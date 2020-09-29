@@ -1,0 +1,405 @@
+{
+	"_id" : ObjectId("5f27cb85004a3257f9c87ad7"),
+	"tripExpenses" : [
+		{
+			"ticketName" : "PARKING",
+			"ticketPrice" : "100",
+			"ticketProof" : "https://fivebees.s3.amazonaws.com/DriverDocuments612b239b-f27a-4734-a28b-e1ad5b9c231b.jpg"
+		},
+		{
+			"ticketName" : "INTER STATE TAX",
+			"ticketPrice" : "1000",
+			"ticketProof" : "https://fivebees.s3.amazonaws.com/DriverDocumentsd9715fe0-7dae-4f1c-8148-3527d25945ff.jpg"
+		}
+	],
+	"packageTypeId" : ObjectId("5e58adbadde2687f43b93050"),
+	"packageId" : ObjectId("5f2170355288a02398a191be"),
+	"contractId" : ObjectId("5f279d7b004a3257f9c87a76"),
+	"bookingId" : 8,
+	"tripType" : "Outstation",
+	"pickupFrom" : "Others",
+	"from" : {
+		"address1" : "",
+		"address" : "Pune, Maharashtra, India",
+		"city" : "Pune",
+		"state" : "Maharashtra",
+		"country" : "India",
+		"pincode" : "3453",
+		"latitude" : 18.5204303,
+		"longitude" : 73.8567437
+	},
+	"to" : {
+		"address1" : "",
+		"address" : "Mumbai",
+		"area" : "",
+		"city" : "Mumbai",
+		"state" : "",
+		"country" : "",
+		"pincode" : "234324"
+	},
+	"pickupDate" : ISODate("2020-08-03T00:00:00Z"),
+	"pickupTime" : "14:41",
+	"returnDate" : ISODate("2020-08-04T00:00:00Z"),
+	"returnTime" : "14:41",
+	"vehicleCategoryId" : ObjectId("5f1da6f38c7dd5280c318070"),
+	"employeeId" : ObjectId("5f2015311a776b578319dba9"),
+	"employeeUserId" : ObjectId("5f2015241a776b578319dba8"),
+	"departmentId" : ObjectId("5ec79052d9eb302982414ad1"),
+	"corporateId" : ObjectId("5f2012411a776b578319db8e"),
+	"managerId1" : ObjectId("5f20149d1a776b578319db91"),
+	"managerId2" : ObjectId("5f2014d01a776b578319dba0"),
+	"managerId3" : ObjectId("5f2015311a776b578319dba9"),
+	"managerID1" : "IBM-1",
+	"managerID2" : "IBM-2",
+	"managerID3" : "IBM-3",
+	"approver1exist" : "Yes",
+	"approver2exist" : "Yes",
+	"approver3exist" : "Yes",
+	"approvalRequired" : "Yes",
+	"estimatedCost" : 5000,
+	"intermediateStops" : [ ],
+	"specialInstruction" : "",
+	"purposeOfTravel" : "Client Demo",
+	"purposeOfTravelOther" : "",
+	"reasonForSelectingVehicle" : "",
+	"status" : [
+		{
+			"_id" : ObjectId("5f27cb85004a3257f9c87ad8"),
+			"value" : "New",
+			"statusBy" : ObjectId("5f2015241a776b578319dba8"),
+			"allocatedTo" : ObjectId("5f20149d1a776b578319db91"),
+			"statusAt" : ISODate("2020-08-03T08:31:52.170Z")
+		},
+		{
+			"_id" : ObjectId("5f27cbcc004a3257f9c87ad9"),
+			"value" : "Manager Approved",
+			"statusBy" : ObjectId("5f20149d1a776b578319db91"),
+			"remark" : "ttt",
+			"statusAt" : ISODate("2020-08-03T08:33:16.851Z")
+		},
+		{
+			"_id" : ObjectId("5f27f088004a3257f9c87b90"),
+			"value" : "Allocated To Vendor",
+			"statusBy" : ObjectId("5f15a2f637ee424042c5893d"),
+			"allocatedToVendor" : ObjectId("5f2021a31a776b578319dbb5"),
+			"statusAt" : ISODate("2020-08-03T11:10:00.831Z")
+		},
+		{
+			"_id" : ObjectId("5f27f28f004a3257f9c87b9f"),
+			"value" : "Vendor Accepted",
+			"statusBy" : ObjectId("5f20221d1a776b578319dbb7"),
+			"statusAt" : ISODate("2020-08-03T11:18:38.948Z"),
+			"allocatedToVendor" : ObjectId("5f2021a31a776b578319dbb5")
+		},
+		{
+			"_id" : ObjectId("5f27f29a004a3257f9c87ba2"),
+			"value" : "Trip Allocated To Driver",
+			"statusBy" : ObjectId("5f20221d1a776b578319dbb7"),
+			"statusAt" : ISODate("2020-08-03T11:18:50.005Z"),
+			"allocatedToDriver" : ObjectId("5f2038431a776b578319dbd4"),
+			"allocatedToVendor" : ObjectId("5f2021a31a776b578319dbb5")
+		},
+		{
+			"_id" : ObjectId("5f27f318004a3257f9c87ba5"),
+			"value" : "Driver Accepted",
+			"statusBy" : ObjectId("5f2038421a776b578319dbce"),
+			"statusAt" : ISODate("2020-08-03T11:20:55.658Z"),
+			"remark" : "",
+			"allocatedToDriver" : ObjectId("5f2038431a776b578319dbd4"),
+			"allocatedToVendor" : ObjectId("5f2021a31a776b578319dbb5")
+		},
+		{
+			"_id" : ObjectId("5f27f363004a3257f9c87ba7"),
+			"value" : "Started From Garage",
+			"statusBy" : ObjectId("5f2038421a776b578319dbce"),
+			"statusAt" : ISODate("2020-08-03T11:22:10.243Z"),
+			"odometerReading" : 500,
+			"proof" : "https://fivebees.s3.amazonaws.com/DriverDocuments42d86ae3-8bb9-4113-b716-f95ea68a7443.jpg",
+			"longitude" : 73.8892742,
+			"latitude" : 17.9415123,
+			"startOTP" : 1234,
+			"endOTP" : 5678,
+			"allocatedToDriver" : ObjectId("5f2038431a776b578319dbd4"),
+			"allocatedToVendor" : ObjectId("5f2021a31a776b578319dbb5"),
+			"destinationDistance" : {
+				"text" : "98.6 km",
+				"value" : 98620
+			},
+			"destinationTime" : {
+				"text" : "2 hours 14 mins",
+				"value" : 8035
+			}
+		},
+		{
+			"_id" : ObjectId("5f27f364004a3257f9c87baa"),
+			"value" : "Reached Pickup Location",
+			"statusBy" : ObjectId("5f2038421a776b578319dbce"),
+			"statusAt" : ISODate("2020-08-03T11:22:11.831Z"),
+			"longitude" : 73.8892742,
+			"latitude" : 17.9415123,
+			"allocatedToDriver" : ObjectId("5f2038431a776b578319dbd4"),
+			"allocatedToVendor" : ObjectId("5f2021a31a776b578319dbb5")
+		},
+		{
+			"_id" : ObjectId("5f27f36b004a3257f9c87bad"),
+			"value" : "Start OTP Verified",
+			"statusBy" : ObjectId("5f2038421a776b578319dbce"),
+			"statusAt" : ISODate("2020-08-03T11:22:18.107Z"),
+			"longitude" : 73.8892742,
+			"latitude" : 17.9415123,
+			"allocatedToDriver" : ObjectId("5f2038431a776b578319dbd4"),
+			"allocatedToVendor" : ObjectId("5f2021a31a776b578319dbb5")
+		},
+		{
+			"_id" : ObjectId("5f27f384004a3257f9c87bb0"),
+			"value" : "Start From Pickup",
+			"statusBy" : ObjectId("5f2038421a776b578319dbce"),
+			"statusAt" : ISODate("2020-08-03T11:22:43.034Z"),
+			"longitude" : 73.8892742,
+			"latitude" : 17.9415123,
+			"odometerReading" : 1500,
+			"proof" : "https://fivebees.s3.amazonaws.com/DriverDocuments51ed4836-ec1f-43f9-a69c-e320aae09798.jpg",
+			"allocatedToDriver" : ObjectId("5f2038431a776b578319dbd4"),
+			"allocatedToVendor" : ObjectId("5f2021a31a776b578319dbb5")
+		},
+		{
+			"_id" : ObjectId("5f27f386004a3257f9c87bb3"),
+			"value" : "Intermediate Stop",
+			"statusBy" : ObjectId("5f2038421a776b578319dbce"),
+			"statusAt" : ISODate("2020-08-03T11:22:45Z"),
+			"longitude" : 73.8892742,
+			"latitude" : 17.9415123,
+			"allocatedToDriver" : ObjectId("5f2038431a776b578319dbd4"),
+			"allocatedToVendor" : ObjectId("5f2021a31a776b578319dbb5")
+		},
+		{
+			"_id" : ObjectId("5f27f387004a3257f9c87bb6"),
+			"value" : "Reached Destination",
+			"statusBy" : ObjectId("5f2038421a776b578319dbce"),
+			"statusAt" : ISODate("2020-08-03T11:22:46.779Z"),
+			"longitude" : 73.8892742,
+			"latitude" : 17.9415123,
+			"allocatedToDriver" : ObjectId("5f2038431a776b578319dbd4"),
+			"allocatedToVendor" : ObjectId("5f2021a31a776b578319dbb5")
+		},
+		{
+			"_id" : ObjectId("5f27f393004a3257f9c87bb9"),
+			"value" : "End OTP Verified",
+			"statusBy" : ObjectId("5f2038421a776b578319dbce"),
+			"statusAt" : ISODate("2020-08-03T11:22:58.428Z"),
+			"longitude" : 73.8892742,
+			"latitude" : 17.9415123,
+			"allocatedToDriver" : ObjectId("5f2038431a776b578319dbd4"),
+			"allocatedToVendor" : ObjectId("5f2021a31a776b578319dbb5")
+		},
+		{
+			"_id" : ObjectId("5f27f3a4004a3257f9c87bbd"),
+			"value" : "Reached Drop Location",
+			"statusBy" : ObjectId("5f2038421a776b578319dbce"),
+			"statusAt" : ISODate("2020-08-03T11:23:15.578Z"),
+			"longitude" : 73.8892742,
+			"latitude" : 17.9415123,
+			"odometerReading" : 2000,
+			"proof" : "https://fivebees.s3.amazonaws.com/DriverDocumentse2e38a32-3e38-4330-9bf3-3f0b31ac64a1.jpg",
+			"allocatedToDriver" : ObjectId("5f2038431a776b578319dbd4"),
+			"allocatedToVendor" : ObjectId("5f2021a31a776b578319dbb5"),
+			"destinationDistance" : {
+				"text" : "98.6 km",
+				"value" : 98620
+			},
+			"destinationTime" : {
+				"text" : "2 hours 14 mins",
+				"value" : 8035
+			}
+		},
+		{
+			"_id" : ObjectId("5f27f3b7004a3257f9c87bc0"),
+			"value" : "Reached Garage",
+			"statusBy" : ObjectId("5f2038421a776b578319dbce"),
+			"statusAt" : ISODate("2020-08-03T11:23:34.692Z"),
+			"odometerReading" : 2500,
+			"proof" : "https://fivebees.s3.amazonaws.com/DriverDocuments00855ce5-94d3-4f03-a1be-f484b9fe2d9c.jpg",
+			"longitude" : 73.8892742,
+			"latitude" : 17.9415123,
+			"allocatedToDriver" : ObjectId("5f2038431a776b578319dbd4"),
+			"allocatedToVendor" : ObjectId("5f2021a31a776b578319dbb5")
+		},
+		{
+			"_id" : ObjectId("5f27f3fe004a3257f9c87bc2"),
+			"value" : "Expense Submitted",
+			"statusBy" : ObjectId("5f2038421a776b578319dbce"),
+			"statusAt" : ISODate("2020-08-03T11:24:46.051Z")
+		},
+		{
+			"_id" : ObjectId("5f27f401004a3257f9c87bc4"),
+			"value" : "Expense Submitted",
+			"statusBy" : ObjectId("5f2038421a776b578319dbce"),
+			"statusAt" : ISODate("2020-08-03T11:24:49.426Z")
+		},
+		{
+			"_id" : ObjectId("5f27f40b004a3257f9c87bc6"),
+			"value" : "Ready To Bill",
+			"statusBy" : ObjectId("5f2038421a776b578319dbce"),
+			"statusAt" : ISODate("2020-08-03T11:24:58.291Z"),
+			"allocatedToDriver" : ObjectId("5f2038431a776b578319dbd4"),
+			"allocatedToVendor" : ObjectId("5f2021a31a776b578319dbb5")
+		}
+	],
+	"statusValue" : "Ready To Bill",
+	"roundAllocated" : "No",
+	"createdBy" : ObjectId("5f2015241a776b578319dba8"),
+	"createdAt" : ISODate("2020-08-03T08:32:05.468Z"),
+	"routeCoordinates" : [
+		{
+			"_id" : ObjectId("5f27f36b004a3257f9c87baf"),
+			"latitude" : 17.9415123,
+			"longitude" : 73.8892742,
+			"distanceTravelled" : 0,
+			"stop" : false
+		},
+		{
+			"_id" : ObjectId("5f27f384004a3257f9c87bb2"),
+			"latitude" : 17.9415123,
+			"longitude" : 73.8892742,
+			"distanceTravelled" : 0,
+			"stop" : false
+		},
+		{
+			"_id" : ObjectId("5f27f386004a3257f9c87bb5"),
+			"latitude" : 17.9415123,
+			"longitude" : 73.8892742,
+			"distanceTravelled" : 0,
+			"stop" : true
+		},
+		{
+			"_id" : ObjectId("5f27f387004a3257f9c87bb8"),
+			"latitude" : 17.9415123,
+			"longitude" : 73.8892742,
+			"distanceTravelled" : 0,
+			"stop" : false
+		},
+		{
+			"_id" : ObjectId("5f27f393004a3257f9c87bbb"),
+			"latitude" : 17.9415123,
+			"longitude" : 73.8892742,
+			"distanceTravelled" : 0,
+			"stop" : false
+		},
+		{
+			"_id" : ObjectId("5f27f3a4004a3257f9c87bbc"),
+			"latitude" : 17.9415123,
+			"longitude" : 73.8892742,
+			"distanceTravelled" : 0,
+			"stop" : false
+		},
+		{
+			"_id" : ObjectId("5f27f3a5004a3257f9c87bbf"),
+			"latitude" : 17.9415123,
+			"longitude" : 73.8892742,
+			"distanceTravelled" : 0,
+			"stop" : false
+		}
+	],
+	"updateLog" : [
+		{
+			"_id" : ObjectId("5f27cbcc004a3257f9c87ada"),
+			"updatedAt" : ISODate("2020-08-03T08:33:16.948Z")
+		},
+		{
+			"_id" : ObjectId("5f27f088004a3257f9c87b91"),
+			"updatedAt" : ISODate("2020-08-03T11:10:00.906Z")
+		},
+		{
+			"_id" : ObjectId("5f27f28f004a3257f9c87ba0"),
+			"updatedAt" : ISODate("2020-08-03T11:18:39.135Z")
+		},
+		{
+			"_id" : ObjectId("5f27f294004a3257f9c87ba1"),
+			"updatedAt" : ISODate("2020-08-03T11:18:44.069Z"),
+			"updatedBy" : ObjectId("5f20221d1a776b578319dbb7")
+		},
+		{
+			"_id" : ObjectId("5f27f29a004a3257f9c87ba3"),
+			"updatedAt" : ISODate("2020-08-03T11:18:50.127Z"),
+			"updatedBy" : ObjectId("5f20221d1a776b578319dbb7")
+		},
+		{
+			"_id" : ObjectId("5f27f318004a3257f9c87ba6"),
+			"updatedAt" : ISODate("2020-08-03T11:20:56.721Z"),
+			"updatedBy" : ObjectId("5f2038421a776b578319dbce")
+		},
+		{
+			"_id" : ObjectId("5f27f363004a3257f9c87ba8"),
+			"updatedAt" : ISODate("2020-08-03T11:22:11.754Z"),
+			"updatedBy" : ObjectId("5f2038421a776b578319dbce")
+		},
+		{
+			"_id" : ObjectId("5f27f364004a3257f9c87bab"),
+			"updatedAt" : ISODate("2020-08-03T11:22:12.891Z"),
+			"updatedBy" : ObjectId("5f2038421a776b578319dbce")
+		},
+		{
+			"_id" : ObjectId("5f27f36b004a3257f9c87bae"),
+			"updatedAt" : ISODate("2020-08-03T11:22:19.164Z"),
+			"updatedBy" : ObjectId("5f2038421a776b578319dbce")
+		},
+		{
+			"_id" : ObjectId("5f27f384004a3257f9c87bb1"),
+			"updatedAt" : ISODate("2020-08-03T11:22:44.094Z"),
+			"updatedBy" : ObjectId("5f2038421a776b578319dbce")
+		},
+		{
+			"_id" : ObjectId("5f27f386004a3257f9c87bb4"),
+			"updatedAt" : ISODate("2020-08-03T11:22:46.061Z"),
+			"updatedBy" : ObjectId("5f2038421a776b578319dbce")
+		},
+		{
+			"_id" : ObjectId("5f27f387004a3257f9c87bb7"),
+			"updatedAt" : ISODate("2020-08-03T11:22:47.838Z"),
+			"updatedBy" : ObjectId("5f2038421a776b578319dbce")
+		},
+		{
+			"_id" : ObjectId("5f27f393004a3257f9c87bba"),
+			"updatedAt" : ISODate("2020-08-03T11:22:59.493Z"),
+			"updatedBy" : ObjectId("5f2038421a776b578319dbce")
+		},
+		{
+			"_id" : ObjectId("5f27f3a4004a3257f9c87bbe"),
+			"updatedAt" : ISODate("2020-08-03T11:23:16.863Z"),
+			"updatedBy" : ObjectId("5f2038421a776b578319dbce")
+		},
+		{
+			"_id" : ObjectId("5f27f3b7004a3257f9c87bc1"),
+			"updatedAt" : ISODate("2020-08-03T11:23:35.756Z"),
+			"updatedBy" : ObjectId("5f2038421a776b578319dbce")
+		},
+		{
+			"_id" : ObjectId("5f27f3fe004a3257f9c87bc3"),
+			"updatedAt" : ISODate("2020-08-03T11:24:46.055Z"),
+			"updatedBy" : ObjectId("5f2038421a776b578319dbce")
+		},
+		{
+			"_id" : ObjectId("5f27f401004a3257f9c87bc5"),
+			"updatedAt" : ISODate("2020-08-03T11:24:49.429Z"),
+			"updatedBy" : ObjectId("5f2038421a776b578319dbce")
+		},
+		{
+			"_id" : ObjectId("5f27f40b004a3257f9c87bc7"),
+			"updatedAt" : ISODate("2020-08-03T11:24:59.438Z"),
+			"updatedBy" : ObjectId("5f2038421a776b578319dbce")
+		},
+		{
+			"_id" : ObjectId("5f27f412004a3257f9c87bc8"),
+			"updatedAt" : ISODate("2020-08-03T11:25:06.709Z"),
+			"updatedBy" : ObjectId("5f2038421a776b578319dbce")
+		}
+	],
+	"__v" : 0,
+	"allocatedToVendor" : ObjectId("5f2021a31a776b578319dbb5"),
+	"vehicleID" : ObjectId("5f27d40e004a3257f9c87aee"),
+	"allocatedToDriver" : ObjectId("5f2038431a776b578319dbd4"),
+	"ratingToPassenger" : {
+		"rating" : 4,
+		"remark" : "good"
+	}
+}

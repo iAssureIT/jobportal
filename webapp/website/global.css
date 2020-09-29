@@ -1,0 +1,15 @@
+body{
+	background-color: #1f262d;
+	color: #f5a721;
+}
+
+
+.stateWrapper{
+	width:60%;
+	height: 900px;
+	margin: auto;
+	border: 1px solid #ff0;
+	position: absolute;
+	left: 50%;
+	transform: translate(-50%);
+}

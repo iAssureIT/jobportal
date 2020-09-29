@@ -1,0 +1,62 @@
+.cityClassificationTable{
+	width:100%;
+	border: 1px solid #ccc;
+  border-collapse:  separate;
+  border-radius: 5px;
+	border-collapse: none;
+  margin-top: 5px;
+	/*text-align: center;*/
+}
+.cityClassificationTableTitle{
+	font-size: 13px;
+}
+/*.cityClassificationTable{
+  border: 1px solid #ccc;
+  border-collapse:  separate;
+  border-radius: 5px;
+  padding: 15px;
+}*/
+.cityClassificationTable tbody tr td{
+  padding: 10px 10px;
+  font-size: 11px;
+  border-top: 0;
+}
+.cityClassificationTable tbody tr th{
+  /*text-align: center;*/
+  padding: 10px 10px;
+  font-size: 12px;
+  font-weight: normal;
+  font-weight: 600;
+  background-color: #eee;
+}
+.cityClassificationTable .cityClass{
+  width: 15%;
+}
+.cityClassificationTable .cityClassTitle{
+  font-weight: 600;
+}
+.cityClassificationTitleDiv{
+  border: 1px dashed #ccc;
+  background-color: #f2f2f2;
+  color: #666;
+
+  -moz-transition: all 10s linear;
+  -webkit-transition: all 10s linear;
+  transition: all 10s linear;
+}
+.cityClassificationTitleDiv:hover{
+  cursor: pointer;
+}
+.tablePanel{
+  /*border: 1px dashed #ccc;*/
+}
+#tablePanel{
+  display: none;
+}
+
+.angledown{
+  -ms-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+  -webkit-transform: rotate(90deg);
+  transform: rotate(90deg);
+}

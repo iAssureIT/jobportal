@@ -1,0 +1,53 @@
+
+Jyoti Khedkar
+
+
+Package Master
+
+	[_City_Class_ v] 		[_Vehicle_Category_v]  	[_Package_Type_v]  	[OneWay | TwoWay]
+
+
+	Package Name 				Min Km / Day 						Min Hrs / Day 			
+	[______________]		[___________________]		[_______________] 	
+
+
+	Package Rate 				Extra Km 								Extra Hr 								
+	[R|_________|.00] 	[___________________]		[_______________]	
+
+
+	Driver Allowance 		Night Halt 							Night Charges 	 Early Morning Charges
+	[R|_________|.00] 	[R|_________|.00] 			[R|_________|.00] 	[R|_________|.00]
+
+	
+																																			[Submit]
+
+
+
+
+Refer Excelsheet for the table details
+
+
+
+Contract Management
+
+1) City Class Master
+2) Add Cities in each Class
+3) City Type wise Package Master. Rates will change as per City type, Vehicle Category & Package Type. 
+
+4) Contract Management
+	- Single contract between two entities
+		- Fivebees Vs Corporate
+		- Fivebees Vs Vendor
+	- Location of each entity will be head office only. 
+	- Show Company & Location into single Box
+	- Add a verticle line between two entities. 
+
+
+5) On Packages page, show the same table as in Package Master. 
+	but Grey cells are not editable. White cells are editable in input fields. 
+
+	
+
+
+
+

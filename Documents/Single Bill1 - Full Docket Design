@@ -1,0 +1,347 @@
+
+
+
+			+-----------------------------------------+
+			|										  |
+			|			      Page 1				  |
+			|										  |
+			|										  |
+			|		    Invoice as per Design		  |
+			|										  |
+			|										  |
+			|										  |
+			|										  |
+			|										  |
+			|										  |
+			|										  |
+			|										  |
+			|										  |
+			|										  |
+			|										  |
+			|										  |
+			|										  |
+			|										  |
+			+-----------------------------------------+
+
+
+			+-----------------------------------------+
+			|										  |
+			|			      Page 2				  |
+			|										  |
+			|										  |
+			|		    Trip Summary Table 			  |
+			|										  |
+			|										  |
+			|										  |
+			|										  |
+			|	-----------------------------------	  |
+			|										  |
+			|										  |
+			|	 		Trip Google Map Route 		  |
+			|	  With All Dates, Times, Locations	  |
+			|										  |
+			|										  |
+			|										  |
+			|										  |
+			|										  |
+			+-----------------------------------------+
+
+
+			+-----------------------------------------+
+			|										  |
+			|			      Page 3				  |
+			|										  |
+			|										  |
+			|		      Booking Details		  	  |
+			|										  |
+			|				 	OR					  |
+			|										  |
+			|				 Duty Slip				  |
+			|										  |
+			|										  |
+			|										  |
+			|										  |
+			|										  |
+			|										  |
+			|										  |
+			|										  |
+			|										  |
+			|										  |
+			+-----------------------------------------+
+
+
+			+-----------------------------------------+
+			|										  |
+			|			      Page 4				  |
+			|		     TOLL, Parking Slips		  |
+			|										  |
+			|	 +-------+	 +-------+	 +-------+	  |
+			|	 |	 	 |	 |		 |	 |		 |	  |
+			|	 |		 |	 |		 |	 |		 | 	  |
+			|	 |		 |	 |		 |	 |		 |	  |
+			|	 +-------+	 +-------+	 +-------+	  |
+			|										  |
+			|	 +-------+	 +-------+	 +-------+	  |
+			|	 |	 	 |	 |		 |	 |		 |	  |
+			|	 |		 |	 |		 |	 |		 | 	  |
+			|	 |		 |	 |		 |	 |		 |	  |
+			|	 +-------+	 +-------+	 +-------+	  |
+			|										  |
+			|	 +-------+	 +-------+	 +-------+	  |
+			|	 |	 	 |	 |		 |	 |		 |	  |
+			|	 |		 |	 |		 |	 |		 | 	  |
+			|	 |		 |	 |		 |	 |		 |	  |
+			|	 +-------+	 +-------+	 +-------+	  |
+			|										  |
+			+-----------------------------------------+
+
+
+
+
+
+
+Summary Table
+
+Booking ID 		 : 123
+Booking Given By : Empname, empID, designaation, department, company name
+Car Details		 : Colour + Car Model, Car Number, 
+Driver Details 	 : Driver Name, Phone 
+Package Details  : Complete Table, Package Type, Name, Allowd Km, Allowed Hr
+
+-------------------------------------------------------
+				DateTime 			Odometer Reading		
+-------------------------------------------------------
+Garage Start	dd/mm/yyyy hh:mm		123000							
+Trip Start		dd/mm/yyyy hh:mm		123010
+Trip End		dd/mm/yyyy hh:mm		123050
+Garage End		dd/mm/yyyy hh:mm		123060
+-------------------------------------------------------
+	  Total Hr   5 hrs 15 mins 	Total Km   60 Km
+	  Allowed Hr 4 Hrs 00 mins	Allowed Km 40 Km
+	  Extra Hr	 1 Hrs 15 mins	Extra Km   20 Km
+-------------------------------------------------------
+
+
+
+
+
+
+
+==========================================================================
+
+Step 1) Billing Management
+		- All Bills
+		- Billing Masters
+
+
+Step 2) Billing Masters
+		- Expense Types
+		- Expense Items		
+
+
+		Expense Type
+		------------
+
+		Expense Type 	 GST 	  CSGT 	  SGST    IGST
+		[__________] 	[____]   [____]  [____]  [____]
+
+
+
+		Expense Items
+		--------------
+			[Show Billing Codes > ]
+				{billing code table hidden}
+
+			[Show Billing Codes v ]
+			+-----------------------------------+
+			| 								 	|
+			| 	  Show billing table here	 	|
+			| 								 	|
+			+-----------------------------------+
+
+
+
+		Expense Type   		 Expense Item 	 	        HSN 	  Billing Code
+		[__________v] 		[_________________] 	 [________]   [________]
+
+
+
+
+
+
+
+Step 3)  Invoice 
+
+---------------------------------------------------------------------------------		
+
+Sr 	Line Item 		Qty 	Rate 	  Tax		Amount
+1 	Basic Rate		1		750 	5%  37.5 	750.00
+2   Fuel Surcharge  0       0.00 	0%  0.00      0.00
+3   Discount		0       0.00	0%  0.00      0.00
+------------------------------------------------------
+						SubTotal A 		37.5	750.00
+
+4   Extra Km  		20      15 		5% 15.00    300.00
+5   Extra Hr  		1.25    100 	5%  7.25    125.00
+6   Driver Allowance 0      200 	5%  0.00      0.00
+7   Night Hault Allowance 0 250 	5%  0.00      0.00	
+8	Early Morning Charges 0 100 	5%  0.00      0.00
+9	Night Charges  	 0		150 	5%  0.00      0.00
+------------------------------------------------------
+						SubTotal B 	   22.25   1175.00
+
+10							CSGT 	2.5%		 30.00 		
+					(2.5% of subTotal A + subTotal B)
+11							SSGT 	2.5%		 30.00
+					(2.5% of subTotal A + subTotal B)
+------------------------------------------------------
+							SubTotal C 		     60.00 		
+
+							Toll & Parking 		300.00
+							Rounding Off 		  0.65
+
+							Total Amount 	   1535.00
+------------------------------------------------------
+In Words: Rupees Fifteen Hundred Thirty Five Only
+SAC: 	  __________________
+		
+
+---------------------------------------------------------------------------------		
+
+Billing Codes
+
+	Total & SubTotal 	=   1 to 100	
+		Total Amount 	-	001
+		SubTotal A 		-	011					
+		SubTotal B 		-	012
+		SubTotal C		-	013
+		SubTotal D 		-   014
+
+	Primary Rates		=	101 to 200
+		Basic Rates  	-  	101					
+
+
+	Travel Type Items 	=   201 to 300
+		Fuel Surcharge  		-   201				
+		Extra Km  				-   202	
+		Extra Hr  				-   203 
+		Driver Allowance		-   204  
+		Night Hault Allowance 	- 	205  	
+		Early Morning Charges 	- 	206 
+		Night Charges  			-   207  
+
+	Reimbursement Items =	301 to 400
+		Toll 		 	-	301  
+		Parking 		-	302
+
+
+	Tax Items			=	401 to 500
+		CSGT 			-	401
+		SSGT 			-	402
+
+	Negative Items 		=	901 to 999
+		Discount		-	901
+		Rounding Off 	-	902
+
+
+New Master
+Automated Billing Sequence
+
+			[Show Billing Codes > ]
+				{billing code table hidden}
+
+			[Show Billing Codes v ]
+			+-----------------------------------+
+			| 								 	|
+			| 	  Show billing table here	 	|
+			| 								 	|
+			+-----------------------------------+
+
+
+Bill Title
+[_Single Trip Invoice__]
+
+	Arrange the Expense Items as per their appearance on Invoice
+
+	Expense Item Number		Billing Code
+	1.  Basic Rates  	-  	101				x	^
+	2.  Fuel Surcharge  -   201				x	|
+	3.  Discount		-	901				x	|
+	4.  SubTotal A 		-	011				x	v
+	5.  Extra Km  		-   202				x
+	6   Extra Hr  		-   203				x 
+	7   Driver Allowance-   204				x  
+	8   Night Hault Allowance - 205  		x
+	9	Early Morning Charges - 206 		x
+	10	Night Charges  	-   207  			x
+	11	SubTotal B 		-	012				x
+	12	CSGT 			-	401				x
+	13  SSGT 			-	402				x
+	14  SubTotal C		-	013				x
+	15  Toll 		 	-	301  			x
+	16  Parking 		-	302				x
+	17  SubTotal D 		-   014				x
+	17  Rounding Off 	-	902				x
+	18  Total Amount 	-	001				x
+
+
+	Formulae 	
+
+	011 = 101 + 201 + (-1 x 901)
+	012 = 202 + 203 + 204 + 205 + 206 + 207
+	013 = 011 + 012 + 401 + 402
+	014 = 301 + 302
+
+	001 = 011 + 012 + 013 + 014 + 902
+
+	902 = 011 - round(001,0) 
+
+
+
+	Collection Name : billingSequence 
+	{
+		_id : xxx,
+		billTitle : xxx,
+		sequence : [
+			{seqNum, billing code, }
+			{seqNum, billing code, }
+			{seqNum, billing code, }
+		],
+		createdBy : user_id,  (_id from users table for the logged in person)
+		createdAt : Datetime,
+		updateLog : [
+			{updatedBy: user_id, updatedAt: datetime, remark: (to be added during update) }
+		]
+
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

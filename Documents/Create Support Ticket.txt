@@ -1,0 +1,32 @@
+Create Support Ticket
+
+
+
+	Select Client 			Select Department 		Select Project 			Select Sites
+	___________v 				___________v 					___________v 				___________v
+
+
+
+	Assign Ticket To 														Task Type 				Tags
+	_______________V  (Autocomplete) 						___________V      [________________]  (Simple Input field)
+	Ashish Naik (Project Manager) 							
+	Karuna Khandale (Developer)
+	Anuja Kate (QA Tester)
+	
+
+  Description
+  +------------------------------------------------------------------------+
+  |                                                                        |
+  |                                                                        |
+  |                                                                        |
+  |                                                                        |
+  +------------------------------------------------------------------------+
+
+  Attach Images
+  [upload file] _________________________
+
+  Attach Videos
+  [upload file] _________________________  
+
+
+  

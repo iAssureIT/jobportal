@@ -1,0 +1,16 @@
+contract no
+contract start date
+duration
+contract end date
+signing entity type
+signing entity
+latestStatus (new / party-1 sign / party-2 sign / edited)
+StatusLog : [
+	{new, 01-07-2020 3:30pm, statusBy: {user_id: xxx, name:xx, empid: xxx, companyId:nnn, department:xxx, designation:xxx,} }
+	{'party-1-signed', 01-07-2020 3:30pm, statusBy: {user_id: xxx, name:xx, empid: xxx, companyId:nnn, department:xxx, designation:xxx,} }
+	{'party-2-signed', 01-07-2020 3:30pm, statusBy: {user_id: xxx, name:xx, empid: xxx, companyId:nnn, department:xxx, designation:xxx,} }
+	{'edited', 01-07-2020 3:30pm, statusBy: {user_id: xxx, name:xx, empid: xxx, companyId:nnn, department:xxx, designation:xxx,} }
+	{'party-1-signed', 01-07-2020 3:30pm, statusBy: {user_id: xxx, name:xx, empid: xxx, companyId:nnn, department:xxx, designation:xxx,} }
+	{'party-2-signed', 01-07-2020 3:30pm, statusBy: {user_id: xxx, name:xx, empid: xxx, companyId:nnn, department:xxx, designation:xxx,} }
+]
+action e | d | v

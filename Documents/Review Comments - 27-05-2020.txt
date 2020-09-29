@@ -1,0 +1,35 @@
+Review Comments - 27/05/2020
+By Ashish Naik
+
+
+1) Must have checkauth for each API. If Authentication failed, redirect on login page. 
+2) Leftside menu bar for Admin
+	- All bookings   (Add "s")
+	- Date field is unnecessarily long. Make it short enough to occupy date. Not more than that. 
+	  Also rename Custom tab as => "Date Range"
+	  From and To Fields need to be shorten just to occupy date value. 
+	  Remove Sr No column. 
+	  
+	- Move Vendor Mapping to Vendor menu
+	- Remove Bulk upload menu.. Move all items to individual forms. change singlefield Master form. Add toggle button on top right like =>    Manual Form | Bulk Upload
+	Manage this field from Props. If prop is true then only show. 
+
+	- Make a single page of Master data. It must have looks same as Global Masters. No need to use Tabs. Each tab like button will have a separate url. This structure will bring all masters to single page. 
+
+	-  When two field master is used, show the first field master link on the same form using Plus sign. 
+	  All two fields masters like Brand/Model or Document List/Document Entity, etc. 
+
+	- Rename To => Vehicle Category & Designation Mapping
+
+	- Package Master => Add Vehicle Category and City Type here. 
+
+	-	There will be a new Two field master "City Classification"
+
+		Field-1 : City Type => A-Class-City, B-Class-City, C-Class-City
+		Field-2 : Cities => Input Field. Use Google API for name of cities. 
+
+		Also must have bulk upload facility. 
+
+	- 
+
+

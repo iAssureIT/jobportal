@@ -1,0 +1,25 @@
+.selectedSupplier .arrowsDiv{
+	display: block !important;
+}
+.arrowsDiv{
+    display: none;
+   	height: 95px;
+    background-color: var(--blue-color);
+}
+.arrowsDiv img{
+	height: 20px;
+    padding: 3px;
+    margin-top: 40px;
+}
+.vendorListTitle{
+    font-size: 16px;
+    font-weight: 600;
+    color: #4e4e4e;
+    padding: 4px 6px;
+    background: #eaeaea;
+}
+.detailtitleentity {
+    font-size: 16px;
+    color: #333;
+    font-weight: bold;
+}

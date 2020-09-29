@@ -1,0 +1,214 @@
+.imageBox {
+    width: 100px;
+    height: 70px;
+}
+.wrapText{
+  white-space: normal !important;
+}
+.tableDwld{
+  font-size: 25px;
+  border: 1px solid #eee;
+  padding: 5px 8px;
+  box-shadow: 0 0 10px #ede1e1;
+  color: #777;
+  background-color: #fff;
+  margin-bottom: 10px;
+  margin-top: 28px;
+  border: 1px solid #979797 !important;
+  border-radius: 3px !important;
+  height: 32px !important;
+}
+.iAssureITtable-bordered > thead > tr > th, .iAssureITtable-bordered > tbody > tr > th, .iAssureITtable-bordered > tfoot > tr > th, .iAssureITtable-bordered > thead > tr > td, .iAssureITtable-bordered > tbody > tr > td, .iAssureITtable-bordered > tfoot > tr > td {
+    border: 1px solid #fff6;
+}
+.table-striped>tbody>tr:nth-of-type(even) {
+    background-color: #fff;
+}
+.iAssureITtable-bordered{
+  border: 1px solid var(--blue-color );
+}
+.tempTableHeader{
+  background: var(--blue-color ) !important;
+}
+.paginationAdminWrap{
+  text-align: center !important;
+  width: 100%;
+}
+.paginationAdminOES > li > a{
+  margin-right: 5px !important;
+  margin-bottom: 5px !important;
+}
+.paginationAdminOES > li{
+    display: inline-block;
+    margin-left: 0 !important;
+    font-size: 10px;
+}
+.queDataCircle p{
+  height: 100%;
+  width: 100%;
+}
+.activeCircle{
+  background: #7f7f7f !important;
+}
+.queDataCircle {
+  padding-top: 4px;
+  font-size: 12px;
+  border: 1px solid #e8e6e6 !important;
+  height: 24px !important;
+  width: 24px !important;
+  border-radius: 100% !important;
+  box-shadow: 3px 4px 7px -3px #aeabab !important;
+  text-align: center;
+}
+.marginTop8{
+  margin-top: 8px;
+}
+.marginTop17{
+  margin-top: 17px;
+}
+.textAlignCenter{
+  text-align: center !important;
+}
+.tempTableHeader{
+  color: #fff;
+}
+
+.umDynamicHeader{
+  /*white-space: nowrap !important;*/
+}
+.noPadding{
+  padding: 0px;
+}
+
+.noWrapText{
+  white-space: nowrap;
+}
+.tableicons{
+  font-size: 20px;
+    padding: 5px 8px;
+    box-shadow: 0 0 10px #ede1e1;
+    color: #777;
+    background-color: #fff;
+    border: 1px solid #979797 !important;
+    border-radius: 3px !important;
+}
+.tableprintincon{
+  font-size: 15px;
+    box-shadow: 0 0 10px #ede1e1;
+    color: #777;
+    background-color: #fff;
+    border: 1px solid #979797 !important;
+    border-radius: 3px !important;
+    padding: 5px 10px;
+}
+.ht30{
+  height: 30px !important;
+}
+.fz15{
+  font-size: 15px !important;
+}
+.totalrow{
+  background-color: #ddd;
+}
+.vendorBtn{    
+  font-weight: 600;
+  padding: 1px 9px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  outline: 0;
+  letter-spacing: 1px;
+  font-size: 12px;
+  margin-bottom: 5px;
+  width:100% !important;
+}
+
+.vendorBtn:hover{    
+  color: #aaa
+}
+/*.blueBtn{    
+  background: var(--blue-background);
+}*/
+.selectLabel{
+  font-size: 14px;
+  font-family:'Montserrat',sans-serif !important;
+  font-weight: 500;
+  padding: 0;
+  letter-spacing: 1px;
+}
+
+.proofImage{
+  height:50px;
+  width:50px;
+}
+
+#hide input[type=file] {
+    display: block;
+    background: 0 0;
+    opacity: 0;
+    cursor: pointer;
+}
+#LogoImageUp {
+    position: absolute;
+    top: 1px;
+    height: 100%;
+}
+
+#LogoImageUpOne {
+    align-items: center;
+    text-align: center;
+    display: grid;
+    background: #ebebeb;
+    border: 1px dashed #999;
+    cursor: pointer;
+    padding: 0;
+}
+.imgSty{
+  top: 0 !important;
+}
+.uploadImageClient {
+    position: absolute;
+    height: 34px !important;
+    width: 50px;
+    background-size: 232px 128px;
+    background-repeat: no-repeat;
+    background: #ebebeb;
+    border: 1px dashed #999;
+    height: 5em;
+    padding: 0;
+}
+.textleft{
+  text-align: left !important;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+    z-index: auto;
+}
+
+.dropdownContent {
+    display: none;
+    position: absolute;
+    
+    min-width: 140px !important;
+    box-shadow: 0px 8px 8px 0px #eee;
+    z-index: 1;
+    border-radius: 5px;
+    border: 1px solid #f1f1f1;
+}
+
+.dropdownContent{background-color: #f1f1f1;
+    cursor:pointer;}
+.dropdown:hover .dropdownContent {display: block;}
+.dropdown:hover .dropbtn { color:#666;}
+
+.dropdownContent{ 
+    cursor: pointer;
+    color: #666666;
+    padding: 7px 7px;
+    text-decoration: none;
+    display: block;
+    border-radius: 3px;}
+.dropdown:hover .dropdownContent {display: block; }
+.dropdown:hover .dropbtn { color:#666;}

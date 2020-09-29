@@ -1,0 +1,1605 @@
+const mongoose  = require("mongoose");
+
+const EntityMaster = require('./ModelEntityMaster');
+const PersonMaster = require('../personMaster/ModelPersonMaster.js');
+const VehicleMaster = require('../vehicleMaster/ModelVehicleMaster.js');
+const VendorAllocation = require('../vendorAllocation/ModelVendorAllocation.js');
+const FailedRecords = require('../failedRecords/ModelFailedRecords');
+const DesignationMaster = require('../designationMaster/ModelDesignationMaster.js');
+const DepartmentMaster = require('../departmentMaster/ModelDepartmentMaster.js');
+
+
+var request = require('request-promise');
+var ObjectID = require('mongodb').ObjectID;
+
+exports.insertEntity = (req,res,next)=>{
+    insertEntityFun();
+    async function insertEntityFun(){
+        var getnext = await getNextSequence(req.body.entityType)
+        if(req.body.entityType == 'corporate'){var str = "C"+parseInt(getnext)}else if(req.body.entityType == 'vendor'){var str = "V"+parseInt(getnext)}else{var str = 1}
+
+        EntityMaster.findOne({  
+                            companyName               : req.body.companyName,
+                            groupName                 : req.body.groupName,
+                            companyEmail              : req.body.companyEmail, 
+                            companyPhone              : req.body.companyPhone,
+                            website                   : req.body.website   
+                            })
+        .exec()
+        .then(data=>{
+            if (data) {
+                res.status(200).json({ duplicated : true });
+            }else{
+                const entity = new EntityMaster({
+                    _id                       : new mongoose.Types.ObjectId(),
+                    supplierOf                : req.body.supplierOf,
+                    entityType                : req.body.entityType,
+                    profileStatus             : req.body.profileStatus,
+                    companyNo                 : getnext ? getnext : 1,
+                    companyID                 : str ? str : 1, 
+                    companyName               : req.body.companyName,
+                    groupName                 : req.body.groupName,
+                    CIN                       : req.body.CIN,   
+                    COI                       : req.body.COI,
+                    TAN                       : req.body.TAN,
+                    companyLogo               : req.body.companyLogo,
+                    website                   : req.body.website,
+                    companyPhone              : req.body.companyPhone,
+                    companyEmail              : req.body.companyEmail,
+                    country                   : req.body.country,
+                    countryCode               : req.body.countryCode,
+                    userID                    : req.body.userID,  
+                    createdBy                 : req.body.createdBy,
+                    createdAt                 : new Date()
+                })
+                entity.save()
+                .then(data=>{
+                    res.status(200).json({ created : true, entityID : data._id ,companyID : data.companyID});
+                })
+                .catch(err =>{
+                    res.status(500).json({ error: err }); 
+                });
+            }
+        })
+        .catch(err =>{
+            res.status(500).json({ error: err }); 
+        });
+        
+    }  
+};
+function getNextSequence(entityType) {
+    return new Promise((resolve,reject)=>{
+    EntityMaster.findOne({entityType:entityType})    
+        .sort({companyNo : -1})   
+        .exec()
+        .then(data=>{
+            if (data) { 
+                var seq = data.companyNo;
+                seq = seq+1;
+                resolve(seq) 
+            }else{
+               resolve(1)
+            }
+            
+        })
+        .catch(err =>{
+            reject(0)
+        });
+    });
+}
+exports.addStatutoryDetails = (req,res,next)=>{
+    EntityMaster.find({ _id:req.body.entityID,"statutoryDetails.state": req.body.statutoryDetails.state})
+    .then((datas)=>{
+        if(datas.length > 0){
+            res.status(200).json({ duplicated : true });
+        }else{
+            EntityMaster.updateOne(
+                { _id:req.body.entityID},  
+                {
+                    $push:   { 
+                                'statutoryDetails':req.body.statutoryDetails
+                            }
+                }
+            )
+            .exec()
+            .then(data=>{
+                if(data.nModified == 1){
+                    EntityMaster.updateOne(
+                    { _id:req.body.entityID},
+                    {
+                        $push:  { 'updateLog' : [{  updatedAt      : new Date(),
+                                                    updatedBy      : req.body.updatedBy 
+                                                }] 
+                                }
+                    } )
+                    .exec()
+                    .then(data=>{
+                        res.status(200).json({ updated : true });
+                    })
+                }else{
+                    res.status(200).json({ updated : false });
+                }
+            })
+            .catch(err =>{
+                res.status(500).json({
+                    error: err
+                });
+            });
+        }
+    })
+    .catch(err =>{
+        res.status(500).json({
+            error: err
+        });
+    });
+   
+}
+
+exports.listEntity = (req,res,next)=>{
+    EntityMaster.find({entityType:req.params.entityType}).sort({createdAt : -1})    
+        .exec()
+        .then(data=>{
+            res.status(200).json(data);
+        })
+        .catch(err =>{
+            res.status(500).json({
+                error: err
+            });
+        });
+};
+exports.listSupplier = (req,res,next)=>{
+    EntityMaster.find({entityType:req.params.entityType,supplierOf:req.params.company_id}).sort({createdAt : -1})    
+        .exec()
+        .then(data=>{
+            res.status(200).json(data);
+        })
+        .catch(err =>{
+            res.status(500).json({
+                error: err
+            });
+        });
+};
+exports.countEntity = (req,res,next)=>{
+    EntityMaster.find({entityType:req.params.entityType}).count()       
+        .exec()
+        .then(data=>{
+            res.status(200).json({count: data});
+        })
+        .catch(err =>{
+            console.log(err);
+            res.status(500).json({
+                error: err
+            });
+        });
+};
+exports.singleEntity = (req,res,next)=>{
+    EntityMaster.findOne({_id : req.params.entityID})
+    .exec()
+    .then(data=>{
+        main();
+        async function main(){
+            var k = 0 ;
+            var returnData = [];
+            if(data){
+            if(data.contactPersons && data.contactPersons.length > 0){
+                var contactData = [];
+                for(k = 0 ; k < data.contactPersons.length ; k++){
+                    var manager1Details = {
+                        Name   : "",
+                        Department  : "",
+                        Designation    : "",
+                        contactNo   : "",
+                        EmpID   : "",
+                    };
+                     var manager2Details = {
+                        Name   : "",
+                        Department  : "",
+                        Designation    : "",
+                        contactNo   : "",
+                        EmpID   : "",
+                    };
+                     var manager3Details = {
+                        Name   : "",
+                        Department  : "",
+                        Designation    : "",
+                        contactNo   : "",
+                        EmpID   : "",
+                    };
+                    // if(data.contactPersons[k].bookingApprovalRequired == 'Yes'){
+
+                      
+                    manager1Details = await getManagerDetails(data.contactPersons[k].approvingAuthorityId1,data.companyID)
+                    
+                   
+                    manager2Details = await getManagerDetails(data.contactPersons[k].approvingAuthorityId2,data.companyID)
+                    
+                   
+                    manager3Details = await getManagerDetails(data.contactPersons[k].approvingAuthorityId3,data.companyID)
+
+                       
+                    // }
+                    contactData.push({
+                        "_id"                    : data.contactPersons[k]._id,
+                        branchCode               : data.contactPersons[k].branchCode,
+                        branchName               : data.contactPersons[k].branchName,
+                        locationType             : data.contactPersons[k].locationType,
+                        firstName                : data.contactPersons[k].firstName,
+                        workLocationId           : data.contactPersons[k].workLocationId,
+                        addEmployee              : data.contactPersons[k].addEmployee,
+                        personID                 : data.contactPersons[k].personID,
+                        lastName                 : data.contactPersons[k].lastName,
+                        departmentName           : data.contactPersons[k].departmentName,
+                        designationName          : data.contactPersons[k].designationName,
+                        phone                    : data.contactPersons[k].phone,
+                        email                    : data.contactPersons[k].email,
+                        employeeID               : data.contactPersons[k].employeeID,
+                        role                     : data.contactPersons[k].role,
+                        bookingApprovalRequired  : data.contactPersons[k].bookingApprovalRequired,
+                        profilePhoto             : data.contactPersons[k].profilePhoto,
+                        middleName               : data.contactPersons[k].middleName,
+                        DOB                      : data.contactPersons[k].DOB,
+                        altPhone                 : data.contactPersons[k].altPhone,
+                        gender                   : data.contactPersons[k].gender,
+                        whatsappNo               : data.contactPersons[k].whatsappNo,
+                        department               : data.contactPersons[k].department,
+                        empCategory              : data.contactPersons[k].empCategory,
+                        empPriority              : data.contactPersons[k].empPriority,
+                        designation              : data.contactPersons[k].designation,
+                        address                  : data.contactPersons[k].address,
+                        createUser               : data.contactPersons[k].createUser,
+                        approvingAuthorityId1    : data.contactPersons[k].approvingAuthorityId1,
+                        approvingAuthorityId2    : data.contactPersons[k].approvingAuthorityId2,
+                        approvingAuthorityId3    : data.contactPersons[k].approvingAuthorityId3,
+                        preApprovedKilometer     : data.contactPersons[k].preApprovedKilometer,
+                        preApprovedAmount        : data.contactPersons[k].preApprovedAmount,
+                        preApprovedRides         : data.contactPersons[k].preApprovedRides,
+
+                        manager1Details           : manager1Details,
+                        manager2Details           : manager2Details,
+                        manager3Details           : manager3Details,
+
+                    })
+                }
+                    
+            }
+            returnData.push({
+                        "_id"                           : data._id,
+                        supplierOf              : data.supplierOf,
+                        companyID               : data.companyID,
+                        companyName             : data.companyName,
+                        companyPhone            : data.companyPhone,
+                        companyEmail            : data.companyEmail,
+                        locations               : data.locations,
+                        statutoryDetails        : data.statutoryDetails,
+                        entityType              : data.entityType,
+                        profileStatus           : data.profileStatus,
+                        groupName               : data.groupName,
+                        CIN                     : data.CIN,   
+                        COI                     : data.COI,
+                        TAN                     : data.TAN,
+                        companyLogo             : data.companyLogo,
+                        website                 : data.website,
+                        userID                  : data.userID,  
+                        contactData             : contactData
+                    })
+            }//data
+            res.status(200).json(returnData);
+            
+        }
+        
+        
+    })
+    .catch(err =>{
+        res.status(500).json({
+            error: err
+        });
+    });
+};
+function getManagerDetails(ID,companyID){
+   return new Promise(function(resolve,reject){
+        PersonMaster.findOne({"employeeId" : ID,"companyID":companyID},{"firstName":1,middleName:1,lastName:1,contactNo:1,designation:1,department:1,employeeId:1})
+             .populate('designationId')
+             .populate('departmentId')
+             .exec()
+             .then(managerDetails=>{
+                resolve(managerDetails);
+             })
+            .catch(err =>{
+                res.status(500).json({
+                    message : "manager not found.",
+                    error: err
+                   });
+            });
+    });
+}
+exports.getCompany = (req,res,next)=>{
+    EntityMaster.findOne({companyID : req.params.companyID})
+    .exec()
+    .then(data=>{
+        res.status(200).json(data);
+    })
+    .catch(err =>{
+        res.status(500).json({
+            error: err
+        });
+    });
+};
+exports.entityDetails = (req,res,next)=>{
+    EntityMaster.findOne({"contactPersons.userID" : req.params.userID})
+    .exec()
+    .then(data=>{
+        res.status(200).json(data);
+    })
+    .catch(err =>{
+        res.status(500).json({
+            error: err
+        });
+    });
+};
+exports.getEntity = (req, res, next)=>{
+    EntityMaster.findOne({_id : req.params.entityID})
+        .exec()
+        .then(data=>{
+            res.status(200).json(data);
+        })
+        .catch(err =>{
+            res.status(500).json({ error: err });
+        }); 
+};
+
+exports.getAllStatutoryDetails = (req, res, next)=>{
+    EntityMaster.findOne({_id : req.params.entityID})
+        .exec()
+        .then(data=>{
+            res.status(200).json(data.statutoryDetails);
+        })
+        .catch(err =>{
+            res.status(500).json({ error: err });
+        }); 
+};
+
+exports.fetchLocationEntities = (req, res, next)=>{
+    EntityMaster.findOne({_id : req.body.entityID})
+        .sort({createdAt : -1})
+        .skip(req.body.startRange)
+        .limit(req.body.limitRange)
+        .exec()
+        .then(data=>{
+            res.status(200).json(data);
+        })
+        .catch(err =>{
+            res.status(500).json({ error: err });
+        }); 
+};
+exports.fetchContactEntities = (req, res, next)=>{
+    EntityMaster.findOne({_id : req.body.entityID})
+        .sort({createdAt : -1})
+        .skip(req.body.startRange)
+        .limit(req.body.limitRange)
+        .exec()
+        .then(data=>{
+            res.status(200).json(data);
+        })
+        .catch(err =>{
+            res.status(500).json({ error: err });
+        }); 
+};
+exports.getWorkLocation = (req, res, next)=>{
+    console.log("body=>",req.body)
+    var selector = {};
+    if(req.body.company_id){
+        selector = {'_id':ObjectID(req.body.company_id)}
+    }else{
+        selector = {"entityType":req.body.entityType} 
+    }
+    console.log("selector",selector);
+    EntityMaster.aggregate([
+        { $match :selector},
+        { $unwind: "$locations" }
+        ])
+        .exec()
+        .then(data=>{
+            var locations = data.map((a, i)=>{
+                return a.locations
+             })   
+            res.status(200).json({locations});
+        })
+        .catch(err =>{
+            res.status(500).json({ error: err });
+        }); 
+};
+exports.companyName = (req,res,next)=>{
+    EntityMaster.findOne({companyID : req.params.companyID},{companyName:1,companyLogo:1})
+    .exec()
+    .then(data=>{
+        if(data){
+            res.status(200).json(data);
+        }else{
+            res.status(200).json({message:"COMPANY_NOT_FOUND"})
+        }
+    })
+    .catch(err =>{
+        res.status(500).json({
+            error: err
+        });
+    });
+};
+exports.companyNameType = (req,res,next)=>{
+    EntityMaster.findOne({companyID : req.params.companyID,entityType : req.params.type},{companyID:1,companyName:1})
+    .exec()
+    .then(data=>{
+        if(data){
+            res.status(200).json(data);
+        }else{
+            res.status(200).json({message:"COMPANY_NOT_FOUND"})
+        }
+    })
+    .catch(err =>{
+        res.status(500).json({
+            error: err
+        });
+    });
+};
+exports.branchCodeLocation = (req,res,next)=>{
+    EntityMaster.findOne({_id : req.params.entityID, 'locations.branchCode' : req.params.branchCode})
+    .exec()
+    .then(data=>{
+        res.status(200).json(data);
+    })
+    .catch(err =>{
+        res.status(500).json({
+            error: err
+        });
+    });
+};
+exports.updateEntity = (req,res,next)=>{
+    EntityMaster.updateOne(
+            { _id:req.body.entityID},  
+            {
+                $set:   { 
+                            'companyName'               : req.body.companyName,
+                            'groupName'                 : req.body.groupName,
+                            'CIN'                       : req.body.CIN,   
+                            'COI'                       : req.body.COI,
+                            'TAN'                       : req.body.TAN,
+                            'companyLogo'               : req.body.companyLogo,
+                            'website'                   : req.body.website,
+                            'companyEmail'              : req.body.companyEmail,
+                            'companyPhone'              : req.body.companyPhone,
+                            'country'                   : req.body.country,
+                            'countryCode'               : req.body.countryCode,
+                        }
+            }
+        )
+        .exec()
+        .then(data=>{
+            if(data.nModified == 1){
+                EntityMaster.updateOne(
+                { _id:req.body.entityID},
+                {
+                    $push:  { 'updateLog' : [{  updatedAt      : new Date(),
+                                                updatedBy      : req.body.updatedBy 
+                                            }] 
+                            }
+                } )
+                .exec()
+                .then(data=>{
+                    res.status(200).json({ updated : true });
+                })
+            }else{
+                res.status(200).json({ updated : false });
+            }
+        })
+        .catch(err =>{
+            res.status(500).json({
+                error: err
+            });
+        });
+};
+exports.updateProfileStatus = (req,res,next)=>{
+    EntityMaster.updateOne(
+            { _id:req.body.entityID},  
+            {
+                $set:   { 
+                            'profileStatus':req.body.status
+                        }
+            }
+        )
+        .exec()
+        .then(data=>{
+            if(data.nModified == 1){
+                EntityMaster.updateOne(
+                { _id:req.body.entityID},
+                {
+                    $push:  { 'updateLog' : [{  updatedAt      : new Date(),
+                                                updatedBy      : req.body.updatedBy 
+                                            }] 
+                            }
+                } )
+                .exec()
+                .then(data=>{
+                    res.status(200).json({ updated : true });
+                })
+            }else{
+                res.status(200).json({ updated : false });
+            }
+        })
+        .catch(err =>{
+            res.status(500).json({
+                error: err
+            });
+        });
+};
+exports.addLocation = (req,res,next)=>{
+    var locationdetails = req.body.locationDetails;
+    
+    insertLocationdetails();
+    async function insertLocationdetails() {
+        // var data = await updateDocInLoc(req.body.entityID,locationdetails)
+        // console.log('data====>',data)
+         var getData = await fetchLocData(req.body.entityID,locationdetails);
+        if (getData.length > 0) {
+            res.status(200).json({ duplicated : true });
+        }else{
+            // if(locationdetails.GSTIN || locationdetails.PAN){
+            //     var compare = await updateSameStateDocuments(req.body.entityID,locationdetails)
+            // }
+            var getnext = await getNextBranchCode(req.body.entityID)
+            locationdetails.branchCode = getnext;
+            EntityMaster.updateOne(
+                    { _id: ObjectID(req.body.entityID) },  
+                    {
+                        $push:  { 'locations' : locationdetails }
+                    }
+                )
+                .exec()
+                .then(data=>{
+                    if(data.nModified == 1){
+                        res.status(200).json({ created : true });
+                    }else{
+                        res.status(401).json({ created : false });
+                    }
+                })
+                .catch(err =>{
+                    res.status(500).json({ error: err });
+                });
+        }
+    }
+};
+function fetchLocData(entityID,locationdetails){
+    return new Promise((resolve,reject)=>{
+        EntityMaster.find(
+        {_id: entityID,"locations.locationType":locationdetails.locationType, "locations.addressLine1": locationdetails.addressLine1},{ 'locations.$': 1 })
+        .exec()
+        .then(data=>{
+            resolve(data)
+        })
+        .catch(err =>{
+            reject(0)
+        });
+    })
+}
+
+function getNextBranchCode(entityID) {
+    return new Promise((resolve,reject)=>{
+    EntityMaster.findOne({"_id" : entityID }).sort({"locations.branchCode":-1})       
+        .exec()
+        .then(data=>{
+            if (data.locations.length > 0 ) { 
+                var seq = data.locations[data.locations.length - 1].branchCode;
+                seq = seq+1;
+                resolve(seq) 
+            }else{
+               resolve(1)
+            }
+            
+        })
+        .catch(err =>{
+            reject(0)
+        });
+    });
+}
+
+function updateSameStateDocuments(entityID,locationdetails){
+    return new Promise((resolve,reject)=>{
+        EntityMaster.updateMany({"_id":entityID, "locations.state":locationdetails.state},
+            {
+                $set:   { 
+                          'locations.$[].GSTIN'        : locationdetails.GSTIN,
+                          'locations.$[].GSTDocument'  : locationdetails.GSTDocument,
+                          'locations.$[].PAN'          : locationdetails.PAN,
+                          'locations.$[].PANDocument'  : locationdetails.PANDocument
+                        }
+            },{ multi: true }
+        )
+        .exec()
+        .then(data=>{
+            resolve(data)
+        })
+        .catch(err =>{
+            reject(0)
+        });
+    })
+}
+
+exports.updateDocInLoc= (req,res,next)=>{
+    EntityMaster.find({"_id":req.body.entityID, "locations.state":req.body.state},{_id: 0, 'locations.$': 1})
+    .exec()
+    .then(data=>{
+         console.log('results====>',JSON.stringify(data[0].locations[0].GSTIN)) 
+         // EntityMaster.updateOne({"_id":entityID, "locations._id":})
+//              const category = await Category.findOne({ _id:req.params.categoryId });
+// const lastIndex: number = category.items.length - 1;
+
+// console.log(category.items[lastIndex]);
+    })
+    .catch(err =>{
+        res.status(500).json({
+            error: err
+        });
+    });
+}
+
+exports.singleLocation = (req,res,next)=>{
+    EntityMaster.find({"_id" : req.body.entityID, "locations._id":req.body.locationID },
+        {"locations.$" : 1})
+    .exec()
+    .then(data=>{
+        res.status(200).json(data);
+    })
+    .catch(err =>{
+        res.status(500).json({
+            error: err
+        });
+    });
+};
+exports.updateSingleLocation = (req,res,next)=>{
+    var locationdetails = req.body.locationDetails;
+    insertLocationdetails();
+    async function insertLocationdetails() {
+    // var getData = await fetchLocData(req.body.entityID,locationdetails);
+    //     if (getData.length > 0) {
+    //         res.status(200).json({ duplicated : true });
+    //     }else{
+            // if(locationdetails.GSTIN || locationdetails.PAN){
+            //     var compare = await updateSameStateDocuments(req.body.entityID,locationdetails)
+            // }
+    
+           EntityMaster.updateOne(
+                { "_id":req.body.entityID, "locations._id": req.body.locationID},  
+                {
+                    $set:   { 'locations.$.locationType' : locationdetails.locationType,
+                              'locations.$.branchCode'   : locationdetails.branchCode,
+                              'locations.$.addressLine1' : locationdetails.addressLine1,
+                              'locations.$.addressLine2' : locationdetails.addressLine2,
+                              'locations.$.countryCode'  : locationdetails.countryCode,
+                              'locations.$.country'      : locationdetails.country,
+                              'locations.$.stateCode'    : locationdetails.stateCode,
+                              'locations.$.state'        : locationdetails.state,
+                              'locations.$.district'     : locationdetails.district,
+                              'locations.$.city'         : locationdetails.city,
+                              'locations.$.area'         : locationdetails.area,
+                              'locations.$.pincode'      : locationdetails.pincode,
+                              'locations.$.latitude'     : locationdetails.latitude,
+                              'locations.$.longitude'    : locationdetails.longitude,
+                              // 'locations.$.GSTIN'        : locationdetails.GSTIN,
+                              // 'locations.$.GSTDocument'  : locationdetails.GSTDocument,
+                              // 'locations.$.PAN'          : locationdetails.PAN,
+                              // 'locations.$.PANDocument'  : locationdetails.PANDocument
+                            }
+                }
+            )
+            .exec()
+            .then(data=>{
+                if(data.nModified == 1){
+                    res.status(200).json({ updated : true });
+                }else{
+                    res.status(200).json({ updated : false });
+                }
+            })
+            .catch(err =>{
+                res.status(500).json({ error: err });
+            });
+        // }
+    }
+};
+
+exports.updateSingleStatutory = (req,res,next)=>{
+    var statutorydetails = req.body.statutoryDetails
+   EntityMaster.updateOne(
+        { "_id":req.body.entityID, "statutoryDetails._id": req.body.statutoryID},  
+        {
+            $set:   { 
+                      'statutoryDetails.$.stateCode'    : statutorydetails.stateCode,
+                      'statutoryDetails.$.state'        : statutorydetails.state,
+                      'statutoryDetails.$.GSTIN'        : statutorydetails.GSTIN,
+                      'statutoryDetails.$.GSTDocument'  : statutorydetails.GSTDocument,
+                      'statutoryDetails.$.PAN'          : statutorydetails.PAN,
+                      'statutoryDetails.$.PANDocument'  : statutorydetails.PANDocument
+                    }
+        }
+    )
+    .exec()
+    .then(data=>{
+        if(data.nModified == 1){
+            res.status(200).json({ updated : true });
+        }else{
+            res.status(200).json({ updated : false });
+        }
+    })
+    .catch(err =>{
+        res.status(500).json({ error: err });
+    });
+};
+
+exports.addContact = (req,res,next)=>{
+    var contactdetails = req.body.contactDetails;
+    EntityMaster.find({"contactPersons.email": contactdetails.email,"contactPersons._id" : {$ne : req.body.entityID}})
+    .then((datas)=>{
+        if(datas.length > 0){
+            res.status(200).json({ duplicated : true });
+        }else{
+            EntityMaster.updateOne(
+                { _id:req.body.entityID},  
+                {
+                    $push:  { 'contactPersons' : contactdetails }
+                }
+            )
+            .exec()
+            .then(data=>{
+                if(data.nModified == 1){
+                    res.status(200).json({ created : true });
+                }else{
+                    res.status(200).json({ created : false });
+                }
+            })
+            .catch(err =>{
+                res.status(500).json({
+                    error: err
+                });
+            });
+        }
+    })
+    .catch((err)=>{
+        res.status(500).json({
+            error: err
+        });
+    })
+    
+};
+exports.singleContact = (req,res,next)=>{
+    EntityMaster.findOne({"_id" : req.body.entityID, "contactPersons._id":req.body.contactID},
+        {"contactPersons.$" : 1})
+    .exec()
+    .then(data=>{
+        res.status(200).json(data);
+    })
+    .catch(err =>{
+        res.status(500).json({
+            error: err
+        });
+    });
+};
+
+function camelCase(str) {
+    return str
+      .toLowerCase()
+      .split(' ')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
+  }
+
+exports.getAllVendors = (req,res,next)=>{
+    var city = req.params.city;
+    var city1 = camelCase(city);
+    var city2 = city.toUpperCase();
+    var city3 = city.toLowerCase();
+    EntityMaster.find({"entityType":"vendor","locations.city":{$in:
+          [city,city1,city2,city3]}})
+    .exec()
+    .then(data=>{
+        res.status(200).json(data);
+    })
+    .catch(err =>{
+        res.status(500).json({
+            error: err
+        });
+    });
+};
+// Convert Degress to Radians
+function Deg2Rad(deg) {
+  return deg * Math.PI / 180;
+}
+function PythagorasEquirectangular(lat1, lon1, lat2, lon2) {
+  lat1 = Deg2Rad(lat1);
+  lat2 = Deg2Rad(lat2);
+  lon1 = Deg2Rad(lon1);
+  lon2 = Deg2Rad(lon2);
+  var R = 6371; // km
+  var x = (lon2 - lon1) * Math.cos((lat1 + lat2) / 2);
+  var y = (lat2 - lat1);
+  var d = Math.sqrt(x * x + y * y) * R;
+  return d;
+}
+function onlyUnique(value, index, self) { 
+    return self.indexOf(value) === index;
+}
+exports.getAllNearbyVendors = (req,res,next)=>{
+    EntityMaster.find({"entityType":"vendor"})
+    .exec()
+    .then(data=>{
+        if(data && data.length > 0){
+            var vendorArray = []
+            for(var i=0 ; i<data.length ; i++){
+                if(data[i].locations && data[i].locations.length > 0){
+                    var cityArray = []
+                    for(var j=0 ; j<data[i].locations.length ; j++){
+                        var lat = data[i].locations[j].latitude;
+                        var lng = data[i].locations[j].longitude;
+                        if(lat && lng){
+                            cityArray.push({lat:lat,lng:lng})
+                        }
+                    }//j
+                    var minDif = 300;
+                    var closest
+                    if(cityArray && cityArray.length > 0){
+                        for (index = 0; index < cityArray.length; index++) {
+                           var dif = PythagorasEquirectangular(req.params.lat, req.params.lng, cityArray[index].lat, cityArray[index].lng); 
+                           if (dif < minDif) {
+                              closest = index;
+                              minDif = dif;
+                              vendorArray.push(data[i])
+                            }
+                        }//index
+                    }
+                }
+            }//i
+            var uniqueVendorArray = vendorArray.filter( onlyUnique );
+            res.status(200).json(uniqueVendorArray);
+        }
+        
+    })
+    .catch(err =>{
+        res.status(500).json({
+            error: err
+        });
+    });
+};
+exports.getAdminCompany = (req,res,next)=>{
+    EntityMaster.find({"entityType":"appCompany"})
+    .exec()
+    .then(data=>{
+        res.status(200).json(data);
+    })
+    .catch(err =>{
+        res.status(500).json({
+            error: err
+        });
+    });
+};
+exports.getAllEntities = (req,res,next)=>{
+    EntityMaster.find({})
+    .exec()
+    .then(data=>{
+        res.status(200).json(data);
+    })
+    .catch(err =>{
+        res.status(500).json({
+            error: err
+        });
+    });
+};
+exports.updateSingleContact = (req,res,next)=>{
+    var contactdetails = req.body.contactDetails;
+    console.log('contactdetails', contactdetails, contactdetails.createUser);
+    EntityMaster.find({"contactPersons.email": contactdetails.email, _id: { $ne: req.body.entityID}, "contactPersons._id" : {$ne : req.body.contactID},"contactPersons.employeeID" : {$ne : req.body.employeeID} })
+    .then((datas)=>{
+        if(datas.length > 0){
+            res.status(200).json({ duplicated : true });
+        }else{
+            EntityMaster.updateOne(
+            { "_id":req.body.entityID, "contactPersons._id": req.body.contactID},  
+            {
+                $set:   { 'contactPersons.$.branchCode' : contactdetails.branchCode,
+                          'contactPersons.$.branchName' : contactdetails.branchName,
+                          'contactPersons.$.locationType' : contactdetails.locationType,
+                          'contactPersons.$.profilePhoto': contactdetails.profilePhoto,
+                          'contactPersons.$.firstName'  : contactdetails.firstName,
+                          'contactPersons.$.middleName' : contactdetails.middleName,
+                          'contactPersons.$.lastName'   : contactdetails.lastName,
+                          'contactPersons.$.DOB'        : contactdetails.DOB,
+                          'contactPersons.$.employeeID' : contactdetails.employeeID,
+                          'contactPersons.$.phone'      : contactdetails.phone,
+                          'contactPersons.$.altPhone'   : contactdetails.altPhone,
+                          'contactPersons.$.whatsappNo' : contactdetails.whatsappNo,
+                          'contactPersons.$.email'      : contactdetails.email,
+                          'contactPersons.$.gender'     : contactdetails.gender,
+                          'contactPersons.$.department' : contactdetails.department,
+                          'contactPersons.$.empCategory' : contactdetails.empCategory,
+                          'contactPersons.$.empPriority' : contactdetails.empPriority,
+                          'contactPersons.$.designationName'    : contactdetails.designationName,
+                          'contactPersons.$.designation'        : contactdetails.designation,
+                          'contactPersons.$.departmentName'     : contactdetails.departmentName,
+                          'contactPersons.$.address'            : contactdetails.address,
+                          'contactPersons.$.role'               : contactdetails.role,
+                          'contactPersons.$.createUser'         : contactdetails.createUser,
+                          'contactPersons.$.bookingApprovalRequired'    : contactdetails.bookingApprovalRequired,
+                          'contactPersons.$.approvingAuthorityId1'      : contactdetails.approvingAuthorityId1,
+                          'contactPersons.$.approvingAuthorityId2'      : contactdetails.approvingAuthorityId2,
+                          'contactPersons.$.approvingAuthorityId3'      : contactdetails.approvingAuthorityId3,
+                          'contactPersons.$.preApprovedKilometer'       : contactdetails.preApprovedKilometer,
+                          'contactPersons.$.preApprovedAmount'  : contactdetails.preApprovedAmount,
+                          'contactPersons.$.preApprovedRides'  : contactdetails.preApprovedRides,
+                        }
+            }
+            )
+            .exec()
+            .then(data=>{
+                if(data.nModified == 1){
+                    res.status(200).json({ updated : true });
+                }else{
+                    res.status(200).json({ updated : false });
+                }
+            })
+            .catch(err =>{
+                res.status(500).json({ error: err });
+            });
+        }
+    })
+    .catch((err)=>{
+        res.status(500).json({
+            error: err
+        });
+    })
+};
+function getAllVendorAllocationData(id){
+    return new Promise((resolve,reject)=>{
+        VendorAllocation.update({},{'$pull':{"vendor":{"vendorID":id}}},{multi:true})
+        .exec()
+        .then(response=>{
+            resolve(response)
+        })
+        .catch(err=>{
+            console.log("Error :",err)
+            reject(err)
+        })
+    })
+}
+exports.deleteEntity = (req,res,next)=>{
+    EntityMaster.deleteOne({_id:req.params.entityID})
+    .exec()
+    .then(data=>{
+        main();
+        async function main(){
+            var vendorAllocationData = await getAllVendorAllocationData(req.params.entityID)
+            res.status(200).json({ deleted : true });
+        }
+        
+    })
+    .catch(err =>{
+        res.status(500).json({ error: err });
+    });
+};
+exports.deleteLocation = (req,res,next)=>{   
+    EntityMaster.updateOne(
+            { _id:req.params.entityID},  
+            {
+                $pull: { 'locations' : {_id:req.params.locationID}}
+            }
+        )
+        .exec()
+        .then(data=>{
+            if(data.nModified == 1){
+                res.status(200).json({ deleted : true });
+            }else{
+                res.status(401).json({ deleted : false });
+            }
+        })
+        .catch(err =>{
+            res.status(500).json({ error: err });
+        });
+};
+
+exports.deleteStatutory = (req,res,next)=>{   
+    EntityMaster.updateOne(
+            { _id:req.params.entityID},  
+            {
+                $pull: { 'statutoryDetails' : {_id:req.params.statutoryID}}
+            }
+        )
+        .exec()
+        .then(data=>{
+            if(data.nModified == 1){
+                res.status(200).json({ deleted : true });
+            }else{
+                res.status(401).json({ deleted : false });
+            }
+        })
+        .catch(err =>{
+            res.status(500).json({ error: err });
+        });
+};
+exports.deleteContact = (req,res,next)=>{   
+    EntityMaster.updateOne(
+            { _id:req.params.entityID},  
+            {
+                $pull: { 'contactPersons' : {_id:req.params.contactID}}
+            }
+        )
+        .exec()
+        .then(data=>{
+            if(data.nModified == 1){
+                res.status(200).json({ deleted : true });
+            }else{
+                res.status(200).json({ deleted : false });
+            }
+        })
+        .catch(err =>{
+            res.status(500).json({
+                error: err
+            });
+        });
+};
+exports.filterEntities = (req,res,next)=>{
+    // var selector = {
+    //         "locations":{ $elemMatch: { stateCode : "MH" }}, 
+    //         "locations":{ $elemMatch: { district : "Pune" }},
+    //         "companyName" :  {$regex : "^i",$options: "i"} 
+    //     };
+
+
+    var selector = {}; 
+    selector['$and']=[];
+
+    selector["$and"].push({ entityType : { $regex : req.body.entityType,$options: "i"} })
+    //selector.entityType = {$regex : req.body.entityType,$options: "i"}  
+    if (req.body.stateCode) {
+        selector["$and"].push({ locations : { $elemMatch: { stateCode : req.body.stateCode } }  })
+        //selector.locations = { $elemMatch: { stateCode : req.body.stateCode } }     
+    }
+    if (req.body.district) {
+        selector["$and"].push({ locations : { $elemMatch: { district : { $regex : req.body.district, $options: "i"} } }  })
+    }
+    if (req.body.initial && req.body.initial != 'All') {
+        //selector.companyName = {$regex : "^"+req.body.initial,$options: "i"} 
+        selector["$and"].push({ companyName : { $regex : "^"+req.body.initial,$options: "i"}   })
+    }
+    if (req.body.searchStr && req.body.searchStr != '') {
+        selector['$or']=[];
+        if (req.body.initial && req.body.initial != 'All') {
+            selector["$and"].push({ companyName : { $regex : "^"+req.body.initial,$options: "i"}   })
+        }
+        
+        selector["$or"].push({ companyName : { $regex : req.body.searchStr, $options: "i"}  })
+        selector["$or"].push({ groupName   : { $regex : req.body.searchStr, $options: "i"}  })
+        selector["$or"].push({ locations   : { $elemMatch: { addressLine1 : { $regex : req.body.searchStr, $options: "i"} } }  })
+        selector["$or"].push({ locations   : { $elemMatch: { area : { $regex : req.body.searchStr, $options: "i"} } }  })
+        selector["$or"].push({ locations   : { $elemMatch: { district : { $regex : req.body.searchStr, $options: "i"} } }  })
+        selector["$or"].push({ locations   : { $elemMatch: { stateCode : { $regex : req.body.searchStr, $options: "i"} } }  })
+    }
+
+    EntityMaster.find(selector)
+    .sort({createdAt : -1})
+    .exec()
+    .then(data=>{
+        res.status(200).json(data);
+    })
+    .catch(err =>{
+        res.status(500).json({
+            error: err
+        });
+    });
+};
+exports.filterEntities_grid = (req,res,next)=>{
+    
+    var selector = {}; 
+    selector['$and']=[];
+
+    selector["$and"].push({ entityType : { $regex : req.body.entityType,$options: "i"} })
+    if (req.body.stateCode) {
+        selector["$and"].push({ locations : { $elemMatch: { stateCode : req.body.stateCode } }  })
+    }
+    if (req.body.district) {
+        selector["$and"].push({ locations : { $elemMatch: { district : { $regex : req.body.district, $options: "i"} } }  })
+    }
+    if (req.body.initial && req.body.initial != 'All') {
+        selector["$and"].push({ companyName : { $regex : "^"+req.body.initial,$options: "i"}   })
+    }
+    if (req.body.searchStr && req.body.searchStr != '') {
+        selector['$or']=[];
+        if (req.body.initial && req.body.initial != 'All') {
+            selector["$and"].push({ companyName : { $regex : "^"+req.body.initial,$options: "i"}   })
+        }
+        
+        selector["$or"].push({ companyName : { $regex : req.body.searchStr, $options: "i"}  })
+        selector["$or"].push({ groupName   : { $regex : req.body.searchStr, $options: "i"}  })
+        selector["$or"].push({ locations   : { $elemMatch: { addressLine1 : { $regex : req.body.searchStr, $options: "i"} } }  })
+        selector["$or"].push({ locations   : { $elemMatch: { area : { $regex : req.body.searchStr, $options: "i"} } }  })
+        selector["$or"].push({ locations   : { $elemMatch: { district : { $regex : req.body.searchStr, $options: "i"} } }  })
+        selector["$or"].push({ locations   : { $elemMatch: { stateCode : { $regex : req.body.searchStr, $options: "i"} } }  })
+    }
+
+    EntityMaster.find(selector)
+    .sort({createdAt : -1})
+    .skip(req.body.startRange)
+    .limit(req.body.limitRange)
+    .exec()
+    .then(data=>{
+        res.status(200).json(data);
+    })
+    .catch(err =>{
+        res.status(500).json({
+            error: err
+        });
+    });
+};
+exports.fetchEntities = (req, res, next)=>{
+    EntityMaster.find({entityType:req.body.type})
+        .sort({createdAt : -1})
+        .skip(req.body.startRange)
+        .limit(req.body.limitRange)
+        .exec()
+        .then(data=>{
+            res.status(200).json(data);
+        })
+        .catch(err =>{
+            res.status(500).json({ error: err });
+        }); 
+};
+exports.CompanyfromEntities = (req, res, next)=>{
+    EntityMaster.find({})
+        .sort({createdAt : -1})
+        .select("companyName")
+        .exec()
+        .then(data=>{
+            res.status(200).json(data);
+        })
+        .catch(err =>{
+            res.status(500).json({ error: err });
+        }); 
+};
+exports.countContacts = (req,res,next)=>{
+    EntityMaster.aggregate([
+        { "$match": { entityType:req.params.entityType } },
+        {
+          $group: {
+            _id: "$entityType",
+            total: { $sum: { $size: "$contactPersons"} }
+          }
+        }
+    ])
+    .exec()
+    .then(data=>{
+        if(data[0]){
+            var count = data[0].total
+        }else{
+            var count = 0
+        }
+
+            res.status(200).json({count:count});
+    })
+    .catch(err =>{
+        console.log(err);
+        res.status(500).json({
+            error: err
+        });
+    });
+};
+function getVehicleData(id){
+    return new Promise((resolve,reject)=>{
+        VehicleMaster.find({"company_Id":id})
+        .then(vehicleData=>{
+            var returnData = {};
+            if(vehicleData && vehicleData.length > 0){
+                var vehicleCount = 0;
+                for(var j=0 ; j<vehicleData.length ; j++){
+                  vehicleCount++  
+                }//j
+                returnData={
+                    carCount:vehicleCount
+                }
+                resolve(returnData)
+            }else{
+                returnData={
+                    carCount:0
+                }
+                resolve(returnData)
+            }
+        })
+        .catch(err=>{
+            res.status(500).json({
+                error: err
+            });
+        })
+    })
+}
+exports.getAllCitywiseVendors = (req,res,next)=>{
+    var city = req.params.city;
+    var city1 = camelCase(city);
+    var city2 = city.toUpperCase();
+    var city3 = city.toLowerCase();
+    EntityMaster.find({"entityType":"vendor","locations.city":{$in:
+          [city,city1,city2,city3]}})
+    .exec()
+    .then(data=>{
+        
+        if(data && data.length > 0){
+            main();
+            async function main(){
+                var returnData = [];
+                for(var i=0; i<data.length; i++){
+                    var vehicleData = await getVehicleData(data[i]._id)
+                    returnData.push({
+                        id:data[i]._id,
+                        ID:data[i].companyID,
+                        companyName:data[i].companyName,
+                        carCount:vehicleData.carCount
+                    })
+                }//i  
+                res.status(200).json(returnData);
+            }
+        }
+        
+    })
+    .catch(err =>{
+        res.status(500).json({
+            error: err
+        });
+    });
+};
+
+/*Bulk upload*/
+
+exports.bulkUploadEntity = (req, res, next) => {
+    var entity = req.body.data;
+
+    var validData = [];
+    var validObjects = [];
+    var invalidData = [];
+    var invalidObjects = [];
+    var remark = '';
+    var failedRecords = [];
+    var Count = 0;
+    var DuplicateCount = 0;
+    processData();
+    async function processData() {
+
+        var departments = await fetchDepartments();
+        var designations = await fetchDesignations();
+        console.log("entity",entity);
+
+        for (var k = 0; k < entity.length; k++) {
+            if (entity[k].supplierOf == '-') {
+                remark += "supplierOf not found, ";
+            }
+            if (entity[k].profileStatus == '-') {
+                remark += "profileStatus not found, ";
+            }
+            if (entity[k].entityType == '-') {
+                remark += "entityType not found, ";
+            }
+            if (entity[k].companyName == '-') {
+                remark += "companyName not found, ";
+            }
+            if (entity[k].groupName == '-') {
+                remark += "groupName not found, ";
+            }
+            if (entity[k].companyEmail == '-') {
+                remark += "companyEmail not found, ";
+            }
+            if (entity[k].website == '-') {
+                remark += "website not found, ";
+            }
+            if (entity[k].companyPhone == '-') {
+                remark += "companyPhone not found, ";
+            }
+            if (entity[k].CIN == '-') {
+                remark += "CIN not found, ";
+            }
+            if (entity[k].COI == '-') {
+                remark += "COI not found, ";
+            }
+            if (entity[k].TAN == '-') {
+                remark += "TAN not found, ";
+            }
+            console.log("remark", remark)
+
+            if (remark == '') {
+                var departmentId, designationId;
+                // check if department exists
+                var departmentExists = departments.filter((data) => {
+                    console.log("departmentExists",departmentExists);
+                    if (data.department == entity[k].department) {
+                        return data;
+                    }
+                })
+                if (departmentExists.length > 0) {
+                    departmentId = departmentExists[0]._id;
+                } else {
+                    departmentId = await insertDepartment(entity[k].department, req.body.reqdata.createdBy);
+                    //departmentId = departmentExists[0]._id;
+                }
+                // check if designation exists
+                var designationExists = designations.filter((data) => {
+                    if (data.designation == entity[k].designation) {
+                        return data;
+                    }
+                })
+                if (designationExists.length > 0) {
+                    designationId = designationExists[0]._id;
+                } else {
+                    designationId = await insertDesignation(entity[k].designation);
+                    //departmentId = departmentExists[0]._id;
+                }
+
+                var allEntities = await fetchAllEntities(req.body.reqdata.entityType);
+
+                // check if employee exists
+                var employeeExists = allEntities.filter((data) => {
+                    if (data.supplierOf == entity[k].supplierOf
+                        && data.entityType == entity[k].entityType
+                        && data.companyName == entity[k].companyName
+                        && data.companyEmail == entity[k].companyEmail) {
+                        return data;
+                    }
+                })
+
+                if (employeeExists.length == 0) {
+                   
+
+                    validObjects = entity[k];
+
+                    validObjects.entityType = "corporate";
+                    validObjects.supplierOf = supplierOf;
+                    validObjects.departmentId = departmentId;
+                    validObjects.designationId = designationId;
+                    validObjects.companyName = companyName;
+                    validObjects.companyEmail = companyEmail;
+                    validObjects.fileName = req.body.fileName;
+                    validObjects.createdBy = req.body.reqdata.createdBy;
+                    validObjects.createdAt = new Date();
+
+                    validData.push(validObjects);
+
+                } else {
+
+                    remark += "Employee already exists.";
+
+                    invalidObjects = entity[k];
+                    invalidObjects.failedRemark = remark;
+                    invalidData.push(invalidObjects);
+                }
+
+            } else {
+
+              
+                invalidObjects = employees[k];
+                invalidObjects.failedRemark = remark;
+                invalidData.push(invalidObjects);
+            }
+            remark = '';
+        }
+        //console.log("validData",validData);
+        EntityMaster.insertMany(validData)
+            .then(data => {
+
+            })
+            .catch(err => {
+                console.log(err);
+            });
+
+        failedRecords.FailedRecords = invalidData;
+        failedRecords.fileName = req.body.fileName;
+        failedRecords.totalRecords = req.body.totalRecords;
+
+        await insertFailedRecords(failedRecords, req.body.updateBadData);
+
+        res.status(200).json({
+            "message": "Bulk upload process is completed successfully!",
+            "completed": true
+        });
+    }
+};
+
+var fetchDesignations = async () => {
+    return new Promise(function (resolve, reject) {
+        DesignationMaster.find({})
+            .exec()
+            .then(data => {
+                resolve(data);
+            })
+            .catch(err => {
+                reject(err);
+            });
+    });
+};
+
+var fetchDepartments = async () => {
+    return new Promise(function (resolve, reject) {
+        DepartmentMaster.find({})
+            .exec()
+            .then(data => {
+                resolve(data);
+            })
+            .catch(err => {
+                reject(err);
+            });
+    });
+};
+var fetchAllEntities = async (type) => {
+    return new Promise(function (resolve, reject) {
+        EntityMaster.find({entityType:req.body.entityType})
+            .sort({ createdAt: -1 })
+            .then(data => {
+                resolve(data);
+            })
+            .catch(err => {
+                reject(err);
+            });
+    });
+};
+exports.filedetails = (req, res, next) => {
+    var finaldata = {};
+    EntityMaster.aggregate([
+        {
+            $lookup:
+            {
+                from: "departmentmasters",
+                localField: "departmentId",
+                foreignField: "_id",
+                as: "department"
+            }
+        },
+        {
+            $lookup:
+            {
+                from: "designationmasters",
+                localField: "designationId",
+                foreignField: "_id",
+                as: "designation"
+            }
+        },
+        { $match: { entityType: req.params.entityType, fileName: req.params.fileName } }
+    ])
+        .exec()
+        .then(data => {
+            //finaldata.push({goodrecords: data})
+            finaldata.goodrecords = data;
+            FailedRecords.find({ fileName: req.params.fileName })
+                .exec()
+                .then(badData => {
+                    finaldata.failedRecords = badData[0].failedRecords
+                    finaldata.totalRecords = badData[0].totalRecords
+                    res.status(200).json(finaldata);
+                })
+
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({
+                error: err
+            });
+        });
+};
+function insertDepartment(department, createdBy) {
+    return new Promise(function (resolve, reject) {
+        const departmentMaster = new DepartmentMaster({
+            _id: new mongoose.Types.ObjectId(),
+            department: department,
+            createdBy: createdBy,
+            createdAt: new Date()
+        })
+        departmentMaster.save()
+            .then(data => {
+                resolve(data._id);
+            })
+            .catch(err => {
+                reject(err);
+            });
+    });
+}
+function insertDesignation(designation, createdBy) {
+    return new Promise(function (resolve, reject) {
+        const designationMaster = new DesignationMaster({
+            _id: new mongoose.Types.ObjectId(),
+            designation: designation,
+            createdBy: createdBy,
+            createdAt: new Date()
+        })
+        designationMaster.save()
+            .then(data => {
+                resolve(data._id);
+            })
+            .catch(err => {
+                reject(err);
+            });
+    });
+}
+var insertFailedRecords = async (invalidData, updateBadData) => {
+    //console.log('invalidData',invalidData);
+    return new Promise(function (resolve, reject) {
+        FailedRecords.find({ fileName: invalidData.fileName })
+            .exec()
+            .then(data => {
+                if (data.length > 0) {
+                    //console.log('data',data[0].failedRecords.length)   
+                    if (data[0].failedRecords.length > 0) {
+                        if (updateBadData) {
+                            FailedRecords.updateOne({ fileName: invalidData.fileName },
+                                { $set: { 'failedRecords': [] } })
+                                .then(data => {
+                                    if (data.nModified == 1) {
+                                        FailedRecords.updateOne({ fileName: invalidData.fileName },
+                                            {
+                                                $set: { 'totalRecords': invalidData.totalRecords },
+                                                $push: { 'failedRecords': invalidData.FailedRecords }
+                                            })
+                                            .then(data => {
+                                                if (data.nModified == 1) {
+                                                    resolve(data);
+                                                } else {
+                                                    resolve(data);
+                                                }
+                                            })
+                                            .catch(err => { reject(err); });
+                                    } else {
+                                        resolve(0);
+                                    }
+                                })
+                                .catch(err => { reject(err); });
+                        } else {
+                            FailedRecords.updateOne({ fileName: invalidData.fileName },
+                                {
+                                    $set: { 'totalRecords': invalidData.totalRecords },
+                                    $push: { 'failedRecords': invalidData.FailedRecords }
+                                })
+                                .then(data => {
+                                    if (data.nModified == 1) {
+                                        resolve(data);
+                                    } else {
+                                        resolve(data);
+                                    }
+                                })
+                                .catch(err => { reject(err); });
+                        }
+
+                    } else {
+                        FailedRecords.updateOne({ fileName: invalidData.fileName },
+                            {
+                                $set: { 'totalRecords': invalidData.totalRecords },
+                                $push: { 'failedRecords': invalidData.FailedRecords }
+                            })
+                            .then(data => {
+                                if (data.nModified == 1) {
+                                    resolve(data);
+                                } else {
+                                    resolve(data);
+                                }
+                            })
+                            .catch(err => { reject(err); });
+                    }
+                } else {
+                    const failedRecords = new FailedRecords({
+                        _id: new mongoose.Types.ObjectId(),
+                        failedRecords: invalidData.FailedRecords,
+                        fileName: invalidData.fileName,
+                        totalRecords: invalidData.totalRecords,
+                        createdAt: new Date()
+                    });
+
+                    failedRecords
+                        .save()
+                        .then(data => {
+                            resolve(data._id);
+                        })
+                        .catch(err => {
+                            console.log(err);
+                            reject(err);
+                        });
+                }
+            })
+
+    })
+}
+
+

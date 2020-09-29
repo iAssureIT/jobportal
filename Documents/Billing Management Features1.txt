@@ -1,0 +1,249 @@
+Billing Management Features
+
+Menu Admin side
+
+Billing Management
+ - Generate Bills
+ - Unpaid Bills
+ - Paid Bills
+
+
+
+1) Unpaid Bills 
+	
+	Collection Name: "invoices"
+ 	List of Invoices for the Trips whose Status => "Expenses Submitted" or "Ready To Bill" (Confirm with Rushi)
+	Booking ID: 123 			Invoice Number: FY2020-21/936    (invoices: nnn )
+
+
+
+
+2) System Admin will have a separate function 
+	
+	> Billing Management 
+		- Generate Bill 
+
+		When clicked on this link, admin will see all trips which has status “Ready To Bill”. 
+
+
+		i)  Select details from Booking Collection
+		ii) Select Rates from Contract table for that company, for that period & active contract.
+		ii) Insert into "invoices" collection 
+
+
+
+
+		Table Columns  (Copy from Booking collection: "bookings") 
+
+		Trip ID & Type,     (Type : Outstation)
+		Company Name/ID, 
+		Emp Name/ID, 
+		Trip Date, 
+		Start & End Location Date & Time, 
+		Car Details + Driver, 
+		
+		Total Km Travelled, 
+		Total Time taken,   
+		Package Applied, 
+		Rate Applied (Contract Management), 
+		Total Travel Cost,    
+		Toll Charges, 
+		Parking Charges, 
+		Driver Allowance,     
+		Night Charges,  
+		Early Morning Charges, 
+		Other Charges,  
+		Total Bill Amount, 
+		Actions
+
+		Actions => [Generate Bill], [Cancel]
+
+		When Generate Bill button is clicked, we will produce a tax invoice and will be shown to admin. This invoice would be editable. Route "/create-invoice"
+
+		Admin will have facility to add new line-item or make changes in existing line items. 
+		Admin can add or remove charges or provide any discount. 
+
+		
+
+	===============================================================================
+
+	Our Company Name 																															LOGO
+	Address 														TAX Invoice
+	Email  |  Phone
+	PAN:
+	GST: 
+
+
+	Client Company Name 				 																			Invoice #: 12345
+	Address 										 																Date: dd/mm/yyyy
+	Email  |  Phone
+	PAN:
+	GST: 
+
+	[Add Line Item]
+--------------------------------------------------------------------------------				
+	Item Type 		Description 	Qty       Unit Cost 		Line Total
+																											  (
+--------------------------------------------------------------------------------																											  
+	Travel Cost   Pune-Mumbai Trip 	512 Km 		 10              5120.00  
+	Trip ID #: nnn             ________
+	Sedan Car 
+	White Honda City
+	MH-12-AB-1234
+	Driver: Abcd (ID: nnn) 
+
+
+	Other Charges 	Toll 			  1 		 50  	          50.00 
+
+	Other Charges 	Toll			  1 		 300  		      300.00   
+
+	Other Charges 	Parking 		  2 		 50  		      100.00   
+
+	Allowance 		Driver Allowance  1			 250 		      250.00   
+
+	Allowance 		Night Allowance   1			 200 		      200.00   
+
+--------------------------------------------------------------------------------																				Discount    :   (500.00)  x							Final Total :   5520.0															CGST (2.5%) :   138.00
+																										0
+
+--------------------------------------------------------------------------------	
+																									0
+
+	Notes 
+	[ ------------------- ] (Text Area 2 Rows - 100 columns)
+
+
+	Terms & Conditions
+	[ ------------------- ] (Text Area 2 Rows - 100 columns)
+
+
+	Bank Details (To Be Discussed)
+	---------------------
+	---------------------
+	---------------------
+
+																																[
+================================================================================
+
+Once changes are done, then Admin can save invoice. It would be shown in pdf format. 
+
+This invoice can be downloaded, printed or sent automatically via email. 
+
+	PDF Format ->  Top 3 icons   [download] [print] [email]
+																										 |
+																							
+
+Notification => Automatic Email to Client (Corprate Admin) & System Admin.
+
+Status => "UnPaid Bill"
+
+
+
+6) (A) Unpaid Bills means all generated bills which are not yet paid by client. 
+Show Due Date and Overdue Status. Background Red to highlight. 
+
+(B) - Master Invoice 
+Admin can select multiple trip-invoices and create one single Master Invoice. 
+Invoices can be selected only from same Location or same State - SAME GST. 
+Tax Invoice should be Unique. 
+
+When client makes payment, Admin can enter these payment details like 
+				- Payment date, 
+				- Paid amount, 
+				- mode of payment, 
+				- transaction number or ID, etc. 
+				- Attachment 
+
+Admin can select multiple invoices to add these Payment details. Client can make payment for multiple invoice in one cheque or one transaction. 
+
+
+A notification would be generated for client and to vendor about the client payment. 
+Client will receive payment receipt and vendor will be informed that client has made payment and vendor will receive his payment soon. 
+
+Status of the trip will be changed to “Paid Bill”
+
+
+
+7) Cancelled Bills 
+Bills can be cancelled for various reasons. 
+Status changes to “Cancelled” 
+
+Notification will be send to client & vendor about bill cancellation. 
+
+
+Reporting System 
+
+Reports can be generated on various parameters 
+1) Unpaid & paid bills
+2) Client wise bills
+3) Vendor wise bills
+4) Originating city and destination city wise bills
+
+
+
+
+
+
+
+
+
+==================
+
+logic
+
+
+Generate bill 
+1) Copy from booking collection 
+2) Find City Class using Originating City
+3) Using the package_id & Company ID, Get the rates from contract collection
+4) if local package type
+	i)   fix charges
+	ii)  Total Km > min km, extra km charges = (TKM - MKM) * EKM charges  
+	iii) Total Hrs > min Hrs, extra Hr charges = (THR - MHR) * EHR charges  
+	iv)  Add Driver allowance, if THR > 12
+	v)   Add night halt charges, if fromTime < 11pm and Totime > 6pm
+	vi)  Add night charges, if fromTime > nightChartgesStTime OR Totime < nightChartgesEndTime
+	vii) Add morning charges, if fromTime > morningChartgesStTime OR Totime < earlyMorningChargesEndTime
+
+5) if Outstation package type
+	0)   TotalDays = todate - fromdate + 1	
+	i)   if TKM < (MKM x TotDays)
+			TotFixCharges = fixCharges x TotDays
+		 else
+		 	TotFixCharges = (fixCharges x TotDays) + (TKM - (MKM x TotDays)) x extKmCharges
+	iv)  Add Driver allowance, if THR > 12
+	v)   Add night halt charges, if fromTime < 11pm and Totime > 6pm
+	vi)  Add night charges, if fromTime > nightChartgesStTime OR Totime < nightChartgesEndTime
+	vii) Add morning charges, if fromTime > morningChartgesStTime OR Totime < earlyMorningChargesEndTime
+
+
+next discussion
+ - grace period
+ - 
+
+ 10) insert into invoices collection
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

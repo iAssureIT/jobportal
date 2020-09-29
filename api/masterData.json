@@ -1,0 +1,50 @@
+{
+	"locationType":[
+		{ 
+	    	"fieldValue": "Head Off",
+	    	"companyID": "1",
+	    	"iconUrl" : "",
+	    	"createdBy" : "5ecd01bf0a41eb785b6074c0"
+		},
+		{ 
+		    "fieldValue": "Mfg Plant",
+		    "companyID": "1"
+		},
+		{ 
+		    "fieldValue": "Marketing Office",
+		    "companyID": "1"
+		}
+	],
+	"departments":[
+		{ 
+	    	"fieldValue": "Finance",
+	    	"companyID": "1"
+		},
+		{ 
+		    "fieldValue": "Production",
+		    "companyID": "1"
+		},
+		{ 
+		    "fieldValue": "QA",
+		    "companyID": "1"
+		}
+	],
+	"designations":[
+		{ 
+	    	"fieldValue": "CEO",
+	    	"companyID": "1"
+		},
+		{ 
+		    "fieldValue": "General Manager",
+		    "companyID": "1"
+		},
+		{ 
+		    "fieldValue": "Manager",
+		    "companyID": "1"
+		},
+		{ 
+		    "fieldValue": "Staff",
+		    "companyID": "1"
+		}
+	]
+}

@@ -1,0 +1,96 @@
+System ADMIN 
+
+Rightside Menubar
+
+
+Organization Setting -> (url -> org-setting)
+	-> Entity Master
+	-> Locations:  location type [+]
+	-> Contact : Company Branch, dapartment [+], designation [+], 
+
+Notification Management
+User Management
+Access Management 
+Global Masters (url -> /global-masters)
+	-> Bank Details
+	-> Tax Master
+	-> Payment Gateway
+	-> SMS Gateway
+	-> Amazon S3
+	-> Location Types 
+	-> Department  (Tobe used only in Organisation Settings)
+	-> Designation (Tobe used only in Organisation Settings)
+
+Preferences (url-> /preferences)
+
+
+=======================================
+
+
+System ADMIN 
+Left Side Menubar
+
+
+
+Dashboard
+All Bookings
+Reporting System 
+Contract Management
+Vendor Mapping
+
+Corporates
+	-> Corporate Masters 	(Form | Bulk Upload)
+	-> Employee Masters 	(Form | Bulk Upload)
+	-> Guest Master 			(Form | Bulk Upload)
+
+Vendors
+	-> Vendor Master 			(Form | Bulk Upload)
+	-> Supplier Master 		(Form | Bulk Upload)
+	-> Vehicle Master 		(Form | Bulk Upload) 
+	-> Driver Master 			(Form | Bulk Upload)
+
+Master Data
+	-> Vehicle Category
+	-> Fuel Type
+	-> Vehicle Brand
+	-> Vehicle Model
+	-> Package Type
+	-> Package Master
+
+Bulk Upload
+	-> Department 
+	-> Designations 
+	-> Vehicle Brand
+	-> Vehicle Model
+
+
+
+
+
+
+
+
+
+
+
+All Bookings
+	
+	[Daily] 		[Weekly] 	 	[Monthly]			[Yearly]		[Custom Date]
+	_______
+											< [08/04/2020] >
+
+	Status 										Search (EmpID or Name)
+	______v 									[___________________]
+
+
+----------------------------------------------------------------------------------------------------------------
+Booking 	Company		Employee 		 	Status 		Travel Date 	Destination 	Estimated 	Actions
+ ID 								Name & ID 	 																					Cost 		
+----------------------------------------------------------------------------------------------------------------
+1001			IBM				ABC (666) 	 	 New 			12/04/2020 		Mumbai 				Rs 5000 		[Allocate to Vendor]	----------------------------------------------------------------------------------------------------------------
+1002			IBM				ABC (666) 	 	 New 			12/04/2020 		Mumbai 				Rs 5000 		[Allocate to Vendor]	----------------------------------------------------------------------------------------------------------------
+1003			IBM				ABC (666) 	 	 New 			12/04/2020 		Mumbai 				Rs 5000 		[Allocate to Vendor]	----------------------------------------------------------------------------------------------------------------
+1004			IBM				ABC (666) 	 	 New 			12/04/2020 		Mumbai 				Rs 5000 		[Allocate to Vendor]	----------------------------------------------------------------------------------------------------------------
+1005			IBM				ABC (666) 	 	 New 			12/04/2020 		Mumbai 				Rs 5000 		[Allocate to Vendor]	----------------------------------------------------------------------------------------------------------------
+1006			IBM				ABC (666) 	 	 New 			12/04/2020 		Mumbai 				Rs 5000 		[Allocate to Vendor]	----------------------------------------------------------------------------------------------------------------
+

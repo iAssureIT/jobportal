@@ -1,0 +1,59 @@
+
+.expenseItemSequenceList > div > div{
+	width: 100% !important;
+}
+.mainDiv{
+	width: 100% !important;
+}
+.sequenceNum{
+	/*width: 8% !important;*/
+	float: left;
+	padding: 0;
+}
+.expenseItem{
+	/*width: 55% !important;*/
+	float: left;
+}
+.billingCode{
+	/*width: 20% !important;*/
+	float: left;
+	text-align: center;
+    padding: 0px 10px;
+}
+.deleteSequence{
+	/*width: 12% !important;*/
+	float: left;
+	text-align: center;
+	padding: 0;
+}
+.deleteSequence i{
+	color: #ccc;
+	padding: 3px;
+}
+.deleteSequence i:hover{
+	color: #f00;
+	background: #eee;
+}
+.expenseItemSequenceList{
+	padding: 0;
+}
+.expenseItemSequence{
+	padding: 10px 20px;
+    margin: 3px 0px;
+    border: 1px solid #ccc;
+}
+.expenseItemSequence:hover{
+	background: #f2f2f2;
+}
+.headingList{
+	font-weight: bold;
+	background: #f2f2f2;
+}
+.sequenceCol{
+
+}
+.move-icon{
+	/*width: 5% !important;*/
+    padding: 0px;
+    color: #ccc;
+}

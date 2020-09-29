@@ -1,0 +1,7 @@
+1 preferences 
+	time 12/24 hr format
+	profit margin :  0 to 100% 
+
+2. when inserting coporatePackages, also add vendorPackages
+3. if profit margin = 0/undefined, assume default value of 20%
+4. when profit is changes, all vendor packages must be updated with new value

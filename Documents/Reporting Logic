@@ -1,0 +1,19 @@
+1) Each report will have a single api to fetch the data. 
+
+2) Report May have many filters. But all filters will be managed with single api. 
+So use post API and send all filter data via formValues. 
+
+3) for date, use Daily, Weekly, Monthly, Annually & custom date logic. 
+For each case, use fromDate and toDate  logic. 
+
+4) use iAssureIT table 
+
+5) if you have to use 2 or more tables, then do all that mixing at api side. 
+
+6) Mostly, there will not be any action column in reports
+
+7) Use bootstrap table-hovered and table-stripped classes
+
+8) All tables must have download to excelsheet facility, print/pdf facilities and pagination facility. 
+
+9) Show 50 records in the beginning on page-1. But there will be facility to show more or less records. This is already given in iAssureIT table. 
