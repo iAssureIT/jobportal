@@ -2,11 +2,11 @@ const mongoose  = require("mongoose");
 
 const EntityMaster = require('./ModelEntityMaster');
 const PersonMaster = require('../personMaster/ModelPersonMaster.js');
-const VehicleMaster = require('../vehicleMaster/ModelVehicleMaster.js');
-const VendorAllocation = require('../vendorAllocation/ModelVendorAllocation.js');
+//const VehicleMaster = require('../vehicleMaster/ModelVehicleMaster.js');
+//const VendorAllocation = require('../vendorAllocation/ModelVendorAllocation.js');
 const FailedRecords = require('../failedRecords/ModelFailedRecords');
-const DesignationMaster = require('../designationMaster/ModelDesignationMaster.js');
-const DepartmentMaster = require('../departmentMaster/ModelDepartmentMaster.js');
+//const DesignationMaster = require('../designationMaster/ModelDesignationMaster.js');
+//const DepartmentMaster = require('../departmentMaster/ModelDepartmentMaster.js');
 
 
 var request = require('request-promise');

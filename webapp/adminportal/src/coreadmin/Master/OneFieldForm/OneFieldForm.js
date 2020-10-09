@@ -415,144 +415,138 @@ class OneFieldForm extends React.Component {
         // console.log("typeof this.props.editId = ",typeof this.props.editId);
 
         return (
-            <div className="">
-                <div className="pageContent">
-                    <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 NOPadding">
-                        <section className="content">
-                            <div className={this.props.masterFieldForm ? "OneFieldModal" : "col-lg-12 col-md-12 col-sm-12 col-xs-12 pageContent"}>
-                                <div className="row">
-                                    <div className="box-header with-border col-lg-12 col-md-12 col-xs-12 col-sm-12 NOpadding-right">
-                                        <h4 className="weighttitle col-lg-9 col-md-9 col-xs-12 col-sm-12 NOpadding-right">{this.props.fields.title === "Location Type" ? this.props.fields.title + "s" : this.props.fields.title} </h4>
+        <div className="container-fluid">
+            <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 companyDisplayForm">
+                <div className={this.props.masterFieldForm ? "OneFieldModal" : "col-lg-12 col-md-12 col-sm-12 col-xs-12 pageContent"}>
+                        <div className="row">
+                            <div className="box-header with-border col-lg-12 col-md-12 col-xs-12 col-sm-12 NOpadding-right">
+                                <h4 className="weighttitle col-lg-9 col-md-9 col-xs-12 col-sm-12 NOpadding-right">{this.props.fields.title === "Location Type" ? this.props.fields.title + "s" : this.props.fields.title} </h4>
+                                {
+                                    this.props.bulkRequired ?
+                                        <ul className="nav tabNav nav-pills col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                            <li className="active col-lg-5 col-md-5 col-xs-5 col-sm-5 NOpadding text-center"><a className="fieldTab" data-toggle="pill" href={"#manual-"+this.props.fields.attributeName}>Manual</a></li>
+                                            <li className="col-lg-6 col-md-6 col-xs-6 col-sm-6 NOpadding  text-center"><a className="fieldTab" data-toggle="pill" href={"#bulk-"+this.props.fields.attributeName}>Bulk Upload</a></li>
+                                        </ul>
+                                        : null
+                                }
+                            
+
+                            </div>
+                            <section className="Content">
+                                <div className="row tab-content">
+                                    <div id={"manual-"+this.props.fields.attributeName} className={this.props.masterFieldForm ? "tab-pane fade in active mt" : "col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-12 col-xs-12"}>
                                         {
-                                            this.props.bulkRequired ?
-                                                <ul className="nav tabNav nav-pills col-lg-3 col-md-3 col-sm-12 col-xs-12">
-                                                    <li className="active col-lg-5 col-md-5 col-xs-5 col-sm-5 NOpadding text-center"><a className="fieldTab" data-toggle="pill" href={"#manual-"+this.props.fields.attributeName}>Manual</a></li>
-                                                    <li className="col-lg-6 col-md-6 col-xs-6 col-sm-6 NOpadding  text-center"><a className="fieldTab" data-toggle="pill" href={"#bulk-"+this.props.fields.attributeName}>Bulk Upload</a></li>
-                                                </ul>
-                                                : null
-                                        }
-                                    
+                                            this.props.fields.hasImage === true
+                                                ?
+                                                <form className="col-lg-12 col-md-12 col-sm-12 col-xs-12" id={this.props.fields.attributeName} >
+                                                    <div className="form-margin col-lg-6 col-lg-offset-1 col-md-6 col-sm-12 col-xs-12 pdcls">
+                                                        <div id="OneFieldInput">
+                                                            <label className="labelform col-lg-12 col-md-12 col-sm-12 col-xs-12 NOpadding-left">{this.props.fields.title} <i className="astrick">*</i></label>
+                                                            <input type="text" className="form-control col-lg-12 col-md-12 col-sm-12 col-xs-12 errorinputText" value={this.state.fieldName} ref="fieldName" id="OneFieldInput"  name="fieldName" onChange={this.handleChange.bind(this)} placeholder={this.props.fields.placeholder} required />
+                                                        </div>
+                                                    </div>
+                                                    <div className="col-lg-3 col-md-12 col-sm-12 col-xs-12 NOpadding marginsBottom" id="hide">
+                                                        <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 OFFImageDiv " id="LogoImageUpOne" >
+                                                            <div><i className="fa fa-camera"></i> <br /><p>UPLOAD IMAGE</p></div>
+                                                            <input onChange={this.docBrowse.bind(this)} id="LogoImageUp" type="file" className="form-control col-lg-12 col-md-12 col-sm-12 col-xs-12" title="" name="categoryImage" />
+                                                        </div>
+                                                        {
+                                                            this.state.categoryImage ?
+                                                                <div className="col-lg-12 col-md-2 col-sm-12 col-xs-12 nopadding CustomImageUploadOF">
+                                                                    <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 NOpadding marginsBottom" id="hide">
+                                                                        <label className="labelform deletelogo col-lg-12 col-md-12 col-sm-12 col-xs-12" id={this.state.categoryImage} name="categoryImage" title="Delete Image" onClick={this.deleteDoc.bind(this)}>x</label>
+                                                                        <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 brdlogosOF" id="categoryImage">
+                                                                            {
+                                                                                this.state.categoryImage.split('.').pop() === "pdf" || this.state.categoryImage.split('.').pop() === "PDF" ?
+                                                                                    <img src="/images/pdfImg.png" className="img-responsive profileImageDivlogoStyleOF" />
 
-                                    </div>
-                                    <section className="Content">
-                                        <div className="row tab-content">
-                                            <div id={"manual-"+this.props.fields.attributeName} className={this.props.masterFieldForm ? "tab-pane fade in active mt" : "col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-12 col-xs-12"}>
-                                                {
-                                                    this.props.fields.hasImage === true
-                                                        ?
-                                                        <form className="col-lg-12 col-md-12 col-sm-12 col-xs-12" id={this.props.fields.attributeName} >
-                                                            <div className="form-margin col-lg-6 col-lg-offset-1 col-md-6 col-sm-12 col-xs-12 pdcls">
-                                                                <div id="OneFieldInput">
-                                                                    <label className="labelform col-lg-12 col-md-12 col-sm-12 col-xs-12 NOpadding-left">{this.props.fields.title} <i className="astrick">*</i></label>
-                                                                    <input type="text" className="form-control col-lg-12 col-md-12 col-sm-12 col-xs-12 errorinputText" value={this.state.fieldName} ref="fieldName" id="OneFieldInput"  name="fieldName" onChange={this.handleChange.bind(this)} placeholder={this.props.fields.placeholder} required />
+                                                                                    :
+                                                                                    <img src={this.state.categoryImage} className="img-responsive profileImageDivlogoStyleOF" />
+                                                                            }
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                            <div className="col-lg-3 col-md-12 col-sm-12 col-xs-12 NOpadding marginsBottom" id="hide">
-                                                                <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 OFFImageDiv " id="LogoImageUpOne" >
-                                                                    <div><i className="fa fa-camera"></i> <br /><p>UPLOAD IMAGE</p></div>
-                                                                    <input onChange={this.docBrowse.bind(this)} id="LogoImageUp" type="file" className="form-control col-lg-12 col-md-12 col-sm-12 col-xs-12" title="" name="categoryImage" />
-                                                                </div>
-                                                                {
-                                                                    this.state.categoryImage ?
-                                                                        <div className="col-lg-12 col-md-2 col-sm-12 col-xs-12 nopadding CustomImageUploadOF">
-                                                                            <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 NOpadding marginsBottom" id="hide">
-                                                                                <label className="labelform deletelogo col-lg-12 col-md-12 col-sm-12 col-xs-12" id={this.state.categoryImage} name="categoryImage" title="Delete Image" onClick={this.deleteDoc.bind(this)}>x</label>
-                                                                                <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 brdlogosOF" id="categoryImage">
-                                                                                    {
-                                                                                        this.state.categoryImage.split('.').pop() === "pdf" || this.state.categoryImage.split('.').pop() === "PDF" ?
-                                                                                            <img src="/images/pdfImg.png" className="img-responsive profileImageDivlogoStyleOF" />
-
-                                                                                            :
-                                                                                            <img src={this.state.categoryImage} className="img-responsive profileImageDivlogoStyleOF" />
-                                                                                    }
-                                                                                </div>
+                                                                :
+                                                                (this.state.gotImagecategoryImage ?
+                                                                    <div className="col-lg-12 col-md-2 col-sm-12 col-xs-12 nopadding CustomImageUploadOF">
+                                                                        <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 NOpadding marginsBottom" id="hide">
+                                                                            <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 brdlogosOF" id="categoryImage">
+                                                                                <img src="/images/loading.gif" className="img-responsive profileImageDivlogoStyleOF" />
                                                                             </div>
                                                                         </div>
-                                                                        :
-                                                                        (this.state.gotImagecategoryImage ?
-                                                                            <div className="col-lg-12 col-md-2 col-sm-12 col-xs-12 nopadding CustomImageUploadOF">
-                                                                                <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 NOpadding marginsBottom" id="hide">
-                                                                                    <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 brdlogosOF" id="categoryImage">
-                                                                                        <img src="/images/loading.gif" className="img-responsive profileImageDivlogoStyleOF" />
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                            :
-                                                                            null
+                                                                    </div>
+                                                                    :
+                                                                    null
 
-                                                                        )
-                                                                }
-                                                            </div>
-                                                            <div className="form-margin col-lg-6 col-lg-offset-6 col-md-6 col-sm-12 col-xs-12">
-                                                                {
-                                                                    (this.props.editId !== "" && typeof this.props.editId !== 'undefined') ?
-                                                                        <button onClick={this.updateType.bind(this)} className="btn button3 pull-right">Update</button>
-                                                                        :
-                                                                        <button onClick={this.submitType.bind(this)} className="btn button3 pull-right">Submit</button>
-                                                                }
-                                                            </div>
-                                                            <br />
-                                                        </form>
-                                                        :
-                                                        <form className="col-lg-12 col-md-12 col-sm-12 col-xs-12" id={this.props.fields.attributeName}>
-                                                            <div className="form-margin col-lg-8 col-lg-offset-2 col-md-6 col-sm-12 col-xs-12 pdcls">
-                                                                <div id="OneFieldInput">
-                                                                    <label className="labelform col-lg-12 col-md-12 col-sm-12 col-xs-12 NOpadding-left">{this.props.fields.title} <i className="astrick">*</i></label>
-                                                                    <input type20="text" className="form-control col-lg-12 col-md-12 col-sm-12 col-xs-12 errorinputText" value={this.state.fieldName} ref="fieldName" id="fieldName" name="fieldName" onChange={this.handleChange.bind(this)} placeholder={this.props.fields.placeholder} required />
-                                                                </div>
-                                                            </div>
-                                                            <br />
-                                                            <div className="form-margin col-lg-6 col-lg-offset-6 col-md-6 col-sm-12 col-xs-12">
-                                                                {
-                                                                    (this.props.editId !== "" && typeof this.props.editId !== 'undefined') ?
-                                                                        <button onClick={this.updateType.bind(this)} className="btn button3 pull-right">Update</button>
-                                                                        :
-                                                                        <button onClick={this.submitType.bind(this)} className="btn button3 pull-right">Submit</button>
-                                                                }
-                                                            </div>
-                                                        </form>
-                                                }
-                                                <div className="oneFieldTable col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                                    <IAssureTable
-                                                        tableHeading={this.props.tableHeading}
-                                                        twoLevelHeader={this.state.twoLevelHeader}
-                                                        dataCount={this.state.dataCount}
-                                                        tableData={this.state["tableData" + this.props.fields.attributeName]}
-                                                        getData={this.getData.bind(this)}
-                                                        tableObjects={this.props.tableObjects}
-                                                    />
-                                                </div>
-                                            </div>
-                                            <div id={"bulk-"+this.props.fields.attributeName} className="tab-pane fade in  col-lg-12 col-md-12 col-sm-12 col-xs-12 mt">
-                                                <div className="outerForm">
-                                                    <BulkUpload
-                                                        url={this.props.url}
-                                                        data={this.props.data}
-                                                        getData={this.getData.bind(this)}
-                                                        uploadedData={this.props.uploadedData}
-                                                        fileurl={this.props.fileurl}
-                                                        getFileDetails={this.props.getFileDetails}
-                                                        fileDetails={this.props.fileDetails}
-                                                        goodRecordsHeading={this.props.goodRecordsHeading}
-                                                        failedtableHeading={this.props.failedtableHeading}
-                                                        failedRecordsTable={this.props.failedRecordsTable}
-                                                        failedRecordsCount={this.props.failedRecordsCount}
-                                                        goodRecordsTable={this.props.goodRecordsTable}
-                                                        goodDataCount={this.props.goodDataCount}
-                                                    />
-                                                </div>
-                                            </div>
+                                                                )
+                                                        }
+                                                    </div>
+                                                    <div className="form-margin col-lg-6 col-lg-offset-6 col-md-6 col-sm-12 col-xs-12">
+                                                        {
+                                                            (this.props.editId !== "" && typeof this.props.editId !== 'undefined') ?
+                                                                <button onClick={this.updateType.bind(this)} className="btn button3 pull-right">Update</button>
+                                                                :
+                                                                <button onClick={this.submitType.bind(this)} className="btn button3 pull-right">Submit</button>
+                                                        }
+                                                    </div>
+                                                    <br />
+                                                </form>
+                                                :
+                                                <form className="col-lg-12 col-md-12 col-sm-12 col-xs-12" id={this.props.fields.attributeName}>
+                                                    <div className="form-margin col-lg-8 col-lg-offset-2 col-md-6 col-sm-12 col-xs-12 pdcls">
+                                                        <div id="OneFieldInput">
+                                                            <label className="labelform col-lg-12 col-md-12 col-sm-12 col-xs-12 NOpadding-left">{this.props.fields.title} <i className="astrick">*</i></label>
+                                                            <input type20="text" className="form-control col-lg-12 col-md-12 col-sm-12 col-xs-12 errorinputText" value={this.state.fieldName} ref="fieldName" id="fieldName" name="fieldName" onChange={this.handleChange.bind(this)} placeholder={this.props.fields.placeholder} required />
+                                                        </div>
+                                                    </div>
+                                                    <br />
+                                                    <div className="form-margin col-lg-6 col-lg-offset-6 col-md-6 col-sm-12 col-xs-12">
+                                                        {
+                                                            (this.props.editId !== "" && typeof this.props.editId !== 'undefined') ?
+                                                                <button onClick={this.updateType.bind(this)} className="btn button3 pull-right">Update</button>
+                                                                :
+                                                                <button onClick={this.submitType.bind(this)} className="btn button3 pull-right">Submit</button>
+                                                        }
+                                                    </div>
+                                                </form>
+                                        }
+                                        <div className="oneFieldTable col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                            <IAssureTable
+                                                tableHeading={this.props.tableHeading}
+                                                twoLevelHeader={this.state.twoLevelHeader}
+                                                dataCount={this.state.dataCount}
+                                                tableData={this.state["tableData" + this.props.fields.attributeName]}
+                                                getData={this.getData.bind(this)}
+                                                tableObjects={this.props.tableObjects}
+                                            />
                                         </div>
-                                    </section>
+                                    </div>
+                                    <div id={"bulk-"+this.props.fields.attributeName} className="tab-pane fade in  col-lg-12 col-md-12 col-sm-12 col-xs-12 mt">
+                                        <div className="outerForm">
+                                            <BulkUpload
+                                                url={this.props.url}
+                                                data={this.props.data}
+                                                getData={this.getData.bind(this)}
+                                                uploadedData={this.props.uploadedData}
+                                                fileurl={this.props.fileurl}
+                                                getFileDetails={this.props.getFileDetails}
+                                                fileDetails={this.props.fileDetails}
+                                                goodRecordsHeading={this.props.goodRecordsHeading}
+                                                failedtableHeading={this.props.failedtableHeading}
+                                                failedRecordsTable={this.props.failedRecordsTable}
+                                                failedRecordsCount={this.props.failedRecordsCount}
+                                                goodRecordsTable={this.props.goodRecordsTable}
+                                                goodDataCount={this.props.goodDataCount}
+                                            />
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </section>
+                            </section>
+                        </div>
                     </div>
-                </div>
             </div>
+        </div>
         );
     }
 }
 export default withRouter(OneFieldForm)
-
-

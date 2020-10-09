@@ -35,7 +35,7 @@ class Header2 extends Component{
 
     //======= User Details ==========
     var userDetails = JSON.parse(localStorage.getItem("userDetails")) ;
-    const Token     = userDetails.token;
+    const Token     = userDetails ? userDetails.token : null;
     
     console.log("Token = ", userDetails);
 
@@ -132,7 +132,6 @@ class Header2 extends Component{
     $('#dashbordid').toggleClass('dashboardeffect')
     var sideBar = $("#sidebar").hasClass("active")
     localStorage.setItem('sideBar', sideBar);
-
   }
 
   toggleNav(event) {

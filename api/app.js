@@ -18,7 +18,6 @@ const GlobalMaster  = require('./coreAdmin/projectSettings/ModelProjectSettings.
 const systemSecurityRoutes 				= require('./coreAdmin/systemSecurity/RoutesSystemSecurity.js');
 const userRoutes 						= require('./coreAdmin/userManagement/RoutesUsers.js');
 const rolesRoutes						= require('./coreAdmin/rolesManagement/RoutesRoles.js');
-const rolesentitymasterRoutes			= require('./coreAdmin/RoleEntityMaster/Routes.js');
 const masternotificationRoutes		    = require('./coreAdmin/notificationManagement/RoutesMasterNotification.js');
 const notificationRoutes				= require('./coreAdmin/notificationManagement/RoutesNotification.js');
 const companySettingsRoutes				= require('./coreAdmin/companySettings/RoutesCompanySettings.js');
@@ -27,60 +26,21 @@ const globalMasterRoutes 				= require('./coreAdmin/globalMaster/RoutesGlobalMas
 const preferencesRoutes 				= require('./coreAdmin/preferences/RoutesPreferences.js');
 const paymentgatewayRoutes 				= require('./coreAdmin/paymentgateway/Routes.js');
 const paymentTermsRoutes 				= require('./coreAdmin/PaymentTerms/PaymentTermsRoutes.js');
+//const personMasterRoutes				= require("./coreAdmin/personMaster/RoutesPersonMaster.js");
 
 const entityRoutes						= require("./coreAdmin/entityMaster/RoutesEntityMaster.js");
 
 // const mappingRoutes						= require("./coreAdmin/entityMaster/RoutesMappingMaster.js");
 
-const packageTypeMasterRoutes			= require("./coreAdmin/packageTypeMaster/RoutesPackageTypeMaster.js");
-const packageNameMasterRoutes			= require("./coreAdmin/packageNameMaster/RoutesPackageNameMaster.js");
-const packageMasterRoutes				= require("./coreAdmin/packageMaster/RoutesPackageMaster.js");
+const industryMasterRoutes			    = require("./coreAdmin/IndustryMaster/RoutesIndustryMaster.js");
+const functionalAreaMasterRoutes		= require("./coreAdmin/FunctionalAreaMaster/RoutesFunctionalAreaMaster.js");
+const jobCategoryMasterRoutes			= require("./coreAdmin/JobCategoryMaster/RoutesJobCategory.js");
 
-const packageMasterBulkRoutes			= require("./coreAdmin/packageMasterBulk_corp/RoutesPackageMasterBulk.js");
-
-const categoryMasterRoutes			    = require("./coreAdmin/categoryMaster/RoutesCategoryMaster.js");
-const brandMasterRoutes			    	= require("./coreAdmin/brandMaster/RoutesBrandMaster.js");
-const cityTypeRoutes			    	= require("./coreAdmin/cityType/RoutesCityType.js");
-const documententitymasterRoutes	    = require("./coreAdmin/DocumentEntityMaster/Routes.js");
-const documentListMasterRoutes		    = require("./coreAdmin/DocumentListMaster/Routes.js");
-const departmentMasterRoutes			= require("./coreAdmin/departmentMaster/RoutesDepartmentMaster.js");
-const designationMasterRoutes			= require("./coreAdmin/designationMaster/RoutesDesignationMaster.js");
-const fuelTypeMasterRoutes				= require("./coreAdmin/fuelTypeMaster/RoutesFuelTypeMaster.js");
-const locationTypeMasterRoutes		    = require("./coreAdmin/locationTypeMaster/RoutesLocationTypeMaster.js");
-const taxNameMasterRoutes				= require("./coreAdmin/taxNameMaster/RoutesTaxNameMaster.js");
-const modelMasterRoutes					= require("./coreAdmin/modelMaster/RoutesModelMaster.js");
-const categoryBrandRoutes				= require("./coreAdmin/categoryBrand/RoutesModelMaster.js");
-const cityNameMasterRoutes				= require("./coreAdmin/cityNameMaster/RoutesCityNameMaster.js");
-const vehicleMasterRoutes				= require("./coreAdmin/vehicleMaster/RoutesVehicleMaster.js");
-const personMasterRoutes				= require("./coreAdmin/personMaster/RoutesPersonMaster.js");
-const contractRoutes				    = require("./coreAdmin/contract/RoutesContracts.js");
-const entityMappingRoutes				= require("./coreAdmin/EntityMapping/RoutesEntityMapping.js");
-const vehicleDriverMappingRoutes	    = require("./coreAdmin/vehicleDriverMapping/RoutesVehicleDriverMapping.js");
-const bookingRoutes				        = require("./coreAdmin/bookingMaster/RoutesBookingMaster.js");
 const moduleRoutes				        = require("./coreAdmin/moduleMaster/RoutesModuleMaster.js");
 const facilityRoutes				    = require("./coreAdmin/facilityMaster/RoutesFacilityMaster.js");
 const accessRoutes				    	= require("./coreAdmin/accessManagement/RoutesAccessMaster.js");
-const expenseTypeRoutes				    = require("./coreAdmin/expenseTypeMaster/RoutesExpenseTypeMaster.js");
-const VehicleEmployeeMappingRoutes	    = require("./coreAdmin/VehicleEmployeeMapping/RoutesVehicleEmployeeMapping.js");
-const expenseItemRoutes				    = require("./coreAdmin/expenseItemMaster/Routes.js");
-const EventMappingRoutes				= require("./coreAdmin/EventMappingMaster/RoutesEventMapping.js");
-const PurposeOfTravelRoutes				= require("./coreAdmin/purposeOfTravelMaster/RoutesPurposeOfTravelMaster.js");
-const VendorAllocationRoutes			= require("./coreAdmin/vendorAllocation/RoutesVendorAllocation.js");
 
-const RoutesReports		        = require("./coreAdmin/Reports/RoutesReports.js");
-
-const NightTimingsRoutes		= require("./coreAdmin/nightTimings/RoutesNightTimings.js");
-const EarlyMorningTimingsRoutes	= require("./coreAdmin/earlyMorningTimings/RoutesEarlyMorningTimings.js");
-const TimeFormatRoutes			= require("./coreAdmin/timeFormat/RoutesTimeFormat.js");
-const EmpVehicalRoutes			= require("./coreAdmin/EmpVehicalMaster/RoutesEmpVehicalMaster.js");
-const EventTokenRoutes			= require("./coreAdmin/EventTokenMaster/RoutesEventTokenMaster.js");
-const BillingManagement			= require("./coreAdmin/BillingManagement/Routes.js");
-const InvoiceNumber		    	= require("./coreAdmin/InvoiceNumbers/Routes.js");
-const AutomatedBillingSequence  = require("./coreAdmin/AutomatedSequenceMaster/Routes.js");
-const InvoiceMaster             = require("./coreAdmin/invoiceMaster/RoutesInvoiceMaster.js");
-const MasterInvoiceNumber		= require("./coreAdmin/masterInvoiceNumbers/Routes.js");
-const CountrySpecificConfig		= require("./coreAdmin/CountrySpecificConfig/RoutesCountrySpecificConfig.js");
-const AlertSystem		        = require("./coreAdmin/AlertSystem/Routes.js");
+//const AlertSystem		        = require("./coreAdmin/AlertSystem/Routes.js");
 
 //============ To Start API on Server with Authentication ========
 // mongoose.connect('mongodb://localhost/'+globalVariable.dbname,{
@@ -143,61 +103,21 @@ app.use('/api/companysettings',companySettingsRoutes);
 app.use('/api/globalmaster',globalMasterRoutes);
 app.use('/api/preferences',preferencesRoutes);
 app.use("/api/entitymaster", entityRoutes);
-app.use("/api/empvehicalmaster", EmpVehicalRoutes);
-
-app.use("/api/packagetypemaster", packageTypeMasterRoutes);
-app.use("/api/packagenamemaster", packageNameMasterRoutes);
 
 app.use("/api/paymentgateway", paymentgatewayRoutes);
 app.use("/api/paymentterms", paymentTermsRoutes);
 
-app.use("/api/packagemaster", packageMasterRoutes);
-
-app.use("/api/packagemasterbulk", packageMasterBulkRoutes);
-app.use("/api/categorymaster", categoryMasterRoutes);
-app.use("/api/brandmaster", brandMasterRoutes);
-app.use("/api/citytypemaster", cityTypeRoutes);
-app.use("/api/documententitymaster", documententitymasterRoutes);
-app.use("/api/rolesentitymaster", rolesentitymasterRoutes);
-app.use("/api/documentlistmaster", documentListMasterRoutes);
-app.use("/api/departmentmaster", departmentMasterRoutes);
-app.use("/api/designationmaster", designationMasterRoutes);
-app.use("/api/fueltypemaster", fuelTypeMasterRoutes);
-app.use("/api/locationtypemaster", locationTypeMasterRoutes);
-app.use("/api/taxnamemaster", taxNameMasterRoutes);
-app.use("/api/modelmaster", modelMasterRoutes);
-app.use("/api/categoryBrandmaster", categoryBrandRoutes);
-app.use("/api/citynamemaster", cityNameMasterRoutes);
-app.use("/api/vehiclemaster", vehicleMasterRoutes);
+app.use("/api/industrymaster", industryMasterRoutes);
+app.use("/api/functionalareamaster", functionalAreaMasterRoutes);
+app.use("/api/jobcategorymaster", jobCategoryMasterRoutes);
 app.use("/api/modulemaster", moduleRoutes);
 app.use("/api/facilitymaster", facilityRoutes);
 
-app.use("/api/personmaster", personMasterRoutes);
-app.use("/api/contract", contractRoutes);
-app.use("/api/entitymapping", entityMappingRoutes);
-app.use("/api/vehicledrivermapping", vehicleDriverMappingRoutes);
-app.use("/api/bookingmaster", bookingRoutes);
-app.use("/api/accessmaster", accessRoutes);
-app.use("/api/expensetypemaster", expenseTypeRoutes);
-app.use("/api/VehicleEmployeeMapping", VehicleEmployeeMappingRoutes);
-app.use("/api/expenseitemmaster", expenseItemRoutes);
-app.use("/api/eventmapping", EventMappingRoutes);
-app.use("/api/purposeoftravelmaster", PurposeOfTravelRoutes);
-app.use("/api/VendorAllocation", VendorAllocationRoutes);
+//app.use("/api/personmaster", personMasterRoutes);
+//p.use("/api/accessmaster", accessRoutes);
+//app.use("/api/reports", 	RoutesReports);
+//app.use("/api/alertSystem", 	AlertSystem);
 
-app.use("/api/reports", 	RoutesReports);
-app.use("/api/countryspecificConfig", 	CountrySpecificConfig);
-app.use("/api/alertSystem", 	AlertSystem);
-
-app.use("/api/nighttimingsmaster", 			NightTimingsRoutes);
-app.use("/api/earlymorningtimingsmaster", 	EarlyMorningTimingsRoutes);
-app.use("/api/timeformat", 					TimeFormatRoutes);
-app.use("/api/EventToken", 					EventTokenRoutes);
-app.use("/api/billing", 					BillingManagement);
-app.use("/api/invoicenumber", 				InvoiceNumber);
-app.use("/api/automatedbillingsequence", 	AutomatedBillingSequence);
-app.use("/api/invoiceMaster", 	InvoiceMaster);
-app.use("/api/masterinvoiceMaster", 	MasterInvoiceNumber);
 
 var formvalues = masterData.locationType[0];
 axios.post('/api/locationtypemaster/post',formvalues)

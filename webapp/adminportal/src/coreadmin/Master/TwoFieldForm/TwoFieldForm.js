@@ -623,4 +623,3 @@ class TwoFieldForm extends Component {
     }
 }
 export default TwoFieldForm;
-
