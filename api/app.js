@@ -30,11 +30,12 @@ const paymentTermsRoutes 				= require('./coreAdmin/PaymentTerms/PaymentTermsRou
 
 const entityRoutes						= require("./coreAdmin/entityMaster/RoutesEntityMaster.js");
 
-// const mappingRoutes						= require("./coreAdmin/entityMaster/RoutesMappingMaster.js");
-
+const addressTypeMasterRoutes			= require("./coreAdmin/AddressTypeMaster/RoutesAddressType.js");
 const industryMasterRoutes			    = require("./coreAdmin/IndustryMaster/RoutesIndustryMaster.js");
 const functionalAreaMasterRoutes		= require("./coreAdmin/FunctionalAreaMaster/RoutesFunctionalAreaMaster.js");
 const jobCategoryMasterRoutes			= require("./coreAdmin/JobCategoryMaster/RoutesJobCategory.js");
+const jobTypeMasterRoutes				= require("./coreAdmin/JobTypeMaster/RoutesJobType.js");
+const qualificationLevelMasterRoutes	= require("./coreAdmin/QualificationLevelMaster/RoutesQualificationLevel.js");
 
 const moduleRoutes				        = require("./coreAdmin/moduleMaster/RoutesModuleMaster.js");
 const facilityRoutes				    = require("./coreAdmin/facilityMaster/RoutesFacilityMaster.js");
@@ -107,9 +108,14 @@ app.use("/api/entitymaster", entityRoutes);
 app.use("/api/paymentgateway", paymentgatewayRoutes);
 app.use("/api/paymentterms", paymentTermsRoutes);
 
+app.use("/api/addresstypemaster", addressTypeMasterRoutes);
 app.use("/api/industrymaster", industryMasterRoutes);
 app.use("/api/functionalareamaster", functionalAreaMasterRoutes);
 app.use("/api/jobcategorymaster", jobCategoryMasterRoutes);
+app.use("/api/jobtypemaster", jobTypeMasterRoutes);
+app.use("/api/qualificationlevelmaster", qualificationLevelMasterRoutes);
+
+
 app.use("/api/modulemaster", moduleRoutes);
 app.use("/api/facilitymaster", facilityRoutes);
 

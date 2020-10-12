@@ -21,18 +21,21 @@ import Leftsidebar          from './coreadmin/common/leftSidebar/Leftsidebar.js'
 import EmployeeProfile      from './coreadmin/EmployeeProfile/EmployeeProfile.js';
 import CompanyProfile       from './coreadmin/CompanyProfile/CompanyProfile.js';
 import CompanyProfileView   from './coreadmin/CompanyProfile/CompanyProfileView.js';
-// ============ Contract Management =========================== 
-
-import Industry             from "./jobportaladmin/Master/Industry/Industry.js"
-import FunctionalArea       from "./jobportaladmin/Master/FunctionalArea/FunctionalArea.js"
-import JobCategory       from "./jobportaladmin/Master/JobCategory/JobCategory.js"
-import Module             from "./jobportaladmin/Master/Module/Module.js"
-import Facility       from "./jobportaladmin/Master/Facility/Facility.js"
-
-import CoreLayout           from './coreadmin/CoreLayout/CoreLayout.js';
 
 // =============  Master =======================
-import MasterData                               from "./jobportaladmin/MasterData/MasterData.js";
+import AddressType          from "./jobportaladmin/Master/AddressType/AddressType.js"
+import Industry             from "./jobportaladmin/Master/Industry/Industry.js"
+import FunctionalArea       from "./jobportaladmin/Master/FunctionalArea/FunctionalArea.js"
+import JobCategory          from "./jobportaladmin/Master/JobCategory/JobCategory.js"
+import JobType              from "./jobportaladmin/Master/JobType/JobType.js"
+import QualificationLevel   from "./jobportaladmin/Master/QualificationLevel/QualificationLevel.js"
+
+import MasterData           from "./jobportaladmin/MasterData/MasterData.js";
+
+import Module               from "./jobportaladmin/Master/Module/Module.js"
+import Facility             from "./jobportaladmin/Master/Facility/Facility.js"
+
+import CoreLayout           from './coreadmin/CoreLayout/CoreLayout.js';
 import GlobalMaster         from "./coreadmin/companysetting/Components/GlobalMasters.js";
 
 class Layout extends Component  {
@@ -86,13 +89,18 @@ class Layout extends Component  {
                                                         <Route path="/org-profile" exact strict component={CompanyProfile} />
                                                         <Route path="/company-profile/:comp_ID" exact strict component={CompanyProfileView} />
 
-                                                        
+                                                        <Route path="/address-type" exact strict component={AddressType} />
+                                                        <Route path="/address-type/:fieldID" exact strict component={AddressType} />
                                                         <Route path="/industry" exact strict component={Industry} />
                                                         <Route path="/industry/:fieldID" exact strict component={Industry} />
                                                         <Route path="/functional-area" exact strict component={FunctionalArea} />
                                                         <Route path="/functional-area/:fieldID" exact strict component={FunctionalArea} />
                                                         <Route path="/job-category" exact strict component={JobCategory} />
                                                         <Route path="/job-category/:fieldID" exact strict component={JobCategory} />
+                                                        <Route path="/job-type" exact strict component={JobType} />
+                                                        <Route path="/job-type/:fieldID" exact strict component={JobType} />
+                                                        <Route path="/qualification-level" exact strict component={QualificationLevel} />
+                                                        <Route path="/qualification-level/:fieldID" exact strict component={QualificationLevel} />
                                                         
                                                         {/*<Route path="/technicalMaster/tax-name" exact strict component={TaxName} />*/}
                                                         <Route path="/technicalMaster/tax-name"  render={(props)=><GlobalMaster {...props}/> } exact />
