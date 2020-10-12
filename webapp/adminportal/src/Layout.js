@@ -29,6 +29,9 @@ import FunctionalArea       from "./jobportaladmin/Master/FunctionalArea/Functio
 import JobCategory          from "./jobportaladmin/Master/JobCategory/JobCategory.js"
 import JobType              from "./jobportaladmin/Master/JobType/JobType.js"
 import QualificationLevel   from "./jobportaladmin/Master/QualificationLevel/QualificationLevel.js"
+import Language             from "./jobportaladmin/Master/Language/Language.js"
+import University           from "./jobportaladmin/Master/University/University.js"
+import Collage              from "./jobportaladmin/Master/Collage/Collage.js"
 
 import MasterData           from "./jobportaladmin/MasterData/MasterData.js";
 

@@ -36,6 +36,9 @@ const functionalAreaMasterRoutes		= require("./coreAdmin/FunctionalAreaMaster/Ro
 const jobCategoryMasterRoutes			= require("./coreAdmin/JobCategoryMaster/RoutesJobCategory.js");
 const jobTypeMasterRoutes				= require("./coreAdmin/JobTypeMaster/RoutesJobType.js");
 const qualificationLevelMasterRoutes	= require("./coreAdmin/QualificationLevelMaster/RoutesQualificationLevel.js");
+const languageMasterRoutes				= require("./coreAdmin/LanguageMaster/RoutesLanguage.js");
+const universityMasterRoutes			= require("./coreAdmin/UniversityMaster/RoutesUniversity.js");
+const collageMasterRoutes				= require("./coreAdmin/CollageMaster/RoutesCollage.js");
 
 const moduleRoutes				        = require("./coreAdmin/moduleMaster/RoutesModuleMaster.js");
 const facilityRoutes				    = require("./coreAdmin/facilityMaster/RoutesFacilityMaster.js");
@@ -114,6 +117,8 @@ app.use("/api/functionalareamaster", functionalAreaMasterRoutes);
 app.use("/api/jobcategorymaster", jobCategoryMasterRoutes);
 app.use("/api/jobtypemaster", jobTypeMasterRoutes);
 app.use("/api/qualificationlevelmaster", qualificationLevelMasterRoutes);
+app.use("/api/languagemaster", languageMasterRoutes);
+app.use("/api/universitymaster", universityMasterRoutes);
 
 
 app.use("/api/modulemaster", moduleRoutes);
