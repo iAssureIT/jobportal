@@ -110,7 +110,7 @@ import '../../coreadmin/companysetting/css/CompanySetting.css';
                             <li className="col-lg-12 col-md-12 col-xs-12 col-sm-12">
                             <a className="tabLeft lettersp tablefthr" href="#Collage" data-toggle="tab"  onClick={this.tab.bind(this)}>Collage</a>
                             </li>
-                          </ul>   
+                          </ul>    
                       </div>
                       <div className="tab-content col-lg-9 col-md-9 col-xs-12 col-sm-12">  
                         <div className="tab-pane active" id="AddressType"><AddressType  editId={this.state.editId} history={this.props.history}/>  </div>
