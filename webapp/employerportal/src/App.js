@@ -52,16 +52,16 @@ export const App = () => {
   return (
     <div>
     	{
-		initMap ?
+		/*initMap ?
   		<ReactDependentScript
 	      scripts={[
 	        "https://maps.googleapis.com/maps/api/js?key="+googleAPIKey+"&libraries=places&callback=initMap"
 	      ]}
-	    >
+	    >*/
 	      <Layout />
-	    </ReactDependentScript>
+	    /*</ReactDependentScript>
   		:
-  		null
+  		null*/
       }
     </div>
     

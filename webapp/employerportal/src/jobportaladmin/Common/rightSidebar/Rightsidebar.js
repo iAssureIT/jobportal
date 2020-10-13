@@ -44,40 +44,7 @@ export default class Rightsidebar extends Component{
                     <span className="iconTitle">All Bookings</span>
                   </a>
                  </li>
-                  <li className="sidebarMenuText">
-                    <a href="/umlistofusers"  title="User Management">
-                       <i className="glyphicon fa fa-users greenColor"></i> 
-                         User Management
-                    </a>
-                  </li>
                  
-                  <li className="" >
-                    <a href="/coming-soon" title="Reporting System">
-                      <i className="fa fa-user blueColor"></i>
-                      <span className="iconTitle">Reporting System</span>
-                    </a>
-                  </li>
-                  <li className=" sidebarMenuText adminMenuItem menuItem" >
-                    <a href="/coming-soon" title="Billing Details">
-                      <i className="fa fa-users yellowColor"></i>
-                      <span className="iconTitle">Billing Details</span>
-                    </a>
-                  </li>
-                   <li className=" sidebarMenuText separator employeeMenuItem menuItem" >
-                   </li>
-               
-                  <li className=" sidebarMenuText adminMenuItem menuItem" >
-                  <a href="/company-profile" title="Corporate Profile">
-                    <i className="fa fa-street-view addCircle"></i>
-                    <span className="iconTitle">Corporate Profile</span>
-                  </a>
-                  </li>
-                  <li className=" sidebarMenuText adminMenuItem menuItem" >
-                    <a href="/contract-view" title="Contract Details">
-                      <i className="fa fa-handshake-o darkGreenColor"></i>
-                      <span className="iconTitle">Contract Details</span>
-                    </a>
-                  </li>
                   <li className="sidebarMenuText adminMenuItem menuItem" onClick={this.eventclk1.bind(this)}>
                   <a href="#Corporate" data-toggle="collapse" aria-expanded="false" className="menuContent" title="Master Data">
                     <i className="fa fa-address-book aquaColor" />

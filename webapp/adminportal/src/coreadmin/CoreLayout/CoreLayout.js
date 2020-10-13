@@ -37,26 +37,15 @@ import CityType from '../Master/CityType/CityType.js';
 
 
 import CompanyPaymentGateway from '../companysetting/Components/CompanyPaymentGateway.js';
-//============= Corporate Master ====================
-import CorporateBasicInfo from '../Master/CorporateMaster/CorporateBasicInfo.js';
-import CorporateStatutoryDetails from '../Master/CorporateMaster/CorporateStatutoryDetails.js';
-import CorporateLocationDetails from '../Master/CorporateMaster/CorporateLocationDetails.js';
-import CorporateContactDetails from '../Master/CorporateMaster/CorporateContactDetails.js';
-import CorporateListOfEntities from '../Master/CorporateMaster/CorporateListOfEntities.js';
-
-//============= Vendor Master ====================
-import VendorBasicInfo from '../Master/VendorMaster/VendorBasicInfo.js';
-import VendorStatutoryDetails from '../Master/VendorMaster/VendorStatutoryDetails.js';
-import VendorLocationDetails from '../Master/VendorMaster/VendorLocationDetails.js';
-import VendorContactDetails from '../Master/VendorMaster/VendorContactDetails.js';
-import VendorListOfEntities from '../Master/VendorMaster/VendorListOfEntities.js';
+//============= Employer Master ====================
+import EmployerBasicInfo from '../Master/EmployerMaster/EmployerBasicInfo.js';
+import EmployerStatutoryDetails from '../Master/EmployerMaster/EmployerStatutoryDetails.js';
+import EmployerLocationDetails from '../Master/EmployerMaster/EmployerLocationDetails.js';
+import EmployerContactDetails from '../Master/EmployerMaster/EmployerContactDetails.js';
+import EmployerListOfEntities from '../Master/EmployerMaster/EmployerListOfEntities.js';
 
 
-//============= Supplier Master ====================
-/*import SupplierBasicInfo from '../Master/SupplierMaster/SupplierBasicInfo.js';
-import SupplierLocationDetails from '../Master/SupplierMaster/SupplierLocationDetails.js';
-import SupplierContactDetails from '../Master/SupplierMaster/SupplierContactDetails.js';
-*/
+
 // ============ Payment Process =======================
 import OrderPage from "../PaymentProcess/OrderPage.js";
 import PlanPage from "../PaymentProcess/PlanPage.js";
@@ -76,49 +65,12 @@ import OrganizationalStatutoryDetails from "../OrganizationalSettings/Organizati
 // ============= One Field Component ==================
 
 
-// import FuleType from "../Master/FuleType/FuleType.js"
-// import DriverMaster from "../Master/DriverMaster/DriverMaster.js"
-import EmployeeMaster from "../Master/EmployeeMaster/EmployeeMaster.js"
-import GuestMaster   from "../Master/GuestMaster/GuestMaster.js"
 import PersonMaster from "../Master/PersonMaster/PersonMaster.js"
-import EmployeeVehicalMapping from "../Master/EmployeeVehicalMapping/EmployeeVehicalMapping.js"
-import PackageMasterBulk from "../Master/BulkUploadPackageMaster/PackageMasterBulk.js"
-
 
 import PersonList from "../Master/PersonMaster/PersonList.js"
-import DepartmentBulkUpload from "../Master/Department/DepartmentBulkUpload.js"
-import DesignationBulkUpload from "../Master/Designation/DesignationBulkUpload.js"
-import DepartmentList    from "../Master/Department/DepartmentList.js"
-
-import filewisePersonList from "../Master/PersonMaster/FilewisePersonList.js"
-
-import VendorEmpList from "../Master/VendorEmpList/VendorEmpList.js"
-import CorporateEmpList from "../Master/CorporateEmpList/CorporateEmpList.js"
-
-import VendorEmployeeMaster from "../Master/VendorEmpList/VendorEmployeeMaster.js"
-import CorporateEmployeeMaster from "../Master/CorporateEmpList/CorporateEmployeeMaster.js"
-
-import GuestList from "../Master/GuestMaster/GuestList.js"
-import EmployeeList from "../Master/EmployeeMaster/EmployeeList.js"
-// import DesignationMapping from "../Master/DesignationMapping/DesignationMapping.js"
-
-//import Model from "../Master/Model/Model.js"
-// import Brand from "../Master/Brand/Brand.js"
-// import VehicleBrandBulkUpload from "../Master/Brand/VehicleBrandBulkUpload.js"
-// import VehicleModelBulkUpload from "../Master/Model/VehicleModelBulkUpload.js"
-import Designation from "../Master/Designation/DesignationMaster-GlobalMaster.js"
-import Department from "../Master/Department/DepartmentMaster-GlobalMaster.js"
-// import PackageType from "../Master/PackageType/PackageType.js"
 import Module from "../Master/Module/Module.js"
 import Facility from "../Master/Facility/Facility.js"
 // import ExpenseTypeMaster from "../Master/ExpenseTypeMaster/ExpenseTypeMaster.js"
-
-
-
-// ============= Vehicle Master =======================
-// import VehicleMaster from "../Master/VehicleMaster/VehicleMaster.js"
-
-// ============= Booking Master =======================
 
 
 
@@ -130,12 +82,6 @@ import Notfound from "../Notfound/Notfound.js"
 
 //=============== Broadcast System ================
 import BroadcastSystem from "../BroadcastSystem/BroadcastSystem.js";
-import UserReport from "../Reports/UserReport/UserReport.js";
-import CorporateReport from "../Reports/CorporateReport/CorporateReport.js";
-import VendorReport from "../Reports/VendorReport/VendorReport.js";
-import EmployeeReport from "../Reports/EmployeeReport/EmployeeReport.js";
-
-
 
 class CoreLayout extends Component {
     render() {
@@ -160,10 +106,7 @@ class CoreLayout extends Component {
                 <Route path="/EventToken" component={EventToken} exact />
                 <Route path="/ViewTemplates" component={NotificationTemplate} exact />
 
-                <Route path="/packagemasterBulk" component={PackageMasterBulk} exact />
-                <Route path="/employee-vehical-mapping" component={EmployeeVehicalMapping} exact />
-                <Route path="/employee-vehical-mapping/:editId" component={EmployeeVehicalMapping} exact />
-
+                
                 <Route path="/technicalMaster/location-type" exact strict component={LocationType} />
                 <Route path="/technicalMaster/location-type/:fieldID" exact strict component={LocationType} />
 
@@ -190,72 +133,22 @@ class CoreLayout extends Component {
 
                 <Route path="/paymentgateway" exact strict component={CompanyPaymentGateway} />
                 <Route path="/paymentgateway/:id" exact strict component={CompanyPaymentGateway} />                
-
-                { /* Employee Master */}
-    
-                <Route path="/employee/master/:fieldID" exact strict component={EmployeeMaster} />
-                <Route path="/employee/users/:fieldID" exact strict component={EmployeeMaster} />
-                <Route path="/driver/users/:fieldID" exact strict component={EmployeeMaster} />
-                <Route path="/employee/master" exact strict component={EmployeeMaster} />
-                <Route path="/employee/lists" exact strict component={EmployeeList} />
+                { /* Employer Master */}
                 
-                {/*Corporate and Vendor specific employee*/}
-                 <Route path="/corporate/employee/master/:fieldID" exact strict component={CorporateEmployeeMaster} />
-                <Route path="/corporate/employee/master" exact strict component={CorporateEmployeeMaster} />
-                 <Route path="/vendor/employee/master/:fieldID" exact strict component={VendorEmployeeMaster} />
-                <Route path="/vendor/employee/master" exact strict component={VendorEmployeeMaster} />
+                <Route path="/employer/basic-details" exact strict component={EmployerBasicInfo} />
+                <Route path="/employer/basic-details/:entityID" exact strict component={EmployerBasicInfo} />
+                <Route path="/employer/statutory-details" exact strict component={EmployerStatutoryDetails} />
+                <Route path="/employer/location-details" exact strict component={EmployerLocationDetails} />
+                <Route path="/employer/statutory-details/:entityID/:statutoryID" exact strict component={EmployerStatutoryDetails} />
+                <Route path="/employer/location-details/:entityID/:locationID" exact strict component={EmployerLocationDetails} />
+                <Route path="/employer/statutory-details/:entityID" exact strict component={EmployerStatutoryDetails} />
+                <Route path="/employer/location-details/:entityID" exact strict component={EmployerLocationDetails} />
+                <Route path="/employer/contact-details" exact strict component={EmployerContactDetails} />
+                <Route path="/employer/contact-details/:entityID" exact strict component={EmployerContactDetails} />
+                <Route path="/employer/contact-details/:entityID/:contactID" exact strict component={EmployerContactDetails} />
+                <Route path="/employer/list" exact strict component={EmployerListOfEntities} />
 
-                <Route path="/vendor/employee/lists" exact strict component={VendorEmpList} />
-                <Route path="/corporate/employee/lists" exact strict component={CorporateEmpList} />
-               
-                { /* Guest Master */}
-
-                <Route path="/corporate/guest/master/:fieldID" exact strict component={GuestMaster} />
-                <Route path="/corporate/guest/master" exact strict component={GuestMaster} />
-                <Route path="/guest/lists" exact strict component={GuestList} />
-
-
-                { /* Corporate Master */}
                 
-                <Route path="/corporate/basic-details" exact strict component={CorporateBasicInfo} />
-                <Route path="/corporate/basic-details/:entityID" exact strict component={CorporateBasicInfo} />
-                <Route path="/corporate/statutory-details" exact strict component={CorporateStatutoryDetails} />
-                <Route path="/corporate/location-details" exact strict component={CorporateLocationDetails} />
-                <Route path="/corporate/statutory-details/:entityID/:statutoryID" exact strict component={CorporateStatutoryDetails} />
-                <Route path="/corporate/location-details/:entityID/:locationID" exact strict component={CorporateLocationDetails} />
-                <Route path="/corporate/statutory-details/:entityID" exact strict component={CorporateStatutoryDetails} />
-                <Route path="/corporate/location-details/:entityID" exact strict component={CorporateLocationDetails} />
-                <Route path="/corporate/contact-details" exact strict component={CorporateContactDetails} />
-                <Route path="/corporate/contact-details/:entityID" exact strict component={CorporateContactDetails} />
-                <Route path="/corporate/contact-details/:entityID/:contactID" exact strict component={CorporateContactDetails} />
-                <Route path="/corporate/list" exact strict component={CorporateListOfEntities} />
-
-                { /* Vendor Master */}
-                <Route path="/vendor/basic-details" exact strict component={VendorBasicInfo} />
-                <Route path="/vendor/basic-details/:entityID" exact strict component={VendorBasicInfo} />
-                <Route path="/vendor/statutory-details/:entityID" exact strict component={VendorStatutoryDetails} />
-                <Route path="/vendor/location-details/:entityID" exact strict component={VendorLocationDetails} />
-                <Route path="/vendor/statutory-details" exact strict component={VendorStatutoryDetails} />
-                <Route path="/vendor/location-details" exact strict component={VendorLocationDetails} />
-                <Route path="/vendor/statutory-details/:entityID/:locationID" exact strict component={VendorStatutoryDetails} />
-                <Route path="/vendor/location-details/:entityID/:locationID" exact strict component={VendorLocationDetails} />
-                <Route path="/vendor/contact-details/:entityID" exact strict component={VendorContactDetails} />
-                <Route path="/vendor/contact-details" exact strict component={VendorContactDetails} />
-                <Route path="/vendor/contact-details/:entityID/:contactID" exact strict component={VendorContactDetails} />
-                <Route path="/vendor/list" exact strict component={VendorListOfEntities} /> 
-
-                { /* Supplier Master */}
-                <Route path="/supplier" exact strict component={SelectVendor} />
-              {/*  <Route path="/supplier/basic-details" exact strict component={SupplierBasicInfo} />
-                <Route path="/supplier/basic-details/:entityID" exact strict component={SupplierBasicInfo} />
-                <Route path="/supplier/location-details/:entityID" exact strict component={SupplierLocationDetails} />
-                <Route path="/supplier/location-details" exact strict component={SupplierLocationDetails} />
-                <Route path="/supplier/location-details/:entityID/:locationID" exact strict component={SupplierLocationDetails} />
-                <Route path="/supplier/contact-details/:entityID" exact strict component={SupplierContactDetails} />
-                <Route path="/supplier/contact-details" exact strict component={SupplierContactDetails} />
-                <Route path="/supplier/contact-details/:entityID/:contactID" exact strict component={SupplierContactDetails} />*/}
-                {/*  <Route path="/supplier/list" exact strict component={ListOfEntities} /> */}
-
                  { /* Orgnizational Setting */}
                 <Route path="/appCompany/basic-details" exact strict component={OrgnizationalBasicInfo} />
                 <Route path="/appCompany/basic-details/:entityID" exact strict component={OrgnizationalBasicInfo} />
@@ -269,9 +162,6 @@ class CoreLayout extends Component {
                 {/*<Route path="/appCompany/location-details/:entityID/:locationID" exact strict component={OrganizationalLocationDetails} />*/}
                
                 { /* Orgnizational Setting */}
-
-
-
                 <Route path="/appCompany/contact-details" exact strict component={OrganizationalContactDetails} />
                 <Route path="/appCompany/contact-details/:entityID" exact strict component={OrganizationalContactDetails} />
                 <Route path="/appCompany/contact-details/:entityID/:contactID" exact strict component={OrganizationalContactDetails} />
@@ -310,74 +200,21 @@ class CoreLayout extends Component {
                 {/*<Route path="/vehiclebrand" exact strict component={VehicleBrandBulkUpload} />
                 <Route path="/vehiclemodel" exact strict component={VehicleModelBulkUpload} />*/}
                 {/* <Route path="/brand/:fieldID" exact strict component={Brand} /> */}
-                <Route path="/designation" exact strict component={Designation} />
-                <Route path="/designation/:fieldID" exact strict component={Designation} />
-                <Route path="/Department" exact strict component={Department} />
-                <Route path="/Department/:fieldID" exact strict component={Department} />
-
                 
-
-                {/*
-                <Route path="/:type/master/:field_id" exact strict component={DepartmentMaster} />
-                <Route path="/:type/master" exact strict component={DepartmentMaster} />
-                */}
-                <Route path="/Departments" exact strict component={DepartmentBulkUpload} />
-                <Route path="/Designations" exact strict component={DesignationBulkUpload} />
-
                 <Route path="/:type/master/:fieldID" exact strict component={PersonMaster} />
                 <Route path="/:type/master" exact strict component={PersonMaster} />
                 <Route path="/:type/users/:fieldID" exact strict component={PersonMaster} />
 
                 <Route path="/:type/lists" component={PersonList} />
-                <Route path="/:type/list1" component={DepartmentList} />
-                <Route path="/:type/filewiselists" component={filewisePersonList} />
-
+                
                 <Route path="/:entity/master/:fieldID" exact strict component={PersonMaster} />
                 <Route path="/:entity/master" exact strict component={PersonMaster} />
                 <Route path="/:entity/lists" component={PersonList} />
-                <Route path="/Departments" exact strict component={DepartmentBulkUpload} />
-                <Route path="/Designations" exact strict component={DesignationBulkUpload} />
-
+                
                 { /* Booking Master */}
                 {/* <Route path="/All_Bookings" exact strict component={AllBookings} /> */}
                 
-                <Route path="/:entity/lists" component={DepartmentList} />
-                <Route path="/:entity/master/:fieldID" exact strict component={DepartmentBulkUpload} />
-                <Route path="/:entity/master" exact strict component={DepartmentBulkUpload} />
-
                 
-                { /* ExpenseType Master */}
-                
-
-                <Route path="/:entity/master/:fieldID" exact strict component={DepartmentBulkUpload} />
-                <Route path="/:entity/master" exact strict component={DepartmentBulkUpload} />
-                <Route path="/:entity/lists" component={DepartmentList} />
-
-
-
-                { /* Vendor Management */}
-
-                <Route path="/vendor/basic-details" exact strict component={BasicInfo} />
-                <Route path="/vendor/basic-details/:vendor_ID" exact strict component={BasicInfo} />
-                <Route path="/vendor/location-details/:vendor_ID" exact strict component={LocationDetails} />
-                <Route path="/vendor/location-details/:vendor_ID/:location_ID" exact strict component={LocationDetails} />
-                <Route path="/vendor/contact-details/:vendor_ID" exact strict component={ContactDetails} />
-                <Route path="/vendor/contact-details/:vendor_ID/:contactDetails_ID" exact strict component={ContactDetails} />
-
-                <Route path="/vendor/list" exact strict component={ListOfEntities} />
-               {/* <Route path="/vendor/category" exact strict component={Category} />
-
-                <Route path="/vendor/category/:vendorID" exact strict component={Category} />*/}
-                <Route path="/vendor/location-type" exact strict component={LocationType} />
-                <Route path="/vendor/location-type/:locationTypeID" exact strict component={LocationType} />
-                {/* Vehicle Master */}
-
-                {/* <Route path="/designation-mapping" exact strict component={DesignationMapping} /> */}
-                {/* Vehicle Master */}
-                {/* <Route path="/vehicle-master" exact strict component={VehicleMaster} />
-                <Route path="/vehicle-master/:vehicleID" exact strict component={VehicleMaster} /> */}
-                {/* <Route path="/vehicle-list" exact strict component={ListOfVehicles} /> */}
-
                 {/* access-management */}
                 <Route path="/access-management" exact strict component={AccessManagement} />
 
@@ -386,10 +223,6 @@ class CoreLayout extends Component {
 
                 {/* Broadcast-System */}
                 <Route path="/broadcast-system" exact strict component={BroadcastSystem} />
-                <Route path="/user-report" exact strict component={UserReport} />
-                <Route path="/corporate-report" exact strict component={CorporateReport} />
-                <Route path="/vendor-report" exact strict component={VendorReport} />
-                <Route path="/employee-report" exact strict component={EmployeeReport} />
                 
             </Switch>
         );
@@ -400,7 +233,7 @@ class CoreLayout extends Component {
 
 
 const mapStateToProps = (state)=>{
-    // console.log(" state on Dashboard corporate==> ",state)
+    // console.log(" state on Dashboard employer==> ",state)
     return {
       userDetails   : state.userDetails,
     }

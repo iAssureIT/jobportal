@@ -111,16 +111,18 @@ export default class Dashboard extends Component{
         <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 NOPadding">
            <section className="content">
            	<div className="row">
-            {localStorage.getItem("roles").includes('corporateadmin') ?
-	           	<Statistics 
-                display={true}
-	           		bgColor="bg-aqua"
-	           		faIcon="fa-user"
-	           		firstField={{"Field":"Active Employees","method":"get","path":"/api/personmaster/get/employeeCount/Active/"+localStorage.getItem("companyID")}} 
-	           		secondField={{"Field":"Inactive Employees","method":"get","path":"/api/personmaster/get/inactiveemployeeCount/Active/"+localStorage.getItem("companyID")}}
-				      />
-              :
-              null
+            {localStorage.getItem("roles") ? 
+              localStorage.getItem("roles").includes('corporateadmin') ?
+  	           	<Statistics 
+                  display={true}
+  	           		bgColor="bg-aqua"
+  	           		faIcon="fa-user"
+  	           		firstField={{"Field":"Active Employees","method":"get","path":"/api/personmaster/get/employeeCount/Active/"+localStorage.getItem("companyID")}} 
+  	           		secondField={{"Field":"Inactive Employees","method":"get","path":"/api/personmaster/get/inactiveemployeeCount/Active/"+localStorage.getItem("companyID")}}
+  				      />
+                :
+                null
+              : null
             }
             {localStorage.getItem("roles").includes('manager') ?
               <Statistics 

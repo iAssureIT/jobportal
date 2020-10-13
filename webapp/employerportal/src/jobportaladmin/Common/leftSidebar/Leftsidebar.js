@@ -138,87 +138,18 @@ export default class AdminDashboard extends Component{
             <li className="singleTreeview" onClick={this.clickDashboard.bind(this)}>
                 <a href="/dashboard"  title="Dashboard" onClick={()=>this.openMenu("dashboard")}>
                   <i className="fa fa-dashboard" aria-hidden="true"></i>
-                  <span className="sidebarMenuTitle">Dashboard</span>
+                  <span className="sidebarMenuTitle">Dashboard aaa</span>
                 </a>
               </li>
-                <li className=" sidebarMenuText separator employeeMenuItem managerMenuItem adminMenuItem menuItem" >
-                    <span className="">Employee Section</span>
-                </li>
-                 <li className="singleTreeview employeeMenuItem menuItem" onClick={this.clickDashboard.bind(this)}>
-                  <a href="/booking"  title="Trip Booking" onClick={()=>this.openMenu("Trip Booking")}>
-                    <i className="fa fa-ticket" aria-hidden="true"></i>
-                    <span className="sidebarMenuTitle">Trip Booking</span>
-                  </a>
-                </li>
-
-                <li className=" sidebarMenuText employeeMenuItem menuItem" >
+                
+                <li className="sidebarMenuText employeeMenuItem menuItem" >
                   <a href="/booking-details" title="Booking List">
                     <i className="fa fa-file"></i>
                     <span className="iconTitle">Booking List </span>
                   </a>
                 </li>
-                <li className=" sidebarMenuText employeeMenuItem menuItem" >
-                  <a href="/my-profile" title="My Profile">
-                    <i className="fa fa-user"></i>
-                    <span className="iconTitle">My Profile</span>
-                  </a>
-                </li>
-             
-                <li className=" sidebarMenuText separator managerMenuItem menuItem" >
-                    <span className="">Manager Section</span>
-                </li>
-              
-                <li className=" sidebarMenuText managerMenuItem menuItem" >
-                  <a href="/new-bookings" title="New Bookings">
-                    <i className="fa fa-ticket"></i>
-                    <span className="iconTitle">New Bookings</span>
-                  </a>
-                </li>
-                <li className=" sidebarMenuText managerMenuItem menuItem" >
-                  <a href="/approved-bookings" title="Approved Bookings">
-                    <i className="fa fa-check-square-o"></i>
-                    <span className="iconTitle">Approved Bookings</span>
-                  </a>
-                </li>
-                <li className=" sidebarMenuText managerMenuItem menuItem" >
-                  <a href="/rejected-bookings" title="Rejected Bookings">
-                    <i className="fa fa-bars"></i>
-                    <span className="iconTitle">Rejected Bookings</span>
-                  </a>
-                </li>
-                <li className=" sidebarMenuText managerMenuItem menuItem" >
-                  <a href="/CR-bookings" title="Rejected Bookings">
-                    <i className="fa fa-bars"></i>
-                    <span className="iconTitle">Change Request</span>
-                  </a>
-                </li>
-             {/*   <li className=" sidebarMenuText managerMenuItem menuItem" >
-                  <a href="/department-report" title="Department Report">
-                    <i className="fa fa-file"></i>
-                    <span className="iconTitle">Department Report</span>
-                  </a>
-                </li>*/}
-                 <li className=" sidebarMenuText separator adminMenuItem menuItem" >
-                    <span className="">Admin Section</span>
-                </li>
-                <li className="singleTreeview employeeMenuItem adminMenuItem menuItem" onClick={this.clickDashboard.bind(this)}>
-                  <a href="/guest/lists"  title="Add Guest" onClick={()=>this.openMenu("Add Guest")}>
-                    <i className="fa fa-user" aria-hidden="true"></i>
-                    <span className="sidebarMenuTitle">Add Guest</span>
-                  </a>
-                </li>
-                <li className="singleTreeview adminMenuItem menuItem" onClick={this.clickDashboard.bind(this)}>
-                  <a href="/employee/lists"  title="Add Employee" onClick={()=>this.openMenu("Add Employee")}>
-                    <i className="fa fa-user" aria-hidden="true"></i>
-                    <span className="sidebarMenuTitle">Add Employee</span>
-                  </a>
-                </li>
-                <li className="singleTreeview adminMenuItem menuItem" onClick={this.clickDashboard.bind(this)}>
-                  <a href="/CR_Bookings_Admin"  title="Add Employee" onClick={()=>this.openMenu("Add Employee")}>
-                    <i className="fa fa-user" aria-hidden="true"></i>
-                    <span className="sidebarMenuTitle">Change Request</span>
-                  </a>
-                </li>
+               
+          
            
           </ul>
         </section>
