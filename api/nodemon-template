@@ -1,6 +1,6 @@
 module.exports = {
     "JWT_KEY"   : "secret",
-    "port"      : 3065,
+    "port"      : 3066,
     "dbname"    : "standardapi",
     "emailHost" : "smtp.gmail.com",
     "emailPort" : 587,
