@@ -53,16 +53,16 @@ export const App = () => {
   return (
     <div>
     	{
-		initMap ?
-  		<ReactDependentScript
-	      scripts={[
-	        "https://maps.googleapis.com/maps/api/js?key="+googleAPIKey+"&libraries=geometry,drawing,places&callback=initMap"
-	      ]}
-	    >
+		// initMap ?
+  // 		<ReactDependentScript
+	 //      scripts={[
+	 //        "https://maps.googleapis.com/maps/api/js?key="+googleAPIKey+"&libraries=geometry,drawing,places&callback=initMap"
+	 //      ]}
+	 //    >
 	      <Layout />
-	    </ReactDependentScript>
-  		:
-  		null
+	   //  </ReactDependentScript>
+  		// :
+  		// null
       }
     </div>
     

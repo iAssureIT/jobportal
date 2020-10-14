@@ -105,7 +105,7 @@ class Layout extends Component  {
         const roles = localStorage.getItem("roles");
         var roleArr = [];
         roleArr.push(roles);
-        console.log("this.state.sidebar ",this.state.sidebar );
+        console.log("this.state.sidebar ",this.state.loggedIn );
         if (this.state.loggedIn) {
             return (
             <Router>
