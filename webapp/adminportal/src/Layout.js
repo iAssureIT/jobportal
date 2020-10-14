@@ -33,7 +33,7 @@ import Language             from "./jobportaladmin/Master/Language/Language.js"
 import University           from "./jobportaladmin/Master/University/University.js"
 import Collage              from "./jobportaladmin/Master/Collage/Collage.js"
 
-import MasterData           from "./jobportaladmin/MasterData/MasterData.js";
+import MasterData           from "./jobportaladmin/Master/MasterData.js";
 
 import Module               from "./jobportaladmin/Master/Module/Module.js"
 import Facility             from "./jobportaladmin/Master/Facility/Facility.js"
