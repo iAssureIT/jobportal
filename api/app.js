@@ -54,6 +54,7 @@ const collageMasterRoutes				= require("./coreAdmin/CollageMaster/RoutesCollage.
 const moduleRoutes				        = require("./coreAdmin/moduleMaster/RoutesModuleMaster.js");
 const facilityRoutes				    = require("./coreAdmin/facilityMaster/RoutesFacilityMaster.js");
 const accessRoutes				    	= require("./coreAdmin/accessManagement/RoutesAccessMaster.js");
+const jobPostRoutes				    	= require("./api/com/iassure/jobPortal/employerPortal/jobPost/RoutesJobPost.js");
 
 //const AlertSystem		        = require("./coreAdmin/AlertSystem/Routes.js");
 
@@ -143,6 +144,7 @@ app.use("/api/universitymaster", universityMasterRoutes);
 
 app.use("/api/modulemaster", moduleRoutes);
 app.use("/api/facilitymaster", facilityRoutes);
+app.use("/api/jobPost", jobPostRoutes);
 
 //app.use("/api/personmaster", personMasterRoutes);
 //p.use("/api/accessmaster", accessRoutes);
