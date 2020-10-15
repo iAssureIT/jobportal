@@ -32,10 +32,17 @@ const entityRoutes						= require("./coreAdmin/entityMaster/RoutesEntityMaster.j
 
 const addressTypeMasterRoutes			= require("./coreAdmin/AddressTypeMaster/RoutesAddressType.js");
 const industryMasterRoutes			    = require("./coreAdmin/IndustryMaster/RoutesIndustryMaster.js");
+const subIndustryMasterRoutes			= require("./coreAdmin/SubIndustryMaster/RoutesSubIndustryMaster.js");
 const functionalAreaMasterRoutes		= require("./coreAdmin/FunctionalAreaMaster/RoutesFunctionalAreaMaster.js");
+const subFunctionalAreaMasterRoutes		= require("./coreAdmin/SubFunctionalAreaMaster/RoutesSubFunctionalAreaMaster.js");
+
+const designationMasterRoutes			= require("./coreAdmin/DesignationMaster/RoutesDesignationMaster.js");
+
 const jobCategoryMasterRoutes			= require("./coreAdmin/JobCategoryMaster/RoutesJobCategory.js");
 const jobTypeMasterRoutes				= require("./coreAdmin/JobTypeMaster/RoutesJobType.js");
 const jobRoleMasterRoutes				= require("./coreAdmin/JobRoleMaster/RoutesJobRole.js");
+const jobTimeMasterRoutes				= require("./coreAdmin/JobTimeMaster/RoutesJobTime.js");
+
 const qualificationLevelMasterRoutes	= require("./coreAdmin/QualificationLevelMaster/RoutesQualificationLevel.js");
 const qualificationMasterRoutes			= require("./coreAdmin/QualificationMaster/RoutesQualification.js");
 const skillMasterRoutes					= require("./coreAdmin/SkillMaster/RoutesSkill.js");
@@ -117,7 +124,12 @@ app.use("/api/paymentterms", paymentTermsRoutes);
 
 app.use("/api/addresstypemaster", addressTypeMasterRoutes);
 app.use("/api/industrymaster", industryMasterRoutes);
+app.use("/api/subindustrymaster", subIndustryMasterRoutes);
 app.use("/api/functionalareamaster", functionalAreaMasterRoutes);
+app.use("/api/subfunctionalareamaster", subFunctionalAreaMasterRoutes);
+
+app.use("/api/designationmaster", designationMasterRoutes);
+
 app.use("/api/jobcategorymaster", jobCategoryMasterRoutes);
 app.use("/api/jobtypemaster", jobTypeMasterRoutes);
 app.use("/api/jobrolemaster", jobRoleMasterRoutes);

@@ -1,26 +1,26 @@
 const mongoose	        = require("mongoose");
-const JobRoleMaster       = require('./ModelJobRole.js');
+const JobTimeMaster       = require('./ModelJobTime.js');
 const FailedRecords     = require('../failedRecords/ModelFailedRecords');
 
-exports.insertJobRole = (req,res,next)=>{
+exports.insertJobTime = (req,res,next)=>{
     processData();
     async function processData(){
-    var allJobRole = await fetchJobRole()
-        var jobRole = allJobRole.filter((data)=>{
-        if (data.jobRole.trim().toLowerCase() == req.body.fieldValue.trim().toLowerCase()) {
+    var allJobTime = await fetchJobTime()
+        var jobTime = allJobTime.filter((data)=>{
+        if (data.jobTime.trim().toLowerCase() == req.body.fieldValue.trim().toLowerCase()) {
             return data;
         }
         })
-        if (jobRole.length > 0) {
+        if (jobTime.length > 0) {
             res.status(200).json({ duplicated : true });
         }else{
-            const jobRoleMaster = new JobRoleMaster({
-                            _id                         : new mongoose.Roles.ObjectId(),
-                            jobRole                     : req.body.fieldValue,
+            const jobTimeMaster = new JobTimeMaster({
+                            _id                         : new mongoose.Times.ObjectId(),
+                            jobTime                     : req.body.fieldValue,
                             createdBy                   : req.body.createdBy,
                             createdAt                   : new Date()
                         })
-                        jobRoleMaster.save()
+                        jobTimeMaster.save()
                         .then(data=>{
                             res.status(200).json({ created : true, fieldID : data._id });
                         })
@@ -36,9 +36,9 @@ exports.insertJobRole = (req,res,next)=>{
         }
     }       
 };
-var fetchJobRole = async ()=>{
+var fetchJobTime = async ()=>{
     return new Promise(function(resolve,reject){ 
-    JobRoleMaster.find({})
+    JobTimeMaster.find({})
         .exec()
         .then(data=>{
             resolve( data );
@@ -48,8 +48,8 @@ var fetchJobRole = async ()=>{
         }); 
     });
 };
-exports.countJobRoles = (req, res, next)=>{
-    JobRoleMaster.find({}).count()
+exports.countJobTimes = (req, res, next)=>{
+    JobTimeMaster.find({}).count()
         .exec()
         .then(data=>{
             res.status(200).json({ count : data });
@@ -58,8 +58,8 @@ exports.countJobRoles = (req, res, next)=>{
             res.status(500).json({ error: err });
         }); 
 };
-exports.fetchJobRoles = (req, res, next)=>{
-    JobRoleMaster.find({})
+exports.fetchJobTimes = (req, res, next)=>{
+    JobTimeMaster.find({})
         .sort({createdAt : -1})
         .skip(req.body.startRange)
         .limit(req.body.limitRange)
@@ -71,8 +71,8 @@ exports.fetchJobRoles = (req, res, next)=>{
             res.status(500).json({ error: err });
         }); 
 };
-exports.getJobRoles = (req, res, next)=>{
-    JobRoleMaster.find({})
+exports.getJobTimes = (req, res, next)=>{
+    JobTimeMaster.find({})
     .exec()
     .then(data=>{
         res.status(200).json(data);
@@ -81,8 +81,8 @@ exports.getJobRoles = (req, res, next)=>{
         res.status(500).json({ error: err });
     }); 
 };
-exports.fetchSingleJobRole = (req, res, next)=>{
-    JobRoleMaster.findOne({ _id: req.params.fieldID })
+exports.fetchSingleJobTime = (req, res, next)=>{
+    JobTimeMaster.findOne({ _id: req.params.fieldID })
         .exec()
         .then(data=>{
             res.status(200).json(data);
@@ -92,8 +92,8 @@ exports.fetchSingleJobRole = (req, res, next)=>{
         }); 
 };
 
-exports.searchJobRole = (req, res, next)=>{
-    JobRoleMaster.find({ jobRole: { $regex : req.params.str ,$options: "i" }  })
+exports.searchJobTime = (req, res, next)=>{
+    JobTimeMaster.find({ jobTime: { $regex : req.params.str ,$options: "i" }  })
         .exec()
         .then(data=>{
             res.status(200).json(data);
@@ -102,17 +102,17 @@ exports.searchJobRole = (req, res, next)=>{
             res.status(500).json({ error: err });
         }); 
 };
-exports.updateJobRole = (req, res, next)=>{
-    JobRoleMaster.updateOne(
+exports.updateJobTime = (req, res, next)=>{
+    JobTimeMaster.updateOne(
             { _id:req.body.fieldID },  
             {
-                $set:   {  'jobRole'       : req.body.fieldValue  }
+                $set:   {  'jobTime'       : req.body.fieldValue  }
             }
         )
         .exec()
         .then(data=>{
             if(data.nModified == 1){
-                JobRoleMaster.updateOne(
+                JobTimeMaster.updateOne(
                 { _id:req.body.fieldID},
                 {
                     $push:  { 'updateLog' : [{  updatedAt      : new Date(),
@@ -133,8 +133,8 @@ exports.updateJobRole = (req, res, next)=>{
             res.status(500).json({ error: err });
         });
 };
-exports.deleteJobRole = (req, res, next)=>{
-    JobRoleMaster.deleteOne({_id: req.params.fieldID})
+exports.deleteJobTime = (req, res, next)=>{
+    JobTimeMaster.deleteOne({_id: req.params.fieldID})
         .exec()
         .then(data=>{
             if(data.deletedCount === 1){
@@ -148,9 +148,9 @@ exports.deleteJobRole = (req, res, next)=>{
         });            
 };
 
-var fetchAllJobRole = async (type)=>{
+var fetchAllJobTime = async (type)=>{
     return new Promise(function(resolve,reject){ 
-    JobRoleMaster.find()
+    JobTimeMaster.find()
         .sort({createdAt : -1})
         // .skip(req.body.startRange)
         // .limit(req.body.limitRange)
@@ -224,7 +224,7 @@ var insertFailedRecords = async (invalidData,updateBadData) => {
                 }
             }else{
                     const failedRecords = new FailedRecords({
-                    _id                     : new mongoose.Roles.ObjectId(),                    
+                    _id                     : new mongoose.Times.ObjectId(),                    
                     failedRecords           : invalidData.FailedRecords,
                     fileName                : invalidData.fileName,
                     totalRecords            : invalidData.totalRecords,
@@ -247,11 +247,11 @@ var insertFailedRecords = async (invalidData,updateBadData) => {
 };
 
 
-exports.bulkUploadJobRole = (req, res, next)=>{
-    console.log("inside bulk upload JobRole");
-     // var JobRole = [{JobRole:"mesh"}];
-    var JobRole = req.body.data;
-    console.log("JobRole",JobRole);
+exports.bulkUploadJobTime = (req, res, next)=>{
+    console.log("inside bulk upload JobTime");
+     // var JobTime = [{JobTime:"mesh"}];
+    var JobTime = req.body.data;
+    console.log("JobTime",JobTime);
 
     var validData = [];
     var validObjects = [];
@@ -265,8 +265,8 @@ exports.bulkUploadJobRole = (req, res, next)=>{
     processData();
     async function processData(){
          // var alldepartments = await fetchDepartments();
-        for(var k = 0 ; k < JobRole.length ; k++){
-            if (JobRole[k].JobRole == '-') {
+        for(var k = 0 ; k < JobTime.length ; k++){
+            if (JobTime[k].JobTime == '-') {
                 remark += "department not found, " ;  
             }
             console.log("remark",remark)
@@ -275,17 +275,17 @@ exports.bulkUploadJobRole = (req, res, next)=>{
                 // var allDepartments = await fetchAllDepartments(req.body.reqdata);
                 // console.log("alldepartments",allDepartments);
                  console.log()
-                  var allJobRole = await fetchAllJobRole(req.body.reqdata);
-                  var JobRoleExists = allJobRole.filter((data)=>{
-                    if (data.JobRole == JobRole[k].JobRole)
+                  var allJobTime = await fetchAllJobTime(req.body.reqdata);
+                  var JobTimeExists = allJobTime.filter((data)=>{
+                    if (data.JobTime == JobTime[k].JobTime)
                          {
                         return data;
                     }
                 })
                
-                 console.log("in else validObjects",JobRoleExists);
-                if (JobRoleExists.length==0) {
-                    validObjects = JobRole[k];
+                 console.log("in else validObjects",JobTimeExists);
+                if (JobTimeExists.length==0) {
+                    validObjects = JobTime[k];
                     validObjects.fileName       = req.body.fileName;
                     // validObjects.createdBy      = req.body.reqdata.createdBy;
                     validObjects.createdAt      = new Date();
@@ -294,9 +294,9 @@ exports.bulkUploadJobRole = (req, res, next)=>{
 
                 }else{
                     
-                    remark += "JobRole already exists." ; 
+                    remark += "JobTime already exists." ; 
 
-                    invalidObjects = JobRole[k];
+                    invalidObjects = JobTime[k];
                     invalidObjects.failedRemark = remark;
                     invalidData.push(invalidObjects); 
                 }
@@ -305,7 +305,7 @@ exports.bulkUploadJobRole = (req, res, next)=>{
             }
 
         }
-        JobRoleMaster.insertMany(validData)
+        JobTimeMaster.insertMany(validData)
         .then(data=>{
 
         })
@@ -326,7 +326,7 @@ exports.bulkUploadJobRole = (req, res, next)=>{
     }
 };
 exports.fetch_file = (req,res,next)=>{ 
-    JobRoleMaster.find( { _id : "fileName"})
+    JobTimeMaster.find( { _id : "fileName"})
     .exec()
     .then(data=>{
         res.status(200).json(data.length);
@@ -342,7 +342,7 @@ exports.fetch_file = (req,res,next)=>{
 exports.filedetails = (req,res,next)=>{
     var finaldata = {};
     console.log(req.params.fileName)
-    JobRoleMaster.find( { fileName:req.params.fileName }  )
+    JobTimeMaster.find( { fileName:req.params.fileName }  )
     .exec()
     .then(data=>{
         //finaldata.push({goodrecords: data})
