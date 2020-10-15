@@ -1,5 +1,6 @@
 mobileapp/node_modules
 webapp/adminportal/node_modules
+<<<<<<< HEAD
 webapp/candidateteportal/node_modules
 webapp/employerportal/node_modules
 api/node_modules
@@ -8,3 +9,12 @@ webapp/adminportal/.env
 webapp/candidateteportal/.env
 webapp/employerportal/.env
 nodemon.js
+=======
+webapp/candidateportal/node_modules
+webapp/employerportal/node_modules
+api/node_modules
+webapp/adminportal/.env
+webapp/candidateportal/.env
+webapp/employerportal/.env
+api/nodemon.js
+>>>>>>> f9f49f483f649c565d21f4465bb9778587fdaed5

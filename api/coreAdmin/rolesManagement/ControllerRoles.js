@@ -2,6 +2,7 @@ const mongoose	= require("mongoose");
 const Role      = require('./ModelRoles.js');
 const RolesEntityMaster = require('../RoleEntityMaster/Model.js');
 exports.create_role = (req,res,next)=>{
+    console.log(req.body)
     if(req.body.fieldValue){
     	Role.findOne({role:req.body.fieldValue,rolesentityId:req.body.dropdownID})
     		.exec()

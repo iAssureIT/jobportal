@@ -96,7 +96,7 @@ class ListOfEntities extends Component {
 		})
 		this.getData();
 		this.getEntities();
-		this.getgridFilteredProducts();
+		this.getgridFilteredProducts(this.state.selector);
 	}
 
 	getData(){
@@ -420,7 +420,6 @@ class ListOfEntities extends Component {
 			.then((response) => {
 				if (this.state.roles.indexOf("admin") == -1)
 				{
-					
 					var FilteredData =  response.data.filter(entity=>entity.supplierOf == this.state.getcompanyID)
 					var tableData = FilteredData.map((a, i)=>{
 					var locDetails = a.locations.map((l,i)=>{

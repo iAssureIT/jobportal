@@ -21,6 +21,7 @@ import Leftsidebar                              from './coreadmin/common/leftSid
 import Dashboard                                from './jobportaladmin/Dashboard/Dashboard.js'
 import Header                                   from './coreadmin/common/header/Header.js'; 
 import JobPosting                               from './jobportaladmin/JobPosting/JobPosting.js'; 
+import JobList                                  from './jobportaladmin/JobList/JobList.js'; 
 
 
 import axios                from 'axios';
@@ -104,7 +105,7 @@ class Layout extends Component  {
         const roles = localStorage.getItem("roles");
         var roleArr = [];
         roleArr.push(roles);
-        console.log("this.state.sidebar ",this.state.sidebar );
+        console.log("this.state.sidebar ",this.state.loggedIn );
         if (this.state.loggedIn) {
             return (
             <Router>
@@ -134,6 +135,7 @@ class Layout extends Component  {
                                                         <Route path="/" component={Dashboard} exact />
                                                         <Route path="/dashboard" component={Dashboard} exact />
                                                         <Route path="/post-job" component={JobPosting} exact />
+                                                        <Route path="/job-list" component={JobList} exact />
                                                     </Switch>
                                                 </div>
                                             </div>
