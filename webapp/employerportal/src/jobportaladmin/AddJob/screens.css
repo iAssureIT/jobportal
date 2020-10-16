@@ -1,0 +1,282 @@
+.pageWrapper{
+	min-height: 650px;
+	height: auto;
+	width: 100%;
+	color: var(--main-txt-color);
+}
+
+.mainForm{
+	margin-top: 100px;
+	min-height: 500px;
+	height: auto;
+	padding-bottom: 50px;
+	margin-bottom: 50px;
+}
+
+.backgroundColor{
+	background-color: var(--main-bg-color);	
+}
+
+.borderColor{
+	border-color: var(--main-border-color); 
+}
+
+.headingColor{
+	color: var(--main-heading-color); 
+}
+
+.buttonYellow{
+	background-color: var(--yellow-button-color);
+	color: var(--main-txt-color);
+	height: 30px;
+	line-height: 15px;
+}
+
+.pageWrapperBorder{
+	border: 3px solid var(--main-border-color);
+	border-radius: 10px;
+	background-color: #242933;
+}
+
+.formHeading{
+	margin-top: 25px;
+	font-size: 25px;
+	/*font-weight: bold;*/
+	color: var(--main-heading-font-color);
+	font-family: 'Montserrat-SemiBold'; 
+}
+
+.formHr{
+	border-top: 1px solid var(--main-border-color);
+	margin-top: 15px;
+}
+
+.formSubHeading{
+	font-size: 21px;
+	font-weight: bold;
+	color: var(--main-subheading-font-color);
+	font-family: 'Montserrat-SemiBold'; 
+}
+
+.formSubHeading i{
+	color: var(--main-txt-color);
+	border: 1px solid #fff;
+	padding: 1px 7px;
+	font-size: 18px;
+	border-radius: 6px;
+}
+
+.formSubHeading .labelLeftPadding{
+	padding-left: 17px;
+}
+
+.formSubHeadingHead{
+	font-size: 21px;
+	font-weight: bold;
+	color: var(--main-subheading-font-color);
+	font-family: 'Montserrat-SemiBold';
+}
+
+.formSubHeadingHead i{
+	color: var(--main-txt-color);
+	font-size: 25px;
+	margin-top: 18px;
+}
+
+.formSubHeadingHead .labelLeftPadding{
+	padding-left: 17px;
+}
+
+.jobDesc{
+	margin-top: 20px;
+	padding-bottom: 6px;
+	font-family: 'Montserrat-Regular';
+}
+
+.formSection{
+	margin-left: 40px;
+	margin-right: 40px;
+}
+
+.formLable{
+	font-family: 'Montserrat-Regular';
+	font-size: 12px; 
+	font-weight: 100;
+	color: var(--main-txt-color);
+	letter-spacing: 1px;
+}
+
+.formFieldRow {
+    margin-top: 15px;
+}
+
+.formField {
+    border: 1px solid var(--main-border-color);
+    background-color: #242933;
+    color: var(--main-txt-color);
+}
+
+.formField:hover{
+	color: var(--main-txt-color);
+}
+
+.form-control:focus{
+	border-color: rgba(211,149,10,0.8);
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(211, 149, 10, 0.6);
+}
+
+.locationIcon{
+	font-size: 15px;
+}
+
+.workLable{
+  margin-left: 10px;
+}
+
+/*****************************Custom Checkbox***************************/
+.containerWfh{
+    display: block;
+    position: relative;
+    padding-left: 30px;
+    margin-top: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    font-weight: normal;
+  }
+  
+  .containerWfh input{
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+  
+  .checkmark2{
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 21px;
+  width: 21px;
+  border-radius: 3px;
+  background-color: transparent;
+  border: 2px solid var(--main-border-color); 
+  }
+  
+  .containerWfh:hover input ~ .checkmark2{
+    background-color: transparent;
+  }
+  
+  .containerWfh input:checked ~ .checkmark2{
+    background-color: transparent;	
+  }
+  
+  .checkmark2:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+  
+  .containerWfh input:checked ~ .checkmark2:after{
+    display: block;
+  }
+  
+  .containerWfh .checkmark2:after{
+  left: 5px;
+  top: 3px;
+  width: 6px;
+  height: 9px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+  }
+/******************************************************************/
+
+select{
+	border: 1px solid var(--main-border-color);
+    background-color: transparent;
+    color: var(--main-txt-color);
+	/*border-left: transparent !important;*/
+}
+
+option{
+	border: 1px solid var(--main-border-color);
+    background-color: var(--main-bg-color);
+    color: var(--main-txt-color);
+}
+
+option:hover{
+	background-color: var(--main-bg-color) !important;
+}
+
+.optionContainer{
+	background-color: var(--main-bg-color);
+	white-space: nowrap; 
+ 	overflow: hidden;
+ 	text-overflow: ellipsis;
+}
+
+.optionContainer li:hover,
+.optionContainer .highlight{
+  background-color: var(--main-border-color);
+  color: var(--main-txt-color);
+}
+
+/*.bulletPoints{
+	list-style-type: square;
+}*/
+
+/*.pillListItems{
+	width: 100px;
+	height: 20px;
+	border-radius: 20px;
+
+	color: var(--main-txt-color);
+	background-color: transparent;
+	border: 1px solid var(--main-border-color);
+	margin-right: 10px;
+}
+
+.pillButton {
+  background-color: #ddd;
+  border: none;
+  color: black;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: 16px;
+  background-color: transparent;
+	border: 1px solid var(--main-border-color);
+	color: var(--main-txt-color);
+}
+
+.pillButton:hover {
+  background-color: transparent;
+}
+*/
+
+.previewBtn{
+	height: 40px;
+	width: 150px;
+	margin-top: 60px;
+	margin-right: 30px;
+	margin-left: 95px;
+}
+
+.submitBtn{
+	height: 40px;
+	width: 150px;
+	margin-top: 60px;
+}
+
+.submitBtn:hover{
+	color: var(--main-txt-color);
+}
+
+

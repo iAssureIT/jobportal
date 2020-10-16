@@ -1,0 +1,369 @@
+.jobPostProfileWrapper{
+	min-height: 670px;
+	height: auto;
+	background-color: var(--main-bg-color);
+	color: var(--main-txt-color);
+	padding-top: 30px;
+	padding-bottom: 30px;
+}
+
+.leftSideMain{
+	min-height: 670px;
+	height: 1375px;
+	border: 1px solid var(--main-border-color);
+}
+
+.leftHeader{
+	height: 215px;
+	border-bottom: 1px solid var(--main-border-color);
+}
+
+.leftImgContainer{
+	height: 215px;
+	/*background-color: red;*/
+}
+
+.leftImgContainer .imgbox{
+	margin-top: 45px;
+	margin-left: 15px;
+	height: 130px;
+	border-radius: 3px;
+	background-color: #fff;
+}
+
+.leftImgContainer .logo{
+	height: 55px;
+	margin-top: 40px;
+	border-radius: 5px;
+}
+
+.imgContent .contentMain{
+	padding-top: 5px;
+}
+
+.imgContent{
+	height: 215px;
+	/*background-color: maroon;*/
+}
+
+.imgContent .contentHead{
+	font-size: 27px;
+	font-weight: bold;
+	color: var(--main-subheading-font-color);
+	padding-top: 60px;
+	font-family: 'Montserrat-SemiBold';
+	margin-left: -52px;
+}
+
+.imgContent .subContentHead{
+	margin-top: -3px;
+	margin-left: -52px;
+	font-size: 18px;
+	font-family: 'Montserrat-SemiBold';
+
+}
+
+.imgContent .locationinfo{
+	padding-top: 1px;
+	margin-left: -52px;
+	font-family: 'Montserrat-Thin';
+	font-size: 13px;
+}
+
+.mainContent{
+	height: auto; 
+	/*background-color: #444;*/
+}
+
+.contentWrapper1{
+	margin-top: -5px;
+}
+
+.content1 ul{
+	margin-top: 10px;
+}
+
+.content1 .timeline:before{
+	content: '';
+	position: absolute;
+	top: 70px;
+	left: 40px;
+	width: 2px;
+	height: 356px;
+	background-color: var(--main-border-color);
+}
+
+.contentWrapper2{
+	margin-top: -32px;
+}
+
+.contentWrapper3{
+	margin-top: -30px;
+}
+
+.content1{
+	height: auto;
+	/*background-color: blue;*/
+}
+
+.content1:before{
+	content: "\25C8";
+	position: absolute;
+	font-size: 27px;
+	font-weight: bold;
+	color: var(--main-subheading-font-color);
+	top: 40px;
+	left: 33px;
+}
+
+.timeline:after{
+	content: "";
+	/*font-size: 30px;*/
+	position: absolute;
+	top: 56px;
+	left: 53px;
+	width: 25px;
+	height: 2px;
+	background-color: var(--main-border-color);
+}
+
+.timeline ul { list-style: none; }
+
+.timeline li::before {
+    content: "\25C6";
+    font-weight: bold;
+    padding-right: 6px;
+    margin-left: -15px;
+}
+
+.content2 ul{
+	margin-top: 10px;
+}
+
+.content2 .eduSubtitle{
+	font-family: 'Montserrat-SemiBold';
+}
+
+.content2 .eduDuration{
+	font-family: 'Montserrat-Regular';
+}
+
+.content2 .timeline:before{
+	content: '';
+	position: absolute;
+	top: 70px;
+	left: 40px;
+	width: 2px;
+	height: 117px;
+	background-color: var(--main-border-color);
+}
+
+.content2:before{
+	content: "\25C8";
+	position: absolute;
+	font-size: 27px;
+	font-weight: bold;
+	color: var(--main-subheading-font-color);
+	top: 40px;
+	left: 33px;
+}
+
+.content3 .timeline:before{
+	content: '';
+	position: absolute;
+	top: 71px;
+	left: 40px;
+	width: 2px;
+	height: 435px;
+	background-color: var(--main-border-color);
+}
+
+.content3 ul li:nth-child(1){
+	font-weight: bold;
+	font-size: 16px;
+}
+
+.content3:before{
+	content: "\25C8";
+	position: absolute;
+	font-size: 27px;
+	font-weight: bold;
+	color: var(--main-subheading-font-color);
+	top: 40px;
+	left: 33px;
+}
+
+.contentHeading{
+	font-size: 21px;
+	font-weight: bold;
+	color: var(--main-subheading-font-color);
+	/*background-color: red;*/
+	margin-top: 42px; 
+	font-family: 'Montserrat-SemiBold';
+}
+
+.blankSpace{
+	/*background-color: green;*/
+	margin-top: 43px;
+	height: 30px;
+}
+
+.skillsHeadOne{
+	/*background-color: maroon;*/
+	margin-top: 10px;
+}
+
+.skillsHeadOne .skillsTitle{
+	font-size: 15px;
+	font-family: 'Montserrat-SemiBold';
+	color: var(--main-subheading-font-color);
+}
+
+.skillsHeadOne .skillSubtitle{
+	font-family: 'Montserrat-SemiBold';
+}
+
+.skillsHeadOne .skillDuration{
+	font-family: 'Montserrat-Regular';
+}
+
+.skillsHeadOne li:nth-child(2){
+	margin-top: 42px;
+	/*background-color: red;*/
+}
+
+.skillsHeadTwo{
+	/*background-color: gray;*/
+	margin-top: 10px;
+}
+
+.skillsHeadTwo .skillsTitle{
+	font-size: 15px;
+	font-family: 'Montserrat-SemiBold';
+	color: var(--main-subheading-font-color);
+}
+
+.skillsHeadTwo .skillSubtitle{
+	font-family: 'Montserrat-SemiBold';
+}
+
+.skillsHeadTwo .skillDuration{
+	font-family: 'Montserrat-Regular';
+}
+
+.skillsHeadTwo li:nth-child(2){
+	margin-top: 62px;
+	/*background-color: red;*/
+}
+
+.skillsHeadThree{
+	margin-top: 10px;
+	/*background-color: red;*/
+}
+
+.skillsHeadThree .skillsTitle{
+	font-size: 15px;
+	font-family: 'Montserrat-SemiBold';
+	color: var(--main-subheading-font-color);
+}
+
+.skillsHeadThree .skillSubtitle{
+	font-family: 'Montserrat-SemiBold';
+}
+
+.skillsHeadThree .skillDuration{
+	font-family: 'Montserrat-Regular';
+}
+
+.skillsHeadThree li:nth-child(2){
+	margin-top: 62px;
+	/*background-color: red;*/
+}
+
+.skillsHeadFour{
+	margin-top: 10px;
+	/*background-color: red;*/
+}
+
+.skillsHeadFour .skillsTitle{
+	color: var(--main-subheading-font-color);
+}
+
+.skillsList{
+	/*background-color: brown;*/
+	margin-top: 22px;
+	position: absolute;
+	font-family: 'Montserrat-Regular';
+}
+
+.buttonMain{
+	margin-top: 115px;
+}
+
+.btnEdit{
+	border: 1px solid var(--main-border-color);
+    background-color: transparent;
+    color: var(--main-txt-color);
+    margin-left: -50px;
+    margin-right: 0px;
+}
+
+.btnEdit:hover{
+	color: var(--main-txt-color);
+}
+
+.btnSubmit{ 
+	background-color: var(--yellow-button-color);
+	margin-left: 33px;
+}
+
+.btnSubmit:hover{ 
+	color: var(--main-txt-color);
+}
+
+.rightSideMain{
+	min-height: 1375px;
+	height: auto;
+	border: 1px solid var(--main-border-color);
+}
+
+.rightSideHeader{
+	height: 215px;
+	border-bottom: 1px solid var(--main-border-color);
+}
+
+.rightContentHead{
+	font-size: 28px;
+	font-weight: bold;
+	color: var(--main-subheading-font-color);
+	padding-top: 30px;
+	padding-left: 22px;
+	font-family: 'Montserrat-SemiBold';
+}
+
+.rightSideTitle{
+	font-size: 20px;
+	font-weight: bold;
+	padding-left: 25px;
+	padding-top: 7px;
+	color: var(--main-subheading-font-color);
+	font-family: 'Montserrat-SemiBold';
+}
+
+.rightSideSub{
+	padding-left: 25px;
+	padding-top: 2px;
+	font-family: 'Montserrat-Regular';
+}
+
+.mapImg{
+	height: 175px;
+	margin-top: 20px;
+	margin-left: 50px;
+}
+
+.rightSideImg{
+	height: 300px;
+	margin-left: 30px;
+	margin-top: 330px;
+}

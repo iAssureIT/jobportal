@@ -1,0 +1,172 @@
+.jobListWrapper{
+	height: 670px;
+	background-color: var(--main-bg-color);
+	color: var(--main-txt-color);
+}
+
+.mainListContainer{
+	height: 670px;
+	background-color: var(--main-bg-color);
+}
+
+.listContainer{
+	height: 290px;
+	margin-top: 30px;
+	border: 1px solid var(--main-border-color);
+	border-radius: 10px;
+	padding-top: 21px;
+	background-color: #242933;
+}
+
+.leftSideContent{
+	height: 247px;
+	/*background-color: red;*/
+	margin-left: -10px;
+	border-right: 1px solid var(--main-border-color);
+}
+
+.iconsBar{
+	background-color: yellow;
+}
+
+.iconsBar ul{
+	list-style: none;
+	/*background-color: maroon;*/
+	height: 29px;
+	padding: 0;
+	padding-top: 2px;	
+	float: left;
+}
+ 
+.iconsBar ul li i{
+	margin-left: 22px;
+}
+
+.iconsBar ul li{
+	float: left;
+	/*background-color: green;*/
+	margin-top: 5px;
+}
+
+.iconsBar i{
+	color: var(--main-border-color);
+	font-size: 20px;
+	height: 20px;
+	/*float: left;*/
+}
+
+.infoLog{
+	padding: 6px 9px;
+	height: 29px;
+	color: var(--main-border-color);
+	border-radius: 3px;
+	/*background-color: red;*/
+	border: 1px solid var(--main-border-color);
+	width: 21%;
+	margin-left: 18px;
+	font-size: 11px;
+	float: left;
+	margin-top: 2px;
+}
+
+.designation{
+	font-size: 22px;
+	color: var(--main-border-color);
+	margin-top: 5px;
+	margin-left: 5px;
+	font-family: 'Montserrat-SemiBold';
+}
+
+.companyName{
+	margin-top: 5px;
+	margin-left: 5px;
+	font-family: 'Montserrat-SemiBold';
+}
+
+.jobListFont{
+	font-family: 'Montserrat-Regular';
+	font-size: 12px;
+}
+
+.experience{
+	font-size: 14px !important;
+	margin-left: 6px;
+	margin-top: 18px;
+	color: var(--main-border-color);
+}
+
+.monSal{
+	font-size: 10px !important; 
+	border: 1px solid #D3950A;
+	padding: 3px 5px;
+	border-radius: 50%;
+	margin-top: 13px;
+	margin-left: 3px;
+	color: var(--main-border-color);
+}
+
+.jLocation{
+	font-size: 16px !important;
+	padding: 3px 5px;
+	border-radius: 50%;
+	margin-top: 8px;
+	margin-left: 1px;
+	color: var(--main-border-color);
+}
+
+.noPositions{
+	font-size: 13px !important;
+	margin-left: 4px;
+	margin-top: 13px;
+	color: var(--main-border-color);
+}
+
+.verticleIcons i{
+	color: var(--main-border-color);
+}
+
+.verticleIcons ul li:nth-child(1){
+	border: 2px solid #D3950A;
+	padding-right: 17px;
+	padding-left: 3px; 
+	border-radius: 3px;
+	margin-left: 3px;
+	margin-top: 6px;
+}
+
+.verticleIcons ul li:nth-child(2){
+	padding-right: 16px;
+	padding-left: 3px; 
+	border-radius: 3px;
+	margin-left: 2px;
+	margin-top: 20px;
+	font-size: 19px;
+}
+
+.verticleIcons ul li:nth-child(3){
+	padding-right: 16px;
+	margin-left: 5px;
+	border-radius: 3px;
+	margin-top: 12px;
+	font-size: 20px;	
+}
+
+.verticleIcons ul{
+	list-style: none;	
+	padding: 0;
+}
+
+.verticleIcons .active{
+	background-color: var(--main-border-color);
+	padding: 4px;
+	color: #000;
+	margin-left: 4px;
+	margin-top: 6px;
+}
+
+.verticleIcons .active1{
+	color: var(--main-border-color);
+	font-size: 18px;
+	margin-left: 6px;
+	margin-top: 25px;
+}

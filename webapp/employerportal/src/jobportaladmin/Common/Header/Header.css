@@ -1,0 +1,103 @@
+.headerWrapper{
+	height:45px;
+	background-color: #2F3036;
+	
+}
+.headerLogoWrapper,.headerJobWrapper,
+.headerBellWrapper,.headerProfileWrapper,.headerToggelWrapper{
+	height:45px;
+	background-color:var(--header-bg-color);
+	border-right: 1px solid var(--header-border-color);
+	color:var(--main-txt-color);
+	float:left;
+	border-bottom: 2px solid var(--header-border-color)!important;
+}
+.headerJobWrapper{
+	width:28%;
+}
+.headerBellWrapper{
+	width:12%;
+}
+.headerLogoWrapper img{
+	height:32px;
+	margin-top:5px;
+	margin-left:5px;
+}
+.headerProfileWrapper{
+	width:42%;
+}
+.headerToggelWrapper{
+	width:18%;
+	border-right:none;
+}
+.headerJob{
+	height:25px;
+	width: 70%;
+	margin:auto;
+	margin-top:10px;
+	background-color:var(--yellow-button-color );
+	text-align:center;
+	color:var(--main-txt-color);
+	font-size:10px;
+	padding-top:7px;
+	border-radius:2px;
+}
+.headerJob i{
+	padding-right:5px;
+}
+.headerBellWrapper {
+	text-align:center;
+	font-size:17px;
+	color:var(--main-txt-color);
+
+}
+.headerBellWrapper i{
+	margin-top:13px;
+	transform: translate(-30%, 0%);
+}
+.headerBellbadge{
+	position: relative;
+	height:10px;
+	width:11px;
+	text-align:center;
+	background-color: var(--red-button-color);  
+	border-radius:50%;
+	font-size:8px;
+	top:9px;
+	left:24px;
+	float:left;
+}
+.headerProfileWrapper{
+	padding-top:8px;
+	padding-left:12px;
+}
+.headerProfileName{
+	font-size:12px;
+}
+.headerProfileImg{
+	width:30px;
+	height:30px;
+	border-radius:50%;
+	margin-left:15px;
+	margin-right:12px;
+}
+.headerBellWrapper i:hover,.headerProfileImg:hover,
+.headerToggel:hover, .headerJob:hover,
+.headerProfileWrapper i:hover{
+	cursor: pointer;
+}
+
+.headerToggel{
+	width:40%;
+	height:23px;
+	background-color: #303A50;
+	margin:auto;
+	margin-top:12px;
+	text-align:center;
+	border: 1px solid #4F515B;
+	border-radius:2px;
+}
+.headerToggel i{
+	padding-top:3px;
+}
+

@@ -1,0 +1,15 @@
+.footerWrapper{
+	height:40px;
+	background-color: var(--footer-bg-color);
+	border-top: 2px solid var(--header-border-color);
+	font-size:13px;
+	color:var(--main-txt-color);
+	padding-top:10px;
+}
+.footerSpan{
+	color:var(--main-subheading-font-color);
+}
+.footerRightSide{
+	text-align:right;
+	padding-right:10px;
+}

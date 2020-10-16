@@ -30,6 +30,7 @@ import axios from 'axios';
 import $ from 'jquery';
 import '../node_modules/font-awesome/css/font-awesome.min.css';
 import ReactDependentScript from "react-dependent-script";
+import './jobportaladmin/FontAwesomeIcons';
 
 axios.defaults.baseURL = process.env.REACT_APP_BASE_URL;
 console.log("axios.defaults.baseURL",axios.defaults.baseURL);

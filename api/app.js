@@ -54,7 +54,12 @@ const collageMasterRoutes				= require("./coreAdmin/CollageMaster/RoutesCollage.
 const moduleRoutes				        = require("./coreAdmin/moduleMaster/RoutesModuleMaster.js");
 const facilityRoutes				    = require("./coreAdmin/facilityMaster/RoutesFacilityMaster.js");
 const accessRoutes				    	= require("./coreAdmin/accessManagement/RoutesAccessMaster.js");
+<<<<<<< Updated upstream
 const jobPostRoutes				    	= require("./employer/jobPost/RoutesJobPost.js");
+=======
+
+const jobManagementRoutes		    	= require("./projectAdmin/jobManagement/RoutesJobPost.js");
+>>>>>>> Stashed changes
 
 //const AlertSystem		        = require("./coreAdmin/AlertSystem/Routes.js");
 
@@ -106,7 +111,9 @@ app.use((req, res, next) => {
 let rawdata = fs.readFileSync('./masterData.json');
 let masterData = JSON.parse(rawdata);
 
-
+//==========================================================
+// 				Core Admin APIs
+//==========================================================
 //URL's collection wise
 //coreAdmin
 app.use("/api/roles", rolesRoutes);
@@ -123,6 +130,9 @@ app.use("/api/entitymaster", entityRoutes);
 app.use("/api/paymentgateway", paymentgatewayRoutes);
 app.use("/api/paymentterms", paymentTermsRoutes);
 
+//==========================================================
+// 				Job Portal APIs
+//==========================================================
 app.use("/api/addresstypemaster", addressTypeMasterRoutes);
 app.use("/api/industrymaster", industryMasterRoutes);
 app.use("/api/subindustrymaster", subIndustryMasterRoutes);
@@ -143,7 +153,11 @@ app.use("/api/universitymaster", universityMasterRoutes);
 
 app.use("/api/modulemaster", moduleRoutes);
 app.use("/api/facilitymaster", facilityRoutes);
+<<<<<<< Updated upstream
 app.use("/api/jobposting", jobPostRoutes);
+=======
+app.use("/api/jobmanagement", jobManagementRoutes);
+>>>>>>> Stashed changes
 
 //app.use("/api/personmaster", personMasterRoutes);
 //p.use("/api/accessmaster", accessRoutes);

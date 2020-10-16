@@ -19,7 +19,8 @@ import Footer                                   from './coreadmin/common/footer/
 import EmployeeMaster                           from "./coreadmin/Master/EmployeeMaster/EmployeeMaster.js"
 import Leftsidebar                              from './coreadmin/common/leftSidebar/Leftsidebar.js';
 import Dashboard                                from './jobportaladmin/Dashboard/Dashboard.js'
-import Header                                   from './coreadmin/common/header/Header.js'; 
+import Header                                   from './jobportaladmin/Common/Header/Header.js'; 
+import FunctionalHeader                         from './jobportaladmin/Common/FunctionalHeader/FunctionalHeader.js'; 
 import JobPosting                               from './jobportaladmin/JobPosting/JobPosting.js'; 
 import JobList                                  from './jobportaladmin/JobList/JobList.js'; 
 
@@ -113,6 +114,7 @@ class Layout extends Component  {
                     <div className="content-wrapper">
                         <div className="wrapper">
                             <Header />
+                            <FunctionalHeader />
                             <div className="">
                                 <div className="row">
                                     {   
