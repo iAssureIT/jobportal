@@ -8,7 +8,7 @@ function EmployerListOfEntities(){
     return (
     	
         <div className="">
-            <ListOfEntities entity="Employer" />
+            <ListOfEntities entity="employer" />
         </div>
     );
 }

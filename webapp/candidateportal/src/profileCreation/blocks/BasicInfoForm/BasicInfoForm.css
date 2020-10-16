@@ -1,0 +1,147 @@
+@font-face {
+  font-family: Montserrat-Medium;
+  src: url("/Fonts/Montserrat-Medium.ttf");
+}
+@font-face {
+  font-family: Montserrat-Regular;
+  src: url("/Fonts/Montserrat-Regular.ttf");
+}
+@font-face {
+  font-family: Montserrat-Bold;
+  src: url("/Fonts/Montserrat-Bold.ttf");
+}
+@font-face {
+  font-family: Montserrat-SemiBold;
+  src: url("/Fonts/Montserrat-SemiBold.ttf");
+}
+@font-face {
+  font-family: Montserrat-Medium;
+  src: url("/Fonts/Montserrat-Medium.ttff");
+}
+.pageWrapper{
+	min-height: 650px;
+	height: auto;
+	width: 100%;
+	color: var(--main-txt-color);
+}
+
+.nameTitleForm{
+	color:var(--main-txt-color);
+}
+.formWrapper{
+	margin-top:20px;
+	color:var(--main-txt-color);
+
+}
+.nameTitleForm{
+	font-family: 'Montserrat-Medium';
+	font-size:12px;
+	font-weight:100!important;
+
+	color: #eee;
+}
+.nameTitleFormAge{
+	font-family: 'Montserrat-Bold';
+	font-weight:bold!important;
+	color: #fff;
+}
+.nameTitleFormStar{
+	color:#f00;
+	padding-left: 2px;
+}
+.inputBoxIcon{
+	border:1px solid var(--main-border-color)!important;
+	border-right:none!important;
+	background-color: var(--input-bg-color)!important;
+	color:var(--main-txt-color)!important;
+}
+.inputBoxIcon1 i{
+	padding:2px;
+}
+.inputBoxIcon2 i{
+	padding:1px;
+}
+.inputBox{
+	border-radius-right: 3px;
+	border:1px solid var(--main-border-color)!important;
+    background-color: var(--input-bg-color)!important;
+    color:var(--main-txt-color)!important;
+    font-size:13.5px!important;
+
+}
+
+.showFeild{
+	margin-top:7px;
+	font-size:10px;
+	font-weight:100!important;
+	letter-spacing: 1px;
+}
+.showFeild2{
+	margin-top:14px;
+	font-size:10px;
+	font-weight:100!important;
+	letter-spacing: 1px;
+}
+.genderFeildWrapper{
+	height:25px;
+	border:1px solid var(--main-border-color)!important;
+	width:100%;
+	border-radius:20px;
+	margin-top:3px;
+}
+.genderFeild{
+	height:21px;
+	margin-top:1px;
+	border-radius:20px;
+	font-size:10px;
+	font-weight:100!important;
+	padding-top:4px;
+	text-align:center;
+	background-color: var(--input-bg-color);
+}
+.genderFeild:hover{
+	cursor: pointer;
+}
+.genderFeildActive{
+	background-color:var(--main-border-color);
+	transition:all 0.5s;
+}
+.buttonNext{
+	height: 28px;
+	width: 110px;
+	background-color:var(--main-border-color);
+	margin-top:30px;
+	border:1px solid var(--main-border-color)!important;
+	border-radius:5px;
+	font-family: 'Montserrat-Medium';
+	font-size:13px;
+
+}
+.buttonBack{
+	height: 28px;
+	width: 110px;
+	margin-top:30px;
+	border:1px solid var(--main-border-color)!important;
+	border-radius:5px;
+	background-color:var(--main-bg-color);
+	font-family: 'Montserrat-Medium';
+	font-size:13px;
+
+}
+
+input[type="text"], textarea {
+
+  background-color : var(--main-bg-color); 
+ 
+
+}
+input:active{
+	 box-shadow:0px 0px 10px var(--main-border-color)!important;
+}
+.selectOption{
+	padding-right: 5px!important;
+}
+.errorMsg{
+  font-size:10px;
+  color:var(--red-button-color );
+}

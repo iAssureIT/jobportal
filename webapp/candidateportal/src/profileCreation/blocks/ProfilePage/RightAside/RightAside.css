@@ -1,0 +1,67 @@
+
+.rightAsideWrapper{
+	min-height:700px;
+	height:auto;
+	color: #dddddd;
+	padding-bottom:20px;
+}
+.videoWrapper{
+	position: relative;
+	height:180px;
+	border-radius:5px;
+	margin-bottom: 20px;
+	background-image:url("/Images/50.png");
+	background-repeat:no-repeat;
+	background-size:cover;
+}
+.videoLigo{
+	position:absolute;
+	width:100px;
+	left:50%;
+	top:50%;
+	text-align:center;
+	transform:translate(-50%,-50%);
+
+}
+.videoLigo img{
+	width:60px;
+}
+.certificationHeading{
+	font-size: 19px;
+	color: var(--main-heading-font-color);
+	font-family: Montserrat-SemiBold;
+}
+.caertificationName{
+	font-size:17px;
+	color: var(--main-subheading-font-color);
+	font-family: Montserrat-SemiBold;
+	
+}
+.caertificationNameWrapper{
+	margin-top:15px;
+}
+.caertificationCompanyName{
+	font-size:13px;
+	font-weight:600;
+	color: var(--main-txt-color);
+	margin-top:5px;
+	font-family: Montserrat-Medium;
+}
+.issueDate,.expireDate{
+	padding-top:3px;
+	font-size:12px;
+	font-family: Montserrat-Medium;
+}
+.certificationImages img{
+	width:50px;
+	padding-top:5px;
+}
+.HonnerImage{
+	margin-top:10px;
+	height:180px;
+}
+.HonnerImage img{
+	width:100%;
+	border-radius:5px;
+
+}

@@ -175,17 +175,7 @@ export default class AdminDashboard extends Component{
                   <a href="/employer/list" data-id="/employer/list" title="employer List" onClick={this.activeMenu.bind(this)}>
                     <i className="fa fa-circle-o dashr" />Employer Master
                   </a> 
-                </li>  
-                <li className="noPadLR"> 
-                  <a href="/employer/employee/lists" data-id="/employer/employee/lists" title="Employee List" onClick={this.activeMenu.bind(this)}>
-                    <i className="fa fa-circle-o dashr" />Employee Master
-                  </a> 
-                </li>  
-                <li className="noPadLR"> 
-                  <a href="/guest/lists" data-id="/guest/lists" title="Guest List" onClick={this.activeMenu.bind(this)}>
-                    <i className="fa fa-circle-o dashr" />Guest Master
-                  </a> 
-                </li>  
+                </li>   
               </ul>
             </li>
             <li className="treeview" >
@@ -198,35 +188,11 @@ export default class AdminDashboard extends Component{
               </a>
               <ul className="treeview-menu" >                    
                 <li className="noPadLR"> 
-                  <a href="/vendor/list" data-id="/vendor/list" title="Vendor List" onClick={this.activeMenu.bind(this)}>
-                    <i className="fa fa-circle-o dashr" />Vendor Master
+                  <a href="/candidate/list" data-id="/candidate/list" title="Vendor List" onClick={this.activeMenu.bind(this)}>
+                    <i className="fa fa-circle-o dashr" />Candidate Master
                   </a> 
                 </li> 
-                 <li className="noPadLR"> 
-                  <a href="/vendor/employee/lists" data-id="/vendor/employee/lists" title="Employee List" onClick={this.activeMenu.bind(this)}>
-                    <i className="fa fa-circle-o dashr" />Employee Master
-                  </a> 
-                </li>   
-                <li className="noPadLR"> 
-                  <a href="/VendorAllocationList" data-id="/VendorAllocationList" title="Mapped List" onClick={this.activeMenu.bind(this)}>
-                    <i className="fa fa-circle-o dashr" />Vendor Mapping
-                  </a> 
-                </li>    
-              { /* <li className="noPadLR"> 
-                  <a href="/supplier/list" data-id="/supplier/list" title="Supplier List" onClick={this.activeMenu.bind(this)}>
-                    <i className="fa fa-circle-o dashr" />Supplier Master
-                  </a> 
-                </li> */}    
-                <li className="noPadLR"> 
-                  <a href="/vehicle-list" data-id="/vehicle-list" title="Vehicle List" onClick={this.activeMenu.bind(this)}>
-                    <i className="fa fa-circle-o dashr" />Vehicle Master
-                  </a> 
-                </li>    
-                <li className="noPadLR"> 
-                  <a href="/driver/lists" data-id="/driver/lists" title="Driver List" onClick={this.activeMenu.bind(this)}>
-                    <i className="fa fa-circle-o dashr" />Driver Master
-                  </a> 
-                </li>  
+                  
               </ul>
             </li>
             <li className="singleTreeview" onClick={this.clickDashboard.bind(this)}>

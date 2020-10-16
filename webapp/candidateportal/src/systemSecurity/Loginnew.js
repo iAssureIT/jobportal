@@ -1,0 +1,318 @@
+import React, { Component } from 'react';
+import { connect }        from 'react-redux';
+import 'font-awesome/css/font-awesome.min.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './LoginForm.css';
+import $ from 'jquery';
+import axios from 'axios';
+import jQuery from 'jquery';
+import 'jquery-validation';
+import swal from 'sweetalert';
+import { BrowserRouter, Route, Link } from "react-router-dom";
+
+class Login extends Component {
+
+  constructor() {
+    super();
+    this.state = {
+      loggedIn: false,
+      btnLoading: false,
+      auth: {
+        email: '',
+        pwd: '',
+      },
+      messageData: {
+        "type": "",
+      }
+    }
+  }
+  componentDidMount() {
+
+    $.validator.addMethod("regxemail", function (value, element, regexpr) {
+      return regexpr.test(value);
+    }, "Please enter a valid email address.");
+
+    jQuery.validator.setDefaults({
+      debug: true,
+      success: "valid"
+    });
+    $("#login").validate({
+      rules: {
+        loginusername: {
+          required: true,
+          regxemail : /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/
+        },
+        loginpassword: {
+          required: true
+        }
+      },
+      errorPlacement: function (error, element) {
+        if (element.attr("name") == "loginusername") {
+          error.insertAfter("#loginusername");
+        }
+        if (element.attr("name") == "loginpassword") {
+          error.insertAfter("#loginpassword1");
+        }
+      }
+    });
+  }
+  handleChange(event){
+    var fieldValue=event.currentTarget.value;
+    // console.log("fieldValue",fieldValue);
+     var fieldKey=event.currentTarget.name;
+     console.log("fieldKey",fieldKey);
+    this.setState({
+      [fieldKey]:fieldValue
+    });
+    }
+  userlogin(event) {
+    event.preventDefault();
+    var auth = {
+      email: this.refs.loginusername.value,
+      password: this.refs.loginpassword.value,
+      role: "vendoradmin"
+    }
+    
+    if ($("#login").valid()) {
+      document.getElementById("logInBtn").value = 
+      this.setState({ btnLoading: true });
+      // axios.post('/api/auth/post/login', auth) 
+      console.log("Before Post auth:==>",auth);  
+      axios.post('/api/auth/post/login', auth)
+      .then((response) => {
+        this.setState({ btnLoading: false });
+        console.log("response.data userDetails:==>",response.data);  
+         axios.defaults.headers.common['Authorization'] = 'Bearer '+response.data.token;
+          if (response.data.ID) {
+             var  userDetails = {
+              firstName : response.data.userDetails.firstName, 
+              lastName  : response.data.userDetails.lastName, 
+              email     : response.data.userDetails.email, 
+              phone     : response.data.userDetails.phone, 
+              city      : response.data.userDetails.city,
+              companyID : response.data.userDetails.companyID,
+              companyName : response.data.userDetails.companyName,
+              locationID: response.data.userDetails.locationID,
+              user_id   : response.data.userDetails.user_id,
+              roles     : response.data.userDetails.roles,
+              passwordreset: response.data.userDetailspasswordreset,
+              token     : response.data.userDetails.token, 
+              loginTime : response.data.userDetails.loginTime, 
+            }
+            document.getElementById("logInBtn").value = 'Sign In';
+            localStorage.setItem("companyName", response.data.companyName);
+            localStorage.setItem("token", response.data.token);
+            localStorage.setItem("user_ID", response.data.ID);
+            localStorage.setItem("roles", response.data.roles);
+            localStorage.setItem("loginTime", response.data.loginTime);
+            localStorage.setItem('userDetails', JSON.stringify(userDetails));
+             axios.get("/api/entitymaster/getCompany/"+response.data.userDetails.companyID)
+            .then((response) => {
+              console.log('company_Id===',response.data)
+                localStorage.setItem("company_Id",response.data._id);
+            })
+            .catch((error) => {
+            })
+            
+            this.setState({
+              loggedIn: true
+            })
+            // console.log("In login data====>>",response.data);
+            if(response.data.passwordreset === false  ){
+                this.props.history.push('/reset-password/'+response.data.ID);
+            }else{
+              const roles = localStorage.getItem("roles");
+              var company_Id = localStorage.getItem("company_Id");
+              var roleArr = [];
+              roleArr.push(roles);
+              if(roles.indexOf("vendoradmin")>-1)
+              {
+                axios.get("/api/entitymaster/get/one/"+company_Id)
+                .then((response)=>{
+                  console.log("response dash",response);
+                  this.setState({
+                      profileStatus : response.data[0].profileStatus,
+                  },()=>{
+                     if(this.state.profileStatus== "New"){
+                      this.props.history.push("/company-profile")
+                      window.location.reload()
+
+                    }else{
+                      axios.get("/api/contract/get/one/entity/" + company_Id)
+                      .then((response) => {
+                        if(response.data.length>0)
+                        {
+                          console.log("response",response.data);
+                          var contractDetails = response.data[0];
+                          this.setState({
+                              contractDetails: contractDetails
+                          },()=>{
+                            if(this.state.contractDetails.status !== "Approved"){
+                                this.props.history.push("/contract-view")
+                                window.location.reload()
+
+
+                            }else{
+                              var user_id = localStorage.getItem("user_ID");
+                             axios.get('/api/personmaster/get/details/' + user_id)
+                              .then((res) => {
+                                console.log("res empProfileStatus",res)
+                                if(res.data[0].profileStatus && res.data[0].profileStatus === "New" )
+                                {
+                                 this.props.history.push("/my-profile")
+                                  window.location.reload()
+
+                                }else{
+                                this.props.history.push("/dashboard")
+                                window.location.reload()
+                                }
+                                
+                              })
+                              .catch((err) => {
+                              })
+
+                            
+                            }
+                          })
+                        }else{
+                           this.props.history.push("/no-contract")
+                                window.location.reload()
+                        }
+                      })
+                      .catch((error) => {
+                      })
+                    }
+                  });
+                })
+                .catch((error)=>{
+                })
+            }else{
+              this.props.history.push("/dashboard")
+              window.location.reload()
+
+            }
+          }
+             
+          }else if(response.data.message == "USER_BLOCK"){
+            console.log("In USER_BLOCK")
+            swal({
+              title: "You are blocked by admin. Please contact Admin.",
+              text: "You are blocked by admin. Please contact Admin."
+            });
+          }else if(response.data.message == "NOT_REGISTER"){
+            console.log("In NOT_REGISTER")
+            swal({
+              text : "This email is not registered. Please do signup."
+            });
+          }else if(response.data.message == "INVALID_PASSWORD"){
+            swal({
+              text : "You have entered wrong password. Please try again."
+            });
+          }else if(response.data.message == "USER_UNVERIFIED"){
+            swal({
+              text : "You have not verified your account. Please verify your account."
+            })
+            .then((value)=>{
+              var emailText = {
+                "emailSubject"	: "Email Verification", 
+                "emailContent"  : "As part of our registration process, we screen every new profile to ensure its credibility by validating email provided by user. While screening the profile, we verify that details put in by user are correct and genuine.",
+              }
+              axios.patch('/api/auth/patch/setsendemailotpusingEmail/'+this.refs.loginusername.value, emailText)
+              .then((response)=>{
+                swal("We send you a Verification Code to your registered email. Please verify your account.");
+                this.props.history.push("/confirm-otp/" + response.data.userID);
+              })
+              .catch((error)=>{
+                swal(" Failed to sent OTP");
+              })    
+            });
+          }
+      })
+      .catch((error) => {
+        console.log("error",error);
+         if(error.response&&error.response.status===401){
+          swal("Invalid Email or Password","Email ID does not exists");
+        }else if(error.response&&error.response.status===409){
+          swal("Invalid Email or Password","Please Enter a valid password");
+        }else{
+          swal("Invalid Email or Password","Please try again");
+        }
+        this.setState({ btnLoading: false });
+      });
+    }
+  }
+  showPassword() {
+    $('.showPwd').toggleClass('showPwd1');
+    $('.hidePwd').toggleClass('hidePwd1');
+    return $('#loginpassword').attr('type', 'text');
+  }
+  hideSignPass() {
+    $('.showPwd').toggleClass('showPwd1');
+    $('.hidePwd').toggleClass('hidePwd1');
+    return $('#loginpassword').attr('type', 'password');
+  }
+  Closepagealert(event) {
+    event.preventDefault();
+    $(".toast-error").html('');
+    $(".toast-success").html('');
+    $(".toast-info").html('');
+    $(".toast-warning").html('');
+    $(".toast-error").removeClass('toast');
+    $(".toast-success").removeClass('toast');
+    $(".toast-info").removeClass('toast');
+    $(".toast-warning").removeClass('toast');
+  }
+  render() {
+    return (
+      <div className="loginFormOuter col-lg-12">
+          <div className="loginFormInner col-lg-4 col-lg-offset-4">
+            <div className="signInTitle col-lg-12">Sign In
+            </div>
+            
+            <div className="loginSocialMedia">
+              <div className="loginSocialMediaInner">
+                <div className="loginLinkedIn"><i className="fa fa-linkedin"></i></div>
+                <div className="loginGoogle"><i className="fa fa-google"></i></div>
+              </div>    
+            </div>
+            <div className="loginOr col-lg-12">
+              <hr className="loginHr"/>
+              <div className="loginOrText">or
+              </div>
+              <hr className="loginHr"/>
+            </div>
+           <form id="login"> 
+            <div className="col-lg-12 form-group loginFormGroup" >
+              <div className="input-group">
+                <span className="input-group-addon loginInputIcon1"><i className="fa fa-mobile"></i></span>
+                <input type="tel" id="mobileNumber" name="mobileNumber" placeholder="Mobile Number" value={this.state.mobileNumber} onChange={this.handleChange.bind(this)} ref="loginusername" className="form-control loginInputBox"/>
+              </div>
+            </div>
+            <div className="col-lg-12 form-group" >
+              <div className="input-group">
+                <span className="input-group-addon loginInputIcon2"><i className="fa fa-lock"></i></span>
+                <input type="password" id="password" name="password" placeholder="Password" value={this.state.password} onChange={this.handleChange.bind(this)} ref="loginpassword" className="form-control loginInputBox"/>
+                <span className="input-group-addon loginInputIcon3"><i className="fa fa-eye" onClick={this.showPassword.bind(this)}></i></span>
+              </div>
+            </div>
+            <div className="col-lg-12 buttonWrapper">
+             <button className="btn col-lg-12 buttonSignIn" id="logInBtn" onClick={this.userlogin.bind(this)}>Sign In</button>
+            </div>
+          </form>
+
+            <div className="col-lg-12 loginLinks">
+            <div className="row">
+                <div className="col-lg-6">
+                  <a className=" loginSignUp" href="#"><u>Sign Up?</u></a>
+                </div>
+                <div className="col-lg-6">
+                  <a className=" loginForgotPassword" href="#"><u>Forgot Password?</u></a>
+                </div>
+            </div>  
+            </div>
+          </div>
+        </div>
+    );
+  }
+}
+export default Login;

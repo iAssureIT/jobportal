@@ -1,0 +1,20 @@
+
+.rating{
+	font-size:18px!important;
+	margin-right:18px;
+	margin-top:9px;
+	color:var(--main-border-color);
+}
+.stars{
+	color: var(--main-border-color);
+}
+.rating:hover{
+	cursor: pointer;
+}
+.textareaFix{
+	resize:none;
+	height:100px; 
+    min-height:100px;  
+    max-height:auto;
+    border-radius:5px!important;
+}

@@ -1,0 +1,41 @@
+:root {
+  --main-bg-color                   : #1f262d;
+  --header-bg-color                 : #191c24;
+  --footer-bg-color                 : #191c24;
+  --input-bg-color                  : #242933;
+
+  --main-txt-color                  : #ffffff;
+
+  --main-heading-font-color         : #f5a721;
+  --main-subheading-font-color      : #f5a721;
+  --main-white-subheading-font-color: #f5a721;
+
+  --header-border-color             : #4b5666;
+  --main-border-color               : #f5a721;
+
+  --yellow-button-color             : #f5a721;
+  --red-button-color                : #ff4444;
+}
+.basicInfoWrapper{
+	min-height: 100px;
+	height: auto;
+	color:#fff;
+  background-color: var(--main-bg-color );
+  padding-bottom:70px;
+}
+.BasicInfoBlock{
+  min-height: 430px;
+  height: auto;
+	border:3px solid var(--main-border-color);
+	border-radius: 10px;
+	padding-top: 30px;
+  padding-bottom: 30px;
+  background-color: var(--main-bg-color );
+}
+.mainPagesWrapper{
+  min-height: 430px;
+  height:auto;
+  background-color: var(--main-bg-color );
+}
+
+
