@@ -8,10 +8,9 @@ const jobsSchema = mongoose.Schema({
 		jobTitle			: String,
 		jobLocationCity		: String,
 		jobLocationCountry 	: String,
-		jobGeoLocation 		: {
-								lat: String,
-								long: String,
-						      },
+		industryId			: String,
+		functionalAreaId	: String,
+		subFunctionalAreaId : String,
 		workFromHome 		: Boolean,
 		contactPersonName 	: String,
 		contactPersonEmail 	: String,

@@ -14,10 +14,9 @@ exports.insertJobs = (req, res, next)=>{
 				"jobTitle"				: req.body.jobTitle,
 				"jobLocationCity"		: req.body.jobLocationCity,
 				"jobLocationCountry" 	: req.body.jobLocationCountry,
-				"jobGeoLocation" 		: {
-										"lat": req.body.lat,
-										"long": req.body.long,
-								      },
+				"industryId"			: req.body.industryId,
+				"functionalAreaId" 		: req.body.functionalAreaId,
+				"subFunctionalAreaId"	: req.body.subFunctionalAreaId,
 				"workFromHome" 			: req.body.workFromHome,
 				"contactPersonName" 	: req.body.contactPersonName,
 				"contactPersonEmail" 	: req.body.contactPersonEmail,

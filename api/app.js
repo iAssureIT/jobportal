@@ -54,17 +54,9 @@ const collageMasterRoutes				= require("./coreAdmin/CollageMaster/RoutesCollage.
 const moduleRoutes				        = require("./coreAdmin/moduleMaster/RoutesModuleMaster.js");
 const facilityRoutes				    = require("./coreAdmin/facilityMaster/RoutesFacilityMaster.js");
 const accessRoutes				    	= require("./coreAdmin/accessManagement/RoutesAccessMaster.js");
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
+
 const jobPostRoutes				    	= require("./employer/jobPost/RoutesJobPost.js");
-=======
 
-const jobManagementRoutes		    	= require("./projectAdmin/jobManagement/RoutesJobPost.js");
->>>>>>> Stashed changes
-=======
-
-const jobManagementRoutes		    	= require("./projectAdmin/jobManagement/RoutesJobPost.js");
->>>>>>> Stashed changes
 
 //const AlertSystem		        = require("./coreAdmin/AlertSystem/Routes.js");
 
@@ -158,15 +150,7 @@ app.use("/api/universitymaster", universityMasterRoutes);
 
 app.use("/api/modulemaster", moduleRoutes);
 app.use("/api/facilitymaster", facilityRoutes);
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
 app.use("/api/jobposting", jobPostRoutes);
-=======
-app.use("/api/jobmanagement", jobManagementRoutes);
->>>>>>> Stashed changes
-=======
-app.use("/api/jobmanagement", jobManagementRoutes);
->>>>>>> Stashed changes
 
 //app.use("/api/personmaster", personMasterRoutes);
 //p.use("/api/accessmaster", accessRoutes);
