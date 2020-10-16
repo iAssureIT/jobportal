@@ -7,20 +7,27 @@ import 'font-awesome/css/font-awesome.min.css';
 import axios from 'axios';
 
 // Section: 1 - SystemSecurity ***********************************
-import Login                from './candidateprofile/systemSecurity/Login.js';
-import ConfirmOtp           from './candidateprofile/systemSecurity/ConfirmOtp.js';
-import ForgotPassword       from './candidateprofile/systemSecurity/ForgotPassword.js';
-import ResetPassword        from './candidateprofile/systemSecurity/ResetPassword.js';
-import SignUp               from './candidateprofile/systemSecurity/SignUp.js';
-import ResetPasswordFirstLogin from './candidateprofile/systemSecurity/ResetPasswordFirstLogin.js';
-import Header               from './candidateprofile/common/header/Header.js'; 
-import Footer               from './candidateprofile/common/footer/Footer.js';
-import Leftsidebar          from './candidateprofile/common/leftSidebar/Leftsidebar.js';
+import Login                from './systemSecurity/Login.js';
+import ConfirmOtp           from './systemSecurity/ConfirmOtp.js';
+import ForgotPassword       from './systemSecurity/ForgotPassword.js';
+import ResetPassword        from './systemSecurity/ResetPassword.js';
+import SignUp               from './systemSecurity/SignUp.js';
+import ResetPasswordFirstLogin from './systemSecurity/ResetPasswordFirstLogin.js';
+import Header               from './common/header/Header.js'; 
+import Footer               from './common/footer/Footer.js';
+import Leftsidebar          from './common/leftSidebar/Leftsidebar.js';
 import CoreLayout           from './coreadmin/CoreLayout/CoreLayout.js';
 
 //import CompanyProfile       from './candidateprofile/Profile/CompanyProfile/CompanyProfile.js';
-import CandidateProfile            from './candidateprofile/Profile/CandidateProfile.js';
-
+import CandidateProfile            from './profileCreation/CandidateProfile.js';
+import CandidateBasicInfo     from './profileCreation/CandidateBasicInfo.js';
+import CandidateAddress     from './profileCreation/CandidateAddress.js';
+import CandidateContact     from './profileCreation/CandidateContact.js';
+import CandidateAcademics     from './profileCreation/CandidateAcademics.js';
+import CandidateCertification     from './profileCreation/CandidateCertification.js';
+import CandidateExperience     from './profileCreation/CandidateExperience.js';
+//import CandidateProfile     from './blocks/CandidateProfile/CandidateProfile.js';
+//import CandidateList     from './blocks/CandidateList/CandidateList.js';
 
 class Layout extends Component  {
 
@@ -101,40 +108,35 @@ class Layout extends Component  {
             return (
             <Router>
                 <div className="hold-transition skin-blue fixed sidebar-mini">
-                    <div className="content-wrapper">
-                        <div className="wrapper">
-                            <Header />
-                            <div className="">
-                                <div className="row">
-                                    {   
-                                        (roles.indexOf("vendoradmin")>-1) ?
-                                            this.state.sidebar && this.state.empProfileStatus?
-                                                <Leftsidebar/>
-                                            :
-                                            null
-                                        :
-                                        <Leftsidebar/>
-                                    }
-                                    <div className="container-fluid main-container">
-                                        <div className="row">
-                                            <div className="dashboardWrapper" >
-                                                <div className="backColor col-lg-12 col-md-12 col-sm-12 col-xs-12" >
-                                                  {/*  <CoreLayout />*/}
-                                                    <Switch >
-                                                        
-                                                        <Route path="/"                                            component={CandidateProfile} exact />
-                                                        <Route path="/profile"                                   component={CandidateProfile} exact />  
-                                                        
-                                                    </Switch>
-                                                </div>
+                    <div className="wrapper">
+                        <Header />
+                        <div className="">
+                            <div className="row">
+                                <div className="container-fluid main-container">
+                                    <div className="row">
+                                        <div className="dashboardWrapper" >
+                                            <div className="backColor col-lg-12 col-md-12 col-sm-12 col-xs-12" >
+                                              {/*  <CoreLayout />*/}
+                                                <Switch >
+                                                    
+                                                    <Route exact path="/basic-info"        component={CandidateBasicInfo}  />
+                                                    <Route exact path="/address/:candidateID"           component={CandidateAddress}  />
+                                                    <Route exact path="/contact/:candidateID"           component={CandidateContact}  />
+                                                    <Route exact path="/academics/:candidateID"         component={CandidateAcademics}  />
+                                                    <Route exact path="/certification/:candidateID"     component={CandidateCertification}  />
+                                                    <Route exact path="/experience/:candidateID"        component={CandidateExperience}  />
+                                                    {/*<Route exact path="/profile"           component={CandidateProfile}  />
+                                                    <Route exact path="/list"              component={CandidateList}  />  
+                                                    */}
+                                                </Switch>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <Footer />
+                        </div>
+                        <Footer />
                 </div>
             </Router>
             );
