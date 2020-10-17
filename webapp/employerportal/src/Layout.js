@@ -15,11 +15,13 @@ import ResetPassword from './coreadmin/systemSecurity/ResetPassword.js';
 import SignUp from './coreadmin/systemSecurity/SignUp.js';
 
 
-import Footer                                   from './coreadmin/common/footer/Footer.js';
+/*import Footer                                   from './coreadmin/common/footer/Footer.js';*/
 import EmployeeMaster                           from "./coreadmin/Master/EmployeeMaster/EmployeeMaster.js"
-import Leftsidebar                              from './coreadmin/common/leftSidebar/Leftsidebar.js';
+import Leftsidebar                              from './jobportaladmin/Common/leftSidebar/Leftsidebar.js';
 import Dashboard                                from './jobportaladmin/Dashboard/Dashboard.js'
 import Header                                   from './jobportaladmin/Common/Header/Header.js'; 
+import Footer                                   from './jobportaladmin/Common/Footer/Footer.js';
+/*import Leftsidebar                              from './jobportaladmin/Common/LeftSidebar/Leftsidebar.js';*/
 import FunctionalHeader                         from './jobportaladmin/Common/FunctionalHeader/FunctionalHeader.js'; 
 import JobPosting                               from './jobportaladmin/JobPosting/JobPosting.js'; 
 import JobList                                  from './jobportaladmin/JobList/JobList.js'; 
@@ -111,10 +113,9 @@ class Layout extends Component  {
             return (
             <Router>
                 <div className="hold-transition skin-blue fixed sidebar-mini">
-                    <div className="content-wrapper">
+                    <div className="content-wrapper" style={{paddingTop:0}}>
                         <div className="wrapper">
                             <Header />
-                            <FunctionalHeader />
                             <div className="">
                                 <div className="row">
                                     {   

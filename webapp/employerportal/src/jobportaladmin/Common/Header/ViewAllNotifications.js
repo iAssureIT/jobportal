@@ -17,7 +17,7 @@ class ViewAllNotifications extends Component {
 
   componentDidMount() {
     const user_ID = localStorage.getItem("user_ID");
-    axios.get('/api/notifications/get/allList/'+user_ID)
+    axios.get('/api/notifications/get/list/Read/'+user_ID)
       .then(notifications => {
         console.log('notifications: ',notifications)
         this.setState({ 
@@ -34,7 +34,7 @@ class ViewAllNotifications extends Component {
 		axios.delete('/api/notifications/delete/'+id)
 		.then((response)=> {
 			 const user_ID = localStorage.getItem("user_ID");
-			    axios.get('/api/notifications/get/allList/'+user_ID)
+			    axios.get('/api/notifications/get/list/Read/'+user_ID)
 			      .then(notifications => {
 			        console.log('notifications: ',notifications)
 			        this.setState({ 
@@ -67,7 +67,7 @@ class ViewAllNotifications extends Component {
 			          				
 			          				<div className="col-lg-12 marginStyle">
 			          					<div className="table-responsive col-lg-12 col-md-12">
-				          					<table className="table table-bordered table-striped">
+				          					<table className="table table-bordered">
 				          						<thead>
 					                            <tr style={{"background":"#eee"}}>
 			              							<td className="textCenter"><strong> Notification </strong></td>
@@ -115,7 +115,7 @@ class ViewAllNotifications extends Component {
 				          									)
 				          								})
 				          							:
-				          							<tr><td colSpan="3" className="textAlignCenter">No Data Found</td></tr>
+				          							<tr>No Data Found</tr>
 				          							}
 				          						</tbody>
 				          					</table>

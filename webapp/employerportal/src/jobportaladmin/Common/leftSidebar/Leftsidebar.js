@@ -138,15 +138,32 @@ export default class AdminDashboard extends Component{
             <li className="singleTreeview" onClick={this.clickDashboard.bind(this)}>
                 <a href="/dashboard"  title="Dashboard" onClick={()=>this.openMenu("dashboard")}>
                   <i className="fa fa-dashboard" aria-hidden="true"></i>
-                  <span className="sidebarMenuTitle">Dashboard aaa</span>
+                  <span className="sidebarMenuTitle">Dashboard</span>
                 </a>
               </li>
                 
-                <li className="sidebarMenuText employeeMenuItem menuItem" >
-                  <a href="/booking-details" title="Booking List">
-                    <i className="fa fa-file"></i>
-                    <span className="iconTitle">Booking List </span>
+                <li className="treeview" >
+                  <a href="JavaScript:void(0);" onClick={()=>this.openMenu("vendorData")} title="Vendor Master">
+                    <i className="fa fa-book" aria-hidden="true"></i>
+                    <span className="smsidenames sidebarMenuTitle"> Job Management </span>
+                    <span className="pull-right-container">
+                      <i className={"fa pull-right menu-icon-toggle "+(vendorData?this.openIcon:this.closeIcon)} />
+                    </span>
                   </a>
+                  <ul className="treeview-menu" >                    
+                    
+                     <li className="noPadLR"> 
+                      <a href="/post-job" data-id="/post-job" title="Post Job" onClick={this.activeMenu.bind(this)}>
+                        <i className="fa fa-circle-o dashr" />Job Posting
+                      </a> 
+                    </li>   
+                    <li className="noPadLR"> 
+                      <a href="/job-list" data-id="/job-list" title="Job List" onClick={this.activeMenu.bind(this)}>
+                        <i className="fa fa-circle-o dashr" />All Jobs 
+                      </a> 
+                    </li>    
+                  
+                  </ul>
                 </li>
                
           
