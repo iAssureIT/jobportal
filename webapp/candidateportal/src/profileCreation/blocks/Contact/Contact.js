@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-
+import { withRouter } from 'react-router-dom';
 import '../BasicInfoForm/BasicInfoForm.css';
 import './Contact.css';
 
@@ -17,7 +17,7 @@ class Contact extends Component{
 	//========== User Define Function Start ================
 
 
-	handelChange(event){
+	handleChange(event){
 		var value = event.currentTarget.value;
 		var name  = event.currentTarget.name;
 
@@ -26,8 +26,11 @@ class Contact extends Component{
 			[name]:value,
 		})
 	}
-
-	handelSubmit(event){
+	handleBack(event){
+		event.preventDefault();
+		this.props.history.push("/address/:candidateID");
+	}
+	handleSubmit(event){
 		event.preventDefault();
 
 		var status =  this.validateForm();
@@ -43,6 +46,7 @@ class Contact extends Component{
 			alternate     : "",
 			email         : "",
 		})
+		this.props.history.push("/academics/:candidateID");
 	}
 	//========== User Define Function End ==================
 	//========== Validation Start ==================
@@ -104,7 +108,7 @@ class Contact extends Component{
 								<label htmlFor="mobile" className="nameTitleForm">Mobile Number<sup className="nameTitleFormStar">*</sup></label>
 								<div className="input-group ">
 									<span className="input-group-addon inputBoxIcon"><i className="fa fa-mobile"></i> </span> 
-									<input type="text" name="mobile" id="mobile" className="form-control inputBox" value={this.state.mobile} onChange={this.handelChange.bind(this)} />
+									<input type="text" name="mobile" id="mobile" className="form-control inputBox" value={this.state.mobile} onChange={this.handleChange.bind(this)} />
 								</div> 
 								<span id="mobileError" className="errorMsg"></span>
 							</div>
@@ -113,7 +117,7 @@ class Contact extends Component{
 								<label htmlFor="alternate" className="nameTitleForm">Alternate Mobile Number<sup className="nameTitleFormStar">*</sup></label>
 								<div className="input-group ">
 									<span className="input-group-addon inputBoxIcon"><i className="fa fa-mobile"></i> </span> 
-									<input type="text" name="alternate" id="alternate" className="form-control inputBox" value={this.state.alternate} onChange={this.handelChange.bind(this)} />
+									<input type="text" name="alternate" id="alternate" className="form-control inputBox" value={this.state.alternate} onChange={this.handleChange.bind(this)} />
 								</div> 
 								<span id="alternateError" className="errorMsg"></span>
 							</div>
@@ -122,19 +126,19 @@ class Contact extends Component{
 								<label htmlFor="email" className="nameTitleForm">Personal Mail ID<sup className="nameTitleFormStar">*</sup></label>
 								<div className="input-group ">
 									<span className="input-group-addon inputBoxIcon"><i className="fa fa-envelope-o"></i> </span> 
-									<input type="email" name="email" id="email" className="form-control inputBox" value={this.state.email} onChange={this.handelChange.bind(this)} />
+									<input type="email" name="email" id="email" className="form-control inputBox" value={this.state.email} onChange={this.handleChange.bind(this)} />
 								</div> 
 								<span id="emailError" className="errorMsg"></span>
 							</div>
 
 						</div>
 
-						<button className="buttonBack pull-left" onClick={this.handelSubmit.bind(this)}> <i className="fa fa-angle-left"> - Back</i></button>
-						<button className="buttonNext pull-right" onClick={this.handelSubmit.bind(this)}>Next - <i className="fa fa-angle-right "></i></button>
+						<button className="buttonBack pull-left" onClick={this.handleBack.bind(this)}> <i className="fa fa-angle-left"> - Back</i></button>
+						<button className="buttonNext pull-right" onClick={this.handleSubmit.bind(this)}>Next - <i className="fa fa-angle-right "></i></button>
 					</form>
 				</div>
 			);
 	}
 }
 
-export default Contact;
+export default withRouter(Contact);

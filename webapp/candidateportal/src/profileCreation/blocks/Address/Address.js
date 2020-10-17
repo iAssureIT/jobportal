@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
+import { withRouter } from 'react-router-dom';
 import '../BasicInfoForm/BasicInfoForm.css';
 
 
@@ -25,7 +25,7 @@ class Address extends Component{
 	//========== User Define Function Start ================
 
 
-	handelChange(event){
+	handleChange(event){
 		var value = event.currentTarget.value;
 		var name  = event.currentTarget.name;
 
@@ -34,8 +34,11 @@ class Address extends Component{
 			[name]:value,
 		})
 	}
-
-	handelSubmit(event){
+	handleBack(event){
+		event.preventDefault();
+		this.props.history.push("/basic-info");
+	}
+	handleSubmit(event){
 		event.preventDefault();
 
 		var status =  this.validateForm();
@@ -64,6 +67,7 @@ class Address extends Component{
 			pincode            : "",
 	
 		})
+		this.props.history.push("/contact/:candidateID");
 	}
 	//========== User Define Function End ==================
 
@@ -144,7 +148,7 @@ class Address extends Component{
 									<label htmlFor="addressType" className="nameTitleForm">Address Type<sup className="nameTitleFormStar">*</sup></label>
 									<div className="input-group ">
 										<span className="input-group-addon inputBoxIcon inputBoxIcon1"><i className="fa fa-map-marker"></i></span> 
-										<select className="form-control inputBox" id="addressType" value={this.state.addressType} name="addressType" onChange={this.handelChange.bind(this)}>
+										<select className="form-control inputBox" id="addressType" value={this.state.addressType} name="addressType" onChange={this.handleChange.bind(this)}>
 										  	<option > ---- select ---- </option>
 										  	{
 										  		this.state.inputAddressType.length>0
@@ -170,7 +174,7 @@ class Address extends Component{
 									<label htmlFor="houseNumber" className="nameTitleForm">House/Building Number<sup className="nameTitleFormStar">*</sup></label>
 									<div className="input-group ">
 										<span className="input-group-addon inputBoxIcon inputBoxIcon1"><i className="fa fa-map-marker"></i></span> 
-										<input type="text" name="houseNumber" id="houseNumber" className="form-control inputBox " value={this.state.houseNumber} onChange={this.handelChange.bind(this)} />
+										<input type="text" name="houseNumber" id="houseNumber" className="form-control inputBox " value={this.state.houseNumber} onChange={this.handleChange.bind(this)} />
 									</div> 
 									<span id="houseNumberError" className="errorMsg"></span>
 								</div>
@@ -192,7 +196,7 @@ class Address extends Component{
 									<label htmlFor="address" className="nameTitleForm">Address</label>
 									<div className="input-group ">
 										<span className="input-group-addon inputBoxIcon"><i className="fa fa-map-marker"></i></span> 
-										<input type="text" name="address" id="address" className="form-control inputBox " value={this.state.address} onChange={this.handelChange.bind(this)} />
+										<input type="text" name="address" id="address" className="form-control inputBox " value={this.state.address} onChange={this.handleChange.bind(this)} />
 									</div> 
 								</div>
 
@@ -211,7 +215,7 @@ class Address extends Component{
 									<label htmlFor="area" className="nameTitleForm">Area/Suburb</label>
 									<div className="input-group ">
 										<span className="input-group-addon inputBoxIcon"><FontAwesomeIcon icon="map-marked-alt" /></span> 
-										<input type="text" name="area" id="area" className="form-control inputBox" value={this.state.area} onChange={this.handelChange.bind(this)} />
+										<input type="text" name="area" id="area" className="form-control inputBox" value={this.state.area} onChange={this.handleChange.bind(this)} />
 									</div> 
 								</div>
 
@@ -219,7 +223,7 @@ class Address extends Component{
 									<label htmlFor="city" className="nameTitleForm">City/Village<sup className="nameTitleFormStar">*</sup></label>
 									<div className="input-group ">
 										<span className="input-group-addon inputBoxIcon"><i className="fa fa-map-marker"></i> </span> 
-										<input type="text" name="city" id="city" className="form-control inputBox" value={this.state.city} onChange={this.handelChange.bind(this)} />
+										<input type="text" name="city" id="city" className="form-control inputBox" value={this.state.city} onChange={this.handleChange.bind(this)} />
 									</div> 
 									<span id="cityError" className="errorMsg"></span>
 								</div>
@@ -228,7 +232,7 @@ class Address extends Component{
 									<label htmlFor="district" className="nameTitleForm">District<sup className="nameTitleFormStar">*</sup></label>
 									<div className="input-group ">
 										<span className="input-group-addon inputBoxIcon"><i className="fa fa-map"></i> </span> 
-										<input type="text" name="district" id="district" className="form-control inputBox" value={this.state.district} onChange={this.handelChange.bind(this)} />
+										<input type="text" name="district" id="district" className="form-control inputBox" value={this.state.district} onChange={this.handleChange.bind(this)} />
 									</div> 
 									<span id="districtError" className="errorMsg"></span>
 								</div>
@@ -241,7 +245,7 @@ class Address extends Component{
 									<label htmlFor="state" className="nameTitleForm">State<sup className="nameTitleFormStar">*</sup></label>
 									<div className="input-group ">
 										<span className="input-group-addon inputBoxIcon"><i className="fa fa-map"></i> </span> 
-										<input type="text" name="state" id="state" className="form-control inputBox" value={this.state.state} onChange={this.handelChange.bind(this)} />
+										<input type="text" name="state" id="state" className="form-control inputBox" value={this.state.state} onChange={this.handleChange.bind(this)} />
 									</div> 
 									<span id="stateError" className="errorMsg"></span>
 								</div>
@@ -250,7 +254,7 @@ class Address extends Component{
 									<label htmlFor="country" className="nameTitleForm">Country<sup className="nameTitleFormStar">*</sup></label>
 									<div className="input-group ">
 										<span className="input-group-addon inputBoxIcon"><i className="fa fa-flag"></i> </span> 
-										<input type="text" name="country" id="country" className="form-control inputBox" value={this.state.country} onChange={this.handelChange.bind(this)} />
+										<input type="text" name="country" id="country" className="form-control inputBox" value={this.state.country} onChange={this.handleChange.bind(this)} />
 									</div> 
 									<span id="countryError" className="errorMsg"></span>
 								</div>
@@ -259,14 +263,14 @@ class Address extends Component{
 									<label htmlFor="pincode" className="nameTitleForm">Pincode<sup className="nameTitleFormStar">*</sup></label>
 									<div className="input-group ">
 										<span className="input-group-addon inputBoxIcon"><FontAwesomeIcon icon="map-marked-alt" /> </span> 
-										<input type="text" name="pincode" id="pincode" className="form-control inputBox" value={this.state.pincode} onChange={this.handelChange.bind(this)} />
+										<input type="text" name="pincode" id="pincode" className="form-control inputBox" value={this.state.pincode} onChange={this.handleChange.bind(this)} />
 									</div> 
 									<span id="pincodeError" className="errorMsg"></span>
 								</div>
 
 							</div>
-							<button className="buttonBack pull-left" onClick={this.handelSubmit.bind(this)}> <i className="fa fa-angle-left"> - Back</i></button>
-							<button className="buttonNext pull-right" onClick={this.handelSubmit.bind(this)}>Next - <i className="fa fa-angle-right "></i></button>
+							<button className="buttonBack pull-left" onClick={this.handleBack.bind(this)}> <i className="fa fa-angle-left"> - Back</i></button>
+							<button className="buttonNext pull-right" onClick={this.handleSubmit.bind(this)}>Next - <i className="fa fa-angle-right "></i></button>
 						</form>
 					</div>
 				</div>
@@ -274,4 +278,4 @@ class Address extends Component{
 	}
 }
 
-export default Address;
+export default withRouter(Address);

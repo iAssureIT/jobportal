@@ -19,13 +19,13 @@ import Leftsidebar          from './common/leftSidebar/Leftsidebar.js';
 import CoreLayout           from './coreadmin/CoreLayout/CoreLayout.js';
 
 //import CompanyProfile       from './candidateprofile/Profile/CompanyProfile/CompanyProfile.js';
-import CandidateProfile            from './profileCreation/CandidateProfile.js';
-import CandidateBasicInfo     from './profileCreation/CandidateBasicInfo.js';
+import CandidateProfile     from './profileCreation/blocks/ProfilePage/CandidateProfile.js';
+import CandidateBasicInfo   from './profileCreation/CandidateBasicInfo.js';
 import CandidateAddress     from './profileCreation/CandidateAddress.js';
 import CandidateContact     from './profileCreation/CandidateContact.js';
-import CandidateAcademics     from './profileCreation/CandidateAcademics.js';
+import CandidateAcademics   from './profileCreation/CandidateAcademics.js';
 import CandidateCertification     from './profileCreation/CandidateCertification.js';
-import CandidateExperience     from './profileCreation/CandidateExperience.js';
+import CandidateExperience  from './profileCreation/CandidateExperience.js';
 //import CandidateProfile     from './blocks/CandidateProfile/CandidateProfile.js';
 //import CandidateList     from './blocks/CandidateList/CandidateList.js';
 
@@ -125,8 +125,8 @@ class Layout extends Component  {
                                                     <Route exact path="/academics/:candidateID"         component={CandidateAcademics}  />
                                                     <Route exact path="/certification/:candidateID"     component={CandidateCertification}  />
                                                     <Route exact path="/experience/:candidateID"        component={CandidateExperience}  />
-                                                    {/*<Route exact path="/profile"           component={CandidateProfile}  />
-                                                    <Route exact path="/list"              component={CandidateList}  />  
+                                                    <Route exact path="/profile"           component={CandidateProfile}  />
+                                                    {/*<Route exact path="/list"              component={CandidateList}  />  
                                                     */}
                                                 </Switch>
                                             </div>

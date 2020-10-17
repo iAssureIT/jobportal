@@ -10,7 +10,7 @@ class LeftAside extends Component{
 						<div className="">
 							<div className="col-lg-8 col-lg-offset-2 candidateProfileImg">
 								<div className="candidateImgWrapper row">
-									<img src="/Images/43.png" alt="Candidate Image" />
+									<img src="/images/43.png" alt="Candidate Image" />
 									<div className="candidateName mainText">
 										Anjali Sharma  
 									</div>

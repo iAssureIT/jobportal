@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
+import { withRouter } from 'react-router-dom';
 import '../BasicInfoForm/BasicInfoForm.css';
 import './Certification.css';
 
@@ -25,7 +25,7 @@ class Certification extends Component{
 	//========== User Define Function Start ================
 
 
-	handelChange(event){
+	handleChange(event){
 		var value = event.currentTarget.value;
 		var name  = event.currentTarget.name;
 
@@ -33,6 +33,10 @@ class Certification extends Component{
 		this.setState({
 			[name]:value,
 		})
+	}
+	handleBack(event){
+		event.preventDefault();
+		this.props.history.push("/academics/:candidateID");
 	}
 	changeBlock(event){
 		event.preventDefault();
@@ -55,7 +59,7 @@ class Certification extends Component{
 		})
 		console.log(rating);
 	}
-	handelSubmit(event){
+	handleSubmit(event){
 		event.preventDefault();
 		var status =  this.validateForm();
 			 this.changeBlock(event);
@@ -91,7 +95,7 @@ class Certification extends Component{
 									
 										})
 			}
-		
+			this.props.history.push("/experience/:candidateID");
 
 		
 	}
@@ -182,7 +186,7 @@ class Certification extends Component{
 										<label htmlFor="skills" className="nameTitleForm">Skills<sup className="nameTitleFormStar">*</sup></label>
 										<div className="input-group ">
 											<span className="input-group-addon inputBoxIcon"><FontAwesomeIcon icon="chalkboard-teacher" /> </span> 
-											<input type="text"placeholder="Enter Skill Name or Certification Name" name="skills" id="skills" className="form-control inputBox" value={this.state.skills} onChange={this.handelChange.bind(this)} />
+											<input type="text"placeholder="Enter Skill Name or Certification Name" name="skills" id="skills" className="form-control inputBox" value={this.state.skills} onChange={this.handleChange.bind(this)} />
 										</div> 
 										<span id="skillsError" className="errorMsg"></span>
 									</div>
@@ -204,7 +208,7 @@ class Certification extends Component{
 									<div className="col-lg-12">
 										<label htmlFor="description" className="nameTitleForm">Description</label>
 										<div className="input-group col-lg-12">
-											<textarea type="text" name="description" id="description" className="form-control inputBox textareaFix" rows="5"  value={this.state.description} onChange={this.handelChange.bind(this)} />
+											<textarea type="text" name="description" id="description" className="form-control inputBox textareaFix" rows="5"  value={this.state.description} onChange={this.handleChange.bind(this)} />
 										</div> 
 									</div>
 								</div>
@@ -218,7 +222,7 @@ class Certification extends Component{
 									<label htmlFor="certificationName" className="nameTitleForm">Certification Name<sup className="nameTitleFormStar">*</sup></label>
 									<div className="input-group ">
 										<span className="input-group-addon inputBoxIcon"><FontAwesomeIcon icon="chalkboard-teacher" /></span> 
-										<input type="text" name="certificationName" id="certificationName" className="form-control inputBox " value={this.state.certificationName} onChange={this.handelChange.bind(this)} />
+										<input type="text" name="certificationName" id="certificationName" className="form-control inputBox " value={this.state.certificationName} onChange={this.handleChange.bind(this)} />
 									</div> 
 									<span id="certificationNameError" className="errorMsg"></span>
 								</div>
@@ -227,7 +231,7 @@ class Certification extends Component{
 									<label htmlFor="issuedBy" className="nameTitleForm">Issued By<sup className="nameTitleFormStar">*</sup></label>
 									<div className="input-group ">
 										<span className="input-group-addon inputBoxIcon"><i className="fa fa-user-circle"></i></span> 
-										<input type="text" name="issuedBy" id="issuedBy" className="form-control inputBox " value={this.state.issuedBy} onChange={this.handelChange.bind(this)} />
+										<input type="text" name="issuedBy" id="issuedBy" className="form-control inputBox " value={this.state.issuedBy} onChange={this.handleChange.bind(this)} />
 									</div> 
 									<span id="issuedByError" className="errorMsg"></span>
 								</div>
@@ -236,7 +240,7 @@ class Certification extends Component{
 									<label htmlFor="certifiedOn" className="nameTitleForm">Certified ON<sup className="nameTitleFormStar">*</sup></label>
 									<div className="input-group ">
 										<span className="input-group-addon inputBoxIcon"><FontAwesomeIcon icon="chalkboard-teacher" /></span> 
-										<input type="text" name="certifiedOn" id="certifiedOn" className="form-control inputBox " value={this.state.certifiedOn} onChange={this.handelChange.bind(this)} />
+										<input type="text" name="certifiedOn" id="certifiedOn" className="form-control inputBox " value={this.state.certifiedOn} onChange={this.handleChange.bind(this)} />
 									</div> 
 									<span id="certifiedOnError" className="errorMsg"></span>
 								</div>
@@ -249,7 +253,7 @@ class Certification extends Component{
 									<label htmlFor="validity" className="nameTitleForm">Valid Till<sup className="nameTitleFormStar">*</sup></label>
 									<div className="input-group ">
 										<span className="input-group-addon inputBoxIcon"><i className="fa fa-calendar"></i> </span> 
-										<input type="date" name="validity" id="validity" className="form-control inputBox" value={this.state.validity} onChange={this.handelChange.bind(this)} />
+										<input type="date" name="validity" id="validity" className="form-control inputBox" value={this.state.validity} onChange={this.handleChange.bind(this)} />
 									</div> 
 								</div>
 
@@ -257,7 +261,7 @@ class Certification extends Component{
 									<label htmlFor="grade" className="nameTitleForm">Grade / Percentage  <sup className="nameTitleFormStar">*</sup></label>
 									<div className="input-group ">
 										<span className="input-group-addon inputBoxIcon"><FontAwesomeIcon icon="file-alt" /></span> 
-										<input type="text" name="grade" id="grade" className="form-control inputBox" value={this.state.grade} onChange={this.handelChange.bind(this)} />
+										<input type="text" name="grade" id="grade" className="form-control inputBox" value={this.state.grade} onChange={this.handleChange.bind(this)} />
 									</div> 
 								</div>
 
@@ -265,12 +269,12 @@ class Certification extends Component{
 						</div>
 						}
 
-						<button className="buttonBack pull-left" onClick={this.handelSubmit.bind(this)}> <i className="fa fa-angle-left"> - Back</i></button>
-						<button className="buttonNext pull-right" onClick={this.handelSubmit.bind(this)}>Next - <i className="fa fa-angle-right "></i></button>
+						<button className="buttonBack pull-left" onClick={this.handleSubmit.bind(this)}> <i className="fa fa-angle-left"> - Back</i></button>
+						<button className="buttonNext pull-right" onClick={this.handleSubmit.bind(this)}>Next - <i className="fa fa-angle-right "></i></button>
 					</form>
 				</div>
 			);
 	}
 }
 
-export default Certification;
+export default withRouter(Certification);

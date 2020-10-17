@@ -1,7 +1,7 @@
 import React,{Component}    from 'react';
 import { FontAwesomeIcon }  from '@fortawesome/react-fontawesome';
 import Moment               from 'moment';
-
+import { withRouter } from 'react-router-dom';
 
 import './BasicInfoForm.css';
 
@@ -35,7 +35,7 @@ class BasicInfoForm extends Component{
 	//========== User Define Function Start ================
 
 
-	handelChange(event){
+	handleChange(event){
 		event.preventDefault();
 		var value = event.currentTarget.value;
 		var name  = event.currentTarget.name;
@@ -72,7 +72,7 @@ class BasicInfoForm extends Component{
 			gender:id,
 		})
 	}
-	handelSubmit(event){
+	handleSubmit(event){
 		event.preventDefault();
 		var status =  this.validateForm();
 			var formValues = {
@@ -107,7 +107,7 @@ class BasicInfoForm extends Component{
 							ageDays	       	   : 0,
 						})
 		
-			this.props.history("/address/:candidateID");
+			this.props.history.push("/address/:candidateID");
 		
 		
 	}
@@ -155,7 +155,7 @@ class BasicInfoForm extends Component{
 								<label htmlFor="firstName" className="nameTitleForm">First Name<sup className="nameTitleFormStar">*</sup></label>
 								<div className="input-group ">
 									<span className="input-group-addon inputBoxIcon"><i className="fa fa-user-circle"></i> </span> 
-									<input type="text" name="firstName" id="firstName" className="form-control inputBox" value={this.state.firstName} onChange={this.handelChange.bind(this)} />
+									<input type="text" name="firstName" id="firstName" className="form-control inputBox" value={this.state.firstName} onChange={this.handleChange.bind(this)} />
 								</div> 
 								<span id="firstNameError" className="errorMsg"></span>
 							</div>
@@ -164,7 +164,7 @@ class BasicInfoForm extends Component{
 								<label htmlFor="middleName" className="nameTitleForm">Middle Name</label>
 								<div className="input-group ">
 									<span className="input-group-addon inputBoxIcon"><i className="fa fa-user-circle"></i> </span> 
-									<input type="text" name="middleName" id="middleName" className="form-control inputBox" value={this.state.middleName} onChange={this.handelChange.bind(this)} />
+									<input type="text" name="middleName" id="middleName" className="form-control inputBox" value={this.state.middleName} onChange={this.handleChange.bind(this)} />
 								</div> 
 								
 							</div>
@@ -173,7 +173,7 @@ class BasicInfoForm extends Component{
 								<label htmlFor="lastName" className="nameTitleForm">Last Name</label>
 								<div className="input-group ">
 									<span className="input-group-addon inputBoxIcon"><i className="fa fa-user-circle"></i> </span> 
-									<input type="text" name="lastName" id="lastName" className="form-control inputBox" value={this.state.lastName} onChange={this.handelChange.bind(this)} />
+									<input type="text" name="lastName" id="lastName" className="form-control inputBox" value={this.state.lastName} onChange={this.handleChange.bind(this)} />
 								</div> 
 							</div>
 
@@ -185,7 +185,7 @@ class BasicInfoForm extends Component{
 								<label htmlFor="dob" className="nameTitleForm">Date Of Birth<sup className="nameTitleFormStar">*</sup></label>
 								<div className="input-group ">
 									<span className="input-group-addon inputBoxIcon"><i className="fa fa-birthday-cake"></i></span> 
-									<input type="date" name="dob" id="dob" className="form-control inputBox unstyled" value={this.state.dob} onChange={this.handelChange.bind(this)} />
+									<input type="date" name="dob" id="dob" className="form-control inputBox unstyled" value={this.state.dob} onChange={this.handleChange.bind(this)} />
 								</div> 
 								<span id="dobError" className="errorMsg"></span>
 							</div>
@@ -227,7 +227,7 @@ class BasicInfoForm extends Component{
 								<label htmlFor="maritalStatus" className="nameTitleForm">Marital Status<sup className="nameTitleFormStar">*</sup></label>
 								<div className="input-group ">
 									<span className="input-group-addon inputBoxIcon inputBoxIcon1"><FontAwesomeIcon icon="ring" /></span> 
-									<select required className="form-control inputBox selectOption" id="maritalStatus" value={this.state.maritalStatus} name="maritalStatus" onChange={this.handelChange.bind(this)}>
+									<select required className="form-control inputBox selectOption" id="maritalStatus" value={this.state.maritalStatus} name="maritalStatus" onChange={this.handleChange.bind(this)}>
 									  	<option  > ---- select ---- </option>
 									  	{
 									  		this.state.inputMaritalStatus.length>0
@@ -250,7 +250,7 @@ class BasicInfoForm extends Component{
 								<label htmlFor="anniversaryDate" className="nameTitleForm">Anniversary Date</label>
 								<div className="input-group ">
 									<span className="input-group-addon inputBoxIcon inputBoxIcon2"><i className="fa fa-calendar-o"></i></span> 
-									<input type="date" name="anniversaryDate" id="anniversaryDate" className="form-control inputBox " value={this.state.anniversaryDate} onChange={this.handelChange.bind(this)} />
+									<input type="date" name="anniversaryDate" id="anniversaryDate" className="form-control inputBox " value={this.state.anniversaryDate} onChange={this.handleChange.bind(this)} />
 								</div> 
 							</div>
 
@@ -258,7 +258,7 @@ class BasicInfoForm extends Component{
 								<label htmlFor="languages" className="nameTitleForm">Languages<sup className="nameTitleFormStar">*</sup></label>
 								<div className="input-group ">
 									<span className="input-group-addon inputBoxIcon inputBoxIcon2"><i className="fa fa-comment-o"></i></span> 
-									<select className="form-control inputBox" id="languages" value={this.state.languages} name="languages" onChange={this.handelChange.bind(this)}>
+									<select className="form-control inputBox" id="languages" value={this.state.languages} name="languages" onChange={this.handleChange.bind(this)}>
 									  	<option  > - Select Your Languages - </option>
 									  	{
 									  		this.state.inputLanguages.length>0
@@ -284,7 +284,7 @@ class BasicInfoForm extends Component{
 								<label htmlFor = "nationality" className = "nameTitleForm" > Nationality <sup className = "nameTitleFormStar"> * </sup></label>
 								<div className="input-group ">
 									<span className="input-group-addon inputBoxIcon"><i className="fa fa-flag-o"></i></span> 
-									<select className="form-control inputBox" id = "nationality" value ={this.state.nationality} name="nationality" onChange={this.handelChange.bind(this)}>
+									<select className="form-control inputBox" id = "nationality" value ={this.state.nationality} name="nationality" onChange={this.handleChange.bind(this)}>
 									  	<option > ---- select ---- </option>
 									  	{
 									  		this.state.inputNationality.length>0
@@ -306,7 +306,7 @@ class BasicInfoForm extends Component{
 								<label htmlFor="panCardNo" className="nameTitleForm">Pan Card No.</label>
 								<div className="input-group ">
 									<span className="input-group-addon inputBoxIcon"><i className="fa fa-id-card-o"></i> </span> 
-									<input type="text" name="panCardNo" id="panCardNo" className="form-control inputBox" value={this.state.panCardNo} onChange={this.handelChange.bind(this)} />
+									<input type="text" name="panCardNo" id="panCardNo" className="form-control inputBox" value={this.state.panCardNo} onChange={this.handleChange.bind(this)} />
 								</div> 
 							</div>
 
@@ -314,17 +314,17 @@ class BasicInfoForm extends Component{
 								<label htmlFor="adhaarCardNo" className="nameTitleForm">Aadhaar Card No.</label>
 								<div className="input-group ">
 									<span className="input-group-addon inputBoxIcon"><i className="fa fa-id-card-o"></i> </span> 
-									<input type="text" name="adhaarCardNo" id="adhaarCardNo" className="form-control inputBox" value={this.state.adhaarCardNo} onChange={this.handelChange.bind(this)} />
+									<input type="text" name="adhaarCardNo" id="adhaarCardNo" className="form-control inputBox" value={this.state.adhaarCardNo} onChange={this.handleChange.bind(this)} />
 								</div> 
 							</div>
 
 						</div>
 
-						<button className="buttonNext pull-right" onClick={this.handelSubmit.bind(this)}>Next</button>
+						<button className="buttonNext pull-right" onClick={this.handleSubmit.bind(this)}>Next</button>
 					</form>
 				</div>
 			);
 	}
 }
 
-export default BasicInfoForm;
+export default withRouter(BasicInfoForm);

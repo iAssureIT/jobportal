@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
+import { withRouter } from 'react-router-dom';
 import '../BasicInfoForm/BasicInfoForm.css';
 
 class Academics extends Component{
@@ -29,7 +29,7 @@ class Academics extends Component{
 	//========== User Define Function Start ================
 
 
-	handelChange(event){
+	handleChange(event){
 		var value = event.currentTarget.value;
 		var name  = event.currentTarget.name;
 
@@ -38,8 +38,11 @@ class Academics extends Component{
 			[name]:value,
 		})
 	}
-
-	handelSubmit(event){
+	handleBack(event){
+		event.preventDefault();
+		this.props.history.push("/contact/:candidateID");
+	}
+	handleSubmit(event){
 		event.preventDefault();
 		var status =  this.validateForm();
 		
@@ -72,6 +75,7 @@ class Academics extends Component{
 			passOutYear         : "",
 	
 		})
+		this.props.history.push("/certification/:candidateID");
 	}
 	//========== User Define Function End ==================
 		//========== Validation Start ==================
@@ -160,7 +164,7 @@ class Academics extends Component{
 								<label htmlFor="qualificationLevel" className="nameTitleForm">Qualification Leval<sup className="nameTitleFormStar">*</sup></label>
 								<div className="input-group ">
 									<span className="input-group-addon inputBoxIcon"><FontAwesomeIcon icon="file-alt" /></span> 
-									<select className="form-control inputBox" id="qualificationLevel" value={this.state.qualificationLevel} name="qualificationLevel" onChange={this.handelChange.bind(this)}>
+									<select className="form-control inputBox" id="qualificationLevel" value={this.state.qualificationLevel} name="qualificationLevel" onChange={this.handleChange.bind(this)}>
 									  	<option > ---- select ---- </option>
 									  	{
 									  		this.state.inputQualificationLevel.length>0
@@ -181,7 +185,7 @@ class Academics extends Component{
 								<label htmlFor="qualification" className="nameTitleForm">Qualification<sup className="nameTitleFormStar">*</sup></label>
 								<div className="input-group ">
 									<span className="input-group-addon inputBoxIcon"><i className="fa fa-graduation-cap"></i></span> 
-									<select className="form-control inputBox" id="qualification" value={this.state.qualification} name="qualification" onChange={this.handelChange.bind(this)}>
+									<select className="form-control inputBox" id="qualification" value={this.state.qualification} name="qualification" onChange={this.handleChange.bind(this)}>
 									  	<option > ---- select ---- </option>
 									  	{
 									  		this.state.inputQualification.length>0
@@ -202,7 +206,7 @@ class Academics extends Component{
 								<label htmlFor="specialization" className="nameTitleForm">Specialization</label>
 								<div className="input-group ">
 									<span className="input-group-addon inputBoxIcon"><i className="fa fa-graduation-cap"></i></span> 
-									<input type="text" name="specialization" id="specialization" className="form-control inputBox " value={this.state.specialization} onChange={this.handelChange.bind(this)} />
+									<input type="text" name="specialization" id="specialization" className="form-control inputBox " value={this.state.specialization} onChange={this.handleChange.bind(this)} />
 								</div> 
 							</div>
 
@@ -214,7 +218,7 @@ class Academics extends Component{
 								<label htmlFor="grade" className="nameTitleForm">Grade/Marks/GPA<sup className="nameTitleFormStar">*</sup></label>
 								<div className="input-group ">
 									<span className="input-group-addon inputBoxIcon"><FontAwesomeIcon icon="file-alt" /></span> 
-									<input type="text" name="grade" id="grade" className="form-control inputBox" value={this.state.grade} onChange={this.handelChange.bind(this)} />
+									<input type="text" name="grade" id="grade" className="form-control inputBox" value={this.state.grade} onChange={this.handleChange.bind(this)} />
 								</div> 
 								<span id="gradeError" className="errorMsg"></span>
 							</div>
@@ -223,7 +227,7 @@ class Academics extends Component{
 								<label htmlFor="mode" className="nameTitleForm">Mode<sup className="nameTitleFormStar">*</sup></label>
 								<div className="input-group ">
 									<span className="input-group-addon inputBoxIcon"><FontAwesomeIcon icon="adjust" /></span> 
-									<select className="form-control inputBox" id="mode" value={this.state.mode} name="mode" onChange={this.handelChange.bind(this)}>
+									<select className="form-control inputBox" id="mode" value={this.state.mode} name="mode" onChange={this.handleChange.bind(this)}>
 									  	<option > ---- select ---- </option>
 									  	{
 									  		this.state.inputMode.length>0
@@ -245,7 +249,7 @@ class Academics extends Component{
 								<label htmlFor="passOutYear" className="nameTitleForm">Pass-out-year<sup className="nameTitleFormStar">*</sup></label>
 								<div className="input-group ">
 									<span className="input-group-addon inputBoxIcon"><i className="fa fa-calendar"></i></span> 
-									<input type="text" name="passOutYear" id="passOutYear" className="form-control inputBox " value={this.state.passOutYear} onChange={this.handelChange.bind(this)} />
+									<input type="text" name="passOutYear" id="passOutYear" className="form-control inputBox " value={this.state.passOutYear} onChange={this.handleChange.bind(this)} />
 								</div> 
 								<span id="passOutYearError" className="errorMsg"></span>
 							</div>
@@ -258,7 +262,7 @@ class Academics extends Component{
 								<label htmlFor="college" className="nameTitleForm">College/School Name<sup className="nameTitleFormStar">*</sup></label>
 								<div className="input-group ">
 									<span className="input-group-addon inputBoxIcon"><FontAwesomeIcon icon="university" /></span> 
-									<input type="text" name="college" id="college" className="form-control inputBox " value={this.state.college} onChange={this.handelChange.bind(this)} />
+									<input type="text" name="college" id="college" className="form-control inputBox " value={this.state.college} onChange={this.handleChange.bind(this)} />
 								</div> 
 								<span id="collegeError" className="errorMsg"></span>
 							</div>
@@ -267,7 +271,7 @@ class Academics extends Component{
 								<label htmlFor="university" className="nameTitleForm">University/Boards Name<sup className="nameTitleFormStar">*</sup></label>
 								<div className="input-group ">
 									<span className="input-group-addon inputBoxIcon"><FontAwesomeIcon icon="university" /></span> 
-									<input type="text" name="university" id="university" className="form-control inputBox " value={this.state.university} onChange={this.handelChange.bind(this)} />
+									<input type="text" name="university" id="university" className="form-control inputBox " value={this.state.university} onChange={this.handleChange.bind(this)} />
 								</div> 
 								<span id="universityError" className="errorMsg"></span>
 							</div>
@@ -276,7 +280,7 @@ class Academics extends Component{
 								<label htmlFor="state" className="nameTitleForm">State<sup className="nameTitleFormStar">*</sup></label>
 								<div className="input-group ">
 									<span className="input-group-addon inputBoxIcon"><i className="fa fa-map"></i></span> 
-									<input type="text" name="state" id="state" className="form-control inputBox " value={this.state.state} onChange={this.handelChange.bind(this)} />
+									<input type="text" name="state" id="state" className="form-control inputBox " value={this.state.state} onChange={this.handleChange.bind(this)} />
 								</div> 
 								<span id="stateError" className="errorMsg"></span>
 							</div>
@@ -289,7 +293,7 @@ class Academics extends Component{
 								<label htmlFor="country" className="nameTitleForm">Country<sup className="nameTitleFormStar">*</sup></label>
 								<div className="input-group ">
 									<span className="input-group-addon inputBoxIcon"><i className="fa fa-flag"></i> </span> 
-									<input type="text" name="country" id="country" className="form-control inputBox" value={this.state.country} onChange={this.handelChange.bind(this)} />
+									<input type="text" name="country" id="country" className="form-control inputBox" value={this.state.country} onChange={this.handleChange.bind(this)} />
 								</div> 
 								<span id="countryError" className="errorMsg"></span>
 							</div>
@@ -298,7 +302,7 @@ class Academics extends Component{
 								<label htmlFor="city" className="nameTitleForm">City<sup className="nameTitleFormStar">*</sup></label>
 								<div className="input-group ">
 									<span className="input-group-addon inputBoxIcon"><FontAwesomeIcon icon="city" /> </span> 
-									<input type="text" name="city" id="city" className="form-control inputBox" value={this.state.city} onChange={this.handelChange.bind(this)} />
+									<input type="text" name="city" id="city" className="form-control inputBox" value={this.state.city} onChange={this.handleChange.bind(this)} />
 								</div>
 								<span id="cityError" className="errorMsg"></span>
 							</div>
@@ -306,12 +310,12 @@ class Academics extends Component{
 						</div>
 
 					
-						<button className="buttonBack pull-left" onClick={this.handelSubmit.bind(this)}> <i className="fa fa-angle-left"> - Back</i></button>
-						<button className="buttonNext pull-right" onClick={this.handelSubmit.bind(this)}>Next - <i className="fa fa-angle-right "></i></button>
+						<button className="buttonBack pull-left" onClick={this.handleBack.bind(this)}> <i className="fa fa-angle-left"> - Back</i></button>
+						<button className="buttonNext pull-right" onClick={this.handleSubmit.bind(this)}>Next - <i className="fa fa-angle-right "></i></button>
 					</form>
 				</div>
 			);
 	}
 }
 
-export default Academics;
+export default withRouter(Academics);

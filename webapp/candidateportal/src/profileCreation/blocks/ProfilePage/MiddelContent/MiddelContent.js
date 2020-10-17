@@ -65,7 +65,7 @@ class MiddelContent extends Component{
 											</div>
 											<div className="companyImages col-lg-4">
 												<div className="row">
-													<img className="pull-right" src="/Images/53.png" alt="Company logo"/>
+													<img className="pull-right" src="/images/53.png" alt="Company logo"/>
 												</div>
 											</div>
 										</div>
@@ -98,7 +98,7 @@ class MiddelContent extends Component{
 											</div>
 											<div className="companyImages col-lg-4">
 												<div className="row">
-													<img className="pull-right" src="/Images/52.png" alt="Company logo"/>
+													<img className="pull-right" src="/images/52.png" alt="Company logo"/>
 												</div>
 											</div>
 										</div>
@@ -131,7 +131,7 @@ class MiddelContent extends Component{
 											</div>
 											<div className="companyImages col-lg-4">
 												<div className="row">
-													<img className="pull-right" src="/Images/53.png" alt="Company logo"/>
+													<img className="pull-right" src="/images/53.png" alt="Company logo"/>
 												</div>
 											</div>
 										</div>
@@ -164,7 +164,7 @@ class MiddelContent extends Component{
 											</div>
 											<div className="companyImages col-lg-4">
 												<div className="row">
-													<img className="pull-right" src="/Images/54.png" alt="Company logo"/>
+													<img className="pull-right" src="/images/54.png" alt="Company logo"/>
 												</div>
 											</div>
 										</div>
@@ -211,7 +211,7 @@ class MiddelContent extends Component{
 											</div>
 											<div className="companyImages col-lg-4">
 												<div className="row">
-													<img className="pull-right" src="/Images/55.png" alt="College logo"/>
+													<img className="pull-right" src="/images/55.png" alt="College logo"/>
 												</div>
 											</div>
 										</div>

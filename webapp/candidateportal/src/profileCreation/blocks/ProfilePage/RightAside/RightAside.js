@@ -9,7 +9,7 @@ class RightAside extends Component{
 					<div className=" ">
 						<div className="videoWrapper">
 							<div className="videoLigo">
-								<img src="/Images/49.png"/>
+								<img src="/images/49.png"/>
 							</div>
 						</div>
 						<div className="certificationHeading">
@@ -36,7 +36,7 @@ class RightAside extends Component{
 								
 							<div className="certificationImages col-lg-4">
 								<div className="row">
-									<img className="pull-right" src="/Images/53.png" alt="logo"/>
+									<img className="pull-right" src="/images/53.png" alt="logo"/>
 								</div>
 							</div>
 							
@@ -65,7 +65,7 @@ class RightAside extends Component{
 								
 							<div className="certificationImages col-lg-4">
 								<div className="row">
-									<img className="pull-right" src="/Images/linkedIn.png" alt="logo"/>
+									<img className="pull-right" src="/images/linkedIn.png" alt="logo"/>
 								</div>
 							</div>
 							
@@ -94,7 +94,7 @@ class RightAside extends Component{
 								
 							<div className="certificationImages col-lg-4">
 								<div className="row">
-									<img className="pull-right" src="/Images/linkedIn.png" alt="logo"/>
+									<img className="pull-right" src="/images/linkedIn.png" alt="logo"/>
 								</div>
 							</div>
 							
@@ -117,7 +117,7 @@ class RightAside extends Component{
 								
 							<div className="HonnerImage col-lg-12">
 								<div className="row">
-									<img className=""  src="/Images/50.png" alt="logo"/>
+									<img className=""  src="/images/50.png" alt="logo"/>
 								</div>
 							</div>
 							

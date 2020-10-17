@@ -8,10 +8,14 @@ class Header extends Component{
     return(
         <div className="headerWrapper col-lg-12">
           <div className="row">
-            <div className="headerLogoWrapper col-lg-8">
+            
+            <div className="headerLogoWrapper col-lg-8 noPadding">
               <img src="/images/1.png" alt="ijobs logo"/>
             </div>
-            <div className="headerMenuWrapper col-lg-4 pull-right">
+            <div className="headerMenuWrapper col-lg-4 noPadding">
+              <div className="headerJobWrapper">
+                  
+              </div>
               <div className="headerBellWrapper ">
                   <i className="fa fa-bell-o "></i>
                   <div className="headerBellbadge">1</div>
