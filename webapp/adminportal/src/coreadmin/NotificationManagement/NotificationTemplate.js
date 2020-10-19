@@ -8,7 +8,7 @@ import { withRouter }       from 'react-router-dom';
 import 'bootstrap/js/tab.js';
 import './NotificationTemplate.css';
 import './notification.css';
-
+import BulkUpload from "../Master/BulkUpload/BulkUpload.js";
 import TemplateList from './TemplateList.js';
 import CreateTemplate from './CreateTemplate.js';
 
@@ -17,6 +17,7 @@ class NotificationTemplate extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+        	"pathname": this.props.type ? this.props.type : "",
             type:'Email',
 			roleArray:[],
 			eventArray:[],
@@ -28,7 +29,29 @@ class NotificationTemplate extends React.Component {
 			filteredTemplatesCount : 0,
 			filteredSelectors : "",
 			selector : {},
-			selectorOn:false
+			selectorOn:false,
+			fileDetailUrl: "/api/masternotifications/get/filedetails/",
+             goodRecordsHeading: {
+	        templateType: "Template Type",
+	        templateName: "Template Name",
+	        role: "Role",
+	        company: "Company Name",
+	        entityType: "eEntity Type",
+	        website: "Website",
+	        content: "Content",
+	        subject: "Subject",
+	        },
+			failedtableHeading: {
+	        templateType: "Template Type",
+	        templateName: "Template Name",
+	        role: "Role",
+	        company: "Company Name",
+	        entityType: "Entity Type",
+	        website: "Website",
+	        content: "Content",
+	        subject: "Subject",
+      
+      }
         };
     }
 
@@ -135,6 +158,65 @@ class NotificationTemplate extends React.Component {
 		})
 	}
 
+
+	
+
+	getFileDetails(fileName) {
+
+    axios
+      .get(this.state.fileDetailUrl + this.state.pathname + fileName)
+      .then((response) => {
+        console.log("filedetails...",response);
+        $('.fullpageloader').hide();
+        if (response) {
+          this.setState({
+            fileDetails: response.data,
+            failedRecordsCount: response.data.failedRecords.length,
+            goodDataCount: response.data.goodrecords.length
+          });
+          // if (this.state.pathname === "ViewTemplates") {
+            var tableData = response.data.goodrecords.map((a, i) => {
+              return {
+
+	                "templateType": a.templateType ? a.templateType : '-',
+	                "event": a.event ? a.event : '-',
+	                "entityType": a.entityType ? a.entityType : '-',
+	                "templateName": a.templateName ? a.templateName : '-',
+	                "role": a.role ? a.role : '-',
+	                "company": a.company ? a.company : '-',
+	                "subject": a.subject ? a.subject : '-',
+	                "content": a.content ? a.content : '-',
+                 }
+            })
+
+            var failedRecordsTable = response.data.failedRecords.map((a, i) => {
+              return {
+                    "templateType": a.templateType ? a.templateType : '-',
+	                "event": a.event ? a.event : '-',
+	                "entityType": a.entityType ? a.entityType : '-',
+	                "templateName": a.templateName ? a.templateName : '-',
+	                "role": a.role ? a.role : '-',
+	                "company": a.company ? a.company : '-',
+	                "subject": a.subject ? a.subject : '-',
+	                "content": a.content ? a.content : '-',
+              }
+            })
+          // }
+
+          this.setState({
+            goodRecordsTable: tableData,
+            failedRecordsTable: failedRecordsTable
+          })
+        }
+      })
+      .catch((error) => {
+      })
+  }
+   redirectTo(event)
+    {
+    	this.props.history.push("/ViewTemplates")
+    }
+
 	onSelectedItemsChange(filterType, selecteditems){
 		console.log('inside selector==>',filterType,selecteditems.currentTarget.value)
 		var selector=this.state.selector;
@@ -192,22 +274,55 @@ class NotificationTemplate extends React.Component {
                                 <section className="Content">
                                     <div className="row">
                                         <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                        	<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 mrgTp1">
-                                            	<button className="pull-right btn btn-primary btn-sm btn_oval col-lg-3 col-md-3" data-toggle="modal" data-target="#createNotifyModal"><i className="fa fa-plus" aria-hidden="true"></i>&nbsp;&nbsp;Create New Template</button>
-                                            	<CreateTemplate getType={this.getType.bind(this)} />
+                                          {/* <ul className="nav tabNav nav-pills col-lg-3 col-md-3 col-sm-12 col-xs-12">
+						                        <li className="active col-lg-5 col-md-5 col-xs-5 col-sm-5 NOpadding text-center"><a data-toggle="pill" href="#manual">Manual</a></li>
+						                        <li className="col-lg-6 col-md-6 col-xs-6 col-sm-6 NOpadding  text-center"><a data-toggle="pill" href="#bulk">Bulk Upload</a></li>
+						                    </ul>*/}
+                                           {/*<div  className="col-lg-12 col-md-12 col-sm-12 col-xs-12 mt20">
+								              <ul className="nav tabNav nav-pills col-lg-3 col-md-3 col-sm-12 col-xs-12 pull-right">
+								                <li className="active col-lg-5 col-md-5 col-xs-5 col-sm-5 NOpadding text-center"><a data-toggle="pill" data-toggle="modal" data-target="#createNotifyModal">Create New Template</a></li>
+								                <li className="col-lg-6 col-md-6 col-xs-6 col-sm-6 NOpadding  text-center"><a data-toggle="pill" href="#bulk">Bulk Upload</a></li>
+								              </ul>
+								            </div>*/}
+   											 
+                                            <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 mrgTp1">
+                                            	<a href="/CreateTemplate"><button className="pull-right btn btn-primary btn-sm btn_oval col-lg-2 col-md-2"onClick={this.redirectTo.bind(this)}><i className="fa fa-plus" aria-hidden="true"></i>&nbsp;&nbsp;Add New Template</button></a>
+                                            	{/*<CreateTemplate getType={this.getType.bind(this)} />*/}
    											</div>
+   											<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+	   											{/*<li className="col-lg-2 col-md-2 col-xs-2 col-sm-2  pull-right btn btn-primary btn-sm btn_oval  text-center"style={{marginTop:"20px"}}><a data-toggle="pill" href="#bulk" style={{color:"#fff"}}>Bulk Upload</a></li>*/}
+						                          <section className="Content tab-content">
+									                <div id="bulk" className="tab-pane fade in col-lg-12 col-md-1f2 col-sm-12 col-xs-12 mt">
+									                  <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 outerForm">
+									                    <BulkUpload 
+									                        url="/api/masternotifications/bulkUploadNotification"
+							                                data={{ "type": "employee", "createdBy": localStorage.getItem("user_ID"), "corporateId": localStorage.getItem("corporate_ID") }}
+							                                uploadedData={this.uploadedData}
+							                                fileurl="https://fivebees.s3.ap-south-1.amazonaws.com/prod/master/notificationBulk.xls"
+							                                getFileDetails={this.getFileDetails.bind(this)}
+							                                fileDetails={this.state.fileDetails}
+							                                goodRecordsHeading={this.state.goodRecordsHeading}
+							                                failedtableHeading={this.state.failedtableHeading}
+							                                failedRecordsTable={this.state.failedRecordsTable}
+							                                failedRecordsCount={this.state.failedRecordsCount}
+							                                goodRecordsTable={this.state.goodRecordsTable}
+							                                goodDataCount={this.state.goodDataCount}
+																                    />
+									                  </div>
+									                </div>
+					                            </section>
+					                         </div>   
    											<div className="col-lg-12 col-md-12 col-xs-12 col-sm-12 nopadding">									
-													<div className="col-lg-4 col-md-12 col-sm-12 col-xs-12 nopadding rowPadding">
-														<button type="button" className=" selectFilterBtn reset" onClick={this.selectFilter.bind(this)}>
-															<i className="fa fa-filter"></i>&nbsp;&nbsp;<b> SELECT FILTER</b>
-														</button>
-													</div>
-													
+												<div className="col-lg-4 col-md-12 col-sm-12 col-xs-12 nopadding rowPadding">
+													<button type="button" className=" selectFilterBtn reset" onClick={this.selectFilter.bind(this)}>
+														<i className="fa fa-filter"></i>&nbsp;&nbsp;<b> SELECT FILTER</b>
+													</button>
+												</div>
 													<h5 className="box-title2 col-lg-2 col-md-11 col-sm-11 col-xs-12 nopadding">Total Records :&nbsp;&nbsp;<b>{this.state.TemplatesListCount}</b></h5>
 													<h5 className="box-title2 col-lg-2 col-md-11 col-sm-11 col-xs-12 nopadding">Filtered :&nbsp;&nbsp;<b>{this.state.filteredTemplatesCount}</b></h5>
-													
+
 												</div>
-												<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding firstElement filterWrapper rowPadding">
+										{/*		<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding firstElement filterWrapper rowPadding">
 													<div className="col-lg-2 col-md-12 col-sm-12 col-xs-12 nopadding">
 														<button type="button" className="reset selheight" onClick={this.resetFilter.bind(this)}>RESET FILTERS</button>
 													</div>
@@ -263,7 +378,7 @@ class NotificationTemplate extends React.Component {
 	                                                        }
 	                                                    </select>
 													</div>
-												</div>
+												</div>*/}
    											<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 mrgTp1">
 												<ul className="nav nav-pills nav-justified" id="navContents">
 											      <li className="active" onClick={this.clickTab.bind(this,'Email')}>
@@ -289,6 +404,7 @@ class NotificationTemplate extends React.Component {
 								                  </div>
 	               								</div>
    											</div>
+   											
                                         </div>
                                     </div>
                                 </section>
@@ -301,4 +417,3 @@ class NotificationTemplate extends React.Component {
     }
 }
 export default NotificationTemplate;
-

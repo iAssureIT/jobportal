@@ -637,7 +637,7 @@ exports.fetch_users = (req,res,next)=>{
 			if(data){
 				var i = 0;
 				var returnData = [];
-				for(i = 0 ; i < data.length ; i++){ 
+				for(i = 0 ; i < data.length ; i++){
 					returnData.push({
 										"_id"		: data[i]._id,
 										"firstname" : data[i].profile.firstname,

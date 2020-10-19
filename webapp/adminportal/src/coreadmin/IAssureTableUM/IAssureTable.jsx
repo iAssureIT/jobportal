@@ -1114,24 +1114,23 @@ class IAssureTableUM extends Component {
 							
 							buttonText=""/>
 					</div>
-				<div className="col-lg-12 col-sm-12 col-md-12 col-xs-12 NOpadding marginTop17">
-					<div className="table-responsive  ">
-						<div className="scrolltbl">
-							<table className="table iAssureITtable-bordered table-striped table-hover  ">
-								<thead className="tempTableHeader">
-									<tr className="">
+				<div className="col-lg-12 col-sm-12 col-md-12 col-xs-12 NOpadding marginTop8 table-responsive">
+				
+				 <table className="table iAssureITtable-bordered table-striped table-hover fixedTable"style={{marginBottom:"0px"}}>
+				 	<thead className="tempTableHeader fixedHeader">
+									<tr className="tempTableHeader">
 										{this.state.twoLevelHeader.apply === true ?
 											this.state.twoLevelHeader.firstHeaderData.map((data, index) => {
 												return (
-													<th key={index} colSpan={data.mergedColoums} className="umDynamicHeader srpadd textAlignCenter">{data.heading}</th>
+													<th key={index} id={"heading_data"+index} colSpan={data.mergedColoums} className="umDynamicHeader  srpadd textAlignCenter new_tableborder">{data.heading}</th>
 												);
 											})
 											:
 											null
 										}
 									</tr>
-									<tr className="">
-										<th className="umDynamicHeader srpadd textAlignLeft">
+									<tr className="tempTableHeader">
+										<th className="umDynamicHeader tablebodynew srpadd textAlignLeft new_tableborder" style={{width:"5%"}}>
 											<div className="uMDetailContainer">
 												<input type="checkbox" className="allSelector col-lg-1 col-md-1 col-sm-3 col-xs-1 umchksett" name="allSelector" onChange={this.checkAll.bind(this)} />
 												<span className="uMDetailCheck"></span>
@@ -1140,14 +1139,19 @@ class IAssureTableUM extends Component {
 										{this.state.tableHeading ?
 											Object.entries(this.state.tableHeading).map(
 												([key, value], i) => {
-													if (key === 'actions') {
-														return (
-															<th key={i} className="umDynamicHeader srpadd textAlignLeft">{value}</th>
-														);
-													} else {
-														return (
-															<th key={i} className="umDynamicHeader srpadd textAlignLeft">{value} <span onClick={this.sort.bind(this)} id={key} className="fa fa-sort tableSort"></span></th>
-														);
+													if(key === 'actions'){
+															return(
+																<th key={i} className="umDynamicHeader srpadd text-center col">
+																	<div style={{width:"6%"}}>{value}</div>
+																</th>
+															);	
+															
+													}else{
+														return(
+															<th key={i} className="umDynamicHeader srpadd textAlignLeft">
+															<div className={"wrapWord col"+(i+1)}>{value}</div>
+															 <span onClick={this.sort.bind(this)} id={key} className="fa fa-sort tableSort"></span></th>
+														);	
 													}
 
 												}
@@ -1157,7 +1161,7 @@ class IAssureTableUM extends Component {
 										}
 									</tr>
 								</thead>
-								<tbody className="scrollContent">
+								<tbody className={this.state.tableData && this.state.tableData.length > 0 ? "scrollContent" : ""}>
 									{this.state.tableData && this.state.tableData.length > 0 ?
 										this.state.tableData.map(
 											(value, i) => {
@@ -1166,7 +1170,7 @@ class IAssureTableUM extends Component {
 												return (
 													<tr key={i} className="">
 
-														<td className="textAlignCenter">
+														<td className="textAlignCenter"style={{width:'5%'}}>
 															<div className="uMDetailContainer">
 																<input type="checkbox" ref="userCheckbox" name="userCheckbox" className="userCheckbox" checked={this.state[value._id] ? true : false} id={value._id} onChange={this.selectedId.bind(this)} />
 																<span className="uMDetailCheck"></span>
@@ -1174,7 +1178,7 @@ class IAssureTableUM extends Component {
 														</td>
 														{
 															Object.entries(value).map(
-																([key, value1], i) => {
+																([key, value1], j) => {
 																	if (value1) {
 																		if ($.type(value1) === 'string') {
 																			var regex = new RegExp(/(<([^>]+)>)/ig);
@@ -1185,7 +1189,7 @@ class IAssureTableUM extends Component {
 																			} else {
 																				var bN = value1 ? parseInt(value1.replace(this.state.reN, ""), 10) : '';
 																				if (bN) {
-																					var textAlign = 'textAlignLeft';
+																					var textAlign = 'textAlignRight';
 																				} else {
 																					var textAlign = 'textAlignLeft';
 																				}
@@ -1195,14 +1199,18 @@ class IAssureTableUM extends Component {
 																			});
 																			if (found.length > 0) {
 																				if (key !== 'id') {
-																					return (<td className={textAlign} key={i}><div className={textAlign} dangerouslySetInnerHTML={{ __html: value1 }}></div></td>);
+																					if(value1){
+																						return(<td className={textAlign} key={j}><div className={textAlign+" col"+j } dangerouslySetInnerHTML={{ __html:value1}}></div></td>); 						
+																					}else{
+																						return(<td className={textAlign} key={j}><div className={textAlign+" col"+j} dangerouslySetInnerHTML={{ __html:value1}}></div></td>); 						
+																					}
 																				} else {
 
 																				}
 																			}
 																		}
 																	} else {
-																		return (<td key={i}></td>);
+																		return (<td  key={i}></td>);
 																	}
 																}
 															)
@@ -1211,7 +1219,7 @@ class IAssureTableUM extends Component {
 															this.props.Actioncol ?
 																""
 																:
-																<td className="textAlignCenter">
+																<td className="textAlignCenter"style={{width:'6%'}}>
 																	{
 																		this.props.UsersTable
 																			?
@@ -1421,8 +1429,6 @@ class IAssureTableUM extends Component {
 							:
 							null
 	                    } */}
-						</div>
-					</div>
 						{/*Export To Excel*/}
 						<div className="table-responsive" id="HideTable">
 						<table id="table-to-xls" className="table iAssureITtable-bordered table-striped table-hover  ">
@@ -1444,11 +1450,11 @@ class IAssureTableUM extends Component {
 												([key, value], i) => {
 													if (key === 'actions') {
 														return (
-															<th key={i} className="umDynamicHeader srpadd textAlignLeft">{value != "actions"}</th>
+															<th key={i} className="umDynamicHeader srpadd textAlignLeft new_tableborder">{value != "actions"}</th>
 														);
 													} else {
 														return (
-															<th key={i} className="umDynamicHeader srpadd textAlignLeft">{value} <span onClick={this.sort.bind(this)} id={key} className="fa fa-sort tableSort"></span></th>
+															<th key={i} className="umDynamicHeader srpadd textAlignLeft new_tableborder">{value} <span onClick={this.sort.bind(this)} id={key} className="fa fa-sort tableSort"></span></th>
 														);
 													}
 

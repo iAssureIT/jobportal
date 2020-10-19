@@ -1,0 +1,97 @@
+.confirmOTPWrapper{
+	min-height: 650px;
+	height: auto;
+	background-color:#242931;
+}
+
+.confirmOTP{
+	height: 350px;
+	margin-top: 150px;
+	background-color: #242931;
+	border:3px solid #D3950A;
+	border-radius: 10px;
+}
+
+.confirmOTPTitle{
+	height: 80px;
+	color: #D3950A;
+	font-size:20px;
+	text-align: center;
+	padding-top: 40px;
+}
+
+.confirmOTPHr{
+	width:92%;
+	
+	border-top: 1px solid #D3950A;
+}
+
+.confirmOTPSentence{
+	text-align: center;
+	color: #aaa;
+	height: 60px;
+	line-height: 1.8;
+	letter-spacing: 1px;
+	margin-bottom: 10px;
+}
+
+.confirmOTPInputIcon1{
+	font-size: 14px;
+	 border: 1px solid #D3950A;
+	background-color: transparent !important;
+	color: #eee;
+}
+
+.confirmOTPInputBox{
+  
+  text-align:left;
+  padding-left: 10px;
+  border: 1px solid #D3950A;
+  background-color: transparent !important;
+  color: #fff;
+
+}
+
+.confirmOTPInputBox:focus{
+	border-color: #D3950A;
+	box-shadow: 0px 1px 1px rgba(211, 149, 10, 0.075) inset, 0px 0px 8px rgba(211, 149, 10, 0.5)  !important;
+}
+
+.buttonConfirmOTP{
+	background-color: #D3950A;
+	color: #fff;
+	border: 1px solid #D3950A;
+	margin-bottom: 2px;
+}
+
+.buttonConfirmOTP:hover{
+	background-color: transparent;
+	color: #D3950A;
+	border: 2px solid #D3950A;
+	font-weight: bold;
+	margin-bottom: 0px;
+}
+
+.confirmOTPLinks{
+	
+	margin-top: 10px;
+	margin-bottom: 10px;
+	height: 30px;
+	color: #aaa;
+	/*background-color: pink;*/
+}
+
+
+.confirmOTPSignIn{
+	color: #aaa !important;
+	text-align: center;
+	font-size: 14px;
+	margin-top: 50px;
+	
+	
+}
+
+.confirmOTPSignIn:hover{
+	color: #fff!important;
+	font-size: 15px;
+}

@@ -69,6 +69,17 @@ class IAssureTable extends Component {
 		}
 	}
 	componentDidMount() {
+		 var pageUrl = window.location.pathname;
+		    console.log("pageUrl = ",pageUrl);
+		    let a = pageUrl ? pageUrl.split('/') : "";
+		        console.log("a==>",a[1]); 
+		        const urlParam =a[2];
+		        this.setState({
+		      pageUrl   : a[1],
+		      });
+		        if(pageUrl=="/package-master"){
+		          $('.fixedWidth_new').css('width','45px');
+		        }
 		axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem("token");
 		$("html,body").scrollTop(0);
 		
@@ -559,11 +570,11 @@ class IAssureTable extends Component {
 				{this.state.tableObjects.downloadApply === true ?
 					this.state.tableData && this.state.id && this.state.tableName && this.state.tableData.length !== 0 ?
 						<React.Fragment>
-							<div className="col-lg-2 col-md-2 col-xs-12 col-sm-12 pull-right " title="Download as Excel">
-								<button type="button" className="btn col-md-4 col-sm-4 fa fa-print tableprintincon" title="Print Table" onClick={this.printTable}></button>
+							<div className="col-lg-1 col-md-2 col-xs-12 col-sm-12 pull-right noPadding " title="Download as Excel">
+								<button type="button" className="btn col-md-5 col-sm-4 fa fa-print tableprintincon pull-right" title="Print Table" onClick={this.printTable}></button>
 								<ReactHTMLTableToExcel
 									id="table-to-xls"
-									className="download-table-xls-button col-md-4 col-sm-4 fa fa-download tableprintincon"
+									className="download-table-xls-button col-md-5 col-sm-4 fa fa-download tableprintincon"
 
 									table={"Download-"+this.state.id}
 									sheet="tablexls"
@@ -596,10 +607,9 @@ class IAssureTable extends Component {
 						null
 				}
 
-				<div className="col-lg-12 col-sm-12 col-md-12 col-xs-12 NOpadding marginTop8">
-					<div className="table-responsive" id="section-to-print">
-						<table className="table iAssureITtable-bordered table-striped table-hover fixedTable" id={this.state.id}>
-							<thead className="tempTableHeader ">
+				<div className="col-lg-12 col-sm-12 col-md-12 col-xs-12 NOpadding marginTop8 table-responsive commonHeaderFixTable">
+				 <table id="commonTable" className="table iAssureITtable-bordered table-striped table-hover">
+				 	<thead className="tempTableHeader">
 								<tr className="tempTableHeader">
 									{this.state.twoLevelHeader.apply === true ?
 										this.state.twoLevelHeader.firstHeaderData.map((data, index) => {
@@ -611,27 +621,82 @@ class IAssureTable extends Component {
 										null
 									}
 								</tr>
-								<tr className="">
+								<tr className="tempTableHeader">
 									{
 										this.state.showCompanyId ?
 
-										<th className="umDynamicHeader srpadd text-center">Company ID</th>
+										<th scope="col" className="umDynamicHeader  srpadd text-center">Company ID</th>
 
 										:
-										<th className="umDynamicHeader srpadd text-center">Sr. No.</th>
+										<th scope="col" className="umDynamicHeader srpadd text-center">Sr. No.</th>
 
 									}
 									{this.state.tableHeading ?
 										Object.entries(this.state.tableHeading).map(
 											([key, value], i) => {
-												if (key === 'actions') {
+												{/*if (key === 'actions') {
 													return (
-														<th key={i} className=" umDynamicHeader srpadd text-center" id="ActionContent">{value}</th>
+														<th key={i} className=" umDynamicHeader srpadd text-center new_tableborder" id="ActionContent">{value}</th>
 													);
-												} else {
+												} 
+												if (key === 'empName') {
 													return (
-														<th key={i} className="umDynamicHeader srpadd  textAlignLeft">{value} <span onClick={this.sort.bind(this)} id={key} className="fa fa-sort tableSort"></span></th>
+														<th key={i} className=" umDynamicHeader srpadd text-center new_tableborder"style={{width:"160px"}}>{value}</th>
 													);
+												} 
+												if (key === 'contactDetails') {
+													return (
+														<th key={i} className=" "style={{width:"143px"}}>{value}</th>
+													);
+												} 
+												if (key === 'category') {
+													return (
+														<th key={i} className="text-center"style={{width:"232px"}}>{value}</th>
+													);
+												} 
+												if (key === 'documententity') {
+													return (
+														<th key={i} className=" "style={{width:"146px"}}>{value}</th>
+													);
+												} 
+												if (key === 'documentName') {
+													return (
+														<th key={i} className=" "style={{width:"151px"}}>{value}</th>
+													);
+												} 
+												if (key === 'approvingAuthorityId1') {
+													return (
+														<th key={i} className="text-center"style={{width:"143px"}}>{value}</th>
+													);
+												}
+												if (key === 'approvingAuthorityId2') {
+													return (
+														<th key={i} className="text-center"style={{width:"143px"}}>{value}</th>
+													);
+												}
+												if (key === 'approvingAuthorityId3') {
+													return (
+														<th key={i} className="text-center"style={{width:"143px"}}>{value}</th>
+													);
+												}
+												else {
+													return (
+														<th key={i} className="umDynamicHeader srpadd  textAlignCenter new_tableborder">{value} <span onClick={this.sort.bind(this)} id={key} className="fa fa-sort tableSort"></span></th>
+													);
+												}*/}
+												if(key === 'actions'){
+														return(
+															<th key={i} scope="col" className="umDynamicHeader srpadd text-center">
+																<div className="">{value}</div>
+															</th>
+														);	
+														
+												}else{
+													return(
+														<th key={i} scope="col" className="umDynamicHeader srpadd textAlignLeft">
+														<div>{value}</div>
+														 <span onClick={this.sort.bind(this)} id={key} className="fa fa-sort tableSort"></span></th>
+													);	
 												}
 
 											}
@@ -641,44 +706,49 @@ class IAssureTable extends Component {
 									}
 								</tr>
 							</thead>
-							<tbody className="">
+							<tbody>
 								{this.state.tableData && this.state.tableData.length > 0 ?
 									this.state.tableData.map(
 										(value, i) => {
 											return (
 												<tr key={i} className="">
 													{ this.state.showCompanyId?
-													<td className="textAlignCenter fixedWidth">{value.companyID}</td>
+													<td className="textAlignLeft">{value.companyID}</td>
 
 													:
-													<td className="textAlignCenter fixedWidth">{this.state.startRange + 1 + i}</td>
+													<td className="textAlignLeft">{this.state.startRange + 1 + i}</td>
 													}
 													{
 														Object.entries(value).map(
-															([key, value1], i) => {
+															([key, value1], j) => {
 																if ($.type(value1) === 'string') {
 																	var regex = new RegExp(/(<([^>]+)>)/ig);
 																	var value2 = value1 ? value1.replace(regex, '') : '';
 																	var aN = value2.replace(this.state.reA, "");
 																	if (aN && $.type(aN) === 'string') {
-																		var textAlign = 'textAlignLeft fixedWidth'
+																		var textAlign = 'textAlignLeft'
 																	} else {
 																		var bN = value1 ? parseInt(value1.replace(this.state.reN, ""), 10) : '';
 																		if (bN) {
-																			var textAlign = 'textAlignLeft fixedWidth';
+																			var textAlign = 'textAlignRight';
 																		} else {
-																			var textAlign = 'textAlignLeft fixedWidth';
+																			var textAlign = 'textAlignLeft';
 																		}
 																	}
 																} else {
-																	var textAlign = 'textAlignLeft fixedWidth';
+																	var textAlign = 'textAlignLeft';
 																}
 																var found = Object.keys(this.state.tableHeading).filter((k) => {
 																	return k === key;
 																});
 																if (found.length > 0) {
 																	if (key !== 'id') {
-																		return (<td className={textAlign} key={i}><div className={textAlign} dangerouslySetInnerHTML={{ __html: value1 }}></div></td>);
+																		{/*return (<td className={textAlign} key={i}><div className={textAlign} dangerouslySetInnerHTML={{ __html: value1 }}></div></td>);*/}
+																		if(value1){
+																			return(<td className={textAlign} key={j}><div className={textAlign} dangerouslySetInnerHTML={{ __html:value1}}></div></td>); 						
+																		}else{
+																			return(<td className={textAlign} key={j}><div className={textAlign} dangerouslySetInnerHTML={{ __html:value1}}></div></td>); 						
+																		}
 																	}
 																}
 
@@ -686,7 +756,7 @@ class IAssureTable extends Component {
 														)
 													}
 													{this.state.tableHeading && this.state.tableHeading.actions ?
-														<td className="textAlignCenter fixedWidth" id="ActionContent">
+														<td className="textAlignCenter">
 															<span>
 																{this.props.tableObjects.editUrl ?
 																	
@@ -777,7 +847,6 @@ class IAssureTable extends Component {
 								null
 						}
 						*/}
-					</div>
 
 				{/*Export To Excel*/}
 					<div className="table-responsive" id="HideTable">

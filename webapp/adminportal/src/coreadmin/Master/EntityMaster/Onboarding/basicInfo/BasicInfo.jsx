@@ -20,7 +20,7 @@ class BasicInfo extends Component {
     this.state = {
       "pathname"      : this.props.entity,
       "companyLogo"   : [],
-      "COI"   : [],
+      "COI"           : [],
       "countryData"   : [],
       "imageUploaded" : true,
       "companyPhoneAvailable" : true, 
@@ -28,8 +28,7 @@ class BasicInfo extends Component {
       "country"  : "",
       fileDetailUrl: "/api/entitymaster/get/filedetails/",
       goodRecordsHeading: {
-        supplierOf: "Supplier Of",
-        profileStatus: "Profile Status",
+       
         entityType: "Entity Type",
         companyName: "Company Name",
         groupName: "Group Name",
@@ -39,10 +38,39 @@ class BasicInfo extends Component {
         CIN: "CIN",
         COI: "COI",
         TAN: "TAN",
-      },
+        state   : "State",
+        GSTIN   : "GST",
+        PAN     : "PAN",
+        locationType        : "Location Type",
+        addressLine1        : "AddressLine1",
+        addressLine2        : "AddressLine2",
+        country             : "Country",
+        state               : "State",
+        district            : "District",
+        city                : "City",
+        area                : "Area",
+        pincode             : "Pincode",
+        branchName                : "Branch Name",
+        firstName                 : "First Name",
+        lastName                  : "Last Name",
+        empCategory               : "Employee Category",
+        empPriority               : "Priority",
+        phone                     : "Phone",
+        altPhone                  : "Alternate Phone",
+        email                     : "Email",
+        department                : "Department",
+        designation               : "Designation",
+        employeeID                : "Employee ID",
+        bookingApprovalRequired   : "BookingApprovalRequired",
+        approvingAuthorityId1     : "ApprovingAuthorityId1",
+        approvingAuthorityId2     : "ApprovingAuthorityId2",
+        approvingAuthorityId3     : "ApprovingAuthorityId2",
+        preApprovedKilometer      : "preApprovedKilometer",
+        preApprovedRides          : "preApprovedRides",
+        preApprovedAmount         : "preApprovedAmount",
+  },
       failedtableHeading: {
-        supplierOf: "Supplier Of",
-        profileStatus: "Profile Status",
+       
         entityType: "Entity Type",
         companyName: "Company Name",
         groupName: "Group Name",
@@ -52,7 +80,37 @@ class BasicInfo extends Component {
         CIN: "CIN",
         COI: "COI",
         TAN: "TAN",
-      
+         state                    : "State",
+        GSTIN                     : "GST",
+        PAN                       : "PAN",
+        locationType              : "Location Type",
+        addressLine1              : "AddressLine1",
+        addressLine2              : "AddressLine2",
+        country                   : "Country",
+        state                     : "State",
+        district                  : "District",
+        city                      : "City",
+        area                      : "Area",
+        pincode                   : "Pincode",
+        branchName                : "Branch Name",
+        firstName                 : "First Name",
+        lastName                  : "Last Name",
+        empCategory               : "Employee Category",
+        empPriority               : "Priority",
+        phone                     : "Phone",
+        altPhone                  : "Alternate Phone",
+        email                     : "Email",
+        department                : "Department",
+        designation               : "Designation",
+        employeeID                : "Employee ID",
+        bookingApprovalRequired   : "BookingApprovalRequired",
+        approvingAuthorityId1     : "ApprovingAuthorityId1",
+        approvingAuthorityId2     : "ApprovingAuthorityId2",
+        approvingAuthorityId3     : "ApprovingAuthorityId2",
+        preApprovedKilometer      : "preApprovedKilometer",
+        preApprovedRides          : "preApprovedRides",
+        preApprovedAmount         : "preApprovedAmount",
+        failedRemark              : "Failed Data Remark"
       }
     };
  
@@ -195,7 +253,6 @@ class BasicInfo extends Component {
           {
            this.props.history.push('/org-profile/' + this.state.entityID);
            this.edit();
-
           }*/}
         })
        })
@@ -323,8 +380,8 @@ class BasicInfo extends Component {
           var ext = fileName.split('.').pop();
           if (ext === "jpg" || ext === "png" || ext === "jpeg" || ext === "JPG" || ext === "PNG" || ext === "JPEG") {
             if(fileSize > 1048576){
-							swal("Allowed file size is 1MB");
-						}else{
+              swal("Allowed file size is 1MB");
+            }else{
               if (file) {
                 var objTitle = { fileInfo: file }
                 companyLogo.push(objTitle);
@@ -422,8 +479,8 @@ class BasicInfo extends Component {
           var ext = fileName.split('.').pop();
           if (ext === "jpg" || ext === "png" || ext === "pdf" || ext === "jpeg" || ext === "JPG" || ext === "PNG" || ext === "JPEG" || ext === "PDF") {
             if(fileSize > 1048576){
-							swal("Your file size is exceeding max size allowed which is 1 MB.");
-						}else{
+              swal("Your file size is exceeding max size allowed which is 1 MB.");
+            }else{
               if (file) {
                 var objTitle = { fileInfo: file }
                 COI.push(objTitle);
@@ -637,23 +694,21 @@ class BasicInfo extends Component {
 
     })
   }
-  getFileDetails(fileName) {
+   getFileDetails(fileName){
+     axios
+      .get(this.state.fileDetailUrl+fileName)
+      .then((response)=> {
+      $('.fullpageloader').hide();  
+      if (response) {
+        this.setState({
+            fileDetails         : response.data,
+            failedRecordsCount  : response.data.failedRecords.length,
+            goodDataCount       : response.data.goodrecords.length
+        });
 
-    axios
-      .get(this.state.fileDetailUrl + this.state.pathname + "/" + fileName)
-      .then((response) => {
-        $('.fullpageloader').hide();
-        if (response) {
-          this.setState({
-            fileDetails: response.data,
-            failedRecordsCount: response.data.failedRecords.length,
-            goodDataCount: response.data.goodrecords.length
-          });
-          if (this.state.pathname === "corporate") {
-            var tableData = response.data.goodrecords.map((a, i) => {
-              return {
-                "supplierOf": a.supplierOf ? a.supplierOf : '-',
-                "profileStatus": a.profileStatus ? a.profileStatus : '-',
+          var tableData = response.data.goodrecords.map((a, i)=>{
+            return{
+                
                 "entityType": a.entityType ? a.entityType : '-',
                 "companyName": a.companyName ? a.companyName : '-',
                 "groupName": a.groupName ? a.groupName : '-',
@@ -663,35 +718,36 @@ class BasicInfo extends Component {
                 "CIN": a.CIN ? a.CIN : '-',
                 "COI": a.COI ? a.COI : '-',
                 "TAN": a.TAN ? a.TAN : "-"
-              }
-            })
-
-            var failedRecordsTable = response.data.failedRecords.map((a, i) => {
-              return {
-                "supplierOf": a.supplierOf ? a.supplierOf : '-',
-                "profileStatus": a.profileStatus ? a.profileStatus : '-',
-                "entityType": a.entityType ? a.entityType : '-',
-                "companyName": a.companyName ? a.companyName : '-',
-                "groupName": a.groupName ? a.groupName : '-',
-                "website": a.website ? a.website : '-',
-                "companyPhone": a.companyPhone ? a.companyPhone : '-',
-                "companyEmail": a.companyEmail ? a.companyEmail : '-',
-                "CIN": a.CIN ? a.CIN : '-',
-                "COI": a.COI ? a.COI : '-',
-                "TAN": a.TAN ? a.TAN : "-"
-              }
-            })
-          }
-
-          this.setState({
-            goodRecordsTable: tableData,
-            failedRecordsTable: failedRecordsTable
+            }
           })
-        }
+
+          var failedRecordsTable = response.data.failedRecords.map((a, i)=>{
+          return{
+                
+                "entityType": a.entityType ? a.entityType : '-',
+                "companyName": a.companyName ? a.companyName : '-',
+                "groupName": a.groupName ? a.groupName : '-',
+                "website": a.website ? a.website : '-',
+                "companyPhone": a.companyPhone ? a.companyPhone : '-',
+                "companyEmail": a.companyEmail ? a.companyEmail : '-',
+                "CIN": a.CIN ? a.CIN : '-',
+                "COI": a.COI ? a.COI : '-',
+                "TAN": a.TAN ? a.TAN : "-",
+                "failedRemark"  : a.failedRemark     ? a.failedRemark : '-' 
+          }
+          })
+          
+        this.setState({
+            goodRecordsTable    : tableData,
+            failedRecordsTable  : failedRecordsTable
+        })
+      }
       })
-      .catch((error) => {
-      })
+      .catch((error)=> { 
+        console.log('error', error);
+      }) 
   }
+
 
   getCountryConfigDetails(){
     axios.post('/api/countryspecificConfig/list')
@@ -703,7 +759,7 @@ class BasicInfo extends Component {
   }
   
 
-  render() {
+ render() {
     return (
 
       <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 NOPadding">
@@ -713,10 +769,10 @@ class BasicInfo extends Component {
             this.props.match.params.entityID ? 
             null:
             <div  className="col-lg-12 col-md-12 col-sm-12 col-xs-12 mt20">
-            {/*  <ul className="nav tabNav nav-pills col-lg-3 col-md-3 col-sm-12 col-xs-12 pull-right">
+              <ul className="nav tabNav nav-pills col-lg-3 col-md-3 col-sm-12 col-xs-12 pull-right">
                 <li className="active col-lg-5 col-md-5 col-xs-5 col-sm-5 NOpadding text-center"><a data-toggle="pill" href="#manual">Manual</a></li>
                 <li className="col-lg-6 col-md-6 col-xs-6 col-sm-6 NOpadding  text-center"><a data-toggle="pill" href="#bulk">Bulk Upload</a></li>
-              </ul>*/}
+              </ul>
             </div>
           }
             <div className="box-header with-border col-lg-12 col-md-12 col-xs-12 col-sm-12 NOpadding-right">
@@ -877,7 +933,13 @@ class BasicInfo extends Component {
                                 </label>
                                 <input type="text" id="website" className="form-control col-lg-12 col-md-12 col-sm-12 col-xs-12 inputText" onKeyDown={this.keyPressWeb} value={this.state.website} ref="website" name="website" onChange={this.handleChange} />
                               </div>
-                              <div className=" col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                             
+                             
+                          </div>
+                          </div>
+                        </div>
+                        <div className="form-margin col-lg-12 col-md-12 col-sm-12 col-xs-12 pdcls ">
+                         <div className=" col-lg-3 col-md-3 col-sm-12 col-xs-12">
                                 <label className="labelform col-lg-12 col-md-12 col-sm-12 col-xs-12 NOpadding-left">Country<i className="astrick">*</i></label>
                                 <select className="form-control col-lg-12 col-md-12 col-sm-12 col-xs-12 errorinputText" value={this.state.country} ref="country" name="country" id="country" onChange={this.handleCountryChange.bind(this)} required>
                                   <option value="" disabled>--Select Country--</option>
@@ -893,11 +955,6 @@ class BasicInfo extends Component {
                                   }
                                 </select>
                               </div>
-                             
-                          </div>
-                          </div>
-                        </div>
-                        <div className="form-margin col-lg-12 col-md-12 col-sm-12 col-xs-12 pdcls ">
                         <div className="col-lg-3 col-md-3 col-sm-12 col-xs-12 panerror" >
                                 <label className="labelform col-lg-12 col-md-12 col-sm-12 col-xs-12 NOpadding-left">Tax Deduction Account Number
                                   <a href="#" data-tip data-for='basicInfo2Tooltip' className="pull-right"> <i title="Eg. NGPO02911G" className="fa fa-question-circle"></i> </a>
@@ -910,9 +967,9 @@ class BasicInfo extends Component {
                             </label>
                             <input type="text" id="CIN" maxLength="21" className="form-control col-lg-12 col-md-12 col-sm-12 col-xs-12 UpperCase inputText" placeholder="L12345MH2019PTC123456" value={this.state.CIN} ref="CIN" name="CIN" onChange={this.handleChange} />
                           </div>
-                          <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12 NOpadding ">
+                          <div className="col-lg-3 col-md-4 col-sm-12 col-xs-12 NOpadding ">
                             <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                              <label className="labelform col-lg-12 col-md-12 col-sm-12 col-xs-12">Add COI Document (jpg, jpeg, png, pdf)</label>
+                              <label className="labelform col-lg-12 col-md-12 col-sm-12 col-xs-12">Add COI Doc (jpg, jpeg, png, pdf)</label>
                             </div>
                             <div className="col-lg-3 col-md-3 col-sm-12 col-xs-12">
                               <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 NOpadding marginsBottom" id="hide">
@@ -929,7 +986,7 @@ class BasicInfo extends Component {
                                     return (
                                       <div key={i} className="col-lg-3 col-md-3 col-sm-12 col-xs-12">
                                         <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 NOpadding marginsBottom" id="hide">
-                                          <label className="labelform deletelogo col-lg-12 col-md-12 col-sm-12 col-xs-12" title="Delete Document" id={doc} onClick={this.deleteDoc.bind(this)}>x</label>
+                                          <label className="labelform deletelogoCOI col-lg-12 col-md-12 col-sm-12 col-xs-12" title="Delete Document" id={doc} onClick={this.deleteDoc.bind(this)}>x</label>
                                           <div title={(doc.substring(doc.lastIndexOf("/"))).replace('/', "")} className="col-lg-12 col-md-12 col-sm-12 col-xs-12 brdlogos1 " id="LogoImageUpOne">
                                             <img src={'/images/pdf.png'} alt={"coi"+i} className="img-responsive logoStyle" />
                                           </div>
@@ -940,7 +997,7 @@ class BasicInfo extends Component {
                                     return (
                                       <div key={i} className="col-lg-3 col-md-3 col-sm-12 col-xs-12">
                                         <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 NOpadding marginsBottom" id="hide">
-                                          <label className="labelform deletelogo col-lg-12 col-md-12 col-sm-12 col-xs-12" title="Delete Document" id={doc} onClick={this.deleteDoc.bind(this)}>x</label>
+                                          <label className="labelform deletelogoCOI col-lg-12 col-md-12 col-sm-12 col-xs-12" title="Delete Document" id={doc} onClick={this.deleteDoc.bind(this)}>x</label>
                                           <div title={(doc.substring(doc.lastIndexOf("/"))).replace('/', "")} className="col-lg-12 col-md-12 col-sm-12 col-xs-12 brdlogos1" id="LogoImageUpOne">
                                             <img src={doc} alt={"coi"+i} className="img-responsive logoStyle" />
                                           </div>
@@ -962,6 +1019,7 @@ class BasicInfo extends Component {
                                 null)
                             }
                           </div>
+
                       
                         </div>
                       </div>

@@ -3,7 +3,7 @@ import jQuery                   from 'jquery';
 import $                        from 'jquery';
 import axios                    from 'axios';
 import swal                     from 'sweetalert';
-import IAssureTable             from '../IAssureTable/IAssureTable.jsx';
+import IAssureTable             from '../IAssureTablePackage/IAssureTable.jsx';
 import OneFieldForm             from '../Master/OneFieldForm/OneFieldForm.js';
 import PackageMasterForm        from './PackageMasterForm.js';
 
@@ -111,6 +111,15 @@ class PackageMaster extends Component {
   }
   /*======= componentDidMount() =======*/
   componentDidMount() {
+    var pageUrl = window.location.pathname;
+    console.log("pageUrl = ",pageUrl);
+    let a = pageUrl ? pageUrl.split('/') : "";
+        console.log("a==>",a[1]); 
+        const urlParam =a[2];
+        this.setState({
+      pageUrl   : a[1],
+      });
+
     this.edit(this.props.match.params.packageID);
     this.getData(this.state.startRange, this.state.limitRange);
     this.getPackageType();
@@ -407,7 +416,6 @@ class PackageMaster extends Component {
       .then((response) => {
         var tableData = response.data.map((a, i)=>{
           return {
-            _id             : a._id,
             packageEntity   : a.packageEntity === "CorporatePackage" ? "Corporate Package" : "Vendor Package",
             citytype        : a.cityType,
             carCategory     : a.carCategory,
@@ -421,7 +429,9 @@ class PackageMaster extends Component {
             driverAllowance : a.driverAllow,
             nightHalt       : a.nightHalt,
             nightCharges    : a.nightCharges,
-            morningCharges  : a.morningCharges
+            morningCharges  : a.morningCharges,
+            _id             : a._id,
+
           }
         })
         this.setState({

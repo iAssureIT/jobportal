@@ -1116,6 +1116,21 @@ select#gender option[value="others"] {
     font-weight: 700;
     cursor: pointer;
 }
+.deletelogoCOI{
+    background: #dad8d8;
+    border-radius: 100%;
+    height: 15px;
+    width: 15px;
+    padding: 0px;
+    font-size: 10px;
+    text-align: center;
+    position: absolute;
+    z-index: 1;
+    top: -5px;
+    right: -25px;
+    font-weight: 700;
+    cursor: pointer;
+}
 .uploadImageClient{
     position: absolute;
     top: 20px;

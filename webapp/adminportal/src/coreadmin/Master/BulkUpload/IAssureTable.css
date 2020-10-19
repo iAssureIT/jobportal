@@ -110,3 +110,6 @@
   max-height: 200px; /* e.g. */
   overflow-y: scroll; /* keeps the scrollbar even if it doesn't need it; display purpose */
 }
+.bulkwidth{
+  width: 196px;
+}

@@ -3,23 +3,17 @@ mongoose.pluralize(null);
 
 const candidateprofileSchema = mongoose.Schema({
 	_id : mongoose.Schema.Types.ObjectId,
-	company_id: String,
-	jobBasicInfo : {
-		jobTitle			: String,
-		jobLocationCity		: String,
-		jobLocationCountry 	: String,
-		jobGeoLocation 		: {
-								lat: String,
-								long: String,
-						      },
-		workFromHome 		: Boolean,
-		contactPersonName 	: String,
-		contactPersonEmail 	: String,
-		contactPersonPhone 	: String,
-		jobType 			: String,
-		jobTime 			: String,
-		lastDateOfAppl 		: Date,
-		jobDesc 			: String,
+	basicInfo : {
+		firstName 			: String,	
+		middleName 			: String,
+		lastName 			: String,
+		dob 				: Date,		
+		age					: String,
+		gender				: String,
+		maritalStatus 		: String,
+		anniversaryDate 	: Date,
+		languagesKnown		: Array,
+		nationality 		: String	
 	},
 	CTCOffered : {
 		minCTC 		: Number,

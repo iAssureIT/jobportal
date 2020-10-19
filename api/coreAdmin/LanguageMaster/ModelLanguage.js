@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 
-const langaugeSchema = mongoose.Schema({
+const languageSchema = mongoose.Schema({
     _id                       : mongoose.Schema.Types.ObjectId,
-    langauge                  : { type: String, index: true, unique: true  },
+    language                  : { type: String, index: true, unique: true  },
     createdBy                 : { type: mongoose.Schema.Types.ObjectId, ref: 'users' },
     createdAt                 : Date,
     fileName                  : String,
@@ -14,4 +14,4 @@ const langaugeSchema = mongoose.Schema({
                                 ]
 });
 
-module.exports = mongoose.model('langaugemaster',langaugeSchema);
+module.exports = mongoose.model('languagemaster',languageSchema);

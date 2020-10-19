@@ -16,7 +16,7 @@ export default class AdminDashboard extends Component{
       menuValues : {
         candidateData             : false,
         supplierData           : false,
-        employerData          : false,
+        corporateData          : false,
         contractmanagement     : false,
         masterData             : false,
       }
@@ -111,7 +111,7 @@ export default class AdminDashboard extends Component{
   }
 
   render(){
-    let {dashboard,candidateData,supplierData,employerData,contractmanagement,masterData, billingData} = this.state.menuValues;
+    let {dashboard,candidateData,supplierData,corporateData,contractmanagement,masterData, billingData} = this.state.menuValues;
 
     return(
       <aside className="main-sidebar control-sidebar sidebarWrapper scrollBox">
@@ -146,7 +146,7 @@ export default class AdminDashboard extends Component{
                   </a> 
                 </li>  
               <li className="noPadLR"> 
-                  <a href="/employer-report" data-id="/employer-report" title="employer Report" onClick={this.activeMenu.bind(this)}>
+                  <a href="/corporate-report" data-id="/corporate-report" title="corporate Report" onClick={this.activeMenu.bind(this)}>
                     <i className="fa fa-circle-o dashr" />Employer Report
                   </a> 
                 </li>    
@@ -163,16 +163,16 @@ export default class AdminDashboard extends Component{
               </ul>
             </li>
             <li className="treeview" >
-              <a href="JavaScript:void(0);" onClick={()=>this.openMenu("employerData")} title="employer Master">
+              <a href="JavaScript:void(0);" onClick={()=>this.openMenu("corporateData")} title="corporate Master">
                 <i className="fa fa-users" aria-hidden="true"></i>
                 <span className="smsidenames sidebarMenuTitle"> Employers </span>
                 <span className="pull-right-container">
-                  <i className={"fa pull-right menu-icon-toggle "+(employerData?this.openIcon:this.closeIcon)} />
+                  <i className={"fa pull-right menu-icon-toggle "+(corporateData?this.openIcon:this.closeIcon)} />
                 </span>
               </a>
               <ul className="treeview-menu" >                    
                 <li className="noPadLR"> 
-                  <a href="/employer/list" data-id="/employer/list" title="employer List" onClick={this.activeMenu.bind(this)}>
+                  <a href="/corporate/list" data-id="/corporate/list" title="corporate List" onClick={this.activeMenu.bind(this)}>
                     <i className="fa fa-circle-o dashr" />Employer Master
                   </a> 
                 </li>   

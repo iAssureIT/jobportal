@@ -15,7 +15,7 @@ exports.insertJobRole = (req,res,next)=>{
             res.status(200).json({ duplicated : true });
         }else{
             const jobRoleMaster = new JobRoleMaster({
-                            _id                         : new mongoose.Roles.ObjectId(),
+                            _id                         : new mongoose.Types.ObjectId(),
                             jobRole                     : req.body.fieldValue,
                             createdBy                   : req.body.createdBy,
                             createdAt                   : new Date()

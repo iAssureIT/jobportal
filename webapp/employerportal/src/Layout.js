@@ -126,7 +126,7 @@ class Layout extends Component  {
                                             null
                                         :
                                         ( this.state.empProfileStatus ? <Leftsidebar/> : null) */
-                                        <Leftsidebar/>
+                                       /* <Leftsidebar/>*/
                                     }
 
                                     <div className="container-fluid main-container">

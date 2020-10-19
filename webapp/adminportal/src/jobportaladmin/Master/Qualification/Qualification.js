@@ -8,25 +8,25 @@ import OneFieldForm         from '../../../coreadmin/Master/OneFieldForm/OneFiel
 import 'rc-time-picker/assets/index.css';
 
 const format = "h:mm a";
-class QualificationLevel extends Component{
+class Qualification extends Component{
    constructor(props) {
     super(props);
     this.state = {
       "fields" : {
-        placeholder : "Add qualification level & press 'Enter' Key",
-        title       : "Qualification Level",
-        attributeName : "qualificationLevel"
+        placeholder : "Add qualification & press 'Enter' Key",
+        title       : "Qualification",
+        attributeName : "qualification"
       },
       "tableHeading": {
-          qualificationLevel: "Qualification Level",
+          qualification: "Qualification",
           actions: 'Action',
       },
       "tableObjects": {
           deleteMethod: 'delete',
-          apiLink: '/api/qualificationlevelmaster/',
+          apiLink: '/api/qualificationmaster/',
           paginationApply: false,
           searchApply: false,
-          editUrl: '/qualification-level'
+          editUrl: '/qualification'
       },
       "startRange": 0,
       "limitRange": 10,
@@ -62,4 +62,4 @@ class QualificationLevel extends Component{
   }
 }
 
- export default QualificationLevel;
+ export default Qualification;

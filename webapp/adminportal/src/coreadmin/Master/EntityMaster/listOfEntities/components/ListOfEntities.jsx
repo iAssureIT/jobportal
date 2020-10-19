@@ -4,7 +4,7 @@ import axios from 'axios';
 import EntityDetails from './EntityDetails.jsx';
 import {withRouter}  from 'react-router-dom';
 
-import IAssureTable           from "../../../../IAssureTable/IAssureTable.jsx";
+import IAssureTableNew         from "../../../../iAssureTableNew/IAssureTableNew.jsx";
 
 import 'bootstrap/js/tab.js';
 import '../css/ListOfEntity.css';
@@ -124,12 +124,12 @@ class ListOfEntities extends Component {
 						return "<ul class='nopadding'><li><a title='View profile' target='_blank' href='/employee-profile/'"+c.personID+">"+c.firstName+" "+c.lastName+"</a></li><li>"+c.email+"</li><li>"+(c.departmentName ? c.departmentName : "")+"</li><li>"+(c.designationName ? c.designationName : "")+"</li></ul>"
 					})
 			        return{
-			        	_id:a._id,
-			            companyName:"<a  title='View company profile'  target='_blank' href='/company-profile/"+(a.company_Id)+"'>"+a.companyName +" (" +a.companyID+")</a>"+"<br> <b>Group Name : </b>"+a.groupName,
+			            companyName:"<a  title='View company profile'  target='_blank' href='/company-profile/"+(a._id)+"'>"+a.companyName +" (" +a.companyID+")</a>"+"<br> <b>Group Name : </b>"+a.groupName,
 			            companyEmail:"<b>Email : </b>"+a.companyEmail+"<br><b>Mobile No. : </b>"+a.companyPhone,
 			            location:locDetails && locDetails.length > 0 ? locDetails : "No Location Added Yet",
 			            contacts:contactData && contactData.length > 0 ? contactData : "No Contacts Added Yet",
-			            action:""
+			            action:"",
+			            _id:a._id,
 			        }
 			      })
 				
@@ -142,13 +142,13 @@ class ListOfEntities extends Component {
 						return "<ul class='nopadding'><li><a title='View profile' target='_blank'  href='/employee-profile/"+(c.personID)+"'>"+c.firstName+" "+c.lastName+"</a></li><li>"+c.email+"</li><li>"+(c.departmentName ? c.departmentName : "")+"</li><li>"+(c.designationName ? c.designationName : "")+"</li></ul>"
 					})
 			        return{
-			        	_id:a._id,
-			            companyID:a.companyID,
-			            companyName:"<a  title='View company profile'  target='_blank' href='/company-profile/"+(a.company_Id)+"'>"+a.companyName +"</a>"+"<br> <b>Group Name : </b> "+a.groupName,
+			            companyName:"<a  title='View company profile'  target='_blank' href='/company-profile/"+(a._id)+"'>"+a.companyName +"</a>"+"<br> <b>Group Name : </b> "+a.groupName,
 			            companyEmail:"<b>Email : </b>"+a.companyEmail+"<br><b>Mobile No. : </b>"+a.companyPhone,
 			            location:locDetails && locDetails.length > 0 ? locDetails : "No Location Added Yet",
 			            contacts:contactData && contactData.length > 0 ? contactData : "No Contacts Added Yet",
-			            action:""
+			            action:"",
+			            _id:a._id,
+			            companyID:a.companyID,
 			        }
 			      })
 				}
@@ -420,6 +420,7 @@ class ListOfEntities extends Component {
 			.then((response) => {
 				if (this.state.roles.indexOf("admin") == -1)
 				{
+					
 					var FilteredData =  response.data.filter(entity=>entity.supplierOf == this.state.getcompanyID)
 					var tableData = FilteredData.map((a, i)=>{
 					var locDetails = a.locations.map((l,i)=>{
@@ -429,12 +430,12 @@ class ListOfEntities extends Component {
 						return "<ul class='nopadding'><li><a title='View profile' target='_blank' href='/employee-profile/'"+c.personID+">"+c.firstName+" "+c.lastName+"</a></li><li>"+c.email+"</li><li>"+(c.departmentName ? c.departmentName : "")+"</li><li>"+(c.designationName ? c.designationName : "")+"</li></ul>"
 					})
 			        return{
-			        	_id:a._id,
-			            companyName:"<a  title='View company profile'  target='_blank' href='/company-profile/"+(a.company_Id)+"'>"+a.companyName +" (" +a.companyID+")</a>"+"<br> <b>Group Name : </b>"+a.groupName,
+			            companyName:"<a  title='View company profile'  target='_blank' href='/company-profile/"+(a._id)+"'>"+a.companyName +" (" +a.companyID+")</a>"+"<br> <b>Group Name : </b>"+a.groupName,
 			            companyEmail:"<b>Email : </b>"+a.companyEmail+"<br><b>Mobile No. : </b>"+a.companyPhone,
 			            location:locDetails && locDetails.length > 0 ? locDetails : "No Location Added Yet",
 			            contacts:contactData && contactData.length > 0 ? contactData : "No Contacts Added Yet",
-			            action:""
+			            action:"",
+			        	_id:a._id,
 			        }
 			      })
 				
@@ -447,13 +448,13 @@ class ListOfEntities extends Component {
 						return "<ul class='nopadding'><li><a title='View profile' target='_blank'  href='/employee-profile/"+(c.personID)+"'>"+c.firstName+" "+c.lastName+"</a></li><li>"+c.email+"</li><li>"+(c.departmentName ? c.departmentName : "")+"</li><li>"+(c.designationName ? c.designationName : "")+"</li></ul>"
 					})
 			        return{
-			        	_id:a._id,
-			        	companyID:a.companyID,
-			            companyName:"<a  title='View company profile'  target='_blank' href='/company-profile/"+(a.company_Id)+"'>"+a.companyName +"</a>"+"<br> <b>Group Name : </b>"+a.groupName,
+			            companyName:"<a  title='View company profile'  target='_blank' href='/company-profile/"+(a._id)+"'>"+a.companyName +"</a>"+"<br> <b>Group Name : </b>"+a.groupName,
 			            companyEmail:"<b>Email : </b>"+a.companyEmail+"<br><b>Mobile No. : </b>"+a.companyPhone,
 			            location:locDetails && locDetails.length > 0 ? locDetails : "No Location Added Yet",
 			            contacts:contactData && contactData.length > 0 ? contactData : "No Contacts Added Yet",
-			            action:""
+			            action:"",
+			        	_id:a._id,
+			        	companyID:a.companyID,
 			        }
 			      })
 				}
@@ -591,17 +592,18 @@ class ListOfEntities extends Component {
 								</div>
 
 								{this.state.view === 'List' ?
-								<div className="col-lg-12"> <IAssureTable 
-			                      tableHeading={this.state.tableHeading}
-			                      dataCount={this.state.entityCount}
-			                      tableData={this.state.RecordsTable}
-			                      tableObjects={this.state.tableObjects}
-			                      getData={this.getData.bind(this)}
-			                      id={"id"}
-			                      tableName={this.state.entityType}
-			                      showCompanyId={true}
-			                      />
-			                      </div>
+					
+								 <div className="col-lg-12"> <IAssureTableNew 
+			                       tableHeading={this.state.tableHeading}
+			                       dataCount={this.state.entityCount}
+			                       tableData={this.state.RecordsTable}
+			                       tableObjects={this.state.tableObjects}
+			                       getData={this.getData.bind(this)}
+			                       id={"id"}
+			                       tableName={this.state.entityType}
+			                       showCompanyId={true}
+			                       />
+			                       </div>
 								 :
 								 this.state.entityList && this.state.entityList.length > 0 ?
 									<div className="col-lg-4 col-md-6 col-sm-6 col-xs-6 scrollbar" id="style-2">

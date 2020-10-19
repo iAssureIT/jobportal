@@ -3,16 +3,23 @@ import {render}           from 'react-dom';
 import $                  from "jquery";
 import axios              from 'axios';
 
-import AddressType        from  '../Master/AddressType/AddressType.js';
-import Industry           from  '../Master/Industry/Industry.js';
-import FunctionalArea     from  '../Master/FunctionalArea/FunctionalArea.js';
-import JobCategory        from  '../Master/JobCategory/JobCategory.js';
-import JobType            from  '../Master/JobType/JobType.js';
-import QualificationLevel  from  '../Master/QualificationLevel/QualificationLevel.js';
-import Language             from "../Master/Language/Language.js"
+import AddressType          from  '../Master/AddressType/AddressType.js';
+import Industry             from  '../Master/Industry/Industry.js';
+import SubIndustry          from  '../Master/SubIndustry/SubIndustry.js';
+import FunctionalArea       from  '../Master/FunctionalArea/FunctionalArea.js';
+import JobCategory          from  '../Master/JobCategory/JobCategory.js';
+import JobType              from  '../Master/JobType/JobType.js';
+import JobTime              from  '../Master/JobTime/JobTime.js';
+import JobRole              from  '../Master/JobRole/JobRole.js';
+
+import QualificationLevel   from  '../Master/QualificationLevel/QualificationLevel.js';
+import Qualification        from  '../Master/Qualification/Qualification.js';
+
+
 import University           from "../Master/University/University.js"
 import Collage              from "../Master/Collage/Collage.js"
-
+import Language             from "../Master/Language/Language.js"
+import Skill             from "../Master/Skill/Skill.js"
 import '../../coreadmin/companysetting/css/CompanySetting.css';
 
  class MasterData extends Component{
@@ -90,6 +97,10 @@ import '../../coreadmin/companysetting/css/CompanySetting.css';
                             <a className="tabLeft lettersp tablefthr" href="#Industry" data-toggle="tab"  onClick={this.tab.bind(this)}>Industry</a>
                             </li>
                             <li className="col-lg-12 col-md-12 col-xs-12 col-sm-12">
+                            <a className="tabLeft lettersp tablefthr" href="#SubIndustry" data-toggle="tab"  onClick={this.tab.bind(this)}>Sub Industry</a>
+                            </li>
+                            
+                            <li className="col-lg-12 col-md-12 col-xs-12 col-sm-12">
                             <a className="tabLeft lettersp tablefthr" href="#FunctionalArea" data-toggle="tab"  onClick={this.tab.bind(this)}>Functional Area</a>
                             </li>
                             <li className="col-lg-12 col-md-12 col-xs-12 col-sm-12">
@@ -99,10 +110,17 @@ import '../../coreadmin/companysetting/css/CompanySetting.css';
                             <a className="tabLeft lettersp tablefthr" href="#JobType" data-toggle="tab"  onClick={this.tab.bind(this)}>Job Type</a>
                             </li>
                             <li className="col-lg-12 col-md-12 col-xs-12 col-sm-12">
+                            <a className="tabLeft lettersp tablefthr" href="#JobTime" data-toggle="tab"  onClick={this.tab.bind(this)}>Job Time</a>
+                            </li>
+                            <li className="col-lg-12 col-md-12 col-xs-12 col-sm-12">
+                            <a className="tabLeft lettersp tablefthr" href="#JobRole" data-toggle="tab"  onClick={this.tab.bind(this)}>Job Role</a>
+                            </li>
+
+                            <li className="col-lg-12 col-md-12 col-xs-12 col-sm-12">
                             <a className="tabLeft lettersp tablefthr" href="#QualificationLevel" data-toggle="tab"  onClick={this.tab.bind(this)}>Qualification Level</a>
                             </li>
                             <li className="col-lg-12 col-md-12 col-xs-12 col-sm-12">
-                            <a className="tabLeft lettersp tablefthr" href="#Language" data-toggle="tab"  onClick={this.tab.bind(this)}>Language</a>
+                            <a className="tabLeft lettersp tablefthr" href="#Qualification" data-toggle="tab"  onClick={this.tab.bind(this)}>Qualification</a>
                             </li>
                             <li className="col-lg-12 col-md-12 col-xs-12 col-sm-12">
                             <a className="tabLeft lettersp tablefthr" href="#University" data-toggle="tab"  onClick={this.tab.bind(this)}>University</a>
@@ -110,18 +128,34 @@ import '../../coreadmin/companysetting/css/CompanySetting.css';
                             <li className="col-lg-12 col-md-12 col-xs-12 col-sm-12">
                             <a className="tabLeft lettersp tablefthr" href="#Collage" data-toggle="tab"  onClick={this.tab.bind(this)}>Collage</a>
                             </li>
+                            <li className="col-lg-12 col-md-12 col-xs-12 col-sm-12">
+                            <a className="tabLeft lettersp tablefthr" href="#Language" data-toggle="tab"  onClick={this.tab.bind(this)}>Language</a>
+                            </li>
+                            <li className="col-lg-12 col-md-12 col-xs-12 col-sm-12">
+                            <a className="tabLeft lettersp tablefthr" href="#Skill" data-toggle="tab"  onClick={this.tab.bind(this)}>Skill</a>
+                            </li>
                           </ul>    
                       </div>
                       <div className="tab-content col-lg-9 col-md-9 col-xs-12 col-sm-12">  
                         <div className="tab-pane active" id="AddressType"><AddressType  editId={this.state.editId} history={this.props.history}/>  </div>
                         <div className="tab-pane" id="Industry"><Industry  editId={this.state.editId} history={this.props.history}/>  </div>
+                        
+                        <div className="tab-pane" id="SubIndustry"><SubIndustry  editId={this.state.editId} history={this.props.history}/>  </div>
+                        
                         <div className="tab-pane" id="FunctionalArea"><FunctionalArea  editId={this.state.editId} history={this.props.history}/>  </div>
                         <div className="tab-pane" id="JobCategory"><JobCategory  editId={this.state.editId} history={this.props.history}/>  </div>
                         <div className="tab-pane" id="JobType"><JobType  editId={this.state.editId} history={this.props.history}/>  </div>
-                        <div className="tab-pane" id="QualificationLevel"><QualificationLevel  editId={this.state.editId} history={this.props.history}/>  </div>
-                        <div className="tab-pane" id="Language"><Language  editId={this.state.editId} history={this.props.history}/>  </div>
+                        <div className="tab-pane" id="JobTime"><JobTime  editId={this.state.editId} history={this.props.history}/>  </div>
+                        <div className="tab-pane" id="JobRole"><JobRole  editId={this.state.editId} history={this.props.history}/>  </div>
+                        
                         <div className="tab-pane" id="University"><University  editId={this.state.editId} history={this.props.history}/>  </div>
                         <div className="tab-pane" id="Collage"><Collage  editId={this.state.editId} history={this.props.history}/>  </div>
+                        <div className="tab-pane" id="QualificationLevel"><QualificationLevel  editId={this.state.editId} history={this.props.history}/>  </div>
+                        <div className="tab-pane" id="Qualification"><Qualification  editId={this.state.editId} history={this.props.history}/>  </div>
+                        
+                        <div className="tab-pane" id="Language"><Language  editId={this.state.editId} history={this.props.history}/>  </div>
+                        <div className="tab-pane" id="Skill"><Skill  editId={this.state.editId} history={this.props.history}/>  </div>
+                        
                       </div> 
                     </div>
                   </div>

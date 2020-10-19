@@ -6,21 +6,21 @@ exports.insertUniversity = (req,res,next)=>{
     processData();
     async function processData(){
     var allUniversity = await fetchUniversity()
-        var jobType = allUniversity.filter((data)=>{
-        if (data.jobType.trim().toLowerCase() == req.body.fieldValue.trim().toLowerCase()) {
+        var university = allUniversity.filter((data)=>{
+        if (data.university.trim().toLowerCase() == req.body.fieldValue.trim().toLowerCase()) {
             return data;
         }
         })
-        if (jobType.length > 0) {
+        if (university.length > 0) {
             res.status(200).json({ duplicated : true });
         }else{
-            const jobTypeMaster = new UniversityMaster({
+            const universityMaster = new UniversityMaster({
                             _id                         : new mongoose.Types.ObjectId(),
-                            jobType                     : req.body.fieldValue,
+                            university                  : req.body.fieldValue,
                             createdBy                   : req.body.createdBy,
                             createdAt                   : new Date()
                         })
-                        jobTypeMaster.save()
+                        universityMaster.save()
                         .then(data=>{
                             res.status(200).json({ created : true, fieldID : data._id });
                         })
@@ -93,7 +93,7 @@ exports.fetchSingleUniversity = (req, res, next)=>{
 };
 
 exports.searchUniversity = (req, res, next)=>{
-    UniversityMaster.find({ jobType: { $regex : req.params.str ,$options: "i" }  })
+    UniversityMaster.find({ university: { $regex : req.params.str ,$options: "i" }  })
         .exec()
         .then(data=>{
             res.status(200).json(data);
@@ -106,7 +106,7 @@ exports.updateUniversity = (req, res, next)=>{
     UniversityMaster.updateOne(
             { _id:req.body.fieldID },  
             {
-                $set:   {  'jobType'       : req.body.fieldValue  }
+                $set:   {  'university'       : req.body.fieldValue  }
             }
         )
         .exec()

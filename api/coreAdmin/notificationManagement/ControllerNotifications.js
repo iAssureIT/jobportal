@@ -1,4 +1,4 @@
-const mongoose  = require("mongoose");
+const mongoose	= require("mongoose");
 
 const Notifications = require('./ModelNotification.js');
 
@@ -10,7 +10,7 @@ exports.create_notification = (req,res,next)=>{
         toMailId              : req.body.toMailId,
         toUserId              : req.body.toUserId,
         notifBody             : req.body.notifBody,
-        status                : 'Unread',
+        status                : 'unread',
         createdAt             : new Date(),
         date                  : new Date(),
         createdBy             : req.body.createdBy,
@@ -28,22 +28,8 @@ exports.create_notification = (req,res,next)=>{
 };
 
 exports.list_notification = (req,res,next)=>{
-    Notifications.find({toUserId:req.params.userID,status:req.params.status})
-        .sort({createdAt : -1})
-        .exec()
-        .then(data=>{
-            res.status(200).json(data);
-        })
-        .catch(err =>{
-            console.log(err);
-            res.status(500).json({
-                error: err
-            });
-        });
-}
-exports.alllist_notification = (req,res,next)=>{
-    Notifications.find({toUserId:req.params.userID})
-        .sort({createdAt : -1})
+    // Notifications.find({toUserId:req.params.userID})
+    Notifications.find({})
         .exec()
         .then(data=>{
             res.status(200).json(data);
@@ -76,10 +62,10 @@ exports.detail_notification = (req,res,next)=>{
 
 exports.update_notification = (req,res,next)=>{
     Notifications.updateOne(
-            { _id:req.params.ID},  
+            { _id:req.body.notification_ID},  
             {
                 $set:{
-                    status    : 'Read'  
+                    status    : req.body.status	
                 }
             }
         )
@@ -87,31 +73,6 @@ exports.update_notification = (req,res,next)=>{
         .then(data=>{
             console.log('data ',data);
             if(data){
-                res.status(200).json("Notifications Updated");
-            }else{
-                res.status(401).json("Notifications Found");
-            }
-        })
-        .catch(err =>{
-            console.log(err);
-            res.status(500).json({
-                error: err
-            });
-        });
-}
-exports.update_status = (req,res,next)=>{
-    Notifications.updateMany(
-            { toUserId:req.params.userID},  
-            {
-                $set:{
-                    status    : req.params.status, 
-                }
-            },
-        )
-        .exec()
-        .then(data=>{
-            console.log('data ',data);
-            if(data.nModified == 1){
                 res.status(200).json("Notifications Updated");
             }else{
                 res.status(401).json("Notifications Found");

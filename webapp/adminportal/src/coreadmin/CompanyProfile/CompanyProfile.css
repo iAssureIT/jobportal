@@ -37,8 +37,8 @@
 	width: 60%;
 }
 .imgtabCP{
-	height: 30px;
-	width: 30px;
+	height: 30px !important;
+	width: 30px !important;
 }
 .editOption{
 	margin-top: 15px;

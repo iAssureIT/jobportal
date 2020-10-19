@@ -5,22 +5,22 @@ const FailedRecords     = require('../failedRecords/ModelFailedRecords');
 exports.insertCollage = (req,res,next)=>{
     processData();
     async function processData(){
-    var allCollage = await fetchCollage()
-        var jobType = allCollage.filter((data)=>{
-        if (data.jobType.trim().toLowerCase() == req.body.fieldValue.trim().toLowerCase()) {
+    var allCollages = await fetchCollage()
+        var collage = allCollages.filter((data)=>{
+        if (data.collage.trim().toLowerCase() == req.body.fieldValue.trim().toLowerCase()) {
             return data;
         }
         })
-        if (jobType.length > 0) {
+        if (collage.length > 0) {
             res.status(200).json({ duplicated : true });
         }else{
-            const jobTypeMaster = new CollageMaster({
+            const collageMaster = new CollageMaster({
                             _id                         : new mongoose.Types.ObjectId(),
-                            jobType                     : req.body.fieldValue,
+                            collage                     : req.body.fieldValue,
                             createdBy                   : req.body.createdBy,
                             createdAt                   : new Date()
                         })
-                        jobTypeMaster.save()
+                        collageMaster.save()
                         .then(data=>{
                             res.status(200).json({ created : true, fieldID : data._id });
                         })
@@ -93,7 +93,7 @@ exports.fetchSingleCollage = (req, res, next)=>{
 };
 
 exports.searchCollage = (req, res, next)=>{
-    CollageMaster.find({ jobType: { $regex : req.params.str ,$options: "i" }  })
+    CollageMaster.find({ collage: { $regex : req.params.str ,$options: "i" }  })
         .exec()
         .then(data=>{
             res.status(200).json(data);
@@ -106,7 +106,7 @@ exports.updateCollage = (req, res, next)=>{
     CollageMaster.updateOne(
             { _id:req.body.fieldID },  
             {
-                $set:   {  'jobType'       : req.body.fieldValue  }
+                $set:   {  'collage'       : req.body.fieldValue  }
             }
         )
         .exec()
@@ -275,8 +275,8 @@ exports.bulkUploadCollage = (req, res, next)=>{
                 // var allDepartments = await fetchAllDepartments(req.body.reqdata);
                 // console.log("alldepartments",allDepartments);
                  console.log()
-                  var allCollage = await fetchAllCollage(req.body.reqdata);
-                  var CollageExists = allCollage.filter((data)=>{
+                  var allCollages = await fetchAllCollage(req.body.reqdata);
+                  var CollageExists = allCollages.filter((data)=>{
                     if (data.Collage == Collage[k].Collage)
                          {
                         return data;

@@ -9,10 +9,10 @@ import ReactHTMLTableToExcel from 'react-html-table-to-excel';
 import Loader  from '../../common/Loader/Loader.js'; 
 
 class BulkUpload extends Component{
-	constructor(props) {
+  constructor(props) {
     super(props);
     this.state = {
-    	"inputFileData" : [],
+      "inputFileData" : [],
       tableData:[],
       failedRecordsTable:[],
       tableObjects : {
@@ -108,7 +108,7 @@ class BulkUpload extends Component{
     var chunkData = [];
     var excelChunkData = [];
 
-    
+   
     const startProcess = async (data)=>{
       for (var i = initialLmt; i < endLmt; i++) {
         if (this.state.inputFileData[i]) {
@@ -151,15 +151,19 @@ class BulkUpload extends Component{
                 $('.fullpageloader').hide();
                 $('.filedetailsDiv').show();
                 this.props.getFileDetails(this.state.fileName); 
-                this.props.getData(this.state.startRange, this.state.limitRange) 
+                // this.props.getData(this.state.startRange, this.state.limitRange) 
               }
               this.setState({percentage:percentage},()=>{})
               chunkData = [];
               initialLmt += factor;  
               endLmt = initialLmt+factor; 
             }
+          this.setState({
+            filename:"",
+          })
           })
         }
+         // window.location.reload();
       }
     }
     startProcess(this.props.data);
@@ -186,38 +190,38 @@ class BulkUpload extends Component{
 
   }
   render() {
-  	const SheetJSFT = [
+    const SheetJSFT = [
       "xlsx",
       "xls",
       "csv"
     ]
     return (
-    	 <div className=" container-fluid">
+       <div className=" container-fluid">
        <Loader type="fullpageloader" percentage={this.state.percentage}/>
-	        <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 bulkEmployeeContent">
+          <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 bulkEmployeeContent">
             <h4 className="weighttitle col-lg-12 col-md-12 col-xs-12 col-sm-12 NOpadding-right">Bulk Upload</h4>
-	          <div className="col-lg-2 col-md-2 col-sm-12 col-xs-12 bulkEmployeeImg">
-	            <a href={this.props.fileurl} download>
-		            <img src="/images/Excel-download-icon.png" />
-	            </a>
-	          </div>
-	          <div className="col-lg-10 col-md-10 col-sm-12 col-xs-12 bulkEmployeeVerif">
-	            <ul className="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-	              <li>Please use attached file format for bulkupload into this system.</li>
-	              <li>Please do not change the Heading of following file.</li>
-	              <li>File format must be .xlsx or .xls.</li>
-	            </ul>
-	          </div>
-	        </div>
-	        <div className="col-lg-4 col-md-4 col-sm-4 col-xs-4 bulkuploadFileouter">
-	            <input
-			          ref={el => this.fileInput = el}
-			          type="file"
-	              className="col-lg-12 col-md-12 col-sm-12 col-xs-12 NOpadding"
-			          accept={SheetJSFT}
-			          onChange={this.handleChange}
-			        />
-	        </div>
+            <div className="col-lg-2 col-md-2 col-sm-12 col-xs-12 bulkEmployeeImg">
+              <a href={this.props.fileurl} download>
+                <img src="/images/Excel-download-icon.png" />
+              </a>
+            </div>
+            <div className="col-lg-10 col-md-10 col-sm-12 col-xs-12 bulkEmployeeVerif">
+              <ul className="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <li>Please use attached file format for bulkupload into this system.</li>
+                <li>Please do not change the Heading of following file.</li>
+                <li>File format must be .xlsx or .xls.</li>
+              </ul>
+            </div>
+          </div>
+          <div className="col-lg-4 col-md-4 col-sm-4 col-xs-4 bulkuploadFileouter">
+              <input
+                ref={el => this.fileInput = el}
+                type="file"
+                className="col-lg-12 col-md-12 col-sm-12 col-xs-12 NOpadding"
+                accept={SheetJSFT}
+                onChange={this.handleChange}
+              />
+          </div>
           {
             this.state.inputFileData.length > 0 ?
             <div className="col-lg-2 col-md-2 col-sm-4 col-xs-4" style={{marginTop:'2%'}}>
@@ -340,7 +344,7 @@ class BulkUpload extends Component{
           }
         </div>
       </div>
-    	</div>
+      </div>
     )
   }
 }

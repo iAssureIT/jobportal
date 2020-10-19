@@ -135,18 +135,18 @@ class CoreLayout extends Component {
                 <Route path="/paymentgateway/:id" exact strict component={CompanyPaymentGateway} />                
                 { /* Employer Master */}
                 
-                <Route path="/employer/basic-details" exact strict component={EmployerBasicInfo} />
-                <Route path="/employer/basic-details/:entityID" exact strict component={EmployerBasicInfo} />
-                <Route path="/employer/statutory-details" exact strict component={EmployerStatutoryDetails} />
-                <Route path="/employer/location-details" exact strict component={EmployerLocationDetails} />
-                <Route path="/employer/statutory-details/:entityID/:statutoryID" exact strict component={EmployerStatutoryDetails} />
-                <Route path="/employer/location-details/:entityID/:locationID" exact strict component={EmployerLocationDetails} />
-                <Route path="/employer/statutory-details/:entityID" exact strict component={EmployerStatutoryDetails} />
-                <Route path="/employer/location-details/:entityID" exact strict component={EmployerLocationDetails} />
-                <Route path="/employer/contact-details" exact strict component={EmployerContactDetails} />
-                <Route path="/employer/contact-details/:entityID" exact strict component={EmployerContactDetails} />
-                <Route path="/employer/contact-details/:entityID/:contactID" exact strict component={EmployerContactDetails} />
-                <Route path="/employer/list" exact strict component={EmployerListOfEntities} />
+                <Route path="/corporate/basic-details" exact strict component={EmployerBasicInfo} />
+                <Route path="/corporate/basic-details/:entityID" exact strict component={EmployerBasicInfo} />
+                <Route path="/corporate/statutory-details" exact strict component={EmployerStatutoryDetails} />
+                <Route path="/corporate/location-details" exact strict component={EmployerLocationDetails} />
+                <Route path="/corporate/statutory-details/:entityID/:statutoryID" exact strict component={EmployerStatutoryDetails} />
+                <Route path="/corporate/location-details/:entityID/:locationID" exact strict component={EmployerLocationDetails} />
+                <Route path="/corporate/statutory-details/:entityID" exact strict component={EmployerStatutoryDetails} />
+                <Route path="/corporate/location-details/:entityID" exact strict component={EmployerLocationDetails} />
+                <Route path="/corporate/contact-details" exact strict component={EmployerContactDetails} />
+                <Route path="/corporate/contact-details/:entityID" exact strict component={EmployerContactDetails} />
+                <Route path="/corporate/contact-details/:entityID/:contactID" exact strict component={EmployerContactDetails} />
+                <Route path="/corporate/list" exact strict component={EmployerListOfEntities} />
 
                 
                  { /* Orgnizational Setting */}
@@ -233,7 +233,6 @@ class CoreLayout extends Component {
 
 
 const mapStateToProps = (state)=>{
-    // console.log(" state on Dashboard employer==> ",state)
     return {
       userDetails   : state.userDetails,
     }

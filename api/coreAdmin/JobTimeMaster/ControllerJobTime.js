@@ -15,7 +15,7 @@ exports.insertJobTime = (req,res,next)=>{
             res.status(200).json({ duplicated : true });
         }else{
             const jobTimeMaster = new JobTimeMaster({
-                            _id                         : new mongoose.Times.ObjectId(),
+                            _id                         : new mongoose.Types.ObjectId(),
                             jobTime                     : req.body.fieldValue,
                             createdBy                   : req.body.createdBy,
                             createdAt                   : new Date()

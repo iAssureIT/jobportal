@@ -9,7 +9,7 @@ exports.insertSubIndustry = (req,res,next)=>{
     const subIndustryMaster = new SubIndustryMaster({
                         _id                         : new mongoose.Types.ObjectId(),                        
                         industry_id                 : req.body.dropdownID,
-                        subIndustry              : req.body.fieldValue,
+                        subindustry              : req.body.fieldValue,
                         createdBy                   : req.body.createdBy,
                         createdAt                   : new Date()
                     })
@@ -169,7 +169,7 @@ exports.updateSubIndustry = (req, res, next)=>{
             { _id:req.body.fieldID },  
             {
                 $set:   {   'industry_id'                     : req.body.dropdownID,
-                            'subIndustry'                  : req.body.fieldValue
+                            'subindustry'                  : req.body.fieldValue
                         }
             }
         )

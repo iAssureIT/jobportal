@@ -57,3 +57,45 @@
     border-left: 1px solid #cccccc !important;
     border-right: 0 !important;
 }
+
+.col1{
+  width: 110px !important;
+  white-space: pre-wrap!important;
+}
+.col2{
+  width: 90px !important;
+}
+.col3{
+  white-space: pre-wrap!important;
+  width: 150px !important;
+}
+.col4,.col5,.col7{
+  width: 60px !important;
+}
+.col11, .col9, .col8{
+  width: 75px !important;
+}
+.col15, .col14{
+  width: 82px !important;
+}
+.col16{
+  width: 62px !important;
+} 
+ .col6, .col12, .col10, .col19, .col20{
+  width: 80px !important;
+}
+.col13, .col14, .col15, .col17, .col18{
+  width: 62px !important;
+}
+.scrollContent {
+  display: block;
+  height: 350px;
+  overflow: auto;
+  width: 100%;
+}
+
+.fixedHeader{
+  display: table;
+  overflow: auto;
+  width: 100%
+}

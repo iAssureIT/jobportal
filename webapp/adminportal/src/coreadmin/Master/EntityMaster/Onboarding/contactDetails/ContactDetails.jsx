@@ -218,9 +218,8 @@ class ContactDetails extends Component {
 		  })
 	}
 	getDepartment() {
-	var getcompanyID = localStorage.getItem("companyID")
-
-	axios.get("/api/departmentmaster/get/list")
+		var getcompanyID = localStorage.getItem("companyID")
+		axios.get("/api/departmentmaster/get/list")
 		.then((response) => {
 		this.setState({
 			departmentArray: response.data.filter(dept => dept.companyID == getcompanyID)
@@ -611,6 +610,7 @@ class ContactDetails extends Component {
 			}
 			const main = async()=>{
 				if ($('#ContactDetail').valid()) {
+					console.log("emp id =>",this.state.listOfEmpID.indexOf(this.state.employeeID))
 					if(this.state.createUser === true && this.state.listOfEmpID.indexOf(this.state.employeeID) === -1){
 						formValues.contactDetails.userID = await this.createUser();
 						formValues.contactDetails.personID = await this.savePerson(formValues.contactDetails.userID);
@@ -647,7 +647,7 @@ class ContactDetails extends Component {
 				            }
 		                  axios.post('/api/masternotifications/post/sendNotification', sendData)
 		                  .then((res) => {
-		                  console.log('sendDataToUser in result==>>>', res.data)
+		                  //console.log('sendDataToUser in result==>>>', res.data)
 		                  })
 		                  .catch((error) => { console.log('notification error: ',error)})
 					}
@@ -678,7 +678,7 @@ class ContactDetails extends Component {
 			.then((response)=>{				
 				resolve(response.data.ID);
 				if(response.data.message === 'USER_CREATED'){
-					
+					//swal(response.data.message);
 				}else{
 					swal(response.data.message);
 				}
@@ -742,10 +742,10 @@ class ContactDetails extends Component {
 	}
 
 	saveContact = (formValues)=>{
-		if(this.state.listOfEmpID.indexOf(this.state.employeeID)>-1)
-		{
-			swal("Employee ID already exists..!")
-		}else{
+		// if(this.state.listOfEmpID.indexOf(this.state.employeeID)>-1)
+		// {
+		// 	swal("Employee ID already exists..!")
+		// }else{
 		axios.patch('/api/entitymaster/patch/addContact' ,formValues)
 		.then((response) => {
 				if(response.data.duplicated)
@@ -793,7 +793,7 @@ class ContactDetails extends Component {
 			.catch((error) => {
 			
 			})
-		}
+		// }
 	}
 	getBranchCode() {
 		var entityID = this.state.entityID;
@@ -848,7 +848,7 @@ class ContactDetails extends Component {
 					'createUser'        		: this.state.createUser,
 				    'role' 						: this.state.createUser ? this.state.role : "", 
                     'addEmployee'       		: this.state.addEmployee,
-                    address: this.state.addressLine1 !=="" ? [{
+                    address 					: this.state.addressLine1 !=="" ? [{
                     addressLine1                : this.state.addressLine1,
                     addressLine2                : this.state.addressLine2,
                     landmark                    : this.state.landmark,
@@ -860,6 +860,8 @@ class ContactDetails extends Component {
                     country                     : this.state.country.split('|')[1],
                     countryCode                 : this.state.country.split('|')[0],
                     pincode                     : this.state.pincode,
+                    latitude                    : this.state.latLng ? this.state.latLng.lat : "",
+                    longitude                   : this.state.latLng ? this.state.latLng.lng : "",
                     addressProof                : this.state.addressProof,
                 }] : [],
        
@@ -917,19 +919,20 @@ class ContactDetails extends Component {
 			companyID			: this.state.companyID,
 			email					: this.state.email,
 			companyName			: this.state.companyName,
-			pwd						: "welcome123",
 			role					: [this.state.role],
             "status": this.state.role !=="corporateadmin" || this.state.role !=="vendoradmin" ? "blocked" :"active",
 			"emailSubject"		: "Email Verification",
 			"emailContent"		: "As part of our registration process, we screen every new profile to ensure its credibility by validating email provided by user. While screening the profile, we verify that details put in by user are correct and genuine.",
 		}
 		var userid = this.state.userID;
+		console.log("userDetails",userDetails)
 		axios.patch('/api/users/patch/' + userid, userDetails)
 		.then((response)=>{
-			if(response.data.message  === 'USER_CREATED'){
-			}else{
-				swal(response.data.message);
-			}
+			console.log("response",response)
+			// if(response.data.message  === 'USER_CREATED'){
+			// }else{
+			// 	swal(response.data.message);
+			// }
 			
 		})
 		.catch((error)=>{})
@@ -988,6 +991,8 @@ class ContactDetails extends Component {
                     countryCode                 : this.state.country.split('|')[0],
                     pincode                     : this.state.pincode,
                     addressProof                : this.state.addressProof,
+                    latitude                    : this.state.latLng ? this.state.latLng.lat : "",
+                    longitude                   : this.state.latLng ? this.state.latLng.lng : "",
                 }] : [],
        
 		  }
@@ -1085,7 +1090,7 @@ class ContactDetails extends Component {
 			            'states'					: contactDetails[0].address[0] ? contactDetails[0].address[0].stateCode + "|" + contactDetails[0].address[0].state : "",
 			            'country'					: contactDetails[0].address[0] ? contactDetails[0].address[0].countryCode + "|" + contactDetails[0].address[0].country : "-- Select --",
 			            'pincode'					: contactDetails[0].address[0] ? contactDetails[0].address[0].pincode : "",
-			               
+			            'latLng'                    : contactDetails[0].address[0] ? {lat:contactDetails[0].address[0].latitude,lng:contactDetails[0].address[0].longitude} : "", 
 						'phone'             		: contactDetails[0].phone,
 						'altPhone'          		: contactDetails[0].altPhone,
 						'email'             		: contactDetails[0].email,
@@ -1259,10 +1264,10 @@ class ContactDetails extends Component {
 	        return{
 	        	_id         :a._id,
 	            empName:"<b>Name :</b> "+"<a  title='View profile' target='_blank' href='/employee-profile/"+(a.personID)+"'>"+a.firstName + " " + a.lastName+"</a>" + " <br><b>Emp ID :</b> " + (a.employeeID? a.employeeID :"- NA -" ),
-	            contactDetails:"<b>Mob Number :</b> "+(a.phone ? a.phone :"- NA -") + (a.whatsupNumber ? " | " + a.whatsupNumber : "" ) + "<br><b> Email : </b> " +a.email,
-	            approvingAuthorityId1:a.bookingApprovalRequired="Yes" ? ("<b>Emp ID : </b>"+(a.approvingAuthorityId1 ? a.approvingAuthorityId1 :"- NA -")+ "<br><b>Name : </b>" +(a.approvingAuthorityName ?a.approvingAuthorityName:"-" )) : "- NA -",
-	            approvingAuthorityId2:a.bookingApprovalRequired="Yes" ? ("<b>Emp ID : </b>"+(a.approvingAuthorityId2 ? a.approvingAuthorityId2 :"- NA -")+ "<br><b>Name : </b>" +(a.approvingAuthorityName?a.approvingAuthorityName:"-") ) : "- NA -",
-	            approvingAuthorityId3:a.bookingApprovalRequired="Yes" ? ("<b>Emp ID : </b>"+(a.approvingAuthorityId3 ? a.approvingAuthorityId3 :"- NA -")+ "<br><b>Name : </b>" +(a.approvingAuthorityName?a.approvingAuthorityName:"-") ) : "- NA -",
+	            contactDetails:"<b>Phone :</b> "+(a.phone ? a.phone :"- NA -") + (a.whatsupNumber ? " | " + a.whatsupNumber : "" ) + "<br><b> Email : </b> " +a.email,
+	            approvingAuthorityId1:a.bookingApprovalRequired="Yes" ? ("<b>Emp ID : </b>"+(a.approvingAuthorityId1 ? a.approvingAuthorityId1 :"- NA -")+ "<br><b>Name : </b>" +(a.approvingAuthorityName ?a.approvingAuthorityName:"-NA-" )) : "- NA -",
+	            approvingAuthorityId2:a.bookingApprovalRequired="Yes" ? ("<b>Emp ID : </b>"+(a.approvingAuthorityId2 ? a.approvingAuthorityId2 :"- NA -")+ "<br><b>Name : </b>" +(a.approvingAuthorityName?a.approvingAuthorityName:"-NA-") ) : "- NA -",
+	            approvingAuthorityId3:a.bookingApprovalRequired="Yes" ? ("<b>Emp ID : </b>"+(a.approvingAuthorityId3 ? a.approvingAuthorityId3 :"- NA -")+ "<br><b>Name : </b>" +(a.approvingAuthorityName?a.approvingAuthorityName:"-NA-") ) : "- NA -",
 	            preApprovedLimits :a.bookingApprovalRequired="Yes"  ? ("<b>Amount :</b> " + (a.preApprovedAmount ? a.preApprovedAmount :"- NA -") + "<br><b>Kilometer :</b> " + (a.preApprovedKilometer ? a.preApprovedKilometer :"- NA -") + "<br><b>Rides : </b>" + (a.preApprovedRides ? a.preApprovedRides :"- NA -")):"- NA -",
 	        }
 	      })
@@ -1630,10 +1635,13 @@ class ContactDetails extends Component {
 											
 											</div>
 											<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+											{this.state.contactarray && this.state.contactarray.length > 0 ?
 												<div className="col-lg-2 col-md-2 col-sm-6 col-xs-12 pull-right NOPadding">
 													<i className="fa fa-th-list fa-lg btn viewBtn  pull-right"  title="List View" name="view" ref="view" value={this.state.view} onClick={this.showView.bind(this,'List')} onChange={this.handleChange} aria-hidden="true"></i>
 													<i className="fa fa-th fa-lg btn viewBtn pull-right btnactive" name="view"  title="Grid View" ref="view" value={this.state.view} onClick={this.showView.bind(this,'Grid')} onChange={this.handleChange} aria-hidden="true"></i>&nbsp;&nbsp;
 												</div>
+												: null
+											}
 											</div>
 											{this.state.view === 'List' ?
 											<IAssureTable 

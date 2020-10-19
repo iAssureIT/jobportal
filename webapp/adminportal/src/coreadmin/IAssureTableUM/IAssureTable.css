@@ -232,3 +232,99 @@ display: block;
 .marBtm{
   margin-bottom: 6px;
 }
+.scrollToTable{
+  overflow: auto ! important;
+  height: 300px ! important;
+}
+.tbl-main{
+   width:100%;
+  table-layout: fixed;
+}
+.tbl-content{
+  height:500px;
+  overflow-x:auto;
+ width: 100%;
+}
+.tableforHeader{
+  width: 100%;
+ 
+}
+.tablebodynew{
+   height:40px ! important;
+   width: 48px;
+}
+.heading_data0{
+
+}
+.stastuscolumn{
+  position: absolute;
+  left:425px ! important;
+  top:13px;
+}
+.companycolumn{
+    position: absolute;
+    left:286px;
+    top: 13px;
+}
+.rolecolumn{
+    position: absolute;
+    left: 525px;
+    top: 13px;
+}
+.registeredcolumn{
+    position: absolute;
+    left: 625px;
+    top: 13px;
+}
+.actioncolumn{
+    position: absolute;
+    left: 941px;
+    top: 13px;
+}
+.logincolumn{
+    position: absolute;
+    left: 773px;
+    top: 13px;
+}
+
+.col1{
+  width: 110px !important;
+  white-space: pre-wrap!important;
+}
+.col2{
+  width: 90px !important;
+}
+.col3{
+  white-space: pre-wrap!important;
+  width: 150px !important;
+}
+.col4,.col5,.col7{
+  width: 60px !important;
+}
+.col11, .col9, .col8{
+  width: 75px !important;
+}
+.col15, .col14{
+  width: 82px !important;
+}
+.col16{
+  width: 62px !important;
+} 
+ .col6, .col12, .col10, .col19, .col20{
+  width: 80px !important;
+}
+.col13, .col14, .col15, .col17, .col18{
+  width: 62px !important;
+}
+.scrollContent {
+  display: block;
+  height: 350px;
+  overflow: auto;
+  width: 100%;
+}
+
+.fixedHeader{
+  display: table;
+  overflow: auto;
+  width: 100%
+}

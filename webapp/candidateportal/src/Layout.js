@@ -104,7 +104,7 @@ class Layout extends Component  {
         const roles = localStorage.getItem("roles");
         var roleArr = [];
         roleArr.push(roles);
-        if (this.state.loggedIn) {
+        if (!this.state.loggedIn) {
             return (
             <Router>
                 <div className="hold-transition skin-blue fixed sidebar-mini">

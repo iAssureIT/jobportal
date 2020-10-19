@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const collageSchema = mongoose.Schema({
     _id                       : mongoose.Schema.Types.ObjectId,
-    collage               : { type: String, index: true, unique: true  },
+    collage                   : { type: String, index: true, unique: true  },
     createdBy                 : { type: mongoose.Schema.Types.ObjectId, ref: 'users' },
     createdAt                 : Date,
     fileName                  : String,

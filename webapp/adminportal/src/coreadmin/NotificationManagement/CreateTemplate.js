@@ -452,7 +452,7 @@ class CreateTemplate extends Component {
 				</div>
 			</div>
 			<div className="modal-body adminModal-body col-lg-12 col-md-12 col-sm-12 col-xs-12">
-				<div className="col-md-12 NOpadding rowPadding">
+			 <div className="col-md-12 NOpadding rowPadding">
 				<div className="col-md-3">
 					<label className="labelform col-lg-12 col-md-12 col-sm-12 col-xs-12">Event <sup className="astrick">*</sup></label>
 		            <select id="eventName" className="form-control col-lg-12 col-md-12 col-sm-12 col-xs-12" value={this.state.eventName} ref="eventName" name="eventName" onChange={this.handleEventChange.bind(this)}>

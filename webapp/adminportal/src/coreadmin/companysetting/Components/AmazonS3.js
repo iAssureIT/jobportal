@@ -17,6 +17,27 @@ class AmazonS3 extends Component {
   }
   componentDidMount(){
     this.getData();
+    $.validator.addMethod("regxtax", function (value, element, regexpr) {
+      return regexpr.test(value);
+    }, "Please enter valid tax rate.");
+
+    $("#AmazonS3Form").validate({
+    rules: {
+      key: {
+        required: true,
+      },
+      secret: {
+        required: true,
+      },
+      bucket: {
+        required: true,
+      },
+      region: {
+        required: true,
+      },
+      
+    }
+    }); 
   }
  
   handleChange(event){
@@ -35,11 +56,13 @@ class AmazonS3 extends Component {
               var bucket = response.data.bucket;
               var region = response.data.region;
                 this.setState({
-                  s3id    : s3id,
+                  id    : s3id,
                   s3key   : key,
                   s3secret: secret,
                   s3bucket: bucket,
                   s3region: region,
+                },()=>{
+                  // this.edit()
                 });
             })
             .catch((error) => {});
@@ -55,6 +78,7 @@ class AmazonS3 extends Component {
           createdBy : localStorage.getItem("user_ID")
         }
         console.log("formvalue===>",formvalue);
+        if($("#AmazonS3Form").valid()){
           axios.post('/api/projectsettings/post',formvalue)
           .then((response)=> {
             console.log("response===>",response.data);
@@ -77,7 +101,7 @@ class AmazonS3 extends Component {
           })
         
   
-      // }
+      }
   
   }
   update(event){
@@ -90,6 +114,7 @@ class AmazonS3 extends Component {
         type   : 'S3',
         createdBy : localStorage.getItem("user_ID")
       }
+      if($("#AmazonS3Form").valid()){
         axios.patch('/api/projectsettings/patch/S3',formvalues)
         .then((response)=> {
           this.getData();
@@ -101,6 +126,7 @@ class AmazonS3 extends Component {
                 secret : "",
                 bucket : "",
                 region : "",
+                s3id : "",
               })
         })
         .catch((error)=> {
@@ -110,20 +136,24 @@ class AmazonS3 extends Component {
         })
       
 
-    // }
+    }
 
 }
   edit(event) {
+    $("html,body").scrollTop(0);
+    $("#AmazonS3Form").validate().resetForm();
         this.getData();
         var key    = this.state.s3key;
         var secret = this.state.s3secret;
         var bucket = this.state.s3bucket;
         var region = this.state.s3region;
+        var s3id = this.state.id;
         this.setState({
           key   : key,
           secret: secret,
           bucket: bucket,
           region: region,
+          s3id  : s3id
         });
     }
   
@@ -202,7 +232,7 @@ class AmazonS3 extends Component {
                </div>
               <div className=" col-lg-12 col-md-12 col-xs-12 col-sm-12 ">
                 {
-                    this.state.s3id === undefined ?
+                    this.state.s3id ?
                         
                         <button className="col-lg-3 col-md-2 col-xs-12 col-sm-12 col-xs-12 pull-right btn button3 topMargin outlinebox" type="update" onClick={this.update.bind(this)} >Update</button>
 

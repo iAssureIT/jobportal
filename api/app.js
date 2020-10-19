@@ -18,6 +18,7 @@ const GlobalMaster  = require('./coreAdmin/projectSettings/ModelProjectSettings.
 const systemSecurityRoutes 				= require('./coreAdmin/systemSecurity/RoutesSystemSecurity.js');
 const userRoutes 						= require('./coreAdmin/userManagement/RoutesUsers.js');
 const rolesRoutes						= require('./coreAdmin/rolesManagement/RoutesRoles.js');
+const rolesentitymasterRoutes			= require('./coreAdmin/RoleEntityMaster/Routes.js');
 const masternotificationRoutes		    = require('./coreAdmin/notificationManagement/RoutesMasterNotification.js');
 const notificationRoutes				= require('./coreAdmin/notificationManagement/RoutesNotification.js');
 const companySettingsRoutes				= require('./coreAdmin/companySettings/RoutesCompanySettings.js');
@@ -114,6 +115,7 @@ let masterData = JSON.parse(rawdata);
 //URL's collection wise
 //coreAdmin
 app.use("/api/roles", rolesRoutes);
+app.use("/api/rolesentitymaster", rolesentitymasterRoutes);
 app.use('/api/projectsettings',projectSettingRoutes);
 app.use("/api/auth", systemSecurityRoutes);
 app.use("/api/users", userRoutes);
@@ -140,6 +142,7 @@ app.use("/api/designationmaster", designationMasterRoutes);
 
 app.use("/api/jobcategorymaster", jobCategoryMasterRoutes);
 app.use("/api/jobtypemaster", jobTypeMasterRoutes);
+app.use("/api/jobtimemaster", jobTimeMasterRoutes);
 app.use("/api/jobrolemaster", jobRoleMasterRoutes);
 
 app.use("/api/qualificationlevelmaster", qualificationLevelMasterRoutes);
@@ -147,7 +150,7 @@ app.use("/api/qualificationmaster", qualificationMasterRoutes);
 app.use("/api/skillmaster", skillMasterRoutes);
 app.use("/api/languagemaster", languageMasterRoutes);
 app.use("/api/universitymaster", universityMasterRoutes);
-
+app.use("/api/collagemaster", collageMasterRoutes);
 app.use("/api/modulemaster", moduleRoutes);
 app.use("/api/facilitymaster", facilityRoutes);
 app.use("/api/jobposting", jobPostRoutes);

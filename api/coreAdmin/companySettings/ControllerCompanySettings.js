@@ -124,20 +124,6 @@ exports.update_companysettinginfo = (req,res,next)=>{
 }
 
 
-exports.singleData = (req,res,next)=>{
-    Companysettings.findOne({  _id : req.params.companyId})
-    .exec()
-        .then(data=>{
-            res.status(200).json(data);
-        })
-        .catch(err =>{
-            console.log(err);
-            res.status(500).json({
-                error: err
-            });
-        });
-}
-
 exports.addLocation = (req,res,next)=>{
     // var roleData = req.body.role;
     Companysettings.updateOne(
@@ -194,20 +180,6 @@ exports.singleLocation = (req,res,next)=>{
             });
         });
 }
-exports.singleTaxDetails = (req,res,next)=>{
-    // var roleData = req.body.role;
-    Companysettings.findOne({"taxSettings._id":req.params.taxDetailsID}, {"taxSettings.$" : 1})
-        .exec()
-        .then(data=>{
-            res.status(200).json(data);
-        })
-        .catch(err =>{
-            console.log(err);
-            res.status(500).json({
-                error: err
-            });
-        });
-}
 exports.update_location = (req,res,next)=>{
     // var roleData = req.body.role;
     Companysettings.updateOne(
@@ -247,35 +219,6 @@ exports.update_location = (req,res,next)=>{
             });
         });
 }
-exports.update_taxDetails = (req,res,next)=>{
-    // var roleData = req.body.role;
-    Companysettings.updateOne(
-        {  _id : req.body.companyId, "taxSettings._id":req.body.taxID },
-        {
-            $set:{
-                    "taxSettings.$.locationType"    : req.body.locationType,
-                    "taxSettings.$.contactNumber"   : req.body.contactnumber,
-                    "taxSettings.$.blockName"       : req.body.blockname,
-                    "taxSettings.$.area"            : req.body.area,
-                                               
-            }
-        }
-        )
-        .exec()
-        .then(data=>{
-            if(data.nModified == 1){
-                res.status(200).json("Company Tax Details added");
-            }else{
-                res.status(404).json("Company Tax Details Not found");
-            }
-        })
-        .catch(err =>{
-            console.log(err);
-            res.status(500).json({
-                error: err
-            });
-        });
-}
 
 exports.delete_location = (req,res,next)=>{    
     Companysettings.updateOne(
@@ -288,7 +231,7 @@ exports.delete_location = (req,res,next)=>{
         .then(data=>{
             if(data.nModified == 1){
                 res.status(200).json({
-                    "message": "Location is deleted successfully."
+                    "message": "Location is deleted uccessfully."
                 });
             }else{
                 res.status(401).json({
@@ -304,23 +247,30 @@ exports.delete_location = (req,res,next)=>{
         });
 };
 
-exports.delete_taxDetails = (req,res,next)=>{    
+exports.addBankDetails = (req,res,next)=>{
     Companysettings.updateOne(
-            { _id:req.params.companyID},  
-            {
-                $pull: { 'taxSettings' : {_id:req.params.taxDetailsID}}
+        {  _id : req.body.companyId},
+
+        {
+            $push:{
+                bankDetails : {
+                accHolderName       : req.body.accHolderName,
+                accNickName         : req.body.accNickName,
+                bankName            : req.body.bankName,
+                accType             : req.body.accType,
+                branchName          : req.body.branchName,
+                accNumber           : req.body.accNumber,
+                ifscCode            : req.body.ifscCode
+                }
             }
+        }
         )
         .exec()
         .then(data=>{
             if(data.nModified == 1){
-                res.status(200).json({
-                    "message": "Tax details is deleted successfully."
-                });
+                res.status(200).json("Company banck details is added");
             }else{
-                res.status(401).json({
-                    "message": "Tax details not found"
-                });
+                res.status(404).json("Company not found");
             }
         })
         .catch(err =>{
@@ -329,98 +279,29 @@ exports.delete_taxDetails = (req,res,next)=>{
                 error: err
             });
         });
-};
-
-exports.addBankDetails = (req,res,next)=>{
-    const companysettings = new Companysettings({
-                _id                    : new mongoose.Types.ObjectId(),
-                accHolderName       : req.body.accHolderName,
-                accNickName         : req.body.accNickName,
-                bankName            : req.body.bankName,
-                accType             : req.body.accType,
-                branchName          : req.body.branchName,
-                accNumber           : req.body.accNumber,
-                ifscCode            : req.body.ifscCode,
-                createdBy           : req.body.createdBy,
-                createdAt           : new Date(),
-        });
-        companysettings.save()
-                        .then(data=>{
-                            res.status(200).json("CompanySetting Added");
-                        })
-                        .catch(err =>{
-                            console.log(err);
-                            res.status(500).json({
-                                error: err
-                            });
-                        });
-    // Companysettings.updateOne(
-    //     {  _id : req.body.companyId},
-
-    //     {
-    //         $push:{
-    //             bankDetails : {
-    //             accHolderName       : req.body.accHolderName,
-    //             accNickName         : req.body.accNickName,
-    //             bankName            : req.body.bankName,
-    //             accType             : req.body.accType,
-    //             branchName          : req.body.branchName,
-    //             accNumber           : req.body.accNumber,
-    //             ifscCode            : req.body.ifscCode
-    //             }
-    //         }
-    //     }
-    //     )
-    //     .exec()
-    //     .then(data=>{
-    //         if(data.nModified == 1){
-    //             res.status(200).json("Company banck details is added");
-    //         }else{
-    //             res.status(404).json("Company not found");
-    //         }
-    //     })
-    //     .catch(err =>{
-    //         console.log(err);
-    //         res.status(500).json({
-    //             error: err
-    //         });
-    //     });
 }
 
 exports.updateBankDetails = (req,res,next)=>{
     Companysettings.updateOne(
-        {  _id : req.body.companyId},
+        {  _id : req.body.companyId, "bankDetails._id":req.body.bankDetailsId},
         {
             $set:{
-                "accHolderName"       : req.body.accHolderName,
-                "accNickName"         : req.body.accNickName,
-                "bankName"            : req.body.bankName,
-                "accType"             : req.body.accType,
-                "branchName"          : req.body.branchName,
-                "accNumber"           : req.body.accNumber,
-                "ifscCode"            : req.body.ifscCode
+                "bankDetails.$.accHolderName"       : req.body.accHolderName,
+                "bankDetails.$.accNickName"         : req.body.accNickName,
+                "bankDetails.$.bankName"            : req.body.bankName,
+                "bankDetails.$.accType"             : req.body.accType,
+                "bankDetails.$.branchName"          : req.body.branchName,
+                "bankDetails.$.accNumber"           : req.body.accNumber,
+                "bankDetails.$.ifscCode"            : req.body.ifscCode
             }
         }
         )
         .exec()
         .then(data=>{
-            if (data.nModified == 1) {
-                Companysettings.updateOne(
-                    { _id: req.body.companyId },
-                    {
-                        $push: {
-                            'updateLog': [{
-                                updatedAt: new Date(),
-                                updatedBy: req.body.updatedBy
-                            }]
-                        }
-                    })
-                    .exec()
-                    .then(data => {
-                        res.status(200).json({ updated: true });
-                    })
-            } else {
-                res.status(200).json({ updated: false });
+            if(data.nModified == 1){
+                res.status(200).json("Company banck details is added");
+            }else{
+                res.status(404).json("Company not found");
             }
         })
         .catch(err =>{
@@ -432,102 +313,20 @@ exports.updateBankDetails = (req,res,next)=>{
 }
 
 exports.addTaxSettings = (req,res,next)=>{
-    var fromDate1 = req.body.taxSettings.effectiveFrom.replace(/-/g, '\/');
-    var toDateForPreviousRecordISOFormat = new Date(new Date(fromDate1) - (24*60*60*1000) );
-    var formateddate = new Date(toDateForPreviousRecordISOFormat);
-    var toDateForPreviousRecord = formateddate.getFullYear()+'-' + (formateddate.getMonth()+1) + '-'+formateddate.getDate();
-    var checkTaxSettings = Companysettings.find({'_id': req.body.companyId},{taxSettings:{$exists: true}})
-    console.log('checkTaxSettings: ',checkTaxSettings)
-    if(checkTaxSettings){
+    console.log(req.body.effectiveFrom)
+    Companysettings.updateOne(
+        {  _id : req.body.companyId},
 
-    }
-    var queryResult = Companysettings.aggregate([
-        {$match:{'_id': req.body.companyId}},
-        {$match:{
-           'taxSettings':
-                      {
-                        $elemMatch:
-                        { 
-                          'taxType' : req.body.taxType , 
-                            'effectiveTo' : "",
-                          }
-                    } 
-                }},
-                {$count:"count"}
-    ])
-    .exec()
-    .then((res)=>{
-        console.log('res=>',res)
-    })
-    .catch((err)=>{console.log('err: ',err)})
-
-    console.log('formateddate: ',formateddate)
-    console.log('queryResult: ',queryResult)
-    if(queryResult){
-        console.log('inside if')
-        console.log('req.body.taxType: ',req.body.taxType)
-        Companysettings.updateOne({'taxSettings':
-                      {
-                        $elemMatch:
-                        { 
-                          'taxType' : req.body.taxType , 
-                            'effectiveTo' : "",
-                          }
-                    }
-          },
-          {$set:{ 
-              'taxSettings.$.effectiveTo' : formateddate,
-              
-              }
-          },
-        )
-        .exec()
-        .then((respose)=>{
-            Companysettings.updateOne({'_id': req.body.companyId},
-              {$push:{ taxSettings :{
-                  taxType       : req.body.taxSettings.taxType,
-                  taxRating : req.body.taxSettings.taxRating,
-                  effectiveFrom : req.body.taxSettings.effectiveFrom,
-                  effectiveTo : req.body.taxSettings.effectiveTo,
-                  createdAt     : new Date(),
+        {
+            $push:{
+                taxSettings : {
+                taxType         : req.body.taxType,
+                taxRating       : req.body.taxRating,
+                effectiveFrom   : req.body.effectiveFrom,
+                createdAt       : new Date()
                 }
-              }
-            },
-            )
-        .exec()
-        .then(data=>{
-            if(data.nModified == 1){
-                res.status(200).json("Company tax details is added");
-            }else{
-                res.status(404).json("Company not found");
             }
-        })
-        .catch(err =>{
-            console.log(err);
-            res.status(500).json({
-                error: err
-            });
-        });
-        })
-        .catch(err =>{
-            console.log(err);
-            res.status(500).json({
-                error: err
-            });
-        });
-
-        
-    }else{
-        Companysettings.updateOne({'_id': req.body.companyId},
-          {$push:{ taxSettings :{
-              taxType       : req.body.taxType,
-              taxRating : req.body.taxRating,
-              effectiveFrom : req.body.effectiveFrom,
-              effectiveTo : '',
-              createdAt     : new Date(),
-            }
-          }
-        },
+        }
         )
         .exec()
         .then(data=>{
@@ -543,22 +342,18 @@ exports.addTaxSettings = (req,res,next)=>{
                 error: err
             });
         });
-    } 
-    
-    
 }
 exports.updateTaxSettings = (req,res,next)=>{
     Companysettings.updateOne(
         {  _id : req.body.companyId,"taxSettings._id":req.body.taxId},
         {
             $set:{
-                "taxSettings.$.taxType"         : req.body.taxSettings.taxType,
-                "taxSettings.$.taxRating"       : req.body.taxSettings.taxRating,
-                "taxSettings.$.effectiveFrom"   : req.body.taxSettings.effectiveFrom,
-                "taxSettings.$.effectiveTo"     : req.body.taxSettings.effectiveTo,
+                "taxSettings.$.taxType"         : req.body.taxType,
+                "taxSettings.$.taxRating"       : req.body.taxRating,
+                "taxSettings.$.effectiveFrom"   : req.body.effectiveFrom,
+                
             }
         }
-
         )
         .exec()
         .then(data=>{
@@ -574,18 +369,6 @@ exports.updateTaxSettings = (req,res,next)=>{
                 error: err
             });
         });
-}
-
-exports.showAllTaxDetails = (req,res,next)=>{
-    Companysettings.find({_id: req.params.companyID})
-    .exec() 
-    .then(data=>{
-        res.status(200).json(data);
-    })
-    .catch(err =>{
-        res.status(500).json({ error: err });
-    });
-
 }
 
 exports.addPaymentInfo = (req,res,next)=>{
