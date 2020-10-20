@@ -5,6 +5,7 @@ const candidateSchema = mongoose.Schema({
 	_id : mongoose.Schema.Types.ObjectId,
 	basicInfo : {
 		firstName		: String,
+		middleName		: String,
 		lastName 		: String,
 		dob 			: Date,
 		age				: String,
