@@ -15,23 +15,20 @@ class ConfirmOtp extends Component {
   componentDidMount() {
     
     //==================================
-    var userid = this.props.match.params.userID;
-    console.log('userid==',userid)  
+    var user_id = this.props.match.params.userID;
+    console.log('user_id==',user_id)  
 
-    axios.get('/api/users/get/'+userid)
+    axios.get('/api/users/get/'+user_id)
     .then((response) => {
       console.log('userInfo==',response.data)
 
       this.setState({
               'firstName'       : response.data.firstname,
               'lastName'        : response.data.lastname,
-              'contactNo'       : response.data.mobile,
-              'phone'           : response.data.mobile,
-              'email'           : response.data.email,
-              "companyID"       : response.data.companyID,
-              "company_Id"      : response.data._id,
-              "companyName"     : response.data.companyName,
-              "userId"          : userid,
+              'mobile'          : response.data.mobile,
+              'emailId'         : response.data.email,
+              "user_id"         : user_id,
+              "createdBy"       : user_id
              })
     })
     .catch((error) => {
@@ -58,26 +55,19 @@ class ConfirmOtp extends Component {
     }
     //========person master===============
 
-      var contactDetailspersonmaster   = {
-                            
-          'firstName'       : this.state.firstName,
-          'lastName'        : this.state.lastName,
-          'contactNo'       : this.state.contactNo,
-          'phone'           : this.state.phone,
-          'email'           : this.state.email,
-          "companyID"       : this.state.companyID,
-          "company_Id"      : this.state.company_Id,
-          "companyName"     : this.state.companyName,
-          "type"            : "employee",
-          "entityType"      : "vendor",
-          "userId"          : this.props.match.params.userID,
-          "status"          : "Active",
+      var candidatemaster   = {
+        'firstName'       : this.state.firstName,
+        'lastName'        : this.state.lastName,
+        'mobile'          : this.state.mobile,
+        'emailId'         : this.state.emailId,
+        "user_id"         : this.state.user_id,
+        "createdBy"       : this.state.createdBy
       }
-    console.log("mastercontactDetailspersonmaster",contactDetailspersonmaster)
+    console.log("candidatemaster",candidatemaster)
     
       //====================================
     
-      axios.get('/api/auth/get/checkemailotp/usingID/' + this.props.match.params.userID + '/' + this.refs.emailotp.value)
+      axios.get('/api/auth/get/activate/usingID/' + this.props.match.params.userID + '/' + this.refs.emailotp.value)
         .then((response) => {
 
           if (response.data.message == 'SUCCESS') {
@@ -88,14 +78,14 @@ class ConfirmOtp extends Component {
               this.props.history.push('/reset-pwd/' + this.props.match.params.userID);
             } else {
               localStorage.removeItem("previousUrl");
-              //this.props.history.push('/login');
+              
               //================================
 
-                axios.post('/api/personmaster/post', contactDetailspersonmaster)
+                axios.post('/api/candidatemaster/post', candidatemaster)
                 .then((response) => {
 
                   console.log('in result Res data==>>>', response.data);
-                  
+                  this.props.history.push('/login');
                 })
                 .catch((error) => {})
               

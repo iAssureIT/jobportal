@@ -305,7 +305,7 @@ class SignUp extends Component {
                     <hr className="registrationHr"/>
 
                    
-                    <div className="form-group col-lg-12">
+                    {/*<div className="form-group col-lg-12">
                         <div className="input-group">
                         <span className="input-group-addon registrationInputIcon1"><i className="fa fa-envelope"></i></span>
                         <select className="form-control col-lg-12 registrationInputBox registrationCompany" id="currentCompany" name="currentCompany" value={this.state.currentCompany} onChange={this.handleChange1.bind(this)}>
@@ -319,7 +319,7 @@ class SignUp extends Component {
                       }
                          </select>                      
                         </div>
-                    </div>
+                    </div>*/}
 
 
                     <div className="col-lg-12 form-group" >
@@ -377,7 +377,7 @@ class SignUp extends Component {
                   </div>
 
                   <div className="col-lg-12 registrationLinks">
-                        <a className="alreadyAccount" href="#"><u>Already have an Account?Sign In</u></a>
+                        <a className="alreadyAccount" href="/login"><u>Already have an Account?Sign In</u></a>
                       </div>
 
                 </form>

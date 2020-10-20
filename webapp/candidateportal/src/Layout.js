@@ -104,7 +104,7 @@ class Layout extends Component  {
         const roles = localStorage.getItem("roles");
         var roleArr = [];
         roleArr.push(roles);
-        if (!this.state.loggedIn) {
+        if (this.state.loggedIn) {
             return (
             <Router>
                 <div className="hold-transition skin-blue fixed sidebar-mini">
@@ -148,7 +148,7 @@ class Layout extends Component  {
                             <Route path="/" exact strict component={Login} />
                             <Route path="/login" exact strict component={Login} />
                             <Route path="/signup" exact strict component={SignUp} />
-                            <Route path="/forgotpassword" exact strict component={ForgotPassword} />
+                            <Route path="/forgot-password" exact strict component={ForgotPassword} />
                             <Route path="/reset-pwd/:user_ID" exact strict component={ResetPassword} />
                             <Route path="/confirm-otp/:userID" exact strict component={ConfirmOtp} />
                             <Route path="/reset-password/:user_ID" exact strict component={ResetPasswordFirstLogin}  />

@@ -56,6 +56,8 @@ const moduleRoutes				        = require("./coreAdmin/moduleMaster/RoutesModuleMa
 const facilityRoutes				    = require("./coreAdmin/facilityMaster/RoutesFacilityMaster.js");
 const accessRoutes				    	= require("./coreAdmin/accessManagement/RoutesAccessMaster.js");
 
+const candidateProfileRoutes			= require("./candidate/profile/RoutesCandidateProfile.js");
+
 const jobPostRoutes				    	= require("./employer/jobPost/RoutesJobPost.js");
 
 
@@ -153,6 +155,7 @@ app.use("/api/universitymaster", universityMasterRoutes);
 app.use("/api/collagemaster", collageMasterRoutes);
 app.use("/api/modulemaster", moduleRoutes);
 app.use("/api/facilitymaster", facilityRoutes);
+app.use("/api/candidatemaster", candidateProfileRoutes);
 app.use("/api/jobposting", jobPostRoutes);
 
 //app.use("/api/personmaster", personMasterRoutes);
