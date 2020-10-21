@@ -1208,7 +1208,7 @@ exports.user_update_password_withoutotp_ID = (req, res, next) => {
 						.then(data => {
 							console.log('update user data ',data);
 							if (data.nModified == 1) {
-								res.status(200).json("PASSWORD_RESET");
+								res.status(200).json({message:"Your password is changed successfully"});
 								// User.updateOne(
 								// 	{ "username": req.body.emailId.toLowerCase() },
 								// 	{
@@ -1231,7 +1231,7 @@ exports.user_update_password_withoutotp_ID = (req, res, next) => {
 								// 		});
 								
 							} else {
-								res.status(401).json("PASSWORD_NOT_RESET");
+								res.status(401).json({message:"Failed to reset password"});
 							}
 						})
 						.catch(err => {
@@ -1242,7 +1242,7 @@ exports.user_update_password_withoutotp_ID = (req, res, next) => {
 						});
 				});
 			} else {
-				res.status(404).json("User Not Found");
+				res.status(404).json({message:"User Not Found"});
 			}
 		})
 		.catch(err => {
@@ -1275,9 +1275,9 @@ exports.user_update_password_withoutotp_username = (req, res, next) => {
 						.exec()
 						.then(data => {
 							if (data.nModified == 1) {
-								res.status(200).json("PASSWORD_RESET");
+								res.status(200).json({message:"Your password is changed successfully"});
 							} else {
-								res.status(401).json("PASSWORD_NOT_RESET");
+								res.status(401).json({message:"Failed to reset password"});
 							}
 						})
 						.catch(err => {
@@ -1288,7 +1288,7 @@ exports.user_update_password_withoutotp_username = (req, res, next) => {
 						});
 				});
 			} else {
-				res.status(404).json("User Not Found");
+				res.status(404).json({message:"User Not Found"});
 			}
 		})
 		.catch(err => {
@@ -1323,9 +1323,9 @@ exports.user_update_password_with_emailOTP_ID = (req, res, next) => {
 						.exec()
 						.then(data => {
 							if (data.nModified == 1) {
-								res.status(200).json("PASSWORD_RESET");
+								res.status(200).json({message:"Your password is changed successfully"});
 							} else {
-								res.status(401).json("PASSWORD_NOT_RESET");
+								res.status(401).json({message:"Failed to reset password"});
 							}
 						})
 						.catch(err => {
@@ -1371,9 +1371,9 @@ exports.user_update_password_with_emailOTP_username = (req, res, next) => {
 						.exec()
 						.then(data => {
 							if (data.nModified == 1) {
-								res.status(200).json("PASSWORD_RESET");
+								res.status(200).json({message:"Your password is changed successfully"});
 							} else {
-								res.status(401).json("PASSWORD_NOT_RESET");
+								res.status(401).json({message:"Failed to reset password"});
 							}
 						})
 						.catch(err => {
