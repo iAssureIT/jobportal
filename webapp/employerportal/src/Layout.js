@@ -24,6 +24,7 @@ import Footer                                   from './jobportaladmin/Common/Fo
 /*import Leftsidebar                              from './jobportaladmin/Common/LeftSidebar/Leftsidebar.js';*/
 import FunctionalHeader                         from './jobportaladmin/Common/FunctionalHeader/FunctionalHeader.js'; 
 import JobPosting                               from './jobportaladmin/JobPosting/JobPosting.js'; 
+import JobProfile                               from './jobportaladmin/JobPostProfile/JobPostProfile.js'; 
 import JobList                                  from './jobportaladmin/JobList/JobList.js'; 
 
 
@@ -138,6 +139,7 @@ class Layout extends Component  {
                                                         <Route path="/" component={Dashboard} exact />
                                                         <Route path="/dashboard" component={Dashboard} exact />
                                                         <Route path="/post-job" component={JobPosting} exact />
+                                                        <Route path="/job-profile" component={JobProfile} exact />
                                                         <Route path="/job-list" component={JobList} exact />
                                                     </Switch>
                                                 </div>

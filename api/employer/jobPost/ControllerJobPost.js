@@ -23,7 +23,7 @@ exports.insertJobs = (req, res, next)=>{
 				"contactPersonPhone" 	: req.body.contactPersonPhone,
 				"jobType" 				: req.body.jobType,
 				"jobTime" 				: req.body.jobTime,
-				"lastDateOfAppl" 		: new Date(),
+				"lastDateOfAppl" 		: new Date(req.body.lastDateOfAppl),
 				"jobDesc" 				: req.body.jobDesc,
 			},
 			"CTCOffered" : {
@@ -67,8 +67,8 @@ exports.insertJobs = (req, res, next)=>{
 			});
 		
 }
-exports.getJobs = (req,res,next)=>{
-	var job_id = req.body.job_id;
+exports.getJob = (req,res,next)=>{
+	var job_id = req.params.job_id;
 
 	Jobs.findOne({_id : job_id})
 		.then(job => {

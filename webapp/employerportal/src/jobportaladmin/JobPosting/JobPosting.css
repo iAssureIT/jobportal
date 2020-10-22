@@ -1,11 +1,4 @@
-.pageWrapper{
-	min-height: 650px;
-	height: auto;
-	width: 100%;
-	color: var(--main-txt-color);
-}
-
-.mainForm{
+.addJobForm{
 	margin-top: 100px;
 	min-height: 500px;
 	height: auto;
@@ -13,15 +6,15 @@
 	margin-bottom: 50px;
 }
 
-.backgroundColor{
+.addJobBackgroundColor{
 	background-color: var(--main-bg-color);	
 }
 
-.borderColor{
+.addJobBorderColor{
 	border-color: var(--main-border-color); 
 }
 
-.headingColor{
+.addJobHeadingColor{
 	color: var(--main-heading-color); 
 }
 
@@ -32,13 +25,13 @@
 	line-height: 15px;
 }
 
-.pageWrapperBorder{
+.addJobWrapperBorder{
 	border: 3px solid var(--main-border-color);
 	border-radius: 10px;
 	background-color: #242933;
 }
 
-.formHeading{
+.addJobFormHeading{
 	margin-top: 25px;
 	font-size: 25px;
 	/*font-weight: bold;*/
@@ -46,19 +39,19 @@
 	font-family: 'Montserrat-SemiBold'; 
 }
 
-.formHr{
+.addJobFormHr{
 	border-top: 1px solid var(--main-border-color);
 	margin-top: 15px;
 }
 
-.formSubHeading{
+.addJobMainHead{
 	font-size: 21px;
 	font-weight: bold;
 	color: var(--main-subheading-font-color);
 	font-family: 'Montserrat-SemiBold'; 
 }
 
-.formSubHeading i{
+.addJobMainHead i{
 	color: var(--main-txt-color);
 	border: 1px solid #fff;
 	padding: 1px 7px;
@@ -66,24 +59,24 @@
 	border-radius: 6px;
 }
 
-.formSubHeading .labelLeftPadding{
+.addJobMainHead .labelLeftPadding{
 	padding-left: 17px;
 }
 
-.formSubHeadingHead{
+.addJobSubHead{
 	font-size: 21px;
 	font-weight: bold;
 	color: var(--main-subheading-font-color);
 	font-family: 'Montserrat-SemiBold';
 }
 
-.formSubHeadingHead i{
+.addJobSubHead i{
 	color: var(--main-txt-color);
 	font-size: 25px;
 	margin-top: 18px;
 }
 
-.formSubHeadingHead .labelLeftPadding{
+.addJobSubHead .labelLeftPadding{
 	padding-left: 17px;
 }
 
@@ -93,12 +86,12 @@
 	font-family: 'Montserrat-Regular';
 }
 
-.formSection{
+.addJobFormSection{
 	margin-left: 40px;
 	margin-right: 40px;
 }
 
-.formLable{
+.addjobformLable{
 	font-family: 'Montserrat-Regular';
 	font-size: 12px; 
 	font-weight: 100;
@@ -106,17 +99,17 @@
 	letter-spacing: 1px;
 }
 
-.formFieldRow {
+.addJobFieldRow {
     margin-top: 15px;
 }
 
-.formField {
+.addJobFormField {
     border: 1px solid var(--main-border-color);
     background-color: #242933;
     color: var(--main-txt-color);
 }
 
-.formField:hover{
+.addJobFormField:hover{
 	color: var(--main-txt-color);
 }
 
@@ -130,7 +123,7 @@
 }
 
 .workLable{
-  margin-left: 10px;
+ 	margin-left: 10px;
 }
 
 /*****************************Custom Checkbox***************************/
@@ -146,6 +139,7 @@
     -ms-user-select: none;
     user-select: none;
     font-weight: normal;
+    color: var(--main-txt-color);
   }
   
   .containerWfh input{
@@ -228,40 +222,7 @@ option:hover{
   color: var(--main-txt-color);
 }
 
-/*.bulletPoints{
-	list-style-type: square;
-}*/
-
-/*.pillListItems{
-	width: 100px;
-	height: 20px;
-	border-radius: 20px;
-
-	color: var(--main-txt-color);
-	background-color: transparent;
-	border: 1px solid var(--main-border-color);
-	margin-right: 10px;
-}
-
-.pillButton {
-  background-color: #ddd;
-  border: none;
-  color: black;
-  text-align: center;
-  text-decoration: none;
-  cursor: pointer;
-  border-radius: 16px;
-  background-color: transparent;
-	border: 1px solid var(--main-border-color);
-	color: var(--main-txt-color);
-}
-
-.pillButton:hover {
-  background-color: transparent;
-}
-*/
-
-.previewBtn{
+.addJobPreviewBtn{
 	height: 40px;
 	width: 150px;
 	margin-top: 60px;
@@ -269,14 +230,17 @@ option:hover{
 	margin-left: 95px;
 }
 
-.submitBtn{
+.addJobSubmitBtn{
 	height: 40px;
 	width: 150px;
 	margin-top: 60px;
 }
 
-.submitBtn:hover{
+.addJobSubmitBtn:hover{
 	color: var(--main-txt-color);
 }
 
-
+.errorMsg{
+	color: red;
+	font-size: 12px;
+}

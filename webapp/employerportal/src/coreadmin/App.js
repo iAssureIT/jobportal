@@ -3,7 +3,7 @@ import './coreadmin/css/root.css';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './lib/router.js';
-import Layout from './Layout.js';
+/*import Layout from './Layout.js';*/
 import axios from 'axios';
 
 axios.defaults.baseURL = process.env.REACT_APP_BASE_URL;

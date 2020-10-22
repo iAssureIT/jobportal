@@ -8,7 +8,7 @@ export default class MadhyaPradesh extends Component{
 
 	render(){
 		return(
-			<div className="bodyWrapper">
+			<div className="bodyWrapper" className="col-lg-10 col-lg-offset-1">
 				<div className="stateWrapper" style={{width:"90%"}}>
 					<div className="kas"> 
 						<img src="/Maps/Madhya_Pradesh/Alirajpur.png" className="alirajpur" alt="Alirajpur" onMouseOver={e => (e.currentTarget.src = "/Maps/Madhya_Pradesh/Alirajpur_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Madhya_Pradesh/Alirajpur.png")}/>

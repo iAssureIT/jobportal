@@ -2,6 +2,11 @@ const express = require('express');
 const router = express.Router();
 
 const CandidateProfileController = require("./ControllerCandidateProfile.js");
+router.post("/post", CandidateProfileController.insertCandidate);
+router.get("/get/:candidate_id", CandidateProfileController.getCandidate);
+router.get("/get/list", CandidateProfileController.getCandidateList);
+router.put("/update", CandidateProfileController.updateCandidate);
+router.delete("/delete", CandidateProfileController.deleteCandidate);
 
 router.post("/post", CandidateProfileController.insertCandidateBasicInfo);
 

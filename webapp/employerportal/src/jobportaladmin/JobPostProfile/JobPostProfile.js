@@ -1,7 +1,75 @@
-import React, {Component} from 'react';
+import React, {Component}   from 'react';
+import { FontAwesomeIcon }  from '@fortawesome/react-fontawesome';
+import Axios 				from 'axios';
+import Swal 				from 'sweetalert2';
 import './JobPostProfile.css';
 
 export default class JobPostProfile extends Component{
+	constructor(props){
+		super(props);
+
+		this.state = {
+			jobTitle 			: "",
+			jobLocation 		: "",
+			country 			: "",
+			industryId			: "",
+			functionalAreaId 	: "",
+			subFunctionalAreaId : "",
+			role 				: "",
+			workFromHome 		: "",
+			contactPerson 		: "",
+			email 				: "",
+			phone 				: "",
+			jobType 			: "",
+			jobTime 			: "",
+			lastDateAppl 		: "",
+			minSalary 			: "",
+			minSalPeriod 		: "",
+			maxSalary 			: "",
+			maxSalPeriod		: "",
+			jobDesc 			: "",
+			minEducation 		: "",
+			minExperience 		: "",
+			priSkillsArray 		: [], 
+			secSkillsArray 		: [], 
+			otherSkillsArray 	: [], 
+			preferSkillsArray 	: [],
+			functionalArealist 	: [],
+			priSkillsArraylist 	: [],
+			secSkillsArraylist 	: [],
+			otherSkillsArraylist: [],
+			preferSkillsArraylist: [],
+			jobTypeArray		: [],		
+		}
+
+	}
+	componentDidMount(){
+		var job_id = this.props.match.params.job_id;
+		console.log("student_id = ",job_id);
+
+		Axios.get("/api/jobposting/get/one/"+job_id)
+			.then(response=>{
+				console.log("response.data = ",response.data);
+
+				this.setState({
+					job_id		: job_id,
+					/*firstName 	: response.data.data.firstName,
+					middleName 	: response.data.data.middleName,
+					lastName 	: response.data.data.lastName,
+					mobile 		: response.data.data.phone,
+					email 		: response.data.data.email,
+					dob 		: response.data.data.dob,
+					gender 		: response.data.data.gender,
+					hobbies 	: response.data.data.hobbies,
+					standard	: response.data.data.standard,
+					profilePhoto: response.data.data.profilePhoto,*/
+				})
+			})
+			.catch(error=>{
+				Swal.fire("Some Error Occured during data fetch",error.message,'error');
+			})
+
+	}
 	render(){
 		return(
 			<div className="jobPostProfileWrapper container-fluid">
