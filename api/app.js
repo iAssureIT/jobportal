@@ -60,6 +60,7 @@ const candidateProfileRoutes			= require("./candidate/profile/RoutesCandidatePro
 
 const jobPostRoutes				    	= require("./employer/jobPost/RoutesJobPost.js");
 const condidateProfileRoutes	    	= require("./candidate/profile/RoutesCandidateProfile.js");
+const mapRoutes	    					= require("./website/maps/RoutesMap.js");
 
 
 //const AlertSystem		        = require("./coreAdmin/AlertSystem/Routes.js");
@@ -159,6 +160,7 @@ app.use("/api/facilitymaster", facilityRoutes);
 app.use("/api/candidatemaster", candidateProfileRoutes);
 app.use("/api/jobposting", jobPostRoutes);
 app.use("/api/candidateProfile", condidateProfileRoutes);
+app.use("/api/map", mapRoutes);
 
 //app.use("/api/personmaster", personMasterRoutes);
 //p.use("/api/accessmaster", accessRoutes);

@@ -31,7 +31,26 @@ import CandidateCertification     from './profileCreation/CandidateCertification
 import CandidateExperience  from './profileCreation/CandidateExperience.js';
 //import CandidateProfile     from './blocks/CandidateProfile/CandidateProfile.js';
 //import CandidateList     from './blocks/CandidateList/CandidateList.js';
-
+import India from './maps/India/India.js';
+import Maharashtra from './maps/Maharashtra/Maharashtra.js';
+import AndhraPradesh from './maps/AndhraPradesh/AndhraPradesh.js';
+import ArunachalPradesh from './maps/ArunachalPradesh/ArunachalPradesh.js';
+import Bihar from './maps/Bihar/Bihar.js';
+import Chhattisgarh from './maps/Chhattisgarh/Chhattisgarh.js';
+import Delhi from './maps/Delhi/Delhi.js';
+import Goa from './maps/Goa/Goa.js';
+import Gujarat from './maps/Gujarat/Gujarat.js';
+import HimachalPradesh from './maps/HimachalPradesh/HimachalPradesh.js';
+import JammuKashmirLadakh from './maps/JammuKashmirLadakh/JammuKashmirLadakh.js';
+import Jharkhand from './maps/Jharkhand/Jharkhand.js';
+import Karmataka from './maps/Karmataka/Karmataka.js';
+import Kerala from './maps/Kerala/Kerala.js';
+import MadhyaPradesh from './maps/MadhyaPradesh/MadhyaPradesh.js';
+import Manipur from './maps/Manipur/Manipur.js';
+import Meghalaya from './maps/Meghalaya/Meghalaya.js';
+import Mizoram from './maps/Mizoram/Mizoram.js';
+import Nagaland from './maps/Nagaland/Nagaland.js';
+import Orissa from './maps/Orissa/Orissa.js';
 
 class Layout extends Component  {
 
@@ -122,8 +141,12 @@ class Layout extends Component  {
                                             <div className="backColor col-lg-12 col-md-12 col-sm-12 col-xs-12" >
                                               {/*  <CoreLayout />*/}
                                                 <Switch >
+
                                                     <Route exact path="/functional-area"        component={PageFunctionWise}  />
                                                     <Route exact path="/subfunctional-area"        component={SubPageFunctionWise}  />
+
+                                                    <Route exact path="/"        component={India}  />
+
                                                     <Route exact path="/basic-info"        component={CandidateBasicInfo}  />
                                                     <Route exact path="/address/:candidateID"           component={CandidateAddress}  />
                                                     <Route exact path="/contact/:candidateID"           component={CandidateContact}  />

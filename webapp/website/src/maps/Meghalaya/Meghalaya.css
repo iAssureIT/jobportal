@@ -1,0 +1,55 @@
+.southWestGaroHills{
+	position: absolute;
+	left: 10px;
+	top: 250px;
+}
+.westGaroHills{
+	position: absolute;
+	left: 22px;
+    top: 128px;
+}
+.southGaroHills{
+	position: absolute;
+	left: 116px;
+    top: 250px;
+}
+.eastGaroHills{
+	position: absolute;
+	left: 135px;
+    top: 142px;
+}
+.northGaroHills{
+	position: absolute;
+	left: 135px;
+    top: 128px;
+}
+.westKhasiHills{
+	position: absolute;
+	left: 243px;
+    top: 166px;
+}
+.southWestKhasiHills{
+	position: absolute;
+	left: 271px;
+    top: 264px;
+}
+.eastKhasiHills{
+	position: absolute;
+	left: 399px;
+    top: 205px;
+}
+.riBhol{
+	position: absolute;
+	left: 388px;
+    top: 87px;
+}
+.westJaintiaHills{
+	position: absolute;
+	left: 560px;
+    top: 182px;
+}
+.eastJaintiaHills{
+	position: absolute;
+	left: 607px;
+    top: 259px;
+}

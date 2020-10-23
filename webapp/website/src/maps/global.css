@@ -1,0 +1,24 @@
+.bodyWrapper{
+	height: 950px;
+	background-color: #1f262d;
+	color: #f5a721;
+}
+.mapWrapper{
+	min-height: 950px;
+	height: auto;
+	margin-top: 30px;
+	width: 100%;
+	color: var(--main-txt-color);
+}
+
+
+.stateWrapper{
+	width:70%;
+	height: 900px;
+	margin: auto;
+	border: 1px solid #ff0;
+	position: absolute;
+	left: 50%;
+	transform: translate(-50%);
+	background-color: #1f262d;
+}
