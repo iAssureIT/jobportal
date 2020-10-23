@@ -322,3 +322,33 @@ exports.updateOneCandidateExperience = (req,res,next)=>{
             res.status(500).json({ error: err });
         });
 };
+
+exports.getCandidateList = (req,res,next)=>{
+    CandidateProfile.find({})
+    .exec()
+    .then(data=>{
+        res.status(200).json(data);
+    })
+    .catch(err =>{
+        res.status(500).json({
+            error: err
+        });
+    });
+};
+
+exports.deleteCandidate = (req,res,next)=>{
+    CandidateProfile.deleteOne({_id : req.params.candidateID})
+    .exec()
+    .then(data=>{
+        if(data.deletedCount === 1){
+            res.status(200).json({ deleted : true });
+        }else{
+            res.status(200).json({ deleted : false });
+        }
+    })
+    .catch(err =>{
+        res.status(500).json({
+            error: err
+        });
+    });
+};

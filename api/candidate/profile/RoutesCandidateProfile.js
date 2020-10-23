@@ -2,11 +2,6 @@ const express = require('express');
 const router = express.Router();
 
 const CandidateProfileController = require("./ControllerCandidateProfile.js");
-router.post("/post", CandidateProfileController.insertCandidate);
-router.get("/get/:candidate_id", CandidateProfileController.getCandidate);
-router.get("/get/list", CandidateProfileController.getCandidateList);
-router.put("/update", CandidateProfileController.updateCandidate);
-router.delete("/delete", CandidateProfileController.deleteCandidate);
 
 router.post("/post", CandidateProfileController.insertCandidateBasicInfo);
 
@@ -36,5 +31,9 @@ router.patch("/patch/addCandidateExperience", CandidateProfileController.addCand
 router.post("/post/getOneCandidateExperience", CandidateProfileController.getOneCandidateExperience);
 
 router.patch("/patch/updateOneCandidateExperience", CandidateProfileController.updateOneCandidateExperience);
+
+router.get("/get/list", CandidateProfileController.getCandidateList);
+
+router.delete("/delete/:candidateID", CandidateProfileController.deleteCandidate);
 
 module.exports = router ;
