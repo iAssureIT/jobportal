@@ -1,3 +1,16 @@
+@font-face {
+  font-family:'Montserrat-Regular';
+  src: url('/fonts/Montserrat/Montserrat-Regular.ttf');
+}
+
+@font-face {
+  font-family:'Montserrat-Bold';
+  src: url('/fonts/Montserrat/Montserrat-Bold.ttf');
+}
+
+
+
+
 .loginFormWrapper{
 	min-height: 650px;
 	height: auto;
@@ -5,38 +18,40 @@
 }
 
 .loginFormOuter{
-	/*height: 570px;*/
+	height: 650px;
 	background-color: #1f262d;
 	
 }
 
 .loginFormInner{
-	height: 450px;
-	margin-top: 50px;
+	height:auto;
+	min-height: 400px;
+	padding-bottom: 50px;
+	margin-top: 120px;
 	background-color: #242931;
 	border:3px solid #D3950A;
 	border-radius: 10px;
 }
 
 .signInTitle{
-	height: 90px;
+	height: 70px;
 	color: #D3950A;
 	font-size:20px;
 	text-align: center;
-	padding-top: 40px;
-	/*background-color: pink;*/
+	padding-top: 30px;
+	font-family: 'Montserrat-Bold';
 }
 
 .loginSocialMedia{
 	height: 50px;
-	width: 100%;	/*background-color: yellow;*/
+	width: 100%;	
 	float: left;
 	margin: auto;
 }
 
 .loginSocialMediaInner{
 	height: 50px;
-	width: 28%;	/*background-color: yellow;*/
+	width: 28%;	
 	
 	margin: auto;
 }
@@ -97,9 +112,7 @@
 .loginOr{
 	width: 100%;
 	height: 30px;
-	margin-bottom: 20px;
-	/*background-color:red;*/
-	
+	margin-bottom: 20px;	
 }
 
 .loginHr{
@@ -115,6 +128,7 @@
 	color: #eee;
 	height: 20px;
 	padding-top: 10px;
+	font-family: 'Montserrat-Regular';
 }
 
 .loginInputBox{
@@ -124,6 +138,9 @@
   border: 1px solid #D3950A;
   background-color: transparent !important;
   color: #fff;
+  font-size: 14px;
+  font-family: 'Montserrat-Regular';
+  letter-spacing: 1px;
 
 }
 
@@ -165,6 +182,8 @@
 	color: #fff;
 	border: 1px solid #D3950A;
 	margin-bottom: 2px;
+	font-size: 16px;
+	font-family: 'Montserrat-Bold';
 }
 
 .buttonSignIn:hover{
@@ -181,13 +200,13 @@
 
 	margin-top: 20px;
 	height: 30px;
-	/*background-color: pink;*/
 }
 
 .loginSignUp{
 	color: #aaa !important;
 	text-align: left;
 	font-size: 14px;
+	font-family: 'Montserrat-Regular';
 	float: left;
 }
 
@@ -200,10 +219,170 @@
 	color: #aaa !important;
 	text-align: right;
 	font-size: 14px;
+	font-family: 'Montserrat-Regular';
 	float: right;
 }
 
 .loginForgotPassword:hover{
 	color: #fff!important;
 	font-size: 15px;
+}
+
+.img1Login{
+	position: absolute;
+	height: 200px;
+	width: 125px;
+	top:15px;
+	left:55%;
+	z-index: 1;
+
+	animation: horizontalMove1 2s;
+	animation-iteration-count:infinite;
+	transition-timing-function: ease-in-out;
+	animation-delay: 1s;
+}
+
+.img1oginInner{
+	height: 200px;
+	width: 125px;
+
+	
+}
+
+@keyframes horizontalMove1 {
+		0% { left: 55%;}
+		
+		
+		50% {  left: 54%;}
+		
+		100% {  left: 55%; }
+	}
+
+@keyframes horizontalMove2 {
+		0% { left: 23%;}
+		
+		
+		50% {  left: 22%;}
+		
+		100% {  left: 23%; }
+	}
+
+	@keyframes horizontalMove3 {
+		0% { left: 61.5%;}
+		
+		
+		50% {  left: 62.5%;}
+		
+		100% {  left: 61.5%; }
+	}
+
+.img2Login{
+	position: absolute;
+	height: 300px;
+	width: 180px;
+	top:240px;
+	left:23%;
+	z-index: 1;
+
+	animation: horizontalMove2 2s;
+	animation-iteration-count:infinite;
+	transition-timing-function: ease-in-out;
+	animation-delay: 2s;
+}
+
+.img2loginInner{
+	height: 300px;
+	width: 180px;
+}
+
+
+
+
+.img3Login{
+	position: absolute;
+	height: 290px;
+	width: 120px;
+	
+	top:250px;
+	left:61.5%;
+	z-index: 1;
+	animation: horizontalMove3 2s;
+	animation-iteration-count:infinite;
+	transition-timing-function: ease-in-out;
+	animation-delay: 3s;
+}
+
+.img3loginInner{
+	height: 290px;
+	width: 120px;
+}
+
+@keyframes move {
+		0% { 
+	height: 150px;width: 80px; }
+		
+		
+		50% { height: 180px; 
+width: 100px;
+	}
+		
+		100% { height: 150px;width: 80px;
+	 }
+	}
+
+.img4Login{
+	position: absolute;
+	height: 150px;
+	width: 80px;
+	
+	top:435px;
+	left:42%;
+	z-index: 1;
+
+
+	animation: move 2s;
+	animation-iteration-count:infinite;
+	transition-timing-function: ease-in-out;
+	animation-delay: 1s;
+}
+
+.img4loginInner{
+	height: 150px;
+	width: 80px;
+}
+
+.img5Login{
+	position: absolute;
+	height: 150px;
+	width: 140px;
+	
+	top:365px;
+	left:66%;
+	z-index: 0;
+}
+
+.img5loginInner{
+	height: 150px;
+	width: 140px;
+}
+
+.img6Login{
+	position: absolute;
+	height: 90px;
+	width: 70px;
+	top:140px;
+	left:28.6%;
+	z-index: 0;
+}
+
+.img6loginInner{
+	height: 90px;
+	width: 70px;
+}
+
+
+.errorMsg{
+	color: #f00;
+	font-family: 'Montserrat-Regular';
+	font-size: 11px;
 }

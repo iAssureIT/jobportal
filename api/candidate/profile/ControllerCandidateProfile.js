@@ -62,56 +62,40 @@ exports.getSingleCandidate = (req,res,next)=>{
     });
 };
 exports.updateCandidateBasicInfo = (req, res, next)=>{
-	const candidateData = new CandidateProfile({
-			"_id" : new mongoose.Types.ObjectId(),
-			"basicInfo" : {
-				"firstName"		 : req.body.firstName,
-				"middleName" 	 : req.body.middleName,	
-				"lastName" 		 : req.body.lastName,
-				"dob" 			 : new Date(req.body.dob),
-				"age" 			 : req.body.dob,
-				"gender"	 	 : req.body.gender,
-				"maritalStatus"  : req.body.maritalStatus,
-				"anniversaryDate": new Date(req.body.anniversaryDate),
-				"languagesKnown" : req.body.languagesKnown,
-				"nationality" 	 : req.body.nationality,
-				"panCard" 		 : req.body.panCard,
-				"aadhaarCard" 	 : req.body.aadhaarCard,
-			},
-			
-			// "skillCertification": {
-			// 	"skill" 		: req.body.skill,
-			// 	"rating"   		: req.body.rating,
-			// 	"skilldesc"   	: req.body.skilldesc,
-			// 	"certName"		: req.body.certName,
-			// 	"issuedBy"   	: req.body.issuedBy,
-			// 	"certifiedOn" 	: new Date(req.body.certifiedOn),
-			// 	"validTill"		: new Date(req.body.validTill),
-			// 	"gradePercent"	: req.body.gradePercent,
-			// },
-			
-			// "createdAt" : new Date(),
-			// "createdBy" : req.body.user_id,
-			"updateLog" : [
-				{"updatedBy": req.body.user_id, "updatedAt":new Date(), "remark":req.body.remark }
-			]
-			});
-		
-
-		candidateData.save()
+	
+        CandidateProfile.updateOne(
+            { "_id":req.body.candidateID},  
+            {
+                $set:   {   
+                        "basicInfo.firstName"      : req.body.firstName,
+                        "basicInfo.middleName"     : req.body.middleName, 
+                        "basicInfo.lastName"       : req.body.lastName,
+                        "basicInfo.dob"            : new Date(req.body.dob),
+                        "basicInfo.age"            : req.body.dob,
+                        "basicInfo.gender"         : req.body.gender,
+                        "basicInfo.maritalStatus"  : req.body.maritalStatus,
+                        "basicInfo.anniversaryDate": new Date(req.body.anniversaryDate),
+                        "basicInfo.languagesKnown" : req.body.languagesKnown,
+                        "basicInfo.nationality"    : req.body.nationality,
+                        "basicInfo.panCard"        : req.body.panCard,
+                        "basicInfo.aadhaarCard"    : req.body.aadhaarCard,
+                        }
+            }
+        )
+		.exec()
 				.then(data => {
-				res.status(200).json({							
-					message	: "Candidate details Inserted Successfully",
-				});
+				if(data.nModified == 1){
+                    res.status(200).json({ updated : true });
+                }else{
+                    res.status(200).json({ updated : false });
+                }
 			})
 			.catch(error=>{
 				console.log(error);
 				res.status(500).json({
-					error 	: error,
-					message : "Some issue occurred during Insert Candidate details."
-				});
-			});
-		
+                    error: err
+                });
+			});	
 }
 
 exports.addCandidateAddress = (req,res,next)=>{
@@ -183,8 +167,8 @@ exports.updateCandidateContact = (req,res,next)=>{
    CandidateProfile.updateOne(
             { "_id":req.body.candidateID },  
             {
-                $set:   { 		"mobile" 		 : req.body.mobile,
-							 	"altMobile"   	 : req.body.altMobile
+                $set:   { 		"contact.mobile" 		 : req.body.mobile,
+							 	"contact.altMobile"   	 : req.body.altMobile
                         }
             }
         )

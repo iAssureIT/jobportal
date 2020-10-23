@@ -14,11 +14,14 @@ import ResetPassword        from './systemSecurity/ResetPassword.js';
 import SignUp               from './systemSecurity/SignUp.js';
 import ResetPasswordFirstLogin from './systemSecurity/ResetPasswordFirstLogin.js';
 import Header               from './common/header/Header.js'; 
+import FunctionalHeader     from './common/FunctionalHeader/FunctionalHeader.js'; 
 import Footer               from './common/footer/Footer.js';
 import Leftsidebar          from './common/leftSidebar/Leftsidebar.js';
 import CoreLayout           from './coreadmin/CoreLayout/CoreLayout.js';
 
-//import CompanyProfile       from './candidateprofile/Profile/CompanyProfile/CompanyProfile.js';
+import PageFunctionWise    from './FunctionalAreawiseJobs/PageFunctionWise.js';
+import SubPageFunctionWise from './FunctionalAreawiseJobs/SubPageFunctionWise.js';
+
 import CandidateProfile     from './profileCreation/blocks/ProfilePage/CandidateProfile.js';
 import CandidateBasicInfo   from './profileCreation/CandidateBasicInfo.js';
 import CandidateAddress     from './profileCreation/CandidateAddress.js';
@@ -28,6 +31,7 @@ import CandidateCertification     from './profileCreation/CandidateCertification
 import CandidateExperience  from './profileCreation/CandidateExperience.js';
 //import CandidateProfile     from './blocks/CandidateProfile/CandidateProfile.js';
 //import CandidateList     from './blocks/CandidateList/CandidateList.js';
+
 
 class Layout extends Component  {
 
@@ -118,7 +122,8 @@ class Layout extends Component  {
                                             <div className="backColor col-lg-12 col-md-12 col-sm-12 col-xs-12" >
                                               {/*  <CoreLayout />*/}
                                                 <Switch >
-                                                    
+                                                    <Route exact path="/functional-area"        component={PageFunctionWise}  />
+                                                    <Route exact path="/subfunctional-area"        component={SubPageFunctionWise}  />
                                                     <Route exact path="/basic-info"        component={CandidateBasicInfo}  />
                                                     <Route exact path="/address/:candidateID"           component={CandidateAddress}  />
                                                     <Route exact path="/contact/:candidateID"           component={CandidateContact}  />
@@ -142,7 +147,8 @@ class Layout extends Component  {
             );
         } else {
             return (
-                <div>
+                <div className="PageFunctionWiseWrapper">
+                <FunctionalHeader/>
                     <Router >
                         <Switch >
                             <Route path="/" exact strict component={Login} />
@@ -152,6 +158,8 @@ class Layout extends Component  {
                             <Route path="/reset-pwd/:user_ID" exact strict component={ResetPassword} />
                             <Route path="/confirm-otp/:userID" exact strict component={ConfirmOtp} />
                             <Route path="/reset-password/:user_ID" exact strict component={ResetPasswordFirstLogin}  />
+                            <Route exact path="/functional-area"        component={PageFunctionWise}  />
+                            <Route exact path="/subfunctional-area"        component={SubPageFunctionWise}  />
                         </Switch>
                     </Router>
                 </div>

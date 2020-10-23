@@ -1,0 +1,151 @@
+@font-face {
+  font-family:'Montserrat-Regular';
+  src: url('/fonts/Montserrat/Montserrat-Regular.ttf');
+}
+
+@font-face {
+  font-family:'Montserrat-Bold';
+  src: url('/fonts/Montserrat/Montserrat-Bold.ttf');
+}
+
+.FunctionalHeaderWrapper{
+	height: 150px;
+	background-color: #1f262d;
+}
+
+.iconHeader{
+	height: 120px;
+	padding-top: 40px;
+	padding-left: 0%;
+}
+
+.breadCrumbHeader{
+	height: 120px;
+	color: #ddd;
+	text-align: left;
+	padding-top: 70px;
+	font-size: 11px;
+	font-family: 'Montserrat-Regular';
+}
+
+.FunctionWiseTitle{
+	height: 120px;
+	color: #ddd;
+	text-align: left;
+	padding-top: 60px;
+	font-size: 28px;
+	color: #f5a721;
+	font-family: 'Montserrat-Bold';
+}
+.rightFunctionHeader{
+	height: 120px;
+}
+
+.rightFunctionHeader1{
+	height: 120px;
+}
+.rightFunctionHeader2{
+	height: 120px;
+}
+
+.breadCrumbInner{
+	color: #eee;
+	 list-style: none;
+	 padding: 0px;
+	 margin: 0px;
+}
+
+.breadCrumbInnerli {
+  display: inline;
+  font-size: 12px;
+  padding-bottom: 5px;
+  border-bottom: 0.5px solid #ddd;
+}
+
+.breadCrumbInnerLI {
+  display: inline;
+  color: #f5a721;
+  font-size: 12px;
+  padding-bottom: 5px;
+  border-bottom: 0.5px solid #f5a721;
+}
+
+.breadCrumbInner li+li:before {
+  padding:3px;
+  color: #ddd;
+  content: ">\00a0";
+}
+
+.breadCrumbInner li a {
+  color: #eee;
+  text-decoration: none;
+}
+
+.breadCrumbInner li a:hover{
+  color: #f5a721;
+  text-decoration: none;
+}
+.rightFunctionHeader1CityJobs{
+	width: 100%;
+	height: 100px;
+	margin-top: 20px;
+	background-color: #242933;
+	border: 1px solid #999;
+	border-radius: 5px;
+}
+
+.cityNameHeader{
+	width: 100%;
+	height: 40px;
+	color: #eee;
+	font-size: 22px;
+	font-weight: bold;
+	text-align: center;
+	padding-top: 15px;
+	font-family: 'Montserrat-Bold';
+	
+}
+
+.cityJobsHeader{
+	width: 100%;
+	height: 50px;
+	color: #f5a721;
+	font-size: 28px;
+	font-weight: bold;
+	text-align: center;
+	padding-bottom: 10px;
+	font-family: 'Montserrat-Regular';
+}
+
+.headerMenu1,.headerMenu11{
+	width: 30px;
+	height: 30px;
+	color: #aaa;
+	font-size: 18px;
+	text-align: center;
+	margin-left: 5px;
+	margin-top: 0px;
+	border: 1px solid #999;
+	border-radius: 5px;
+	float: right;
+	
+}
+
+.headerMenu2{
+	width: 100%;
+	height: 50px;
+	margin-top: 20px;
+}
+
+.headerMenu11{
+	float: right;
+}
+
+.bind{
+	background-color: #222;
+}
+
+.LayoutWrapper{
+	background-color: #444;
+
+}
