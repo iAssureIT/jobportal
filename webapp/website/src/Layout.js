@@ -67,51 +67,6 @@ class Layout extends Component  {
        var company_Id = localStorage.getItem("company_Id");
        var contractID ="";
 
-        axios.get("/api/entitymaster/get/one/"+company_Id)
-        .then((company)=>{
-            axios.get("/api/contract/get/one/entity/" + company_Id)
-            .then((contract) => {
-                if(contract.data.length>0){
-                    var contractDetails = contract.data[0];
-                    if(company.data[0].profileStatus === "New" || contractDetails.status !== "Approved"){
-                        this.setState({
-                            sidebar:false
-                        })
-                    }
-                }else{
-                this.setState({
-                    sidebar:false
-                })
-            }
-                   
-
-              })
-            .catch((error) => {})      
-        })
-        .catch((error)=>{})
-         const user_ID = localStorage.getItem("user_ID");
-
-         axios.get('/api/personmaster/get/details/' + user_ID)
-          .then((res) => {
-            console.log("res empProfileStatus",res)
-            if(res.data[0].profileStatus && res.data[0].profileStatus === "New" )
-            {
-              this.setState({
-                empProfileStatus : false
-              })
-            }
-            
-          })
-          .catch((err) => {
-          })
-
-        const token = localStorage.getItem("token");
-        if (token !== null && token !== "undefined") {
-            this.setState({
-                loggedIn: true
-            })
-        } else { }
-
     }
 
     logout() {
@@ -127,7 +82,7 @@ class Layout extends Component  {
         const roles = localStorage.getItem("roles");
         var roleArr = [];
         roleArr.push(roles);
-        if (!this.state.loggedIn) {
+        if (this.state.loggedIn) {
             return (
             <Router>
                 <div className="hold-transition skin-blue fixed sidebar-mini">
@@ -141,7 +96,6 @@ class Layout extends Component  {
                                             <div className="backColor col-lg-12 col-md-12 col-sm-12 col-xs-12" >
                                               {/*  <CoreLayout />*/}
                                                 <Switch >
-
                                                     <Route exact path="/functional-area"        component={PageFunctionWise}  />
                                                     <Route exact path="/subfunctional-area"        component={SubPageFunctionWise}  />
 
@@ -174,7 +128,8 @@ class Layout extends Component  {
                 <FunctionalHeader/>
                     <Router >
                         <Switch >
-                            <Route path="/" exact strict component={Login} />
+                            <Route exact path="/"        component={India}  />
+
                             <Route path="/login" exact strict component={Login} />
                             <Route path="/signup" exact strict component={SignUp} />
                             <Route path="/forgot-password" exact strict component={ForgotPassword} />

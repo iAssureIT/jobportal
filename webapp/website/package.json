@@ -26,6 +26,7 @@
     "jquery-validation": "^1.19.1",
     "jspdf": "^1.5.3",
     "moment": "^2.24.0",
+    "multiselect-react-dropdown": "^1.6.1",
     "rc-time-picker": "^3.7.3",
     "react": "^16.8.6",
     "react-chartjs-2": "^2.7.6",

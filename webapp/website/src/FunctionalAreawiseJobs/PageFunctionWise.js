@@ -14,11 +14,10 @@ export default class PageFunctionWise extends Component{
 		
 		return(
 			<div className="col-lg-12">
-				<div className=" col-lg-12">
-						<LeftMenu/>
-						<LeftSideFilters />
-						<FunctionalAreawiseJobs />
-				</div>
+				<LeftMenu/>
+				<LeftSideFilters />
+				<FunctionalAreawiseJobs />
+				
 			</div>
 		);
 	}

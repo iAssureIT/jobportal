@@ -62,7 +62,7 @@ const jobPostRoutes				    	= require("./employer/jobPost/RoutesJobPost.js");
 const condidateProfileRoutes	    	= require("./candidate/profile/RoutesCandidateProfile.js");
 const mapRoutes	    					= require("./website/maps/RoutesMap.js");
 
-
+const candidateWishlistRoutes	    	= require("./candidate/wishlist/RoutesCandidateWishlist.js");
 //const AlertSystem		        = require("./coreAdmin/AlertSystem/Routes.js");
 
 //============ To Start API on Server with Authentication ========
@@ -161,6 +161,8 @@ app.use("/api/candidatemaster", candidateProfileRoutes);
 app.use("/api/jobposting", jobPostRoutes);
 app.use("/api/candidateProfile", condidateProfileRoutes);
 app.use("/api/map", mapRoutes);
+
+app.use("/api/wishlist", candidateWishlistRoutes);
 
 //app.use("/api/personmaster", personMasterRoutes);
 //p.use("/api/accessmaster", accessRoutes);

@@ -70,15 +70,15 @@ exports.updateCandidateBasicInfo = (req, res, next)=>{
                         "basicInfo.firstName"      : req.body.firstName,
                         "basicInfo.middleName"     : req.body.middleName, 
                         "basicInfo.lastName"       : req.body.lastName,
-                        "basicInfo.dob"            : new Date(req.body.dob),
+                        "basicInfo.dob"            : req.body.dob == "" ? null : new Date(req.body.dob),
                         "basicInfo.age"            : req.body.dob,
                         "basicInfo.gender"         : req.body.gender,
                         "basicInfo.maritalStatus"  : req.body.maritalStatus,
-                        "basicInfo.anniversaryDate": new Date(req.body.anniversaryDate),
+                        "basicInfo.anniversaryDate": req.body.anniversaryDate == "" ? null : new Date(req.body.anniversaryDate),
                         "basicInfo.languagesKnown" : req.body.languagesKnown,
                         "basicInfo.nationality"    : req.body.nationality,
-                        "basicInfo.panCard"        : req.body.panCard,
-                        "basicInfo.aadhaarCard"    : req.body.aadhaarCard,
+                        "panCard"                  : req.body.panCard,
+                        "aadhaarCard"              : req.body.aadhaarCard,
                         }
             }
         )
