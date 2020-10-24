@@ -43,6 +43,7 @@ class EntityDetails extends Component {
       	console.log("entityInfo",response)
         this.setState({
             entityInfo 	: response.data[0],
+            companyID 	: response.data[0].companyID,
             contacts 		: response.data[0].contactData,
             locations 	: response.data[0].locations.reverse(),
             entityType 	: response.data[0].entityType
@@ -112,6 +113,13 @@ class EntityDetails extends Component {
 				if (response.data.count  === 0) {
     	           window.location.reload();   
 				}
+			})
+			.catch((error) => {
+				console.log("error",error)
+			})
+			axios.delete("/api/entitymaster/deleteUsers/"+this.state.companyID)
+			.then((response) => {
+				console.log("response=>",response)
 			})
 			.catch((error) => {
 				console.log("error",error)

@@ -4,7 +4,7 @@ import axios from 'axios';
 import EntityDetails from './EntityDetails.jsx';
 import {withRouter}  from 'react-router-dom';
 
-import IAssureTableNew         from "../../../../iAssureTableNew/IAssureTableNew.jsx";
+import IAssureTableNew         from "../../../../IAssureTable/IAssureTable.jsx";
 
 import 'bootstrap/js/tab.js';
 import '../css/ListOfEntity.css';
@@ -124,6 +124,7 @@ class ListOfEntities extends Component {
 						return "<ul class='nopadding'><li><a title='View profile' target='_blank' href='/employee-profile/'"+c.personID+">"+c.firstName+" "+c.lastName+"</a></li><li>"+c.email+"</li><li>"+(c.departmentName ? c.departmentName : "")+"</li><li>"+(c.designationName ? c.designationName : "")+"</li></ul>"
 					})
 			        return{
+			        	companyID:a.companyID,
 			            companyName:"<a  title='View company profile'  target='_blank' href='/company-profile/"+(a._id)+"'>"+a.companyName +" (" +a.companyID+")</a>"+"<br> <b>Group Name : </b>"+a.groupName,
 			            companyEmail:"<b>Email : </b>"+a.companyEmail+"<br><b>Mobile No. : </b>"+a.companyPhone,
 			            location:locDetails && locDetails.length > 0 ? locDetails : "No Location Added Yet",
@@ -430,6 +431,7 @@ class ListOfEntities extends Component {
 						return "<ul class='nopadding'><li><a title='View profile' target='_blank' href='/employee-profile/'"+c.personID+">"+c.firstName+" "+c.lastName+"</a></li><li>"+c.email+"</li><li>"+(c.departmentName ? c.departmentName : "")+"</li><li>"+(c.designationName ? c.designationName : "")+"</li></ul>"
 					})
 			        return{
+			        	companyID:a.companyID,
 			            companyName:"<a  title='View company profile'  target='_blank' href='/company-profile/"+(a._id)+"'>"+a.companyName +" (" +a.companyID+")</a>"+"<br> <b>Group Name : </b>"+a.groupName,
 			            companyEmail:"<b>Email : </b>"+a.companyEmail+"<br><b>Mobile No. : </b>"+a.companyPhone,
 			            location:locDetails && locDetails.length > 0 ? locDetails : "No Location Added Yet",

@@ -78,6 +78,7 @@ class ContactDetails extends Component {
 			'contactID':nextProps.match.params ? nextProps.match.params.contactID : '',
 		},()=>{
 			this.edit();
+			this.getAllEntites();
 		})
 		this.setState({'isBookingRequired':nextProps.bookingRequired})
 	}
@@ -158,7 +159,8 @@ class ContactDetails extends Component {
 			axios.get('/api/entitymaster/get/one/' + this.props.match.params.entityID)
 			.then((response) => {
 				this.setState({
-					contactarray: response.data[0].contactData
+					contactarray: response.data[0].contactData,
+					companyID: response.data[0].companyID
 
 				},()=>{
 					if(response.data[0].contactData){
@@ -602,7 +604,7 @@ class ContactDetails extends Component {
 					'approvingAuthorityId3' 	: this.state.approvingAuthorityId3,
 					'preApprovedAmount' 		: this.state.bookingApprovalRequired ? this.state.preApprovedAmount : "",
 					'preApprovedRides'          : this.state.bookingApprovalRequired ? this.state.preApprovedRides : "",
-					'preApprovedKilometer'     : this.state.bookingApprovalRequired ? this.state.preApprovedKilometer : "",
+					'preApprovedKilometer'      : this.state.bookingApprovalRequired ? this.state.preApprovedKilometer : "",
 					'createUser'        		: this.state.createUser,
 					'role' 						: this.state.createUser ? this.state.role : "",
           			'addEmployee'       		: this.state.addEmployee,
@@ -611,7 +613,7 @@ class ContactDetails extends Component {
 			const main = async()=>{
 				if ($('#ContactDetail').valid()) {
 					console.log("emp id =>",this.state.listOfEmpID.indexOf(this.state.employeeID))
-					if(this.state.createUser === true && this.state.listOfEmpID.indexOf(this.state.employeeID) === -1){
+					if(this.state.createUser === true){
 						formValues.contactDetails.userID = await this.createUser();
 						formValues.contactDetails.personID = await this.savePerson(formValues.contactDetails.userID);
 						var formValues1 = {
@@ -664,15 +666,16 @@ class ContactDetails extends Component {
 			firstname				: this.state.firstName,
 			lastname				: this.state.lastName,
 			mobNumber				: this.state.phone,
-			email						: this.state.email,
+			email				    : this.state.email,
 			companyID				: this.state.companyID,
-			companyName			: this.state.companyName,
-			pwd							: "welcome123",
-			role						: [ this.state.role ],
-            "status"					: this.state.role ==="corporateadmin" || this.state.role ==="vendoradmin" || this.state.role === "admin" ? "active" :"blocked",
+			companyName			    : this.state.companyName,
+			pwd						: "welcome123",
+			role					: [ this.state.role ],
+            "status"				: this.state.role ==="corporateadmin" || this.state.role ==="vendoradmin" || this.state.role === "admin" ? "active" :"blocked",
 			"emailSubject"	: "Email Verification",
 			"emailContent"	: "As part of our registration process, we screen every new profile to ensure its credibility by validating email provided by user. While screening the profile, we verify that details put in by user are correct and genuine.",
 		}
+
 		return new Promise(function(resolve, reject){
 			axios.post('/api/auth/post/signup/user', userDetails)
 			.then((response)=>{				
@@ -1073,6 +1076,7 @@ class ContactDetails extends Component {
 						'openForm'					: true,
 						'branchCode'        		: contactDetails[0].branchCode,
 						'workLocation'        		: contactDetails[0].branchName,
+						'locationType'        		: contactDetails[0].locationType ? contactDetails[0].locationType : "",
 						"workLocationId"			: contactDetails[0].workLocationId,
 						'firstName'               	: contactDetails[0].firstName,
 						'lastName'                	: contactDetails[0].lastName,
@@ -1263,11 +1267,11 @@ class ContactDetails extends Component {
 				
 	        return{
 	        	_id         :a._id,
-	            empName:"<b>Name :</b> "+"<a  title='View profile' target='_blank' href='/employee-profile/"+(a.personID)+"'>"+a.firstName + " " + a.lastName+"</a>" + " <br><b>Emp ID :</b> " + (a.employeeID? a.employeeID :"- NA -" ),
-	            contactDetails:"<b>Phone :</b> "+(a.phone ? a.phone :"- NA -") + (a.whatsupNumber ? " | " + a.whatsupNumber : "" ) + "<br><b> Email : </b> " +a.email,
-	            approvingAuthorityId1:a.bookingApprovalRequired="Yes" ? ("<b>Emp ID : </b>"+(a.approvingAuthorityId1 ? a.approvingAuthorityId1 :"- NA -")+ "<br><b>Name : </b>" +(a.approvingAuthorityName ?a.approvingAuthorityName:"-NA-" )) : "- NA -",
-	            approvingAuthorityId2:a.bookingApprovalRequired="Yes" ? ("<b>Emp ID : </b>"+(a.approvingAuthorityId2 ? a.approvingAuthorityId2 :"- NA -")+ "<br><b>Name : </b>" +(a.approvingAuthorityName?a.approvingAuthorityName:"-NA-") ) : "- NA -",
-	            approvingAuthorityId3:a.bookingApprovalRequired="Yes" ? ("<b>Emp ID : </b>"+(a.approvingAuthorityId3 ? a.approvingAuthorityId3 :"- NA -")+ "<br><b>Name : </b>" +(a.approvingAuthorityName?a.approvingAuthorityName:"-NA-") ) : "- NA -",
+	            empName:"<a  title='View profile' target='_blank' href='/employee-profile/"+(a.personID)+"'>"+a.firstName + " " + a.lastName+"</a>"  + (a.employeeID? " ("+a.employeeID + ")" :"- NA -" ),
+	            contactDetails:"<b>Phone :</b> "+(a.phone ? a.phone :"- NA -") + (a.whatsupNumber ? " | " + a.whatsupNumber : "" ) + "<br><b> Email : </b> " +(a.email ? a.email : "-NA-"),
+	            approvingAuthorityId1:a.bookingApprovalRequired="Yes" ? ("<b>Emp ID : </b>"+(a.approvingAuthorityId1 ? a.approvingAuthorityId1 :"- NA -")+ "<br><b>Name : </b>" +(a.manager1Details ?a.manager1Details.firstName +' '+a.manager1Details.lastName:"-NA-" )) : "- NA -",
+	            approvingAuthorityId2:a.bookingApprovalRequired="Yes" ? ("<b>Emp ID : </b>"+(a.approvingAuthorityId2 ? a.approvingAuthorityId2 :"- NA -")+ "<br><b>Name : </b>" +(a.manager2Details ?a.manager2Details.firstName +' '+a.manager2Details.lastName:"-NA-") ) : "- NA -",
+	            approvingAuthorityId3:a.bookingApprovalRequired="Yes" ? ("<b>Emp ID : </b>"+(a.approvingAuthorityId3 ? a.approvingAuthorityId3 :"- NA -")+ "<br><b>Name : </b>" +(a.manager3Details ?a.manager3Details.firstName +' '+a.manager3Details.lastName:"-NA-") ) : "- NA -",
 	            preApprovedLimits :a.bookingApprovalRequired="Yes"  ? ("<b>Amount :</b> " + (a.preApprovedAmount ? a.preApprovedAmount :"- NA -") + "<br><b>Kilometer :</b> " + (a.preApprovedKilometer ? a.preApprovedKilometer :"- NA -") + "<br><b>Rides : </b>" + (a.preApprovedRides ? a.preApprovedRides :"- NA -")):"- NA -",
 	        }
 	      })

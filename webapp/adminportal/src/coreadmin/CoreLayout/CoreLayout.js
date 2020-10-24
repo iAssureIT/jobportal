@@ -37,12 +37,12 @@ import CityType from '../Master/CityType/CityType.js';
 
 
 import CompanyPaymentGateway from '../companysetting/Components/CompanyPaymentGateway.js';
-//============= Employer Master ====================
-import EmployerBasicInfo from '../Master/EmployerMaster/EmployerBasicInfo.js';
-import EmployerStatutoryDetails from '../Master/EmployerMaster/EmployerStatutoryDetails.js';
-import EmployerLocationDetails from '../Master/EmployerMaster/EmployerLocationDetails.js';
-import EmployerContactDetails from '../Master/EmployerMaster/EmployerContactDetails.js';
-import EmployerListOfEntities from '../Master/EmployerMaster/EmployerListOfEntities.js';
+//============= Corporate Master ====================
+import CorporateBasicInfo from '../Master/CorporateMaster/CorporateBasicInfo.js';
+import CorporateStatutoryDetails from '../Master/CorporateMaster/CorporateStatutoryDetails.js';
+import CorporateLocationDetails from '../Master/CorporateMaster/CorporateLocationDetails.js';
+import CorporateContactDetails from '../Master/CorporateMaster/CorporateContactDetails.js';
+import CorporateListOfEntities from '../Master/CorporateMaster/CorporateListOfEntities.js';
 
 
 
@@ -133,20 +133,20 @@ class CoreLayout extends Component {
 
                 <Route path="/paymentgateway" exact strict component={CompanyPaymentGateway} />
                 <Route path="/paymentgateway/:id" exact strict component={CompanyPaymentGateway} />                
-                { /* Employer Master */}
+                { /* Corporate Master */}
                 
-                <Route path="/corporate/basic-details" exact strict component={EmployerBasicInfo} />
-                <Route path="/corporate/basic-details/:entityID" exact strict component={EmployerBasicInfo} />
-                <Route path="/corporate/statutory-details" exact strict component={EmployerStatutoryDetails} />
-                <Route path="/corporate/location-details" exact strict component={EmployerLocationDetails} />
-                <Route path="/corporate/statutory-details/:entityID/:statutoryID" exact strict component={EmployerStatutoryDetails} />
-                <Route path="/corporate/location-details/:entityID/:locationID" exact strict component={EmployerLocationDetails} />
-                <Route path="/corporate/statutory-details/:entityID" exact strict component={EmployerStatutoryDetails} />
-                <Route path="/corporate/location-details/:entityID" exact strict component={EmployerLocationDetails} />
-                <Route path="/corporate/contact-details" exact strict component={EmployerContactDetails} />
-                <Route path="/corporate/contact-details/:entityID" exact strict component={EmployerContactDetails} />
-                <Route path="/corporate/contact-details/:entityID/:contactID" exact strict component={EmployerContactDetails} />
-                <Route path="/corporate/list" exact strict component={EmployerListOfEntities} />
+                <Route path="/corporate/basic-details" exact strict component={CorporateBasicInfo} />
+                <Route path="/corporate/basic-details/:entityID" exact strict component={CorporateBasicInfo} />
+                <Route path="/corporate/statutory-details" exact strict component={CorporateStatutoryDetails} />
+                <Route path="/corporate/location-details" exact strict component={CorporateLocationDetails} />
+                <Route path="/corporate/statutory-details/:entityID/:statutoryID" exact strict component={CorporateStatutoryDetails} />
+                <Route path="/corporate/location-details/:entityID/:locationID" exact strict component={CorporateLocationDetails} />
+                <Route path="/corporate/statutory-details/:entityID" exact strict component={CorporateStatutoryDetails} />
+                <Route path="/corporate/location-details/:entityID" exact strict component={CorporateLocationDetails} />
+                <Route path="/corporate/contact-details" exact strict component={CorporateContactDetails} />
+                <Route path="/corporate/contact-details/:entityID" exact strict component={CorporateContactDetails} />
+                <Route path="/corporate/contact-details/:entityID/:contactID" exact strict component={CorporateContactDetails} />
+                <Route path="/corporate/list" exact strict component={CorporateListOfEntities} />
 
                 
                  { /* Orgnizational Setting */}

@@ -21,10 +21,14 @@ const rolesRoutes						= require('./coreAdmin/rolesManagement/RoutesRoles.js');
 const rolesentitymasterRoutes			= require('./coreAdmin/RoleEntityMaster/Routes.js');
 const masternotificationRoutes		    = require('./coreAdmin/notificationManagement/RoutesMasterNotification.js');
 const notificationRoutes				= require('./coreAdmin/notificationManagement/RoutesNotification.js');
+const CountrySpecificConfig				= require("./coreAdmin/CountrySpecificConfig/RoutesCountrySpecificConfig.js");
+
 const companySettingsRoutes				= require('./coreAdmin/companySettings/RoutesCompanySettings.js');
 const projectSettingRoutes 				= require('./coreAdmin/projectSettings/RoutesProjectSettings.js');
 const globalMasterRoutes 				= require('./coreAdmin/globalMaster/RoutesGlobalMaster.js');
 const preferencesRoutes 				= require('./coreAdmin/preferences/RoutesPreferences.js');
+const locationTypeMasterRoutes		    = require("./coreAdmin/locationTypeMaster/RoutesLocationTypeMaster.js");
+
 const paymentgatewayRoutes 				= require('./coreAdmin/paymentgateway/Routes.js');
 const paymentTermsRoutes 				= require('./coreAdmin/PaymentTerms/PaymentTermsRoutes.js');
 //const personMasterRoutes				= require("./coreAdmin/personMaster/RoutesPersonMaster.js");
@@ -36,8 +40,8 @@ const industryMasterRoutes			    = require("./coreAdmin/IndustryMaster/RoutesInd
 const subIndustryMasterRoutes			= require("./coreAdmin/SubIndustryMaster/RoutesSubIndustryMaster.js");
 const functionalAreaMasterRoutes		= require("./coreAdmin/FunctionalAreaMaster/RoutesFunctionalAreaMaster.js");
 const subFunctionalAreaMasterRoutes		= require("./coreAdmin/SubFunctionalAreaMaster/RoutesSubFunctionalAreaMaster.js");
-
-const designationMasterRoutes			= require("./coreAdmin/DesignationMaster/RoutesDesignationMaster.js");
+const departmentMasterRoutes			= require("./coreAdmin/departmentMaster/RoutesDepartmentMaster.js");
+const designationMasterRoutes			= require("./coreAdmin/designationMaster/RoutesDesignationMaster.js");
 
 const jobCategoryMasterRoutes			= require("./coreAdmin/JobCategoryMaster/RoutesJobCategory.js");
 const jobTypeMasterRoutes				= require("./coreAdmin/JobTypeMaster/RoutesJobType.js");
@@ -125,11 +129,12 @@ app.use("/api/auth", systemSecurityRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/masternotifications",masternotificationRoutes);
 app.use('/api/notifications',notificationRoutes);
+app.use("/api/countryspecificConfig", 	CountrySpecificConfig);
 app.use('/api/companysettings',companySettingsRoutes);
 app.use('/api/globalmaster',globalMasterRoutes);
 app.use('/api/preferences',preferencesRoutes);
 app.use("/api/entitymaster", entityRoutes);
-
+app.use("/api/locationtypemaster", locationTypeMasterRoutes);
 app.use("/api/paymentgateway", paymentgatewayRoutes);
 app.use("/api/paymentterms", paymentTermsRoutes);
 
@@ -141,7 +146,7 @@ app.use("/api/industrymaster", industryMasterRoutes);
 app.use("/api/subindustrymaster", subIndustryMasterRoutes);
 app.use("/api/functionalareamaster", functionalAreaMasterRoutes);
 app.use("/api/subfunctionalareamaster", subFunctionalAreaMasterRoutes);
-
+app.use("/api/departmentmaster", departmentMasterRoutes);
 app.use("/api/designationmaster", designationMasterRoutes);
 
 app.use("/api/jobcategorymaster", jobCategoryMasterRoutes);

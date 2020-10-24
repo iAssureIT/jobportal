@@ -38,36 +38,7 @@ class BasicInfo extends Component {
         CIN: "CIN",
         COI: "COI",
         TAN: "TAN",
-        state   : "State",
-        GSTIN   : "GST",
-        PAN     : "PAN",
-        locationType        : "Location Type",
-        addressLine1        : "AddressLine1",
-        addressLine2        : "AddressLine2",
-        country             : "Country",
-        state               : "State",
-        district            : "District",
-        city                : "City",
-        area                : "Area",
-        pincode             : "Pincode",
-        branchName                : "Branch Name",
-        firstName                 : "First Name",
-        lastName                  : "Last Name",
-        empCategory               : "Employee Category",
-        empPriority               : "Priority",
-        phone                     : "Phone",
-        altPhone                  : "Alternate Phone",
-        email                     : "Email",
-        department                : "Department",
-        designation               : "Designation",
-        employeeID                : "Employee ID",
-        bookingApprovalRequired   : "BookingApprovalRequired",
-        approvingAuthorityId1     : "ApprovingAuthorityId1",
-        approvingAuthorityId2     : "ApprovingAuthorityId2",
-        approvingAuthorityId3     : "ApprovingAuthorityId2",
-        preApprovedKilometer      : "preApprovedKilometer",
-        preApprovedRides          : "preApprovedRides",
-        preApprovedAmount         : "preApprovedAmount",
+       
   },
       failedtableHeading: {
        
@@ -80,36 +51,6 @@ class BasicInfo extends Component {
         CIN: "CIN",
         COI: "COI",
         TAN: "TAN",
-         state                    : "State",
-        GSTIN                     : "GST",
-        PAN                       : "PAN",
-        locationType              : "Location Type",
-        addressLine1              : "AddressLine1",
-        addressLine2              : "AddressLine2",
-        country                   : "Country",
-        state                     : "State",
-        district                  : "District",
-        city                      : "City",
-        area                      : "Area",
-        pincode                   : "Pincode",
-        branchName                : "Branch Name",
-        firstName                 : "First Name",
-        lastName                  : "Last Name",
-        empCategory               : "Employee Category",
-        empPriority               : "Priority",
-        phone                     : "Phone",
-        altPhone                  : "Alternate Phone",
-        email                     : "Email",
-        department                : "Department",
-        designation               : "Designation",
-        employeeID                : "Employee ID",
-        bookingApprovalRequired   : "BookingApprovalRequired",
-        approvingAuthorityId1     : "ApprovingAuthorityId1",
-        approvingAuthorityId2     : "ApprovingAuthorityId2",
-        approvingAuthorityId3     : "ApprovingAuthorityId2",
-        preApprovedKilometer      : "preApprovedKilometer",
-        preApprovedRides          : "preApprovedRides",
-        preApprovedAmount         : "preApprovedAmount",
         failedRemark              : "Failed Data Remark"
       }
     };
@@ -705,7 +646,7 @@ class BasicInfo extends Component {
             failedRecordsCount  : response.data.failedRecords.length,
             goodDataCount       : response.data.goodrecords.length
         });
-
+          console.log("response.data.goodrecords----",response.data.goodrecords);
           var tableData = response.data.goodrecords.map((a, i)=>{
             return{
                 
@@ -717,7 +658,7 @@ class BasicInfo extends Component {
                 "companyEmail": a.companyEmail ? a.companyEmail : '-',
                 "CIN": a.CIN ? a.CIN : '-',
                 "COI": a.COI ? a.COI : '-',
-                "TAN": a.TAN ? a.TAN : "-"
+                "TAN": a.TAN ? a.TAN : "-",
             }
           })
 
@@ -766,7 +707,7 @@ class BasicInfo extends Component {
         <section className="content">   
           <div className="pageContent col-lg-12 col-md-12 col-sm-12 col-xs-12">
         {
-            this.props.match.params.entityID ? 
+            this.props.match.params.entityID && this.state.pathname === "appCompany" ? 
             null:
             <div  className="col-lg-12 col-md-12 col-sm-12 col-xs-12 mt20">
               <ul className="nav tabNav nav-pills col-lg-3 col-md-3 col-sm-12 col-xs-12 pull-right">
@@ -865,7 +806,7 @@ class BasicInfo extends Component {
                                 <div className="col-lg-12 col-md-3 col-sm-12 col-xs-12">
                                   <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 NOpadding " id="hide">
                                     <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 uploadImageClient" id="LogoImageUpOne" title="Upload Image">
-                                      <div><i className="fa fa-camera"></i></div>
+                                      <div><i className="fa fa-camera cursorPointer"></i></div>
                                       <input multiple onChange={this.imgBrowse.bind(this)} id="LogoImageUp" type="file" className="form-control col-lg-12 col-md-12 col-sm-12 col-xs-12" title="" name="companyLogo" />
                                     </div>
                                   </div>
