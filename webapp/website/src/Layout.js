@@ -125,11 +125,11 @@ class Layout extends Component  {
         } else {
             return (
                 <div className="PageFunctionWiseWrapper">
-                <FunctionalHeader/>
+                <Header/>
                     <Router >
                         <Switch >
-                            <Route exact path="/"        component={India}  />
 
+                            <Route exact path="/"        component={India}  />
                             <Route path="/login" exact strict component={Login} />
                             <Route path="/signup" exact strict component={SignUp} />
                             <Route path="/forgot-password" exact strict component={ForgotPassword} />

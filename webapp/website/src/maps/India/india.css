@@ -1,7 +1,8 @@
 .india{
-	width:60%;
+	width:65%;
 	height: 900px;
-	margin-top: 20px;
+	top: 150px;
+	margin-top: 70px;
 	margin: auto;
 	border: 1px solid #ff0;
 	position: absolute;
@@ -13,6 +14,22 @@
 	position: absolute;
 	top: 15px;
 	left: 200px;
+	text-align: center;
+	color: #ff0;
+}
+.kashmirText{
+	position: absolute;
+	top: 40px;
+	left: 230px;
+	text-align: center;
+	color: #ff0;
+}
+.kashmirNumber{
+	position: absolute;
+	top: 60px;
+	left: 240px;
+	text-align: center;
+	color: #ff0;
 }
 .ladakh{
 	position: absolute;
