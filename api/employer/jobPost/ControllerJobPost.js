@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const mongodb = require('mongodb');
 
 
-const Jobs 		= require('./ModelJobPost.js');
+const Jobs = require('./ModelJobPost.js');
 
 exports.insertJobs = (req, res, next)=>{
 	
@@ -14,22 +14,26 @@ exports.insertJobs = (req, res, next)=>{
 				"jobTitle"				: req.body.jobTitle,
 				"jobLocationCity"		: req.body.jobLocationCity,
 				"jobLocationCountry" 	: req.body.jobLocationCountry,
-				"industryId"			: req.body.industryId,
+				"role"					: req.body.role,
+				"gender"				: req.body.gender,
+				/*"industryId"			: req.body.industryId,*/
 				"functionalAreaId" 		: req.body.functionalAreaId,
-				"subFunctionalAreaId"	: req.body.subFunctionalAreaId,
+				"functionalArea"	 	: req.body.functionalArea,
+				/*"subFunctionalAreaId"	: req.body.subFunctionalAreaId,
 				"workFromHome" 			: req.body.workFromHome,
 				"contactPersonName" 	: req.body.contactPersonName,
 				"contactPersonEmail" 	: req.body.contactPersonEmail,
 				"contactPersonPhone" 	: req.body.contactPersonPhone,
 				"jobType" 				: req.body.jobType,
 				"jobTime" 				: req.body.jobTime,
-				"lastDateOfAppl" 		: new Date(req.body.lastDateOfAppl),
+				"lastDateOfAppl" 		: new Date(req.body.lastDateOfAppl),*/
 				"jobDesc" 				: req.body.jobDesc,
 			},
-			"CTCOffered" : {
-				"minCTC" 		: req.body.minCTC,
-				"maxCTC" 		: req.body.maxCTC,
-				"currency" 		: req.body.currency,
+			"ctcOffered" : {
+				"minSalary" 	: req.body.minSalary,
+				"minSalPeriod" 	: req.body.minSalPeriod,
+				"maxSalary" 	: req.body.maxSalary,
+				"maxSalPeriod" 	: req.body.maxSalPeriod,
 			},
 			"eligibility" : {
 				"minEducation" 	: req.body.minEducation,
@@ -37,25 +41,25 @@ exports.insertJobs = (req, res, next)=>{
 			},
 			"requiredSkills":{
 				"primarySkills" 	: req.body.primarySkills,
-				"primarySkillsExp" 	: req.body.primarySkillsExp,
+				"minPrimExp"		: req.body.minPrimExp,
 				"secondarySkills" 	: req.body.secondarySkills,
-				"secondarySkillsExp": req.body.secondarySkillsExp,
+				"minSecExp"			: req.body.minSecExp,
 				"otherSkills"		: req.body.otherSkills,
-				"otherSkillsExp" 	: req.body.otherSkillsExp,
+				"minOtherExp" 	  	: req.body.minOtherExp,
 				"preferredSkills" 	: req.body.preferredSkills,
 			},
-			"createdAt" : new Date(),
+			/*"createdAt" : new Date(),
 			"createdBy" : req.body.user_id,
 			"updateLog" : [
 				{"updatedBy": req.body.user_id, "updatedAt":new Date(), "remark":req.body.remark }
-			]
+			]*/
 			});
 		
-
 		jobsData.save()
-				.then(data => {
-				res.status(200).json({							
-					message	: "Job details Inserted Successfully",
+			.then(jobsData => {
+				res.status(200).json({
+					jobsData : jobsData,							
+					message	 : "Job details Inserted Successfully",
 				});
 			})
 			.catch(error=>{
@@ -64,16 +68,16 @@ exports.insertJobs = (req, res, next)=>{
 					error 	: error,
 					message : "Some issue occurred during Insert Jobs."
 				});
-			});
-		
+			});	
 }
+
 exports.getJob = (req,res,next)=>{
 	var job_id = req.params.job_id;
 
 	Jobs.findOne({_id : job_id})
-		.then(job => {
+		.then(jobsData => {
 			res.status(200).json({	
-				job 	: job,
+				jobsData 	: jobsData,
 				message	: "Job Details Found",
 			});			
 		})
@@ -102,6 +106,7 @@ exports.getJobList = (req,res,next)=>{
 			});
 		});
 }
+
 exports.updateJob = (req,res,next)=>{
 	console.log("req.body - ", req.body);
 	Jobs.updateOne(
@@ -124,15 +129,18 @@ exports.updateJob = (req,res,next)=>{
 							"jobTime" 			: req.body.jobTime,
 							"jobDesc" 			: req.body.jobDesc,
 						},
+						
 						"CTCOffered" 		: {
 							"minCTC" 		: req.body.minCTC,
 							"maxCTC" 		: req.body.maxCTC,
 							"currency" 		: req.body.currency,
 						},
+						
 						"eligibility" 		: {
 							"minEducation" 	: req.body.minEducation,
 							"minExperience" : req.body.minExperience,
 						},
+						
 						"requiredSkills":{
 							"primarySkills" 	: req.body.primarySkills,
 							"primarySkillsExp" 	: req.body.primarySkillsExp,
@@ -142,6 +150,7 @@ exports.updateJob = (req,res,next)=>{
 							"minExperience" 	: req.body.minExperience,
 							"preferredSkills" 	: req.body.preferredSkills,
 						},
+						
 						"updateLog" : [
 							{"updatedBy": req.body.user_id, "updatedAt":new Date(), "remark":req.body.remark }
 						]

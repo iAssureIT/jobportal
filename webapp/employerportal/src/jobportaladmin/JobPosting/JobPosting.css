@@ -41,7 +41,8 @@
 
 .addJobFormHr{
 	border-top: 1px solid var(--main-border-color);
-	margin-top: 15px;
+	margin-top: 18px;
+	margin-bottom: 18px;
 }
 
 .addJobMainHead{
@@ -86,9 +87,12 @@
 	font-family: 'Montserrat-Regular';
 }
 
-.addJobFormSection{
-	margin-left: 40px;
-	margin-right: 40px;
+.mainFormSection{
+	border: 3px solid var(--main-border-color);
+	padding-bottom: 40px;
+	border-radius: 10px;
+	padding-left: 25px;
+	padding-right: 25px;
 }
 
 .addjobformLable{
@@ -109,6 +113,11 @@
     color: var(--main-txt-color);
 }
 
+.input-group .form-control:not(:first-child):not(:last-child), .input-group-addon:not(:first-child):not(:last-child), .input-group-btn:not(:first-child):not(:last-child) {
+    border-bottom-right-radius: 4px;
+    border-top-right-radius: 4px;
+}
+
 .addJobFormField:hover{
 	color: var(--main-txt-color);
 }
@@ -122,76 +131,163 @@
 	font-size: 15px;
 }
 
-.workLable{
- 	margin-left: 10px;
+.addJobSubHead .salaryIcon{
+	font-size: 17px;
+	border: 1px solid #fff;
+	border-radius: 50%;
+	padding-left: 7px;
+	padding-right: 7px;
+	padding-top: 2px;
+	padding-bottom: 3px;
+	/*background-color: #000;*/
 }
+
+.addJobrupee{
+	font-size: 11px;
+	padding-left: 3px;
+	padding-right: 3px;
+	padding-top: 2px;
+	border-radius: 50%;
+	border: 1px solid #fff;
+}
+
+
+/*****************************Custom Gender Field************************************/
+.nameTitleForm{
+	font-family: 'Montserrat-Medium';
+	font-size: 12px;
+	font-weight: 100 !important;
+	color: var(--main-txt-color);
+}
+
+.nameTitleFormAge{
+	font-family: 'Montserrat-Regular';
+	color: var(--main-txt-color);
+}
+
+.genderFeildWrapper{
+	height: 25px;
+	border: 1px solid var(--main-border-color)!important;
+	width: 100%;
+	border-radius: 20px;
+}
+
+.genderFeild{
+	height: 32px;
+	border-radius: 20px;
+	font-size: 11px;
+	color: #fff;
+	font-weight: 100 !important;
+	padding-top: 8px;
+	text-align:center;
+	background-color: var(--input-bg-color);
+}
+
+.genderFeild:hover{
+	cursor: pointer;
+}
+
+.genderFeildActive{
+	background-color:var(--main-border-color);
+	transition:all 0.5s;
+}
+
+.buttonNext{
+	height: 28px;
+	width: 110px;
+	background-color:var(--main-border-color);
+	margin-top:30px;
+	border:1px solid var(--main-border-color)!important;
+	border-radius:5px;
+	font-family: 'Montserrat-Medium';
+	font-size:13px;
+
+}
+
+.buttonBack{
+	height: 28px;
+	width: 110px;
+	margin-top:30px;
+	border:1px solid var(--main-border-color)!important;
+	border-radius:5px;
+	background-color:var(--main-bg-color);
+	font-family: 'Montserrat-Medium';
+	font-size:13px;
+
+}
+
+/***********************************************************************/
 
 /*****************************Custom Checkbox***************************/
 .containerWfh{
-    display: block;
+	display: block;
     position: relative;
     padding-left: 30px;
-    margin-top: 5px;
-    cursor: pointer;
-    font-size: 14px;
+    margin-top: 8px;
+    font-size: 13px;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
     font-weight: normal;
     color: var(--main-txt-color);
-  }
+    font-family: 'Montserrat-Regular';
+    /*background-color: red;*/
+}
   
-  .containerWfh input{
+.containerWfh input{
     position: absolute;
     opacity: 0;
     cursor: pointer;
     height: 0;
     width: 0;
-  }
+}
   
-  .checkmark2{
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 21px;
-  width: 21px;
-  border-radius: 3px;
-  background-color: transparent;
-  border: 2px solid var(--main-border-color); 
-  }
+.checkmark2{
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 21px;
+	width: 21px;
+	border-radius: 3px;
+	cursor: pointer;
+	/*background-color: transparent;*/
+	border: 2px solid var(--main-border-color); 
+}
   
-  .containerWfh:hover input ~ .checkmark2{
-    background-color: transparent;
-  }
+.containerWfh:hover input ~ .checkmark2{
+	background-color: transparent;
+}
   
-  .containerWfh input:checked ~ .checkmark2{
-    background-color: transparent;	
-  }
+.containerWfh input:checked ~ .checkmark2{
+	background-color: transparent;	
+}
   
-  .checkmark2:after {
-    content: "";
-    position: absolute;
+.checkmark2:after {
+	content: "";
+	position: absolute;
     display: none;
-  }
+}
   
-  .containerWfh input:checked ~ .checkmark2:after{
-    display: block;
-  }
+.containerWfh input:checked ~ .checkmark2:after{
+	display: block;
+}
   
-  .containerWfh .checkmark2:after{
-  left: 5px;
-  top: 3px;
-  width: 6px;
-  height: 9px;
-  border: solid white;
-  border-width: 0 3px 3px 0;
-  -webkit-transform: rotate(45deg);
-  -ms-transform: rotate(45deg);
-  transform: rotate(45deg);
-  }
-/******************************************************************/
+.containerWfh .checkmark2:after{
+	left: 5px;
+	top: 3px;
+	width: 6px;
+	height: 9px;
+	border: solid white;
+	border-width: 0 3px 3px 0;
+	-webkit-transform: rotate(45deg);
+	-ms-transform: rotate(45deg);
+	transform: rotate(45deg);
+ }
 
+/***************************End of Custom Checkbox***************************************/
+
+/***************************Select Dropdown custom classes*******************************/
 select{
 	border: 1px solid var(--main-border-color);
     background-color: transparent;
@@ -206,9 +302,12 @@ option{
 }
 
 option:hover{
-	background-color: var(--main-bg-color) !important;
+	background-color: var(--main-border-color) !important;
 }
 
+/***************************End of Select Dropdown custom classes*******************************/
+
+/***************************React multiselect Dropdown custom classes***************************/
 .optionContainer{
 	background-color: var(--main-bg-color);
 	white-space: nowrap; 
@@ -218,22 +317,36 @@ option:hover{
 
 .optionContainer li:hover,
 .optionContainer .highlight{
-  background-color: var(--main-border-color);
-  color: var(--main-txt-color);
+	background-color: var(--main-border-color);
+	color: var(--main-txt-color);
 }
+
+._7ahQImyV4dj0EpcNOjnwA{
+	background-color: var(--main-border-color) !important;
+}
+
+.optionContainer .highlight{
+	background-color: var(--main-bg-color) !important;
+}
+
+.optionContainer li:hover {
+    background-color: var(--main-border-color) !important;
+}
+
+/***************************End of React multiselect Dropdown custom classes***************************/
 
 .addJobPreviewBtn{
 	height: 40px;
 	width: 150px;
-	margin-top: 60px;
+	margin-top: 40px;
 	margin-right: 30px;
-	margin-left: 95px;
+	margin-left: 127px;
 }
 
 .addJobSubmitBtn{
 	height: 40px;
 	width: 150px;
-	margin-top: 60px;
+	margin-top: 40px;
 }
 
 .addJobSubmitBtn:hover{
@@ -244,3 +357,123 @@ option:hover{
 	color: red;
 	font-size: 12px;
 }
+
+.asterisk{
+	content: "\002A";
+	color: #c73030;
+}
+
+/*******************************************ckeditor***********************************************/
+.ck-editor {
+     /* Overrides the border radius setting in the theme. */
+    --ck-border-radius: 4px;
+
+    /* Overrides the default font size in the theme. */
+    --ck-font-size-base: 14px;
+
+    /* Helper variables to avoid duplication in the colors. */
+    --ck-custom-background: hsl(270, 1%, 29%);
+    --ck-custom-foreground: hsl(255, 3%, 18%);
+    --ck-custom-border: hsl(300, 1%, 22%);
+    --ck-custom-white: hsl(0, 0%, 100%);
+
+    /* -- Overrides generic colors. ------------------------------------------------------------- */
+
+    --ck-color-base-foreground: var(--ck-custom-background);
+    --ck-color-focus-border: hsl(208, 90%, 62%);
+    --ck-color-text: hsl(0, 0%, 98%);
+    --ck-color-shadow-drop: hsla(0, 0%, 0%, 0.2);
+    --ck-color-shadow-inner: hsla(0, 0%, 0%, 0.1);
+
+    /* -- Overrides the default .ck-button class colors. ---------------------------------------- */
+
+    --ck-color-button-default-background: var(--ck-custom-background);
+    --ck-color-button-default-hover-background: hsl(270, 1%, 22%);
+    --ck-color-button-default-active-background: hsl(270, 2%, 20%);
+    --ck-color-button-default-active-shadow: hsl(270, 2%, 23%);
+    --ck-color-button-default-disabled-background: var(--ck-custom-background);
+
+    /*--ck-color-button-on-background: var(--ck-custom-foreground);
+    --ck-color-button-on-hover-background: hsl(255, 4%, 16%);
+    --ck-color-button-on-active-background: hsl(255, 4%, 14%);
+    --ck-color-button-on-active-shadow: hsl(240, 3%, 19%);
+    --ck-color-button-on-disabled-background: var(--ck-custom-foreground);*/
+
+    --ck-color-button-action-background: hsl(168, 76%, 42%);
+    --ck-color-button-action-hover-background: hsl(168, 76%, 38%);
+    --ck-color-button-action-active-background: hsl(168, 76%, 36%);
+    --ck-color-button-action-active-shadow: hsl(168, 75%, 34%);
+    --ck-color-button-action-disabled-background: hsl(168, 76%, 42%);
+    --ck-color-button-action-text: var(--ck-custom-white);
+
+    --ck-color-button-save: hsl(120, 100%, 46%);
+    --ck-color-button-cancel: hsl(15, 100%, 56%);
+
+    /* -- Overrides the default .ck-dropdown class colors. -------------------------------------- */
+
+    --ck-color-dropdown-panel-background: var(--ck-custom-background);
+    --ck-color-dropdown-panel-border: var(--ck-custom-foreground);
+
+    /* -- Overrides the default .ck-splitbutton class colors. ----------------------------------- */
+
+    --ck-color-split-button-hover-background: var(--ck-color-button-default-hover-background);
+    --ck-color-split-button-hover-border: var(--ck-custom-foreground);
+
+    /* -- Overrides the default .ck-input class colors. ----------------------------------------- */
+
+    --ck-color-input-background: var(--ck-custom-foreground);
+    --ck-color-input-border: hsl(257, 3%, 43%);
+    --ck-color-input-text: hsl(0, 0%, 98%);
+    --ck-color-input-disabled-background: hsl(255, 4%, 21%);
+    --ck-color-input-disabled-border: hsl(250, 3%, 38%);
+    --ck-color-input-disabled-text: hsl(0, 0%, 46%);
+
+    /* -- Overrides the default .ck-list class colors. ------------------------------------------ */
+
+    --ck-color-list-background: var(--ck-custom-background);
+    --ck-color-list-button-hover-background: var(--ck-color-base-foreground);
+    --ck-color-list-button-on-background: var(--ck-color-base-active);
+    --ck-color-list-button-on-background-focus: var(--ck-color-base-active-focus);
+    --ck-color-list-button-on-text: var(--ck-color-base-background);
+
+    /* -- Overrides the default .ck-balloon-panel class colors. --------------------------------- */
+
+    --ck-color-panel-background: var(--ck-custom-background);
+    --ck-color-panel-border: var(--ck-custom-border);
+
+    /* -- Overrides the default .ck-toolbar class colors. --------------------------------------- */
+
+    --ck-color-toolbar-background: var(--main-bg-color);
+    --ck-color-toolbar-border: var(--main-border-color);
+
+    /* -- Overrides the default .ck-tooltip class colors. --------------------------------------- */
+
+    --ck-color-tooltip-background: hsl(252, 7%, 14%);
+    --ck-color-tooltip-text: hsl(0, 0%, 93%);
+
+    /* -- Overrides the default colors used by the ckeditor5-image package. --------------------- */
+
+    --ck-color-image-caption-background: hsl(0, 0%, 97%);
+    --ck-color-image-caption-text: hsl(0, 0%, 20%);
+
+    /* -- Overrides the default colors used by the ckeditor5-widget package. -------------------- */
+
+    --ck-color-widget-blurred-border: hsl(0, 0%, 87%);
+    --ck-color-widget-hover-border: hsl(43, 100%, 68%);
+    --ck-color-widget-editable-focus-background: var(--ck-custom-white);
+
+    /* -- Overrides the default colors used by the ckeditor5-link package. ---------------------- */
+
+    --ck-color-link-default: hsl(190, 100%, 75%);
+}
+
+.ck.ck-editor__main>.ck-editor__editable:not(.ck-focused) {
+	background-color: var(--main-bg-color);
+	border: 1px solid var(--main-border-color) !important; 
+}
+
+.ck-rounded-corners .ck.ck-button{
+	background-color: var(--main-bg-color);
+}
+
+/**********************************************End ckeditor****************************************/

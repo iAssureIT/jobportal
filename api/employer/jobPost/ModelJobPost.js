@@ -8,22 +8,26 @@ const jobsSchema = mongoose.Schema({
 		jobTitle			: String,
 		jobLocationCity		: String,
 		jobLocationCountry 	: String,
-		industryId			: String,
+		role				: String,
+		gender              : String,
+		functionalArea 		: String,
+		/*industryId		: String,*/
 		functionalAreaId	: String,
-		subFunctionalAreaId : String,
+		/*subFunctionalAreaId : String,
 		workFromHome 		: Boolean,
 		contactPersonName 	: String,
 		contactPersonEmail 	: String,
 		contactPersonPhone 	: String,
 		jobType 			: String,
 		jobTime 			: String,
-		lastDateOfAppl 		: Date,
+		lastDateOfAppl 		: Date,*/
 		jobDesc 			: String,
 	},
-	CTCOffered : {
-		minCTC 		: Number,
-		maxCTC 		: Number,
-		currency 	: String
+	ctcOffered : {
+		minSalary 	 : Number,
+		minSalPeriod : String,
+		maxSalary 	 : Number,
+		maxSalPeriod : String
 	},
 	eligibility : {
 		minEducation 	: String,
@@ -31,18 +35,18 @@ const jobsSchema = mongoose.Schema({
 	},
 	requiredSkills:{
 		primarySkills 		: Array,
-		primarySkillsExp 	: String,
+		minPrimExp			: String,
 		secondarySkills 	: Array,
-		minExperience 		: String,
+		minSecExp 			: String,
 		otherSkills			: Array,
-		minExperience 		: String,
+		minOtherExp 		: String,
 		preferredSkills 	: Array,
 	},
-	createdAt : Date,
+	/*createdAt : Date,
 	createdBy : String,
 	updateLog : [
 		{updatedBy: String, updatedAt:Date, remark:String }
-	]
+	]*/
 });
 
 module.exports = mongoose.model("jobs", jobsSchema);

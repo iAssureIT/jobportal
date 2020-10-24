@@ -27,6 +27,8 @@
 
 .iconsBar{
 	background-color: yellow;
+	margin-left: -11px;
+	margin-top: -5px;
 }
 
 .iconsBar ul{
@@ -72,14 +74,14 @@
 .designation{
 	font-size: 22px;
 	color: var(--main-border-color);
-	margin-top: 5px;
-	margin-left: 5px;
+	margin-top: 3px;
+	margin-left: -5px;
 	font-family: 'Montserrat-SemiBold';
 }
 
 .companyName{
-	margin-top: 5px;
-	margin-left: 5px;
+	margin-top: 7px;
+	margin-left: -5px;
 	font-family: 'Montserrat-SemiBold';
 }
 
@@ -90,8 +92,8 @@
 
 .experience{
 	font-size: 14px !important;
-	margin-left: 6px;
-	margin-top: 18px;
+	margin-left: -5px;
+	margin-top: 13px;
 	color: var(--main-border-color);
 }
 
@@ -101,7 +103,7 @@
 	padding: 3px 5px;
 	border-radius: 50%;
 	margin-top: 13px;
-	margin-left: 3px;
+	margin-left: -8px;
 	color: var(--main-border-color);
 }
 
@@ -109,14 +111,14 @@
 	font-size: 16px !important;
 	padding: 3px 5px;
 	border-radius: 50%;
-	margin-top: 8px;
-	margin-left: 1px;
+	margin-top: 9px;
+	margin-left: -9px;
 	color: var(--main-border-color);
 }
 
 .noPositions{
 	font-size: 13px !important;
-	margin-left: 4px;
+	margin-left: -6px;
 	margin-top: 13px;
 	color: var(--main-border-color);
 }
@@ -130,7 +132,7 @@
 	padding-right: 17px;
 	padding-left: 3px; 
 	border-radius: 3px;
-	margin-left: 3px;
+	margin-left: -2px;
 	margin-top: 6px;
 }
 
@@ -138,14 +140,13 @@
 	padding-right: 16px;
 	padding-left: 3px; 
 	border-radius: 3px;
-	margin-left: 2px;
+	margin-left: -3px;
 	margin-top: 20px;
 	font-size: 19px;
 }
 
 .verticleIcons ul li:nth-child(3){
 	padding-right: 16px;
-	margin-left: 5px;
 	border-radius: 3px;
 	margin-top: 12px;
 	font-size: 20px;	
@@ -169,4 +170,70 @@
 	font-size: 18px;
 	margin-left: 6px;
 	margin-top: 25px;
+}
+
+.verticalLine{
+	width: 2px;
+	left: 40px;
+	top: 38px;
+	height: 20px;
+	background-color: var(--main-border-color);
+	position: absolute;
+}
+
+.maleIcon{
+	position: absolute;
+	left: 2px;
+}
+
+.femaleIcon{
+	position: absolute;
+	left: 24px;
+}
+
+.sunIcon{
+	position: absolute;
+	left: 59px;
+}
+
+.clockIcon{
+	position: absolute;
+	left: 100px;
+}
+
+.infoLogFix{
+	position: absolute;
+	left: 138px;
+}
+
+.JobListWrapper1{
+	min-height: 1300px;
+	height: auto;
+	background-color: var(--main-bg-color);
+	color: var(--main-txt-color);
+}
+
+.ListContainer1{
+	height: 280px;
+	margin-top: 30px;
+	border-radius: 10px;
+	border: 1px solid var(--main-border-color);
+	/*background-color: red;*/
+}
+
+.JobListWrapperMain{
+	/*background-color: yellow;*/
+}
+
+.LeftSideContent1{
+	height: 240px;
+	margin-top: 20px;
+	border-right: 1px solid var(--main-border-color);
+	/*background-color: maroon;*/
+}
+
+.RightSideContent1{
+	height: 220px;
+	margin-top: 18px;
+	/*background-color: blue;*/
 }

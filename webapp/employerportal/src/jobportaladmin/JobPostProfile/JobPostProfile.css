@@ -1,15 +1,15 @@
 .jobPostProfileWrapper{
 	min-height: 670px;
 	height: auto;
-	background-color: var(--main-bg-color);
-	color: var(--main-txt-color);
 	padding-top: 30px;
 	padding-bottom: 30px;
+	background-color: var(--main-bg-color);
+	color: var(--main-txt-color);
 }
 
 .leftSideMain{
 	min-height: 670px;
-	height: 1375px;
+	height: auto;
 	border: 1px solid var(--main-border-color);
 }
 
@@ -49,168 +49,280 @@
 .imgContent .contentHead{
 	font-size: 27px;
 	font-weight: bold;
-	color: var(--main-subheading-font-color);
 	padding-top: 60px;
-	font-family: 'Montserrat-SemiBold';
 	margin-left: -52px;
+	color: var(--main-subheading-font-color);
+	font-family: 'Montserrat-SemiBold';
 }
 
 .imgContent .subContentHead{
 	margin-top: -3px;
 	margin-left: -52px;
 	font-size: 18px;
-	font-family: 'Montserrat-SemiBold';
-
+	font-family: 'Montserrat-SemiBold'
 }
 
 .imgContent .locationinfo{
 	padding-top: 1px;
 	margin-left: -52px;
-	font-family: 'Montserrat-Thin';
 	font-size: 13px;
+	font-family: 'Montserrat-Thin';
 }
 
-.mainContent{
-	height: auto; 
-	/*background-color: #444;*/
+.jobProfileMain{ 
+	height: auto;
 }
 
-.contentWrapper1{
-	margin-top: -5px;
-}
-
-.content1 ul{
-	margin-top: 10px;
-}
-
-.content1 .timeline:before{
-	content: '';
-	position: absolute;
-	top: 70px;
-	left: 40px;
-	width: 2px;
+.content1 .timeline .start{
+	margin-left: 41px;
+	margin-top: 70px;
+	width: 1px;
 	height: 356px;
 	background-color: var(--main-border-color);
 }
 
-.contentWrapper2{
-	margin-top: -32px;
+.timeline{
+	height: 200px;
+	/*background-color: red;*/
 }
 
-.contentWrapper3{
-	margin-top: -30px;
-}
+/*******************************Content Wrapper One********************************/
 
-.content1{
+.contentWrapper1{
 	height: auto;
+	margin-top: -5px;
+	/*min-height: 200px;*/
 	/*background-color: blue;*/
 }
 
-.content1:before{
-	content: "\25C8";
+.contentWrapper1 .DescriptionContainer{
+	height: auto;
+	margin-top: 63px;
+	/*min-height: 100px;*/
+	padding-bottom: 15px;
+	padding-top: 18px;
+	padding-left: 33px;
+	border-left: 2px solid var(--main-border-color);
+	/*background-color: green;*/
+} 
+
+.contentWrapper1 .profileheading{
 	position: absolute;
-	font-size: 27px;
+	font-size: 21px;
 	font-weight: bold;
+	margin-top: 35px;
+	margin-left: 40px;
 	color: var(--main-subheading-font-color);
-	top: 40px;
-	left: 33px;
-}
-
-.timeline:after{
-	content: "";
-	/*font-size: 30px;*/
-	position: absolute;
-	top: 56px;
-	left: 53px;
-	width: 25px;
-	height: 2px;
-	background-color: var(--main-border-color);
-}
-
-.timeline ul { list-style: none; }
-
-.timeline li::before {
-    content: "\25C6";
-    font-weight: bold;
-    padding-right: 6px;
-    margin-left: -15px;
-}
-
-.content2 ul{
-	margin-top: 10px;
-}
-
-.content2 .eduSubtitle{
 	font-family: 'Montserrat-SemiBold';
 }
 
-.content2 .eduDuration{
+.contentWrapper1 .profileSubContainer{
+	height: auto;
+	/*min-height: 200px;*/
+	margin-left: 13px;
+	margin-top: 5px;
+	/*background-color: maroon;*/
+}
+
+.contentWrapper1 .horizontalRightLine{
+	height: 2px;
+	position: absolute;
+	margin-top: 50px;
+	margin-left: 12px;
+	width: 25px;
+	background-color: var(--main-border-color);
+}
+
+.contentWrapper1 .profileContent{
 	font-family: 'Montserrat-Regular';
 }
 
-.content2 .timeline:before{
-	content: '';
-	position: absolute;
-	top: 70px;
-	left: 40px;
-	width: 2px;
-	height: 117px;
-	background-color: var(--main-border-color);
-}
-
-.content2:before{
+.contentWrapper1 .diamondBullet:before{
 	content: "\25C8";
 	position: absolute;
+	top: -16px;
+	left: -20px;
 	font-size: 27px;
 	font-weight: bold;
 	color: var(--main-subheading-font-color);
-	top: 40px;
-	left: 33px;
 }
 
-.content3 .timeline:before{
-	content: '';
+/*****************************End of Content Wrapper One**********************************/
+
+/*******************************Content Wrapper Two***************************************/
+
+.contentWrapper2{
+	height: auto;
+	/*min-height: 120px;*/
+	/*background-color: blue;*/
+}
+
+.contentWrapper2 .DescriptionContainer{
+	margin-top: 27px;
+	height: auto;
+	/*min-height: 100px;*/
+	border-left: 2px solid var(--main-border-color);
+	padding-bottom: 20px;
+	padding-top: 10px;
+	padding-left: 35px;
+	/*background-color: green;*/
+} 
+
+.contentWrapper2 .profileheading{
 	position: absolute;
-	top: 71px;
-	left: 40px;
-	width: 2px;
-	height: 435px;
-	background-color: var(--main-border-color);
-}
-
-.content3 ul li:nth-child(1){
-	font-weight: bold;
-	font-size: 16px;
-}
-
-.content3:before{
-	content: "\25C8";
-	position: absolute;
-	font-size: 27px;
-	font-weight: bold;
-	color: var(--main-subheading-font-color);
-	top: 40px;
-	left: 33px;
-}
-
-.contentHeading{
 	font-size: 21px;
 	font-weight: bold;
 	color: var(--main-subheading-font-color);
-	/*background-color: red;*/
-	margin-top: 42px; 
+	margin-top: -5px;
+	margin-left: 40px;
 	font-family: 'Montserrat-SemiBold';
 }
 
-.blankSpace{
+.contentWrapper2 .profileSubContainer{
+	height: auto;
+	/*min-height: 120px;*/
+	/*background-color: maroon;*/
+	margin-left: 13px;
+}
+
+.contentWrapper2 .horizontalRightLine{
+	height: 2px;
+	position: absolute;
+	margin-top: 12px;
+	margin-left: 12px;
+	width: 25px;
+	background-color: var(--main-border-color);
+}
+
+.contentWrapper2 .profileContent{
+	font-family: 'Montserrat-Regular';
+}
+
+.contentWrapper2 .diamondBullet:before{
+	content: "\25C8";
+	position: absolute;
+	top: -16px;
+	left: -20px;
+	font-size: 27px;
+	font-weight: bold;
+	color: var(--main-subheading-font-color);
+}
+
+.contentWrapper2 .eduSubtitle{
+	font-family: 'Montserrat-SemiBold';
+}
+
+.contentWrapper2 .eduDuration{
+	font-family: 'Montserrat-Regular';
+}
+
+.profileContent li:before{
+	content: "\25C6";
+    font-weight: bold;
+    padding-right: 6px;
+    margin-left: -15px;	
+}
+
+.profileContent li{
+	list-style: none;
+}
+
+/*************************End of Content Wrapper Two******************************/
+
+/****************************Content Wrapper Three********************************/
+
+.contentWrapper3{
+	height: auto;
+	/*min-height: 120px;*/
+	/*background-color: blue;*/
+}
+
+.contentWrapper3 .DescriptionContainer{
+	margin-top: 27px;
+	height: auto;
+	/*min-height: 100px;*/
+	border-left: 2px solid var(--main-border-color);
+	padding-top: 10px;
+	padding-left: 35px;
 	/*background-color: green;*/
-	margin-top: 43px;
-	height: 30px;
+} 
+
+.contentWrapper3 .profileheading{
+	position: absolute;
+	font-size: 21px;
+	font-weight: bold;
+	color: var(--main-subheading-font-color);
+	margin-top: -5px;
+	margin-left: 40px;
+	font-family: 'Montserrat-SemiBold';
+}
+
+.contentWrapper3 .profileSubContainer{
+	height: auto;
+	/*min-height: 120px;*/
+	/*background-color: maroon;*/
+	margin-left: 13px;
+}
+
+.contentWrapper3 .horizontalRightLine{
+	height: 2px;
+	position: absolute;
+	margin-top: 12px;
+	margin-left: 12px;
+	width: 25px;
+	background-color: var(--main-border-color);
+}
+
+.contentWrapper3 .profileContent{
+	font-family: 'Montserrat-Regular';
+}
+
+.contentWrapper3 .diamondBullet:before{
+	content: "\25C8";
+	position: absolute;
+	top: -16px;
+	left: -20px;
+	font-size: 27px;
+	font-weight: bold;
+	color: var(--main-subheading-font-color);
+}
+
+.contentWrapper3 .eduSubtitle{
+	font-family: 'Montserrat-SemiBold';
+}
+
+.contentWrapper3 .eduDuration{
+	font-family: 'Montserrat-Regular';
+}
+
+.profileContent li:before{
+	content: "\25C6";
+    font-weight: bold;
+    padding-right: 6px;
+    margin-left: -15px;	
+}
+
+.profileContent li{
+	list-style: none;
+}
+
+/*****************************End of Content Wrapper Three****************************/
+
+.profileContent1 li{
+	list-style: none;
+}
+
+.profileContent1 li:nth-child(1):before{
+	content: "\25C6";
+    font-weight: bold;
+    padding-right: 6px;
+    margin-left: -15px;
+	list-style: none;
 }
 
 .skillsHeadOne{
 	/*background-color: maroon;*/
-	margin-top: 10px;
+	margin-left: 6px;
 }
 
 .skillsHeadOne .skillsTitle{
@@ -233,8 +345,9 @@
 }
 
 .skillsHeadTwo{
-	/*background-color: gray;*/
 	margin-top: 10px;
+	margin-left: 6px;
+	/*background-color: gray;*/
 }
 
 .skillsHeadTwo .skillsTitle{
@@ -257,6 +370,7 @@
 }
 
 .skillsHeadThree{
+	margin-left: 6px;
 	margin-top: 10px;
 	/*background-color: red;*/
 }
@@ -281,8 +395,14 @@
 }
 
 .skillsHeadFour{
+	margin-left: 6px;
 	margin-top: 10px;
+	font-family: 'Montserrat-SemiBold';
 	/*background-color: red;*/
+}
+
+.skillsHeadFour li:nth-child(2){
+	margin-top: 62px;
 }
 
 .skillsHeadFour .skillsTitle{
@@ -297,7 +417,8 @@
 }
 
 .buttonMain{
-	margin-top: 115px;
+	margin-top: 50px;
+	padding-bottom: 40px;
 }
 
 .btnEdit{
@@ -321,15 +442,23 @@
 	color: var(--main-txt-color);
 }
 
+/**************************Right Aside Bar******************************/
+
 .rightSideMain{
-	min-height: 1375px;
 	height: auto;
+	padding-bottom: 40px;
 	border: 1px solid var(--main-border-color);
 }
 
 .rightSideHeader{
 	height: 215px;
 	border-bottom: 1px solid var(--main-border-color);
+}
+
+.mapImg{
+	height: 175px;
+	margin-top: 20px;
+	margin-left: 50px;
 }
 
 .rightContentHead{
@@ -356,263 +485,8 @@
 	font-family: 'Montserrat-Regular';
 }
 
-.mapImg{
-	height: 175px;
-	margin-top: 20px;
-	margin-left: 50px;
-}
-
 .rightSideImg{
 	height: 300px;
 	margin-left: 30px;
 	margin-top: 330px;
-}
-.input-group-addon{
-	background-color: transparent !important;
-}
-.addJobForm{
-	margin-top: 100px;
-	min-height: 500px;
-	height: auto;
-	padding-bottom: 50px;
-	margin-bottom: 50px;
-}
-
-.addJobBackgroundColor{
-	background-color: var(--main-bg-color);	
-}
-
-.addJobBorderColor{
-	border-color: var(--main-border-color); 
-}
-
-.addJobHeadingColor{
-	color: var(--main-heading-color); 
-}
-
-.buttonYellow{
-	background-color: var(--yellow-button-color);
-	color: var(--main-txt-color);
-	height: 30px;
-	line-height: 15px;
-}
-
-.addJobWrapperBorder{
-	border: 3px solid var(--main-border-color);
-	border-radius: 10px;
-	background-color: #242933;
-}
-
-.addJobFormHeading{
-	margin-top: 25px;
-	font-size: 25px;
-	/*font-weight: bold;*/
-	color: var(--main-heading-font-color);
-	font-family: 'Montserrat-SemiBold'; 
-}
-
-.addJobFormHr{
-	border-top: 1px solid var(--main-border-color);
-	margin-top: 15px;
-}
-
-.addJobMainHead{
-	font-size: 21px;
-	font-weight: bold;
-	color: var(--main-subheading-font-color);
-	font-family: 'Montserrat-SemiBold'; 
-}
-
-.addJobMainHead i{
-	color: var(--main-txt-color);
-	border: 1px solid #fff;
-	padding: 1px 7px;
-	font-size: 18px;
-	border-radius: 6px;
-}
-
-.addJobMainHead .labelLeftPadding{
-	padding-left: 17px;
-}
-
-.addJobSubHead{
-	font-size: 21px;
-	font-weight: bold;
-	color: var(--main-subheading-font-color);
-	font-family: 'Montserrat-SemiBold';
-}
-
-.addJobSubHead i{
-	color: var(--main-txt-color);
-	font-size: 25px;
-	margin-top: 18px;
-}
-
-.addJobSubHead .labelLeftPadding{
-	padding-left: 17px;
-}
-
-.jobDesc{
-	margin-top: 20px;
-	padding-bottom: 6px;
-	font-family: 'Montserrat-Regular';
-}
-
-.addJobFormSection{
-	margin-left: 40px;
-	margin-right: 40px;
-}
-
-.addjobformLable{
-	font-family: 'Montserrat-Regular';
-	font-size: 12px; 
-	font-weight: 100;
-	color: var(--main-txt-color);
-	letter-spacing: 1px;
-}
-
-.addJobFieldRow {
-    margin-top: 15px;
-}
-
-.addJobFormField {
-    border: 1px solid var(--main-border-color) !important;
-    background-color: transparent  !important;
-    color: var(--main-txt-color)  !important;
-}
-
-.addJobFormField:hover{
-	color: var(--main-txt-color)  !important;
-}
-
-.form-control:focus{
-	border-color: rgba(211,149,10,0.8);
-	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(211, 149, 10, 0.6);
-}
-
-.locationIcon{
-	font-size: 15px;
-}
-
-.workLable{
- 	margin-left: 10px;
-}
-
-/*****************************Custom Checkbox***************************/
-.containerWfh{
-    display: block;
-    position: relative;
-    padding-left: 30px;
-    margin-top: 5px;
-    cursor: pointer;
-    font-size: 14px;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    font-weight: normal;
-    color: var(--main-txt-color);
-  }
-  
-  .containerWfh input{
-    position: absolute;
-    opacity: 0;
-    cursor: pointer;
-    height: 0;
-    width: 0;
-  }
-  
-  .checkmark2{
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 21px;
-  width: 21px;
-  border-radius: 3px;
-  background-color: transparent;
-  border: 2px solid var(--main-border-color); 
-  }
-  
-  .containerWfh:hover input ~ .checkmark2{
-    background-color: transparent;
-  }
-  
-  .containerWfh input:checked ~ .checkmark2{
-    background-color: transparent;	
-  }
-  
-  .checkmark2:after {
-    content: "";
-    position: absolute;
-    display: none;
-  }
-  
-  .containerWfh input:checked ~ .checkmark2:after{
-    display: block;
-  }
-  
-  .containerWfh .checkmark2:after{
-  left: 5px;
-  top: 3px;
-  width: 6px;
-  height: 9px;
-  border: solid white;
-  border-width: 0 3px 3px 0;
-  -webkit-transform: rotate(45deg);
-  -ms-transform: rotate(45deg);
-  transform: rotate(45deg);
-  }
-/******************************************************************/
-
-select{
-	border: 1px solid var(--main-border-color);
-    background-color: transparent;
-    color: var(--main-txt-color) !important;
-	/*border-left: transparent !important;*/
-}
-
-option{
-	border: 1px solid var(--main-border-color);
-    background-color: var(--main-bg-color);
-    color: var(--main-txt-color);
-}
-
-option:hover{
-	background-color: var(--main-bg-color) !important;
-}
-
-.optionContainer{
-	background-color: var(--main-bg-color);
-	white-space: nowrap; 
- 	overflow: hidden;
- 	text-overflow: ellipsis;
-}
-
-.optionContainer li:hover,
-.optionContainer .highlight{
-  background-color: var(--main-border-color);
-  color: var(--main-txt-color);
-}
-
-.addJobPreviewBtn{
-	height: 40px;
-	width: 150px;
-	margin-top: 60px;
-	margin-right: 30px;
-	margin-left: 95px;
-}
-
-.addJobSubmitBtn{
-	height: 40px;
-	width: 150px;
-	margin-top: 60px;
-}
-
-.addJobSubmitBtn:hover{
-	color: var(--main-txt-color);
-}
-
-.errorMsg{
-	color: red;
-	font-size: 12px;
 }
