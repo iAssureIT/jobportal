@@ -25,12 +25,20 @@ router.post("/post/getOneCandidateAcademics", CandidateProfileController.getOneC
 
 router.patch("/patch/updateOneCandidateAcademics", CandidateProfileController.updateOneCandidateAcademics);
 
-// =========================== candidate academics =====================================//
+// =========================== candidate Experience =====================================//
 router.patch("/patch/addCandidateExperience", CandidateProfileController.addCandidateExperience);
 
 router.post("/post/getOneCandidateExperience", CandidateProfileController.getOneCandidateExperience);
 
 router.patch("/patch/updateOneCandidateExperience", CandidateProfileController.updateOneCandidateExperience);
+
+// =========================== candidate Experience =====================================//
+router.patch("/patch/addCandidateSkill", CandidateProfileController.addCandidateSkill);
+
+router.post("/post/getOneCandidateSkill", CandidateProfileController.getOneCandidateSkill);
+
+router.patch("/patch/updateOneCandidateSkill", CandidateProfileController.updateOneCandidateSkill);
+
 
 router.get("/get/list", CandidateProfileController.getCandidateList);
 

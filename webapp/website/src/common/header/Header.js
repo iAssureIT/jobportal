@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
+import { withRouter } from 'react-router-dom';
 import './Header.css';
 
 class Header extends Component{
@@ -53,6 +53,16 @@ class Header extends Component{
       notificationDisplay  : "none",
       })
     }
+  }
+  logout() {
+        var token = localStorage.removeItem("token");
+        if (token !== null && token !== "undefined") {
+            this.setState({
+                loggedIn: false
+            })
+        }
+        window.location.href = "/";
+        //this.props.history.push("/")
   }
   render(){
     return(
@@ -111,13 +121,13 @@ class Header extends Component{
                     <div className="signOutToggelButtons">
                       <div className="col-lg-5 pull-left">
                         <div className="row">
-                          <div className="signOutButton">Profile</div>
+                          <a href="/profile" className="whitelink"><div className="signOutButton">Profile</div></a>
                         </div>
                       </div>
                       
                       <div className="col-lg-5 pull-right">
                         <div className="row">
-                          <div className="signOutButton">Sign Out</div>
+                          <div className="signOutButton" onClick={this.logout.bind(this)}>Sign Out</div>
                         </div>
                       </div>
                     </div>
@@ -167,4 +177,4 @@ class Header extends Component{
   }
 }
 
-export default Header;
+export default withRouter(Header);

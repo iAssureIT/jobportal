@@ -74,7 +74,7 @@ class ForgotPassword extends Component {
 
             })
             .catch((error)=>{
-                document.getElementById("sendlink").innerHTML = 'Reset Password';
+                //document.getElementById("sendlink").innerHTML = 'Reset Password';
                 swal("This Email ID is not registered");
                 $('.fullpageloader').hide();
             })

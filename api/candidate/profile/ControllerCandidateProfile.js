@@ -24,6 +24,7 @@ exports.insertCandidateBasicInfo = (req, res, next)=>{
 		"aadhaarCard" 	 		: null,
 		"contact" : {
 			"mobile" 		 	: req.body.mobile,
+            "altMobile"         : null,
 			"emailId" 		 	: req.body.emailId,
 		},
 		"user_id"		 	 	: req.body.user_id,	
@@ -101,8 +102,8 @@ exports.updateCandidateBasicInfo = (req, res, next)=>{
 exports.addCandidateAddress = (req,res,next)=>{
     console.log(req.body)
     CandidateProfile.updateOne(
-            { _id: ObjectID(req.body.candidateID) },  
-            {
+            { _id: req.body.candidateID },  
+            { 
                 $push:  { 'address' : req.body.address }
             }
         )
@@ -188,7 +189,7 @@ exports.updateCandidateContact = (req,res,next)=>{
 exports.addCandidateAcademics = (req,res,next)=>{
     console.log(req.body)
     CandidateProfile.updateOne(
-            { _id: ObjectID(req.body.candidateID) },  
+            { _id: req.body.candidateID },  
             {
                 $push:  { 'academics' : req.body.academics }
             }
@@ -257,7 +258,7 @@ exports.updateOneCandidateAcademics = (req,res,next)=>{
 
 exports.addCandidateExperience = (req,res,next)=>{
     CandidateProfile.updateOne(
-            { _id: ObjectID(req.body.candidateID) },  
+            { _id: req.body.candidateID },  
             {
                 $push:  { 'workExperience' : req.body.experience }
             }
@@ -307,6 +308,82 @@ exports.updateOneCandidateExperience = (req,res,next)=>{
 						 	"workExperience.$.responsibilities"		: experience.responsibilities,
 						 	"workExperience.$.reportingManager"		: experience.reportingManager,
 						 	"workExperience.$.reportingManagerDegn" : experience.reportingManagerDegn,
+                        }
+            }
+        )
+        .exec()
+        .then(data=>{
+            if(data.nModified == 1){
+                res.status(200).json({ updated : true });
+            }else{
+                res.status(200).json({ updated : false });
+            }
+        })
+        .catch(err =>{
+            res.status(500).json({ error: err });
+        });
+};
+exports.addCandidateSkill = (req,res,next)=>{
+    CandidateProfile.updateOne(
+            { _id: req.body.candidateID },  
+            {
+                $push:  { 'skillCertification' :
+                {
+                    primarySkills   : req.body.primarySkills,
+                    secondarySkills : req.body.secondarySkills,
+                    otherSkills     : req.body.otherSkills,
+                    rating          : req.body.rating,
+                    skilldesc       : req.body.skilldesc,
+                    certName        : req.body.certName,
+                    issuedBy        : req.body.issuedBy,
+                    certifiedOn     : req.body.certifiedOn,
+                    validTill       : req.body.validTill,
+                    gradePercent    : req.body.gradePercent,
+                }  }
+            }
+        )
+        .exec()
+        .then(data=>{
+            if(data.nModified == 1){
+                res.status(200).json({ created : true });
+            }else{
+                res.status(401).json({ created : false });
+            }
+        })
+        .catch(err =>{
+            res.status(500).json({ error: err });
+        });   
+};
+exports.getOneCandidateSkill = (req,res,next)=>{
+    CandidateProfile.find({"_id" : req.body.candidateID, "skillCertification._id":req.body.skillCertificationID },
+        {"skillCertification.$" : 1})
+    .exec()
+    .then(data=>{
+        res.status(200).json(data);
+    })
+    .catch(err =>{
+        res.status(500).json({
+            error: err
+        });
+    });
+};
+
+exports.updateOneCandidateSkill = (req,res,next)=>{
+    var skill = req.body.skill;
+    
+    CandidateProfile.updateOne(
+            { "_id":req.body.candidateID, "skillCertification._id": req.body.skillCertificationID},  
+            {
+                $set:   {   "primarySkills"   : skill.primarySkills,
+                            "secondarySkills" : skill.secondarySkills,
+                            "otherSkills"     : skill.otherSkills,
+                            "rating"          : skill.rating,
+                            "skilldesc"       : skill.skilldesc,
+                            "certName"        : skill.certName,
+                            "issuedBy"        : skill.issuedBy,
+                            "certifiedOn"     : skill.certifiedOn,
+                            "validTill"       : skill.validTill,
+                            "gradePercent"    : skill.gradePercent
                         }
             }
         )

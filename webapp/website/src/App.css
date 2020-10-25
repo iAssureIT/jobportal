@@ -42,3 +42,6 @@
 .noPadding{
   padding : 0 !important;
 }
+.whitelink, .whitelink:hover{
+  color: #fff
+}

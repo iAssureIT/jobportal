@@ -66,7 +66,12 @@ class Layout extends Component  {
     componentDidMount() {
        var company_Id = localStorage.getItem("company_Id");
        var contractID ="";
-
+       const token = localStorage.getItem("token");
+          if (token !== null && token !== "undefined") {
+              this.setState({
+                  loggedIn: true
+              })
+          } else { }
     }
 
     logout() {
