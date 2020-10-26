@@ -126,9 +126,9 @@ export default class JobPostProfile extends Component{
 												<div className="horizontalRightLine diamondBullet"></div>
 												<div className="DescriptionContainer col-lg-12">
 													<div className="profileContent">
-														<ul className="col-lg-12">
-															{/*this.state.jobDesc*/}
-															<li>Develops information systems by designing, developing, and installing software solutions.</li>
+														<div className="col-lg-12">
+															{this.state.jobDesc}
+															{/*<li>Develops information systems by designing, developing, and installing software solutions.</li>
 															<li>Determines operational feasibility by evaluating analysis, problem definition, requirements, solution development, and proposed solutions.</li>
 															<li>Develops software solutions by studying information needs, conferring with users, and studying systems flow, data usage, and work processes.</li>
 															<li>Investigates problem areas.</li>
@@ -139,8 +139,8 @@ export default class JobPostProfile extends Component{
 															<li>Obtains and licenses software by obtaining required information from vendors, recommending purchases, and testing and approving products</li>
 															<li>Protects operations by keeping information confidential.</li>
 															<li>Provides information by collecting. analyzing, and summarizing development and service issues.</li>
-															<li>Accomplishes engineering and organization mission by completing related results as needed.</li>
-														</ul>
+															<li>Accomplishes engineering and organization mission by completing related results as needed.</li>*/}
+														</div>
 													</div>
 												</div>
 											</div>

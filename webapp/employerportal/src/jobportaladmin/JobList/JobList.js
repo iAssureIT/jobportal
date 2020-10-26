@@ -29,9 +29,57 @@ getJobsData=()=>{
 	})
 }
 
+deleteJob = (event)=>{
+	event.preventDefault();
+	const job_id = event.currentTarget.id;
+
+	Swal.fire({
+		title : 'Are you sure? you want to delete this profile!!!',
+		text : 'You will not be able to recover this profile',
+		icon : 'warning',
+		showCancelButton : true,
+		confirmButtonText : 'Yes, delete it!',
+		cancelButtonColor : 'No, keep it',
+		confirmButtonColor : '#d33',
+	
+	}).then((result) =>{
+		if(result.value){
+			if(job_id){
+				Axios.delete("http://localhost:3009/delete/"+job_id)
+				.then(response =>{
+					console.log()
+					if(response.data.message==="Job details deleted Successfully!"){
+						this.getJobsData();
+
+						Swal.fire(
+									'Deleted!',
+									'Job Profile has been deleted successfully!',
+									'success'
+							);
+					}
+				})
+				.catch(error=>{
+					Swal.fire(
+								"Some problem occured deleting job!",
+								error.message,
+								'error'
+						)
+				})
+			}
+				
+				}else if (result.dismiss === Swal.DismissReason.cancel){
+					Swal.fire(
+						'Cancelled',
+						'Your job Profile is safe :)',
+						'error'
+					)
+				}
+			})
+		}
+
 	render(){
 		return(
-			<section className="JobListWrapper1">
+			<section className="jobListWrapper">
 				<div className="col-lg-9 JobListWrapperMain pull-right"> 
 						{
 							this.state.jobList.length > 0
@@ -39,9 +87,9 @@ getJobsData=()=>{
 								this.state.jobList.map((elem,index)=>{
 									return(
 										<div className="col-lg-6">
-											<div className="ListContainer1">
+											<div className="jobListContainer">
 												<div className="col-lg-12">
-													<div className="col-lg-11 LeftSideContent1">
+													<div className="col-lg-11 jobListLeftContent">
 														<div className="row">
 															<div className="iconsBar">
 																<ul>	
@@ -52,34 +100,43 @@ getJobsData=()=>{
 																<div className="infoLog"> 15 Days Ago </div>
 															</div>
 														</div>
-														<div className="designation">
+														<div className="jobListDesignation">
 															{elem.jobBasicInfo.jobTitle}
 														</div>
-														<div className="companyName">
+														<div className="jobListCompanyName">
 															<b>iAssure International Technologies Pvt Ltd</b>
 														</div>
 														<div> 
-															<i className="fa fa-calendar experience"></i> &nbsp; Exp: {elem.eligibility.minEducation} To {elem.eligibility.minExperience}
+															<i className="fa fa-calendar jobListExperience"></i> &nbsp; Exp: {elem.eligibility.minEducation} To {elem.eligibility.minExperience}
 														</div>
 														<div> 
-															<i className="fa fa-rupee monSal"></i> &nbsp; <i className="fa fa-inr"></i> {elem.ctcOffered.minSalary} - <i className="fa fa-inr"></i> {elem.ctcOffered.maxSalary} a month
+															<i className="fa fa-rupee jobListMonSal"></i> &nbsp; <i className="fa fa-inr"></i> {elem.ctcOffered.minSalary} - <i className="fa fa-inr"></i> {elem.ctcOffered.maxSalary} a month
 														</div>
 														<div>
-															<i className="fa fa-map-marker jLocation"></i> &nbsp; {elem.jobBasicInfo.jobLocationCity}
+															<i className="fa fa-map-marker jobListLocation"></i> &nbsp; {elem.jobBasicInfo.jobLocationCity}
 														</div>
 														<div> 
-															<i className="fa fa-users noPositions"></i> &nbsp; No of position : 10
+															<i className="fa fa-users jobListNumPositions"></i> &nbsp; No of position : 10
 														</div>
 													</div>
-													<div className="col-lg-1 RightSideContent1">
+													<div className="col-lg-1 jobListRightContent">
 														<div className="row">
 															<div className="col-lg-12">
-																<div className="verticleIcons">
+																<div className="jobProfileVerticleIcons">
 																	<ul>
 																		<li><i className="fa fa-check"></i></li>
 																		<li><i className="fa fa-heart-o"></i></li>
 																		<li><i className="fa fa-youtube-play"></i></li>
 																	</ul>
+																</div>
+																<div className="listEditBtn">
+																	<a title = "edit Profile" href={"/job-post-form/" + elem._id}><i className="fa fa-edit"></i></a>
+																</div>
+																<div className="listViewBtn">	
+																	<a title = "view Profile" href={"/job-profile/" + elem._id}><i className="fa fa-eye"></i></a>
+																</div>
+																<div className="listDelBtn">	
+																	<i title = "delete Profile" className="fa fa-trash" onClick={this.deleteJob} id = {elem._id}></i>
 																</div>
 															</div>
 														</div>

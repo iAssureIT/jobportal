@@ -11,16 +11,17 @@ const jobsSchema = mongoose.Schema({
 		role				: String,
 		gender              : String,
 		functionalArea 		: String,
+		subFunctionalArea 	: String,
 		/*industryId		: String,*/
-		functionalAreaId	: String,
+		/*functionalAreaId	: String,*/
 		/*subFunctionalAreaId : String,
 		workFromHome 		: Boolean,
 		contactPersonName 	: String,
 		contactPersonEmail 	: String,
-		contactPersonPhone 	: String,
+		contactPersonPhone 	: String,*/
 		jobType 			: String,
 		jobTime 			: String,
-		lastDateOfAppl 		: Date,*/
+		lastDateOfAppl 		: Date,
 		jobDesc 			: String,
 	},
 	ctcOffered : {

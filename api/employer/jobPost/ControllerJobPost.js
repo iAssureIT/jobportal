@@ -17,15 +17,16 @@ exports.insertJobs = (req, res, next)=>{
 				"role"					: req.body.role,
 				"gender"				: req.body.gender,
 				/*"industryId"			: req.body.industryId,*/
-				"functionalAreaId" 		: req.body.functionalAreaId,
+				/*"functionalAreaId" 		: req.body.functionalAreaId,*/
 				"functionalArea"	 	: req.body.functionalArea,
+				"subFunctionalArea"	 	: req.body.subFunctionalArea,
 				/*"subFunctionalAreaId"	: req.body.subFunctionalAreaId,
 				"workFromHome" 			: req.body.workFromHome,
 				"contactPersonName" 	: req.body.contactPersonName,
 				"contactPersonEmail" 	: req.body.contactPersonEmail,
-				"contactPersonPhone" 	: req.body.contactPersonPhone,
+				"contactPersonPhone" 	: req.body.contactPersonPhone,*/
 				"jobType" 				: req.body.jobType,
-				"jobTime" 				: req.body.jobTime,
+				/*"jobTime" 				: req.body.jobTime,
 				"lastDateOfAppl" 		: new Date(req.body.lastDateOfAppl),*/
 				"jobDesc" 				: req.body.jobDesc,
 			},
@@ -172,9 +173,10 @@ exports.updateJob = (req,res,next)=>{
 				});
 }
 
-exports.deleteJob = (req,res,next)=>{
+exports.deleteJob = (req, res, next)=>{
 	console.log("req.body - ", req.body);
-	StudentMaster.deleteOne({_id : req.body.job_id})
+	var job_id = req.params.job_id;
+	Jobs.deleteOne({"_id" : job_id})
 				.then(data => {
 					res.status(200).json({
 						data : data,

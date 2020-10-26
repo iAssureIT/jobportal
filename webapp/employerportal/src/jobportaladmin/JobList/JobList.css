@@ -1,37 +1,37 @@
 .jobListWrapper{
-	height: 670px;
-	background-color: var(--main-bg-color);
+	min-height: 1300px;
+	height: auto;
+	/*background-color: var(--main-bg-color);*/
 	color: var(--main-txt-color);
 }
 
-.mainListContainer{
-	height: 670px;
+.JobListWrapperMain{
 	background-color: var(--main-bg-color);
+	padding-bottom: 30px;
 }
 
-.listContainer{
-	height: 290px;
+.jobListContainer{
+	height: 280px;
 	margin-top: 30px;
-	border: 1px solid var(--main-border-color);
 	border-radius: 10px;
-	padding-top: 21px;
-	background-color: #242933;
-}
-
-.leftSideContent{
-	height: 247px;
+	border: 1px solid var(--main-border-color);
 	/*background-color: red;*/
-	margin-left: -10px;
-	border-right: 1px solid var(--main-border-color);
 }
 
-.iconsBar{
+.jobListContainer .jobListLeftContent{
+	height: 240px;
+	margin-top: 20px;
+	border-right: 1px solid var(--main-border-color);
+	/*background-color: maroon;*/
+}
+
+.jobListLeftContent .iconsBar{
 	background-color: yellow;
 	margin-left: -11px;
 	margin-top: -5px;
 }
 
-.iconsBar ul{
+.jobListLeftContent .iconsBar ul{
 	list-style: none;
 	/*background-color: maroon;*/
 	height: 29px;
@@ -39,25 +39,25 @@
 	padding-top: 2px;	
 	float: left;
 }
- 
-.iconsBar ul li i{
-	margin-left: 22px;
-}
 
-.iconsBar ul li{
+.jobListLeftContent .iconsBar ul li{
 	float: left;
 	/*background-color: green;*/
 	margin-top: 5px;
 }
+ 
+.jobListLeftContent .iconsBar ul li i{
+	margin-left: 22px;
+}
 
-.iconsBar i{
+.jobListLeftContent .iconsBar i{
 	color: var(--main-border-color);
 	font-size: 20px;
 	height: 20px;
 	/*float: left;*/
 }
 
-.infoLog{
+.jobListLeftContent .infoLog{
 	padding: 6px 9px;
 	height: 29px;
 	color: var(--main-border-color);
@@ -71,7 +71,7 @@
 	margin-top: 2px;
 }
 
-.designation{
+.jobListDesignation{
 	font-size: 22px;
 	color: var(--main-border-color);
 	margin-top: 3px;
@@ -79,25 +79,20 @@
 	font-family: 'Montserrat-SemiBold';
 }
 
-.companyName{
+.jobListCompanyName{
 	margin-top: 7px;
 	margin-left: -5px;
 	font-family: 'Montserrat-SemiBold';
 }
 
-.jobListFont{
-	font-family: 'Montserrat-Regular';
-	font-size: 12px;
-}
-
-.experience{
+.jobListExperience{
 	font-size: 14px !important;
 	margin-left: -5px;
 	margin-top: 13px;
 	color: var(--main-border-color);
 }
 
-.monSal{
+.jobListMonSal{
 	font-size: 10px !important; 
 	border: 1px solid #D3950A;
 	padding: 3px 5px;
@@ -107,7 +102,7 @@
 	color: var(--main-border-color);
 }
 
-.jLocation{
+.jobListLocation{
 	font-size: 16px !important;
 	padding: 3px 5px;
 	border-radius: 50%;
@@ -116,18 +111,33 @@
 	color: var(--main-border-color);
 }
 
-.noPositions{
+.jobListNumPositions{
 	font-size: 13px !important;
 	margin-left: -6px;
 	margin-top: 13px;
 	color: var(--main-border-color);
 }
 
-.verticleIcons i{
+.jobListRightContent{
+	height: 220px;
+	margin-top: 18px;
+	/*background-color: blue;*/
+}
+
+.jobProfileVerticleIcons i{
 	color: var(--main-border-color);
 }
 
-.verticleIcons ul li:nth-child(1){
+.jobProfileVerticleIcons{
+	/*background-color: red;*/
+}
+
+.jobProfileVerticleIcons ul{
+	list-style: none;	
+	padding: 0;
+}
+
+.jobProfileVerticleIcons ul li:nth-child(1){
 	border: 2px solid #D3950A;
 	padding-right: 17px;
 	padding-left: 3px; 
@@ -136,7 +146,7 @@
 	margin-top: 6px;
 }
 
-.verticleIcons ul li:nth-child(2){
+.jobProfileVerticleIcons ul li:nth-child(2){
 	padding-right: 16px;
 	padding-left: 3px; 
 	border-radius: 3px;
@@ -145,95 +155,31 @@
 	font-size: 19px;
 }
 
-.verticleIcons ul li:nth-child(3){
+.jobProfileVerticleIcons ul li:nth-child(3){
 	padding-right: 16px;
 	border-radius: 3px;
 	margin-top: 12px;
 	font-size: 20px;	
 }
 
-.verticleIcons ul{
-	list-style: none;	
-	padding: 0;
-}
-
-.verticleIcons .active{
-	background-color: var(--main-border-color);
-	padding: 4px;
-	color: #000;
-	margin-left: 4px;
-	margin-top: 6px;
-}
-
-.verticleIcons .active1{
+.listEditBtn i{
 	color: var(--main-border-color);
-	font-size: 18px;
-	margin-left: 6px;
-	margin-top: 25px;
+	font-size: 21px;
+	margin-top: 10px;
+	margin-left: 1px;
 }
 
-.verticalLine{
-	width: 2px;
-	left: 40px;
-	top: 38px;
-	height: 20px;
-	background-color: var(--main-border-color);
-	position: absolute;
+.listViewBtn i{
+	color: var(--main-border-color);
+	font-size: 21px;
+	margin-top: 15px;
+	margin-left: -1px;
 }
 
-.maleIcon{
-	position: absolute;
-	left: 2px;
-}
-
-.femaleIcon{
-	position: absolute;
-	left: 24px;
-}
-
-.sunIcon{
-	position: absolute;
-	left: 59px;
-}
-
-.clockIcon{
-	position: absolute;
-	left: 100px;
-}
-
-.infoLogFix{
-	position: absolute;
-	left: 138px;
-}
-
-.JobListWrapper1{
-	min-height: 1300px;
-	height: auto;
-	background-color: var(--main-bg-color);
-	color: var(--main-txt-color);
-}
-
-.ListContainer1{
-	height: 280px;
-	margin-top: 30px;
-	border-radius: 10px;
-	border: 1px solid var(--main-border-color);
-	/*background-color: red;*/
-}
-
-.JobListWrapperMain{
-	/*background-color: yellow;*/
-}
-
-.LeftSideContent1{
-	height: 240px;
-	margin-top: 20px;
-	border-right: 1px solid var(--main-border-color);
-	/*background-color: maroon;*/
-}
-
-.RightSideContent1{
-	height: 220px;
-	margin-top: 18px;
-	/*background-color: blue;*/
+.listDelBtn i{
+	color: var(--main-border-color);
+	font-size: 21px;
+	margin-top: 15px;
+	margin-left: 1px;
+	cursor: pointer;
 }

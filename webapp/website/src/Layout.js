@@ -116,6 +116,26 @@ class Layout extends Component  {
                                                     <Route exact path="/profile"           component={CandidateProfile}  />
                                                     {/*<Route exact path="/list"              component={CandidateList}  />  
                                                     */}
+                                                     <Route exact path="/Maharashtra "        component={Maharashtra }  />
+                                                     <Route exact path="/AndhraPradesh "        component={AndhraPradesh }  />
+                                                     <Route exact path="/ArunachalPradesh "        component={ArunachalPradesh }  />
+                                                     <Route exact path="/Bihar "        component={Bihar }  />
+                                                     <Route exact path="/Chhattisgarh "        component={Chhattisgarh }  />
+                                                     <Route exact path="/Delhi "        component={Delhi }  />
+                                                     <Route exact path="/Goa "        component={Goa }  />
+                                                     <Route exact path="/Gujarat "        component={Gujarat }  />
+                                                     <Route exact path="/HimachalPradesh "        component={HimachalPradesh }  />
+                                                     <Route exact path="/JammuKashmirLadakh "        component={JammuKashmirLadakh }  />
+                                                     <Route exact path="/Jharkhand "        component={Jharkhand }  />
+                                                     <Route exact path="/Karmataka "        component={Karmataka }  />
+                                                     <Route exact path="/Kerala "        component={Kerala }  />
+                                                     <Route exact path="/MadhyaPradesh "        component={MadhyaPradesh }  />
+                                                     <Route exact path="/Manipur "        component={Manipur }  />
+                                                     <Route exact path="/Meghalaya "        component={Meghalaya }  />
+                                                     <Route exact path="/Mizoram "        component={Mizoram }  />
+                                                     <Route exact path="/Nagaland "        component={Nagaland }  />
+                                                     <Route exact path="/Orissa "        component={Orissa }  />
+
                                                 </Switch>
                                             </div>
                                         </div>
@@ -137,6 +157,27 @@ class Layout extends Component  {
                         <Switch >
 
                             <Route exact path="/"        component={India}  />
+                             <Route exact path="/maharashtra "        component={Maharashtra }  />
+                             <Route exact path="/andhrapradesh "        component={AndhraPradesh }  />
+                             <Route exact path="/arunachalpradesh "        component={ArunachalPradesh }  />
+                             <Route exact path="/bihar "        component={Bihar }  />
+                             <Route exact path="/chhattisgarh "        component={Chhattisgarh }  />
+                             <Route exact path="/delhi "        component={Delhi }  />
+                             <Route exact path="/goa "        component={Goa }  />
+                             <Route exact path="/gujarat "        component={Gujarat }  />
+                             <Route exact path="/himachalPradesh "        component={HimachalPradesh }  />
+                             <Route exact path="/kashmir "        component={JammuKashmirLadakh }  />
+                             <Route exact path="/jharkhand "        component={Jharkhand }  />
+                             <Route exact path="/karmataka "        component={Karmataka }  />
+                             <Route exact path="/kerala "        component={Kerala }  />
+                             <Route exact path="/madhyapradesh "        component={MadhyaPradesh }  />
+                             <Route exact path="/manipur "        component={Manipur }  />
+                             <Route exact path="/meghalaya "        component={Meghalaya }  />
+                             <Route exact path="/mizoram "        component={Mizoram }  />
+                             <Route exact path="/nagaland "        component={Nagaland }  />
+                             <Route exact path="/orissa "        component={Orissa }  />
+
+
                             <Route path="/login" exact strict component={Login} />
                             <Route path="/signup" exact strict component={SignUp} />
                             <Route path="/forgot-password" exact strict component={ForgotPassword} />

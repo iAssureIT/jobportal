@@ -8,6 +8,8 @@ import { Multiselect } 		from 'multiselect-react-dropdown';
 import CKEditor 			from '@ckeditor/ckeditor5-react';
 import ClassicEditor 		from '@ckeditor/ckeditor5-build-classic';
 
+import PropTypes from 'prop-types';
+
 
 export default class JobPosting extends Component{
 	
@@ -20,17 +22,21 @@ export default class JobPosting extends Component{
 			jobLocationCountry 	: "",
 			/*industryId			: "",*/
 			functionalArea 		: "",
+			subFunctionalArea 	: "",
 			/*functionalAreaId 	: "",*/
 			/*subFunctionalAreaId : "",*/
 			role 				: "",
 			gender             : "Male",
-			/*workFromHome 		: "",
+			workFromHome 		: "",
 			contactPerson 		: "",
 			email 				: "",
 			phone 				: "",
 			jobType 			: "",
+			jobTypeArray		: [],
 			jobTime 			: "",
-			lastDateOfAppl 		: "",*/
+			lastDateOfAppl 		: "",
+			streetAddress		: "",
+			pincode 			: "",
 			minSalary 			: "",
 			minSalPeriod 		: "",
 			maxSalary 			: "",
@@ -54,7 +60,8 @@ export default class JobPosting extends Component{
 			otherSkillsArraylist: [],
 			minOtherExp   		: "",
 			preferSkillsArraylist: [],
-			jobTypeArray		: [],		      
+			jobTypeArray		: [],
+			submitBtnText 		: "SUBMIT",		      
 		}
 
 		this.style =  {
@@ -72,7 +79,48 @@ export default class JobPosting extends Component{
 	}
 	
 	componentDidMount(){
-		Axios.get("http://qajobportalapi.iassureit.com/api/functionalareamaster/get/list")
+		if(this.props.match.params.job_id){
+			let job_id = this.props.match.params.job_id;
+			Axios.get("http://localhost:3009/get/one/" + job_id)
+			.then(response=>{
+				console.log("response.data : ", response.data);
+				this.setState({
+					job_id			: job_id,
+					jobTitle 		: response.data.jobsData.jobBasicInfo.jobTitle,
+					jobLocationCity : response.data.jobsData.jobBasicInfo.jobLocationCity,
+					country 		: response.data.jobsData.jobBasicInfo.country,
+					functionalArea 	: response.data.jobsData.jobBasicInfo.functionalArea,
+					subFunctionalArea: response.data.jobsData.jobBasicInfo.subFunctionalArea,
+					role 			: response.data.jobsData.jobBasicInfo.role,
+					gender 			: response.data.jobsData.jobBasicInfo.gender,
+					workFromHome 	: response.data.jobsData.workFromHome,
+					jobType 		: response.data.jobsData.jobType,
+					contactPerson 	: response.data.jobsData.contactPerson,
+					email 			: response.data.jobsData.email,
+					phone 			: response.data.jobsData.phone,
+					jobTime 		: response.data.jobsData.jobTime,
+					lastDateOfAppl 	: response.data.jobsData.lastDateOfAppl,
+					streetAddress	: response.data.jobsData.streetAddress,
+					pincode 		: response.data.jobsData.pincode,
+					minSalary 		: response.data.jobsData.ctcOffered.minSalary,
+					minSalPeriod 	: response.data.jobsData.ctcOffered.minSalPeriod,
+					maxSalary 		: response.data.jobsData.ctcOffered.maxSalary,
+					maxSalPeriod	: response.data.jobsData.ctcOffered.maxSalPeriod,
+					jobDesc 		: response.data.jobsData.jobBasicInfo.jobDesc,
+					minEducation 	: response.data.jobsData.eligibility.minEducation,
+					minExperience 	: response.data.jobsData.eligibility.minExperience,
+					minPrimExp 		: response.data.jobsData.requiredSkills.minPrimExp,
+					minSecExp 		: response.data.jobsData.requiredSkills.minSecExp,
+					minOtherExp 	: response.data.jobsData.requiredSkills.minOtherExp,
+					submitBtnText 	: "UPDATE",
+				})
+			})
+			.catch(error=>{
+				Swal.fire("Some error occured while updating job data", error.message, "error");
+			})
+		}
+		
+		Axios.get("http://qaapi-jobportal.iassureit.in/api/functionalareamaster/get/list")
 			.then(response => {
 				console.log("getfunctionalAreaData response.data = ",response.data);
 				this.setState({functionalArealist : response.data});
@@ -80,9 +128,19 @@ export default class JobPosting extends Component{
 			})
 			.catch(error=>{
 				Swal.fire("Error while getting List data",error.message,'error');
-			})	
+			})
+
+		Axios.get("http://qaapi-jobportal.iassureit.in/api/subfunctionalareamaster/get/list")
+			.then(response => {
+				console.log("getsubFunctionalAreaData response.data = ",response.data);
+				this.setState({subFunctionalAreaList : response.data});
+				console.log("subFunctionalArea",this.state.subFunctionalAreaList);
+			})
+			.catch(error=>{
+				Swal.fire("Error while getting List data",error.message,'error');
+			})
 		
-		Axios.get("http://qajobportalapi.iassureit.com/api/jobtypemaster/get/list")
+		Axios.get("http://qaapi-jobportal.iassureit.in/api/jobtypemaster/get/list")
 			.then(response => {
 				console.log("getfunctionalAreaData response.data = ",response.data);
 				this.setState({jobTypeArray : response.data});
@@ -92,7 +150,7 @@ export default class JobPosting extends Component{
 				Swal.fire("Error while getting List data",error.message,'error');
 			})	
 		
-		Axios.get("http://qajobportalapi.iassureit.com/api/skillmaster/get/list")
+		Axios.get("http://qaapi-jobportal.iassureit.in/api/skillmaster/get/list")
 			.then(response => {
 				console.log("getfunctionalAreaData response.data = ",response.data);
 				this.setState({priSkillsArraylist : response.data});
@@ -111,7 +169,7 @@ export default class JobPosting extends Component{
 				Swal.fire("Error while getting priSkillsArraylist List data",error.message,'error');
 			})
 			
-		Axios.get("http://qajobportalapi.iassureit.com/api/skillmaster/get/list")
+		Axios.get("http://qaapi-jobportal.iassureit.in/api/skillmaster/get/list")
 			.then(response => {
 				console.log("getfunctionalAreaData response.data = ",response.data);
 				this.setState({secSkillsArraylist : response.data});
@@ -129,7 +187,8 @@ export default class JobPosting extends Component{
 			.catch(error=>{
 				Swal.fire("Error while getting secSkillsArraylist List data",error.message,'error');
 			})
-		Axios.get("http://qajobportalapi.iassureit.com/api/skillmaster/get/list")
+		
+		Axios.get("http://qaapi-jobportal.iassureit.in/api/skillmaster/get/list")
 			.then(response => {
 				console.log("getfunctionalAreaData response.data = ",response.data);
 				this.setState({otherSkillsArraylist : response.data});
@@ -147,7 +206,8 @@ export default class JobPosting extends Component{
 			.catch(error=>{
 				Swal.fire("Error while getting otherSkillsArraylist List data",error.message,'error');
 			})
-		Axios.get("http://qajobportalapi.iassureit.com/api/skillmaster/get/list")
+		
+		Axios.get("http://qaapi-jobportal.iassureit.in/api/skillmaster/get/list")
 			.then(response => {
 				console.log("getfunctionalAreaData response.data = ",response.data);
 				this.setState({preferSkillsArraylist : response.data});
@@ -168,8 +228,8 @@ export default class JobPosting extends Component{
 				
 	}
 
-	/*validateForm=()=>{
-		var status = true;
+	validateForm=()=>{
+		var status = true;	
 		if(this.state.jobTitle.length<=0){
 			document.getElementById("jobTitleError").innerHTML=  
 			"Enter job title";  
@@ -179,7 +239,7 @@ export default class JobPosting extends Component{
 			""; 
 			status = true;
 		}
-		if(this.state.jobLocation.length<=0){
+		if(this.state.jobLocationCity.length<=0){
 			document.getElementById("jobLocationError").innerHTML=  
 			"Enter job location";  
 			status=false; 
@@ -223,7 +283,16 @@ export default class JobPosting extends Component{
 			document.getElementById("phoneError").innerHTML=  
 			""; 
 			status = true;
-		}*/
+		}
+		if(this.state.pincode.length<=0){
+			document.getElementById("pincodeError").innerHTML=  
+			"Enter pincode";  
+			status = false; 
+		}else{
+			document.getElementById("pincodeError").innerHTML=  
+			""; 
+			status = true;
+		}
        /* if (this.state.country.length<=0) {
         	document.getElementById("countryError").innerHTML=
         	"Select country"; 
@@ -246,8 +315,8 @@ export default class JobPosting extends Component{
 			""; 
 			status = true;
 		}*/
-		 /*return status;*/
-	/*}*/
+		 return status;
+	}
 	
 	handleChange = (event)=>{
 		var name = event.currentTarget.name;
@@ -267,12 +336,13 @@ export default class JobPosting extends Component{
 	
 	handleSubmit = (event)=>{
 		event.preventDefault();
-
+		if(this.validateForm()){	
 		var formValues = {
 			jobTitle 			: this.state.jobTitle,
 			jobLocationCity		: this.state.jobLocationCity,
 			jobLocationCountry 	: this.state.jobLocationCountry,
 			functionalArea 		: this.state.functionalArea,
+			subFunctionalArea 	: this.state.subFunctionalArea,
 			role 				: this.state.role,
 			gender      	   	: this.state.gender,
 			workFromHome 		: this.state.workFromHome,
@@ -293,50 +363,83 @@ export default class JobPosting extends Component{
 			minSecExp	 		: this.state.minSecExp,
 			minOtherExp	 		: this.state.minOtherExp,
 		};
+			console.log("formValues :", formValues);
+			
+			if(this.props.match.params.job_id){
+				formValues.job_id = this.state.job_id;
+				this.updateData(formValues);
+			}
+			else{
+				this.insertData(formValues);
+			}
+		}
+	}	
 		
-		console.log("Inside handleSubmit", formValues);
-		/*this.validateForm();*/
+	insertData(formValues){
 		Axios.post("http://localhost:3009/post",formValues)
-				.then(response => {
-					console.log("Inside axios",response.data);
-					if(response.data.message==="Job details Inserted Successfully"){
-						console.log("response.data = ",response.data);
-						let job_id = response.data.jobsData._id;
+			.then(response => {
+				console.log("Inside axios",response.data);
+				if(response.data.message==="Job details Inserted Successfully"){
+					console.log("response.data = ",response.data);
+					let job_id = response.data.jobsData._id;
 
-						Swal.fire("Congrats","Your Data is Submitted Successfully","success");
-						this.setState({
-										jobTitle 			: "",
-										jobLocationCity 	: "",
-										jobLocationCountry 	: "",
-										functionalArea 		: "",
-										role 				: "",
-										gender              : "Male",
-										/*workFromHome 		: "",
-										contactPerson 		: "",
-										email 				: "",
-										phone 				: "",
-										jobType 			: "",
-										jobTime 			: "",
-										lastDateOfAppl 		: "",*/
-										minSalary 			: "",
-										minSalPeriod 		: "",
-										maxSalary 			: "",
-										maxSalPeriod		: "",
-										jobDesc 			: "",
-										minEducation 		: "",
-										minExperience 		: "",
-										minPrimExp 	 		: "",
-										minSecExp 	 		: "",
-										minOtherExp			: ""
-									  });
-						this.props.history.push("/job-profile/"+job_id);
-					}
-				})
-				.catch(error =>{
-					console.log(error);
-					Swal.fire("Submit Error!",error.message,'error');
-				})		
+					Swal.fire("Congrats","Your Data is Submitted Successfully","success");
+					this.setState({
+									jobTitle 			: "",
+									jobLocationCity 	: "",
+									jobLocationCountry 	: "",
+									functionalArea 		: "",
+									subFunctionalArea 	: "",
+									role 				: "",
+									gender              : "Male",
+									workFromHome 		: "",
+									contactPerson 		: "",
+									email 				: "",
+									phone 				: "",
+									jobType 			: "",
+									jobTime 			: "",
+									lastDateOfAppl 		: "",
+									minSalary 			: "",
+									minSalPeriod 		: "",
+									maxSalary 			: "",
+									maxSalPeriod		: "",
+									jobDesc 			: "",
+									minEducation 		: "",
+									minExperience 		: "",
+									minPrimExp 	 		: "",
+									minSecExp 	 		: "",
+									minOtherExp			: ""
+								  });
+					this.props.history.push("/job-profile/"+job_id);
+				}
+			})
+			.catch(error =>{
+				console.log(error);
+				Swal.fire("Submit Error!",error.message,'error');
+			})
+		}
+
+	updateData(formValues){
+		Axios.put("http://localhost:3009/update", formValues)
+		.then(response=>{
+			console.log("formValues :", formValues);
+			if(response.data.message==="Job details updated Successfully!"){
+				console.log("response.data : ", response.data);
+				Swal.fire("Congrats!", "your profile updated successfully!", "success");
+				this.props.history.push("/job-profile/" + this.state.job_id);
+			}
+		})
+		.catch(error =>{
+			console.log(error);
+	    	Swal.fire("Update Error!", error.message, 'error');
+		})
 	}
+
+	onEditorChange( evt ) {
+        this.setState( {
+            jobDesc: evt.editor.getData()
+        } );
+    }				
 	
 	render(){
 		 
@@ -354,7 +457,7 @@ export default class JobPosting extends Component{
 							</div>
 							<div className="addJobMainHead col-lg-12">
 								<i className="fa fa-info"></i> 
-								<span className="labelLeftPadding">Basic Info</span>
+								<span className="labelLeftPadding"> Basic Info </span>
 							</div>
 							<form id="addJob">
 								<div className="col-lg-12 addJobFieldRow text-left">
@@ -365,7 +468,7 @@ export default class JobPosting extends Component{
 												<span className="input-group-addon addJobFormField"><i className="fa fa-briefcase"></i> </span> 
 												<input type="text" className="form-control addJobFormField" name="jobTitle" id="jobTitle" value={this.state.jobTitle} onChange={this.handleChange}/>
 											</div>
-											{<span id="jobTitleError" className="errorMsg"></span>}
+											<span id="jobTitleError" className="errorMsg"></span>
 										</div>
 										<div className="col-lg-6">
 											<div className="row row-no-gutters">
@@ -431,12 +534,11 @@ export default class JobPosting extends Component{
 														?
 															this.state.subFunctionalAreaList.map((elem,index)=>{
 																return(
-																	
 																	<option value={elem._id}> {elem.subFunctionalArea} </option>
 																);
 															})
 														:
-															<option>--select--</option>
+															<option> --select-- </option>
 													}		   
 												</select>
 											</div>
@@ -454,7 +556,7 @@ export default class JobPosting extends Component{
 											<span id="roleError" className="errorMsg"></span>
 										</div>
 										<div className="col-lg-4">
-											<label htmlFor="gender" className="nameTitleForm nameTitleFormAge">Gender <span className="asterisk">&#42;</span></label>
+											<label htmlFor="gender" className="nameTitleForm nameTitleFormAge"> Gender <span className="asterisk">&#42;</span></label>
 											<div className="input-group genderFeildWrapper">
 												<div className={this.state.gender==="Male"? "genderFeild col-lg-4 genderFeildActive" : "genderFeild col-lg-4" }  id="Male" name="gender" value="Male" onClick={this.setGender.bind(this)}>
 													<div className="row" >
@@ -528,7 +630,7 @@ export default class JobPosting extends Component{
 															this.state.jobTypeArray.map((elem,index)=>{
 																return(
 																	
-																	<option> {elem.functionalArea} </option>
+																	<option> {elem.jobType} </option>
 																);
 															})
 														:
@@ -563,13 +665,13 @@ export default class JobPosting extends Component{
 										<div className="col-lg-4">
 											<label htmlFor="lastDateOfAppl" className="addjobformLable"> Last Date of Application </label>
 											<div className="input-group">
-												<span className="input-group-addon addJobFormField"><i className="fa fa-calendar"></i> </span> 
+												<span className="input-group-addon addJobFormField"><i className="fa fa-calendar"></i></span> 
 												<input type="date" className="form-control addJobFormField" name="lastDateOfAppl" id="lastDateOfAppl" value={this.state.lastDateOfAppl} onChange={this.handleChange}/>
 											</div>
 										</div>
 									</div>
 								</div>
-								
+
 								<div className="col-lg-12 addJobFieldRow">
 									<div className="addJobFormHr col-lg-12">
 									</div>
@@ -641,28 +743,31 @@ export default class JobPosting extends Component{
 								
 								<div className="addJobSubHead col-lg-12">
 									<i className="fa fa-briefcase"></i>
-									<span className="labelLeftPadding">Job Description</span>
+									<span className="labelLeftPadding"> Job Description </span>
 								</div>
 								<div className="description text-left col-lg-12">
 									<div className="form-group">
-								      <label htmlFor="jobDesc" className="addjobformLable jobDesc">Describe the responsibilities of this job, required work experience, skills, or education.</label>
-								      {/*<textarea className="form-control addJobFormField" rows="20" name="jobDesc" id="jobDesc" value={this.state.jobDesc} onChange={this.handleChange}></textarea>*/}
+								      <label htmlFor="jobDesc" className="addjobformLable jobDesc"> Describe the responsibilities of this job, required work experience, skills, or education. </label>
 								      	<div rows="20" id="jobDesc"> 
-									    	
-									    	{/*<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 NOpadding" id="editorEmail">
-												<CKEditor activeClass="p15"  
-													name="editorEmail" data-text="message" 
-													className="editorEmail" content={this.state.editorEmail} 
-													events={{ "change": this.onChangeEmail }}
-												/>
-											</div>*/}
-
-									    	<CKEditor
-									    		editor={ClassicEditor}
-									    		name="jobDesc"
-									    		value={this.state.jobDesc}
-									    		events={{ "change" : this.handleChange }}
-									      	/>	
+                    						<CKEditor
+									          editor={ ClassicEditor }
+									          data=""
+									          onInit={ editor => {
+									            // You can store the "editor" and use when it is needed.
+									            console.log( 'Editor is ready to use!', editor );
+									          } }
+									          onChange={ ( event, editor ) => {
+									          	 this.setState( {
+										            jobDesc: editor.getData()
+										        } );
+									          } }
+									          onBlur={ editor => {
+									            console.log( 'Blur.', editor );
+									          } }
+									          onFocus={ editor => {
+									            console.log( 'Focus.', editor );
+									          } }
+									        />	
 									    </div> 
 								    </div>
 								</div>
@@ -674,7 +779,7 @@ export default class JobPosting extends Component{
 								
 								<div className="col-lg-12 addJobSubHead">
 									<i className="fa fa-book"></i>
-									<span className="labelLeftPadding">Required Education & Experience</span>
+									<span className="labelLeftPadding"> Required Education & Experience </span>
 								</div>
 								<div className="col-lg-12 addJobFieldRow text-left">
 									<div className="row">
@@ -701,7 +806,7 @@ export default class JobPosting extends Component{
 								
 								<div className="col-lg-12 addJobSubHead">
 									<i className='fa fa-cog'></i> 
-									<span className="labelLeftPadding">Expected Skills</span>
+									<span className="labelLeftPadding"> Expected Skills </span>
 								</div>
 								<div className="col-lg-12 addJobFieldRow text-left">
 									<div className="row">
@@ -717,7 +822,7 @@ export default class JobPosting extends Component{
 											</div>
 										</div>
 										<div className="col-lg-4">
-											<label htmlFor="minPrimExp" className="addjobformLable"> Min. Experience Req.</label>
+											<label htmlFor="minPrimExp" className="addjobformLable"> Min. Experience Req. </label>
 											<div className="input-group">
 												<span className="input-group-addon addJobFormField"><i className="fa fa-bar-chart"></i> </span> 
 												<input type="text" className="form-control addJobFormField" name="minPrimExp" id="minPrimExp" value={this.state.minPrimExp} onChange={this.handleChange}/>
@@ -739,7 +844,7 @@ export default class JobPosting extends Component{
 											</div>
 										</div>
 										<div className="col-lg-4">
-											<label htmlFor="minSecExp" className="addjobformLable"> Min. Experience Req.</label>
+											<label htmlFor="minSecExp" className="addjobformLable"> Min. Experience Req. </label>
 											<div className="input-group">
 												<span className="input-group-addon addJobFormField"><i className="fa fa-bar-chart"></i> </span> 
 												<input type="text" className="form-control addJobFormField" name="minSecExp" id="minSecExp" value={this.state.minSecExp} onChange={this.handleChange}/>
@@ -761,7 +866,7 @@ export default class JobPosting extends Component{
 											</div>
 										</div>
 										<div className="col-lg-4">
-											<label htmlFor="minOtherExp" className="addjobformLable"> Min. Experience Req.</label>
+											<label htmlFor="minOtherExp" className="addjobformLable"> Min. Experience Req. </label>
 											<div className="input-group">
 												<span className="input-group-addon addJobFormField"><i className="fa fa-bar-chart"></i> </span> 
 												<input type="text" className="form-control addJobFormField" name="minOtherExp" id="minOtherExp" value={this.state.minOtherExp} onChange={this.handleChange}/>
@@ -781,8 +886,8 @@ export default class JobPosting extends Component{
 									</div>
 								</div>
 								<div className="col-lg-7 col-lg-offset-5 pull-right">
-									<button className="btn addJobFormField addJobPreviewBtn" > PREVIEW </button>
-									<button className="btn buttonYellow addJobSubmitBtn"  onClick={this.handleSubmit}> SUBMIT </button>
+									<button className="btn addJobFormField addJobPreviewBtn"> PREVIEW </button>
+									<button className="btn buttonYellow addJobSubmitBtn"  onClick={this.handleSubmit}> {this.state.submitBtnText} </button>
 								</div>
 							</form>
 						</div>
