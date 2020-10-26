@@ -1,6 +1,5 @@
 import React,{Component} from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { withRouter } from 'react-router-dom';
 import './Header.css';
 
 class Header extends Component{
@@ -56,6 +55,7 @@ class Header extends Component{
   }
   logout() {
         var token = localStorage.removeItem("token");
+        //alert()
         if (token !== null && token !== "undefined") {
             this.setState({
                 loggedIn: false
@@ -69,7 +69,7 @@ class Header extends Component{
         <div className="headerWrapper col-lg-12">
           <div className="row">
             <div className="headerLogoWrapper col-lg-8">
-              <img src="/images/1.png" alt="ijobs logo"/>
+              <a href="/"><img src="/images/1.png" alt="ijobs logo"/></a>
             </div>
             <div className="headerMenuWrapper col-lg-4">
               <div className="row"> 
@@ -138,33 +138,28 @@ class Header extends Component{
                   <div className="headerToggel" onClick={this.asideBar.bind(this)}>
                     <FontAwesomeIcon icon="align-right" />
                   </div>
-                  
                 </div>
                 <div className="barsToggel pull-right" id="barsToggel" style={{display:this.state.asideDisplay}}>
                   <div className="notificationMessege col-lg-12">
-                      <FontAwesomeIcon icon="envelope" />
-                      <span className="notificationMessegeText">Post Job</span>
-                    </div>
-                    <div className="notificationMessege col-lg-12">
-                      <FontAwesomeIcon icon="search" />
-                      <span className="notificationMessegeText">Candidate Search</span>
-                    
-                    </div>
-                    <div className="notificationMessege col-lg-12">
-                      <FontAwesomeIcon icon="users" />
-                      <span className="notificationMessegeText">Candidate Profile</span>
-                      
-                    </div>
-                    <div className="notificationMessege col-lg-12">
-                      <FontAwesomeIcon icon="file-alt" />
-                      <span className="notificationMessegeText">Candidate List</span>
-                      
-                    </div>
-                    <div className="notificationMessege col-lg-12">
+                    <FontAwesomeIcon icon="bag" />
+                    <span className="notificationMessegeText">Jobs</span>
+                  </div>
+                  <div className="notificationMessege col-lg-12">
+                     
+                      <span className="notificationMessegeText">Recruiters</span>
+                  </div>
+                  <div className="notificationMessege col-lg-12">
+                      <FontAwesomeIcon icon="mobile" />
+                      <span className="notificationMessegeText">Companies</span>
+                  </div>
+                  <div className="notificationMessege col-lg-12">
+                      <FontAwesomeIcon icon="mobile" />
+                      <span className="notificationMessegeText">Employer Login</span>
+                  </div>                    
+                  <div className="notificationMessege col-lg-12">
                       <FontAwesomeIcon icon="sign-out-alt" />
                       <span className="notificationMessegeText">Sign Out</span>
-                      
-                    </div>
+                  </div>
                 </div>
                 
               </div>
@@ -177,4 +172,4 @@ class Header extends Component{
   }
 }
 
-export default withRouter(Header);
+export default Header;

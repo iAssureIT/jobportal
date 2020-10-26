@@ -122,7 +122,7 @@ class ForgotPassword extends Component {
                     </div>
 
                     <div className="col-lg-12 forgotPasswordLinks">
-                        <a className="forgotPasswordSignIn" href="#"><u>Sign In</u></a>
+                        <a className="forgotPasswordSignIn" href="/login"><u>Sign In</u></a>
                       </div>
                   </form>
                 </div>

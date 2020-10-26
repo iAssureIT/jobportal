@@ -60,7 +60,7 @@
 	height: 38px;
 	width: 40px;
 	margin: 6px;
-	color: #fff;
+	color: #fff !important;
 	text-align: center;
 	font-size: 24px;
 	border: 1px solid #D3950A !important;
@@ -73,7 +73,7 @@
 	height: 42px;
 	width: 44px;
 	margin: 4px;
-	color: #fff;
+	color: #fff !important;
 	text-align: center;
 	font-size: 24px;
 	border: 1px solid #D3950A !important;
@@ -118,7 +118,7 @@
 .loginHr{
 	width:47%;
 	float: left;
-	border-top: 1px solid #D3950A;
+	border-top: 1px solid #D3950A !important;
 }
 
 .loginOrText{
@@ -137,7 +137,7 @@
   padding-left: 10px;
   border: 1px solid #D3950A !important;
   background-color: transparent !important;
-  color: #fff;
+  color: #fff !important;
   font-size: 14px;
   font-family: 'Montserrat-Regular';
   letter-spacing: 1px;
@@ -145,7 +145,7 @@
 }
 
 .loginInputBox:focus{
-	border-color: #D3950A;
+	border-color: #D3950A !important;
 	box-shadow: 0px 1px 1px rgba(211, 149, 10, 0.075) inset, 0px 0px 8px rgba(211, 149, 10, 0.5)  !important;
 }
 
@@ -168,7 +168,7 @@
 .loginInputIcon3{
 	font-size: 18px;
 	border: 1px solid #D3950A !important;
-	border-left: transparent!important;
+    border-left: transparent!important;
 	background-color: transparent !important;
 	color: #eee;
 }
@@ -178,7 +178,7 @@
 }
 
 .buttonSignIn{
-	background-color: #D3950A;
+	background-color: #D3950A ;
 	color: #fff;
 	border: 1px solid #D3950A !important;
 	margin-bottom: 2px;

@@ -15,6 +15,7 @@ import SignUp               from './systemSecurity/SignUp.js';
 import ResetPasswordFirstLogin from './systemSecurity/ResetPasswordFirstLogin.js';
 import Header               from './common/header/Header.js'; 
 import FunctionalHeader     from './common/FunctionalHeader/FunctionalHeader.js'; 
+import MapHeader            from './common/MapHeader/MapHeader.js'; 
 import Footer               from './common/footer/Footer.js';
 import Leftsidebar          from './common/leftSidebar/Leftsidebar.js';
 import CoreLayout           from './coreadmin/CoreLayout/CoreLayout.js';
@@ -129,8 +130,9 @@ class Layout extends Component  {
             );
         } else {
             return (
-                <div className="PageFunctionWiseWrapper">
-                <Header/>
+                <div className="wrapper PageFunctionWiseWrapper">
+
+                {/*<MapHeader/>*/}
                     <Router >
                         <Switch >
 

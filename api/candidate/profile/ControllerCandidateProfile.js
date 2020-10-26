@@ -51,7 +51,29 @@ exports.insertCandidateBasicInfo = (req, res, next)=>{
 		});		
 }
 exports.getSingleCandidate = (req,res,next)=>{
-    CandidateProfile.findOne({_id : req.params.candidateID})
+    //CandidateProfile.findOne({_id : req.params.candidateID})
+    CandidateProfile('candidatemaster').aggregate([
+        {$match:{"_id": req.params.candidateID} },
+        {$lookup:{
+                   from: "addresstypemasters",
+                   localField: "address.addressType",
+                   foreignField: "_id",
+                   as: "addressType" } 
+        },
+        {$lookup:{
+                   from: "qualificationlevelmasters",
+                   localField: "academics.qualificationLevel",
+                   foreignField: "_id",
+                   as: "qualificationlevel" } 
+         },   
+         {$lookup:{
+                   from: "qualificationmasters",
+                   localField: "academics.qualification",
+                   foreignField: "_id",
+                   as: "qualification" } 
+         }
+         
+         ])
     .exec()
     .then(data=>{
         res.status(200).json(data);
@@ -324,6 +346,7 @@ exports.updateOneCandidateExperience = (req,res,next)=>{
         });
 };
 exports.addCandidateSkill = (req,res,next)=>{
+
     CandidateProfile.updateOne(
             { _id: req.body.candidateID },  
             {

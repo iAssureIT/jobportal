@@ -3,7 +3,7 @@ import swal from 'sweetalert';
 import $ from "jquery";
 import jQuery from 'jquery';
 import axios from 'axios';
-import './SignUp.css';
+import './ConfirmOtp.css';
 
 class ConfirmOtp extends Component {
   constructor(props) {
@@ -13,28 +13,37 @@ class ConfirmOtp extends Component {
     }
   }
   componentDidMount() {
-    $.validator.addMethod("regxemailotp", function (value, element, regexpr) {
-      return regexpr.test(value);
-    }, "Please enter valid OTP.");
+    
+    //==================================
+    var user_id = this.props.match.params.userID;
+    console.log('user_id==',user_id)  
 
-    jQuery.validator.setDefaults({
-      debug: true,
-      success: "valid"
-    });
+    axios.get('/api/users/get/'+user_id)
+    .then((response) => {
+      console.log('userInfo==',response.data)
 
-    $("#OTPMobMail").validate({
-      rules: {
-        emailotp: {
-          required: true,
-          regxemailotp: /^[1-9][0-9]{3}$/,
-        },
-      },
-      errorPlacement: function (error, element) {
-        if (element.attr("name") == "emailotp") {
-          error.insertAfter("#emailotp");
-        }
-      }
-    });
+      this.setState({
+              'firstName'       : response.data.firstname,
+              'lastName'        : response.data.lastname,
+              'mobile'          : response.data.mobile,
+              'emailId'         : response.data.email,
+              "user_id"         : user_id,
+              "createdBy"       : user_id
+             })
+    })
+    .catch((error) => {
+    })
+
+  }
+  
+  handleChange(event){
+      var fieldValue=event.currentTarget.value;
+      // console.log("fieldValue",fieldValue);
+       var fieldKey=event.currentTarget.name;
+       console.log("fieldKey",fieldKey);
+      this.setState({
+        [fieldKey]:fieldValue
+      });
   }
   confirmOTP(event) {
     event.preventDefault();
@@ -44,8 +53,21 @@ class ConfirmOtp extends Component {
       "emailOTP": parseInt(this.refs.emailotp.value),
       "status": "Active"
     }
-    if ($("#OTPMobMail").valid()) {
-      axios.get('/api/auth/get/checkemailotp/usingID/' + this.props.match.params.userID + '/' + this.refs.emailotp.value)
+    //========person master===============
+
+      var candidatemaster   = {
+        'firstName'       : this.state.firstName,
+        'lastName'        : this.state.lastName,
+        'mobile'          : this.state.mobile,
+        'emailId'         : this.state.emailId,
+        "user_id"         : this.state.user_id,
+        "createdBy"       : this.state.createdBy
+      }
+    console.log("candidatemaster",candidatemaster)
+    
+      //====================================
+    
+      axios.get('/api/auth/get/activate/usingID/' + this.props.match.params.userID + '/' + this.refs.emailotp.value)
         .then((response) => {
 
           if (response.data.message == 'SUCCESS') {
@@ -56,7 +78,18 @@ class ConfirmOtp extends Component {
               this.props.history.push('/reset-pwd/' + this.props.match.params.userID);
             } else {
               localStorage.removeItem("previousUrl");
-              this.props.history.push('/login');
+              
+              //================================
+
+                axios.post('/api/candidatemaster/post', candidatemaster)
+                .then((response) => {
+
+                  console.log('in result Res data==>>>', response.data);
+                  this.props.history.push('/login');
+                })
+                .catch((error) => {})
+              
+            //================================
             }
           } else {
             swal('Please enter valid OTP.');
@@ -65,7 +98,7 @@ class ConfirmOtp extends Component {
         .catch((error) => {
           swal(error.response.data.message);
         })
-    }
+    
 
   }
   inputEffect(event) {
@@ -92,10 +125,6 @@ class ConfirmOtp extends Component {
         swal(" Failed to resent OTP");
         document.getElementById("resendOtpBtn").innerHTML = 'Resend OTP';
       })
-
-
-
-
   }
   Closepagealert(event) {
     event.preventDefault();
@@ -116,62 +145,53 @@ class ConfirmOtp extends Component {
     var resendOtp = "";
 
     return (
-      <div style={{ 'height': window.innerHeight + 'px', 'width': window.innerWidth + 'px' }} className="col-lg-12 col-md-12 col-sm-12 col-xs-12 LoginWrapper">
-        <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 innloginwrap">
-        </div>
-        <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 mt100 mb100">
-          <div className="col-lg-4 col-lg-offset-7 col-md-4 col-md-offset-7 col-sm-12 col-xs-12 formShadow">
-
-            <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-
-              <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 innloginwrap mb25">
-                <h3>Confirm OTP</h3>
-              </div>
-              {
-                this.state.showMessage == false ?
-                  <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <p>We send you a Verification Code to your registered email </p>
-                    <div className="">
-                      <span>Enter verification code received on email.<br /></span>
+      <section className="container-fluid confirmOTPWrapper">
+                <div className="confirmOTP col-lg-4 col-lg-offset-4">
+                  <form>
+                    <div className="confirmOTPTitle col-lg-12">Confirm OTP
                     </div>
-                    <form id="OTPMobMail" className="textAlignLeft">
-                      <div className="">
 
-                        <br />
-                        <div className="input-group " id="emailotp">
-                          <input type="text" className="form-control" ref="emailotp" name="emailotp" placeholder="Enter OTP" onBlur={this.inputEffect.bind(this)} aria-describedby="basic-addon1" maxLength="4" pattern="(0|[0-9]*)" required />
-                          <span className="input-group-addon glyphi-custommm"><i className="fa fa-key" aria-hidden="true"></i></span>
-                        </div>
-                      </div>
-                      <div className="loginforgotpass mt25">
-                        <lable>Already have an account?</lable>&nbsp;<a href='/login' className="">Sign In <b>&#8702;</b></a>
-                      </div>
-                      <div className="mt30 col-lg-12 mb25">
-                        <div className="col-lg-6">
-                          <div id="resendOtpBtn" onClick={this.resendOtp.bind(this)} className="col-lg-12 btn  systemsecBtn">
-                            Resend OTP
-                          </div>
-                        </div>
-                        <div className="col-lg-6">
-                          <button type="submit" onClick={this.confirmOTP.bind(this)} className="col-lg-12 btn loginBtn systemsecBtn">Submit</button>
-                        </div>
-                      </div>
-                    </form>
-                  </div>
-                  :
-                  <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <p className="textAlignCenter">Your Account is verified successfully! Please Sign In to access your account.<br /></p>
-                    <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 mt15">
-                      <a href="/login" className="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-12 col-xs-12 button3  btn btn-warning  signupbtn">Sign In</a>
+                    <hr className="confirmOTPHr"/>
+
+                    <div className="confirmOTPSentence col-lg-12">
+                         We have sent you an OTP to your registered email address.
+                        Please enter your OTP below
+
                     </div>
-                  </div>
-              }
 
-            </div>
-          </div>
+                    <div className="col-lg-12 form-group" >
+                        <div className="input-group">
+                            <span className="input-group-addon confirmOTPInputIcon1"><i className="fa fa-envelope"></i></span>
+                            <input type="text" id="otp" name="otp" ref="emailotp" placeholder="Enter your OTP" value={this.state.OTP} onChange={this.handleChange.bind(this)} className="form-control confirmOTPInputBox"/>
+                        </div>
+                    </div>
 
-        </div>
-      </div>
+
+                    <div className="col-lg-12 confirmOTPLinks">
+                        Found your Password? &nbsp;
+                        <a className="confirmOTPSignIn" href="#"><u>Sign In</u></a>
+                    </div>
+                    
+                    
+                     
+                    <div className="col-lg-12 buttonWrapper">
+                      <div className="row">
+                        <div className="col-lg-6">
+                            <button className="btn col-lg-12 buttonConfirmOTP" onClick={this.resendOtp.bind(this)}>Resend OTP</button>
+                        </div>
+
+                        <div className="col-lg-6">
+                            <button className="btn col-lg-12 buttonConfirmOTP" onClick={this.confirmOTP.bind(this)}>Confirm OTP</button>
+                        </div>
+                      </div>
+                            
+                    </div>
+                  </form> 
+
+                </div>
+         </section>
+
+      
     );
   }
 }

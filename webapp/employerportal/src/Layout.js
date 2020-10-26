@@ -7,12 +7,12 @@ import 'font-awesome/css/font-awesome.min.css';
 
 
 // Section: 1 - SystemSecurity ******************************************************
-import Login from './coreadmin/systemSecurity/Login.js';
-import ConfirmOtp from './coreadmin/systemSecurity/ConfirmOtp.js';
-import ForgotPassword from './coreadmin/systemSecurity/ForgotPassword.js';
-import ResetPassword from './coreadmin/systemSecurity/ResetPassword.js';
+import Login from './jobportaladmin/systemSecurity/Login.js';
+import ConfirmOtp from './jobportaladmin/systemSecurity/ConfirmOtp.js';
+import ForgotPassword from './jobportaladmin/systemSecurity/ForgotPassword.js';
+import ResetPassword from './jobportaladmin/systemSecurity/ResetPassword.js';
 //import ResetPasswordFirstLogin from './coreadmin/systemSecurity/ResetPasswordFirstLogin.js';
-import SignUp from './coreadmin/systemSecurity/SignUp.js';
+import SignUp from './jobportaladmin/systemSecurity/SignUp.js';
 
 
 /*import Footer                                   from './coreadmin/common/footer/Footer.js';*/
@@ -114,7 +114,7 @@ class Layout extends Component  {
             return (
             <Router>
                 <div className="hold-transition skin-blue fixed sidebar-mini">
-                    <div className="content-wrapper" style={{paddingTop:0}}>
+                    <div className="" style={{paddingTop:0}}>
                         <div className="wrapper">
                             <Header />
                             <div className="">
@@ -135,7 +135,7 @@ class Layout extends Component  {
                                             <div className="dashboardWrapper" >
                                                 <div className="backColor col-lg-12 col-md-12 col-sm-12 col-xs-12" >
                                                     <CoreLayout />
-                                                    <Leftsidebar/>
+                                                   {/* <Leftsidebar/>*/}
                                                     <Switch >
                                                         <Route path="/" component={Dashboard} exact />
                                                         <Route path="/dashboard" component={Dashboard} exact />

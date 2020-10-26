@@ -1,8 +1,39 @@
 :root {
-  --main-bg-color: #242931;
-  --main-txt-color: #ffffff;
-  --main-border-color: #D3950A;
-  --main-heading-font-color: #D3950A;
-  --main-subheading-font-color: #D3950A;
-  --yellow-button-color: #FAAD00;
+  --main-bg-color                   : #1f262d;
+  --header-bg-color                 : #191c24;
+  --footer-bg-color                 : #191c24;
+  --input-bg-color                  : #242933;
+
+  --main-txt-color                  : #ffffff;
+
+  --main-heading-font-color         : #f5a721;
+  --main-subheading-font-color      : #f5a721;
+  --main-white-subheading-font-color: #f5a721;
+
+  --header-border-color             : #4b5666;
+  --main-border-color               : #f5a721;
+
+  --yellow-button-color             : #f5a721;
+  --red-button-color                : #ff4444;
+}
+.basicInfoWrapper{
+  min-height: 100px;
+  height: auto;
+  color:#fff;
+  background-color: var(--main-bg-color );
+  padding-bottom:70px;
+}
+
+.mainPagesWrapper{
+  min-height: 430px;
+  height:auto;
+  background-color: var(--main-bg-color );
+}
+
+
+.noPadding{
+  padding : 0 !important;
+}
+.whitelink, .whitelink:hover{
+  color: #fff
 }

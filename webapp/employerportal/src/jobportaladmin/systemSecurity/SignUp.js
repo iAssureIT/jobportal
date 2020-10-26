@@ -17,159 +17,190 @@ class SignUp extends Component {
 		super();
 		this.state = {
 			checkUserExists: 0,
-			companyID :"",
 			loggedIn: false,
-			auth: {
-				firstname: '',
-				lastname: '',
-				mobNumber: '',
-				email: '',
-				pwd: '',
-				signupPassword: '',
-				role: ''
-			},
+			employerID : "",
 			formerrors: {
 				firstNameV: "",
 				lastNameV: "",
 				mobileV: "",
 				emailIDV: "",
 			},
-			termsCondition: ["The price of products  is as quoted on the site from time to time.",
-				"Price and delivery costs are liable to change at any time, but changes will not affect orders in respect of which we have already sent you a Despatch Confirmation.",
-				"Products marked as 'non-returnable' on the product detail page cannot be returned.",
-				"Products may not be eligible for return in some cases, including cases of buyer's remorse such as incorrect model or color of product ordered or incorrect product ordered."]
+			employerArray : [],
+			vendor_Id : "",
+			currentCompany :"",
+	      	firstName  : "",
+	      	lastName   : "",
+	      	password   : "",
+	      	confirmPassword   : "",
+	      	emailAddress      : "",
+	      	mobileNumber      : "",
 		}
 		this.handleChange = this.handleChange.bind(this);
 	}
 	componentWillMount() {
 
 	}
-	validation() {
-        $.validator.addMethod("regxfirstname", function (value, element, regexpr) {
-            return regexpr.test(value);
-        }, "Name should only contain letters.");
-        $.validator.addMethod("regxEmail", function (value, element, regexpr) {
-            return regexpr.test(value);
-		}, "Please enter a valid email address.");
-
-		$.validator.addMethod("regxcompanyID", function (value, element, regexpr) {
-			return regexpr.test(value);
-		  }, "Please enter valid company ID");
+	componentDidMount() {
 		
-        jQuery.validator.setDefaults({
-            debug: true,
-            success: "valid"
-        });
+		$(".checkUserExistsError").hide();
+		//==============
+		axios.get('/api/entitymaster/get/employer')
+		.then((response) => {
+			console.log('entitymaster==',response.data)
 
-        $("#signUpUser").validate({
-            rules: {
-                firstname: {
-                    required: true,
-                    regxfirstname : /^[A-Za-z]*$/,
-				},
-				lastname: {
-                    required: true,
-                    regxfirstname : /^[A-Za-z]*$/,
-                },
-                signupEmail: {
-					required: true,
-					regxEmail: /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/
-				},
-				companyID: {
-					required: true,
-					regxcompanyID: /[a-zA-Z0-9]/,
-				  },
-                signupPassword: {
-                    required: true,
-				},
-				signupConfirmPassword: {
-					required: true,
-					equalTo : "#signupPassword"
-				},
-				idacceptcondition: {
-					required: true,
-				}
-			},
-			messages:{
-				signupConfirmPassword:"Password do not match"
-			},
-            errorPlacement: function (error, element) {
-                if (element.attr("name") == "firstname") {
-                    error.insertAfter("#firstname");
-				}
-				if (element.attr("name") == "lastname") {
-                    error.insertAfter("#lastname");
-                }
-                if (element.attr("name") == "signupEmail") {
-                    error.insertAfter("#signupEmail");
-                }
-                if (element.attr("name") == "companyID") {
-                    error.insertAfter("#companyID");
-                }
-                if (element.attr("name") == "signupPassword") {
-                    error.insertAfter("#signupPassword");
-				}
-				if (element.attr("name") == "signupConfirmPassword") {
-                    error.insertAfter("#signupConfirmPassword");
-                }
-                if (element.attr("name") == "idacceptcondition") {
-                    error.insertAfter("#idacceptcondition");
-                }
-            }
-        });
+			this.setState({
+		        	employerArray : response.data
+		        })
+		})
+		.catch((error) => {
+		})
+	}
+	validateForm=()=>{
+    var status = true;
+    var tempEmail = this.state.emailAddress.trim(); // value of field with whitespace trimmed off
+    var emailFilter = /^[^@]+@[^@.]+\.[^@]*\w\w$/;
+    var illegalChars = /[\(\)\<\>\,\;\:\\\"\[\]]/;
+    var phoneno = /^\d{10}$/;
+
+    if(this.state.firstName<=0)  {
+      document.getElementById("firstNameError").innerHTML=  
+      "Please enter valid Name";  
+      status=false; 
     }
+    else if(this.state.firstName.match(illegalChars)){
+      document.getElementById("firstNameError").innerHTML=  
+      "Please enter valid name";  
+      status=false; 
+    }
+    else{
+      document.getElementById("firstNameError").innerHTML=  
+       ""; 
+      status = true;
+    }
+
+    if(this.state.lastName<=0)  {
+      document.getElementById("lastNameError").innerHTML=  
+      "Please enter valid Name";  
+      status=false; 
+    }
+    else if(this.state.lastName.match(illegalChars)){
+      document.getElementById("lastNameError").innerHTML=  
+      "Please enter valid name";  
+      status=false; 
+    }
+    else{
+      document.getElementById("lastNameError").innerHTML=  
+       ""; 
+      status = true;
+    }
+
+    if(this.state.emailAddress.length<=0){
+      document.getElementById("emailAddressError").innerHTML=  
+      "Please enter your Email";  
+      status=false; 
+    }else if (
+      !emailFilter.test(tempEmail)) { //test email for illegal characters
+          document.getElementById('emailAddressError').innerHTML = "Please enter a valid email address.";
+      } else if (this.state.emailAddress.match(illegalChars)) {
+          document.getElementById('emailAddressError').innerHTML = "Email contains invalid characters.";
+      }else{
+      document.getElementById("emailAddressError").innerHTML=
+      ""; 
+      status = true;
+    }
+
+    if(this.state.mobileNumber.match(phoneno)){
+      document.getElementById("mobileNumberError").innerHTML=  
+      ""; 
+      status = true;
+      
+    }else{
+      document.getElementById("mobileNumberError").innerHTML=  
+      "Please enter valid Mobile Number";  
+      status=false; 
+    }
+
+    if(this.state.password.length<=0){
+      document.getElementById("passwordError").innerHTML=  
+      "Please enter Password";  
+      status=false; 
+    }
+
+    if(this.state.password.length<8){
+      document.getElementById("passwordError").innerHTML=  
+      "Please enter atleast 8 characters";  
+      status=false; 
+    }
+    else{
+      document.getElementById("passwordError").innerHTML=  
+      ""; 
+      status = true;
+    }
+
+    if(this.state.confirmPassword.length<=0){
+      document.getElementById("confirmPasswordError").innerHTML=  
+      "Please enter Confirm Password";  
+      status=false; 
+    }
+
+    if(this.state.confirmPassword.length<8){
+      document.getElementById("confirmPasswordError").innerHTML=  
+      "Please enter atleast 8 characters";  
+      status=false; 
+    }
+    else{
+      document.getElementById("confirmPasswordError").innerHTML=  
+      ""; 
+      status = true;
+    }
+
+    if ((this.state.password) != (this.state.confirmPassword)){
+      document.getElementById("passwordError").innerHTML=  
+      "Passwords do not match";  
+      document.getElementById("confirmPasswordError").innerHTML=  
+      "Passwords do not match"; 
+      status=false; 
+    }
+
+    return status;
+  } 
 	usersignup(event) {
 		event.preventDefault();
-		if($("#signUpUser").valid()){
+		var status =  this.validateForm();
+
+	    if(status == true){
 			var auth = {
-				firstname		: this.state.firstname,
-				lastname		: this.state.lastname,
-				mobNumber		: (this.state.mobNumber).replace("-", ""),
-				email			: this.state.signupEmail,
-				companyID		: this.state.companyID,
-				pwd				: this.state.signupPassword,
-				role			: 'employee',
-				status			: 'blocked',
+				username 		: "EMAIL",
+				firstname		: this.state.firstName,
+				lastname		: this.state.lastName,
+				mobNumber		: (this.state.mobileNumber).replace("-", ""),
+				email			: this.state.emailAddress,
+				pwd				: this.state.password,
+				companyID		: this.state.employerID,
+				companyName	: this.state.employerName,
+				role			: 'candidate',
+				status			: 'unverified',
 				"emailSubject"	: "Email Verification", 
 				"emailContent"  : "As part of our registration process, we screen every new profile to ensure its credibility by validating email provided by user. While screening the profile, we verify that details put in by user are correct and genuine.",
 			}
-			document.getElementById("signUpBtn").innerHTML = 'Please Wait...';
 
-			var passwordVar = this.refs.signupPassword.value;
-			var signupConfirmPasswordVar = this.refs.signupConfirmPassword.value;
-				console.log("companyID auth===>",auth);
-				if (passwordVar === signupConfirmPasswordVar) {
-					return (passwordVar.length >= 6) ?
-						(true,
-							document.getElementById("signUpBtn").innerHTML = 'Sign Up',
-							axios.post('/api/auth/post/signup/user/emailotp', auth)
-							.then((response) => {
-								if(response.data.message == 'USER_CREATED'){
-									swal('Great, Information submitted successfully and OTP is sent to your registered Email.');
-									localStorage.setItem('previousUrl' ,'signup');
-									this.props.history.push("/confirm-otp/" + response.data.ID);
-								}else{
-									swal(response.data.message);
-								}	
-							})
-							.catch((error) => {
-								
-							})
-						)
-						:
-						(
-							document.getElementById("signUpBtn").innerHTML = 'Sign Up',
-							
-							swal("Password should be at least 6 Characters Long, Please try again or create an Account.")
-							
-						)
+			
+		console.log('auth sign=======',auth)
 
-
-				} else {
-					document.getElementById("signUpBtn").innerHTML = 'Sign Up';
+			axios.post('/api/auth/post/signup/user/otp', auth)
+				.then((response) => {
+					console.log("signup res===",response.data)
+					if(response.data.message == 'USER_CREATED'){
+						swal('Great, Information submitted successfully and OTP is sent to your registered Email.');
+						localStorage.setItem('previousUrl' ,'signup');
+						this.props.history.push("/confirm-otp/" + response.data.ID);
+					}else{
+						swal(response.data.message);
+					}	
+				})
+				.catch((error) => {
 					
-					swal("Passwords does not match, Please Try Again.");
-				}
+				})
 		}
 
 	}
@@ -209,9 +240,29 @@ class SignUp extends Component {
 	}
 
 	handleChange(event) {
+		// var dropDown = this.refs.dropDown.value;
+		// console.log("dropDown",dropDown);
 		this.setState({
 			[event.target.name]: event.target.value
 		});
+		
+	}
+	handleChange1(event){
+		var comId = event.target.value
+		console.log('comId==',comId)
+		axios.get('/api/entitymaster/getCompany/'+comId)
+		.then((response) => {
+			console.log('employerName==',response.data)
+
+			this.setState({
+		        	employerID : comId,
+		        	employerName : response.data.employerName,
+		        	vendor_Id : response.data._id,
+		        })
+		})
+		.catch((error) => {
+		})
+		
 	}
 	acceptcondition(event) {
 		var conditionaccept = event.target.value;
@@ -228,147 +279,110 @@ class SignUp extends Component {
 	hideModal() {
 		$(".modalbg").css("display", "none");
 	}
-	componentDidMount() {
-		this.validation();
-		$(".checkUserExistsError").hide();
-	}
-
+	
 	showSignPass() {
 		$('.showPwd').toggleClass('showPwd1');
 		$('.hidePwd').toggleClass('hidePwd1');
-		return $('#signupPassword').attr('type', 'text');
+		return $('.inputTextPass').attr('type', 'text');
 	}
 	hideSignPass() {
 		$('.showPwd').toggleClass('showPwd1');
 		$('.hidePwd').toggleClass('hidePwd1');
-		return $('#signupPassword').attr('type', 'password');
-	}
-	showConfSignPass() {
-		$('.showConfPwd').toggleClass('showPwd2');
-		$('.hideConfPwd').toggleClass('hidePwd2');
-		return $('#signupConfirmPassword').attr('type', 'text');
-	}
-	hideConfSignPass() {
-		$('.showConfPwd').toggleClass('showPwd2');
-		$('.hideConfPwd').toggleClass('hidePwd2');
-		return $('#signupConfirmPassword').attr('type', 'password');
+		return $('.inputTextPass').attr('type', 'password');
 	}
 	proceed() {
 
 	}
 	render() {
 		return (
-			<div style={{'height': window.innerHeight+'px', 'width': window.innerWidth+'px'}} className="col-lg-12 col-md-12 col-sm-12 col-xs-12 LoginWrapper">
-				<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-					<div className="col-lg-4 col-lg-offset-7 col-md-4 col-md-offset-7 col-sm-12 col-xs-12 formShadow">
-						<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 innloginwrap">
-							<h3>Sign Up</h3>
-						</div>
-						<form id="signUpUser">
-							<div className="form-group textAlignLeft col-lg-6 col-md-6 col-sm-12 col-xs-12">
-								<label>First Name</label><label className="astricsign">*</label>
-								<input type="text" maxLength="25" className="form-control" id="firstname" ref="firstname" name="firstname" placeholder="" onChange={this.handleChange} data-text="firstNameV" />
-							</div>
-							<div className="form-group textAlignLeft col-lg-6 col-md-6 col-sm-12 col-xs-12">
-								<label>Last Name</label><label className="astricsign">*</label>
-								<input type="text" maxLength="25" className="form-control" id="lastname" ref="lastname" name="lastname" placeholder="" onChange={this.handleChange} data-text="lastNameV" />
-							</div>
-							<div className="form-group textAlignLeft col-lg-12 col-md-12 col-sm-12 col-xs-12 mt15">
-								<label>Email ID</label><label className="astricsign">*</label>
-								<input type="email" className="form-control" id="signupEmail" ref="signupEmail" name="signupEmail" placeholder="" onChange={this.handleChange} data-text="emailIDV" />
-								<label className="checkUserExistsError">User already exists!!!</label>
-								
-							</div>
-							<div className="form-group textAlignLeft col-lg-12 col-md-12 col-sm-12 col-xs-12 mt15">
-								<label>Mobile Number</label><label className="astricsign">*</label>
-								
-								<PhoneInput
-									country={'in'}
-									value={this.state.mobNumber} 
-									name="mobNumber"
-									inputProps={{
-									name: 'mobNumber',
-									required: true
-									}}
-									onChange={mobNumber=>{this.setState({mobNumber})}}
-								/>
-							</div>
-							<div className="form-group textAlignLeft col-lg-12 col-md-12 col-sm-12 col-xs-12 mt15">
-								<label>Company ID</label><label className="astricsign">*</label>
-								<input type="Number" className="form-control" id="companyID" ref="companyID" name="companyID" placeholder="" onChange={this.handleChange} />
-							</div>
-							<div className="form-group textAlignLeft col-lg-12 col-md-12 col-sm-12 col-xs-12 mt15">
-								<label>Password</label><label className="astricsign">*</label>
-								<input minLength="6" type="password" className="form-control" id="signupPassword" ref="signupPassword" placeholder="" autoComplete="off" name="signupPassword" onChange={this.handleChange} />
-								<div className="showHideSignDiv">
-				                    <i className="fa fa-eye showPwd showEyeupSign" aria-hidden="true" onClick={this.showSignPass.bind(this)}></i>
-				                    <i className="fa fa-eye-slash hidePwd hideEyeSignup " aria-hidden="true" onClick={this.hideSignPass.bind(this)}></i>
-				                </div>
-							</div>
-							<div className="form-group textAlignLeft col-lg-12 col-md-12 col-sm-12 col-xs-12 mt15">
-								<label>Confirm Password</label><label className="astricsign">*</label>
-								<input minLength="6" type="password" className="form-control" id="signupConfirmPassword" ref="signupConfirmPassword" placeholder="" name="signupConfirmPassword" />
-								<div className="showHideSignDiv">
-				                    <i className="fa fa-eye showConfPwd showEyeupSign" aria-hidden="true" onClick={this.showConfSignPass.bind(this)}></i>
-				                    <i className="fa fa-eye-slash hideConfPwd hideEyeSignup " aria-hidden="true" onClick={this.hideConfSignPass.bind(this)}></i>
-				                </div>
-							</div>
-							{/* <div className="col-lg-4 col-lg-offset-3 col-md-12 col-sm-12 col-xs-12 mt15">
-								<button id="signUpBtn" onClick={this.usersignup.bind(this)} className="col-lg-12 col-md-12 col-md-offset-3 col-sm-12 col-xs-12  btn loginBtn">Sign Up</button>
-							</div> */}
-							{
-								this.state.btnLoading
-								?
-								<div className="col-lg-3 col-lg-offset-4 col-md-10 col-md-offset-1 col-sm-12 col-xs-12 NOpaddingRight ">
-								<div align="center" className="cssload-fond">
-									<div className="cssload-container-general">
-										<div className="cssload-internal"><div className="cssload-ballcolor cssload-ball_1"> </div></div>
-										<div className="cssload-internal"><div className="cssload-ballcolor cssload-ball_2"> </div></div>
-										<div className="cssload-internal"><div className="cssload-ballcolor cssload-ball_3"> </div></div>
-										<div className="cssload-internal"><div className="cssload-ballcolor cssload-ball_4"> </div></div>
-									</div>
-								</div>
-								</div>
-								:
-								<div className="col-lg-10 col-lg-offset-1 col-md-6 col-md-offset-3 col-sm-12 col-xs-12 NOpaddingRight">
-									<button id="signUpBtn" onClick={this.usersignup.bind(this)} className="col-lg-12 col-md-12 -sm-12 col-xs-12  btn loginBtn">Sign Up</button>
-								</div>
-							}
-							<div className="col-lg-12 col-md-12 col-xs-12 col-sm-12 text-center loginforgotpass mt25">
-								<label>Already have an account?</label> &nbsp; <a href='/login' className="">Sign In <b>&#8702;</b></a>
-							</div>
-						</form>
-						<div className="modal" id="myModal" role="dialog">
-							<div className="modal-dialog">
-								<div className="modal-content">
-									<div className="modal-header">
-										<img src="/images/Icon.png" />
-										<button type="button" className="close modalclosebut" data-dismiss="modal">&times;</button>
-										<h2 className="modaltext modalheadingcont">TERMS AND CONDITIONS</h2>
-									</div>
-									<div className="modal-body">
-										<ul>
-											{
-												this.state.termsCondition && this.state.termsCondition.length > 0 ?
-													this.state.termsCondition.map((data, index) => {
-														return (
-															<li>{data}</li>
-														);
-													})
-													:
-													null
-											}
-										</ul>
-									</div>
-									<div className="modal-footer">
-										<button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+			<section className="container-fluid registrationFormWrapper">
+                <div className="registrationForm col-lg-4 col-lg-offset-4">
+                  <form>
+
+                    <div className="signUpTitle col-lg-12">Sign Up
+                    </div>
+
+                    <hr className="registrationHr"/>
+
+                   
+                    {/*<div className="form-group col-lg-12">
+                        <div className="input-group">
+                        <span className="input-group-addon registrationInputIcon1"><i className="fa fa-envelope"></i></span>
+                        <select className="form-control col-lg-12 registrationInputBox registrationCompany" id="currentCompany" name="currentCompany" value={this.state.currentCompany} onChange={this.handleChange1.bind(this)}>
+                        <option className="registrationInputBox">Enter your Company </option>
+                            {
+                        this.state.employerArray.length ? 
+                        this.state.employerArray.map((elem,index)=>{
+                          return(<option value={elem._id}>{elem.companyName}</option>)
+                        }):
+                         null
+                      }
+                         </select>                      
+                        </div>
+                    </div>*/}
+
+
+                    <div className="col-lg-12 form-group" >
+                        <div className="input-group">
+                            <span className="input-group-addon registrationInputIcon"><i className="fa fa-user"></i></span>
+                            <input type="text" id="firstName" name="firstName" placeholder="First Name" value={this.state.firstName} onChange={this.handleChange.bind(this)} className="form-control registrationInputBox"/>
+                        </div>
+                         <span id="firstNameError" className="errorMsg"></span>
+                    </div>
+
+                    <div className="col-lg-12 form-group" >
+                        <div className="input-group">
+                            <span className="input-group-addon registrationInputIcon"><i className="fa fa-user"></i></span>
+                            <input type="text" id="lastName" name="lastName" placeholder="Last Name" value={this.state.lastName} onChange={this.handleChange.bind(this)} className="form-control registrationInputBox"/>
+                        </div>
+                         <span id="lastNameError" className="errorMsg"></span>
+                    </div>
+
+                   
+                    <div className="col-lg-12 form-group" >
+                        <div className="input-group">
+                            <span className="input-group-addon registrationInputIcon1"><i className="fa fa-envelope"></i></span>
+                            <input type="email" id="emailAddress" name="emailAddress" placeholder="Email Address" value={this.state.emailAddress} onChange={this.handleChange.bind(this)} className="form-control registrationInputBox"/>
+                        </div>
+                         <span id="emailAddressError" className="errorMsg"></span>
+                    </div>
+
+                    <div className="col-lg-12 form-group" >
+                        <div className="input-group">
+                            <span className="input-group-addon registrationInputIcon"><i className="fa fa-mobile"></i></span>
+                            <input type="tel" id="mobileNumber" name="mobileNumber" placeholder="Mobile Number" value={this.state.mobileNumber} onChange={this.handleChange.bind(this)} className="form-control registrationInputBox"/>
+                        </div>
+                         <span id="mobileNumberError" className="errorMsg"></span>
+                    </div>
+
+                     <div className="col-lg-12 form-group" >
+                        <div className="input-group">
+                            <span className="input-group-addon registrationInputIcon"><i className="fa fa-lock"></i></span>
+                            <input type="password" id="password" name="password" placeholder="Password" value={this.state.password} onChange={this.handleChange.bind(this)} className="form-control registrationInputBox"/>
+                        </div>
+                         <span id="passwordError" className="errorMsg"></span>
+                    </div>
+
+                    <div className="col-lg-12 form-group" >
+                        <div className="input-group">
+                            <span className="input-group-addon registrationInputIcon"><i className="fa fa-lock"></i></span>
+                            <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" value={this.state.confirmPassword} onChange={this.handleChange.bind(this)} className="form-control registrationInputBox"/>
+                        </div>
+                         <span id="confirmPasswordError" className="errorMsg"></span>
+                    </div>
+
+
+                    <div className="col-lg-12 buttonWrapper">
+                   <button className="btn col-lg-12 buttonSignUp" onClick={this.usersignup.bind(this)}>Sign Up</button>
+                  </div>
+
+                  <div className="col-lg-12 registrationLinks">
+                        <a className="alreadyAccount" href="/login"><u>Already have an Account?Sign In</u></a>
+                      </div>
+
+                </form>
+              </div>
+         </section>
 		);
 	}
 }

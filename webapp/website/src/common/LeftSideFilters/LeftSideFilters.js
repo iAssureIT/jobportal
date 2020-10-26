@@ -14,7 +14,7 @@ this.state = {
       allIndustries  : [],
       inputIndustry : [],
 
-      allSectors  : [],
+      allFunctionalAreas  : [],
       inputSector : [],
 
       allRoles  : [],
@@ -89,11 +89,11 @@ componentDidMount(){
         ?
           this.state.inputSector.map((elem,index)=>{
             
-            this.state.allSectors.push(elem.functionalArea);
+            this.state.allFunctionalAreas.push(elem.functionalArea);
             
           })
         :
-          this.state.allSectors.push("select");
+          this.state.allFunctionalAreas.push("select");
       })
       .catch(error=>{
         Swal.fire("Error while getting inputSector List data",error.message,'error');
@@ -125,13 +125,15 @@ componentDidMount(){
       <section className="LeftSideFiltersWrapper col-lg-2">
           <div className="form-group col-lg-12">
               <div className="input-group col-lg-12">
+              <div className="row">
                <Multiselect className="form-control LeftSideFiltersInputBox LeftSideFiltersDrop"
                     id="allIndustries" name="allIndustries" placeholder="All Industries"
                     
                       options={this.state.allIndustries}
                         isObject={false}
                         style={this.style}
-                   />                   
+                   />   
+                  </div>                 
               </div>
           </div> 
 
@@ -139,9 +141,9 @@ componentDidMount(){
               <div className="input-group col-lg-12">
                 <div className="row">
                    <Multiselect className="form-control LeftSideFiltersInputBox LeftSideFiltersDrop"
-                    id="allSectors" name="allSectors" placeholder="All Sectors"
+                    id="allFunctionalAreas" name="allFunctionalAreas" placeholder="All Functional Areas"
                     
-                      options={this.state.allSectors}
+                      options={this.state.allFunctionalAreas}
                         isObject={false}
                         style={this.style}
                    />    

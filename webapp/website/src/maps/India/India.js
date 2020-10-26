@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import Axios 				from 'axios';
 import Swal 				from 'sweetalert2';
-
+import LeftMenu from '../../common/LeftMenu/LeftMenu.js';
+import LeftSideFilters from '../../common/LeftSideFilters/LeftSideFilters.js';
 import '../global.css';
 import './india.css';
 
@@ -28,6 +29,7 @@ export default class India extends Component{
 	render(){
 		return(
 			<section className="mapWrapper">
+
 				<div className="india">
 					<div className="ks">
 						<img src="Maps/India/Kashmir.png" className="kashmir" onMouseOver={e => (e.currentTarget.src = "/Maps/India/Kashmir1.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/India/Kashmir.png")}/>

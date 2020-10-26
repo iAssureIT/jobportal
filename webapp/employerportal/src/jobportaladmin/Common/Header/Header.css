@@ -1,4 +1,5 @@
 .headerWrapper{
+  position: relative;
   height:45px;
   background-color: #2F3036;
   
@@ -14,6 +15,10 @@
 }
 .headerJobWrapper{
   width:28%;
+
+}
+.headerLogoWrapper{
+  border-right:none;
 }
 .headerBellWrapper{
   width:12%;
@@ -55,6 +60,10 @@
   margin-top:13px;
   transform: translate(-30%, 0%);
 }
+.headerBellWrapper i:hover{
+  cursor: pointer;
+  color:var(--yellow-button-color);
+}
 .headerBellbadge{
   position: relative;
   height:10px;
@@ -69,10 +78,11 @@
 }
 .headerProfileWrapper{
   padding-top:8px;
-  padding-left:12px;
+  
 }
 .headerProfileName{
   font-size:12px;
+  padding-left:12px;
 }
 .headerProfileImg{
   width:30px;
@@ -85,6 +95,7 @@
 .headerToggel:hover, .headerJob:hover,
 .headerProfileWrapper i:hover{
   cursor: pointer;
+  color:var(--yellow-button-color);
 }
 
 .headerToggel{
@@ -97,7 +108,108 @@
   border: 1px solid #4F515B;
   border-radius:2px;
 }
+.headerToggel:hover{
+  cursor: pointer;
+}
 .headerToggel i{
   padding-top:3px;
 }
 
+.signOutToggel{
+  position: relative;
+  width:100%;
+  height: 150px;
+  margin-top:5px;
+  background-color:var(--header-bg-color  );
+  z-index:5;
+  border: 2px solid var(--header-border-color);
+
+}
+
+.signOutToggelProfileImg img{
+  width:60px;
+  height:60px;
+  margin-left:50%;
+  margin-top:15px;
+  transform: translate(-50%,0);
+  border-radius:50%;
+}
+.signOutToggelProfileName{
+  text-align:center;
+  margin-top:10px;
+  padding-bottom:5px;
+  border-bottom:2px solid var(--header-border-color);
+  
+}
+.signOutButton{
+  padding:3px;
+  border:1px solid var(--header-border-color);
+  margin-top:5px;
+  text-align:center;
+  font-size:11px;
+  border-radius:3px;
+  margin-left:5px;
+  margin-right:5px;
+  transition:all 1s;
+}
+.signOutButton:hover{
+  cursor: pointer;
+  background-color:var(--yellow-button-color);
+}
+.barsToggel{
+  position: relative;
+  width:255px;
+  height: 170px;
+  background:var(--header-bg-color  );
+  z-index:3;
+  margin-top:0px;
+  border:1px solid var(--header-border-color);
+}
+.notificationBox{
+  position: relative;
+  width:225px;
+  height: 170px;
+  background:var(--header-bg-color  );
+  z-index:3;
+  top:10px;
+  border:1px solid var(--header-border-color);
+  left:-173px;
+}
+.notificationCount{
+  text-align:center;
+  height:34px;
+  
+  font-size:13px;
+  border-bottom:1px solid var(--header-border-color);
+  padding-top:7px;
+  background:var(--header-bg-color  );
+}
+.notificationMessege{
+  height:34px;
+
+  font-size:12px;
+  border-bottom:1px solid var(--header-border-color);
+  padding-top:7px;
+  text-align:left;
+  background:var(--header-bg-color  );
+  
+}
+.notificationMessegeText{
+  margin-left:12px;
+}
+.MessagesTime{
+  font-size:10px;
+  padding-top:3px;
+}
+.notificationMessege:hover{
+  cursor: pointer;
+  background:var(--main-bg-color );
+
+}
+.notificationCount:hover{
+  cursor: pointer;
+  background:var(--main-bg-color );
+}
+.barsToggel .notificationMessege{
+  color:#fff;
+}
