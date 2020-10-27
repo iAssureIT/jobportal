@@ -186,42 +186,15 @@ axios.post('/api/locationtypemaster/post',formvalues)
             })
 
 // var task = cron.schedule('* * * * *', async () => {
-var task = cron.schedule('*/30 * * * *', async () => {
-    var booking = await getBookings();
-});
+// var task = cron.schedule('*/30 * * * *', async () => {
+//     var booking = await getBookings();
+// });
 
-var notification = cron.schedule('*/5 * * * *', async () => {
-    var push_notification = await sendPushNotificationToDriver();
-});
+// var notification = cron.schedule('*/5 * * * *', async () => {
+//     var push_notification = await sendPushNotificationToDriver();
+// });
 
-function getBookings() {
-	return new Promise(function (resolve, reject) {
-		axios.get('http://localhost:'+globalVariable.port+'/api/alertSystem/vendorAcceptanceAlert')
-	    .then((response) => {
-	    	resolve(response);
-	        // console.log("response",response);
-	    })
-	    .catch((error) => {
-	        //console.log("error",error);
 
-	    })
-    });
-	
-}
-
-function sendPushNotificationToDriver() {
-	return new Promise(function (resolve, reject) {
-		axios.post('http://localhost:'+globalVariable.port+'/api/bookingmaster/post/send_push_notification')
-	    .then((response) => {
-	        resolve(response);
-	    })
-	    .catch((error) => {
-	        console.log("error",error);
-
-	    })
-    });
-	
-}
 
 app.post('/send-email', (req, res)=> {
 	GlobalMaster.findOne({type:'EMAIL'})
