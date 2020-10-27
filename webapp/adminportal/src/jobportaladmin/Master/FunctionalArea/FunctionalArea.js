@@ -18,7 +18,7 @@ class FunctionalArea extends Component {
                 attributeName   : "industry"
             },
             "oneTableHeading"   : {
-                industry  : "Industry",
+                industry        : "Industry",
                 actions         : 'Action',
             },
             "oneTableObjects"   : {
@@ -40,7 +40,7 @@ class FunctionalArea extends Component {
             },
             "tableHeading"      : {
                 industry              : "Industry",
-                functionalArea        : "FunctionalArea",
+                functionalArea        : "Functional Area",
                 actions               : 'Action',
             },
             "tableObjects"      : {

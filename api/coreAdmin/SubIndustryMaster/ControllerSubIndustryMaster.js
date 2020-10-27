@@ -72,8 +72,7 @@ exports.fetchSubIndustries = (req, res, next)=>{
 
     // console.log("fetchModels req.body = ",req.body);
 
-    SubIndustryMaster
-        .aggregate([{
+    SubIndustryMaster.aggregate([{
             $lookup:
                 {
                    from: "industrymasters",

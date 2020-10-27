@@ -40,7 +40,7 @@ class SubIndustry extends Component {
             },
             "tableHeading"      : {
                 industry              : "Industry",
-                subindustry        : "SubIndustry",
+                subindustry           : "Sub Industry",
                 actions               : 'Action',
             },
             "tableObjects"      : {
@@ -173,7 +173,7 @@ class SubIndustry extends Component {
                                         oneTableHeading={this.state.oneTableHeading}
                                         oneTableObjects={this.state.oneTableObjects}
                                         oneeditId ={this.props.oneFieldEditId}
-                                        history={this.props.history}   
+                                        history={this.props.history}
                                         
                                         bulkRequired={true}
                                         onefieldurl="/api/subindustrymaster/bulkUploadbrand" 

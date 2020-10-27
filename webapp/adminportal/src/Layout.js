@@ -25,6 +25,7 @@ import CompanyProfileView   from './coreadmin/CompanyProfile/CompanyProfileView.
 // =============  Master =======================
 import AddressType          from "./jobportaladmin/Master/AddressType/AddressType.js"
 import Industry             from "./jobportaladmin/Master/Industry/Industry.js"
+import SubIndustry          from "./jobportaladmin/Master/SubIndustry/SubIndustry.js"
 import FunctionalArea       from "./jobportaladmin/Master/FunctionalArea/FunctionalArea.js"
 import JobCategory          from "./jobportaladmin/Master/JobCategory/JobCategory.js"
 import JobType              from "./jobportaladmin/Master/JobType/JobType.js"
@@ -96,6 +97,10 @@ class Layout extends Component  {
                                                         <Route path="/address-type/:fieldID" exact strict component={AddressType} />
                                                         <Route path="/industry" exact strict component={Industry} />
                                                         <Route path="/industry/:fieldID" exact strict component={Industry} />
+                                                        
+                                                        <Route path="/subindustry" exact strict component={SubIndustry} />
+                                                        <Route path="/subindustry/:fieldID" exact strict component={SubIndustry} />
+                                                        
                                                         <Route path="/functional-area" exact strict component={FunctionalArea} />
                                                         <Route path="/functional-area/:fieldID" exact strict component={FunctionalArea} />
                                                         <Route path="/job-category" exact strict component={JobCategory} />
@@ -104,6 +109,11 @@ class Layout extends Component  {
                                                         <Route path="/job-type/:fieldID" exact strict component={JobType} />
                                                         <Route path="/qualification-level" exact strict component={QualificationLevel} />
                                                         <Route path="/qualification-level/:fieldID" exact strict component={QualificationLevel} />
+                                                        <Route path="/university" exact strict component={University} />
+                                                        <Route path="/university/:fieldID" exact strict component={University} />
+                                                        
+                                                        <Route path="/collages" exact strict component={Collage} />
+                                                        <Route path="/collages/:fieldID" exact strict component={Collage} />
                                                         
                                                         {/*<Route path="/technicalMaster/tax-name" exact strict component={TaxName} />*/}
                                                         <Route path="/technicalMaster/tax-name"  render={(props)=><GlobalMaster {...props}/> } exact />
