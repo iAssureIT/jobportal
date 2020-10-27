@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const mongodb = require('mongodb');
-
+var ObjectID = require('mongodb').ObjectID;
 
 const CandidateProfile 		= require('./ModelCandidateProfile.js');
 
@@ -52,8 +52,9 @@ exports.insertCandidateBasicInfo = (req, res, next)=>{
 }
 exports.getSingleCandidate = (req,res,next)=>{
     //CandidateProfile.findOne({_id : req.params.candidateID})
-    CandidateProfile('candidatemaster').aggregate([
-        {$match:{"_id": req.params.candidateID} },
+    console.log("hsadh",req.params.candidateID);
+    CandidateProfile.aggregate([
+        {$match:{"_id": ObjectID(req.params.candidateID)} },
         {$lookup:{
                    from: "addresstypemasters",
                    localField: "address.addressType",
@@ -79,6 +80,7 @@ exports.getSingleCandidate = (req,res,next)=>{
         res.status(200).json(data);
     })
     .catch(err =>{
+        console.log(err)
         res.status(500).json({
             error: err
         });
