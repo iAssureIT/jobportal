@@ -188,6 +188,25 @@ exports.updateOneCandidateAddress = (req,res,next)=>{
         });
 };
 
+exports.deleteAddress = (req,res,next)=>{   
+    CandidateProfile.updateOne(
+            { _id:req.params.candidateID},  
+            {
+                $pull: { 'address' : {_id:req.params.addressID}}
+            }
+        )
+        .exec()
+        .then(data=>{
+            if(data.nModified == 1){
+                res.status(200).json({ deleted : true });
+            }else{
+                res.status(401).json({ deleted : false });
+            }
+        })
+        .catch(err =>{
+            res.status(500).json({ error: err });
+        });
+};
 exports.updateCandidateContact = (req,res,next)=>{
    CandidateProfile.updateOne(
             { "_id":req.body.candidateID },  
@@ -279,7 +298,25 @@ exports.updateOneCandidateAcademics = (req,res,next)=>{
         });
 };
 
-
+exports.deleteAcademics = (req,res,next)=>{   
+    CandidateProfile.updateOne(
+            { _id:req.params.candidateID},  
+            {
+                $pull: { 'academics' : {_id:req.params.academicsID}}
+            }
+        )
+        .exec()
+        .then(data=>{
+            if(data.nModified == 1){
+                res.status(200).json({ deleted : true });
+            }else{
+                res.status(401).json({ deleted : false });
+            }
+        })
+        .catch(err =>{
+            res.status(500).json({ error: err });
+        });
+};
 exports.addCandidateExperience = (req,res,next)=>{
     CandidateProfile.updateOne(
             { _id: req.body.candidateID },  
@@ -341,6 +378,25 @@ exports.updateOneCandidateExperience = (req,res,next)=>{
                 res.status(200).json({ updated : true });
             }else{
                 res.status(200).json({ updated : false });
+            }
+        })
+        .catch(err =>{
+            res.status(500).json({ error: err });
+        });
+};
+exports.deleteExperience = (req,res,next)=>{   
+    CandidateProfile.updateOne(
+            { _id:req.params.candidateID},  
+            {
+                $pull: { 'workExperience' : {_id:req.params.experienceID}}
+            }
+        )
+        .exec()
+        .then(data=>{
+            if(data.nModified == 1){
+                res.status(200).json({ deleted : true });
+            }else{
+                res.status(401).json({ deleted : false });
             }
         })
         .catch(err =>{
@@ -424,7 +480,25 @@ exports.updateOneCandidateSkill = (req,res,next)=>{
             res.status(500).json({ error: err });
         });
 };
-
+exports.deleteSkill = (req,res,next)=>{   
+    CandidateProfile.updateOne(
+            { _id:req.params.candidateID},  
+            {
+                $pull: { 'skillCertification' : {_id:req.params.skillID}}
+            }
+        )
+        .exec()
+        .then(data=>{
+            if(data.nModified == 1){
+                res.status(200).json({ deleted : true });
+            }else{
+                res.status(401).json({ deleted : false });
+            }
+        })
+        .catch(err =>{
+            res.status(500).json({ error: err });
+        });
+};
 exports.getCandidateList = (req,res,next)=>{
     CandidateProfile.find({})
     .exec()
