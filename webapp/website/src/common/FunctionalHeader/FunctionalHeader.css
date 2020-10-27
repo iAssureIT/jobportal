@@ -1,4 +1,4 @@
-@font-face {
+font-face {
   font-family:'Montserrat-Regular';
   src: url('/fonts/Montserrat/Montserrat-Regular.ttf');
 }
@@ -17,6 +17,7 @@
 	height: 120px;
 	padding-top: 40px;
 	padding-left: 0%;
+	/*background-color: pink;*/
 }
 
 .breadCrumbHeader{
@@ -26,6 +27,7 @@
 	padding-top: 70px;
 	font-size: 11px;
 	font-family: 'Montserrat-Regular';
+	/*background-color: blue;*/
 }
 
 .FunctionWiseTitle{
@@ -33,18 +35,23 @@
 	color: #ddd;
 	text-align: left;
 	padding-top: 60px;
+	/*padding-left: 20px;*/
 	font-size: 28px;
 	color: #f5a721;
 	font-family: 'Montserrat-Bold';
+	/*background-color: green;*/
 }
 .rightFunctionHeader{
+	/*background-color: yellow;*/
 	height: 120px;
 }
 
 .rightFunctionHeader1{
+	/*background-color:pink;*/
 	height: 120px;
 }
 .rightFunctionHeader2{
+	/*background-color: blue;*/
 	height: 120px;
 }
 
@@ -149,3 +156,52 @@
 	background-color: #444;
 
 }
+
+.barsToggel{
+	position: absolute;
+	top:60px;
+	right:14px;
+	width:200px;
+	height: auto;
+	min-height: 50px;
+	background-color: #191c24;
+	z-index:3;
+	margin-top:0px;
+	border:1px solid #4b5666;
+}
+.notificationBox{
+	position: relative;
+	width:200px;
+	height: auto;
+	min-height: 100px;
+	background-color: #191c24;
+	z-index:3;
+	top:12px;
+	border:1px solid #4b5666;
+	
+}
+
+.notificationMessege{
+	height:40px;
+
+	font-size:12px;
+	
+	padding-top:10px;
+	padding-bottom: 15px;
+	text-align:left;
+
+	
+}
+
+.notificationMessegeText{
+	margin-left:12px;
+	font-size: 14px;
+	font-family: 'Montserrat-Regular';
+}
+
+.notificationMessege:hover{
+	cursor: pointer;
+	background-color: #1f262d;
+
+}
+

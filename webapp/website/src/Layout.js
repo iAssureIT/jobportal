@@ -152,7 +152,7 @@ class Layout extends Component  {
             return (
                 <div className="wrapper PageFunctionWiseWrapper">
 
-                {/*<MapHeader/>*/}
+                {<MapHeader/>}
                     <Router >
                         <Switch >
 
