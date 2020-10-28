@@ -23,6 +23,7 @@
 import React,{useEffect,useState} from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'font-awesome/css/font-awesome.min.css';
 import './coreadmin/css/root.css';
 import Layout from './Layout.js';
 import './lib/router.js';

@@ -8,7 +8,7 @@ export default class Maharashtra extends Component{
 
 	render(){
 		return(
-			<div className="bodyWrapper" className="col-lg-12">
+			<div className="bodyWrapper">
 				<div className="stateWrapper">
 					<div className="mum"> 
 						<img src="/Maps/Maharashtra/Mumbai_City.png" className="mumbai" alt="city"/>

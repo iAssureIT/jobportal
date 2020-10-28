@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-import './Karmataka.css';
+import './Karnataka.css';
 import '../global.css';
 
 

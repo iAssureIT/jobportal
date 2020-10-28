@@ -51,7 +51,7 @@ export default class JobPostProfile extends Component{
 		var job_id = this.props.match.params.job_id;
 		console.log("job_id = ", job_id);
 
-		Axios.get("http://localhost:3009/get/one/"+job_id)
+		Axios.get("/api/jobposting/get/one/"+job_id)
 			.then(response=>{
                
 				console.log("response.data = ",response.data);

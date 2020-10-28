@@ -284,7 +284,7 @@ export default class JobPosting extends Component{
 			""; 
 			status = true;
 		}
-		if(this.state.pincode.length<=0){
+		/*if(this.state.pincode.length<=0){
 			document.getElementById("pincodeError").innerHTML=  
 			"Enter pincode";  
 			status = false; 
@@ -292,7 +292,7 @@ export default class JobPosting extends Component{
 			document.getElementById("pincodeError").innerHTML=  
 			""; 
 			status = true;
-		}
+		}*/
        /* if (this.state.country.length<=0) {
         	document.getElementById("countryError").innerHTML=
         	"Select country"; 
@@ -376,7 +376,7 @@ export default class JobPosting extends Component{
 	}	
 		
 	insertData(formValues){
-		Axios.post("http://localhost:3009/post",formValues)
+		Axios.post("/api/jobposting/post",formValues)
 			.then(response => {
 				console.log("Inside axios",response.data);
 				if(response.data.message==="Job details Inserted Successfully"){
@@ -420,7 +420,7 @@ export default class JobPosting extends Component{
 		}
 
 	updateData(formValues){
-		Axios.put("http://localhost:3009/update", formValues)
+		Axios.put("/api/jobposting/update", formValues)
 		.then(response=>{
 			console.log("formValues :", formValues);
 			if(response.data.message==="Job details updated Successfully!"){
