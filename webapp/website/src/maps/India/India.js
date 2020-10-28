@@ -38,8 +38,8 @@ export default class India extends Component{
 	}
 	onStateClick = (stateName) => {
 		var routeName = "/"+stateName;
-		alert(routeName);
 		this.props.history.push(routeName);
+
 	}
 	render(){
 		return(

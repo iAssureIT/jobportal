@@ -137,12 +137,13 @@ import '../../coreadmin/companysetting/css/CompanySetting.css';
                           </ul>    
                       </div>
                       <div className="tab-content col-lg-9 col-md-9 col-xs-12 col-sm-12">  
-                        <div className="tab-pane active" id="AddressType"><AddressType  editId={this.state.editId} history={this.props.history}/>  </div>
-                        <div className="tab-pane" id="Industry"><Industry  editId={this.state.editId} history={this.props.history}/>  </div>
+                        <div className="tab-pane active" id="AddressType"><AddressType  editId={this.state.editId} 
+                                                                                        history={this.props.history} />  </div>
+                        <div className="tab-pane" id="Industry"><Industry  editId={this.state.editId}  history={this.props.history}/>  </div>
                         
-                        <div className="tab-pane" id="SubIndustry"><SubIndustry  editId={this.state.editId} history={this.props.history}/>  </div>
+                        <div className="tab-pane" id="SubIndustry"><SubIndustry  editId={this.state.editId} oneFieldEditId={this.state.oneFieldEditId} history={this.props.history}/>  </div>
                         
-                        <div className="tab-pane" id="FunctionalArea"><FunctionalArea  editId={this.state.editId} history={this.props.history}/>  </div>
+                        <div className="tab-pane" id="FunctionalArea"><FunctionalArea  editId={this.state.editId} oneFieldEditId={this.state.oneFieldEditId} history={this.props.history}/>  </div>
                         <div className="tab-pane" id="JobCategory"><JobCategory  editId={this.state.editId} history={this.props.history}/>  </div>
                         <div className="tab-pane" id="JobType"><JobType  editId={this.state.editId} history={this.props.history}/>  </div>
                         <div className="tab-pane" id="JobTime"><JobTime  editId={this.state.editId} history={this.props.history}/>  </div>

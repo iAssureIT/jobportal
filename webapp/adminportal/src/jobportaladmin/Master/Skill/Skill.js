@@ -26,36 +26,22 @@ class Skill extends Component{
           apiLink: '/api/skillmaster/',
           paginationApply: false,
           searchApply: false,
-          editUrl: '/address-type'
+          editUrl: '/project-master-data'
       },
       "startRange": 0,
       "limitRange": 10,
-      "editId": this.props.match ? this.props.match.params.fieldID : ''
+      "editId": ''
       };
   }
-  componentDidMount() {
-    var editId = this.props.match ? this.props.match.params.fieldID : '';
-    this.setState({
-        editId: editId
-    })
-    window.scrollTo(0, 0);
-  } 
-  componentWillReceiveProps(nextProps) {
-      var editId = nextProps.match ? nextProps.match.params.fieldID : '';
-      if (editId) {
-          this.setState({
-              editId: editId
-          })
-      }
-  }
-
+  
   render() {
     return (
       <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12">
           <OneFieldForm fields={this.state.fields}
                         tableHeading={this.state.tableHeading}
                         tableObjects={this.state.tableObjects}
-                        editId ={this.props.match ? this.props.match.params.fieldID : ''}
+                        editId ={this.props.editId}
+                        masterFieldForm = {true}   
                         history={this.props.history} />
       </div>
     );

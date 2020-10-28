@@ -26,28 +26,14 @@ class Qualification extends Component{
           apiLink: '/api/qualificationmaster/',
           paginationApply: false,
           searchApply: false,
-          editUrl: '/qualification'
+          editUrl: '/project-master-data'
       },
       "startRange": 0,
       "limitRange": 10,
-      "editId": this.props.match ? this.props.match.params.fieldID : ''
+      "editId":  ''
       };
   }
-  componentDidMount() {
-    var editId = this.props.match ? this.props.match.params.fieldID : '';
-    this.setState({
-        editId: editId
-    })
-    window.scrollTo(0, 0);
-  } 
-  componentWillReceiveProps(nextProps) {
-      var editId = nextProps.match ? nextProps.match.params.fieldID : '';
-      if (editId) {
-          this.setState({
-              editId: editId
-          })
-      }
-  }
+  
 
   render() {
     return (
@@ -55,7 +41,8 @@ class Qualification extends Component{
           <OneFieldForm fields={this.state.fields}
                         tableHeading={this.state.tableHeading}
                         tableObjects={this.state.tableObjects}
-                        editId ={this.props.match ? this.props.match.params.fieldID : ''}
+                        editId ={this.props.editId}
+                        masterFieldForm = {true}  
                         history={this.props.history} />
       </div>
     );
