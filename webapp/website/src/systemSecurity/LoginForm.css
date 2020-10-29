@@ -386,3 +386,54 @@ width: 100px;
 	font-family: 'Montserrat-Regular';
 	font-size: 11px;
 }
+.OTPSentWrapper{
+	min-height: 650px;
+	height: auto;
+	background-color:#242931;
+}
+
+.OTPSent{
+	height: 250px;
+	margin-top: 150px;
+	background-color: #242931;
+	border:3px solid #D3950A;
+	border-radius: 10px;
+}
+
+.OTPSentTitle{
+	height: 80px;
+	color: #D3950A;
+	font-size:20px;
+	text-align: center;
+	padding-top: 40px;
+}
+
+.OTPSentHr{
+	width:92%;
+	
+	border-top: 1px solid #D3950A;
+}
+
+.OTPSentSentence{
+	text-align: center;
+	color: #aaa;
+	height: 60px;
+	line-height: 1.8;
+	letter-spacing: 1px;
+	margin-top: 10px;
+}
+
+.buttonOTPSent{
+	background-color: #D3950A;
+	color: #fff;
+	border: 1px solid #D3950A;
+	margin-bottom: 2px;
+}
+
+.buttonOTPSent:hover{
+	background-color: transparent;
+	color: #D3950A;
+	border: 2px solid #D3950A;
+	font-weight: bold;
+	margin-bottom: 0px;
+}

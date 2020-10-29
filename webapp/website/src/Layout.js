@@ -88,6 +88,11 @@ class Layout extends Component  {
         const roles = localStorage.getItem("roles");
         var roleArr = [];
         roleArr.push(roles);
+
+        var pageUrl = window.location.pathname;
+        let a = pageUrl ? pageUrl.split('/') : "";
+        console.log("a:",a);
+
         if (this.state.loggedIn) {
             return (
             <Router>
@@ -176,7 +181,6 @@ class Layout extends Component  {
                              <Route exact path="/mizoram"        component={Mizoram }  />
                              <Route exact path="/nagaland"        component={Nagaland }  />
                              <Route exact path="/orissa"        component={Orissa }  />
-
 
                             <Route path="/login" exact strict component={Login} />
                             <Route path="/signup" exact strict component={SignUp} />
