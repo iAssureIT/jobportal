@@ -9,167 +9,97 @@ export default class Orissa extends Component{
 	render(){
 		return(
 			<div className="bodyWrapper">
-				<div className="stateWrapper" style={{width:"90%"}}>
+				<div className="stateWrapper">
 					<div className="kas"> 
 						<img src="/Maps/Orissa/Malkangir.png" className="malkangir" alt="Malkangir" onMouseOver={e => (e.currentTarget.src = "/Maps/Orissa/Malkangir_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Orissa/Malkangir.png")}/>
 					</div>
 					<div className="kan"> 
-						<img src="/Maps/Orissa/Jhabua.png" className="jhabua" alt="Jhabua"  onMouseOver={e => (e.currentTarget.src = "/Maps/Orissa/Jhabua_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Orissa/Jhabua.png")}/>
+						<img src="/Maps/Orissa/Koraput.png" className="koraput" alt="Koraput"  onMouseOver={e => (e.currentTarget.src = "/Maps/Orissa/Koraput_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Orissa/Koraput.png")}/>
 					</div>
 					<div className="kan"> 
-						<img src="/Maps/Orissa/Ratlam.png" className="ratlam" alt="Ratlam"  onMouseOver={e => (e.currentTarget.src = "/Maps/Orissa/Ratlam_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Orissa/Ratlam.png")}/>
+						<img src="/Maps/Orissa/Nabarangpur.png" className="nabarangpur" alt="Nabarangpur"  onMouseOver={e => (e.currentTarget.src = "/Maps/Orissa/Nabarangpur_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Orissa/Nabarangpur.png")}/>
 					</div>
 					<div className="kan"> 
-						<img src="/Maps/Orissa/Mandsaur.png" className="mandsaur" alt="Mandsaur"  onMouseOver={e => (e.currentTarget.src = "/Maps/Orissa/Mandsaur_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Orissa/Mandsaur.png")}/>
+						<img src="/Maps/Orissa/Rayagada.png" className="rayagada" alt="Rayagada"  onMouseOver={e => (e.currentTarget.src = "/Maps/Orissa/Rayagada_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Orissa/Rayagada.png")}/>
 					</div>
 					<div className="kan"> 
-						<img src="/Maps/Orissa/Neemuch.png" className="neemuch" alt="Neemuch"  onMouseOver={e => (e.currentTarget.src = "/Maps/Orissa/Neemuch_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Orissa/Neemuch.png")}/>
+						<img src="/Maps/Orissa/Kalahandi.png" className="kalahandi" alt="Kalahandi"  onMouseOver={e => (e.currentTarget.src = "/Maps/Orissa/Kalahandi_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Orissa/Kalahandi.png")}/>
 					</div>
 					<div className="kan"> 
-						<img src="/Maps/Orissa/Barwani.png" className="barwani" alt="Barwani"  onMouseOver={e => (e.currentTarget.src = "/Maps/Orissa/Barwani_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Orissa/Barwani.png")}/>
+						<img src="/Maps/Orissa/Nuapada.png" className="nuapada" alt="Nuapada"  onMouseOver={e => (e.currentTarget.src = "/Maps/Orissa/Nuapada_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Orissa/Nuapada.png")}/>
 					</div>
 					<div className="kan"> 
-						<img src="/Maps/Orissa/Khargone.png" className="khargone" alt="Khargone"  onMouseOver={e => (e.currentTarget.src = "/Maps/Orissa/Khargone_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Orissa/Khargone.png")}/>
+						<img src="/Maps/Orissa/Balangir.png" className="balangir" alt="Balangir"  onMouseOver={e => (e.currentTarget.src = "/Maps/Orissa/Balangir_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Orissa/Balangir.png")}/>
 					</div>
 					<div className="kan"> 
-						<img src="/Maps/Orissa/Burhanpur.png" className="burhanpur" alt="Burhanpur"  onMouseOver={e => (e.currentTarget.src = "/Maps/Orissa/Burhanpur_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Orissa/Burhanpur.png")}/>
+						<img src="/Maps/Orissa/Kandhamal.png" className="kandhamal" alt="Kandhamal"  onMouseOver={e => (e.currentTarget.src = "/Maps/Orissa/Kandhamal_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Orissa/Kandhamal.png")}/>
 					</div>
 					<div className="kan"> 
-						<img src="/Maps/Orissa/Khandwa.png" className="khandwa" alt="Khandwa"  onMouseOver={e => (e.currentTarget.src = "/Maps/Orissa/Khandwa_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Orissa/Khandwa.png")}/>
+						<img src="/Maps/Orissa/Ganpati.png" className="ganpati" alt="Ganpati"  onMouseOver={e => (e.currentTarget.src = "/Maps/Orissa/Ganpati_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Orissa/Ganpati.png")}/>
 					</div>
 					<div className="kan"> 
-						<img src="/Maps/Orissa/Harda.png" className="harda" alt="Harda"  onMouseOver={e => (e.currentTarget.src = "/Maps/Orissa/Harda_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Orissa/Harda.png")}/>
+						<img src="/Maps/Orissa/Ganjam.png" className="ganjam" alt="Ganjam"  onMouseOver={e => (e.currentTarget.src = "/Maps/Orissa/Ganjam_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Orissa/Ganjam.png")}/>
 					</div>
 					<div className="kan"> 
-						<img src="/Maps/Orissa/Betul.png" className="betul" alt="Betul"  onMouseOver={e => (e.currentTarget.src = "/Maps/Orissa/Betul_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Orissa/Betul.png")}/>
+						<img src="/Maps/Orissa/Puri.png" className="puri" alt="Puri"  onMouseOver={e => (e.currentTarget.src = "/Maps/Orissa/Puri_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Orissa/Puri.png")}/>
 					</div>
 					<div className="kan"> 
-						<img src="/Maps/Orissa/Chhindwara.png" className="chhindwara" alt="Chhindwara"  onMouseOver={e => (e.currentTarget.src = "/Maps/Orissa/Chhindwara_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Orissa/Chhindwara.png")}/>
+						<img src="/Maps/Orissa/Khordha.png" className="khordha" alt="Khordha"  onMouseOver={e => (e.currentTarget.src = "/Maps/Orissa/Khordha_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Orissa/Khordha.png")}/>
 					</div>
 					<div className="kan"> 
-						<img src="/Maps/Orissa/Seoni.png" className="seoni" alt="Seoni"  onMouseOver={e => (e.currentTarget.src = "/Maps/Orissa/Seoni_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Orissa/Seoni.png")}/>
+						<img src="/Maps/Orissa/Nayagarh.png" className="nayagarh" alt="Nayagarh"  onMouseOver={e => (e.currentTarget.src = "/Maps/Orissa/Nayagarh_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Orissa/Nayagarh.png")}/>
 					</div>
 					<div className="kan"> 
-						<img src="/Maps/Orissa/Balaghat.png" className="balaghat" alt="Balaghat"  onMouseOver={e => (e.currentTarget.src = "/Maps/Orissa/Balaghat_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Orissa/Balaghat.png")}/>
+						<img src="/Maps/Orissa/Boudh.png" className="boudh" alt="Boudh"  onMouseOver={e => (e.currentTarget.src = "/Maps/Orissa/Boudh_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Orissa/Boudh.png")}/>
 					</div>
 					<div className="kan"> 
-						<img src="/Maps/Orissa/Mandla.png" className="mandla" alt="Mandla" onMouseOver={e => (e.currentTarget.src = "/Maps/Orissa/Mandla_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Orissa/Mandla.png")}/>
+						<img src="/Maps/Orissa/Subarnapur.png" className="subarnapur" alt="Subarnapur" onMouseOver={e => (e.currentTarget.src = "/Maps/Orissa/Subarnapur_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Orissa/Subarnapur.png")}/>
 					</div>
 					<div className="kan"> 
-						<img src="/Maps/Orissa/Dindori.png" className="dindori" alt="Dindori"  onMouseOver={e => (e.currentTarget.src = "/Maps/Orissa/Dindori_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Orissa/Dindori.png")}/>
+						<img src="/Maps/Orissa/Bargarh.png" className="bargarh" alt="Bargarh"  onMouseOver={e => (e.currentTarget.src = "/Maps/Orissa/Bargarh_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Orissa/Bargarh.png")}/>
 					</div>
 					<div className="kan"> 
-						<img src="/Maps/Orissa/Annupur.png" className="annupur" alt="Annupur"  onMouseOver={e => (e.currentTarget.src = "/Maps/Orissa/Annupur_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Orissa/Annupur.png")}/>
+						<img src="/Maps/Orissa/Jharsugunda.png" className="jharsugunda" alt="Jharsugunda"  onMouseOver={e => (e.currentTarget.src = "/Maps/Orissa/Jharsugunda_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Orissa/Jharsugunda.png")}/>
 					</div>
 					<div className="kan"> 
-						<img src="/Maps/Orissa/Shahdol.png" className="shahdol" alt="Shahdol"  onMouseOver={e => (e.currentTarget.src = "/Maps/Orissa/Shahdol_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Orissa/Shahdol.png")}/>
+						<img src="/Maps/Orissa/Sambalpur.png" className="sambalpur" alt="Sambalpur"  onMouseOver={e => (e.currentTarget.src = "/Maps/Orissa/Sambalpur_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Orissa/Sambalpur.png")}/>
 					</div>
 					<div className="kan"> 
-						<img src="/Maps/Orissa/Sidhi.png" className="sidhi" alt="Sidhi"  onMouseOver={e => (e.currentTarget.src = "/Maps/Orissa/Sidhi_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Orissa/Sidhi.png")}/>
+						<img src="/Maps/Orissa/Deogarh.png" className="deogarh" alt="Deogarh"  onMouseOver={e => (e.currentTarget.src = "/Maps/Orissa/Deogarh_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Orissa/Deogarh.png")}/>
 					</div>
 					<div className="kan"> 
-						<img src="/Maps/Orissa/Singrauli.png" className="singrauli" alt="Singrauli"  onMouseOver={e => (e.currentTarget.src = "/Maps/Orissa/Singrauli_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Orissa/Singrauli.png")}/>
+						<img src="/Maps/Orissa/Angul.png" className="angul" alt="Angul"  onMouseOver={e => (e.currentTarget.src = "/Maps/Orissa/Angul_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Orissa/Angul.png")}/>
 					</div>
 					<div className="kan"> 
-						<img src="/Maps/Orissa/Rewa.png" className="rewa" alt="Rewa"  onMouseOver={e => (e.currentTarget.src = "/Maps/Orissa/Rewa_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Orissa/Rewa.png")}/>
+						<img src="/Maps/Orissa/Dhenkanal.png" className="dhenkanal" alt="Dhenkanal"  onMouseOver={e => (e.currentTarget.src = "/Maps/Orissa/Dhenkanal_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Orissa/Dhenkanal.png")}/>
 					</div>
 					<div className="kan"> 
-						<img src="/Maps/Orissa/Satna.png" className="satna" alt="Satna"  onMouseOver={e => (e.currentTarget.src = "/Maps/Orissa/Satna_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Orissa/Satna.png")}/>
+						<img src="/Maps/Orissa/Bhubaneswar.png" className="bhubaneswar" alt="Bhubaneswar"  onMouseOver={e => (e.currentTarget.src = "/Maps/Orissa/Bhubaneswar_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Orissa/Bhubaneswar.png")}/>
 					</div>
 					<div className="kan"> 
-						<img src="/Maps/Orissa/Umaria.png" className="umaria" alt="Umaria"  onMouseOver={e => (e.currentTarget.src = "/Maps/Orissa/Umaria_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Orissa/Umaria.png")}/>
+						<img src="/Maps/Orissa/Jagatsinghpur.png" className="jagatsinghpur" alt="Jagatsinghpur"  onMouseOver={e => (e.currentTarget.src = "/Maps/Orissa/Jagatsinghpur_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Orissa/Jagatsinghpur.png")}/>
 					</div>
 					<div className="kan"> 
-						<img src="/Maps/Orissa/Katni.png" className="katni" alt="Katni"  onMouseOver={e => (e.currentTarget.src = "/Maps/Orissa/Katni_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Orissa/Katni.png")}/>
+						<img src="/Maps/Orissa/Kendrapara.png" className="kendrapara" alt="Kendrapara"  onMouseOver={e => (e.currentTarget.src = "/Maps/Orissa/Kendrapara_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Orissa/Kendrapara.png")}/>
 					</div>
 					<div className="kan"> 
-						<img src="/Maps/Orissa/Jabalpur.png" className="jabalpur" alt="Jabalpur"  onMouseOver={e => (e.currentTarget.src = "/Maps/Orissa/Jabalpur_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Orissa/Jabalpur.png")}/>
+						<img src="/Maps/Orissa/Jaipur.png" className="jaipur" alt="Jaipur"  onMouseOver={e => (e.currentTarget.src = "/Maps/Orissa/Jaipur_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Orissa/Jaipur.png")}/>
 					</div>
 					<div className="kan"> 
-						<img src="/Maps/Orissa/Narsinghpur.png" className="narsinghpur" alt="Narsinghpur"  onMouseOver={e => (e.currentTarget.src = "/Maps/Orissa/Narsinghpur_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Orissa/Narsinghpur.png")}/>
+						<img src="/Maps/Orissa/Kendujhar.png" className="kendujhar" alt="Kendujhar"  onMouseOver={e => (e.currentTarget.src = "/Maps/Orissa/Kendujhar_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Orissa/Kendujhar.png")}/>
 					</div>
 					<div className="kan"> 
-						<img src="/Maps/Orissa/Hoshangabad.png" className="hoshangabad" alt="Hoshangabad"  onMouseOver={e => (e.currentTarget.src = "/Maps/Orissa/Hoshangabad_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Orissa/Hoshangabad.png")}/>
+						<img src="/Maps/Orissa/Sundararh.png" className="sundararh" alt="Sundararh"  onMouseOver={e => (e.currentTarget.src = "/Maps/Orissa/Sundararh_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Orissa/Sundararh.png")}/>
 					</div>
 					<div className="kan"> 
-						<img src="/Maps/Orissa/Dewas.png" className="dewas" alt="Dewas"  onMouseOver={e => (e.currentTarget.src = "/Maps/Orissa/Dewas_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Orissa/Dewas.png")}/>
+						<img src="/Maps/Orissa/Mayurbhanj.png" className="mayurbhanj" alt="Mayurbhanj"  onMouseOver={e => (e.currentTarget.src = "/Maps/Orissa/Mayurbhanj_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Orissa/Mayurbhanj.png")}/>
 					</div>
 					<div className="kan"> 
-						<img src="/Maps/Orissa/Indore.png" className="indore" alt="Indore"  onMouseOver={e => (e.currentTarget.src = "/Maps/Orissa/Indore_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Orissa/Indore.png")}/>
+						<img src="/Maps/Orissa/Baleswar.png" className="baleswar" alt="Baleswar"  onMouseOver={e => (e.currentTarget.src = "/Maps/Orissa/Baleswar_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Orissa/Baleswar.png")}/>
 					</div>
 					<div className="kan"> 
-						<img src="/Maps/Orissa/Dhar.png" className="dhar" alt="Dhar"  onMouseOver={e => (e.currentTarget.src = "/Maps/Orissa/Dhar_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Orissa/Dhar.png")}/>
+						<img src="/Maps/Orissa/Bhadrak.png" className="bhadrak" alt="Bhadrak"  onMouseOver={e => (e.currentTarget.src = "/Maps/Orissa/Bhadrak_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Orissa/Bhadrak.png")}/>
 					</div>
-					<div className="kan"> 
-						<img src="/Maps/Orissa/Ujjain.png" className="ujjain" alt="Ujjain"  onMouseOver={e => (e.currentTarget.src = "/Maps/Orissa/Ujjain_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Orissa/Ujjain.png")}/>
-					</div>
-					<div className="kan"> 
-						<img src="/Maps/Orissa/Shajapur.png" className="shajapur" alt="Shajapur"  onMouseOver={e => (e.currentTarget.src = "/Maps/Orissa/Shajapur_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Orissa/Shajapur.png")}/>
-					</div>
-					<div className="cha"> 
-						<img src="/Maps/Orissa/Sehore.png" className="sehore" alt="Sehore"  onMouseOver={e => e.currentTarget.src = "/Maps/Orissa/Sehore_.png"} onMouseOut={e => e.currentTarget.src = "/Maps/Orissa/Sehore.png"}/>
-					</div>
-					<div className="key"> 
-						<img src="/Maps/Orissa/Hoshangabad.png" className="hoshangabad" alt="Hoshangabad"  onMouseOver={e => e.currentTarget.src = "/Maps/Orissa/Hoshangabad_.png"} onMouseOut={e => e.currentTarget.src = "/Maps/Orissa/Hoshangabad.png"}/>
-					</div>
-					<div className="kul"> 
-						<img src="/Maps/Orissa/Agar_Malwa.png" className="agarMalwa" alt="Agar_Malwa"  onMouseOver={e => e.currentTarget.src = "/Maps/Orissa/Agar_Malwa_.png"} onMouseOut={e => e.currentTarget.src = "/Maps/Orissa/Agar_Malwa.png"}/>
-					</div>
-					<div className="man"> 
-						<img src="/Maps/Orissa/Rajgarh.png" className="rajgarh" alt="Rajgarh"  onMouseOver={e => e.currentTarget.src = "/Maps/Orissa/Rajgarh_.png"} onMouseOut={e => e.currentTarget.src = "/Maps/Orissa/Rajgarh.png"}/>
-					</div>
-					<div className="ham"> 
-						<img src="/Maps/Orissa/Bhopal.png" className="bhopal" alt="Bhopal"  onMouseOver={e => e.currentTarget.src = "/Maps/Orissa/Bhopal_.png"} onMouseOut={e => e.currentTarget.src = "/Maps/Orissa/Bhopal.png"}/>
-					</div>
-					<div className="Raisen"> 
-						<img src="/Maps/Orissa/Raisen.png" className="raisen" alt="Raisen"  onMouseOver={e => e.currentTarget.src = "/Maps/Orissa/Raisen_.png"} onMouseOut={e => e.currentTarget.src = "/Maps/Orissa/Raisen.png"}/>
-					</div>
-					<div className="bal"> 
-						<img src="/Maps/Orissa/Sagar.png" className="sagar" alt="Sagar"  onMouseOver={e => e.currentTarget.src = "/Maps/Orissa/Sagar_.png"} onMouseOut={e => e.currentTarget.src = "/Maps/Orissa/Sagar.png"}/>
-					</div>
-					<div className="sol"> 
-						<img src="/Maps/Orissa/Damoh.png" className="damoh" alt="Damoh"  onMouseOver={e => e.currentTarget.src = "/Maps/Orissa/Damoh_.png"} onMouseOut={e => e.currentTarget.src = "/Maps/Orissa/Damoh.png"}/>
-					</div>
-					<div className="shi"> 
-						<img src="/Maps/Orissa/Panna.png" className="panna" alt="Panna"  onMouseOver={e => e.currentTarget.src = "/Maps/Orissa/Panna_.png"} onMouseOut={e => e.currentTarget.src = "/Maps/Orissa/Panna.png"}/>
-					</div>
-					<div className="kin"> 
-						<img src="/Maps/Orissa/Chhatarpur.png" className="chhatarpur" alt="Chhatarpur"  onMouseOver={e => e.currentTarget.src = "/Maps/Orissa/Chhatarpur_.png"} onMouseOut={e => e.currentTarget.src = "/Maps/Orissa/Chhatarpur.png"}/>
-					</div>
-					<div className="sir"> 
-						<img src="/Maps/Orissa/Tikamgarh.png" className="tikamgarh" alt="Tikamgarh"  onMouseOver={e => e.currentTarget.src = "/Maps/Orissa/Tikamgarh_.png"} onMouseOut={e => e.currentTarget.src = "/Maps/Orissa/Tikamgarh.png"}/>
-					</div>
-					<div className="kur"> 
-						<img src="/Maps/Orissa/Niwari.png" className="niwari" alt="Niwari"  onMouseOver={e => e.currentTarget.src = "/Maps/Orissa/Niwari_.png"} onMouseOut={e => e.currentTarget.src = "/Maps/Orissa/Niwari.png"}/>
-					</div>
-					<div className="ana"> 
-						<img src="/Maps/Orissa/Vidisha.png" className="vidisha" alt="Vidisha"  onMouseOver={e => e.currentTarget.src = "/Maps/Orissa/Vidisha_.png"} onMouseOut={e => e.currentTarget.src = "/Maps/Orissa/Vidisha.png"}/>
-					</div>
-					<div className="ysr"> 
-						<img src="/Maps/Orissa/Guna.png" className="guna" alt="Guna"  onMouseOver={e => e.currentTarget.src = "/Maps/Orissa/Guna_.png"} onMouseOut={e => e.currentTarget.src = "/Maps/Orissa/Guna.png"}/>
-					</div>
-					<div className="chi"> 
-						<img src="/Maps/Orissa/Ashoknagar.png" className="ashoknagar" alt="Ashoknagar"  onMouseOver={e => e.currentTarget.src = "/Maps/Orissa/Ashoknagar_.png"} onMouseOut={e => e.currentTarget.src = "/Maps/Orissa/Ashoknagar.png"}/>
-					</div>
-					<div className="nel"> 
-						<img src="/Maps/Orissa/Shivpuri.png" className="shivpuri" alt="Shivpuri"  onMouseOver={e => e.currentTarget.src = "/Maps/Orissa/Shivpuri_.png"} onMouseOut={e => e.currentTarget.src = "/Maps/Orissa/Shivpuri.png"}/>
-					</div>
-					<div className="pra"> 
-						<img src="/Maps/Orissa/Sheopur.png" className="sheopur" alt="Sheopur"  onMouseOver={e => e.currentTarget.src = "/Maps/Orissa/Sheopur_.png"} onMouseOut={e => e.currentTarget.src = "/Maps/Orissa/Sheopur.png"}/>
-					</div>
-					<div className="gun"> 
-						<img src="/Maps/Orissa/Gwalior.png" className="gwalior" alt="Gwalior"  onMouseOver={e => e.currentTarget.src = "/Maps/Orissa/Gwalior_.png"} onMouseOut={e => e.currentTarget.src = "/Maps/Orissa/Gwalior.png"}/>
-					</div>
-					<div className="kri"> 
-						<img src="/Maps/Orissa/Datia.png" className="datia" alt="Datia"  onMouseOver={e => e.currentTarget.src = "/Maps/Orissa/Datia_.png"} onMouseOut={e => e.currentTarget.src = "/Maps/Orissa/Datia.png"}/>
-					</div>
-					<div className="wes"> 
-						<img src="/Maps/Orissa/Bhind.png" className="bhind" alt="Bhind"  onMouseOver={e => e.currentTarget.src = "/Maps/Orissa/Bhind_.png"} onMouseOut={e => e.currentTarget.src = "/Maps/Orissa/Bhind.png"}/>
-					</div>
-					<div className="eas"> 
-						<img src="/Maps/Orissa/Morena.png" className="morena" alt="Morena"  onMouseOver={e => e.currentTarget.src = "/Maps/Orissa/Morena_.png"} onMouseOut={e => e.currentTarget.src = "/Maps/Orissa/Morena.png"}/>
-					</div>
-					
 				</div>
 			</div>
 		);

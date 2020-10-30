@@ -49,12 +49,12 @@ export default class JobPostProfile extends Component{
 
 	componentDidMount(){
 		var job_id = this.props.match.params.job_id;
-		console.log("job_id = ", job_id);
+		console.log("job_id in job profile = ", job_id);
 
 		Axios.get("/api/jobposting/get/one/"+job_id)
 			.then(response=>{
                
-				console.log("response.data = ",response.data);
+				console.log("response.data from job profile = ",response.data);
 
 				this.setState({
 					job_id			: job_id,
@@ -95,7 +95,7 @@ export default class JobPostProfile extends Component{
 										<div className="col-lg-3 leftImgContainer">
 											<div className="col-lg-12">
 												<div className="imgbox col-lg-9">
-													<img src="images/iAssureIT_Logo.svg" className="logo"  alt="not found"/>
+													<img src="images/iAssureIT_Logo.png" className="logo"  alt="not found"/>
 												</div>
 											</div>	
 										</div>

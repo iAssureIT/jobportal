@@ -17,6 +17,7 @@ exports.insertSubFunctionalArea = (req,res,next)=>{
     subfunctionalAreaMaster
         .save()
         .then(data=>{
+            console.log("saved successfully",req.body.fieldValue);
             res.status(200).json({ created : true, fieldID : data._id });
         })
         .catch(err =>{

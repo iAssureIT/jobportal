@@ -81,7 +81,7 @@ export default class JobPosting extends Component{
 	componentDidMount(){
 		if(this.props.match.params.job_id){
 			let job_id = this.props.match.params.job_id;
-			Axios.get("http://localhost:3009/get/one/" + job_id)
+			Axios.get("/api/jobposting/get/one/" + job_id)
 			.then(response=>{
 				console.log("response.data : ", response.data);
 				this.setState({
@@ -120,7 +120,7 @@ export default class JobPosting extends Component{
 			})
 		}
 		
-		Axios.get("http://qaapi-jobportal.iassureit.in/api/functionalareamaster/get/list")
+		Axios.get("/api/functionalareamaster/get/list")
 			.then(response => {
 				console.log("getfunctionalAreaData response.data = ",response.data);
 				this.setState({functionalArealist : response.data});
@@ -130,17 +130,17 @@ export default class JobPosting extends Component{
 				Swal.fire("Error while getting List data",error.message,'error');
 			})
 
-		Axios.get("http://qaapi-jobportal.iassureit.in/api/subfunctionalareamaster/get/list")
+		Axios.get("/api/subfunctionalareamaster/get/lists")
 			.then(response => {
 				console.log("getsubFunctionalAreaData response.data = ",response.data);
 				this.setState({subFunctionalAreaList : response.data});
 				console.log("subFunctionalArea",this.state.subFunctionalAreaList);
 			})
 			.catch(error=>{
-				Swal.fire("Error while getting List data",error.message,'error');
+				Swal.fire("Error while getting subFunctionalAreaList data",error.message,'error');
 			})
 		
-		Axios.get("http://qaapi-jobportal.iassureit.in/api/jobtypemaster/get/list")
+		Axios.get("/api/jobtypemaster/get/list")
 			.then(response => {
 				console.log("getfunctionalAreaData response.data = ",response.data);
 				this.setState({jobTypeArray : response.data});
@@ -150,7 +150,7 @@ export default class JobPosting extends Component{
 				Swal.fire("Error while getting List data",error.message,'error');
 			})	
 		
-		Axios.get("http://qaapi-jobportal.iassureit.in/api/skillmaster/get/list")
+		Axios.get("/api/skillmaster/get/list")
 			.then(response => {
 				console.log("getfunctionalAreaData response.data = ",response.data);
 				this.setState({priSkillsArraylist : response.data});
@@ -169,7 +169,7 @@ export default class JobPosting extends Component{
 				Swal.fire("Error while getting priSkillsArraylist List data",error.message,'error');
 			})
 			
-		Axios.get("http://qaapi-jobportal.iassureit.in/api/skillmaster/get/list")
+		Axios.get("/api/skillmaster/get/list")
 			.then(response => {
 				console.log("getfunctionalAreaData response.data = ",response.data);
 				this.setState({secSkillsArraylist : response.data});
@@ -188,7 +188,7 @@ export default class JobPosting extends Component{
 				Swal.fire("Error while getting secSkillsArraylist List data",error.message,'error');
 			})
 		
-		Axios.get("http://qaapi-jobportal.iassureit.in/api/skillmaster/get/list")
+		Axios.get("/api/skillmaster/get/list")
 			.then(response => {
 				console.log("getfunctionalAreaData response.data = ",response.data);
 				this.setState({otherSkillsArraylist : response.data});
@@ -207,7 +207,7 @@ export default class JobPosting extends Component{
 				Swal.fire("Error while getting otherSkillsArraylist List data",error.message,'error');
 			})
 		
-		Axios.get("http://qaapi-jobportal.iassureit.in/api/skillmaster/get/list")
+		Axios.get("/api/skillmaster/get/list")
 			.then(response => {
 				console.log("getfunctionalAreaData response.data = ",response.data);
 				this.setState({preferSkillsArraylist : response.data});
@@ -534,7 +534,7 @@ export default class JobPosting extends Component{
 														?
 															this.state.subFunctionalAreaList.map((elem,index)=>{
 																return(
-																	<option value={elem._id}> {elem.subFunctionalArea} </option>
+																	<option value={elem._id}> {elem.subfunctionalArea} </option>
 																);
 															})
 														:
