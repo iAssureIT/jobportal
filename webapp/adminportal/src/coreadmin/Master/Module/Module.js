@@ -80,7 +80,7 @@ class Module extends Component{
   }
  }
 
- const mapStateToProps = (state)=>{
+const mapStateToProps = (state)=>{
     return {
         rolewiseAccessToModule  : state.rolewiseAccessToModule,
         accessToFacility        : state.accessToFacility

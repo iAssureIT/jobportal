@@ -1,10 +1,12 @@
 import React, {Component} from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import '../FunctionalHeader/FunctionalHeader.css';
+import '../functionalHeader/FunctionalHeader.css';
 import ReactModal from 'react-modal';
 import LoginForm from '../../systemSecurity/Login.js';
+import {connect}            from 'react-redux';
+import { bindActionCreators } from 'redux';
 
-export default class FunctionalHeader extends Component{
+class MapHeader extends Component{
 	constructor(props){
 		super(props);
 		this.state={
@@ -38,7 +40,9 @@ export default class FunctionalHeader extends Component{
 	}
   	render(){
     
-   
+    const selectedState = this.props.selectedState;
+   	console.log(selectedState);
+
     return(
       	<nav className="navbar FunctionalHeaderWrapper container-fluid">
   			<div className="iconHeader col-lg-1">
@@ -48,13 +52,13 @@ export default class FunctionalHeader extends Component{
 		    <div className="breadCrumbHeader col-lg-2">
 				<ul className="breadCrumbInner">
 				  <li className="breadCrumbInnerli"><a href="#">India</a></li>
-				  <li className="breadCrumbInnerli"><a href="#">Maharashtra</a></li> 
+				  <li className="breadCrumbInnerli"><a href="#">{selectedState}</a></li> 
 				  <li className="breadCrumbInnerLI">Pune</li>
 				</ul>
 		    </div>
 
 	      	<div className="FunctionWiseTitle col-lg-5">
-	     		
+	     		India 
 	      	</div>
 
 
@@ -81,26 +85,26 @@ export default class FunctionalHeader extends Component{
 			     	</div>
 
 			     	<div className="barsToggel pull-right" id="barsToggel" style={{display:this.state.asideDisplay}}>
+						
 						<div className="notificationMessege col-lg-12">
 							<FontAwesomeIcon icon="search" />
 							<span className="notificationMessegeText">Companies</span>
-						
 						</div>
 						<div className="notificationMessege col-lg-12">
 							<FontAwesomeIcon icon="users" />
 							<span className="notificationMessegeText">Recruiters</span>
-							
+						</div>
+						<div className="notificationMessege col-lg-12">
+							<FontAwesomeIcon icon="search" />
+							<span className="notificationMessegeText">Services</span>
 						</div>
 						<div className="notificationMessege col-lg-12">
 							<FontAwesomeIcon icon="file-alt" />
 							<span className="notificationMessegeText">About Us</span>
-							
 						</div>
-
 						<div className="notificationMessege col-lg-12">
 							<FontAwesomeIcon icon="file-alt" />
 							<span className="notificationMessegeText">Contact Us</span>
-							
 						</div>
 						<div className="notificationMessege col-lg-12" data-toggle="modal"  data-target="#loginModal">
 							<FontAwesomeIcon icon="sign-out-alt" />
@@ -134,6 +138,14 @@ export default class FunctionalHeader extends Component{
 	</nav>
     );
   }
-
-
 }
+
+const mapStateToProps = (state)=>{
+    return {
+        selectedState  : state.selectedState
+    }
+}
+// const mapDispachToProps = (dispatch) =>{
+//     return bindActionCreators({ setMapSelectedStateFun : setMapSelectedState }, dispatch);  
+// } 
+export default connect(mapStateToProps) (MapHeader);

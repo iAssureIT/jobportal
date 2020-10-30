@@ -102,9 +102,10 @@ exports.manage_wishlist = (req,res,next)=>{
 
 
 exports.getCandidateWishlist = (req,res,next)=>{
-    Wishlist.find({"candidateID": req.params.candidateID})     
+    console.log(req.params.candidateID)
+    //Wishlist.find({"candidateID": req.params.candidateID})     
     Wishlist.aggregate([
-        { "$match" : { "candidateID" : ObjectId(req.params.candidateID) } },
+        { "$match" : { "candidateID" :req.params.candidateID } },
         { "$unwind": "$wishlistItems" },
         { "$lookup": {
             "from": "jobs",

@@ -42,6 +42,7 @@ class GoogleApiKey extends Component {
           type      : 'GOOGLE',
           createdBy : localStorage.getItem("user_ID")
         }
+        console.log(formvalue)
           axios.post('/api/projectsettings/post',formvalue)
           .then((response)=> {
             this.getData();

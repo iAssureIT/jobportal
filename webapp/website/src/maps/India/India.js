@@ -2,12 +2,14 @@ import React, {Component} from 'react';
 import Axios 				from 'axios';
 import Swal 				from 'sweetalert2';
 import {Redirect} from 'react-router-dom';
-
+import {connect}            from 'react-redux';
+import { bindActionCreators } from 'redux';
 import '../global.css';
 import './india.css';
+import  * as mapActionCreator from '../../common/actions/index';
 
 
-export default class India extends Component{
+class India extends Component{
 	constructor(props){
 		super(props);
 
@@ -38,6 +40,9 @@ export default class India extends Component{
 	}
 	onStateClick = (stateName) => {
 		var routeName = "/"+stateName;
+		var {mapAction} = this.props;
+
+		mapAction.setMapSelectedState(stateName);
 		this.props.history.push(routeName);
 
 	}
@@ -214,3 +219,14 @@ export default class India extends Component{
 		);
 	}
 }
+
+const mapStateToProps = (state)=>{
+    return {
+        selectedState  : state.selectedState
+    }
+}
+const mapDispachToProps = (dispatch) => ({
+	mapAction :  bindActionCreators(mapActionCreator, dispatch)
+    //return bindActionCreators({ setMapSelectedStateFun : setMapSelectedState }, dispatch);  
+}) 
+export default connect(mapStateToProps, mapDispachToProps) (India);

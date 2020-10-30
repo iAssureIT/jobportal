@@ -14,8 +14,8 @@ import ResetPassword        from './systemSecurity/ResetPassword.js';
 import SignUp               from './systemSecurity/SignUp.js';
 import ResetPasswordFirstLogin from './systemSecurity/ResetPasswordFirstLogin.js';
 import Header               from './common/header/Header.js'; 
-import FunctionalHeader     from './common/FunctionalHeader/FunctionalHeader.js'; 
-import MapHeader            from './common/MapHeader/MapHeader.js'; 
+import FunctionalHeader     from './common/functionalHeader/FunctionalHeader.js'; 
+import MapHeader            from './common/mapHeader/MapHeader.js'; 
 import Footer               from './common/footer/Footer.js';
 import Leftsidebar          from './common/leftSidebar/Leftsidebar.js';
 import CoreLayout           from './coreadmin/CoreLayout/CoreLayout.js';
@@ -90,9 +90,10 @@ class Layout extends Component  {
         roleArr.push(roles);
 
         var pageUrl = window.location.pathname;
-        let a = pageUrl ? pageUrl.split('/') : "";
-        console.log("a:",a);
+        let lastpara = pageUrl ? pageUrl.split('/') : "";
+        console.log("lastpara:",lastpara);
 
+        //var stateArray = [""]
         if (this.state.loggedIn) {
             return (
             <Router>
@@ -157,7 +158,19 @@ class Layout extends Component  {
             return (
                 <div className="wrapper PageFunctionWiseWrapper">
 
-                {<MapHeader/>}
+                {
+                    lastpara[1] == "" || lastpara[1] == "maharashtra" || lastpara[1] == "andhrapradesh" || lastpara[1] == "arunachalpradesh"
+                    || lastpara[1] == "bihar" || lastpara[1] == "chhattisgarh" || lastpara[1] == "delhi" || lastpara[1] == "goa" || lastpara[1] == "gujarat"
+                    || lastpara[1] == "himachalPradesh" || lastpara[1] == "kashmir" || lastpara[1] == "jharkhand" || lastpara[1] == "karnataka"
+                    || lastpara[1] == "kerala" || lastpara[1] ==  "madhyapradesh" || lastpara[1] == "manipur" || lastpara[1] == "meghalaya"
+                    || lastpara[1] == "mizoram" || lastpara[1] == "nagaland" || lastpara[1] == "orissa"
+                     ? 
+                    <MapHeader/> : null
+                }
+                {
+                    lastpara[1] == "functional-area" || lastpara[1] == "subfunctional-area" ? 
+                    <FunctionalHeader /> : null
+                }
                     <Router >
                         <Switch >
 
@@ -165,7 +178,7 @@ class Layout extends Component  {
                              <Route exact path="/maharashtra"        component={Maharashtra }  />
                              <Route exact path="/andhrapradesh"        component={AndhraPradesh }  />
                              <Route exact path="/arunachalpradesh"        component={ArunachalPradesh }  />
-                             <Route exact path="/bihar"        component={Bihar }  />
+                             <Route exact path="/bihar"        component={Bihar }  />meghalaya
                              <Route exact path="/chhattisgarh"        component={Chhattisgarh }  />
                              <Route exact path="/delhi"        component={Delhi }  />
                              <Route exact path="/goa"        component={Goa }  />

@@ -1,8 +1,7 @@
 
 import React, { Component }                       from 'react';
-import FunctionalHeader from '.././common/FunctionalHeader/FunctionalHeader.js';
-import LeftMenu from '../common/LeftMenu/LeftMenu.js';
-import LeftSideFilters from '../common/LeftSideFilters/LeftSideFilters.js';
+import LeftMenu from '../common/leftMenu/LeftMenu.js';
+import LeftSideFilters from '../common/leftSideFilters/LeftSideFilters.js';
 import SubFunctionalAreawiseJobs from './blocks/SubFunctionalAreawiseJobs.js';
 import './PageFunctionWise.css'
 

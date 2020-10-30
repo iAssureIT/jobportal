@@ -1,7 +1,9 @@
 const initialState = {
-	bookingList : [1,2,3],
 	rolewiseAccessToModule 		: false,
-	accessToFacility 			: false
+	accessToFacility 			: false,
+	selectedCountry				: "India",
+	selectedState 				: "",
+	selectedDistrict 			: "" 
 }
 
 const reducer = (state = initialState,action) => {
@@ -12,11 +14,9 @@ const newState = {...state};
 	if(action.type === "FETCH_ACCESS_FACILITY"){
 		newState.accessToFacility 	= action.accessToFacility;
 	}
-
-	if(action.type === "BOOKING_LIST"){
-		newState.bookingList = action.bookingList;
+	if(action.type === "SET_MAP_STATE"){
+		newState.selectedState 	= action.selectedState;
 	}
-
 return newState;
 }
 

@@ -59,6 +59,7 @@ const collageMasterRoutes				= require("./coreAdmin/CollageMaster/RoutesCollage.
 const moduleRoutes				        = require("./coreAdmin/moduleMaster/RoutesModuleMaster.js");
 const facilityRoutes				    = require("./coreAdmin/facilityMaster/RoutesFacilityMaster.js");
 const accessRoutes				    	= require("./coreAdmin/accessManagement/RoutesAccessMaster.js");
+const TimeFormatRoutes					= require("./coreAdmin/timeFormat/RoutesTimeFormat.js");
 
 const candidateProfileRoutes			= require("./candidate/profile/RoutesCandidateProfile.js");
 
@@ -67,6 +68,8 @@ const condidateProfileRoutes	    	= require("./candidate/profile/RoutesCandidate
 const mapRoutes	    					= require("./website/maps/RoutesMap.js");
 
 const candidateWishlistRoutes	    	= require("./candidate/wishlist/RoutesCandidateWishlist.js");
+const candidateApplyJobRoutes	    	= require("./candidate/applyJob/RoutesApplyJob.js");
+
 //const AlertSystem		        = require("./coreAdmin/AlertSystem/Routes.js");
 
 //============ To Start API on Server with Authentication ========
@@ -137,7 +140,7 @@ app.use("/api/entitymaster", entityRoutes);
 app.use("/api/locationtypemaster", locationTypeMasterRoutes);
 app.use("/api/paymentgateway", paymentgatewayRoutes);
 app.use("/api/paymentterms", paymentTermsRoutes);
-
+app.use("/api/timeformat", 					TimeFormatRoutes);
 //==========================================================
 // 				Job Portal APIs
 //==========================================================
@@ -168,6 +171,8 @@ app.use("/api/candidateProfile", condidateProfileRoutes);
 app.use("/api/map", mapRoutes);
 
 app.use("/api/wishlist", candidateWishlistRoutes);
+app.use("/api/applyJob", candidateApplyJobRoutes);
+
 
 //app.use("/api/personmaster", personMasterRoutes);
 //p.use("/api/accessmaster", accessRoutes);

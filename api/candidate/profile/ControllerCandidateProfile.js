@@ -450,21 +450,19 @@ exports.getOneCandidateSkill = (req,res,next)=>{
 };
 
 exports.updateOneCandidateSkill = (req,res,next)=>{
-    var skill = req.body.skill;
-    
     CandidateProfile.updateOne(
             { "_id":req.body.candidateID, "skillCertification._id": req.body.skillCertificationID},  
             {
-                $set:   {   "primarySkills"   : skill.primarySkills,
-                            "secondarySkills" : skill.secondarySkills,
-                            "otherSkills"     : skill.otherSkills,
-                            "rating"          : skill.rating,
-                            "skilldesc"       : skill.skilldesc,
-                            "certName"        : skill.certName,
-                            "issuedBy"        : skill.issuedBy,
-                            "certifiedOn"     : skill.certifiedOn,
-                            "validTill"       : skill.validTill,
-                            "gradePercent"    : skill.gradePercent
+                $set:   {   "primarySkills"   : req.body.primarySkills,
+                            "secondarySkills" : req.body.secondarySkills,
+                            "otherSkills"     : req.body.otherSkills,
+                            "rating"          : req.body.rating,
+                            "skilldesc"       : req.body.skilldesc,
+                            "certName"        : req.body.certName,
+                            "issuedBy"        : req.body.issuedBy,
+                            "certifiedOn"     : req.body.certifiedOn,
+                            "validTill"       : req.body.validTill,
+                            "gradePercent"    : req.body.gradePercent
                         }
             }
         )

@@ -47,26 +47,32 @@ export const App = () => {
 	useEffect(() => {
 	 	axios.get("/api/projectSettings/get/GOOGLE",)
 	    .then((response) => {
+	    	console.log("googleAPIKey",response.data.googleapikey);
 	      	setGoogleAPIKey(response.data.googleapikey)
 	        window.initMap = setInitMap(true);
+	        console.log("googleAPIKey",googleAPIKey);
+   			console.log("initMap",initMap);
 	    })
 	    .catch((error) =>{
 	        console.log(error)
 	    })
 	}, []);
-  return (
+
+  return (  
+  	
     <div>
     	{
-		// initMap ?
-  // 		<ReactDependentScript
-	 //      scripts={[
-	 //        "https://maps.googleapis.com/maps/api/js?key="+googleAPIKey+"&libraries=geometry,drawing,places&callback=initMap"
-	 //      ]}
-	 //    >
+
+		initMap ?
+  		<ReactDependentScript
+	      scripts={[
+	        "https://maps.googleapis.com/maps/api/js?key="+googleAPIKey+"&libraries=geometry,drawing,places&callback=initMap"
+	      ]}
+	    >
 	      <Layout />
-	   //  </ReactDependentScript>
-  		// :
-  		// null
+	    </ReactDependentScript>
+  		:
+  		null
       }
     </div>
     
