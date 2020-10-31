@@ -17,4 +17,14 @@
     min-height:100px;  
     max-height:auto;
     border-radius:5px!important;
+    z-index:-1;
+}
+
+.optionContainer:hover{
+  background-color: var(--main-border-color);
+  color: var(--main-txt-color);
+}
+
+.description{
+ z-index:0!important;
 }

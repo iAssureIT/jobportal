@@ -1,7 +1,11 @@
-import React,{Component} from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { withRouter } from 'react-router-dom';
+import React,{Component}    from 'react';
+import { FontAwesomeIcon }  from '@fortawesome/react-fontawesome';
+import Moment               from 'moment';
+import { withRouter }	 	from 'react-router-dom';
+import Axios 			 	from 'axios';
+import Swal 			 	from 'sweetalert2';
 import '../BasicInfoForm/BasicInfoForm.css';
+import './Address.css';
 
 
 class Address extends Component{
@@ -9,7 +13,10 @@ class Address extends Component{
 		super(props);
 
 		this.state={
+			addressArry        :[],
 			addressType        : "",
+			addressID          : this.props.match.params.addressID,
+			candidateID        : this.props.match.params.candidateID,
 			houseNumber        : "",
 			address            : "",
 			area               : "",
@@ -18,12 +25,119 @@ class Address extends Component{
 			state              : "",
 			country	           : "",
 			pincode            : "",
-			inputAddressType   : ["Local Address", "Permanat Address"],
+			inputAddressType   : [],
+			buttonText         : "Save",
+			
 		}
 	}
+	componentDidMount(){
+		this.getData();
 
+		Axios.get("/api/addresstypemaster/get/list")
+			.then(response => {
+				this.setState({inputAddressType : response.data});
+			})
+			.catch(error=>{
+				Swal.fire("Error while getting List data",error.message,'error');
+			})
+
+		if(this.props.match.params.addressID){
+			this.edit()
+		}
+	}
+	getData(){
+		
+		Axios.get("/api/candidatemaster/get/one/"+this.state.candidateID)
+		.then(response=>{
+			 	this.setState({
+			 		addressArry: response.data[0].address
+
+				 })
+			 })
+			 .catch(error=>{
+			 	Swal.fire("Submit Error!",error.message,'error');
+			 })
+	}
 	//========== User Define Function Start ================
+	edit(){
+		var candidateID = this.state.candidateID;
+		var addressID   = this.state.addressID;
+		if (addressID) {
+			var idDate ={
+				candidateID : this.state.candidateID,
+				addressID : this.state.addressID,
+			}
+			Axios.post("/api/candidatemaster/post/getOneCandidateAddress",idDate)
+			.then(response=>{
+				var editData =response.data;
 
+			 	this.setState({
+			 		addressType :editData[0].address[0].addressType,
+			 		houseNumber :editData[0].address[0].houseNumber,
+			 		address     :editData[0].address[0].address,
+			 		area :editData[0].address[0].area,
+			 		city :editData[0].address[0].cityVillage,
+			 		district :editData[0].address[0].district,
+			 		state :editData[0].address[0].state,
+			 		country :editData[0].address[0].country,
+			 		pincode :editData[0].address[0].pincode,
+			 		buttonText:"Update"
+			 	})
+			 	
+			 })
+			 .catch(error=>{
+			 	Swal.fire("Submit Error!",error.message,'error');
+			 })
+		}
+	}
+	deleteDate(event){
+		
+		var data_id =  event.currentTarget.id;
+
+		Swal.fire({
+		title : 'Are you sure? you want to delete this Address details!!!',
+		text : 'You will not be able to recover this Address details',
+		icon : 'warning',
+		showCancelButton : true,
+		confirmButtonText : 'Yes, delete it!',
+		cancelButtonColor : 'No, keep it',
+		confirmButtonColor : '#d33',
+	
+	  }).then((result) =>{
+		if(result.value){
+			if(data_id){
+				Axios.delete("/api/candidatemaster/deleteAddress/"+this.state.candidateID+"/delete/"+data_id)
+				.then(response =>{
+						if(response.data.deleted===true){
+						Swal.fire(
+									'Deleted!',
+									'Address details has been deleted successfully!',
+									'success'
+							);
+					}
+			})
+				.catch(error=>{
+					
+					Swal.fire(
+								"Some problem occured deleting Address details!",
+								error.message,
+								'error'
+						)
+				})
+			}
+				
+				}else if (result.dismiss === Swal.DismissReason.cancel){
+					
+					Swal.fire(
+						'Cancelled',
+						'Your Address details is safe :)',
+						'error'
+					)
+				}
+			})
+	  this.getData();
+	}
+	
 
 	handleChange(event){
 		var value = event.currentTarget.value;
@@ -38,36 +152,95 @@ class Address extends Component{
 		event.preventDefault();
 		this.props.history.push("/basic-info");
 	}
+	handleSave(event){
+		event.preventDefault();
+		var status =  this.validateForm();
+			var formValues = {	
+								candidateID   : this.state.candidateID,
+								addressID   : this.state.addressID,
+								address       :   
+								{
+									addressType   : this.state.addressType,
+									houseNumber   : this.state.houseNumber,
+									address       : this.state.address,
+									area          : this.state.area,
+									cityVillage   : this.state.city,
+									district      : this.state.district,
+									state         : this.state.state,
+									country       : this.state.country,
+									pincode       : this.state.pincode
+								}
+								
+							}
+		if(this.props.match.params.addressID){
+			this.updateData(formValues);
+		}else{
+			this.insetData(formValues);
+		}
+		this.getData();
+	}
+	updateData(formValues){
+		var status =  this.validateForm();
+		if(status==true){
+					Axios.patch("/api/candidatemaster/patch/updateOneCandidateAddress",formValues)
+				 .then(response=>{
+
+									Swal.fire("Congrats","Your Address details update Successfully","success");
+										this.setState({
+														addressType        : [],
+														houseNumber        : "",
+														address            : "",
+														area               : "",
+														city               : "",
+														district   		   : "",	
+														state              : "",
+														country	           : "",
+														pincode            : "",
+														buttonText         : "Save",
+													})	
+							this.props.history.push("/address/"+this.state.candidateID);
+					})
+					.catch(error =>{
+						console.log(error);
+						Swal.fire("Submit Error!",error.message,'error');
+					});
+				}
+
+			
+		}
+		
+	insetData(formValues){
+		var status =  this.validateForm();
+			if(status==true){
+					Axios.patch("/api/candidatemaster/patch/addCandidateAddress",formValues)
+				 .then(response=>{
+
+									Swal.fire("Congrats","Your Address details is insert Successfully","success");
+										this.setState({
+														addressType        : [],
+														houseNumber        : "",
+														address            : "",
+														area               : "",
+														city               : "",
+														district   		   : "",	
+														state              : "",
+														country	           : "",
+														pincode            : "",
+														buttonText         : "Save"
+													})	
+					})
+					.catch(error =>{
+						console.log(error);
+						Swal.fire("Submit Error!",error.message,'error');
+					});
+				}
+
+			
+		}
+	
 	handleSubmit(event){
 		event.preventDefault();
-
-		var status =  this.validateForm();
-			var formValues = {
-								addressType   : this.state.addressType,
-								houseNumber   : this.state.houseNumber,
-								address       : this.state.address,
-								area          : this.state.area,
-								city          : this.state.city,
-								district      : this.state.district,
-								state         : this.state.state,
-								country       : this.state.country,
-								pincode       : this.state.pincode,
-							}
-		console.log(formValues);
-		
-		this.setState({
-			addressType        : "",
-			houseNumber        : "",
-			address            : "",
-			area               : "",
-			city               : "",
-			district   		   : "",	
-			state              : "",
-			country	           : "",
-			pincode            : "",
-	
-		})
-		this.props.history.push("/contact/:candidateID");
+    	this.props.history.push("/contact/"+this.state.candidateID);
 	}
 	//========== User Define Function End ==================
 
@@ -151,11 +324,11 @@ class Address extends Component{
 										<select className="form-control inputBox" id="addressType" value={this.state.addressType} name="addressType" onChange={this.handleChange.bind(this)}>
 										  	<option > ---- select ---- </option>
 										  	{
-										  		this.state.inputAddressType.length>0
+										  		this.state.inputAddressType!=null && this.state.inputAddressType.length>0
 										  		?	
 										  			this.state.inputAddressType.map((elem,index)=>{
 										  				return(
-										  					<option>{elem}</option>
+										  					<option value={elem._id} key={index}>{elem.addressType}</option>
 										  				);
 										  			})
 										  			
@@ -263,13 +436,96 @@ class Address extends Component{
 									<label htmlFor="pincode" className="nameTitleForm">Pincode<sup className="nameTitleFormStar">*</sup></label>
 									<div className="input-group ">
 										<span className="input-group-addon inputBoxIcon"><FontAwesomeIcon icon="map-marked-alt" /> </span> 
-										<input type="text" name="pincode" id="pincode" className="form-control inputBox" value={this.state.pincode} onChange={this.handleChange.bind(this)} />
+										<input type="number" name="pincode" id="pincode" className="form-control inputBox" value={this.state.pincode} onChange={this.handleChange.bind(this)} />
 									</div> 
 									<span id="pincodeError" className="errorMsg"></span>
 								</div>
 
 							</div>
-							<button className="buttonBack pull-left" onClick={this.handleBack.bind(this)}> <i className="fa fa-angle-left"> - Back</i></button>
+							<div>
+								<button className="buttonBack pull-right" onClick={this.handleSave.bind(this)}> {this.state.buttonText}</button>
+							</div>
+							<div className=" AddressWrapper col-lg-12" >
+								<div className="row">
+								{
+								this.state.addressArry.length > 0
+								?
+								this.state.addressArry.map((elem,index)=>{
+									return(
+									
+										<div className="col-lg-6 AddressOuterWrapper"  key={index}>
+											<div className="col-lg-12 AddressInnerWrapper">
+												<div className="row">
+													<div className="col-lg-1 AddressBoxLeftIcon">
+														<FontAwesomeIcon icon="map-marker-alt" />
+													</div>
+													<div className="col-lg-10">
+														<div className="AddressBoxHead">
+															Address details
+														</div>
+														<div className="AddressBoxText">
+															{elem.addressType}
+														</div>
+														<div className="AddressBoxText">
+															{elem.address}
+														</div>
+														<div className="AddressBoxText">
+															{elem.area}
+														</div>
+														<div className="AddressBoxText">
+															{elem.houseNumber}
+														</div>
+														<div className="AddressBoxText">
+															{elem.district}
+														</div>
+														<div className="AddressBoxText">
+															{elem.state}
+														</div>
+														<div className="AddressBoxText">
+															{elem.country}
+														</div>
+														<div className="AddressBoxText">
+															{elem.pincode}
+														</div>
+													</div>
+													<div className="col-lg-1 AddressBoxRightIcon hoverEdit ">
+														<div className="row">
+															<FontAwesomeIcon icon="ellipsis-h" />
+														
+																<div className="rightIconHideWrapper" >
+																<a id={elem._id} href={"/address/"+this.state.candidateID+"/edit/"+elem._id}>
+																	<div className="rightIconHide"   >
+																		<FontAwesomeIcon icon="pencil-alt" /> 
+																		<span className="rightIconHideRexr" >Edit</span>
+																	</div>
+																	</a>
+																	<div className="rightIconHide">
+																		<FontAwesomeIcon icon="trash-alt" /> 
+																		<span className="rightIconHideRexr" id={elem._id} onClick={this.deleteDate.bind(this)}>Delete</span>
+																	</div>
+																</div>
+						
+															
+														</div>
+													</div>
+
+												</div>
+												</div>
+											</div>
+										
+									);
+									})
+									:
+										null
+									}
+								</div>
+							</div>
+
+						
+							
+							
+							<button className="buttonBack pull-left " onClick={this.handleBack.bind(this)}> <i className="fa fa-angle-left"> - Back</i></button>
+							
 							<button className="buttonNext pull-right" onClick={this.handleSubmit.bind(this)}>Next - <i className="fa fa-angle-right "></i></button>
 						</form>
 					</div>

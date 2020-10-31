@@ -3,6 +3,7 @@
 	min-height: 650px;
 	height:auto;
 	color: #dddddd;
+	text-transform: capitalize;
 }
 .candidateProfileImg{
 	height:250px;

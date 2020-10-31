@@ -50,6 +50,20 @@ exports.insertCandidateBasicInfo = (req, res, next)=>{
 			});
 		});		
 }
+
+exports.getcandidateID = (req,res,next)=>{
+    CandidateProfile.find({user_id: req.params.userID})
+                    .exec()
+                    .then(data=>{
+                        res.status(200).json(data);
+                    })
+                    .catch(err =>{
+                        console.log(err)
+                        res.status(500).json({
+                            error: err
+                        });
+                    });
+}
 exports.getSingleCandidate = (req,res,next)=>{
     //CandidateProfile.findOne({_id : req.params.candidateID})
     console.log("hsadh",req.params.candidateID);

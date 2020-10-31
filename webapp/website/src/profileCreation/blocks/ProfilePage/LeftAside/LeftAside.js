@@ -1,8 +1,65 @@
 import React,{Component} from 'react';
-
+import Axios 			 	from 'axios';
+import Swal 			 	from 'sweetalert2';
+import Moment               from 'moment';
+import { withRouter }	 	from 'react-router-dom';
 import './LeftAside.css';
 
 class LeftAside extends Component{
+	constructor(props){
+		super(props);
+
+		this.state={
+			firstName          : "",
+			middleName         : "",
+			lastName           : "",
+			lastDesignation    : "",
+			candidateID        : localStorage.getItem("candidateID"),
+			mobile             : "",
+			alternate          : "",
+			email              : "",	
+			houseNumber        : "",
+			address            : "",
+			area               : "",
+			city               : "",
+			district           : "",
+			state	           : "",
+			country	           : "",
+			skillsArry	       : [],
+			pincode	           : 0,	
+		}
+	}
+	componentDidMount(){
+
+		Axios.get("/api/candidatemaster/get/one/"+this.state.candidateID)
+		.then(response=>{
+			 
+			 	this.setState({
+			 		skillsArry        : response.data[0].skillCertification,
+			 		firstName         : response.data[0].basicInfo.firstName?response.data[0].basicInfo.firstName:"",
+					middleName        : response.data[0].basicInfo.middleName?response.data[0].basicInfo.middleName:"",
+					lastName          : response.data[0].basicInfo.lastName?response.data[0].basicInfo.lastName:"",
+					mobile            : response.data[0].contact.mobile?response.data[0].contact.mobile:"",
+					alternate         : response.data[0].contact.altMobile?response.data[0].contact.altMobile:"",
+					email             : response.data[0].contact.emailId?response.data[0].contact.emailId:"",
+					houseNumber       : response.data[0].address[0].houseNumber?response.data[0].address[0].houseNumber:"",
+					address           : response.data[0].address[0].address?response.data[0].address[0].address:"",
+					area              : response.data[0].address[0].area?response.data[0].address[0].area:"",
+					city              : response.data[0].address[0].cityVillage?response.data[0].address[0].cityVillage:"",
+					district          : response.data[0].address[0].district?response.data[0].address[0].district:"",
+					state             : response.data[0].address[0].state?response.data[0].address[0].state:"",
+					country           : response.data[0].address[0].country?response.data[0].address[0].country:"",
+					pincode           : response.data[0].address[0].pincode?response.data[0].address[0].pincode:"",
+					lastDesignation   : response.data[0].workExperience[0].lastDegn?response.data[0].workExperience[0].lastDegn:"",
+					
+
+				
+			 	})
+			 })
+			 .catch(error=>{
+			 	Swal.fire("Submit Error!",error.message,'error');
+			 })
+		}
 	render(){
 		return(
 				<div className="container-fluid col-lg-12 ">
@@ -10,12 +67,12 @@ class LeftAside extends Component{
 						<div className="">
 							<div className="col-lg-8 col-lg-offset-2 candidateProfileImg">
 								<div className="candidateImgWrapper row">
-									<img src="/images/43.png" alt="Candidate Image" />
+									<img src="/images/43.png" alt="Candidate" />
 									<div className="candidateName mainText">
-										Anjali Sharma  
+										{this.state.firstName+" "+this.state.lastName }
 									</div>
 									<div className="jobName subText">
-										Software Engineer  
+										{this.state.lastDesignation}  
 									</div>
 								</div>
 							</div>
@@ -35,7 +92,7 @@ class LeftAside extends Component{
 
 											<div className=" col-lg-10">
 												<div className="candidatePageText row">
-													+91 99233 93733
+													{this.state.mobile}
 												</div>
 											</div>
 										</div>
@@ -50,7 +107,7 @@ class LeftAside extends Component{
 
 											<div className=" col-lg-10">
 												<div className="candidatePageText row">
-													ShahrukhKhan@gmail.com
+													{this.state.email}
 												</div>
 											</div>
 										</div>
@@ -65,7 +122,7 @@ class LeftAside extends Component{
 
 											<div className=" col-lg-10">
 												<div className="candidatePageText row">
-													903, Cosmose, Prime Magarpatta Inner Circle, Magarpatta City, Hadpsar, Pune, 411028. 
+													{this.state.houseNumber+","+ this.state.address +","+ this.state.area + ","+ this.state.city+ ","+ this.state.district +","+ this.state.state+","+this.state.country+","+this.state.pincode +"."}
 												</div>
 											</div>
 										</div>
@@ -84,61 +141,33 @@ class LeftAside extends Component{
 									<div className="subHeadingText">
 										Primary Skills
 									</div>
+
 									<ul className="candidateSkillsUl">
-										<li>
-											<div>
-												<i className="fa fa-square rotate45" ></i>
-													Mathamatical aptitude
-											</div>
-											<div className="progress candidateprogess">
-												<div className="progress-bar candidateprogessBar" role="progressbar" aria-valuenow="70"
-												  aria-valuemin="0" aria-valuemax="100" style={{width:"80%"}}>
-												    
-												 </div>	
-												 <span className="progressBarStatus ">80%</span>
-											</div>
-										</li>
-										<li>
-											<div>
-												<i className="fa fa-square rotate45" ></i>
-													Problem-solving skills
-											</div>
+										{
 
-											<div className="progress candidateprogess">
-												<div className="progress-bar candidateprogessBar" role="progressbar" aria-valuenow="70"
-												  aria-valuemin="0" aria-valuemax="100" style={{width:"70%"}}>
-												    
-												 </div>	
-												 <span className="progressBarStatus ">70%</span>
-											</div>
-
-										</li>
-										<li>
-											<div>
-												<i className="fa fa-square rotate45" ></i>
-													Programming languages
-											</div>
-											<div className="progress candidateprogess">
-												<div className="progress-bar candidateprogessBar" role="progressbar" aria-valuenow="70"
-												  aria-valuemin="0" aria-valuemax="100" style={{width:"85%"}}>
-												    
-												 </div>	
-												 <span className="progressBarStatus ">85%</span>
-											</div>
-										</li>
-										<li>
-											<div>
-												<i className="fa fa-square rotate45" ></i>
-													Software Development
-											</div>
-											<div className="progress candidateprogess">
-												<div className="progress-bar candidateprogessBar" role="progressbar" aria-valuenow="70"
-												  aria-valuemin="0" aria-valuemax="100" style={{width:"90%"}}>
-												    
-												 </div>	
-												 <span className="progressBarStatus ">90%</span>
-											</div>
-										</li>
+											this.state.skillsArry.length > 0
+											?
+											this.state.skillsArry.map((elem,index)=>{
+												return(
+												<li key={index}>
+													<div>
+														<i className="fa fa-square rotate45" ></i>
+															{elem.primarySkills[index]}
+													</div>
+													<div className="progress candidateprogess">
+														<div className="progress-bar candidateprogessBar" role="progressbar" aria-valuenow="70"
+														  aria-valuemin="0" aria-valuemax="100" style={{width:"80%"}}>
+														    
+														 </div>	
+														 <span className="progressBarStatus ">80%</span>
+													</div>
+												</li>
+												);
+												})
+												:
+												null
+											}
+										
 									</ul>
 								</div>
 								<div className="row candidateSkillsProgess">
@@ -146,58 +175,30 @@ class LeftAside extends Component{
 										Secondary Skills
 									</div>
 									<ul className="candidateSkillsUl">
-										<li>
-											<div>
-												<i className="fa fa-square rotate45" ></i>
-													Communication
-											</div>
-											<div className="progress candidateprogess">
-												<div className="progress-bar candidateprogessBar" role="progressbar" aria-valuenow="70"
-												  aria-valuemin="0" aria-valuemax="100" style={{width:"60%"}}>
-												    
-												 </div>	
-												 <span className="progressBarStatus ">60%</span>
-											</div>
-										</li>
-										<li>
-											<div>
-												<i className="fa fa-square rotate45" ></i>
-													Teamwork
-											</div>
-											<div className="progress candidateprogess">
-												<div className="progress-bar candidateprogessBar" role="progressbar" aria-valuenow="70"
-												  aria-valuemin="0" aria-valuemax="100" style={{width:"70%"}}>
-												    
-												 </div>	
-												 <span className="progressBarStatus ">70%</span>
-											</div>
-										</li>
-										<li>
-											<div>
-												<i className="fa fa-square rotate45" ></i>
-													Multitasking
-											</div>
-											<div className="progress candidateprogess">
-												<div className="progress-bar candidateprogessBar" role="progressbar" aria-valuenow="70"
-												  aria-valuemin="0" aria-valuemax="100" style={{width:"80%"}}>
-												    
-												 </div>	
-												 <span className="progressBarStatus ">80%</span>
-											</div>
-										</li>
-										<li>
-											<div>
-												<i className="fa fa-square rotate45" ></i>
-													Attention to detail
-											</div>
-											<div className="progress candidateprogess">
-												<div className="progress-bar candidateprogessBar" role="progressbar" aria-valuenow="70"
-												  aria-valuemin="0" aria-valuemax="100" style={{width:"65%"}}>
-												    
-												 </div>	
-												 <span className="progressBarStatus ">65%</span>
-											</div>
-										</li>
+										{
+
+											this.state.skillsArry.length > 0
+											?
+											this.state.skillsArry.map((elem,index)=>{
+												return(
+												<li key={index}>
+													<div>
+														<i className="fa fa-square rotate45" ></i>
+															{elem.secondarySkills[index]}
+													</div>
+													<div className="progress candidateprogess">
+														<div className="progress-bar candidateprogessBar" role="progressbar" aria-valuenow="70"
+														  aria-valuemin="0" aria-valuemax="100" style={{width:"80%"}}>
+														    
+														 </div>	
+														 <span className="progressBarStatus ">80%</span>
+													</div>
+												</li>
+												);
+												})
+												:
+												null
+											}
 									</ul>
 								</div>
 							</div>
@@ -209,4 +210,4 @@ class LeftAside extends Component{
 	}
 }
 
-export default LeftAside;
+export default withRouter(LeftAside);

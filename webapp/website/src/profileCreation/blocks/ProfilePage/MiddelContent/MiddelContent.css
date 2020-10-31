@@ -3,6 +3,7 @@
 	min-height:700px;
 	height:auto;
 	color: #dddddd;
+	text-transform: capitalize;
 }
 .middelContentHeadingWrapper i{
 	margin-left:-3px;

@@ -98,9 +98,19 @@ class Login extends Component {
                 roles: response.data.userDetails.roles,
                 token: response.data.userDetails.token,
               }
+
+              axios.get('/api/candidatemaster/get/candidateID/'+response.data.userDetails.user_id)
+              .then((candidate) => {
              
+              localStorage.setItem("candidateID", candidate.data[0] ? candidate.data[0]._id : null);
+              })
+              .catch((error) => {
+                console.log("error", error);
+              });
               localStorage.setItem("token", response.data.token);
               localStorage.setItem("user_ID", response.data.ID);
+
+              
               localStorage.setItem("roles", response.data.roles);
               //localStorage.setItem("companyID", response.data.userDetails.companyID);
               localStorage.setItem('userDetails', JSON.stringify(userDetails));

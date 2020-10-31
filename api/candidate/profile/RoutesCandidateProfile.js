@@ -5,6 +5,8 @@ const CandidateProfileController = require("./ControllerCandidateProfile.js");
 
 router.post("/post", CandidateProfileController.insertCandidateBasicInfo);
 
+router.get("/get/candidateID/:userID", CandidateProfileController.getcandidateID);
+
 router.get("/get/one/:candidateID", CandidateProfileController.getSingleCandidate);
 
 router.patch("/patch/updateCandidateBasicInfo", CandidateProfileController.updateCandidateBasicInfo);

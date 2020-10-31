@@ -121,7 +121,7 @@ class Header extends Component{
                     <div className="signOutToggelButtons">
                       <div className="col-lg-5 pull-left">
                         <div className="row">
-                          <a href="/profile" className="whitelink"><div className="signOutButton">Profile</div></a>
+                          <a href={"/profile/"+localStorage.getItem("candidateID")} className="whitelink"><div className="signOutButton">Profile</div></a>
                         </div>
                       </div>
                       

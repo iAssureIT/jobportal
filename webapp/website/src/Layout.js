@@ -73,8 +73,17 @@ class Layout extends Component  {
                   loggedIn: true
               })
           } else { }
-    }
 
+        axios.get("http://locations2.iassureit.com/api/states/get/list/IN")
+            .then((response) => {
+                this.setState({
+                    stateArray: response.data
+                })
+            })
+            .catch((error) => {
+            })   
+    }
+    
     logout() {
         var token = localStorage.removeItem("token");
         if (token !== null && token !=="undefined") {
@@ -90,15 +99,19 @@ class Layout extends Component  {
         roleArr.push(roles);
 
         var pageUrl = window.location.pathname;
+        console.log(window.location.pathname)
+
+        console.log("history",this.props)
         let lastpara = pageUrl ? pageUrl.split('/') : "";
         console.log("lastpara:",lastpara);
 
-        //var stateArray = [""]
+        
         if (this.state.loggedIn) {
             return (
             <Router>
                 <div className="hold-transition skin-blue fixed sidebar-mini">
                     <div className="wrapper">
+
                         <Header />
                         <div className="">
                             <div className="row">
@@ -119,28 +132,39 @@ class Layout extends Component  {
                                                     <Route exact path="/academics/:candidateID"         component={CandidateAcademics}  />
                                                     <Route exact path="/certification/:candidateID"     component={CandidateCertification}  />
                                                     <Route exact path="/experience/:candidateID"        component={CandidateExperience}  />
-                                                    <Route exact path="/profile"           component={CandidateProfile}  />
+                                                    <Route exact path="/profile/:candidateID"           component={CandidateProfile}  />
                                                     {/*<Route exact path="/list"              component={CandidateList}  />  
                                                     */}
-                                                     <Route exact path="/maharashtra"        component={Maharashtra }  />
-                                                     <Route exact path="/andhraPradesh"        component={AndhraPradesh }  />
-                                                     <Route exact path="/arunachalPradesh"        component={ArunachalPradesh }  />
-                                                     <Route exact path="/bihar"        component={Bihar }  />
-                                                     <Route exact path="/chhattisgarh"        component={Chhattisgarh }  />
-                                                     <Route exact path="/delhi"        component={Delhi }  />
-                                                     <Route exact path="/goa"        component={Goa }  />
-                                                     <Route exact path="/gujarat"        component={Gujarat }  />
-                                                     <Route exact path="/himachalPradesh"        component={HimachalPradesh }  />
-                                                     <Route exact path="/kashmir"        component={JammuKashmirLadakh }  />
-                                                     <Route exact path="/jharkhand"        component={Jharkhand }  />
-                                                     <Route exact path="/karnataka"        component={Karnataka }  />
-                                                     <Route exact path="/kerala"        component={Kerala }  />
-                                                     <Route exact path="/madhyaPradesh"        component={MadhyaPradesh }  />
-                                                     <Route exact path="/manipur"        component={Manipur }  />
-                                                     <Route exact path="/meghalaya"        component={Meghalaya }  />
-                                                     <Route exact path="/mizoram"        component={Mizoram }  />
-                                                     <Route exact path="/nagaland"        component={Nagaland }  />
-                                                     <Route exact path="/orissa"        component={Orissa }  />
+                                                    
+                                                    {/*<Route exact path="/Andaman And Nicobar Islands"        component={AndamanAndNicobar }  />
+                                                    */}
+                                                    <Route exact path="/Andhra Pradesh"        component={AndhraPradesh }  />
+                                                    <Route exact path="/Arunachal Pradesh"        component={ArunachalPradesh }  />
+                                                    {/*<Route exact path="/Assam"        component={Assam }  />*/}
+                                                    <Route exact path="/Bihar"        component={Bihar }  />
+                                                    {/*<Route exact path="/Chandigarh"        component={Chandigarh }  />*/}
+                                                    
+                                                    <Route exact path="/Chhattisgarh"        component={Chhattisgarh }  />
+                                                    {/*<Route exact path="/Dadra And Nagar Haveli"        component={DadraNagarHaveli }  />
+                                                    <Route exact path="/Daman And Diu"        component={DamanAndDiu }  />
+                                                    */}
+                                                    <Route exact path="/Delhi"        component={Delhi }  />
+                                                    <Route exact path="/Goa"        component={Goa }  />
+                                                    <Route exact path="/Gujarat"        component={Gujarat }  />
+                                                    {/*<Route exact path="/Haryana"        component={Haryana }  />*/}
+                                                    <Route exact path="/Himachal Pradesh"        component={HimachalPradesh }  />
+                                                    <Route exact path="/JammuAndKashmir"        component={JammuKashmirLadakh }  />
+                                                    <Route exact path="/Jharkhand"        component={Jharkhand }  />
+                                                    <Route exact path="/Karnataka"        component={Karnataka }  />
+                                                    <Route exact path="/Kerala"        component={Kerala }  />
+                                                    {/*<Route exact path="/Lakshadweep"        component={Lakshadweep }  />*/}
+                                                    <Route exact path="/Madhya Pradesh"        component={MadhyaPradesh }  />
+                                                    <Route exact path="/Maharashtra"        component={Maharashtra }  />                                                    
+                                                    <Route exact path="/Manipur"        component={Manipur }  />
+                                                    <Route exact path="/Meghalaya"        component={Meghalaya }  />
+                                                    <Route exact path="/Mizoram"        component={Mizoram }  />
+                                                    <Route exact path="/Nagaland"        component={Nagaland }  />
+                                                    <Route exact path="/Odisha"        component={Orissa }  />
 
                                                 </Switch>
                                             </div>
@@ -158,8 +182,8 @@ class Layout extends Component  {
             return (
                 <div className="wrapper PageFunctionWiseWrapper">
 
-                {
-                    lastpara[1] == "" || lastpara[1] == "maharashtra" || lastpara[1] == "andhrapradesh" || lastpara[1] == "arunachalpradesh"
+                { <MapHeader/> 
+                    /*lastpara[1] == "" || lastpara[1] == "maharashtra" || lastpara[1] == "andhrapradesh" || lastpara[1] == "arunachalpradesh"
                     || lastpara[1] == "bihar" || lastpara[1] == "chhattisgarh" || lastpara[1] == "delhi" || lastpara[1] == "goa" || lastpara[1] == "gujarat"
                     || lastpara[1] == "himachalPradesh" || lastpara[1] == "kashmir" || lastpara[1] == "jharkhand" || lastpara[1] == "karnataka"
                     || lastpara[1] == "kerala" || lastpara[1] ==  "madhyapradesh" || lastpara[1] == "manipur" || lastpara[1] == "meghalaya"
@@ -170,7 +194,7 @@ class Layout extends Component  {
                 {
                     lastpara[1] == "functional-area" || lastpara[1] == "subfunctional-area" ? 
                     <FunctionalHeader /> : null
-                }
+                */}
                     <Router >
                         <Switch >
 

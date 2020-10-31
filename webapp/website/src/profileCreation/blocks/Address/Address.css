@@ -1,0 +1,71 @@
+.AddressWrapper{
+	min-height:200px;
+	height:auto;
+	margin-top:15px;
+	padding-top:15px;
+	border-radius:3px;
+	padding-bottom:15px;
+	background:var(--main);
+}
+.AddressInnerWrapper{
+	border-radius:4px;
+	min-height:200px;
+	height:auto;
+	box-shadow:0px 0px 5px var(--main-border-color );
+	padding-top:15px;
+	padding-bottom:15px;
+	background:var(--input-bg-color);
+}
+.AddressBoxHead{
+	font-weight:bold;
+	color:var(--main-subheading-font-color);
+	text-align:center;
+	margin-bottom:15px;
+}
+.AddressBoxLeftIcon{
+	color:var(--main-subheading-font-color);
+}
+.AddressBoxRightIcon{
+	padding-right:10px;
+	color:var(--main-subheading-font-color);
+}
+.AddressBoxRightIcon:hover{
+	cursor:pointer;
+}
+.rightIconHideWrapper{
+	position:relative;
+	height:55px;
+	width:80px;
+	left:-60px;
+	font-size:12px;
+	box-shadow:0px 0px 5px var(--main-border-color );
+	border-radius:4px;
+	display:none;
+	color:#fff!important;
+}
+.rightIconHide{
+	padding-left:10px;
+	padding-top:7px;
+}
+.rightIconHideRexr{
+	padding-left:8px;
+
+}
+
+.AddressBoxText{
+	margin-top:5px;
+	padding-left:15px;
+	font-size:12px;
+}
+.AddressOuterWrapper{
+	margin-top:20px;
+}
+.hoverEdit:hover{
+	cursor:pointer;
+}
+.hoverEdit:hover  .rightIconHideWrapper {
+	display:block;
+}
+.rightIconHide:hover{
+	color:var(--main-subheading-font-color)!important;
+}

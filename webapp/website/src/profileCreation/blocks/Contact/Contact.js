@@ -1,5 +1,8 @@
-import React,{Component} from 'react';
-import { withRouter } from 'react-router-dom';
+import React,{Component} 	from 'react';
+import Moment               from 'moment';
+import { withRouter }	 	from 'react-router-dom';
+import Axios 			 	from 'axios';
+import Swal 			 	from 'sweetalert2';
 import '../BasicInfoForm/BasicInfoForm.css';
 import './Contact.css';
 
@@ -11,8 +14,26 @@ class Contact extends Component{
 			mobile        : "",
 			alternate     : "",
 			email         : "",
+			candidateID   : this.props.match.params.candidateID,
 		}
 	}
+	componentDidMount(){
+	Axios.get("/api/candidatemaster/get/one/"+this.state.candidateID)
+		.then(response=>{
+			 	console.log(response.data);
+			 	this.setState({
+			 		
+					mobile         : response.data[0].contact.mobile?response.data[0].contact.mobile:"",
+					alternate      : response.data[0].contact.altMobile?response.data[0].contact.altMobile:"",
+					email          : response.data[0].contact.emailId?response.data[0].contact.emailId:"",
+
+			 	})
+			 })
+			 .catch(error=>{
+			 	Swal.fire("Submit Error!",error.message,'error');
+			 })
+
+}
 
 	//========== User Define Function Start ================
 
@@ -28,25 +49,43 @@ class Contact extends Component{
 	}
 	handleBack(event){
 		event.preventDefault();
-		this.props.history.push("/address/:candidateID");
+		this.props.history.push("/address/"+this.state.candidateID);
 	}
 	handleSubmit(event){
 		event.preventDefault();
 
 		var status =  this.validateForm();
 			var formValues = {
+								candidateID : this.state.candidateID,
 								mobile      : this.state.mobile,
-								alternate   : this.state.alternate,
-								email       : this.state.email,
+								altMobile   : this.state.alternate,
+								emailId     : this.state.email,
 							}
 		console.log(formValues);
 		
-		this.setState({
-			mobile        : "",
-			alternate     : "",
-			email         : "",
-		})
-		this.props.history.push("/academics/:candidateID");
+		if(status==true){
+				Axios.patch("/api/candidatemaster/patch/updateCandidateContact",formValues)
+			 .then(response=>{
+						 
+						 	console.log('XXX',response.data);
+								Swal.fire("Congrats","Your Profile is update Successfully","success");
+									this.setState({
+
+													mobile        : "",
+													alternate     : "",
+													email         : "",
+												})
+
+
+								this.props.history.push("/academics/"+this.state.candidateID);
+							
+							
+				})
+				.catch(error =>{
+					console.log(error);
+					Swal.fire("Submit Error!",error.message,'error');
+				});
+			}
 	}
 	//========== User Define Function End ==================
 	//========== Validation Start ==================
@@ -126,7 +165,7 @@ class Contact extends Component{
 								<label htmlFor="email" className="nameTitleForm">Personal Mail ID<sup className="nameTitleFormStar">*</sup></label>
 								<div className="input-group ">
 									<span className="input-group-addon inputBoxIcon"><i className="fa fa-envelope-o"></i> </span> 
-									<input type="email" name="email" id="email" className="form-control inputBox" value={this.state.email} onChange={this.handleChange.bind(this)} />
+									<input type="email" name="email" id="email" className="form-control inputBox" value={this.state.email} onChange={this.handleChange.bind(this)} readonly="readonly"/>
 								</div> 
 								<span id="emailError" className="errorMsg"></span>
 							</div>

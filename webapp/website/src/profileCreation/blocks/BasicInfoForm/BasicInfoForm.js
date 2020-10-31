@@ -1,7 +1,11 @@
 import React,{Component}    from 'react';
 import { FontAwesomeIcon }  from '@fortawesome/react-fontawesome';
 import Moment               from 'moment';
-import { withRouter } from 'react-router-dom';
+import { withRouter }	 	from 'react-router-dom';
+import Axios 			 	from 'axios';
+import Swal 			 	from 'sweetalert2';
+import { Multiselect }      from 'multiselect-react-dropdown';
+
 
 import './BasicInfoForm.css';
 
@@ -9,28 +13,107 @@ import './BasicInfoForm.css';
 class BasicInfoForm extends Component{
 	constructor(props){
 		super(props);
-
 		this.state={
 			firstName          : "",
 			middleName         : "",
+			candidateID        : localStorage.getItem("candidateID"),
 			lastName           : "",
 			dob                : "",
 			gender             : "male",
 			anniversaryDate    : "",	
 			maritalStatus      : "",
-			languages	       : "",
 			nationality        : "",
 			panCardNo          : "",
 			adhaarCardNo       : "",
+			selectedValue      : [],
 			ageYears	       : 0,	
 			ageMonths	       : 0,	
 			ageWeeks	       : 0,	
 			ageDays	       	   : 0,
+			age                :"",
 			inputMaritalStatus : ["Married", "UnMarried"],
-			inputLanguages	   : ["English", "Marathi", "Hindi"],
 			inputNationality   : ["Indian","American"],
+			languages	       : [],
+			inputLanguages	   : [],
 		}
+		 this.style =  {
+					      chips: {
+					        backgroundColor: "transparent"
+					      },
+					      searchBox: {
+					        border: "1px solid #D3950A",
+					        borderTopLeftRadius: "0px",
+					        borderBottomLeftRadius: "0px"
+					      },
+					      multiselectContainer: {
+					      	backgroundColor: "#242931",
+					        color: "white",
+					        zIndex:"5!important"
+					      }, 
+					      inputField: {
+						     fontSize:"13.5px",
+						     marginLeft:"5px",
+						     zIndex:"5!important"
+						  },
+						  option: {
+						   	backgroundColor: "#242933",
+						   	zIndex:"5!important",
+						   	color: "white",
+						  },
+						  optionContainer:{
+						  	border: "1px solid #D3950A",
+						  	zIndex:"5!important"
+						  }
+						};
 	}
+	componentDidMount(){
+
+		Axios.get("/api/candidatemaster/get/one/"+this.state.candidateID)
+		.then(response=>{
+			 
+			 	this.setState({
+			 		firstName         : response.data[0].basicInfo.firstName?response.data[0].basicInfo.firstName:"",
+					middleName        : response.data[0].basicInfo.middleName?response.data[0].basicInfo.middleName:"",
+					lastName          : response.data[0].basicInfo.lastName?response.data[0].basicInfo.lastName:"",
+					dob               : response.data[0].basicInfo.dob?Moment(response.data[0].basicInfo.dob).format("YYYY-MM-DD"):"",
+					gender            : response.data[0].basicInfo.gender?response.data[0].basicInfo.gender:"",
+					anniversaryDate   : response.data[0].basicInfo.anniversaryDate?Moment(response.data[0].basicInfo.anniversaryDate).format("YYYY-MM-DD"):"",
+					maritalStatus     : response.data[0].basicInfo.maritalStatus?response.data[0].basicInfo.maritalStatus:"",
+					nationality       : response.data[0].basicInfo.nationality?response.data[0].basicInfo.nationality:"",
+					panCardNo         : response.data[0].panCard?response.data[0].panCard:"",
+					adhaarCardNo      : response.data[0].aadhaarCard?response.data[0].aadhaarCard:"",
+		
+					age               : response.data[0].basicInfo.age?response.data[0].basicInfo.age:"",
+					
+
+				
+			 	})
+			 })
+			 .catch(error=>{
+			 	Swal.fire("Submit Error!",error.message,'error');
+			 })
+
+		Axios.get("/api/languagemaster/get/list")
+		.then(response => {
+			this.setState({inputLanguages : response.data});
+			console.log("response.data",response.data);
+			this.state.inputLanguages!=null && this.state.inputLanguages.length > 0 
+			?
+				this.state.inputLanguages.map((elem,index)=>{
+					
+					this.state.languages.push(elem.language);
+					
+					
+				})
+			:
+				this.state.languages.push("select");
+		})
+		.catch(error=>{
+			Swal.fire("Error while getting List data",error.message,'error');
+		})
+
+			
+}
 
 	//========== User Define Function Start ================
 
@@ -76,53 +159,74 @@ class BasicInfoForm extends Component{
 		event.preventDefault();
 		var status =  this.validateForm();
 			var formValues = {
-								firstName         : this.state.firstName,
-								middleName        : this.state.middleName,
-								lastName          : this.state.lastName,
-								dob               : this.state.dob,
-								anniversaryDate   : this.state.anniversaryDate,
-								maritalStatus     : this.state.maritalStatus,
-								languages         : this.state.languages,
-								nationality       : this.state.nationality,
-								panCardNo         : this.state.panCardNo,
-								adhaarCardNo      : this.state.adhaarCardNo,
-								gender      	  : this.state.gender,
+
+								firstName          : this.state.firstName,
+								candidateID        : this.state.candidateID,
+								middleName         : this.state.middleName,
+								lastName           : this.state.lastName,
+								dob                : this.state.dob,
+								gender             : this.state.gender,
+								anniversaryDate    : this.state.anniversaryDate,	
+								maritalStatus      : this.state.maritalStatus,
+								nationality        : this.state.nationality,
+								panCard            : this.state.panCardNo,
+								aadhaarCard        : this.state.adhaarCardNo,
+								languagesKnown	   : this.state.selectedValue,
+								age	   			   : this.state.age,
+								
 							}
 							console.log(formValues);
-			this.setState({
-							firstName          : "",
-							middleName         : "",
-							lastName           : "",
-							dob                : "",
-							gender             : "male",
-							anniversaryDate    : "",	
-							maritalStatus      : "",
-							languages	       : "",
-							nationality        : "",
-							panCardNo          : "",
-							adhaarCardNo       : "",
-							ageYears	       : 0,	
-							ageMonths	       : 0,	
-							ageWeeks	       : 0,	
-							ageDays	       	   : 0,
-						})
-		
-			this.props.history.push("/address/:candidateID");
-		
+			if(status==true){
+				Axios.patch("/api/candidatemaster/patch/updateCandidateBasicInfo",formValues)
+			 .then(response=>{
+						 
+								
+						 	console.log(response.data);
+								Swal.fire("Congrats","Your Basic details is insert Successfully","success");
+									this.setState({
+													firstName          : "",
+													middleName         : "",
+													lastName           : "",
+													dob                : "",
+													gender             : "male",
+													anniversaryDate    : "",	
+													maritalStatus      : "",
+													languages          : [],
+													nationality        : "",
+													panCardNo          : "",
+													adhaarCardNo       : "",
+													ageYears	       : 0,	
+													ageMonths	       : 0,	
+													ageWeeks	       : 0,	
+													ageDays	       	   : 0,
+												})
+
+
+								this.props.history.push("/address/"+this.state.candidateID);
+							
+							
+				})
+				.catch(error =>{
+					console.log(error);
+					Swal.fire("Submit Error!",error.message,'error');
+				});
+			}
 		
 	}
+	
 	//========== User Define Function End ==================
 
 	//========== Validation Start ==================
 	 validateForm=()=>{
 		var status = true;
-	
+		
 		if(this.state.firstName.length<=0){
 			document.getElementById("firstNameError").innerHTML=  
 			"Please enter your first name";  
 			status=false; 
-		}else{
-			document.getElementById("firstNameError").innerHTML=  
+		}
+		 else{
+			document.getElementById("firstNameError").innerHTML=
 			""; 
 			status = true;
 		}
@@ -193,7 +297,7 @@ class BasicInfoForm extends Component{
 							<div className="col-lg-4">
 								<label htmlFor="age" className="nameTitleForm nameTitleFormAge">Age</label>
 								<div className="input-group showFeild">
-									{this.state.ageYears + "  Years, " + this.state.ageMonths + " months, " + this.state.ageWeeks + "Weeks " + " And " + this.state.ageDays + " Days Old"}	
+									{this.state.ageYears + "  Years, " + this.state.ageMonths + " months, " + this.state.ageWeeks + " Weeks " + " And " + this.state.ageDays + " Days Old"}	
 								</div> 
 							</div>
 
@@ -221,7 +325,7 @@ class BasicInfoForm extends Component{
 
 						</div>
 
-						<div className="row formWrapper">
+						<div className="row formWrapper multiselectZ">
 
 							<div className="col-lg-4">
 								<label htmlFor="maritalStatus" className="nameTitleForm">Marital Status<sup className="nameTitleFormStar">*</sup></label>
@@ -234,7 +338,7 @@ class BasicInfoForm extends Component{
 									  		?	
 									  			this.state.inputMaritalStatus.map((elem,index)=>{
 									  				return(
-									  					<option>{elem}</option>
+									  					<option value={elem._id} key={index}>{elem}</option>
 									  				);
 									  			})
 									  			
@@ -258,21 +362,13 @@ class BasicInfoForm extends Component{
 								<label htmlFor="languages" className="nameTitleForm">Languages<sup className="nameTitleFormStar">*</sup></label>
 								<div className="input-group ">
 									<span className="input-group-addon inputBoxIcon inputBoxIcon2"><i className="fa fa-comment-o"></i></span> 
-									<select className="form-control inputBox" id="languages" value={this.state.languages} name="languages" onChange={this.handleChange.bind(this)}>
-									  	<option  > - Select Your Languages - </option>
-									  	{
-									  		this.state.inputLanguages.length>0
-									  		?	
-									  			this.state.inputLanguages.map((elem,index)=>{
-									  				return(
-									  					<option>{elem}</option>
-									  				);
-									  			})
-									  			
-									  		:
-									  			null
-									  	}
-									</select>
+									<Multiselect  name="languages" id="languages" className="form-control " value={this.state.languages} onChange={this.handleChange.bind(this)}
+										options={this.state.languages}
+										isObject={false}
+										style={this.style}
+										closeIcon="cancel"
+
+									 />
 								</div>
 							</div>
 
@@ -291,7 +387,7 @@ class BasicInfoForm extends Component{
 									  		?	
 									  			this.state.inputNationality.map((elem,index)=>{
 									  				return(
-									  					<option>{elem}</option>
+									  					<option value={elem._id} key={index}>{elem}</option>
 									  				);
 									  			})
 									  			

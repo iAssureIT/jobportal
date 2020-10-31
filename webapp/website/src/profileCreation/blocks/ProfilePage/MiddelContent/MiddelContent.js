@@ -1,8 +1,39 @@
 import React,{Component} from 'react';
-
+import Axios 			 	from 'axios';
+import Swal 			 	from 'sweetalert2';
+import Moment               from 'moment';
+import { withRouter }	 	from 'react-router-dom';
 import './MiddelContent.css';
 
 class MiddelContent extends Component{
+	constructor(props){
+		super(props);
+
+		this.state={
+			candidateID        : this.props.match.params.candidateID,
+			workExperienceArry :[],
+			academicsArry      :[],
+			certificationArry  :[],
+		}
+	}
+		componentDidMount(){
+
+		Axios.get("/api/candidatemaster/get/one/"+this.state.candidateID)
+		.then(response=>{
+			 
+			 	this.setState({
+			 		workExperienceArry:response.data[0].workExperience,
+			 		academicsArry     :response.data[0].academics,
+			 		certificationArry :response.data[0].skillCertification,
+					
+
+				
+			 	})
+			 })
+			 .catch(error=>{
+			 	Swal.fire("Submit Error!",error.message,'error');
+			 })
+		}
 	render(){
 		return(
 				<div className="container-fluid middelContentWrapper col-lg-12">
@@ -21,12 +52,19 @@ class MiddelContent extends Component{
 								</div>
 							</div>
 							<div className="middelContentText col-lg-12">
-								<div className="SubHeadingPadding">
-									<p>Experienced Web User Interface Devloper with a demonstrated history of working in the internet industry. Skiled 
-									in Html5, SASS, Cascading Style Sheets(CSS), Bootsrap 4, JavaScript, JQuery and reactjs.</p>
-
-									<p className="secondP">Strong enginnering professional with a Bachlor's degree focused in Information Technology from MIT college of engineering</p>
-								</div>
+								{
+									this.state.certificationArry.length > 0
+									?
+									this.state.certificationArry.map((elem,index)=>{
+										return(
+												<div className="SubHeadingPadding" key={index}>
+													<p>{elem.skilldesc}</p>
+												</div>
+												);
+									})
+									:
+									null
+								}
 							</div>
 						</div>
 
@@ -44,135 +82,49 @@ class MiddelContent extends Component{
 								</div>
 							</div>
 							<div className="middelContentText  col-lg-12">
-								<div>
-									<div className="SubHeadingPadding">
-										<div className="profesion">
-											Software Engineer
-										</div>
-										<div>
-											<div className="col-lg-8">
-												<div className="row">
-													<div className="companyName">
-														Tata Consultancy Services . Full-time
+								{
+									this.state.workExperienceArry.length > 0
+									?
+									this.state.workExperienceArry.map((elem,index)=>{
+										return(
+										<div key={index}>
+											<div className="SubHeadingPadding">
+												<div className="profesion">
+													{elem.lastDegn}
+												</div>
+												<div>
+													<div className="col-lg-10">
+														<div className="row">
+															<div className="companyName">
+																{elem.companyName + " . " + "Full-time"}
+															</div>
+															<div className="companyExperience">
+																{Moment(elem.fromDate).format("YYYY MMM") +" - "+Moment(elem.toDate).format("YYYY MMM") + " . " + "9 mos"}
+															</div>
+															<div className="companyAddress">
+																{elem.city+" , "+elem.country} 
+															</div>
+														</div>
 													</div>
-													<div className="companyExperience">
-														Dec 2019 - Present. 9 mos
-													</div>
-													<div className="companyAddress">
-														Pune, Maharashtra, India
+													<div className="companyImages col-lg-2">
+														<div className="row">
+															<img className="pull-right" src="/Images/53.png" alt="Company logo"/>
+														</div>
 													</div>
 												</div>
 											</div>
-											<div className="companyImages col-lg-4">
+											<div>
 												<div className="row">
-													<img className="pull-right" src="/images/53.png" alt="Company logo"/>
+													<hr className="middleContentHr col-lg-10 col-lg-offset-1"/>
 												</div>
 											</div>
 										</div>
-									</div>
-									<div>
-										<div className="row">
-											<hr className="middleContentHr col-lg-10 col-lg-offset-1"/>
-										</div>
-									</div>
-								</div>
-
-								<div>
-									<div className="SubHeadingPadding">
-										<div className="profesion">
-											Software Devloper
-										</div>
-										<div>
-											<div className="col-lg-8">
-												<div className="row">
-													<div className="companyName">
-														Infosys Limited
-													</div>
-													<div className="companyExperience">
-														Dec 2018 - Dec 2019. 1 year 1 mos
-													</div>
-													<div className="companyAddress">
-														Pune, Maharashtra, India
-													</div>
-												</div>
-											</div>
-											<div className="companyImages col-lg-4">
-												<div className="row">
-													<img className="pull-right" src="/images/52.png" alt="Company logo"/>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div>
-										<div className="row">
-											<hr className="middleContentHr col-lg-10 col-lg-offset-1"/>
-										</div>
-									</div>
-								</div>
-
-								<div>
-									<div className="SubHeadingPadding">
-										<div className="profesion">
-											Frontend Devloper
-										</div>
-										<div>
-											<div className="col-lg-8">
-												<div className="row">
-													<div className="companyName">
-														Cybage Software
-													</div>
-													<div className="companyExperience">
-														jul 2017 - Dec 2018. 1 year 5 mos
-													</div>
-													<div className="companyAddress">
-														Pune, Maharashtra, India
-													</div>
-												</div>
-											</div>
-											<div className="companyImages col-lg-4">
-												<div className="row">
-													<img className="pull-right" src="/images/53.png" alt="Company logo"/>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div>
-										<div className="row">
-											<hr className="middleContentHr col-lg-10 col-lg-offset-1"/>
-										</div>
-									</div>
-								</div>
-
-								<div>
-									<div className="SubHeadingPadding">
-										<div className="profesion">
-											Cognizant
-										</div>
-										<div>
-											<div className="col-lg-8">
-												<div className="row">
-													<div className="companyName">
-														Cybage Software
-													</div>
-													<div className="companyExperience">
-														Sep 2016 - Dec 2017. 10 mos
-													</div>
-													<div className="companyAddress">
-														Pune, Maharashtra, India
-													</div>
-												</div>
-											</div>
-											<div className="companyImages col-lg-4">
-												<div className="row">
-													<img className="pull-right" src="/images/54.png" alt="Company logo"/>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-
-							</div>
-
+										);
+									})
+									:
+									null
+								  }
+						   </div>
 						</div>
 
 						<div >
@@ -189,34 +141,44 @@ class MiddelContent extends Component{
 								</div>
 							</div>
 							<div className="middelContentText  col-lg-12">
-								<div>
-									<div className="SubHeadingPadding">
-										<div className="profesion">
-											MIT College Of Engineering,
-										</div>
-										<div>
-											<div className="col-lg-8">
-												<div className="row">
-													<div className="companyName">
-														Engineers Degree,Information Technology,<br/>
-														1st Class
-													</div>
-													<div className="companyExperience">
-														2012 - 2016
-													</div>
-													<div className="companyAddress">
-														Pune, Maharashtra, India
+								{
+									this.state.academicsArry.length > 0
+									?
+									this.state.academicsArry.map((elem,index)=>{
+										return(
+												<div key={index}>
+													<div className="SubHeadingPadding">
+														<div className="profesion">
+															{elem.collegeSchool+" ,"}
+														</div>
+														<div>
+															<div className="col-lg-10">
+																<div className="row">
+																	<div className="companyName">
+																		{elem.qualification + " , " + elem.specialization + " , "}<br/>
+																		{elem.grade}
+																	</div>
+																	<div className="companyExperience">
+																		{"2012" +" - "+Moment(elem.passOutYear).format("YYYY")}
+																	</div>
+																	<div className="companyAddress">
+																	   {elem.cityVillage + " , " + elem.state + " , " + elem.country }
+																	</div>
+																</div>
+															</div>
+															<div className="companyImages col-lg-2">
+																<div className="row">
+																	<img className="pull-right" src="/Images/55.png" alt="College logo"/>
+																</div>
+															</div>
+														</div>
 													</div>
 												</div>
-											</div>
-											<div className="companyImages col-lg-4">
-												<div className="row">
-													<img className="pull-right" src="/images/55.png" alt="College logo"/>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
+											);
+										})
+										:
+										null
+									}
 							</div>
 						</div>
 					</div>
@@ -226,4 +188,4 @@ class MiddelContent extends Component{
 	}
 }
 
-export default MiddelContent;
+export default withRouter(MiddelContent);

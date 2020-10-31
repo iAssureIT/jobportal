@@ -1,6 +1,9 @@
 import React,{Component} 	from 'react';
 import { FontAwesomeIcon }  from '@fortawesome/react-fontawesome';
 import Moment               from 'moment';
+import { withRouter }	 	from 'react-router-dom';
+import Axios 			 	from 'axios';
+import Swal 			 	from 'sweetalert2';
 
 import '../BasicInfoForm/BasicInfoForm.css';
 
@@ -10,7 +13,10 @@ class Academics extends Component{
 		super(props);
 
 		this.state={
+			experienceArry                :[],
 			companyName                   : "",
+			candidateID                   : this.props.match.params.candidateID,
+			workExperienceID              : this.props.match.params.workExperienceID,
 			companyCountry                : "",
 			companyCity                   : "",
 			lastDesignation               : "",
@@ -21,16 +27,207 @@ class Academics extends Component{
 			responsibilities              : "",
 			reportingManager              : "",
 			reportingManagerDesignation   : "",
+			buttonText                    : "Save",
 
 			expYears                      : 0,
 			expMonths                     : 0,
 			
 		}
 	}
-
+	componentDidMount(){
+		this.getData();
+		if(this.props.match.params.workExperienceID){
+			this.edit()
+		}
+	}
 	//========== User Define Function Start ================
+	edit(){
+		var candidateID = this.state.candidateID;
+		var workExperienceID   = this.state.workExperienceID;
+		if (workExperienceID) {
+			var idDate ={
+				candidateID : this.state.candidateID,
+				workExperienceID : this.state.workExperienceID,
+			}
+			Axios.post("/api/candidatemaster/post/getOneCandidateExperience",idDate)
+			.then(response=>{
+				var editData =response.data;
 
+			 	this.setState({
+			 		companyName          :editData[0].workExperience[0].companyName,
+			 		companyCountry       :editData[0].workExperience[0].country,
+			 		companyCity          :editData[0].workExperience[0].city,
+			 		lastDesignation      :editData[0].workExperience[0].lastDegn,
+			 		lastDeartment        :editData[0].workExperience[0].department,
+			 		lastSalary           :editData[0].workExperience[0].lastSalary,
+			 		formDate             :Moment(editData[0].workExperience[0].fromDate).format("YYYY-MM-DD"),
+			 		toDate               :Moment(editData[0].workExperience[0].toDate).format("YYYY-MM-DD"),
+			 		responsibilities     :editData[0].workExperience[0].responsibilities,
+			 		reportingManager     :editData[0].workExperience[0].reportingManager,
+			 		reportingManagerDesignation     :editData[0].workExperience[0].reportingManagerDegn,
+			 		buttonText           :"Update"
+			 	})
+			 	
+			 })
+			 .catch(error=>{
+			 	Swal.fire("Submit Error!",error.message,'error');
+			 })
+		}
+	}
+	getData(){
+		Axios.get("/api/candidatemaster/get/one/"+this.state.candidateID)
+		.then(response=>{
+			 	this.setState({
+			 		experienceArry: response.data[0].workExperience
 
+				 })
+			 })
+			 .catch(error=>{
+			 	Swal.fire("Submit Error!",error.message,'error');
+			 })
+	}
+	deleteDate(event){
+		event.preventDefault();
+		var data_id =  event.currentTarget.id;
+
+		Swal.fire({
+		title : 'Are you sure? you want to delete this Experience Details!!!',
+		text : 'You will not be able to recover this Experience Details',
+		icon : 'warning',
+		showCancelButton : true,
+		confirmButtonText : 'Yes, delete it!',
+		cancelButtonColor : 'No, keep it',
+		confirmButtonColor : '#d33',
+	
+	  }).then((result) =>{
+		if(result.value){
+			if(data_id){
+				Axios.delete("/api/candidatemaster/deleteExperience/"+this.state.candidateID+"/delete/"+data_id)
+				.then(response =>{
+						if(response.data.deleted===true){
+						Swal.fire(
+									'Deleted!',
+									'Experience Details has been deleted successfully!',
+									'success'
+							);
+					}
+			})
+				.catch(error=>{
+					
+					Swal.fire(
+								"Some problem occured deleting Experience Details!",
+								error.message,
+								'error'
+						)
+				})
+			}
+				
+				}else if (result.dismiss === Swal.DismissReason.cancel){
+					
+					Swal.fire(
+						'Cancelled',
+						'Your Experience details is safe :)',
+						'error'
+					)
+				}
+			})
+	  this.getData();
+	}
+	
+	handleSave(event){
+		event.preventDefault();
+		var status =  this.validateForm();
+		
+		
+		var formValues = {
+								candidateID        : this.state.candidateID,
+								workExperienceID   : this.state.workExperienceID,
+								experience:{
+									companyName                   : this.state.companyName,
+									country                       : this.state.companyCountry,
+									city                          : this.state.companyCity,
+									lastDegn                      : this.state.lastDesignation,
+									department                    : this.state.lastDeartment,
+									lastSalary                    : this.state.lastSalary,
+									fromDate                      : this.state.formDate,
+									toDate                        : this.state.toDate,
+									responsibilities              : this.state.responsibilities,
+									reportingManager              : this.state.reportingManager,
+									reportingManagerDegn          : this.state.reportingManagerDesignation
+								}
+								
+							}
+		console.log(formValues);
+		if(this.props.match.params.workExperienceID){
+			this.updateData(formValues,event);
+		}else{
+			this.insetData(formValues,event);
+		}
+		this.getData();
+	}
+	updateData(formValues,event){
+		var status =  this.validateForm();
+		if(status==true){
+					Axios.patch("/api/candidatemaster/patch/updateOneCandidateExperience",formValues)
+				 .then(response=>{
+
+									Swal.fire("Congrats","Your Experience Details is update Successfully","success");
+										this.setState({
+													companyName                   : "",
+													companyCountry                : "",
+													companyCity                   : "",
+													lastDesignation               : "",
+													lastDeartment   		      : "",
+													lastSalary                    : "",
+													formDate	                  : "",	
+													toDate                        : "",
+													responsibilities              : "",
+													reportingManager              : "",
+													reportingManagerDesignation   : "",
+													buttonText                    : "Save"
+												})
+							this.props.history.push("/experience/"+this.state.candidateID);
+					})
+					.catch(error =>{
+						console.log(error);
+						Swal.fire("Submit Error!",error.message,'error');
+					});
+				}
+
+			
+		}
+	insetData(formValues,event){
+		var status =  this.validateForm();
+		if(status==true){
+			Axios.patch("/api/candidatemaster/patch/addCandidateExperience",formValues)
+			 .then(response=>{
+						 
+								
+						 	console.log(response.data);
+								Swal.fire("Congrats","Your Experience Details is insert Successfully","success");
+									this.setState({
+													companyName                   : "",
+													companyCountry                : "",
+													companyCity                   : "",
+													lastDesignation               : "",
+													lastDeartment   		      : "",
+													lastSalary                    : "",
+													formDate	                  : "",	
+													toDate                        : "",
+													responsibilities              : "",
+													reportingManager              : "",
+													reportingManagerDesignation   : "",
+													buttonText                    : "Save"
+												})
+							
+							
+				})
+				.catch(error =>{
+					console.log(error);
+					Swal.fire("Submit Error!",error.message,'error');
+				});
+			}
+	}
 	handelChange(event){
 		var value = event.currentTarget.value;
 		var name  = event.currentTarget.name;
@@ -43,39 +240,14 @@ class Academics extends Component{
 
 	}
 
-
+	handleBack(event){
+			event.preventDefault();
+			this.props.history.push("/certification/"+this.state.candidateID);
+		}
 	handelSubmit(event){
 		event.preventDefault();
-
-		var status =  this.validateForm();
-			var formValues = {
-								companyName                   : this.state.companyName,
-								companyCountry                : this.state.companyCountry,
-								companyCity                   : this.state.companyCity,
-								lastDesignation               : this.state.lastDesignation,
-								lastDeartment                 : this.state.lastDeartment,
-								lastSalary                    : this.state.lastSalary,
-								formDate                      : this.state.formDate,
-								responsibilities              : this.state.responsibilities,
-								reportingManager              : this.state.reportingManager,
-								reportingManagerDesignation   : this.state.reportingManagerDesignation,
-							}
-		console.log(formValues);
-		
-		this.setState({
-			companyName                   : "",
-			companyCountry                : "",
-			companyCity                   : "",
-			lastDesignation               : "",
-			lastDeartment   		      : "",
-			lastSalary                    : "",
-			formDate	                  : "",	
-			toDate                        : "",
-			responsibilities              : "",
-			reportingManager              : "",
-			reportingManagerDesignation   : "",
-	
-		})
+			this.props.history.push("/profile/"+this.state.candidateID);
+			
 	}
 	//========== User Define Function End ==================
 		//========== Validation Start ==================
@@ -315,14 +487,102 @@ class Academics extends Component{
 							</div>
 
 						</div>
+						<div>
+							<button className="buttonBack pull-right" onClick={this.handleSave.bind(this)}> {this.state.buttonText}</button>
+						</div>
+						<div className=" AddressWrapper col-lg-12" >
+							<div className="row">
+								{
+								this.state.experienceArry.length > 0
+								?
+								this.state.experienceArry.map((elem,index)=>{
+									return(
+									
+										<div className="col-lg-6 AddressOuterWrapper" key={index}>
+											<div className="col-lg-12 AddressInnerWrapper">
+												<div className="row">
+													<div className="col-lg-1 AddressBoxLeftIcon">
+														<FontAwesomeIcon icon="map-marker-alt" />
+													</div>
+													<div className="col-lg-10">
+														<div className="AddressBoxHead">
+															Work Experience
+														</div>
+														<div className="AddressBoxText">
+															{elem.companyName}
+														</div>
+														<div className="AddressBoxText">
+															{elem.country}
+														</div>
+														<div className="AddressBoxText">
+															{elem.city}
+														</div>
+														<div className="AddressBoxText">
+															{elem.lastDegn}
+														</div>
+														<div className="AddressBoxText">
+															{elem.department}
+														</div>
+														<div className="AddressBoxText">
+															{elem.lastSalary}
+														</div>
+														<div className="AddressBoxText">
+															{elem.fromDate}
+														</div>
+														<div className="AddressBoxText">
+															{elem.toDate}
+														</div>
+														<div className="AddressBoxText">
+															{elem.responsibilities}
+														</div>
+														<div className="AddressBoxText">
+															{elem.reportingManager}
+														</div>
+														<div className="AddressBoxText">
+															{elem.reportingManagerDegn}
+														</div>
+														
+														
+														
+													</div>
+													<div className="col-lg-1 AddressBoxRightIcon hoverEdit ">
+														<div className="row">
+															<FontAwesomeIcon icon="ellipsis-h" />
+														
+																<div className="rightIconHideWrapper" >
+																<a id={elem._id} href={"/experience/"+this.state.candidateID+"/edit/"+elem._id}>
+																	<div className="rightIconHide"   >
+																		<FontAwesomeIcon icon="pencil-alt" /> 
+																		<span className="rightIconHideRexr" >Edit</span>
+																	</div>
+																	</a>
+																	<div className="rightIconHide">
+																		<FontAwesomeIcon icon="trash-alt" /> 
+																		<span className="rightIconHideRexr" id={elem._id} onClick={this.deleteDate.bind(this)}>Delete</span>
+																	</div>
+																</div>
+						
+															
+														</div>
+													</div>
 
+												</div>
+											</div>
+										</div>
+										
+									);
+									})
+									:
+										null
+									}
+							</div>
+						</div>
 					
-						<button className="buttonBack pull-left" onClick={this.handelSubmit.bind(this)}> <i className="fa fa-angle-left"> - Back</i></button>
-						<button className="buttonNext pull-right" onClick={this.handelSubmit.bind(this)}>Next - <i className="fa fa-angle-right "></i></button>
+						<button className="buttonBack pull-left" onClick={this.handleBack.bind(this)}> <i className="fa fa-angle-left"> - Back</i></button>
 					</form>
 				</div>
 			);
 	}
 }
 
-export default Academics;
+export default withRouter(Academics);
