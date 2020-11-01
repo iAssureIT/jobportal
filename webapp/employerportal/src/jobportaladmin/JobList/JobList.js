@@ -1,14 +1,14 @@
 import React, {Component} from 'react';
-import './JobList.css';
+import './CompanyJobList.css';
 
 import Axios from  'axios';
 import Swal  from  'sweetalert2';
 
-export default class JobList extends Component{
+export default class CompanyJobList extends Component{
 	constructor(props){
 	super(props);
 	this.state={
-		jobList:[]
+		jobList : []
 	}
 }	
 
@@ -17,7 +17,7 @@ componentDidMount(){
 }
 
 getJobsData=()=>{
-	Axios.get("http://localhost:3009/getJobList")
+	Axios.get("api/jobs/getJobList")
 	.then(response=>{
 		console.log("getJobsData response.data : ", response.data);
 		this.setState({
@@ -34,18 +34,18 @@ deleteJob = (event)=>{
 	const job_id = event.currentTarget.id;
 
 	Swal.fire({
-		title : 'Are you sure? you want to delete this profile!!!',
-		text : 'You will not be able to recover this profile',
-		icon : 'warning',
-		showCancelButton : true,
-		confirmButtonText : 'Yes, delete it!',
-		cancelButtonColor : 'No, keep it',
-		confirmButtonColor : '#d33',
+		title 				: 'Are you sure? you want to delete this profile!!!',
+		text 				: 'You will not be able to recover this profile',
+		icon 				: 'warning',
+		showCancelButton 	: true,
+		confirmButtonText 	: 'Yes, delete it!',
+		cancelButtonColor 	: 'No, keep it',
+		confirmButtonColor 	: '#d33',
 	
 	}).then((result) =>{
 		if(result.value){
 			if(job_id){
-				Axios.delete("http://localhost:3009/delete/"+job_id)
+				Axios.delete("apijobs/delete/"+job_id)
 				.then(response =>{
 					console.log()
 					if(response.data.message==="Job details deleted Successfully!"){
@@ -122,13 +122,6 @@ deleteJob = (event)=>{
 													<div className="col-lg-1 jobListRightContent">
 														<div className="row">
 															<div className="col-lg-12">
-																<div className="jobProfileVerticleIcons">
-																	<ul>
-																		<li><i className="fa fa-check"></i></li>
-																		<li><i className="fa fa-heart-o"></i></li>
-																		<li><i className="fa fa-youtube-play"></i></li>
-																	</ul>
-																</div>
 																<div className="listEditBtn">
 																	<a title = "edit Profile" href={"/job-post-form/" + elem._id}><i className="fa fa-edit"></i></a>
 																</div>
@@ -154,70 +147,3 @@ deleteJob = (event)=>{
 		);
 	}
 }
-
-
-
-
-{/*<div className="container-fluid jobListWrapper">
-							<div className="row">
-								<div className="col-lg-9 mainListContainer pull-right">
-									<div className="col-lg-12">
-										<div className="row">
-											<div className="col-lg-6">
-												<div className="col-lg-12 listContainer">
-													<div className="col-lg-11 leftSideContent">
-														<div className="row">
-															<div className="col-lg-12">
-																<div className="row">
-																	<div className="iconsBar">
-																		<ul>	
-																			<li><i className="fa fa-male maleIcon"></i></li>
-																			<div className="verticalLine"></div>
-																			<li><i className="fa fa-female femaleIcon"></i></li>
-																			<li><i className="fa fa-sun-o sunIcon"></i></li>
-																			<li><i className="fa fa-clock-o clockIcon"></i></li>
-																		</ul>
-																		<div className="infoLog infoLogFix"> 15 Days Ago </div>
-																	</div>
-																</div>
-																<div className="designation">
-																	{elem.jobBasicInfo.jobTitle}
-																</div>
-																<div className="companyName">
-																	<b>iAssure International Technologies Pvt Ltd</b>
-																</div>
-																<div className="jobListFont"> 
-																	<i className="fa fa-calendar experience"></i> &nbsp; Exp: {elem.eligibility.minEducation} To {elem.eligibility.minExperience}
-																</div>
-																<div className="jobListFont"> 
-																	<i className="fa fa-rupee monSal"></i> &nbsp; <i className="fa fa-inr"></i> {elem.ctcOffered.minSalary} - <i className="fa fa-inr"></i> {elem.ctcOffered.maxSalary} a month
-																</div>
-																<div className="jobListFont">
-																	<i className="fa fa-map-marker jLocation"></i> &nbsp; {elem.jobBasicInfo.jobLocationCity}
-																</div>
-																<div className="jobListFont"> 
-																	<i className="fa fa-users noPositions"></i> &nbsp; No of position : 10
-																</div>
-															</div>
-														</div>
-													</div>
-													<div className="col-lg-1">
-														<div className="row">
-															<div className="col-lg-12">
-																<div className="verticleIcons">
-																	<ul>
-																		<li><i className="fa fa-check"></i></li>
-																		<li><i className="fa fa-heart-o"></i></li>
-																		<li><i className="fa fa-youtube-play"></i></li>
-																	</ul>
-																</div>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>	
-									</div>
-								</div>
-							</div>
-						</div>*/}

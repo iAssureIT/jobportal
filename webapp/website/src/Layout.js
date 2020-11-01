@@ -20,8 +20,10 @@ import Footer               from './common/footer/Footer.js';
 import Leftsidebar          from './common/leftSidebar/Leftsidebar.js';
 import CoreLayout           from './coreadmin/CoreLayout/CoreLayout.js';
 
-import PageFunctionWise    from './FunctionalAreawiseJobs/PageFunctionWise.js';
-import SubPageFunctionWise from './FunctionalAreawiseJobs/SubPageFunctionWise.js';
+import PageFunctionWise     from './functionalAreawiseJobs/PageFunctionWise.js';
+import SubPageFunctionWise  from './functionalAreawiseJobs/SubPageFunctionWise.js';
+import JobList              from './jobList/JobList.js'
+import JobWishlist          from './jobWishlist/JobWishlist.js'
 
 import CandidateProfile     from './profileCreation/blocks/ProfilePage/CandidateProfile.js';
 import CandidateBasicInfo   from './profileCreation/CandidateBasicInfo.js';
@@ -133,8 +135,9 @@ class Layout extends Component  {
                                                     <Route exact path="/certification/:candidateID"     component={CandidateCertification}  />
                                                     <Route exact path="/experience/:candidateID"        component={CandidateExperience}  />
                                                     <Route exact path="/profile/:candidateID"           component={CandidateProfile}  />
-                                                    {/*<Route exact path="/list"              component={CandidateList}  />  
-                                                    */}
+                                                    <Route exact path="/search-jobs"                    component={JobList}  />  
+                                                    <Route exact path="/wishlist"                    component={JobWishlist}  />  
+                                                    
                                                     
                                                     {/*<Route exact path="/Andaman And Nicobar Islands"        component={AndamanAndNicobar }  />
                                                     */}
