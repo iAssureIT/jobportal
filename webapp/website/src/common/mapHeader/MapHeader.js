@@ -52,13 +52,12 @@ class MapHeader extends Component{
 		    <div className="breadCrumbHeader col-lg-2">
 				<ul className="breadCrumbInner">
 				  <li className="breadCrumbInnerli"><a href="#">India</a></li>
-				  <li className="breadCrumbInnerli"><a href="#">{selectedState}</a></li> 
-				  <li className="breadCrumbInnerLI">Pune</li>
+				  <li className="breadCrumbInnerli"><a href="#">{selectedState}</a></li> 	
 				</ul>
 		    </div>
 
 	      	<div className="FunctionWiseTitle col-lg-5">
-	     		India 
+	     		 
 	      	</div>
 
 
@@ -67,7 +66,7 @@ class MapHeader extends Component{
 	     		<div className="rightFunctionHeader1 col-lg-9">
 	     			<div className="rightFunctionHeader1 col-lg-11 pull-right">
 		     			<div className="rightFunctionHeader1CityJobs">
-							<div className="cityNameHeader">Pune Jobs
+							<div className="cityNameHeader">{selectedState} Jobs
 							</div>	
 
 							<div className="cityJobsHeader">10,680

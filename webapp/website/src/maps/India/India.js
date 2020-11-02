@@ -46,7 +46,6 @@ class India extends Component{
 		mapAction.setMapSelectedState(stateName);
 		window.location.href = routeName
 		//this.props.history.push(routeName);
-
 	}
 	render(){
 		return(
@@ -89,9 +88,9 @@ class India extends Component{
 					</div>
 
 					<div className="rajasthan">
-						<img src="Maps/India/Rajasthan.png" className="img-responsive "  onClick={e => this.onStateClick("rajasthan")} onMouseOver={e => (e.currentTarget.src = "/Maps/India/Rajasthan1.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/India/Rajasthan.png")}/>
-						<span className="rajasthanText  text-capitalize">rajasthan</span>
-						<span className="rajasthanNumber  text-center">{this.search('rajasthan')}</span>
+						<img src="Maps/India/Rajasthan.png" className="img-responsive "  onClick={e => this.onStateClick("Rajasthan")} onMouseOver={e => (e.currentTarget.src = "/Maps/India/Rajasthan1.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/India/Rajasthan.png")}/>
+						<span className="rajasthanText  text-capitalize">Rajasthan</span>
+						<span className="rajasthanNumber  text-center">{this.search('Rajasthan')}</span>
 					</div>
 
 					<div className="gujrat">
