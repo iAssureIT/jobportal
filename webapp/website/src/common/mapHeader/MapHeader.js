@@ -51,8 +51,9 @@ class MapHeader extends Component{
 
 		    <div className="breadCrumbHeader col-lg-2">
 				<ul className="breadCrumbInner">
-				  <li className="breadCrumbInnerli"><a href="#">India</a></li>
-				  <li className="breadCrumbInnerli"><a href="#">{selectedState}</a></li> 	
+				  <li className="breadCrumbInnerli"><a href="/">India</a></li>
+				  <li className="breadCrumbInnerli selectedState"><a href={"/"+selectedState}>{selectedState}</a></li> 	
+				  {/*<li className="breadCrumbInnerLI selectedDistrict">Pune</li>*/}
 				</ul>
 		    </div>
 
@@ -66,7 +67,7 @@ class MapHeader extends Component{
 	     		<div className="rightFunctionHeader1 col-lg-9">
 	     			<div className="rightFunctionHeader1 col-lg-11 pull-right">
 		     			<div className="rightFunctionHeader1CityJobs">
-							<div className="cityNameHeader">{selectedState} Jobs
+							<div className="cityNameHeader">{selectedState && selectedState != "" ? selectedState : "India"}
 							</div>	
 
 							<div className="cityJobsHeader">10,680
@@ -105,10 +106,10 @@ class MapHeader extends Component{
 							<FontAwesomeIcon icon="file-alt" />
 							<span className="notificationMessegeText">Contact Us</span>
 						</div>
-						<div className="notificationMessege col-lg-12" data-toggle="modal"  data-target="#loginModal">
+						<a href="/login"><div className="notificationMessege col-lg-12">
 							<FontAwesomeIcon icon="sign-out-alt" />
 							<span className="notificationMessegeText">Sign In</span>
-						</div>
+						</div></a>
 
 					</div>
 					<div className="modal fade" id="loginModal" role="dialog">

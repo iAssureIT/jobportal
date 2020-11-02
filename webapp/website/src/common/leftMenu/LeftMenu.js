@@ -18,8 +18,6 @@ export default class LeftMenu extends Component{
 
   setActive(event){
 
-    
-
     var fieldValue=event.currentTarget.id;
     console.log("fieldValue",fieldValue);
      // var fieldKey=event.currentTarget.name;
@@ -33,7 +31,7 @@ export default class LeftMenu extends Component{
       LeftMenuView: this.state.LeftMenuView,
     }
     console.log("formValues=",formValues);
-
+    window.location.href = '/'
 }
 
   

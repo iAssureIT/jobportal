@@ -72,11 +72,21 @@ class Layout extends Component  {
     componentDidMount() {
         var pageUrl = window.location.pathname;
         let lastpara = pageUrl ? pageUrl.split('/') : "";
-        console.log("lastpara:",pageUrl);
+        
         if (lastpara[1] == '') {
             this.setState({ showMapHeader: true })
         }
         this.setState({ currentUrl: pageUrl })
+        
+        this.setState({ stateArray: process.env.REACT_APP_STATES.split(',') },()=>{
+
+            let stateLink = this.state.stateArray.find(element => element == decodeURIComponent(lastpara[1]) );
+            
+            if (stateLink ) {
+                this.setState({ showMapHeader: true })
+                this.props.mapAction.setMapSelectedState(decodeURIComponent(lastpara[1]));
+            }      
+        })
 
         var company_Id = localStorage.getItem("company_Id");
         var contractID ="";
@@ -87,18 +97,13 @@ class Layout extends Component  {
               })
             } else { }
 
-        axios.get("http://locations2.iassureit.com/api/states/get/list/IN")
-            .then((response) => {
-                this.setState({ stateArray: response.data })
+        
+        
 
-                let stateLink = this.state.stateArray.find(o => o.stateName === lastpara[1]);
-                if (stateLink) {
-                    this.setState({ showMapHeader: true })
-                    this.props.mapAction.setMapSelectedState(lastpara[1]);
-                }
-            })
-            .catch((error) => {
-            })   
+        
+       // let stateLink = this.state.stateArray.find(o => o.stateName === decodeURIComponent(lastpara[1]));
+        
+        
     }
     
     logout() {
@@ -113,11 +118,8 @@ class Layout extends Component  {
     render() {
         const roles = localStorage.getItem("roles");
         var roleArr = [];
-        roleArr.push(roles);
-
-        console.log(this.state.stateLink);
-        
-        
+        roleArr.push(roles);        
+        console.log(this.state.currentUrl)
         if (this.state.loggedIn) {
             return (
             <Router>
@@ -132,54 +134,54 @@ class Layout extends Component  {
                                         <div className="dashboardWrapper" >
                                             <div className="backColor col-lg-12 col-md-12 col-sm-12 col-xs-12" >
                                               {/*  <CoreLayout />*/}
-                                                <Switch >
-                                                    <Route exact path="/functional-area"        component={PageFunctionWise}  />
-                                                    <Route exact path="/subfunctional-area"        component={SubPageFunctionWise}  />
+                                        <Switch >
+                                            <Route exact path="/functional-area"        component={PageFunctionWise}  />
+                                            <Route exact path="/subfunctional-area"        component={SubPageFunctionWise}  />
 
-                                                    <Route exact path="/"        component={India}  />
+                                            <Route exact path="/"        component={India}  />
 
-                                                    <Route exact path="/basic-info"        component={CandidateBasicInfo}  />
-                                                    <Route exact path="/address/:candidateID"           component={CandidateAddress}  />
-                                                    <Route exact path="/contact/:candidateID"           component={CandidateContact}  />
-                                                    <Route exact path="/academics/:candidateID"         component={CandidateAcademics}  />
-                                                    <Route exact path="/certification/:candidateID"     component={CandidateCertification}  />
-                                                    <Route exact path="/experience/:candidateID"        component={CandidateExperience}  />
-                                                    <Route exact path="/profile/:candidateID"           component={CandidateProfile}  />
-                                                    <Route exact path="/search-jobs"                    component={JobList}  />  
-                                                    <Route exact path="/wishlist"                    component={JobWishlist}  />  
-                                                    
-                                                    
-                                                    {/*<Route exact path="/Andaman And Nicobar Islands"        component={AndamanAndNicobar }  />
-                                                    */}
-                                                    <Route exact path="/Andhra Pradesh"        component={AndhraPradesh }  />
-                                                    <Route exact path="/Arunachal Pradesh"        component={ArunachalPradesh }  />
-                                                    {/*<Route exact path="/Assam"        component={Assam }  />*/}
-                                                    <Route exact path="/Bihar"        component={Bihar }  />
-                                                    {/*<Route exact path="/Chandigarh"        component={Chandigarh }  />*/}
-                                                    
-                                                    <Route exact path="/Chhattisgarh"        component={Chhattisgarh }  />
-                                                    {/*<Route exact path="/Dadra And Nagar Haveli"        component={DadraNagarHaveli }  />
-                                                    <Route exact path="/Daman And Diu"        component={DamanAndDiu }  />
-                                                    */}
-                                                    <Route exact path="/Delhi"        component={Delhi }  />
-                                                    <Route exact path="/Goa"        component={Goa }  />
-                                                    <Route exact path="/Gujarat"        component={Gujarat }  />
-                                                    {/*<Route exact path="/Haryana"        component={Haryana }  />*/}
-                                                    <Route exact path="/Himachal Pradesh"        component={HimachalPradesh }  />
-                                                    <Route exact path="/JammuAndKashmir"        component={JammuKashmirLadakh }  />
-                                                    <Route exact path="/Jharkhand"        component={Jharkhand }  />
-                                                    <Route exact path="/Karnataka"        component={Karnataka }  />
-                                                    <Route exact path="/Kerala"        component={Kerala }  />
-                                                    {/*<Route exact path="/Lakshadweep"        component={Lakshadweep }  />*/}
-                                                    <Route exact path="/Madhya Pradesh"        component={MadhyaPradesh }  />
-                                                    <Route exact path="/Maharashtra"        component={Maharashtra }  />                                                    
-                                                    <Route exact path="/Manipur"        component={Manipur }  />
-                                                    <Route exact path="/Meghalaya"        component={Meghalaya }  />
-                                                    <Route exact path="/Mizoram"        component={Mizoram }  />
-                                                    <Route exact path="/Nagaland"        component={Nagaland }  />
-                                                    <Route exact path="/Odisha"        component={Orissa }  />
+                                            <Route exact path="/basic-info"        component={CandidateBasicInfo}  />
+                                            <Route exact path="/address/:candidateID"           component={CandidateAddress}  />
+                                            <Route exact path="/contact/:candidateID"           component={CandidateContact}  />
+                                            <Route exact path="/academics/:candidateID"         component={CandidateAcademics}  />
+                                            <Route exact path="/certification/:candidateID"     component={CandidateCertification}  />
+                                            <Route exact path="/experience/:candidateID"        component={CandidateExperience}  />
+                                            <Route exact path="/profile/:candidateID"           component={CandidateProfile}  />
+                                            <Route exact path="/search-jobs"                    component={JobList}  />  
+                                            <Route exact path="/wishlist"                    component={JobWishlist}  />  
+                                            
+                                            
+                                            {/*<Route exact path="/Andaman And Nicobar Islands"        component={AndamanAndNicobar }  />
+                                            */}
+                                            <Route exact path="/Andhra Pradesh"        component={AndhraPradesh }  />
+                                            <Route exact path="/Arunachal Pradesh"        component={ArunachalPradesh }  />
+                                            {/*<Route exact path="/Assam"        component={Assam }  />*/}
+                                            <Route exact path="/Bihar"        component={Bihar }  />
+                                            {/*<Route exact path="/Chandigarh"        component={Chandigarh }  />*/}
+                                            
+                                            <Route exact path="/Chhattisgarh"        component={Chhattisgarh }  />
+                                            {/*<Route exact path="/Dadra And Nagar Haveli"        component={DadraNagarHaveli }  />
+                                            <Route exact path="/Daman And Diu"        component={DamanAndDiu }  />
+                                            */}
+                                            <Route exact path="/Delhi"        component={Delhi }  />
+                                            <Route exact path="/Goa"        component={Goa }  />
+                                            <Route exact path="/Gujarat"        component={Gujarat }  />
+                                            {/*<Route exact path="/Haryana"        component={Haryana }  />*/}
+                                            <Route exact path="/Himachal Pradesh"        component={HimachalPradesh }  />
+                                            <Route exact path="/Jammu And Kashmir"        component={JammuKashmirLadakh }  />
+                                            <Route exact path="/Jharkhand"        component={Jharkhand }  />
+                                            <Route exact path="/Karnataka"        component={Karnataka }  />
+                                            <Route exact path="/Kerala"        component={Kerala }  />
+                                            {/*<Route exact path="/Lakshadweep"        component={Lakshadweep }  />*/}
+                                            <Route exact path="/Madhya Pradesh"        component={MadhyaPradesh }  />
+                                            <Route exact path="/Maharashtra"        component={Maharashtra }  />                                                    
+                                            <Route exact path="/Manipur"        component={Manipur }  />
+                                            <Route exact path="/Meghalaya"        component={Meghalaya }  />
+                                            <Route exact path="/Mizoram"        component={Mizoram }  />
+                                            <Route exact path="/Nagaland"        component={Nagaland }  />
+                                            <Route exact path="/Odisha"        component={Orissa }  />
 
-                                                </Switch>
+                                        </Switch>
                                             </div>
                                         </div>
                                     </div>
@@ -197,9 +199,9 @@ class Layout extends Component  {
 
                 { this.state.showMapHeader ? <MapHeader/> : null }
                     
-                { /*lastpara[1] == "functional-area" || lastpara[1] == "subfunctional-area" ? 
+                { this.state.currentUrl == "/functional-area" || this.state.currentUrl == "/subfunctional-area" ? 
                     <FunctionalHeader /> : null
-                */}
+                }
                     <Router >
                         <Switch >
 
@@ -221,7 +223,7 @@ class Layout extends Component  {
                             <Route exact path="/Gujarat"        component={Gujarat }  />
                             {/*<Route exact path="/Haryana"        component={Haryana }  />*/}
                             <Route exact path="/Himachal Pradesh"        component={HimachalPradesh }  />
-                            <Route exact path="/JammuAndKashmir"        component={JammuKashmirLadakh }  />
+                            <Route exact path="/Jammu And Kashmir"        component={JammuKashmirLadakh }  />
                             <Route exact path="/Jharkhand"        component={Jharkhand }  />
                             <Route exact path="/Karnataka"        component={Karnataka }  />
                             <Route exact path="/Kerala"        component={Kerala }  />
