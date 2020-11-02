@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import './CompanyJobList.css';
+import './JobList.css';
 
 import Axios from  'axios';
 import Swal  from  'sweetalert2';

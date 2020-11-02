@@ -97,13 +97,7 @@ class Layout extends Component  {
               })
             } else { }
 
-        
-        
-
-        
-       // let stateLink = this.state.stateArray.find(o => o.stateName === decodeURIComponent(lastpara[1]));
-        
-        
+       // let stateLink = this.state.stateArray.find(o => o.stateName === decodeURIComponent(lastpara[1])); 
     }
     
     logout() {

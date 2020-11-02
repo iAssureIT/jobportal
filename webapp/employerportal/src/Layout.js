@@ -16,20 +16,19 @@ import SignUp from './jobportaladmin/systemSecurity/SignUp.js';
 
 
 /*import Footer                                   from './coreadmin/common/footer/Footer.js';*/
-import EmployeeMaster                           from "./coreadmin/Master/EmployeeMaster/EmployeeMaster.js"
-import Leftsidebar                              from './jobportaladmin/Common/leftSidebar/Leftsidebar.js';
+import Leftsidebar                              from './jobportaladmin/common/leftSidebar/Leftsidebar.js';
 import Dashboard                                from './jobportaladmin/Dashboard/Dashboard.js'
-import Header                                   from './jobportaladmin/Common/Header/Header.js'; 
-import Footer                                   from './jobportaladmin/Common/Footer/Footer.js';
-/*import Leftsidebar                              from './jobportaladmin/Common/LeftSidebar/Leftsidebar.js';*/
-import FunctionalHeader                         from './jobportaladmin/Common/FunctionalHeader/FunctionalHeader.js'; 
-import JobPosting                               from './jobportaladmin/JobPosting/JobPosting.js'; 
-import JobProfile                               from './jobportaladmin/JobPostProfile/JobPostProfile.js'; 
-import JobList                                  from './jobportaladmin/JobList/JobList.js'; 
+import Header                                   from './jobportaladmin/common/header/Header.js'; 
+import Footer                                   from './jobportaladmin/common/footer/Footer.js';
+/*import Leftsidebar                              from './jobportaladmin/common/LeftSidebar/Leftsidebar.js';*/
+import FunctionalHeader                         from './jobportaladmin/common/functionalHeader/FunctionalHeader.js'; 
+import JobPosting                               from './jobportaladmin/jobPosting/JobPosting.js'; 
+import JobProfile                               from './jobportaladmin/jobPostProfile/JobPostProfile.js'; 
+import JobList                                  from './jobportaladmin/jobList/JobList.js'; 
 
 
 import axios                from 'axios';
-import CoreLayout from './coreadmin/CoreLayout/CoreLayout.js';
+import CoreLayout           from './coreadmin/CoreLayout/CoreLayout.js';
 
 
 class Layout extends Component  {
@@ -37,14 +36,26 @@ class Layout extends Component  {
     constructor(props) {
         super();
         this.state = {
-            loggedIn: true,
+            loggedIn: false,
             sidebar: true,
             empProfileStatus: true,
             contractDetails:"",
             profileStatus:""
         }
     }
+    componentDidMount() {
+        
+        var company_Id = localStorage.getItem("company_Id");
+        var contractID ="";
+        const token = localStorage.getItem("token");
+            if (token !== null && token !=="undefined") {
+              this.setState({
+                  loggedIn: true
+              })
+            } else { }
 
+       // let stateLink = this.state.stateArray.find(o => o.stateName === decodeURIComponent(lastpara[1])); 
+    }
   
     logout() {
         var token = localStorage.removeItem("token");
@@ -87,8 +98,7 @@ class Layout extends Component  {
                                                     <CoreLayout />
                                                    {/* <Leftsidebar/>*/}
                                                     <Switch >
-                                                        <Route path="/" component={Dashboard} exact />
-                                                        <Route path="/dashboard" component={Dashboard} exact />
+                                                        <Route path="/" component={Login} exact />
                                                         <Route path="/post-job" component={JobPosting} exact />
                                                         <Route path="/job-profile/:job_id" component={JobProfile} exact />
                                                         <Route path="/job-list" component={JobList} exact />
