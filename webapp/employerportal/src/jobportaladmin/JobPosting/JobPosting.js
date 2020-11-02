@@ -7,6 +7,9 @@ import Swal 				from 'sweetalert2';
 import { Multiselect } 		from 'multiselect-react-dropdown';
 import CKEditor 			from '@ckeditor/ckeditor5-react';
 import ClassicEditor 		from '@ckeditor/ckeditor5-build-classic';
+import PhoneInput 			from 'react-phone-input-2';
+
+import 'react-phone-input-2/lib/style.css';
 
 import PropTypes from 'prop-types';
 
@@ -17,51 +20,49 @@ export default class JobPosting extends Component{
 		super(props);
 
 		this.state = {
-			jobTitle 			: "",
-			jobLocationCity 	: "",
-			jobLocationCountry 	: "",
-			/*industryId			: "",*/
-			functionalArea 		: "",
-			subFunctionalArea 	: "",
-			/*functionalAreaId 	: "",*/
-			/*subFunctionalAreaId : "",*/
-			role 				: "",
-			gender             : "Male",
-			workFromHome 		: "",
-			contactPerson 		: "",
-			email 				: "",
-			phone 				: "",
-			jobType 			: "",
-			jobTypeArray		: [],
-			jobTime 			: "",
-			lastDateOfAppl 		: "",
-			streetAddress		: "",
-			pincode 			: "",
-			minSalary 			: "",
-			minSalPeriod 		: "",
-			maxSalary 			: "",
-			maxSalPeriod		: "",
-			jobDesc 			: "",
-			minEducation 		: "",
-			minExperience 		: "",
-			priSkillsArray 		: [],
-			minPrimExp	    	: "", 
-			secSkillsArray 		: [],
-			minSecExp			: "", 
-			otherSkillsArray 	: [],
-			minExpRequiredOther	: "", 
-			preferSkillsArray 	: [],
-			minExpRequiredPre	: "",
-			industryList		: [],
-			functionalArealist 	: [],
-			subFunctionalAreaList:[],
-			priSkillsArraylist 	: [],
-			secSkillsArraylist 	: [],
-			otherSkillsArraylist: [],
-			minOtherExp   		: "",
-			preferSkillsArraylist: [],
-			jobTypeArray		: [],
-			submitBtnText 		: "SUBMIT",		      
+			jobTitle 				: 	"",
+			jobLocationCity 		: 	"",
+			jobLocationCountry 		: 	"",
+			/*industryId			: 	"",*/
+			functionalArea 			: 	"",
+			/*functionalAreaId 		: 	"",*/
+			subFunctionalArea 		: 	"",
+			/*subFunctionalAreaId 	: 	"",*/
+			role 					: 	"",
+			gender             		: 	"Male",
+			workFromHome 			: 	"",
+			contactPersonName 		: 	"",
+			contactPersonEmail		:   "",
+			contactPersonPhone		:   "",
+			jobType 				: 	"",
+			jobTypeArray			: 	[],
+			jobTime 				: 	"",
+			lastDateOfAppl 			: 	"",
+			minSalary 				: 	"",
+			minSalPeriod 			: 	"",
+			maxSalary 				: 	"",
+			maxSalPeriod			: 	"",
+			jobDesc 				: 	"",
+			minEducation 			: 	"",
+			minExperience 			: 	"",
+			priSkillsArray 			: 	[],
+			minPrimExp	    		: 	"", 
+			secSkillsArray 			: 	[],
+			minSecExp				: 	"", 
+			otherSkillsArray 		: 	[],
+			minOtherExp				: 	"", 
+			preferSkillsArray 		: 	[],
+			minExpRequiredPre		: 	"",
+			industryList			: 	[],
+			functionalArealist 		: 	[],
+			subFunctionalAreaList	: 	[],
+			priSkillsArraylist 		: 	[],
+			secSkillsArraylist 		: 	[],
+			otherSkillsArraylist	: 	[],
+			minOtherExp   			: 	"",
+			preferSkillsArraylist	: 	[],
+			/*jobTypeArray			: 	[],*/
+			submitBtnText 			: 	"SUBMIT",			      
 		}
 
 		this.style =  {
@@ -85,34 +86,34 @@ export default class JobPosting extends Component{
 			.then(response=>{
 				console.log("response.data : ", response.data);
 				this.setState({
-					job_id			: job_id,
-					jobTitle 		: response.data.jobsData.jobBasicInfo.jobTitle,
-					jobLocationCity : response.data.jobsData.jobBasicInfo.jobLocationCity,
-					country 		: response.data.jobsData.jobBasicInfo.country,
-					functionalArea 	: response.data.jobsData.jobBasicInfo.functionalArea,
-					subFunctionalArea: response.data.jobsData.jobBasicInfo.subFunctionalArea,
-					role 			: response.data.jobsData.jobBasicInfo.role,
-					gender 			: response.data.jobsData.jobBasicInfo.gender,
-					workFromHome 	: response.data.jobsData.workFromHome,
-					jobType 		: response.data.jobsData.jobType,
-					contactPerson 	: response.data.jobsData.contactPerson,
-					email 			: response.data.jobsData.email,
-					phone 			: response.data.jobsData.phone,
-					jobTime 		: response.data.jobsData.jobTime,
-					lastDateOfAppl 	: response.data.jobsData.lastDateOfAppl,
-					streetAddress	: response.data.jobsData.streetAddress,
-					pincode 		: response.data.jobsData.pincode,
-					minSalary 		: response.data.jobsData.ctcOffered.minSalary,
-					minSalPeriod 	: response.data.jobsData.ctcOffered.minSalPeriod,
-					maxSalary 		: response.data.jobsData.ctcOffered.maxSalary,
-					maxSalPeriod	: response.data.jobsData.ctcOffered.maxSalPeriod,
-					jobDesc 		: response.data.jobsData.jobBasicInfo.jobDesc,
-					minEducation 	: response.data.jobsData.eligibility.minEducation,
-					minExperience 	: response.data.jobsData.eligibility.minExperience,
-					minPrimExp 		: response.data.jobsData.requiredSkills.minPrimExp,
-					minSecExp 		: response.data.jobsData.requiredSkills.minSecExp,
-					minOtherExp 	: response.data.jobsData.requiredSkills.minOtherExp,
-					submitBtnText 	: "UPDATE",
+					job_id				: job_id,
+					jobTitle 			: response.data.jobsData.jobBasicInfo.jobTitle,
+					jobLocationCity 	: response.data.jobsData.jobBasicInfo.jobLocationCity,
+					country 			: response.data.jobsData.jobBasicInfo.country,
+					functionalArea 		: response.data.jobsData.jobBasicInfo.functionalArea,
+					subFunctionalArea 	: response.data.jobsData.jobBasicInfo.subFunctionalArea,
+					role 				: response.data.jobsData.jobBasicInfo.role,
+					gender 				: response.data.jobsData.jobBasicInfo.gender,
+					workFromHome 		: response.data.jobsData.workFromHome,
+					jobType 			: response.data.jobsData.jobType,
+					contactPersonName 	: response.data.jobsData.contactPersonName,
+					contactPersonEmail 	: response.data.jobsData.contactPersonEmail,
+					contactPersonPhone 	: response.data.jobsData.contactPersonPhone,
+					jobTime 			: response.data.jobsData.jobTime,
+					lastDateOfAppl 		: response.data.jobsData.lastDateOfAppl,
+					streetAddress		: response.data.jobsData.streetAddress,
+					pincode 			: response.data.jobsData.pincode,
+					minSalary 			: response.data.jobsData.ctcOffered.minSalary,
+					minSalPeriod 		: response.data.jobsData.ctcOffered.minSalPeriod,
+					maxSalary 			: response.data.jobsData.ctcOffered.maxSalary,
+					maxSalPeriod		: response.data.jobsData.ctcOffered.maxSalPeriod,
+					jobDesc 			: response.data.jobsData.jobBasicInfo.jobDesc,
+					minEducation 		: response.data.jobsData.eligibility.minEducation,
+					minExperience 		: response.data.jobsData.eligibility.minExperience,
+					minPrimExp 			: response.data.jobsData.requiredSkills.minPrimExp,
+					minSecExp 			: response.data.jobsData.requiredSkills.minSecExp,
+					minOtherExp 		: response.data.jobsData.requiredSkills.minOtherExp,
+					submitBtnText 		: "UPDATE",
 				})
 			})
 			.catch(error=>{
@@ -257,7 +258,7 @@ export default class JobPosting extends Component{
 			""; 
 			status = true;
 		}
-		if(this.state.contactPerson.length<=0){
+		if(this.state.contactPersonName.length<=0){
 			document.getElementById("contactPersonError").innerHTML=  
 			"Enter contact person name";  
 			status = false; 
@@ -266,7 +267,7 @@ export default class JobPosting extends Component{
 			""; 
 			status = true;
 		}
-		if(this.state.email.length<=0){
+		if(this.state.contactPersonEmail.length<=0){
 			document.getElementById("emailError").innerHTML=  
 			"Enter email id";  
 			status = false; 
@@ -275,7 +276,7 @@ export default class JobPosting extends Component{
 			""; 
 			status = true;
 		}
-		if(this.state.phone.length<=0){
+		if(this.state.contactPersonPhone.length<=0){
 			document.getElementById("phoneError").innerHTML=  
 			"Enter phone number";  
 			status = false; 
@@ -338,30 +339,29 @@ export default class JobPosting extends Component{
 		event.preventDefault();
 		if(this.validateForm()){	
 		var formValues = {
-			jobTitle 			: this.state.jobTitle,
-			jobLocationCity		: this.state.jobLocationCity,
-			jobLocationCountry 	: this.state.jobLocationCountry,
-			functionalArea 		: this.state.functionalArea,
-			subFunctionalArea 	: this.state.subFunctionalArea,
-			role 				: this.state.role,
-			gender      	   	: this.state.gender,
-			workFromHome 		: this.state.workFromHome,
-			contactPerson 		: this.state.contactPerson,
-			email 				: this.state.email,
-			phone 				: this.state.phone,
-			jobType 			: this.state.jobType,
-			jobTime 			: this.state.jobTime,
-			lastDateOfAppl 		: this.state.lastDateOfAppl,
-			minSalary 			: this.state.minSalary,
-			minSalPeriod 		: this.state.minSalPeriod,
-			maxSalary 			: this.state.maxSalary,
-			maxSalPeriod 		: this.state.maxSalPeriod,
-			jobDesc 			: this.state.jobDesc,
-			minEducation 		: this.state.minEducation,
-			minExperience 		: this.state.minExperience,
-			minPrimExp	 		: this.state.minPrimExp,
-			minSecExp	 		: this.state.minSecExp,
-			minOtherExp	 		: this.state.minOtherExp,
+			jobTitle 			: 	this.state.jobTitle,
+			jobLocationCity		: 	this.state.jobLocationCity,
+			jobLocationCountry 	: 	this.state.jobLocationCountry,
+			functionalArea 		: 	this.state.functionalArea,
+			subFunctionalArea 	: 	this.state.subFunctionalArea,
+			role 				: 	this.state.role,
+			gender      	   	: 	this.state.gender,
+			workFromHome 		: 	this.state.workFromHome,
+			contactPersonName 	: 	this.state.contactPersonName,
+			contactPersonEmail 	: 	this.state.contactPersonEmail,
+			jobType 			: 	this.state.jobType,
+			jobTime 			: 	this.state.jobTime,
+			lastDateOfAppl 		: 	this.state.lastDateOfAppl,
+			minSalary 			: 	this.state.minSalary,
+			minSalPeriod 		: 	this.state.minSalPeriod,
+			maxSalary 			: 	this.state.maxSalary,
+			maxSalPeriod 		: 	this.state.maxSalPeriod,
+			jobDesc 			: 	this.state.jobDesc,
+			minEducation 		: 	this.state.minEducation,
+			minExperience 		: 	this.state.minExperience,
+			minPrimExp	 		: 	this.state.minPrimExp,
+			minSecExp	 		: 	this.state.minSecExp,
+			minOtherExp	 		: 	this.state.minOtherExp,
 		};
 			console.log("formValues :", formValues);
 			
@@ -385,31 +385,30 @@ export default class JobPosting extends Component{
 
 					Swal.fire("Congrats","Your Data is Submitted Successfully","success");
 					this.setState({
-									jobTitle 			: "",
-									jobLocationCity 	: "",
-									jobLocationCountry 	: "",
-									functionalArea 		: "",
-									subFunctionalArea 	: "",
-									role 				: "",
-									gender              : "Male",
-									workFromHome 		: "",
-									contactPerson 		: "",
-									email 				: "",
-									phone 				: "",
-									jobType 			: "",
-									jobTime 			: "",
-									lastDateOfAppl 		: "",
-									minSalary 			: "",
-									minSalPeriod 		: "",
-									maxSalary 			: "",
-									maxSalPeriod		: "",
-									jobDesc 			: "",
-									minEducation 		: "",
-									minExperience 		: "",
-									minPrimExp 	 		: "",
-									minSecExp 	 		: "",
-									minOtherExp			: ""
-								  });
+						jobTitle 			: "",
+						jobLocationCity 	: "",
+						jobLocationCountry 	: "",
+						functionalArea 		: "",
+						subFunctionalArea 	: "",
+						role 				: "",
+						gender              : "Male",
+						workFromHome 		: "",
+						contactPersonName 	: "",
+						contactPersonEmail 	: "",
+						jobType 			: "",
+						jobTime 			: "",
+						lastDateOfAppl 		: "",
+						minSalary 			: "",
+						minSalPeriod 		: "",
+						maxSalary 			: "",
+						maxSalPeriod		: "",
+						jobDesc 			: "",
+						minEducation 		: "",
+						minExperience 		: "",
+						minPrimExp 	 		: "",
+						minSecExp 	 		: "",
+						minOtherExp			: ""			
+					});
 					this.props.history.push("/job-profile/"+job_id);
 				}
 			})
@@ -445,7 +444,7 @@ export default class JobPosting extends Component{
 		 
 		 /*const { funAreaArray, jobTypeArray, jobTimeArray, countryArray, minSalArray, maxSalArray,  secSkillsArray, otherSkillsArray, preferSkillsArray } = this.state;*/
 				
-		return(
+			return(
 			<div className="pageWrapper addJobBackgroundColor container-fluid">
 				<div className="row">
 					<div className="col-lg-10 col-lg-offset-1 addJobForm pageWrapperBorder borderColor">
@@ -491,12 +490,6 @@ export default class JobPosting extends Component{
 												    	<option> Germany 	  </option>
 												    </select>
 												    <span id="countryError" className="errorMsg"></span>
-												    {/*<Multiselect 
-											            options={countryArray}
-											            displayValue="key"
-											            singleSelect
-											            style={this.style}
-										        	/>*/}
 												</div>
 											</div>
 										</div>
@@ -509,6 +502,7 @@ export default class JobPosting extends Component{
 											<div className="input-group">
 												<span className="input-group-addon addJobFormField"><i className="fa fa-briefcase"></i></span> 
 												<select className="form-control addJobFormField" name="functionalArea" id="functionalArea" value={this.state.functionalArea} onChange={this.handleChange}>
+												<option hidden> --select-- </option>
 											    	{
 														this.state.functionalArealist!=null && this.state.functionalArealist.length > 0 
 														?
@@ -556,7 +550,7 @@ export default class JobPosting extends Component{
 											<span id="roleError" className="errorMsg"></span>
 										</div>
 										<div className="col-lg-4">
-											<label htmlFor="gender" className="nameTitleForm nameTitleFormAge"> Gender <span className="asterisk">&#42;</span></label>
+											<label htmlFor="gender" className="addJobGenderTitle"> Gender <span className="asterisk">&#42;</span></label>
 											<div className="input-group genderFeildWrapper">
 												<div className={this.state.gender==="Male"? "genderFeild col-lg-4 genderFeildActive" : "genderFeild col-lg-4" }  id="Male" name="gender" value="Male" onClick={this.setGender.bind(this)}>
 													<div className="row" >
@@ -589,7 +583,7 @@ export default class JobPosting extends Component{
 											<label htmlFor="contactPerson" className="addjobformLable"> Contact Person <span className="asterisk">&#42;</span> </label>
 											<div className="input-group">
 												<span className="input-group-addon addJobFormField"><i className="fa fa-user"></i></span> 
-												<input type="text" className="form-control addJobFormField" name="contactPerson" id="contactPerson" value={this.state.contactPerson} onChange={this.handleChange}/>
+												<input type="text" className="form-control addJobFormField" name="contactPersonName" id="contactPersonName" value={this.state.contactPersonName} onChange={this.handleChange}/>
 											</div>
 											<span id="contactPersonError" className="errorMsg"></span>
 										</div>
@@ -597,16 +591,23 @@ export default class JobPosting extends Component{
 											<label htmlFor="email" className="addjobformLable"> Email <span className="asterisk">&#42;</span> </label>
 											<div className="input-group">
 												<span className="input-group-addon addJobFormField"><i className="fa fa-envelope-o"></i></span> 
-												<input type="text" className="form-control addJobFormField" name="email" id="email" value={this.state.email} onChange={this.handleChange}/>
+												<input type="text" className="form-control addJobFormField" name="contactPersonEmail" id="contactPersonEmail" value={this.state.contactPersonEmail} onChange={this.handleChange}/>
 											</div>
 											<span id="emailError" className="errorMsg"></span>
 										</div>
 										<div className="col-lg-4">
 											<label htmlFor="phone" className="addjobformLable"> Phone Number <span className="asterisk">&#42;</span> </label>
-											<div className="input-group">
+											{/*<div className="input-group">
 												<span className="input-group-addon addJobFormField"><i className="fa fa-phone"></i> </span> 
-												<input type="text" className="form-control addJobFormField" name="phone" id="phone" value={this.state.phone} onChange={this.handleChange}/>
-											</div>
+												<input type="text" className="form-control addJobFormField" name="contactPersonPhone" id="contactPersonPhone" value={this.state.contactPersonPhone} onChange={this.handleChange}/>
+											</div>*/}
+											<PhoneInput
+												className="input-group-addon addJobFormField form-control addJobFormField" 
+												country={'in'}
+												id="contactPersonPhone"
+												value={this.state.contactPersonPhone}
+												onChange={contactPersonPhone => this.setState({ contactPersonPhone })}
+											/>
 											<span id="phoneError" className="errorMsg"></span>
 										</div>
 									</div>
@@ -619,11 +620,6 @@ export default class JobPosting extends Component{
 												<span className="input-group-addon addJobFormField"><i className="fa fa-briefcase"></i> </span> 
 												<select name="jobType" className="form-control addJobFormField" id="jobType" value={this.state.jobType} onChange={this.handleChange}>
 											    	<option hidden> --select-- </option>
-											    	{/*<option> Full Time  </option>
-											    	<option> Internship </option>
-											    	<option> Contract   </option>
-											    	<option> Part-time  </option>
-											    	<option> Temporary  </option>*/}
 											    	{
 														this.state.jobTypeArray!=null && this.state.jobTypeArray.length > 0 
 														?
@@ -637,12 +633,6 @@ export default class JobPosting extends Component{
 															<option> select </option>
 													}	
 												</select>
-												{/*<Multiselect 
-										            options={jobTypeArray}
-										            displayValue="key"
-										            singleSelect
-										            style={this.style}
-										        />*/}
 											</div>
 										</div>
 										<div className="col-lg-4">
@@ -654,15 +644,9 @@ export default class JobPosting extends Component{
 											    	<option> 8 to 5     </option>
 											    	<option> 9 to 6     </option>
 												</select>
-												{/*<Multiselect 
-										            options={jobTimeArray}
-										            displayValue="key"
-										            singleSelect
-										            style={this.style}
-										        />*/} 
 											</div>
 										</div>
-										<div className="col-lg-4">
+										<div className="col-lg-4 democlass">
 											<label htmlFor="lastDateOfAppl" className="addjobformLable"> Last Date of Application </label>
 											<div className="input-group">
 												<span className="input-group-addon addJobFormField"><i className="fa fa-calendar"></i></span> 
@@ -694,17 +678,11 @@ export default class JobPosting extends Component{
 												</div>
 												<div className="col-lg-4">
 													<label htmlFor="minSalPeriod" className="addjobformLable"> &nbsp; </label>
-													<select className="form-control addJobFormField" name="minSalPeriod" id="minSalPeriod" value={this.state.minSalPeriod} onChange={this.handleChange}>
-												      <option hidden> --select-- </option>
-												      <option> Per Month  </option>
-												      <option> Per Year   </option>
+													<select className="form-control addJobFormField minSalaryDropdown" name="minSalPeriod" id="minSalPeriod" value={this.state.minSalPeriod} onChange={this.handleChange}>
+														<option hidden> --select-- </option>
+														<option> Per Month  </option>
+														<option> Per Year   </option>
 												    </select>
-												    {/*<Multiselect 
-											            options={minSalArray}
-											            displayValue="key"
-											            singleSelect
-											            style={this.style}
-										        	/>*/}
 												</div>
 											</div>
 										</div>
@@ -720,16 +698,10 @@ export default class JobPosting extends Component{
 												<div className="col-lg-4">
 													<label htmlFor="maxSalPeriod" className="addjobformLable"> &nbsp; </label>
 													<select className="form-control addJobFormField" name="maxSalPeriod" id="maxSalPeriod" value={this.state.maxSalPeriod} onChange={this.handleChange}>
-												      <option hidden> --select-- </option>
-												      <option> Per Month  </option>
-												      <option> Per Year   </option>
+														<option hidden> --select-- </option>
+														<option> Per Month  </option>
+														<option> Per Year   </option>
 												    </select>
-												    {/*<Multiselect 
-											            options={maxSalArray}
-											            displayValue="key"
-											            singleSelect
-											            style={this.style}
-										        	/>*/}
 												</div>
 											</div>
 										</div>
@@ -748,12 +720,12 @@ export default class JobPosting extends Component{
 								<div className="description text-left col-lg-12">
 									<div className="form-group">
 								      <label htmlFor="jobDesc" className="addjobformLable jobDesc"> Describe the responsibilities of this job, required work experience, skills, or education. </label>
-								      	<div rows="20" id="jobDesc"> 
+								      	<div rows="20"> 
                     						<CKEditor
 									          editor={ ClassicEditor }
 									          data=""
+									          id="jobDesc"
 									          onInit={ editor => {
-									            // You can store the "editor" and use when it is needed.
 									            console.log( 'Editor is ready to use!', editor );
 									          } }
 									          onChange={ ( event, editor ) => {

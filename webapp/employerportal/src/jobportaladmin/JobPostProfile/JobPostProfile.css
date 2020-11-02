@@ -11,6 +11,7 @@
 	min-height: 670px;
 	height: auto;
 	border: 1px solid var(--main-border-color);
+	padding-bottom: 100px;
 }
 
 .leftHeader{
@@ -84,6 +85,10 @@
 .timeline{
 	height: 200px;
 	/*background-color: red;*/
+}
+
+.jobDescContent{
+	margin-left: -37px;
 }
 
 /*******************************Content Wrapper One********************************/
@@ -490,3 +495,50 @@
 	margin-left: 30px;
 	margin-top: 330px;
 }
+
+/************************************React phone input custom classes***************************/
+.react-tel-input .form-control{
+	width: 255px;
+	background-color: var(--main-bg-color);
+	border: 1px solid var(--main-border-color);
+	color: #fff;
+}
+
+.react-tel-input .flag-dropdown{
+	background-color: var(--main-bg-color);
+	border: 1px solid var(--main-border-color);
+	color: #fff;
+	z-index: 100 !important;
+}
+
+.react-tel-input .flag-dropdown:hover{
+	background-color: var(--main-bg-color);
+}
+
+.react-tel-input .selected-flag:hover{
+	background-color: var(--main-bg-color);
+}
+
+.react-tel-input .selected-flag .arrow{
+    border-top: 4px solid #fff !important;
+}
+
+.react-tel-input .country-list{
+	background-color: var(--main-bg-color);
+	border: 1px solid var(--main-border-color);
+	border-radius: 5px;
+}
+
+.react-tel-input .country-list .country:hover{
+	background-color: var(--main-border-color);
+}
+
+.react-tel-input .country-list .country.highlight{
+	background-color: var(--main-border-color);
+}
+
+.react-tel-input .country-list .country .dial-code{
+	/*color: #fff;*/
+}
+
+/******************************End of react phone input*****************************************/

@@ -37,7 +37,7 @@ class Layout extends Component  {
     constructor(props) {
         super();
         this.state = {
-            loggedIn: false,
+            loggedIn: true,
             sidebar: true,
             empProfileStatus: true,
             contractDetails:"",
@@ -45,57 +45,7 @@ class Layout extends Component  {
         }
     }
 
-    componentDidMount() {
-      var company_Id = localStorage.getItem("company_Id");
-      var user_id = localStorage.getItem("user_ID");
-
-      var contractID ="";
-      axios.get("/api/contract/get/one/entity/" + company_Id)
-      .then((response) => {
-          if(response.data.length>0){
-              var contractDetails = response.data[0];
-               axios.get("/api/entitymaster/get/one/"+company_Id)
-              .then((response)=>{
-                  if(response.data[0].profileStatus === "New" || contractDetails.status !== "Approved"){
-                      this.setState({
-                          sidebar:false
-                      })
-                  }
-              })
-              .catch((error)=>{})
-          }else{
-              this.setState({
-                  sidebar:false
-              })
-          }
-      })
-      .catch((error) => {})
-
-      axios.get('/api/personmaster/get/details/' + user_id)
-      .then((res) => {
-        console.log("res empProfileStatus",res)
-        if(res.data[0].profileStatus && res.data[0].profileStatus === "New" )
-        {
-          this.setState({
-            empProfileStatus : false
-          })
-        }
-        
-      })
-      .catch((err) => {
-      })
-
-       
-
-      const token = localStorage.getItem("token");
-      if (token !== null && token !== "undefined") {
-          this.setState({
-              loggedIn: true
-          })
-      } else { }
-
-    }
-
+  
     logout() {
         var token = localStorage.removeItem("token");
         if (token !== null && token !== "undefined") {
@@ -140,7 +90,7 @@ class Layout extends Component  {
                                                         <Route path="/" component={Dashboard} exact />
                                                         <Route path="/dashboard" component={Dashboard} exact />
                                                         <Route path="/post-job" component={JobPosting} exact />
-                                                        <Route path="/job-profile" component={JobProfile} exact />
+                                                        <Route path="/job-profile/:job_id" component={JobProfile} exact />
                                                         <Route path="/job-list" component={JobList} exact />
                                                     </Switch>
                                                 </div>

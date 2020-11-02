@@ -81,6 +81,10 @@
 	padding-left: 17px;
 }
 
+.addJobFieldRow .minSalaryDropdown{
+	margin-left: 1px;
+}
+
 .jobDesc{
 	margin-top: 20px;
 	padding-bottom: 6px;
@@ -153,67 +157,42 @@
 
 
 /*****************************Custom Gender Field************************************/
-.nameTitleForm{
+.addJobGenderTitle{
 	font-family: 'Montserrat-Medium';
 	font-size: 12px;
 	font-weight: 100 !important;
 	color: var(--main-txt-color);
 }
 
-.nameTitleFormAge{
-	font-family: 'Montserrat-Regular';
-	color: var(--main-txt-color);
-}
-
-.genderFeildWrapper{
-	height: 25px;
+.addJobGenderFeildWrapper{
+	height: 32px;
 	border: 1px solid var(--main-border-color)!important;
 	width: 100%;
-	border-radius: 20px;
+	border-radius: 5px;
 }
 
-.genderFeild{
+.addJobGenderField{
 	height: 32px;
-	border-radius: 20px;
+	border-radius: 5px;
 	font-size: 11px;
 	color: #fff;
 	font-weight: 100 !important;
 	padding-top: 8px;
 	text-align:center;
+	margin-top: 1px;
+	margin-bottom: 1px;
 	background-color: var(--input-bg-color);
 }
 
-.genderFeild:hover{
+.addJobGenderField:hover{
 	cursor: pointer;
 }
 
-.genderFeildActive{
+.addJobGenderActive{
 	background-color:var(--main-border-color);
+	height: 32px;
+	/*border: 1px solid #fff !important;*/
 	transition:all 0.5s;
-}
-
-.buttonNext{
-	height: 28px;
-	width: 110px;
-	background-color:var(--main-border-color);
-	margin-top:30px;
-	border:1px solid var(--main-border-color)!important;
-	border-radius:5px;
-	font-family: 'Montserrat-Medium';
-	font-size:13px;
-
-}
-
-.buttonBack{
-	height: 28px;
-	width: 110px;
-	margin-top:30px;
-	border:1px solid var(--main-border-color)!important;
-	border-radius:5px;
-	background-color:var(--main-bg-color);
-	font-family: 'Montserrat-Medium';
-	font-size:13px;
-
 }
 
 /***********************************************************************/
@@ -313,6 +292,7 @@ option:hover{
 	white-space: nowrap; 
  	overflow: hidden;
  	text-overflow: ellipsis;
+ 	border: 1px solid var(--main-border-color) !important;
 }
 
 .optionContainer li:hover,
@@ -331,6 +311,14 @@ option:hover{
 
 .optionContainer li:hover {
     background-color: var(--main-border-color) !important;
+}
+
+._2iA8p44d0WZ-WqRBGcAuEV{
+	/*padding: 4px !important;
+	padding-top: 7px !important;*/
+	border-radius: 0px !important;
+	border-bottom-right-radius: 4px !important;
+    border-top-right-radius: 4px !important;
 }
 
 /***************************End of React multiselect Dropdown custom classes***************************/

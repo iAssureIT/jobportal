@@ -74,25 +74,13 @@ exports.insertJobs = (req, res, next)=>{
 exports.getOneJob = (req,res,next)=>{
     console.log("getOneJob :: job id from param: ",req.params.job_id);
     Jobs.aggregate([
-        {$match:{"_id": ObjectID(req.params.job_id)} },
+        {$match:{"_id": mongoose.Types.ObjectId(req.params.job_id)} },
         {$lookup:{
                    from: "functionalareamaster",
                    localField: "jobBasicInfo.functionalArea",
                    foreignField: "_id",
                    as: "functionalAreas" } 
-        },
-        {$lookup:{
-                   from: "subfunctionalareamaster",
-                   localField: "jobBasicInfo.subFunctionalArea",
-                   foreignField: "_id",
-                   as: "subFunctionalAreas" } 
-         },   
-         {$lookup:{
-                   from: "jobtypemaster",
-                   localField: "jobBasicInfo.jobType",
-                   foreignField: "_id",
-                   as: "jobTypes" } 
-         }
+        }
          
          ])
     .exec()
