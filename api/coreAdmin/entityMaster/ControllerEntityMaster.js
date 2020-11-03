@@ -13,8 +13,9 @@ exports.insertEntity = (req,res,next)=>{
     insertEntityFun();
     async function insertEntityFun(){
         var getnext = await getNextSequence(req.body.entityType)
-        if(req.body.entityType == 'corporate'){var str = "C"+parseInt(getnext)}else if(req.body.entityType == 'vendor'){var str = "V"+parseInt(getnext)}else if(req.body.entityType == 'supplier'){var str = "S"+parseInt(getnext)}else{var str = 1}
-
+        if(req.body.entityType == 'appCompany'){var str = 1}
+            else{var str = parseInt(getnext)}
+        
         EntityMaster.findOne({  
                             companyName               : req.body.companyName,
                             groupName                 : req.body.groupName,
@@ -75,7 +76,7 @@ function getNextSequence(entityType) {
                 seq = seq+1;
                 resolve(seq) 
             }else{
-               resolve(1)
+               resolve(2)
             }
             
         })
@@ -975,8 +976,7 @@ exports.deleteEntity = (req,res,next)=>{
     EntityMaster.deleteOne({_id:req.params.entityID})
     .exec()
     .then(data=>{
-        main();
-        
+       
             res.status(200).json({ deleted : true });
         
     })

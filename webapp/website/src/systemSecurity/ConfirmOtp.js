@@ -55,15 +55,15 @@ class ConfirmOtp extends Component {
     }
     //========person master===============
 
-      var candidatemaster   = {
-        'firstName'       : this.state.firstName,
-        'lastName'        : this.state.lastName,
-        'mobile'          : this.state.mobile,
-        'emailId'         : this.state.emailId,
-        "user_id"         : this.state.user_id,
-        "createdBy"       : this.state.createdBy
-      }
-    console.log("candidatemaster",candidatemaster)
+    //   var candidatemaster   = {
+    //     'firstName'       : this.state.firstName,
+    //     'lastName'        : this.state.lastName,
+    //     'mobile'          : this.state.mobile,
+    //     'emailId'         : this.state.emailId,
+    //     "user_id"         : this.state.user_id,
+    //     "createdBy"       : this.state.createdBy
+    //   }
+    // console.log("candidatemaster",candidatemaster)
     
       //====================================
     
@@ -81,13 +81,13 @@ class ConfirmOtp extends Component {
               
               //================================
 
-                axios.post('/api/candidatemaster/post', candidatemaster)
-                .then((response) => {
+                // axios.post('/api/candidatemaster/post', candidatemaster)
+                // .then((response) => {
 
-                  console.log('in result Res data==>>>', response.data);
-                  this.props.history.push('/login');
-                })
-                .catch((error) => {})
+                //   console.log('in result Res data==>>>', response.data);
+                //   this.props.history.push('/login');
+                // })
+                // .catch((error) => {})
               
             //================================
             }

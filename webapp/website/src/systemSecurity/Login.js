@@ -40,7 +40,7 @@ class Login extends Component {
       
     }else{
       document.getElementById("loginusernameError").innerHTML=  
-      "Please enter valid Mobile Number";  
+      "Please enter valid email id";  
       status=false; 
     }
     if(this.state.password.length<=0){

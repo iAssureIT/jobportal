@@ -10,7 +10,7 @@ import 'font-awesome/css/font-awesome.min.css';
 import './SignUp.css';
 import swal from 'sweetalert';
 import axios from 'axios';
-import ReactAutocomplete from 'react-autocomplete';
+import Autosuggest from 'react-autosuggest';
 
 class SignUp extends Component {
 
@@ -20,6 +20,8 @@ class SignUp extends Component {
       checkUserExists: 0,
       loggedIn: false,
       employerID : "",
+      employer_id:"",
+      employerName: "",
       formerrors: {
         firstNameV: "",
         lastNameV: "",
@@ -35,6 +37,8 @@ class SignUp extends Component {
           confirmPassword   : "",
           emailAddress      : "",
           mobileNumber      : "",
+      value: '',
+      suggestions: []
     }
     this.handleChange = this.handleChange.bind(this);
   }
@@ -45,12 +49,12 @@ class SignUp extends Component {
     
     $(".checkUserExistsError").hide();
     //==============
-    axios.get('http://qaapi-jobportal.iassureit.in/api/entitymaster/get/corporate')
+    axios.get('/api/entitymaster/get/corporate')
     .then((response) => {
       
       var employerArray = [];
       response.data.map((value,ind)=>{
-        employerArray.push({id : value._id, label : value.companyName})
+        employerArray.push({_id: value._id, companyID : value.companyID, label : value.companyName})
       })
       //{ id: 'foo', label: 'foo' }
       console.log('entitymaster==',employerArray)
@@ -173,17 +177,19 @@ class SignUp extends Component {
   usersignup(event) {
     event.preventDefault();
     var status =  this.validateForm();
+    console.log(this.state.employer_id)
     console.log(this.state.employerID)
-      if(status == true){
+    /*  if(status == true){
       var auth = {
         username    : "EMAIL",
         firstname   : this.state.firstName,
         lastname    : this.state.lastName,
         mobNumber   : (this.state.mobileNumber).replace("-", ""),
-        email     : this.state.emailAddress,
-        pwd       : this.state.password,
+        email       : this.state.emailAddress,
+        pwd         : this.state.password,
+        company_id  : this.state.employer_id,
         companyID   : this.state.employerID,
-        //companyName : this.state.employerName,
+        companyName : this.state.employerName,
         role      : 'employer',
         status      : 'unverified',
         "emailSubject"  : "Email Verification", 
@@ -208,7 +214,7 @@ class SignUp extends Component {
           
         })
     }
-
+    */
   }
   Closepagealert(event) {
     event.preventDefault();
@@ -253,24 +259,17 @@ class SignUp extends Component {
     });
     
   }
-  handleChangeEmployer(e){
-
-    console.log('comId==',e.target.value )
-    this.setState({ employerID: e.target.value })
-   
-    // axios.get('/api/entitymaster/getCompany/'+comId)
-    // .then((response) => {
-    //   console.log('employerName==',response.data)
-
-    //   this.setState({
-    //           employerID : comId,
-    //           employerName : response.data.employerName,
-    //           vendor_Id : response.data._id,
-    //         })
-    // })
-    // .catch((error) => {
-    // })
-    
+    changeMobile(event) {
+    this.setState({
+      mobileNumber: event
+    }, () => {
+      if (this.state.mobileNumber) {
+        this.setState({
+          companyPhoneAvailable: this.state.companyPhone === "+" || this.state.companyPhone.length<15 ? false : true
+        },()=>{
+        })
+      }
+    })
   }
   acceptcondition(event) {
     var conditionaccept = event.target.value;
@@ -301,7 +300,64 @@ class SignUp extends Component {
   proceed() {
 
   }
+  escapeRegexCharacters(str) {
+    return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  }
+
+  getSuggestions(value) {
+    const escapedValue = this.escapeRegexCharacters(value.trim());
+    
+    if (escapedValue === '') {
+      return [];
+    }
+
+    const regex = new RegExp('^' + escapedValue, 'i');
+
+    return this.state.employerArray.filter(employer => regex.test(employer.label));
+  }
+
+  getSuggestionValue(suggestion) {
+    return suggestion.label;
+  }
+
+  renderSuggestion(suggestion) {
+    return (
+      <span className="Autosuggestlist">{suggestion.label}</span>
+    );
+  }
+
+  onChange = (event, { newValue }) => {
+    this.setState({
+      value: newValue
+    });
+  };
+ 
+  // Autosuggest will call this function every time you need to update suggestions.
+  // You already implemented this logic above, so just use it.
+  onSuggestionsFetchRequested = ({ value }) => {
+    this.setState({
+      suggestions: this.getSuggestions(value)
+    });
+  };
+ 
+  // Autosuggest will call this function every time you need to clear suggestions.
+  onSuggestionsClearRequested = () => {
+    this.setState({
+      suggestions: []
+    });
+  };
+  onSuggestionSelected=(event, { suggestion, suggestionValue, suggestionIndex, sectionIndex, method }) => { 
+    console.log("suggestion",suggestion)
+    
+    this.setState({employer_id : suggestion._id, employerID : suggestion.companyID, employerName : suggestionValue})
+  };
   render() {
+    const { value, suggestions } = this.state;
+    const inputProps = {
+      placeholder: "Employer",
+      value,
+      onChange: this.onChange
+    };
     return (
       
       <section className="container-fluid registrationFormWrapper">
@@ -312,42 +368,19 @@ class SignUp extends Component {
               </div>
 
               <hr className="registrationHr"/>
-
              
-              {/*<div className="form-group col-lg-12">
-                  <div className="input-group">
-                  <span className="input-group-addon registrationInputIcon1"><i className="fa fa-envelope"></i></span>
-                  <select className="form-control col-lg-12 registrationInputBox registrationCompany" id="currentCompany" name="currentCompany" value={this.state.currentCompany} onChange={this.handleChange1.bind(this)}>
-                  <option className="registrationInputBox">Enter your Company </option>
-                      {
-                  this.state.employerArray.length ? 
-                  this.state.employerArray.map((elem,index)=>{
-                    return(<option value={elem._id}>{elem.companyName}</option>)
-                  }):
-                   null
-                }
-                   </select>                      
-                  </div>
-              </div>*/}
               <div className="col-lg-12 form-group" >
               <div className="input-group autocomplete">
               <span className="input-group-addon registrationInputIcon"><i className="fa fa-briefcase"></i></span>
-              <ReactAutocomplete
-                  items={this.state.employerArray}
-                  shouldItemRender={(item, value) => item.label.toLowerCase().indexOf(value.toLowerCase()) > -1}
-                  getItemValue={item => item.label}
-                  renderItem={(item, highlighted) =>
-                    <div
-                      key={item.id}
-                      style={{ backgroundColor: highlighted ? '#eee' : 'transparent'}}
-                    >
-                      {item.label}
-                    </div>
-                  }
-                  value={this.state.employerID}
-                  onChange={e => this.setState({ employerID: e.target.value })}
-                  onSelect={value => this.setState({ employerID: value })}
-                />
+               <Autosuggest
+                suggestions={suggestions}
+                onSuggestionsFetchRequested={this.onSuggestionsFetchRequested.bind(this)}
+                onSuggestionsClearRequested={this.onSuggestionsClearRequested.bind(this)}
+                getSuggestionValue={this.getSuggestionValue.bind(this)}
+                renderSuggestion={this.renderSuggestion.bind(this)}
+                onSuggestionSelected={this.onSuggestionSelected.bind(this)}
+                inputProps={inputProps}
+              />
                 </div>
               </div> 
               <div className="col-lg-12 form-group" >
@@ -377,9 +410,22 @@ class SignUp extends Component {
 
               <div className="col-lg-12 form-group" >
                   <div className="input-group">
-                      <span className="input-group-addon registrationInputIcon"><i className="fa fa-mobile"></i></span>
+                      {/*<span className="input-group-addon registrationInputIcon"><i className="fa fa-mobile"></i></span>
                       <input type="tel" id="mobileNumber" name="mobileNumber" placeholder="Mobile Number" value={this.state.mobileNumber} onChange={this.handleChange.bind(this)} className="form-control registrationInputBox"/>
+                    */}
+                    <PhoneInput
+                    country={'in'}
+                    value={this.state.mobileNumber}
+                    name="mobileNumber"
+                    inputProps={{
+                      name: 'mobileNumber',
+                      required: true
+                    }}
+                    onChange={this.changeMobile.bind(this)}
+                  />
+
                   </div>
+                  
                    <span id="mobileNumberError" className="errorMsg"></span>
               </div>
 

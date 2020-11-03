@@ -76,35 +76,43 @@ class Login extends Component {
       var auth = {
         email: this.refs.loginusername.value,
         password: this.refs.loginpassword.value,
-        role: "candidate"
+        role: "employer"
       }
       var status =  this.validateForm();
       if (status) {
       
         this.setState({ btnLoading: true });
-        axios.post('/api/auth/post/login', auth)
+        axios.post('/api/auth/post/loginwithcompanyid', auth)
           .then((response) => {
             console.log("response login",response);
             if (response.data.ID) {
               this.setState({ btnLoading: false });
-              var userDetails = {
-                firstName: response.data.userDetails.firstname,
-                lastName: response.data.userDetails.lastname,
-                email: response.data.userDetails.email,
-                phone: response.data.userDetails.phone,
-                companyID : parseInt(response.data.userDetails.companyID),
-                pincode: response.data.userDetails.pincode,
-                user_id: response.data.userDetails.user_id,
-                roles: response.data.userDetails.roles,
-                token: response.data.userDetails.token,
-              }
-             
-              localStorage.setItem("token", response.data.token);
-              localStorage.setItem("user_ID", response.data.ID);
-              localStorage.setItem("roles", response.data.roles);
-              //localStorage.setItem("companyID", response.data.userDetails.companyID);
-              localStorage.setItem('userDetails', JSON.stringify(userDetails));
-              
+              var  userDetails = {
+              firstName : response.data.userDetails.firstName, 
+              lastName  : response.data.userDetails.lastName, 
+              email     : response.data.userDetails.email, 
+              phone     : response.data.userDetails.phone, 
+              city      : response.data.userDetails.city,
+              company_id : response.data.userDetails.company_id,
+              companyID : response.data.userDetails.companyID,
+              companyName : response.data.userDetails.companyName,
+              locationID: response.data.userDetails.locationID,
+              user_id   : response.data.userDetails.user_id,
+              roles     : response.data.userDetails.roles,
+              passwordreset: response.data.userDetailspasswordreset,
+              token     : response.data.userDetails.token, 
+              //loginTime : response.data.userDetails.loginTime, 
+            }
+
+            
+            localStorage.setItem("token", response.data.token);
+            localStorage.setItem("user_ID", response.data.ID);
+            localStorage.setItem("roles", response.data.roles);
+            localStorage.setItem("loginTime", response.data.loginTime);
+            localStorage.setItem('userDetails', JSON.stringify(userDetails));
+            localStorage.setItem("company_Id",response.data.userDetails.company_id); 
+            localStorage.setItem("companyID", response.data.userDetails.companyID);
+
               this.setState({
                 loggedIn: true
               }, () => {

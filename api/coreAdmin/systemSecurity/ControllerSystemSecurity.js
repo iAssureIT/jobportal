@@ -324,8 +324,8 @@ exports.user_signup_user_otp = (req, res, next) => {
 															lastname: req.body.lastname,
 															fullName: req.body.firstname + ' ' + req.body.lastname,
 															email: emailId.toLowerCase(),
-															companyID: req.body.companyID,
-															companyName: req.body.companyName,
+															company_id : req.body.company_id,
+															companyID: req.body.companyID, 
 															mobile: req.body.mobNumber,
 															createdAt: new Date(),
 															otpEmail: emailOTP,
@@ -916,7 +916,7 @@ function getCompanyContacts(companyID){
     });
 }
 
-exports.user_login_with_companyID = (req, res, next) => {
+exports.user_login_with_companyID = (req, res, next) => { 
 	var emailId = (req.body.email).toLowerCase();
 	var role = (req.body.role).toLowerCase();
 	User.findOne({
@@ -977,6 +977,7 @@ exports.user_login_with_companyID = (req, res, next) => {
 														phone: user.profile.phone,
 														passwordreset: user.profile.passwordreset,
 														city: user.profile.city,
+														company_id: user.profile.company_id,
 														companyID: user.profile.companyID,
 														workLocation: user.profile.workLocation,
 														locationID: user.profile.locationID,
