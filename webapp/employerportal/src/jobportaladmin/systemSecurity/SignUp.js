@@ -177,9 +177,9 @@ class SignUp extends Component {
   usersignup(event) {
     event.preventDefault();
     var status =  this.validateForm();
-    console.log(this.state.employer_id)
-    console.log(this.state.employerID)
-    /*  if(status == true){
+   
+     if(status == true){
+
       var auth = {
         username    : "EMAIL",
         firstname   : this.state.firstName,
@@ -187,8 +187,8 @@ class SignUp extends Component {
         mobNumber   : (this.state.mobileNumber).replace("-", ""),
         email       : this.state.emailAddress,
         pwd         : this.state.password,
-        company_id  : this.state.employer_id,
-        companyID   : this.state.employerID,
+        company_id  : this.state.employer_id != "" ? this.state.employer_id : null,
+        companyID   : this.state.employerID != "" ? this.state.employerID : null,
         companyName : this.state.employerName,
         role      : 'employer',
         status      : 'unverified',
@@ -205,16 +205,19 @@ class SignUp extends Component {
           if(response.data.message == 'USER_CREATED'){
             swal('Great, Information submitted successfully and OTP is sent to your registered Email.');
             localStorage.setItem('previousUrl' ,'signup');
+
             this.props.history.push("/confirm-otp/" + response.data.ID);
+            
+
           }else{
             swal(response.data.message);
           } 
         })
         .catch((error) => {
           
-        })
+        }) 
     }
-    */
+   
   }
   Closepagealert(event) {
     event.preventDefault();
@@ -326,10 +329,15 @@ class SignUp extends Component {
     );
   }
 
-  onChange = (event, { newValue }) => {
-    this.setState({
-      value: newValue
-    });
+  onChange = (event, { newValue , method}) => {
+    if (method="type") {
+      this.setState({ value: newValue, employerName : newValue})
+      
+    }else{
+      this.setState({
+        value: newValue
+      });
+    }
   };
  
   // Autosuggest will call this function every time you need to update suggestions.
@@ -410,10 +418,10 @@ class SignUp extends Component {
 
               <div className="col-lg-12 form-group" >
                   <div className="input-group">
-                      {/*<span className="input-group-addon registrationInputIcon"><i className="fa fa-mobile"></i></span>
+                      <span className="input-group-addon registrationInputIcon"><i className="fa fa-mobile"></i></span>
                       <input type="tel" id="mobileNumber" name="mobileNumber" placeholder="Mobile Number" value={this.state.mobileNumber} onChange={this.handleChange.bind(this)} className="form-control registrationInputBox"/>
-                    */}
-                    <PhoneInput
+                   
+                  {/*  <PhoneInput
                     country={'in'}
                     value={this.state.mobileNumber}
                     name="mobileNumber"
@@ -422,7 +430,7 @@ class SignUp extends Component {
                       required: true
                     }}
                     onChange={this.changeMobile.bind(this)}
-                  />
+                  /> */}
 
                   </div>
                   

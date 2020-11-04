@@ -101,16 +101,10 @@ class Login extends Component {
 
               axios.get('/api/candidatemaster/get/candidateID/'+response.data.userDetails.user_id)
               .then((candidate) => {
-             
+              
               localStorage.setItem("candidateID", candidate.data[0] ? candidate.data[0]._id : null);
-              })
-              .catch((error) => {
-                console.log("error", error);
-              });
               localStorage.setItem("token", response.data.token);
               localStorage.setItem("user_ID", response.data.ID);
-
-              
               localStorage.setItem("roles", response.data.roles);
               //localStorage.setItem("companyID", response.data.userDetails.companyID);
               localStorage.setItem('userDetails', JSON.stringify(userDetails));
@@ -118,9 +112,13 @@ class Login extends Component {
               this.setState({
                 loggedIn: true
               }, () => {
-                this.props.history.push('/')
-                window.location.reload();
+                window.location.href = '/';
               })
+              })
+              .catch((error) => {
+                console.log("error", error);
+              });
+
             } else if (response.data.message === "USER_BLOCK") {
               swal({
                 text: "You are blocked by admin. Please contact Admin."

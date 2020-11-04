@@ -98,7 +98,7 @@ class Layout extends Component  {
                                                     <CoreLayout />
                                                    {/* <Leftsidebar/>*/}
                                                     <Switch >
-                                                        <Route path="/" component={Login} exact />
+                                                        <Route path="/" component={Dashboard} exact />
                                                         <Route path="/post-job" component={JobPosting} exact />
                                                         <Route path="/job-profile/:job_id" component={JobProfile} exact />
                                                         <Route path="/job-list" component={JobList} exact />
@@ -120,6 +120,7 @@ class Layout extends Component  {
             return (
                 <div>
                     <Router >
+                    <CoreLayout />
                         <Switch >
                             <Route path="/" exact strict component={Login} />
                             <Route path="/login" exact strict component={Login} />

@@ -34,7 +34,6 @@ import ReactDependentScript from "react-dependent-script";
 import './jobportaladmin/Common/FontAwesomeIcons'; 
 
 axios.defaults.baseURL = process.env.REACT_APP_BASE_URL;
-console.log("axios.defaults.baseURL",axios.defaults.baseURL);
 axios.defaults.headers.post['Content-Type'] = 'application/json'; 
 
 

@@ -679,7 +679,7 @@ exports.check_username_EmailOTP = (req, res, next) => {
 		});
 };
 
-exports.user_login_using_email = (req, res, next) => {
+exports.user_login_using_email = (req, res, next) => { 
 	var emailId = (req.body.email).toLowerCase();
 	var role = (req.body.role).toLowerCase();
 	console.log('role', role);
@@ -693,7 +693,6 @@ exports.user_login_using_email = (req, res, next) => {
 			if (user) {
 				if ((user.profile.status).toLowerCase() == "active") {
 					var pwd = user.services.password.bcrypt;
-					console.log('pwd', pwd);
 					if (pwd) {
 						bcrypt.compare(req.body.password, pwd, (err, result) => {
 							if (err) {
@@ -925,9 +924,10 @@ exports.user_login_with_companyID = (req, res, next) => {
 	})
 		.exec()
 		.then(user => {
-			if (user) {
+		if (user) {
+			if ((user.profile.status).toLowerCase() == "active") {
 				var loginTokenscount = user.services.resume.loginTokens.length;
-				if (user.profile.companyID != "") {
+				
 					if ((user.profile.status).toLowerCase() == "active") {
 						var pwd = user.services.password.bcrypt;
 						if (pwd) {
@@ -1019,9 +1019,13 @@ exports.user_login_with_companyID = (req, res, next) => {
 				} else if (user.profile.companyID == "") {
 					res.status(200).json({ message: "NO_COMPANYID" });
 				}
-			} else {
-				res.status(200).json({ message: "NOT_REGISTER" });
 			}
+			else if ((user.profile.status).toLowerCase() == "blocked") {
+				res.status(200).json({ message: "USER_BLOCK",ID: user._id });
+			} else if ((user.profile.status).toLowerCase() == "unverified") {
+				res.status(200).json({ message: "USER_UNVERIFIED",ID: user._id});
+			}
+		
 		})
 		.catch(err => {
 			console.log(err);

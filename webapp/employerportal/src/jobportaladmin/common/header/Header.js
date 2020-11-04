@@ -10,7 +10,12 @@ class Header extends Component{
       profileDisplay  : "none",
       asideDisplay  : "none",
       notificationDisplay  : "none",
+      userDetails: {}
     }
+  }
+  componentDidMount() {
+    this.setState({userDetails : JSON.parse(localStorage.getItem("userDetails"))})
+    
   }
   profileInfo(event){
 
@@ -66,8 +71,8 @@ class Header extends Component{
         //this.props.history.push("/")
   }
   render(){
+    console.log(this.state.userDetails)
     return(
-        
 
         <div className="headerWrapper col-lg-12">
           <div className="row">
@@ -111,7 +116,7 @@ class Header extends Component{
                 <div className="headerProfileWrapper ">
                   <div className="headerProfileInfo">
                     <span className="headerProfileName">
-                      Hello, John doe
+                      Hello, {this.state.userDetails.firstName }
                     </span>
                     <img className="headerProfileImg" src='/images/profilelogo.jpeg' alt="logo" onClick={this.profileInfo.bind(this)} />
                     <i className="fa fa-caret-down profileDownArrow" onClick={this.profileInfo.bind(this)}></i>
@@ -121,12 +126,12 @@ class Header extends Component{
                       <img src='/images/profilelogo.jpeg' alt="logo"  />
                     </div>
                     <div className="signOutToggelProfileName">
-                      Hello, John doe
+                       Hello, {this.state.userDetails.firstName }
                     </div>
                     <div className="signOutToggelButtons">
                       <div className="col-lg-5 pull-left">
                         <div className="row">
-                          <a href="/profile" className="whitelink"><div className="signOutButton">Profile</div></a>
+                          <a href="/profile" className="whitelink"><div className="signOutButton">Add Employer</div></a>
                         </div>
                       </div>
                       

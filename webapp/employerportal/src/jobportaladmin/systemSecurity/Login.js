@@ -57,7 +57,7 @@ class Login extends Component {
     return status;
   } 
   componentDidMount() {
-
+    
     
   }
   handleChange(event){
@@ -116,8 +116,12 @@ class Login extends Component {
               this.setState({
                 loggedIn: true
               }, () => {
-                this.props.history.push('/')
-                window.location.reload();
+                if (response.data.userDetails.company_id) {
+                   window.location.href='/'
+                }else{
+                  window.location.href= '/corporate/basic-details'
+                }
+                
               })
             } else if (response.data.message === "USER_BLOCK") {
               swal({
