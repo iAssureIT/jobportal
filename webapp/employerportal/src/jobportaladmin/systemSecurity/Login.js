@@ -58,7 +58,6 @@ class Login extends Component {
   } 
   componentDidMount() {
     
-    
   }
   handleChange(event){
       var fieldValue=event.currentTarget.value;
