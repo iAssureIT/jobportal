@@ -3,7 +3,27 @@
 	left: 1px;
 	top:400px;
 }
+.bhabuaText{
+	position: absolute;
+	left: 1px;
+	top:400px;
+}
+.bhabuaNumber{
+	position: absolute;
+	left: 1px;
+	top:400px;
+}
 .rohtas{
+	position: absolute;
+	left: 28px;
+    top: 406px;
+}
+.rohtasText{
+	position: absolute;
+	left: 28px;
+    top: 406px;
+}
+.rohtasNumber{
 	position: absolute;
 	left: 28px;
     top: 406px;
@@ -13,7 +33,27 @@
 	left: 68px;
     top: 340px;
 }
+.buxarText{
+	position: absolute;
+	left: 68px;
+    top: 340px;
+}
+.buxarNumber{
+	position: absolute;
+	left: 68px;
+    top: 340px;
+}
 .bhojpur{
+	position: absolute;
+	left: 145px;
+    top: 339px;
+}
+.bhojpurText{
+	position: absolute;
+	left: 145px;
+    top: 339px;
+}
+.bhojpurNumber{
 	position: absolute;
 	left: 145px;
     top: 339px;
@@ -23,7 +63,27 @@
 	left: 175px;
     top: 412px;
 }
+.arwalText{
+	position: absolute;
+	left: 175px;
+    top: 412px;
+}
+.arwalNumber{
+	position: absolute;
+	left: 175px;
+    top: 412px;
+}
 .aurangabad{
+	position: absolute;
+	left: 109px;
+    top: 446px;
+}
+.aurangabadText{
+	position: absolute;
+	left: 109px;
+    top: 446px;
+}
+.aurangabadNumber{
 	position: absolute;
 	left: 109px;
     top: 446px;
@@ -33,7 +93,27 @@
 	left: 152px;
     top: 451px;
 }
+.gayaText{
+	position: absolute;
+	left: 152px;
+    top: 451px;
+}
+.gayaNumber{
+	position: absolute;
+	left: 152px;
+    top: 451px;
+}
 .jehanabad{
+	position: absolute;
+	left: 232px;
+    top: 411px;
+}
+.jehanabadText{
+	position: absolute;
+	left: 232px;
+    top: 411px;
+}
+.jehanabadNumber{
 	position: absolute;
 	left: 232px;
     top: 411px;
@@ -43,7 +123,27 @@
 	left: 212px;
     top: 343px;
 }
+.patnaText{
+	position: absolute;
+	left: 212px;
+    top: 343px;
+}
+.patnaNumber{
+	position: absolute;
+	left: 212px;
+    top: 343px;
+}
 .saran{
+	position: absolute;
+	left: 165px;
+    top: 258px;
+}
+.saranText{
+	position: absolute;
+	left: 165px;
+    top: 258px;
+}
+.saranNumber{
 	position: absolute;
 	left: 165px;
     top: 258px;
@@ -53,7 +153,12 @@
 	left: 104px;
     top: 235px;
 }
-.siwan{
+.siwanText{
+	position: absolute;
+	left: 104px;
+    top: 235px;
+}
+.siwanNumber{
 	position: absolute;
 	left: 104px;
     top: 235px;
@@ -63,7 +168,27 @@
 	left: 86px;
     top: 191px;
 }
+.gopalganjText{
+	position: absolute;
+	left: 86px;
+    top: 191px;
+}
+.gopalganjNumber{
+	position: absolute;
+	left: 86px;
+    top: 191px;
+}
 .bettiah{
+	position: absolute;
+	left: 72px;
+    top: 40px;
+}
+.bettiahText{
+	position: absolute;
+	left: 72px;
+    top: 40px;
+}
+.bettiahNumber{
 	position: absolute;
 	left: 72px;
     top: 40px;
@@ -73,7 +198,27 @@
 	left: 175px;
     top: 124px;
 }
+.motihariText{
+	position: absolute;
+	left: 175px;
+    top: 124px;
+}
+.motihariNumber{
+	position: absolute;
+	left: 175px;
+    top: 124px;
+}
 .muzaffrpur{
+	position: absolute;
+	left: 234px;
+    top: 229px;
+}
+.muzaffrpurText{
+	position: absolute;
+	left: 234px;
+    top: 229px;
+}
+.muzaffrpurNumber{
 	position: absolute;
 	left: 234px;
     top: 229px;
@@ -83,7 +228,27 @@
 	left: 265px;
     top: 292px;
 }
+.vaishaliText{
+	position: absolute;
+	left: 265px;
+    top: 292px;
+}
+.vaishaliNumber{
+	position: absolute;
+	left: 265px;
+    top: 292px;
+}
 .nalanda{
+	position: absolute;
+	left: 283px;
+    top: 386px;
+}
+.nalandaText{
+	position: absolute;
+	left: 283px;
+    top: 386px;
+}
+.nalandaNumber{
 	position: absolute;
 	left: 283px;
     top: 386px;
@@ -93,7 +258,27 @@
 	left: 302px;
     top: 445px;
 }
+.nawadaText{
+	position: absolute;
+	left: 302px;
+    top: 445px;
+}
+.nawadaNumber{
+	position: absolute;
+	left: 302px;
+    top: 445px;
+}
 .jamui{
+	position: absolute;
+	left: 386px;
+    top: 436px;
+}
+.jamuiText{
+	position: absolute;
+	left: 386px;
+    top: 436px;
+}
+.jamuiNumber{
 	position: absolute;
 	left: 386px;
     top: 436px;
@@ -103,7 +288,27 @@
 	left: 351px;
     top: 416px;
 }
+.sheikpuraText{
+	position: absolute;
+	left: 351px;
+    top: 416px;
+}
+.sheikpuraNumber{
+	position: absolute;
+	left: 351px;
+    top: 416px;
+}
 .lakhisarai{
+	position: absolute;
+	left: 396px;
+    top: 406px;
+}
+.lakhisaraiText{
+	position: absolute;
+	left: 396px;
+    top: 406px;
+}
+.lakhisaraiNumber{
 	position: absolute;
 	left: 396px;
     top: 406px;
@@ -113,7 +318,27 @@
 	left: 370px;
     top: 332px;
 }
+.begusaraiText{
+	position: absolute;
+	left: 370px;
+    top: 332px;
+}
+.begusaraiNumber{
+	position: absolute;
+	left: 370px;
+    top: 332px;
+}
 .samastipur{
+	position: absolute;
+	left: 337px;
+    top: 282px;
+}
+.samastipurText{
+	position: absolute;
+	left: 337px;
+    top: 282px;
+}
+.samastipurNumber{
 	position: absolute;
 	left: 337px;
     top: 282px;
@@ -123,7 +348,27 @@
 	left: 356px;
     top: 219px;
 }
+.darbhangaText{
+	position: absolute;
+	left: 356px;
+    top: 219px;
+}
+.darbhangaNumber{
+	position: absolute;
+	left: 356px;
+    top: 219px;
+}
 .sitamarihi{
+	position: absolute;
+	left: 288px;
+    top: 148px;
+}
+.sitamarihiText{
+	position: absolute;
+	left: 288px;
+    top: 148px;
+}
+.sitamarihiNumber{
 	position: absolute;
 	left: 288px;
     top: 148px;
@@ -133,7 +378,27 @@
 	left: 280px;
     top: 185px;
 }
+.sheoharText{
+	position: absolute;
+	left: 280px;
+    top: 185px;
+}
+.sheoharNumber{
+	position: absolute;
+	left: 280px;
+    top: 185px;
+}
 .madhubani{
+	position: absolute;
+	left: 367px;
+    top: 180px;
+}
+.madhubaniText{
+	position: absolute;
+	left: 367px;
+    top: 180px;
+}
+.madhubaniNumber{
 	position: absolute;
 	left: 367px;
     top: 180px;
@@ -143,7 +408,27 @@
 	left: 467px;
     top: 191px;
 }
+.supaulText{
+	position: absolute;
+	left: 467px;
+    top: 191px;
+}
+.supaulNumber{
+	position: absolute;
+	left: 467px;
+    top: 191px;
+}
 .saharsa{
+	position: absolute;
+	left: 456px;
+    top: 277px;
+}
+.saharsaText{
+	position: absolute;
+	left: 456px;
+    top: 277px;
+}
+.saharsaNumber{
 	position: absolute;
 	left: 456px;
     top: 277px;
@@ -153,7 +438,27 @@
 	left: 452px;
     top: 339px;
 }
+.khagariaText{
+	position: absolute;
+	left: 452px;
+    top: 339px;
+}
+.khagariaNumber{
+	position: absolute;
+	left: 452px;
+    top: 339px;
+}
 .munger{
+	position: absolute;
+	left: 457px;
+    top: 377px;
+}
+.mungerText{
+	position: absolute;
+	left: 457px;
+    top: 377px;
+}
+.mungerNumber{
 	position: absolute;
 	left: 457px;
     top: 377px;
@@ -163,7 +468,27 @@
 	left: 487px;
     top: 440px;
 }
+.bankaText{
+	position: absolute;
+	left: 487px;
+    top: 440px;
+}
+.bankaNumber{
+	position: absolute;
+	left: 487px;
+    top: 440px;
+}
 .bhagalpur{
+	position: absolute;
+	left: 509px;
+    top: 374px;
+}
+.bhagalpurText{
+	position: absolute;
+	left: 509px;
+    top: 374px;
+}
+.bhagalpurNumber{
 	position: absolute;
 	left: 509px;
     top: 374px;
@@ -173,7 +498,27 @@
 	left: 500px;
     top: 270px;
 }
+.mahepuraText{
+	position: absolute;
+	left: 500px;
+    top: 270px;
+}
+.mahepuraNumber{
+	position: absolute;
+	left: 500px;
+    top: 270px;
+}
 .araria{
+	position: absolute;
+	left: 563px;
+    top: 194px;
+}
+.arariaText{
+	position: absolute;
+	left: 563px;
+    top: 194px;
+}
+.arariaNumber{
 	position: absolute;
 	left: 563px;
     top: 194px;
@@ -183,12 +528,42 @@
 	left: 559px;
     top: 268px;
 }
+.purneaText{
+	position: absolute;
+	left: 559px;
+    top: 268px;
+}
+.purneaNumber{
+	position: absolute;
+	left: 559px;
+    top: 268px;
+}
 .katihar{
 	position: absolute;
 	left: 594px;
     top: 306px;
 }
+.katiharText{
+	position: absolute;
+	left: 594px;
+    top: 306px;
+}
+.katiharNumber{
+	position: absolute;
+	left: 594px;
+    top: 306px;
+}
 .kishanganj{
+	position: absolute;
+	left: 652px;
+    top: 191px;
+}
+.kishanganjText{
+	position: absolute;
+	left: 652px;
+    top: 191px;
+}
+.kishanganjNumber{
 	position: absolute;
 	left: 652px;
     top: 191px;

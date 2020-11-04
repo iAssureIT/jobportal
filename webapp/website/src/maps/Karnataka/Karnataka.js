@@ -68,7 +68,7 @@ export default class Karmataka extends Component{
 						<img src="/Maps/Karmataka/Tumakuru.png" className="tumakuru" alt="Tumakuru"  onMouseOver={e => (e.currentTarget.src = "/Maps/Karmataka/Tumakuru_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Karmataka/Tumakuru.png")}/>
 					</div>
 					<div className="kan"> 
-						<img src="/Maps/Karmataka/Hassan.png" className="Hassan" alt="Hassan"  onMouseOver={e => (e.currentTarget.src = "/Maps/Karmataka/Hassan_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Karmataka/Hassan.png")}/>
+						<img src="/Maps/Karmataka/Hassan.png" className="hassan" alt="Hassan"  onMouseOver={e => (e.currentTarget.src = "/Maps/Karmataka/Hassan_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Karmataka/Hassan.png")}/>
 					</div>
 					<div className="kan"> 
 						<img src="/Maps/Karmataka/Kodagu.png" className="kodagu" alt="Kodagu"  onMouseOver={e => (e.currentTarget.src = "/Maps/Karmataka/Kodagu_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Karmataka/Kodagu.png")}/>

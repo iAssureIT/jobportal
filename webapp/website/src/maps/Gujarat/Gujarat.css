@@ -3,7 +3,27 @@
 	left: 1px;
 	top:  50px;
 }
+.kachchhText{
+	position: absolute;
+	left: 1px;
+	top:  50px;
+}
+.kachchhNumber{
+	position: absolute;
+	left: 1px;
+	top:  50px;
+}
 .banasKantha{
+	position: absolute;
+	left: 407px;
+    top: 45px;
+}
+.banasKanthaText{
+	position: absolute;
+	left: 407px;
+    top: 45px;
+}
+.banasKanthaNumber{
 	position: absolute;
 	left: 407px;
     top: 45px;
@@ -13,7 +33,27 @@
 	left: 378px;
     top: 124px;
 }
+.patanText{
+	position: absolute;
+	left: 378px;
+    top: 124px;
+}
+.patanNumber{
+	position: absolute;
+	left: 378px;
+    top: 124px;
+}
 .mahesana{
+	position: absolute;
+	left: 497px;
+    top: 129px;
+}
+.mahesanaText{
+	position: absolute;
+	left: 497px;
+    top: 129px;
+}
+.mahesanaNumber{
 	position: absolute;
 	left: 497px;
     top: 129px;
@@ -23,7 +63,27 @@
 	left: 598px;
     top: 76px;
 }
+.sabarkanthaText{
+	position: absolute;
+	left: 598px;
+    top: 76px;
+}
+.sabarkanthaNumber{
+	position: absolute;
+	left: 598px;
+    top: 76px;
+}
 .arvalli{
+	position: absolute;
+	left: 630px;
+    top: 156px;
+}
+.arvalliText{
+	position: absolute;
+	left: 630px;
+    top: 156px;
+}
+.arvalliNumber{
 	position: absolute;
 	left: 630px;
     top: 156px;
@@ -33,7 +93,27 @@
 	left: 550px;
     top: 206px;
 }
+.gandhinagarText{
+	position: absolute;
+	left: 550px;
+    top: 206px;
+}
+.gandhinagarNumber{
+	position: absolute;
+	left: 550px;
+    top: 206px;
+}
 .ahmedabad{
+	position: absolute;
+	left: 483px;
+    top: 215px;
+}
+.ahmedabadText{
+	position: absolute;
+	left: 483px;
+    top: 215px;
+}
+.ahmedabadNumber{
 	position: absolute;
 	left: 483px;
     top: 215px;
@@ -43,7 +123,27 @@
 	left: 372px;
     top: 214px;
 }
+.surendraNagarText{
+	position: absolute;
+	left: 372px;
+    top: 214px;
+}
+.surendraNagarNumber{
+	position: absolute;
+	left: 372px;
+    top: 214px;
+}
 .morbi{
+	position: absolute;
+	left: 297px;
+    top: 258px;
+}
+.morbiText{
+	position: absolute;
+	left: 297px;
+    top: 258px;
+}
+.morbiNumber{
 	position: absolute;
 	left: 297px;
     top: 258px;
@@ -53,7 +153,27 @@
 	left: 206px;
     top: 292px;
 }
+.jamnagarText{
+	position: absolute;
+	left: 206px;
+    top: 292px;
+}
+.jamnagarNumber{
+	position: absolute;
+	left: 206px;
+    top: 292px;
+}
 .devbhumiDwarka{
+	position: absolute;
+	left: 103px;
+    top: 352px;
+}
+.devbhumiDwarkaText{
+	position: absolute;
+	left: 103px;
+    top: 352px;
+}
+.devbhumiDwarkaNumber{
 	position: absolute;
 	left: 103px;
     top: 352px;
@@ -63,7 +183,27 @@
 	left: 157px;
     top: 432px;
 }
+.porbandarText{
+	position: absolute;
+	left: 157px;
+    top: 432px;
+}
+.porbandarNumber{
+	position: absolute;
+	left: 157px;
+    top: 432px;
+}
 .rajkot{
+	position: absolute;
+	left: 246px;
+    top: 344px;
+}
+.rajkotText{
+	position: absolute;
+	left: 246px;
+    top: 344px;
+}
+.rajkotNumber{
 	position: absolute;
 	left: 246px;
     top: 344px;
@@ -73,7 +213,27 @@
 	left: 423px;
     top: 373px;
 }
+.botadText{
+	position: absolute;
+	left: 423px;
+    top: 373px;
+}
+.botadNumber{
+	position: absolute;
+	left: 423px;
+    top: 373px;
+}
 .bhavnagar{
+	position: absolute;
+	left: 437px;
+    top: 412px;
+}
+.bhavnagarText{
+	position: absolute;
+	left: 437px;
+    top: 412px;
+}
+.bhavnagarNumber{
 	position: absolute;
 	left: 437px;
     top: 412px;
@@ -83,7 +243,27 @@
 	left: 337px;
     top: 424px;
 }
+.amreliText{
+	position: absolute;
+	left: 337px;
+    top: 424px;
+}
+.amreliNumber{
+	position: absolute;
+	left: 337px;
+    top: 424px;
+}
 .junagadh{
+	position: absolute;
+	left: 234px;
+    top: 472px;
+}
+.junagadhText{
+	position: absolute;
+	left: 234px;
+    top: 472px;
+}
+.junagadhNumber{
 	position: absolute;
 	left: 234px;
     top: 472px;
@@ -93,7 +273,27 @@
 	left: 270px;
     top: 544px;
 }
+.girSomnathText{
+	position: absolute;
+	left: 270px;
+    top: 544px;
+}
+.girSomnathNumber{
+	position: absolute;
+	left: 270px;
+    top: 544px;
+}
 .mahisagar{
+	position: absolute;
+	left: 665px;
+    top: 221px;
+}
+.mahisagarText{
+	position: absolute;
+	left: 665px;
+    top: 221px;
+}
+.mahisagarNumber{
 	position: absolute;
 	left: 665px;
     top: 221px;
@@ -103,7 +303,27 @@
 	left: 568px;
     top: 259px;
 }
+.khedaText{
+	position: absolute;
+	left: 568px;
+    top: 259px;
+}
+.khedaNumber{
+	position: absolute;
+	left: 568px;
+    top: 259px;
+}
 .anand{
+	position: absolute;
+	left: 546px;
+    top: 325px;
+}
+.anandText{
+	position: absolute;
+	left: 546px;
+    top: 325px;
+}
+.anandNumber{
 	position: absolute;
 	left: 546px;
     top: 325px;
@@ -113,7 +333,27 @@
 	left: 566px;
     top: 391px;
 }
+.bharuchText{
+	position: absolute;
+	left: 566px;
+    top: 391px;
+}
+.bharuchNumber{
+	position: absolute;
+	left: 566px;
+    top: 391px;
+}
 .vadodara{
+	position: absolute;
+	left: 618px;
+    top: 314px;
+}
+.vadodaraText{
+	position: absolute;
+	left: 618px;
+    top: 314px;
+}
+.vadodaraNumber{
 	position: absolute;
 	left: 618px;
     top: 314px;
@@ -123,7 +363,27 @@
 	left: 682px;
     top: 271px;
 }
+.panchMahalsText{
+	position: absolute;
+	left: 682px;
+    top: 271px;
+}
+.panchMahalsNumber{
+	position: absolute;
+	left: 682px;
+    top: 271px;
+}
 .dahod{
+	position: absolute;
+	left: 740px;
+    top: 236px;
+}
+.dahodText{
+	position: absolute;
+	left: 740px;
+    top: 236px;
+}
+.dahodNumber{
 	position: absolute;
 	left: 740px;
     top: 236px;
@@ -133,7 +393,27 @@
 	left: 698px;
     top: 344px;
 }
+.chhotaUdaipurText{
+	position: absolute;
+	left: 698px;
+    top: 344px;
+}
+.chhotaUdaipurNumber{
+	position: absolute;
+	left: 698px;
+    top: 344px;
+}
 .narmada{
+	position: absolute;
+	left: 675px;
+    top: 416px;
+}
+.narmadaText{
+	position: absolute;
+	left: 675px;
+    top: 416px;
+}
+.narmadaNumber{
 	position: absolute;
 	left: 675px;
     top: 416px;
@@ -143,7 +423,27 @@
 	left: 586px;
     top: 489px;
 }
+.suratText{
+	position: absolute;
+	left: 586px;
+    top: 489px;
+}
+.suratNumber{
+	position: absolute;
+	left: 586px;
+    top: 489px;
+}
 .tapi{
+	position: absolute;
+	left: 662px;
+    top: 487px;
+}
+.tapiText{
+	position: absolute;
+	left: 662px;
+    top: 487px;
+}
+.tapiNumber{
 	position: absolute;
 	left: 662px;
     top: 487px;
@@ -153,12 +453,42 @@
 	left: 699px;
     top: 567px;
 }
+.theDangsText{
+	position: absolute;
+	left: 699px;
+    top: 567px;
+}
+.theDangsNumber{
+	position: absolute;
+	left: 699px;
+    top: 567px;
+}
 .navsari{
 	position: absolute;
 	left: 600px;
     top: 559px;
 }
+.navsariText{
+	position: absolute;
+	left: 600px;
+    top: 559px;
+}
+.navsariNumber{
+	position: absolute;
+	left: 600px;
+    top: 559px;
+}
 .valsad{
+	position: absolute;
+	left: 603px;
+    top: 602px;
+}
+.valsadText{
+	position: absolute;
+	left: 603px;
+    top: 602px;
+}
+.valsadNumber{
 	position: absolute;
 	left: 603px;
     top: 602px;
