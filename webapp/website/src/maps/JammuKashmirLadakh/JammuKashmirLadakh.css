@@ -3,7 +3,27 @@
 	top: 100px;
 	left: 20px;
 }
+.jammuAndKashmirText{
+	position: absolute;
+	top: 100px;
+	left: 20px;
+}
+.jammuAndKashmirNumber{
+	position: absolute;
+	top: 100px;
+	left: 20px;
+}
 .ladakhJK{
+	position: absolute;
+	top: 203px;
+    left: 329px;
+}
+.ladakhJKText{
+	position: absolute;
+	top: 203px;
+    left: 329px;
+}
+.ladakhJKNumber{
 	position: absolute;
 	top: 203px;
     left: 329px;

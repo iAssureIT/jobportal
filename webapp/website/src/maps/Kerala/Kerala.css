@@ -3,68 +3,208 @@
 	left: 10px;
 	top: 10px;
 }
+.kasaragodText{
+	position: absolute;
+	top: 23%;
+    left: 30%;
+}
+.kasaragodNumber{
+	position: absolute;
+	top: 33%;
+    left: 34%;
+}
 .kannur{
 	position: absolute;
 	left: 65px;
     top: 101px;
+}
+.kannurText{
+	position: absolute;
+	top: 23%;
+    left: 30%;
+}
+.kannurNumber{
+	position: absolute;
+	top: 33%;
+    left: 34%;
 }
 .wayand{
 	position: absolute;
 	left: 177px;
     top: 160px;
 }
+.wayandText{
+	position: absolute;
+	top: 23%;
+    left: 30%;
+}
+.wayandNumber{
+	position: absolute;
+	top: 33%;
+    left: 34%;
+}
 .kozhikode{
 	position: absolute;
 	left: 133px;
     top: 195px;
+}
+.kozhikodeText{
+	position: absolute;
+	top: 23%;
+    left: 30%;
+}
+.kozhikodeNumber{
+	position: absolute;
+	top: 33%;
+    left: 34%;
 }
 .malappuram{
 	position: absolute;
 	left: 186px;
     top: 250px;
 }
+.malappuramText{
+	position: absolute;
+	top: 23%;
+    left: 30%;
+}
+.malappuramNumber{
+	position: absolute;
+	top: 33%;
+    left: 34%;
+}
 .palakkad{
 	position: absolute;
 	left: 226px;
     top: 300px;
+}
+.palakkadText{
+	position: absolute;
+	top: 23%;
+    left: 30%;
+}
+.palakkadNumber{
+	position: absolute;
+	top: 33%;
+    left: 34%;
 }
 .thrissur{
 	position: absolute;
 	left: 213px;
     top: 388px;
 }
+.thrissurText{
+	position: absolute;
+	top: 23%;
+    left: 30%;
+}
+.thrissurNumber{
+	position: absolute;
+	top: 33%;
+    left: 34%;
+}
 .ernakulam{
 	position: absolute;
 	left: 253px;
     top: 479px;
+}
+.ernakulamText{
+	position: absolute;
+	top: 23%;
+    left: 30%;
+}
+.ernakulamNumber{
+	position: absolute;
+	top: 33%;
+    left: 34%;
 }
 .idukki{
 	position: absolute;
 	left: 336px;
     top: 466px;
 }
+.idukkiText{
+	position: absolute;
+	top: 23%;
+    left: 30%;
+}
+.idukkiNumber{
+	position: absolute;
+	top: 33%;
+    left: 34%;
+}
 .kottayam{
 	position: absolute;
 	left: 289px;
     top: 557px;
+}
+.kottayamText{
+	position: absolute;
+	top: 23%;
+    left: 30%;
+}
+.kottayamNumber{
+	position: absolute;
+	top: 33%;
+    left: 34%;
 }
 .alappuzha{
 	position: absolute;
 	left: 270px;
     top: 554px;
 }
+.alappuzhaText{
+	position: absolute;
+	top: 23%;
+    left: 30%;
+}
+.alappuzhaNumber{
+	position: absolute;
+	top: 33%;
+    left: 34%;
+}
 .pathanamthitta{
 	position: absolute;
     left: 308px;
     top: 630px;
+}
+.pathanamthittaText{
+	position: absolute;
+    top: 23%;
+    left: 30%;
+}
+.pathanamthittaNumber{
+	position: absolute;
+    top: 33%;
+    left: 34%;
 }
 .kollam{
 	position: absolute;
 	left: 310px;
     top: 691px;
 }
+.kollamText{
+	position: absolute;
+	top: 23%;
+    left: 30%;
+}
+.kollamNumber{
+	position: absolute;
+	top: 33%;
+    left: 34%;
+}
 .thiruvanthapuram{
 	position: absolute;
 	left: 340px;
     top: 748px;
+}
+.thiruvanthapuramText{
+	position: absolute;
+	top: 23%;
+    left: 30%;
+}
+.thiruvanthapuramNumber{
+	position: absolute;
+	top: 33%;
+    left: 34%;
 }

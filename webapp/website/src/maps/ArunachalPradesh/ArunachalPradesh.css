@@ -8,7 +8,22 @@
     top: 375px;
     left: 20px;
 }
+.tawangNumber{
+    position: absolute;
+    top: 375px;
+    left: 20px;
+}
 .westKameng{
+    position: absolute;
+    top: 189px;
+    left: 40px;
+}
+.westKamengText{
+    position: absolute;
+    top: 189px;
+    left: 40px;
+}
+.westKamengNumber{
     position: absolute;
     top: 189px;
     left: 40px;
@@ -18,7 +33,27 @@
     top: 355px;
     left: 134px;
 }
+.eastKamengText{
+    position: absolute;
+    top: 355px;
+    left: 134px;
+}
+.eastKamengNumber{
+    position: absolute;
+    top: 355px;
+    left: 134px;
+}
 .kurungKumey{
+    position: absolute;
+    top: 325px;
+    left: 161px;
+}
+.kurungKumeyText{
+    position: absolute;
+    top: 325px;
+    left: 161px;
+}
+.kurungKumeyNumber{
     position: absolute;
     top: 325px;
     left: 161px;
@@ -28,7 +63,12 @@
     top: 400px;
     left: 234px;
 }
-.papumPare{
+.papumPareText{
+    position: absolute;
+    top: 400px;
+    left: 234px;
+}
+.papumPareNumber{
     position: absolute;
     top: 400px;
     left: 234px;
@@ -38,7 +78,27 @@
     top: 349px;
     left: 270px;
 }
+.lowerSubansiriText{
+    position: absolute;
+    top: 349px;
+    left: 270px;
+}
+.lowerSubansiriNumber{
+    position: absolute;
+    top: 349px;
+    left: 270px;
+}
 .upperSubansiri{
+    position: absolute;
+    top: 247px;
+    left: 223px;
+}
+.upperSubansiriText{
+    position: absolute;
+    top: 247px;
+    left: 223px;
+}
+.upperSubansiriNumber{
     position: absolute;
     top: 247px;
     left: 223px;
@@ -48,7 +108,27 @@
     top: 297px;
     left: 182px;
 }
+.kraDaadiText{
+    position: absolute;
+    top: 297px;
+    left: 182px;
+}
+.kraDaadiNumber{
+    position: absolute;
+    top: 297px;
+    left: 182px;
+}
 .upperSubansiri{
+    position: absolute;
+    top: 247px;
+    left: 222px;
+}
+.upperSubansiriText{
+    position: absolute;
+    top: 247px;
+    left: 222px;
+}
+.upperSubansiriNumber{
     position: absolute;
     top: 247px;
     left: 222px;
@@ -58,7 +138,27 @@
     top: 192px;
     left: 315px;
 }
+.westSiangText{
+    position: absolute;
+    top: 192px;
+    left: 315px;
+}
+.westSiangNumber{
+    position: absolute;
+    top: 192px;
+    left: 315px;
+}
 .yingkiong{
+    position: absolute;
+    top: 151px;
+    left: 344px;
+}
+.yingkiongText{
+    position: absolute;
+    top: 151px;
+    left: 344px;
+}
+.yingkiongNumber{
     position: absolute;
     top: 151px;
     left: 344px;
@@ -68,7 +168,27 @@
     top: 259px;
     left: 416px;
 }
+.eastSiangText{
+    position: absolute;
+    top: 259px;
+    left: 416px;
+}
+.eastSiangNumber{
+    position: absolute;
+    top: 259px;
+    left: 416px;
+}
 .dibangValley{
+    position: absolute;
+    top: 123px;
+    left: 476px;
+}
+.dibangValleyText{
+    position: absolute;
+    top: 123px;
+    left: 476px;
+}
+.dibangValleyNumber{
     position: absolute;
     top: 123px;
     left: 476px;
@@ -78,7 +198,27 @@
     top: 252px;
     left: 490px;
 }
+.lowerDibangValleyText{
+    position: absolute;
+    top: 252px;
+    left: 490px;
+}
+.lowerDibangValleyNumber{
+    position: absolute;
+    top: 252px;
+    left: 490px;
+}
 .lohit{
+    position: absolute;
+    top: 267px;
+    left: 552px;
+}
+.lohitText{
+    position: absolute;
+    top: 267px;
+    left: 552px;
+}
+.lohitNumber{
     position: absolute;
     top: 267px;
     left: 552px;
@@ -88,7 +228,27 @@
     top: 260px;
     left: 612px;
 }
+.anjawText{
+    position: absolute;
+    top: 260px;
+    left: 612px;
+}
+.anjawNumber{
+    position: absolute;
+    top: 260px;
+    left: 612px;
+}
 .changlang{
+    position: absolute;
+    top: 370px;
+    left: 540px;
+}
+.changlangText{
+    position: absolute;
+    top: 370px;
+    left: 540px;
+}
+.changlangNumber{
     position: absolute;
     top: 370px;
     left: 540px;
@@ -98,12 +258,42 @@
     top: 363px;
     left: 552px;
 }
+.namsaiText{
+    position: absolute;
+    top: 363px;
+    left: 552px;
+}
+.namsaiNumber{
+    position: absolute;
+    top: 363px;
+    left: 552px;
+}
 .khonsa{
     position: absolute;
     top: 435px;
     left: 508px;
 }
+.khonsaText{
+    position: absolute;
+    top: 435px;
+    left: 508px;
+}
+.khonsaNumber{
+    position: absolute;
+    top: 435px;
+    left: 508px;
+}
 .langding{
+    position: absolute;
+    top: 456px;
+    left: 486px;
+}
+.langdingText{
+    position: absolute;
+    top: 456px;
+    left: 486px;
+}
+.langdingNumber{
     position: absolute;
     top: 456px;
     left: 486px;

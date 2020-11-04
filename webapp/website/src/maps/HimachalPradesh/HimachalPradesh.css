@@ -3,7 +3,27 @@
 	left: 1px;
 	top: 200px;
 }
+.kangraText{
+	position: absolute;
+	left: 1px;
+	top: 200px;
+}
+.kangraNumber{
+	position: absolute;
+	left: 1px;
+	top: 200px;
+}
 .chamba{
+	position: absolute;
+	left: 55px;
+    top: 10px;
+}
+.chambaText{
+	position: absolute;
+	left: 55px;
+    top: 10px;
+}
+.chambaNumber{
 	position: absolute;
 	left: 55px;
     top: 10px;
@@ -13,7 +33,27 @@
 	left: 177px;
     top: -1px;
 }
+.keylongText{
+	position: absolute;
+	left: 177px;
+    top: -1px;
+}
+.keylongNumber{
+	position: absolute;
+	left: 177px;
+    top: -1px;
+}
 .kullu{
+	position: absolute;
+	left: 295px;
+    top: 216px;
+}
+.kulluText{
+	position: absolute;
+	left: 295px;
+    top: 216px;
+}
+.kulluNumber{
 	position: absolute;
 	left: 295px;
     top: 216px;
@@ -23,7 +63,27 @@
 	left: 224px;
     top: 302px;
 }
+.mandiText{
+	position: absolute;
+	left: 224px;
+    top: 302px;
+}
+.mandiNumber{
+	position: absolute;
+	left: 224px;
+    top: 302px;
+}
 .hamirpur{
+	position: absolute;
+	left: 156px;
+    top: 346px;
+}
+.hamirpurText{
+	position: absolute;
+	left: 156px;
+    top: 346px;
+}
+.hamirpurNumber{
 	position: absolute;
 	left: 156px;
     top: 346px;
@@ -33,7 +93,27 @@
 	left: 37px;
     top: 175px;
 }
+.unaText{
+	position: absolute;
+	left: 37px;
+    top: 175px;
+}
+.unaNumber{
+	position: absolute;
+	left: 37px;
+    top: 175px;
+}
 .balspur{
+	position: absolute;
+	left: 171px;
+    top: 422px;
+}
+.balspurText{
+	position: absolute;
+	left: 171px;
+    top: 422px;
+}
+.balspurNumber{
 	position: absolute;
 	left: 171px;
     top: 422px;
@@ -43,7 +123,27 @@
 	left: 215px;
     top: 484px;
 }
+.solanText{
+	position: absolute;
+	left: 215px;
+    top: 484px;
+}
+.solanNumber{
+	position: absolute;
+	left: 215px;
+    top: 484px;
+}
 .shimla{
+	position: absolute;
+	left: 298px;
+    top: 396px;
+}
+.shimlaText{
+	position: absolute;
+	left: 298px;
+    top: 396px;
+}
+.shimlaNumber{
 	position: absolute;
 	left: 298px;
     top: 396px;
@@ -53,7 +153,27 @@
 	left: 469px;
     top: 305px;
 }
+.kinnaurText{
+	position: absolute;
+	left: 469px;
+    top: 305px;
+}
+.kinnaurNumber{
+	position: absolute;
+	left: 469px;
+    top: 305px;
+}
 .sirmaur{
+	position: absolute;
+	left: 303px;
+    top: 570px;
+}
+.sirmaurText{
+	position: absolute;
+	left: 303px;
+    top: 570px;
+}
+.sirmaurNumber{
 	position: absolute;
 	left: 303px;
     top: 570px;

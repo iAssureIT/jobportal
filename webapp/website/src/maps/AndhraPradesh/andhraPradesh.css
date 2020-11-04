@@ -3,7 +3,27 @@
 	top: 375px;
 	left: 80px;
 }
+.kurnoolText{
+    position: absolute;
+    top: 375px;
+    left: 80px;
+}
+.kurnoolNumber{
+    position: absolute;
+    top: 375px;
+    left: 80px;
+}
 .anantapur {
+    position: absolute;
+    top: 476px;
+    left: 61px;
+}
+.anantapurText {
+    position: absolute;
+    top: 476px;
+    left: 61px;
+}
+.anantapurNumber {
     position: absolute;
     top: 476px;
     left: 61px;
@@ -13,7 +33,27 @@
     top: 237px;
     left: 90px;
 }
+.ysrText {
+    position: absolute;
+    top: 237px;
+    left: 90px;
+}
+.ysrNumber {
+    position: absolute;
+    top: 237px;
+    left: 90px;
+}
 .chittoor {
+    position: absolute;
+    top: 602px;
+    left: 195px;
+}
+.chittoorText {
+    position: absolute;
+    top: 602px;
+    left: 195px;
+}
+.chittoorNumber {
     position: absolute;
     top: 602px;
     left: 195px;
@@ -23,7 +63,27 @@
     top: 486px;
     left: 288px;
 }
+.nelloreText {
+    position: absolute;
+    top: 486px;
+    left: 288px;
+}
+.nelloreNumber {
+    position: absolute;
+    top: 486px;
+    left: 288px;
+}
 .prakasam {
+    position: absolute;
+    top: 366px;
+    left: 255px;
+}
+.prakasamText {
+    position: absolute;
+    top: 366px;
+    left: 255px;
+}
+.prakasamNumber {
     position: absolute;
     top: 366px;
     left: 255px;
@@ -33,7 +93,27 @@
     top: 310px;
     left: 299px;
 }
+.gunturText {
+    position: absolute;
+    top: 310px;
+    left: 299px;
+}
+.gunturNumber {
+    position: absolute;
+    top: 310px;
+    left: 299px;
+}
 .krishna {
+    position: absolute;
+    top: 278px;
+    left: 374px;
+}
+.krishnaText {
+    position: absolute;
+    top: 278px;
+    left: 374px;
+}
+.krishnaNumber {
     position: absolute;
     top: 278px;
     left: 374px;
@@ -43,7 +123,12 @@
     top: 243px;
     left: 458px;
 }
-.westGodawari {
+.westGodawariText {
+    position: absolute;
+    top: 243px;
+    left: 458px;
+}
+.westGodawariNumber {
     position: absolute;
     top: 243px;
     left: 458px;
@@ -53,7 +138,27 @@
     top: 179px;
     left: 519px;
 }
+.eastGodawariText {
+    position: absolute;
+    top: 179px;
+    left: 519px;
+}
+.eastGodawariNumber {
+    position: absolute;
+    top: 179px;
+    left: 519px;
+}
 .vishakhapatnam {
+    position: absolute;
+    top: 126px;
+    left: 555px;
+}
+.vishakhapatnamText {
+    position: absolute;
+    top: 126px;
+    left: 555px;
+}
+.vishakhapatnamNumber {
     position: absolute;
     top: 126px;
     left: 555px;
@@ -63,7 +168,27 @@
     top: 58px;
     left: 655px;
 }
+.vizianagaramText {
+    position: absolute;
+    top: 126px;
+    left: 555px;
+}
+.vizianagaramNumber {
+    position: absolute;
+    top: 58px;
+    left: 655px;
+}
 .srikakulam {
+    position: absolute;
+    top: 57px;
+    left: 707px;
+}
+.srikakulamText {
+    position: absolute;
+    top: 57px;
+    left: 707px;
+}
+.srikakulamNumber {
     position: absolute;
     top: 57px;
     left: 707px;
