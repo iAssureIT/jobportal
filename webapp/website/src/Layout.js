@@ -113,7 +113,7 @@ class Layout extends Component  {
         const roles = localStorage.getItem("roles");
         var roleArr = [];
         roleArr.push(roles);        
-        console.log(this.state.currentUrl)
+       
         if (this.state.loggedIn) {
             return (
             <Router>

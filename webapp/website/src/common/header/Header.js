@@ -164,10 +164,7 @@ class Header extends Component{
                       <FontAwesomeIcon icon="mobile" />
                       <span className="notificationMessegeText">Employer Login</span>
                   </div>                    
-                  <div className="notificationMessege col-lg-12">
-                      <FontAwesomeIcon icon="sign-out-alt" />
-                      <span className="notificationMessegeText">Sign Out</span>
-                  </div>
+                  
                 </div>
                 
               </div>

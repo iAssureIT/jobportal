@@ -9,7 +9,8 @@ import axios from 'axios';
 import jQuery from 'jquery';
 import 'jquery-validation';
 import swal from 'sweetalert';
-import SignUp from './SignUp.js';
+import { bindActionCreators } from 'redux';
+import  * as mapActionCreator from '../common/actions/index';
 
 class Login extends Component {
 
@@ -63,9 +64,7 @@ class Login extends Component {
   }
   handleChange(event){
       var fieldValue=event.currentTarget.value;
-      // console.log("fieldValue",fieldValue);
-       var fieldKey=event.currentTarget.name;
-       console.log("fieldKey",fieldKey);
+      var fieldKey=event.currentTarget.name;
       this.setState({
         [fieldKey]:fieldValue
       });    
@@ -190,124 +189,117 @@ class Login extends Component {
     $(".toast-info").removeClass('toast');
     $(".toast-warning").removeClass('toast');
   }
+  ShowSignUp(event){
+    event.preventDefault();
+    var {mapAction} = this.props;
+
+    mapAction.setSelectedModal("signup");
+  }
+  ShowForgotPass(event){
+    event.preventDefault();
+    var {mapAction} = this.props;
+
+    mapAction.setSelectedModal("forgotpassword");
+  }
+  
   render() {
     return (
-      <div className="loginFormOuter col-lg-12">
-            <div className="img1Login">
-                <img src="/images/Sign_In/1.png" alt="img1Login" className="img1oginInner"/>
-            </div>
-
-             <div className="img2Login">
-                <img src="/images/Sign_In/2.png" alt="img2Login" className="img2loginInner"/>
-            </div>
-
-             <div className="img3Login">
-                <img src="/images/Sign_In/3.png" alt="img3Login" className="img3loginInner"/>
-            </div>
-
-             <div className="img4Login">
-                <img src="/images/Sign_In/4.png" alt="img4Login" className="img4loginInner"/>
-            </div>
-
-             <div className="img5Login">
-                <img src="/images/Sign_In/5.png" alt="img5Login" className="img5loginInner"/>
-            </div>
-
-             <div className="img6Login">
-                <img src="/images/Sign_In/6.png" alt="img6Login" className="img6loginInner"/>
-            </div>
-
-            <div className="loginFormInner col-lg-6 col-lg-offset-3">
-              <form>
-
-                <div className="signInTitle col-lg-12">Sign In
-                </div>
-                
-                <div className="loginSocialMedia">
-                  <div className="loginSocialMediaInner">
-                    <div className="loginLinkedIn"><i className="fa fa-linkedin"></i></div>
-                    <div className="loginGoogle"><i className="fa fa-google"></i></div>
-                  </div>    
-                </div>
-                
-
-                <div className="loginOr col-lg-12">
-                  <hr className="loginHr"/>
-                  <div className="loginOrText">or
-                  </div>
-                  <hr className="loginHr"/>
-                </div>
-                
-
-                    <div className="col-lg-12 form-group loginFormGroup" >
-                      <div className="input-group">
-                        <span className="input-group-addon loginInputIcon1"><i className="fa fa-mobile"></i></span>
-                        <input type="tel" id="loginusername" name="loginusername" placeholder="Email Id" value={this.state.loginusername} ref="loginusername" onChange={this.handleChange.bind(this)} className="form-control loginInputBox"/>
-                      </div>
-                      <span id="loginusernameError" className="errorMsg"></span>
-                    </div>
-
-                    <div className="col-lg-12 form-group" >
-                      <div className="input-group">
-                        <span className="input-group-addon loginInputIcon2"><i className="fa fa-lock"></i></span>
-                        <input type="password" id="password" name="password" placeholder="Password" value={this.state.password} ref="loginpassword" onChange={this.handleChange.bind(this)} className="form-control loginInputBox"/>
-                        <span className="input-group-addon loginInputIcon3"><i className="fa fa-eye" onClick={this.showSignPass.bind(this)}></i></span>
-                      </div>
-                      <span id="passwordError" className="errorMsg"></span>
-                    </div>
-
-                    <div className="col-lg-12 buttonWrapper">
-                     <button className="btn col-lg-12 buttonSignIn" onClick={this.userlogin.bind(this)}>Sign In</button>
-                    </div>
- 
-                    <div className="col-lg-12 loginLinks">
-                      <div className="row">
-                        <div className="col-lg-6" >
-                          <a className="loginSignUp" href="/signup"><u>Sign Up?</u></a>
-                        </div>
-                      
-                        <div className="col-lg-6">
-                          <a className="loginForgotPassword" href="/forgot-password"><u>Forgot Password?</u></a>
-                        </div>
-                      </div>  
-                    </div>
-              </form>
-            </div>
-            <div className="modal fade" id="signupModal" role="dialog">
-              <div className="modal-dialog  modal-lg">
-               
-                <div className="modal-body">
-                    <button type="button" className="close" data-dismiss="modal">&times;</button>
-                    <section className="OTPSentWrapper row">
-                          <SignUp/>
-                    </section>
-                </div>
-            
-              </div>
-            </div>
+        <div className="loginFormOuter col-lg-12">
+          <div className="img1Login">
+              <img src="/images/Sign_In/1.png" alt="img1Login" className="img1oginInner"/>
           </div>
+
+           <div className="img2Login">
+              <img src="/images/Sign_In/2.png" alt="img2Login" className="img2loginInner"/>
+          </div>
+
+           <div className="img3Login">
+              <img src="/images/Sign_In/3.png" alt="img3Login" className="img3loginInner"/>
+          </div>
+
+           <div className="img4Login">
+              <img src="/images/Sign_In/4.png" alt="img4Login" className="img4loginInner"/>
+          </div>
+
+           <div className="img5Login">
+              <img src="/images/Sign_In/5.png" alt="img5Login" className="img5loginInner"/>
+          </div>
+
+           <div className="img6Login">
+              <img src="/images/Sign_In/6.png" alt="img6Login" className="img6loginInner"/>
+          </div>
+
+          <div className="loginFormInner col-lg-6 col-lg-offset-3">
+            <form>
+
+              <div className="signInTitle col-lg-12">Sign In
+              </div>
+              
+              <div className="loginSocialMedia">
+                <div className="loginSocialMediaInner">
+                  <div className="loginLinkedIn"><i className="fa fa-linkedin"></i></div>
+                  <div className="loginGoogle"><i className="fa fa-google"></i></div>
+                </div>    
+              </div>
+              
+
+              <div className="loginOr col-lg-12">
+                <hr className="loginHr"/>
+                <div className="loginOrText">or
+                </div>
+                <hr className="loginHr"/>
+              </div>
+              
+
+                  <div className="col-lg-12 form-group loginFormGroup" >
+                    <div className="input-group">
+                      <span className="input-group-addon loginInputIcon1"><i className="fa fa-mobile"></i></span>
+                      <input type="tel" id="loginusername" name="loginusername" placeholder="Email Id" value={this.state.loginusername} ref="loginusername" onChange={this.handleChange.bind(this)} className="form-control loginInputBox"/>
+                    </div>
+                    <span id="loginusernameError" className="errorMsg"></span>
+                  </div>
+
+                  <div className="col-lg-12 form-group" >
+                    <div className="input-group">
+                      <span className="input-group-addon loginInputIcon2"><i className="fa fa-lock"></i></span>
+                      <input type="password" id="password" name="password" placeholder="Password" value={this.state.password} ref="loginpassword" onChange={this.handleChange.bind(this)} className="form-control loginInputBox"/>
+                      <span className="input-group-addon loginInputIcon3"><i className="fa fa-eye" onClick={this.showSignPass.bind(this)}></i></span>
+                    </div>
+                    <span id="passwordError" className="errorMsg"></span>
+                  </div>
+
+                  <div className="col-lg-12 buttonWrapper">
+                   <button className="btn col-lg-12 buttonSignIn" onClick={this.userlogin.bind(this)}>Sign In</button>
+                  </div>
+
+                  <div className="col-lg-12 loginLinks">
+                    <div className="row">
+                      <div className="col-lg-6">
+                        <a href="#" className="loginSignUp" onClick={this.ShowSignUp.bind(this)}><u>Sign Up?</u></a>
+                      </div>
+                    
+                      <div className="col-lg-6">
+                       <a href="#" className="loginForgotPassword" onClick={this.ShowForgotPass.bind(this)}><u>Forgot Password?</u></a>
+                      </div>
+                    </div>  
+                  </div>
+            </form>
+          </div>
+      </div>
+      
     );
   }
 }
 
 const mapStateToProps = (state)=>{
-  console.log("state = ",state)
-  return {
-    userDetails   : state.userDetails,
-  }
-};
+    return {
+        selectedModal  : state.selectedModal
+    }
+}
+const mapDispachToProps = (dispatch) => ({
+  mapAction :  bindActionCreators(mapActionCreator, dispatch)
+}) 
 
 
-const mapDispatchToProps = (dispatch)=>{
-  return {
-      setGlobalUser  : (userDetails)=> dispatch({
-                          type      : "SET_GLOBAL_USER",
-                          userDetails : userDetails,
-                        }),
-  }
-};
-
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispachToProps)(Login);
 

@@ -42,7 +42,7 @@
   
   text-align:left;
   padding-left: 10px;
-  border: 1px solid #D3950A;
+  border: 1px solid #D3950A !important;
   background-color: transparent !important;
   color: #fff;
   font-size: 14px;

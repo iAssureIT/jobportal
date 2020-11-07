@@ -3,7 +3,8 @@ const initialState = {
 	accessToFacility 			: false,
 	selectedCountry				: "India",
 	selectedState 				: "",
-	selectedDistrict 			: "" 
+	selectedDistrict 			: "",
+	selectedModal 				: "login" 
 }
 
 const reducer = (state = initialState,action) => {
@@ -16,6 +17,9 @@ const newState = {...state};
 	}
 	if(action.type === "SET_MAP_STATE"){
 		newState.selectedState 	= action.selectedState;
+	}
+	if(action.type === "SET_MODAL"){
+		newState.selectedModal 	= action.selectedModal;
 	}
 return newState;
 }

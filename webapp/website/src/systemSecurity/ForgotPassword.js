@@ -4,6 +4,9 @@ import jQuery from 'jquery';
 import axios from 'axios';
 import swal from 'sweetalert';
 import './ForgotPassword.css';
+import { connect }        from 'react-redux';
+import { bindActionCreators } from 'redux';
+import  * as mapActionCreator from '../common/actions/index';
 
 class ForgotPassword extends Component {
     constructor(props) {
@@ -93,11 +96,16 @@ class ForgotPassword extends Component {
 
     }
 
-   
+    ShowLogin(event){
+        event.preventDefault();
+        var {mapAction} = this.props;
+
+        mapAction.setSelectedModal("login");
+    }
     render() {
         return (
             <section className="container-fluid forgotPasswordWrapper">
-                <div className="forgotPassword col-lg-4 col-lg-offset-4">
+                <div className="forgotPassword col-lg-6 col-lg-offset-3">
                   <form>
                     <div className="forgotPasswordTitle col-lg-12">Forgot Password ?
                     </div>
@@ -122,7 +130,7 @@ class ForgotPassword extends Component {
                     </div>
 
                     <div className="col-lg-12 forgotPasswordLinks">
-                        <a className="forgotPasswordSignIn" href="/login"><u>Sign In</u></a>
+                        <a className="forgotPasswordSignIn" href="#" onClick={this.ShowLogin.bind(this)}><u>Sign In</u></a>
                       </div>
                   </form>
                 </div>
@@ -131,4 +139,14 @@ class ForgotPassword extends Component {
     }
 }
 
-export default ForgotPassword;
+
+const mapStateToProps = (state)=>{
+    return {
+        selectedModal  : state.selectedModal
+    }
+}
+const mapDispachToProps = (dispatch) => ({
+  mapAction :  bindActionCreators(mapActionCreator, dispatch)
+})
+
+export default connect(mapStateToProps, mapDispachToProps) (ForgotPassword);

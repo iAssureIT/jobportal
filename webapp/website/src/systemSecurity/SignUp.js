@@ -10,6 +10,9 @@ import 'font-awesome/css/font-awesome.min.css';
 import './SignUp.css';
 import swal from 'sweetalert';
 import axios from 'axios';
+import { connect }        from 'react-redux';
+import { bindActionCreators } from 'redux';
+import  * as mapActionCreator from '../common/actions/index';
 
 class SignUp extends Component {
 
@@ -293,10 +296,16 @@ class SignUp extends Component {
 	proceed() {
 
 	}
+  ShowLogin(event){
+      event.preventDefault();
+      var {mapAction} = this.props;
+
+      mapAction.setSelectedModal("login");
+  }
 	render() {
 		return (
 			<section className="container-fluid registrationFormWrapper">
-                <div className="registrationForm col-lg-4 col-lg-offset-4">
+                <div className="registrationForm col-lg-6 col-lg-offset-3">
                   <form>
 
                     <div className="signUpTitle col-lg-12">Sign Up
@@ -376,9 +385,9 @@ class SignUp extends Component {
                    <button className="btn col-lg-12 buttonSignUp" onClick={this.usersignup.bind(this)}>Sign Up</button>
                   </div>
 
-                  <div className="col-lg-12 registrationLinks">
-                        <a className="alreadyAccount" href="/login"><u>Already have an Account?Sign In</u></a>
-                      </div>
+                  <div className="col-lg-12 registrationLinks" >
+                    <a className="alreadyAccount" href="#" onClick={this.ShowLogin.bind(this)}><u>Already have an Account?Sign In</u></a>
+                  </div>
 
                 </form>
               </div>
@@ -386,4 +395,13 @@ class SignUp extends Component {
 		);
 	}
 }
-export default SignUp;
+const mapStateToProps = (state)=>{
+    return {
+        selectedModal  : state.selectedModal
+    }
+}
+const mapDispachToProps = (dispatch) => ({
+  mapAction :  bindActionCreators(mapActionCreator, dispatch)
+})
+
+export default connect(mapStateToProps, mapDispachToProps) (SignUp);

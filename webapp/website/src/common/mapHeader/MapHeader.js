@@ -2,14 +2,18 @@ import React, {Component} from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import '../functionalHeader/FunctionalHeader.css';
 import LoginForm from '../../systemSecurity/Login.js';
+import SignUp from '../../systemSecurity/SignUp.js';
+import ForgotPassword from '../../systemSecurity/ForgotPassword.js';
 import {connect}            from 'react-redux';
 import { bindActionCreators } from 'redux';
+import  * as mapActionCreator from '../../common/actions/index';
+
 
 class MapHeader extends Component{
 	constructor(props){
 		super(props);
 		this.state={
-			showModal: false,
+			showLoginModal: false,
 			asideDisplay  : "none",
 			
 		}
@@ -40,7 +44,7 @@ class MapHeader extends Component{
   	render(){
     
     const selectedState = this.props.selectedState;
-   	console.log(selectedState);
+   	console.log(this.props.selectedModal);
 
     return(
       	<nav className="navbar FunctionalHeaderWrapper container-fluid">
@@ -110,16 +114,16 @@ class MapHeader extends Component{
 						</div>
 
 					</div>
-					<div className="modal fade" id="loginModal" role="dialog">
+					<div className="modal" id="loginModal" role="dialog" tabIndex="-1">
 					    <div className="modal-dialog  modal-lg">
-						   
 						    <div className="modal-body">
 						      	<button type="button" className="close" data-dismiss="modal">&times;</button>
 						        <section className="OTPSentWrapper row">
-					                <LoginForm/>
+					                {this.props.selectedModal == "login" ? <LoginForm/> : null }
+					                {this.props.selectedModal == "signup" ? <SignUp/> : null }
+					                {this.props.selectedModal == "forgotpassword" ? <ForgotPassword/> : null }
 					        	</section>
 						    </div>
-						
 						  </div>
 					</div>
 		   		</div>
@@ -133,10 +137,11 @@ class MapHeader extends Component{
 
 const mapStateToProps = (state)=>{
     return {
-        selectedState  : state.selectedState
+        selectedState  : state.selectedState,
+        selectedModal  : state.selectedModal
     }
 }
-// const mapDispachToProps = (dispatch) =>{
-//     return bindActionCreators({ setMapSelectedStateFun : setMapSelectedState }, dispatch);  
-// } 
-export default connect(mapStateToProps) (MapHeader);
+const mapDispachToProps = (dispatch) => ({
+	mapAction :  bindActionCreators(mapActionCreator, dispatch)
+}) 
+export default connect(mapStateToProps,mapDispachToProps) (MapHeader);
