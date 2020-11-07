@@ -19,7 +19,7 @@
 
 .loginFormOuter{
 	height: 650px;
-	background-color: #1f262d;
+	/*background-color: #1f262d;*/
 	
 }
 
@@ -236,10 +236,10 @@
 	left:55%;
 	z-index: 1;
 
-	animation: horizontalMove1 2s;
+	/*animation: horizontalMove1 2s;
 	animation-iteration-count:infinite;
 	transition-timing-function: ease-in-out;
-	animation-delay: 1s;
+	animation-delay: 1s;*/
 }
 
 .img1oginInner{
@@ -280,14 +280,14 @@
 	position: absolute;
 	height: 300px;
 	width: 180px;
-	top:240px;
-	left:23%;
+	top:250px;
+	left:9%;
 	z-index: 1;
 
-	animation: horizontalMove2 2s;
+	/*animation: horizontalMove2 2s;
 	animation-iteration-count:infinite;
 	transition-timing-function: ease-in-out;
-	animation-delay: 2s;
+	animation-delay: 2s;*/
 }
 
 .img2loginInner{
@@ -304,12 +304,12 @@
 	width: 120px;
 	
 	top:250px;
-	left:61.5%;
+	left:67%;
 	z-index: 1;
-	animation: horizontalMove3 2s;
+	/*animation: horizontalMove3 2s;
 	animation-iteration-count:infinite;
 	transition-timing-function: ease-in-out;
-	animation-delay: 3s;
+	animation-delay: 3s;*/
 }
 
 .img3loginInner{
@@ -335,15 +335,15 @@ width: 100px;
 	height: 150px;
 	width: 80px;
 	
-	top:435px;
-	left:42%;
+	top: 445px;
+    left: 38%;
 	z-index: 1;
 
 
-	animation: move 2s;
+	/*animation: move 2s;
 	animation-iteration-count:infinite;
 	transition-timing-function: ease-in-out;
-	animation-delay: 1s;
+	animation-delay: 1s;*/
 }
 
 .img4loginInner{
@@ -356,8 +356,8 @@ width: 100px;
 	height: 150px;
 	width: 140px;
 	
-	top:365px;
-	left:66%;
+	top: 343px;
+    left: 73%;
 	z-index: 0;
 }
 
@@ -370,8 +370,8 @@ width: 100px;
 	position: absolute;
 	height: 90px;
 	width: 70px;
-	top:140px;
-	left:28.6%;
+	top: 130px;
+    left: 18.6%;
 	z-index: 0;
 }
 

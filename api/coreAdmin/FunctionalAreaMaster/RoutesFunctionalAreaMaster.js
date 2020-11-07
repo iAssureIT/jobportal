@@ -9,7 +9,7 @@ router.post('/get/list', functionalAreaMaster.fetchFunctionalAreas);
 
 router.get('/get/list', functionalAreaMaster.getFunctionalAreas);
 
-router.get('/get/functionalArealist/:id', functionalAreaMaster.fetchFunctionalAreaData); 
+router.get('/get/functionalArealist/:id', functionalAreaMaster.fetchFunctionalAreas); 
 
 router.get('/get/count', functionalAreaMaster.countFunctionalAreas);
  
@@ -21,11 +21,11 @@ router.patch('/patch', functionalAreaMaster.updateFunctionalArea);
 
 router.delete('/delete/:fieldID', functionalAreaMaster.deleteFunctionalArea);
 
-router.post('/bulkUploadModel',functionalAreaMaster.bulkUploadFunctionalArea);
+//router.post('/bulkUploadModel',functionalAreaMaster.bulkUploadFunctionalArea);
 
-router.get('/get/filedetails/:fileName', functionalAreaMaster.filedetails);
+//router.get('/get/filedetails/:fileName', functionalAreaMaster.filedetails);
 
-router.post('/get/files', functionalAreaMaster.fetch_file); 
+//router.post('/get/files', functionalAreaMaster.fetch_file); 
 
 
 module.exports = router;

@@ -1,12 +1,11 @@
 const mongoose = require('mongoose');
 
-const functionalAreaSchema = mongoose.Schema({
+const functionalareaSchema = mongoose.Schema({
     _id                       : mongoose.Schema.Types.ObjectId,
-    industry_id               : { type: mongoose.Schema.Types.ObjectId, ref: 'industryMaster' },
-    functionalArea            : String,  
+    functionalArea            : String,
+    iconUrl                   : String,  
     createdBy                 : { type: mongoose.Schema.Types.ObjectId, ref: 'users' },
     createdAt                 : Date,
-    fileName                  :String,
     updateLog                 : [
                                 {
                                     updatedAt           : Date,
@@ -15,4 +14,4 @@ const functionalAreaSchema = mongoose.Schema({
                                 ]
 });
 
-module.exports = mongoose.model('functionalareamaster',functionalAreaSchema);
+module.exports = mongoose.model('functionalareamaster',functionalareaSchema);

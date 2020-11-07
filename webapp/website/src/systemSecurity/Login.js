@@ -9,6 +9,7 @@ import axios from 'axios';
 import jQuery from 'jquery';
 import 'jquery-validation';
 import swal from 'sweetalert';
+import SignUp from './SignUp.js';
 
 class Login extends Component {
 
@@ -216,7 +217,7 @@ class Login extends Component {
                 <img src="/images/Sign_In/6.png" alt="img6Login" className="img6loginInner"/>
             </div>
 
-            <div className="loginFormInner col-lg-4 col-lg-offset-4">
+            <div className="loginFormInner col-lg-6 col-lg-offset-3">
               <form>
 
                 <div className="signInTitle col-lg-12">Sign In
@@ -258,10 +259,10 @@ class Login extends Component {
                     <div className="col-lg-12 buttonWrapper">
                      <button className="btn col-lg-12 buttonSignIn" onClick={this.userlogin.bind(this)}>Sign In</button>
                     </div>
-
+ 
                     <div className="col-lg-12 loginLinks">
                       <div className="row">
-                        <div className="col-lg-6">
+                        <div className="col-lg-6" >
                           <a className="loginSignUp" href="/signup"><u>Sign Up?</u></a>
                         </div>
                       
@@ -271,6 +272,18 @@ class Login extends Component {
                       </div>  
                     </div>
               </form>
+            </div>
+            <div className="modal fade" id="signupModal" role="dialog">
+              <div className="modal-dialog  modal-lg">
+               
+                <div className="modal-body">
+                    <button type="button" className="close" data-dismiss="modal">&times;</button>
+                    <section className="OTPSentWrapper row">
+                          <SignUp/>
+                    </section>
+                </div>
+            
+              </div>
             </div>
           </div>
     );

@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { Multiselect } from 'multiselect-react-dropdown';
 import Axios        from 'axios';
 import Swal         from 'sweetalert2';
+
 import './LeftSideFilters.css';
 
 export default class LeftSideFilters extends Component{
@@ -10,11 +11,14 @@ export default class LeftSideFilters extends Component{
     super(props);
     console.log("I am in Constructor!");
 
-this.state = {
+    this.state = {
+
+      leftDrawerDisplay  : "-350px",
+
       allIndustries  : [],
       inputIndustry : [],
 
-      allFunctionalAreas  : [],
+      allSectors  : [],
       inputSector : [],
 
       allRoles  : [],
@@ -29,9 +33,10 @@ this.state = {
                 chips: {
                   backgroundColor: "#D3950A",
                   overflow:"hidden!important",
+                  whiteSpcae:"nowrap!important",
                 },
                 searchBox: {
-                  border: "1px solid #D3950A",
+                  border: "1px solid #4b5666",
                   
                 },
                 multiselectContainer: {
@@ -51,16 +56,34 @@ this.state = {
                 color: "white",
               },
               optionContainer:{
-                border: "1px solid #D3950A",
-                zIndex:"5!important"
+                border: "1px solid #4b5666",
+                zIndex:"5!important",
+                width:"100%important",
               }
 
                 };
   }
 
-componentDidMount(){
+  leftDrawerInfo(event){
 
-  Axios.get("http://qajobportalapi.iassureit.com/api/industrymaster/get/list")
+    if(this.state.leftDrawerDisplay==="-350px"){
+  
+      this.setState({
+      leftDrawerDisplay  : "0px",
+      
+      })
+    }
+    else{
+      this.setState({
+      leftDrawerDisplay  : "-350px",
+      
+      })
+    }
+  }
+
+ componentDidMount(){
+
+  Axios.get("/api/industrymaster/get/list")
       .then(response => {
         console.log("get Industry Data response.data = ",response.data);
         this.setState({inputIndustry : response.data});
@@ -80,7 +103,7 @@ componentDidMount(){
       })
 
 
-      Axios.get(" http://qajobportalapi.iassureit.com/api/functionalareamaster/get/list")
+      Axios.get("/api/functionalareamaster/get/list")
       .then(response => {
         console.log("get functionalArea Data response.data = ",response.data);
         this.setState({inputSector : response.data});
@@ -89,17 +112,17 @@ componentDidMount(){
         ?
           this.state.inputSector.map((elem,index)=>{
             
-            this.state.allFunctionalAreas.push(elem.functionalArea);
+            this.state.allSectors.push(elem.functionalArea);
             
           })
         :
-          this.state.allFunctionalAreas.push("select");
+          this.state.allSectors.push("select");
       })
       .catch(error=>{
         Swal.fire("Error while getting inputSector List data",error.message,'error');
       })
 
-      Axios.get(" http://qajobportalapi.iassureit.com/api/jobrolemaster/get/list")
+      Axios.get("/api/jobrolemaster/get/list")
       .then(response => {
         console.log("get Jpb Role Data response.data = ",response.data);
         this.setState({inputRole : response.data});
@@ -117,44 +140,55 @@ componentDidMount(){
       .catch(error=>{
         Swal.fire("Error while getting inputRole List data",error.message,'error');
       })
+
+
+
  }
-  render(){
+render(){
     
    
     return(
       <section className="LeftSideFiltersWrapper col-lg-2">
-          <div className="form-group col-lg-12">
+        
+        <div className="ApplyFilters" onClick={this.leftDrawerInfo.bind(this)}> Apply Filters   
+        <i className="fa fa-filter filtersIcon" ></i>
+        </div>
+
+        <div className="leftDrawerToggel col-lg-12" id="leftDrawerToggel" style={{left:this.state.leftDrawerDisplay}}>
+        <div className="row">
+
+          <div className="form-group col-lg-12 FilterDropDown">
               <div className="input-group col-lg-12">
-              <div className="row">
-               <Multiselect className="form-control LeftSideFiltersInputBox LeftSideFiltersDrop"
+                
+                   <Multiselect className="form-control LeftSideFiltersInputBox LeftSideFiltersDrop"
                     id="allIndustries" name="allIndustries" placeholder="All Industries"
                     
                       options={this.state.allIndustries}
                         isObject={false}
                         style={this.style}
-                   />   
-                  </div>                 
+                   />    
+                                
               </div>
           </div> 
 
           <div className="form-group col-lg-12">
-              <div className="input-group col-lg-12">
-                <div className="row">
+              <div className="input-group FilterDropDown1 col-lg-12">
+               
                    <Multiselect className="form-control LeftSideFiltersInputBox LeftSideFiltersDrop"
-                    id="allFunctionalAreas" name="allFunctionalAreas" placeholder="All Functional Areas"
+                    id="allSectors" name="allSectors" placeholder="All Sectors"
                     
-                      options={this.state.allFunctionalAreas}
+                      options={this.state.allSectors}
                         isObject={false}
                         style={this.style}
                    />    
-                 </div>                  
+                            
               </div>
           </div> 
 
 
            <div className="form-group col-lg-12">
               <div className="input-group col-lg-12">
-                <div className="row">
+                
                    <Multiselect className="form-control LeftSideFiltersInputBox LeftSideFiltersDrop"
                     id="allRoles" name="allRoles" placeholder="All Roles"
                     
@@ -162,30 +196,29 @@ componentDidMount(){
                         isObject={false}
                         style={this.style}
                    />    
-                 </div>                  
+                                 
               </div>
           </div> 
     
-        <div className="form-group col-lg-12">
+        <div className="form-group col-lg-12 ">
               <div className="input-group col-lg-12">
-                <div className="row">
+                
                    <Multiselect className="form-control LeftSideFiltersInputBox LeftSideFiltersDrop"
-                    id="allExperiences" name="aallExperiences" placeholder="All Experiences"
+                    id="allExperiences" name="allExperiences" placeholder="All Experiences"
                     
                       options={this.state.inputExperience}
                         isObject={false}
                         style={this.style}
                    />    
-                 </div>                  
+                               
               </div>
           </div> 
 
-
-  
+      </div>
+       </div>
         
       </section>
     );
   }
-
 
 }

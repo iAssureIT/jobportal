@@ -12,7 +12,7 @@ export default class PageFunctionWise extends Component{
 	render(){
 		
 		return(
-			<div className="col-lg-12">
+			<div className="container-fluid">
 				<LeftMenu/>
 				<LeftSideFilters />
 				<FunctionalAreawiseJobs />

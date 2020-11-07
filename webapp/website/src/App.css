@@ -45,3 +45,76 @@
 .whitelink, .whitelink:hover{
   color: #fff
 }
+@font-face {
+  font-family:'Montserrat-Regular';
+  src: url('/fonts/Montserrat/Montserrat-Regular.ttf');
+}
+
+@font-face {
+  font-family:'Montserrat-Bold';
+  src: url('/fonts/Montserrat/Montserrat-Bold.ttf');
+}
+.OTPSentWrapper{
+  min-height: 250px;
+  height:auto;
+  background-color: rgb(36 41 49 / 0.5) !important;
+}
+.OTPSent{
+  width:100%;
+  min-height: 250px;
+  height:auto;
+  background-color: #242931;
+  border:3px solid #D3950A;
+  border-radius: 10px;
+  padding-bottom:30px;
+}
+
+.OTPSentTitle{
+  min-height: 60px;
+  height:auto;
+  color: #D3950A;
+  font-size:20px;
+  text-align: center;
+  padding-top: 30px;
+  font-family: 'Montserrat-Bold';
+}
+
+.OTPSentHr{
+
+  border-top: 1px solid #D3950A;
+}
+
+.OTPSentSentence{
+  min-height:40px;
+  height:auto;
+  text-align: center;
+  color: #aaa;
+  line-height: 1.8;
+  letter-spacing: 1px;
+  margin-top: 10px;
+  font-size: 13px;
+  font-family: 'Montserrat-Regular';
+  padding-bottom:30px;
+}
+
+.buttonOTPSent{
+  background-color: #D3950A;
+  color: #fff;
+  border: 1px solid #D3950A;
+  margin-bottom: 2px;
+  font-size: 14px;
+  font-family: 'Montserrat-Bold';
+}
+
+.buttonOTPSent:hover{
+  background-color: transparent;
+  border: 1px solid #D3950A;
+  margin-bottom: 0px;
+  color:  #D3950A!important;
+}
+
+button.close{
+  color: #fff;
+  opacity: 1;
+  margin: 10px;
+}

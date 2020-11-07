@@ -7,7 +7,7 @@ router.post('/post', subfunctionalAreaMaster.insertSubFunctionalArea);
 
 router.post('/get/list', subfunctionalAreaMaster.fetchSubFunctionalAreas);
 
-router.get('/get/lists', subfunctionalAreaMaster.getSubFunctionalAreas);
+router.get('/get/list', subfunctionalAreaMaster.getSubFunctionalAreas);
 
 router.get('/get/subfunctionalArealist/:id', subfunctionalAreaMaster.fetchSubFunctionalAreaData); 
 

@@ -7,6 +7,7 @@ import AddressType          from  '../Master/AddressType/AddressType.js';
 import Industry             from  '../Master/Industry/Industry.js';
 import SubIndustry          from  '../Master/SubIndustry/SubIndustry.js';
 import FunctionalArea       from  '../Master/FunctionalArea/FunctionalArea.js';
+import SubFunctionalArea    from  '../Master/SubFunctionalArea/SubFunctionalArea.js';
 import JobCategory          from  '../Master/JobCategory/JobCategory.js';
 import JobType              from  '../Master/JobType/JobType.js';
 import JobTime              from  '../Master/JobTime/JobTime.js';
@@ -104,6 +105,9 @@ import '../../coreadmin/companysetting/css/CompanySetting.css';
                             <a className="tabLeft lettersp tablefthr" href="#FunctionalArea" data-toggle="tab"  onClick={this.tab.bind(this)}>Functional Area</a>
                             </li>
                             <li className="col-lg-12 col-md-12 col-xs-12 col-sm-12">
+                            <a className="tabLeft lettersp tablefthr" href="#SubFunctionalArea" data-toggle="tab"  onClick={this.tab.bind(this)}>Sub Functional Area</a>
+                            </li>
+                            <li className="col-lg-12 col-md-12 col-xs-12 col-sm-12">
                             <a className="tabLeft lettersp tablefthr" href="#JobCategory" data-toggle="tab"  onClick={this.tab.bind(this)}>Job Category</a>
                             </li>
                             <li className="col-lg-12 col-md-12 col-xs-12 col-sm-12">
@@ -144,6 +148,8 @@ import '../../coreadmin/companysetting/css/CompanySetting.css';
                         <div className="tab-pane" id="SubIndustry"><SubIndustry  editId={this.state.editId} oneFieldEditId={this.state.oneFieldEditId} history={this.props.history}/>  </div>
                         
                         <div className="tab-pane" id="FunctionalArea"><FunctionalArea  editId={this.state.editId} oneFieldEditId={this.state.oneFieldEditId} history={this.props.history}/>  </div>
+                        <div className="tab-pane" id="SubFunctionalArea"><SubFunctionalArea  editId={this.state.editId} oneFieldEditId={this.state.oneFieldEditId} history={this.props.history}/>  </div>
+                        
                         <div className="tab-pane" id="JobCategory"><JobCategory  editId={this.state.editId} history={this.props.history}/>  </div>
                         <div className="tab-pane" id="JobType"><JobType  editId={this.state.editId} history={this.props.history}/>  </div>
                         <div className="tab-pane" id="JobTime"><JobTime  editId={this.state.editId} history={this.props.history}/>  </div>

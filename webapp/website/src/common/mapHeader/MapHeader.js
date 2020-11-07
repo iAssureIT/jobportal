@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import '../functionalHeader/FunctionalHeader.css';
-import ReactModal from 'react-modal';
 import LoginForm from '../../systemSecurity/Login.js';
 import {connect}            from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -61,7 +60,6 @@ class MapHeader extends Component{
 	     		 
 	      	</div>
 
-
 	    <div className="rightFunctionHeader col-lg-4">
 	      	<div className="row">
 	     		<div className="rightFunctionHeader1 col-lg-9">
@@ -85,7 +83,7 @@ class MapHeader extends Component{
 			     	</div>
 
 			     	<div className="barsToggel pull-right" id="barsToggel" style={{display:this.state.asideDisplay}}>
-						
+
 						<div className="notificationMessege col-lg-12">
 							<FontAwesomeIcon icon="search" />
 							<span className="notificationMessegeText">Companies</span>
@@ -106,35 +104,28 @@ class MapHeader extends Component{
 							<FontAwesomeIcon icon="file-alt" />
 							<span className="notificationMessegeText">Contact Us</span>
 						</div>
-						<a href="/login"><div className="notificationMessege col-lg-12">
+						<div className="notificationMessege col-lg-12" data-toggle="modal" data-target="#loginModal">
 							<FontAwesomeIcon icon="sign-out-alt" />
 							<span className="notificationMessegeText">Sign In</span>
-						</div></a>
+						</div>
 
 					</div>
 					<div className="modal fade" id="loginModal" role="dialog">
-					    <div className="modal-dialog">
-					      <div className="modal-content">
-					        <div className="modal-header">
-					          <button type="button" className="close" data-dismiss="modal">&times;</button>
-					          <h4 className="modal-title">Modal Header</h4>
-					        </div>
-					        <div className="modal-body">
-					          <p>Some text in the modal.</p>
-					        </div>
-					        <div className="modal-footer">
-					          <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
-					        </div>
-					      </div>
-					      
-					    </div>
+					    <div className="modal-dialog  modal-lg">
+						   
+						    <div className="modal-body">
+						      	<button type="button" className="close" data-dismiss="modal">&times;</button>
+						        <section className="OTPSentWrapper row">
+					                <LoginForm/>
+					        	</section>
+						    </div>
+						
+						  </div>
 					</div>
 		   		</div>
 		   	</div>
-	</div>
-	<div>
-       
-      </div>
+		</div>
+	
 	</nav>
     );
   }
