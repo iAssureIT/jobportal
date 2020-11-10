@@ -884,7 +884,7 @@ class ContactDetails extends Component {
 				
 			})
 			.catch((error) => {})
-		}
+		} 
 		  
 	}
 	updateContact = (formValues)=>{

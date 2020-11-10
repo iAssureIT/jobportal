@@ -12,8 +12,8 @@ import PlacesAutocomplete, {
   getLatLng
 } from "react-places-autocomplete";
 import IAssureTable           from "../../../../IAssureTable/IAssureTable.jsx";
-
-
+import MapContainer from '../../../../Map/MapContainer.js';
+import Geocode from "react-geocode";
 
 class LocationDetails extends Component {
 	constructor(props) {
@@ -134,18 +134,26 @@ class LocationDetails extends Component {
 			'locationID': this.props.match.params ? this.props.match.params.locationID : '',
 		})
 
+		if(this.props.match.params.locationID){
+			this.edit()
+		}
 		
 	}
 	componentWillReceiveProps(nextProps) {
 		// this.getGoogleAPIKey()
-		
+		console.log('inside componentWillReceiveProps nextProps.match.params.locationID==>',nextProps.match.params.locationID)
+		this.edit();
 		this.getData();
 		this.setState({
 			'entityID': nextProps.match.params ? nextProps.match.params.entityID : '',
 			'locationID':nextProps.match.params ? nextProps.match.params.locationID : '',
-		},()=>{this.edit()})
+		},()=>{
+			this.edit()
+		})
 	}
+	
 	getData(){
+		
 		console.log('getData this.props.match.params.locationID: ',this.props.match.params.locationID)
 		this.setState({
 			'entityID': this.props.match.params ? this.props.match.params.entityID : '',
@@ -159,16 +167,17 @@ class LocationDetails extends Component {
 		
 		axios.post('/api/entitymaster/getAllLocation',formvalues)
 		.then((response)=>{
+			console.log("response",response);
 			var data = response.data.locations.reverse()
 			var tableData = data.map((a, i)=>{
-				var gstimage = a.GSTDocument.map((image,i)=>{return '<a href='+image+' target="_blank" title="Click to View"><img src='+image+' class="img-responsive imgtabLD logoStyle" /></a>'})
-				var panimage = a.PANDocument.map((image,i)=>{return '<a href='+image+' target="_blank" title="Click to View"><img src='+image+' class="img-responsive imgtabLD logoStyle" /></a>'})
+				var gstimage = a.GSTDocument ? (a.GSTDocument.map((image,i)=>{return '<a href='+image+' target="_blank" title="Click to View"><img src='+image+' class="img-responsive imgtabLD logoStyle" /></a>'})):""
+				var panimage = a.PANDocument ? (a.PANDocument.map((image,i)=>{return '<a href='+image+' target="_blank" title="Click to View"><img src='+image+' class="img-responsive imgtabLD logoStyle" /></a>'})):""
 	        return{
 	        	_id:a._id,
 	            locationType:a.locationType,
 	            address:a.addressLine1 ? a.addressLine1 : null +' '+a.addressLine2,
-	            GSTIN:a.GSTIN ? (a.GSTIN +"</br>"+(a.GSTDocument && a.GSTDocument.length > 0 ? gstimage:'')) : 'NIL',
-	            PAN:a.PAN ? (a.PAN +"</br>"+(a.PANDocument && a.PANDocument.length > 0 ? panimage:'')): 'NIL',
+	            GSTIN:a.GSTIN ? (a.GSTIN +"</br>"+(a.GSTDocument && a.GSTDocument.length > 0 ? gstimage:'')) : '-NA-',
+	            PAN:a.PAN ? (a.PAN +"</br>"+(a.PANDocument && a.PANDocument.length > 0 ? panimage:'')): '-NA-',
 	            action:""
 	        }
 	      })
@@ -179,7 +188,7 @@ class LocationDetails extends Component {
 
 	}
 
-	openForm() {		
+	openForm() {
 		this.setState({
 			openForm: this.state.openForm === false ? true : false,
 			openFormIcon : this.state.openFormIcon === false ? true : false
@@ -535,6 +544,7 @@ class LocationDetails extends Component {
 						'PANDocument': [],
 					});
 					this.locationDetails();
+					this.getData();
 					$(".swal-text").css("font-family", "sans-serif");
 					if(response.data.duplicated === true){
 						swal('Location details already exist')
@@ -605,7 +615,7 @@ class LocationDetails extends Component {
 
 	edit() {
 		console.log('this.props.match.params: ',this.props.match.params)
-		console.log('this.props.match.params.locationID: ',this.props.match.params.locationID)
+		console.log('this.props.match.params.locationID: ',this.state.locationID)
 		var entityID = this.state.entityID;
 		var locationID = this.state.locationID;
 		if (locationID) {
@@ -814,6 +824,8 @@ class LocationDetails extends Component {
 					});
 					this.props.history.push('/' +this.state.pathname+ '/location-details/' + entityID);
 					this.locationDetails();
+					this.getData();
+
 					$(".swal-text").css("font-family", "sans-serif");
 					if(response.data.duplicated === true){
 						swal('Location details already exist')
@@ -1206,6 +1218,71 @@ class LocationDetails extends Component {
       this.setState({ addressLine1 : address});
   };
 
+   addMarker(e){
+    this.setState({
+      latLng : {
+            lat: e.latLng.lat(),
+            lng: e.latLng.lng()
+        },
+    },()=>{
+      axios.get("/api/projectSettings/get/GOOGLE",)
+        .then((response) => {
+        Geocode.setApiKey(response.data.googleapikey);
+        Geocode.fromLatLng(e.latLng.lat(), e.latLng.lng()).then(
+          response => {
+            const address = response.results[0].address_components;
+              for (var i = 0; i < address.length; i++) {
+                  for (var b = 0; b < address[i].types.length; b++) {
+                      switch (address[i].types[b]) {
+                          case 'sublocality_level_1':
+                              var area = address[i].long_name;
+                              break;
+                          case 'sublocality_level_2':
+                              area = address[i].long_name;
+                              break;
+                          case 'locality':
+                              var city = address[i].long_name;
+                              break;
+                          case 'administrative_area_level_1':
+                              var state = address[i].long_name;
+                              var stateCode = address[i].short_name;
+                              break;
+                          case 'administrative_area_level_2':
+                              var district = address[i].long_name;
+                              break;
+                          case 'country':
+                             var country = address[i].long_name;
+                             var countryCode = address[i].short_name;
+                              break; 
+                          case 'postal_code':
+                             var pincode = address[i].long_name;
+                              break;
+                          default :
+                                break;
+                      }
+                  }
+              }
+              this.setState({
+                addressLine1:response.results[0].formatted_address,
+                area : area,
+                city : city,
+                district : district,
+                states: state,
+                country:country,
+                pincode: pincode,
+                stateCode:stateCode,
+                countryCode:countryCode
+              })
+          },
+          error => {}
+        );
+        })
+      .catch((error) =>{
+          swal(error)
+      })
+    })
+  }
+
   hideModal(event){
     	event.preventDefault();
     	//$("html,body").scrollTop(0);
@@ -1262,7 +1339,7 @@ class LocationDetails extends Component {
 												<i className="fa fa-map-marker iconMarginLeft" aria-hidden="true"></i> &nbsp;
 												Statutory Info
 											</a>
-											<div className="triangleone forActive" id="triangle-right"></div>
+											<div className="trianglethree forActive" id="triangle-right"></div>
 										</li>
 										<li className="active col-lg-3 col-md-3 col-sm-12 col-xs-12 transactionTab noRightPadding pdcls btn4 disabled">
 											<div className="triangletwo" id="triangle-right1"></div>
@@ -1538,7 +1615,7 @@ class LocationDetails extends Component {
 																	</div>
 																</div>*/}
 																<div className = "col-lg-12 marginTop17">
-							                                      { /*<MapContainer address={this.state.addressLine1} latLng={this.state.latLng} addMarker={this.addMarker.bind(this)} /> */}
+								                                      <MapContainer address={this.state.addressLine1} latLng={this.state.latLng} addMarker={this.addMarker.bind(this)} />
 								                                    </div>
 																<div className="col-lg-7 col-md-7 col-sm-7 col-xs-7  NOpadding pull-right">
 																	{this.props.match.params.entityID ?
@@ -1579,15 +1656,15 @@ class LocationDetails extends Component {
 
 										{this.state.view === 'List' ?
 										<div  className="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding30">
-											{/*<IAssureTable 
-																	                      tableHeading={this.state.tableHeading}
-																	                      dataCount={this.state.entityCount}
-																	                      tableData={this.state.RecordsTable}
-																	                      tableObjects={this.state.tableObjects}
-																	                      getData={this.getData.bind(this)}
-																	                      id={1}
-																	                      tableName={"Comapny Locations"}
-																	                    />*/}
+											<IAssureTable 
+						                      tableHeading={this.state.tableHeading}
+						                      dataCount={this.state.entityCount}
+						                      tableData={this.state.RecordsTable}
+						                      tableObjects={this.state.tableObjects}
+						                      getData={this.getData.bind(this)}
+						                      id={1}
+						                      tableName={"Comapny Locations"}
+						                    />
 					                    </div>
 										 :
 										<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12">

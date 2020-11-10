@@ -77,16 +77,23 @@ class Layout extends Component  {
             this.setState({ showMapHeader: true })
         }
         this.setState({ currentUrl: pageUrl })
+        axios.get("http://locations2.iassureit.com/api/states/get/list/IN")
+            .then((response) => {
+                this.setState({
+                    stateArray: response.data
+                },()=>{
+                    console.log(this.state.stateArray)
+                    let stateLink = this.state.stateArray.find(element => element.stateName == decodeURIComponent(lastpara[1]) );
+                    
+                    if (stateLink ) {
+                        this.setState({ showMapHeader: true })
+                        this.props.mapAction.setMapSelectedState(decodeURIComponent(lastpara[1]));
+                    }  
+                })
+            })
+            .catch((error) => {
+            })
         
-        this.setState({ stateArray: process.env.REACT_APP_STATES.split(',') },()=>{
-
-            let stateLink = this.state.stateArray.find(element => element == decodeURIComponent(lastpara[1]) );
-            
-            if (stateLink ) {
-                this.setState({ showMapHeader: true })
-                this.props.mapAction.setMapSelectedState(decodeURIComponent(lastpara[1]));
-            }      
-        })
 
         var company_Id = localStorage.getItem("company_Id");
         var contractID ="";
