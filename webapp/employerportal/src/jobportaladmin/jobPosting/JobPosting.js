@@ -24,11 +24,11 @@ export default class JobPosting extends Component{
 			jobLocationCity 		: 	"",
 			jobLocationCountry 		: 	"",
 			/*industryId			: 	"",*/
-			functionalArea 			: 	"",
-			/*functionalAreaId 		: 	"",*/
-			subFunctionalArea 		: 	"",
-			/*subFunctionalAreaId 	: 	"",*/
-			role 					: 	"",
+			//functionalArea 			: 	"",
+			functionalAreaId 		: 	"",
+			//subFunctionalArea 		: 	"",
+			subFunctionalAreaId 	: 	"",
+			jobRoleId 					: 	"",
 			gender             		: 	"Male",
 			workFromHome 			: 	"",
 			contactPersonName 		: 	"",
@@ -92,7 +92,7 @@ export default class JobPosting extends Component{
 					country 			: response.data.jobsData.jobBasicInfo.country,
 					functionalArea 		: response.data.jobsData.jobBasicInfo.functionalArea,
 					subFunctionalArea 	: response.data.jobsData.jobBasicInfo.subFunctionalArea,
-					role 				: response.data.jobsData.jobBasicInfo.role,
+					jobRoleId 				: response.data.jobsData.jobBasicInfo.jobRoleId,
 					gender 				: response.data.jobsData.jobBasicInfo.gender,
 					workFromHome 		: response.data.jobsData.workFromHome,
 					jobType 			: response.data.jobsData.jobType,
@@ -131,7 +131,7 @@ export default class JobPosting extends Component{
 				Swal.fire("Error while getting List data",error.message,'error');
 			})
 
-		Axios.get("/api/subfunctionalareamaster/get/lists")
+		Axios.get("/api/subfunctionalareamaster/get/list")
 			.then(response => {
 				console.log("getsubFunctionalAreaData response.data = ",response.data);
 				this.setState({subFunctionalAreaList : response.data});
@@ -249,12 +249,12 @@ export default class JobPosting extends Component{
 			""; 
 			status = true;
 		}
-		if(this.state.role.length<=0){
-			document.getElementById("roleError").innerHTML=  
-			"Enter role";  
+		if(this.state.jobRoleId.length<=0){
+			document.getElementById("jobRoleIdError").innerHTML=  
+			"Enter jobRoleId";  
 			status=false; 
 		}else{
-			document.getElementById("roleError").innerHTML=  
+			document.getElementById("jobRoleIdError").innerHTML=  
 			""; 
 			status = true;
 		}
@@ -344,7 +344,7 @@ export default class JobPosting extends Component{
 			jobLocationCountry 	: 	this.state.jobLocationCountry,
 			functionalArea 		: 	this.state.functionalArea,
 			subFunctionalArea 	: 	this.state.subFunctionalArea,
-			role 				: 	this.state.role,
+			jobRoleId 				: 	this.state.jobRoleId,
 			gender      	   	: 	this.state.gender,
 			workFromHome 		: 	this.state.workFromHome,
 			contactPersonName 	: 	this.state.contactPersonName,
@@ -390,7 +390,7 @@ export default class JobPosting extends Component{
 						jobLocationCountry 	: "",
 						functionalArea 		: "",
 						subFunctionalArea 	: "",
-						role 				: "",
+						jobRoleId 				: "",
 						gender              : "Male",
 						workFromHome 		: "",
 						contactPersonName 	: "",
@@ -545,9 +545,9 @@ export default class JobPosting extends Component{
 											<label htmlFor="Role" className="addjobformLable"> Role <span className="asterisk">&#42;</span> </label>
 											<div className="input-group">
 												<span className="input-group-addon addJobFormField"><FontAwesomeIcon icon={['fas', 'briefcase']} /></span> 
-												<input type="text" className="form-control addJobFormField" name="role" id="role" value={this.state.role} onChange={this.handleChange}/>
+												<input type="text" className="form-control addJobFormField" name="jobRoleId" id="jobRoleId" value={this.state.jobRoleId} onChange={this.handleChange}/>
 											</div>
-											<span id="roleError" className="errorMsg"></span>
+											<span id="jobRoleIdError" className="errorMsg"></span>
 										</div>
 										<div className="col-lg-4">
 											<label htmlFor="gender" className="addJobGenderTitle"> Gender <span className="asterisk">&#42;</span></label>

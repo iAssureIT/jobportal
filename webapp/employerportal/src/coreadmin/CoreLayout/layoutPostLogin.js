@@ -4,7 +4,7 @@ import $ from 'jquery';
 import Header from '../common/header/Header.js'
 import Footer from '../common/footer/Footer.js'
 //import Dashboard from '../dashboard/Dashboard.js'
-import Leftsidebar from '../common/leftSidebar/Leftsidebar.js'
+
 
  const layoutPostLogin = function (MainComponent){
 
@@ -73,7 +73,6 @@ import Leftsidebar from '../common/leftSidebar/Leftsidebar.js'
 		                  </div>
 		                  <div className="leftsidebarbackgroundcolor">
 		                    <div className="row">
-		                       <Leftsidebar />
 		                    </div>
 		                  </div>
 		                  <div className="col-lg-10 col-md-10 col-sm-10 col-xs-10 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2">

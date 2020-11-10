@@ -6,7 +6,6 @@ import swal from 'sweetalert';
 import 'bootstrap/js/tab.js';
 import PhoneInput from 'react-phone-input-2';
 import { withRouter } from 'react-router-dom';
-import BookingRequired from './BookingRequired.js'
 import IAssureTable           from "../../../../IAssureTable/IAssureTable.jsx";
 
 
@@ -20,15 +19,8 @@ class ContactDetails extends Component {
 			'altPhone'         	 		: '',
 			'email'             		: '',
 			'employeeID'        		: '',
-			'preApprovedAmount'      : '',
-			'preApprovedRides' : '',
-			'preApprovedKilometer' : '',
-			'approvingAuthorityId1'     : '',
-			'approvingAuthorityId2'     : '',
-			'approvingAuthorityId3'     : '',
 			'openForm'					: false,
 			'openFormIcon'              : false,
-			'bookingApprovalRequired' 	: "No",
 			'createUser' 				: false,
 			'showBookingApprovalRequired' : true,
 			'branchCode'  				:"",
@@ -39,9 +31,6 @@ class ContactDetails extends Component {
 			tableHeading:this.props.entity === "corporate" ?{
 	            empName              :"Emp Name & ID",
 	            contactDetails       :"Contact Details",
-	            approvingAuthorityId1:"Approving Authority #1",
-	            approvingAuthorityId2:"Approving Authority #2",
-	            approvingAuthorityId3:"Approving Authority #3",
 	            preApprovedLimits    : "PreApproved Limits",
 	             actions:"Action"
 	          }
@@ -65,7 +54,6 @@ class ContactDetails extends Component {
             "editId": this.props.match.params ? this.props.match.params.fieldID : '',
             "IdToDelete" : "",
 			'listOfEmpID'               : [],
-			'isBookingRequired'         : this.props.bookingRequired,
 			"pathname"					: this.props.entity,
 			'entityID'					: this.props.match.params ? this.props.match.params.entityID : '',
 			'contactID'					: this.props.match.params ? this.props.match.params.contactID : '',
@@ -77,7 +65,7 @@ class ContactDetails extends Component {
 			'entityID': this.props.match.params ? this.props.match.params.entityID : '',
 			'contactID': this.props.match.params ? this.props.match.params.contactID : '',
 		},()=>{this.edit()})
-		this.setState({'isBookingRequired':nextProps.bookingRequired})
+		
 	}
 	openForm() {
 		this.setState({
@@ -107,7 +95,7 @@ class ContactDetails extends Component {
 			url: Url,
 			getCurrentRole : roles
 		})
-		this.getCategoryData(getcompanyID)
+		
 		this.getRoles();
 		this.getAllEntites();
 		this.getDesignation();
@@ -117,39 +105,13 @@ class ContactDetails extends Component {
 		this.edit();
 		axios.defaults.headers.common['Authorization'] = 'Bearer '+ localStorage.getItem("token");
 	}
-	getCategoryData(companyID) {
-        var data= {company : companyID}
-        axios.post('/api/VehicleEmployeeMapping/companylist',data)
-        .then((response) => {
-            var returndata = []
-            var tableData = response.data.map((value,i)=>{
-                var vehicles = value.vehicle ? value.vehicle.map((a,i)=>{return (a.category)}):"-NA-"
-                return{
-                    empCategory:value.empCategory,
-                    vehicalCategory: vehicles.toString()
-                }
-
-            })
-           
-            this.setState({
-                vehicalsTable: tableData,
-            })
-        })
-        .catch((error) => {           
-          
-        });
-    }
+	
 	getAllEntites() {
 		var formvalues = {};
 		if(this.state.pathname === "corporate"){
 			formvalues = {
-			 type : "employee",
+			 type : "employer",
 			 entityType: this.state.pathname 
-			}
-		}else{
-			formvalues = { 
-				type : "driver",
-				entityType: this.state.pathname 
 			}
 		}
 		var listOfEmpID = [];
@@ -283,22 +245,7 @@ class ContactDetails extends Component {
 					required: true,
 					lastRegx: /^[a-zA-Z\s]+$/,
 				},
-				approvingAuthorityId1: {
-					required: true,
-				},
-				approvingAuthorityId2: {
-					required: true,
-				},
-				approvingAuthorityId3: {
-					required: true,
-				},
 				
-				empCategory: {
-					required: true,
-				},
-				empPriority: {
-					required: true,
-				},
 				employeeID: {
 					required: true,
 					//regexpremployeeID :/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/,
@@ -328,24 +275,7 @@ class ContactDetails extends Component {
 				if (element.attr("name") === "lastName") {
 					error.insertAfter("#lastName");
 				}
-				if (element.attr("name") === "approvingAuthorityId1") {
-					error.insertAfter("#approvingAuthorityId1");
-				}
-				if (element.attr("name") === "approvingAuthorityId2") {
-					error.insertAfter("#approvingAuthorityId2");
-				}
-				if (element.attr("name") === "approvingAuthorityId3") {
-					error.insertAfter("#approvingAuthorityId3");
-				}
-				if (element.attr("name") === "preApprovedRides") {
-					error.insertAfter("#preApprovedRides");
-				}
-				if (element.attr("name") === "preApprovedKilometer") {
-					error.insertAfter("#preApprovedKilometer");
-				}
-				if (element.attr("name") === "preApprovedAmount") {
-					error.insertAfter("#preApprovedAmount");
-				}
+				
 				if (element.attr("name") === "employeeID") {
 					error.insertAfter("#employeeID");
 				}
@@ -593,17 +523,8 @@ class ContactDetails extends Component {
 					'department'        		: this.state.department ? this.state.department : "",
 					'departmentName'        	: this.state.departmentName,
 					'designationName'       	: this.state.designationName,
-					'empPriority'       		: this.state.empPriority,
-					'empCategory'       	 	: this.state.empCategory,
 					'designation'       		: this.state.designation ? this.state.designation :"" ,
 					'employeeID'        		: this.state.employeeID,
-					'bookingApprovalRequired' 	: this.state.bookingApprovalRequired,
-					'approvingAuthorityId1' 	: this.state.approvingAuthorityId1,
-					'approvingAuthorityId2' 	: this.state.approvingAuthorityId2,
-					'approvingAuthorityId3' 	: this.state.approvingAuthorityId3,
-					'preApprovedAmount' 		: this.state.bookingApprovalRequired ? this.state.preApprovedAmount : "",
-					'preApprovedRides'          : this.state.bookingApprovalRequired ? this.state.preApprovedRides : "",
-					'preApprovedKilometer'     : this.state.bookingApprovalRequired ? this.state.preApprovedKilometer : "",
 					'createUser'        		: this.state.createUser,
 					'role' 						: this.state.createUser ? this.state.role : "",
           			'addEmployee'       		: this.state.addEmployee,
@@ -692,7 +613,7 @@ class ContactDetails extends Component {
 		console.log("userID",userID);
 		if(userID){
 			var userDetails = {
-				type                    : "employee",
+				type                    : "employer",
 				companyID				: this.state.companyID,
 				profileStatus			: "New",
 				company_Id				: this.state.entityID,
@@ -711,18 +632,9 @@ class ContactDetails extends Component {
 				whatsappNo              : this.state.whatsappNo ? this.state.whatsappNo : "",
 				entityType 				: this.state.pathname,
 				profilePhoto            : this.state.profilePhoto ? this.state.profilePhoto : "",
-				empCategory             : this.state.empCategory ? this.state.empCategory : "",
-	            empPriority             : this.state.empPriority ? this.state.empPriority : "",
 				employeeId              : this.state.employeeID,
 				userId 					: userID,
 				status					: "Active",
-				bookingApprovalRequired : this.state.bookingApprovalRequired,
-				approvingAuthorityId1   : this.state.approvingAuthorityId1,
-				approvingAuthorityId2   : this.state.approvingAuthorityId2,
-				approvingAuthorityId3   : this.state.approvingAuthorityId3,
-				preApprovedRides  		: this.state.bookingApprovalRequired === "Yes" ? this.state.preApprovedRides : "",
-				preApprovedKilometer   : this.state.bookingApprovalRequired === "Yes" ? this.state.preApprovedKilometer : "",
-				preApprovedAmount       : this.state.bookingApprovalRequired === "Yes" ? this.state.preApprovedAmount : "",
 			}
 			if(this.state.departmentName)
 			{
@@ -773,14 +685,8 @@ class ContactDetails extends Component {
 						'department'        		: '',
 						'designation'       		: '',
 						'employeeID'        		: '',
-						'empPriority'        		: '-- Select --',
-						'empCategory'        		: '-- Select --',
-						'bookingApprovalRequired' 	: "No",
 						'createUser' 				: false,
 						'addEmployee'				: false,
-						'approvingAuthorityId1' 		: '',
-						'approvingAuthorityId2' 		: '',
-						'approvingAuthorityId3' 		: '',
 						'role' 		 				: '',
 						'preApprovedAmount' : '',
 						'preApprovedRides' : '',
@@ -835,16 +741,7 @@ class ContactDetails extends Component {
 					'designation'       		: this.state.designation,
 					'departmentName'        	: this.state.departmentName,
 					'designationName'       	: this.state.designationName,
-					'empCategory'               : this.state.empCategory,
-                	'empPriority'               : this.state.empPriority,
 					'employeeID'        		: this.state.employeeID,
-					'bookingApprovalRequired' 	: this.state.bookingApprovalRequired,
-					'approvingAuthorityId1' 	: this.state.approvingAuthorityId1,
-					'approvingAuthorityId2' 	: this.state.approvingAuthorityId2,
-					'approvingAuthorityId3' 	: this.state.approvingAuthorityId3,
-					'preApprovedKilometer'     : this.state.bookingApprovalRequired === "Yes"  ? this.state.preApprovedKilometer : "",
-					'preApprovedRides'          : this.state.bookingApprovalRequired === "Yes"  ? this.state.preApprovedRides : "",
-					'preApprovedAmount'          : this.state.bookingApprovalRequired === "Yes"  ? this.state.preApprovedAmount : "",
 					'createUser'        		: this.state.createUser,
 				    'role' 						: this.state.createUser ? this.state.role : "", 
                     'addEmployee'       		: this.state.addEmployee,
@@ -959,23 +856,13 @@ class ContactDetails extends Component {
 			DOB                     : this.state.DOB,
 			gender                  : this.state.gender,
 			contactNo               : this.state.phone,
-			altContactNo            : this.state.altPhone,
-			empCategory             : this.state.empCategory ? this.state.empCategory : "",
-            empPriority             : this.state.empPriority ? this.state.empPriority : "",
 			email                   : this.state.email,
 			whatsappNo              : this.state.whatsappNo ? this.state.whatsappNo : "",
 			departmentId            : this.state.department,
 			designationId           : this.state.designation,
 			profilePhoto            : this.state.profilePhoto,
 			employeeId              : this.state.employeeID,
-			bookingApprovalRequired : this.state.bookingApprovalRequired,
-			approvingAuthorityId1    : this.state.approvingAuthorityId1,
-			approvingAuthorityId2    : this.state.approvingAuthorityId2,
-			approvingAuthorityId3    : this.state.approvingAuthorityId3,
-			preApprovedAmount     : this.state.bookingApprovalRequired ? this.state.preApprovedAmount: "",
-            preApprovedRides      : this.state.bookingApprovalRequired ? this.state.preApprovedRides:"",
-            preApprovedKilometer      : this.state.bookingApprovalRequired ? this.state.preApprovedKilometer:"",
-            address: this.state.country !=="-- Select --" ? [{
+			address: this.state.country !=="-- Select --" ? [{
                     addressLine1                : this.state.addressLine1,
                     addressLine2                : this.state.addressLine2,
                     landmark                    : this.state.landmark,
@@ -1015,16 +902,10 @@ class ContactDetails extends Component {
 				'branchCode'        		: '',
 				'department'        		: '',
 				'designation'       		: '',
-				'empPriority'        		: '-- Select --',
-				'empCategory'        		: '-- Select --',
 				'employeeID'        		: '',
 				'role'        				: '',
-				'bookingApprovalRequired' 	: "No",
 				'createUser' 				: false,
 				'addEmployee'				: false,
-				'approvingAuthorityId1' 		: '',
-				'approvingAuthorityId2' 		: '',
-				'approvingAuthorityId3' 		: '',
 				'preApprovedKilometer' 		: '',
 				'preApprovedRides' : '',
 				'preApprovedAmount' : '',
@@ -1055,13 +936,6 @@ class ContactDetails extends Component {
 
 					console.log("contactDetails",contactDetails)
 					var data = {
-			            'bookingApprovalRequired' 	: contactDetails[0].bookingApprovalRequired,
-						// 'approvingAuthorityId1'    	: contactDetails[0].approvingAuthorityId1,
-						// 'approvingAuthorityId2'    	: contactDetails[0].approvingAuthorityId2,
-						// 'approvingAuthorityId3'    	: contactDetails[0].approvingAuthorityId3,
-						'preApprovedAmount' 		: contactDetails[0].preApprovedAmount,
-						'preApprovedRides'          : contactDetails[0].preApprovedRides,
-						'preApprovedKilometer'     : contactDetails[0].preApprovedKilometer,
 			        }
 			        this.setState({'editData':data})
 					this.setState({
@@ -1094,9 +968,6 @@ class ContactDetails extends Component {
 						'designationName'       	: contactDetails[0].designationName,
 						'designation'       		: contactDetails[0].designation,
 						'employeeID'        		: contactDetails[0].employeeID,
-						'empCategory'        		: contactDetails[0].empCategory,
-						'empPriority'        		: contactDetails[0].empPriority,
-
 						'role'        				: contactDetails[0].role,
 						'createUser'        		: contactDetails[0].createUser,
 						'addEmployee'       		: contactDetails[0].addEmployee,
@@ -1104,13 +975,6 @@ class ContactDetails extends Component {
 						'personID' 					: contactDetails[0].personID,
 						'alreadyHasUser' 			: contactDetails[0].createUser,
 						'alreadyHasEmployee' 		: contactDetails[0].addEmployee,
-						'bookingApprovalRequired' 	: contactDetails[0].bookingApprovalRequired,
-						'approvingAuthorityId1'    	: contactDetails[0].approvingAuthorityId1,
-						'approvingAuthorityId2'    	: contactDetails[0].approvingAuthorityId2,
-						'approvingAuthorityId3'    	: contactDetails[0].approvingAuthorityId3,
-						'preApprovedAmount' 		: contactDetails[0].preApprovedAmount,
-						'preApprovedRides'          : contactDetails[0].preApprovedRides,
-						'preApprovedKilometer'     : contactDetails[0].preApprovedKilometer,
 						
 					},()=>{
 						if(this.state.openForm === true){
@@ -1157,12 +1021,7 @@ class ContactDetails extends Component {
 					'branchCode'        		: '',
 					'department'        		: '',
 					'designation'       		: '',
-					'approvingAuthorityId1' 		: '',
-					'approvingAuthorityId2' 		: '',
-					'approvingAuthorityId3' 		: '',
-					'preApprovedKilometer' 			: '',
-					'preApprovedRides' 	: '',
-					'preApprovedAmount' 	: ''
+					
 				})
 				axios.get('/api/personmaster/get/emailID/' + email)
 					.then((response) => {
@@ -1234,11 +1093,7 @@ class ContactDetails extends Component {
 		  [event.target.name] : event.target.checked
 		})
 	}
-	// bookingApproval(val,event) {
-	// 	this.setState({
-	// 		bookingApprovalRequired : val
-	// 	})
-	// }
+	
 	loginCredentials(val,event) {
 		event.preventDefault();
 		this.setState({
@@ -1260,28 +1115,14 @@ class ContactDetails extends Component {
 	        	_id         :a._id,
 	            empName:"<b>Name :</b> "+"<a  title='View profile' target='_blank' href='/employee-profile/"+(a.personID)+"'>"+a.firstName + " " + a.lastName+"</a>" + " <br><b>Emp ID :</b> " + (a.employeeID? a.employeeID :"- NA -" ),
 	            contactDetails:"<b>Mob Number :</b> "+(a.phone ? a.phone :"- NA -") + (a.whatsupNumber ? " | " + a.whatsupNumber : "" ) + "<br><b> Email : </b> " +a.email,
-	            approvingAuthorityId1:a.bookingApprovalRequired="Yes" ? ("<b>Emp ID : </b>"+(a.approvingAuthorityId1 ? a.approvingAuthorityId1 :"- NA -")+ "<br><b>Name : </b>" +(a.approvingAuthorityName ?a.approvingAuthorityName:"-" )) : "- NA -",
-	            approvingAuthorityId2:a.bookingApprovalRequired="Yes" ? ("<b>Emp ID : </b>"+(a.approvingAuthorityId2 ? a.approvingAuthorityId2 :"- NA -")+ "<br><b>Name : </b>" +(a.approvingAuthorityName?a.approvingAuthorityName:"-") ) : "- NA -",
-	            approvingAuthorityId3:a.bookingApprovalRequired="Yes" ? ("<b>Emp ID : </b>"+(a.approvingAuthorityId3 ? a.approvingAuthorityId3 :"- NA -")+ "<br><b>Name : </b>" +(a.approvingAuthorityName?a.approvingAuthorityName:"-") ) : "- NA -",
-	            preApprovedLimits :a.bookingApprovalRequired="Yes"  ? ("<b>Amount :</b> " + (a.preApprovedAmount ? a.preApprovedAmount :"- NA -") + "<br><b>Kilometer :</b> " + (a.preApprovedKilometer ? a.preApprovedKilometer :"- NA -") + "<br><b>Rides : </b>" + (a.preApprovedRides ? a.preApprovedRides :"- NA -")):"- NA -",
-	        }
+	           }
 	      })
           this.setState({RecordsTable:tableData})
 			
 		})
 		.catch((error)=>{console.log('error: ',error)})
 	}
-	getData(data){
-		this.setState({
-			'preApprovedAmount'      : data.preApprovedAmount,
-            'preApprovedRides'       : data.preApprovedRides,
-            'preApprovedKilometer'  : data.preApprovedKilometer,
-            // 'approvingAuthorityId1'     : data.approvingAuthorityId1,
-            // 'approvingAuthorityId2'     : data.approvingAuthorityId2,
-            // 'approvingAuthorityId3'     : data.approvingAuthorityId3,
-            'bookingApprovalRequired'   : data.bookingApprovalRequired,
-		})
-	}
+	
 	showView(value,event){
 		$('.viewBtn').removeClass('btnactive');
         $(event.target).addClass('btnactive');
@@ -1293,7 +1134,7 @@ class ContactDetails extends Component {
 	render() {
 
 		return (
-			<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+			<div className="col-lg-10 col-lg-offset-1 col-md-12 col-sm-12 col-xs-12">
 				<div className="row">
 					<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 NOPadding">
 						<section className="content OrgSettingFormWrapper">
@@ -1324,7 +1165,7 @@ class ContactDetails extends Component {
 												<i className="fa fa-map-marker iconMarginLeft" aria-hidden="true"></i> &nbsp;
 												Statutory Info
 											</a>
-											<div className="trianglethree forActive" id="triangle-right"></div>
+											<div className="triangleone forActive" id="triangle-right"></div>
 										</li>
 										<li className=" col-lg-3 col-md-3 col-sm-12 col-xs-12 transactionTab pdcls pdclsOne btn2 disabled">
 											<div className="triangletwo" id="triangle-right1"></div>
@@ -1332,7 +1173,7 @@ class ContactDetails extends Component {
 												<i className="fa fa-map-marker iconMarginLeft" aria-hidden="true"></i> &nbsp;
 												Location
 											</a>
-											<div className="trianglethree forActive" id="triangle-right"></div>
+											<div className="triangleone forActive" id="triangle-right"></div>
 										</li>
 										<li className="active col-lg-3 col-md-3 col-sm-12 col-xs-12 transactionTab noRightPadding pdcls btn4 ">
 											<div className="trianglesix" id="triangle-right2"></div>
@@ -1347,13 +1188,13 @@ class ContactDetails extends Component {
 									<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 										<div className="col-lg-12 col-md-12 col-sm-12 col-sm-12 NOpadding">
 											<div className="col-lg-12 col-md-12 col-sm-12 col-sm-12">
-												<div className="col-lg-3 col-md-6 col-sm-6 col-sm-6 contactDetailTitle">
+												<div className="col-lg-3 col-md-6 col-sm-6 col-sm-6 contactDetailTitle locationTabs">
 													<h4><i className="fa fa-phone" aria-hidden="true"></i> Contact Details</h4>
 												</div>
 												<div className="col-lg-6 col-md-6 col-sm-6 col-sm-6 ">
 													{/* <h4 className="noteSupplier">Note: Please start adding contacts from 1st point of contact to higher authority.</h4> */}
 												</div>
-												<div className="col-lg-3 col-md-6 col-sm-6 col-sm-6 contactDetailTitle">
+												<div className="col-lg-3 col-md-6 col-sm-6 col-sm-6 contactDetailTitle ">
 													<div className="button4  pull-right" onClick={this.openForm.bind(this)}>
 													{
 														this.state.openForm === true ?
@@ -1369,7 +1210,7 @@ class ContactDetails extends Component {
 											{
 											this.state.openForm === true ?
 												<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 NOpadding">
-													<form id="ContactDetail" className="col-lg-12 col-md-12 col-sm-12 col-xs-12 NOpadding">
+													<form id="ContactDetail" className="col-lg-12 col-md-12 col-sm-12 col-xs-12 NOpadding  ContactDetail">
 														<div className="form-margin col-lg-12 col-md-12 col-sm-12 col-xs-12 NOpadding">
 															<div className="col-lg-4 col-md-4 col-sm-12 col-xs-12 ">
 																{
@@ -1481,82 +1322,7 @@ class ContactDetails extends Component {
 												                </div> 
 											              	</div>
 														</div>
-														{
-								 						this.state.pathname ==="corporate" ?
-														<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 NOpadding">
-									                        <div className=" col-lg-4 col-md-4 col-sm-12 col-xs-12 employee  person">
-									                           <div id="approvingAuthorityId1"> 
-									                              <label className="labelform col-lg-12 col-md-12 col-sm-12 col-xs-12 NOpadding-left">EmployeeID of Approving Authority #1<i className="astrick">*</i></label>
-									                              <input type="text" className="form-control col-lg-12 col-md-12 col-sm-12 col-xs-12" value={this.state.approvingAuthorityId1} ref="approvingAuthorityId1" name="approvingAuthorityId1" onChange={this.handleChange.bind(this)} required/>
-									                            </div>
-									                        </div>
-									                        <div className=" col-lg-4 col-md-4 col-sm-12 col-xs-12 employee  person">
-									                           <div id="approvingAuthorityId2"> 
-									                              <label className="labelform col-lg-12 col-md-12 col-sm-12 col-xs-12 NOpadding-left">EmployeeID of Approving Authority #2<i className="astrick">*</i></label>
-									                              <input type="text" className="form-control col-lg-12 col-md-12 col-sm-12 col-xs-12" value={this.state.approvingAuthorityId2} ref="approvingAuthorityId2" name="approvingAuthorityId2" onChange={this.handleChange.bind(this)} />
-									                            </div>
-									                        </div>
-									                        <div className=" col-lg-4 col-md-4 col-sm-12 col-xs-12 employee  person">
-									                           <div id="approvingAuthorityId3"> 
-									                              <label className="labelform col-lg-12 col-md-12 col-sm-12 col-xs-12 NOpadding-left">EmployeeID of Approving Authority #3<i className="astrick">*</i></label>
-									                              <input type="text" className="form-control col-lg-12 col-md-12 col-sm-12 col-xs-12" value={this.state.approvingAuthorityId3} ref="approvingAuthorityId3" name="approvingAuthorityId3" onChange={this.handleChange.bind(this)} />
-									                            </div>
-									                        </div>
-									                    </div>
-									                    :
-									                    null
-									                	}
-									                	{this.state.pathname === "corporate" ? 
-									                    <div className=" form-margin col-lg-12 col-md-12 col-sm-12 col-xs-12 NOpadding">
-									                        <div className=" col-lg-4 col-md-4 col-sm-12 col-xs-12 driver person employee">
-						                                        <div id="empCategory">
-						                                          <label className="labelform col-lg-12 col-md-12 col-sm-12 col-xs-12 NOpadding-left">Employee Category <i className="astrick">*</i><a href="#" data-tip data-for='basicInfo4Tooltip' className="pull-right"> <i title=
-						                                           {
-						                                            this.state.vehicalsTable ? 
-						                                            this.state.vehicalsTable.map((a,i)=>{
-						                                                return(
-						                                                    "Category-"+a.empCategory+" allowed to use "+a.vehicalCategory
-						                                                )
-						                                            })
-						                                            :"No Data Found"
-						                                            } 
-						                                            className="fa fa-question-circle"></i></a></label>
-						                                          <select className="form-control col-lg-12 col-md-12 col-sm-12 col-xs-12"
-						                                            ref="empCategory" value={this.state.empCategory} name="empCategory"
-						                                            disabled={ window.location.pathname == '/my-profile/'+this.state.personID ? true : false} onChange={this.handleChange} >
-						                                            <option selected={true} disabled={true}>-- Select --</option>
-						                                            <option value="1">1</option>
-						                                            <option value="2">2</option>
-						                                            <option value="3">3</option>
-						                                          </select>
-						                                        </div>
-					                                        </div>
-					                                        <div className=" col-lg-4 col-md-4 col-sm-12 col-xs-12 driver person employee">
-						                                        <div id="empPriority">
-						                                          <label className="labelform col-lg-12 col-md-12 col-sm-12 col-xs-12 NOpadding-left">Employee Priority <i className="astrick">*</i> <a href="#" data-tip data-for='basicInfo4Tooltip' className="pull-right"> <i title=
-						                                           {
-						                                            this.state.vehicalsTable ? 
-						                                            this.state.vehicalsTable.map((a,i)=>{
-						                                                return(
-						                                                    "Category-"+a.empCategory+" allowed to use "+a.vehicalCategory
-						                                                )
-						                                            })
-						                                            :"No Data Found"
-						                                            } 
-						                                            className="fa fa-question-circle"></i> </a> </label>
-						                                          <select className="form-control col-lg-12 col-md-12 col-sm-12 col-xs-12"
-						                                            disabled={ window.location.pathname == '/my-profile/'+this.state.personID ? true : false} ref="empPriority" value={this.state.empPriority} name="empPriority" onChange={this.handleChange} >
-						                                            <option selected={true} disabled={true}>-- Select --</option>
-						                                            <option value="1">   ★ </option>
-						                                            <option value="2">  ★ ★  </option>
-						                                            <option value="3"> ★ ★ ★ </option>
-						                                          </select>
-						                                        </div>
-					                                        </div>
-									                    </div>
-									                    :
-									                    null
-									                	}
+														
 														<div className="height40 form-margin col-lg-12 col-md-12 col-sm-12 col-xs-12 NOpadding">
 															<div className="col-lg-4 col-md-4 col-sm-12 col-xs-12 ">
 																<label className="labelform col-lg-12 col-md-12 col-sm-12 col-xs-12">Create Login Credentials</label>
@@ -1596,14 +1362,7 @@ class ContactDetails extends Component {
 					                                        null
 					                                    	}																	
 														</div>															
-														{this.state.isBookingRequired ?
-															<BookingRequired 
-																pathname={this.state.pathname}
-																getData={this.getData.bind(this)}
-																editData={this.state.editData} />
-															:
-															null
-														}
+														
 														<div className="col-lg-7 col-md-7 col-sm-7 col-xs-7 contactSubmit pull-right">
 															{this.props.match.params.entityID ?
 																this.state.contactID ?
@@ -1630,10 +1389,13 @@ class ContactDetails extends Component {
 											
 											</div>
 											<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+											{this.state.contactarray && this.state.contactarray.length > 0 ?
 												<div className="col-lg-2 col-md-2 col-sm-6 col-xs-12 pull-right NOPadding">
 													<i className="fa fa-th-list fa-lg btn viewBtn  pull-right"  title="List View" name="view" ref="view" value={this.state.view} onClick={this.showView.bind(this,'List')} onChange={this.handleChange} aria-hidden="true"></i>
 													<i className="fa fa-th fa-lg btn viewBtn pull-right btnactive" name="view"  title="Grid View" ref="view" value={this.state.view} onClick={this.showView.bind(this,'Grid')} onChange={this.handleChange} aria-hidden="true"></i>&nbsp;&nbsp;
 												</div>
+												: null
+											}
 											</div>
 											{this.state.view === 'List' ?
 											<IAssureTable 
@@ -1644,7 +1406,7 @@ class ContactDetails extends Component {
 						                      getData={this.getDataTable.bind(this)}
 						                      id={"id"}
 						                      tableName={"Contact"}
-						                      />
+						                      /> 
 											:
 											<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 NOPadding">
 										 	{this.state.contactarray && this.state.contactarray.length > 0 ?
@@ -1667,54 +1429,7 @@ class ContactDetails extends Component {
 																			<li>Company Branch: {data.branchName?data.branchName :" -NA- "}</li>
 																			<li>Department &  Designation : {data.departmentName && data.designationName ? data.departmentName+" , "+data.designationName : " -NA- "}</li>
 																			{/*<li>Designation: {data.designationName ? data.designationName : " -NA- "}</li>*/}
-																			{this.state.pathname === "vendor"?
-																			null
-																			:
-																			<div>
-																				<li>{data.empCategory ? "Employee Category:" + data.empCategory : ""}</li>
-																				<li>{data.empPriority ?"Employee Priority: "+(data.empPriority == "1" ? "★" : data.empPriority == "2" ? "★ ★" : "★ ★ ★" ): ""}</li>
-																			</div>
-																			}
-
-																			{data.approvingAuthorityId1 ?
-																				<li>Approving Authority Employee ID 1: {data.approvingAuthorityId1}</li>	
-																			:
-																			null
-																			}
-																			{data.approvingAuthorityId2 ?
-																				<li>Approving Authority Employee ID 2: {data.approvingAuthorityId2}</li>	
-																			:
-																			null
-																			}																	
-																			{data.approvingAuthorityId3 ?
-																				<li>Approving Authority Employee ID 3: {data.approvingAuthorityId3}</li>	
-																			:
-																			null
-																			}
-																			{data.bookingApprovalRequired === 'Yes'?
-																				<li>Booking Approval Required: Yes</li>	
-																			:
-																				null
-																			}																		
-
-																			{data.preApprovedAmount ?
-																				<li>Pre Approved Amount:  &#8377; {data.preApprovedAmount}</li>	
-																				:
-																				null
-																			}
-
-																			{data.preApprovedRides?
-																				<li>Pre Approved Rides : {data.preApprovedRides}</li>	
-																				:
-																				null
-																			}
-																			{data.preApprovedKilometer?
-																				<li>Pre Approved Kilometer : {data.preApprovedKilometer}</li>	
-																				:
-																				null
-																			}					
-																											
-																																				
+																			
 																			{data.createUser?
 																				<li><i className="fa fa-sign-in" aria-hidden="true"></i>&nbsp;Created Login Credentials: Yes <br/> Role: {data.role}</li>	
 																			:

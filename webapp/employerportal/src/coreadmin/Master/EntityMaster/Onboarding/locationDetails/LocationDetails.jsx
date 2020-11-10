@@ -1262,7 +1262,7 @@ class LocationDetails extends Component {
 												<i className="fa fa-map-marker iconMarginLeft" aria-hidden="true"></i> &nbsp;
 												Statutory Info
 											</a>
-											<div className="trianglethree forActive" id="triangle-right"></div>
+											<div className="triangleone forActive" id="triangle-right"></div>
 										</li>
 										<li className="active col-lg-3 col-md-3 col-sm-12 col-xs-12 transactionTab noRightPadding pdcls btn4 disabled">
 											<div className="triangletwo" id="triangle-right1"></div>
@@ -1537,6 +1537,9 @@ class LocationDetails extends Component {
 																		}
 																	</div>
 																</div>*/}
+																<div className = "col-lg-12 marginTop17">
+							                                      { /*<MapContainer address={this.state.addressLine1} latLng={this.state.latLng} addMarker={this.addMarker.bind(this)} /> */}
+								                                    </div>
 																<div className="col-lg-7 col-md-7 col-sm-7 col-xs-7  NOpadding pull-right">
 																	{this.props.match.params.entityID ?
 																		
@@ -1562,23 +1565,29 @@ class LocationDetails extends Component {
 											</form>
 										</div>
 										<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+										{
+											this.state.locationarray && this.state.locationarray.length > 0 ?
 											<div className="col-lg-2 col-md-2 col-sm-6 col-xs-12 textAlignCenter  pull-right">
 												<i className="fa fa-th fa-lg btn viewBtn btnactive" name="view" title="Grid View" ref="view" value={this.state.view} onClick={this.showView.bind(this,'Grid')} onChange={this.handleChange} aria-hidden="true"></i>&nbsp;&nbsp;
 												<i className="fa fa-th-list fa-lg btn viewBtn " title="List View" name="view" ref="view" value={this.state.view} onClick={this.showView.bind(this,'List')} onChange={this.handleChange} aria-hidden="true"></i>
 											</div>
+											:
+											null
+										}
+											
 										</div>
 
 										{this.state.view === 'List' ?
 										<div  className="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding30">
-											<IAssureTable 
-						                      tableHeading={this.state.tableHeading}
-						                      dataCount={this.state.entityCount}
-						                      tableData={this.state.RecordsTable}
-						                      tableObjects={this.state.tableObjects}
-						                      getData={this.getData.bind(this)}
-						                      id={"id"}
-						                      tableName={"Comapny Locations"}
-						                    />
+											{/*<IAssureTable 
+																	                      tableHeading={this.state.tableHeading}
+																	                      dataCount={this.state.entityCount}
+																	                      tableData={this.state.RecordsTable}
+																	                      tableObjects={this.state.tableObjects}
+																	                      getData={this.getData.bind(this)}
+																	                      id={1}
+																	                      tableName={"Comapny Locations"}
+																	                    />*/}
 					                    </div>
 										 :
 										<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12">

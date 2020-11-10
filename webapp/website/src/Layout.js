@@ -96,8 +96,6 @@ class Layout extends Component  {
                   loggedIn: true
               })
             } else { }
-
-       // let stateLink = this.state.stateArray.find(o => o.stateName === decodeURIComponent(lastpara[1])); 
     }
     
     logout() {

@@ -813,25 +813,25 @@ class StatutoryDetails extends Component {
 		return (
 			<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 				<div className="row">
-					<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 NOPadding">
+					<div className="col-lg-10 col-lg-offset-1 col-md-10 col-sm-12 col-xs-12">
 						<section className="content OrgSettingFormWrapper">
 							
 							<div className="pageContent col-lg-12 col-md-12 col-sm-12 col-xs-12">
-								<div className="box-header with-border col-lg-12 col-md-12 col-xs-12 col-sm-12 NOpadding-right">
+								<div className="box-header with-border col-lg-12 col-md-12 col-xs-12 col-sm-12">
 									 {this.state.pathname !="appCompany" ?
-					                  <h4 className="weighttitle col-lg-11 col-md-11 col-xs-11 col-sm-11 NOpadding-right">{this.state.pathname ? this.state.pathname : "Entity"} Master</h4>
+					                  <h4 className="weighttitle col-lg-11 col-md-11 col-xs-11 col-sm-11">{this.state.pathname ? this.state.pathname : "Entity"} Master</h4>
 					                  :
-					                  <h4 className="weighttitle col-lg-11 col-md-11 col-xs-11 col-sm-11 NOpadding-right">Organizational Settings</h4>
+					                  <h4 className="weighttitle col-lg-11 col-md-11 col-xs-11 col-sm-11">Organizational Settings</h4>
 					  
 					                }
-									<div title="Go to Admin" className="col-lg-1 col-md-1 col-xs-1 col-sm-1 NOpadding-right">
+									<div title="Go to Admin" className="col-lg-1 col-md-1 col-xs-1 col-sm-1">
 										{this.props.vendorData ? <div onClick={this.admin.bind(this)} className="redirectToAdmin col-lg-5 col-lg-offset-7 col-md-10 col-xs-10 col-sm-10 fa fa-arrow-right"></div> : null}
 									</div>
 								</div>
 
 								<div className="nav-center OnboardingTabs col-lg-12 col-md-12 col-sm-12 col-xs-12">
 									<ul className="nav nav-pills vendorpills col-lg-12 col-md-12 col-sm-12 col-xs-12">
-										<li className="col-lg-3 col-md-3 col-sm-12 col-xs-12 transactionTab pdcls pdclsOne  NOpadding-left btn1 disabled">
+										<li className="col-lg-3 col-md-3 col-sm-12 col-xs-12 transactionTab pdcls pdclsOne  btn1 disabled">
 											<a href={this.props.match.params.entityID ? "/"+this.props.entity+"/basic-details/"+this.props.match.params.entityID : "/"+this.props.entity+"/basic-details"} className="basic-info-pillss pills backcolor">
 												<i className="fa fa-info-circle" aria-hidden="true"></i> &nbsp;
 												Basic Info
@@ -844,9 +844,9 @@ class StatutoryDetails extends Component {
 												<i className="fa fa-info-circle iconMarginLeft" aria-hidden="true"></i> &nbsp;
 												Statutory Info
 											</a>
-											<div className="trianglethree triangleones forActive" id="triangle-right"></div>
+											<div className="triangleone triangleones forActive" id="triangle-right"></div>
 										</li>
-										<li className="col-lg-3 col-md-3 col-sm-12 col-xs-12 transactionTab noRightPadding pdcls btn4 disabled">
+										<li className="col-lg-3 col-md-3 col-sm-12 col-xs-12 transactionTab pdcls btn4 disabled">
 											<div className="trianglesix" id="triangle-right2"></div>
 											<a href={this.props.match.params.entityID ? "/"+this.props.entity+"/location-details/"+this.props.match.params.entityID : "/"+this.props.entity+"/location-details"} className="basic-info-pillss backcolor">
 												<i className="fa fa-phone phoneIcon" aria-hidden="true"></i> &nbsp;
@@ -854,7 +854,7 @@ class StatutoryDetails extends Component {
 											</a>
 											<div className="trianglethree forActive" id="triangle-right"></div>
 										</li>
-										<li className="col-lg-3 col-md-3 col-sm-12 col-xs-12 transactionTab noRightPadding pdcls btn4 disabled">
+										<li className="col-lg-3 col-md-3 col-sm-12 col-xs-12 transactionTab pdcls btn4 disabled">
 											<div className="trianglesix" id="triangle-right2"></div>
 											<a href={this.props.match.params.entityID ? "/"+this.props.entity+"/contact-details/"+this.props.match.params.entityID : "/"+this.props.entity+"/contact-details"} className="basic-info-pillss backcolor">
 												<i className="fa fa-phone phoneIcon" aria-hidden="true"></i> &nbsp;
@@ -866,14 +866,16 @@ class StatutoryDetails extends Component {
 								<section className="Content">
 									<div className="row">
 										<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-											<form id="locationsDetail" className="col-lg-12 col-md-12 col-sm-12 col-xs-12 NOpadding">
+										<div className="row">
+
+											<form id="locationsDetail" className="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
 												<div className="col-lg-12 col-md-12 col-sm-12 col-sm-12">
 													<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-														<div className="col-lg-6 col-md-6 col-sm-6 col-sm-6 locationTabs">
+														<div className="col-lg-6 col-md-6 col-sm-6 col-sm-6 locationTabs StatutoryDetails">
 															<h4><i className="fa fa-info-circle" aria-hidden="true"></i> Statutory Details</h4>
 														</div>
 														<div className="col-lg-6 col-md-6 col-sm-6 col-sm-6 locationTabs">
-															<div className="button4  pull-right" onClick={this.openForm.bind(this)}>
+															<div className="button4 AddStatutory pull-right" onClick={this.openForm.bind(this)}>
 															{
 																this.state.openForm === true ?
 																<i className="fa fa-minus-circle" aria-hidden="true"></i>
@@ -888,7 +890,11 @@ class StatutoryDetails extends Component {
 													{
 														this.state.openForm === true ?
 															<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12" >
-																<div className="form-margin col-lg-12 col-md-12 col-sm-12 col-xs-12 NOpadding">
+															<div className="row">
+
+																<div className="form-margin col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+																<div className="row">
+
 																	<div className="col-lg-3 col-md-3 col-sm-12 col-xs-12  " >
 																		<label className="labelform col-lg-12 col-md-12 col-sm-12 col-xs-12">State <i className="astrick">*</i> {this.props.typeOption == 'Local' ? <i className="astrick">*</i> : null}
 																		</label>
@@ -912,17 +918,19 @@ class StatutoryDetails extends Component {
 																		</label>
 																		<input type="text" id="GSTIN" placeholder="29ABCDE1234F1Z5" className="form-control uppercase col-lg-12 col-md-12 col-sm-12 col-xs-12" value={this.state.GSTIN} ref="GSTIN" name="GSTIN" onChange={this.handleChange} />
 																	</div>
-																	<div className="col-lg-6 col-md-6 col-sm-12 col-xs-12 NOpadding">
+																	<div className="col-lg-6 col-md-6 col-sm-12 col-xs-12 ">
 																		<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 																			<label className="labelform col-lg-12 col-md-12 col-sm-12 col-xs-12">{this.state.taxName} Document (jpg, jpeg, png, pdf) (Max size 1MB)</label>
 																		</div>
-																		<div className="col-lg-2 col-md-2 col-sm-12 col-xs-12 NOpadding">
+																		<div className="col-lg-2 col-md-2 col-sm-12 col-xs-12 ">
+																		<div className="row">
 																			<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="hide">
 																				<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 brdlogos locationDocsImg" id="LogoImageUpOne">
 																					<div><i className="fa fa-upload"></i> <br /></div>
 																					<input multiple onChange={this.GSTINBrowse.bind(this)} id="LogoImageUp" type="file" className="form-control col-lg-12 col-md-12 col-sm-12 col-xs-12" title="" name="GSTDocument" />
 																				</div>
 																			</div>
+																		</div>	
 																		</div>
 																		{
 																			this.state.GSTDocument && this.state.GSTDocument.length > 0 ?
@@ -930,7 +938,7 @@ class StatutoryDetails extends Component {
 																					if(('extension',doc.substring(doc.lastIndexOf("."))) === '.pdf'){
 																						return (
 																							<div key={i} className=" col-lg-2 col-md-2 col-sm-12 col-xs-12">
-																								<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 NOpadding marginsBottom" id="hide">
+																								<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12  marginsBottom" id="hide">
 																									<label className="labelform deletelogo col-lg-12 col-md-12 col-sm-12 col-xs-12" title="Delete Document" id={doc} onClick={this.deleteGSTIN.bind(this)}>x</label>
 																									<div title={(doc.substring(doc.lastIndexOf("/"))).replace('/', "")} className="col-lg-12 col-md-12 col-sm-12 col-xs-12 brdlogos locationDocsImg" id="LogoImageUpOne">
 																										<img src={'/images/pdf.png'} className="img-responsive logoStyle" />
@@ -941,7 +949,7 @@ class StatutoryDetails extends Component {
 																					}else{
 																						return (
 																							<div key={i} className=" col-lg-2 col-md-2 col-sm-12 col-xs-12">
-																								<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 NOpadding marginsBottom" id="hide">
+																								<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12  marginsBottom" id="hide">
 																									<label className="labelform deletelogo col-lg-12 col-md-12 col-sm-12 col-xs-12" title="Delete Document" id={doc} onClick={this.deleteGSTIN.bind(this)}>x</label>
 																									<div title={(doc.substring(doc.lastIndexOf("/"))).replace('/', "")} className="col-lg-12 col-md-12 col-sm-12 col-xs-12 brdlogos locationDocsImg" id="LogoImageUpOne">
 																										<img src={doc} className="img-responsive logoStyle" />
@@ -953,8 +961,8 @@ class StatutoryDetails extends Component {
 																				})
 																				:
 																				( this.state.gotImageGSTIN ?
-											                                          <div className="col-lg-2 col-md-2 col-sm-12 col-xs-12 nopadding CustomImageUploadLDProfile">
-											                                            <div className="col-lg-8 col-md-12 col-sm-12 col-xs-12 NOpadding marginsBottom" id="hide">
+											                                          <div className="col-lg-2 col-md-2 col-sm-12 col-xs-12  CustomImageUploadLDProfile">
+											                                            <div className="col-lg-8 col-md-12 col-sm-12 col-xs-12  marginsBottom" id="hide">
 											                                                <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 brdlogos locationDocsImg" id="LogoImageUpOne">
 											                                                      <img src="/images/loading.gif" className="img-responsive logoStyle"/>
 											                                                </div>
@@ -965,7 +973,10 @@ class StatutoryDetails extends Component {
 																		}
 																	</div>
 																	</div>
-																	<div className="form-margin col-lg-12 col-md-12 col-sm-12 col-xs-12 NOpadding">
+																	<div className="row">
+																	<div className="form-margin col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+																	<div className="row">
+
 																		<div className="form-margin col-lg-4 col-md-4 col-sm-12 col-xs-12  " >
 																			<label className="labelform col-lg-12 col-md-12 col-sm-12 col-xs-12">PAN<i className="astrick">*</i>
 																				<a data-tip data-for='basicInfo4Tooltip' className="pull-right"> <i title="Eg. ABCDE1234E" className="fa fa-question-circle"></i> </a>
@@ -974,17 +985,20 @@ class StatutoryDetails extends Component {
 																		</div>
 
 
-																		<div className="form-margin col-lg-6 col-md-6 col-sm-12 col-xs-12 NOpadding">
+																		<div className="form-margin col-lg-6 col-md-6 col-sm-12 col-xs-12 ">
 																			<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 																				<label className="labelform col-lg-12 col-md-12 col-sm-12 col-xs-12">PAN Document (jpg, jpeg, png, pdf) (Max size 1MB)</label>
 																			</div>
 																			<div className="col-lg-2 col-md-2 col-sm-12 col-xs-12">
-																				<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 NOpadding" id="hide">
+																			<div className="row">
+
+																				<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 " id="hide">
 																					<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 brdlogos locationDocsImg" id="LogoImageUpOne">
 																						<div><i className="fa fa-upload"></i> <br /></div>
 																						<input multiple onChange={this.PANBrowse.bind(this)} id="LogoImageUp" type="file" className="form-control col-lg-12 col-md-12 col-sm-12 col-xs-12" title="" name="PANDocument" />
 																					</div>
 																				</div>
+																			</div>
 																			</div>
 																			{
 																				this.state.PANDocument && this.state.PANDocument.length > 0 ?
@@ -992,7 +1006,7 @@ class StatutoryDetails extends Component {
 																						if(('extension',doc.substring(doc.lastIndexOf("."))) === '.pdf'){
 																							return (
 																								<div key={i} className=" col-lg-2 col-md-2 col-sm-12 col-xs-12">
-																									<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 NOpadding marginsBottom" id="hide">
+																									<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12  marginsBottom" id="hide">
 																										<label className="labelform deletelogo col-lg-12 col-md-12 col-sm-12 col-xs-12" title="Delete Document" id={doc} onClick={this.deletePAN.bind(this)}>x</label>
 																										<div title={(doc.substring(doc.lastIndexOf("/"))).replace('/', "")} className="col-lg-12 col-md-12 col-sm-12 col-xs-12 brdlogos locationDocsImg" id="LogoImageUpOne">
 																											<img src={'/images/pdf.png'} className="img-responsive logoStyle" />
@@ -1003,7 +1017,7 @@ class StatutoryDetails extends Component {
 																						}else{
 																							return (
 																								<div key={i} className=" col-lg-2 col-md-2 col-sm-12 col-xs-12">
-																									<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 NOpadding marginsBottom" id="hide">
+																									<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12  marginsBottom" id="hide">
 																										<label className="labelform deletelogo col-lg-12 col-md-12 col-sm-12 col-xs-12" title="Delete Document" id={doc} onClick={this.deletePAN.bind(this)}>x</label>
 																										<div title={(doc.substring(doc.lastIndexOf("/"))).replace('/', "")} className="col-lg-12 col-md-12 col-sm-12 col-xs-12 brdlogos locationDocsImg" id="LogoImageUpOne">
 																											<img src={doc} className="img-responsive logoStyle" />
@@ -1015,8 +1029,8 @@ class StatutoryDetails extends Component {
 																					})
 																					:
 																					( this.state.gotImagePAN ?
-												                                          <div className="col-lg-2 col-md-2 col-sm-12 col-xs-12 nopadding CustomImageUploadLDProfile">
-												                                            <div className="col-lg-8 col-md-12 col-sm-12 col-xs-12 NOpadding marginsBottom" id="hide">
+												                                          <div className="col-lg-2 col-md-2 col-sm-12 col-xs-12 CustomImageUploadLDProfile">
+												                                            <div className="col-lg-8 col-md-12 col-sm-12 col-xs-12  marginsBottom" id="hide">
 												                                                <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 brdlogos locationDocsImg" id="LogoImageUpOne">
 												                                                      <img src="/images/loading.gif" className="img-responsive logoStyle"/>
 												                                                </div>
@@ -1026,8 +1040,11 @@ class StatutoryDetails extends Component {
 												                                null)
 																			}
 																		</div>
+																		</div>
+																	</div>
+																	</div>
 																</div>
-																<div className="col-lg-7 col-md-7 col-sm-7 col-xs-7  NOpadding pull-right">
+																<div className="col-lg-7 col-md-7 col-sm-7 col-xs-7   pull-right">
 																	{this.props.match.params.entityID ?
 																		
 																			this.state.statutoryID ?
@@ -1039,17 +1056,18 @@ class StatutoryDetails extends Component {
 																		null
 																	}
 																</div>
-
+															</div>
 															</div>
 															:
 															null
 													}
-													<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12  ">
+													<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
 														<button className="button2" onClick={this.locationdetailBack.bind(this)}><i className="fa fa-angle-double-left" aria-hidden="true"></i>&nbsp;Basic Info</button>
 														<button className="button1 pull-right" onClick={this.locationdetailBtn.bind(this)}>Next&nbsp;<i className="fa fa-angle-double-right" aria-hidden="true"></i></button>
 													</div>
 												</div>
 											</form>
+										</div>
 										</div>
 										
 										<div  className="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding30">
@@ -1061,7 +1079,7 @@ class StatutoryDetails extends Component {
 						                      getData={this.getData.bind(this)}
 						                      id={1}
 						                      tableName="Statutory"
-						                    />
+						                    /> 
 					                    </div>
 										
 									</div>
@@ -1077,7 +1095,7 @@ class StatutoryDetails extends Component {
 		          <div className="adminModal adminModal-dialog col-lg-12 col-md-12 col-sm-12 col-xs-12">
 		            <div className="modal-content adminModal-content col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1 col-xs-12 noPadding">
 		              <div className="modal-header adminModal-header col-lg-12 col-md-12 col-sm-12 col-xs-12">
-		                <div className="adminCloseCircleDiv pull-right  col-lg-1 col-lg-offset-11 col-md-1 col-md-offset-11 col-sm-1 col-sm-offset-11 col-xs-12 NOpadding-left NOpadding-right">
+		                <div className="adminCloseCircleDiv pull-right  col-lg-1 col-lg-offset-11 col-md-1 col-md-offset-11 col-sm-1 col-sm-offset-11 col-xs-12">
 		                	<button type="button" className="adminCloseButton" data-dismiss="modal" onClick={this.closeModal.bind(this)}>&times;</button>
 		                </div>
 		              </div>

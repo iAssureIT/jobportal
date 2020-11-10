@@ -82,9 +82,9 @@ class Header extends Component{
             <div className="headerMenuWrapper col-lg-4">
               <div className="row"> 
                 <div className="headerJobWrapper">
-                  <div className="headerJob">
+                  <a href="/post-job"><div className="headerJob">
                     <i className="fa fa-user"></i>Post Job 
-                  </div>
+                  </div></a>
                 </div>
                 <div className="headerBellWrapper ">
                   <i className="fa fa-bell-o " onClick={this.notificationBar.bind(this)}></i>
@@ -131,7 +131,7 @@ class Header extends Component{
                     <div className="signOutToggelButtons">
                       <div className="col-lg-5 pull-left">
                         <div className="row">
-                          <a href="/profile" className="whitelink"><div className="signOutButton">Add Employer</div></a>
+                          <a href="/profile" className="whitelink"><div className="signOutButton">Profile</div></a>
                         </div>
                       </div>
                       
@@ -150,26 +150,26 @@ class Header extends Component{
                   </div>
                 </div>
                 <div className="barsToggel pull-right" id="barsToggel" style={{display:this.state.asideDisplay}}>
+                  <a href="corporate/basic-details"><div className="notificationMessege col-lg-12">
+                    <FontAwesomeIcon icon="search" />
+                    <span className="notificationMessegeText">Employer Settings</span>
+                  </div></a>
+                  
                   <div className="notificationMessege col-lg-12">
-                    <FontAwesomeIcon icon="bag" />
-                    <span className="notificationMessegeText">Jobs</span>
+                    <FontAwesomeIcon icon="users" />
+                    <span className="notificationMessegeText">Recruiters</span>
                   </div>
                   <div className="notificationMessege col-lg-12">
-                     
-                      <span className="notificationMessegeText">Recruiters</span>
+                    <FontAwesomeIcon icon="search" />
+                    <span className="notificationMessegeText">Services</span>
                   </div>
                   <div className="notificationMessege col-lg-12">
-                      <FontAwesomeIcon icon="mobile" />
-                      <span className="notificationMessegeText">Companies</span>
+                    <span className="notificationMessegeText">About Us</span>
                   </div>
                   <div className="notificationMessege col-lg-12">
-                      <FontAwesomeIcon icon="mobile" />
-                      <span className="notificationMessegeText">Employer Login</span>
-                  </div>                    
-                  <div className="notificationMessege col-lg-12">
-                      <FontAwesomeIcon icon="sign-out-alt" />
-                      <span className="notificationMessegeText">Sign Out</span>
+                    <span className="notificationMessegeText">Contact Us</span>
                   </div>
+                  
                 </div>
                 
               </div>
