@@ -7,7 +7,7 @@ import S3FileUpload from 'react-s3';
 import PhoneInput from 'react-phone-input-2';
 import { withRouter } from 'react-router-dom';
 import BulkUpload from "../../../BulkUpload/BulkUpload.js";
-
+import Autosuggest from 'react-autosuggest';
 import 'bootstrap/js/tab.js';
 import '../css/SupplierOnboardingForm.css';
 import 'react-phone-input-2/lib/style.css';
@@ -26,6 +26,11 @@ class BasicInfo extends Component {
       "companyPhoneAvailable" : true, 
       "companyPhone"  : '',
       "country"  : "",
+      "industryArray":[],
+      "industry_id":"",
+      "industry":"",
+      value: '',
+      suggestions: [],
       fileDetailUrl: "/api/entitymaster/get/filedetails/",
       goodRecordsHeading: {
        
@@ -199,7 +204,18 @@ class BasicInfo extends Component {
        })
       .catch((error) => {
       })
+    axios.get('/api/industrymaster/get/list')
+      .then((response) => {
+        
+        var industryArray = [];
+        response.data.map((value,ind)=>{
+          industryArray.push({_id: value._id, label : value.industry})
+        })
 
+        this.setState({ industryArray : industryArray })
+      })
+      .catch((error) => {
+      })  
   }
   componentWillUnmount() {
     $("script[src='/js/adminLte.js']").remove();
@@ -271,6 +287,8 @@ class BasicInfo extends Component {
         "CIN": this.state.CIN? this.state.CIN.toUpperCase() :"",
         "COI": this.state.COI,
         "TAN": this.state.TAN ? this.state.TAN.toUpperCase() : "",
+        "industry_id" : this.state.industry_id,
+        "industry" : this.state.value,
         "companyLogo": this.state.companyLogo,
         "userID": this.state.userID,
         "createdBy": localStorage.getItem("user_ID")
@@ -573,7 +591,11 @@ class BasicInfo extends Component {
     if (entityID !== '') {
       axios.get('/api/entitymaster/getEntity/' + entityID)
         .then((response) => {
+
           console.log("response",response)
+          var industry = this.state.industryArray.filter((industry)=>{
+            return industry._id  == response.data.industry_id
+          })
           this.setState({
             "entityID": this.props.match.params.entityID,
             "entityType": response.data.entityType,
@@ -589,6 +611,8 @@ class BasicInfo extends Component {
             "country": response.data.country,
             "countryCode": response.data.countryCode,
             "statutoryDetails": response.data.statutoryDetails,
+            "value": industry[0] ? industry[0].label : "",
+            suggestions: industry[0] ? this.getSuggestions(industry[0].label) : [] ,
             "userID": response.data.ID,
             "createdBy": localStorage.getItem("user_ID")
           })
@@ -699,8 +723,70 @@ class BasicInfo extends Component {
       })
   }
   
+  escapeRegexCharacters(str) {
+    return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  }
 
- render() {
+  getSuggestions(value) {
+    const escapedValue = this.escapeRegexCharacters(value.trim());
+   
+    if (escapedValue === '') {
+      return [];
+    }
+
+    const regex = new RegExp('^' + escapedValue, 'i');
+
+    return this.state.industryArray.filter(industry => regex.test(industry.label));
+  }
+
+  getSuggestionValue(suggestion) {
+    return suggestion.label;
+  }
+
+  renderSuggestion(suggestion) {
+    return (
+      <span className="Autosuggestlist">{suggestion.label}</span>
+    );
+  }
+
+  onChange = (event, { newValue , method}) => {
+    if (method="type") {
+      this.setState({ value: newValue, industry : newValue})
+      
+    }else{
+      this.setState({
+        value: newValue, industry_id :""
+      });
+    }
+  };
+ 
+  // Autosuggest will call this function every time you need to update suggestions.
+  // You already implemented this logic above, so just use it.
+  onSuggestionsFetchRequested = ({ value }) => {
+    this.setState({
+      suggestions: this.getSuggestions(value)
+    });
+  };
+ 
+  // Autosuggest will call this function every time you need to clear suggestions.
+  onSuggestionsClearRequested = () => {
+    this.setState({
+      suggestions: []
+    });
+  };
+  onSuggestionSelected=(event, { suggestion, suggestionValue, suggestionIndex, sectionIndex, method }) => { 
+    //console.log("suggestion",suggestion)
+    
+    this.setState({industry_id : suggestion._id, industry : suggestionValue})
+  };
+  
+  render() {
+    const { value, suggestions } = this.state;
+    const inputProps = {
+      placeholder: "Industry",
+      value,
+      onChange: this.onChange
+    };
     return (
 
       <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 NOPadding">
@@ -845,7 +931,18 @@ class BasicInfo extends Component {
 
                             </div>
                            <div className="form-margin col-lg-12 col-md-12 col-sm-12 col-xs-12 NOpadding-left NOpadding-right">
-                              
+                              <div className="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <label className="labelform col-lg-12 col-md-12 col-sm-12 col-xs-12 NOpadding-left">Industry<i className="astrick">*</i></label>
+                                <Autosuggest 
+                                suggestions={suggestions}
+                                onSuggestionsFetchRequested={this.onSuggestionsFetchRequested.bind(this)}
+                                onSuggestionsClearRequested={this.onSuggestionsClearRequested.bind(this)}
+                                getSuggestionValue={this.getSuggestionValue.bind(this)}
+                                renderSuggestion={this.renderSuggestion.bind(this)}
+                                onSuggestionSelected={this.onSuggestionSelected.bind(this)}
+                                inputProps={inputProps}
+                              />
+                              </div>
                               <div className=" col-lg-3 col-md-3 col-sm-12 col-xs-12">
                                 <label className="labelform col-lg-12 col-md-12 col-sm-12 col-xs-12 NOpadding-left">Email<i className="astrick">*</i></label>
                                 <input  type="email" id="companyEmail" className="form-control col-lg-12 col-md-12 col-sm-12 col-xs-12" value={this.state.companyEmail} ref="companyEmail" name="companyEmail" onChange={this.handleChange} required />

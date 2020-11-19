@@ -1306,7 +1306,7 @@ class LocationDetails extends Component {
      }
 
 		return (
-			<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+			<div className="col-lg-10 col-lg-offset-1 col-md-12 col-sm-12 col-xs-12">
 				<div className="row">
 					<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 NOPadding">
 						<section className="content OrgSettingFormWrapper">
@@ -1339,7 +1339,7 @@ class LocationDetails extends Component {
 												<i className="fa fa-map-marker iconMarginLeft" aria-hidden="true"></i> &nbsp;
 												Statutory Info
 											</a>
-											<div className="trianglethree forActive" id="triangle-right"></div>
+											<div className="triangleone forActive" id="triangle-right"></div>
 										</li>
 										<li className="active col-lg-3 col-md-3 col-sm-12 col-xs-12 transactionTab noRightPadding pdcls btn4 disabled">
 											<div className="triangletwo" id="triangle-right1"></div>
@@ -1347,7 +1347,7 @@ class LocationDetails extends Component {
 												<i className="fa fa-map-marker iconMarginLeft" aria-hidden="true"></i> &nbsp;
 												Location
 											</a>
-											<div className="trianglethree triangleones forActive" id="triangle-right"></div>
+											<div className="triangleone triangleones forActive" id="triangle-right"></div>
 										</li>
 										<li className="col-lg-3 col-md-3 col-sm-12 col-xs-12 transactionTab noRightPadding pdcls btn4 disabled">
 											<div className="trianglesix" id="triangle-right2"></div>
@@ -1615,7 +1615,7 @@ class LocationDetails extends Component {
 																	</div>
 																</div>*/}
 																<div className = "col-lg-12 marginTop17">
-								                                      <MapContainer address={this.state.addressLine1} latLng={this.state.latLng} addMarker={this.addMarker.bind(this)} />
+							                                      { /*<MapContainer address={this.state.addressLine1} latLng={this.state.latLng} addMarker={this.addMarker.bind(this)} /> */}
 								                                    </div>
 																<div className="col-lg-7 col-md-7 col-sm-7 col-xs-7  NOpadding pull-right">
 																	{this.props.match.params.entityID ?
@@ -1657,13 +1657,13 @@ class LocationDetails extends Component {
 										{this.state.view === 'List' ?
 										<div  className="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding30">
 											<IAssureTable 
-						                      tableHeading={this.state.tableHeading}
-						                      dataCount={this.state.entityCount}
-						                      tableData={this.state.RecordsTable}
-						                      tableObjects={this.state.tableObjects}
-						                      getData={this.getData.bind(this)}
-						                      id={1}
-						                      tableName={"Comapny Locations"}
+							                      tableHeading={this.state.tableHeading}
+							                      dataCount={this.state.entityCount}
+							                      tableData={this.state.RecordsTable}
+							                      tableObjects={this.state.tableObjects}
+							                      getData={this.getData.bind(this)}
+							                      id={1}
+							                      tableName={"Comapny Locations"}
 						                    />
 					                    </div>
 										 :

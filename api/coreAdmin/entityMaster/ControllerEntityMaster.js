@@ -5,6 +5,7 @@ const FailedRecords = require('../failedRecords/ModelFailedRecords');
 const DesignationMaster = require('../designationMaster/ModelDesignationMaster.js');
 const DepartmentMaster = require('../departmentMaster/ModelDepartmentMaster.js');
 const User = require('../userManagement/ModelUsers.js');
+const IndustryMaster = require('../IndustryMaster/ModelIndustryMaster.js');
 
 var request = require('request-promise');
 var ObjectID = require('mongodb').ObjectID;
@@ -13,6 +14,13 @@ exports.insertEntity = (req,res,next)=>{
     insertEntityFun();
     async function insertEntityFun(){
         var getnext = await getNextSequence(req.body.entityType)
+        var industry_id = "";
+        if (req.body.industry_id != "") {
+            industry_id = req.body.industry_id
+        }else{
+            industry_id = await industryInsert(req.body.industry)
+        }
+                
         if(req.body.entityType == 'appCompany'){var str = 1}
             else{var str = parseInt(getnext)}
         
@@ -28,6 +36,7 @@ exports.insertEntity = (req,res,next)=>{
             if (data) {
                 res.status(200).json({ duplicated : true });
             }else{
+
                 const entity = new EntityMaster({
                     _id                       : new mongoose.Types.ObjectId(),
                     supplierOf                : req.body.supplierOf,
@@ -46,6 +55,7 @@ exports.insertEntity = (req,res,next)=>{
                     companyEmail              : req.body.companyEmail,
                     country                   : req.body.country,
                     countryCode               : req.body.countryCode,
+                    industry_id               : industry_id,  
                     userID                    : req.body.userID,  
                     createdBy                 : req.body.createdBy,
                     createdAt                 : new Date()
@@ -435,49 +445,119 @@ exports.branchCodeLocation = (req,res,next)=>{
     });
 };
 exports.updateEntity = (req,res,next)=>{
-    EntityMaster.updateOne(
-            { _id:req.body.entityID},  
-            {
-                $set:   { 
-                            'companyName'               : req.body.companyName,
-                            'groupName'                 : req.body.groupName,
-                            'CIN'                       : req.body.CIN,   
-                            'COI'                       : req.body.COI,
-                            'TAN'                       : req.body.TAN,
-                            'companyLogo'               : req.body.companyLogo,
-                            'website'                   : req.body.website,
-                            'companyEmail'              : req.body.companyEmail,
-                            'companyPhone'              : req.body.companyPhone,
-                            'country'                   : req.body.country,
-                            'countryCode'               : req.body.countryCode,
-                        }
-            }
-        )
-        .exec()
-        .then(data=>{
-            if(data.nModified == 1){
-                EntityMaster.updateOne(
-                { _id:req.body.entityID},
+    
+    var industry_id = "";
+
+    updateEntity();
+
+    async function updateEntity(){
+        if (req.body.industry_id != "") {
+
+            industry_id = req.body.industry_id
+        }else{
+            industry_id = await industryInsert(req.body.industry)
+        }
+        EntityMaster.updateOne({ _id:req.body.entityID},  
                 {
-                    $push:  { 'updateLog' : [{  updatedAt      : new Date(),
-                                                updatedBy      : req.body.updatedBy 
-                                            }] 
+                    $set:   { 
+                                'companyName'               : req.body.companyName,
+                                'groupName'                 : req.body.groupName,
+                                'CIN'                       : req.body.CIN,   
+                                'COI'                       : req.body.COI,
+                                'TAN'                       : req.body.TAN,
+                                'companyLogo'               : req.body.companyLogo,
+                                'website'                   : req.body.website,
+                                'companyEmail'              : req.body.companyEmail,
+                                'companyPhone'              : req.body.companyPhone,
+                                'country'                   : req.body.country,
+                                'countryCode'               : req.body.countryCode,
+                                'industry_id'               : industry_id,  
                             }
-                } )
-                .exec()
-                .then(data=>{
-                    res.status(200).json({ updated : true });
-                })
-            }else{
-                res.status(200).json({ updated : false });
-            }
-        })
-        .catch(err =>{
-            res.status(500).json({
-                error: err
+                }
+            )
+            .exec()
+            .then(data=>{
+                if(data.nModified == 1){
+                    EntityMaster.updateOne(
+                    { _id:req.body.entityID},
+                    {
+                        $push:  { 'updateLog' : [{  updatedAt      : new Date(),
+                                                    updatedBy      : req.body.updatedBy 
+                                                }] 
+                                }
+                    } )
+                    .exec()
+                    .then(data=>{
+                        res.status(200).json({ updated : true });
+                    })
+                }else{
+                    res.status(200).json({ updated : false });
+                }
+            })
+            .catch(err =>{
+                res.status(500).json({
+                    error: err
+                });
             });
-        });
+
+
+    }
+    
+    
 };
+function industryInsert(industry) {
+    return new Promise(function(resolve,reject){    
+        industryDuplicateControl();
+        async function industryDuplicateControl(){
+            var industryPresent = await findIndustry(industry);
+            //console.log('industryPresent',industryPresent)
+
+            if(industryPresent === 0){
+                const industryObj = new IndustryMaster({
+                        _id                       : new mongoose.Types.ObjectId(),
+                        industry                  : industry,
+                        createdAt                 : new Date()
+                    });
+
+                    industryObj
+                    .save()
+                    .then(data=>{
+                        //console.log('insertCategory',data.subCategory[0]._id);
+                        resolve( data._id );
+                    })
+                    .catch(err =>{
+                        console.log(err);
+                        reject(err);
+                    });
+            }else{
+                IndustryMaster.findOne({ industry : { "$regex": industry, $options: "i"} })
+                        .exec()
+                        .then(industryObject=>{
+                            if(industryObject){
+                                //console.log('industry',industryObject);
+                                resolve({industry_id : industryObject._id, industry : industryObject.industry});
+                            }else{
+                                resolve(0);
+                            }
+                        })
+            }
+        }
+
+    })                   
+}
+function findIndustry(industry) {
+    return new Promise(function(resolve,reject){  
+    IndustryMaster.findOne({ industry : { "$regex": industry, $options: "i"} })
+                .exec()
+                .then(industryObject=>{
+                    if(industryObject){
+                        resolve(industryObject);
+                    }else{
+                        resolve(0);
+                    }
+                })
+    })           
+}
 exports.updateProfileStatus = (req,res,next)=>{
     EntityMaster.updateOne(
             { _id:req.body.entityID},  

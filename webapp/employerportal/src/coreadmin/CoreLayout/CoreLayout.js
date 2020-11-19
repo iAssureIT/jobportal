@@ -74,7 +74,7 @@ class CoreLayout extends Component {
                 <Route path="/company-profile/:comp_ID" exact strict component={CompanyProfileView} />
                 <Route path="/corporate/basic-details" exact strict component={CorporateBasicInfo} />
                 <Route path="/corporate/basic-details/:entityID" exact strict component={CorporateBasicInfo} />
-                <Route path="/corporate/location-details" exact strict component={CorporateLocationDetails} />
+                <Route path="/corporate/locati/5fa14315c3cd487b4ebfff52on-details" exact strict component={CorporateLocationDetails} />
                 <Route path="/corporate/location-details/:entityID/:locationID" exact strict component={CorporateLocationDetails} />
                 <Route path="/corporate/location-details/:entityID" exact strict component={CorporateLocationDetails} />
                 <Route path="/corporate/contact-details" exact strict component={CorporateContactDetails} />

@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import $ from 'jquery';
-import jQuery from 'jquery';
-import axios from 'axios';
-import swal from 'sweetalert';
+import $ 				from 'jquery';
+import jQuery 			from 'jquery';
+import axios 			from 'axios';
+import swal 			from 'sweetalert';
 import 'bootstrap/js/tab.js';
-import PhoneInput from 'react-phone-input-2';
-import { withRouter } from 'react-router-dom';
-import IAssureTable           from "../../../../IAssureTable/IAssureTable.jsx";
+import PhoneInput 		from 'react-phone-input-2';
+import { withRouter } 	from 'react-router-dom';
+import IAssureTable     from "../../../../IAssureTable/IAssureTable.jsx";
 
 
 class ContactDetails extends Component {

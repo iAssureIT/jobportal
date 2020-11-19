@@ -71,7 +71,9 @@ class Header extends Component{
         //this.props.history.push("/")
   }
   render(){
-    console.log(this.state.userDetails)
+    
+    var hascompany_Id = localStorage.getItem("company_Id");
+    console.log(hascompany_Id)
     return(
 
         <div className="headerWrapper col-lg-12">
@@ -150,7 +152,7 @@ class Header extends Component{
                   </div>
                 </div>
                 <div className="barsToggel pull-right" id="barsToggel" style={{display:this.state.asideDisplay}}>
-                  <a href="corporate/basic-details"><div className="notificationMessege col-lg-12">
+                  <a href={hascompany_Id ? "/corporate/basic-details/"+hascompany_Id : "/corporate/basic-details"}><div className="notificationMessege col-lg-12">
                     <FontAwesomeIcon icon="search" />
                     <span className="notificationMessegeText">Employer Settings</span>
                   </div></a>

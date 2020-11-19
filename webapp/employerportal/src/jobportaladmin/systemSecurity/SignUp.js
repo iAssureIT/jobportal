@@ -56,7 +56,6 @@ class SignUp extends Component {
       response.data.map((value,ind)=>{
         employerArray.push({_id: value._id, companyID : value.companyID, label : value.companyName})
       })
-      //{ id: 'foo', label: 'foo' }
       console.log('entitymaster==',employerArray)
       this.setState({
               employerArray : employerArray
@@ -380,7 +379,7 @@ class SignUp extends Component {
               <div className="col-lg-12 form-group" >
               <div className="input-group autocomplete">
               <span className="input-group-addon registrationInputIcon"><i className="fa fa-briefcase"></i></span>
-               <Autosuggest
+              <Autosuggest 
                 suggestions={suggestions}
                 onSuggestionsFetchRequested={this.onSuggestionsFetchRequested.bind(this)}
                 onSuggestionsClearRequested={this.onSuggestionsClearRequested.bind(this)}
@@ -389,7 +388,7 @@ class SignUp extends Component {
                 onSuggestionSelected={this.onSuggestionSelected.bind(this)}
                 inputProps={inputProps}
               />
-                </div>
+              </div>
               </div> 
               <div className="col-lg-12 form-group" >
                   <div className="input-group">

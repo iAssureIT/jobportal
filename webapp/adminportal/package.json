@@ -36,6 +36,7 @@
     "number-to-words": "^1.2.4",
     "rc-time-picker": "^3.7.3",
     "react": "^16.8.6",
+    "react-autosuggest": "^10.0.3",
     "react-chartjs-2": "^2.7.6",
     "react-ckeditor-component": "^1.1.0",
     "react-collapsible": "^2.8.1",

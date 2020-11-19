@@ -95,7 +95,8 @@
 .headerToggel:hover, .headerJob:hover,
 .headerProfileWrapper i:hover{
   cursor: pointer;
-  color:var(--yellow-button-color);
+  color:var(--main-txt-color);
+  
 }
 
 .headerToggel{

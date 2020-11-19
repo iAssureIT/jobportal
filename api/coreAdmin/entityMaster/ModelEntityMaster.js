@@ -18,6 +18,7 @@ const entitySchema = mongoose.Schema({
     profileStatus             : String,
     country                   : String,
     countryCode               : String,
+    industry_id               : { type: mongoose.Schema.Types.ObjectId, ref: 'industrymaster' },  
     statutoryDetails    : [{
                             stateCode           : String,
                             state               : String,
