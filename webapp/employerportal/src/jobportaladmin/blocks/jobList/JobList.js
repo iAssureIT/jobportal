@@ -1,10 +1,9 @@
 import React, {Component} from 'react';
-import './JobList.css';
 
 import Axios from  'axios';
 import Swal  from  'sweetalert2';
 
-export default class CompanyJobList extends Component{
+export default class JobList extends Component{
 	constructor(props){
 	super(props);
 	this.state={
@@ -17,7 +16,7 @@ componentDidMount(){
 }
 
 getJobsData=()=>{
-	Axios.get("api/jobs/getJobList")
+	Axios.get("/api/jobposting/list")
 	.then(response=>{
 		console.log("getJobsData response.data : ", response.data);
 		this.setState({
@@ -45,7 +44,7 @@ deleteJob = (event)=>{
 	}).then((result) =>{
 		if(result.value){
 			if(job_id){
-				Axios.delete("apijobs/delete/"+job_id)
+				Axios.delete("/api/jobposting/delete/"+job_id)
 				.then(response =>{
 					console.log()
 					if(response.data.message==="Job details deleted Successfully!"){
@@ -80,13 +79,19 @@ deleteJob = (event)=>{
 	render(){
 		return(
 			<section className="jobListWrapper">
-				<div className="col-lg-9 JobListWrapperMain pull-right"> 
+				<div className="col-lg-9 JobListWrapperMain pull-right">
+					<div className="col-lg-4 col-lg-offset-8">
+						<div className="input-group searchMainTab">
+							<input type="text" name="jobTitle" id="jobTitle" className="form-control jobListSearchTab" placeholder="Search by Job Title..." onChange={this.search}/>
+							<span className="input-group-addon searchTabAddOn"><i className="fa fa-search"></i> </span> 
+						</div> 
+					</div> 
 						{
 							this.state.jobList.length > 0
 							?
 								this.state.jobList.map((elem,index)=>{
 									return(
-										<div className="col-lg-6">
+										<div className="col-lg-12">
 											<div className="jobListContainer">
 												<div className="col-lg-12">
 													<div className="col-lg-11 jobListLeftContent">
@@ -107,7 +112,7 @@ deleteJob = (event)=>{
 															<b>iAssure International Technologies Pvt Ltd</b>
 														</div>
 														<div> 
-															<i className="fa fa-calendar jobListExperience"></i> &nbsp; Exp: {elem.eligibility.minEducation} To {elem.eligibility.minExperience}
+															<i className="fa fa-calendar jobListExperience"></i> &nbsp; Exp: {elem.eligibility.minExperience}
 														</div>
 														<div> 
 															<i className="fa fa-rupee jobListMonSal"></i> &nbsp; <i className="fa fa-inr"></i> {elem.ctcOffered.minSalary} - <i className="fa fa-inr"></i> {elem.ctcOffered.maxSalary} a month
@@ -123,13 +128,13 @@ deleteJob = (event)=>{
 														<div className="row">
 															<div className="col-lg-12">
 																<div className="listEditBtn">
-																	<a title = "edit Profile" href={"/job-post-form/" + elem._id}><i className="fa fa-edit"></i></a>
+																	<a title = "Edit Profile" href={"/job-post-form/" + elem._id}><i className="fa fa-edit"></i></a>
 																</div>
 																<div className="listViewBtn">	
-																	<a title = "view Profile" href={"/job-profile/" + elem._id}><i className="fa fa-eye"></i></a>
+																	<a title = "View Profile" href={"/job-profile/" + elem._id}><i className="fa fa-eye"></i></a>
 																</div>
 																<div className="listDelBtn">	
-																	<i title = "delete Profile" className="fa fa-trash" onClick={this.deleteJob} id = {elem._id}></i>
+																	<i title = "Delete Profile" className="fa fa-trash" onClick={this.deleteJob} id = {elem._id}></i>
 																</div>
 															</div>
 														</div>

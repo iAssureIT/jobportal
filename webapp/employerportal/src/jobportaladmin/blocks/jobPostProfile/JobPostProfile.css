@@ -8,8 +8,7 @@
 }
 
 .leftSideMain{
-	min-height: 670px;
-	height: auto;
+	height: 1359px;
 	border: 1px solid var(--main-border-color);
 	padding-bottom: 100px;
 }
@@ -32,7 +31,7 @@
 	background-color: #fff;
 }
 
-.leftImgContainer .logo{
+.leftImgContainer .companyProfileLogo{
 	height: 55px;
 	margin-top: 40px;
 	border-radius: 5px;
@@ -66,8 +65,9 @@
 .imgContent .locationinfo{
 	padding-top: 1px;
 	margin-left: -52px;
-	font-size: 13px;
-	font-family: 'Montserrat-Thin';
+	font-size: 14px;
+	font-family: 'Montserrat-Regular';
+	color: var(--main-txt-color);
 }
 
 .jobProfileMain{ 
@@ -145,9 +145,9 @@
 .contentWrapper1 .diamondBullet:before{
 	content: "\25C8";
 	position: absolute;
-	top: -16px;
-	left: -20px;
-	font-size: 27px;
+	top: -10px;
+	left: -18px;
+	font-size: 16px;
 	font-weight: bold;
 	color: var(--main-subheading-font-color);
 }
@@ -206,9 +206,9 @@
 .contentWrapper2 .diamondBullet:before{
 	content: "\25C8";
 	position: absolute;
-	top: -16px;
-	left: -20px;
-	font-size: 27px;
+	top: -10px;
+	left: -18px;
+	font-size: 16px;
 	font-weight: bold;
 	color: var(--main-subheading-font-color);
 }
@@ -285,9 +285,9 @@
 .contentWrapper3 .diamondBullet:before{
 	content: "\25C8";
 	position: absolute;
-	top: -16px;
-	left: -20px;
-	font-size: 27px;
+	top: -10px;
+	left: -18px;
+	font-size: 16px;
 	font-weight: bold;
 	color: var(--main-subheading-font-color);
 }
@@ -496,49 +496,3 @@
 	margin-top: 330px;
 }
 
-/************************************React phone input custom classes***************************/
-.react-tel-input .form-control{
-	width: 255px;
-	background-color: var(--main-bg-color);
-	border: 1px solid var(--main-border-color);
-	color: #fff;
-}
-
-.react-tel-input .flag-dropdown{
-	background-color: var(--main-bg-color);
-	border: 1px solid var(--main-border-color);
-	color: #fff;
-	z-index: 100 !important;
-}
-
-.react-tel-input .flag-dropdown:hover{
-	background-color: var(--main-bg-color);
-}
-
-.react-tel-input .selected-flag:hover{
-	background-color: var(--main-bg-color);
-}
-
-.react-tel-input .selected-flag .arrow{
-    border-top: 4px solid #fff !important;
-}
-
-.react-tel-input .country-list{
-	background-color: var(--main-bg-color);
-	border: 1px solid var(--main-border-color);
-	border-radius: 5px;
-}
-
-.react-tel-input .country-list .country:hover{
-	background-color: var(--main-border-color);
-}
-
-.react-tel-input .country-list .country.highlight{
-	background-color: var(--main-border-color);
-}
-
-.react-tel-input .country-list .country .dial-code{
-	/*color: #fff;*/
-}
-
-/******************************End of react phone input*****************************************/

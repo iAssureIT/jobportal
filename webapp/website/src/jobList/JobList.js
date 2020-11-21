@@ -1,15 +1,15 @@
 import React, {Component} from 'react';
-import './JobList.css';
 
 import Axios from  'axios';
 import Swal  from  'sweetalert2';
 
-export default class JobList extends Component{
+export default class Joblist extends Component{
 	constructor(props){
 	super(props);
 	this.state={
 		jobList  : [],
 		isToggle : true,
+		appliedItems:[]
 	}
 }
 
@@ -18,7 +18,7 @@ componentDidMount(){
 }
 
 getJobsData=()=>{
-	Axios.get("/api/jobs/getJobList")
+	Axios.get("/api/jobposting/list")
 	.then(response=>{
 		console.log("getJobsData response.data : ", response.data);
 		this.setState({
@@ -29,57 +29,6 @@ getJobsData=()=>{
 		Swal.fire("Error while getting list data", error.message, "error");
 	})
 }
-
-deleteJob = (event)=>{
-	event.preventDefault();
-	const job_id = event.currentTarget.id;
-
-	Swal.fire({
-		title 				: 'Are you sure? you want to delete this profile!!!',
-		text 				: 'You will not be able to recover this profile',
-		icon 				: 'warning',
-		showCancelButton 	: true,
-		confirmButtonText 	: 'Yes, delete it!',
-		cancelButtonColor 	: 'No, keep it',
-		confirmButtonColor 	: '#d33',
-	
-	}).then((result) =>{
-		if(result.value){
-			if(job_id){
-				
-				Axios.delete("/api/jobs/delete/"+job_id)
-				
-				.then(response =>{
-					console.log()
-					if(response.data.message==="Job details deleted Successfully!"){
-						this.getJobsData();
-
-						Swal.fire(
-									'Deleted!',
-									'Job Profile has been deleted successfully!',
-									'success'
-							);
-					}
-				})
-				
-				.catch(error=>{
-					Swal.fire(
-								"Some problem occured deleting job!",
-								error.message,
-								'error'
-						)
-				})
-			}
-				
-				}else if (result.dismiss === Swal.DismissReason.cancel){
-					Swal.fire(
-						'Cancelled',
-						'Your job Profile is safe :)',
-						'error'
-					)
-				}
-			})
-		}
 
 handleclick = (jobid)=>{
 	console.log("jobid : ", jobid);
@@ -105,7 +54,7 @@ search = (event)=>{
 	event.preventDefault();
 	const searchTxt = event.currentTarget.value;
 	if(searchTxt !== ""){
-		Axios.get("/api/get/searchlist/" + searchTxt)
+		Axios.get("/api/jobposting/get/searchlist/" + searchTxt)
 			.then(response => {
 				this.setState({jobList : response.data.jobList });
 			})
@@ -115,16 +64,104 @@ search = (event)=>{
 	}else{
 		this.getJobsData();
 	}
+}
 
+applyJob = (jobid)=>{
+	console.log("jobid=", jobid);
+	if(!this.state.appliedItems.includes(jobid)){
+		this.state.appliedItems.push(jobid);
+	}
+	
+	console.log("appliedItems=", this.state.appliedItems);
+	const candidateID = "5f8ea1e3e4b7b4407df2cfe1";
+	const employerID  = "5f942a095464992f575e0b7e";
+
+	Swal.fire({
+		title 				: 'Are you sure? you want to apply for this job!!!',
+		text 				: 'You will be able to add this to applied joblist',
+		icon 				: 'success',
+		showCancelButton 	: true,
+		confirmButtonText 	: 'Yes, Add it!',
+		cancelButtonColor 	: 'No, keep it',
+		confirmButtonColor  : '#d33',
+	
+	}).then((result) =>{
+		console.log("result", result.value)
+		if(result.value){
+			console.log("[candidateID, employerID]=", [candidateID, employerID]);
+			if(candidateID && employerID !== ""){
+				if(this.state.appliedItems.includes(jobid)){
+					Axios.post("/api/applyJob/post")
+					.then(response =>{
+						console.log("applied jobs response=", response.data);
+						for (var i = 0; i < this.state.appliedItems.length; i++){
+							if (this.state.appliedItems[i] === this.state.jobid) { 
+								this.state.appliedItems.splice(i, 1);
+								break;
+							}
+						}
+						if(response.data.message==="You have applied to job."){
+
+							Swal.fire(
+										'Applied!',
+										'Applied job successfully!',
+										'success'
+								);
+						}
+					})
+					.catch(error=>{
+						Swal.fire(
+									"Some problem occured while applying job!",
+									error.message,
+									'error'
+							)
+					})
+				}else{
+					Axios.post("/api/applyJob/post")
+					.then(response =>{
+						console.log("apply job response=", response.data);
+						if(response.data.message==="Failed to apply job."){
+
+							Swal.fire(
+										'Added!',
+										'Job added into applied joblist successfully!',
+										'success'
+								);
+						}
+					})
+					.catch(error=>{
+						Swal.fire(
+									"Some problem occured while adding job into applied joblist!",
+									error.message,
+									'error'
+							)
+					})
+				}
+			}
+				
+				}else if (result.dismiss === Swal.DismissReason.cancel){
+					for (var i = 0; i < this.state.appliedItems.length; i++){
+						if (this.state.appliedItems[i] === this.state.jobid) { 
+							this.state.appliedItems.splice(i, 1);
+							break;
+						}
+					}
+					Swal.fire(
+						'Cancelled',
+						'Not added to applied joblist',
+						'error'
+					)
+				}
+			})
 }
 	
 	render(){
 		return(
 			<section className="jobListWrapper">
-				<div className="col-lg-9 JobListWrapperMain pull-right">
+				<div className="col-lg-9 JobListWrapperMain">
 					<div className="col-lg-4 col-lg-offset-8">
 						<div className="input-group searchMainTab">
-							<input type="text" name="jobTitle" id="jobTitle" className="form-control jobListSearchTab" placeholder="Search by Job Title..." onChange={this.search}/>
+							<input type="text" name="search" id="search" className="form-control jobListSearchTab" placeholder="Search by Job Title..." onChange={this.search}/>
 							<span className="input-group-addon searchTabAddOn"><i className="fa fa-search"></i> </span> 
 						</div> 
 					</div> 
@@ -171,8 +208,8 @@ search = (event)=>{
 															<div className="col-lg-12">
 																<div className="jobProfileVerticleIcons">
 																	<ul>
-																		<li><i className="fa fa-check"></i></li>
-																		<li><i onClick={e => this.handleclick(elem._id)} className={this.state.isToggle ? 'fa fa-heart-o':'fa fa-heart'}></i></li>
+																		<li><i className="fa fa-check" onClick={this.applyJob}></i></li>
+																		<li><i onClick={wishlist => this.handleclick(elem._id)} className={this.state.isToggle ? 'fa fa-heart-o':'fa fa-heart'}></i></li>
 																		<li><i className="fa fa-youtube-play"></i></li>
 																	</ul>
 																</div>

@@ -20,7 +20,7 @@
 
 .buttonYellow{
 	background-color: var(--yellow-button-color);
-	color: var(--main-txt-color);
+	color: #fff;
 	height: 30px;
 	line-height: 15px;
 }
@@ -28,7 +28,7 @@
 .addJobWrapperBorder{
 	border: 3px solid var(--main-border-color);
 	border-radius: 10px;
-	background-color: #242933;
+	background-color: var(--form-field-background-color);
 }
 
 .addJobFormHeading{
@@ -61,7 +61,7 @@
 }
 
 .addJobMainHead .labelLeftPadding{
-	padding-left: 17px;
+	padding-left: 10px;
 }
 
 .addJobSubHead{
@@ -78,11 +78,15 @@
 }
 
 .addJobSubHead .labelLeftPadding{
-	padding-left: 17px;
+	padding-left: 10px;
 }
 
 .addJobFieldRow .minSalaryDropdown{
 	margin-left: 1px;
+}
+
+.addJobState{
+	border-radius: 4px !important;
 }
 
 .jobDesc{
@@ -100,8 +104,8 @@
 }
 
 .addjobformLable{
-	font-family: 'Montserrat-Regular';
-	font-size: 12px; 
+	font-family: 'Montserrat-Medium';
+	font-size: 13px; 
 	font-weight: 100;
 	color: var(--main-txt-color);
 	letter-spacing: 1px;
@@ -112,8 +116,8 @@
 }
 
 .addJobFormField {
-    border: 1px solid var(--main-border-color) !important;
-    background-color: #242933;
+    border: 1px solid var(--main-border-color);
+    background-color: var(--form-field-background-color);
     color: var(--main-txt-color);
 }
 
@@ -143,23 +147,23 @@
 	padding-right: 7px;
 	padding-top: 2px;
 	padding-bottom: 3px;
-	/*background-color: #000;*/
 }
 
 .addJobrupee{
 	font-size: 11px;
-	padding-left: 3px;
-	padding-right: 3px;
+	padding-left: 4px;
+	padding-right: 4px;
 	padding-top: 2px;
 	border-radius: 50%;
 	border: 1px solid #fff;
 }
 
 
-/*****************************Custom Gender Field************************************/
+/*****************************Custom Gender Field************************/
+
 .addJobGenderTitle{
 	font-family: 'Montserrat-Medium';
-	font-size: 12px;
+	font-size: 13px;
 	font-weight: 100 !important;
 	color: var(--main-txt-color);
 }
@@ -174,7 +178,7 @@
 .addJobGenderField{
 	height: 32px;
 	border-radius: 5px;
-	font-size: 11px;
+	font-size: 12px;
 	color: #fff;
 	font-weight: 100 !important;
 	padding-top: 8px;
@@ -191,13 +195,81 @@
 .addJobGenderActive{
 	background-color:var(--main-border-color);
 	height: 32px;
-	/*border: 1px solid #fff !important;*/
-	transition:all 0.5s;
+	transition: all 1.3s;
 }
 
 /***********************************************************************/
 
-/*****************************Custom Checkbox***************************/
+/********************React phone input custom classes*******************/
+
+.react-tel-input .form-control{
+	width: 255px !important;
+	background-color: var(--main-bg-color) !important;
+	border: 1px solid var(--main-border-color) !important;
+	color: var(--main-txt-color) !important;
+}
+
+.react-tel-input .flag-dropdown{
+	background-color: var(--main-bg-color) !important;
+	border: 1px solid var(--main-border-color) !important;
+	color: #fff !important;
+	z-index: 100 !important;
+}
+
+.react-tel-input .flag-dropdown:hover{
+	background-color: var(--main-bg-color) !important;
+}
+
+.react-tel-input .selected-flag:hover{
+	background-color: var(--main-bg-color) !important;
+}
+
+[role=button] {
+	background-color: var(--main-bg-color) !important;
+}
+
+.react-tel-input .selected-flag .arrow{
+    border-top: 4px solid #fff !important;
+}
+
+.react-tel-input .selected-flag .arrow.up{
+	border-bottom: 0px solid #555 !important;
+}
+
+.react-tel-input .country-list{
+	background-color: var(--main-bg-color) !important;
+	border: 1px solid var(--main-border-color) !important;
+	border-radius: 5px !important;
+}
+
+.react-tel-input .country-list .country:hover{
+	background-color: var(--main-border-color) !important;
+}
+
+.react-tel-input .country-list .country.highlight{
+	background-color: var(--main-border-color) !important;
+}
+
+.react-tel-input .country-list .country .dial-code{
+	color: var(--main-txt-color) !important;
+}
+
+/*****************************End of react phone input***************************/
+
+/********************************Calender Date Input*****************************/
+ 
+::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+}
+
+.picker__box .picker__header .picker__date-display .picker__weekday-display {
+	background-color: red !important;
+}
+
+/****************************End of HTML Date Input******************************/
+
+/*******************************Custom Checkbox**********************************/
+
 .containerWfh{
 	display: block;
     position: relative;
@@ -230,7 +302,6 @@
 	width: 21px;
 	border-radius: 3px;
 	cursor: pointer;
-	/*background-color: transparent;*/
 	border: 2px solid var(--main-border-color); 
 }
   
@@ -239,7 +310,7 @@
 }
   
 .containerWfh input:checked ~ .checkmark2{
-	background-color: transparent;	
+	background-color: var(--main-border-color);	
 }
   
 .checkmark2:after {
@@ -267,11 +338,11 @@
 /***************************End of Custom Checkbox***************************************/
 
 /***************************Select Dropdown custom classes*******************************/
-select{
+
+/*select{
 	border: 1px solid var(--main-border-color);
     background-color: transparent;
     color: var(--main-txt-color);
-	/*border-left: transparent !important;*/
 }
 
 option{
@@ -282,11 +353,12 @@ option{
 
 option:hover{
 	background-color: var(--main-border-color) !important;
-}
+}*/
 
 /***************************End of Select Dropdown custom classes*******************************/
 
 /***************************React multiselect Dropdown custom classes***************************/
+
 .optionContainer{
 	background-color: var(--main-bg-color);
 	white-space: nowrap; 
@@ -321,7 +393,7 @@ option:hover{
     border-top-right-radius: 4px !important;
 }
 
-/***************************End of React multiselect Dropdown custom classes***************************/
+/**************************End of React multiselect Dropdown custom classes*************************/
 
 .addJobPreviewBtn{
 	height: 40px;
@@ -329,6 +401,7 @@ option:hover{
 	margin-top: 40px;
 	margin-right: 30px;
 	margin-left: 127px;
+	color: #fff;
 }
 
 .addJobSubmitBtn{
@@ -341,7 +414,7 @@ option:hover{
 	color: var(--main-txt-color);
 }
 
-.errorMsg{
+.errorMsgJobPost{
 	color: red;
 	font-size: 12px;
 }
@@ -352,6 +425,7 @@ option:hover{
 }
 
 /*******************************************ckeditor***********************************************/
+
 .ck-editor {
      /* Overrides the border radius setting in the theme. */
     --ck-border-radius: 4px;
@@ -376,10 +450,10 @@ option:hover{
     /* -- Overrides the default .ck-button class colors. ---------------------------------------- */
 
     --ck-color-button-default-background: var(--ck-custom-background);
-    --ck-color-button-default-hover-background: hsl(270, 1%, 22%);
+    --ck-color-button-default-hover-background: /*hsl(270, 1%, 22%);*/ var(--main-border-color) !important;
     --ck-color-button-default-active-background: hsl(270, 2%, 20%);
     --ck-color-button-default-active-shadow: hsl(270, 2%, 23%);
-    --ck-color-button-default-disabled-background: var(--ck-custom-background);
+    --ck-color-button-default-disabled-background: var(--ck-custom-background) /*var(--main-border-color) !important*/;
 
     /*--ck-color-button-on-background: var(--ck-custom-foreground);
     --ck-color-button-on-hover-background: hsl(255, 4%, 16%);
@@ -388,7 +462,7 @@ option:hover{
     --ck-color-button-on-disabled-background: var(--ck-custom-foreground);*/
 
     --ck-color-button-action-background: hsl(168, 76%, 42%);
-    --ck-color-button-action-hover-background: hsl(168, 76%, 38%);
+    --ck-color-button-action-hover-background: hsl(168, 76%, 38%); 
     --ck-color-button-action-active-background: hsl(168, 76%, 36%);
     --ck-color-button-action-active-shadow: hsl(168, 75%, 34%);
     --ck-color-button-action-disabled-background: hsl(168, 76%, 42%);
@@ -456,12 +530,110 @@ option:hover{
 }
 
 .ck.ck-editor__main>.ck-editor__editable:not(.ck-focused) {
-	background-color: var(--main-bg-color);
-	border: 1px solid var(--main-border-color) !important; 
+	background-color: var(--form-field-background-color) !important;
+	border: 1px solid var(--main-border-color) !important;
 }
 
 .ck-rounded-corners .ck.ck-button{
 	background-color: var(--main-bg-color);
 }
 
-/**********************************************End ckeditor****************************************/
+.ck-content{
+	color: var(--main-txt-color) !important;
+}
+
+.ck.ck-editor__main>.ck-editor__editable{
+	background-color: var(--form-field-background-color) !important;
+	border: 1px solid var(--main-border-color) !important;
+	height: 370px;
+}
+
+.ck-rounded-corners .ck.ck-editor__top .ck-sticky-panel .ck-toolbar, .ck.ck-editor__top .ck-sticky-panel .ck-toolbar.ck-rounded-corners{
+	/*background-color: var(--form-field-background-color) !important;*/
+}
+
+/**********************************************End of ckeditor****************************************/
+
+/**************************************************Tooltip************************************************/
+
+/*.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 150%;
+  left: 50%;
+  margin-left: -60px;
+}
+
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: black transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+*/
+/*********************************************************************************************************/
+
+.tagsInput{
+	background-color: none;
+	border: 1px solid var(--main-border-color);
+	border-bottom-right-radius: 4px;
+	border-top-right-radius: 4px;
+	flex-grow: 1;
+}
+
+.react-tagsinput-tag {
+	background-color: #fff !important;
+	color: var(--main-bg-color) !important;
+	border-radius: 10px !important;
+	margin-top: 5px !important;
+	margin-left: 5px !important;
+	border: 1px solid #fff !important;
+	padding: 2px !important;
+	padding-left: 10px !important;
+	padding-right: 5px !important; 
+}
+
+.react-tagsinput-remove{
+	background-color: var(--main-bg-color) !important;
+	border-radius: 10px;
+	padding-right: 4px !important;
+	margin-left: 5px;
+	color: #fff !important;
+	text-decoration: none !important;
+} 
+
+a{
+    color: #000 !important;
+    text-decoration: none;
+}
+
+.react-tagsinput-input {
+	margin-left: 5px;
+	color: #fff !important;
+	margin-top: 5px !important;
+}
+
+.react-tagsinput--focused {
+	border: 1px solid var(--main-border-color) !important;
+}

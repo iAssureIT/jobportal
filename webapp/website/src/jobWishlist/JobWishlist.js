@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import './JobWishlist.css';
 
 import Axios from  'axios';
 import Swal  from  'sweetalert2';
@@ -13,71 +12,6 @@ export default class jobWishlist extends Component{
 		jobIdArray:[]
 	}
 }
-
-componentDidMount(){
-	this.getJobsData();
-}
-
-getJobsData=()=>{
-	Axios.get("/api/jobs/getJobList")
-	.then(response=>{
-		console.log("getJobsData response.data : ", response.data);
-		this.setState({
-			jobList : response.data.jobList
-		});
-	})
-	.catch(error=>{
-		Swal.fire("Error while getting list data", error.message, "error");
-	})
-}
-
-deleteJob = (event)=>{
-	event.preventDefault();
-	const job_id = event.currentTarget.id;
-
-	Swal.fire({
-		title 				: 'Are you sure? you want to delete this profile!!!',
-		text 				: 'You will not be able to recover this profile',
-		icon 				: 'warning',
-		showCancelButton 	: true,
-		confirmButtonText 	: 'Yes, delete it!',
-		cancelButtonColor 	: 'No, keep it',
-		confirmButtonColor 	: '#d33',
-	
-	}).then((result) =>{
-		if(result.value){
-			if(job_id){
-				Axios.delete("/api/jobs/delete/"+job_id)
-				.then(response =>{
-					console.log()
-					if(response.data.message==="Job details deleted Successfully!"){
-						this.getJobsData();
-
-						Swal.fire(
-									'Deleted!',
-									'Job Profile has been deleted successfully!',
-									'success'
-							);
-					}
-				})
-				.catch(error=>{
-					Swal.fire(
-								"Some problem occured deleting job!",
-								error.message,
-								'error'
-						)
-				})
-			}
-				
-				}else if (result.dismiss === Swal.DismissReason.cancel){
-					Swal.fire(
-						'Cancelled',
-						'Your job Profile is safe :)',
-						'error'
-					)
-				}
-			})
-		}
 
 handleclick = (jobid)=>{
 	console.log("jobid=", jobid);
@@ -130,7 +64,7 @@ handleclick = (jobid)=>{
 							)
 					})
 				}else{
-					Axios.post("/api/wishlist/post")
+					Axios.post("http://qaapi-jobportal.iassureit.in/api/wishlist/post")
 					.then(response =>{
 						console.log("wishlist response=", response.data);
 						if(response.data.message==="Job is added to wishlist."){
@@ -171,7 +105,13 @@ handleclick = (jobid)=>{
 	render(){
 		return(
 			<section className="jobListWrapper">
-				<div className="col-lg-9 JobListWrapperMain pull-right"> 
+				<div className="col-lg-9 JobListWrapperMain pull-right">
+					<div className="col-lg-4 col-lg-offset-8">
+						<div className="input-group searchMainTab">
+							<input type="text" name="jobTitle" id="jobTitle" className="form-control jobListSearchTab" placeholder="Search by Job Title..." onChange={this.search}/>
+							<span className="input-group-addon searchTabAddOn"><i className="fa fa-search"></i> </span> 
+						</div> 
+					</div> 
 						{
 							this.state.jobList.length > 0
 							?
