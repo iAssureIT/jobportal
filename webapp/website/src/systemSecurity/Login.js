@@ -17,6 +17,7 @@ class Login extends Component {
   constructor() {
     super();
     this.state = {
+      showPassword: false,
       btnLoading: false,
       loggedIn: false,
       auth: {
@@ -28,6 +29,21 @@ class Login extends Component {
       }
     }
   }
+
+
+  showPassword=(event)=>{
+    event.preventDefault();
+    alert();
+    var passwordToggle = document.getElementById("password");
+    if (passwordToggle.type === "password") {
+        passwordToggle.type = "text";
+        this.setState({showPassword:true});
+      } else {
+        passwordToggle.type = "password";
+        this.setState({showPassword:false});
+      }
+  }
+
   validateForm=()=>{
     var status = true;
     // var tempEmail = this.state.email.trim(); // value of field with whitespace trimmed off
@@ -263,7 +279,9 @@ class Login extends Component {
                     <div className="input-group">
                       <span className="input-group-addon loginInputIcon2"><i className="fa fa-lock"></i></span>
                       <input type="password" id="password" name="password" placeholder="Password" value={this.state.password} ref="loginpassword" onChange={this.handleChange.bind(this)} className="form-control loginInputBox"/>
-                      <span className="input-group-addon loginInputIcon3"><i className="fa fa-eye" onClick={this.showSignPass.bind(this)}></i></span>
+                      <span className="input-group-addon loginInputIcon3">
+                      <i className={this.state.showPassword ? "fa fa-eye-slash" : "fa fa-eye"} 
+                         onClick={this.showPassword.bind(this)} value={this.state.showPassword}></i></span>
                     </div>
                     <span id="passwordError" className="errorMsg"></span>
                   </div>

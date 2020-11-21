@@ -235,11 +235,6 @@
 	top:15px;
 	left:55%;
 	z-index: 1;
-
-	/*animation: horizontalMove1 2s;
-	animation-iteration-count:infinite;
-	transition-timing-function: ease-in-out;
-	animation-delay: 1s;*/
 }
 
 .img1oginInner{
@@ -249,32 +244,6 @@
 	
 }
 
-@keyframes horizontalMove1 {
-		0% { left: 55%;}
-		
-		
-		50% {  left: 54%;}
-		
-		100% {  left: 55%; }
-	}
-
-@keyframes horizontalMove2 {
-		0% { left: 23%;}
-		
-		
-		50% {  left: 22%;}
-		
-		100% {  left: 23%; }
-	}
-
-	@keyframes horizontalMove3 {
-		0% { left: 61.5%;}
-		
-		
-		50% {  left: 62.5%;}
-		
-		100% {  left: 61.5%; }
-	}
 
 .img2Login{
 	position: absolute;
@@ -284,10 +253,7 @@
 	left:9%;
 	z-index: 1;
 
-	/*animation: horizontalMove2 2s;
-	animation-iteration-count:infinite;
-	transition-timing-function: ease-in-out;
-	animation-delay: 2s;*/
+	
 }
 
 .img2loginInner{
@@ -306,10 +272,7 @@
 	top:250px;
 	left:67%;
 	z-index: 1;
-	/*animation: horizontalMove3 2s;
-	animation-iteration-count:infinite;
-	transition-timing-function: ease-in-out;
-	animation-delay: 3s;*/
+	
 }
 
 .img3loginInner{
@@ -317,18 +280,7 @@
 	width: 120px;
 }
 
-@keyframes move {
-		0% { 
-	height: 150px;width: 80px; }
-		
-		
-		50% { height: 180px; 
-width: 100px;
-	}
-		
-		100% { height: 150px;width: 80px;
-	 }
-	}
+
 
 .img4Login{
 	position: absolute;
@@ -338,12 +290,6 @@ width: 100px;
 	top: 445px;
     left: 38%;
 	z-index: 1;
-
-
-	/*animation: move 2s;
-	animation-iteration-count:infinite;
-	transition-timing-function: ease-in-out;
-	animation-delay: 1s;*/
 }
 
 .img4loginInner{

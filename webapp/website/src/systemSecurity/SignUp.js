@@ -305,14 +305,15 @@ class SignUp extends Component {
 	render() {
 		return (
 			<section className="container-fluid registrationFormWrapper">
-                <div className="registrationForm col-lg-6 col-lg-offset-3">
+                <div className="registrationForm col-lg-10 col-lg-offset-1">
                   <form>
 
                     <div className="signUpTitle col-lg-12">Sign Up
                     </div>
 
-                    <hr className="registrationHr"/>
-
+                    <div className="row">
+                      <hr className="registrationHr"/>
+                    </div>
                    
                     {/*<div className="form-group col-lg-12">
                         <div className="input-group">
@@ -331,7 +332,7 @@ class SignUp extends Component {
                     </div>*/}
 
 
-                    <div className="col-lg-12 form-group" >
+                    <div className="col-lg-6 form-group" >
                         <div className="input-group">
                             <span className="input-group-addon registrationInputIcon"><i className="fa fa-user"></i></span>
                             <input type="text" id="firstName" name="firstName" placeholder="First Name" value={this.state.firstName} onChange={this.handleChange.bind(this)} className="form-control registrationInputBox"/>
@@ -339,7 +340,7 @@ class SignUp extends Component {
                          <span id="firstNameError" className="errorMsg"></span>
                     </div>
 
-                    <div className="col-lg-12 form-group" >
+                    <div className="col-lg-6 form-group" >
                         <div className="input-group">
                             <span className="input-group-addon registrationInputIcon"><i className="fa fa-user"></i></span>
                             <input type="text" id="lastName" name="lastName" placeholder="Last Name" value={this.state.lastName} onChange={this.handleChange.bind(this)} className="form-control registrationInputBox"/>
@@ -348,7 +349,7 @@ class SignUp extends Component {
                     </div>
 
                    
-                    <div className="col-lg-12 form-group" >
+                    <div className="col-lg-6 form-group" >
                         <div className="input-group">
                             <span className="input-group-addon registrationInputIcon1"><i className="fa fa-envelope"></i></span>
                             <input type="email" id="emailAddress" name="emailAddress" placeholder="Email Address" value={this.state.emailAddress} onChange={this.handleChange.bind(this)} className="form-control registrationInputBox"/>
@@ -356,7 +357,7 @@ class SignUp extends Component {
                          <span id="emailAddressError" className="errorMsg"></span>
                     </div>
 
-                    <div className="col-lg-12 form-group" >
+                    <div className="col-lg-6 form-group" >
                         <div className="input-group">
                             <span className="input-group-addon registrationInputIcon"><i className="fa fa-mobile"></i></span>
                             <input type="tel" id="mobileNumber" name="mobileNumber" placeholder="Mobile Number" value={this.state.mobileNumber} onChange={this.handleChange.bind(this)} className="form-control registrationInputBox"/>
@@ -364,7 +365,7 @@ class SignUp extends Component {
                          <span id="mobileNumberError" className="errorMsg"></span>
                     </div>
 
-                     <div className="col-lg-12 form-group" >
+                     <div className="col-lg-6 form-group" >
                         <div className="input-group">
                             <span className="input-group-addon registrationInputIcon"><i className="fa fa-lock"></i></span>
                             <input type="password" id="password" name="password" placeholder="Password" value={this.state.password} onChange={this.handleChange.bind(this)} className="form-control registrationInputBox"/>
@@ -372,7 +373,7 @@ class SignUp extends Component {
                          <span id="passwordError" className="errorMsg"></span>
                     </div>
 
-                    <div className="col-lg-12 form-group" >
+                    <div className="col-lg-6 form-group" >
                         <div className="input-group">
                             <span className="input-group-addon registrationInputIcon"><i className="fa fa-lock"></i></span>
                             <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" value={this.state.confirmPassword} onChange={this.handleChange.bind(this)} className="form-control registrationInputBox"/>
@@ -381,7 +382,7 @@ class SignUp extends Component {
                     </div>
 
 
-                    <div className="col-lg-12 buttonWrapper">
+                    <div className="col-lg-6 col-lg-offset-3 buttonWrapper">
                    <button className="btn col-lg-12 buttonSignUp" onClick={this.usersignup.bind(this)}>Sign Up</button>
                   </div>
 
