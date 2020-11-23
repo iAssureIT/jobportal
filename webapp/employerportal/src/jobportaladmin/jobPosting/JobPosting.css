@@ -203,7 +203,7 @@
 /********************React phone input custom classes*******************/
 
 .react-tel-input .form-control{
-	width: 255px !important;
+	/*width: 255px !important;*/
 	background-color: var(--main-bg-color) !important;
 	border: 1px solid var(--main-border-color) !important;
 	color: var(--main-txt-color) !important;
