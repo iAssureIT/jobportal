@@ -18,7 +18,6 @@ import BasicInfo from '../Master/EntityMaster/Onboarding/basicInfo/BasicInfo.jsx
 import LocationDetails from '../Master/EntityMaster/Onboarding/locationDetails/LocationDetails.jsx';
 import ContactDetails from '../Master/EntityMaster/Onboarding/contactDetails/ContactDetails.jsx';
 import ListOfEntities from '../Master/EntityMaster/listOfEntities/components/ListOfEntities.jsx';
-import SelectVendor from '../Master/EntityMaster/SelectVendor/SelectVendor.js';
 
 import CompanyPaymentGateway from '../companysetting/Components/CompanyPaymentGateway.js';
 //============= Corporate Master ====================
@@ -80,7 +79,6 @@ class CoreLayout extends Component {
                 <Route path="/corporate/statutory-details/:entityID/:statutoryID" exact strict component={CorporateStatutoryDetails} />
                 <Route path="/corporate/statutory-details/:entityID" exact strict component={CorporateStatutoryDetails} />
                 
-                <Route path="/supplier" exact strict component={SelectVendor} />
                 <Route path="/module" exact strict component={Module} />
                 <Route path="/module/:fieldID" exact strict component={Module} />
 
