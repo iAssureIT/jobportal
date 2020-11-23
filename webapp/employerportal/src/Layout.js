@@ -24,7 +24,7 @@ import Footer                                   from './jobportaladmin/common/fo
 import FunctionalHeader                         from './jobportaladmin/common/functionalHeader/FunctionalHeader.js'; 
 import JobPosting                               from './jobportaladmin/jobPosting/JobPosting.js'; 
 import JobProfile                               from './jobportaladmin/jobPostProfile/JobPostProfile.js'; 
-import JobList                                  from './jobportaladmin/jobList/JobList.js'; 
+import JobList                                  from './jobportaladmin/pages/Joblist/Joblist.js'; 
 
 
 import axios                from 'axios';

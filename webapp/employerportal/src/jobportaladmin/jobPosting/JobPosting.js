@@ -1,6 +1,6 @@
 import React, {Component}   from 'react';
-import './JobPosting.css';
-
+import './JobPosting.css'; 
+import $ from 'jquery';
 import { FontAwesomeIcon }  from '@fortawesome/react-fontawesome';
 import Axios 				from 'axios';
 import Swal 				from 'sweetalert2';
@@ -10,7 +10,10 @@ import ClassicEditor 		from '@ckeditor/ckeditor5-build-classic';
 import PhoneInput 			from 'react-phone-input-2';
 import Moment 				from "moment";
 import TagsInput 			from 'react-tagsinput';
-
+import PlacesAutocomplete, {
+  geocodeByAddress,
+  getLatLng
+} from "react-places-autocomplete";
 import 'react-tagsinput/react-tagsinput.css';
 
 import 'react-phone-input-2/lib/style.css';
@@ -21,9 +24,20 @@ export default class JobPosting extends Component{
 		super(props);
 
 		this.state = {
-			jobTitle 				: 	"",
-			jobLocationCity 		: 	"",
-			jobLocationCountry 		: 	"",
+			jobTitle 				: "",
+			addressLine1 			: "",
+			addressLine2 			: "",
+			country 				: "",
+			state 					: "",
+			district 				: "",
+			city 					: "",
+			area 					: "",
+			pincode 				: "",
+			stateCode				:"",
+			countryCode 			:"",
+			stateArray 				: [],
+			districtArray 			: [],
+			pincodeExists 			: true,
 			/*industryId			: 	"",*/
 			functionalArea 			: 	"",
 			/*functionalAreaId 		: 	"",*/
@@ -87,45 +101,44 @@ export default class JobPosting extends Component{
 	}
 	
 	componentDidMount(){
+		this.getStates();
 		if(this.props.match.params.job_id){
 			let job_id = this.props.match.params.job_id;
 			Axios.get("/api/jobposting/get/one/"+job_id)
 			.then(response=>{
 				console.log("response.data : ", response.data);
 				this.setState({
-									job_id				: job_id,
-									jobTitle 			: response.data.jobsData.jobBasicInfo.jobTitle,
-									jobLocationCity 	: response.data.jobsData.jobBasicInfo.jobLocationCity,
-									country 			: response.data.jobsData.jobBasicInfo.country,
-									functionalArea 		: response.data.jobsData.jobBasicInfo.functionalArea,
-									subFunctionalArea 	: response.data.jobsData.jobBasicInfo.subFunctionalArea,
-									role 				: response.data.jobsData.jobBasicInfo.role,
-									gender 				: response.data.jobsData.jobBasicInfo.gender,
-									workFromHome 		: response.data.jobsData.jobBasicInfo.workFromHome,
-									jobType 			: response.data.jobsData.jobBasicInfo.jobType,
-									contactPersonName 	: response.data.jobsData.jobBasicInfo.contactPersonName,
-									contactPersonEmail 	: response.data.jobsData.jobBasicInfo.contactPersonEmail,
-									contactPersonPhone 	: response.data.jobsData.jobBasicInfo.contactPersonPhone,
-									jobTime 			: response.data.jobsData.jobBasicInfo.jobTime,
-									lastDateOfAppl      : response.data.jobsData.jobBasicInfo.lastDateOfAppl?Moment(response.data.jobsData.jobBasicInfo.lastDateOfAppl).format("YYYY-MM-DD"):"",
-									minSalary 			: response.data.jobsData.ctcOffered.minSalary,
-									minSalPeriod 		: response.data.jobsData.ctcOffered.minSalPeriod,
-									maxSalary 			: response.data.jobsData.ctcOffered.maxSalary,
-									maxSalPeriod		: response.data.jobsData.ctcOffered.maxSalPeriod,
-									jobDesc 			: response.data.jobsData.jobBasicInfo.jobDesc,
-									minEducation 		: response.data.jobsData.eligibility.minEducation,
-									minExperience 		: response.data.jobsData.eligibility.minExperience,
-									minPrimExp 			: response.data.jobsData.requiredSkills.minPrimExp,
-									minSecExp 			: response.data.jobsData.requiredSkills.minSecExp,
-									minOtherExp 		: response.data.jobsData.requiredSkills.minOtherExp,
-									submitBtnText 		: "UPDATE",
-							})
+					job_id				: job_id,
+					jobTitle 			: response.data.jobsData.jobBasicInfo.jobTitle,
+					functionalArea 		: response.data.jobsData.jobBasicInfo.functionalArea,
+					subFunctionalArea 	: response.data.jobsData.jobBasicInfo.subFunctionalArea,
+					role 				: response.data.jobsData.jobBasicInfo.role,
+					gender 				: response.data.jobsData.jobBasicInfo.gender,
+					workFromHome 		: response.data.jobsData.jobBasicInfo.workFromHome,
+					jobType 			: response.data.jobsData.jobBasicInfo.jobType,
+					contactPersonName 	: response.data.jobsData.jobBasicInfo.contactPersonName,
+					contactPersonEmail 	: response.data.jobsData.jobBasicInfo.contactPersonEmail,
+					contactPersonPhone 	: response.data.jobsData.jobBasicInfo.contactPersonPhone,
+					jobTime 			: response.data.jobsData.jobBasicInfo.jobTime,
+					lastDateOfAppl      : response.data.jobsData.jobBasicInfo.lastDateOfAppl?Moment(response.data.jobsData.jobBasicInfo.lastDateOfAppl).format("YYYY-MM-DD"):"",
+					minSalary 			: response.data.jobsData.ctcOffered.minSalary,
+					minSalPeriod 		: response.data.jobsData.ctcOffered.minSalPeriod,
+					maxSalary 			: response.data.jobsData.ctcOffered.maxSalary,
+					maxSalPeriod		: response.data.jobsData.ctcOffered.maxSalPeriod,
+					jobDesc 			: response.data.jobsData.jobBasicInfo.jobDesc,
+					minEducation 		: response.data.jobsData.eligibility.minEducation,
+					minExperience 		: response.data.jobsData.eligibility.minExperience,
+					minPrimExp 			: response.data.jobsData.requiredSkills.minPrimExp,
+					minSecExp 			: response.data.jobsData.requiredSkills.minSecExp,
+					minOtherExp 		: response.data.jobsData.requiredSkills.minOtherExp,
+					submitBtnText 		: "UPDATE",
+				})
 				
 				if(response.data.jobsData.jobBasicInfo.workFromHome === true){
-						document.getElementById("workFromHome").checked = true;
-					}else{
-						document.getElementById("workFromHome").checked = false;
-					}
+					document.getElementById("workFromHome").checked = true;
+				}else{
+					document.getElementById("workFromHome").checked = false;
+				}
 			})
 			
 			.catch(error=>	{
@@ -299,7 +312,17 @@ export default class JobPosting extends Component{
 		}
 		 return status;
 	}
-	
+	getStates() {
+		Axios.get("http://locations2.iassureit.com/api/states/get/list/IN")
+			.then((response) => {
+				this.setState({
+					stateArray: response.data
+				})
+				document.getElementById('Statedata').val(this.state.states);
+			})
+			.catch((error) => {
+			})
+	}
 	handleChange  = (event)=>{
 		var name  = event.currentTarget.name;
 		var value = event.currentTarget.value;
@@ -319,8 +342,6 @@ export default class JobPosting extends Component{
 		if(this.validateForm()){	
 		var formValues = {
 			jobTitle 			: 	this.state.jobTitle,
-			jobLocationCity		: 	this.state.jobLocationCity,
-			jobLocationCountry 	: 	this.state.jobLocationCountry,
 			functionalArea 		: 	this.state.functionalArea,
 			subFunctionalArea 	: 	this.state.subFunctionalArea,
 			role 				: 	this.state.role,
@@ -366,8 +387,6 @@ export default class JobPosting extends Component{
 					Swal.fire("Congrats","Your Data is Submitted Successfully","success");
 					this.setState({
 									jobTitle 			: "",
-									jobLocationCity 	: "",
-									jobLocationCountry 	: "",
 									functionalArea 		: "",
 									subFunctionalArea 	: "",
 									role 				: "",
@@ -428,9 +447,109 @@ export default class JobPosting extends Component{
     inputChange = tags => {
 		console.log(tags);
 		this.setState({ tags });
-	  };
-    	
-	render(){			
+	};
+	keyPressNumber = (e) => {
+		if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 189]) !== -1 ||
+			// Allow: Ctrl+A, Command+A
+			(e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) ||
+			(e.keyCode === 86 && (e.ctrlKey === true || e.metaKey === true)) ||
+			(e.keyCode === 67 && (e.ctrlKey === true || e.metaKey === true)) ||
+			// Allow: home, end, left, right, down, up
+			(e.keyCode >= 35 && e.keyCode <= 40) || e.keyCode === 189 || e.keyCode === 32) {
+			// let it happen, don't do anything
+			return;
+		}
+		// Ensure that it is a number and stop the keypress
+		if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 58)) && (e.keyCode < 96 || e.keyCode > 105 || e.keyCode === 190 || e.keyCode === 46)) {
+			e.preventDefault();
+		}
+	}
+	camelCase(str) {
+		return str
+			.toLowerCase()
+			.split(' ')
+			.map(word => word.charAt(0).toUpperCase() + word.slice(1))
+			.join(' ');
+	}
+	handleChangeState(event) {
+		const target = event.target;
+	    var designation = document.getElementById("states");
+    	var stateCode = designation.options[designation.selectedIndex].getAttribute("statecode");
+		this.setState({
+			[event.target.name]: event.target.value,
+			stateCode : stateCode
+		});
+	}
+    handleChangePlaces = address => {
+	    this.setState({ addressLine1 : address});
+	};
+
+	handleSelect = address => {
+
+    geocodeByAddress(address)
+     .then((results) =>{ 
+      	for (var i = 0; i < results[0].address_components.length; i++) {
+          	for (var b = 0; b < results[0].address_components[i].types.length; b++) {
+              	switch (results[0].address_components[i].types[b]) {
+                  case 'sublocality_level_1':
+                      var area = results[0].address_components[i].long_name;
+                      break;
+                  case 'sublocality_level_2':
+                      area = results[0].address_components[i].long_name;
+                      break;
+                  case 'locality':
+                      var city = results[0].address_components[i].long_name;
+                      break;
+                  case 'administrative_area_level_1':
+                      var state = results[0].address_components[i].long_name;
+                      var stateCode = results[0].address_components[i].short_name;
+                      break;
+                  case 'administrative_area_level_2':
+                      var district = results[0].address_components[i].long_name;
+                      break;
+                  case 'country':
+                     var country = results[0].address_components[i].long_name;
+                     var countryCode = results[0].address_components[i].short_name;
+                      break; 
+                  case 'postal_code':
+                     var pincode = results[0].address_components[i].long_name;
+                      break;
+                  default :
+                  		break;
+              }
+          	}
+      	}
+
+      console.log('state==>',state)
+
+      this.setState({
+        area : area,
+        city : city,
+        district : district,
+        states: state,
+        country:country,
+        pincode: pincode,
+        stateCode:stateCode,
+        countryCode:countryCode
+      })
+
+       
+    })
+     
+      .catch(error => console.error('Error', error));
+
+      geocodeByAddress(address)
+      .then(results => getLatLng(results[0]))
+      .then(latLng => this.setState({'latLng': latLng}))
+      .catch(error => console.error('Error', error));
+     
+      this.setState({ addressLine1 : address});
+  	};	
+	render(){	
+	const searchOptions = {
+      // types: ['(cities)'],
+      componentRestrictions: {country: "in"}
+    }		
 		return(
 			<div className="pageWrapper addJobBackgroundColor container-fluid">
 				<div className="row">
@@ -463,26 +582,55 @@ export default class JobPosting extends Component{
 										</div>
 										<div className="col-lg-6">
 											<div className="row row-no-gutters">
-												<div className="col-lg-8">
+												<div className="col-lg-12">
 													<label htmlFor="jobLocation" className="addjobformLable"> Job Location <span className="asterisk">&#42;</span> </label>
 													<div className="input-group">
 														<span className="input-group-addon addJobFormField"><FontAwesomeIcon className="locationIcon" icon={['fas', 'map-marker-alt']} /></span> 
-														<input type="text" className="form-control addJobFormField" name="jobLocationCity" id="jobLocationCity" value={this.state.jobLocationCity} onChange={this.handleChange}/>
+														<PlacesAutocomplete
+				                                        value={this.state.addressLine1}
+				                                        onChange={this.handleChangePlaces}
+				                                        onSelect={this.handleSelect}
+				                                        searchOptions={searchOptions}
+				                                      >
+				                                        {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+				                                          <div>
+				                                            <input
+				                                              {...getInputProps({
+				                                                placeholder: 'Search Address ...',
+				                                                className: 'location-search-input col-lg-12 form-control errorinputText',
+				                                                id:"addressLine1",
+				                                                name:"addressLine1"
+				                                              })}
+				                                            />
+				                                            <div className={this.state.addressLine1 ? "autocomplete-dropdown-container SearchListContainer" : ""}>
+				                                              {loading && <div>Loading...</div>}
+				                                              {suggestions.map(suggestion => {
+				                                                const className = suggestion.active
+				                                                  ? 'suggestion-item--active'
+				                                                  : 'suggestion-item';
+				                                                // inline style for demonstration purpose
+				                                                const style = suggestion.active
+				                                                  ? { backgroundColor: '#fafafa', cursor: 'pointer' }
+				                                                  : { backgroundColor: '#ffffff', cursor: 'pointer' };
+				                                                return (
+				                                                  <div
+				                                                    {...getSuggestionItemProps(suggestion, {
+				                                                      className,
+				                                                      style,
+				                                                    })}
+				                                                  >
+				                                                    <span>{suggestion.description}</span>
+				                                                  </div>
+				                                                );
+				                                              })}
+				                                            </div>
+				                                          </div>
+				                                        )}
+				                                      </PlacesAutocomplete>
 													</div>
 													<span id="jobLocationError" className="errorMsgJobPost"></span>
 												</div>
-												<div className="col-lg-4">
-													<label htmlFor="country" className="addjobformLable"> Country <span className="asterisk">&#42;</span> </label>
-													<select className="country form-control addJobFormField" name="country" id="country" value={this.state.country} onChange={this.handleChange}>
-												     	<option hidden> -- Select -- </option>
-												    	<option> India 	  </option>
-												    	<option> USA 	  </option>
-												    	<option> UK 	  </option>
-												    	<option> Sweeden  </option>
-												    	<option> Germany  </option>
-												    </select>
-												    <span id="countryError" className="errorMsgJobPost"></span>
-												</div>
+												
 											</div>
 										</div>
 									</div>
@@ -491,44 +639,49 @@ export default class JobPosting extends Component{
 								<div className="col-lg-12 addJobFieldRow text-left">
 									<div className="row">
 										<div className="col-lg-3">
-											<div className="row">
-												<label htmlFor="jobTitle" className="addjobformLable col-lg-12"> State
-													<span className="asterisk">&#42;</span>
-												</label>
-											</div>
+											<label htmlFor="functionalArea" className="addjobformLable"> State <span className="asterisk">&#42;</span> </label>
+											<div className="input-group">
+												<span className="input-group-addon addJobFormField"></span> 
+												<select className="form-control addJobFormField"  id="states"
+												ref="states" value={this.state.states} name="states" onChange={this.handleChangeState.bind(this)} >
+												<option selected={true}>-- Select --</option>
+												{
+													this.state.stateArray && this.state.stateArray.length > 0 ?
+														this.state.stateArray.map((stateData, index) => {
+															return (
+																<option key={index} statecode={stateData.stateCode}>{this.camelCase(stateData.stateName)}</option>
+															);
+														}
+														) : ''
+												}
+												</select>
+												<span id="functionalAreaError" className="errorMsgJobPost"></span>
+											</div>	
+										</div>	
+										
+										<div className="col-lg-3">
+											<label className="addjobformLable col-lg-12"> City
+												<span className="asterisk">&#42;</span>
+											</label>
 											<div className="input-group"> 
-												<input type="text" className="form-control addJobFormField  addJobState" name="jobTitle" id="jobTitle" value={this.state.jobTitle} onChange={this.handleChange}/>
+												<input type="text" className="form-control addJobFormField  addJobState" value={this.state.city} ref="city" name="city" onChange={this.handleChange}/>
 											</div>
 										</div>
 										<div className="col-lg-3">
-											<div className="row">
-												<label htmlFor="jobTitle" className="addjobformLable col-lg-12"> City
-													<span className="asterisk">&#42;</span>
-												</label>
-											</div>
+											<label className="addjobformLable col-lg-12"> District
+												<span className="asterisk">&#42;</span>
+											</label>
 											<div className="input-group"> 
-												<input type="text" className="form-control addJobFormField  addJobState" name="jobTitle" id="jobTitle" value={this.state.jobTitle} onChange={this.handleChange}/>
-											</div>
-										</div>
-										<div className="col-lg-3">
-											<div className="row">
-												<label htmlFor="jobTitle" className="addjobformLable col-lg-12"> District
-													<span className="asterisk">&#42;</span>
-												</label>
-											</div>
-											<div className="input-group"> 
-												<input type="text" className="form-control addJobFormField  addJobState" name="jobTitle" id="jobTitle" value={this.state.jobTitle} onChange={this.handleChange}/>
+												<input type="text" className="form-control addJobFormField  addJobState" value={this.state.district} ref="district" name="district" onChange={this.handleChange}/>
 											</div>
 											<span id="jobTitleError" className="errorMsgJobPost"></span>
 										</div>
 										<div className="col-lg-3">
-											<div className="row">
-												<label htmlFor="jobTitle" className="addjobformLable col-lg-12"> Pincode
-													<span className="asterisk">&#42;</span>
-												</label>
-											</div>
+											<label className="addjobformLable col-lg-12"> Pincode
+												<span className="asterisk">&#42;</span>
+											</label>
 											<div className="input-group"> 
-												<input type="text" className="form-control addJobFormField  addJobState" name="jobTitle" id="jobTitle" value={this.state.jobTitle} onChange={this.handleChange}/>
+												<input type="text" className="form-control addJobFormField  addJobState" value={this.state.pincode} ref="pincode" name="pincode" onKeyDown={this.keyPressNumber.bind(this)}/>
 											</div>
 											<span id="jobTitleError" className="errorMsgJobPost"></span>
 										</div>

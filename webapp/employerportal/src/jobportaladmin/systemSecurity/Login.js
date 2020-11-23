@@ -98,78 +98,85 @@ class Login extends Component {
         axios.post('/api/auth/post/loginwithcompanyid', auth)
           .then((response) => {
             console.log("response login",response);
-            if (response.data.ID) {
-              this.setState({ btnLoading: false });
-              var  userDetails = {
-              firstName : response.data.userDetails.firstName, 
-              lastName  : response.data.userDetails.lastName, 
-              email     : response.data.userDetails.email, 
-              phone     : response.data.userDetails.phone, 
-              city      : response.data.userDetails.city,
-              company_id : response.data.userDetails.company_id,
-              companyID : response.data.userDetails.companyID,
-              companyName : response.data.userDetails.companyName,
-              locationID: response.data.userDetails.locationID,
-              user_id   : response.data.userDetails.user_id,
-              roles     : response.data.userDetails.roles,
-              passwordreset: response.data.userDetailspasswordreset,
-              token     : response.data.userDetails.token, 
-              //loginTime : response.data.userDetails.loginTime, 
-            }
 
-            
-            localStorage.setItem("token", response.data.token);
-            localStorage.setItem("user_ID", response.data.ID);
-            localStorage.setItem("roles", response.data.roles);
-            localStorage.setItem("loginTime", response.data.loginTime);
-            localStorage.setItem('userDetails', JSON.stringify(userDetails));
-            localStorage.setItem("company_Id",response.data.userDetails.company_id); 
-            localStorage.setItem("companyID", response.data.userDetails.companyID);
+            axios.get('/api/entitymaster/getEntity/'+response.data.userDetails.company_id)
+            .then((resp) => {
+              console.log("resp login",resp);
+              if (response.data.ID) {
+                this.setState({ btnLoading: false });
+                var  userDetails = {
+                firstName : response.data.userDetails.firstName, 
+                lastName  : response.data.userDetails.lastName, 
+                email     : response.data.userDetails.email, 
+                phone     : response.data.userDetails.phone, 
+                city      : response.data.userDetails.city,
+                company_id : response.data.userDetails.company_id,
+                companyID : response.data.userDetails.companyID,
+                companyName : response.data.userDetails.companyName,
+                locationID: response.data.userDetails.locationID,
+                user_id   : response.data.userDetails.user_id,
+                roles     : response.data.userDetails.roles,
+                passwordreset: response.data.userDetailspasswordreset,
+                token     : response.data.userDetails.token, 
+                //loginTime : response.data.userDetails.loginTime, 
+              }
+
+              
+              localStorage.setItem("token", response.data.token);
+              localStorage.setItem("user_ID", response.data.ID);
+              localStorage.setItem("roles", response.data.roles);
+              localStorage.setItem("loginTime", response.data.loginTime);
+              localStorage.setItem('userDetails', JSON.stringify(userDetails));
+              localStorage.setItem("company_Id",response.data.userDetails.company_id); 
+              localStorage.setItem("companyID", response.data.userDetails.companyID);
+              localStorage.setItem("industry_id",resp.data.industry_id); 
 
               this.setState({
-                loggedIn: true
-              }, () => {
-                if (response.data.userDetails.company_id) {
-                   window.location.href='/'
-                }else{
-                  window.location.href= '/corporate/basic-details'
-                }
-                
-              })
-            } else if (response.data.message === "USER_BLOCK") {
-              swal({
-                text: "You are blocked by admin. Please contact Admin."
-              });
-              
-            } else if (response.data.message === "NOT_REGISTER") {
-              swal({
-                text: "This Email ID is not registered. Please try again."
-              });
-             
-            } else if (response.data.message === "INVALID_PASSWORD") {
-              swal({
-                text: "You have entered wrong password. Please try again."
-              });
-              
-            } else if (response.data.message === "USER_UNVERIFIED") {
-              swal({
-                text: "You have not verified your account. Please verify your account."
-              })
-                .then((value) => {
-                  var emailText = {
-                    "emailSubject": "Email Verification",
-                    "emailContent": "As part of our registration process, we screen every new profile to ensure its credibility by validating email provided by user. While screening the profile, we verify that details put in by user are correct and genuine.",
+                  loggedIn: true
+                }, () => {
+                  if (response.data.userDetails.company_id) {
+                     window.location.href='/'
+                  }else{
+                    window.location.href= '/corporate/basic-details'
                   }
-                  axios.patch('/api/auth/patch/setsendemailotpusingEmail/' + this.refs.loginusername.value, emailText)
-                    .then((response) => {
-                      swal("We send you a Verification Code to your registered email. Please verify your account.");
-                      this.props.history.push("/confirm-otp/" + response.data.userID);
-                    })
-                    .catch((error) => {
-                      swal(" Failed to sent OTP");
-                    })
+                  
+                })
+              } else if (response.data.message === "USER_BLOCK") {
+                swal({
+                  text: "You are blocked by admin. Please contact Admin."
                 });
-            }
+                
+              } else if (response.data.message === "NOT_REGISTER") {
+                swal({
+                  text: "This Email ID is not registered. Please try again."
+                });
+               
+              } else if (response.data.message === "INVALID_PASSWORD") {
+                swal({
+                  text: "You have entered wrong password. Please try again."
+                });
+                
+              } else if (response.data.message === "USER_UNVERIFIED") {
+                swal({
+                  text: "You have not verified your account. Please verify your account."
+                })
+                  .then((value) => {
+                    var emailText = {
+                      "emailSubject": "Email Verification",
+                      "emailContent": "As part of our registration process, we screen every new profile to ensure its credibility by validating email provided by user. While screening the profile, we verify that details put in by user are correct and genuine.",
+                    }
+                    axios.patch('/api/auth/patch/setsendemailotpusingEmail/' + this.refs.loginusername.value, emailText)
+                      .then((response) => {
+                        swal("We send you a Verification Code to your registered email. Please verify your account.");
+                        this.props.history.push("/confirm-otp/" + response.data.userID);
+                      })
+                      .catch((error) => {
+                        swal(" Failed to sent OTP");
+                      })
+                  });
+              }
+            })
+            .catch((error) => {});
           })
           .catch((error) => {
             console.log("error", error);

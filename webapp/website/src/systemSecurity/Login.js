@@ -31,18 +31,7 @@ class Login extends Component {
   }
 
 
-  showPassword=(event)=>{
-    event.preventDefault();
-    alert();
-    var passwordToggle = document.getElementById("password");
-    if (passwordToggle.type === "password") {
-        passwordToggle.type = "text";
-        this.setState({showPassword:true});
-      } else {
-        passwordToggle.type = "password";
-        this.setState({showPassword:false});
-      }
-  }
+  
 
   validateForm=()=>{
     var status = true;
@@ -86,7 +75,18 @@ class Login extends Component {
       });    
   }
 
-  
+  showPassFun=(event)=>{
+    event.preventDefault();
+    alert();
+    var passwordToggle = document.getElementById("password");
+    if (passwordToggle.type === "password") {
+        passwordToggle.type = "text";
+        this.setState({showPassword:true});
+      } else {
+        passwordToggle.type = "password";
+        this.setState({showPassword:false});
+      }
+  }
   userlogin(event) {
       event.preventDefault();
       var auth = {
@@ -279,9 +279,9 @@ class Login extends Component {
                     <div className="input-group">
                       <span className="input-group-addon loginInputIcon2"><i className="fa fa-lock"></i></span>
                       <input type="password" id="password" name="password" placeholder="Password" value={this.state.password} ref="loginpassword" onChange={this.handleChange.bind(this)} className="form-control loginInputBox"/>
-                      <span className="input-group-addon loginInputIcon3">
+                      <span className="input-group-addon loginInputIcon3" onClick={this.showPassFun.bind(this)}>
                       <i className={this.state.showPassword ? "fa fa-eye-slash" : "fa fa-eye"} 
-                         onClick={this.showPassword.bind(this)} value={this.state.showPassword}></i></span>
+                          value={this.state.showPassword}></i></span>
                     </div>
                     <span id="passwordError" className="errorMsg"></span>
                   </div>

@@ -142,24 +142,9 @@ export default class AdminDashboard extends Component{
               <ul className="treeview-menu" >
                 <li className="noPadLR"> 
                   <a href="/user-report" data-id="/user-report" onClick={this.activeMenu.bind(this)} title="User Report">
-                    <i className="fa fa-circle-o dashr" />User Report
+                    <i className="fa fa-circle-o dashr" /> Report
                   </a> 
-                </li>  
-              <li className="noPadLR"> 
-                  <a href="/corporate-report" data-id="/corporate-report" title="corporate Report" onClick={this.activeMenu.bind(this)}>
-                    <i className="fa fa-circle-o dashr" />Employer Report
-                  </a> 
-                </li>    
-               <li className="noPadLR"> 
-                  <a href="/vendor-report" data-id="/vendor-report" title="Vendor Report" onClick={this.activeMenu.bind(this)}>
-                    <i className="fa fa-circle-o dashr" />Vendor Report
-                  </a> 
-                </li>  
-                <li className="noPadLR"> 
-                  <a href="/employee-report" data-id="/employee-report" title="Employee Report" onClick={this.activeMenu.bind(this)}>
-                    <i className="fa fa-circle-o dashr" />Employee Report
-                  </a> 
-                </li>               
+                </li>        
               </ul>
             </li>
             <li className="treeview" >
