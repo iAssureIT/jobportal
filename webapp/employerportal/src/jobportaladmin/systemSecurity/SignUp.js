@@ -368,7 +368,7 @@ class SignUp extends Component {
     return (
       
       <section className="container-fluid registrationFormWrapper">
-          <div className="registrationForm col-lg-10 col-lg-offset-1">
+          <div className="registrationForm col-lg-6 col-lg-offset-3">
             <form>
 
               <div className="signUpTitle col-lg-12">Sign Up

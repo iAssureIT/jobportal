@@ -31,7 +31,18 @@ class Login extends Component {
   }
 
 
-  
+
+  showPassword=(event)=>{
+    event.preventDefault();
+    var passwordToggle = document.getElementById("password");
+    if (passwordToggle.type === "password") {
+        passwordToggle.type = "text";
+        this.setState({showPassword:true});
+      } else {
+        passwordToggle.type = "password";
+        this.setState({showPassword:false});
+      }
+  }
 
   validateForm=()=>{
     var status = true;

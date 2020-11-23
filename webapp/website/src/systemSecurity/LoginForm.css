@@ -267,17 +267,17 @@
 .img3Login{
 	position: absolute;
 	height: 290px;
-	width: 120px;
+	width: 110px;
 	
 	top:250px;
-	left:67%;
+	left:69%;
 	z-index: 1;
 	
 }
 
 .img3loginInner{
 	height: 290px;
-	width: 120px;
+	width: 110px;
 }
 
 

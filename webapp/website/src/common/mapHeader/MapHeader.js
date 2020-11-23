@@ -14,7 +14,7 @@ class MapHeader extends Component{
 		super(props);
 		this.state={
 			showLoginModal: false,
-			asideDisplay  : "none",
+			asideDisplay  : "-600px",
 			
 		}
 		this.handleOpenModal = this.handleOpenModal.bind(this);
@@ -29,15 +29,15 @@ class MapHeader extends Component{
 	}
   	asideBar(event){
 
-		if(this.state.asideDisplay==="none"){
+		if(this.state.asideDisplay==="-600px"){
 	
 			this.setState({
-			asideDisplay  : "block",
+			asideDisplay  : "15px",
 			})
 		}
 		else{
 			this.setState({
-			asideDisplay  : "none",
+			asideDisplay  : "-600px",
 			})
 		}
 	}
@@ -86,34 +86,46 @@ class MapHeader extends Component{
 		     		</div>
 		     	</div>
 
-		     	<div className="barsToggel pull-right" id="barsToggel" style={{display:this.state.asideDisplay}}>
+		     	<div className="functionalbarsToggel" id="barsToggel" style={{top:this.state.asideDisplay}}>
 
-					<div className="notificationMessege col-lg-12">
-						<FontAwesomeIcon icon="search" />
-						<span className="notificationMessegeText">Companies</span>
-					</div>
-					<div className="notificationMessege col-lg-12">
-						<FontAwesomeIcon icon="users" />
-						<span className="notificationMessegeText">Recruiters</span>
-					</div>
-					<div className="notificationMessege col-lg-12">
-						<FontAwesomeIcon icon="search" />
-						<span className="notificationMessegeText">Services</span>
-					</div>
-					<div className="notificationMessege col-lg-12">
-						<FontAwesomeIcon icon="file-alt" />
-						<span className="notificationMessegeText">About Us</span>
-					</div>
-					<div className="notificationMessege col-lg-12">
-						<FontAwesomeIcon icon="file-alt" />
-						<span className="notificationMessegeText">Contact Us</span>
-					</div>
-					<div className="notificationMessege col-lg-12" data-toggle="modal" data-target="#loginModal">
-						<FontAwesomeIcon icon="sign-out-alt" />
-						<span className="notificationMessegeText">Sign In</span>
-					</div>
+	     				<div className="functionalbarsCross col-lg-12">
+							
+							<span className="notificationMessegeCross" onClick={this.asideBar.bind(this)}> X </span>
+						</div>
 
-				</div>
+
+						<div className="functionalbarsItem col-lg-12">
+							
+							<span className="notificationMessegeText">Jobs </span>
+						</div>
+						<div className="functionalbarsItem col-lg-12">
+							
+							<span className="notificationMessegeText">Companies</span>
+						
+						</div>
+						<div className="functionalbarsItem col-lg-12">
+							
+							<span className="notificationMessegeText">Recruiters</span>
+							
+						</div>
+						<div className="functionalbarsItem col-lg-12">
+							
+							<span className="notificationMessegeText">About Us</span>
+							
+						</div>
+
+						<div className="functionalbarsItem col-lg-12">
+							
+							<span className="notificationMessegeText">Contact Us</span>
+							
+						</div>
+						
+						<div className="functionalbarsItem col-lg-12" data-toggle="modal" data-target="#loginModal">
+							<FontAwesomeIcon icon="sign-out-alt" />
+							<span className="notificationMessegeText">Sign In</span>
+						</div>
+
+					</div>
 				<div className="modal" id="loginModal" role="dialog" tabIndex="-1">
 				    <div className="modal-dialog  modal-lg">
 					    <div className="modal-body">

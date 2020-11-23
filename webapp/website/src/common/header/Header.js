@@ -7,7 +7,7 @@ class Header extends Component{
     super(props);
     this.state={
       profileDisplay  : "none",
-      asideDisplay  : "none",
+      asideDisplay  : "-600px",
       notificationDisplay  : "none",
     }
   }
@@ -27,15 +27,15 @@ class Header extends Component{
   }
   asideBar(event){
 
-    if(this.state.asideDisplay==="none"){
+    if(this.state.asideDisplay==="-600px"){
   
       this.setState({
-      asideDisplay  : "block",
+      asideDisplay  : "15px",
       })
     }
     else{
       this.setState({
-      asideDisplay  : "none",
+      asideDisplay  : "-600px",
       })
     }
   }
@@ -139,33 +139,46 @@ class Header extends Component{
                     <FontAwesomeIcon icon="align-right" />
                   </div>
                 </div>
-                <div className="barsToggel pull-right" id="barsToggel" style={{display:this.state.asideDisplay}}>
-                  <a href="search-jobs"><div className="notificationMessege col-lg-12">
-                    <FontAwesomeIcon icon="bag" />
-                    <span className="notificationMessegeText">Search Jobs</span>
-                  </div></a>
-                  <a href="search-jobs"><div className="notificationMessege col-lg-12">
-                    <FontAwesomeIcon icon="bag" />
-                    <span className="notificationMessegeText">My Applied Jobs</span>
-                  </div></a>
-                  <a href="wishlist"><div className="notificationMessege col-lg-12">
-                    <FontAwesomeIcon icon="bag" />
-                    <span className="notificationMessegeText">My Wishlist</span>
-                  </div></a>
-                  <div className="notificationMessege col-lg-12">
-                     
-                      <span className="notificationMessegeText">Recruiters</span>
-                  </div>
-                  <div className="notificationMessege col-lg-12">
-                      <FontAwesomeIcon icon="mobile" />
-                      <span className="notificationMessegeText">Companies</span>
-                  </div>
-                  <div className="notificationMessege col-lg-12">
-                      <FontAwesomeIcon icon="mobile" />
-                      <span className="notificationMessegeText">Employer Login</span>
-                  </div>                    
-                  
-                </div>
+                <div className="functionalbarsToggel" id="barsToggel" style={{top:this.state.asideDisplay}}>
+
+              <div className="functionalbarsCross col-lg-12">
+              
+              <span className="notificationMessegeCross" onClick={this.asideBar.bind(this)}> X </span>
+            </div>
+
+
+            <div className="functionalbarsItem col-lg-12">
+              
+              <span className="notificationMessegeText">Jobs </span>
+            </div>
+            <div className="functionalbarsItem col-lg-12">
+              
+              <span className="notificationMessegeText">Companies</span>
+            
+            </div>
+            <div className="functionalbarsItem col-lg-12">
+              
+              <span className="notificationMessegeText">Recruiters</span>
+              
+            </div>
+            <div className="functionalbarsItem col-lg-12">
+              
+              <span className="notificationMessegeText">About Us</span>
+              
+            </div>
+
+            <div className="functionalbarsItem col-lg-12">
+              
+              <span className="notificationMessegeText">Contact Us</span>
+              
+            </div>
+            
+            <div className="functionalbarsItem col-lg-12" data-toggle="modal" data-target="#loginModal">
+              <FontAwesomeIcon icon="sign-out-alt" />
+              <span className="notificationMessegeText">Sign In</span>
+            </div>
+
+          </div>
                 
               </div>
 

@@ -1,4 +1,4 @@
-font-face {
+ont-face {
   font-family:'Montserrat-Regular';
   src: url('/fonts/Montserrat/Montserrat-Regular.ttf');
 }
@@ -9,32 +9,33 @@ font-face {
 }
 
 .FunctionalHeaderWrapper{
-	height: 150px;
+	height: 100px;
 	background-color: #1f262d;
+	margin-bottom: 0px !important;
 }
 
 .iconHeader{
-	height: 120px;
-	padding-top: 40px;
+	height: 100px;
+	padding-top: 30px;
 	padding-left: 0%;
 	/*background-color: pink;*/
 }
 
 .breadCrumbHeader{
-	height: 120px;
+	height: 100px;
 	color: #ddd;
 	text-align: left;
-	padding-top: 70px;
+	padding-top: 50px;
 	font-size: 11px;
 	font-family: 'Montserrat-Regular';
 	/*background-color: blue;*/
 }
 
 .FunctionWiseTitle{
-	height: 120px;
+	height: 100px;
 	color: #ddd;
 	text-align: left;
-	padding-top: 60px;
+	padding-top: 40px;
 	/*padding-left: 20px;*/
 	font-size: 28px;
 	color: #f5a721;
@@ -43,12 +44,12 @@ font-face {
 }
 .rightFunctionHeader{
 	/*background-color: yellow;*/
-	height: 120px;
+	height: 100px;
 }
 
 .rightFunctionHeader1{
 	/*background-color:pink;*/
-	height: 120px;
+	height: 100px;
 }
 .rightFunctionHeader2{
 	/*background-color: blue;*/
@@ -94,7 +95,7 @@ font-face {
 }
 .rightFunctionHeader1CityJobs{
 	width: 100%;
-	height: 100px;
+	height: 85px;
 	margin-top: 20px;
 	background-color: #242933;
 	border: 1px solid #999;
@@ -105,10 +106,10 @@ font-face {
 	width: 100%;
 	height: 40px;
 	color: #eee;
-	font-size: 22px;
+	font-size: 20px;
 	font-weight: bold;
 	text-align: center;
-	padding-top: 15px;
+	padding-top: 10px;
 	font-family: 'Montserrat-Bold';
 	
 }
@@ -117,10 +118,10 @@ font-face {
 	width: 100%;
 	height: 50px;
 	color: #f5a721;
-	font-size: 28px;
+	font-size: 25px;
 	font-weight: bold;
 	text-align: center;
-	padding-bottom: 10px;
+/*	padding-bottom: 10px;*/
 	font-family: 'Montserrat-Regular';
 }
 
@@ -137,10 +138,13 @@ font-face {
 	float: right;
 	
 }
+.headerMenu1:hover{
+	cursor: pointer;
+}
 
 .headerMenu2{
 	width: 100%;
-	height: 50px;
+	height: 30px;
 	margin-top: 20px;
 }
 
@@ -157,17 +161,20 @@ font-face {
 
 }
 
-.barsToggel{
-	position: absolute;
-	top:60px;
-	right:14px;
-	width:200px;
+.functionalbarsToggel{
+	position: fixed;
+    right: 15px;
+    width: auto;
+    min-width: 1250px;
 	height: auto;
-	min-height: 50px;
+	min-height: 600px;
 	background-color: #191c24;
-	z-index:3;
+	z-index:300;
 	margin-top:0px;
 	border:1px solid #4b5666;
+	transition: 1s;
+	transition-timing-function: ease;
+
 }
 .notificationBox{
 	position: relative;
@@ -181,27 +188,52 @@ font-face {
 	
 }
 
-.notificationMessege{
-	height:40px;
-
-	font-size:12px;
-	
+.functionalbarsItem{
+	height:70px;
+	font-size:30px;
+	font-family: 'Montserrat-Bold';
 	padding-top:10px;
 	padding-bottom: 15px;
-	text-align:left;
+	text-align:center;
+	color: #aaa;	
+}
 
+.functionalbarsCross{
+	height:80px;
+	padding-top:15px;
+	padding-bottom: 15px;
+	margin-bottom: 50px;
+	text-align:right;
 	
 }
 
 .notificationMessegeText{
 	margin-left:12px;
-	font-size: 14px;
-	font-family: 'Montserrat-Regular';
+	/*font-size:30px;
+	font-family: 'Montserrat-Regular';*/
 }
 
-.notificationMessege:hover{
-	cursor: pointer;
-	background-color: #1f262d;
+.notificationMessegeCross{
+	padding :10px;
+	padding-bottom: 5px;
+	font-size:30px;
+	border-bottom: 5px solid transperant;
+	color: var(--main-txt-color);
+	font-family: 'Montserrat-Bold';	
+}
 
+.notificationMessegeCross:hover{
+	border-bottom: 5px solid #fff;
+	color:#fff;
+	cursor: pointer;
+}
+
+.functionalbarsItem:hover{
+	cursor: pointer;
+	font-size: 40px;
+	color: #fff;
+	padding-top: 5px;
+	transition: 0.3s;
+	cursor: pointer;
 }
 
