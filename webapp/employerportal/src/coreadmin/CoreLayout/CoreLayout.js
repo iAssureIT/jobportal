@@ -55,7 +55,6 @@ class CoreLayout extends Component {
                 <Route path="/ViewAllNotification" component={ViewAllNotification} exact />
                 <Route path="/EventToken" component={EventToken} exact />
 
-<<<<<<< HEAD
                 { /* Driver Master */}
                
 

@@ -10,6 +10,7 @@ import ClassicEditor 		from '@ckeditor/ckeditor5-build-classic';
 import PhoneInput 			from 'react-phone-input-2';
 import Moment 				from "moment";
 import TagsInput 			from 'react-tagsinput';
+
 import PlacesAutocomplete, {
   		geocodeByAddress,
   		getLatLng
@@ -39,45 +40,48 @@ export default class JobPosting extends Component{
 			stateArray 				: [],
 			districtArray 			: [],
 			pincodeExists 			: true,
-			/*industryId			: 	"",*/
-			functionalArea 			: 	"",
-			/*functionalAreaId 		: 	"",*/
-			subFunctionalArea 		: 	"",
-			/*subFunctionalAreaId 	: 	"",*/
-			role 					: 	"",
-			gender             		: 	"Male Only",
-			workFromHome 			: 	"",
-			contactPersonName 		: 	"",
-			contactPersonEmail		:   "",
-			contactPersonPhone		:   "",
-			jobType 				: 	"",
-			jobTypeArray			: 	[],
-			jobTime 				: 	"",
-			lastDateOfAppl 			: 	"",
-			minSalary 				: 	"",
-			minSalPeriod 			: 	"",
-			maxSalary 				: 	"",
-			maxSalPeriod			: 	"",
-			jobDesc 				: 	"",
-			minEducation 			: 	"",
-			minExperience 			: 	"",
-			priSkillsArray 			: 	[],
-			minPrimExp	    		: 	"", 
-			secSkillsArray 			: 	[],
-			minSecExp				: 	"", 
-			otherSkillsArray 		: 	[],
-			minOtherExp				: 	"", 
-			preferSkillsArray 		: 	[],
-			minExpRequiredPre		: 	"",
-			industryList			: 	[],
-			functionalArealist 		: 	[],
-			subFunctionalAreaList	: 	[],
-			priSkillsArraylist 		: 	[],
-			secSkillsArraylist 		: 	[],
-			otherSkillsArraylist	: 	[],
-			preferSkillsArraylist	: 	[],
-			tags                    :   [],
-			submitBtnText 			: 	"SUBMIT",		      
+			/*industryId			: "",*/
+			functionalArea 			: "",
+			/*functionalAreaId 		: "",*/
+			subFunctionalArea 		: "",
+			/*subFunctionalAreaId 	: "",*/
+			role 					: "",
+			gender             		: "Male Only",
+			workFromHome 			: "",
+			contactPersonName 		: "",
+			contactPersonEmail		: "",
+			contactPersonPhone		: "",
+			jobType 				: "",
+			jobTypeArray			: [],
+			jobTime 				: "",
+			jobTimeArray 			: [],
+			jobCategory 			: "",
+			jobCategoryArray 		: [],
+			lastDateOfAppl 			: "",
+			minSalary 				: "",
+			minSalPeriod 			: "",
+			maxSalary 				: "",
+			maxSalPeriod			: "",
+			jobDesc 				: "",
+			minEducation 			: "",
+			minExperience 			: "",
+			priSkillsArray 			: [],
+			minPrimExp	    		: "", 
+			secSkillsArray 			: [],
+			minSecExp				: "", 
+			otherSkillsArray 		: [],
+			minOtherExp				: "", 
+			preferSkillsArray 		: [],
+			minExpRequiredPre		: "",
+			industryList			: [],
+			functionalArealist 		: [],
+			subFunctionalAreaList	: [],
+			priSkillsArraylist 		: [],
+			secSkillsArraylist 		: [],
+			otherSkillsArraylist	: [],
+			preferSkillsArraylist	: [],
+			tags                    : [],
+			submitBtnText 			: "SUBMIT",		      
 		}
 
 		this.inputRef = React.createRef()
@@ -121,6 +125,7 @@ export default class JobPosting extends Component{
 					contactPersonEmail 	: response.data.jobsData.jobBasicInfo.contactPersonEmail,
 					contactPersonPhone 	: response.data.jobsData.jobBasicInfo.contactPersonPhone,
 					jobTime 			: response.data.jobsData.jobBasicInfo.jobTime,
+					jobCategory 		: response.data.jobsData.jobBasicInfo.jobCategory,
 					lastDateOfAppl      : response.data.jobsData.jobBasicInfo.lastDateOfAppl?Moment(response.data.jobsData.jobBasicInfo.lastDateOfAppl).format("YYYY-MM-DD"):"",
 					minSalary 			: response.data.jobsData.ctcOffered.minSalary,
 					minSalPeriod 		: response.data.jobsData.ctcOffered.minSalPeriod,
@@ -175,6 +180,28 @@ export default class JobPosting extends Component{
 									this.setState({jobTypeArray : response.data
 								});
 									console.log("jobTypeArray", this.state.jobTypeArray);
+								})
+			.catch(error=>	{
+								Swal.fire("Error while getting List data",error.message,'error');
+							})
+
+		Axios.get("http://qaapi-jobportal.iassureit.in/api/JobTimeMaster/get/list")
+			.then(response=> 	{
+									console.log("getfunctionalAreaData response.data = ", response.data);
+									this.setState({jobTimeArray : response.data
+								});
+									console.log("jobTimeArray", this.state.jobTimeArray);
+								})
+			.catch(error=>	{
+								Swal.fire("Error while getting List data",error.message,'error');
+							})	
+
+		Axios.get("http://qaapi-jobportal.iassureit.in/api/jobcategorymaster/get/list")
+			.then(response=> 	{
+									console.log("getfunctionalAreaData response.data = ", response.data);
+									this.setState({jobCategoryArray : response.data
+								});
+									console.log("jobCategoryArray", this.state.jobCategoryArray);
 								})
 			.catch(error=>	{
 								Swal.fire("Error while getting List data",error.message,'error');
@@ -353,6 +380,7 @@ export default class JobPosting extends Component{
 			contactPersonPhone  :   this.state.contactPersonPhone,
 			jobType 			: 	this.state.jobType,
 			jobTime 			: 	this.state.jobTime,
+			jobCategory 		: 	this.state.jobCategory,
 			lastDateOfAppl 		: 	this.state.lastDateOfAppl,
 			minSalary 			: 	this.state.minSalary,
 			minSalPeriod 		: 	this.state.minSalPeriod,
@@ -398,6 +426,7 @@ export default class JobPosting extends Component{
 									contactPersonPhone 	: "",
 									jobType 			: "",
 									jobTime 			: "",
+									jobCategory 		: "",
 									lastDateOfAppl 		: "",
 									minSalary 			: "",
 									minSalPeriod 		: "",
@@ -808,9 +837,18 @@ export default class JobPosting extends Component{
 											<div className="input-group">
 												<span className="input-group-addon addJobFormField"><FontAwesomeIcon icon={['fas', 'business-time']} /></span> 
 												<select name="jobTime" className="form-control addJobFormField" id="jobTime" value={this.state.jobTime} onChange={this.handleChange}>
-											    	<option hidden> -- Select -- </option>
-											    	<option> Day Shift   </option>
-											    	<option> Night Shift </option>
+											    	<option hidden> -- Select -- </option>	
+											    	{
+														this.state.jobTimeArray!=null && this.state.jobTimeArray.length > 0 
+														?
+															this.state.jobTimeArray.map((elem,index)=>{
+																return(
+																	<option value={elem._id} key={index}> {elem.jobTime} </option>
+																);
+															})
+														:
+															<option> -- Select -- </option>
+													}
 												</select>
 											</div>
 										</div>
@@ -819,9 +857,18 @@ export default class JobPosting extends Component{
 											<div className="input-group">
 												<span className="input-group-addon addJobFormField"><i className="fa fa-list-alt"></i></span> 
 												<select name="jobCategory" className="form-control addJobFormField" id="jobCategory" value={this.state.jobCategory} onChange={this.handleChange}>
-											    	<option hidden> -- Select -- </option>
-											    	<option> Part Time </option>
-											    	<option> Full Time </option>
+											    	<option hidden> -- Select -- </option>	
+											    	{
+														this.state.jobCategoryArray!=null && this.state.jobCategoryArray.length > 0 
+														?
+															this.state.jobCategoryArray.map((elem,index)=>{
+																return(
+																	<option value={elem._id} key={index}> {elem.jobCategory} </option>
+																);
+															})
+														:
+															<option> -- Select -- </option>
+													}		   
 												</select>
 											</div>
 										</div>
