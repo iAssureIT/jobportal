@@ -4,7 +4,8 @@ const initialState = {
 	selectedCountry				: "India",
 	selectedState 				: "",
 	selectedDistrict 			: "",
-	selectedModal 				: "login" 
+	selectedModal 				: "login",
+	userID 						: "" 
 }
 
 const reducer = (state = initialState,action) => {
@@ -21,6 +22,11 @@ const newState = {...state};
 	if(action.type === "SET_MODAL"){
 		newState.selectedModal 	= action.selectedModal;
 	}
+	if(action.type === "SET_USERID"){
+		newState.userID 	= action.userID;
+	}
+	
+	
 return newState;
 }
 

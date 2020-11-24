@@ -196,7 +196,7 @@ class SignUp extends Component {
       }
 
       
-    console.log('auth sign=======',auth)
+    console.log('auth sign=======',auth) 
 
       axios.post('/api/auth/post/signup/user/otp', auth)
         .then((response) => {

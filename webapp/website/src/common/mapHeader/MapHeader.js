@@ -4,6 +4,8 @@ import '../functionalHeader/FunctionalHeader.css';
 import LoginForm from '../../systemSecurity/Login.js';
 import SignUp from '../../systemSecurity/SignUp.js';
 import ForgotPassword from '../../systemSecurity/ForgotPassword.js';
+import ConfirmOtp from '../../systemSecurity/ConfirmOtp.js';
+import ResetPass from '../../systemSecurity/ResetPassword.js'
 import {connect}            from 'react-redux';
 import { bindActionCreators } from 'redux';
 import  * as mapActionCreator from '../../common/actions/index';
@@ -134,6 +136,8 @@ class MapHeader extends Component{
 				                {this.props.selectedModal == "login" ? <LoginForm/> : null }
 				                {this.props.selectedModal == "signup" ? <SignUp/> : null }
 				                {this.props.selectedModal == "forgotpassword" ? <ForgotPassword/> : null }
+				                {this.props.selectedModal == "confirmotp" ? <ConfirmOtp/> : null }
+				                {this.props.selectedModal == "resetpass" ? <ResetPass/> : null }
 				        	</section>
 					    </div>
 					</div>
