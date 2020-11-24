@@ -7,3 +7,7 @@ export const setSelectedModal = (selectedModal )=> ({
       type: 'SET_MODAL',
       selectedModal: selectedModal
 });
+export const setUserID = (userID )=> ({
+      type: 'SET_USERID',
+      userID: userID
+});

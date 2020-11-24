@@ -12,6 +12,7 @@ import swal from 'sweetalert';
 import axios from 'axios';
 import { connect }        from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { withRouter }   from 'react-router-dom';
 import  * as mapActionCreator from '../common/actions/index';
 
 class SignUp extends Component {
@@ -188,7 +189,7 @@ class SignUp extends Component {
 			}
 
 			
-		console.log('auth sign=======',auth)
+		  console.log('auth sign=======',auth)
 
 			axios.post('/api/auth/post/signup/user/otp', auth)
 				.then((response) => {
@@ -196,7 +197,13 @@ class SignUp extends Component {
 					if(response.data.message == 'USER_CREATED'){
 						swal('Great, Information submitted successfully and OTP is sent to your registered Email.');
 						localStorage.setItem('previousUrl' ,'signup');
-						this.props.history.push("/confirm-otp/" + response.data.ID);
+
+            var {mapAction} = this.props;
+            mapAction.setUserID(response.data.ID);
+            mapAction.setSelectedModal("confirmotp");
+            
+
+						//this.props.history.push("/confirm-otp/" + response.data.ID);
 					}else{
 						swal(response.data.message);
 					}	

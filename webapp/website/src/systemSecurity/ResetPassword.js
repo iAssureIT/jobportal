@@ -4,6 +4,10 @@ import jQuery from 'jquery';
 import swal from 'sweetalert';
 import axios from 'axios';
 import './ResetPassword.css';
+import { connect }        from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { withRouter }   from 'react-router-dom';
+import  * as mapActionCreator from '../common/actions/index';
 
 class ResetPassword extends Component {
     constructor(props) {
@@ -79,7 +83,7 @@ class ResetPassword extends Component {
 
     resetPassword(event) {
         event.preventDefault();
-        var userID = this.props.match.params.user_ID;
+        var userID = this.props.userID;
         var formValues = {
             "pwd" : this.refs.newPassword.value
         }
@@ -93,7 +97,9 @@ class ResetPassword extends Component {
                     "showMessage" : true,
                 })
                 swal(response.data.message);
-                this.props.history.push('/login');
+                //this.props.history.push('/login');
+                var {mapAction} = this.props;
+                mapAction.setSelectedModal("login");
             })
             .catch((error)=>{
                 $('.fullpageloader').hide();
@@ -137,7 +143,7 @@ class ResetPassword extends Component {
     render() {
         return (
             <section className="container-fluid resetPasswordWrapper">
-                <div className="resetPassword col-lg-4 col-lg-offset-4">
+                <div className="resetPassword col-lg-6 col-lg-offset-3">
                   <form>
 
                     <div className="resetPasswordTitle col-lg-12">Reset Password
@@ -174,5 +180,13 @@ class ResetPassword extends Component {
         )
     }
 }
-
-export default ResetPassword;
+const mapStateToProps = (state)=>{
+    return {
+        selectedModal  : state.selectedModal,
+        userID         : state.userID
+    }
+}
+const mapDispachToProps = (dispatch) => ({
+  mapAction :  bindActionCreators(mapActionCreator, dispatch)
+})
+export default connect(mapStateToProps, mapDispachToProps) (ResetPassword);

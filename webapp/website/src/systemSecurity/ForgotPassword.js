@@ -50,29 +50,36 @@ class ForgotPassword extends Component {
                     localStorage.setItem('previousUrl' ,'forgotpassword');
                     $('.fullpageloader').hide();
                     swal("OTP send to your registered email ID.");
-                    this.props.history.push('/confirm-otp/'+response.data.ID);
+                    //this.props.history.push('/confirm-otp/'+response.data.ID);
+                    var {mapAction} = this.props;
+                    mapAction.setUserID(response.data.ID);
+                    mapAction.setSelectedModal("confirmotp");
+
                 } else if(response.data.message == "USER_BLOCK"){
                     console.log("In USER_BLOCK")
                     swal({
                       title: "You are blocked by admin. Please contact Admin.",
                       text: "You are blocked by admin. Please contact Admin."
                     });
-                    this.props.history.push('/login');
-
+                    //this.props.history.push('/login');
+                    var {mapAction} = this.props;
+                    mapAction.setSelectedModal("login");
                   }else if(response.data.message == "USER_UNVERIFIED"){
                     console.log("In USER_UNVERIFIED")
                     swal({
                       text : "You have not verified your account. Please verify your account."
                     });
-                    this.props.history.push('/login');
-
+                    //this.props.history.push('/login');
+                    var {mapAction} = this.props;
+                    mapAction.setSelectedModal("login");
                   }else if(response.data.message == "NOT_REGISTER"){
                     console.log("In NOT_REGISTER")
                     swal({
                       text : "This email is not registered. Please do signup."
                     });
-                    this.props.history.push('/login');
-                    
+                    //this.props.history.push('/login');
+                    var {mapAction} = this.props;
+                    mapAction.setSelectedModal("login");
                   }
 
             })

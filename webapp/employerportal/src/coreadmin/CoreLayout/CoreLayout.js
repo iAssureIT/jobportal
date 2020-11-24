@@ -55,9 +55,13 @@ class CoreLayout extends Component {
                 <Route path="/ViewAllNotification" component={ViewAllNotification} exact />
                 <Route path="/EventToken" component={EventToken} exact />
 
+<<<<<<< HEAD
                 { /* Driver Master */}
                
 
+=======
+                
+>>>>>>> da9237e8b436fabaf1a5d0bace21fe315948cc6e
                 { /* Corporate Master */}
                 <Route path="/org-profile" exact strict component={CompanyProfile} />
                 <Route path="/company-profile/:comp_ID" exact strict component={CompanyProfileView} />

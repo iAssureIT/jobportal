@@ -73,7 +73,7 @@ class Layout extends Component  {
         var pageUrl = window.location.pathname;
         let lastpara = pageUrl ? pageUrl.split('/') : "";
         
-        if (lastpara[1] == '') {
+        if (lastpara[1] == '' || lastpara[1] == '/functional-area' || lastpara[1] == '/subfunctional-area') {
             this.setState({ showMapHeader: true })
         }
         this.setState({ currentUrl: pageUrl })
@@ -198,9 +198,7 @@ class Layout extends Component  {
 
                 { this.state.showMapHeader ? <MapHeader/> : null }
                     
-                { this.state.currentUrl == "/functional-area" || this.state.currentUrl == "/subfunctional-area" ? 
-                    <FunctionalHeader /> : null
-                }
+                
                     <Router >
                         <Switch >
 

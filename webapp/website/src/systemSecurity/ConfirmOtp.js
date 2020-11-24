@@ -4,6 +4,10 @@ import $ from "jquery";
 import jQuery from 'jquery';
 import axios from 'axios';
 import './ConfirmOtp.css';
+import { connect }        from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { withRouter }   from 'react-router-dom';
+import  * as mapActionCreator from '../common/actions/index';
 
 class ConfirmOtp extends Component {
   constructor(props) {
@@ -15,7 +19,7 @@ class ConfirmOtp extends Component {
   componentDidMount() {
     
     //==================================
-    var user_id = this.props.match.params.userID;
+    var user_id = this.props.userID;
     console.log('user_id==',user_id)  
 
     axios.get('/api/users/get/'+user_id)
@@ -47,27 +51,27 @@ class ConfirmOtp extends Component {
   }
   confirmOTP(event) {
     event.preventDefault();
-    var url = this.props.match.params;
+    var url = this.props;
     var formValues = {
-      "user_ID": this.props.match.params.userID,
+      "user_ID": this.props.userID,
       "emailOTP": parseInt(this.refs.emailotp.value),
       "status": "Active"
     }
     //========person master===============
 
-    //   var candidatemaster   = {
-    //     'firstName'       : this.state.firstName,
-    //     'lastName'        : this.state.lastName,
-    //     'mobile'          : this.state.mobile,
-    //     'emailId'         : this.state.emailId,
-    //     "user_id"         : this.state.user_id,
-    //     "createdBy"       : this.state.createdBy
-    //   }
-    // console.log("candidatemaster",candidatemaster)
+      var candidatemaster   = {
+        'firstName'       : this.state.firstName,
+        'lastName'        : this.state.lastName,
+        'mobile'          : this.state.mobile,
+        'emailId'         : this.state.emailId,
+        "user_id"         : this.state.user_id,
+        "createdBy"       : this.state.createdBy
+      }
+    console.log("candidatemaster",candidatemaster)
     
       //====================================
     
-      axios.get('/api/auth/get/activate/usingID/' + this.props.match.params.userID + '/' + this.refs.emailotp.value)
+      axios.get('/api/auth/get/activate/usingID/' + this.props.userID + '/' + this.refs.emailotp.value)
         .then((response) => {
 
           if (response.data.message == 'SUCCESS') {
@@ -75,19 +79,25 @@ class ConfirmOtp extends Component {
             var url = localStorage.getItem('previousUrl');
             if (url == 'forgotpassword') {
               localStorage.removeItem("previousUrl");
-              this.props.history.push('/reset-pwd/' + this.props.match.params.userID);
+              //this.props.history.push('/reset-pwd/' + this.props.userID);
+              var {mapAction} = this.props;
+              mapAction.setUserID(this.props.userID);
+              mapAction.setSelectedModal("resetpass");
+              
             } else {
               localStorage.removeItem("previousUrl");
               
               //================================
 
-                // axios.post('/api/candidatemaster/post', candidatemaster)
-                // .then((response) => {
+                axios.post('/api/candidatemaster/post', candidatemaster)
+                .then((response) => {
 
-                //   console.log('in result Res data==>>>', response.data);
-                //   this.props.history.push('/login');
-                // })
-                // .catch((error) => {})
+                  console.log('in result Res data==>>>', response.data);
+                  //this.props.history.push('/login');
+                  var {mapAction} = this.props;
+                  mapAction.setSelectedModal("login");
+                })
+                .catch((error) => {})
               
             //================================
             }
@@ -111,7 +121,7 @@ class ConfirmOtp extends Component {
   }
   resendOtp(event) {
     document.getElementById("resendOtpBtn").innerHTML = 'Please wait...';
-    const userid = this.props.match.params.userID;
+    const userid = this.props.userID;
     var formValues = {
       "emailSubject": "Email Verification",
       "emailContent": "As part of our registration process, we screen every new profile to ensure its credibility by validating email provided by user. While screening the profile, we verify that details put in by user are correct and genuine.",
@@ -146,7 +156,7 @@ class ConfirmOtp extends Component {
 
     return (
       <section className="container-fluid confirmOTPWrapper">
-                <div className="confirmOTP col-lg-4 col-lg-offset-4">
+                <div className="confirmOTP col-lg-6 col-lg-offset-3">
                   <form>
                     <div className="confirmOTPTitle col-lg-12">Confirm OTP
                     </div>
@@ -195,4 +205,13 @@ class ConfirmOtp extends Component {
     );
   }
 }
-export default ConfirmOtp;
+const mapStateToProps = (state)=>{
+    return {
+        selectedModal  : state.selectedModal,
+        userID         : state.userID
+    }
+}
+const mapDispachToProps = (dispatch) => ({
+  mapAction :  bindActionCreators(mapActionCreator, dispatch)
+})
+export default connect(mapStateToProps, mapDispachToProps) (ConfirmOtp);
