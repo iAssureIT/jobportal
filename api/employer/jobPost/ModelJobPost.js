@@ -4,15 +4,12 @@ mongoose.pluralize(null);
 const jobsSchema = mongoose.Schema({
 	_id : mongoose.Schema.Types.ObjectId,
 	company_id: String,
-	jobBasicInfo 	: 	{
+	/*jobBasicInfo 	: 	{
 							jobTitle			: String,
 							jobLocationCity		: String,
 							jobLocationCountry 	: String,
-							/*industryId		: String,*/
 							functionalArea 		: String,
-							/*functionalAreaId	: String,*/
 							subFunctionalArea 	: String,
-							/*subFunctionalAreaId : String,*/
 							role				: String,
 							gender              : String,
 							workFromHome 		: Boolean,
@@ -51,7 +48,7 @@ const jobsSchema = mongoose.Schema({
 	createdBy 		: 	String,
 	updateLog 		: 	[
 							{updatedBy: String, updatedAt:Date, remark:String}
-						]
+						]*/
 });
 
 module.exports = mongoose.model("jobs", jobsSchema);

@@ -17,14 +17,11 @@ import EventToken from '../NotificationManagement/EventToken.js';
 import BasicInfo from '../Master/EntityMaster/Onboarding/basicInfo/BasicInfo.jsx';
 import LocationDetails from '../Master/EntityMaster/Onboarding/locationDetails/LocationDetails.jsx';
 import ContactDetails from '../Master/EntityMaster/Onboarding/contactDetails/ContactDetails.jsx';
-import ListOfEntities from '../Master/EntityMaster/listOfEntities/components/ListOfEntities.jsx';
 
-import CompanyPaymentGateway from '../companysetting/Components/CompanyPaymentGateway.js';
 //============= Corporate Master ====================
 import CorporateBasicInfo from '../Master/CorporateMaster/CorporateBasicInfo.js';
 import CorporateLocationDetails from '../Master/CorporateMaster/CorporateLocationDetails.js';
 import CorporateContactDetails from '../Master/CorporateMaster/CorporateContactDetails.js';
-import CorporateListOfEntities from '../Master/CorporateMaster/CorporateListOfEntities.js';
 import CorporateStatutoryDetails from '../Master/CorporateMaster/CorporateStatutoryDetails.js';
 
 import CompanyProfile       from '../CompanyProfile/CompanyProfile.js';
@@ -59,9 +56,7 @@ class CoreLayout extends Component {
                 <Route path="/EventToken" component={EventToken} exact />
 
                 { /* Driver Master */}
-
-                <Route path="/paymentgateway" exact strict component={CompanyPaymentGateway} />
-                <Route path="/paymentgateway/:id" exact strict component={CompanyPaymentGateway} />                
+               
 
                 { /* Corporate Master */}
                 <Route path="/org-profile" exact strict component={CompanyProfile} />
@@ -74,7 +69,6 @@ class CoreLayout extends Component {
                 <Route path="/corporate/contact-details" exact strict component={CorporateContactDetails} />
                 <Route path="/corporate/contact-details/:entityID" exact strict component={CorporateContactDetails} />
                 <Route path="/corporate/contact-details/:entityID/:contactID" exact strict component={CorporateContactDetails} />
-                <Route path="/corporate/list" exact strict component={CorporateListOfEntities} />
                 <Route path="/corporate/statutory-details" exact strict component={CorporateStatutoryDetails} />
                 <Route path="/corporate/statutory-details/:entityID/:statutoryID" exact strict component={CorporateStatutoryDetails} />
                 <Route path="/corporate/statutory-details/:entityID" exact strict component={CorporateStatutoryDetails} />

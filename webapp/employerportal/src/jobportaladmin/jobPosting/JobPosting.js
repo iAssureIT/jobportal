@@ -11,9 +11,10 @@ import PhoneInput 			from 'react-phone-input-2';
 import Moment 				from "moment";
 import TagsInput 			from 'react-tagsinput';
 import PlacesAutocomplete, {
-  geocodeByAddress,
-  getLatLng
+  		geocodeByAddress,
+  		getLatLng
 } from "react-places-autocomplete";
+
 import 'react-tagsinput/react-tagsinput.css';
 
 import 'react-phone-input-2/lib/style.css';
@@ -33,8 +34,8 @@ export default class JobPosting extends Component{
 			city 					: "",
 			area 					: "",
 			pincode 				: "",
-			stateCode				:"",
-			countryCode 			:"",
+			stateCode				: "",
+			countryCode 			: "",
 			stateArray 				: [],
 			districtArray 			: [],
 			pincodeExists 			: true,
@@ -186,7 +187,7 @@ export default class JobPosting extends Component{
 				console.log("priSkill", this.state.priSkillsArraylist);
 				this.state.priSkillsArraylist!=null && this.state.priSkillsArraylist.length > 0 
 				?
-					this.state.priSkillsArraylist.map((elem, index)=>{
+					this.state.priSkillsArraylist.forEach((elem, index)=>{
 						
 						this.state.priSkillsArray.push(elem.skill);
 					})
@@ -204,7 +205,7 @@ export default class JobPosting extends Component{
 				console.log("secSkill", this.state.secSkillsArraylist);
 				this.state.secSkillsArraylist!=null && this.state.secSkillsArraylist.length > 0 
 				?
-					this.state.secSkillsArraylist.map((elem, index)=>{
+					this.state.secSkillsArraylist.forEach((elem, index)=>{
 						
 						this.state.secSkillsArray.push(elem.skill);	
 					})
@@ -222,7 +223,7 @@ export default class JobPosting extends Component{
 				console.log("otherSkill", this.state.otherSkillsArraylist);
 				this.state.otherSkillsArraylist!=null && this.state.otherSkillsArraylist.length > 0 
 				?
-					this.state.otherSkillsArraylist.map((elem, index)=>{
+					this.state.otherSkillsArraylist.forEach((elem, index)=>{
 						
 						this.state.otherSkillsArray.push(elem.skill);
 						
@@ -241,7 +242,7 @@ export default class JobPosting extends Component{
 				console.log("preferSkills", this.state.preferSkillsArraylist);
 				this.state.preferSkillsArraylist!=null && this.state.preferSkillsArraylist.length > 0 
 				?
-					this.state.preferSkillsArraylist.map((elem, index)=>{
+					this.state.preferSkillsArraylist.forEach((elem, index)=>{
 						
 						this.state.preferSkillsArray.push(elem.skill);
 						
@@ -265,7 +266,7 @@ export default class JobPosting extends Component{
 			""; 
 			status = true;
 		}
-		if(this.state.jobLocationCity.length<=0){
+		/*if(this.state.jobLocationCity.length<=0){
 			document.getElementById("jobLocationError").innerHTML=  
 			"Enter job location";  
 			status=false; 
@@ -273,7 +274,7 @@ export default class JobPosting extends Component{
 			document.getElementById("jobLocationError").innerHTML=  
 			""; 
 			status = true;
-		}
+		}*/
 		if(this.state.role.length<=0){
 			document.getElementById("roleError").innerHTML=  
 			"Enter role";  
@@ -472,7 +473,6 @@ export default class JobPosting extends Component{
 			.join(' ');
 	}
 	handleChangeState(event) {
-		const target = event.target;
 	    var designation = document.getElementById("states");
     	var stateCode = designation.options[designation.selectedIndex].getAttribute("statecode");
 		this.setState({
@@ -510,7 +510,7 @@ export default class JobPosting extends Component{
                   case 'country':
                      var country = results[0].address_components[i].long_name;
                      var countryCode = results[0].address_components[i].short_name;
-                      break; 
+                    break; 
                   case 'postal_code':
                      var pincode = results[0].address_components[i].long_name;
                       break;
@@ -591,7 +591,7 @@ export default class JobPosting extends Component{
 				                                        onChange={this.handleChangePlaces}
 				                                        onSelect={this.handleSelect}
 				                                        searchOptions={searchOptions}
-				                                      >
+				                                      	>
 				                                        {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
 				                                          <div>
 				                                            <input
@@ -629,8 +629,7 @@ export default class JobPosting extends Component{
 				                                      </PlacesAutocomplete>
 													</div>
 													<span id="jobLocationError" className="errorMsgJobPost"></span>
-												</div>
-												
+												</div>	
 											</div>
 										</div>
 									</div>
@@ -640,11 +639,10 @@ export default class JobPosting extends Component{
 									<div className="row">
 										<div className="col-lg-3">
 											<label htmlFor="functionalArea" className="addjobformLable"> State <span className="asterisk">&#42;</span> </label>
-											<div className="input-group">
-												<span className="input-group-addon addJobFormField"></span> 
+											<div className="input-group"> 
 												<select className="form-control addJobFormField"  id="states"
 												ref="states" value={this.state.states} name="states" onChange={this.handleChangeState.bind(this)} >
-												<option selected={true}>-- Select --</option>
+												<option hidden>-- Select --</option>
 												{
 													this.state.stateArray && this.state.stateArray.length > 0 ?
 														this.state.stateArray.map((stateData, index) => {
@@ -660,30 +658,34 @@ export default class JobPosting extends Component{
 										</div>	
 										
 										<div className="col-lg-3">
-											<label className="addjobformLable col-lg-12"> City
-												<span className="asterisk">&#42;</span>
-											</label>
+											<div className="row">
+												<label className="addjobformLable col-lg-12"> City
+													<span className="asterisk">&#42;</span>
+												</label>
+											</div>	
 											<div className="input-group"> 
-												<input type="text" className="form-control addJobFormField  addJobState" value={this.state.city} ref="city" name="city" onChange={this.handleChange}/>
+												<input type="text" className="form-control addJobFormField addJobState" value={this.state.city} ref="city" name="city" onChange={this.handleChange}/>
 											</div>
 										</div>
 										<div className="col-lg-3">
-											<label className="addjobformLable col-lg-12"> District
-												<span className="asterisk">&#42;</span>
-											</label>
-											<div className="input-group"> 
-												<input type="text" className="form-control addJobFormField  addJobState" value={this.state.district} ref="district" name="district" onChange={this.handleChange}/>
+											<div className="row">
+												<label className="addjobformLable col-lg-12"> District
+													<span className="asterisk">&#42;</span>
+												</label>
 											</div>
-											<span id="jobTitleError" className="errorMsgJobPost"></span>
+											<div className="input-group"> 
+												<input type="text" className="form-control addJobFormField addJobState" value={this.state.district} ref="district" name="district" onChange={this.handleChange}/>
+											</div>
 										</div>
 										<div className="col-lg-3">
-											<label className="addjobformLable col-lg-12"> Pincode
-												<span className="asterisk">&#42;</span>
-											</label>
-											<div className="input-group"> 
-												<input type="text" className="form-control addJobFormField  addJobState" value={this.state.pincode} ref="pincode" name="pincode" onKeyDown={this.keyPressNumber.bind(this)}/>
+											<div className="row">
+												<label className="addjobformLable col-lg-12"> Pincode
+													<span className="asterisk">&#42;</span>
+												</label>
 											</div>
-											<span id="jobTitleError" className="errorMsgJobPost"></span>
+											<div className="input-group"> 
+												<input type="text" className="form-control addJobFormField addJobState" value={this.state.pincode} ref="pincode" name="pincode" onChange={this.keyPressNumber.bind(this)}/>
+											</div>
 										</div>
 									</div>
 								</div>
@@ -807,9 +809,34 @@ export default class JobPosting extends Component{
 												<span className="input-group-addon addJobFormField"><FontAwesomeIcon icon={['fas', 'business-time']} /></span> 
 												<select name="jobTime" className="form-control addJobFormField" id="jobTime" value={this.state.jobTime} onChange={this.handleChange}>
 											    	<option hidden> -- Select -- </option>
+											    	<option> Day Shift   </option>
+											    	<option> Night Shift </option>
+												</select>
+											</div>
+										</div>
+										<div className="col-lg-4">
+											<label htmlFor="jobCategory" className="addjobformLable"> Job Category </label>
+											<div className="input-group">
+												<span className="input-group-addon addJobFormField"><i className="fa fa-list-alt"></i></span> 
+												<select name="jobCategory" className="form-control addJobFormField" id="jobCategory" value={this.state.jobCategory} onChange={this.handleChange}>
+											    	<option hidden> -- Select -- </option>
 											    	<option> Part Time </option>
 											    	<option> Full Time </option>
 												</select>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div className="col-lg-12 addJobFieldRow text-left">
+									<div className="row">
+										<div className="col-lg-4">
+											<div className="row">
+												<label htmlFor="addJobNumOfPosi" className="addjobformLable col-lg-12"> No. Of Positions </label>
+											</div>
+											<div className="input-group">
+												<span className="input-group-addon addJobFormField"><i className="fa fa-users"></i></span> 
+												<input type="text" className="form-control addJobFormField" name="addJobNumOfPosi" id="addJobNumOfPosi" value={this.state.addJobNumOfPosi} onChange={this.handleChange}/>
 											</div>
 										</div>
 										<div className="col-lg-4 democlass">
@@ -819,7 +846,7 @@ export default class JobPosting extends Component{
 												<input type="date" className="form-control addJobFormField" name="lastDateOfAppl" id="lastDateOfAppl" value={this.state.lastDateOfAppl} onChange={this.handleChange}/>
 											</div>
 										</div>
-									</div>
+									</div>	
 								</div>
 
 								<div className="col-lg-12 addJobFieldRow">
@@ -863,7 +890,7 @@ export default class JobPosting extends Component{
 												</div>
 												<div className="col-lg-4">
 													<label htmlFor="maxSalPeriod" className="addjobformLable"> &nbsp; </label>
-													<select className="form-control addJobFormField" name="maxSalPeriod" id="maxSalPeriod" value={this.state.maxSalPeriod} onChange={this.handleChange}>
+													<select className="form-control addJobFormField maxSalaryDropdown" name="maxSalPeriod" id="maxSalPeriod" value={this.state.maxSalPeriod} onChange={this.handleChange}>
 														<option hidden> -- Select -- </option>
 														<option> Per Month </option>
 														<option> Per Year  </option>

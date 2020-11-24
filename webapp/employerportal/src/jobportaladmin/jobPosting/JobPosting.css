@@ -81,10 +81,6 @@
 	padding-left: 10px;
 }
 
-.addJobFieldRow .minSalaryDropdown{
-	margin-left: 1px;
-}
-
 .addJobState{
 	border-radius: 4px !important;
 }
@@ -126,6 +122,25 @@
     border-top-right-radius: 4px;
 }
 
+.input-group .form-control:last-child{
+	border-bottom-right-radius: 4px !important;
+    border-top-right-radius: 4px !important;
+}
+
+.input-group .form-control:first-child{
+	border-radius: 4px !important;
+    height: 35px;
+    padding-left: 10px;
+}
+
+.addJobFieldRow .minSalaryDropdown{
+	border-radius: 4px !important;
+}
+
+.addJobFieldRow .maxSalaryDropdown{
+	border-radius: 4px !important;
+}
+
 .addJobFormField:hover{
 	color: var(--main-txt-color);
 }
@@ -157,7 +172,6 @@
 	border-radius: 50%;
 	border: 1px solid #fff;
 }
-
 
 /*****************************Custom Gender Field************************/
 
@@ -204,6 +218,7 @@
 
 .react-tel-input .form-control{
 	/*width: 255px !important;*/
+	border-radius: 4px !important;
 	background-color: var(--main-bg-color) !important;
 	border: 1px solid var(--main-border-color) !important;
 	color: var(--main-txt-color) !important;

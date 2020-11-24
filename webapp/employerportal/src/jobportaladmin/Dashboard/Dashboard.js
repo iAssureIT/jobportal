@@ -111,7 +111,7 @@ export default class Dashboard extends Component{
         <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 NOPadding">
            <section className="content">
            	<div className="row">
-            {localStorage.getItem("roles") ? 
+            {/*{localStorage.getItem("roles") ? 
               localStorage.getItem("roles").includes('corporateadmin') ?
   	           	<Statistics 
                   display={true}
@@ -244,7 +244,7 @@ export default class Dashboard extends Component{
                 title="Recent Bookings"
                 api={{"method":"get","path":"/api/bookingmaster/get/EmployeeRecentBookings/"+localStorage.getItem("company_Id")+"/"+localStorage.getItem("user_ID")}}
                 redirectlink="/booking-details" />
-            }
+            }*/}
             </div>
            </section>
         </div>

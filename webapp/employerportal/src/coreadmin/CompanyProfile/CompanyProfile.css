@@ -75,7 +75,7 @@
 	font-size: 13px;
 }
 .blueBack{
-	background-image: url("/images/orgbackground.jpg");
+	/*background-image: url("/images/orgbackground.jpg");*/
 	background-repeat: no-repeat;
 	height: 100px;
 }

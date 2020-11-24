@@ -8,7 +8,7 @@
   --form-field-background-color: #242933;
 }
 
-@font-face{
+/*@font-face{
     font-family: 'Montserrat-Bold'; 
     src: url('/font/Montserrat-Bold.ttf');
 }
@@ -16,7 +16,7 @@
 @font-face{
     font-family: 'Montserrat-Regular'; 
     src: url('/font/Montserrat-Regular.ttf');
-}
+}*/
 
 .basic-info-pillss {
     padding: 8px 15px!important
@@ -1078,15 +1078,15 @@ input:checked+.slider:before {
 }
 
 select#gender option[value="male"] {
-    background-image: url("/images/iAssureIT_favicon_blue.png");
+    /*background-image: url("/images/iAssureIT_favicon_blue.png");*/
 }
 
 select#gender option[value="female"] {
-    background-image: url("/images/iAssureIT_favicon_blue.png");
+    /*background-image: url("/images/iAssureIT_favicon_blue.png");*/
 }
 
 select#gender option[value="others"] {
-    background-image: url("/images/iAssureIT_favicon_blue.png");
+    /*background-image: url("/images/iAssureIT_favicon_blue.png");*/
 }
 
 
