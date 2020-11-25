@@ -12,25 +12,35 @@ exports.insertJobs = (req, res, next)=>{
 			
 			"jobBasicInfo" 	: 	{
 									"jobTitle"				: req.body.jobTitle,
-									"jobLocationCity"		: req.body.jobLocationCity,
-									"jobLocationCountry" 	: req.body.jobLocationCountry,
-									/*"industryId"			: req.body.industryId,*/
-									/*"functionalAreaId" 		: req.body.functionalAreaId,*/
+									"industry_id"			: req.body.industry_id,
+									"functionalarea_id" 	: req.body.functionalarea_id,
 									"functionalArea" 		: req.body.functionalArea,
-									/*"subFunctionalAreaId"	: req.body.subFunctionalAreaId,*/
-									"subFunctionalArea" 	: req.body.subFunctionalArea,
+									"subfunctionalarea_id"	: req.body.subfunctionalarea_id,
 									"role"					: req.body.role,
 									"gender"				: req.body.gender,
 									"workFromHome" 			: req.body.workFromHome,
+									"jobtype_id" 			: req.body.jobtype_id,
+									"jobtime_id" 			: req.body.jobtime_id,
+									"jobcategory_id" 		: req.body.jobcategory_id,
+									"positions" 			: req.body.positions,
+									"jobDesc" 				: req.body.jobDesc,
+									"lastDateOfAppl" 		: new Date(req.body.lastDateOfAppl),
+									
 									"contactPersonName" 	: req.body.contactPersonName,
 									"contactPersonEmail" 	: req.body.contactPersonEmail,
 									"contactPersonPhone" 	: req.body.contactPersonPhone,
-									"jobType" 				: req.body.jobType,
-									"jobTime" 				: req.body.jobTime,
-									"lastDateOfAppl" 		: new Date(req.body.lastDateOfAppl),
-									"jobDesc" 				: req.body.jobDesc,
 								},
-			
+			"location" 		: 	{
+									"address" 				: req.body.address,
+									"area" 					: req.body.area,
+									"cityVillage"  			: req.body.city,
+									"district" 				: req.body.district,
+									"state" 				: req.body.state,
+									"stateCode" 			: req.body.stateCode,	
+									"country" 				: req.body.country,
+									"countryCode" 			: req.body.countryCode,
+									"pincode" 	 			: req.body.pincode
+								},
 			"ctcOffered" 	: 	{
 									"minSalary" 	: req.body.minSalary,
 									"minSalPeriod" 	: req.body.minSalPeriod,

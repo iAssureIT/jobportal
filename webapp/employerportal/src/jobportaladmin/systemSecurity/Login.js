@@ -135,7 +135,7 @@ class Login extends Component {
                   loggedIn: true
                 }, () => {
                   if (response.data.userDetails.company_id) {
-                     window.location.href='/'
+                     window.location.href='/post-job'
                   }else{
                     window.location.href= '/corporate/basic-details'
                   }

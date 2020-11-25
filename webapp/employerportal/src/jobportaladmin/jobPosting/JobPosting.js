@@ -9,7 +9,7 @@ import CKEditor 			from '@ckeditor/ckeditor5-react';
 import ClassicEditor 		from '@ckeditor/ckeditor5-build-classic';
 import PhoneInput 			from 'react-phone-input-2';
 import Moment 				from "moment";
-import TagsInput 			from 'react-tagsinput';
+import ReactTags from 'react-tag-autocomplete'
 
 import PlacesAutocomplete, {
   		geocodeByAddress,
@@ -26,6 +26,7 @@ export default class JobPosting extends Component{
 		super(props);
 
 		this.state = {
+			company_id 				: localStorage.getItem("company_Id"),
 			jobTitle 				: "",
 			addressLine1 			: "",
 			addressLine2 			: "",
@@ -40,14 +41,15 @@ export default class JobPosting extends Component{
 			stateArray 				: [],
 			districtArray 			: [],
 			pincodeExists 			: true,
-			/*industryId			: "",*/
+
+			industry_id				: localStorage.getItem("industry_id"),
 			functionalArea 			: "",
 			/*functionalAreaId 		: "",*/
 			subFunctionalArea 		: "",
 			/*subFunctionalAreaId 	: "",*/
 			role 					: "",
 			gender             		: "Male Only",
-			workFromHome 			: "",
+			workFromHome 			: false,
 			contactPersonName 		: "",
 			contactPersonEmail		: "",
 			contactPersonPhone		: "",
@@ -66,10 +68,13 @@ export default class JobPosting extends Component{
 			minEducation 			: "",
 			minExperience 			: "",
 			priSkillsArray 			: [],
-			minPrimExp	    		: "", 
+			primarySkills 			: [],
+			minPrimExp	    		: "",
+			secondarySkills 		: [], 
 			secSkillsArray 			: [],
 			minSecExp				: "", 
 			otherSkillsArray 		: [],
+			otherSkills 			: [],
 			minOtherExp				: "", 
 			preferSkillsArray 		: [],
 			minExpRequiredPre		: "",
@@ -82,9 +87,19 @@ export default class JobPosting extends Component{
 			preferSkillsArraylist	: [],
 			tags                    : [],
 			submitBtnText 			: "SUBMIT",		      
+			tags: [
+		        { id: 1, name: "Apples" },
+		        { id: 2, name: "Pears" }
+		      ],
+		    suggestions: [
+		        { id: 3, name: "Bananas" },
+		        { id: 4, name: "Mangos" },
+		        { id: 5, name: "Lemons" },
+		        { id: 6, name: "Apricots" }
+		      ]
 		}
 
-		this.inputRef = React.createRef()
+		 this.reactTags = React.createRef()
 
 
 
@@ -152,7 +167,7 @@ export default class JobPosting extends Component{
 							})
 		}
 		
-		Axios.get("http://qaapi-jobportal.iassureit.in/api/functionalareamaster/get/list")
+		Axios.get("/api/functionalareamaster/get/list")
 			.then(response=> 	{
 									console.log("getfunctionalAreaData response.data = ", response.data);
 									this.setState({functionalArealist : response.data
@@ -163,7 +178,7 @@ export default class JobPosting extends Component{
 								Swal.fire("Error while getting List data", error.message, 'error');
 							})
 
-		Axios.get("http://qaapi-jobportal.iassureit.in/api/subfunctionalareamaster/get/list")
+		Axios.get("/api/subfunctionalareamaster/get/list")
 			.then(response=>	{
 									console.log("getsubFunctionalAreaData response.data = ", response.data);
 									this.setState({subFunctionalAreaList : response.data
@@ -174,7 +189,7 @@ export default class JobPosting extends Component{
 								Swal.fire("Error while getting List data", error.message,'error');
 							})
 		
-		Axios.get("http://qaapi-jobportal.iassureit.in/api/jobtypemaster/get/list")
+		Axios.get("/api/jobtypemaster/get/list")
 			.then(response=> 	{
 									console.log("getfunctionalAreaData response.data = ", response.data);
 									this.setState({jobTypeArray : response.data
@@ -185,7 +200,7 @@ export default class JobPosting extends Component{
 								Swal.fire("Error while getting List data",error.message,'error');
 							})
 
-		Axios.get("http://qaapi-jobportal.iassureit.in/api/JobTimeMaster/get/list")
+		Axios.get("/api/JobTimeMaster/get/list")
 			.then(response=> 	{
 									console.log("getfunctionalAreaData response.data = ", response.data);
 									this.setState({jobTimeArray : response.data
@@ -196,7 +211,7 @@ export default class JobPosting extends Component{
 								Swal.fire("Error while getting List data",error.message,'error');
 							})	
 
-		Axios.get("http://qaapi-jobportal.iassureit.in/api/jobcategorymaster/get/list")
+		Axios.get("/api/jobcategorymaster/get/list")
 			.then(response=> 	{
 									console.log("getfunctionalAreaData response.data = ", response.data);
 									this.setState({jobCategoryArray : response.data
@@ -207,7 +222,7 @@ export default class JobPosting extends Component{
 								Swal.fire("Error while getting List data",error.message,'error');
 							})	
 		
-		Axios.get("http://qaapi-jobportal.iassureit.in/api/skillmaster/get/list")
+		Axios.get("/api/skillmaster/get/list")
 			.then(response=> {
 				console.log("getfunctionalAreaData response.data = ", response.data);
 				this.setState({priSkillsArraylist : response.data});
@@ -225,61 +240,7 @@ export default class JobPosting extends Component{
 				Swal.fire("Error while getting priSkillsArraylist List data", error.message,'error');
 			})
 			
-		Axios.get("http://qaapi-jobportal.iassureit.in/api/skillmaster/get/list")
-			.then(response=> {
-				console.log("getfunctionalAreaData response.data = ", response.data);
-				this.setState({secSkillsArraylist : response.data});
-				console.log("secSkill", this.state.secSkillsArraylist);
-				this.state.secSkillsArraylist!=null && this.state.secSkillsArraylist.length > 0 
-				?
-					this.state.secSkillsArraylist.forEach((elem, index)=>{
-						
-						this.state.secSkillsArray.push(elem.skill);	
-					})
-				:
-					this.state.secSkillsArray.push("select");
-			})
-			.catch(error=>{
-				Swal.fire("Error while getting secSkillsArraylist List data", error.message,'error');
-			})
 		
-		Axios.get("http://qaapi-jobportal.iassureit.in/api/skillmaster/get/list")
-			.then(response=> {
-				console.log("getfunctionalAreaData response.data = ", response.data);
-				this.setState({otherSkillsArraylist : response.data});
-				console.log("otherSkill", this.state.otherSkillsArraylist);
-				this.state.otherSkillsArraylist!=null && this.state.otherSkillsArraylist.length > 0 
-				?
-					this.state.otherSkillsArraylist.forEach((elem, index)=>{
-						
-						this.state.otherSkillsArray.push(elem.skill);
-						
-					})
-				:
-					this.state.otherSkillsArray.push("select");
-			})
-			.catch(error=>{
-				Swal.fire("Error while getting otherSkillsArraylist List data", error.message,'error');
-			})
-		
-		Axios.get("http://qaapi-jobportal.iassureit.in/api/skillmaster/get/list")
-			.then(response=> {
-				console.log("getfunctionalAreaData response.data = ",response.data);
-				this.setState({preferSkillsArraylist : response.data});
-				console.log("preferSkills", this.state.preferSkillsArraylist);
-				this.state.preferSkillsArraylist!=null && this.state.preferSkillsArraylist.length > 0 
-				?
-					this.state.preferSkillsArraylist.forEach((elem, index)=>{
-						
-						this.state.preferSkillsArray.push(elem.skill);
-						
-					})
-				:
-					this.state.preferSkillsArray.push("select");
-			})
-			.catch(error=>{
-				Swal.fire("Error while getting preferSkillsArraylist List data", error.message, 'error');
-			})	
 	}
 
 	validateForm=()=>{
@@ -369,28 +330,47 @@ export default class JobPosting extends Component{
 		event.preventDefault();
 		if(this.validateForm()){	
 		var formValues = {
+			company_id 			: 	this.state.company_id,
 			jobTitle 			: 	this.state.jobTitle,
-			functionalArea 		: 	this.state.functionalArea,
-			subFunctionalArea 	: 	this.state.subFunctionalArea,
+			address 			:   this.state.addressLine1,
+			area 				:   this.state.area,
+        	city 				: 	this.state.city,
+       	 	district 			: 	this.state.district,
+        	state 				: 	this.state.state,
+        	country 			: 	this.state.country,
+        	pincode 			: 	this.state.pincode,
+        	stateCode 			: 	this.state.stateCode,
+        	countryCode 		: 	this.state.countryCode,
+			industry_id 		:  	this.state.industry_id,
+			functionalarea_id 	: 	this.state.functionalArea,
+			subfunctionalarea_id: 	this.state.subFunctionalArea,
 			role 				: 	this.state.role,
 			gender      	   	: 	this.state.gender,
 			workFromHome 		: 	this.state.workFromHome,
+			jobtype_id 			: 	this.state.jobType,
+			jobtime_id 			: 	this.state.jobTime,
+			jobcategory_id 		:   this.state.jobCategory,
+			positions 			: 	this.state.addJobNumOfPosi,
+			jobDesc 			: 	this.state.jobDesc,
+			lastDateOfAppl 		: 	this.state.lastDateOfAppl,
+			
 			contactPersonName 	: 	this.state.contactPersonName,
 			contactPersonEmail 	: 	this.state.contactPersonEmail,
 			contactPersonPhone  :   this.state.contactPersonPhone,
-			jobType 			: 	this.state.jobType,
-			jobTime 			: 	this.state.jobTime,
-			jobCategory 		: 	this.state.jobCategory,
-			lastDateOfAppl 		: 	this.state.lastDateOfAppl,
+
 			minSalary 			: 	this.state.minSalary,
 			minSalPeriod 		: 	this.state.minSalPeriod,
 			maxSalary 			: 	this.state.maxSalary,
 			maxSalPeriod 		: 	this.state.maxSalPeriod,
-			jobDesc 			: 	this.state.jobDesc,
+			
 			minEducation 		: 	this.state.minEducation,
 			minExperience 		: 	this.state.minExperience,
+
+			primarySkills 		: 	this.state.primarySkills,
 			minPrimExp	 		: 	this.state.minPrimExp,
+			secondarySkills 	: 	this.state.secondarySkills,
 			minSecExp	 		: 	this.state.minSecExp,
+			otherSkills 		: 	this.state.otherSkills,
 			minOtherExp	 		: 	this.state.minOtherExp,
 		};
 			console.log("formValues :", formValues);
@@ -420,7 +400,7 @@ export default class JobPosting extends Component{
 									subFunctionalArea 	: "",
 									role 				: "",
 									gender              : "Male Only",
-									workFromHome 		: "",
+									workFromHome 		: false,
 									contactPersonName 	: "",
 									contactPersonEmail 	: "",
 									contactPersonPhone 	: "",
@@ -474,10 +454,7 @@ export default class JobPosting extends Component{
          this.setState({workFromHome: event.target.checked});
 	}	
 
-    inputChange = tags => {
-		console.log(tags);
-		this.setState({ tags });
-	};
+   
 	keyPressNumber = (e) => {
 		if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 189]) !== -1 ||
 			// Allow: Ctrl+A, Command+A
@@ -574,6 +551,17 @@ export default class JobPosting extends Component{
      
       this.setState({ addressLine1 : address});
   	};	
+  	onDelete (i) {
+	    const tags = this.state.tags.slice(0)
+	    tags.splice(i, 1)
+	    this.setState({ tags })
+	}
+	 
+	onAddition (tag) {
+	    const tags = [].concat(this.state.tags, tag)
+	    this.setState({ tags })
+	}
+	
 	render(){	
 	const searchOptions = {
       // types: ['(cities)'],
@@ -823,7 +811,7 @@ export default class JobPosting extends Component{
 															this.state.jobTypeArray.map((elem,index)=>{
 																return(
 																	
-																	<option key={index}> {elem.jobType} </option>
+																	<option key={index} value={elem._id}> {elem.jobType} </option>
 																);
 															})
 														:
@@ -990,20 +978,13 @@ export default class JobPosting extends Component{
 											<label htmlFor="primSkills" className="addjobformLable"> Primary Skills </label>
 											<div className="input-group col-lg-12">
 												<span className="input-group-addon addJobFormField"> <i className='fa fa-cog'></i> </span> 
-													{/*<TagsInput ref="tagsinput" value={this.state.tags} onChange={this.inputchange} />*/}
-													<TagsInput className="tagsInput" value={this.state.tags} onChange={this.inputChange} />
-													{/*<div className="skill">
-									                    <ul>
-									                        { skills.map((skill, i) => {
-									                            return (
-									                                <li key={i}> {skill} <button onClick={() => this.removeSkill(i)}>+</button> </li>
-									                            )
-									                        }) }
-									                        <li className="input-skill">
-									                            <input onKeyDown={this.addSkill} type="text" size="4" ref={this.inputRef} name="primSkills" id="primSkills" value={this.state.primSkills} />
-									                        </li>
-									                    </ul>
-                									</div>*/}
+													
+											        <ReactTags
+											        ref={this.reactTags}
+											        tags={this.state.tags}
+											        suggestions={this.state.suggestions}
+											        onDelete={this.onDelete.bind(this)}
+											        onAddition={this.onAddition.bind(this)} />
 											</div>
 										</div>
 										<div className="col-lg-4">
@@ -1021,13 +1002,7 @@ export default class JobPosting extends Component{
 											<label htmlFor="secSkills" className="addjobformLable"> Secondary Skills </label>
 											<div className="input-group col-lg-12">
 												<span className="input-group-addon addJobFormField"> <i className='fa fa-cog'></i> </span> 
-												<TagsInput className="tagsInput" value={this.state.tags} onChange={this.inputChange}>
-													<Multiselect className="form-control addJobFormField" name="secSkills" id="secSkills" value={this.state.secSkills} onChange={this.handleChange}
-														options	 = {this.state.secSkillsArray}
-														isObject = {false}
-														style	 = {this.style}>
-													</Multiselect>
-												</TagsInput>	
+												
 											</div>
 										</div>
 										<div className="col-lg-4">
@@ -1045,13 +1020,6 @@ export default class JobPosting extends Component{
 											<label htmlFor="otherSkills" className="addjobformLable"> Other Skills </label>
 											<div className="input-group col-lg-12">
 												<span className="input-group-addon addJobFormField"> <i className='fa fa-cog'></i> </span> 
-												{/*<Multiselect className="form-control addJobFormField" name="otherSkills" id="otherSkills" value={this.state.otherSkills} onChange={this.handleChange}
-													options  = {this.state.otherSkillsArray}
-													isObject = {false}
-													style    = {this.style}
-												/>*/}
-
-												<TagsInput className="tagsInput" name="otherSkills" id="otherSkills" value={this.state.tags} onChange={this.inputChange} />
 											</div>
 										</div>
 										<div className="col-lg-4">
@@ -1067,13 +1035,6 @@ export default class JobPosting extends Component{
 									<label htmlFor="notMandateSkills" className="addjobformLable"> Preferred Skills but not mandatory </label>
 									<div className="input-group col-lg-12">
 										<span className="input-group-addon addJobFormField"> <i className='fa fa-cog'></i> </span> 
-										{/*<Multiselect name="notMandateSkills" id="notMandateSkills" className="form-control addJobFormField" value={this.state.notMandateSkills} onChange={this.handleChange}
-											options  = {this.state.preferSkillsArray}
-											isObject = {false}
-											style	 = {this.style}
-										/>*/}
-
-										<TagsInput className="tagsInput" name="notMandateSkills" id="notMandateSkills" value={this.state.tags} onChange={this.inputChange} />
 									</div>
 								</div>
 								

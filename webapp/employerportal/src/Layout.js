@@ -71,13 +71,13 @@ class Layout extends Component  {
         var roleArr = [];
         roleArr.push(roles);
         
-        if (!this.state.loggedIn) {
+        if (this.state.loggedIn) {
             return (
             <Router>
                 <div className="hold-transition skin-blue fixed sidebar-mini">
                     <div className="" style={{paddingTop:0}}>
                         <div className="wrapper">
-                            {/*<Header />*/}
+                            <Header />
                             <div className="">
                                 <div className="row">
                                     {   
@@ -133,7 +133,7 @@ class Layout extends Component  {
                     </Router>
                 </div>
             );
-        }
+        } 
     }
 }
 
