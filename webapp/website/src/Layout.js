@@ -116,7 +116,7 @@ class Layout extends Component  {
         }
     }
 
-    render() {
+    render() { 
         const roles = localStorage.getItem("roles");
         var roleArr = [];
         roleArr.push(roles);        
