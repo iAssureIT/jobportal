@@ -1,8 +1,8 @@
 import React,{Component} from 'react';
 
-import ProgressBar     	from './blocks/ProgressBar/ProgressBar.js';
-import TitleLayout       from './blocks/TitleLayout/TitleLayout.js';
-import Academics      	 from './blocks/Academics/Academics.js';
+import ProgressBar     	from '../../blocks/ProgressBar/ProgressBar.js';
+import TitleLayout       from '../../blocks/TitleLayout/TitleLayout.js';
+import Academics      	 from '../../blocks/Academics/Academics.js';
 
 class CandidateAcademics extends Component{
 	constructor(props){

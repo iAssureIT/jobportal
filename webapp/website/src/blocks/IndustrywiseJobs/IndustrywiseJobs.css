@@ -1,0 +1,9 @@
+.IndustrywiseJobsWrapper{
+	height: 500px;
+	background-color: #1F262D;
+	color: #fff;
+	text-align: center;font-size: 30px;
+	padding: 50px;
+	border: 2px solid var(--yellow-button-color);
+	
+}

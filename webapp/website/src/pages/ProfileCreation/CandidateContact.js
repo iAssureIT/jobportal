@@ -1,8 +1,8 @@
 import React,{Component} from 'react';
 
-import ProgressBar     	from './blocks/ProgressBar/ProgressBar.js';
-import TitleLayout       from './blocks/TitleLayout/TitleLayout.js';
-import Contact     	     from './blocks/Contact/Contact.js';
+import ProgressBar     	from '../../blocks/ProgressBar/ProgressBar.js';
+import TitleLayout       from '../../blocks/TitleLayout/TitleLayout.js';
+import Contact     	     from '../../blocks/Contact/Contact.js';
 
 class CandidateContact extends Component{
 	constructor(props){

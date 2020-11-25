@@ -1,8 +1,8 @@
 import React,{Component} from 'react';
 
-import ProgressBar     	from './blocks/ProgressBar/ProgressBar.js';
-import TitleLayout       from './blocks/TitleLayout/TitleLayout.js';
-import Experience     from './blocks/Experience/Experience.js';
+import ProgressBar     	from '../../blocks/ProgressBar/ProgressBar.js';
+import TitleLayout       from '../../blocks/TitleLayout/TitleLayout.js';
+import Experience     from '../../blocks/Experience/Experience.js';
 
 class CandidateExperience extends Component{
 	constructor(props){

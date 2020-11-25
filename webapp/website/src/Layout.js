@@ -21,18 +21,18 @@ import Footer               from './common/footer/Footer.js';
 import Leftsidebar          from './common/leftSidebar/Leftsidebar.js';
 import CoreLayout           from './coreadmin/CoreLayout/CoreLayout.js';
 
-import PageFunctionWise     from './functionalAreawiseJobs/PageFunctionWise.js';
-import SubPageFunctionWise  from './functionalAreawiseJobs/SubPageFunctionWise.js';
-import JobList              from './jobList/JobList.js'
-import JobWishlist          from './jobWishlist/JobWishlist.js'
+import PageFunctionWise     from './pages/PageFunctionalAreawiseJobs/PageFunctionWise.js';
+import SubPageFunctionWise  from './pages/PageFunctionalAreawiseJobs/SubPageFunctionWise.js';
+import JobList              from './blocks/jobList/JobList.js'
+import JobWishlist          from './blocks/jobWishlist/JobWishlist.js'
 
-import CandidateProfile     from './profileCreation/blocks/ProfilePage/CandidateProfile.js';
-import CandidateBasicInfo   from './profileCreation/CandidateBasicInfo.js';
-import CandidateAddress     from './profileCreation/CandidateAddress.js';
-import CandidateContact     from './profileCreation/CandidateContact.js';
-import CandidateAcademics   from './profileCreation/CandidateAcademics.js';
-import CandidateCertification     from './profileCreation/CandidateCertification.js';
-import CandidateExperience  from './profileCreation/CandidateExperience.js';
+import CandidateProfile     from './blocks/ProfilePage/CandidateProfile.js';
+import CandidateBasicInfo   from './pages/ProfileCreation/CandidateBasicInfo.js';
+import CandidateAddress     from './pages/ProfileCreation/CandidateAddress.js';
+import CandidateContact     from './pages/ProfileCreation/CandidateContact.js';
+import CandidateAcademics   from './pages/ProfileCreation/CandidateAcademics.js';
+import CandidateCertification     from './pages/ProfileCreation/CandidateCertification.js';
+import CandidateExperience  from './pages/ProfileCreation/CandidateExperience.js';
 //import CandidateProfile     from './blocks/CandidateProfile/CandidateProfile.js';
 //import CandidateList     from './blocks/CandidateList/CandidateList.js';
 import India from './maps/India/India.js';
@@ -55,6 +55,8 @@ import Meghalaya from './maps/Meghalaya/Meghalaya.js';
 import Mizoram from './maps/Mizoram/Mizoram.js';
 import Nagaland from './maps/Nagaland/Nagaland.js';
 import Orissa from './maps/Orissa/Orissa.js';
+
+import Homepage from './blocks/Homepage/Homepage.js'
 
 class Layout extends Component  {
 

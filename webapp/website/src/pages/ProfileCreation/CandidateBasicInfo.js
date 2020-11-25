@@ -1,8 +1,8 @@
 import React,{Component} from 'react';
 
-import ProgressBar     	from './blocks/ProgressBar/ProgressBar.js';
-import TitleLayout       from './blocks/TitleLayout/TitleLayout.js';
-import BasicInfoForm     from './blocks/BasicInfoForm/BasicInfoForm.js';
+import ProgressBar     	from '../../blocks/ProgressBar/ProgressBar.js';
+import TitleLayout       from '../../blocks/TitleLayout/TitleLayout.js';
+import BasicInfoForm     from '../../blocks/BasicInfoForm/BasicInfoForm.js';
 
 class CandidateBasicInfo extends Component{
 	constructor(props){
