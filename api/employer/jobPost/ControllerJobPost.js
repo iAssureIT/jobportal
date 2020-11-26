@@ -1,6 +1,7 @@
 const mongoose	=	require('mongoose');
 const mongodb	=	require('mongodb');
 const Jobs 		=	require('./ModelJobPost.js');
+var ObjectID = require('mongodb').ObjectID;
 
 exports.insertJobs = (req, res, next)=>{
 
@@ -245,10 +246,15 @@ exports.filterJobs = (req, res, next)=>{
 	console.log("req.body - ", req.body);
 	var selector = {}; 
     selector['$and']=[];
+    var industry_ids = [];
+    if (req.body.industry_id) {
+    	req.body.industry_id.map(elem => {
+    		industry_ids.push(ObjectID(elem.id))
+    	})
+    }
+    
     selector["$and"].push({ "location.countryCode" :  req.body.countryCode   })
-    /*selector["$and"].push({ "jobBasicInfo.industry_id" : { $elemMatch: { $in:
-		req.body.industry_id.map(elem => {ObjectId(elem)}) } }
-    });*/
+    selector["$and"].push({ "jobBasicInfo.industry_id" : { $in: industry_ids } });
     console.log(JSON.stringify(selector))
     Jobs.find(selector)
     .sort({createdAt : -1})
@@ -257,7 +263,7 @@ exports.filterJobs = (req, res, next)=>{
         res.status(200).json(data);
     })
     .catch(err =>{
-    	console.log(err)
+    	console.log(err.response)
         res.status(500).json({
             error: err
         });

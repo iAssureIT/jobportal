@@ -168,7 +168,7 @@ export default class LeftSideFilters extends Component{
       selecteditems.map((elem,index)=>{
         industry_ids.push(elem.id);
       })
-      selector.industry_id = industry_ids;
+      selector.industry_id = selecteditems;
     }
 
     
