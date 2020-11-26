@@ -1,24 +1,40 @@
 import React, {Component}   from 'react';
-import './JobPosting.css'; 
-import $ from 'jquery';
-import { FontAwesomeIcon }  from '@fortawesome/react-fontawesome';
-import Axios 				from 'axios';
-import Swal 				from 'sweetalert2';
-import { Multiselect } 		from 'multiselect-react-dropdown';
-import CKEditor 			from '@ckeditor/ckeditor5-react';
-import ClassicEditor 		from '@ckeditor/ckeditor5-build-classic';
-import PhoneInput 			from 'react-phone-input-2';
-import Moment 				from "moment";
-import ReactTags from 'react-tag-autocomplete'
 
-import PlacesAutocomplete, {
-  		geocodeByAddress,
-  		getLatLng
-} from "react-places-autocomplete";
-
-import 'react-tagsinput/react-tagsinput.css';
-
+import './JobPosting.css';
 import 'react-phone-input-2/lib/style.css';
+
+import $ from 'jquery';
+import { FontAwesomeIcon }  		from '@fortawesome/react-fontawesome';
+import Axios 						from 'axios';
+import Swal 						from 'sweetalert2';
+import { Multiselect } 				from 'multiselect-react-dropdown';
+import CKEditor 					from '@ckeditor/ckeditor5-react';
+import ClassicEditor 				from '@ckeditor/ckeditor5-build-classic';
+import PhoneInput 					from 'react-phone-input-2';
+import Moment 						from "moment";
+import { WithContext as ReactTags } from 'react-tag-input';
+
+import {COUNTRIES} 					from './countries';
+
+import PlacesAutocomplete, 
+		{
+  			geocodeByAddress,
+  			getLatLng
+  		} 							from "react-places-autocomplete";
+
+const suggestions = COUNTRIES.map((country)	=>	{
+													return {
+																id: country,
+																text: country
+															}
+												})
+
+const KeyCodes	=	{
+						comma: 188,
+						enter: 13,
+					};
+
+const delimiters = [KeyCodes.comma, KeyCodes.enter];
 
 export default class JobPosting extends Component{
 	
@@ -26,82 +42,68 @@ export default class JobPosting extends Component{
 		super(props);
 
 		this.state = {
-			company_id 				: localStorage.getItem("company_Id"),
-			jobTitle 				: "",
-			addressLine1 			: "",
-			addressLine2 			: "",
-			country 				: "",
-			state 					: "",
-			district 				: "",
-			city 					: "",
-			area 					: "",
-			pincode 				: "",
-			stateCode				: "",
-			countryCode 			: "",
-			stateArray 				: [],
-			districtArray 			: [],
-			pincodeExists 			: true,
-
-			industry_id				: localStorage.getItem("industry_id"),
-			functionalArea 			: "",
-			/*functionalAreaId 		: "",*/
-			subFunctionalArea 		: "",
-			/*subFunctionalAreaId 	: "",*/
-			role 					: "",
-			gender             		: "Male Only",
-			workFromHome 			: false,
-			contactPersonName 		: "",
-			contactPersonEmail		: "",
-			contactPersonPhone		: "",
-			jobType 				: "",
-			jobTypeArray			: [],
-			jobTime 				: "",
-			jobTimeArray 			: [],
-			jobCategory 			: "",
-			jobCategoryArray 		: [],
-			lastDateOfAppl 			: "",
-			minSalary 				: "",
-			minSalPeriod 			: "",
-			maxSalary 				: "",
-			maxSalPeriod			: "",
-			jobDesc 				: "",
-			minEducation 			: "",
-			minExperience 			: "",
-			priSkillsArray 			: [],
-			primarySkills 			: [],
-			minPrimExp	    		: "",
-			secondarySkills 		: [], 
-			secSkillsArray 			: [],
-			minSecExp				: "", 
-			otherSkillsArray 		: [],
-			otherSkills 			: [],
-			minOtherExp				: "", 
-			preferSkillsArray 		: [],
-			minExpRequiredPre		: "",
-			industryList			: [],
-			functionalArealist 		: [],
-			subFunctionalAreaList	: [],
-			priSkillsArraylist 		: [],
-			secSkillsArraylist 		: [],
-			otherSkillsArraylist	: [],
-			preferSkillsArraylist	: [],
-			tags                    : [],
-			submitBtnText 			: "SUBMIT",		      
-			tags: [
-		        { id: 1, name: "Apples" },
-		        { id: 2, name: "Pears" }
-		      ],
-		    suggestions: [
-		        { id: 3, name: "Bananas" },
-		        { id: 4, name: "Mangos" },
-		        { id: 5, name: "Lemons" },
-		        { id: 6, name: "Apricots" }
-		      ]
+			company_id 				: 	localStorage.getItem("company_Id"),
+			jobTitle 				: 	"",
+			addressLine1 			: 	"",
+			addressLine2 			: 	"",
+			country 				: 	"",
+			state 					: 	"",
+			district 				: 	"",
+			city 					: 	"",
+			area 					: 	"",
+			pincode 				: 	"",
+			stateCode				: 	"",
+			countryCode 			: 	"",
+			stateArray 				: 	[],
+			districtArray 			: 	[],
+			pincodeExists 			: 	true,
+			industry_id				: 	localStorage.getItem("industry_id"),
+			functionalArea 			: 	"",
+			/*functionalAreaId 		: 	"",*/
+			subFunctionalArea 		: 	"",
+			/*subFunctionalAreaId 	: 	"",*/
+			role 					: 	"",
+			gender             		: 	"Male Only",
+			workFromHome 			: 	false,
+			contactPersonName 		: 	"",
+			contactPersonEmail		: 	"",
+			contactPersonPhone		: 	"",
+			jobType 				: 	"",
+			jobTypeArray			: 	[],
+			jobTime 				: 	"",
+			jobTimeArray 			: 	[],
+			jobCategory 			: 	"",
+			jobCategoryArray 		: 	[],
+			lastDateOfAppl 			: 	"",
+			minSalary 				: 	"",
+			minSalPeriod 			: 	"",
+			maxSalary 				: 	"",
+			maxSalPeriod			: 	"",
+			jobDesc 				: 	"",
+			minEducation 			: 	"",
+			minExperience 			: 	"",
+			priSkillsArray 			: 	[],
+			primarySkills 			: 	[],
+			minPrimExp	    		: 	"",
+			secondarySkills 		: 	[], 
+			secSkillsArray 			: 	[],
+			minSecExp				: 	"", 
+			otherSkillsArray 		: 	[],
+			otherSkills 			: 	[],
+			minOtherExp				: 	"", 
+			preferSkillsArray 		: 	[],
+			minExpRequiredPre		: 	"",
+			industryList			: 	[],
+			functionalArealist 		: 	[],
+			subFunctionalAreaList	: 	[],
+			priSkillsArraylist 		: 	[],
+			secSkillsArraylist 		: 	[],
+			otherSkillsArraylist	: 	[],
+			preferSkillsArraylist	: 	[],
+			submitBtnText 			: 	"SUBMIT",
+			tags 					:   [],
+            							suggestions: suggestions,							
 		}
-
-		 this.reactTags = React.createRef()
-
-
 
 		this.style 	=  	{
 					      	chips 					: 	{
@@ -117,6 +119,11 @@ export default class JobPosting extends Component{
 					        								color: "white",
 					      								}
 				 		};
+
+		this.handleDelete 	= this.handleDelete.bind(this);
+        this.handleAddition = this.handleAddition.bind(this);
+        this.handleDrag 	= this.handleDrag.bind(this);
+        this.handleTagClick = this.handleTagClick.bind(this);		 		
 	 		
 	}
 	
@@ -124,7 +131,7 @@ export default class JobPosting extends Component{
 		this.getStates();
 		if(this.props.match.params.job_id){
 			let job_id = this.props.match.params.job_id;
-			Axios.get("/api/jobs/get/one/"+job_id)
+			Axios.get("/api/jobposting/get/one/"+job_id)
 			.then(response=>{
 				console.log("response.data : ", response.data);
 				this.setState({
@@ -254,15 +261,6 @@ export default class JobPosting extends Component{
 			""; 
 			status = true;
 		}
-		/*if(this.state.jobLocationCity.length<=0){
-			document.getElementById("jobLocationError").innerHTML=  
-			"Enter job location";  
-			status=false; 
-		}else{
-			document.getElementById("jobLocationError").innerHTML=  
-			""; 
-			status = true;
-		}*/
 		if(this.state.role.length<=0){
 			document.getElementById("roleError").innerHTML=  
 			"Enter role";  
@@ -301,6 +299,7 @@ export default class JobPosting extends Component{
 		}
 		 return status;
 	}
+	
 	getStates() {
 		Axios.get("http://locations2.iassureit.com/api/states/get/list/IN")
 			.then((response) => {
@@ -312,6 +311,7 @@ export default class JobPosting extends Component{
 			.catch((error) => {
 			})
 	}
+	
 	handleChange  = (event)=>{
 		var name  = event.currentTarget.name;
 		var value = event.currentTarget.value;
@@ -386,7 +386,7 @@ export default class JobPosting extends Component{
 	}	
 		
 	insertData(formValues){
-		Axios.post("/api/jobs/post",formValues)
+		Axios.post("/api/jobposting/post",formValues)
 			.then(response=> {
 				console.log("Inside axios",response.data);
 				if(response.data.message==="Job details Inserted Successfully"){
@@ -418,7 +418,7 @@ export default class JobPosting extends Component{
 									minPrimExp 	 		: "",
 									minSecExp 	 		: "",
 									minOtherExp			: ""
-								  });
+								});
 					this.props.history.push("/job-profile/"+job_id);
 				}
 			})
@@ -453,7 +453,6 @@ export default class JobPosting extends Component{
     setWorkFromHome(event) {
          this.setState({workFromHome: event.target.checked});
 	}	
-
    
 	keyPressNumber = (e) => {
 		if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 189]) !== -1 ||
@@ -471,6 +470,7 @@ export default class JobPosting extends Component{
 			e.preventDefault();
 		}
 	}
+	
 	camelCase(str) {
 		return str
 			.toLowerCase()
@@ -478,14 +478,16 @@ export default class JobPosting extends Component{
 			.map(word => word.charAt(0).toUpperCase() + word.slice(1))
 			.join(' ');
 	}
+	
 	handleChangeState(event) {
 	    var designation = document.getElementById("states");
     	var stateCode = designation.options[designation.selectedIndex].getAttribute("statecode");
 		this.setState({
-			[event.target.name]: event.target.value,
-			stateCode : stateCode
-		});
+						[event.target.name]: event.target.value,
+						stateCode : stateCode
+					});
 	}
+    
     handleChangePlaces = address => {
 	    this.setState({ addressLine1 : address});
 	};
@@ -526,45 +528,61 @@ export default class JobPosting extends Component{
           	}
       	}
 
-      console.log('state==>',state)
+    	console.log('state==>',state)
 
-      this.setState({
-        area : area,
-        city : city,
-        district : district,
-        states: state,
-        country:country,
-        pincode: pincode,
-        stateCode:stateCode,
-        countryCode:countryCode
-      })
-
-       
+	    this.setState({
+				    	area : area,
+				        city : city,
+				        district : district,
+				        states: state,
+				        country:country,
+				        pincode: pincode,
+				        stateCode:stateCode,
+				        countryCode:countryCode
+	      			})
+   
     })
      
       .catch(error => console.error('Error', error));
 
       geocodeByAddress(address)
-      .then(results => getLatLng(results[0]))
-      .then(latLng => this.setState({'latLng': latLng}))
-      .catch(error => console.error('Error', error));
+    	.then(results => getLatLng(results[0]))
+    	.then(latLng => this.setState({'latLng': latLng}))
+    	.catch(error => console.error('Error', error));
      
       this.setState({ addressLine1 : address});
-  	};	
-  	onDelete (i) {
-	    const tags = this.state.tags.slice(0)
-	    tags.splice(i, 1)
-	    this.setState({ tags })
-	}
-	 
-	onAddition (tag) {
-	    const tags = [].concat(this.state.tags, tag)
-	    this.setState({ tags })
-	}
-	
+  	};
+
+handleDelete(i) {
+				    const { tags } = this.state;
+				    this.setState({
+				    tags: tags.filter((tag, index) => index !== i),
+    			});
+  	}
+
+handleAddition(tag) {
+						this.setState(state => ({ tags: [...state.tags, tag] }));
+					}
+
+handleDrag(tag, currPos, newPos) {
+									const tags = [...this.state.tags];
+									const newTags = tags.slice();
+
+									newTags.splice(currPos, 1);
+									newTags.splice(newPos, 0, tag);
+
+									// re-render
+									this.setState({ tags: newTags });
+								}
+
+handleTagClick(index){
+						console.log('The tag at index ' + index + ' was clicked');
+					}
+
 	render(){	
+	const { tags, suggestions } = this.state;
 	const searchOptions = {
-      // types: ['(cities)'],
+    	// types: ['(cities)'],
       componentRestrictions: {country: "in"}
     }		
 		return(
@@ -573,9 +591,8 @@ export default class JobPosting extends Component{
 					<div className="col-lg-10 col-lg-offset-1 addJobForm pageWrapperBorder borderColor">
 						<div className="col-lg-10 col-lg-offset-1 mainFormSection">
 							<div className="addJobFormHeading col-lg-12">
-								Post A Job
-								<div className="addJobFormHr col-lg-12">
-								</div>
+									Post A Job
+								<div className="addJobFormHr col-lg-12"></div>
 							</div>
 							<div className="addJobMainHead col-lg-12">
 								<i className="fa fa-info"></i> 
@@ -603,40 +620,39 @@ export default class JobPosting extends Component{
 													<label htmlFor="jobLocation" className="addjobformLable"> Job Location <span className="asterisk">&#42;</span> </label>
 													<div className="input-group">
 														<span className="input-group-addon addJobFormField"><FontAwesomeIcon className="locationIcon" icon={['fas', 'map-marker-alt']} /></span> 
-														<PlacesAutocomplete
-				                                        value={this.state.addressLine1}
-				                                        onChange={this.handleChangePlaces}
-				                                        onSelect={this.handleSelect}
-				                                        searchOptions={searchOptions}
-				                                      	>
+															<PlacesAutocomplete
+					                                        	value 		  =	{this.state.addressLine1}
+					                                        	onChange 	  =	{this.handleChangePlaces}
+					                                        	onSelect 	  =	{this.handleSelect}
+					                                        	searchOptions =	{searchOptions} >
 				                                        {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
 				                                          <div>
 				                                            <input
-				                                              {...getInputProps({
-				                                                placeholder: 'Search Address ...',
-				                                                className: 'location-search-input col-lg-12 form-control errorinputText',
-				                                                id:"addressLine1",
-				                                                name:"addressLine1"
-				                                              })}
+				                                            	{...getInputProps({
+				                                            		placeholder: 'Search Address ...',
+				                                                	className: 'location-search-input col-lg-12 form-control errorinputText',
+				                                                	id:"addressLine1",
+				                                                	name:"addressLine1"
+				                                              	})}
 				                                            />
 				                                            <div className={this.state.addressLine1 ? "autocomplete-dropdown-container SearchListContainer" : ""}>
-				                                              {loading && <div>Loading...</div>}
-				                                              {suggestions.map(suggestion => {
-				                                                const className = suggestion.active
-				                                                  ? 'suggestion-item--active'
-				                                                  : 'suggestion-item';
+				                                            	{loading && <div>Loading...</div>}
+				                                            	{suggestions.map(suggestion => {
+				                                                	const className = suggestion.active
+				                                                  		? 'suggestion-item--active'
+				                                                  		: 'suggestion-item';
 				                                                // inline style for demonstration purpose
-				                                                const style = suggestion.active
-				                                                  ? { backgroundColor: '#fafafa', cursor: 'pointer' }
-				                                                  : { backgroundColor: '#ffffff', cursor: 'pointer' };
+				                                                	const style = suggestion.active
+				                                                  		? { backgroundColor: '#fafafa', cursor: 'pointer' }
+				                                                  		: { backgroundColor: '#ffffff', cursor: 'pointer' };
 				                                                return (
-				                                                  <div
-				                                                    {...getSuggestionItemProps(suggestion, {
-				                                                      className,
-				                                                      style,
-				                                                    })}
-				                                                  >
-				                                                    <span>{suggestion.description}</span>
+				                                                	<div
+				                                                    	{...getSuggestionItemProps(suggestion, {
+				                                                      		className,
+				                                                      		style,
+				                                                    	})}
+				                                                	>
+				                                                    <span> {suggestion.description} </span>
 				                                                  </div>
 				                                                );
 				                                              })}
@@ -974,18 +990,23 @@ export default class JobPosting extends Component{
 								</div>
 								<div className="col-lg-12 addJobFieldRow text-left">
 									<div className="row">
-										<div className="col-lg-8">
-											<label htmlFor="primSkills" className="addjobformLable"> Primary Skills </label>
+										<div className="col-lg-8 primarySkillsField">
+											<label htmlFor="primarySkills" className="addjobformLable"> Primary Skills </label>
 											<div className="input-group col-lg-12">
-												<span className="input-group-addon addJobFormField"> <i className='fa fa-cog'></i> </span> 
-													
-											        <ReactTags
-											        ref={this.reactTags}
-											        tags={this.state.tags}
-											        suggestions={this.state.suggestions}
-											        onDelete={this.onDelete.bind(this)}
-											        onAddition={this.onAddition.bind(this)} />
-											</div>
+												<span className="input-group-addon addJobFormField"> <i className='fa fa-cog'></i> </span>
+													<ReactTags
+														tags 		   = {tags}
+											        	suggestions    = {suggestions}
+											        	delimiters 	   = {delimiters}
+											        	handleDelete   = {this.handleDelete}
+											        	handleAddition = {this.handleAddition}
+											        	handleDrag 	   = {this.handleDrag}
+											        	handleTagClick = {this.handleTagClick}
+											        	name           = "primarySkills"
+											        	id             = "primarySkills"
+											        	value          = {this.state.primarySkills}
+										        	/>
+												</div>
 										</div>
 										<div className="col-lg-4">
 											<label htmlFor="minPrimExp" className="addjobformLable"> Min. Experience Req. </label>
@@ -998,11 +1019,22 @@ export default class JobPosting extends Component{
 								</div>
 								<div className="col-lg-12 addJobFieldRow text-left">
 									<div className="row">
-										<div className="col-lg-8">
-											<label htmlFor="secSkills" className="addjobformLable"> Secondary Skills </label>
+										<div className="col-lg-8 secondarySkillsField">
+											<label htmlFor="secondarySkills" className="addjobformLable"> Secondary Skills </label>
 											<div className="input-group col-lg-12">
-												<span className="input-group-addon addJobFormField"> <i className='fa fa-cog'></i> </span> 
-												
+												<span className="input-group-addon addJobFormField"> <i className='fa fa-cog'></i> </span>
+												<ReactTags
+													tags           = {tags}
+										        	suggestions    = {suggestions}
+										        	delimiters     = {delimiters}
+										        	handleDelete   = {this.handleDelete}
+										        	handleAddition = {this.handleAddition}
+										        	handleDrag     = {this.handleDrag}
+										        	handleTagClick = {this.handleTagClick}
+										        	name           = "secondarySkills"
+										        	id             = "secondarySkills"
+										        	value          = {this.state.secondarySkills}
+										        />
 											</div>
 										</div>
 										<div className="col-lg-4">
