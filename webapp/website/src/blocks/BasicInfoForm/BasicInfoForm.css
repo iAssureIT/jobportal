@@ -42,7 +42,6 @@
 }
 .nameTitleFormAge{
 	font-family: 'Montserrat-Bold';
-	font-weight:bold!important;
 	color: #fff;
 }
 .nameTitleFormStar{
@@ -62,26 +61,30 @@
 	padding:1px;
 }
 .inputBox{
-	border-radius-right: 3px;
+	border-top-right-radius:3px;
+	border-bottom-right-radius:3px;
 	border:1px solid var(--main-border-color)!important;
     background-color: var(--input-bg-color)!important;
     color:var(--main-txt-color)!important;
     font-size:13.5px!important;
     z-index:0!important;
+    text-transform:capitalize;
 
 }
 
 .showFeild{
-	margin-top:7px;
-	font-size:10px;
+	margin-top:9px;
+	font-size:12px;
 	font-weight:100!important;
 	letter-spacing: 1px;
+	font-family: 'Montserrat-Medium';
 }
 .showFeild2{
 	margin-top:14px;
 	font-size:10px;
 	font-weight:100!important;
 	letter-spacing: 1px;
+	font-family: 'Montserrat-Medium';
 }
 .genderFeildWrapper{
 	height:25px;
@@ -105,7 +108,8 @@
 }
 .genderFeildActive{
 	background-color:var(--main-border-color);
-	transition:all 0.5s;
+	transition:all 2s;
+
 }
 .buttonNext{
 	height: 28px;
@@ -145,4 +149,40 @@
 }
 .multiselectZ{
 	z-index:6;
+}
+::-webkit-calendar-picker-indicator {
+  filter: invert(100%);
+}
+::-webkit-calendar-picker-indicator:hover{
+	cursor: pointer;
+}
+
+.date{
+	text-transform:uppercase;
+}
+.inputImage{
+	width:240px !important;
+	margin-top: 3px;
+	border:1px solid var(--main-border-color);
+	padding:6px;
+	background-color: var(--input-bg-color);
+	border-radius: 3px!important;
+	font-size:13.5px!important;
+}
+.inputImage:hover{
+	cursor: pointer;
+}
+.profileImage{
+	margin-top:5px;
+}
+.delImgIcon{
+	position: absolute;
+	top:-15px;
+	right:10px;
+	font-size: 14px;
+	color:#f00;
+}
+.delImgIcon:hover{
+	cursor: pointer;
+
 }

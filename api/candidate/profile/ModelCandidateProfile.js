@@ -27,6 +27,8 @@ const candidateSchema = mongoose.Schema({
 		state			: String,
 		country 		: String,
 		pincode 		: Number,
+		stateCode 		: String,
+		countryCode 	: String,
 	}],
 	contact : {
 		mobile 			: String,

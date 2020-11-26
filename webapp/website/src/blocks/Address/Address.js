@@ -7,18 +7,29 @@ import Swal 			 	from 'sweetalert2';
 import '../BasicInfoForm/BasicInfoForm.css';
 import './Address.css';
 
+import PlacesAutocomplete, {
+  		geocodeByAddress,
+  		getLatLng
+} from "react-places-autocomplete";
 
 class Address extends Component{
 	constructor(props){
 		super(props);
 
 		this.state={
-			addressArry        :[],
-			addressType        : "",
 			addressID          : this.props.match.params.addressID,
 			candidateID        : this.props.match.params.candidateID,
+			addressArry        : [],
+			addressLine1 	   : "",
+			address 	       : "",
+			addressType        : "",
+			stateCode		   : "",
+			countryCode 	   : "",
+			stateArray 		   : [],
+			districtArray 	   : [],
+			pincodeExists 	   : true,
+			addressType        : "",
 			houseNumber        : "",
-			address            : "",
 			area               : "",
 			city               : "",
 			district   		   : "",	
@@ -32,9 +43,11 @@ class Address extends Component{
 	}
 	componentDidMount(){
 		this.getData();
+		this.getStates();
 
 		Axios.get("/api/addresstypemaster/get/list")
 			.then(response => {
+				console.log(response.data);
 				this.setState({inputAddressType : response.data});
 			})
 			.catch(error=>{
@@ -69,19 +82,20 @@ class Address extends Component{
 			}
 			Axios.post("/api/candidatemaster/post/getOneCandidateAddress",idDate)
 			.then(response=>{
+
 				var editData =response.data;
 
 			 	this.setState({
 			 		addressType :editData[0].address[0].addressType,
 			 		houseNumber :editData[0].address[0].houseNumber,
-			 		address     :editData[0].address[0].address,
-			 		area :editData[0].address[0].area,
-			 		city :editData[0].address[0].cityVillage,
-			 		district :editData[0].address[0].district,
-			 		state :editData[0].address[0].state,
-			 		country :editData[0].address[0].country,
-			 		pincode :editData[0].address[0].pincode,
-			 		buttonText:"Update"
+			 		address     :editData[0].address[0].address?editData[0].address[0].address:"",
+			 		area        :editData[0].address[0].area,
+			 		city        :editData[0].address[0].cityVillage,
+			 		district    :editData[0].address[0].district,
+			 		state       :editData[0].address[0].state,
+			 		country     :editData[0].address[0].country,
+			 		pincode     :editData[0].address[0].pincode,
+			 		buttonText  :"Update"
 			 	})
 			 	
 			 })
@@ -162,13 +176,15 @@ class Address extends Component{
 								{
 									addressType   : this.state.addressType,
 									houseNumber   : this.state.houseNumber,
-									address       : this.state.address,
+									address       : this.state.addressLine1,
 									area          : this.state.area,
 									cityVillage   : this.state.city,
 									district      : this.state.district,
-									state         : this.state.state,
+									state         : this.state.states,
 									country       : this.state.country,
-									pincode       : this.state.pincode
+									pincode       : this.state.pincode,
+									stateCode 	  : this.state.stateCode,
+        							countryCode   : this.state.countryCode
 								}
 								
 							}
@@ -187,7 +203,8 @@ class Address extends Component{
 
 									Swal.fire("Congrats","Your Address details update Successfully","success");
 										this.setState({
-														addressType        : [],
+														addressType        : "",
+														pincodeExists 	   : true,
 														houseNumber        : "",
 														address            : "",
 														area               : "",
@@ -212,12 +229,14 @@ class Address extends Component{
 	insetData(formValues){
 		var status =  this.validateForm();
 			if(status==true){
+				console.log("formValues",formValues);
 					Axios.patch("/api/candidatemaster/patch/addCandidateAddress",formValues)
 				 .then(response=>{
 
 									Swal.fire("Congrats","Your Address details is insert Successfully","success");
 										this.setState({
-														addressType        : [],
+														addressType        : "",
+														pincodeExists 	   : true,
 														houseNumber        : "",
 														address            : "",
 														area               : "",
@@ -242,6 +261,97 @@ class Address extends Component{
 		event.preventDefault();
     	this.props.history.push("/contact/"+this.state.candidateID);
 	}
+	getStates() {
+		Axios.get("http://locations2.iassureit.com/api/states/get/list/IN")
+			.then((response) => {
+				this.setState({
+					stateArray: response.data
+				})
+				document.getElementById('Statedata').val(this.state.states);
+			})
+			.catch((error) => {
+			})
+	}
+	camelCase(str) {
+		return str
+			.toLowerCase()
+			.split(' ')
+			.map(word => word.charAt(0).toUpperCase() + word.slice(1))
+			.join(' ');
+	}
+	handleChangeState(event) {
+	    var designation = document.getElementById("states");
+    	var stateCode = designation.options[designation.selectedIndex].getAttribute("statecode");
+		this.setState({
+			[event.target.name]: event.target.value,
+			stateCode : stateCode
+		});
+	}
+
+    handleChangePlaces = address => {
+	    this.setState({ addressLine1 : address});
+	};
+	handleSelect = address => {
+
+    geocodeByAddress(address)
+     .then((results) =>{ 
+      	for (var i = 0; i < results[0].address_components.length; i++) {
+          	for (var b = 0; b < results[0].address_components[i].types.length; b++) {
+              	switch (results[0].address_components[i].types[b]) {
+                  case 'sublocality_level_1':
+                      var area = results[0].address_components[i].long_name;
+                      break;
+                  case 'sublocality_level_2':
+                      area = results[0].address_components[i].long_name;
+                      break;
+                  case 'locality':
+                      var city = results[0].address_components[i].long_name;
+                      break;
+                  case 'administrative_area_level_1':
+                      var state = results[0].address_components[i].long_name;
+                      var stateCode = results[0].address_components[i].short_name;
+                      break;
+                  case 'administrative_area_level_2':
+                      var district = results[0].address_components[i].long_name;
+                      break;
+                  case 'country':
+                     var country = results[0].address_components[i].long_name;
+                     var countryCode = results[0].address_components[i].short_name;
+                    break; 
+                  case 'postal_code':
+                     var pincode = results[0].address_components[i].long_name;
+                      break;
+                  default :
+                  		break;
+              }
+          	}
+      	}
+
+      console.log('state==>',state)
+
+      this.setState({
+        area       : area,
+        city       : city,
+        district   : district,
+        states     : state,
+        country    : country,
+        pincode    : pincode,
+        stateCode  : stateCode,
+        countryCode: countryCode
+      })
+
+       
+    })
+     
+      .catch(error => console.error('Error', error));
+
+      geocodeByAddress(address)
+      .then(results => getLatLng(results[0]))
+      .then(latLng => this.setState({'latLng': latLng}))
+      .catch(error => console.error('Error', error));
+     
+      this.setState({ addressLine1 : address});
+  	};
 	//========== User Define Function End ==================
 
 	//========== Validation Start ==================
@@ -275,7 +385,7 @@ class Address extends Component{
 			""; 
 			status = true;
 		}
-		if(this.state.state.length<=0){
+		if(this.state.states.length<=0){
 			document.getElementById("stateError").innerHTML=  
 			"Please enter your State";  
 			status=false; 
@@ -310,6 +420,10 @@ class Address extends Component{
 	//========== Validation End ==================
 
 	render(){
+		const searchOptions = {
+      // types: ['(cities)'],
+      componentRestrictions: {country: "in"}
+       }	
 		return(
 				<div className="mainFormWrapper col-lg-12">
 					<div className="row">
@@ -318,17 +432,27 @@ class Address extends Component{
 							<div className="row formWrapper">
 
 								<div className="col-lg-4">
-									<label htmlFor="addressType" className="nameTitleForm">Address Type<sup className="nameTitleFormStar">*</sup></label>
+									<label htmlFor="addressType" className="nameTitleForm">
+										Address Type
+										<sup className="nameTitleFormStar">*</sup>
+									</label>
 									<div className="input-group ">
-										<span className="input-group-addon inputBoxIcon inputBoxIcon1"><i className="fa fa-map-marker"></i></span> 
-										<select className="form-control inputBox" id="addressType" value={this.state.addressType} name="addressType" onChange={this.handleChange.bind(this)}>
+										<span className="input-group-addon inputBoxIcon inputBoxIcon1">
+											<i className="fa fa-map-marker"></i>
+										</span> 
+										<select className="form-control inputBox" id="addressType" 
+										 value={this.state.addressType} name="addressType" 
+										 onChange={this.handleChange.bind(this)}>
 										  	<option > ---- select ---- </option>
 										  	{
-										  		this.state.inputAddressType!=null && this.state.inputAddressType.length>0
+										  		this.state.inputAddressType!=null 
+										  		&& this.state.inputAddressType.length>0
 										  		?	
 										  			this.state.inputAddressType.map((elem,index)=>{
 										  				return(
-										  					<option value={elem._id} key={index}>{elem.addressType}</option>
+										  					<option value={elem._id} key={index}>
+										  						{elem.addressType}
+										  					</option>
 										  				);
 										  			})
 										  			
@@ -339,73 +463,122 @@ class Address extends Component{
 									</div>
 								</div>
 
-							</div>
+							
 
-							<div className="row formWrapper">
-
-								<div className="col-lg-8">
-									<label htmlFor="houseNumber" className="nameTitleForm">House/Building Number<sup className="nameTitleFormStar">*</sup></label>
+								<div className="col-lg-4">
+									<label htmlFor="houseNumber" className="nameTitleForm">
+										House/Building Number
+										<sup className="nameTitleFormStar">*</sup>
+									</label>
 									<div className="input-group ">
-										<span className="input-group-addon inputBoxIcon inputBoxIcon1"><i className="fa fa-map-marker"></i></span> 
-										<input type="text" name="houseNumber" id="houseNumber" className="form-control inputBox " value={this.state.houseNumber} onChange={this.handleChange.bind(this)} />
+										<span className="input-group-addon inputBoxIcon inputBoxIcon1">
+											<i className="fa fa-map-marker"></i>
+										</span> 
+										<input type="text" name="houseNumber" id="houseNumber" 
+										 className="form-control inputBox " 
+										 value={this.state.houseNumber} 
+										 onChange={this.handleChange.bind(this)} />
 									</div> 
 									<span id="houseNumberError" className="errorMsg"></span>
 								</div>
 
 								<div className="col-lg-4">
-									<label htmlFor="houseNumber" className="nameTitleForm nameTitleFormAge"></label>
-									<div className="input-group showFeild2">
-										{this.state.houseNumber}	
-									</div> 
-								</div>
-
-							</div>
-
-							<div className="row formWrapper">
-
-								
-
-								<div className="col-lg-8">
 									<label htmlFor="address" className="nameTitleForm">Address</label>
 									<div className="input-group ">
-										<span className="input-group-addon inputBoxIcon"><i className="fa fa-map-marker"></i></span> 
-										<input type="text" name="address" id="address" className="form-control inputBox " value={this.state.address} onChange={this.handleChange.bind(this)} />
+										<span className="input-group-addon inputBoxIcon">
+											<i className="fa fa-map-marker"></i>
+										</span> 
+										<PlacesAutocomplete
+	                                        value={this.state.addressLine1}
+	                                        onChange={this.handleChangePlaces}
+	                                        onSelect={this.handleSelect}
+	                                        searchOptions={searchOptions}
+	                                      	>
+	                                        {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+	                                          <div>
+	                                            <input
+	                                              {...getInputProps({
+	                                                placeholder: 'Search Address ...',
+	                                                className: 'location-search-input   form-control inputBox',
+	                                                id:"addressLine1",
+	                                                name:"addressLine1"
+	                                              })}
+	                                            />
+	                                            <div className={this.state.addressLine1 ? 
+	                                            				"autocomplete-dropdown-container SearchListContainer inputBox" 
+	                                            				: ""}>
+	                                              {loading && <div>Loading...</div>}
+	                                              {suggestions.map(suggestion => {
+	                                                const className = suggestion.active
+	                                                  ? 'suggestion-item--active'
+	                                                  : 'suggestion-item';
+	                                                // inline style for demonstration purpose
+	                                                const style = suggestion.active
+	                                                  ? { backgroundColor: '#f5a721', cursor: 'pointer' }
+	                                                  : { backgroundColor: '#242933', cursor: 'pointer'};
+	                                                return (
+	                                                  <div
+	                                                    {...getSuggestionItemProps(suggestion, {
+	                                                      className,
+	                                                      style,
+	                                                    })}
+	                                                  >
+	                                                    <span>{suggestion.description}</span>
+	                                                  </div>
+	                                                );
+	                                              })}
+	                                            </div>
+	                                          </div>
+	                                        )}
+	                                      </PlacesAutocomplete>
 									</div> 
 								</div>
-
-								<div className="col-lg-4">
-									<label htmlFor="address" className="nameTitleForm nameTitleFormAge"></label>
-									<div className="input-group showFeild2">
-										{this.state.address}	
-									</div> 
-								</div>
-
 							</div>
 
 							<div className="row formWrapper">
 
 								<div className="col-lg-4">
-									<label htmlFor="area" className="nameTitleForm">Area/Suburb</label>
+									<label htmlFor="area" className="nameTitleForm">
+										Area/Suburb
+									</label>
 									<div className="input-group ">
-										<span className="input-group-addon inputBoxIcon"><FontAwesomeIcon icon="map-marked-alt" /></span> 
-										<input type="text" name="area" id="area" className="form-control inputBox" value={this.state.area} onChange={this.handleChange.bind(this)} />
+										<span className="input-group-addon inputBoxIcon">
+											<FontAwesomeIcon icon="map-marked-alt" />
+										</span> 
+										<input type="text" name="area" id="area" 
+										 className="form-control inputBox" value={this.state.area}
+										 onChange={this.handleChange.bind(this)} />
 									</div> 
 								</div>
 
 								<div className="col-lg-4">
-									<label htmlFor="city" className="nameTitleForm">City/Village<sup className="nameTitleFormStar">*</sup></label>
+									<label htmlFor="city" className="nameTitleForm">
+										City/Village
+										<sup className="nameTitleFormStar">*</sup>
+									</label>
 									<div className="input-group ">
-										<span className="input-group-addon inputBoxIcon"><i className="fa fa-map-marker"></i> </span> 
-										<input type="text" name="city" id="city" className="form-control inputBox" value={this.state.city} onChange={this.handleChange.bind(this)} />
+										<span className="input-group-addon inputBoxIcon">
+											<i className="fa fa-map-marker"></i> 
+										</span> 
+										<input type="text" name="city" id="city" 
+										 className="form-control inputBox" value={this.state.city} 
+										 onChange={this.handleChange.bind(this)} />
 									</div> 
 									<span id="cityError" className="errorMsg"></span>
 								</div>
 
 								<div className="col-lg-4">
-									<label htmlFor="district" className="nameTitleForm">District<sup className="nameTitleFormStar">*</sup></label>
+									<label htmlFor="district" className="nameTitleForm">
+										District
+										<sup className="nameTitleFormStar">*</sup>
+									</label>
 									<div className="input-group ">
-										<span className="input-group-addon inputBoxIcon"><i className="fa fa-map"></i> </span> 
-										<input type="text" name="district" id="district" className="form-control inputBox" value={this.state.district} onChange={this.handleChange.bind(this)} />
+										<span className="input-group-addon inputBoxIcon">
+											<i className="fa fa-map"></i> 
+										</span> 
+										<input type="text" name="district" id="district" 
+										 className="form-control inputBox" value={this.state.district} 
+										 onChange={this.handleChange.bind(this)} />
 									</div> 
 									<span id="districtError" className="errorMsg"></span>
 								</div>
@@ -415,35 +588,71 @@ class Address extends Component{
 							<div className="row formWrapper">
 
 								<div className="col-lg-4">
-									<label htmlFor="state" className="nameTitleForm">State<sup className="nameTitleFormStar">*</sup></label>
+									<label htmlFor="state" className="nameTitleForm">
+										State
+										<sup className="nameTitleFormStar">*</sup>
+									</label>
 									<div className="input-group ">
-										<span className="input-group-addon inputBoxIcon"><i className="fa fa-map"></i> </span> 
-										<input type="text" name="state" id="state" className="form-control inputBox" value={this.state.state} onChange={this.handleChange.bind(this)} />
+										<span className="input-group-addon inputBoxIcon">
+											<i className="fa fa-map"></i> 
+										</span> 
+										<select className="form-control inputBox"  id="states"
+										 ref="states" value={this.state.states} name="states" 
+										 onChange={this.handleChangeState.bind(this)} >
+											<option hidden>-- Select --</option>
+											{
+												this.state.stateArray && this.state.stateArray.length > 0 ?
+													this.state.stateArray.map((stateData, index) => {
+														return (
+															<option key={index} statecode={stateData.stateCode}>
+																{this.camelCase(stateData.stateName)}
+															</option>
+														);
+													}
+													) : ''
+											}
+										</select>
 									</div> 
 									<span id="stateError" className="errorMsg"></span>
 								</div>
 
 								<div className="col-lg-4">
-									<label htmlFor="country" className="nameTitleForm">Country<sup className="nameTitleFormStar">*</sup></label>
+									<label htmlFor="country" className="nameTitleForm">
+										Country
+										<sup className="nameTitleFormStar">*</sup>
+									</label>
 									<div className="input-group ">
-										<span className="input-group-addon inputBoxIcon"><i className="fa fa-flag"></i> </span> 
-										<input type="text" name="country" id="country" className="form-control inputBox" value={this.state.country} onChange={this.handleChange.bind(this)} />
+										<span className="input-group-addon inputBoxIcon">
+											<i className="fa fa-flag"></i> 
+										</span> 
+										<input type="text" name="country" id="country" 
+										 className="form-control inputBox" value={this.state.country} 
+										 onChange={this.handleChange.bind(this)} />
 									</div> 
 									<span id="countryError" className="errorMsg"></span>
 								</div>
 
 								<div className="col-lg-4">
-									<label htmlFor="pincode" className="nameTitleForm">Pincode<sup className="nameTitleFormStar">*</sup></label>
+									<label htmlFor="pincode" className="nameTitleForm">
+										Pincode
+										<sup className="nameTitleFormStar">*</sup>
+									</label>
 									<div className="input-group ">
-										<span className="input-group-addon inputBoxIcon"><FontAwesomeIcon icon="map-marked-alt" /> </span> 
-										<input type="number" name="pincode" id="pincode" className="form-control inputBox" value={this.state.pincode} onChange={this.handleChange.bind(this)} />
+										<span className="input-group-addon inputBoxIcon">
+											<FontAwesomeIcon icon="map-marked-alt" /> 
+										</span> 
+										<input type="number" name="pincode" id="pincode" 
+										 className="form-control inputBox" value={this.state.pincode} 
+										 onChange={this.handleChange.bind(this)} />
 									</div> 
 									<span id="pincodeError" className="errorMsg"></span>
 								</div>
 
 							</div>
 							<div>
-								<button className="buttonBack pull-right" onClick={this.handleSave.bind(this)}> {this.state.buttonText}</button>
+								<button className="buttonBack pull-right" onClick={this.handleSave.bind(this)}> 
+								 	{this.state.buttonText}
+								 </button>
 							</div>
 							<div className=" AddressWrapper col-lg-12" >
 								<div className="row">
@@ -459,7 +668,7 @@ class Address extends Component{
 													<div className="col-lg-1 AddressBoxLeftIcon">
 														<FontAwesomeIcon icon="map-marker-alt" />
 													</div>
-													<div className="col-lg-10">
+													<div className="col-lg-10 AddressBoxTextWrapper">
 														<div className="AddressBoxHead">
 															Address details
 														</div>
@@ -493,11 +702,11 @@ class Address extends Component{
 															<FontAwesomeIcon icon="ellipsis-h" />
 														
 																<div className="rightIconHideWrapper" >
-																<a id={elem._id} href={"/address/"+this.state.candidateID+"/edit/"+elem._id}>
-																	<div className="rightIconHide"   >
-																		<FontAwesomeIcon icon="pencil-alt" /> 
-																		<span className="rightIconHideRexr" >Edit</span>
-																	</div>
+																	<a id={elem._id} href={"/address/"+this.state.candidateID+"/edit/"+elem._id}>
+																		<div className="rightIconHide"   >
+																			<FontAwesomeIcon icon="pencil-alt" /> 
+																			<span className="rightIconHideRexr" >Edit</span>
+																		</div>
 																	</a>
 																	<div className="rightIconHide">
 																		<FontAwesomeIcon icon="trash-alt" /> 

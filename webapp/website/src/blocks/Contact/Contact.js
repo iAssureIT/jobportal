@@ -3,8 +3,12 @@ import Moment               from 'moment';
 import { withRouter }	 	from 'react-router-dom';
 import Axios 			 	from 'axios';
 import Swal 			 	from 'sweetalert2';
+import PhoneInput 			from 'react-phone-input-2';
 import '../BasicInfoForm/BasicInfoForm.css';
 import './Contact.css';
+
+import 'react-phone-input-2/lib/style.css';
+
 
 class Contact extends Component{
 	constructor(props){
@@ -144,28 +148,49 @@ class Contact extends Component{
 						<div className="row formWrapper contactWrapper">
 
 							<div className="col-lg-4">
-								<label htmlFor="mobile" className="nameTitleForm">Mobile Number<sup className="nameTitleFormStar">*</sup></label>
-								<div className="input-group ">
-									<span className="input-group-addon inputBoxIcon"><i className="fa fa-mobile"></i> </span> 
-									<input type="text" name="mobile" id="mobile" className="form-control inputBox" value={this.state.mobile} onChange={this.handleChange.bind(this)} />
-								</div> 
+								<label htmlFor="mobile" className="nameTitleForm">
+									Mobile Number
+									<sup className="nameTitleFormStar">*</sup>
+								</label>
+								<PhoneInput 
+									country   = {'in'}
+									id        ="mobile" 
+									className ="input-group-addon form-control inputBox" 
+									value     ={this.state.mobile} 
+									onChange  = {mobile => this.setState({ mobile })}
+								 />
+							
 								<span id="mobileError" className="errorMsg"></span>
 							</div>
 
 							<div className="col-lg-4">
-								<label htmlFor="alternate" className="nameTitleForm">Alternate Mobile Number<sup className="nameTitleFormStar">*</sup></label>
-								<div className="input-group ">
-									<span className="input-group-addon inputBoxIcon"><i className="fa fa-mobile"></i> </span> 
-									<input type="text" name="alternate" id="alternate" className="form-control inputBox" value={this.state.alternate} onChange={this.handleChange.bind(this)} />
-								</div> 
+								<label htmlFor="alternate" className="nameTitleForm">
+									Alternate Mobile Number
+									<sup className="nameTitleFormStar">*</sup>
+								</label>
+								<PhoneInput 
+									country   = {'in'}
+									id        ="alternate" 
+									className ="input-group-addon form-control inputBox" 
+									value     ={this.state.alternate} 
+									onChange  = {alternate => this.setState({ alternate })}
+								 />
+								
 								<span id="alternateError" className="errorMsg"></span>
 							</div>
 
 							<div className="col-lg-4">
-								<label htmlFor="email" className="nameTitleForm">Personal Mail ID<sup className="nameTitleFormStar">*</sup></label>
+								<label htmlFor="email" className="nameTitleForm">
+									Personal Mail ID
+									<sup className="nameTitleFormStar">*</sup>
+								</label>
 								<div className="input-group ">
-									<span className="input-group-addon inputBoxIcon"><i className="fa fa-envelope-o"></i> </span> 
-									<input type="email" name="email" id="email" className="form-control inputBox" value={this.state.email} onChange={this.handleChange.bind(this)} readonly="readonly"/>
+									<span className="input-group-addon inputBoxIcon">
+										<i className="fa fa-envelope-o"></i> 
+									</span> 
+									<input type="email" name="email" id="email" 
+									 className="form-control inputBox" value={this.state.email} 
+									 onChange={this.handleChange.bind(this)} />
 								</div> 
 								<span id="emailError" className="errorMsg"></span>
 							</div>
