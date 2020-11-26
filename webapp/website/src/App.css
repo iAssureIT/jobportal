@@ -16,6 +16,10 @@
   --yellow-button-color             : #f5a721;
   --red-button-color                : #ff4444;
 }
+
+body{
+  padding: 0px !important;
+}
 .basicInfoWrapper{
   min-height: 100px;
   height: auto;

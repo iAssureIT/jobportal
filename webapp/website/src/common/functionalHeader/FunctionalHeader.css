@@ -163,7 +163,7 @@ ont-face {
 
 .functionalbarsToggel{
 	position: fixed;
-    right: 15px;
+    /*right: 15px;*/
     width: auto;
     min-width: 1250px;
 	height: auto;

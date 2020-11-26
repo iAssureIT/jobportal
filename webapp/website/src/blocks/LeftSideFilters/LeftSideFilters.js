@@ -88,6 +88,7 @@ export default class LeftSideFilters extends Component{
 
  componentDidMount(){
   let allIndustries = [];
+  let allFunctionalAreas = [];
   Axios.get("/api/industrymaster/get/list")
       .then(response => {
         console.log("get Industry Data response.data = ",response.data);
@@ -119,7 +120,8 @@ export default class LeftSideFilters extends Component{
         ?
           this.state.inputSector.map((elem,index)=>{
             
-            this.state.allFunctionalAreas.push(elem.functionalArea);
+            allFunctionalAreas.push({functionalArea:elem.functionalArea,id:elem._id})
+            this.setState({allFunctionalAreas:allFunctionalAreas})
             
           })
         :
@@ -160,6 +162,7 @@ export default class LeftSideFilters extends Component{
     console.log("filterType",filterType)
     var selector=this.state.selector;
     var industry_ids = [];
+    var functionalArea_ids=[];
     selector.countryCode = "IN"; 
     //selector.stateCode = selecteditems.currentTarget.value; 
 
@@ -169,6 +172,13 @@ export default class LeftSideFilters extends Component{
         industry_ids.push(elem.id);
       })
       selector.industry_id = selecteditems;
+    }
+
+    if (filterType === 'functionalArea') {
+      selecteditems.map((elem,index)=>{
+        functionalArea_ids.push(elem.id);
+      })
+      selector.functionalArea_id = selecteditems;
     }
 
     
@@ -238,7 +248,9 @@ export default class LeftSideFilters extends Component{
                     id="allFunctionalAreas" name="allFunctionalAreas" placeholder="All Functional Areas"
                     
                       options={this.state.allFunctionalAreas}
-                        isObject={false}
+                      displayValue="functionalArea"
+                      onSelect={this.onSelectedItemsChange.bind(this,'functionalArea')} // Function will trigger on select event
+                      onRemove={this.onSelectedItemsChange.bind(this,'functionalArea')}
                         //showCheckbox={true}
                         style={this.style}
                    />    
