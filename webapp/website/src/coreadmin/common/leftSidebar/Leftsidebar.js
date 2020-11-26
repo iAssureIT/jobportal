@@ -4,7 +4,7 @@ import $                                              from "jquery";
 import { BrowserRouter, Route, Switch,Link  } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'font-awesome/css/font-awesome.min.css'; 
-import './Leftsidebar.css';
+
 import './dashboard.css';
 
 

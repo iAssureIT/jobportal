@@ -124,7 +124,7 @@ export default class JobPosting extends Component{
 		this.getStates();
 		if(this.props.match.params.job_id){
 			let job_id = this.props.match.params.job_id;
-			Axios.get("/api/jobposting/get/one/"+job_id)
+			Axios.get("/api/jobs/get/one/"+job_id)
 			.then(response=>{
 				console.log("response.data : ", response.data);
 				this.setState({
@@ -386,7 +386,7 @@ export default class JobPosting extends Component{
 	}	
 		
 	insertData(formValues){
-		Axios.post("/api/jobposting/post",formValues)
+		Axios.post("/api/jobs/post",formValues)
 			.then(response=> {
 				console.log("Inside axios",response.data);
 				if(response.data.message==="Job details Inserted Successfully"){

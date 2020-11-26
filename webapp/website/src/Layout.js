@@ -18,7 +18,6 @@ import Header               from './common/header/Header.js';
 import FunctionalHeader     from './common/functionalHeader/FunctionalHeader.js'; 
 import MapHeader            from './common/mapHeader/MapHeader.js'; 
 import Footer               from './common/footer/Footer.js';
-import Leftsidebar          from './common/leftSidebar/Leftsidebar.js';
 import CoreLayout           from './coreadmin/CoreLayout/CoreLayout.js';
 
 import PageFunctionWise     from './pages/PageFunctionalAreawiseJobs/PageFunctionWise.js';
@@ -139,7 +138,7 @@ class Layout extends Component  {
                                             <Route exact path="/functional-area"        component={PageFunctionWise}  />
                                             <Route exact path="/subfunctional-area"        component={SubPageFunctionWise}  />
 
-                                            <Route exact path="/"        component={India}  />
+                                            <Route exact path="/"        component={Homepage}  />
 
                                             <Route exact path="/basic-info"        component={CandidateBasicInfo}  />
                                             <Route exact path="/address/:candidateID"           component={CandidateAddress}  />
@@ -204,7 +203,7 @@ class Layout extends Component  {
                     <Router >
                         <Switch >
 
-                            <Route exact path="/"        component={India}  />
+                            <Route exact path="/"        component={Homepage}  />
                             {/*<Route exact path="/Andaman And Nicobar Islands"        component={AndamanAndNicobar }  />
                             */}
                             <Route exact path="/Andhra Pradesh"        component={AndhraPradesh }  />
@@ -246,6 +245,7 @@ class Layout extends Component  {
                             <Route exact path="/subfunctional-area"        component={SubPageFunctionWise}  />
                         </Switch>
                     </Router>
+                    <Footer />
                 </div>
             );
         }

@@ -8,7 +8,6 @@ import 'font-awesome/css/font-awesome.min.css';
 import Header from '../common/header/Header.js'
 import ViewAllNotification from '../common/header/ViewAllNotifications.js'
 import Footer from '../common/footer/Footer.js'
-import Leftsidebar from '../common/leftSidebar/Leftsidebar.js';
 
 class CoreLayout extends Component {
     render() {

@@ -166,7 +166,7 @@ app.use("/api/collagemaster", collageMasterRoutes);
 app.use("/api/modulemaster", moduleRoutes);
 app.use("/api/facilitymaster", facilityRoutes);
 app.use("/api/candidatemaster", candidateProfileRoutes);
-app.use("/api/jobposting", jobPostRoutes);
+app.use("/api/jobs", jobPostRoutes);
 app.use("/api/candidateProfile", condidateProfileRoutes);
 app.use("/api/map", mapRoutes);
 

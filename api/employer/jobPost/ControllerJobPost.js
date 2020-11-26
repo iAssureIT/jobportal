@@ -14,7 +14,6 @@ exports.insertJobs = (req, res, next)=>{
 									"jobTitle"				: req.body.jobTitle,
 									"industry_id"			: req.body.industry_id,
 									"functionalarea_id" 	: req.body.functionalarea_id,
-									"functionalArea" 		: req.body.functionalArea,
 									"subfunctionalarea_id"	: req.body.subfunctionalarea_id,
 									"role"					: req.body.role,
 									"gender"				: req.body.gender,
@@ -91,7 +90,29 @@ exports.insertJobs = (req, res, next)=>{
 exports.getJob = (req,res,next)=>{
 	var job_id = req.params.job_id;
 
-	Jobs.findOne({_id : job_id})
+	Jobs.aggregate([
+        {$match:{"_id": ObjectID(req.params.job_id)} },
+        
+        {$lookup:{
+                   from: "functionalareamaster",
+                   localField: "jobBasicInfo.functionalArea",
+                   foreignField: "_id",
+                   as: "functionalAreas" } 
+        },
+        {$lookup:{
+                   from: "subfunctionalareamaster",
+                   localField: "jobBasicInfo.subFunctionalArea",
+                   foreignField: "_id",
+                   as: "subFunctionalAreas" } 
+         },   
+         {$lookup:{
+                   from: "jobtypemaster",
+                   localField: "jobBasicInfo.jobType",
+                   foreignField: "_id",
+                   as: "jobTypes" } 
+         }
+         ])
+    	.exec()
 		
 		.then(jobsData=> {
 							res.status(200).json({	
@@ -111,8 +132,27 @@ exports.getJob = (req,res,next)=>{
 
 exports.getJobList = (req,res,next)=>{
 	
-	Jobs.find({company_id: req.body.company_id})
-		
+	Jobs.aggregate([
+        {$lookup:{
+                   from: "functionalareamaster",
+                   localField: "jobBasicInfo.functionalArea",
+                   foreignField: "_id",
+                   as: "functionalAreas" } 
+        },
+        {$lookup:{
+                   from: "subfunctionalareamaster",
+                   localField: "jobBasicInfo.subFunctionalArea",
+                   foreignField: "_id",
+                   as: "subFunctionalAreas" } 
+         },   
+         {$lookup:{
+                   from: "jobtypemaster",
+                   localField: "jobBasicInfo.jobType",
+                   foreignField: "_id",
+                   as: "jobTypes" } 
+         }
+         ])
+    	.exec()
 		.then(jobList=> {
 							res.status(200).json({	
 								jobList  : jobList,
@@ -200,6 +240,29 @@ exports.updateJob = (req,res,next)=>{
 								})
 					  	});
 	}
+
+exports.filterJobs = (req, res, next)=>{
+	console.log("req.body - ", req.body);
+	var selector = {}; 
+    selector['$and']=[];
+    selector["$and"].push({ "location.countryCode" :  req.body.countryCode   })
+    /*selector["$and"].push({ "jobBasicInfo.industry_id" : { $elemMatch: { $in:
+		req.body.industry_id.map(elem => {ObjectId(elem)}) } }
+    });*/
+    console.log(JSON.stringify(selector))
+    Jobs.find(selector)
+    .sort({createdAt : -1})
+    .exec()
+    .then(data=>{
+        res.status(200).json(data);
+    })
+    .catch(err =>{
+    	console.log(err)
+        res.status(500).json({
+            error: err
+        });
+    });
+}
 
 exports.deleteJob = (req, res, next)=>{
 	console.log("req.body - ", req.body);

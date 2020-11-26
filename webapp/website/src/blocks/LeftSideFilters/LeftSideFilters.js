@@ -13,24 +13,24 @@ export default class LeftSideFilters extends Component{
 
     this.state = {
 
-      allIndustries  : [],
-      inputIndustry  : [],
+      allIndustries         : [],
+      inputIndustry         : [],
 
-      allSectors  : [],
-      inputSector : [],
+      allFunctionalAreas    : [],
+      inputSector           : [],
 
-      allRoles  : [],
-      inputRole : [],
+      allRoles              : [],
+      inputRole             : [],
 
-      allExperiences  : "",
-      inputExperience : ['Experience-1','Experience-2','Experience-3'],
+      allExperiences        : "",
+      inputExperience       : ['Experience-1','Experience-2','Experience-3'],
         
-      industry   :  '-',
-      Sector     :  '-',
-      role       :  '-',
-      Experience :  '-',
+      industry              : [],
+      functionalArea        : [],
+      role                  : '-',
+      experience            : '-',
 
-      selector   :{},
+      selector              : {},
 
     };
 
@@ -87,18 +87,20 @@ export default class LeftSideFilters extends Component{
   
 
  componentDidMount(){
-
+  let allIndustries = [];
   Axios.get("/api/industrymaster/get/list")
       .then(response => {
         console.log("get Industry Data response.data = ",response.data);
         this.setState({inputIndustry : response.data});
-        console.log("industry",this.state.inputIndustry);
+        
         this.state.inputIndustry!=null && this.state.inputIndustry.length > 0 
         ?
           this.state.inputIndustry.map((elem,index)=>{
             
-            this.state.allIndustries.push(elem.industry);
+            allIndustries.push({industry:elem.industry,id:elem._id})
+            this.setState({allIndustries:allIndustries})
             
+             
           })
         :
           this.state.allIndustries.push("select");
@@ -108,7 +110,7 @@ export default class LeftSideFilters extends Component{
       })
 
 
-      Axios.get("http://qaapi-jobportal.iassureit.in/api/functionalareamaster/get/list")
+      Axios.get("/api/functionalareamaster/get/list")
       .then(response => {
         console.log("get functionalArea Data response.data = ",response.data);
         this.setState({inputSector : response.data});
@@ -117,17 +119,17 @@ export default class LeftSideFilters extends Component{
         ?
           this.state.inputSector.map((elem,index)=>{
             
-            this.state.allSectors.push(elem.functionalArea);
+            this.state.allFunctionalAreas.push(elem.functionalArea);
             
           })
         :
-          this.state.allSectors.push("select");
+          this.state.allFunctionalAreas.push("select");
       })
       .catch(error=>{
         Swal.fire("Error while getting inputSector List data",error.message,'error');
       })
 
-      Axios.get("http://qaapi-jobportal.iassureit.in/api/jobrolemaster/get/list")
+      Axios.get("/api/jobrolemaster/get/list")
       .then(response => {
         console.log("get Jpb Role Data response.data = ",response.data);
         this.setState({inputRole : response.data});
@@ -145,11 +147,61 @@ export default class LeftSideFilters extends Component{
       .catch(error=>{
         Swal.fire("Error while getting inputRole List data",error.message,'error');
       })
+  }
+  onSelect(selectedList, selectedItem) {
+    console.log(selectedList)
+    //console.log(selectedItem)
+  }
+   
+  onRemove(selectedList, removedItem) {
+     console.log(selectedList)
+  }
+  onSelectedItemsChange(filterType, selecteditems){
+    console.log("filterType",filterType)
+    var selector=this.state.selector;
+    var industry_ids = [];
+    selector.countryCode = "IN"; 
+    //selector.stateCode = selecteditems.currentTarget.value; 
 
+    
+    if (filterType === 'industry') {
+      selecteditems.map((elem,index)=>{
+        industry_ids.push(elem.id);
+      })
+      selector.industry_id = industry_ids;
+    }
 
+    
+    this.setState({ selector: selector });
+    console.log("selecteditems",this.state.selector)
+    
+    this.setState({ selector: selector },()=>{
+      this.getFilteredData(this.state.selector);
+    })
+    /*  
+      delete selector.district
+      
+    
+    if(filterType === 'functionalArea'){
+      selector.district  = selecteditems.currentTarget.value; 
+    }
+    */
+  }
+  getFilteredData(selector){
 
- }
-  
+    Axios.post("/api/jobs/filter", selector)
+      .then((response) => {
+        // console.log("response>/",response.data,this.state.roles,this.state.getcompanyID)
+       
+        //   this.setState({
+        //     entityList   : response.data,
+        //     showDetails  : true,
+        //   })
+        
+      })
+      .catch((error) => {
+      })
+  }
   render(){
     
    
@@ -164,11 +216,13 @@ export default class LeftSideFilters extends Component{
            			
            				 <Multiselect className="form-control LeftSideFiltersInputBox LeftSideFiltersDrop"
                     id="allIndustries" name="allIndustries" placeholder="All Industries"
-                		
-                      options={this.state.allIndustries}
-                        isObject={false}
-                        //showCheckbox={true}
-                        style={this.style}
+                		//onChange={this.onSelectedItemsChange.bind(this,'industry')}
+                    options={this.state.allIndustries}
+                    displayValue="industry"
+                    onSelect={this.onSelectedItemsChange.bind(this,'industry')} // Function will trigger on select event
+                    onRemove={this.onSelectedItemsChange.bind(this,'industry')}
+                    style={this.style}
+                    
            				 />   
 
           
@@ -181,9 +235,9 @@ export default class LeftSideFilters extends Component{
               <div className="input-group FilterDropDown1 col-lg-12">
                
                    <Multiselect className="form-control LeftSideFiltersInputBox LeftSideFiltersDrop"
-                    id="allSectors" name="allSectors" placeholder="All Sectors"
+                    id="allFunctionalAreas" name="allFunctionalAreas" placeholder="All Functional Areas"
                     
-                      options={this.state.allSectors}
+                      options={this.state.allFunctionalAreas}
                         isObject={false}
                         //showCheckbox={true}
                         style={this.style}
