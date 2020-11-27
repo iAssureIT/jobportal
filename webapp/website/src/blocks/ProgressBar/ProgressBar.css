@@ -1,85 +1,83 @@
 
 .progressBarWrapper{
-	height:180px;
+	height:170px;
 	background-color: var(--main-bg-color);
 	padding-top:40px;
 	padding-bottom:20px;
 
 }
-.progressBar1Li{
-	width:20px;
-	height:20px;
-	background-color:var(--main-bg-color);
-	margin-top:20px ;
-	margin-left:25px ;
-	border:1px solid var(--main-border-color);
-	font-size:10px;
-	color:var(--main-txt-color);
-	padding-top:3px;
+.progressBar{
+	display:flex;
+	align-items:flex-end;
+	color:#999;
 }
-.progressBarActive{
-	background-color:var(--main-border-color);
-}
-.progressBar ul{
+.step{
 	text-align:center;
+	width: 19.6%;
+	z-index:;
+}
+.step6{
+	text-align:center;
+	width: 2%;
+}
+.stepText{
+	font-size:11px;
+}
+.bullet{
+	display:inline-block;
+	position:relative;
+	height:18px;
+	width: 18px;
+	font-size:10px;
+	padding-top:2px;
+	border:1px solid var(--main-border-color);
+	background-color:var(--main-bg-color);
+	margin-bottom:5px;
+	text-align:center;
+	z-index:2;
+
+}
+.step .active{
+	color:#fff;
+	background:var(--yellow-button-color)!important;
+}
+.bullet::after{
+	content:'';
+	position:absolute;
+	width:155px; 
+	height:1px;
+	left:16px;
+	top:8px;
+	background:var(--yellow-button-color);
 	z-index:-2;
 
 }
-.progressBar ul li{
-	display:inline-block;
-	width:130px;
-	position:relative;
-	z-index:1;
+.step:nth-child(6) .bullet::after{
+	width:0px;
+	
+}
 
-}
-.progressBar1LiTitle{
-	margin-top:10px ;
-	margin-left:-60px;
-	color:#aaa;
-	font-size:11px;
-}
-.progressBar1Li::after{
-	content:'';
-	background:var(--main-border-color);
-	height:1px;
-	width:200px;
-	display:block;
-	position:absolute;
-	top:30px;
-	left:0;
-	z-index:-1;
-}
-.progressBar ul li:first-child .progressBar1Li::after{
-	width:100px!important;
-	left:30px;
-}
-.progressBar ul li:nth-child(5) .progressBar1Li::after{
-	width:130px;
-	
-}.progressBar ul li:nth-child(6) .progressBar1Li::after{
-	width:30px;
-	
-}
+
 .progressBar2{
+	margin-top:25px;
 	border:1px solid var(--main-border-color);
 	background-color:var(--main-bg-color)!important;
-}
-
-.mainProgessBar{
-	margin-top:15px;
-	margin-bottom:20px;
+	margin-bottom:0px;
 
 }
+
 .progressBar2 img{
 	height:35px;
 	position:absolute;
-	top:-10px;
-	left:23%;
+	top:15px;
+	transition:all 2s;
+	
 }
 .progress-bar {
     background-color: var(--main-border-color);
+    transition:all 2s;
 }
 .progress-bar-striped {
-    background-image: linear-gradient(135deg, rgba(0, 0, 0, 0.9) 25%, transparent 25%, transparent 50%, rgba(0, 0, 0, 0.9) 50%, rgba(0, 0, 0, 0.9) 75%, transparent 75%, transparent)!important;
+    background-image: linear-gradient(135deg, rgba(20, 40, 60, 0.9) 25%, transparent 25%, transparent 50%, rgba(20, 40, 60, 0.9) 50%, rgba(20, 40, 60, 0.9) 75%, transparent 75%, transparent)!important;
     background-size: 1.3rem 1.3rem!important;
 }

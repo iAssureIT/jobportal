@@ -19,6 +19,7 @@
 
 body{
   padding: 0px !important;
+ background-color: var(--main-bg-color )!important;
 }
 .basicInfoWrapper{
   min-height: 100px;

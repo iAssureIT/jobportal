@@ -15,7 +15,7 @@ class CandidateAcademics extends Component{
 		return(
 				<div className="mainPagesWrapper col-lg-12">
 					<div className="row">
-						<ProgressBar/>
+						<ProgressBar width="60" left="57.5" img="37"/>
 					</div>
 					<div className="basicInfoWrapper row">
 						<div className=" col-lg-8 col-lg-offset-2 BasicInfoBlock">

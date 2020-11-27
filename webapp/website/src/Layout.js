@@ -127,12 +127,12 @@ class Layout extends Component  {
                     <div className="wrapper">
 
                         <Header />
-                        <div className="">
-                            <div className="row">
+                       
                                 <div className="container-fluid main-container">
                                     <div className="row">
                                         <div className="dashboardWrapper" >
                                             <div className="backColor col-lg-12 col-md-12 col-sm-12 col-xs-12" >
+                                                <div className="row">
                                               {/*  <CoreLayout />*/}
                                         <Switch >
                                             <Route exact path="/functional-area"        component={PageFunctionWise}  />
@@ -183,10 +183,10 @@ class Layout extends Component  {
 
                                         </Switch>
                                             </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
+                             
                         </div>
                         </div>
                         <Footer />

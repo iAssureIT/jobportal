@@ -28,7 +28,6 @@ class Address extends Component{
 			stateArray 		   : [],
 			districtArray 	   : [],
 			pincodeExists 	   : true,
-			addressType        : "",
 			houseNumber        : "",
 			area               : "",
 			city               : "",
@@ -47,7 +46,7 @@ class Address extends Component{
 
 		Axios.get("/api/addresstypemaster/get/list")
 			.then(response => {
-				console.log(response.data);
+				
 				this.setState({inputAddressType : response.data});
 			})
 			.catch(error=>{
@@ -62,7 +61,9 @@ class Address extends Component{
 		
 		Axios.get("/api/candidatemaster/get/one/"+this.state.candidateID)
 		.then(response=>{
+			console.log(response.data);
 			 	this.setState({
+
 			 		addressArry: response.data[0].address
 
 				 })
@@ -86,15 +87,15 @@ class Address extends Component{
 				var editData =response.data;
 
 			 	this.setState({
-			 		addressType :editData[0].address[0].addressType,
-			 		houseNumber :editData[0].address[0].houseNumber,
+			 		addressType :editData[0].address[0].addressType?editData[0].address[0].addressType:"",
+			 		houseNumber :editData[0].address[0].houseNumber?editData[0].address[0].houseNumber:"",
 			 		address     :editData[0].address[0].address?editData[0].address[0].address:"",
-			 		area        :editData[0].address[0].area,
-			 		city        :editData[0].address[0].cityVillage,
-			 		district    :editData[0].address[0].district,
-			 		state       :editData[0].address[0].state,
-			 		country     :editData[0].address[0].country,
-			 		pincode     :editData[0].address[0].pincode,
+			 		area        :editData[0].address[0].area?editData[0].address[0].area:"",
+			 		city        :editData[0].address[0].cityVillage?editData[0].address[0].cityVillage:"",
+			 		district    :editData[0].address[0].district?editData[0].address[0].district:"",
+			 		state       :editData[0].address[0].state?editData[0].address[0].state:"",
+			 		country     :editData[0].address[0].country?editData[0].address[0].country:"",
+			 		pincode     :editData[0].address[0].pincode?editData[0].address[0].pincode:"",
 			 		buttonText  :"Update"
 			 	})
 			 	
@@ -171,7 +172,7 @@ class Address extends Component{
 		var status =  this.validateForm();
 			var formValues = {	
 								candidateID   : this.state.candidateID,
-								addressID   : this.state.addressID,
+								addressID     : this.state.addressID,
 								address       :   
 								{
 									addressType   : this.state.addressType,
@@ -501,7 +502,7 @@ class Address extends Component{
 	                                                placeholder: 'Search Address ...',
 	                                                className: 'location-search-input   form-control inputBox',
 	                                                id:"addressLine1",
-	                                                name:"addressLine1"
+	                                                name:"addressLine1",
 	                                              })}
 	                                            />
 	                                            <div className={this.state.addressLine1 ? 

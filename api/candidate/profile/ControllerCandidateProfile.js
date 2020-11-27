@@ -187,7 +187,7 @@ exports.updateOneCandidateAddress = (req,res,next)=>{
 							'address.$.country' 		: address.country,
 							'address.$.pincode' 		: address.pincode,
                             'address.$.stateCode'       : address.stateCode,
-                            'address.$.countryCode'     : address.countryCode,
+                            'address.$.countryCode'     : address.countryCode
                         }
             }
         )
