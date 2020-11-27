@@ -5,7 +5,9 @@ const initialState = {
 	selectedState 				: "",
 	selectedDistrict 			: "",
 	selectedModal 				: "login",
-	userID 						: "" 
+	userID 						: "",
+	selector 					: {},
+	filterData 					: []
 }
 
 const reducer = (state = initialState,action) => {
@@ -24,6 +26,10 @@ const newState = {...state};
 	}
 	if(action.type === "SET_USERID"){
 		newState.userID 	= action.userID;
+	}
+	if(action.type === "SET_FILTER"){
+		newState.selector 	= action.selector;
+		newState.filterData = action.filterData;
 	}
 	
 	

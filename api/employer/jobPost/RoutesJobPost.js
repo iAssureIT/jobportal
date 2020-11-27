@@ -7,6 +7,9 @@ router.get   ("/get/one/:job_id"  				, jobsController.getJob);
 router.get   ("/get/searchlist/:searchTxt"  	, jobsController.getSearchList);
 router.get   ("/list"	   						, jobsController.getJobList);
 router.patch ("/update"		   					, jobsController.updateJob);
+router.post ("/functional-jobs"		   			, jobsController.functonalAreaJobs);
+router.post ("/subfunctional-jobs"		   		, jobsController.subfunctonalAreaJobs);
+
 router.post ("/filter"		   					, jobsController.filterJobs);
 
 router.delete("/delete/:job_id"					, jobsController.deleteJob);

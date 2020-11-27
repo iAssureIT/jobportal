@@ -4,8 +4,12 @@ import Axios        from 'axios';
 import Swal         from 'sweetalert2';
 
 import './LeftSideFilters.css';
+import { connect }        from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { withRouter }   from 'react-router-dom';
+import  * as mapActionCreator from '../common/actions/index';
 
-export default class LeftSideFilters extends Component{
+class LeftSideFilters extends Component{
 
   constructor(props){
     super(props);
@@ -159,7 +163,6 @@ export default class LeftSideFilters extends Component{
      console.log(selectedList)
   }
   onSelectedItemsChange(filterType, selecteditems){
-    console.log("filterType",filterType)
     var selector=this.state.selector;
     var industry_ids = [];
     var functionalArea_ids=[];
@@ -182,9 +185,6 @@ export default class LeftSideFilters extends Component{
     }
 
     
-    this.setState({ selector: selector });
-    console.log("selecteditems",this.state.selector)
-    
     this.setState({ selector: selector },()=>{
       this.getFilteredData(this.state.selector);
     })
@@ -201,6 +201,8 @@ export default class LeftSideFilters extends Component{
 
     Axios.post("/api/jobs/filter", selector)
       .then((response) => {
+          var {mapAction} = this.props;
+          mapAction.setFilter(selector, response.data);
         // console.log("response>/",response.data,this.state.roles,this.state.getcompanyID)
        
         //   this.setState({
@@ -303,3 +305,13 @@ export default class LeftSideFilters extends Component{
 
 
 }
+const mapStateToProps = (state)=>{
+    return {
+        selector    : state.selector,
+        filterData  : state.filterData
+    }
+}
+const mapDispachToProps = (dispatch) => ({
+  mapAction :  bindActionCreators(mapActionCreator, dispatch)
+})
+export default connect(mapStateToProps, mapDispachToProps) (LeftSideFilters);

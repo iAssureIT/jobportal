@@ -240,23 +240,93 @@ exports.updateJob = (req,res,next)=>{
 									message : "Some issue occurred while updating Job details!"
 								})
 					  	});
-	}
+}
 
+exports.functonalAreaJobs = (req, res, next)=>{
+	console.log("req.body - ", req.body);
+	var selector = {}; 
+    selector['$and']=[];
+    
+    selector["$and"].push({ "location.countryCode" :  req.body.countryCode })
+   	
+    console.log(JSON.stringify(selector))
+
+    Jobs.aggregate([
+    	{ $match: selector },
+    	{ $group: {_id: "$jobBasicInfo.functionalarea_id", count: { $sum: 1}} },
+    	{ $lookup: {from: "functionalareamasters", localField: "_id", foreignField: "_id", as: "functionalarea"}}
+    ])
+
+    .sort({createdAt : -1})
+    .exec()
+    .then(data=>{
+        res.status(200).json(data);
+    })
+    .catch(err =>{
+    	console.log(err.response)
+        res.status(500).json({
+            error: err
+        });
+    });
+}
+
+exports.subfunctonalAreaJobs = (req, res, next)=>{
+	console.log("req.body - ", req.body);
+	var selector = {}; 
+    selector['$and']=[];
+    
+    selector["$and"].push({ "location.countryCode" :  req.body.countryCode })
+   	
+    console.log(JSON.stringify(selector))
+
+    Jobs.aggregate([
+    	{ $match: selector },
+    	{ $group: {_id: "$jobBasicInfo.subfunctionalarea_id", count: { $sum: 1}} },
+    	{ $lookup: {from: "subfunctionalareamasters", localField: "_id", foreignField: "_id", as: "functionalarea"}}
+    ])
+
+    .sort({createdAt : -1})
+    .exec()
+    .then(data=>{
+        res.status(200).json(data);
+    })
+    .catch(err =>{
+    	console.log(err.response)
+        res.status(500).json({
+            error: err
+        });
+    });
+}
 exports.filterJobs = (req, res, next)=>{
 	console.log("req.body - ", req.body);
 	var selector = {}; 
     selector['$and']=[];
     var industry_ids = [];
+    var funarea_ids = [];
+
     if (req.body.industry_id) {
     	req.body.industry_id.map(elem => {
     		industry_ids.push(ObjectID(elem.id))
     	})
+    	selector["$and"].push({ "jobBasicInfo.industry_id" : { $in: industry_ids } });
     }
-    
+    if (req.body.funarea_id) {
+    	req.body.funarea_id.map(elem => {
+    		funarea_ids.push(ObjectID(elem.id))
+    	})
+    	selector["$and"].push({ "jobBasicInfo.functionalarea_id" : { $in: funarea_ids } });
+    }
     selector["$and"].push({ "location.countryCode" :  req.body.countryCode   })
-    selector["$and"].push({ "jobBasicInfo.industry_id" : { $in: industry_ids } });
+   	
     console.log(JSON.stringify(selector))
-    Jobs.find(selector)
+
+    Jobs.aggregate([
+    	{ $match: selector },
+    	{ $group: {_id: "$location.state", count: { $sum: 1}} },
+    
+    ])
+
+    //Jobs.find(selector)
     .sort({createdAt : -1})
     .exec()
     .then(data=>{
