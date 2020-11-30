@@ -145,21 +145,18 @@ exports.getJobList = (req,res,next)=>{
                    localField: "jobBasicInfo.subFunctionalArea",
                    foreignField: "_id",
                    as: "subFunctionalAreas" } 
-         },   
-         {$lookup:{
+        },   
+        {$lookup:{
                    from: "jobtypemaster",
                    localField: "jobBasicInfo.jobType",
                    foreignField: "_id",
                    as: "jobTypes" } 
-         }
-         ])
+        }
+        ])
     	.exec()
 		.then(jobList=> {
-							res.status(200).json({	
-								jobList  : jobList,
-								message	 : "Jobs Found",
-						});			
-					})
+							res.status(200).json({	jobList  : jobList });			
+		})
 		.catch(error=> {
 			console.log(error);
 			res.status(500).json({
@@ -242,67 +239,16 @@ exports.updateJob = (req,res,next)=>{
 					  	});
 }
 
-exports.functonalAreaJobs = (req, res, next)=>{
+
+exports.mapwiseJobs = (req, res, next)=>{
 	console.log("req.body - ", req.body);
 	var selector = {}; 
-    selector['$and']=[];
-    
-    selector["$and"].push({ "location.countryCode" :  req.body.countryCode })
-   	
-    console.log(JSON.stringify(selector))
-
-    Jobs.aggregate([
-    	{ $match: selector },
-    	{ $group: {_id: "$jobBasicInfo.functionalarea_id", count: { $sum: 1}} },
-    	{ $lookup: {from: "functionalareamasters", localField: "_id", foreignField: "_id", as: "functionalarea"}}
-    ])
-
-    .sort({createdAt : -1})
-    .exec()
-    .then(data=>{
-        res.status(200).json(data);
-    })
-    .catch(err =>{
-    	console.log(err.response)
-        res.status(500).json({
-            error: err
-        });
-    });
-}
-
-exports.subfunctonalAreaJobs = (req, res, next)=>{
-	console.log("req.body - ", req.body);
-	var selector = {}; 
-    selector['$and']=[];
-    
-    selector["$and"].push({ "location.countryCode" :  req.body.countryCode })
-   	
-    console.log(JSON.stringify(selector))
-
-    Jobs.aggregate([
-    	{ $match: selector },
-    	{ $group: {_id: "$jobBasicInfo.subfunctionalarea_id", count: { $sum: 1}} },
-    	{ $lookup: {from: "subfunctionalareamasters", localField: "_id", foreignField: "_id", as: "functionalarea"}}
-    ])
-
-    .sort({createdAt : -1})
-    .exec()
-    .then(data=>{
-        res.status(200).json(data);
-    })
-    .catch(err =>{
-    	console.log(err.response)
-        res.status(500).json({
-            error: err
-        });
-    });
-}
-exports.filterJobs = (req, res, next)=>{
-	console.log("req.body - ", req.body);
-	var selector = {}; 
-    selector['$and']=[];
-    var industry_ids = [];
+	var industry_ids = [];
     var funarea_ids = [];
+
+    selector['$and']=[];
+    selector["$and"].push({ "location.countryCode" :  req.body.countryCode   })
+   	
 
     if (req.body.industry_id) {
     	req.body.industry_id.map(elem => {
@@ -316,18 +262,14 @@ exports.filterJobs = (req, res, next)=>{
     	})
     	selector["$and"].push({ "jobBasicInfo.functionalarea_id" : { $in: funarea_ids } });
     }
-    selector["$and"].push({ "location.countryCode" :  req.body.countryCode   })
-   	
     console.log(JSON.stringify(selector))
 
     Jobs.aggregate([
-    	{ $match: selector },
-    	{ $group: {_id: "$location.state", count: { $sum: 1}} },
-    
+    	{ $match 	: selector },
+    	{ $sort 	: {createdAt : -1} },
+    	{ $group 	: {_id: "$location.state", count: { $sum: 1}} },
     ])
-
-    //Jobs.find(selector)
-    .sort({createdAt : -1})
+    
     .exec()
     .then(data=>{
         res.status(200).json(data);
@@ -340,6 +282,92 @@ exports.filterJobs = (req, res, next)=>{
     });
 }
 
+exports.functonalAreaJobs = (req, res, next)=>{
+	console.log("req.body - ", req.body);
+	var selector = {}; 
+    var industry_ids = [];
+    var funarea_ids = [];
+
+    selector['$and']=[];
+    selector["$and"].push({ "location.countryCode" :  req.body.countryCode })
+   	
+    if (req.body.industry_id) {
+    	req.body.industry_id.map(elem => {
+    		industry_ids.push(ObjectID(elem.id))
+    	})
+    	selector["$and"].push({ "jobBasicInfo.industry_id" : { $in: industry_ids } });
+    }
+    if (req.body.funarea_id) {
+    	req.body.funarea_id.map(elem => {
+    		funarea_ids.push(ObjectID(elem.id))
+    	})
+    	selector["$and"].push({ "jobBasicInfo.functionalarea_id" : { $in: funarea_ids } });
+    }
+    
+
+    console.log(JSON.stringify(selector))
+
+    Jobs.aggregate([
+    	{ $match 	: selector },
+    	{ $sort 	: {createdAt : -1} },
+    	{ $group 	: {_id: "$jobBasicInfo.functionalarea_id", count: { $sum: 1}} },
+    	{ $lookup 	: {from: "functionalareamasters", localField: "_id", foreignField: "_id", as: "functionalarea"}}
+    ])
+	.exec()
+    .then(data=>{
+        res.status(200).json(data);
+    })
+    .catch(err =>{
+    	console.log(err.response)
+        res.status(500).json({
+            error: err
+        });
+    });
+}
+
+exports.subfunctionalAreaJobs = (req, res, next)=>{
+	console.log("req.body - ", req.body);
+	var selector = {}; 
+	var industry_ids = [];
+    var funarea_ids = [];
+
+    selector['$and']=[];
+    selector["$and"].push({ "location.countryCode" :  req.body.countryCode })
+   	
+    console.log(JSON.stringify(selector))
+
+    if (req.body.industry_id) {
+    	req.body.industry_id.map(elem => {
+    		industry_ids.push(ObjectID(elem.id))
+    	})
+    	selector["$and"].push({ "jobBasicInfo.industry_id" : { $in: industry_ids } });
+    }
+    if (req.body.funarea_id) {
+    	req.body.funarea_id.map(elem => {
+    		funarea_ids.push(ObjectID(elem.id))
+    	})
+    	selector["$and"].push({ "jobBasicInfo.functionalarea_id" : { $in: funarea_ids } });
+    }
+    
+    Jobs.aggregate([
+    	{ $match 	: selector },
+    	{ $sort 	: {createdAt : -1} },
+    	{ $group 	: {_id: "$jobBasicInfo.subfunctionalarea_id", count: { $sum: 1}} },
+    	{ $lookup 	: {from: "subfunctionalareamasters", localField: "_id", foreignField: "_id", as: "functionalarea"}}
+    ])
+
+    .sort({createdAt : -1})
+    .exec()
+    .then(data=>{
+        res.status(200).json(data);
+    })
+    .catch(err =>{
+    	console.log(err.response)
+        res.status(500).json({
+            error: err
+        });
+    });
+}
 exports.deleteJob = (req, res, next)=>{
 	console.log("req.body - ", req.body);
 	var job_id = req.params.job_id;

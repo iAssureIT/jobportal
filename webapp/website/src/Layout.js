@@ -55,7 +55,7 @@ import Mizoram from './maps/Mizoram/Mizoram.js';
 import Nagaland from './maps/Nagaland/Nagaland.js';
 import Orissa from './maps/Orissa/Orissa.js';
 
-import Homepage from './blocks/Homepage/Homepage.js'
+import Homepage from './pages/Homepage/Homepage.js'
 
 class Layout extends Component  {
 

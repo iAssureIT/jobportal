@@ -7,7 +7,7 @@ import './LeftSideFilters.css';
 import { connect }        from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { withRouter }   from 'react-router-dom';
-import  * as mapActionCreator from '../common/actions/index';
+import  * as mapActionCreator from '../../common/actions/index';
 
 class LeftSideFilters extends Component{
 
@@ -202,7 +202,7 @@ class LeftSideFilters extends Component{
     Axios.post("/api/jobs/filter", selector)
       .then((response) => {
           var {mapAction} = this.props;
-          mapAction.setFilter(selector, response.data);
+          mapAction.filterData(selector);
         // console.log("response>/",response.data,this.state.roles,this.state.getcompanyID)
        
         //   this.setState({
@@ -295,11 +295,9 @@ class LeftSideFilters extends Component{
               </div>
             </div>
           </div> 
-
-      
 	   </div>
 		 	  
-      </section>
+    </section>
     );
   }
 

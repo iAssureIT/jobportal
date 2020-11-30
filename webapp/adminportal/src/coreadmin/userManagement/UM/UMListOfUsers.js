@@ -99,7 +99,7 @@ class UMListOfUsers extends Component {
 	}
 	getData(data) {
 		console.log("data in getdata",data);
-		axios.post('/api/users/post/list', data)
+		axios.post('/api/users/get/list', data)
 			.then((res) => {
 				 console.log("res.data in getdata==>", res.data);
 				if (res.data.message == "COMPANYID_NOT_AVAILABLE") {

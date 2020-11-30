@@ -20,12 +20,7 @@ class ContactDetails extends Component {
 			'altPhone'         	 		: '',
 			'email'             		: '',
 			'employeeID'        		: '',
-			'preApprovedAmount'      : '',
-			'preApprovedRides' : '',
-			'preApprovedKilometer' : '',
-			'approvingAuthorityId1'     : '',
-			'approvingAuthorityId2'     : '',
-			'approvingAuthorityId3'     : '',
+			
 			'openForm'					: false,
 			'openFormIcon'              : false,
 			'bookingApprovalRequired' 	: "No",
@@ -39,9 +34,7 @@ class ContactDetails extends Component {
 			tableHeading:this.props.entity === "corporate" ?{
 	            empName              :"Emp Name & ID",
 	            contactDetails       :"Contact Details",
-	            approvingAuthorityId1:"Approving Authority #1",
-	            approvingAuthorityId2:"Approving Authority #2",
-	            approvingAuthorityId3:"Approving Authority #3",
+	           
 	            preApprovedLimits    : "PreApproved Limits",
 	             actions:"Action"
 	          }
@@ -286,15 +279,6 @@ class ContactDetails extends Component {
 					required: true,
 					lastRegx: /^[a-zA-Z\s]+$/,
 				},
-				approvingAuthorityId1: {
-					required: true,
-				},
-				approvingAuthorityId2: {
-					required: true,
-				},
-				approvingAuthorityId3: {
-					required: true,
-				},
 				
 				empCategory: {
 					required: true,
@@ -331,24 +315,7 @@ class ContactDetails extends Component {
 				if (element.attr("name") === "lastName") {
 					error.insertAfter("#lastName");
 				}
-				if (element.attr("name") === "approvingAuthorityId1") {
-					error.insertAfter("#approvingAuthorityId1");
-				}
-				if (element.attr("name") === "approvingAuthorityId2") {
-					error.insertAfter("#approvingAuthorityId2");
-				}
-				if (element.attr("name") === "approvingAuthorityId3") {
-					error.insertAfter("#approvingAuthorityId3");
-				}
-				if (element.attr("name") === "preApprovedRides") {
-					error.insertAfter("#preApprovedRides");
-				}
-				if (element.attr("name") === "preApprovedKilometer") {
-					error.insertAfter("#preApprovedKilometer");
-				}
-				if (element.attr("name") === "preApprovedAmount") {
-					error.insertAfter("#preApprovedAmount");
-				}
+				
 				if (element.attr("name") === "employeeID") {
 					error.insertAfter("#employeeID");
 				}
@@ -599,12 +566,6 @@ class ContactDetails extends Component {
 					'designation'       		: this.state.designation ? this.state.designation :"" ,
 					'employeeID'        		: this.state.employeeID,
 					'bookingApprovalRequired' 	: this.state.bookingApprovalRequired,
-					'approvingAuthorityId1' 	: this.state.approvingAuthorityId1,
-					'approvingAuthorityId2' 	: this.state.approvingAuthorityId2,
-					'approvingAuthorityId3' 	: this.state.approvingAuthorityId3,
-					'preApprovedAmount' 		: this.state.bookingApprovalRequired ? this.state.preApprovedAmount : "",
-					'preApprovedRides'          : this.state.bookingApprovalRequired ? this.state.preApprovedRides : "",
-					'preApprovedKilometer'      : this.state.bookingApprovalRequired ? this.state.preApprovedKilometer : "",
 					'createUser'        		: this.state.createUser,
 					'role' 						: this.state.createUser ? this.state.role : "",
           			'addEmployee'       		: this.state.addEmployee,
@@ -719,13 +680,6 @@ class ContactDetails extends Component {
 				employeeId              : this.state.employeeID,
 				userId 					: userID,
 				status					: "Active",
-				bookingApprovalRequired : this.state.bookingApprovalRequired,
-				approvingAuthorityId1   : this.state.approvingAuthorityId1,
-				approvingAuthorityId2   : this.state.approvingAuthorityId2,
-				approvingAuthorityId3   : this.state.approvingAuthorityId3,
-				preApprovedRides  		: this.state.bookingApprovalRequired === "Yes" ? this.state.preApprovedRides : "",
-				preApprovedKilometer   : this.state.bookingApprovalRequired === "Yes" ? this.state.preApprovedKilometer : "",
-				preApprovedAmount       : this.state.bookingApprovalRequired === "Yes" ? this.state.preApprovedAmount : "",
 			}
 			if(this.state.departmentName)
 			{
@@ -781,13 +735,6 @@ class ContactDetails extends Component {
 						'bookingApprovalRequired' 	: "No",
 						'createUser' 				: false,
 						'addEmployee'				: false,
-						'approvingAuthorityId1' 		: '',
-						'approvingAuthorityId2' 		: '',
-						'approvingAuthorityId3' 		: '',
-						'role' 		 				: '',
-						'preApprovedAmount' : '',
-						'preApprovedRides' : '',
-						'preApprovedKilometer' : '',
 						'openForm'					: false,
 					})
 				}
@@ -841,13 +788,6 @@ class ContactDetails extends Component {
 					'empCategory'               : this.state.empCategory,
                 	'empPriority'               : this.state.empPriority,
 					'employeeID'        		: this.state.employeeID,
-					'bookingApprovalRequired' 	: this.state.bookingApprovalRequired,
-					'approvingAuthorityId1' 	: this.state.approvingAuthorityId1,
-					'approvingAuthorityId2' 	: this.state.approvingAuthorityId2,
-					'approvingAuthorityId3' 	: this.state.approvingAuthorityId3,
-					'preApprovedKilometer'     : this.state.bookingApprovalRequired === "Yes"  ? this.state.preApprovedKilometer : "",
-					'preApprovedRides'          : this.state.bookingApprovalRequired === "Yes"  ? this.state.preApprovedRides : "",
-					'preApprovedAmount'          : this.state.bookingApprovalRequired === "Yes"  ? this.state.preApprovedAmount : "",
 					'createUser'        		: this.state.createUser,
 				    'role' 						: this.state.createUser ? this.state.role : "", 
                     'addEmployee'       		: this.state.addEmployee,
@@ -974,14 +914,7 @@ class ContactDetails extends Component {
 			designationId           : this.state.designation,
 			profilePhoto            : this.state.profilePhoto,
 			employeeId              : this.state.employeeID,
-			bookingApprovalRequired : this.state.bookingApprovalRequired,
-			approvingAuthorityId1    : this.state.approvingAuthorityId1,
-			approvingAuthorityId2    : this.state.approvingAuthorityId2,
-			approvingAuthorityId3    : this.state.approvingAuthorityId3,
-			preApprovedAmount     : this.state.bookingApprovalRequired ? this.state.preApprovedAmount: "",
-            preApprovedRides      : this.state.bookingApprovalRequired ? this.state.preApprovedRides:"",
-            preApprovedKilometer      : this.state.bookingApprovalRequired ? this.state.preApprovedKilometer:"",
-            address: this.state.country !=="-- Select --" ? [{
+			address: this.state.country !=="-- Select --" ? [{
                     addressLine1                : this.state.addressLine1,
                     addressLine2                : this.state.addressLine2,
                     landmark                    : this.state.landmark,
@@ -1030,12 +963,6 @@ class ContactDetails extends Component {
 				'bookingApprovalRequired' 	: "No",
 				'createUser' 				: false,
 				'addEmployee'				: false,
-				'approvingAuthorityId1' 		: '',
-				'approvingAuthorityId2' 		: '',
-				'approvingAuthorityId3' 		: '',
-				'preApprovedKilometer' 		: '',
-				'preApprovedRides' : '',
-				'preApprovedAmount' : '',
 				'openForm'					: false,
 				editData                    : null
 			})
@@ -1062,16 +989,7 @@ class ContactDetails extends Component {
 					var contactDetails = response.data.contactPersons;
 
 					console.log("contactDetails",contactDetails)
-					var data = {
-			            'bookingApprovalRequired' 	: contactDetails[0].bookingApprovalRequired,
-						// 'approvingAuthorityId1'    	: contactDetails[0].approvingAuthorityId1,
-						// 'approvingAuthorityId2'    	: contactDetails[0].approvingAuthorityId2,
-						// 'approvingAuthorityId3'    	: contactDetails[0].approvingAuthorityId3,
-						'preApprovedAmount' 		: contactDetails[0].preApprovedAmount,
-						'preApprovedRides'          : contactDetails[0].preApprovedRides,
-						'preApprovedKilometer'     : contactDetails[0].preApprovedKilometer,
-			        }
-			        this.setState({'editData':data})
+					
 					this.setState({
 						'openForm'					: true,
 						'branchCode'        		: contactDetails[0].branchCode,
@@ -1113,13 +1031,6 @@ class ContactDetails extends Component {
 						'personID' 					: contactDetails[0].personID,
 						'alreadyHasUser' 			: contactDetails[0].createUser,
 						'alreadyHasEmployee' 		: contactDetails[0].addEmployee,
-						'bookingApprovalRequired' 	: contactDetails[0].bookingApprovalRequired,
-						'approvingAuthorityId1'    	: contactDetails[0].approvingAuthorityId1,
-						'approvingAuthorityId2'    	: contactDetails[0].approvingAuthorityId2,
-						'approvingAuthorityId3'    	: contactDetails[0].approvingAuthorityId3,
-						'preApprovedAmount' 		: contactDetails[0].preApprovedAmount,
-						'preApprovedRides'          : contactDetails[0].preApprovedRides,
-						'preApprovedKilometer'     : contactDetails[0].preApprovedKilometer,
 						
 					},()=>{
 						if(this.state.openForm === true){
@@ -1166,12 +1077,7 @@ class ContactDetails extends Component {
 					'branchCode'        		: '',
 					'department'        		: '',
 					'designation'       		: '',
-					'approvingAuthorityId1' 		: '',
-					'approvingAuthorityId2' 		: '',
-					'approvingAuthorityId3' 		: '',
-					'preApprovedKilometer' 			: '',
-					'preApprovedRides' 	: '',
-					'preApprovedAmount' 	: ''
+					
 				})
 				axios.get('/api/personmaster/get/emailID/' + email)
 					.then((response) => {
@@ -1490,82 +1396,8 @@ class ContactDetails extends Component {
 												                </div> 
 											              	</div>
 														</div>
-														{
-								 						this.state.pathname ==="corporate" ?
-														<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 NOpadding">
-									                        <div className=" col-lg-4 col-md-4 col-sm-12 col-xs-12 employee  person">
-									                           <div id="approvingAuthorityId1"> 
-									                              <label className="labelform col-lg-12 col-md-12 col-sm-12 col-xs-12 NOpadding-left">EmployeeID of Approving Authority #1<i className="astrick">*</i></label>
-									                              <input type="text" className="form-control col-lg-12 col-md-12 col-sm-12 col-xs-12" value={this.state.approvingAuthorityId1} ref="approvingAuthorityId1" name="approvingAuthorityId1" onChange={this.handleChange.bind(this)} required/>
-									                            </div>
-									                        </div>
-									                        <div className=" col-lg-4 col-md-4 col-sm-12 col-xs-12 employee  person">
-									                           <div id="approvingAuthorityId2"> 
-									                              <label className="labelform col-lg-12 col-md-12 col-sm-12 col-xs-12 NOpadding-left">EmployeeID of Approving Authority #2<i className="astrick">*</i></label>
-									                              <input type="text" className="form-control col-lg-12 col-md-12 col-sm-12 col-xs-12" value={this.state.approvingAuthorityId2} ref="approvingAuthorityId2" name="approvingAuthorityId2" onChange={this.handleChange.bind(this)} />
-									                            </div>
-									                        </div>
-									                        <div className=" col-lg-4 col-md-4 col-sm-12 col-xs-12 employee  person">
-									                           <div id="approvingAuthorityId3"> 
-									                              <label className="labelform col-lg-12 col-md-12 col-sm-12 col-xs-12 NOpadding-left">EmployeeID of Approving Authority #3<i className="astrick">*</i></label>
-									                              <input type="text" className="form-control col-lg-12 col-md-12 col-sm-12 col-xs-12" value={this.state.approvingAuthorityId3} ref="approvingAuthorityId3" name="approvingAuthorityId3" onChange={this.handleChange.bind(this)} />
-									                            </div>
-									                        </div>
-									                    </div>
-									                    :
-									                    null
-									                	}
-									                	{this.state.pathname === "corporate" ? 
-									                    <div className=" form-margin col-lg-12 col-md-12 col-sm-12 col-xs-12 NOpadding">
-									                        <div className=" col-lg-4 col-md-4 col-sm-12 col-xs-12 driver person employee">
-						                                        <div id="empCategory">
-						                                          <label className="labelform col-lg-12 col-md-12 col-sm-12 col-xs-12 NOpadding-left">Employee Category <i className="astrick">*</i><a href="#" data-tip data-for='basicInfo4Tooltip' className="pull-right"> <i title=
-						                                           {
-						                                            this.state.vehicalsTable ? 
-						                                            this.state.vehicalsTable.map((a,i)=>{
-						                                                return(
-						                                                    "Category-"+a.empCategory+" allowed to use "+a.vehicalCategory
-						                                                )
-						                                            })
-						                                            :"No Data Found"
-						                                            } 
-						                                            className="fa fa-question-circle"></i></a></label>
-						                                          <select className="form-control col-lg-12 col-md-12 col-sm-12 col-xs-12"
-						                                            ref="empCategory" value={this.state.empCategory} name="empCategory"
-						                                            disabled={ window.location.pathname == '/my-profile/'+this.state.personID ? true : false} onChange={this.handleChange} >
-						                                            <option selected={true} disabled={true}>-- Select --</option>
-						                                            <option value="1">1</option>
-						                                            <option value="2">2</option>
-						                                            <option value="3">3</option>
-						                                          </select>
-						                                        </div>
-					                                        </div>
-					                                        <div className=" col-lg-4 col-md-4 col-sm-12 col-xs-12 driver person employee">
-						                                        <div id="empPriority">
-						                                          <label className="labelform col-lg-12 col-md-12 col-sm-12 col-xs-12 NOpadding-left">Employee Priority <i className="astrick">*</i> <a href="#" data-tip data-for='basicInfo4Tooltip' className="pull-right"> <i title=
-						                                           {
-						                                            this.state.vehicalsTable ? 
-						                                            this.state.vehicalsTable.map((a,i)=>{
-						                                                return(
-						                                                    "Category-"+a.empCategory+" allowed to use "+a.vehicalCategory
-						                                                )
-						                                            })
-						                                            :"No Data Found"
-						                                            } 
-						                                            className="fa fa-question-circle"></i> </a> </label>
-						                                          <select className="form-control col-lg-12 col-md-12 col-sm-12 col-xs-12"
-						                                            disabled={ window.location.pathname == '/my-profile/'+this.state.personID ? true : false} ref="empPriority" value={this.state.empPriority} name="empPriority" onChange={this.handleChange} >
-						                                            <option selected={true} disabled={true}>-- Select --</option>
-						                                            <option value="1">   ★ </option>
-						                                            <option value="2">  ★ ★  </option>
-						                                            <option value="3"> ★ ★ ★ </option>
-						                                          </select>
-						                                        </div>
-					                                        </div>
-									                    </div>
-									                    :
-									                    null
-									                	}
+														
+									                	
 														<div className="height40 form-margin col-lg-12 col-md-12 col-sm-12 col-xs-12 NOpadding">
 															<div className="col-lg-4 col-md-4 col-sm-12 col-xs-12 ">
 																<label className="labelform col-lg-12 col-md-12 col-sm-12 col-xs-12">Create Login Credentials</label>
@@ -1605,14 +1437,7 @@ class ContactDetails extends Component {
 					                                        null
 					                                    	}																	
 														</div>															
-														{this.state.isBookingRequired ?
-															<BookingRequired 
-																pathname={this.state.pathname}
-																getData={this.getData.bind(this)}
-																editData={this.state.editData} />
-															:
-															null
-														}
+														
 														<div className="col-lg-7 col-md-7 col-sm-7 col-xs-7 contactSubmit pull-right">
 															{this.props.match.params.entityID ?
 																this.state.contactID ?

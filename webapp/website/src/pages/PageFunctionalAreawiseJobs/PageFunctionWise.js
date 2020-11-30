@@ -1,6 +1,6 @@
 
 import React, { Component }                       from 'react';
-import Homepage from '../../blocks/Homepage/Homepage.js';
+//import Homepage from '../../blocks/Homepage/Homepage.js';
 import './PageFunctionWise.css'
 
 
@@ -11,7 +11,7 @@ export default class PageFunctionWise extends Component{
 		
 		return(
 			<div className="container-fluid">
-				<Homepage />
+				{/*<Homepage />*/}
 			</div>
 		);
 	}

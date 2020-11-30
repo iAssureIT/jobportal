@@ -6,8 +6,11 @@ const initialState = {
 	selectedDistrict 			: "",
 	selectedModal 				: "login",
 	userID 						: "",
+	viewMode 					: "",
 	selector 					: {},
-	filterData 					: []
+	mapJobs 					: [],
+	functionalJobs 				: [],
+	subfunctionalJobs 			: [],
 }
 
 const reducer = (state = initialState,action) => {
@@ -27,9 +30,20 @@ const newState = {...state};
 	if(action.type === "SET_USERID"){
 		newState.userID 	= action.userID;
 	}
-	if(action.type === "SET_FILTER"){
+	if(action.type === "SET_VIEW_MODE"){
+		newState.viewMode 	= action.viewMode;
+	}
+	if(action.type === "SET_FILTER_SELECTOR"){
 		newState.selector 	= action.selector;
-		newState.filterData = action.filterData;
+	}
+	if(action.type === "SET_MAP_DATA"){
+		newState.mapJobs = action.mapJobs;
+	}
+	if(action.type === "SET_FUNCTIONAL_DATA"){
+		newState.functionalJobs = action.functionalJobs;
+	}
+	if(action.type === "SET_SUBFUNCTIONAL_DATA"){
+		newState.subfunctionalJobs = action.subfunctionalJobs;
 	}
 	
 	
