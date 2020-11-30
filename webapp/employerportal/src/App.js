@@ -32,7 +32,7 @@ import $ from 'jquery';
 import '../node_modules/font-awesome/css/font-awesome.min.css';
 import ReactDependentScript from "react-dependent-script";
 /*import './jobportaladmin/common/FontAwesomeIcons';*/
-import './jobportaladmin/blocks/FontAwesomeIcons';
+import './jobportaladmin/common/FontAwesomeIcons';
 
 
 

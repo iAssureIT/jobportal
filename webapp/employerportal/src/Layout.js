@@ -99,7 +99,8 @@ class Layout extends Component  {
                                                    {/* <Leftsidebar/>*/}
                                                     <Switch >
                                                         <Route path="/" component={Dashboard} exact />
-                                                        <Route path="/post-job" component={JobPosting} exact />
+                                                        <Route path="/post-job/" component={JobPosting} exact />
+                                                        <Route path="/post-job/:job_id" component={JobPosting} exact />
                                                         <Route path="/job-profile/:job_id" component={JobProfile} exact />
                                                         <Route path="/job-list" component={JobList} exact />
                                                     </Switch>

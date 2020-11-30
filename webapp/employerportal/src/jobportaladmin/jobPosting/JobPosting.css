@@ -128,7 +128,7 @@
 }
 
 .input-group .form-control:first-child{
-	height: 35px;
+	height: 34px;
     padding-left: 10px;
 	border: 1px solid var(--main-border-color);
 	border-radius: 4px;
@@ -152,8 +152,8 @@
 	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(211, 149, 10, 0.6);
 }
 
-.locationIcon{
-	font-size: 15px;
+.addJobLocationIcon{
+	font-size: 14px;
 }
 
 .addJobSubHead .salaryIcon{
@@ -234,6 +234,10 @@
 }
 
 .react-tel-input .flag-dropdown:hover{
+	background-color: var(--main-bg-color) !important;
+}
+
+.react-tel-input .selected-flag{
 	background-color: var(--main-bg-color) !important;
 }
 
@@ -640,7 +644,6 @@ div.ReactTags__tagInput input.ReactTags__tagInputField:focus {
 }
 
 .ReactTags__tagInputField{
-	background-color: red !important;
 	z-index: -200 !important;
 }
 

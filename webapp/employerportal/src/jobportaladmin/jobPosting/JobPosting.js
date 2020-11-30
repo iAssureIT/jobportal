@@ -7,7 +7,6 @@ import $ from 'jquery';
 import { FontAwesomeIcon }  		from '@fortawesome/react-fontawesome';
 import Axios 						from 'axios';
 import Swal 						from 'sweetalert2';
-import { Multiselect } 				from 'multiselect-react-dropdown';
 import CKEditor 					from '@ckeditor/ckeditor5-react';
 import ClassicEditor 				from '@ckeditor/ckeditor5-build-classic';
 import PhoneInput 					from 'react-phone-input-2';
@@ -44,58 +43,59 @@ export default class JobPosting extends Component{
 		this.state = {
 			company_id 				: 	localStorage.getItem("company_Id"),
 			jobTitle 				: 	"",
+			industry_id				: 	localStorage.getItem("industry_id"),
+			industryList			: 	[],
+			functionalarea_id 		: 	"",
+			functionalArealist 		: 	[],
+			subfunctionalarea_id 	: 	"",
+			subFunctionalAreaList	: 	[],
+			role 					: 	"",
+			gender             		: 	"Male Only",
+			workFromHome 			: 	false,
+			jobtype_id 				: 	"",
+			jobTypeArray			: 	[],
+			jobtime_id 				: 	"",
+			jobTimeArray 			: 	[],
+			jobcategory_id 			: 	"",
+			jobCategoryArray 		: 	[],
+			positions               :   "",
+			jobDesc 				: 	"",
+			lastDateOfAppl 			: 	"",
+			contactPersonName 		: 	"",
+			contactPersonEmail		: 	"",
+			contactPersonPhone		: 	"", 
+			
+			address                 :   "",
+			area 					: 	"",
 			addressLine1 			: 	"",
 			addressLine2 			: 	"",
 			country 				: 	"",
 			state 					: 	"",
 			district 				: 	"",
 			city 					: 	"",
-			area 					: 	"",
 			pincode 				: 	"",
 			stateCode				: 	"",
 			countryCode 			: 	"",
 			stateArray 				: 	[],
 			districtArray 			: 	[],
 			pincodeExists 			: 	true,
-			industry_id				: 	localStorage.getItem("industry_id"),
-			functionalArea 			: 	"",
-			/*functionalAreaId 		: 	"",*/
-			subFunctionalArea 		: 	"",
-			/*subFunctionalAreaId 	: 	"",*/
-			role 					: 	"",
-			gender             		: 	"Male Only",
-			workFromHome 			: 	false,
-			contactPersonName 		: 	"",
-			contactPersonEmail		: 	"",
-			contactPersonPhone		: 	"",
-			jobType 				: 	"",
-			jobTypeArray			: 	[],
-			jobTime 				: 	"",
-			jobTimeArray 			: 	[],
-			jobCategory 			: 	"",
-			jobCategoryArray 		: 	[],
-			lastDateOfAppl 			: 	"",
 			minSalary 				: 	"",
 			minSalPeriod 			: 	"",
 			maxSalary 				: 	"",
 			maxSalPeriod			: 	"",
-			jobDesc 				: 	"",
 			minEducation 			: 	"",
 			minExperience 			: 	"",
-			priSkillsArray 			: 	[],
 			primarySkills 			: 	[],
 			minPrimExp	    		: 	"",
-			secondarySkills 		: 	[], 
-			secSkillsArray 			: 	[],
+			priSkillsArray 			: 	[],
+			secondarySkills 		: 	[],
 			minSecExp				: 	"", 
-			otherSkillsArray 		: 	[],
+			secSkillsArray 			: 	[], 
 			otherSkills 			: 	[],
 			minOtherExp				: 	"", 
+			otherSkillsArray 		: 	[],
+			preferSkills		 	: 	"",
 			preferSkillsArray 		: 	[],
-			minExpRequiredPre		: 	"",
-			industryList			: 	[],
-			functionalArealist 		: 	[],
-			subFunctionalAreaList	: 	[],
 			priSkillsArraylist 		: 	[],
 			secSkillsArraylist 		: 	[],
 			otherSkillsArraylist	: 	[],
@@ -131,35 +131,42 @@ export default class JobPosting extends Component{
 		this.getStates();
 		if(this.props.match.params.job_id){
 			let job_id = this.props.match.params.job_id;
-			Axios.get("/api/jobposting/get/one/"+job_id)
+			Axios.get("/api/jobs/get/one/"+job_id)
 			.then(response=>{
 				console.log("response.data : ", response.data);
 				this.setState({
-					job_id				: job_id,
-					jobTitle 			: response.data.jobsData.jobBasicInfo.jobTitle,
-					functionalArea 		: response.data.jobsData.jobBasicInfo.functionalArea,
-					subFunctionalArea 	: response.data.jobsData.jobBasicInfo.subFunctionalArea,
-					role 				: response.data.jobsData.jobBasicInfo.role,
-					gender 				: response.data.jobsData.jobBasicInfo.gender,
-					workFromHome 		: response.data.jobsData.jobBasicInfo.workFromHome,
-					jobType 			: response.data.jobsData.jobBasicInfo.jobType,
-					contactPersonName 	: response.data.jobsData.jobBasicInfo.contactPersonName,
-					contactPersonEmail 	: response.data.jobsData.jobBasicInfo.contactPersonEmail,
-					contactPersonPhone 	: response.data.jobsData.jobBasicInfo.contactPersonPhone,
-					jobTime 			: response.data.jobsData.jobBasicInfo.jobTime,
-					jobCategory 		: response.data.jobsData.jobBasicInfo.jobCategory,
-					lastDateOfAppl      : response.data.jobsData.jobBasicInfo.lastDateOfAppl?Moment(response.data.jobsData.jobBasicInfo.lastDateOfAppl).format("YYYY-MM-DD"):"",
-					minSalary 			: response.data.jobsData.ctcOffered.minSalary,
-					minSalPeriod 		: response.data.jobsData.ctcOffered.minSalPeriod,
-					maxSalary 			: response.data.jobsData.ctcOffered.maxSalary,
-					maxSalPeriod		: response.data.jobsData.ctcOffered.maxSalPeriod,
-					jobDesc 			: response.data.jobsData.jobBasicInfo.jobDesc,
-					minEducation 		: response.data.jobsData.eligibility.minEducation,
-					minExperience 		: response.data.jobsData.eligibility.minExperience,
-					minPrimExp 			: response.data.jobsData.requiredSkills.minPrimExp,
-					minSecExp 			: response.data.jobsData.requiredSkills.minSecExp,
-					minOtherExp 		: response.data.jobsData.requiredSkills.minOtherExp,
-					submitBtnText 		: "UPDATE",
+					job_id				: 	job_id,
+					jobTitle 			: 	response.data.jobsData[0].jobBasicInfo.jobTitle,
+					industry_id 		: 	response.data.jobsData[0].jobBasicInfo.industry_id,
+					functionalarea_id 	: 	response.data.jobsData[0].jobBasicInfo.functionalarea_id,
+					subfunctionalarea_id: 	response.data.jobsData[0].jobBasicInfo.subfunctionalarea_id,
+					role 				: 	response.data.jobsData[0].jobBasicInfo.role,
+					gender 				: 	response.data.jobsData[0].jobBasicInfo.gender,
+					workFromHome 		: 	response.data.jobsData[0].jobBasicInfo.workFromHome,
+					jobtype_id 			: 	response.data.jobsData[0].jobBasicInfo.jobtype_id,
+					contactPersonName 	: 	response.data.jobsData[0].jobBasicInfo.contactPersonName,
+					contactPersonEmail 	: 	response.data.jobsData[0].jobBasicInfo.contactPersonEmail,
+					contactPersonPhone 	: 	response.data.jobsData[0].jobBasicInfo.contactPersonPhone,
+					address 			: 	response.data.jobsData[0].location.address,
+					jobtime_id 			: 	response.data.jobsData[0].jobBasicInfo.jobtime_id,
+					jobcategory_id 		: 	response.data.jobsData[0].jobBasicInfo.jobcategory_id,
+					positions           :   response.data.jobsData[0].jobBasicInfo.positions,
+					/*lastDateOfAppl      : 	response.data.jobsData[0].jobBasicInfo.lastDateOfAppl?Moment(response.data.jobsData.jobBasicInfo.lastDateOfAppl).format("YYYY-MM-DD"):"",*/
+					minSalary 			: 	response.data.jobsData[0].ctcOffered.minSalary,
+					minSalPeriod 		: 	response.data.jobsData[0].ctcOffered.minSalPeriod,
+					maxSalary 			: 	response.data.jobsData[0].ctcOffered.maxSalary,
+					maxSalPeriod		: 	response.data.jobsData[0].ctcOffered.maxSalPeriod,
+					jobDesc 			: 	response.data.jobsData[0].jobBasicInfo.jobDesc,
+					minEducation 		: 	response.data.jobsData[0].eligibility.minEducation,
+					minExperience 		: 	response.data.jobsData[0].eligibility.minExperience,
+					primarySkills 		: 	response.data.jobsData[0].eligibility.primarySkills,
+					minPrimExp 			: 	response.data.jobsData[0].requiredSkills.minPrimExp,
+					secondarySkills 	: 	response.data.jobsData[0].requiredSkills.secondarySkills,
+					minSecExp 	        : 	response.data.jobsData[0].requiredSkills.minSecExp,
+					otherSkills 	    : 	response.data.jobsData[0].requiredSkills.otherSkills,
+					minOtherExp 		: 	response.data.jobsData[0].requiredSkills.minOtherExp,
+					preferSkills 		: 	response.data.jobsData[0].requiredSkills.preferSkills,
+					submitBtnText 		: 	"UPDATE"
 				})
 				
 				if(response.data.jobsData.jobBasicInfo.workFromHome === true){
@@ -322,7 +329,7 @@ export default class JobPosting extends Component{
 		event.preventDefault();
 		var id    = event.currentTarget.id;
 		this.setState({
-						gender:id,
+						gender : id,
 					 })
 	}
 	
@@ -330,48 +337,50 @@ export default class JobPosting extends Component{
 		event.preventDefault();
 		if(this.validateForm()){	
 		var formValues = {
-			company_id 			: 	this.state.company_id,
-			jobTitle 			: 	this.state.jobTitle,
-			address 			:   this.state.addressLine1,
-			area 				:   this.state.area,
-        	city 				: 	this.state.city,
-       	 	district 			: 	this.state.district,
-        	state 				: 	this.state.state,
-        	country 			: 	this.state.country,
-        	pincode 			: 	this.state.pincode,
-        	stateCode 			: 	this.state.stateCode,
-        	countryCode 		: 	this.state.countryCode,
-			industry_id 		:  	this.state.industry_id,
-			functionalarea_id 	: 	this.state.functionalArea,
-			subfunctionalarea_id: 	this.state.subFunctionalArea,
-			role 				: 	this.state.role,
-			gender      	   	: 	this.state.gender,
-			workFromHome 		: 	this.state.workFromHome,
-			jobtype_id 			: 	this.state.jobType,
-			jobtime_id 			: 	this.state.jobTime,
-			jobcategory_id 		:   this.state.jobCategory,
-			positions 			: 	this.state.addJobNumOfPosi,
-			jobDesc 			: 	this.state.jobDesc,
-			lastDateOfAppl 		: 	this.state.lastDateOfAppl,
+			company_id 				: 	this.state.company_id,
+			jobTitle 				: 	this.state.jobTitle,
+			area 					:   this.state.area,
+        	city 					: 	this.state.city,
+       	 	district 				: 	this.state.district,
+        	state 					: 	this.state.state,
+        	country 				: 	this.state.country,
+        	pincode 				: 	this.state.pincode,
+        	stateCode 				: 	this.state.stateCode,
+        	countryCode 			: 	this.state.countryCode,
+			industry_id 			:  	this.state.industry_id,
+			functionalarea_id 		: 	this.state.functionalarea_id,
+			subfunctionalarea_id 	: 	this.state.subfunctionalarea_id,
+			role 					: 	this.state.role,
+			gender      	   		: 	this.state.gender,
+			workFromHome 			: 	this.state.workFromHome,
+			jobtype_id 				: 	this.state.jobtype_id,
+			jobtime_id 				: 	this.state.jobtime_id,
+			jobcategory_id 			:   this.state.jobcategory_id,
+			positions 				: 	this.state.positions,
+			jobDesc 				: 	this.state.jobDesc,
+			lastDateOfAppl 			: 	this.state.lastDateOfAppl,
 			
-			contactPersonName 	: 	this.state.contactPersonName,
-			contactPersonEmail 	: 	this.state.contactPersonEmail,
-			contactPersonPhone  :   this.state.contactPersonPhone,
+			contactPersonName 		: 	this.state.contactPersonName,
+			contactPersonEmail 		: 	this.state.contactPersonEmail,
+			contactPersonPhone  	:   this.state.contactPersonPhone,
 
-			minSalary 			: 	this.state.minSalary,
-			minSalPeriod 		: 	this.state.minSalPeriod,
-			maxSalary 			: 	this.state.maxSalary,
-			maxSalPeriod 		: 	this.state.maxSalPeriod,
+			address 				:   this.state.address,
+
+			minSalary 				: 	this.state.minSalary,
+			minSalPeriod 			: 	this.state.minSalPeriod,
+			maxSalary 				: 	this.state.maxSalary,
+			maxSalPeriod 			: 	this.state.maxSalPeriod,
 			
-			minEducation 		: 	this.state.minEducation,
-			minExperience 		: 	this.state.minExperience,
+			minEducation 			: 	this.state.minEducation,
+			minExperience 			: 	this.state.minExperience,
 
-			primarySkills 		: 	this.state.primarySkills,
-			minPrimExp	 		: 	this.state.minPrimExp,
-			secondarySkills 	: 	this.state.secondarySkills,
-			minSecExp	 		: 	this.state.minSecExp,
-			otherSkills 		: 	this.state.otherSkills,
-			minOtherExp	 		: 	this.state.minOtherExp,
+			primarySkills 			: 	this.state.primarySkills,
+			minPrimExp	 			: 	this.state.minPrimExp,
+			secondarySkills 		: 	this.state.secondarySkills,
+			minSecExp	 			: 	this.state.minSecExp,
+			otherSkills 			: 	this.state.otherSkills,
+			minOtherExp	 			: 	this.state.minOtherExp,
+			preferSkills	 		: 	this.state.preferSkills,
 		};
 			console.log("formValues :", formValues);
 			
@@ -386,7 +395,7 @@ export default class JobPosting extends Component{
 	}	
 		
 	insertData(formValues){
-		Axios.post("/api/jobposting/post",formValues)
+		Axios.post("/api/jobs/post",formValues)
 			.then(response=> {
 				console.log("Inside axios",response.data);
 				if(response.data.message==="Job details Inserted Successfully"){
@@ -395,29 +404,36 @@ export default class JobPosting extends Component{
 
 					Swal.fire("Congrats","Your Data is Submitted Successfully","success");
 					this.setState({
-									jobTitle 			: "",
-									functionalArea 		: "",
-									subFunctionalArea 	: "",
-									role 				: "",
-									gender              : "Male Only",
-									workFromHome 		: false,
-									contactPersonName 	: "",
-									contactPersonEmail 	: "",
-									contactPersonPhone 	: "",
-									jobType 			: "",
-									jobTime 			: "",
-									jobCategory 		: "",
-									lastDateOfAppl 		: "",
-									minSalary 			: "",
-									minSalPeriod 		: "",
-									maxSalary 			: "",
-									maxSalPeriod		: "",
-									jobDesc 			: "",
-									minEducation 		: "",
-									minExperience 		: "",
-									minPrimExp 	 		: "",
-									minSecExp 	 		: "",
-									minOtherExp			: ""
+									jobTitle 			: 	"",
+									industry_id 		: 	"",
+									functionalarea_id 	: 	"",
+									subfunctionalarea_id: 	"",
+									role 				: 	"",
+									gender              : 	"Male Only",
+									workFromHome 		: 	false,
+									contactPersonName 	: 	"",
+									contactPersonEmail 	: 	"",
+									contactPersonPhone 	: 	"",
+									address 			: 	"",
+									jobtype_id 			: 	"",
+									jobtime_id 			: 	"",
+									jobcategory_id 		: 	"",
+									positions           :   "",
+									lastDateOfAppl 		: 	"",
+									minSalary 			: 	"",
+									minSalPeriod 		: 	"",
+									maxSalary 			: 	"",
+									maxSalPeriod		: 	"",
+									jobDesc 			: 	"",
+									minEducation 		: 	"",
+									minExperience 		: 	"",
+									primarySkills 		: 	"",
+									minPrimExp	 		: 	"",
+									secondarySkills 	: 	"",
+									minSecExp	 		: 	"",
+									otherSkills 		: 	"",
+									minOtherExp	 		: 	"",
+									preferSkills	 	: 	"",
 								});
 					this.props.history.push("/job-profile/"+job_id);
 				}
@@ -429,7 +445,7 @@ export default class JobPosting extends Component{
 		}
 
 	updateData(formValues){
-		Axios.patch("/api/JobPosting/update", formValues)
+		Axios.patch("/api/jobs/update", formValues)
 		.then(response=>{
 			console.log("formValues :", formValues);
 			if(response.data.message==="Job details updated Successfully!"){
@@ -531,14 +547,14 @@ export default class JobPosting extends Component{
     	console.log('state==>',state)
 
 	    this.setState({
-				    	area : area,
-				        city : city,
-				        district : district,
-				        states: state,
-				        country:country,
-				        pincode: pincode,
-				        stateCode:stateCode,
-				        countryCode:countryCode
+				   		area        	: 	area,
+				        city        	: 	city,
+				        district    	: 	district,
+				        states      	: 	state,
+				        country     	: 	country,
+				        pincode     	: 	pincode,
+				        stateCode   	: 	stateCode,
+				        countryCode 	: 	countryCode
 	      			})
    
     })
@@ -615,55 +631,54 @@ handleTagClick(index){
 											<span id="jobTitleError" className="errorMsgJobPost"></span>
 										</div>
 										<div className="col-lg-6">
-											<div className="row row-no-gutters">
-												<div className="col-lg-12">
-													<label htmlFor="jobLocation" className="addjobformLable"> Job Location <span className="asterisk">&#42;</span> </label>
-													<div className="input-group">
-														<span className="input-group-addon addJobFormField"><FontAwesomeIcon className="locationIcon" icon={['fas', 'map-marker-alt']} /></span> 
-															<PlacesAutocomplete
-					                                        	value 		  =	{this.state.addressLine1}
-					                                        	onChange 	  =	{this.handleChangePlaces}
-					                                        	onSelect 	  =	{this.handleSelect}
-					                                        	searchOptions =	{searchOptions} >
-				                                        {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-				                                          <div>
-				                                            <input
-				                                            	{...getInputProps({
-				                                            		placeholder: 'Search Address ...',
-				                                                	className: 'location-search-input col-lg-12 form-control errorinputText',
-				                                                	id:"addressLine1",
-				                                                	name:"addressLine1"
-				                                              	})}
-				                                            />
-				                                            <div className={this.state.addressLine1 ? "autocomplete-dropdown-container SearchListContainer" : ""}>
-				                                            	{loading && <div>Loading...</div>}
-				                                            	{suggestions.map(suggestion => {
-				                                                	const className = suggestion.active
-				                                                  		? 'suggestion-item--active'
-				                                                  		: 'suggestion-item';
-				                                                // inline style for demonstration purpose
-				                                                	const style = suggestion.active
-				                                                  		? { backgroundColor: '#fafafa', cursor: 'pointer' }
-				                                                  		: { backgroundColor: '#ffffff', cursor: 'pointer' };
-				                                                return (
-				                                                	<div
-				                                                    	{...getSuggestionItemProps(suggestion, {
-				                                                      		className,
-				                                                      		style,
-				                                                    	})}
-				                                                	>
-				                                                    <span> {suggestion.description} </span>
-				                                                  </div>
-				                                                );
-				                                              })}
-				                                            </div>
-				                                          </div>
-				                                        )}
-				                                      </PlacesAutocomplete>
-													</div>
-													<span id="jobLocationError" className="errorMsgJobPost"></span>
-												</div>	
-											</div>
+											<div className="row">
+												<label htmlFor="address" className="addjobformLable col-lg-12"> Job Location
+													<span className="asterisk">&#42;</span>
+												</label>
+											</div>	
+												<div className="input-group">
+													<span className="input-group-addon addJobFormField"><FontAwesomeIcon className="addJobLocationIcon" icon={['fas', 'map-marker-alt']} /></span> 
+														<PlacesAutocomplete
+				                                        	value 		  =	{this.state.addressLine1}
+				                                        	onChange 	  =	{this.handleChangePlaces}
+				                                        	onSelect 	  =	{this.handleSelect}
+				                                        	searchOptions =	{searchOptions} >
+			                                        {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+			                                          <div>
+			                                            <input
+			                                            	{...getInputProps({
+			                                            		placeholder: 'Search Address ...',
+			                                                	className: 'location-search-input col-lg-12 form-control errorinputText',
+			                                                	id:"addressLine1",
+			                                                	name:"addressLine1"
+			                                              	})}
+			                                            />
+			                                            <div className={this.state.addressLine1 ? "autocomplete-dropdown-container SearchListContainer" : ""}>
+			                                            	{loading && <div>Loading...</div>}
+			                                            	{suggestions.map(suggestion => {
+			                                                	const className = suggestion.active
+			                                                  		? 'suggestion-item--active'
+			                                                  		: 'suggestion-item';
+			                                                // inline style for demonstration purpose
+			                                                	const style = suggestion.active
+			                                                  		? { backgroundColor: '#fafafa', cursor: 'pointer' }
+			                                                  		: { backgroundColor: '#ffffff', cursor: 'pointer' };
+			                                                return (
+			                                                	<div
+			                                                    	{...getSuggestionItemProps(suggestion, {
+			                                                      		className,
+			                                                      		style,
+			                                                    	})}
+			                                                	>
+			                                                    <span> {suggestion.description} </span>
+			                                                  </div>
+			                                                );
+			                                              })}
+			                                            </div>
+			                                          </div>
+			                                        )}
+			                                      </PlacesAutocomplete>
+												</div>
 										</div>
 									</div>
 								</div>
@@ -671,22 +686,21 @@ handleTagClick(index){
 								<div className="col-lg-12 addJobFieldRow text-left">
 									<div className="row">
 										<div className="col-lg-3">
-											<label htmlFor="functionalArea" className="addjobformLable"> State <span className="asterisk">&#42;</span> </label>
+											<label htmlFor="states" className="addjobformLable"> State <span className="asterisk">&#42;</span> </label>
 											<div className="input-group"> 
-												<select className="form-control addJobFormField"  id="states"
-												ref="states" value={this.state.states} name="states" onChange={this.handleChangeState.bind(this)} >
-												<option hidden>-- Select --</option>
-												{
-													this.state.stateArray && this.state.stateArray.length > 0 ?
-														this.state.stateArray.map((stateData, index) => {
-															return (
-																<option key={index} statecode={stateData.stateCode}>{this.camelCase(stateData.stateName)}</option>
-															);
+												<select className="form-control addJobFormField"  id="states" ref="states" value={this.state.states} name="states" onChange={this.handleChangeState.bind(this)} >
+													<option hidden>-- Select --</option>
+														{
+															this.state.stateArray && this.state.stateArray.length > 0 ?
+																this.state.stateArray.map((stateData, index) => {
+																	return (
+																		<option key={index} statecode={stateData.stateCode}>{this.camelCase(stateData.stateName)}</option>
+																	);
+																}
+																) : ''
 														}
-														) : ''
-												}
 												</select>
-												<span id="functionalAreaError" className="errorMsgJobPost"></span>
+												
 											</div>	
 										</div>	
 										
@@ -729,7 +743,7 @@ handleTagClick(index){
 											<label htmlFor="functionalArea" className="addjobformLable"> Functional Area <span className="asterisk">&#42;</span> </label>
 											<div className="input-group">
 												<span className="input-group-addon addJobFormField"><i className="fa fa-briefcase"></i></span> 
-												<select className="form-control addJobFormField" name="functionalArea" id="functionalArea" value={this.state.functionalArea} onChange={this.handleChange}>
+												<select className="form-control addJobFormField" name="functionalarea_id" id="functionalarea_id" value={this.state.functionalarea_id} onChange={this.handleChange}>
 												<option hidden> -- Select -- </option>
 											    	{
 														this.state.functionalArealist!=null && this.state.functionalArealist.length > 0 
@@ -750,7 +764,7 @@ handleTagClick(index){
 											<label htmlFor="subFunctionalArea" className="addjobformLable"> Sub Functional Area <span className="asterisk">&#42;</span> </label>
 											<div className="input-group">
 												<span className="input-group-addon addJobFormField"><FontAwesomeIcon icon={['fas', 'briefcase']} /></span> 
-												<select className="form-control addJobFormField" name="subFunctionalArea" id="subFunctionalArea" value={this.state.subFunctionalArea} onChange={this.handleChange}>
+												<select className="form-control addJobFormField" name="subfunctionalarea_id" id="subfunctionalarea_id" value={this.state.subfunctionalarea_id} onChange={this.handleChange}>
 											    <option hidden> -- Select -- </option>	
 											    	{
 														this.state.subFunctionalAreaList!=null && this.state.subFunctionalAreaList.length > 0 
@@ -808,7 +822,7 @@ handleTagClick(index){
 									</div>
 								</div>
 								<div className="col-lg-3 text-left">
-									<label className="containerWfh">Work From Home
+									<label htmlFor="workFromHome" className="containerWfh">Work From Home
                                         <input type="checkbox" name="workFromHome" id="workFromHome" value={this.state.workFromHome} onChange={this.setWorkFromHome.bind(this)} />
                                         <span className="checkmark2"></span>
                             		</label>
@@ -819,7 +833,7 @@ handleTagClick(index){
 											<label htmlFor="jobType" className="addjobformLable"> Job Type </label>
 											<div className="input-group col-lg-12">
 												<span className="input-group-addon addJobFormField"><i className="fa fa-briefcase"></i> </span> 
-												<select name="jobType" className="form-control addJobFormField" id="jobType" value={this.state.jobType} onChange={this.handleChange}>
+												<select name="jobtype_id" className="form-control addJobFormField" id="jobtype_id" value={this.state.jobtype_id} onChange={this.handleChange}>
 											    	<option hidden> -- Select -- </option>
 											    	{
 														this.state.jobTypeArray!=null && this.state.jobTypeArray.length > 0 
@@ -840,7 +854,7 @@ handleTagClick(index){
 											<label htmlFor="jobTime" className="addjobformLable"> Job Time </label>
 											<div className="input-group">
 												<span className="input-group-addon addJobFormField"><FontAwesomeIcon icon={['fas', 'business-time']} /></span> 
-												<select name="jobTime" className="form-control addJobFormField" id="jobTime" value={this.state.jobTime} onChange={this.handleChange}>
+												<select name="jobtime_id" className="form-control addJobFormField" id="jobtime_id" value={this.state.jobtime_id} onChange={this.handleChange}>
 											    	<option hidden> -- Select -- </option>	
 											    	{
 														this.state.jobTimeArray!=null && this.state.jobTimeArray.length > 0 
@@ -860,7 +874,7 @@ handleTagClick(index){
 											<label htmlFor="jobCategory" className="addjobformLable"> Job Category </label>
 											<div className="input-group">
 												<span className="input-group-addon addJobFormField"><i className="fa fa-list-alt"></i></span> 
-												<select name="jobCategory" className="form-control addJobFormField" id="jobCategory" value={this.state.jobCategory} onChange={this.handleChange}>
+												<select name="jobcategory_id" className="form-control addJobFormField" id="jobcategory_id" value={this.state.jobcategory_id} onChange={this.handleChange}>
 											    	<option hidden> -- Select -- </option>	
 											    	{
 														this.state.jobCategoryArray!=null && this.state.jobCategoryArray.length > 0 
@@ -883,11 +897,11 @@ handleTagClick(index){
 									<div className="row">
 										<div className="col-lg-4">
 											<div className="row">
-												<label htmlFor="addJobNumOfPosi" className="addjobformLable col-lg-12"> No. Of Positions </label>
+												<label htmlFor="positions" className="addjobformLable col-lg-12"> No. Of Positions </label>
 											</div>
 											<div className="input-group">
 												<span className="input-group-addon addJobFormField"><i className="fa fa-users"></i></span> 
-												<input type="text" className="form-control addJobFormField" name="addJobNumOfPosi" id="addJobNumOfPosi" value={this.state.addJobNumOfPosi} onChange={this.handleChange}/>
+												<input type="text" className="form-control addJobFormField" name="positions" id="positions" value={this.state.positions} onChange={this.handleChange}/>
 											</div>
 										</div>
 										<div className="col-lg-4 democlass">
@@ -1023,18 +1037,18 @@ handleTagClick(index){
 											<label htmlFor="secondarySkills" className="addjobformLable"> Secondary Skills </label>
 											<div className="input-group col-lg-12">
 												<span className="input-group-addon addJobFormField"> <i className='fa fa-cog'></i> </span>
-												<ReactTags
-													tags           = {tags}
-										        	suggestions    = {suggestions}
-										        	delimiters     = {delimiters}
-										        	handleDelete   = {this.handleDelete}
-										        	handleAddition = {this.handleAddition}
-										        	handleDrag     = {this.handleDrag}
-										        	handleTagClick = {this.handleTagClick}
-										        	name           = "secondarySkills"
-										        	id             = "secondarySkills"
-										        	value          = {this.state.secondarySkills}
-										        />
+													<ReactTags
+														tags           = {tags}
+											        	suggestions    = {suggestions}
+											        	delimiters     = {delimiters}
+											        	handleDelete   = {this.handleDelete}
+											        	handleAddition = {this.handleAddition}
+											        	handleDrag     = {this.handleDrag}
+											        	handleTagClick = {this.handleTagClick}
+											        	name           = "secondarySkills"
+											        	id             = "secondarySkills"
+											        	value          = {this.state.secondarySkills}
+											        />
 											</div>
 										</div>
 										<div className="col-lg-4">
@@ -1051,7 +1065,19 @@ handleTagClick(index){
 										<div className="col-lg-8">
 											<label htmlFor="otherSkills" className="addjobformLable"> Other Skills </label>
 											<div className="input-group col-lg-12">
-												<span className="input-group-addon addJobFormField"> <i className='fa fa-cog'></i> </span> 
+												<span className="input-group-addon addJobFormField"> <i className='fa fa-cog'></i> </span>
+													<ReactTags
+														tags           = {tags}
+											        	suggestions    = {suggestions}
+											        	delimiters     = {delimiters}
+											        	handleDelete   = {this.handleDelete}
+											        	handleAddition = {this.handleAddition}
+											        	handleDrag     = {this.handleDrag}
+											        	handleTagClick = {this.handleTagClick}
+											        	name           = "otherSkills"
+											        	id             = "otherSkills"
+											        	value          = {this.state.otherSkills}
+											        /> 
 											</div>
 										</div>
 										<div className="col-lg-4">
@@ -1064,9 +1090,21 @@ handleTagClick(index){
 									</div>
 								</div>
 								<div className="col-lg-12 addJobFieldRow text-left">
-									<label htmlFor="notMandateSkills" className="addjobformLable"> Preferred Skills but not mandatory </label>
+									<label htmlFor="preferSkills" className="addjobformLable"> Preferred Skills but not mandatory </label>
 									<div className="input-group col-lg-12">
-										<span className="input-group-addon addJobFormField"> <i className='fa fa-cog'></i> </span> 
+										<span className="input-group-addon addJobFormField"> <i className='fa fa-cog'></i> </span>
+											<ReactTags
+												tags           = {tags}
+									        	suggestions    = {suggestions}
+									        	delimiters     = {delimiters}
+									        	handleDelete   = {this.handleDelete}
+									        	handleAddition = {this.handleAddition}
+									        	handleDrag     = {this.handleDrag}
+									        	handleTagClick = {this.handleTagClick}
+									        	name           = "preferSkills"
+									        	id             = "preferSkills"
+									        	value          = {this.state.preferSkills}
+											/> 
 									</div>
 								</div>
 								

@@ -1,7 +1,7 @@
 const mongoose	=	require('mongoose');
 const mongodb	=	require('mongodb');
 const Jobs 		=	require('./ModelJobPost.js');
-var ObjectID = require('mongodb').ObjectID;
+var ObjectID 	= 	require('mongodb').ObjectID;
 
 exports.insertJobs = (req, res, next)=>{
 
@@ -173,53 +173,64 @@ exports.updateJob = (req,res,next)=>{
 					{_id : req.body.job_id},
 					{$set 	: 	{
 									"company_id"	: 	req.body.company_id,
-									"jobBasicInfo" 	:   {
-															"jobTitle"			: req.body.jobTitle,
-															"jobLocationCity"	: req.body.jobLocationCity,
-															"jobLocationCountry": req.body.jobLocationCountry,
-															"functionalArea"	: req.body.functionalArea,
-															"subFunctionalArea"	: req.body.subFunctionalArea,
-															"role"				: req.body.role,	
-															"gender"            : req.body.gender,
-															"workFromHome" 		: req.body.workFromHome,
-															"jobGeoLocation" 	: 	{
-																						"lat": req.body.lat,
-																						"long": req.body.long,
-																				    },
-															"contactPersonName" : req.body.contactPersonName,
-															"contactPersonEmail": req.body.contactPersonEmail,
-															"contactPersonPhone": req.body.contactPersonPhone,
-															"jobType" 			: req.body.jobType,
-															"jobTime" 			: req.body.jobTime,
-															"lastDateOfAppl" 	: new Date(req.body.lastDateOfAppl),
-															"jobDesc" 			: req.body.jobDesc,
-														},
-						
-									"CTCOffered" 	:   {
-															"minSalary" 	: req.body.minSalary,
-															"minSalPeriod" 	: req.body.minSalPeriod,
-															"maxSalary" 	: req.body.maxSalary,
-															"maxSalPeriod" 	: req.body.maxSalPeriod,
-														},
-						
-									"eligibility" 	: 	{
-															"minEducation" 	: req.body.minEducation,
-															"minExperience" : req.body.minExperience,
-														},
-						
-									"requiredSkills": 	{
-															"primarySkills" 	: req.body.primarySkills,
-															"minPrimExp" 	    : req.body.minPrimExp,
-															"secondarySkills" 	: req.body.secondarySkills,
-															"minSecExp" 		: req.body.minSecExp,
-															"otherSkills"		: req.body.otherSkills,
-															"minOtherExp"		: req.body.minOtherExp,
-															"preferredSkills" 	: req.body.preferredSkills,
-														},
-						
-									"updateLog" : 	[
-														{"updatedBy": req.body.user_id, "updatedAt":new Date(), "remark":req.body.remark }
-													]
+			
+			"jobBasicInfo" 	: 	{
+									"jobTitle"				: req.body.jobTitle,
+									"industry_id"			: req.body.industry_id,
+									"functionalarea_id" 	: req.body.functionalarea_id,
+									"subfunctionalarea_id"	: req.body.subfunctionalarea_id,
+									"role"					: req.body.role,
+									"gender"				: req.body.gender,
+									"workFromHome" 			: req.body.workFromHome,
+									"jobtype_id" 			: req.body.jobtype_id,
+									"jobtime_id" 			: req.body.jobtime_id,
+									"jobcategory_id" 		: req.body.jobcategory_id,
+									"positions" 			: req.body.positions,
+									"jobDesc" 				: req.body.jobDesc,
+									"lastDateOfAppl" 		: new Date(req.body.lastDateOfAppl),
+									
+									"contactPersonName" 	: req.body.contactPersonName,
+									"contactPersonEmail" 	: req.body.contactPersonEmail,
+									"contactPersonPhone" 	: req.body.contactPersonPhone,
+								},
+			"location" 		: 	{
+									"address" 				: req.body.address,
+									"area" 					: req.body.area,
+									"cityVillage"  			: req.body.city,
+									"district" 				: req.body.district,
+									"state" 				: req.body.state,
+									"stateCode" 			: req.body.stateCode,	
+									"country" 				: req.body.country,
+									"countryCode" 			: req.body.countryCode,
+									"pincode" 	 			: req.body.pincode
+								},
+			"ctcOffered" 	: 	{
+									"minSalary" 	: req.body.minSalary,
+									"minSalPeriod" 	: req.body.minSalPeriod,
+									"maxSalary" 	: req.body.maxSalary,
+									"maxSalPeriod" 	: req.body.maxSalPeriod,
+								},
+			
+			"eligibility" 	: 	{
+									"minEducation" 	: req.body.minEducation,
+									"minExperience" : req.body.minExperience,
+								},
+			
+			"requiredSkills": 	{
+									"primarySkills" 	: req.body.primarySkills,
+									"minPrimExp"		: req.body.minPrimExp,
+									"secondarySkills" 	: req.body.secondarySkills,
+									"minSecExp"			: req.body.minSecExp,
+									"otherSkills"		: req.body.otherSkills,
+									"minOtherExp" 	  	: req.body.minOtherExp,
+									"preferredSkills" 	: req.body.preferredSkills,
+								},
+			
+			"createdAt" 	: 	new Date(),
+			"createdBy" 	: 	req.body.user_id,
+			"updateLog" 	: 	[
+									{"updatedBy": req.body.user_id, "updatedAt":new Date(), "remark":req.body.remark }
+								]
 					}}
 				)
 				

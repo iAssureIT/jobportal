@@ -20,8 +20,7 @@ const jobsSchema = mongoose.Schema({
 							lastDateOfAppl 			: Date,
 							contactPersonName 		: String,
 							contactPersonEmail 		: String,
-							contactPersonPhone 		: String,
-							
+							contactPersonPhone 		: String,	
 						},
 	location 		: 	{
 							address 				: String,

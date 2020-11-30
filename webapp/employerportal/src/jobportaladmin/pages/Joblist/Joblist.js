@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-//import "../listCss/JoblistPage.css";
+import "../listCss/JobList.css";
 
 import LeftMenu  		from '../../common/leftMenu/LeftMenu.js';
 import LeftSideFilters  from '../../common/leftSideFilters/LeftSideFilters.js';
@@ -10,6 +10,7 @@ class Joblist extends Component{
 		super(props);
 
 	}
+	
 	render(){
 		return(
 				<div className="container-fluid">

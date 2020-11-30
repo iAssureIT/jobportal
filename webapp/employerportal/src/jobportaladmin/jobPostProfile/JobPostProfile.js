@@ -13,16 +13,19 @@ export default class JobPostProfile extends Component{
 			jobTitle 			: "",
 			jobLocationCity 	: "",
 			jobLocationCountry 	: "",
-			functionalArea 		: "",
-			subFunctionalArea 	: "",
+			functionalarea_id 	: "",
+			subfunctionalarea_id: "",
 			role 				: "",
 			gender              : "Male",
 			workFromHome 		: "",
 			contactPersonName 	: "",
 			contactPersonEmail 	: "",
 			contactPersonPhone 	: "",
-			jobType 			: "",
-			jobTime 			: "",
+			address             : "",
+			jobtype_id 			: "",
+			jobtime_id 			: "",
+			jobcategory_id      : "",
+			positions           : "",
 			lastDateOfAppl 		: "",
 			minSalary 			: "",
 			minSalPeriod 		: "",
@@ -50,37 +53,41 @@ export default class JobPostProfile extends Component{
 		var job_id = this.props.match.params.job_id;
 		console.log("job_id = ", job_id);
 
-		Axios.get("/api/jobposting/get/one/"+job_id)
+		Axios.get("/api/jobs/get/one/"+job_id)
 			.then(response=>{
                
 				console.log("response.data = ",response.data);
 
 				this.setState({
 					job_id				: job_id,
-					jobTitle 			: response.data.jobsData.jobBasicInfo.jobTitle,
-					jobLocationCity 	: response.data.jobsData.jobBasicInfo.jobLocationCity,
-					jobLocationCountry 	: response.data.jobsData.jobBasicInfo.jobLocationCountry,
-					functionalArea 		: response.data.jobsData.jobBasicInfo.functionalArea,
-					subFunctionalArea 	: response.data.jobsData.jobBasicInfo.subFunctionalArea,
-					role 				: response.data.jobsData.jobBasicInfo.role,
-					gender              : response.data.jobsData.jobBasicInfo.gender,
-					workFromHome 		: response.data.jobsData.jobBasicInfo.workFromHome,
-					contactPersonName 	: response.data.jobsData.jobBasicInfo.contactPersonName,
-					contactPersonEmail 	: response.data.jobsData.jobBasicInfo.contactPersonEmail,
-					contactPersonPhone 	: response.data.jobsData.jobBasicInfo.contactPersonPhone,
-					jobType 			: response.data.jobsData.jobBasicInfo.jobType,
-					jobTime 			: response.data.jobsData.jobBasicInfo.jobTime,
-					lastDateOfAppl 		: response.data.jobsData.jobBasicInfo.lastDateOfAppl?Moment(response.data.jobsData.jobBasicInfo.lastDateOfAppl).format("YYYY-MM-DD"):"",
-					minSalary 			: response.data.jobsData.ctcOffered.minSalary,
-					minSalPeriod 		: response.data.jobsData.ctcOffered.minSalPeriod,
-					maxSalary 			: response.data.jobsData.ctcOffered.maxSalary,
-					maxSalPeriod		: response.data.jobsData.ctcOffered.maxSalPeriod,
-					jobDesc 			: response.data.jobsData.jobBasicInfo.jobDesc,
-					minEducation 		: response.data.jobsData.eligibility.minEducation,
-					minExperience 		: response.data.jobsData.eligibility.minExperience,
-					minPrimExp 	 		: response.data.jobsData.requiredSkills.minPrimExp,
-					minSecExp 	 		: response.data.jobsData.requiredSkills.minSecExp,
-					minOtherExp			: response.data.jobsData.requiredSkills.minOtherExp,
+					jobTitle 			: response.data.jobsData[0].jobBasicInfo.jobTitle,
+					industry_id         : response.data.jobsData[0].jobBasicInfo.industry_id,
+					jobLocationCity 	: response.data.jobsData[0].jobBasicInfo.jobLocationCity,
+					jobLocationCountry 	: response.data.jobsData[0].jobBasicInfo.jobLocationCountry,
+					functionalarea_id 	: response.data.jobsData[0].jobBasicInfo.functionalarea_id,
+					subfunctionalarea_id: response.data.jobsData[0].jobBasicInfo.subfunctionalarea_id,
+					role 				: response.data.jobsData[0].jobBasicInfo.role,
+					gender              : response.data.jobsData[0].jobBasicInfo.gender,
+					workFromHome 		: response.data.jobsData[0].jobBasicInfo.workFromHome,
+					contactPersonName 	: response.data.jobsData[0].jobBasicInfo.contactPersonName,
+					contactPersonEmail 	: response.data.jobsData[0].jobBasicInfo.contactPersonEmail,
+					contactPersonPhone 	: response.data.jobsData[0].jobBasicInfo.contactPersonPhone,
+					address             : response.data.jobsData[0].location.address,
+					jobtype_id 			: response.data.jobsData[0].jobBasicInfo.jobtype_id,
+					jobtime_id 			: response.data.jobsData[0].jobBasicInfo.jobtime_id,
+					jobcategory_id 		: response.data.jobsData[0].jobBasicInfo.jobcategory_id,
+					positions           : response.data.jobsData[0].jobBasicInfo.positions,
+					/*lastDateOfAppl 		: response.data.jobsData[0].jobBasicInfo.lastDateOfAppl?Moment(response.data.jobsData.jobBasicInfo.lastDateOfAppl).format("YYYY-MM-DD"):"",*/
+					minSalary 			: response.data.jobsData[0].ctcOffered.minSalary,
+					minSalPeriod 		: response.data.jobsData[0].ctcOffered.minSalPeriod,
+					maxSalary 			: response.data.jobsData[0].ctcOffered.maxSalary,
+					maxSalPeriod		: response.data.jobsData[0].ctcOffered.maxSalPeriod,
+					jobDesc 			: response.data.jobsData[0].jobBasicInfo.jobDesc,
+					minEducation 		: response.data.jobsData[0].eligibility.minEducation,
+					minExperience 		: response.data.jobsData[0].eligibility.minExperience,
+					minPrimExp 	 		: response.data.jobsData[0].requiredSkills.minPrimExp,
+					minSecExp 	 		: response.data.jobsData[0].requiredSkills.minSecExp,
+					minOtherExp			: response.data.jobsData[0].requiredSkills.minOtherExp,
                 })
                
 			})
@@ -114,7 +121,7 @@ export default class JobPostProfile extends Component{
 														<b>iAssure International Technologies Pvt Ltd</b>
 													</div>
 													<div className="locationinfo">
-														{this.state.jobLocationCity}
+														{this.state.address}
 													</div>
 												</div>
 											</div>
@@ -323,7 +330,7 @@ export default class JobPostProfile extends Component{
 										Industry
 									</div>
 									<p className="rightSideSub">
-										Information & Technology
+										{this.state.industry_id}
 									</p>
 									
 									<div className="rightSideTitle">
@@ -344,7 +351,7 @@ export default class JobPostProfile extends Component{
 										Job Type
 									</div>
 									<p className="rightSideSub">
-										{this.state.jobType}
+										{this.state.jobtype_id}
 									</p>
 									
 									<div className="rightSideTitle">
@@ -352,7 +359,7 @@ export default class JobPostProfile extends Component{
 									</div>
 									
 									<p className="rightSideSub">
-										{this.state.functionalArea}
+										{this.state.functionalarea_id}
 									</p>
 									
 									<div className="rightSideTitle">

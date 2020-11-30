@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-
 import Axios from  'axios';
 import Swal  from  'sweetalert2';
 
@@ -16,7 +15,7 @@ componentDidMount(){
 }
 
 getJobsData=()=>{
-	Axios.get("/api/jobposting/list")
+	Axios.get("/api/jobs/list")
 	.then(response=>{
 		console.log("getJobsData response.data : ", response.data);
 		this.setState({
@@ -44,7 +43,7 @@ deleteJob = (event)=>{
 	}).then((result) =>{
 		if(result.value){
 			if(job_id){
-				Axios.delete("/api/jobposting/delete/"+job_id)
+				Axios.delete("/api/jobs/delete/"+job_id)
 				.then(response =>{
 					console.log()
 					if(response.data.message==="Job details deleted Successfully!"){
@@ -121,14 +120,14 @@ deleteJob = (event)=>{
 															<i className="fa fa-map-marker jobListLocation"></i> &nbsp; {elem.jobBasicInfo.jobLocationCity}
 														</div>
 														<div> 
-															<i className="fa fa-users jobListNumPositions"></i> &nbsp; No of position : 10
+															<i className="fa fa-users jobListNumPositions"></i> &nbsp; No of position : {elem.jobBasicInfo.positions} 
 														</div>
 													</div>
 													<div className="col-lg-1 jobListRightContent">
 														<div className="row">
 															<div className="col-lg-12">
 																<div className="listEditBtn">
-																	<a title = "Edit Profile" href={"/job-post-form/" + elem._id}><i className="fa fa-edit"></i></a>
+																	<a title = "Edit Profile" href={"/post-job/" + elem._id}><i className="fa fa-edit"></i></a>
 																</div>
 																<div className="listViewBtn">	
 																	<a title = "View Profile" href={"/job-profile/" + elem._id}><i className="fa fa-eye"></i></a>
