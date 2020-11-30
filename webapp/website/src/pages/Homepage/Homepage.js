@@ -51,17 +51,17 @@ class HomePage extends Component {
     }
   }
   changeViewMode(viewMode){
+    var {mapAction} = this.props;
+    mapAction.setViewMode(viewMode);
+
     if (viewMode=="functionalView") {
-      var {mapAction} = this.props;
       mapAction.filterFunctionalData(this.state.selector);
     }
     if (viewMode=="subfunctionalView") {
-      var {mapAction} = this.props;
       mapAction.filterSubfunctionalData(this.state.selector);
     }
     if (viewMode=="industrialView") {
-      var {mapAction} = this.props;
-      mapAction.filterFunctionalData(this.state.selector);
+      mapAction.filterIndustrialData(this.state.selector);
     }
   }
   render() {

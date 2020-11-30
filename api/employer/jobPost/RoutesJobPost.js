@@ -11,7 +11,7 @@ router.patch ("/update"		   					, jobsController.updateJob);
 router.post ("/mapwise-jobs"		   			, jobsController.mapwiseJobs);
 router.post ("/functional-jobs"		   			, jobsController.functonalAreaJobs);
 router.post ("/subfunctional-jobs"		   		, jobsController.subfunctionalAreaJobs);
-//router.post ("/industrial-jobs"		   			, jobsController.industrialJobs);
+router.post ("/industrial-jobs"		   			, jobsController.industrialJobs);
 
 router.delete("/delete/:job_id"					, jobsController.deleteJob);
 

@@ -11,6 +11,7 @@ const initialState = {
 	mapJobs 					: [],
 	functionalJobs 				: [],
 	subfunctionalJobs 			: [],
+	industrialJobs 				: []
 }
 
 const reducer = (state = initialState,action) => {
@@ -45,7 +46,9 @@ const newState = {...state};
 	if(action.type === "SET_SUBFUNCTIONAL_DATA"){
 		newState.subfunctionalJobs = action.subfunctionalJobs;
 	}
-	
+	if(action.type === "SET_INDUSTRIAL_DATA"){
+		newState.industrialJobs = action.industrialJobs;
+	}
 	
 return newState;
 }

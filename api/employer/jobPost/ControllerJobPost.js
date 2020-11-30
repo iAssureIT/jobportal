@@ -353,7 +353,50 @@ exports.subfunctionalAreaJobs = (req, res, next)=>{
     	{ $match 	: selector },
     	{ $sort 	: {createdAt : -1} },
     	{ $group 	: {_id: "$jobBasicInfo.subfunctionalarea_id", count: { $sum: 1}} },
-    	{ $lookup 	: {from: "subfunctionalareamasters", localField: "_id", foreignField: "_id", as: "functionalarea"}}
+    	{ $lookup 	: {from: "subfunctionalareamasters", localField: "_id", foreignField: "_id", as: "subfunctionalarea"}}
+    ])
+
+    .sort({createdAt : -1})
+    .exec()
+    .then(data=>{
+        res.status(200).json(data);
+    })
+    .catch(err =>{
+    	console.log(err.response)
+        res.status(500).json({
+            error: err
+        });
+    });
+}
+exports.industrialJobs = (req, res, next)=>{
+	console.log("req.body - ", req.body);
+	var selector = {}; 
+	var industry_ids = [];
+    var funarea_ids = [];
+
+    selector['$and']=[];
+    selector["$and"].push({ "location.countryCode" :  req.body.countryCode })
+   	
+    console.log(JSON.stringify(selector))
+
+    if (req.body.industry_id) {
+    	req.body.industry_id.map(elem => {
+    		industry_ids.push(ObjectID(elem.id))
+    	})
+    	selector["$and"].push({ "jobBasicInfo.industry_id" : { $in: industry_ids } });
+    }
+    if (req.body.funarea_id) {
+    	req.body.funarea_id.map(elem => {
+    		funarea_ids.push(ObjectID(elem.id))
+    	})
+    	selector["$and"].push({ "jobBasicInfo.functionalarea_id" : { $in: funarea_ids } });
+    }
+    
+    Jobs.aggregate([
+    	{ $match 	: selector },
+    	{ $sort 	: {createdAt : -1} },
+    	{ $group 	: {_id: "$jobBasicInfo.industry_id", count: { $sum: 1}} },
+    	{ $lookup 	: {from: "industrymasters", localField: "_id", foreignField: "_id", as: "industry"}}
     ])
 
     .sort({createdAt : -1})
