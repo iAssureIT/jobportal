@@ -23,9 +23,8 @@ class India extends Component{
 	componentDidMount(){
 		Axios.get("/api/map/list")
 			.then(response => {
-				console.log("getStateWiseJobs response.data = ",response.data);
 				this.setState({stateWiseJobs : response.data.stateJobsList });
-				console.log("stateWiseJobs",this.state.stateWiseJobs);
+				
 			})
 			.catch(error=>{
 				Swal.fire("Error while getting List data",error.message,'error');

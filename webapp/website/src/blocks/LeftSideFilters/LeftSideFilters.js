@@ -13,8 +13,7 @@ class LeftSideFilters extends Component{
 
   constructor(props){
     super(props);
-    console.log("I am in Constructor!");
-
+    
     this.state = {
 
       allIndustries         : [],
@@ -95,7 +94,6 @@ class LeftSideFilters extends Component{
   let allFunctionalAreas = [];
   Axios.get("/api/industrymaster/get/list")
       .then(response => {
-        console.log("get Industry Data response.data = ",response.data);
         this.setState({inputIndustry : response.data});
         
         this.state.inputIndustry!=null && this.state.inputIndustry.length > 0 
@@ -117,9 +115,7 @@ class LeftSideFilters extends Component{
 
       Axios.get("/api/functionalareamaster/get/list")
       .then(response => {
-        console.log("get functionalArea Data response.data = ",response.data);
         this.setState({inputSector : response.data});
-        console.log("Sector",this.state.inputSector);
         this.state.inputSector!=null && this.state.inputSector.length > 0 
         ?
           this.state.inputSector.map((elem,index)=>{
@@ -137,9 +133,7 @@ class LeftSideFilters extends Component{
 
       Axios.get("/api/jobrolemaster/get/list")
       .then(response => {
-        console.log("get Jpb Role Data response.data = ",response.data);
         this.setState({inputRole : response.data});
-        console.log("Role",this.state.inputSector);
         this.state.inputRole!=null && this.state.inputRole.length > 0 
         ?
           this.state.inputRole.map((elem,index)=>{
@@ -166,6 +160,8 @@ class LeftSideFilters extends Component{
     var selector=this.state.selector;
     var industry_ids = [];
     var functionalArea_ids=[];
+    var {mapAction} = this.props;
+
     selector.countryCode = "IN"; 
     //selector.stateCode = selecteditems.currentTarget.value; 
 
@@ -184,36 +180,24 @@ class LeftSideFilters extends Component{
       selector.functionalArea_id = selecteditems;
     }
 
-    
     this.setState({ selector: selector },()=>{
-      this.getFilteredData(this.state.selector);
-    })
-    /*  
-      delete selector.district
-      
-    
-    if(filterType === 'functionalArea'){
-      selector.district  = selecteditems.currentTarget.value; 
-    }
-    */
-  }
-  getFilteredData(selector){
 
-    Axios.post("/api/jobs/filter", selector)
-      .then((response) => {
-          var {mapAction} = this.props;
-          mapAction.filterData(selector);
-        // console.log("response>/",response.data,this.state.roles,this.state.getcompanyID)
-       
-        //   this.setState({
-        //     entityList   : response.data,
-        //     showDetails  : true,
-        //   })
-        
-      })
-      .catch((error) => {
-      })
+      if (this.props.viewMode=="mapView") {
+        mapAction.filterMapData(this.state.selector);
+      }
+      if (this.props.viewMode=="functionalView") {
+        mapAction.filterFunctionalData(this.state.selector);
+      }
+      if (this.props.viewMode=="subfunctionalView") {
+        mapAction.filterSubfunctionalData(this.state.selector);
+      }
+      if (this.props.viewMode=="industrialView") {
+        mapAction.filterIndustrialData(this.state.selector);
+      }
+    })
+    
   }
+
   render(){
     
    
@@ -305,8 +289,7 @@ class LeftSideFilters extends Component{
 }
 const mapStateToProps = (state)=>{
     return {
-        selector    : state.selector,
-        filterData  : state.filterData
+        viewMode    : state.viewMode
     }
 }
 const mapDispachToProps = (dispatch) => ({

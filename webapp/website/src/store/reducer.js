@@ -6,7 +6,7 @@ const initialState = {
 	selectedDistrict 			: "",
 	selectedModal 				: "login",
 	userID 						: "",
-	viewMode 					: "",
+	viewMode 					: "mapView",
 	selector 					: {},
 	mapJobs 					: [],
 	functionalJobs 				: [],

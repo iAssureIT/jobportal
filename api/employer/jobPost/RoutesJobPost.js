@@ -7,11 +7,6 @@ router.get   ("/get/one/:job_id"  				, jobsController.getJob);
 router.get   ("/get/searchlist/:searchTxt"  	, jobsController.getSearchList);
 router.get   ("/list"	   						, jobsController.getJobList);
 router.patch ("/update"		   					, jobsController.updateJob);
-<<<<<<< Updated upstream
-=======
-router.post  ("/functional-jobs"		   		, jobsController.functonalAreaJobs);
-router.post  ("/subfunctional-jobs"		   		, jobsController.subfunctonalAreaJobs);
->>>>>>> Stashed changes
 
 router.post ("/mapwise-jobs"		   			, jobsController.mapwiseJobs);
 router.post ("/functional-jobs"		   			, jobsController.functonalAreaJobs);

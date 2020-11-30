@@ -139,7 +139,7 @@ class Login extends Component {
               this.setState({
                 loggedIn: true
               }, () => {
-                window.location.href = '/';
+                //window.location.href = '/';
               })
               })
               .catch((error) => {

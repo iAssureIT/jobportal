@@ -54,6 +54,9 @@ class HomePage extends Component {
     var {mapAction} = this.props;
     mapAction.setViewMode(viewMode);
 
+    if (viewMode=="mapView") {
+      mapAction.filterMapData(this.state.selector);
+    }
     if (viewMode=="functionalView") {
       mapAction.filterFunctionalData(this.state.selector);
     }

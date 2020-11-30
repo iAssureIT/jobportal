@@ -83,7 +83,6 @@ class Layout extends Component  {
                 this.setState({
                     stateArray: response.data
                 },()=>{
-                    console.log(this.state.stateArray)
                     let stateLink = this.state.stateArray.find(element => element.stateName == decodeURIComponent(lastpara[1]) );
                     
                     if (stateLink ) {
