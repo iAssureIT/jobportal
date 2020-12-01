@@ -206,25 +206,25 @@ class LeftSideFilters extends Component{
       
       <div className="row">
 
-		 	    <div className="form-group col-lg-12">
+          <div className="form-group col-lg-12">
             <div className='row'>
-            	<div className="input-group filtersColor col-lg-12">
-           			
-           				 <Multiselect className="form-control LeftSideFiltersInputBox LeftSideFiltersDrop"
+              <div className="input-group filtersColor col-lg-12">
+                
+                   <Multiselect className="form-control LeftSideFiltersInputBox LeftSideFiltersDrop"
                     id="allIndustries" name="allIndustries" placeholder="All Industries"
-                		//onChange={this.onSelectedItemsChange.bind(this,'industry')}
+                    //onChange={this.onSelectedItemsChange.bind(this,'industry')}
                     options={this.state.allIndustries}
                     displayValue="industry"
                     onSelect={this.onSelectedItemsChange.bind(this,'industry')} // Function will trigger on select event
                     onRemove={this.onSelectedItemsChange.bind(this,'industry')}
                     style={this.style}
                     
-           				 />   
+                   />   
 
           
-            	</div>
+              </div>
             </div>  
-        	</div> 
+          </div> 
 
           <div className="form-group col-lg-12">
             <div className='row'>
@@ -262,7 +262,7 @@ class LeftSideFilters extends Component{
               </div>
             </div>
           </div> 
-		
+    
         <div className="form-group col-lg-12">
             <div className="row">
               <div className="input-group col-lg-12">
@@ -279,8 +279,8 @@ class LeftSideFilters extends Component{
               </div>
             </div>
           </div> 
-	   </div>
-		 	  
+     </div>
+        
     </section>
     );
   }

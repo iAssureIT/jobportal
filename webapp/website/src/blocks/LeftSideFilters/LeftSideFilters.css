@@ -10,21 +10,21 @@
 
 .LeftSideFiltersWrapper{
   height: auto;
-	min-height: 250px;
-	background-color: #1f262d;
+  min-height: 250px;
+  background-color: #1f262d;
 }
 
 
 .LeftSideFiltersDrop{
-	background-color: #242933;
-	color: #fff;
+  background-color: #242933;
+  color: #fff;
   overflow-x: hidden;
 
 }
 
 .LeftSideFiltersInputBox{
-	height:auto;
-	min-height: 40px;
+  height:auto;
+  min-height: 40px;
   margin-top: 15px;
   text-align:left;
   padding-left: 10px;
@@ -36,8 +36,8 @@
 }
 
 .LeftSideFiltersInputBox:focus{
-	border-color: #999;
-	box-shadow: 0px 1px 1px rgba(153, 153, 153, 0.075) inset, 0px 0px 8px rgba(153, 153, 153, 0.5)  !important;
+  border-color: #999;
+  box-shadow: 0px 1px 1px rgba(153, 153, 153, 0.075) inset, 0px 0px 8px rgba(153, 153, 153, 0.5)  !important;
 }
 
 .optionContainer,
@@ -64,16 +64,12 @@
   padding-left: 10px;
  
 }
-
 .filtersIcon{
   padding: 5px;
 }
-
 .FilterDropDown{
   margin-top: 15px;
-
 }
-
 .leftDrawerToggel{
  
   position: absolute;
