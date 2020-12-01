@@ -7,10 +7,94 @@
 	padding-bottom:15px;
 	background:var(--main);
 }
+
+.SearchListContainer{
+	width:87%;
+	position:absolute;
+	top:33px;
+	z-index:5!important;
+	background-color: var(--input-bg-color);
+}
+.addRightbtn a{
+	color:var(--main-txt-color );
+	text-decoration: none;
+}
+.addWrapper{
+	height:156px;
+	font-family:'Montserrat-Regular';
+	margin-bottom:25px;
+	border: 3px inset var(--main-border-color);
+}
+.addLeftWrapper{
+	background:var(--main-border-color );
+	height:150px;
+	text-align: center;
+	overflow: hidden!important;
+}
+.addLogoDiv{
+	font-size:45px;
+	padding-top:15px;
+
+}
+.addLogoTextDiv{
+	font-family:'Montserrat-Bold';
+	font-size:14px;
+}
+.addRightWrapper{
+	height:150px;
+	background-color: var(--input-bg-color );
+}
+.addRightText{
+	height:100px;
+	padding-top:15px;
+	font-size:12px;
+}
+.editBtn{
+	height: 25px;
+	width: 70px;
+	margin-top:10px;
+	border:1px solid var(--main-border-color)!important;
+	border-radius:4px;
+	background-color:var(--main-bg-color);
+	font-family: 'Montserrat-Medium';
+	font-size:13px;
+	transition:all 0.5s;
+	text-align: center;
+	padding-top:3px;
+}
+.dltBtn{
+	height: 25px;
+	width: 70px;
+	margin-top:10px;
+	border:1px solid var(--main-border-color)!important;
+	border-radius:4px;
+	background-color:var(--main-bg-color);
+	font-family: 'Montserrat-Medium';
+	font-size:13px;
+	transition:all 0.5s;
+	text-align: center;
+	padding-top:3px;
+}
+.editBtn:hover{
+	cursor: pointer;
+	background-color: var(--main-border-color);
+}
+.dltBtn:hover{
+	cursor: pointer;
+	background-color: #f00;
+	border:1px solid #f00!important;
+}
+.inputSearch{
+	font-size:13.5px!important;
+	border: 1px solid var(--main-border-color);
+	border-top:none;
+	
+}
+
 .AddressInnerWrapper{
 	border-radius:4px;
-	min-height:200px;
-	height:auto;
+	height:200px;
+	overflow: hidden;
 	box-shadow:0px 0px 5px var(--main-border-color );
 	padding-top:15px;
 	padding-bottom:15px;
@@ -26,29 +110,39 @@
 	color:var(--main-subheading-font-color);
 }
 .AddressBoxRightIcon{
-	padding-right:10px;
+	position:absolute;
 	color:var(--main-subheading-font-color);
+	top:0px;
+	right:-30px;
+	width:100px;
 }
 .AddressBoxRightIcon:hover{
+	position:absolute;
 	cursor:pointer;
+}
+.AddressBoxTextWrapper{
+	margin-bottom:15px;
+	padding-bottom:15px;
 }
 .rightIconHideWrapper{
 	position:relative;
 	height:55px;
 	width:80px;
-	left:-60px;
+	left:-5px;
 	font-size:12px;
 	box-shadow:0px 0px 5px var(--main-border-color );
 	border-radius:4px;
 	display:none;
 	color:#fff!important;
+	text-align:left;
 }
 .rightIconHide{
 	padding-left:10px;
 	padding-top:7px;
 }
-.rightIconHideRexr{
+.rightIconHideText{
 	padding-left:8px;
+	font-size:10px;
 
 }
 
@@ -59,6 +153,7 @@
 }
 .AddressOuterWrapper{
 	margin-top:20px;
+	
 }
 .hoverEdit:hover{
 	cursor:pointer;
@@ -69,13 +164,11 @@
 .rightIconHide:hover{
 	color:var(--main-subheading-font-color)!important;
 }
-.SearchListContainer{
-	width:87%;
-	position:absolute;
-	top:32.5px;
-	z-index:5!important;
-}
 .rightIconHideWrapper a{
-	color:var(--main-txt-color );
-	text-decoration: none;
+	color:#fff;
+	text-decoration: none!important;
+}
+.SearchListContainer{
+	position:absolute;
+	top:50px;
 }

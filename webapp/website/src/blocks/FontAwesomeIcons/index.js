@@ -4,7 +4,10 @@ import { fab } from '@fortawesome/free-brands-svg-icons'
 import {faAlignRight,faCheckSquare ,faRing,faMapMarkedAlt,
 		faUniversity,faFileAlt,faAdjust,faChalkboardTeacher,faCity,faWarehouse,
 		faIdCardAlt,faNetworkWired,faUserClock,faIndustry,faMapMarkerAlt,faEnvelope,
-		faUsers,faSearch,faSignOutAlt,faEllipsisH,faTrashAlt,faPencilAlt} 
+		faUsers,faSearch,faSignOutAlt,faEllipsisH,faTrashAlt,faPencilAlt,faHome} 
 from '@fortawesome/free-solid-svg-icons'
  
-library.add(fab, faCheckSquare, faAlignRight,faRing,faMapMarkedAlt,faUniversity,faFileAlt,faAdjust,faChalkboardTeacher,faCity,faWarehouse,faIdCardAlt,faNetworkWired,faUserClock,faIndustry,faMapMarkerAlt,faEnvelope,faUsers,faSearch,faSignOutAlt,faEllipsisH,faTrashAlt,faPencilAlt)
+library.add(fab, faCheckSquare, faAlignRight,faRing,faMapMarkedAlt,faUniversity,
+			faFileAlt,faAdjust,faChalkboardTeacher,faCity,faWarehouse,faIdCardAlt,
+			faNetworkWired,faUserClock,faIndustry,faMapMarkerAlt,faEnvelope,faUsers,
+			faSearch,faSignOutAlt,faEllipsisH,faTrashAlt,faPencilAlt,faHome)
