@@ -102,10 +102,10 @@ exports.manage_wishlist = (req,res,next)=>{
 
 
 exports.getCandidateWishlist = (req,res,next)=>{
-    console.log(req.params.candidateID)
+    console.log(req.body.candidateID)
     //Wishlist.find({"candidateID": req.params.candidateID})     
     Wishlist.aggregate([
-        { "$match" : { "candidateID" :req.params.candidateID } },
+        { "$match" : { "candidateID" : ObjectId(req.body.candidateID) } },
         { "$unwind": "$wishlistItems" },
         { "$lookup": {
             "from": "jobs",
@@ -117,6 +117,7 @@ exports.getCandidateWishlist = (req,res,next)=>{
     ])  
     .exec()
     .then(data=>{
+        //console.log(data)
         res.status(200).json(data);
     })
     .catch(err =>{

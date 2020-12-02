@@ -3,32 +3,34 @@ import Axios        		from 'axios';
 import Swal  				from  'sweetalert2';
 import JobList    	 		from '../../blocks/jobList/JobList.js';
 import LeftSideFilters      from '../../blocks/LeftSideFilters/LeftSideFilters.js';
+import { connect }        from 'react-redux';
+import { bindActionCreators } from 'redux';
+import  * as mapActionCreator from '../../common/actions/index';
 
 class CandidateJobList extends Component{
 	constructor(props){
 		super(props);
 		this.state={
-			jobList  : []
+			jobList  		: [],
+			selector 		: {},
+			user_ID 		: localStorage.getItem("user_ID"),
+			candidateID 	: localStorage.getItem("candidateID")
 		}
 	}
 
 	componentDidMount(){
-		this.getJobsData();
+
+		var selector=this.state.selector;
+	    selector.countryCode = "IN"; 
+
+	    this.setState({ selector: selector })
+
+	    var {mapAction} = this.props;
+	    mapAction.filterJobList(selector);
+
+	    mapAction.getJobWishlist(this.state.candidateID);
 	}
 
-	getJobsData=()=>{
-		Axios.get("/api/jobs/list")
-		.then(response=>{
-			console.log("getJobsData response.data : ", response.data);
-			this.setState({
-				jobList : response.data
-			});
-		})
-		.catch(error=>{
-			//Swal.fire("Error while getting list data", error.message, "error");
-		})
-	}
-	
 	render(){
 		return(
 				<div className="mainPagesWrapper col-lg-12">
@@ -53,7 +55,7 @@ class CandidateJobList extends Component{
 						</div>
 						<div className="col-lg-9">
 							<div className="row">
-								<JobList jobList={this.state.jobList}/>
+								<JobList jobList={this.props.jobList} jobWishlist={this.props.jobWishlist}/>
 							</div>
 						</div>
 					</div>
@@ -61,5 +63,15 @@ class CandidateJobList extends Component{
 			);
 	}
 }
+const mapStateToProps = (state)=>{
+    return {
+        selector        : state.selector,
+        jobList 		: state.jobList,
+        jobWishlist 	: state.jobWishlist
+    }
+}
+const mapDispachToProps = (dispatch) => ({
+  mapAction :  bindActionCreators(mapActionCreator, dispatch)
+}) 
 
-export default CandidateJobList;
+export default connect(mapStateToProps, mapDispachToProps) (CandidateJobList);

@@ -7,7 +7,7 @@ router.post('/post', ControllerCandidateWishlist.manage_wishlist);
 
 // router.patch('/', wishlistsController.update_wishlists);
 
-router.get('/get/candidateWishlist/:candidateID',ControllerCandidateWishlist.getCandidateWishlist);
+router.post('/candidateWishlist',ControllerCandidateWishlist.getCandidateWishlist);
 
 router.get('/get/wishlistcount/:candidateID',ControllerCandidateWishlist.countCandidateWishlist);
 
