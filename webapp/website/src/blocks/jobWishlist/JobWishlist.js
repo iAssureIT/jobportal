@@ -14,7 +14,9 @@ export default class jobWishlist extends Component{
 		jobIdArray:[]
 	}
 }
-
+componetDidMount(){
+	
+}
 handleclick = (jobid)=>{
 	console.log("jobid=", jobid);
 	if(!this.state.jobIdArray.includes(jobid)){

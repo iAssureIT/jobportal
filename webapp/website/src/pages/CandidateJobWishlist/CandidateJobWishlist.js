@@ -1,6 +1,6 @@
 import React,{Component}     from 'react';
 
-import CandidateWishlist    	 from '../../blocks/CandidateWishlist/CandidateWishlist.js';
+import JobWishlist    	 from '../../blocks/jobWishlist/JobWishlist.js';
 
 class CandidateJobWishlist extends Component{
 	constructor(props){
@@ -13,7 +13,7 @@ class CandidateJobWishlist extends Component{
 		return(
 				<div className="mainPagesWrapper col-lg-12">
 					<div className="row">
-						<CandidateWishlist/>
+						<JobWishlist/>
 					</div>
 				</div>
 			);

@@ -65,7 +65,19 @@ export function filterIndustrialData(selector) {
 	    }) 
   	}  
 }
-
+export function filteJobList(selector) {
+  	return dispatch =>{
+  		dispatch(setFilterSelector(selector));
+	  	return axios.post("/api/jobs/list",selector)
+	    .then((response)=>{
+	     
+	        dispatch(setJobList(response.data));
+	    })
+	    .catch((error)=>{
+	          console.log('error', error);
+	    }) 
+  	}  
+}
 export const setViewMode = (viewMode )=> ({
       type 				: 'SET_VIEW_MODE',
       viewMode 			: viewMode
@@ -89,4 +101,8 @@ export const setSubfunctionalData = (subfunctionalJobs )=> ({
 export const setIndustrialData = (industrialJobs )=> ({
       type 				: 'SET_INDUSTRIAL_DATA',
       industrialJobs 	: industrialJobs
+});
+export const setJobList = (jobList )=> ({
+      type 				: 'SET_INDUSTRIAL_DATA',
+      jobList 			: jobList
 });
