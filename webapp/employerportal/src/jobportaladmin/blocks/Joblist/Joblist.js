@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import Axios from  'axios';
 import Swal  from  'sweetalert2';
 
-export default class JobList extends Component{
+export default class JobListView extends Component{
 	constructor(props){
 	super(props);
 	this.state={
@@ -78,7 +78,8 @@ deleteJob = (event)=>{
 	render(){
 		return(
 			<section className="jobListWrapper">
-				<div className="col-lg-9 JobListWrapperMain pull-right">
+				<div className="col-lg-12 EmployeeListWrapperMain">
+					<div className="row">
 					<div className="col-lg-4 col-lg-offset-8">
 						<div className="input-group searchMainTab">
 							<input type="text" name="jobTitle" id="jobTitle" className="form-control jobListSearchTab" placeholder="Search by Job Title..." onChange={this.search}/>
@@ -88,7 +89,7 @@ deleteJob = (event)=>{
 						{
 							this.state.jobList.length > 0
 							?
-								this.state.jobList.map((elem,index)=>{
+								this.state.jobList.map((elem,index1)=>{
 									return(
 										<div className="col-lg-12">
 											<div className="jobListContainer">
@@ -146,6 +147,7 @@ deleteJob = (event)=>{
 							:
 								null
 						}
+					</div>	
 				</div>
 			</section>
 		);

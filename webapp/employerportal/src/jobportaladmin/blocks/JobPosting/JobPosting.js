@@ -1,6 +1,7 @@
 import React, {Component}   from 'react';
 
 import './JobPosting.css';
+import Modal 				from '../Modal/Modal.js';
 import 'react-phone-input-2/lib/style.css';
 
 import $ from 'jquery';
@@ -65,26 +66,27 @@ export default class JobPosting extends Component{
 			contactPersonEmail		: 	"",
 			contactPersonPhone		: 	"", 
 			
-			address                 :   "",
+			addressLine1            :   "",
 			area 					: 	"",
-			addressLine1 			: 	"",
-			addressLine2 			: 	"",
-			country 				: 	"",
-			state 					: 	"",
-			district 				: 	"",
 			city 					: 	"",
-			pincode 				: 	"",
-			stateCode				: 	"",
-			countryCode 			: 	"",
-			stateArray 				: 	[],
+			district 				: 	"",
 			districtArray 			: 	[],
+			state 					: 	"",
+			stateArray 				: 	[],
+			stateCode				: 	"",
+			country 				: 	"",
+			countryCode 			: 	"",
+			pincode 				: 	"",
 			pincodeExists 			: 	true,
+			
 			minSalary 				: 	"",
 			minSalPeriod 			: 	"",
 			maxSalary 				: 	"",
 			maxSalPeriod			: 	"",
+			
 			minEducation 			: 	"",
 			minExperience 			: 	"",
+			
 			primarySkills 			: 	[],
 			minPrimExp	    		: 	"",
 			priSkillsArray 			: 	[],
@@ -144,21 +146,33 @@ export default class JobPosting extends Component{
 					gender 				: 	response.data.jobsData[0].jobBasicInfo.gender,
 					workFromHome 		: 	response.data.jobsData[0].jobBasicInfo.workFromHome,
 					jobtype_id 			: 	response.data.jobsData[0].jobBasicInfo.jobtype_id,
-					contactPersonName 	: 	response.data.jobsData[0].jobBasicInfo.contactPersonName,
-					contactPersonEmail 	: 	response.data.jobsData[0].jobBasicInfo.contactPersonEmail,
-					contactPersonPhone 	: 	response.data.jobsData[0].jobBasicInfo.contactPersonPhone,
-					address 			: 	response.data.jobsData[0].location.address,
 					jobtime_id 			: 	response.data.jobsData[0].jobBasicInfo.jobtime_id,
 					jobcategory_id 		: 	response.data.jobsData[0].jobBasicInfo.jobcategory_id,
 					positions           :   response.data.jobsData[0].jobBasicInfo.positions,
-					/*lastDateOfAppl      : 	response.data.jobsData[0].jobBasicInfo.lastDateOfAppl?Moment(response.data.jobsData.jobBasicInfo.lastDateOfAppl).format("YYYY-MM-DD"):"",*/
+					jobDesc 			: 	response.data.jobsData[0].jobBasicInfo.jobDesc,
+					lastDateOfAppl      : 	response.data.jobsData[0].jobBasicInfo.lastDateOfAppl?Moment(response.data.jobsData[0].jobBasicInfo.lastDateOfAppl).format("YYYY-MM-DD"):"",
+					contactPersonName 	: 	response.data.jobsData[0].jobBasicInfo.contactPersonName,
+					contactPersonEmail 	: 	response.data.jobsData[0].jobBasicInfo.contactPersonEmail,
+					contactPersonPhone 	: 	response.data.jobsData[0].jobBasicInfo.contactPersonPhone,
+					
+					addressLine1 		: 	response.data.jobsData[0].location.address,
+					area 				: 	response.data.jobsData[0].location.area,
+					city 				: 	response.data.jobsData[0].location.city,
+					district 			: 	response.data.jobsData[0].location.district,
+					state 				: 	response.data.jobsData[0].location.state,
+					stateCode 			: 	response.data.jobsData[0].location.stateCode,
+					country 			: 	response.data.jobsData[0].location.country,
+					countryCode 		: 	response.data.jobsData[0].location.countryCode,
+					pincode 			: 	response.data.jobsData[0].location.pincode,
+					
 					minSalary 			: 	response.data.jobsData[0].ctcOffered.minSalary,
 					minSalPeriod 		: 	response.data.jobsData[0].ctcOffered.minSalPeriod,
 					maxSalary 			: 	response.data.jobsData[0].ctcOffered.maxSalary,
 					maxSalPeriod		: 	response.data.jobsData[0].ctcOffered.maxSalPeriod,
-					jobDesc 			: 	response.data.jobsData[0].jobBasicInfo.jobDesc,
+					
 					minEducation 		: 	response.data.jobsData[0].eligibility.minEducation,
 					minExperience 		: 	response.data.jobsData[0].eligibility.minExperience,
+					
 					primarySkills 		: 	response.data.jobsData[0].eligibility.primarySkills,
 					minPrimExp 			: 	response.data.jobsData[0].requiredSkills.minPrimExp,
 					secondarySkills 	: 	response.data.jobsData[0].requiredSkills.secondarySkills,
@@ -169,7 +183,7 @@ export default class JobPosting extends Component{
 					submitBtnText 		: 	"UPDATE"
 				})
 				
-				if(response.data.jobsData.jobBasicInfo.workFromHome === true){
+				if(response.data.jobsData[0].jobBasicInfo.workFromHome === true){
 					document.getElementById("workFromHome").checked = true;
 				}else{
 					document.getElementById("workFromHome").checked = false;
@@ -183,10 +197,10 @@ export default class JobPosting extends Component{
 		
 		Axios.get("/api/functionalareamaster/get/list")
 			.then(response=> 	{
-									console.log("getfunctionalAreaData response.data = ", response.data);
+									/*console.log("getfunctionalAreaData response.data = ", response.data);*/
 									this.setState({functionalArealist : response.data
 								});
-									console.log("functionalArea", this.state.functionalArealist);
+									/*console.log("functionalArea", this.state.functionalArealist);*/
 								})
 			.catch(error=>	{
 								Swal.fire("Error while getting List data", error.message, 'error');
@@ -194,10 +208,10 @@ export default class JobPosting extends Component{
 
 		Axios.get("/api/subfunctionalareamaster/get/list")
 			.then(response=>	{
-									console.log("getsubFunctionalAreaData response.data = ", response.data);
+									/*console.log("getsubFunctionalAreaData response.data = ", response.data);*/
 									this.setState({subFunctionalAreaList : response.data
 								});
-									console.log("subFunctionalArea", this.state.subFunctionalAreaList);
+									/*console.log("subFunctionalArea", this.state.subFunctionalAreaList);*/
 								})
 			.catch(error=>	{
 								Swal.fire("Error while getting List data", error.message,'error');
@@ -205,10 +219,10 @@ export default class JobPosting extends Component{
 		
 		Axios.get("/api/jobtypemaster/get/list")
 			.then(response=> 	{
-									console.log("getfunctionalAreaData response.data = ", response.data);
+									/*console.log("getfunctionalAreaData response.data = ", response.data);*/
 									this.setState({jobTypeArray : response.data
 								});
-									console.log("jobTypeArray", this.state.jobTypeArray);
+									/*console.log("jobTypeArray", this.state.jobTypeArray);*/
 								})
 			.catch(error=>	{
 								Swal.fire("Error while getting List data",error.message,'error');
@@ -216,10 +230,10 @@ export default class JobPosting extends Component{
 
 		Axios.get("/api/JobTimeMaster/get/list")
 			.then(response=> 	{
-									console.log("getfunctionalAreaData response.data = ", response.data);
+									/*console.log("getfunctionalAreaData response.data = ", response.data);*/
 									this.setState({jobTimeArray : response.data
 								});
-									console.log("jobTimeArray", this.state.jobTimeArray);
+									/*console.log("jobTimeArray", this.state.jobTimeArray);*/
 								})
 			.catch(error=>	{
 								Swal.fire("Error while getting List data",error.message,'error');
@@ -227,10 +241,10 @@ export default class JobPosting extends Component{
 
 		Axios.get("/api/jobcategorymaster/get/list")
 			.then(response=> 	{
-									console.log("getfunctionalAreaData response.data = ", response.data);
+									/*console.log("getfunctionalAreaData response.data = ", response.data);*/
 									this.setState({jobCategoryArray : response.data
 								});
-									console.log("jobCategoryArray", this.state.jobCategoryArray);
+									/*console.log("jobCategoryArray", this.state.jobCategoryArray);*/
 								})
 			.catch(error=>	{
 								Swal.fire("Error while getting List data",error.message,'error');
@@ -238,9 +252,9 @@ export default class JobPosting extends Component{
 		
 		Axios.get("/api/skillmaster/get/list")
 			.then(response=> {
-				console.log("getfunctionalAreaData response.data = ", response.data);
+				/*console.log("getfunctionalAreaData response.data = ", response.data);*/
 				this.setState({priSkillsArraylist : response.data});
-				console.log("priSkill", this.state.priSkillsArraylist);
+				/*console.log("priSkill", this.state.priSkillsArraylist);*/
 				this.state.priSkillsArraylist!=null && this.state.priSkillsArraylist.length > 0 
 				?
 					this.state.priSkillsArraylist.forEach((elem, index)=>{
@@ -311,7 +325,7 @@ export default class JobPosting extends Component{
 		Axios.get("http://locations2.iassureit.com/api/states/get/list/IN")
 			.then((response) => {
 				this.setState({
-					stateArray: response.data
+					stateArray : response.data
 				})
 				document.getElementById('Statedata').val(this.state.states);
 			})
@@ -339,14 +353,6 @@ export default class JobPosting extends Component{
 		var formValues = {
 			company_id 				: 	this.state.company_id,
 			jobTitle 				: 	this.state.jobTitle,
-			area 					:   this.state.area,
-        	city 					: 	this.state.city,
-       	 	district 				: 	this.state.district,
-        	state 					: 	this.state.state,
-        	country 				: 	this.state.country,
-        	pincode 				: 	this.state.pincode,
-        	stateCode 				: 	this.state.stateCode,
-        	countryCode 			: 	this.state.countryCode,
 			industry_id 			:  	this.state.industry_id,
 			functionalarea_id 		: 	this.state.functionalarea_id,
 			subfunctionalarea_id 	: 	this.state.subfunctionalarea_id,
@@ -359,13 +365,20 @@ export default class JobPosting extends Component{
 			positions 				: 	this.state.positions,
 			jobDesc 				: 	this.state.jobDesc,
 			lastDateOfAppl 			: 	this.state.lastDateOfAppl,
-			
 			contactPersonName 		: 	this.state.contactPersonName,
 			contactPersonEmail 		: 	this.state.contactPersonEmail,
 			contactPersonPhone  	:   this.state.contactPersonPhone,
-
-			address 				:   this.state.address,
-
+			
+			addressLine1            :    this.state.address, 
+			area 					:   this.state.area,
+        	city 					: 	this.state.city,
+       	 	district 				: 	this.state.district,
+        	state 					: 	this.state.state,
+        	stateCode 				: 	this.state.stateCode,
+        	country 				: 	this.state.country,
+        	countryCode 			: 	this.state.countryCode,
+        	pincode 				: 	this.state.pincode,
+        	
 			minSalary 				: 	this.state.minSalary,
 			minSalPeriod 			: 	this.state.minSalPeriod,
 			maxSalary 				: 	this.state.maxSalary,
@@ -411,22 +424,33 @@ export default class JobPosting extends Component{
 									role 				: 	"",
 									gender              : 	"Male Only",
 									workFromHome 		: 	false,
-									contactPersonName 	: 	"",
-									contactPersonEmail 	: 	"",
-									contactPersonPhone 	: 	"",
-									address 			: 	"",
 									jobtype_id 			: 	"",
 									jobtime_id 			: 	"",
 									jobcategory_id 		: 	"",
 									positions           :   "",
+									jobDesc 			: 	"",
 									lastDateOfAppl 		: 	"",
+									contactPersonName 	: 	"",
+									contactPersonEmail 	: 	"",
+									contactPersonPhone 	: 	"",
+									
+									addressLine1        :   "",
+									area 				:   "",
+						        	city 				: 	"",
+						       	 	district 			: 	"",
+						        	state 				: 	"",
+						        	stateCode 			: 	"",
+						        	country 			: 	"",
+						        	countryCode 		: 	"",
+						        	pincode 			: 	"",
+									
 									minSalary 			: 	"",
 									minSalPeriod 		: 	"",
 									maxSalary 			: 	"",
 									maxSalPeriod		: 	"",
-									jobDesc 			: 	"",
 									minEducation 		: 	"",
 									minExperience 		: 	"",
+									
 									primarySkills 		: 	"",
 									minPrimExp	 		: 	"",
 									secondarySkills 	: 	"",
@@ -619,9 +643,11 @@ handleTagClick(index){
 									<div className="row">
 										<div className="col-lg-6">
 											<div className="row">
-												<label htmlFor="jobTitle" className="addjobformLable col-lg-12"> Job Title
-													<div href="#" data-tip data-for='jobTitleTooltip' className="pull-right"> <i title="Please enter designation name of your profile" className="fa fa-question-circle"></i> </div>
-													<span className="asterisk"> &#42; </span>
+												<label htmlFor="jobTitle" className="addjobformLable col-lg-12">
+													Job Title <span className="asterisk"> &#42; </span>
+													<div href="#" data-tip data-for='jobTitleTooltip' className="pull-right">
+														<i title="Please enter designation name of your profile" className="fa fa-question-circle"></i>
+													</div>
 												</label>
 											</div>
 											<div className="input-group">
@@ -632,53 +658,54 @@ handleTagClick(index){
 										</div>
 										<div className="col-lg-6">
 											<div className="row">
-												<label htmlFor="address" className="addjobformLable col-lg-12"> Job Location
-													<span className="asterisk">&#42;</span>
+												<label htmlFor="jobLocation" className="addjobformLable col-lg-12">
+													Job Location <span className="asterisk">&#42;</span>
 												</label>
 											</div>	
-												<div className="input-group">
-													<span className="input-group-addon addJobFormField"><FontAwesomeIcon className="addJobLocationIcon" icon={['fas', 'map-marker-alt']} /></span> 
-														<PlacesAutocomplete
-				                                        	value 		  =	{this.state.addressLine1}
-				                                        	onChange 	  =	{this.handleChangePlaces}
-				                                        	onSelect 	  =	{this.handleSelect}
-				                                        	searchOptions =	{searchOptions} >
+											<div className="input-group">
+												<span className="input-group-addon addJobFormField"><FontAwesomeIcon className="addJobLocationIcon" icon={['fas', 'map-marker-alt']} /></span> 
+												<PlacesAutocomplete
+		                                        	value 		  	=	{this.state.addressLine1}
+		                                        	onChange 	  	=	{this.handleChangePlaces}
+		                                        	onSelect 	  	=	{this.handleSelect}
+		                                        	searchOptions	=	{searchOptions}>
+			                                        
 			                                        {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-			                                          <div>
-			                                            <input
-			                                            	{...getInputProps({
-			                                            		placeholder: 'Search Address ...',
-			                                                	className: 'location-search-input col-lg-12 form-control errorinputText',
-			                                                	id:"addressLine1",
-			                                                	name:"addressLine1"
-			                                              	})}
-			                                            />
-			                                            <div className={this.state.addressLine1 ? "autocomplete-dropdown-container SearchListContainer" : ""}>
-			                                            	{loading && <div>Loading...</div>}
-			                                            	{suggestions.map(suggestion => {
-			                                                	const className = suggestion.active
-			                                                  		? 'suggestion-item--active'
-			                                                  		: 'suggestion-item';
-			                                                // inline style for demonstration purpose
-			                                                	const style = suggestion.active
-			                                                  		? { backgroundColor: '#fafafa', cursor: 'pointer' }
-			                                                  		: { backgroundColor: '#ffffff', cursor: 'pointer' };
-			                                                return (
-			                                                	<div
-			                                                    	{...getSuggestionItemProps(suggestion, {
-			                                                      		className,
-			                                                      		style,
-			                                                    	})}
-			                                                	>
-			                                                    <span> {suggestion.description} </span>
-			                                                  </div>
-			                                                );
-			                                              })}
-			                                            </div>
-			                                          </div>
+			                                          	<div>
+				                                            <input
+				                                            	{...getInputProps({
+				                                            		placeholder: 'Search Address ...',
+				                                                	className: 'location-search-input col-lg-12 form-control errorinputText',
+				                                                	id:"addressLine1",
+				                                                	name:"addressLine1"
+				                                              	})}
+				                                            />
+				                                            <div className={this.state.addressLine1 ? "autocomplete-dropdown-container SearchListContainer" : ""}>
+				                                            	{loading && <div>Loading...</div>}
+				                                            	{suggestions.map(suggestion => {
+				                                                	const className = suggestion.active
+				                                                  		? 'suggestion-item--active'
+				                                                  		: 'suggestion-item';
+				                                                // inline style for demonstration purpose
+				                                                	const style = suggestion.active
+				                                                  		? { backgroundColor: '#fafafa', cursor: 'pointer' }
+				                                                  		: { backgroundColor: '#ffffff', cursor: 'pointer' };
+				                                                return (
+				                                                	<div
+				                                                    	{...getSuggestionItemProps(suggestion, {
+				                                                      		className,
+				                                                      		style,
+				                                                    	})}
+				                                                	>
+				                                                    <span> {suggestion.description} </span>
+				                                                  </div>
+				                                                );
+				                                              })}
+				                                            </div>
+			                                          	</div>
 			                                        )}
-			                                      </PlacesAutocomplete>
-												</div>
+	                                      		</PlacesAutocomplete>
+											</div>
 										</div>
 									</div>
 								</div>
@@ -686,19 +713,21 @@ handleTagClick(index){
 								<div className="col-lg-12 addJobFieldRow text-left">
 									<div className="row">
 										<div className="col-lg-3">
-											<label htmlFor="states" className="addjobformLable"> State <span className="asterisk">&#42;</span> </label>
+											<label htmlFor="states" className="addjobformLable">
+												State <span className="asterisk">&#42;</span> 
+											</label>
 											<div className="input-group"> 
 												<select className="form-control addJobFormField"  id="states" ref="states" value={this.state.states} name="states" onChange={this.handleChangeState.bind(this)} >
 													<option hidden>-- Select --</option>
-														{
-															this.state.stateArray && this.state.stateArray.length > 0 ?
-																this.state.stateArray.map((stateData, index) => {
-																	return (
-																		<option key={index} statecode={stateData.stateCode}>{this.camelCase(stateData.stateName)}</option>
-																	);
-																}
-																) : ''
-														}
+													{
+														this.state.stateArray && this.state.stateArray.length > 0 ?
+															this.state.stateArray.map((stateData, index) => {
+																return (
+																	<option key={index} statecode={stateData.stateCode}>{this.camelCase(stateData.stateName)}</option>
+																);
+															}
+															) : ''
+													}
 												</select>
 												
 											</div>	
@@ -706,8 +735,8 @@ handleTagClick(index){
 										
 										<div className="col-lg-3">
 											<div className="row">
-												<label className="addjobformLable col-lg-12"> City
-													<span className="asterisk">&#42;</span>
+												<label className="addjobformLable col-lg-12">
+													City <span className="asterisk">&#42;</span>
 												</label>
 											</div>	
 											<div className="input-group"> 
@@ -716,8 +745,8 @@ handleTagClick(index){
 										</div>
 										<div className="col-lg-3">
 											<div className="row">
-												<label className="addjobformLable col-lg-12"> District
-													<span className="asterisk">&#42;</span>
+												<label className="addjobformLable col-lg-12">
+													District <span className="asterisk">&#42;</span>
 												</label>
 											</div>
 											<div className="input-group"> 
@@ -726,8 +755,8 @@ handleTagClick(index){
 										</div>
 										<div className="col-lg-3">
 											<div className="row">
-												<label className="addjobformLable col-lg-12"> Pincode
-													<span className="asterisk">&#42;</span>
+												<label className="addjobformLable col-lg-12">
+													Pincode <span className="asterisk">&#42;</span>
 												</label>
 											</div>
 											<div className="input-group"> 
@@ -740,23 +769,25 @@ handleTagClick(index){
 								<div className="form-group col-lg-12 addJobFieldRow text-left">
 									<div className="row">
 										<div className="col-lg-6">
-											<label htmlFor="functionalArea" className="addjobformLable"> Functional Area <span className="asterisk">&#42;</span> </label>
+											<label htmlFor="functionalArea" className="addjobformLable">
+												Functional Area <span className="asterisk">&#42;</span>
+											</label>
 											<div className="input-group">
 												<span className="input-group-addon addJobFormField"><i className="fa fa-briefcase"></i></span> 
-												<select className="form-control addJobFormField" name="functionalarea_id" id="functionalarea_id" value={this.state.functionalarea_id} onChange={this.handleChange}>
-												<option hidden> -- Select -- </option>
-											    	{
-														this.state.functionalArealist!=null && this.state.functionalArealist.length > 0 
-														?
-															this.state.functionalArealist.map((elem,index)=>{
-																return(
-																	<option value={elem._id} key={index}> {elem.functionalArea} </option>
-																);
-															})
-														:
-															<option> -- Select -- </option>
-													}		   
-												</select>
+													<select className="form-control addJobFormField" name="functionalarea_id" id="functionalarea_id" value={this.state.functionalarea_id} onChange={this.handleChange}>
+														<option hidden> -- Select -- </option>
+												    	{
+															this.state.functionalArealist!=null && this.state.functionalArealist.length > 0 
+															?
+																this.state.functionalArealist.map((elem,index)=>{
+																	return(
+																		<option value={elem._id} key={index}> {elem.functionalArea} </option>
+																	);
+																})
+															:
+																<option> -- Select -- </option>
+														}		   
+													</select>
 												<span id="functionalAreaError" className="errorMsgJobPost"></span>
 											</div>	
 										</div>			
@@ -764,20 +795,20 @@ handleTagClick(index){
 											<label htmlFor="subFunctionalArea" className="addjobformLable"> Sub Functional Area <span className="asterisk">&#42;</span> </label>
 											<div className="input-group">
 												<span className="input-group-addon addJobFormField"><FontAwesomeIcon icon={['fas', 'briefcase']} /></span> 
-												<select className="form-control addJobFormField" name="subfunctionalarea_id" id="subfunctionalarea_id" value={this.state.subfunctionalarea_id} onChange={this.handleChange}>
-											    <option hidden> -- Select -- </option>	
-											    	{
-														this.state.subFunctionalAreaList!=null && this.state.subFunctionalAreaList.length > 0 
-														?
-															this.state.subFunctionalAreaList.map((elem,index)=>{
-																return(
-																	<option value={elem._id} key={index}> {elem.subfunctionalArea} </option>
-																);
-															})
-														:
-															<option> -- Select -- </option>
-													}		   
-												</select>
+													<select className="form-control addJobFormField" name="subfunctionalarea_id" id="subfunctionalarea_id" value={this.state.subfunctionalarea_id} onChange={this.handleChange}>
+													    <option hidden> -- Select -- </option>	
+												    	{
+															this.state.subFunctionalAreaList!=null && this.state.subFunctionalAreaList.length > 0 
+															?
+																this.state.subFunctionalAreaList.map((elem,index)=>{
+																	return(
+																		<option value={elem._id} key={index}> {elem.subfunctionalArea} </option>
+																	);
+																})
+															:
+																<option> -- Select -- </option>
+														}		   
+													</select>
 											</div>
 										</div>
 									</div>
@@ -786,11 +817,11 @@ handleTagClick(index){
 									<div className="row">
 										<div className="col-lg-6">
 											<div className="row">
-												<label htmlFor="Role" className="addjobformLable col-lg-12"> Role 
+												<label htmlFor="Role" className="addjobformLable col-lg-12">
+													Role <span className="asterisk">&#42;</span>
 													<div href="#" data-tip data-for='jobTitleTooltip' className="pull-right">
 														<i title="Please enter your project role" className="fa fa-question-circle"></i>
 													</div>
-													<span className="asterisk">&#42;</span>
 												</label>
 											</div>
 											<div className="input-group">
@@ -822,7 +853,8 @@ handleTagClick(index){
 									</div>
 								</div>
 								<div className="col-lg-3 text-left">
-									<label htmlFor="workFromHome" className="containerWfh">Work From Home
+									<label htmlFor="workFromHome" className="containerWfh">
+										Work From Home
                                         <input type="checkbox" name="workFromHome" id="workFromHome" value={this.state.workFromHome} onChange={this.setWorkFromHome.bind(this)} />
                                         <span className="checkmark2"></span>
                             		</label>
@@ -830,24 +862,26 @@ handleTagClick(index){
 								<div className="col-lg-12 addJobFieldRow text-left">
 									<div className="row">
 										<div className="col-lg-4">
-											<label htmlFor="jobType" className="addjobformLable"> Job Type </label>
+											<label htmlFor="jobType" className="addjobformLable">
+												Job Type
+											</label>
 											<div className="input-group col-lg-12">
 												<span className="input-group-addon addJobFormField"><i className="fa fa-briefcase"></i> </span> 
-												<select name="jobtype_id" className="form-control addJobFormField" id="jobtype_id" value={this.state.jobtype_id} onChange={this.handleChange}>
-											    	<option hidden> -- Select -- </option>
-											    	{
-														this.state.jobTypeArray!=null && this.state.jobTypeArray.length > 0 
-														?
-															this.state.jobTypeArray.map((elem,index)=>{
-																return(
-																	
-																	<option key={index} value={elem._id}> {elem.jobType} </option>
-																);
-															})
-														:
-															<option> --Select-- </option>
-													}	
-												</select>
+													<select name="jobtype_id" className="form-control addJobFormField" id="jobtype_id" value={this.state.jobtype_id} onChange={this.handleChange}>
+												    	<option hidden> -- Select -- </option>
+												    	{
+															this.state.jobTypeArray!=null && this.state.jobTypeArray.length > 0 
+															?
+																this.state.jobTypeArray.map((elem,index)=>{
+																	return(
+																		
+																		<option key={index} value={elem._id}> {elem.jobType} </option>
+																	);
+																})
+															:
+																<option> --Select-- </option>
+														}	
+													</select>
 											</div>
 										</div>
 										<div className="col-lg-4">
@@ -1163,30 +1197,38 @@ handleTagClick(index){
 								      <label htmlFor="jobDesc" className="addjobformLable jobDesc"> Describe the responsibilities of this job, required work experience, skills, or education. </label>
 								      	<div> 
                     						<CKEditor
-									          editor={ ClassicEditor }
-									          data={ this.state.jobDesc }
-									          id="jobDesc"
-									          onInit={ editor => {
+										        editor={ ClassicEditor }
+										        data={ this.state.jobDesc }
+										        id="jobDesc"
+										        
+										        onInit={ editor => {
 
-									          } }
-									          onChange={ ( event, editor ) => {
-									          	 this.setState( {
-										            jobDesc: editor.getData()
-										        } );
-									          } }
-									          onBlur={ editor => {
-									            console.log( 'Blur.', editor );
-									          } }
-									          onFocus={ editor => {
-									            console.log( 'Focus.', editor );
-									          } }
+										          		} }
+										        
+										        onChange={ ( event, editor ) => {
+																			        this.setState( {
+																				        				jobDesc: editor.getData()
+																				        		 } );
+										          								} }
+										        onBlur={ editor => {
+										            					console.log( 'Blur.', editor );
+										          			} }
+										        
+										        onFocus={ editor => {
+										            					console.log( 'Focus.', editor );
+										          					} }
 									        />	
 									    </div> 
 								    </div>
 								</div>																														
 								
 								<div className="col-lg-7 col-lg-offset-5 pull-right">
-									<button className="btn addJobFormField addJobPreviewBtn"> PREVIEW </button>
+									<button type="button" data-toggle="modal" data-target="#robust" data-dismiss="modal" className="btn addJobFormField addJobPreviewBtn"> 
+										PREVIEW 
+									</button>
+								
+									<Modal />
+
 									<button className="btn buttonYellow addJobSubmitBtn"  onClick={this.handleSubmit}> {this.state.submitBtnText} </button>
 								</div>
 							</form>

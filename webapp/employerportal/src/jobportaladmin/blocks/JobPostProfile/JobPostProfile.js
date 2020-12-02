@@ -10,41 +10,48 @@ export default class JobPostProfile extends Component{
 		super(props);
 
 		this.state = {
-			jobTitle 			: "",
-			jobLocationCity 	: "",
-			jobLocationCountry 	: "",
-			functionalarea_id 	: "",
-			subfunctionalarea_id: "",
-			role 				: "",
-			gender              : "Male",
-			workFromHome 		: "",
-			contactPersonName 	: "",
-			contactPersonEmail 	: "",
-			contactPersonPhone 	: "",
-			address             : "",
-			jobtype_id 			: "",
-			jobtime_id 			: "",
-			jobcategory_id      : "",
-			positions           : "",
-			lastDateOfAppl 		: "",
-			minSalary 			: "",
-			minSalPeriod 		: "",
-			maxSalary 			: "",
-			maxSalPeriod		: "",
-			jobDesc 			: "",
-			minEducation 		: "",
-			minExperience 		: "",
-			minPrimExp 	 		: "",
-			minSecExp 	 		: "",
-			minOtherExp			: ""
-			/*priSkillsArray 		: [],
-			priSkillsArraylist 		: [], 
-			secSkillsArray 			: [],
-			secSkillsArraylist 		: [], 
-			otherSkillsArray 		: [],
-			otherSkillsArraylist	: [], 
-			preferSkillsArray 		: [],
-			preferSkillsArraylist	: [],*/
+						jobTitle 			: 	"",
+						industry_id 		: 	"",
+						functionalarea_id 	: 	"",
+						subfunctionalarea_id: 	"",
+						role 				: 	"",
+						gender              : 	"Male Only",
+						workFromHome 		: 	false,
+						jobtype_id 			: 	"",
+						jobtime_id 			: 	"",
+						jobcategory_id 		: 	"",
+						positions           :   "",
+						jobDesc 			: 	"",
+						lastDateOfAppl 		: 	"",
+						contactPersonName 	: 	"",
+						contactPersonEmail 	: 	"",
+						contactPersonPhone 	: 	"",
+						
+						addressLine1        :   "",
+						area 				:   "",
+			        	cityVillage 		: 	"",
+			       	 	district 			: 	"",
+			        	state 				: 	"",
+			        	stateCode 			: 	"",
+			        	country 			: 	"",
+			        	countryCode 		: 	"",
+			        	pincode 			: 	"",
+						
+						minSalary 			: 	"",
+						minSalPeriod 		: 	"",
+						maxSalary 			: 	"",
+						maxSalPeriod		: 	"",
+						
+						minEducation 		: 	"",
+						minExperience 		: 	"",
+						
+						primarySkills 		: 	"",
+						minPrimExp	 		: 	"",
+						secondarySkills 	: 	"",
+						minSecExp	 		: 	"",
+						otherSkills 		: 	"",
+						minOtherExp	 		: 	"",
+						preferSkills	 	: 	"",
 		}
 
 	}	
@@ -59,35 +66,49 @@ export default class JobPostProfile extends Component{
 				console.log("response.data = ",response.data);
 
 				this.setState({
-					job_id				: job_id,
-					jobTitle 			: response.data.jobsData[0].jobBasicInfo.jobTitle,
-					industry_id         : response.data.jobsData[0].jobBasicInfo.industry_id,
-					jobLocationCity 	: response.data.jobsData[0].jobBasicInfo.jobLocationCity,
-					jobLocationCountry 	: response.data.jobsData[0].jobBasicInfo.jobLocationCountry,
-					functionalarea_id 	: response.data.jobsData[0].jobBasicInfo.functionalarea_id,
-					subfunctionalarea_id: response.data.jobsData[0].jobBasicInfo.subfunctionalarea_id,
-					role 				: response.data.jobsData[0].jobBasicInfo.role,
-					gender              : response.data.jobsData[0].jobBasicInfo.gender,
-					workFromHome 		: response.data.jobsData[0].jobBasicInfo.workFromHome,
-					contactPersonName 	: response.data.jobsData[0].jobBasicInfo.contactPersonName,
-					contactPersonEmail 	: response.data.jobsData[0].jobBasicInfo.contactPersonEmail,
-					contactPersonPhone 	: response.data.jobsData[0].jobBasicInfo.contactPersonPhone,
-					address             : response.data.jobsData[0].location.address,
-					jobtype_id 			: response.data.jobsData[0].jobBasicInfo.jobtype_id,
-					jobtime_id 			: response.data.jobsData[0].jobBasicInfo.jobtime_id,
-					jobcategory_id 		: response.data.jobsData[0].jobBasicInfo.jobcategory_id,
-					positions           : response.data.jobsData[0].jobBasicInfo.positions,
-					/*lastDateOfAppl 		: response.data.jobsData[0].jobBasicInfo.lastDateOfAppl?Moment(response.data.jobsData.jobBasicInfo.lastDateOfAppl).format("YYYY-MM-DD"):"",*/
-					minSalary 			: response.data.jobsData[0].ctcOffered.minSalary,
-					minSalPeriod 		: response.data.jobsData[0].ctcOffered.minSalPeriod,
-					maxSalary 			: response.data.jobsData[0].ctcOffered.maxSalary,
-					maxSalPeriod		: response.data.jobsData[0].ctcOffered.maxSalPeriod,
-					jobDesc 			: response.data.jobsData[0].jobBasicInfo.jobDesc,
-					minEducation 		: response.data.jobsData[0].eligibility.minEducation,
-					minExperience 		: response.data.jobsData[0].eligibility.minExperience,
-					minPrimExp 	 		: response.data.jobsData[0].requiredSkills.minPrimExp,
-					minSecExp 	 		: response.data.jobsData[0].requiredSkills.minSecExp,
-					minOtherExp			: response.data.jobsData[0].requiredSkills.minOtherExp,
+					job_id				: 	job_id,
+					jobTitle 			: 	response.data.jobsData[0].jobBasicInfo.jobTitle,
+					industry_id 		: 	response.data.jobsData[0].jobBasicInfo.industry_id,
+					functionalarea_id 	: 	response.data.jobsData[0].jobBasicInfo.functionalarea_id,
+					subfunctionalarea_id: 	response.data.jobsData[0].jobBasicInfo.subfunctionalarea_id,
+					role 				: 	response.data.jobsData[0].jobBasicInfo.role,
+					gender 				: 	response.data.jobsData[0].jobBasicInfo.gender,
+					workFromHome 		: 	response.data.jobsData[0].jobBasicInfo.workFromHome,
+					jobtype_id 			: 	response.data.jobsData[0].jobBasicInfo.jobtype_id,
+					jobtime_id 			: 	response.data.jobsData[0].jobBasicInfo.jobtime_id,
+					jobcategory_id 		: 	response.data.jobsData[0].jobBasicInfo.jobcategory_id,
+					positions           :   response.data.jobsData[0].jobBasicInfo.positions,
+					jobDesc 			: 	response.data.jobsData[0].jobBasicInfo.jobDesc,
+					lastDateOfAppl      : 	response.data.jobsData[0].jobBasicInfo.lastDateOfAppl?Moment(response.data.jobsData[0].jobBasicInfo.lastDateOfAppl).format("YYYY-MM-DD"):"",
+					contactPersonName 	: 	response.data.jobsData[0].jobBasicInfo.contactPersonName,
+					contactPersonEmail 	: 	response.data.jobsData[0].jobBasicInfo.contactPersonEmail,
+					contactPersonPhone 	: 	response.data.jobsData[0].jobBasicInfo.contactPersonPhone,
+					
+					addressLine1        :   response.data.jobsData[0].location.address,
+					area 				: 	response.data.jobsData[0].location.area,
+					city 				: 	response.data.jobsData[0].location.city,
+					district 			: 	response.data.jobsData[0].location.district,
+					state 				: 	response.data.jobsData[0].location.state,
+					stateCode 			: 	response.data.jobsData[0].location.stateCode,
+					country 			: 	response.data.jobsData[0].location.country,
+					countryCode 		: 	response.data.jobsData[0].location.countryCode,
+					pincode 			: 	response.data.jobsData[0].location.pincode,
+					
+					minSalary 			: 	response.data.jobsData[0].ctcOffered.minSalary,
+					minSalPeriod 		: 	response.data.jobsData[0].ctcOffered.minSalPeriod,
+					maxSalary 			: 	response.data.jobsData[0].ctcOffered.maxSalary,
+					maxSalPeriod		: 	response.data.jobsData[0].ctcOffered.maxSalPeriod,
+					
+					minEducation 		: 	response.data.jobsData[0].eligibility.minEducation,
+					minExperience 		: 	response.data.jobsData[0].eligibility.minExperience,
+					
+					primarySkills 		: 	response.data.jobsData[0].eligibility.primarySkills,
+					minPrimExp 			: 	response.data.jobsData[0].requiredSkills.minPrimExp,
+					secondarySkills 	: 	response.data.jobsData[0].requiredSkills.secondarySkills,
+					minSecExp 	        : 	response.data.jobsData[0].requiredSkills.minSecExp,
+					otherSkills 	    : 	response.data.jobsData[0].requiredSkills.otherSkills,
+					minOtherExp 		: 	response.data.jobsData[0].requiredSkills.minOtherExp,
+					preferSkills 		: 	response.data.jobsData[0].requiredSkills.preferSkills,
                 })
                
 			})
@@ -121,7 +142,7 @@ export default class JobPostProfile extends Component{
 														<b>iAssure International Technologies Pvt Ltd</b>
 													</div>
 													<div className="locationinfo">
-														{this.state.address}
+														{this.state.addressLine1}
 													</div>
 												</div>
 											</div>
@@ -159,7 +180,7 @@ export default class JobPostProfile extends Component{
 																<span className="eduDuration"> {this.state.minEducation} </span>
 															</li>
 															<li>
-																<span className="eduSubtitle">Minimum Overall Experience</span><br/>
+																<span className="eduSubtitle"> Minimum Overall Experience </span><br/>
 																<span className="eduDuration"> {this.state.minExperience} </span>
 															</li>
 														</ul>

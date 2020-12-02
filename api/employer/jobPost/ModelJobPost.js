@@ -23,9 +23,9 @@ const jobsSchema = mongoose.Schema({
 							contactPersonPhone 		: String,	
 						},
 	location 		: 	{
-							address 				: String,
+							addressLine1 			: String,			
 							area 					: String,
-							cityVillage  			: String,
+							city  					: String,
 							district 				: String,
 							state 					: String,
 							stateCode 				: String,	

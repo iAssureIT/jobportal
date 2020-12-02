@@ -14,7 +14,6 @@ import ResetPassword from './jobportaladmin/systemSecurity/ResetPassword.js';
 //import ResetPasswordFirstLogin from './coreadmin/systemSecurity/ResetPasswordFirstLogin.js';
 import SignUp from './jobportaladmin/systemSecurity/SignUp.js';
 
-
 /*import Footer                                   from './coreadmin/common/footer/Footer.js';*/
 import Leftsidebar                              from './jobportaladmin/common/leftSidebar/Leftsidebar.js';
 import Dashboard                                from './jobportaladmin/Dashboard/Dashboard.js'
@@ -22,14 +21,14 @@ import Header                                   from './jobportaladmin/common/he
 import Footer                                   from './jobportaladmin/common/footer/Footer.js';
 /*import Leftsidebar                              from './jobportaladmin/common/LeftSidebar/Leftsidebar.js';*/
 import FunctionalHeader                         from './jobportaladmin/common/functionalHeader/FunctionalHeader.js'; 
-import JobPosting                               from './jobportaladmin/jobPosting/JobPosting.js'; 
-import JobProfile                               from './jobportaladmin/jobPostProfile/JobPostProfile.js'; 
-import JobList                                  from './jobportaladmin/pages/Joblist/Joblist.js'; 
 
+import JobPosting                               from './jobportaladmin/blocks/JobPosting/JobPosting.js'; 
+import JobPostProfile                           from './jobportaladmin/blocks/JobPostProfile/JobPostProfile.js'; 
+
+import EmployeeJoblistPage                      from './jobportaladmin/pages/EmployeeJoblistPage/EmployeeJoblistPage.js';
 
 import axios                from 'axios';
 import CoreLayout           from './coreadmin/CoreLayout/CoreLayout.js';
-
 
 class Layout extends Component  {
 
@@ -101,8 +100,8 @@ class Layout extends Component  {
                                                         <Route path="/" component={Dashboard} exact />
                                                         <Route path="/post-job/" component={JobPosting} exact />
                                                         <Route path="/post-job/:job_id" component={JobPosting} exact />
-                                                        <Route path="/job-profile/:job_id" component={JobProfile} exact />
-                                                        <Route path="/job-list" component={JobList} exact />
+                                                        <Route path="/job-profile/:job_id" component={JobPostProfile} exact />
+                                                        <Route path="/job-list" component={EmployeeJoblistPage} exact />
                                                     </Switch>
                                                 </div>
                                             </div>

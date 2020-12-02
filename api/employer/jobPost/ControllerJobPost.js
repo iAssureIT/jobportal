@@ -31,9 +31,9 @@ exports.insertJobs = (req, res, next)=>{
 									"contactPersonPhone" 	: req.body.contactPersonPhone,
 								},
 			"location" 		: 	{
-									"address" 				: req.body.address,
+									"addressLine1" 			: req.body.address,
 									"area" 					: req.body.area,
-									"cityVillage"  			: req.body.city,
+									"city"  				: req.body.city,
 									"district" 				: req.body.district,
 									"state" 				: req.body.state,
 									"stateCode" 			: req.body.stateCode,	
@@ -194,9 +194,9 @@ exports.updateJob = (req,res,next)=>{
 									"contactPersonPhone" 	: req.body.contactPersonPhone,
 								},
 			"location" 		: 	{
-									"address" 				: req.body.address,
+									"addressLine1" 			: req.body.address,
 									"area" 					: req.body.area,
-									"cityVillage"  			: req.body.city,
+									"city"  				: req.body.city,
 									"district" 				: req.body.district,
 									"state" 				: req.body.state,
 									"stateCode" 			: req.body.stateCode,	
