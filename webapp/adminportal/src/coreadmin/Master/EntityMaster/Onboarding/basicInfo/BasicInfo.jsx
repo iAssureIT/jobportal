@@ -342,6 +342,8 @@ class BasicInfo extends Component {
               swal("Allowed file size is 1MB");
             }else{
               if (file) {
+                
+
                 var objTitle = { fileInfo: file }
                 companyLogo.push(objTitle);
               } else {

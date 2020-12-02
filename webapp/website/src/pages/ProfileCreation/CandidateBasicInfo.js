@@ -15,7 +15,7 @@ class CandidateBasicInfo extends Component{
 		return(		
 				<div className="mainPagesWrapper col-lg-12">
 					<div className="row">
-						<ProgressBar width="0" left="0" />
+						<ProgressBar width="0" left="0" active="active"/>
 					</div>
 					<div className="basicInfoWrapper row">
 						<div className=" col-lg-8 col-lg-offset-2 BasicInfoBlock">

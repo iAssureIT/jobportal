@@ -13,13 +13,46 @@ export const setUserID = (userID )=> ({
       type 				: 'SET_USERID',
       userID 			: userID
 });
+export const setViewMode = (viewMode )=> ({
+      type 				: 'SET_VIEW_MODE',
+      viewMode 			: viewMode
+});
+export const setFilterSelector = (selector )=> ({
+      type 				: 'SET_FILTER_SELECTOR',
+      selector 			: selector
+});
+export const getMapData = (mapJobs )=> ({
+      type 				: 'GET_MAP_DATA',
+      mapJobs 			: mapJobs
+});
+export const getFunctionalData = (functionalJobs )=> ({
+      type 				: 'GET_FUNCTIONAL_DATA',
+      functionalJobs 	: functionalJobs
+});
+export const getSubfunctionalData = (subfunctionalJobs )=> ({
+      type 				: 'GET_SUBFUNCTIONAL_DATA',
+      subfunctionalJobs : subfunctionalJobs
+});
+export const getIndustrialData = (industrialJobs )=> ({
+      type 				: 'GET_INDUSTRIAL_DATA',
+      industrialJobs 	: industrialJobs
+});
+export const getJobList = (jobList )=> ({
+      type 				: 'GET_JOB_LIST',
+      jobList 			: jobList
+});
+export const setJobWishlist = (jobWishlist )=> ({
+      type 				: 'GET_JOB_WISHLIST',
+      jobWishlist 		: jobWishlist
+});
+
 export function filterMapData(selector) {
   	return dispatch =>{
   		dispatch(setFilterSelector(selector));
 	  	return axios.post("/api/jobs/mapwise-jobs",selector)
 	    .then((response)=>{
 	     
-	        dispatch(setMapData(response.data));
+	        dispatch(getMapData(response.data));
 	    })
 	    .catch((error)=>{
 	          console.log('error', error);
@@ -32,7 +65,7 @@ export function filterFunctionalData(selector) {
 	  	return axios.post("/api/jobs/functional-jobs",selector)
 	    .then((response)=>{
 	     
-	        dispatch(setFunctionalData(response.data));
+	        dispatch(getFunctionalData(response.data));
 	    })
 	    .catch((error)=>{
 	          console.log('error', error);
@@ -45,7 +78,7 @@ export function filterSubfunctionalData(selector) {
 	  	return axios.post("/api/jobs/subfunctional-jobs",selector)
 	    .then((response)=>{
 	     
-	        dispatch(setSubfunctionalData(response.data));
+	        dispatch(getSubfunctionalData(response.data));
 	    })
 	    .catch((error)=>{
 	          console.log('error', error);
@@ -58,35 +91,37 @@ export function filterIndustrialData(selector) {
 	  	return axios.post("/api/jobs/industrial-jobs",selector)
 	    .then((response)=>{
 	     
-	        dispatch(setIndustrialData(response.data));
+	        dispatch(getIndustrialData(response.data));
 	    })
 	    .catch((error)=>{
 	          console.log('error', error);
 	    }) 
   	}  
 }
+export function filterJobList(selector) {
+  	return dispatch =>{
+  		dispatch(setFilterSelector(selector));
+	  	return axios.post("/api/jobs/list",selector)
+	    .then((response)=>{
+	     
+	        dispatch(getJobList(response.data));
+	    })
+	    .catch((error)=>{
+	          console.log('error', error);
+	    }) 
+  	}  
+}
+export function getJobWishlist(candidateID) {
+  	return dispatch =>{
+  		var formValue={"candidateID":candidateID}
+	  	return axios.post("/api/wishlist/candidateWishlist",formValue)
+	    .then((response)=>{
+	     	//console.log(response.data)
 
-export const setViewMode = (viewMode )=> ({
-      type 				: 'SET_VIEW_MODE',
-      viewMode 			: viewMode
-});
-export const setFilterSelector = (selector )=> ({
-      type 				: 'SET_FILTER_SELECTOR',
-      selector 			: selector
-});
-export const setMapData = (mapJobs )=> ({
-      type 				: 'SET_MAP_DATA',
-      mapJobs 			: mapJobs
-});
-export const setFunctionalData = (functionalJobs )=> ({
-      type 				: 'SET_FUNCTIONAL_DATA',
-      functionalJobs 	: functionalJobs
-});
-export const setSubfunctionalData = (subfunctionalJobs )=> ({
-      type 				: 'SET_SUBFUNCTIONAL_DATA',
-      subfunctionalJobs : subfunctionalJobs
-});
-export const setIndustrialData = (industrialJobs )=> ({
-      type 				: 'SET_INDUSTRIAL_DATA',
-      industrialJobs 	: industrialJobs
-});
+	        dispatch(setJobWishlist(response.data[0] ? response.data[0].wishlistItems : [] ));
+	    })
+	    .catch((error)=>{
+	          console.log('error', error);
+	    }) 
+  	}  
+}

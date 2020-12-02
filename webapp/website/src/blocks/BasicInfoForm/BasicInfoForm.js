@@ -5,6 +5,7 @@ import { withRouter }	 	from 'react-router-dom';
 import Axios 			 	from 'axios';
 import Swal 			 	from 'sweetalert2';
 import { Multiselect }      from 'multiselect-react-dropdown';
+import S3FileUpload         from 'react-s3';
 
 
 import './BasicInfoForm.css';
@@ -31,11 +32,13 @@ class BasicInfoForm extends Component{
 			ageYears	       : 0,	
 			ageMonths	       : 0,	
 			ageDays	       	   : 0,
-			age                :"",
+			age                : "",
 			inputMaritalStatus : ["Single",,"Married", "Separated","Divorced","Widowed"],
 			inputNationality   : ["Indian","American"],
 			languages	       : [],
 			inputLanguages	   : [],
+			imageUploaded      : true,
+			profilePicture     : ""
 		}
 		 this.style =  {
 					      chips: {
@@ -126,6 +129,9 @@ class BasicInfoForm extends Component{
 
 	//========== User Define Function Start ================
 	selectImage(event){
+		event.preventDefault();
+		var profilePicture = [];
+		if (event.currentTarget.files ) {
 		const imgFile = event.currentTarget.value;
 		const files   = event.currentTarget.files;
 		// imgValue      = imgFile.split(".");
@@ -134,10 +140,101 @@ class BasicInfoForm extends Component{
 
 		// 	})
 		// }
+
 		const imgUrl =  URL.createObjectURL(event.target.files[0]);
+		
 		this.setState({
 			profileImageUrl : imgUrl
 		})
+		var file = event.currentTarget.files[0];
+		if (file) {
+          var fileName = file.name;
+          var fileSize = file.size;
+          var ext = fileName.split('.').pop();
+          if (ext === "jpg" || ext === "png" || ext === "jpeg" || ext === "JPG" || ext === "PNG" || ext === "JPEG") {
+            if(fileSize > 1048576){
+              Swal.fire("Allowed file size is 1MB");
+            }else{
+              if (file) {
+                var objTitle = { fileInfo: file }
+                profilePicture.push(objTitle);
+              } else {
+                Swal.fire("Images not uploaded");
+              }//file
+            }
+          } else {
+            Swal.fire("Allowed images formats are (jpg,png,jpeg)");
+            this.setState({
+              gotProfileImage:false
+            })
+          }//file types
+        }
+         if (event.currentTarget.files) {
+        this.setState({
+          gotProfileImage:true
+        })
+        main().then(formValues => {
+          var profilePicture = this.state.profilePicture;
+          
+            profilePicture.push(formValues.profilePicture);
+          
+
+          this.setState({
+            profilePicture   : profilePicture,
+            imageUploaded : false
+          })
+        });
+
+        async function main() {
+          var formValues = [];
+        
+            var config = await getConfig();
+
+            console.log('config=>',config)
+
+            var s3url = await s3upload(profilePicture[0].fileInfo, config, this);
+            const formValue = {
+              "profilePicture": s3url,
+              "status": "New"
+            };
+            formValues.push(formValue);
+          
+          return Promise.resolve(formValues);
+        }
+    
+    	function s3upload(image, configuration) {
+          console.log('image: ',image,configuration)
+          return new Promise(function (resolve, reject) {
+            S3FileUpload
+              .uploadFile(image, configuration)
+              .then((Data) => {
+                resolve(Data.location);
+              })
+              .catch((error) => {
+              })
+          })
+        }
+        function getConfig() {
+          return new Promise(function (resolve, reject) {
+            Axios.post('/api/projectsettings/getS3Details/S3')
+              .then((response) => {
+                const config = {
+                  bucketName: response.data.bucket,
+                  dirName: process.env.REACT_APP_ENVIRONMENT,
+                  region: response.data.region,
+                  accessKeyId: response.data.key,
+                  secretAccessKey: response.data.secret,
+                }
+                resolve(config);
+              })
+              .catch(function (error) {
+              })
+
+          })
+        }
+    }
+    }
+		
 	}
 
 	delImgPreview(event){

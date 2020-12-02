@@ -61,8 +61,8 @@
 	padding:1px;
 }
 .inputBox{
-	border-top-right-radius:3px;
-	border-bottom-right-radius:3px;
+	border-top-right-radius:3px!important;
+	border-bottom-right-radius:3px!important;
 	border:1px solid var(--main-border-color)!important;
     background-color: var(--input-bg-color)!important;
     color:var(--main-txt-color)!important;

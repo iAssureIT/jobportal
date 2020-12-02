@@ -3,6 +3,8 @@ import React, {Component} from 'react';
 import Axios from  'axios';
 import Swal  from  'sweetalert2';
 
+import "./JobWishlist.css";
+
 export default class jobWishlist extends Component{
 	constructor(props){
 	super(props);
@@ -12,7 +14,9 @@ export default class jobWishlist extends Component{
 		jobIdArray:[]
 	}
 }
-
+componetDidMount(){
+	
+}
 handleclick = (jobid)=>{
 	console.log("jobid=", jobid);
 	if(!this.state.jobIdArray.includes(jobid)){
@@ -106,12 +110,13 @@ handleclick = (jobid)=>{
 		return(
 			<section className="jobListWrapper">
 				<div className="col-lg-9 JobListWrapperMain pull-right">
-					<div className="col-lg-4 col-lg-offset-8">
-						<div className="input-group searchMainTab">
-							<input type="text" name="jobTitle" id="jobTitle" className="form-control jobListSearchTab" placeholder="Search by Job Title..." onChange={this.search}/>
-							<span className="input-group-addon searchTabAddOn"><i className="fa fa-search"></i> </span> 
+					<div className="row">
+						<div className="col-lg-4 col-lg-offset-8">
+							<div className="input-group searchMainTab">
+								<input type="text" name="jobTitle" id="jobTitle" className="form-control jobListSearchTab" placeholder="Search by Job Title..." onChange={this.search}/>
+								<span className="input-group-addon searchTabAddOn"><i className="fa fa-search"></i> </span> 
+							</div> 
 						</div> 
-					</div> 
 						{
 							this.state.jobList.length > 0
 							?
@@ -171,6 +176,7 @@ handleclick = (jobid)=>{
 							:
 								null
 						}
+					</div>
 				</div>
 			</section>
 		);

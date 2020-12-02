@@ -115,8 +115,8 @@ class Login extends Component {
             if (response.data.ID) {
               this.setState({ btnLoading: false });
               var userDetails = {
-                firstName: response.data.userDetails.firstname,
-                lastName: response.data.userDetails.lastname,
+                firstName: response.data.userDetails.firstName,
+                lastName: response.data.userDetails.lastName,
                 email: response.data.userDetails.email,
                 phone: response.data.userDetails.phone,
                 companyID : parseInt(response.data.userDetails.companyID),
@@ -139,7 +139,7 @@ class Login extends Component {
               this.setState({
                 loggedIn: true
               }, () => {
-                //window.location.href = '/';
+                window.location.href = '/';
               })
               })
               .catch((error) => {

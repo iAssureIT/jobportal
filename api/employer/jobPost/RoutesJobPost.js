@@ -5,7 +5,7 @@ const jobsController =	require("./ControllerJobPost.js");
 router.post  ("/post"			   				, jobsController.insertJobs);
 router.get   ("/get/one/:job_id"  				, jobsController.getJob);
 router.get   ("/get/searchlist/:searchTxt"  	, jobsController.getSearchList);
-router.get   ("/list"	   						, jobsController.getJobList);
+router.post   ("/list"	   						, jobsController.getJobList);
 router.patch ("/update"		   					, jobsController.updateJob);
 
 router.post ("/mapwise-jobs"		   			, jobsController.mapwiseJobs);

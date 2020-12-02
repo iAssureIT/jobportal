@@ -132,38 +132,78 @@ exports.getJob = (req,res,next)=>{
 }
 
 exports.getJobList = (req,res,next)=>{
-	
-	Jobs.aggregate([
+	var selector = {}; 
+	var industry_ids = [];
+    var funarea_ids = [];
+
+    selector['$and']=[];
+    selector["$and"].push({ "location.countryCode" :  req.body.countryCode   })
+   	
+
+    if (req.body.industry_id) {
+    	req.body.industry_id.map(elem => {
+    		industry_ids.push(ObjectID(elem.id))
+    	})
+    	selector["$and"].push({ "jobBasicInfo.industry_id" : { $in: industry_ids } });
+    }
+    if (req.body.funarea_id) {
+    	req.body.funarea_id.map(elem => {
+    		funarea_ids.push(ObjectID(elem.id))
+    	})
+    	selector["$and"].push({ "jobBasicInfo.functionalarea_id" : { $in: funarea_ids } });
+    }
+    console.log(JSON.stringify(selector))
+
+    Jobs.aggregate([
+    	{ $match 	: selector },
+    	{ $sort 	: {createdAt : -1} },
+    	{ $lookup 	: { from: "industrymaster",
+                   		localField: "jobBasicInfo.industry_id",
+                   		foreignField: "_id",
+                   		as: "functionalAreas"}
+        },
         {$lookup:{
                    from: "functionalareamaster",
-                   localField: "jobBasicInfo.functionalArea",
+                   localField: "jobBasicInfo.functionalarea_id",
                    foreignField: "_id",
                    as: "functionalAreas" } 
         },
         {$lookup:{
                    from: "subfunctionalareamaster",
-                   localField: "jobBasicInfo.subFunctionalArea",
+                   localField: "jobBasicInfo.subfunctionalarea_id",
                    foreignField: "_id",
                    as: "subFunctionalAreas" } 
         },   
         {$lookup:{
                    from: "jobtypemaster",
-                   localField: "jobBasicInfo.jobType",
+                   localField: "jobBasicInfo.jobtype_id",
+                   foreignField: "_id",
+                   as: "jobTypes" } 
+        },
+        {$lookup:{
+                   from: "jobtypemaster",
+                   localField: "jobBasicInfo.jobtime_id",
+                   foreignField: "_id",
+                   as: "jobTypes" } 
+        },
+        {$lookup:{
+                   from: "jobtypemaster",
+                   localField: "jobBasicInfo.jobcategory_id",
                    foreignField: "_id",
                    as: "jobTypes" } 
         }
-        ])
-    	.exec()
-		.then(jobList=> {
-							res.status(200).json({	jobList  : jobList });			
-		})
-		.catch(error=> {
-			console.log(error);
-			res.status(500).json({
-									error 	: error,
-									message : "Some issue occurred finding Job List"
-								});
-						});
+    ])
+	.exec()
+	.then(jobList=> {
+						res.status(200).json(jobList);			
+	})
+	.catch(error=> {
+		console.log(error);
+		res.status(500).json({
+								error 	: error,
+								message : "Some issue occurred finding Job List"
+							});
+					});
 }
 
 exports.updateJob = (req,res,next)=>{

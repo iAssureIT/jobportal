@@ -1,53 +1,44 @@
 import React, {Component} from 'react';
-
 import Axios from  'axios';
 import Swal  from  'sweetalert2';
+import "./JobList.css";
 
 export default class Joblist extends Component{
 	constructor(props){
 	super(props);
 	this.state={
-		jobList  : [],
-		isToggle : true,
-		appliedItems:[]
+		jobList  		: [],
+		isToggle 		: true,
+		appliedItems 	: [],
+		user_ID 		: localStorage.getItem("user_ID"),
+		candidateID 	: localStorage.getItem("candidateID")
 	}
 }
 
 componentDidMount(){
-	this.getJobsData();
+	
 }
 
-getJobsData=()=>{
-	Axios.get("/api/jobposting/list")
-	.then(response=>{
-		console.log("getJobsData response.data : ", response.data);
-		this.setState({
-			jobList : response.data.jobList
-		});
-	})
-	.catch(error=>{
-		Swal.fire("Error while getting list data", error.message, "error");
-	})
-}
+
 
 handleclick = (jobid)=>{
 	console.log("jobid : ", jobid);
 	this.setState({isToggle:!this.state.isToggle})
-	const candidateID = "5f8ea1e3e4b7b4407d2cfe1";
+	var formValues = {
+		candidateID : this.state.candidateID,
+		jobID  		: jobid,
+		createdBy   : this.state.user_ID
+	}
+	Axios.post("/api/wishlist/post",formValues)
+		.then(response =>{
+			console.log("wishlist response=", response.data);
+			if(response.data.message==="Job is removed from wishlist."){
 
-			console.log("candidateID=", candidateID);
-			if(candidateID !== ""){
-				Axios.post("/api/wishlist/post")
-				.then(response =>{
-					console.log("wishlist response=", response.data);
-					if(response.data.message==="Job is removed from wishlist."){
-
-					}
-				})
-				.catch(error=>{
-					console.log(error);
-				})
-			}				
+			}
+		})
+		.catch(error=>{
+			console.log(error);
+		})	
 }
 
 search = (event)=>{
@@ -158,19 +149,20 @@ applyJob = (jobid)=>{
 	render(){
 		return(
 			<section className="jobListWrapper">
-				<div className="col-lg-9 JobListWrapperMain">
-					<div className="col-lg-4 col-lg-offset-8">
-						<div className="input-group searchMainTab">
-							<input type="text" name="search" id="search" className="form-control jobListSearchTab" placeholder="Search by Job Title..." onChange={this.search}/>
-							<span className="input-group-addon searchTabAddOn"><i className="fa fa-search"></i> </span> 
+				<div className="col-lg-12 JobListWrapperMain">
+					<div className="row">
+						<div className="col-lg-4 col-lg-offset-8">
+							<div className="input-group searchMainTab">
+								<input type="text" name="search" id="search" className="form-control jobListSearchTab" placeholder="Search by Job Title..." onChange={this.search}/>
+								<span className="input-group-addon searchTabAddOn"><i className="fa fa-search"></i> </span> 
+							</div> 
 						</div> 
-					</div> 
 						{
-							this.state.jobList.length > 0
+							this.props.jobList 
 							?
-								this.state.jobList.map((elem,index)=>{
+								this.props.jobList.map((elem,index)=>{
 									return(
-										<div className="col-lg-6">
+										<div className="col-lg-12">
 											<div className="jobListContainer">
 												<div className="col-lg-12">
 													<div className="col-lg-11 jobListLeftContent">
@@ -205,7 +197,7 @@ applyJob = (jobid)=>{
 													</div>
 													<div className="col-lg-1 jobListRightContent">
 														<div className="row">
-															<div className="col-lg-12">
+															<div className="col-lg-offset-2 col-lg-8">
 																<div className="jobProfileVerticleIcons">
 																	<ul>
 																		<li><i className="fa fa-check" onClick={this.applyJob}></i></li>
@@ -224,6 +216,7 @@ applyJob = (jobid)=>{
 							:
 								null
 						}
+					</div>
 				</div>
 			</section>
 		);

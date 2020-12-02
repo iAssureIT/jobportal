@@ -6,10 +6,15 @@ class Header extends Component{
   constructor(props){
     super(props);
     this.state={
-      profileDisplay  : "none",
-      asideDisplay  : "-600px",
-      notificationDisplay  : "none",
+      profileDisplay        : "none",
+      asideDisplay          : "-600px",
+      notificationDisplay   : "none",
+      userDetails           : {}
     }
+  }
+  componentDidMount() {
+    this.setState({userDetails : JSON.parse(localStorage.getItem("userDetails"))})
+    
   }
   profileInfo(event){
 
@@ -55,6 +60,10 @@ class Header extends Component{
   }
   logout() {
         var token = localStorage.removeItem("token");
+        localStorage.removeItem("userDetails")
+        localStorage.removeItem("roles")
+        localStorage.removeItem("user_ID")
+        localStorage.removeItem("candidateID")
         //alert()
         if (token !== null && token !== "undefined") {
             this.setState({
@@ -106,7 +115,7 @@ class Header extends Component{
                 <div className="headerProfileWrapper ">
                   <div className="headerProfileInfo">
                     <span className="headerProfileName">
-                      Hello, John doe
+                      Hello, {this.state.userDetails.firstName }
                     </span>
                     <img className="headerProfileImg" src='/images/40.png' alt="logo" onClick={this.profileInfo.bind(this)} />
                     <i className="fa fa-caret-down profileDownArrow" onClick={this.profileInfo.bind(this)}></i>
@@ -116,7 +125,7 @@ class Header extends Component{
                       <img src='/images/40.png' alt="logo"  />
                     </div>
                     <div className="signOutToggelProfileName">
-                      Hello, John doe
+                      Hello, {this.state.userDetails.firstName }
                     </div>
                     <div className="signOutToggelButtons">
                       <div className="col-lg-5 pull-left">
@@ -148,8 +157,7 @@ class Header extends Component{
 
 
             <div className="functionalbarsItem col-lg-12">
-              
-              <span className="notificationMessegeText">Jobs </span>
+              <a href="search-jobs"><span className="notificationMessegeText">Jobs </span></a>
             </div>
             <div className="functionalbarsItem col-lg-12">
               

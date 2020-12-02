@@ -89,11 +89,11 @@ class Address extends Component{
 			 	this.setState({
 			 		addressType :editData[0].address[0].addressType?editData[0].address[0].addressType:"",
 			 		houseNumber :editData[0].address[0].houseNumber?editData[0].address[0].houseNumber:"",
-			 		address     :editData[0].address[0].address?editData[0].address[0].address:"",
+			 		addressLine1     :editData[0].address[0].address?editData[0].address[0].address:"",
 			 		area        :editData[0].address[0].area?editData[0].address[0].area:"",
 			 		city        :editData[0].address[0].cityVillage?editData[0].address[0].cityVillage:"",
 			 		district    :editData[0].address[0].district?editData[0].address[0].district:"",
-			 		state       :editData[0].address[0].state?editData[0].address[0].state:"",
+			 		states      :editData[0].address[0].state?editData[0].address[0].state:"",
 			 		country     :editData[0].address[0].country?editData[0].address[0].country:"",
 			 		pincode     :editData[0].address[0].pincode?editData[0].address[0].pincode:"",
 			 		buttonText  :"Update"
@@ -106,7 +106,7 @@ class Address extends Component{
 		}
 	}
 	deleteDate(event){
-		
+		event.preventDefault();
 		var data_id =  event.currentTarget.id;
 
 		Swal.fire({
@@ -207,11 +207,11 @@ class Address extends Component{
 														addressType        : "",
 														pincodeExists 	   : true,
 														houseNumber        : "",
-														address            : "",
+														addressLine1            : "",
 														area               : "",
 														city               : "",
 														district   		   : "",	
-														state              : "",
+														states              : "",
 														country	           : "",
 														pincode            : "",
 														buttonText         : "Save",
@@ -239,11 +239,11 @@ class Address extends Component{
 														addressType        : "",
 														pincodeExists 	   : true,
 														houseNumber        : "",
-														address            : "",
+														addressLine1       : "",
 														area               : "",
 														city               : "",
 														district   		   : "",	
-														state              : "",
+														states             : "",
 														country	           : "",
 														pincode            : "",
 														buttonText         : "Save"
@@ -506,7 +506,7 @@ class Address extends Component{
 	                                              })}
 	                                            />
 	                                            <div className={this.state.addressLine1 ? 
-	                                            				"autocomplete-dropdown-container SearchListContainer inputBox" 
+	                                            				"autocomplete-dropdown-container SearchListContainer inputSearch" 
 	                                            				: ""}>
 	                                              {loading && <div>Loading...</div>}
 	                                              {suggestions.map(suggestion => {
@@ -664,64 +664,32 @@ class Address extends Component{
 									return(
 									
 										<div className="col-lg-6 AddressOuterWrapper"  key={index}>
-											<div className="col-lg-12 AddressInnerWrapper">
+											<div className="col-lg-12 addWrapper">
 												<div className="row">
-													<div className="col-lg-1 AddressBoxLeftIcon">
-														<FontAwesomeIcon icon="map-marker-alt" />
-													</div>
-													<div className="col-lg-10 AddressBoxTextWrapper">
-														<div className="AddressBoxHead">
-															Address details
+													<div className="col-lg-4 addLeftWrapper">
+														<div className="addLogoDiv">
+															<FontAwesomeIcon icon="home" /> 
 														</div>
-														<div className="AddressBoxText">
+														<div className="addLogoTextDiv">
 															{elem.addressType}
 														</div>
-														<div className="AddressBoxText">
-															{elem.address}
+													</div> 
+													<div className="col-lg-8 addRightWrapper">
+														<div className="addRightText ">
+															{elem.houseNumber +", "+ elem.address+" , "}<br/>
+															{elem.area +" , "+ elem.district+" , "}<br/>
+															{elem.state +" , "+elem.country +" , "+elem.pincode+" ."}
 														</div>
-														<div className="AddressBoxText">
-															{elem.area}
-														</div>
-														<div className="AddressBoxText">
-															{elem.houseNumber}
-														</div>
-														<div className="AddressBoxText">
-															{elem.district}
-														</div>
-														<div className="AddressBoxText">
-															{elem.state}
-														</div>
-														<div className="AddressBoxText">
-															{elem.country}
-														</div>
-														<div className="AddressBoxText">
-															{elem.pincode}
-														</div>
+							                            <div className="addRightbtn">
+							                                <a id={elem._id} href={"/address/"+this.state.candidateID+"/edit/"+elem._id}>
+							                            	    <div className="editBtn pull-left">Edit</div>
+							                            	</a>
+							                            	<div className="dltBtn pull-right" id={elem._id} onClick={this.deleteDate.bind(this)}>Delete</div>
+							                            </div>
 													</div>
-													<div className="col-lg-1 AddressBoxRightIcon hoverEdit ">
-														<div className="row">
-															<FontAwesomeIcon icon="ellipsis-h" />
-														
-																<div className="rightIconHideWrapper" >
-																	<a id={elem._id} href={"/address/"+this.state.candidateID+"/edit/"+elem._id}>
-																		<div className="rightIconHide"   >
-																			<FontAwesomeIcon icon="pencil-alt" /> 
-																			<span className="rightIconHideRexr" >Edit</span>
-																		</div>
-																	</a>
-																	<div className="rightIconHide">
-																		<FontAwesomeIcon icon="trash-alt" /> 
-																		<span className="rightIconHideRexr" id={elem._id} onClick={this.deleteDate.bind(this)}>Delete</span>
-																	</div>
-																</div>
-						
-															
-														</div>
-													</div>
-
-												</div>
-												</div>
+												</div> 
 											</div>
+										</div>
 										
 									);
 									})
@@ -730,7 +698,7 @@ class Address extends Component{
 									}
 								</div>
 							</div>
-
+							
 						
 							
 							

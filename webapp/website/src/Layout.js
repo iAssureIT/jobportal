@@ -22,18 +22,21 @@ import CoreLayout           from './coreadmin/CoreLayout/CoreLayout.js';
 
 import PageFunctionWise     from './pages/PageFunctionalAreawiseJobs/PageFunctionWise.js';
 import SubPageFunctionWise  from './pages/PageFunctionalAreawiseJobs/SubPageFunctionWise.js';
-import JobList              from './blocks/jobList/JobList.js'
-import JobWishlist          from './blocks/jobWishlist/JobWishlist.js'
 
 import CandidateProfile     from './blocks/ProfilePage/CandidateProfile.js';
 import CandidateBasicInfo   from './pages/ProfileCreation/CandidateBasicInfo.js';
 import CandidateAddress     from './pages/ProfileCreation/CandidateAddress.js';
 import CandidateContact     from './pages/ProfileCreation/CandidateContact.js';
 import CandidateAcademics   from './pages/ProfileCreation/CandidateAcademics.js';
-import CandidateCertification     from './pages/ProfileCreation/CandidateCertification.js';
+import CandidateCertification  from './pages/ProfileCreation/CandidateCertification.js';
 import CandidateExperience  from './pages/ProfileCreation/CandidateExperience.js';
+
 //import CandidateProfile     from './blocks/CandidateProfile/CandidateProfile.js';
 //import CandidateList     from './blocks/CandidateList/CandidateList.js';
+import CandidateJobList              from './pages/CandidateJobList/CandidateJobList.js'
+import ApplyJobList          from './pages/ApplyJob/ApplyJob.js';
+import CandidateJobWishlist  from './pages/CandidateJobWishlist/CandidateJobWishlist.js';
+
 import India from './maps/India/India.js';
 import Maharashtra from './maps/Maharashtra/Maharashtra.js';
 import AndhraPradesh from './maps/AndhraPradesh/AndhraPradesh.js';
@@ -134,20 +137,25 @@ class Layout extends Component  {
                                                 <div className="row">
                                               {/*  <CoreLayout />*/}
                                         <Switch >
-                                            <Route exact path="/functional-area"        component={PageFunctionWise}  />
-                                            <Route exact path="/subfunctional-area"        component={SubPageFunctionWise}  />
+                                            <Route exact path="/functional-area"                component={PageFunctionWise}  />
+                                            <Route exact path="/subfunctional-area"             component={SubPageFunctionWise}  />
 
-                                            <Route exact path="/"        component={Homepage}  />
+                                            <Route exact path="/"                               component={Homepage}  />
 
-                                            <Route exact path="/basic-info"        component={CandidateBasicInfo}  />
+                                            <Route exact path="/basic-info"                     component={CandidateBasicInfo}  />
                                             <Route exact path="/address/:candidateID"           component={CandidateAddress}  />
+                                            <Route exact path="/address/:candidateID/edit/:addressID"        component={CandidateAddress}  />
+                                            
                                             <Route exact path="/contact/:candidateID"           component={CandidateContact}  />
                                             <Route exact path="/academics/:candidateID"         component={CandidateAcademics}  />
                                             <Route exact path="/certification/:candidateID"     component={CandidateCertification}  />
                                             <Route exact path="/experience/:candidateID"        component={CandidateExperience}  />
                                             <Route exact path="/profile/:candidateID"           component={CandidateProfile}  />
-                                            <Route exact path="/search-jobs"                    component={JobList}  />  
-                                            <Route exact path="/wishlist"                    component={JobWishlist}  />  
+
+                                            <Route exact path="/search-jobs"                    component={CandidateJobList}  />  
+                                            <Route exact path="/apply-job"                      component={ApplyJobList}  />  
+                                            <Route exact path="/wishlist"                       component={CandidateJobWishlist}  />  
+
                                             
                                             
                                             {/*<Route exact path="/Andaman And Nicobar Islands"        component={AndamanAndNicobar }  />
