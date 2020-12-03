@@ -123,3 +123,6 @@ button.close{
   opacity: 1;
   margin: 10px;
 }
+a:hover{
+  text-decoration: none!important;
+}

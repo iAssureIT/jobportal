@@ -688,7 +688,7 @@ class Address extends Component{
 														
 													</div> 
 													<div className="col-lg-8 addRightWrapper">
-														<div className="addRightText ">
+														<div className="addRightText paddingAddress">
 															{elem.houseNumber +", "+ elem.address+" , "}<br/>
 															{elem.area +" , "+ elem.district+" , "}<br/>
 															{elem.state +" , "+elem.country +" , "+elem.pincode+" ."}
@@ -715,9 +715,15 @@ class Address extends Component{
 						
 							
 							
-							<button className="buttonBack pull-left " onClick={this.handleBack.bind(this)}> <i className="fa fa-angle-left"> - Back</i></button>
-							
-							<button className="buttonNext pull-right" onClick={this.handleSubmit.bind(this)}>Next - <i className="fa fa-angle-right "></i></button>
+							<button className="buttonBack pull-left" onClick={this.handleBack.bind(this)}>
+							 	<FontAwesomeIcon className="backArrow" icon="arrow-left" /> 
+								Back
+							 </button>
+						
+							<button className="buttonNext pull-right" onClick={this.handleSubmit.bind(this)}>
+								Next 
+								<FontAwesomeIcon className="nextArrow" icon="arrow-right" />
+							</button>
 						</form>
 					</div>
 				</div>

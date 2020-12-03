@@ -130,7 +130,7 @@ class Header extends Component{
                     <div className="signOutToggelButtons">
                       <div className="col-lg-5 pull-left">
                         <div className="row">
-                          <a href={"/profile/"+localStorage.getItem("candidateID")} className="whitelink"><div className="signOutButton">Profile</div></a>
+                          <a href={"/profile/"+localStorage.getItem("candidateID")} className="whitelink linkA"><div className="signOutButton">Profile</div></a>
                         </div>
                       </div>
                       
@@ -157,7 +157,7 @@ class Header extends Component{
 
 
             <div className="functionalbarsItem col-lg-12">
-              <a href="search-jobs"><span className="notificationMessegeText">Jobs </span></a>
+              <a href="search-jobs" className="aLink"><span className="notificationMessegeText">Jobs </span></a>
             </div>
             <div className="functionalbarsItem col-lg-12">
               

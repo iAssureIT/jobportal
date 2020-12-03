@@ -635,9 +635,15 @@ class Certification extends Component{
 								</div>
 							</div>
 							
-						<button className="buttonBack pull-left" onClick={this.handleBack.bind(this)}> <i className="fa fa-angle-left"> - Back</i></button>
-				
-						<button className="buttonNext pull-right" onClick={this.handleSubmit.bind(this)}>Next - <i className="fa fa-angle-right "></i></button>
+						<button className="buttonBack pull-left" onClick={this.handleBack.bind(this)}>
+						 	<FontAwesomeIcon className="backArrow" icon="arrow-left" /> 
+							Back
+						 </button>
+						
+						<button className="buttonNext pull-right" onClick={this.handleSubmit.bind(this)}>
+							Next 
+							<FontAwesomeIcon className="nextArrow" icon="arrow-right" />
+						</button>
 					</form>
 				</div>
 			);

@@ -166,3 +166,6 @@
 	font-size: 8px;
 	color: var(--main-txt-color);
 }
+.profileSymbols img:hover{
+	cursor: pointer;
+}

@@ -671,22 +671,19 @@ class Academics extends Component{
 								?
 								this.state.qualificationArray.map((elem,index)=>{
 									return(
-									
-										<div className="col-lg-6 AddressOuterWrapper" key={index}>
-											<div className="col-lg-12 AddressInnerWrapper">
+										<div className="col-lg-6 AddressOuterWrapper"  key={index}>
+											<div className="col-lg-12 addWrapper">
 												<div className="row">
-													<div className="col-lg-1 AddressBoxLeftIcon">
-														<FontAwesomeIcon icon="map-marker-alt" />
-													</div>
-													<div className="col-lg-10">
-														<div className="AddressBoxHead">
-															Academics Details
+													<div className="col-lg-4 addLeftWrapper">
+														<div className="addLogoDiv">
+															<FontAwesomeIcon icon="graduation-cap" /> 
 														</div>
+
 														<div>
 															{
 																this.state.DegreeArray.map((elem1,index)=>{
 																	return(
-																		<div className="AddressBoxText" key={index}>
+																		<div className="addLogoTextDiv" key={index}>
 																			{elem1.qualification}
 																			
 																		</div>
@@ -694,89 +691,87 @@ class Academics extends Component{
 																})
 															}
 														</div>
-														
-														<div>
-															{
-																this.state.classArray.map((elem1,index)=>{
-																	return(
-																		<div className="AddressBoxText" key={index}>
-																			{elem1.qualificationLevel}
-																			
-																		</div>
-																	);
-																})
-															}
-														</div>
-														<div className="AddressBoxText">
-															{elem.specialization}
-														</div>
-														<div className="AddressBoxText">
-															{elem.grade}
-														</div>
-														<div className="AddressBoxText">
-															{elem.mode}
-														</div>
-														<div className="AddressBoxText">
-															{elem.passOutYear}
-														</div>
-														<div>
-															{
-																this.state.inputCollege.map((elem1,index)=>{
-																	return(
-																		<div className="AddressBoxText" key={index}>
-																			{elem1.collage}
-																			
-																		</div>
-																	);
-																})
-															}
-														</div>
-														<div>
-															{
-																this.state.inputUniversity.map((elem1,index)=>{
-																	return(
-																		<div className="AddressBoxText" key={index}>
-																			{elem1.university}
-																			
-																		</div>
-																	);
-																})
-															}
-														</div>
-														<div className="AddressBoxText">
-															{elem.state}
-														</div>
-														<div className="AddressBoxText">
-															{elem.country}
-														</div>
-														<div className="AddressBoxText">
-															{elem.cityVillage}
-														</div>
-													</div>
-													<div className="col-lg-1 AddressBoxRightIcon hoverEdit ">
-														<div className="row">
-															<FontAwesomeIcon icon="ellipsis-h" />
-														
-																<div className="rightIconHideWrapper" >
-																<a id={elem._id} href={"/academics/"+this.state.candidateID+"/edit/"+elem._id}>
-																	<div className="rightIconHide"   >
-																		<FontAwesomeIcon icon="pencil-alt" /> 
-																		<span className="rightIconHideRexr" >Edit</span>
-																	</div>
-																	</a>
-																	<div className="rightIconHide">
-																		<FontAwesomeIcon icon="trash-alt" /> 
-																		<span className="rightIconHideRexr" id={elem._id} onClick={this.deleteDate.bind(this)}>Delete</span>
-																	</div>
-																</div>
-						
 															
+														
+													</div> 
+													<div className="col-lg-8 addRightWrapper">
+														<div className="row">
+														<div className="addRightText ">
+															<div>
+																{
+																	this.state.classArray.map((elem1,index)=>{
+																		return(
+																			<div className="AddressBoxText" key={index}>
+																				{elem1.qualificationLevel}
+																				
+																			</div>
+																		);
+																	})
+																}
+															</div>
+															<div className="AddressBoxText">
+															{elem.specialization}
+															</div>
+															<div className="AddressBoxText">
+																{elem.grade}
+															</div>
+															<div className="AddressBoxText">
+																{elem.mode}
+															</div>
+															<div className="AddressBoxText">
+																{elem.passOutYear}
+															</div>
+															<div className="AddressBoxText">
+																{elem.admisionYear}
+															</div>
+															<div>
+																{
+																	this.state.inputCollege.map((elem1,index)=>{
+																		return(
+																			<div className="AddressBoxText" key={index}>
+																				{elem1.collage}
+																				
+																			</div>
+																		);
+																	})
+																}
+															</div>
+															<div>
+																{
+																	this.state.inputUniversity.map((elem1,index)=>{
+																		return(
+																			<div className="AddressBoxText" key={index}>
+																				{elem1.university}
+																				
+																			</div>
+																		);
+																	})
+																}
+															</div>
+															<div className="AddressBoxText">
+																{elem.state}
+															</div>
+															<div className="AddressBoxText">
+																{elem.country}
+															</div>
+															<div className="AddressBoxText">
+																{elem.cityVillage}
+															</div>
 														</div>
+														<div className="col-lg-12">
+								                            <div className="addRightbtn">
+								                                <a id={elem._id} href={"/academics/"+this.state.candidateID+"/edit/"+elem._id}>
+								                            	    <div className="editBtn pull-left">Edit</div>
+								                            	</a>
+								                            	<div className="dltBtn pull-right" id={elem._id} onClick={this.deleteDate.bind(this)}>Delete</div>
+								                            </div>
+							                            </div>
 													</div>
-
-												</div>
-												</div>
+													</div>
+												</div> 
 											</div>
+										</div>
+										
 										
 									);
 									})
@@ -787,9 +782,15 @@ class Academics extends Component{
 							</div>
 
 					
-						<button className="buttonBack pull-left" onClick={this.handleBack.bind(this)}> <i className="fa fa-angle-left"> - Back</i></button>
+						<button className="buttonBack pull-left" onClick={this.handleBack.bind(this)}>
+						 	<FontAwesomeIcon className="backArrow" icon="arrow-left" /> 
+							Back
+						 </button>
 						
-						<button className="buttonNext pull-right" onClick={this.handleSubmit.bind(this)}>Next - <i className="fa fa-angle-right "></i></button>
+						<button className="buttonNext pull-right" onClick={this.handleSubmit.bind(this)}>
+							Next 
+							<FontAwesomeIcon className="nextArrow" icon="arrow-right" />
+						</button>
 					</form>
 				</div>
 			);

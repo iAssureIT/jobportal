@@ -24,6 +24,7 @@ import PageFunctionWise     from './pages/PageFunctionalAreawiseJobs/PageFunctio
 import SubPageFunctionWise  from './pages/PageFunctionalAreawiseJobs/SubPageFunctionWise.js';
 
 import CandidateProfile     from './blocks/ProfilePage/CandidateProfile.js';
+import CandidateList        from './blocks/CandidateList/CandidateList.js';
 import CandidateBasicInfo   from './pages/ProfileCreation/CandidateBasicInfo.js';
 import CandidateAddress     from './pages/ProfileCreation/CandidateAddress.js';
 import CandidateContact     from './pages/ProfileCreation/CandidateContact.js';
@@ -35,12 +36,9 @@ import CandidateExperience  from './pages/ProfileCreation/CandidateExperience.js
 //import CandidateList     from './blocks/CandidateList/CandidateList.js';
 
 import CandidateJobList              from './pages/CandidateJobList/CandidateJobList.js'
-<<<<<<< Updated upstream
 import CandidateApplyJoblistPage     from './pages/CandidateApplyJoblistPage/CandidateApplyJoblistPage.js';
-=======
 
-import ApplyJobList          from './pages/ApplyJob/ApplyJob.js';
->>>>>>> Stashed changes
+
 import CandidateJobWishlist  from './pages/CandidateJobWishlist/CandidateJobWishlist.js';
 
 
@@ -160,16 +158,14 @@ class Layout extends Component  {
                                             <Route exact path="/certification/:candidateID"     component={CandidateCertification}  />
                                             <Route exact path="/experience/:candidateID"        component={CandidateExperience}  />
                                             <Route exact path="/profile/:candidateID"           component={CandidateProfile}  />
+                                            <Route exact path="/candidate-list/:candidateID"           component={CandidateList}  />
 
 
                                             <Route exact path="/search-jobs"                    component={CandidateJobList}  />  
-<<<<<<< Updated upstream
+
                                             <Route exact path="/apply-job"                      component={CandidateApplyJoblistPage}  />  
-=======
 
 
-                                            <Route exact path="/apply-job"                      component={ApplyJobList}  />  
->>>>>>> Stashed changes
                                             <Route exact path="/wishlist"                       component={CandidateJobWishlist}  />  
 
 
