@@ -22,6 +22,7 @@
 .filterButton{
 	/*background-color: yellow;*/
 	height: auto;
+	margin-top: 20px;
 	width: 3.64%;
 	border: 1px solid var(--yellow-button-color);
 	margin-left: 5px;

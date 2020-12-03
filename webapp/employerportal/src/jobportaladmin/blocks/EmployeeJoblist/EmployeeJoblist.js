@@ -52,16 +52,6 @@ export default class EmployeeJoblist extends Component {
 
           <div className="col-lg-3">
             <div className='row'>
-                <div className="viewWrapper col-lg-4">
-                  <div className='row'>
-                    <ul className="nav nav-pills">
-                      <li className="viewDiv active"><a data-toggle="pill" href="#"> Map <br/> View</a></li>
-                      <li className="viewDiv"><a data-toggle="pill" href="#">Functional <br/> View</a></li>
-                      <li className="viewDiv"><a data-toggle="pill" href="#">Industrial <br/> View</a></li>
-                    </ul>
-                  </div>  
-                </div>
-
                 <div className="filterWrapper col-lg-8" style={{left:this.state.leftDrawerDisplay}}>
                   <div className='row'>
                     <LeftSideFilters />

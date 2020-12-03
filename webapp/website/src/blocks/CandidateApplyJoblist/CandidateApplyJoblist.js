@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 
-import JobList             from '../jobList/JobList.js';
+import ApplyJoblist        from '../ApplyJoblist/ApplyJoblist.js';
 import LeftSideFilters     from '../LeftSideFilters/LeftSideFilters.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import './SubFunctionalpage.css';
 
-export default class ApplyJob extends Component {
+export default class CandidateApplyJoblist extends Component {
 
   constructor(props){
     super(props);
@@ -73,7 +73,7 @@ export default class ApplyJob extends Component {
           <div className="col-lg-9">
             <div className="tab-content">
               <div id="mapwise" className="tab-pane fade in active">
-                <JobList />
+                <ApplyJoblist />
               </div>
             </div>
           </div>

@@ -13,7 +13,6 @@ class Joblist extends Component{
 		jobList  		: [],
 		isToggle 		: true,
 		appliedItems 	: [],
-		
 	}
 }
 
@@ -60,15 +59,19 @@ search = (event)=>{
 }
 
 applyJob = (jobid)=>{
-	console.log("jobid=", jobid);
-	if(!this.state.appliedItems.includes(jobid)){
+	console.log("jobid :", jobid);
+	/*if(!this.state.appliedItems.includes(jobid)){
 		this.state.appliedItems.push(jobid);
-	}
-	
-	console.log("appliedItems=", this.state.appliedItems);
-	const candidateID = "5f8ea1e3e4b7b4407df2cfe1";
-	const employerID  = "5f942a095464992f575e0b7e";
+	}*/
 
+	var formValues = {
+						jobID         		: jobid,
+					    employerID    		: localStorage.getItem("company_Id"),
+					    candidateID   		: this.props.candidateID,
+					    /*appliedDate   : "",*/
+					    status        	  	: "Applied",
+					    applicationViewed 	: 0
+	}
 	Swal.fire({
 		title 				: 'Are you sure? you want to apply for this job!!!',
 		text 				: 'You will be able to add this to applied joblist',
@@ -84,7 +87,7 @@ applyJob = (jobid)=>{
 			console.log("[candidateID, employerID]=", [candidateID, employerID]);
 			if(candidateID && employerID !== ""){
 				if(this.state.appliedItems.includes(jobid)){
-					Axios.post("/api/applyJob/post")
+					Axios.post("/api/applyJob/post", formValues)
 					.then(response =>{
 						console.log("applied jobs response=", response.data);
 						for (var i = 0; i < this.state.appliedItems.length; i++){
