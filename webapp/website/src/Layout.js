@@ -204,7 +204,7 @@ class Layout extends Component  {
             return (
                 <div className="wrapper PageFunctionWiseWrapper">
 
-                { this.state.showMapHeader ? <MapHeader/> : null }
+                 <MapHeader/> 
                     
                 
                     <Router >
@@ -213,6 +213,7 @@ class Layout extends Component  {
                             <Route exact path="/"        component={Homepage}  />
                             {/*<Route exact path="/Andaman And Nicobar Islands"        component={AndamanAndNicobar }  />
                             */}
+                             <Route exact path="/search-jobs"                    component={CandidateJobList}  />  
                             <Route exact path="/Andhra Pradesh"        component={AndhraPradesh }  />
                             <Route exact path="/Arunachal Pradesh"        component={ArunachalPradesh }  />
                             {/*<Route exact path="/Assam"        component={Assam }  />*/}
