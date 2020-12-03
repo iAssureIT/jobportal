@@ -31,6 +31,8 @@ class CandidateJobList extends Component{
 
 	render(){
 		return(
+			<div className="ViewBodyWrapper container-fluid">
+        
 				<div className="mainPagesWrapper col-lg-12">
 					<div className="row">
 						<div className="col-lg-3">
@@ -58,6 +60,7 @@ class CandidateJobList extends Component{
 						</div>
 					</div>
 				</div>
+			</div>	
 			);
 	}
 }

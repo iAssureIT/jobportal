@@ -2,6 +2,7 @@ mobileapp/node_modules
 webapp/adminportal/node_modules
 webapp/website/node_modules
 webapp/employerportal/node_modules
+webapp/employerportal/.eslintcache
 api/node_modules
 webapp/adminportal/.env
 webapp/website/.env

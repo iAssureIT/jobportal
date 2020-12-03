@@ -31,10 +31,10 @@ class India extends Component{
 			});
 	}
 	search(nameKey){
-		const stateArray = this.state.stateWiseJobs;
-	    for (var i=0; i < stateArray.length; i++) {
-	        if (stateArray[i].stateName === nameKey) {
-	            return stateArray[i].numberOfJobs;
+		console.log(this.props.mapJobs)
+	    for (var i=0; i < this.props.mapJobs.length; i++) {
+	        if (this.props.mapJobs[i]._id === nameKey) {
+	            return this.props.mapJobs[i].count;
 	        }
 	    }
 	}
@@ -222,7 +222,8 @@ class India extends Component{
 
 const mapStateToProps = (state)=>{
     return {
-        selectedState  : state.selectedState
+        selectedState  		: state.selectedState,
+        mapJobs           	: state.mapJobs,
     }
 }
 const mapDispachToProps = (dispatch) => ({

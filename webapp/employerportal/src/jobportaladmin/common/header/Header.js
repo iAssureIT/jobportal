@@ -152,11 +152,15 @@ class Header extends Component{
                   </div>
                 </div>
                 <div className="barsToggel pull-right" id="barsToggel" style={{display:this.state.asideDisplay}}>
-                  <a href={hascompany_Id ? "/corporate/basic-details/"+hascompany_Id : "/corporate/basic-details"}><div className="notificationMessege col-lg-12">
+                  <a href={hascompany_Id ? "/corporate/basic-details/"+hascompany_Id : "/corporate/basic-details"}>
+                  <div className="notificationMessege col-lg-12">
                     <FontAwesomeIcon icon="search" />
                     <span className="notificationMessegeText">Employer Settings</span>
                   </div></a>
-                  
+                  <a href="job-list"><div className="notificationMessege col-lg-12">
+                    <FontAwesomeIcon icon="briefcase" />
+                    <span className="notificationMessegeText">Posted Jobs</span>
+                  </div></a>
                   <div className="notificationMessege col-lg-12">
                     <FontAwesomeIcon icon="users" />
                     <span className="notificationMessegeText">Recruiters</span>
