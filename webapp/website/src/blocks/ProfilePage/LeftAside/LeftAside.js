@@ -122,7 +122,9 @@ class LeftAside extends Component{
 
 											<div className=" col-lg-10">
 												<div className="candidatePageText row">
-													{this.state.houseNumber+","+ this.state.address +","+ this.state.area + ","+ this.state.city+ ","+ this.state.district +","+ this.state.state+","+this.state.country+","+this.state.pincode +"."}
+													{this.state.houseNumber+", "+ this.state.address +", "}<br/>
+													{ this.state.area + ", "+ this.state.city+ ", "+ this.state.district +", "}<br/>
+													{ this.state.state+", "+this.state.country+", "+this.state.pincode +"."}
 												</div>
 											</div>
 										</div>

@@ -3,11 +3,7 @@ import React,{Component} from 'react';
 import './TitleLayout.css';
 
 class TitleLayout extends Component{
-	constructor(props){
-		super(props);
 
-	}
-	
 	render(){
 		return(
 				<div className="col-lg-12">

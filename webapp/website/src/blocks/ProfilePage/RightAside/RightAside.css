@@ -10,7 +10,7 @@
 	height:180px;
 	border-radius:5px;
 	margin-bottom: 20px;
-	background-image:url("/Images/50.png");
+	background-image:url("/images/50.png");
 	background-repeat:no-repeat;
 	background-size:cover;
 }
@@ -27,14 +27,14 @@
 	width:60px;
 }
 .certificationHeading{
-	font-size: 19px;
+	font-size: 17px;
 	color: var(--main-heading-font-color);
-	font-family: Montserrat-SemiBold;
+	font-family: Montserrat-Bold;
 }
 .caertificationName{
-	font-size:17px;
+	font-size:14px;
 	color: var(--main-subheading-font-color);
-	font-family: Montserrat-SemiBold;
+	font-family: Montserrat-Bold;
 	
 }
 .caertificationNameWrapper{

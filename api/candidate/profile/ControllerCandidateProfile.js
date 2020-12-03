@@ -293,6 +293,7 @@ exports.updateOneCandidateAcademics = (req,res,next)=>{
 						 	"academics.$.grade" 		 	 : academics.grade,
 						 	"academics.$.mode"			 	 : academics.mode,
 						 	"academics.$.passOutYear" 	 	 : academics.passOutYear,
+                            "academics.$.admisionYear"       : academics.admisionYear,
 						 	"academics.$.collegeSchool"  	 : academics.collegeSchool,
 						 	"academics.$.universityBoard"	 : academics.universityBoard,
 						 	"academics.$.state"			 	 : academics.state,
@@ -372,19 +373,22 @@ exports.updateOneCandidateExperience = (req,res,next)=>{
     var experience = req.body.experience;
     
     CandidateProfile.updateOne(
-            { "_id":req.body.candidateID, "academics._id": req.body.experienceID},  
+            { "_id":req.body.candidateID, "workExperience._id": req.body.experienceID},  
             {
-                $set:   { 	"workExperience.$.companyName" 			: experience.companyName,
-						 	"workExperience.$.country"	     		: experience.country,
-						 	"workExperience.$.city" 	 			: experience.city,
-						 	"workExperience.$.lastDegn" 		 	: experience.lastDegn,
-						 	"workExperience.$.department"			: experience.department,
-						 	"workExperience.$.lastSalary" 	 		: experience.lastSalary,
-						 	"workExperience.$.fromDate"  	 		: experience.fromDate,
-						 	"workExperience.$.toDate"	 			: experience.toDate,
-						 	"workExperience.$.responsibilities"		: experience.responsibilities,
-						 	"workExperience.$.reportingManager"		: experience.reportingManager,
-						 	"workExperience.$.reportingManagerDegn" : experience.reportingManagerDegn,
+                $set:   { 	"workExperience.$.companyName"          : experience.companyName,
+                            "workExperience.$.country"              : experience.country,
+                            "workExperience.$.city"                 : experience.city,
+                            "workExperience.$.state"                : experience.state,
+                            "workExperience.$.lastDegn"             : experience.lastDegn,
+                            "workExperience.$.department"           : experience.department,
+                            "workExperience.$.lastSalary"           : experience.lastSalary,
+                            "workExperience.$.fromDate"             : experience.fromDate,
+                            "workExperience.$.toDate"               : experience.toDate,
+                            "workExperience.$.noticePeriod"         : experience.noticePeriod,
+                            "workExperience.$.expectedSalary"       : experience.expectedSalary,
+                            "workExperience.$.responsibilities"     : experience.responsibilities,
+                            "workExperience.$.reportingManager"     : experience.reportingManager,
+                            "workExperience.$.reportingManagerDegn" : experience.reportingManagerDegn,
                         }
             }
         )
@@ -428,9 +432,7 @@ exports.addCandidateSkill = (req,res,next)=>{
                 {
                     primarySkills   : req.body.primarySkills,
                     secondarySkills : req.body.secondarySkills,
-                    otherSkills     : req.body.otherSkills,
                     rating          : req.body.rating,
-                    skilldesc       : req.body.skilldesc,
                     certName        : req.body.certName,
                     issuedBy        : req.body.issuedBy,
                     certifiedOn     : req.body.certifiedOn,
@@ -471,9 +473,7 @@ exports.updateOneCandidateSkill = (req,res,next)=>{
             {
                 $set:   {   "primarySkills"   : req.body.primarySkills,
                             "secondarySkills" : req.body.secondarySkills,
-                            "otherSkills"     : req.body.otherSkills,
                             "rating"          : req.body.rating,
-                            "skilldesc"       : req.body.skilldesc,
                             "certName"        : req.body.certName,
                             "issuedBy"        : req.body.issuedBy,
                             "certifiedOn"     : req.body.certifiedOn,

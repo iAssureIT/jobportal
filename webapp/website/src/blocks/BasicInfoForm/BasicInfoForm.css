@@ -81,7 +81,7 @@
 }
 .showFeild2{
 	margin-top:14px;
-	font-size:10px;
+	font-size:12px;
 	font-weight:100!important;
 	letter-spacing: 1px;
 	font-family: 'Montserrat-Medium';
@@ -159,6 +159,7 @@
 
 .date{
 	text-transform:uppercase;
+	font-size:12px!important;
 }
 .inputImage{
 	width:240px !important;

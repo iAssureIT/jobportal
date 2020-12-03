@@ -4,18 +4,6 @@ import moment     from 'moment';
 import axios from 'axios';
 
 export default class CandidateProfile extends Component{
-    constructor(props) {
-       super(props);
-        this.state = {
-          
-        }
-    }
-
-       
-    componentDidMount(){
-
-    }
-
   render(){
     return(
         <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 NOPadding">

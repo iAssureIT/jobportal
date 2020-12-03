@@ -5,36 +5,85 @@ import './ProgressBar.css';
 class ProgressBar extends Component{
 	constructor(props){
 		super(props);
-
+		this.state = {
+			location:this.props.location,
+			candidateID  : localStorage.getItem("candidateID")
+		}
 	}
 	render(){
+		
 		return(
 				<div className="progressBarWrapper col-lg-12">
 					<div className="row">
 						<div className="col-lg-10 col-lg-offset-1">
 							<div className="progressBar col-lg-12">
-								<div className="step  ">
-									<div className="bullet active">1</div>
+								<div className="step">
+									<div className={this.state.location===("http://localhost:3000/basic-info")
+														||this.state.location===("http://localhost:3000/address/"+this.state.candidateID)
+														||this.state.location===("http://localhost:3000/contact/"+this.state.candidateID)
+														||this.state.location===("http://localhost:3000/academics/"+this.state.candidateID)
+														||this.state.location===("http://localhost:3000/certification/"+this.state.candidateID)
+														||this.state.location===("http://localhost:3000/experience/"+this.state.candidateID)
+														
+													?
+														"bullet active "
+													:
+														"bullet " }>1</div>
+
 									<div className="stepText">Basic Info</div>
 								</div>
-								<div className="step ">
-									<div className="bullet">2</div>
+								<div className="step">
+									<div className={this.state.location===("http://localhost:3000/address/"+this.state.candidateID)
+														||this.state.location===("http://localhost:3000/contact/"+this.state.candidateID)
+														||this.state.location===("http://localhost:3000/academics/"+this.state.candidateID)
+														||this.state.location===("http://localhost:3000/certification/"+this.state.candidateID)
+														||this.state.location===("http://localhost:3000/experience/"+this.state.candidateID)
+														
+													?
+														"bullet active "
+													:
+														"bullet " }>2</div>
 									<div className="stepText">Address</div>
 								</div>
-								<div className="step ">
-									<div className="bullet">3</div>
+								<div className="step">
+									<div className={this.state.location===("http://localhost:3000/contact/"+this.state.candidateID)
+														||this.state.location===("http://localhost:3000/academics/"+this.state.candidateID)
+														||this.state.location===("http://localhost:3000/certification/"+this.state.candidateID)
+														||this.state.location===("http://localhost:3000/experience/"+this.state.candidateID)
+														
+													?
+														"bullet active "
+													:
+														"bullet " }>3</div>
 									<div className="stepText">Contact Details</div>
 								</div>
-								<div className="step ">
-									<div className="bullet">4</div>
+								<div className="step">
+									<div className={this.state.location===("http://localhost:3000/academics/"+this.state.candidateID)
+														||this.state.location===("http://localhost:3000/certification/"+this.state.candidateID)
+														||this.state.location===("http://localhost:3000/experience/"+this.state.candidateID)
+													
+													?
+														"bullet active "
+													:
+														"bullet " }>4</div>
 									<div className="stepText">Academics</div>
 								</div>
-								<div className="step ">
-									<div className="bullet">5</div>
+								<div className="step">
+									<div className={this.state.location===("http://localhost:3000/certification/"+this.state.candidateID)
+														||this.state.location===("http://localhost:3000/experience/"+this.state.candidateID)
+														
+													?
+														"bullet active "
+													:
+														"bullet " }>5</div>
 									<div className="stepText">skills & Certificates</div>
 								</div>
-								<div className="step ">
-									<div className="bullet">6</div>
+								<div className="step">
+									<div className={this.state.location===("http://localhost:3000/experience/"+this.state.candidateID)
+													?
+														"bullet active "
+													:
+														"bullet " }>6</div>
 									<div className="stepText">Work Experience</div>
 								</div>
 							</div>

@@ -24,7 +24,6 @@ class Contact extends Component{
 	componentDidMount(){
 	Axios.get("/api/candidatemaster/get/one/"+this.state.candidateID)
 		.then(response=>{
-			 	console.log(response.data);
 			 	this.setState({
 			 		
 					mobile         : response.data[0].contact.mobile?response.data[0].contact.mobile:"",
@@ -65,28 +64,25 @@ class Contact extends Component{
 								altMobile   : this.state.alternate,
 								emailId     : this.state.email,
 							}
-		console.log(formValues);
 		
 		if(status==true){
 				Axios.patch("/api/candidatemaster/patch/updateCandidateContact",formValues)
 			 .then(response=>{
-						 
-						 	console.log('XXX',response.data);
-								Swal.fire("Congrats","Your Profile is update Successfully","success");
-									this.setState({
 
-													mobile        : "",
-													alternate     : "",
-													email         : "",
-												})
+						Swal.fire("Congrats","Your Profile is update Successfully","success");
+							this.setState({
+
+											mobile        : "",
+											alternate     : "",
+											email         : "",
+										})
 
 
-								this.props.history.push("/academics/"+this.state.candidateID);
+						this.props.history.push("/academics/"+this.state.candidateID);
 							
 							
 				})
 				.catch(error =>{
-					console.log(error);
 					Swal.fire("Submit Error!",error.message,'error');
 				});
 			}

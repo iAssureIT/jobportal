@@ -5,17 +5,11 @@ import TitleLayout       from '../../blocks/TitleLayout/TitleLayout.js';
 import BasicInfoForm     from '../../blocks/BasicInfoForm/BasicInfoForm.js';
 
 class CandidateBasicInfo extends Component{
-	constructor(props){
-		super(props);
-
-	}
-
-	
 	render(){
 		return(		
 				<div className="mainPagesWrapper col-lg-12">
 					<div className="row">
-						<ProgressBar width="0" left="0" active="active"/>
+						<ProgressBar width="0" left="0" active="active" location={window.location.href}/>				
 					</div>
 					<div className="basicInfoWrapper row">
 						<div className=" col-lg-8 col-lg-offset-2 BasicInfoBlock">

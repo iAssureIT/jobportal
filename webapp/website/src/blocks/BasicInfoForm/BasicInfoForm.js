@@ -37,8 +37,12 @@ class BasicInfoForm extends Component{
 			inputNationality   : ["Indian","American"],
 			languages	       : [],
 			inputLanguages	   : [],
+
 			imageUploaded      : true,
-			profilePicture     : ""
+			profilePicture     : [],
+
+			"imageUploaded"    : true,
+
 		}
 		 this.style =  {
 					      chips: {
@@ -107,8 +111,9 @@ class BasicInfoForm extends Component{
 
 		Axios.get("/api/languagemaster/get/list")
 		.then(response => {
-			this.setState({inputLanguages : response.data});
-			console.log("response.data",response.data);
+			this.setState({
+				inputLanguages : response.data
+			});
 			this.state.inputLanguages!=null && this.state.inputLanguages.length > 0 
 			?
 				this.state.inputLanguages.map((elem,index)=>{
@@ -189,9 +194,6 @@ class BasicInfoForm extends Component{
           var formValues = [];
         
             var config = await getConfig();
-
-            console.log('config=>',config)
-
             var s3url = await s3upload(profilePicture[0].fileInfo, config, this);
             const formValue = {
               "profilePicture": s3url,
@@ -203,7 +205,6 @@ class BasicInfoForm extends Component{
         }
     
     	function s3upload(image, configuration) {
-          console.log('image: ',image,configuration)
           return new Promise(function (resolve, reject) {
             S3FileUpload
               .uploadFile(image, configuration)
@@ -300,38 +301,33 @@ class BasicInfoForm extends Component{
 								age	   			   : this.state.age,
 								
 							}
-							console.log(formValues);
 			if(status==true){
 				Axios.patch("/api/candidatemaster/patch/updateCandidateBasicInfo",formValues)
 			 .then(response=>{
-						 
-								
-						 	console.log(response.data);
-								Swal.fire("Congrats","Your Basic details is insert Successfully","success");
-									this.setState({
-													firstName          : "",
-													middleName         : "",
-													lastName           : "",
-													dob                : "",
-													gender             : "male",
-													anniversaryDate    : "",	
-													maritalStatus      : "",
-													languages          : [],
-													nationality        : "",
-													panCardNo          : "",
-													adhaarCardNo       : "",
-													ageYears	       : 0,	
-													ageMonths	       : 0,	
-													ageDays	       	   : 0,
-												})
 
+						Swal.fire("Congrats","Your Basic details is insert Successfully","success");
+							this.setState({
+											firstName          : "",
+											middleName         : "",
+											lastName           : "",
+											dob                : "",
+											gender             : "male",
+											anniversaryDate    : "",	
+											maritalStatus      : "",
+											languages          : [],
+											nationality        : "",
+											panCardNo          : "",
+											adhaarCardNo       : "",
+											ageYears	       : 0,	
+											ageMonths	       : 0,	
+											ageDays	       	   : 0,
+										})
 
-								this.props.history.push("/address/"+this.state.candidateID);
+						this.props.history.push("/address/"+this.state.candidateID);
 							
 							
 				})
 				.catch(error =>{
-					console.log(error);
 					Swal.fire("Submit Error!",error.message,'error');
 				});
 			}

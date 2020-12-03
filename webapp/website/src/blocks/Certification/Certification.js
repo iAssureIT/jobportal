@@ -24,17 +24,17 @@ class Certification extends Component{
 			grade   		     : "",
 			selectArry   		 : [],
 			certificationToggel  : "toggleSkills",
-			description          : "",
 			rating               : "",
 			buttonText           : "Save",
 			primarySkillsArrya   :[],
 			primarySkills        :[],
 			secondarySkills      :[],
-			otherSkills          :[],
 
 			inputSecondarySkills : [],
 			inputPrimarySkills 	 : [],
-			inputOtherSkills 	 : [],
+
+			selectedPrimarySkills    :[],
+			selectedSecondarySkills  :[],
 		}
 
 		 this.style =  {
@@ -128,6 +128,20 @@ class Certification extends Component{
 }
 
 	//========== User Define Function Start ================
+	onSelect(selectedList, selectedItem) {
+		var id = selectedItem.id;
+    	var primaryArry  = this.state.selectedPrimarySkills;
+    	var secodaryArry = this.state.selectedSecondarySkills;
+    	primaryArry.push(selectedItem);
+    	secodaryArry.push(selectedItem);
+	}
+	 
+	onRemove(selectedList, removedItem) {
+    	var primaryArry  = this.state.selectedPrimarySkills;
+    	var secodaryArry = this.state.selectedSecondarySkills;
+    	primaryArry.pop(removedItem);
+    	secodaryArry.pop(removedItem);
+	}
 	getData(){
 		Axios.get("/api/candidatemaster/get/one/"+this.state.candidateID)
 		.then(response=>{
@@ -153,17 +167,15 @@ class Certification extends Component{
 			.then(response=>{
 				var editData =response.data;
 			 	this.setState({
-			 		certificationName  :editData[0].skillCertification[0].certName,
-			 		primarySkills      :editData[0].skillCertification[0].primarySkills,
-			 		secondarySkills    :editData[0].skillCertification[0].secondarySkills,
-			 		otherSkills        :editData[0].skillCertification[0].otherSkills,
-			 		issuedBy           :editData[0].skillCertification[0].issuedBy,
-			 		certifiedOn        :Moment(editData[0].skillCertification[0].certifiedOn).format("YYYY-MM-DD"),
-			 		validity           :Moment(editData[0].skillCertification[0].validTill).format("YYYY-MM-DD"),
-			 		description        :editData[0].skillCertification[0].skilldesc,
-			 		rating             :editData[0].skillCertification[0].rating,
-			 		grade              :editData[0].skillCertification[0].gradePercent,
-			 		buttonText         :"Update"
+			 		certificationName          :editData[0].skillCertification[0].certName,
+			 		selectedPrimarySkills      :editData[0].skillCertification[0].primarySkills,
+			 		selectedSecondarySkills    :editData[0].skillCertification[0].secondarySkills,
+			 		issuedBy                   :editData[0].skillCertification[0].issuedBy,
+			 		certifiedOn                :Moment(editData[0].skillCertification[0].certifiedOn).format("YYYY-MM-DD"),
+			 		validity                   :Moment(editData[0].skillCertification[0].validTill).format("YYYY-MM-DD"),
+			 		rating                     :editData[0].skillCertification[0].rating,
+			 		grade                      :editData[0].skillCertification[0].gradePercent,
+			 		buttonText                 :"Update"
 			 	})
 			 	
 			 })
@@ -254,7 +266,6 @@ class Certification extends Component{
 		this.setState({
 			rating:id,
 		})
-		console.log(rating);
 	}
 	handleSave(event){
 		var status =  this.validateForm();
@@ -268,14 +279,10 @@ class Certification extends Component{
 									certifiedOn         : this.state.certifiedOn,
 									validTill           : this.state.validity,
 									gradePercent        : this.state.grade,
-									skilldesc           : this.state.description,
 									rating              : this.state.rating,
-									primarySkills       : this.state.primarySkills,
-									secondarySkills     : this.state.secondarySkills,
-									otherSkills         : this.state.otherSkills
-	
+									primarySkills       : this.state.selectedPrimarySkills,
+									secondarySkills     : this.state.selectedSecondarySkills
 							}	
-			console.log(formValues);
 		if(this.props.match.params.skillCertificationID){
 			this.updateData(formValues,event);
 		}else{
@@ -286,7 +293,7 @@ class Certification extends Component{
 	updateData(formValues,event){
 		var status =  this.validateForm();
 		
-					Axios.patch("/api/candidatemaster/patch/updateOneCandidateSkill",formValues)
+			Axios.patch("/api/candidatemaster/patch/updateOneCandidateSkill",formValues)
 				 .then(response=>{
 
 									Swal.fire("Congrats","Your Certification Details is update Successfully","success");
@@ -296,17 +303,14 @@ class Certification extends Component{
 													certifiedOn        : "",
 													validity           : "",
 													grade   		   : "",
-													description        : "",
 													rating             : "",
-													primarySkills      :[],
-													secondarySkills    :[],
-													otherSkills        :[],
+													selectedPrimarySkills      :[],
+													selectedSecondarySkills    :[],
 													buttonText         : "Save"
 												})
 							this.props.history.push("/certification/"+this.state.candidateID);
 					})
 					.catch(error =>{
-						console.log(error);
 						Swal.fire("Submit Error!",error.message,'error');
 					});
 				
@@ -316,43 +320,28 @@ class Certification extends Component{
 	insetData(formValues,event){
 			Axios.patch("/api/candidatemaster/patch/addCandidateSkill",formValues)
 			 .then(response=>{
-						 
-								
-						 	console.log(response.data);
-								Swal.fire("Congrats","Your Certification Details is insert Successfully","success");
-									this.setState({
-													certificationName  : "",
-													issuedBy           : "",
-													certifiedOn        : "",
-													validity           : "",
-													grade   		   : "",
-													description        : "",
-													rating             : "",
-													primarySkills      :[],
-													secondarySkills    :[],
-													otherSkills        :[],
-													buttonText         : "Save"
-												})
 
+					Swal.fire("Congrats","Your Certification Details is insert Successfully","success");
+						this.setState({
+										certificationName  : "",
+										issuedBy           : "",
+										certifiedOn        : "",
+										validity           : "",
+										grade   		   : "",
+										rating             : "",
+										selectedPrimarySkills      :[],
+										selectedSecondarySkills    :[],
+										buttonText         : "Save"
+									})
 	
-							
-							
-							
 				})
 				.catch(error =>{
-					console.log(error);
 					Swal.fire("Submit Error!",error.message,'error');
 				});
 	}
 	handleSubmit(event){
 		event.preventDefault();
-
-	
 		 this.props.history.push("/experience/"+this.state.candidateID);
-							
-							
-			
-			
 	}
 	//========== User Define Function End ==================
 	//========== Validation Start ==================
@@ -414,10 +403,20 @@ class Certification extends Component{
 							<div className="col-lg-4 col-lg-offset-4">
 								<div className="input-group genderFeildWrapper">
 
-									<div className ={ this.state.certificationToggel==="toggleSkills"? "genderFeild col-lg-6 genderFeildActive": "genderFeild col-lg-6"}  id="toggleSkills" name="certificationToggel" value="toggleSkills" onClick={this.changeBlock.bind(this)}>
-										Enter Skills
+									<div className ={ this.state.certificationToggel==="toggleSkills"
+													 ? "genderFeild col-lg-6 genderFeildActive"
+													 : "genderFeild col-lg-6"}  
+										 id="toggleSkills" name="certificationToggel" 
+										 value="toggleSkills" onClick={this.changeBlock.bind(this)}
+									>
+											Enter Skills
 									</div>
-									<div className={this.state.certificationToggel === "toogleCertificate" ? "genderFeild col-lg-6 genderFeildActive": "genderFeild col-lg-6"} id="toogleCertificate" name="certificationToggel" value="toogleCertificate" onClick={this.changeBlock.bind(this)}>
+									<div className={this.state.certificationToggel === "toogleCertificate" 
+													? "genderFeild col-lg-6 genderFeildActive"
+													: "genderFeild col-lg-6"} 
+										id="toogleCertificate" name="certificationToggel" 
+										value="toogleCertificate" onClick={this.changeBlock.bind(this)}
+									>
 										Enter Certification	
 									</div>
 									
@@ -430,47 +429,54 @@ class Certification extends Component{
 								<div >
 								<div className="row formWrapper">
 									<div className="col-lg-6">
-										<label htmlFor="primarySkills" className="nameTitleForm">Primary Skills <sup className="nameTitleFormStar">*</sup></label>
+										<label htmlFor="primarySkills" className="nameTitleForm">
+											Primary Skills 
+											<sup className="nameTitleFormStar">*</sup>
+										</label>
 										<div className="input-group ">
-											<span className="input-group-addon inputBoxIcon"><FontAwesomeIcon icon="chalkboard-teacher" /> </span> 
-											<Multiselect  name="primarySkills" id="primarySkills" className="form-control " value={this.state.primarySkills} onChange={this.handleChange.bind(this)}
+											<span className="input-group-addon inputBoxIcon">
+												<FontAwesomeIcon icon="chalkboard-teacher" /> 
+											</span> 
+											<Multiselect  name="primarySkills" id="primarySkills" 
+											 	className="form-control " 
+											 	value={this.state.selectedPrimarySkills} 
+											 	onChange={this.handleChange.bind(this)}
 												options={this.state.primarySkills}
 												isObject={false}
 												style={this.style}
 												selectionLimit="4"
-												
+												onSelect={this.onSelect.bind(this)} 
+                                                onRemove={this.onRemove.bind(this)}
 											
 											 />
 										</div> 
 										<span id="skillsError" className="errorMsg"></span>
 									</div>
-									<div className="col-lg-6">
-										<label htmlFor="secondarySkills" className="nameTitleForm">Secondary Skills <sup className="nameTitleFormStar">*</sup></label>
+
+									<div className="col-lg-4">
+										<label htmlFor="rating" className="nameTitleForm">How do you rate yourself  <sup className="nameTitleFormStar">*</sup></label>
 										<div className="input-group ">
-											<span className="input-group-addon inputBoxIcon"><FontAwesomeIcon icon="chalkboard-teacher" /> </span> 
-											<Multiselect  name="secondarySkills" id="secondarySkills" className="form-control " value={this.state.secondarySkills} onChange={this.handleChange.bind(this)}
-												options={this.state.secondarySkills}
-												isObject={false}
-												style={this.style}
-												selectionLimit="4"
-											
-											
-											 />
+											<span className={this.state.rating=== "star1"||this.state.rating=== "star2"||this.state.rating=== "star3"||this.state.rating=== "star4"||this.state.rating=== "star5"? "fa fa-star rating stars":"fa fa-star-o rating"} id="star1" name="rating" value="start1" onClick={this.starClick.bind(this)}></span>
+											<span className={this.state.rating === "star2"||this.state.rating=== "star3"||this.state.rating=== "star4"||this.state.rating=== "star5"? "fa fa-star rating stars":"fa fa-star-o rating"} id="star2" name="rating" value="star2" onClick={this.starClick.bind(this)}></span>
+											<span className={this.state.rating === "star3"||this.state.rating=== "star4"||this.state.rating=== "star5"? "fa fa-star rating stars":"fa fa-star-o rating"} id="star3" name="rating" value="star3" onClick={this.starClick.bind(this)}></span>
+											<span className={this.state.rating === "star4" ||this.state.rating=== "star5"? "fa fa-star rating stars":"fa fa-star-o rating"} id="star4" name="rating" value="star4" onClick={this.starClick.bind(this)}></span>
+											<span className={this.state.rating === "star5" ? "fa fa-star rating stars":"fa fa-star-o rating"} id="star5" name="rating" value="star5" onClick={this.starClick.bind(this)}></span>
 										</div> 
-										<span id="skillsError" className="errorMsg"></span>
+										<span id="ratingError" className="errorMsg"></span>
 									</div>
 								</div>
 								<div className="row formWrapper">
 									<div className="col-lg-6">
-										<label htmlFor="otherSkills" className="nameTitleForm">Other Skills <sup className="nameTitleFormStar">*</sup></label>
+										<label htmlFor="secondarySkills" className="nameTitleForm">Secondary Skills <sup className="nameTitleFormStar">*</sup></label>
 										<div className="input-group ">
 											<span className="input-group-addon inputBoxIcon"><FontAwesomeIcon icon="chalkboard-teacher" /> </span> 
-											<Multiselect  name="otherSkills" id="otherSkills" className="form-control otherSkills" value={this.state.otherSkills} onChange={this.handleChange.bind(this)}
-												options={this.state.otherSkills}
+											<Multiselect  name="secondarySkills" id="secondarySkills" className="form-control " value={this.state.selectedSecondarySkills} onChange={this.handleChange.bind(this)}
+												options={this.state.secondarySkills}
 												isObject={false}
 												style={this.style}
 												selectionLimit="4"
-												
+												onSelect={this.onSelect.bind(this)} 
+                                                onRemove={this.onRemove.bind(this)}
 											
 											 />
 										</div> 
@@ -490,14 +496,6 @@ class Certification extends Component{
 										<span id="ratingError" className="errorMsg"></span>
 									</div>
 
-								</div>
-								<div className="row formWrapper">
-									<div className="col-lg-12">
-										<label htmlFor="description" className="nameTitleForm description">Description</label>
-										<div className="input-group col-lg-12">
-											<textarea type="text" name="description" id="description" className="form-control inputBox textareaFix" rows="5"  value={this.state.description} onChange={this.handleChange.bind(this)} />
-										</div> 
-									</div>
 								</div>
 							</div>
 							:
@@ -527,7 +525,7 @@ class Certification extends Component{
 									<label htmlFor="certifiedOn" className="nameTitleForm">Certified ON<sup className="nameTitleFormStar">*</sup></label>
 									<div className="input-group ">
 										<span className="input-group-addon inputBoxIcon"><FontAwesomeIcon icon="chalkboard-teacher" /></span> 
-										<input type="Date" name="certifiedOn" id="certifiedOn" className="form-control inputBox " value={this.state.certifiedOn} onChange={this.handleChange.bind(this)} />
+										<input type="Date" name="certifiedOn" id="certifiedOn" className="form-control inputBox date" value={this.state.certifiedOn} onChange={this.handleChange.bind(this)} />
 									</div> 
 									<span id="certifiedOnError" className="errorMsg"></span>
 								</div>
@@ -540,7 +538,7 @@ class Certification extends Component{
 									<label htmlFor="validity" className="nameTitleForm">Valid Till<sup className="nameTitleFormStar">*</sup></label>
 									<div className="input-group ">
 										<span className="input-group-addon inputBoxIcon"><i className="fa fa-calendar"></i> </span> 
-										<input type="date" name="validity" id="validity" className="form-control inputBox" value={this.state.validity} onChange={this.handleChange.bind(this)} />
+										<input type="date" name="validity" id="validity" className="form-control inputBox date" value={this.state.validity} onChange={this.handleChange.bind(this)} />
 									</div> 
 								</div>
 
@@ -568,72 +566,66 @@ class Certification extends Component{
 								this.state.certificationArry.map((elem,index)=>{
 									return(
 									
-										<div className="col-lg-6 AddressOuterWrapper" key={index}>
-											<div className="col-lg-12 AddressInnerWrapper">
-												<div className="row">
-													<div className="col-lg-1 AddressBoxLeftIcon">
-														<FontAwesomeIcon icon="map-marker-alt" />
-													</div>
-													<div className="col-lg-10">
-														<div className="AddressBoxHead">
-															Certification Details
-														</div>
-														<div className="AddressBoxText">
-															{elem.primarySkills}
-														</div>
-														<div className="AddressBoxText">
-															{elem.secondarySkills}
-														</div>
-														<div className="AddressBoxText">
-															{elem.otherSkills}
-														</div>
-														<div className="AddressBoxText">
-															{elem.rating}
-														</div>
-														<div className="AddressBoxText">
-															{elem.skilldesc}
-														</div>
-														<div className="AddressBoxText">
-															{elem.certName}
-														</div>
-														<div className="AddressBoxText">
-															{elem.issuedBy}
-														</div>
-														<div className="AddressBoxText">
-															{elem.certifiedOn}
-														</div>
-														<div className="AddressBoxText">
-															{elem.validTill}
-														</div>
-														<div className="AddressBoxText">
-															{elem.gradePercent}
-														</div>
-												
-													</div>
-													<div className="col-lg-1 AddressBoxRightIcon hoverEdit ">
-														<div className="row">
-															<FontAwesomeIcon icon="ellipsis-h" />
-														
-																<div className="rightIconHideWrapper" >
-																<a id={elem._id} href={"/certification/"+this.state.candidateID+"/edit/"+elem._id}>
-																	<div className="rightIconHide"   >
-																		<FontAwesomeIcon icon="pencil-alt" /> 
-																		<span className="rightIconHideRexr" >Edit</span>
-																	</div>
-																	</a>
-																	<div className="rightIconHide">
-																		<FontAwesomeIcon icon="trash-alt" /> 
-																		<span className="rightIconHideRexr" id={elem._id} onClick={this.deleteDate.bind(this)}>Delete</span>
-																	</div>
-																</div>
-						
-															
+										<div className="col-lg-6 " key={index}>
+											<div className="col-lg-12 certifiedWrapper">
+												<div className="col-lg-12 certificateTitleWrapperd">
+													<div className="row">
+														<div className="certificateTitle">
+															Certificate
 														</div>
 													</div>
-
 												</div>
+												<div className="certificateLogoWrppaer">
+													<img className="certificateLogo" src="/images/56.png" alt="certificateLogo"/>
+												</div>
+												<div className="certificateText">
+													This certificate is proudly presented to
+												</div>
+												<div className="certificateNameText1">
+													Digvijay Mohite
+												</div>
+												<div className="certificateText">
+													for
+												</div>
+												<div className="certificateNameText1">
+													{elem.certName}
+												</div>
+												<div className="col-ld-12 certificateFooter">
+													<div className="row">
+														<div className="col-lg-4 col-lg-offset-1 IssueDate">
+															<div className="certificateNameText2">{elem.certifiedOn} </div>
+															<div className="certificateText2">date</div>
+														</div>
+														<div className="col-lg-2">
+															<img className="certificateLogo2" src="/images/57.png" alt="certificateLogo"/>
+														</div>
+														<div className="col-lg-4 IssueDate">
+															<div className="certificateNameText2">{elem.issuedBy}</div>
+															<div className="certificateText2">Issued By</div>
+														</div>
+													</div>
+												</div>
+												<div className="AddressBoxRightIcon hoverEdit pull-right">
+													<div className="row">
+														<FontAwesomeIcon icon="ellipsis-h" />
+														<div className="rightIconHideWrapper" >
+														
+															<div className="rightIconHide"   >
+																<a id={elem._id} href={"/address/"+this.state.candidateID+"/edit/"+elem._id}>
+																	<FontAwesomeIcon icon="pencil-alt" /> 
+																	<span className="rightIconHideText" >Edit</span>
+																</a>
+															</div>
+															
+															<div className="rightIconHide">
+																<FontAwesomeIcon icon="trash-alt" /> 
+																<span className="rightIconHideText" i onClick={this.deleteDate.bind(this)}>Delete</span>
+															</div>
+														</div>
+													</div>
 												</div>
 											</div>
+										</div>
 										
 									);
 									})
@@ -642,7 +634,7 @@ class Certification extends Component{
 									}
 								</div>
 							</div>
-
+							
 						<button className="buttonBack pull-left" onClick={this.handleBack.bind(this)}> <i className="fa fa-angle-left"> - Back</i></button>
 				
 						<button className="buttonNext pull-right" onClick={this.handleSubmit.bind(this)}>Next - <i className="fa fa-angle-right "></i></button>

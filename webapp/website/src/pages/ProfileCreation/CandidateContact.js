@@ -5,17 +5,12 @@ import TitleLayout       from '../../blocks/TitleLayout/TitleLayout.js';
 import Contact     	     from '../../blocks/Contact/Contact.js';
 
 class CandidateContact extends Component{
-	constructor(props){
-		super(props);
-
-	}
-
 	
 	render(){
 		return(
 				<div className="mainPagesWrapper col-lg-12">
 					<div className="row">
-						<ProgressBar width="40" left="37.5" img="37" />
+						<ProgressBar width="40" left="37.5" img="37" location={window.location.href}  />
 					</div>
 					<div className="basicInfoWrapper row">
 						<div className=" col-lg-8 col-lg-offset-2 BasicInfoBlock">

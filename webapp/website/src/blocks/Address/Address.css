@@ -11,8 +11,8 @@
 .SearchListContainer{
 	width:87%;
 	position:absolute;
-	top:33px;
-	z-index:5!important;
+	top:33px!important;
+	z-index:1!important;
 	background-color: var(--input-bg-color);
 }
 .addRightbtn a{
@@ -27,7 +27,7 @@
 }
 .addLeftWrapper{
 	background:var(--main-border-color );
-	height:150px;
+	height:149.5px;
 	text-align: center;
 	overflow: hidden!important;
 }

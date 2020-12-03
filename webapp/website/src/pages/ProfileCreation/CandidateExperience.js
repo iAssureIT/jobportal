@@ -5,17 +5,11 @@ import TitleLayout       from '../../blocks/TitleLayout/TitleLayout.js';
 import Experience     from '../../blocks/Experience/Experience.js';
 
 class CandidateExperience extends Component{
-	constructor(props){
-		super(props);
-
-	}
-
-	
 	render(){
 		return(
 				<div className="mainPagesWrapper col-lg-12">
 					<div className="row">
-						<ProgressBar width="100" left="97.5" img="38" />
+						<ProgressBar width="100" left="97.5" img="38" location={window.location.href} />
 					</div>
 					<div className="basicInfoWrapper row">
 						<div className=" col-lg-8 col-lg-offset-2 BasicInfoBlock">

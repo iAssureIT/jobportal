@@ -11,23 +11,41 @@ class MiddelContent extends Component{
 
 		this.state={
 			candidateID        : this.props.match.params.candidateID,
-			workExperienceArry :[],
-			academicsArry      :[],
-			certificationArry  :[],
+			workExperienceArry : [],
+			academicsArry      : [],
+			certificationArry  : [],
+			DegreeArray        : [],
+			classArray         : [],
+			inputUniversity    : [],
+			inputCollege       : [],
 		}
 	}
 		componentDidMount(){
+		Axios.get("/api/universitymaster/get/list")
+		.then(response => {
+			this.setState({inputUniversity : response.data});
+		})
+		.catch(error=>{
+			Swal.fire("Error while getting List data",error.message,'error');
+		})	
+		Axios.get("/api/collagemaster/get/list")
+			.then(response => {
+				this.setState({inputCollege : response.data});
+			})
+			.catch(error=>{
+				Swal.fire("Error while getting List data",error.message,'error');
+			})	
 
 		Axios.get("/api/candidatemaster/get/one/"+this.state.candidateID)
 		.then(response=>{
-			 
+
 			 	this.setState({
+
 			 		workExperienceArry:response.data[0].workExperience,
 			 		academicsArry     :response.data[0].academics,
-			 		certificationArry :response.data[0].skillCertification,
-					
-
-				
+			 		certificationArry :response.data[0].skillCertification,	
+					DegreeArray       :response.data[0].qualification,
+					classArray        :response.data[0].qualificationlevel		
 			 	})
 			 })
 			 .catch(error=>{
@@ -47,7 +65,7 @@ class MiddelContent extends Component{
 								</div>
 								<div className="col-lg-11"> 
 									<div className="row middleContentHeading">
-										Description
+										Executive Summary 
 									</div>
 								</div>
 							</div>
@@ -96,19 +114,19 @@ class MiddelContent extends Component{
 													<div className="col-lg-10">
 														<div className="row">
 															<div className="companyName">
-																{elem.companyName + " . " + "Full-time"}
+																{elem.companyName }
 															</div>
 															<div className="companyExperience">
 																{Moment(elem.fromDate).format("YYYY MMM") +" - "+Moment(elem.toDate).format("YYYY MMM") + " . " + "9 mos"}
 															</div>
 															<div className="companyAddress">
-																{elem.city+" , "+elem.country} 
+																{elem.city+", "+elem.state+", "+elem.country} 
 															</div>
 														</div>
 													</div>
 													<div className="companyImages col-lg-2">
 														<div className="row">
-															<img className="pull-right" src="/Images/53.png" alt="Company logo"/>
+															<img className="pull-right" src="/images/53.png" alt="Company logo"/>
 														</div>
 													</div>
 												</div>
@@ -136,7 +154,7 @@ class MiddelContent extends Component{
 								</div>
 								<div className="col-lg-11"> 
 									<div className="row middleContentHeading">
-										Eduction
+										Education
 									</div>
 								</div>
 							</div>
@@ -148,27 +166,45 @@ class MiddelContent extends Component{
 										return(
 												<div key={index}>
 													<div className="SubHeadingPadding">
-														<div className="profesion">
-															{elem.collegeSchool+" ,"}
+														<div>
+															{
+																this.state.inputCollege.map((elem1,index)=>{
+																	return(
+																		<div className="profesion" key={index}>
+																			{elem1.collage}
+																			
+																		</div>
+																	);
+																})
+															}
 														</div>
 														<div>
 															<div className="col-lg-10">
 																<div className="row">
-																	<div className="companyName">
-																		{elem.qualification + " , " + elem.specialization + " , "}<br/>
-																		{elem.grade}
+																	<div>
+																		{
+																			this.state.DegreeArray.map((elem1,index)=>{
+																				return(
+																					<div className="companyName" key={index}>
+																						{elem1.qualification + ", " + elem.specialization + ", "}<br/>
+																						{elem.grade}
+																						
+																					</div>
+																				);
+																			})
+																		}
 																	</div>
 																	<div className="companyExperience">
-																		{"2012" +" - "+Moment(elem.passOutYear).format("YYYY")}
+																		{Moment(elem.admisionYear).format("YYYY") +" - "+Moment(elem.passOutYear).format("YYYY")}
 																	</div>
 																	<div className="companyAddress">
-																	   {elem.cityVillage + " , " + elem.state + " , " + elem.country }
+																	   {elem.cityVillage + ", " + elem.state + ", " + elem.country }
 																	</div>
 																</div>
 															</div>
 															<div className="companyImages col-lg-2">
 																<div className="row">
-																	<img className="pull-right" src="/Images/55.png" alt="College logo"/>
+																	<img className="pull-right" src="/images/55.png" alt="College logo"/>
 																</div>
 															</div>
 														</div>

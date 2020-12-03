@@ -25,6 +25,49 @@
   color: var(--main-txt-color);
 }
 
-.description{
- z-index:0!important;
+.certifiedWrapper{
+	height:250px;
+	border:5px ridge var(--main-border-color) ;
+	text-transform: uppercase;
+	text-align:center;
+	padding-bottom:20px;
+}
+.certificateTitle{
+	padding-top:10px;
+	text-align:center;
+	font-size:25px;
+	font-family:DancingScript-Bold!important;;
+	color: var(--main-heading-font-color);
+}
+.certificateLogo{
+	height:60px;
+	padding-bottom:5px;
+}
+.certificateText,.certificateText2{
+	font-size:12px;
+	text-align:center;	
+}
+.certificateText2{
+	font-size:11px;
+}
+.certificateNameText1,.certificateNameText2{
+	font-family:DancingScript-Bold!important;
+	font-size:14px;
+	color: var(--main-heading-font-color);
+	padding-top:2px;
+}
+.certificateNameText2{
+	font-size:12px;
+}
+.certificateLogo2{
+	height:30px;
+}
+.certificateFooter{
+	margin-top:15px;
+}
+.certificateTitleWrapper{
+	position:relative;
+}
+.AddressBoxRightIcon{
+	position:absolute;
 }

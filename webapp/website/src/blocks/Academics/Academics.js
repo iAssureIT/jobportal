@@ -13,7 +13,7 @@ class Academics extends Component{
 		super(props);
 
 		this.state={
-			qualificationArry   : [],
+			qualificationArray  : [],
 			qualificationLevel  : "",
 			candidateID         : this.props.match.params.candidateID,
 			academicsID         : this.props.match.params.academicsID,
@@ -27,9 +27,12 @@ class Academics extends Component{
 			grade               : "",
 			mode                : "",
 			passOutYear         : "",
+			admisionYear        : "",
 			buttonText          : "Save",
 			
 			
+			DegreeArray               : [],
+			classArray                : [],
 			inputQualificationLevel   : [],
 			inputUniversity   		  : [],
 			inputCollege  		  	  : [],
@@ -48,25 +51,27 @@ class Academics extends Component{
 				Swal.fire("Error while getting List data",error.message,'error');
 			})
 
-		Axios.get("http://qaapi-jobportal.iassureit.in/api/qualificationmaster/get/list")
+		Axios.get("/api/qualificationmaster/get/list")
 			.then(response => {
-				this.setState({inputQualification : response.data});
+				this.setState({
+					inputQualification : response.data
+				});
 			})
 			.catch(error=>{
 				Swal.fire("Error while getting List data",error.message,'error');
 			})	
-		Axios.get("http://qaapi-jobportal.iassureit.in/api/universitymaster/get/list")
+		Axios.get("/api/universitymaster/get/list")
 			.then(response => {
+				
 				this.setState({inputUniversity : response.data});
-				console.log("uni",response.data);
 			})
 			.catch(error=>{
 				Swal.fire("Error while getting List data",error.message,'error');
 			})	
-		Axios.get("http://qaapi-jobportal.iassureit.in/api/collagemaster/get/list")
+		Axios.get("/api/collagemaster/get/list")
 			.then(response => {
+				
 				this.setState({inputCollege : response.data});
-				console.log("col",response.data);
 			})
 			.catch(error=>{
 				Swal.fire("Error while getting List data",error.message,'error');
@@ -82,8 +87,11 @@ class Academics extends Component{
 	getData(){
 		Axios.get("/api/candidatemaster/get/one/"+this.state.candidateID)
 		.then(response=>{
+			
 			 	this.setState({
-						qualificationArry:response.data[0].academics
+						qualificationArray:response.data[0].academics,
+						DegreeArray       :response.data[0].qualification,
+						classArray        :response.data[0].qualificationlevel
 			 	})
 			 	
 			 })
@@ -115,6 +123,7 @@ class Academics extends Component{
 			 		grade               :editData[0].academics[0].grade,
 			 		mode                :editData[0].academics[0].mode,
 			 		passOutYear         :editData[0].academics[0].passOutYear,
+			 		admisionYear        :editData[0].academics[0].admisionYear,
 			 		buttonText          :"Update"
 			 	})
 			 	
@@ -204,10 +213,10 @@ class Academics extends Component{
 									cityVillage          : this.state.city,
 									grade                : this.state.grade,
 									mode                 : this.state.mode,
-									passOutYear          : this.state.passOutYear
+									passOutYear          : this.state.passOutYear,
+									admisionYear         : this.state.admisionYear
 								}
 							}
-		console.log(formValues);
 		if(this.props.match.params.academicsID){
 			this.updateData(formValues,event);
 		}else{
@@ -220,28 +229,27 @@ class Academics extends Component{
 		if(status==true){
 					Axios.patch("/api/candidatemaster/patch/updateOneCandidateAcademics",formValues)
 				 .then(response=>{
-				 		console.log("heeellooo")
-									Swal.fire("Congrats","Your Academics details update Successfully","success");
-										this.setState({
-													
-														qualificationLevel  : "",
-														qualification       : "",
-														specialization      : "",
-														college             : "",
-														university   		: "",
-														state               : "",
-														country	            : "",	
-														city                : "",
-														grade               : "",
-														mode                : "",
-														passOutYear         : "",
-														buttonText         : "Save"
-													
-												})
+							Swal.fire("Congrats","Your Academics details update Successfully","success");
+								this.setState({
+											
+												qualificationLevel  : "",
+												qualification       : "",
+												specialization      : "",
+												college             : "",
+												university   		: "",
+												state               : "",
+												country	            : "",	
+												city                : "",
+												grade               : "",
+												mode                : "",
+												passOutYear         : "",
+												admisionYear        : "",
+												buttonText         : "Save"
+											
+										})
 							this.props.history.push("/academics/"+this.state.candidateID);
 					})
 					.catch(error =>{
-						console.log(error);
 						Swal.fire("Submit Error!",error.message,'error');
 					});
 				}
@@ -254,30 +262,28 @@ class Academics extends Component{
 		if(status==true){
 				Axios.patch("/api/candidatemaster/patch/addCandidateAcademics",formValues)
 			 .then(response=>{
-						 
-								
-						 	console.log(response.data);
-								Swal.fire("Congrats","Your Academics details insert Successfully","success");
-									this.setState({
-													
-														qualificationLevel  : "",
-														qualification       : "",
-														specialization      : "",
-														college             : "",
-														university   		: "",
-														state               : "",
-														country	            : "",	
-														city                : "",
-														grade               : "",
-														mode                : "",
-														passOutYear         : "",
-														buttonText         : "Save"
-													
-												})
+						
+					Swal.fire("Congrats","Your Academics details insert Successfully","success");
+						this.setState({
+										
+											qualificationLevel  : "",
+											qualification       : "",
+											specialization      : "",
+											college             : "",
+											university   		: "",
+											state               : "",
+											country	            : "",	
+											city                : "",
+											grade               : "",
+											mode                : "",
+											passOutYear         : "",
+											admisionYear        : "",
+											buttonText         : "Save"
+										
+									})
 							
 				})
 				.catch(error =>{
-					console.log(error);
 					Swal.fire("Submit Error!",error.message,'error');
 				});
 			}
@@ -370,17 +376,27 @@ class Academics extends Component{
 						<div className="row formWrapper">
 
 							<div className="col-lg-4">
-								<label htmlFor="qualificationLevel" className="nameTitleForm">Qualification Leval<sup className="nameTitleFormStar">*</sup></label>
+								<label htmlFor="qualificationLevel" className="nameTitleForm">
+									Qualification Leval
+									<sup className="nameTitleFormStar">*</sup>
+								</label>
 								<div className="input-group ">
-									<span className="input-group-addon inputBoxIcon"><FontAwesomeIcon icon="file-alt" /></span> 
-									<select className="form-control inputBox" id="qualificationLevel" value={this.state.qualificationLevel} name="qualificationLevel" onChange={this.handleChange.bind(this)}>
-									  	<option > ---- select ---- </option>
+									<span className="input-group-addon inputBoxIcon">
+										<FontAwesomeIcon icon="file-alt" />
+									</span> 
+									<select className="form-control inputBox" 
+									 id="qualificationLevel" value={this.state.qualificationLevel}
+									 name="qualificationLevel" onChange={this.handleChange.bind(this)}>
+									  	<option > -- select -- </option>
 									  	{
-									  		this.state.inputQualificationLevel!=null && this.state.inputQualificationLevel.length>0
+									  		this.state.inputQualificationLevel!=null
+									  			 && this.state.inputQualificationLevel.length>0
 									  		?	
 									  			this.state.inputQualificationLevel.map((elem,index)=>{
 									  				return(
-									  					<option value={elem._id}  key={index}>{elem.qualificationLevel}</option>
+									  					<option value={elem._id}  key={index}>
+									  						{elem.qualificationLevel}
+									  					</option>
 									  				);
 									  			})
 									  			
@@ -391,17 +407,27 @@ class Academics extends Component{
 								</div>
 							</div>
 							<div className="col-lg-4">
-								<label htmlFor="qualification" className="nameTitleForm">Qualification<sup className="nameTitleFormStar">*</sup></label>
+								<label htmlFor="qualification" className="nameTitleForm">
+									Qualification
+									<sup className="nameTitleFormStar">*</sup>
+								</label>
 								<div className="input-group ">
-									<span className="input-group-addon inputBoxIcon"><i className="fa fa-graduation-cap"></i></span> 
-									<select className="form-control inputBox" id="qualification" value={this.state.qualification} name="qualification" onChange={this.handleChange.bind(this)}>
-									  	<option > ---- select ---- </option>
+									<span className="input-group-addon inputBoxIcon">
+										<i className="fa fa-graduation-cap"></i>
+									</span> 
+									<select className="form-control inputBox" 
+									 id="qualification" value={this.state.qualification} 
+									 name="qualification" onChange={this.handleChange.bind(this)}>
+									  	<option > -- select -- </option>
 									  	{
-									  		this.state.inputQualification!=null && this.state.inputQualification.length>0
+									  		this.state.inputQualification!=null 
+									  			&& this.state.inputQualification.length>0
 									  		?	
 									  			this.state.inputQualification.map((elem,index)=>{
 									  				return(
-									  					<option value={elem._id} key={index}>{elem.qualification}</option>
+									  					<option value={elem._id} key={index}>
+									  						{elem.qualification}
+									  					</option>
 									  				);
 									  			})
 									  			
@@ -412,10 +438,17 @@ class Academics extends Component{
 								</div>
 							</div>
 							<div className="col-lg-4">
-								<label htmlFor="specialization" className="nameTitleForm">Specialization</label>
+								<label htmlFor="specialization" className="nameTitleForm">
+									Specialization
+								</label>
 								<div className="input-group ">
-									<span className="input-group-addon inputBoxIcon"><i className="fa fa-graduation-cap"></i></span> 
-									<input type="text" name="specialization" id="specialization" className="form-control inputBox " value={this.state.specialization} onChange={this.handleChange.bind(this)} />
+									<span className="input-group-addon inputBoxIcon">
+										<i className="fa fa-graduation-cap"></i>
+									</span> 
+									<input type="text" name="specialization" id="specialization" 
+									 className="form-control inputBox " 
+									 value={this.state.specialization} 
+									 onChange={this.handleChange.bind(this)} />
 								</div> 
 							</div>
 
@@ -424,26 +457,43 @@ class Academics extends Component{
 						<div className="row formWrapper">
 
 							<div className="col-lg-4">
-								<label htmlFor="grade" className="nameTitleForm">Grade/Marks/GPA<sup className="nameTitleFormStar">*</sup></label>
+								<label htmlFor="grade" className="nameTitleForm">
+									Grade/Marks/GPA
+									<sup className="nameTitleFormStar">*</sup>
+								</label>
 								<div className="input-group ">
-									<span className="input-group-addon inputBoxIcon"><FontAwesomeIcon icon="file-alt" /></span> 
-									<input type="text" name="grade" id="grade" className="form-control inputBox" value={this.state.grade} onChange={this.handleChange.bind(this)} />
+									<span className="input-group-addon inputBoxIcon">
+										<FontAwesomeIcon icon="file-alt" />
+									</span> 
+									<input type="text" name="grade" id="grade" 
+										className="form-control inputBox" 
+										value={this.state.grade} 
+										onChange={this.handleChange.bind(this)} />
 								</div> 
 								<span id="gradeError" className="errorMsg"></span>
 							</div>
 
 							<div className="col-lg-4">
-								<label htmlFor="mode" className="nameTitleForm">Mode<sup className="nameTitleFormStar">*</sup></label>
+								<label htmlFor="mode" className="nameTitleForm">
+									Mode
+									<sup className="nameTitleFormStar">*</sup>
+								</label>
 								<div className="input-group ">
-									<span className="input-group-addon inputBoxIcon"><FontAwesomeIcon icon="adjust" /></span> 
-									<select className="form-control inputBox" id="mode" value={this.state.mode} name="mode" onChange={this.handleChange.bind(this)}>
-									  	<option > ---- select ---- </option>
+									<span className="input-group-addon inputBoxIcon">
+										<FontAwesomeIcon icon="adjust" />
+									</span> 
+									<select className="form-control inputBox" id="mode" 
+									 value={this.state.mode} name="mode" 
+									 onChange={this.handleChange.bind(this)}>
+									  	<option > -- select -- </option>
 									  	{
-									  		this.state.inputMode.length>0
+									  		this.state.inputMode.length > 0
 									  		?	
 									  			this.state.inputMode.map((elem,index)=>{
 									  				return(
-									  					<option value={elem._id} key={index}>{elem}</option>
+									  					<option value={elem._id} key={index}>
+									  						{elem}
+									  					</option>
 									  				);
 									  			})
 									  			
@@ -455,12 +505,20 @@ class Academics extends Component{
 							</div>
 
 							<div className="col-lg-4">
-								<label htmlFor="passOutYear" className="nameTitleForm">Pass-out-year<sup className="nameTitleFormStar">*</sup></label>
+								<label htmlFor="admisionYear" className="nameTitleForm">
+									Admission Year
+									<sup className="nameTitleFormStar">*</sup>
+								</label>
 								<div className="input-group ">
-									<span className="input-group-addon inputBoxIcon"><i className="fa fa-calendar"></i></span> 
-									<input type="text" name="passOutYear" id="passOutYear" className="form-control inputBox " value={this.state.passOutYear} onChange={this.handleChange.bind(this)} />
+									<span className="input-group-addon inputBoxIcon">
+										<i className="fa fa-calendar"></i>
+									</span> 
+									<input type="text" name="admisionYear" id="admisionYear" 
+									 className="form-control inputBox" 
+									 value={this.state.admisionYear} 
+									 onChange={this.handleChange.bind(this)} />
 								</div> 
-								<span id="passOutYearError" className="errorMsg"></span>
+								<span id="admisionYearError" className="errorMsg"></span>
 							</div>
 
 						</div>
@@ -468,17 +526,43 @@ class Academics extends Component{
 						<div className="row formWrapper">
 
 							<div className="col-lg-4">
-								<label htmlFor="college" className="nameTitleForm">College/School Name<sup className="nameTitleFormStar">*</sup></label>
+								<label htmlFor="passOutYear" className="nameTitleForm">
+									Pass-out-year
+									<sup className="nameTitleFormStar">*</sup>
+								</label>
 								<div className="input-group ">
-									<span className="input-group-addon inputBoxIcon"><FontAwesomeIcon icon="university" /></span> 
-									<select className="form-control inputBox" id="college" value={this.state.college} name="college" onChange={this.handleChange.bind(this)}>
-										  	<option > ---- select ---- </option>
+									<span className="input-group-addon inputBoxIcon">
+										<i className="fa fa-calendar"></i>
+									</span> 
+									<input type="text" name="passOutYear" id="passOutYear" 
+									 className="form-control inputBox " 
+									 value={this.state.passOutYear} 
+									 onChange={this.handleChange.bind(this)} />
+								</div> 
+								<span id="passOutYearError" className="errorMsg"></span>
+							</div>
+
+							<div className="col-lg-4">
+								<label htmlFor="college" className="nameTitleForm">
+									College/School Name<sup className="nameTitleFormStar">*</sup>
+								</label>
+								<div className="input-group ">
+									<span className="input-group-addon inputBoxIcon">
+										<FontAwesomeIcon icon="university" />
+									</span> 
+									<select className="form-control inputBox" id="college" 
+									 value={this.state.college} name="college" 
+									 onChange={this.handleChange.bind(this)}>
+										  	<option > -- select -- </option>
 										  	{
-										  		this.state.inputCollege!=null && this.state.inputCollege.length>0
+										  		this.state.inputCollege!=null 
+										  			&& this.state.inputCollege.length>0
 										  		?	
 										  			this.state.inputCollege.map((elem,index)=>{
 										  				return(
-										  					<option value={elem._id} key={index}>{elem.collage}</option>
+										  					<option value={elem._id} key={index}>
+										  						{elem.collage}
+										  					</option>
 										  				);
 										  			})
 										  			
@@ -491,17 +575,25 @@ class Academics extends Component{
 							</div>
 
 							<div className="col-lg-4">
-								<label htmlFor="university" className="nameTitleForm">University/Boards Name<sup className="nameTitleFormStar">*</sup></label>
+								<label htmlFor="university" className="nameTitleForm">
+									University/Boards Name
+									<sup className="nameTitleFormStar">*</sup>
+								</label>
 								<div className="input-group ">
-									<span className="input-group-addon inputBoxIcon"><FontAwesomeIcon icon="university" /></span> 
+									<span className="input-group-addon inputBoxIcon">
+										<FontAwesomeIcon icon="university" />
+									</span> 
 									<select className="form-control inputBox" id="university" value={this.state.university} name="university" onChange={this.handleChange.bind(this)}>
-										  	<option > ---- select ---- </option>
+										  	<option > -- select -- </option>
 										  	{
-										  		this.state.inputUniversity!=null && this.state.inputUniversity.length>0
+										  		this.state.inputUniversity!=null 
+										  			&& this.state.inputUniversity.length>0
 										  		?	
 										  			this.state.inputUniversity.map((elem,index)=>{
 										  				return(
-										  					<option value={elem._id} key={index}>{elem.university}</option>
+										  					<option value={elem._id} key={index}>
+										  						{elem.university}
+										  					</option>
 										  				);
 										  			})
 										  			
@@ -513,47 +605,71 @@ class Academics extends Component{
 								<span id="universityError" className="errorMsg"></span>
 							</div>
 
-							<div className="col-lg-4">
-								<label htmlFor="state" className="nameTitleForm">State<sup className="nameTitleFormStar">*</sup></label>
-								<div className="input-group ">
-									<span className="input-group-addon inputBoxIcon"><i className="fa fa-map"></i></span> 
-									<input type="text" name="state" id="state" className="form-control inputBox " value={this.state.state} onChange={this.handleChange.bind(this)} />
-								</div> 
-								<span id="stateError" className="errorMsg"></span>
-							</div>
-
 						</div>
 
 						<div className="row formWrapper">
-
 							<div className="col-lg-4">
-								<label htmlFor="country" className="nameTitleForm">Country<sup className="nameTitleFormStar">*</sup></label>
+								<label htmlFor="city" className="nameTitleForm">
+									City
+									<sup className="nameTitleFormStar">*</sup>
+								</label>
 								<div className="input-group ">
-									<span className="input-group-addon inputBoxIcon"><i className="fa fa-flag"></i> </span> 
-									<input type="text" name="country" id="country" className="form-control inputBox" value={this.state.country} onChange={this.handleChange.bind(this)} />
-								</div> 
-								<span id="countryError" className="errorMsg"></span>
-							</div>
-
-							<div className="col-lg-4">
-								<label htmlFor="city" className="nameTitleForm">City<sup className="nameTitleFormStar">*</sup></label>
-								<div className="input-group ">
-									<span className="input-group-addon inputBoxIcon"><FontAwesomeIcon icon="city" /> </span> 
-									<input type="text" name="city" id="city" className="form-control inputBox" value={this.state.city} onChange={this.handleChange.bind(this)} />
+									<span className="input-group-addon inputBoxIcon">
+										<FontAwesomeIcon icon="city" /> 
+									</span> 
+									<input type="text" name="city" id="city" 
+									 className="form-control inputBox" value={this.state.city} 
+									 onChange={this.handleChange.bind(this)} />
 								</div>
 								<span id="cityError" className="errorMsg"></span>
 							</div>
 
+							<div className="col-lg-4">
+								<label htmlFor="state" className="nameTitleForm">
+									State
+									<sup className="nameTitleFormStar">*</sup>
+								</label>
+								<div className="input-group ">
+									<span className="input-group-addon inputBoxIcon">
+										<i className="fa fa-map"></i>
+									</span> 
+									<input type="text" name="state" id="state" 
+									 className="form-control inputBox " 
+									 value={this.state.state} 
+									 onChange={this.handleChange.bind(this)} />
+								</div> 
+								<span id="stateError" className="errorMsg"></span>
+							</div>
+							
+							<div className="col-lg-4">
+								<label htmlFor="country" className="nameTitleForm">
+									Country
+									<sup className="nameTitleFormStar">*</sup>
+								</label>
+								<div className="input-group ">
+									<span className="input-group-addon inputBoxIcon">
+										<i className="fa fa-flag"></i> 
+									</span> 
+									<input type="text" name="country" id="country" 
+									 className="form-control inputBox" 
+									 value={this.state.country} 
+									 onChange={this.handleChange.bind(this)} />
+								</div> 
+								<span id="countryError" className="errorMsg"></span>
+							</div>
 						</div>
 						<div>
-							<button className="buttonBack pull-right" onClick={this.handleSave.bind(this)}> {this.state.buttonText}</button>
+							<button className="buttonBack pull-right" 
+							 onClick={this.handleSave.bind(this)}> 
+							 	{this.state.buttonText}
+							 </button>
 						</div>
 						<div className=" AddressWrapper col-lg-12" >
 							 <div className="row">
 								{
-								this.state.qualificationArry.length > 0
+								this.state.qualificationArray.length > 0
 								?
-								this.state.qualificationArry.map((elem,index)=>{
+								this.state.qualificationArray.map((elem,index)=>{
 									return(
 									
 										<div className="col-lg-6 AddressOuterWrapper" key={index}>
@@ -566,11 +682,30 @@ class Academics extends Component{
 														<div className="AddressBoxHead">
 															Academics Details
 														</div>
-														<div className="AddressBoxText">
-															{elem.qualificationLevel}
+														<div>
+															{
+																this.state.DegreeArray.map((elem1,index)=>{
+																	return(
+																		<div className="AddressBoxText" key={index}>
+																			{elem1.qualification}
+																			
+																		</div>
+																	);
+																})
+															}
 														</div>
-														<div className="AddressBoxText">
-															{elem.qualification}
+														
+														<div>
+															{
+																this.state.classArray.map((elem1,index)=>{
+																	return(
+																		<div className="AddressBoxText" key={index}>
+																			{elem1.qualificationLevel}
+																			
+																		</div>
+																	);
+																})
+															}
 														</div>
 														<div className="AddressBoxText">
 															{elem.specialization}
@@ -584,11 +719,29 @@ class Academics extends Component{
 														<div className="AddressBoxText">
 															{elem.passOutYear}
 														</div>
-														<div className="AddressBoxText">
-															{elem.collegeSchool}
+														<div>
+															{
+																this.state.inputCollege.map((elem1,index)=>{
+																	return(
+																		<div className="AddressBoxText" key={index}>
+																			{elem1.collage}
+																			
+																		</div>
+																	);
+																})
+															}
 														</div>
-														<div className="AddressBoxText">
-															{elem.universityBoard}
+														<div>
+															{
+																this.state.inputUniversity.map((elem1,index)=>{
+																	return(
+																		<div className="AddressBoxText" key={index}>
+																			{elem1.university}
+																			
+																		</div>
+																	);
+																})
+															}
 														</div>
 														<div className="AddressBoxText">
 															{elem.state}

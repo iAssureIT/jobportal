@@ -36,6 +36,7 @@ class Address extends Component{
 			country	           : "",
 			pincode            : "",
 			inputAddressType   : [],
+			addressTypeArry    : [],
 			buttonText         : "Save",
 			
 		}
@@ -46,7 +47,6 @@ class Address extends Component{
 
 		Axios.get("/api/addresstypemaster/get/list")
 			.then(response => {
-				
 				this.setState({inputAddressType : response.data});
 			})
 			.catch(error=>{
@@ -61,10 +61,9 @@ class Address extends Component{
 		
 		Axios.get("/api/candidatemaster/get/one/"+this.state.candidateID)
 		.then(response=>{
-			console.log(response.data);
 			 	this.setState({
-
-			 		addressArry: response.data[0].address
+			 		addressArry    : response.data[0].address,
+			 		addressTypeArry: response.data[0].addressType
 
 				 })
 			 })
@@ -87,16 +86,18 @@ class Address extends Component{
 				var editData =response.data;
 
 			 	this.setState({
-			 		addressType :editData[0].address[0].addressType?editData[0].address[0].addressType:"",
-			 		houseNumber :editData[0].address[0].houseNumber?editData[0].address[0].houseNumber:"",
-			 		addressLine1     :editData[0].address[0].address?editData[0].address[0].address:"",
-			 		area        :editData[0].address[0].area?editData[0].address[0].area:"",
-			 		city        :editData[0].address[0].cityVillage?editData[0].address[0].cityVillage:"",
-			 		district    :editData[0].address[0].district?editData[0].address[0].district:"",
-			 		states      :editData[0].address[0].state?editData[0].address[0].state:"",
-			 		country     :editData[0].address[0].country?editData[0].address[0].country:"",
-			 		pincode     :editData[0].address[0].pincode?editData[0].address[0].pincode:"",
-			 		buttonText  :"Update"
+			 		addressType   :editData[0].address[0].addressType?editData[0].address[0].addressType:"",
+			 		houseNumber   :editData[0].address[0].houseNumber?editData[0].address[0].houseNumber:"",
+			 		addressLine1  :editData[0].address[0].address?editData[0].address[0].address:"",
+			 		area          :editData[0].address[0].area?editData[0].address[0].area:"",
+			 		city          :editData[0].address[0].cityVillage?editData[0].address[0].cityVillage:"",
+			 		district      :editData[0].address[0].district?editData[0].address[0].district:"",
+			 		states        :editData[0].address[0].state?editData[0].address[0].state:"",
+			 		country       :editData[0].address[0].country?editData[0].address[0].country:"",
+			 		stateCode     :editData[0].address[0].stateCode?editData[0].address[0].stateCode:"",
+			 		countryCode   :editData[0].address[0].countryCode?editData[0].address[0].countryCode:"",
+			 		pincode       :editData[0].address[0].pincode?editData[0].address[0].pincode:"",
+			 		buttonText    :"Update"
 			 	})
 			 	
 			 })
@@ -187,7 +188,7 @@ class Address extends Component{
 									stateCode 	  : this.state.stateCode,
         							countryCode   : this.state.countryCode
 								}
-								
+				
 							}
 		if(this.props.match.params.addressID){
 			this.updateData(formValues);
@@ -219,7 +220,6 @@ class Address extends Component{
 							this.props.history.push("/address/"+this.state.candidateID);
 					})
 					.catch(error =>{
-						console.log(error);
 						Swal.fire("Submit Error!",error.message,'error');
 					});
 				}
@@ -230,7 +230,6 @@ class Address extends Component{
 	insetData(formValues){
 		var status =  this.validateForm();
 			if(status==true){
-				console.log("formValues",formValues);
 					Axios.patch("/api/candidatemaster/patch/addCandidateAddress",formValues)
 				 .then(response=>{
 
@@ -250,7 +249,6 @@ class Address extends Component{
 													})	
 					})
 					.catch(error =>{
-						console.log(error);
 						Swal.fire("Submit Error!",error.message,'error');
 					});
 				}
@@ -327,8 +325,6 @@ class Address extends Component{
               }
           	}
       	}
-
-      console.log('state==>',state)
 
       this.setState({
         area       : area,
@@ -500,14 +496,16 @@ class Address extends Component{
 	                                            <input
 	                                              {...getInputProps({
 	                                                placeholder: 'Search Address ...',
-	                                                className: 'location-search-input   form-control inputBox',
+	                                                className: 'location-search-input form-control inputBox',
 	                                                id:"addressLine1",
 	                                                name:"addressLine1",
 	                                              })}
 	                                            />
-	                                            <div className={this.state.addressLine1 ? 
+	                                            <div className={this.state.addressLine1 
+	                                            				? 
 	                                            				"autocomplete-dropdown-container SearchListContainer inputSearch" 
-	                                            				: ""}>
+	                                            				: 
+	                                            				""}>
 	                                              {loading && <div>Loading...</div>}
 	                                              {suggestions.map(suggestion => {
 	                                                const className = suggestion.active
@@ -547,7 +545,7 @@ class Address extends Component{
 											<FontAwesomeIcon icon="map-marked-alt" />
 										</span> 
 										<input type="text" name="area" id="area" 
-										 className="form-control inputBox" value={this.state.area}
+										 className="form-control inputBox" value={this.state.area} 
 										 onChange={this.handleChange.bind(this)} />
 									</div> 
 								</div>
@@ -602,7 +600,8 @@ class Address extends Component{
 										 onChange={this.handleChangeState.bind(this)} >
 											<option hidden>-- Select --</option>
 											{
-												this.state.stateArray && this.state.stateArray.length > 0 ?
+												this.state.stateArray && this.state.stateArray.length > 0 
+												?
 													this.state.stateArray.map((stateData, index) => {
 														return (
 															<option key={index} statecode={stateData.stateCode}>
@@ -610,7 +609,8 @@ class Address extends Component{
 															</option>
 														);
 													}
-													) : ''
+													) 
+												: ''
 											}
 										</select>
 									</div> 
@@ -627,7 +627,8 @@ class Address extends Component{
 											<i className="fa fa-flag"></i> 
 										</span> 
 										<input type="text" name="country" id="country" 
-										 className="form-control inputBox" value={this.state.country} 
+										 className="form-control inputBox" 
+										 value={this.state.country} 
 										 onChange={this.handleChange.bind(this)} />
 									</div> 
 									<span id="countryError" className="errorMsg"></span>
@@ -643,7 +644,8 @@ class Address extends Component{
 											<FontAwesomeIcon icon="map-marked-alt" /> 
 										</span> 
 										<input type="number" name="pincode" id="pincode" 
-										 className="form-control inputBox" value={this.state.pincode} 
+										 className="form-control inputBox" 
+										 value={this.state.pincode} 
 										 onChange={this.handleChange.bind(this)} />
 									</div> 
 									<span id="pincodeError" className="errorMsg"></span>
@@ -651,8 +653,9 @@ class Address extends Component{
 
 							</div>
 							<div>
-								<button className="buttonBack pull-right" onClick={this.handleSave.bind(this)}> 
-								 	{this.state.buttonText}
+								<button className="buttonBack pull-right"
+								  onClick={this.handleSave.bind(this)}> 
+								  {this.state.buttonText}
 								 </button>
 							</div>
 							<div className=" AddressWrapper col-lg-12" >
@@ -670,9 +673,19 @@ class Address extends Component{
 														<div className="addLogoDiv">
 															<FontAwesomeIcon icon="home" /> 
 														</div>
-														<div className="addLogoTextDiv">
-															{elem.addressType}
+														<div className="">
+														{
+															this.state.addressTypeArry.map((elem1,index)=>{
+																return(
+																	<div className="addLogoTextDiv" key={index}>
+																		{elem1.addressType}<br/>
+																		Address
+																	</div>
+																);
+															})
+														}
 														</div>
+														
 													</div> 
 													<div className="col-lg-8 addRightWrapper">
 														<div className="addRightText ">

@@ -7,7 +7,9 @@ import './LeftSideFilters.css';
 import { connect }        from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { withRouter }   from 'react-router-dom';
-import  * as mapActionCreator from '../../common/actions/index';
+
+import  * as mapActionCreator from '../../common/actions/index.js';
+
 
 class LeftSideFilters extends Component{
 
