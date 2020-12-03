@@ -2,16 +2,18 @@ import React, {Component} from 'react';
 import Axios from  'axios';
 import Swal  from  'sweetalert2';
 import "./JobList.css";
+import { connect }        from 'react-redux';
+import { bindActionCreators } from 'redux';
+import  * as mapActionCreator from '../../common/actions/index';
 
-export default class Joblist extends Component{
+class Joblist extends Component{
 	constructor(props){
 	super(props);
 	this.state={
 		jobList  		: [],
 		isToggle 		: true,
 		appliedItems 	: [],
-		user_ID 		: localStorage.getItem("user_ID"),
-		candidateID 	: localStorage.getItem("candidateID")
+		
 	}
 }
 
@@ -25,15 +27,15 @@ handleclick = (jobid)=>{
 	console.log("jobid : ", jobid);
 	this.setState({isToggle:!this.state.isToggle})
 	var formValues = {
-		candidateID : this.state.candidateID,
+		candidateID : this.props.candidateID,
 		jobID  		: jobid,
-		createdBy   : this.state.user_ID
+		createdBy   : this.props.user_ID
 	}
 	Axios.post("/api/wishlist/post",formValues)
 		.then(response =>{
 			console.log("wishlist response=", response.data);
 			if(response.data.message==="Job is removed from wishlist."){
-
+						
 			}
 		})
 		.catch(error=>{
@@ -147,6 +149,7 @@ applyJob = (jobid)=>{
 }
 	
 	render(){
+		
 		return(
 			<section className="jobListWrapper">
 				<div className="col-lg-12 JobListWrapperMain">
@@ -161,60 +164,72 @@ applyJob = (jobid)=>{
 							this.props.jobList 
 							?
 								this.props.jobList.map((elem,index)=>{
-									return(
-										<div className="col-lg-12">
-											<div className="jobListContainer">
-												<div className="col-lg-12">
-													<div className="col-lg-11 jobListLeftContent">
-														<div className="row">
-															<div className="iconsBar">
-																<ul>	
-																	<li><i className="fa fa-male"></i></li>
-																	<li><i className="fa fa-sun-o"></i></li>
-																	<li><i className="fa fa-clock-o"></i></li>
+									//console.log(elem._id )
+									
+								var x = this.props.jobWishlist && this.props.jobWishlist.length > 0 ?
+								 this.props.jobWishlist.filter((wishlistitem) => wishlistitem.wishlistItems.jobID == elem._id) : [];
+				                
+				                if (x && x.length > 0) {
+				                  var wishClass = '';
+				                  var tooltipMsg = 'Remove from wishlist';
+				                } else {
+				                  var wishClass = '-o';
+				                  var tooltipMsg = 'Add to wishlist';
+				                }
+								return(
+									<div className="col-lg-12">
+										<div className="jobListContainer">
+											<div className="col-lg-12">
+												<div className="col-lg-11 jobListLeftContent">
+													<div className="row">
+														<div className="iconsBar">
+															<ul>	
+																<li><i className="fa fa-male"></i></li>
+																<li><i className="fa fa-sun-o"></i></li>
+																<li><i className="fa fa-clock-o"></i></li>
+															</ul>
+															<div className="infoLog"> 15 Days Ago </div>
+														</div>
+													</div>
+													<div className="jobListDesignation">
+														{elem.jobBasicInfo.jobTitle}
+													</div>
+													<div className="jobListCompanyName">
+														<b>iAssure International Technologies Pvt Ltd</b>
+													</div>
+													<div> 
+														<i className="fa fa-calendar jobListExperience"></i> &nbsp; Exp: {elem.eligibility.minEducation} To {elem.eligibility.minExperience}
+													</div>
+													<div> 
+														<i className="fa fa-rupee jobListMonSal"></i> &nbsp; <i className="fa fa-inr"></i> {elem.ctcOffered.minSalary} - <i className="fa fa-inr"></i> {elem.ctcOffered.maxSalary} a month
+													</div>
+													<div>
+														<i className="fa fa-map-marker jobListLocation"></i> &nbsp; {elem.jobBasicInfo.jobLocationCity}
+													</div>
+													<div> 
+														<i className="fa fa-users jobListNumPositions"></i> &nbsp; No of position : 10
+													</div>
+												</div>
+												<div className="col-lg-1 jobListRightContent">
+													<div className="row">
+														<div className="col-lg-offset-2 col-lg-8">
+															<div className="jobProfileVerticleIcons">
+																<ul>
+																	<li><i className="fa fa-check" onClick={this.applyJob}></i></li>
+																	<li ><i title={tooltipMsg} onClick={wishlist => this.handleclick(elem._id)} className={"fa fa-heart" + wishClass }></i></li>
+																	<li><i className="fa fa-youtube-play"></i></li>
 																</ul>
-																<div className="infoLog"> 15 Days Ago </div>
-															</div>
-														</div>
-														<div className="jobListDesignation">
-															{elem.jobBasicInfo.jobTitle}
-														</div>
-														<div className="jobListCompanyName">
-															<b>iAssure International Technologies Pvt Ltd</b>
-														</div>
-														<div> 
-															<i className="fa fa-calendar jobListExperience"></i> &nbsp; Exp: {elem.eligibility.minEducation} To {elem.eligibility.minExperience}
-														</div>
-														<div> 
-															<i className="fa fa-rupee jobListMonSal"></i> &nbsp; <i className="fa fa-inr"></i> {elem.ctcOffered.minSalary} - <i className="fa fa-inr"></i> {elem.ctcOffered.maxSalary} a month
-														</div>
-														<div>
-															<i className="fa fa-map-marker jobListLocation"></i> &nbsp; {elem.jobBasicInfo.jobLocationCity}
-														</div>
-														<div> 
-															<i className="fa fa-users jobListNumPositions"></i> &nbsp; No of position : 10
-														</div>
-													</div>
-													<div className="col-lg-1 jobListRightContent">
-														<div className="row">
-															<div className="col-lg-offset-2 col-lg-8">
-																<div className="jobProfileVerticleIcons">
-																	<ul>
-																		<li><i className="fa fa-check" onClick={this.applyJob}></i></li>
-																		<li><i onClick={wishlist => this.handleclick(elem._id)} className={this.state.isToggle ? 'fa fa-heart-o':'fa fa-heart'}></i></li>
-																		<li><i className="fa fa-youtube-play"></i></li>
-																	</ul>
-																</div>
 															</div>
 														</div>
 													</div>
-												</div>	
-											</div>
+												</div>
+											</div>	
 										</div>
-									);
-								})
+									</div>
+								);
+							})
 							:
-								null
+							null
 						}
 					</div>
 				</div>
@@ -222,3 +237,15 @@ applyJob = (jobid)=>{
 		);
 	}
 }
+
+const mapStateToProps = (state)=>{
+    return {
+    	user_ID 		: state.user_ID, 	candidateID 	: state.candidateID,
+        selector        : state.selector, 	jobList 		: state.jobList,
+        jobWishlist 	: state.jobWishlist
+    }
+}
+const mapDispachToProps = (dispatch) => ({
+  mapAction :  bindActionCreators(mapActionCreator, dispatch)
+}) 
+export default connect(mapStateToProps, mapDispachToProps) (Joblist);

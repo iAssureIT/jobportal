@@ -116,9 +116,9 @@ export function getJobWishlist(candidateID) {
   		var formValue={"candidateID":candidateID}
 	  	return axios.post("/api/wishlist/candidateWishlist",formValue)
 	    .then((response)=>{
-	     	//console.log(response.data)
+	     	console.log(response.data)
 
-	        dispatch(setJobWishlist(response.data[0] ? response.data[0].wishlistItems : [] ));
+	        dispatch(setJobWishlist(response.data ));
 	    })
 	    .catch((error)=>{
 	          console.log('error', error);

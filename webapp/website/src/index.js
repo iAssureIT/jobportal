@@ -8,15 +8,12 @@ import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import reducer 			from './store/reducer';
 
-import {routes} from './lib/router.js';
-
-
+ 
 const configureStore = () => {   
   return createStore( reducer, applyMiddleware(thunk)) ;
 }
 
 const store = configureStore();
 
-ReactDOM.render(routes, document.getElementById('root'));
 ReactDOM.render( <Provider store={store}> <App /> </Provider>,  document.getElementById('root'));
 serviceWorker.unregister();

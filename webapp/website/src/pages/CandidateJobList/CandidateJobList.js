@@ -13,8 +13,6 @@ class CandidateJobList extends Component{
 		this.state={
 			jobList  		: [],
 			selector 		: {},
-			user_ID 		: localStorage.getItem("user_ID"),
-			candidateID 	: localStorage.getItem("candidateID")
 		}
 	}
 
@@ -28,7 +26,7 @@ class CandidateJobList extends Component{
 	    var {mapAction} = this.props;
 	    mapAction.filterJobList(selector);
 
-	    mapAction.getJobWishlist(this.state.candidateID);
+	    mapAction.getJobWishlist(this.props.candidateID);
 	}
 
 	render(){
@@ -65,8 +63,8 @@ class CandidateJobList extends Component{
 }
 const mapStateToProps = (state)=>{
     return {
-        selector        : state.selector,
-        jobList 		: state.jobList,
+    	user_ID 		: state.user_ID, 	candidateID 	: state.candidateID,
+        selector        : state.selector, 	jobList 		: state.jobList,
         jobWishlist 	: state.jobWishlist
     }
 }
