@@ -26,7 +26,7 @@ class LeftSideFilters extends Component{
       inputRole             : [],
 
       allExperiences        : "",
-      inputExperience       : ['Experience-1','Experience-2','Experience-3'],
+      inputExperience       : ['0-1 year','1-3 years','3-7 years','7+ years'],
         
       industry              : [],
       functionalArea        : [],
@@ -156,6 +156,7 @@ class LeftSideFilters extends Component{
   onRemove(selectedList, removedItem) {
      console.log(selectedList)
   }
+
   onSelectedItemsChange(filterType, selecteditems){
     var selector=this.state.selector;
     var industry_ids = [];
@@ -285,14 +286,16 @@ class LeftSideFilters extends Component{
     );
   }
 
-
 }
+
+
 const mapStateToProps = (state)=>{
     return {
-        viewMode    : state.viewMode
+            viewMode    : state.viewMode
     }
 }
 const mapDispachToProps = (dispatch) => ({
-  mapAction :  bindActionCreators(mapActionCreator, dispatch)
+    mapAction :  bindActionCreators(mapActionCreator, dispatch)
 })
+
 export default connect(mapStateToProps, mapDispachToProps) (LeftSideFilters);

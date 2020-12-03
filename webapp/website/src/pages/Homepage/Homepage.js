@@ -68,6 +68,7 @@ class HomePage extends Component {
     }
   }
   render() {
+    console.log("industrialJobs",this.props.industrialJobs);
     return (
       <div className="ViewBodyWrapper container-fluid">
         
@@ -88,9 +89,18 @@ class HomePage extends Component {
                 <div className="viewWrapper col-lg-4">
                   <div className='row'>
                     <ul className="nav nav-pills">
-                      <li className="viewDiv active" onClick={this.changeViewMode.bind(this,"mapView")}><a data-toggle="pill" href="#mapwise" > Map <br/> View</a></li>
-                      <li className="viewDiv" onClick={this.changeViewMode.bind(this,"functionalView")}><a data-toggle="pill" href="#functionwise">Functional <br/> View</a></li>
-                      <li className="viewDiv" onClick={this.changeViewMode.bind(this,"industrialView")}><a data-toggle="pill" href="#industrywise">Industrial <br/> View</a></li>
+                      <li className="viewDiv active" onClick={this.changeViewMode.bind(this,"mapView")}>
+                        <a data-toggle="pill" href="#mapwise" > Map <br/> View</a> 
+                      </li>
+
+                      <li className="viewDiv" onClick={this.changeViewMode.bind(this,"functionalView")}>  
+                        <a data-toggle="pill" href="#functionwise">Functional <br/> View</a>
+                      </li>
+
+                      <li className="viewDiv" onClick={this.changeViewMode.bind(this,"industrialView")}>
+                        <a data-toggle="pill" href="#industrywise">Industrial <br/> View</a>
+                      </li>
+
                     </ul>
                   </div>  
                 </div>
@@ -114,7 +124,7 @@ class HomePage extends Component {
               </div>
 
               <div id="industrywise" className="tab-pane fade">
-                <IndustrywiseJobs />
+                <IndustrywiseJobs industrialJobs={this.props.industrialJobs}/>
               </div>
             </div>
           </div>
