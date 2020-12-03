@@ -11,21 +11,9 @@ export default class JobListView extends Component{
 }	
 
 componentDidMount(){
-	this.getJobsData();
 }
 
-getJobsData=()=>{
-	Axios.get("/api/jobs/list")
-	.then(response=>{
-		console.log("getJobsData response.data : ", response.data);
-		this.setState({
-			jobList : response.data.jobList
-		});
-	})
-	.catch(error=>{
-		Swal.fire("Error while getting list data", error.message, "error");
-	})
-}
+
 
 deleteJob = (event)=>{
 	event.preventDefault();
@@ -87,9 +75,9 @@ deleteJob = (event)=>{
 						</div> 
 					</div> 
 						{
-							this.state.jobList.length > 0
+							this.props.jobList
 							?
-								this.state.jobList.map((elem,index1)=>{
+								this.props.jobList.map((elem,index1)=>{
 									return(
 										<div className="col-lg-12">
 											<div className="jobListContainer">
