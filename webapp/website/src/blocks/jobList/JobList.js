@@ -84,9 +84,7 @@ applyJob = (jobid)=>{
 	}).then((result) =>{
 		console.log("result", result.value)
 		if(result.value){
-			console.log("[candidateID, employerID]=", [candidateID, employerID]);
-			if(candidateID && employerID !== ""){
-				if(this.state.appliedItems.includes(jobid)){
+			if(this.state.appliedItems.includes(jobid)){
 					Axios.post("/api/applyJob/post", formValues)
 					.then(response =>{
 						console.log("applied jobs response=", response.data);
@@ -133,8 +131,7 @@ applyJob = (jobid)=>{
 							)
 					})
 				}
-			}
-				
+			
 				}else if (result.dismiss === Swal.DismissReason.cancel){
 					for (var i = 0; i < this.state.appliedItems.length; i++){
 						if (this.state.appliedItems[i] === this.state.jobid) { 

@@ -128,7 +128,8 @@ const mapStateToProps = (state)=>{
         selector          : state.selector,
         mapJobs           : state.mapJobs,
         functionalJobs    : state.functionalJobs,
-        subfunctionalJobs : state.subfunctionalJobs
+        subfunctionalJobs : state.subfunctionalJobs,
+        industrialJobs    : state.industrialJobs
     }
 }
 const mapDispachToProps = (dispatch) => ({
