@@ -659,7 +659,8 @@ class BasicInfoForm extends Component{
 						</div>
 
 						<button className="buttonNext pull-right" onClick={this.handleSubmit.bind(this)}>
-							Next
+							Next 
+							<FontAwesomeIcon className="nextArrow" icon="arrow-right" />
 						</button>
 						
 					</form>

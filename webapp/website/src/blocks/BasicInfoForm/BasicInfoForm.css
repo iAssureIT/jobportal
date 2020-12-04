@@ -122,6 +122,14 @@
 	font-size:13px;
 
 }
+.nextArrow{
+	font-size:12px;
+	margin-left:3px;
+} 
+.backArrow{
+	font-size:12px;
+	margin-right:3px;
+}
 .buttonBack{
 	height: 28px;
 	width: 110px;

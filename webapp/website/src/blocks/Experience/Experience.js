@@ -673,77 +673,68 @@ class Academics extends Component{
 								?
 								this.state.experienceArry.map((elem,index)=>{
 									return(
-									
-										<div className="col-lg-6 AddressOuterWrapper" key={index}>
-											<div className="col-lg-12 AddressInnerWrapper">
+										<div className="col-lg-6 AddressOuterWrapper"  key={index}>
+											<div className="col-lg-12 addWrapper">
 												<div className="row">
-													<div className="col-lg-1 AddressBoxLeftIcon">
-														<FontAwesomeIcon icon="map-marker-alt" />
-													</div>
-													<div className="col-lg-10">
-														<div className="AddressBoxHead">
-															Work Experience
+													<div className="col-lg-4 addLeftWrapper">
+														<div className="addLogoDiv">
+															<FontAwesomeIcon icon="user-clock" /> 
 														</div>
-														<div className="AddressBoxText">
+
+														<div className="addLogoTextDiv" key={index}>
 															{elem.companyName}
-														</div>
-														<div className="AddressBoxText">
-															{elem.country}
-														</div>
-														<div className="AddressBoxText">
-															{elem.city}
-														</div>
-														<div className="AddressBoxText">
-															{elem.lastDegn}
-														</div>
-														<div className="AddressBoxText">
-															{elem.department}
-														</div>
-														<div className="AddressBoxText">
-															{elem.lastSalary}
-														</div>
-														<div className="AddressBoxText">
-															{elem.fromDate}
-														</div>
-														<div className="AddressBoxText">
-															{elem.toDate}
-														</div>
-														<div className="AddressBoxText">
-															{elem.responsibilities}
-														</div>
-														<div className="AddressBoxText">
-															{elem.reportingManager}
-														</div>
-														<div className="AddressBoxText">
-															{elem.reportingManagerDegn}
-														</div>
-													</div>
-													<div className="col-lg-1 AddressBoxRightIcon hoverEdit ">
-														<div className="row">
-															<FontAwesomeIcon icon="ellipsis-h" />
-														
-																<div className="rightIconHideWrapper" >
-																<a id={elem._id} 
-																   href={"/experience/"+this.state.candidateID+"/edit/"+elem._id}>
-																	<div className="rightIconHide"   >
-																		<FontAwesomeIcon icon="pencil-alt" /> 
-																		<span className="rightIconHideRexr" >Edit</span>
-																	</div>
-																	</a>
-																	<div className="rightIconHide">
-																		<FontAwesomeIcon icon="trash-alt" /> 
-																		<span className="rightIconHideRexr" id={elem._id} 
-																		 onClick={this.deleteDate.bind(this)}>Delete</span>
-																	</div>
-																</div>
-						
 															
 														</div>
+			
+													</div> 
+													<div className="col-lg-8 addRightWrapper">
+														<div className="row">
+														<div className="addRightText ">	
+															<div className="AddressBoxText">
+															{elem.country}
+															</div>
+															<div className="AddressBoxText">
+																{elem.city}
+															</div>
+															<div className="AddressBoxText">
+																{elem.lastDegn}
+															</div>
+															<div className="AddressBoxText">
+																{elem.department}
+															</div>
+															<div className="AddressBoxText">
+																{elem.lastSalary}
+															</div>
+															<div className="AddressBoxText">
+																{elem.fromDate}
+															</div>
+															<div className="AddressBoxText">
+																{elem.toDate}
+															</div>
+															<div className="AddressBoxText">
+																{elem.responsibilities}
+															</div>
+															<div className="AddressBoxText">
+																{elem.reportingManager}
+															</div>
+															<div className="AddressBoxText">
+																{elem.reportingManagerDegn}
+															</div>
+														</div>
+														<div className="col-lg-12">
+								                            <div className="addRightbtn">
+								                                <a id={elem._id} href={"/academics/"+this.state.candidateID+"/edit/"+elem._id}>
+								                            	    <div className="editBtn pull-left">Edit</div>
+								                            	</a>
+								                            	<div className="dltBtn pull-right" id={elem._id} onClick={this.deleteDate.bind(this)}>Delete</div>
+								                            </div>
+							                            </div>
 													</div>
-
-												</div>
+													</div>
+												</div> 
 											</div>
 										</div>
+										
 										
 									);
 									})
@@ -754,11 +745,13 @@ class Academics extends Component{
 						</div>
 					
 						<button className="buttonBack pull-left" onClick={this.handleBack.bind(this)}> 
-							<i className="fa fa-angle-left"> - Back</i>
+							<FontAwesomeIcon className="backArrow" icon="arrow-left" /> 
+							Back
 						</button>
 						
 						<button className="buttonNext pull-right" onClick={this.handelSubmit.bind(this)}>
-							Next - <i className="fa fa-angle-right "></i>
+							Next 
+							<FontAwesomeIcon className="nextArrow" icon="arrow-right" />
 						</button>
 					</form>
 				</div>

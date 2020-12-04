@@ -24,6 +24,7 @@
 	font-family:'Montserrat-Regular';
 	margin-bottom:25px;
 	border: 3px inset var(--main-border-color);
+	text-transform:capitalize;
 }
 .addLeftWrapper{
 	background:var(--main-border-color );
@@ -43,11 +44,17 @@
 .addRightWrapper{
 	height:150px;
 	background-color: var(--input-bg-color );
+
 }
 .addRightText{
 	height:100px;
-	padding-top:15px;
+	padding-top:5px;
 	font-size:12px;
+	overflow:auto;
+	margin-bottom:5px;
+}
+.paddingAddress{
+	padding-top:15px;
 }
 .editBtn{
 	height: 25px;
