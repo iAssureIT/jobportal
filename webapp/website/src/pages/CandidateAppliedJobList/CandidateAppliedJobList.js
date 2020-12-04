@@ -1,7 +1,7 @@
 import React,{Component}      from 'react';
 import CandidateApplyJoblist  from '../../blocks/CandidateApplyJoblist/CandidateApplyJoblist.js';
 
-class CandidateApplyJoblistPage extends Component{
+class CandidateAppliedJoblistPage extends Component{
 	constructor(props){
 		super(props);
 	}
@@ -17,4 +17,4 @@ class CandidateApplyJoblistPage extends Component{
 	}
 }
 
-export default CandidateApplyJoblistPage;
+export default CandidateAppliedJoblistPage;
