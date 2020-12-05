@@ -35,14 +35,10 @@ import CandidateExperience  from './pages/ProfileCreation/CandidateExperience.js
 //import CandidateProfile     from './blocks/CandidateProfile/CandidateProfile.js';
 //import CandidateList     from './blocks/CandidateList/CandidateList.js';
 
-import CandidateJobList              from './pages/CandidateJobList/CandidateJobList.js'
-import CandidateApplyJoblistPage     from './pages/CandidateApplyJoblistPage/CandidateApplyJoblistPage.js';
 
-
-import CandidateJobWishlist  from './pages/CandidateJobWishlist/CandidateJobWishlist.js';
-
-
-
+import CandidateJobList         from './pages/CandidateJobList/CandidateJobList.js'
+import CandidateAppliedJobList  from './pages/CandidateAppliedJobList/CandidateAppliedJobList.js';
+import CandidateJobWishlist     from './pages/CandidateJobWishlist/CandidateJobWishlist.js';
 
 import India from './maps/India/India.js';
 import Maharashtra from './maps/Maharashtra/Maharashtra.js';
@@ -163,8 +159,7 @@ class Layout extends Component  {
 
                                             <Route exact path="/search-jobs"                    component={CandidateJobList}  />  
 
-                                            <Route exact path="/apply-job"                      component={CandidateApplyJoblistPage}  />  
-
+                                            <Route exact path="/applied-jobs"                   component={CandidateAppliedJobList}  />  
 
                                             <Route exact path="/wishlist"                       component={CandidateJobWishlist}  />  
 

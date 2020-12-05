@@ -5,7 +5,7 @@ export const setFilterSelector = (selector )=> ({
       selector 			: selector
 });
 
-export const getJobList = (jobList )=> ({
+export const getJobList = (jobList )=> ({ 
       type 				: 'GET_JOB_LIST',
       jobList 			: jobList
 });

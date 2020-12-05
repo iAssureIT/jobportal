@@ -2,15 +2,31 @@ import React, {Component} 	from 'react';
 import "../listCss/Joblist.css";
 import LeftSideFilters		from '../../blocks/LeftSideFilters/LeftSideFilters.js';
 import Joblist				from '../../blocks/Joblist/Joblist.js';
+import { connect }        from 'react-redux';
+import { bindActionCreators } from 'redux';
+import  * as mapActionCreator from '../../common/actions/index';
 
 class JoblistPage extends Component{
 	constructor(props){
 		super(props);
 		this.state={
-	      leftDrawerDisplay  : "-350px",
-	      arrowToggle: false  
+	      leftDrawerDisplay    : "-350px",
+	      arrowToggle          : false ,
+        jobList              : [],
+        selector             : {}, 
 	    }
 	}
+  componentDidMount(){
+
+    var selector=this.state.selector;
+      selector.countryCode = "IN"; 
+
+      this.setState({ selector: selector })
+
+      var {mapAction} = this.props;
+      mapAction.filterJobList(selector);
+
+  }
 	leftDrawerInfo(event){
 
     if(this.state.leftDrawerDisplay==="-350px"){
@@ -30,25 +46,10 @@ class JoblistPage extends Component{
   }
 	render(){
 		return(
-		<div className="ViewBodyWrapper container-fluid">
-        
-          <div className="filterDiv col-lg-12">
-
-            <div className="row">
-              <div className="filterButton" onClick={this.leftDrawerInfo.bind(this)}>
-                <i className="fa fa-filter filtersIcon" ></i>
-                <i className={this.state.arrowToggle ? "fa fa-arrow-left arrowIcon" : "fa fa-arrow-right arrowIcon"} 
-                              value={this.state.arrowToggle}></i>
-
-              </div>
-            </div>
-          </div>
-
-          <div className="col-lg-3">
+  		<div className="ViewBodyWrapper container-fluid">
+          <div className="col-lg-3" style={{"margin-top": "32px"}}>
             <div className='row'>
-                
-
-                <div className="filterWrapper col-lg-8" style={{left:this.state.leftDrawerDisplay}}>
+                <div className="col-lg-8">
                   <div className='row'>
                     <LeftSideFilters />
                   </div>
@@ -58,18 +59,25 @@ class JoblistPage extends Component{
 
           <div className="col-lg-9">
             <div className="row">
-              <div className="tab-content">
-                <div id="mapwise" className="tab-pane fade in active">
-                  <Joblist />
-                </div>
+              <div id="mapwise">
+                <Joblist jobList={this.props.jobList}/>
               </div>
             </div>  
           </div>
-         
+           
       </div>
 	);
 	}
 }
+const mapStateToProps = (state)=>{
+    return {
+        user_ID     : state.user_ID,  candidateID   : state.candidateID,
+        selector        : state.selector,   jobList     : state.jobList,
+    }
+}
+const mapDispachToProps = (dispatch) => ({
+  mapAction :  bindActionCreators(mapActionCreator, dispatch)
+}) 
+export default connect(mapStateToProps, mapDispachToProps)(JoblistPage)
 
-export default JoblistPage;
 
