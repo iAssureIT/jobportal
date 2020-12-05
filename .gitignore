@@ -7,5 +7,5 @@ api/node_modules
 webapp/adminportal/.env
 webapp/website/.env
 webapp/employerportal/.env
-api/nodemon.js
 webapp/employerportal/.eslintcache
+api/nodemon.js

@@ -34,7 +34,7 @@
     "rc-time-picker": "^3.7.3",
     "react": "^16.14.0",
     "react-autocomplete": "^1.8.1",
-    "react-autosuggest": "^10.0.3",
+    "react-autosuggest": "^10.0.4",
     "react-chartjs-2": "^2.7.6",
     "react-ckeditor-component": "^1.1.0",
     "react-collapsible": "^2.8.1",

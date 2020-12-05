@@ -175,7 +175,7 @@
 	border: 1px solid #fff;
 }
 
-/*****************************Custom Gender Field************************/
+/*********************************Custom Gender Field Properties********************************/
 
 .addJobGenderTitle{
 	font-family: 'Montserrat-Medium';
@@ -214,14 +214,14 @@
 	transition: all 1.3s;
 }
 
-/***********************************************************************/
+/***********************************End of Custom Gender Field Properties**************************/
 
-/********************React phone input custom classes*******************/
+/***************************************React Phone Input Properties*******************************/
 
 .react-tel-input .form-control{
 	/*width: 255px !important;*/
 	border-radius: 4px !important;
-	background-color: var(--main-bg-color) !important;
+	background-color: var(--form-field-background-color) !important;
 	border: 1px solid var(--main-border-color) !important;
 	color: var(--main-txt-color) !important;
 }
@@ -239,6 +239,7 @@
 
 .react-tel-input .selected-flag{
 	background-color: var(--main-bg-color) !important;
+	background-color: var(--form-field-background-color) !important;
 }
 
 .react-tel-input .selected-flag:hover{
@@ -261,6 +262,7 @@
 	background-color: var(--main-bg-color) !important;
 	border: 1px solid var(--main-border-color) !important;
 	border-radius: 5px !important;
+	margin-top: 4px !important;
 }
 
 .react-tel-input .country-list .country:hover{
@@ -275,9 +277,9 @@
 	color: var(--main-txt-color) !important;
 }
 
-/*****************************End of react phone input***************************/
+/********************************End Of React Phone Input Properties*******************************/
 
-/********************************Calender Date Input*****************************/
+/*************************************HTML Date Input Properties***********************************/
  
 ::-webkit-calendar-picker-indicator {
     filter: invert(1);
@@ -287,9 +289,9 @@
 	background-color: red !important;
 }
 
-/****************************End of HTML Date Input******************************/
+/***********************************End of HTML Date Input Properties*******************************/
 
-/*******************************Custom Checkbox**********************************/
+/********************************************Custom Checkbox****************************************/
 
 .containerWfh{
 	display: block;
@@ -356,9 +358,9 @@
 	transform: rotate(45deg);
  }
 
-/***************************End of Custom Checkbox***************************************/
+/***************************End Of Custom Checkbox Properties***************************************/
 
-/***************************Select Dropdown custom classes*******************************/
+/*****************************Select Dropdown custom classes************************************/
 
 /*select{
 	border: 1px solid var(--main-border-color);
@@ -376,11 +378,11 @@ option:hover{
 	background-color: var(--main-border-color) !important;
 }*/
 
-/***************************End of Select Dropdown custom classes*******************************/
+/**************************************End of Select Dropdown custom classes**********************************/
 
-/***************************React multiselect Dropdown custom classes***************************/
+/************************************React multiselect Dropdown custom classes********************************/
 
-.optionContainer{
+/*.optionContainer{
 	background-color: var(--main-bg-color);
 	white-space: nowrap; 
  	overflow: hidden;
@@ -407,21 +409,19 @@ option:hover{
 }
 
 ._2iA8p44d0WZ-WqRBGcAuEV{
-	/*padding: 4px !important;
-	padding-top: 7px !important;*/
 	border-radius: 0px !important;
 	border-bottom-right-radius: 4px !important;
     border-top-right-radius: 4px !important;
-}
+}*/
 
-/**************************End of React multiselect Dropdown custom classes*************************/
+/***********************************End Of React Multiselect Dropdown Properties**********************************/
 
 .addJobPreviewBtn{
 	height: 40px;
 	width: 150px;
 	margin-top: 40px;
 	margin-right: 30px;
-	margin-left: 127px;
+	margin-left: 110px;
 	color: #fff;
 }
 
@@ -445,7 +445,7 @@ option:hover{
 	color: #c73030;
 }
 
-/*******************************************ckeditor***********************************************/
+/*********************************************Properties Of Ckeditor***********************************************/
 
 .ck-editor {
      /* Overrides the border radius setting in the theme. */
@@ -474,7 +474,7 @@ option:hover{
     --ck-color-button-default-hover-background: /*hsl(270, 1%, 22%);*/ var(--main-border-color) !important;
     --ck-color-button-default-active-background: hsl(270, 2%, 20%);
     --ck-color-button-default-active-shadow: hsl(270, 2%, 23%);
-    --ck-color-button-default-disabled-background: var(--ck-custom-background) /*var(--main-border-color) !important*/;
+    --ck-color-button-default-disabled-background: var(--ck-custom-background);
 
     /*--ck-color-button-on-background: var(--ck-custom-foreground);
     --ck-color-button-on-hover-background: hsl(255, 4%, 16%);
@@ -570,12 +570,42 @@ option:hover{
 }
 
 .ck-rounded-corners .ck.ck-editor__top .ck-sticky-panel .ck-toolbar, .ck.ck-editor__top .ck-sticky-panel .ck-toolbar.ck-rounded-corners{
-	/*background-color: var(--form-field-background-color) !important;*/
+	background-color: var(--form-field-background-color) !important;
 }
 
-/**********************************************End of ckeditor****************************************/
+/*.ck.ck-dropdown.ck-heading-dropdown .ck-dropdown__button .ck-button__label{
+	background-color: var(--form-field-background-color) !important;
+}*/
 
-/**************************************************Tooltip************************************************/
+.ck.ck-dropdown .ck-button.ck-dropdown__button.ck-on{
+	background-color: var(--form-field-background-color) !important;
+}
+
+.ck.ck-list__item .ck-button.ck-on{
+	background-color: var(--main-border-color) !important
+}
+
+.ck .ck-insert-table-dropdown-grid-box.ck-on{
+	border-color: var(--main-border-color) !important;
+	background-color: var(--form-field-background-color) !important;
+}
+
+.ck .ck-insert-table-dropdown__grid{
+	background-color: #444 !important;
+}
+
+.ck.ck-media-form{
+	background-color: #444 !important;
+}
+
+.ck.ck-link-form{
+	background-color: #444 !important;
+	border: none !important;
+} 
+
+/********************************************End Of Ckeditor Properties*******************************************/
+
+/***********************************************Properties Of Tooltip*********************************************/
 
 /*.tooltip {
   position: relative;
@@ -613,22 +643,28 @@ option:hover{
   visibility: visible;
 }
 */
-/*********************************************End of tooltip**********************************************/
 
-/******************************************Styles for React Tags******************************************/
+/**********************************************End Of Tooltip Properties********************************************/
+
+/********************************************Properties Of React Tag Input******************************************/
 
 div.ReactTags__tags {
     position: relative;
-    z-index: 100 !important;
     border-bottom-right-radius: 4px;
     border-top-right-radius: 4px;
     border: 1px solid var(--main-border-color);
-    padding-bottom: 2px;
+    background-color: var(--form-field-background-color);
+    padding-bottom: 1px;
 }
 
 div.ReactTags__tagInput {
     border-radius: 2px;
     display: inline-block;
+}
+
+.ReactTags__tagInputField{
+	/*border: 1px solid var(--main-border-color) !important;*/
+	background-color: var(--form-field-background-color) !important;
 }
 
 div.ReactTags__tagInput input.ReactTags__tagInputField,
@@ -643,23 +679,21 @@ div.ReactTags__tagInput input.ReactTags__tagInputField:focus {
     background-color: var(--main-bg-color);
 }
 
-.ReactTags__tagInputField{
-	z-index: -200 !important;
-}
-
 /* Styles for selected tags */
 div.ReactTags__selected span.ReactTags__tag {
-    border: 1px solid #ddd;
     background: #eee;
     font-size: 12px;
     display: inline-block;
     margin-top: 2px;
     padding-left: 5px;
     padding-right: 5px;
+    padding-top: 2px;
+    padding-bottom: 1px;
     margin: 0 5px;
     cursor: move;
     border-radius: 10px;
 }
+
 div.ReactTags__selected a.ReactTags__remove {
     color: #fff;
     border-radius: 100%;
@@ -672,39 +706,54 @@ div.ReactTags__selected a.ReactTags__remove {
 
 /* Styles for suggestions */
 div.ReactTags__suggestions {
+	margin-left: 5px;
     position: absolute;
+    z-index: 100 !important;
+    background-color: var(--main-bg-color);
 }
 
 div.ReactTags__suggestions ul {
+	width: 200px;
     list-style-type: none;
     box-shadow: .05em .01em .5em rgba(0,0,0,.2);
-    background: white;
-    width: 200px;
+    margin-top: 3px;
+    /*background-color: var(--main-bg-color);*/
+    border: 1px solid var(--main-border-color);
+    color: #fff !important;
+    border-radius: 4px;
+    padding-top: 5px !important;
+    padding-bottom: 5px !important;
 }
 
 div.ReactTags__suggestions li {
-    border-bottom: 1px solid #ddd;
+    /*border-bottom: 1px solid #ddd;*/
     padding: 5px 10px;
     margin: 0;
+    margin-left: -40px !important;
 }
 
 div.ReactTags__suggestions li mark {
     text-decoration: underline;
     background: none;
     font-weight: 600;
+    /*color: #fff !important;*/
+    color: var(--main-border-color) !important;
 }
 
 div.ReactTags__suggestions ul li.ReactTags__activeSuggestion {
-    background: #b7cfe0;
     cursor: pointer;
+    background-color: var(--main-bg-color) !important;
+    color: #fff !important;
+    /*background-color: var(--main-border-color) !important;*/
+}
+
+input::placeholder{
+	color: #ccc !important;
 }
 
 .primarySkillsField{
-	z-index: 200 !important;
+	z-index: 3 !important;
 }
 
-.secondarySkillsField{
-	z-index: 300 !important;
-}
 
-/******************************************End of React Tags******************************************/
+/******************************************End Of React Tag Input Properties******************************************/
