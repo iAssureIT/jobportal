@@ -736,7 +736,7 @@ exports.user_login_using_email = (req, res, next) => {
 													firstName: user.profile.firstname,
 													lastName: user.profile.lastname,
 													email: user.profile.email,
-													phone: user.profile.phone,
+													phone: user.profile.mobile,
 													city: user.profile.city,
 													companyID: user.profile.companyID,
 													locationID: user.profile.locationID,

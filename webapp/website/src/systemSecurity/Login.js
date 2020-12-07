@@ -128,11 +128,11 @@ class Login extends Component {
 
               axios.get('/api/candidatemaster/get/candidateID/'+response.data.userDetails.user_id)
               .then((candidate) => {
-              
-              localStorage.setItem("candidateID", candidate.data[0] ? candidate.data[0]._id : null);
-              localStorage.setItem("token", response.data.token);
-              localStorage.setItem("user_ID", response.data.ID);
-              localStorage.setItem("roles", response.data.roles);
+              userDetails.candidate_id = candidate.data[0] ? candidate.data[0]._id : null;
+              // localStorage.setItem("candidateID", candidate.data[0] ? candidate.data[0]._id : null);
+              // localStorage.setItem("token", response.data.token);
+              // localStorage.setItem("user_ID", response.data.ID);
+              // localStorage.setItem("roles", response.data.roles);
               //localStorage.setItem("companyID", response.data.userDetails.companyID);
               localStorage.setItem('userDetails', JSON.stringify(userDetails));
               var {mapAction} = this.props;
@@ -233,7 +233,8 @@ class Login extends Component {
   }
   
   render() {
-    console.log("userDetails",this.props.userDetails)
+    console.log("userDetails", JSON.parse(localStorage.getItem("userDetails")) )
+    console.log("userDetails", this.props.userDetails )
     return (
         <div className="loginFormOuter col-lg-12">
           <div className="img1Login">

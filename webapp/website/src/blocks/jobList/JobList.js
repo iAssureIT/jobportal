@@ -25,21 +25,25 @@ componentDidMount(){
 handleclick = (jobid)=>{
 	console.log("jobid : ", jobid);
 	this.setState({isToggle:!this.state.isToggle})
-	var formValues = {
-		candidateID : this.props.candidateID,
-		jobID  		: jobid,
-		createdBy   : this.props.user_ID
+	if (this.props.loggedIn) {
+		var formValues = {
+			candidateID : this.props.candidateID,
+			jobID  		: jobid,
+			createdBy   : this.props.user_ID
+		}
+		Axios.post("/api/wishlist/post",formValues)
+			.then(response =>{
+				console.log("wishlist response=", response.data);
+				if(response.data.message==="Job is removed from wishlist."){
+							
+				}
+			})
+			.catch(error=>{
+				console.log(error);
+			})	
+	}else{
+		document.getElementById("loginbtndiv").click();
 	}
-	Axios.post("/api/wishlist/post",formValues)
-		.then(response =>{
-			console.log("wishlist response=", response.data);
-			if(response.data.message==="Job is removed from wishlist."){
-						
-			}
-		})
-		.catch(error=>{
-			console.log(error);
-		})	
 }
 
 search = (event)=>{
