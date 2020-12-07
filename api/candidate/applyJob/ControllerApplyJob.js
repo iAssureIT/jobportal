@@ -11,11 +11,11 @@ exports.applyJob = (req,res,next)=>{
             
             if(data){
                 var appliedItems = {
-                        'jobID'         : req.body.jobID,
-                        'employerID'    : req.body.employerID,
-                        'appliedDate'   : new Date(req.body.appliedDate),
-                        'status'        : req.body.status,
-                        'applicationViewed' : 0
+                        'jobID'                 : req.body.jobID,
+                        'employerID'            : req.body.employerID,
+                        'appliedDate'           : new Date(),
+                        'status'                : req.body.status,
+                        'applicationViewed'     : false
                     }
                 ApplyJob.updateOne(
                     {"candidateID": req.body.candidateID},

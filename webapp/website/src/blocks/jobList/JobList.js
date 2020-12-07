@@ -58,20 +58,16 @@ search = (event)=>{
 	}
 }
 
-applyJob = (jobid)=>{
+applyJob = (jobid, company_id)=>{
 	console.log("jobid :", jobid);
-	/*if(!this.state.appliedItems.includes(jobid)){
-		this.state.appliedItems.push(jobid);
-	}*/
-
-	var formValues = {
+	
+	var formValues = { 
+						candidateID   		: this.props.candidateID,
 						jobID         		: jobid,
-					    employerID    		: localStorage.getItem("company_Id"),
-					    candidateID   		: this.props.candidateID,
-					    /*appliedDate   : "",*/
-					    status        	  	: "Applied",
-					    applicationViewed 	: 0
+					    employerID    		: company_id,
+					    status        	  	: "Applied"
 	}
+	console.log(formValues)
 	Swal.fire({
 		title 				: 'Are you sure? you want to apply for this job!!!',
 		text 				: 'You will be able to add this to applied joblist',
@@ -84,61 +80,28 @@ applyJob = (jobid)=>{
 	}).then((result) =>{
 		console.log("result", result.value)
 		if(result.value){
-			if(this.state.appliedItems.includes(jobid)){
-					Axios.post("/api/applyJob/post", formValues)
-					.then(response =>{
-						console.log("applied jobs response=", response.data);
-						for (var i = 0; i < this.state.appliedItems.length; i++){
-							if (this.state.appliedItems[i] === this.state.jobid) { 
-								this.state.appliedItems.splice(i, 1);
-								break;
-							}
-						}
-						if(response.data.message==="You have applied to job."){
+			Axios.post("/api/applyJob/post", formValues)
+				.then(response =>{
+					console.log("applied jobs response=", response.data);
+					
+					if(response.data.message==="You have applied to job."){
 
-							Swal.fire(
-										'Applied!',
-										'Applied job successfully!',
-										'success'
-								);
-						}
-					})
-					.catch(error=>{
 						Swal.fire(
-									"Some problem occured while applying job!",
-									error.message,
-									'error'
-							)
-					})
-				}else{
-					Axios.post("/api/applyJob/post")
-					.then(response =>{
-						console.log("apply job response=", response.data);
-						if(response.data.message==="Failed to apply job."){
-
-							Swal.fire(
-										'Added!',
-										'Job added into applied joblist successfully!',
-										'success'
-								);
-						}
-					})
-					.catch(error=>{
-						Swal.fire(
-									"Some problem occured while adding job into applied joblist!",
-									error.message,
-									'error'
-							)
-					})
-				}
+									'Applied!',
+									'Applied job successfully!',
+									'success'
+							);
+					}
+				})
+				.catch(error=>{
+					Swal.fire(
+								"Some problem occured while applying job!",
+								error.message,
+								'error'
+						)
+				})
 			
 				}else if (result.dismiss === Swal.DismissReason.cancel){
-					for (var i = 0; i < this.state.appliedItems.length; i++){
-						if (this.state.appliedItems[i] === this.state.jobid) { 
-							this.state.appliedItems.splice(i, 1);
-							break;
-						}
-					}
 					Swal.fire(
 						'Cancelled',
 						'Not added to applied joblist',
@@ -215,7 +178,7 @@ applyJob = (jobid)=>{
 														<div className="col-lg-offset-2 col-lg-8">
 															<div className="jobProfileVerticleIcons">
 																<ul>
-																	<li><i className="fa fa-check" onClick={this.applyJob}></i></li>
+																	<li><i className="fa fa-check" onClick={applyJob => this.applyJob(elem._id, elem.company_id)}></i></li>
 																	<li ><i title={tooltipMsg} onClick={wishlist => this.handleclick(elem._id)} className={"fa fa-heart" + wishClass }></i></li>
 																	<li><i className="fa fa-youtube-play"></i></li>
 																</ul>

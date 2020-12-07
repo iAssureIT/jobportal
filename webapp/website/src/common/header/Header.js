@@ -180,11 +180,7 @@ class Header extends Component{
               <span className="notificationMessegeText">Contact Us</span>
               
             </div>
-            
-            <div className="functionalbarsItem col-lg-12" data-toggle="modal" data-target="#loginModal">
-              <FontAwesomeIcon icon="sign-out-alt" />
-              <span className="notificationMessegeText">Sign In</span>
-            </div>
+          
 
           </div>
                 
