@@ -61,6 +61,7 @@ search = (event)=>{
 applyJob = (jobid, company_id)=>{
 	console.log("jobid :", jobid);
 	
+	if (this.props.loggedIn) {
 	var formValues = { 
 						candidateID   		: this.props.candidateID,
 						jobID         		: jobid,
@@ -109,6 +110,10 @@ applyJob = (jobid, company_id)=>{
 					)
 				}
 			})
+
+	}else{
+		document.getElementById("loginbtndiv").click();
+	}
 }
 	
 	render(){
@@ -203,9 +208,9 @@ applyJob = (jobid, company_id)=>{
 
 const mapStateToProps = (state)=>{
     return {
-    	user_ID 		: state.user_ID, 	candidateID 	: state.candidateID,
-        selector        : state.selector, 	jobList 		: state.jobList,
-        jobWishlist 	: state.jobWishlist
+    	loggedIn  		: state.loggedIn,		user_ID 		: state.user_ID, 	
+    	candidateID 	: state.candidateID,	selector        : state.selector, 	
+    	jobList 		: state.jobList,		jobWishlist 	: state.jobWishlist
     }
 }
 const mapDispachToProps = (dispatch) => ({

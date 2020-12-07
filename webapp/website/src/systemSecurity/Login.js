@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { connect }        from 'react-redux';
 import { BrowserRouter, Route, Switch,Link,location } from 'react-router-dom';
 import 'font-awesome/css/font-awesome.min.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -9,6 +8,7 @@ import axios from 'axios';
 import jQuery from 'jquery';
 import 'jquery-validation';
 import swal from 'sweetalert';
+import { connect }        from 'react-redux';
 import { bindActionCreators } from 'redux';
 import  * as mapActionCreator from '../common/actions/index';
 
@@ -135,11 +135,14 @@ class Login extends Component {
               localStorage.setItem("roles", response.data.roles);
               //localStorage.setItem("companyID", response.data.userDetails.companyID);
               localStorage.setItem('userDetails', JSON.stringify(userDetails));
-              
+              var {mapAction} = this.props;
+
+              mapAction.setUserDetails(userDetails);
+
               this.setState({
                 loggedIn: true
               }, () => {
-                window.location.href = '/';
+                //window.location.href = '/';
               })
               })
               .catch((error) => {
@@ -230,6 +233,7 @@ class Login extends Component {
   }
   
   render() {
+    console.log("userDetails",this.props.userDetails)
     return (
         <div className="loginFormOuter col-lg-12">
           <div className="img1Login">
@@ -322,7 +326,8 @@ class Login extends Component {
 
 const mapStateToProps = (state)=>{
     return {
-        selectedModal  : state.selectedModal
+        selectedModal  : state.selectedModal,
+        userDetails    : state.userDetails 
     }
 }
 const mapDispachToProps = (dispatch) => ({

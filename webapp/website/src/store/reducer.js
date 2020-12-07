@@ -1,8 +1,22 @@
 const initialState = {
 	rolewiseAccessToModule 		: false,
 	accessToFacility 			: false,
+	loggedIn  					: false,
 	user_ID 					: localStorage.getItem("user_ID"),
 	candidateID 				: localStorage.getItem("candidateID"),
+	userDetails : {
+		firstName : "", 
+		lastName  : "", 
+		email 		: "", 
+		phone 		: "", 
+		city 			: "",
+		companyID : "",
+		locationID: "",
+		user_id   : "",
+		roles 		: [],
+		token 		: "", 
+		candidateID : ""
+	},
 	selectedCountry				: "India",
 	selectedState 				: "",
 	selectedDistrict 			: "",
@@ -25,6 +39,9 @@ const newState = {...state};
 	}
 	if(action.type === "FETCH_ACCESS_FACILITY"){
 		newState.accessToFacility 	= action.accessToFacility;
+	}
+	if(action.type === "SET_USER_DETAILS"){
+		newState.userDetails 	= action.userDetails;
 	}
 	if(action.type === "SET_MAP_STATE"){
 		newState.selectedState 	= action.selectedState;

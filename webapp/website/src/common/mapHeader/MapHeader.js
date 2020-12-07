@@ -122,7 +122,7 @@ class MapHeader extends Component{
 							
 						</div>
 						
-						<div className="functionalbarsItem col-lg-12" data-toggle="modal" data-target="#loginModal">
+						<div className="functionalbarsItem col-lg-12" id="loginbtndiv" data-toggle="modal" data-target="#loginModal">
 							<FontAwesomeIcon icon="sign-out-alt" />
 							<span className="notificationMessegeText">Sign In</span>
 						</div>
