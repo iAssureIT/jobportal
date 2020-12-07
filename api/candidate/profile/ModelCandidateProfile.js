@@ -14,6 +14,7 @@ const candidateSchema = mongoose.Schema({
 		anniversaryDate	: Date,
 		languagesKnown	: Array,
 		nationality 	: String,
+		profilePicture  : String,
 	},
 	panCard			: String,
 	aadhaarCard		: String,

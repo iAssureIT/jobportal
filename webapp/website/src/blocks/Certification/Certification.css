@@ -27,16 +27,18 @@
 
 .certifiedWrapper{
 	height:250px;
-	border:5px ridge var(--main-border-color) ;
+	border:3px inset var(--main-border-color) ;
 	text-transform: uppercase;
 	text-align:center;
 	padding-bottom:20px;
+	margin-bottom:20px;
+	font-family:'Montserrat-Regular';
 }
 .certificateTitle{
 	padding-top:10px;
 	text-align:center;
-	font-size:25px;
-	font-family:DancingScript-Bold!important;;
+	font-size:23px;
+	font-family:Montserrat-Bold!important;;
 	color: var(--main-heading-font-color);
 }
 .certificateLogo{
@@ -51,13 +53,15 @@
 	font-size:11px;
 }
 .certificateNameText1,.certificateNameText2{
-	font-family:DancingScript-Bold!important;
+	font-family:'Montserrat-Bold';
 	font-size:14px;
 	color: var(--main-heading-font-color);
 	padding-top:2px;
 }
 .certificateNameText2{
-	font-size:12px;
+	font-size:10px;
+	font-family: Montserrat-Bold!important;
+	padding-bottom: 3px;
 }
 .certificateLogo2{
 	height:30px;

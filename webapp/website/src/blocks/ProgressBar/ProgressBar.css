@@ -81,3 +81,6 @@
     background-image: linear-gradient(135deg, rgba(20, 40, 60, 0.9) 25%, transparent 25%, transparent 50%, rgba(20, 40, 60, 0.9) 50%, rgba(20, 40, 60, 0.9) 75%, transparent 75%, transparent)!important;
     background-size: 1.3rem 1.3rem!important;
 }
+.step a{
+	color:#999!important;
+}

@@ -17,6 +17,7 @@ class Certification extends Component{
 			certificationArry    : [],
 			candidateID          : this.props.match.params.candidateID,
 			skillCertificationID : this.props.match.params.skillCertificationID,
+			certificationID      : this.props.match.params.certificationID,
 			certificationName    : "",
 			issuedBy             : "",
 			certifiedOn          : "",
@@ -103,24 +104,8 @@ class Certification extends Component{
 			Swal.fire("Error while getting List data",error.message,'error');
 		})
 
-		Axios.get("/api/skillmaster/get/list")
-		.then(response => {
-			this.setState({inputOtherSkills : response.data});
-			this.state.inputOtherSkills!=null && this.state.inputOtherSkills.length > 0 
-			?
-				this.state.inputOtherSkills.map((elem,index)=>{
-					
-					this.state.otherSkills.push(elem.skill);
-					
-				})
-			:
-				this.state.otherSkills.push("select");
-		})
-		.catch(error=>{
-			Swal.fire("Error while getting List data",error.message,'error');
-		})
 
-		if(this.props.match.params.skillCertificationID){
+		if(this.props.match.params.certificationID){
 			this.edit()
 
 			}
@@ -147,7 +132,7 @@ class Certification extends Component{
 		.then(response=>{
 			
 			 	this.setState({
-						certificationArry:response.data[0].skillCertification
+						certificationArry:response.data[0].certifications
 			 	})
 			 })
 			 .catch(error=>{
@@ -155,81 +140,133 @@ class Certification extends Component{
 			 })
 	}
 	edit(event){
-
-		var candidateID = this.state.candidateID;
-		var skillCertificationID   = this.state.skillCertificationID;
-		if (skillCertificationID) {
-			var idData ={
-				candidateID : this.state.candidateID,
-				skillCertificationID : this.state.skillCertificationID,
+		event.preventDefault();
+		if(this.state.certificationToggel==="toogleCertificate"){
+			var candidateID = this.state.candidateID;
+			var certificationID   = this.state.certificationID;
+			if (certificationID) {
+				var idData ={
+					candidateID : this.state.candidateID,
+					certificationID : this.state.certificationID,
+				}
+				Axios.post("/api/candidatemaster/post/getOneCandidateCertification",idData)
+				.then(response=>{
+					var editData =response.data;
+				 	this.setState({
+				 		certificationName          :editData[0].skillCertification[0].certName,
+				 		issuedBy                   :editData[0].skillCertification[0].issuedBy,
+				 		certifiedOn                :Moment(editData[0].skillCertification[0].certifiedOn).format("YYYY-MM-DD"),
+				 		validity                   :Moment(editData[0].skillCertification[0].validTill).format("YYYY-MM-DD"),
+				 		rating                     :editData[0].skillCertification[0].rating,
+				 		grade                      :editData[0].skillCertification[0].gradePercent,
+				 		buttonText                 :"Update"
+				 	})
+				 	
+				 })
+				 .catch(error=>{
+				 	Swal.fire("Submit Error!",error.message,'error');
+				 })
 			}
-			Axios.post("/api/candidatemaster/post/getOneCandidateSkill",idData)
-			.then(response=>{
-				var editData =response.data;
-			 	this.setState({
-			 		certificationName          :editData[0].skillCertification[0].certName,
-			 		selectedPrimarySkills      :editData[0].skillCertification[0].primarySkills,
-			 		selectedSecondarySkills    :editData[0].skillCertification[0].secondarySkills,
-			 		issuedBy                   :editData[0].skillCertification[0].issuedBy,
-			 		certifiedOn                :Moment(editData[0].skillCertification[0].certifiedOn).format("YYYY-MM-DD"),
-			 		validity                   :Moment(editData[0].skillCertification[0].validTill).format("YYYY-MM-DD"),
-			 		rating                     :editData[0].skillCertification[0].rating,
-			 		grade                      :editData[0].skillCertification[0].gradePercent,
-			 		buttonText                 :"Update"
-			 	})
-			 	
-			 })
-			 .catch(error=>{
-			 	Swal.fire("Submit Error!",error.message,'error');
-			 })
 		}
 	}
 	deleteDate(event){
 		event.preventDefault();
 		var data_id =  event.currentTarget.id;
+		console.log("data_id",data_id);
+		if(this.state.certificationToggel==="toggleSkills"){
 
-		Swal.fire({
-		title : 'Are you sure? you want to delete this Certification Details!!!',
-		text : 'You will not be able to recover this Certification Details',
-		icon : 'warning',
-		showCancelButton : true,
-		confirmButtonText : 'Yes, delete it!',
-		cancelButtonColor : 'No, keep it',
-		confirmButtonColor : '#d33',
-	
-	  }).then((result) =>{
-		if(result.value){
-			if(data_id){
-				Axios.delete("/api/candidatemaster/deleteSkill/"+this.state.candidateID+"/delete/"+data_id)
-				.then(response =>{
-						if(response.data.deleted===true){
-						Swal.fire(
-									'Deleted!',
-									'Certification Details has been deleted successfully!',
-									'success'
-							);
-					}
-			})
-				.catch(error=>{
-					
-					Swal.fire(
-								"Some problem occured deleting Certification Details!",
-								error.message,
-								'error'
-						)
+			var data_id =  event.currentTarget.id;
+
+			Swal.fire({
+			title : 'Are you sure? you want to delete this Certification Details!!!',
+			text : 'You will not be able to recover this Certification Details',
+			icon : 'warning',
+			showCancelButton : true,
+			confirmButtonText : 'Yes, delete it!',
+			cancelButtonColor : 'No, keep it',
+			confirmButtonColor : '#d33',
+		
+		  }).then((result) =>{
+			if(result.value){
+				if(data_id){
+					Axios.delete("/api/candidatemaster/deleteSkill/"+this.state.candidateID+"/delete/"+data_id)
+					.then(response =>{
+							if(response.data.deleted===true){
+							Swal.fire(
+										'Deleted!',
+										'Certification Details has been deleted successfully!',
+										'success'
+								);
+						}
 				})
-			}
-				
-				}else if (result.dismiss === Swal.DismissReason.cancel){
-					
-					Swal.fire(
-						'Cancelled',
-						'Your Certification details is safe :)',
-						'error'
-					)
+					.catch(error=>{
+						
+						Swal.fire(
+									"Some problem occured deleting Certification Details!",
+									error.message,
+									'error'
+							)
+					})
 				}
-			})
-	  this.getData();
+					
+					}else if (result.dismiss === Swal.DismissReason.cancel){
+						
+						Swal.fire(
+							'Cancelled',
+							'Your Certification details is safe :)',
+							'error'
+						)
+					}
+				})
+		  this.getData();
+		  
+		}else{
+			console.log("you click");
+			var data_id =  event.currentTarget.id;
+			Swal.fire({
+			title : 'Are you sure? you want to delete this Certification Details!!!',
+			text : 'You will not be able to recover this Certification Details',
+			icon : 'warning',
+			showCancelButton : true,
+			confirmButtonText : 'Yes, delete it!',
+			cancelButtonColor : 'No, keep it',
+			confirmButtonColor : '#d33',
+		
+		  }).then((result) =>{
+			if(result.value){
+				if(data_id){
+					Axios.delete("/api/candidatemaster/deleteCertification/"+this.state.candidateID+"/delete/"+data_id)
+					.then(response =>{
+							if(response.data.deleted===true){
+							Swal.fire(
+										'Deleted!',
+										'Certification Details has been deleted successfully!',
+										'success'
+								);
+						}
+				})
+					.catch(error=>{
+						
+						Swal.fire(
+									"Some problem occured deleting Certification Details!",
+									error.message,
+									'error'
+							)
+					})
+				}
+					
+					}else if (result.dismiss === Swal.DismissReason.cancel){
+						
+						Swal.fire(
+							'Cancelled',
+							'Your Certification details is safe :)',
+							'error'
+						)
+					}
+				})
+		  this.getData();
+		}
+		
 	}
 
 	handleBack(event){
@@ -269,21 +306,39 @@ class Certification extends Component{
 	}
 	handleSave(event){
 		var status =  this.validateForm();
-			 this.changeBlock(event);
-				var formValues = {
-					                candidateID   : this.state.candidateID,
+		this.changeBlock(event);
+		if(this.state.certificationToggel==="toggleSkills"){
+			var formValues = {
+					                candidateID            : this.state.candidateID,
 					                skillCertificationID   : this.state.skillCertificationID,
-						
-									certName            : this.state.certificationName,
-									issuedBy            : this.state.issuedBy,
-									certifiedOn         : this.state.certifiedOn,
-									validTill           : this.state.validity,
-									gradePercent        : this.state.grade,
-									rating              : this.state.rating,
-									primarySkills       : this.state.selectedPrimarySkills,
-									secondarySkills     : this.state.selectedSecondarySkills
+					                skills:{
+					                	primarySkills          : this.state.selectedPrimarySkills,
+										secondarySkills        : this.state.selectedSecondarySkills,
+										rating                 : this.state.rating,
+					                }
+					                
+							}
+		}else{
+			var formValues = {
+					                candidateID         : this.state.candidateID,
+					                certificationID     : this.state.certificationID,
+					                certifications:{
+					                	certName            : this.state.certificationName,
+										issuedBy            : this.state.issuedBy,
+										certifiedOn         : this.state.certifiedOn,
+										validTill           : this.state.validity,
+										gradePercent        : this.state.grade,
+					                }
+									
+									
+									
 							}	
-		if(this.props.match.params.skillCertificationID){
+		}
+			 
+				
+		if(this.props.match.params.skillCertificationID 
+			|| this.props.match.params.certificationID )
+		{
 			this.updateData(formValues,event);
 		}else{
 			this.insetData(formValues,event);
@@ -292,8 +347,25 @@ class Certification extends Component{
 	}
 	updateData(formValues,event){
 		var status =  this.validateForm();
-		
+		if(this.state.certificationToggel==="toggleSkills"){
 			Axios.patch("/api/candidatemaster/patch/updateOneCandidateSkill",formValues)
+				 .then(response=>{
+
+									Swal.fire("Congrats","Your Certification Details is update Successfully","success");
+										this.setState({
+													selectedPrimarySkills      :[],
+													selectedSecondarySkills    :[],
+													buttonText                 : "Save",
+													rating                     : "",
+												})
+							this.props.history.push("/certification/"+this.state.candidateID);
+					})
+					.catch(error =>{
+						Swal.fire("Submit Error!",error.message,'error');
+					});
+				}
+				else{
+					Axios.patch("/api/candidatemaster/patch/updateOneCandidateCertification",formValues)
 				 .then(response=>{
 
 									Swal.fire("Congrats","Your Certification Details is update Successfully","success");
@@ -303,9 +375,7 @@ class Certification extends Component{
 													certifiedOn        : "",
 													validity           : "",
 													grade   		   : "",
-													rating             : "",
-													selectedPrimarySkills      :[],
-													selectedSecondarySkills    :[],
+												
 													buttonText         : "Save"
 												})
 							this.props.history.push("/certification/"+this.state.candidateID);
@@ -313,12 +383,30 @@ class Certification extends Component{
 					.catch(error =>{
 						Swal.fire("Submit Error!",error.message,'error');
 					});
+				}
 				
 
 			
 		}
 	insetData(formValues,event){
+		if(this.state.certificationToggel==="toggleSkills"){
 			Axios.patch("/api/candidatemaster/patch/addCandidateSkill",formValues)
+			 .then(response=>{
+
+					Swal.fire("Congrats","Your Certification Details is insert Successfully","success");
+						this.setState({
+										selectedPrimarySkills      : [],
+										selectedSecondarySkills    : [],
+										rating                     : "",
+										buttonText                 : "Save"
+									})
+	
+				})
+				.catch(error =>{
+					Swal.fire("Submit Error!",error.message,'error');
+				});
+			}else{
+				Axios.patch("/api/candidatemaster/patch/addCandidateCertification",formValues)
 			 .then(response=>{
 
 					Swal.fire("Congrats","Your Certification Details is insert Successfully","success");
@@ -328,16 +416,14 @@ class Certification extends Component{
 										certifiedOn        : "",
 										validity           : "",
 										grade   		   : "",
-										rating             : "",
-										selectedPrimarySkills      :[],
-										selectedSecondarySkills    :[],
 										buttonText         : "Save"
 									})
-	
+				console.log("formWrapper",formValues);
 				})
 				.catch(error =>{
 					Swal.fire("Submit Error!",error.message,'error');
 				});
+			}
 	}
 	handleSubmit(event){
 		event.preventDefault();
@@ -456,11 +542,11 @@ class Certification extends Component{
 									<div className="col-lg-4">
 										<label htmlFor="rating" className="nameTitleForm">How do you rate yourself  <sup className="nameTitleFormStar">*</sup></label>
 										<div className="input-group ">
-											<span className={this.state.rating=== "star1"||this.state.rating=== "star2"||this.state.rating=== "star3"||this.state.rating=== "star4"||this.state.rating=== "star5"? "fa fa-star rating stars":"fa fa-star-o rating"} id="star1" name="rating" value="start1" onClick={this.starClick.bind(this)}></span>
-											<span className={this.state.rating === "star2"||this.state.rating=== "star3"||this.state.rating=== "star4"||this.state.rating=== "star5"? "fa fa-star rating stars":"fa fa-star-o rating"} id="star2" name="rating" value="star2" onClick={this.starClick.bind(this)}></span>
-											<span className={this.state.rating === "star3"||this.state.rating=== "star4"||this.state.rating=== "star5"? "fa fa-star rating stars":"fa fa-star-o rating"} id="star3" name="rating" value="star3" onClick={this.starClick.bind(this)}></span>
-											<span className={this.state.rating === "star4" ||this.state.rating=== "star5"? "fa fa-star rating stars":"fa fa-star-o rating"} id="star4" name="rating" value="star4" onClick={this.starClick.bind(this)}></span>
-											<span className={this.state.rating === "star5" ? "fa fa-star rating stars":"fa fa-star-o rating"} id="star5" name="rating" value="star5" onClick={this.starClick.bind(this)}></span>
+											<span className={this.state.rating=== "star1B"||this.state.rating=== "star2B"||this.state.rating=== "star3B"||this.state.rating=== "star4B"||this.state.rating=== "star5B"? "fa fa-star rating stars":"fa fa-star-o rating"} id="star1B" name="rating" value="star1B" onClick={this.starClick.bind(this)}></span>
+											<span className={this.state.rating === "star2B"||this.state.rating=== "star3B"||this.state.rating=== "star4B"||this.state.rating=== "star5B"? "fa fa-star rating stars":"fa fa-star-o rating"} id="star2B" name="rating" value="star2B" onClick={this.starClick.bind(this)}></span>
+											<span className={this.state.rating === "star3B"||this.state.rating=== "star4B"||this.state.rating=== "star5B"? "fa fa-star rating stars":"fa fa-star-o rating"} id="star3B" name="rating" value="star3B" onClick={this.starClick.bind(this)}></span>
+											<span className={this.state.rating === "star4B" ||this.state.rating=== "star5B"? "fa fa-star rating stars":"fa fa-star-o rating"} id="star4B" name="rating" value="star4B" onClick={this.starClick.bind(this)}></span>
+											<span className={this.state.rating === "star5B" ? "fa fa-star rating stars":"fa fa-star-o rating"} id="star5B" name="rating" value="star5B" onClick={this.starClick.bind(this)}></span>
 										</div> 
 										<span id="ratingError" className="errorMsg"></span>
 									</div>
@@ -487,11 +573,11 @@ class Certification extends Component{
 									<div className="col-lg-4">
 										<label htmlFor="rating" className="nameTitleForm">How do you rate yourself  <sup className="nameTitleFormStar">*</sup></label>
 										<div className="input-group ">
-											<span className={this.state.rating=== "star1"||this.state.rating=== "star2"||this.state.rating=== "star3"||this.state.rating=== "star4"||this.state.rating=== "star5"? "fa fa-star rating stars":"fa fa-star-o rating"} id="star1" name="rating" value="start1" onClick={this.starClick.bind(this)}></span>
-											<span className={this.state.rating === "star2"||this.state.rating=== "star3"||this.state.rating=== "star4"||this.state.rating=== "star5"? "fa fa-star rating stars":"fa fa-star-o rating"} id="star2" name="rating" value="star2" onClick={this.starClick.bind(this)}></span>
-											<span className={this.state.rating === "star3"||this.state.rating=== "star4"||this.state.rating=== "star5"? "fa fa-star rating stars":"fa fa-star-o rating"} id="star3" name="rating" value="star3" onClick={this.starClick.bind(this)}></span>
-											<span className={this.state.rating === "star4" ||this.state.rating=== "star5"? "fa fa-star rating stars":"fa fa-star-o rating"} id="star4" name="rating" value="star4" onClick={this.starClick.bind(this)}></span>
-											<span className={this.state.rating === "star5" ? "fa fa-star rating stars":"fa fa-star-o rating"} id="star5" name="rating" value="star5" onClick={this.starClick.bind(this)}></span>
+											<span className={this.state.rating=== "star1A"||this.state.rating=== "star2A"||this.state.rating=== "star3A"||this.state.rating=== "star4A"||this.state.rating=== "star5A"? "fa fa-star rating stars":"fa fa-star-o rating"} id="star1A" name="rating" value="star1A" onClick={this.starClick.bind(this)}></span>
+											<span className={this.state.rating === "star2A"||this.state.rating=== "star3A"||this.state.rating=== "star4A"||this.state.rating=== "star5A"? "fa fa-star rating stars":"fa fa-star-o rating"} id="star2A" name="rating" value="star2A" onClick={this.starClick.bind(this)}></span>
+											<span className={this.state.rating === "star3A"||this.state.rating=== "star4A"||this.state.rating=== "star5A"? "fa fa-star rating stars":"fa fa-star-o rating"} id="star3A" name="rating" value="star3A" onClick={this.starClick.bind(this)}></span>
+											<span className={this.state.rating === "star4A" ||this.state.rating=== "star5A"? "fa fa-star rating stars":"fa fa-star-o rating"} id="star4A" name="rating" value="star4A" onClick={this.starClick.bind(this)}></span>
+											<span className={this.state.rating === "star5A" ? "fa fa-star rating stars":"fa fa-star-o rating"} id="star5A" name="rating" value="star5A" onClick={this.starClick.bind(this)}></span>
 										</div> 
 										<span id="ratingError" className="errorMsg"></span>
 									</div>
@@ -558,83 +644,90 @@ class Certification extends Component{
 							<button className="buttonBack pull-right" onClick={this.handleSave.bind(this)}> {this.state.buttonText}</button>
 						</div>
 						
-						<div className=" AddressWrapper col-lg-12" >
-							 <div className="row">
-								{
-								this.state.certificationArry.length > 0
-								?
-								this.state.certificationArry.map((elem,index)=>{
-									return(
-									
-										<div className="col-lg-6 " key={index}>
-											<div className="col-lg-12 certifiedWrapper">
-												<div className="col-lg-12 certificateTitleWrapperd">
-													<div className="row">
-														<div className="certificateTitle">
-															Certificate
-														</div>
-													</div>
-												</div>
-												<div className="certificateLogoWrppaer">
-													<img className="certificateLogo" src="/images/56.png" alt="certificateLogo"/>
-												</div>
-												<div className="certificateText">
-													This certificate is proudly presented to
-												</div>
-												<div className="certificateNameText1">
-													Digvijay Mohite
-												</div>
-												<div className="certificateText">
-													for
-												</div>
-												<div className="certificateNameText1">
-													{elem.certName}
-												</div>
-												<div className="col-ld-12 certificateFooter">
-													<div className="row">
-														<div className="col-lg-4 col-lg-offset-1 IssueDate">
-															<div className="certificateNameText2">{elem.certifiedOn} </div>
-															<div className="certificateText2">date</div>
-														</div>
-														<div className="col-lg-2">
-															<img className="certificateLogo2" src="/images/57.png" alt="certificateLogo"/>
-														</div>
-														<div className="col-lg-4 IssueDate">
-															<div className="certificateNameText2">{elem.issuedBy}</div>
-															<div className="certificateText2">Issued By</div>
-														</div>
-													</div>
-												</div>
-												<div className="AddressBoxRightIcon hoverEdit pull-right">
-													<div className="row">
-														<FontAwesomeIcon icon="ellipsis-h" />
-														<div className="rightIconHideWrapper" >
-														
-															<div className="rightIconHide"   >
-																<a id={elem._id} href={"/address/"+this.state.candidateID+"/edit/"+elem._id}>
-																	<FontAwesomeIcon icon="pencil-alt" /> 
-																	<span className="rightIconHideText" >Edit</span>
-																</a>
+						{
+							this.state.certificationToggel==="toogleCertificate"
+							?
+							<div className=" AddressWrapper col-lg-12" >
+								 <div className="row">
+									{
+									this.state.certificationArry.length > 0
+									?
+									this.state.certificationArry.map((elem,index)=>{
+										return(
+										
+											<div className="col-lg-6 " key={index}>
+												<div className="col-lg-12 certifiedWrapper">
+													<div className="col-lg-12 certificateTitleWrapperd">
+														<div className="row">
+															<div className="certificateTitle">
+																Certificate
 															</div>
+														</div>
+													</div>
+													<div className="certificateLogoWrppaer">
+														<img className="certificateLogo" src="/images/56.png" alt="certificateLogo"/>
+													</div>
+													<div className="certificateText">
+														This certificate is proudly presented to
+													</div>
+													<div className="certificateNameText1">
+														Digvijay Mohite
+													</div>
+													<div className="certificateText">
+														for
+													</div>
+													<div className="certificateNameText1">
+														{elem.certName}
+													</div>
+													<div className="col-ld-12 certificateFooter">
+														<div className="row">
+															<div className="col-lg-4 col-lg-offset-1 IssueDate">
+																<div className="certificateNameText2">{Moment(elem.certifiedOn).format("YYYY-MM-DD")} </div>
+																<div className="certificateText2">date</div>
+															</div>
+															<div className="col-lg-2">
+																<img className="certificateLogo2" src="/images/57.png" alt="certificateLogo"/>
+															</div>
+															<div className="col-lg-4 IssueDate">
+																<div className="certificateNameText2">{elem.issuedBy}</div>
+																<div className="certificateText2">Issued By</div>
+															</div>
+														</div>
+													</div>
+													<div className="AddressBoxRightIcon hoverEdit pull-right">
+														<div className="row">
+															<FontAwesomeIcon icon="ellipsis-h" />
+															<div className="rightIconHideWrapper" >
 															
-															<div className="rightIconHide">
-																<FontAwesomeIcon icon="trash-alt" /> 
-																<span className="rightIconHideText" i onClick={this.deleteDate.bind(this)}>Delete</span>
+																<div className="rightIconHide"   >
+																	<a id={elem._id} href={"/certification/"+this.state.candidateID+"/edit/"+elem._id}>
+																		<FontAwesomeIcon icon="pencil-alt" /> 
+																		<span className="rightIconHideText" >Edit</span>
+																	</a>
+																</div>
+																
+																<div className="rightIconHide">
+																	<FontAwesomeIcon icon="trash-alt" /> 
+																	<span className="rightIconHideText" i onClick={this.deleteDate.bind(this)}>Delete</span>
+																</div>
 															</div>
 														</div>
 													</div>
 												</div>
 											</div>
-										</div>
-										
-									);
-									})
-									:
-										null
-									}
-								</div>
+											
+										);
+										})
+										:
+											null
+										}
+									</div>
 							</div>
-							
+							:
+							<div className="AddressWrapper col-lg-12">
+								
+							</div>
+						}
 						<button className="buttonBack pull-left" onClick={this.handleBack.bind(this)}>
 						 	<FontAwesomeIcon className="backArrow" icon="arrow-left" /> 
 							Back

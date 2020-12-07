@@ -7,11 +7,12 @@ import Address     	    from '../../blocks/Address/Address.js';
 class CandidateAddress extends Component{
 
 	render(){
+	
 		return(
 				<div className="mainPagesWrapper col-lg-12">
 					<div className="row">
 						
-						<ProgressBar width="20" left="17.5" img="37" location={window.location.href} />
+						<ProgressBar width="20" left="17.5" img="37" location={window.location.pathname} />
 						
 					
 					</div>

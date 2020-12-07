@@ -7,10 +7,11 @@ import Academics      	 from '../../blocks/Academics/Academics.js';
 class CandidateAcademics extends Component{
 	
 	render(){
+		
 		return(
 				<div className="mainPagesWrapper col-lg-12">
 					<div className="row">
-						<ProgressBar width="60" left="57.5" img="37" location={window.location.href}/>
+						<ProgressBar width="60" left="57.5" img="37" location={window.location.pathname}/>
 					</div>
 					<div className="basicInfoWrapper row">
 						<div className=" col-lg-8 col-lg-offset-2 BasicInfoBlock">

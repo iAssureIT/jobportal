@@ -19,6 +19,7 @@ exports.insertCandidateBasicInfo = (req, res, next)=>{
 			"anniversaryDate"	: null,
 			"languagesKnown" 	: [],
 			"nationality" 	 	: null,
+            "profilePicture"    : null,
 		},
 		"panCard" 		 		: null,
 		"aadhaarCard" 	 		: null,
@@ -101,7 +102,7 @@ exports.getSingleCandidate = (req,res,next)=>{
     });
 };
 exports.updateCandidateBasicInfo = (req, res, next)=>{
-	
+	console.log(req.body);
         CandidateProfile.updateOne(
             { "_id":req.body.candidateID},  
             {
@@ -118,6 +119,7 @@ exports.updateCandidateBasicInfo = (req, res, next)=>{
                         "basicInfo.nationality"    : req.body.nationality,
                         "panCard"                  : req.body.panCard,
                         "aadhaarCard"              : req.body.aadhaarCard,
+                        "profilePicture"           : req.body.profilePicture,
                         }
             }
         )

@@ -39,7 +39,7 @@ class BasicInfoForm extends Component{
 			inputLanguages	   : [],
 
 			imageUploaded      : true,
-			profilePicture     : [],
+			profilePicture     : "",
 
 			"imageUploaded"    : true,
 
@@ -86,7 +86,7 @@ class BasicInfoForm extends Component{
 
 		Axios.get("/api/candidatemaster/get/one/"+this.state.candidateID)
 		.then(response=>{
-			 
+			 console.log("response.data",response.data);
 			 	this.setState({
 			 		firstName         : response.data[0].basicInfo.firstName?response.data[0].basicInfo.firstName:"",
 					middleName        : response.data[0].basicInfo.middleName?response.data[0].basicInfo.middleName:"",
@@ -98,6 +98,7 @@ class BasicInfoForm extends Component{
 					nationality       : response.data[0].basicInfo.nationality?response.data[0].basicInfo.nationality:"",
 					panCardNo         : response.data[0].panCard?response.data[0].panCard:"",
 					adhaarCardNo      : response.data[0].aadhaarCard?response.data[0].aadhaarCard:"",
+					profilePicture      : response.data[0].profilePicture?response.data[0].profilePicture:"",
 		
 					age               : response.data[0].basicInfo.age?response.data[0].basicInfo.age:"",
 					
@@ -179,13 +180,10 @@ class BasicInfoForm extends Component{
           gotProfileImage:true
         })
         main().then(formValues => {
-          var profilePicture = this.state.profilePicture;
-          
-            profilePicture.push(formValues.profilePicture);
-          
-
+         
+   	console.log(formValues)
           this.setState({
-            profilePicture   : profilePicture,
+            profilePicture   : formValues[0].profilePicture,
             imageUploaded : false
           })
         });
@@ -200,6 +198,7 @@ class BasicInfoForm extends Component{
               "status": "New"
             };
             formValues.push(formValue);
+
           
           return Promise.resolve(formValues);
         }
@@ -209,6 +208,7 @@ class BasicInfoForm extends Component{
             S3FileUpload
               .uploadFile(image, configuration)
               .then((Data) => {
+
                 resolve(Data.location);
               })
               .catch((error) => {
@@ -268,7 +268,7 @@ class BasicInfoForm extends Component{
 			this.setState({
 				ageYears : Years,
 				ageMonths: Months,
-				ageWeeks: weeks,
+				ageWeeks : weeks,
 			})
 	}
 
@@ -299,6 +299,7 @@ class BasicInfoForm extends Component{
 								aadhaarCard        : this.state.adhaarCardNo,
 								languagesKnown	   : this.state.selectedValue,
 								age	   			   : this.state.age,
+								profilePicture	   : this.state.profilePicture,
 								
 							}
 			if(status==true){
