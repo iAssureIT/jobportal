@@ -31,7 +31,7 @@ class India extends Component{
 			});
 	}
 	search(nameKey){
-		console.log(this.props.mapJobs)
+		//console.log(this.props.mapJobs)
 	    for (var i=0; i < this.props.mapJobs.length; i++) {
 	        if (this.props.mapJobs[i]._id === nameKey) {
 	            return this.props.mapJobs[i].count;

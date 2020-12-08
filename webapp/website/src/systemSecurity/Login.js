@@ -114,7 +114,8 @@ class Login extends Component {
             console.log("response login",response);
             if (response.data.ID) {
               this.setState({ btnLoading: false });
-              var userDetails = {
+              var userDetails = { 
+                loggedIn    : true,
                 firstName: response.data.userDetails.firstName,
                 lastName: response.data.userDetails.lastName,
                 email: response.data.userDetails.email,
@@ -134,6 +135,9 @@ class Login extends Component {
               // localStorage.setItem("roles", response.data.roles);
               //localStorage.setItem("companyID", response.data.userDetails.companyID);
               localStorage.setItem('userDetails', JSON.stringify(userDetails));
+               //window.location.href = '/';
+                // document.getElementById("modalclosebtn").click();
+                //document.getElementById("navclosebtn").click();
               
               var {mapAction} = this.props;
               mapAction.setUserDetails(userDetails);
@@ -141,9 +145,7 @@ class Login extends Component {
               this.setState({
                 loggedIn: true
               }, () => {
-                //window.location.href = '/';
-                // document.getElementById("modalclosebtn").click();
-                //document.getElementById("navclosebtn").click();
+               
               })
               })
               .catch((error) => {

@@ -101,10 +101,8 @@ class Layout extends Component  {
             })
         
 
-        var company_Id = localStorage.getItem("company_Id");
-        var contractID ="";
-        const token = localStorage.getItem("token");
-            if (token !== null && token !=="undefined") {
+        const userDetails = localStorage.getItem("userDetails");
+            if (userDetails !== null && userDetails !=="undefined") {
               this.setState({
                   loggedIn: true
               })
@@ -121,11 +119,9 @@ class Layout extends Component  {
     }
 
     render() { 
-        const roles = localStorage.getItem("roles");
-        var roleArr = [];
-        roleArr.push(roles);        
-       
-        if (this.state.loggedIn) {    
+        console.log(this.props.userDetails)
+        
+        if (this.props.userDetails.loggedIn) {    
             return (
             <Router>
                 <div className="hold-transition skin-blue fixed sidebar-mini">
@@ -278,7 +274,8 @@ class Layout extends Component  {
 }
 const mapStateToProps = (state)=>{
     return {
-        selectedState  : state.selectedState
+        selectedState   : state.selectedState,
+        userDetails     : state.userDetails
     }
 }
 const mapDispatchToProps = (dispatch) => ({
