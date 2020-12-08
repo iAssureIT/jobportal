@@ -22,6 +22,8 @@ class SignUp extends Component {
 		this.state = {
 			checkUserExists: 0,
 			loggedIn: false,
+      showPassword1: false,
+      showPassword2: false,
 			employerID : "",
 			formerrors: {
 				firstNameV: "",
@@ -59,6 +61,30 @@ class SignUp extends Component {
 		.catch((error) => {
 		})
 	}
+
+  showPassword1=(event)=>{
+    event.preventDefault();
+    var passwordToggle1 = document.getElementById("password");
+    if (passwordToggle1.type === "password") {
+        passwordToggle1.type = "text";
+        this.setState({showPassword1:true});
+      } else {
+        passwordToggle1.type = "password";
+        this.setState({showPassword1:false});
+      }
+  }
+
+  showPassword2=(event)=>{
+    event.preventDefault();
+    var passwordToggle2 = document.getElementById("confirmPassword");
+    if (passwordToggle2.type === "password") {
+        passwordToggle2.type = "text";
+        this.setState({showPassword2:true});
+      } else {
+        passwordToggle2.type = "password";
+        this.setState({showPassword2:false});
+      }
+  }
 	validateForm=()=>{
     var status = true;
     var tempEmail = this.state.emailAddress.trim(); // value of field with whitespace trimmed off
@@ -376,6 +402,9 @@ class SignUp extends Component {
                         <div className="input-group">
                             <span className="input-group-addon registrationInputIcon"><i className="fa fa-lock"></i></span>
                             <input type="password" id="password" name="password" placeholder="Password" value={this.state.password} onChange={this.handleChange.bind(this)} className="form-control registrationInputBox"/>
+                            <span className="input-group-addon loginInputIcon3" onClick={this.showPassword1.bind(this)}>
+                              <i className={this.state.showPassword1 ? "fa fa-eye-slash" : "fa fa-eye"} 
+                                  value={this.state.showPassword1}></i></span>
                         </div>
                          <span id="passwordError" className="errorMsg"></span>
                     </div>
@@ -384,6 +413,9 @@ class SignUp extends Component {
                         <div className="input-group">
                             <span className="input-group-addon registrationInputIcon"><i className="fa fa-lock"></i></span>
                             <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" value={this.state.confirmPassword} onChange={this.handleChange.bind(this)} className="form-control registrationInputBox"/>
+                            <span className="input-group-addon loginInputIcon3" onClick={this.showPassword2.bind(this)}>
+                               <i className={this.state.showPassword2 ? "fa fa-eye-slash" : "fa fa-eye"} 
+                                value={this.state.showPassword2}></i></span>
                         </div>
                          <span id="confirmPasswordError" className="errorMsg"></span>
                     </div>

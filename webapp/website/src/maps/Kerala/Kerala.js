@@ -10,75 +10,75 @@ export default class Kerala extends Component{
 		return(
 			<div className="bodyWrapper">
 				<div className="stateWrapper">
-					<div className="kasaragod"> 
+					<div className="kasaragod classHover"> 
 						<img src="/Maps/Kerala/Kasaragod.png" className="" alt="Kasaragod" onMouseOver={e => (e.currentTarget.src = "/Maps/Kerala/Kasaragod_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Kerala/Kasaragod.png")}/>
-						<span className="kasaragodText text-capitalize">kasaragod</span>
-						<span className="kasaragodNumber  text-center">{this.search('kasaragod')}</span>
+						<span className="kasaragodText mapTextLabel text-capitalize">kasaragod</span>
+						<span className="kasaragodNumber mapCountLabel text-center">{this.search('kasaragod')}</span>
 					</div>
-					<div className="kannur"> 
+					<div className="kannur classHover"> 
 						<img src="/Maps/Kerala/Kannur.png" className="" alt="Kannur"  onMouseOver={e => (e.currentTarget.src = "/Maps/Kerala/Kannur_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Kerala/Kannur.png")}/>
-						<span className="kannurText text-capitalize">kannur</span>
+						<span className="kannurText  mapTextLabel text-capitalize">kannur</span>
 						<span className="kannurNumber  text-center">{this.search('kannur')}</span>
 					</div>
-					<div className="wayand"> 
+					<div className="wayand classHover"> 
 						<img src="/Maps/Kerala/Wayand.png" className="" alt="Wayand"  onMouseOver={e => (e.currentTarget.src = "/Maps/Kerala/Wayand_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Kerala/Wayand.png")}/>
-						<span className="wayandText text-capitalize">wayand</span>
-						<span className="wayandNumber  text-center">{this.search('wayand')}</span>
+						<span className="wayandText  mapTextLabel text-capitalize">wayand</span>
+						<span className="wayandNumber  mapCountLabel  text-center">{this.search('wayand')}</span>
 					</div>
-					<div className="kozhikode"> 
+					<div className="kozhikode classHover"> 
 						<img src="/Maps/Kerala/Kozhikode.png" className="" alt="Kozhikode"  onMouseOver={e => (e.currentTarget.src = "/Maps/Kerala/Kozhikode_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Kerala/Kozhikode.png")}/>
-						<span className="kozhikodeText text-capitalize">kozhikode</span>
-						<span className="kozhikodeNumber  text-center">{this.search('kozhikode')}</span>
+						<span className="kozhikodeText mapTextLabel text-capitalize">kozhikode</span>
+						<span className="kozhikodeNumber  mapCountLabel  text-center">{this.search('kozhikode')}</span>
 					</div>
-					<div className="malappuram"> 
+					<div className="malappuram classHover"> 
 						<img src="/Maps/Kerala/Malappuram.png" className="" alt="Malappuram"  onMouseOver={e => (e.currentTarget.src = "/Maps/Kerala/Malappuram_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Kerala/Malappuram.png")}/>
-						<span className="malappuramText text-capitalize">malappuram</span>
-						<span className="malappuramNumber  text-center">{this.search('malappuram')}</span>
+						<span className="malappuramText  mapTextLabel text-capitalize">malappuram</span>
+						<span className="malappuramNumber  mapCountLabel  text-center">{this.search('malappuram')}</span>
 					</div>
-					<div className="palakkad"> 
+					<div className="palakkad classHover"> 
 						<img src="/Maps/Kerala/Palakkad.png" className="" alt="Palakkad"  onMouseOver={e => (e.currentTarget.src = "/Maps/Kerala/Palakkad_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Kerala/Palakkad.png")}/>
-						<span className="palakkadText text-capitalize">palakkad</span>
-						<span className="palakkadNumber  text-center">{this.search('palakkad')}</span>
+						<span className="palakkadText  mapTextLabel text-capitalize">palakkad</span>
+						<span className="palakkadNumber  mapCountLabel  text-center">{this.search('palakkad')}</span>
 					</div>
-					<div className="thrissur"> 
+					<div className="thrissur classHover"> 
 						<img src="/Maps/Kerala/Thrissur.png" className="" alt="Thrissur"  onMouseOver={e => (e.currentTarget.src = "/Maps/Kerala/Thrissur_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Kerala/Thrissur.png")}/>
-						<span className="thrissurText text-capitalize">thrissur</span>
-						<span className="thrissurNumber  text-center">{this.search('thrissur')}</span>
+						<span className="thrissurText  mapTextLabel text-capitalize">thrissur</span>
+						<span className="thrissurNumber  mapCountLabel  text-center">{this.search('thrissur')}</span>
 					</div>
-					<div className="ernakulam"> 
+					<div className="ernakulam classHover"> 
 						<img src="/Maps/Kerala/Ernakulam.png" className="" alt="Ernakulam"  onMouseOver={e => (e.currentTarget.src = "/Maps/Kerala/Ernakulam_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Kerala/Ernakulam.png")}/>
-						<span className="ernakulamText text-capitalize">ernakulam</span>
-						<span className="ernakulamNumber  text-center">{this.search('ernakulam')}</span>
+						<span className="ernakulamText  mapTextLabel text-capitalize">ernakulam</span>
+						<span className="ernakulamNumber  mapCountLabel  text-center">{this.search('ernakulam')}</span>
 					</div>
-					<div className="idukki"> 
+					<div className="idukki classHover"> 
 						<img src="/Maps/Kerala/Idukki.png" className="" alt="Idukki"  onMouseOver={e => (e.currentTarget.src = "/Maps/Kerala/Idukki_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Kerala/Idukki.png")}/>
-						<span className="idukkiText text-capitalize">idukki</span>
-						<span className="idukkiNumber  text-center">{this.search('idukki')}</span>
+						<span className="idukkiText mapTextLabel  text-capitalize">idukki</span>
+						<span className="idukkiNumber  mapCountLabel  text-center">{this.search('idukki')}</span>
 					</div>
-					<div className="kottayam"> 
+					<div className="kottayam classHover"> 
 						<img src="/Maps/Kerala/Kottayam.png" className="" alt="Kottayam"  onMouseOver={e => (e.currentTarget.src = "/Maps/Kerala/Kottayam_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Kerala/Kottayam.png")}/>
-						<span className="kottayamText text-capitalize">kottayam</span>
-						<span className="kottayamNumber  text-center">{this.search('kottayam')}</span>
+						<span className="kottayamText mapTextLabel  text-capitalize">kottayam</span>
+						<span className="kottayamNumber  mapCountLabel  text-center">{this.search('kottayam')}</span>
 					</div>
-					<div className="alappuzha"> 
+					<div className="alappuzha classHover"> 
 						<img src="/Maps/Kerala/Alappuzha.png" className="" alt="Alappuzha"  onMouseOver={e => (e.currentTarget.src = "/Maps/Kerala/Alappuzha_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Kerala/Alappuzha.png")}/>
-						<span className="alappuzhaText text-capitalize">alappuzha</span>
-						<span className="alappuzhaNumber  text-center">{this.search('alappuzha')}</span>
+						<span className="alappuzhaText  mapTextLabel text-capitalize">alappuzha</span>
+						<span className="alappuzhaNumber  mapCountLabel  text-center">{this.search('alappuzha')}</span>
 					</div>
-					<div className="kollam"> 
+					<div className="kollam classHover"> 
 						<img src="/Maps/Kerala/Kollam.png" className="" alt="Kollam"  onMouseOver={e => (e.currentTarget.src = "/Maps/Kerala/Kollam_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Kerala/Kollam.png")}/>
-						<span className="kollamText text-capitalize">kollam</span>
-						<span className="kollamNumber  text-center">{this.search('kollam')}</span>
+						<span className="kollamText  mapTextLabel text-capitalize">kollam</span>
+						<span className="kollamNumber  mapCountLabel  text-center">{this.search('kollam')}</span>
 					</div>
-					<div className="thiruvanthapuram"> 
+					<div className="thiruvanthapuram classHover"> 
 						<img src="/Maps/Kerala/Thiruvanthapuram.png" className="" alt="Thiruvanthapuram"  onMouseOver={e => (e.currentTarget.src = "/Maps/Kerala/Thiruvanthapuram_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Kerala/Thiruvanthapuram.png")}/>
-						<span className="thiruvanthapuramText text-capitalize">thiruvanthapuram</span>
-						<span className="thiruvanthapuramNumber  text-center">{this.search('thiruvanthapuram')}</span>
+						<span className="thiruvanthapuramText  mapTextLabel text-capitalize">thiruvanthapuram</span>
+						<span className="thiruvanthapuramNumber  mapCountLabel  text-center">{this.search('thiruvanthapuram')}</span>
 					</div>
-					<div className="pathanamthitta"> 
+					<div className="pathanamthitta classHover"> 
 						<img src="/Maps/Kerala/Pathanamthitta.png" className="" alt="Pathanamthitta"  onMouseOver={e => (e.currentTarget.src = "/Maps/Kerala/Pathanamthitta_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Kerala/Pathanamthitta.png")}/>
-						<span className="pathanamthittaText text-capitalize">pathanamthitta</span>
-						<span className="pathanamthittaNumber  text-center">{this.search('pathanamthitta')}</span>
+						<span className="pathanamthittaText  mapTextLabel text-capitalize">pathanamthitta</span>
+						<span className="pathanamthittaNumber mapCountLabel text-center">{this.search('pathanamthitta')}</span>
 					</div>
 				</div>
 			</div>

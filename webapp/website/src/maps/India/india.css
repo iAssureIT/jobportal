@@ -1,3 +1,13 @@
+@font-face {
+  font-family:'Montserrat-Regular';
+  src: url('/fonts/Montserrat/Montserrat-Regular.ttf');
+}
+
+@font-face {
+  font-family:'Montserrat-Bold';
+  src: url('/fonts/Montserrat/Montserrat-Bold.ttf');
+}
+
 .india{
 	width:90%;
 	height: 800px;
@@ -13,6 +23,30 @@
    font-size: 12px;
    cursor: pointer;
 }
+
+.mapTextLabel{
+	font-size: 10px;
+	font-family: 'Montserrat-Regular';
+	color: var(--main-txt-color);
+}
+
+.mapCountLabel{
+	font-size: 11px;
+	font-family: 'Montserrat-Regular';
+	color: var(--main-txt-color);
+}
+
+.classHover:hover .mapTextLabel{
+	font-size: 12px;
+	font-family: 'Montserrat-Bold';
+	z-index: 1;
+}
+
+.classHover:hover .mapCountLabel{
+	font-size: 16px;
+	font-family: 'Montserrat-Bold';
+}
+
 .kashmir{
 	position: absolute;
 	top: 15px;

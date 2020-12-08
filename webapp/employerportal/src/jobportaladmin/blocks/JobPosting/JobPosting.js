@@ -354,6 +354,8 @@ export default class JobPosting extends Component{
 									 })
 					}
 	
+
+
 	handleSubmit = (event)	=>	{
 									event.preventDefault();
 									if(this.validateForm()){	
@@ -393,6 +395,7 @@ export default class JobPosting extends Component{
 																						
 																						minEducation 			: 	this.state.minEducation,
 																						minExperience 			: 	this.state.minExperience,
+
 
 																						primarySkills 			: 	this.state.primarySkills,
 																						minPrimExp	 			: 	this.state.minPrimExp,
