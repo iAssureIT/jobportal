@@ -48,6 +48,7 @@ export default class JobPosting extends Component{
 							industry_id				: 	localStorage.getItem("industry_id"),
 							industryList			: 	[],
 							functionalarea_id 		: 	"",
+							functionalAreaName		: 	"",
 							functionalArealist 		: 	[],
 							subfunctionalarea_id 	: 	"",
 							subFunctionalAreaList	: 	[],
@@ -67,12 +68,12 @@ export default class JobPosting extends Component{
 							contactPersonEmail		: 	"",
 							contactPersonPhone		: 	"", 
 							
-							addressLine1            :   "",
+							address            		:   "",
 							area 					: 	"",
-							city 					: 	"",
+							cityVillage 			: 	"",
 							district 				: 	"",
 							districtArray 			: 	[],
-							state 					: 	"",
+							states 					: 	"",
 							stateArray 				: 	[],
 							stateCode				: 	"",
 							country 				: 	"",
@@ -106,7 +107,7 @@ export default class JobPosting extends Component{
 							submitBtnText 			: 	"SUBMIT",
 							tags 					:   [],
 				            							suggestions: suggestions,
-				            suggestions 			:   [] 														
+				            /*suggestions 			:   []*/ 														
 						}
 
 		this.style 	=  	{
@@ -157,11 +158,11 @@ export default class JobPosting extends Component{
 																									contactPersonEmail 	: 	response.data.jobsData[0].jobBasicInfo.contactPersonEmail,
 																									contactPersonPhone 	: 	response.data.jobsData[0].jobBasicInfo.contactPersonPhone,
 																									
-																									addressLine1 		: 	response.data.jobsData[0].location.address,
+																									address 			: 	response.data.jobsData[0].location.address,
 																									area 				: 	response.data.jobsData[0].location.area,
-																									city 				: 	response.data.jobsData[0].location.city,
+																									cityVillage 		: 	response.data.jobsData[0].location.cityVillage,
 																									district 			: 	response.data.jobsData[0].location.district,
-																									state 				: 	response.data.jobsData[0].location.state,
+																									states 				: 	response.data.jobsData[0].location.states,
 																									stateCode 			: 	response.data.jobsData[0].location.stateCode,
 																									country 			: 	response.data.jobsData[0].location.country,
 																									countryCode 		: 	response.data.jobsData[0].location.countryCode,
@@ -190,7 +191,7 @@ export default class JobPosting extends Component{
 																																					}else{
 																																							document.getElementById("workFromHome").checked = false;
 																																					}
-																			})
+																				})
 								
 																.catch(error=>	{
 																					Swal.fire("Some error occured while updating job data", error.message, "error");
@@ -199,13 +200,27 @@ export default class JobPosting extends Component{
 		
 	Axios.get("/api/functionalareamaster/get/list")
 		.then(response 	=> 	{
-								/*console.log("getfunctionalAreaData response.data = ", response.data);*/
 								this.setState({functionalArealist : response.data});
-								/*console.log("functionalArea", this.state.functionalArealist);*/
 							})
 		.catch(error 	=>	{
 								Swal.fire("Error while getting List data", error.message, 'error');
 							})
+
+	/*Axios.get('/api/functionalareamaster/get/list')
+    .then((response) => {
+      
+      var functionalArealist = [];
+      response.data.map((value,ind)=>{
+        functionalArealist.push({_id: value._id, label : value.functionalAreaName})
+      })
+      console.log('functionalArealist==',functionalArealist)
+      this.setState({
+              functionalArealist : functionalArealist
+            })
+    })
+    .catch((error) => {
+    })*/
+
 
 	Axios.get("/api/subfunctionalareamaster/get/list")
 		.then(response=>	{
@@ -364,6 +379,7 @@ export default class JobPosting extends Component{
 																						jobTitle 				: 	this.state.jobTitle,
 																						industry_id 			:  	this.state.industry_id,
 																						functionalarea_id 		: 	this.state.functionalarea_id,
+																						functionalAreaName		: 	this.state.functionalAreaName,
 																						subfunctionalarea_id 	: 	this.state.subfunctionalarea_id,
 																						role 					: 	this.state.role,
 																						gender      	   		: 	this.state.gender,
@@ -378,11 +394,11 @@ export default class JobPosting extends Component{
 																						contactPersonEmail 		: 	this.state.contactPersonEmail,
 																						contactPersonPhone  	:   this.state.contactPersonPhone,
 																						
-																						addressLine1            :   this.state.address, 
+																						address            		:   this.state.address, 
 																						area 					:   this.state.area,
-																			        	city 					: 	this.state.city,
+																			        	cityVillage 			: 	this.state.cityVillage,
 																			       	 	district 				: 	this.state.district,
-																			        	state 					: 	this.state.state,
+																			        	states 					: 	this.state.states,
 																			        	stateCode 				: 	this.state.stateCode,
 																			        	country 				: 	this.state.country,
 																			        	countryCode 			: 	this.state.countryCode,
@@ -432,6 +448,7 @@ export default class JobPosting extends Component{
 																																				jobTitle 			: 	"",
 																																				industry_id 		: 	"",
 																																				functionalarea_id 	: 	"",
+																																				functionalAreaName	: 	"",
 																																				subfunctionalarea_id: 	"",
 																																				role 				: 	"",
 																																				gender              : 	"Male Only",
@@ -446,11 +463,11 @@ export default class JobPosting extends Component{
 																																				contactPersonEmail 	: 	"",
 																																				contactPersonPhone 	: 	"",
 																																				
-																																				addressLine1        :   "",
+																																				address        		:   "",
 																																				area 				:   "",
-																																	        	city 				: 	"",
+																																	        	cityVillage 		: 	"",
 																																	       	 	district 			: 	"",
-																																	        	state 				: 	"",
+																																	        	states 				: 	"",
 																																	        	stateCode 			: 	"",
 																																	        	country 			: 	"",
 																																	        	countryCode 		: 	"",
@@ -545,7 +562,7 @@ export default class JobPosting extends Component{
 							}
     
     handleChangePlaces = address => {
-	    								this.setState({ addressLine1 : address});
+	    								this.setState({ address : address});
 									};
 
 	handleSelect = address => 	{
@@ -564,11 +581,11 @@ export default class JobPosting extends Component{
 																																																											                    	break;
 																																																												                  	
 																																																												                  	case 'locality':
-																																																											                    	var city = results[0].address_components[i].long_name;
+																																																											                    	var cityVillage = results[0].address_components[i].long_name;
 																																																											                    	break;
 																																																												                  	
 																																																												                  	case 'administrative_area_level_1':
-																																																											                    	var state = results[0].address_components[i].long_name;
+																																																											                    	var states = results[0].address_components[i].long_name;
 																																																											                    	var stateCode = results[0].address_components[i].short_name;
 																																																											                    	break;
 																																																												                  	
@@ -590,13 +607,13 @@ export default class JobPosting extends Component{
 													    																																				}
       																														}
 
-						    								console.log('state==>',state)
+						    								console.log('state==>', states)
 
 														    this.setState({
 																	   			area        	: 	area,
-																	        	city        	: 	city,
+																	        	cityVillage     : 	cityVillage,
 																		        district    	: 	district,
-																		        states      	: 	state,
+																		        states      	: 	states,
 																		        country     	: 	country,
 																		        pincode     	: 	pincode,
 																		        stateCode   	: 	stateCode,
@@ -611,7 +628,7 @@ export default class JobPosting extends Component{
 								    	.then(latLng => this.setState({'latLng': latLng}))
 								    	.catch(error => console.error('Error', error));
 								     
-								      this.setState({ addressLine1 : address});
+								      this.setState({ address : address});
   								};
 
 	handleDelete(i) {
@@ -641,7 +658,7 @@ export default class JobPosting extends Component{
 						}
 
 
-	/*getSuggestions(value) {
+	/*getSuggestions = value => {
     const escapedValue = this.escapeRegexCharacters(value.trim());
     
     if (escapedValue === '') {
@@ -661,7 +678,7 @@ export default class JobPosting extends Component{
     return (
       <span className="Autosuggestlist">{suggestion.label}</span>
     );
-  }*/
+  }
 
   onChange = (event, { newValue , method }) => {
     if (method="type") {
@@ -672,11 +689,11 @@ export default class JobPosting extends Component{
         value: newValue
       });
     }
-  };
+  };*/
 
   //Autosuggest will call this function every time you need to update suggestions.
   // You already implemented this logic above, so just use it.
- /* onSuggestionsFetchRequested = ({ value }) => {
+  /*onSuggestionsFetchRequested = ({ value }) => {
     this.setState({
       suggestions: this.getSuggestions(value)
     });
@@ -687,12 +704,12 @@ export default class JobPosting extends Component{
     this.setState({
       suggestions: []
     });
-  };
+  };*/
   
-  onSuggestionSelected=(event, { suggestion, suggestionValue, suggestionIndex, sectionIndex, method }) => { 
+  /*onSuggestionSelected=(event, { suggestion, suggestionValue, suggestionIndex, sectionIndex, method }) => { 
     console.log("suggestion",suggestion)
     
-    this.setState({functionalarea_id : suggestion._id, employerID : suggestion.company_Id, functionalAreaName : suggestionValue})
+    this.setState({functionalarea_id : suggestion._id, functionalAreaName : suggestionValue})
   };*/
 
 
@@ -742,14 +759,14 @@ render(){
 											
 											<div className="col-lg-6">
 												<div className="row">
-													<label htmlFor="jobLocation" className="addjobformLable col-lg-12"> Job Location <span className="asterisk">&#42;</span> </label>
+													<label htmlFor="address" className="addjobformLable col-lg-12"> Job Location <span className="asterisk">&#42;</span> </label>
 												</div>	
 												<div className="input-group">
 													<span className="input-group-addon addJobFormField">
 														<FontAwesomeIcon className="addJobLocationIcon" icon={['fas', 'map-marker-alt']} />
 													</span> 
 													<PlacesAutocomplete
-			                                        	value 		  	=	{this.state.addressLine1}
+			                                        	value 		  	=	{this.state.address}
 			                                        	onChange 	  	=	{this.handleChangePlaces}
 			                                        	onSelect 	  	=	{this.handleSelect}
 			                                        	searchOptions	=	{searchOptions}>
@@ -760,13 +777,13 @@ render(){
 																							                                            	{...getInputProps({
 																											                                            		placeholder: 'Search Address ...',
 																											                                                	className: 'location-search-input col-lg-12 form-control errorinputText',
-																											                                                	id:"addressLine1",
-																											                                                	name:"addressLine1"
+																											                                                	id:"address",
+																											                                                	name:"address"
 																							                                              					})
 																							                                            	}
 																							                                            />
 																							                                            
-																							                                            <div className={this.state.addressLine1 ? "autocomplete-dropdown-container SearchListContainer" : ""}>
+																							                                            <div className={this.state.address ? "autocomplete-dropdown-container SearchListContainer" : ""}>
 																							                                            	{loading && <div>Loading...</div>}
 																							                                            	{suggestions.map(suggestion => {
 																															                                                	const className = suggestion.active
@@ -827,7 +844,7 @@ render(){
 													<label className="addjobformLable col-lg-12"> City <span className="asterisk">&#42;</span> </label>
 												</div>	
 												<div className="input-group"> 
-													<input type="text" className="form-control addJobFormField addJobState" value={this.state.city} ref="city" name="city" onChange={this.handleChange}/>
+													<input type="text" className="form-control addJobFormField addJobState" value={this.state.cityVillage} ref="cityVillage" name="cityVillage" onChange={this.handleChange}/>
 												</div>
 											</div>
 											
@@ -851,14 +868,14 @@ render(){
 										</div>
 									</div>
 									
-									
+
 									<div className="form-group col-lg-12 addJobFieldRow text-left">
 										<div className="row">
 											<div className="col-lg-6">
 												<label htmlFor="functionalArea" className="addjobformLable"> Functional Area <span className="asterisk">&#42;</span> </label>
 												<div className="input-group">
 													<span className="input-group-addon addJobFormField"><i className="fa fa-briefcase"></i></span> 
-														{<select className="form-control addJobFormField" name="functionalarea_id" id="functionalarea_id" value={this.state.functionalarea_id} onChange={this.handleChange}>
+														<select className="form-control addJobFormField" name="functionalarea_id" id="functionalarea_id" value={this.state.functionalarea_id} onChange={this.handleChange}>
 															<option hidden> -- Select -- </option>
 													    	{
 																this.state.functionalArealist!=null && this.state.functionalArealist.length > 0 
@@ -872,7 +889,7 @@ render(){
 																:
 																	<option> -- Select -- </option>
 															}		   
-														</select>}
+														</select>
 
 														{/*<Autosuggest 
 											                suggestions={suggestions}
@@ -1215,7 +1232,7 @@ render(){
 												        	name           = "otherSkills"
 												        	id             = "otherSkills"
 												        	value          = {this.state.otherSkills}
-												        /> 
+												        />
 												</div>
 											</div>
 											
@@ -1244,7 +1261,7 @@ render(){
 										        	name           = "preferSkills"
 										        	id             = "preferSkills"
 										        	value          = {this.state.preferSkills}
-												/> 
+												/>
 										</div>
 									</div>
 									

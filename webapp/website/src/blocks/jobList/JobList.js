@@ -126,12 +126,12 @@ applyJob = (jobid, company_id)=>{
 			<section className="jobListWrapper">
 				<div className="col-lg-12 JobListWrapperMain">
 					<div className="row">
-						<div className="col-lg-4 col-lg-offset-8">
+						{/*<div className="col-lg-4 col-lg-offset-8">
 							<div className="input-group searchMainTab">
 								<input type="text" name="search" id="search" className="form-control jobListSearchTab" placeholder="Search by Job Title..." onChange={this.search}/>
 								<span className="input-group-addon searchTabAddOn"><i className="fa fa-search"></i> </span> 
 							</div> 
-						</div> 
+						</div>*/} 
 						{
 							this.props.jobList 
 							?
@@ -149,7 +149,7 @@ applyJob = (jobid, company_id)=>{
 				                  var tooltipMsg = 'Add to wishlist';
 				                }
 								return(
-									<div className="col-lg-12">
+									<div className="col-lg-6">
 										<div className="jobListContainer">
 											<div className="col-lg-12">
 												<div className="col-lg-11 jobListLeftContent">
@@ -175,8 +175,8 @@ applyJob = (jobid, company_id)=>{
 													<div> 
 														<i className="fa fa-rupee jobListMonSal"></i> &nbsp; <i className="fa fa-inr"></i> {elem.ctcOffered.minSalary} - <i className="fa fa-inr"></i> {elem.ctcOffered.maxSalary} a month
 													</div>
-													<div>
-														<i className="fa fa-map-marker jobListLocation"></i> &nbsp; {elem.jobBasicInfo.jobLocationCity}
+													<div className="joblistLocationInfo">
+														<i className="fa fa-map-marker jobListLocation"></i> &nbsp; {elem.location.address}
 													</div>
 													<div> 
 														<i className="fa fa-users jobListNumPositions"></i> &nbsp; No of position : 10
@@ -184,10 +184,10 @@ applyJob = (jobid, company_id)=>{
 												</div>
 												<div className="col-lg-1 jobListRightContent">
 													<div className="row">
-														<div className="col-lg-offset-2 col-lg-8">
-															<div className="jobProfileVerticleIcons">
+														<div className="col-lg-offset-2 col-lg-12">
+															<div className="jobListVerticleIcons">
 																<ul>
-																	<li><i className="fa fa-check" onClick={applyJob => this.applyJob(elem._id, elem.company_id)}></i></li>
+																	<li><i className="fa fa-check-square-o" onClick={applyJob => this.applyJob(elem._id, elem.company_id)}></i></li>
 																	<li ><i title={tooltipMsg} onClick={wishlist => this.handleclick(elem._id)} className={"fa fa-heart" + wishClass }></i></li>
 																	<li><i className="fa fa-youtube-play"></i></li>
 																</ul>

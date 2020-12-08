@@ -1305,7 +1305,7 @@ width: 100%;
   }
 
   .SearchListContainer{
-    border: 1px solid #eee;
+    /*border: 1px solid #eee;*/
     z-index: 100;
     top: 90%;
     width: 90%;

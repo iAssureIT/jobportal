@@ -27,11 +27,11 @@ export default class JobPostProfile extends Component{
 						contactPersonEmail 	: 	"",
 						contactPersonPhone 	: 	"",
 						
-						addressLine1        :   "",
+						address        		:   "",
 						area 				:   "",
 			        	cityVillage 		: 	"",
 			       	 	district 			: 	"",
-			        	state 				: 	"",
+			        	states 				: 	"",
 			        	stateCode 			: 	"",
 			        	country 			: 	"",
 			        	countryCode 		: 	"",
@@ -84,11 +84,11 @@ export default class JobPostProfile extends Component{
 					contactPersonEmail 	: 	response.data.jobsData[0].jobBasicInfo.contactPersonEmail,
 					contactPersonPhone 	: 	response.data.jobsData[0].jobBasicInfo.contactPersonPhone,
 					
-					addressLine1        :   response.data.jobsData[0].location.address,
+					address        		:   response.data.jobsData[0].location.address,
 					area 				: 	response.data.jobsData[0].location.area,
-					city 				: 	response.data.jobsData[0].location.city,
+					cityVillage 		: 	response.data.jobsData[0].location.cityVillage,
 					district 			: 	response.data.jobsData[0].location.district,
-					state 				: 	response.data.jobsData[0].location.state,
+					states 				: 	response.data.jobsData[0].location.states,
 					stateCode 			: 	response.data.jobsData[0].location.stateCode,
 					country 			: 	response.data.jobsData[0].location.country,
 					countryCode 		: 	response.data.jobsData[0].location.countryCode,
@@ -142,7 +142,7 @@ export default class JobPostProfile extends Component{
 														<b>iAssure International Technologies Pvt Ltd</b>
 													</div>
 													<div className="locationinfo">
-														{this.state.addressLine1}
+														{this.state.address}
 													</div>
 												</div>
 											</div>

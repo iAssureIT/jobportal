@@ -106,7 +106,7 @@ deleteJob = (event)=>{
 															<i className="fa fa-rupee jobListMonSal"></i> &nbsp; <i className="fa fa-inr"></i> {elem.ctcOffered.minSalary} - <i className="fa fa-inr"></i> {elem.ctcOffered.maxSalary} a month
 														</div>
 														<div>
-															<i className="fa fa-map-marker jobListLocation"></i> &nbsp; {elem.jobBasicInfo.jobLocationCity}
+															<i className="fa fa-map-marker jobListLocation"></i> &nbsp; {elem.location.address}
 														</div>
 														<div> 
 															<i className="fa fa-users jobListNumPositions"></i> &nbsp; No of position : {elem.jobBasicInfo.positions} 

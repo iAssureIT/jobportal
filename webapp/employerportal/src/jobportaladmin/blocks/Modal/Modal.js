@@ -122,10 +122,10 @@ export default class Modal extends Component{
 
   render() {
     return (
-      <div id="robust" class="modal fade" role="dialog">
-                    <div class="modal-dialog modal-lg">
-                      <div class="modal-content">
-                        <div class="modal-body">
+      <div id="robust" className="modal fade" role="dialog">
+                    <div className="modal-dialog modal-lg">
+                      <div className="modal-content">
+                        <div className="modal-body">
                           <div className="jobPostProfileWrapper container-fluid">
                             <div className="col-lg-9">
                               <div className="col-lg-12 leftSideMain">
@@ -408,8 +408,8 @@ export default class Modal extends Component{
                             </div>  
                           </div>
                         </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-danger" data-dismiss="modal">
+                        <div className="modal-footer">
+                          <button type="button" className="btn btn-danger" data-dismiss="modal">
                             close
                           </button> 
                         </div>

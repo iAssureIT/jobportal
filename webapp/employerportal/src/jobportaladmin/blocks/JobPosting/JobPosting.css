@@ -133,6 +133,7 @@
 	border: 1px solid var(--main-border-color);
 	border-radius: 4px;
     background-color: var(--form-field-background-color);
+    color: var(--main-txt-color);
 }
 
 .addJobFieldRow .minSalaryDropdown{
