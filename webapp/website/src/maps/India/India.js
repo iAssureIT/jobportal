@@ -226,8 +226,8 @@ const mapStateToProps = (state)=>{
         mapJobs           	: state.mapJobs,
     }
 }
-const mapDispachToProps = (dispatch) => ({
+const mapDispatchToProps = (dispatch) => ({
 	mapAction :  bindActionCreators(mapActionCreator, dispatch)
     //return bindActionCreators({ setMapSelectedStateFun : setMapSelectedState }, dispatch);  
 }) 
-export default connect(mapStateToProps, mapDispachToProps) (withRouter(India));
+export default connect(mapStateToProps, mapDispatchToProps) (withRouter(India));

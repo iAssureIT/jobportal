@@ -142,8 +142,8 @@ const mapStateToProps = (state)=>{
         industrialJobs    : state.industrialJobs
     }
 }
-const mapDispachToProps = (dispatch) => ({
+const mapDispatchToProps = (dispatch) => ({
   mapAction :  bindActionCreators(mapActionCreator, dispatch)
 }) 
 
-export default connect(mapStateToProps, mapDispachToProps)(HomePage);
+export default connect(mapStateToProps, mapDispatchToProps)(HomePage);

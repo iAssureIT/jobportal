@@ -186,7 +186,7 @@ const mapStateToProps = (state)=>{
         userID         : state.userID
     }
 }
-const mapDispachToProps = (dispatch) => ({
+const mapDispatchToProps = (dispatch) => ({
   mapAction :  bindActionCreators(mapActionCreator, dispatch)
 })
-export default connect(mapStateToProps, mapDispachToProps) (ResetPassword);
+export default connect(mapStateToProps, mapDispatchToProps) (ResetPassword);

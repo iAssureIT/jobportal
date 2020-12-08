@@ -86,7 +86,7 @@ class Module extends Component{
         accessToFacility        : state.accessToFacility
     }
 }
-const mapDispachToProps = (dispatch) =>{
+const mapDispatchToProps = (dispatch) =>{
     return bindActionCreators({ fetchRoleWiseAccess: getRoleWiseAccessToModule, fetchAccessToFacility: getAccessToFacility }, dispatch);  
 }  
-export default connect(mapStateToProps, mapDispachToProps) (Module);
+export default connect(mapStateToProps, mapDispatchToProps) (Module);

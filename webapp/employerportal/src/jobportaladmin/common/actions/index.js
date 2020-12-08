@@ -1,5 +1,9 @@
 import axios from 'axios';
 
+export const setUserDetails = (userDetails )=> ({
+      type 				: 'SET_USER_DETAILS',
+      userDetails 		: userDetails
+});
 export const setFilterSelector = (selector )=> ({
       type 				: 'SET_FILTER_SELECTOR',
       selector 			: selector

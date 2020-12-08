@@ -292,7 +292,7 @@ const mapStateToProps = (state)=>{
         viewMode    : state.viewMode
     }
 }
-const mapDispachToProps = (dispatch) => ({
+const mapDispatchToProps = (dispatch) => ({
   mapAction :  bindActionCreators(mapActionCreator, dispatch)
 })
-export default connect(mapStateToProps, mapDispachToProps) (LeftSideFilters);
+export default connect(mapStateToProps, mapDispatchToProps) (LeftSideFilters);

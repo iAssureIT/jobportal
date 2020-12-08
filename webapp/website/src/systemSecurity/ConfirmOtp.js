@@ -211,7 +211,7 @@ const mapStateToProps = (state)=>{
         userID         : state.userID
     }
 }
-const mapDispachToProps = (dispatch) => ({
+const mapDispatchToProps = (dispatch) => ({
   mapAction :  bindActionCreators(mapActionCreator, dispatch)
 })
-export default connect(mapStateToProps, mapDispachToProps) (ConfirmOtp);
+export default connect(mapStateToProps, mapDispatchToProps) (ConfirmOtp);

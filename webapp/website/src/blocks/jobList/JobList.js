@@ -217,7 +217,7 @@ const mapStateToProps = (state)=>{
     	jobList 		: state.jobList,		jobWishlist 	: state.jobWishlist
     }
 }
-const mapDispachToProps = (dispatch) => ({
+const mapDispatchToProps = (dispatch) => ({
   mapAction :  bindActionCreators(mapActionCreator, dispatch)
 }) 
-export default connect(mapStateToProps, mapDispachToProps) (Joblist);
+export default connect(mapStateToProps, mapDispatchToProps) (Joblist);

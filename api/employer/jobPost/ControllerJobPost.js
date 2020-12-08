@@ -317,12 +317,13 @@ exports.mapwiseJobs = (req, res, next)=>{
 
     Jobs.aggregate([
     	{ $match 	: selector },
-    	{ $sort 	: {createdAt : -1} },
+    	{ $sort 	: {createdAt : -1} }, 
     	{ $group 	: {_id: "$location.state", count: { $sum: 1}} },
     ])
     
     .exec()
     .then(data=>{
+    	//create states array
         res.status(200).json(data);
     })
     .catch(err =>{

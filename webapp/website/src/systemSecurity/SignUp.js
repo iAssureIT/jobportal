@@ -440,8 +440,8 @@ const mapStateToProps = (state)=>{
         selectedModal  : state.selectedModal
     }
 }
-const mapDispachToProps = (dispatch) => ({
+const mapDispatchToProps = (dispatch) => ({
   mapAction :  bindActionCreators(mapActionCreator, dispatch)
 })
 
-export default connect(mapStateToProps, mapDispachToProps) (SignUp);
+export default connect(mapStateToProps, mapDispatchToProps) (SignUp);

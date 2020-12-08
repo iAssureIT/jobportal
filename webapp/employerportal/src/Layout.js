@@ -42,12 +42,10 @@ class Layout extends Component  {
             profileStatus:""
         }
     }
-    componentDidMount() {
+    componentDidMount() { 
         
-        var company_Id = localStorage.getItem("company_Id");
-        var contractID ="";
-        const token = localStorage.getItem("token");
-            if (token !== null && token !=="undefined") {
+        const userDetails = localStorage.getItem("userDetails");
+            if (userDetails !== null && userDetails !=="userDetails") {
               this.setState({
                   loggedIn: true
               })

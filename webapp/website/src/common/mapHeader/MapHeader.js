@@ -156,7 +156,7 @@ const mapStateToProps = (state)=>{
         selectedModal  : state.selectedModal
     }
 }
-const mapDispachToProps = (dispatch) => ({
+const mapDispatchToProps = (dispatch) => ({
 	mapAction :  bindActionCreators(mapActionCreator, dispatch)
 }) 
-export default connect(mapStateToProps,mapDispachToProps) (MapHeader);
+export default connect(mapStateToProps,mapDispatchToProps) (MapHeader);

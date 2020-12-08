@@ -61,9 +61,7 @@ class Header extends Component{
   logout() {
         var token = localStorage.removeItem("token");
         localStorage.removeItem("userDetails")
-        localStorage.removeItem("roles")
-        localStorage.removeItem("user_ID")
-        localStorage.removeItem("candidateID")
+        
         //alert()
         if (token !== null && token !== "undefined") {
             this.setState({

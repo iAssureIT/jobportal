@@ -60,9 +60,10 @@ class Header extends Component{
     }
   }
   logout() {
-        var token = localStorage.removeItem("token");
+    
+        var userDetails = localStorage.removeItem("userDetails");
         //alert()
-        if (token !== null && token !== "undefined") {
+        if (userDetails !== null && userDetails !== "undefined") {
             this.setState({
                 loggedIn: false
             })

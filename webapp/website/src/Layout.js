@@ -281,8 +281,8 @@ const mapStateToProps = (state)=>{
         selectedState  : state.selectedState
     }
 }
-const mapDispachToProps = (dispatch) => ({
+const mapDispatchToProps = (dispatch) => ({
     mapAction :  bindActionCreators(mapActionCreator, dispatch)
     //return bindActionCreators({ setMapSelectedStateFun : setMapSelectedState }, dispatch);  
 })  
-export default connect(mapStateToProps, mapDispachToProps) (Layout);
+export default connect(mapStateToProps, mapDispatchToProps) (Layout);

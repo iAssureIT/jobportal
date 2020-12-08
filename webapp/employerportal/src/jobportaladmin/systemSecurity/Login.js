@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { connect }        from 'react-redux';
 import { BrowserRouter, Route, Switch,Link,location } from 'react-router-dom';
 import 'font-awesome/css/font-awesome.min.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -9,6 +8,9 @@ import axios from 'axios';
 import jQuery from 'jquery';
 import 'jquery-validation';
 import swal from 'sweetalert';
+import { connect }        from 'react-redux';
+import { bindActionCreators } from 'redux';
+import  * as mapActionCreator from '../common/actions/index';
 
 class Login extends Component {
 
@@ -113,29 +115,32 @@ class Login extends Component {
                 company_id : response.data.userDetails.company_id,
                 companyID : response.data.userDetails.companyID,
                 companyName : response.data.userDetails.companyName,
-                locationID: response.data.userDetails.locationID,
                 user_id   : response.data.userDetails.user_id,
                 roles     : response.data.userDetails.roles,
-                passwordreset: response.data.userDetailspasswordreset,
                 token     : response.data.userDetails.token, 
+                industry_id   : resp.data.industry_id
                 //loginTime : response.data.userDetails.loginTime, 
               }
 
               
-              localStorage.setItem("token", response.data.token);
+              /*localStorage.setItem("token", response.data.token);
               localStorage.setItem("user_ID", response.data.ID);
               localStorage.setItem("roles", response.data.roles);
               localStorage.setItem("loginTime", response.data.loginTime);
-              localStorage.setItem('userDetails', JSON.stringify(userDetails));
+              
               localStorage.setItem("company_Id",response.data.userDetails.company_id); 
               localStorage.setItem("companyID", response.data.userDetails.companyID);
-              localStorage.setItem("industry_id",resp.data.industry_id); 
+              localStorage.setItem("industry_id",resp.data.industry_id); */
+              localStorage.setItem('userDetails', JSON.stringify(userDetails));
 
+              var {mapAction} = this.props;
+              mapAction.setUserDetails(userDetails);
+ 
               this.setState({
                   loggedIn: true
                 }, () => {
                   if (response.data.userDetails.company_id) {
-                     window.location.href='/post-job'
+                    window.location.href='/post-job'
                   }else{
                     window.location.href= '/corporate/basic-details'
                   }
@@ -214,6 +219,7 @@ class Login extends Component {
     $(".toast-warning").removeClass('toast');
   }
   render() {
+    console.log(this.props.userDetails)
     return (
       <div className="loginFormOuter col-lg-12">
             <div className="img1Login">
@@ -310,17 +316,8 @@ const mapStateToProps = (state)=>{
   }
 };
 
-
-const mapDispatchToProps = (dispatch)=>{
-  return {
-      setGlobalUser  : (userDetails)=> dispatch({
-                          type      : "SET_GLOBAL_USER",
-                          userDetails : userDetails,
-                        }),
-  }
-};
-
-
-
+const mapDispatchToProps = (dispatch) => ({
+  mapAction :  bindActionCreators(mapActionCreator, dispatch)
+}) 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
 

@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './LoginForm.css';
 import $ from 'jquery';
 import axios from 'axios';
-import jQuery from 'jquery';
+import jQuery from 'jquery'; 
 import 'jquery-validation';
 import swal from 'sweetalert';
 import { connect }        from 'react-redux';
@@ -119,7 +119,6 @@ class Login extends Component {
                 lastName: response.data.userDetails.lastName,
                 email: response.data.userDetails.email,
                 phone: response.data.userDetails.phone,
-                companyID : parseInt(response.data.userDetails.companyID),
                 pincode: response.data.userDetails.pincode,
                 user_id: response.data.userDetails.user_id,
                 roles: response.data.userDetails.roles,
@@ -135,14 +134,16 @@ class Login extends Component {
               // localStorage.setItem("roles", response.data.roles);
               //localStorage.setItem("companyID", response.data.userDetails.companyID);
               localStorage.setItem('userDetails', JSON.stringify(userDetails));
+              
               var {mapAction} = this.props;
-
               mapAction.setUserDetails(userDetails);
 
               this.setState({
                 loggedIn: true
               }, () => {
                 //window.location.href = '/';
+                // document.getElementById("modalclosebtn").click();
+                //document.getElementById("navclosebtn").click();
               })
               })
               .catch((error) => {
@@ -331,10 +332,9 @@ const mapStateToProps = (state)=>{
         userDetails    : state.userDetails 
     }
 }
-const mapDispachToProps = (dispatch) => ({
+const mapDispatchToProps = (dispatch) => ({
   mapAction :  bindActionCreators(mapActionCreator, dispatch)
 }) 
 
-
-export default connect(mapStateToProps, mapDispachToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
 

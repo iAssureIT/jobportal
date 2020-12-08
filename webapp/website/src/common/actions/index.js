@@ -13,6 +13,10 @@ export const setUserID = (userID )=> ({
       type 				: 'SET_USERID',
       userID 			: userID
 });
+export const setUserDetails = (userDetails )=> ({
+      type 				: 'SET_USER_DETAILS',
+      userDetails 		: userDetails
+});
 export const setViewMode = (viewMode )=> ({
       type 				: 'SET_VIEW_MODE',
       viewMode 			: viewMode
@@ -44,10 +48,6 @@ export const getJobList = (jobList )=> ({
 export const setJobWishlist = (jobWishlist )=> ({
       type 				: 'GET_JOB_WISHLIST',
       jobWishlist 		: jobWishlist
-});
-export const setUserDetails = (userDetails )=> ({
-      type 				: 'SET_USER_DETAILS',
-      userDetails 		: userDetails
 });
 export function filterMapData(selector) {
   	return dispatch =>{
