@@ -142,8 +142,10 @@ class Login extends Component {
                 loggedIn: true
               }, () => {
                 //window.location.href = '/';
+
                 // document.getElementById("modalclosebtn").click();
                 //document.getElementById("navclosebtn").click();
+
               })
               })
               .catch((error) => {
