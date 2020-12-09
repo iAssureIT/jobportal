@@ -68,7 +68,6 @@ class HomePage extends Component {
     }
   }
   render() {
-    console.log("industrialJobs",this.props.industrialJobs);
     return (
       <div className="ViewBodyWrapper container-fluid">
         

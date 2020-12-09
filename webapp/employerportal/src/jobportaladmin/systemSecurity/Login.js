@@ -219,7 +219,6 @@ class Login extends Component {
     $(".toast-warning").removeClass('toast');
   }
   render() {
-    console.log(this.props.userDetails)
     return (
       <div className="loginFormOuter col-lg-12">
             <div className="img1Login">
@@ -310,7 +309,6 @@ class Login extends Component {
 }
 
 const mapStateToProps = (state)=>{
-  console.log("state = ",state)
   return {
     userDetails   : state.userDetails,
   }

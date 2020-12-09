@@ -277,7 +277,10 @@
 .react-tel-input .country-list .country .dial-code{
 	color: var(--main-txt-color) !important;
 }
-
+.react-autosuggest__suggestions-container--open{
+	top:34px;
+	width: 100%;
+}
 /********************************End Of React Phone Input Properties*******************************/
 
 /*************************************HTML Date Input Properties***********************************/

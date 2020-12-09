@@ -1,732 +1,692 @@
-import React, {Component}   from 'react';
-
+import React, {Component} from 'react';
 import './JobPosting.css';
 import 'react-phone-input-2/lib/style.css';
-
-import $ 							from 'jquery';
-import { FontAwesomeIcon }  		from '@fortawesome/react-fontawesome';
-import Modal 						from '../Modal/Modal.js';
-import Axios 						from 'axios';
-import Swal 						from 'sweetalert2';
-import CKEditor 					from '@ckeditor/ckeditor5-react';
-import ClassicEditor 				from '@ckeditor/ckeditor5-build-classic';
-import PhoneInput 					from 'react-phone-input-2';
-import Moment 						from "moment";
-/*import Autosuggest 					from 'react-autosuggest';*/
+import $ from 'jquery';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Modal from '../Modal/Modal.js';
+import Axios from 'axios';
+import Swal from 'sweetalert2';
+import CKEditor from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import PhoneInput from 'react-phone-input-2';
+import Moment from "moment";
+import Autosuggest from 'react-autosuggest';
 import { WithContext as ReactTags } from 'react-tag-input';
+import { COUNTRIES } from './countries';
+import PlacesAutocomplete, {
+    geocodeByAddress,
+    getLatLng
+} from "react-places-autocomplete";
 
-import {COUNTRIES} 					from './countries';
+export default class JobPosting extends Component {
 
-import PlacesAutocomplete, 
-		{
-  			geocodeByAddress,
-  			getLatLng
-  		} 							from "react-places-autocomplete";
+    constructor(props) {
+        super(props);
 
-const suggestions = COUNTRIES.map((country)	=>	{
-													return {
-																id   : country,
-																text : country
-															}
-												})
+        this.state = {
+            company_id: localStorage.getItem("company_Id"),
+            jobTitle: "",
+            industry_id: localStorage.getItem("industry_id"),
+            industryList: [],
+            functionalarea_id: "",
+            functionalArealist: [],
+            subfunctionalarea_id: "",
+            subFunctionalAreaList: [],
+            role: "",
+            gender: "Male Only",
+            workFromHome: false,
+            jobtype_id: "",
+            jobTypeArray: [],
+            jobtime_id: "",
+            jobTimeArray: [],
+            jobcategory_id: "",
+            jobCategoryArray: [],
+            positions: "",
+            jobDesc: "",
+            lastDateOfAppl: "",
+            contactPersonName: "",
+            contactPersonEmail: "",
+            contactPersonPhone: "",
 
-const KeyCodes	=	{
-						comma: 188,
-						enter: 13,
-					};
+            addressLine1: "",
+            area: "",
+            city: "",
+            district: "",
+            districtArray: [],
+            state: "",
+            stateArray: [],
+            stateCode: "",
+            country: "",
+            countryCode: "",
+            pincode: "",
+            pincodeExists: true,
 
-const delimiters = [KeyCodes.comma, KeyCodes.enter];
+            minSalary: "",
+            minSalPeriod: "",
+            maxSalary: "",
+            maxSalPeriod: "",
 
-export default class JobPosting extends Component{
-	
-	constructor(props){
-		super(props);
+            minEducation: "",
+            minExperience: "",
 
-		this.state = 	{
-							company_id 				: 	localStorage.getItem("company_Id"),
-							jobTitle 				: 	"",
-							industry_id				: 	localStorage.getItem("industry_id"),
-							industryList			: 	[],
-							functionalarea_id 		: 	"",
-							functionalAreaName		: 	"",
-							functionalArealist 		: 	[],
-							subfunctionalarea_id 	: 	"",
-							subFunctionalAreaList	: 	[],
-							role 					: 	"",
-							gender             		: 	"Male Only",
-							workFromHome 			: 	false,
-							jobtype_id 				: 	"",
-							jobTypeArray			: 	[],
-							jobtime_id 				: 	"",
-							jobTimeArray 			: 	[],
-							jobcategory_id 			: 	"",
-							jobCategoryArray 		: 	[],
-							positions               :   "",
-							jobDesc 				: 	"",
-							lastDateOfAppl 			: 	"",
-							contactPersonName 		: 	"",
-							contactPersonEmail		: 	"",
-							contactPersonPhone		: 	"", 
-							
-							address            		:   "",
-							area 					: 	"",
-							cityVillage 			: 	"",
-							district 				: 	"",
-							districtArray 			: 	[],
-							states 					: 	"",
-							stateArray 				: 	[],
-							stateCode				: 	"",
-							country 				: 	"",
-							countryCode 			: 	"",
-							pincode 				: 	"",
-							pincodeExists 			: 	true,
-							
-							minSalary 				: 	"",
-							minSalPeriod 			: 	"",
-							maxSalary 				: 	"",
-							maxSalPeriod			: 	"",
-							
-							minEducation 			: 	"",
-							minExperience 			: 	"",
-							
-							primarySkills 			: 	[],
-							minPrimExp	    		: 	"",
-							priSkillsArray 			: 	[],
-							secondarySkills 		: 	[],
-							minSecExp				: 	"", 
-							secSkillsArray 			: 	[], 
-							otherSkills 			: 	[],
-							minOtherExp				: 	"", 
-							otherSkillsArray 		: 	[],
-							preferSkills		 	: 	"",
-							preferSkillsArray 		: 	[],
-							priSkillsArraylist 		: 	[],
-							secSkillsArraylist 		: 	[],
-							otherSkillsArraylist	: 	[],
-							preferSkillsArraylist	: 	[],
-							submitBtnText 			: 	"SUBMIT",
-							tags 					:   [],
-				            							suggestions: suggestions,
-				            /*suggestions 			:   []*/ 														
-						}
+            primarySkills: [],
+            minPrimExp: "",
+            priSkillsArray: [],
+            secondarySkills: [],
+            minSecExp: "",
+            secSkillsArray: [],
+            otherSkills: [],
+            minOtherExp: "",
+            otherSkillsArray: [],
+            preferSkills: "",
+            preferSkillsArray: [],
+            priSkillsArraylist: [],
+            secSkillsArraylist: [],
+            otherSkillsArraylist: [],
+            preferSkillsArraylist: [],
+            submitBtnText: "SUBMIT",
+            tags: [],
+            functAreaSuggestions: [],
+            value:""
+        }
 
-		this.style 	=  	{
-					      	chips 					: 	{
-					        								color: "white"
-					      								},
-					      	
-					      	searchBox 				: 	{
-					        								border: "1px solid #D3950A",
-					      								},
-					      	
-					      	multiselectContainer	: 	{
-					      									backgroundColor: "#242931",
-					        								color: "white",
-					      								}
-				 		};
+        this.style = {
+            chips: {
+                color: "white"
+            },
 
-		this.handleDelete	   =    this.handleDelete.bind(this);
-        this.handleAddition	   =    this.handleAddition.bind(this);
-        this.handleDrag 	   =    this.handleDrag.bind(this);
-        this.handleTagClick	   =    this.handleTagClick.bind(this);		 		
-	 		
-	}
-	
-	componentDidMount(){
-							this.getStates();
-							if(this.props.match.params.job_id){
-																let job_id = this.props.match.params.job_id;
-																Axios.get("/api/jobs/get/one/"+job_id)
-																.then(response=>{
-																					console.log("response.data : ", response.data);
-																					this.setState({	
-																									job_id				: 	job_id,
-																									jobTitle 			: 	response.data.jobsData[0].jobBasicInfo.jobTitle,
-																									industry_id 		: 	response.data.jobsData[0].jobBasicInfo.industry_id,
-																									functionalarea_id 	: 	response.data.jobsData[0].jobBasicInfo.functionalarea_id,
-																									subfunctionalarea_id: 	response.data.jobsData[0].jobBasicInfo.subfunctionalarea_id,
-																									role 				: 	response.data.jobsData[0].jobBasicInfo.role,
-																									gender 				: 	response.data.jobsData[0].jobBasicInfo.gender,
-																									workFromHome 		: 	response.data.jobsData[0].jobBasicInfo.workFromHome,
-																									jobtype_id 			: 	response.data.jobsData[0].jobBasicInfo.jobtype_id,
-																									jobtime_id 			: 	response.data.jobsData[0].jobBasicInfo.jobtime_id,
-																									jobcategory_id 		: 	response.data.jobsData[0].jobBasicInfo.jobcategory_id,
-																									positions           :   response.data.jobsData[0].jobBasicInfo.positions,
-																									jobDesc 			: 	response.data.jobsData[0].jobBasicInfo.jobDesc,
-																									lastDateOfAppl      : 	response.data.jobsData[0].jobBasicInfo.lastDateOfAppl?Moment(response.data.jobsData[0].jobBasicInfo.lastDateOfAppl).format("YYYY-MM-DD"):"",
-																									contactPersonName 	: 	response.data.jobsData[0].jobBasicInfo.contactPersonName,
-																									contactPersonEmail 	: 	response.data.jobsData[0].jobBasicInfo.contactPersonEmail,
-																									contactPersonPhone 	: 	response.data.jobsData[0].jobBasicInfo.contactPersonPhone,
-																									
-																									address 			: 	response.data.jobsData[0].location.address,
-																									area 				: 	response.data.jobsData[0].location.area,
-																									cityVillage 		: 	response.data.jobsData[0].location.cityVillage,
-																									district 			: 	response.data.jobsData[0].location.district,
-																									states 				: 	response.data.jobsData[0].location.states,
-																									stateCode 			: 	response.data.jobsData[0].location.stateCode,
-																									country 			: 	response.data.jobsData[0].location.country,
-																									countryCode 		: 	response.data.jobsData[0].location.countryCode,
-																									pincode 			: 	response.data.jobsData[0].location.pincode,
-																									
-																									minSalary 			: 	response.data.jobsData[0].ctcOffered.minSalary,
-																									minSalPeriod 		: 	response.data.jobsData[0].ctcOffered.minSalPeriod,
-																									maxSalary 			: 	response.data.jobsData[0].ctcOffered.maxSalary,
-																									maxSalPeriod		: 	response.data.jobsData[0].ctcOffered.maxSalPeriod,
-																									
-																									minEducation 		: 	response.data.jobsData[0].eligibility.minEducation,
-																									minExperience 		: 	response.data.jobsData[0].eligibility.minExperience,
-																									
-																									primarySkills 		: 	response.data.jobsData[0].eligibility.primarySkills,
-																									minPrimExp 			: 	response.data.jobsData[0].requiredSkills.minPrimExp,
-																									secondarySkills 	: 	response.data.jobsData[0].requiredSkills.secondarySkills,
-																									minSecExp 	        : 	response.data.jobsData[0].requiredSkills.minSecExp,
-																									otherSkills 	    : 	response.data.jobsData[0].requiredSkills.otherSkills,
-																									minOtherExp 		: 	response.data.jobsData[0].requiredSkills.minOtherExp,
-																									preferSkills 		: 	response.data.jobsData[0].requiredSkills.preferSkills,
-																									submitBtnText 		: 	"UPDATE"
-																								})
-									
-																					if(response.data.jobsData[0].jobBasicInfo.workFromHome === true){
-																																							document.getElementById("workFromHome").checked = true;
-																																					}else{
-																																							document.getElementById("workFromHome").checked = false;
-																																					}
-																				})
-								
-																.catch(error=>	{
-																					Swal.fire("Some error occured while updating job data", error.message, "error");
-																				})
-						}
-		
-	Axios.get("/api/functionalareamaster/get/list")
-		.then(response 	=> 	{
-								this.setState({functionalArealist : response.data});
-							})
-		.catch(error 	=>	{
-								Swal.fire("Error while getting List data", error.message, 'error');
-							})
+            searchBox: {
+                border: "1px solid #D3950A",
+            },
 
-	/*Axios.get('/api/functionalareamaster/get/list')
-    .then((response) => {
-      
-      var functionalArealist = [];
-      response.data.map((value,ind)=>{
-        functionalArealist.push({_id: value._id, label : value.functionalAreaName})
-      })
-      console.log('functionalArealist==',functionalArealist)
-      this.setState({
-              functionalArealist : functionalArealist
+            multiselectContainer: {
+                backgroundColor: "#242931",
+                color: "white",
+            }
+        };
+
+        this.handleDelete = this.handleDelete.bind(this);
+        this.handleAddition = this.handleAddition.bind(this);
+        this.handleDrag = this.handleDrag.bind(this);
+        this.handleTagClick = this.handleTagClick.bind(this);
+
+    }
+
+    componentDidMount() {
+        this.getStates();
+        if (this.props.match.params.job_id) {
+            let job_id = this.props.match.params.job_id;
+            Axios.get("/api/jobs/get/one/" + job_id)
+                .then(response => {
+                    console.log("response.data : ", response.data);
+                    this.setState({
+                        job_id: job_id,
+                        jobTitle: response.data.jobsData[0].jobBasicInfo.jobTitle,
+                        industry_id: response.data.jobsData[0].jobBasicInfo.industry_id,
+                        functionalarea_id: response.data.jobsData[0].jobBasicInfo.functionalarea_id,
+                        subfunctionalarea_id: response.data.jobsData[0].jobBasicInfo.subfunctionalarea_id,
+                        role: response.data.jobsData[0].jobBasicInfo.role,
+                        gender: response.data.jobsData[0].jobBasicInfo.gender,
+                        workFromHome: response.data.jobsData[0].jobBasicInfo.workFromHome,
+                        jobtype_id: response.data.jobsData[0].jobBasicInfo.jobtype_id,
+                        jobtime_id: response.data.jobsData[0].jobBasicInfo.jobtime_id,
+                        jobcategory_id: response.data.jobsData[0].jobBasicInfo.jobcategory_id,
+                        positions: response.data.jobsData[0].jobBasicInfo.positions,
+                        jobDesc: response.data.jobsData[0].jobBasicInfo.jobDesc,
+                        lastDateOfAppl: response.data.jobsData[0].jobBasicInfo.lastDateOfAppl ? Moment(response.data.jobsData[0].jobBasicInfo.lastDateOfAppl).format("YYYY-MM-DD") : "",
+                        contactPersonName: response.data.jobsData[0].jobBasicInfo.contactPersonName,
+                        contactPersonEmail: response.data.jobsData[0].jobBasicInfo.contactPersonEmail,
+                        contactPersonPhone: response.data.jobsData[0].jobBasicInfo.contactPersonPhone,
+
+                        addressLine1: response.data.jobsData[0].location.address,
+                        area: response.data.jobsData[0].location.area,
+                        city: response.data.jobsData[0].location.city,
+                        district: response.data.jobsData[0].location.district,
+                        state: response.data.jobsData[0].location.state,
+                        stateCode: response.data.jobsData[0].location.stateCode,
+                        country: response.data.jobsData[0].location.country,
+                        countryCode: response.data.jobsData[0].location.countryCode,
+                        pincode: response.data.jobsData[0].location.pincode,
+
+                        minSalary: response.data.jobsData[0].ctcOffered.minSalary,
+                        minSalPeriod: response.data.jobsData[0].ctcOffered.minSalPeriod,
+                        maxSalary: response.data.jobsData[0].ctcOffered.maxSalary,
+                        maxSalPeriod: response.data.jobsData[0].ctcOffered.maxSalPeriod,
+
+                        minEducation: response.data.jobsData[0].eligibility.minEducation,
+                        minExperience: response.data.jobsData[0].eligibility.minExperience,
+
+                        primarySkills: response.data.jobsData[0].eligibility.primarySkills,
+                        minPrimExp: response.data.jobsData[0].requiredSkills.minPrimExp,
+                        secondarySkills: response.data.jobsData[0].requiredSkills.secondarySkills,
+                        minSecExp: response.data.jobsData[0].requiredSkills.minSecExp,
+                        otherSkills: response.data.jobsData[0].requiredSkills.otherSkills,
+                        minOtherExp: response.data.jobsData[0].requiredSkills.minOtherExp,
+                        preferSkills: response.data.jobsData[0].requiredSkills.preferSkills,
+                        submitBtnText: "UPDATE"
+                    })
+
+                    if (response.data.jobsData[0].jobBasicInfo.workFromHome === true) {
+                        document.getElementById("workFromHome").checked = true;
+                    } else {
+                        document.getElementById("workFromHome").checked = false;
+                    }
+                })
+
+                .catch(error => {
+                    Swal.fire("Some error occured while updating job data", error.message, "error");
+                })
+        }
+
+        Axios.get("/api/functionalareamaster/get/list")
+            .then(response => {
+                	var functionalArealist = [];
+			      	response.data.map((value,ind)=>{
+			        functionalArealist.push({_id: value._id, label : value.functionalArea})
+			      	})
+			     
+	                this.setState({
+	                    functionalArealist: functionalArealist
+	                });
+                console.log("functionalArea", this.state.functionalArealist);
             })
-    })
-    .catch((error) => {
-    })*/
+            .catch(error => {
+                Swal.fire("Error while getting List data", error.message, 'error');
+            })
+
+        Axios.get("/api/subfunctionalareamaster/get/list")
+            .then(response => {
+                /*console.log("getsubFunctionalAreaData response.data = ", response.data);*/
+                this.setState({
+                    subFunctionalAreaList: response.data
+                });
+                /*console.log("subFunctionalArea", this.state.subFunctionalAreaList);*/
+            })
+            .catch(error => {
+                Swal.fire("Error while getting List data", error.message, 'error');
+            })
+
+        Axios.get("/api/jobtypemaster/get/list")
+            .then(response => {
+                /*console.log("getfunctionalAreaData response.data = ", response.data);*/
+                this.setState({
+                    jobTypeArray: response.data
+                });
+                /*console.log("jobTypeArray", this.state.jobTypeArray);*/
+            })
+            .catch(error => {
+                Swal.fire("Error while getting List data", error.message, 'error');
+            })
+
+        Axios.get("/api/JobTimeMaster/get/list")
+            .then(response => {
+                /*console.log("getfunctionalAreaData response.data = ", response.data);*/
+                this.setState({
+                    jobTimeArray: response.data
+                });
+                /*console.log("jobTimeArray", this.state.jobTimeArray);*/
+            })
+            .catch(error => {
+                Swal.fire("Error while getting List data", error.message, 'error');
+            })
+
+        Axios.get("/api/jobcategorymaster/get/list")
+            .then(response => {
+                /*console.log("getfunctionalAreaData response.data = ", response.data);*/
+                this.setState({
+                    jobCategoryArray: response.data
+                });
+                /*console.log("jobCategoryArray", this.state.jobCategoryArray);*/
+            })
+            .catch(error => {
+                Swal.fire("Error while getting List data", error.message, 'error');
+            })
+
+        Axios.get("/api/skillmaster/get/list")
+            .then(response => {
+                /*console.log("getfunctionalAreaData response.data = ", response.data);*/
+                this.setState({
+                    priSkillsArraylist: response.data
+                });
+                /*console.log("priSkill", this.state.priSkillsArraylist);*/
+                this.state.priSkillsArraylist != null && this.state.priSkillsArraylist.length > 0 ?
+                    this.state.priSkillsArraylist.forEach((elem, index) => {
+                        this.state.priSkillsArray.push(elem.skill);
+                    }) :
+                    this.state.priSkillsArray.push("select");
+            })
+            .catch(error => {
+                Swal.fire("Error while getting priSkillsArraylist List data", error.message, 'error');
+            })
+
+    }
+
+    validateForm = () => {
+        var status = true;
+
+        if (this.state.jobTitle.length <= 0) {
+            document.getElementById("jobTitleError").innerHTML = "Enter job title";
+            status = false;
+        } else {
+            document.getElementById("jobTitleError").innerHTML = "";
+            status = true;
+        }
+        if (this.state.role.length <= 0) {
+            document.getElementById("roleError").innerHTML = "Enter role";
+            status = false;
+        } else {
+            document.getElementById("roleError").innerHTML = "";
+            status = true;
+        }
+        if (this.state.contactPersonName.length <= 0) {
+            document.getElementById("contactPersonNameError").innerHTML = "Enter contact person name";
+            status = false;
+        } else {
+            document.getElementById("contactPersonNameError").innerHTML = "";
+            status = true;
+        }
+        if (this.state.contactPersonEmail.length <= 0) {
+            document.getElementById("contactPersonEmailError").innerHTML = "Enter email id";
+            status = false;
+        } else {
+            document.getElementById("contactPersonEmailError").innerHTML = "";
+            status = true;
+        }
+        if (this.state.contactPersonPhone.length <= 0) {
+            document.getElementById("contactPersonPhoneError").innerHTML = "Enter phone number";
+            status = false;
+        } else {
+            document.getElementById("contactPersonPhoneError").innerHTML = "";
+            status = true;
+        }
+        return status;
+    }
+    getStates() {
+        Axios.get("http://locations2.iassureit.com/api/states/get/list/IN").then((response) => {
+                this.setState({
+                    stateArray: response.data
+                })
+                document.getElementById('Statedata').val(this.state.states);
+            })
+
+            .catch((error) => {
+
+            })
+    }
+
+    handleChange = (event) => {
+        var name = event.currentTarget.name;
+        var value = event.currentTarget.value;
+        this.setState({
+            [name]: value
+        });
+    }
+
+    setGender(event) {
+        event.preventDefault();
+        var id = event.currentTarget.id;
+        this.setState({
+            gender: id,
+        })
+    }
 
 
-	Axios.get("/api/subfunctionalareamaster/get/list")
-		.then(response=>	{
-								/*console.log("getsubFunctionalAreaData response.data = ", response.data);*/
-								this.setState({subFunctionalAreaList : response.data
-							});
-								/*console.log("subFunctionalArea", this.state.subFunctionalAreaList);*/
-							})
-		.catch(error=>	{
-							Swal.fire("Error while getting List data", error.message,'error');
-						})
-		
-	Axios.get("/api/jobtypemaster/get/list")
-		.then(response=> 	{
-								/*console.log("getfunctionalAreaData response.data = ", response.data);*/
-								this.setState({jobTypeArray : response.data
-							});
-								/*console.log("jobTypeArray", this.state.jobTypeArray);*/
-							})
-		.catch(error=>	{
-							Swal.fire("Error while getting List data",error.message,'error');
-						})
 
-	Axios.get("/api/JobTimeMaster/get/list")
-		.then(response=> 	{
-								/*console.log("getfunctionalAreaData response.data = ", response.data);*/
-								this.setState({jobTimeArray : response.data
-							});
-								/*console.log("jobTimeArray", this.state.jobTimeArray);*/
-							})
-		.catch(error=>	{
-							Swal.fire("Error while getting List data",error.message,'error');
-						})	
+    handleSubmit = (event) => {
+        event.preventDefault();
+        if (this.validateForm()) {
+            var formValues = {
+                company_id: this.state.company_id,
+                jobTitle: this.state.jobTitle,
+                industry_id: this.state.industry_id,
+                functionalarea_id: this.state.functionalarea_id,
+                subfunctionalarea_id: this.state.subfunctionalarea_id,
+                role: this.state.role,
+                gender: this.state.gender,
+                workFromHome: this.state.workFromHome,
+                jobtype_id: this.state.jobtype_id,
+                jobtime_id: this.state.jobtime_id,
+                jobcategory_id: this.state.jobcategory_id,
+                positions: this.state.positions,
+                jobDesc: this.state.jobDesc,
+                lastDateOfAppl: this.state.lastDateOfAppl,
+                contactPersonName: this.state.contactPersonName,
+                contactPersonEmail: this.state.contactPersonEmail,
+                contactPersonPhone: this.state.contactPersonPhone,
 
-	Axios.get("/api/jobcategorymaster/get/list")
-		.then(response=> 	{
-								/*console.log("getfunctionalAreaData response.data = ", response.data);*/
-								this.setState({jobCategoryArray : response.data
-							});
-								/*console.log("jobCategoryArray", this.state.jobCategoryArray);*/
-							})
-		.catch(error=>	{
-							Swal.fire("Error while getting List data",error.message,'error');
-						})	
-		
-	Axios.get("/api/skillmaster/get/list")
-		.then(response=> 	{
-								/*console.log("getfunctionalAreaData response.data = ", response.data);*/
-								this.setState({priSkillsArraylist : response.data});
-								/*console.log("priSkill", this.state.priSkillsArraylist);*/
-								this.state.priSkillsArraylist!=null && this.state.priSkillsArraylist.length > 0 
-								?
-								this.state.priSkillsArraylist.forEach((elem, index)=>{
-																						this.state.priSkillsArray.push(elem.skill);
-																					})
-																					:
-																						this.state.priSkillsArray.push("select");
-							})
-		.catch(error=>	{
-							Swal.fire("Error while getting priSkillsArraylist List data", error.message,'error');
-						})
-			
-	}
+                addressLine1: this.state.address,
+                area: this.state.area,
+                city: this.state.city,
+                district: this.state.district,
+                state: this.state.state,
+                stateCode: this.state.stateCode,
+                country: this.state.country,
+                countryCode: this.state.countryCode,
+                pincode: this.state.pincode,
 
-	validateForm=()=>{
-						var status = true;	
-						
-						if(this.state.jobTitle.length<=0)	{
-																	document.getElementById("jobTitleError").innerHTML=  
-																	"Enter job title";  
-																	status = false; 
-															}else{
-																	document.getElementById("jobTitleError").innerHTML=  
-																	""; 
-																	status = true;
-																}
-						
-						if(this.state.role.length<=0)	{
-																document.getElementById("roleError").innerHTML=  
-																"Enter role";  
-																status=false; 
-														}else{
-																document.getElementById("roleError").innerHTML=  
-																""; 
-																status = true;
-															}
-						
-						if(this.state.contactPersonName.length<=0)	{
-																			document.getElementById("contactPersonNameError").innerHTML=  
-																			"Enter contact person name";  
-																			status = false; 
-																	}else{
-																			document.getElementById("contactPersonNameError").innerHTML=  
-																			""; 
-																			status = true;
-																		}
-						
-						if(this.state.contactPersonEmail.length<=0){
-																			document.getElementById("contactPersonEmailError").innerHTML=  
-																			"Enter email id";  
-																			status = false; 
-																	}else{
-																			document.getElementById("contactPersonEmailError").innerHTML=  
-																			""; 
-																			status = true;
-																		}
-						
-						if(this.state.contactPersonPhone.length<=0){
-																			document.getElementById("contactPersonPhoneError").innerHTML=  
-																			"Enter phone number";  
-																			status = false; 
-																	}else{
-																			document.getElementById("contactPersonPhoneError").innerHTML=  
-																			""; 
-																			status = true;
-																		}
-		 				return status;
-					}
-	
-	getStates() {
-					Axios.get("http://locations2.iassureit.com/api/states/get/list/IN")
-						
-						.then((response) => {
-												this.setState({
-																	stateArray : response.data
-															})
-												document.getElementById('Statedata').val(this.state.states);
-											})
-						
-						.catch((error) => 	{
-											
-											})
-				}
-	
-	handleChange  = (event)=>	{
-									var name  = event.currentTarget.name;
-									var value = event.currentTarget.value;
-									this.setState({ [name] : value});
-								}
+                minSalary: this.state.minSalary,
+                minSalPeriod: this.state.minSalPeriod,
+                maxSalary: this.state.maxSalary,
+                maxSalPeriod: this.state.maxSalPeriod,
 
-	setGender(event){
-						event.preventDefault();
-						var id    = event.currentTarget.id;
-						this.setState({
-										gender : id,
-									 })
-					}
-	
+                minEducation: this.state.minEducation,
+                minExperience: this.state.minExperience,
 
 
-	handleSubmit = (event)	=>	{
-									event.preventDefault();
-									if(this.validateForm()){	
-																var formValues  = 	{
-																						company_id 				: 	this.state.company_id,
-																						jobTitle 				: 	this.state.jobTitle,
-																						industry_id 			:  	this.state.industry_id,
-																						functionalarea_id 		: 	this.state.functionalarea_id,
-																						functionalAreaName		: 	this.state.functionalAreaName,
-																						subfunctionalarea_id 	: 	this.state.subfunctionalarea_id,
-																						role 					: 	this.state.role,
-																						gender      	   		: 	this.state.gender,
-																						workFromHome 			: 	this.state.workFromHome,
-																						jobtype_id 				: 	this.state.jobtype_id,
-																						jobtime_id 				: 	this.state.jobtime_id,
-																						jobcategory_id 			:   this.state.jobcategory_id,
-																						positions 				: 	this.state.positions,
-																						jobDesc 				: 	this.state.jobDesc,
-																						lastDateOfAppl 			: 	this.state.lastDateOfAppl,
-																						contactPersonName 		: 	this.state.contactPersonName,
-																						contactPersonEmail 		: 	this.state.contactPersonEmail,
-																						contactPersonPhone  	:   this.state.contactPersonPhone,
-																						
-																						address            		:   this.state.address, 
-																						area 					:   this.state.area,
-																			        	cityVillage 			: 	this.state.cityVillage,
-																			       	 	district 				: 	this.state.district,
-																			        	states 					: 	this.state.states,
-																			        	stateCode 				: 	this.state.stateCode,
-																			        	country 				: 	this.state.country,
-																			        	countryCode 			: 	this.state.countryCode,
-																			        	pincode 				: 	this.state.pincode,
-																			        	
-																						minSalary 				: 	this.state.minSalary,
-																						minSalPeriod 			: 	this.state.minSalPeriod,
-																						maxSalary 				: 	this.state.maxSalary,
-																						maxSalPeriod 			: 	this.state.maxSalPeriod,
-																						
-																						minEducation 			: 	this.state.minEducation,
-																						minExperience 			: 	this.state.minExperience,
+                primarySkills: this.state.primarySkills,
+                minPrimExp: this.state.minPrimExp,
+                secondarySkills: this.state.secondarySkills,
+                minSecExp: this.state.minSecExp,
+                otherSkills: this.state.otherSkills,
+                minOtherExp: this.state.minOtherExp,
+                preferSkills: this.state.preferSkills,
+            };
 
+            console.log("formValues :", formValues);
 
-																						primarySkills 			: 	this.state.primarySkills,
-																						minPrimExp	 			: 	this.state.minPrimExp,
-																						secondarySkills 		: 	this.state.secondarySkills,
-																						minSecExp	 			: 	this.state.minSecExp,
-																						otherSkills 			: 	this.state.otherSkills,
-																						minOtherExp	 			: 	this.state.minOtherExp,
-																						preferSkills	 		: 	this.state.preferSkills,
-																					};
-																
-																console.log("formValues :", formValues);
-									
-																if(this.props.match.params.job_id)	{
-																										formValues.job_id = this.state.job_id;
-																										this.updateData(formValues);
-																									}
-																									else{
-																											this.insertData(formValues);
-																										}
-															}
-								}	
-		
-	insertData(formValues)	{
-								Axios.post("/api/jobs/post",formValues)
-								
-								.then(response 	=> 	{
-														console.log("Inside axios",response.data);
-														if(response.data.message==="Job details Inserted Successfully"){
-																															console.log("response.data = ",response.data);
-																															let job_id = response.data.jobsData._id;
+            if (this.props.match.params.job_id) {
+                formValues.job_id = this.state.job_id;
+                this.updateData(formValues);
+            } else {
+                this.insertData(formValues);
+            }
+        }
+    }
 
-																															Swal.fire("Congrats","Your Data is Submitted Successfully","success");
-																															this.setState 	({
-																																				jobTitle 			: 	"",
-																																				industry_id 		: 	"",
-																																				functionalarea_id 	: 	"",
-																																				functionalAreaName	: 	"",
-																																				subfunctionalarea_id: 	"",
-																																				role 				: 	"",
-																																				gender              : 	"Male Only",
-																																				workFromHome 		: 	false,
-																																				jobtype_id 			: 	"",
-																																				jobtime_id 			: 	"",
-																																				jobcategory_id 		: 	"",
-																																				positions           :   "",
-																																				jobDesc 			: 	"",
-																																				lastDateOfAppl 		: 	"",
-																																				contactPersonName 	: 	"",
-																																				contactPersonEmail 	: 	"",
-																																				contactPersonPhone 	: 	"",
-																																				
-																																				address        		:   "",
-																																				area 				:   "",
-																																	        	cityVillage 		: 	"",
-																																	       	 	district 			: 	"",
-																																	        	states 				: 	"",
-																																	        	stateCode 			: 	"",
-																																	        	country 			: 	"",
-																																	        	countryCode 		: 	"",
-																																	        	pincode 			: 	"",
-																																				
-																																				minSalary 			: 	"",
-																																				minSalPeriod 		: 	"",
-																																				maxSalary 			: 	"",
-																																				maxSalPeriod		: 	"",
-																																				minEducation 		: 	"",
-																																				minExperience 		: 	"",
-																																				
-																																				primarySkills 		: 	"",
-																																				minPrimExp	 		: 	"",
-																																				secondarySkills 	: 	"",
-																																				minSecExp	 		: 	"",
-																																				otherSkills 		: 	"",
-																																				minOtherExp	 		: 	"",
-																																				preferSkills	 	: 	"",
-																																			});
-																																			
-																															this.props.history.push("/job-profile/"+job_id);
-																														}
-													})
-								
-								.catch(error=>	{
-													console.log(error);
-													Swal.fire("Submit Error!",error.message,'error');
-												})
-							}
+    insertData(formValues) {
+        Axios.post("/api/jobs/post", formValues)
 
-	updateData(formValues)	{
-								Axios.patch("/api/jobs/update", formValues)
-								.then(response=>	{
-														console.log("formValues :", formValues);
-														if(response.data.message==="Job details updated Successfully!") {
-																															console.log("response.data : ", response.data);
-																															Swal.fire("Congrats!", "your profile updated successfully!", "success");
-																															this.props.history.push("/job-profile/" + this.state.job_id);
-																														}
-													})
-								.catch(error=>	{
-													console.log(error);
-											    	Swal.fire("Update Error!", error.message, 'error');
-												})
-							}
+            .then(response => {
+                console.log("Inside axios", response.data);
+                if (response.data.message === "Job details Inserted Successfully") {
+                    console.log("response.data = ", response.data);
+                    let job_id = response.data.jobsData._id;
 
-	onEditorChange(evt) {
-					        this.setState( 	
-					        				{
-					            				jobDesc: evt.editor.getData()
-					        				} 	
-					        			);
-    					}
+                    Swal.fire("Congrats", "Your Data is Submitted Successfully", "success");
+                    this.setState({
+                        jobTitle: "",
+                        industry_id: "",
+                        functionalarea_id: "",
+                        subfunctionalarea_id: "",
+                        role: "",
+                        gender: "Male Only",
+                        workFromHome: false,
+                        jobtype_id: "",
+                        jobtime_id: "",
+                        jobcategory_id: "",
+                        positions: "",
+                        jobDesc: "",
+                        lastDateOfAppl: "",
+                        contactPersonName: "",
+                        contactPersonEmail: "",
+                        contactPersonPhone: "",
 
-    setWorkFromHome(event)  {
-        						this.setState({workFromHome: event.target.checked});
-							}	
-   
-	keyPressNumber = (e) => {
-								if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 189]) !== -1 ||
-									// Allow: Ctrl+A, Command+A
-									(e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) ||
-									(e.keyCode === 86 && (e.ctrlKey === true || e.metaKey === true)) ||
-									(e.keyCode === 67 && (e.ctrlKey === true || e.metaKey === true)) ||
-									// Allow: home, end, left, right, down, up
-									(e.keyCode >= 35 && e.keyCode <= 40) || e.keyCode === 189 || e.keyCode === 32)  {
-																														// let it happen, don't do anything
-																														return;
-																													}
-								// Ensure that it is a number and stop the keypress
-								if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 58)) && (e.keyCode < 96 || e.keyCode > 105 || e.keyCode === 190 || e.keyCode === 46)) {
-																																											e.preventDefault();
-																																										}
-							}
-	
-	camelCase(str)  {
-						return str
-						.toLowerCase()
-						.split(' ')
-						.map(word => word.charAt(0).toUpperCase() + word.slice(1))
-						.join(' ');
-					}
-	
-	handleChangeState(event){
-							    var designation = document.getElementById("states");
-						    	var stateCode = designation.options[designation.selectedIndex].getAttribute("statecode");
-								this.setState({
-													[event.target.name]: event.target.value,
-													stateCode : stateCode
-											});
-							}
-    
+                        addressLine1: "",
+                        area: "",
+                        city: "",
+                        district: "",
+                        state: "",
+                        stateCode: "",
+                        country: "",
+                        countryCode: "",
+                        pincode: "",
+
+                        minSalary: "",
+                        minSalPeriod: "",
+                        maxSalary: "",
+                        maxSalPeriod: "",
+                        minEducation: "",
+                        minExperience: "",
+
+                        primarySkills: "",
+                        minPrimExp: "",
+                        secondarySkills: "",
+                        minSecExp: "",
+                        otherSkills: "",
+                        minOtherExp: "",
+                        preferSkills: "",
+                    });
+
+                    this.props.history.push("/job-profile/" + job_id);
+                }
+            })
+
+            .catch(error => {
+                console.log(error);
+                Swal.fire("Submit Error!", error.message, 'error');
+            })
+    }
+
+    updateData(formValues) {
+        Axios.patch("/api/jobs/update", formValues)
+            .then(response => {
+                console.log("formValues :", formValues);
+                if (response.data.message === "Job details updated Successfully!") {
+                    console.log("response.data : ", response.data);
+                    Swal.fire("Congrats!", "your profile updated successfully!", "success");
+                    this.props.history.push("/job-profile/" + this.state.job_id);
+                }
+            })
+            .catch(error => {
+                console.log(error);
+                Swal.fire("Update Error!", error.message, 'error');
+            })
+    }
+
+    onEditorChange(evt) {
+        this.setState({
+            jobDesc: evt.editor.getData()
+        });
+    }
+
+    setWorkFromHome(event) {
+        this.setState({
+            workFromHome: event.target.checked
+        });
+    }
+
+    keyPressNumber = (e) => {
+        if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 189]) !== -1 ||
+            // Allow: Ctrl+A, Command+A
+            (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) ||
+            (e.keyCode === 86 && (e.ctrlKey === true || e.metaKey === true)) ||
+            (e.keyCode === 67 && (e.ctrlKey === true || e.metaKey === true)) ||
+            // Allow: home, end, left, right, down, up
+            (e.keyCode >= 35 && e.keyCode <= 40) || e.keyCode === 189 || e.keyCode === 32) { // let it happen, don't do anything return; } // Ensure that it is a number and stop the keypress if ((e.shiftKey || (e.keyCode < 48 || e.keyCode> 58)) && (e.keyCode < 96 || e.keyCode> 105 || e.keyCode === 190 || e.keyCode === 46)) {
+            e.preventDefault();
+        }
+    }
+
+    camelCase(str) {
+        return str
+            .toLowerCase()
+            .split(' ')
+            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+            .join(' ');
+    }
+
+    handleChangeState(event) {
+        var designation = document.getElementById("states");
+        var stateCode = designation.options[designation.selectedIndex].getAttribute("statecode");
+        this.setState({
+            [event.target.name]: event.target.value,
+            stateCode: stateCode
+        });
+    }
+
     handleChangePlaces = address => {
-	    								this.setState({ address : address});
-									};
+        this.setState({
+            addressLine1: address
+        });
+    };
 
-	handleSelect = address => 	{
+    handleSelect = address => {
 
-								    geocodeByAddress(address)
-								    .then((results) =>	{ 
-													      	for (var i = 0; i < results[0].address_components.length; i++) {
-																													          	for (var b = 0; b < results[0].address_components[i].types.length; b++) {
-																																															              	switch (results[0].address_components[i].types[b]) {
-																																																												                  	case 'sublocality_level_1':
-																																																											                    	var area = results[0].address_components[i].long_name;
-																																																											                    	break;
-																																																												                  	
-																																																												                  	case 'sublocality_level_2':
-																																																											                    	area = results[0].address_components[i].long_name;
-																																																											                    	break;
-																																																												                  	
-																																																												                  	case 'locality':
-																																																											                    	var cityVillage = results[0].address_components[i].long_name;
-																																																											                    	break;
-																																																												                  	
-																																																												                  	case 'administrative_area_level_1':
-																																																											                    	var states = results[0].address_components[i].long_name;
-																																																											                    	var stateCode = results[0].address_components[i].short_name;
-																																																											                    	break;
-																																																												                  	
-																																																												                  	case 'administrative_area_level_2':
-																																																											                    	var district = results[0].address_components[i].long_name;
-																																																											                    	break;
-																																																												                  	
-																																																												                  	case 'country':
-																																																											                    	var country = results[0].address_components[i].long_name;
-																																																											                    	var countryCode = results[0].address_components[i].short_name;
-																																																											                    	break; 
-																																																												                  	
-																																																												                  	case 'postal_code':
-																																																												                    var pincode = results[0].address_components[i].long_name;
-																																																												                    break;
-																																																												                  	default :
-																																																												                  	break;
-													        																																																	}
-													    																																				}
-      																														}
+        geocodeByAddress(address)
+            .then((results) => {
+                for (var i = 0; i < results[0].address_components.length; i++) {
+                    for (var b = 0; b < results[0].address_components[i].types.length; b++) {
+                        switch (results[0].address_components[i].types[b]) {
+                            case 'sublocality_level_1':
+                                var area = results[0].address_components[i].long_name;
+                                break;
+                            case 'sublocality_level_2':
+                                area = results[0].address_components[i].long_name;
+                                break;
+                            case 'locality':
+                                var city = results[0].address_components[i].long_name;
+                                break;
+                            case 'administrative_area_level_1':
+                                var state = results[0].address_components[i].long_name;
+                                var stateCode = results[0].address_components[i].short_name;
+                                break;
+                            case 'administrative_area_level_2':
+                                var district = results[0].address_components[i].long_name;
+                                break;
+                            case 'country':
+                                var country = results[0].address_components[i].long_name;
+                                var countryCode = results[0].address_components[i].short_name;
+                                break;
+                            case 'postal_code':
+                                var pincode = results[0].address_components[i].long_name;
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                }
+                console.log('state==>', state)
 
-						    								console.log('state==>', states)
+                this.setState({
+                    area: area,
+                    city: city,
+                    district: district,
+                    states: state,
+                    country: country,
+                    pincode: pincode,
+                    stateCode: stateCode,
+                    countryCode: countryCode
+                })
+            })
 
-														    this.setState({
-																	   			area        	: 	area,
-																	        	cityVillage     : 	cityVillage,
-																		        district    	: 	district,
-																		        states      	: 	states,
-																		        country     	: 	country,
-																		        pincode     	: 	pincode,
-																		        stateCode   	: 	stateCode,
-																		        countryCode 	: 	countryCode
-								      									})
-														})
-     
-      								.catch(error => console.error('Error', error));
+            .catch(error => console.error('Error', error));
 
-								    geocodeByAddress(address)
-								    	.then(results => getLatLng(results[0]))
-								    	.then(latLng => this.setState({'latLng': latLng}))
-								    	.catch(error => console.error('Error', error));
-								     
-								      this.setState({ address : address});
-  								};
+        geocodeByAddress(address)
+            .then(results => getLatLng(results[0]))
+            .then(latLng => this.setState({
+                'latLng': latLng
+            }))
+            .catch(error => console.error('Error', error));
 
-	handleDelete(i) {
-					    const { tags } = this.state;
-					    this.setState({
-					    					tags: tags.filter((tag, index) => index !== i),
-    								});
-  					}
+        this.setState({
+            addressLine1: address
+        });
+    };
 
-	handleAddition(tag) {
-							this.setState(state => ({ tags: [...state.tags, tag] }));
-						}
+    handleDelete(i) {
+        const {
+            tags
+        } = this.state;
+        this.setState({
+            tags: tags.filter((tag, index) => index !== i),
+        });
+    }
 
-	handleDrag(tag, currPos, newPos){
-										const tags = [...this.state.tags];
-										const newTags = tags.slice();
+    handleAddition(tag) {
+        this.setState(state => ({
+            tags: [...state.tags, tag]
+        }));
+    }
 
-										newTags.splice(currPos, 1);
-										newTags.splice(newPos, 0, tag);
+    handleDrag(tag, currPos, newPos) {
+        const tags = [...this.state.tags];
+        const newTags = tags.slice();
 
-										// re-render
-										this.setState({ tags: newTags });
-									}
+        newTags.splice(currPos, 1);
+        newTags.splice(newPos, 0, tag);
 
-	handleTagClick(index){
-							console.log('The tag at index ' + index + ' was clicked');
-						}
+        // re-render
+        this.setState({
+            tags: newTags
+        });
+    }
 
+    handleTagClick(index) {
+        console.log('The tag at index ' + index + ' was clicked');
+    }
 
-	/*getSuggestions = value => {
+    // AutoSuggest starts
+    escapeRegexCharacters(str) {
+    	return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  	}
+
+    getSuggestions(value) {
     const escapedValue = this.escapeRegexCharacters(value.trim());
-    
+
     if (escapedValue === '') {
-      return [];
+    return [];
     }
 
     const regex = new RegExp('^' + escapedValue, 'i');
 
     return this.state.functionalArealist.filter(functionalArea => regex.test(functionalArea.label));
-  }
-
-  getSuggestionValue(suggestion) {
-    return suggestion.label;
-  }
-
-  renderSuggestion(suggestion) {
-    return (
-      <span className="Autosuggestlist">{suggestion.label}</span>
-    );
-  }
-
-  onChange = (event, { newValue , method }) => {
-    if (method="type") {
-      this.setState({ value: newValue, functionalAreaName : newValue})
-      
-    }else{
-      this.setState({
-        value: newValue
-      });
     }
-  };*/
 
-  //Autosuggest will call this function every time you need to update suggestions.
-  // You already implemented this logic above, so just use it.
-  /*onSuggestionsFetchRequested = ({ value }) => {
+    getSuggestionValue(suggestion) {
+    return suggestion.label;
+    }
+
+    renderSuggestion(suggestion) {
+    return (
+    <span className="Autosuggestlist">{suggestion.label}</span>
+    );
+
+    }
+
+    onChange = (event, { newValue, method }) => {
+        if (method = "type") {
+            this.setState({
+                value: newValue,
+                functionalAreaName: newValue
+            })
+
+        } else {
+            this.setState({
+                value: newValue
+            });
+        }
+    };
+
+    onSuggestionsFetchRequested = ({ value }) => {
+
     this.setState({
-      suggestions: this.getSuggestions(value)
+    functAreaSuggestions: this.getSuggestions(value)
     });
-  };*/
- 
-  // Autosuggest will call this function every time you need to clear suggestions.
-  /*onSuggestionsClearRequested = () => {
-    this.setState({
-      suggestions: []
-    });
-  };*/
+    };
+
+    onSuggestionsClearRequested = () => {
+	    this.setState({
+	    functAreaSuggestions: []
+	    });
+  	};
   
-  /*onSuggestionSelected=(event, { suggestion, suggestionValue, suggestionIndex, sectionIndex, method }) => { 
+  	onSuggestionSelected=(event, { suggestion, suggestionValue, suggestionIndex, sectionIndex, method }) => { 
     console.log("suggestion",suggestion)
     
     this.setState({functionalarea_id : suggestion._id, functionalAreaName : suggestionValue})
-  };*/
-
-
+  	};
+    
+    // AutoSuggest ends
 render(){	
-			/*const { value, suggestions } = this.state;
-		    const inputProps = {
-		      placeholder: "Select Functional Area",
-		      value,
-		      onChange: this.onChange
-		    };*/
-			const { tags, suggestions } = this.state;
-			const searchOptions =   {
-										// types: ['(cities)'],
-							  			componentRestrictions: {country: "in"}
-									}		
+		const { value, functAreaSuggestions } = this.state;
+	    const inputProps = {
+	      placeholder: "Select Functional Area",
+	      value,
+	      onChange: this.onChange
+	    };
+		const searchOptions =   { componentRestrictions: {country: "in"} }		
 		
-		return(
+	return(
 				<div className="pageWrapper addJobBackgroundColor container-fluid">
 					<div className="row">
 						<div className="col-lg-10 col-lg-offset-1 addJobForm pageWrapperBorder borderColor">
@@ -875,31 +835,15 @@ render(){
 												<label htmlFor="functionalArea" className="addjobformLable"> Functional Area <span className="asterisk">&#42;</span> </label>
 												<div className="input-group">
 													<span className="input-group-addon addJobFormField"><i className="fa fa-briefcase"></i></span> 
-														<select className="form-control addJobFormField" name="functionalarea_id" id="functionalarea_id" value={this.state.functionalarea_id} onChange={this.handleChange}>
-															<option hidden> -- Select -- </option>
-													    	{
-																this.state.functionalArealist!=null && this.state.functionalArealist.length > 0 
-																?
-																	this.state.functionalArealist.map((elem,index)=>{
-																														return(
-																																	<option value={elem._id} key={index}> {elem.functionalArea} </option>
-																																);
-																													}
-																									)
-																:
-																	<option> -- Select -- </option>
-															}		   
-														</select>
-
-														{/*<Autosuggest 
-											                suggestions={suggestions}
+														<Autosuggest 
+											                suggestions={functAreaSuggestions}
 											                onSuggestionsFetchRequested={this.onSuggestionsFetchRequested.bind(this)}
 											                onSuggestionsClearRequested={this.onSuggestionsClearRequested.bind(this)}
 											                getSuggestionValue={this.getSuggestionValue.bind(this)}
 											                renderSuggestion={this.renderSuggestion.bind(this)}
 											                onSuggestionSelected={this.onSuggestionSelected.bind(this)}
 											                inputProps={inputProps}
-										              	/>*/}
+										              	/>
 													<span id="functionalAreaError" className="errorMsgJobPost"></span>
 												</div>	
 											</div>			
@@ -1161,7 +1105,7 @@ render(){
 												<label htmlFor="primarySkills" className="addjobformLable"> Primary Skills </label>
 												<div className="input-group col-lg-12">
 													<span className="input-group-addon addJobFormField"> <i className='fa fa-cog'></i> </span>
-														<ReactTags
+														{/*<ReactTags
 															tags 		   = {tags}
 												        	suggestions    = {suggestions}
 												        	delimiters 	   = {delimiters}
@@ -1172,7 +1116,7 @@ render(){
 												        	name           = "primarySkills"
 												        	id             = "primarySkills"
 												        	value          = {this.state.primarySkills}
-											        	/>
+											        	/>*/}
 													</div>
 											</div>
 											
@@ -1191,7 +1135,7 @@ render(){
 												<label htmlFor="secondarySkills" className="addjobformLable"> Secondary Skills </label>
 												<div className="input-group col-lg-12">
 													<span className="input-group-addon addJobFormField"> <i className='fa fa-cog'></i> </span>
-														<ReactTags
+														{/*<ReactTags
 															tags           = {tags}
 												        	suggestions    = {suggestions}
 												        	delimiters     = {delimiters}
@@ -1202,7 +1146,7 @@ render(){
 												        	name           = "secondarySkills"
 												        	id             = "secondarySkills"
 												        	value          = {this.state.secondarySkills}
-												        />
+												        />*/}
 												</div>
 											</div>
 											
@@ -1221,7 +1165,7 @@ render(){
 												<label htmlFor="otherSkills" className="addjobformLable"> Other Skills </label>
 												<div className="input-group col-lg-12">
 													<span className="input-group-addon addJobFormField"> <i className='fa fa-cog'></i> </span>
-														<ReactTags
+														{/*<ReactTags
 															tags           = {tags}
 												        	suggestions    = {suggestions}
 												        	delimiters     = {delimiters}
@@ -1232,7 +1176,7 @@ render(){
 												        	name           = "otherSkills"
 												        	id             = "otherSkills"
 												        	value          = {this.state.otherSkills}
-												        />
+												        /> */}
 												</div>
 											</div>
 											
@@ -1250,7 +1194,7 @@ render(){
 										<label htmlFor="preferSkills" className="addjobformLable"> Preferred Skills but not mandatory </label>
 										<div className="input-group col-lg-12 preferSkillsField">
 											<span className="input-group-addon addJobFormField"> <i className='fa fa-cog'></i> </span>
-												<ReactTags
+												{/*<ReactTags
 													tags           = {tags}
 										        	suggestions    = {suggestions}
 										        	delimiters     = {delimiters}
@@ -1261,7 +1205,7 @@ render(){
 										        	name           = "preferSkills"
 										        	id             = "preferSkills"
 										        	value          = {this.state.preferSkills}
-												/>
+												/>*/} 
 										</div>
 									</div>
 									
@@ -1318,26 +1262,10 @@ render(){
 									      	<div> 
 	                    						<CKEditor
 											        editor  	= 	{ClassicEditor}
-											        
 											        data 		= 	{this.state.jobDesc}
-											        
 											        id 			= 	"jobDesc"
-											        
-											        onInit		=	{ 	
-											        					editor =>	{
-
-											          								} 			
-											          				}
-											        
-											        onChange 	=	{ 	
-											        					(event, editor)	=> 	{
-																				        		this.setState( 
-																				        						{
-																					        						jobDesc: editor.getData()
-																					        		 			} 
-																					        		 		);
-											          										}
-											          				}
+											        onInit		=	{ editor =>	{}}
+											        onChange 	=	{(event, editor) => {this.setState({ jobDesc: editor.getData() });} }
 											        
 											        onBlur		=	{ 	
 											        					editor 	=> 	{
@@ -1370,5 +1298,5 @@ render(){
 					</div>
 				</div>
 			);
-		}
+}
 }
