@@ -50,6 +50,7 @@
     "react-geolocated": "^3.1.0",
     "react-google-charts": "^3.0.15",
     "react-google-maps": "^9.4.5",
+    "react-html-datalist": "^2.0.4",
     "react-html-table-to-excel": "^2.0.0",
     "react-imask": "^6.0.5",
     "react-inline-editing": "^1.0.10",

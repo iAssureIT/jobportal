@@ -17,7 +17,6 @@ import PlacesAutocomplete, {
     geocodeByAddress,
     getLatLng
 } from "react-places-autocomplete";
-
 export default class JobPosting extends Component {
 
     constructor(props) {
@@ -28,6 +27,7 @@ export default class JobPosting extends Component {
             jobTitle: "",
             industry_id: localStorage.getItem("industry_id"),
             industryList: [],
+            functionalArea: "",
             functionalarea_id: "",
             functionalArealist: [],
             subfunctionalarea_id: "",
@@ -180,15 +180,9 @@ export default class JobPosting extends Component {
 
         Axios.get("/api/functionalareamaster/get/list")
             .then(response => {
-                	var functionalArealist = [];
-			      	response.data.map((value,ind)=>{
-			        functionalArealist.push({_id: value._id, label : value.functionalArea})
-			      	})
-			     
 	                this.setState({
-	                    functionalArealist: functionalArealist
+	                    functionalArealist: response.data
 	                });
-                console.log("functionalArea", this.state.functionalArealist);
             })
             .catch(error => {
                 Swal.fire("Error while getting List data", error.message, 'error');
@@ -615,68 +609,23 @@ export default class JobPosting extends Component {
         console.log('The tag at index ' + index + ' was clicked');
     }
 
-    // AutoSuggest starts
-    escapeRegexCharacters(str) {
-    	return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-  	}
-
-    getSuggestions(value) {
-    const escapedValue = this.escapeRegexCharacters(value.trim());
-
-    if (escapedValue === '') {
-    return [];
-    }
-
-    const regex = new RegExp('^' + escapedValue, 'i');
-
-    return this.state.functionalArealist.filter(functionalArea => regex.test(functionalArea.label));
-    }
-
-    getSuggestionValue(suggestion) {
-    return suggestion.label;
-    }
-
-    renderSuggestion(suggestion) {
-    return (
-    <span className="Autosuggestlist">{suggestion.label}</span>
-    );
-
-    }
-
-    onChange = (event, { newValue, method }) => {
-        if (method = "type") {
-            this.setState({
-                value: newValue,
-                functionalAreaName: newValue
-            })
-
-        } else {
-            this.setState({
-                value: newValue
-            });
-        }
-    };
-
-    onSuggestionsFetchRequested = ({ value }) => {
-
-    this.setState({
-    functAreaSuggestions: this.getSuggestions(value)
-    });
-    };
-
-    onSuggestionsClearRequested = () => {
-	    this.setState({
-	    functAreaSuggestions: []
-	    });
-  	};
-  
-  	onSuggestionSelected=(event, { suggestion, suggestionValue, suggestionIndex, sectionIndex, method }) => { 
-    console.log("suggestion",suggestion)
     
-    this.setState({functionalarea_id : suggestion._id, functionalAreaName : suggestionValue})
-  	};
-    
-    // AutoSuggest ends
+
+    _onChange(event){
+        const {name,value} = event.target;
+        this.setState({ [name]:value });  
+        
+        var functionalarea_id;
+        if (document.querySelector('#functionalArea option[value="' + value + '"]')) {
+        	functionalarea_id = document.querySelector('#functionalArea option[value="' + value + '"]').getAttribute("data-value")
+        }else{ functionalarea_id = "" }
+
+	 	this.setState({ functionalarea_id : functionalarea_id },()=>{
+	 		console.log(this.state)
+	 	});  
+	 	
+    }
+
 render(){	
 		const { value, functAreaSuggestions } = this.state;
 	    const inputProps = {
@@ -835,15 +784,13 @@ render(){
 												<label htmlFor="functionalArea" className="addjobformLable"> Functional Area <span className="asterisk">&#42;</span> </label>
 												<div className="input-group">
 													<span className="input-group-addon addJobFormField"><i className="fa fa-briefcase"></i></span> 
-														<Autosuggest 
-											                suggestions={functAreaSuggestions}
-											                onSuggestionsFetchRequested={this.onSuggestionsFetchRequested.bind(this)}
-											                onSuggestionsClearRequested={this.onSuggestionsClearRequested.bind(this)}
-											                getSuggestionValue={this.getSuggestionValue.bind(this)}
-											                renderSuggestion={this.renderSuggestion.bind(this)}
-											                onSuggestionSelected={this.onSuggestionSelected.bind(this)}
-											                inputProps={inputProps}
-										              	/>
+														<input type="text" list="functionalArea" className="form-control addJobFormField addJobState" refs="functionalArea" id="selectFunctionalArea" value={this.state.functionalArea} name="functionalArea"
+														onChange={this._onChange.bind(this)} />
+														  <datalist name="functionalArea" id="functionalArea" className="functionalArealist" >
+														    {this.state.functionalArealist.map((item, key) =>
+														      <option key={key} value={item.functionalArea} data-value={item._id}/>
+														    )}
+														  </datalist>
 													<span id="functionalAreaError" className="errorMsgJobPost"></span>
 												</div>	
 											</div>			
