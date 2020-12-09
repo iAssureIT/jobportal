@@ -92,7 +92,7 @@ class MapHeader extends Component{
 
 	     				<div className="functionalbarsCross col-lg-12">
 							
-							<span className="notificationMessegeCross" onClick={this.asideBar.bind(this)}> X </span>
+							<span className="notificationMessegeCross" id="closeAsidebarButton" onClick={this.asideBar.bind(this)}> X </span>
 						</div>
 
 
@@ -131,7 +131,7 @@ class MapHeader extends Component{
 				<div className="modal" id="loginModal" role="dialog" tabIndex="-1">
 				    <div className="modal-dialog  modal-lg">
 					    <div className="modal-body">
-					      	<button type="button" className="close" data-dismiss="modal">&times;</button>
+					      	<button type="button" className="close" id="closeModalButton" data-dismiss="modal">&times;</button>
 					        <section className="OTPSentWrapper row">
 				                {this.props.selectedModal == "login" ? <LoginForm/> : null }
 				                {this.props.selectedModal == "signup" ? <SignUp/> : null }

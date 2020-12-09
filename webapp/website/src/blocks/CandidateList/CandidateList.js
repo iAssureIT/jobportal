@@ -1,4 +1,4 @@
-import React,{Component} from 'react';
+zimport React,{Component} from 'react';
 import Axios 			 	from 'axios';
 import Swal 			 	from 'sweetalert2';
 import Moment               from 'moment';

@@ -136,8 +136,8 @@ class Login extends Component {
               //localStorage.setItem("companyID", response.data.userDetails.companyID);
               localStorage.setItem('userDetails', JSON.stringify(userDetails));
                //window.location.href = '/';
-                // document.getElementById("modalclosebtn").click();
-                //document.getElementById("navclosebtn").click();
+                 document.getElementById("closeModalButton").click();
+                 document.getElementById("closeAsidebarButton").click();
               
               var {mapAction} = this.props;
               mapAction.setUserDetails(userDetails);

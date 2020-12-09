@@ -25,11 +25,11 @@ componentDidMount(){
 handleclick = (jobid)=>{
 	console.log("jobid : ", jobid);
 	this.setState({isToggle:!this.state.isToggle})
-	if (this.props.loggedIn) {
+	if (this.props.userDetails.loggedIn) {
 		var formValues = {
-			candidateID : this.props.candidateID,
+			candidateID : this.props.userDetails.candidate_id,
 			jobID  		: jobid,
-			createdBy   : this.props.user_ID
+			createdBy   : this.props.userDetails.user_id
 		}
 		Axios.post("/api/wishlist/post",formValues)
 			.then(response =>{
@@ -65,9 +65,9 @@ search = (event)=>{
 applyJob = (jobid, company_id)=>{
 	console.log("jobid :", jobid);
 	
-	if (this.props.loggedIn) {
+	if (this.props.userDetails.loggedIn) {
 	var formValues = { 
-						candidateID   		: this.props.candidateID,
+						candidateID   		: this.props.userDetails.candidate_id,
 						jobID         		: jobid,
 					    employerID    		: company_id,
 					    status        	  	: "Applied"
@@ -212,8 +212,8 @@ applyJob = (jobid, company_id)=>{
 
 const mapStateToProps = (state)=>{
     return {
-    	loggedIn  		: state.loggedIn,		user_ID 		: state.user_ID, 	
-    	candidateID 	: state.candidateID,	selector        : state.selector, 	
+    		
+    	userDetails 	: state.userDetails,	selector        : state.selector, 	
     	jobList 		: state.jobList,		jobWishlist 	: state.jobWishlist
     }
 }
