@@ -3,17 +3,20 @@ import './JobPosting.css';
 import 'react-phone-input-2/lib/style.css';
 import $ from 'jquery';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Modal from '../Modal/Modal.js';
+import PreviewModal from '../PreviewModal/PreviewModal.js';
 import Axios from 'axios';
 import Swal from 'sweetalert2';
 import CKEditor from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import PhoneInput from 'react-phone-input-2';
 import Moment from "moment";
-import {WithContext as ReactTags}  from 'react-tag-input';	
-import PlacesAutocomplete, {    
-	geocodeByAddress,
-    getLatLng
+import Autosuggest from 'react-autosuggest';
+
+import { WithContext as ReactTags } from 'react-tag-input';
+import { COUNTRIES } from './countries';
+import PlacesAutocomplete, {
+        geocodeByAddress,
+        getLatLng
 } from "react-places-autocomplete";
 export default class JobPosting extends Component {
 
@@ -21,68 +24,73 @@ export default class JobPosting extends Component {
         super(props);
 
         this.state = {
-            company_id: localStorage.getItem("company_Id"),
-            jobTitle: "",
-            industry_id: localStorage.getItem("industry_id"),
-            industryList: [],
-            functionalArea: "",
-            functionalarea_id: "",
-            functionalArealist: [],
-            subfunctionalarea_id: "",
-            subFunctionalAreaList: [],
-            role: "",
-            gender: "Male Only",
-            workFromHome: false,
-            jobtype_id: "",
-            jobTypeArray: [],
-            jobtime_id: "",
-            jobTimeArray: [],
-            jobcategory_id: "",
-            jobCategoryArray: [],
-            positions: "",
-            jobDesc: "",
-            lastDateOfAppl: "",
-            contactPersonName: "",
-            contactPersonEmail: "",
-            contactPersonPhone: "",
+            company_id                  :   localStorage.getItem("company_Id"),
+            jobTitle                    :   "",
+            industry_id                 :   localStorage.getItem("industry_id"),
+            industryList                :   [],
+            functionalarea_id           :   "",
+            functionalArealist          :   [],
+            subfunctionalarea_id        :   "",
+            subFunctionalArealist       :   [],
+            role_id                     :   "",
+            roleArray                   :   [],
+            gender                      :   "Male Only",
+            workFromHome                :   false,
+            jobtype_id                  :   "",
+            jobTypeArray                :   [],
+            jobtime_id                  :   "",
+            jobTimeArray                :   [],
+            jobcategory_id              :   "",
+            jobCategoryArray            :   [],
+            positions                   :   "",
+            jobDesc                     :   "",
+            lastDateOfAppl              :   "",
+            contactPersonName           :   "",
+            contactPersonEmail          :   "",
+            contactPersonPhone          :   "",
 
-            addressLine1: "",
-            area: "",
-            city: "",
-            district: "",
-            districtArray: [],
-            state: "",
-            stateArray: [],
-            stateCode: "",
-            country: "",
-            countryCode: "",
-            pincode: "",
-            pincodeExists: true,
+            address                     :   "",
+            area                        :   "",
+            cityVillage                 :   "",
+            district                    :   "",
+            districtArray               :   [],
+            states                      :   "",
+            stateArray                  :   [],
+            stateCode                   :   "",
+            country                     :   "",
+            countryCode                 :   "",
+            pincode                     :   "",
+            pincodeExists               :   true,
 
-            minSalary: "",
-            minSalPeriod: "",
-            maxSalary: "",
-            maxSalPeriod: "",
+            minSalary                   :   "",
+            minSalPeriod                :   "",
+            maxSalary                   :   "",
+            maxSalPeriod                :   "",
 
-            minEducation: "",
-            minExperience: "",
+            minEducation                :   "",
+            minExperience               :   "",
 
-            primarySkills: [],
-            minPrimExp: "",
-            priSkillsArray: [],
-            secondarySkills: [],
-            minSecExp: "",
-            secSkillsArray: [],
-            otherSkills: [],
-            minOtherExp: "",
-            otherSkillsArray: [],
-            preferSkills: "",
-            preferSkillsArray: [],
-            submitBtnText: "SUBMIT",
-            primarySkillTags: [],
-		    primarySkillSuggestions: [],
-		    secondarySkillTags: [],
-		    secondarySkillSuggestions: []
+            primarySkills               :   [],
+            minPrimExp                  :   "",
+            priSkillsArray              :   [],
+            secondarySkills             :   [],
+            minSecExp                   :   "",
+            secSkillsArray              :   [],
+            otherSkills                 :   [],
+            minOtherExp                 :   "",
+            otherSkillsArray            :   [],
+            preferSkills                :   "",
+            preferSkillsArray           :   [],
+            priSkillsArraylist          :   [],
+            secSkillsArraylist          :   [],
+            otherSkillsArraylist        :   [],
+            preferSkillsArraylist       :   [],
+            submitBtnText               :   "SUBMIT",
+            primarySkillTags            :   [],
+            primarySkillSuggestions     :   [],
+            secondarySkillTags          :   [],
+            secondarySkillSuggestions   :   [],
+            value                       :   ""
         }
 
         this.style = {
@@ -102,6 +110,11 @@ export default class JobPosting extends Component {
 
         this.reactTags = React.createRef();
         
+        this.handleDelete   = this.handleDelete.bind(this);
+        this.handleAddition = this.handleAddition.bind(this);
+        this.handleDrag     = this.handleDrag.bind(this);
+        this.handleTagClick = this.handleTagClick.bind(this);
+
     }
 
     componentDidMount() {
@@ -112,50 +125,50 @@ export default class JobPosting extends Component {
                 .then(response => {
                     console.log("response.data : ", response.data);
                     this.setState({
-                        job_id: job_id,
-                        jobTitle: response.data.jobsData[0].jobBasicInfo.jobTitle,
-                        industry_id: response.data.jobsData[0].jobBasicInfo.industry_id,
-                        functionalarea_id: response.data.jobsData[0].jobBasicInfo.functionalarea_id,
-                        subfunctionalarea_id: response.data.jobsData[0].jobBasicInfo.subfunctionalarea_id,
-                        role: response.data.jobsData[0].jobBasicInfo.role,
-                        gender: response.data.jobsData[0].jobBasicInfo.gender,
-                        workFromHome: response.data.jobsData[0].jobBasicInfo.workFromHome,
-                        jobtype_id: response.data.jobsData[0].jobBasicInfo.jobtype_id,
-                        jobtime_id: response.data.jobsData[0].jobBasicInfo.jobtime_id,
-                        jobcategory_id: response.data.jobsData[0].jobBasicInfo.jobcategory_id,
-                        positions: response.data.jobsData[0].jobBasicInfo.positions,
-                        jobDesc: response.data.jobsData[0].jobBasicInfo.jobDesc,
-                        lastDateOfAppl: response.data.jobsData[0].jobBasicInfo.lastDateOfAppl ? Moment(response.data.jobsData[0].jobBasicInfo.lastDateOfAppl).format("YYYY-MM-DD") : "",
-                        contactPersonName: response.data.jobsData[0].jobBasicInfo.contactPersonName,
-                        contactPersonEmail: response.data.jobsData[0].jobBasicInfo.contactPersonEmail,
-                        contactPersonPhone: response.data.jobsData[0].jobBasicInfo.contactPersonPhone,
+                        job_id                  :   job_id,
+                        jobTitle                :   response.data.jobsData[0].jobBasicInfo.jobTitle,
+                        industry_id             :   response.data.jobsData[0].jobBasicInfo.industry_id,
+                        functionalarea_id       :   response.data.jobsData[0].jobBasicInfo.functionalarea_id,
+                        subfunctionalarea_id    :   response.data.jobsData[0].jobBasicInfo.subfunctionalarea_id,
+                        role_id                 :   response.data.jobsData[0].jobBasicInfo.role_id,
+                        gender                  :   response.data.jobsData[0].jobBasicInfo.gender,
+                        workFromHome            :   response.data.jobsData[0].jobBasicInfo.workFromHome,
+                        jobtype_id              :   response.data.jobsData[0].jobBasicInfo.jobtype_id,
+                        jobtime_id              :   response.data.jobsData[0].jobBasicInfo.jobtime_id,
+                        jobcategory_id          :   response.data.jobsData[0].jobBasicInfo.jobcategory_id,
+                        positions               :   response.data.jobsData[0].jobBasicInfo.positions,
+                        jobDesc                 :   response.data.jobsData[0].jobBasicInfo.jobDesc,
+                        lastDateOfAppl          :   response.data.jobsData[0].jobBasicInfo.lastDateOfAppl ? Moment(response.data.jobsData[0].jobBasicInfo.lastDateOfAppl).format("YYYY-MM-DD") : "",
+                        contactPersonName       :   response.data.jobsData[0].jobBasicInfo.contactPersonName,
+                        contactPersonEmail      :   response.data.jobsData[0].jobBasicInfo.contactPersonEmail,
+                        contactPersonPhone      :   response.data.jobsData[0].jobBasicInfo.contactPersonPhone,
 
-                        addressLine1: response.data.jobsData[0].location.address,
-                        area: response.data.jobsData[0].location.area,
-                        city: response.data.jobsData[0].location.city,
-                        district: response.data.jobsData[0].location.district,
-                        state: response.data.jobsData[0].location.state,
-                        stateCode: response.data.jobsData[0].location.stateCode,
-                        country: response.data.jobsData[0].location.country,
-                        countryCode: response.data.jobsData[0].location.countryCode,
-                        pincode: response.data.jobsData[0].location.pincode,
+                        address                 :   response.data.jobsData[0].location.address,
+                        area                    :   response.data.jobsData[0].location.area,
+                        cityVillage             :   response.data.jobsData[0].location.cityVillage,
+                        district                :   response.data.jobsData[0].location.district,
+                        states                  :   response.data.jobsData[0].location.states,
+                        stateCode               :   response.data.jobsData[0].location.stateCode,
+                        country                 :   response.data.jobsData[0].location.country,
+                        countryCode             :   response.data.jobsData[0].location.countryCode,
+                        pincode                 :   response.data.jobsData[0].location.pincode,
 
-                        minSalary: response.data.jobsData[0].ctcOffered.minSalary,
-                        minSalPeriod: response.data.jobsData[0].ctcOffered.minSalPeriod,
-                        maxSalary: response.data.jobsData[0].ctcOffered.maxSalary,
-                        maxSalPeriod: response.data.jobsData[0].ctcOffered.maxSalPeriod,
+                        minSalary               :   response.data.jobsData[0].ctcOffered.minSalary,
+                        minSalPeriod            :   response.data.jobsData[0].ctcOffered.minSalPeriod,
+                        maxSalary               :   response.data.jobsData[0].ctcOffered.maxSalary,
+                        maxSalPeriod            :   response.data.jobsData[0].ctcOffered.maxSalPeriod,
 
-                        minEducation: response.data.jobsData[0].eligibility.minEducation,
-                        minExperience: response.data.jobsData[0].eligibility.minExperience,
+                        minEducation            :   response.data.jobsData[0].eligibility.minEducation,
+                        minExperience           :   response.data.jobsData[0].eligibility.minExperience,
 
-                        primarySkills: response.data.jobsData[0].eligibility.primarySkills,
-                        minPrimExp: response.data.jobsData[0].requiredSkills.minPrimExp,
-                        secondarySkills: response.data.jobsData[0].requiredSkills.secondarySkills,
-                        minSecExp: response.data.jobsData[0].requiredSkills.minSecExp,
-                        otherSkills: response.data.jobsData[0].requiredSkills.otherSkills,
-                        minOtherExp: response.data.jobsData[0].requiredSkills.minOtherExp,
-                        preferSkills: response.data.jobsData[0].requiredSkills.preferSkills,
-                        submitBtnText: "UPDATE"
+                        primarySkills           :   response.data.jobsData[0].eligibility.primarySkills,
+                        minPrimExp              :   response.data.jobsData[0].requiredSkills.minPrimExp,
+                        secondarySkills         :   response.data.jobsData[0].requiredSkills.secondarySkills,
+                        minSecExp               :   response.data.jobsData[0].requiredSkills.minSecExp,
+                        otherSkills             :   response.data.jobsData[0].requiredSkills.otherSkills,
+                        minOtherExp             :   response.data.jobsData[0].requiredSkills.minOtherExp,
+                        preferSkills            :   response.data.jobsData[0].requiredSkills.preferSkills,
+                        submitBtnText           :   "UPDATE"
                     })
 
                     if (response.data.jobsData[0].jobBasicInfo.workFromHome === true) {
@@ -184,13 +197,25 @@ export default class JobPosting extends Component {
             .then(response => {
                 /*console.log("getsubFunctionalAreaData response.data = ", response.data);*/
                 this.setState({
-                    subFunctionalAreaList: response.data
+                    subFunctionalArealist: response.data
                 });
-                /*console.log("subFunctionalArea", this.state.subFunctionalAreaList);*/
+                /*console.log("subFunctionalArea", this.state.subFunctionalArealist);*/
             })
             .catch(error => {
                 Swal.fire("Error while getting List data", error.message, 'error');
             })
+
+        Axios.get("/api/jobrolemaster/get/list")
+            .then(response => {
+                /*console.log("getsubFunctionalAreaData response.data = ", response.data);*/
+                this.setState({
+                    roleArray: response.data
+                });
+                /*console.log("subFunctionalArea", this.state.roleArray);*/
+            })
+            .catch(error => {
+                Swal.fire("Error while getting List data", error.message, 'error');
+            })    
 
         Axios.get("/api/jobtypemaster/get/list")
             .then(response => {
@@ -257,8 +282,8 @@ export default class JobPosting extends Component {
             document.getElementById("jobTitleError").innerHTML = "";
             status = true;
         }
-        if (this.state.role.length <= 0) {
-            document.getElementById("roleError").innerHTML = "Enter role";
+        if (this.state.role_id.length <= 0) {
+            document.getElementById("roleError").innerHTML = "Enter job role";
             status = false;
         } else {
             document.getElementById("roleError").innerHTML = "";
@@ -322,50 +347,49 @@ export default class JobPosting extends Component {
         event.preventDefault();
         if (this.validateForm()) {
             var formValues = {
-                company_id: this.state.company_id,
-                jobTitle: this.state.jobTitle,
-                industry_id: this.state.industry_id,
-                functionalarea_id: this.state.functionalarea_id,
-                subfunctionalarea_id: this.state.subfunctionalarea_id,
-                role: this.state.role,
-                gender: this.state.gender,
-                workFromHome: this.state.workFromHome,
-                jobtype_id: this.state.jobtype_id,
-                jobtime_id: this.state.jobtime_id,
-                jobcategory_id: this.state.jobcategory_id,
-                positions: this.state.positions,
-                jobDesc: this.state.jobDesc,
-                lastDateOfAppl: this.state.lastDateOfAppl,
-                contactPersonName: this.state.contactPersonName,
-                contactPersonEmail: this.state.contactPersonEmail,
-                contactPersonPhone: this.state.contactPersonPhone,
+                company_id              :   this.state.company_id,
+                jobTitle                :   this.state.jobTitle,
+                industry_id             :   this.state.industry_id,
+                functionalarea_id       :   this.state.functionalarea_id,
+                subfunctionalarea_id    :   this.state.subfunctionalarea_id,
+                role_id                 :   this.state.role_id,
+                gender                  :   this.state.gender,
+                workFromHome            :   this.state.workFromHome,
+                jobtype_id              :   this.state.jobtype_id,
+                jobtime_id              :   this.state.jobtime_id,
+                jobcategory_id          :   this.state.jobcategory_id,
+                positions               :   this.state.positions,
+                jobDesc                 :   this.state.jobDesc,
+                lastDateOfAppl          :   this.state.lastDateOfAppl,
+                contactPersonName       :   this.state.contactPersonName,
+                contactPersonEmail      :   this.state.contactPersonEmail,
+                contactPersonPhone      :   this.state.contactPersonPhone,
 
-                addressLine1: this.state.address,
-                area: this.state.area,
-                city: this.state.city,
-                district: this.state.district,
-                state: this.state.state,
-                stateCode: this.state.stateCode,
-                country: this.state.country,
-                countryCode: this.state.countryCode,
-                pincode: this.state.pincode,
+                address                 :   this.state.address,
+                area                    :   this.state.area,
+                cityVillage             :   this.state.cityVillage,
+                district                :   this.state.district,
+                states                  :   this.state.states,
+                stateCode               :   this.state.stateCode,
+                country                 :   this.state.country,
+                countryCode             :   this.state.countryCode,
+                pincode                 :   this.state.pincode,
 
-                minSalary: this.state.minSalary,
-                minSalPeriod: this.state.minSalPeriod,
-                maxSalary: this.state.maxSalary,
-                maxSalPeriod: this.state.maxSalPeriod,
+                minSalary               :   this.state.minSalary,
+                minSalPeriod            :   this.state.minSalPeriod,
+                maxSalary               :   this.state.maxSalary,
+                maxSalPeriod            :   this.state.maxSalPeriod,
 
-                minEducation: this.state.minEducation,
-                minExperience: this.state.minExperience,
+                minEducation            :   this.state.minEducation,
+                minExperience           :   this.state.minExperience,
 
-
-                primarySkills: this.state.primarySkills,
-                minPrimExp: this.state.minPrimExp,
-                secondarySkills: this.state.secondarySkills,
-                minSecExp: this.state.minSecExp,
-                otherSkills: this.state.otherSkills,
-                minOtherExp: this.state.minOtherExp,
-                preferSkills: this.state.preferSkills,
+                primarySkills           :   this.state.primarySkills,
+                minPrimExp              :   this.state.minPrimExp,
+                secondarySkills         :   this.state.secondarySkills,
+                minSecExp               :   this.state.minSecExp,
+                otherSkills             :   this.state.otherSkills,
+                minOtherExp             :   this.state.minOtherExp,
+                preferSkills            :   this.state.preferSkills,
             };
 
             console.log("formValues :", formValues);
@@ -390,47 +414,47 @@ export default class JobPosting extends Component {
 
                     Swal.fire("Congrats", "Your Data is Submitted Successfully", "success");
                     this.setState({
-                        jobTitle: "",
-                        industry_id: "",
-                        functionalarea_id: "",
-                        subfunctionalarea_id: "",
-                        role: "",
-                        gender: "Male Only",
-                        workFromHome: false,
-                        jobtype_id: "",
-                        jobtime_id: "",
-                        jobcategory_id: "",
-                        positions: "",
-                        jobDesc: "",
-                        lastDateOfAppl: "",
-                        contactPersonName: "",
-                        contactPersonEmail: "",
-                        contactPersonPhone: "",
+                        jobTitle                :   "",
+                        industry_id             :   "",
+                        functionalarea_id       :   "",
+                        subfunctionalarea_id    :   "",
+                        role_id                 :   "",
+                        gender                  :   "Male Only",
+                        workFromHome            :   false,
+                        jobtype_id              :   "",
+                        jobtime_id              :   "",
+                        jobcategory_id          :   "",
+                        positions               :   "",
+                        jobDesc                 :   "",
+                        lastDateOfAppl          :   "",
+                        contactPersonName       :   "",
+                        contactPersonEmail      :   "",
+                        contactPersonPhone      :   "",
 
-                        addressLine1: "",
-                        area: "",
-                        city: "",
-                        district: "",
-                        state: "",
-                        stateCode: "",
-                        country: "",
-                        countryCode: "",
-                        pincode: "",
+                        address                 :   "",
+                        area                    :   "",
+                        cityVillage             :   "",
+                        district                :   "",
+                        states                  :   "",
+                        stateCode               :   "",
+                        country                 :   "",
+                        countryCode             :   "",
+                        pincode                 :   "",
 
-                        minSalary: "",
-                        minSalPeriod: "",
-                        maxSalary: "",
-                        maxSalPeriod: "",
-                        minEducation: "",
-                        minExperience: "",
+                        minSalary               :   "",
+                        minSalPeriod            :   "",
+                        maxSalary               :   "",
+                        maxSalPeriod            :   "",
+                        minEducation            :   "",
+                        minExperience           :   "",
 
-                        primarySkills: "",
-                        minPrimExp: "",
-                        secondarySkills: "",
-                        minSecExp: "",
-                        otherSkills: "",
-                        minOtherExp: "",
-                        preferSkills: "",
+                        primarySkills           :   "",
+                        minPrimExp              :   "",
+                        secondarySkills         :   "",
+                        minSecExp               :   "",
+                        otherSkills             :   "",
+                        minOtherExp             :   "",
+                        preferSkills            :   "",
                     });
 
                     this.props.history.push("/job-profile/" + job_id);
@@ -502,7 +526,7 @@ export default class JobPosting extends Component {
 
     handleChangePlaces = address => {
         this.setState({
-            addressLine1: address
+            address: address
         });
     };
 
@@ -542,15 +566,17 @@ export default class JobPosting extends Component {
                     }
                 }
 
+                console.log('states==>', state)
+
                 this.setState({
-                    area: area,
-                    city: city,
-                    district: district,
-                    states: state,
-                    country: country,
-                    pincode: pincode,
-                    stateCode: stateCode,
-                    countryCode: countryCode
+                    area            :   area,
+                    city            :   city,
+                    district        :   district,
+                    states          :   state,
+                    country         :   country,
+                    pincode         :   pincode,
+                    stateCode       :   stateCode,
+                    countryCode     :   countryCode
                 })
             })
 
@@ -564,11 +590,45 @@ export default class JobPosting extends Component {
             .catch(error => console.error('Error', error));
 
         this.setState({
-            addressLine1: address
+            address: address
         });
     };
 
-    _onChange(event){
+    handleDelete(i) {
+        const {
+            tags
+        } = this.state;
+        this.setState({
+            tags: tags.filter((tag, index) => index !== i),
+        });
+    }
+
+    handleAddition(tag) {
+        this.setState(state => ({
+            tags: [...state.tags, tag]
+        }));
+    }
+
+    handleDrag(tag, currPos, newPos) {
+        const tags = [...this.state.tags];
+        const newTags = tags.slice();
+
+        newTags.splice(currPos, 1);
+        newTags.splice(newPos, 0, tag);
+
+        // re-render
+        this.setState({
+            tags: newTags
+        });
+    }
+
+    handleTagClick(index) {
+        console.log('The tag at index ' + index + ' was clicked');
+    }
+
+    
+
+    onChangeFunctionalArea(event){
         const {name,value} = event.target;
         this.setState({ [name]:value });  
         
@@ -582,6 +642,7 @@ export default class JobPosting extends Component {
 	 	});  
 	 	
     }
+    
     onprimarySkillDelete (i) {
 	    const { primarySkillTags } = this.state;
 	    this.setState({
@@ -617,10 +678,86 @@ export default class JobPosting extends Component {
   	onsecondarySkillAddition (tags) {
     	const secondarySkillTags = [].concat(this.state.secondarySkillTags, tags)
     	this.setState({ secondarySkillTags })
-  	}
-	render(){
-		console.log(this.state.primarySkillSuggestions)
+  	}	
 
+    onChangeSubFunctionalArea(event){
+        const {name,value} = event.target;
+        this.setState({ [name]:value });  
+        
+        var subfunctionalarea_id;
+        if (document.querySelector('#subFunctionalArea option[value="' + value + '"]')) {
+            subfunctionalarea_id = document.querySelector('#subFunctionalArea option[value="' + value + '"]').getAttribute("data-value")
+        }else{ subfunctionalarea_id = "" }
+
+        this.setState({ subfunctionalarea_id : subfunctionalarea_id },()=>{
+            console.log(this.state)
+        });  
+        
+    }
+
+    onChangeRole(event){
+        const {name,value} = event.target;
+        this.setState({ [name]:value });  
+        
+        var role_id;
+        if (document.querySelector('#role option[value="' + value + '"]')) {
+            role_id = document.querySelector('#role option[value="' + value + '"]').getAttribute("data-value")
+        }else{ role_id = "" }
+
+        this.setState({ role_id : role_id },()=>{
+            console.log(this.state)
+        });  
+        
+    }
+
+    onChangeJobType(event){
+        const {name,value} = event.target;
+        this.setState({ [name]:value });  
+        
+        var jobtype_id;
+        if (document.querySelector('#jobType option[value="' + value + '"]')) {
+            jobtype_id = document.querySelector('#jobType option[value="' + value + '"]').getAttribute("data-value")
+        }else{ jobtype_id = "" }
+
+        this.setState({ jobtype_id : jobtype_id },()=>{
+            console.log(this.state)
+        });  
+        
+    }
+
+    onChangeJobTime(event){
+        const {name,value} = event.target;
+        this.setState({ [name]:value });  
+        
+        var jobtime_id;
+        if (document.querySelector('#jobTime option[value="' + value + '"]')) {
+            jobtime_id = document.querySelector('#jobTime option[value="' + value + '"]').getAttribute("data-value")
+        }else{ jobtime_id = "" }
+
+        this.setState({ jobtime_id : jobtime_id },()=>{
+            console.log(this.state)
+        });  
+        
+    }
+
+    onChangeJobCategory(event){
+        const {name,value} = event.target;
+        this.setState({ [name]:value });  
+        
+        var jobcategory_id;
+        if (document.querySelector('#jobCategory option[value="' + value + '"]')) {
+            jobcategory_id = document.querySelector('#jobCategory option[value="' + value + '"]').getAttribute("data-value")
+        }else{ jobcategory_id = "" }
+
+        this.setState({ jobcategory_id : jobcategory_id },()=>{
+            console.log(this.state)
+        });  
+        
+    }
+
+
+render(){	
+        console.log(this.state.primarySkillSuggestions)
 		const searchOptions =   { componentRestrictions: {country: "in"} }		
 		const KeyCodes = {
 		  comma: 188,
@@ -639,7 +776,7 @@ export default class JobPosting extends Component {
 									<i className="fa fa-info"></i> 
 									<span className="labelLeftPadding"> Basic Info </span>
 								</div>
-								<form id="addJob">
+								<form id="addJob" autocomplete="off">
 									<div className="col-lg-12 addJobFieldRow text-left">
 										<div className="row">
 											<div className="col-lg-6">
@@ -674,45 +811,44 @@ export default class JobPosting extends Component {
 			                                        	searchOptions	=	{searchOptions}>
 				                                        
 				                                        {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => 	(
-																						                                          	<div>
-																							                                            <input
-																							                                            	{...getInputProps({
-																											                                            		placeholder: 'Search Address ...',
-																											                                                	className: 'location-search-input col-lg-12 form-control errorinputText',
-																											                                                	id:"address",
-																											                                                	name:"address"
-																							                                              					})
-																							                                            	}
-																							                                            />
-																							                                            
-																							                                            <div className={this.state.address ? "autocomplete-dropdown-container SearchListContainer" : ""}>
-																							                                            	{loading && <div>Loading...</div>}
-																							                                            	{suggestions.map(suggestion => {
-																															                                                	const className = suggestion.active
-																															                                                  		? 'suggestion-item--active'
-																															                                                  		: 'suggestion-item';
-																															                                                	// inline style for demonstration purpose
-																															                                                	const style = suggestion.active
-																															                                                  		? { backgroundColor: '#fafafa', cursor: 'pointer' }
-																															                                                  		: { backgroundColor: '#ffffff', cursor: 'pointer' };
-																							                                                
-																																                                                return (
-																																		                                                	<div
-																																		                                                    	{...getSuggestionItemProps(suggestion, {
-																																												                                                      		className,
-																																												                                                      		style,
-																																		                                                    	}							)          }
-																																		                                                	>
-																																                                                    		<span> {suggestion.description} </span>
-																																        													</div>
-																																                                    					);
-																																											}
-																																							)
-																							                                            	}
-																							                                            </div>
-																						                                          	</div>
-				                                        																		)
-				                                    	}
+					                                          	<div>
+						                                            <input
+						                                            	{...getInputProps({
+										                                            		placeholder: 'Search Address ...',
+										                                                	className: 'location-search-input col-lg-12 form-control errorinputText',
+										                                                	id:"address",
+										                                                	name:"address"
+						                                              					})
+						                                            	}
+						                                            />
+						                                            
+						                                            <div className={this.state.address ? "autocomplete-dropdown-container SearchListContainer" : ""}>
+						                                            	{loading && <div>Loading...</div>}
+						                                            	{suggestions.map(suggestion => {
+														                                                	const className = suggestion.active
+														                                                  		? 'suggestion-item--active'
+														                                                  		: 'suggestion-item';
+														                                                	// inline style for demonstration purpose
+														                                                	const style = suggestion.active
+														                                                  		? { backgroundColor: '#fafafa', cursor: 'pointer' }
+														                                                  		: { backgroundColor: '#ffffff', cursor: 'pointer' };
+						                                                
+															                                                return (
+																	                                                	<div
+																	                                                    	{...getSuggestionItemProps(suggestion, {
+																											                                                      		className,
+																											                                                      		style,
+																	                                                    	}							)          }
+																	                                                	>
+															                                                    		<span> {suggestion.description} </span>
+															        													</div>
+															                                    					);
+																										}
+																						)
+						                                            	}
+						                                            </div>
+					                                          	</div>
+														)}
 		                                      		</PlacesAutocomplete>
 												</div>
 											</div>
@@ -722,7 +858,9 @@ export default class JobPosting extends Component {
 									<div className="col-lg-12 addJobFieldRow text-left">
 										<div className="row">
 											<div className="col-lg-3">
-												<label htmlFor="states" className="addjobformLable"> State <span className="asterisk">&#42;</span> </label>
+                                                <div className="row">
+												    <label htmlFor="states" className="addjobformLable col-lg-12"> State <span className="asterisk">&#42;</span> </label>
+                                                </div>
 												<div className="input-group"> 
 													<select className="form-control addJobFormField"  id="states" ref="states" value={this.state.states} name="states" onChange={this.handleChangeState.bind(this)} >
 														<option hidden>-- Select --</option>
@@ -777,36 +915,28 @@ export default class JobPosting extends Component {
 												<label htmlFor="functionalArea" className="addjobformLable"> Functional Area <span className="asterisk">&#42;</span> </label>
 												<div className="input-group">
 													<span className="input-group-addon addJobFormField"><i className="fa fa-briefcase"></i></span> 
-														<input type="text" list="functionalArea" className="form-control addJobFormField addJobState" refs="functionalArea" id="selectFunctionalArea" value={this.state.functionalArea} name="functionalArea"
-														onChange={this._onChange.bind(this)} />
-														  <datalist name="functionalArea" id="functionalArea" className="functionalArealist" >
+														<input type="text" list="functionalArea" className="form-control addJobFormField" refs="functionalArea" id="selectFunctionalArea" value={this.state.functionalArea} name="functionalArea"
+														onChange={this.onChangeFunctionalArea.bind(this)} />
+														<datalist name="functionalArea" id="functionalArea" className="functionalArealist" >
 														    {this.state.functionalArealist.map((item, key) =>
-														      <option key={key} value={item.functionalArea} data-value={item._id}/>
+														        <option key={key} value={item.functionalArea} data-value={item._id}/>
 														    )}
-														  </datalist>
+														</datalist>
 													<span id="functionalAreaError" className="errorMsgJobPost"></span>
 												</div>	
 											</div>			
 											
 											<div className="col-lg-6">
-												<label htmlFor="subFunctionalArea" className="addjobformLable"> Sub Functional Area <span className="asterisk">&#42;</span> </label>
+												<label htmlFor="subFunctionalArea" className="addjobformLable"> Sub-Functional Area <span className="asterisk">&#42;</span> </label>
 												<div className="input-group">
 													<span className="input-group-addon addJobFormField"><FontAwesomeIcon icon={['fas', 'briefcase']} /></span> 
-														<select className="form-control addJobFormField" name="subfunctionalarea_id" id="subfunctionalarea_id" value={this.state.subfunctionalarea_id} onChange={this.handleChange}>
-														    <option hidden> -- Select -- </option>	
-													    	{
-																this.state.subFunctionalAreaList!=null && this.state.subFunctionalAreaList.length > 0 
-																?
-																	this.state.subFunctionalAreaList.map((elem,index)=>{
-																															return(
-																																		<option value={elem._id} key={index}> {elem.subfunctionalArea} </option>
-																																	);
-																														}
-																										)
-																:
-																	<option> -- Select -- </option>
-															}		   
-														</select>
+                                                        <input type="text" list="subFunctionalArea" className="form-control addJobFormField" refs="subFunctionalArea" id="selectSubFunctionalArea" value={this.state.subFunctionalArea} name="subFunctionalArea"
+                                                        onChange={this.onChangeSubFunctionalArea.bind(this)} />
+                                                        <datalist name="subFunctionalArea" id="subFunctionalArea" className="subFunctionalArealist" >
+                                                            {this.state.subFunctionalArealist.map((item, key) =>
+                                                                <option key={key} value={item.subfunctionalArea} data-value={item._id}/>
+                                                            )}
+                                                        </datalist>
 												</div>
 											</div>
 										</div>
@@ -816,7 +946,7 @@ export default class JobPosting extends Component {
 										<div className="row">
 											<div className="col-lg-6">
 												<div className="row">
-													<label htmlFor="Role" className="addjobformLable col-lg-12"> Role <span className="asterisk">&#42;</span>
+													<label htmlFor="role" className="addjobformLable col-lg-12"> Role <span className="asterisk">&#42;</span>
 														<div href="#" data-tip data-for='jobTitleTooltip' className="pull-right">
 															<i title="Please enter your project role" className="fa fa-question-circle"></i>
 														</div>
@@ -824,7 +954,15 @@ export default class JobPosting extends Component {
 												</div>
 												<div className="input-group">
 													<span className="input-group-addon addJobFormField"><FontAwesomeIcon icon={['fas', 'briefcase']} /></span> 
-													<input type="text" className="form-control addJobFormField" name="role" id="role" value={this.state.role} onChange={this.handleChange}/>
+                                                        <div className="input-group col-lg-12">
+                                                            <input type="text" list="role" className="form-control addJobFormField" refs="role" id="selectrole" value={this.state.role} name="role"
+                                                            onChange={this.onChangeRole.bind(this)} />
+                                                            <datalist name="role" id="role" className="roleArray" >
+                                                                {this.state.roleArray.map((item, key) =>
+                                                                    <option key={key} value={item.jobRole} data-value={item._id}/>
+                                                                )}
+                                                            </datalist>
+                                                        </div>
 												</div>
 												<span id="roleError" className="errorMsgJobPost"></span>
 											</div>
@@ -866,21 +1004,13 @@ export default class JobPosting extends Component {
 												<label htmlFor="jobType" className="addjobformLable"> Job Type </label>
 												<div className="input-group col-lg-12">
 													<span className="input-group-addon addJobFormField"><i className="fa fa-briefcase"></i> </span> 
-														<select name="jobtype_id" className="form-control addJobFormField" id="jobtype_id" value={this.state.jobtype_id} onChange={this.handleChange}>
-													    	<option hidden> -- Select -- </option>
-													    	{
-																this.state.jobTypeArray!=null && this.state.jobTypeArray.length > 0 
-																?
-																	this.state.jobTypeArray.map((elem,index)=> {
-																													return(	
-																																<option key={index} value={elem._id}> {elem.jobType} </option>
-																															);
-																												}
-																								)
-																:
-																	<option> --Select-- </option>
-															}	
-														</select>
+														<input type="text" list="jobType" className="form-control addJobFormField" refs="jobType" id="selectjobType" value={this.state.jobType} name="jobType"
+                                                        onChange={this.onChangeJobType.bind(this)} />
+                                                        <datalist name="jobType" id="jobType" className="jobTypeArray" >
+                                                            {this.state.jobTypeArray.map((item, key) =>
+                                                                <option key={key} value={item.jobType} data-value={item._id}/>
+                                                            )}
+                                                        </datalist>
 												</div>
 											</div>
 											
@@ -888,21 +1018,13 @@ export default class JobPosting extends Component {
 												<label htmlFor="jobTime" className="addjobformLable"> Job Time </label>
 												<div className="input-group">
 													<span className="input-group-addon addJobFormField"><FontAwesomeIcon icon={['fas', 'business-time']} /></span> 
-													<select name="jobtime_id" className="form-control addJobFormField" id="jobtime_id" value={this.state.jobtime_id} onChange={this.handleChange}>
-												    	<option hidden> -- Select -- </option>	
-												    	{
-															this.state.jobTimeArray!=null && this.state.jobTimeArray.length > 0 
-															?
-																this.state.jobTimeArray.map((elem,index)=> {
-																												return(
-																															<option value={elem._id} key={index}> {elem.jobTime} </option>
-																														);
-																											}
-																							)
-															:
-																<option> -- Select -- </option>
-														}
-													</select>
+													   <input type="text" list="jobTime" className="form-control addJobFormField" refs="jobTime" id="selectJobTime" value={this.state.jobTime} name="jobTime"
+                                                        onChange={this.onChangeJobTime.bind(this)} />
+                                                        <datalist name="jobTime" id="jobTime" className="jobTimeArray" >
+                                                            {this.state.jobTimeArray.map((item, key) =>
+                                                              <option key={key} value={item.jobTime} data-value={item._id}/>
+                                                            )}
+                                                        </datalist>
 												</div>
 											</div>
 											
@@ -910,21 +1032,13 @@ export default class JobPosting extends Component {
 												<label htmlFor="jobCategory" className="addjobformLable"> Job Category </label>
 												<div className="input-group">
 													<span className="input-group-addon addJobFormField"><i className="fa fa-list-alt"></i></span> 
-													<select name="jobcategory_id" className="form-control addJobFormField" id="jobcategory_id" value={this.state.jobcategory_id} onChange={this.handleChange}>
-												    	<option hidden> -- Select -- </option>	
-												    	{
-															this.state.jobCategoryArray!=null && this.state.jobCategoryArray.length > 0 
-															?
-																this.state.jobCategoryArray.map((elem,index)=> {
-																													return(
-																																<option value={elem._id} key={index}> {elem.jobCategory} </option>
-																															);
-																												}
-																								)
-															:
-																<option> -- Select -- </option>
-														}		   
-													</select>
+													   <input type="text" list="jobCategory" className="form-control addJobFormField" refs="jobCategory" id="selectjobCategory" value={this.state.jobCategory} name="jobCategory"
+                                                        onChange={this.onChangeJobCategory.bind(this)} />
+                                                        <datalist name="jobCategory" id="jobCategory" className="jobCategoryArray" >
+                                                            {this.state.jobCategoryArray.map((item, key) =>
+                                                              <option key={key} value={item.jobCategory} data-value={item._id}/>
+                                                            )}
+                                                        </datalist>
 												</div>
 											</div>
 										</div>
@@ -1219,7 +1333,26 @@ export default class JobPosting extends Component {
 											PREVIEW 
 										</button>
 									
-										<Modal />
+										<PreviewModal 
+											jobTitle 			= 	"MERN Developer"
+											address  			= 	"World Trade Center, Pune"
+											jobDesc	 			= 	"Develops information systems by designing, developing, and installing software solutions.
+																 	 Develops information systems by designing, developing, and installing software solutions."
+											minEducation 		= 	"BE Graduation"
+											minExperience 		= 	"4 years"
+											minPrimExp			= 	"2-3 years"
+											minSecExp			= 	"3-4 years"
+											minOtherExp			= 	"4-5 years"
+											industry_id			= 	"Information Technology"
+											gender          	=	"Both (Male & Female)"
+											minSalary 			= 	"70000"
+											minSalPeriod 		= 	"Per Month"
+											maxSalary 			= 	"90000"
+											maxSalPeriod		= 	"Per Month"
+											jobtype_id 			= 	"Full-Time"
+											functionalarea_id 	= 	"Engineer"
+											role 				=   "Project Manager"
+										/>
 
 										<button className="btn buttonYellow addJobSubmitBtn"  onClick={this.handleSubmit}> {this.state.submitBtnText} </button>
 									</div>

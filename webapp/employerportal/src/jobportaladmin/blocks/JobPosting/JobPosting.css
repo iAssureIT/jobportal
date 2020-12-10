@@ -896,4 +896,15 @@ input::placeholder{
 .react-tags__suggestions li.is-disabled {
   opacity: 0.5;
   cursor: auto;
+}  
+
+/************************************************HTML Custom Classes******************************************/
+
+[list]::-webkit-calendar-picker-indicator {
+  display: none;
+}
+
+::selection {
+  color: #fff;
+  background-color: var(--main-border-color);
 }

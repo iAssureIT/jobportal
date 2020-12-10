@@ -2,123 +2,31 @@ import React, { Component } from 'react';
 
 import { FontAwesomeIcon }  from '@fortawesome/react-fontawesome';
 
-import './Modal.css';
+import './PreviewModal.css';
 
 import Axios  from 'axios';
 import Swal   from 'sweetalert2';
 import Moment from "moment";
 
-export default class Modal extends Component{
+export default class PreviewModal extends Component{
   constructor(props){
     super(props);
 
-    this.state = {
-            jobTitle      :   "",
-            industry_id     :   "",
-            functionalarea_id   :   "",
-            subfunctionalarea_id:   "",
-            role        :   "",
-            gender              :   "Male Only",
-            workFromHome    :   false,
-            jobtype_id      :   "",
-            jobtime_id      :   "",
-            jobcategory_id    :   "",
-            positions           :   "",
-            jobDesc       :   "",
-            lastDateOfAppl    :   "",
-            contactPersonName   :   "",
-            contactPersonEmail  :   "",
-            contactPersonPhone  :   "",
-            
-            addressLine1        :   "",
-            area        :   "",
-                cityVillage     :   "",
-                district      :   "",
-                state         :   "",
-                stateCode       :   "",
-                country       :   "",
-                countryCode     :   "",
-                pincode       :   "",
-            
-            minSalary       :   "",
-            minSalPeriod    :   "",
-            maxSalary       :   "",
-            maxSalPeriod    :   "",
-            
-            minEducation    :   "",
-            minExperience     :   "",
-            
-            primarySkills     :   "",
-            minPrimExp      :   "",
-            secondarySkills   :   "",
-            minSecExp     :   "",
-            otherSkills     :   "",
-            minOtherExp     :   "",
-            preferSkills    :   "",
-    }
+   /* this.state = {
+        jobTitle       :   ""
+    }*/
 
   } 
 
-/*  componentDidMount(){
-    var job_id = this.props.match.params.job_id;
-    console.log("job_id = ", job_id);
 
-    Axios.get("/api/jobs/get/one/"+job_id)
-      .then(response=>{
-               
-        console.log("response.data = ",response.data);
+  /*componentDidMount() {
 
-        this.setState({
-          job_id        :   job_id,
-          jobTitle      :   response.data.jobsData[0].jobBasicInfo.jobTitle,
-          industry_id     :   response.data.jobsData[0].jobBasicInfo.industry_id,
-          functionalarea_id   :   response.data.jobsData[0].jobBasicInfo.functionalarea_id,
-          subfunctionalarea_id:   response.data.jobsData[0].jobBasicInfo.subfunctionalarea_id,
-          role        :   response.data.jobsData[0].jobBasicInfo.role,
-          gender        :   response.data.jobsData[0].jobBasicInfo.gender,
-          workFromHome    :   response.data.jobsData[0].jobBasicInfo.workFromHome,
-          jobtype_id      :   response.data.jobsData[0].jobBasicInfo.jobtype_id,
-          jobtime_id      :   response.data.jobsData[0].jobBasicInfo.jobtime_id,
-          jobcategory_id    :   response.data.jobsData[0].jobBasicInfo.jobcategory_id,
-          positions           :   response.data.jobsData[0].jobBasicInfo.positions,
-          jobDesc       :   response.data.jobsData[0].jobBasicInfo.jobDesc,
-          lastDateOfAppl      :   response.data.jobsData[0].jobBasicInfo.lastDateOfAppl?Moment(response.data.jobsData[0].jobBasicInfo.lastDateOfAppl).format("YYYY-MM-DD"):"",
-          contactPersonName   :   response.data.jobsData[0].jobBasicInfo.contactPersonName,
-          contactPersonEmail  :   response.data.jobsData[0].jobBasicInfo.contactPersonEmail,
-          contactPersonPhone  :   response.data.jobsData[0].jobBasicInfo.contactPersonPhone,
-          
-          addressLine1        :   response.data.jobsData[0].location.address,
-          area        :   response.data.jobsData[0].location.area,
-          city        :   response.data.jobsData[0].location.city,
-          district      :   response.data.jobsData[0].location.district,
-          state         :   response.data.jobsData[0].location.state,
-          stateCode       :   response.data.jobsData[0].location.stateCode,
-          country       :   response.data.jobsData[0].location.country,
-          countryCode     :   response.data.jobsData[0].location.countryCode,
-          pincode       :   response.data.jobsData[0].location.pincode,
-          
-          minSalary       :   response.data.jobsData[0].ctcOffered.minSalary,
-          minSalPeriod    :   response.data.jobsData[0].ctcOffered.minSalPeriod,
-          maxSalary       :   response.data.jobsData[0].ctcOffered.maxSalary,
-          maxSalPeriod    :   response.data.jobsData[0].ctcOffered.maxSalPeriod,
-          
-          minEducation    :   response.data.jobsData[0].eligibility.minEducation,
-          minExperience     :   response.data.jobsData[0].eligibility.minExperience,
-          
-          primarySkills     :   response.data.jobsData[0].eligibility.primarySkills,
-          minPrimExp      :   response.data.jobsData[0].requiredSkills.minPrimExp,
-          secondarySkills   :   response.data.jobsData[0].requiredSkills.secondarySkills,
-          minSecExp           :   response.data.jobsData[0].requiredSkills.minSecExp,
-          otherSkills       :   response.data.jobsData[0].requiredSkills.otherSkills,
-          minOtherExp     :   response.data.jobsData[0].requiredSkills.minOtherExp,
-          preferSkills    :   response.data.jobsData[0].requiredSkills.preferSkills,
-                })
-               
-      })
-      .catch(error=>  {
-                Swal.fire("Some Error Occured during data fetch",error.message,'error');
-              })
-  } */
+                        this.setState({
+                                        jobTitle      :   response.data.jobsData[0].jobBasicInfo.jobTitle
+                                     })
+
+                      }*/
+
 
   render() {
     return (
@@ -130,32 +38,32 @@ export default class Modal extends Component{
                             <div className="col-lg-9">
                               <div className="col-lg-12 leftSideMain">
                                 <div className="row">
-                                  {/*<div className="col-lg-12 leftHeader">
+                                  <div className="col-lg-12 leftHeader">
                                     <div className="row">
                                       <div className="col-lg-3 leftImgContainer">
                                         <div className="col-lg-12">
-                                          <div className="imgbox col-lg-9">
+                                          {/*<div className="imgbox col-lg-9">
                                             <img src="/images/iAssureIT_Logo.svg" className="companyProfileLogo"  alt="not found"/>
-                                          </div>
+                                          </div>*/}
                                         </div>  
                                       </div>
                                       <div className="col-lg-9 imgContent">
                                         <div className="col-lg-12 contentMain">
                                           <div className="row">
                                             <div className="contentHead">
-                                              {this.state.jobTitle}
+                                              {this.props.jobTitle}
                                             </div>
                                             <div className="subContentHead">
                                               <b>iAssure International Technologies Pvt Ltd</b>
                                             </div>
                                             <div className="locationinfo">
-                                              {this.state.addressLine1}
+                                              {this.props.address}
                                             </div>
                                           </div>
                                         </div>
                                       </div>
                                     </div>
-                                  </div>*/}
+                                  </div>
                                   <div className="col-lg-12 jobProfileMain">
                                     <div className="row">
                                       <div className="col-lg-12 contentWrapper1">
@@ -167,7 +75,7 @@ export default class Modal extends Component{
                                           <div className="DescriptionContainer col-lg-12">
                                             <div className="profileContent">
                                               <div className="col-lg-12 jobDescContent">
-                                                <div dangerouslySetInnerHTML = {{ __html : this.state.jobDesc}} />
+                                                <div dangerouslySetInnerHTML = {{ __html : this.props.jobDesc}} />
                                               </div>
                                             </div>
                                           </div>
@@ -184,11 +92,11 @@ export default class Modal extends Component{
                                               <ul className="col-lg-12">
                                                 <li><span className="eduSubtitle">
                                                   Minimum Education Required</span><br/>
-                                                  <span className="eduDuration"> {this.state.minEducation} </span>
+                                                  <span className="eduDuration"> {this.props.minEducation} </span>
                                                 </li>
                                                 <li>
                                                   <span className="eduSubtitle"> Minimum Overall Experience </span><br/>
-                                                  <span className="eduDuration"> {this.state.minExperience} </span>
+                                                  <span className="eduDuration"> {this.props.minExperience} </span>
                                                 </li>
                                               </ul>
                                             </div>
@@ -217,7 +125,7 @@ export default class Modal extends Component{
                                                           Min. Experience Req.
                                                         </span><br/>
                                                         <span className="skillDuration">
-                                                          {this.state.minPrimExp}
+                                                          {this.props.minPrimExp}
                                                         </span>
                                                       </li>
                                                       <p className="skillsList col-lg-5">
@@ -246,7 +154,7 @@ export default class Modal extends Component{
                                                             Min. Experience Req.
                                                           </span><br/>
                                                           <span className="skillDuration">
-                                                            {this.state.minSecExp}
+                                                            {this.props.minSecExp}
                                                           </span>
                                                         </li>
                                                         <p className="skillsList col-lg-5">
@@ -277,10 +185,10 @@ export default class Modal extends Component{
                                                             Min. Experience Req.
                                                           </span><br/>
                                                           <span className="skillDuration">
-                                                            {this.state.minOtherExp}
+                                                            {this.props.minOtherExp}
                                                           </span>
                                                         </li>
-                                                        <p className="skillsList col-lg-5">
+                                                        <p className="skillsList col-lg-6">
                                                           Computer programming and coding<br/>
                                                           Problem-solving<br/>
                                                           Software Development<br/>
@@ -298,7 +206,7 @@ export default class Modal extends Component{
                                                   <div className="row">
                                                     <ul className="skillsHeadFour">
                                                       <div className="row">
-                                                        <li className="col-lg-5">
+                                                        <li className="col-lg-6">
                                                           <span className="skillsTitle">
                                                             Preferred Skills but not mandatory
                                                           </span>
@@ -358,28 +266,28 @@ export default class Modal extends Component{
                                       Industry
                                     </div>
                                     <p className="rightSideSub">
-                                      {this.state.industry_id}
+                                      {this.props.industry_id}
                                     </p>
                                     
                                     <div className="rightSideTitle">
                                       Gender
                                     </div>
                                     <p className="rightSideSub">
-                                      {this.state.gender}
+                                      {this.props.gender}
                                     </p>
                                     
                                     <div className="rightSideTitle">
                                       Salary
                                     </div>
                                     <p className="rightSideSub">
-                                      <i className="fa fa-inr"></i> {this.state.minSalary} {this.state.minSalPeriod} To &nbsp;<i className="fa fa-inr"></i> {this.state.maxSalary} {this.state.maxSalPeriod}{/*(Monthly)*/}
+                                      <i className="fa fa-inr"></i> {this.props.minSalary} {this.props.minSalPeriod} To &nbsp;<i className="fa fa-inr"></i> {this.props.maxSalary} {this.props.maxSalPeriod}{/*(Monthly)*/}
                                     </p>
                                     
                                     <div className="rightSideTitle">
                                       Job Type
                                     </div>
                                     <p className="rightSideSub">
-                                      {this.state.jobtype_id}
+                                      {this.props.jobtype_id}
                                     </p>
                                     
                                     <div className="rightSideTitle">
@@ -387,14 +295,14 @@ export default class Modal extends Component{
                                     </div>
                                     
                                     <p className="rightSideSub">
-                                      {this.state.functionalarea_id}
+                                      {this.props.functionalarea_id}
                                     </p>
                                     
                                     <div className="rightSideTitle">
                                       Role
                                     </div>
                                     <p className="rightSideSub">
-                                      {this.state.role}
+                                      {this.props.role}
                                     </p>
 
                                     <div className="col-lg-12">
