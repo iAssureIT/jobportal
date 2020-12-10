@@ -10,7 +10,7 @@ import CKEditor from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import PhoneInput from 'react-phone-input-2';
 import Moment from "moment";
-import ReactTags from 'react-tag-autocomplete';	
+import {WithContext as ReactTags}  from 'react-tag-input';	
 import PlacesAutocomplete, {    
 	geocodeByAddress,
     getLatLng
@@ -78,10 +78,6 @@ export default class JobPosting extends Component {
             otherSkillsArray: [],
             preferSkills: "",
             preferSkillsArray: [],
-            priSkillsArraylist: [],
-            secSkillsArraylist: [],
-            otherSkillsArraylist: [],
-            preferSkillsArraylist: [],
             submitBtnText: "SUBMIT",
             primarySkillTags: [],
 		    primarySkillSuggestions: [],
@@ -105,6 +101,7 @@ export default class JobPosting extends Component {
         };
 
         this.reactTags = React.createRef();
+        
     }
 
     componentDidMount() {
@@ -236,17 +233,16 @@ export default class JobPosting extends Component {
                 /*console.log("getfunctionalAreaData response.data = ", response.data);*/
                 var primarySkillSuggestions =  [];
                 response.data.map((elem,index)=>{
-		            primarySkillSuggestions.push({id:elem._id,name:elem.skill})
+		            primarySkillSuggestions.push({id:elem._id,text:elem.skill})
 		        })
                 this.setState({
                     primarySkillSuggestions: primarySkillSuggestions,
                     secondarySkillSuggestions : primarySkillSuggestions
                 });
 
-                /*console.log("priSkill", this.state.priSkillsArraylist);*/
             })
             .catch(error => {
-                Swal.fire("Error while getting priSkillsArraylist List data", error.message, 'error');
+                Swal.fire("Error while getting List data", error.message, 'error');
             })
 
     }
@@ -587,16 +583,31 @@ export default class JobPosting extends Component {
 	 	
     }
     onprimarySkillDelete (i) {
-	    const primarySkillTags = this.state.primarySkillTags.slice(0)
-	    primarySkillTags.splice(i, 1)
-	    this.setState({ primarySkillTags })
+	    const { primarySkillTags } = this.state;
+	    this.setState({
+	      primarySkillTags: primarySkillTags.filter((tag, index) => index !== i),
+	    });
 	}
  
-  	onprimarySkillAddition (tags) {
-    	const primarySkillTags = [].concat(this.state.primarySkillTags, tags)
-    	this.setState({ primarySkillTags })
+  	onprimarySkillAddition (tag) {
+   
+    	this.setState(state => ({ primarySkillTags: [...state.primarySkillTags, tag] }));
   	}
- 	
+
+	onprimarySkillDrag(tag, currPos, newPos) {
+	    const primarySkillTags = [...this.state.primarySkillTags];
+	    const newTags = primarySkillTags.slice();
+
+	    newTags.splice(currPos, 1);
+	    newTags.splice(newPos, 0, tag);
+
+	    // re-render
+	    this.setState({ primarySkillTags: newTags });
+	}
+
+	onprimarySkillClick(index) {
+	    console.log('The tag at index ' + index + ' was clicked');
+	}
  	onsecondarySkillDelete (i) {
 	    const secondarySkillTags = this.state.secondarySkillTags.slice(0)
 	    secondarySkillTags.splice(i, 1)
@@ -608,8 +619,15 @@ export default class JobPosting extends Component {
     	this.setState({ secondarySkillTags })
   	}
 	render(){
+		console.log(this.state.primarySkillSuggestions)
+
 		const searchOptions =   { componentRestrictions: {country: "in"} }		
-		
+		const KeyCodes = {
+		  comma: 188,
+		  enter: 13,
+		};
+
+		const delimiters = [KeyCodes.comma, KeyCodes.enter];
 	return(
 				<div className="pageWrapper addJobBackgroundColor container-fluid">
 					<div className="row">
@@ -1028,11 +1046,14 @@ export default class JobPosting extends Component {
 												<div className="input-group col-lg-12">
 													<span className="input-group-addon addJobFormField"> <i className='fa fa-cog'></i> </span>
 														<ReactTags
-													        ref={this.reactTags}
+													        //ref={this.reactTags}
 													        tags={this.state.primarySkillTags}
 													        suggestions={this.state.primarySkillSuggestions}
-													        onDelete={this.onprimarySkillDelete.bind(this)}
-													        onAddition={this.onprimarySkillAddition.bind(this)} />
+													        delimiters={delimiters}
+													        handleDelete={this.onprimarySkillDelete.bind(this)}
+													        handleAddition={this.onprimarySkillAddition.bind(this)}
+													        handleDrag={this.onprimarySkillDrag}
+          													handleTagClick={this.onprimarySkillClick} />
 													</div>
 											</div>
 											
