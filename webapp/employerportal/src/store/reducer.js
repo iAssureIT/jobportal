@@ -40,7 +40,6 @@ const reducer = (state = initialState, action) => {
 	//Create Global userDetails Variable
 	if(action.type === "SET_GLOBAL_USER"){
 		newState.userDetails 	= action.userDetails;
-		console.log("newState.userDetails in store = ",newState.userDetails);
 	}
 
 	if(action.type === "FETCH_ROLEWISE_ACCESS"){

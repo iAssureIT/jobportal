@@ -10,11 +10,9 @@ import CKEditor from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import PhoneInput from 'react-phone-input-2';
 import Moment from "moment";
-import Autosuggest from 'react-autosuggest';
-import { WithContext as ReactTags } from 'react-tag-input';
-import { COUNTRIES } from './countries';
-import PlacesAutocomplete, {
-    geocodeByAddress,
+import ReactTags from 'react-tag-autocomplete';	
+import PlacesAutocomplete, {    
+	geocodeByAddress,
     getLatLng
 } from "react-places-autocomplete";
 export default class JobPosting extends Component {
@@ -85,9 +83,10 @@ export default class JobPosting extends Component {
             otherSkillsArraylist: [],
             preferSkillsArraylist: [],
             submitBtnText: "SUBMIT",
-            tags: [],
-            functAreaSuggestions: [],
-            value:""
+            primarySkillTags: [],
+		    primarySkillSuggestions: [],
+		    secondarySkillTags: [],
+		    secondarySkillSuggestions: []
         }
 
         this.style = {
@@ -105,11 +104,7 @@ export default class JobPosting extends Component {
             }
         };
 
-        this.handleDelete = this.handleDelete.bind(this);
-        this.handleAddition = this.handleAddition.bind(this);
-        this.handleDrag = this.handleDrag.bind(this);
-        this.handleTagClick = this.handleTagClick.bind(this);
-
+        this.reactTags = React.createRef();
     }
 
     componentDidMount() {
@@ -239,15 +234,16 @@ export default class JobPosting extends Component {
         Axios.get("/api/skillmaster/get/list")
             .then(response => {
                 /*console.log("getfunctionalAreaData response.data = ", response.data);*/
+                var primarySkillSuggestions =  [];
+                response.data.map((elem,index)=>{
+		            primarySkillSuggestions.push({id:elem._id,name:elem.skill})
+		        })
                 this.setState({
-                    priSkillsArraylist: response.data
+                    primarySkillSuggestions: primarySkillSuggestions,
+                    secondarySkillSuggestions : primarySkillSuggestions
                 });
+
                 /*console.log("priSkill", this.state.priSkillsArraylist);*/
-                this.state.priSkillsArraylist != null && this.state.priSkillsArraylist.length > 0 ?
-                    this.state.priSkillsArraylist.forEach((elem, index) => {
-                        this.state.priSkillsArray.push(elem.skill);
-                    }) :
-                    this.state.priSkillsArray.push("select");
             })
             .catch(error => {
                 Swal.fire("Error while getting priSkillsArraylist List data", error.message, 'error');
@@ -549,7 +545,6 @@ export default class JobPosting extends Component {
                         }
                     }
                 }
-                console.log('state==>', state)
 
                 this.setState({
                     area: area,
@@ -577,40 +572,6 @@ export default class JobPosting extends Component {
         });
     };
 
-    handleDelete(i) {
-        const {
-            tags
-        } = this.state;
-        this.setState({
-            tags: tags.filter((tag, index) => index !== i),
-        });
-    }
-
-    handleAddition(tag) {
-        this.setState(state => ({
-            tags: [...state.tags, tag]
-        }));
-    }
-
-    handleDrag(tag, currPos, newPos) {
-        const tags = [...this.state.tags];
-        const newTags = tags.slice();
-
-        newTags.splice(currPos, 1);
-        newTags.splice(newPos, 0, tag);
-
-        // re-render
-        this.setState({
-            tags: newTags
-        });
-    }
-
-    handleTagClick(index) {
-        console.log('The tag at index ' + index + ' was clicked');
-    }
-
-    
-
     _onChange(event){
         const {name,value} = event.target;
         this.setState({ [name]:value });  
@@ -625,14 +586,28 @@ export default class JobPosting extends Component {
 	 	});  
 	 	
     }
-
-render(){	
-		const { value, functAreaSuggestions } = this.state;
-	    const inputProps = {
-	      placeholder: "Select Functional Area",
-	      value,
-	      onChange: this.onChange
-	    };
+    onprimarySkillDelete (i) {
+	    const primarySkillTags = this.state.primarySkillTags.slice(0)
+	    primarySkillTags.splice(i, 1)
+	    this.setState({ primarySkillTags })
+	}
+ 
+  	onprimarySkillAddition (tags) {
+    	const primarySkillTags = [].concat(this.state.primarySkillTags, tags)
+    	this.setState({ primarySkillTags })
+  	}
+ 	
+ 	onsecondarySkillDelete (i) {
+	    const secondarySkillTags = this.state.secondarySkillTags.slice(0)
+	    secondarySkillTags.splice(i, 1)
+	    this.setState({ secondarySkillTags })
+	}
+ 
+  	onsecondarySkillAddition (tags) {
+    	const secondarySkillTags = [].concat(this.state.secondarySkillTags, tags)
+    	this.setState({ secondarySkillTags })
+  	}
+	render(){
 		const searchOptions =   { componentRestrictions: {country: "in"} }		
 		
 	return(
@@ -1052,18 +1027,12 @@ render(){
 												<label htmlFor="primarySkills" className="addjobformLable"> Primary Skills </label>
 												<div className="input-group col-lg-12">
 													<span className="input-group-addon addJobFormField"> <i className='fa fa-cog'></i> </span>
-														{/*<ReactTags
-															tags 		   = {tags}
-												        	suggestions    = {suggestions}
-												        	delimiters 	   = {delimiters}
-												        	handleDelete   = {this.handleDelete}
-												        	handleAddition = {this.handleAddition}
-												        	handleDrag 	   = {this.handleDrag}
-												        	handleTagClick = {this.handleTagClick}
-												        	name           = "primarySkills"
-												        	id             = "primarySkills"
-												        	value          = {this.state.primarySkills}
-											        	/>*/}
+														<ReactTags
+													        ref={this.reactTags}
+													        tags={this.state.primarySkillTags}
+													        suggestions={this.state.primarySkillSuggestions}
+													        onDelete={this.onprimarySkillDelete.bind(this)}
+													        onAddition={this.onprimarySkillAddition.bind(this)} />
 													</div>
 											</div>
 											
@@ -1082,18 +1051,12 @@ render(){
 												<label htmlFor="secondarySkills" className="addjobformLable"> Secondary Skills </label>
 												<div className="input-group col-lg-12">
 													<span className="input-group-addon addJobFormField"> <i className='fa fa-cog'></i> </span>
-														{/*<ReactTags
-															tags           = {tags}
-												        	suggestions    = {suggestions}
-												        	delimiters     = {delimiters}
-												        	handleDelete   = {this.handleDelete}
-												        	handleAddition = {this.handleAddition}
-												        	handleDrag     = {this.handleDrag}
-												        	handleTagClick = {this.handleTagClick}
-												        	name           = "secondarySkills"
-												        	id             = "secondarySkills"
-												        	value          = {this.state.secondarySkills}
-												        />*/}
+														<ReactTags
+													        ref={this.reactTags}
+													        tags={this.state.secondarySkillTags}
+													        suggestions={this.state.secondarySkillSuggestions}
+													        onDelete={this.onsecondarySkillDelete.bind(this)}
+													        onAddition={this.onsecondarySkillAddition.bind(this)} />
 												</div>
 											</div>
 											
