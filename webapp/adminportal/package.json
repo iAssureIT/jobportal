@@ -39,6 +39,7 @@
     "jspdf": "^1.5.3",
     "moment": "^2.27.0",
     "moment-timezone": "^0.5.31",
+    "multiselect-react-dropdown": "^1.6.2",
     "node-sass": "^4.14.1",
     "npm": "^6.14.9",
     "number-to-words": "^1.2.4",

@@ -10,3 +10,4 @@ webapp/website/.env
 webapp/employerportal/.env
 webapp/employerportal/.eslintcache
 api/nodemon.js
+webapp/adminportal/.eslintcache

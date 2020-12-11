@@ -35,7 +35,8 @@ import axios from 'axios';
 import $ from 'jquery';
 import '../node_modules/font-awesome/css/font-awesome.min.css';
 import ReactDependentScript from "react-dependent-script";
-import './jobportaladmin/Common/FontAwesomeIcons';
+
+import './jobportaladmin/CandidateProfile/Blocks/FontAwesomeIcons'; 
 
 axios.defaults.baseURL = process.env.REACT_APP_BASE_URL;
 axios.defaults.headers.post['Content-Type'] = 'application/json'; 
