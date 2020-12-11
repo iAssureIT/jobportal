@@ -18,6 +18,7 @@ import PlacesAutocomplete, {
         geocodeByAddress,
         getLatLng
 } from "react-places-autocomplete";
+
 export default class JobPosting extends Component {
 
     constructor(props) {
@@ -90,6 +91,10 @@ export default class JobPosting extends Component {
             primarySkillSuggestions     :   [],
             secondarySkillTags          :   [],
             secondarySkillSuggestions   :   [],
+            otherSkillTags              :   [],
+            otherSkillSuggestions       :   [],
+            preferSkillTags             :   [],
+            preferSkillSuggestions      :   [],
             value                       :   ""
         }
 
@@ -261,8 +266,10 @@ export default class JobPosting extends Component {
 		            primarySkillSuggestions.push({id:elem._id,text:elem.skill})
 		        })
                 this.setState({
-                    primarySkillSuggestions: primarySkillSuggestions,
-                    secondarySkillSuggestions : primarySkillSuggestions
+                    primarySkillSuggestions   : primarySkillSuggestions,
+                    secondarySkillSuggestions : primarySkillSuggestions,
+                    otherSkillSuggestions     : primarySkillSuggestions,
+                    preferSkillSuggestions    : primarySkillSuggestions
                 });
 
             })
@@ -625,6 +632,117 @@ export default class JobPosting extends Component {
     handleTagClick(index) {
         console.log('The tag at index ' + index + ' was clicked');
     }
+ 
+  	
+
+    onprimarySkillAddition (tag) {
+   
+    	this.setState(state => ({ primarySkillTags: [...state.primarySkillTags, tag] }));
+  	}
+
+    onprimarySkillClick(index) {
+        console.log('The tag at index ' + index + ' was clicked');
+    }
+
+    onprimarySkillDrag(tag, currPos, newPos) {
+        const primarySkillTags = [...this.state.primarySkillTags];
+        const newTags = primarySkillTags.slice();
+
+        newTags.splice(currPos, 1);
+        newTags.splice(newPos, 0, tag);
+
+        // re-render
+        this.setState({ primarySkillTags: newTags });
+    }
+
+    onprimarySkillDelete (i) {
+        const { primarySkillTags } = this.state;
+        this.setState({
+          primarySkillTags: primarySkillTags.filter((tag, index) => index !== i),
+        });
+    }
+ 	
+    
+    onsecondarySkillAddition (tags) {
+        const secondarySkillTags = [].concat(this.state.secondarySkillTags, tags)
+        this.setState({ secondarySkillTags })
+    }
+
+    onsecondarySkillClick(index) {
+        console.log('The tag at index ' + index + ' was clicked');
+    }
+
+    onsecondarySkillDrag(tag, currPos, newPos) {
+        const secondarySkillTags = [...this.state.secondarySkillTags];
+        const newTags = secondarySkillTags.slice();
+
+        newTags.splice(currPos, 1);
+        newTags.splice(newPos, 0, tag);
+
+        // re-render
+        this.setState({ secondarySkillTags: newTags });
+    }
+
+    onsecondarySkillDelete (i) {
+	    const secondarySkillTags = this.state.secondarySkillTags.slice(0)
+	    secondarySkillTags.splice(i, 1)
+	    this.setState({ secondarySkillTags })
+	}
+
+    
+
+    onOtherSkillAddition (tag) {
+        this.setState(state => ({ otherSkillTags: [...state.otherSkillTags, tag] }));
+    }
+
+    onOtherSkillClick(index) {
+        console.log('The tag at index ' + index + ' was clicked');
+    }
+
+    onOtherSkillDrag(tag, currPos, newPos) {
+        const otherSkillTags = [...this.state.otherSkillTags];
+        const newTags = otherSkillTags.slice();
+
+        newTags.splice(currPos, 1);
+        newTags.splice(newPos, 0, tag);
+
+        // re-render
+        this.setState({ otherSkillTags: newTags });
+    }
+
+    onOtherSkillDelete (i) {
+        const { otherSkillTags } = this.state;
+        this.setState({
+          otherSkillTags: otherSkillTags.filter((tag, index) => index !== i),
+        });
+    }
+
+
+    onPreferSkillAddition (tag) {
+        this.setState(state => ({ preferSkillTags: [...state.preferkillTags, tag] }));
+    }
+
+    onPreferSkillClick(index) {
+        console.log('The tag at index ' + index + ' was clicked');
+    }
+
+    onPreferSkillDrag(tag, currPos, newPos) {
+        const preferSkillTags = [...this.state.preferSkillTags];
+        const newTags = preferSkillTags.slice();
+
+        newTags.splice(currPos, 1);
+        newTags.splice(newPos, 0, tag);
+
+        // re-render
+        this.setState({ preferSkillTags: newTags });
+    }
+
+    onPreferSkillDelete (i) {
+        const { preferSkillTags } = this.state;
+        this.setState({
+          preferSkillTags: preferSkillTags.filter((tag, index) => index !== i),
+        });
+    }
 
     
 
@@ -634,51 +752,14 @@ export default class JobPosting extends Component {
         
         var functionalarea_id;
         if (document.querySelector('#functionalArea option[value="' + value + '"]')) {
-        	functionalarea_id = document.querySelector('#functionalArea option[value="' + value + '"]').getAttribute("data-value")
+            functionalarea_id = document.querySelector('#functionalArea option[value="' + value + '"]').getAttribute("data-value")
         }else{ functionalarea_id = "" }
 
-	 	this.setState({ functionalarea_id : functionalarea_id },()=>{
-	 		console.log(this.state)
-	 	});  
-	 	
-    }
-    
-    onprimarySkillDelete (i) {
-	    const { primarySkillTags } = this.state;
-	    this.setState({
-	      primarySkillTags: primarySkillTags.filter((tag, index) => index !== i),
-	    });
-	}
- 
-  	onprimarySkillAddition (tag) {
-   
-    	this.setState(state => ({ primarySkillTags: [...state.primarySkillTags, tag] }));
-  	}
-
-	onprimarySkillDrag(tag, currPos, newPos) {
-	    const primarySkillTags = [...this.state.primarySkillTags];
-	    const newTags = primarySkillTags.slice();
-
-	    newTags.splice(currPos, 1);
-	    newTags.splice(newPos, 0, tag);
-
-	    // re-render
-	    this.setState({ primarySkillTags: newTags });
-	}
-
-	onprimarySkillClick(index) {
-	    console.log('The tag at index ' + index + ' was clicked');
-	}
- 	onsecondarySkillDelete (i) {
-	    const secondarySkillTags = this.state.secondarySkillTags.slice(0)
-	    secondarySkillTags.splice(i, 1)
-	    this.setState({ secondarySkillTags })
-	}
- 
-  	onsecondarySkillAddition (tags) {
-    	const secondarySkillTags = [].concat(this.state.secondarySkillTags, tags)
-    	this.setState({ secondarySkillTags })
-  	}	
+        this.setState({ functionalarea_id : functionalarea_id },()=>{
+            console.log(this.state)
+        });  
+        
+    }	
 
     onChangeSubFunctionalArea(event){
         const {name,value} = event.target;
@@ -1210,18 +1291,12 @@ render(){
 												<label htmlFor="otherSkills" className="addjobformLable"> Other Skills </label>
 												<div className="input-group col-lg-12">
 													<span className="input-group-addon addJobFormField"> <i className='fa fa-cog'></i> </span>
-														{/*<ReactTags
-															tags           = {tags}
-												        	suggestions    = {suggestions}
-												        	delimiters     = {delimiters}
-												        	handleDelete   = {this.handleDelete}
-												        	handleAddition = {this.handleAddition}
-												        	handleDrag     = {this.handleDrag}
-												        	handleTagClick = {this.handleTagClick}
-												        	name           = "otherSkills"
-												        	id             = "otherSkills"
-												        	value          = {this.state.otherSkills}
-												        /> */}
+														<ReactTags
+                                                            ref={this.reactTags}
+                                                            tags={this.state.otherSkillTags}
+                                                            suggestions={this.state.otherSkillSuggestions}
+                                                            onDelete={this.onOtherSkillDelete.bind(this)}
+                                                            onAddition={this.onOtherSkillAddition.bind(this)} />
 												</div>
 											</div>
 											
@@ -1239,18 +1314,12 @@ render(){
 										<label htmlFor="preferSkills" className="addjobformLable"> Preferred Skills but not mandatory </label>
 										<div className="input-group col-lg-12 preferSkillsField">
 											<span className="input-group-addon addJobFormField"> <i className='fa fa-cog'></i> </span>
-												{/*<ReactTags
-													tags           = {tags}
-										        	suggestions    = {suggestions}
-										        	delimiters     = {delimiters}
-										        	handleDelete   = {this.handleDelete}
-										        	handleAddition = {this.handleAddition}
-										        	handleDrag     = {this.handleDrag}
-										        	handleTagClick = {this.handleTagClick}
-										        	name           = "preferSkills"
-										        	id             = "preferSkills"
-										        	value          = {this.state.preferSkills}
-												/>*/} 
+												<ReactTags
+                                                    ref={this.reactTags}
+                                                    tags={this.state.preferSkillTags}
+                                                    suggestions={this.state.preferSkillSuggestions}
+                                                    onDelete={this.onPreferSkillDelete.bind(this)}
+                                                    onAddition={this.onPreferSkillAddition.bind(this)} />
 										</div>
 									</div>
 									
