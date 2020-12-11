@@ -11,7 +11,7 @@ const initialState = {
 		email 		: JSON.parse(localStorage.getItem("userDetails")).email,
 		phone 		: JSON.parse(localStorage.getItem("userDetails")).phone, 
 		companyID 	: JSON.parse(localStorage.getItem("userDetails")).companyID,
-		company_id 	: JSON.parse(localStorage.getItem("userDetails")).companyID,
+		company_id 	: JSON.parse(localStorage.getItem("userDetails")).company_id,
 		user_id   	: JSON.parse(localStorage.getItem("userDetails")).user_id,
 		roles 		: JSON.parse(localStorage.getItem("userDetails")).roles,
 		token 		: JSON.parse(localStorage.getItem("userDetails")).token, 

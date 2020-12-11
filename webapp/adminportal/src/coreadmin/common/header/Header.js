@@ -37,7 +37,6 @@ class Header2 extends Component{
     var userDetails = JSON.parse(localStorage.getItem("userDetails")) ;
     const Token     = userDetails ? userDetails.token : null;
     
-    console.log("Token = ", userDetails);
 
     if(Token){
       axios.get('/api/entitymaster/get/one/companyName/1')
@@ -55,12 +54,10 @@ class Header2 extends Component{
                   companyID     : userDetails.companyID,
                   companyName   : companyDetails.data.companyName,
                   companyLogo   : companyDetails.data.companyLogo[0],
-                },()=>{
-                   console.log("this.state.fullname = ",this.state.fullname);
                 });
 
           //======= Notification Unread Count ==========
-          axios.get('/api/notifications/get/list/Unread/'+userDetails.user_id)
+          /*axios.get('/api/notifications/get/list/Unread/'+userDetails.user_id)
               .then(notifications => {
 
               this.setState({
@@ -71,7 +68,7 @@ class Header2 extends Component{
               })
               .catch(error => {
                 console.log("Error in /api/notifications/get/list/Unread/ = ",error);
-              })
+              })*/
 
           })
           .catch(error => {
@@ -163,7 +160,6 @@ class Header2 extends Component{
     data.email = id;
     data.user_ID =this.state.user_ID;
     data.token = this.state.token;
-    console.log("emailId",id);
     axios.patch('/api/auth/patch/logout',data)
     .then((res)=>{
       // this.props.history.push("/ViewAllNotification");

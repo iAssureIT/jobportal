@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { connect }        from 'react-redux';
 import { BrowserRouter, Route, Switch,Link,location } from 'react-router-dom';
 import 'font-awesome/css/font-awesome.min.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -9,6 +8,9 @@ import axios from 'axios';
 import jQuery from 'jquery';
 import 'jquery-validation';
 import swal from 'sweetalert';
+import { connect }        from 'react-redux';
+import { bindActionCreators } from 'redux';
+import  * as mapActionCreator from '../../jobportaladmin/Common/actions/index';
 
 class Login extends Component {
 
@@ -88,11 +90,12 @@ class Login extends Component {
             if (response.data.ID) {
               this.setState({ btnLoading: false });
               var userDetails = {
+                loggedIn    : true,
                 firstName: response.data.userDetails.firstName,
                 lastName: response.data.userDetails.lastName,
                 email: response.data.userDetails.email,
                 phone: response.data.userDetails.phone,
-                companyID : parseInt(response.data.userDetails.companyID),
+                //companyID : parseInt(response.data.userDetails.companyID),
                 pincode: response.data.userDetails.pincode,
                 user_id: response.data.userDetails.user_id,
                 roles: response.data.userDetails.roles,
@@ -108,8 +111,11 @@ class Login extends Component {
               this.setState({
                 loggedIn: true
               }, () => {
+                var {mapAction} = this.props;
+                mapAction.setUserDetails(userDetails);
                 this.props.history.push('/')
                 window.location.reload();
+
               })
             } else if (response.data.message === "USER_BLOCK") {
               swal({
@@ -232,17 +238,9 @@ const mapStateToProps = (state)=>{
   }
 };
 
-
-const mapDispatchToProps = (dispatch)=>{
-  return {
-      setGlobalUser  : (userDetails)=> dispatch({
-                          type      : "SET_GLOBAL_USER",
-                          userDetails : userDetails,
-                        }),
-  }
-};
-
-
+const mapDispatchToProps = (dispatch) => ({
+  mapAction :  bindActionCreators(mapActionCreator, dispatch)
+}) 
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
 

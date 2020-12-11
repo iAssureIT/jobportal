@@ -838,8 +838,7 @@ export default class JobPosting extends Component {
     }
 
 
-render(){   
-        console.log(ClassicEditor)
+render(){  
         const searchOptions =   { componentRestrictions: {country: "in"} }      
         const KeyCodes = {
           comma: 188,
@@ -858,7 +857,7 @@ render(){
                                     <i className="fa fa-info"></i> 
                                     <span className="labelLeftPadding"> Basic Info </span>
                                 </div>
-                                <form id="addJob" autocomplete="off">
+                                <form id="addJob" autoComplete="off">
                                     <div className="col-lg-12 addJobFieldRow text-left">
                                         <div className="row">
                                             <div className="col-lg-6">

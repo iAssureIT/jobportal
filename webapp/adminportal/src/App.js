@@ -35,9 +35,9 @@ import axios from 'axios';
 import $ from 'jquery';
 import '../node_modules/font-awesome/css/font-awesome.min.css';
 import ReactDependentScript from "react-dependent-script";
+import './jobportaladmin/Common/FontAwesomeIcons';
 
 axios.defaults.baseURL = process.env.REACT_APP_BASE_URL;
-console.log("axios.defaults.baseURL",axios.defaults.baseURL);
 axios.defaults.headers.post['Content-Type'] = 'application/json'; 
 
 
@@ -47,11 +47,8 @@ export const App = () => {
 	useEffect(() => {
 	 	axios.get("/api/projectSettings/get/GOOGLE",)
 	    .then((response) => {
-	    	console.log("googleAPIKey",response.data.googleapikey);
 	      	setGoogleAPIKey(response.data.googleapikey)
 	        window.initMap = setInitMap(true);
-	        console.log("googleAPIKey",googleAPIKey);
-   			console.log("initMap",initMap);
 	    })
 	    .catch((error) =>{
 	        console.log(error)
