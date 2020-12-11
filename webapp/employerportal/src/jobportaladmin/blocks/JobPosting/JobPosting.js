@@ -29,8 +29,10 @@ export default class JobPosting extends Component {
             jobTitle                    :   "",
             industry_id                 :   localStorage.getItem("industry_id"),
             industryList                :   [],
+            functionalArea 				: 	"",
             functionalarea_id           :   "",
             functionalArealist          :   [],
+            subFunctionalArea 			: 	"",
             subfunctionalarea_id        :   "",
             subFunctionalArealist       :   [],
             role_id                     :   "",
@@ -397,6 +399,7 @@ export default class JobPosting extends Component {
                 otherSkills             :   this.state.otherSkills,
                 minOtherExp             :   this.state.minOtherExp,
                 preferSkills            :   this.state.preferSkills,
+
             };
 
             console.log("formValues :", formValues);
