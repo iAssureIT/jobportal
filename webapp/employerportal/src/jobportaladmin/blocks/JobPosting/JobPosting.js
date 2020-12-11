@@ -841,7 +841,7 @@ export default class JobPosting extends Component {
 
 
 render(){	
-        console.log(this.state.primarySkillSuggestions)
+        console.log(ClassicEditor)
 		const searchOptions =   { componentRestrictions: {country: "in"} }		
 		const KeyCodes = {
 		  comma: 188,

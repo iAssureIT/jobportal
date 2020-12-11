@@ -95,7 +95,7 @@ class Layout extends Component  {
                                                         <Route path="/org-profile" exact strict component={CompanyProfile} />
                                                         <Route path="/company-profile/:comp_ID" exact strict component={CompanyProfileView} />
 
-                                                        <Route path="/jobposting" exact strict component={JobPosting} />
+                                                        <Route path="/post-job" exact strict component={JobPosting} />
 
                                                         <Route path="/address-type" exact strict component={AddressType} />
                                                         <Route path="/address-type/:fieldID" exact strict component={AddressType} />

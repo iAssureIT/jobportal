@@ -3,7 +3,6 @@ import './JobPosting.css';
 import 'react-phone-input-2/lib/style.css';
 import $ from 'jquery';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-//import PreviewModal from '../PreviewModal/PreviewModal.js';
 import Axios from 'axios';
 import Swal from 'sweetalert2';
 import CKEditor from '@ckeditor/ckeditor5-react';
@@ -13,7 +12,6 @@ import Moment from "moment";
 import Autosuggest from 'react-autosuggest';
 
 import { WithContext as ReactTags } from 'react-tag-input';
-//import { COUNTRIES } from './countries';
 import PlacesAutocomplete, {
         geocodeByAddress,
         getLatLng
@@ -25,12 +23,14 @@ export default class JobPosting extends Component {
         super(props);
 
         this.state = {
-            company_id                  :   localStorage.getItem("company_Id"),
+            company_id                  :   localStorage.getItem("company_Id") ? localStorage.getItem("company_Id") : null,
             jobTitle                    :   "",
-            industry_id                 :   localStorage.getItem("industry_id"),
+            industry_id                 :   localStorage.getItem("industry_id") ? localStorage.getItem("industry_id") : null,
             industryList                :   [],
+            functionalArea              :   "",
             functionalarea_id           :   "",
             functionalArealist          :   [],
+            subFunctionalArea           :   "",
             subfunctionalarea_id        :   "",
             subFunctionalArealist       :   [],
             role_id                     :   "",
@@ -397,6 +397,7 @@ export default class JobPosting extends Component {
                 otherSkills             :   this.state.otherSkills,
                 minOtherExp             :   this.state.minOtherExp,
                 preferSkills            :   this.state.preferSkills,
+
             };
 
             console.log("formValues :", formValues);
@@ -838,7 +839,7 @@ export default class JobPosting extends Component {
 
 
 render(){   
-        console.log(this.state.primarySkillSuggestions)
+        console.log(ClassicEditor)
         const searchOptions =   { componentRestrictions: {country: "in"} }      
         const KeyCodes = {
           comma: 188,
@@ -1398,31 +1399,9 @@ render(){
                                     </div>                                                                                                                      
                                     
                                     <div className="col-lg-7 col-lg-offset-5 pull-right">
-                                       {/* <button type="button" data-toggle="modal" data-target="#robust" data-dismiss="modal" className="btn addJobFormField addJobPreviewBtn"> 
+                                        <button type="button" data-toggle="modal" data-target="#robust" data-dismiss="modal" className="btn addJobFormField addJobPreviewBtn"> 
                                             PREVIEW 
-                                        </button>
-                                    
-                                        <PreviewModal 
-                                            jobTitle            =   "MERN Developer"
-                                            address             =   "World Trade Center, Pune"
-                                            jobDesc             =   "Develops information systems by designing, developing, and installing software solutions.
-                                                                     Develops information systems by designing, developing, and installing software solutions."
-                                            minEducation        =   "BE Graduation"
-                                            minExperience       =   "4 years"
-                                            minPrimExp          =   "2-3 years"
-                                            minSecExp           =   "3-4 years"
-                                            minOtherExp         =   "4-5 years"
-                                            industry_id         =   "Information Technology"
-                                            gender              =   "Both (Male & Female)"
-                                            minSalary           =   "70000"
-                                            minSalPeriod        =   "Per Month"
-                                            maxSalary           =   "90000"
-                                            maxSalPeriod        =   "Per Month"
-                                            jobtype_id          =   "Full-Time"
-                                            functionalarea_id   =   "Engineer"
-                                            role                =   "Project Manager"
-                                        />*/}
-
+                                        </button>                                        
                                         <button className="btn buttonYellow addJobSubmitBtn"  onClick={this.handleSubmit}> {this.state.submitBtnText} </button>
                                     </div>
                                 </form>
