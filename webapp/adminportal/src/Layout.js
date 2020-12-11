@@ -13,7 +13,9 @@ import ForgotPassword       from './coreadmin/systemSecurity/ForgotPassword.js';
 import ResetPassword        from './coreadmin/systemSecurity/ResetPassword.js';
 import SignUp               from './coreadmin/systemSecurity/SignUp.js';
 
-import Dashboard            from './jobportaladmin/Dashboard/Dashboard.js'
+import Dashboard            from './jobportaladmin/Dashboard/Dashboard.js';
+
+import JobPosting            from './jobportaladmin/JobPosting/JobPosting.js';
 
 import Header               from './coreadmin/common/header/Header.js'; 
 import Footer               from './coreadmin/common/footer/Footer.js';
@@ -92,6 +94,8 @@ class Layout extends Component  {
                                                         <Route path="/employee-profile/:emp_ID" exact strict component={EmployeeProfile} />
                                                         <Route path="/org-profile" exact strict component={CompanyProfile} />
                                                         <Route path="/company-profile/:comp_ID" exact strict component={CompanyProfileView} />
+
+                                                        <Route path="/jobposting" exact strict component={JobPosting} />
 
                                                         <Route path="/address-type" exact strict component={AddressType} />
                                                         <Route path="/address-type/:fieldID" exact strict component={AddressType} />
