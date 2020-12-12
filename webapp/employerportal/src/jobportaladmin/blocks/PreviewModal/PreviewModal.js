@@ -51,7 +51,7 @@ export default class PreviewModal extends Component{
                                         <div className="col-lg-12 contentMain">
                                           <div className="row">
                                             <div className="contentHead">
-                                              {this.props.jobTitle}
+                                              {this.props.jobInfo.jobTitle}
                                             </div>
                                             <div className="subContentHead">
                                               <b>iAssure International Technologies Pvt Ltd</b>

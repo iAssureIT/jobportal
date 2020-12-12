@@ -1404,26 +1404,7 @@ render(){
 											PREVIEW 
 										</button>
 									
-										<PreviewModal 
-											jobTitle 			= 	"MERN Developer"
-											address  			= 	"World Trade Center, Pune"
-											jobDesc	 			= 	"Develops information systems by designing, developing, and installing software solutions.
-																 	 Develops information systems by designing, developing, and installing software solutions."
-											minEducation 		= 	"BE Graduation"
-											minExperience 		= 	"4 years"
-											minPrimExp			= 	"2-3 years"
-											minSecExp			= 	"3-4 years"
-											minOtherExp			= 	"4-5 years"
-											industry_id			= 	"Information Technology"
-											gender          	=	"Both (Male & Female)"
-											minSalary 			= 	"70000"
-											minSalPeriod 		= 	"Per Month"
-											maxSalary 			= 	"90000"
-											maxSalPeriod		= 	"Per Month"
-											jobtype_id 			= 	"Full-Time"
-											functionalarea_id 	= 	"Engineer"
-											role 				=   "Project Manager"
-										/>
+										<PreviewModal jobInfo = {this.state}/>
 
 										<button className="btn buttonYellow addJobSubmitBtn"  onClick={this.handleSubmit}> {this.state.submitBtnText} </button>
 									</div>
