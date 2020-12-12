@@ -19,11 +19,20 @@
 }
 
 .buttonYellow{
-	background-color: var(--yellow-button-color);
+	background-color: #3C8DBC;
 	color: #fff;
 	height: 30px;
 	line-height: 15px;
+	border:1px solid #3C8DBC ;
 }
+
+.buttonYellow:hover{
+	background-color: #fff;
+	color: #3C8DBC !important;
+	
+}
+
+
 
 .addJobWrapperBorder{
 	border: 3px solid var(--main-border-color);
@@ -35,7 +44,7 @@
 	margin-top: 25px;
 	font-size: 25px;
 	/*font-weight: bold;*/
-	color: var(--main-heading-font-color);
+	color: #3C8DBC;
 	font-family: 'Montserrat-SemiBold'; 
 }
 
@@ -48,7 +57,7 @@
 .addJobMainHead{
 	font-size: 21px;
 	font-weight: bold;
-	color: var(--main-subheading-font-color);
+	color: #3C8DBC;
 	font-family: 'Montserrat-SemiBold'; 
 }
 
@@ -67,12 +76,12 @@
 .addJobSubHead{
 	font-size: 21px;
 	font-weight: bold;
-	color: var(--main-subheading-font-color);
+	color: #3C8DBC;
 	font-family: 'Montserrat-SemiBold';
 }
 
 .addJobSubHead i{
-	color: var(--main-txt-color);
+	color: #3C8DBC;
 	font-size: 25px;
 	margin-top: 18px;
 }
@@ -196,7 +205,7 @@
 	height: 32px;
 	border-radius: 5px;
 	font-size: 12px;
-	color: #fff;
+	color: #555;
 	font-weight: 100 !important;
 	padding-top: 8px;
 	text-align:center;
@@ -210,9 +219,9 @@
 }
 
 .addJobGenderActive{
-	background-color:var(--main-border-color);
-	height: 32px;
-	transition: all 1.3s;
+	background-color: #3C8DBC;
+    transition: all 2s;
+    color: #fff;
 }
 
 /***********************************End of Custom Gender Field Properties**************************/
@@ -223,7 +232,7 @@
 	/*width: 255px !important;*/
 	border-radius: 4px !important;
 	background-color: var(--form-field-background-color) !important;
-	border: 1px solid var(--main-border-color) !important;
+	border: 1px solid #3C8DBC !important;
 	color: var(--main-txt-color) !important;
 }
 
@@ -337,7 +346,7 @@
 }
   
 .containerWfh input:checked ~ .checkmark2{
-	background-color: var(--main-border-color);	
+	background-color:#3C8DBC;	
 }
   
 .checkmark2:after {
@@ -466,7 +475,7 @@ option:hover{
 
     /* -- Overrides generic colors. ------------------------------------------------------------- */
 
-    --ck-color-base-foreground: var(--ck-custom-background);
+    --ck-color-base-foreground: #3C8DBC;
     --ck-color-focus-border: hsl(208, 90%, 62%);
     --ck-color-text: hsl(0, 0%, 98%);
     --ck-color-shadow-drop: hsla(0, 0%, 0%, 0.2);
@@ -474,11 +483,11 @@ option:hover{
 
     /* -- Overrides the default .ck-button class colors. ---------------------------------------- */
 
-    --ck-color-button-default-background: var(--ck-custom-background);
+    --ck-color-button-default-background: #3C8DBC;
     --ck-color-button-default-hover-background: /*hsl(270, 1%, 22%);*/ var(--main-border-color) !important;
     --ck-color-button-default-active-background: hsl(270, 2%, 20%);
     --ck-color-button-default-active-shadow: hsl(270, 2%, 23%);
-    --ck-color-button-default-disabled-background: var(--ck-custom-background);
+    --ck-color-button-default-disabled-background: #3C8DBC;
 
     /*--ck-color-button-on-background: var(--ck-custom-foreground);
     --ck-color-button-on-hover-background: hsl(255, 4%, 16%);
@@ -498,7 +507,7 @@ option:hover{
 
     /* -- Overrides the default .ck-dropdown class colors. -------------------------------------- */
 
-    --ck-color-dropdown-panel-background: var(--ck-custom-background);
+    --ck-color-dropdown-panel-background: #3C8DBC;
     --ck-color-dropdown-panel-border: var(--ck-custom-foreground);
 
     /* -- Overrides the default .ck-splitbutton class colors. ----------------------------------- */
@@ -517,15 +526,15 @@ option:hover{
 
     /* -- Overrides the default .ck-list class colors. ------------------------------------------ */
 
-    --ck-color-list-background: var(--ck-custom-background);
+    --ck-color-list-background: #3C8DBC;
     --ck-color-list-button-hover-background: var(--ck-color-base-foreground);
     --ck-color-list-button-on-background: var(--ck-color-base-active);
     --ck-color-list-button-on-background-focus: var(--ck-color-base-active-focus);
-    --ck-color-list-button-on-text: var(--ck-color-base-background);
+    --ck-color-list-button-on-text: #3C8DBC;
 
     /* -- Overrides the default .ck-balloon-panel class colors. --------------------------------- */
 
-    --ck-color-panel-background: var(--ck-custom-background);
+    --ck-color-panel-background:#3C8DBC;
     --ck-color-panel-border: var(--ck-custom-border);
 
     /* -- Overrides the default .ck-toolbar class colors. --------------------------------------- */
@@ -582,7 +591,7 @@ option:hover{
 }*/
 
 .ck.ck-dropdown .ck-button.ck-dropdown__button.ck-on{
-	background-color: var(--form-field-background-color) !important;
+	background-color: var(--ck-color-dropdown-panel-background) !important;
 }
 
 .ck.ck-list__item .ck-button.ck-on{
@@ -761,3 +770,9 @@ input::placeholder{
 
 
 /******************************************End Of React Tag Input Properties******************************************/
+
+.form-control:focus{
+	/*box-shadow: inset 0 1px 1px rgba(176, 238, 176,.075) !important;*/
+border-color: #fff;
+	box-shadow: 0px 1px 1px rgba(60,141,188, 0.075) inset, 0px 0px 8px rgba(60,141,188, 0.5)  !important;
+}

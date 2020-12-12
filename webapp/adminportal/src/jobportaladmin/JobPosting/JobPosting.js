@@ -23,6 +23,9 @@ export default class JobPosting extends Component {
         super(props);
 
         this.state = {
+            corporate                   :   "",
+            corporate_id                :   "",
+            corporatelist               :   [],
             company_id                  :   localStorage.getItem("company_Id") ? localStorage.getItem("company_Id") : null,
             jobTitle                    :   "",
             industry_id                 :   localStorage.getItem("industry_id") ? localStorage.getItem("industry_id") : null,
@@ -187,6 +190,16 @@ export default class JobPosting extends Component {
                     Swal.fire("Some error occured while updating job data", error.message, "error");
                 })
         }
+
+        Axios.get("/api/entitymaster/get/corporate")
+            .then(response => {
+                    this.setState({
+                        corporatelist: response.data
+                    });
+            })
+            .catch(error => {
+                Swal.fire("Error while getting List data", error.message, 'error');
+            })
 
         Axios.get("/api/functionalareamaster/get/list")
             .then(response => {
@@ -422,6 +435,7 @@ export default class JobPosting extends Component {
 
                     Swal.fire("Congrats", "Your Data is Submitted Successfully", "success");
                     this.setState({
+
                         jobTitle                :   "",
                         industry_id             :   "",
                         functionalarea_id       :   "",
@@ -762,6 +776,21 @@ export default class JobPosting extends Component {
         
     }   
 
+    onChangeCorporate(event){
+        const {name,value} = event.target;
+        this.setState({ [name]:value });  
+        
+        var corporate_id;
+        if (document.querySelector('#corporate option[value="' + value + '"]')) {
+            corporate_id = document.querySelector('#corporate option[value="' + value + '"]').getAttribute("data-value")
+        }else{ corporate_id = "" }
+
+        this.setState({ corporate_id : corporate_id },()=>{
+            console.log(this.state)
+        });  
+        
+    }   
+
     onChangeSubFunctionalArea(event){
         const {name,value} = event.target;
         this.setState({ [name]:value });  
@@ -853,6 +882,30 @@ render(){
                             <div className="col-lg-10 col-lg-offset-1 mainFormSection">
                                 <div className="addJobFormHeading col-lg-12"> Post A Job <div className="addJobFormHr col-lg-12"></div> </div>
                                 
+
+                                <div className="addJobMainHead col-lg-12">
+                                    <i className="fa fa-info"></i> 
+                                    <span className="labelLeftPadding"> Add Corporate </span>
+                                </div>
+
+                                <div className="col-lg-6">
+                                    <label htmlFor="corporate" className="addjobformLable"> Corporate Name <span className="asterisk">&#42;</span> </label>
+                                    <div className="input-group">
+                                        <span className="input-group-addon addJobFormField"><i className="fa fa-briefcase"></i></span> 
+                                            <input type="text" list="corporate" className="form-control addJobFormField" refs="corporate" id="selectCorporate" value={this.state.corporate} name="corporate"
+                                            onChange={this.onChangeCorporate.bind(this)} />
+                                            <datalist name="corporate" id="corporate" className="corporatelist" >
+                                                {this.state.corporatelist.map((item, key) =>
+                                                    <option key={key} value={item.companyName} data-value={item._id}/>
+                                                )}
+                                            </datalist>
+                                        <span id="functionalAreaError" className="errorMsgJobPost"></span>
+                                    </div>  
+                                </div>    
+
+
+                                 <div className="addJobFormHr col-lg-12"></div>
+
                                 <div className="addJobMainHead col-lg-12">
                                     <i className="fa fa-info"></i> 
                                     <span className="labelLeftPadding"> Basic Info </span>
@@ -1063,7 +1116,7 @@ render(){
                                                     </div>
                                                     <div className={this.state.gender==="Both (Male & Female)"? "addJobGenderField col-lg-4 addJobGenderActive" : "addJobGenderField col-lg-4" } id="Both (Male & Female)" name="gender" value="Both (Male & Female)"  onClick={this.setGender.bind(this)}>
                                                         <div className="row">
-                                                            Both (Male & Female)
+                                                            Both
                                                         </div>
                                                     </div>          
                                                 </div>
@@ -1398,9 +1451,7 @@ render(){
                                     </div>                                                                                                                      
                                     
                                     <div className="col-lg-7 col-lg-offset-5 pull-right">
-                                        <button type="button" data-toggle="modal" data-target="#robust" data-dismiss="modal" className="btn addJobFormField addJobPreviewBtn"> 
-                                            PREVIEW 
-                                        </button>                                        
+                                                                            
                                         <button className="btn buttonYellow addJobSubmitBtn"  onClick={this.handleSubmit}> {this.state.submitBtnText} </button>
                                     </div>
                                 </form>
