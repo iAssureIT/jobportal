@@ -35,14 +35,18 @@ export default class JobPosting extends Component {
             subFunctionalArea 			: 	"",
             subfunctionalarea_id        :   "",
             subFunctionalArealist       :   [],
+            role                        :   "",
             role_id                     :   "",
             roleArray                   :   [],
             gender                      :   "Male Only",
             workFromHome                :   false,
+            jobType                     :   "",
             jobtype_id                  :   "",
             jobTypeArray                :   [],
+            jobTime                     :   "",
             jobtime_id                  :   "",
             jobTimeArray                :   [],
+            jobCategory                 :   "",
             jobcategory_id              :   "",
             jobCategoryArray            :   [],
             positions                   :   "",
@@ -359,13 +363,19 @@ export default class JobPosting extends Component {
                 company_id              :   this.state.company_id,
                 jobTitle                :   this.state.jobTitle,
                 industry_id             :   this.state.industry_id,
+                functionalArea          :   this.state.functionalArea,
                 functionalarea_id       :   this.state.functionalarea_id,
+                subFunctionalArea       :   this.state.subFunctionalArea,
                 subfunctionalarea_id    :   this.state.subfunctionalarea_id,
+                role                    :   this.state.role,
                 role_id                 :   this.state.role_id,
                 gender                  :   this.state.gender,
                 workFromHome            :   this.state.workFromHome,
+                jobType                 :   this.state.jobType,
                 jobtype_id              :   this.state.jobtype_id,
+                jobTime                 :   this.state.jobTime,
                 jobtime_id              :   this.state.jobtime_id,
+                jobCategory             :   this.state.jobCategory,
                 jobcategory_id          :   this.state.jobcategory_id,
                 positions               :   this.state.positions,
                 jobDesc                 :   this.state.jobDesc,
@@ -859,7 +869,8 @@ render(){
 									<i className="fa fa-info"></i> 
 									<span className="labelLeftPadding"> Basic Info </span>
 								</div>
-								<form id="addJob" autoComplete="off">
+								
+                                <form id="addJob" autoComplete="off">
 									<div className="col-lg-12 addJobFieldRow text-left">
 										<div className="row">
 											<div className="col-lg-6">
@@ -1403,8 +1414,8 @@ render(){
 										<button type="button" data-toggle="modal" data-target="#robust" data-dismiss="modal" className="btn addJobFormField addJobPreviewBtn"> 
 											PREVIEW 
 										</button>
-									
-										<PreviewModal jobInfo = {this.state}/>
+
+										<PreviewModal jobInfo = {this.state} />
 
 										<button className="btn buttonYellow addJobSubmitBtn"  onClick={this.handleSubmit}> {this.state.submitBtnText} </button>
 									</div>

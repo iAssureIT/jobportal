@@ -9,24 +9,6 @@ import Swal   from 'sweetalert2';
 import Moment from "moment";
 
 export default class PreviewModal extends Component{
-  constructor(props){
-    super(props);
-
-   /* this.state = {
-        jobTitle       :   ""
-    }*/
-
-  } 
-
-
-  /*componentDidMount() {
-
-                        this.setState({
-                                        jobTitle      :   response.data.jobsData[0].jobBasicInfo.jobTitle
-                                     })
-
-                      }*/
-
 
   render() {
     return (
@@ -57,7 +39,7 @@ export default class PreviewModal extends Component{
                                               <b>iAssure International Technologies Pvt Ltd</b>
                                             </div>
                                             <div className="locationinfo">
-                                              {this.props.address}
+                                              {this.props.jobInfo.address}
                                             </div>
                                           </div>
                                         </div>
@@ -75,7 +57,7 @@ export default class PreviewModal extends Component{
                                           <div className="DescriptionContainer col-lg-12">
                                             <div className="profileContent">
                                               <div className="col-lg-12 jobDescContent">
-                                                <div dangerouslySetInnerHTML = {{ __html : this.props.jobDesc}} />
+                                                <div dangerouslySetInnerHTML = {{ __html : this.props.jobInfo.jobDesc}} />
                                               </div>
                                             </div>
                                           </div>
@@ -92,11 +74,11 @@ export default class PreviewModal extends Component{
                                               <ul className="col-lg-12">
                                                 <li><span className="eduSubtitle">
                                                   Minimum Education Required</span><br/>
-                                                  <span className="eduDuration"> {this.props.minEducation} </span>
+                                                  <span className="eduDuration"> {this.props.jobInfo.minEducation} </span>
                                                 </li>
                                                 <li>
                                                   <span className="eduSubtitle"> Minimum Overall Experience </span><br/>
-                                                  <span className="eduDuration"> {this.props.minExperience} </span>
+                                                  <span className="eduDuration"> {this.props.jobInfo.minExperience} </span>
                                                 </li>
                                               </ul>
                                             </div>
@@ -125,7 +107,7 @@ export default class PreviewModal extends Component{
                                                           Min. Experience Req.
                                                         </span><br/>
                                                         <span className="skillDuration">
-                                                          {this.props.minPrimExp}
+                                                          {this.props.jobInfo.minPrimExp}
                                                         </span>
                                                       </li>
                                                       <p className="skillsList col-lg-5">
@@ -154,7 +136,7 @@ export default class PreviewModal extends Component{
                                                             Min. Experience Req.
                                                           </span><br/>
                                                           <span className="skillDuration">
-                                                            {this.props.minSecExp}
+                                                            {this.props.jobInfo.minSecExp}
                                                           </span>
                                                         </li>
                                                         <p className="skillsList col-lg-5">
@@ -185,7 +167,7 @@ export default class PreviewModal extends Component{
                                                             Min. Experience Req.
                                                           </span><br/>
                                                           <span className="skillDuration">
-                                                            {this.props.minOtherExp}
+                                                            {this.props.jobInfo.minOtherExp}
                                                           </span>
                                                         </li>
                                                         <p className="skillsList col-lg-6">
@@ -266,28 +248,28 @@ export default class PreviewModal extends Component{
                                       Industry
                                     </div>
                                     <p className="rightSideSub">
-                                      {this.props.industry_id}
+                                      {this.props.jobInfo.industry_id}
                                     </p>
                                     
                                     <div className="rightSideTitle">
                                       Gender
                                     </div>
                                     <p className="rightSideSub">
-                                      {this.props.gender}
+                                      {this.props.jobInfo.gender}
                                     </p>
                                     
                                     <div className="rightSideTitle">
                                       Salary
                                     </div>
                                     <p className="rightSideSub">
-                                      <i className="fa fa-inr"></i> {this.props.minSalary} {this.props.minSalPeriod} To &nbsp;<i className="fa fa-inr"></i> {this.props.maxSalary} {this.props.maxSalPeriod}{/*(Monthly)*/}
+                                      <i className="fa fa-inr"></i> {this.props.jobInfo.minSalary} {this.props.jobInfo.minSalPeriod} To &nbsp;<i className="fa fa-inr"></i> {this.props.jobInfo.maxSalary} {this.props.jobInfo.maxSalPeriod}{/*(Monthly)*/}
                                     </p>
                                     
                                     <div className="rightSideTitle">
                                       Job Type
                                     </div>
                                     <p className="rightSideSub">
-                                      {this.props.jobtype_id}
+                                      {this.props.jobInfo.jobtype_id}
                                     </p>
                                     
                                     <div className="rightSideTitle">
@@ -295,14 +277,14 @@ export default class PreviewModal extends Component{
                                     </div>
                                     
                                     <p className="rightSideSub">
-                                      {this.props.functionalarea_id}
+                                      {this.props.jobInfo.functionalarea_id}
                                     </p>
                                     
                                     <div className="rightSideTitle">
                                       Role
                                     </div>
                                     <p className="rightSideSub">
-                                      {this.props.role}
+                                      {this.props.jobInfo.role}
                                     </p>
 
                                     <div className="col-lg-12">

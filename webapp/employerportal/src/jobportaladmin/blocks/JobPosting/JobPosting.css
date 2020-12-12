@@ -908,3 +908,5 @@ input::placeholder{
   color: #fff;
   background-color: var(--main-border-color);
 }
+
+{/*autocomplete="off"*/}

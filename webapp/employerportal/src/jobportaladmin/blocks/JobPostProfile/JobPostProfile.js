@@ -387,7 +387,7 @@ export default class JobPostProfile extends Component{
 										Role
 									</div>
 									<p className="rightSideSub">
-										{this.state.role}
+										{this.state.role_id}
 									</p>
 
 									<div className="col-lg-12">
