@@ -1,10 +1,37 @@
 const mongoose	=	require('mongoose');
 const mongodb	=	require('mongodb');
 const Jobs 		=	require('./ModelJobPost.js');
+const FunctionalAreaMaster 		= require('../../coreAdmin/FunctionalAreaMaster/ModelFunctionalAreaMaster.js');
+const SubFunctionalAreaMaster 	= require('../../coreAdmin/SubFunctionalAreaMaster/ModelSubFunctionalAreaMaster.js');
+const JobCategoryMaster 		= require('../../coreAdmin/JobCategoryMaster/ModelJobCategory.js');
+const JobRoleMaster 			= require('../../coreAdmin/JobRoleMaster/ModelJobRole.js');
+const JobTypeMaster 			= require('../../coreAdmin/JobTypeMaster/ModelJobType.js');
+const JobTimeMaster 			= require('../../coreAdmin/JobTimeMaster/ModelJobTime.js');
+
 var ObjectID 	= 	require('mongodb').ObjectID;
 
 exports.insertJobs = (req, res, next)=>{
+		console.log(req.body)	
+		var functionalarea_id, subfunctionalarea_id, jobcategory_id, jobrole_id, jobtype_id, jobtime_id;
+		processData();
+    	async function processData(){
+    		functionalarea_id  		= req.body.functionalarea_id != "" ? req.body.functionalarea_id 
+    							: await insertFunctArea(req.body.functionalArea,req.body.user_id)
+			
+			subfunctionalarea_id  	= req.body.subfunctionalarea_id != "" ? req.body.subfunctionalarea_id 
+    							: await insertSubFunctArea(functionalarea_id, req.body.subFunctionalArea,req.body.user_id)
+			
+			jobcategory_id  		= req.body.jobcategory_id != "" ? req.body.jobcategory_id 
+    							: await insertJobCategory(req.body.jobCategory,req.body.user_id)
+			
+			jobrole_id  			= req.body.jobrole_id != "" ? req.body.jobrole_id 
+    							: await insertJobRole(req.body.jobRole,req.body.user_id)
+			
+			jobtype_id  			= req.body.jobtype_id != "" ? req.body.jobtype_id 
+    							: await insertJobType(req.body.jobType,req.body.user_id)
 
+			jobtime_id  			= req.body.jobtime_id != "" ? req.body.jobtime_id 
+    							: await insertJobTime(req.body.jobTime,req.body.user_id)
 		const jobsData = new Jobs({
 			
 			"_id" 			: 	new mongoose.Types.ObjectId(),
@@ -14,14 +41,14 @@ exports.insertJobs = (req, res, next)=>{
 			"jobBasicInfo" 	: 	{
 									"jobTitle"				: req.body.jobTitle,
 									"industry_id"			: req.body.industry_id,
-									"functionalarea_id" 	: req.body.functionalarea_id,
-									"subfunctionalarea_id"	: req.body.subfunctionalarea_id,
-									"role_id"				: req.body.role_id,
+									"functionalarea_id" 	: functionalarea_id,
+									"subfunctionalarea_id"	: subfunctionalarea_id,
+									"jobrole_id"			: jobrole_id,
 									"gender"				: req.body.gender,
 									"workFromHome" 			: req.body.workFromHome,
-									"jobtype_id" 			: req.body.jobtype_id,
-									"jobtime_id" 			: req.body.jobtime_id,
-									"jobcategory_id" 		: req.body.jobcategory_id,
+									"jobtype_id" 			: jobtype_id,
+									"jobtime_id" 			: jobtime_id,
+									"jobcategory_id" 		: jobcategory_id,
 									"positions" 			: req.body.positions,
 									"jobDesc" 				: req.body.jobDesc,
 									"lastDateOfAppl" 		: new Date(req.body.lastDateOfAppl),
@@ -74,7 +101,8 @@ exports.insertJobs = (req, res, next)=>{
 				
 				.then(jobsData=> {
 					res.status(200).json({
-											jobsData : jobsData,							
+											jobsData : jobsData,	
+											created  : true,							
 											message	 : "Job details Inserted Successfully",
 										});
 								  })
@@ -83,11 +111,119 @@ exports.insertJobs = (req, res, next)=>{
 					console.log(error);
 					res.status(500).json({
 											error 	: error,
+											created : false,
 											message : "Some issue occurred during Insert Jobs."
 										});
 								});	
-	}
+		}
+}
+function insertFunctArea(functionalArea, createdBy){ 
+    return new Promise(function(resolve,reject){ 
+        const functionalAreaMaster = new FunctionalAreaMaster({
+                        _id                         : new mongoose.Types.ObjectId(),
+                        functionalArea              : functionalArea,
+                        iconUrl						: "",
+                        createdBy                   : createdBy,
+                        createdAt                   : new Date()
+                    })
+                    functionalAreaMaster.save()
+                    .then(data=>{
+                        resolve( data._id );
+                    })
+                    .catch(err =>{
+                        reject(err); 
+                    });
+    });
+}
 
+function insertSubFunctArea(functionalarea_id, subFunctionalArea, createdBy){ 
+    return new Promise(function(resolve,reject){ 
+        const subFunctionalAreaMaster = new SubFunctionalAreaMaster({
+                        _id                         : new mongoose.Types.ObjectId(),
+                        functionalarea_id           : functionalarea_id,
+                        subfunctionalArea			: subFunctionalArea,
+                        createdBy                   : createdBy,
+                        createdAt                   : new Date()
+                    })
+                    subFunctionalAreaMaster.save()
+                    .then(data=>{
+                        resolve( data._id );
+                    })
+                    .catch(err =>{
+                        reject(err); 
+                    });
+    });
+}
+
+function insertJobCategory(jobCategory, createdBy){ 
+    return new Promise(function(resolve,reject){ 
+        const jobCategoryMaster = new JobCategoryMaster({
+                        _id                         : new mongoose.Types.ObjectId(),
+                        jobCategory           		: jobCategory,
+                        createdBy                   : createdBy,
+                        createdAt                   : new Date()
+                    })
+                    jobCategoryMaster.save()
+                    .then(data=>{
+                        resolve( data._id );
+                    })
+                    .catch(err =>{
+                        reject(err); 
+                    });
+    });
+}
+function insertJobRole(jobRole, createdBy){ 
+    return new Promise(function(resolve,reject){ 
+        const jobRoleMaster = new JobRoleMaster({
+                        _id                         : new mongoose.Types.ObjectId(),
+                        jobRole           		    : jobRole,
+                        createdBy                   : createdBy,
+                        createdAt                   : new Date()
+                    })
+                    jobRoleMaster.save()
+                    .then(data=>{
+                        resolve( data._id );
+                    })
+                    .catch(err =>{
+                        reject(err); 
+                    });
+    });
+}
+
+function insertJobType(jobType, createdBy){ 
+    return new Promise(function(resolve,reject){ 
+        const jobTypeMaster = new JobTypeMaster({
+                        _id                         : new mongoose.Types.ObjectId(),
+                        jobType           		    : jobType,
+                        createdBy                   : createdBy,
+                        createdAt                   : new Date()
+                    })
+                    jobTypeMaster.save()
+                    .then(data=>{
+                        resolve( data._id );
+                    })
+                    .catch(err =>{
+                        reject(err); 
+                    });
+    });
+}
+function insertJobTime(jobTime, createdBy){ 
+    return new Promise(function(resolve,reject){ 
+        const jobTimeMaster = new JobTimeMaster({
+                        _id                         : new mongoose.Types.ObjectId(),
+                        jobTime           		    : jobTime,
+                        createdBy                   : createdBy,
+                        createdAt                   : new Date()
+                    })
+                    jobTimeMaster.save()
+                    .then(data=>{
+                        resolve( data._id );
+                    })
+                    .catch(err =>{
+                        reject(err); 
+                    });
+    });
+}
 exports.getJob = (req,res,next)=>{
 	var job_id = req.params.job_id;
 
@@ -219,7 +355,7 @@ exports.updateJob = (req,res,next)=>{
 									"industry_id"			: req.body.industry_id,
 									"functionalarea_id" 	: req.body.functionalarea_id,
 									"subfunctionalarea_id"	: req.body.subfunctionalarea_id,
-									"role_id"				: req.body.role_id,
+									"jobrole_id"			: req.body.jobrole_id,
 									"gender"				: req.body.gender,
 									"workFromHome" 			: req.body.workFromHome,
 									"jobtype_id" 			: req.body.jobtype_id,

@@ -9,7 +9,7 @@ const jobsSchema = mongoose.Schema({
 							industry_id 		 	: { type: mongoose.Schema.Types.ObjectId, ref: 'industrymasters' },
 							functionalarea_id 	 	: { type: mongoose.Schema.Types.ObjectId, ref: 'functionalareamasters' },
 							subfunctionalarea_id 	: { type: mongoose.Schema.Types.ObjectId, ref: 'subfunctionalareamasters' },
-							role_id					: String,
+							jobrole_id					: String,
 							gender              	: String,
 							workFromHome 			: Boolean,
 							jobtype_id 				: { type: mongoose.Schema.Types.ObjectId, ref: 'jobtypemasters' },

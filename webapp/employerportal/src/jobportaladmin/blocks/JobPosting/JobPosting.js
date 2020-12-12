@@ -11,23 +11,22 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import PhoneInput from 'react-phone-input-2';
 import Moment from "moment";
 import Autosuggest from 'react-autosuggest';
-
 import { WithContext as ReactTags } from 'react-tag-input';
-import { COUNTRIES } from './countries';
 import PlacesAutocomplete, {
         geocodeByAddress,
         getLatLng
 } from "react-places-autocomplete";
+import { connect }        from 'react-redux';
+import { bindActionCreators } from 'redux';
+import  * as mapActionCreator from '../../common/actions/index';
 
-export default class JobPosting extends Component {
+class JobPosting extends Component {
 
     constructor(props) {
         super(props);
 
         this.state = {
-            company_id                  :   localStorage.getItem("company_Id"),
             jobTitle                    :   "",
-            industry_id                 :   localStorage.getItem("industry_id"),
             industryList                :   [],
             functionalArea 				: 	"",
             functionalarea_id           :   "",
@@ -35,8 +34,8 @@ export default class JobPosting extends Component {
             subFunctionalArea 			: 	"",
             subfunctionalarea_id        :   "",
             subFunctionalArealist       :   [],
-            role                        :   "",
-            role_id                     :   "",
+            jobRole                     :   "",
+            jobrole_id                  :   "",
             roleArray                   :   [],
             gender                      :   "Male Only",
             workFromHome                :   false,
@@ -55,7 +54,6 @@ export default class JobPosting extends Component {
             contactPersonName           :   "",
             contactPersonEmail          :   "",
             contactPersonPhone          :   "",
-
             address                     :   "",
             area                        :   "",
             cityVillage                 :   "",
@@ -141,7 +139,7 @@ export default class JobPosting extends Component {
                         industry_id             :   response.data.jobsData[0].jobBasicInfo.industry_id,
                         functionalarea_id       :   response.data.jobsData[0].jobBasicInfo.functionalarea_id,
                         subfunctionalarea_id    :   response.data.jobsData[0].jobBasicInfo.subfunctionalarea_id,
-                        role_id                 :   response.data.jobsData[0].jobBasicInfo.role_id,
+                        jobrole_id              :   response.data.jobsData[0].jobBasicInfo.jobrole_id,
                         gender                  :   response.data.jobsData[0].jobBasicInfo.gender,
                         workFromHome            :   response.data.jobsData[0].jobBasicInfo.workFromHome,
                         jobtype_id              :   response.data.jobsData[0].jobBasicInfo.jobtype_id,
@@ -206,11 +204,9 @@ export default class JobPosting extends Component {
 
         Axios.get("/api/subfunctionalareamaster/get/list")
             .then(response => {
-                /*console.log("getsubFunctionalAreaData response.data = ", response.data);*/
                 this.setState({
                     subFunctionalArealist: response.data
                 });
-                /*console.log("subFunctionalArea", this.state.subFunctionalArealist);*/
             })
             .catch(error => {
                 Swal.fire("Error while getting List data", error.message, 'error');
@@ -218,11 +214,9 @@ export default class JobPosting extends Component {
 
         Axios.get("/api/jobrolemaster/get/list")
             .then(response => {
-                /*console.log("getsubFunctionalAreaData response.data = ", response.data);*/
                 this.setState({
                     roleArray: response.data
                 });
-                /*console.log("subFunctionalArea", this.state.roleArray);*/
             })
             .catch(error => {
                 Swal.fire("Error while getting List data", error.message, 'error');
@@ -295,7 +289,7 @@ export default class JobPosting extends Component {
             document.getElementById("jobTitleError").innerHTML = "";
             status = true;
         }
-        if (this.state.role_id.length <= 0) {
+        if (this.state.jobrole_id.length <= 0) {
             document.getElementById("roleError").innerHTML = "Enter job role";
             status = false;
         } else {
@@ -360,15 +354,16 @@ export default class JobPosting extends Component {
         event.preventDefault();
         if (this.validateForm()) {
             var formValues = {
-                company_id              :   this.state.company_id,
+                user_id                 :   this.props.userDetails.user_id,
+                company_id              :   this.props.userDetails.company_id,
                 jobTitle                :   this.state.jobTitle,
-                industry_id             :   this.state.industry_id,
+                industry_id             :   this.props.userDetails.industry_id,
                 functionalArea          :   this.state.functionalArea,
                 functionalarea_id       :   this.state.functionalarea_id,
                 subFunctionalArea       :   this.state.subFunctionalArea,
                 subfunctionalarea_id    :   this.state.subfunctionalarea_id,
-                role                    :   this.state.role,
-                role_id                 :   this.state.role_id,
+                jobRole                 :   this.state.jobRole,
+                jobrole_id              :   this.state.jobrole_id,
                 gender                  :   this.state.gender,
                 workFromHome            :   this.state.workFromHome,
                 jobType                 :   this.state.jobType,
@@ -427,18 +422,15 @@ export default class JobPosting extends Component {
         Axios.post("/api/jobs/post", formValues)
 
             .then(response => {
-                console.log("Inside axios", response.data);
-                if (response.data.message === "Job details Inserted Successfully") {
-                    console.log("response.data = ", response.data);
+                if (response.data.created) {
                     let job_id = response.data.jobsData._id;
 
                     Swal.fire("Congrats", "Your Data is Submitted Successfully", "success");
                     this.setState({
                         jobTitle                :   "",
-                        industry_id             :   "",
                         functionalarea_id       :   "",
                         subfunctionalarea_id    :   "",
-                        role_id                 :   "",
+                        jobrole_id              :   "",
                         gender                  :   "Male Only",
                         workFromHome            :   false,
                         jobtype_id              :   "",
@@ -793,12 +785,12 @@ export default class JobPosting extends Component {
         const {name,value} = event.target;
         this.setState({ [name]:value });  
         
-        var role_id;
+        var jobrole_id;
         if (document.querySelector('#role option[value="' + value + '"]')) {
-            role_id = document.querySelector('#role option[value="' + value + '"]').getAttribute("data-value")
-        }else{ role_id = "" }
+            jobrole_id = document.querySelector('#role option[value="' + value + '"]').getAttribute("data-value")
+        }else{ jobrole_id = "" }
 
-        this.setState({ role_id : role_id },()=>{
+        this.setState({ jobrole_id : jobrole_id },()=>{
             console.log(this.state)
         });  
         
@@ -1042,16 +1034,16 @@ render(){
 												<div className="row">
 													<label htmlFor="role" className="addjobformLable col-lg-12"> Role <span className="asterisk">&#42;</span>
 														<div href="#" data-tip data-for='jobTitleTooltip' className="pull-right">
-															<i title="Please enter your project role" className="fa fa-question-circle"></i>
+															<i title="Please enter your role" className="fa fa-question-circle"></i>
 														</div>
 													</label>
 												</div>
 												<div className="input-group">
 													<span className="input-group-addon addJobFormField"><FontAwesomeIcon icon={['fas', 'briefcase']} /></span> 
                                                         <div className="input-group col-lg-12">
-                                                            <input type="text" list="role" className="form-control addJobFormField" refs="role" id="selectrole" value={this.state.role} name="role"
+                                                            <input type="text" list="jobRole" className="form-control addJobFormField" refs="role" id="selectrole" value={this.state.jobRole} name="jobRole"
                                                             onChange={this.onChangeRole.bind(this)} />
-                                                            <datalist name="role" id="role" className="roleArray" >
+                                                            <datalist name="jobRole" id="jobRole" className="roleArray" >
                                                                 {this.state.roleArray.map((item, key) =>
                                                                     <option key={key} value={item.jobRole} data-value={item._id}/>
                                                                 )}
@@ -1427,3 +1419,12 @@ render(){
 			);
 }
 }
+const mapStateToProps = (state)=>{
+    return {
+        userDetails     : state.userDetails,
+    }
+}
+const mapDispatchToProps = (dispatch) => ({
+  mapAction :  bindActionCreators(mapActionCreator, dispatch)
+}) 
+export default connect(mapStateToProps, mapDispatchToProps)(JobPosting)
