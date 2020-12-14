@@ -125,7 +125,7 @@ export default class AdminDashboard extends Component{
               </a>
             </li>
             <li className="singleTreeview" onClick={this.clickDashboard.bind(this)}>
-              <a href="/All_Jobs"  title="All Jobs" onClick={()=>this.openMenu("dashboard")}>
+              <a href="/job/list"  title="All Jobs" onClick={()=>this.openMenu("dashboard")}>
                 <i className="fa fa-ticket" aria-hidden="true"></i>
                 <span className="sidebarMenuTitle">All Jobs</span>
               </a>
