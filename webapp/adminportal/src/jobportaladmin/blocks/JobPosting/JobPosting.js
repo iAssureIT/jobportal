@@ -878,7 +878,7 @@ render(){
     return(
                 <div className="pageWrapper addJobBackgroundColor container-fluid">
                     <div className="row">
-                        <div className="col-lg-10 col-lg-offset-1 addJobForm pageWrapperBorder borderColor">
+                        <div className="col-lg-12 col-lg-offset-0 addJobForm pageWrapperBorder borderColor">
                             <div className="col-lg-10 col-lg-offset-1 mainFormSection">
                                 <div className="addJobFormHeading col-lg-12"> Post A Job <div className="addJobFormHr col-lg-12"></div> </div>
                                 
