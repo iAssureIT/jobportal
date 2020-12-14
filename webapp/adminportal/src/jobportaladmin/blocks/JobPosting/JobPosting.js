@@ -867,7 +867,8 @@ export default class JobPosting extends Component {
     }
 
 
-render(){  
+render(){   
+        console.log(this.state.primarySkillSuggestions);
         const searchOptions =   { componentRestrictions: {country: "in"} }      
         const KeyCodes = {
           comma: 188,
