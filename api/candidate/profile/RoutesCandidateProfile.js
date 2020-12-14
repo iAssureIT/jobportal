@@ -43,12 +43,9 @@ router.delete('/deleteExperience/:candidateID/delete/:experienceID',CandidatePro
 // =========================== candidate Experience =====================================//
 router.patch("/patch/addCandidateSkill", CandidateProfileController.addCandidateSkill); 
 
-router.post("/post/getOneCandidateSkill", CandidateProfileController.getOneCandidateSkill);
-
-router.patch("/patch/updateOneCandidateSkill", CandidateProfileController.updateOneCandidateSkill);
-
 router.delete('/deleteSkill/:candidateID/delete/:skillID',CandidateProfileController.deleteSkill);
 
+// ========================== candidate certification ================================== //
 router.patch("/patch/addCandidateCertification", CandidateProfileController.addCandidateCertification); 
 
 router.post("/post/getOneCandidateCertification", CandidateProfileController.getOneCandidateCertification);
