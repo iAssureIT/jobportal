@@ -344,7 +344,27 @@ exports.getJobList = (req,res,next)=>{
 
 exports.updateJob = (req,res,next)=>{
 	console.log("req.body - ", req.body);
-	
+	var functionalarea_id, subfunctionalarea_id, jobcategory_id, jobrole_id, jobtype_id, jobtime_id;
+		processData();
+		async function processData(){
+    		functionalarea_id  		= req.body.functionalarea_id != "" ? req.body.functionalarea_id 
+    							: await insertFunctArea(req.body.functionalArea,req.body.user_id)
+			
+			subfunctionalarea_id  	= req.body.subfunctionalarea_id != "" ? req.body.subfunctionalarea_id 
+    							: await insertSubFunctArea(functionalarea_id, req.body.subFunctionalArea,req.body.user_id)
+			
+			jobcategory_id  		= req.body.jobcategory_id != "" ? req.body.jobcategory_id 
+    							: await insertJobCategory(req.body.jobCategory,req.body.user_id)
+			
+			jobrole_id  			= req.body.jobrole_id != "" ? req.body.jobrole_id 
+    							: await insertJobRole(req.body.jobRole,req.body.user_id)
+			
+			jobtype_id  			= req.body.jobtype_id != "" ? req.body.jobtype_id 
+    							: await insertJobType(req.body.jobType,req.body.user_id)
+
+			jobtime_id  			= req.body.jobtime_id != "" ? req.body.jobtime_id 
+    							: await insertJobTime(req.body.jobTime,req.body.user_id)
+		
 	Jobs.updateOne(
 					{_id : req.body.job_id},
 					{$set 	: 	{
@@ -353,18 +373,17 @@ exports.updateJob = (req,res,next)=>{
 			"jobBasicInfo" 	: 	{
 									"jobTitle"				: req.body.jobTitle,
 									"industry_id"			: req.body.industry_id,
-									"functionalarea_id" 	: req.body.functionalarea_id,
-									"subfunctionalarea_id"	: req.body.subfunctionalarea_id,
-									"jobrole_id"			: req.body.jobrole_id,
+									"functionalarea_id" 	: functionalarea_id,
+									"subfunctionalarea_id"	: subfunctionalarea_id,
+									"jobrole_id"			: jobrole_id,
 									"gender"				: req.body.gender,
 									"workFromHome" 			: req.body.workFromHome,
-									"jobtype_id" 			: req.body.jobtype_id,
-									"jobtime_id" 			: req.body.jobtime_id,
-									"jobcategory_id" 		: req.body.jobcategory_id,
+									"jobtype_id" 			: jobtype_id,
+									"jobtime_id" 			: jobtime_id,
+									"jobcategory_id" 		: jobcategory_id,
 									"positions" 			: req.body.positions,
 									"jobDesc" 				: req.body.jobDesc,
 									"lastDateOfAppl" 		: new Date(req.body.lastDateOfAppl),
-									
 									"contactPersonName" 	: req.body.contactPersonName,
 									"contactPersonEmail" 	: req.body.contactPersonEmail,
 									"contactPersonPhone" 	: req.body.contactPersonPhone,
@@ -424,8 +443,8 @@ exports.updateJob = (req,res,next)=>{
 									message : "Some issue occurred while updating Job details!"
 								})
 					  	});
+	}
 }
-
 
 exports.mapwiseJobs = (req, res, next)=>{
 	console.log("req.body - ", req.body);

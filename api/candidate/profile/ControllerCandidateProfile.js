@@ -10,30 +10,27 @@ exports.insertCandidateBasicInfo = (req, res, next)=>{
 		"_id" : new mongoose.Types.ObjectId(),
 		"basicInfo" : {
 			"firstName"			: req.body.firstName,
-			"middleName"		: null,
+			"middleName"		: req.body.middleName ? req.body.middleName : null,
 			"lastName" 		 	: req.body.lastName,
-			"dob" 			 	: null,
-			"age" 			 	: null,
-			"gender"	 	 	: null,
-			"maritalStatus"  	: null,
-			"anniversaryDate"	: null,
-			"languagesKnown" 	: [],
-			"nationality" 	 	: null,
-            "profilePicture"    : null,
+			"dob" 			 	: req.body.dob ? req.body.dob : null,
+			"age" 			 	: req.body.age ? req.body.age : null,
+			"gender"	 	 	: req.body.gender ? req.body.gender : null,
+			"maritalStatus"  	: req.body.maritalStatus ? req.body.maritalStatus : null,
+			"anniversaryDate"	: req.body.anniversaryDate ? req.body.anniversaryDate : null,
+			"languagesKnown" 	: req.body.languagesKnown ? req.body.languagesKnown : [],
+			"nationality" 	 	: req.body.nationality ? req.body.nationality : null,
+            "profilePicture"    : req.body.profilePicture ? req.body.profilePicture : null,
 		},
-		"panCard" 		 		: null,
-		"aadhaarCard" 	 		: null,
+		"panCard" 		 		: req.body.panCard ? req.body.panCard : null,
+		"aadhaarCard" 	 		: req.body.aadhaarCard ? req.body.aadhaarCard  : null,
 		"contact" : {
 			"mobile" 		 	: req.body.mobile,
-            "altMobile"         : null,
+            "altMobile"         : req.body.altMobile ? req.body.altMobile : null,
 			"emailId" 		 	: req.body.emailId,
 		},
 		"user_id"		 	 	: req.body.user_id,	
 		"createdAt" : new Date(),
 		"createdBy" : req.body.createdBy,
-		"updateLog" : [
-			{"updatedBy": req.body.user_id, "updatedAt":new Date(), "remark":req.body.remark }
-		]
 		});
 	
 
@@ -426,25 +423,29 @@ exports.deleteExperience = (req,res,next)=>{
         });
 };
 exports.addCandidateSkill = (req,res,next)=>{
+    var primarySkills   = []
+    var secondarySkills = [];
 
+    console.log(req.body.candidateID)
+    console.log(req.body.primarySkills)
     CandidateProfile.updateOne(
             { _id: req.body.candidateID },  
-            {
-                $push:  { 'skills' :
+            { 
+                $push : { "primarySkills"   : req.body.primarySkills }
+                //$push:  { 'academics' : req.body.academics }
+            }
+            /*{
+                $push:  { 'primarySkills' :
                 {
                     primarySkills   : req.body.primarySkills,
                     secondarySkills : req.body.secondarySkills,
-                    //rating          : req.body.rating,
-                    /*certName        : req.body.certName,
-                    issuedBy        : req.body.issuedBy,
-                    certifiedOn     : req.body.certifiedOn,
-                    validTill       : req.body.validTill,
-                    gradePercent    : req.body.gradePercent,*/
+                    
                 }  }
-            }
+            }*/
         )
         .exec()
         .then(data=>{
+            console.log(data)
             if(data.nModified == 1){
                 res.status(200).json({ created : true });
             }else{
@@ -454,47 +455,6 @@ exports.addCandidateSkill = (req,res,next)=>{
         .catch(err =>{
             res.status(500).json({ error: err });
         });   
-};
-exports.getOneCandidateSkill = (req,res,next)=>{
-    CandidateProfile.find({"_id" : req.body.candidateID },
-        {"skills.$" : 1})
-    .exec()
-    .then(data=>{
-        res.status(200).json(data);
-    })
-    .catch(err =>{
-        res.status(500).json({
-            error: err
-        });
-    });
-};
-
-exports.updateOneCandidateSkill = (req,res,next)=>{
-    CandidateProfile.updateOne(
-            { "_id":req.body.candidateID, "skills._id": req.body.skillCertificationID},  
-            {
-                $set:   {   "primarySkills"   : req.body.primarySkills,
-                            "secondarySkills" : req.body.secondarySkills,
-                            /*"rating"          : req.body.rating,
-                            "certName"        : req.body.certName,
-                            "issuedBy"        : req.body.issuedBy,
-                            "certifiedOn"     : req.body.certifiedOn,
-                            "validTill"       : req.body.validTill,
-                            "gradePercent"    : req.body.gradePercent*/
-                        }
-            }
-        )
-        .exec()
-        .then(data=>{
-            if(data.nModified == 1){
-                res.status(200).json({ updated : true });
-            }else{
-                res.status(200).json({ updated : false });
-            }
-        })
-        .catch(err =>{
-            res.status(500).json({ error: err });
-        });
 };
 exports.deleteSkill = (req,res,next)=>{   
     CandidateProfile.updateOne(
@@ -515,6 +475,48 @@ exports.deleteSkill = (req,res,next)=>{
             res.status(500).json({ error: err });
         });
 };
+/*exports.getOneCandidateSkill = (req,res,next)=>{
+    CandidateProfile.find({"_id" : req.body.candidateID },
+        {"skills.$" : 1})
+    .exec()
+    .then(data=>{
+        res.status(200).json(data);
+    })
+    .catch(err =>{
+        res.status(500).json({
+            error: err
+        });
+    });
+};
+
+exports.updateOneCandidateSkill = (req,res,next)=>{
+    CandidateProfile.updateOne(
+            { "_id":req.body.candidateID, "skills._id": req.body.skillCertificationID},  
+            {
+                $set:   {   "primarySkills"   : req.body.primarySkills,
+                            "secondarySkills" : req.body.secondarySkills,
+                            "rating"          : req.body.rating,
+                            "certName"        : req.body.certName,
+                            "issuedBy"        : req.body.issuedBy,
+                            "certifiedOn"     : req.body.certifiedOn,
+                            "validTill"       : req.body.validTill,
+                            "gradePercent"    : req.body.gradePercent
+                        }
+            }
+        )
+        .exec()
+        .then(data=>{
+            if(data.nModified == 1){
+                res.status(200).json({ updated : true });
+            }else{
+                res.status(200).json({ updated : false });
+            }
+        })
+        .catch(err =>{
+            res.status(500).json({ error: err });
+        });
+};*/
+
 exports.addCandidateCertification = (req,res,next)=>{
 
     CandidateProfile.updateOne(
