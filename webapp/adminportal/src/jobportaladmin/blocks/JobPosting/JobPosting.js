@@ -783,6 +783,7 @@ export default class JobPosting extends Component {
         var corporate_id;
         if (document.querySelector('#corporate option[value="' + value + '"]')) {
             corporate_id = document.querySelector('#corporate option[value="' + value + '"]').getAttribute("data-value")
+            industry_id = document.querySelector('#corporate option[value="' + value + '"]').getAttribute("data-industry")
         }else{ corporate_id = "" }
 
         this.setState({ corporate_id : corporate_id },()=>{
@@ -897,7 +898,7 @@ render(){
                                             onChange={this.onChangeCorporate.bind(this)} />
                                             <datalist name="corporate" id="corporate" className="corporatelist" >
                                                 {this.state.corporatelist.map((item, key) =>
-                                                    <option key={key} value={item.companyName} data-value={item._id}/>
+                                                    <option key={key} value={item.companyName} data-value={item._id} data-industry={item.industry_id}/>
                                                 )}
                                             </datalist>
                                         <span id="functionalAreaError" className="errorMsgJobPost"></span>

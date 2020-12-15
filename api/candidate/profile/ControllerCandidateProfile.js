@@ -3,6 +3,7 @@ const mongodb = require('mongodb');
 var ObjectID = require('mongodb').ObjectID;
 
 const CandidateProfile 		= require('./ModelCandidateProfile.js');
+const SkillMaster           = require('../../coreAdmin/SkillMaster/ModelSkill.js');
 
 exports.insertCandidateBasicInfo = (req, res, next)=>{
 
@@ -64,7 +65,6 @@ exports.getcandidateID = (req,res,next)=>{
 }
 exports.getSingleCandidate = (req,res,next)=>{
     //CandidateProfile.findOne({_id : req.params.candidateID})
-    console.log("hsadh",req.params.candidateID);
     CandidateProfile.aggregate([
         {$match:{"_id": ObjectID(req.params.candidateID)} },
         {$lookup:{
@@ -425,37 +425,90 @@ exports.deleteExperience = (req,res,next)=>{
 exports.addCandidateSkill = (req,res,next)=>{
     var primarySkills   = []
     var secondarySkills = [];
+    var skillID; 
+    //console.log(req.body.candidateID)
+    
+    processData();
+        async function processData(){
 
-    console.log(req.body.candidateID)
-    console.log(req.body.primarySkills)
-    CandidateProfile.updateOne(
+            var allSkills = await fetchCandidateSkills(req.body.candidateID);
+            for (var i = 0 ; i < req.body.primarySkills.length; i++) {
+                skillID = req.body.primarySkills[i].skillID != "" ? req.body.primarySkills[i].skillID
+                                    : await insertSkill(req.body.primarySkills[i].skill,req.body.user_id)
+                    
+                primarySkills.push({ "skillID" : skillID, "rating": req.body.primarySkills[i].rating })
+            }
+            for (var i = 0 ; i < req.body.secondarySkills.length; i++) {
+                
+                skillID = req.body.secondarySkills[i].skillID != "" ? req.body.secondarySkills[i].skillID
+                                : await insertSkill(req.body.secondarySkills[i].skill,req.body.user_id)
+                
+                secondarySkills.push({ "skillID" : skillID, "rating": req.body.secondarySkills[i].rating })
+            }
+        CandidateProfile.updateOne(
             { _id: req.body.candidateID },  
             { 
-                $push : { "primarySkills"   : req.body.primarySkills }
-                //$push:  { 'academics' : req.body.academics }
+                $set : {   "skills.primarySkills"      : [], 
+                            "skills.secondarySkills"   : [] }
             }
-            /*{
-                $push:  { 'primarySkills' :
-                {
-                    primarySkills   : req.body.primarySkills,
-                    secondarySkills : req.body.secondarySkills,
-                    
-                }  }
-            }*/
         )
         .exec()
         .then(data=>{
-            console.log(data)
             if(data.nModified == 1){
-                res.status(200).json({ created : true });
+                CandidateProfile.updateOne(
+                    { _id: req.body.candidateID },  
+                    { 
+                        $push : {   "skills.primarySkills"      : primarySkills, 
+                                    "skills.secondarySkills"    : secondarySkills }
+                    }
+                )
+                .exec()
+                .then(data=>{
+                    if(data.nModified == 1){
+                        res.status(200).json({ created : true });
+                    }else{
+                        res.status(401).json({ created : false });
+                    }
+                });
             }else{
                 res.status(401).json({ created : false });
             }
         })
         .catch(err =>{
             res.status(500).json({ error: err });
-        });   
+        });
+    }   
 };
+var fetchCandidateSkills = async (candidateID)=>{
+    return new Promise(function(resolve,reject){ 
+    CandidateProfile.findOne({"_id" : candidateID }, {"skills" : 1})
+        .exec()
+        .then(data=>{
+             resolve( data );
+        })
+        .catch(err =>{
+            reject(err);
+        });
+        
+    });
+}; 
+function insertSkill(skill, createdBy){ 
+    return new Promise(function(resolve,reject){ 
+        const skillMaster = new SkillMaster({
+                        _id                   : new mongoose.Types.ObjectId(),
+                        skill                 : skill,
+                        createdBy             : createdBy,
+                        createdAt             : new Date()
+                    })
+                    skillMaster.save()
+                    .then(data=>{
+                        resolve( data._id );
+                    })
+                    .catch(err =>{
+                        reject(err); 
+                    });
+    });
+}
 exports.deleteSkill = (req,res,next)=>{   
     CandidateProfile.updateOne(
             { _id:req.params.candidateID},  
