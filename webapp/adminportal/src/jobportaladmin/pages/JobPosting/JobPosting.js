@@ -781,6 +781,7 @@ export default class JobPosting extends Component {
         this.setState({ [name]:value });  
         
         var corporate_id;
+        var industry_id;
         if (document.querySelector('#corporate option[value="' + value + '"]')) {
             corporate_id = document.querySelector('#corporate option[value="' + value + '"]').getAttribute("data-value")
             industry_id = document.querySelector('#corporate option[value="' + value + '"]').getAttribute("data-industry")
@@ -890,7 +891,7 @@ render(){
                                     <span className="labelLeftPadding"> Add Corporate </span>
                                 </div>
 
-                                <div className="col-lg-6">
+                                <div className="col-lg-8">
                                     <label htmlFor="corporate" className="addjobformLable"> Corporate Name <span className="asterisk">&#42;</span> </label>
                                     <div className="input-group">
                                         <span className="input-group-addon addJobFormField"><i className="fa fa-briefcase"></i></span> 

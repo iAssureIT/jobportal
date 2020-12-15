@@ -15,13 +15,11 @@ import SignUp               from './coreadmin/systemSecurity/SignUp.js';
 
 import Dashboard            from './jobportaladmin/Dashboard/Dashboard.js';
 
-<<<<<<< Updated upstream
-import JobPosting            from './jobportaladmin/blocks/JobPosting/JobPosting.js';
+import JobPosting           from './jobportaladmin/pages/JobPosting/JobPosting.js';
 import JobPostProfile       from './jobportaladmin/blocks/JobPostProfile/JobPostProfile.js';
 import Joblist              from './jobportaladmin/blocks/Joblist/Joblist.jsx';
 
-import JobPosting            from './jobportaladmin/blocks/JobPosting/JobPosting.js';
-import JobListView            from './jobportaladmin/Joblist/Joblist.js';
+import JobListView          from './jobportaladmin/blocks/Joblist/Joblist.js';
 
 import Header               from './coreadmin/common/header/Header.js'; 
 import Footer               from './coreadmin/common/footer/Footer.js';
@@ -110,11 +108,12 @@ class Layout extends Component  {
                                                         <Route path="/org-profile" exact strict component={CompanyProfile} />
                                                         <Route path="/company-profile/:comp_ID" exact strict component={CompanyProfileView} />
 
-<<<<<<< Updated upstream
+
                                                         <Route path="/job/list" exact strict component={Joblist} />
                                                         <Route path="/post-job" exact strict component={JobPosting} />
                                                         <Route path="/post-job/:job_id" exact strict component={JobPosting} />
                                                         <Route path="/job-profile/:job_id" exact strict component={JobPostProfile} />
+                                                        <Route path="/job-profile" exact strict component={JobPostProfile} />
 
                                                         <Route path="/candidate/list" exact strict component={CandidateMainPage} />
                                                         <Route path="/candidate/basic-info" exact strict component={CandidateBasicInfo} />
@@ -124,10 +123,10 @@ class Layout extends Component  {
                                                         <Route path="/candidate/experience/:candidateID" exact strict component={CandidateExperience} />
                                                         <Route path="/candidate/certification/:candidateID" exact strict component={CandidateCertification} />
 
-=======
-                                                        <Route path="/jobposting" exact strict component={JobPosting} />
+
+                                                       
                                                         <Route path="/joblist" exact strict component={JobListView} />
->>>>>>> Stashed changes
+
 
                                                         <Route path="/address-type" exact strict component={AddressType} />
                                                         <Route path="/address-type/:fieldID" exact strict component={AddressType} />

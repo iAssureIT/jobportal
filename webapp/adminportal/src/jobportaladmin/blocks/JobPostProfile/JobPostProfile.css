@@ -117,7 +117,7 @@
 	font-weight: bold;
 	margin-top: 35px;
 	margin-left: 40px;
-	color: var(--main-subheading-font-color);
+	color: #3C8DBC;
 	font-family: 'Montserrat-SemiBold';
 }
 
@@ -149,7 +149,7 @@
 	left: -18px;
 	font-size: 16px;
 	font-weight: bold;
-	color: var(--main-subheading-font-color);
+	color: #3C8DBC;
 }
 
 /*****************************End of Content Wrapper One**********************************/
@@ -177,7 +177,7 @@
 	position: absolute;
 	font-size: 21px;
 	font-weight: bold;
-	color: var(--main-subheading-font-color);
+	color: #3C8DBC;;
 	margin-top: -5px;
 	margin-left: 40px;
 	font-family: 'Montserrat-SemiBold';
@@ -210,7 +210,7 @@
 	left: -18px;
 	font-size: 16px;
 	font-weight: bold;
-	color: var(--main-subheading-font-color);
+	color: #3C8DBC;
 }
 
 .contentWrapper2 .eduSubtitle{
@@ -256,7 +256,7 @@
 	position: absolute;
 	font-size: 21px;
 	font-weight: bold;
-	color: var(--main-subheading-font-color);
+	color: #3C8DBC;
 	margin-top: -5px;
 	margin-left: 40px;
 	font-family: 'Montserrat-SemiBold';
@@ -289,7 +289,7 @@
 	left: -18px;
 	font-size: 16px;
 	font-weight: bold;
-	color: var(--main-subheading-font-color);
+	color: #3C8DBC;
 }
 
 .contentWrapper3 .eduSubtitle{
@@ -333,7 +333,7 @@
 .skillsHeadOne .skillsTitle{
 	font-size: 15px;
 	font-family: 'Montserrat-SemiBold';
-	color: var(--main-subheading-font-color);
+	color: #3C8DBC;
 }
 
 .skillsHeadOne .skillSubtitle{
@@ -358,7 +358,7 @@
 .skillsHeadTwo .skillsTitle{
 	font-size: 15px;
 	font-family: 'Montserrat-SemiBold';
-	color: var(--main-subheading-font-color);
+	color: #3C8DBC;
 }
 
 .skillsHeadTwo .skillSubtitle{
@@ -383,7 +383,7 @@
 .skillsHeadThree .skillsTitle{
 	font-size: 15px;
 	font-family: 'Montserrat-SemiBold';
-	color: var(--main-subheading-font-color);
+	color: #3C8DBC;
 }
 
 .skillsHeadThree .skillSubtitle{
@@ -411,7 +411,7 @@
 }
 
 .skillsHeadFour .skillsTitle{
-	color: var(--main-subheading-font-color);
+	color: #3C8DBC;
 }
 
 .skillsList{
@@ -469,7 +469,7 @@
 .rightContentHead{
 	font-size: 28px;
 	font-weight: bold;
-	color: var(--main-subheading-font-color);
+	color: #3C8DBC;
 	padding-top: 30px;
 	padding-left: 22px;
 	font-family: 'Montserrat-SemiBold';
@@ -480,7 +480,7 @@
 	font-weight: bold;
 	padding-left: 25px;
 	padding-top: 7px;
-	color: var(--main-subheading-font-color);
+	color: #3C8DBC;
 	font-family: 'Montserrat-SemiBold';
 }
 
