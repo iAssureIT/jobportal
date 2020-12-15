@@ -11,7 +11,7 @@ import './css/ListOfEntity.css';
 import './css/ListOfEntityFilter.css';
 import './css/ListOfAllEntity.css';
 
-class Joblist extends Component {
+class List extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -473,7 +473,7 @@ class Joblist extends Component {
     }
     redirectTo(event)
     {
-    	this.props.history.push("/candidate/basic-info")
+    	this.props.history.push("/post-job")
     }
 
     showView(value,event){
@@ -490,7 +490,7 @@ class Joblist extends Component {
 			<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 				<div className="row">
 					<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 NOPadding">
-						<section className="content">
+						<section className="adminPageContent">
 							<div className="pageContent col-lg-12 col-md-12 col-sm-12 col-xs-12">
 								<div className="box-header with-border col-lg-12 col-md-12 col-xs-12 col-sm-12 NOpadding-right">
 									<h4 className="weighttitle col-lg-5 col-md-11 col-xs-11 col-sm-11">{this.state.pathname ? this.state.pathname : "Entity"} List</h4>
@@ -555,7 +555,7 @@ class Joblist extends Component {
 									
 									</div>
 
-									<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+									{/*<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
 											<button type="button" className="btn alphab allBtn"  id="filterallalphab" onClick={this.shortByAlpha.bind(this)} name="initial" value={this.state.initial} onChange={this.handleChange}>All</button>
 											<button type="button" className="btn alphab" value="A" onClick={this.shortByAlpha.bind(this)} onChange={this.handleChange}>A</button>
 											<button type="button" className="btn alphab" value="B" onClick={this.shortByAlpha.bind(this)} onChange={this.handleChange}>B</button>
@@ -583,7 +583,7 @@ class Joblist extends Component {
 											<button type="button" className="btn alphab" value="X" onClick={this.shortByAlpha.bind(this)} onChange={this.handleChange}>X</button>
 											<button type="button" className="btn alphab" value="Y" onClick={this.shortByAlpha.bind(this)} onChange={this.handleChange}>Y</button>
 											<button type="button" className="btn alphab" value="Z" onClick={this.shortByAlpha.bind(this)} onChange={this.handleChange}>Z</button>
-									</div>
+									</div>*/}
 								</div>
 
 								<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 customTab">
@@ -639,7 +639,7 @@ class Joblist extends Component {
 									</div>
 									:
 									<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-align-center">
-										<h5>No Data Found</h5>
+										{/*<h5>No Data Found</h5>*/}
 									</div>
 								}
 								{ this.state.view === 'Grid' && this.state.showDetails && this.state.entityList && this.state.entityList.length > 0?
@@ -662,4 +662,4 @@ class Joblist extends Component {
 		);
 	}
 }
-export default withRouter(Joblist);
+export default withRouter(List);

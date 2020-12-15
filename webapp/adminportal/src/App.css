@@ -1,3 +1,38 @@
+@font-face{
+  font-family: 'Montserrat-Bold'; 
+  src: url('/Fonts/Montserrat/Montserrat-Bold.ttf');
+}
+
+@font-face{
+  font-family: 'Montserrat-Medium'; 
+  src: url('/Fonts/Montserrat/Montserrat-Medium.ttf');
+}
+
+@font-face{
+  font-family: 'Montserrat-Regular'; 
+  src: url('/Fonts/Montserrat/Montserrat-Regular.ttf');
+}
+
+@font-face{
+  font-family: 'Montserrat-SemiBold'; 
+  src: url('/Fonts/Montserrat/Montserrat-SemiBold.ttf');
+}
+
+@font-face{
+  font-family: 'Montserrat-Thin'; 
+  src: url('/Fonts/Montserrat/Montserrat-Thin.ttf');
+}
+
+@font-face{
+  font-family: 'Montserrat-light'; 
+  src: url('/Fonts/Montserrat/Montserrat-Thin.ttf');
+}
+
+@font-face{
+  font-family: 'Montserrat-ExtraLight'; 
+  src: url('/Fonts/Montserrat/Montserrat-ExtraLight.ttf');
+}
+
 .adminLte {
   padding: 0px !important;
 }
@@ -42,11 +77,12 @@
 
 .pageContent{
   background-color: var(--white-background) !important;
-  padding-bottom: 15px;
-  margin-bottom: 15px;
+/*  padding-bottom: 15px;
+  margin-bottom: 15px;*/
   margin-top: 15px;
-  min-height: 700px !important;
+  /*min-height: 700px !important;*/
 }
+
 /*.pageContent{
   background-color: var(--white-background) !important;
   padding-bottom: 15px;
@@ -54,8 +90,9 @@
   min-height: 700px !important;
 }
 */
-.content {
-  min-height: 60vh !important;
+
+.adminPageContent {
+  /*min-height: 60vh !important;*/
   margin-right: auto;
   margin-left: auto;
   padding-left: 15px;

@@ -1,8 +1,13 @@
-import React, {Component} from 'react';
-import Axios from  'axios';
-import Swal  from  'sweetalert2';
+import React, {Component} 		from 'react';
+import Axios 					from  'axios';
+import Swal  					from  'sweetalert2';
+import { connect }        		from 'react-redux';
+import { bindActionCreators } 	from 'redux';
+import  * as mapActionCreator 	from '../../Common/actions/index';
 
-export default class JobListView extends Component{
+import './Joblist.css';
+
+class Joblist extends Component{
 	constructor(props){
 	super(props);
 	this.state={
@@ -12,8 +17,6 @@ export default class JobListView extends Component{
 
 componentDidMount(){
 }
-
-
 
 deleteJob = (event)=>{
 	event.preventDefault();
@@ -66,14 +69,13 @@ deleteJob = (event)=>{
 	render(){
 		return(
 			<section className="jobListWrapper">
-				<div className="col-lg-12 EmployeeListWrapperMain">
-					<div className="row">
-					<div className="col-lg-4 col-lg-offset-8">
+				<div className="col-lg-12 jobListWrapperMain">
+					{/*<div className="col-lg-4 col-lg-offset-8">
 						<div className="input-group searchMainTab">
 							<input type="text" name="jobTitle" id="jobTitle" className="form-control jobListSearchTab" placeholder="Search by Job Title..." onChange={this.search}/>
 							<span className="input-group-addon searchTabAddOn"><i className="fa fa-search"></i> </span> 
 						</div> 
-					</div> 
+					</div> */}
 						{
 							this.props.jobList
 							?
@@ -103,7 +105,7 @@ deleteJob = (event)=>{
 															<i className="fa fa-calendar jobListExperience"></i> &nbsp; Exp: {elem.eligibility.minExperience}
 														</div>
 														<div> 
-															<i className="fa fa-rupee jobListMonSal"></i> &nbsp; <i className="fa fa-inr"></i> {elem.ctcOffered.minSalary} - <i className="fa fa-inr"></i> {elem.ctcOffered.maxSalary} a month
+															<i className="fa fa-rupee jobListMonSal"></i> &nbsp; <i className="fa fa-inr"></i> {elem.ctcOffered.minSalary} {elem.ctcOffered.minSalPeriod} - <i className="fa fa-inr"></i> {elem.ctcOffered.maxSalary} {elem.ctcOffered.maxSalPeriod}
 														</div>
 														<div>
 															<i className="fa fa-map-marker jobListLocation"></i> &nbsp; {elem.location.address}
@@ -134,10 +136,22 @@ deleteJob = (event)=>{
 								})
 							:
 								null
-						}
-					</div>	
+						}	
 				</div>
 			</section>
 		);
 	}
 }
+
+const mapStateToProps = (state)	=>	{
+									    return {	
+											    	userDetails 	: state.userDetails,	selector : state.selector, 	
+											    	jobList 		: state.jobList
+									    		}
+									}
+
+const mapDispatchToProps = (dispatch) => 	({
+  												mapAction :  bindActionCreators(mapActionCreator, dispatch)
+											}) 
+
+export default connect(mapStateToProps, mapDispatchToProps) (Joblist);

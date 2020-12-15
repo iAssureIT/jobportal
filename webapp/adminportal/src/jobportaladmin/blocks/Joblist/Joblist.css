@@ -1,0 +1,165 @@
+.jobListWrapper{
+	min-height: 700px;
+	height: auto;
+	color: #3C8DBC;
+	background-color: var(--main-bg-color);
+}
+
+.jobListWrapperMain{
+	background-color: var(--main-bg-color);
+	padding-bottom: 30px;
+}
+
+.jobListContainer{
+	height: 270px;
+	margin-top: 30px;
+	border-radius: 10px;
+	border: 1px solid var(--main-border-color);;
+}
+
+.jobListContainer .jobListLeftContent{
+	height: 229px;
+	margin-top: 20px;
+	border-right: 1px solid var(--main-border-color);
+}
+
+.jobListLeftContent .iconsBar{
+	background-color: yellow;
+	margin-left: -11px;
+	margin-top: -5px;
+}
+
+.jobListLeftContent .iconsBar ul{
+	list-style: none;
+	height: 29px;
+	padding: 0;
+	padding-top: 2px;	
+	float: left;
+}
+
+.jobListLeftContent .iconsBar ul li{
+	float: left;
+	margin-top: 5px;
+}
+ 
+.jobListLeftContent .iconsBar ul li i{
+	margin-left: 22px;
+}
+
+.jobListLeftContent .iconsBar i{
+	color: var(--blue-color);
+	font-size: 20px;
+	height: 20px;
+}
+
+.jobListLeftContent .infoLog{
+	padding: 6px 11px;
+	height: 29px;
+	color: var(--blue-color);
+	border-radius: 3px;
+	border: 1px solid var(--main-border-color);
+	width: 9%;
+	margin-left: 18px;
+	font-size: 11px;
+	float: left;
+	margin-top: 2px;
+}
+
+.jobListDesignation{
+	font-size: 22px;
+	color: var(--blue-color);
+	margin-top: 3px;
+	margin-left: -5px;
+	font-family: 'Montserrat-SemiBold';
+}
+
+.jobListCompanyName{
+	margin-top: 7px;
+	margin-left: -5px;
+	font-family: 'Montserrat-SemiBold';
+}
+
+.jobListExperience{
+	font-size: 14px !important;
+	margin-left: -5px;
+	margin-top: 13px;
+	color: var(--blue-color);
+}
+
+.jobListMonSal{
+	font-size: 10px !important; 
+	border: 1px solid var(--blue-color);
+	padding: 3px 5px;
+	border-radius: 50%;
+	margin-top: 13px;
+	margin-left: -8px;
+	color: var(--blue-color);
+}
+
+.jobListLocation{
+	font-size: 16px !important;
+	padding: 3px 5px;
+	border-radius: 50%;
+	margin-top: 9px;
+	margin-left: -9px;
+	color: var(--blue-color);
+}
+
+.jobListNumPositions{
+	font-size: 13px !important;
+	margin-left: -6px;
+	margin-top: 13px;
+	color: var(--blue-color);
+}
+
+.jobListRightContent{
+	height: 220px;
+	margin-top: 18px;
+}
+
+.listEditBtn i{
+	color: var(--blue-color);
+	font-size: 21px;
+	margin-top: 10px;
+	margin-left: 24px;
+}
+
+.listViewBtn i{
+	color: var(--blue-color);
+	font-size: 21px;
+	margin-top: 15px;
+	margin-left: 22px;
+}
+
+.listDelBtn i{
+	color: var(--blue-color);
+	font-size: 21px;
+	margin-top: 15px;
+	margin-left: 24px;
+	cursor: pointer;
+}
+
+/*******************Search Tab********************/
+
+.jobListSearchTab{
+	background-color: var(--main-bg-color);
+	border: 1px solid var(--main-border-color);
+	color: var(--main-txt-color);
+}
+
+.searchTabAddOn{
+	background-color: var(--main-bg-color);
+	border: 1px solid var(--main-border-color);
+	color: var(--main-txt-color);	
+}
+
+.searchMainTab{
+	margin-top: 32px;
+	margin-left: -20px;
+	margin-right: 20px;
+}
+
+::selection {
+  color: #fff;
+  background-color: var(--blue-color);
+}

@@ -289,11 +289,11 @@ class JobPosting extends Component {
             document.getElementById("jobTitleError").innerHTML = "";
             status = true;
         }
-        if (this.state.jobrole_id.length <= 0) {
-            document.getElementById("roleError").innerHTML = "Enter job role";
+        if (this.state.jobRole.length <= 0) {
+            document.getElementById("jobRoleError").innerHTML = "Enter job role";
             status = false;
         } else {
-            document.getElementById("roleError").innerHTML = "";
+            document.getElementById("jobRoleError").innerHTML = "";
             status = true;
         }
         if (this.state.contactPersonName.length <= 0) {
@@ -1032,7 +1032,7 @@ render(){
 										<div className="row">
 											<div className="col-lg-6">
 												<div className="row">
-													<label htmlFor="role" className="addjobformLable col-lg-12"> Role <span className="asterisk">&#42;</span>
+													<label htmlFor="jobRole" className="addjobformLable col-lg-12"> Role <span className="asterisk">&#42;</span>
 														<div href="#" data-tip data-for='jobTitleTooltip' className="pull-right">
 															<i title="Please enter your role" className="fa fa-question-circle"></i>
 														</div>
@@ -1050,7 +1050,7 @@ render(){
                                                             </datalist>
                                                         </div>
 												</div>
-												<span id="roleError" className="errorMsgJobPost"></span>
+												<span id="jobRoleError" className="errorMsgJobPost"></span>
 											</div>
 											
 											<div className="col-lg-6">

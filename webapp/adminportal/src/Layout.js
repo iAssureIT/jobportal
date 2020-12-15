@@ -17,7 +17,8 @@ import Dashboard            from './jobportaladmin/Dashboard/Dashboard.js';
 
 import JobPosting           from './jobportaladmin/pages/JobPosting/JobPosting.js';
 import JobPostProfile       from './jobportaladmin/blocks/JobPostProfile/JobPostProfile.js';
-import Joblist              from './jobportaladmin/blocks/Joblist/Joblist.jsx';
+
+import JoblistPage          from './jobportaladmin/pages/JoblistPage/JoblistPage.js';
 
 import JobListView          from './jobportaladmin/blocks/Joblist/Joblist.js';
 
@@ -108,12 +109,11 @@ class Layout extends Component  {
                                                         <Route path="/org-profile" exact strict component={CompanyProfile} />
                                                         <Route path="/company-profile/:comp_ID" exact strict component={CompanyProfileView} />
 
-
-                                                        <Route path="/job/list" exact strict component={Joblist} />
                                                         <Route path="/post-job" exact strict component={JobPosting} />
                                                         <Route path="/post-job/:job_id" exact strict component={JobPosting} />
                                                         <Route path="/job-profile/:job_id" exact strict component={JobPostProfile} />
                                                         <Route path="/job-profile" exact strict component={JobPostProfile} />
+                                                        <Route path="/job/list" exact strict component={JoblistPage} />
 
                                                         <Route path="/candidate/list" exact strict component={CandidateMainPage} />
                                                         <Route path="/candidate/basic-info" exact strict component={CandidateBasicInfo} />
