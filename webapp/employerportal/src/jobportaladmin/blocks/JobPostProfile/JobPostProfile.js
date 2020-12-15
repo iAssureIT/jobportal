@@ -14,7 +14,7 @@ export default class JobPostProfile extends Component{
 						industry_id 		: 	"",
 						functionalarea_id 	: 	"",
 						subfunctionalarea_id: 	"",
-						role_id 			: 	"",
+						jobrole_id 			: 	"",
 						gender              : 	"Male Only",
 						workFromHome 		: 	false,
 						jobtype_id 			: 	"",
@@ -71,7 +71,7 @@ export default class JobPostProfile extends Component{
 					industry_id 		: 	response.data.jobsData[0].jobBasicInfo.industry_id,
 					functionalarea_id 	: 	response.data.jobsData[0].jobBasicInfo.functionalarea_id,
 					subfunctionalarea_id: 	response.data.jobsData[0].jobBasicInfo.subfunctionalarea_id,
-					role_id 			: 	response.data.jobsData[0].jobBasicInfo.role_id,
+					jobrole_id 			: 	response.data.jobsData[0].jobBasicInfo.jobrole_id,
 					gender 				: 	response.data.jobsData[0].jobBasicInfo.gender,
 					workFromHome 		: 	response.data.jobsData[0].jobBasicInfo.workFromHome,
 					jobtype_id 			: 	response.data.jobsData[0].jobBasicInfo.jobtype_id,
@@ -387,7 +387,7 @@ export default class JobPostProfile extends Component{
 										Role
 									</div>
 									<p className="rightSideSub">
-										{this.state.role_id}
+										{this.state.jobrole_id}
 									</p>
 
 									<div className="col-lg-12">

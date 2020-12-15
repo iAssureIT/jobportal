@@ -10,6 +10,7 @@
 
 .LeftSideFiltersWrapper{
   height: auto;
+  margin-left: 12px;
   min-height: 250px;
   background-color: #1f262d;
 }
@@ -125,9 +126,7 @@ form-control{
 ._2iA8p44d0WZ-WqRBGcAuEV{
   /*padding: 4px !important;
   padding-top: 7px !important;*/
-  border-radius: 0px !important;
-  border-bottom-right-radius: 4px !important;
-    border-top-right-radius: 4px !important;
+  border-radius: 4px;
 }
 
 .placeholder:{
@@ -224,4 +223,4 @@ form-control{
   z-index: 100;
   transition:all 2s; 
   transition-timing-function: ease-in-out;
-}                
+}              

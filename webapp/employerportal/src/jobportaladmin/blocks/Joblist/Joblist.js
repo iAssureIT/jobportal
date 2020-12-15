@@ -67,13 +67,12 @@ deleteJob = (event)=>{
 		return(
 			<section className="jobListWrapper">
 				<div className="col-lg-12 EmployeeListWrapperMain">
-					<div className="row">
-					<div className="col-lg-4 col-lg-offset-8">
+					{/*<div className="col-lg-4 col-lg-offset-8">
 						<div className="input-group searchMainTab">
 							<input type="text" name="jobTitle" id="jobTitle" className="form-control jobListSearchTab" placeholder="Search by Job Title..." onChange={this.search}/>
 							<span className="input-group-addon searchTabAddOn"><i className="fa fa-search"></i> </span> 
 						</div> 
-					</div> 
+					</div>*/} 
 						{
 							this.props.jobList
 							?
@@ -135,7 +134,6 @@ deleteJob = (event)=>{
 							:
 								null
 						}
-					</div>	
 				</div>
 			</section>
 		);
