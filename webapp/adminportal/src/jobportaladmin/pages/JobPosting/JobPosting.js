@@ -779,7 +779,6 @@ export default class JobPosting extends Component {
     onChangeCorporate(event){
         const {name,value} = event.target;
         this.setState({ [name]:value });  
-        
         var corporate_id;
         var industry_id;
         if (document.querySelector('#corporate option[value="' + value + '"]')) {

@@ -445,38 +445,69 @@ exports.addCandidateSkill = (req,res,next)=>{
                 
                 secondarySkills.push({ "skillID" : skillID, "rating": req.body.secondarySkills[i].rating })
             }
-        CandidateProfile.updateOne(
-            { _id: req.body.candidateID },  
-            { 
-                $set : {   "skills.primarySkills"      : [], 
-                            "skills.secondarySkills"   : [] }
-            }
-        )
-        .exec()
-        .then(data=>{
-            if(data.nModified == 1){
-                CandidateProfile.updateOne(
-                    { _id: req.body.candidateID },  
-                    { 
-                        $push : {   "skills.primarySkills"      : primarySkills, 
-                                    "skills.secondarySkills"    : secondarySkills }
-                    }
-                )
-                .exec()
-                .then(data=>{
-                    if(data.nModified == 1){
-                        res.status(200).json({ created : true });
-                    }else{
-                        res.status(401).json({ created : false });
-                    }
-                });
-            }else{
-                res.status(401).json({ created : false });
-            }
-        })
-        .catch(err =>{
-            res.status(500).json({ error: err });
-        });
+        
+
+       if (allSkills.skills.length > 0) {
+            CandidateProfile.updateOne(
+                { _id: req.body.candidateID },  
+                { 
+                    $set : {   "skills.0.primarySkills"      : [], 
+                                "skills.0.secondarySkills"   : [] }
+                }
+            )
+            .exec()
+            .then(data=>{
+                if(data.nModified == 1){
+                    CandidateProfile.updateOne(
+                        { _id: req.body.candidateID },  
+                        { 
+                            $push : {   "skills.0.primarySkills"      : primarySkills, 
+                                        "skills.0.secondarySkills"    : secondarySkills }
+                        }
+                    )
+                    .exec()
+                    .then(data=>{
+                        if(data.nModified == 1){
+                            res.status(200).json({ created : true });
+                        }else{
+                            res.status(401).json({ created : false });
+                        }
+                    })
+                    .catch(err =>{
+                        console.log(err)
+                        res.status(500).json({ error: err });
+                    });
+                }else{
+                    res.status(401).json({ created : false });
+                }
+            })
+            .catch(err =>{
+                res.status(500).json({ error: err });
+            });
+
+       }else{
+            var skillObject = {}
+            skillObject.primarySkills   = primarySkills;
+            skillObject.secondarySkills = secondarySkills;
+            CandidateProfile.updateOne(
+                        { _id: req.body.candidateID },  
+                        { 
+                            $push : {    "skills"      : skillObject }
+                        }
+                    )
+                    .exec()
+                    .then(data=>{
+                        if(data.nModified == 1){
+                            res.status(200).json({ created : true });
+                        }else{
+                            res.status(401).json({ created : false });
+                        }
+                    })
+                    .catch(err =>{
+                        console.log(err)
+                        res.status(500).json({ error: err });
+                    });
+       }
     }   
 };
 var fetchCandidateSkills = async (candidateID)=>{
@@ -509,7 +540,7 @@ function insertSkill(skill, createdBy){
                     });
     });
 }
-exports.deleteSkill = (req,res,next)=>{   
+exports.deleteSkill = (req,res,next)=>{
     CandidateProfile.updateOne(
             { _id:req.params.candidateID},  
             {
