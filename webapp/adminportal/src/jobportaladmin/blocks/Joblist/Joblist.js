@@ -79,7 +79,7 @@ deleteJob = (event)=>{
 						{
 							this.props.jobList
 							?
-								this.props.jobList.map((elem,index1)=>{
+								this.props.jobList.map((elem,index)=>{
 									return(
 										<div className="col-lg-12">
 											<div className="jobListContainer">
@@ -102,10 +102,10 @@ deleteJob = (event)=>{
 															<b>iAssure International Technologies Pvt Ltd</b>
 														</div>
 														<div> 
-															<i className="fa fa-calendar jobListExperience"></i> &nbsp; Exp: {elem.eligibility.minExperience}
+															<i className="fa fa-calendar jobListExperience"></i> &nbsp; Exp : {elem.eligibility.minExperience}
 														</div>
 														<div> 
-															<i className="fa fa-rupee jobListMonSal"></i> &nbsp; <i className="fa fa-inr"></i> {elem.ctcOffered.minSalary} {elem.ctcOffered.minSalPeriod} - <i className="fa fa-inr"></i> {elem.ctcOffered.maxSalary} {elem.ctcOffered.maxSalPeriod}
+															<i className="fa fa-rupee jobListMonSal"></i> &nbsp; <i className="fa fa-inr"></i> {elem.ctcOffered.minSalary} {elem.ctcOffered.minSalPeriod} &nbsp;-&nbsp; <i className="fa fa-inr"></i> {elem.ctcOffered.maxSalary} {elem.ctcOffered.maxSalPeriod}
 														</div>
 														<div>
 															<i className="fa fa-map-marker jobListLocation"></i> &nbsp; {elem.location.address}
