@@ -284,7 +284,7 @@ export default class PreviewModal extends Component{
                                       Role
                                     </div>
                                     <p className="rightSideSub">
-                                      {this.props.jobInfo.role}
+                                      {this.props.jobInfo.jobrole_id}
                                     </p>
 
                                     <div className="col-lg-12">

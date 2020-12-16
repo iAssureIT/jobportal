@@ -1616,10 +1616,14 @@ padding: 5px 5px !important;
 }
 .skin-blue .main-header .navbar .sidebar-toggle {
   color: #ffffff;
+  margin-top: -3px;
+  padding-top: 21px;
+  padding-bottom: 15px;
+  background-color: #3c8dbc !important;
 }
 .skin-blue .main-header .navbar .sidebar-toggle:hover {
-  background: #fff;
-  color: #367ea8!important; 
+  background: #367EA8 !important;
+  color: #ffffff !important; 
   /*color: #e60004;*/
   /*background: #fff;*/
 }

@@ -786,8 +786,8 @@ class JobPosting extends Component {
         this.setState({ [name]:value });  
         
         var jobrole_id;
-        if (document.querySelector('#role option[value="' + value + '"]')) {
-            jobrole_id = document.querySelector('#role option[value="' + value + '"]').getAttribute("data-value")
+        if (document.querySelector('#jobRole option[value="' + value + '"]')) {
+            jobrole_id = document.querySelector('#jobRole option[value="' + value + '"]').getAttribute("data-value")
         }else{ jobrole_id = "" }
 
         this.setState({ jobrole_id : jobrole_id },()=>{
@@ -1041,7 +1041,7 @@ render(){
 												<div className="input-group">
 													<span className="input-group-addon addJobFormField"><FontAwesomeIcon icon={['fas', 'briefcase']} /></span> 
                                                         <div className="input-group col-lg-12">
-                                                            <input type="text" list="jobRole" className="form-control addJobFormField" refs="role" id="selectrole" value={this.state.jobRole} name="jobRole"
+                                                            <input type="text" list="jobRole" className="form-control addJobFormField" refs="jobRole" id="selectrole" value={this.state.jobRole} name="jobRole"
                                                             onChange={this.onChangeRole.bind(this)} />
                                                             <datalist name="jobRole" id="jobRole" className="roleArray" >
                                                                 {this.state.roleArray.map((item, key) =>

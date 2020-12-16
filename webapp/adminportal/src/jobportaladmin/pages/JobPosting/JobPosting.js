@@ -890,7 +890,7 @@ render(){
                                     <span className="labelLeftPadding"> Add Corporate </span>
                                 </div>
 
-                                <div className="col-lg-8">
+                                <div className="col-lg-6">
                                     <label htmlFor="corporate" className="addjobformLable"> Corporate Name <span className="asterisk">&#42;</span> </label>
                                     <div className="input-group">
                                         <span className="input-group-addon addJobFormField"><i className="fa fa-briefcase"></i></span> 

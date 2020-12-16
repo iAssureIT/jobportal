@@ -46,18 +46,16 @@ class JoblistPage extends Component{
   }
 	render(){
 		return(
-  		<div className="ViewBodyWrapper container-fluid">
-          <div className="col-lg-3" style={{"margin-top": "32px"}}>
-            <div className='row'>
-                <div className="col-lg-8">
-                  <div className='row'>
-                    <LeftSideFilters />
-                  </div>
-                </div>
+  		<div className="ViewBodyWrapper">
+          <div className="col-lg-2" style={{"margin-top": "30px"}}>
+            <div className="col-lg-8">
+              <div className='row'>
+                <LeftSideFilters />
+              </div>
             </div>
           </div>
 
-          <div className="col-lg-9">
+          <div className="col-lg-10">
             <div className="row">
               <div id="mapwise">
                 <Joblist jobList={this.props.jobList}/>
