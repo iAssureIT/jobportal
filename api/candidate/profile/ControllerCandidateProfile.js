@@ -510,6 +510,7 @@ exports.addCandidateSkill = (req,res,next)=>{
        }
     }   
 };
+
 var fetchCandidateSkills = async (candidateID)=>{
     return new Promise(function(resolve,reject){ 
     CandidateProfile.findOne({"_id" : candidateID }, {"skills" : 1})
