@@ -129,7 +129,87 @@ class JobPosting extends Component {
     componentDidMount() {
         this.getStates();
         if (this.props.match.params.job_id) {
-            let job_id = this.props.match.params.job_id;
+        let job_id = this.props.match.params.job_id;
+        Axios.get("/api/functionalareamaster/get/list")
+            .then(response => {
+                    this.setState({
+                        functionalArealist: response.data
+                    });
+            })
+            .catch(error => {
+                Swal.fire("Error while getting List data", error.message, 'error');
+            })
+
+        Axios.get("/api/subfunctionalareamaster/get/list")
+            .then(response => {
+                this.setState({
+                    subFunctionalArealist: response.data
+                });
+            })
+            .catch(error => {
+                Swal.fire("Error while getting List data", error.message, 'error');
+            })
+
+        Axios.get("/api/jobrolemaster/get/list")
+            .then(response => {
+                this.setState({
+                    roleArray: response.data
+                });
+            })
+            .catch(error => {
+                Swal.fire("Error while getting List data", error.message, 'error');
+            })    
+
+        Axios.get("/api/jobtypemaster/get/list")
+            .then(response => {
+                this.setState({
+                    jobTypeArray: response.data
+                });
+            })
+            .catch(error => {
+                Swal.fire("Error while getting List data", error.message, 'error');
+            })
+
+        Axios.get("/api/JobTimeMaster/get/list")
+            .then(response => {
+                this.setState({
+                    jobTimeArray: response.data
+                });
+                /*console.log("jobTimeArray", this.state.jobTimeArray);*/
+            })
+            .catch(error => {
+                Swal.fire("Error while getting List data", error.message, 'error');
+            })
+
+        Axios.get("/api/jobcategorymaster/get/list")
+            .then(response => {
+                this.setState({
+                    jobCategoryArray: response.data
+                });
+                /*console.log("jobCategoryArray", this.state.jobCategoryArray);*/
+            })
+            .catch(error => {
+                Swal.fire("Error while getting List data", error.message, 'error');
+            })
+
+        Axios.get("/api/skillmaster/get/list")
+            .then(response => {
+                var primarySkillSuggestions =  [];
+                response.data.map((elem,index)=>{
+                    primarySkillSuggestions.push({id:elem._id,text:elem.skill})
+                })
+                this.setState({
+                    primarySkillSuggestions   : primarySkillSuggestions,
+                    secondarySkillSuggestions : primarySkillSuggestions,
+                    otherSkillSuggestions     : primarySkillSuggestions,
+                    preferSkillSuggestions    : primarySkillSuggestions
+                });
+
+            })
+            .catch(error => {
+                Swal.fire("Error while getting List data", error.message, 'error');
+            })
+
             Axios.get("/api/jobs/get/one/" + job_id)
                 .then(response => {
                     console.log("response.data : ", response.data);
@@ -185,6 +265,25 @@ class JobPosting extends Component {
                     } else {
                         document.getElementById("workFromHome").checked = false;
                     }
+                    if (document.querySelector('#functionalArea option[data-value="'+this.state.functionalarea_id+'"]')) {
+                       this.setState({functionalArea: document.querySelector('#functionalArea option[data-value="'+this.state.functionalarea_id+'"]').value}) 
+                    }
+                    if (document.querySelector('#subFunctionalArea option[data-value="'+this.state.subfunctionalarea_id+'"]')) {
+                       this.setState({subFunctionalArea: document.querySelector('#subFunctionalArea option[data-value="'+this.state.subfunctionalarea_id+'"]').value}) 
+                    }
+                    if (document.querySelector('#jobRole option[data-value="'+this.state.jobrole_id+'"]')) {
+                       this.setState({jobRole: document.querySelector('#jobRole option[data-value="'+this.state.jobrole_id+'"]').value}) 
+                    }
+                    if (document.querySelector('#jobType option[data-value="'+this.state.jobtype_id+'"]')) {
+                       this.setState({jobType: document.querySelector('#jobType option[data-value="'+this.state.jobtype_id+'"]').value}) 
+                    }
+                    if (document.querySelector('#jobTime option[data-value="'+this.state.jobtime_id+'"]')) {
+                       this.setState({jobTime: document.querySelector('#jobTime option[data-value="'+this.state.jobtime_id+'"]').value}) 
+                    }
+                    if (document.querySelector('#jobCategory option[data-value="'+this.state.jobcategory_id+'"]')) {
+                       this.setState({jobCategory: document.querySelector('#jobCategory option[data-value="'+this.state.jobcategory_id+'"]').value}) 
+                    }
+                    
                 })
 
                 .catch(error => {
@@ -192,90 +291,7 @@ class JobPosting extends Component {
                 })
         }
 
-        Axios.get("/api/functionalareamaster/get/list")
-            .then(response => {
-	                this.setState({
-	                    functionalArealist: response.data
-	                });
-            })
-            .catch(error => {
-                Swal.fire("Error while getting List data", error.message, 'error');
-            })
-
-        Axios.get("/api/subfunctionalareamaster/get/list")
-            .then(response => {
-                this.setState({
-                    subFunctionalArealist: response.data
-                });
-            })
-            .catch(error => {
-                Swal.fire("Error while getting List data", error.message, 'error');
-            })
-
-        Axios.get("/api/jobrolemaster/get/list")
-            .then(response => {
-                this.setState({
-                    roleArray: response.data
-                });
-            })
-            .catch(error => {
-                Swal.fire("Error while getting List data", error.message, 'error');
-            })    
-
-        Axios.get("/api/jobtypemaster/get/list")
-            .then(response => {
-                /*console.log("getfunctionalAreaData response.data = ", response.data);*/
-                this.setState({
-                    jobTypeArray: response.data
-                });
-                /*console.log("jobTypeArray", this.state.jobTypeArray);*/
-            })
-            .catch(error => {
-                Swal.fire("Error while getting List data", error.message, 'error');
-            })
-
-        Axios.get("/api/JobTimeMaster/get/list")
-            .then(response => {
-                /*console.log("getfunctionalAreaData response.data = ", response.data);*/
-                this.setState({
-                    jobTimeArray: response.data
-                });
-                /*console.log("jobTimeArray", this.state.jobTimeArray);*/
-            })
-            .catch(error => {
-                Swal.fire("Error while getting List data", error.message, 'error');
-            })
-
-        Axios.get("/api/jobcategorymaster/get/list")
-            .then(response => {
-                /*console.log("getfunctionalAreaData response.data = ", response.data);*/
-                this.setState({
-                    jobCategoryArray: response.data
-                });
-                /*console.log("jobCategoryArray", this.state.jobCategoryArray);*/
-            })
-            .catch(error => {
-                Swal.fire("Error while getting List data", error.message, 'error');
-            })
-
-        Axios.get("/api/skillmaster/get/list")
-            .then(response => {
-                /*console.log("getfunctionalAreaData response.data = ", response.data);*/
-                var primarySkillSuggestions =  [];
-                response.data.map((elem,index)=>{
-		            primarySkillSuggestions.push({id:elem._id,text:elem.skill})
-		        })
-                this.setState({
-                    primarySkillSuggestions   : primarySkillSuggestions,
-                    secondarySkillSuggestions : primarySkillSuggestions,
-                    otherSkillSuggestions     : primarySkillSuggestions,
-                    preferSkillSuggestions    : primarySkillSuggestions
-                });
-
-            })
-            .catch(error => {
-                Swal.fire("Error while getting List data", error.message, 'error');
-            })
+        
 
     }
 
@@ -1010,7 +1026,8 @@ render(){
 												<label htmlFor="functionalArea" className="addjobformLable"> Functional Area <span className="asterisk">&#42;</span> </label>
 												<div className="input-group">
 													<span className="input-group-addon addJobFormField"><i className="fa fa-briefcase"></i></span> 
-														<input type="text" list="functionalArea" className="form-control addJobFormField" refs="functionalArea" id="selectFunctionalArea" value={this.state.functionalArea} name="functionalArea"
+														<input type="text" list="functionalArea" className="form-control addJobFormField" refs="functionalArea" 
+                                                        id="selectFunctionalArea" value={this.state.functionalArea} data-value={this.state.functionalarea_id} name="functionalArea"
 														onChange={this.onChangeFunctionalArea.bind(this)} />
 														<datalist name="functionalArea" id="functionalArea" className="functionalArealist" >
 														    {this.state.functionalArealist.map((item, key) =>

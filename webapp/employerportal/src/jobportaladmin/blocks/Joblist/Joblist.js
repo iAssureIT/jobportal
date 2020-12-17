@@ -14,8 +14,8 @@ class JobListView extends Component{
 }	
 
 componentDidMount(){
-	var selector=this.state.selector;
-	//selector.countryCode = "IN"; 
+	var selector=this.props.selector;
+	selector.countryCode = "IN"; 
 
 	this.setState({ selector: selector })
 
@@ -45,7 +45,8 @@ deleteJob = (event)=>{
 				.then(response =>{
 					console.log()
 					if(response.data.message==="Job details deleted Successfully!"){
-						this.getJobsData();
+						var {mapAction} = this.props;
+						mapAction.filterJobList(this.state.selector);
 
 						Swal.fire(
 									'Deleted!',
