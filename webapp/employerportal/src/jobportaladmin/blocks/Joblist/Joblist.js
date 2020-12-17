@@ -1,8 +1,11 @@
 import React, {Component} from 'react';
 import Axios from  'axios';
 import Swal  from  'sweetalert2';
+import { connect }        from 'react-redux';
+import { bindActionCreators } from 'redux';
+import  * as mapActionCreator from '../../common/actions/index';
 
-export default class JobListView extends Component{
+class JobListView extends Component{
 	constructor(props){
 	super(props);
 	this.state={
@@ -11,6 +14,13 @@ export default class JobListView extends Component{
 }	
 
 componentDidMount(){
+	var selector=this.state.selector;
+	//selector.countryCode = "IN"; 
+
+	this.setState({ selector: selector })
+
+	var {mapAction} = this.props;
+	mapAction.filterJobList(selector);
 }
 
 
@@ -139,3 +149,13 @@ deleteJob = (event)=>{
 		);
 	}
 }
+const mapStateToProps = (state)=>{
+    return {
+        user_ID     : state.user_ID,  	candidateID   : state.candidateID,
+        selector    : state.selector,   jobList     : state.jobList,
+    }
+}
+const mapDispatchToProps = (dispatch) => ({
+  mapAction :  bindActionCreators(mapActionCreator, dispatch)
+}) 
+export default connect(mapStateToProps, mapDispatchToProps)(JobListView)

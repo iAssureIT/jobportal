@@ -18,7 +18,7 @@ class JoblistPage extends Component{
 	}
   componentDidMount(){
 
-    var selector=this.state.selector;
+      var selector=this.state.selector;
       selector.countryCode = "IN"; 
 
       this.setState({ selector: selector })

@@ -156,7 +156,7 @@ class JobPosting extends Component {
                         area                    :   response.data.jobsData[0].location.area,
                         cityVillage             :   response.data.jobsData[0].location.cityVillage,
                         district                :   response.data.jobsData[0].location.district,
-                        states                  :   response.data.jobsData[0].location.states,
+                        states                  :   response.data.jobsData[0].location.state,
                         stateCode               :   response.data.jobsData[0].location.stateCode,
                         country                 :   response.data.jobsData[0].location.country,
                         countryCode             :   response.data.jobsData[0].location.countryCode,
@@ -397,13 +397,13 @@ class JobPosting extends Component {
                 minEducation            :   this.state.minEducation,
                 minExperience           :   this.state.minExperience,
 
-                primarySkills           :   this.state.primarySkills,
+                primarySkillTags        :   this.state.primarySkillTags,
                 minPrimExp              :   this.state.minPrimExp,
-                secondarySkills         :   this.state.secondarySkills,
+                secondarySkillTags      :   this.state.secondarySkillTags,
                 minSecExp               :   this.state.minSecExp,
-                otherSkills             :   this.state.otherSkills,
+                otherSkillTags          :   this.state.otherSkillTags,
                 minOtherExp             :   this.state.minOtherExp,
-                preferSkills            :   this.state.preferSkills,
+                preferSkillTags         :   this.state.preferSkillTags,
 
             };
 
@@ -641,7 +641,9 @@ class JobPosting extends Component {
   	
 
     onprimarySkillAddition (tag) {
-   
+        if (tag.id == tag.text) {
+            tag.id = "" 
+        }
     	this.setState(state => ({ primarySkillTags: [...state.primarySkillTags, tag] }));
   	}
 
@@ -668,9 +670,11 @@ class JobPosting extends Component {
     }
  	
     
-    onsecondarySkillAddition (tags) {
-        const secondarySkillTags = [].concat(this.state.secondarySkillTags, tags)
-        this.setState({ secondarySkillTags })
+    onsecondarySkillAddition (tag) {  
+        if (tag.id == tag.text) {
+            tag.id = "" 
+        }
+        this.setState(state => ({ secondarySkillTags: [...state.secondarySkillTags, tag] }));
     }
 
     onsecondarySkillClick(index) {
@@ -689,14 +693,19 @@ class JobPosting extends Component {
     }
 
     onsecondarySkillDelete (i) {
-	    const secondarySkillTags = this.state.secondarySkillTags.slice(0)
-	    secondarySkillTags.splice(i, 1)
-	    this.setState({ secondarySkillTags })
+        const { secondarySkillTags } = this.state;
+        this.setState({
+          secondarySkillTags: secondarySkillTags.filter((tag, index) => index !== i),
+        });
 	}
 
     
 
     onOtherSkillAddition (tag) {
+        if (tag.id == tag.text) {
+            tag.id = "" 
+        }
+        
         this.setState(state => ({ otherSkillTags: [...state.otherSkillTags, tag] }));
     }
 
@@ -724,7 +733,10 @@ class JobPosting extends Component {
 
 
     onPreferSkillAddition (tag) {
-        this.setState(state => ({ preferSkillTags: [...state.preferkillTags, tag] }));
+        if (tag.id == tag.text) {
+            tag.id = "" 
+        }
+        this.setState(state => ({ preferSkillTags: [...state.preferSkillTags, tag] }));
     }
 
     onPreferSkillClick(index) {
@@ -750,7 +762,6 @@ class JobPosting extends Component {
     }
 
     
-
     onChangeFunctionalArea(event){
         const {name,value} = event.target;
         this.setState({ [name]:value });  
@@ -778,7 +789,6 @@ class JobPosting extends Component {
         this.setState({ subfunctionalarea_id : subfunctionalarea_id },()=>{
             console.log(this.state)
         });  
-        
     }
 
     onChangeRole(event){
@@ -838,7 +848,6 @@ class JobPosting extends Component {
         this.setState({ jobcategory_id : jobcategory_id },()=>{
             console.log(this.state)
         });  
-        
     }
 
 
@@ -1252,8 +1261,8 @@ render(){
 													        delimiters={delimiters}
 													        handleDelete={this.onprimarySkillDelete.bind(this)}
 													        handleAddition={this.onprimarySkillAddition.bind(this)}
-													        handleDrag={this.onprimarySkillDrag}
-          													handleTagClick={this.onprimarySkillClick} />
+													        handleDrag={this.onprimarySkillDrag.bind(this)}
+          													handleTagClick={this.onprimarySkillClick.bind(this)} />
 													</div>
 											</div>
 											
@@ -1273,11 +1282,14 @@ render(){
 												<div className="input-group col-lg-12">
 													<span className="input-group-addon addJobFormField"> <i className='fa fa-cog'></i> </span>
 														<ReactTags
-													        ref={this.reactTags}
-													        tags={this.state.secondarySkillTags}
-													        suggestions={this.state.secondarySkillSuggestions}
-													        onDelete={this.onsecondarySkillDelete.bind(this)}
-													        onAddition={this.onsecondarySkillAddition.bind(this)} />
+                                                            tags={this.state.secondarySkillTags}
+                                                            suggestions={this.state.secondarySkillSuggestions}
+                                                            delimiters={delimiters}
+                                                            handleDelete={this.onsecondarySkillDelete.bind(this)}
+                                                            handleAddition={this.onsecondarySkillAddition.bind(this)}
+                                                            handleDrag={this.onsecondarySkillDrag.bind(this)}
+                                                            handleTagClick={this.onsecondarySkillClick.bind(this)}
+                                                            />
 												</div>
 											</div>
 											
@@ -1297,11 +1309,14 @@ render(){
 												<div className="input-group col-lg-12">
 													<span className="input-group-addon addJobFormField"> <i className='fa fa-cog'></i> </span>
 														<ReactTags
-                                                            ref={this.reactTags}
                                                             tags={this.state.otherSkillTags}
                                                             suggestions={this.state.otherSkillSuggestions}
-                                                            onDelete={this.onOtherSkillDelete.bind(this)}
-                                                            onAddition={this.onOtherSkillAddition.bind(this)} />
+                                                            delimiters={delimiters}
+                                                            handleDelete={this.onOtherSkillDelete.bind(this)}
+                                                            handleAddition={this.onOtherSkillAddition.bind(this)}
+                                                            handleDrag={this.onOtherSkillDrag.bind(this)}
+                                                            handleTagClick={this.onOtherSkillClick.bind(this)}
+                                                            />
 												</div>
 											</div>
 											
@@ -1320,11 +1335,14 @@ render(){
 										<div className="input-group col-lg-12 preferSkillsField">
 											<span className="input-group-addon addJobFormField"> <i className='fa fa-cog'></i> </span>
 												<ReactTags
-                                                    ref={this.reactTags}
                                                     tags={this.state.preferSkillTags}
                                                     suggestions={this.state.preferSkillSuggestions}
-                                                    onDelete={this.onPreferSkillDelete.bind(this)}
-                                                    onAddition={this.onPreferSkillAddition.bind(this)} />
+                                                    delimiters={delimiters}
+                                                    handleDelete={this.onPreferSkillDelete.bind(this)}
+                                                    handleAddition={this.onPreferSkillAddition.bind(this)}
+                                                    handleDrag={this.onPreferSkillDrag.bind(this)}
+                                                    handleTagClick={this.onPreferSkillClick.bind(this)}
+                                                    />
 										</div>
 									</div>
 									

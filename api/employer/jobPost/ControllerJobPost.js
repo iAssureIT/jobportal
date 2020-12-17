@@ -7,12 +7,19 @@ const JobCategoryMaster 		= require('../../coreAdmin/JobCategoryMaster/ModelJobC
 const JobRoleMaster 			= require('../../coreAdmin/JobRoleMaster/ModelJobRole.js');
 const JobTypeMaster 			= require('../../coreAdmin/JobTypeMaster/ModelJobType.js');
 const JobTimeMaster 			= require('../../coreAdmin/JobTimeMaster/ModelJobTime.js');
+const SkillMaster           	= require('../../coreAdmin/SkillMaster/ModelSkill.js');
 
 var ObjectID 	= 	require('mongodb').ObjectID;
 
 exports.insertJobs = (req, res, next)=>{
 		console.log(req.body)	
 		var functionalarea_id, subfunctionalarea_id, jobcategory_id, jobrole_id, jobtype_id, jobtime_id;
+		var primarySkills   = []
+	    var secondarySkills = [];
+	    var otherSkills = [];
+	    var preferSkills = [];
+	    var skill_id; 
+
 		processData();
     	async function processData(){
     		functionalarea_id  		= req.body.functionalarea_id != "" ? req.body.functionalarea_id 
@@ -32,6 +39,32 @@ exports.insertJobs = (req, res, next)=>{
 
 			jobtime_id  			= req.body.jobtime_id != "" ? req.body.jobtime_id 
     							: await insertJobTime(req.body.jobTime,req.body.user_id)
+		
+    			
+    		for (var i = 0 ; i < req.body.primarySkillTags.length; i++) {
+                skill_id = req.body.primarySkillTags[i].id != "" ? req.body.primarySkillTags[i].id
+                                    : await insertSkill(req.body.primarySkillTags[i].text, req.body.user_id)
+                    
+                primarySkills.push({ "skill_id" : skill_id })
+            }	
+            for (var i = 0 ; i < req.body.secondarySkillTags.length; i++) {
+                skill_id = req.body.secondarySkillTags[i].id != "" ? req.body.secondarySkillTags[i].id
+                                    : await insertSkill(req.body.secondarySkillTags[i].text, req.body.user_id)
+                    
+                secondarySkills.push({ "skill_id" : skill_id })
+            }
+            for (var i = 0 ; i < req.body.otherSkillTags.length; i++) {
+                skill_id = req.body.otherSkillTags[i].id != "" ? req.body.otherSkillTags[i].id
+                                    : await insertSkill(req.body.otherSkillTags[i].text, req.body.user_id)
+                    
+                otherSkills.push({ "skill_id" : skill_id })
+            }		
+            for (var i = 0 ; i < req.body.preferSkillTags.length; i++) {
+                skill_id = req.body.preferSkillTags[i].id != "" ? req.body.preferSkillTags[i].id
+                                    : await insertSkill(req.body.preferSkillTags[i].text, req.body.user_id)
+                    
+                preferSkills.push({ "skill_id" : skill_id })
+            }	
 		const jobsData = new Jobs({
 			
 			"_id" 			: 	new mongoose.Types.ObjectId(),
@@ -62,7 +95,7 @@ exports.insertJobs = (req, res, next)=>{
 									"area" 					: req.body.area,
 									"cityVillage"  			: req.body.cityVillage,
 									"district" 				: req.body.district,
-									"states" 				: req.body.states,
+									"state" 				: req.body.states,
 									"stateCode" 			: req.body.stateCode,	
 									"country" 				: req.body.country,
 									"countryCode" 			: req.body.countryCode,
@@ -81,13 +114,13 @@ exports.insertJobs = (req, res, next)=>{
 								},
 			
 			"requiredSkills": 	{
-									"primarySkills" 	: req.body.primarySkills,
+									"primarySkills" 	: primarySkills,
 									"minPrimExp"		: req.body.minPrimExp,
-									"secondarySkills" 	: req.body.secondarySkills,
+									"secondarySkills" 	: secondarySkills,
 									"minSecExp"			: req.body.minSecExp,
-									"otherSkills"		: req.body.otherSkills,
+									"otherSkills"		: otherSkills,
 									"minOtherExp" 	  	: req.body.minOtherExp,
-									"preferredSkills" 	: req.body.preferredSkills,
+									"preferredSkills" 	: preferSkills,
 								},
 			
 			"createdAt" 	: 	new Date(),
@@ -116,6 +149,23 @@ exports.insertJobs = (req, res, next)=>{
 										});
 								});	
 		}
+}
+function insertSkill(skill, createdBy){ 
+    return new Promise(function(resolve,reject){ 
+        const skillMaster = new SkillMaster({
+                        _id                   : new mongoose.Types.ObjectId(),
+                        skill                 : skill,
+                        createdBy             : createdBy,
+                        createdAt             : new Date()
+                    })
+                    skillMaster.save()
+                    .then(data=>{
+                        resolve( data._id );
+                    })
+                    .catch(err =>{
+                        reject(err); 
+                    });
+    });
 }
 function insertFunctArea(functionalArea, createdBy){ 
     return new Promise(function(resolve,reject){ 
@@ -393,7 +443,7 @@ exports.updateJob = (req,res,next)=>{
 									"area" 					: req.body.area,
 									"cityVillage"  			: req.body.cityVillage,
 									"district" 				: req.body.district,
-									"states" 				: req.body.states,
+									"state" 				: req.body.states,
 									"stateCode" 			: req.body.stateCode,	
 									"country" 				: req.body.country,
 									"countryCode" 			: req.body.countryCode,

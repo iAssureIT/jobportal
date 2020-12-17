@@ -27,7 +27,7 @@ const jobsSchema = mongoose.Schema({
 							area 					: String,
 							cityVillage  			: String,
 							district 				: String,
-							states 					: String,
+							state 					: String,
 							stateCode 				: String,	
 							country 				: String,
 							countryCode 			: String,
@@ -46,13 +46,21 @@ const jobsSchema = mongoose.Schema({
 				  		},
 	
 	requiredSkills  : 	{
-							primarySkills 			: Array,
+							primarySkills 			: [{
+								skill_id : { type: mongoose.Schema.Types.ObjectId, ref: 'skillmasters' }
+							}],
 							minPrimExp				: String,
-							secondarySkills 		: Array,
+							secondarySkills 		: [{
+								skill_id : { type: mongoose.Schema.Types.ObjectId, ref: 'skillmasters' }
+							}],
 							minSecExp 				: String,
-							otherSkills				: Array,
+							otherSkills				: [{
+								skill_id : { type: mongoose.Schema.Types.ObjectId, ref: 'skillmasters' }
+							}],
 							minOtherExp 			: String,
-							preferredSkills 		: Array,
+							preferredSkills 		: [{
+								skill_id : { type: mongoose.Schema.Types.ObjectId, ref: 'skillmasters' }
+							}],
 					 	},
 	
 	createdAt 		: 	Date,

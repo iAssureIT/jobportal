@@ -434,14 +434,14 @@ exports.addCandidateSkill = (req,res,next)=>{
             var allSkills = await fetchCandidateSkills(req.body.candidateID);
             for (var i = 0 ; i < req.body.primarySkills.length; i++) {
                 skillID = req.body.primarySkills[i].skillID != "" ? req.body.primarySkills[i].skillID
-                                    : await insertSkill(req.body.primarySkills[i].skill,req.body.user_id)
+                                    : await insertSkill(req.body.primarySkills[i].skill, req.body.user_id)
                     
                 primarySkills.push({ "skillID" : skillID, "rating": req.body.primarySkills[i].rating })
             }
             for (var i = 0 ; i < req.body.secondarySkills.length; i++) {
                 
                 skillID = req.body.secondarySkills[i].skillID != "" ? req.body.secondarySkills[i].skillID
-                                : await insertSkill(req.body.secondarySkills[i].skill,req.body.user_id)
+                                : await insertSkill(req.body.secondarySkills[i].skill, req.body.user_id)
                 
                 secondarySkills.push({ "skillID" : skillID, "rating": req.body.secondarySkills[i].rating })
             }
