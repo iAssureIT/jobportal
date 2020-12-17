@@ -779,6 +779,7 @@ export default class JobPosting extends Component {
     onChangeCorporate(event){
         const {name,value} = event.target;
         this.setState({ [name]:value });  
+        
         var corporate_id;
         var industry_id;
         if (document.querySelector('#corporate option[value="' + value + '"]')) {
@@ -1452,7 +1453,7 @@ render(){
                                         </div>
                                     </div>                                                                                                                      
                                     
-                                    <div className="col-lg-7 col-lg-offset-5 pull-right">
+                                    <div className="col-lg-3 col-lg-offset-4 pull-right">
                                                                             
                                         <button className="btn buttonYellow addJobSubmitBtn"  onClick={this.handleSubmit}> {this.state.submitBtnText} </button>
                                     </div>

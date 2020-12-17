@@ -1,6 +1,9 @@
 :root {
   --main-font-color: #444;
-  --border-color: #444;
+  --border-color: #555;
+  --main-admin-text-color: #555;
+  --main-admin-bg-color: #EEE;
+  --main-blue-bg-color: #3C8DBC;
 }
 
 @font-face{

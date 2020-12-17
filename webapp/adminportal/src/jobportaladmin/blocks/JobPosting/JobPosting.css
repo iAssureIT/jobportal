@@ -32,8 +32,6 @@
 	
 }
 
-
-
 .addJobWrapperBorder{
 	border: 3px solid var(--main-border-color);
 	border-radius: 10px;
@@ -44,7 +42,7 @@
 	margin-top: 25px;
 	font-size: 25px;
 	/*font-weight: bold;*/
-	color: #3C8DBC;
+	color: var(--main-admin-text-color);
 	font-family: 'Montserrat-SemiBold'; 
 }
 
@@ -57,13 +55,13 @@
 .addJobMainHead{
 	font-size: 21px;
 	font-weight: bold;
-	color: #3C8DBC;
+	color: var(--main-admin-text-color);
 	font-family: 'Montserrat-SemiBold'; 
 }
 
 .addJobMainHead i{
-	color: var(--main-txt-color);
-	border: 1px solid #fff;
+	color: var(--main-admin-text-color);
+	border: 1px solid var(--border-color);
 	padding: 1px 7px;
 	font-size: 18px;
 	border-radius: 6px;
@@ -76,12 +74,12 @@
 .addJobSubHead{
 	font-size: 21px;
 	font-weight: bold;
-	color: #3C8DBC;
+	color: var(--main-admin-text-color);
 	font-family: 'Montserrat-SemiBold';
 }
 
 .addJobSubHead i{
-	color: #3C8DBC;
+	color: var(--main-admin-text-color);
 	font-size: 25px;
 	margin-top: 18px;
 }
@@ -168,7 +166,7 @@
 
 .addJobSubHead .salaryIcon{
 	font-size: 17px;
-	border: 1px solid #fff;
+	border: 1px solid var(--border-color);
 	border-radius: 50%;
 	padding-left: 7px;
 	padding-right: 7px;
@@ -182,7 +180,7 @@
 	padding-right: 4px;
 	padding-top: 2px;
 	border-radius: 50%;
-	border: 1px solid #fff;
+	border: 1px solid var(--border-color);
 }
 
 /*********************************Custom Gender Field Properties********************************/
@@ -196,7 +194,7 @@
 
 .addJobGenderFeildWrapper{
 	height: 32px;
-	border: 1px solid var(--main-border-color)!important;
+	border: 1px solid var(--main-border-color) !important;
 	width: 100%;
 	border-radius: 5px;
 }
@@ -219,7 +217,7 @@
 }
 
 .addJobGenderActive{
-	background-color: #3C8DBC;
+	background-color: var(--main-blue-bg-color);
     transition: all 2s;
     color: #fff;
 }
