@@ -128,8 +128,6 @@ class JobPosting extends Component {
 
     componentDidMount() {
         this.getStates();
-        if (this.props.match.params.job_id) {
-        let job_id = this.props.match.params.job_id;
         Axios.get("/api/functionalareamaster/get/list")
             .then(response => {
                     this.setState({
@@ -209,6 +207,8 @@ class JobPosting extends Component {
             .catch(error => {
                 Swal.fire("Error while getting List data", error.message, 'error');
             })
+        if (this.props.match.params.job_id) {
+        let job_id = this.props.match.params.job_id;
 
             Axios.get("/api/jobs/get/one/" + job_id)
                 .then(response => {
