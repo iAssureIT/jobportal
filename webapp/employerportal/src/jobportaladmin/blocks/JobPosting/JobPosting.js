@@ -88,12 +88,15 @@ class JobPosting extends Component {
             otherSkills                 :   [],
             minOtherExp                 :   "",
             otherSkillsArray            :   [],
+
+            preferredSkills             :   "",
+            preferredSkillsArray        :   [],
+            priSkillsArraylist          :   [],
+            secSkillsArraylist          :   [],
             otherSkillsArraylist        :   [],
-            
-            preferSkills                :   "",
-            preferSkillsArray           :   [],
-            preferSkillsArraylist       :   [],
-            
+            preferredSkillsArraylist    :   [],
+            submitBtnText               :   "SUBMIT",
+
             primarySkillTags            :   [],
             primarySkillSuggestions     :   [],
             
@@ -106,8 +109,7 @@ class JobPosting extends Component {
             preferSkillTags             :   [],
             preferSkillSuggestions      :   [],
             
-            submitBtnText               :   "SUBMIT",
-            value                       :   ""
+            submitBtnText               :   "SUBMIT"
         }
 
         this.reactTags = React.createRef();
@@ -121,73 +123,6 @@ class JobPosting extends Component {
 
     componentDidMount() {
         this.getStates();
-
-        if (this.props.match.params.job_id) {
-            let job_id = this.props.match.params.job_id;
-            Axios.get("/api/jobs/get/one/" + job_id)
-                .then(response => {
-                    console.log("response.data : ", response.data);
-                    this.setState({
-                        job_id                  :   job_id,
-                        jobTitle                :   response.data.jobsData[0].jobBasicInfo.jobTitle,
-                        industry_id             :   response.data.jobsData[0].jobBasicInfo.industry_id,
-                        functionalarea_id       :   response.data.jobsData[0].jobBasicInfo.functionalarea_id,
-                        subfunctionalarea_id    :   response.data.jobsData[0].jobBasicInfo.subfunctionalarea_id,
-                        jobrole_id              :   response.data.jobsData[0].jobBasicInfo.jobrole_id,
-                        gender                  :   response.data.jobsData[0].jobBasicInfo.gender,
-                        workFromHome            :   response.data.jobsData[0].jobBasicInfo.workFromHome,
-                        jobtype_id              :   response.data.jobsData[0].jobBasicInfo.jobtype_id,
-                        jobtime_id              :   response.data.jobsData[0].jobBasicInfo.jobtime_id,
-                        jobcategory_id          :   response.data.jobsData[0].jobBasicInfo.jobcategory_id,
-                        positions               :   response.data.jobsData[0].jobBasicInfo.positions,
-                        jobDesc                 :   response.data.jobsData[0].jobBasicInfo.jobDesc,
-                        lastDateOfAppl          :   response.data.jobsData[0].jobBasicInfo.lastDateOfAppl ? Moment(response.data.jobsData[0].jobBasicInfo.lastDateOfAppl).format("YYYY-MM-DD") : "",
-                        contactPersonName       :   response.data.jobsData[0].jobBasicInfo.contactPersonName,
-                        contactPersonEmail      :   response.data.jobsData[0].jobBasicInfo.contactPersonEmail,
-                        contactPersonPhone      :   response.data.jobsData[0].jobBasicInfo.contactPersonPhone,
-
-                        address                 :   response.data.jobsData[0].location.address,
-                        area                    :   response.data.jobsData[0].location.area,
-                        cityVillage             :   response.data.jobsData[0].location.cityVillage,
-                        district                :   response.data.jobsData[0].location.district,
-                        states                  :   response.data.jobsData[0].location.state,
-                        stateCode               :   response.data.jobsData[0].location.stateCode,
-                        country                 :   response.data.jobsData[0].location.country,
-                        countryCode             :   response.data.jobsData[0].location.countryCode,
-                        pincode                 :   response.data.jobsData[0].location.pincode,
-
-                        minSalary               :   response.data.jobsData[0].ctcOffered.minSalary,
-                        minSalPeriod            :   response.data.jobsData[0].ctcOffered.minSalPeriod,
-                        maxSalary               :   response.data.jobsData[0].ctcOffered.maxSalary,
-                        maxSalPeriod            :   response.data.jobsData[0].ctcOffered.maxSalPeriod,
-
-                        minEducation            :   response.data.jobsData[0].eligibility.minEducation,
-                        minExperience           :   response.data.jobsData[0].eligibility.minExperience,
-
-                        primarySkills           :   response.data.jobsData[0].requiredSkills.primarySkills,
-                        minPrimExp              :   response.data.jobsData[0].requiredSkills.minPrimExp,
-                        
-                        secondarySkills         :   response.data.jobsData[0].requiredSkills.secondarySkills,
-                        minSecExp               :   response.data.jobsData[0].requiredSkills.minSecExp,
-                        
-                        otherSkills             :   response.data.jobsData[0].requiredSkills.otherSkills,
-                        minOtherExp             :   response.data.jobsData[0].requiredSkills.minOtherExp,
-                        
-                        preferSkills            :   response.data.jobsData[0].requiredSkills.preferSkills,
-                        submitBtnText           :   "UPDATE"
-                    })
-
-                    if (response.data.jobsData[0].jobBasicInfo.workFromHome === true) {
-                        document.getElementById("workFromHome").checked = true;
-                    } else {
-                        document.getElementById("workFromHome").checked = false;
-                    }
-                })
-
-                .catch(error => {
-                    Swal.fire("Some error occured while updating job data", error.message, "error");
-                })
-        }
 
         Axios.get("/api/functionalareamaster/get/list")
             .then(response => {
@@ -261,7 +196,7 @@ class JobPosting extends Component {
                     primarySkillSuggestions   : primarySkillSuggestions,
                     secondarySkillSuggestions : primarySkillSuggestions,
                     otherSkillSuggestions     : primarySkillSuggestions,
-                    preferSkillSuggestions    : primarySkillSuggestions
+                    preferredSkillSuggestions    : primarySkillSuggestions
                 });
 
             })
@@ -311,13 +246,9 @@ class JobPosting extends Component {
                         minEducation            :   response.data.jobsData[0].eligibility.minEducation,
                         minExperience           :   response.data.jobsData[0].eligibility.minExperience,
 
-                        /*primarySkills           :   response.data.jobsData[0].requiredSkills.primarySkills,*/
                         minPrimExp              :   response.data.jobsData[0].requiredSkills.minPrimExp,
-                        //secondarySkills         :   response.data.jobsData[0].requiredSkills.secondarySkills,
                         minSecExp               :   response.data.jobsData[0].requiredSkills.minSecExp,
-                        //otherSkills             :   response.data.jobsData[0].requiredSkills.otherSkills,
                         minOtherExp             :   response.data.jobsData[0].requiredSkills.minOtherExp,
-                        //preferSkills            :   response.data.jobsData[0].requiredSkills.preferSkills,
                         submitBtnText           :   "UPDATE"
                     })
 
@@ -345,30 +276,52 @@ class JobPosting extends Component {
                     var jobCategory = this.state.jobCategoryArray.filter((data,index)=>{
                         if (data._id == this.state.jobcategory_id) { return data}
                     })
+                    var primarySkillTags = [];
+                    var secondarySkillTags = [];
+                    var otherSkillTags = [];
+                    var preferredSkillTags = [];
+
 
                     this.state.primarySkillSuggestions.map((skill,index)=>{
-                        //console.log(skill._id)
                         response.data.jobsData[0].requiredSkills.primarySkills.map((data,ind)=>{
-                            if (skill._id == data.skill_id) {
-                                
+                            if (skill.id == data.skill_id) {
+                                primarySkillTags.push({ id : skill.id, text : skill.text })
                             }
                         })
                     })
-                    //response.data.jobsData[0].requiredSkills.primarySkills.map()
+                    this.state.secondarySkillSuggestions.map((skill,index)=>{
+                        response.data.jobsData[0].requiredSkills.secondarySkills.map((data,ind)=>{
+                            if (skill.id == data.skill_id) {
+                                secondarySkillTags.push({ id : skill.id, text : skill.text })
+                            }
+                        })
+                    })
+                    this.state.otherSkillSuggestions.map((skill,index)=>{
+                        response.data.jobsData[0].requiredSkills.otherSkills.map((data,ind)=>{
+                            if (skill.id == data.skill_id) {
+                                otherSkillTags.push({ id : skill.id, text : skill.text })
+                            }
+                        })
+                    })
+                    this.state.preferredSkillSuggestions.map((skill,index)=>{
+                        response.data.jobsData[0].requiredSkills.preferredSkills.map((data,ind)=>{
+                            if (skill.id == data.skill_id) {
+                                preferredSkillTags.push({ id : skill.id, text : skill.text })
+                            }
+                        })
+                    })
 
                     this.setState({ functionalArea      : functionalArea[0].functionalArea, 
                                     subFunctionalArea   : subFunctionalArea[0].subfunctionalArea,
                                     jobRole             : jobRole[0].jobRole,
                                     jobType             : jobType[0].jobType,
                                     jobTime             : jobTime[0].jobTime,
-                                    jobCategory         : jobCategory[0].jobCategory
+                                    jobCategory         : jobCategory[0].jobCategory,
+                                    primarySkillTags    : primarySkillTags,
+                                    secondarySkillTags  : secondarySkillTags,
+                                    otherSkillTags      : otherSkillTags,
+                                    preferredSkillTags  : preferredSkillTags
                     }) 
-
-
-
-                    if (document.querySelector('#functionalArea option[data-value="'+this.state.functionalarea_id+'"]')) {
-                       
-                    }
                     
                 })
 
@@ -505,7 +458,7 @@ class JobPosting extends Component {
                 minSecExp               :   this.state.minSecExp,
                 otherSkillTags          :   this.state.otherSkillTags,
                 minOtherExp             :   this.state.minOtherExp,
-                preferSkillTags         :   this.state.preferSkillTags,
+                preferredSkillTags      :   this.state.preferredSkillTags,
 
             };
 
@@ -568,7 +521,7 @@ class JobPosting extends Component {
                         minSecExp               :   "",
                         otherSkills             :   "",
                         minOtherExp             :   "",
-                        preferSkills            :   "",
+                        preferredSkills            :   "",
                     });
 
                     this.props.history.push("/job-profile/" + job_id);
@@ -834,32 +787,32 @@ class JobPosting extends Component {
     }
 
 
-    onPreferSkillAddition (tag) {
+    onPreferredAddition (tag) {
         if (tag.id == tag.text) {
             tag.id = "" 
         }
-        this.setState(state => ({ preferSkillTags: [...state.preferSkillTags, tag] }));
+        this.setState(state => ({ preferredSkillTags: [...state.preferredSkillTags, tag] }));
     }
 
-    onPreferSkillClick(index) {
+    onPreferredClick(index) {
         console.log('The tag at index ' + index + ' was clicked');
     }
 
-    onPreferSkillDrag(tag, currPos, newPos) {
-        const preferSkillTags = [...this.state.preferSkillTags];
-        const newTags = preferSkillTags.slice();
+    onPreferredDrag(tag, currPos, newPos) {
+        const preferredSkillTags = [...this.state.preferredSkillTags];
+        const newTags = preferredSkillTags.slice();
 
         newTags.splice(currPos, 1);
         newTags.splice(newPos, 0, tag);
 
         // re-render
-        this.setState({ preferSkillTags: newTags });
+        this.setState({ preferredSkillTags: newTags });
     }
 
-    onPreferSkillDelete (i) {
-        const { preferSkillTags } = this.state;
+    onPreferredDelete (i) {
+        const { preferredSkillTags } = this.state;
         this.setState({
-          preferSkillTags: preferSkillTags.filter((tag, index) => index !== i),
+          preferredSkillTags: preferredSkillTags.filter((tag, index) => index !== i),
         });
     }
 
@@ -1434,17 +1387,17 @@ render(){
 									</div>
 									
 									<div className="col-lg-12 addJobFieldRow text-left">
-										<label htmlFor="preferSkills" className="addjobformLable"> Preferred Skills but not mandatory </label>
-										<div className="input-group col-lg-12 preferSkillsField">
+										<label htmlFor="preferredSkills" className="addjobformLable"> Preferred Skills but not mandatory </label>
+										<div className="input-group col-lg-12 preferredSkillsField">
 											<span className="input-group-addon addJobFormField"> <i className='fa fa-cog'></i> </span>
 												<ReactTags
-                                                    tags={this.state.preferSkillTags}
-                                                    suggestions={this.state.preferSkillSuggestions}
+                                                    tags={this.state.preferredSkillTags}
+                                                    suggestions={this.state.preferredSkillSuggestions}
                                                     delimiters={delimiters}
-                                                    handleDelete={this.onPreferSkillDelete.bind(this)}
-                                                    handleAddition={this.onPreferSkillAddition.bind(this)}
-                                                    handleDrag={this.onPreferSkillDrag.bind(this)}
-                                                    handleTagClick={this.onPreferSkillClick.bind(this)}
+                                                    handleDelete={this.onPreferredDelete.bind(this)}
+                                                    handleAddition={this.onPreferredAddition.bind(this)}
+                                                    handleDrag={this.onPreferredDrag.bind(this)}
+                                                    handleTagClick={this.onPreferredClick.bind(this)}
                                                     />
 										</div>
 									</div>

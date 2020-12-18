@@ -16,8 +16,8 @@ exports.insertJobs = (req, res, next)=>{
 		var functionalarea_id, subfunctionalarea_id, jobcategory_id, jobrole_id, jobtype_id, jobtime_id;
 		var primarySkills   = []
 	    var secondarySkills = [];
-	    var otherSkills = [];
-	    var preferSkills = [];
+	    var otherSkills 	= [];
+	    var preferredSkills = [];
 	    var skill_id; 
 
 		processData();
@@ -59,11 +59,11 @@ exports.insertJobs = (req, res, next)=>{
                     
                 otherSkills.push({ "skill_id" : skill_id })
             }		
-            for (var i = 0 ; i < req.body.preferSkillTags.length; i++) {
-                skill_id = req.body.preferSkillTags[i].id != "" ? req.body.preferSkillTags[i].id
-                                    : await insertSkill(req.body.preferSkillTags[i].text, req.body.user_id)
+            for (var i = 0 ; i < req.body.preferredSkillTags.length; i++) {
+                skill_id = req.body.preferredSkillTags[i].id != "" ? req.body.preferredSkillTags[i].id
+                                    : await insertSkill(req.body.preferredSkillTags[i].text, req.body.user_id)
                     
-                preferSkills.push({ "skill_id" : skill_id })
+                preferredSkills.push({ "skill_id" : skill_id })
             }	
 		const jobsData = new Jobs({
 			
@@ -120,7 +120,7 @@ exports.insertJobs = (req, res, next)=>{
 									"minSecExp"			: req.body.minSecExp,
 									"otherSkills"		: otherSkills,
 									"minOtherExp" 	  	: req.body.minOtherExp,
-									"preferredSkills" 	: preferSkills,
+									"preferredSkills" 	: preferredSkills,
 								},
 			
 			"createdAt" 	: 	new Date(),
