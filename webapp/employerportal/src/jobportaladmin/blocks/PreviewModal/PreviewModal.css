@@ -87,8 +87,9 @@
 	/*background-color: red;*/
 }
 
-.jobDescContent{
+.modalJobDescContent{
 	margin-left: -37px;
+	font-size: 13px;
 }
 
 /*******************************Content Wrapper One********************************/
@@ -111,9 +112,9 @@
 	/*background-color: green;*/
 } 
 
-.contentWrapper1 .profileheading{
+.contentWrapper1 .modalProfileheading{
 	position: absolute;
-	font-size: 21px;
+	font-size: 19px;
 	font-weight: bold;
 	margin-top: 35px;
 	margin-left: 40px;
@@ -173,9 +174,9 @@
 	/*background-color: green;*/
 } 
 
-.contentWrapper2 .profileheading{
+.contentWrapper2 .modalProfileheading{
 	position: absolute;
-	font-size: 21px;
+	font-size: 19px;
 	font-weight: bold;
 	color: var(--main-subheading-font-color);
 	margin-top: -5px;
@@ -213,12 +214,13 @@
 	color: var(--main-subheading-font-color);
 }
 
-.contentWrapper2 .eduSubtitle{
+.contentWrapper2 .modalEduSubtitle{
 	font-family: 'Montserrat-SemiBold';
 }
 
-.contentWrapper2 .eduDuration{
+.contentWrapper2 .modalEduDuration{
 	font-family: 'Montserrat-Regular';
+	font-size: 13px;
 }
 
 .profileContent li:before{
@@ -252,9 +254,9 @@
 	/*background-color: green;*/
 } 
 
-.contentWrapper3 .profileheading{
+.contentWrapper3 .modalProfileheading{
 	position: absolute;
-	font-size: 21px;
+	font-size: 19px;
 	font-weight: bold;
 	color: var(--main-subheading-font-color);
 	margin-top: -5px;
@@ -466,33 +468,39 @@
 	margin-left: 50px;
 }
 
-.rightContentHead{
-	font-size: 28px;
+.rightModalContentHead{
+	font-size: 23px;
 	font-weight: bold;
 	color: var(--main-subheading-font-color);
 	padding-top: 30px;
-	padding-left: 22px;
+	padding-left: 5px;
 	font-family: 'Montserrat-SemiBold';
 }
 
-.rightSideTitle{
-	font-size: 20px;
+.rightSideModalTitle{
+	font-size: 18px;
 	font-weight: bold;
-	padding-left: 25px;
+	padding-left: 5px;
 	padding-top: 7px;
 	color: var(--main-subheading-font-color);
 	font-family: 'Montserrat-SemiBold';
 }
 
-.rightSideSub{
-	padding-left: 25px;
+.rightSideModalSub{
+	padding-left: 5px;
 	padding-top: 2px;
+	margin-left: 2px;
+	font-size: 13px;
 	font-family: 'Montserrat-Regular';
 }
 
-.rightSideImg{
-	height: 300px;
-	margin-left: 30px;
+.rightSideModalSub .rupeeIcon{
+	font-size: 10px;
+}
+
+.rightSideModalImg{
+	height: 270px;
+	margin-left: -18px;
 	margin-top: 330px;
 }
 

@@ -78,44 +78,37 @@ class JobPosting extends Component {
             primarySkills               :   [],
             minPrimExp                  :   "",
             priSkillsArray              :   [],
+            priSkillsArraylist          :   [],
+            
             secondarySkills             :   [],
             minSecExp                   :   "",
             secSkillsArray              :   [],
+            secSkillsArraylist          :   [],
+            
             otherSkills                 :   [],
             minOtherExp                 :   "",
             otherSkillsArray            :   [],
+            otherSkillsArraylist        :   [],
+            
             preferSkills                :   "",
             preferSkillsArray           :   [],
-            priSkillsArraylist          :   [],
-            secSkillsArraylist          :   [],
-            otherSkillsArraylist        :   [],
             preferSkillsArraylist       :   [],
-            submitBtnText               :   "SUBMIT",
+            
             primarySkillTags            :   [],
             primarySkillSuggestions     :   [],
+            
             secondarySkillTags          :   [],
             secondarySkillSuggestions   :   [],
+            
             otherSkillTags              :   [],
             otherSkillSuggestions       :   [],
+            
             preferSkillTags             :   [],
             preferSkillSuggestions      :   [],
+            
+            submitBtnText               :   "SUBMIT",
             value                       :   ""
         }
-
-        this.style = {
-            chips: {
-                color: "white"
-            },
-
-            searchBox: {
-                border: "1px solid #D3950A",
-            },
-
-            multiselectContainer: {
-                backgroundColor: "#242931",
-                color: "white",
-            }
-        };
 
         this.reactTags = React.createRef();
         
@@ -128,6 +121,74 @@ class JobPosting extends Component {
 
     componentDidMount() {
         this.getStates();
+
+        if (this.props.match.params.job_id) {
+            let job_id = this.props.match.params.job_id;
+            Axios.get("/api/jobs/get/one/" + job_id)
+                .then(response => {
+                    console.log("response.data : ", response.data);
+                    this.setState({
+                        job_id                  :   job_id,
+                        jobTitle                :   response.data.jobsData[0].jobBasicInfo.jobTitle,
+                        industry_id             :   response.data.jobsData[0].jobBasicInfo.industry_id,
+                        functionalarea_id       :   response.data.jobsData[0].jobBasicInfo.functionalarea_id,
+                        subfunctionalarea_id    :   response.data.jobsData[0].jobBasicInfo.subfunctionalarea_id,
+                        jobrole_id              :   response.data.jobsData[0].jobBasicInfo.jobrole_id,
+                        gender                  :   response.data.jobsData[0].jobBasicInfo.gender,
+                        workFromHome            :   response.data.jobsData[0].jobBasicInfo.workFromHome,
+                        jobtype_id              :   response.data.jobsData[0].jobBasicInfo.jobtype_id,
+                        jobtime_id              :   response.data.jobsData[0].jobBasicInfo.jobtime_id,
+                        jobcategory_id          :   response.data.jobsData[0].jobBasicInfo.jobcategory_id,
+                        positions               :   response.data.jobsData[0].jobBasicInfo.positions,
+                        jobDesc                 :   response.data.jobsData[0].jobBasicInfo.jobDesc,
+                        lastDateOfAppl          :   response.data.jobsData[0].jobBasicInfo.lastDateOfAppl ? Moment(response.data.jobsData[0].jobBasicInfo.lastDateOfAppl).format("YYYY-MM-DD") : "",
+                        contactPersonName       :   response.data.jobsData[0].jobBasicInfo.contactPersonName,
+                        contactPersonEmail      :   response.data.jobsData[0].jobBasicInfo.contactPersonEmail,
+                        contactPersonPhone      :   response.data.jobsData[0].jobBasicInfo.contactPersonPhone,
+
+                        address                 :   response.data.jobsData[0].location.address,
+                        area                    :   response.data.jobsData[0].location.area,
+                        cityVillage             :   response.data.jobsData[0].location.cityVillage,
+                        district                :   response.data.jobsData[0].location.district,
+                        states                  :   response.data.jobsData[0].location.state,
+                        stateCode               :   response.data.jobsData[0].location.stateCode,
+                        country                 :   response.data.jobsData[0].location.country,
+                        countryCode             :   response.data.jobsData[0].location.countryCode,
+                        pincode                 :   response.data.jobsData[0].location.pincode,
+
+                        minSalary               :   response.data.jobsData[0].ctcOffered.minSalary,
+                        minSalPeriod            :   response.data.jobsData[0].ctcOffered.minSalPeriod,
+                        maxSalary               :   response.data.jobsData[0].ctcOffered.maxSalary,
+                        maxSalPeriod            :   response.data.jobsData[0].ctcOffered.maxSalPeriod,
+
+                        minEducation            :   response.data.jobsData[0].eligibility.minEducation,
+                        minExperience           :   response.data.jobsData[0].eligibility.minExperience,
+
+                        primarySkills           :   response.data.jobsData[0].requiredSkills.primarySkills,
+                        minPrimExp              :   response.data.jobsData[0].requiredSkills.minPrimExp,
+                        
+                        secondarySkills         :   response.data.jobsData[0].requiredSkills.secondarySkills,
+                        minSecExp               :   response.data.jobsData[0].requiredSkills.minSecExp,
+                        
+                        otherSkills             :   response.data.jobsData[0].requiredSkills.otherSkills,
+                        minOtherExp             :   response.data.jobsData[0].requiredSkills.minOtherExp,
+                        
+                        preferSkills            :   response.data.jobsData[0].requiredSkills.preferSkills,
+                        submitBtnText           :   "UPDATE"
+                    })
+
+                    if (response.data.jobsData[0].jobBasicInfo.workFromHome === true) {
+                        document.getElementById("workFromHome").checked = true;
+                    } else {
+                        document.getElementById("workFromHome").checked = false;
+                    }
+                })
+
+                .catch(error => {
+                    Swal.fire("Some error occured while updating job data", error.message, "error");
+                })
+        }
+
         Axios.get("/api/functionalareamaster/get/list")
             .then(response => {
                     this.setState({
@@ -250,7 +311,7 @@ class JobPosting extends Component {
                         minEducation            :   response.data.jobsData[0].eligibility.minEducation,
                         minExperience           :   response.data.jobsData[0].eligibility.minExperience,
 
-                        //primarySkills           :   response.data.jobsData[0].eligibility.primarySkills,
+                        /*primarySkills           :   response.data.jobsData[0].requiredSkills.primarySkills,*/
                         minPrimExp              :   response.data.jobsData[0].requiredSkills.minPrimExp,
                         //secondarySkills         :   response.data.jobsData[0].requiredSkills.secondarySkills,
                         minSecExp               :   response.data.jobsData[0].requiredSkills.minSecExp,

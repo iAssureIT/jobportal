@@ -102,7 +102,7 @@ export default class JobPostProfile extends Component{
 					minEducation 		: 	response.data.jobsData[0].eligibility.minEducation,
 					minExperience 		: 	response.data.jobsData[0].eligibility.minExperience,
 					
-					primarySkills 		: 	response.data.jobsData[0].eligibility.primarySkills,
+					primarySkills 		: 	response.data.jobsData[0].requiredSkills.primarySkills,
 					minPrimExp 			: 	response.data.jobsData[0].requiredSkills.minPrimExp,
 					secondarySkills 	: 	response.data.jobsData[0].requiredSkills.secondarySkills,
 					minSecExp 	        : 	response.data.jobsData[0].requiredSkills.minSecExp,

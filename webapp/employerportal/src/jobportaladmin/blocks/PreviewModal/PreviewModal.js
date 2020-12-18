@@ -50,13 +50,13 @@ export default class PreviewModal extends Component{
                                     <div className="row">
                                       <div className="col-lg-12 contentWrapper1">
                                         <div className="col-lg-12 profileSubContainer">
-                                          <div className="profileheading">
+                                          <div className="modalProfileheading">
                                             Job Description
                                           </div>
                                           <div className="horizontalRightLine diamondBullet"></div>
                                           <div className="DescriptionContainer col-lg-12">
                                             <div className="profileContent">
-                                              <div className="col-lg-12 jobDescContent">
+                                              <div className="col-lg-12 modalJobDescContent">
                                                 <div dangerouslySetInnerHTML = {{ __html : this.props.jobInfo.jobDesc}} />
                                               </div>
                                             </div>
@@ -65,20 +65,20 @@ export default class PreviewModal extends Component{
                                       </div>
                                       <div className="col-lg-12 contentWrapper2">
                                         <div className="col-lg-12 profileSubContainer">
-                                          <div className="profileheading"> 
+                                          <div className="modalProfileheading"> 
                                             Required Education & Experience
                                           </div>
                                           <div className="horizontalRightLine diamondBullet"></div>
                                           <div className="DescriptionContainer col-lg-12">
                                             <div className="profileContent">
                                               <ul className="col-lg-12">
-                                                <li><span className="eduSubtitle">
+                                                <li><span className="modalEduSubtitle">
                                                   Minimum Education Required</span><br/>
-                                                  <span className="eduDuration"> {this.props.jobInfo.minEducation} </span>
+                                                  <span className="modalEduDuration"> {this.props.jobInfo.minEducation} </span>
                                                 </li>
                                                 <li>
                                                   <span className="eduSubtitle"> Minimum Overall Experience </span><br/>
-                                                  <span className="eduDuration"> {this.props.jobInfo.minExperience} </span>
+                                                  <span className="modalEduDuration"> {this.props.jobInfo.minExperience} </span>
                                                 </li>
                                               </ul>
                                             </div>
@@ -87,7 +87,7 @@ export default class PreviewModal extends Component{
                                       </div>
                                       <div className="col-lg-12 contentWrapper3">
                                         <div className="col-lg-12 profileSubContainer">
-                                          <div className="profileheading"> 
+                                          <div className="modalProfileheading"> 
                                             Expected Skills
                                           </div>
                                           <div className="horizontalRightLine diamondBullet"></div>
@@ -240,56 +240,56 @@ export default class PreviewModal extends Component{
                                 </div>
                                 <div className="col-lg-12">
                                   <div className="row">
-                                    <div className="rightContentHead">
+                                    <div className="rightModalContentHead">
                                       Overview
                                     </div>
                                     
-                                    <div className="rightSideTitle">
+                                    <div className="rightSideModalTitle">
                                       Industry
                                     </div>
-                                    <p className="rightSideSub">
+                                    <p className="rightSideModalSub">
                                       {this.props.jobInfo.industry_id}
                                     </p>
                                     
-                                    <div className="rightSideTitle">
+                                    <div className="rightSideModalTitle">
                                       Gender
                                     </div>
-                                    <p className="rightSideSub">
+                                    <p className="rightSideModalSub">
                                       {this.props.jobInfo.gender}
                                     </p>
                                     
-                                    <div className="rightSideTitle">
+                                    <div className="rightSideModalTitle">
                                       Salary
                                     </div>
-                                    <p className="rightSideSub">
-                                      <i className="fa fa-inr"></i> {this.props.jobInfo.minSalary} {this.props.jobInfo.minSalPeriod} To &nbsp;<i className="fa fa-inr"></i> {this.props.jobInfo.maxSalary} {this.props.jobInfo.maxSalPeriod}{/*(Monthly)*/}
+                                    <p className="rightSideModalSub">
+                                      <i className="rupeeIcon fa fa-inr"></i> {this.props.jobInfo.minSalary} {this.props.jobInfo.minSalPeriod} &nbsp;To &nbsp;<i className="rupeeIcon fa fa-inr"></i> {this.props.jobInfo.maxSalary} {this.props.jobInfo.maxSalPeriod}
                                     </p>
                                     
-                                    <div className="rightSideTitle">
+                                    <div className="rightSideModalTitle">
                                       Job Type
                                     </div>
-                                    <p className="rightSideSub">
+                                    <p className="rightSideModalSub">
                                       {this.props.jobInfo.jobtype_id}
                                     </p>
                                     
-                                    <div className="rightSideTitle">
+                                    <div className="rightSideModalTitle">
                                       Funtional Area
                                     </div>
                                     
-                                    <p className="rightSideSub">
+                                    <p className="rightSideModalSub">
                                       {this.props.jobInfo.functionalarea_id}
                                     </p>
                                     
-                                    <div className="rightSideTitle">
-                                      Role
+                                    <div className="rightSideModalTitle">
+                                      Job Role
                                     </div>
-                                    <p className="rightSideSub">
+                                    <p className="rightSideModalSub">
                                       {this.props.jobInfo.jobrole_id}
                                     </p>
 
                                     <div className="col-lg-12">
                                       <div className="row">
-                                        <img src="/images/2.png" className="rightSideImg" alt="not found" />
+                                        <img src="/images/2.png" className="rightSideModalImg" alt="not found" />
                                       </div>
                                     </div>
                                   </div>

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Axios from  'axios';
 import Swal  from  'sweetalert2';
+import Moment from "moment";
 import { connect }        from 'react-redux';
 import { bindActionCreators } from 'redux';
 import  * as mapActionCreator from '../../common/actions/index';
@@ -22,8 +23,6 @@ componentDidMount(){
 	var {mapAction} = this.props;
 	mapAction.filterJobList(selector);
 }
-
-
 
 deleteJob = (event)=>{
 	event.preventDefault();
@@ -50,7 +49,7 @@ deleteJob = (event)=>{
 
 						Swal.fire(
 									'Deleted!',
-									'Job Profile has been deleted successfully!',
+									'Joblist has been deleted successfully!',
 									'success'
 							);
 					}
@@ -88,6 +87,7 @@ deleteJob = (event)=>{
 							this.props.jobList
 							?
 								this.props.jobList.map((elem,index1)=>{
+										console.log("elem =", elem)
 									return(
 										<div className="col-lg-12">
 											<div className="jobListContainer">
@@ -100,7 +100,7 @@ deleteJob = (event)=>{
 																	<li><i className="fa fa-sun-o"></i></li>
 																	<li><i className="fa fa-clock-o"></i></li>
 																</ul>
-																<div className="infoLog"> 15 Days Ago </div>
+																<div className="infoLog"> {Moment(elem.createdAt).startOf('seconds').fromNow()}  </div>
 															</div>
 														</div>
 														<div className="jobListDesignation">
@@ -150,6 +150,7 @@ deleteJob = (event)=>{
 		);
 	}
 }
+
 const mapStateToProps = (state)=>{
     return {
         user_ID     : state.user_ID,  	candidateID   : state.candidateID,
