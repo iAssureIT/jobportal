@@ -36,7 +36,7 @@ class JobPosting extends Component {
             subFunctionalArealist       :   [],
             jobRole                     :   "",
             jobrole_id                  :   "",
-            roleArray                   :   [],
+            jobRoleArray                :   [],
             gender                      :   "Male Only",
             workFromHome                :   false,
             jobType                     :   "",
@@ -151,7 +151,7 @@ class JobPosting extends Component {
         Axios.get("/api/jobrolemaster/get/list")
             .then(response => {
                 this.setState({
-                    roleArray: response.data
+                    jobRoleArray: response.data
                 });
             })
             .catch(error => {
@@ -250,13 +250,13 @@ class JobPosting extends Component {
                         minEducation            :   response.data.jobsData[0].eligibility.minEducation,
                         minExperience           :   response.data.jobsData[0].eligibility.minExperience,
 
-                        primarySkills           :   response.data.jobsData[0].eligibility.primarySkills,
+                        //primarySkills           :   response.data.jobsData[0].eligibility.primarySkills,
                         minPrimExp              :   response.data.jobsData[0].requiredSkills.minPrimExp,
-                        secondarySkills         :   response.data.jobsData[0].requiredSkills.secondarySkills,
+                        //secondarySkills         :   response.data.jobsData[0].requiredSkills.secondarySkills,
                         minSecExp               :   response.data.jobsData[0].requiredSkills.minSecExp,
-                        otherSkills             :   response.data.jobsData[0].requiredSkills.otherSkills,
+                        //otherSkills             :   response.data.jobsData[0].requiredSkills.otherSkills,
                         minOtherExp             :   response.data.jobsData[0].requiredSkills.minOtherExp,
-                        preferSkills            :   response.data.jobsData[0].requiredSkills.preferSkills,
+                        //preferSkills            :   response.data.jobsData[0].requiredSkills.preferSkills,
                         submitBtnText           :   "UPDATE"
                     })
 
@@ -265,23 +265,48 @@ class JobPosting extends Component {
                     } else {
                         document.getElementById("workFromHome").checked = false;
                     }
+
+                    var functionalArea = this.state.functionalArealist.filter((data,index)=>{
+                        if (data._id == this.state.functionalarea_id) { return data}
+                    })
+                    var subFunctionalArea = this.state.subFunctionalArealist.filter((data,index)=>{
+                        if (data._id == this.state.subfunctionalarea_id) { return data}
+                    })
+                    var jobRole = this.state.jobRoleArray.filter((data,index)=>{
+                        if (data._id == this.state.jobrole_id) { return data}
+                    })
+                    var jobType = this.state.jobTypeArray.filter((data,index)=>{
+                        if (data._id == this.state.jobtype_id) { return data}
+                    })
+                    var jobTime = this.state.jobTimeArray.filter((data,index)=>{
+                        if (data._id == this.state.jobtime_id) { return data}
+                    })
+                    var jobCategory = this.state.jobCategoryArray.filter((data,index)=>{
+                        if (data._id == this.state.jobcategory_id) { return data}
+                    })
+
+                    this.state.primarySkillSuggestions.map((skill,index)=>{
+                        //console.log(skill._id)
+                        response.data.jobsData[0].requiredSkills.primarySkills.map((data,ind)=>{
+                            if (skill._id == data.skill_id) {
+                                
+                            }
+                        })
+                    })
+                    //response.data.jobsData[0].requiredSkills.primarySkills.map()
+
+                    this.setState({ functionalArea      : functionalArea[0].functionalArea, 
+                                    subFunctionalArea   : subFunctionalArea[0].subfunctionalArea,
+                                    jobRole             : jobRole[0].jobRole,
+                                    jobType             : jobType[0].jobType,
+                                    jobTime             : jobTime[0].jobTime,
+                                    jobCategory         : jobCategory[0].jobCategory
+                    }) 
+
+
+
                     if (document.querySelector('#functionalArea option[data-value="'+this.state.functionalarea_id+'"]')) {
-                       this.setState({functionalArea: document.querySelector('#functionalArea option[data-value="'+this.state.functionalarea_id+'"]').value}) 
-                    }
-                    if (document.querySelector('#subFunctionalArea option[data-value="'+this.state.subfunctionalarea_id+'"]')) {
-                       this.setState({subFunctionalArea: document.querySelector('#subFunctionalArea option[data-value="'+this.state.subfunctionalarea_id+'"]').value}) 
-                    }
-                    if (document.querySelector('#jobRole option[data-value="'+this.state.jobrole_id+'"]')) {
-                       this.setState({jobRole: document.querySelector('#jobRole option[data-value="'+this.state.jobrole_id+'"]').value}) 
-                    }
-                    if (document.querySelector('#jobType option[data-value="'+this.state.jobtype_id+'"]')) {
-                       this.setState({jobType: document.querySelector('#jobType option[data-value="'+this.state.jobtype_id+'"]').value}) 
-                    }
-                    if (document.querySelector('#jobTime option[data-value="'+this.state.jobtime_id+'"]')) {
-                       this.setState({jobTime: document.querySelector('#jobTime option[data-value="'+this.state.jobtime_id+'"]').value}) 
-                    }
-                    if (document.querySelector('#jobCategory option[data-value="'+this.state.jobcategory_id+'"]')) {
-                       this.setState({jobCategory: document.querySelector('#jobCategory option[data-value="'+this.state.jobcategory_id+'"]').value}) 
+                       
                     }
                     
                 })
@@ -1069,8 +1094,8 @@ render(){
                                                         <div className="input-group col-lg-12">
                                                             <input type="text" list="jobRole" className="form-control addJobFormField" refs="jobRole" id="selectrole" value={this.state.jobRole} name="jobRole"
                                                             onChange={this.onChangeRole.bind(this)} />
-                                                            <datalist name="jobRole" id="jobRole" className="roleArray" >
-                                                                {this.state.roleArray.map((item, key) =>
+                                                            <datalist name="jobRole" id="jobRole" className="jobRoleArray" >
+                                                                {this.state.jobRoleArray.map((item, key) =>
                                                                     <option key={key} value={item.jobRole} data-value={item._id}/>
                                                                 )}
                                                             </datalist>

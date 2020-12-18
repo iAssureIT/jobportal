@@ -158,7 +158,7 @@ class Header extends Component{
                     <FontAwesomeIcon icon="search" />
                     <span className="notificationMessegeText">Employer Settings</span>
                   </div></a>
-                  <a href="job-list"><div className="notificationMessege col-lg-12">
+                  <a href="/job-list"><div className="notificationMessege col-lg-12">
                     <FontAwesomeIcon icon="briefcase" />
                     <span className="notificationMessegeText">Posted Jobs</span>
                   </div></a>
