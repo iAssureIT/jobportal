@@ -15,30 +15,33 @@ export default class PreviewModal extends Component{
       <div id="robust" className="modal fade" role="dialog">
                     <div className="modal-dialog modal-lg">
                       <div className="modal-content">
+                       <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal">&times;</button>
+                      </div>
                         <div className="modal-body">
-                          <div className="jobPostProfileWrapper container-fluid">
+                          <div className="jobProfileModalWrapper container-fluid">
                             <div className="col-lg-9">
-                              <div className="col-lg-12 leftSideMain">
+                              <div className="col-lg-12 modalLeftSideMain">
                                 <div className="row">
-                                  <div className="col-lg-12 leftHeader">
+                                  <div className="col-lg-12 ModalLeftHeader">
                                     <div className="row">
-                                      <div className="col-lg-3 leftImgContainer">
+                                      <div className="col-lg-4 leftImgModalContainer">
                                         <div className="col-lg-12">
-                                          {/*<div className="imgbox col-lg-9">
-                                            <img src="/images/iAssureIT_Logo.svg" className="companyProfileLogo"  alt="not found"/>
-                                          </div>*/}
+                                          <div className="modalImgbox col-lg-9">
+                                            <img src="/images/iAssureIT_Logo.svg" className="modalProfileLogo"  alt="not found"/>
+                                          </div>
                                         </div>  
                                       </div>
-                                      <div className="col-lg-9 imgContent">
-                                        <div className="col-lg-12 contentMain">
+                                      <div className="col-lg-8 modalImgContent">
+                                        <div className="col-lg-12 modalContentMain">
                                           <div className="row">
-                                            <div className="contentHead">
+                                            <div className="modalContentHead">
                                               {this.props.jobInfo.jobTitle}
                                             </div>
-                                            <div className="subContentHead">
+                                            <div className="modalSubContentHead">
                                               <b>iAssure International Technologies Pvt Ltd</b>
                                             </div>
-                                            <div className="locationinfo">
+                                            <div className="modalLocationinfo">
                                               {this.props.jobInfo.address}
                                             </div>
                                           </div>
@@ -228,15 +231,15 @@ export default class PreviewModal extends Component{
                               </div>
                             </div>
                             <div className="col-lg-3">
-                              <div className="col-lg-12 rightSideMain">
+                              <div className="col-lg-12 ModalRightSideMain">
                                 <div className="row">
-                                  {/*<div className="rightSideHeader">
+                                  {<div className="ModalRightSideHeader">
                                     <div className="col-lg-12">
                                       <div className="row">
-                                        <img src="/images/6.png" className="mapImg" alt="not found" />
+                                        <img src="/images/6.png" className="modalMapImg" alt="not found" />
                                       </div>
                                     </div>
-                                  </div>*/}
+                                  </div>}
                                 </div>
                                 <div className="col-lg-12">
                                   <div className="row">
@@ -299,7 +302,7 @@ export default class PreviewModal extends Component{
                           </div>
                         </div>
                         <div className="modal-footer">
-                          <button type="button" className="btn btn-danger" data-dismiss="modal">
+                          <button type="button" className="modalbtn" data-dismiss="modal">
                             close
                           </button> 
                         </div>

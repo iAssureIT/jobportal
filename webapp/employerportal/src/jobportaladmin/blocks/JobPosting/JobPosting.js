@@ -338,14 +338,63 @@ class JobPosting extends Component {
         var status = true;
 
         if (this.state.jobTitle.length <= 0) {
-            document.getElementById("jobTitleError").innerHTML = "Enter job title";
+            document.getElementById("jobTitleError").innerHTML = "Enter Job Title";
             status = false;
         } else {
             document.getElementById("jobTitleError").innerHTML = "";
             status = true;
         }
+        if (this.state.address.length <= 0) {
+            document.getElementById("addressError").innerHTML = "Enter Job Location";
+            status = false;
+        } else {
+            document.getElementById("addressError").innerHTML = "";
+            status = true;
+        }
+        if (this.state.states.length <= 0) {
+            document.getElementById("statesError").innerHTML = "Select State";
+            status = false;
+        } else {
+            document.getElementById("statesError").innerHTML = "";
+            status = true;
+        }
+        if (this.state.cityVillage.length <= 0) {
+            document.getElementById("cityVillageError").innerHTML = "Enter City";
+            status = false;
+        } else {
+            document.getElementById("cityVillageError").innerHTML = "";
+            status = true;
+        }
+        if (this.state.district.length <= 0) {
+            document.getElementById("districtError").innerHTML = "Enter District";
+            status = false;
+        } else {
+            document.getElementById("districtError").innerHTML = "";
+            status = true;
+        }
+        if (this.state.pincode.length <= 0) {
+            document.getElementById("pincodeError").innerHTML = "Enter Pincode";
+            status = false;
+        } else {
+            document.getElementById("pincodeError").innerHTML = "";
+            status = true;
+        }
+        if (this.state.functionalarea_id.length <= 0) {
+            document.getElementById("functionalAreaError").innerHTML = "Select or enter Functional Area";
+            status = false;
+        } else {
+            document.getElementById("functionalAreaError").innerHTML = "";
+            status = true;
+        }
+        if (this.state.subfunctionalarea_id.length <= 0) {
+            document.getElementById("subFunctionalAreaError").innerHTML = "Select or enter Sub-Functional Area";
+            status = false;
+        } else {
+            document.getElementById("subFunctionalAreaError").innerHTML = "";
+            status = true;
+        }
         if (this.state.jobRole.length <= 0) {
-            document.getElementById("jobRoleError").innerHTML = "Enter job role";
+            document.getElementById("jobRoleError").innerHTML = "Enter Job Role";
             status = false;
         } else {
             document.getElementById("jobRoleError").innerHTML = "";
@@ -923,7 +972,7 @@ render(){
 								
 								<div className="addJobMainHead col-lg-12">
 									<i className="fa fa-info"></i> 
-									<span className="labelLeftPadding"> Basic Info </span>
+									<div className="labelLeftPadding"> Basic Info </div>
 								</div>
 								
                                 <form id="addJob" autoComplete="off">
@@ -935,7 +984,7 @@ render(){
 														Job Title
 														<span className="asterisk"> &#42; </span>
 														<div href="#" data-tip data-for='jobTitleTooltip' className="pull-right">
-															<i title="Please enter designation name of your profile" className="fa fa-question-circle"></i>
+															<i title="Please enter job title" className="fa fa-question-circle"></i>
 														</div>
 													</label>
 												</div>
@@ -1001,6 +1050,7 @@ render(){
 														)}
 		                                      		</PlacesAutocomplete>
 												</div>
+                                                <span id="addressError" className="errorMsgJobPost"></span>
 											</div>
 										</div>
 									</div>
@@ -1026,7 +1076,8 @@ render(){
 															: ''
 														}
 													</select>
-												</div>	
+												</div>
+                                                <span id="statesError" className="errorMsgJobPost"></span>	
 											</div>	
 											
 											<div className="col-lg-3">
@@ -1034,8 +1085,9 @@ render(){
 													<label className="addjobformLable col-lg-12"> City <span className="asterisk">&#42;</span> </label>
 												</div>	
 												<div className="input-group"> 
-													<input type="text" className="form-control addJobFormField addJobState" value={this.state.cityVillage} ref="cityVillage" name="cityVillage" onChange={this.handleChange}/>
+													<input type="text" className="form-control addJobFormField addJobState" ref="cityVillage" id="cityVillage" name="cityVillage" value={this.state.cityVillage} onChange={this.handleChange}/>
 												</div>
+                                                <span id="cityVillageError" className="errorMsgJobPost"></span>
 											</div>
 											
 											<div className="col-lg-3">
@@ -1043,8 +1095,9 @@ render(){
 													<label className="addjobformLable col-lg-12"> District <span className="asterisk">&#42;</span> </label>
 												</div>
 												<div className="input-group"> 
-													<input type="text" className="form-control addJobFormField addJobState" value={this.state.district} ref="district" name="district" onChange={this.handleChange}/>
+													<input type="text" className="form-control addJobFormField addJobState" ref="district" id="district" name="district" value={this.state.district} onChange={this.handleChange}/>
 												</div>
+                                                <span id="districtError" className="errorMsgJobPost"></span>
 											</div>
 											
 											<div className="col-lg-3">
@@ -1052,8 +1105,9 @@ render(){
 													<label className="addjobformLable col-lg-12"> Pincode <span className="asterisk">&#42;</span> </label>
 												</div>
 												<div className="input-group"> 
-													<input type="text" className="form-control addJobFormField addJobState" value={this.state.pincode} ref="pincode" name="pincode" onChange={this.keyPressNumber.bind(this)}/>
+													<input type="text" className="form-control addJobFormField addJobState" value={this.state.pincode} ref="pincode" id="pincode" name="pincode" onChange={this.keyPressNumber.bind(this)}/>
 												</div>
+                                                <span id="pincodeError" className="errorMsgJobPost"></span>
 											</div>
 										</div>
 									</div>
@@ -1066,15 +1120,15 @@ render(){
 												<div className="input-group">
 													<span className="input-group-addon addJobFormField"><i className="fa fa-briefcase"></i></span> 
 														<input type="text" list="functionalArea" className="form-control addJobFormField" refs="functionalArea" 
-                                                        id="selectFunctionalArea" value={this.state.functionalArea} data-value={this.state.functionalarea_id} name="functionalArea"
+                                                         name="functionalArea" id="selectFunctionalArea" value={this.state.functionalArea} data-value={this.state.functionalarea_id}
 														onChange={this.onChangeFunctionalArea.bind(this)} />
 														<datalist name="functionalArea" id="functionalArea" className="functionalArealist" >
 														    {this.state.functionalArealist.map((item, key) =>
 														        <option key={key} value={item.functionalArea} data-value={item._id}/>
 														    )}
 														</datalist>
-													<span id="functionalAreaError" className="errorMsgJobPost"></span>
-												</div>	
+												</div>
+                                                <span id="functionalAreaError" className="errorMsgJobPost"></span>
 											</div>			
 											
 											<div className="col-lg-6">
@@ -1089,6 +1143,7 @@ render(){
                                                             )}
                                                         </datalist>
 												</div>
+                                                <span id="subFunctionalAreaError" className="errorMsgJobPost"></span>
 											</div>
 										</div>
 									</div>
@@ -1099,7 +1154,7 @@ render(){
 												<div className="row">
 													<label htmlFor="jobRole" className="addjobformLable col-lg-12"> Role <span className="asterisk">&#42;</span>
 														<div href="#" data-tip data-for='jobTitleTooltip' className="pull-right">
-															<i title="Please enter your role" className="fa fa-question-circle"></i>
+															<i title="Please enter job role" className="fa fa-question-circle"></i>
 														</div>
 													</label>
 												</div>
@@ -1219,9 +1274,9 @@ render(){
 
 									<div className="col-lg-12 addJobFieldRow"> <div className="addJobFormHr col-lg-12"></div> </div>	
 									
-									<div className="addJobSubHead col-lg-12">
+									<div className="addJobSubHead addJobSubHeadSalary col-lg-12">
 										<i className="fa fa-rupee salaryIcon"></i>
-										<span className="labelLeftPadding"> Salary </span>
+										<div className="labelLeftPadding"> Salary </div>
 									</div>
 									
 									<div className="col-lg-12 addJobFieldRow text-left">
@@ -1274,7 +1329,7 @@ render(){
 									
 									<div className="col-lg-12 addJobSubHead">
 										<i className="fa fa-book"></i>
-										<span className="labelLeftPadding"> Required Education & Experience </span>
+										<div className="labelLeftPadding"> Required Education & Experience </div>
 									</div>
 									
 									<div className="col-lg-12 addJobFieldRow text-left">
@@ -1299,9 +1354,9 @@ render(){
 									
 									<div className="col-lg-12 addJobFieldRow"> <div className="addJobFormHr col-lg-12"> </div> </div>
 									
-									<div className="col-lg-12 addJobSubHead">
+									<div className="col-lg-12 addJobSubHead addJobSubHeadSkills">
 										<i className='fa fa-cog'> </i> 
-										<span className="labelLeftPadding"> Expected Skills </span>
+										<div className="labelLeftPadding"> Expected Skills </div>
 									</div>
 									
 									<div className="col-lg-12 addJobFieldRow text-left">
@@ -1406,7 +1461,7 @@ render(){
 									
 									<div className="addJobMainHead col-lg-12">
 										<i className="fa fa-info"> </i> 
-										<span className="labelLeftPadding"> Contact Info </span>
+										<div className="labelLeftPadding"> Contact Info </div>
 									</div>
 									<div className="col-lg-12 addJobFieldRow text-left">
 										<div className="row">
@@ -1446,7 +1501,7 @@ render(){
 
 									<div className="addJobSubHead col-lg-12">
 										<i className="fa fa-briefcase"> </i>
-										<span className="labelLeftPadding"> Job Description </span>
+										<div className="labelLeftPadding"> Job Description </div>
 									</div>
 									
 									<div className="description text-left col-lg-12">
