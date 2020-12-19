@@ -8,10 +8,9 @@ api/node_modules
 webapp/adminportal/.env
 webapp/website/.env
 webapp/employerportal/.env
-<<<<<<< Updated upstream
-=======
 webapp/employerportal/.eslintcache
 webapp/adminportal/.eslintcache
->>>>>>> Stashed changes
 api/nodemon.js
 webapp/adminportal/.eslintcache
+
+

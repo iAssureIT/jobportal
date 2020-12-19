@@ -888,11 +888,11 @@ render(){
 
                                 <div className="addJobMainHead col-lg-12">
                                     <i className="fa fa-info"></i> 
-                                    <span className="labelLeftPadding"> Add Corporate </span>
+                                    <span className="labelLeftPadding"> Add Company </span>
                                 </div>
 
                                 <div className="col-lg-6">
-                                    <label htmlFor="corporate" className="addjobformLable"> Corporate Name <span className="asterisk">&#42;</span> </label>
+                                    <label htmlFor="corporate" className="addjobformLable"> Company Name <span className="asterisk">&#42;</span> </label>
                                     <div className="input-group">
                                         <span className="input-group-addon addJobFormField"><i className="fa fa-briefcase"></i></span> 
                                             <input type="text" list="corporate" className="form-control addJobFormField" refs="corporate" id="selectCorporate" value={this.state.corporate} name="corporate"

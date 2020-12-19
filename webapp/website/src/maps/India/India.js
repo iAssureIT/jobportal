@@ -43,24 +43,20 @@ class India extends Component{
 		var {mapAction} = this.props;
 
 		mapAction.setMapSelectedState(stateName);
-		window.location.href = routeName
-		//this.props.history.push(routeName);
+		//window.location.href = routeName
+		this.props.history.push(routeName);
 	}
 	render(){
 		return(
 			<section className="mapWrapper">
 				<div className="india">
-					<div className="kashmir classHover">
-						<img src="Maps/India/Kashmir.png" className="img-responsive" onClick={e => this.onStateClick("Jammu and Kashmir")} onMouseOver={e => (e.currentTarget.src = "/Maps/India/Kashmir1.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/India/Kashmir.png")}/>
-						<span className="kashmirText mapTextLabel text-capitalize">Jammu and Kashmir</span>
-						<span className="kashmirNumber mapCountLabel text-center">{this.search('Jammu and Kashmir')}</span>
+					
+					<div className="jammuKashmir classHover">
+						<img src="Maps/India/Jammu_Kashmir.png" className="img-responsive "  onClick={e => this.onStateClick("Jammu And Kashmir")} onMouseOver={e => (e.currentTarget.src = "/Maps/India/Jammu_Kashmir_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/India/Jammu_Kashmir.png")}/>
+						<span className="jammuKashmirText  mapTextLabel text-capitalize">Jammu and Kashmir</span>
+						<span className="jammuKashmirNumber mapCountLabel text-center">{this.search('Jammu and Kashmir')}</span>
 					</div>
 
-					<div className="ladakh classHover">
-						<img src="Maps/India/Ladakh.png" className="img-responsive "  onClick={e => this.onStateClick("kashmir")} onMouseOver={e => (e.currentTarget.src = "/Maps/India/Ladakh1.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/India/Ladakh.png")}/>
-						<span className="ladakhText  mapTextLabel text-capitalize">ladakh</span>
-						<span className="ladakhNumber mapCountLabel text-center">{this.search('ladakh')}</span>
-					</div>
 
 					<div className="punjab classHover">
 						<img src="Maps/India/Punjab.png" className="img-responsive "  onClick={e => this.onStateClick("Punjab")} onMouseOver={e => (e.currentTarget.src = "/Maps/India/Punjab1.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/India/Punjab.png")}/>

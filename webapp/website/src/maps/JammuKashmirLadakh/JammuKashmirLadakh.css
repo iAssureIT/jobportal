@@ -1,30 +1,4 @@
-@font-face {
-  font-family:'Montserrat-Bold';
-  src: url('/fonts/Montserrat/Montserrat-Bold.ttf');
-}
 
-.mapTextLabel{
-	font-size: 10px;
-	font-family: 'Montserrat-Regular';
-	color: var(--main-txt-color);
-}
-
-.mapCountLabel{
-	font-size: 11px;
-	font-family: 'Montserrat-Regular';
-	color: var(--main-txt-color);
-}
-
-.classHover:hover .mapTextLabel{
-	font-size: 12px;
-	font-family: 'Montserrat-Bold';
-	z-index: 1;
-}
-
-.classHover:hover .mapCountLabel{
-	font-size: 16px;
-	font-family: 'Montserrat-Bold';
-}
 .jammuAndKashmir{
 	position: absolute;
 	top: 100px;
@@ -32,26 +6,26 @@
 }
 .jammuAndKashmirText{
 	position: absolute;
-	top: 100px;
-	left: 20px;
+	top: 45%;
+	left: 45%;
 }
 .jammuAndKashmirNumber{
 	position: absolute;
-	top: 100px;
-	left: 20px;
+	top: 50%;
+	left: 45%;
 }
-.ladakhJK{
+.ladakh{
 	position: absolute;
 	top: 203px;
     left: 329px;
 }
-.ladakhJKText{
+.ladakhText{
 	position: absolute;
-	top: 203px;
-    left: 329px;
+	top: 45%;
+	left: 45%;
 }
-.ladakhJKNumber{
+.ladakhNumber{
 	position: absolute;
-	top: 203px;
-    left: 329px;
+	top: 50%;
+	left: 45%;
 }
