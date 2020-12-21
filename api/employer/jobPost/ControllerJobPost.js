@@ -279,25 +279,39 @@ exports.getJob = (req,res,next)=>{
 
 	Jobs.aggregate([
         {$match:{"_id": ObjectID(req.params.job_id)} },
-        
         {$lookup:{
-                   from: "functionalareamaster",
-                   localField: "jobBasicInfo.functionalArea",
-                   foreignField: "_id",
-                   as: "functionalAreas" } 
+                   from: "entitymasters", 		localField: "company_id",
+                   foreignField: "_id",		as: "employer" } 
         },
         {$lookup:{
-                   from: "subfunctionalareamaster",
-                   localField: "jobBasicInfo.subFunctionalArea",
-                   foreignField: "_id",
-                   as: "subFunctionalAreas" } 
+                   from: "industrymasters", 		localField: "jobBasicInfo.industry_id",
+                   foreignField: "_id",		as: "industry" } 
+        },
+        {$lookup:{
+                   from: "functionalareamasters",	localField: "jobBasicInfo.functionalarea_id",
+                   foreignField: "_id",		as: "functionalArea" } 
+        },
+        {$lookup:{
+                   from: "subfunctionalareamasters",	localField: "jobBasicInfo.subfunctionalarea_id",
+                   foreignField: "_id",		as: "subFunctionalArea" } 
          },   
          {$lookup:{
-                   from: "jobtypemaster",
-                   localField: "jobBasicInfo.jobType",
-                   foreignField: "_id",
-                   as: "jobTypes" } 
+                   from: "jobrolemasters",			localField: "jobBasicInfo.jobrole_id",
+                   foreignField: "_id", 	as: "jobRole" } 
+         },
+         {$lookup:{
+                   from: "jobtypemasters",			localField: "jobBasicInfo.jobtype_id",
+                   foreignField: "_id",		as: "jobType" } 
+         },
+         {$lookup:{
+                   from: "jobtimemasters",			localField: "jobBasicInfo.jobtime_id",
+                   foreignField: "_id",		as: "jobTime" } 
+         },
+         {$lookup:{
+                   from: "jobcategorymasters",			localField: "jobBasicInfo.jobcategory_id",
+                   foreignField: "_id",		as: "jobCategory" } 
          }
+
          ])
     	.exec()
 		
@@ -318,11 +332,13 @@ exports.getJob = (req,res,next)=>{
 }
 
 exports.getJobList = (req,res,next)=>{
-	var selector = {}; 
-	var industry_ids = [];
-    var funarea_ids = [];
+	var selector 		= {}; 
+	var industry_ids 	= [];
+    var funarea_ids 	= [];
+    var subfunarea_ids 	= [];
+    var jobroles_ids 	= [];
 
-    selector['$and']=[];
+    selector['$and'] 	= [];
     selector["$and"].push({ "location.countryCode" :  req.body.countryCode   })
    	
 
@@ -332,11 +348,23 @@ exports.getJobList = (req,res,next)=>{
     	})
     	selector["$and"].push({ "jobBasicInfo.industry_id" : { $in: industry_ids } });
     }
-    if (req.body.funarea_id) {
-    	req.body.funarea_id.map(elem => {
+    if (req.body.functionalArea_id) {
+    	req.body.functionalArea_id.map(elem => {
     		funarea_ids.push(ObjectID(elem.id))
     	})
     	selector["$and"].push({ "jobBasicInfo.functionalarea_id" : { $in: funarea_ids } });
+    }
+    if (req.body.subfunctionalArea_id) {
+    	req.body.subfunctionalArea_id.map(elem => {
+    		subfunarea_ids.push(ObjectID(elem.id))
+    	})
+    	selector["$and"].push({ "jobBasicInfo.subfunctionalarea_id" : { $in: subfunarea_ids } });
+    }
+    if (req.body.jobRoles_id) {
+    	req.body.jobRoles_id.map(elem => {
+    		jobroles_ids.push(ObjectID(elem.id))
+    	})
+    	selector["$and"].push({ "jobBasicInfo.jobrole_id" : { $in: jobroles_ids } });
     }
     console.log(JSON.stringify(selector))
 
@@ -512,13 +540,13 @@ exports.mapwiseJobs = (req, res, next)=>{
     	})
     	selector["$and"].push({ "jobBasicInfo.industry_id" : { $in: industry_ids } });
     }
-    if (req.body.funarea_id) {
-    	req.body.funarea_id.map(elem => {
+    if (req.body.functionalArea_id) {
+    	req.body.functionalArea_id.map(elem => {
     		funarea_ids.push(ObjectID(elem.id))
     	})
     	selector["$and"].push({ "jobBasicInfo.functionalarea_id" : { $in: funarea_ids } });
     }
-    console.log(JSON.stringify(selector))
+    //console.log(JSON.stringify(selector))
 
     Jobs.aggregate([
     	{ $match 	: selector },
@@ -554,8 +582,8 @@ exports.functonalAreaJobs = (req, res, next)=>{
     	})
     	selector["$and"].push({ "jobBasicInfo.industry_id" : { $in: industry_ids } });
     }
-    if (req.body.funarea_id) {
-    	req.body.funarea_id.map(elem => {
+    if (req.body.functionalArea_id) {
+    	req.body.functionalArea_id.map(elem => {
     		funarea_ids.push(ObjectID(elem.id))
     	})
     	selector["$and"].push({ "jobBasicInfo.functionalarea_id" : { $in: funarea_ids } });
@@ -599,8 +627,8 @@ exports.subfunctionalAreaJobs = (req, res, next)=>{
     	})
     	selector["$and"].push({ "jobBasicInfo.industry_id" : { $in: industry_ids } });
     }
-    if (req.body.funarea_id) {
-    	req.body.funarea_id.map(elem => {
+    if (req.body.functionalArea_id) {
+    	req.body.functionalArea_id.map(elem => {
     		funarea_ids.push(ObjectID(elem.id))
     	})
     	selector["$and"].push({ "jobBasicInfo.functionalarea_id" : { $in: funarea_ids } });
@@ -642,8 +670,8 @@ exports.industrialJobs = (req, res, next)=>{
     	})
     	selector["$and"].push({ "jobBasicInfo.industry_id" : { $in: industry_ids } });
     }
-    if (req.body.funarea_id) {
-    	req.body.funarea_id.map(elem => {
+    if (req.body.functionalArea_id) {
+    	req.body.functionalArea_id.map(elem => {
     		funarea_ids.push(ObjectID(elem.id))
     	})
     	selector["$and"].push({ "jobBasicInfo.functionalarea_id" : { $in: funarea_ids } });

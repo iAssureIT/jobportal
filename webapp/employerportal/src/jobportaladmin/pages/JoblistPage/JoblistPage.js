@@ -47,7 +47,7 @@ class JoblistPage extends Component{
 	render(){
 		return(
   		<div className="ViewBodyWrapper">
-          <div className="col-lg-3" style={{"margin-top": "30px"}}>
+          <div className="col-lg-3" style={{"marginTop": "30px"}}>
             <div className="col-lg-12">
               <div className='row'>
                 <LeftSideFilters />

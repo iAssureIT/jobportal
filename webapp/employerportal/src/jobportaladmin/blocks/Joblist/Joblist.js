@@ -87,9 +87,8 @@ deleteJob = (event)=>{
 							this.props.jobList
 							?
 								this.props.jobList.map((elem,index1)=>{
-										console.log("elem =", elem)
 									return(
-										<div className="col-lg-12">
+										<div className="col-lg-12" key={index1}>
 											<div className="jobListContainer">
 												<div className="col-lg-12">
 													<div className="col-lg-11 jobListLeftContent">

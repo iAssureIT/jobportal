@@ -329,9 +329,6 @@ class JobPosting extends Component {
                     Swal.fire("Some error occured while updating job data", error.message, "error");
                 })
         }
-
-        
-
     }
 
     validateForm = () => {

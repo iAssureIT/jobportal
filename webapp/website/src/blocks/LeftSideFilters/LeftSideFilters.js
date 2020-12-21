@@ -19,11 +19,7 @@ class LeftSideFilters extends Component{
     this.state = {
 
       allIndustries         : [],
-      inputIndustry         : [],
-
       allFunctionalAreas    : [],
-      inputSector           : [],
-
       allRoles              : [],
       inputRole             : [],
 
@@ -92,62 +88,46 @@ class LeftSideFilters extends Component{
   
 
  componentDidMount(){
-  let allIndustries = [];
-  let allFunctionalAreas = [];
-  Axios.get("/api/industrymaster/get/list")
+  let allIndustries       = [];
+  let allFunctionalAreas  = [];
+  let allRoles            = [] 
+      Axios.get("/api/industrymaster/get/list")
       .then(response => {
-        this.setState({inputIndustry : response.data});
         
-        this.state.inputIndustry!=null && this.state.inputIndustry.length > 0 
-        ?
-          this.state.inputIndustry.map((elem,index)=>{
-            
-            allIndustries.push({industry:elem.industry,id:elem._id})
-            this.setState({allIndustries:allIndustries})
-            
-             
+          response.data.map((elem,index)=>{
+            allIndustries.push({industry:elem.industry,id:elem._id})             
           })
-        :
-          this.state.allIndustries.push("select");
+          this.setState({allIndustries:allIndustries})
+            
       })
       .catch(error=>{
-        Swal.fire("Error while getting  inputIndustry List data",error.message,'error');
+        Swal.fire("Error while getting  industries",error.message,'error');
       })
 
 
       Axios.get("/api/functionalareamaster/get/list")
       .then(response => {
-        this.setState({inputSector : response.data});
-        this.state.inputSector!=null && this.state.inputSector.length > 0 
-        ?
-          this.state.inputSector.map((elem,index)=>{
+          response.data.map((elem,index)=>{
             
             allFunctionalAreas.push({functionalArea:elem.functionalArea,id:elem._id})
-            this.setState({allFunctionalAreas:allFunctionalAreas})
             
           })
-        :
-          this.state.allFunctionalAreas.push("select");
+          this.setState({allFunctionalAreas:allFunctionalAreas})
       })
       .catch(error=>{
-        Swal.fire("Error while getting inputSector List data",error.message,'error');
+        Swal.fire("Error while getting functional areas",error.message,'error');
       })
 
       Axios.get("/api/jobrolemaster/get/list")
       .then(response => {
-        this.setState({inputRole : response.data});
-        this.state.inputRole!=null && this.state.inputRole.length > 0 
-        ?
-          this.state.inputRole.map((elem,index)=>{
+        response.data.map((elem,index)=>{
             
-            this.state.allRoles.push(elem.jobRole);
-            
-          })
-        :
-          this.state.allRoles.push("select");
+            allRoles.push({jobRole : elem.jobRole, id: elem._id});
+        })
+        this.setState({allRoles:allRoles})
       })
       .catch(error=>{
-        Swal.fire("Error while getting inputRole List data",error.message,'error');
+        Swal.fire("Error while getting job roles",error.message,'error');
       })
   }
   onSelect(selectedList, selectedItem) {
