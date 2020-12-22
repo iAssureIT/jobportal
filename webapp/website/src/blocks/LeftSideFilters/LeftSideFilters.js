@@ -150,17 +150,21 @@ class LeftSideFilters extends Component{
 
     
     if (filterType === 'industry') {
-      selecteditems.map((elem,index)=>{
-        industry_ids.push(elem.id);
-      })
-      selector.industry_id = selecteditems;
+      if (selecteditems.length > 0) {
+        selecteditems.map((elem,index)=>{
+          industry_ids.push(elem.id);
+        })
+        selector.industry_id = selecteditems;
+      }
     }
 
     if (filterType === 'functionalArea') {
-      selecteditems.map((elem,index)=>{
-        functionalArea_ids.push(elem.id);
-      })
-      selector.functionalArea_id = selecteditems;
+      if (selecteditems.length > 0) {
+        selecteditems.map((elem,index)=>{
+          functionalArea_ids.push(elem.id);
+        })
+        selector.functionalArea_id = selecteditems;
+      }
     }
 
     this.setState({ selector: selector },()=>{

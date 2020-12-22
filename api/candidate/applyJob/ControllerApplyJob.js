@@ -47,9 +47,9 @@ exports.applyJob = (req,res,next)=>{
                 var appliedItems = {
                         'jobID'         : req.body.jobID,
                         'employerID'    : req.body.employerID,
-                        'appliedDate'   : new Date(req.body.appliedDate),
+                        'appliedDate'   : new Date(),
                         'status'        : req.body.status,
-                        'applicationViewed' : 0
+                        'applicationViewed' : false
                     }
                 const applyjob = new ApplyJob({
                     _id                   : new mongoose.Types.ObjectId(),                    
@@ -117,6 +117,29 @@ exports.appliedJobCount = (req,res,next)=>{
             "localField": "appliedItems.jobID",
             "foreignField": "_id"
         }},
+            
+    ])
+    .exec()
+    .then(data=>{
+        res.status(200).json(data);
+    })
+    .catch(err =>{
+        res.status(500).json({
+            error: err
+        });
+    });
+};
+
+//candidatesAppliedToJob
+exports.candidatesAppliedToJob = (req,res,next)=>{
+    ApplyJob.aggregate([
+        { "$match" : { "appliedItems.jobID" : ObjectId(req.body.jobID) } },
+        { "$lookup": {
+            "from": "candidatemasters",
+            "as": "candidate",
+            "localField": "candidateID",
+            "foreignField": "_id"}
+        }
             
     ])
     .exec()

@@ -9,6 +9,8 @@ router.post('/post', ControllerApplyJob.applyJob);
 
 router.get('/get/candidateAppliedJobList/:candidateID',ControllerApplyJob.getCandidateAppliedJobList);
 
+router.post('/get/candidatesAppliedToJob',ControllerApplyJob.candidatesAppliedToJob);
+
 router.get('/get/appliedJobCount/:candidateID',ControllerApplyJob.appliedJobCount);
 
 //router.delete('/delete/:wishlistID',wishlistsController.delete_wishlist);

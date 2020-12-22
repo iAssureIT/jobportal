@@ -688,7 +688,28 @@ exports.deleteCertification = (req,res,next)=>{
         });
 };
 exports.getCandidateList = (req,res,next)=>{
-    CandidateProfile.find({})
+    //CandidateProfile.find({})
+    CandidateProfile.aggregate([
+        {$lookup:{
+                   from: "addresstypemasters",
+                   localField: "address.addressType",
+                   foreignField: "_id",
+                   as: "addressType" } 
+        },
+        {$lookup:{
+                   from: "qualificationlevelmasters",
+                   localField: "academics.qualificationLevel",
+                   foreignField: "_id",
+                   as: "qualificationlevel" } 
+         },   
+         {$lookup:{
+                   from: "qualificationmasters",
+                   localField: "academics.qualification",
+                   foreignField: "_id",
+                   as: "qualification" } 
+         }
+         
+         ])
     .exec()
     .then(data=>{
         res.status(200).json(data);

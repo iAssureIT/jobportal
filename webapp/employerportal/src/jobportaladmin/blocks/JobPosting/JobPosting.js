@@ -103,8 +103,9 @@ class JobPosting extends Component {
             otherSkillTags              :   [],
             otherSkillSuggestions       :   [],
             
-            preferredSkillTags          :   [],
-            preferredSkillSuggestions   :   [],
+            preferredSkillTags             :   [],
+            preferredSkillSuggestions      :   [],
+
             
             submitBtnText               :   "SUBMIT"
         }
@@ -372,13 +373,13 @@ class JobPosting extends Component {
             document.getElementById("districtError").innerHTML = "";
             status = true;
         }
-        if (this.state.pincode.length <= 0) {
+        /*if (this.state.pincode.length <= 0) {
             document.getElementById("pincodeError").innerHTML = "Enter Pincode";
             status = false;
         } else {
             document.getElementById("pincodeError").innerHTML = "";
             status = true;
-        }
+        }*/
         if (this.state.functionalarea_id.length <= 0) {
             document.getElementById("functionalAreaError").innerHTML = "Select or enter Functional Area";
             status = false;
@@ -664,6 +665,7 @@ class JobPosting extends Component {
 
         geocodeByAddress(address)
             .then((results) => {
+                console.log(results)
                 for (var i = 0; i < results[0].address_components.length; i++) {
                     for (var b = 0; b < results[0].address_components[i].types.length; b++) {
                         switch (results[0].address_components[i].types[b]) {
@@ -919,7 +921,6 @@ class JobPosting extends Component {
         }else{ jobrole_id = "" }
 
         this.setState({ jobrole_id : jobrole_id },()=>{
-            console.log(this.state)
         });  
         
     }
@@ -1076,20 +1077,8 @@ render(){
 												    <label htmlFor="states" className="addjobformLable col-lg-12"> State <span className="asterisk">&#42;</span> </label>
                                                 </div>
 												<div className="input-group"> 
-													<select className="form-control addJobFormField"  id="states" ref="states" value={this.state.states} name="states" onChange={this.handleChangeState.bind(this)} >
-														<option hidden>-- Select --</option>
-														{
-															this.state.stateArray && this.state.stateArray.length > 0 
-															?
-																this.state.stateArray.map((stateData, index) => {
-																													return(
-																																<option key={index} statecode={stateData.stateCode}>{this.camelCase(stateData.stateName)}</option>
-																															);
-																												}
-																						) 
-															: ''
-														}
-													</select>
+                                                    <input type="text" className="form-control addJobFormField addJobState" ref="states" id="states" name="states" value={this.state.states} onChange={this.handleChange}/>
+													
 												</div>
                                                 <span id="statesError" className="errorMsgJobPost"></span>	
 											</div>	

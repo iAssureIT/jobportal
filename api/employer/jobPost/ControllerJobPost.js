@@ -341,7 +341,10 @@ exports.getJobList = (req,res,next)=>{
     selector['$and'] 	= [];
     selector["$and"].push({ "location.countryCode" :  req.body.countryCode   })
    	
-
+    if (req.body.company_id) {
+    	
+    	selector["$and"].push({ "jobBasicInfo.company_id" : req.body.company_id});
+    }
     if (req.body.industry_id) {
     	req.body.industry_id.map(elem => {
     		industry_ids.push(ObjectID(elem.id))
@@ -366,11 +369,16 @@ exports.getJobList = (req,res,next)=>{
     	})
     	selector["$and"].push({ "jobBasicInfo.jobrole_id" : { $in: jobroles_ids } });
     }
-    console.log(JSON.stringify(selector))
+
+    //console.log(JSON.stringify(selector))
 
     Jobs.aggregate([
     	{ $match 	: selector },
     	{ $sort 	: {createdAt : -1} },
+    	{$lookup:{
+                   from: "entitymasters", 		localField: "company_id",
+                   foreignField: "_id",		as: "employer" } 
+        },
     	{ $lookup 	: { from: "industrymaster",
                    		localField: "jobBasicInfo.industry_id",
                    		foreignField: "_id",

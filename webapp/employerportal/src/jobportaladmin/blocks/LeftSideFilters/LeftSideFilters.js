@@ -151,22 +151,29 @@ class LeftSideFilters extends Component{
 
     
     if (filterType === 'functionalArea') {
-      selecteditems.map((elem,index)=>{
-        functionalArea_ids.push(elem.id);
-      })
-      selector.functionalArea_id = selecteditems;
+      console.log(selecteditems)
+      if (selecteditems.length > 0) {
+        selecteditems.map((elem,index)=>{
+          functionalArea_ids.push(elem.id);
+        })
+        selector.functionalArea_id = selecteditems;
+      }      
     }
     if (filterType === 'subfunctionalArea') {
-      selecteditems.map((elem,index)=>{
-        subfunctionalArea_ids.push(elem.id);
-      })
-      selector.subfunctionalArea_id = selecteditems;
+      if (selecteditems.length > 0) {
+        selecteditems.map((elem,index)=>{
+          subfunctionalArea_ids.push(elem.id);
+        })
+        selector.subfunctionalArea_id = selecteditems;
+      }
     }
     if (filterType === 'jobRole') {
-      selecteditems.map((elem,index)=>{
-        jobRoles_ids.push(elem.id);
-      })
-      selector.jobRoles_id = selecteditems;
+      if (selecteditems.length > 0) {
+        selecteditems.map((elem,index)=>{
+          jobRoles_ids.push(elem.id);
+        })
+        selector.jobRoles_id = selecteditems;
+      }
     }
 
     this.setState({ selector: selector },()=>{

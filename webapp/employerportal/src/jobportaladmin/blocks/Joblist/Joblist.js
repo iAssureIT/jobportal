@@ -88,7 +88,7 @@ deleteJob = (event)=>{
 							this.props.jobList
 							?
 								this.props.jobList.map((elem,index1)=>{
-									console.log("elem:", elem);
+
 									return(
 										<div className="col-lg-12" key={index1}>
 											<div className="jobListContainer">
@@ -108,7 +108,7 @@ deleteJob = (event)=>{
 															{elem.jobBasicInfo.jobTitle}
 														</div>
 														<div className="jobListCompanyName">
-															<b>iAssure International Technologies Pvt Ltd</b>
+															<b>{elem.employer[0].companyName}</b>
 														</div>
 														<div> 
 															<i className="fa fa-calendar jobListExperience"></i> &nbsp; Exp: {elem.eligibility.minExperience}
