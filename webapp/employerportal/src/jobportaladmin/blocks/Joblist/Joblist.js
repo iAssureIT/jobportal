@@ -75,6 +75,7 @@ deleteJob = (event)=>{
 		}
 
 	render(){
+		
 		return(
 			<section className="jobListWrapper">
 				<div className="col-lg-12 EmployeeListWrapperMain">

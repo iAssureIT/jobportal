@@ -54,7 +54,7 @@ router.patch("/patch/updateOneCandidateCertification", CandidateProfileControlle
 
 router.delete('/deleteCertification/:candidateID/delete/:certificationID',CandidateProfileController.deleteCertification);
 
-router.get("/get/list", CandidateProfileController.getCandidateList);
+router.post("/get/list", CandidateProfileController.getCandidateList);
 
 router.delete("/delete/:candidateID", CandidateProfileController.deleteCandidate);
 

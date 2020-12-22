@@ -88,4 +88,4 @@ const candidateSchema = mongoose.Schema({
 	]
 });
 
-module.exports = mongoose.model("candidatemaster", candidateSchema);
+module.exports = mongoose.model("candidatemasters", candidateSchema);

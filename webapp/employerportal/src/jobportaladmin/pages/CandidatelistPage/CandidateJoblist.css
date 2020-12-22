@@ -25,7 +25,7 @@
 .salaryBlockWrapper{
 	border-top:1px solid var(--main-border-color);
 	height:55px;
-	padding-top:8px;
+	padding-top:11px;
 
 }
 .candidateImgBlock{
@@ -91,12 +91,12 @@
 
 .postName{
 	height:18px;
-	font-size:9px;
+	font-size:13px;
 	color: var(--main-txt-color);
 
 }
 .skillsHeading{
-	font-size:9px;
+	font-size:11px;
 	font-weight: bold;
 	color: var(--main-heading-font-color);
 	font-family: Montserrat-SemiBold;
@@ -106,7 +106,7 @@
 }
 .skillsSubHeading{
 	
-	font-size:7px;
+	font-size:11px;
 	margin-top:2px;
 }
 .skillsSubHeading i{
@@ -136,7 +136,7 @@
 	transform:translate(-50%,-50%);
 }
 .salaryBlockHeading{
-	font-size: 8px;
+	font-size: 11px;
 	color: var(--main-heading-font-color);
 	padding-left:9px;
 }
@@ -155,7 +155,7 @@
 	height:20px;
 }
 .expectSalaryBlockHeading{
-	font-size: 8px;
+	font-size: 11px;
 	color: var(--main-heading-font-color);
 	text-align:center;
 }
@@ -163,7 +163,7 @@
 .expectSalaryBlockSubHeading{
 	text-align:center;
 	padding-top:2px;
-	font-size: 8px;
+	font-size: 11px;
 	color: var(--main-txt-color);
 }
 .profileSymbols img:hover{

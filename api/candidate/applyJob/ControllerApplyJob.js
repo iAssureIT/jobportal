@@ -133,12 +133,31 @@ exports.appliedJobCount = (req,res,next)=>{
 //candidatesAppliedToJob
 exports.candidatesAppliedToJob = (req,res,next)=>{
     ApplyJob.aggregate([
-        { "$match" : { "appliedItems.jobID" : ObjectId(req.body.jobID) } },
-        { "$lookup": {
-            "from": "candidatemasters",
-            "as": "candidate",
-            "localField": "candidateID",
-            "foreignField": "_id"}
+        { $unwind : "$appliedItems" },
+        { $match : { "appliedItems.jobID" : ObjectId(req.body.jobID) } },
+        { $lookup: {
+                    from: "candidatemasters",
+                    as: "candidate",
+                    localField: "candidateID",
+                    foreignField: "_id"}
+        },
+        {$lookup:{
+                   from: "addresstypemasters",
+                   localField: "address.addressType",
+                   foreignField: "_id",
+                   as: "addressType" } 
+        },
+        {$lookup:{
+                   from: "qualificationlevelmasters",
+                   localField: "academics.qualificationLevel",
+                   foreignField: "_id",
+                   as: "qualificationlevel" } 
+        },   
+        {$lookup:{
+                   from: "qualificationmasters",
+                   localField: "academics.qualification",
+                   foreignField: "_id",
+                   as: "qualification" } 
         }
             
     ])

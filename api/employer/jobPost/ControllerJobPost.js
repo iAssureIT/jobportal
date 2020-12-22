@@ -343,7 +343,7 @@ exports.getJobList = (req,res,next)=>{
    	
     if (req.body.company_id) {
     	
-    	selector["$and"].push({ "jobBasicInfo.company_id" : req.body.company_id});
+    	selector["$and"].push({ "jobBasicInfo.company_id" : ObjectID(req.body.company_id)});
     }
     if (req.body.industry_id) {
     	req.body.industry_id.map(elem => {

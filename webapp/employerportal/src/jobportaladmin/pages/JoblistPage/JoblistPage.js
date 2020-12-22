@@ -1,5 +1,5 @@
 import React, {Component} 	from 'react';
-import "../listCss/Joblist.css";
+import "./Joblist.css";
 import LeftSideFilters		from '../../blocks/LeftSideFilters/LeftSideFilters.js';
 import Joblist				from '../../blocks/Joblist/Joblist.js';
 import { connect }        from 'react-redux';
