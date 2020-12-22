@@ -45,14 +45,16 @@ export default class JobPostProfile extends Component{
 						minEducation 		: 	"",
 						minExperience 		: 	"",
 						
-						//primarySkills 		: 	"",
 						primarySkillTags 	:  	[],
 						minPrimExp	 		: 	"",
-						secondarySkills 	: 	"",
+						
+						secondarySkillTags 	:  	[],
 						minSecExp	 		: 	"",
-						otherSkills 		: 	"",
+						
+						otherSkillTags      :   [],
 						minOtherExp	 		: 	"",
-						preferSkills	 	: 	"",
+						
+						preferredSkillTags  :   [],
 		}
 
 	}	
@@ -73,33 +75,50 @@ export default class JobPostProfile extends Component{
                 this.setState({
                     primarySkillSuggestions   : primarySkillSuggestions,
                 });*/
-
+  
+		Axios.get("/api/jobs/get/one/"+job_id)
+		.then(response=>{
+           	//console.log("response.skillmaster = ",skillmaster);
+			//console.log("response.data = ",response.data);
+			skillmaster.data.map((skill,index)=>{
+                response.data.jobsData[0].requiredSkills.primarySkills.map((data,ind)=>{
+                    if (skill._id == data.skill_id) {
+                        primarySkillTags.push({ id : skill._id, text : skill.skill })
+                    }
+                })
+            })
             
-			Axios.get("/api/jobs/get/one/"+job_id)
-			.then(response=>{
-               	//console.log("response.skillmaster = ",skillmaster);
-				//console.log("response.data = ",response.data);
-				skillmaster.data.map((skill,index)=>{
-                    response.data.jobsData[0].requiredSkills.primarySkills.map((data,ind)=>{
-                        if (skill._id == data.skill_id) {
-                            primarySkillTags.push({ id : skill._id, text : skill.skill })
-                        }
-                    })
+            skillmaster.data.map((skill,index)=>{
+                response.data.jobsData[0].requiredSkills.secondarySkills.map((data,ind)=>{
+                    if (skill._id == data.skill_id) {
+                        secondarySkillTags.push({ id : skill._id, text : skill.skill })
+                    }
                 })
-                skillmaster.data.map((skill,index)=>{
-                    response.data.jobsData[0].requiredSkills.secondarySkills.map((data,ind)=>{
-                        if (skill._id == data.skill_id) {
-                            secondarySkillTags.push({ id : skill._id, text : skill.skill })
-                        }
-                    })
+            })
+
+            skillmaster.data.map((skill,index)=>{
+                response.data.jobsData[0].requiredSkills.otherSkills.map((data,ind)=>{
+                    if (skill._id == data.skill_id) {
+                        otherSkillTags.push({ id : skill._id, text : skill.skill })
+                    }
                 })
+            })
+
+            skillmaster.data.map((skill,index)=>{
+                response.data.jobsData[0].requiredSkills.preferredSkills.map((data,ind)=>{
+                    if (skill._id == data.skill_id) {
+                        preferredSkillTags.push({ id : skill._id, text : skill.skill })
+                    }
+                })
+            })
+				
 				this.setState({
 					job_id				: 	job_id,
 					jobTitle 			: 	response.data.jobsData[0].jobBasicInfo.jobTitle,
 					employerName 		: 	response.data.jobsData[0].employer[0].companyName,
 					employerLogo 		: 	response.data.jobsData[0].employer[0].companyLogo[0] ? response.data.jobsData[0].employer[0].companyLogo[0] : null,
 					industry_id 		: 	response.data.jobsData[0].jobBasicInfo.industry_id,
-					industry 			: 	response.data.jobsData[0].industry[0].industry,
+					/*industry 			: 	response.data.jobsData[0].industry[0].industry,*/
 					functionalarea_id 	: 	response.data.jobsData[0].jobBasicInfo.functionalarea_id,
 					functionalArea 		: 	response.data.jobsData[0].functionalArea[0].functionalArea,
 					subfunctionalarea_id: 	response.data.jobsData[0].jobBasicInfo.subfunctionalarea_id,
@@ -140,12 +159,15 @@ export default class JobPostProfile extends Component{
 					minExperience 		: 	response.data.jobsData[0].eligibility.minExperience,
 					
 					primarySkillTags 	: 	primarySkillTags,
-					secondarySkillTags 	: 	secondarySkillTags,
 					minPrimExp 			: 	response.data.jobsData[0].requiredSkills.minPrimExp,
+					
+					secondarySkillTags 	: 	secondarySkillTags,
 					minSecExp 	        : 	response.data.jobsData[0].requiredSkills.minSecExp,
-					otherSkills 	    : 	response.data.jobsData[0].requiredSkills.otherSkills,
+					
+					otherSkillTags 	    : 	otherSkillTags,
 					minOtherExp 		: 	response.data.jobsData[0].requiredSkills.minOtherExp,
-					preferSkills 		: 	response.data.jobsData[0].requiredSkills.preferSkills,
+					
+					preferredSkillTags  :   preferredSkillTags,
                 })
                
 			})
@@ -155,8 +177,8 @@ export default class JobPostProfile extends Component{
 		
 			})
             .catch(error => {
-                Swal.fire("Error while getting List data", error.message, 'error');
-           	})
+                				Swal.fire("Error while getting List data", error.message, 'error');
+           					})
 	}	
 	
 	render(){
@@ -291,10 +313,14 @@ export default class JobPostProfile extends Component{
 																				</span>
 																			</li>
 																			<p className="skillsList col-lg-5">
-																				Communication<br/>
-																				Teamwork<br/>
-																				Multitasking<br/>
-																				Attention to detail<br/>
+																				{
+																					this.state.secondarySkillTags.map((skill,index)=>{
+																						return (
+																								<div>{skill.text }</div>
+																								
+																							)
+																					})
+																				}
 																			</p>
 																		</div>
 																	</ul>
@@ -322,10 +348,14 @@ export default class JobPostProfile extends Component{
 																				</span>
 																			</li>
 																			<p className="skillsList col-lg-5">
-																				Computer programming and coding<br/>
-																				Problem-solving<br/>
-																				Software Development<br/>
-																				Object-oriented design<br/>
+																				{
+																					this.state.otherSkillTags.map((skill,index)=>{
+																						return (
+																								<div>{skill.text }</div>
+																								
+																							)
+																					})
+																				}
 																			</p>
 																		</div>
 																	</ul>
@@ -350,9 +380,14 @@ export default class JobPostProfile extends Component{
 																				<span className="skillDuration"></span>
 																			</li>
 																			<p className="skillsList col-lg-5">
-																				Teamwork<br/>
-																				Debug your resume<br/>
-																				Written and verbal communication<br/>
+																				{
+																					this.state.preferredSkillTags.map((skill,index)=>{
+																						return (
+																								<div>{skill.text }</div>
+																								
+																							)
+																					})
+																				}
 																			</p>
 																		</div>
 																	</ul>
@@ -413,7 +448,7 @@ export default class JobPostProfile extends Component{
 										Salary
 									</div>
 									<p className="rightSideSub">
-										<i className="fa fa-inr"></i> {this.state.minSalary} {this.state.minSalPeriod} To &nbsp;<i className="fa fa-inr"></i> {this.state.maxSalary} {this.state.maxSalPeriod}{/*(Monthly)*/}
+										<i className="fa fa-inr"></i> {this.state.minSalary} {this.state.minSalPeriod} To &nbsp;<i className="fa fa-inr"></i> {this.state.maxSalary} {this.state.maxSalPeriod}
 									</p>
 									
 									<div className="rightSideTitle">

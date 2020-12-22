@@ -19,10 +19,10 @@
 
 /*@font-face {
   font-family:'Montserrat-Bold';
-  src: url('/fonts/Montserrat/Montserrat-Bold.ttf');
-}
+  src: url('./fonts/Montserrat/Montserrat-Bold.ttf');
+}*/
 
-@font-face{
+/*@font-face{
   font-family: 'Montserrat-Medium'; 
   src: url('/fonts/Montserrat-Medium.ttf');
 }

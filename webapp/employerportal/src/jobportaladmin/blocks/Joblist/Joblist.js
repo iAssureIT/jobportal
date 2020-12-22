@@ -1,10 +1,11 @@
-import React, {Component} from 'react';
-import Axios from  'axios';
-import Swal  from  'sweetalert2';
-import Moment from "moment";
-import { connect }        from 'react-redux';
-import { bindActionCreators } from 'redux';
-import  * as mapActionCreator from '../../common/actions/index';
+import React, {Component} 		from 'react';
+import Axios 			  		from 'axios';
+import Swal  					from 'sweetalert2';
+import Moment 					from "moment";
+import { FontAwesomeIcon } 		from '@fortawesome/react-fontawesome';
+import { connect }        		from 'react-redux';
+import { bindActionCreators } 	from 'redux';
+import  * as mapActionCreator 	from '../../common/actions/index';
 
 class JobListView extends Component{
 	constructor(props){
@@ -87,6 +88,7 @@ deleteJob = (event)=>{
 							this.props.jobList
 							?
 								this.props.jobList.map((elem,index1)=>{
+									console.log("elem:", elem);
 									return(
 										<div className="col-lg-12" key={index1}>
 											<div className="jobListContainer">
@@ -94,10 +96,10 @@ deleteJob = (event)=>{
 													<div className="col-lg-11 jobListLeftContent">
 														<div className="row">
 															<div className="iconsBar">
+																<FontAwesomeIcon className="restRoomIcon" icon={['fas', 'restroom']} />
 																<ul>	
-																	<li><i className="fa fa-male"></i></li>
-																	<li><i className="fa fa-sun-o"></i></li>
-																	<li><i className="fa fa-clock-o"></i></li>
+																	<li><i className="fa fa-sun-o sunIcon"></i></li>
+																	<li><i className="fa fa-clock-o clockIcon"></i></li>
 																</ul>
 																<div className="infoLog"> {Moment(elem.createdAt).startOf('seconds').fromNow()}  </div>
 															</div>
@@ -158,5 +160,6 @@ const mapStateToProps = (state)=>{
 }
 const mapDispatchToProps = (dispatch) => ({
   mapAction :  bindActionCreators(mapActionCreator, dispatch)
-}) 
+})
 export default connect(mapStateToProps, mapDispatchToProps)(JobListView)
+															

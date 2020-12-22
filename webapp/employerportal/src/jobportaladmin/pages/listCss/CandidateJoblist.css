@@ -1,0 +1,171 @@
+.candidateList{
+	min-height:600px;
+	height:auto;
+	padding-bottom:30px;
+	background-color: var(--main-bg-color );
+	color: var(--main-txt-color);
+	font-family: Montserrat-Regular;
+
+}
+.candidateBlockWrapper{
+	height:283px;
+	border:2px solid var(--main-border-color);
+	border-radius:5px;
+
+}
+.candidateListRow{
+	margin-top:30px;
+
+}
+.candidateInfoBlock{
+	height:225px;
+	border-right:1px solid var(--main-border-color);
+
+}
+.salaryBlockWrapper{
+	border-top:1px solid var(--main-border-color);
+	height:55px;
+	padding-top:8px;
+
+}
+.candidateImgBlock{
+	margin-top:15px;
+	height:110px;
+
+
+}
+.candidateSkillsBlocks{
+	height:100px;
+	
+
+}
+.imageOfCandidate{
+	height:110px;
+
+
+}
+.imageOfCandidate img{
+	width:80%;
+	margin-left:12%;
+	height:90px;
+
+}
+.displayInfoCandidate{
+	height:110px;
+
+}
+.displayCandidateName{
+	font-size: 17px;
+	font-weight: bold;
+	color: var(--main-heading-font-color);
+	margin-left:12px;
+	margin-bottom:3px;
+
+
+}
+.candidateIdNumber{
+	font-size:10px;
+	color: var(--main-txt-color);
+	padding-left:5px;
+}
+.postIcon{
+	font-size:10px;
+	margin:0px;
+	padding-left:20px;
+	color:var(--main-heading-font-color);
+
+}
+
+.candListIcon{
+	height:18px;
+	font-size:10px;
+	color:var(--main-heading-font-color);
+
+}
+.candListIcon4{
+	font-size:11px;
+}
+.postNameWrapper{
+	padding-left:37px;
+}
+
+.postName{
+	height:18px;
+	font-size:9px;
+	color: var(--main-txt-color);
+
+}
+.skillsHeading{
+	font-size:9px;
+	font-weight: bold;
+	color: var(--main-heading-font-color);
+	font-family: Montserrat-SemiBold;
+}
+.listRoatate45{
+	font-size:6px!important;
+}
+.skillsSubHeading{
+	
+	font-size:7px;
+	margin-top:2px;
+}
+.skillsSubHeading i{
+	font-size:5px!important;
+	padding-right:5px;
+}
+
+.candidateSkillsBlocks .skillsHeadingBlock{
+	padding-top:20px!important;
+}
+.marginForSkillHeading{
+	margin-bottom:15px;
+
+}
+.profileSymbolsWrapper{
+	height:225px;
+	
+	
+}
+.profileSymbols{
+	height:40px;
+
+}
+.profileSymbols img{
+	margin-left:50%;
+	margin-top:50%;
+	transform:translate(-50%,-50%);
+}
+.salaryBlockHeading{
+	font-size: 8px;
+	color: var(--main-heading-font-color);
+	padding-left:9px;
+}
+.salrayBlockSubHeading{
+	color: var(--main-txt-color);
+}
+.expectSalaryBlock{
+	padding-top:2px;
+}
+.salaryBlock{
+
+	height:20px;
+	border-right:1px solid var(--main-border-color);
+}
+.salaryBlock2{
+	height:20px;
+}
+.expectSalaryBlockHeading{
+	font-size: 8px;
+	color: var(--main-heading-font-color);
+	text-align:center;
+}
+
+.expectSalaryBlockSubHeading{
+	text-align:center;
+	padding-top:2px;
+	font-size: 8px;
+	color: var(--main-txt-color);
+}
+.profileSymbols img:hover{
+	cursor: pointer;
+}

@@ -10,7 +10,6 @@ import CKEditor from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import PhoneInput from 'react-phone-input-2';
 import Moment from "moment";
-import Autosuggest from 'react-autosuggest';
 import { WithContext as ReactTags } from 'react-tag-input';
 import PlacesAutocomplete, {
         geocodeByAddress,
@@ -91,11 +90,9 @@ class JobPosting extends Component {
 
             preferredSkills             :   "",
             preferredSkillsArray        :   [],
-            priSkillsArraylist          :   [],
-            secSkillsArraylist          :   [],
+            
             otherSkillsArraylist        :   [],
             preferredSkillsArraylist    :   [],
-            submitBtnText               :   "SUBMIT",
 
             primarySkillTags            :   [],
             primarySkillSuggestions     :   [],
@@ -106,8 +103,8 @@ class JobPosting extends Component {
             otherSkillTags              :   [],
             otherSkillSuggestions       :   [],
             
-            preferSkillTags             :   [],
-            preferSkillSuggestions      :   [],
+            preferredSkillTags          :   [],
+            preferredSkillSuggestions   :   [],
             
             submitBtnText               :   "SUBMIT"
         }
@@ -329,10 +326,16 @@ class JobPosting extends Component {
                     Swal.fire("Some error occured while updating job data", error.message, "error");
                 })
         }
+
+        
+
     }
 
     validateForm = () => {
         var status = true;
+        var tempEmail = this.state.contactPersonEmail.trim(); // value of field with whitespace trimmed off
+        var emailFilter = /^[^@]+@[^@.]+\.[^@]*\w\w$/;
+        var illegalChars = /[\(\)\<\>\,\;\:\\\"\[\]]/;
 
         if (this.state.jobTitle.length <= 0) {
             document.getElementById("jobTitleError").innerHTML = "Enter Job Title";
@@ -391,31 +394,38 @@ class JobPosting extends Component {
             status = true;
         }
         if (this.state.jobRole.length <= 0) {
-            document.getElementById("jobRoleError").innerHTML = "Enter Job Role";
+            document.getElementById("jobRoleError").innerHTML = "Please enter Job Role";
             status = false;
         } else {
             document.getElementById("jobRoleError").innerHTML = "";
             status = true;
         }
         if (this.state.contactPersonName.length <= 0) {
-            document.getElementById("contactPersonNameError").innerHTML = "Enter contact person name";
+            document.getElementById("contactPersonNameError").innerHTML = "Please enter contact person name";
             status = false;
         } else {
             document.getElementById("contactPersonNameError").innerHTML = "";
             status = true;
         }
-        if (this.state.contactPersonEmail.length <= 0) {
-            document.getElementById("contactPersonEmailError").innerHTML = "Enter email id";
-            status = false;
-        } else {
-            document.getElementById("contactPersonEmailError").innerHTML = "";
+        
+        if(this.state.contactPersonEmail.length <=0 ){
+            document.getElementById("contactPersonEmailError").innerHTML=  "Please enter your Email";  
+            status=false; 
+        }else if (
+            !emailFilter.test(tempEmail)) { //test email for illegal characters
+            document.getElementById('contactPersonEmailError').innerHTML = "Please enter a valid email address.";
+        } else if (this.state.contactPersonEmail.match(illegalChars)) {
+            document.getElementById('contactPersonEmailError').innerHTML = "Email contains invalid characters.";
+        }else{
+            document.getElementById("contactPersonEmailError").innerHTML = ""; 
             status = true;
         }
+
         if (this.state.contactPersonPhone.length <= 0) {
-            document.getElementById("contactPersonPhoneError").innerHTML = "Enter phone number";
+            document.getElementById("contactPersonPhoneError").innerHTML = "Please enter phone number";
             status = false;
-        } else {
-            document.getElementById("contactPersonPhoneError").innerHTML = "";
+        } else{
+            document.getElementById("contactPersonPhoneError").innerHTML = ""; 
             status = true;
         }
         return status;
@@ -447,9 +457,16 @@ class JobPosting extends Component {
         this.setState({
             gender: id,
         })
+       /* if(this.state.gender === "Male Only"){
+                                
+                                this.setState ({"<i className='fa fa-male'></i>"});
+                            
+                            }else{
+                                
+                                this.setState ({"<i className='fa fa-female'></i>"});
+                                                                    
+                            }*/
     }
-
-
 
     handleSubmit = (event) => {
         event.preventDefault();
@@ -977,17 +994,17 @@ render(){
 										<div className="row">
 											<div className="col-lg-6">
 												<div className="row">
-													<label htmlFor="jobTitle" className="addjobformLable col-lg-12">
+													<label htmlFor="jobTitle" className="addjobformLable col-lg-12" aria-label="Whats up!">
 														Job Title
 														<span className="asterisk"> &#42; </span>
-														<div href="#" data-tip data-for='jobTitleTooltip' className="pull-right">
-															<i title="Please enter job title" className="fa fa-question-circle"></i>
-														</div>
+                                                        <div href="#" data-tip data-for='jobTitleTooltip' className="pull-right">
+                                                            <i title="Please enter job title" className="fa fa-question-circle"></i>
+                                                        </div>
 													</label>
 												</div>
 												<div className="input-group">
 													<span className="input-group-addon addJobFormField"><i className="fa fa-briefcase"></i> </span> 
-													<input type="text" className="form-control addJobFormField" name="jobTitle" id="jobTitle" value={this.state.jobTitle} onChange={this.handleChange}/>
+													<input type="text" className="form-control addJobFormField" name="jobTitle" id="jobTitle" maxLength="50" value={this.state.jobTitle} onChange={this.handleChange}/>
 												</div>
 												<span id="jobTitleError" className="errorMsgJobPost"></span>
 											</div>
@@ -1008,7 +1025,7 @@ render(){
 				                                        
 				                                        {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => 	(
 					                                          	<div>
-						                                            <input
+						                                            <input maxLength="200"
 						                                            	{...getInputProps({
 										                                            		placeholder: 'Search Address ...',
 										                                                	className: 'location-search-input col-lg-12 form-control errorinputText',
@@ -1082,7 +1099,7 @@ render(){
 													<label className="addjobformLable col-lg-12"> City <span className="asterisk">&#42;</span> </label>
 												</div>	
 												<div className="input-group"> 
-													<input type="text" className="form-control addJobFormField addJobState" ref="cityVillage" id="cityVillage" name="cityVillage" value={this.state.cityVillage} onChange={this.handleChange}/>
+													<input type="text" className="form-control addJobFormField addJobState" ref="cityVillage" id="cityVillage" name="cityVillage" maxLength="50" value={this.state.cityVillage} onChange={this.handleChange}/>
 												</div>
                                                 <span id="cityVillageError" className="errorMsgJobPost"></span>
 											</div>
@@ -1092,7 +1109,7 @@ render(){
 													<label className="addjobformLable col-lg-12"> District <span className="asterisk">&#42;</span> </label>
 												</div>
 												<div className="input-group"> 
-													<input type="text" className="form-control addJobFormField addJobState" ref="district" id="district" name="district" value={this.state.district} onChange={this.handleChange}/>
+													<input type="text" className="form-control addJobFormField addJobState" ref="district" id="district" name="district" maxLength="50" value={this.state.district} onChange={this.handleChange}/>
 												</div>
                                                 <span id="districtError" className="errorMsgJobPost"></span>
 											</div>
@@ -1102,7 +1119,7 @@ render(){
 													<label className="addjobformLable col-lg-12"> Pincode <span className="asterisk">&#42;</span> </label>
 												</div>
 												<div className="input-group"> 
-													<input type="text" className="form-control addJobFormField addJobState" value={this.state.pincode} ref="pincode" id="pincode" name="pincode" onChange={this.keyPressNumber.bind(this)}/>
+													<input type="text" className="form-control addJobFormField addJobState" ref="pincode" id="pincode" name="pincode" maxLength="50" value={this.state.pincode} onChange={this.keyPressNumber.bind(this)}/>
 												</div>
                                                 <span id="pincodeError" className="errorMsgJobPost"></span>
 											</div>
@@ -1117,7 +1134,7 @@ render(){
 												<div className="input-group">
 													<span className="input-group-addon addJobFormField"><i className="fa fa-briefcase"></i></span> 
 														<input type="text" list="functionalArea" className="form-control addJobFormField" refs="functionalArea" 
-                                                         name="functionalArea" id="selectFunctionalArea" value={this.state.functionalArea} data-value={this.state.functionalarea_id}
+                                                         name="functionalArea" id="selectFunctionalArea" maxLength="100" value={this.state.functionalArea} data-value={this.state.functionalarea_id}
 														onChange={this.onChangeFunctionalArea.bind(this)} />
 														<datalist name="functionalArea" id="functionalArea" className="functionalArealist" >
 														    {this.state.functionalArealist.map((item, key) =>
@@ -1132,7 +1149,8 @@ render(){
 												<label htmlFor="subFunctionalArea" className="addjobformLable"> Sub-Functional Area <span className="asterisk">&#42;</span> </label>
 												<div className="input-group">
 													<span className="input-group-addon addJobFormField"><FontAwesomeIcon icon={['fas', 'briefcase']} /></span> 
-                                                        <input type="text" list="subFunctionalArea" className="form-control addJobFormField" refs="subFunctionalArea" id="selectSubFunctionalArea" value={this.state.subFunctionalArea} name="subFunctionalArea"
+                                                        <input type="text" list="subFunctionalArea" className="form-control addJobFormField" refs="subFunctionalArea"
+                                                         id="selectSubFunctionalArea" maxLength="100" value={this.state.subFunctionalArea} name="subFunctionalArea"
                                                         onChange={this.onChangeSubFunctionalArea.bind(this)} />
                                                         <datalist name="subFunctionalArea" id="subFunctionalArea" className="subFunctionalArealist" >
                                                             {this.state.subFunctionalArealist.map((item, key) =>
@@ -1158,7 +1176,7 @@ render(){
 												<div className="input-group">
 													<span className="input-group-addon addJobFormField"><FontAwesomeIcon icon={['fas', 'briefcase']} /></span> 
                                                         <div className="input-group col-lg-12">
-                                                            <input type="text" list="jobRole" className="form-control addJobFormField" refs="jobRole" id="selectrole" value={this.state.jobRole} name="jobRole"
+                                                            <input type="text" list="jobRole" className="form-control addJobFormField" refs="jobRole" id="selectrole" maxLength="50" value={this.state.jobRole} name="jobRole"
                                                             onChange={this.onChangeRole.bind(this)} />
                                                             <datalist name="jobRole" id="jobRole" className="jobRoleArray" >
                                                                 {this.state.jobRoleArray.map((item, key) =>
@@ -1171,7 +1189,7 @@ render(){
 											</div>
 											
 											<div className="col-lg-6">
-												<label htmlFor="gender" className="addJobGenderTitle"> Who Can Apply <span className="asterisk">&#42;</span></label>
+												<label htmlFor="gender" className="addJobGenderTitle"> Who Can Apply </label>
 												<div className="input-group addJobGenderFeildWrapper">
 													<div className={this.state.gender==="Male Only"? "addJobGenderField col-lg-4 addJobGenderActive" : "addJobGenderField col-lg-4" }  id="Male Only" name="gender" value="Male Only" onClick={this.setGender.bind(this)}>
 														<div className="row">
@@ -1207,7 +1225,7 @@ render(){
 												<label htmlFor="jobType" className="addjobformLable"> Job Type </label>
 												<div className="input-group col-lg-12">
 													<span className="input-group-addon addJobFormField"><i className="fa fa-briefcase"></i> </span> 
-														<input type="text" list="jobType" className="form-control addJobFormField" refs="jobType" id="selectjobType" value={this.state.jobType} name="jobType"
+														<input type="text" list="jobType" className="form-control addJobFormField" refs="jobType" id="selectjobType" maxLength="50" value={this.state.jobType} name="jobType"
                                                         onChange={this.onChangeJobType.bind(this)} />
                                                         <datalist name="jobType" id="jobType" className="jobTypeArray" >
                                                             {this.state.jobTypeArray.map((item, key) =>
@@ -1221,7 +1239,7 @@ render(){
 												<label htmlFor="jobTime" className="addjobformLable"> Job Time </label>
 												<div className="input-group">
 													<span className="input-group-addon addJobFormField"><FontAwesomeIcon icon={['fas', 'business-time']} /></span> 
-													   <input type="text" list="jobTime" className="form-control addJobFormField" refs="jobTime" id="selectJobTime" value={this.state.jobTime} name="jobTime"
+													   <input type="text" list="jobTime" className="form-control addJobFormField" refs="jobTime" id="selectJobTime" maxLength="50" value={this.state.jobTime} name="jobTime"
                                                         onChange={this.onChangeJobTime.bind(this)} />
                                                         <datalist name="jobTime" id="jobTime" className="jobTimeArray" >
                                                             {this.state.jobTimeArray.map((item, key) =>
@@ -1235,7 +1253,7 @@ render(){
 												<label htmlFor="jobCategory" className="addjobformLable"> Job Category </label>
 												<div className="input-group">
 													<span className="input-group-addon addJobFormField"><i className="fa fa-list-alt"></i></span> 
-													   <input type="text" list="jobCategory" className="form-control addJobFormField" refs="jobCategory" id="selectjobCategory" value={this.state.jobCategory} name="jobCategory"
+													   <input type="text" list="jobCategory" className="form-control addJobFormField" refs="jobCategory" id="selectjobCategory" maxLength="50" value={this.state.jobCategory} name="jobCategory"
                                                         onChange={this.onChangeJobCategory.bind(this)} />
                                                         <datalist name="jobCategory" id="jobCategory" className="jobCategoryArray" >
                                                             {this.state.jobCategoryArray.map((item, key) =>
@@ -1255,7 +1273,7 @@ render(){
 												</div>
 												<div className="input-group">
 													<span className="input-group-addon addJobFormField"><i className="fa fa-users"></i></span> 
-													<input type="text" className="form-control addJobFormField" name="positions" id="positions" value={this.state.positions} onChange={this.handleChange}/>
+													<input type="text" className="form-control addJobFormField" name="positions" id="positions" maxLength="50" value={this.state.positions} onChange={this.handleChange}/>
 												</div>
 											</div>
 											
@@ -1284,7 +1302,7 @@ render(){
 														<label htmlFor="minSalary" className="addjobformLable"> Minimum Salary <i className="fa fa-rupee"></i> </label>
 														<div className="input-group">
 															<span className="input-group-addon addJobFormField"> <i className="fa fa-rupee addJobrupee"></i> </span> 
-															<input type="text" className="form-control addJobFormField" name="minSalary" id="minSalary" value={this.state.minSalary} onChange={this.handleChange}/>
+															<input type="text" className="form-control addJobFormField" name="minSalary" id="minSalary" maxLength="50" value={this.state.minSalary} onChange={this.handleChange}/>
 														</div>
 													</div>
 													
@@ -1305,7 +1323,7 @@ render(){
 														<label htmlFor="maxSalary" className="addjobformLable"> Maximum Salary <i className="fa fa-rupee"></i> </label>
 														<div className="input-group">
 															<span className="input-group-addon addJobFormField"><i className="fa fa-rupee addJobrupee"></i> </span> 
-															<input type="text" className="form-control addJobFormField" name="maxSalary" id="maxSalary" value={this.state.maxSalary} onChange={this.handleChange}/>
+															<input type="text" className="form-control addJobFormField" name="maxSalary" id="maxSalary" maxLength="50" value={this.state.maxSalary} onChange={this.handleChange}/>
 														</div>
 													</div>
 													
@@ -1335,7 +1353,7 @@ render(){
 												<label htmlFor="minEducation" className="addjobformLable"> Minimum Education Required </label>
 												<div className="input-group">
 													<span className="input-group-addon addJobFormField"> <i className="fa fa-graduation-cap"></i> </span> 
-													<input type="text" className="form-control addJobFormField" name="minEducation" id="minEducation" value={this.state.minEducation} onChange={this.handleChange}/>
+													<input type="text" className="form-control addJobFormField" name="minEducation" id="minEducation" maxLength="50" value={this.state.minEducation} onChange={this.handleChange}/>
 												</div>
 											</div>
 											
@@ -1343,7 +1361,7 @@ render(){
 												<label htmlFor="minExperience" className="addjobformLable"> Minimum Overall Experience </label>
 												<div className="input-group">
 													<span className="input-group-addon addJobFormField"> <i className="fa fa-history"></i> </span> 
-													<input type="text" className="form-control addJobFormField" name="minExperience" id="minExperience" value={this.state.minExperience} onChange={this.handleChange}/>
+													<input type="text" className="form-control addJobFormField" name="minExperience" id="minExperience" maxLength="50" value={this.state.minExperience} onChange={this.handleChange}/>
 												</div>
 											</div>
 										</div>
@@ -1378,7 +1396,7 @@ render(){
 												<label htmlFor="minPrimExp" className="addjobformLable"> Min. Experience Req. </label>
 												<div className="input-group">
 													<span className="input-group-addon addJobFormField"> <i className="fa fa-bar-chart"></i> </span> 
-													<input type="text" className="form-control addJobFormField" name="minPrimExp" id="minPrimExp" value={this.state.minPrimExp} onChange={this.handleChange}/>
+													<input type="text" className="form-control addJobFormField" name="minPrimExp" id="minPrimExp" maxLength="50" value={this.state.minPrimExp} onChange={this.handleChange}/>
 												</div>
 											</div>
 										</div>
@@ -1405,7 +1423,7 @@ render(){
 												<label htmlFor="minSecExp" className="addjobformLable"> Min. Experience Req. </label>
 												<div className="input-group">
 													<span className="input-group-addon addJobFormField"> <i className="fa fa-bar-chart"></i> </span> 
-													<input type="text" className="form-control addJobFormField" name="minSecExp" id="minSecExp" value={this.state.minSecExp} onChange={this.handleChange}/>
+													<input type="text" className="form-control addJobFormField" name="minSecExp" id="minSecExp" maxLength="50" value={this.state.minSecExp} onChange={this.handleChange}/>
 												</div>
 											</div>
 										</div>
@@ -1432,7 +1450,7 @@ render(){
 												<label htmlFor="minOtherExp" className="addjobformLable"> Min. Experience Req. </label>
 												<div className="input-group">
 													<span className="input-group-addon addJobFormField"> <i className="fa fa-bar-chart"></i> </span> 
-													<input type="text" className="form-control addJobFormField" name="minOtherExp" id="minOtherExp" value={this.state.minOtherExp} onChange={this.handleChange}/>
+													<input type="text" className="form-control addJobFormField" name="minOtherExp" id="minOtherExp" maxLength="50" value={this.state.minOtherExp} onChange={this.handleChange}/>
 												</div>
 											</div>
 										</div>
@@ -1466,7 +1484,7 @@ render(){
 												<label htmlFor="contactPersonName" className="addjobformLable"> Contact Person <span className="asterisk">&#42;</span> </label>
 												<div className="input-group">
 													<span className="input-group-addon addJobFormField"> <i className="fa fa-user"> </i> </span> 
-													<input type="text" className="form-control addJobFormField" name="contactPersonName" id="contactPersonName" value={this.state.contactPersonName} onChange={this.handleChange}/>
+													<input type="text" className="form-control addJobFormField" name="contactPersonName" id="contactPersonName" maxLength="100" value={this.state.contactPersonName} onChange={this.handleChange}/>
 												</div>
 												<span id="contactPersonNameError" className="errorMsgJobPost"> </span>
 											</div>
@@ -1475,7 +1493,7 @@ render(){
 												<label htmlFor="contactPersonEmail" className="addjobformLable"> Email <span className="asterisk">&#42;</span> </label>
 												<div className="input-group">
 													<span className="input-group-addon addJobFormField"> <i className="fa fa-envelope-o"> </i> </span> 
-													<input type="text" className="form-control addJobFormField" name="contactPersonEmail" id="contactPersonEmail" value={this.state.contactPersonEmail} onChange={this.handleChange}/>
+													<input type="text" className="form-control addJobFormField" name="contactPersonEmail" id="contactPersonEmail" maxLength="50" value={this.state.contactPersonEmail} onChange={this.handleChange}/>
 												</div>
 												<span id="contactPersonEmailError" className="errorMsgJobPost"> </span>
 											</div>

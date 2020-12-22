@@ -26,6 +26,7 @@ import JobPosting                               from './jobportaladmin/blocks/Jo
 import JobPostProfile                           from './jobportaladmin/blocks/JobPostProfile/JobPostProfile.js'; 
 
 import JoblistPage                              from './jobportaladmin/pages/JoblistPage/JoblistPage.js';
+import CandidatelistPage                        from './jobportaladmin/pages/CandidatelistPage/CandidatelistPage.js';
 
 import axios                from 'axios';
 import CoreLayout           from './coreadmin/CoreLayout/CoreLayout.js';
@@ -100,6 +101,7 @@ class Layout extends Component  {
                                                         <Route path="/post-job/:job_id" component={JobPosting} exact />
                                                         <Route path="/job-profile/:job_id" component={JobPostProfile} exact />
                                                         <Route path="/job-list" component={JoblistPage} exact />
+                                                        <Route path="/applied-candidate-list/" component={CandidatelistPage} exact />
                                                     </Switch>
                                                 </div>
                                             </div>

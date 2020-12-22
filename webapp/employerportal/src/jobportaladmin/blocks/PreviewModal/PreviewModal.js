@@ -4,10 +4,6 @@ import { FontAwesomeIcon }  from '@fortawesome/react-fontawesome';
 
 import './PreviewModal.css';
 
-import Axios  from 'axios';
-import Swal   from 'sweetalert2';
-import Moment from "moment";
-
 export default class PreviewModal extends Component{
 
   render() {
@@ -15,8 +11,8 @@ export default class PreviewModal extends Component{
       <div id="robust" className="modal fade" role="dialog">
                     <div className="modal-dialog modal-lg">
                       <div className="modal-content">
-                       <div class="modal-header">
-                          <button type="button" class="close" data-dismiss="modal">&times;</button>
+                       <div className="modal-header">
+                          <button type="button" className="close" data-dismiss="modal">&times;</button>
                       </div>
                         <div className="modal-body">
                           <div className="jobProfileModalWrapper container-fluid">
@@ -114,9 +110,7 @@ export default class PreviewModal extends Component{
                                                         </span>
                                                       </li>
                                                       <p className="skillsList col-lg-5">
-                                                        Mathematical aptitude<br/>
-                                                        Problem-solving skills<br/>
-                                                        Programming languages<br/>
+                                                        {/*{this.props.jobInfo.primarySkillTags}*/}
                                                       </p>
                                                     </div>
                                                   </ul>
