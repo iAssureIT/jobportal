@@ -208,4 +208,168 @@
     left: 48%;
 }
 
+.rupnagar{
+	position: absolute;
+    top: 370px;
+    left: 652px;
+}
+.rupnagarText{
+	position: absolute;
+	top: 45%;
+    left: 30%;
+}
+.rupnagarNumber{
+	position: absolute;
+    top: 55%;
+    left: 48%;
+}
+
+.a_Kapurthala{
+	position: absolute;
+    top: 386px;
+    left: 501px;
+}
+.a_KapurthalaText{
+	position: absolute;
+	top: 25%;
+    left: 20%;
+}
+.a_KapurthalaNumber{
+	position: absolute;
+    top: 45%;
+    left: 20%;
+}
+
+.moga{
+	position: absolute;
+    top: 461px;
+    left: 304px;
+}
+.mogaText{
+	position: absolute;
+	top: 35%;
+    left: 40%;
+}
+.mogaNumber{
+	position: absolute;
+    top: 45%;
+    left: 40%;
+}
+
+.ludhiana{
+	position: absolute;
+    top: 487px;
+    left: 422px;
+}
+.ludhianaText{
+	position: absolute;
+	top: 35%;
+    left: 40%;
+}
+.ludhianaNumber{
+	position: absolute;
+    top: 45%;
+    left: 40%;
+}
+
+.barnala{
+	position: absolute;
+    top: 607px;
+    left: 393px;
+}
+.barnalaText{
+	position: absolute;
+	top: 35%;
+    left: 40%;
+}
+.barnalaNumber{
+	position: absolute;
+    top: 45%;
+    left: 40%;
+}
+
+.mansa{
+	position: absolute;
+    top: 719px;
+    left: 367px;
+}
+.mansaText{
+	position: absolute;
+	top: 35%;
+    left: 40%;
+}
+.mansaNumber{
+	position: absolute;
+    top: 45%;
+    left: 40%;
+}
+
+.sangrur{
+	position: absolute;
+    top: 585px;
+    left: 469px;
+}
+.sangrurText{
+	position: absolute;
+	top: 35%;
+    left: 40%;
+}
+.sangrurNumber{
+	position: absolute;
+    top: 45%;
+    left: 40%;
+}
+
+.fatehgarh_sahib{
+	position: absolute;
+    top: 533px;
+    left: 598px;
+}
+.fatehgarh_sahibText{
+	position: absolute;
+	top: 45%;
+    left: 20%;
+}
+.fatehgarh_sahibNumber{
+	position: absolute;
+    top: 60%;
+    left: 40%;
+}
+
+
+.patiala{
+	position: absolute;
+    top: 604px;
+    left: 562px;
+}
+.patialaText{
+	position: absolute;
+	top: 30%;
+    left: 40%;
+}
+.patialaNumber{
+	position: absolute;
+    top: 40%;
+    left: 40%;
+}
+
+
+.mohali{
+	position: absolute;
+    top: 516px;
+    left: 711px;
+}
+.mohaliText{
+	position: absolute;
+	top: 30%;
+    left: 40%;
+}
+.mohaliNumber{
+	position: absolute;
+    top: 40%;
+    left: 40%;
+}
+
+
+
 

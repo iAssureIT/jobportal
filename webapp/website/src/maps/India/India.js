@@ -52,7 +52,7 @@ class India extends Component{
 				<div className="india">
 					
 					<div className="jammuKashmir classHover">
-						<img src="Maps/India/Jammu_Kashmir.png" className="img-responsive "  onClick={e => this.onStateClick("Jammu And Kashmir")} onMouseOver={e => (e.currentTarget.src = "/Maps/India/Jammu_Kashmir_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/India/Jammu_Kashmir.png")}/>
+						<img src="Maps/India/JammuKashmir.png" className="img-responsive "  onClick={e => this.onStateClick("Jammu And Kashmir")} onMouseOver={e => (e.currentTarget.src = "/Maps/India/Jammu_Kashmir_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/India/JammuKashmir.png")}/>
 						<span className="jammuKashmirText  mapTextLabel text-capitalize">Jammu and Kashmir</span>
 						<span className="jammuKashmirNumber mapCountLabel text-center">{this.search('Jammu and Kashmir')}</span>
 					</div>
