@@ -1453,7 +1453,7 @@ render(){
                                         </div>
                                     </div>                                                                                                                      
                                     
-                                    <div className="col-lg-7 col-lg-offset-5 pull-right">
+                                    <div className="col-lg-3 col-lg-offset-4 pull-right">
                                                                             
                                         <button className="btn buttonYellow addJobSubmitBtn"  onClick={this.handleSubmit}> {this.state.submitBtnText} </button>
                                     </div>

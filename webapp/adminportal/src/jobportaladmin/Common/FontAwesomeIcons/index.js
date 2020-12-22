@@ -3,7 +3,7 @@ import { library } 							from '@fortawesome/fontawesome-svg-core'
 import { fab } 								from '@fortawesome/free-brands-svg-icons'
 
 import {	faAlignRight, faCheckSquare, 
-	     	faCoffee, faRing,faMapMarkedAlt,
+	     	faCoffee, faRing, faMapMarkedAlt,
 	     	faUniversity, faFileAlt, faAdjust,
 	     	faChalkboardTeacher, faCity,
 	     	faWarehouse, faIdCardAlt,

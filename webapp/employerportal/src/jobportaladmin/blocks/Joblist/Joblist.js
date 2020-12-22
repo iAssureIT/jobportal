@@ -1,8 +1,12 @@
 import React, {Component} from 'react';
 import Axios from  'axios';
 import Swal  from  'sweetalert2';
+import Moment from "moment";
+import { connect }        from 'react-redux';
+import { bindActionCreators } from 'redux';
+import  * as mapActionCreator from '../../common/actions/index';
 
-export default class JobListView extends Component{
+class JobListView extends Component{
 	constructor(props){
 	super(props);
 	this.state={
@@ -11,9 +15,14 @@ export default class JobListView extends Component{
 }	
 
 componentDidMount(){
+	var selector=this.props.selector;
+	selector.countryCode = "IN"; 
+
+	this.setState({ selector: selector })
+
+	var {mapAction} = this.props;
+	mapAction.filterJobList(selector);
 }
-
-
 
 deleteJob = (event)=>{
 	event.preventDefault();
@@ -35,11 +44,12 @@ deleteJob = (event)=>{
 				.then(response =>{
 					console.log()
 					if(response.data.message==="Job details deleted Successfully!"){
-						this.getJobsData();
+						var {mapAction} = this.props;
+						mapAction.filterJobList(this.state.selector);
 
 						Swal.fire(
 									'Deleted!',
-									'Job Profile has been deleted successfully!',
+									'Joblist has been deleted successfully!',
 									'success'
 							);
 					}
@@ -78,7 +88,7 @@ deleteJob = (event)=>{
 							?
 								this.props.jobList.map((elem,index1)=>{
 									return(
-										<div className="col-lg-12">
+										<div className="col-lg-12" key={index1}>
 											<div className="jobListContainer">
 												<div className="col-lg-12">
 													<div className="col-lg-11 jobListLeftContent">
@@ -89,7 +99,7 @@ deleteJob = (event)=>{
 																	<li><i className="fa fa-sun-o"></i></li>
 																	<li><i className="fa fa-clock-o"></i></li>
 																</ul>
-																<div className="infoLog"> 15 Days Ago </div>
+																<div className="infoLog"> {Moment(elem.createdAt).startOf('seconds').fromNow()}  </div>
 															</div>
 														</div>
 														<div className="jobListDesignation">
@@ -139,3 +149,14 @@ deleteJob = (event)=>{
 		);
 	}
 }
+
+const mapStateToProps = (state)=>{
+    return {
+        user_ID     : state.user_ID,  	candidateID   : state.candidateID,
+        selector    : state.selector,   jobList     : state.jobList,
+    }
+}
+const mapDispatchToProps = (dispatch) => ({
+  mapAction :  bindActionCreators(mapActionCreator, dispatch)
+}) 
+export default connect(mapStateToProps, mapDispatchToProps)(JobListView)

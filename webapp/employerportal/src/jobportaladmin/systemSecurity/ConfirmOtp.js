@@ -63,7 +63,6 @@ class ConfirmOtp extends Component {
         "user_id"         : this.state.user_id,
         "createdBy"       : this.state.createdBy
       }
-    console.log("candidatemaster",candidatemaster)
     
       //====================================
     
@@ -81,13 +80,13 @@ class ConfirmOtp extends Component {
               
               //================================
 
-                axios.post('/api/candidatemaster/post', candidatemaster)
+                /*axios.post('/api/candidatemaster/post', candidatemaster)
                 .then((response) => {
 
                   console.log('in result Res data==>>>', response.data);
                   this.props.history.push('/login');
                 })
-                .catch((error) => {})
+                .catch((error) => {})*/
               
             //================================
             }

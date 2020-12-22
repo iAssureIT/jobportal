@@ -61,7 +61,8 @@
 }
 
 .addJobMainHead .labelLeftPadding{
-	padding-left: 10px;
+	padding-left: 37px;
+	margin-top: -30px;
 }
 
 .addJobSubHead{
@@ -78,7 +79,18 @@
 }
 
 .addJobSubHead .labelLeftPadding{
-	padding-left: 10px;
+	padding-left: 40px;
+	margin-top: -32px;
+}
+
+.addJobSubHeadSalary .labelLeftPadding{
+	padding-left: 40px;
+	margin-top: -30px;
+}
+
+.addJobSubHeadSkills .labelLeftPadding{
+	padding-left: 40px;
+	margin-top: -32px;
 }
 
 .addJobState{
@@ -107,11 +119,11 @@
 	letter-spacing: 1px;
 }
 
-.addJobFieldRow {
+.addJobFieldRow{
     margin-top: 15px;
 }
 
-.addJobFormField {
+.addJobFormField{
     border: 1px solid var(--main-border-color);
     background-color: var(--form-field-background-color);
     color: var(--main-txt-color);
@@ -212,7 +224,7 @@
 .addJobGenderActive{
 	background-color:var(--main-border-color);
 	height: 32px;
-	transition: all 1.3s;
+	transition: all 0.7s;
 }
 
 /***********************************End of Custom Gender Field Properties**************************/
@@ -364,7 +376,7 @@
 
 /***************************End Of Custom Checkbox Properties***************************************/
 
-/*****************************Select Dropdown custom classes************************************/
+/*****************************Select Dropdown Custom Classes************************************/
 
 /*select{
 	border: 1px solid var(--main-border-color);
@@ -382,9 +394,9 @@ option:hover{
 	background-color: var(--main-border-color) !important;
 }*/
 
-/**************************************End of Select Dropdown custom classes**********************************/
+/**************************************End Of Select Dropdown Custom Classes**********************************/
 
-/************************************React multiselect Dropdown custom classes********************************/
+/************************************React Multiselect Dropdown Custom Classes********************************/
 
 /*.optionContainer{
 	background-color: var(--main-bg-color);
@@ -436,12 +448,18 @@ option:hover{
 }
 
 .addJobSubmitBtn:hover{
-	color: var(--main-txt-color);
+	background-color: var(--form-field-background-color);
+	border: 1px solid var(--main-border-color);
+	color: #fff;	 
+	transition: all 500ms ease; 
 }
 
 .errorMsgJobPost{
-	color: red;
-	font-size: 12px;
+	/*color: #d93025;*/
+	/*color: var(--main-border-color);*/
+	color: #fff;
+	font-family: 'Montserrat-Regular';
+	font-size: 13px;
 }
 
 .asterisk{
@@ -749,6 +767,18 @@ div.ReactTags__suggestions ul li.ReactTags__activeSuggestion {
     background-color: var(--main-bg-color) !important;
     color: #fff !important;
     /*background-color: var(--main-border-color) !important;*/
+}
+
+/*input.ReactTags__tagInputField:focus{
+	border: none !important;
+}*/
+
+input:focus {
+    outline-offset: 0px !important;
+}
+
+user agent stylesheet:focus {
+    outline: -webkit-focus-ring-color auto 0px !important;
 }
 
 input::placeholder{

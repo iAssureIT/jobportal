@@ -15,7 +15,7 @@ import SignUp               from './coreadmin/systemSecurity/SignUp.js';
 
 import Dashboard            from './jobportaladmin/Dashboard/Dashboard.js';
 
-import JobPosting           from './jobportaladmin/pages/JobPosting/JobPosting.js';
+import JobPosting           from './jobportaladmin/blocks/JobPosting/JobPosting.js';
 import JobPostProfile       from './jobportaladmin/blocks/JobPostProfile/JobPostProfile.js';
 
 import JoblistPage          from './jobportaladmin/pages/JoblistPage/JoblistPage.js';

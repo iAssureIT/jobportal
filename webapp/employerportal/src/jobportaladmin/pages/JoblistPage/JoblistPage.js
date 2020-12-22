@@ -18,7 +18,7 @@ class JoblistPage extends Component{
 	}
   componentDidMount(){
 
-    var selector=this.state.selector;
+      var selector=this.state.selector;
       selector.countryCode = "IN"; 
 
       this.setState({ selector: selector })
@@ -47,15 +47,15 @@ class JoblistPage extends Component{
 	render(){
 		return(
   		<div className="ViewBodyWrapper">
-          <div className="col-lg-2" style={{"margin-top": "30px"}}>
-            <div className="col-lg-8">
+          <div className="col-lg-3" style={{"marginTop": "30px"}}>
+            <div className="col-lg-12">
               <div className='row'>
                 <LeftSideFilters />
               </div>
             </div>
           </div>
 
-          <div className="col-lg-10">
+          <div className="col-lg-9">
             <div className="row">
               <div id="mapwise">
                 <Joblist jobList={this.props.jobList}/>

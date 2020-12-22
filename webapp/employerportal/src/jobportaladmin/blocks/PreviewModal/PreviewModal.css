@@ -1,73 +1,79 @@
-.jobPostProfileWrapper{
+.jobProfileModalWrapper{
 	min-height: 670px;
 	height: auto;
-	padding-top: 30px;
+	padding-top: 5px;
+	padding-left: 35px;
+	padding-right: 35px;
 	padding-bottom: 30px;
 	background-color: var(--main-bg-color);
 	color: var(--main-txt-color);
 }
 
-.leftSideMain{
-	height: 1359px;
+.modalLeftSideMain{
+	height: 1400px;
 	border: 1px solid var(--main-border-color);
+	background-color: var(--form-field-background-color);
 	padding-bottom: 100px;
 }
 
-.leftHeader{
-	height: 215px;
+.ModalLeftHeader{
+	height: 180px;
 	border-bottom: 1px solid var(--main-border-color);
 }
 
-.leftImgContainer{
-	height: 215px;
-	/*background-color: red;*/
+.leftImgModalContainer{
+	/*height: 214px;*/
+	background-color: var(--form-field-background-color);
 }
 
-.leftImgContainer .imgbox{
-	margin-top: 45px;
+.leftImgModalContainer .modalImgbox{
+	margin-top: 40px;
 	margin-left: 15px;
-	height: 130px;
+	height: 100px;
 	border-radius: 3px;
 	background-color: #fff;
 }
 
-.leftImgContainer .companyProfileLogo{
-	height: 55px;
-	margin-top: 40px;
+.leftImgModalContainer .modalProfileLogo{
+	height: 40px;
+	margin-top: 30px;
 	border-radius: 5px;
 }
 
-.imgContent .contentMain{
-	padding-top: 5px;
+.modalImgContent .modalContentMain{
+	padding-top: 13px;
 }
 
-.imgContent{
-	height: 215px;
-	/*background-color: maroon;*/
+.modalImgContent{
+	/*height: 214px;*/
+	background-color: var(--form-field-background-color);
 }
 
-.imgContent .contentHead{
-	font-size: 27px;
+.modalImgContent .modalContentHead{
+	font-size: 24px;
 	font-weight: bold;
-	padding-top: 60px;
-	margin-left: -52px;
+	padding-top: 30px;
+	margin-left: -50px;
 	color: var(--main-subheading-font-color);
 	font-family: 'Montserrat-SemiBold';
 }
 
-.imgContent .subContentHead{
+.modalImgContent .modalSubContentHead{
 	margin-top: -3px;
-	margin-left: -52px;
-	font-size: 18px;
+	margin-left: -50px;
+	font-size: 17px;
 	font-family: 'Montserrat-SemiBold'
 }
 
-.imgContent .locationinfo{
+.modalImgContent .modalLocationinfo{
 	padding-top: 1px;
 	margin-left: -52px;
 	font-size: 14px;
 	font-family: 'Montserrat-Regular';
 	color: var(--main-txt-color);
+	white-space: nowrap !important;
+	text-overflow: ellipsis !important;
+  	overflow: hidden !important;
 }
 
 .jobProfileMain{ 
@@ -87,8 +93,10 @@
 	/*background-color: red;*/
 }
 
-.jobDescContent{
+.modalJobDescContent{
 	margin-left: -37px;
+	font-size: 13px;
+	/*text-align: justify;*/
 }
 
 /*******************************Content Wrapper One********************************/
@@ -111,11 +119,11 @@
 	/*background-color: green;*/
 } 
 
-.contentWrapper1 .profileheading{
+.contentWrapper1 .modalProfileheading{
 	position: absolute;
-	font-size: 21px;
+	font-size: 19px;
 	font-weight: bold;
-	margin-top: 35px;
+	margin-top: 37px;
 	margin-left: 40px;
 	color: var(--main-subheading-font-color);
 	font-family: 'Montserrat-SemiBold';
@@ -173,12 +181,12 @@
 	/*background-color: green;*/
 } 
 
-.contentWrapper2 .profileheading{
+.contentWrapper2 .modalProfileheading{
 	position: absolute;
-	font-size: 21px;
+	font-size: 19px;
 	font-weight: bold;
+	margin-top: -1px;
 	color: var(--main-subheading-font-color);
-	margin-top: -5px;
 	margin-left: 40px;
 	font-family: 'Montserrat-SemiBold';
 }
@@ -213,12 +221,13 @@
 	color: var(--main-subheading-font-color);
 }
 
-.contentWrapper2 .eduSubtitle{
+.contentWrapper2 .modalEduSubtitle{
 	font-family: 'Montserrat-SemiBold';
 }
 
-.contentWrapper2 .eduDuration{
+.contentWrapper2 .modalEduDuration{
 	font-family: 'Montserrat-Regular';
+	font-size: 13px;
 }
 
 .profileContent li:before{
@@ -252,12 +261,12 @@
 	/*background-color: green;*/
 } 
 
-.contentWrapper3 .profileheading{
+.contentWrapper3 .modalProfileheading{
 	position: absolute;
-	font-size: 21px;
+	font-size: 19px;
 	font-weight: bold;
 	color: var(--main-subheading-font-color);
-	margin-top: -5px;
+	margin-top: -1px;
 	margin-left: 40px;
 	font-family: 'Montserrat-SemiBold';
 }
@@ -449,65 +458,75 @@
 
 /**************************Right Aside Bar******************************/
 
-.rightSideMain{
-	height: auto;
+.ModalRightSideMain{
+	height: 1359px;
 	padding-bottom: 40px;
 	border: 1px solid var(--main-border-color);
+	background-color: var(--form-field-background-color);
 }
 
-.rightSideHeader{
-	height: 215px;
+.ModalRightSideHeader{
+	height: 180px;
 	border-bottom: 1px solid var(--main-border-color);
+	background-color: var(--form-field-background-color);
 }
 
-.mapImg{
-	height: 175px;
-	margin-top: 20px;
-	margin-left: 50px;
+.modalMapImg{
+	height: 120px;
+	margin-top: 30px;
+	margin-left: 16px;
+	/*height: 140px;
+	margin-left: 25px;
+	margin-top: 20px;*/
 }
 
-.rightContentHead{
-	font-size: 28px;
+.rightModalContentHead{
+	font-size: 23px;
 	font-weight: bold;
 	color: var(--main-subheading-font-color);
 	padding-top: 30px;
-	padding-left: 22px;
+	padding-left: 5px;
 	font-family: 'Montserrat-SemiBold';
 }
 
-.rightSideTitle{
-	font-size: 20px;
+.rightSideModalTitle{
+	font-size: 18px;
 	font-weight: bold;
-	padding-left: 25px;
+	padding-left: 5px;
 	padding-top: 7px;
 	color: var(--main-subheading-font-color);
 	font-family: 'Montserrat-SemiBold';
 }
 
-.rightSideSub{
-	padding-left: 25px;
+.rightSideModalSub{
+	padding-left: 5px;
 	padding-top: 2px;
+	margin-left: 2px;
+	font-size: 13px;
 	font-family: 'Montserrat-Regular';
 }
 
-.rightSideImg{
-	height: 300px;
-	margin-left: 30px;
+.rightSideModalSub .rupeeIcon{
+	font-size: 10px;
+}
+
+.rightSideModalImg{
+	height: 250px;
+	margin-left: -18px;
 	margin-top: 330px;
 }
 
 /******************************************modal classes**********************************************/
 
 .modalwrapper{
-	margin-top: 20px;
-	margin-bottom: 20px;
 	background-color: var(--main-bg-color);
 }
 
 .modal-body{
 	background-color: var(--main-bg-color);
-	border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
+    padding: 0 !important;
+    /*width: 120%;
+    margin-left: -100px;*/
 }
 
 .modal-content{
@@ -519,4 +538,58 @@
 	border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
     border-top: 1px solid var(--main-border-color);
+    /*width: 120%;
+    margin-left: -100px;*/
+}
+
+.modal-header .close{
+    background-color: var(--main-border-color);
+    /*border: 0 none !important;*/
+    color: #fff;
+    display: inline-block;
+    float: right;
+    font-size: 20px;
+    height: 28px;
+    /*line-height: 1;*/
+    border-radius: 10%;
+    margin: 10px 10px;
+    opacity: 1;
+    text-align: center;
+    text-shadow: none;
+    -webkit-transition: background 0.2s ease-in-out;
+    transition: background 0.2s ease-in-out;
+    vertical-align: top;
+    width: 30px;
+}
+
+.close:hover{
+	color: #fff !important;
+	background-color: var(--main-bg-color);
+	border: 1px solid var(--main-border-color);
+	transition: background-color 0.5s ease;
+}
+
+.modal-header{
+	padding: 0px !important;
+	background-color: var(--main-bg-color);
+	border-top-right-radius: 10px;
+	border-top-left-radius: 10px;
+    border: none;
+    /*width: 120%;
+    margin-left: -100px;*/
+}
+
+.modalbtn{
+	background-color: var(--main-border-color);
+	color: #fff;
+	border: none;
+	height: 30px;
+	width: 10%;
+	border-radius: 5px;
+}
+
+.modalbtn:hover{
+	background-color: var(--main-bg-color);
+	border: 1px solid var(--main-border-color);
+	transition: background-color 0.5s ease;
 }

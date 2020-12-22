@@ -502,7 +502,7 @@ class List extends Component {
 								<div className="col-lg-12 col-md-12 col-xs-12 col-sm-12 ">									
 									<div className="col-lg-2 col-md-12 col-sm-12 col-xs-12 nopadding">
 										<button type="button" className=" selectFilterBtnEL reset" onClick={this.selectFilter.bind(this)}>
-											<i class="fa fa-filter"></i>&nbsp;&nbsp;<b> SELECT FILTER</b>
+											<i className="fa fa-filter"></i>&nbsp;&nbsp;<b> SELECT FILTER</b>
 										</button>
 									</div>
 									

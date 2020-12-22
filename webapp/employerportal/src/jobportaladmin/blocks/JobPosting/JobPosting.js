@@ -36,7 +36,7 @@ class JobPosting extends Component {
             subFunctionalArealist       :   [],
             jobRole                     :   "",
             jobrole_id                  :   "",
-            roleArray                   :   [],
+            jobRoleArray                :   [],
             gender                      :   "Male Only",
             workFromHome                :   false,
             jobType                     :   "",
@@ -78,44 +78,39 @@ class JobPosting extends Component {
             primarySkills               :   [],
             minPrimExp                  :   "",
             priSkillsArray              :   [],
+            priSkillsArraylist          :   [],
+            
             secondarySkills             :   [],
             minSecExp                   :   "",
             secSkillsArray              :   [],
+            secSkillsArraylist          :   [],
+            
             otherSkills                 :   [],
             minOtherExp                 :   "",
             otherSkillsArray            :   [],
-            preferSkills                :   "",
-            preferSkillsArray           :   [],
+
+            preferredSkills             :   "",
+            preferredSkillsArray        :   [],
             priSkillsArraylist          :   [],
             secSkillsArraylist          :   [],
             otherSkillsArraylist        :   [],
-            preferSkillsArraylist       :   [],
+            preferredSkillsArraylist    :   [],
             submitBtnText               :   "SUBMIT",
+
             primarySkillTags            :   [],
             primarySkillSuggestions     :   [],
+            
             secondarySkillTags          :   [],
             secondarySkillSuggestions   :   [],
+            
             otherSkillTags              :   [],
             otherSkillSuggestions       :   [],
+            
             preferSkillTags             :   [],
             preferSkillSuggestions      :   [],
-            value                       :   ""
+            
+            submitBtnText               :   "SUBMIT"
         }
-
-        this.style = {
-            chips: {
-                color: "white"
-            },
-
-            searchBox: {
-                border: "1px solid #D3950A",
-            },
-
-            multiselectContainer: {
-                backgroundColor: "#242931",
-                color: "white",
-            }
-        };
 
         this.reactTags = React.createRef();
         
@@ -128,8 +123,89 @@ class JobPosting extends Component {
 
     componentDidMount() {
         this.getStates();
+
+        Axios.get("/api/functionalareamaster/get/list")
+            .then(response => {
+                    this.setState({
+                        functionalArealist: response.data
+                    });
+            })
+            .catch(error => {
+                Swal.fire("Error while getting List data", error.message, 'error');
+            })
+
+        Axios.get("/api/subfunctionalareamaster/get/list")
+            .then(response => {
+                this.setState({
+                    subFunctionalArealist: response.data
+                });
+            })
+            .catch(error => {
+                Swal.fire("Error while getting List data", error.message, 'error');
+            })
+
+        Axios.get("/api/jobrolemaster/get/list")
+            .then(response => {
+                this.setState({
+                    jobRoleArray: response.data
+                });
+            })
+            .catch(error => {
+                Swal.fire("Error while getting List data", error.message, 'error');
+            })    
+
+        Axios.get("/api/jobtypemaster/get/list")
+            .then(response => {
+                this.setState({
+                    jobTypeArray: response.data
+                });
+            })
+            .catch(error => {
+                Swal.fire("Error while getting List data", error.message, 'error');
+            })
+
+        Axios.get("/api/JobTimeMaster/get/list")
+            .then(response => {
+                this.setState({
+                    jobTimeArray: response.data
+                });
+                /*console.log("jobTimeArray", this.state.jobTimeArray);*/
+            })
+            .catch(error => {
+                Swal.fire("Error while getting List data", error.message, 'error');
+            })
+
+        Axios.get("/api/jobcategorymaster/get/list")
+            .then(response => {
+                this.setState({
+                    jobCategoryArray: response.data
+                });
+                /*console.log("jobCategoryArray", this.state.jobCategoryArray);*/
+            })
+            .catch(error => {
+                Swal.fire("Error while getting List data", error.message, 'error');
+            })
+
+        Axios.get("/api/skillmaster/get/list")
+            .then(response => {
+                var primarySkillSuggestions =  [];
+                response.data.map((elem,index)=>{
+                    primarySkillSuggestions.push({id:elem._id,text:elem.skill})
+                })
+                this.setState({
+                    primarySkillSuggestions   : primarySkillSuggestions,
+                    secondarySkillSuggestions : primarySkillSuggestions,
+                    otherSkillSuggestions     : primarySkillSuggestions,
+                    preferredSkillSuggestions    : primarySkillSuggestions
+                });
+
+            })
+            .catch(error => {
+                Swal.fire("Error while getting List data", error.message, 'error');
+            })
         if (this.props.match.params.job_id) {
-            let job_id = this.props.match.params.job_id;
+        let job_id = this.props.match.params.job_id;
+
             Axios.get("/api/jobs/get/one/" + job_id)
                 .then(response => {
                     console.log("response.data : ", response.data);
@@ -156,7 +232,7 @@ class JobPosting extends Component {
                         area                    :   response.data.jobsData[0].location.area,
                         cityVillage             :   response.data.jobsData[0].location.cityVillage,
                         district                :   response.data.jobsData[0].location.district,
-                        states                  :   response.data.jobsData[0].location.states,
+                        states                  :   response.data.jobsData[0].location.state,
                         stateCode               :   response.data.jobsData[0].location.stateCode,
                         country                 :   response.data.jobsData[0].location.country,
                         countryCode             :   response.data.jobsData[0].location.countryCode,
@@ -170,13 +246,9 @@ class JobPosting extends Component {
                         minEducation            :   response.data.jobsData[0].eligibility.minEducation,
                         minExperience           :   response.data.jobsData[0].eligibility.minExperience,
 
-                        primarySkills           :   response.data.jobsData[0].eligibility.primarySkills,
                         minPrimExp              :   response.data.jobsData[0].requiredSkills.minPrimExp,
-                        secondarySkills         :   response.data.jobsData[0].requiredSkills.secondarySkills,
                         minSecExp               :   response.data.jobsData[0].requiredSkills.minSecExp,
-                        otherSkills             :   response.data.jobsData[0].requiredSkills.otherSkills,
                         minOtherExp             :   response.data.jobsData[0].requiredSkills.minOtherExp,
-                        preferSkills            :   response.data.jobsData[0].requiredSkills.preferSkills,
                         submitBtnText           :   "UPDATE"
                     })
 
@@ -185,112 +257,141 @@ class JobPosting extends Component {
                     } else {
                         document.getElementById("workFromHome").checked = false;
                     }
+
+                    var functionalArea = this.state.functionalArealist.filter((data,index)=>{
+                        if (data._id == this.state.functionalarea_id) { return data}
+                    })
+                    var subFunctionalArea = this.state.subFunctionalArealist.filter((data,index)=>{
+                        if (data._id == this.state.subfunctionalarea_id) { return data}
+                    })
+                    var jobRole = this.state.jobRoleArray.filter((data,index)=>{
+                        if (data._id == this.state.jobrole_id) { return data}
+                    })
+                    var jobType = this.state.jobTypeArray.filter((data,index)=>{
+                        if (data._id == this.state.jobtype_id) { return data}
+                    })
+                    var jobTime = this.state.jobTimeArray.filter((data,index)=>{
+                        if (data._id == this.state.jobtime_id) { return data}
+                    })
+                    var jobCategory = this.state.jobCategoryArray.filter((data,index)=>{
+                        if (data._id == this.state.jobcategory_id) { return data}
+                    })
+                    var primarySkillTags = [];
+                    var secondarySkillTags = [];
+                    var otherSkillTags = [];
+                    var preferredSkillTags = [];
+
+
+                    this.state.primarySkillSuggestions.map((skill,index)=>{
+                        response.data.jobsData[0].requiredSkills.primarySkills.map((data,ind)=>{
+                            if (skill.id == data.skill_id) {
+                                primarySkillTags.push({ id : skill.id, text : skill.text })
+                            }
+                        })
+                    })
+                    this.state.secondarySkillSuggestions.map((skill,index)=>{
+                        response.data.jobsData[0].requiredSkills.secondarySkills.map((data,ind)=>{
+                            if (skill.id == data.skill_id) {
+                                secondarySkillTags.push({ id : skill.id, text : skill.text })
+                            }
+                        })
+                    })
+                    this.state.otherSkillSuggestions.map((skill,index)=>{
+                        response.data.jobsData[0].requiredSkills.otherSkills.map((data,ind)=>{
+                            if (skill.id == data.skill_id) {
+                                otherSkillTags.push({ id : skill.id, text : skill.text })
+                            }
+                        })
+                    })
+                    this.state.preferredSkillSuggestions.map((skill,index)=>{
+                        response.data.jobsData[0].requiredSkills.preferredSkills.map((data,ind)=>{
+                            if (skill.id == data.skill_id) {
+                                preferredSkillTags.push({ id : skill.id, text : skill.text })
+                            }
+                        })
+                    })
+
+                    this.setState({ functionalArea      : functionalArea[0].functionalArea, 
+                                    subFunctionalArea   : subFunctionalArea[0].subfunctionalArea,
+                                    jobRole             : jobRole[0].jobRole,
+                                    jobType             : jobType[0].jobType,
+                                    jobTime             : jobTime[0].jobTime,
+                                    jobCategory         : jobCategory[0].jobCategory,
+                                    primarySkillTags    : primarySkillTags,
+                                    secondarySkillTags  : secondarySkillTags,
+                                    otherSkillTags      : otherSkillTags,
+                                    preferredSkillTags  : preferredSkillTags
+                    }) 
+                    
                 })
 
                 .catch(error => {
                     Swal.fire("Some error occured while updating job data", error.message, "error");
                 })
         }
-
-        Axios.get("/api/functionalareamaster/get/list")
-            .then(response => {
-	                this.setState({
-	                    functionalArealist: response.data
-	                });
-            })
-            .catch(error => {
-                Swal.fire("Error while getting List data", error.message, 'error');
-            })
-
-        Axios.get("/api/subfunctionalareamaster/get/list")
-            .then(response => {
-                this.setState({
-                    subFunctionalArealist: response.data
-                });
-            })
-            .catch(error => {
-                Swal.fire("Error while getting List data", error.message, 'error');
-            })
-
-        Axios.get("/api/jobrolemaster/get/list")
-            .then(response => {
-                this.setState({
-                    roleArray: response.data
-                });
-            })
-            .catch(error => {
-                Swal.fire("Error while getting List data", error.message, 'error');
-            })    
-
-        Axios.get("/api/jobtypemaster/get/list")
-            .then(response => {
-                /*console.log("getfunctionalAreaData response.data = ", response.data);*/
-                this.setState({
-                    jobTypeArray: response.data
-                });
-                /*console.log("jobTypeArray", this.state.jobTypeArray);*/
-            })
-            .catch(error => {
-                Swal.fire("Error while getting List data", error.message, 'error');
-            })
-
-        Axios.get("/api/JobTimeMaster/get/list")
-            .then(response => {
-                /*console.log("getfunctionalAreaData response.data = ", response.data);*/
-                this.setState({
-                    jobTimeArray: response.data
-                });
-                /*console.log("jobTimeArray", this.state.jobTimeArray);*/
-            })
-            .catch(error => {
-                Swal.fire("Error while getting List data", error.message, 'error');
-            })
-
-        Axios.get("/api/jobcategorymaster/get/list")
-            .then(response => {
-                /*console.log("getfunctionalAreaData response.data = ", response.data);*/
-                this.setState({
-                    jobCategoryArray: response.data
-                });
-                /*console.log("jobCategoryArray", this.state.jobCategoryArray);*/
-            })
-            .catch(error => {
-                Swal.fire("Error while getting List data", error.message, 'error');
-            })
-
-        Axios.get("/api/skillmaster/get/list")
-            .then(response => {
-                /*console.log("getfunctionalAreaData response.data = ", response.data);*/
-                var primarySkillSuggestions =  [];
-                response.data.map((elem,index)=>{
-		            primarySkillSuggestions.push({id:elem._id,text:elem.skill})
-		        })
-                this.setState({
-                    primarySkillSuggestions   : primarySkillSuggestions,
-                    secondarySkillSuggestions : primarySkillSuggestions,
-                    otherSkillSuggestions     : primarySkillSuggestions,
-                    preferSkillSuggestions    : primarySkillSuggestions
-                });
-
-            })
-            .catch(error => {
-                Swal.fire("Error while getting List data", error.message, 'error');
-            })
-
     }
 
     validateForm = () => {
         var status = true;
 
         if (this.state.jobTitle.length <= 0) {
-            document.getElementById("jobTitleError").innerHTML = "Enter job title";
+            document.getElementById("jobTitleError").innerHTML = "Enter Job Title";
             status = false;
         } else {
             document.getElementById("jobTitleError").innerHTML = "";
             status = true;
         }
+        if (this.state.address.length <= 0) {
+            document.getElementById("addressError").innerHTML = "Enter Job Location";
+            status = false;
+        } else {
+            document.getElementById("addressError").innerHTML = "";
+            status = true;
+        }
+        if (this.state.states.length <= 0) {
+            document.getElementById("statesError").innerHTML = "Select State";
+            status = false;
+        } else {
+            document.getElementById("statesError").innerHTML = "";
+            status = true;
+        }
+        if (this.state.cityVillage.length <= 0) {
+            document.getElementById("cityVillageError").innerHTML = "Enter City";
+            status = false;
+        } else {
+            document.getElementById("cityVillageError").innerHTML = "";
+            status = true;
+        }
+        if (this.state.district.length <= 0) {
+            document.getElementById("districtError").innerHTML = "Enter District";
+            status = false;
+        } else {
+            document.getElementById("districtError").innerHTML = "";
+            status = true;
+        }
+        if (this.state.pincode.length <= 0) {
+            document.getElementById("pincodeError").innerHTML = "Enter Pincode";
+            status = false;
+        } else {
+            document.getElementById("pincodeError").innerHTML = "";
+            status = true;
+        }
+        if (this.state.functionalarea_id.length <= 0) {
+            document.getElementById("functionalAreaError").innerHTML = "Select or enter Functional Area";
+            status = false;
+        } else {
+            document.getElementById("functionalAreaError").innerHTML = "";
+            status = true;
+        }
+        if (this.state.subfunctionalarea_id.length <= 0) {
+            document.getElementById("subFunctionalAreaError").innerHTML = "Select or enter Sub-Functional Area";
+            status = false;
+        } else {
+            document.getElementById("subFunctionalAreaError").innerHTML = "";
+            status = true;
+        }
         if (this.state.jobRole.length <= 0) {
-            document.getElementById("jobRoleError").innerHTML = "Enter job role";
+            document.getElementById("jobRoleError").innerHTML = "Enter Job Role";
             status = false;
         } else {
             document.getElementById("jobRoleError").innerHTML = "";
@@ -397,13 +498,13 @@ class JobPosting extends Component {
                 minEducation            :   this.state.minEducation,
                 minExperience           :   this.state.minExperience,
 
-                primarySkills           :   this.state.primarySkills,
+                primarySkillTags        :   this.state.primarySkillTags,
                 minPrimExp              :   this.state.minPrimExp,
-                secondarySkills         :   this.state.secondarySkills,
+                secondarySkillTags      :   this.state.secondarySkillTags,
                 minSecExp               :   this.state.minSecExp,
-                otherSkills             :   this.state.otherSkills,
+                otherSkillTags          :   this.state.otherSkillTags,
                 minOtherExp             :   this.state.minOtherExp,
-                preferSkills            :   this.state.preferSkills,
+                preferredSkillTags      :   this.state.preferredSkillTags,
 
             };
 
@@ -466,7 +567,7 @@ class JobPosting extends Component {
                         minSecExp               :   "",
                         otherSkills             :   "",
                         minOtherExp             :   "",
-                        preferSkills            :   "",
+                        preferredSkills            :   "",
                     });
 
                     this.props.history.push("/job-profile/" + job_id);
@@ -641,7 +742,9 @@ class JobPosting extends Component {
   	
 
     onprimarySkillAddition (tag) {
-   
+        if (tag.id == tag.text) {
+            tag.id = "" 
+        }
     	this.setState(state => ({ primarySkillTags: [...state.primarySkillTags, tag] }));
   	}
 
@@ -668,9 +771,11 @@ class JobPosting extends Component {
     }
  	
     
-    onsecondarySkillAddition (tags) {
-        const secondarySkillTags = [].concat(this.state.secondarySkillTags, tags)
-        this.setState({ secondarySkillTags })
+    onsecondarySkillAddition (tag) {  
+        if (tag.id == tag.text) {
+            tag.id = "" 
+        }
+        this.setState(state => ({ secondarySkillTags: [...state.secondarySkillTags, tag] }));
     }
 
     onsecondarySkillClick(index) {
@@ -689,14 +794,19 @@ class JobPosting extends Component {
     }
 
     onsecondarySkillDelete (i) {
-	    const secondarySkillTags = this.state.secondarySkillTags.slice(0)
-	    secondarySkillTags.splice(i, 1)
-	    this.setState({ secondarySkillTags })
+        const { secondarySkillTags } = this.state;
+        this.setState({
+          secondarySkillTags: secondarySkillTags.filter((tag, index) => index !== i),
+        });
 	}
 
     
 
     onOtherSkillAddition (tag) {
+        if (tag.id == tag.text) {
+            tag.id = "" 
+        }
+        
         this.setState(state => ({ otherSkillTags: [...state.otherSkillTags, tag] }));
     }
 
@@ -723,34 +833,36 @@ class JobPosting extends Component {
     }
 
 
-    onPreferSkillAddition (tag) {
-        this.setState(state => ({ preferSkillTags: [...state.preferkillTags, tag] }));
+    onPreferredAddition (tag) {
+        if (tag.id == tag.text) {
+            tag.id = "" 
+        }
+        this.setState(state => ({ preferredSkillTags: [...state.preferredSkillTags, tag] }));
     }
 
-    onPreferSkillClick(index) {
+    onPreferredClick(index) {
         console.log('The tag at index ' + index + ' was clicked');
     }
 
-    onPreferSkillDrag(tag, currPos, newPos) {
-        const preferSkillTags = [...this.state.preferSkillTags];
-        const newTags = preferSkillTags.slice();
+    onPreferredDrag(tag, currPos, newPos) {
+        const preferredSkillTags = [...this.state.preferredSkillTags];
+        const newTags = preferredSkillTags.slice();
 
         newTags.splice(currPos, 1);
         newTags.splice(newPos, 0, tag);
 
         // re-render
-        this.setState({ preferSkillTags: newTags });
+        this.setState({ preferredSkillTags: newTags });
     }
 
-    onPreferSkillDelete (i) {
-        const { preferSkillTags } = this.state;
+    onPreferredDelete (i) {
+        const { preferredSkillTags } = this.state;
         this.setState({
-          preferSkillTags: preferSkillTags.filter((tag, index) => index !== i),
+          preferredSkillTags: preferredSkillTags.filter((tag, index) => index !== i),
         });
     }
 
     
-
     onChangeFunctionalArea(event){
         const {name,value} = event.target;
         this.setState({ [name]:value });  
@@ -778,7 +890,6 @@ class JobPosting extends Component {
         this.setState({ subfunctionalarea_id : subfunctionalarea_id },()=>{
             console.log(this.state)
         });  
-        
     }
 
     onChangeRole(event){
@@ -838,7 +949,6 @@ class JobPosting extends Component {
         this.setState({ jobcategory_id : jobcategory_id },()=>{
             console.log(this.state)
         });  
-        
     }
 
 
@@ -859,7 +969,7 @@ render(){
 								
 								<div className="addJobMainHead col-lg-12">
 									<i className="fa fa-info"></i> 
-									<span className="labelLeftPadding"> Basic Info </span>
+									<div className="labelLeftPadding"> Basic Info </div>
 								</div>
 								
                                 <form id="addJob" autoComplete="off">
@@ -871,7 +981,7 @@ render(){
 														Job Title
 														<span className="asterisk"> &#42; </span>
 														<div href="#" data-tip data-for='jobTitleTooltip' className="pull-right">
-															<i title="Please enter designation name of your profile" className="fa fa-question-circle"></i>
+															<i title="Please enter job title" className="fa fa-question-circle"></i>
 														</div>
 													</label>
 												</div>
@@ -937,6 +1047,7 @@ render(){
 														)}
 		                                      		</PlacesAutocomplete>
 												</div>
+                                                <span id="addressError" className="errorMsgJobPost"></span>
 											</div>
 										</div>
 									</div>
@@ -962,7 +1073,8 @@ render(){
 															: ''
 														}
 													</select>
-												</div>	
+												</div>
+                                                <span id="statesError" className="errorMsgJobPost"></span>	
 											</div>	
 											
 											<div className="col-lg-3">
@@ -970,8 +1082,9 @@ render(){
 													<label className="addjobformLable col-lg-12"> City <span className="asterisk">&#42;</span> </label>
 												</div>	
 												<div className="input-group"> 
-													<input type="text" className="form-control addJobFormField addJobState" value={this.state.cityVillage} ref="cityVillage" name="cityVillage" onChange={this.handleChange}/>
+													<input type="text" className="form-control addJobFormField addJobState" ref="cityVillage" id="cityVillage" name="cityVillage" value={this.state.cityVillage} onChange={this.handleChange}/>
 												</div>
+                                                <span id="cityVillageError" className="errorMsgJobPost"></span>
 											</div>
 											
 											<div className="col-lg-3">
@@ -979,8 +1092,9 @@ render(){
 													<label className="addjobformLable col-lg-12"> District <span className="asterisk">&#42;</span> </label>
 												</div>
 												<div className="input-group"> 
-													<input type="text" className="form-control addJobFormField addJobState" value={this.state.district} ref="district" name="district" onChange={this.handleChange}/>
+													<input type="text" className="form-control addJobFormField addJobState" ref="district" id="district" name="district" value={this.state.district} onChange={this.handleChange}/>
 												</div>
+                                                <span id="districtError" className="errorMsgJobPost"></span>
 											</div>
 											
 											<div className="col-lg-3">
@@ -988,8 +1102,9 @@ render(){
 													<label className="addjobformLable col-lg-12"> Pincode <span className="asterisk">&#42;</span> </label>
 												</div>
 												<div className="input-group"> 
-													<input type="text" className="form-control addJobFormField addJobState" value={this.state.pincode} ref="pincode" name="pincode" onChange={this.keyPressNumber.bind(this)}/>
+													<input type="text" className="form-control addJobFormField addJobState" value={this.state.pincode} ref="pincode" id="pincode" name="pincode" onChange={this.keyPressNumber.bind(this)}/>
 												</div>
+                                                <span id="pincodeError" className="errorMsgJobPost"></span>
 											</div>
 										</div>
 									</div>
@@ -1001,15 +1116,16 @@ render(){
 												<label htmlFor="functionalArea" className="addjobformLable"> Functional Area <span className="asterisk">&#42;</span> </label>
 												<div className="input-group">
 													<span className="input-group-addon addJobFormField"><i className="fa fa-briefcase"></i></span> 
-														<input type="text" list="functionalArea" className="form-control addJobFormField" refs="functionalArea" id="selectFunctionalArea" value={this.state.functionalArea} name="functionalArea"
+														<input type="text" list="functionalArea" className="form-control addJobFormField" refs="functionalArea" 
+                                                         name="functionalArea" id="selectFunctionalArea" value={this.state.functionalArea} data-value={this.state.functionalarea_id}
 														onChange={this.onChangeFunctionalArea.bind(this)} />
 														<datalist name="functionalArea" id="functionalArea" className="functionalArealist" >
 														    {this.state.functionalArealist.map((item, key) =>
 														        <option key={key} value={item.functionalArea} data-value={item._id}/>
 														    )}
 														</datalist>
-													<span id="functionalAreaError" className="errorMsgJobPost"></span>
-												</div>	
+												</div>
+                                                <span id="functionalAreaError" className="errorMsgJobPost"></span>
 											</div>			
 											
 											<div className="col-lg-6">
@@ -1024,6 +1140,7 @@ render(){
                                                             )}
                                                         </datalist>
 												</div>
+                                                <span id="subFunctionalAreaError" className="errorMsgJobPost"></span>
 											</div>
 										</div>
 									</div>
@@ -1034,7 +1151,7 @@ render(){
 												<div className="row">
 													<label htmlFor="jobRole" className="addjobformLable col-lg-12"> Role <span className="asterisk">&#42;</span>
 														<div href="#" data-tip data-for='jobTitleTooltip' className="pull-right">
-															<i title="Please enter your role" className="fa fa-question-circle"></i>
+															<i title="Please enter job role" className="fa fa-question-circle"></i>
 														</div>
 													</label>
 												</div>
@@ -1043,8 +1160,8 @@ render(){
                                                         <div className="input-group col-lg-12">
                                                             <input type="text" list="jobRole" className="form-control addJobFormField" refs="jobRole" id="selectrole" value={this.state.jobRole} name="jobRole"
                                                             onChange={this.onChangeRole.bind(this)} />
-                                                            <datalist name="jobRole" id="jobRole" className="roleArray" >
-                                                                {this.state.roleArray.map((item, key) =>
+                                                            <datalist name="jobRole" id="jobRole" className="jobRoleArray" >
+                                                                {this.state.jobRoleArray.map((item, key) =>
                                                                     <option key={key} value={item.jobRole} data-value={item._id}/>
                                                                 )}
                                                             </datalist>
@@ -1154,9 +1271,9 @@ render(){
 
 									<div className="col-lg-12 addJobFieldRow"> <div className="addJobFormHr col-lg-12"></div> </div>	
 									
-									<div className="addJobSubHead col-lg-12">
+									<div className="addJobSubHead addJobSubHeadSalary col-lg-12">
 										<i className="fa fa-rupee salaryIcon"></i>
-										<span className="labelLeftPadding"> Salary </span>
+										<div className="labelLeftPadding"> Salary </div>
 									</div>
 									
 									<div className="col-lg-12 addJobFieldRow text-left">
@@ -1209,7 +1326,7 @@ render(){
 									
 									<div className="col-lg-12 addJobSubHead">
 										<i className="fa fa-book"></i>
-										<span className="labelLeftPadding"> Required Education & Experience </span>
+										<div className="labelLeftPadding"> Required Education & Experience </div>
 									</div>
 									
 									<div className="col-lg-12 addJobFieldRow text-left">
@@ -1234,9 +1351,9 @@ render(){
 									
 									<div className="col-lg-12 addJobFieldRow"> <div className="addJobFormHr col-lg-12"> </div> </div>
 									
-									<div className="col-lg-12 addJobSubHead">
+									<div className="col-lg-12 addJobSubHead addJobSubHeadSkills">
 										<i className='fa fa-cog'> </i> 
-										<span className="labelLeftPadding"> Expected Skills </span>
+										<div className="labelLeftPadding"> Expected Skills </div>
 									</div>
 									
 									<div className="col-lg-12 addJobFieldRow text-left">
@@ -1252,8 +1369,8 @@ render(){
 													        delimiters={delimiters}
 													        handleDelete={this.onprimarySkillDelete.bind(this)}
 													        handleAddition={this.onprimarySkillAddition.bind(this)}
-													        handleDrag={this.onprimarySkillDrag}
-          													handleTagClick={this.onprimarySkillClick} />
+													        handleDrag={this.onprimarySkillDrag.bind(this)}
+          													handleTagClick={this.onprimarySkillClick.bind(this)} />
 													</div>
 											</div>
 											
@@ -1273,11 +1390,14 @@ render(){
 												<div className="input-group col-lg-12">
 													<span className="input-group-addon addJobFormField"> <i className='fa fa-cog'></i> </span>
 														<ReactTags
-													        ref={this.reactTags}
-													        tags={this.state.secondarySkillTags}
-													        suggestions={this.state.secondarySkillSuggestions}
-													        onDelete={this.onsecondarySkillDelete.bind(this)}
-													        onAddition={this.onsecondarySkillAddition.bind(this)} />
+                                                            tags={this.state.secondarySkillTags}
+                                                            suggestions={this.state.secondarySkillSuggestions}
+                                                            delimiters={delimiters}
+                                                            handleDelete={this.onsecondarySkillDelete.bind(this)}
+                                                            handleAddition={this.onsecondarySkillAddition.bind(this)}
+                                                            handleDrag={this.onsecondarySkillDrag.bind(this)}
+                                                            handleTagClick={this.onsecondarySkillClick.bind(this)}
+                                                            />
 												</div>
 											</div>
 											
@@ -1297,11 +1417,14 @@ render(){
 												<div className="input-group col-lg-12">
 													<span className="input-group-addon addJobFormField"> <i className='fa fa-cog'></i> </span>
 														<ReactTags
-                                                            ref={this.reactTags}
                                                             tags={this.state.otherSkillTags}
                                                             suggestions={this.state.otherSkillSuggestions}
-                                                            onDelete={this.onOtherSkillDelete.bind(this)}
-                                                            onAddition={this.onOtherSkillAddition.bind(this)} />
+                                                            delimiters={delimiters}
+                                                            handleDelete={this.onOtherSkillDelete.bind(this)}
+                                                            handleAddition={this.onOtherSkillAddition.bind(this)}
+                                                            handleDrag={this.onOtherSkillDrag.bind(this)}
+                                                            handleTagClick={this.onOtherSkillClick.bind(this)}
+                                                            />
 												</div>
 											</div>
 											
@@ -1316,15 +1439,18 @@ render(){
 									</div>
 									
 									<div className="col-lg-12 addJobFieldRow text-left">
-										<label htmlFor="preferSkills" className="addjobformLable"> Preferred Skills but not mandatory </label>
-										<div className="input-group col-lg-12 preferSkillsField">
+										<label htmlFor="preferredSkills" className="addjobformLable"> Preferred Skills but not mandatory </label>
+										<div className="input-group col-lg-12 preferredSkillsField">
 											<span className="input-group-addon addJobFormField"> <i className='fa fa-cog'></i> </span>
 												<ReactTags
-                                                    ref={this.reactTags}
-                                                    tags={this.state.preferSkillTags}
-                                                    suggestions={this.state.preferSkillSuggestions}
-                                                    onDelete={this.onPreferSkillDelete.bind(this)}
-                                                    onAddition={this.onPreferSkillAddition.bind(this)} />
+                                                    tags={this.state.preferredSkillTags}
+                                                    suggestions={this.state.preferredSkillSuggestions}
+                                                    delimiters={delimiters}
+                                                    handleDelete={this.onPreferredDelete.bind(this)}
+                                                    handleAddition={this.onPreferredAddition.bind(this)}
+                                                    handleDrag={this.onPreferredDrag.bind(this)}
+                                                    handleTagClick={this.onPreferredClick.bind(this)}
+                                                    />
 										</div>
 									</div>
 									
@@ -1332,7 +1458,7 @@ render(){
 									
 									<div className="addJobMainHead col-lg-12">
 										<i className="fa fa-info"> </i> 
-										<span className="labelLeftPadding"> Contact Info </span>
+										<div className="labelLeftPadding"> Contact Info </div>
 									</div>
 									<div className="col-lg-12 addJobFieldRow text-left">
 										<div className="row">
@@ -1372,7 +1498,7 @@ render(){
 
 									<div className="addJobSubHead col-lg-12">
 										<i className="fa fa-briefcase"> </i>
-										<span className="labelLeftPadding"> Job Description </span>
+										<div className="labelLeftPadding"> Job Description </div>
 									</div>
 									
 									<div className="description text-left col-lg-12">
