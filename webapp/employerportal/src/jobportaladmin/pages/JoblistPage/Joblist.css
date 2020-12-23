@@ -11,7 +11,7 @@
 }
 
 .jobListContainer{
-	height: 275px;
+	height: 300px;
 	margin-top: 30px;
 	border-radius: 10px;
 	border: 1px solid var(--main-border-color);
@@ -19,7 +19,7 @@
 }
 
 .jobListContainer .jobListLeftContent{
-	height: 233px;
+	height: 260px;
 	margin-top: 20px;
 	border-right: 1px solid rgba(245, 167, 33, 0.5);
 }
@@ -168,6 +168,19 @@
 	cursor: pointer;
 }
 
+.jobListNumapply{
+	font-size: 15px !important;
+	margin-left: -6px;
+	margin-top: 13px;
+	padding-left: 3px;
+	color: var(--main-border-color);
+}
+
+.jobListNumapply a {
+    color: var(--main-border-color) !important;
+    text-decoration: none;
+}
+
 /*******************Search Tab********************/
 
 .jobListSearchTab{
@@ -186,4 +199,8 @@
 	margin-top: 32px;
 	margin-left: -20px;
 	margin-right: 20px;
+}
+
+.applyjob{
+	margin-left: 80px;
 }
