@@ -1,5 +1,4 @@
 import React, {Component} 	from 'react';
-import "./CandidateJoblist.css";
 import Candidatelist		from '../../blocks/Candidatelist/Candidatelist.js';
 
 

@@ -124,16 +124,16 @@ deleteJob = (event)=>{
 															<i className="fa fa-calendar jobListExperience"></i> &nbsp; Exp: {elem.eligibility.minExperience}
 														</div>
 														<div> 
-															<i className="fa fa-rupee jobListMonSal"></i> &nbsp; <i className="fa fa-inr"></i> {elem.ctcOffered.minSalary} - <i className="fa fa-inr"></i> {elem.ctcOffered.maxSalary} a month
+															<i className="fa fa-rupee jobListCtcSal"></i> &nbsp; <i className="fa fa-inr"></i> {elem.ctcOffered.minSalary} {elem.ctcOffered.minSalPeriod} - <i className="fa fa-inr"></i> {elem.ctcOffered.maxSalary} {elem.ctcOffered.maxSalPeriod}
 														</div>
 														<div>
 															<i className="fa fa-map-marker jobListLocation"></i> &nbsp; {elem.location.address}
 														</div>
 														<div> 
-															<i className="fa fa-users jobListNumPositions"></i> &nbsp; No of position : {elem.jobBasicInfo.positions}
+															<i className="fa fa-users jobListNumPositions"></i> &nbsp; No. of positions : {elem.jobBasicInfo.positions}
 														</div>
-														<div> 
-															<i className="fa fa-check-circle jobListNumapply"></i> &nbsp; <a href={"/applied-candidate-list/" + elem._id}> No of candidates applied to this job : {applicantsCount.length > 0 ? applicantsCount[0].candidatesApplied :  0}</a> 
+														<div className="joblistNoCount"> 
+															<i className="fa fa-check-circle jobListNumapply"></i> &nbsp; <a href={"/applied-candidate-list/" + elem._id}> No. of applicants applied to job : {applicantsCount.length > 0 ? applicantsCount[0].candidatesApplied :  0}</a> 
 														</div>
 													</div>
 													<div className="col-lg-1 jobListRightContent">

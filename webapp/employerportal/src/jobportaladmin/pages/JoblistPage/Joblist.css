@@ -115,7 +115,7 @@
 	color: var(--main-border-color);
 }
 
-.jobListMonSal{
+.jobListCtcSal{
 	font-size: 10px !important; 
 	border: 1px solid #D3950A;
 	padding: 3px 5px;
@@ -176,9 +176,8 @@
 	color: var(--main-border-color);
 }
 
-.jobListNumapply a {
-    color: var(--main-border-color) !important;
-    text-decoration: none;
+.joblistNoCount{
+	margin-left: -3px;
 }
 
 /*******************Search Tab********************/
