@@ -157,7 +157,9 @@ class LeftSideFilters extends Component{
           functionalArea_ids.push(elem.id);
         })
         selector.functionalArea_id = selecteditems;
-      }      
+      } else{
+        delete selector.functionalArea_id;
+      }     
     }
     if (filterType === 'subfunctionalArea') {
       if (selecteditems.length > 0) {
@@ -165,7 +167,9 @@ class LeftSideFilters extends Component{
           subfunctionalArea_ids.push(elem.id);
         })
         selector.subfunctionalArea_id = selecteditems;
-      }
+      }else{
+        delete selector.subfunctionalArea_id;
+      }   
     }
     if (filterType === 'jobRole') {
       if (selecteditems.length > 0) {
@@ -173,7 +177,9 @@ class LeftSideFilters extends Component{
           jobRoles_ids.push(elem.id);
         })
         selector.jobRoles_id = selecteditems;
-      }
+      }else{
+        delete selector.jobRoles_id;
+      }   
     }
 
     this.setState({ selector: selector },()=>{
