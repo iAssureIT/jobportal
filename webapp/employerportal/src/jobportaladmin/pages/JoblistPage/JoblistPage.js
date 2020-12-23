@@ -17,7 +17,7 @@ class JoblistPage extends Component{
 	    }
 	}
   componentDidMount(){
-
+ 
       var selector=this.state.selector;
       selector.countryCode = "IN"; 
       selector.company_id = this.props.company_id

@@ -16,40 +16,39 @@ class Candidatelist extends Component{
 			dataArry           : [],
 			skillsArry         : [],
 			//candidateSelector  : {},
+			jobInfo 		   : [], 	
 			candidateSelector  : { "jobID" :  this.props.jobID }
  		}
 	}
 	componentDidMount(){
-		
 		var {mapAction}  = this.props;
 		mapAction.filterCandidatesApplied(this.state.candidateSelector)	
 		
+		// get single job information by jobID
+		Axios.get("/api/jobs/get/one/"+this.props.jobID)
+		.then(response=>{
+			this.setState({jobInfo : response.data.jobsData})
+		})
+		.catch(err=>{
+
+		})
 	}
 	render(){
-		console.log(this.props.jobList)
 		return(
 				<div className="">
 					<div className="candidateListWrapperMain">
 						<div className="col-lg-12 candidateListWrapper">
 							{
-								this.props.candidateList
-								? 
-								this.props.candidateList.map((elem,index)=>{
-									return(
-												<div className="col-lg-8" key={index}>
-													<div className="JobInfoContainer">
-														<div className="col-lg-12">
-															<div className="col-lg-11 jobDescBlock">
-																{/*{elem.jobsData[0].jobBasicInfo.jobDesc}*/}
-																job Description:
-															</div>
-														</div>	
-													</div>
-												</div>
-											);
-							})
-							:
-								null	
+								<div className="col-lg-8" >
+									<div className="JobInfoContainer">
+										<div className="col-lg-12">
+											<div className="col-lg-11 jobDescBlock">
+												{this.state.jobInfo[0] ? this.state.jobInfo[0].jobBasicInfo.jobTitle : null}
+												
+											</div>
+										</div>	
+									</div>
+								</div>
 						}	
 						</div>
 					</div>			
