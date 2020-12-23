@@ -14,7 +14,7 @@
 
 }
 .candidateListRow{
-	margin-top:30px;
+	/*margin-top:30px;*/
 
 }
 .candidateInfoBlock{
@@ -168,4 +168,30 @@
 }
 .profileSymbols img:hover{
 	cursor: pointer;
+}
+
+.candidateListWrapperMain{
+	margin-top: 30px;
+}
+
+.candidateListWrapper{
+	padding-bottom: 30px;
+}
+
+.JobInfoContainer{
+	height: 290px;
+	font-size: 22px;
+	color: var(--main-border-color); 
+	border-radius: 10px;
+	border: 1px solid var(--main-border-color);
+	background-color: var(--form-field-background-color);
+}
+
+.jobDescBlock{
+	padding-top: 20px;
+	font-family: Montserrat-SemiBold;
+}
+
+.xyz{
+	color: red;
 }

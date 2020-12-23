@@ -11,7 +11,7 @@ class JobListView extends Component{
 	constructor(props){
 	super(props);
 	this.state={
-		jobList : []
+		jobList : [],
 	}
 }	
 
@@ -121,7 +121,10 @@ deleteJob = (event)=>{
 															<i className="fa fa-map-marker jobListLocation"></i> &nbsp; {elem.location.address}
 														</div>
 														<div> 
-															<i className="fa fa-users jobListNumPositions"></i> &nbsp; No of position : {elem.jobBasicInfo.positions} 
+															<i className="fa fa-users jobListNumPositions"></i> &nbsp; No of position : {elem.jobBasicInfo.positions}
+														</div>
+														<div> 
+															<i className="fa fa-check-circle jobListNumapply"></i> &nbsp; <a href={"/applied-candidate-list/" + elem._id}> No of candidates applied to this job : </a> 
 														</div>
 													</div>
 													<div className="col-lg-1 jobListRightContent">
