@@ -33,7 +33,8 @@ const initialState = {
 	selector 					: {},
 	jobList 					: [],
 	candidateSelector 			: {},
-	candidateList 				: []
+	candidateList 				: [],
+	applicantsCountList 		: []
 }
 
 const reducer = (state = initialState, action) => {
@@ -60,6 +61,9 @@ const reducer = (state = initialState, action) => {
 	}
 	if(action.type === "GET_JOB_LIST"){
 		newState.jobList = action.jobList;
+	}
+	if(action.type === "GET_APPLICANTS_COUNT"){
+		newState.applicantsCountList = action.applicantsCountList;
 	}
 	if(action.type === "GET_CANDIDATE_LIST"){
 		newState.candidateList = action.candidateList;

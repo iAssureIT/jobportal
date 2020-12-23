@@ -6,6 +6,7 @@ router.post  ("/post"			   				, jobsController.insertJobs);
 router.get   ("/get/one/:job_id"  				, jobsController.getJob);
 router.get   ("/get/searchlist/:searchTxt"  	, jobsController.getSearchList);
 router.post   ("/list"	   						, jobsController.getJobList);
+router.post   ("/joblist-for-employer"	   		, jobsController.getJobListForEmployer);
 router.patch ("/update"		   					, jobsController.updateJob);
 
 router.post ("/mapwise-jobs"		   			, jobsController.mapwiseJobs);

@@ -7,6 +7,8 @@ router.post('/post', ControllerApplyJob.applyJob);
 
 // router.patch('/', wishlistsController.update_wishlists);
 
+router.post('/get/applicantsCountList',ControllerApplyJob.applicantsCountList);
+
 router.get('/get/candidateAppliedJobList/:candidateID',ControllerApplyJob.getCandidateAppliedJobList);
 
 router.post('/get/candidatesAppliedToJob',ControllerApplyJob.candidatesAppliedToJob);

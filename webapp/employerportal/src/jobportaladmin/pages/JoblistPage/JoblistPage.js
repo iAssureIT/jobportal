@@ -26,6 +26,8 @@ class JoblistPage extends Component{
       var {mapAction} = this.props;
       mapAction.filterJobList(selector);
 
+      mapAction.applicantsCountList({employerID : this.props.company_id});
+
   }
 	leftDrawerInfo(event){
 

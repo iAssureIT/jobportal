@@ -129,7 +129,24 @@ exports.appliedJobCount = (req,res,next)=>{
         });
     });
 };
-
+//applicantsCountList
+exports.applicantsCountList = (req,res,next)=>{
+    //console.log(req.params.candidateID);
+    ApplyJob.aggregate([
+        { "$unwind": "$appliedItems" },
+        { "$match" : { "appliedItems.employerID" : ObjectId(req.body.employerID) } },
+        { "$group" : { _id: "$appliedItems.jobID", candidatesApplied: { $sum: 1 } }}
+    ])
+    .exec()
+    .then(data=>{
+        res.status(200).json(data);
+    })
+    .catch(err =>{
+        res.status(500).json({
+            error: err
+        });
+    });
+};
 //candidatesAppliedToJob
 exports.candidatesAppliedToJob = (req,res,next)=>{
     ApplyJob.aggregate([

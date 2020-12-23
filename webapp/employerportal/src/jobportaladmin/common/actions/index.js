@@ -16,6 +16,11 @@ export const getJobList = (jobList )=> ({
       type 				   : 'GET_JOB_LIST',
       jobList 			 : jobList
 });
+
+export const getApplicantsCountList = (applicantsCountList )=> ({ 
+      type                       : 'GET_APPLICANTS_COUNT',
+      applicantsCountList        : applicantsCountList
+});
 export const getCandidateList = (candidateList )=> ({ 
       type           : 'GET_CANDIDATE_LIST',
       candidateList  : candidateList
@@ -24,7 +29,7 @@ export const getCandidateList = (candidateList )=> ({
 export function filterJobList(selector) {
   	return dispatch =>{
   		dispatch(setFilterSelector(selector));
-	  	return axios.post("/api/jobs/list",selector)
+	  	return axios.post("/api/jobs/joblist-for-employer",selector)
 	    .then((response)=>{
 	        dispatch(getJobList(response.data));
 	    })
@@ -33,12 +38,22 @@ export function filterJobList(selector) {
 	    }) 
   	}  
 }
+export function applicantsCountList(selector) {
+    return dispatch =>{
+      return axios.post("/api/applyJob/get/applicantsCountList",selector)
+      .then((response)=>{
+          dispatch(getApplicantsCountList(response.data));
+      })
+      .catch((error)=>{
+            console.log('error', error);
+      }) 
+    }  
+}
 export function filterCandidatesApplied(candidateSelector) {
     return dispatch =>{ 
       dispatch(setCandidateFilterSelector(candidateSelector));
       return axios.post("/api/applyJob/get/candidatesAppliedToJob",candidateSelector)
       .then((response)=>{
-          console.log(response.data)
           dispatch(getCandidateList(response.data));
       })
       .catch((error)=>{

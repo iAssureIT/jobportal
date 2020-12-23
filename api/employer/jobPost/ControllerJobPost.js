@@ -428,6 +428,101 @@ exports.getJobList = (req,res,next)=>{
 					});
 }
 
+exports.getJobListForEmployer = (req,res,next)=>{
+	var selector 		= {}; 
+	var industry_ids 	= [];
+    var funarea_ids 	= [];
+    var subfunarea_ids 	= [];
+    var jobroles_ids 	= [];
+
+    selector['$and'] 	= [];
+    selector["$and"].push({ "location.countryCode" :  req.body.countryCode   })
+   	
+    if (req.body.company_id) {
+    	selector["$and"].push({ "company_id" : ObjectID(req.body.company_id)});
+    }
+    if (req.body.industry_id) {
+    	req.body.industry_id.map(elem => {
+    		industry_ids.push(ObjectID(elem.id))
+    	})
+    	selector["$and"].push({ "jobBasicInfo.industry_id" : { $in: industry_ids } });
+    }
+    if (req.body.functionalArea_id) {
+    	req.body.functionalArea_id.map(elem => {
+    		funarea_ids.push(ObjectID(elem.id))
+    	})
+    	selector["$and"].push({ "jobBasicInfo.functionalarea_id" : { $in: funarea_ids } });
+    }
+    if (req.body.subfunctionalArea_id) {
+    	req.body.subfunctionalArea_id.map(elem => {
+    		subfunarea_ids.push(ObjectID(elem.id))
+    	})
+    	selector["$and"].push({ "jobBasicInfo.subfunctionalarea_id" : { $in: subfunarea_ids } });
+    }
+    if (req.body.jobRoles_id) {
+    	req.body.jobRoles_id.map(elem => {
+    		jobroles_ids.push(ObjectID(elem.id))
+    	})
+    	selector["$and"].push({ "jobBasicInfo.jobrole_id" : { $in: jobroles_ids } });
+    }
+
+    //console.log(JSON.stringify(selector))
+
+    Jobs.aggregate([
+    	{ $match 	: selector },
+    	{ $sort 	: {createdAt : -1} },
+    	{$lookup:{
+                   from: "entitymasters", 		localField: "company_id",
+                   foreignField: "_id",		as: "employer" } 
+        },
+    	{ $lookup 	: { from: "industrymaster",
+                   		localField: "jobBasicInfo.industry_id",
+                   		foreignField: "_id",
+                   		as: "functionalAreas"}
+        },
+        {$lookup:{
+                   from: "functionalareamaster",
+                   localField: "jobBasicInfo.functionalarea_id",
+                   foreignField: "_id",
+                   as: "functionalAreas" } 
+        },
+        {$lookup:{
+                   from: "subfunctionalareamaster",
+                   localField: "jobBasicInfo.subfunctionalarea_id",
+                   foreignField: "_id",
+                   as: "subFunctionalAreas" } 
+        },   
+        {$lookup:{
+                   from: "jobtypemaster",
+                   localField: "jobBasicInfo.jobtype_id",
+                   foreignField: "_id",
+                   as: "jobTypes" } 
+        },
+        {$lookup:{
+                   from: "jobtypemaster",
+                   localField: "jobBasicInfo.jobtime_id",
+                   foreignField: "_id",
+                   as: "jobTypes" } 
+        },
+        {$lookup:{
+                   from: "jobtypemaster",
+                   localField: "jobBasicInfo.jobcategory_id",
+                   foreignField: "_id",
+                   as: "jobTypes" } 
+        }
+    ])
+	.exec()
+	.then(jobList=> {
+						res.status(200).json(jobList);			
+	})
+	.catch(error=> {
+		console.log(error);
+		res.status(500).json({
+								error 	: error,
+								message : "Some issue occurred finding Job List"
+							});
+					});
+}
 exports.updateJob = (req,res,next)=>{
 	console.log("req.body - ", req.body);
 	var functionalarea_id, subfunctionalarea_id, jobcategory_id, jobrole_id, jobtype_id, jobtime_id;

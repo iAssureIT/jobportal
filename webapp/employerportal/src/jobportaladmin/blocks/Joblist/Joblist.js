@@ -16,13 +16,13 @@ class JobListView extends Component{
 }	
 
 componentDidMount(){
-	var selector=this.props.selector;
+	/*var selector=this.props.selector;
 	selector.countryCode = "IN"; 
 
 	this.setState({ selector: selector })
 
 	var {mapAction} = this.props;
-	mapAction.filterJobList(selector);
+	mapAction.filterJobList(selector);*/
 }
 
 deleteJob = (event)=>{
