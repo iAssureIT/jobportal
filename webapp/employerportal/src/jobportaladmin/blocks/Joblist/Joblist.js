@@ -89,7 +89,16 @@ deleteJob = (event)=>{
 							this.props.jobList
 							?
 								this.props.jobList.map((elem,index1)=>{
-
+									var applicantsCount = this.props.applicantsCountList.filter((appl, ind)=>{
+										if (appl._id == elem._id) {
+											return appl.candidatesApplied;
+										}else{
+											return 0
+										}
+										
+									})
+									console.log(applicantsCount)
+									console.log(applicantsCount.length)
 									return(
 										<div className="col-lg-12" key={index1}>
 											<div className="jobListContainer">
@@ -124,7 +133,7 @@ deleteJob = (event)=>{
 															<i className="fa fa-users jobListNumPositions"></i> &nbsp; No of position : {elem.jobBasicInfo.positions}
 														</div>
 														<div> 
-															<i className="fa fa-check-circle jobListNumapply"></i> &nbsp; <a href={"/applied-candidate-list/" + elem._id}> No of candidates applied to this job : </a> 
+															<i className="fa fa-check-circle jobListNumapply"></i> &nbsp; <a href={"/applied-candidate-list/" + elem._id}> No of candidates applied to this job : {applicantsCount.length > 0 ? applicantsCount[0].candidatesApplied :  0}</a> 
 														</div>
 													</div>
 													<div className="col-lg-1 jobListRightContent">
@@ -160,6 +169,7 @@ const mapStateToProps = (state)=>{
     return {
         user_ID     : state.user_ID,  	candidateID   : state.candidateID,
         selector    : state.selector,   jobList     : state.jobList,
+        applicantsCountList : state.applicantsCountList
     }
 }
 const mapDispatchToProps = (dispatch) => ({
