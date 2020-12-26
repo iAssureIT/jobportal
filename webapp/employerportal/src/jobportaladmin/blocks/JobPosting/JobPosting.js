@@ -103,8 +103,8 @@ class JobPosting extends Component {
             otherSkillTags              :   [],
             otherSkillSuggestions       :   [],
             
-            preferredSkillTags             :   [],
-            preferredSkillSuggestions      :   [],
+            preferredSkillTags          :   [],
+            preferredSkillSuggestions   :   [],
 
             
             submitBtnText               :   "SUBMIT"
@@ -327,8 +327,6 @@ class JobPosting extends Component {
                     Swal.fire("Some error occured while updating job data", error.message, "error");
                 })
         }
-
-        
 
     }
 
@@ -995,7 +993,7 @@ render(){
 										<div className="row">
 											<div className="col-lg-6">
 												<div className="row">
-													<label htmlFor="jobTitle" className="addjobformLable col-lg-12" aria-label="Whats up!">
+													<label htmlFor="jobTitle" className="addjobformLable col-lg-12">
 														Job Title
 														<span className="asterisk"> &#42; </span>
                                                         <div href="#" data-tip data-for='jobTitleTooltip' className="pull-right">
@@ -1025,18 +1023,18 @@ render(){
 			                                        	searchOptions	=	{searchOptions}>
 				                                        
 				                                        {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => 	(
-					                                          	<div>
+					                                          	<div className="col-lg-12 form-control addJobFormField">
 						                                            <input maxLength="200"
 						                                            	{...getInputProps({
 										                                            		placeholder: 'Search Address ...',
-										                                                	className: 'location-search-input col-lg-12 form-control errorinputText',
+										                                                	className: 'col-lg-12 location-search-input errorinputText',
 										                                                	id:"address",
 										                                                	name:"address"
 						                                              					})
 						                                            	}
 						                                            />
 						                                            
-						                                            <div className={this.state.address ? "autocomplete-dropdown-container SearchListContainer" : ""}>
+						                                            <div className={this.state.address ? "autocomplete-dropdown-container col-lg-12" : ""}>
 						                                            	{loading && <div>Loading...</div>}
 						                                            	{suggestions.map(suggestion => {
 														                                                	const className = suggestion.active
@@ -1044,8 +1042,8 @@ render(){
 														                                                  		: 'suggestion-item';
 														                                                	// inline style for demonstration purpose
 														                                                	const style = suggestion.active
-														                                                  		? { backgroundColor: '#fafafa', cursor: 'pointer' }
-														                                                  		: { backgroundColor: '#ffffff', cursor: 'pointer' };
+														                                                  		? { backgroundColor: 'var(--main-border-color)', cursor: 'pointer'}
+														                                                  		: { backgroundColor: 'var(--form-field-background-color)', cursor: 'pointer', paddingLeft: '10px'};
 						                                                
 															                                                return (
 																	                                                	<div
@@ -1072,7 +1070,7 @@ render(){
 
 									<div className="col-lg-12 addJobFieldRow text-left">
 										<div className="row">
-											<div className="col-lg-3">
+											<div className="col-lg-3 addJobFixzIndex">
                                                 <div className="row">
 												    <label htmlFor="states" className="addjobformLable col-lg-12"> State <span className="asterisk">&#42;</span> </label>
                                                 </div>
@@ -1083,7 +1081,7 @@ render(){
                                                 <span id="statesError" className="errorMsgJobPost"></span>	
 											</div>	
 											
-											<div className="col-lg-3">
+											<div className="col-lg-3 addJobFixzIndex">
 												<div className="row">
 													<label className="addjobformLable col-lg-12"> City <span className="asterisk">&#42;</span> </label>
 												</div>	
@@ -1093,7 +1091,7 @@ render(){
                                                 <span id="cityVillageError" className="errorMsgJobPost"></span>
 											</div>
 											
-											<div className="col-lg-3">
+											<div className="col-lg-3 addJobFixzIndex">
 												<div className="row">
 													<label className="addjobformLable col-lg-12"> District <span className="asterisk">&#42;</span> </label>
 												</div>
@@ -1103,12 +1101,12 @@ render(){
                                                 <span id="districtError" className="errorMsgJobPost"></span>
 											</div>
 											
-											<div className="col-lg-3">
+											<div className="col-lg-3 addJobFixzIndex">
 												<div className="row">
 													<label className="addjobformLable col-lg-12"> Pincode <span className="asterisk">&#42;</span> </label>
 												</div>
 												<div className="input-group"> 
-													<input type="text" className="form-control addJobFormField addJobState" ref="pincode" id="pincode" name="pincode" maxLength="50" value={this.state.pincode} onChange={this.keyPressNumber.bind(this)}/>
+													<input type="text" className="form-control addJobFormField addJobState" ref="pincode" id="pincode" name="pincode" maxLength="06" value={this.state.pincode} onChange={this.keyPressNumber.bind(this)}/>
 												</div>
                                                 <span id="pincodeError" className="errorMsgJobPost"></span>
 											</div>
@@ -1134,7 +1132,7 @@ render(){
                                                 <span id="functionalAreaError" className="errorMsgJobPost"></span>
 											</div>			
 											
-											<div className="col-lg-6">
+											<div className="col-lg-6 addJobFixzIndex">
 												<label htmlFor="subFunctionalArea" className="addjobformLable"> Sub-Functional Area <span className="asterisk">&#42;</span> </label>
 												<div className="input-group">
 													<span className="input-group-addon addJobFormField"><FontAwesomeIcon icon={['fas', 'briefcase']} /></span> 

@@ -118,7 +118,7 @@ export default class JobPostProfile extends Component{
 					employerName 		: 	response.data.jobsData[0].employer[0].companyName,
 					employerLogo 		: 	response.data.jobsData[0].employer[0].companyLogo[0] ? response.data.jobsData[0].employer[0].companyLogo[0] : null,
 					industry_id 		: 	response.data.jobsData[0].jobBasicInfo.industry_id,
-					/*industry 			: 	response.data.jobsData[0].industry[0].industry,*/
+					industry 			: 	response.data.jobsData[0].industry[0].industry,
 					functionalarea_id 	: 	response.data.jobsData[0].jobBasicInfo.functionalarea_id,
 					functionalArea 		: 	response.data.jobsData[0].functionalArea[0].functionalArea,
 					subfunctionalarea_id: 	response.data.jobsData[0].jobBasicInfo.subfunctionalarea_id,
@@ -135,7 +135,7 @@ export default class JobPostProfile extends Component{
 					jobCategory 		: 	response.data.jobsData[0].jobCategory[0].jobCategory,
 					positions           :   response.data.jobsData[0].jobBasicInfo.positions,
 					jobDesc 			: 	response.data.jobsData[0].jobBasicInfo.jobDesc,
-					lastDateOfAppl      : 	response.data.jobsData[0].jobBasicInfo.lastDateOfAppl?Moment(response.data.jobsData[0].jobBasicInfo.lastDateOfAppl).format("YYYY-MM-DD"):"",
+					lastDateOfAppl      : 	response.data.jobsData[0].jobBasicInfo.lastDateOfAppl ? Moment(response.data.jobsData[0].jobBasicInfo.lastDateOfAppl).format("YYYY-MM-DD"):"",
 					contactPersonName 	: 	response.data.jobsData[0].jobBasicInfo.contactPersonName,
 					contactPersonEmail 	: 	response.data.jobsData[0].jobBasicInfo.contactPersonEmail,
 					contactPersonPhone 	: 	response.data.jobsData[0].jobBasicInfo.contactPersonPhone,

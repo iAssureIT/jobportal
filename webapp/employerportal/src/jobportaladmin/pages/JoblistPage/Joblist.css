@@ -203,3 +203,28 @@
 .applyjob{
 	margin-left: 80px;
 }
+
+/***************************swal custom classes**********************************/
+
+.swal2-container:not(.swal2-top):not(.swal2-top-start):not(.swal2-top-end):not(.swal2-top-left):not(.swal2-top-right):not(.swal2-center-start):not(.swal2-center-end):not(.swal2-center-left):not(.swal2-center-right):not(.swal2-bottom):not(.swal2-bottom-start):not(.swal2-bottom-end):not(.swal2-bottom-left):not(.swal2-bottom-right):not(.swal2-grow-fullscreen)>.swal2-modal {
+	border: 1px solid var(--main-border-color);
+	padding: 30px;
+	border-radius: 5px;
+	background-color: var(--form-field-background-color);
+}
+
+[class^=swal2]{
+	color: #fff;
+}
+
+.swal2-styled.swal2-confirm{
+	box-shadow: none;
+	color: #fff;
+	font-weight: bold;
+}
+
+.swal2-styled.swal2-cancel{
+	box-shadow: none;
+	color: #fff;
+	font-weight: bold;
+}

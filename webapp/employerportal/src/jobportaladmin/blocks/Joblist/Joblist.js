@@ -30,13 +30,13 @@ deleteJob = (event)=>{
 	const job_id = event.currentTarget.id;
 
 	Swal.fire({
-		title 				: 'Are you sure? you want to delete this profile!!!',
-		text 				: 'You will not be able to recover this profile',
+		title 				: 'Are you sure? you want to delete this job!!!',
+		text 				: 'You will not be able to recover this job',
 		icon 				: 'warning',
 		showCancelButton 	: true,
 		confirmButtonText 	: 'Yes, delete it!',
-		cancelButtonColor 	: 'No, keep it',
-		confirmButtonColor 	: '#d33',
+		cancelButtonText 	: 'No, keep it',
+		confirmButtonColor 	: '#f5a721',
 	
 	}).then((result) =>{
 		if(result.value){
@@ -50,7 +50,7 @@ deleteJob = (event)=>{
 
 						Swal.fire(
 									'Deleted!',
-									'Joblist has been deleted successfully!',
+									'Job has been deleted successfully!',
 									'success'
 							);
 					}
@@ -67,7 +67,7 @@ deleteJob = (event)=>{
 				}else if (result.dismiss === Swal.DismissReason.cancel){
 					Swal.fire(
 						'Cancelled',
-						'Your job Profile is safe :)',
+						'Your job is safe :)',
 						'error'
 					)
 				}

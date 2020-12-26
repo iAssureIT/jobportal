@@ -93,6 +93,43 @@
 	margin-top: -32px;
 }
 
+
+.location-search-input{
+	padding: 0 !important;
+	padding-left: 10px !important;
+	background-color: var(--form-field-background-color);
+	border: none;
+	height: 30px;
+	margin-top: -5px;
+	margin-left: -12px;
+	width: 102%;
+}
+
+.autocomplete-dropdown-container{
+  margin-top: 1px;
+  border-left: 1px solid var(--main-border-color);
+  border-bottom: 1px solid var(--main-border-color);
+  border-right: 1px solid var(--main-border-color);
+  background-color: var(--form-field-background-color);
+  margin-left: -12px;
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  padding-top: 20px;
+  /*border: 1px solid var(--main-border-color);*/
+}
+
+.location-search-input,
+.location-search-input:focus,
+.location-search-input:active {
+  outline: none;
+}
+
+.addJobFixzIndex{
+	z-index: 1;
+}
+
 .addJobState{
 	border-radius: 4px !important;
 }
@@ -134,26 +171,19 @@
     border-top-right-radius: 4px;
 }
 
-.input-group .form-control:last-child{
-	border-bottom-right-radius: 4px !important;
-    border-top-right-radius: 4px !important;
-}
-
 .input-group .form-control:first-child{
-	height: 34px;
-    padding-left: 10px;
-	border: 1px solid var(--main-border-color);
-	border-radius: 4px;
-    background-color: var(--form-field-background-color);
-    color: var(--main-txt-color);
+	border-bottom-right-radius: 4px;
+    border-top-right-radius: 4px;
+    border-bottom-left-radius: 0px;
+    border-top-left-radius: 0px;
 }
 
 .addJobFieldRow .minSalaryDropdown{
-	border-radius: 4px !important;
+	margin-left: 2px;
 }
 
 .addJobFieldRow .maxSalaryDropdown{
-	border-radius: 4px !important;
+	margin-left: 2px;
 }
 
 .addJobFormField:hover{
@@ -676,7 +706,7 @@ div.ReactTags__tags {
     border-top-right-radius: 4px;
     border: 1px solid var(--main-border-color);
     background-color: var(--form-field-background-color);
-    padding-bottom: 1px;
+    /*padding-bottom: 1px;*/
 }
 
 div.ReactTags__tagInput {
@@ -691,7 +721,7 @@ div.ReactTags__tagInput {
 
 div.ReactTags__tagInput input.ReactTags__tagInputField,
 div.ReactTags__tagInput input.ReactTags__tagInputField:focus {
-    height: 31px;
+    height: 34px;
     margin-left: 5px;
     color: #fff;
     font-size: 12px;
@@ -699,6 +729,7 @@ div.ReactTags__tagInput input.ReactTags__tagInputField:focus {
     width: 100%;
     padding: 0 4px;
     background-color: var(--main-bg-color);
+    outline: none;
 }
 
 /* Styles for selected tags */
@@ -714,6 +745,7 @@ div.ReactTags__selected span.ReactTags__tag {
     margin: 0 5px;
     cursor: move;
     border-radius: 10px;
+    margin-top: 5px;
 }
 
 div.ReactTags__selected a.ReactTags__remove {
@@ -792,142 +824,6 @@ input::placeholder{
 
 /******************************************End Of React Tag Input Properties******************************************/
 
-.react-tags {
-  position: relative;
-  padding: 6px 0 0 6px;
-  border: 1px solid #D1D1D1;
-  border-radius: 1px;
-
-  /* shared font styles */
-  font-size: 1em;
-  line-height: 1.2;
-
-  /* clicking anywhere will focus the input */
-  cursor: text;
-}
-
-.react-tags.is-focused {
-  border-color: #B1B1B1;
-}
-
-.react-tags__selected {
-  display: inline;
-}
-
-.react-tags__selected-tag {
-  display: inline-block;
-  box-sizing: border-box;
-  margin: 0 6px 6px 0;
-  padding: 6px 8px;
-  border: 1px solid #D1D1D1;
-  border-radius: 2px;
-  background: #F1F1F1;
-
-  /* match the font styles */
-  font-size: inherit;
-  line-height: inherit;
-}
-
-.react-tags__selected-tag:after {
-  content: '\2715';
-  color: #AAA;
-  margin-left: 8px;
-}
-
-.react-tags__selected-tag:hover,
-.react-tags__selected-tag:focus {
-  border-color: #B1B1B1;
-}
-
-.react-tags__search {
-  display: inline-block;
-
-  /* match tag layout */
-  padding: 7px 2px;
-  margin-bottom: 6px;
-
-  /* prevent autoresize overflowing the container */
-  max-width: 100%;
-}
-
-@media screen and (min-width: 30em) {
-
-  .react-tags__search {
-    /* this will become the offsetParent for suggestions */
-    position: relative;
-  }
-
-}
-
-.react-tags__search-input {
-  /* prevent autoresize overflowing the container */
-  max-width: 100%;
-
-  /* remove styles and layout from this element */
-  margin: 0;
-  padding: 0;
-  border: 0;
-  outline: none;
-
-  /* match the font styles */
-  font-size: inherit;
-  line-height: inherit;
-}
-
-.react-tags__search-input::-ms-clear {
-  display: none;
-}
-
-.react-tags__suggestions {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  width: 100%;
-}
-
-@media screen and (min-width: 30em) {
-
-  .react-tags__suggestions {
-    width: 240px;
-  }
-
-}
-
-.react-tags__suggestions ul {
-  margin: 4px -1px;
-  padding: 0;
-  list-style: none;
-  background: white;
-  border: 1px solid #D1D1D1;
-  border-radius: 2px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-}
-
-.react-tags__suggestions li {
-  border-bottom: 1px solid #ddd;
-  padding: 6px 8px;
-}
-
-.react-tags__suggestions li mark {
-  text-decoration: underline;
-  background: none;
-  font-weight: 600;
-}
-
-.react-tags__suggestions li:hover {
-  cursor: pointer;
-  background: #eee;
-}
-
-.react-tags__suggestions li.is-active {
-  background: #b7cfe0;
-}
-
-.react-tags__suggestions li.is-disabled {
-  opacity: 0.5;
-  cursor: auto;
-}  
-
 /************************************************HTML Custom Classes******************************************/
 
 [list]::-webkit-calendar-picker-indicator {
@@ -938,5 +834,3 @@ input::placeholder{
   color: #fff;
   background-color: var(--main-border-color);
 }
-
-{/*autocomplete="off"*/}
