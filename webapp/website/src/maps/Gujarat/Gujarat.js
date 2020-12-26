@@ -6,109 +6,221 @@ import '../global.css';
 
 export default class Gujarat extends Component{
 
+	constructor(props){
+		super(props);
+	}
+	componentDidMount(){
+		
+	}
+	search(nameKey){
+		return 10;
+	}
+	onStateClick = (stateName) => {
+		
+	}
+
 	render(){
 		return(
 			<div className="bodyWrapper">
 				<div className="stateWrapper">
-					<div className="kec"> 
-						<img src="/Maps/Gujarat/Kachchh.png" className="kachchh" alt="Kachchh" onMouseOver={e => (e.currentTarget.src = "/Maps/Madhya_Pradesh/Kachchh_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Madhya_Pradesh/Kachchh.png")}/>
+					<div className="kachchh classHover"> 
+						<img src="/Maps/Gujarat/Kachchh.png"  alt="Kachchh" onMouseOver={e => (e.currentTarget.src = "/Maps/Gujarat/Kachchh_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Gujarat/Kachchh.png")}/>
+						<span className="kachchhText mapTextLabel text-capitalize">Kachchh</span>
+						<span className="kachchhNumber mapCountLabel text-center">{this.search('kachchh')}</span>
 					</div>
-					<div className="ban"> 
-						<img src="/Maps/Gujarat/Banas_Kantha.png" className="banasKantha" alt="Banas_Kantha" onMouseOver={e => (e.currentTarget.src = "/Maps/Madhya_Pradesh/Banas_Kantha_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Madhya_Pradesh/Banas_Kantha.png")}/>
+
+					<div className="banasKantha classHover"> 
+						<img src="/Maps/Gujarat/Banas_Kantha.png"  alt="Banas_Kantha" onMouseOver={e => (e.currentTarget.src = "/Maps/Gujarat/Banas_Kantha_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Gujarat/Banas_Kantha.png")}/>
+						<span className="banasKanthaText mapTextLabel text-capitalize">Banas Kantha</span>
+						<span className="banasKanthaNumber mapCountLabel text-center">{this.search('banas kantha')}</span>
 					</div>
-					<div className="pat"> 
-						<img src="/Maps/Gujarat/Patan.png" className="patan" alt="Patan" onMouseOver={e => (e.currentTarget.src = "/Maps/Madhya_Pradesh/Patan_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Madhya_Pradesh/Patan.png")}/>
+
+					<div className="patan classHover"> 
+						<img src="/Maps/Gujarat/Patan.png"  alt="Patan" onMouseOver={e => (e.currentTarget.src = "/Maps/Gujarat/Patan_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Gujarat/Patan.png")}/>
+						<span className="patanText mapTextLabel text-capitalize">Patan</span>
+						<span className="patanNumber mapCountLabel text-center">{this.search('patan')}</span>
 					</div>
-					<div className="mah"> 
-						<img src="/Maps/Gujarat/Mahesana.png" className="mahesana" alt="Mahesana" onMouseOver={e => (e.currentTarget.src = "/Maps/Madhya_Pradesh/Mahesana_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Madhya_Pradesh/Mahesana.png")}/>
+
+					<div className="mahesana classHover"> 
+						<img src="/Maps/Gujarat/Mahesana.png"  alt="Mahesana" onMouseOver={e => (e.currentTarget.src = "/Maps/Gujarat/Mahesana_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Gujarat/Mahesana.png")}/>
+						<span className="mahesanaText mapTextLabel text-capitalize">Mahesana</span>
+						<span className="mahesanaNumber mapCountLabel text-center">{this.search('mahesana')}</span>
 					</div>
-					<div className="sab"> 
-						<img src="/Maps/Gujarat/Sabarkantha.png" className="sabarkantha" alt="Sabarkantha" onMouseOver={e => (e.currentTarget.src = "/Maps/Madhya_Pradesh/Sabarkantha_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Madhya_Pradesh/Sabarkantha.png")}/>
+
+					<div className="sabarkantha classHover"> 
+						<img src="/Maps/Gujarat/Sabarkantha.png"  alt="Sabarkantha" onMouseOver={e => (e.currentTarget.src = "/Maps/Gujarat/Sabarkantha_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Gujarat/Sabarkantha.png")}/>
+						<span className="sabarkanthaText mapTextLabel text-capitalize">Sabarkantha</span>
+						<span className="sabarkanthaNumber mapCountLabel text-center">{this.search('sabarkantha')}</span>
 					</div>
-					<div className="arv"> 
-						<img src="/Maps/Gujarat/Arvalli.png" className="arvalli" alt="Arvalli" onMouseOver={e => (e.currentTarget.src = "/Maps/Madhya_Pradesh/Arvalli_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Madhya_Pradesh/Arvalli.png")}/>
+
+					<div className="arvalli classHover"> 
+						<img src="/Maps/Gujarat/Arvalli.png"  alt="Arvalli" onMouseOver={e => (e.currentTarget.src = "/Maps/Gujarat/Arvalli_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Gujarat/Arvalli.png")}/>
+						<span className="arvalliText mapTextLabel text-capitalize">Arvalli</span>
+						<span className="arvalliNumber mapCountLabel text-center">{this.search('arvalli')}</span>
 					</div>
-					<div className="gan"> 
-						<img src="/Maps/Gujarat/Gandhinagar.png" className="gandhinagar" alt="Gandhinagar" onMouseOver={e => (e.currentTarget.src = "/Maps/Madhya_Pradesh/Gandhinagar_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Madhya_Pradesh/Gandhinagar.png")}/>
+
+					<div className="gandhinagar classHover"> 
+						<img src="/Maps/Gujarat/Gandhinagar.png"  alt="Gandhinagar" onMouseOver={e => (e.currentTarget.src = "/Maps/Gujarat/Gandhinagar_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Gujarat/Gandhinagar.png")}/>
+						<span className="gandhinagarText mapTextLabel text-capitalize">Gandhinagar</span>
+						<span className="gandhinagarNumber mapCountLabel text-center">{this.search('gandhinagar')}</span>
 					</div>
-					<div className="ahm"> 
-						<img src="/Maps/Gujarat/Ahmedabad.png" className="ahmedabad" alt="Ahmedabad" onMouseOver={e => (e.currentTarget.src = "/Maps/Madhya_Pradesh/Ahmedabad_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Madhya_Pradesh/Ahmedabad.png")}/>
+
+					<div className="ahmedabad classHover"> 
+						<img src="/Maps/Gujarat/Ahmedabad.png"  alt="Ahmedabad" onMouseOver={e => (e.currentTarget.src = "/Maps/Gujarat/Ahmedabad_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Gujarat/Ahmedabad.png")}/>
+						<span className="fazilkaText mapTextLabel text-capitalize">Ahmedabad</span>
+						<span className="fazilkaNumber mapCountLabel text-center">{this.search('fazilka')}</span>
 					</div>
-					<div className="sur"> 
-						<img src="/Maps/Gujarat/Surendra_Nagar.png" className="surendraNagar" alt="Surendra_Nagar" onMouseOver={e => (e.currentTarget.src = "/Maps/Madhya_Pradesh/Surendra_Nagar_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Madhya_Pradesh/Surendra_Nagar.png")}/>
+
+					<div className="surendraNagar classHover"> 
+						<img src="/Maps/Gujarat/Surendra_Nagar.png"  alt="Surendra_Nagar" onMouseOver={e => (e.currentTarget.src = "/Maps/Gujarat/Surendra_Nagar_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Gujarat/Surendra_Nagar.png")}/>
+						<span className="ahmedabadText mapTextLabel text-capitalize">Ahmedabad</span>
+						<span className="ahmedabadNumber mapCountLabel text-center">{this.search('ahmedabad')}</span>
 					</div>
-					<div className="mor"> 
-						<img src="/Maps/Gujarat/Morbi.png" className="morbi" alt="Morbi" onMouseOver={e => (e.currentTarget.src = "/Maps/Madhya_Pradesh/Morbi_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Madhya_Pradesh/Morbi.png")}/>
+
+					<div className="morbi classHover"> 
+						<img src="/Maps/Gujarat/Morbi.png"  alt="Morbi" onMouseOver={e => (e.currentTarget.src = "/Maps/Gujarat/Morbi_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Gujarat/Morbi.png")}/>
+						<span className="morbiText mapTextLabel text-capitalize">Morbi</span>
+						<span className="morbiNumber mapCountLabel text-center">{this.search('morbi')}</span>
 					</div>
-					<div className="jam"> 
-						<img src="/Maps/Gujarat/Jamnagar.png" className="jamnagar" alt="Jamnagar" onMouseOver={e => (e.currentTarget.src = "/Maps/Madhya_Pradesh/Jamnagar_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Madhya_Pradesh/Jamnagar.png")}/>
+
+					<div className="jamnagar classHover"> 
+						<img src="/Maps/Gujarat/Jamnagar.png"  alt="Jamnagar" onMouseOver={e => (e.currentTarget.src = "/Maps/Gujarat/Jamnagar_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Gujarat/Jamnagar.png")}/>
+						<span className="jamnagarText mapTextLabel text-capitalize">Jamnagar</span>
+						<span className="jamnagarNumber mapCountLabel text-center">{this.search('jamnagar')}</span>
 					</div>
-					<div className="dev"> 
-						<img src="/Maps/Gujarat/Devbhumi_Dwarka.png" className="devbhumiDwarka" alt="Devbhumi_Dwarka" onMouseOver={e => (e.currentTarget.src = "/Maps/Madhya_Pradesh/Devbhumi_Dwarka_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Madhya_Pradesh/Devbhumi_Dwarka.png")}/>
+
+					<div className="devbhumiDwarka classHover"> 
+						<img src="/Maps/Gujarat/Devbhumi_Dwarka.png"  alt="Devbhumi_Dwarka" onMouseOver={e => (e.currentTarget.src = "/Maps/Gujarat/Devbhumi_Dwarka_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Gujarat/Devbhumi_Dwarka.png")}/>
+						<span className="devbhumiDwarkaText mapTextLabel text-capitalize">Devbhumi Dwarka</span>
+						<span className="devbhumiDwarkaNumber mapCountLabel text-center">{this.search('devbhumi dwarka')}</span>
 					</div>
-					<div className="por"> 
-						<img src="/Maps/Gujarat/Porbandar.png" className="porbandar" alt="Porbandar" onMouseOver={e => (e.currentTarget.src = "/Maps/Madhya_Pradesh/Porbandar_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Madhya_Pradesh/Porbandar.png")}/>
+
+					<div className="porbandar classHover"> 
+						<img src="/Maps/Gujarat/Porbandar.png"  alt="Porbandar" onMouseOver={e => (e.currentTarget.src = "/Maps/Gujarat/Porbandar_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Gujarat/Porbandar.png")}/>
+						<span className="porbandarText mapTextLabel text-capitalize">Porbandar</span>
+						<span className="porbandarNumber mapCountLabel text-center">{this.search('porbandar')}</span>
 					</div>
-					<div className="raj"> 
-						<img src="/Maps/Gujarat/Rajkot.png" className="rajkot" alt="Rajkot" onMouseOver={e => (e.currentTarget.src = "/Maps/Madhya_Pradesh/Rajkot_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Madhya_Pradesh/Rajkot.png")}/>
+
+					<div className="rajkot classHover"> 
+						<img src="/Maps/Gujarat/Rajkot.png"  alt="Rajkot" onMouseOver={e => (e.currentTarget.src = "/Maps/Gujarat/Rajkot_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Gujarat/Rajkot.png")}/>
+						<span className="rajkotText mapTextLabel text-capitalize">Rajkot</span>
+						<span className="rajkotNumber mapCountLabel text-center">{this.search('rajkot')}</span>
 					</div>
-					<div className="bot"> 
-						<img src="/Maps/Gujarat/Botad.png" className="botad" alt="Botad" onMouseOver={e => (e.currentTarget.src = "/Maps/Madhya_Pradesh/Botad_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Madhya_Pradesh/Botad.png")}/>
+
+					<div className="botad classHover"> 
+						<img src="/Maps/Gujarat/Botad.png"  alt="Botad" onMouseOver={e => (e.currentTarget.src = "/Maps/Gujarat/Botad_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Gujarat/Botad.png")}/>
+						<span className="botadText mapTextLabel text-capitalize">Botad</span>
+						<span className="botadNumber mapCountLabel text-center">{this.search('botad')}</span>
 					</div>
-					<div className="bha"> 
-						<img src="/Maps/Gujarat/Bhavnagar.png" className="bhavnagar" alt="Bhavnagar" onMouseOver={e => (e.currentTarget.src = "/Maps/Madhya_Pradesh/Bhavnagar_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Madhya_Pradesh/Bhavnagar.png")}/>
+
+					<div className="bhavnagar classHover"> 
+						<img src="/Maps/Gujarat/Bhavnagar.png"  alt="Bhavnagar" onMouseOver={e => (e.currentTarget.src = "/Maps/Gujarat/Bhavnagar_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Gujarat/Bhavnagar.png")}/>
+						<span className="bhavnagarText mapTextLabel text-capitalize">Bhavnagar</span>
+						<span className="bhavnagarNumber mapCountLabel text-center">{this.search('bhavnagar')}</span>
 					</div>
-					<div className="amr"> 
-						<img src="/Maps/Gujarat/Amreli.png" className="amreli" alt="Amreli" onMouseOver={e => (e.currentTarget.src = "/Maps/Madhya_Pradesh/Amreli_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Madhya_Pradesh/Amreli.png")}/>
+
+					<div className="amreli classHover"> 
+						<img src="/Maps/Gujarat/Amreli.png"  alt="Amreli" onMouseOver={e => (e.currentTarget.src = "/Maps/Gujarat/Amreli_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Gujarat/Amreli.png")}/>
+						<span className="amreliText mapTextLabel text-capitalize">Amreli</span>
+						<span className="amreliNumber mapCountLabel text-center">{this.search('amreli')}</span>
 					</div>
-					<div className="jun"> 
-						<img src="/Maps/Gujarat/Junagadh.png" className="junagadh" alt="Junagadh" onMouseOver={e => (e.currentTarget.src = "/Maps/Madhya_Pradesh/Junagadh_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Madhya_Pradesh/Junagadh.png")}/>
+
+					<div className="junagadh classHover"> 
+						<img src="/Maps/Gujarat/Junagadh.png"  alt="Junagadh" onMouseOver={e => (e.currentTarget.src = "/Maps/Gujarat/Junagadh_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Gujarat/Junagadh.png")}/>
+						<span className="junagadhText mapTextLabel text-capitalize">Junagadh</span>
+						<span className="junagadhNumber mapCountLabel text-center">{this.search('junagadh')}</span>
 					</div>
-					<div className="gir"> 
-						<img src="/Maps/Gujarat/Gir_Somnath.png" className="girSomnath" alt="Gir_Somnath" onMouseOver={e => (e.currentTarget.src = "/Maps/Madhya_Pradesh/Gir_Somnath_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Madhya_Pradesh/Gir_Somnath.png")}/>
+
+					<div className="girSomnath classHover"> 
+						<img src="/Maps/Gujarat/Gir_Somnath.png"  alt="Gir_Somnath" onMouseOver={e => (e.currentTarget.src = "/Maps/Gujarat/Gir_Somnath_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Gujarat/Gir_Somnath.png")}/>
+						<span className="girSomnathText mapTextLabel text-capitalize">Gir Somnath</span>
+						<span className="girSomnathNumber mapCountLabel text-center">{this.search('gir somnath')}</span>
 					</div>
-					<div className="mah"> 
-						<img src="/Maps/Gujarat/Mahisagar.png" className="mahisagar" alt="Mahisagar" onMouseOver={e => (e.currentTarget.src = "/Maps/Madhya_Pradesh/Mahisagar_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Madhya_Pradesh/Mahisagar.png")}/>
+
+					<div className="mahisagar classHover"> 
+						<img src="/Maps/Gujarat/Mahisagar.png"  alt="Mahisagar" onMouseOver={e => (e.currentTarget.src = "/Maps/Gujarat/Mahisagar_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Gujarat/Mahisagar.png")}/>
+						<span className="mahisagarText mapTextLabel text-capitalize">Mahisagar</span>
+						<span className="mahisagarNumber mapCountLabel text-center">{this.search('mahisagar')}</span>
 					</div>
-					<div className="khe"> 
-						<img src="/Maps/Gujarat/Kheda.png" className="kheda" alt="Kheda" onMouseOver={e => (e.currentTarget.src = "/Maps/Madhya_Pradesh/Kheda_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Madhya_Pradesh/Kheda.png")}/>
+
+					<div className="kheda classHover"> 
+						<img src="/Maps/Gujarat/Kheda.png"  alt="Kheda" onMouseOver={e => (e.currentTarget.src = "/Maps/Gujarat/Kheda_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Gujarat/Kheda.png")}/>
+						<span className="khedaText mapTextLabel text-capitalize">Kheda</span>
+						<span className="khedaNumber mapCountLabel text-center">{this.search('kheda')}</span>
 					</div>
-					<div className="ana"> 
-						<img src="/Maps/Gujarat/Anand.png" className="anand" alt="Anand" onMouseOver={e => (e.currentTarget.src = "/Maps/Madhya_Pradesh/Anand_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Madhya_Pradesh/Anand.png")}/>
+
+					<div className="anand classHover"> 
+						<img src="/Maps/Gujarat/Anand.png"  alt="Anand" onMouseOver={e => (e.currentTarget.src = "/Maps/Gujarat/Anand_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Gujarat/Anand.png")}/>
+						<span className="anandText mapTextLabel text-capitalize">Anand</span>
+						<span className="anandNumber mapCountLabel text-center">{this.search('anand')}</span>
 					</div>
-					<div className="bha"> 
-						<img src="/Maps/Gujarat/Bharuch.png" className="bharuch" alt="Bharuch" onMouseOver={e => (e.currentTarget.src = "/Maps/Madhya_Pradesh/Bharuch_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Madhya_Pradesh/Bharuch.png")}/>
+
+					<div className="bharuch classHover"> 
+						<img src="/Maps/Gujarat/Bharuch.png"  alt="Bharuch" onMouseOver={e => (e.currentTarget.src = "/Maps/Gujarat/Bharuch_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Gujarat/Bharuch.png")}/>
+						<span className="bharuchText mapTextLabel text-capitalize">Bharuch</span>
+						<span className="bharuchNumber mapCountLabel text-center">{this.search('bharuch')}</span>
 					</div>
-					<div className="vad"> 
-						<img src="/Maps/Gujarat/Vadodara.png" className="vadodara" alt="Vadodara" onMouseOver={e => (e.currentTarget.src = "/Maps/Madhya_Pradesh/Vadodara_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Madhya_Pradesh/Vadodara.png")}/>
+
+					<div className="vadodara classHover"> 
+						<img src="/Maps/Gujarat/Vadodara.png"  alt="Vadodara" onMouseOver={e => (e.currentTarget.src = "/Maps/Gujarat/Vadodara_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Gujarat/Vadodara.png")}/>
+						<span className="vadodaraText mapTextLabel text-capitalize">Vadodara</span>
+						<span className="vadodaraNumber mapCountLabel text-center">{this.search('vadodara')}</span>
 					</div>
-					<div className="pac"> 
-						<img src="/Maps/Gujarat/Panch_Mahals.png" className="panchMahals" alt="Panch_Mahals" onMouseOver={e => (e.currentTarget.src = "/Maps/Madhya_Pradesh/Panch_Mahals_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Madhya_Pradesh/Panch_Mahals.png")}/>
+
+					<div className="panchMahals classHover"> 
+						<img src="/Maps/Gujarat/Panch_Mahals.png"  alt="Panch_Mahals" onMouseOver={e => (e.currentTarget.src = "/Maps/Gujarat/Panch_Mahals_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Gujarat/Panch_Mahals.png")}/>
+						<span className="panchMahalsText mapTextLabel text-capitalize">PanchMahals</span>
+						<span className="panchMahalsNumber mapCountLabel text-center">{this.search('panchMahals')}</span>
 					</div>
-					<div className="dah"> 
-						<img src="/Maps/Gujarat/Dahod.png" className="dahod" alt="Dahod" onMouseOver={e => (e.currentTarget.src = "/Maps/Madhya_Pradesh/Dahod_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Madhya_Pradesh/Dahod.png")}/>
+
+					<div className="dahod classHover"> 
+						<img src="/Maps/Gujarat/Dahod.png"  alt="Dahod" onMouseOver={e => (e.currentTarget.src = "/Maps/Gujarat/Dahod_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Gujarat/Dahod.png")}/>
+						<span className="dahodText mapTextLabel text-capitalize">Dahod</span>
+						<span className="dahodNumber mapCountLabel text-center">{this.search('dahod')}</span>
 					</div>
-					<div className="chh"> 
-						<img src="/Maps/Gujarat/Chhota_Udaipur.png" className="chhotaUdaipur" alt="Chhota_Udaipur" onMouseOver={e => (e.currentTarget.src = "/Maps/Madhya_Pradesh/Chhota_Udaipur_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Madhya_Pradesh/Chhota_Udaipur.png")}/>
+
+					<div className="chhotaUdaipur classHover"> 
+						<img src="/Maps/Gujarat/Chhota_Udaipur.png"  alt="Chhota_Udaipur" onMouseOver={e => (e.currentTarget.src = "/Maps/Gujarat/Chhota_Udaipur_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Gujarat/Chhota_Udaipur.png")}/>
+						<span className="chhotaUdaipurText mapTextLabel text-capitalize">ChhotaUdaipur</span>
+						<span className="chhotaUdaipurNumber mapCountLabel text-center">{this.search('chhotaUdaipur')}</span>
 					</div>
-					<div className="nar"> 
-						<img src="/Maps/Gujarat/Narmada.png" className="narmada" alt="Narmada" onMouseOver={e => (e.currentTarget.src = "/Maps/Madhya_Pradesh/Narmada_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Madhya_Pradesh/Narmada.png")}/>
+
+					<div className="narmada classHover"> 
+						<img src="/Maps/Gujarat/Narmada.png"  alt="Narmada" onMouseOver={e => (e.currentTarget.src = "/Maps/Gujarat/Narmada_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Gujarat/Narmada.png")}/>
+						<span className="narmadaText mapTextLabel text-capitalize">Narmada</span>
+						<span className="narmadaNumber mapCountLabel text-center">{this.search('narmada')}</span>
 					</div>
-					<div className="sur"> 
-						<img src="/Maps/Gujarat/Surat.png" className="surat" alt="Surat" onMouseOver={e => (e.currentTarget.src = "/Maps/Madhya_Pradesh/Surat_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Madhya_Pradesh/Surat.png")}/>
+
+					<div className="surat classHover"> 
+						<img src="/Maps/Gujarat/Surat.png"  alt="Surat" onMouseOver={e => (e.currentTarget.src = "/Maps/Gujarat/Surat_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Gujarat/Surat.png")}/>
+						<span className="suratText mapTextLabel text-capitalize">Surat</span>
+						<span className="suratNumber mapCountLabel text-center">{this.search('surat')}</span>
 					</div>
-					<div className="tap"> 
-						<img src="/Maps/Gujarat/Tapi.png" className="tapi" alt="Tapi" onMouseOver={e => (e.currentTarget.src = "/Maps/Madhya_Pradesh/Tapi_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Madhya_Pradesh/Tapi.png")}/>
+
+					<div className="tapi"> 
+						<img src="/Maps/Gujarat/Tapi.png"  alt="Tapi" onMouseOver={e => (e.currentTarget.src = "/Maps/Gujarat/Tapi_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Gujarat/Tapi.png")}/>
+						<span className="fazilkaText mapTextLabel text-capitalize">Fazilka</span>
+						<span className="fazilkaNumber mapCountLabel text-center">{this.search('fazilka')}</span>
 					</div>
-					<div className="the"> 
-						<img src="/Maps/Gujarat/The_Dangs.png" className="theDangs" alt="The_Dangs" onMouseOver={e => (e.currentTarget.src = "/Maps/Madhya_Pradesh/The_Dangs_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Madhya_Pradesh/The_Dangs.png")}/>
+
+					<div className="theDangs classHover"> 
+						<img src="/Maps/Gujarat/The_Dangs.png"  alt="The_Dangs" onMouseOver={e => (e.currentTarget.src = "/Maps/Gujarat/The-Dangs_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Gujarat/The_Dangs.png")}/>
+						<span className="tapiText mapTextLabel text-capitalize">Tapi</span>
+						<span className="tapiNumber mapCountLabel text-center">{this.search('tapi')}</span>
 					</div>
-					<div className="nav"> 
-						<img src="/Maps/Gujarat/Navsari.png" className="navsari" alt="Navsari" onMouseOver={e => (e.currentTarget.src = "/Maps/Madhya_Pradesh/Navsari_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Madhya_Pradesh/Navsari.png")}/>
+
+					<div className="navsari classHover"> 
+						<img src="/Maps/Gujarat/Navsari.png"  alt="Navsari" onMouseOver={e => (e.currentTarget.src = "/Maps/Gujarat/Navsari_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Gujarat/Navsari.png")}/>
+						<span className="navsariText mapTextLabel text-capitalize">Navsari</span>
+						<span className="navsariNumber mapCountLabel text-center">{this.search('navsari')}</span>
 					</div>
-					<div className="val"> 
-						<img src="/Maps/Gujarat/Valsad.png" className="valsad" alt="Valsad" onMouseOver={e => (e.currentTarget.src = "/Maps/Madhya_Pradesh/Valsad_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Madhya_Pradesh/Valsad.png")}/>
+
+					<div className="valsad classHover"> 
+						<img src="/Maps/Gujarat/Valsad.png"  alt="Valsad" onMouseOver={e => (e.currentTarget.src = "/Maps/Gujarat/Valsad_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Gujarat/Valsad.png")}/>
+						<span className="valsadText mapTextLabel text-capitalize">Valsad</span>
+						<span className="valsadNumber mapCountLabel text-center">{this.search('valsad')}</span>
 					</div>
+
 
 				</div>
 			</div>

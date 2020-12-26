@@ -13,9 +13,11 @@ export default class Punjab extends Component{
 	componentDidMount(){
 		
 	}
+	
 	search(nameKey){
 		return 10;
 	}
+
 	onStateClick = (stateName) => {
 		
 	}
