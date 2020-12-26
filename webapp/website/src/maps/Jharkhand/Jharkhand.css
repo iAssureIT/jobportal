@@ -32,13 +32,13 @@
 }
 .garhwaText{
     position: absolute;
-    left: 10px;
-    top:250px;
+    top: 30%;
+    left: 25%;
 }
 .garhwaNumber{
     position: absolute;
-    left: 10px;
-    top:250px;
+    top: 40%;
+    left: 30%;
 }
 .palamu{
 	position: absolute;
@@ -47,13 +47,13 @@
 }
 .palamuText{
     position: absolute;
-    left: 87px;
-    top: 231px;
+    top: 40%;
+    left: 30%;
 }
 .palamuNumber{
     position: absolute;
-    left: 87px;
-    top: 231px;
+    top: 50%;
+    left: 35%;
 }
 .chatra{
 	position: absolute;
@@ -62,13 +62,13 @@
 }
 .chatraText{
     position: absolute;
-    left: 190px;
-    top: 249px;
+    top: 30%;
+    left: 30%;
 }
 .chatraNumber{
     position: absolute;
-    left: 190px;
-    top: 249px;
+    top: 40%;
+    left: 35%;
 }
 .hazaribag{
 	position: absolute;
@@ -77,13 +77,13 @@
 }
 .hazaribagText{
     position: absolute;
-    left: 285px;
-    top: 248px;
+    top: 40%;
+    left: 30%;
 }
 .hazaribagNumber{
     position: absolute;
-    left: 285px;
-    top: 248px;
+    top: 50%;
+    left: 35%;
 }
 .koderma{
 	position: absolute;
@@ -92,13 +92,13 @@
 }
 .kodermaText{
     position: absolute;
-    left: 332px;
-    top: 197px;
+    top: 55%;
+    left: 28%;
 }
 .kodermaNumber{
     position: absolute;
-    left: 332px;
-    top: 197px;
+    top: 70%;
+    left: 30%;
 }
 .giridin{
 	position: absolute;
@@ -107,13 +107,13 @@
 }
 .giridinText{
     position: absolute;
-    left: 389px;
-    top: 203px;
+    top: 40%;
+    left: 30%;
 }
 .giridinNumber{
     position: absolute;
-    left: 389px;
-    top: 203px;
+    top: 50%;
+    left: 35%;
 }
 .deoghar{
 	position: absolute;
@@ -122,13 +122,13 @@
 }
 .deogharText{
     position: absolute;
-    left: 515px;
-    top: 228px;
+    top: 40%;
+    left: 25%;
 }
 .deogharNumber{
     position: absolute;
-    left: 515px;
-    top: 228px;
+    top: 55%;
+    left: 30%;
 }
 .dumka{
 	position: absolute;
@@ -137,13 +137,13 @@
 }
 .dumkaText{
     position: absolute;
-    left: 586px;
-    top: 221px;
+    top: 40%;
+    left: 30%;
 }
 .dumkaNumber{
     position: absolute;
-    left: 586px;
-    top: 221px;
+    top: 55%;
+    left: 35%;
 }
 .godda{
 	position: absolute;
@@ -152,13 +152,13 @@
 }
 .goddaText{
     position: absolute;
-    left: 614px;
-    top: 119px;
+    top: 40%;
+    left: 30%;
 }
 .goddaNumber{
     position: absolute;
-    left: 614px;
-    top: 119px;
+    top: 55%;
+    left: 35%;
 }
 .pakur{
 	position: absolute;
@@ -167,13 +167,13 @@
 }
 .pakurText{
     position: absolute;
-    left: 666px;
-    top: 190px;
+    top: 30%;
+    left: 30%;
 }
 .pakurNumber{
     position: absolute;
-    left: 666px;
-    top: 190px;
+    top: 45%;
+    left: 40%;
 }
 .sahibganj{
 	position: absolute;
@@ -182,13 +182,13 @@
 }
 .sahibganjText{
     position: absolute;
-    left: 678px;
-    top: 99px;
+    top: 40%;
+    left: 20%;
 }
 .sahibganjNumber{
     position: absolute;
-    left: 678px;
-    top: 99px;
+    top: 55%;
+    left: 30%;
 }
 .jamtara{
 	position: absolute;
@@ -197,13 +197,13 @@
 }
 .jamtaraText{
     position: absolute;
-    left: 521px;
-    top: 310px;
+    top: 40%;
+    left: 30%;
 }
 .jamtaraNumber{
     position: absolute;
-    left: 521px;
-    top: 310px;
+    top: 55%;
+    left: 35%;
 }
 .dhanbad{
 	position: absolute;
@@ -212,13 +212,13 @@
 }
 .dhanbadText{
     position: absolute;
-    left: 461px;
-    top: 332px;
+    top: 40%;
+    left: 30%;
 }
 .dhanbadNumber{
     position: absolute;
-    left: 461px;
-    top: 332px;
+    top: 55%;
+    left: 35%;
 }
 .bokaro{
 	position: absolute;
@@ -227,13 +227,13 @@
 }
 .bokaroText{
     position: absolute;
-    left: 377px;
-    top: 347px;
+    top: 40%;
+    left: 30%;
 }
 .bokaroNumber{
     position: absolute;
-    left: 377px;
-    top: 347px;
+    top: 55%;
+    left: 35%;
 }
 .ramgarh{
 	position: absolute;
@@ -242,43 +242,43 @@
 }
 .ramgarhText{
     position: absolute;
-    left: 316px;
-    top: 353px;
+    top: 40%;
+    left: 30%;
 }
 .ramgarhNumber{
     position: absolute;
-    left: 316px;
-    top: 353px;
+    top: 55%;
+    left: 35%;
 }
 .ranchi{
 	position: absolute;
-    left: 263px;
-    top: 395px;
+    left: 262px;
+    top: 394px;
 }
 .ranchiText{
     position: absolute;
-    left: 263px;
-    top: 395px;
+    top: 30%;
+    left: 30%;
 }
 .ranchiNumber{
     position: absolute;
-    left: 263px;
-    top: 395px;
+    top: 40%;
+    left: 35%;
 }
 .saraikelaKharsawan{
 	position: absolute;
-    left: 369px;
+    left: 368px;
     top: 486px;
 }
 .saraikelaKharsawanText{
     position: absolute;
-    left: 369px;
-    top: 486px;
+    top: 40%;
+    left: 18%;
 }
 .saraikelaKharsawanNumber{
     position: absolute;
-    left: 369px;
-    top: 486px;
+    top: 50%;
+    left: 40%;
 }
 .eastSinghbhum{
 	position: absolute;
@@ -287,13 +287,13 @@
 }
 .eastSinghbhumText{
     position: absolute;
-    left: 455px;
-    top: 516px;
+    top: 40%;
+    left: 20%;
 }
 .eastSinghbhumNumber{
     position: absolute;
-    left: 455px;
-    top: 516px;
+    top: 50%;
+    left: 35%;
 }
 .westSinghbhum{
 	position: absolute;
@@ -302,13 +302,13 @@
 }
 .westSinghbhumText{
     position: absolute;
-    left: 284px;
-    top: 543px;
+    top: 40%;
+    left: 30%;
 }
 .westSinghbhumNumber{
     position: absolute;
-    left: 284px;
-    top: 543px;
+    top: 50%;
+    left: 35%;
 }
 .simdega{
 	position: absolute;
@@ -317,28 +317,28 @@
 }
 .simdegaText{
     position: absolute;
-    left: 122px;
-    top: 551px;
+    top: 40%;
+    left: 30%;
 }
 .simdegaNumber{
     position: absolute;
-    left: 122px;
-    top: 551px;
+    top: 55%;
+    left: 35%;
 }
 .khunti{
 	position: absolute;
-    left: 272px;
+    left: 271px;
     top: 475px;
 }
 .khuntiText{
     position: absolute;
-    left: 272px;
-    top: 475px;
+    top: 30%;
+    left: 30%;
 }
 .khuntiNumber{
     position: absolute;
-    left: 272px;
-    top: 475px;
+    top: 40%;
+    left: 35%;
 }
 .gumla{
 	position: absolute;
@@ -347,28 +347,28 @@
 }
 .gumlaText{
     position: absolute;
-    left: 125px;
-    top: 415px;
+    top:50%;
+    left: 40%;
 }
 .gumlaNumber{
     position: absolute;
-    left: 125px;
-    top: 415px;
+    top: 60%;
+    left: 45%;
 }
 .lohardaga{
 	position: absolute;
-    left: 181px;
+    left: 182px;
     top: 404px;
 }
 .lohardagaText{
     position: absolute;
-    left: 181px;
-    top: 404px;
+    top: 40%;
+    left: 30%;
 }
 .lohardagaNumber{
     position: absolute;
-    left: 181px;
-    top: 404px;
+    top: 55%;
+    left: 35%;
 }
 .latehar{
 	position: absolute;
@@ -377,11 +377,11 @@
 }
 .lateharText{
     position: absolute;
-    left: 114px;
-    top: 337px;
+    top: 30%;
+    left: 30%;
 }
 .lateharNumber{
     position: absolute;
-    left: 114px;
-    top: 337px;
+    top: 40%;
+    left: 35%;
 }

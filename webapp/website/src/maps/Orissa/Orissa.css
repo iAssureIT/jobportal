@@ -3,148 +3,449 @@
 	left: 10px;
 	top: 600px;
 }
+.malkangirText{
+    position: absolute;
+    top: 35%;
+    left: 45%;
+}
+.malkangirNumber{
+    position: absolute;
+    top: 48%;
+    left: 50%;
+}
 .koraput{
 	position: absolute;
 	left: 92px;
     top: 541px;
 }
+.koraputText{
+    position: absolute;
+    top: 35%;
+    left: 40%;
+}
+.koraputNumber{
+    position: absolute;
+    top: 48%;
+    left: 45%;
+}
 .nabarangpur{
 	position: absolute;
-	left: 66px;
+	left: 67px;
     top: 422px;
+}
+.nabarangpurText{
+    position: absolute;
+    top: 35%;
+    left: 15%;
+}
+.nabarangpurNumber{
+    position: absolute;
+    top: 48%;
+    left: 35%;
 }
 .rayagada{
 	position: absolute;
 	left: 193px;
-    top: 439px;
+    top: 438px;
+}
+.rayagadaText{
+    position: absolute;
+    top: 45%;
+    left: 45%;
+}
+.rayagadaNumber{
+    position: absolute;
+    top: 55%;
+    left: 55%;
 }
 .kalahandi{
 	position: absolute;
-    left: 149px;
+    left: 150px;
     top: 377px;
+}
+.kalahandiText{
+    position: absolute;
+    top: 35%;
+    left: 30%;
+}
+.kalahandiNumber{
+    position: absolute;
+    top: 45%;
+    left: 35%;
 }
 .nuapada{
 	position: absolute;
     left: 129px;
     top: 290px;
 }
+.nuapadaText{
+    position: absolute;
+    top: 35%;
+    left: -10%;
+}
+.nuapadaNumber{
+    position: absolute;
+    top: 45%;
+    left: 25%;
+}
 .balangir{
 	position: absolute;
     left: 171px;
     top: 296px;
+}
+.balangirText{
+    position: absolute;
+    top: 45%;
+    left: 30%;
+}
+.balangirNumber{
+    position: absolute;
+    top: 55%;
+    left: 35%;
 }
 .kandhamal{
 	position: absolute;
     left: 271px;
     top: 348px;
 }
+.kandhamalText{
+    position: absolute;
+    top: 45%;
+    left: 30%;
+}
+.kandhamalNumber{
+    position: absolute;
+    top: 55%;
+    left: 35%;
+}
 .ganpati{
 	position: absolute;
     left: 307px;
-    top: 483px;
+    top: 482px;
 }
+.ganpatiText{
+    position: absolute;
+    top: 40%;
+    left: 40%;
+}
+.ganpatiNumber{
+    position: absolute;
+    top: 55%;
+    left: 55%;
+}
+
 .ganjam{
 	position: absolute;
     left: 350px;
     top: 398px;
 }
+.ganjamText{
+    position: absolute;
+    top: 40%;
+    left: 40%;
+}
+.ganjamNumber{
+    position: absolute;
+    top: 50%;
+    left: 45%;
+}
 .puri{
 	position: absolute;
     left: 477px;
-    top: 409px;
+    top: 410px;
+}
+.puriText{
+    position: absolute;
+    top: 20%;
+    left: 50%;
+}
+.puriNumber{
+    position: absolute;
+    top: 35%;
+    left: 53%;
 }
 .khordha{
 	position: absolute;
     left: 451px;
     top: 376px;
 }
+.khordhaText{
+    position: absolute;
+    top: 20%;
+    left: 50%;
+}
+.khordhaNumber{
+    position: absolute;
+    top: 35%;
+    left: 53%;
+}
 .nayagarh{
 	position: absolute;
     left: 393px;
     top: 359px;
+}
+.nayagarhText{
+    position: absolute;
+    top: 30%;
+    left: 30%;
+}
+.nayagarhNumber{
+    position: absolute;
+    top: 45%;
+    left: 50%;
 }
 .boudh{
 	position: absolute;
     left: 282px;
     top: 318px;
 }
+.boudhText{
+    position: absolute;
+    top: 25%;
+    left: 30%;
+}
+.boudhNumber{
+    position: absolute;
+    top: 40%;
+    left: 35%;
+}
 .subarnapur{
 	position: absolute;
     left: 265px;
-    top: 282px;
+    top: 281px;
+}
+.subarnapurText{
+    position: absolute;
+    top: 25%;
+    left: 30%;
+}
+.subarnapurNumber{
+    position: absolute;
+    top: 40%;
+    left: 35%;
 }
 .bargarh{
 	position: absolute;
     left: 164px;
-    top: 208px;
+    top: 207px;
+}
+.bargarhText{
+    position: absolute;
+    top: 35%;
+    left: 60%;
+}
+.bargarhNumber{
+    position: absolute;
+    top: 45%;
+    left: 65%;
 }
 .jharsugunda{
 	position: absolute;
     left: 263px;
     top: 169px;
 }
+.jharsugundaText{
+    position: absolute;
+    top: 35%;
+    left: 40%;
+}
+.jharsugundaNumber{
+    position: absolute;
+    top: 55%;
+    left: 35%;
+}
 .sambalpur{
 	position: absolute;
     left: 311px;
     top: 147px;
+}
+.sambalpurText{
+    position: absolute;
+    top: 55%;
+    left: 20%;
+}
+.sambalpurNumber{
+    position: absolute;
+    top: 65%;
+    left: 35%;
 }
 .deogarh{
 	position: absolute;
     left: 392px;
     top: 206px;
 }
+.deogarhText{
+    position: absolute;
+    top: 40%;
+    left: 20%;
+}
+.deogarhNumber{
+    position: absolute;
+    top: 55%;
+    left: 35%;
+}
 .angul{
 	position: absolute;
     left: 366px;
     top: 214px;
+}
+.angulText{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+}
+.angulNumber{
+    position: absolute;
+    top: 60%;
+    left: 55%;
 }
 .dhenkanal{
 	position: absolute;
     left: 474px;
     top: 280px;
 }
+.dhenkanalText{
+    position: absolute;
+    top: 40%;
+    left: 30%;
+}
+.dhenkanalNumber{
+    position: absolute;
+    top: 55%;
+    left: 35%;
+}
 .bhubaneswar{
 	position: absolute;
     left: 437px;
     top: 342px;
+}
+.bhubaneswarText{
+    position: absolute;
+    top: 20%;
+    left: 55%;
+}
+.bhubaneswarNumber{
+    position: absolute;
+    top: 35%;
+    left: 60%;
 }
 .jagatsinghpur{
 	position: absolute;
     left: 583px;
     top: 381px;
 }
+.jagatsinghpurText{
+    position: absolute;
+    top: 20%;
+    left: 25%;
+}
+.jagatsinghpurNumber{
+    position: absolute;
+    top: 40%;
+    left: 35%;
+}
 .kendrapara{
 	position: absolute;
     left: 615px;
     top: 327px;
+}
+.kendraparaText{
+    position: absolute;
+    top: 30%;
+    left: 25%;
+}
+.kendraparaNumber{
+    position: absolute;
+    top: 50%;
+    left: 35%;
 }
 .jaipur{
 	position: absolute;
     left: 542px;
     top: 280px;
 }
+.jaipurText{
+    position: absolute;
+    top: 30%;
+    left: 30%;
+}
+.jaipurNumber{
+    position: absolute;
+    top: 45%;
+    left: 40%;
+}
 .kendujhar{
 	position: absolute;
     left: 479px;
     top: 148px;
 }
+.kendujharText{
+    position: absolute;
+    top: 45%;
+    left: 25%;
+}
+.kendujharNumber{
+    position: absolute;
+    top: 55%;
+    left: 30%;
+}
 .sundararh{
 	position: absolute;
-    left: 274px;
+    left: 275px;
     top: 99px;
+}
+.sundararhText{
+    position: absolute;
+    top: 25%;
+    left: 25%;
+}
+.sundararhNumber{
+    position: absolute;
+    top: 40%;
+    left: 30%;
 }
 .mayurbhanj{
 	position: absolute;
     left: 539px;
     top: 94px;
 }
+.mayurbhanjText{
+    position: absolute;
+    top: 45%;
+    left: 35%;
+}
+.mayurbhanjNumber{
+    position: absolute;
+    top: 55%;
+    left: 40%;
+}
 .baleswar{
 	position: absolute;
     left: 624px;
     top: 175px;
 }
+.baleswarText{
+    position: absolute;
+    top: 45%;
+    left: 35%;
+}
+.baleswarNumber{
+    position: absolute;
+    top: 55%;
+    left: 40%;
+}
 .bhadrak{
 	position: absolute;
     left: 614px;
     top: 269px;
+}
+.bhadrakText{
+    position: absolute;
+    top: 40%;
+    left: 30%;
+}
+.bhadrakNumber{
+    position: absolute;
+    top: 55%;
+    left: 40%;
 }

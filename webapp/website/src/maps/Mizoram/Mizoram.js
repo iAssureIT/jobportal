@@ -8,8 +8,8 @@ export default class Mizoram extends Component{
 
 	render(){
 		return(
-			<div className="bodyWrapper"  style={{height:"1050px"}}>
-				<div className="stateWrapper"  style={{height:"1050px"}}>
+			<div className="bodyWrapper" >
+				<div className="stateWrapper"  >
 					<div className="kas"> 
 						<img src="/Maps/Mizoram/Tuipang.png" className="tuipang" alt="Tuipang" onMouseOver={e => (e.currentTarget.src = "/Maps/Mizoram/Tuipang_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Mizoram/Tuipang.png")}/>
 					</div>

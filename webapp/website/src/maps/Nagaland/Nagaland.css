@@ -3,53 +3,163 @@
 	left: 10px;
 	top: 650px;
 }
+.perenText{
+    position: absolute;
+    top: 43%;
+    left: 40%;
+}
+.perenNumber{
+    position: absolute;
+    top: 50%;
+    left: 42%;
+}
 .dimapur{
 	position: absolute;
 	left: 79px;
     top: 524px;
+}
+.dimapurText{
+    position: absolute;
+    top: 55%;
+    left: 40%;
+}
+.dimapurNumber{
+    position: absolute;
+    top: 65%;
+    left: 42%;
 }
 .kohima{
 	position: absolute;
 	left: 209px;
     top: 498px;
 }
+.kohimaText{
+    position: absolute;
+    top: 55%;
+    left: 40%;
+}
+.kohimaNumber{
+    position: absolute;
+    top: 65%;
+    left: 42%;
+}
 .phek{
 	position: absolute;
-	left: 340px;
+	left: 339px;
     top: 561px;
+}
+.phekText{
+    position: absolute;
+    top: 30%;
+    left: 30%;
+}
+.phekNumber{
+    position: absolute;
+    top: 40%;
+    left: 32%;
 }
 .kiphireSadar{
 	position: absolute;
-	left: 469px;
+	left: 468px;
     top: 483px;
+}
+.kiphireSadarText{
+    position: absolute;
+    top: 30%;
+    left: 30%;
+}
+.kiphireSadarNumber{
+    position: absolute;
+    top: 40%;
+    left: 32%;
 }
 .zunhebotoSadar{
 	position: absolute;
 	left: 333px;
-    top: 373px;
+    top: 374px;
+}
+.zunhebotoSadarText{
+    position: absolute;
+    top: 30%;
+    left: 40%;
+}
+.zunhebotoSadarNumber{
+    position: absolute;
+    top: 40%;
+    left: 44%;
 }
 .wokhaSadar{
 	position: absolute;
 	left: 227px;
     top: 272px;
 }
+.wokhaSadarText{
+    position: absolute;
+    top: 45%;
+    left: 38%;
+}
+.wokhaSadarNumber{
+    position: absolute;
+    top: 52%;
+    left: 44%;
+}
 .tuensangSadar{
 	position: absolute;
 	left: 452px;
     top: 291px;
+}
+.tuensangSadarText{
+    position: absolute;
+    top: 45%;
+    left: 38%;
+}
+.tuensangSadarNumber{
+    position: absolute;
+    top: 52%;
+    left: 44%;
 }
 .mokochung{
 	position: absolute;
 	left: 342px;
     top: 163px;
 }
+.mokochungText{
+    position: absolute;
+    top: 45%;
+    left: 38%;
+}
+.mokochungNumber{
+    position: absolute;
+    top: 52%;
+    left: 44%;
+}
 .longleng{
 	position: absolute;
 	left: 479px;
     top: 145px;
 }
+.longlengText{
+    position: absolute;
+    top: 50%;
+    left: 25%;
+}
+.longlengNumber{
+    position: absolute;
+    top: 60%;
+    left: 40%;
+}
 .mon{
 	position: absolute;
-	left: 516px;
+	left: 517px;
     top: 42px;
+}
+.monText{
+    position: absolute;
+    top: 40%;
+    left: 45%;
+}
+.monNumber{
+    position: absolute;
+    top: 45%;
+    left: 48%;
 }

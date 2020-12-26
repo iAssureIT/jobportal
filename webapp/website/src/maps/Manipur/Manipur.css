@@ -3,63 +3,193 @@
 	left: 10px;
 	top: 500px;
 }
+.pherzawlText{
+    position: absolute;
+    top: 43%;
+    left: 30%;
+}
+.pherzawlNumber{
+    position: absolute;
+    top: 50%;
+    left: 35%;
+}
 .churachandpur{
 	position: absolute;
 	left: 83px;
-    top: 524px;
+    top: 523px;
+}
+.churachandpurText{
+    position: absolute;
+    top: 43%;
+    left: 30%;
+}
+.churachandpurNumber{
+    position: absolute;
+    top: 50%;
+    left: 35%;
 }
 .chandel{
 	position: absolute;
-	left: 331px;
-    top: 583px;
+	left: 330px;
+    top: 581px;
+}
+.chandelText{
+    position: absolute;
+    top: 43%;
+    left: 40%;
+}
+.chandelNumber{
+    position: absolute;
+    top: 50%;
+    left: 45%;
 }
 .tengnoupal{
 	position: absolute;
 	left: 438px;
-    top: 506px;
+    top: 503px;
+}
+.tengnoupalText{
+    position: absolute;
+    top: 43%;
+    left: 40%;
+}
+.tengnoupalNumber{
+    position: absolute;
+    top: 50%;
+    left: 50%;
 }
 .kakching{
 	position: absolute;
-	left: 370px;
-    top: 548px;
+	left: 369px;
+    top: 547px;
+}
+.kakchingText{
+    position: absolute;
+    top: 10%;
+    left: 20%;
+}
+.kakchingNumber{
+    position: absolute;
+    top: 30%;
+    left: 25%;
 }
 .bishnupur{
 	position: absolute;
 	left: 301px;
     top: 461px;
 }
+.bishnupurText{
+    position: absolute;
+    top: 40%;
+    left: 17%;
+}
+.bishnupurNumber{
+    position: absolute;
+    top: 50%;
+    left: 22%;
+}
 .noney{
 	position: absolute;
 	left: 63px;
     top: 430px;
+}
+.noneyText{
+    position: absolute;
+    top: 30%;
+    left: 45%;
+}
+.noneyNumber{
+    position: absolute;
+    top: 40%;
+    left: 50%;
 }
 .tamenglong{
 	position: absolute;
 	left: 41px;
     top: 138px;
 }
+.tamenglongText{
+    position: absolute;
+    top: 40%;
+    left: 45%;
+}
+.tamenglongNumber{
+    position: absolute;
+    top: 45%;
+    left: 50%;
+}
 .senapati{
 	position: absolute;
 	left: 283px;
     top: 54px;
+}
+.senapatiText{
+    position: absolute;
+    top: 20%;
+    left: 45%;
+}
+.senapatiNumber{
+    position: absolute;
+    top: 25%;
+    left: 50%;
 }
 .ukhrul{
 	position: absolute;
 	left: 464px;
     top: 15px;
 }
+.ukhrulText{
+    position: absolute;
+    top: 50%;
+    left: 45%;
+}
+.ukhrulNumber{
+    position: absolute;
+    top: 55%;
+    left: 50%;
+}
 .kangpokpi{
 	position: absolute;
 	left: 366px;
     top: 258px;
+}
+.kangpokpiText{
+    position: absolute;
+    top: 10%;
+    left: 35%;
+}
+.kangpokpiNumber{
+    position: absolute;
+    top: 15%;
+    left: 40%;
 }
 .porompat{
 	position: absolute;
 	left: 379px;
     top: 310px;
 }
+.porompatText{
+    position: absolute;
+    top: 50%;
+    left: 30%;
+}
+.porompatNumber{
+    position: absolute;
+    top: 55%;
+    left: 45%;
+}
 .imphalWest{
 	position: absolute;
 	left: 327px;
     top: 313px;
+}
+.imphalWestText{
+    position: absolute;
+    top: 42%;
+    left: 25%;
+}
+.imphalWestNumber{
+    position: absolute;
+    top: 48%;
+    left: 35%;
 }

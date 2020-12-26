@@ -3,53 +3,163 @@
 	left: 10px;
 	top: 250px;
 }
+.southWestGaroHillsText{
+    position: absolute;
+    top: 42%;
+    left: -15%;
+}
+.southWestGaroHillsNumber{
+    position: absolute;
+    top: 60%;
+    left: 32%;
+}
 .westGaroHills{
 	position: absolute;
 	left: 22px;
     top: 128px;
+}
+.westGaroHillsText{
+    position: absolute;
+    top: 28%;
+    left: 18%;
+}
+.westGaroHillsNumber{
+    position: absolute;
+    top: 35%;
+    left: 32%;
 }
 .southGaroHills{
 	position: absolute;
 	left: 116px;
     top: 250px;
 }
+.southGaroHillsText{
+    position: absolute;
+    top: 50%;
+    left: 18%;
+}
+.southGaroHillsNumber{
+    position: absolute;
+    top: 65%;
+    left: 32%;
+}
 .eastGaroHills{
 	position: absolute;
 	left: 135px;
     top: 142px;
+}
+.eastGaroHillsText{
+    position: absolute;
+    top: 50%;
+    left: 25%;
+}
+.eastGaroHillsNumber{
+    position: absolute;
+    top: 65%;
+    left: 32%;
 }
 .northGaroHills{
 	position: absolute;
 	left: 135px;
     top: 128px;
 }
+.northGaroHillsText{
+    position: absolute;
+    top: 40%;
+    left: 20%;
+}
+.northGaroHillsNumber{
+    position: absolute;
+    top: 55%;
+    left: 32%;
+}
 .westKhasiHills{
 	position: absolute;
 	left: 243px;
     top: 166px;
+}
+.westKhasiHillsText{
+    position: absolute;
+    top: 40%;
+    left: 20%;
+}
+.westKhasiHillsNumber{
+    position: absolute;
+    top: 55%;
+    left: 32%;
 }
 .southWestKhasiHills{
 	position: absolute;
 	left: 271px;
     top: 264px;
 }
+.southWestKhasiHillsText{
+    position: absolute;
+    top: 43%;
+    left: 25%;
+}
+.southWestKhasiHillsNumber{
+    position: absolute;
+    top: 57%;
+    left: 50%;
+}
 .eastKhasiHills{
 	position: absolute;
-	left: 399px;
-    top: 205px;
+	left: 398px;
+    top: 204px;
 }
-.riBhol{
+.eastKhasiHillsText{
+    position: absolute;
+    top: 43%;
+    left: 40%;
+}
+.eastKhasiHillsNumber{
+    position: absolute;
+    top: 55%;
+    left: 50%;
+}
+.riBhoi{
 	position: absolute;
 	left: 388px;
     top: 87px;
 }
+.riBhoiText{
+    position: absolute;
+    top: 43%;
+    left: 60%;
+}
+.riBhoiNumber{
+    position: absolute;
+    top: 55%;
+    left: 62%;
+}
 .westJaintiaHills{
 	position: absolute;
-	left: 560px;
-    top: 182px;
+	left: 559px;
+    top: 181px;
+}
+.westJaintiaHillsText{
+    position: absolute;
+    top: 23%;
+    left: 25%;
+}
+.westJaintiaHillsNumber{
+    position: absolute;
+    top: 30%;
+    left: 35%;
 }
 .eastJaintiaHills{
 	position: absolute;
-	left: 607px;
-    top: 259px;
+	left: 606px;
+    top: 258px;
+}
+.eastJaintiaHillsText{
+    position: absolute;
+    top: 23%;
+    left: 25%;
+}
+.eastJaintiaHillsNumber{
+    position: absolute;
+    top: 35%;
+    left: 35%;
 }
