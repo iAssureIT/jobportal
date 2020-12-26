@@ -74,7 +74,7 @@
 
 }
 .candidateBlockWrapper{
-	height:283px;
+	height:300px;
 	border:2px solid var(--main-border-color);
 	border-radius:5px;
 
@@ -235,4 +235,43 @@
 
 .candidateListWrapperMain{
 	margin-top: 30px;
+}
+
+.downloadCount{
+	color: var(--main-subheading-font-color);
+	/*background-color: red;*/
+	font-size: 15px;
+	padding-bottom: 15px;
+	margin-left: 15px;
+	font-weight: bold;
+}
+
+.downloadCount .GridViewIcon{
+	padding-top: 8px;
+	border: 1px solid #eee;
+}
+
+.downloadCount .listViewIcon{
+	margin-right: 15px;
+	padding-top: 8px;
+	border: 1px solid #eee;
+}
+
+.viewBtn{
+	color: #fff;
+}
+
+.viewBtn:hover{
+	color: #fff;
+}
+
+.gridBtnActive{
+	background: var(--main-subheading-font-color) !important;
+	color:#fff;
+}
+
+.iAssureITTable{
+	color: #fff;
+	text-align: center;
+	font-size: 20px;
 }
