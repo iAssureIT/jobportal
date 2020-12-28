@@ -9,7 +9,7 @@ router.post('/post', ControllerApplyJob.applyJob);
 
 router.post('/get/applicantsCountList',ControllerApplyJob.applicantsCountList);
 
-router.get('/get/candidateAppliedJobList/:candidateID',ControllerApplyJob.getCandidateAppliedJobList);
+router.post('/get/candidateAppliedJobList',ControllerApplyJob.getCandidateAppliedJobList);
 
 router.post('/get/candidatesAppliedToJob',ControllerApplyJob.candidatesAppliedToJob);
 

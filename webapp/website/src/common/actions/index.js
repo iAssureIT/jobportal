@@ -49,6 +49,10 @@ export const setJobWishlist = (jobWishlist )=> ({
       type 				: 'GET_JOB_WISHLIST',
       jobWishlist 		: jobWishlist
 });
+export const setAppliedJoblist = (appliedJoblist )=> ({
+      type 				: 'GET_APPLIED_JOBLIST',
+      appliedJoblist 	: appliedJoblist
+});
 export function filterMapData(selector) {
   	return dispatch =>{
   		dispatch(setFilterSelector(selector));
@@ -121,6 +125,19 @@ export function getJobWishlist(candidateID) {
 	    .then((response)=>{
 	     	
 	        dispatch(setJobWishlist(response.data ));
+	    })
+	    .catch((error)=>{
+	          console.log('error', error);
+	    }) 
+  	}  
+}
+export function getAppliedJoblist(candidateID) {
+  	return dispatch =>{
+  		var formValue={"candidateID":candidateID}
+  		console.log(formValue)
+	  	return axios.post("/api/applyJob/get/candidateAppliedJobList",formValue)
+	    .then((response)=>{
+	        dispatch(setAppliedJoblist(response.data ));
 	    })
 	    .catch((error)=>{
 	          console.log('error', error);

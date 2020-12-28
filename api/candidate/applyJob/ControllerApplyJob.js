@@ -5,73 +5,20 @@ const _ = require('underscore');
 
 exports.applyJob = (req,res,next)=>{
     console.log(req.body)
-	ApplyJob.findOne({"candidateID": req.body.candidateID})
-		.exec()
+    const applyjob = new ApplyJob({
+            _id                   : new mongoose.Types.ObjectId(),                    
+            candidateID           : req.body.candidateID,
+            jobID                 : req.body.jobID,
+            employerID            : req.body.employerID,
+            appliedDate           : new Date(),
+            status                : req.body.status,   
+            applicationViewed     : false,  
+            createdBy             : req.body.createdBy,
+            createdAt             : new Date()
+        });
+        applyjob.save()
 		.then(data =>{
-            
-            if(data){
-                var appliedItems = {
-                        'jobID'                 : req.body.jobID,
-                        'employerID'            : req.body.employerID,
-                        'appliedDate'           : new Date(),
-                        'status'                : req.body.status,
-                        'applicationViewed'     : false
-                    }
-                ApplyJob.updateOne(
-                    {"candidateID": req.body.candidateID},
-                    {
-                        $push:{
-                            'appliedItems' : appliedItems,
-                        },
-                    }
-                )
-                .exec()
-                .then(data=>{
-                    if(data.nModified == 1){
-                        res.status(200).json({
-                            "message": "You have applied to job.",
-                        });
-                    }else{
-                        res.status(401).json({
-                            "message": "Failed to apply job."
-                        });
-                    }
-                })
-                .catch(err =>{
-                    // console.log('2',err);
-                    res.status(500).json({
-                        error: err
-                    });
-                });
-            }else{
-                var appliedItems = {
-                        'jobID'         : req.body.jobID,
-                        'employerID'    : req.body.employerID,
-                        'appliedDate'   : new Date(),
-                        'status'        : req.body.status,
-                        'applicationViewed' : false
-                    }
-                const applyjob = new ApplyJob({
-                    _id                   : new mongoose.Types.ObjectId(),                    
-                    candidateID           : req.body.candidateID,
-                    appliedItems          : [appliedItems],  
-                    createdBy             : req.body.createdBy,
-                    createdAt             : new Date()
-                });
-                applyjob.save()
-                .then(datas=>{
-                    res.status(200).json({
-                        "message": "You have applied to job.",
-                    });
-                })
-                .catch(err =>{
-                    console.log(err);
-                    res.status(500).json({
-                        error: err
-                    });
-                });
-            }
-		
+            res.status(200).json({ "message": "You have applied to job." });		
 	})
 	.catch(err =>{
         // console.log('5',err);
@@ -83,18 +30,16 @@ exports.applyJob = (req,res,next)=>{
 
 
 exports.getCandidateAppliedJobList = (req,res,next)=>{
-    console.log(req.params.candidateID)
-    //ApplyJob.find({"candidateID": req.params.candidateID})     
+     //ApplyJob.find({"candidateID": req.params.candidateID}) 
+
     ApplyJob.aggregate([
-        { "$match" : { "candidateID" :req.params.candidateID } },
-        { "$unwind": "$appliedItems" },
+        { "$match" : { "candidateID" : ObjectId(req.body.candidateID) } },
         { "$lookup": {
             "from": "jobs",
-            "as": "appliedItems.jobDetail",
-            "localField": "appliedItems.jobID",
+            "as": "jobDetails",
+            "localField": "jobID",
             "foreignField": "_id"
-        }},
-        { "$unwind": "$appliedItems.jobDetail" }    
+        }}
     ])  
     .exec()
     .then(data=>{
@@ -110,11 +55,10 @@ exports.appliedJobCount = (req,res,next)=>{
     console.log(req.params.candidateID);
     ApplyJob.aggregate([
         { "$match" : { "candidateID" : ObjectId(req.params.candidateID) } },
-        { "$unwind": "$appliedItems" },
         { "$lookup": {
             "from": "jobs",
-            "as": "appliedItems.jobDetail",
-            "localField": "appliedItems.jobID",
+            "as": "jobDetail",
+            "localField": "jobID",
             "foreignField": "_id"
         }},
             
@@ -150,8 +94,7 @@ exports.applicantsCountList = (req,res,next)=>{
 //candidatesAppliedToJob
 exports.candidatesAppliedToJob = (req,res,next)=>{
     ApplyJob.aggregate([
-        { $unwind : "$appliedItems" },
-        { $match : { "appliedItems.jobID" : ObjectId(req.body.jobID) } },
+        { $match : { "jobID" : ObjectId(req.body.jobID) } },
         { $lookup: {
                     from: "candidatemasters",
                     as: "candidate",

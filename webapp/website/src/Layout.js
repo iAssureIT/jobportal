@@ -120,7 +120,6 @@ class Layout extends Component  {
     }
 
     render() { 
-        console.log(this.props.userDetails)
         
         if (this.props.userDetails.loggedIn) {    
             return (

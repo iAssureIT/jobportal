@@ -26,10 +26,13 @@ class CandidateJobList extends Component{
 	    var {mapAction} = this.props;
 	    mapAction.filterJobList(selector);
 
-	    mapAction.getJobWishlist(this.props.candidateID);
+	    mapAction.getJobWishlist(this.props.userDetails.candidate_id);
+	    mapAction.getAppliedJoblist(this.props.userDetails.candidate_id);
+
 	}
 
 	render(){
+		
 		return(
 			<div className="ViewBodyWrapper container-fluid">
         
@@ -55,7 +58,9 @@ class CandidateJobList extends Component{
 						</div>
 						<div className="col-lg-9">
 							<div className="row">
-								<JobList jobList={this.props.jobList} jobWishlist={this.props.jobWishlist}/>
+								<JobList jobList={this.props.jobList} 
+								jobWishlist={this.props.jobWishlist}
+								appliedJoblist = {this.props.appliedJoblist}/>
 							</div>
 						</div>
 					</div>
@@ -66,9 +71,9 @@ class CandidateJobList extends Component{
 }
 const mapStateToProps = (state)=>{
     return {
-    	user_ID 		: state.user_ID, 	candidateID 	: state.candidateID,
+    	userDetails 	: state.userDetails,
         selector        : state.selector, 	jobList 		: state.jobList,
-        jobWishlist 	: state.jobWishlist
+        jobWishlist 	: state.jobWishlist, appliedJoblist : state.appliedJoblist
     }
 }
 const mapDispatchToProps = (dispatch) => ({

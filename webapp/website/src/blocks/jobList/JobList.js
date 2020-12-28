@@ -139,7 +139,7 @@ applyJob = (jobid, company_id)=>{
 									//console.log(elem._id )
 									
 								var x = this.props.jobWishlist && this.props.jobWishlist.length > 0 ?
-								 this.props.jobWishlist.filter((wishlistitem) => wishlistitem.wishlistItems.jobID == elem._id) : [];
+								this.props.jobWishlist.filter((wishlistitem) => wishlistitem.wishlistItems.jobID == elem._id) : [];
 				                
 				                if (x && x.length > 0) {
 				                  var wishClass = '';
@@ -147,6 +147,17 @@ applyJob = (jobid, company_id)=>{
 				                } else {
 				                  var wishClass = '-o';
 				                  var tooltipMsg = 'Add to wishlist';
+				                }
+
+				                var y = this.props.appliedJoblist && this.props.appliedJoblist.length > 0 ?
+								this.props.appliedJoblist.filter((applieditem) => applieditem.jobID == elem._id) : [];
+				                
+				                if (y && y.length > 0) {
+				                  var appliedClass = '';
+				                  var appliedtooltipMsg = 'Applied';
+				                } else {
+				                  var appliedClass = '-o';
+				                  var appliedtooltipMsg = 'Apply Job';
 				                }
 								return(
 									<div className="col-lg-6">
@@ -187,7 +198,9 @@ applyJob = (jobid, company_id)=>{
 														<div className="col-lg-offset-2 col-lg-12">
 															<div className="jobListVerticleIcons">
 																<ul>
-																	<li><i className="fa fa-check-square-o" onClick={applyJob => this.applyJob(elem._id, elem.company_id)}></i></li>
+																	
+																	<li><i title={appliedtooltipMsg} className={"fa fa-check-square"+appliedClass} 
+																	onClick={applyJob => this.applyJob(elem._id, elem.company_id)}></i></li>
 																	<li ><i title={tooltipMsg} onClick={wishlist => this.handleclick(elem._id)} className={"fa fa-heart" + wishClass }></i></li>
 																	<li><i className="fa fa-youtube-play"></i></li>
 																</ul>

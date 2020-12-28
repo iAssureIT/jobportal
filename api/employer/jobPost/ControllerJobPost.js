@@ -379,40 +379,46 @@ exports.getJobList = (req,res,next)=>{
                    from: "entitymasters", 		localField: "company_id",
                    foreignField: "_id",		as: "employer" } 
         },
-    	{ $lookup 	: { from: "industrymaster",
+    	{ $lookup 	: { from: "industrymasters",
                    		localField: "jobBasicInfo.industry_id",
                    		foreignField: "_id",
-                   		as: "functionalAreas"}
+                   		as: "industry"}
         },
         {$lookup:{
-                   from: "functionalareamaster",
+                   from: "functionalareamasters",
                    localField: "jobBasicInfo.functionalarea_id",
                    foreignField: "_id",
-                   as: "functionalAreas" } 
+                   as: "functionalArea" } 
         },
         {$lookup:{
-                   from: "subfunctionalareamaster",
+                   from: "subfunctionalareamasters",
                    localField: "jobBasicInfo.subfunctionalarea_id",
                    foreignField: "_id",
-                   as: "subFunctionalAreas" } 
+                   as: "subFunctionalArea" } 
         },   
         {$lookup:{
-                   from: "jobtypemaster",
+                   from: "jobrolemasters",
+                   localField: "jobBasicInfo.jobrole_id",
+                   foreignField: "_id",
+                   as: "jobRole" } 
+        },
+        {$lookup:{
+                   from: "jobtypemasters",
                    localField: "jobBasicInfo.jobtype_id",
                    foreignField: "_id",
-                   as: "jobTypes" } 
+                   as: "jobType" } 
         },
         {$lookup:{
-                   from: "jobtypemaster",
+                   from: "jobtimemasters",
                    localField: "jobBasicInfo.jobtime_id",
                    foreignField: "_id",
-                   as: "jobTypes" } 
+                   as: "jobTime" } 
         },
         {$lookup:{
-                   from: "jobtypemaster",
+                   from: "jobcategorymasters",
                    localField: "jobBasicInfo.jobcategory_id",
                    foreignField: "_id",
-                   as: "jobTypes" } 
+                   as: "jobCategory" } 
         }
     ])
 	.exec()
@@ -466,7 +472,7 @@ exports.getJobListForEmployer = (req,res,next)=>{
     	selector["$and"].push({ "jobBasicInfo.jobrole_id" : { $in: jobroles_ids } });
     }
 
-    //console.log(JSON.stringify(selector))
+    console.log(JSON.stringify(selector))
 
     Jobs.aggregate([
     	{ $match 	: selector },
@@ -475,40 +481,46 @@ exports.getJobListForEmployer = (req,res,next)=>{
                    from: "entitymasters", 		localField: "company_id",
                    foreignField: "_id",		as: "employer" } 
         },
-    	{ $lookup 	: { from: "industrymaster",
+    	{ $lookup 	: { from: "industrymasters",
                    		localField: "jobBasicInfo.industry_id",
                    		foreignField: "_id",
-                   		as: "functionalAreas"}
+                   		as: "industry"}
         },
         {$lookup:{
-                   from: "functionalareamaster",
+                   from: "functionalareamasters",
                    localField: "jobBasicInfo.functionalarea_id",
                    foreignField: "_id",
-                   as: "functionalAreas" } 
+                   as: "functionalArea" } 
         },
         {$lookup:{
-                   from: "subfunctionalareamaster",
+                   from: "subfunctionalareamasters",
                    localField: "jobBasicInfo.subfunctionalarea_id",
                    foreignField: "_id",
-                   as: "subFunctionalAreas" } 
+                   as: "subFunctionalArea" } 
         },   
         {$lookup:{
-                   from: "jobtypemaster",
+                   from: "jobrolemasters",
+                   localField: "jobBasicInfo.jobrole_id",
+                   foreignField: "_id",
+                   as: "jobRole" } 
+        },
+        {$lookup:{
+                   from: "jobtypemasters",
                    localField: "jobBasicInfo.jobtype_id",
                    foreignField: "_id",
-                   as: "jobTypes" } 
+                   as: "jobType" } 
         },
         {$lookup:{
-                   from: "jobtypemaster",
+                   from: "jobtimemasters",
                    localField: "jobBasicInfo.jobtime_id",
                    foreignField: "_id",
-                   as: "jobTypes" } 
+                   as: "jobTime" } 
         },
         {$lookup:{
-                   from: "jobtypemaster",
+                   from: "jobcategorymasters",
                    localField: "jobBasicInfo.jobcategory_id",
                    foreignField: "_id",
-                   as: "jobTypes" } 
+                   as: "jobCategory" } 
         }
     ])
 	.exec()

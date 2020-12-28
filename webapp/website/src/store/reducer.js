@@ -42,7 +42,8 @@ const initialState = {
 	subfunctionalJobs 			: [],
 	industrialJobs 				: [],
 	jobList 					: [],
-	jobWishlist 				: []
+	jobWishlist 				: [],
+	appliedJoblist 				: []
 }
 
 const reducer = (state = initialState,action) => {
@@ -89,6 +90,10 @@ const newState = {...state};
 	if(action.type === "GET_JOB_WISHLIST"){
 		newState.jobWishlist = action.jobWishlist;
 	}
+	if(action.type === "GET_APPLIED_JOBLIST"){
+		newState.appliedJoblist = action.appliedJoblist;
+	}
+	
 	
 	
 return newState;

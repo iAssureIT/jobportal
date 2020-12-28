@@ -111,7 +111,7 @@ class Login extends Component {
         this.setState({ btnLoading: true });
         axios.post('/api/auth/post/login', auth)
           .then((response) => {
-            console.log("response login",response);
+            //console.log("response login",response);
             if (response.data.ID) {
               this.setState({ btnLoading: false });
               var userDetails = { 
@@ -128,6 +128,7 @@ class Login extends Component {
 
               axios.get('/api/candidatemaster/get/candidateID/'+response.data.userDetails.user_id)
               .then((candidate) => {
+              //console.log(candidate)
               userDetails.candidate_id = candidate.data[0] ? candidate.data[0]._id : null;
               // localStorage.setItem("candidateID", candidate.data[0] ? candidate.data[0]._id : null);
               // localStorage.setItem("token", response.data.token);
