@@ -313,7 +313,7 @@ class Candidatelist extends Component{
 																						<div className="col-lg-7 displayInfoCandidate">
 																							<div className="row">
 																								<div className="displayCandidateName">
-																									{elem.candidate[0].basicInfo.firstName}
+																									{/*{elem.candidate[0].basicInfo.firstName}*/}
 																									<span className="candidateIdNumber">(1234)</span>
 																								</div>
 																								<div className=" candidatePosts">
@@ -332,10 +332,10 @@ class Candidatelist extends Component{
 																										</div>
 																									</div>
 																									<div className=" Col-lg-11 postNameWrapper">
-																										<div className="postName">{elem.candidate[0].workExperience[index] ? elem.candidate[0].workExperience[index].lastDegn : null}</div> 
+																										{/*<div className="postName">{elem.candidate[0].workExperience[index] ? elem.candidate[0].workExperience[index].lastDegn : null}</div> 
 																										<div className="postName">{elem.candidate[0].workExperience[index] ? elem.candidate[0].workExperience[index].department : null} </div>
 																										<div className="postName"></div>
-																										<div className="postName">{elem.candidate[0].workExperience[index] ? elem.candidate[0].workExperience[index].city : null} </div>
+																										<div className="postName">{elem.candidate[0].workExperience[index] ? elem.candidate[0].workExperience[index].city : null} </div>*/}
 																									</div>
 																								</div>
 																							</div>
@@ -409,6 +409,9 @@ class Candidatelist extends Component{
 																			</div>
 																			<div className="row profileSymbols">
 																				<img src="/images/48.png" alt="Profile Logo"/>
+																			</div>
+																			<div className="row exlIconTwo">
+																				<i className="fa fa-file-excel-o" title="Download as excel file" aria-hidden="true"></i>
 																			</div>
 																		</div>	
 																	</div>
