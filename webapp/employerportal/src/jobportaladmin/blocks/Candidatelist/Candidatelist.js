@@ -25,16 +25,15 @@ class Candidatelist extends Component{
 	            name 	: "Name",
 	            gender 	: "Gender",
 	            contactDetails: "Contact Details",
-	            location: "Locations",
-	            contacts: "Contacts",
-	            actions: "Action"
-
+	            address: "Address",
+	            academics: "Academics",
+	            workExperience : "Work Experience"
 	          },
 	          tableObjects 	: {
 	          paginationApply : false,
 	          searchApply     : false,
-	          editUrl         : '/'+this.props.entity+'/basic-details',
-	          deleteMethod    : 'delete',
+	          //editUrl         : '/'+this.props.entity+'/basic-details',
+	          //deleteMethod    : 'delete',
         	  apiLink         : '/api/entitymaster/',
 	          downloadApply   : true
 	      },
@@ -57,7 +56,30 @@ class Candidatelist extends Component{
 
 		})
 	}
-
+	getData(){
+		var tableData = this.props.candidateList.map((a, i)=>{
+			console.log(a)
+		var addressDetails = a.candidate[0].address.map((l,i)=>{
+			return "<ul class='nopadding'><li><b>"+a.addressType[0].addressType+ " Address</b>: "+l.address+"</li></ul>"
+		})
+		var academicsData = a.candidate[0].academics.map((c,i)=>{
+			return "<ul class='nopadding'><li>"+a.qualificationlevel[0].qualificationLevel+" "+a.qualification[0].qualification+", "+(a.universityBoard[0].university)+" " + a.collegeSchool[0].collage+" "+c.state+" " +c.country+"</li></ul>"
+		})
+		var workExperience = a.candidate[0].workExperience.map((c,i)=>{
+			return "<ul class='nopadding'><li>"+c.lastDegn+" "+c.companyName+" "+c.city+ ", "+c.state+" " + c.country+ "</li></ul>"
+		})
+        return{
+            name 	: a.candidate[0].basicInfo.firstName + " "+a.candidate[0].basicInfo.lastName,
+            gender  : a.candidate[0].basicInfo.gender,
+            contactDetails:"<b>Email : </b>"+a.candidate[0].contact.emailId+"<br><b>Mobile No. : </b>"+a.candidate[0].contact.mobile,
+            address :addressDetails && addressDetails.length > 0 ? addressDetails : "No Address Added Yet",
+            academics:academicsData && academicsData.length > 0 ? academicsData : "No Academics Added Yet",
+            workExperience : workExperience && workExperience.length > 0 ? workExperience : "No Experiences Added Yet", 
+            _id:a._id
+        }
+      	})
+		this.setState({RecordsTable:tableData,initial: 'All'})
+	}
 	showView(value,event){
 		$('.viewBtn').removeClass('gridBtnActive');
         $(event.target).addClass('gridBtnActive');
@@ -114,11 +136,13 @@ class Candidatelist extends Component{
 			 							<div className="iAssureITTable"> 
 			 							<IAssureTable
                                                 tableHeading={this.state.tableHeading}
-                                                twoLevelHeader={this.state.twoLevelHeader}
-                                                dataCount={this.state.dataCount}
-                                                tableData={this.state["tableData" + this.props.fields.attributeName]}
-                                                getData={this.getData.bind(this)}
-                                                tableObjects={this.props.tableObjects}
+						                       	dataCount={this.state.entityCount}
+						                       	tableData={this.state.RecordsTable}
+						                       	tableObjects={this.state.tableObjects}
+						                       	getData={this.getData.bind(this)}
+						                       	id={"id"}
+						                       	tableName={this.state.entityType}
+						                       	
                                             />
 			 							</div>
 			                       	</div>

@@ -270,8 +270,9 @@
 }
 
 .iAssureITTable{
-	color: #fff;
+	/*color: #fff;
 	text-align: center;
+<<<<<<< Updated upstream
 	font-size: 20px;
 }
 
@@ -295,3 +296,4 @@
 .imageOfCandidate img{
 	height: 110px;
 }
+

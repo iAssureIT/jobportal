@@ -40,11 +40,11 @@ exports.getCandidateAppliedJobList = (req,res,next)=>{
             "localField": "jobID",
             "foreignField": "_id"
         }}
-    ])  
+    ])    
     .exec()
     .then(data=>{
         res.status(200).json(data);
-    })
+    })   
     .catch(err =>{
         res.status(500).json({
             error: err
@@ -103,21 +103,33 @@ exports.candidatesAppliedToJob = (req,res,next)=>{
         },
         {$lookup:{
                    from: "addresstypemasters",
-                   localField: "address.addressType",
+                   localField: "candidate.address.addressType",
                    foreignField: "_id",
                    as: "addressType" } 
         },
         {$lookup:{
                    from: "qualificationlevelmasters",
-                   localField: "academics.qualificationLevel",
+                   localField: "candidate.academics.qualificationLevel",
                    foreignField: "_id",
                    as: "qualificationlevel" } 
         },   
         {$lookup:{
                    from: "qualificationmasters",
-                   localField: "academics.qualification",
+                   localField: "candidate.academics.qualification",
                    foreignField: "_id",
                    as: "qualification" } 
+        },
+        {$lookup:{
+                   from: "universitymasters",
+                   localField: "candidate.academics.universityBoard",
+                   foreignField: "_id",
+                   as: "universityBoard" } 
+        },
+        {$lookup:{
+                   from: "collagemasters",
+                   localField: "candidate.academics.collegeSchool",
+                   foreignField: "_id",
+                   as: "collegeSchool" } 
         }
             
     ])
