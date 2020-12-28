@@ -23,7 +23,8 @@ import Footer                                   from './jobportaladmin/common/fo
 import FunctionalHeader                         from './jobportaladmin/common/functionalHeader/FunctionalHeader.js'; 
 
 import JobPosting                               from './jobportaladmin/blocks/JobPosting/JobPosting.js'; 
-import JobPostProfile                           from './jobportaladmin/blocks/JobPostProfile/JobPostProfile.js'; 
+import JobPostProfile                           from './jobportaladmin/blocks/JobPostProfile/JobPostProfile.js';
+import CandidateProfile                         from './jobportaladmin/blocks/CandidateProfile/CandidateProfile.js';
 
 import JoblistPage                              from './jobportaladmin/pages/JoblistPage/JoblistPage.js';
 import CandidatelistPage                        from './jobportaladmin/pages/CandidatelistPage/CandidatelistPage.js';
@@ -96,12 +97,13 @@ class Layout extends Component  {
                                                     <CoreLayout />
                                                    {/* <Leftsidebar/>*/}
                                                     <Switch >
-                                                        <Route path="/" component={Dashboard} exact />
-                                                        <Route path="/post-job/" component={JobPosting} exact />
-                                                        <Route path="/post-job/:job_id" component={JobPosting} exact />
-                                                        <Route path="/job-profile/:job_id" component={JobPostProfile} exact />
-                                                        <Route path="/job-list" component={JoblistPage} exact />
-                                                        <Route path="/applied-candidate-list/:jobID" component={CandidatelistPage} exact />
+                                                        <Route path="/"                                 component={Dashboard} exact />
+                                                        <Route path="/post-job/"                        component={JobPosting} exact />
+                                                        <Route path="/post-job/:job_id"                 component={JobPosting} exact />
+                                                        <Route path="/job-profile/:job_id"              component={JobPostProfile} exact />
+                                                        <Route path="/job-list"                         component={JoblistPage} exact />
+                                                        <Route path="/applied-candidate-list/:jobID"    component={CandidatelistPage} exact />
+                                                        <Route path="/candidate-profile/"               component={CandidateProfile} exact />
                                                     </Switch>
                                                 </div>
                                             </div>
@@ -122,12 +124,12 @@ class Layout extends Component  {
                     <Router >
                     <CoreLayout />
                         <Switch >
-                            <Route path="/" exact strict component={Login} />
-                            <Route path="/login" exact strict component={Login} />
-                            <Route path="/signup" exact strict component={SignUp} />
-                            <Route path="/forgotpassword" exact strict component={ForgotPassword} />
-                            <Route path="/reset-pwd/:user_ID" exact strict component={ResetPassword} />
-                            <Route path="/confirm-otp/:userID" exact strict component={ConfirmOtp} />
+                            <Route path="/"                     exact strict component={Login} />
+                            <Route path="/login"                exact strict component={Login} />
+                            <Route path="/signup"               exact strict component={SignUp} />
+                            <Route path="/forgotpassword"       exact strict component={ForgotPassword} />
+                            <Route path="/reset-pwd/:user_ID"   exact strict component={ResetPassword} />
+                            <Route path="/confirm-otp/:userID"  exact strict component={ConfirmOtp} />
                             {/*<Route path="/reset-password/:user_ID" exact strict component={ResetPasswordFirstLogin}  />*/}
                         </Switch>
                     </Router>

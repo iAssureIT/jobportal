@@ -3,7 +3,7 @@
 }
 
 .JobInfoContainer{
-	height: 243px;
+	height: 241px;
 	color: var(--main-txt-color); 
 	border-radius: 10px;
 	border: 1px solid var(--main-border-color);
@@ -74,14 +74,14 @@
 
 }
 .candidateBlockWrapper{
-	height:300px;
+	height:340px;
 	border:2px solid var(--main-border-color);
 	border-radius:10px;
 	background-color: var(--form-field-background-color);
 }
 
 .candidateInfoBlock{
-	height:225px;
+	height:263px;
 	border-right:1px solid var(--main-border-color);
 
 }
@@ -99,7 +99,7 @@
 }
 .candidateSkillsBlocks{
 	height:100px;
-	
+	margin-top: 30px;
 
 }
 .imageOfCandidate{
@@ -185,33 +185,32 @@
 
 }
 .profileSymbolsWrapper{
-	height:225px;
-	
-	
+	height:263px;
 }
 .profileSymbols{
 	height:40px;
-
 }
 .profileSymbols img{
 	margin-left:50%;
-	margin-top:50%;
+	margin-top:39%;
 	transform:translate(-50%,-50%);
 }
 .salaryBlockHeading{
 	font-size: 11px;
 	color: var(--main-heading-font-color);
-	padding-left:9px;
+	padding-left: 0px;
+	margin-left: 33px;
 }
 .salrayBlockSubHeading{
 	color: var(--main-txt-color);
 }
 .expectSalaryBlock{
 	padding-top:2px;
+	padding-top: 20px;
 }
 .salaryBlock{
 
-	height:20px;
+	height:28px;
 	border-right:1px solid var(--main-border-color);
 }
 .salaryBlock2{
@@ -274,4 +273,26 @@
 	color: #fff;
 	text-align: center;
 	font-size: 20px;
+}
+
+.exlIconOne{
+	position: absolute;
+	font-size: 20px;
+	/*margin-top: 11px;*/
+	margin-top: 160px;
+	cursor: pointer;
+	color:var(--main-heading-font-color);
+}
+
+.exlIconTwo{
+	position: absolute;
+	font-size: 16px;
+	margin-top: 21px;
+	margin-left: 17px;
+	cursor: pointer;
+	color:var(--main-heading-font-color);
+}
+
+.imageOfCandidate img{
+	height: 110px;
 }

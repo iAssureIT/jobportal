@@ -76,6 +76,7 @@ class Candidatelist extends Component{
 								<div className="JobInfoContainer">
 									<div className="col-lg-12">
 										<div className="col-lg-11 jobDescBlock">
+											<div className="exlIconOne col-lg-offset-12" title="Download as excel file"><i className="fa fa-file-excel-o" aria-hidden="true"></i></div>
 											<div className="joblistDesignation">
 												{this.state.jobInfo[0] ? this.state.jobInfo[0].jobBasicInfo.jobTitle : null}
 											</div>
@@ -148,7 +149,7 @@ class Candidatelist extends Component{
 																		<div className="row">
 																			<div className="displayCandidateName">
 																				{/*{elem.candidate[0].basicInfo.firstName}*/}
-																				Akshay
+																				<a href={"/candidate-profile/"}> Akshaya </a>
 																				<span className="candidateIdNumber">(1234)</span>
 																			</div>
 																			<div className=" candidatePosts">
@@ -245,12 +246,15 @@ class Candidatelist extends Component{
 														<div className="row profileSymbols">
 															<img src="/images/48.png" alt="Profile Logo"/>
 														</div>
+														<div className="row exlIconTwo">
+															<i className="fa fa-file-excel-o" title="Download as excel file" aria-hidden="true"></i>
+														</div>
 													</div>	
 												</div>
 												<div className="row">
 													<div className="col-lg-12 salaryBlockWrapper">
-														<div className="row salaryBlockHeading">
-															Current Offers :<span className="salrayBlockSubHeading"> 2 View</span>
+														<div className="row salaryBlockHeading col-lg-10 col-lg-offset-1">
+															Current Offers : &nbsp;<span className="salrayBlockSubHeading"> 2 View</span>
 														</div>
 														<div className="expectSalaryBlock">
 															<div className="row">

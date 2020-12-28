@@ -1,0 +1,85 @@
+
+.middelContentWrapper{
+	min-height:700px;
+	height:auto;
+	color: #dddddd;
+}
+.middelContentHeadingWrapper i{
+	margin-left:-3px;
+	font-size:10px;
+	color: var(--main-border-color);
+} 
+.midlleContentrotate45:after{
+	content:'';
+	background:var(--main-border-color);
+	height:2px;
+	width:20px;
+	display:block;
+	position:absolute;
+	transform: rotate(-45deg);
+	left:10px;
+	top:-10px;
+}
+
+.midlleContentrotate45{
+	-webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+.middleContentHeading{
+	font-size:19px;
+	letter-spacing:1px;
+	color: var(--main-heading-font-color);
+	font-family: Montserrat-SemiBold;
+}
+.middelContentText{
+	min-height:100px;
+	height:auto;
+	margin-bottom:5px;
+	padding-bottom:12px;
+	border-left:2px solid var(--main-heading-font-color);
+	font-family: Montserrat-Medium;
+	font-size:13px;
+}
+.secondP{
+	margin-top:20px;
+}
+.SubHeadingPadding{
+	padding-left:33px;
+	padding-top:10px;
+} 
+.SubHeadingPadding2{
+	padding-left:10px;
+	padding-top:10px;
+}
+.profesion{
+	font-size:14px;
+	color: var(--main-subheading-font-color);
+	font-weight:800;
+	padding-top:5px;
+	padding-bottom:10px;
+	font-family: Montserrat-Medium;
+}
+.companyName{
+	font-size:13px;
+	font-weight:600;
+	color: var(--main-txt-color);
+	font-family: Montserrat-Medium;
+}
+.companyExperience,.companyAddress{
+	padding-top:3px;
+	font-size:12px;
+	font-family: Montserrat-Medium;
+}
+
+.middleContentHr{
+	height:1px!important;
+	border:none;
+	background-color:var(--main-heading-font-color);
+}
+.companyImages img{
+	width:70px;
+	padding-top:15px;
+}
