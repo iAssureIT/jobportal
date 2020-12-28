@@ -76,8 +76,8 @@
 .candidateBlockWrapper{
 	height:300px;
 	border:2px solid var(--main-border-color);
-	border-radius:5px;
-
+	border-radius:10px;
+	background-color: var(--form-field-background-color);
 }
 
 .candidateInfoBlock{
@@ -246,7 +246,7 @@
 	font-weight: bold;
 }
 
-.downloadCount .GridViewIcon{
+.downloadCount .gridViewIcon{
 	padding-top: 8px;
 	border: 1px solid #eee;
 }

@@ -74,21 +74,20 @@ exports.insertJobs = (req, res, next)=>{
 			"jobBasicInfo" 	: 	{
 									"jobTitle"				: req.body.jobTitle,
 									"industry_id"			: req.body.industry_id,
-									"functionalarea_id" 	: functionalarea_id,
-									"subfunctionalarea_id"	: subfunctionalarea_id,
-									"jobrole_id"			: jobrole_id,
+									"functionalarea_id" 	: req.body.functionalarea_id,
+									"subfunctionalarea_id"	: req.body.subfunctionalarea_id,
+									"jobrole_id"			: req.body.jobrole_id,
 									"gender"				: req.body.gender,
 									"workFromHome" 			: req.body.workFromHome,
-									"jobtype_id" 			: jobtype_id,
-									"jobtime_id" 			: jobtime_id,
-									"jobcategory_id" 		: jobcategory_id,
+									"jobtype_id" 			: req.body.jobtype_id,
+									"jobtime_id" 			: req.body.jobtime_id,
+									"jobcategory_id" 		: req.body.jobcategory_id,
 									"positions" 			: req.body.positions,
 									"jobDesc" 				: req.body.jobDesc,
 									"lastDateOfAppl" 		: new Date(req.body.lastDateOfAppl),
-									
 									"contactPersonName" 	: req.body.contactPersonName,
 									"contactPersonEmail" 	: req.body.contactPersonEmail,
-									"contactPersonPhone" 	: req.body.contactPersonPhone,
+									"contactPersonPhone" 	: req.body.contactPersonPhone
 								},
 			"location" 		: 	{
 									"address" 				: req.body.address,
@@ -102,25 +101,25 @@ exports.insertJobs = (req, res, next)=>{
 									"pincode" 	 			: req.body.pincode
 								},
 			"ctcOffered" 	: 	{
-									"minSalary" 	: req.body.minSalary,
-									"minSalPeriod" 	: req.body.minSalPeriod,
-									"maxSalary" 	: req.body.maxSalary,
-									"maxSalPeriod" 	: req.body.maxSalPeriod,
+									"minSalary" 	        : req.body.minSalary,
+									"minSalPeriod" 	        : req.body.minSalPeriod,
+									"maxSalary" 	        : req.body.maxSalary,
+									"maxSalPeriod" 	        : req.body.maxSalPeriod,
 								},
 			
 			"eligibility" 	: 	{
-									"minEducation" 	: req.body.minEducation,
-									"minExperience" : req.body.minExperience,
+									"minEducation" 	        : req.body.minEducation,
+									"minExperience"         : req.body.minExperience
 								},
 			
 			"requiredSkills": 	{
-									"primarySkills" 	: primarySkills,
-									"minPrimExp"		: req.body.minPrimExp,
-									"secondarySkills" 	: secondarySkills,
-									"minSecExp"			: req.body.minSecExp,
-									"otherSkills"		: otherSkills,
-									"minOtherExp" 	  	: req.body.minOtherExp,
-									"preferredSkills" 	: preferredSkills,
+									"primarySkills" 	    : primarySkills,
+									"minPrimExp"		    : req.body.minPrimExp,
+									"secondarySkills" 	    : secondarySkills,
+									"minSecExp"			    : req.body.minSecExp,
+									"otherSkills"		    : otherSkills,
+									"minOtherExp" 	  	    : req.body.minOtherExp,
+									"preferredSkills" 	    : preferredSkills
 								},
 			
 			"createdAt" 	: 	new Date(),
@@ -150,6 +149,7 @@ exports.insertJobs = (req, res, next)=>{
 								});	
 		}
 }
+
 function insertSkill(skill, createdBy){ 
     return new Promise(function(resolve,reject){ 
         const skillMaster = new SkillMaster({
@@ -167,6 +167,7 @@ function insertSkill(skill, createdBy){
                     });
     });
 }
+
 function insertFunctArea(functionalArea, createdBy){ 
     return new Promise(function(resolve,reject){ 
         const functionalAreaMaster = new FunctionalAreaMaster({
@@ -222,6 +223,7 @@ function insertJobCategory(jobCategory, createdBy){
                     });
     });
 }
+
 function insertJobRole(jobRole, createdBy){ 
     return new Promise(function(resolve,reject){ 
         const jobRoleMaster = new JobRoleMaster({
@@ -257,6 +259,7 @@ function insertJobType(jobType, createdBy){
                     });
     });
 }
+
 function insertJobTime(jobTime, createdBy){ 
     return new Promise(function(resolve,reject){ 
         const jobTimeMaster = new JobTimeMaster({
@@ -274,6 +277,7 @@ function insertJobTime(jobTime, createdBy){
                     });
     });
 }
+
 exports.getJob = (req,res,next)=>{
 	var job_id = req.params.job_id;
 
@@ -535,6 +539,7 @@ exports.getJobListForEmployer = (req,res,next)=>{
 							});
 					});
 }
+
 exports.updateJob = (req,res,next)=>{
 	console.log("req.body - ", req.body);
 	var functionalarea_id, subfunctionalarea_id, jobcategory_id, jobrole_id, jobtype_id, jobtime_id;
@@ -566,20 +571,20 @@ exports.updateJob = (req,res,next)=>{
 			"jobBasicInfo" 	: 	{
 									"jobTitle"				: req.body.jobTitle,
 									"industry_id"			: req.body.industry_id,
-									"functionalarea_id" 	: functionalarea_id,
-									"subfunctionalarea_id"	: subfunctionalarea_id,
-									"jobrole_id"			: jobrole_id,
+									"functionalarea_id" 	: req.body.functionalarea_id,
+									"subfunctionalarea_id"	: req.body.subfunctionalarea_id,
+									"jobrole_id"			: req.body.jobrole_id,
 									"gender"				: req.body.gender,
 									"workFromHome" 			: req.body.workFromHome,
-									"jobtype_id" 			: jobtype_id,
-									"jobtime_id" 			: jobtime_id,
-									"jobcategory_id" 		: jobcategory_id,
+									"jobtype_id" 			: req.body.jobtype_id,
+									"jobtime_id" 			: req.body.jobtime_id,
+									"jobcategory_id" 		: req.body.jobcategory_id,
 									"positions" 			: req.body.positions,
 									"jobDesc" 				: req.body.jobDesc,
 									"lastDateOfAppl" 		: new Date(req.body.lastDateOfAppl),
 									"contactPersonName" 	: req.body.contactPersonName,
 									"contactPersonEmail" 	: req.body.contactPersonEmail,
-									"contactPersonPhone" 	: req.body.contactPersonPhone,
+									"contactPersonPhone" 	: req.body.contactPersonPhone
 								},
 			"location" 		: 	{
 									"address" 				: req.body.address,
@@ -593,25 +598,25 @@ exports.updateJob = (req,res,next)=>{
 									"pincode" 	 			: req.body.pincode
 								},
 			"ctcOffered" 	: 	{
-									"minSalary" 	: req.body.minSalary,
-									"minSalPeriod" 	: req.body.minSalPeriod,
-									"maxSalary" 	: req.body.maxSalary,
-									"maxSalPeriod" 	: req.body.maxSalPeriod,
+									"minSalary" 	         : req.body.minSalary,
+									"minSalPeriod" 	         : req.body.minSalPeriod,
+									"maxSalary" 	         : req.body.maxSalary,
+									"maxSalPeriod" 	         : req.body.maxSalPeriod
 								},
 			
 			"eligibility" 	: 	{
-									"minEducation" 	: req.body.minEducation,
-									"minExperience" : req.body.minExperience,
+									"minEducation" 	         : req.body.minEducation,
+									"minExperience"          : req.body.minExperience
 								},
 			
 			"requiredSkills": 	{
-									"primarySkills" 	: req.body.primarySkills,
-									"minPrimExp"		: req.body.minPrimExp,
-									"secondarySkills" 	: req.body.secondarySkills,
-									"minSecExp"			: req.body.minSecExp,
-									"otherSkills"		: req.body.otherSkills,
-									"minOtherExp" 	  	: req.body.minOtherExp,
-									"preferredSkills" 	: req.body.preferredSkills,
+									"primarySkills" 	     : primarySkills,
+									"minPrimExp"		     : req.body.minPrimExp,
+									"secondarySkills" 	     : req.body.secondarySkills,
+									"minSecExp"			     : req.body.minSecExp,
+									"otherSkills"		     : otherSkills,
+									"minOtherExp" 	  	     : req.body.minOtherExp,
+									"preferredSkills" 	     : preferredSkills
 								},
 			
 			"createdAt" 	: 	new Date(),

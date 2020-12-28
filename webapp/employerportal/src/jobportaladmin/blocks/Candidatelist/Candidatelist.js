@@ -104,7 +104,7 @@ class Candidatelist extends Component{
 					<div className="col-lg-12 downloadCount">
 						Candidates applied to job  : 
 						<i class="fa fa-th-list fa-lg btn pull-right listViewIcon viewBtn" title="List view" name="view" ref="view" value={this.state.view} onClick={this.showView.bind(this,'List')} onChange={this.handleChange} aria-hidden="true"></i>
-						<i class="fa fa-th fa-lg btn pull-right gridBtnActive GridViewIcon viewBtn" title="Grid view" name="view" ref="view" value={this.state.view} onClick={this.showView.bind(this,'Grid')} onChange={this.handleChange} aria-hidden="true"></i>
+						<i class="fa fa-th fa-lg btn pull-right gridBtnActive gridViewIcon viewBtn" title="Grid view" name="view" ref="view" value={this.state.view} onClick={this.showView.bind(this,'Grid')} onChange={this.handleChange} aria-hidden="true"></i>
 					</div>
 
 					{this.state.view === 'List' ?
@@ -119,7 +119,7 @@ class Candidatelist extends Component{
                                                 getData={this.getData.bind(this)}
                                                 tableObjects={this.props.tableObjects}
                                             />
-			 							</div> 
+			 							</div>
 			                       	</div>
 								 
 									:
@@ -310,7 +310,6 @@ class Candidatelist extends Component{
 																							<div className="row">
 																								<div className="displayCandidateName">
 																									{elem.candidate[0].basicInfo.firstName}
-																									
 																									<span className="candidateIdNumber">(1234)</span>
 																								</div>
 																								<div className=" candidatePosts">

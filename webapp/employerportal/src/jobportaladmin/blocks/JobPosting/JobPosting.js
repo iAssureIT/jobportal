@@ -194,7 +194,7 @@ class JobPosting extends Component {
                     primarySkillSuggestions   : primarySkillSuggestions,
                     secondarySkillSuggestions : primarySkillSuggestions,
                     otherSkillSuggestions     : primarySkillSuggestions,
-                    preferredSkillSuggestions    : primarySkillSuggestions
+                    preferredSkillSuggestions : primarySkillSuggestions
                 });
 
             })
@@ -210,13 +210,19 @@ class JobPosting extends Component {
                     this.setState({
                         job_id                  :   job_id,
                         jobTitle                :   response.data.jobsData[0].jobBasicInfo.jobTitle,
+                        employerName            :   response.data.jobsData[0].employer[0].companyName,
+                        employerLogo            :   response.data.jobsData[0].employer[0].companyLogo[0] ? response.data.jobsData[0].employer[0].companyLogo[0] : null,
                         industry_id             :   response.data.jobsData[0].jobBasicInfo.industry_id,
+                        industry                :   response.data.jobsData[0].industry[0].industry,
                         functionalarea_id       :   response.data.jobsData[0].jobBasicInfo.functionalarea_id,
+                        functionalArea          :   response.data.jobsData[0].functionalArea[0].functionalArea,
                         subfunctionalarea_id    :   response.data.jobsData[0].jobBasicInfo.subfunctionalarea_id,
                         jobrole_id              :   response.data.jobsData[0].jobBasicInfo.jobrole_id,
+                        jobRole                 :   response.data.jobsData[0].jobRole[0].jobRole,
                         gender                  :   response.data.jobsData[0].jobBasicInfo.gender,
                         workFromHome            :   response.data.jobsData[0].jobBasicInfo.workFromHome,
                         jobtype_id              :   response.data.jobsData[0].jobBasicInfo.jobtype_id,
+                        jobType                 :   response.data.jobsData[0].jobType[0].jobType,
                         jobtime_id              :   response.data.jobsData[0].jobBasicInfo.jobtime_id,
                         jobcategory_id          :   response.data.jobsData[0].jobBasicInfo.jobcategory_id,
                         positions               :   response.data.jobsData[0].jobBasicInfo.positions,
@@ -583,7 +589,7 @@ class JobPosting extends Component {
                         minSecExp               :   "",
                         otherSkills             :   "",
                         minOtherExp             :   "",
-                        preferredSkills            :   "",
+                        preferredSkills         :   "",
                     });
 
                     this.props.history.push("/job-profile/" + job_id);
@@ -816,8 +822,6 @@ class JobPosting extends Component {
           secondarySkillTags: secondarySkillTags.filter((tag, index) => index !== i),
         });
 	}
-
-    
 
     onOtherSkillAddition (tag) {
         if (tag.id == tag.text) {

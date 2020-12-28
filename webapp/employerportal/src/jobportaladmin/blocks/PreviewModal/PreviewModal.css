@@ -334,92 +334,92 @@
 	list-style: none;
 }
 
-.skillsHeadOne{
+.modalSkillsHeadOne{
 	/*background-color: maroon;*/
 	margin-left: 6px;
 }
 
-.skillsHeadOne .skillsTitle{
+.modalSkillsHeadOne .skillsTitle{
 	font-size: 15px;
 	font-family: 'Montserrat-SemiBold';
 	color: var(--main-subheading-font-color);
 }
 
-.skillsHeadOne .skillSubtitle{
+.modalSkillsHeadOne .skillSubtitle{
 	font-family: 'Montserrat-SemiBold';
 }
 
-.skillsHeadOne .skillDuration{
+.modalSkillsHeadOne .skillDuration{
 	font-family: 'Montserrat-Regular';
 }
 
-.skillsHeadOne li:nth-child(2){
-	margin-top: 42px;
+.modalSkillsHeadOne li:nth-child(2){
+	margin-top: 30px;
 	/*background-color: red;*/
 }
 
-.skillsHeadTwo{
+.modalSkillsHeadTwo{
 	margin-top: 10px;
 	margin-left: 6px;
 	/*background-color: gray;*/
 }
 
-.skillsHeadTwo .skillsTitle{
+.modalSkillsHeadTwo .skillsTitle{
 	font-size: 15px;
 	font-family: 'Montserrat-SemiBold';
 	color: var(--main-subheading-font-color);
 }
 
-.skillsHeadTwo .skillSubtitle{
+.modalSkillsHeadTwo .skillSubtitle{
 	font-family: 'Montserrat-SemiBold';
 }
 
-.skillsHeadTwo .skillDuration{
+.modalSkillsHeadTwo .skillDuration{
 	font-family: 'Montserrat-Regular';
 }
 
-.skillsHeadTwo li:nth-child(2){
-	margin-top: 62px;
+.modalSkillsHeadTwo li:nth-child(2){
+	margin-top: 30px;
 	/*background-color: red;*/
 }
 
-.skillsHeadThree{
+.modalSkillsHeadThree{
 	margin-left: 6px;
 	margin-top: 10px;
 	/*background-color: red;*/
 }
 
-.skillsHeadThree .skillsTitle{
+.modalSkillsHeadThree .skillsTitle{
 	font-size: 15px;
 	font-family: 'Montserrat-SemiBold';
 	color: var(--main-subheading-font-color);
 }
 
-.skillsHeadThree .skillSubtitle{
+.modalSkillsHeadThree .skillSubtitle{
 	font-family: 'Montserrat-SemiBold';
 }
 
-.skillsHeadThree .skillDuration{
+.modalSkillsHeadThree .skillDuration{
 	font-family: 'Montserrat-Regular';
 }
 
-.skillsHeadThree li:nth-child(2){
-	margin-top: 62px;
+.modalSkillsHeadThree li:nth-child(2){
+	margin-top: 30px;
 	/*background-color: red;*/
 }
 
-.skillsHeadFour{
+.modalSkillsHeadFour{
 	margin-left: 6px;
 	margin-top: 10px;
 	font-family: 'Montserrat-SemiBold';
 	/*background-color: red;*/
 }
 
-.skillsHeadFour li:nth-child(2){
+.modalSkillsHeadFour li:nth-child(2){
 	margin-top: 62px;
 }
 
-.skillsHeadFour .skillsTitle{
+.modalSkillsHeadFour .skillsTitle{
 	color: var(--main-subheading-font-color);
 }
 
