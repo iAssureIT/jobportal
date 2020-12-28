@@ -22,7 +22,7 @@ exports.manage_wishlist = (req,res,next)=>{
                         .exec()
                         .then(data=>{
                             res.status(200).json({
-                                "message": "Job is removed from wishlist.",
+                                "message": "Job is removed from wishlist",
                             });
                         })
                         .catch(err =>{
@@ -47,7 +47,7 @@ exports.manage_wishlist = (req,res,next)=>{
                         .then(data=>{
                             if(data.nModified == 1){
                                 res.status(200).json({
-                                    "message": "Job is added to wishlist.",
+                                    "message": "Job is added to wishlist",
                                 });
                             }else{
                                 res.status(401).json({

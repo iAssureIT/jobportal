@@ -33,9 +33,22 @@ handleclick = (jobid)=>{
 		}
 		Axios.post("/api/wishlist/post",formValues)
 			.then(response =>{
+				var {mapAction} = this.props;
+				mapAction.getJobWishlist(this.props.userDetails.candidate_id);
+
 				console.log("wishlist response=", response.data);
-				if(response.data.message==="Job is removed from wishlist."){
-							
+				if(response.data.message==="Job is removed from wishlist"){
+							Swal.fire(
+									'Removed!',
+									'Job is removed from wishlist',
+									'success'
+							);
+				}else{
+					Swal.fire(
+									'Added!',
+									'Job is added to wishlist',
+									'success'
+							);
 				}
 			})
 			.catch(error=>{
@@ -49,7 +62,7 @@ handleclick = (jobid)=>{
 search = (event)=>{
 	event.preventDefault();
 	const searchTxt = event.currentTarget.value;
-	if(searchTxt !== ""){
+	if(searchTxt !== ""){ 
 		Axios.get("/api/jobposting/get/searchlist/" + searchTxt)
 			.then(response => {
 				this.setState({jobList : response.data.jobList });
@@ -87,9 +100,11 @@ applyJob = (jobid, company_id)=>{
 		if(result.value){
 			Axios.post("/api/applyJob/post", formValues)
 				.then(response =>{
-					console.log("applied jobs response=", response.data);
 					
-					if(response.data.message==="You have applied to job."){
+					var {mapAction} = this.props;
+					mapAction.getAppliedJoblist(this.props.userDetails.candidate_id);
+
+					if(response.data.message==="You have applied to job"){
 
 						Swal.fire(
 									'Applied!',

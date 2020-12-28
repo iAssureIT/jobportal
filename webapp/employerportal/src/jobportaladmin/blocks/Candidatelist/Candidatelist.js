@@ -7,7 +7,7 @@ import { connect }        	  from 'react-redux';
 import { bindActionCreators } from 'redux';
 import  * as mapActionCreator from '../../common/actions/index';
 import $                      from 'jquery';
-
+import IAssureTable 		  from '../../../coreadmin/IAssureTable/IAssureTable.jsx';
 import './Candidatelist.css';
 
 class Candidatelist extends Component{ 
@@ -19,7 +19,27 @@ class Candidatelist extends Component{
 			skillsArry         : [],
 			jobInfo 		   : [], 	
 			candidateSelector  : { "jobID" :  this.props.jobID },
-			view : 'Grid'
+			view 			   : 'Grid',
+			RecordsTable 	   : [],
+			tableHeading 	: {
+	            name 	: "Name",
+	            gender 	: "Gender",
+	            contactDetails: "Contact Details",
+	            location: "Locations",
+	            contacts: "Contacts",
+	            actions: "Action"
+
+	          },
+	          tableObjects 	: {
+	          paginationApply : false,
+	          searchApply     : false,
+	          editUrl         : '/'+this.props.entity+'/basic-details',
+	          deleteMethod    : 'delete',
+        	  apiLink         : '/api/entitymaster/',
+	          downloadApply   : true
+	      },
+	      startRange        : 0,
+      	  limitRange        : 100000,
  		}
 	}
 	
@@ -82,7 +102,7 @@ class Candidatelist extends Component{
 					</div>
 					
 					<div className="col-lg-12 downloadCount">
-						Count of all candidates downloaded  : 
+						Candidates applied to job  : 
 						<i class="fa fa-th-list fa-lg btn pull-right listViewIcon viewBtn" title="List view" name="view" ref="view" value={this.state.view} onClick={this.showView.bind(this,'List')} onChange={this.handleChange} aria-hidden="true"></i>
 						<i class="fa fa-th fa-lg btn pull-right gridBtnActive GridViewIcon viewBtn" title="Grid view" name="view" ref="view" value={this.state.view} onClick={this.showView.bind(this,'Grid')} onChange={this.handleChange} aria-hidden="true"></i>
 					</div>
@@ -90,7 +110,16 @@ class Candidatelist extends Component{
 					{this.state.view === 'List' ?
 					
 								 	<div className="col-lg-12"> 
-			 							<div className="iAssureITTable"> iAssureIT Table </div> 
+			 							<div className="iAssureITTable"> 
+			 							<IAssureTable
+                                                tableHeading={this.state.tableHeading}
+                                                twoLevelHeader={this.state.twoLevelHeader}
+                                                dataCount={this.state.dataCount}
+                                                tableData={this.state["tableData" + this.props.fields.attributeName]}
+                                                getData={this.getData.bind(this)}
+                                                tableObjects={this.props.tableObjects}
+                                            />
+			 							</div> 
 			                       	</div>
 								 
 									:
@@ -102,7 +131,164 @@ class Candidatelist extends Component{
 								{ this.state.view === 'Grid' ?
 									
 									<div className="container-fluid  candidateList col-lg-12">
+										<div className="col-lg-4 ">
+										<div>
+											<div className="col-lg-12 candidateBlockWrapper">
+												<div className="row">
+													<div className="col-lg-10 candidateInfoBlock">
+														<div className="row">
+															<div className="col-lg-12 candidateImgBlock">
+																<div className="row">
+																	<div className="col-lg-5 imageOfCandidate">
+																		<div className="row">
+																			<img src="/images/43.png" alt="candidateName"/>
+																		</div>
+																	</div>
+																	<div className="col-lg-7 displayInfoCandidate">
+																		<div className="row">
+																			<div className="displayCandidateName">
+																				{/*{elem.candidate[0].basicInfo.firstName}*/}
+																				Akshay
+																				<span className="candidateIdNumber">(1234)</span>
+																			</div>
+																			<div className=" candidatePosts">
+																				<div className=" col-lg-1">
+																					<div className="candListIcon candListIcon1">
+																						<FontAwesomeIcon icon="chalkboard-teacher" />
+																					</div>
+																					<div className="candListIcon candListIcon2">
+																						<FontAwesomeIcon icon="industry"/>
+																					</div>
+																					<div className="candListIcon candListIcon3">
+																						<FontAwesomeIcon icon="user-clock" />
+																					</div>
+																					<div className="candListIcon candListIcon4">
+																						<FontAwesomeIcon icon="map-marker-alt" />
+																					</div>
+																				</div>
+																				<div className=" Col-lg-11 postNameWrapper">
+																					<div className="postName">{/*{elem.candidate[0].workExperience[index] ? elem.candidate[0].workExperience[index].lastDegn : null}*/} Project Manager</div> 
+																					<div className="postName">{/*{elem.candidate[0].workExperience[index] ? elem.candidate[0].workExperience[index].department : null}*/} IT Industry</div>
+																					<div className="postName">10 Year Exp.</div>
+																					<div className="postName">{/*{elem.candidate[0].workExperience[index] ? elem.candidate[0].workExperience[index].city : null}*/} Pune</div>
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+															</div>
+															<div className="col-lg-12 candidateSkillsBlocks">
+																<div className="">
+																	<div className="skillsHeading">	
+																		Primary skllis
+																	</div>
+																	<div className=" marginForSkillHeading">
+																		<div className=" skillsSubHeadingWrapper">	
+																			{
+																				this.state.skillsArry.length > 0
+																				?
+																				this.state.skillsArry.map((elem,index)=>{
+																					return(
+																							<div className="col-lg-6 " key={index}>
+																								<div className="row skillsSubHeading">
+																									<i className="fa fa-square rotate45 listRoatate45" ></i>
+																										{/*{elem.primarySkills[index]}*/}
+																								</div>
+																							</div>
+																						);
+																				})
+																				:
+																				null
+																			}
+																		</div>
+																	</div>
+																</div>
+																<div className="skillsHeadingBlock">
+																	<div className="skillsHeading">	
+																		Secondary skllis
+																	</div>
+																	<div className=" skillsSubHeadingWrapper">	
+																		{
+																			this.state.skillsArry.length > 0
+																			?
+																			this.state.skillsArry.map((elem,index)=>{
+																				return(
+																						<div className="col-lg-6 " key={index}>
+																							<div className="row skillsSubHeading">
+																								<i className="fa fa-square rotate45 listRoatate45" ></i>
+																									{elem.secondarySkills[index]}
+																							</div>
+																						</div>
+																					);
+																			})
+																			:
+																			null
+																		}
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+													<div className="col-lg-2 profileSymbolsWrapper">
+														<div className="row profileSymbols">
+															<img src="/images/44.png" alt="Profile Logo"/>
+														</div>
+														<div className="row profileSymbols">
+															<img src="/images/45.png" alt="Profile Logo"/>
+														</div>
+														<div className="row profileSymbols">
+															<img src="/images/46.png" alt="Profile Logo"/>
+														</div>
+														<div className="row profileSymbols">
+															<img src="/images/47.png" alt="Profile Logo"/>
+														</div>
+														<div className="row profileSymbols">
+															<img src="/images/48.png" alt="Profile Logo"/>
+														</div>
+													</div>	
+												</div>
+												<div className="row">
+													<div className="col-lg-12 salaryBlockWrapper">
+														<div className="row salaryBlockHeading">
+															Current Offers :<span className="salrayBlockSubHeading"> 2 View</span>
+														</div>
+														<div className="expectSalaryBlock">
+															<div className="row">
+																<div className="col-lg-4 salaryBlock ">
+																	<div className="row expectSalaryBlockHeading">
+																		Current CTC
+																	</div>
+																	<div className="row expectSalaryBlockSubHeading">
+																		{/*{elem.candidate[0].workExperience[index] ? elem.candidate[0].workExperience[index].lastSalary : null}*/} Rs 10 Lakhs
+																	</div>
+																	
+																</div>
+																<div className="col-lg-4 salaryBlock ">
+																	<div className="row expectSalaryBlockHeading">
+																		Expected CTC
+																	</div>
+																	<div className="row expectSalaryBlockSubHeading">
+																		{/*{elem.candidate[0].workExperience[index] ? elem.candidate[0].workExperience[index].expectedSalary : null}*/} Rs 12 Lakhs
+																	</div>
+																	
+																</div>
+																<div className="col-lg-4 salaryBlock2 ">
+																	<div className="row expectSalaryBlockHeading">
+																		Notice Period
+																	</div>
+																	<div className="row expectSalaryBlockSubHeading">
+																		{/*{elem.candidate[0].workExperience[index] ? elem.candidate[0].workExperience[index].noticePeriod : null}*/} 3 Months
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+									    	</div>	
+										</div>
+							    	</div>
 										{
+
 											this.props.candidateList
 											? 	
 											this.props.candidateList.map((elem,index)=>{
@@ -123,8 +309,8 @@ class Candidatelist extends Component{
 																						<div className="col-lg-7 displayInfoCandidate">
 																							<div className="row">
 																								<div className="displayCandidateName">
-																									{/*{elem.candidate[0].basicInfo.firstName}*/}
-																									Akshay
+																									{elem.candidate[0].basicInfo.firstName}
+																									
 																									<span className="candidateIdNumber">(1234)</span>
 																								</div>
 																								<div className=" candidatePosts">
@@ -143,10 +329,10 @@ class Candidatelist extends Component{
 																										</div>
 																									</div>
 																									<div className=" Col-lg-11 postNameWrapper">
-																										<div className="postName">{/*{elem.candidate[0].workExperience[index] ? elem.candidate[0].workExperience[index].lastDegn : null}*/} Project Manager</div> 
-																										<div className="postName">{/*{elem.candidate[0].workExperience[index] ? elem.candidate[0].workExperience[index].department : null}*/} IT Industry</div>
-																										<div className="postName">10 Year Exp.</div>
-																										<div className="postName">{/*{elem.candidate[0].workExperience[index] ? elem.candidate[0].workExperience[index].city : null}*/} Pune</div>
+																										<div className="postName">{elem.candidate[0].workExperience[index] ? elem.candidate[0].workExperience[index].lastDegn : null}</div> 
+																										<div className="postName">{elem.candidate[0].workExperience[index] ? elem.candidate[0].workExperience[index].department : null} </div>
+																										<div className="postName"></div>
+																										<div className="postName">{elem.candidate[0].workExperience[index] ? elem.candidate[0].workExperience[index].city : null} </div>
 																									</div>
 																								</div>
 																							</div>
@@ -168,7 +354,7 @@ class Candidatelist extends Component{
 																												<div className="col-lg-6 " key={index}>
 																													<div className="row skillsSubHeading">
 																														<i className="fa fa-square rotate45 listRoatate45" ></i>
-																															{/*{elem.primarySkills[index]}*/}
+																															{elem.primarySkills[index]}
 																													</div>
 																												</div>
 																											);

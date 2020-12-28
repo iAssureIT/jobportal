@@ -18,7 +18,7 @@ exports.applyJob = (req,res,next)=>{
         });
         applyjob.save()
 		.then(data =>{
-            res.status(200).json({ "message": "You have applied to job." });		
+            res.status(200).json({ "message": "You have applied to job" });		
 	})
 	.catch(err =>{
         // console.log('5',err);
