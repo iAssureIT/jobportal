@@ -193,3 +193,19 @@
     top: 48%;
     left: 35%;
 }
+.thoubal{
+    position: absolute;
+    left: 381px;
+    top: 468px;
+}
+.thoubalText{
+    position: absolute;
+    top: 42%;
+    left: 25%;
+}
+.thoubalNumber{
+    position: absolute;
+    top: 55%;
+    left: 30%;
+
+}

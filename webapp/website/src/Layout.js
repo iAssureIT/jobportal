@@ -61,6 +61,8 @@ import Mizoram from './maps/Mizoram/Mizoram.js';
 import Nagaland from './maps/Nagaland/Nagaland.js';
 import Orissa from './maps/Orissa/Orissa.js';
 import Punjab from './maps/Punjab/Punjab.js';
+import Tripura from './maps/Tripura/Tripura.js';
+import WestBengal from './maps/WestBengal/WestBengal.js';
 
 import Homepage from './pages/Homepage/Homepage.js'
 
@@ -201,6 +203,8 @@ class Layout extends Component  {
                                             <Route exact path="/Nagaland"        component={Nagaland }  />
                                             <Route exact path="/Odisha"        component={Orissa }  />
                                             <Route exact path="/Punjab"        component={Punjab }  />
+                                            <Route exact path="/Tripura"        component={Tripura }  />
+                                            <Route exact path="/WestBengal"        component={WestBengal }  />
 
                                         </Switch>
                                             </div>

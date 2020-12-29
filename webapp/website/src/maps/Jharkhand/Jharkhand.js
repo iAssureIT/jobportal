@@ -105,15 +105,16 @@ constructor(props){
 						<span className="ranchiText mapTextLabel text-capitalize">Ranchi</span>
 						<span className="ranchiNumber mapCountLabel text-center">{this.search('ranchi')}</span>
 					</div>
-					<div className="saraikelaKharsawan classHover"> 
-						<img src="/Maps/Jharkhand/Saraikela_Kharsawan.png"  alt="Saraikela_Kharsawan" onMouseOver={e => (e.currentTarget.src = "/Maps/Jharkhand/Saraikela_Kharsawan_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Jharkhand/Saraikela_Kharsawan.png")}/>
-						<span className="saraikelaKharsawanText mapTextLabel text-capitalize">Saraikela_Kharsawan</span>
-						<span className="saraikelaKharsawanNumber mapCountLabel text-center">{this.search('saraikelaKharsawan')}</span>
-					</div>
+					
 					<div className="eastSinghbhum classHover"> 
 						<img src="/Maps/Jharkhand/East_Singhbhum.png"  alt="East_Singhbhum" onMouseOver={e => (e.currentTarget.src = "/Maps/Jharkhand/East_Singhbhum_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Jharkhand/East_Singhbhum.png")}/>
 						<span className="eastSinghbhumText mapTextLabel text-capitalize">East_Singhbhum</span>
 						<span className="eastSinghbhumNumber mapCountLabel text-center">{this.search('eastSinghbhum')}</span>
+					</div>
+					<div className="saraikelaKharsawan classHover"> 
+						<img src="/Maps/Jharkhand/Saraikela_Kharsawan.png"  alt="Saraikela_Kharsawan" onMouseOver={e => (e.currentTarget.src = "/Maps/Jharkhand/Saraikela_Kharsawan_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Jharkhand/Saraikela_Kharsawan.png")}/>
+						<span className="saraikelaKharsawanText mapTextLabel text-capitalize">Saraikela_Kharsawan</span>
+						<span className="saraikelaKharsawanNumber mapCountLabel text-center">{this.search('saraikelaKharsawan')}</span>
 					</div>
 					<div className="westSinghbhum classHover"> 
 						<img src="/Maps/Jharkhand/West_Singhbhum.png" alt="West_Singhbhum" onMouseOver={e => (e.currentTarget.src = "/Maps/Jharkhand/West_Singhbhum_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Jharkhand/West_Singhbhum.png")}/>

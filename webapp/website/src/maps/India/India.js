@@ -155,7 +155,7 @@ class India extends Component{
 					</div>
 					
 					<div className="westbengal classHover">
-						<img src="Maps/India/WestBengal.png" className="img-responsive "  onClick={e => this.onStateClick("West Bengal")} onMouseOver={e => (e.currentTarget.src = "/Maps/India/WestBengal1.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/India/WestBengal.png")}/>
+						<img src="Maps/India/WestBengal.png" className="img-responsive "  onClick={e => this.onStateClick("WestBengal")} onMouseOver={e => (e.currentTarget.src = "/Maps/India/WestBengal1.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/India/WestBengal.png")}/>
 						<span className="westbengalText mapTextLabel text-capitalize">West Bengal</span>
 						<span className="westbengalNumber mapCountLabel text-center">{this.search('West Bengal')}</span>
 					</div>

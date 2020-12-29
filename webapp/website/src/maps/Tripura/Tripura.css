@@ -25,153 +25,123 @@
 	font-size: 16px;
 	font-family: 'Montserrat-Bold';
 }
-.pernem{
+.northTripura{
 	position: absolute;
-	left: 1px;
-	top:  11px;
+	left: 736px;
+	top:  0px;
 }
-.pernemText{
+.northTripuraText{
 	position: absolute;
-	top: 45%;
-    left: 40%;
+	top: 48%;
+    left: 43%;
 }
-.pernemNumber{
+.northTripuraNumber{
 	position: absolute;
-	top: 53%;
-    left: 45%;
-}
-.mapusa{
-	position: absolute;
-	left: 40px;
-    top: 123px;
-}
-.mapusaText{
-	position: absolute;
-	top: 45%;
-    left: 40%;
-}
-.mapusaNumber{
-	position: absolute;
-	top: 53%;
-    left: 45%;
-}
-.bicholim{
-	position: absolute;
-	left: 192px;
-    top: 108px;
-}
-.bicholimText{
-	position: absolute;
-	top: 35%;
-    left: 20%;
-}
-.bicholimNumber{
-	position: absolute;
-	top: 42%;
-    left: 25%;
-}
-.panjim{
-	position: absolute;
-	left: 96px;
-    top: 243px;
-}
-.panjimText{
-	position: absolute;
-	top: 55%;
+	top: 51%;
     left: 50%;
 }
-.panjimNumber{
+.unakoti{
 	position: absolute;
-	top: 62%;
-    left: 55%;
+	left: 642px;
+    top: 95px;
 }
-.satari{
-	position: absolute;
-	left: 302px;
-    top: 132px;
-}
-.satariText{
+.unakotiText{
 	position: absolute;
 	top: 45%;
-    left: 50%;
-}
-.satariNumber{
-	position: absolute;
-	top: 52%;
-    left: 52%;
-}
-.ponda{
-	position: absolute;
-	left: 226px;
-    top: 273px;
-}
-.pondaText{
-	position: absolute;
-	top: 45%;
-    left: 40%;
-}
-.pondaNumber{
-	position: absolute;
-	top: 52%;
-    left: 45%;
-}
-.sanguem{
-	position: absolute;
-	left: 366px;
-    top: 322px;
-}
-.sanguemText{
-	position: absolute;
-	top: 45%;
-    left: 40%;
-}
-.sanguemNumber{
-	position: absolute;
-	top: 50%;
-    left: 45%;
-}
-.quepem{
-	position: absolute;
-	left: 238px;
-    top: 544px;
-}
-.quepemText{
-	position: absolute;
-	top: 50%;
-    left: 30%;
-}
-.quepemNumber{
-	position: absolute;
-	top: 55%;
     left: 35%;
 }
-.canacona{
+.unakotiNumber{
 	position: absolute;
-	left: 212px;
-    top: 702px;
+	top: 50%;
+    left: 40%;
 }
-.canaconaText{
+.dhalai{
+	position: absolute;
+	left: 548px;
+    top: 195px;
+}
+.dhalaiText{
+	position: absolute;
+	top: 35%;
+    left: 35%;
+}
+.dhalaiNumber{
+	position: absolute;
+	top: 38%;
+    left: 40%;
+}
+.khowai{
+	position: absolute;
+	left: 396px;
+    top: 207px;
+}
+.khowaiText{
 	position: absolute;
 	top: 50%;
     left: 50%;
 }
-.canaconaNumber{
+.khowaiNumber{
 	position: absolute;
 	top: 55%;
     left: 55%;
 }
-.salcette{
+.westTripura{
 	position: absolute;
-	left: 88px;
-    top: 401px;
+	left: 253px;
+    top: 289px;
 }
-.salcetteText{
+.westTripuraText{
 	position: absolute;
 	top: 45%;
-    left: 60%;
+    left: 40%;
 }
-.salcetteNumber{
+.westTripuraNumber{
 	position: absolute;
-	top: 50%;
-    left: 65%;
+	top: 52%;
+    left: 45%;
+}
+.gomati{
+	position: absolute;
+	left: 351px;
+    top: 506px;
+}
+.gomatiText{
+	position: absolute;
+	top: 40%;
+    left: 40%;
+}
+.gomatiNumber{
+	position: absolute;
+	top: 45%;
+    left: 45%;
+}
+.sepahijala{
+	position: absolute;
+	left: 213px;
+    top: 495px;
+}
+.sepahijalaText{
+	position: absolute;
+	top: 35%;
+    left: 25%;
+}
+.sepahijalaNumber{
+	position: absolute;
+	top: 40%;
+    left: 30%;
+}
+.southTripura{
+	position: absolute;
+	left: 321px;
+    top: 726px;
+}
+.southTripuraText{
+	position: absolute;
+	top: 40%;
+    left: 45%;
+}
+.southTripuraNumber{
+	position: absolute;
+	top: 45%;
+    left: 50%;
 }

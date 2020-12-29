@@ -90,6 +90,12 @@ export default class Manipur extends Component{
 						<span className="imphalWestText mapTextLabel text-capitalize">Imphal_West</span>
 						<span className="imphalWestNumber mapCountLabel text-center">{this.search('imphalWest')}</span>
 					</div>
+					<div className="thoubal classHover"> 
+						<img src="/Maps/Manipur/Thoubal.png"  alt="Thoubal"  onMouseOver={e => (e.currentTarget.src = "/Maps/Manipur/Thoubal_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Manipur/Thoubal.png")}/>
+						<span className="thoubalText mapTextLabel text-capitalize">Thoubal</span>
+						<span className="thoubalNumber mapCountLabel text-center">{this.search('thoubal')}</span>
+					</div>
+					
 				</div>
 			</div>
 		);

@@ -1,0 +1,372 @@
+@font-face {
+  font-family:'Montserrat-Bold';
+  src: url('/fonts/Montserrat/Montserrat-Bold.ttf');
+}
+
+.mapTextLabel{
+	font-size: 10px;
+	font-family: 'Montserrat-Regular';
+	color: var(--main-txt-color);
+}
+
+.mapCountLabel{
+	font-size: 11px;
+	font-family: 'Montserrat-Regular';
+	color: var(--main-txt-color);
+}
+
+.classHover:hover .mapTextLabel{
+	font-size: 12px;
+	font-family: 'Montserrat-Bold';
+	z-index: 1;
+}
+
+.classHover:hover .mapCountLabel{
+	font-size: 16px;
+	font-family: 'Montserrat-Bold';
+}
+.darjeeling{
+	position: absolute;
+	left: 519px;
+    top: 1px;
+}
+.darjeelingText{
+	position: absolute;
+	top: 35%;
+    left: 32%;
+}
+.darjeelingNumber{
+	position: absolute;
+	top: 45%;
+    left: 55%;
+}
+.kalimpong{
+	position: absolute;
+	left: 587px;
+    top: 4px;
+}
+.kalimpongText{
+	position: absolute;
+	top: 30%;
+    left: 20%;
+}
+.kalimpongNumber{
+	position: absolute;
+	top: 53%;
+    left: 45%;
+}
+.jalpaiguri{
+	position: absolute;
+	left: 588px;
+    top: 39px;
+}
+.jalpaiguriText{
+	position: absolute;
+	top: 30%;
+    left: 30%;
+}
+.jalpaiguriNumber{
+	position: absolute;
+	top: 42%;
+    left: 35%;
+}
+.alipurduar{
+	position: absolute;
+	left: 693px;
+    top: 57px;
+}
+.alipurduarText{
+	position: absolute;
+	top: 35%;
+    left: 30%;
+}
+.alipurduarNumber{
+	position: absolute;
+	top: 50%;
+    left: 35%;
+}
+.coochBihar{
+	position: absolute;
+	left: 649px;
+    top: 119px;
+}
+.coochBiharText{
+	position: absolute;
+	top: 35%;
+    left: 45%;
+}
+.coochBiharNumber{
+	position: absolute;
+	top: 50%;
+    left: 52%;
+}
+.uttarDinajpur{
+	position: absolute;
+	left: 495px;
+    top: 132px;
+}
+.uttarDinajpurText{
+	position: absolute;
+	top: 45%;
+    left: 20%;
+}
+.uttarDinajpurNumber{
+	position: absolute;
+	top: 52%;
+    left: 25%;
+}
+.dakshinDinajpur{
+	position: absolute;
+	left:  558px;
+    top: 293px;
+}
+.dakshinDinajpurText{
+	position: absolute;
+	top: 40%;
+    left: 20%;
+}
+.dakshinDinajpurNumber{
+	position: absolute;
+	top: 58%;
+    left: 45%;
+}
+.malda{
+	position: absolute;
+	left: 491px;
+    top: 308px;
+}
+.maldaText{
+	position: absolute;
+	top: 40%;
+    left: 35%;
+}
+.maldaNumber{
+	position: absolute;
+	top: 50%;
+    left: 40%;
+}
+.murshidabad{
+	position: absolute;
+	left: 505px;
+    top: 431px;
+}
+.murshidabadText{
+	position: absolute;
+	top: 50%;
+    left: 30%;
+}
+.murshidabadNumber{
+	position: absolute;
+	top: 57%;
+    left: 35%;
+}
+.birbhum{
+	position: absolute;
+	left: 389px;
+    top: 480px;
+}
+.birbhumText{
+	position: absolute;
+	top: 60%;
+    left: 40%;
+}
+.birbhumNumber{
+	position: absolute;
+	top: 67%;
+    left: 45%;
+}
+.purbaBardhaman{
+	position: absolute;
+	left:446px;
+    top: 610px;
+}
+.purbaBardhamanText{
+	position: absolute;
+	top: 50%;
+    left: 30%;
+}
+.purbaBardhamanNumber{
+	position: absolute;
+	top: 60%;
+    left: 45%;
+}
+.nadia{
+	position: absolute;
+	left:562px;
+    top: 561px;
+}
+.nadiaText{
+	position: absolute;
+	top: 50%;
+    left: 50%;
+}
+.nadiaNumber{
+	position: absolute;
+	top: 55%;
+    left: 55%;
+}
+.pashchimBardhaman{
+	position: absolute;
+	left:341px;
+    top: 610px;
+}
+.pashchimBardhamanText{
+	position: absolute;
+	top: 28%;
+    left: -20%;
+}
+.pashchimBardhamanNumber{
+	position: absolute;
+	top: 45%;
+    left: 35%;
+}
+.bankura{
+	position: absolute;
+	left:314px;
+    top: 651px;
+}
+.bankuraText{
+	position: absolute;
+	top: 35%;
+    left: 35%;
+}
+.bankuraNumber{
+	position: absolute;
+	top: 40%;
+    left: 40%;
+}
+.parulia{
+	position: absolute;
+	left:184px;
+    top: 641px;
+}
+.paruliaText{
+	position: absolute;
+	top: 40%;
+    left: 35%;
+}
+.paruliaNumber{
+	position: absolute;
+	top: 47%;
+    left: 40%;
+}
+.jhargram{
+	position: absolute;
+	left:307px;
+    top: 805px;
+}
+.jhargramText{
+	position: absolute;
+	top: 40%;
+    left: 45%;
+}
+.jhargramNumber{
+	position: absolute;
+	top: 50%;
+    left: 55%;
+}
+.pashchimMedinipur{
+	position: absolute;
+	left:389px;
+    top: 775px;
+}
+.pashchimMedinipurText{
+	position: absolute;
+	top: 30%;
+    left: 15%;
+}
+.pashchimMedinipurNumber{
+	position: absolute;
+	top: 38%;
+    left: 40%;
+}
+.purbaMedinipur{
+	position: absolute;
+	left:458px;
+    top: 850px;
+}
+.purbaMedinipurText{
+	position: absolute;
+	top: 30%;
+    left: 15%;
+}
+.purbaMedinipurNumber{
+	position: absolute;
+	top: 38%;
+    left: 40%;
+}
+.hooghly{
+	position: absolute;
+	left:456px;
+    top: 719px;
+}
+.hooghlyText{
+	position: absolute;
+	top: 50%;
+    left: 50%;
+}
+.hooghlyNumber{
+	position: absolute;
+	top: 62%;
+    left: 55%;
+}
+.howrah{
+	position: absolute;
+	left:519px;
+    top: 802px;
+}
+.howrahText{
+	position: absolute;
+	top: 30%;
+    left: 20%;
+}
+.howrahNumber{
+	position: absolute;
+	top: 43%;
+    left: 30%;
+}
+.north24Paraganas{
+	position: absolute;
+	left: 598px;
+    top: 713px;
+}
+.north24ParaganasText{
+	position: absolute;
+	top: 40%;
+    left: 20%;
+}
+.north24ParaganasNumber{
+	position: absolute;
+	top: 48%;
+    left: 35%;
+}
+.kolkata{
+	position: absolute;
+	left: 583px;
+    top: 823px;
+}
+.kolkataText{
+	position: absolute;
+	top: 40%;
+    left: 40%;
+}
+.kolkataNumber{
+	position: absolute;
+	top: 70%;
+    left: 45%;
+}
+.south24Paraganas{
+	position: absolute;
+	left: 555px;
+    top: 826px;
+}
+.south24ParaganasText{
+	position: absolute;
+	top: 30%;
+    left: 10%;
+}
+.south24ParaganasNumber{
+	position: absolute;
+	top: 40%;
+    left: 25%;
+}

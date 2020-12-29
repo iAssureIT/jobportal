@@ -15,16 +15,7 @@
 	color: var(--main-txt-color);
 }
 
-.classHover:hover .mapTextLabel{
-	font-size: 12px;
-	font-family: 'Montserrat-Bold';
-	z-index: 1;
-}
 
-.classHover:hover .mapCountLabel{
-	font-size: 16px;
-	font-family: 'Montserrat-Bold';
-}
 .dwarka{
 	position: absolute;
 	left: 1px;
@@ -32,13 +23,13 @@
 }
 .dwarkaText{
 	position: absolute;
-	left: 1px;
-	top:  400px;
+	left: 45%;
+    top: 45%;
 }
 .dwarkaNumber{
 	position: absolute;
-	left: 1px;
-	top:  400px;
+	left: 50%;
+    top: 50%;
 }
 .newDelhi{
 	position: absolute;
@@ -47,28 +38,28 @@
 }
 .newDelhiText{
 	position: absolute;
-	left: 263px;
-    top: 446px;
+	left: 40%;
+    top: 30%;
 }
 .newDelhiNumber{
 	position: absolute;
-	left: 263px;
-    top: 446px;
+	left: 45%;
+    top: 37%;
 }
 .saket{
 	position: absolute;
-	left: 338px;
+	left: 337px;
     top: 540px;
 }
 .saketText{
 	position: absolute;
-	left: 338px;
-    top: 540px;
+	left: 50%;
+    top: 50%;
 }
 .saketNumber{
 	position: absolute;
-	left: 338px;
-    top: 540px;
+	left: 55%;
+    top: 56%;
 }
 .defenceColony{
 	position: absolute;
@@ -77,13 +68,13 @@
 }
 .defenceColonyText{
 	position: absolute;
-	left: 454px;
-    top: 492px;
+	left: 20%;
+    top: 45%;
 }
 .defenceColonyNumber{
 	position: absolute;
-	left: 454px;
-    top: 492px;
+	left: 30%;
+    top: 52%;
 }
 .preetVihar{
 	position: absolute;
@@ -92,13 +83,13 @@
 }
 .preetViharText{
 	position: absolute;
-	left: 517px;
-    top: 433px;
+	left: 20%;
+    top: 30%;
 }
 .preetViharNumber{
 	position: absolute;
-	left: 517px;
-    top: 433px;
+	left: 25%;
+    top: 40%;
 }
 .shahdara{
 	position: absolute;
@@ -107,13 +98,13 @@
 }
 .shahdaraText{
 	position: absolute;
-	left: 517px;
-    top: 355px;
+	left: 35%;
+    top: 40%;
 }
 .shahdaraNumber{
 	position: absolute;
-	left: 517px;
-    top: 355px;
+	left: 50%;
+    top: 53%;
 }
 .centralDaryaganj{
 	position: absolute;
@@ -122,13 +113,13 @@
 }
 .centralDaryaganjText{
 	position: absolute;
-	left: 414px;
-    top: 248px;
+	left:10%;
+    top: 70%;
 }
 .centralDaryaganjNumber{
 	position: absolute;
-	left: 414px;
-    top: 248px;
+	left: 50%;
+    top: 77%;
 }
 .rajouriGarden{
 	position: absolute;
@@ -137,13 +128,13 @@
 }
 .rajouriGardenText{
 	position: absolute;
-	left: 145px;
-    top: 364px;
+	left: 40%;
+    top: 40%;
 }
 .rajouriGardenNumber{
 	position: absolute;
-	left: 145px;
-    top: 364px;
+	left: 50%;
+    top: 50%;
 }
 .kanjhwala{
 	position: absolute;
@@ -152,13 +143,13 @@
 }
 .kanjhwalaText{
 	position: absolute;
-	left: 134px;
-    top: 204px;
+	left: 30%;
+    top: 50%;
 }
 .kanjhwalaNumber{
 	position: absolute;
-	left: 134px;
-    top: 204px;
+	left: 35%;
+    top: 57%;
 }
 .northNarela{
 	position: absolute;
@@ -167,27 +158,27 @@
 }
 .northNarelaText{
 	position: absolute;
-	left: 155px;
-    top: 112px;
+	left: 45%;
+    top: 40%;
 }
 .northNarelaNumber{
 	position: absolute;
-	left: 155px;
-    top: 112px;
+	left: 50%;
+    top: 45%;
 }
 .northEastSeelampur{
 	position: absolute;
-	left: 464px;
+	left: 463px;
     top: 248px;
 }
 .northEastSeelampurText{
 	position: absolute;
-	left: 464px;
-    top: 248px;
+	left: 45%;
+    top: 45%;
 }
 .northEastSeelampurNumber{
 	position: absolute;
-	left: 464px;
-    top: 248px;
+	left: 50%;
+    top: 53%;
 }
 

@@ -25,15 +25,16 @@ export default class Meghalaya extends Component{
 		return(
 			<div className="bodyWrapper">
 				<div className="stateWrapper">
-					<div className="southWestGaroHills classHover"> 
-						<img src="/Maps/Meghalaya/South_West_Garo_Hills.png" alt="South_West_Garo_Hills" onMouseOver={e => (e.currentTarget.src = "/Maps/Meghalaya/South_West_Garo_Hills_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Meghalaya/South_West_Garo_Hills.png")}/>
-						<span className="southWestGaroHillsText mapTextLabel text-capitalize">South_West_Garo_Hills</span>
-						<span className="southWestGaroHillsNumber mapCountLabel text-center">{this.search('southWestGaroHills')}</span>
-					</div>
+					
 					<div className="westGaroHills classHover"> 
 						<img src="/Maps/Meghalaya/West_Garo_Hills.png" alt="West_Garo_Hills"  onMouseOver={e => (e.currentTarget.src = "/Maps/Meghalaya/West_Garo_Hills_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Meghalaya/West_Garo_Hills.png")}/>
 						<span className="westGaroHillsText mapTextLabel text-capitalize">West_Garo_Hills</span>
 						<span className="westGaroHillsNumber mapCountLabel text-center">{this.search('westGaroHills')}</span>
+					</div>
+					<div className="southWestGaroHills classHover"> 
+						<img src="/Maps/Meghalaya/South_West_Garo_Hills.png" alt="South_West_Garo_Hills" onMouseOver={e => (e.currentTarget.src = "/Maps/Meghalaya/South_West_Garo_Hills_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Meghalaya/South_West_Garo_Hills.png")}/>
+						<span className="southWestGaroHillsText mapTextLabel text-capitalize">South_West_Garo_Hills</span>
+						<span className="southWestGaroHillsNumber mapCountLabel text-center">{this.search('southWestGaroHills')}</span>
 					</div>
 					<div className="southGaroHills classHover"> 
 						<img src="/Maps/Meghalaya/South_Garo_Hills.png"  alt="South_Garo_Hills"  onMouseOver={e => (e.currentTarget.src = "/Maps/Meghalaya/South_Garo_Hills_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Meghalaya/South_Garo_Hills.png")}/>

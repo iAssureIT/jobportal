@@ -297,18 +297,18 @@
 }
 .bilaspur{
 	position: absolute;
-	left: 210px;
-    top: 159px;
+	left: 210px!important;
+    top: 159px!important;
 }
 .bilaspurText{
 	position: absolute;
-	top: 65%;
-    left: 30%;
+	top: 60%!important;
+    left: 35%!important;
 }
 .bilaspurNumber{
 	position: absolute;
-	top: 75%;
-    left: 40%;
+	top: 67%!important;
+    left: 40%!important;
 }
 .janjgirChampa{
 	position: absolute;

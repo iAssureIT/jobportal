@@ -112,15 +112,17 @@ export default class Orissa extends Component{
 						<span className="sambalpurText mapTextLabel text-capitalize">Sambalpur</span>
 						<span className="sambalpurNumber mapCountLabel text-center">{this.search('sambalpur')}</span>
 					</div>
-					<div className="deogarh classHover"> 
-						<img src="/Maps/Orissa/Deogarh.png"  alt="Deogarh"  onMouseOver={e => (e.currentTarget.src = "/Maps/Orissa/Deogarh_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Orissa/Deogarh.png")}/>
-						<span className="deogarhText mapTextLabel text-capitalize">Deogarh</span>
-						<span className="deogarhNumber mapCountLabel text-center">{this.search('deogarh')}</span>
-					</div>
+				
+					
 					<div className="angul classHover"> 
 						<img src="/Maps/Orissa/Angul.png"  alt="Angul"  onMouseOver={e => (e.currentTarget.src = "/Maps/Orissa/Angul_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Orissa/Angul.png")}/>
 						<span className="angulText mapTextLabel text-capitalize">Angul</span>
 						<span className="angulNumber mapCountLabel text-center">{this.search('angul')}</span>
+					</div>
+					<div className="deogarh classHover"> 
+						<img src="/Maps/Orissa/Deogarh.png"  alt="Deogarh"  onMouseOver={e => (e.currentTarget.src = "/Maps/Orissa/Deogarh_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Orissa/Deogarh.png")}/>
+						<span className="deogarhText mapTextLabel text-capitalize">Deogarh</span>
+						<span className="deogarhNumber mapCountLabel text-center">{this.search('deogarh')}</span>
 					</div>
 					<div className="dhenkanal classHover"> 
 						<img src="/Maps/Orissa/Dhenkanal.png"  alt="Dhenkanal"  onMouseOver={e => (e.currentTarget.src = "/Maps/Orissa/Dhenkanal_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Orissa/Dhenkanal.png")}/>
