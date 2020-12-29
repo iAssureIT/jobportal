@@ -43,7 +43,6 @@ deleteJob = (event)=>{
 			if(job_id){
 				Axios.delete("/api/jobs/delete/"+job_id)
 				.then(response =>{
-					console.log()
 					if(response.data.message==="Job details deleted Successfully!"){
 						var {mapAction} = this.props;
 						mapAction.filterJobList(this.state.selector);
@@ -106,8 +105,15 @@ deleteJob = (event)=>{
 													<div className="col-lg-11 jobListLeftContent">
 														<div className="row">
 															<div className="iconsBar">
-																<FontAwesomeIcon className="restRoomIcon" icon={['fas', 'restroom']} />
-																<ul>	
+																{/*<FontAwesomeIcon className="restRoomIcon" icon={['fas', 'restroom']} />*/}
+																
+																<ul>
+																	{
+																		elem.jobBasicInfo.gender=="Male Only"?
+																		<li><i className="fa fa-male"></i></li>
+																		:
+																		<li><i className="fa fa-female"></i></li>
+																	}	
 																	<li><i className="fa fa-sun-o sunIcon"></i></li>
 																	<li><i className="fa fa-clock-o clockIcon"></i></li>
 																</ul>

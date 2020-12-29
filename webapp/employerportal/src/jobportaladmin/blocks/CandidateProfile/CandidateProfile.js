@@ -20,7 +20,9 @@ class CandidateProfile extends Component{
 									</div>
 									<div className="col-lg-6">
 										<div className="row">
+											
 											<MiddelContent/>
+										
 										</div>
 									</div>
 									<div className="col-lg-3">

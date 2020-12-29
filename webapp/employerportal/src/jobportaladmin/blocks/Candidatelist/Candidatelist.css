@@ -276,16 +276,7 @@
 	font-size: 20px;
 }
 
-.exlIconOne{
-	position: absolute;
-	font-size: 20px;
-	/*margin-top: 11px;*/
-	margin-top: 160px;
-	cursor: pointer;
-	color:var(--main-heading-font-color);
-}
-
-.exlIconTwo{
+.exlIcon{
 	font-size: 16px;
 	margin-top: 21px;
 	text-align: center;

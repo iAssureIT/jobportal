@@ -98,7 +98,6 @@ class Candidatelist extends Component{
 								<div className="JobInfoContainer">
 									<div className="col-lg-12">
 										<div className="col-lg-11 jobDescBlock">
-											<div className="exlIconOne col-lg-offset-12" title="Download as excel file"><i className="fa fa-file-excel-o" aria-hidden="true"></i></div>
 											<div className="joblistDesignation">
 												{this.state.jobInfo[0] ? this.state.jobInfo[0].jobBasicInfo.jobTitle : null}
 											</div>
@@ -270,7 +269,7 @@ class Candidatelist extends Component{
 														<div className="row profileSymbols">
 															<img src="/images/48.png" alt="Profile Logo"/>
 														</div>
-														<div className="row exlIconTwo">
+														<div className="row exlIcon">
 															<i className="fa fa-file-excel-o" title="Download as excel file" aria-hidden="true"></i>
 														</div>
 													</div>	
@@ -320,6 +319,7 @@ class Candidatelist extends Component{
 											this.props.candidateList
 											? 	
 											this.props.candidateList.map((elem,index)=>{
+												/*console.log(elem.candidate[0].basicInfo.firstName)*/
 												return(
 														<div className="col-lg-4 " key={index}>
 															<div>
@@ -434,7 +434,7 @@ class Candidatelist extends Component{
 																			<div className="row profileSymbols">
 																				<img src="/images/48.png" alt="Profile Logo"/>
 																			</div>
-																			<div className="row exlIconTwo">
+																			<div className="row exlIcon">
 																				<i className="fa fa-file-excel-o" title="Download as excel file" aria-hidden="true"></i>
 																			</div>
 																		</div>	
