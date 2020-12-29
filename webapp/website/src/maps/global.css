@@ -60,12 +60,9 @@
 .classHover:hover .mapCountLabel{
 	font-size: 16px;
 	font-family: 'Montserrat-Bold';
-<<<<<<< Updated upstream
 	z-index: 1;
 }
-=======
-}
+
 .classHover:hover{
 	cursor: pointer;
 }
->>>>>>> Stashed changes

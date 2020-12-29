@@ -319,7 +319,8 @@ class Candidatelist extends Component{
 											this.props.candidateList
 											? 	
 											this.props.candidateList.map((elem,index)=>{
-												/*console.log(elem.candidate[0].basicInfo.firstName)*/
+
+
 												return(
 														<div className="col-lg-4 " key={index}>
 															<div>
@@ -337,7 +338,7 @@ class Candidatelist extends Component{
 																						<div className="col-lg-7 displayInfoCandidate">
 																							<div className="row">
 																								<div className="displayCandidateName">
-																									{/*{elem.candidate[0].basicInfo.firstName}*/}
+																									{elem.candidate[0].basicInfo.firstName}
 																									<span className="candidateIdNumber">(1234)</span>
 																								</div>
 																								<div className=" candidatePosts">

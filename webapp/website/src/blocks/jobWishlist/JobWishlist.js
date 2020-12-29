@@ -25,7 +25,7 @@ handleclick = (jobid)=>{
 	
 	console.log("jobIdArray=", this.state.jobIdArray);
 	this.setState({isToggle:!this.state.isToggle})
-	const candidateID = "5f8ea1e3e4b7b4407d2cfe1";
+	const candidate_id = "5f8ea1e3e4b7b4407d2cfe1";
 
 	Swal.fire({
 		title 				: 'Are you sure? you want to add this to wishlist!!!',
@@ -39,8 +39,8 @@ handleclick = (jobid)=>{
 	}).then((result) =>{
 		console.log("result", result.value)
 		if(result.value){
-			console.log("candidateID=", candidateID);
-			if(candidateID !== ""){
+			console.log("candidate_id=", candidate_id);
+			if(candidate_id !== ""){
 				if(this.state.jobIdArray.includes(jobid)){
 					Axios.post("/api/wishlist/post")
 					.then(response =>{

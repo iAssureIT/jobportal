@@ -27,7 +27,7 @@ handleclick = (jobid)=>{
 	this.setState({isToggle:!this.state.isToggle})
 	if (this.props.userDetails.loggedIn) {
 		var formValues = {
-			candidateID : this.props.userDetails.candidate_id,
+			candidate_id : this.props.userDetails.candidate_id,
 			jobID  		: jobid,
 			createdBy   : this.props.userDetails.user_id
 		}
@@ -80,7 +80,7 @@ applyJob = (jobid, company_id)=>{
 	
 	if (this.props.userDetails.loggedIn) {
 	var formValues = { 
-						candidateID   		: this.props.userDetails.candidate_id,
+						candidate_id   		: this.props.userDetails.candidate_id,
 						jobID         		: jobid,
 					    employerID    		: company_id,
 					    status        	  	: "Applied"

@@ -13,7 +13,7 @@ router.post('/get/candidateAppliedJobList',ControllerApplyJob.getCandidateApplie
 
 router.post('/get/candidatesAppliedToJob',ControllerApplyJob.candidatesAppliedToJob);
 
-router.get('/get/appliedJobCount/:candidateID',ControllerApplyJob.appliedJobCount);
+router.get('/get/appliedJobCount/:candidate_id',ControllerApplyJob.appliedJobCount);
 
 //router.delete('/delete/:wishlistID',wishlistsController.delete_wishlist);
 

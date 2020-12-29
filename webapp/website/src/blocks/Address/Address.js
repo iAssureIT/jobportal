@@ -18,7 +18,7 @@ class Address extends Component{
 
 		this.state={
 			addressID          : this.props.match.params.addressID,
-			candidateID        : this.props.match.params.candidateID,
+			candidate_id        : this.props.match.params.candidate_id,
 			addressArry        : [],
 			addressLine1 	   : "",
 			address 	       : "",
@@ -59,7 +59,7 @@ class Address extends Component{
 	}
 	getData(){
 		
-		Axios.get("/api/candidatemaster/get/one/"+this.state.candidateID)
+		Axios.get("/api/candidatemaster/get/one/"+this.state.candidate_id)
 		.then(response=>{
 			 	this.setState({
 			 		addressArry    : response.data[0].address,
@@ -73,11 +73,11 @@ class Address extends Component{
 	}
 	//========== User Define Function Start ================
 	edit(){
-		var candidateID = this.state.candidateID;
+		var candidate_id = this.state.candidate_id;
 		var addressID   = this.state.addressID;
 		if (addressID) {
 			var idDate ={
-				candidateID : this.state.candidateID,
+				candidate_id : this.state.candidate_id,
 				addressID : this.state.addressID,
 			}
 			Axios.post("/api/candidatemaster/post/getOneCandidateAddress",idDate)
@@ -122,7 +122,7 @@ class Address extends Component{
 	  }).then((result) =>{
 		if(result.value){
 			if(data_id){
-				Axios.delete("/api/candidatemaster/deleteAddress/"+this.state.candidateID+"/delete/"+data_id)
+				Axios.delete("/api/candidatemaster/deleteAddress/"+this.state.candidate_id+"/delete/"+data_id)
 				.then(response =>{
 						if(response.data.deleted===true){
 						Swal.fire(
@@ -172,7 +172,7 @@ class Address extends Component{
 		event.preventDefault();
 		var status =  this.validateForm();
 			var formValues = {	
-								candidateID   : this.state.candidateID,
+								candidate_id   : this.state.candidate_id,
 								addressID     : this.state.addressID,
 								address       :   
 								{
@@ -217,7 +217,7 @@ class Address extends Component{
 														pincode            : "",
 														buttonText         : "Save",
 													})	
-							this.props.history.push("/address/"+this.state.candidateID);
+							this.props.history.push("/address/"+this.state.candidate_id);
 					})
 					.catch(error =>{
 						Swal.fire("Submit Error!",error.message,'error');
@@ -258,7 +258,7 @@ class Address extends Component{
 	
 	handleSubmit(event){
 		event.preventDefault();
-    	this.props.history.push("/contact/"+this.state.candidateID);
+    	this.props.history.push("/contact/"+this.state.candidate_id);
 	}
 	getStates() {
 		Axios.get("http://locations2.iassureit.com/api/states/get/list/IN")
@@ -694,7 +694,7 @@ class Address extends Component{
 															{elem.state +" , "+elem.country +" , "+elem.pincode+" ."}
 														</div>
 							                            <div className="addRightbtn">
-							                                <a id={elem._id} href={"/address/"+this.state.candidateID+"/edit/"+elem._id}>
+							                                <a id={elem._id} href={"/address/"+this.state.candidate_id+"/edit/"+elem._id}>
 							                            	    <div className="editBtn pull-left">Edit</div>
 							                            	</a>
 							                            	<div className="dltBtn pull-right" id={elem._id} onClick={this.deleteDate.bind(this)}>Delete</div>

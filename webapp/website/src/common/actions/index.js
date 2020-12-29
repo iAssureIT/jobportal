@@ -118,9 +118,9 @@ export function filterJobList(selector) {
 	    }) 
   	}  
 }
-export function getJobWishlist(candidateID) {
+export function getJobWishlist(candidate_id) {
   	return dispatch =>{
-  		var formValue={"candidateID":candidateID}
+  		var formValue={"candidate_id":candidate_id}
 	  	return axios.post("/api/wishlist/candidateWishlist",formValue)
 	    .then((response)=>{
 	     	
@@ -131,9 +131,9 @@ export function getJobWishlist(candidateID) {
 	    }) 
   	}  
 }
-export function getAppliedJoblist(candidateID) {
+export function getAppliedJoblist(candidate_id) {
   	return dispatch =>{
-  		var formValue={"candidateID":candidateID}
+  		var formValue={"candidate_id":candidate_id}
   		console.log(formValue)
 	  	return axios.post("/api/applyJob/get/candidateAppliedJobList",formValue)
 	    .then((response)=>{

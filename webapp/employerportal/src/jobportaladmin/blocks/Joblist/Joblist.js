@@ -173,7 +173,7 @@ deleteJob = (event)=>{
 
 const mapStateToProps = (state)=>{
     return {
-        user_ID     : state.user_ID,  	candidateID   : state.candidateID,
+        user_ID     : state.user_ID,  	candidate_id   : state.candidate_id,
         selector    : state.selector,   jobList     : state.jobList,
         applicantsCountList : state.applicantsCountList
     }

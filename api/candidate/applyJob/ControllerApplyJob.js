@@ -7,7 +7,7 @@ exports.applyJob = (req,res,next)=>{
     console.log(req.body)
     const applyjob = new ApplyJob({
             _id                   : new mongoose.Types.ObjectId(),                    
-            candidateID           : req.body.candidateID,
+            candidate_id          : req.body.candidate_id,
             jobID                 : req.body.jobID,
             employerID            : req.body.employerID,
             appliedDate           : new Date(),
@@ -30,10 +30,10 @@ exports.applyJob = (req,res,next)=>{
 
 
 exports.getCandidateAppliedJobList = (req,res,next)=>{
-     //ApplyJob.find({"candidateID": req.params.candidateID}) 
+     //ApplyJob.find({"candidate_id": req.params.candidate_id}) 
 
     ApplyJob.aggregate([
-        { "$match" : { "candidateID" : ObjectId(req.body.candidateID) } },
+        { "$match" : { "candidate_id" : ObjectId(req.body.candidate_id) } },
         { "$lookup": {
             "from": "jobs",
             "as": "jobDetails",
@@ -52,9 +52,9 @@ exports.getCandidateAppliedJobList = (req,res,next)=>{
     });
 };
 exports.appliedJobCount = (req,res,next)=>{
-    console.log(req.params.candidateID);
+    console.log(req.params.candidate_id);
     ApplyJob.aggregate([
-        { "$match" : { "candidateID" : ObjectId(req.params.candidateID) } },
+        { "$match" : { "candidate_id" : ObjectId(req.params.candidate_id) } },
         { "$lookup": {
             "from": "jobs",
             "as": "jobDetail",
@@ -75,7 +75,7 @@ exports.appliedJobCount = (req,res,next)=>{
 };
 //applicantsCountList
 exports.applicantsCountList = (req,res,next)=>{
-    //console.log(req.params.candidateID);
+    //console.log(req.params.candidate_id);
     ApplyJob.aggregate([
         { "$unwind": "$appliedItems" },
         { "$match" : { "appliedItems.employerID" : ObjectId(req.body.employerID) } },
@@ -98,7 +98,7 @@ exports.candidatesAppliedToJob = (req,res,next)=>{
         { $lookup: {
                     from: "candidatemasters",
                     as: "candidate",
-                    localField: "candidateID",
+                    localField: "candidate_id",
                     foreignField: "_id"}
         },
         {$lookup:{

@@ -1,6 +1,9 @@
 import React,{Component} from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './Header.css';
+import {connect}            from 'react-redux';
+import { bindActionCreators } from 'redux';
+import  * as mapActionCreator from '../../common/actions/index';
 
 class Header extends Component{
   constructor(props){
@@ -9,11 +12,9 @@ class Header extends Component{
       profileDisplay        : "none",
       asideDisplay          : "-600px",
       notificationDisplay   : "none",
-      userDetails           : {}
     }
   }
   componentDidMount() {
-    this.setState({userDetails : JSON.parse(localStorage.getItem("userDetails"))})
     
   }
   profileInfo(event){
@@ -59,15 +60,8 @@ class Header extends Component{
     }
   }
   logout() {
-        var token = localStorage.removeItem("token");
         localStorage.removeItem("userDetails")
-        
-        //alert()
-        if (token !== null && token !== "undefined") {
-            this.setState({
-                loggedIn: false
-            })
-        }
+      
         window.location.href = "/";
         //this.props.history.push("/")
   }
@@ -113,7 +107,7 @@ class Header extends Component{
                 <div className="headerProfileWrapper ">
                   <div className="headerProfileInfo">
                     <span className="headerProfileName">
-                      Hello, {this.state.userDetails.firstName }
+                      Hello, {this.props.userDetails.firstName }
                     </span>
                     <img className="headerProfileImg" src='/images/40.png' alt="logo" onClick={this.profileInfo.bind(this)} />
                     <i className="fa fa-caret-down profileDownArrow" onClick={this.profileInfo.bind(this)}></i>
@@ -123,12 +117,12 @@ class Header extends Component{
                       <img src='/images/40.png' alt="logo"  />
                     </div>
                     <div className="signOutToggelProfileName">
-                      Hello, {this.state.userDetails.firstName }
+                      Hello, {this.props.userDetails.firstName }
                     </div>
                     <div className="signOutToggelButtons">
                       <div className="col-lg-5 pull-left">
                         <div className="row">
-                          <a href={"/profile/"+localStorage.getItem("candidateID")} className="whitelink linkA"><div className="signOutButton">Profile</div></a>
+                          <a href={"/profile/"+this.props.userDetails.candidate_id} className="whitelink linkA"><div className="signOutButton">Profile</div></a>
                         </div>
                       </div>
                       
@@ -191,5 +185,12 @@ class Header extends Component{
       );
   }
 }
-
-export default Header;
+const mapStateToProps = (state)=>{
+    return {
+        userDetails  : state.userDetails,
+    }
+}
+const mapDispatchToProps = (dispatch) => ({
+  mapAction :  bindActionCreators(mapActionCreator, dispatch)
+}) 
+export default connect(mapStateToProps,mapDispatchToProps) (Header);

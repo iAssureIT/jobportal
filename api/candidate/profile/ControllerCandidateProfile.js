@@ -50,7 +50,7 @@ exports.insertCandidateBasicInfo = (req, res, next)=>{
 		});		
 }
 
-exports.getcandidateID = (req,res,next)=>{
+exports.getcandidate_id = (req,res,next)=>{
     CandidateProfile.find({user_id: req.params.userID})
                     .exec()
                     .then(data=>{
@@ -64,9 +64,9 @@ exports.getcandidateID = (req,res,next)=>{
                     });
 }
 exports.getSingleCandidate = (req,res,next)=>{
-    //CandidateProfile.findOne({_id : req.params.candidateID})
+    //CandidateProfile.findOne({_id : req.params.candidate_id})
     CandidateProfile.aggregate([
-        {$match:{"_id": ObjectID(req.params.candidateID)} },
+        {$match:{"_id": ObjectID(req.params.candidate_id)} },
         {$lookup:{
                    from: "addresstypemasters",
                    localField: "address.addressType",
@@ -101,7 +101,7 @@ exports.getSingleCandidate = (req,res,next)=>{
 exports.updateCandidateBasicInfo = (req, res, next)=>{
 	console.log(req.body);
         CandidateProfile.updateOne(
-            { "_id":req.body.candidateID},  
+            { "_id":req.body.candidate_id},  
             {
                 $set:   {   
                         "basicInfo.firstName"      : req.body.firstName,
@@ -139,7 +139,7 @@ exports.updateCandidateBasicInfo = (req, res, next)=>{
 exports.addCandidateAddress = (req,res,next)=>{
     console.log(req.body)
     CandidateProfile.updateOne(
-            { _id: req.body.candidateID },  
+            { _id: req.body.candidate_id },  
             { 
                 $push:  { 'address' : req.body.address }
             }
@@ -158,7 +158,7 @@ exports.addCandidateAddress = (req,res,next)=>{
 };
 
 exports.getOneCandidateAddress = (req,res,next)=>{
-    CandidateProfile.find({"_id" : req.body.candidateID, "address._id":req.body.addressID },
+    CandidateProfile.find({"_id" : req.body.candidate_id, "address._id":req.body.addressID },
         {"address.$" : 1})
     .exec()
     .then(data=>{
@@ -174,7 +174,7 @@ exports.updateOneCandidateAddress = (req,res,next)=>{
     var address = req.body.address;
     
     CandidateProfile.updateOne(
-            { "_id":req.body.candidateID, "address._id": req.body.addressID},  
+            { "_id":req.body.candidate_id, "address._id": req.body.addressID},  
             {
                 $set:   { 	'address.$.addressType'    	: address.addressType,
 							'address.$.houseNumber' 	: address.houseNumber,
@@ -205,7 +205,7 @@ exports.updateOneCandidateAddress = (req,res,next)=>{
 
 exports.deleteAddress = (req,res,next)=>{   
     CandidateProfile.updateOne(
-            { _id:req.params.candidateID},  
+            { _id:req.params.candidate_id},  
             {
                 $pull: { 'address' : {_id:req.params.addressID}}
             }
@@ -224,7 +224,7 @@ exports.deleteAddress = (req,res,next)=>{
 };
 exports.updateCandidateContact = (req,res,next)=>{
    CandidateProfile.updateOne(
-            { "_id":req.body.candidateID },  
+            { "_id":req.body.candidate_id },  
             {
                 $set:   { 		"contact.mobile" 		 : req.body.mobile,
 							 	"contact.altMobile"   	 : req.body.altMobile
@@ -247,7 +247,7 @@ exports.updateCandidateContact = (req,res,next)=>{
 exports.addCandidateAcademics = (req,res,next)=>{
     console.log(req.body)
     CandidateProfile.updateOne(
-            { _id: req.body.candidateID },  
+            { _id: req.body.candidate_id },  
             {
                 $push:  { 'academics' : req.body.academics }
             }
@@ -266,7 +266,7 @@ exports.addCandidateAcademics = (req,res,next)=>{
 };
 
 exports.getOneCandidateAcademics = (req,res,next)=>{
-    CandidateProfile.find({"_id" : req.body.candidateID, "academics._id":req.body.academicsID },
+    CandidateProfile.find({"_id" : req.body.candidate_id, "academics._id":req.body.academicsID },
         {"academics.$" : 1})
     .exec()
     .then(data=>{
@@ -284,7 +284,7 @@ exports.updateOneCandidateAcademics = (req,res,next)=>{
     var academics = req.body.academics;
     
     CandidateProfile.updateOne(
-            { "_id":req.body.candidateID, "academics._id": req.body.academicsID},  
+            { "_id":req.body.candidate_id, "academics._id": req.body.academicsID},  
             {
                 $set:   { 	"academics.$.qualificationLevel" : academics.qualificationLevel,
 						 	"academics.$.qualification"	     : academics.qualification,
@@ -316,7 +316,7 @@ exports.updateOneCandidateAcademics = (req,res,next)=>{
 
 exports.deleteAcademics = (req,res,next)=>{   
     CandidateProfile.updateOne(
-            { _id:req.params.candidateID},  
+            { _id:req.params.candidate_id},  
             {
                 $pull: { 'academics' : {_id:req.params.academicsID}}
             }
@@ -335,7 +335,7 @@ exports.deleteAcademics = (req,res,next)=>{
 };
 exports.addCandidateExperience = (req,res,next)=>{
     CandidateProfile.updateOne(
-            { _id: req.body.candidateID },  
+            { _id: req.body.candidate_id },  
             {
                 $push:  { 'workExperience' : req.body.experience }
             }
@@ -354,7 +354,7 @@ exports.addCandidateExperience = (req,res,next)=>{
 };
 
 exports.getOneCandidateExperience = (req,res,next)=>{
-    CandidateProfile.find({"_id" : req.body.candidateID, "workExperience._id":req.body.workExperienceID },
+    CandidateProfile.find({"_id" : req.body.candidate_id, "workExperience._id":req.body.workExperienceID },
         {"workExperience.$" : 1})
     .exec()
     .then(data=>{
@@ -372,7 +372,7 @@ exports.updateOneCandidateExperience = (req,res,next)=>{
     var experience = req.body.experience;
     
     CandidateProfile.updateOne(
-            { "_id":req.body.candidateID, "workExperience._id": req.body.experienceID},  
+            { "_id":req.body.candidate_id, "workExperience._id": req.body.experienceID},  
             {
                 $set:   { 	"workExperience.$.companyName"          : experience.companyName,
                             "workExperience.$.country"              : experience.country,
@@ -405,7 +405,7 @@ exports.updateOneCandidateExperience = (req,res,next)=>{
 };
 exports.deleteExperience = (req,res,next)=>{   
     CandidateProfile.updateOne(
-            { _id:req.params.candidateID},  
+            { _id:req.params.candidate_id},  
             {
                 $pull: { 'workExperience' : {_id:req.params.experienceID}}
             }
@@ -426,12 +426,12 @@ exports.addCandidateSkill = (req,res,next)=>{
     var primarySkills   = []
     var secondarySkills = [];
     var skillID; 
-    //console.log(req.body.candidateID)
+    //console.log(req.body.candidate_id)
     
     processData();
         async function processData(){
 
-            var allSkills = await fetchCandidateSkills(req.body.candidateID);
+            var allSkills = await fetchCandidateSkills(req.body.candidate_id);
             for (var i = 0 ; i < req.body.primarySkills.length; i++) {
                 skillID = req.body.primarySkills[i].skillID != "" ? req.body.primarySkills[i].skillID
                                     : await insertSkill(req.body.primarySkills[i].skill, req.body.user_id)
@@ -449,7 +449,7 @@ exports.addCandidateSkill = (req,res,next)=>{
 
        if (allSkills.skills.length > 0) {
             CandidateProfile.updateOne(
-                { _id: req.body.candidateID },  
+                { _id: req.body.candidate_id },  
                 { 
                     $set : {   "skills.0.primarySkills"      : [], 
                                 "skills.0.secondarySkills"   : [] }
@@ -459,7 +459,7 @@ exports.addCandidateSkill = (req,res,next)=>{
             .then(data=>{
                 if(data.nModified == 1){
                     CandidateProfile.updateOne(
-                        { _id: req.body.candidateID },  
+                        { _id: req.body.candidate_id },  
                         { 
                             $push : {   "skills.0.primarySkills"      : primarySkills, 
                                         "skills.0.secondarySkills"    : secondarySkills }
@@ -490,7 +490,7 @@ exports.addCandidateSkill = (req,res,next)=>{
             skillObject.primarySkills   = primarySkills;
             skillObject.secondarySkills = secondarySkills;
             CandidateProfile.updateOne(
-                        { _id: req.body.candidateID },  
+                        { _id: req.body.candidate_id },  
                         { 
                             $push : {    "skills"      : skillObject }
                         }
@@ -511,9 +511,9 @@ exports.addCandidateSkill = (req,res,next)=>{
     }   
 };
 
-var fetchCandidateSkills = async (candidateID)=>{
+var fetchCandidateSkills = async (candidate_id)=>{
     return new Promise(function(resolve,reject){ 
-    CandidateProfile.findOne({"_id" : candidateID }, {"skills" : 1})
+    CandidateProfile.findOne({"_id" : candidate_id }, {"skills" : 1})
         .exec()
         .then(data=>{
              resolve( data );
@@ -543,7 +543,7 @@ function insertSkill(skill, createdBy){
 }
 exports.deleteSkill = (req,res,next)=>{
     CandidateProfile.updateOne(
-            { _id:req.params.candidateID},  
+            { _id:req.params.candidate_id},  
             {
                 $pull: { 'skills' : {_id:req.params.skillID}}
             }
@@ -561,7 +561,7 @@ exports.deleteSkill = (req,res,next)=>{
         });
 };
 /*exports.getOneCandidateSkill = (req,res,next)=>{
-    CandidateProfile.find({"_id" : req.body.candidateID },
+    CandidateProfile.find({"_id" : req.body.candidate_id },
         {"skills.$" : 1})
     .exec()
     .then(data=>{
@@ -576,7 +576,7 @@ exports.deleteSkill = (req,res,next)=>{
 
 exports.updateOneCandidateSkill = (req,res,next)=>{
     CandidateProfile.updateOne(
-            { "_id":req.body.candidateID, "skills._id": req.body.skillCertificationID},  
+            { "_id":req.body.candidate_id, "skills._id": req.body.skillCertificationID},  
             {
                 $set:   {   "primarySkills"   : req.body.primarySkills,
                             "secondarySkills" : req.body.secondarySkills,
@@ -605,7 +605,7 @@ exports.updateOneCandidateSkill = (req,res,next)=>{
 exports.addCandidateCertification = (req,res,next)=>{
 
     CandidateProfile.updateOne(
-            { _id: req.body.candidateID },  
+            { _id: req.body.candidate_id },  
             {
                 $push:  { 'certifications' :
                 {
@@ -630,7 +630,7 @@ exports.addCandidateCertification = (req,res,next)=>{
         });   
 };
 exports.getOneCandidateCertification = (req,res,next)=>{
-    CandidateProfile.find({"_id" : req.body.candidateID },
+    CandidateProfile.find({"_id" : req.body.candidate_id },
         {"certifications.$" : 1})
     .exec()
     .then(data=>{
@@ -645,7 +645,7 @@ exports.getOneCandidateCertification = (req,res,next)=>{
 
 exports.updateOneCandidateCertification = (req,res,next)=>{
     CandidateProfile.updateOne(
-            { "_id":req.body.candidateID, "certifications._id": req.body.certificationID},  
+            { "_id":req.body.candidate_id, "certifications._id": req.body.certificationID},  
             {
                 $set:   {   
                             "certName"        : req.body.certName,
@@ -670,7 +670,7 @@ exports.updateOneCandidateCertification = (req,res,next)=>{
 };
 exports.deleteCertification = (req,res,next)=>{   
     CandidateProfile.updateOne(
-            { _id:req.params.candidateID},  
+            { _id:req.params.candidate_id},  
             {
                 $pull: { 'certifications' : {_id:req.params.certificationID}}
             }
@@ -722,7 +722,7 @@ exports.getCandidateList = (req,res,next)=>{
 };
 
 exports.deleteCandidate = (req,res,next)=>{
-    CandidateProfile.deleteOne({_id : req.params.candidateID})
+    CandidateProfile.deleteOne({_id : req.params.candidate_id})
     .exec()
     .then(data=>{
         if(data.deletedCount === 1){

@@ -6,8 +6,9 @@ import Axios 			 	from 'axios';
 import Swal 			 	from 'sweetalert2';
 import { Multiselect }      from 'multiselect-react-dropdown';
 import S3FileUpload         from 'react-s3';
-
-
+import {connect}            from 'react-redux';
+import { bindActionCreators } from 'redux';
+import  * as mapActionCreator from '../../common/actions/index';
 import './BasicInfoForm.css';
 
 
@@ -17,7 +18,7 @@ class BasicInfoForm extends Component{
 		this.state={
 			firstName          : "",
 			middleName         : "",
-			candidateID        : localStorage.getItem("candidateID"),
+			candidate_id       : this.props.userDetails.candidate_id,
 			lastName           : "",
 			dob                : "",
 			profilePhoto       : "",
@@ -84,7 +85,7 @@ class BasicInfoForm extends Component{
 	}
 	componentDidMount(){
 
-		Axios.get("/api/candidatemaster/get/one/"+this.state.candidateID)
+		Axios.get("/api/candidatemaster/get/one/"+this.state.candidate_id)
 		.then(response=>{
 			 console.log("response.data",response.data);
 			 	this.setState({
@@ -98,11 +99,8 @@ class BasicInfoForm extends Component{
 					nationality       : response.data[0].basicInfo.nationality?response.data[0].basicInfo.nationality:"",
 					panCardNo         : response.data[0].panCard?response.data[0].panCard:"",
 					adhaarCardNo      : response.data[0].aadhaarCard?response.data[0].aadhaarCard:"",
-					profilePicture      : response.data[0].profilePicture?response.data[0].profilePicture:"",
-		
+					profilePicture    : response.data[0].profilePicture?response.data[0].profilePicture:"",
 					age               : response.data[0].basicInfo.age?response.data[0].basicInfo.age:"",
-					
-
 				
 			 	})
 			 })
@@ -181,7 +179,7 @@ class BasicInfoForm extends Component{
         })
         main().then(formValues => {
          
-   	console.log(formValues)
+   		console.log(formValues)
           this.setState({
             profilePicture   : formValues[0].profilePicture,
             imageUploaded : false
@@ -287,7 +285,7 @@ class BasicInfoForm extends Component{
 			var formValues = {
 
 								firstName          : this.state.firstName,
-								candidateID        : this.state.candidateID,
+								candidate_id       : this.state.candidate_id,
 								middleName         : this.state.middleName,
 								lastName           : this.state.lastName,
 								dob                : this.state.dob,
@@ -324,7 +322,7 @@ class BasicInfoForm extends Component{
 											ageDays	       	   : 0,
 										})
 
-						this.props.history.push("/address/"+this.state.candidateID);
+						this.props.history.push("/address/"+this.state.candidate_id);
 							
 							
 				})
@@ -671,4 +669,12 @@ class BasicInfoForm extends Component{
 	}
 }
 
-export default withRouter(BasicInfoForm);
+const mapStateToProps = (state)=>{
+    return {
+        userDetails  : state.userDetails,
+    }
+}
+const mapDispatchToProps = (dispatch) => ({
+  mapAction :  bindActionCreators(mapActionCreator, dispatch)
+}) 
+export default connect(mapStateToProps,mapDispatchToProps) (withRouter(BasicInfoForm));

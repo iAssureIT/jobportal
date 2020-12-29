@@ -5,9 +5,9 @@ const CandidateProfileController = require("./ControllerCandidateProfile.js");
 
 router.post("/post", CandidateProfileController.insertCandidateBasicInfo);
 
-router.get("/get/candidateID/:userID", CandidateProfileController.getcandidateID);
+router.get("/get/candidate_id/:userID", CandidateProfileController.getcandidate_id);
 
-router.get("/get/one/:candidateID", CandidateProfileController.getSingleCandidate);
+router.get("/get/one/:candidate_id", CandidateProfileController.getSingleCandidate);
 
 router.patch("/patch/updateCandidateBasicInfo", CandidateProfileController.updateCandidateBasicInfo);
 
@@ -18,7 +18,7 @@ router.post("/post/getOneCandidateAddress", CandidateProfileController.getOneCan
 
 router.patch("/patch/updateOneCandidateAddress", CandidateProfileController.updateOneCandidateAddress);
 
-router.delete('/deleteAddress/:candidateID/delete/:addressID',CandidateProfileController.deleteAddress);
+router.delete('/deleteAddress/:candidate_id/delete/:addressID',CandidateProfileController.deleteAddress);
 
 router.patch("/patch/updateCandidateContact", CandidateProfileController.updateCandidateContact);
 
@@ -29,7 +29,7 @@ router.post("/post/getOneCandidateAcademics", CandidateProfileController.getOneC
 
 router.patch("/patch/updateOneCandidateAcademics", CandidateProfileController.updateOneCandidateAcademics);
 
-router.delete('/deleteAcademics/:candidateID/delete/:academicsID',CandidateProfileController.deleteAcademics);
+router.delete('/deleteAcademics/:candidate_id/delete/:academicsID',CandidateProfileController.deleteAcademics);
 
 // =========================== candidate Experience =====================================//
 router.patch("/patch/addCandidateExperience", CandidateProfileController.addCandidateExperience);
@@ -38,12 +38,12 @@ router.post("/post/getOneCandidateExperience", CandidateProfileController.getOne
 
 router.patch("/patch/updateOneCandidateExperience", CandidateProfileController.updateOneCandidateExperience);
 
-router.delete('/deleteExperience/:candidateID/delete/:experienceID',CandidateProfileController.deleteExperience);
+router.delete('/deleteExperience/:candidate_id/delete/:experienceID',CandidateProfileController.deleteExperience);
 
 // =========================== candidate Experience =====================================//
 router.patch("/patch/addCandidateSkill", CandidateProfileController.addCandidateSkill); 
 
-router.delete('/deleteSkill/:candidateID/delete/:skillID',CandidateProfileController.deleteSkill);
+router.delete('/deleteSkill/:candidate_id/delete/:skillID',CandidateProfileController.deleteSkill);
 
 // ========================== candidate certification ================================== //
 router.patch("/patch/addCandidateCertification", CandidateProfileController.addCandidateCertification); 
@@ -52,10 +52,10 @@ router.post("/post/getOneCandidateCertification", CandidateProfileController.get
 
 router.patch("/patch/updateOneCandidateCertification", CandidateProfileController.updateOneCandidateCertification);
 
-router.delete('/deleteCertification/:candidateID/delete/:certificationID',CandidateProfileController.deleteCertification);
+router.delete('/deleteCertification/:candidate_id/delete/:certificationID',CandidateProfileController.deleteCertification);
 
 router.post("/get/list", CandidateProfileController.getCandidateList);
 
-router.delete("/delete/:candidateID", CandidateProfileController.deleteCandidate);
+router.delete("/delete/:candidate_id", CandidateProfileController.deleteCandidate);
 
 module.exports = router ;

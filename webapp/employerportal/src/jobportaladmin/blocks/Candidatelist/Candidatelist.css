@@ -270,6 +270,14 @@
 }
 
 .exlIcon{
+
+	position: absolute;
+	font-size: 20px;
+	/*margin-top: 11px;*/
+	
+}
+
+.exlIconTwo{
 	font-size: 16px;
 	margin-top: 21px;
 	text-align: center;

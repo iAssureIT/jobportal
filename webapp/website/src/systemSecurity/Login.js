@@ -126,16 +126,12 @@ class Login extends Component {
                 token: response.data.userDetails.token,
               }
 
-              axios.get('/api/candidatemaster/get/candidateID/'+response.data.userDetails.user_id)
+              axios.get('/api/candidatemaster/get/candidate_id/'+response.data.userDetails.user_id)
               .then((candidate) => {
               //console.log(candidate)
               userDetails.candidate_id = candidate.data[0] ? candidate.data[0]._id : null;
-              // localStorage.setItem("candidateID", candidate.data[0] ? candidate.data[0]._id : null);
-              // localStorage.setItem("token", response.data.token);
-              // localStorage.setItem("user_ID", response.data.ID);
-              // localStorage.setItem("roles", response.data.roles);
-              //localStorage.setItem("companyID", response.data.userDetails.companyID);
-              localStorage.setItem('userDetails', JSON.stringify(userDetails));
+             
+             localStorage.setItem('userDetails', JSON.stringify(userDetails));
                //window.location.href = '/';
                  document.getElementById("closeModalButton").click();
                  document.getElementById("closeAsidebarButton").click();
@@ -237,8 +233,7 @@ class Login extends Component {
   }
   
   render() {
-    console.log("userDetails", JSON.parse(localStorage.getItem("userDetails")) )
-    console.log("userDetails", this.props.userDetails )
+    
     return (
         <div className="loginFormOuter col-lg-12">
           <div className="img1Login">

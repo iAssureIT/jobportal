@@ -10,7 +10,7 @@ class MiddelContent extends Component{
 		super(props);
 
 		this.state={
-			candidateID        : this.props.match.params.candidateID,
+			candidate_id        : this.props.match.params.candidate_id,
 			workExperienceArry : [],
 			academicsArry      : [],
 			certificationArry  : [],
@@ -36,7 +36,7 @@ class MiddelContent extends Component{
 				Swal.fire("Error while getting List data",error.message,'error');
 			})	
 
-		Axios.get("/api/candidatemaster/get/one/"+this.state.candidateID)
+		Axios.get("/api/candidatemaster/get/one/"+this.state.candidate_id)
 		.then(response=>{
 
 			 	this.setState({

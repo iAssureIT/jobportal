@@ -4,6 +4,9 @@ import Swal 			 	from 'sweetalert2';
 import Moment               from 'moment';
 import { withRouter }	 	from 'react-router-dom';
 import './LeftAside.css';
+import {connect}            from 'react-redux';
+import { bindActionCreators } from 'redux';
+import  * as mapActionCreator from '../../../common/actions/index';
 
 class LeftAside extends Component{
 	constructor(props){
@@ -14,7 +17,7 @@ class LeftAside extends Component{
 			middleName         : "",
 			lastName           : "",
 			lastDesignation    : "",
-			candidateID        : localStorage.getItem("candidateID"),
+			candidate_id       : this.props.userDetails.candidate_id,
 			mobile             : "",
 			alternate          : "",
 			email              : "",	
@@ -31,7 +34,7 @@ class LeftAside extends Component{
 	}
 	componentDidMount(){
 
-		Axios.get("/api/candidatemaster/get/one/"+this.state.candidateID)
+		Axios.get("/api/candidatemaster/get/one/"+this.state.candidate_id)
 		.then(response=>{
 			 
 			 	this.setState({
@@ -211,5 +214,12 @@ class LeftAside extends Component{
 			);
 	}
 }
-
-export default withRouter(LeftAside);
+const mapStateToProps = (state)=>{
+    return {
+        userDetails  : state.userDetails,
+    }
+}
+const mapDispatchToProps = (dispatch) => ({
+  mapAction :  bindActionCreators(mapActionCreator, dispatch)
+}) 
+export default connect(mapStateToProps,mapDispatchToProps) (withRouter(LeftAside))

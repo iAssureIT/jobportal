@@ -15,7 +15,7 @@ class Academics extends Component{
 		this.state={
 			qualificationArray  : [],
 			qualificationLevel  : "",
-			candidateID         : this.props.match.params.candidateID,
+			candidate_id         : this.props.match.params.candidate_id,
 			academicsID         : this.props.match.params.academicsID,
 			qualification       : "",
 			specialization      : "",
@@ -85,7 +85,7 @@ class Academics extends Component{
 
 	//========== User Define Function Start ================
 	getData(){
-		Axios.get("/api/candidatemaster/get/one/"+this.state.candidateID)
+		Axios.get("/api/candidatemaster/get/one/"+this.state.candidate_id)
 		.then(response=>{
 			
 			 	this.setState({
@@ -100,11 +100,11 @@ class Academics extends Component{
 			 })
 	}
 	edit(){
-		var candidateID = this.state.candidateID;
+		var candidate_id = this.state.candidate_id;
 		var academicsID   = this.state.academicsID;
 		if (academicsID) {
 			var idData ={
-				candidateID : this.state.candidateID,
+				candidate_id : this.state.candidate_id,
 				academicsID : this.state.academicsID,
 			}
 			Axios.post("/api/candidatemaster/post/getOneCandidateAcademics",idData)
@@ -149,7 +149,7 @@ class Academics extends Component{
 	  }).then((result) =>{
 		if(result.value){
 			if(data_id){
-				Axios.delete("/api/candidatemaster/deleteAcademics/"+this.state.candidateID+"/delete/"+data_id)
+				Axios.delete("/api/candidatemaster/deleteAcademics/"+this.state.candidate_id+"/delete/"+data_id)
 				.then(response =>{
 						if(response.data.deleted===true){
 						Swal.fire(
@@ -192,7 +192,7 @@ class Academics extends Component{
 	}
 	handleBack(event){
 		event.preventDefault();
-		this.props.history.push("/contact/"+this.state.candidateID);
+		this.props.history.push("/contact/"+this.state.candidate_id);
 	}
 	
 	handleSave(event){
@@ -200,7 +200,7 @@ class Academics extends Component{
 		var status =  this.validateForm();
 		
 			var formValues = {
-								candidateID   : this.state.candidateID,
+								candidate_id   : this.state.candidate_id,
 								academicsID   : this.state.academicsID,
 								academics:{
 									qualificationLevel   : this.state.qualificationLevel,
@@ -247,7 +247,7 @@ class Academics extends Component{
 												buttonText         : "Save"
 											
 										})
-							this.props.history.push("/academics/"+this.state.candidateID);
+							this.props.history.push("/academics/"+this.state.candidate_id);
 					})
 					.catch(error =>{
 						Swal.fire("Submit Error!",error.message,'error');
@@ -290,7 +290,7 @@ class Academics extends Component{
 	}
 	handleSubmit(event){
 		event.preventDefault();
-			this.props.history.push("/certification/"+this.state.candidateID);
+			this.props.history.push("/certification/"+this.state.candidate_id);
 	}
 	//========== User Define Function End ==================
 		//========== Validation Start ==================
@@ -760,7 +760,7 @@ class Academics extends Component{
 														</div>
 														<div className="col-lg-12">
 								                            <div className="addRightbtn">
-								                                <a id={elem._id} href={"/academics/"+this.state.candidateID+"/edit/"+elem._id}>
+								                                <a id={elem._id} href={"/academics/"+this.state.candidate_id+"/edit/"+elem._id}>
 								                            	    <div className="editBtn pull-left">Edit</div>
 								                            	</a>
 								                            	<div className="dltBtn pull-right" id={elem._id} onClick={this.deleteDate.bind(this)}>Delete</div>

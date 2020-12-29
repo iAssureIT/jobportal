@@ -19,11 +19,11 @@ class Contact extends Component{
 			mobile        : "",
 			alternate     : "",
 			email         : "",
-			candidateID   : this.props.match.params.candidateID,
+			candidate_id   : this.props.match.params.candidate_id,
 		}
 	}
 	componentDidMount(){
-	Axios.get("/api/candidatemaster/get/one/"+this.state.candidateID)
+	Axios.get("/api/candidatemaster/get/one/"+this.state.candidate_id)
 		.then(response=>{
 			 	this.setState({
 			 		
@@ -53,14 +53,14 @@ class Contact extends Component{
 	}
 	handleBack(event){
 		event.preventDefault();
-		this.props.history.push("/address/"+this.state.candidateID);
+		this.props.history.push("/address/"+this.state.candidate_id);
 	}
 	handleSubmit(event){
 		event.preventDefault();
 
 		var status =  this.validateForm();
 			var formValues = {
-								candidateID : this.state.candidateID,
+								candidate_id : this.state.candidate_id,
 								mobile      : this.state.mobile,
 								altMobile   : this.state.alternate,
 								emailId     : this.state.email,
@@ -79,7 +79,7 @@ class Contact extends Component{
 										})
 
 
-						this.props.history.push("/academics/"+this.state.candidateID);
+						this.props.history.push("/academics/"+this.state.candidate_id);
 							
 							
 				})

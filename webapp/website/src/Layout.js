@@ -144,15 +144,15 @@ class Layout extends Component  {
                                             <Route exact path="/"                               component={Homepage}  />
 
                                             <Route exact path="/basic-info"                     component={CandidateBasicInfo}  />
-                                            <Route exact path="/address/:candidateID"           component={CandidateAddress}  />
-                                            <Route exact path="/address/:candidateID/edit/:addressID"        component={CandidateAddress}  />
+                                            <Route exact path="/address/:candidate_id"           component={CandidateAddress}  />
+                                            <Route exact path="/address/:candidate_id/edit/:addressID"        component={CandidateAddress}  />
                                             
-                                            <Route exact path="/contact/:candidateID"           component={CandidateContact}  />
-                                            <Route exact path="/academics/:candidateID"         component={CandidateAcademics}  />
-                                            <Route exact path="/certification/:candidateID"     component={CandidateCertification}  />
-                                            <Route exact path="/experience/:candidateID"        component={CandidateExperience}  />
-                                            <Route exact path="/profile/:candidateID"           component={CandidateProfile}  />
-                                            <Route exact path="/candidate-list/:candidateID"           component={CandidateList}  />
+                                            <Route exact path="/contact/:candidate_id"           component={CandidateContact}  />
+                                            <Route exact path="/academics/:candidate_id"         component={CandidateAcademics}  />
+                                            <Route exact path="/certification/:candidate_id"     component={CandidateCertification}  />
+                                            <Route exact path="/experience/:candidate_id"        component={CandidateExperience}  />
+                                            <Route exact path="/profile/:candidate_id"           component={CandidateProfile}  />
+                                            <Route exact path="/candidate-list/:candidate_id"           component={CandidateList}  />
 
 
                                             <Route exact path="/search-jobs"                    component={CandidateJobList}  />  
@@ -166,10 +166,10 @@ class Layout extends Component  {
 
                                             <Route exact path="/wishlist"                       component={JobWishlist}  />  */}
 
-                                            <Route exact path="/address/:candidateID/edit/:addressID"                  component={CandidateAddress}  />
-                                            <Route exact path="/academics/:candidateID/edit/:academicsID"              component={CandidateAcademics}  />
-                                            <Route exact path="/certification/:candidateID/edit/:skillCertificationID" component={CandidateCertification}  />
-                                            <Route exact path="/experience/:candidateID/edit/:workExperienceID"        component={CandidateExperience}  />
+                                            <Route exact path="/address/:candidate_id/edit/:addressID"                  component={CandidateAddress}  />
+                                            <Route exact path="/academics/:candidate_id/edit/:academicsID"              component={CandidateAcademics}  />
+                                            <Route exact path="/certification/:candidate_id/edit/:skillCertificationID" component={CandidateCertification}  />
+                                            <Route exact path="/experience/:candidate_id/edit/:workExperienceID"        component={CandidateExperience}  />
 
                                             
                                             

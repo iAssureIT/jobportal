@@ -1,8 +1,7 @@
 const initialState = {
 	rolewiseAccessToModule 		: false,
 	accessToFacility 			: false,
-	/*user_ID 					: localStorage.getItem("user_ID"),
-	candidateID 				: localStorage.getItem("candidateID"),*/
+	
 	userDetails 				: localStorage.getItem("userDetails") ?
 		{
 		loggedIn  	: true,		

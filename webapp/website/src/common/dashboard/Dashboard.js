@@ -2,6 +2,9 @@ import React,{Component} from 'react';
 import { render } from 'react-dom';
 import moment     from 'moment';
 import axios      from 'axios';
+import {connect}            from 'react-redux';
+import { bindActionCreators } from 'redux';
+import  * as mapActionCreator from '../../common/actions/index';
 
 import Statistics from './StatisticsBox/Statistics.js'
 import PieChart from './Charts/PieChart.js'
@@ -9,7 +12,7 @@ import BarChart from './Charts/BarChart.js'
 import Report from './Reports/Report.js'
 import ProgressBlock from './ProgressBlock/ProgressBlock.js'
 
-export default class Dashboard extends Component{
+class Dashboard extends Component{
 	constructor(props) {
 	   super(props);
 	    this.state = {
@@ -34,13 +37,13 @@ export default class Dashboard extends Component{
                     var booking_id = bookingData[i]._id;
                     var status = {
                                         value           : 'Cancelled',
-                                        statusBy        : localStorage.getItem("user_ID"),
+                                        statusBy        : this.props.userDetails.user_id,
                                         statusAt        : new Date(),
                                     }
                     var formValues ={
                       booking_id:booking_id,
                       status:status,
-                      userId:localStorage.getItem("user_ID")
+                      userId:this.props.userDetails.user_id
                     }
                     axios.patch('/api/bookingmaster/updateCancelStatus',formValues)
                     .then((response) => {
@@ -93,7 +96,7 @@ export default class Dashboard extends Component{
                 display={true}
 	           		bgColor="bg-aqua"
 	           		faIcon="fa-info"
-	           		firstField={{"Field":"Total Booking","method":"get","path":"/api/bookingmaster/get/countbookingListForVendor/"+this.state.monthStart+"/"+this.state.monthEnd+"/"+localStorage.getItem("company_Id")}} 
+	           		firstField={{"Field":"Total Booking","method":"get","path":"/api/bookingmaster/get/countbookingListForVendor/"+this.state.monthStart+"/"+this.state.monthEnd+"/"+this.props.userDetails.user_id}} 
 	           		secondField={{"Field":"Total City","method":"get","path":"/api/VendorAllocation/get/getCompanyCount/"+localStorage.getItem("company_Id")}}
 				      />
 	           	<Statistics 
@@ -202,6 +205,14 @@ export default class Dashboard extends Component{
   }
 }
 
-
+const mapStateToProps = (state)=>{
+    return {
+        userDetails  : state.userDetails,
+    }
+}
+const mapDispatchToProps = (dispatch) => ({
+  mapAction :  bindActionCreators(mapActionCreator, dispatch)
+}) 
+export default connect(mapStateToProps,mapDispatchToProps) (ProgressBar)
 
 

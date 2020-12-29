@@ -15,7 +15,7 @@ class Certification extends Component{
 
 		this.state={
 			certificationArry    : [],
-			candidateID          : this.props.match.params.candidateID,
+			candidate_id          : this.props.match.params.candidate_id,
 			skillCertificationID : this.props.match.params.skillCertificationID,
 			certificationID      : this.props.match.params.certificationID,
 			certificationName    : "",
@@ -128,7 +128,7 @@ class Certification extends Component{
     	secodaryArry.pop(removedItem);
 	}
 	getData(){
-		Axios.get("/api/candidatemaster/get/one/"+this.state.candidateID)
+		Axios.get("/api/candidatemaster/get/one/"+this.state.candidate_id)
 		.then(response=>{
 			
 			 	this.setState({
@@ -142,11 +142,11 @@ class Certification extends Component{
 	edit(event){
 		event.preventDefault();
 		if(this.state.certificationToggel==="toogleCertificate"){
-			var candidateID = this.state.candidateID;
+			var candidate_id = this.state.candidate_id;
 			var certificationID   = this.state.certificationID;
 			if (certificationID) {
 				var idData ={
-					candidateID : this.state.candidateID,
+					candidate_id : this.state.candidate_id,
 					certificationID : this.state.certificationID,
 				}
 				Axios.post("/api/candidatemaster/post/getOneCandidateCertification",idData)
@@ -189,7 +189,7 @@ class Certification extends Component{
 		  }).then((result) =>{
 			if(result.value){
 				if(data_id){
-					Axios.delete("/api/candidatemaster/deleteSkill/"+this.state.candidateID+"/delete/"+data_id)
+					Axios.delete("/api/candidatemaster/deleteSkill/"+this.state.candidate_id+"/delete/"+data_id)
 					.then(response =>{
 							if(response.data.deleted===true){
 							Swal.fire(
@@ -235,7 +235,7 @@ class Certification extends Component{
 		  }).then((result) =>{
 			if(result.value){
 				if(data_id){
-					Axios.delete("/api/candidatemaster/deleteCertification/"+this.state.candidateID+"/delete/"+data_id)
+					Axios.delete("/api/candidatemaster/deleteCertification/"+this.state.candidate_id+"/delete/"+data_id)
 					.then(response =>{
 							if(response.data.deleted===true){
 							Swal.fire(
@@ -271,7 +271,7 @@ class Certification extends Component{
 
 	handleBack(event){
 		event.preventDefault();
-		this.props.history.push("/academics/"+this.state.candidateID);
+		this.props.history.push("/academics/"+this.state.candidate_id);
 	}
 
 
@@ -309,7 +309,7 @@ class Certification extends Component{
 		this.changeBlock(event);
 		if(this.state.certificationToggel==="toggleSkills"){
 			var formValues = {
-					                candidateID            : this.state.candidateID,
+					                candidate_id            : this.state.candidate_id,
 					                skillCertificationID   : this.state.skillCertificationID,
 					                skills:{
 					                	primarySkills          : this.state.selectedPrimarySkills,
@@ -320,7 +320,7 @@ class Certification extends Component{
 							}
 		}else{
 			var formValues = {
-					                candidateID         : this.state.candidateID,
+					                candidate_id         : this.state.candidate_id,
 					                certificationID     : this.state.certificationID,
 					                certifications:{
 					                	certName            : this.state.certificationName,
@@ -358,7 +358,7 @@ class Certification extends Component{
 													buttonText                 : "Save",
 													rating                     : "",
 												})
-							this.props.history.push("/certification/"+this.state.candidateID);
+							this.props.history.push("/certification/"+this.state.candidate_id);
 					})
 					.catch(error =>{
 						Swal.fire("Submit Error!",error.message,'error');
@@ -378,7 +378,7 @@ class Certification extends Component{
 												
 													buttonText         : "Save"
 												})
-							this.props.history.push("/certification/"+this.state.candidateID);
+							this.props.history.push("/certification/"+this.state.candidate_id);
 					})
 					.catch(error =>{
 						Swal.fire("Submit Error!",error.message,'error');
@@ -427,7 +427,7 @@ class Certification extends Component{
 	}
 	handleSubmit(event){
 		event.preventDefault();
-		 this.props.history.push("/experience/"+this.state.candidateID);
+		 this.props.history.push("/experience/"+this.state.candidate_id);
 	}
 	//========== User Define Function End ==================
 	//========== Validation Start ==================
@@ -700,7 +700,7 @@ class Certification extends Component{
 															<div className="rightIconHideWrapper" >
 															
 																<div className="rightIconHide"   >
-																	<a id={elem._id} href={"/certification/"+this.state.candidateID+"/edit/"+elem._id}>
+																	<a id={elem._id} href={"/certification/"+this.state.candidate_id+"/edit/"+elem._id}>
 																		<FontAwesomeIcon icon="pencil-alt" /> 
 																		<span className="rightIconHideText" >Edit</span>
 																	</a>

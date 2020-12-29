@@ -15,7 +15,7 @@ class Academics extends Component{
 		this.state={
 			experienceArry                : [],
 			companyName                   : "",
-			candidateID                   : this.props.match.params.candidateID,
+			candidate_id                   : this.props.match.params.candidate_id,
 			workExperienceID              : this.props.match.params.workExperienceID,
 			companyCountry                : "",
 			companyCity                   : "",
@@ -44,11 +44,11 @@ class Academics extends Component{
 	}
 	//========== User Define Function Start ================
 	edit(){
-		var candidateID = this.state.candidateID;
+		var candidate_id = this.state.candidate_id;
 		var workExperienceID   = this.state.workExperienceID;
 		if (workExperienceID) {
 			var idDate ={
-				candidateID : this.state.candidateID,
+				candidate_id : this.state.candidate_id,
 				workExperienceID : this.state.workExperienceID,
 			}
 			Axios.post("/api/candidatemaster/post/getOneCandidateExperience",idDate)
@@ -80,7 +80,7 @@ class Academics extends Component{
 		}
 	}
 	getData(){
-		Axios.get("/api/candidatemaster/get/one/"+this.state.candidateID)
+		Axios.get("/api/candidatemaster/get/one/"+this.state.candidate_id)
 		.then(response=>{
 			 	this.setState({
 			 		experienceArry: response.data[0].workExperience
@@ -107,7 +107,7 @@ class Academics extends Component{
 	  }).then((result) =>{
 		if(result.value){
 			if(data_id){
-				Axios.delete("/api/candidatemaster/deleteExperience/"+this.state.candidateID+"/delete/"+data_id)
+				Axios.delete("/api/candidatemaster/deleteExperience/"+this.state.candidate_id+"/delete/"+data_id)
 				.then(response =>{
 						if(response.data.deleted===true){
 						Swal.fire(
@@ -115,7 +115,7 @@ class Academics extends Component{
 									'Experience Details has been deleted successfully!',
 									'success'
 							);
-						this.props.history.push("/experience/"+this.state.candidateID);
+						this.props.history.push("/experience/"+this.state.candidate_id);
 					}
 			})
 				.catch(error=>{
@@ -145,7 +145,7 @@ class Academics extends Component{
 		
 		
 		var formValues = {
-								candidateID        : this.state.candidateID,
+								candidate_id        : this.state.candidate_id,
 								experienceID       : this.state.workExperienceID,
 								experience:{
 									companyName                   : this.state.companyName,
@@ -198,7 +198,7 @@ class Academics extends Component{
 													buttonText                    : "Save"
 												})
 							
-							this.props.history.push("/experience/"+this.state.candidateID);
+							this.props.history.push("/experience/"+this.state.candidate_id);
 					})
 					.catch(error =>{
 						Swal.fire("Submit Error!",error.message,'error');
@@ -250,11 +250,11 @@ class Academics extends Component{
 
 	handleBack(event){
 			event.preventDefault();
-			this.props.history.push("/certification/"+this.state.candidateID);
+			this.props.history.push("/certification/"+this.state.candidate_id);
 		}
 	handelSubmit(event){
 		event.preventDefault();
-			this.props.history.push("/profile/"+this.state.candidateID);
+			this.props.history.push("/profile/"+this.state.candidate_id);
 			
 	}
 	//========== User Define Function End ==================
@@ -723,7 +723,7 @@ class Academics extends Component{
 														</div>
 														<div className="col-lg-12">
 								                            <div className="addRightbtn">
-								                                <a id={elem._id} href={"/academics/"+this.state.candidateID+"/edit/"+elem._id}>
+								                                <a id={elem._id} href={"/academics/"+this.state.candidate_id+"/edit/"+elem._id}>
 								                            	    <div className="editBtn pull-left">Edit</div>
 								                            	</a>
 								                            	<div className="dltBtn pull-right" id={elem._id} onClick={this.deleteDate.bind(this)}>Delete</div>

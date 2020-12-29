@@ -5,18 +5,18 @@ const _ = require('underscore');
 
 exports.manage_wishlist = (req,res,next)=>{
     console.log(req.body)
-	Wishlist.findOne({"candidateID": req.body.candidateID})
+	Wishlist.findOne({"candidate_id": req.body.candidate_id})
 		.exec()
 		.then(data =>{
             
             if(data){
-                Wishlist.findOne({"candidateID": req.body.candidateID, "wishlistItems.jobID": req.body.jobID })
+                Wishlist.findOne({"candidate_id": req.body.candidate_id, "wishlistItems.jobID": req.body.jobID })
                 .exec()
                 .then(jobdata =>{
                     console.log("jobdata",jobdata)
                     if (jobdata) {
                         Wishlist.updateOne(
-                        {"candidateID": req.body.candidateID},
+                        {"candidate_id": req.body.candidate_id},
                         { $pull: {"wishlistItems":{"jobID": req.body.jobID } } }
                         )
                         .exec()
@@ -36,7 +36,7 @@ exports.manage_wishlist = (req,res,next)=>{
                             'jobID' : req.body.jobID
                         }
                         Wishlist.updateOne(
-                            {"candidateID": req.body.candidateID},
+                            {"candidate_id": req.body.candidate_id},
                             {
                                 $push:{
                                     'wishlistItems' : wishlistItems,
@@ -72,7 +72,7 @@ exports.manage_wishlist = (req,res,next)=>{
                
                 const wishlists = new Wishlist({
                     _id                   : new mongoose.Types.ObjectId(),                    
-                    candidateID           : req.body.candidateID,
+                    candidate_id           : req.body.candidate_id,
                     wishlistItems         : [{"jobID": req.body.jobID}],  
                     createdBy             : req.body.createdBy,
                     createdAt             : new Date()
@@ -102,10 +102,10 @@ exports.manage_wishlist = (req,res,next)=>{
 
 
 exports.getCandidateWishlist = (req,res,next)=>{
-    console.log(req.body.candidateID)
-    //Wishlist.find({"candidateID": req.params.candidateID})     
+    console.log(req.body.candidate_id)
+    //Wishlist.find({"candidate_id": req.params.candidate_id})     
     Wishlist.aggregate([
-        { "$match" : { "candidateID" : ObjectId(req.body.candidateID) } },
+        { "$match" : { "candidate_id" : ObjectId(req.body.candidate_id) } },
         { "$unwind": "$wishlistItems" },
         { "$lookup": {
             "from": "jobs",
@@ -127,9 +127,9 @@ exports.getCandidateWishlist = (req,res,next)=>{
     });
 };
 exports.countCandidateWishlist = (req,res,next)=>{
-    console.log(req.params.candidateID);
+    console.log(req.params.candidate_id);
     Wishlist.aggregate([
-        { "$match" : { "candidateID" : ObjectId(req.params.candidateID) } },
+        { "$match" : { "candidate_id" : ObjectId(req.params.candidate_id) } },
         { "$unwind": "$wishlistItems" },
         { "$lookup": {
             "from": "jobs",

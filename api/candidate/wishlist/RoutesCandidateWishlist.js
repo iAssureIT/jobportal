@@ -9,7 +9,7 @@ router.post('/post', ControllerCandidateWishlist.manage_wishlist);
 
 router.post('/candidateWishlist',ControllerCandidateWishlist.getCandidateWishlist);
 
-router.get('/get/wishlistcount/:candidateID',ControllerCandidateWishlist.countCandidateWishlist);
+router.get('/get/wishlistcount/:candidate_id',ControllerCandidateWishlist.countCandidateWishlist);
 
 //router.delete('/delete/:wishlistID',wishlistsController.delete_wishlist);
 
