@@ -1,0 +1,223 @@
+.uttarkashi{
+	position: absolute;
+    top: 10px;
+    left:100px;
+}
+.uttarkashiText{
+	position: absolute;
+	top: 40%;
+    left: 40%;
+}
+.uttarkashiNumber{
+	position: absolute;
+	top: 50%;
+    left: 45%;
+}
+
+.dehradun{
+	position: absolute;
+    top: 134px;
+    left: 60px;
+}
+.dehradunText{
+	position: absolute;
+	top: 50%;
+    left: 30%;
+}
+.dehradunNumber{
+	position: absolute;
+	top: 58%;
+    left: 45%;
+}
+
+.haridwar{
+	position: absolute;
+    top: 317px;
+    left: 88px;
+}
+.haridwarText{
+	position: absolute;
+	top: 50%;
+    left: 30%;
+}
+.haridwarNumber{
+	position: absolute;
+	top: 58%;
+    left: 45%;
+}
+
+.tehri_garhwal{
+	position: absolute;
+    top: 157px;
+    left: 138px;
+}
+.tehri_garhwalText{
+	position: absolute;
+	top: 60%;
+    left: 40%;
+}
+.tehri_garhwalNumber{
+	position: absolute;
+	top: 70%;
+    left: 50%;
+}
+
+.rudraprayag{
+	position: absolute;
+    top: 176px;
+    left: 332px;
+}
+.rudraprayagText{
+	position: absolute;
+	top: 40%;
+    left: 10%;
+}
+.rudraprayagNumber{
+	position: absolute;
+	top: 50%;
+    left: 30%;
+}
+
+.chamoli{
+	position: absolute;
+    top: 109px;
+    left: 383px;
+}
+.chamoliText{
+	position: absolute;
+	top: 40%;
+    left: 40%;
+}
+.chamoliNumber{
+	position: absolute;
+	top: 50%;
+    left: 50%;
+}
+
+.pithoragarh{
+	position: absolute;
+    top: 168px;
+    left: 548px;
+}
+.pithoragarhText{
+	position: absolute;
+	top: 45%;
+    left: 40%;
+}
+.pithoragarhNumber{
+	position: absolute;
+	top: 50%;
+    left: 50%;
+}
+
+.bageshwar{
+	position: absolute;
+    top: 298px;
+    left: 470px;
+}
+.bageshwarText{
+	position: absolute;
+	top: 50%;
+    left: 40%;
+}
+.bageshwarNumber{
+	position: absolute;
+	top: 60%;
+    left: 50%;
+}
+
+.pauri_garhwal{
+	position: absolute;
+    top: 314px;
+    left: 190px;
+}
+.pauri_garhwalText{
+	position: absolute;
+	top: 50%;
+    left: 40%;
+}
+.pauri_garhwalNumber{
+	position: absolute;
+	top: 60%;
+    left: 50%;
+}
+
+.almora{
+	position: absolute;
+    top: 376px;
+    left: 376px;
+}
+.almoraText{
+	position: absolute;
+	top: 50%;
+    left: 40%;
+}
+.almoraNumber{
+	position: absolute;
+	top: 60%;
+    left: 50%;
+}
+.almora{
+	position: absolute;
+    top: 376px;
+    left: 376px;
+}
+.almoraText{
+	position: absolute;
+	top: 50%;
+    left: 40%;
+}
+.almoraNumber{
+	position: absolute;
+	top: 60%;
+    left: 50%;
+}
+
+.nainital{
+	position: absolute;
+    top: 480px;
+    left: 334px;
+}
+.nainitalText{
+	position: absolute;
+	top: 40%;
+    left: 40%;
+}
+.nainitalNumber{
+	position: absolute;
+	top: 50%;
+    left: 50%;
+}
+
+.champawat{
+	position: absolute;
+    top: 498px;
+    left: 546px;
+}
+.champawatText{
+	position: absolute;
+	top: 40%;
+    left: 30%;
+}
+.champawatNumber{
+	position: absolute;
+	top: 50%;
+    left: 40%;
+}
+
+.udham_singh_nagar{
+	position: absolute;
+    top: 534px;
+    left: 310px;
+}
+.udham_singh_nagarText{
+	position: absolute;
+	top: 40%;
+    left: 30%;
+}
+.udham_singh_nagarNumber{
+	position: absolute;
+	top: 50%;
+    left: 40%;
+}
+

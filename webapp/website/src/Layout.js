@@ -66,6 +66,12 @@ import WestBengal from './maps/WestBengal/WestBengal.js';
 import TamilNadu from './maps/TamilNadu/TamilNadu.js';
 import Telangana from './maps/Telangana/Telangana.js';
 
+import Haryana from './maps/Haryana/Haryana.js';
+import Rajasthan from './maps/Rajasthan/Rajasthan.js';
+import Uttarakhand from './maps/Uttarakhand/Uttarakhand.js';
+
+
+
 import Homepage from './pages/Homepage/Homepage.js'
 
 class Layout extends Component  {
@@ -205,10 +211,16 @@ class Layout extends Component  {
                                             <Route exact path="/Nagaland"        component={Nagaland }  />
                                             <Route exact path="/Odisha"        component={Orissa }  />
                                             <Route exact path="/Punjab"        component={Punjab }  />
+
                                             <Route exact path="/Tripura"        component={Tripura }  />
                                             <Route exact path="/WestBengal"        component={WestBengal }  />
                                             <Route exact path="/TamilNadu"        component={TamilNadu }  />
                                             <Route exact path="/Telangana"        component={Telangana }  />
+
+                                            <Route exact path="/Haryana"        component={Haryana }  />
+                                            <Route exact path="/Rajasthan"        component={Rajasthan }  />
+                                            <Route exact path="/Uttarakhand"        component={Uttarakhand }  />
+
 
                                         </Switch>
                                             </div>
@@ -264,6 +276,10 @@ class Layout extends Component  {
                             <Route exact path="/Nagaland"        component={Nagaland }  />
                             <Route exact path="/Odisha"        component={Orissa }  />
                             <Route exact path="/Punjab"        component={Punjab }  />
+                            <Route exact path="/Haryana"        component={Haryana }  />
+                            <Route exact path="/Rajasthan"        component={Rajasthan }  />
+                            <Route exact path="/Uttarakhand"        component={Uttarakhand }  />
+
 
 
                             <Route path="/login" exact strict component={Login} />

@@ -1,0 +1,343 @@
+.sirsa{
+	position: absolute;
+	top: 250px;
+	left: 50px;
+}
+.sirsaText{
+	position: absolute;
+	top: 50%;
+    left: 25%;
+}
+.sirsaNumber{
+	position: absolute;
+	top: 60%;
+    left: 33%;
+}
+
+.fatehabad{
+	position: absolute;
+	top: 287px;
+    left: 173px;
+}
+.fatehabadText{
+	position: absolute;
+	top: 30%;
+    left: 25%;
+}
+.fatehabadNumber{
+	position: absolute;
+	top: 40%;
+    left: 33%;
+}
+
+.jind{
+	position: absolute;
+    top: 287px;
+    left: 296px;
+}
+.jindText{
+	position: absolute;
+	top: 40%;
+    left: 25%;
+}
+.jindNumber{
+	position: absolute;
+	top: 50%;
+    left: 33%;
+}
+
+.kaithal{
+	position: absolute;
+    top: 227px;
+    left: 332px;
+}
+.kaithalText{
+	position: absolute;
+	top: 40%;
+    left: 25%;
+}
+.kaithalNumber{
+	position: absolute;
+	top: 50%;
+    left: 33%;
+}
+
+.kurukshetra{
+	position: absolute;
+    top: 217px;
+    left: 381px;
+}
+.kurukshetraText{
+	position: absolute;
+	top: 40%;
+    left: 25%;
+}
+.kurukshetraNumber{
+	position: absolute;
+	top: 55%;
+    left: 33%;
+}
+
+.ambala{
+	position: absolute;
+    top: 154px;
+    left: 404px;
+}
+.ambalaText{
+	position: absolute;
+	top: 40%;
+    left: 35%;
+}
+.ambalaNumber{
+	position: absolute;
+	top: 55%;
+    left: 43%;
+}
+
+.panchkula{
+	position: absolute;
+    top: 102px;
+    left: 434px;
+}
+.panchkulaText{
+	position: absolute;
+	top: 40%;
+    left: 35%;
+}
+.panchkulaNumber{
+	position: absolute;
+	top: 55%;
+    left: 43%;
+}
+
+.yamunanagar{
+	position: absolute;
+    top: 178px;
+    left: 482px;
+}
+.yamunanagarText{
+	position: absolute;
+	top: 40%;
+    left: 35%;
+}
+.yamunanagarNumber{
+	position: absolute;
+	top: 55%;
+    left: 43%;
+}
+
+.karnal{
+	position: absolute;
+    top: 268px;
+    left: 387px;
+}
+.karnalText{
+	position: absolute;
+	top: 40%;
+    left: 35%;
+}
+.karnalNumber{
+	position: absolute;
+	top: 55%;
+    left: 43%;
+}
+
+.panipat{
+	position: absolute;
+    top: 353px;
+    left: 410px;
+}
+.panipatText{
+	position: absolute;
+	top: 30%;
+    left: 35%;
+}
+.panipatNumber{
+	position: absolute;
+	top: 55%;
+    left: 43%;
+}
+
+.sonipat{
+	    position: absolute;
+    top: 386px;
+    left: 380px;
+}
+.sonipatText{
+	position: absolute;
+	top: 30%;
+    left: 35%;
+}
+.sonipatNumber{
+	position: absolute;
+	top: 55%;
+    left: 43%;
+}
+
+.rohtak{
+	position: absolute;
+    top: 421px;
+    left: 337px;
+}
+.rohtakText{
+	position: absolute;
+	top: 30%;
+    left: 35%;
+}
+.rohtakNumber{
+	position: absolute;
+	top: 55%;
+    left: 43%;
+}
+
+.bhiwani{
+	position: absolute;
+   top: 423px;
+    left: 213px;
+}
+.bhiwaniText{
+	position: absolute;
+	top: 40%;
+    left: 35%;
+}
+.bhiwaniNumber{
+	position: absolute;
+	top: 55%;
+    left: 43%;
+}
+
+.hisar{
+	position: absolute;
+	top: 326px;
+    left: 180px;
+}
+
+.hisarText{
+	position: absolute;
+	top: 40%;
+    left: 35%;
+}
+.hisarNumber{
+	position: absolute;
+	top: 55%;
+    left: 43%;
+}
+
+.mahendragarh{
+	position: absolute;
+    top: 532px;
+    left: 276px;
+}
+
+.mahendragarhText{
+	position: absolute;
+	top: 40%;
+    left: 35%;
+}
+.mahendragarhNumber{
+	position: absolute;
+	top: 55%;
+    left: 43%;
+}
+
+.rewari{
+	position: absolute;
+   	top: 528px;
+    left: 345px;
+}
+
+.rewariText{
+	position: absolute;
+	top: 40%;
+    left: 35%;
+}
+.rewariNumber{
+	position: absolute;
+	top: 55%;
+    left: 43%;
+}
+
+.jhajjar{
+	position: absolute;
+    top: 470px;
+    left: 352px;
+}
+
+.jhajjarText{
+	position: absolute;
+	top: 40%;
+    left: 35%;
+}
+.jhajjarNumber{
+	position: absolute;
+	top: 55%;
+    left: 43%;
+}
+
+.gurgaon{
+	position: absolute;
+    top: 524px;
+    left: 409px;
+}
+
+.gurgaonText{
+	position: absolute;
+	top: 10%;
+    left: 35%;
+}
+.gurgaonNumber{
+	position: absolute;
+	top: 35%;
+    left: 43%;
+}
+
+.mewat{
+	position: absolute;
+    top: 559px;
+    left: 437px;
+}
+
+.mewatText{
+	position: absolute;
+	top: 40%;
+    left: 30%;
+}
+.mewatNumber{
+	position: absolute;
+	top: 55%;
+    left: 43%;
+}
+
+.faridabad{
+	position: absolute;
+    top: 532px;
+    left: 493px;
+}
+
+.faridabadText{
+	position: absolute;
+	top: 40%;
+    left: 30%;
+}
+.faridabadNumber{
+	position: absolute;
+	top: 55%;
+    left: 43%;
+}
+
+.palwal{
+	position: absolute;
+    top: 597px;
+    left: 495px;
+}
+
+.palwalText{
+	position: absolute;
+	top: 20%;
+    left: 30%;
+}
+.palwalNumber{
+	position: absolute;
+	top: 55%;
+    left: 43%;
+}
