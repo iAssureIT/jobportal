@@ -122,7 +122,7 @@ class India extends Component{
 						<span className="keralaNumber  text-center">{this.search('Kerala')}</span>
 					</div>
 					<div className="tamilnadu classHover">
-						<img src="Maps/India/TamilNadu.png" className="img-responsive "  onClick={e => this.onStateClick("Tamil Nadu")} onMouseOver={e => (e.currentTarget.src = "/Maps/India/TamilNadu1.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/India/TamilNadu.png")}/>
+						<img src="Maps/India/TamilNadu.png" className="img-responsive "  onClick={e => this.onStateClick("TamilNadu")} onMouseOver={e => (e.currentTarget.src = "/Maps/India/TamilNadu1.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/India/TamilNadu.png")}/>
 						<span className="tamilnaduText mapTextLabel text-capitalize">Tamil Nadu</span>
 						<span className="tamilnaduNumber mapCountLabel text-center">{this.search('Tamil Nadu')}</span>
 					</div>

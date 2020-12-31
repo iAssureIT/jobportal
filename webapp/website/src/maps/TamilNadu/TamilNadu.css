@@ -1,0 +1,627 @@
+@font-face {
+  font-family:'Montserrat-Bold';
+  src: url('/fonts/Montserrat/Montserrat-Bold.ttf');
+}
+
+.mapTextLabel{
+	font-size: 10px;
+	font-family: 'Montserrat-Regular';
+	color: var(--main-txt-color);
+}
+
+.mapCountLabel{
+	font-size: 11px;
+	font-family: 'Montserrat-Regular';
+	color: var(--main-txt-color);
+}
+
+.classHover:hover .mapTextLabel{
+	font-size: 12px;
+	font-family: 'Montserrat-Bold';
+	z-index: 1;
+}
+
+.classHover:hover .mapCountLabel{
+	font-size: 16px;
+	font-family: 'Montserrat-Bold';
+}
+.tiruvallur{
+	position: absolute;
+	left: 676px;
+    top: 11px;
+}
+.tiruvallurText{
+	position: absolute;
+	top: 40%;
+    left: 50%;
+}
+.tiruvallurNumber{
+	position: absolute;
+	top: 55%;
+    left: 55%;
+}
+.chennai{
+	position: absolute;
+	left: 777px;
+    top: 47px;
+}
+.chennaiText{
+	position: absolute;
+	top: 30%;
+    left: 35%;
+}
+.chennaiNumber{
+	position: absolute;
+	top: 53%;
+    left: 45%;
+}
+.kanchipuram{
+	position: absolute;
+	left: 708px;
+    top: 72px;
+}
+.kanchipuramText{
+	position: absolute;
+	top: 30%;
+    left: 20%;
+}
+.kanchipuramNumber{
+	position: absolute;
+	top: 50%;
+    left: 30%;
+}
+.ranipet{
+	position: absolute;
+    left: 660px;
+    top: 54px;
+}
+.ranipetText{
+	position: absolute;
+	top: 30%;
+    left: 20%;
+}
+.ranipetNumber{
+	position: absolute;
+	top: 50%;
+    left: 25%;
+}
+.vellore{
+	position: absolute;
+	left: 587px;
+    top: 61px;
+}
+.velloreText{
+	position: absolute;
+	top: 30%;
+    left: 45%;
+}
+.velloreNumber{
+	position: absolute;
+	top: 45%;
+    left: 50%;
+}
+.chengalpattu{
+	position: absolute;
+	left: 718px;
+    top: 88px;
+}
+.chengalpattuText{
+	position: absolute;
+	top: 40%;
+    left: 40%;
+}
+.chengalpattuNumber{
+	position: absolute;
+	top: 52%;
+    left: 45%;
+}
+.tiruvannamalai{
+	position: absolute;
+	left: 588px;
+    top: 100px;
+}
+.tiruvannamalaiText{
+	position: absolute;
+	top: 30%;
+    left: 25%;
+}
+.tiruvannamalaiNumber{
+	position: absolute;
+	top: 45%;
+    left: 35%;
+}
+.tirupattur{
+	position: absolute;
+	left:  562px;
+    top: 91px;
+}
+.tirupatturText{
+	position: absolute;
+	top: 40%;
+    left: 30%;
+}
+.tirupatturNumber{
+	position: absolute;
+	top: 55%;
+    left: 35%;
+}
+.krishnagiri{
+	position: absolute;
+	left: 442px;
+    top: 93px;
+}
+.krishnagiriText{
+	position: absolute;
+	top: 25%;
+    left: 25%;
+}
+.krishnagiriNumber{
+	position: absolute;
+	top: 37%;
+    left: 35%;
+}
+.viluppuram{
+	position: absolute;
+	left: 663px;
+    top: 151px;
+}
+.viluppuramText{
+	position: absolute;
+	top: 30%;
+    left: 20%;
+}
+.viluppuramNumber{
+	position: absolute;
+	top: 45%;
+    left: 35%;
+}
+.puducherry{
+	position: absolute;
+	left: 713px;
+    top: 202px;
+}
+.puducherryText{
+	position: absolute;
+	top: 30%;
+    left: 90%;
+}
+.puducherryNumber{
+	position: absolute;
+	top: 60%;
+    left: 100%;
+}
+.kallakurichi{
+	position: absolute;
+	left:  588px;
+    top: 198px;
+}
+.kallakurichiText{
+	position: absolute;
+	top: 30%;
+    left: 30%;
+}
+.kallakurichiNumber{
+	position: absolute;
+	top: 50%;
+    left: 35%;
+}
+.dharmapuri{
+	position: absolute;
+	left:466px;
+    top: 143px;
+}
+.dharmapuriText{
+	position: absolute;
+	top: 45%;
+    left: 30%;
+}
+.dharmapuriNumber{
+	position: absolute;
+	top: 57%;
+    left: 35%;
+}
+.cuddalore{
+	position: absolute;
+	left:618px;
+    top: 221px;
+}
+.cuddaloreText{
+	position: absolute;
+	top: 40%;
+    left: 40%;
+}
+.cuddaloreNumber{
+	position: absolute;
+	top: 50%;
+    left: 45%;
+}
+.salem{
+	position: absolute;
+	left:462px;
+    top: 210px;
+}
+.salemText{
+	position: absolute;
+	top: 25%;
+    left: 30%;
+}
+.salemNumber{
+	position: absolute;
+	top: 40%;
+    left: 35%;
+}
+.erode{
+	position: absolute;
+	left:359px;
+    top: 212px
+}
+.erodeText{
+	position: absolute;
+	top: 35%;
+    left: 40%;
+}
+.erodeNumber{
+	position: absolute;
+	top: 45%;
+    left: 45%;
+}
+.nilgiris{
+	position: absolute;
+	left:280px;
+    top: 241px;
+}
+.nilgirisText{
+	position: absolute;
+	top: 35%;
+    left: 40%;
+}
+.nilgirisNumber{
+	position: absolute;
+	top: 55%;
+    left: 45%;
+}
+.mayiladuthurai{
+	position: absolute;
+	left: 698px;
+    top: 280px;
+}
+.mayiladuthuraiText{
+	position: absolute;
+	top: 40%;
+    left: 40%;
+}
+.mayiladuthuraiNumber{
+	position: absolute;
+	top: 55%;
+    left: 45%;
+}
+.karaikal{
+	position: absolute;
+	left:725px;
+    top: 336px;
+}
+.karaikalText{
+	position: absolute;
+	top: 10%;
+    left:60%;
+}
+.karaikalNumber{
+	position: absolute;
+	top: 50%;
+    left: 100%;
+}
+.nagapattinam{
+	position: absolute;
+	left:715px;
+    top: 347px;
+}
+.nagapattinamText{
+	position: absolute;
+	top: 40%;
+    left:25%;
+}
+.nagapattinamNumber{
+	position: absolute;
+	top: 55%;
+    left: 40%;
+}
+.tiruvarur{
+	position: absolute;
+	left: 670px;
+    top: 334px;
+}
+.tiruvarurText{
+	position: absolute;
+	top: 35%;
+    left:25%;
+}
+.tiruvarurNumber{
+	position: absolute;
+	top: 45%;
+    left: 35%;
+}
+.airyalur{
+	position: absolute;
+	left: 625px;
+    top: 285px;
+}
+.airyalurText{
+	position: absolute;
+	top: 30%;
+    left:40%;
+}
+.airyalurNumber{
+	position: absolute;
+	top: 50%;
+    left: 45%;
+}
+.thanjavur{
+	position: absolute;
+	left: 615px;
+    top: 314px;
+}
+.thanjavurText{
+	position: absolute;
+	top: 60%;
+    left:50%;
+}
+.thanjavurNumber{
+	position: absolute;
+	top: 70%;
+    left: 55%;
+}
+.perambalur{
+	position: absolute;
+	left: 588px;
+    top: 269px;
+}
+.perambalurText{
+	position: absolute;
+	top: 35%;
+    left:30%;
+}
+.perambalurNumber{
+	position: absolute;
+	top: 55%;
+    left: 45%;
+}
+.tirchirappalli{
+	position: absolute;
+	left: 527px;
+    top: 284px;
+}
+.tirchirappalliText{
+	position: absolute;
+	top: 35%;
+    left:30%;
+}
+.tirchirappalliNumber{
+	position: absolute;
+	top: 45%;
+    left: 55%;
+}
+.namakkal{
+	position: absolute;
+	left:468px;
+    top: 259px;
+}
+.namakkalText{
+	position: absolute;
+	top: 30%;
+    left:30%;
+}
+.namakkalNumber{
+	position: absolute;
+	top: 50%;
+    left: 45%;
+}
+.karur{
+	position: absolute;
+	left:475px;
+    top: 324px;
+}
+.karurText{
+	position: absolute;
+	top: 25%;
+    left:30%;
+}
+.karurNumber{
+	position: absolute;
+	top: 40%;
+    left: 35%;
+}
+.tiruppur{
+	position: absolute;
+	left:  381px;
+    top: 287px;
+}
+.tiruppurText{
+	position: absolute;
+	top: 35%;
+    left:30%;
+}
+.tiruppurNumber{
+	position: absolute;
+	top: 45%;
+    left: 40%;
+}
+.coimbatore{
+	position: absolute;
+	left:335px;
+    top: 282px;
+}
+.coimbatoreText{
+	position: absolute;
+	top: 25%;
+    left:30%;
+}
+.coimbatoreNumber{
+	position: absolute;
+	top: 35%;
+    left: 45%;
+}
+.pudukkottai{
+	position: absolute;
+	left: 563px;
+    top: 373px;
+}
+.pudukkottaiText{
+	position: absolute;
+	top: 25%;
+    left:22%;
+}
+.pudukkottaiNumber{
+	position: absolute;
+	top: 37%;
+    left: 30%;
+}
+.dindigul{
+	position: absolute;
+	left: 410px;
+    top: 359px;
+}
+.dindigulText{
+	position: absolute;
+	top: 40%;
+    left:40%;
+}
+.dindigulNumber{
+	position: absolute;
+	top: 52%;
+    left: 45%;
+}
+.sivagangai{
+	position: absolute;
+	left: 519px;
+    top: 414px;
+}
+.sivagangaiText{
+	position: absolute;
+	top: 40%;
+    left:40%;
+}
+.sivagangaiNumber{
+	position: absolute;
+	top: 50%;
+    left:45%;
+}
+.madurai{
+	position: absolute;
+	left: 432px;
+    top: 421px
+}
+.maduraiText{
+	position: absolute;
+	top: 40%;
+    left:40%;
+}
+.maduraiNumber{
+	position: absolute;
+	top: 50%;
+    left:45%;
+}
+.theni{
+	position: absolute;
+	left: 398px;
+    top: 435px;
+}
+.theniText{
+	position: absolute;
+	top: 30%;
+    left:30%;
+}
+.theniNumber{
+	position: absolute;
+	top: 40%;
+    left: 35%;
+}
+.ramanathapuram{
+	position: absolute;
+	left: 536px;
+    top: 475px;
+}
+.ramanathapuramText{
+	position: absolute;
+	top: 50%;
+    left:20%;
+}
+.ramanathapuramNumber{
+	position: absolute;
+	top: 60%;
+    left: 30%;
+}
+.virudhunagar{
+	position: absolute;
+	left: 418px;
+    top: 494px;
+}
+.virudhunagarText{
+	position: absolute;
+	top: 30%;
+    left:30%;
+}
+.virudhunagarNumber{
+	position: absolute;
+	top: 45%;
+    left: 35%;
+}
+.thoothukudi{
+	position: absolute;
+	left: 458px;
+    top: 547px;
+}
+.thoothukudiText{
+	position: absolute;
+	top: 25%;
+    left:22%;
+}
+.thoothukudiNumber{
+	position: absolute;
+	top: 37%;
+    left: 35%;
+}
+.tenkasi{
+	position: absolute;
+	left: 394px;
+    top: 541px;
+}
+.tenkasiText{
+	position: absolute;
+	top: 30%;
+    left:25%;
+}
+.tenkasiNumber{
+	position: absolute;
+	top: 45%;
+    left: 30%;
+}
+.tirunelveli{
+	position: absolute;
+	left: 396px;
+    top: 602px;
+}
+.tirunelveliText{
+	position: absolute;
+	top: 25%;
+    left:22%;
+}
+.tirunelveliNumber{
+	position: absolute;
+	top: 37%;
+    left: 30%;
+}
+.kanniyakumari{
+	position: absolute;
+	left:387px;
+    top: 649px;
+}
+.kanniyakumariText{
+	position: absolute;
+	top: 25%;
+    left:22%;
+}
+.kanniyakumariNumber{
+	position: absolute;
+	top: 42%;
+    left: 30%;
+}
