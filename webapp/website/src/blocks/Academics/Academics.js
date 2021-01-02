@@ -5,7 +5,10 @@ import { withRouter }	 	from 'react-router-dom';
 import Axios 			 	from 'axios';
 import Swal 			 	from 'sweetalert2';
 import { Multiselect }      from 'multiselect-react-dropdown';
-
+import PlacesAutocomplete, {
+  		geocodeByAddress,
+  		getLatLng
+} from "react-places-autocomplete";
 import '../BasicInfoForm/BasicInfoForm.css';
 
 class Academics extends Component{
@@ -13,17 +16,30 @@ class Academics extends Component{
 		super(props);
 
 		this.state={
-			qualificationArray  : [],
-			qualificationLevel  : "",
-			candidate_id         : this.props.match.params.candidate_id,
+			
+			candidate_id        : this.props.match.params.candidate_id,
 			academicsID         : this.props.match.params.academicsID,
+			qualificationLevel  : "",
+            qualificationlevel_id    : "",
+            qualificationLevellist   : [],
+            qualificationArray  : [],
 			qualification       : "",
+            qualification_id    : "",
+            qualificationlist   : [],
 			specialization      : "",
 			college             : "",
 			university   		: "",
-			state               : "",
-			country	            : "",	
+			university_id    	: "",
+            universitylist   	: [],
+            addressLine1 	    : "",
+			area                : "",
 			city                : "",
+			district   		    : "",	
+			states              : "",
+			stateCode		    : "",
+			country	            : "",
+			countryCode 	    : "",
+			pincode             : "",
 			grade               : "",
 			mode                : "",
 			passOutYear         : "",
@@ -45,7 +61,7 @@ class Academics extends Component{
 
 			Axios.get("/api/qualificationlevelmaster/get/list")
 			.then(response => {
-				this.setState({inputQualificationLevel : response.data});
+				this.setState({qualificationLevellist : response.data});
 			})
 			.catch(error=>{
 				Swal.fire("Error while getting List data",error.message,'error');
@@ -54,7 +70,7 @@ class Academics extends Component{
 		Axios.get("/api/qualificationmaster/get/list")
 			.then(response => {
 				this.setState({
-					inputQualification : response.data
+					qualificationlist : response.data
 				});
 			})
 			.catch(error=>{
@@ -63,7 +79,7 @@ class Academics extends Component{
 		Axios.get("/api/universitymaster/get/list")
 			.then(response => {
 				
-				this.setState({inputUniversity : response.data});
+				this.setState({universitylist : response.data});
 			})
 			.catch(error=>{
 				Swal.fire("Error while getting List data",error.message,'error');
@@ -116,7 +132,7 @@ class Academics extends Component{
 			 		qualification       :editData[0].academics[0].qualification,
 			 		specialization      :editData[0].academics[0].specialization,
 			 		college             :editData[0].academics[0].collegeSchool,
-			 		university          :editData[0].academics[0].universityBoard,
+			 		university          :editData[0].academics[0].university,
 			 		state               :editData[0].academics[0].state,
 			 		city                :editData[0].academics[0].cityVillage,
 			 		country             :editData[0].academics[0].country,
@@ -194,7 +210,102 @@ class Academics extends Component{
 		event.preventDefault();
 		this.props.history.push("/contact/"+this.state.candidate_id);
 	}
-	
+	onChangeQualificationLevel(event){
+        const {name,value} = event.target;
+        this.setState({ [name]:value });  
+        
+        var qualificationlevel_id;
+        if (document.querySelector('#qualificationLevel option[value="' + value + '"]')) {
+            qualificationlevel_id = document.querySelector('#qualificationLevel option[value="' + value + '"]').getAttribute("data-value")
+        }else{ qualificationlevel_id = "" }
+
+        this.setState({ qualificationlevel_id : qualificationlevel_id });  
+    }    
+    onChangeQualification(event){
+        const {name,value} = event.target;
+        this.setState({ [name]:value });  
+        
+        var qualification_id;
+        if (document.querySelector('#qualification option[value="' + value + '"]')) {
+            qualification_id = document.querySelector('#qualification option[value="' + value + '"]').getAttribute("data-value")
+        }else{ qualification_id = "" }
+
+        this.setState({ qualification_id : qualification_id });  
+    }
+    onChangeUniversity(event){
+        const {name,value} = event.target;
+        this.setState({ [name]:value });  
+        
+        var university_id;
+        if (document.querySelector('#university option[value="' + value + '"]')) {
+            university_id = document.querySelector('#university option[value="' + value + '"]').getAttribute("data-value")
+        }else{ university_id = "" }
+
+        this.setState({ university_id : university_id });  
+    }
+    handleChangePlaces = address => {
+	    this.setState({ addressLine1 : address});
+	};
+	handleSelect = address => {
+
+    geocodeByAddress(address)
+     .then((results) =>{ 
+      	for (var i = 0; i < results[0].address_components.length; i++) {
+          	for (var b = 0; b < results[0].address_components[i].types.length; b++) {
+              	switch (results[0].address_components[i].types[b]) {
+                  case 'sublocality_level_1':
+                      var area = results[0].address_components[i].long_name;
+                      break;
+                  case 'sublocality_level_2':
+                      area = results[0].address_components[i].long_name;
+                      break;
+                  case 'locality':
+                      var city = results[0].address_components[i].long_name;
+                      break;
+                  case 'administrative_area_level_1':
+                      var state = results[0].address_components[i].long_name;
+                      var stateCode = results[0].address_components[i].short_name;
+                      break;
+                  case 'administrative_area_level_2':
+                      var district = results[0].address_components[i].long_name;
+                      break;
+                  case 'country':
+                     var country = results[0].address_components[i].long_name;
+                     var countryCode = results[0].address_components[i].short_name;
+                    break; 
+                  case 'postal_code':
+                     var pincode = results[0].address_components[i].long_name;
+                      break;
+                  default :
+                  		break;
+              }
+          	}
+      	}
+
+      this.setState({
+        area       : area,
+        city       : city,
+        district   : district,
+        states     : state,
+        country    : country,
+        pincode    : pincode,
+        stateCode  : stateCode,
+        countryCode: countryCode
+      })
+
+       
+    })
+     
+      .catch(error => console.error('Error', error));
+
+      geocodeByAddress(address)
+      .then(results => getLatLng(results[0]))
+      .then(latLng => this.setState({'latLng': latLng}))
+      .catch(error => console.error('Error', error));
+     
+      this.setState({ addressLine1 : address});
+  	};
+
 	handleSave(event){
 		event.preventDefault();
 		var status =  this.validateForm();
@@ -204,13 +315,21 @@ class Academics extends Component{
 								academicsID   : this.state.academicsID,
 								academics:{
 									qualificationLevel   : this.state.qualificationLevel,
+									qualificationlevel_id: this.state.qualificationlevel_id,
 									qualification        : this.state.qualification,
+									qualification_id     : this.state.qualification_id,
 									specialization       : this.state.specialization,
 									collegeSchool        : this.state.college,
-									universityBoard      : this.state.university,
-									state                : this.state.state,
-									country              : this.state.country,
-									cityVillage          : this.state.city,
+									university 		     : this.state.university,
+									university_id 		 : this.state.university_id,	
+									area       			 : this.state.area,
+							        city       			 : this.state.city,
+							        district   			 : this.state.district,
+							        states     			 : this.state.state,
+							        country    			 : this.state.country,
+							        pincode    			 : this.state.pincode,
+							        stateCode  			 : this.state.stateCode,
+							        countryCode 		 : this.state.countryCode,
 									grade                : this.state.grade,
 									mode                 : this.state.mode,
 									passOutYear          : this.state.passOutYear,
@@ -369,6 +488,10 @@ class Academics extends Component{
 
 	//========== Validation End ==================
 	render(){
+		const searchOptions = {
+	      // types: ['(cities)'],
+	      componentRestrictions: {country: "in"}
+	    }
 		return(
 				<div className="col-lg-12 ">
 					<form>
@@ -384,26 +507,14 @@ class Academics extends Component{
 									<span className="input-group-addon inputBoxIcon">
 										<FontAwesomeIcon icon="file-alt" />
 									</span> 
-									<select className="form-control inputBox" 
-									 id="qualificationLevel" value={this.state.qualificationLevel}
-									 name="qualificationLevel" onChange={this.handleChange.bind(this)}>
-									  	<option > -- select -- </option>
-									  	{
-									  		this.state.inputQualificationLevel!=null
-									  			 && this.state.inputQualificationLevel.length>0
-									  		?	
-									  			this.state.inputQualificationLevel.map((elem,index)=>{
-									  				return(
-									  					<option value={elem._id}  key={index}>
-									  						{elem.qualificationLevel}
-									  					</option>
-									  				);
-									  			})
-									  			
-									  		:
-									  			null
-									  	}
-									</select>
+									<input type="text" list="qualificationLevel" className="form-control inputBox" refs="qualificationLevel" 
+                                     name="qualificationLevel" id="selectqualificationLevel" maxLength="100" value={this.state.qualificationLevel} data-value={this.state.qualificationlevel_id}
+									onChange={this.onChangeQualificationLevel.bind(this)} />
+									<datalist name="qualificationLevel" id="qualificationLevel" className="qualificationLevellist" >
+									    {this.state.qualificationLevellist.map((item, key) =>
+									        <option key={key} value={item.qualificationLevel} data-value={item._id}/>
+									    )}
+									</datalist>
 								</div>
 							</div>
 							<div className="col-lg-4">
@@ -415,26 +526,14 @@ class Academics extends Component{
 									<span className="input-group-addon inputBoxIcon">
 										<i className="fa fa-graduation-cap"></i>
 									</span> 
-									<select className="form-control inputBox" 
-									 id="qualification" value={this.state.qualification} 
-									 name="qualification" onChange={this.handleChange.bind(this)}>
-									  	<option > -- select -- </option>
-									  	{
-									  		this.state.inputQualification!=null 
-									  			&& this.state.inputQualification.length>0
-									  		?	
-									  			this.state.inputQualification.map((elem,index)=>{
-									  				return(
-									  					<option value={elem._id} key={index}>
-									  						{elem.qualification}
-									  					</option>
-									  				);
-									  			})
-									  			
-									  		:
-									  			null
-									  	}
-									</select>
+									<input type="text" list="qualification" className="form-control inputBox" refs="qualification" 
+                                     name="qualification" id="selectqualification" maxLength="100" value={this.state.qualification} data-value={this.state.qualification_id}
+									onChange={this.onChangeQualification.bind(this)} />
+									<datalist name="qualification" id="qualification" className="qualificationlist" >
+									    {this.state.qualificationlist.map((item, key) =>
+									        <option key={key} value={item.qualification} data-value={item._id}/>
+									    )}
+									</datalist>
 								</div>
 							</div>
 							<div className="col-lg-4">
@@ -543,6 +642,26 @@ class Academics extends Component{
 							</div>
 
 							<div className="col-lg-4">
+								<label htmlFor="university" className="nameTitleForm">
+									University/Boards Name
+									<sup className="nameTitleFormStar">*</sup>
+								</label>
+								<div className="input-group ">
+									<span className="input-group-addon inputBoxIcon">
+										<FontAwesomeIcon icon="university" />
+									</span> 
+									<input type="text" list="university" className="form-control inputBox" refs="university" 
+                                     name="university" id="selectuniversity" maxLength="100" value={this.state.university} data-value={this.state.university_id}
+									onChange={this.onChangeUniversity.bind(this)} />
+									<datalist name="university" id="university" className="universitylist" >
+									    {this.state.universitylist.map((item, key) =>
+									        <option key={key} value={item.university} data-value={item._id}/>
+									    )}
+									</datalist>
+								</div> 
+								<span id="universityError" className="errorMsg"></span>
+							</div>
+							<div className="col-lg-4">
 								<label htmlFor="college" className="nameTitleForm">
 									College/School Name<sup className="nameTitleFormStar">*</sup>
 								</label>
@@ -550,7 +669,7 @@ class Academics extends Component{
 									<span className="input-group-addon inputBoxIcon">
 										<FontAwesomeIcon icon="university" />
 									</span> 
-									<select className="form-control inputBox" id="college" 
+									{/*<select className="form-control inputBox" id="college" 
 									 value={this.state.college} name="college" 
 									 onChange={this.handleChange.bind(this)}>
 										  	<option > -- select -- </option>
@@ -569,42 +688,55 @@ class Academics extends Component{
 										  		:
 										  			null
 										  	}
-										</select>
+									</select>*/}
+									<PlacesAutocomplete
+                                        value={this.state.addressLine1}
+                                        onChange={this.handleChangePlaces}
+                                        onSelect={this.handleSelect}
+                                        searchOptions={searchOptions}
+                                      	>
+                                        {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+                                          <div>
+                                            <input
+                                              {...getInputProps({
+                                                placeholder: 'Search Address ...',
+                                                className: 'location-search-input form-control inputBox',
+                                                id:"addressLine1",
+                                                name:"addressLine1",
+                                              })}
+                                            />
+                                            <div className={this.state.addressLine1 
+                                            				? 
+                                            				"autocomplete-dropdown-container SearchListContainer inputSearch" 
+                                            				: 
+                                            				""}>
+                                              {loading && <div>Loading...</div>}
+                                              {suggestions.map(suggestion => {
+                                                const className = suggestion.active
+                                                  ? 'suggestion-item--active'
+                                                  : 'suggestion-item';
+                                                // inline style for demonstration purpose
+                                                const style = suggestion.active
+                                                  ? { backgroundColor: '#f5a721', cursor: 'pointer' }
+                                                  : { backgroundColor: '#242933', cursor: 'pointer'};
+                                                return (
+                                                  <div
+                                                    {...getSuggestionItemProps(suggestion, {
+                                                      className,
+                                                      style,
+                                                    })}
+                                                  >
+                                                    <span>{suggestion.description}</span>
+                                                  </div>
+                                                );
+                                              })}
+                                            </div>
+                                          </div>
+                                        )}
+                                      </PlacesAutocomplete>
 								</div> 
 								<span id="collegeError" className="errorMsg"></span>
 							</div>
-
-							<div className="col-lg-4">
-								<label htmlFor="university" className="nameTitleForm">
-									University/Boards Name
-									<sup className="nameTitleFormStar">*</sup>
-								</label>
-								<div className="input-group ">
-									<span className="input-group-addon inputBoxIcon">
-										<FontAwesomeIcon icon="university" />
-									</span> 
-									<select className="form-control inputBox" id="university" value={this.state.university} name="university" onChange={this.handleChange.bind(this)}>
-										  	<option > -- select -- </option>
-										  	{
-										  		this.state.inputUniversity!=null 
-										  			&& this.state.inputUniversity.length>0
-										  		?	
-										  			this.state.inputUniversity.map((elem,index)=>{
-										  				return(
-										  					<option value={elem._id} key={index}>
-										  						{elem.university}
-										  					</option>
-										  				);
-										  			})
-										  			
-										  		:
-										  			null
-										  	}
-										</select>
-								</div> 
-								<span id="universityError" className="errorMsg"></span>
-							</div>
-
 						</div>
 
 						<div className="row formWrapper">
@@ -623,6 +755,21 @@ class Academics extends Component{
 								</div>
 								<span id="cityError" className="errorMsg"></span>
 							</div>
+							<div className="col-lg-4">
+								<label htmlFor="district" className="nameTitleForm">
+									District
+									<sup className="nameTitleFormStar">*</sup>
+								</label>
+								<div className="input-group ">
+									<span className="input-group-addon inputBoxIcon">
+										<FontAwesomeIcon icon="city" /> 
+									</span> 
+									<input type="text" name="district" id="district" 
+									 className="form-control inputBox" value={this.state.district} 
+									 onChange={this.handleChange.bind(this)} />
+								</div>
+								<span id="districtError" className="errorMsg"></span>
+							</div>
 
 							<div className="col-lg-4">
 								<label htmlFor="state" className="nameTitleForm">
@@ -635,12 +782,13 @@ class Academics extends Component{
 									</span> 
 									<input type="text" name="state" id="state" 
 									 className="form-control inputBox " 
-									 value={this.state.state} 
+									 value={this.state.states} 
 									 onChange={this.handleChange.bind(this)} />
 								</div> 
 								<span id="stateError" className="errorMsg"></span>
 							</div>
-							
+						</div>	
+						<div className="row formWrapper">	
 							<div className="col-lg-4">
 								<label htmlFor="country" className="nameTitleForm">
 									Country

@@ -14,7 +14,7 @@ var ObjectID 	= 	require('mongodb').ObjectID;
 exports.insertJobs = (req, res, next)=>{
 		console.log(req.body)	
 		var functionalarea_id, subfunctionalarea_id, jobcategory_id, jobrole_id, jobtype_id, jobtime_id;
-		var primarySkills   = []
+		var primarySkills   = [];
 	    var secondarySkills = [];
 	    var otherSkills 	= [];
 	    var preferredSkills = [];

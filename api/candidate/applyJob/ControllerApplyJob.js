@@ -29,7 +29,7 @@ exports.applyJob = (req,res,next)=>{
 };
 
 
-exports.getCandidateAppliedJobList = (req,res,next)=>{
+exports.appliedJobList = (req,res,next)=>{
      //ApplyJob.find({"candidate_id": req.params.candidate_id}) 
 
     ApplyJob.aggregate([
@@ -77,9 +77,8 @@ exports.appliedJobCount = (req,res,next)=>{
 exports.applicantsCountList = (req,res,next)=>{
     //console.log(req.params.candidate_id);
     ApplyJob.aggregate([
-        { "$unwind": "$appliedItems" },
-        { "$match" : { "appliedItems.employerID" : ObjectId(req.body.employerID) } },
-        { "$group" : { _id: "$appliedItems.jobID", candidatesApplied: { $sum: 1 } }}
+        { "$match" : { "employerID" : ObjectId(req.body.employerID) } },
+        { "$group" : { _id: "$jobID", candidatesApplied: { $sum: 1 } }}
     ])
     .exec()
     .then(data=>{
