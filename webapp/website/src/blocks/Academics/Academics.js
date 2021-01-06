@@ -27,11 +27,13 @@ class Academics extends Component{
 			qualification       : "",
             qualification_id    : "",
             qualificationlist   : [],
+            qualificationArray  : [],
 			specialization      : "",
 			college             : "",
 			university   		: "",
 			university_id    	: "",
             universitylist   	: [],
+            universityArray     : [],		
             addressLine1 	    : "",
 			area                : "",
 			city                : "",
@@ -60,7 +62,7 @@ class Academics extends Component{
 	componentDidMount(){
 		this.getData();
 
-			Axios.get("/api/qualificationlevelmaster/get/list")
+		Axios.get("/api/qualificationlevelmaster/get/list")
 			.then(response => {
 				this.setState({qualificationLevellist : response.data});
 			})
@@ -107,12 +109,14 @@ class Academics extends Component{
 			
 			 	this.setState({
 						academics  				: response.data,
-						qualificationLevelArray : response.data[0].qualificationLevel
+						qualificationLevelArray : response.data[0].qualificationLevel,
+						qualificationArray 		: response.data[0].qualification,
+						universityArray			: response.data[0].university
 			 	})
 			 	
 			 })
 			 .catch(error=>{
-			 	Swal.fire("Submit Error!",error.message,'error');
+			 	Swal.fire("Fetch Error!",error.message,'error');
 			 })
 	}
 	edit(){
@@ -126,26 +130,45 @@ class Academics extends Component{
 			Axios.post("/api/candidatemaster/post/getOneCandidateAcademics",idData)
 			.then(response=>{
 				var editData =response.data;
-				
+				console.log(editData)
+				var qualificationLevel = this.state.qualificationLevelArray.filter((data,index)=>{
+                    if (data._id == editData[0].academics[0].qualificationlevel_id) { return data}
+                })
+
+				var qualification = this.state.qualificationArray.filter((data,index)=>{
+                    if (data._id == editData[0].academics[0].qualification_id) { return data}
+                })
+
+                var university = this.state.universityArray.filter((data,index)=>{
+                    if (data._id == editData[0].academics[0].university_id) { return data}
+                })
+
 			 	this.setState({
-			 		qualificationLevel  :editData[0].academics[0].qualificationLevel,
-			 		qualification       :editData[0].academics[0].qualification,
-			 		specialization      :editData[0].academics[0].specialization,
-			 		college             :editData[0].academics[0].collegeSchool,
-			 		university          :editData[0].academics[0].university,
-			 		state               :editData[0].academics[0].state,
-			 		city                :editData[0].academics[0].cityVillage,
-			 		country             :editData[0].academics[0].country,
-			 		grade               :editData[0].academics[0].grade,
-			 		mode                :editData[0].academics[0].mode,
-			 		passOutYear         :editData[0].academics[0].passOutYear,
-			 		admisionYear        :editData[0].academics[0].admisionYear,
-			 		buttonText          :"Update"
+			 		qualificationlevel_id  	: editData[0].academics[0].qualificationlevel_id,
+			 		qualificationLevel  	: qualificationLevel[0].qualificationLevel,	
+			 		qualification_id       	: editData[0].academics[0].qualification_id,
+			 		qualification 	  		: qualification[0].qualification,	
+			 		specialization      	: editData[0].academics[0].specialization,
+			 		university_id          	: editData[0].academics[0].university_id,
+			 		university          	: university[0].university,
+			 		addressLine1            : editData[0].academics[0].collegeSchool,
+			 		area 					: editData[0].academics[0].area,
+			 		city                	: editData[0].academics[0].cityVillage,
+			 		district 				: editData[0].academics[0].district,
+			 		state               	: editData[0].academics[0].state,
+			 		stateCode              	: editData[0].academics[0].stateCode,
+			 		country             	: editData[0].academics[0].country,
+			 		countryCode             : editData[0].academics[0].countryCode,
+			 		grade               	: editData[0].academics[0].grade,
+			 		mode                	: editData[0].academics[0].mode,
+			 		passOutYear         	: editData[0].academics[0].passOutYear,
+			 		admisionYear        	: editData[0].academics[0].admisionYear,
+			 		buttonText          	: "Update"
 			 	})
 			 	
 			 })
 			 .catch(error=>{
-			 	Swal.fire("Submit Error!",error.message,'error');
+			 	Swal.fire("edit Error!",error.message,'error');
 			 })
 		}
 	}
@@ -816,9 +839,20 @@ class Academics extends Component{
 								this.state.academics.length > 0
 								?
 								this.state.academics[0].academics.map((elem,index)=>{
-									console.log(this.state.academics)
-									console.log(elem)
+									//console.log(elem)
+									//console.log(this.state.qualificationLevelArray);
 
+
+									var qualificationLevel = this.state.qualificationLevelArray.filter((data,index)=>{
+                        			if (data._id == elem.qualificationlevel_id) { return data}
+                    				})
+                    				var qualification = this.state.qualificationArray.filter((data,index)=>{
+                        			if (data._id == elem.qualification_id) { return data}
+                    				})
+                    				var university = this.state.universityArray.filter((data,index)=>{
+                        			if (data._id == elem.university_id) { return data}
+                    				})
+									
 									return(
 										<div className="col-lg-6 AddressOuterWrapper"  key={index}>
 											<div className="col-lg-12 addWrapper">
@@ -829,20 +863,13 @@ class Academics extends Component{
 														</div>
 														<div>
 														<div className="">
-														{
-															this.state.qualificationLevelArray.map((elem1,index)=>{
-																return(
-																	<div className="addLogoTextDiv" key={index}>
-																		{elem1.qualificationLevel}<br/>
-																	</div>
-																);
-															})
-														}
+														<div className="addLogoTextDiv" key={index}>
+															{qualificationLevel[0].qualificationLevel}<br/>
+														</div>
 														</div>
 														
 														<div className="addLogoTextDiv" key={index}>
-															{//this.state.academics[0].qualification[index].qualification
-															}
+															{qualification[0].qualification}
 														</div>
 														</div>
 															
@@ -851,10 +878,7 @@ class Academics extends Component{
 													<div className="col-lg-8 addRightWrapper">
 														<div className="row">
 														<div className="addRightText ">
-															<div className="AddressBoxText" key={index}>
-																{//this.state.academics[0].qualificationlevel[index].qualificationLevel
-																}
-															</div>
+															
 															<div className="AddressBoxText">
 															{elem.specialization}
 															</div>
@@ -862,8 +886,7 @@ class Academics extends Component{
 																{elem.collegeSchool}
 															</div>
 															<div className="AddressBoxText">
-															{//this.state.academics[0].university[index].university
-															}
+															{university[0].university}
 															</div>
 															{/*<div className="AddressBoxText">
 																{elem.admisionYear} - {elem.passOutYear}

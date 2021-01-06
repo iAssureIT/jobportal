@@ -645,7 +645,7 @@ exports.updateJob = (req,res,next)=>{
 }
 
 exports.mapwiseJobs = (req, res, next)=>{
-	console.log("req.body - ", req.body);
+	//console.log("req.body - ", req.body);
 	var selector = {}; 
 	var industry_ids = [];
     var funarea_ids = [];
@@ -688,7 +688,7 @@ exports.mapwiseJobs = (req, res, next)=>{
 }
 
 exports.functonalAreaJobs = (req, res, next)=>{
-	console.log("req.body - ", req.body);
+	//console.log("req.body - ", req.body);
 	var selector = {}; 
     var industry_ids = [];
     var funarea_ids = [];
