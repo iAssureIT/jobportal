@@ -387,18 +387,18 @@
 }
 .balrampur{
 	position: absolute;
-	left: 333px;
-    top: 15px;
+	left: 333px!important;
+    top: 15px!important;
 }
 .balrampurText{
 	position: absolute;
-	top: 45%;
-    left: 45%;
+	top: 45%!important;
+    left: 45%!important;
 }
 .balrampurNumber{
 	position: absolute;
-	top: 55%;
-    left: 50%;
+	top: 55%!important;
+    left: 50%!important;
 }
 .surguja{
 	position: absolute;

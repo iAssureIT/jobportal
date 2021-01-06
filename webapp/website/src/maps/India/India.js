@@ -65,7 +65,7 @@ class India extends Component{
 					</div>
 
 					<div className="himachal classHover">
-						<img src="Maps/India/HimachalPradesh.png" className="img-responsive "  onClick={e => this.onStateClick("Himachal Pradesh")} onMouseOver={e => (e.currentTarget.src = "/Maps/India/HimachalPradesh1.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/India/HimachalPradesh.png")}/>
+						<img src="Maps/India/HimachalPradesh.png" className="img-responsive "  onClick={e => this.onStateClick("HimachalPradesh")} onMouseOver={e => (e.currentTarget.src = "/Maps/India/HimachalPradesh1.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/India/HimachalPradesh.png")}/>
 						<span className="himachalText mapTextLabel text-capitalize">Himachal Pradesh</span>
 						<span className="himachalNumber mapCountLabel text-center">{this.search('Himachal Pradesh')}</span>
 					</div>
@@ -101,7 +101,7 @@ class India extends Component{
 					</div>
 					
 					<div className="madhyapradesh classHover">
-						<img src="Maps/India/MadhyaPradesh.png" className="img-responsive"  onClick={e => this.onStateClick("Madhya Pradesh")} onMouseOver={e => (e.currentTarget.src = "/Maps/India/MadhyaPradesh1.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/India/MadhyaPradesh.png")}/>
+						<img src="Maps/India/MadhyaPradesh.png" className="img-responsive"  onClick={e => this.onStateClick("MadhyaPradesh")} onMouseOver={e => (e.currentTarget.src = "/Maps/India/MadhyaPradesh1.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/India/MadhyaPradesh.png")}/>
 						<span className="madhyapradeshText mapTextLabel text-capitalize">Madhya Pradesh</span>
 						<span className="madhyapradeshNumber mapCountLabel text-center">{this.search('Madhya Pradesh')}</span>
 					</div>
@@ -127,7 +127,7 @@ class India extends Component{
 						<span className="tamilnaduNumber mapCountLabel text-center">{this.search('Tamil Nadu')}</span>
 					</div>
 					<div className="andhrapradesh classHover">
-						<img src="Maps/India/AndhraPradesh.png" className="img-responsive "  onClick={e => this.onStateClick("Andhra Pradesh")} onMouseOver={e => (e.currentTarget.src = "/Maps/India/AndhraPradesh1.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/India/AndhraPradesh.png")}/>
+						<img src="Maps/India/AndhraPradesh.png" className="img-responsive "  onClick={e => this.onStateClick("AndhraPradesh")} onMouseOver={e => (e.currentTarget.src = "/Maps/India/AndhraPradesh1.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/India/AndhraPradesh.png")}/>
 						<span className="andhrapradeshText mapTextLabel text-capitalize">Andhra Pradesh</span>
 						<span className="andhrapradeshNumber mapCountLabel text-center">{this.search('Andhra Pradesh')}</span>
 					</div>
@@ -186,7 +186,7 @@ class India extends Component{
 						<span className="meghalayaNumber mapCountLabel text-center">{this.search('Meghalaya')}</span>
 					</div>
 					<div className="arunachalpradesh classHover">
-						<img src="Maps/India/ArunachalPradesh.png" className="img-responsive "  onClick={e => this.onStateClick("Arunachal Pradesh")} onMouseOver={e => (e.currentTarget.src = "/Maps/India/ArunachalPradesh1.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/India/ArunachalPradesh.png")}/>
+						<img src="Maps/India/ArunachalPradesh.png" className="img-responsive "  onClick={e => this.onStateClick("ArunachalPradesh")} onMouseOver={e => (e.currentTarget.src = "/Maps/India/ArunachalPradesh1.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/India/ArunachalPradesh.png")}/>
 						<span className="arunachalpradeshText mapTextLabel text-capitalize">Arunachal Pradesh</span>
 						<span className="arunachalpradeshNumber mapCountLabel text-center">{this.search('Arunachal Pradesh')}</span>
 					</div>

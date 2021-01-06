@@ -65,6 +65,7 @@ import Tripura from './maps/Tripura/Tripura.js';
 import WestBengal from './maps/WestBengal/WestBengal.js';
 import TamilNadu from './maps/TamilNadu/TamilNadu.js';
 import Telangana from './maps/Telangana/Telangana.js';
+import UttarPradesh from './maps/UttarPradesh/UttarPradesh.js';
 
 import Haryana from './maps/Haryana/Haryana.js';
 import Rajasthan from './maps/Rajasthan/Rajasthan.js';
@@ -183,8 +184,8 @@ class Layout extends Component  {
                                             
                                             {/*<Route exact path="/Andaman And Nicobar Islands"        component={AndamanAndNicobar }  />
                                             */}
-                                            <Route exact path="/Andhra Pradesh"        component={AndhraPradesh }  />
-                                            <Route exact path="/Arunachal Pradesh"        component={ArunachalPradesh }  />
+                                            <Route exact path="/AndhraPradesh"        component={AndhraPradesh }  />
+                                            <Route exact path="/ArunachalPradesh"        component={ArunachalPradesh }  />
                                             {/*<Route exact path="/Assam"        component={Assam }  />*/}
                                             <Route exact path="/Bihar"        component={Bihar }  />
                                             {/*<Route exact path="/Chandigarh"        component={Chandigarh }  />*/}
@@ -197,13 +198,13 @@ class Layout extends Component  {
                                             <Route exact path="/Goa"        component={Goa }  />
                                             <Route exact path="/Gujarat"        component={Gujarat }  />
                                             {/*<Route exact path="/Haryana"        component={Haryana }  />*/}
-                                            <Route exact path="/Himachal Pradesh"        component={HimachalPradesh }  />
+                                            <Route exact path="/HimachalPradesh"        component={HimachalPradesh }  />
                                             <Route exact path="/Jammu And Kashmir"        component={JammuKashmirLadakh }  />
                                             <Route exact path="/Jharkhand"        component={Jharkhand }  />
                                             <Route exact path="/Karnataka"        component={Karnataka }  />
                                             <Route exact path="/Kerala"        component={Kerala }  />
                                             {/*<Route exact path="/Lakshadweep"        component={Lakshadweep }  />*/}
-                                            <Route exact path="/Madhya Pradesh"        component={MadhyaPradesh }  />
+                                            <Route exact path="/MadhyaPradesh"        component={MadhyaPradesh }  />
                                             <Route exact path="/Maharashtra"        component={Maharashtra }  />                                                    
                                             <Route exact path="/Manipur"        component={Manipur }  />
                                             <Route exact path="/Meghalaya"        component={Meghalaya }  />
@@ -216,6 +217,7 @@ class Layout extends Component  {
                                             <Route exact path="/WestBengal"        component={WestBengal }  />
                                             <Route exact path="/TamilNadu"        component={TamilNadu }  />
                                             <Route exact path="/Telangana"        component={Telangana }  />
+                                            <Route exact path="/UttarPradesh"        component={UttarPradesh }  />
 
                                             <Route exact path="/Haryana"        component={Haryana }  />
                                             <Route exact path="/Rajasthan"        component={Rajasthan }  />

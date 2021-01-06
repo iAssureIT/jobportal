@@ -53,7 +53,7 @@ export default class Telangana extends Component{
 					</div>
 					<div className="nizamabad classHover"> 
 						<img src="/Maps/Telangana/Nizamabad.png"  alt="Nizamabad" 
-						 onMouseOver={e => (e.currentTarget.src = "/Maps/Telangana/Nizamabad.png")} 
+						 onMouseOver={e => (e.currentTarget.src = "/Maps/Telangana/Nizamabad_.png")} 
 						 onMouseOut={e => (e.currentTarget.src = "/Maps/Telangana/Nizamabad.png")}/>
 						<span className="nizamabadText mapTextLabel text-capitalize">Nizamabad</span>
 						<span className="nizamabadNumber mapCountLabel text-center">{this.search('nizamabad')}</span>
