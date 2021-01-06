@@ -81,15 +81,21 @@ exports.getSingleCandidate = (req,res,next)=>{
         },
         {$lookup:{
                    from: "qualificationlevelmasters",
-                   localField: "academics.qualificationLevel",
+                   localField: "academics.qualificationlevel_id",
                    foreignField: "_id",
-                   as: "qualificationlevel" } 
+                   as: "qualificationLevel" } 
          },   
          {$lookup:{
                    from: "qualificationmasters",
-                   localField: "academics.qualification",
+                   localField: "academics.qualification_id",
                    foreignField: "_id",
                    as: "qualification" } 
+         },
+         {$lookup:{
+                   from: "universitymasters",
+                   localField: "academics.university_id",
+                   foreignField: "_id",
+                   as: "university" } 
          }
          
          ])
@@ -156,6 +162,7 @@ function insertQualification(qualification, createdBy){
     });
 }
 function insertUniversity(university, createdBy){ 
+    console.log("university",university)
     return new Promise(function(resolve,reject){ 
         const universityMaster = new UniversityMaster({
                         _id                         : new mongoose.Types.ObjectId(),
@@ -335,20 +342,44 @@ exports.addCandidateAcademics = (req,res,next)=>{
 
     processData();
         async function processData(){
-            qualificationlevel_id   = req.body.qualificationlevel_id != "" ? req.body.qualificationlevel_id 
-                                : await insertQualificationLevel(req.body.qualificationLevel,req.body.user_id)
+            qualificationlevel_id   = req.body.academics.qualificationlevel_id != "" ? req.body.academics.qualificationlevel_id 
+                                : await insertQualificationLevel(req.body.academics.qualificationLevel,req.body.user_id)
             
-            qualification_id       = req.body.qualification_id != "" ? req.body.qualification_id 
-                                : await insertQualification(req.body.qualification,req.body.user_id)
+            qualification_id       = req.body.academics.qualification_id != "" ? req.body.academics.qualification_id 
+                                : await insertQualification(req.body.academics.qualification,req.body.user_id)
             
-            university_id          = req.body.university_id != "" ? req.body.university 
-                                : await insertUniversity(req.body.university,req.body.user_id)
+            university_id          = req.body.academics.university_id != "" ? req.body.academics.university_id 
+                                : await insertUniversity(req.body.academics.university,req.body.user_id)
             
+            var academics = {
+                                    //qualificationLevel   : this.state.qualificationLevel,
+                                    qualificationlevel_id: qualificationlevel_id,
+                                    //qualification        : this.state.qualification,
+                                    qualification_id     : qualification_id,
+                                    specialization       : req.body.academics.specialization,
+                                    collegeSchool        : req.body.academics.collegeSchool,
+                                    //university           : req.body.academics.university,
+                                    university_id        : req.body.academics.university_id,    
+                                    collegeSchool        : req.body.academics.collegeSchool,
+                                    area                 : req.body.academics.area,
+                                    city                 : req.body.academics.city,
+                                    district             : req.body.academics.district,
+                                    states               : req.body.academics.states,
+                                    country              : req.body.academics.country,
+                                    pincode              : req.body.academics.pincode,
+                                    stateCode            : req.body.academics.stateCode,
+                                    countryCode          : req.body.academics.countryCode,
+                                    grade                : req.body.academics.grade,
+                                    mode                 : req.body.academics.mode,
+                                    passOutYear          : req.body.academics.passOutYear,
+                                    admisionYear         : req.body.academics.admisionYear
+                                } 
 
+        console.log(academics)                        
     CandidateProfile.updateOne(
             { _id: req.body.candidate_id },  
             {
-                $push:  { 'academics' : req.body.academics }
+                $push:  { 'academics' :academics }
             }
         )
         .exec()

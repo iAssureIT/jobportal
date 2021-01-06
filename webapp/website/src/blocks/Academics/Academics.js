@@ -19,10 +19,11 @@ class Academics extends Component{
 			
 			candidate_id        : this.props.match.params.candidate_id,
 			academicsID         : this.props.match.params.academicsID,
+			academics  			: [],
 			qualificationLevel  : "",
             qualificationlevel_id    : "",
             qualificationLevellist   : [],
-            qualificationArray  : [],
+            qualificationLevelArray  : [],
 			qualification       : "",
             qualification_id    : "",
             qualificationlist   : [],
@@ -105,9 +106,8 @@ class Academics extends Component{
 		.then(response=>{
 			
 			 	this.setState({
-						qualificationArray:response.data[0].academics,
-						DegreeArray       :response.data[0].qualification,
-						classArray        :response.data[0].qualificationlevel
+						academics  				: response.data,
+						qualificationLevelArray : response.data[0].qualificationLevel
 			 	})
 			 	
 			 })
@@ -319,13 +319,13 @@ class Academics extends Component{
 									qualification        : this.state.qualification,
 									qualification_id     : this.state.qualification_id,
 									specialization       : this.state.specialization,
-									collegeSchool        : this.state.college,
 									university 		     : this.state.university,
 									university_id 		 : this.state.university_id,	
+									collegeSchool 		 : this.state.addressLine1,
 									area       			 : this.state.area,
 							        city       			 : this.state.city,
 							        district   			 : this.state.district,
-							        states     			 : this.state.state,
+							        states     			 : this.state.states,
 							        country    			 : this.state.country,
 							        pincode    			 : this.state.pincode,
 							        stateCode  			 : this.state.stateCode,
@@ -336,27 +336,27 @@ class Academics extends Component{
 									admisionYear         : this.state.admisionYear
 								}
 							}
+		console.log(formValues)						
 		if(this.props.match.params.academicsID){
 			this.updateData(formValues,event);
 		}else{
 			this.insetData(formValues,event);
 		}
-		this.getData();
+		
 	}
 	updateData(formValues,event){
 		var status =  this.validateForm();
 		if(status==true){
-					Axios.patch("/api/candidatemaster/patch/updateOneCandidateAcademics",formValues)
+			Axios.patch("/api/candidatemaster/patch/updateOneCandidateAcademics",formValues)
 				 .then(response=>{
 							Swal.fire("Congrats","Your Academics details update Successfully","success");
 								this.setState({
-											
 												qualificationLevel  : "",
 												qualification       : "",
 												specialization      : "",
 												college             : "",
 												university   		: "",
-												state               : "",
+												states              : "",
 												country	            : "",	
 												city                : "",
 												grade               : "",
@@ -364,7 +364,6 @@ class Academics extends Component{
 												passOutYear         : "",
 												admisionYear        : "",
 												buttonText         : "Save"
-											
 										})
 							this.props.history.push("/academics/"+this.state.candidate_id);
 					})
@@ -388,9 +387,9 @@ class Academics extends Component{
 											qualificationLevel  : "",
 											qualification       : "",
 											specialization      : "",
-											college             : "",
+											addressLine1        : "",
 											university   		: "",
-											state               : "",
+											states              : "",
 											country	            : "",	
 											city                : "",
 											grade               : "",
@@ -400,6 +399,7 @@ class Academics extends Component{
 											buttonText         : "Save"
 										
 									})
+						this.getData();
 							
 				})
 				.catch(error =>{
@@ -462,7 +462,7 @@ class Academics extends Component{
 			""; 
 			status = true;
 		}
-		if(this.state.state.length<=0){
+		if(this.state.states.length<=0){
 			document.getElementById("stateError").innerHTML=  
 			"Please enter your State";  
 			status=false; 
@@ -602,7 +602,9 @@ class Academics extends Component{
 									</select>
 								</div>
 							</div>
+						</div>
 
+						<div className="row formWrapper">
 							<div className="col-lg-4">
 								<label htmlFor="admisionYear" className="nameTitleForm">
 									Admission Year
@@ -619,11 +621,6 @@ class Academics extends Component{
 								</div> 
 								<span id="admisionYearError" className="errorMsg"></span>
 							</div>
-
-						</div>
-
-						<div className="row formWrapper">
-
 							<div className="col-lg-4">
 								<label htmlFor="passOutYear" className="nameTitleForm">
 									Pass-out-year
@@ -640,8 +637,9 @@ class Academics extends Component{
 								</div> 
 								<span id="passOutYearError" className="errorMsg"></span>
 							</div>
-
-							<div className="col-lg-4">
+						</div>	
+						<div className="row formWrapper">	
+							<div className="col-lg-6">
 								<label htmlFor="university" className="nameTitleForm">
 									University/Boards Name
 									<sup className="nameTitleFormStar">*</sup>
@@ -661,7 +659,7 @@ class Academics extends Component{
 								</div> 
 								<span id="universityError" className="errorMsg"></span>
 							</div>
-							<div className="col-lg-4">
+							<div className="col-lg-6">
 								<label htmlFor="college" className="nameTitleForm">
 									College/School Name<sup className="nameTitleFormStar">*</sup>
 								</label>
@@ -780,7 +778,7 @@ class Academics extends Component{
 									<span className="input-group-addon inputBoxIcon">
 										<i className="fa fa-map"></i>
 									</span> 
-									<input type="text" name="state" id="state" 
+									<input type="text" name="states" id="states" 
 									 className="form-control inputBox " 
 									 value={this.state.states} 
 									 onChange={this.handleChange.bind(this)} />
@@ -815,9 +813,12 @@ class Academics extends Component{
 						<div className=" AddressWrapper col-lg-12" >
 							 <div className="row">
 								{
-								this.state.qualificationArray.length > 0
+								this.state.academics.length > 0
 								?
-								this.state.qualificationArray.map((elem,index)=>{
+								this.state.academics[0].academics.map((elem,index)=>{
+									console.log(this.state.academics)
+									console.log(elem)
+
 									return(
 										<div className="col-lg-6 AddressOuterWrapper"  key={index}>
 											<div className="col-lg-12 addWrapper">
@@ -826,18 +827,23 @@ class Academics extends Component{
 														<div className="addLogoDiv">
 															<FontAwesomeIcon icon="graduation-cap" /> 
 														</div>
-
 														<div>
-															{
-																this.state.DegreeArray.map((elem1,index)=>{
-																	return(
-																		<div className="addLogoTextDiv" key={index}>
-																			{elem1.qualification}
-																			
-																		</div>
-																	);
-																})
+														<div className="">
+														{
+															this.state.qualificationLevelArray.map((elem1,index)=>{
+																return(
+																	<div className="addLogoTextDiv" key={index}>
+																		{elem1.qualificationLevel}<br/>
+																	</div>
+																);
+															})
+														}
+														</div>
+														
+														<div className="addLogoTextDiv" key={index}>
+															{//this.state.academics[0].qualification[index].qualification
 															}
+														</div>
 														</div>
 															
 														
@@ -845,57 +851,28 @@ class Academics extends Component{
 													<div className="col-lg-8 addRightWrapper">
 														<div className="row">
 														<div className="addRightText ">
-															<div>
-																{
-																	this.state.classArray.map((elem1,index)=>{
-																		return(
-																			<div className="AddressBoxText" key={index}>
-																				{elem1.qualificationLevel}
-																				
-																			</div>
-																		);
-																	})
+															<div className="AddressBoxText" key={index}>
+																{//this.state.academics[0].qualificationlevel[index].qualificationLevel
 																}
 															</div>
 															<div className="AddressBoxText">
 															{elem.specialization}
 															</div>
+															<div className="AddressBoxText" key={index}>
+																{elem.collegeSchool}
+															</div>
+															<div className="AddressBoxText">
+															{//this.state.academics[0].university[index].university
+															}
+															</div>
+															{/*<div className="AddressBoxText">
+																{elem.admisionYear} - {elem.passOutYear}
+															</div>
+															
 															<div className="AddressBoxText">
 																{elem.grade}
 															</div>
-															<div className="AddressBoxText">
-																{elem.mode}
-															</div>
-															<div className="AddressBoxText">
-																{elem.passOutYear}
-															</div>
-															<div className="AddressBoxText">
-																{elem.admisionYear}
-															</div>
-															<div>
-																{
-																	this.state.inputCollege.map((elem1,index)=>{
-																		return(
-																			<div className="AddressBoxText" key={index}>
-																				{elem1.collage}
-																				
-																			</div>
-																		);
-																	})
-																}
-															</div>
-															<div>
-																{
-																	this.state.inputUniversity.map((elem1,index)=>{
-																		return(
-																			<div className="AddressBoxText" key={index}>
-																				{elem1.university}
-																				
-																			</div>
-																		);
-																	})
-																}
-															</div>
+															
 															<div className="AddressBoxText">
 																{elem.state}
 															</div>
@@ -904,7 +881,7 @@ class Academics extends Component{
 															</div>
 															<div className="AddressBoxText">
 																{elem.cityVillage}
-															</div>
+															</div>*/}
 														</div>
 														<div className="col-lg-12">
 								                            <div className="addRightbtn">
