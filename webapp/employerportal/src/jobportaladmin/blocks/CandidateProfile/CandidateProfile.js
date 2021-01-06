@@ -14,7 +14,7 @@ class CandidateProfile extends Component{
 							<div className="row">
 								<div className="  col-lg-12">
 									<div className="col-lg-3">
-										
+										 
 											<LeftAside/>
 										
 									</div>
