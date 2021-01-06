@@ -66,7 +66,6 @@ import WestBengal from './maps/WestBengal/WestBengal.js';
 import TamilNadu from './maps/TamilNadu/TamilNadu.js';
 import Telangana from './maps/Telangana/Telangana.js';
 import UttarPradesh from './maps/UttarPradesh/UttarPradesh.js';
-<<<<<<< Updated upstream
 
 
 
