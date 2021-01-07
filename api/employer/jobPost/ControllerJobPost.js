@@ -643,7 +643,51 @@ exports.updateJob = (req,res,next)=>{
 					  	});
 	}
 }
+exports.jobCount = (req, res, next)=>{
+    //console.log("req.body - ", req.body);
+    var selector = {}; 
+    var industry_ids = [];
+    var funarea_ids = [];
 
+    selector['$and']=[];
+   
+    var countryCode = req.body.countryCode ? req.body.countryCode : "IN";
+    selector["$and"].push({ "location.countryCode" :  countryCode   })
+    
+    if (req.body.stateCode) {
+        selector["$and"].push({ "location.stateCode" :  req.body.stateCode   })
+    }
+    if (req.body.industry_id) {
+        req.body.industry_id.map(elem => {
+            industry_ids.push(ObjectID(elem.id))
+        })
+        selector["$and"].push({ "jobBasicInfo.industry_id" : { $in: industry_ids } });
+    }
+    if (req.body.functionalArea_id) {
+        req.body.functionalArea_id.map(elem => {
+            funarea_ids.push(ObjectID(elem.id))
+        })
+        selector["$and"].push({ "jobBasicInfo.functionalarea_id" : { $in: funarea_ids } });
+    }
+    console.log("count", JSON.stringify(selector))
+
+    Jobs.aggregate([
+        { $match    : selector },
+        { $count    : "jobCount" },
+    ])
+    
+    .exec()
+    .then(data=>{
+        //create states array
+        res.status(200).json(data);
+    })
+    .catch(err =>{
+        console.log(err.response)
+        res.status(500).json({
+            error: err
+        });
+    });
+}
 exports.mapwiseJobs = (req, res, next)=>{
 	//console.log("req.body - ", req.body);
 	var selector = {}; 
@@ -651,7 +695,8 @@ exports.mapwiseJobs = (req, res, next)=>{
     var funarea_ids = [];
 
     selector['$and']=[];
-    selector["$and"].push({ "location.countryCode" :  req.body.countryCode   })
+    var countryCode = req.body.countryCode ? req.body.countryCode : "IN";
+    selector["$and"].push({ "location.countryCode" :  countryCode   })
    	
 
     if (req.body.industry_id) {
@@ -666,7 +711,7 @@ exports.mapwiseJobs = (req, res, next)=>{
     	})
     	selector["$and"].push({ "jobBasicInfo.functionalarea_id" : { $in: funarea_ids } });
     }
-    //console.log(JSON.stringify(selector))
+    console.log(JSON.stringify(selector))
 
     Jobs.aggregate([
     	{ $match 	: selector },
@@ -694,7 +739,8 @@ exports.functonalAreaJobs = (req, res, next)=>{
     var funarea_ids = [];
 
     selector['$and']=[];
-    selector["$and"].push({ "location.countryCode" :  req.body.countryCode })
+    var countryCode = req.body.countryCode ? req.body.countryCode : "IN";
+    selector["$and"].push({ "location.countryCode" :  countryCode })
    	
     if (req.body.industry_id) {
     	req.body.industry_id.map(elem => {
@@ -737,7 +783,8 @@ exports.subfunctionalAreaJobs = (req, res, next)=>{
     var funarea_ids = [];
 
     selector['$and']=[];
-    selector["$and"].push({ "location.countryCode" :  req.body.countryCode })
+    var countryCode = req.body.countryCode ? req.body.countryCode : "IN";
+    selector["$and"].push({ "location.countryCode" :  countryCode })
    	
     console.log(JSON.stringify(selector))
 
@@ -780,7 +827,8 @@ exports.industrialJobs = (req, res, next)=>{
     var funarea_ids = [];
 
     selector['$and']=[];
-    selector["$and"].push({ "location.countryCode" :  req.body.countryCode })
+    var countryCode = req.body.countryCode ? req.body.countryCode : "IN";
+    selector["$and"].push({ "location.countryCode" :  countryCode })
    	
     console.log(JSON.stringify(selector))
 

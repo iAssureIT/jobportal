@@ -908,9 +908,7 @@ class JobPosting extends Component {
             subfunctionalarea_id = document.querySelector('#subFunctionalArea option[value="' + value + '"]').getAttribute("data-value")
         }else{ subfunctionalarea_id = "" }
 
-        this.setState({ subfunctionalarea_id : subfunctionalarea_id },()=>{
-            console.log(this.state)
-        });  
+        this.setState({ subfunctionalarea_id : subfunctionalarea_id });  
     }
 
     onChangeRole(event){

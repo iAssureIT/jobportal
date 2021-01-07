@@ -37,6 +37,7 @@ const initialState = {
 	viewMode 					: "mapView",
 	selector 					: {},
 	mapJobs 					: [],
+	jobCount 					: 0,
 	functionalJobs 				: [],
 	subfunctionalJobs 			: [],
 	industrialJobs 				: [],
@@ -74,15 +75,21 @@ const newState = {...state};
 	if(action.type === "GET_MAP_DATA"){
 		newState.mapJobs = action.mapJobs;
 	}
+	if(action.type === "GET_JOBCOUNT"){
+		newState.jobCount = action.jobCount;
+	}
 	if(action.type === "GET_FUNCTIONAL_DATA"){
 		newState.functionalJobs = action.functionalJobs;
 	}
+	
 	if(action.type === "GET_SUBFUNCTIONAL_DATA"){
 		newState.subfunctionalJobs = action.subfunctionalJobs;
 	}
+	
 	if(action.type === "GET_INDUSTRIAL_DATA"){
 		newState.industrialJobs = action.industrialJobs;
 	}
+	
 	if(action.type === "GET_JOB_LIST"){
 		newState.jobList = action.jobList;
 	}

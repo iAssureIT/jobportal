@@ -15,13 +15,18 @@ class MapHeader extends Component{
 	constructor(props){
 		super(props);
 		this.state={
-			showLoginModal: false,
-			asideDisplay  : "-600px",
-			
+			showLoginModal 		: false,
+			asideDisplay  		: "-600px",
+			//selector            : {},
 		}
-		this.handleOpenModal = this.handleOpenModal.bind(this);
+		this.handleOpenModal  = this.handleOpenModal.bind(this);
     	this.handleCloseModal = this.handleCloseModal.bind(this);
 	}
+	componentDidMount(){
+	    
+	    var {mapAction} = this.props;
+	    mapAction.jobCount(this.props.selector);
+  	}
 	handleOpenModal () {
 	    this.setState({ showModal: true });
 	  }
@@ -46,8 +51,7 @@ class MapHeader extends Component{
   	render(){
     
     const selectedState = this.props.selectedState;
-   	//console.log(this.props.selectedModal);
-
+   	//console.log(this.props.selector)
     return(
     <nav className="navbar FunctionalHeaderWrapper container-fluid">
 		<div className="iconHeader col-lg-1">
@@ -74,7 +78,7 @@ class MapHeader extends Component{
 						<div className="cityNameHeader">{selectedState && selectedState != "" ? selectedState : "India"}
 						</div>	
 
-						<div className="cityJobsHeader">10,680
+						<div className="cityJobsHeader">{this.props.jobCount[0] ? this.props.jobCount[0].jobCount : 0}
 						</div>			     		
 	     		
 	     			 </div>
@@ -151,9 +155,11 @@ class MapHeader extends Component{
 }
 
 const mapStateToProps = (state)=>{
+	//console.log(state)
     return {
-        selectedState  : state.selectedState,
-        selectedModal  : state.selectedModal
+        selectedState  : state.selectedState, selectedModal  : state.selectedModal,
+        selector       : state.selector,
+        jobCount       : state.jobCount
     }
 }
 const mapDispatchToProps = (dispatch) => ({

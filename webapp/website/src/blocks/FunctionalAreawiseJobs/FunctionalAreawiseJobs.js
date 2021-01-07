@@ -16,7 +16,6 @@ export default class FunctionalAreawiseJobs extends Component{
                             this.props.functionalJobs.length > 0
                             ?
                                 this.props.functionalJobs.map((elem,index)=>{
-                                    console.log("functionalJobselements",elem.functionalarea[0]);
                                     return(
                                         <div className="col-lg-3 AllJobsRow">
                                             <div className="col-lg-12 AllJobsBlock">

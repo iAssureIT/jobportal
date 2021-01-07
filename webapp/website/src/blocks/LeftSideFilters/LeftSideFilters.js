@@ -168,7 +168,7 @@ class LeftSideFilters extends Component{
     }
 
     this.setState({ selector: selector },()=>{
-
+        mapAction.jobCount(this.state.selector);
       if (this.props.viewMode=="mapView") {
         mapAction.filterMapData(this.state.selector);
       }

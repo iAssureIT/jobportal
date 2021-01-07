@@ -18,20 +18,17 @@ class HomePage extends Component {
     this.state={
       leftDrawerDisplay     : "-350px",
       arrowToggle           : false,
-      selector              : {},
+      //selector              : {},
       mapwiseJobs           : [],
       functonalAreaJobs     : [],
       subfunctonalAreaJobs  : [],    
     }
   }
   componentDidMount(){
-    var selector=this.state.selector;
-    selector.countryCode = "IN"; 
-
-    this.setState({ selector: selector })
-
+   
     var {mapAction} = this.props;
-    mapAction.filterMapData(selector);
+
+    mapAction.filterMapData(this.props.selector);
 
   }
   leftDrawerInfo(event){
@@ -54,21 +51,23 @@ class HomePage extends Component {
   changeViewMode(viewMode){
     var {mapAction} = this.props;
     mapAction.setViewMode(viewMode);
-
+    mapAction.jobCount(this.props.selector);
+    
     if (viewMode=="mapView") {
-      mapAction.filterMapData(this.state.selector);
+      mapAction.filterMapData(this.props.selector);
     }
     if (viewMode=="functionalView") {
-      mapAction.filterFunctionalData(this.state.selector);
+      mapAction.filterFunctionalData(this.props.selector);
     }
     if (viewMode=="subfunctionalView") {
-      mapAction.filterSubfunctionalData(this.state.selector);
+      mapAction.filterSubfunctionalData(this.props.selector);
     }
     if (viewMode=="industrialView") {
-      mapAction.filterIndustrialData(this.state.selector);
+      mapAction.filterIndustrialData(this.props.selector);
     }
   }
   render() {
+    console.log(this.props.selector)
     return (
       <div className="ViewBodyWrapper container-fluid">
         
@@ -136,6 +135,7 @@ class HomePage extends Component {
   }
 }
 const mapStateToProps = (state)=>{
+
     return {
         selector          : state.selector,
         mapJobs           : state.mapJobs,

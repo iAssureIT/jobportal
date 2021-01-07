@@ -18,7 +18,6 @@ export default class IndustrywiseJobs extends Component{
                             this.props.industrialJobs.length > 0
                             ?
                                 this.props.industrialJobs.map((elem,index)=>{
-                                    console.log("industrialJobselements",elem.industry[0]);
                                     return(
                                         <div className="col-lg-3 AllJobsRow">
                                             <div className="col-lg-12 AllJobsBlock">
