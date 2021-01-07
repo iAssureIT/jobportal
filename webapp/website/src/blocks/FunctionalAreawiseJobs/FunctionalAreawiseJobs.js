@@ -9,7 +9,7 @@ export default class FunctionalAreawiseJobs extends Component{
   render(){
 
     return(
-            <div className="row"> 
+            
                 <section className="col-lg-12 AllJobsWrapper">
                     <div className="row">
                         {
@@ -40,7 +40,7 @@ export default class FunctionalAreawiseJobs extends Component{
                         }
                     </div>                  
                 </section>
-            </div>
+           
         );
     }
 }

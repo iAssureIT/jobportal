@@ -11,7 +11,7 @@ export default class IndustrywiseJobs extends Component{
     
  
     return(
-            <div className="row"> 
+           
                 <section className="col-lg-12 AllJobsWrapper">
                     <div className="row">
                         {
@@ -42,7 +42,7 @@ export default class IndustrywiseJobs extends Component{
                         }
                     </div>                  
                 </section>
-            </div>
+            
         );
   }
 

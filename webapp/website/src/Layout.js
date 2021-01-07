@@ -74,6 +74,10 @@ import Rajasthan from './maps/Rajasthan/Rajasthan.js';
 import Uttarakhand from './maps/Uttarakhand/Uttarakhand.js';
 import Sikkim from './maps/Sikkim/Sikkim.js';
 import Assam from './maps/Assam/Assam.js';
+import Ladakh from './maps/Ladakh/Ladakh.js';
+
+
+
 
 
 
@@ -232,6 +236,7 @@ class Layout extends Component  {
                                             <Route exact path="/Uttarakhand"        component={Uttarakhand }  />
                                             <Route exact path="/Sikkim"        component={Sikkim}  />
                                             <Route exact path="/Assam"        component={Assam}  />
+                                            <Route exact path="/Ladakh"        component={Ladakh}  />
 
 
 
@@ -294,6 +299,7 @@ class Layout extends Component  {
                             <Route exact path="/Uttarakhand"        component={Uttarakhand }  />
                             <Route exact path="/Sikkim"        component={Sikkim}  />
                             <Route exact path="/Assam"        component={Assam}  />
+                            <Route exact path="/Ladakh"        component={Ladakh}  />
 
 
 

@@ -6,13 +6,29 @@
 }
 .mumbaiText{
 	position: absolute;
-	top: -22%;
-    left: -147%;
+	top: 10%;
+    left: -190%;
 }
 .mumbaiNumber{
 	position: absolute;
-	top: 70%;
-    left: -147%;
+	top: 50%;
+    left: -100%;
+}
+
+.thane{
+	position: absolute;
+	top: 334px;
+    left: 46px;
+}
+.thaneText{
+	position: absolute;
+	top: 45%;
+    left: 40%;
+}
+.thaneNumber{
+	position: absolute;
+	top: 65%;
+    left: 45%;
 }
 
 .raigad{

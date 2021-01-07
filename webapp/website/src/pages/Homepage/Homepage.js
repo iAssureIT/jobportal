@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import India from '../../maps/India/India.js';
+//import India from '../../maps/India/India.js';
+import MapComponent from '../../maps/MapComponent/MapComponent.js';
 import FunctionalAreawiseJobs from '../../blocks/FunctionalAreawiseJobs/FunctionalAreawiseJobs.js';
 import IndustrywiseJobs from '../../blocks/IndustrywiseJobs/IndustrywiseJobs.js';
 import LeftSideFilters from '../../blocks/LeftSideFilters/LeftSideFilters.js';
@@ -75,15 +76,17 @@ class HomePage extends Component {
 
             <div className="row">
               <div className="filterButton" onClick={this.leftDrawerInfo.bind(this)}>
+               
                 <i className="fa fa-filter filtersIcon" ></i>
                 <i className={this.state.arrowToggle ? "fa fa-arrow-left arrowIcon" : "fa fa-arrow-right arrowIcon"} 
                               value={this.state.arrowToggle}></i>
 
+                &nbsp; Filters              
               </div>
             </div>
           </div>
 
-          <div className="col-lg-3">
+          <div className=" col-lg-3">
             <div className='row'>
                 <div className="viewWrapper col-lg-4">
                   <div className='row'>
@@ -105,9 +108,9 @@ class HomePage extends Component {
                 </div>
 
                 <div className="filterWrapper col-lg-8" style={{left:this.state.leftDrawerDisplay}}>
-                  <div className='row'>
+                  
                     <LeftSideFilters />
-                  </div>
+                 
                 </div>
             </div>
           </div>
@@ -115,7 +118,7 @@ class HomePage extends Component {
           <div className="col-lg-9">
             <div className="tab-content">
               <div id="mapwise" className="tab-pane fade in active">
-                <India />
+                <MapComponent />
               </div>
 
               <div id="functionwise" className="tab-pane fade">

@@ -111,6 +111,14 @@ export default class Assam extends Component{
 						<span className="sonitpurNumber mapCountLabel text-center">{this.search('sonitpur')}</span>
 					</div>
 
+					<div className="biswanath classHover"> 
+						<img src="/Maps/Assam/Biswanath.png" alt="Biswanath" onMouseOver={e => (e.currentTarget.src = "/Maps/Assam/Biswanath_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Assam/Biswanath.png")}/>
+						<span className="biswanathText mapTextLabel text-capitalije">Biswanath</span>
+						<span className="biswanathNumber mapCountLabel text-center">{this.search('biswanath')}</span>
+					</div>
+
+					
+
 					<div className="nagaon classHover"> 
 						<img src="/Maps/Assam/Nagaon.png" alt="Nagaon" onMouseOver={e => (e.currentTarget.src = "/Maps/Assam/Nagaon_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Assam/Nagaon.png")}/>
 						<span className="nagaonText mapTextLabel text-capitalije">Nagaon</span>
@@ -119,14 +127,14 @@ export default class Assam extends Component{
 
 					<div className="karbi_anglong_west classHover"> 
 						<img src="/Maps/Assam/Karbi_Anglong_West.png" alt="Karbi_Anglong_West" onMouseOver={e => (e.currentTarget.src = "/Maps/Assam/Karbi_Anglong_West_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Assam/Karbi_Anglong_West.png")}/>
-						<span className="karbi_anglong_westText mapTextLabel text-capitalije">Karbi Anglong</span>
-						<span className="karbi_anglong_westNumber mapCountLabel text-center">{this.search('karbi anglong')}</span>
+						<span className="karbi_anglong_westText mapTextLabel text-capitalije">Karbi Anglong West</span>
+						<span className="karbi_anglong_westNumber mapCountLabel text-center">{this.search('karbi anglong west')}</span>
 					</div>
 
 					<div className="karbi_anglong_east classHover"> 
 						<img src="/Maps/Assam/Karbi_Anglong_East.png" alt="Karbi_Anglong_East" onMouseOver={e => (e.currentTarget.src = "/Maps/Assam/Karbi_Anglong_East_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Assam/Karbi_Anglong_East.png")}/>
-						<span className="karbi_anglong_eastText mapTextLabel text-capitalije">Karbi Anglong</span>
-						<span className="karbi_anglong_eastNumber mapCountLabel text-center">{this.search('karbi anglong')}</span>
+						<span className="karbi_anglong_eastText mapTextLabel text-capitalije">Karbi Anglong East</span>
+						<span className="karbi_anglong_eastNumber mapCountLabel text-center">{this.search('karbi anglong east')}</span>
 					</div>
 
 					<div className="golaghat classHover"> 
@@ -194,6 +202,20 @@ export default class Assam extends Component{
 						<span className="karimganjText mapTextLabel text-capitalije">Karimganj</span>
 						<span className="karimganjNumber mapCountLabel text-center">{this.search('karimganj')}</span>
 					</div>
+
+					<div className="majuli classHover"> 
+						<img src="/Maps/Assam/Majuli.png" alt="Majuli" onMouseOver={e => (e.currentTarget.src = "/Maps/Assam/Majuli_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Assam/Majuli.png")}/>
+						<span className="majuliText mapTextLabel text-capitalije">Majuli</span>
+						<span className="majuliNumber mapCountLabel text-center">{this.search('majuli')}</span>
+					</div>
+
+					<div className="hojai classHover"> 
+						<img src="/Maps/Assam/Hojai.png" alt="v" onMouseOver={e => (e.currentTarget.src = "/Maps/Assam/Hojai_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Assam/Hojai.png")}/>
+						<span className="hojaiText mapTextLabel text-capitalije">Hojai</span>
+						<span className="hojaiNumber mapCountLabel text-center">{this.search('hojai')}</span>
+					</div>
+
+
 
 				</div>
 			</div>
