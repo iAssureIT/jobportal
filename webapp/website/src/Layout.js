@@ -79,10 +79,6 @@ import Ladakh from './maps/Ladakh/Ladakh.js';
 
 
 
-
-
-
-
 import Homepage from './pages/Homepage/Homepage.js'
 
 class Layout extends Component  {
@@ -237,11 +233,13 @@ class Layout extends Component  {
 
 
 
+
                                             <Route exact path="/Haryana"        component={Haryana }  />
                                             <Route exact path="/Rajasthan"        component={Rajasthan }  />
                                             <Route exact path="/Uttarakhand"        component={Uttarakhand }  />
                                             <Route exact path="/Sikkim"        component={Sikkim}  />
                                             <Route exact path="/Assam"        component={Assam}  />
+
 
 
 
