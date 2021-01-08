@@ -41,16 +41,17 @@ export default class CandidateApplyJoblist extends Component {
           <div className="filterDiv col-lg-12">
 
             <div className="row">
-              <div className="filterButton" onClick={this.leftDrawerInfo.bind(this)}>
+              <div className="filterButton col-lg-1" onClick={this.leftDrawerInfo.bind(this)}>
                 <i className="fa fa-filter filtersIcon" ></i>
                 <i className={this.state.arrowToggle ? "fa fa-arrow-left arrowIcon" : "fa fa-arrow-right arrowIcon"} 
                               value={this.state.arrowToggle}></i>
 
+                 Filters             
               </div>
             </div>
           </div>
 
-          <div className="col-lg-3">
+          <div className=" col-lg-3">
             <div className='row'>
                 <div className="viewWrapper col-lg-4">
                   <div className='row'>

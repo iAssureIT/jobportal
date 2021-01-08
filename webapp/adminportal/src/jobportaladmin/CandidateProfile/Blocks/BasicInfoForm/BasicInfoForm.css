@@ -20,7 +20,7 @@
 	height: auto;
 	width: 100%;
 	color: var(--main-txt-color);
-	background:var(--main-bg-color)!important;
+	/*background:var(--main-bg-color)!important;*/
 }
 
 .nameTitleForm{

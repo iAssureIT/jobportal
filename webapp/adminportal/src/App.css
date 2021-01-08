@@ -1,9 +1,31 @@
 :root {
-  --main-font-color: #444;
+  /*--main-font-color: #444;
   --border-color: #555;
   --main-admin-text-color: #555;
   --main-admin-bg-color: #EEE;
-  --main-blue-bg-color: #3C8DBC;
+  --main-blue-bg-color: #3C8DBC;*/
+
+
+
+  --admin-main-bg-color                   : #fff;
+ /* --admin-header-bg-color                 : #191c24;
+  --admin-footer-bg-color                 : #191c24;*/
+  --admin-input-bg-color                  : #3c8dbc;
+
+  --admin-main-txt-color                  : #555;
+  --admin-active-txt-color                : #fff;
+
+  --admin-main-heading-font-color         : #444;
+  /*--admin-main-subheading-font-color      : #444;*/
+  /*--admin-main-white-subheading-font-color: #f5a721;*/
+
+  --admin-form-field-background-color     : #fff;
+
+  /*--admin-header-border-color             : #4b5666;*/
+  --admin-main-border-color               : #ccc;
+  --admin-icon-border-color               : #444;
+
+  --admin-button-color                    : #fff;
 }
 
 @font-face{
@@ -420,7 +442,7 @@ margin-right: 12px;
 margin-top: 20px;
 }
 .fa{
-cursor: pointer;
+/*cursor: pointer;*/
 }
 
 /* .swal-title {
@@ -569,16 +591,16 @@ padding-top: 12px;
   padding-bottom:10px;
 }
 .input-group-addon {
-    padding: 9px 12px !important;
+    /*padding: 9px 12px !important;
     font-size: 14px;
     font-weight: 400;
     color: #555;
     text-align: center;
     background-color: #eee;
-    border: 1px solid #ccc !important;
+    border: 1px solid #ccc !important;*/
     /* border-top: 1px solid #ccc !important;
     border-bottom: 1px solid #ccc !important; */
-    cursor: pointer;
+    /*cursor: pointer;*/
 }
 .button3:focus{
     outline: none !important;

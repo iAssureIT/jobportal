@@ -1,5 +1,5 @@
 .addJobForm{
-	margin-top: 50px;
+	margin-top: 100px;
 	min-height: 500px;
 	height: auto;
 	padding-bottom: 50px;
@@ -7,90 +7,133 @@
 }
 
 .addJobBackgroundColor{
-	background-color: var(--main-bg-color);	
+	background-color: var(--admin-main-bg-color);	
 }
 
 .addJobBorderColor{
-	border-color: var(--main-border-color); 
+	border-color: var(--admin-main-border-color); 
 }
 
 .addJobHeadingColor{
-	color: var(--main-heading-color); 
-}
-
-.buttonYellow{
-	background-color: #3C8DBC;
-	color: #fff;
-	height: 30px;
-	line-height: 15px;
-	border:1px solid #3C8DBC ;
-}
-
-.buttonYellow:hover{
-	background-color: #fff;
-	color: #3C8DBC !important;
-	
+	color: var(--admin-main-heading-font-color); 
 }
 
 .addJobWrapperBorder{
-	border: 3px solid var(--main-border-color);
+	border: 3px solid var(--admin-main-border-color);
 	border-radius: 10px;
-	background-color: var(--form-field-background-color);
+	background-color: var(--admin-form-field-background-color);
 }
 
 .addJobFormHeading{
 	margin-top: 25px;
-	font-size: 25px;
+	font-size: 27px;
 	/*font-weight: bold;*/
-	color: var(--main-admin-text-color);
-	font-family: 'Montserrat-SemiBold'; 
+	color: var(--admin-main-heading-font-color);
+	font-family: 'Montserrat-SemiBold';
 }
 
 .addJobFormHr{
-	border-top: 1px solid var(--main-border-color);
+	border-top: 1px solid var(--admin-main-border-color);
 	margin-top: 18px;
 	margin-bottom: 18px;
 }
 
 .addJobMainHead{
 	font-size: 21px;
-	font-weight: bold;
-	color: var(--main-admin-text-color);
+	color: var(--admin-main-heading-font-color);
 	font-family: 'Montserrat-SemiBold'; 
 }
 
 .addJobMainHead i{
-	color: var(--main-admin-text-color);
-	border: 1px solid var(--border-color);
-	padding: 1px 7px;
+	color: var(--admin-main-txt-color);
+	border: 1px solid var(--admin-icon-border-color);
+	padding-top: 3px;
+	padding-left: 6px;
+	padding-right: 6px;
 	font-size: 18px;
 	border-radius: 6px;
 }
 
+.addJobMainHead .addcompLeftPadding{
+	padding-left: 12px;
+	margin-top: -28px;
+}
+
 .addJobMainHead .labelLeftPadding{
-	padding-left: 10px;
+	padding-left: 39px;
+	margin-top: -28px;
 }
 
 .addJobSubHead{
 	font-size: 21px;
-	font-weight: bold;
-	color: var(--main-admin-text-color);
+	/*font-weight: bold;*/
+	color: var(--admin-main-heading-font-color);
 	font-family: 'Montserrat-SemiBold';
 }
 
 .addJobSubHead i{
-	color: var(--main-admin-text-color);
+	color: var(--admin-main-txt-color);
 	font-size: 25px;
 	margin-top: 18px;
 }
 
 .addJobSubHead .labelLeftPadding{
-	padding-left: 10px;
+	padding-left: 40px;
+	margin-top: -32px;
+}
+
+.addJobSubHeadSalary .labelLeftPadding{
+	padding-left: 40px;
+	margin-top: -30px;
+}
+
+.addJobSubHeadSkills .labelLeftPadding{
+	padding-left: 40px;
+	margin-top: -32px;
+}
+
+/***********************************************************Geolocation Css Properties************************************************/
+
+.location-search-input{
+	padding: 0 !important;
+	padding-left: 10px !important;
+	background-color: var(--admin-form-field-background-color);
+	border: none;
+	height: 30px;
+	margin-top: -5px;
+	margin-left: -12px;
+	width: 102%;
+}
+
+.autocomplete-dropdown-container{
+  margin-top: 1px;
+  border-left: 1px solid var(--admin-main-border-color);
+  border-bottom: 1px solid var(--admin-main-border-color);
+  border-right: 1px solid var(--admin-main-border-color);
+  background-color: var(--admin-form-field-background-color);
+  margin-left: -12px;
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  /*border: 1px solid var(--main-border-color);*/
+}
+
+.location-search-input,
+.location-search-input:focus,
+.location-search-input:active {
+  outline: none;
+}
+
+.addJobFixzIndex{
+	z-index: 1;
 }
 
 .addJobState{
 	border-radius: 4px !important;
 }
+
+/*********************************************************End Of Geolocation Css Properties******************************************/
 
 .jobDesc{
 	margin-top: 20px;
@@ -99,7 +142,7 @@
 }
 
 .mainFormSection{
-	border: 3px solid var(--main-border-color);
+	border: 3px solid var(--admin-main-border-color);
 	padding-bottom: 40px;
 	border-radius: 10px;
 	padding-left: 25px;
@@ -109,19 +152,18 @@
 .addjobformLable{
 	font-family: 'Montserrat-Medium';
 	font-size: 13px; 
-	font-weight: 100;
-	color: var(--main-txt-color);
+	color: var(--admin-main-txt-color);
 	letter-spacing: 1px;
 }
 
-.addJobFieldRow {
+.addJobFieldRow{
     margin-top: 15px;
 }
 
-.addJobFormField {
-    border: 1px solid var(--main-border-color);
-    background-color: var(--form-field-background-color);
-    color: var(--main-txt-color);
+.addJobFormField{
+    border: 1px solid var(--admin-main-border-color);
+    background-color: var(--admin-form-field-background-color);
+    color: var(--admin-main-txt-color);
 }
 
 .input-group .form-control:not(:first-child):not(:last-child), .input-group-addon:not(:first-child):not(:last-child), .input-group-btn:not(:first-child):not(:last-child) {
@@ -129,35 +171,28 @@
     border-top-right-radius: 4px;
 }
 
-.input-group .form-control:last-child{
-	border-bottom-right-radius: 4px !important;
-    border-top-right-radius: 4px !important;
-}
-
 .input-group .form-control:first-child{
-	height: 34px;
-    padding-left: 10px;
-	border: 1px solid var(--main-border-color);
-	border-radius: 4px;
-    background-color: var(--form-field-background-color);
-    color: var(--main-txt-color);
+	border-bottom-right-radius: 4px;
+    border-top-right-radius: 4px;
+    border-bottom-left-radius: 0px;
+    border-top-left-radius: 0px;
 }
 
 .addJobFieldRow .minSalaryDropdown{
-	border-radius: 4px !important;
+	margin-left: 2px;
 }
 
 .addJobFieldRow .maxSalaryDropdown{
-	border-radius: 4px !important;
+	margin-left: 2px;
 }
 
 .addJobFormField:hover{
-	color: var(--main-txt-color);
+	color: var(--admin-main-txt-color);
 }
 
 .form-control:focus{
-	border-color: rgba(211,149,10,0.8);
-	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(211, 149, 10, 0.6);
+	border-color: rgba(60, 141, 188,0.8);
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(60, 141, 188, 0.6);
 }
 
 .addJobLocationIcon{
@@ -166,21 +201,22 @@
 
 .addJobSubHead .salaryIcon{
 	font-size: 17px;
-	border: 1px solid var(--border-color);
+	border: 1px solid var(--admin-icon-border-color);
 	border-radius: 50%;
-	padding-left: 7px;
-	padding-right: 7px;
-	padding-top: 2px;
-	padding-bottom: 3px;
+	padding-left: 8px;
+	padding-right: 8px;
+	padding-top: 5px;
+	padding-bottom: 2px;
 }
 
 .addJobrupee{
 	font-size: 11px;
 	padding-left: 4px;
 	padding-right: 4px;
-	padding-top: 2px;
+	padding-top: 3px;
+	padding-bottom: 1px;
 	border-radius: 50%;
-	border: 1px solid var(--border-color);
+	border: 1px solid var(--admin-icon-border-color);
 }
 
 /*********************************Custom Gender Field Properties********************************/
@@ -188,13 +224,12 @@
 .addJobGenderTitle{
 	font-family: 'Montserrat-Medium';
 	font-size: 13px;
-	font-weight: 100 !important;
-	color: var(--main-txt-color);
+	color: var(--admin-main-txt-color);
 }
 
 .addJobGenderFeildWrapper{
 	height: 32px;
-	border: 1px solid var(--main-border-color) !important;
+	border: 1px solid var(--admin-main-border-color)!important;
 	width: 100%;
 	border-radius: 5px;
 }
@@ -203,13 +238,13 @@
 	height: 32px;
 	border-radius: 5px;
 	font-size: 12px;
-	color: #555;
-	font-weight: 100 !important;
+	color: var(--admin-main-txt-color);
+	/*font-weight: 100 !important;*/
 	padding-top: 8px;
 	text-align:center;
 	margin-top: 1px;
 	margin-bottom: 1px;
-	background-color: var(--input-bg-color);
+	/*background-color: var(--admin-main-border-color);*/
 }
 
 .addJobGenderField:hover{
@@ -217,9 +252,55 @@
 }
 
 .addJobGenderActive{
-	background-color: var(--main-blue-bg-color);
-    transition: all 2s;
-    color: #fff;
+	background-color: var(--admin-input-bg-color);
+	color: var(--admin-active-txt-color);
+	height: 32px;
+	transition: all 0.7s;
+}
+
+.buttonYellow{
+	background-color: var(--admin-input-bg-color);
+	border: 1px solid var(--admin-input-bg-color);
+	color: var(--admin-button-color);
+	height: 30px;
+	line-height: 15px;
+}
+
+.addJobPreviewBtn{
+	height: 40px;
+	width: 150px;
+	margin-top: 40px;
+	margin-right: 30px;
+	margin-left: 110px;
+	color: #fff;
+	font-family: 'Montserrat-SemiBold';
+}
+
+.addJobSubmitBtn{
+	height: 40px;
+	width: 150px;
+	margin-top: 40px;
+	font-family: 'Montserrat-SemiBold';
+}
+
+.addJobSubmitBtn:hover{
+	background-color: var(--admin-button-color);
+	border: 1px solid var(--admin-icon-border-color);
+	color: var(--admin-main-txt-color);	 
+	transition: all 500ms ease; 
+}
+
+.errorMsgJobPost{
+	/*color: #d93025;*/
+	/*color: var(--main-border-color);*/
+	color: red;
+	font-family: 'Montserrat-Regular';
+	font-size: 13px;
+}
+
+.asterisk{
+	content: "\002A";
+	color: #c73030;
 }
 
 /***********************************End of Custom Gender Field Properties**************************/
@@ -230,14 +311,14 @@
 	/*width: 255px !important;*/
 	border-radius: 4px !important;
 	background-color: var(--form-field-background-color) !important;
-	border: 1px solid #3C8DBC !important;
-	color: var(--main-txt-color) !important;
+	border: 1px solid var(--main-border-color) !important;
+	color: var(--admin-main-txt-color) !important;
 }
 
 .react-tel-input .flag-dropdown{
 	background-color: var(--main-bg-color) !important;
 	border: 1px solid var(--main-border-color) !important;
-	color: #fff !important;
+	color: var(--admin-main-txt-color) !important;
 	z-index: 100 !important;
 }
 
@@ -282,40 +363,41 @@
 }
 
 .react-tel-input .country-list .country .dial-code{
-	color: var(--main-txt-color) !important;
+	color: var(--admin-main-txt-color) !important;
 }
 .react-autosuggest__suggestions-container--open{
 	top:34px;
 	width: 100%;
 }
-/********************************End Of React Phone Input Properties*******************************/
+/**********************************************End Of React Phone Input Properties*********************************************/
 
-/*************************************HTML Date Input Properties***********************************/
+/***************************************************HTML Date Input Properties*************************************************/
  
 ::-webkit-calendar-picker-indicator {
     filter: invert(1);
 }
 
-.picker__box .picker__header .picker__date-display .picker__weekday-display {
+/*.picker__box .picker__header .picker__date-display .picker__weekday-display {
 	background-color: red !important;
-}
+}*/
 
-/***********************************End of HTML Date Input Properties*******************************/
+/************************************************End of HTML Date Input Properties*********************************************/
 
-/********************************************Custom Checkbox****************************************/
+/********************************************************Custom Checkbox*******************************************************/
 
 .containerWfh{
 	display: block;
     position: relative;
     padding-left: 30px;
     margin-top: 8px;
+    padding-top: 2px;
     font-size: 13px;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    font-weight: normal;
-    color: var(--main-txt-color);
+    /*font-weight: normal;*/
+    color: var(--admin-main-txt-color);
     font-family: 'Montserrat-Regular';
     /*background-color: red;*/
 }
@@ -336,15 +418,16 @@
 	width: 21px;
 	border-radius: 3px;
 	cursor: pointer;
-	border: 2px solid var(--main-border-color); 
+	border: 2px solid var(--admin-main-border-color); 
 }
   
 .containerWfh:hover input ~ .checkmark2{
 	background-color: transparent;
 }
-  
+
 .containerWfh input:checked ~ .checkmark2{
-	background-color:#3C8DBC;	
+	background-color: var(--admin-input-bg-color);
+	border: 2px solid var(--admin-input-bg-color);
 }
   
 .checkmark2:after {
@@ -369,92 +452,7 @@
 	transform: rotate(45deg);
  }
 
-/***************************End Of Custom Checkbox Properties***************************************/
-
-/*****************************Select Dropdown custom classes************************************/
-
-/*select{
-	border: 1px solid var(--main-border-color);
-    background-color: transparent;
-    color: var(--main-txt-color);
-}
-
-option{
-	border: 1px solid var(--main-border-color);
-    background-color: var(--main-bg-color);
-    color: var(--main-txt-color);
-}
-
-option:hover{
-	background-color: var(--main-border-color) !important;
-}*/
-
-/**************************************End of Select Dropdown custom classes**********************************/
-
-/************************************React multiselect Dropdown custom classes********************************/
-
-/*.optionContainer{
-	background-color: var(--main-bg-color);
-	white-space: nowrap; 
- 	overflow: hidden;
- 	text-overflow: ellipsis;
- 	border: 1px solid var(--main-border-color) !important;
-}
-
-.optionContainer li:hover,
-.optionContainer .highlight{
-	background-color: var(--main-border-color);
-	color: var(--main-txt-color);
-}
-
-._7ahQImyV4dj0EpcNOjnwA{
-	background-color: var(--main-border-color) !important;
-}
-
-.optionContainer .highlight{
-	background-color: var(--main-bg-color) !important;
-}
-
-.optionContainer li:hover {
-    background-color: var(--main-border-color) !important;
-}
-
-._2iA8p44d0WZ-WqRBGcAuEV{
-	border-radius: 0px !important;
-	border-bottom-right-radius: 4px !important;
-    border-top-right-radius: 4px !important;
-}*/
-
-/***********************************End Of React Multiselect Dropdown Properties**********************************/
-
-.addJobPreviewBtn{
-	height: 40px;
-	width: 150px;
-	margin-top: 40px;
-	margin-right: 30px;
-	margin-left: 110px;
-	color: #fff;
-}
-
-.addJobSubmitBtn{
-	height: 40px;
-	width: 150px;
-	margin-top: 40px;
-}
-
-.addJobSubmitBtn:hover{
-	color: var(--main-txt-color);
-}
-
-.errorMsgJobPost{
-	color: red;
-	font-size: 12px;
-}
-
-.asterisk{
-	content: "\002A";
-	color: #c73030;
-}
+/***************************************End Of Custom Checkbox Properties******************************************/
 
 /*********************************************Properties Of Ckeditor***********************************************/
 
@@ -473,7 +471,7 @@ option:hover{
 
     /* -- Overrides generic colors. ------------------------------------------------------------- */
 
-    --ck-color-base-foreground: #3C8DBC;
+    --ck-color-base-foreground: var(--ck-custom-background);
     --ck-color-focus-border: hsl(208, 90%, 62%);
     --ck-color-text: hsl(0, 0%, 98%);
     --ck-color-shadow-drop: hsla(0, 0%, 0%, 0.2);
@@ -481,11 +479,11 @@ option:hover{
 
     /* -- Overrides the default .ck-button class colors. ---------------------------------------- */
 
-    --ck-color-button-default-background: #3C8DBC;
-    --ck-color-button-default-hover-background: /*hsl(270, 1%, 22%);*/ var(--main-border-color) !important;
+    --ck-color-button-default-background: var(--ck-custom-background);
+    --ck-color-button-default-hover-background: /*hsl(270, 1%, 22%);*/ var(--admin-main-border-color) !important;
     --ck-color-button-default-active-background: hsl(270, 2%, 20%);
     --ck-color-button-default-active-shadow: hsl(270, 2%, 23%);
-    --ck-color-button-default-disabled-background: #3C8DBC;
+    --ck-color-button-default-disabled-background: var(--ck-custom-background);
 
     /*--ck-color-button-on-background: var(--ck-custom-foreground);
     --ck-color-button-on-hover-background: hsl(255, 4%, 16%);
@@ -505,7 +503,7 @@ option:hover{
 
     /* -- Overrides the default .ck-dropdown class colors. -------------------------------------- */
 
-    --ck-color-dropdown-panel-background: #3C8DBC;
+    --ck-color-dropdown-panel-background: var(--ck-custom-background);
     --ck-color-dropdown-panel-border: var(--ck-custom-foreground);
 
     /* -- Overrides the default .ck-splitbutton class colors. ----------------------------------- */
@@ -524,21 +522,21 @@ option:hover{
 
     /* -- Overrides the default .ck-list class colors. ------------------------------------------ */
 
-    --ck-color-list-background: #3C8DBC;
+    --ck-color-list-background: var(--ck-custom-background);
     --ck-color-list-button-hover-background: var(--ck-color-base-foreground);
     --ck-color-list-button-on-background: var(--ck-color-base-active);
     --ck-color-list-button-on-background-focus: var(--ck-color-base-active-focus);
-    --ck-color-list-button-on-text: #3C8DBC;
+    --ck-color-list-button-on-text: var(--ck-color-base-background);
 
     /* -- Overrides the default .ck-balloon-panel class colors. --------------------------------- */
 
-    --ck-color-panel-background:#3C8DBC;
+    --ck-color-panel-background: var(--ck-custom-background);
     --ck-color-panel-border: var(--ck-custom-border);
 
     /* -- Overrides the default .ck-toolbar class colors. --------------------------------------- */
 
-    --ck-color-toolbar-background: var(--main-bg-color);
-    --ck-color-toolbar-border: var(--main-border-color);
+    --ck-color-toolbar-background: var(--admin-main-bg-color);
+    --ck-color-toolbar-border: var(--admin-main-border-color);
 
     /* -- Overrides the default .ck-tooltip class colors. --------------------------------------- */
 
@@ -567,105 +565,90 @@ option:hover{
 }
 
 .ck-rounded-corners .ck.ck-button{
-	background-color: var(--main-bg-color);
+	background-color: var(--admin-main-bg-color);
 }
 
 .ck-content{
-	color: var(--main-txt-color) !important;
+	color: var(--admin-main-txt-color) !important;
 }
 
-.ck.ck-editor__main>.ck-editor__editable{
-	background-color: var(--form-field-background-color) !important;
+.ck.ck-editor__main>.ck-editor__editable {
+	background-color: var(--admin-form-field-background-color) !important;
 	border: 1px solid var(--main-border-color) !important;
 	height: 370px;
 }
 
-.ck-rounded-corners .ck.ck-editor__top .ck-sticky-panel .ck-toolbar, .ck.ck-editor__top .ck-sticky-panel .ck-toolbar.ck-rounded-corners{
-	background-color: var(--form-field-background-color) !important;
+.ck-rounded-corners .ck.ck-editor__top .ck-sticky-panel .ck-toolbar, .ck.ck-editor__top .ck-sticky-panel .ck-toolbar.ck-rounded-corners {
+	background-color: var(--admin-form-field-background-color) !important;
 }
 
 /*.ck.ck-dropdown.ck-heading-dropdown .ck-dropdown__button .ck-button__label{
 	background-color: var(--form-field-background-color) !important;
 }*/
 
-.ck.ck-dropdown .ck-button.ck-dropdown__button.ck-on{
-	background-color: var(--ck-color-dropdown-panel-background) !important;
+.ck.ck-dropdown.ck-heading-dropdown .ck-dropdown__button .ck-button__label {
+	color: var(--admin-main-txt-color);
+}
+
+.ck.ck-dropdown .ck-button.ck-dropdown__button.ck-on {
+	background-color: var(--form-field-background-color) !important;
 }
 
 .ck.ck-list__item .ck-button.ck-on{
 	background-color: var(--main-border-color) !important
 }
 
-.ck .ck-insert-table-dropdown-grid-box.ck-on{
-	border-color: var(--main-border-color) !important;
-	background-color: var(--form-field-background-color) !important;
+.ck .ck-insert-table-dropdown-grid-box.ck-on {
+	border-color: var(--admin-icon-border-color) !important;
+	background-color: var(--admin-form-field-background-color) !important;
 }
 
-.ck .ck-insert-table-dropdown__grid{
-	background-color: #444 !important;
+.ck .ck-insert-table-dropdown__grid {
+	background-color: var(--admin-main-bg-color) !important;
 }
 
-.ck.ck-media-form{
-	background-color: #444 !important;
+.ck.ck-media-form {
+	background-color: var(--admin-main-bg-color) !important;
 }
 
-.ck.ck-link-form{
-	background-color: #444 !important;
+.ck.ck-link-form {
+	background-color: var(--admin-main-bg-color) !important;
 	border: none !important;
-} 
-
-/********************************************End Of Ckeditor Properties*******************************************/
-
-/***********************************************Properties Of Tooltip*********************************************/
-
-/*.tooltip {
-  position: relative;
-  display: inline-block;
-  border-bottom: 1px dotted black;
 }
 
-.tooltip .tooltiptext {
-  visibility: hidden;
-  width: 120px;
-  background-color: black;
-  color: #fff;
-  text-align: center;
-  border-radius: 6px;
-  padding: 5px 0;
-  position: absolute;
-  z-index: 1;
-  bottom: 150%;
-  left: 50%;
-  margin-left: -60px;
+.ck.ck-icon, .ck.ck-icon * {
+	color: var(--admin-main-txt-color);
 }
 
-.tooltip .tooltiptext::after {
-  content: "";
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  margin-left: -5px;
-  border-width: 5px;
-  border-style: solid;
-  border-color: black transparent;
+.ck.ck-button.ck-disabled {
+	background-color: var(--admin-main-border-color);
 }
 
-.tooltip:hover .tooltiptext {
-  visibility: visible;
+.ck.ck-list__item .ck-button .ck-button__label{
+	color: var(--admin-main-txt-color);
 }
-*/
 
-/**********************************************End Of Tooltip Properties********************************************/
+.ck.ck-list__item .ck-button .ck-button__label:hover{
+	color: var(--admin-active-txt-color);
+}
 
-/********************************************Properties Of React Tag Input******************************************/
+.ck.ck-dropdown__panel{
+	background-color: var(--admin-main-bg-color);
+}
+
+.ck .ck-insert-table-dropdown__label {
+	color: var(--admin-main-txt-color);
+}
+
+/********************************************Properties Of ReactTags******************************************/
 
 div.ReactTags__tags {
     position: relative;
     border-bottom-right-radius: 4px;
     border-top-right-radius: 4px;
-    border: 1px solid var(--main-border-color);
-    background-color: var(--form-field-background-color);
-    padding-bottom: 1px;
+    border: 1px solid var(--admin-main-border-color);
+    background-color: var(--admin-form-field-background-color);
+    /*padding-bottom: 1px;*/
 }
 
 div.ReactTags__tagInput {
@@ -675,44 +658,51 @@ div.ReactTags__tagInput {
 
 .ReactTags__tagInputField{
 	/*border: 1px solid var(--main-border-color) !important;*/
-	background-color: var(--form-field-background-color) !important;
+	background-color: var(--admin-form-field-background-color) !important;
 }
 
 div.ReactTags__tagInput input.ReactTags__tagInputField,
 div.ReactTags__tagInput input.ReactTags__tagInputField:focus {
-    height: 31px;
+    height: 34px;
     margin-left: 5px;
     color: #fff;
     font-size: 12px;
     border: none;
     width: 100%;
     padding: 0 4px;
-    background-color: var(--main-bg-color);
+    background-color: var(--admin-main-bg-color);
+    outline: none;
 }
 
 /* Styles for selected tags */
 div.ReactTags__selected span.ReactTags__tag {
-    background: #eee;
+    background: #888;
     font-size: 12px;
     display: inline-block;
     margin-top: 2px;
     padding-left: 5px;
     padding-right: 5px;
     padding-top: 2px;
-    padding-bottom: 1px;
+    padding-bottom: 2px;
     margin: 0 5px;
     cursor: move;
-    border-radius: 10px;
+    border-radius: 100px;
+    margin-top: 5px;
+    color: var(--admin-main-bg-color);
 }
 
 div.ReactTags__selected a.ReactTags__remove {
     color: #fff;
-    border-radius: 100%;
     padding-left: 3px;
     padding-right: 3px;
-    background-color: var(--main-bg-color);
     margin-left: 5px;
     cursor: pointer;
+}
+
+.ReactTags__remove{
+	border-radius: 25px;
+	color: var(--admin-main-txt-color);
+	background-color: var(--admin-main-bg-color);
 }
 
 /* Styles for suggestions */
@@ -720,7 +710,7 @@ div.ReactTags__suggestions {
 	margin-left: 5px;
     position: absolute;
     z-index: 100 !important;
-    background-color: var(--main-bg-color);
+    background-color: var(--admin-main-bg-color);
 }
 
 div.ReactTags__suggestions ul {
@@ -729,8 +719,8 @@ div.ReactTags__suggestions ul {
     box-shadow: .05em .01em .5em rgba(0,0,0,.2);
     margin-top: 3px;
     /*background-color: var(--main-bg-color);*/
-    border: 1px solid var(--main-border-color);
-    color: #fff !important;
+    border: 1px solid var(--admin-main-border-color);
+    color: var(--admin-main-txt-color) !important;
     border-radius: 4px;
     padding-top: 5px !important;
     padding-bottom: 5px !important;
@@ -746,31 +736,43 @@ div.ReactTags__suggestions li {
 div.ReactTags__suggestions li mark {
     text-decoration: underline;
     background: none;
-    font-weight: 600;
+    font-family: 'Montserrat-SemiBold';
     /*color: #fff !important;*/
-    color: var(--main-border-color) !important;
+    color: var(--admin-main-txt-color) !important;
 }
 
 div.ReactTags__suggestions ul li.ReactTags__activeSuggestion {
     cursor: pointer;
-    background-color: var(--main-bg-color) !important;
-    color: #fff !important;
+    background-color: var(--admin-main-bg-color) !important;
+    color: var(--admin-main-txt-color) !important;
     /*background-color: var(--main-border-color) !important;*/
 }
 
-input::placeholder{
-	color: #ccc !important;
+input:focus {
+    outline-offset: 0px !important;
+}
+
+user agent stylesheet:focus {
+    outline: -webkit-focus-ring-color auto 0px !important;
 }
 
 .primarySkillsField{
 	z-index: 3 !important;
 }
 
+/*****************************************************End Of ReactTags Properties****************************************************/
 
-/******************************************End Of React Tag Input Properties******************************************/
+/*********************************************************HTML Custom Classes********************************************************/
 
-.form-control:focus{
-	/*box-shadow: inset 0 1px 1px rgba(176, 238, 176,.075) !important;*/
-border-color: #fff;
-	box-shadow: 0px 1px 1px rgba(60,141,188, 0.075) inset, 0px 0px 8px rgba(60,141,188, 0.5)  !important;
+input::placeholder{
+	color: #ccc !important;
+}
+
+[list]::-webkit-calendar-picker-indicator {
+  display: none;
+}
+
+::selection {
+  color: #fff;
+  background-color: var(--admin-main-border-color);
 }

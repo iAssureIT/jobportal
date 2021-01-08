@@ -10,6 +10,7 @@
 .leftSideMain{
 	height: 1359px;
 	border: 1px solid var(--main-border-color);
+	background-color: var(--form-field-background-color);
 	padding-bottom: 100px;
 }
 
@@ -19,8 +20,8 @@
 }
 
 .leftImgContainer{
-	height: 215px;
-	/*background-color: red;*/
+	height: 214px;
+	background-color: var(--form-field-background-color);
 }
 
 .leftImgContainer .imgbox{
@@ -42,8 +43,8 @@
 }
 
 .imgContent{
-	height: 215px;
-	/*background-color: maroon;*/
+	height: 214px;
+	background-color: var(--form-field-background-color);
 }
 
 .imgContent .contentHead{
@@ -51,23 +52,29 @@
 	font-weight: bold;
 	padding-top: 60px;
 	margin-left: -52px;
-	color: var(--main-subheading-font-color);
-	font-family: 'Montserrat-SemiBold';
+	color: var(--blue-color);
+	/*font-family: 'Montserrat-SemiBold';*/
+	font-weight: 600;
 }
 
 .imgContent .subContentHead{
 	margin-top: -3px;
 	margin-left: -52px;
 	font-size: 18px;
-	font-family: 'Montserrat-SemiBold'
+	/*font-family: 'Montserrat-SemiBold';*/
+	font-weight: 600;
 }
 
 .imgContent .locationinfo{
 	padding-top: 1px;
 	margin-left: -52px;
 	font-size: 14px;
-	font-family: 'Montserrat-Regular';
+	/*font-family: 'Montserrat-Regular';*/
+	font-weight: 400;
 	color: var(--main-txt-color);
+	white-space: nowrap !important;
+	text-overflow: ellipsis !important;
+  	overflow: hidden !important;
 }
 
 .jobProfileMain{ 
@@ -89,6 +96,7 @@
 
 .jobDescContent{
 	margin-left: -37px;
+	/*text-align: justify;*/
 }
 
 /*******************************Content Wrapper One********************************/
@@ -114,11 +122,12 @@
 .contentWrapper1 .profileheading{
 	position: absolute;
 	font-size: 21px;
-	font-weight: bold;
+	/*font-weight: bold;*/
 	margin-top: 35px;
 	margin-left: 40px;
-	color: #3C8DBC;
-	font-family: 'Montserrat-SemiBold';
+	color: var(--main-subheading-font-color);
+	/*font-family: 'Montserrat-SemiBold';*/
+	font-weight: 600;
 }
 
 .contentWrapper1 .profileSubContainer{
@@ -139,7 +148,8 @@
 }
 
 .contentWrapper1 .profileContent{
-	font-family: 'Montserrat-Regular';
+	/*font-family: 'Montserrat-Regular';*/
+	font-weight: 400;
 }
 
 .contentWrapper1 .diamondBullet:before{
@@ -149,7 +159,7 @@
 	left: -18px;
 	font-size: 16px;
 	font-weight: bold;
-	color: #3C8DBC;
+	color: var(--main-subheading-font-color);
 }
 
 /*****************************End of Content Wrapper One**********************************/
@@ -168,7 +178,7 @@
 	/*min-height: 100px;*/
 	border-left: 2px solid var(--main-border-color);
 	padding-bottom: 20px;
-	padding-top: 10px;
+	padding-top: 20px;
 	padding-left: 35px;
 	/*background-color: green;*/
 } 
@@ -177,10 +187,11 @@
 	position: absolute;
 	font-size: 21px;
 	font-weight: bold;
-	color: #3C8DBC;;
-	margin-top: -5px;
+	color: var(--main-subheading-font-color);
+	margin-top: -3px;
 	margin-left: 40px;
-	font-family: 'Montserrat-SemiBold';
+	/*font-family: 'Montserrat-SemiBold';*/
+	font-weight: 600;
 }
 
 .contentWrapper2 .profileSubContainer{
@@ -200,7 +211,8 @@
 }
 
 .contentWrapper2 .profileContent{
-	font-family: 'Montserrat-Regular';
+	/*font-family: 'Montserrat-Regular';*/
+	font-weight: 400;
 }
 
 .contentWrapper2 .diamondBullet:before{
@@ -210,20 +222,22 @@
 	left: -18px;
 	font-size: 16px;
 	font-weight: bold;
-	color: #3C8DBC;
+	color: var(--main-subheading-font-color);
 }
 
 .contentWrapper2 .eduSubtitle{
-	font-family: 'Montserrat-SemiBold';
+	/*font-family: 'Montserrat-SemiBold';*/
+	font-weight: 600;
 }
 
 .contentWrapper2 .eduDuration{
-	font-family: 'Montserrat-Regular';
+	/*font-family: 'Montserrat-Regular';*/
+	font-weight: 400;
 }
 
 .profileContent li:before{
 	content: "\25C6";
-    font-weight: bold;
+    /*font-weight: bold;*/
     padding-right: 6px;
     margin-left: -15px;	
 }
@@ -256,10 +270,11 @@
 	position: absolute;
 	font-size: 21px;
 	font-weight: bold;
-	color: #3C8DBC;
-	margin-top: -5px;
+	color: var(--main-subheading-font-color);
+	margin-top: -2px;
 	margin-left: 40px;
-	font-family: 'Montserrat-SemiBold';
+	/*font-family: 'Montserrat-SemiBold';*/
+	font-weight: 600;
 }
 
 .contentWrapper3 .profileSubContainer{
@@ -270,7 +285,7 @@
 }
 
 .contentWrapper3 .horizontalRightLine{
-	height: 2px;
+	height: 3px;
 	position: absolute;
 	margin-top: 12px;
 	margin-left: 12px;
@@ -279,7 +294,8 @@
 }
 
 .contentWrapper3 .profileContent{
-	font-family: 'Montserrat-Regular';
+	/*font-family: 'Montserrat-Regular';*/
+	font-weight: 400;
 }
 
 .contentWrapper3 .diamondBullet:before{
@@ -289,20 +305,23 @@
 	left: -18px;
 	font-size: 16px;
 	font-weight: bold;
-	color: #3C8DBC;
+	color: var(--main-subheading-font-color);
 }
 
 .contentWrapper3 .eduSubtitle{
-	font-family: 'Montserrat-SemiBold';
+	/*font-family: 'Montserrat-SemiBold';*/
+	font-weight: 600;
 }
 
 .contentWrapper3 .eduDuration{
-	font-family: 'Montserrat-Regular';
+	/*font-family: 'Montserrat-Regular';*/
+	font-weight: 400;
 }
 
 .profileContent li:before{
 	content: "\25C6";
-    font-weight: bold;
+    /*font-weight: bold;*/
+    font-weight: 600;
     padding-right: 6px;
     margin-left: -15px;	
 }
@@ -328,20 +347,24 @@
 .skillsHeadOne{
 	/*background-color: maroon;*/
 	margin-left: 6px;
+	font-weight: 600;
 }
 
 .skillsHeadOne .skillsTitle{
 	font-size: 15px;
-	font-family: 'Montserrat-SemiBold';
-	color: #3C8DBC;
+	/*font-family: 'Montserrat-SemiBold';*/
+	font-weight: 600;
+	color: var(--main-subheading-font-color);
 }
 
 .skillsHeadOne .skillSubtitle{
-	font-family: 'Montserrat-SemiBold';
+	/*font-family: 'Montserrat-SemiBold';*/
+	font-weight: 600;
 }
 
 .skillsHeadOne .skillDuration{
-	font-family: 'Montserrat-Regular';
+	/*font-family: 'Montserrat-Regular';*/
+	font-weight: 400;
 }
 
 .skillsHeadOne li:nth-child(2){
@@ -350,59 +373,68 @@
 }
 
 .skillsHeadTwo{
-	margin-top: 10px;
+	margin-top: 28px;
 	margin-left: 6px;
+	font-weight: 600;
 	/*background-color: gray;*/
 }
 
 .skillsHeadTwo .skillsTitle{
 	font-size: 15px;
-	font-family: 'Montserrat-SemiBold';
-	color: #3C8DBC;
+	/*font-family: 'Montserrat-SemiBold';*/
+	font-weight: 600;
+	color: var(--main-subheading-font-color);
 }
 
 .skillsHeadTwo .skillSubtitle{
-	font-family: 'Montserrat-SemiBold';
+	/*font-family: 'Montserrat-SemiBold';*/
+	font-weight: 600;
 }
 
 .skillsHeadTwo .skillDuration{
-	font-family: 'Montserrat-Regular';
+	/*font-family: 'Montserrat-Regular';*/
+	font-weight: 400;
 }
 
 .skillsHeadTwo li:nth-child(2){
-	margin-top: 62px;
+	margin-top: 43px;
 	/*background-color: red;*/
 }
 
 .skillsHeadThree{
 	margin-left: 6px;
-	margin-top: 10px;
+	margin-top: 28px;
+	font-weight: 600;
 	/*background-color: red;*/
 }
 
 .skillsHeadThree .skillsTitle{
 	font-size: 15px;
-	font-family: 'Montserrat-SemiBold';
-	color: #3C8DBC;
+	/*font-family: 'Montserrat-SemiBold';*/
+	font-weight: 600;
+	color: var(--main-subheading-font-color);
 }
 
 .skillsHeadThree .skillSubtitle{
-	font-family: 'Montserrat-SemiBold';
+	/*font-family: 'Montserrat-SemiBold';*/
+	font-weight: 600;
 }
 
 .skillsHeadThree .skillDuration{
-	font-family: 'Montserrat-Regular';
+	/*font-family: 'Montserrat-Regular';*/
+	font-weight: 400;
 }
 
 .skillsHeadThree li:nth-child(2){
-	margin-top: 62px;
+	margin-top: 43px;
 	/*background-color: red;*/
 }
 
 .skillsHeadFour{
 	margin-left: 6px;
-	margin-top: 10px;
-	font-family: 'Montserrat-SemiBold';
+	margin-top: 28px;
+	/*font-family: 'Montserrat-SemiBold';*/
+	font-weight: 600;
 	/*background-color: red;*/
 }
 
@@ -411,14 +443,15 @@
 }
 
 .skillsHeadFour .skillsTitle{
-	color: #3C8DBC;
+	color: var(--main-subheading-font-color);
 }
 
 .skillsList{
 	/*background-color: brown;*/
 	margin-top: 22px;
 	position: absolute;
-	font-family: 'Montserrat-Regular';
+	/*font-family: 'Montserrat-Regular';*/
+	font-weight: 400;
 }
 
 .buttonMain{
@@ -450,29 +483,32 @@
 /**************************Right Aside Bar******************************/
 
 .rightSideMain{
-	height: auto;
+	height: 1359px;
 	padding-bottom: 40px;
 	border: 1px solid var(--main-border-color);
+	background-color: var(--form-field-background-color);
 }
 
 .rightSideHeader{
 	height: 215px;
 	border-bottom: 1px solid var(--main-border-color);
+	background-color: var(--form-field-background-color);
 }
 
 .mapImg{
 	height: 175px;
 	margin-top: 20px;
-	margin-left: 50px;
+	margin-left: 35px;
 }
 
 .rightContentHead{
 	font-size: 28px;
 	font-weight: bold;
-	color: #3C8DBC;
+	color: var(--main-subheading-font-color);
 	padding-top: 30px;
 	padding-left: 22px;
-	font-family: 'Montserrat-SemiBold';
+	/*font-family: 'Montserrat-SemiBold';*/
+	font-weight: 600;
 }
 
 .rightSideTitle{
@@ -480,14 +516,16 @@
 	font-weight: bold;
 	padding-left: 25px;
 	padding-top: 7px;
-	color: #3C8DBC;
-	font-family: 'Montserrat-SemiBold';
+	color: var(--main-subheading-font-color);
+	/*font-family: 'Montserrat-SemiBold';*/
+	font-weight: 600;
 }
 
 .rightSideSub{
 	padding-left: 25px;
 	padding-top: 2px;
-	font-family: 'Montserrat-Regular';
+	/*font-family: 'Montserrat-Regular';*/
+	font-weight: 400;
 }
 
 .rightSideImg{

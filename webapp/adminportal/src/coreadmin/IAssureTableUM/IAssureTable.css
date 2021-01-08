@@ -74,7 +74,7 @@
   background-color: #eee!important;
 }
 .input-group-addon {
-  padding: 9px 12px!important;
+  /*padding: 9px 12px!important;
   font-size: 14px;
   font-weight: 400;
   color: #555;
@@ -83,7 +83,7 @@
   border-right: 1px solid #ccc!important;
   border-top: 1px solid #ccc!important;
   border-bottom: 1px solid #ccc!important;
-  cursor: pointer;
+  cursor: pointer;*/
 } 
 .input_status {
   background-color: var(--white-background)!important;

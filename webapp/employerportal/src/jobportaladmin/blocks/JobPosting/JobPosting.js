@@ -908,9 +908,7 @@ class JobPosting extends Component {
             subfunctionalarea_id = document.querySelector('#subFunctionalArea option[value="' + value + '"]').getAttribute("data-value")
         }else{ subfunctionalarea_id = "" }
 
-        this.setState({ subfunctionalarea_id : subfunctionalarea_id },()=>{
-            console.log(this.state)
-        });  
+        this.setState({ subfunctionalarea_id : subfunctionalarea_id });  
     }
 
     onChangeRole(event){
@@ -1260,7 +1258,7 @@ render(){
 										<div className="row">
 											<div className="col-lg-4">
 												<div className="row">
-													<label htmlFor="positions" className="addjobformLable col-lg-12"> No. Of Positions </label>
+													<label htmlFor="positions" className="addjobformLable col-lg-12"> No. of Positions </label>
 												</div>
 												<div className="input-group">
 													<span className="input-group-addon addJobFormField"><i className="fa fa-users"></i></span> 

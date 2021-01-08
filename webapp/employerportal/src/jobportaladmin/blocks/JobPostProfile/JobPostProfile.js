@@ -204,7 +204,7 @@ export default class JobPostProfile extends Component{
 														{this.state.jobTitle}
 													</div>
 													<div className="subContentHead">
-														<b>{this.state.employerName}</b>
+														{this.state.employerName}
 													</div>
 													<div className="locationinfo">
 														{this.state.address}
@@ -282,7 +282,7 @@ export default class JobPostProfile extends Component{
 																			{
 																				this.state.primarySkillTags.map((skill,index)=>{
 																					return (
-																							<div>{skill.text }</div>
+																							<div>{skill.text}</div>
 																							
 																						)
 																				})
@@ -316,7 +316,7 @@ export default class JobPostProfile extends Component{
 																				{
 																					this.state.secondarySkillTags.map((skill,index)=>{
 																						return (
-																								<div>{skill.text }</div>
+																								<div>{skill.text}</div>
 																								
 																							)
 																					})
@@ -351,7 +351,7 @@ export default class JobPostProfile extends Component{
 																				{
 																					this.state.otherSkillTags.map((skill,index)=>{
 																						return (
-																								<div>{skill.text }</div>
+																								<div>{skill.text}</div>
 																								
 																							)
 																					})
@@ -383,7 +383,7 @@ export default class JobPostProfile extends Component{
 																				{
 																					this.state.preferredSkillTags.map((skill,index)=>{
 																						return (
-																								<div>{skill.text }</div>
+																								<div>{skill.text}</div>
 																								
 																							)
 																					})

@@ -1,6 +1,8 @@
 import React, {Component} 		from 'react';
 import Axios 					from  'axios';
 import Swal  					from  'sweetalert2';
+import Moment 					from "moment";
+import { FontAwesomeIcon } 		from '@fortawesome/react-fontawesome';
 import { connect }        		from 'react-redux';
 import { bindActionCreators } 	from 'redux';
 import  * as mapActionCreator 	from '../../Common/actions/index';
@@ -36,9 +38,9 @@ deleteJob = (event)=>{
 			if(job_id){
 				Axios.delete("/api/jobs/delete/"+job_id)
 				.then(response =>{
-					console.log()
 					if(response.data.message==="Job details deleted Successfully!"){
-						this.getJobsData();
+						var {mapAction} = this.props;
+						mapAction.filterJobList(this.state.selector);
 
 						Swal.fire(
 									'Deleted!',
@@ -80,6 +82,7 @@ deleteJob = (event)=>{
 							this.props.jobList
 							?
 								this.props.jobList.map((elem,index)=>{
+									console.log(elem);
 									return(
 										<div className="col-lg-12">
 											<div className="jobListContainer">
@@ -87,12 +90,17 @@ deleteJob = (event)=>{
 													<div className="col-lg-11 jobListLeftContent">
 														<div className="row">
 															<div className="iconsBar">
-																<ul>	
-																	<li><i className="fa fa-male"></i></li>
-																	<li><i className="fa fa-sun-o"></i></li>
-																	<li><i className="fa fa-clock-o"></i></li>
+																<ul>
+																	{
+																		elem.jobBasicInfo.gender=="Male Only"?
+																		<li><i className="fa fa-male"></i></li>
+																		:
+																		<li><i className="fa fa-female"></i></li>
+																	}	
+																	<li><i className="fa fa-sun-o sunIcon"></i></li>
+																	<li><i className="fa fa-clock-o clockIcon"></i></li>
 																</ul>
-																<div className="infoLog"> 15 Days Ago </div>
+																<div className="infoLog"> {Moment(elem.createdAt).startOf('seconds').fromNow()}  </div>
 															</div>
 														</div>
 														<div className="jobListDesignation">

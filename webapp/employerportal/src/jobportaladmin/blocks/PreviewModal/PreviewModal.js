@@ -35,7 +35,7 @@ export default class PreviewModal extends Component{
                                           {this.props.jobInfo.jobTitle}
                                         </div>
                                         <div className="modalSubContentHead">
-                                          <b>{this.props.jobInfo.employerName}</b>
+                                          {this.props.jobInfo.employerName}
                                         </div>
                                         <div className="modalLocationinfo">
                                           {this.props.jobInfo.address}
@@ -197,7 +197,7 @@ export default class PreviewModal extends Component{
                                               <div className="row">
                                                 <ul className="modalSkillsHeadFour">
                                                   <div className="row">
-                                                    <li className="col-lg-6">
+                                                    <li className="col-lg-7">
                                                       <span className="skillsTitle">
                                                         Preferred Skills but not mandatory
                                                       </span>
@@ -313,7 +313,7 @@ export default class PreviewModal extends Component{
                     </div>
                     <div className="modal-footer">
                       <button type="button" className="modalbtn" data-dismiss="modal">
-                        close
+                        Close
                       </button> 
                     </div>
                   </div>

@@ -15,32 +15,37 @@ class Candidatelist extends Component{
 		super(props);
 		
 		this.state={
-			dataArry           : [],
-			skillsArry         : [],
-			jobInfo 		   : [], 	
-			candidateSelector  : { "jobID" :  this.props.jobID },
-			view 			   : 'Grid',
-			RecordsTable 	   : [],
-			tableHeading 	: {
-	            name 	: "Name",
-	            gender 	: "Gender",
-	            contactDetails: "Contact Details",
-	            address: "Address",
-	            academics: "Academics",
-	            workExperience : "Work Experience"
-	          },
-	          tableObjects 	: {
-	          paginationApply : false,
-	          searchApply     : false,
-	          //editUrl         : '/'+this.props.entity+'/basic-details',
-	          //deleteMethod    : 'delete',
-        	  apiLink         : '/api/entitymaster/',
-	          downloadApply   : true
-	      },
-	      startRange        : 0,
-      	  limitRange        : 100000,
+			dataArry            : 	[],
+			skillsArry          : 	[],
+			jobInfo 		    : 	[], 	
+			candidateSelector   : 	{ "jobID" :  this.props.jobID },
+			view 			    : 	'Grid',
+			RecordsTable 	    : 	[],
+			tableHeading 	    : 	{
+						            	name 	: "Name",
+						            	gender 	: "Gender",
+						            	contactDetails: "Contact Details",
+						            	address: "Address",
+						            	academics: "Academics",
+						            	workExperience : "Work Experience"
+	          					 	},
+			tableObjects 	    : 	{
+										paginationApply     : 	false,
+										searchApply     	: 	false,
+										//editUrl          	: 	'/'+this.props.entity+'/basic-details',
+										//deleteMethod    	: 	'delete',
+										apiLink         	: 	'/api/entitymaster/',
+										downloadApply   	: 	true
+	      							},
+			startRange        	: 	0,
+			limitRange          : 	100000,
+
+      	  /*candidate_id        : 	this.props.match.params.candidate_id,*/
+			dataArry            : 	[],
+			skillsArry          : 	[],
  		}
 	}
+	
 	
 	componentDidMount(){
 		console.log(this.props);
@@ -55,7 +60,21 @@ class Candidatelist extends Component{
 		.catch(err=>{
 
 		})
+
+		/*Axios.get("/api/candidatemaster/get/one/"+this.state.candidate_id)
+		.then(response=>{
+			 
+			 	this.setState({
+
+			 		dataArry     :response.data,
+			 		skillsArry   :response.data[0].skillCertification
+			 	})
+			 })
+			 .catch(error=>{
+			 	Swal.fire("Submit Error!",error.message,'error');
+			 })*/
 	}
+	
 	getData(){
 		var tableData = this.props.candidateList.map((a, i)=>{
 			console.log(a)
@@ -80,6 +99,7 @@ class Candidatelist extends Component{
       	})
 		this.setState({RecordsTable:tableData,initial: 'All'})
 	}
+	
 	showView(value,event){
 		$('.viewBtn').removeClass('gridBtnActive');
         $(event.target).addClass('gridBtnActive');
@@ -88,7 +108,6 @@ class Candidatelist extends Component{
     	})
     }
 	
-
 	render(){
 		return(	
 				<div className="candidateListWrapperMain">
@@ -102,7 +121,7 @@ class Candidatelist extends Component{
 												{this.state.jobInfo[0] ? this.state.jobInfo[0].jobBasicInfo.jobTitle : null}
 											</div>
 											<div className="joblistCompanyName">
-												<b>{this.state.jobInfo[0] ? this.state.jobInfo[0].employer[0].companyName : null}</b>
+												{this.state.jobInfo[0] ? this.state.jobInfo[0].employer[0].companyName : null}
 											</div>
 											<div> 
 												<i className="fa fa-calendar joblistExperience"></i> &nbsp; Exp: {this.state.jobInfo[0] ? this.state.jobInfo[0].eligibility.minExperience : null}
@@ -132,20 +151,16 @@ class Candidatelist extends Component{
 					{this.state.view === 'List' ?
 					
 								 	<div className="col-lg-12"> 
-			 							<div className="iAssureITTable"> 
 			 							<IAssureTable
-                                                tableHeading={this.state.tableHeading}
-						                       	dataCount={this.state.entityCount}
-						                       	tableData={this.state.RecordsTable}
-						                       	tableObjects={this.state.tableObjects}
-						                       	getData={this.getData.bind(this)}
-						                       	id={"id"}
-						                       	tableName={this.state.entityType}
-						                       	
-                                            />
-			 							</div>
+                                                tableHeading	=	{this.state.tableHeading}
+						                       	dataCount		=	{this.state.entityCount}
+						                       	tableData		=	{this.state.RecordsTable}
+						                       	tableObjects	=	{this.state.tableObjects}
+						                       	getData			=	{this.getData.bind(this)}
+						                       	id 				=	{"id"}
+						                       	tableName 		=	{this.state.entityType}
+                                        />
 			                       	</div>
-								 
 									:
 									<div className="col-lg-12">
 										
@@ -172,7 +187,7 @@ class Candidatelist extends Component{
 																		<div className="row">
 																			<div className="displayCandidateName">
 																				{/*{elem.candidate[0].basicInfo.firstName}*/}
-																				<a href={"/candidate-profile/"}> Akshaya </a>
+																				<a href={"/candidate-profile/"}> Mishel </a>
 																				<span className="candidateIdNumber">(1234)</span>
 																			</div>
 																			<div className=" candidatePosts">
@@ -204,7 +219,7 @@ class Candidatelist extends Component{
 															<div className="col-lg-12 candidateSkillsBlocks">
 																<div className="">
 																	<div className="skillsHeading">	
-																		Primary skllis
+																		Primary skills
 																	</div>
 																	<div className=" marginForSkillHeading">
 																		<div className=" skillsSubHeadingWrapper">	
@@ -229,7 +244,7 @@ class Candidatelist extends Component{
 																</div>
 																<div className="skillsHeadingBlock">
 																	<div className="skillsHeading">	
-																		Secondary skllis
+																		Secondary skills
 																	</div>
 																	<div className=" skillsSubHeadingWrapper">	
 																		{
@@ -269,14 +284,14 @@ class Candidatelist extends Component{
 														<div className="row profileSymbols">
 															<img src="/images/48.png" alt="Profile Logo"/>
 														</div>
-														<div className="row exlIcon">
+														<div className="row profileExlIcon">
 															<i className="fa fa-file-excel-o" title="Download as excel file" aria-hidden="true"></i>
 														</div>
 													</div>	
 												</div>
 												<div className="row">
 													<div className="col-lg-12 salaryBlockWrapper">
-														<div className="row salaryBlockHeading col-lg-10 col-lg-offset-1">
+														<div className="salaryBlockHeading">
 															Current Offers : &nbsp;<span className="salrayBlockSubHeading"> 2 View</span>
 														</div>
 														<div className="expectSalaryBlock">
@@ -319,8 +334,6 @@ class Candidatelist extends Component{
 											this.props.candidateList
 											? 	
 											this.props.candidateList.map((elem,index)=>{
-
-
 												return(
 														<div className="col-lg-4 " key={index}>
 															<div>
@@ -338,7 +351,7 @@ class Candidatelist extends Component{
 																						<div className="col-lg-7 displayInfoCandidate">
 																							<div className="row">
 																								<div className="displayCandidateName">
-																									{elem.candidate[0].basicInfo.firstName}
+																										<a href={"/candidate-profile/"}> {elem.candidate[0].basicInfo.firstName} </a>
 																									<span className="candidateIdNumber">(1234)</span>
 																								</div>
 																								<div className=" candidatePosts">
@@ -357,10 +370,10 @@ class Candidatelist extends Component{
 																										</div>
 																									</div>
 																									<div className=" Col-lg-11 postNameWrapper">
-																										{/*<div className="postName">{elem.candidate[0].workExperience[index] ? elem.candidate[0].workExperience[index].lastDegn : null}</div> 
+																										<div className="postName">{elem.candidate[0].workExperience[index] ? elem.candidate[0].workExperience[index].lastDegn : null}</div> 
 																										<div className="postName">{elem.candidate[0].workExperience[index] ? elem.candidate[0].workExperience[index].department : null} </div>
 																										<div className="postName"></div>
-																										<div className="postName">{elem.candidate[0].workExperience[index] ? elem.candidate[0].workExperience[index].city : null} </div>*/}
+																										<div className="postName">{elem.candidate[0].workExperience[index] ? elem.candidate[0].workExperience[index].city : null} </div>
 																									</div>
 																								</div>
 																							</div>
@@ -370,7 +383,7 @@ class Candidatelist extends Component{
 																				<div className="col-lg-12 candidateSkillsBlocks">
 																					<div className="">
 																						<div className="skillsHeading">	
-																							Primary skllis
+																							Primary skills
 																						</div>
 																						<div className=" marginForSkillHeading">
 																							<div className=" skillsSubHeadingWrapper">	
@@ -379,7 +392,7 @@ class Candidatelist extends Component{
 																									?
 																									this.state.skillsArry.map((elem,index)=>{
 																										return(
-																												<div className="col-lg-6 " key={index}>
+																												<div className="col-lg-6" key={index}>
 																													<div className="row skillsSubHeading">
 																														<i className="fa fa-square rotate45 listRoatate45" ></i>
 																															{elem.primarySkills[index]}
@@ -395,7 +408,7 @@ class Candidatelist extends Component{
 																					</div>
 																					<div className="skillsHeadingBlock">
 																						<div className="skillsHeading">	
-																							Secondary skllis
+																							Secondary skills
 																						</div>
 																						<div className=" skillsSubHeadingWrapper">	
 																							{
@@ -403,7 +416,7 @@ class Candidatelist extends Component{
 																								?
 																								this.state.skillsArry.map((elem,index)=>{
 																									return(
-																											<div className="col-lg-6 " key={index}>
+																											<div className="col-lg-6" key={index}>
 																												<div className="row skillsSubHeading">
 																													<i className="fa fa-square rotate45 listRoatate45" ></i>
 																														{elem.secondarySkills[index]}
@@ -435,14 +448,14 @@ class Candidatelist extends Component{
 																			<div className="row profileSymbols">
 																				<img src="/images/48.png" alt="Profile Logo"/>
 																			</div>
-																			<div className="row exlIcon">
+																			<div className="row profileExlIcon">
 																				<i className="fa fa-file-excel-o" title="Download as excel file" aria-hidden="true"></i>
 																			</div>
 																		</div>	
 																	</div>
 																	<div className="row">
 																		<div className="col-lg-12 salaryBlockWrapper">
-																			<div className="row salaryBlockHeading">
+																			<div className="salaryBlockHeading">
 																				Current Offers :<span className="salrayBlockSubHeading"> 2 View</span>
 																			</div>
 																			<div className="expectSalaryBlock">

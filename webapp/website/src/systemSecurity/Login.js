@@ -45,13 +45,13 @@ class Login extends Component {
   }
 
   validateForm=()=>{
-    var status = true;
-    // var tempEmail = this.state.email.trim(); // value of field with whitespace trimmed off
-    //   var emailFilter = /^[^@]+@[^@.]+\.[^@]*\w\w$/;
+       var status = true;
+      // var tempEmail = this.state.loginusername.trim(); // value of field with whitespace trimmed off
+       var emailFilter = /^[^@]+@[^@.]+\.[^@]*\w\w$/;
        var illegalChars = /[\(\)\<\>\,\;\:\\\"\[\]]/;
-       var phoneno = /^\d{10}$/;
+       //var phoneno = /^\d{10}$/;
 
-    if(this.state.loginusername.match(phoneno)){
+    if(this.state.loginusername.match(emailFilter)){
       document.getElementById("loginusernameError").innerHTML=  
       ""; 
       status = true;
@@ -88,7 +88,6 @@ class Login extends Component {
 
   showPassFun=(event)=>{
     event.preventDefault();
-    alert();
     var passwordToggle = document.getElementById("password");
     if (passwordToggle.type === "password") {
         passwordToggle.type = "text";
@@ -285,7 +284,9 @@ class Login extends Component {
                   <div className="col-lg-12 form-group loginFormGroup" >
                     <div className="input-group">
                       <span className="input-group-addon loginInputIcon1"><i className="fa fa-mobile"></i></span>
-                      <input type="tel" id="loginusername" name="loginusername" placeholder="Email Id" value={this.state.loginusername} ref="loginusername" onChange={this.handleChange.bind(this)} className="form-control loginInputBox"/>
+                      <input type="tel" id="loginusername" name="loginusername" placeholder="Email Id" 
+                      value={this.state.loginusername} ref="loginusername"
+                       onChange={this.handleChange.bind(this)} className="form-control loginInputBox"/>
                     </div>
                     <span id="loginusernameError" className="errorMsg"></span>
                   </div>

@@ -155,6 +155,8 @@ class LeftSideFilters extends Component{
           industry_ids.push(elem.id);
         })
         selector.industry_id = selecteditems;
+      }else{
+        delete selector.industry_id;
       }
     }
 
@@ -164,11 +166,13 @@ class LeftSideFilters extends Component{
           functionalArea_ids.push(elem.id);
         })
         selector.functionalArea_id = selecteditems;
+      }else{
+        delete selector.functionalArea_id
       }
     }
 
     this.setState({ selector: selector },()=>{
-
+        mapAction.jobCount(this.state.selector);
       if (this.props.viewMode=="mapView") {
         mapAction.filterMapData(this.state.selector);
       }

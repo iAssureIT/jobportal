@@ -11,14 +11,13 @@ export default class IndustrywiseJobs extends Component{
     
  
     return(
-            <div className="row"> 
+           
                 <section className="col-lg-12 AllJobsWrapper">
                     <div className="row">
                         {
                             this.props.industrialJobs.length > 0
                             ?
                                 this.props.industrialJobs.map((elem,index)=>{
-                                    console.log("industrialJobselements",elem.industry[0]);
                                     return(
                                         <div className="col-lg-3 AllJobsRow">
                                             <div className="col-lg-12 AllJobsBlock">
@@ -42,7 +41,7 @@ export default class IndustrywiseJobs extends Component{
                         }
                     </div>                  
                 </section>
-            </div>
+            
         );
   }
 

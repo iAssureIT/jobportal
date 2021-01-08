@@ -10,7 +10,7 @@
 }
 
 .modalLeftSideMain{
-	height: 1400px;
+	height: 1100px;
 	border: 1px solid var(--main-border-color);
 	background-color: var(--form-field-background-color);
 	padding-bottom: 100px;
@@ -41,7 +41,7 @@
 }
 
 .modalImgContent .modalContentMain{
-	padding-top: 13px;
+	padding-top: 25px;
 }
 
 .modalImgContent{
@@ -50,26 +50,28 @@
 }
 
 .modalImgContent .modalContentHead{
-	font-size: 24px;
+	font-size: 22px;
 	font-weight: bold;
 	padding-top: 30px;
 	margin-left: -50px;
 	color: var(--main-subheading-font-color);
-	font-family: 'Montserrat-SemiBold';
+	/*font-family: 'Montserrat-SemiBold';*/
+	font-weight: 600;
 }
 
 .modalImgContent .modalSubContentHead{
 	margin-top: -3px;
 	margin-left: -50px;
-	font-size: 17px;
-	font-family: 'Montserrat-SemiBold'
+	font-size: 15px;
+	/*font-family: 'Montserrat-SemiBold';*/
+	font-weight: 600;
 }
 
 .modalImgContent .modalLocationinfo{
-	padding-top: 1px;
-	margin-left: -52px;
+	margin-left: -50px;
 	font-size: 14px;
-	font-family: 'Montserrat-Regular';
+	/*font-family: 'Montserrat-Regular';*/
+	font-weight: 600;
 	color: var(--main-txt-color);
 	white-space: nowrap !important;
 	text-overflow: ellipsis !important;
@@ -126,7 +128,8 @@
 	margin-top: 37px;
 	margin-left: 40px;
 	color: var(--main-subheading-font-color);
-	font-family: 'Montserrat-SemiBold';
+	/*font-family: 'Montserrat-SemiBold';*/
+	font-weight: 600;
 }
 
 .contentWrapper1 .profileSubContainer{
@@ -147,7 +150,7 @@
 }
 
 .contentWrapper1 .profileContent{
-	font-family: 'Montserrat-Regular';
+	/*font-family: 'Montserrat-Regular';*/
 }
 
 .contentWrapper1 .diamondBullet:before{
@@ -188,7 +191,8 @@
 	margin-top: -1px;
 	color: var(--main-subheading-font-color);
 	margin-left: 40px;
-	font-family: 'Montserrat-SemiBold';
+	/*font-family: 'Montserrat-SemiBold';*/
+	font-weight: 600;
 }
 
 .contentWrapper2 .profileSubContainer{
@@ -208,7 +212,8 @@
 }
 
 .contentWrapper2 .profileContent{
-	font-family: 'Montserrat-Regular';
+	/*font-family: 'Montserrat-Regular';*/
+	font-weight: 400;
 }
 
 .contentWrapper2 .diamondBullet:before{
@@ -222,17 +227,19 @@
 }
 
 .contentWrapper2 .modalEduSubtitle{
-	font-family: 'Montserrat-SemiBold';
+	/*font-family: 'Montserrat-SemiBold';*/
+	font-weight: 600;
 }
 
 .contentWrapper2 .modalEduDuration{
-	font-family: 'Montserrat-Regular';
+	/*font-family: 'Montserrat-Regular';*/
+	font-weight: 400;
 	font-size: 13px;
 }
 
 .profileContent li:before{
 	content: "\25C6";
-    font-weight: bold;
+    /*font-weight: bold;*/
     padding-right: 6px;
     margin-left: -15px;	
 }
@@ -264,11 +271,11 @@
 .contentWrapper3 .modalProfileheading{
 	position: absolute;
 	font-size: 19px;
-	font-weight: bold;
+	font-weight: 600;
 	color: var(--main-subheading-font-color);
 	margin-top: -1px;
 	margin-left: 40px;
-	font-family: 'Montserrat-SemiBold';
+	/*font-family: 'Montserrat-SemiBold';*/
 }
 
 .contentWrapper3 .profileSubContainer{
@@ -288,7 +295,8 @@
 }
 
 .contentWrapper3 .profileContent{
-	font-family: 'Montserrat-Regular';
+	/*font-family: 'Montserrat-Regular';*/
+	font-weight: 400;
 }
 
 .contentWrapper3 .diamondBullet:before{
@@ -302,16 +310,18 @@
 }
 
 .contentWrapper3 .eduSubtitle{
-	font-family: 'Montserrat-SemiBold';
+	/*font-family: 'Montserrat-SemiBold';*/
+	font-weight: 600;
 }
 
 .contentWrapper3 .eduDuration{
-	font-family: 'Montserrat-Regular';
+	/*font-family: 'Montserrat-Regular';*/
+	font-weight: 400;
 }
 
 .profileContent li:before{
 	content: "\25C6";
-    font-weight: bold;
+    /*font-weight: bold;*/
     padding-right: 6px;
     margin-left: -15px;	
 }
@@ -341,16 +351,19 @@
 
 .modalSkillsHeadOne .skillsTitle{
 	font-size: 15px;
-	font-family: 'Montserrat-SemiBold';
+	/*font-family: 'Montserrat-SemiBold';*/
+	font-weight: 600;
 	color: var(--main-subheading-font-color);
 }
 
 .modalSkillsHeadOne .skillSubtitle{
-	font-family: 'Montserrat-SemiBold';
+	/*font-family: 'Montserrat-SemiBold';*/
+	font-weight: 600;
 }
 
 .modalSkillsHeadOne .skillDuration{
-	font-family: 'Montserrat-Regular';
+	/*font-family: 'Montserrat-Regular';*/
+	font-weight: 400;
 }
 
 .modalSkillsHeadOne li:nth-child(2){
@@ -366,16 +379,19 @@
 
 .modalSkillsHeadTwo .skillsTitle{
 	font-size: 15px;
-	font-family: 'Montserrat-SemiBold';
+	/*font-family: 'Montserrat-SemiBold';*/
+	font-weight: 600;
 	color: var(--main-subheading-font-color);
 }
 
 .modalSkillsHeadTwo .skillSubtitle{
-	font-family: 'Montserrat-SemiBold';
+	/*font-family: 'Montserrat-SemiBold';*/
+	font-weight: 600;
 }
 
 .modalSkillsHeadTwo .skillDuration{
-	font-family: 'Montserrat-Regular';
+	/*font-family: 'Montserrat-Regular';*/
+	font-weight: 400;
 }
 
 .modalSkillsHeadTwo li:nth-child(2){
@@ -391,16 +407,19 @@
 
 .modalSkillsHeadThree .skillsTitle{
 	font-size: 15px;
-	font-family: 'Montserrat-SemiBold';
+	/*font-family: 'Montserrat-SemiBold';*/
+	font-weight: 600;
 	color: var(--main-subheading-font-color);
 }
 
 .modalSkillsHeadThree .skillSubtitle{
-	font-family: 'Montserrat-SemiBold';
+	/*font-family: 'Montserrat-SemiBold';*/
+	font-weight: 600;
 }
 
 .modalSkillsHeadThree .skillDuration{
-	font-family: 'Montserrat-Regular';
+	/*font-family: 'Montserrat-Regular';*/
+	font-weight: 400;
 }
 
 .modalSkillsHeadThree li:nth-child(2){
@@ -411,7 +430,8 @@
 .modalSkillsHeadFour{
 	margin-left: 6px;
 	margin-top: 10px;
-	font-family: 'Montserrat-SemiBold';
+	/*font-family: 'Montserrat-SemiBold';*/
+	font-weight: 600;
 	/*background-color: red;*/
 }
 
@@ -427,7 +447,8 @@
 	/*background-color: brown;*/
 	margin-top: 22px;
 	position: absolute;
-	font-family: 'Montserrat-Regular';
+	/*font-family: 'Montserrat-Regular';*/
+	font-weight: 400;
 }
 
 .buttonMain{
@@ -459,7 +480,7 @@
 /**************************Right Aside Bar******************************/
 
 .ModalRightSideMain{
-	height: 1359px;
+	height: 1100px;
 	padding-bottom: 40px;
 	border: 1px solid var(--main-border-color);
 	background-color: var(--form-field-background-color);
@@ -486,7 +507,8 @@
 	color: var(--main-subheading-font-color);
 	padding-top: 30px;
 	padding-left: 5px;
-	font-family: 'Montserrat-SemiBold';
+	/*font-family: 'Montserrat-SemiBold';*/
+	font-weight: 600;
 }
 
 .rightSideModalTitle{
@@ -495,7 +517,8 @@
 	padding-left: 5px;
 	padding-top: 7px;
 	color: var(--main-subheading-font-color);
-	font-family: 'Montserrat-SemiBold';
+	/*font-family: 'Montserrat-SemiBold';*/
+	font-weight: 600;
 }
 
 .rightSideModalSub{
@@ -503,7 +526,8 @@
 	padding-top: 2px;
 	margin-left: 2px;
 	font-size: 13px;
-	font-family: 'Montserrat-Regular';
+	/*font-family: 'Montserrat-Regular';*/
+	font-weight: 400;
 }
 
 .rightSideModalSub .rupeeIcon{
@@ -513,7 +537,7 @@
 .rightSideModalImg{
 	height: 250px;
 	margin-left: -18px;
-	margin-top: 330px;
+	margin-top: 160px;
 }
 
 /******************************************modal classes**********************************************/

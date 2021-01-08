@@ -362,9 +362,9 @@ exports.addCandidateAcademics = (req,res,next)=>{
                                     university_id        : req.body.academics.university_id,    
                                     collegeSchool        : req.body.academics.collegeSchool,
                                     area                 : req.body.academics.area,
-                                    city                 : req.body.academics.city,
+                                    cityVillage          : req.body.academics.city,
                                     district             : req.body.academics.district,
-                                    states               : req.body.academics.states,
+                                    state                : req.body.academics.states,
                                     country              : req.body.academics.country,
                                     pincode              : req.body.academics.pincode,
                                     stateCode            : req.body.academics.stateCode,
@@ -375,7 +375,7 @@ exports.addCandidateAcademics = (req,res,next)=>{
                                     admisionYear         : req.body.academics.admisionYear
                                 } 
 
-        console.log(academics)                        
+                      
     CandidateProfile.updateOne(
             { _id: req.body.candidate_id },  
             {
@@ -582,8 +582,8 @@ exports.addCandidateSkill = (req,res,next)=>{
             CandidateProfile.updateOne(
                 { _id: req.body.candidate_id },  
                 { 
-                    $set : {   "skills.0.primarySkills"      : [], 
-                                "skills.0.secondarySkills"   : [] }
+                    $set : {   "skills.0.primarySkills"     : [], 
+                               "skills.0.secondarySkills"   : [] }
                 }
             )
             .exec()
@@ -672,7 +672,17 @@ function insertSkill(skill, createdBy){
                     });
     });
 }
-exports.deleteSkill = (req,res,next)=>{
+exports.getCandidateSkills = (req,res,next)=>{
+    CandidateProfile.findOne({"_id" : req.body.candidate_id }, {"skills" : 1})
+        .exec()
+        .then(data=>{
+             resolve( data );
+        })
+        .catch(err =>{
+            reject(err);
+        });
+}
+exports.deletePrimarySkill = (req,res,next)=>{
     CandidateProfile.updateOne(
             { _id:req.params.candidate_id},  
             {

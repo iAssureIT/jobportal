@@ -1669,7 +1669,7 @@ padding: 5px 5px !important;
   /*font-size: 21px;*/
   padding-top: 0.6%;
   letter-spacing: 1px;
-  font-family: 'MyriadPro-Bold';
+  /*font-family: 'MyriadPro-Bold';*/
 
 }
 .us{
@@ -1712,7 +1712,7 @@ padding: 5px 5px !important;
   background-color: transparent;
   background-image: none;
   padding: 10px 15px;
-  font-family: 'Fontawesome';
+  /*font-family: 'Fontawesome';*/
   color: #2b3245;
   margin-top: 7px;
 }

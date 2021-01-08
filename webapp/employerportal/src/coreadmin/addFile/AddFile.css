@@ -1,7 +1,7 @@
 .clr_k {
     height: 90px;
     background-color: #f2f2f2;
-    font-family: Montserrat-Regular;
+    /*font-family: Montserrat-Regular;*/
     cursor: pointer;
     border: 2px dotted #ccc;
 }

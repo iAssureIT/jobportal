@@ -21,6 +21,10 @@ export const setViewMode = (viewMode )=> ({
       type 				: 'SET_VIEW_MODE',
       viewMode 			: viewMode
 });
+export const setMapView = (mapView )=> ({
+      type 				: 'SET_MAP_VIEW',
+      mapView 			: mapView
+});
 export const setFilterSelector = (selector )=> ({
       type 				: 'SET_FILTER_SELECTOR',
       selector 			: selector
@@ -28,6 +32,11 @@ export const setFilterSelector = (selector )=> ({
 export const getMapData = (mapJobs )=> ({
       type 				: 'GET_MAP_DATA',
       mapJobs 			: mapJobs
+});
+
+export const getJobCount = (jobCount )=> ({
+      type 				: 'GET_JOBCOUNT',
+      jobCount 			: jobCount
 });
 export const getFunctionalData = (functionalJobs )=> ({
       type 				: 'GET_FUNCTIONAL_DATA',
@@ -60,6 +69,19 @@ export function filterMapData(selector) {
 	    .then((response)=>{
 	     
 	        dispatch(getMapData(response.data));
+	    })
+	    .catch((error)=>{
+	          console.log('error', error);
+	    }) 
+  	}  
+}
+export function jobCount(selector) {
+  	return dispatch =>{
+  		dispatch(setFilterSelector(selector));
+	  	return axios.post("/api/jobs/job-count",selector)
+	    .then((response)=>{
+	     
+	        dispatch(getJobCount(response.data));
 	    })
 	    .catch((error)=>{
 	          console.log('error', error);

@@ -45,11 +45,11 @@ class Login extends Component {
   validateForm=()=>{
     var status = true;
     // var tempEmail = this.state.email.trim(); // value of field with whitespace trimmed off
-    //   var emailFilter = /^[^@]+@[^@.]+\.[^@]*\w\w$/;
+  var emailFilter = /^[^@]+@[^@.]+\.[^@]*\w\w$/;
        var illegalChars = /[\(\)\<\>\,\;\:\\\"\[\]]/;
-       var phoneno = /^\d{10}$/;
+       //var phoneno = /^\d{10}$/;
 
-    if(this.state.loginusername.match(phoneno)){
+    if(this.state.loginusername.match(emailFilter)){
       document.getElementById("loginusernameError").innerHTML=  
       ""; 
       status = true;

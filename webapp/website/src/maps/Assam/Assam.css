@@ -222,6 +222,38 @@
     left: 35%;
 }
 
+.biswanath{
+	position: absolute;
+   	top: 232px;
+    left: 434px;
+}
+.biswanathText{
+	position: absolute;
+	top: 25%;
+    left: 20%;
+}
+.biswanathNumber{
+	position: absolute;
+	top: 45%;
+    left: 35%;
+}
+
+.majuli{
+	position: absolute;
+   	top: 204px;
+    left: 509px;
+}
+.majuliText{
+	position: absolute;
+	top: 45%;
+    left: 40%;
+}
+.majuliNumber{
+	position: absolute;
+	top: 65%;
+    left: 55%;
+}
+
 .nagaon{
 	position: absolute;
    	top: 275px;
@@ -254,6 +286,36 @@
     left: 25%;
 }
 
+.hojai{
+	position: absolute;
+    top: 344px;
+    left: 387px;
+}
+.hojaiText{
+	position: absolute;
+	top: 35%;
+    left: 40%;
+}
+.hojaiNumber{
+	position: absolute;
+	top: 55%;
+    left: 45%;
+}
+.karbi_anglong_west{
+	position: absolute;
+   	top: 354px;
+    left: 314px;
+}
+.karbi_anglong_westText{
+	position: absolute;
+	top: 35%;
+    left: 10%;
+}
+.karbi_anglong_westNumber{
+	position: absolute;
+	top: 55%;
+    left: 25%;
+}
 .karbi_anglong_east{
 	position: absolute;
    top: 288px;

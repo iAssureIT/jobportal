@@ -18,13 +18,6 @@
 	color: var(--main-heading-color); 
 }
 
-.buttonYellow{
-	background-color: var(--yellow-button-color);
-	color: #fff;
-	height: 30px;
-	line-height: 15px;
-}
-
 .addJobWrapperBorder{
 	border: 3px solid var(--main-border-color);
 	border-radius: 10px;
@@ -33,10 +26,11 @@
 
 .addJobFormHeading{
 	margin-top: 25px;
-	font-size: 25px;
+	font-size: 27px;
 	/*font-weight: bold;*/
 	color: var(--main-heading-font-color);
-	font-family: 'Montserrat-SemiBold'; 
+	/*font-family: 'Montserrat-SemiBold';*/
+	font-weight: 600;
 }
 
 .addJobFormHr{
@@ -47,9 +41,9 @@
 
 .addJobMainHead{
 	font-size: 21px;
-	font-weight: bold;
+	font-weight: 600;
 	color: var(--main-subheading-font-color);
-	font-family: 'Montserrat-SemiBold'; 
+	/*font-family: 'Montserrat-SemiBold'; */
 }
 
 .addJobMainHead i{
@@ -61,15 +55,16 @@
 }
 
 .addJobMainHead .labelLeftPadding{
-	padding-left: 37px;
-	margin-top: -30px;
+	padding-left: 39px;
+	margin-top: -28px;
 }
 
 .addJobSubHead{
 	font-size: 21px;
 	font-weight: bold;
 	color: var(--main-subheading-font-color);
-	font-family: 'Montserrat-SemiBold';
+	/*font-family: 'Montserrat-SemiBold';*/
+	font-weight: 600;
 }
 
 .addJobSubHead i{
@@ -93,6 +88,7 @@
 	margin-top: -32px;
 }
 
+/***********************************************************Geolocation Css Properties************************************************/
 
 .location-search-input{
 	padding: 0 !important;
@@ -133,10 +129,13 @@
 	border-radius: 4px !important;
 }
 
+/*********************************************************End Of Geolocation Css Properties******************************************/
+
 .jobDesc{
 	margin-top: 20px;
 	padding-bottom: 6px;
-	font-family: 'Montserrat-Regular';
+	/*font-family: 'Montserrat-Regular';*/
+	font-weight: 600;
 }
 
 .mainFormSection{
@@ -148,9 +147,9 @@
 }
 
 .addjobformLable{
-	font-family: 'Montserrat-Medium';
+	/*font-family: 'Montserrat-Medium';*/
 	font-size: 13px; 
-	font-weight: 100;
+	font-weight: 300;
 	color: var(--main-txt-color);
 	letter-spacing: 1px;
 }
@@ -202,17 +201,18 @@
 	font-size: 17px;
 	border: 1px solid #fff;
 	border-radius: 50%;
-	padding-left: 7px;
-	padding-right: 7px;
-	padding-top: 2px;
-	padding-bottom: 3px;
+	padding-left: 8px;
+	padding-right: 8px;
+	padding-top: 5px;
+	padding-bottom: 2px;
 }
 
 .addJobrupee{
 	font-size: 11px;
 	padding-left: 4px;
 	padding-right: 4px;
-	padding-top: 2px;
+	padding-top: 3px;
+	padding-bottom: 1px;
 	border-radius: 50%;
 	border: 1px solid #fff;
 }
@@ -220,9 +220,9 @@
 /*********************************Custom Gender Field Properties********************************/
 
 .addJobGenderTitle{
-	font-family: 'Montserrat-Medium';
+	/*font-family: 'Montserrat-Medium';*/
 	font-size: 13px;
-	font-weight: 100 !important;
+	font-weight: 500;
 	color: var(--main-txt-color);
 }
 
@@ -238,7 +238,8 @@
 	border-radius: 5px;
 	font-size: 12px;
 	color: #fff;
-	font-weight: 100 !important;
+	/*font-weight: 100 !important;*/
+	font-weight: 500;
 	padding-top: 8px;
 	text-align:center;
 	margin-top: 1px;
@@ -254,6 +255,51 @@
 	background-color:var(--main-border-color);
 	height: 32px;
 	transition: all 0.7s;
+}
+
+.buttonYellow{
+	background-color: var(--yellow-button-color);
+	color: #fff;
+	height: 30px;
+	line-height: 15px;
+}
+
+.addJobPreviewBtn{
+	height: 40px;
+	width: 150px;
+	margin-top: 40px;
+	margin-right: 30px;
+	margin-left: 110px;
+	color: #fff;
+	font-weight: 600;
+}
+
+.addJobSubmitBtn{
+	height: 40px;
+	width: 150px;
+	margin-top: 40px;
+	font-weight: 600;
+}
+
+.addJobSubmitBtn:hover{
+	background-color: var(--form-field-background-color);
+	border: 1px solid var(--main-border-color);
+	color: #fff;	 
+	transition: all 500ms ease; 
+}
+
+.errorMsgJobPost{
+	/*color: #d93025;*/
+	/*color: var(--main-border-color);*/
+	color: #fff;
+	/*font-family: 'Montserrat-Regular';*/
+	font-weight: 400;
+	font-size: 13px;
+}
+
+.asterisk{
+	content: "\002A";
+	color: #c73030;
 }
 
 /***********************************End of Custom Gender Field Properties**************************/
@@ -322,35 +368,37 @@
 	top:34px;
 	width: 100%;
 }
-/********************************End Of React Phone Input Properties*******************************/
+/**********************************************End Of React Phone Input Properties*********************************************/
 
-/*************************************HTML Date Input Properties***********************************/
+/***************************************************HTML Date Input Properties*************************************************/
  
 ::-webkit-calendar-picker-indicator {
     filter: invert(1);
 }
 
-.picker__box .picker__header .picker__date-display .picker__weekday-display {
+/*.picker__box .picker__header .picker__date-display .picker__weekday-display {
 	background-color: red !important;
-}
+}*/
 
-/***********************************End of HTML Date Input Properties*******************************/
+/************************************************End of HTML Date Input Properties*********************************************/
 
-/********************************************Custom Checkbox****************************************/
+/********************************************************Custom Checkbox*******************************************************/
 
 .containerWfh{
 	display: block;
     position: relative;
     padding-left: 30px;
     margin-top: 8px;
+    padding-top: 2px;
     font-size: 13px;
+    font-weight: 400;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
     font-weight: normal;
     color: var(--main-txt-color);
-    font-family: 'Montserrat-Regular';
+    /*font-family: 'Montserrat-Regular';*/
     /*background-color: red;*/
 }
   
@@ -403,98 +451,7 @@
 	transform: rotate(45deg);
  }
 
-/***************************End Of Custom Checkbox Properties***************************************/
-
-/*****************************Select Dropdown Custom Classes************************************/
-
-/*select{
-	border: 1px solid var(--main-border-color);
-    background-color: transparent;
-    color: var(--main-txt-color);
-}
-
-option{
-	border: 1px solid var(--main-border-color);
-    background-color: var(--main-bg-color);
-    color: var(--main-txt-color);
-}
-
-option:hover{
-	background-color: var(--main-border-color) !important;
-}*/
-
-/**************************************End Of Select Dropdown Custom Classes**********************************/
-
-/************************************React Multiselect Dropdown Custom Classes********************************/
-
-/*.optionContainer{
-	background-color: var(--main-bg-color);
-	white-space: nowrap; 
- 	overflow: hidden;
- 	text-overflow: ellipsis;
- 	border: 1px solid var(--main-border-color) !important;
-}
-
-.optionContainer li:hover,
-.optionContainer .highlight{
-	background-color: var(--main-border-color);
-	color: var(--main-txt-color);
-}
-
-._7ahQImyV4dj0EpcNOjnwA{
-	background-color: var(--main-border-color) !important;
-}
-
-.optionContainer .highlight{
-	background-color: var(--main-bg-color) !important;
-}
-
-.optionContainer li:hover {
-    background-color: var(--main-border-color) !important;
-}
-
-._2iA8p44d0WZ-WqRBGcAuEV{
-	border-radius: 0px !important;
-	border-bottom-right-radius: 4px !important;
-    border-top-right-radius: 4px !important;
-}*/
-
-/***********************************End Of React Multiselect Dropdown Properties**********************************/
-
-.addJobPreviewBtn{
-	height: 40px;
-	width: 150px;
-	margin-top: 40px;
-	margin-right: 30px;
-	margin-left: 110px;
-	color: #fff;
-}
-
-.addJobSubmitBtn{
-	height: 40px;
-	width: 150px;
-	margin-top: 40px;
-}
-
-.addJobSubmitBtn:hover{
-	background-color: var(--form-field-background-color);
-	border: 1px solid var(--main-border-color);
-	color: #fff;	 
-	transition: all 500ms ease; 
-}
-
-.errorMsgJobPost{
-	/*color: #d93025;*/
-	/*color: var(--main-border-color);*/
-	color: #fff;
-	font-family: 'Montserrat-Regular';
-	font-size: 13px;
-}
-
-.asterisk{
-	content: "\002A";
-	color: #c73030;
-}
+/***************************************End Of Custom Checkbox Properties******************************************/
 
 /*********************************************Properties Of Ckeditor***********************************************/
 
@@ -654,50 +611,7 @@ option:hover{
 	border: none !important;
 } 
 
-/********************************************End Of Ckeditor Properties*******************************************/
-
-/***********************************************Properties Of Tooltip*********************************************/
-
-/*.tooltip {
-  position: relative;
-  display: inline-block;
-  border-bottom: 1px dotted black;
-}
-
-.tooltip .tooltiptext {
-  visibility: hidden;
-  width: 120px;
-  background-color: black;
-  color: #fff;
-  text-align: center;
-  border-radius: 6px;
-  padding: 5px 0;
-  position: absolute;
-  z-index: 1;
-  bottom: 150%;
-  left: 50%;
-  margin-left: -60px;
-}
-
-.tooltip .tooltiptext::after {
-  content: "";
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  margin-left: -5px;
-  border-width: 5px;
-  border-style: solid;
-  border-color: black transparent;
-}
-
-.tooltip:hover .tooltiptext {
-  visibility: visible;
-}
-*/
-
-/**********************************************End Of Tooltip Properties********************************************/
-
-/********************************************Properties Of React Tag Input******************************************/
+/********************************************Properties Of ReactTags******************************************/
 
 div.ReactTags__tags {
     position: relative;
@@ -740,7 +654,7 @@ div.ReactTags__selected span.ReactTags__tag {
     padding-left: 5px;
     padding-right: 5px;
     padding-top: 2px;
-    padding-bottom: 1px;
+    padding-bottom: 2px;
     margin: 0 5px;
     cursor: move;
     border-radius: 10px;
@@ -800,10 +714,6 @@ div.ReactTags__suggestions ul li.ReactTags__activeSuggestion {
     /*background-color: var(--main-border-color) !important;*/
 }
 
-/*input.ReactTags__tagInputField:focus{
-	border: none !important;
-}*/
-
 input:focus {
     outline-offset: 0px !important;
 }
@@ -812,18 +722,17 @@ user agent stylesheet:focus {
     outline: -webkit-focus-ring-color auto 0px !important;
 }
 
-input::placeholder{
-	color: #ccc !important;
-}
-
 .primarySkillsField{
 	z-index: 3 !important;
 }
 
+/*****************************************************End Of ReactTags Properties****************************************************/
 
-/******************************************End Of React Tag Input Properties******************************************/
+/*********************************************************HTML Custom Classes********************************************************/
 
-/************************************************HTML Custom Classes******************************************/
+input::placeholder{
+	color: #ccc !important;
+}
 
 [list]::-webkit-calendar-picker-indicator {
   display: none;
