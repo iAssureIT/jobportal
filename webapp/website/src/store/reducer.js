@@ -35,6 +35,7 @@ const initialState = {
 	selectedModal 				: "login",
 	userID 						: "",
 	viewMode 					: "mapView",
+	mapView 					: "India",
 	selector 					: {},
 	mapJobs 					: [],
 	jobCount 					: 0,
@@ -66,6 +67,10 @@ const newState = {...state};
 	if(action.type === "SET_USERID"){
 		newState.userID 	= action.userID;
 	}
+	if(action.type === "SET_MAP_VIEW"){
+		newState.mapView = action.mapView;
+	}
+
 	if(action.type === "SET_VIEW_MODE"){
 		newState.viewMode 	= action.viewMode;
 	}
@@ -75,6 +80,7 @@ const newState = {...state};
 	if(action.type === "GET_MAP_DATA"){
 		newState.mapJobs = action.mapJobs;
 	}
+	
 	if(action.type === "GET_JOBCOUNT"){
 		newState.jobCount = action.jobCount;
 	}

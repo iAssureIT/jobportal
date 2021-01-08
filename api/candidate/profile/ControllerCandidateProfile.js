@@ -672,7 +672,17 @@ function insertSkill(skill, createdBy){
                     });
     });
 }
-exports.deleteSkill = (req,res,next)=>{
+exports.getCandidateSkills = (req,res,next)=>{
+    CandidateProfile.findOne({"_id" : req.body.candidate_id }, {"skills" : 1})
+        .exec()
+        .then(data=>{
+             resolve( data );
+        })
+        .catch(err =>{
+            reject(err);
+        });
+}
+exports.deletePrimarySkill = (req,res,next)=>{
     CandidateProfile.updateOne(
             { _id:req.params.candidate_id},  
             {

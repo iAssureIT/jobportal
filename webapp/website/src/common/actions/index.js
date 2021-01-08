@@ -21,6 +21,10 @@ export const setViewMode = (viewMode )=> ({
       type 				: 'SET_VIEW_MODE',
       viewMode 			: viewMode
 });
+export const setMapView = (mapView )=> ({
+      type 				: 'SET_MAP_VIEW',
+      mapView 			: mapView
+});
 export const setFilterSelector = (selector )=> ({
       type 				: 'SET_FILTER_SELECTOR',
       selector 			: selector

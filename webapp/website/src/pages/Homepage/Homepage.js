@@ -29,7 +29,8 @@ class HomePage extends Component {
     var {mapAction} = this.props;
 
     mapAction.filterMapData(this.props.selector);
-
+    mapAction.setMapView("India");
+    
   }
   leftDrawerInfo(event){
 
