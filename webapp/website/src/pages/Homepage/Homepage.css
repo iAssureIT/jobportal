@@ -16,17 +16,24 @@
 
 .filterDiv{
 	height: 30px;
+	margin-bottom: 15px;
 	/*background-color: blue;*/
 }
 .filterButton{
 	/*background-color: yellow;*/
 	height: auto;
-	width: 3.64%;
+	width: 7.5%;
 	border: 1px solid var(--yellow-button-color);
-	margin-left: 5px;
+	color: #fff;
 	border-radius: 5px;
-	margin-bottom: 2px;
+	margin-bottom: 15px;
+	font-family: 'Montserrat-Regular';
+	font-size: 12px;
 }
+.marginTop15{
+	margin-top: 15px;
+}
+
 
 .filterButton:hover{
 	cursor: pointer;
@@ -44,6 +51,7 @@
   color: var(--yellow-button-color);
 
 }
+
 
 .viewDiv{
 	width: 90%;
@@ -96,6 +104,6 @@
 	min-height: 400px;
 	
 	z-index: 100;
-	transition:all 2s; 
+	transition:all 0.5s; 
   transition-timing-function: ease-in-out;
 }

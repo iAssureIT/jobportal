@@ -5,7 +5,10 @@ import { withRouter }	 	from 'react-router-dom';
 import Axios 			 	from 'axios';
 import Swal 			 	from 'sweetalert2';
 import { Multiselect }      from 'multiselect-react-dropdown';
-
+import PlacesAutocomplete, {
+  		geocodeByAddress,
+  		getLatLng
+} from "react-places-autocomplete";
 import '../BasicInfoForm/BasicInfoForm.css';
 
 class Academics extends Component{
@@ -13,17 +16,33 @@ class Academics extends Component{
 		super(props);
 
 		this.state={
-			qualificationArray  : [],
-			qualificationLevel  : "",
-			candidate_id         : this.props.match.params.candidate_id,
+			
+			candidate_id        : this.props.match.params.candidate_id,
 			academicsID         : this.props.match.params.academicsID,
+			academics  			: [],
+			qualificationLevel  : "",
+            qualificationlevel_id    : "",
+            qualificationLevellist   : [],
+            qualificationLevelArray  : [],
 			qualification       : "",
+            qualification_id    : "",
+            qualificationlist   : [],
+            qualificationArray  : [],
 			specialization      : "",
 			college             : "",
 			university   		: "",
-			state               : "",
-			country	            : "",	
+			university_id    	: "",
+            universitylist   	: [],
+            universityArray     : [],		
+            addressLine1 	    : "",
+			area                : "",
 			city                : "",
+			district   		    : "",	
+			states              : "",
+			stateCode		    : "",
+			country	            : "",
+			countryCode 	    : "",
+			pincode             : "",
 			grade               : "",
 			mode                : "",
 			passOutYear         : "",
@@ -43,9 +62,9 @@ class Academics extends Component{
 	componentDidMount(){
 		this.getData();
 
-			Axios.get("/api/qualificationlevelmaster/get/list")
+		Axios.get("/api/qualificationlevelmaster/get/list")
 			.then(response => {
-				this.setState({inputQualificationLevel : response.data});
+				this.setState({qualificationLevellist : response.data});
 			})
 			.catch(error=>{
 				Swal.fire("Error while getting List data",error.message,'error');
@@ -54,7 +73,7 @@ class Academics extends Component{
 		Axios.get("/api/qualificationmaster/get/list")
 			.then(response => {
 				this.setState({
-					inputQualification : response.data
+					qualificationlist : response.data
 				});
 			})
 			.catch(error=>{
@@ -63,7 +82,7 @@ class Academics extends Component{
 		Axios.get("/api/universitymaster/get/list")
 			.then(response => {
 				
-				this.setState({inputUniversity : response.data});
+				this.setState({universitylist : response.data});
 			})
 			.catch(error=>{
 				Swal.fire("Error while getting List data",error.message,'error');
@@ -89,14 +108,15 @@ class Academics extends Component{
 		.then(response=>{
 			
 			 	this.setState({
-						qualificationArray:response.data[0].academics,
-						DegreeArray       :response.data[0].qualification,
-						classArray        :response.data[0].qualificationlevel
+						academics  				: response.data,
+						qualificationLevelArray : response.data[0].qualificationLevel,
+						qualificationArray 		: response.data[0].qualification,
+						universityArray			: response.data[0].university
 			 	})
 			 	
 			 })
 			 .catch(error=>{
-			 	Swal.fire("Submit Error!",error.message,'error');
+			 	Swal.fire("Fetch Error!",error.message,'error');
 			 })
 	}
 	edit(){
@@ -110,26 +130,45 @@ class Academics extends Component{
 			Axios.post("/api/candidatemaster/post/getOneCandidateAcademics",idData)
 			.then(response=>{
 				var editData =response.data;
-				
+				console.log(editData)
+				var qualificationLevel = this.state.qualificationLevelArray.filter((data,index)=>{
+                    if (data._id == editData[0].academics[0].qualificationlevel_id) { return data}
+                })
+
+				var qualification = this.state.qualificationArray.filter((data,index)=>{
+                    if (data._id == editData[0].academics[0].qualification_id) { return data}
+                })
+
+                var university = this.state.universityArray.filter((data,index)=>{
+                    if (data._id == editData[0].academics[0].university_id) { return data}
+                })
+
 			 	this.setState({
-			 		qualificationLevel  :editData[0].academics[0].qualificationLevel,
-			 		qualification       :editData[0].academics[0].qualification,
-			 		specialization      :editData[0].academics[0].specialization,
-			 		college             :editData[0].academics[0].collegeSchool,
-			 		university          :editData[0].academics[0].universityBoard,
-			 		state               :editData[0].academics[0].state,
-			 		city                :editData[0].academics[0].cityVillage,
-			 		country             :editData[0].academics[0].country,
-			 		grade               :editData[0].academics[0].grade,
-			 		mode                :editData[0].academics[0].mode,
-			 		passOutYear         :editData[0].academics[0].passOutYear,
-			 		admisionYear        :editData[0].academics[0].admisionYear,
-			 		buttonText          :"Update"
+			 		qualificationlevel_id  	: editData[0].academics[0].qualificationlevel_id,
+			 		qualificationLevel  	: qualificationLevel[0].qualificationLevel,	
+			 		qualification_id       	: editData[0].academics[0].qualification_id,
+			 		qualification 	  		: qualification[0].qualification,	
+			 		specialization      	: editData[0].academics[0].specialization,
+			 		university_id          	: editData[0].academics[0].university_id,
+			 		university          	: university[0].university,
+			 		addressLine1            : editData[0].academics[0].collegeSchool,
+			 		area 					: editData[0].academics[0].area,
+			 		city                	: editData[0].academics[0].cityVillage,
+			 		district 				: editData[0].academics[0].district,
+			 		state               	: editData[0].academics[0].state,
+			 		stateCode              	: editData[0].academics[0].stateCode,
+			 		country             	: editData[0].academics[0].country,
+			 		countryCode             : editData[0].academics[0].countryCode,
+			 		grade               	: editData[0].academics[0].grade,
+			 		mode                	: editData[0].academics[0].mode,
+			 		passOutYear         	: editData[0].academics[0].passOutYear,
+			 		admisionYear        	: editData[0].academics[0].admisionYear,
+			 		buttonText          	: "Update"
 			 	})
 			 	
 			 })
 			 .catch(error=>{
-			 	Swal.fire("Submit Error!",error.message,'error');
+			 	Swal.fire("edit Error!",error.message,'error');
 			 })
 		}
 	}
@@ -194,7 +233,102 @@ class Academics extends Component{
 		event.preventDefault();
 		this.props.history.push("/contact/"+this.state.candidate_id);
 	}
-	
+	onChangeQualificationLevel(event){
+        const {name,value} = event.target;
+        this.setState({ [name]:value });  
+        
+        var qualificationlevel_id;
+        if (document.querySelector('#qualificationLevel option[value="' + value + '"]')) {
+            qualificationlevel_id = document.querySelector('#qualificationLevel option[value="' + value + '"]').getAttribute("data-value")
+        }else{ qualificationlevel_id = "" }
+
+        this.setState({ qualificationlevel_id : qualificationlevel_id });  
+    }    
+    onChangeQualification(event){
+        const {name,value} = event.target;
+        this.setState({ [name]:value });  
+        
+        var qualification_id;
+        if (document.querySelector('#qualification option[value="' + value + '"]')) {
+            qualification_id = document.querySelector('#qualification option[value="' + value + '"]').getAttribute("data-value")
+        }else{ qualification_id = "" }
+
+        this.setState({ qualification_id : qualification_id });  
+    }
+    onChangeUniversity(event){
+        const {name,value} = event.target;
+        this.setState({ [name]:value });  
+        
+        var university_id;
+        if (document.querySelector('#university option[value="' + value + '"]')) {
+            university_id = document.querySelector('#university option[value="' + value + '"]').getAttribute("data-value")
+        }else{ university_id = "" }
+
+        this.setState({ university_id : university_id });  
+    }
+    handleChangePlaces = address => {
+	    this.setState({ addressLine1 : address});
+	};
+	handleSelect = address => {
+
+    geocodeByAddress(address)
+     .then((results) =>{ 
+      	for (var i = 0; i < results[0].address_components.length; i++) {
+          	for (var b = 0; b < results[0].address_components[i].types.length; b++) {
+              	switch (results[0].address_components[i].types[b]) {
+                  case 'sublocality_level_1':
+                      var area = results[0].address_components[i].long_name;
+                      break;
+                  case 'sublocality_level_2':
+                      area = results[0].address_components[i].long_name;
+                      break;
+                  case 'locality':
+                      var city = results[0].address_components[i].long_name;
+                      break;
+                  case 'administrative_area_level_1':
+                      var state = results[0].address_components[i].long_name;
+                      var stateCode = results[0].address_components[i].short_name;
+                      break;
+                  case 'administrative_area_level_2':
+                      var district = results[0].address_components[i].long_name;
+                      break;
+                  case 'country':
+                     var country = results[0].address_components[i].long_name;
+                     var countryCode = results[0].address_components[i].short_name;
+                    break; 
+                  case 'postal_code':
+                     var pincode = results[0].address_components[i].long_name;
+                      break;
+                  default :
+                  		break;
+              }
+          	}
+      	}
+
+      this.setState({
+        area       : area,
+        city       : city,
+        district   : district,
+        states     : state,
+        country    : country,
+        pincode    : pincode,
+        stateCode  : stateCode,
+        countryCode: countryCode
+      })
+
+       
+    })
+     
+      .catch(error => console.error('Error', error));
+
+      geocodeByAddress(address)
+      .then(results => getLatLng(results[0]))
+      .then(latLng => this.setState({'latLng': latLng}))
+      .catch(error => console.error('Error', error));
+     
+      this.setState({ addressLine1 : address});
+  	};
+
 	handleSave(event){
 		event.preventDefault();
 		var status =  this.validateForm();
@@ -204,40 +338,48 @@ class Academics extends Component{
 								academicsID   : this.state.academicsID,
 								academics:{
 									qualificationLevel   : this.state.qualificationLevel,
+									qualificationlevel_id: this.state.qualificationlevel_id,
 									qualification        : this.state.qualification,
+									qualification_id     : this.state.qualification_id,
 									specialization       : this.state.specialization,
-									collegeSchool        : this.state.college,
-									universityBoard      : this.state.university,
-									state                : this.state.state,
-									country              : this.state.country,
-									cityVillage          : this.state.city,
+									university 		     : this.state.university,
+									university_id 		 : this.state.university_id,	
+									collegeSchool 		 : this.state.addressLine1,
+									area       			 : this.state.area,
+							        city       			 : this.state.city,
+							        district   			 : this.state.district,
+							        states     			 : this.state.states,
+							        country    			 : this.state.country,
+							        pincode    			 : this.state.pincode,
+							        stateCode  			 : this.state.stateCode,
+							        countryCode 		 : this.state.countryCode,
 									grade                : this.state.grade,
 									mode                 : this.state.mode,
 									passOutYear          : this.state.passOutYear,
 									admisionYear         : this.state.admisionYear
 								}
 							}
+		console.log(formValues)						
 		if(this.props.match.params.academicsID){
 			this.updateData(formValues,event);
 		}else{
 			this.insetData(formValues,event);
 		}
-		this.getData();
+		
 	}
 	updateData(formValues,event){
 		var status =  this.validateForm();
 		if(status==true){
-					Axios.patch("/api/candidatemaster/patch/updateOneCandidateAcademics",formValues)
+			Axios.patch("/api/candidatemaster/patch/updateOneCandidateAcademics",formValues)
 				 .then(response=>{
 							Swal.fire("Congrats","Your Academics details update Successfully","success");
 								this.setState({
-											
 												qualificationLevel  : "",
 												qualification       : "",
 												specialization      : "",
 												college             : "",
 												university   		: "",
-												state               : "",
+												states              : "",
 												country	            : "",	
 												city                : "",
 												grade               : "",
@@ -245,7 +387,6 @@ class Academics extends Component{
 												passOutYear         : "",
 												admisionYear        : "",
 												buttonText         : "Save"
-											
 										})
 							this.props.history.push("/academics/"+this.state.candidate_id);
 					})
@@ -269,9 +410,9 @@ class Academics extends Component{
 											qualificationLevel  : "",
 											qualification       : "",
 											specialization      : "",
-											college             : "",
+											addressLine1        : "",
 											university   		: "",
-											state               : "",
+											states              : "",
 											country	            : "",	
 											city                : "",
 											grade               : "",
@@ -281,6 +422,7 @@ class Academics extends Component{
 											buttonText         : "Save"
 										
 									})
+						this.getData();
 							
 				})
 				.catch(error =>{
@@ -343,7 +485,7 @@ class Academics extends Component{
 			""; 
 			status = true;
 		}
-		if(this.state.state.length<=0){
+		if(this.state.states.length<=0){
 			document.getElementById("stateError").innerHTML=  
 			"Please enter your State";  
 			status=false; 
@@ -369,6 +511,10 @@ class Academics extends Component{
 
 	//========== Validation End ==================
 	render(){
+		const searchOptions = {
+	      // types: ['(cities)'],
+	      componentRestrictions: {country: "in"}
+	    }
 		return(
 				<div className="col-lg-12 ">
 					<form>
@@ -384,26 +530,14 @@ class Academics extends Component{
 									<span className="input-group-addon inputBoxIcon">
 										<FontAwesomeIcon icon="file-alt" />
 									</span> 
-									<select className="form-control inputBox" 
-									 id="qualificationLevel" value={this.state.qualificationLevel}
-									 name="qualificationLevel" onChange={this.handleChange.bind(this)}>
-									  	<option > -- select -- </option>
-									  	{
-									  		this.state.inputQualificationLevel!=null
-									  			 && this.state.inputQualificationLevel.length>0
-									  		?	
-									  			this.state.inputQualificationLevel.map((elem,index)=>{
-									  				return(
-									  					<option value={elem._id}  key={index}>
-									  						{elem.qualificationLevel}
-									  					</option>
-									  				);
-									  			})
-									  			
-									  		:
-									  			null
-									  	}
-									</select>
+									<input type="text" list="qualificationLevel" className="form-control inputBox" refs="qualificationLevel" 
+                                     name="qualificationLevel" id="selectqualificationLevel" maxLength="100" value={this.state.qualificationLevel} data-value={this.state.qualificationlevel_id}
+									onChange={this.onChangeQualificationLevel.bind(this)} />
+									<datalist name="qualificationLevel" id="qualificationLevel" className="qualificationLevellist" >
+									    {this.state.qualificationLevellist.map((item, key) =>
+									        <option key={key} value={item.qualificationLevel} data-value={item._id}/>
+									    )}
+									</datalist>
 								</div>
 							</div>
 							<div className="col-lg-4">
@@ -415,26 +549,14 @@ class Academics extends Component{
 									<span className="input-group-addon inputBoxIcon">
 										<i className="fa fa-graduation-cap"></i>
 									</span> 
-									<select className="form-control inputBox" 
-									 id="qualification" value={this.state.qualification} 
-									 name="qualification" onChange={this.handleChange.bind(this)}>
-									  	<option > -- select -- </option>
-									  	{
-									  		this.state.inputQualification!=null 
-									  			&& this.state.inputQualification.length>0
-									  		?	
-									  			this.state.inputQualification.map((elem,index)=>{
-									  				return(
-									  					<option value={elem._id} key={index}>
-									  						{elem.qualification}
-									  					</option>
-									  				);
-									  			})
-									  			
-									  		:
-									  			null
-									  	}
-									</select>
+									<input type="text" list="qualification" className="form-control inputBox" refs="qualification" 
+                                     name="qualification" id="selectqualification" maxLength="100" value={this.state.qualification} data-value={this.state.qualification_id}
+									onChange={this.onChangeQualification.bind(this)} />
+									<datalist name="qualification" id="qualification" className="qualificationlist" >
+									    {this.state.qualificationlist.map((item, key) =>
+									        <option key={key} value={item.qualification} data-value={item._id}/>
+									    )}
+									</datalist>
 								</div>
 							</div>
 							<div className="col-lg-4">
@@ -503,7 +625,9 @@ class Academics extends Component{
 									</select>
 								</div>
 							</div>
+						</div>
 
+						<div className="row formWrapper">
 							<div className="col-lg-4">
 								<label htmlFor="admisionYear" className="nameTitleForm">
 									Admission Year
@@ -520,11 +644,6 @@ class Academics extends Component{
 								</div> 
 								<span id="admisionYearError" className="errorMsg"></span>
 							</div>
-
-						</div>
-
-						<div className="row formWrapper">
-
 							<div className="col-lg-4">
 								<label htmlFor="passOutYear" className="nameTitleForm">
 									Pass-out-year
@@ -541,8 +660,29 @@ class Academics extends Component{
 								</div> 
 								<span id="passOutYearError" className="errorMsg"></span>
 							</div>
-
-							<div className="col-lg-4">
+						</div>	
+						<div className="row formWrapper">	
+							<div className="col-lg-6">
+								<label htmlFor="university" className="nameTitleForm">
+									University/Boards Name
+									<sup className="nameTitleFormStar">*</sup>
+								</label>
+								<div className="input-group ">
+									<span className="input-group-addon inputBoxIcon">
+										<FontAwesomeIcon icon="university" />
+									</span> 
+									<input type="text" list="university" className="form-control inputBox" refs="university" 
+                                     name="university" id="selectuniversity" maxLength="100" value={this.state.university} data-value={this.state.university_id}
+									onChange={this.onChangeUniversity.bind(this)} />
+									<datalist name="university" id="university" className="universitylist" >
+									    {this.state.universitylist.map((item, key) =>
+									        <option key={key} value={item.university} data-value={item._id}/>
+									    )}
+									</datalist>
+								</div> 
+								<span id="universityError" className="errorMsg"></span>
+							</div>
+							<div className="col-lg-6">
 								<label htmlFor="college" className="nameTitleForm">
 									College/School Name<sup className="nameTitleFormStar">*</sup>
 								</label>
@@ -550,7 +690,7 @@ class Academics extends Component{
 									<span className="input-group-addon inputBoxIcon">
 										<FontAwesomeIcon icon="university" />
 									</span> 
-									<select className="form-control inputBox" id="college" 
+									{/*<select className="form-control inputBox" id="college" 
 									 value={this.state.college} name="college" 
 									 onChange={this.handleChange.bind(this)}>
 										  	<option > -- select -- </option>
@@ -569,42 +709,55 @@ class Academics extends Component{
 										  		:
 										  			null
 										  	}
-										</select>
+									</select>*/}
+									<PlacesAutocomplete
+                                        value={this.state.addressLine1}
+                                        onChange={this.handleChangePlaces}
+                                        onSelect={this.handleSelect}
+                                        searchOptions={searchOptions}
+                                      	>
+                                        {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+                                          <div>
+                                            <input
+                                              {...getInputProps({
+                                                placeholder: 'Search Address ...',
+                                                className: 'location-search-input form-control inputBox',
+                                                id:"addressLine1",
+                                                name:"addressLine1",
+                                              })}
+                                            />
+                                            <div className={this.state.addressLine1 
+                                            				? 
+                                            				"autocomplete-dropdown-container SearchListContainer inputSearch" 
+                                            				: 
+                                            				""}>
+                                              {loading && <div>Loading...</div>}
+                                              {suggestions.map(suggestion => {
+                                                const className = suggestion.active
+                                                  ? 'suggestion-item--active'
+                                                  : 'suggestion-item';
+                                                // inline style for demonstration purpose
+                                                const style = suggestion.active
+                                                  ? { backgroundColor: '#f5a721', cursor: 'pointer' }
+                                                  : { backgroundColor: '#242933', cursor: 'pointer'};
+                                                return (
+                                                  <div
+                                                    {...getSuggestionItemProps(suggestion, {
+                                                      className,
+                                                      style,
+                                                    })}
+                                                  >
+                                                    <span>{suggestion.description}</span>
+                                                  </div>
+                                                );
+                                              })}
+                                            </div>
+                                          </div>
+                                        )}
+                                      </PlacesAutocomplete>
 								</div> 
 								<span id="collegeError" className="errorMsg"></span>
 							</div>
-
-							<div className="col-lg-4">
-								<label htmlFor="university" className="nameTitleForm">
-									University/Boards Name
-									<sup className="nameTitleFormStar">*</sup>
-								</label>
-								<div className="input-group ">
-									<span className="input-group-addon inputBoxIcon">
-										<FontAwesomeIcon icon="university" />
-									</span> 
-									<select className="form-control inputBox" id="university" value={this.state.university} name="university" onChange={this.handleChange.bind(this)}>
-										  	<option > -- select -- </option>
-										  	{
-										  		this.state.inputUniversity!=null 
-										  			&& this.state.inputUniversity.length>0
-										  		?	
-										  			this.state.inputUniversity.map((elem,index)=>{
-										  				return(
-										  					<option value={elem._id} key={index}>
-										  						{elem.university}
-										  					</option>
-										  				);
-										  			})
-										  			
-										  		:
-										  			null
-										  	}
-										</select>
-								</div> 
-								<span id="universityError" className="errorMsg"></span>
-							</div>
-
 						</div>
 
 						<div className="row formWrapper">
@@ -623,6 +776,21 @@ class Academics extends Component{
 								</div>
 								<span id="cityError" className="errorMsg"></span>
 							</div>
+							<div className="col-lg-4">
+								<label htmlFor="district" className="nameTitleForm">
+									District
+									<sup className="nameTitleFormStar">*</sup>
+								</label>
+								<div className="input-group ">
+									<span className="input-group-addon inputBoxIcon">
+										<FontAwesomeIcon icon="city" /> 
+									</span> 
+									<input type="text" name="district" id="district" 
+									 className="form-control inputBox" value={this.state.district} 
+									 onChange={this.handleChange.bind(this)} />
+								</div>
+								<span id="districtError" className="errorMsg"></span>
+							</div>
 
 							<div className="col-lg-4">
 								<label htmlFor="state" className="nameTitleForm">
@@ -633,14 +801,15 @@ class Academics extends Component{
 									<span className="input-group-addon inputBoxIcon">
 										<i className="fa fa-map"></i>
 									</span> 
-									<input type="text" name="state" id="state" 
+									<input type="text" name="states" id="states" 
 									 className="form-control inputBox " 
-									 value={this.state.state} 
+									 value={this.state.states} 
 									 onChange={this.handleChange.bind(this)} />
 								</div> 
 								<span id="stateError" className="errorMsg"></span>
 							</div>
-							
+						</div>	
+						<div className="row formWrapper">	
 							<div className="col-lg-4">
 								<label htmlFor="country" className="nameTitleForm">
 									Country
@@ -667,9 +836,23 @@ class Academics extends Component{
 						<div className=" AddressWrapper col-lg-12" >
 							 <div className="row">
 								{
-								this.state.qualificationArray.length > 0
+								this.state.academics.length > 0
 								?
-								this.state.qualificationArray.map((elem,index)=>{
+								this.state.academics[0].academics.map((elem,index)=>{
+									//console.log(elem)
+									//console.log(this.state.qualificationLevelArray);
+
+
+									var qualificationLevel = this.state.qualificationLevelArray.filter((data,index)=>{
+                        			if (data._id == elem.qualificationlevel_id) { return data}
+                    				})
+                    				var qualification = this.state.qualificationArray.filter((data,index)=>{
+                        			if (data._id == elem.qualification_id) { return data}
+                    				})
+                    				var university = this.state.universityArray.filter((data,index)=>{
+                        			if (data._id == elem.university_id) { return data}
+                    				})
+									
 									return(
 										<div className="col-lg-6 AddressOuterWrapper"  key={index}>
 											<div className="col-lg-12 addWrapper">
@@ -678,18 +861,16 @@ class Academics extends Component{
 														<div className="addLogoDiv">
 															<FontAwesomeIcon icon="graduation-cap" /> 
 														</div>
-
 														<div>
-															{
-																this.state.DegreeArray.map((elem1,index)=>{
-																	return(
-																		<div className="addLogoTextDiv" key={index}>
-																			{elem1.qualification}
-																			
-																		</div>
-																	);
-																})
-															}
+														<div className="">
+														<div className="addLogoTextDiv" key={index}>
+															{qualificationLevel[0].qualificationLevel}<br/>
+														</div>
+														</div>
+														
+														<div className="addLogoTextDiv" key={index}>
+															{qualification[0].qualification}
+														</div>
 														</div>
 															
 														
@@ -697,57 +878,24 @@ class Academics extends Component{
 													<div className="col-lg-8 addRightWrapper">
 														<div className="row">
 														<div className="addRightText ">
-															<div>
-																{
-																	this.state.classArray.map((elem1,index)=>{
-																		return(
-																			<div className="AddressBoxText" key={index}>
-																				{elem1.qualificationLevel}
-																				
-																			</div>
-																		);
-																	})
-																}
-															</div>
+															
 															<div className="AddressBoxText">
 															{elem.specialization}
 															</div>
+															<div className="AddressBoxText" key={index}>
+																{elem.collegeSchool}
+															</div>
+															<div className="AddressBoxText">
+															{university[0].university}
+															</div>
+															{/*<div className="AddressBoxText">
+																{elem.admisionYear} - {elem.passOutYear}
+															</div>
+															
 															<div className="AddressBoxText">
 																{elem.grade}
 															</div>
-															<div className="AddressBoxText">
-																{elem.mode}
-															</div>
-															<div className="AddressBoxText">
-																{elem.passOutYear}
-															</div>
-															<div className="AddressBoxText">
-																{elem.admisionYear}
-															</div>
-															<div>
-																{
-																	this.state.inputCollege.map((elem1,index)=>{
-																		return(
-																			<div className="AddressBoxText" key={index}>
-																				{elem1.collage}
-																				
-																			</div>
-																		);
-																	})
-																}
-															</div>
-															<div>
-																{
-																	this.state.inputUniversity.map((elem1,index)=>{
-																		return(
-																			<div className="AddressBoxText" key={index}>
-																				{elem1.university}
-																				
-																			</div>
-																		);
-																	})
-																}
-															</div>
+															
 															<div className="AddressBoxText">
 																{elem.state}
 															</div>
@@ -756,7 +904,7 @@ class Academics extends Component{
 															</div>
 															<div className="AddressBoxText">
 																{elem.cityVillage}
-															</div>
+															</div>*/}
 														</div>
 														<div className="col-lg-12">
 								                            <div className="addRightbtn">

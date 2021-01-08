@@ -54,13 +54,13 @@ class MapHeader extends Component{
 		  	<img src="images/1.png" alt="icon" />
 		</div>
 
-		<div className="breadCrumbHeader col-lg-2">
+		{/*<div className="breadCrumbHeader col-lg-2">
 			<ul className="breadCrumbInner">
 			  <li className="breadCrumbInnerli"><a href="/">India</a></li>
 			  <li className="breadCrumbInnerli selectedState"><a href={"/"+selectedState}>{selectedState}</a></li> 	
-			  {/*<li className="breadCrumbInnerLI selectedDistrict">Pune</li>*/}
+			  
 			</ul>
-		</div>
+		</div>*/}
 
 	      	<div className="FunctionWiseTitle col-lg-5">
 	     		 

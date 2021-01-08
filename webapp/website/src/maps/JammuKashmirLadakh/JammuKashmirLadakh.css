@@ -1,8 +1,8 @@
 
 .jammuAndKashmir{
 	position: absolute;
-	top: 100px;
-	left: 20px;
+	top: 50px;
+	left: 200px;
 }
 .jammuAndKashmirText{
 	position: absolute;
@@ -10,21 +10,6 @@
 	left: 45%;
 }
 .jammuAndKashmirNumber{
-	position: absolute;
-	top: 50%;
-	left: 45%;
-}
-.ladakh{
-	position: absolute;
-	top: 203px;
-    left: 329px;
-}
-.ladakhText{
-	position: absolute;
-	top: 45%;
-	left: 45%;
-}
-.ladakhNumber{
 	position: absolute;
 	top: 50%;
 	left: 45%;

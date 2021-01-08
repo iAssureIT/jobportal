@@ -96,8 +96,6 @@ deleteJob = (event)=>{
 										}
 										
 									})
-									console.log(applicantsCount)
-									console.log(applicantsCount.length)
 									return(
 										<div className="col-lg-12" key={index1}>
 											<div className="jobListContainer">
@@ -139,7 +137,7 @@ deleteJob = (event)=>{
 															<i className="fa fa-users jobListNumPositions"></i> &nbsp; No. of positions : {elem.jobBasicInfo.positions}
 														</div>
 														<div className="joblistNoCount"> 
-															<i className="fa fa-check-circle jobListNumapply"></i> &nbsp; <a href={"/applied-candidate-list/" + elem._id}> No. of applicants applied to job : {applicantsCount.length > 0 ? applicantsCount[0].candidatesApplied :  0}</a> 
+															<i className="fa fa-check-circle jobListNumapply"></i> &nbsp; <a href={"/applied-candidate-list/" + elem._id}> No. of applicants : {applicantsCount.length > 0 ? applicantsCount[0].candidatesApplied :  0}</a> 
 														</div>
 													</div>
 													<div className="col-lg-1 jobListRightContent">

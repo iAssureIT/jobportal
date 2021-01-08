@@ -6,6 +6,7 @@ import Axios 			 	from 'axios';
 import Swal 			 	from 'sweetalert2';
 import { Multiselect }      from 'multiselect-react-dropdown';
 import S3FileUpload         from 'react-s3';
+import { WithContext as ReactTags } from 'react-tag-input';
 import {connect}            from 'react-redux';
 import { bindActionCreators } from 'redux';
 import  * as mapActionCreator from '../../common/actions/index';
@@ -36,7 +37,8 @@ class BasicInfoForm extends Component{
 			age                : "",
 			inputMaritalStatus : ["Single",,"Married", "Separated","Divorced","Widowed"],
 			inputNationality   : ["Indian","American"],
-			languages	       : [],
+			languagesTags	   : [],
+			languagesSuggestions	   : [],
 			inputLanguages	   : [],
 
 			imageUploaded      : true,
@@ -84,10 +86,33 @@ class BasicInfoForm extends Component{
 						};
 	}
 	componentDidMount(){
+		Axios.get("/api/languagemaster/get/list")
+		.then(response => {
+			var languagesSuggestions =  [];
+                response.data.map((elem,index)=>{
+                    languagesSuggestions.push({id:elem._id,text:elem.language})
+                })
+                this.setState({
+                    languagesSuggestions   : languagesSuggestions
+                });
+		})
+		.catch(error=>{
+			Swal.fire("Error while getting List data",error.message,'error');
+		})
 
 		Axios.get("/api/candidatemaster/get/one/"+this.state.candidate_id)
 		.then(response=>{
 			 console.log("response.data",response.data);
+
+			 	var languagesTags = [];
+			 	this.state.languagesSuggestions.map((language,index)=>{
+                    response.data[0].languagesKnown.map((data,ind)=>{
+                        if (language.id == data.language_id) {
+                            languagesTags.push({ id : language.id, text : language.text })
+                        }
+                    })
+                })
+			 	this.calAge(response.data[0].basicInfo.dob);
 			 	this.setState({
 			 		firstName         : response.data[0].basicInfo.firstName?response.data[0].basicInfo.firstName:"",
 					middleName        : response.data[0].basicInfo.middleName?response.data[0].basicInfo.middleName:"",
@@ -100,35 +125,12 @@ class BasicInfoForm extends Component{
 					panCardNo         : response.data[0].panCard?response.data[0].panCard:"",
 					adhaarCardNo      : response.data[0].aadhaarCard?response.data[0].aadhaarCard:"",
 					profilePicture    : response.data[0].profilePicture?response.data[0].profilePicture:"",
-					age               : response.data[0].basicInfo.age?response.data[0].basicInfo.age:"",
-				
+					languagesTags 	  : languagesTags	
 			 	})
 			 })
 			 .catch(error=>{
 			 	Swal.fire("Submit Error!",error.message,'error');
 			 })
-
-		Axios.get("/api/languagemaster/get/list")
-		.then(response => {
-			this.setState({
-				inputLanguages : response.data
-			});
-			this.state.inputLanguages!=null && this.state.inputLanguages.length > 0 
-			?
-				this.state.inputLanguages.map((elem,index)=>{
-					
-					this.state.languages.push(elem.language);
-					
-					
-				})
-			:
-				this.state.languages.push("select");
-		})
-		.catch(error=>{
-			Swal.fire("Error while getting List data",error.message,'error');
-		})
-
-			
 }
 
 	//========== User Define Function Start ================
@@ -279,6 +281,34 @@ class BasicInfoForm extends Component{
 			gender:id,
 		})
 	}
+	onLanguageAddition (tag) {
+        if (tag.id == tag.text) {
+            tag.id = "" 
+        }
+    	this.setState(state => ({ languagesTags: [...state.languagesTags, tag] }));
+  	}
+
+    onLanguageClick(index) {
+        console.log('The tag at index ' + index + ' was clicked');
+    }
+
+    onLanguageDrag(tag, currPos, newPos) {
+        const languagesTags = [...this.state.languagesTags];
+        const newTags = languagesTags.slice();
+
+        newTags.splice(currPos, 1);
+        newTags.splice(newPos, 0, tag);
+
+        // re-render
+        this.setState({ languagesTags: newTags });
+    }
+
+    onLanguageDelete (i) {
+        const { languagesTags } = this.state;
+        this.setState({
+          languagesTags: languagesTags.filter((tag, index) => index !== i),
+        });
+    }
 	handleSubmit(event){
 		event.preventDefault();
 		var status =  this.validateForm();
@@ -295,8 +325,7 @@ class BasicInfoForm extends Component{
 								nationality        : this.state.nationality,
 								panCard            : this.state.panCardNo,
 								aadhaarCard        : this.state.adhaarCardNo,
-								languagesKnown	   : this.state.selectedValue,
-								age	   			   : this.state.age,
+								languagesTags	   : this.state.languagesTags,
 								profilePicture	   : this.state.profilePicture,
 								
 							}
@@ -367,6 +396,12 @@ class BasicInfoForm extends Component{
 	//========== Validation End ==================
 
 	render(){
+		const KeyCodes = {
+		  comma: 188,
+		  enter: 13,
+		};
+
+		const delimiters = [KeyCodes.comma, KeyCodes.enter];
 		return(
 
 				<div className="col-lg-12 pageWrapper">
@@ -550,15 +585,15 @@ class BasicInfoForm extends Component{
 									<span className="input-group-addon inputBoxIcon inputBoxIcon2">
 										<i className="fa fa-comment-o"></i>
 									</span> 
-									<Multiselect  name="languages" id="languages" 
-									 className="form-control " value={this.state.languages} 
-									 onChange={this.handleChange.bind(this)}
-									 options={this.state.languages}
-									 isObject={false}
-									 style={this.style}
-									 closeIcon="cancel"
-									 showCheckbox={false}
-									 />
+									<ReactTags
+							        //ref={this.reactTags}
+							        tags={this.state.languagesTags}
+							        suggestions={this.state.languagesSuggestions}
+							        delimiters={delimiters}
+							        handleDelete={this.onLanguageDelete.bind(this)}
+							        handleAddition={this.onLanguageAddition.bind(this)}
+							        handleDrag={this.onLanguageDrag.bind(this)}
+									handleTagClick={this.onLanguageClick.bind(this)} />
 								</div>
 							</div>
 
@@ -578,7 +613,7 @@ class BasicInfoForm extends Component{
 									<select className="form-control inputBox" id = "nationality" 
 									 value ={this.state.nationality} name="nationality" 
 									 onChange={this.handleChange.bind(this)}>
-									  	<option disabled> -- Select -- </option>
+									  	<option disabled selected> -- Select -- </option>
 									  	{
 									  		this.state.inputNationality.length>0
 									  		?	

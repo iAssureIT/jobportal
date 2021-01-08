@@ -4,51 +4,57 @@ var ObjectID = require('mongodb').ObjectID;
 
 const CandidateProfile 		= require('./ModelCandidateProfile.js');
 const SkillMaster           = require('../../coreAdmin/SkillMaster/ModelSkill.js');
+const LanguageMaster        = require('../../coreAdmin/LanguageMaster/ModelLanguage.js');
+const QualificationLevelMaster = require('../../coreAdmin/QualificationLevelMaster/ModelQualificationLevel.js');
+const QualificationMaster   = require('../../coreAdmin/QualificationMaster/ModelQualification.js');
+const UniversityMaster      = require('../../coreAdmin/UniversityMaster/ModelUniversity.js');
+
 
 exports.insertCandidateBasicInfo = (req, res, next)=>{
+    
+    	const candidateData = new CandidateProfile({
+    		"_id" : new mongoose.Types.ObjectId(),
+    		"basicInfo" : {
+    			"firstName"			: req.body.firstName,
+    			"middleName"		: req.body.middleName ? req.body.middleName : null,
+    			"lastName" 		 	: req.body.lastName,
+    			"dob" 			 	: req.body.dob ? req.body.dob : null,
+    			//"age" 			 	: req.body.age ? req.body.age : null,
+    			"gender"	 	 	: req.body.gender ? req.body.gender : null,
+    			"maritalStatus"  	: req.body.maritalStatus ? req.body.maritalStatus : null,
+    			"anniversaryDate"	: req.body.anniversaryDate ? req.body.anniversaryDate : null,
+    			"nationality" 	 	: req.body.nationality ? req.body.nationality : null,
+                "profilePicture"    : req.body.profilePicture ? req.body.profilePicture : null,
+    		},
+            "languagesKnown"        : req.body.languagesTags ? req.body.languagesTags : null,
+    		"panCard" 		 		: req.body.panCard ? req.body.panCard : null,
+    		"aadhaarCard" 	 		: req.body.aadhaarCard ? req.body.aadhaarCard  : null,
+    		"contact" : {
+    			"mobile" 		 	: req.body.mobile,
+                "altMobile"         : req.body.altMobile ? req.body.altMobile : null,
+    			"emailId" 		 	: req.body.emailId,
+    		},
+    		"user_id"		 	 	: req.body.user_id,	
+    		"createdAt" : new Date(),
+    		"createdBy" : req.body.createdBy,
+    		});
+    	
 
-	const candidateData = new CandidateProfile({
-		"_id" : new mongoose.Types.ObjectId(),
-		"basicInfo" : {
-			"firstName"			: req.body.firstName,
-			"middleName"		: req.body.middleName ? req.body.middleName : null,
-			"lastName" 		 	: req.body.lastName,
-			"dob" 			 	: req.body.dob ? req.body.dob : null,
-			"age" 			 	: req.body.age ? req.body.age : null,
-			"gender"	 	 	: req.body.gender ? req.body.gender : null,
-			"maritalStatus"  	: req.body.maritalStatus ? req.body.maritalStatus : null,
-			"anniversaryDate"	: req.body.anniversaryDate ? req.body.anniversaryDate : null,
-			"languagesKnown" 	: req.body.languagesKnown ? req.body.languagesKnown : [],
-			"nationality" 	 	: req.body.nationality ? req.body.nationality : null,
-            "profilePicture"    : req.body.profilePicture ? req.body.profilePicture : null,
-		},
-		"panCard" 		 		: req.body.panCard ? req.body.panCard : null,
-		"aadhaarCard" 	 		: req.body.aadhaarCard ? req.body.aadhaarCard  : null,
-		"contact" : {
-			"mobile" 		 	: req.body.mobile,
-            "altMobile"         : req.body.altMobile ? req.body.altMobile : null,
-			"emailId" 		 	: req.body.emailId,
-		},
-		"user_id"		 	 	: req.body.user_id,	
-		"createdAt" : new Date(),
-		"createdBy" : req.body.createdBy,
-		});
-	
-
-	candidateData.save()
-			.then(data => {
-			res.status(200).json({							
-				message	: "Candidate details inserted successfully",
-			});
-		})
-		.catch(error=>{
-			console.log(error);
-			res.status(500).json({
-				error 	: error,
-				message : "Failed to insert candidate details."
-			});
-		});		
+    	candidateData.save()
+    			.then(data => {
+    			res.status(200).json({							
+    				message	: "Candidate details inserted successfully",
+    			});
+    		})
+    		.catch(error=>{
+    			console.log(error);
+    			res.status(500).json({
+    				error 	: error,
+    				message : "Failed to insert candidate details."
+    			});
+    		});		
 }
+
 
 exports.getcandidate_id = (req,res,next)=>{
     CandidateProfile.find({user_id: req.params.userID})
@@ -75,15 +81,21 @@ exports.getSingleCandidate = (req,res,next)=>{
         },
         {$lookup:{
                    from: "qualificationlevelmasters",
-                   localField: "academics.qualificationLevel",
+                   localField: "academics.qualificationlevel_id",
                    foreignField: "_id",
-                   as: "qualificationlevel" } 
+                   as: "qualificationLevel" } 
          },   
          {$lookup:{
                    from: "qualificationmasters",
-                   localField: "academics.qualification",
+                   localField: "academics.qualification_id",
                    foreignField: "_id",
                    as: "qualification" } 
+         },
+         {$lookup:{
+                   from: "universitymasters",
+                   localField: "academics.university_id",
+                   foreignField: "_id",
+                   as: "university" } 
          }
          
          ])
@@ -98,8 +110,87 @@ exports.getSingleCandidate = (req,res,next)=>{
         });
     });
 };
+function insertLanguage(language, createdBy){ 
+    return new Promise(function(resolve,reject){ 
+        const languageMaster = new LanguageMaster({
+                        _id                   : new mongoose.Types.ObjectId(),
+                        language              : language,
+                        createdBy             : createdBy,
+                        createdAt             : new Date()
+                    })
+                    languageMaster.save()
+                    .then(data=>{
+                        resolve( data._id );
+                    })
+                    .catch(err =>{
+                        reject(err); 
+                    });
+    });
+}
+function insertQualificationLevel(qualificationLevel, createdBy){ 
+    return new Promise(function(resolve,reject){ 
+        const qualificationLevelMaster = new QualificationLevelMaster({
+                        _id                         : new mongoose.Types.ObjectId(),
+                        qualificationLevel          : qualificationLevel,
+                        createdBy                   : createdBy,
+                        createdAt                   : new Date()
+                    })
+                    qualificationLevelMaster.save()
+                    .then(data=>{
+                        resolve( data._id );
+                    })
+                    .catch(err =>{
+                        reject(err); 
+                    });
+    });
+}
+function insertQualification(qualification, createdBy){ 
+    return new Promise(function(resolve,reject){ 
+        const qualificationMaster = new QualificationMaster({
+                        _id                         : new mongoose.Types.ObjectId(),
+                        qualification               : qualification,
+                        createdBy                   : createdBy,
+                        createdAt                   : new Date()
+                    })
+                    qualificationMaster.save()
+                    .then(data=>{
+                        resolve( data._id );
+                    })
+                    .catch(err =>{
+                        reject(err); 
+                    });
+    });
+}
+function insertUniversity(university, createdBy){ 
+    console.log("university",university)
+    return new Promise(function(resolve,reject){ 
+        const universityMaster = new UniversityMaster({
+                        _id                         : new mongoose.Types.ObjectId(),
+                        university                  : university,
+                        createdBy                   : createdBy,
+                        createdAt                   : new Date()
+                    })
+                    universityMaster.save()
+                    .then(data=>{
+                        resolve( data._id );
+                    })
+                    .catch(err =>{
+                        reject(err); 
+                    });
+    });
+}
 exports.updateCandidateBasicInfo = (req, res, next)=>{
-	console.log(req.body);
+	var languages   = [];
+    var language_id; 
+
+    processData();
+        async function processData(){
+        for (var i = 0 ; i < req.body.languagesTags.length; i++) {
+            language_id = req.body.languagesTags[i].id != "" ? req.body.languagesTags[i].id
+                                : await insertLanguage(req.body.languagesTags[i].text, req.body.user_id)
+                
+            languages.push({ "language_id" : language_id })
+        }
         CandidateProfile.updateOne(
             { "_id":req.body.candidate_id},  
             {
@@ -108,12 +199,12 @@ exports.updateCandidateBasicInfo = (req, res, next)=>{
                         "basicInfo.middleName"     : req.body.middleName, 
                         "basicInfo.lastName"       : req.body.lastName,
                         "basicInfo.dob"            : req.body.dob == "" ? null : new Date(req.body.dob),
-                        "basicInfo.age"            : req.body.dob,
+                        //"basicInfo.age"            : req.body.dob,
                         "basicInfo.gender"         : req.body.gender,
                         "basicInfo.maritalStatus"  : req.body.maritalStatus,
                         "basicInfo.anniversaryDate": req.body.anniversaryDate == "" ? null : new Date(req.body.anniversaryDate),
-                        "basicInfo.languagesKnown" : req.body.languagesKnown,
                         "basicInfo.nationality"    : req.body.nationality,
+                        "languagesKnown"           : languages,
                         "panCard"                  : req.body.panCard,
                         "aadhaarCard"              : req.body.aadhaarCard,
                         "profilePicture"           : req.body.profilePicture,
@@ -134,10 +225,11 @@ exports.updateCandidateBasicInfo = (req, res, next)=>{
                     error: err
                 });
 			});	
+        }
 }
 
 exports.addCandidateAddress = (req,res,next)=>{
-    console.log(req.body)
+    
     CandidateProfile.updateOne(
             { _id: req.body.candidate_id },  
             { 
@@ -154,7 +246,7 @@ exports.addCandidateAddress = (req,res,next)=>{
         })
         .catch(err =>{
             res.status(500).json({ error: err });
-        });    
+        });  
 };
 
 exports.getOneCandidateAddress = (req,res,next)=>{
@@ -246,10 +338,48 @@ exports.updateCandidateContact = (req,res,next)=>{
 
 exports.addCandidateAcademics = (req,res,next)=>{
     console.log(req.body)
+    var qualificationlevel_id, qualification_id, university_id; 
+
+    processData();
+        async function processData(){
+            qualificationlevel_id   = req.body.academics.qualificationlevel_id != "" ? req.body.academics.qualificationlevel_id 
+                                : await insertQualificationLevel(req.body.academics.qualificationLevel,req.body.user_id)
+            
+            qualification_id       = req.body.academics.qualification_id != "" ? req.body.academics.qualification_id 
+                                : await insertQualification(req.body.academics.qualification,req.body.user_id)
+            
+            university_id          = req.body.academics.university_id != "" ? req.body.academics.university_id 
+                                : await insertUniversity(req.body.academics.university,req.body.user_id)
+            
+            var academics = {
+                                    //qualificationLevel   : this.state.qualificationLevel,
+                                    qualificationlevel_id: qualificationlevel_id,
+                                    //qualification        : this.state.qualification,
+                                    qualification_id     : qualification_id,
+                                    specialization       : req.body.academics.specialization,
+                                    collegeSchool        : req.body.academics.collegeSchool,
+                                    //university           : req.body.academics.university,
+                                    university_id        : req.body.academics.university_id,    
+                                    collegeSchool        : req.body.academics.collegeSchool,
+                                    area                 : req.body.academics.area,
+                                    cityVillage          : req.body.academics.city,
+                                    district             : req.body.academics.district,
+                                    state                : req.body.academics.states,
+                                    country              : req.body.academics.country,
+                                    pincode              : req.body.academics.pincode,
+                                    stateCode            : req.body.academics.stateCode,
+                                    countryCode          : req.body.academics.countryCode,
+                                    grade                : req.body.academics.grade,
+                                    mode                 : req.body.academics.mode,
+                                    passOutYear          : req.body.academics.passOutYear,
+                                    admisionYear         : req.body.academics.admisionYear
+                                } 
+
+                      
     CandidateProfile.updateOne(
             { _id: req.body.candidate_id },  
             {
-                $push:  { 'academics' : req.body.academics }
+                $push:  { 'academics' :academics }
             }
         )
         .exec()
@@ -262,7 +392,8 @@ exports.addCandidateAcademics = (req,res,next)=>{
         })
         .catch(err =>{
             res.status(500).json({ error: err });
-        });    
+        });
+    }    
 };
 
 exports.getOneCandidateAcademics = (req,res,next)=>{
@@ -451,8 +582,8 @@ exports.addCandidateSkill = (req,res,next)=>{
             CandidateProfile.updateOne(
                 { _id: req.body.candidate_id },  
                 { 
-                    $set : {   "skills.0.primarySkills"      : [], 
-                                "skills.0.secondarySkills"   : [] }
+                    $set : {   "skills.0.primarySkills"     : [], 
+                               "skills.0.secondarySkills"   : [] }
                 }
             )
             .exec()

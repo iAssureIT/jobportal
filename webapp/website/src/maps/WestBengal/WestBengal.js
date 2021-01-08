@@ -167,7 +167,7 @@ export default class WestBengal extends Component{
 						 onMouseOver={e => (e.currentTarget.src = "/Maps/West_Bengal/North_24_Paraganas_.png")} 
 						 onMouseOut={e => (e.currentTarget.src = "/Maps/West_Bengal/North_24_Paraganas.png")}/>
 						<span className="north24ParaganasText mapTextLabel text-capitalize">North_24_Paraganas</span>
-						<span className="north24ParaganasNumber mapCountLabel text-center">{this.search('howrah')}</span>
+						<span className="north24ParaganasNumber mapCountLabel text-center">{this.search('north24Paraganas')}</span>
 					</div>
 					<div className="south24Paraganas classHover"> 
 						<img src="/Maps/West_Bengal/South_24_Paraganas.png"  alt="South_24_Paraganas" 

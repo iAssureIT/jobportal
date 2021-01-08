@@ -31,11 +31,6 @@ export default class JammuKashmirLadakh extends Component{
 						<span className="jammuAndKashmirText mapTextLabel text-capitalize">Jammu And Kashmir</span> <span className="jammuAndKashmirNumber mapCountLabel text-center">{this.search('jammuAndKashmir')}</span>
 					</div>
 
-					<div className="ladakh classHover"> 
-						<img src="/Maps/Jammu_Kashmir___Ladakh/Ladakh.png"  alt="Ladakh" onMouseOver={e => (e.currentTarget.src = "/Maps/Jammu_Kashmir___Ladakh/Ladakh_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Jammu_Kashmir___Ladakh/Ladakh.png")}/>
-						<span className="ladakhText mapTextLabel text-capitalize">Ladakh</span>
-						<span className="ladakhNumber mapCountLabel text-center">{this.search('ladakh')}</span>
-					</div>
 					
 
 				</div>

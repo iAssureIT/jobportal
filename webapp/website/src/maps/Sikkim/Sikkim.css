@@ -1,0 +1,63 @@
+.north_sikkim{
+	position: absolute;
+    top: 10px;
+    left: 235px;
+}
+.north_sikkimText{
+	position: absolute;
+	top: 40%;
+    left: 40%;
+}
+.north_sikkimNumber{
+	position: absolute;
+	top: 50%;
+    left: 45%;
+}
+
+.west_sikkim{
+	position: absolute;
+    top: 313px;
+    left: 193px;
+}
+.west_sikkimText{
+	position: absolute;
+	top: 40%;
+    left: 40%;
+}
+.west_sikkimNumber{
+	position: absolute;
+	top: 50%;
+    left: 45%;
+}
+
+.east_sikkim{
+	position: absolute;
+    top: 412px;
+    left: 411px;
+}
+.east_sikkimText{
+	position: absolute;
+	top: 40%;
+    left: 40%;
+}
+.east_sikkimNumber{
+	position: absolute;
+	top: 50%;
+    left: 45%;
+}
+
+.south_sikkim{
+	position: absolute;
+    top: 354px;
+    left: 323px;
+}
+.south_sikkimText{
+	position: absolute;
+	top: 40%;
+    left: 30%;
+}
+.south_sikkimNumber{
+	position: absolute;
+	top: 50%;
+    left: 35%;
+}

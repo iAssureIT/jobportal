@@ -1,50 +1,18 @@
-@font-face {
-  font-family:'Montserrat-Regular';
-  src: url('/fonts/Montserrat/Montserrat-Regular.ttf');
-}
-
-@font-face {
-  font-family:'Montserrat-Bold';
-  src: url('/fonts/Montserrat/Montserrat-Bold.ttf');
-}
-
 .india{
-	width:90%;
+	width:100%;
 	height: 800px;
-	/*top: 150px;
-	margin-top: 70px;*/
+	top: -125px;
+	position: absolute;
+	/*margin-top: 70px;
 	margin: auto;
-	border: 1px solid #ff0;
+	border: 1px solid #ff0 !important;
 	position: absolute;
 	left: 50%;
 	transform: translate(-50%);
 	text-align: center;
 	color: #ff0;
    font-size: 12px;
-   cursor: pointer;
-}
-
-.mapTextLabel{
-	font-size: 10px;
-	font-family: 'Montserrat-Regular';
-	color: var(--main-txt-color);
-}
-
-.mapCountLabel{
-	font-size: 11px;
-	font-family: 'Montserrat-Regular';
-	color: var(--main-txt-color);
-}
-
-.classHover:hover .mapTextLabel{
-	font-size: 12px;
-	font-family: 'Montserrat-Bold';
-	z-index: 1;
-}
-
-.classHover:hover .mapCountLabel{
-	font-size: 16px;
-	font-family: 'Montserrat-Bold';
+   cursor: pointer;*/
 }
 
 .jammuKashmir{
@@ -54,8 +22,8 @@
 }
 .jammuKashmirText{
 	position: absolute;
-	top: 40%;
-    left: 24%;
+	top: 35%;
+    left: 27%;
 }
 .jammuKashmirNumber{
 	position: absolute;
@@ -63,10 +31,25 @@
     left: 34%;
 }
 
+.ladakh{
+	position: absolute;
+	top: 45px;
+    left: 262px;
+}
+.ladakhText{
+	position: absolute;
+	top: 40%;
+    left: 24%;
+}
+.ladakhNumber{
+	position: absolute;
+	top: 50%;
+    left: 34%;
+}
 .punjab{
 	position: absolute;
-	top: 134px;
-	left: 217px;
+	top: 136px;
+    left: 219px;
 }
 .punjabText{
 	position: absolute;
@@ -74,6 +57,38 @@
     left: 34%;
 }
 .punjabNumber{
+	position: absolute;
+	top: 62%;
+    left: 44%;
+}
+
+.chandigarh{
+	position: absolute;
+	top: 174px;
+	left: 286px;
+}
+.chandigarhText{
+	position: absolute;
+	top: 48%;
+    left: 34%;
+}
+.chandigarhNumber{
+	position: absolute;
+	top: 62%;
+    left: 44%;
+}
+
+.delhi{
+	position: absolute;
+	top: 222px;
+    left: 288px;
+}
+.delhiText{
+	position: absolute;
+	top: 30%;
+    left: 50%;
+}
+.delhiNumber{
 	position: absolute;
 	top: 62%;
     left: 44%;
@@ -100,12 +115,12 @@
 }
 .uttarakhandText{
 	position: absolute;
-	top: 32%;
+	top: 42%;
     left: 24%;	
 }
 .uttarakhandNumber{
 	position: absolute;
-	top: 46%;
+	top: 56%;
     left: 34%;	
 }
 .haryana{
@@ -482,4 +497,53 @@
 	position: absolute;
 	top: 74%;
     left: -36%;		
+}
+
+
+.andaman_nicobar{
+	position: absolute;
+    top: 631px;
+    left: 680px;	
+}
+.andaman_nicobarText{
+	position: absolute;
+	top: 48%;
+    left: 30%;		
+}
+.andaman_nicobarNumber{
+	position: absolute;
+	top: 74%;
+    left: 36%;		
+}
+
+.lakshadweep{
+	position: absolute;
+    top: 631px;
+    left: 80px;	
+}
+.lakshadweepText{
+	position: absolute;
+	top: 48%;
+    left: 51%;		
+}
+.lakshadweepNumber{
+	position: absolute;
+	top: 74%;
+    left: 36%;		
+}
+
+.dadraNagarHaveli{
+	position: absolute;
+    top: 331px;
+    left: 0px;	
+}
+.dadraNagarHaveliText{
+	position: absolute;
+	top: 48%;
+    left: 51%;		
+}
+.dadraNagarHaveliNumber{
+	position: absolute;
+	top: 74%;
+    left: 36%;		
 }

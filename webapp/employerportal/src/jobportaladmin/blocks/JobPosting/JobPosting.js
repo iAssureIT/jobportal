@@ -473,7 +473,7 @@ class JobPosting extends Component {
                             }*/
     }
 
-    handleSubmit = (event) => {
+    handleSubmit = (event) => { 
         event.preventDefault();
         if (this.validateForm()) {
             var formValues = {
@@ -908,9 +908,7 @@ class JobPosting extends Component {
             subfunctionalarea_id = document.querySelector('#subFunctionalArea option[value="' + value + '"]').getAttribute("data-value")
         }else{ subfunctionalarea_id = "" }
 
-        this.setState({ subfunctionalarea_id : subfunctionalarea_id },()=>{
-            console.log(this.state)
-        });  
+        this.setState({ subfunctionalarea_id : subfunctionalarea_id });  
     }
 
     onChangeRole(event){
@@ -1352,7 +1350,7 @@ render(){
 												<label htmlFor="minExperience" className="addjobformLable"> Minimum Overall Experience </label>
 												<div className="input-group">
 													<span className="input-group-addon addJobFormField"> <i className="fa fa-history"></i> </span> 
-													<input type="text" className="form-control addJobFormField" name="minExperience" id="minExperience" maxLength="50" value={this.state.minExperience} onChange={this.handleChange}/>
+													<input type="number" className="form-control addJobFormField" name="minExperience" id="minExperience" maxLength="50" value={this.state.minExperience} onChange={this.handleChange}/>
 												</div>
 											</div>
 										</div>

@@ -1,35 +1,4 @@
-@font-face {
-  font-family:'Montserrat-Regular';
-  src: url('/fonts/Montserrat/Montserrat-Regular.ttf');
-}
 
-@font-face {
-  font-family:'Montserrat-Bold';
-  src: url('/fonts/Montserrat/Montserrat-Bold.ttf');
-}
-
-.mapTextLabel{
-	font-size: 10px;
-	font-family: 'Montserrat-Regular';
-	color: var(--main-txt-color);
-}
-
-.mapCountLabel{
-	font-size: 11px;
-	font-family: 'Montserrat-Regular';
-	color: var(--main-txt-color);
-}
-
-.classHover:hover .mapTextLabel{
-	font-size: 12px;
-	font-family: 'Montserrat-Bold';
-	z-index: 1;
-}
-
-.classHover:hover .mapCountLabel{
-	font-size: 16px;
-	font-family: 'Montserrat-Bold';
-}
 .mumbai{
 	position: absolute;
 	top: 375px;
@@ -37,13 +6,29 @@
 }
 .mumbaiText{
 	position: absolute;
-	top: -22%;
-    left: -147%;
+	top: 10%;
+    left: -190%;
 }
 .mumbaiNumber{
 	position: absolute;
-	top: 70%;
-    left: -147%;
+	top: 50%;
+    left: -100%;
+}
+
+.thane{
+	position: absolute;
+	top: 334px;
+    left: 46px;
+}
+.thaneText{
+	position: absolute;
+	top: 45%;
+    left: 40%;
+}
+.thaneNumber{
+	position: absolute;
+	top: 65%;
+    left: 45%;
 }
 
 .raigad{

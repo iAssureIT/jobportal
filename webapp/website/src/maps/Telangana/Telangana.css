@@ -1,0 +1,467 @@
+
+.adilabad{
+	position: absolute;
+	left:  216px;
+    top: 11px
+}
+.adilabadText{
+	position: absolute;
+	top: 40%;
+    left: 45%;
+}
+.adilabadNumber{
+	position: absolute;
+	top: 50%;
+    left: 55%;
+}
+.komaramBheem{
+	position: absolute;
+	left: 345px;
+    top: 73px;
+}
+.komaramBheemText{
+	position: absolute;
+	top: 30%;
+    left: 35%;
+}
+.komaramBheemNumber{
+	position: absolute;
+	top: 42%;
+    left: 45%;
+}
+.nirmal{
+	position: absolute;
+	left: 150px;
+    top: 120px;
+}
+.nirmalText{
+	position: absolute;
+	top: 38%;
+    left: 30%;
+}
+.nirmalNumber{
+	position: absolute;
+	top: 50%;
+    left: 35%;
+}
+.mancherial{
+	position: absolute;
+    left:355px;
+    top: 139px;
+}
+.mancherialText{
+	position: absolute;
+	top: 30%;
+    left: 40%;
+}
+.mancherialNumber{
+	position: absolute;
+	top: 45%;
+    left: 45%;
+}
+.nizamabad{
+	position: absolute;
+	left:  143px;
+    top: 188px;
+}
+.nizamabadText{
+	position: absolute;
+	top: 30%;
+    left: 45%;
+}
+.nizamabadNumber{
+	position: absolute;
+	top: 45%;
+    left: 50%;
+}
+.jagtial{
+	position: absolute;
+	left: 287px;
+    top: 175px;
+}
+.jagtialText{
+	position: absolute;
+	top: 40%;
+    left: 40%;
+}
+.jagtialNumber{
+	position: absolute;
+	top: 52%;
+    left: 45%;
+}
+.peddapalle{
+	position: absolute;
+	left: 400px;
+    top: 216px;
+}
+.peddapalleText{
+	position: absolute;
+	top: 30%;
+    left: 25%;
+}
+.peddapalleNumber{
+	position: absolute;
+	top: 45%;
+    left: 35%;
+}
+.jayaShankar{
+	position: absolute;
+	left:  483px;
+    top: 218px;
+}
+.jayaShankarText{
+	position: absolute;
+	top: 40%;
+    left: 30%;
+}
+.jayaShankarNumber{
+	position: absolute;
+	top: 50%;
+    left: 35%;
+}
+.kamareddy{
+	position: absolute;
+	left: 104px;
+    top: 261px;
+}
+.kamareddyText{
+	position: absolute;
+	top: 40%;
+    left: 35%;
+}
+.kamareddyNumber{
+	position: absolute;
+	top: 50%;
+    left: 40%;
+}
+.sircilla{
+	position: absolute;
+	left: 292px;
+    top: 260px;
+}
+.sircillaText{
+	position: absolute;
+	top: 30%;
+    left: 20%;
+}
+.sircillaNumber{
+	position: absolute;
+	top: 45%;
+    left: 35%;
+}
+.karimnagar{
+	position: absolute;
+	left: 370px;
+    top: 253px;
+}
+.karimnagarText{
+	position: absolute;
+	top: 40%;
+    left: 40%;
+}
+.karimnagarNumber{
+	position: absolute;
+	top: 50%;
+    left: 45%;
+}
+.sangareddy{
+	position: absolute;
+	left:  86px;
+    top: 323px;
+}
+.sangareddyText{
+	position: absolute;
+	top: 60%;
+    left: 30%;
+}
+.sangareddyNumber{
+	position: absolute;
+	top: 70%;
+    left: 35%;
+}
+.medak{
+	position: absolute;
+	left:158px;
+    top: 340px;
+}
+.medakText{
+	position: absolute;
+	top: 40%;
+    left: 35%;
+}
+.medakNumber{
+	position: absolute;
+	top: 52%;
+    left: 40%;
+}
+.siddipet{
+	position: absolute;
+	left:274px;
+    top: 304px;
+}
+.siddipetText{
+	position: absolute;
+	top: 40%;
+    left: 40%;
+}
+.siddipetNumber{
+	position: absolute;
+	top: 50%;
+    left: 45%;
+}
+.jangaon{
+	position: absolute;
+	left:354px;
+    top: 342px;
+}
+.jangaonText{
+	position: absolute;
+	top: 45%;
+    left: 40%;
+}
+.jangaonNumber{
+	position: absolute;
+	top: 55%;
+    left: 45%;
+}
+.warangalUrban{
+	position: absolute;
+	left:431px;
+    top: 331px;
+}
+.warangalUrbanText{
+	position: absolute;
+	top: 35%;
+    left: 40%;
+}
+.warangalUrbanNumber{
+	position: absolute;
+	top: 45%;
+    left: 45%;
+}
+.warangalRural{
+	position: absolute;
+	left:474px;
+    top: 334px;
+}
+.warangalRuralText{
+	position: absolute;
+	top: 40%;
+    left: 35%;
+}
+.warangalRuralNumber{
+	position: absolute;
+	top: 50%;
+    left: 40%;
+}
+.Mahabubabad{
+	position: absolute;
+	left: 698px;
+    top: 280px;
+}
+.MahabubabadText{
+	position: absolute;
+	top: 40%;
+    left: 40%;
+}
+.MahabubabadNumber{
+	position: absolute;
+	top: 55%;
+    left: 45%;
+}
+.mahabubabad{
+	position: absolute;
+	left:477px;
+    top: 367px;
+}
+.mahabubabadText{
+	position: absolute;
+	top: 50%;
+    left:30%;
+}
+.mahabubabadNumber{
+	position: absolute;
+	top: 60%;
+    left: 35%;
+}
+.kothagudem{
+	position: absolute;
+	left:594px;
+    top: 338px;
+}
+.kothagudemText{
+	position: absolute;
+	top: 45%;
+    left:25%;
+}
+.kothagudemNumber{
+	position: absolute;
+	top: 55%;
+    left: 40%;
+}
+.vikarabad{
+	position: absolute;
+	left:69px;
+    top: 451px;
+}
+.vikarabadText{
+	position: absolute;
+	top: 40%;
+    left:35%;
+}
+.vikarabadNumber{
+	position: absolute;
+	top: 50%;
+    left: 40%;
+}
+.rangareddy{
+	position: absolute;
+	left: 176px;
+    top: 462px;
+}
+.rangareddyText{
+	position: absolute;
+	top: 40%;
+    left:40%;
+}
+.rangareddyNumber{
+	position: absolute;
+	top: 50%;
+    left: 45%;
+}
+.medchal{
+	position: absolute;
+	left: 257px;
+    top: 439px;
+}
+.medchalText{
+	position: absolute;
+	top: 30%;
+    left:20%;
+}
+.medchalNumber{
+	position: absolute;
+	top: 45%;
+    left: 35%;
+}
+.bhavnagiri{
+	position: absolute;
+	left:  320px;
+    top: 419px;
+}
+.bhavnagiriText{
+	position: absolute;
+	top: 40%;
+    left:25%;
+}
+.bhavnagiriNumber{
+	position: absolute;
+	top: 50%;
+    left: 30%;
+}
+.suryape{
+	position: absolute;
+	left:  445px;
+    top: 478px;
+}
+.suryapeText{
+	position: absolute;
+	top: 35%;
+    left:35%;
+}
+.suryapeNumber{
+	position: absolute;
+	top: 45%;
+    left: 40%;
+}
+.khammam{
+	position: absolute;
+	left: 525px;
+    top: 464px;
+}
+.khammamText{
+	position: absolute;
+	top: 35%;
+    left:30%;
+}
+.khammamNumber{
+	position: absolute;
+	top: 45%;
+    left: 40%;
+}
+.nalgonda{
+	position: absolute;
+	left:313px;
+    top: 505px;
+}
+.nalgondaText{
+	position: absolute;
+	top: 40%;
+    left:40%;
+}
+.nalgondaNumber{
+	position: absolute;
+	top: 47%;
+    left: 45%;
+}
+.nagarkurnool{
+	position: absolute;
+	left: 204px;
+    top: 611px;
+}
+.nagarkurnoolText{
+	position: absolute;
+	top: 45%;
+    left:30%;
+}
+.nagarkurnoolNumber{
+	position: absolute;
+	top: 55%;
+    left: 40%;
+}
+.mahabubnagar{
+	position: absolute;
+	left:45px;
+    top: 569px;
+}
+.mahabubnagarText{
+	position: absolute;
+	top: 35%;
+    left:30%;
+}
+.mahabubnagarNumber{
+	position: absolute;
+	top: 45%;
+    left: 35%;
+}
+.wanaparthy{
+	position: absolute;
+	left:130px;
+    top: 650px;
+}
+.wanaparthyText{
+	position: absolute;
+	top: 30%;
+    left:30%;
+}
+.wanaparthyNumber{
+	position: absolute;
+	top: 40%;
+    left: 35%;
+}
+.jogulambaGadwal{
+	position: absolute;
+	left: 90px;
+    top: 695px;
+}
+.jogulambaGadwalText{
+	position: absolute;
+	top: 40%;
+    left:10%;
+}
+.jogulambaGadwalNumber{
+	position: absolute;
+	top: 52%;
+    left: 25%;
+}
+

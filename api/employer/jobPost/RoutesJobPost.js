@@ -9,7 +9,9 @@ router.post   ("/list"	   						, jobsController.getJobList);
 router.post   ("/joblist-for-employer"	   		, jobsController.getJobListForEmployer);
 router.patch ("/update"		   					, jobsController.updateJob);
 
+router.post ("/job-count"		   				, jobsController.jobCount);
 router.post ("/mapwise-jobs"		   			, jobsController.mapwiseJobs);
+//router.post ("/functional-jobs-count"		   	, jobsController.functonalAreaJobsCount);
 router.post ("/functional-jobs"		   			, jobsController.functonalAreaJobs);
 router.post ("/subfunctional-jobs"		   		, jobsController.subfunctionalAreaJobs);
 router.post ("/industrial-jobs"		   			, jobsController.industrialJobs);

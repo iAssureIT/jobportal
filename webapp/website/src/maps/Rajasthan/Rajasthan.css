@@ -1,0 +1,527 @@
+.jaisalmer{
+	position: absolute;
+	top: 250px;
+	left: 0px;
+}
+.jaisalmerText{
+	position: absolute;
+	top: 50%;
+    left: 25%;
+}
+.jaisalmerNumber{
+	position: absolute;
+	top: 60%;
+    left: 33%;
+}
+
+.jodhpur{
+	position: absolute;
+	top: 296px;
+    left: 196px;
+}
+.jodhpurText{
+	position: absolute;
+	top: 50%;
+    left: 25%;
+}
+.jodhpurNumber{
+	position: absolute;
+	top: 60%;
+    left: 33%;
+}
+
+.nagaur{
+	position: absolute;
+	top: 295px;
+    left: 308px;
+}
+.nagaurText{
+	position: absolute;
+	top: 50%;
+    left: 25%;
+}
+.nagaurNumber{
+	position: absolute;
+	top: 60%;
+    left: 33%;
+}
+
+.jaipur{
+	position: absolute;
+	top: 285px;
+    left: 464px;
+}
+.jaipurText{
+	position: absolute;
+	top: 50%;
+    left: 35%;
+}
+.jaipurNumber{
+	position: absolute;
+	top: 60%;
+    left: 43%;
+}
+
+.dausa{
+	    position: absolute;
+    top: 344px;
+    left: 570px;
+}
+.dausaText{
+	position: absolute;
+	top: 20%;
+    left: 25%;
+}
+.dausaNumber{
+	position: absolute;
+	top: 40%;
+    left: 33%;
+}
+
+.karauli{
+	position: absolute;
+  	top: 372px;
+    left: 596px;
+}
+.karauliText{
+	position: absolute;
+	top: 15%;
+    left: 25%;
+}
+.karauliNumber{
+	position: absolute;
+	top: 40%;
+    left: 63%;
+}
+
+.dholpur{
+	position: absolute;
+  	top: 374px;
+    left: 662px;
+}
+.dholpurText{
+	position: absolute;
+	top: 20%;
+    left: 25%;
+}
+.dholpurNumber{
+	position: absolute;
+	top: 40%;
+    left: 33%;
+}
+
+.bikaner{
+	position: absolute;
+    top: 166px;
+    left: 210px;
+}
+.bikanerText{
+	position: absolute;
+	top: 30%;
+    left: 25%;
+}
+.bikanerNumber{
+	position: absolute;
+	top: 40%;
+    left: 33%;
+}
+
+.sri_ganganagar{
+	position: absolute;
+    top: 57px;
+    left: 276px;
+}
+.sri_ganganagarText{
+	position: absolute;
+	top: 30%;
+    left: 25%;
+}
+.sri_ganganagarNumber{
+	position: absolute;
+	top: 40%;
+    left: 33%;
+}
+
+.hanumangarh{
+	position: absolute;
+    top: 76px;
+    left: 373px;
+}
+.hanumangarhText{
+	position: absolute;
+	top: 30%;
+    left: 25%;
+}
+.hanumangarhNumber{
+	position: absolute;
+	top: 45%;
+    left: 33%;
+}
+
+.churu{
+	position: absolute;
+    top: 176px;
+    left: 376px;
+}
+.churuText{
+	position: absolute;
+	top: 30%;
+    left: 25%;
+}
+.churuNumber{
+	position: absolute;
+	top: 45%;
+    left: 33%;
+}
+
+.jhunjhunun{
+	position: absolute;
+    top: 219px;
+    left: 478px;
+}
+.jhunjhununText{
+	position: absolute;
+	top: 30%;
+    left: 25%;
+}
+.jhunjhununNumber{
+	position: absolute;
+	top: 45%;
+    left: 33%;
+}
+
+.sikar{
+	position: absolute;
+    top: 249px;
+    left: 446px;
+}
+.sikarText{
+	position: absolute;
+	top: 40%;
+    left: 25%;
+}
+.sikarNumber{
+	position: absolute;
+	top: 55%;
+    left: 33%;
+}
+
+.alwar{
+	position: absolute;
+    top: 250px;
+    left: 569px;
+}
+.alwarText{
+	position: absolute;
+	top: 40%;
+    left: 25%;
+}
+.alwarNumber{
+	position: absolute;
+	top: 55%;
+    left: 33%;
+}
+
+.bharatpur{
+	position: absolute;
+    top: 290px;
+    left: 635px;
+}
+.bharatpurText{
+	position: absolute;
+	top: 40%;
+    left: 25%;
+}
+.bharatpurNumber{
+	position: absolute;
+	top: 55%;
+    left: 33%;
+}
+
+.barmer{
+	position: absolute;
+    top: 397px;
+    left: 49px;
+}
+.barmerText{
+	position: absolute;
+	top: 40%;
+    left: 35%;
+}
+.barmerNumber{
+	position: absolute;
+	top: 55%;
+    left: 43%;
+}
+
+.jalore{
+	position: absolute;
+    top: 468px;
+    left: 134px;
+}
+.jaloreText{
+	position: absolute;
+	top: 40%;
+    left: 45%;
+}
+.jaloreNumber{
+	position: absolute;
+	top: 55%;
+    left: 53%;
+}
+
+.pali{
+	position: absolute;
+    top: 412px;
+    left: 274px;
+}
+.paliText{
+	position: absolute;
+	top: 45%;
+    left: 25%;
+}
+.paliNumber{
+	position: absolute;
+	top: 55%;
+    left: 35%;
+}
+
+.ajmer{
+	position: absolute;
+    top: 365px;
+    left: 374px;
+}
+.ajmerText{
+	position: absolute;
+	top: 40%;
+    left: 45%;
+}
+.ajmerNumber{
+	position: absolute;
+	top: 55%;
+    left: 45%;
+}
+
+.tonk{
+	position: absolute;
+    top: 405px;
+    left: 481px;
+}
+.tonkText{
+	position: absolute;
+	top: 40%;
+    left: 35%;
+}
+.tonkNumber{
+	position: absolute;
+	top: 55%;
+    left: 35%;
+}
+
+.sawai_madhopur{
+	position: absolute;
+    top: 393px;
+    left: 554px;
+}
+.sawai_madhopurText{
+	position: absolute;
+	top: 30%;
+    left: 5%;
+}
+.sawai_madhopurNumber{
+	position: absolute;
+	top: 65%;
+    left: 35%;
+}
+
+.sirohi{
+	position: absolute;
+    top: 517px;
+    left: 238px;
+}
+.sirohiText{
+	position: absolute;
+	top: 45%;
+    left: 30%;
+}
+.sirohiNumber{
+	position: absolute;
+	top: 65%;
+    left: 35%;
+}
+
+.rajsamand{
+	position: absolute;
+    top: 465px;
+    left: 321px;
+}
+.rajsamandText{
+	position: absolute;
+	top: 45%;
+    left: 30%;
+}
+.rajsamandNumber{
+	position: absolute;
+	top: 65%;
+    left: 35%;
+}
+
+.bhilwara{
+	    position: absolute;
+    top: 458px;
+    left: 382px;
+}
+.bhilwaraText{
+	position: absolute;
+	top: 35%;
+    left: 30%;
+}
+.bhilwaraNumber{
+	position: absolute;
+	top: 55%;
+    left: 35%;
+}
+
+.bundi{
+	position: absolute;
+    top: 470px;
+    left: 490px;
+}
+.bundiText{
+	position: absolute;
+	top: 35%;
+    left: 30%;
+}
+.bundiNumber{
+	position: absolute;
+	top: 55%;
+    left: 35%;
+}
+
+.kota{
+	position: absolute;
+    top: 475px;
+    left: 519px;
+}
+.kotaText{
+	position: absolute;
+	top: 50%;
+    left: 30%;
+}
+.kotaNumber{
+	position: absolute;
+	top: 65%;
+    left: 35%;
+}
+
+.baran{
+	position: absolute;
+    top: 516px;
+    left: 571px;
+}
+.baranText{
+	position: absolute;
+	top: 30%;
+    left: 20%;
+}
+.baranNumber{
+	position: absolute;
+	top: 45%;
+    left: 25%;
+}
+
+.jhalawar{
+	position: absolute;
+    top: 567px;
+    left: 504px;
+}
+.jhalawarText{
+	position: absolute;
+	top: 30%;
+    left: 35%;
+}
+.jhalawarNumber{
+	position: absolute;
+	top: 45%;
+    left: 45%;
+}
+
+.udaipur{
+	position: absolute;
+   	top: 552px;
+    left: 295px;
+}
+.udaipurText{
+	position: absolute;
+	top: 40%;
+    left: 35%;
+}
+.udaipurNumber{
+	position: absolute;
+	top: 55%;
+    left: 45%;
+}
+
+.chittorgarh{
+	position: absolute;
+   	top: 531px;
+    left: 396px;
+}
+.chittorgarhText{
+	position: absolute;
+	top: 30%;
+    left: 35%;
+}
+.chittorgarhNumber{
+	position: absolute;
+	top: 45%;
+    left: 45%;
+}
+
+.dungarpur{
+	position: absolute;
+    top: 642px;
+    left: 323px;
+}
+.dungarpurText{
+	position: absolute;
+	top: 20%;
+    left: 15%;
+}
+.dungarpurNumber{
+	position: absolute;
+	top: 45%;
+    left: 45%;
+}
+
+.pratapgarh{
+	position: absolute;
+    top: 599px;
+    left: 405px;
+}
+.pratapgarhText{
+	position: absolute;
+	top: 30%;
+    left: 15%;
+}
+.pratapgarhNumber{
+	position: absolute;
+	top: 45%;
+    left: 45%;
+}
+
+.banswara{
+	position: absolute;
+    top: 650px;
+    left: 373px;
+}
+.banswaraText{
+	position: absolute;
+	top: 30%;
+    left: 15%;
+}
+.banswaraNumber{
+	position: absolute;
+	top: 45%;
+    left: 45%;
+}

@@ -43,8 +43,7 @@ class Address extends Component{
 	}
 	componentDidMount(){
 		this.getData();
-		this.getStates();
-
+		
 		Axios.get("/api/addresstypemaster/get/list")
 			.then(response => {
 				this.setState({inputAddressType : response.data});
@@ -260,17 +259,7 @@ class Address extends Component{
 		event.preventDefault();
     	this.props.history.push("/contact/"+this.state.candidate_id);
 	}
-	getStates() {
-		Axios.get("http://locations2.iassureit.com/api/states/get/list/IN")
-			.then((response) => {
-				this.setState({
-					stateArray: response.data
-				})
-				document.getElementById('Statedata').val(this.state.states);
-			})
-			.catch((error) => {
-			})
-	}
+	
 	camelCase(str) {
 		return str
 			.toLowerCase()
@@ -417,10 +406,10 @@ class Address extends Component{
 	//========== Validation End ==================
 
 	render(){
-		const searchOptions = {
+	const searchOptions = {
       // types: ['(cities)'],
       componentRestrictions: {country: "in"}
-       }	
+    }	
 		return(
 				<div className="mainFormWrapper col-lg-12">
 					<div className="row">
@@ -595,7 +584,7 @@ class Address extends Component{
 										<span className="input-group-addon inputBoxIcon">
 											<i className="fa fa-map"></i> 
 										</span> 
-										<select className="form-control inputBox"  id="states"
+										{/*<select className="form-control inputBox"  id="states"
 										 ref="states" value={this.state.states} name="states" 
 										 onChange={this.handleChangeState.bind(this)} >
 											<option hidden>-- Select --</option>
@@ -612,7 +601,9 @@ class Address extends Component{
 													) 
 												: ''
 											}
-										</select>
+										</select>*/}
+										<input type="text" className="form-control inputBox" ref="states" id="states" name="states" value={this.state.states} onChange={this.handleChange}/>
+													
 									</div> 
 									<span id="stateError" className="errorMsg"></span>
 								</div>
