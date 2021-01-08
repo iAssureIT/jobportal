@@ -140,9 +140,9 @@
     width: 100%;
     border-radius:0;
 }
-body {
+/*body {
   font-family: Helvetica, sans-serif;
-}
+}*/
 
 .react-autosuggest__container {
   position: relative;

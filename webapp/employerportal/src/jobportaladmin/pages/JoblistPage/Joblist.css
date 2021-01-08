@@ -89,23 +89,26 @@
 	font-size: 11px;
 	float: left;
 	margin-top: 2px;
+	font-weight: 500;
 	border: 1px solid var(--main-border-color);
 	color: var(--main-border-color);
 	background-color: var(--form-field-background-color);
 }
 
 .jobListDesignation{
-	font-size: 22px;
+	font-size: 21px;
 	color: var(--main-border-color);
 	margin-top: 3px;
 	margin-left: -5px;
-	font-family: 'Montserrat-SemiBold';
+	/*font-family: 'Montserrat-SemiBold';*/
+	font-weight: 600;
 }
 
 .jobListCompanyName{
 	margin-top: 7px;
 	margin-left: -5px;
-	font-family: 'Montserrat-SemiBold';
+	/*font-family: 'Montserrat-SemiBold';*/
+	font-weight: 600;
 }
 
 .jobListExperience{
@@ -220,11 +223,11 @@
 .swal2-styled.swal2-confirm{
 	box-shadow: none;
 	color: #fff;
-	font-weight: bold;
+	font-weight: 600;
 }
 
 .swal2-styled.swal2-cancel{
 	box-shadow: none;
 	color: #fff;
-	font-weight: bold;
+	font-weight: 600;
 }

@@ -1094,9 +1094,9 @@ select#gender option[value="others"] {
     top: 23px !important;
 }
 
-.react-tel-input .form-control {
+/*.react-tel-input .form-control {
     width: 100% !important;
-}
+}*/
 
 .error {
     color: #ea0202;

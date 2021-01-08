@@ -12,7 +12,7 @@ class CandidateList extends Component{
 		super(props);
 
 		this.state={
-			candidate_id        : this.props.match.params.candidate_id,
+			candidate_id       : this.props.match.params.candidate_id,
 			dataArry           :[],
 			skillsArry         :[],
 		}

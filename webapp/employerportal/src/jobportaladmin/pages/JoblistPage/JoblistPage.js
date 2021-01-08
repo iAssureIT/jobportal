@@ -1,10 +1,11 @@
-import React, {Component} 	from 'react';
-import "./Joblist.css";
-import LeftSideFilters		from '../../blocks/LeftSideFilters/LeftSideFilters.js';
-import Joblist				from '../../blocks/Joblist/Joblist.js';
-import { connect }        from 'react-redux';
+import React, {Component} 	  from 'react';
+import LeftSideFilters		    from '../../blocks/LeftSideFilters/LeftSideFilters.js';
+import Joblist				        from '../../blocks/Joblist/Joblist.js';
+import { connect }            from 'react-redux';
 import { bindActionCreators } from 'redux';
 import  * as mapActionCreator from '../../common/actions/index';
+
+import "./Joblist.css";
 
 class JoblistPage extends Component{
 	constructor(props){
@@ -16,6 +17,7 @@ class JoblistPage extends Component{
         selector             : {}, 
 	    }
 	}
+  
   componentDidMount(){
  
       var selector=this.state.selector;
@@ -29,55 +31,59 @@ class JoblistPage extends Component{
       mapAction.applicantsCountList({employerID : this.props.company_id});
 
   }
-	leftDrawerInfo(event){
+	
+  leftDrawerInfo(event){
 
     if(this.state.leftDrawerDisplay==="-350px"){
   
       this.setState({
-      leftDrawerDisplay  : "0px",
-      arrowToggle: true
-      
-      })
+                      leftDrawerDisplay  : "0px",
+                      arrowToggle: true
+                    })
     }
     else{
       this.setState({
-      leftDrawerDisplay  : "-350px",
-      arrowToggle:false
-      })
+                      leftDrawerDisplay  : "-350px",
+                      arrowToggle:false
+                    })
     }
   }
-	render(){
-		return(
-  		<div className="ViewBodyWrapper">
-          <div className="col-lg-3" style={{"marginTop": "30px"}}>
-            <div className="col-lg-12">
-              <div className='row'>
-                <LeftSideFilters />
-              </div>
-            </div>
-          </div>
+	
+  render(){
+        		return(
+                		<div className="ViewBodyWrapper">
+                        <div className="col-lg-3" style={{"marginTop": "30px"}}>
+                          <div className="col-lg-12">
+                            <div className='row'>
+                              <LeftSideFilters />
+                            </div>
+                          </div>
+                        </div>
 
-          <div className="col-lg-9">
-            <div className="row">
-              <div id="mapwise">
-                <Joblist jobList={this.props.jobList}/>
-              </div>
-            </div>  
-          </div>
-           
-      </div>
-	);
-	}
+                        <div className="col-lg-9">
+                          <div className="row">
+                            <div id="mapwise">
+                              <Joblist jobList={this.props.jobList}/>
+                            </div>
+                          </div>  
+                        </div>
+                         
+                    </div>
+        	       );
+	        }
 }
+
 const mapStateToProps = (state)=>{
-    return {
-        user_id     : state.userDetails.user_id,  company_id   : state.userDetails.company_id,
-        selector    : state.selector,             jobList     : state.jobList,
-    }
-}
+                                    return {
+                                              user_id     : state.userDetails.user_id,  company_id   : state.userDetails.company_id,
+                                              selector    : state.selector,             jobList     : state.jobList,
+                                            }
+                                  }
+
 const mapDispatchToProps = (dispatch) => ({
-  mapAction :  bindActionCreators(mapActionCreator, dispatch)
-}) 
+                                            mapAction :  bindActionCreators(mapActionCreator, dispatch)
+                                          }) 
+
 export default connect(mapStateToProps, mapDispatchToProps)(JoblistPage)
 
 

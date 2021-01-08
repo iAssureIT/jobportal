@@ -793,13 +793,13 @@ h6,
     background: #fff;
   }
 }
-.form-control {
+/*.form-control {
   border-radius: 0;
   box-shadow: none;
   border-color: #ccc;
   letter-spacing: 1px;
   font-family: 'MYRIADPROREGULAR';
-}
+}*/
 /* support Font Awesome icons in form-control */
 .form-control-feedback.fa {
   line-height: 34px;
