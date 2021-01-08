@@ -68,13 +68,13 @@ import Telangana from './maps/Telangana/Telangana.js';
 import UttarPradesh from './maps/UttarPradesh/UttarPradesh.js';
 
 
+
 import Haryana from './maps/Haryana/Haryana.js';
 import Rajasthan from './maps/Rajasthan/Rajasthan.js';
 import Uttarakhand from './maps/Uttarakhand/Uttarakhand.js';
 import Sikkim from './maps/Sikkim/Sikkim.js';
 import Assam from './maps/Assam/Assam.js';
 import Ladakh from './maps/Ladakh/Ladakh.js';
-
 
 
 
@@ -230,6 +230,7 @@ class Layout extends Component  {
                                             <Route exact path="/TamilNadu"        component={TamilNadu }  />
                                             <Route exact path="/Telangana"        component={Telangana }  />
                                             <Route exact path="/UttarPradesh"        component={UttarPradesh }  />
+
 
 
 

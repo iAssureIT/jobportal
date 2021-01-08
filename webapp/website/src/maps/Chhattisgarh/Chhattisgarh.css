@@ -359,18 +359,20 @@
 	top: 55%;
     left: 40%;
 }
-.balrampur1{
-	position: absolute!important;
+
+.balrampur{
+	position: absolute;
 	left: 333px!important;
     top: 15px!important;
 }
-.balrampur1Text{
-	position: absolute!important;
+.balrampurText{
+	position: absolute;
 	top: 45%!important;
     left: 45%!important;
 }
-.balrampur1Number{
-	position: absolute!important;
+.balrampurNumber{
+	position: absolute;
+
 	top: 55%!important;
     left: 50%!important;
 }
