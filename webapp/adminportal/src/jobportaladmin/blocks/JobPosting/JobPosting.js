@@ -19,6 +19,7 @@ import  * as mapActionCreator       from '../../Common/actions/index';
 import './JobPosting.css';
 import 'react-phone-input-2/lib/style.css';
 
+
 class JobPosting extends Component {
 
     constructor(props) {
