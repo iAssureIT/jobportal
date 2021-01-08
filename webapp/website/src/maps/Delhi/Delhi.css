@@ -3,8 +3,8 @@
 
 .dwarka{
 	position: absolute;
-	left: 1px;
-	top:  400px;
+	left: 5px;
+    top: 410px;
 }
 .dwarkaText{
 	position: absolute;
@@ -18,8 +18,8 @@
 }
 .newDelhi{
 	position: absolute;
-	left: 263px;
-    top: 446px;
+	left:  269px;
+    top: 454px;
 }
 .newDelhiText{
 	position: absolute;
@@ -63,7 +63,7 @@
 }
 .preetVihar{
 	position: absolute;
-	left: 517px;
+	left:516px;
     top: 433px;
 }
 .preetViharText{
@@ -94,7 +94,7 @@
 .centralDaryaganj{
 	position: absolute;
 	left: 414px;
-    top: 248px;
+    top: 249px;
 }
 .centralDaryaganjText{
 	position: absolute;
@@ -108,8 +108,8 @@
 }
 .rajouriGarden{
 	position: absolute;
-	left: 145px;
-    top: 364px;
+	left: 148px;
+    top: 370px;
 }
 .rajouriGardenText{
 	position: absolute;
@@ -123,8 +123,8 @@
 }
 .kanjhwala{
 	position: absolute;
-	left: 134px;
-    top: 204px;
+	left:139px;
+    top: 210px;
 }
 .kanjhwalaText{
 	position: absolute;
@@ -138,8 +138,8 @@
 }
 .northNarela{
 	position: absolute;
-	left: 155px;
-    top: 112px;
+	left: 158px;
+    top: 120px;
 }
 .northNarelaText{
 	position: absolute;

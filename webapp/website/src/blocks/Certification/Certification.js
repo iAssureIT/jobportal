@@ -6,6 +6,8 @@ import Swal 			   from 'sweetalert2';
 import { withRouter }	   from 'react-router-dom';
 import Moment              from 'moment';
 
+
+
 import '../BasicInfoForm/BasicInfoForm.css';
 import './Certification.css';
 
@@ -15,7 +17,7 @@ class Certification extends Component{
 
 		this.state={
 			certificationArry    : [],
-			candidate_id          : this.props.match.params.candidate_id,
+			candidate_id         : this.props.match.params.candidate_id,
 			skillCertificationID : this.props.match.params.skillCertificationID,
 			certificationID      : this.props.match.params.certificationID,
 			certificationName    : "",
@@ -27,15 +29,10 @@ class Certification extends Component{
 			certificationToggel  : "toggleSkills",
 			rating               : "",
 			buttonText           : "Save",
-			primarySkillsArrya   :[],
-			primarySkills        :[],
-			secondarySkills      :[],
-
-			inputSecondarySkills : [],
-			inputPrimarySkills 	 : [],
-
-			selectedPrimarySkills    :[],
-			selectedSecondarySkills  :[],
+			skillsArrya          : [],
+			skills               : "",
+            skills_id            : "",
+            skillslist           : [],
 		}
 
 		 this.style =  {
@@ -72,37 +69,14 @@ class Certification extends Component{
 		
 		Axios.get("/api/skillmaster/get/list")
 			.then(response => {
-				this.setState({inputPrimarySkills : response.data});
-				this.state.inputPrimarySkills!=null && this.state.inputPrimarySkills.length > 0 
-				?
-					this.state.inputPrimarySkills.map((elem,index)=>{
-						
-						this.state.primarySkills.push(elem.skill);
-						
-					})
-				:
-					this.state.primarySkills.push("select");
+
+				this.setState({skillslist : response.data});
+				console.log('skillslist', this.state.skillslist);
 			})
 			.catch(error=>{
 				Swal.fire("Error while getting List data",error.message,'error');
 			})
-
-		Axios.get("/api/skillmaster/get/list")
-		.then(response => {
-			this.setState({inputSecondarySkills : response.data});
-			this.state.inputSecondarySkills!=null && this.state.inputSecondarySkills.length > 0 
-			?
-				this.state.inputSecondarySkills.map((elem,index)=>{
-					
-					this.state.secondarySkills.push(elem.skill);
-					
-				})
-			:
-				this.state.secondarySkills.push("select");
-		})
-		.catch(error=>{
-			Swal.fire("Error while getting List data",error.message,'error');
-		})
+			
 
 
 		if(this.props.match.params.certificationID){
@@ -113,20 +87,19 @@ class Certification extends Component{
 }
 
 	//========== User Define Function Start ================
-	onSelect(selectedList, selectedItem) {
-		var id = selectedItem.id;
-    	var primaryArry  = this.state.selectedPrimarySkills;
-    	var secodaryArry = this.state.selectedSecondarySkills;
-    	primaryArry.push(selectedItem);
-    	secodaryArry.push(selectedItem);
-	}
-	 
-	onRemove(selectedList, removedItem) {
-    	var primaryArry  = this.state.selectedPrimarySkills;
-    	var secodaryArry = this.state.selectedSecondarySkills;
-    	primaryArry.pop(removedItem);
-    	secodaryArry.pop(removedItem);
-	}
+	onChangeSkills(event){
+        const {name,value} = event.target;
+        console.log('value',value);
+        this.setState({ [name]:value });  
+        
+        var skills_id;
+        if (document.querySelector('#skills option[value="' + value + '"]')) {
+            skills_id = document.querySelector('#skills option[value="' + value + '"]').getAttribute("data-value")
+        }else{ skills_id = "" }
+
+        this.setState({ skills_id : skills_id });  
+    } 
+	
 	getData(){
 		Axios.get("/api/candidatemaster/get/one/"+this.state.candidate_id)
 		.then(response=>{
@@ -309,25 +282,26 @@ class Certification extends Component{
 		this.changeBlock(event);
 		if(this.state.certificationToggel==="toggleSkills"){
 			var formValues = {
-					                candidate_id            : this.state.candidate_id,
-					                skillCertificationID   : this.state.skillCertificationID,
+					                candidate_id               : this.state.candidate_id,
+					                skillCertificationID       : this.state.skillCertificationID,
 					                skills:{
-					                	primarySkills          : this.state.selectedPrimarySkills,
-										secondarySkills        : this.state.selectedSecondarySkills,
+					                	skills                 : this.state.skills,
 										rating                 : this.state.rating,
+										skills_id              : this.state.skills_id
 					                }
 					                
 							}
+							console.log(formValues);
 		}else{
 			var formValues = {
-					                candidate_id         : this.state.candidate_id,
-					                certificationID     : this.state.certificationID,
+					                candidate_id               : this.state.candidate_id,
+					                certificationID            : this.state.certificationID,
 					                certifications:{
-					                	certName            : this.state.certificationName,
-										issuedBy            : this.state.issuedBy,
-										certifiedOn         : this.state.certifiedOn,
-										validTill           : this.state.validity,
-										gradePercent        : this.state.grade,
+					                	certName               : this.state.certificationName,
+										issuedBy               : this.state.issuedBy,
+										certifiedOn            : this.state.certifiedOn,
+										validTill              : this.state.validity,
+										gradePercent           : this.state.grade,
 					                }
 									
 									
@@ -353,10 +327,9 @@ class Certification extends Component{
 
 									Swal.fire("Congrats","Your Certification Details is update Successfully","success");
 										this.setState({
-													selectedPrimarySkills      :[],
-													selectedSecondarySkills    :[],
-													buttonText                 : "Save",
-													rating                     : "",
+													skills             : [],
+													buttonText         : "Save",
+													rating             : "",
 												})
 							this.props.history.push("/certification/"+this.state.candidate_id);
 					})
@@ -395,10 +368,9 @@ class Certification extends Component{
 
 					Swal.fire("Congrats","Your Certification Details is insert Successfully","success");
 						this.setState({
-										selectedPrimarySkills      : [],
-										selectedSecondarySkills    : [],
-										rating                     : "",
-										buttonText                 : "Save"
+										skills             : [],
+										rating             : "",
+										buttonText         : "Save"
 									})
 	
 				})
@@ -429,6 +401,7 @@ class Certification extends Component{
 		event.preventDefault();
 		 this.props.history.push("/experience/"+this.state.candidate_id);
 	}
+
 	//========== User Define Function End ==================
 	//========== Validation Start ==================
 	 validateForm=()=>{
@@ -514,8 +487,26 @@ class Certification extends Component{
 							?
 								<div >
 								<div className="row formWrapper">
+									
+									<div className="col-lg-1 ">
+										{/*<div className="tooltip">Hover over me
+										  <span className="tooltiptext">Tooltip text</span>
+										</div>*/}
+										
+										<div className="customCheckBox">
+											
+										
+											<label  className="">
+												<input type="checkbox"  />
+											    <span class="checkmark"></span>
+											</label>
+										</div>
+										
+										    
+										
+									</div>
 									<div className="col-lg-6">
-										<label htmlFor="primarySkills" className="nameTitleForm">
+										<label htmlFor="skills" className="nameTitleForm">
 											Primary Skills 
 											<sup className="nameTitleFormStar">*</sup>
 										</label>
@@ -523,18 +514,18 @@ class Certification extends Component{
 											<span className="input-group-addon inputBoxIcon">
 												<FontAwesomeIcon icon="chalkboard-teacher" /> 
 											</span> 
-											<Multiselect  name="primarySkills" id="primarySkills" 
-											 	className="form-control " 
-											 	value={this.state.selectedPrimarySkills} 
-											 	onChange={this.handleChange.bind(this)}
-												options={this.state.primarySkills}
-												isObject={false}
-												style={this.style}
-												selectionLimit="4"
-												onSelect={this.onSelect.bind(this)} 
-                                                onRemove={this.onRemove.bind(this)}
-											
-											 />
+											<input type="text" list="skills" 
+											 className="form-control inputBox" 
+											 refs="skills" name="skills" 
+											 id="selectskills" 
+											 maxLength="100" value={this.state.skills} 
+											 data-value={this.state.skills_id}
+											 onChange={this.onChangeSkills.bind(this)} />
+											<datalist name="skills" id="skills" className="skillslist" >
+												{this.state.skillslist.map((item, key) =>
+												    <option key={key} value={item.skill} data-value={item._id}/>
+												)}
+											</datalist>
 										</div> 
 										<span id="skillsError" className="errorMsg"></span>
 									</div>
@@ -550,38 +541,6 @@ class Certification extends Component{
 										</div> 
 										<span id="ratingError" className="errorMsg"></span>
 									</div>
-								</div>
-								<div className="row formWrapper">
-									<div className="col-lg-6">
-										<label htmlFor="secondarySkills" className="nameTitleForm">Secondary Skills <sup className="nameTitleFormStar">*</sup></label>
-										<div className="input-group ">
-											<span className="input-group-addon inputBoxIcon"><FontAwesomeIcon icon="chalkboard-teacher" /> </span> 
-											<Multiselect  name="secondarySkills" id="secondarySkills" className="form-control " value={this.state.selectedSecondarySkills} onChange={this.handleChange.bind(this)}
-												options={this.state.secondarySkills}
-												isObject={false}
-												style={this.style}
-												selectionLimit="4"
-												onSelect={this.onSelect.bind(this)} 
-                                                onRemove={this.onRemove.bind(this)}
-											
-											 />
-										</div> 
-										<span id="skillsError" className="errorMsg"></span>
-									</div>
-									
-
-									<div className="col-lg-4">
-										<label htmlFor="rating" className="nameTitleForm">How do you rate yourself  <sup className="nameTitleFormStar">*</sup></label>
-										<div className="input-group ">
-											<span className={this.state.rating=== "star1A"||this.state.rating=== "star2A"||this.state.rating=== "star3A"||this.state.rating=== "star4A"||this.state.rating=== "star5A"? "fa fa-star rating stars":"fa fa-star-o rating"} id="star1A" name="rating" value="star1A" onClick={this.starClick.bind(this)}></span>
-											<span className={this.state.rating === "star2A"||this.state.rating=== "star3A"||this.state.rating=== "star4A"||this.state.rating=== "star5A"? "fa fa-star rating stars":"fa fa-star-o rating"} id="star2A" name="rating" value="star2A" onClick={this.starClick.bind(this)}></span>
-											<span className={this.state.rating === "star3A"||this.state.rating=== "star4A"||this.state.rating=== "star5A"? "fa fa-star rating stars":"fa fa-star-o rating"} id="star3A" name="rating" value="star3A" onClick={this.starClick.bind(this)}></span>
-											<span className={this.state.rating === "star4A" ||this.state.rating=== "star5A"? "fa fa-star rating stars":"fa fa-star-o rating"} id="star4A" name="rating" value="star4A" onClick={this.starClick.bind(this)}></span>
-											<span className={this.state.rating === "star5A" ? "fa fa-star rating stars":"fa fa-star-o rating"} id="star5A" name="rating" value="star5A" onClick={this.starClick.bind(this)}></span>
-										</div> 
-										<span id="ratingError" className="errorMsg"></span>
-									</div>
-
 								</div>
 							</div>
 							:

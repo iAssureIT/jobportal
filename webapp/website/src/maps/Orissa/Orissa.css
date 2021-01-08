@@ -361,18 +361,18 @@
 }
 .jaipur{
 	position: absolute;
-    left: 542px;
-    top: 280px;
+    left: 542px!important;
+    top: 280px!important;
 }
 .jaipurText{
     position: absolute;
-    top: 30%;
-    left: 30%;
+    top: 30%!important;
+    left: 30%!important;
 }
 .jaipurNumber{
     position: absolute;
-    top: 45%;
-    left: 40%;
+    top: 45%!important;
+    left: 40%!important;
 }
 .kendujhar{
 	position: absolute;

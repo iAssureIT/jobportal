@@ -152,6 +152,9 @@ class Header extends Component{
               <a href="search-jobs" className="aLink"><span className="notificationMessegeText">Jobs </span></a>
             </div>
             <div className="functionalbarsItem col-lg-12">
+              <a href="/basic-info" className="aLink"><span className="notificationMessegeText">candidate </span></a>
+            </div>
+            <div className="functionalbarsItem col-lg-12">
               
               <span className="notificationMessegeText">Companies</span>
             

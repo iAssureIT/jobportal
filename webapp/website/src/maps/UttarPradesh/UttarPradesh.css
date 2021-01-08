@@ -492,18 +492,18 @@
 }
 .balrampur{
 	position: absolute;
-	left: 578px;
-    top: 359px;
+	left: 578px!important;
+    top: 359px!important;
 }
 .balrampurText{
 	position: absolute;
-	top: 28%;
-    left: 20%;
+	top: 28%!important;
+    left: 20%!important;
 }
 .balrampurNumber{
 	position: absolute;
-	top: 45%;
-    left: 45%;
+	top: 45%!important;
+    left: 45%!important;
 }
 .siddhathnagar{
 	position: absolute;
