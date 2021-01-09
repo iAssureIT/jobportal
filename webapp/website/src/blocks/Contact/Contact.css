@@ -3,7 +3,7 @@
 }
 /********************React phone input custom classes*******************/
 .react-tel-input .form-control{
-	width: 255px !important;
+	width: 100% !important;
 	background-color: var(--input-bg-color) !important;
 	border: 1px solid var(--main-border-color) !important;
 	color: #fff !important;

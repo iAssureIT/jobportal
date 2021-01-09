@@ -14,6 +14,8 @@ import { connect }        from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { withRouter }   from 'react-router-dom';
 import  * as mapActionCreator from '../common/actions/index';
+import 'react-phone-input-2/lib/style.css';
+
 
 class SignUp extends Component {
 
@@ -338,7 +340,7 @@ class SignUp extends Component {
 	render() {
 		return (
 			<section className="container-fluid registrationFormWrapper">
-                <div className="registrationForm col-lg-10 col-lg-offset-1">
+                <div className="registrationForm col-lg-8 col-lg-offset-2">
                   <form>
 
                     <div className="signUpTitle col-lg-12">Sign Up
@@ -391,10 +393,13 @@ class SignUp extends Component {
                     </div>
 
                     <div className="col-lg-6 form-group" >
-                        <div className="input-group">
-                            <span className="input-group-addon registrationInputIcon"><i className="fa fa-mobile"></i></span>
-                            <input type="tel" id="mobileNumber" name="mobileNumber" placeholder="Mobile Number" value={this.state.mobileNumber} onChange={this.handleChange.bind(this)} className="form-control registrationInputBox"/>
-                        </div>
+                        <PhoneInput 
+                          country   = {'in'}
+                          id        ="mobileNumber" 
+                          className ="input-group-addon form-control inputBox" 
+                          value     ={this.state.mobileNumber} 
+                          onChange  = {mobileNumber => this.setState({ mobileNumber })}
+                         />
                          <span id="mobileNumberError" className="errorMsg"></span>
                     </div>
 

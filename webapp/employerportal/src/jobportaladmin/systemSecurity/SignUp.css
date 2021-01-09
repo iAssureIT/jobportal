@@ -201,3 +201,65 @@
 .react-autosuggest__suggestion--highlighted {
   background-color: #ddd;
 }
+/********************React phone input custom classes*******************/
+.react-tel-input .form-control{
+  width: 100% !important;
+  background-color: var(--input-bg-color) !important;
+  border: 1px solid var(--main-border-color) !important;
+  color: #fff !important;
+  font-size:13px !important;
+}
+
+.react-tel-input .flag-dropdown{
+  background-color: var(--main-bg-color) !important;
+  border: 1px solid var(--main-border-color) !important;
+  color: #fff !important;
+  z-index: 100 !important;
+}
+.react-tel-input .country-list{
+  width: 100% !important;
+  font-size:13px !important;
+}
+.react-tel-input .selected-flag{
+  background-color: var(--main-bg-color) !important;
+
+}
+
+.react-tel-input .flag-dropdown:hover{
+  background-color: var(--main-bg-color) !important;
+}
+
+.react-tel-input .selected-flag:hover{
+  background-color: var(--main-bg-color) !important;
+}
+
+[role=button] {
+  background-color: var(--main-bg-color) !important;
+}
+
+.react-tel-input .selected-flag .arrow{
+    border-top: 4px solid #fff !important;
+}
+
+.react-tel-input .selected-flag .arrow.up{
+  border-bottom: 0px solid #555 !important;
+}
+
+.react-tel-input .country-list{
+  background-color: var(--main-bg-color) !important;
+  border: 1px solid var(--main-border-color) !important;
+  border-radius: 5px !important;
+}
+
+.react-tel-input .country-list .country:hover{
+  background-color: var(--main-border-color) !important;
+}
+
+.react-tel-input .country-list .country.highlight{
+  background-color: var(--main-border-color) !important;
+}
+
+.react-tel-input .country-list .country .dial-code{
+  color: var(--main-txt-color) !important;
+}
+/************************End of react phone input***********************/

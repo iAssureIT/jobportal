@@ -11,6 +11,7 @@ import './SignUp.css';
 import swal from 'sweetalert';
 import axios from 'axios';
 import Autosuggest from 'react-autosuggest';
+import 'react-phone-input-2/lib/style.css';
 
 class SignUp extends Component {
 
@@ -419,20 +420,13 @@ class SignUp extends Component {
 
               <div className="col-lg-6 form-group" >
                   <div className="input-group">
-                      <span className="input-group-addon registrationInputIcon"><i className="fa fa-mobile"></i></span>
-                      <input type="tel" id="mobileNumber" name="mobileNumber" placeholder="Mobile Number" value={this.state.mobileNumber} onChange={this.handleChange.bind(this)} className="form-control registrationInputBox"/>
-                   
-                  {/*  <PhoneInput
-                    country={'in'}
-                    value={this.state.mobileNumber}
-                    name="mobileNumber"
-                    inputProps={{
-                      name: 'mobileNumber',
-                      required: true
-                    }}
-                    onChange={this.changeMobile.bind(this)}
-                  /> */}
-
+                     <PhoneInput 
+                          country   = {'in'}
+                          id        ="mobileNumber" 
+                          className ="input-group-addon form-control inputBox" 
+                          value     ={this.state.mobileNumber} 
+                          onChange  = {mobileNumber => this.setState({ mobileNumber })}
+                         />
                   </div>
                   
                    <span id="mobileNumberError" className="errorMsg"></span>
