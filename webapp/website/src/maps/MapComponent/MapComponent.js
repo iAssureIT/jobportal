@@ -9,7 +9,6 @@ import  * as mapActionCreator from '../../common/actions/index';
 
 class MapComponent extends Component{
 
-
 	constructor(props){
 		super(props);
 
