@@ -45,13 +45,13 @@ class India extends Component{
 		mapAction.setMapSelectedState(stateName);
 		//window.location.href = routeName
 		mapAction.setMapView(stateCode);
-		this.props.history.push("state/"+stateCode);
+		this.props.history.push(stateCode);
 	}
 	render(){
 		return(
 			<section className="mapWrapper">
 				<div className="india">
-					
+					 
 					<div className="jammuKashmir classHover">
 						<img src="Maps/India/Jammu&Kashmir.png"   onClick={e => this.onStateClick("Jammu And Kashmir","JK")} onMouseOver={e => (e.currentTarget.src = "/Maps/India/Jammu&Kashmir_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/India/Jammu&Kashmir.png")}/>
 						<span className="jammuKashmirText  mapTextLabel text-capitalize">Jammu <br/> and  <br/> Kashmir</span>

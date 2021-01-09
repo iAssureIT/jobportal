@@ -351,7 +351,7 @@ class Candidatelist extends Component{
 																						<div className="col-lg-7 displayInfoCandidate">
 																							<div className="row">
 																								<div className="displayCandidateName">
-																										<a href={"/candidate-profile/"}> {elem.candidate[0].basicInfo.firstName} </a>
+																										<a href={"/candidate-profile/"+elem._id}> {elem.candidate[0].basicInfo.firstName} </a>
 																									<span className="candidateIdNumber">(1234)</span>
 																								</div>
 																								<div className=" candidatePosts">

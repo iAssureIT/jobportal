@@ -10,7 +10,7 @@ import './maharashtra.css';
 import '../global.css';
 
 
-export default class Maharashtra extends Component{
+class Maharashtra extends Component{
 	constructor(props){
 		super(props);
 
@@ -246,3 +246,4 @@ export default class Maharashtra extends Component{
 		);
 	}
 }
+export default withRouter(Maharashtra);

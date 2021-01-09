@@ -103,7 +103,7 @@ class Layout extends Component  {
                                                         <Route path="/job-profile/:job_id"              component={JobPostProfile} exact />
                                                         <Route path="/job-list"                         component={JoblistPage} exact />
                                                         <Route path="/applied-candidate-list/:jobID"    component={CandidatelistPage} exact />
-                                                        <Route path="/candidate-profile/"  component={CandidateProfile} exact />
+                                                        <Route path="/candidate-profile/:candidate_id"  component={CandidateProfile} exact />
                                                     </Switch>
                                                 </div>
                                             </div>

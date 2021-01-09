@@ -266,7 +266,7 @@ class Layout extends Component  {
                         <Switch >
 
                             <Route exact path="/"        component={Homepage}  />
-                            <Route exact path="/state/:stateCode"               component={Homepage}  />
+                            <Route exact path="/:stateCode"               component={Homepage}  />
 
                             <Route exact path="/search-jobs"                    component={CandidateJobList}  />  
                             /**/

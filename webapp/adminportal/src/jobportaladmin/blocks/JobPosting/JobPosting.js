@@ -26,12 +26,12 @@ class JobPosting extends Component {
         super(props);
 
         this.state = {
-            corporate                   :   "",
+            corporate                   :   "", 
             corporate_id                :   "",
             corporatelist               :   [],
-            company_id                  :   localStorage.getItem("company_Id") ? localStorage.getItem("company_Id") : null,
+            company_id                  :   "",
             jobTitle                    :   "",
-            industryList                :   [],
+            industry_id                 :   "",
             functionalArea              :   "",
             functionalarea_id           :   "",
             functionalArealist          :   [],
@@ -493,9 +493,9 @@ class JobPosting extends Component {
         if (this.validateForm()) {
             var formValues = {
                 user_id                 :   this.props.userDetails.user_id,
-                company_id              :   this.props.userDetails.company_id,
+                company_id              :   this.state.corporate_id,
                 jobTitle                :   this.state.jobTitle,
-                industry_id             :   this.props.userDetails.industry_id,
+                industry_id             :   this.state.industry_id,
                 functionalArea          :   this.state.functionalArea,
                 functionalarea_id       :   this.state.functionalarea_id,
                 subFunctionalArea       :   this.state.subFunctionalArea,
@@ -911,7 +911,7 @@ class JobPosting extends Component {
             industry_id = document.querySelector('#corporate option[value="' + value + '"]').getAttribute("data-industry")
         }else{ corporate_id = "" }
 
-        this.setState({ corporate_id : corporate_id },()=>{
+        this.setState({ corporate_id : corporate_id, industry_id:industry_id },()=>{
             console.log(this.state)
         });  
     }   

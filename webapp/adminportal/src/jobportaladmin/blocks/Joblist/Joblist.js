@@ -107,7 +107,7 @@ deleteJob = (event)=>{
 															{elem.jobBasicInfo.jobTitle}
 														</div>
 														<div className="jobListCompanyName">
-															<b>iAssure International Technologies Pvt Ltd</b>
+															<b>{elem.employer[0].companyName}</b>
 														</div>
 														<div> 
 															<i className="fa fa-calendar jobListExperience"></i> &nbsp; Exp : {elem.eligibility.minExperience}

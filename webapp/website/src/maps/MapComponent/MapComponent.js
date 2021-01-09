@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import India from '../India/India.js';
+import React, {Component, Suspense} from 'react';
+//import India from '../India/India.js';
 import Maharashtra from '../Maharashtra/Maharashtra.js';
 import './MapComponent.css';
 import { connect }        from 'react-redux';
@@ -16,19 +16,25 @@ class MapComponent extends Component{
 	}
 	componentDidMount(){
 		 console.log("pathname=",window.location.pathname)
+		 console.log("history pathname=",this.props.match)
 	}
 	
 
 	render(){
-		console.log(this.props.mapView)
+		const MapView = () => {
+	      switch(window.location.pathname) {
+	        case "/":   return <India />;
+	        case "MH":   return <Maharashtra />;
+	        default:      return <h1>No map match</h1>
+	      }
+	    }
+		//console.log(this.props.mapView)
+		const India = React.lazy(() => import('../India/India.js'));
 		return(
 			<div>
-				{
-				this.props.mapView == "India" ? <India /> : null
-				}
-				{
-				this.props.mapView == "MH" ? <Maharashtra /> : null
-				}
+				<Suspense fallback={<div>Loading...</div>}>
+			        <MapView />
+			    </Suspense>
 			</div>
 		);
 	}
