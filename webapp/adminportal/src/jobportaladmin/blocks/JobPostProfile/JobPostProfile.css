@@ -3,25 +3,24 @@
 	height: auto;
 	padding-top: 30px;
 	padding-bottom: 30px;
-	background-color: var(--main-bg-color);
-	color: var(--main-txt-color);
+	background-color: var(--admin-main-bg-color);
 }
 
 .leftSideMain{
 	height: 1359px;
-	border: 1px solid var(--main-border-color);
-	background-color: var(--form-field-background-color);
+	border: 1px solid var(--admin-main-border-color);
+	background-color: var(--admin-form-field-background-color);
 	padding-bottom: 100px;
 }
 
 .leftHeader{
 	height: 215px;
-	border-bottom: 1px solid var(--main-border-color);
+	border-bottom: 1px solid var(--admin-main-border-color);
 }
 
 .leftImgContainer{
 	height: 214px;
-	background-color: var(--form-field-background-color);
+	background-color: var(--admin-form-field-background-color);
 }
 
 .leftImgContainer .imgbox{
@@ -44,7 +43,7 @@
 
 .imgContent{
 	height: 214px;
-	background-color: var(--form-field-background-color);
+	background-color: var(--admin-form-field-background-color);
 }
 
 .imgContent .contentHead{
@@ -63,6 +62,7 @@
 	font-size: 18px;
 	/*font-family: 'Montserrat-SemiBold';*/
 	font-weight: 600;
+	color: var(--admin-sub-heading-font-color);
 }
 
 .imgContent .locationinfo{
@@ -71,7 +71,7 @@
 	font-size: 14px;
 	/*font-family: 'Montserrat-Regular';*/
 	font-weight: 400;
-	color: var(--main-txt-color);
+	color: var(--admin-main-txt-color);
 	white-space: nowrap !important;
 	text-overflow: ellipsis !important;
   	overflow: hidden !important;
@@ -86,7 +86,7 @@
 	margin-top: 70px;
 	width: 1px;
 	height: 356px;
-	background-color: var(--main-border-color);
+	background-color: var(--admin-main-border-color);
 }
 
 .timeline{
@@ -115,7 +115,7 @@
 	padding-bottom: 15px;
 	padding-top: 18px;
 	padding-left: 33px;
-	border-left: 2px solid var(--main-border-color);
+	border-left: 2px solid var(--admin-main-border-color);
 	/*background-color: green;*/
 } 
 
@@ -123,9 +123,9 @@
 	position: absolute;
 	font-size: 21px;
 	/*font-weight: bold;*/
-	margin-top: 35px;
+	margin-top: 37px;
 	margin-left: 40px;
-	color: var(--main-subheading-font-color);
+	color: var(--blue-color);
 	/*font-family: 'Montserrat-SemiBold';*/
 	font-weight: 600;
 }
@@ -144,7 +144,7 @@
 	margin-top: 50px;
 	margin-left: 12px;
 	width: 25px;
-	background-color: var(--main-border-color);
+	background-color: var(--admin-main-border-color);
 }
 
 .contentWrapper1 .profileContent{
@@ -159,7 +159,7 @@
 	left: -18px;
 	font-size: 16px;
 	font-weight: bold;
-	color: var(--main-subheading-font-color);
+	color: var(--blue-color);
 }
 
 /*****************************End of Content Wrapper One**********************************/
@@ -176,7 +176,7 @@
 	margin-top: 27px;
 	height: auto;
 	/*min-height: 100px;*/
-	border-left: 2px solid var(--main-border-color);
+	border-left: 2px solid var(--admin-main-border-color);
 	padding-bottom: 20px;
 	padding-top: 20px;
 	padding-left: 35px;
@@ -187,7 +187,7 @@
 	position: absolute;
 	font-size: 21px;
 	font-weight: bold;
-	color: var(--main-subheading-font-color);
+	color: var(--blue-color);
 	margin-top: -3px;
 	margin-left: 40px;
 	/*font-family: 'Montserrat-SemiBold';*/
@@ -207,7 +207,7 @@
 	margin-top: 12px;
 	margin-left: 12px;
 	width: 25px;
-	background-color: var(--main-border-color);
+	background-color: var(--admin-main-border-color);
 }
 
 .contentWrapper2 .profileContent{
@@ -222,12 +222,13 @@
 	left: -18px;
 	font-size: 16px;
 	font-weight: bold;
-	color: var(--main-subheading-font-color);
+	color: var(--blue-color);
 }
 
 .contentWrapper2 .eduSubtitle{
 	/*font-family: 'Montserrat-SemiBold';*/
 	font-weight: 600;
+	color: var(--admin-sub-heading-font-color);
 }
 
 .contentWrapper2 .eduDuration{
@@ -240,6 +241,7 @@
     /*font-weight: bold;*/
     padding-right: 6px;
     margin-left: -15px;	
+    color: var(--admin-diamond-color);
 }
 
 .profileContent li{
@@ -260,7 +262,7 @@
 	margin-top: 27px;
 	height: auto;
 	/*min-height: 100px;*/
-	border-left: 2px solid var(--main-border-color);
+	border-left: 2px solid var(--admin-main-border-color);
 	padding-top: 10px;
 	padding-left: 35px;
 	/*background-color: green;*/
@@ -270,7 +272,7 @@
 	position: absolute;
 	font-size: 21px;
 	font-weight: bold;
-	color: var(--main-subheading-font-color);
+	color: var(--blue-color);
 	margin-top: -2px;
 	margin-left: 40px;
 	/*font-family: 'Montserrat-SemiBold';*/
@@ -285,12 +287,12 @@
 }
 
 .contentWrapper3 .horizontalRightLine{
-	height: 3px;
+	height: 2px;
 	position: absolute;
 	margin-top: 12px;
 	margin-left: 12px;
 	width: 25px;
-	background-color: var(--main-border-color);
+	background-color: var(--admin-main-border-color);
 }
 
 .contentWrapper3 .profileContent{
@@ -305,7 +307,7 @@
 	left: -18px;
 	font-size: 16px;
 	font-weight: bold;
-	color: var(--main-subheading-font-color);
+	color: var(--blue-color);
 }
 
 .contentWrapper3 .eduSubtitle{
@@ -342,6 +344,7 @@
     padding-right: 6px;
     margin-left: -15px;
 	list-style: none;
+	color: var(--admin-diamond-color);
 }
 
 .skillsHeadOne{
@@ -354,12 +357,13 @@
 	font-size: 15px;
 	/*font-family: 'Montserrat-SemiBold';*/
 	font-weight: 600;
-	color: var(--main-subheading-font-color);
+	color: var(--blue-color);
 }
 
 .skillsHeadOne .skillSubtitle{
 	/*font-family: 'Montserrat-SemiBold';*/
 	font-weight: 600;
+	color: var(--admin-sub-heading-font-color);
 }
 
 .skillsHeadOne .skillDuration{
@@ -383,12 +387,13 @@
 	font-size: 15px;
 	/*font-family: 'Montserrat-SemiBold';*/
 	font-weight: 600;
-	color: var(--main-subheading-font-color);
+	color: var(--blue-color);
 }
 
 .skillsHeadTwo .skillSubtitle{
 	/*font-family: 'Montserrat-SemiBold';*/
 	font-weight: 600;
+	color: var(--admin-sub-heading-font-color);
 }
 
 .skillsHeadTwo .skillDuration{
@@ -412,12 +417,13 @@
 	font-size: 15px;
 	/*font-family: 'Montserrat-SemiBold';*/
 	font-weight: 600;
-	color: var(--main-subheading-font-color);
+	color: var(--blue-color);
 }
 
 .skillsHeadThree .skillSubtitle{
 	/*font-family: 'Montserrat-SemiBold';*/
 	font-weight: 600;
+	color: var(--admin-sub-heading-font-color);
 }
 
 .skillsHeadThree .skillDuration{
@@ -443,7 +449,8 @@
 }
 
 .skillsHeadFour .skillsTitle{
-	color: var(--main-subheading-font-color);
+	color: var(--blue-color);
+	font-size: 15px;
 }
 
 .skillsList{
@@ -460,15 +467,15 @@
 }
 
 .btnEdit{
-	border: 1px solid var(--main-border-color);
+	border: 1px solid var(--admin-main-border-color);
     background-color: transparent;
-    color: var(--main-txt-color);
+    color: var(--admin-main-txt-color);
     margin-left: -50px;
     margin-right: 0px;
 }
 
 .btnEdit:hover{
-	color: var(--main-txt-color);
+	color: var(--admin-main-txt-color);
 }
 
 .btnSubmit{ 
@@ -477,7 +484,7 @@
 }
 
 .btnSubmit:hover{ 
-	color: var(--main-txt-color);
+	color: var(--admin-main-txt-color);
 }
 
 /**************************Right Aside Bar******************************/
@@ -485,14 +492,14 @@
 .rightSideMain{
 	height: 1359px;
 	padding-bottom: 40px;
-	border: 1px solid var(--main-border-color);
-	background-color: var(--form-field-background-color);
+	border: 1px solid var(--admin-main-border-color);
+	background-color: var(--admin-form-field-background-color);
 }
 
 .rightSideHeader{
 	height: 215px;
-	border-bottom: 1px solid var(--main-border-color);
-	background-color: var(--form-field-background-color);
+	border-bottom: 1px solid var(--admin-main-border-color);
+	background-color: var(--admin-form-field-background-color);
 }
 
 .mapImg{
@@ -504,7 +511,7 @@
 .rightContentHead{
 	font-size: 28px;
 	font-weight: bold;
-	color: var(--main-subheading-font-color);
+	color: var(--blue-color);
 	padding-top: 30px;
 	padding-left: 22px;
 	/*font-family: 'Montserrat-SemiBold';*/
@@ -516,7 +523,7 @@
 	font-weight: bold;
 	padding-left: 25px;
 	padding-top: 7px;
-	color: var(--main-subheading-font-color);
+	color: var(--blue-color);
 	/*font-family: 'Montserrat-SemiBold';*/
 	font-weight: 600;
 }

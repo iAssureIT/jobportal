@@ -182,7 +182,7 @@ export default class JobPostProfile extends Component{
 	}	
 	
 	render(){
-		console.log(this.state.primarySkillTags)
+		console.log(this.state.primarySkillsSkillTags)
 		return(
 				<div className="jobPostProfileWrapper container-fluid">
 					<div className="col-lg-9">
@@ -240,8 +240,7 @@ export default class JobPostProfile extends Component{
 												<div className="DescriptionContainer col-lg-12">
 													<div className="profileContent">
 														<ul className="col-lg-12">
-															<li><span className="eduSubtitle">
-																Minimum Education Required</span><br/>
+															<li><span className="eduSubtitle">Minimum Education Required</span><br/>
 																<span className="eduDuration"> {this.state.minEducation} </span>
 															</li>
 															<li>

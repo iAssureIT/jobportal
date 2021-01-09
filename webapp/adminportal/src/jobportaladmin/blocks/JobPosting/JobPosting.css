@@ -28,7 +28,7 @@
 	margin-top: 25px;
 	font-size: 27px;
 	/*font-weight: bold;*/
-	color: var(--admin-main-heading-font-color);
+	color: var(--blue-color);
 	font-family: 'Montserrat-SemiBold';
 }
 
@@ -40,7 +40,7 @@
 
 .addJobMainHead{
 	font-size: 21px;
-	color: var(--admin-main-heading-font-color);
+	color: var(--blue-color);
 	font-family: 'Montserrat-SemiBold'; 
 }
 
@@ -57,6 +57,7 @@
 .addJobMainHead .addcompLeftPadding{
 	padding-left: 12px;
 	margin-top: -28px;
+	color: var(--blue-color);
 }
 
 .addJobMainHead .labelLeftPadding{
@@ -67,7 +68,7 @@
 .addJobSubHead{
 	font-size: 21px;
 	/*font-weight: bold;*/
-	color: var(--admin-main-heading-font-color);
+	color: var(--blue-color);
 	font-family: 'Montserrat-SemiBold';
 }
 
