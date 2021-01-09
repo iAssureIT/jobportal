@@ -45,7 +45,7 @@ class India extends Component{
 		mapAction.setMapSelectedState(stateName);
 		//window.location.href = routeName
 		mapAction.setMapView(stateCode);
-		this.props.history.push(routeName);
+		this.props.history.push("state/"+stateCode);
 	}
 	render(){
 		return(
@@ -75,7 +75,7 @@ class India extends Component{
 					
 
 					<div className="himachal classHover">
-						<img src="Maps/India/HimachalPradesh.png" className="img-responsive "  onClick={e => this.onStateClick("HimachalPradesh")} onMouseOver={e => (e.currentTarget.src = "/Maps/India/HimachalPradesh1.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/India/HimachalPradesh.png")}/>
+						<img src="Maps/India/HimachalPradesh.png" className="img-responsive "  onClick={e => this.onStateClick("HimachalPradesh","HP")} onMouseOver={e => (e.currentTarget.src = "/Maps/India/HimachalPradesh1.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/India/HimachalPradesh.png")}/>
 						<span className="himachalText mapTextLabel text-capitalize">Himachal Pradesh</span>
 						<span className="himachalNumber mapCountLabel text-center">{this.search('Himachal Pradesh')}</span>
 					</div>

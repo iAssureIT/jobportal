@@ -86,6 +86,7 @@ class BasicInfoForm extends Component{
 						};
 	}
 	componentDidMount(){
+		console.log(this.props.userDetails)
 		Axios.get("/api/languagemaster/get/list")
 		.then(response => {
 			var languagesSuggestions =  [];
