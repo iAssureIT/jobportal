@@ -45,7 +45,7 @@ class India extends Component{
 		mapAction.setMapSelectedState(stateName);
 		//window.location.href = routeName
 		mapAction.setMapView(stateCode);
-		this.props.history.push(stateCode);
+		this.props.history.push("state/"+stateCode);
 	}
 	render(){
 		return(
@@ -264,7 +264,7 @@ class India extends Component{
 }
 
 const mapStateToProps = (state)=>{
-    return {
+    return { 
         selectedState  		: state.selectedState,
         mapJobs           	: state.mapJobs,
     }

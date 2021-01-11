@@ -2,7 +2,7 @@ import React, {Component}     from 'react';
 import Axios 				  from 'axios';
 import Swal 				  from 'sweetalert2';
 import {Redirect}             from 'react-router-dom';
-import { withRouter }         from 'react-router-dom';
+//import { withRouter }         from 'react-router-dom';
 import { connect }            from 'react-redux';
 import { bindActionCreators } from 'redux';
 import  * as mapActionCreator from '../../common/actions/index';
@@ -246,4 +246,4 @@ class Maharashtra extends Component{
 		);
 	}
 }
-export default withRouter(Maharashtra);
+export default Maharashtra;
