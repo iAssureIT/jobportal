@@ -6,6 +6,7 @@ import IndustrywiseJobs from '../../blocks/IndustrywiseJobs/IndustrywiseJobs.js'
 import LeftSideFilters from '../../blocks/LeftSideFilters/LeftSideFilters.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Axios        from 'axios';
+import { withRouter }         from 'react-router-dom';
 import { connect }        from 'react-redux';
 import { bindActionCreators } from 'redux';
 import  * as mapActionCreator from '../../common/actions/index';
@@ -30,6 +31,7 @@ class HomePage extends Component {
 
     mapAction.filterMapData(this.props.selector);
     mapAction.setMapView("India");
+    
     
   }
   leftDrawerInfo(event){
@@ -68,6 +70,7 @@ class HomePage extends Component {
     }
   }
   render() {
+    console.log("history",this.match)
     return (
       <div className="ViewBodyWrapper container-fluid">
         
@@ -148,4 +151,4 @@ const mapDispatchToProps = (dispatch) => ({
   mapAction :  bindActionCreators(mapActionCreator, dispatch)
 }) 
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(HomePage));
