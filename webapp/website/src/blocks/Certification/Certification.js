@@ -5,9 +5,6 @@ import Axios 			   from 'axios';
 import Swal 			   from 'sweetalert2';
 import { withRouter }	   from 'react-router-dom';
 import Moment              from 'moment';
-
-
-
 import '../BasicInfoForm/BasicInfoForm.css';
 import './Certification.css';
 
@@ -72,16 +69,12 @@ class Certification extends Component{
 		
 		Axios.get("/api/skillmaster/get/list")
 			.then(response => {
-
 				this.setState({skillslist : response.data});
-				console.log('skillslist', this.state.skillslist);
 			})
 			.catch(error=>{
 				Swal.fire("Error while getting List data",error.message,'error');
 			})
 			
-
-
 		if(this.props.match.params.certificationID){
 			this.edit()
 
@@ -112,11 +105,10 @@ class Certification extends Component{
 	getData(){
 		Axios.get("/api/candidatemaster/get/one/"+this.state.candidate_id)
 		.then(response=>{
-				console.log("return",response.data);
-			 	this.setState({
+				this.setState({
 						certificationArry:response.data[0].certifications
 			 	})
-			 	console.log("no return",this.state.certificationArry);
+			 	
 			 })
 			 .catch(error=>{
 			 	Swal.fire("Submit Error!",error.message,'error');
@@ -293,23 +285,22 @@ class Certification extends Component{
 				var formValues = {
 					                candidate_id               : this.state.candidate_id,
 					             
-					                primarySkills:{
+					                primarySkills:[{
 					                	skill                 : this.state.skills,
-										rating                 : this.state.rating,
-										skillID              : this.state.skills_id
-					                }
-					                
+										rating                : this.state.rating,
+										skillID               : this.state.skills_id
+					                }],					                
 							}
 							this.insetData(formValues,event);
 			}else{
 				var formValues = {
-					                candidate_id               : this.state.candidate_id,
-					                
-					                secondarySkills:{
+					                candidate_id            : this.state.candidate_id,
+					                primarySkills 			: [],	
+					                secondarySkills 		: [{
 					                	skill                 : this.state.skills,
-										rating                 : this.state.rating,
-										skillID              : this.state.skills_id
-					                }
+										rating                : this.state.rating,
+										skillID               : this.state.skills_id
+					                }]
 					                	
 					                
 					                
@@ -323,13 +314,13 @@ class Certification extends Component{
 			var formValues = {
 					                candidate_id               : this.state.candidate_id,
 					                certificationID            : this.state.certificationID,
-					                certifications:{
+					                
 					                	certName               : this.state.certificationName,
 										issuedBy               : this.state.issuedBy,
 										certifiedOn            : this.state.certifiedOn,
 										validTill              : this.state.validity,
 										gradePercent           : this.state.grade,
-					                }
+					                
 									
 									
 									
@@ -375,7 +366,7 @@ class Certification extends Component{
 			Axios.patch("/api/candidatemaster/patch/addCandidateSkill",formValues)
 			 .then(response=>{
 
-					Swal.fire("Congrats","Your Certification Details is insert Successfully","success");
+					Swal.fire("Congrats","Your skill and rating is insert Successfully","success");
 						this.setState({
 										skills             : [],
 										rating             : "",

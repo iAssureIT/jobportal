@@ -47,7 +47,7 @@ router.post("/get/getCandidateSkills", CandidateProfileController.getCandidateSk
 
 router.delete('/deletePrimarySkill/:candidate_id/delete/:skillID',CandidateProfileController.deletePrimarySkill);
 
-//router.delete('/deleteSecondarySkill/:candidate_id/delete/:skillID',CandidateProfileController.deleteSecondarySkill);
+router.delete('/deleteSecondarySkill/:candidate_id/delete/:skillID',CandidateProfileController.deleteSecondarySkill);
 
 // ========================== candidate certification ================================== //
 router.patch("/patch/addCandidateCertification", CandidateProfileController.addCandidateCertification); 

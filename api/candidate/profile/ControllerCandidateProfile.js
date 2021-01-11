@@ -563,37 +563,44 @@ exports.addCandidateSkill = (req,res,next)=>{
         async function processData(){
 
             var allSkills = await fetchCandidateSkills(req.body.candidate_id);
-            for (var i = 0 ; i < req.body.primarySkills.length; i++) {
-                skillID = req.body.primarySkills[i].skillID != "" ? req.body.primarySkills[i].skillID
-                                    : await insertSkill(req.body.primarySkills[i].skill, req.body.user_id)
+            if (req.body.primarySkills) {
+                for (var i = 0 ; i < req.body.primarySkills.length; i++) {
+                    skillID = req.body.primarySkills[i].skillID != "" ? req.body.primarySkills[i].skillID
+                                        : await insertSkill(req.body.primarySkills[i].skill, req.body.user_id)
+                        
+                    primarySkills.push({ "skillID" : skillID, "rating": req.body.primarySkills[i].rating })
+                }
+                CandidateProfile.updateOne(
+                        { _id: req.body.candidate_id },  
+                        { 
+                            $push : {    "primarySkills"      : primarySkills }
+                        }
+                    )
+                    .exec()
+                    .then(data=>{
+                        if(data.nModified == 1){
+                            res.status(200).json({ created : true });
+                        }else{
+                            res.status(401).json({ created : false });
+                        }
+                    })
+                    .catch(err =>{
+                        console.log(err)
+                        res.status(500).json({ error: err });
+                    });
+            }
+            if (req.body.secondarySkills) {
+                for (var i = 0 ; i < req.body.secondarySkills.length; i++) {
                     
-                primarySkills.push({ "skillID" : skillID, "rating": req.body.primarySkills[i].rating })
-            }
-            for (var i = 0 ; i < req.body.secondarySkills.length; i++) {
-                
-                skillID = req.body.secondarySkills[i].skillID != "" ? req.body.secondarySkills[i].skillID
-                                : await insertSkill(req.body.secondarySkills[i].skill, req.body.user_id)
-                
-                secondarySkills.push({ "skillID" : skillID, "rating": req.body.secondarySkills[i].rating })
-            }
-        
-
-       if (allSkills.skills.length > 0) {
-            CandidateProfile.updateOne(
-                { _id: req.body.candidate_id },  
-                { 
-                    $set : {   "skills.0.primarySkills"     : [], 
-                               "skills.0.secondarySkills"   : [] }
+                    skillID = req.body.secondarySkills[i].skillID != "" ? req.body.secondarySkills[i].skillID
+                                    : await insertSkill(req.body.secondarySkills[i].skill, req.body.user_id)
+                    
+                    secondarySkills.push({ "skillID" : skillID, "rating": req.body.secondarySkills[i].rating })
                 }
-            )
-            .exec()
-            .then(data=>{
-                if(data.nModified == 1){
-                    CandidateProfile.updateOne(
+                CandidateProfile.updateOne(
                         { _id: req.body.candidate_id },  
                         { 
-                            $push : {   "skills.0.primarySkills"      : primarySkills, 
-                                        "skills.0.secondarySkills"    : secondarySkills }
+                            $push : {    "secondarySkills"      : secondarySkills }
                         }
                     )
                     .exec()
@@ -608,37 +615,7 @@ exports.addCandidateSkill = (req,res,next)=>{
                         console.log(err)
                         res.status(500).json({ error: err });
                     });
-                }else{
-                    res.status(401).json({ created : false });
-                }
-            })
-            .catch(err =>{
-                res.status(500).json({ error: err });
-            });
-
-       }else{
-            var skillObject = {}
-            skillObject.primarySkills   = primarySkills;
-            skillObject.secondarySkills = secondarySkills;
-            CandidateProfile.updateOne(
-                        { _id: req.body.candidate_id },  
-                        { 
-                            $push : {    "skills"      : skillObject }
-                        }
-                    )
-                    .exec()
-                    .then(data=>{
-                        if(data.nModified == 1){
-                            res.status(200).json({ created : true });
-                        }else{
-                            res.status(401).json({ created : false });
-                        }
-                    })
-                    .catch(err =>{
-                        console.log(err)
-                        res.status(500).json({ error: err });
-                    });
-       }
+            }
     }   
 };
 
@@ -686,7 +663,26 @@ exports.deletePrimarySkill = (req,res,next)=>{
     CandidateProfile.updateOne(
             { _id:req.params.candidate_id},  
             {
-                $pull: { 'skills' : {_id:req.params.skillID}}
+                $pull: { 'primarySkills' : {_id:req.params.skillID}}
+            }
+        )
+        .exec()
+        .then(data=>{
+            if(data.nModified == 1){
+                res.status(200).json({ deleted : true });
+            }else{
+                res.status(401).json({ deleted : false });
+            }
+        })
+        .catch(err =>{
+            res.status(500).json({ error: err });
+        });
+};
+exports.deleteSecondarySkill = (req,res,next)=>{
+    CandidateProfile.updateOne(
+            { _id:req.params.candidate_id},  
+            {
+                $pull: { 'secondarySkills' : {_id:req.params.skillID}}
             }
         )
         .exec()

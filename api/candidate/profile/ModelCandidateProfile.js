@@ -59,13 +59,10 @@ const candidateSchema = mongoose.Schema({
 		countryCode 	: String,
 		pincode 	 	: String, 
 	}],
-	skills : [{
-		primarySkills 	: [{ 	skillID : {type: mongoose.Schema.Types.ObjectId, ref: 'skillmasters'}, 
-								rating  : Number  }],
-		secondarySkills : [{ 	skillID : {type: mongoose.Schema.Types.ObjectId, ref: 'skillmasters'}, 
-								rating  : Number  }],
-		
-	}],
+	primarySkills 	: [{ 	skillID : {type: mongoose.Schema.Types.ObjectId, ref: 'skillmasters'}, 
+								rating  : String  }],
+	secondarySkills : [{ 	skillID : {type: mongoose.Schema.Types.ObjectId, ref: 'skillmasters'}, 
+								rating  : String  }],							
 	certifications : [{
 		certName		: String,
 		issuedBy   		: String,
