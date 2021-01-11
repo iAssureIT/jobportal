@@ -1,5 +1,45 @@
 import axios from 'axios';
 
+export const fetchRolewiseAccess = rolewiseAccessToModule => ({
+  type: 'FETCH_ROLEWISE_ACCESS',
+  rolewiseAccessToModule: rolewiseAccessToModule
+});
+
+export const fetchAccessToFacility = accessToFacility => ({
+  type: 'FETCH_ACCESS_FACILITY',
+  accessToFacility: accessToFacility
+});
+
+export const setUserDetails = (userDetails )=> ({
+      type            : 'SET_USER_DETAILS',
+      userDetails     : userDetails
+});
+
+export const setFilterSelector = (selector )=> ({
+      type          : 'SET_FILTER_SELECTOR',
+      selector      : selector
+});
+
+export const setCandidateFilterSelector = (candidateSelector )=> ({
+      type                    : 'SET_CANDIDATE_FILTER_SELECTOR',
+      candidateSelector       : candidateSelector
+});
+
+export const getJobList = (jobList )=> ({ 
+      type        : 'GET_JOB_LIST',
+      jobList       : jobList
+});
+
+export const getApplicantsCountList = (applicantsCountList )=> ({ 
+      type                       : 'GET_APPLICANTS_COUNT',
+      applicantsCountList        : applicantsCountList
+});
+
+export const getCandidateList = (candidateList )=> ({ 
+      type           : 'GET_CANDIDATE_LIST',
+      candidateList  : candidateList
+});
+
 export function getRoleWiseAccessToModule(moduleName) {
 
   return dispatch =>{
@@ -44,29 +84,7 @@ export function getAccessToFacility(moduleName, facilityName) {
     
   }  
 }
-export const fetchRolewiseAccess = rolewiseAccessToModule => ({
-  type: 'FETCH_ROLEWISE_ACCESS',
-  rolewiseAccessToModule: rolewiseAccessToModule
-});
 
-export const fetchAccessToFacility = accessToFacility => ({
-  type: 'FETCH_ACCESS_FACILITY',
-  accessToFacility: accessToFacility
-});
-
-export const setUserDetails = (userDetails )=> ({
-      type        : 'SET_USER_DETAILS',
-      userDetails     : userDetails
-});
-export const setFilterSelector = (selector )=> ({
-      type        : 'SET_FILTER_SELECTOR',
-      selector      : selector
-});
-
-export const getJobList = (jobList )=> ({ 
-      type        : 'GET_JOB_LIST',
-      jobList       : jobList
-});
 export function filterJobList(selector) {
     return dispatch =>{
       dispatch(setFilterSelector(selector));
@@ -78,5 +96,29 @@ export function filterJobList(selector) {
       .catch((error)=>{
             console.log('error', error);
       }) 
+    }
+
+export function applicantsCountList(selector) {
+    return dispatch =>{
+      return axios.post("/api/applyJob/get/applicantsCountList",selector)
+      .then((response)=>{
+          dispatch(getApplicantsCountList(response.data));
+      })
+      .catch((error)=>{
+            console.log('error', error);
+      }) 
     }  
+}
+
+export function filterCandidatesApplied(candidateSelector) {
+    return dispatch =>{ 
+      dispatch(setCandidateFilterSelector(candidateSelector));
+      return axios.post("/api/applyJob/get/candidatesAppliedToJob",candidateSelector)
+      .then((response)=>{
+          dispatch(getCandidateList(response.data));
+      })
+      .catch((error)=>{
+            console.log('error', error);
+      }) 
+    }       
 }

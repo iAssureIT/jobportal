@@ -19,12 +19,14 @@ class JoblistPage extends Component{
 
 	componentDidMount(){
 							var selector=this.state.selector;
-							selector.countryCode = "IN"; 
-
+							selector.countryCode = "IN";
+							selector.company_id = this.props.company_id 
 							this.setState({ selector: selector })
 
 							var {mapAction} = this.props;
 							mapAction.filterJobList(selector);
+
+							mapAction.applicantsCountList({employerID : this.props.company_id});
 						}
 
 	render(){
@@ -39,8 +41,11 @@ class JoblistPage extends Component{
 
 	const mapStateToProps = (state)	=>	{
 										    return {
-												    	user_ID 		: state.user_ID, selector        : state.selector, 	
-												    	jobList 		: state.jobList
+												    	/*user_ID 		: state.user_ID, selector        : state.selector, 	
+												    	jobList 		: state.jobList*/
+
+												    	 user_id     : state.userDetails.user_id,  company_id   : state.userDetails.company_id,
+                                              			selector    : state.selector, 
 										    		}
 										}
 	
