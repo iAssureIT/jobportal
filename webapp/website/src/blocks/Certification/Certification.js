@@ -33,6 +33,7 @@ class Certification extends Component{
             isChecked            : false,
             primarySkills        :"",
             secondarySkills      :"",
+            basicArry            :"",
 		}
 
 		 this.style =  {
@@ -75,6 +76,20 @@ class Certification extends Component{
 				Swal.fire("Error while getting List data",error.message,'error');
 			})
 			
+
+
+		Axios.get("/api/candidatemaster/get/one/"+this.state.candidate_id)
+		.then(response=>{
+			console.log(response.data)
+			 	this.setState({
+			 		basicArry    : response.data[0].basicInfo,
+
+				 })
+			 })
+			 .catch(error=>{
+			 	Swal.fire("Submit Error!",error.message,'error');
+			 })
+
 		if(this.props.match.params.certificationID){
 			this.edit()
 
@@ -632,7 +647,7 @@ class Certification extends Component{
 														This certificate is proudly presented to
 													</div>
 													<div className="certificateNameText1">
-														Digvijay Mohite
+														{this.state.basicArry.firstName + " " + this.state.basicArry.lastName }
 													</div>
 													<div className="certificateText">
 														for
