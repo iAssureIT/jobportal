@@ -130,7 +130,7 @@ class Academics extends Component{
 			Axios.post("/api/candidatemaster/post/getOneCandidateAcademics",idData)
 			.then(response=>{
 				var editData =response.data;
-				console.log(editData)
+				console.log(response.data)
 				var qualificationLevel = this.state.qualificationLevelArray.filter((data,index)=>{
                     if (data._id == editData[0].academics[0].qualificationlevel_id) { return data}
                 })
@@ -155,7 +155,7 @@ class Academics extends Component{
 			 		area 					: editData[0].academics[0].area,
 			 		city                	: editData[0].academics[0].cityVillage,
 			 		district 				: editData[0].academics[0].district,
-			 		state               	: editData[0].academics[0].state,
+			 		states               	: editData[0].academics[0].state,
 			 		stateCode              	: editData[0].academics[0].stateCode,
 			 		country             	: editData[0].academics[0].country,
 			 		countryCode             : editData[0].academics[0].countryCode,
@@ -379,6 +379,7 @@ class Academics extends Component{
 												specialization      : "",
 												college             : "",
 												university   		: "",
+												addressLine1        : "",
 												states              : "",
 												country	            : "",	
 												city                : "",

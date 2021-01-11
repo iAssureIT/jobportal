@@ -360,17 +360,17 @@
     left: 40%;
 }
 
-.balrampur{
+.balrampur1{
 	position: absolute;
 	left: 333px!important;
     top: 15px!important;
 }
-.balrampurText{
+.balrampur1Text{
 	position: absolute;
 	top: 45%!important;
     left: 45%!important;
 }
-.balrampurNumber{
+.balrampur1Number{
 	position: absolute;
 	top: 55%!important;
     left: 50%!important;

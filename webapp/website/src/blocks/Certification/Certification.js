@@ -26,13 +26,16 @@ class Certification extends Component{
 			validity             : "",
 			grade   		     : "",
 			selectArry   		 : [],
-			certificationToggel  : "toggleSkills",
+			certificationToggel  : false,
 			rating               : "",
 			buttonText           : "Save",
 			skillsArrya          : [],
 			skills               : "",
             skills_id            : "",
             skillslist           : [],
+            isChecked            : false,
+            primarySkills        :"",
+            secondarySkills      :"",
 		}
 
 		 this.style =  {
@@ -87,9 +90,15 @@ class Certification extends Component{
 }
 
 	//========== User Define Function Start ================
+	 handleChecked (){
+  			this.setState({
+  				isChecked: !this.state.isChecked
+  			});
+  			console.log(this.state.isChecked);
+    }
 	onChangeSkills(event){
         const {name,value} = event.target;
-        console.log('value',value);
+       
         this.setState({ [name]:value });  
         
         var skills_id;
@@ -103,10 +112,11 @@ class Certification extends Component{
 	getData(){
 		Axios.get("/api/candidatemaster/get/one/"+this.state.candidate_id)
 		.then(response=>{
-			
+				console.log("return",response.data);
 			 	this.setState({
 						certificationArry:response.data[0].certifications
 			 	})
+			 	console.log("no return",this.state.certificationArry);
 			 })
 			 .catch(error=>{
 			 	Swal.fire("Submit Error!",error.message,'error');
@@ -114,7 +124,7 @@ class Certification extends Component{
 	}
 	edit(event){
 		event.preventDefault();
-		if(this.state.certificationToggel==="toogleCertificate"){
+		
 			var candidate_id = this.state.candidate_id;
 			var certificationID   = this.state.certificationID;
 			if (certificationID) {
@@ -140,13 +150,13 @@ class Certification extends Component{
 				 	Swal.fire("Submit Error!",error.message,'error');
 				 })
 			}
-		}
+		
 	}
 	deleteDate(event){
 		event.preventDefault();
 		var data_id =  event.currentTarget.id;
-		console.log("data_id",data_id);
-		if(this.state.certificationToggel==="toggleSkills"){
+		
+		if(this.state.certificationToggel===false){
 
 			var data_id =  event.currentTarget.id;
 
@@ -194,7 +204,7 @@ class Certification extends Component{
 		  this.getData();
 		  
 		}else{
-			console.log("you click");
+			
 			var data_id =  event.currentTarget.id;
 			Swal.fire({
 			title : 'Are you sure? you want to delete this Certification Details!!!',
@@ -259,13 +269,10 @@ class Certification extends Component{
 	}
 	changeBlock(event){
 		event.preventDefault();
-		var value = event.currentTarget.value;
-		var id  = event.currentTarget.id;
-		
 		this.setState({
-			certificationToggel:id,
+			certificationToggel:!this.state.certificationToggel
 		})
-		
+		console.log("certificationToggel",this.state.certificationToggel);
 	}
 	starClick(event){
 		event.preventDefault();
@@ -278,20 +285,40 @@ class Certification extends Component{
 		})
 	}
 	handleSave(event){
+		event.preventDefault();
 		var status =  this.validateForm();
-		this.changeBlock(event);
-		if(this.state.certificationToggel==="toggleSkills"){
-			var formValues = {
+		// this.changeBlock(event);
+		if(this.state.certificationToggel===false){
+			if(this.state.isChecked===true){
+				var formValues = {
 					                candidate_id               : this.state.candidate_id,
-					                skillCertificationID       : this.state.skillCertificationID,
-					                skills:{
-					                	skills                 : this.state.skills,
+					             
+					                primarySkills:{
+					                	skill                 : this.state.skills,
 										rating                 : this.state.rating,
-										skills_id              : this.state.skills_id
+										skillID              : this.state.skills_id
 					                }
 					                
 							}
-							console.log(formValues);
+							this.insetData(formValues,event);
+			}else{
+				var formValues = {
+					                candidate_id               : this.state.candidate_id,
+					                
+					                secondarySkills:{
+					                	skill                 : this.state.skills,
+										rating                 : this.state.rating,
+										skillID              : this.state.skills_id
+					                }
+					                	
+					                
+					                
+							}
+							this.insetData(formValues,event);
+			}
+			console.log(formValues);
+			
+
 		}else{
 			var formValues = {
 					                candidate_id               : this.state.candidate_id,
@@ -307,38 +334,22 @@ class Certification extends Component{
 									
 									
 							}	
+		 if(
+		 	this.props.match.params.certificationID )
+				 {
+				 	this.updateData(formValues,event);
+				 }else{
+					this.insetData(formValues,event);
+				}
 		}
 			 
 				
-		if(this.props.match.params.skillCertificationID 
-			|| this.props.match.params.certificationID )
-		{
-			this.updateData(formValues,event);
-		}else{
-			this.insetData(formValues,event);
-		}
+		
 		this.getData();	
 	}
 	updateData(formValues,event){
 		var status =  this.validateForm();
-		if(this.state.certificationToggel==="toggleSkills"){
-			Axios.patch("/api/candidatemaster/patch/updateOneCandidateSkill",formValues)
-				 .then(response=>{
-
-									Swal.fire("Congrats","Your Certification Details is update Successfully","success");
-										this.setState({
-													skills             : [],
-													buttonText         : "Save",
-													rating             : "",
-												})
-							this.props.history.push("/certification/"+this.state.candidate_id);
-					})
-					.catch(error =>{
-						Swal.fire("Submit Error!",error.message,'error');
-					});
-				}
-				else{
-					Axios.patch("/api/candidatemaster/patch/updateOneCandidateCertification",formValues)
+				Axios.patch("/api/candidatemaster/patch/updateOneCandidateCertification",formValues)
 				 .then(response=>{
 
 									Swal.fire("Congrats","Your Certification Details is update Successfully","success");
@@ -356,13 +367,11 @@ class Certification extends Component{
 					.catch(error =>{
 						Swal.fire("Submit Error!",error.message,'error');
 					});
-				}
 				
 
-			
 		}
 	insetData(formValues,event){
-		if(this.state.certificationToggel==="toggleSkills"){
+		if(this.state.certificationToggel===false){
 			Axios.patch("/api/candidatemaster/patch/addCandidateSkill",formValues)
 			 .then(response=>{
 
@@ -370,6 +379,7 @@ class Certification extends Component{
 						this.setState({
 										skills             : [],
 										rating             : "",
+										isChecked		   : false,
 										buttonText         : "Save"
 									})
 	
@@ -462,7 +472,7 @@ class Certification extends Component{
 							<div className="col-lg-4 col-lg-offset-4">
 								<div className="input-group genderFeildWrapper">
 
-									<div className ={ this.state.certificationToggel==="toggleSkills"
+									<div className ={ this.state.certificationToggel===false
 													 ? "genderFeild col-lg-6 genderFeildActive"
 													 : "genderFeild col-lg-6"}  
 										 id="toggleSkills" name="certificationToggel" 
@@ -470,7 +480,7 @@ class Certification extends Component{
 									>
 											Enter Skills
 									</div>
-									<div className={this.state.certificationToggel === "toogleCertificate" 
+									<div className={this.state.certificationToggel === true
 													? "genderFeild col-lg-6 genderFeildActive"
 													: "genderFeild col-lg-6"} 
 										id="toogleCertificate" name="certificationToggel" 
@@ -483,22 +493,22 @@ class Certification extends Component{
 							</div>
 						</div>
 						{
-							this.state.certificationToggel==="toggleSkills"
+							this.state.certificationToggel===false
 							?
 								<div >
 								<div className="row formWrapper">
 									
 									<div className="col-lg-1 ">
-										{/*<div className="tooltip">Hover over me
+										<div className="tooltip">Hover me
 										  <span className="tooltiptext">Tooltip text</span>
-										</div>*/}
+										</div>
 										
 										<div className="customCheckBox">
 											
 										
 											<label  className="">
-												<input type="checkbox"  />
-											    <span class="checkmark"></span>
+												<input type="checkbox"  onChange={ this.handleChecked.bind(this) }/>
+											    <span className="checkmark"></span>
 											</label>
 										</div>
 										
@@ -604,7 +614,7 @@ class Certification extends Component{
 						</div>
 						
 						{
-							this.state.certificationToggel==="toogleCertificate"
+							this.state.certificationToggel===true
 							?
 							<div className=" AddressWrapper col-lg-12" >
 								 <div className="row">
@@ -612,6 +622,7 @@ class Certification extends Component{
 									this.state.certificationArry.length > 0
 									?
 									this.state.certificationArry.map((elem,index)=>{
+
 										return(
 										
 											<div className="col-lg-6 " key={index}>

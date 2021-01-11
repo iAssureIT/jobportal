@@ -63,3 +63,6 @@
 	color: var(--main-txt-color) !important;
 }
 /************************End of react phone input***********************/
+.email{
+	text-transform:none!important;
+}

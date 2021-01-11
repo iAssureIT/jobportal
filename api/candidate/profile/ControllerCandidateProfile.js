@@ -557,7 +557,7 @@ exports.addCandidateSkill = (req,res,next)=>{
     var primarySkills   = []
     var secondarySkills = [];
     var skillID; 
-    //console.log(req.body.candidate_id)
+    //console.log(req.body)
     
     processData();
         async function processData(){

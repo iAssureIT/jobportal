@@ -11,7 +11,9 @@ class ProgressBar extends Component{
 			location 		: this.props.location,
 			candidate_id  	: this.props.userDetails.candidate_id
 		}
+		console.log('candidate_id',this.state.candidate_id);
 	}
+
 	render(){
 		
 		return(
@@ -129,7 +131,7 @@ class ProgressBar extends Component{
 									<div className="progress-bar progress-bar-striped progressBarInner progress-bar-warning progress-bar-striped active" 
 									  role="progressbar" aria-valuenow="0" aria-valuemin="0" 
 									  aria-valuemax="100" style={{width:this.props.width+"%"}}>
-									    <img src={this.props.img?("/images/"+ this.props.img + ".png"):null} style={{left:this.props.left+"%"}}/>
+									    <img src={this.props.img?("/images/"+ this.props.img + ".png"):null}  style={{left:this.props.left+"%"}}/>
 									</div>
 
 								</div>
@@ -146,6 +148,7 @@ const mapStateToProps = (state)=>{
     return {
         userDetails  : state.userDetails,
     }
+
 }
 const mapDispatchToProps = (dispatch) => ({
   mapAction :  bindActionCreators(mapActionCreator, dispatch)

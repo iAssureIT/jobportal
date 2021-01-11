@@ -723,7 +723,7 @@ class Academics extends Component{
 														</div>
 														<div className="col-lg-12">
 								                            <div className="addRightbtn">
-								                                <a id={elem._id} href={"/academics/"+this.state.candidate_id+"/edit/"+elem._id}>
+								                                <a id={elem._id} href={"/experience/"+this.state.candidate_id+"/edit/"+elem._id}>
 								                            	    <div className="editBtn pull-left">Edit</div>
 								                            	</a>
 								                            	<div className="dltBtn pull-right" id={elem._id} onClick={this.deleteDate.bind(this)}>Delete</div>

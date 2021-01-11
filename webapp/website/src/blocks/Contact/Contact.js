@@ -95,7 +95,7 @@ class Contact extends Component{
 		var tempEmail = this.state.email.trim(); // value of field with whitespace trimmed off
     	var emailFilter = /^[^@]+@[^@.]+\.[^@]*\w\w$/;
     	var illegalChars = /[\(\)\<\>\,\;\:\\\"\[\]]/;
-    	var phoneno = /^\d{10}$/;
+    	// var phoneno = /^\d{10}$/;
 
 		if(this.state.email.length<=0){
 			document.getElementById("emailError").innerHTML=  
@@ -111,26 +111,26 @@ class Contact extends Component{
 			""; 
 			status = true;
 		}
-		if(this.state.mobile.match(phoneno)){
-			document.getElementById("mobileError").innerHTML=  
-			""; 
-			status = true;
+		// if(this.state.mobile.match(phoneno)){
+		// 	document.getElementById("mobileError").innerHTML=  
+		// 	""; 
+		// 	status = true;
 			
-		}else{
-			document.getElementById("mobileError").innerHTML=  
-			"Please enter your 10 Digit Mobile Number";  
-			status=false; 
-		}
-		if(this.state.alternate.match(phoneno)){
-			document.getElementById("alternateError").innerHTML=  
-			""; 
-			status = true;
+		// }else{
+		// 	document.getElementById("mobileError").innerHTML=  
+		// 	"Please enter your 10 Digit Mobile Number";  
+		// 	status=false; 
+		// }
+		// if(this.state.alternate.match(phoneno)){
+		// 	document.getElementById("alternateError").innerHTML=  
+		// 	""; 
+		// 	status = true;
 			
-		}else{
-			document.getElementById("alternateError").innerHTML=  
-			"Please enter your 10 Digit Alternate Mobile Number";  
-			status=false; 
-		}
+		// }else{
+		// 	document.getElementById("alternateError").innerHTML=  
+		// 	"Please enter your 10 Digit Alternate Mobile Number";  
+		// 	status=false; 
+		// }
 
 		
 		 return status;
@@ -186,7 +186,7 @@ class Contact extends Component{
 										<i className="fa fa-envelope-o"></i> 
 									</span> 
 									<input type="email" name="email" id="email" 
-									 className="form-control inputBox" value={this.state.email} 
+									 className="form-control inputBox email" value={this.state.email} 
 									 onChange={this.handleChange.bind(this)} />
 								</div> 
 								<span id="emailError" className="errorMsg"></span>

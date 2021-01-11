@@ -47,6 +47,7 @@ class Address extends Component{
 		Axios.get("/api/addresstypemaster/get/list")
 			.then(response => {
 				this.setState({inputAddressType : response.data});
+				console.log(response.data);
 			})
 			.catch(error=>{
 				Swal.fire("Error while getting List data",error.message,'error');

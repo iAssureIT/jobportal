@@ -10,7 +10,7 @@ class MiddelContent extends Component{
 		super(props);
 
 		this.state={
-			candidate_id        : this.props.match.params.candidate_id,
+			candidate_id        : this.props.match.params.user_id,
 			workExperienceArry : [],
 			academicsArry      : [],
 			certificationArry  : [],

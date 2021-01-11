@@ -1032,33 +1032,33 @@
 }
 .kaushambi{
 	position: absolute;
-	left:475px;
-    top: 629px;
+	left:475px!important;
+    top: 629px!important;
 }
 .kaushambiText{
 	position: absolute;
-	top: 40%;
-    left:30%;
+	top: 40%!important;
+    left:30%!important;
 }
 .kaushambiNumber{
 	position: absolute;
-	top: 55%;
-    left: 35%;
+	top: 55%!important;
+    left: 35%!important;
 }
 .pratapgarh{
 	position: absolute;
-	left:494px;
-    top: 580px;
+	left:494px!important;
+    top: 580px!important;
 }
 .pratapgarhText{
 	position: absolute;
-	top: 40%;
-    left:30%;
+	top: 40%!important;
+    left:30%!important;
 }
 .pratapgarhNumber{
 	position: absolute;
-	top: 55%;
-    left:35%;
+	top: 55%!important;
+    left:35%!important;
 }
 .jaunpur{
 	position: absolute;
