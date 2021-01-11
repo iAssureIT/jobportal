@@ -1,9 +1,9 @@
 const mongoose			= require("mongoose");
-const bcrypt				= require("bcrypt");
-const jwt						= require("jsonwebtoken");
-var ObjectID 				= require('mongodb').ObjectID;
-var request         = require('request-promise');
-const User 					= require('./ModelUsers.js');
+const bcrypt			= require("bcrypt");
+const jwt				= require("jsonwebtoken");
+var ObjectID 			= require('mongodb').ObjectID;
+var request         	= require('request-promise');
+const User 				= require('./ModelUsers.js');
 const globalVariable 	= require("../../nodemon.js");
 
 function getRandomInt(min, max) {
@@ -11,6 +11,7 @@ function getRandomInt(min, max) {
 	max = Math.floor(max);
 	return Math.floor(Math.random() * (max - min + 1)) + min;
 };
+
 exports.user_signup_admin = (req,res,next)=>{
 	if(req.body.email && req.body.pwd){
 		User.find({emails:{$elemMatch:{address:req.body.email}}})
@@ -83,7 +84,9 @@ exports.user_signup_admin = (req,res,next)=>{
 		res.status(200).json({message:"Email and pwd are mandatory"});
 	}
 };
+
 exports.user_signup_user = (req,res,next)=>{
+	console.log("user_signup_user req.body = ", req.body);
 	if(req.body.role && req.body.email && req.body.pwd){
 		User.find({emails:{$elemMatch:{address:req.body.email}}})
 			.exec()
@@ -104,9 +107,8 @@ exports.user_signup_user = (req,res,next)=>{
 											createdAt	: new Date,
 											createdBy   : req.body.createdBy,
 											services	: {
-												password:{
-															bcrypt:hash
-															
+											password	:{
+															bcrypt:hash															
 														},
 											},
 											username	: req.body.email,
@@ -150,12 +152,15 @@ exports.user_signup_user = (req,res,next)=>{
 			.catch(err =>{
 				res.status(500).json({
 					error: err
+
+
 				});
 			});
 	}else{
 		res.status(200).json({message:"Email , pwd and Role are mandatory"});
 	}
 };
+
 exports.user_signup_user_email_otp = (req,res,next)=>{
 	if(req.body.role && req.body.email && req.body.pwd){
 		User.find({emails:{$elemMatch:{address:req.body.email}}})
@@ -220,7 +225,7 @@ exports.user_signup_user_email_otp = (req,res,next)=>{
 											                "url"       : "http://localhost:"+globalVariable.port+"/send-email",
 											                "body"      : {
 											                					email 	: req.body.email, 
-											                					subject : "Successfully Creation of your Account on Wealthyvia",
+											                					subject : "Successfully Creation of your Account on Pipito",
 											                					text    : "Dear "+result.profile.fullName+"Your OTP is "+ emailOTP, 
 											                			   },
 											                "json"      : true,
@@ -265,7 +270,9 @@ exports.user_signup_user_email_otp = (req,res,next)=>{
 		res.status(200).json({message:"Email , pwd and Role are mandatory"});
 	}
 };
+
 exports.user_login = (req,res,next) =>{
+	console.log("Inside user_login");
 	User.findOne({emails:{$elemMatch:{address:req.body.email}}})
 		.exec()
 		.then(user => {
@@ -292,8 +299,9 @@ exports.user_login = (req,res,next) =>{
 									{
 										$push : {
 											"services.resume.loginTokens" : {
-													when: new Date(),
-													hashedToken : token
+													loginTimeStamp: new Date(),
+													hashedToken : token,
+													logoutTimeStamp : null
 												}
 										}
 									}
@@ -301,11 +309,38 @@ exports.user_login = (req,res,next) =>{
 								.exec()
 								.then(updateUser=>{
 									if(updateUser.nModified == 1){
+										//===========================================================
+										//====  Change Done by Ashish Naik ==========================
+										// After login, send Company ID and Location ID of User
+										// So at the time of creation of User, we must have 
+										// companyID & locationID available for each user.
+										// From Org-Setting form, we can get these things for Admin. 
+										// We need to check into Entity master 
+										// where CompanyID & LocID are available
+										//===========================================================
+
+										const companyID = '';
+										const locID = '';
+										if(user.companyID){
+											companyID = user.companyID;
+										}else{
+											companyID = 0;
+										}
+
+										if(user.locID){
+											locID = user.locID;
+										}else{
+											locID = 0;
+										}
+
 										res.status(200).json({
 													message	: 'Auth successful',
 													token	: token,
-													ID 		: user._id
+													ID 		: user._id,
+													companyID : companyID,
+													locID : locID,
 										});	
+										
 									}else{
 										return res.status(401).json({
 												message: 'Auth failed'
@@ -330,6 +365,7 @@ exports.user_login = (req,res,next) =>{
 			});
 		});
 };
+
 exports.admin_login = (req,res,next) =>{
 	User.findOne({
 					emails	: {$elemMatch:{address:req.body.email}},
@@ -360,8 +396,9 @@ exports.admin_login = (req,res,next) =>{
 									{
 										$push : {
 											"services.resume.loginTokens" : {
-													when: new Date(),
-													hashedToken : token
+													loginTimeStamp: new Date(),
+													hashedToken : token,
+													logoutTimeStamp : null
 												}
 										}
 									}
@@ -369,10 +406,37 @@ exports.admin_login = (req,res,next) =>{
 								.exec()
 								.then(updateUser=>{
 									if(updateUser.nModified == 1){
+										//===========================================================
+										//====  Change Done by Ashish Naik ==========================
+										// After login, send Company ID and Location ID of User
+										// So at the time of creation of User, we must have 
+										// companyID & locationID available for each user.
+										// From Org-Setting form, we can get these things for Admin. 
+										// We need to check into Entity master 
+										// where CompanyID & LocID are available
+										//===========================================================
+
+										const companyID = '';
+										const locID = '';
+										if(user.companyID){
+											companyID = user.companyID;
+										}else{
+											companyID = 0;
+										}
+
+										if(user.locID){
+											locID = user.locID;
+										}else{
+											locID = 0;
+										}
+
+
 										res.status(200).json({
-													message	: 'Auth successful',
-													token	: token,
-													ID 		: user._id
+												message	: 'Auth successful',
+												token	: token,
+												ID 		: user._id,
+												companyID : companyID,
+												locID : locID													
 										});	
 									}else{
 										return res.status(401).json({
@@ -380,17 +444,16 @@ exports.admin_login = (req,res,next) =>{
 											});
 									}
 								})
-								.catch(err=>{
-									
+								.catch(err=>{									
 									res.status(500).json(err);
 								});	
 						}
 					})
 				}else{
-                    res.status(409).status({message:"Password not found"}); 
+          res.status(409).status({message:"Password not found"}); 
 				}
 			}else{
-                res.status(409).status({message:"User Not found Or User is not a admin"});
+        res.status(409).status({message:"User Not found Or User is not a admin"});
 			}			
 		})
 		.catch(err =>{
@@ -399,7 +462,79 @@ exports.admin_login = (req,res,next) =>{
 			});
 		});
 };
+
 exports.user_update_name_mobile = (req,res,next)=>{
+	console.log("req.body=>",req.body);
+	console.log("req.body",req.params);
+	var username = req.body.email;
+	if(req.body.role.indexOf("driver")>-1){
+		username = req.body.mobile
+	}else{
+		username = req.body.email
+	}
+	User.findOne({_id:req.params.ID})
+		.exec()
+		.then(user=>{
+			if(user){
+				console.log("user",user)
+				User.updateOne(
+					{_id:req.params.ID},
+					{
+						$set:{
+						
+							profile		:
+										{
+											firstname     	: req.body.firstname,
+											lastname      	: req.body.lastname,
+											fullName      	: req.body.firstname+' '+req.body.lastname,
+											emailId       	: req.body.email,
+											mobile     	  	: req.body.mobile,
+											image 	     	: req.body.image ? req.body.image : "",
+											department    	: req.body.department,
+											designation  	: req.body.designation,
+											//city     		: req.body.cityName,
+											email     		: req.body.email,
+											status     		: req.body.status,
+											companyName   	: req.body.companyName,
+											companyID    	: req.body.companyID,
+										},
+										roles 				: req.body.role,
+										username			: username,
+
+						},
+					}
+				)
+				.exec()
+				.then(data=>{
+					console.log("Update Profile data ====>>>",data);
+					if(data.nModified == 1){
+						res.status(200).json("USER_UPDATED");
+					}else{
+                        res.status(200).json({ 
+                            updated : false, 
+                            "message"    : "USER_NOT_UPDATED", 
+                        });
+						// res.status(401).status("USER_NOT_UPDATED")
+					}
+				})
+				.catch(err =>{
+					res.status(500).json({
+						error: err
+					});
+					console.log("error->",err)
+				});
+			}else{
+				res.status(404).json("User Not Found");
+			}
+		})
+		.catch(err=>{
+			res.status(500).json({
+				error:err
+			});
+		});
+};
+//amit===================
+exports.user_update_name_mobile_profile = (req,res,next)=>{
 	User.findOne({_id:req.params.ID})
 		.exec()
 		.then(user=>{
@@ -413,6 +548,9 @@ exports.user_update_name_mobile = (req,res,next)=>{
 							"profile.fullName"      : req.body.firstname+' '+req.body.lastname,
 							"profile.mobile"     	: req.body.mobNumber,
 							"profile.image"     	: req.body.image,
+							"role"     				: req.body.role,
+							"profile.email"    		: req.body.email,
+							
 						},
 					}
 				)
@@ -421,7 +559,11 @@ exports.user_update_name_mobile = (req,res,next)=>{
 					if(data.nModified == 1){
 						res.status(200).json("USER_UPDATED");
 					}else{
-						res.status(401).status("USER_NOT_UPDATED")
+                        res.status(200).json({ 
+                            updated : false, 
+                            "message"    : "USER_NOT_UPDATED", 
+                        });
+						// res.status(401).status("USER_NOT_UPDATED")
 					}
 				})
 				.catch(err =>{
@@ -439,6 +581,7 @@ exports.user_update_name_mobile = (req,res,next)=>{
 			});
 		});
 };
+//=================================
 exports.user_update_status = (req,res,next)=>{
 	User.findOne({_id:req.params.ID})
 		.exec()
@@ -452,21 +595,34 @@ exports.user_update_status = (req,res,next)=>{
 						},
 					}
 				)
-				.exec()
-				.then(data=>{
-					if(data.nModified == 1){
-						res.status(200).json("USER_STATUS_UPDATED");
-					}else{
+				.exec() 
+		        .then(data=>{
+		            if(data.nModified == 1){
+		                User.updateOne(
+							{_id:req.params.ID},
+							{
+			                    $push:  { 'statusLog' : [{  
+														status         : req.body.status,
+														updatedAt      : new Date(),
+														updatedBy      : req.body.username 
+			                                            }] 
+			                            }
+			                })
+		                .exec()
+		                .then(data=>{
+							res.status(200).json("USER_STATUS_UPDATED");
+		                })
+		            }else{
 						res.status(200).json("USER_STATUS_NOT_UPDATED")
-					}
-				})
+		            }
+		        })
 				.catch(err =>{
 					res.status(500).json({
 						error: err
 					});
 				});
 			}else{
-				res.status(404).json("User Not Found");
+				res.status(200).json("User Not Found");
 			}
 		})
 		.catch(err=>{
@@ -475,6 +631,125 @@ exports.user_update_status = (req,res,next)=>{
 			});
 		});
 };
+
+exports.user_update_delete_status = (req,res,next)=>{
+	console.log("*******&&&&&&&&&**************",req.body);
+	console.log("req.body.user_id_tobedeleted==>",req.body.user_id_tobedeleted);
+	User.findOne({_id:req.body.user_id_tobedeleted})
+		.exec()
+		.then(user=>{
+			if(user){
+				console.log("req.user==>",user);
+				var newstatus = "";
+				if(user.profile.status === 'active'){
+					newstatus = 'deleted-active';
+				}
+				if(user.profile.status === 'blocked'){
+					newstatus = 'deleted-blocked';
+				}
+				User.updateOne(
+					{_id:req.body.user_id_tobedeleted},
+					{
+						$set:{
+							"profile.status" : newstatus,
+						},
+					}
+				)
+				.exec() 
+		        .then(data=>{
+					console.log("RESPONSE.data==>",data);
+		            if(data.nModified == 1){
+		                User.updateOne(
+							{_id:req.body.user_id_tobedeleted},
+							{
+			                    $push:  { 'statusLog' : [{  
+			                    							status         : newstatus,
+			                    							updatedAt      : new Date(),
+			                                                updatedBy      : req.body.updatedBy,
+			                                            }] 
+			                            }
+			                })
+		                .exec()
+		                .then(data=>{
+							res.status(200).json("USER_SOFT_DELETED");
+		                })
+		            }else{
+						res.status(200).json("USER_NOT_DELETED")
+		            }
+		        })
+				.catch(err =>{
+					res.status(500).json({
+						error: err
+					});
+				});
+			}else{
+				res.status(200).json("User Not Found");
+			}
+		})
+		.catch(err=>{
+			res.status(500).json({
+				error:err
+			});
+		});
+};
+
+exports.user_update_recover_status = (req,res,next)=>{
+	User.findOne({_id:req.body.user_id_toberecover})
+		.exec()
+		.then(user=>{
+			if(user){
+				var newstatus = "";
+				if(user.profile.status === 'deleted-active'){
+					newstatus = 'active';
+				}
+				if(user.profile.status === 'deleted-blocked'){
+					newstatus = 'blocked';
+				}
+				User.updateOne(
+					{_id:req.body.user_id_toberecover},
+					{
+						$set:{
+							"profile.status" : newstatus,
+						},
+					}
+				)
+				.exec() 
+		        .then(data=>{
+		            if(data.nModified == 1){
+		                User.updateOne(
+							{_id:req.body.user_id_toberecover},
+							{
+			                    $push:  { 'statusLog' : [{  
+			                    							status         : newstatus,
+			                    							updatedAt      : new Date(),
+			                                                updatedBy      : req.body.updatedBy,
+			                                            }] 
+			                            }
+			                })
+		                .exec()
+		                .then(data=>{
+							res.status(200).json("USER_SOFT_DELETED");
+		                })
+		            }else{
+						res.status(200).json("USER_NOT_DELETED")
+		            }
+		        })
+				.catch(err =>{
+					res.status(500).json({
+						error: err
+					});
+				});
+			}else{
+				res.status(200).json("User Not Found");
+			}
+		})
+		.catch(err=>{
+			res.status(500).json({
+				error:err
+			});
+		});
+};
+
 exports.user_update_many_status = (req,res,next)=>{
 	var userID = req.body.userID.map((a,i)=>ObjectID(a));
 	User.updateMany(
@@ -487,18 +762,32 @@ exports.user_update_many_status = (req,res,next)=>{
 	)
 	.exec()
 	.then(data=>{
-		if(data.nModified == 1){
-			res.status(200).json("USER_STATUS_UPDATED");
-		}else{
-			res.status(401).status("USER_STATUS_NOT_UPDATED")
-		}
-	})
+        if(data.nModified == 1){
+            User.updateOne(
+				{"_id": { "$in": userID }},
+				{
+                    $push:  { 'statusLog' : [{  
+	                							status         : req.body.status,
+	                							updatedAt      : new Date(),
+	                                            updatedBy      : req.body.username 
+	                                        }] 
+                            }
+                })
+            .exec()
+            .then(data=>{
+				res.status(200).json("USER_STATUS_UPDATED");
+            })
+        }else{
+			res.status(200).json("USER_STATUS_NOT_UPDATED")
+        }
+    })
 	.catch(err =>{
 		res.status(500).json({
 			error: err
 		});
 	});
 };
+
 exports.user_update_role = (req,res,next)=>{
 	switch(req.params.action){
 		case 'assign' :
@@ -577,6 +866,46 @@ exports.user_update_role = (req,res,next)=>{
 			res.status(200).json({message:"INVALID_ACTION"})
 	}
 };
+exports.update_user_company = (req,res,next)=>{
+	User.findOne({_id:req.params.userID})
+		.exec()
+		.then(user=>{
+			if(user){
+				User.updateOne(
+					{_id:req.params.userID},
+					{
+						$set:{
+							"profile.companyID"     : req.body.companyID,
+						},
+					}
+				)
+				.exec()
+				.then(data=>{
+					if(data.nModified == 1){
+						res.status(200).json("USER_UPDATED");
+					}else{
+                        res.status(200).json({ 
+                            updated : false, 
+                            "message"    : "USER_NOT_UPDATED", 
+                        });
+						// res.status(401).status("USER_NOT_UPDATED")
+					}
+				})
+				.catch(err =>{
+					res.status(500).json({
+						error: err
+					});
+				});
+			}else{
+				res.status(404).json("User Not Found");
+			}
+		})
+		.catch(err=>{
+			res.status(500).json({
+				error:err
+			});
+		});
+};
 exports.user_update_password_ID = (req,res,next)=>{
 	User.findOne({_id:req.params.ID})
 		.exec()
@@ -619,21 +948,35 @@ exports.user_update_password_ID = (req,res,next)=>{
 			});
 		});
 };
+
 exports.fetch_user_ID = (req,res,next)=>{
 	User.findOne({_id:req.params.ID})
-		.select("profile.firstname profile.lastname profile.status profile.fullName roles profile.email profile.mobile profile.image")
 		.exec()
 		.then(data=>{
 			if(data){
+				var loginTokenscount = data.services.resume.loginTokens.length;
+				var statuslogLength = data.statusLog.length;
+
+
 				res.status(200).json({
 					"_id"		: data._id,
 					"firstname" : data.profile.firstname,
 					"lastname"	: data.profile.lastname,
+					"companyID"	: data.profile.companyID,
+					"companyName"	: data.profile.companyName,
 					"email"		: data.profile.email, //Mandatory 
 					"mobile" 	: data.profile.mobile,
+					"designation" 	: data.profile.designation,
+					"department" 	: data.profile.department,
+					"city" 	: data.profile.city,
+					"states" 	: data.profile.states,
 					"role"      : data.roles, //Mandatory
 					"image" 	: data.profile.image,
 					"status"	: data.profile.status, //Either "Active" or "Inactive"
+					"fullName"	: data.profile.fullName,
+					"createdAt" : data.createdAt,
+					"logDetails": loginTokenscount > 0 ? data.services.resume.loginTokens: "-",
+
 				});
 			}else{
 				res.status(200).json({message:"USER_NOT_FOUND"});
@@ -645,33 +988,232 @@ exports.fetch_user_ID = (req,res,next)=>{
 			});
 		});
 };
-exports.fetch_users = (req,res,next)=>{
-	// var limitRange  = 10;
-    // var countNum2   = limitRange * req.params.pageno;
-    // var startRange  = countNum2 - limitRange;
-	User.find({})
-		.select("profile.firstname profile.lastname profile.status profile.fullName roles profile.email profile.mobile profile.clientId createdAt")
+
+exports.post_list_deleted_users = (req,res,next)=>{
+	var companyID= req.body.companyID;
+	if(req.body.companyID){
+		if(companyID === 1){
+			// var selector = {roles:{$ne:["admin"]}};
+			var selector = {roles:{$ne:["admin"]}, "profile.status":{$ne:"active"}};
+		}else{
+			var selector = {"profile.companyID":companyID,roles:{$ne:["admin"]}};
+		}
+		User.find(selector)
+			.select("profile.firstname profile.lastname profile.status profile.companyID profile.companyName profile.fullName roles profile.email profile.mobile profile.clientId createdAt services.resume.loginTokens statusLog")
+			.sort({createdAt : -1})
+			.skip(req.body.startRange)
+			.limit(req.body.limitRange)
+			.exec()
+			.then(data=>{
+				if(data){
+					var i = 0;
+					var returnData = [];
+					for(i = 0 ; i < data.length ; i++){
+						var loginTokenscount = data[i].services.resume.loginTokens.length 
+						// console.log('data in services.resume.loginTokens ==>',data[i].services.resume.loginTokens);
+						var statuslogLength = data[i].statusLog.length
+						returnData.push({
+							"_id"		      : data[i]._id,
+							"firstname"       : data[i].profile.firstname,
+							"lastname"	      : data[i].profile.lastname,
+							"companyID"	      : data[i].profile.companyID,
+							"companyName"	  : data[i].profile.companyName,
+							"email"		      : data[i].profile.email, //Mandatory 
+							"mobNumber"       : data[i].profile.mobile,
+							"role"            : data[i].roles, //Mandatory
+							"status"		  : data[i].profile.status, //Either "Active" or "Inactive"
+							"fullName"	      : data[i].profile.fullName,
+							"createdAt"       : data[i].createdAt,
+							"clientId"	      : data[i].clientId,
+							"lastLogin"       : loginTokenscount > 0 ? data[i].services.resume.loginTokens[loginTokenscount-1].loginTimeStamp : null ,
+							"statusupdatedAt" : statuslogLength > 0 ? data[i].statusLog[statuslogLength-1].updatedAt : "-",
+							"statusupdatedBy" : statuslogLength > 0 ? data[i].statusLog[statuslogLength-1].updatedBy : "-"
+
+						});
+					}
+					if( i >= data.length){
+						res.status(200).json(returnData);
+						// console.log('returnData',returnData);
+					}
+				}else{
+					res.status(200).json({message:"USER_NOT_FOUND"});
+				}
+			})
+			.catch(err =>{
+				res.status(500).json({
+					error: err
+				});
+			});
+	} //end of if condition
+	else{
+		res.status(500).json({
+			message : "COMPANYID_NOT_AVAILABLE",
+			error: err
+		});
+	}
+};
+exports.user_update_password_withoutotp_ID = (req, res, next) => {
+	User.findOne({ _id: req.params.ID })
+		.exec()
+		.then(user => {
+			console.log("user_update_password_withoutotp_ID===========>>>>>>",user)
+			if (user) {
+				bcrypt.hash(req.body.pwd, 10, (err, hash) => {
+					User.updateOne(
+						{ _id: req.params.ID },
+						{
+							$set: {
+								services: {
+									password: {
+										bcrypt: hash
+									},
+								},
+							}
+						}
+					)
+						.exec()
+						.then(data => {
+							if (data.nModified == 1) {
+								res.status(200).json("PASSWORD_RESET");
+							} else {
+								res.status(401).json("PASSWORD_NOT_RESET");
+							}
+						})
+						.catch(err => {
+							console.log(err);
+							res.status(500).json({
+								error: err
+							});
+						});
+				});
+			} else {
+				res.status(404).json("User Not Found");
+			}
+		})
+		.catch(err => {
+			// console.log('update user status error ',err);
+			res.status(500).json({
+				error: err
+			});
+		});
+};
+exports.post_list_users = (req,res,next)=>{
+	var companyID= req.body.companyID;
+	var startRange= req.body.startRange;
+	var limitRange= req.body.limitRange;
+	console.log("=====================req==================",req.body,startRange,limitRange);
+	if(req.body.companyID){
+		if(companyID === 1){
+			// var selector = {roles:{$ne:["admin"]}, "profile.status":{$ne:"deleted-active"}};
+			var selector = {"profile.status":{$ne:"deleted-active"}};
+			// console.log("selector",selector);
+
+		}else{
+			// var selector = {"profile.companyID":companyID,roles:{$ne:["admin"]}};
+			var selector = {"profile.companyID":companyID};
+		}
+		User.find(selector)
+			// .select("profile.firstname profile.lastname profile.status profile.companyID profile.companyName profile.fullName roles profile.email profile.mobile profile.clientId createdAt services.resume.loginTokens statusLog")
+			.sort({createdAt : -1})
+			.skip(startRange)
+			.limit(limitRange)
+			.exec()
+			.then(data=>{
+				if(data){
+					console.log("--------------data----------",data);
+					var i = 0;
+					var returnData = [];
+					for(i = 0 ; i < data.length ; i++){
+						// console.log('data in post ==>',data[i].profile);
+						var loginTokenscount = data[i].services.resume.loginTokens.length;
+						// console.log('data in services.resume.loginTokens ==>',loginTokenscount > 0 ? data[i].services.resume.loginTokens[loginTokenscount-1].loginTimeStamp : null );
+						var statuslogLength = data[i].statusLog.length
+						returnData.push({
+							"_id"		      : data[i]._id,
+							"firstname"       : data[i].profile.firstname,
+							"lastname"	      : data[i].profile.lastname,
+							"companyID"	      : data[i].profile.companyID,
+							"companyName"	  : data[i].profile.companyName,
+							"workLocation"	  : data[i].profile.workLocation,
+							"email"		      : data[i].profile.email, //Mandatory 
+							"mobNumber"       : data[i].profile.mobile,
+							"role"            : data[i].roles, //Mandatory
+							"status"		  : data[i].profile.status, //Either "Active" or "Inactive"
+							"fullName"	      : data[i].profile.fullName,
+							"createdAt"       : data[i].createdAt,
+							"clientId"	      : data[i].clientId,
+							"lastLogin"       : loginTokenscount > 0 ? data[i].services.resume.loginTokens[loginTokenscount-1].loginTimeStamp : null ,
+							"statusupdatedAt" : statuslogLength  > 0 ? data[i].statusLog[statuslogLength-1].updatedAt : "-",
+							"statusupdatedBy" : statuslogLength  > 0 ? data[i].statusLog[statuslogLength-1].updatedBy : "-"
+
+						});
+					}
+					if( i >= data.length){
+						console.log('returnData=============>',returnData);
+						res.status(200).json(returnData);
+					}
+				}else{
+					res.status(200).json({message:"USER_NOT_FOUND"});
+				}
+			})
+			.catch(err =>{
+				res.status(500).json({
+					error: err
+				});
+			});
+	} //end of if condition
+	else{
+		res.status(500).json({
+			message : "COMPANYID_NOT_AVAILABLE",
+		});
+	}
+};
+exports.fetch_users_withlimits = (req,res,next)=>{
+	var companyID= req.body.companyID;
+	var startRange= req.body.startRange;
+	var limitRange= req.body.limitRange;
+	console.log("=====================req==================",req.body,startRange,limitRange);
+	if(req.body.companyID){
+		if(companyID === 1){
+			// var selector = {roles:{$ne:["admin"]}, "profile.status":{$ne:"deleted-active"}};
+			var selector = {"profile.status":{$ne:"deleted-active"}};
+			console.log("selector",selector);
+
+		}else{
+			// var selector = {"profile.companyID":companyID,roles:{$ne:["admin"]}};
+			var selector = {"profile.companyID":companyID};
+		}
+		// console.log("selector",selector);
+
+		User.aggregate([
+			{$match:selector},
+			
+		])
 		.sort({createdAt : -1})
-        .skip(req.body.startRange)
-        .limit(req.body.limitRange)
+        .skip(startRange)
+        .limit(limitRange)
 		.exec()
 		.then(data=>{
 			if(data){
 				var i = 0;
 				var returnData = [];
 				for(i = 0 ; i < data.length ; i++){
+					var loginTokenscount = data[i].services.resume.loginTokens.length 
 					returnData.push({
-						"_id"		: data[i]._id,
-						"firstname" : data[i].profile.firstname,
-						"lastname"	: data[i].profile.lastname,
-						"email"		: data[i].profile.email, //Mandatory 
-						"mobNumber" : data[i].profile.mobile,
-						"role"      : data[i].roles, //Mandatory
-						"status"	: data[i].profile.status, //Either "Active" or "Inactive"
-						"fullName"	: data[i].profile.fullName,
-						"createdAt" : data[i].createdAt,
-						"clientId"	: data[i].clientId
-					});
+										"_id"		: data[i]._id,
+										"firstname" : data[i].profile.firstname,
+										"lastname"	: data[i].profile.lastname,
+										"companyID"	: data[i].profile.companyID,
+										"companyName" : data[i].profile.companyName,
+										"workLocation" : data[i].profile.workLocation,
+										"email"		: data[i].profile.email, //Mandatory 
+										"mobNumber" : data[i].profile.mobile,
+										"role"      : data[i].roles, //Mandatory
+										"status"	: ((data[i].profile.status ==="active") && (data[i].profile.status !=="deleted"))  ? '<span class="label label-success statusLabel">'+data[i].profile.status+"</span>" : '<span class="label label-default statusLabel">'+data[i].profile.status+"</span>" , //Either "Active" or "Inactive"
+										"fullName"	: data[i].profile.fullName,
+										"lastLogin" : loginTokenscount > 0 ? data[i].services.resume.loginTokens[loginTokenscount-1].loginTimeStamp : null ,
+									});
+					// console.log("returnData==>",returnData);
 				}
 				if( i >= data.length){
 					res.status(200).json(returnData);
@@ -685,32 +1227,127 @@ exports.fetch_users = (req,res,next)=>{
 				error: err
 			});
 		});
+	}
+};
+
+
+
+exports.fetch_users_Companies = (req,res,next)=>{
+	console.log("re============>",req.body);
+	var companyID =req.body.companyID;
+    var companyName = req.params.company;
+	// User.find({roles:req.params.role})
+	console.log("companyID",companyID);
+	if(req.body.companyID){
+		if(companyID === 1){
+			var selector = {roles:{$ne:["admin"]}};
+		}else{
+			var selector = {"profile.companyID":companyID,roles:{$ne:["admin"]}};
+		}
+		console.log("selector==>",selector);
+		User.aggregate([
+			{$match:selector},
+			{$match:{"profile.status": {$nin:["deleted-active","deleted-blocked" ]}}},
+			{$match:{"profile.companyName":companyName}},
+		])
+	// User.find({"profile.companyName":req.params.company})
+		// .select("profile.firstname profile.lastname profile.status profile.companyID profile.companyName profile.fullName roles profile.email profile.mobile profile.clientId createdAt services.resume.loginTokens")
+		.sort({createdAt : -1})
+        .skip(req.body.startRange)
+        .limit(req.body.limitRange)
+		.exec()
+		.then(data=>{
+			if(data){
+				var i = 0;
+				var returnData = [];
+				for(i = 0 ; i < data.length ; i++){
+					var loginTokenscount = data[i].services.resume.loginTokens.length 
+					returnData.push({
+										"_id"		: data[i]._id,
+										"firstname" : data[i].profile.firstname,
+										"lastname"	: data[i].profile.lastname,
+										"companyID"	: data[i].profile.companyID,
+										"companyName" : data[i].profile.companyName,
+										"workLocation" : data[i].profile.workLocation,
+										"email"		: data[i].profile.email, //Mandatory 
+										"mobNumber" : data[i].profile.mobile,
+										"role"      : data[i].roles, //Mandatory
+										"status"	: ((data[i].profile.status ==="active") && (data[i].profile.status !=="deleted"))  ? '<span class="label label-success statusLabel">'+data[i].profile.status+"</span>" : '<span class="label label-default statusLabel">'+data[i].profile.status+"</span>" , //Either "Active" or "Inactive"
+										"fullName"	: data[i].profile.fullName,
+										"lastLogin" : loginTokenscount > 0 ? data[i].services.resume.loginTokens[loginTokenscount-1].loginTimeStamp : null ,
+									});
+					// console.log("returnData==>",returnData);
+				}
+				if( i >= data.length){
+					res.status(200).json(returnData);
+				}
+			}else{
+				res.status(200).json({message:"USER_NOT_FOUND"});
+			}
+		})
+		.catch(err =>{
+			res.status(500).json({
+				error: err
+			});
+		});
+	}
 };
 exports.fetch_users_roles = (req,res,next)=>{
-	
-	User.find({roles:req.params.role})
-		.select("profile.firstname profile.lastname profile.status profile.fullName roles profile.email profile.mobile")
+	console.log("re============>",req.body);
+	var companyID =req.body.companyID;
+    var role = req.params.role;
+	// User.find({roles:req.params.role})
+	console.log("companyID",companyID);
+	if(req.body.companyID){
+		if(companyID === 1){
+			if(req.params.role == "admin"){
+				var selector = {roles:{$eq:["admin"]}};
+			}else{
+				var selector = {roles:{$ne:["admin"]}};
+			}
+		}else{
+			var selector = {"profile.companyID":companyID,roles:{$ne:["admin"]}};
+		}
+		// var selector = {"profile.companyID":companyID};
+
+		console.log("selector==>",selector);
+		User.aggregate([
+			{$match:selector},
+			{$match:{"profile.status": {$nin:["deleted-active","deleted-blocked" ]}}},
+			{$match:{"roles":role}},
+		])
+		// .select("profile.firstname profile.lastname profile.status profile.companyID profile.companyName profile.fullName roles profile.email profile.mobile profile.clientId createdAt services.resume.loginTokens")
 		.sort({createdAt : -1})
         .skip(req.body.startRange)
         .limit(req.body.limitRange)
 		.exec()
 		.then(data=>{
+			console.log("data",data);
 			if(data){
 				var i = 0;
 				var returnData = [];
 				for(i = 0 ; i < data.length ; i++){
+					console.log("data[i].services.resume",data[i].services)
+					var loginTokenscount = data[i].services.resume ? data[i].services.resume.loginTokens.length : 0 ;
 					returnData.push({
 										"_id"		: data[i]._id,
 										"firstname" : data[i].profile.firstname,
 										"lastname"	: data[i].profile.lastname,
+										"companyID"	: data[i].profile.companyID,
+										"companyName" : data[i].profile.companyName,
+										"workLocation" : data[i].profile.workLocation ? data[i].profile.workLocation:"",
 										"email"		: data[i].profile.email, //Mandatory 
 										"mobNumber" : data[i].profile.mobile,
 										"role"      : data[i].roles, //Mandatory
-										"status"	: data[i].profile.status, //Either "Active" or "Inactive"
+										"status"	: ((data[i].profile.status ==="active") && (data[i].profile.status !=="deleted"))  ? '<span class="label label-success statusLabel">'+data[i].profile.status+"</span>" : '<span class="label label-default statusLabel">'+data[i].profile.status+"</span>" , //Either "Active" or "Inactive"
 										"fullName"	: data[i].profile.fullName,
+										"lastLogin"       : loginTokenscount > 0 ? data[i].services.resume.loginTokens[loginTokenscount-1].loginTimeStamp : null ,
 									});
+					console.log("returnData==>",returnData);
 				}
 				if( i >= data.length){
+					console.log("returnData=>",returnData);
+
 					res.status(200).json(returnData);
 				}
 			}else{
@@ -718,33 +1355,59 @@ exports.fetch_users_roles = (req,res,next)=>{
 			}
 		})
 		.catch(err =>{
+			console.log("error",err);
 			res.status(500).json({
 				error: err
 			});
 		});
+	}
 };
+
 exports.fetch_users_status = (req,res,next)=>{
-	
-	User.find({"profile.status":req.params.status})
-		.select("profile.firstname profile.lastname profile.status profile.fullName roles profile.email profile.mobile")
+	// User.find({"profile.status":req.params.status})
+	var companyID= req.body.companyID;
+	var status   = req.params.status;
+	console.log("req.body==>",req.body);
+	if(req.body.companyID){
+		if(companyID === 1){
+			var selector = {roles:{$ne:["admin"]}};
+		}else{
+			var selector = {"profile.companyID":companyID,roles:{$ne:["admin"]}};
+		}
+		console.log("selector==>",selector);
+		console.log("req.params.status==>",status);
+		// User.find({"profile.status":status})
+		User.aggregate([
+			{$match:selector},
+			{$match:{"profile.status": {$nin:["deleted-active","deleted-blocked" ]}}},
+			{$match:{"profile.status":status}},
+		])
+		// .select("profile.firstname profile.lastname profile.status profile.companyID profile.fullName roles profile.email profile.mobile profile.clientId createdAt services.resume.loginTokens")
 		.sort({createdAt : -1})
         .skip(req.body.startRange)
         .limit(req.body.limitRange)
 		.exec()
 		.then(data=>{
+			console.log('data',data);
 			if(data){
 				var i = 0;
 				var returnData = [];
 				for(i = 0 ; i < data.length ; i++){
+					var loginTokenscount = data[i].services.resume.loginTokens.length 
 					returnData.push({
 										"_id"		: data[i]._id,
 										"firstname" : data[i].profile.firstname,
 										"lastname"	: data[i].profile.lastname,
+										"companyID"	: data[i].profile.companyID,
+										"companyName" : data[i].profile.companyName,
+										"workLocation" : data[i].profile.workLocation,
 										"email"		: data[i].profile.email, //Mandatory 
 										"mobNumber" : data[i].profile.mobile,
 										"role"      : data[i].roles, //Mandatory
+										// "status"	: ((data[i].profile.status ==="active") && (data[i].profile.status !=="deleted"))  ? '<span class="label label-success statusLabel">'+data[i].profile.status+"</span>" : '<span class="label label-default statusLabel">'+data[i].profile.status+"</span>" , //Either "Active" or "Inactive"
 										"status"	: data[i].profile.status, //Either "Active" or "Inactive"
 										"fullName"	: data[i].profile.fullName,
+										"lastLogin"       : loginTokenscount > 0 ? data[i].services.resume.loginTokens[loginTokenscount-1].loginTimeStamp : null ,
 									});
 				}
 				if( i >= data.length){
@@ -759,7 +1422,256 @@ exports.fetch_users_status = (req,res,next)=>{
 				error: err
 			});
 		});
+	}
 };
+
+exports.fetch_users_company_status_role = (req,res,next)=>{
+	var companyID= req.body.companyID;
+	var company   = req.params.company;
+	var status   = req.params.status;
+	var role   = req.params.role;
+	console.log("req.body==>",req.body);
+	console.log("req.params==>",req.params);
+	if(req.body.companyID){
+		if(companyID === 1){
+			var selector = {roles:{$ne:["admin"]}};
+		}else{
+			var selector = {"profile.companyID":companyID,roles:{$ne:["admin"]}};
+		}
+		console.log("selector==>",selector);
+		User.aggregate([
+			{$match:selector},
+			{$match:{"profile.status": {$nin:["deleted-active","deleted-blocked" ]}}},
+			{$match:{"profile.companyName":company,"profile.status":status,"roles":role}},
+		])
+		.sort({createdAt : -1})
+        .skip(req.body.startRange)
+        .limit(req.body.limitRange)
+		.exec()
+		.then(data=>{
+			console.log('data in Status company==>>',data);
+			if(data){
+				var i = 0;
+				var returnData = [];
+				for(i = 0 ; i < data.length ; i++){
+					var loginTokenscount = data[i].services.resume.loginTokens.length 
+					returnData.push({
+										"_id"		: data[i]._id,
+										"firstname" : data[i].profile.firstname,
+										"lastname"	: data[i].profile.lastname,
+										"companyID"	: data[i].profile.companyID,
+										"companyName" : data[i].profile.companyName,
+										"workLocation" : data[i].profile.workLocation,
+										"email"		: data[i].profile.email, //Mandatory 
+										"mobNumber" : data[i].profile.mobile,
+										"role"      : data[i].roles, //Mandatory
+										// "status"	: ((data[i].profile.status ==="active") && (data[i].profile.status !=="deleted"))  ? '<span class="label label-success statusLabel">'+data[i].profile.status+"</span>" : '<span class="label label-default statusLabel">'+data[i].profile.status+"</span>" , //Either "Active" or "Inactive"
+										"status"	: data[i].profile.status, //Either "Active" or "Inactive"
+										"fullName"	: data[i].profile.fullName,
+										"lastLogin"       : loginTokenscount > 0 ? data[i].services.resume.loginTokens[loginTokenscount-1].loginTimeStamp : null ,
+									});
+				}
+				if( i >= data.length){
+					res.status(200).json(returnData);
+					// console.log('returnData================	',returnData);
+				}
+			}else{
+				res.status(200).json({message:"USER_NOT_FOUND"});
+			}
+		})
+		.catch(err =>{
+			res.status(500).json({
+				error: err
+			});
+		});
+	}
+};
+exports.fetch_users_company_status = (req,res,next)=>{
+	var companyID= req.body.companyID;
+	var company   = req.params.company;
+	var status   = req.params.status;
+	console.log("req.body==>",req.body);
+	console.log("req.params==>",req.params);
+	if(req.body.companyID){
+		if(companyID === 1){
+			var companynames= {"profile.companyName" :company };
+			var selector = {roles:{$ne:["admin"]}};
+		}else{
+			var selector = {"profile.companyID":companyID,roles:{$ne:["admin"]}};
+		}
+		console.log("selector==>",selector);
+		console.log("profile.companyName==>",companynames);
+		User.aggregate([
+			{$match:selector},
+			{$match:{"profile.status": {$nin:["deleted-active","deleted-blocked" ]}}},
+			{$match:{"profile.companyName":company,"profile.status":status}},
+		])
+		.sort({createdAt : -1})
+        .skip(req.body.startRange)
+        .limit(req.body.limitRange)
+		.exec()
+		.then(data=>{
+			console.log('data in Status company==>>',data);
+			if(data){
+				var i = 0;
+				var returnData = [];
+				for(i = 0 ; i < data.length ; i++){
+					var loginTokenscount = data[i].services.resume.loginTokens.length 
+					returnData.push({
+										"_id"		: data[i]._id,
+										"firstname" : data[i].profile.firstname,
+										"lastname"	: data[i].profile.lastname,
+										"companyID"	: data[i].profile.companyID,
+										"companyName" : data[i].profile.companyName,
+										"workLocation" : data[i].profile.workLocation,
+										"email"		: data[i].profile.email, //Mandatory 
+										"mobNumber" : data[i].profile.mobile,
+										"role"      : data[i].roles, //Mandatory
+										// "status"	: ((data[i].profile.status ==="active") && (data[i].profile.status !=="deleted"))  ? '<span class="label label-success statusLabel">'+data[i].profile.status+"</span>" : '<span class="label label-default statusLabel">'+data[i].profile.status+"</span>" , //Either "Active" or "Inactive"
+										"status"	: data[i].profile.status, //Either "Active" or "Inactive"
+										"fullName"	: data[i].profile.fullName,
+										"lastLogin"       : loginTokenscount > 0 ? data[i].services.resume.loginTokens[loginTokenscount-1].loginTimeStamp : null ,
+									});
+				}
+				if( i >= data.length){
+					res.status(200).json(returnData);
+					// console.log('returnData================	',returnData);
+				}
+			}else{
+				res.status(200).json({message:"USER_NOT_FOUND"});
+			}
+		})
+		.catch(err =>{
+			res.status(500).json({
+				error: err
+			});
+		});
+	}
+};
+exports.fetch_users_company_roles = (req,res,next)=>{
+	var companyID= req.body.companyID;
+	var company   = req.params.company;
+	var role   = req.params.role;
+	console.log("status => role=>companyID=>",req.body);
+	
+	console.log("req.params==>",req.params);
+	if(req.body.companyID){
+		if(companyID === 1){
+			var companynames= {"profile.companyName" :company };
+			var selector = {roles:{$ne:["admin"]}};
+		}else{
+			var selector = {"profile.companyID":companyID,roles:{$ne:["admin"]}};
+		}
+		console.log("selector==>",selector);
+		console.log("profile.companyName==>",companynames);
+		User.aggregate([
+			{$match:selector},
+			{$match:{"profile.status": {$nin:["deleted-active","deleted-blocked" ]}}},
+			{$match:{"profile.companyName":company,"roles":role}},
+		])
+		.sort({createdAt : -1})
+        .skip(req.body.startRange)
+        .limit(req.body.limitRange)
+		.exec()
+		.then(data=>{
+			console.log('data in role company==>>',data);
+			if(data){
+				var i = 0;
+				var returnData = [];
+				for(i = 0 ; i < data.length ; i++){
+					var loginTokenscount = data[i].services.resume.loginTokens.length 
+					returnData.push({
+										"_id"		: data[i]._id,
+										"firstname" : data[i].profile.firstname,
+										"lastname"	: data[i].profile.lastname,
+										"companyID"	: data[i].profile.companyID,
+										"companyName" : data[i].profile.companyName,
+										"workLocation" : data[i].profile.workLocation,
+										"email"		: data[i].profile.email, //Mandatory 
+										"mobNumber" : data[i].profile.mobile,
+										"role"      : data[i].roles, //Mandatory
+										// "status"	: ((data[i].profile.status ==="active") && (data[i].profile.status !=="deleted"))  ? '<span class="label label-success statusLabel">'+data[i].profile.status+"</span>" : '<span class="label label-default statusLabel">'+data[i].profile.status+"</span>" , //Either "Active" or "Inactive"
+										"status"	: data[i].profile.status, //Either "Active" or "Inactive"
+										"fullName"	: data[i].profile.fullName,
+										"lastLogin"       : loginTokenscount > 0 ? data[i].services.resume.loginTokens[loginTokenscount-1].loginTimeStamp : null ,
+									});
+				}
+				if( i >= data.length){
+					res.status(200).json(returnData);
+					// console.log('returnData================	',returnData);
+				}
+			}else{
+				res.status(200).json({message:"USER_NOT_FOUND"});
+			}
+		})
+		.catch(err =>{
+			res.status(500).json({
+				error: err
+			});
+		});
+	}
+};
+
+exports.fetch_users_status_roles = (req,res,next)=>{
+	var companyID= req.body.companyID;
+	var status   = req.params.status;
+	var role   = req.params.role;
+	console.log("status => role=>companyID=>",req.body,status,role);
+	if(req.body.companyID){
+		if(companyID === 1){
+			var selector = {roles:{$ne:["admin"]}};
+		}else{
+			var selector = {"profile.companyID":companyID,roles:{$ne:["admin"]}};
+		}
+		console.log("selector==>",selector);
+		User.aggregate([
+			{$match:selector},
+			{$match:{"profile.status": {$nin:["deleted-active","deleted-blocked" ]}}},
+			{$match:{"profile.status":status,"roles":role}},
+		])
+		.sort({createdAt : -1})
+        .skip(req.body.startRange)
+        .limit(req.body.limitRange)
+		.exec()
+		.then(data=>{
+			console.log('data in role status==>>',data);
+			if(data){
+				var i = 0;
+				var returnData = [];
+				for(i = 0 ; i < data.length ; i++){
+					var loginTokenscount = data[i].services.resume.loginTokens.length 
+					returnData.push({
+										"_id"		: data[i]._id,
+										"firstname" : data[i].profile.firstname,
+										"lastname"	: data[i].profile.lastname,
+										"companyID"	: data[i].profile.companyID,
+										"companyName" : data[i].profile.companyName,
+										"workLocation" : data[i].profile.workLocation,
+										"email"		: data[i].profile.email, //Mandatory 
+										"mobNumber" : data[i].profile.mobile,
+										"role"      : data[i].roles, //Mandatory
+										// "status"	: ((data[i].profile.status ==="active") && (data[i].profile.status !=="deleted"))  ? '<span class="label label-success statusLabel">'+data[i].profile.status+"</span>" : '<span class="label label-default statusLabel">'+data[i].profile.status+"</span>" , //Either "Active" or "Inactive"
+										"status"	: data[i].profile.status, //Either "Active" or "Inactive"
+										"fullName"	: data[i].profile.fullName,
+										"lastLogin"       : loginTokenscount > 0 ? data[i].services.resume.loginTokens[loginTokenscount-1].loginTimeStamp : null ,
+									});
+				}
+				if( i >= data.length){
+					res.status(200).json(returnData);
+					console.log('returnData================	',returnData);
+				}
+			}else{
+				res.status(200).json({message:"USER_NOT_FOUND"});
+			}
+		})
+		.catch(err =>{
+			res.status(500).json({
+				error: err
+			});
+		});
+	}
+};
+
 exports.delete_user_ID = (req,res,next)=>{
 	User.deleteOne({_id:req.params.ID})
 		.exec()
@@ -777,6 +1689,7 @@ exports.delete_user_ID = (req,res,next)=>{
 			});
 		});
 };
+
 exports.check_EmailOTP = (req,res,next)=>{
 	User.find({_id : req.params.ID, "profile.optEmail" : req.params.emailotp})
 		.exec()
@@ -813,6 +1726,7 @@ exports.check_EmailOTP = (req,res,next)=>{
 			});
 		});		
 };
+
 exports.update_email_otp = (req,res,next) =>{
 	var optEmail = getRandomInt(1000,9999);
 	User.updateOne(
@@ -831,8 +1745,8 @@ exports.update_email_otp = (req,res,next) =>{
 					                "url"       : "http://localhost:"+globalVariable.port+"/send-email",
 					                "body"      : {
 					                					email 	: req.body.email, 
-					                					subject : "Wealthyvia OTP",
-					                					text    : "Wealthyvia updated OTP is "+ optEmail, 
+					                					subject : "Pipito OTP",
+					                					text    : "Pipito updated OTP is "+ optEmail, 
 					                			   },
 					                "json"      : true,
 					                "headers"   : {
@@ -857,6 +1771,7 @@ exports.update_email_otp = (req,res,next) =>{
 					});
 				});
 };
+
 exports.update_email_otp_email = (req,res,next) =>{
 	var optEmail = getRandomInt(1000,9999);
 	User.updateOne(
@@ -875,8 +1790,8 @@ exports.update_email_otp_email = (req,res,next) =>{
 					                "url"       : "http://localhost:"+globalVariable.port+"/send-email",
 					                "body"      : {
 					                					email 	: req.body.emailId, 
-					                					subject : "Wealthyvia OTP",
-					                					text    : "Wealthyvia updated OTP is "+ optEmail, 
+					                					subject : "Pipito OTP",
+					                					text    : "Pipito updated OTP is "+ optEmail, 
 					                			   },
 					                "json"      : true,
 					                "headers"   : {
@@ -901,6 +1816,7 @@ exports.update_email_otp_email = (req,res,next) =>{
 					});
 				});
 };
+
 exports.change_password_email_verify = (req,res,next)=>{
 	User.findOne({username : req.body.emailId})
 		.exec()
@@ -937,35 +1853,287 @@ exports.change_password_email_verify = (req,res,next)=>{
 				});
 			})
 };
+
 exports.search_text = (req, res, next)=>{
-	User.find({ $or: [
-		{ "profile.firstname": { "$regex": req.body.searchText, $options: "i" } },
-		{ "profile.lastname": { "$regex": req.body.searchText, $options: "i" } },
-		{ "profile.email": { "$regex": req.body.searchText, $options: "i" } },
-		{ "profile.mobile": { "$regex": req.body.searchText, $options: "i" } },
-		{ "role": { "$regex": req.body.searchText, $options: "i" } },
-		{ "profile.status": { "$regex": req.body.searchText, $options: "i" } },
-		{ "profile.fullName": { "$regex": req.body.searchText, $options: "i" } },
-		] 
-	})
-	.select("profile.firstname username profile.lastname profile.status profile.fullName roles profile.email profile.mobile")
+	var companyID= req.body.companyID;
+	console.log("req.body in search==>",req.body);
+	if(req.body.companyID){
+		var selector = {};
+		if(companyID === 1){
+			console.log("req.body in search companyID==>",companyID);
+			selector = {roles:{$ne:["admin"]}};
+		}else{
+			console.log("req.body in search ekse companyID==>",companyID);
+			selector = {"profile.companyID":companyID,roles:{$ne:["admin"]}};
+		}
+		console.log("selector==>",selector);
+	User.aggregate([
+		{$match:selector},
+		{$match:{"profile.status": {$nin:["deleted-active","deleted-blocked" ]}}},
+		{$match:
+			{$or:
+			  [
+						{ "profile.firstname"	: { "$regex": req.body.searchText, $options: "i" } },
+						{ "profile.lastname"	: { "$regex": req.body.searchText, $options: "i" } },
+						{ "profile.email"		: { "$regex": req.body.searchText, $options: "i" } },
+						{ "profile.mobile"		: { "$regex": req.body.searchText, $options: "i" } },
+						{ "role"				: { "$regex": req.body.searchText, $options: "i" } },
+						{ "profile.status"		: { "$regex": req.body.searchText, $options: "i" } },
+						{ "profile.companyName"	: { "$regex": req.body.searchText, $options: "i" } },
+						{ "profile.fullName"	: { "$regex": req.body.searchText, $options: "i" } },
+			  ]
+			}
+		 },
+		])
+	// .select("profile.firstname profile.lastname profile.companyName profile.companyID profile.status profile.fullName roles profile.email profile.mobile services.resume.loginTokens")
 	.skip(req.body.startRange)
 	.limit(req.body.limitRange)
 	.exec()
 	.then(data=>{
+		console.log("Data in search==>",data)
 		if(data){
 			var i = 0;
 			var returnData = [];
 			for(i = 0 ; i < data.length ; i++){
+				var loginTokenscount = data[i].services.resume.loginTokens.length 
 				returnData.push({
-									"_id"		: data[i]._id,
-									"email"		: data[i].profile.email, //Mandatory 
-									"mobNumber" : data[i].profile.mobile,
-									"role"      : data[i].roles, //Mandatory
-									"status"	: data[i].profile.status, //Either "Active" or "Inactive"
-									"fullName"	: data[i].profile.fullName,
+									"_id"			: data[i]._id,
+									"email"			: data[i].profile.email, //Mandatory 
+									"firstname" 	: data[i].profile.firstname,
+									"lastname"  	: data[i].profile.lastname,
+									"companyID" 	: data[i].profile.companyID,
+									"companyName"  	: data[i].profile.companyName,
+									"workLocation"  	: data[i].profile.workLocation,
+									"mobNumber" 	: data[i].profile.mobile,
+									"role"      	: data[i].roles, //Mandatory
+									"status"		: data[i].profile.status, //Either "Active" or "Inactive"
+									"fullName"		: data[i].profile.fullName,
+									"lastLogin"     : loginTokenscount > 0 ? data[i].services.resume.loginTokens[loginTokenscount-1].loginTimeStamp : null ,
 								});
 			}
+			if( i >= data.length){
+				res.status(200).json(returnData);
+			}
+		}else{
+			res.status(200).json({message:"USER_NOT_FOUND"});
+		}
+	})
+	.catch(err=>{
+		res.status(500).json({
+			error : err
+		})
+	})
+}
+}
+
+exports.search_textCompRoleStatus = (req, res, next)=>{
+	// console.log("req=======>>",req.body);
+	if(req.body.companyID){
+		var selector = {};
+		// console.log("selector",selector);
+	       /* if(req.body.companyID) {
+	            selector.companyID = req.body.companyID 
+	        }
+	        if(req.body.searchText) {
+	            selector.searchText =  req.body.searchText 
+	        }
+	        if(req.body.role) {
+	            selector.role =  req.body.role 
+	        }
+	        if(req.body.status) {
+	            selector.status =   req.body.status 
+	        }
+	        if(req.body.company) {
+	            selector.company =  req.body.company } 
+	        }*/
+	 
+	    selector['$and']=[];
+	    var companyID = req.body.companyID
+	    if(companyID === 1){
+			console.log("req.body in search companyID==>",companyID);
+			selector["$and"].push({roles:{$ne:["admin"]}})
+		}else{
+			console.log("req.body in search ekse companyID==>",companyID);
+			selector["$and"].push({"profile.companyID":companyID,roles:{$ne:["admin"]}})
+		}
+		// console.log("selector",selector);
+
+	    if(req.body.role){
+	        selector["$and"].push({"roles": req.body.role })
+			// console.log("selector in search ekse selector==>",selector);
+
+	    }else{
+	        selector["$and"].push({"roles": {$ne: ""} })
+	    }
+		// console.log("selector",selector);
+
+	    if(req.body.status){
+			// console.log("req.body in search ekse companyID==>",companyID);
+	        selector["$and"].push({"profile.status": req.body.status })
+			// console.log("selector in search ekse selector==>",selector);
+
+	    }else{
+	        selector["$and"].push({"profile.status": {$ne: ""} })
+	    }
+		// console.log("selector",selector);
+
+	    if(req.body.company){
+			// console.log("req.body in search ekse companyID==>",req.body.company);
+	        selector["$and"].push({"profile.companyName": req.body.company })
+			// console.log("selector in search ekse selector==>",selector);
+
+
+	    }else{
+	        selector["$and"].push({"profile.companyName": {$ne: ""} })
+	    }
+		// console.log("selector",selector);
+		// console.log(" search above selector==>",req.body.search);
+	    
+	  /*  if(req.body.search){
+			console.log(" search in if selector==>",req.body.search);
+
+	    	selector["$or"].push({ "profile.firstname"	: { "$regex": req.body.search, $options: "i" } })
+			selector["$or"].push({ "profile.lastname"	: { "$regex": req.body.search, $options: "i" } })
+			selector["$or"].push({ "profile.email"		: { "$regex": req.body.search, $options: "i" } })
+			selector["$or"].push({ "profile.mobile"		: { "$regex": req.body.search, $options: "i" } })
+			selector["$or"].push({ "role"				: { "$regex": req.body.search, $options: "i" } })
+			selector["$or"].push({ "profile.status"		: { "$regex": req.body.search, $options: "i" } })
+			selector["$or"].push({ "profile.companyName"	: { "$regex": req.body.search, $options: "i" } })
+			selector["$or"].push({ "profile.fullName"	: { "$regex": req.body.search, $options: "i" } })
+	    }*/
+			console.log("selector in search ekse selector==>",selector);
+
+		User.aggregate([
+			{$match:selector},
+			{$match:{"profile.status": {$nin:["deleted-active","deleted-blocked" ]}}},
+			{$match:
+				{$or:
+				  [
+							{ "profile.firstname"	: { "$regex": req.body.search, $options: "i" } },
+							{ "profile.lastname"	: { "$regex": req.body.search, $options: "i" } },
+							{ "profile.email"		: { "$regex": req.body.search, $options: "i" } },
+							{ "profile.mobile"		: { "$regex": req.body.search, $options: "i" } },
+							{ "role"				: { "$regex": req.body.search, $options: "i" } },
+							{ "profile.status"		: { "$regex": req.body.search, $options: "i" } },
+							{ "profile.companyName"	: { "$regex": req.body.search, $options: "i" } },
+							{ "profile.fullName"	: { "$regex": req.body.search, $options: "i" } },
+				  ]
+				}
+			 },
+			
+			])
+		// .select("profile.firstname profile.lastname profile.companyName profile.companyID profile.status profile.fullName roles profile.email profile.mobile services.resume.loginTokens")
+		.skip(req.body.startRange)
+		.limit(req.body.limitRange)
+		.exec()
+		.then(data=>{
+			console.log("Data in search==>",data)
+			if(data){
+				var i = 0;
+				var returnData = [];
+				for(i = 0 ; i < data.length ; i++){
+					var loginTokenscount = data[i].services.resume.loginTokens.length 
+					returnData.push({
+										"_id"			: data[i]._id,
+										"email"			: data[i].profile.email, //Mandatory 
+										"firstname" 	: data[i].profile.firstname,
+										"lastname"  	: data[i].profile.lastname,
+										"companyID" 	: data[i].profile.companyID,
+										"companyName"  	: data[i].profile.companyName,
+										"workLocation"  	: data[i].profile.workLocation,
+										"mobNumber" 	: data[i].profile.mobile,
+										"role"      	: data[i].roles, //Mandatory
+										"status"		: data[i].profile.status, //Either "Active" or "Inactive"
+										"fullName"		: data[i].profile.fullName,
+										"lastLogin"     : loginTokenscount > 0 ? data[i].services.resume.loginTokens[loginTokenscount-1].loginTimeStamp : null ,
+									});
+				}
+				if( i >= data.length){
+					res.status(200).json(returnData);
+				}
+			}else{
+				res.status(200).json({message:"USER_NOT_FOUND"});
+			}
+		})
+		.catch(err=>{
+			res.status(500).json({
+				error : err
+			})
+		})
+	}
+}
+
+exports.search_text_delete = (req, res, next)=>{
+	User.find({
+		$and:[
+				{$or:[
+					{ "profile.firstname"	: { "$regex": req.body.searchText, $options: "i" } },
+					{ "profile.lastname"	: { "$regex": req.body.searchText, $options: "i" } },
+					{ "profile.email"		: { "$regex": req.body.searchText, $options: "i" } },
+					{ "profile.fullName"	: { "$regex": req.body.searchText, $options: "i" } },
+				]},
+
+				{$or:[
+					{"profile.status": "deleted-active"},
+					{"profile.status": "deleted-blocked"}
+				]},
+		]
+	})
+	.select("profile.firstname profile.lastname profile.status profile.companyID profile.companyName profile.fullName roles profile.email profile.mobile profile.clientId createdAt services.resume.loginTokens statusLog")
+	.skip(req.body.startRange)
+	.limit(req.body.limitRange)
+	.exec()
+	.then(data=>{
+		console.log("Data in delete list==>",data)
+		if(data){
+			var i = 0;
+					var returnData = [];
+					for(i = 0 ; i < data.length ; i++){
+						var loginTokenscount = data[i].services.resume.loginTokens.length;
+						var statuslogLength = data[i].statusLog.length
+						returnData.push({
+							"_id"		      : data[i]._id,
+							"firstname"       : data[i].profile.firstname,
+							"lastname"	      : data[i].profile.lastname,
+							"companyID"	      : data[i].profile.companyID,
+							"companyName"	  : data[i].profile.companyName,
+							"workLocation"	  : data[i].profile.workLocation,
+							"email"		      : data[i].profile.email, //Mandatory 
+							"mobNumber"       : data[i].profile.mobile,
+							"role"            : data[i].roles, //Mandatory
+							"status"		  : data[i].profile.status, //Either "Active" or "Inactive"
+							"fullName"	      : data[i].profile.fullName,
+							"createdAt"       : data[i].createdAt,
+							"clientId"	      : data[i].clientId,
+							"lastLogin"       : loginTokenscount > 0 ? data[i].services.resume.loginTokens[loginTokenscount-1].loginTimeStamp : null ,
+							"statusupdatedAt" : statuslogLength > 0 ? data[i].statusLog[statuslogLength-1].updatedAt : "-",
+							"statusupdatedBy" : statuslogLength > 0 ? data[i].statusLog[statuslogLength-1].updatedBy : "-"
+
+						});
+					}
+			// var i = 0;
+			// var returnData = [];
+			// for(i = 0 ; i < data.length ; i++){
+			// 	var statuslogLength = data[i].statusLog.length
+			// 	var loginTokenscount = data[i].services.resume.loginTokens.length 
+			// 	returnData.push({
+			// 						"_id"			: data[i]._id,
+			// 						"email"			: data[i].profile.email,
+			// 						"firstname" 	: data[i].profile.firstname,
+			// 						"lastname"  	: data[i].profile.lastname,
+			// 						"companyID"  	: data[i].profile.companyID,
+			// 						"companyName"  	: data[i].profile.companyName,
+			// 						"mobNumber" 	: data[i].profile.mobile,
+			// 						"role"      	: data[i].roles,
+			// 						"status"		: data[i].profile.status,
+			// 						"fullName"		: data[i].profile.fullName,
+			// 						"lastLogin" 	: loginTokenscount > 0 ? data[i].services.resume.loginTokens[loginTokenscount-1].loginTimeStamp : "-",
+
+			// 						"statusupdatedAt" : statuslogLength > 0 ? data[i].statusLog[statuslogLength-1].updatedAt : "-",
+			// 						"statusupdatedBy" : statuslogLength > 0 ? data[i].statusLog[statuslogLength-1].updatedBy : "-"
+			// 					});
+			// }
+			console.log("returnData in delete list==>",returnData)
 			if( i >= data.length){
 				res.status(200).json(returnData);
 			}
@@ -1018,3 +2186,56 @@ exports.user_update_img = (req,res,next)=>{
 			});
 		});
 };
+
+exports.fetch_email = (req,res,next)=>{
+	User.findOne({_id:req.params.userID})
+		.exec()
+		.then(data=>{
+			res.status(200).json(data.username);
+		})
+		.catch(err =>{
+			res.status(500).json({
+				error: err
+			});
+		});
+};
+
+exports.getID = (req,res,next)=>{
+	User.findOne({_id:req.params.id})
+		.exec()
+		.then(data=>{
+			res.status(200).json(data);
+		})
+		.catch(err =>{
+			res.status(500).json({
+				error: err
+			});
+		});
+};
+
+exports.getUserList = (req,res,next)=>{
+	console.log("getUserList = ", req.body);
+	User.findOne(
+				{
+					"profile.companyID" 	: req.body.companyID,
+					"roles" 				: req.body.role,
+				}
+			)
+		.exec()
+		.then(data=>{
+			console.log("data = ",data);
+			res.status(200).json(data);
+		})
+		.catch(err =>{
+			res.status(500).json({
+				error: err
+			});
+		});
+};
+
+
+
+
+
+
+

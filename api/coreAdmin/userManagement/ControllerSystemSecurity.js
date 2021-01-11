@@ -418,6 +418,7 @@ exports.admin_login = (req,res,next) =>{
 		});
 };
 exports.user_update_name_mobile = (req,res,next)=>{
+	console.log("req=>",req.body,req.params)
 	User.findOne({_id:req.params.ID})
 		.exec()
 		.then(user=>{
@@ -429,7 +430,12 @@ exports.user_update_name_mobile = (req,res,next)=>{
 							"profile.firstname"     : req.body.firstname,
 							"profile.lastname"      : req.body.lastname,
 							"profile.fullName"      : req.body.firstname+' '+req.body.lastname,
-							"profile.mobNumber"     : req.body.mobNumber,
+							"profile.mobile"     	: req.body.mobile,
+							"profile.email"     	: req.body.email,
+							// "profile.companyID"   	: req.body.companyID,
+							// "profile.companyName"   : req.body.companyName,
+							// "profile.status"   		: req.body.status,
+							// "profile.role"   		: req.body.role,
 						},
 					}
 				)
@@ -458,6 +464,52 @@ exports.user_update_name_mobile = (req,res,next)=>{
 			});
 		});
 };
+// exports.user_update_details = (req,res,next)=>{
+// 	User.findOne({_id:req.params.ID})
+// 		.exec()
+// 		.then(user=>{
+// 			if(user){
+// 				User.updateOne(
+// 					{_id:req.params.ID},
+// 					{
+// 						$set:{
+// 							"profile.firstname"     : req.body.firstname,
+// 							"profile.lastname"      : req.body.lastname,
+// 							"profile.fullName"      : req.body.firstname+' '+req.body.lastname,
+// 							"profile.mobNumber"     : req.body.mobNumber,
+// 							"profile.email"     	: req.body.email,
+// 							"profile.companyID"   	: req.body.companyID,
+// 							"profile.companyName"   : req.body.companyName,
+// 							"profile.status"   		: req.body.status,
+// 							"profile.role"   		: req.body.role,
+// 						},
+// 					}
+// 				)
+// 				.exec()
+// 				.then(data=>{
+// 					if(data.nModified == 1){
+// 						res.status(200).json("USER_UPDATED");
+// 					}else{
+// 						res.status(401).status("USER_NOT_UPDATED")
+// 					}
+// 				})
+// 				.catch(err =>{
+// 					console.log('user error ',err);
+// 					res.status(500).json({
+// 						error: err
+// 					});
+// 				});
+// 			}else{
+// 				res.status(404).json("User Not Found");
+// 			}
+// 		})
+// 		.catch(err=>{
+// 			console.log('update user error ',err);
+// 			res.status(500).json({
+// 				error:err
+// 			});
+// 		});
+// };
 exports.user_update_status = (req,res,next)=>{
 	User.findOne({_id:req.params.ID})
 		.exec()
@@ -637,7 +689,7 @@ exports.fetch_users = (req,res,next)=>{
 			if(data){
 				var i = 0;
 				var returnData = [];
-				for(i = 0 ; i < data.length ; i++){
+				for(i = 0 ; i < data.length ; i++){ 
 					returnData.push({
 										"_id"		: data[i]._id,
 										"firstname" : data[i].profile.firstname,

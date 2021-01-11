@@ -11,9 +11,9 @@ const userSchema = mongoose.Schema({
 		resume: {
 			loginTokens:[
 				{
-					whenLogin: Date,
-					whenLogout: Date,
-					ValidateTill: Date,
+					loginTimeStamp: {type:Date},
+					logoutTimeStamp: {type:Date},
+					ValidateTill: {type:Date},
 					hashedToken : String
 				}
 			]
@@ -22,8 +22,10 @@ const userSchema = mongoose.Schema({
 	username	: {type:String},
 	profile 	:
 					{
-						company_id 				: { type: mongoose.Schema.Types.ObjectId, ref: 'companysettings' },
-						companyID 				: Number,
+						company_id 				: { type: mongoose.Schema.Types.ObjectId, ref: 'entitymasters' },
+						companyID 				: String,
+						companyName  			: String,
+						workLocation	  		: String,
 						firstname 				: String,
 						lastname  				: String,
 						fullName  				: String,
@@ -33,11 +35,24 @@ const userSchema = mongoose.Schema({
 						mobileVerified			: Boolean,
 						email 					: String,
 						otpEmail	  			: String,
+						passwordreset	  		: Boolean,
+						otpMobile	  			: String,
 						emailVerified			: Boolean,
 						status					: String,
+						department				: String,
+						designation				: String,
+						city					: String,
+						states					: String,
 						createdOn 				: String,
 					},
-	roles : [String],
+	roles       : [String],
+	statusLog   : [
+	                {
+	                	status 				: String,
+	                    updatedAt           : Date,
+	                    updatedBy           : String,
+	                }
+	            ],
 });
 
 module.exports = mongoose.model('users',userSchema);

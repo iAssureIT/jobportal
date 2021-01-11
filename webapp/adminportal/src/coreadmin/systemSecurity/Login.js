@@ -95,7 +95,7 @@ class Login extends Component {
                 lastName: response.data.userDetails.lastName,
                 email: response.data.userDetails.email,
                 phone: response.data.userDetails.phone,
-                //companyID : parseInt(response.data.userDetails.companyID),
+                companyID : parseInt(response.data.userDetails.companyID),
                 pincode: response.data.userDetails.pincode,
                 user_id: response.data.userDetails.user_id,
                 roles: response.data.userDetails.roles,
