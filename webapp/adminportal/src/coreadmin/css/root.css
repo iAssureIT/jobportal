@@ -16,5 +16,24 @@
   --waikawagrey-background : #5e728e;
   --whitesmoke-background : #f1f1f1; 
   --white-background : #ffffff;
+
+
+  --admin-main-bg-color                   : #fff;
+  --admin-input-bg-color                  : #3c8dbc;
+
+  --admin-main-txt-color                  : #555;
+  --admin-active-txt-color                : #fff;
+
+  --admin-main-heading-font-color         : #444;
+  --admin-diamond-color                   : #999;
+  --admin-sub-heading-font-color          : #333;
+
+  --admin-form-field-background-color     : #fff;
+
+  --admin-main-border-color               : #ccc;
+  --admin-icon-border-color               : #444;
+  --admin-icon-color                      : #666;
+
+  --admin-button-color                    : #fff;
 }
 

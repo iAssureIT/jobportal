@@ -286,7 +286,7 @@
 
 .addJobSubmitBtn:hover{
 	background-color: var(--admin-button-color);
-	border: 1px solid var(--admin-icon-border-color);
+	border: 1px solid var(--admin-main-border-color);
 	color: var(--admin-main-txt-color);	 
 	transition: all 500ms ease; 
 }
@@ -371,18 +371,6 @@
 	width: 100%;
 }
 /**********************************************End Of React Phone Input Properties*********************************************/
-
-/***************************************************HTML Date Input Properties*************************************************/
- 
-::-webkit-calendar-picker-indicator {
-    filter: invert(1);
-}
-
-/*.picker__box .picker__header .picker__date-display .picker__weekday-display {
-	background-color: red !important;
-}*/
-
-/************************************************End of HTML Date Input Properties*********************************************/
 
 /********************************************************Custom Checkbox*******************************************************/
 
@@ -655,6 +643,7 @@ div.ReactTags__tags {
 div.ReactTags__tagInput {
     border-radius: 2px;
     display: inline-block;
+    padding-bottom: 2px;
 }
 
 .ReactTags__tagInputField{
@@ -664,7 +653,7 @@ div.ReactTags__tagInput {
 
 div.ReactTags__tagInput input.ReactTags__tagInputField,
 div.ReactTags__tagInput input.ReactTags__tagInputField:focus {
-    height: 34px;
+    height: 30px;
     margin-left: 5px;
     color: #fff;
     font-size: 12px;
@@ -677,7 +666,8 @@ div.ReactTags__tagInput input.ReactTags__tagInputField:focus {
 
 /* Styles for selected tags */
 div.ReactTags__selected span.ReactTags__tag {
-    background: #888;
+    /*background: #888;*/
+    border: 1px solid var(--admin-main-border-color);
     font-size: 12px;
     display: inline-block;
     margin-top: 2px;
@@ -689,7 +679,7 @@ div.ReactTags__selected span.ReactTags__tag {
     cursor: move;
     border-radius: 100px;
     margin-top: 5px;
-    color: var(--admin-main-bg-color);
+    /*color: var(--admin-main-bg-color);*/
 }
 
 div.ReactTags__selected a.ReactTags__remove {
@@ -701,9 +691,11 @@ div.ReactTags__selected a.ReactTags__remove {
 }
 
 .ReactTags__remove{
-	border-radius: 25px;
+	border-radius: 100%;
+	margin-left: 2px;
 	color: var(--admin-main-txt-color);
-	background-color: var(--admin-main-bg-color);
+	border: 1px solid var(--admin-main-border-color);
+	background-color: var(--admin-main-border-color);
 }
 
 /* Styles for suggestions */

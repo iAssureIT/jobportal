@@ -224,6 +224,7 @@ class JobPosting extends Component {
                     console.log("response.data : ", response.data);
                     this.setState({
                         job_id                  :   job_id,
+                        company_id              :   response.data.jobsData[0].jobBasicInfo.company_id,
                         jobTitle                :   response.data.jobsData[0].jobBasicInfo.jobTitle,
                         employerName            :   response.data.jobsData[0].employer[0].companyName,
                         employerLogo            :   response.data.jobsData[0].employer[0].companyLogo[0] ? response.data.jobsData[0].employer[0].companyLogo[0] : null,
@@ -1600,7 +1601,7 @@ render(){
                                         </div>
                                     </div>                                                                                                                      
                                     
-                                    <div className="col-lg-4 col-lg-offset-8 pull-right">
+                                    <div className="col-lg-3 pull-right">
                                         <button className="btn buttonYellow addJobSubmitBtn"  onClick={this.handleSubmit}> {this.state.submitBtnText} </button>
                                     </div>
                                 </form>

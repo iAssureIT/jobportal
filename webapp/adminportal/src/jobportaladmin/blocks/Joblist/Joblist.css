@@ -14,7 +14,7 @@
 	height: 270px;
 	margin-top: 30px;
 	border-radius: 10px;
-	border: 1px solid var(--blue-color);
+	border: 1px solid var(--admin-main-border-color);
 }
 
 .jobListContainer .jobListLeftContent{
@@ -47,22 +47,23 @@
 }
 
 .jobListLeftContent .iconsBar i{
-	color: var(--blue-color);
+	color: var(--admin-icon-color);
 	font-size: 20px;
 	height: 20px;
 }
 
 .jobListLeftContent .infoLog{
-	padding: 6px 11px;
+	padding: 6px 10px;
 	height: 29px;
-	color: var(--blue-color);
 	border-radius: 3px;
-	border: 1px solid var(--blue-color);
-	width: 9%;
 	margin-left: 18px;
 	font-size: 11px;
 	float: left;
 	margin-top: 2px;
+	font-weight: 500;
+	border: 1px solid var(--admin-main-border-color);
+	color: var(--admin-icon-color);
+	background-color: var(--admin-form-field-background-color);
 }
 
 .jobListDesignation{
@@ -83,17 +84,17 @@
 	font-size: 14px !important;
 	margin-left: -5px;
 	margin-top: 13px;
-	color: var(--blue-color);
+	color: var(--admin-icon-color);
 }
 
 .jobListMonSal{
 	font-size: 10px !important; 
-	border: 1px solid var(--blue-color);
+	border: 1px solid var(--admin-icon-color);
 	padding: 3px 5px;
 	border-radius: 50%;
 	margin-top: 13px;
 	margin-left: -8px;
-	color: var(--blue-color);
+	color: var(--admin-icon-color);
 }
 
 .jobListLocation{
@@ -102,14 +103,14 @@
 	border-radius: 50%;
 	margin-top: 9px;
 	margin-left: -9px;
-	color: var(--blue-color);
+	color: var(--admin-icon-color);
 }
 
 .jobListNumPositions{
 	font-size: 13px !important;
 	margin-left: -6px;
 	margin-top: 13px;
-	color: var(--blue-color);
+	color: var(--admin-icon-color);
 }
 
 .jobListRightContent{
@@ -118,21 +119,21 @@
 }
 
 .listEditBtn i{
-	color: var(--blue-color);
+	color: var(--admin-icon-color);
 	font-size: 21px;
 	margin-top: 10px;
 	margin-left: 24px;
 }
 
 .listViewBtn i{
-	color: var(--blue-color);
+	color: var(--admin-icon-color);
 	font-size: 21px;
 	margin-top: 15px;
 	margin-left: 22px;
 }
 
 .listDelBtn i{
-	color: var(--blue-color);
+	color: var(--admin-icon-color);
 	font-size: 21px;
 	margin-top: 15px;
 	margin-left: 24px;
@@ -140,7 +141,7 @@
 }
 
 .listEditBtn i:hover, .listViewBtn i:hover, .listDelBtn i:hover{
-	color: var(--admin-sub-heading-font-color);
+	color: var(--blue-color);
 }
 
 /*******************Search Tab********************/

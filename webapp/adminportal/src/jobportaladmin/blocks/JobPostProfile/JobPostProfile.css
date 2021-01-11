@@ -228,7 +228,7 @@
 .contentWrapper2 .eduSubtitle{
 	/*font-family: 'Montserrat-SemiBold';*/
 	font-weight: 600;
-	color: var(--admin-sub-heading-font-color);
+	color: var(--admin-icon-color);
 }
 
 .contentWrapper2 .eduDuration{
@@ -363,7 +363,7 @@
 .skillsHeadOne .skillSubtitle{
 	/*font-family: 'Montserrat-SemiBold';*/
 	font-weight: 600;
-	color: var(--admin-sub-heading-font-color);
+	color: var(--admin-icon-color);
 }
 
 .skillsHeadOne .skillDuration{
@@ -393,7 +393,7 @@
 .skillsHeadTwo .skillSubtitle{
 	/*font-family: 'Montserrat-SemiBold';*/
 	font-weight: 600;
-	color: var(--admin-sub-heading-font-color);
+	color: var(--admin-icon-color);
 }
 
 .skillsHeadTwo .skillDuration{
@@ -423,7 +423,7 @@
 .skillsHeadThree .skillSubtitle{
 	/*font-family: 'Montserrat-SemiBold';*/
 	font-weight: 600;
-	color: var(--admin-sub-heading-font-color);
+	color: var(--admin-icon-color);
 }
 
 .skillsHeadThree .skillDuration{
