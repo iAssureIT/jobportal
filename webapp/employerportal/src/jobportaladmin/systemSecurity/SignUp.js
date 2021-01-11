@@ -418,19 +418,16 @@ class SignUp extends Component {
                    <span id="emailAddressError" className="errorMsg"></span>
               </div>
 
-              <div className="col-lg-6 form-group" >
-                  <div className="input-group">
-                     <PhoneInput 
+               <div className="col-lg-6 form-group" >
+                        <PhoneInput 
                           country   = {'in'}
                           id        ="mobileNumber" 
                           className ="input-group-addon form-control inputBox" 
                           value     ={this.state.mobileNumber} 
                           onChange  = {mobileNumber => this.setState({ mobileNumber })}
                          />
-                  </div>
-                  
-                   <span id="mobileNumberError" className="errorMsg"></span>
-              </div>
+                         <span id="mobileNumberError" className="errorMsg"></span>
+                    </div>
 
                <div className="col-lg-6 form-group" >
                   <div className="input-group">
