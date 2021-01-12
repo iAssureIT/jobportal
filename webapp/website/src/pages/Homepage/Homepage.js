@@ -10,6 +10,7 @@ import { withRouter }         from 'react-router-dom';
 import { connect }        from 'react-redux';
 import { bindActionCreators } from 'redux';
 import  * as mapActionCreator from '../../common/actions/index';
+import Loader from '../../common/Loader/Loader.js';
 import './Homepage.css';
 
 class HomePage extends Component {
@@ -73,7 +74,8 @@ class HomePage extends Component {
     console.log("history",this.match)
     return (
       <div className="ViewBodyWrapper container-fluid">
-        
+          <Loader type="placeholderloader"  />
+          
           <div className="filterDiv col-lg-12">
 
             <div className="row">

@@ -9,9 +9,16 @@ const MapView = () => {
 
 	      switch(window.location.pathname) {
 	        case "/":   return <India />;
-	        case "/state/MH":   
-	        	const Maharashtra = React.lazy(() => import('../Maharashtra/Maharashtra.js'))
-	        	return <Maharashtra/> ;
+
+	        case "/state/MH":   const Maharashtra = React.lazy(() => import('../Maharashtra/Maharashtra.js'))
+	        	                return <Maharashtra/> ;
+
+	        case "/state/JK":   const JammuKashmir = React.lazy(() => import('../JammuKashmirLadakh/JammuKashmirLadakh.js'))
+	        	                return <JammuKashmir/> ;
+
+	        case "/state/LA":   const Ladakh = React.lazy(() => import('../Ladakh/Ladakh.js'))
+	        	                return <Ladakh/> ;
+
 	        default:      return <h1>No map match</h1>
 	      }
 	    }

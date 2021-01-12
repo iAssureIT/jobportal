@@ -7,12 +7,13 @@ export default class Loader extends Component {
     }
 
     render(){
-      //var tempdata = [1,2,3];
-      var tempdata = [];
+      var tempdata = [4];
+     // var tempdata = [];
       //alert(this.props.percentage );
-      for (var i = 0; i < this.props.productLoaderNo; i++) {
+      /*for (var i = 0; i < this.props.productLoaderNo; i++) {*/
+        /*for (var i = 0; i < this.props.placeholderCount; i++) {
         tempdata.push(i);
-      }
+      }*/
       if (this.props.type === "fullpageloader" ) {
         return(
           <div>
@@ -91,7 +92,79 @@ export default class Loader extends Component {
           }
           </div>
         );
-      } else{
+      }
+
+      else if(this.props.type === "placeholderloader"){
+
+        return (
+          <div className="row">
+            <div  className="placeholderWrapper col-lg-12">
+
+                <div className= "col-lg-3">
+                    <div className= "leftPlaceholder col-lg-12">
+                </div>
+                </div>
+
+                <div className="col-lg-9">
+                  <div className="row row1">
+                    <div className="col-lg-3">
+                       <div className="greyBox col-lg-12"></div>
+                    </div>
+
+                    <div className="col-lg-3">
+                       <div className="greyBox col-lg-12"></div>
+                    </div>
+
+                    <div className="col-lg-3">
+                       <div className="greyBox col-lg-12"></div>
+                    </div>
+
+                    <div className="col-lg-3">
+                       <div className="greyBox col-lg-12"></div>
+                    </div>
+                  </div> 
+
+                  <div className="row row2">
+                    <div className="col-lg-3">
+                       <div className="greyBox col-lg-12"></div>
+                    </div>
+
+                    <div className="col-lg-3">
+                       <div className="greyBox col-lg-12"></div>
+                    </div>
+
+                    <div className="col-lg-3">
+                       <div className="greyBox col-lg-12"></div>
+                    </div>
+
+                    <div className="col-lg-3">
+                       <div className="greyBox col-lg-12"></div>
+                    </div>
+                  </div> 
+
+                  <div className="row row3">
+                    <div className="col-lg-3">
+                       <div className="greyBox col-lg-12"></div>
+                    </div>
+
+                    <div className="col-lg-3">
+                       <div className="greyBox col-lg-12"></div>
+                    </div>
+
+                    <div className="col-lg-3">
+                       <div className="greyBox col-lg-12"></div>
+                    </div>
+
+                    <div className="col-lg-3">
+                       <div className="greyBox col-lg-12"></div>
+                    </div>
+                  </div> 
+                </div>
+            </div>
+          </div>
+        );
+      }
+       else{
         return (null);
       }
       
