@@ -716,7 +716,7 @@ exports.mapwiseJobs = (req, res, next)=>{
     Jobs.aggregate([
     	{ $match 	: selector },
     	{ $sort 	: {createdAt : -1} }, 
-    	{ $group 	: {_id: "$location.state", count: { $sum: 1}} },
+    	{ $group 	: {_id: "$location.stateCode", count: { $sum: 1}} },
     ])
     
     .exec()

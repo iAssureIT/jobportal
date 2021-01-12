@@ -29,6 +29,10 @@ export const setFilterSelector = (selector )=> ({
       type 				: 'SET_FILTER_SELECTOR',
       selector 			: selector
 });
+export const showLoader = (showLoader )=> ({
+      type 				: 'SHOW_LOADER',
+      showLoader 		: showLoader
+});
 export const getMapData = (mapJobs )=> ({
       type 				: 'GET_MAP_DATA',
       mapJobs 			: mapJobs
@@ -90,10 +94,12 @@ export function jobCount(selector) {
 }
 export function filterFunctionalData(selector) {
   	return dispatch =>{
+  		
+  		dispatch(showLoader(true));
   		dispatch(setFilterSelector(selector));
 	  	return axios.post("/api/jobs/functional-jobs",selector)
 	    .then((response)=>{
-	     
+	     	dispatch(showLoader(false));
 	        dispatch(getFunctionalData(response.data));
 	    })
 	    .catch((error)=>{

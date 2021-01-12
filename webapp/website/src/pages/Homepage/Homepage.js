@@ -71,11 +71,10 @@ class HomePage extends Component {
     }
   }
   render() {
-    console.log("history",this.match)
+      
     return (
       <div className="ViewBodyWrapper container-fluid">
-          <Loader type="placeholderloader"  />
-          
+
           <div className="filterDiv col-lg-12">
 
             <div className="row">
@@ -126,11 +125,13 @@ class HomePage extends Component {
               </div>
 
               <div id="functionwise" className="tab-pane fade">
-                <FunctionalAreawiseJobs functionalJobs={this.props.functionalJobs}/>
+                { this.props.showLoader ? <Loader type="placeholderloader"  /> :
+                <FunctionalAreawiseJobs functionalJobs={this.props.functionalJobs}/> }
               </div>
 
               <div id="industrywise" className="tab-pane fade">
-                <IndustrywiseJobs industrialJobs={this.props.industrialJobs}/>
+              { this.props.showLoader ? <Loader type="placeholderloader"  /> :
+                <IndustrywiseJobs industrialJobs={this.props.industrialJobs}/> }
               </div>
             </div>
           </div>
@@ -146,7 +147,8 @@ const mapStateToProps = (state)=>{
         mapJobs           : state.mapJobs,
         functionalJobs    : state.functionalJobs,
         subfunctionalJobs : state.subfunctionalJobs,
-        industrialJobs    : state.industrialJobs
+        industrialJobs    : state.industrialJobs,
+        showLoader        : state.showLoader
     }
 }
 const mapDispatchToProps = (dispatch) => ({

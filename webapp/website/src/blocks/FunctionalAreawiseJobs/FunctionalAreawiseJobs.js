@@ -35,7 +35,7 @@ export default class FunctionalAreawiseJobs extends Component{
                                     );
                                 })
                             :
-                            null
+                            <h2>No data available</h2>
                         }
                     </div>                  
                 </section>

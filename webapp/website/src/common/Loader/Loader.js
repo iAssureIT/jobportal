@@ -99,13 +99,12 @@ export default class Loader extends Component {
         return (
           <div className="row">
             <div  className="placeholderWrapper col-lg-12">
-
-                <div className= "col-lg-3">
+                {/*<div className= "col-lg-3">
                     <div className= "leftPlaceholder col-lg-12">
                 </div>
-                </div>
+                </div>*/}
 
-                <div className="col-lg-9">
+                <div className="col-lg-12">
                   <div className="row row1">
                     <div className="col-lg-3">
                        <div className="greyBox col-lg-12"></div>

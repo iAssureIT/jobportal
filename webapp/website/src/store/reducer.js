@@ -39,6 +39,7 @@ const initialState = {
 	selector 					: {},
 	mapJobs 					: [],
 	jobCount 					: 0,
+	showLoader 					: false,
 	functionalJobs 				: [],
 	subfunctionalJobs 			: [],
 	industrialJobs 				: [],
@@ -70,7 +71,9 @@ const newState = {...state};
 	if(action.type === "SET_MAP_VIEW"){
 		newState.mapView = action.mapView;
 	}
-
+	if (action.type === "SHOW_LOADER") {
+		newState.showLoader = action.showLoader;
+	}
 	if(action.type === "SET_VIEW_MODE"){
 		newState.viewMode 	= action.viewMode;
 	}
