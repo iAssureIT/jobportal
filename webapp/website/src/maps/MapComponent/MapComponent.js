@@ -12,6 +12,7 @@ const MapView = () => {
 
 	        case "/state/MH":   const Maharashtra = React.lazy(() => import('../Maharashtra/Maharashtra.js'))
 	        	                return <Maharashtra/> ;
+	        	                
 
 	        case "/state/JK":   const JammuKashmir = React.lazy(() => import('../JammuKashmirLadakh/JammuKashmirLadakh.js'))
 	        	                return <JammuKashmir/> ;
