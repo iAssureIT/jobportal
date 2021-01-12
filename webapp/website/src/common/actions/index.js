@@ -92,7 +92,7 @@ export function jobCount(selector) {
 	    }) 
   	}  
 }
-export function filterFunctionalData(selector) {
+export function filterFunctionalData(selector) { 
   	return dispatch =>{
   		
   		dispatch(showLoader(true));
