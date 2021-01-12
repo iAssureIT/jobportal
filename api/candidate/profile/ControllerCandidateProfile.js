@@ -126,7 +126,7 @@ function insertLanguage(language, createdBy){
                         reject(err); 
                     });
     });
-}
+} 
 function insertQualificationLevel(qualificationLevel, createdBy){ 
     return new Promise(function(resolve,reject){ 
         const qualificationLevelMaster = new QualificationLevelMaster({
