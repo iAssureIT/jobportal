@@ -130,11 +130,12 @@
     font-weight: bold;
 
 }
-@keyframes rewards {
+
+/*@keyframes rewards {
 
   50%{opacity: 0;}
   100%   { opacity: 1; }
-}
+}*/
 
 
 .placeholderWrapper{
@@ -149,11 +150,11 @@
   border-radius: 5px;
   border:1px solid #f5a721;
   padding-top: 10px;
-  opacity: 0;
-
+  
+/*
   animation: rewards 4s forwards;
   animation-iteration-count: infinite;
-  animation-delay: 1s;
+  animation-delay: 1s;*/
 }
 
 .greyBox{
@@ -165,30 +166,29 @@
 }
 
 .row1{
-  margin-bottom: 10px;
-  opacity: 0;
+  margin-bottom: 15px;
 
-  animation: rewards 1s forwards;
+ /* animation: rewards 1s forwards;
   animation-iteration-count: infinite;
-  animation-delay: 1s;
+  animation-delay: 1s;*/
 }
 
 
 
 .row2{
-  margin-bottom: 10px;
-  opacity: 0;
+  margin-bottom: 15px;
+ /* opacity: 0;*/
 
-   animation: rewards 1s forwards;
+ /*  animation: rewards 1s forwards;
   animation-iteration-count: infinite;
-  animation-delay: 1s;
+  animation-delay: 1s;*/
 }
 
 .row3{
   margin-bottom: 10px;
-  opacity: 0;
+  /*opacity: 0;*/
 
-  animation: rewards 1s forwards;
+ /* animation: rewards 1s forwards;
   animation-iteration-count: infinite;
-  animation-delay: 1s;
+  animation-delay: 1s;*/
 }

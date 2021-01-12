@@ -109,10 +109,11 @@ export function filterFunctionalData(selector) {
 }
 export function filterSubfunctionalData(selector) {
   	return dispatch =>{
+  		dispatch(showLoader(true));
   		dispatch(setFilterSelector(selector));
 	  	return axios.post("/api/jobs/subfunctional-jobs",selector)
 	    .then((response)=>{
-	     
+	     	dispatch(showLoader(false));
 	        dispatch(getSubfunctionalData(response.data));
 	    })
 	    .catch((error)=>{
@@ -122,10 +123,11 @@ export function filterSubfunctionalData(selector) {
 }
 export function filterIndustrialData(selector) {
   	return dispatch =>{
+  		dispatch(showLoader(true));
   		dispatch(setFilterSelector(selector));
 	  	return axios.post("/api/jobs/industrial-jobs",selector)
 	    .then((response)=>{
-	     
+	        dispatch(showLoader(false));
 	        dispatch(getIndustrialData(response.data));
 	    })
 	    .catch((error)=>{
