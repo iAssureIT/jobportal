@@ -5,7 +5,7 @@ import Moment                 from 'moment';
 import { FontAwesomeIcon } 	  from '@fortawesome/react-fontawesome';
 import { connect }        	  from 'react-redux';
 import { bindActionCreators } from 'redux';
-import  * as mapActionCreator from '../../common/actions/index';
+import  * as mapActionCreator from '../../Common/actions/index';
 import $                      from 'jquery';
 import IAssureTable 		  from '../../../coreadmin/IAssureTable/IAssureTable.jsx';
 import './Candidatelist.css';
@@ -108,7 +108,7 @@ class Candidatelist extends Component{
 												{this.state.jobInfo[0] ? this.state.jobInfo[0].jobBasicInfo.jobTitle : null}
 											</div>
 											<div className="joblistCompanyName">
-												{this.state.jobInfo[0] ? this.state.jobInfo[0].employer[0].companyName : null}
+												{/*{this.state.jobInfo[0] ? this.state.jobInfo[0].employer[0].companyName : null}*/}
 											</div>
 											<div> 
 												<i className="fa fa-calendar joblistExperience"></i> &nbsp; Exp: {this.state.jobInfo[0] ? this.state.jobInfo[0].eligibility.minExperience : null}
@@ -157,7 +157,7 @@ class Candidatelist extends Component{
 								{ this.state.view === 'Grid' ?
 									
 									<div className="container-fluid  candidateList col-lg-12">
-										<div className="col-lg-4 ">
+										<div className="col-lg-5">
 										<div>
 											<div className="col-lg-12 candidateBlockWrapper">
 												<div className="row">
@@ -322,7 +322,7 @@ class Candidatelist extends Component{
 											? 	
 											this.props.candidateList.map((elem,index)=>{
 												return(
-														<div className="col-lg-4 " key={index}>
+														<div className="col-lg-5" key={index}>
 															<div>
 																<div className="col-lg-12 candidateBlockWrapper">
 																	<div className="row">

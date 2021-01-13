@@ -81,7 +81,6 @@ export function getAccessToFacility(moduleName, facilityName) {
         .catch((error)=>{
               console.log('error', error);
         })
-    
   }  
 }
 
@@ -97,8 +96,9 @@ export function filterJobList(selector) {
             console.log('error', error);
       }) 
     }
-}
-/*export function applicantsCountList(selector) {
+} 
+
+export function applicantsCountList(selector) {
     return dispatch =>{
       return axios.post("/api/applyJob/get/applicantsCountList",selector)
       .then((response)=>{
@@ -121,4 +121,4 @@ export function filterCandidatesApplied(candidateSelector) {
             console.log('error', error);
       }) 
     }       
-}*/
+}

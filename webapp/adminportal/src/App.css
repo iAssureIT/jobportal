@@ -139,13 +139,8 @@ z-index: 0!important;
 /*.....................Main.css........................*/
 body {
   font-family:'Montserrat',sans-serif;
-  background-color:#eeeeee !important;
-  font-size: 12px !important;
-}
-
-@font-face{
-  font-family:'Montserrat-Regular';
-  src: url("/fonts/Montserrat/Montserrat-Regular.ttf");
+  background-color: #222d32 !important;
+  /*font-size: 12px !important;*/
 }
 
 .formWrapper{
