@@ -83,8 +83,16 @@ deleteJob = (event)=>{
 						{
 							this.props.jobList
 							?
-								this.props.jobList.map((elem,index)=>{
+								this.props.jobList.map((elem,index1)=>{
 									console.log(elem);
+									var applicantsCount = this.props.applicantsCountList.filter((appl, ind)=>{
+										if (appl._id == elem._id) {
+											return appl.candidatesApplied;
+										}else{
+											return 0
+										}
+										
+									})
 									return(
 										<div className="col-lg-12">
 											<div className="jobListContainer">
@@ -110,7 +118,7 @@ deleteJob = (event)=>{
 														</div>
 														<div className="jobListCompanyName">
 
-															{/*{elem.employer[0].companyName}*/}
+															{/*{elem.employer[0].companyName}*/} <b> iAssureIT International Technologies Pvt Ltd </b>
 
 														</div>
 														<div> 
@@ -124,6 +132,9 @@ deleteJob = (event)=>{
 														</div>
 														<div> 
 															<i className="fa fa-users jobListNumPositions"></i> &nbsp; No of position : {elem.jobBasicInfo.positions} 
+														</div>
+														<div className="joblistNoCount"> 
+															<i className="fa fa-check-circle jobListNumapply"></i> &nbsp; <a href={"/applied-candidate-list/" + elem._id}> No. of applicants : {applicantsCount.length > 0 ? applicantsCount[0].candidatesApplied :  0}</a> 
 														</div>
 													</div>
 													<div className="col-lg-1 jobListRightContent">
@@ -158,7 +169,7 @@ deleteJob = (event)=>{
 const mapStateToProps = (state)	=>	{
 									    return {	
 											    	userDetails 	: state.userDetails,	selector : state.selector, 	
-											    	jobList 		: state.jobList
+											    	jobList 		: state.jobList,		applicantsCountList : state.applicantsCountList
 									    		}
 									}
 

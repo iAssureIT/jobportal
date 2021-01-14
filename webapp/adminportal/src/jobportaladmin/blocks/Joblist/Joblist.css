@@ -1,7 +1,7 @@
 .jobListWrapper{
 	min-height: 700px;
 	height: auto;
-	color: var(--admin-main-txt-color);
+	/*color: var(--admin-main-txt-color);*/
 	background-color: var(--admin-main-bg-color);
 }
 
@@ -11,7 +11,7 @@
 }
 
 .jobListContainer{
-	height: 270px;
+	height: 300px;
 	margin-top: 30px;
 	border-radius: 10px;
 	border: 1px solid var(--admin-main-border-color);
@@ -62,7 +62,7 @@
 	margin-top: 2px;
 	font-weight: 500;
 	border: 1px solid var(--admin-main-border-color);
-	color: var(--admin-icon-color);
+	/*color: var(--admin-icon-color);*/
 	background-color: var(--admin-form-field-background-color);
 }
 
@@ -142,6 +142,27 @@
 
 .listEditBtn i:hover, .listViewBtn i:hover, .listDelBtn i:hover{
 	color: var(--blue-color);
+}
+
+.jobListNumapply{
+	font-size: 15px !important;
+	margin-left: -6px;
+	margin-top: 13px;
+	padding-left: 3px;
+	color: var(--admin-icon-color);
+}
+
+.joblistNoCount{
+	margin-left: -3px;
+	margin-top: -3px;
+}
+
+a{
+	color: var(--admin-sub-heading-font-color);
+}
+
+a:hover{
+	color: var(--admin-sub-heading-font-color);
 }
 
 /*******************Search Tab********************/

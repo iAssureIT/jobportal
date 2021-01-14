@@ -60,19 +60,6 @@ class Candidatelist extends Component{
 		.catch(err=>{
 
 		})
-
-		/*Axios.get("/api/candidatemaster/get/one/"+this.state.candidate_id)
-		.then(response=>{
-			 
-			 	this.setState({
-
-			 		dataArry     :response.data,
-			 		skillsArry   :response.data[0].skillCertification
-			 	})
-			 })
-			 .catch(error=>{
-			 	Swal.fire("Submit Error!",error.message,'error');
-			 })*/
 	}
 	
 	getData(){

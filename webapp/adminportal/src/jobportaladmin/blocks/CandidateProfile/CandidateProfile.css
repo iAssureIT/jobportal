@@ -1,0 +1,23 @@
+
+.candidateProfileWrapper{
+	min-height:500px;
+	height:auto;
+	background-color:var(--main-bg-color);
+}
+.candidateProfile{
+	min-height: 650px;
+	height:auto;
+	padding-bottom: 30px;
+	margin-bottom: 30px;
+	margin-top: 30px;
+	padding-top: 30px;
+	border:3px solid var(--main-border-color);
+	border-radius: 10px;
+}
+
+.candidateProfileWrapper .PdfIcon{
+	font-size: 30px;
+	margin-top: 20px;
+	color: #fff;
+	cursor: pointer;
+}

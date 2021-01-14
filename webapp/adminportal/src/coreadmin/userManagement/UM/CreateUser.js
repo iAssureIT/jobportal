@@ -8,10 +8,7 @@ import swal from 'sweetalert';
 import 'font-awesome/css/font-awesome.min.css';
 import 'bootstrap/js/modal.js';
 import './userManagement.css';
-import PlacesAutocomplete, {
-  geocodeByAddress,
-  getLatLng
-} from "react-places-autocomplete";
+import PlacesAutocomplete, {geocodeByAddress,getLatLng} from "react-places-autocomplete";
 
 const formValid = formerrors => {
   let valid = true;
@@ -25,8 +22,6 @@ const nameRegex = RegExp(/^[A-za-z']+( [A-Za-z']+)*$/);
 const mobileRegex = RegExp(/^[0-9][0-9]{9}$/);
 const emailRegex = RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
 class CreateUser extends Component {
-
-
   constructor(props) {
     super(props);
     this.state = {
@@ -44,6 +39,7 @@ class CreateUser extends Component {
       designation: "-- Select --",
       cityName: "",
       states: "",
+      employeeID: "",
       workLocation: "",
       corporate_Id: "",
       formValues: "",
@@ -66,21 +62,21 @@ class CreateUser extends Component {
       this.setState({
         gmapsLoaded: true,
       })
-    }
-    getEntityLocation(companyId) {
-      console.log("getEntityLocation",companyId)
-      axios.get('/api/entitymaster/getCompany/' + companyId)
-        .then((response) => {
-          console.log("response.data[0]==>",response.data.locations)
-          this.setState({
-            corporateLocationArray: response.data.locations
-          },()=>{
-          })
+  }
+  getEntityLocation(companyId) {
+    console.log("getEntityLocation",companyId)
+    axios.get('/api/entitymaster/getCompany/' + companyId)
+      .then((response) => {
+        console.log("response.data[0]==>",response.data.locations)
+        this.setState({
+          corporateLocationArray: response.data.locations
+        },()=>{
         })
-        .catch((error) => {
-  
-        })
-    }
+      })
+      .catch((error) => {
+
+      })
+  }
   handleChange(event) {
     const datatype = event.target.getAttribute('data-text');
     const target = event.target;
@@ -163,6 +159,26 @@ class CreateUser extends Component {
       formerrors,
       [name]: value
     });
+  }
+  handleworklocationChange(event) {
+    event.preventDefault();
+    const target = event.target;
+    const name = target.name;
+
+  
+    // console.log("companyID..",compID);
+    var vendorLocation = document.getElementById("workLocation");
+    var locationID = vendorLocation.options[vendorLocation.selectedIndex].getAttribute("locationID");
+    var branchCode = vendorLocation.options[vendorLocation.selectedIndex].getAttribute("branch-code");
+    var district = vendorLocation.options[vendorLocation.selectedIndex].getAttribute("district");
+    var value = event.target.value;
+    this.setState({
+      [name]: event.target.value,
+      workLocationId: locationID,
+      branchCode: branchCode,
+      workLocationDistrict: district,
+     })
+
   }
   validation() {
     $.validator.addMethod("regxA1", function (value, element, regexpr) {
@@ -281,26 +297,19 @@ class CreateUser extends Component {
       }
     });
   }
-
-  // getGoogleAPIKey(){
-  //       axios.get("/api/projectSettings/get/GOOGLE",)
-  //       .then((response) => {
-  //           this.setState({
-  //               googleAPIKey : response.data.googleapikey
-  //           },()=>{
-  //               window.initMap = this.initMap
-  //               const gmapScriptEl = document.createElement(`script`)
-  //               gmapScriptEl.src = `https://maps.googleapis.com/maps/api/js?key=`+this.state.googleAPIKey+`&libraries=places&callback=initMap`
-  //               document.querySelector(`body`).insertAdjacentElement(`beforeend`, gmapScriptEl)
-  //           });
-  //       })
-  //       .catch((error) =>{
-  //           swal(error)
-  //       })
-  //   }
+  changeMobile(event) {
+    this.setState({
+      mobile: event
+    }, () => {
+      if (this.state.mobile) {
+        this.setState({
+          companyPhoneAvailable: this.state.mobile === "+" || this.state.mobile.length<12 ? false : true
+        },()=>{
+        })
+      }
+    })
+  }
   componentDidMount() {
-   // this.getGoogleAPIKey()
-
     this.validation();
     this.getDepartment();
     this.getDesignation();
@@ -331,10 +340,7 @@ class CreateUser extends Component {
           this.props.getData(data);
         }
       )
-      .catch((error) => {
-
-      });
-
+      .catch((error) => {});
   }
   getDepartment() {
     axios.get("/api/departmentmaster/get/list")
@@ -358,18 +364,18 @@ class CreateUser extends Component {
       .catch((error) => {
       })
   }
-
   createUser(event) {
     event.preventDefault();
-    if ($('#userInfo').valid()) {
+    // if ($('#userInfo').valid()) {
+      console.log('userid companyName==>>>', this.state.companyName)
       if (this.state.companyName === "No Company Available") {
+        console.log('IN IF Post==>>>', this.state.companyName)
         swal({
-               
                 text: "Company ID " + this.state.companyID + " is not valid Company ID",
-              });
-
+            });
       }
       else{
+        // console.log('userid companyName==>>>', this.state.companyID)
         axios.get('/api/entitymaster/get/one/companyName/' + this.state.companyID)
           .then((response) => {
             console.log("response.dataresponse.data",response.data);
@@ -393,18 +399,18 @@ class CreateUser extends Component {
                   "mobNumber": (this.state.mobile).replace("-", ""),
                   "pwd": "welcome123",
                   // "role": this.state.role !== "employee" ? ["  employee",this.state.role] : ["employee"],
-                  "role" :  this.state.rolesentityname === "corporate" ? 
+                  "role"  : this.state.rolesentityname === "corporate" ? 
                             this.state.role === "employee" ? ["employee"] : ["employee",this.state.role]
                             :
                             [this.state.role],
 
-                  "department": this.state.department,
-                  "designation": this.state.designation,
-                  "cityName": this.state.cityName,
-                  "states": this.state.states,
-                  "companyID": this.state.companyID,
-                  "workLocation": this.state.workLocation,
-                  "companyName": companyName,
+                  "department"      : this.state.department,
+                  "designation"     : this.state.designation,
+                  "cityName"        : this.state.cityName,
+                  "states"          : this.state.states,
+                  "companyID"       : this.state.companyID,
+                  "workLocation"    : this.state.workLocation,
+                  "companyName"     : companyName,
                   "status"          : this.state.role ==="corporateadmin" || this.state.role ==="vendoradmin" || this.state.role ==="admin"  ? "active" :"blocked",
                 }
                 console.log('userid Post==>>>', formValues)
@@ -422,25 +428,6 @@ class CreateUser extends Component {
                           'buttonType': 'Register User'
                         })
                       } else {
-                        // var sendData = {
-                        //   "event": "Contact Created", //Event Name
-                        //   "toUser_id": res.data.ID, //To user_id(ref:users)
-                        //   "toUserRole":"employee",
-                        //   "company_id": this.state.corporate_Id, //company_id(ref:entitymaster)
-                        //   "otherAdminRole":'corporateadmin',
-                        //   "variables": {
-                        //     'EmployeeName': this.state.firstname + ' ' + this.state.lastname,
-                        //     'Password': "Welcome@123",
-                        //     'mobileNo': this.state.mobile,
-                        //     'email': this.state.signupEmail
-                        //   }
-                        // }
-
-                        // axios.post('/api/masternotifications/post/sendNotification', sendData)
-                        //   .then((res) => {
-                        //     // console.log('sendDataToUser in result==>>>', res.data.type)
-                        //   })
-                        //   .catch((error) => { console.log('notification error: ', error) })
                         var sendData = {
                           "event": "Event2", //Event Name
                           "toUser_id": res.data._id, //To user_id(ref:users)
@@ -452,7 +439,6 @@ class CreateUser extends Component {
                             'Password': "welcome123",
                             'mobileNo': this.state.mobile,
                             'email': this.state.signupEmail,
-                            // 'sendUrl': this.state.url+"/login",
                           }
                         }
                         console.log('sendData: ',sendData)
@@ -461,11 +447,7 @@ class CreateUser extends Component {
                         console.log('sendDataToUser in result==>>>', res.data)
                         })
                         .catch((error) => { console.log('notification error: ',error)})
-
-
-
                           var contactDetailspersonmaster 	= {
-                            
                               'firstName'       : this.state.firstname,
                               'lastName'        : this.state.lastname,
                               'contactNo'       : (this.state.mobile).replace("-", ""),
@@ -473,38 +455,48 @@ class CreateUser extends Component {
                               'email'           : this.state.signupEmail,
                               "departmentName"  : this.state.department,
                               "designationName" : this.state.designation,
-                            /*  "cityName"        : this.state.cityName,
-                              "states"          : this.state.states,*/
+                              "workLocation"  : this.state.workLocation,
+                              "workLocationId"  : this.state.workLocationId,
                               "address"         : [{
                                                   "city"        : this.state.cityName,
                                                   "state"          : this.state.states,
-
-                              }],
+                                                  addressLine1:  "",
+                                                  addressLine2: "",
+                                                  landmark:  "",
+                                                  area: "",
+                                                  district: "",
+                                                  stateCode: "",
+                                                  country: "",
+                                                  countryCode: "",
+                                                  latitude:  "",
+                                                  longitude: "",
+                                                  pincode: "",
+                                                  }],
                               "companyID"       : this.state.companyID,
                               "company_Id"      : this.state.corporate_Id,
                               "companyName"     : companyName,
+                              "employeeId"      : this.state.employeeID,
                               "type"            : this.state.rolesentityname === "corporate" ? 
                                                   "employee": null ||
                                                   this.state.rolesentityname === "vendor" ? 
-                                                  "driver": null,
+                                                  this.state.role ==="vendoradmin" ? "employee" : "driver"
+                                                  :null,
                               "entityType"      : this.state.rolesentityname,
                               "userId"          : res.data.ID,
                               "status"          : "Active",
                             }
                           
                           if(contactDetailspersonmaster.type == "driver" || "employee" || "guest"){
-                          console.log("mastercontactDetailspersonmaster",contactDetailspersonmaster);
-                          // console.log("Before");
+                            console.log('in contactDetailspersonmaster==>>>', contactDetailspersonmaster);
 
                             axios.post('/api/personmaster/post' ,contactDetailspersonmaster)
                             .then((response) => {
-
                               console.log('in result Res data==>>>', response.data);
                             })
                             .catch((error) => {})
                           }
                           
-                        swal( "User added successfully! \n Email Id: "+this.state.signupEmail+"\n Default Password: "+"welcome@123");
+                        swal( "User added successfully! \n Email Id: "+this.state.signupEmail+"\n Default Password: "+"welcome123");
                         var data = {
                           "startRange": this.state.startRange,
                           "limitRange": this.state.limitRange,
@@ -537,15 +529,12 @@ class CreateUser extends Component {
                           modal.style.display = "none";
                           $('.modal-backdrop').remove();
                           $("#CreateUserModal .close").click()
-                          
-
                         })
                       }
                     })
                     .catch((error) => {
                       this.setState({ show: false })
                     });
-
                 } else {
                   swal({
                     title: "Please enter mandatory fields",
@@ -556,7 +545,6 @@ class CreateUser extends Component {
             })
           }).catch(function (error) { });
         }
-      }
   }
   companynamewithid() {
     // console.log(" this.state.companyID==>>", this.state.companyID)
@@ -568,24 +556,6 @@ class CreateUser extends Component {
         })
       }).catch(function (error) { });
   }
-  // getRole() {
-  //   // var data = {
-  //   //   "startRange": this.state.starFtRange,
-  //   //   "limitRange": this.state.limitRange,
-  //   // }
-  //   axios.post('/api/roles/get/list')
-  //     .then((response) => {
-  //       console.log("response.data==>",response.data)
-  //       const key = 'role';
-	// 			// const arrayUniqueByKey = [...new Map(response.data.map(item =>
-	// 			// [item[key], item])).values()];
-  //       this.setState({
-  //         adminRolesListData: response.data
-  //       }, () => {
-  //       })
-  //     }).catch(function (error) {
-  //     });
-  // }
   getRole() {
 		axios.post('/api/roles/get/list')
 		  .then((response) => {
@@ -594,20 +564,6 @@ class CreateUser extends Component {
         this.setState({
           adminRolesListData: response.data
         })
-			// var fileName = 'admin'
-			// axios.get('/api/rolesentitymaster/get/filedetails/'+fileName)
-			// .then((response) => {
-      //   console.log("response from role =>",response.data)
-			// 	var rolecor = response.data[0]._id
-			// 	axios.get('/api/roles/get/rolelist/'+rolecor)
-			// 		.then((response) => {
-			// 			this.setState({
-			// 				adminRolesListData: response.data
-			// 			  }, () => {
-			// 			  })
-			// 		}).catch(function (error) {});
-			// }).catch(function (error) {});
-			
 		  }).catch(function (error) {
 		  });
 	}
@@ -656,7 +612,6 @@ class CreateUser extends Component {
       cityName: address ? address.split(",")[0] : "", 
       tripArray: array });
   };
-
   camelCase(str) {
     return str
       .toLowerCase()
@@ -723,15 +678,25 @@ class CreateUser extends Component {
                           </div>
                           <div className="form-margin col-lg-6 col-md-6 col-xs-12 col-sm-12  valid_box">
                             <label >Mobile Number <span className="requiredsign">*</span></label>
-                            <input type="number"  required pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" className="formFloatingLabels form-control  newinputbox" ref="mobile" name="mobile" id="mobile" data-text="mobile" onChange={this.handleChange} value={this.state.mobile}
-                              placeholder="Mobile Number" />
+                            {/* <input type="number"  required pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" className="formFloatingLabels form-control  newinputbox" ref="mobile" name="mobile" id="mobile" data-text="mobile" onChange={this.handleChange} value={this.state.mobile}
+                              placeholder="Mobile Number" /> */}
+                              <PhoneInput
+                                  country={'in'}
+                                  value={this.state.mobile}
+                                  name="mobile"
+                                  inputProps={{
+                                    name: 'mobile',
+                                    required: true
+                                  }}
+                                  onChange={this.changeMobile.bind(this)}
+                                />
+                                {this.state.companyPhoneAvailable === true ? null : <label className="error">Please enter valid number</label>}
                           </div>
                         </div>
                         <div className="valid_box">
                           <div className="form-margin col-lg-6 col-md-6 col-xs-12 col-sm-12  valid_box " >
                             <label >Role <span className="requiredsign">*</span></label>
                             <div className="input-group col-lg-12 col-md-12 col-xs-12 col-sm-12" >
-
                               <select ref="role" name="role"
                                       value={this.state.role}  id="role" onChange={this.handleChange.bind(this)}
                                        className="form-control">
@@ -748,7 +713,17 @@ class CreateUser extends Component {
                                     </select>
                             </div>
                           </div>
-
+                          {this.state.role !== "-- Select --"  && this.state.role !== "driver" ?
+                          <div className="form-margin col-lg-6 col-md-6 col-xs-12 col-sm-12  valid_box">
+                            <label>Employee ID <span className="requiredsign">*</span></label>
+                              <input type="text" className="form-control UMname  has-content"
+                                id="employeeID" ref="employeeID" name="employeeID" data-text="employeeID"
+                                onChange={this.handleChange}
+                                value={this.state.employeeID} placeholder="Employee ID" />
+                          </div>
+                          :
+                          null
+                          }
                           <div className="form-margin col-lg-6 col-md-6 col-xs-12 col-sm-12  valid_box">
                             <label>Company ID <span className="requiredsign">*</span></label>
                             <input type="text" className="form-control UMname  has-content"
@@ -799,15 +774,16 @@ class CreateUser extends Component {
                           </div> */}
                           <div className="form-margin col-lg-6 col-md-6 col-xs-12 col-sm-12  valid_box " >
                             <label >Work Location <span className="requiredsign">*</span></label>
-                            <div className="input-group col-lg-12 col-md-12 col-xs-12 col-sm-12" id="workLocation">
-                              <select className="form-control " value={this.state.workLocation} onChange={this.handleChange} ref="workLocation" id="workLocation" name="workLocation" data-text="workLocation">
+                            <div className="input-group col-lg-12 col-md-12 col-xs-12 col-sm-12">
+                              <select className="form-control " value={this.state.workLocation} onChange={this.handleworklocationChange.bind(this)} ref="workLocation" id="workLocation" name="workLocation" data-text="workLocation">
                                 <option hidden> --Select-- </option>
                                 {
                                   this.state.corporateLocationArray && this.state.corporateLocationArray.length > 0 ?
                                     this.state.corporateLocationArray.map((data, index) => {
                                       // console.log("data dept==>",data);
                                       return (
-                                        <option key={index} value={data.locationType}>{((data.locationType).match(/\b(\w)/g)).join('')} - {data.area} {data.city}, {data.stateCode} - {data.countryCode}  </option>
+                                        //<option key={index} value={data.locationType}>{((data.locationType).match(/\b(\w)/g)).join('')} - {data.area} {data.city}, {data.stateCode} - {data.countryCode}  </option>
+                                        <option key={index} locationID={data._id} branch-code={data.branchCode} district={data.district} value={data.addressLine1}>{((data.locationType).match(/\b(\w)/g)).join('')} - {data.area} {data.city}, {data.stateCode} - {data.countryCode}  </option>
                                       );
                                     })
                                     : ""

@@ -179,6 +179,15 @@
 
 .joblistNoCount{
 	margin-left: -3px;
+	margin-top: -3px;
+}
+
+a{
+	color: var(--main-txt-color);
+}
+
+a:hover{
+	color: var(--main-txt-color);
 }
 
 /*******************Search Tab********************/

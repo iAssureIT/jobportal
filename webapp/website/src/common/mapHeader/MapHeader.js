@@ -55,7 +55,7 @@ class MapHeader extends Component{
     return(
     <nav className="navbar FunctionalHeaderWrapper container-fluid">
 		<div className="iconHeader col-lg-1">
-		  	<img src="images/1.png" alt="icon" />
+		  	<a href="/"><img src="/images/1.png" alt="icon" /></a>
 		</div>
 
 		<div className="breadCrumbHeader col-lg-2">
@@ -88,7 +88,7 @@ class MapHeader extends Component{
      		<div className="rightFunctionHeader2 col-lg-3">
  				<div className="headerMenu2 ">
  					<div className="headerMenu1" onClick={this.asideBar.bind(this)}>
-		     			<img src="images/List_View.png" alt="icon" />
+		     			<img src="/images/List_View.png" alt="icon" />
 		     		</div>
 		     	</div>
 
