@@ -71,6 +71,7 @@ class ConfirmOtp extends Component {
 
           if (response.data.message == 'SUCCESS') {
             swal('OTP Verified Successfully.');
+            this.props.history.push('/login');
             var url = localStorage.getItem('previousUrl');
             if (url == 'forgotpassword') {
               localStorage.removeItem("previousUrl");
@@ -168,7 +169,7 @@ class ConfirmOtp extends Component {
 
                     <div className="col-lg-12 confirmOTPLinks">
                         Found your Password? &nbsp;
-                        <a className="confirmOTPSignIn" href="#"><u>Sign In</u></a>
+                        <a className="confirmOTPSignIn" href="/login"><u>Sign In</u></a>
                     </div>
                     
                     

@@ -396,28 +396,27 @@ class SignUp extends Component {
       <section className="container-fluid registrationFormWrapper">
           <div className="registrationForm col-lg-6 col-lg-offset-3">
             <form>
-
-              <div className="signUpTitle col-lg-12">Sign Up
-              </div>
+              <div className="signUpTitle col-lg-12">Sign Up</div>
 
               <div className="row">
                 <hr className="registrationHr"/>
               </div>
              
               <div className="col-lg-12 form-group" >
-              <div className="input-group autocomplete">
-              <span className="input-group-addon registrationInputIcon"><i className="fa fa-briefcase"></i></span>
-              <Autosuggest 
-                suggestions={suggestions}
-                onSuggestionsFetchRequested={this.onSuggestionsFetchRequested.bind(this)}
-                onSuggestionsClearRequested={this.onSuggestionsClearRequested.bind(this)}
-                getSuggestionValue={this.getSuggestionValue.bind(this)}
-                renderSuggestion={this.renderSuggestion.bind(this)}
-                onSuggestionSelected={this.onSuggestionSelected.bind(this)}
-                inputProps={inputProps}
-              />
-              </div>
+                <div className="input-group autocomplete">
+                  <span className="input-group-addon registrationInputIcon"><i className="fa fa-briefcase"></i></span>
+                    <Autosuggest 
+                      suggestions={suggestions}
+                      onSuggestionsFetchRequested={this.onSuggestionsFetchRequested.bind(this)}
+                      onSuggestionsClearRequested={this.onSuggestionsClearRequested.bind(this)}
+                      getSuggestionValue={this.getSuggestionValue.bind(this)}
+                      renderSuggestion={this.renderSuggestion.bind(this)}
+                      onSuggestionSelected={this.onSuggestionSelected.bind(this)}
+                      inputProps={inputProps}
+                    />
+                </div>
               </div> 
+              
               <div className="col-lg-6 form-group" >
                   <div className="input-group">
                       <span className="input-group-addon registrationInputIcon"><i className="fa fa-user"></i></span>
@@ -433,7 +432,6 @@ class SignUp extends Component {
                   </div>
                    <span id="lastNameError" className="errorMsg"></span>
               </div>
-
              
               <div className="col-lg-6 form-group" >
                   <div className="input-group">
@@ -443,47 +441,48 @@ class SignUp extends Component {
                    <span id="emailAddressError" className="errorMsg"></span>
               </div>
 
-               <div className="col-lg-6 form-group" >
-                        <PhoneInput 
-                          country   = {'in'}
-                          id        ="mobileNumber" 
-                          className ="input-group-addon form-control inputBox" 
-                          value     ={this.state.mobileNumber} 
-                          onChange  = {mobileNumber => this.setState({ mobileNumber })}
-                         />
-                         <span id="mobileNumberError" className="errorMsg"></span>
-                    </div>
+              <div className="col-lg-6 form-group" >
+                <PhoneInput 
+                  country   = {'in'}
+                  id        ="mobileNumber" 
+                  className ="input-group-addon form-control inputBox" 
+                  value     ={this.state.mobileNumber} 
+                  onChange  = {mobileNumber => this.setState({ mobileNumber })}
+                />
+                <span id="mobileNumberError" className="errorMsg"></span>
+              </div>
 
-               <div className="col-lg-6 form-group" >
-                        <div className="input-group">
-                            <span className="input-group-addon registrationInputIcon"><i className="fa fa-lock"></i></span>
-                            <input type="password" id="password" name="password" placeholder="Password" value={this.state.password} onChange={this.handleChange.bind(this)} className="form-control registrationInputBox"/>
-                            <span className="input-group-addon loginInputIcon3" onClick={this.showPassword1.bind(this)}>
-                              <i className={this.state.showPassword1 ? "fa fa-eye-slash" : "fa fa-eye"} 
-                                  value={this.state.showPassword1}></i></span>
-                        </div>
-                         <span id="passwordError" className="errorMsg"></span>
-                    </div>
+              <div className="col-lg-12 row">
+              <div className="col-lg-6 form-group pqr">
+                <div className="input-group">
+                    <span className="input-group-addon registrationInputIcon"><i className="fa fa-lock"></i></span>
+                    <input type="password" id="password" name="password" placeholder="Password" value={this.state.password} onChange={this.handleChange.bind(this)} className="form-control registrationInputBox"/>
+                      <span className="input-group-addon loginInputIcon3" onClick={this.showPassword1.bind(this)}>
+                        <i className={this.state.showPassword1 ? "fa fa-eye-slash" : "fa fa-eye"} value={this.state.showPassword1}></i>
+                      </span>
+                </div>
+                <span id="passwordError" className="errorMsg"></span>
+              </div>
 
-                    <div className="col-lg-6 form-group" >
-                        <div className="input-group">
-                            <span className="input-group-addon registrationInputIcon"><i className="fa fa-lock"></i></span>
-                            <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" value={this.state.confirmPassword} onChange={this.handleChange.bind(this)} className="form-control registrationInputBox"/>
-                            <span className="input-group-addon loginInputIcon3" onClick={this.showPassword2.bind(this)}>
-                               <i className={this.state.showPassword2 ? "fa fa-eye-slash" : "fa fa-eye"} 
-                                value={this.state.showPassword2}></i></span>
-                        </div>
-                         <span id="confirmPasswordError" className="errorMsg"></span>
-                    </div>
+              <div className="col-lg-6 form-group abc">
+                  <div className="input-group">
+                    <span className="input-group-addon registrationInputIcon"><i className="fa fa-lock"></i></span>
+                    <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" value={this.state.confirmPassword} onChange={this.handleChange.bind(this)} className="form-control registrationInputBox"/>
+                    <span className="input-group-addon loginInputIcon3" onClick={this.showPassword2.bind(this)}>
+                       <i className={this.state.showPassword2 ? "fa fa-eye-slash" : "fa fa-eye"} value={this.state.showPassword2}></i>
+                    </span>
+                  </div>
+                   <span id="confirmPasswordError" className="errorMsg"></span>
+              </div>
+             </div> 
 
-
-              <div className="col-lg-6 col-lg-offset-3 buttonWrapper">
-             <button className="btn col-lg-12 buttonSignUp" onClick={this.usersignup.bind(this)}>Sign Up</button>
+            <div className="col-lg-6 col-lg-offset-3 buttonWrapper">
+              <button className="btn col-lg-12 buttonSignUp" onClick={this.usersignup.bind(this)}>Sign Up</button>
             </div>
 
             <div className="col-lg-12 registrationLinks">
-                  <a className="alreadyAccount" href="/login"><u>Already have an Account?Sign In</u></a>
-                </div>
+              <a className="alreadyAccount" href="/login"><u>Already have an Account?Sign In</u></a>
+            </div>
 
           </form>
         </div>

@@ -2,7 +2,7 @@
 .rightAsideWrapper{
 	min-height:700px;
 	height:auto;
-	color: #dddddd;
+	color: var(--admin-main-txt-color);
 	padding-bottom:20px;
 }
 .videoWrapper{
@@ -28,12 +28,12 @@
 }
 .certificationHeading{
 	font-size: 19px;
-	color: var(--main-heading-font-color);
+	color: var(--blue-color);
 	font-family: Montserrat-SemiBold;
 }
 .caertificationName{
 	font-size:17px;
-	color: var(--main-subheading-font-color);
+	color: var(--blue-color);
 	font-family: Montserrat-SemiBold;
 	
 }

@@ -2,7 +2,7 @@
 .middelContentWrapper{
 	min-height:700px;
 	height:auto;
-	color: #dddddd;
+	color: var(--admin-main-txt-color);
 }
 .middelContentHeadingWrapper i{
 	margin-left:-3px;
@@ -31,7 +31,7 @@
 .middleContentHeading{
 	font-size:19px;
 	letter-spacing:1px;
-	color: var(--main-heading-font-color);
+	color: var(--blue-color);
 	font-family: Montserrat-SemiBold;
 }
 .middelContentText{
@@ -39,7 +39,7 @@
 	height:auto;
 	margin-bottom:5px;
 	padding-bottom:12px;
-	border-left:2px solid var(--main-heading-font-color);
+	border-left:2px solid var(--admin-main-border-color);
 	font-family: Montserrat-Medium;
 	font-size:13px;
 }
@@ -56,7 +56,7 @@
 }
 .profesion{
 	font-size:14px;
-	color: var(--main-subheading-font-color);
+	color: var(--blue-color);
 	font-weight:800;
 	padding-top:5px;
 	padding-bottom:10px;
@@ -77,7 +77,7 @@
 .middleContentHr{
 	height:1px!important;
 	border:none;
-	background-color:var(--main-heading-font-color);
+	background-color:var(--blue-color);
 }
 .companyImages img{
 	width:70px;

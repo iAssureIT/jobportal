@@ -462,15 +462,6 @@ class JobPosting extends Component {
         this.setState({
             gender: id,
         })
-       /* if(this.state.gender === "Male Only"){
-                                
-                                this.setState ({"<i className='fa fa-male'></i>"});
-                            
-                            }else{
-                                
-                                this.setState ({"<i className='fa fa-female'></i>"});
-                                                                    
-                            }*/
     }
 
     handleSubmit = (event) => { 

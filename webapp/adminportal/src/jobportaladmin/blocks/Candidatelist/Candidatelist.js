@@ -108,7 +108,7 @@ class Candidatelist extends Component{
 												{this.state.jobInfo[0] ? this.state.jobInfo[0].jobBasicInfo.jobTitle : null}
 											</div>
 											<div className="joblistCompanyName">
-												{/*{this.state.jobInfo[0] ? this.state.jobInfo[0].employer[0].companyName : null}*/}
+												{this.state.jobInfo[0] ? this.state.jobInfo[0].employer[0].companyName : null}
 											</div>
 											<div> 
 												<i className="fa fa-calendar joblistExperience"></i> &nbsp; Exp: {this.state.jobInfo[0] ? this.state.jobInfo[0].eligibility.minExperience : null}

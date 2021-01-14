@@ -159,7 +159,7 @@
 	left: -18px;
 	font-size: 16px;
 	font-weight: bold;
-	color: var(--blue-color);
+	color: var(--admin-diamond-color);
 }
 
 /*****************************End of Content Wrapper One**********************************/
@@ -222,7 +222,7 @@
 	left: -18px;
 	font-size: 16px;
 	font-weight: bold;
-	color: var(--blue-color);
+	color: var(--admin-diamond-color);
 }
 
 .contentWrapper2 .eduSubtitle{
@@ -307,7 +307,7 @@
 	left: -18px;
 	font-size: 16px;
 	font-weight: bold;
-	color: var(--blue-color);
+	color: var(--admin-diamond-color);
 }
 
 .contentWrapper3 .eduSubtitle{
