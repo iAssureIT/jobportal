@@ -21,7 +21,7 @@ class RightAside extends Component{
 		.then(response=>{
 			 
 			 	this.setState({
-			 		certificationArry :response.data[0].skillCertification,
+			 		certificationArry :response.data[0].certifications,
 			 	})
 			 })
 			 .catch(error=>{

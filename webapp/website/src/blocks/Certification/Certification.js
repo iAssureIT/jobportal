@@ -102,7 +102,7 @@ class Certification extends Component{
   			this.setState({
   				isChecked: !this.state.isChecked
   			});
-  			console.log(this.state.isChecked);
+  			
     }
 	onChangeSkills(event){
         const {name,value} = event.target;
@@ -310,7 +310,7 @@ class Certification extends Component{
 			}else{
 				var formValues = {
 					                candidate_id            : this.state.candidate_id,
-					                primarySkills 			: [],	
+					               	
 					                secondarySkills 		: [{
 					                	skill                 : this.state.skills,
 										rating                : this.state.rating,
@@ -549,11 +549,11 @@ class Certification extends Component{
 									<div className="col-lg-4">
 										<label htmlFor="rating" className="nameTitleForm">How do you rate yourself  <sup className="nameTitleFormStar">*</sup></label>
 										<div className="input-group ">
-											<span className={this.state.rating=== "star1B"||this.state.rating=== "star2B"||this.state.rating=== "star3B"||this.state.rating=== "star4B"||this.state.rating=== "star5B"? "fa fa-star rating stars":"fa fa-star-o rating"} id="star1B" name="rating" value="star1B" onClick={this.starClick.bind(this)}></span>
-											<span className={this.state.rating === "star2B"||this.state.rating=== "star3B"||this.state.rating=== "star4B"||this.state.rating=== "star5B"? "fa fa-star rating stars":"fa fa-star-o rating"} id="star2B" name="rating" value="star2B" onClick={this.starClick.bind(this)}></span>
-											<span className={this.state.rating === "star3B"||this.state.rating=== "star4B"||this.state.rating=== "star5B"? "fa fa-star rating stars":"fa fa-star-o rating"} id="star3B" name="rating" value="star3B" onClick={this.starClick.bind(this)}></span>
-											<span className={this.state.rating === "star4B" ||this.state.rating=== "star5B"? "fa fa-star rating stars":"fa fa-star-o rating"} id="star4B" name="rating" value="star4B" onClick={this.starClick.bind(this)}></span>
-											<span className={this.state.rating === "star5B" ? "fa fa-star rating stars":"fa fa-star-o rating"} id="star5B" name="rating" value="star5B" onClick={this.starClick.bind(this)}></span>
+											<span className={this.state.rating=== "1"||this.state.rating=== "2"||this.state.rating=== "3"||this.state.rating=== "4"||this.state.rating=== "5"? "fa fa-star rating stars":"fa fa-star-o rating"} id="1" name="rating"  onClick={this.starClick.bind(this)}></span>
+											<span className={this.state.rating === "2"||this.state.rating=== "3"||this.state.rating=== "4"||this.state.rating=== "5"? "fa fa-star rating stars":"fa fa-star-o rating"} id="2" name="rating"  onClick={this.starClick.bind(this)}></span>
+											<span className={this.state.rating === "3"||this.state.rating=== "4"||this.state.rating=== "5"? "fa fa-star rating stars":"fa fa-star-o rating"} id="3" name="rating"  onClick={this.starClick.bind(this)}></span>
+											<span className={this.state.rating === "4" ||this.state.rating=== "5"? "fa fa-star rating stars":"fa fa-star-o rating"} id="4" name="rating"  onClick={this.starClick.bind(this)}></span>
+											<span className={this.state.rating === "5" ? "fa fa-star rating stars":"fa fa-star-o rating"} id="5" name="rating"  onClick={this.starClick.bind(this)}></span>
 										</div> 
 										<span id="ratingError" className="errorMsg"></span>
 									</div>
@@ -684,7 +684,7 @@ class Certification extends Component{
 																
 																<div className="rightIconHide">
 																	<FontAwesomeIcon icon="trash-alt" /> 
-																	<span className="rightIconHideText" i onClick={this.deleteDate.bind(this)}>Delete</span>
+																	<span className="rightIconHideText"  onClick={this.deleteDate.bind(this)}>Delete</span>
 																</div>
 															</div>
 														</div>

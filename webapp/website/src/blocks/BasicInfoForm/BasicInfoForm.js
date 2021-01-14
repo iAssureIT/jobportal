@@ -1,15 +1,14 @@
-import React,{Component}    from 'react';
-import { FontAwesomeIcon }  from '@fortawesome/react-fontawesome';
-import Moment               from 'moment';
-import { withRouter }	 	from 'react-router-dom';
-import Axios 			 	from 'axios';
-import Swal 			 	from 'sweetalert2';
-import { Multiselect }      from 'multiselect-react-dropdown';
-import S3FileUpload         from 'react-s3';
+import React,{Component}            from 'react';
+import { FontAwesomeIcon }          from '@fortawesome/react-fontawesome';
+import Moment                       from 'moment';
+import { withRouter }	 	        from 'react-router-dom';
+import Axios 			 	        from 'axios';
+import Swal 			 	        from 'sweetalert2';
+import S3FileUpload                 from 'react-s3';
 import { WithContext as ReactTags } from 'react-tag-input';
-import {connect}            from 'react-redux';
-import { bindActionCreators } from 'redux';
-import  * as mapActionCreator from '../../common/actions/index';
+import {connect}                    from 'react-redux';
+import { bindActionCreators }       from 'redux';
+import  * as mapActionCreator       from '../../common/actions/index';
 import './BasicInfoForm.css';
 
 
@@ -17,78 +16,40 @@ class BasicInfoForm extends Component{
 	constructor(props){
 		super(props);
 		this.state={
-			firstName          : "",
-			middleName         : "",
-			candidate_id       : this.props.userDetails.candidate_id,
-			lastName           : "",
-			dob                : "",
-			profilePhoto       : "",
-			profileImageUrl    : "",
-			gender             : "male",
-			anniversaryDate    : "",	
-			maritalStatus      : "",
-			nationality        : "",
-			panCardNo          : "",
-			adhaarCardNo       : "",
-			selectedValue      : [],
-			ageYears	       : 0,	
-			ageMonths	       : 0,	
-			ageDays	       	   : 0,
-			age                : "",
-			inputMaritalStatus : ["Single",,"Married", "Separated","Divorced","Widowed"],
-			inputNationality   : ["Indian","American"],
-			languagesTags	   : [],
-			languagesSuggestions	   : [],
-			inputLanguages	   : [],
+			firstName                 : "",
+			middleName                : "",
+			candidate_id              : this.props.userDetails.candidate_id,
+			lastName                  : "",
+			dob                       : "",
+			profilePhoto              : "",
+			profileImageUrl           : "",
+			gender                    : "male",
+			anniversaryDate           : "",	
+			maritalStatus             : "",
+			nationality               : "",
+			panCardNo                 : "",
+			adhaarCardNo              : "",
+			selectedValue             : [],
+			ageYears	              : 0,	
+			ageMonths	              : 0,	
+			ageDays	       	          : 0,
+			age                       : "",
+			inputMaritalStatus        : ["Single",,"Married", "Separated","Divorced","Widowed"],
+			inputNationality          : ["Indian","American"],
+			languagesTags	          : [],
+			languagesSuggestions	  : [],
+			inputLanguages	          : [],
 
-			imageUploaded      : true,
-			profilePicture     : "",
-
-			"imageUploaded"    : true,
+			imageUploaded             : true,
+			profilePicture            : "",
 
 		}
-		 this.style =  {
-					      chips: {
-					         backgroundColor: "#D3950A"
-					      },
-					      searchBox: {
-					        border: "1px solid #D3950A",
-					        borderTopLeftRadius: "0px",
-					        borderBottomLeftRadius: "0px",
-					        height:"34px",
-					        overflow:"auto"
-					      },
-					      multiselectContainer: {
-					      	backgroundColor: "#242931",
-					        color: "white",
-					        zIndex:"5!important"
-					      }, 
-					      inputField: {
-						     fontSize:"13.5px",
-						     marginLeft:"5px",
-						     zIndex:"5!important",
-
-						  },
-						  option: {
-						   	backgroundColor: "#242933",
-						   	zIndex:"5!important",
-						   	color: "white",
-						   	paddingTop:"5px",
-						   	paddingBottom:"5px",
-
-						  },
-						  optionContainer:{
-						  	backgroundColor: "#242933",
-						  	border: "1px solid #D3950A",
-						  	zIndex:"5!important",
-						  	height: "100px"
-						  }
-						};
+		
 	}
 	componentDidMount(){
 		Axios.get("/api/languagemaster/get/list")
 		.then(response => {
-			var languagesSuggestions =  [];
+			var languagesSuggestions     =  [];
                 response.data.map((elem,index)=>{
                     languagesSuggestions.push({id:elem._id,text:elem.language})
                 })
@@ -329,6 +290,7 @@ class BasicInfoForm extends Component{
 								profilePicture	   : this.state.profilePicture,
 								
 							}
+							console.log(formValues);
 			if(status==true){
 				Axios.patch("/api/candidatemaster/patch/updateCandidateBasicInfo",formValues)
 			 .then(response=>{
@@ -349,6 +311,7 @@ class BasicInfoForm extends Component{
 											ageYears	       : 0,	
 											ageMonths	       : 0,	
 											ageDays	       	   : 0,
+											profilePicture     : ""
 										})
 
 						this.props.history.push("/address/"+this.state.candidate_id);
@@ -613,7 +576,7 @@ class BasicInfoForm extends Component{
 									<select className="form-control inputBox" id = "nationality" 
 									 value ={this.state.nationality} name="nationality" 
 									 onChange={this.handleChange.bind(this)}>
-									  	<option disabled selected> -- Select -- </option>
+									  	<option disabled > -- Select -- </option>
 									  	{
 									  		this.state.inputNationality.length>0
 									  		?	

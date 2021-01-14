@@ -5,10 +5,12 @@
 	background-color: var(--main-bg-color );
 	color: var(--main-txt-color);
 	font-family: Montserrat-Regular;
+	text-transform: capitalize;
 
 }
 .candidateBlockWrapper{
-	height:283px;
+	min-height:283px;
+	height: auto;
 	border:2px solid var(--main-border-color);
 	border-radius:5px;
 
@@ -18,8 +20,10 @@
 
 }
 .candidateInfoBlock{
-	height:225px;
+	min-height:225px;
+	height: auto;
 	border-right:1px solid var(--main-border-color);
+	padding-bottom: 10px;
 
 }
 .salaryBlockWrapper{
@@ -31,14 +35,8 @@
 .candidateImgBlock{
 	margin-top:15px;
 	height:110px;
-
-
 }
-.candidateSkillsBlocks{
-	height:100px;
-	
 
-}
 .imageOfCandidate{
 	height:110px;
 
@@ -60,13 +58,17 @@
 	color: var(--main-heading-font-color);
 	margin-left:12px;
 	margin-bottom:3px;
-
-
+}
+.secondarySkillsHeading{
+	margin-top: 5px;
 }
 .candidateIdNumber{
 	font-size:10px;
 	color: var(--main-txt-color);
 	padding-left:5px;
+}
+.secondarySkillsHeading{
+
 }
 .postIcon{
 	font-size:10px;
@@ -75,7 +77,9 @@
 	color:var(--main-heading-font-color);
 
 }
-
+.skillsHeadingBlock{
+	margin-top: 10px;
+}
 .candListIcon{
 	height:18px;
 	font-size:10px;
@@ -96,7 +100,7 @@
 
 }
 .skillsHeading{
-	font-size:9px;
+	font-size:10px;
 	font-weight: bold;
 	color: var(--main-heading-font-color);
 	font-family: Montserrat-SemiBold;
@@ -105,17 +109,20 @@
 	font-size:6px!important;
 }
 .skillsSubHeading{
-	
 	font-size:7px;
 	margin-top:2px;
 }
 .skillsSubHeading i{
 	font-size:5px!important;
-	padding-right:5px;
+	padding-right:3px;
 }
 
-.candidateSkillsBlocks .skillsHeadingBlock{
-	padding-top:20px!important;
+.candidateSkillsBlocks{
+	min-height: 100px;
+	height: auto;
+}
+.skillsHeadingBlock{
+	padding-bottom: 10px;
 }
 .marginForSkillHeading{
 	margin-bottom:15px;
@@ -138,7 +145,7 @@
 .salaryBlockHeading{
 	font-size: 8px;
 	color: var(--main-heading-font-color);
-	padding-left:9px;
+	padding-left:15px;
 }
 .salrayBlockSubHeading{
 	color: var(--main-txt-color);
@@ -147,7 +154,6 @@
 	padding-top:2px;
 }
 .salaryBlock{
-
 	height:20px;
 	border-right:1px solid var(--main-border-color);
 }

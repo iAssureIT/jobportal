@@ -10,7 +10,7 @@ class MiddelContent extends Component{
 		super(props);
 
 		this.state={
-			candidate_id        : this.props.match.params.user_id,
+			candidate_id        : this.props.match.params.candidate_id,
 			workExperienceArry : [],
 			academicsArry      : [],
 			certificationArry  : [],
@@ -20,38 +20,39 @@ class MiddelContent extends Component{
 			inputCollege       : [],
 		}
 	}
-		componentDidMount(){
-		Axios.get("/api/universitymaster/get/list")
+	componentDidMount(){
+	Axios.get("/api/universitymaster/get/list")
+	.then(response => {
+		this.setState({inputUniversity : response.data});
+	})
+	.catch(error=>{
+		Swal.fire("Error while getting List data",error.message,'error');
+	})	
+	Axios.get("/api/collagemaster/get/list")
 		.then(response => {
-			this.setState({inputUniversity : response.data});
+			this.setState({inputCollege : response.data});
 		})
 		.catch(error=>{
 			Swal.fire("Error while getting List data",error.message,'error');
 		})	
-		Axios.get("/api/collagemaster/get/list")
-			.then(response => {
-				this.setState({inputCollege : response.data});
-			})
-			.catch(error=>{
-				Swal.fire("Error while getting List data",error.message,'error');
-			})	
 
-		Axios.get("/api/candidatemaster/get/one/"+this.state.candidate_id)
-		.then(response=>{
+	Axios.get("/api/candidatemaster/get/one/"+this.state.candidate_id)
+	.then(response=>{
 
-			 	this.setState({
+		 	this.setState({
 
-			 		workExperienceArry:response.data[0].workExperience,
-			 		academicsArry     :response.data[0].academics,
-			 		certificationArry :response.data[0].skillCertification,	
-					DegreeArray       :response.data[0].qualification,
-					classArray        :response.data[0].qualificationlevel		
-			 	})
-			 })
-			 .catch(error=>{
-			 	Swal.fire("Submit Error!",error.message,'error');
-			 })
-		}
+		 		workExperienceArry:response.data[0].workExperience,
+		 		academicsArry     :response.data[0].academics,
+		 		certificationArry :response.data[0].certifications,	
+				DegreeArray       :response.data[0].qualification,
+				classArray        :response.data[0].qualificationlevel		
+		 	})
+		 })
+		 .catch(error=>{
+		 	Swal.fire("Submit Error!",error.message,'error');
+		 })
+	}
+		
 	render(){
 		return(
 				<div className="container-fluid middelContentWrapper col-lg-12">

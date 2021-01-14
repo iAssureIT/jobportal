@@ -182,7 +182,6 @@ function insertUniversity(university, createdBy){
 exports.updateCandidateBasicInfo = (req, res, next)=>{
 	var languages   = [];
     var language_id; 
-
     processData();
         async function processData(){
         for (var i = 0 ; i < req.body.languagesTags.length; i++) {
@@ -213,6 +212,7 @@ exports.updateCandidateBasicInfo = (req, res, next)=>{
         )
 		.exec()
 				.then(data => {
+
 				if(data.nModified == 1){
                     res.status(200).json({ updated : true });
                 }else{

@@ -12,9 +12,10 @@ class CandidateList extends Component{
 		super(props);
 
 		this.state={
-			candidate_id       : this.props.match.params.candidate_id,
-			dataArry           :[],
-			skillsArry         :[],
+			candidate_id        : this.props.match.params.candidate_id,
+			dataArry            :[],
+			primarySkillsArry   :[],
+			secondarySkillsArry :[],
 		}
 	}
 		componentDidMount(){
@@ -24,8 +25,9 @@ class CandidateList extends Component{
 			 
 			 	this.setState({
 
-			 		dataArry     :response.data,
-			 		skillsArry   :response.data[0].skillCertification
+			 		dataArry            : response.data,
+			 		primarySkillsArry   : response.data[0].primarySkills,
+			 		secondarySkillsArry : response.data[0].secondarySkills
 			 	})
 			 })
 			 .catch(error=>{
@@ -87,59 +89,70 @@ class CandidateList extends Component{
 															</div>
 														</div>
 														<div className="col-lg-12 candidateSkillsBlocks">
-															<div className="">
-																<div className="skillsHeading">	
-																	Primary skllis
-																</div>
-																<div className=" marginForSkillHeading">
-																	<div className=" skillsSubHeadingWrapper">	
-																		{
+															<div className=" ">
+																<div className="col-lg-12">
+																	<div className="row">
 
-																			this.state.skillsArry.length > 0
-																			?
-																			this.state.skillsArry.map((elem,index)=>{
-																				return(
-																						<div className="col-lg-6 " key={index}>
-																							<div className="row skillsSubHeading">
-																								<i className="fa fa-square rotate45 listRoatate45" ></i>
-																									{elem.primarySkills[index]}
-																							</div>
-																						</div>
-																					);
-																			})
-																			:
-																			null
-																		}
-																		
-																		
-																		
+																		<div className="skillsHeading">	
+																			Primary skllis
+																		</div>
+																		<div className=" marginForSkillHeading">
+																			<div className=" skillsSubHeadingWrapper">	
+																				{
+
+																					this.state.primarySkillsArry.length > 0
+																					?
+																					this.state.primarySkillsArry.map((elem,index)=>{
+																						return(
+																								<div className="col-lg-6 " key={index}>
+																									<div className="row skillsSubHeading">
+																										<i className="fa fa-square rotate45 listRoatate45" ></i>
+																											{elem.skillID}
+																									</div>
+																								</div>
+																							);
+																					})
+																					:
+																					null
+																				}
+																				
+																				
+																				
+																			</div>
+																			
+																		</div>
 																	</div>
-																	
 																</div>
 															</div>
-															<div className="skillsHeadingBlock">
-																<div className="skillsHeading">	
-																	Secondary skllis
-																</div>
-																<div className=" skillsSubHeadingWrapper">	
-																	{
+															<div className="skillsHeadingBlock ">
+																<div className="col-lg-12">
+																	<div className="row">
+																		<div className="skillsHeading secondarySkillsHeading">	
+																			Secondary skllis
+																		</div>
+																		<div className=" marginForSkillHeading">
+																		<div className=" skillsSubHeadingWrapper">	
+																			{
 
-																			this.state.skillsArry.length > 0
-																			?
-																			this.state.skillsArry.map((elem,index)=>{
-																				return(
-																						<div className="col-lg-6 " key={index}>
-																							<div className="row skillsSubHeading">
-																								<i className="fa fa-square rotate45 listRoatate45" ></i>
-																									{elem.secondarySkills[index]}
-																							</div>
-																						</div>
-																					);
-																			})
-																			:
-																			null
-																		}
-																	
+																					this.state.secondarySkillsArry.length > 0
+																					?
+																					this.state.secondarySkillsArry.map((elem,index)=>{
+																						return(
+																								<div className="col-lg-6 " key={index}>
+																									<div className="row skillsSubHeading">
+																										<i className="fa fa-square rotate45 listRoatate45" ></i>
+																											{elem.skillID}
+																									</div>
+																								</div>
+																							);
+																					})
+																					:
+																					null
+																				}
+																			
+																		</div>
+																		</div>
+																	</div>
 																</div>
 															</div>
 														</div>

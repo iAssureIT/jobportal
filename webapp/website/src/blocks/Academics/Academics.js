@@ -87,7 +87,7 @@ class Academics extends Component{
 			.catch(error=>{
 				Swal.fire("Error while getting List data",error.message,'error');
 			})	
-		Axios.get("/api/collagemaster/get/list")
+		Axios.post("/api/collagemaster/get/list")
 			.then(response => {
 				
 				this.setState({inputCollege : response.data});

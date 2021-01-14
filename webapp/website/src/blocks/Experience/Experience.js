@@ -244,8 +244,26 @@ class Academics extends Component{
 		this.setState({
 			[name]:value,
 		})
+		if(name==="formDate"||name==="toDate"){
+			this.calExperience(value);
+		}
 	
 
+	}
+	calExperience(exp){
+		var value = exp.currentTarget.value;
+		var a = value.currentTarget.value;
+		var b = value.currentTarget.value;
+
+		var years = a.diff(b, 'year');
+		b.add(years, 'years');
+
+		var months = a.diff(b, 'months');
+		b.add(months, 'months');
+
+		var days = a.diff(b, 'days');
+
+		console.log(years + ' years ' + months + ' months ' + days + ' days');
 	}
 
 	handleBack(event){

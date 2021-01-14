@@ -28,18 +28,21 @@ class LeftAside extends Component{
 			district           : "",
 			state	           : "",
 			country	           : "",
-			skillsArry	       : [],
+			primarySkillsArry  : [],
+			secondarySkillsArry  : [],
 			pincode	           : 0,	
+				
 		}
 	}
 	componentDidMount(){
-
+		
 		Axios.get("/api/candidatemaster/get/one/"+this.state.candidate_id)
 		.then(response=>{
-			 
+			 console.log(response.data);
 			 	this.setState({
-			 		skillsArry        : response.data[0].skillCertification,
-			 		firstName         : response.data[0].basicInfo.firstName?response.data[0].basicInfo.firstName:"",
+			 		primarySkillsArry   : response.data[0].primarySkills,
+			 		secondarySkillsArry : response.data[0].secondarySkills,
+			 		firstName           : response.data[0].basicInfo.firstName?response.data[0].basicInfo.firstName:"",
 					middleName        : response.data[0].basicInfo.middleName?response.data[0].basicInfo.middleName:"",
 					lastName          : response.data[0].basicInfo.lastName?response.data[0].basicInfo.lastName:"",
 					mobile            : response.data[0].contact.mobile?response.data[0].contact.mobile:"",
@@ -62,6 +65,7 @@ class LeftAside extends Component{
 			 .catch(error=>{
 			 	Swal.fire("Submit Error!",error.message,'error');
 			 })
+
 		}
 	render(){
 		return(
@@ -150,21 +154,23 @@ class LeftAside extends Component{
 									<ul className="candidateSkillsUl">
 										{
 
-											this.state.skillsArry.length > 0
+											this.state.primarySkillsArry.length > 0
 											?
-											this.state.skillsArry.map((elem,index)=>{
+											this.state.primarySkillsArry.map((elem,index)=>{
 												return(
 												<li key={index}>
 													<div>
 														<i className="fa fa-square rotate45" ></i>
-															{elem.primarySkills[index]}
+															{elem.skillID}
 													</div>
 													<div className="progress candidateprogess">
-														<div className="progress-bar candidateprogessBar" role="progressbar" aria-valuenow="70"
-														  aria-valuemin="0" aria-valuemax="100" style={{width:"80%"}}>
+														<div className="progress-bar candidateprogessBar"
+														 role="progressbar" aria-valuenow="70"
+														  aria-valuemin="0" aria-valuemax="100" 
+														  style={{width:(elem.rating*20)+"%"}}>
 														    
 														 </div>	
-														 <span className="progressBarStatus ">80%</span>
+														 <span className="progressBarStatus ">{elem.rating*20+"%"}</span>
 													</div>
 												</li>
 												);
@@ -182,21 +188,24 @@ class LeftAside extends Component{
 									<ul className="candidateSkillsUl">
 										{
 
-											this.state.skillsArry.length > 0
+											this.state.secondarySkillsArry.length > 0
 											?
-											this.state.skillsArry.map((elem,index)=>{
+											this.state.secondarySkillsArry.map((elem,index)=>{
 												return(
 												<li key={index}>
 													<div>
 														<i className="fa fa-square rotate45" ></i>
-															{elem.secondarySkills[index]}
+															{elem.skillID}
 													</div>
 													<div className="progress candidateprogess">
-														<div className="progress-bar candidateprogessBar" role="progressbar" aria-valuenow="70"
-														  aria-valuemin="0" aria-valuemax="100" style={{width:"80%"}}>
-														    
+														<div className="progress-bar candidateprogessBar" 
+														 role="progressbar" aria-valuenow="70"
+														 aria-valuemin="0" aria-valuemax="100" 
+														 style={{width:(elem.rating*20)+"%"}}
+														 >
+														  
 														 </div>	
-														 <span className="progressBarStatus ">80%</span>
+														 <span className="progressBarStatus ">{elem.rating*20+"%"}</span>
 													</div>
 												</li>
 												);

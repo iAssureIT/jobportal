@@ -318,3 +318,123 @@ input::placeholder{
 
 
 /******************************************End Of React Tag Input Properties******************************************/
+/********************************************Properties Of ReactTags******************************************/
+
+div.ReactTags__tags {
+    position: relative;
+    border-bottom-right-radius: 4px;
+    border-top-right-radius: 4px;
+    border: 1px solid var(--main-border-color )!important;
+    background-color: var(--input-bg-color);
+    /*padding-bottom: 1px;*/
+}
+
+div.ReactTags__tagInput {
+    border-radius: 2px;
+    display: inline-block;
+}
+
+.ReactTags__tagInputField{
+	/*border: 1px solid var(--main-border-color) !important;*/
+	background-color: var(--input-bg-color) !important;
+}
+
+div.ReactTags__tagInput input.ReactTags__tagInputField,
+div.ReactTags__tagInput input.ReactTags__tagInputField:focus {
+    height: 34px;
+    margin-left: 5px;
+    color: #fff;
+    font-size: 12px;
+    border: none;
+    width: 100%;
+    padding: 0 4px;
+    background-color: var(--main-bg-color);
+    outline: none;
+}
+
+/* Styles for selected tags */
+div.ReactTags__selected span.ReactTags__tag {
+    background: var(--main-border-color );
+    font-size: 12px;
+    display: inline-block;
+    margin-top: 2px;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    margin: 0 5px;
+    cursor: move;
+    border-radius: 10px;
+    margin-top: 5px;
+    color: #fff;
+}
+
+div.ReactTags__selected a.ReactTags__remove {
+    color: #fff;
+    border-radius: 100%;
+    padding-left: 3px;
+    padding-right: 3px;
+    background-color: var(--main-bg-color);
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+/* Styles for suggestions */
+div.ReactTags__suggestions {
+	margin-left: 5px;
+    position: absolute;
+    z-index: 100 !important;
+    background-color: var(--main-bg-color);
+}
+
+div.ReactTags__suggestions ul {
+	width: 200px;
+    list-style-type: none;
+    box-shadow: .05em .01em .5em rgba(0,0,0,.2);
+    margin-top: 3px;
+    /*background-color: var(--main-bg-color);*/
+    border: 1px solid var(--main-border-color);
+    color: #fff !important;
+    border-radius: 4px;
+    padding-top: 5px !important;
+    padding-bottom: 5px !important;
+}
+
+div.ReactTags__suggestions li {
+    /*border-bottom: 1px solid #ddd;*/
+    padding: 5px 10px;
+    margin: 0;
+    margin-left: -40px !important;
+}
+
+div.ReactTags__suggestions li mark {
+    text-decoration: underline;
+    background: none;
+    font-weight: 600;
+    /*color: #fff !important;*/
+    color: var(--main-border-color )!important;
+}
+
+div.ReactTags__suggestions ul li.ReactTags__activeSuggestion {
+    cursor: pointer;
+    background-color: var(--main-bg-color) !important;
+    color: #fff !important;
+    /*background-color: var(--main-border-color) !important;*/
+}
+
+input:focus {
+    outline-offset: 0px !important;
+}
+
+user agent stylesheet:focus {
+    outline: -webkit-focus-ring-color auto 0px !important;
+}
+
+.primarySkillsField{
+	z-index: 3 !important;
+}
+.ReactTags__remove{
+	background: transparent;
+	border: none;
+}
+/*****************************************************End Of ReactTags Properties****************************************************/

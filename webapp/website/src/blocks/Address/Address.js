@@ -32,7 +32,7 @@ class Address extends Component{
 			area               : "",
 			city               : "",
 			district   		   : "",	
-			state              : "",
+			states             : "",
 			country	           : "",
 			pincode            : "",
 			inputAddressType   : [],
@@ -577,7 +577,7 @@ class Address extends Component{
 							<div className="row formWrapper">
 
 								<div className="col-lg-4">
-									<label htmlFor="state" className="nameTitleForm">
+									<label htmlFor="states" className="nameTitleForm">
 										State
 										<sup className="nameTitleFormStar">*</sup>
 									</label>
@@ -603,7 +603,7 @@ class Address extends Component{
 												: ''
 											}
 										</select>*/}
-										<input type="text" className="form-control inputBox" ref="states" id="states" name="states" value={this.state.states} onChange={this.handleChange}/>
+										<input type="text" className="form-control inputBox" ref="states" id="states" name="states" value={this.state.states} onChange={this.handleChange.bind(this)}/>
 													
 									</div> 
 									<span id="stateError" className="errorMsg"></span>
