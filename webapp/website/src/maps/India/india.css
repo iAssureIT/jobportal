@@ -27,7 +27,7 @@
 }
 .jammuKashmirNumber{
 	position: absolute;
-	top: 50%;
+	top: 70%;
     left: 34%;
 }
 
@@ -518,8 +518,8 @@
 
 .lakshadweep{
 	position: absolute;
-    top: 631px;
-    left: 80px;	
+    top: 664px;
+    left: 130px;
 }
 .lakshadweepText{
 	position: absolute;
@@ -534,16 +534,32 @@
 
 .dadraNagarHaveli{
 	position: absolute;
-    top: 331px;
-    left: 0px;	
+    top: 447px;
+    left: 192px;
 }
 .dadraNagarHaveliText{
 	position: absolute;
-	top: 48%;
-    left: 51%;		
+	top: 50%;
+    left: -51%;		
 }
 .dadraNagarHaveliNumber{
 	position: absolute;
-	top: 74%;
-    left: 36%;		
+	top: 150%;
+    left: -36%;		
+}
+
+.damanDiu{
+	position: absolute;
+    top: 430px;
+    left: 135px;
+}
+.damanDiuText{
+	position: absolute;
+	top: 50%;
+    left: -51%;		
+}
+.damanDiuNumber{
+	position: absolute;
+	top: 180%;
+    left: -36%;		
 }

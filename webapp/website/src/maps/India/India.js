@@ -253,7 +253,7 @@ class India extends Component{
 					</div>
 
 					<div className="andaman_nicobar classHover">
-						<img src="Maps/India/Andaman_Nicobar.png" className="img-responsive "  onMouseOver={e => (e.currentTarget.src = "/Maps/India/Andaman_Nicobar_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/India/Andaman_Nicobar.png")}/>
+						<img src="Maps/India/Andman_Nicobar.png" className="img-responsive "  onMouseOver={e => (e.currentTarget.src = "/Maps/India/Andman_Nicobar_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/India/Andman_Nicobar.png")}/>
 						<span className="andaman_nicobarText  mapTextLabel  text-capitalize">Andaman and Nicobar</span>
 						<span className="andaman_nicobarNumber mapCountLabel text-center">{this.search('andaman and nicobar')}</span>
 					</div>
@@ -264,12 +264,17 @@ class India extends Component{
 						<span className="lakshadweepNumber mapCountLabel text-center">{this.search('lakshadweep')}</span>
 					</div>
 
-					{/*<div className="dadraNagarHaveli classHover">
+					<div className="dadraNagarHaveli classHover">
 						<img src="Maps/India/Dadra_Nagar_Haveli.png" className="img-responsive "  onMouseOver={e => (e.currentTarget.src = "/Maps/India/Dadra_Nagar_Haveli_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/India/Dadra_Nagar_Haveli.png")}/>
-						<span className="dadraNagarHaveliText  mapTextLabel  text-capitalize">Dadra Nagar Haveli</span>
+						<span className="dadraNagarHaveliText  mapTextLabel  text-capitalize">D.N.H.</span>
 						<span className="dadraNagarHaveliNumber mapCountLabel text-center">{this.search('dadra nagar haveli')}</span>
-					</div>*/}
+					</div>
 
+					<div className="damanDiu classHover">
+						<img src="Maps/India/Daman_Diu.png" className="img-responsive "  onMouseOver={e => (e.currentTarget.src = "/Maps/India/Daman_Diu_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/India/Dadra_Nagar_Haveli.png")}/>
+						<span className="damanDiuText  mapTextLabel  text-capitalize">D.D.</span>
+						<span className="damanDiuNumber mapCountLabel text-center">{this.search('daman diu')}</span>
+					</div>
 
 
 				</div>

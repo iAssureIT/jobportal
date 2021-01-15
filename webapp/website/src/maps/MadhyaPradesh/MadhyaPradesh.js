@@ -24,7 +24,7 @@ export default class MadhyaPradesh extends Component{
 	render(){
 		return(
 			<div className="bodyWrapper">
-				<div className="stateWrapper" style={{width:"90%"}}>
+				<div className="stateWrapper col-lg-12"  >
 					<div className="alirajpur classHover" > 
 						<img src="/Maps/Madhya_Pradesh/Alirajpur.png" alt="Alirajpur" onMouseOver={e => (e.currentTarget.src = "/Maps/Madhya_Pradesh/Alirajpur_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Madhya_Pradesh/Alirajpur.png")}/>
 						<span className="alirajpurText mapTextLabel text-capitalize">alirajpur</span>

@@ -52,20 +52,20 @@ export default class HimachalPradesh extends Component{
 						<span className="mandiText mapTextLabel text-capitalize">Mandi</span>
 						<span className="mandiNumber mapCountLabel text-center">{this.search('mandi')}</span>
 					</div>
-					<div className="hamirpur classHover"> 
+					<div className="Hamirpur classHover"> 
 						<img src="/Maps/Himachal_Pradesh/Hamirpur.png" alt="Hamirpur" onMouseOver={e => (e.currentTarget.src = "/Maps/Himachal_Pradesh/Hamirpur_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Himachal_Pradesh/Hamirpur.png")}/>
-						<span className="hamirpurText mapTextLabel text-capitalize">Hamirpur</span>
-						<span className="hamirpurNumber mapCountLabel text-center">{this.search('hamirpur')}</span>
+						<span className="HamirpurText mapTextLabel text-capitalize">Hamirpur</span>
+						<span className="HamirpurNumber mapCountLabel text-center">{this.search('hamirpur')}</span>
 					</div>
 					<div className="una classHover"> 
 						<img src="/Maps/Himachal_Pradesh/UNA.png" alt="UNA" onMouseOver={e => (e.currentTarget.src = "/Maps/Himachal_Pradesh/UNA_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Himachal_Pradesh/UNA.png")}/>
 						<span className="unaText mapTextLabel text-capitalize">Una</span>
 						<span className="unaNumber mapCountLabel text-center">{this.search('una')}</span>
 					</div>
-					<div className="bilaspur classHover"> 
+					<div className="Bilaspur classHover"> 
 						<img src="/Maps/Himachal_Pradesh/Bilaspur.png" alt="Bilaspur" onMouseOver={e => (e.currentTarget.src = "/Maps/Himachal_Pradesh/Bilaspur_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Himachal_Pradesh/Bilaspur.png")}/>
-						<span className="bilaspurText mapTextLabel text-capitalize">Bilaspur</span>
-						<span className="bilaspurNumber mapCountLabel text-center">{this.search('bilaspur')}</span>
+						<span className="BilaspurText mapTextLabel text-capitalize">Bilaspur</span>
+						<span className="BilaspurNumber mapCountLabel text-center">{this.search('bilaspur')}</span>
 					</div>
 					<div className="solan classHover"> 
 						<img src="/Maps/Himachal_Pradesh/Solan.png" alt="Solan" onMouseOver={e => (e.currentTarget.src = "/Maps/Himachal_Pradesh/Solan_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Himachal_Pradesh/Solan.png")}/>
