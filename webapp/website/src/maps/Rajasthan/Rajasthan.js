@@ -45,10 +45,10 @@ export default class Rajasthan extends Component{
 						<span className="nagaurNumber mapCountLabel text-center">{this.search('nagaur')}</span>
 					</div>
 
-					<div className="jaipur classHover"> 
+					<div className="Jaipur classHover"> 
 						<img src="/Maps/Rajasthan/Jaipur.png" alt="Jaipur" onMouseOver={e => (e.currentTarget.src = "/Maps/Rajasthan/Jaipur_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Rajasthan/Jaipur.png")}/>
-						<span className="jaipurText mapTextLabel text-capitalize">Jaipur</span>
-						<span className="jaipurNumber mapCountLabel text-center">{this.search('jaipur')}</span>
+						<span className="JaipurText mapTextLabel text-capitalize">Jaipur</span>
+						<span className="JaipurNumber mapCountLabel text-center">{this.search('jaipur')}</span>
 					</div>
 
 					<div className="dausa classHover"> 
@@ -219,10 +219,10 @@ export default class Rajasthan extends Component{
 						<span className="dungarpurNumber mapCountLabel text-center">{this.search('dungarpur')}</span>
 					</div>
 
-					<div className="pratapgarh classHover"> 
+					<div className="Pratapgarh classHover"> 
 						<img src="/Maps/Rajasthan/Pratapgarh.png" alt="Pratapgarh" onMouseOver={e => (e.currentTarget.src = "/Maps/Rajasthan/Pratapgarh_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Rajasthan/Pratapgarh.png")}/>
-						<span className="pratapgarhText mapTextLabel text-capitalize">Pratapgarh</span>
-						<span className="pratapgarhNumber mapCountLabel text-center">{this.search('pratapgarh')}</span>
+						<span className="PratapgarhText mapTextLabel text-capitalize">Pratapgarh</span>
+						<span className="PratapgarhNumber mapCountLabel text-center">{this.search('pratapgarh')}</span>
 					</div>
 
 					<div className="banswara classHover"> 

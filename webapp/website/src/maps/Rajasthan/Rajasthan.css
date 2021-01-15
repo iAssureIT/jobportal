@@ -1,7 +1,7 @@
 .jaisalmer{
 	position: absolute;
-	top: 250px;
-	left: 0px;
+	top: 220px;
+	left: 30px;
 }
 .jaisalmerText{
 	position: absolute;
@@ -16,8 +16,8 @@
 
 .jodhpur{
 	position: absolute;
-	top: 296px;
-    left: 196px;
+	top: 266px;
+    left: 226px;
 }
 .jodhpurText{
 	position: absolute;
@@ -32,8 +32,8 @@
 
 .nagaur{
 	position: absolute;
-	top: 295px;
-    left: 308px;
+	top: 265px;
+    left: 338px;
 }
 .nagaurText{
 	position: absolute;
@@ -46,17 +46,17 @@
     left: 33%;
 }
 
-.jaipur{
+.Jaipur{
 	position: absolute;
-	top: 285px;
-    left: 464px;
+	top: 255px;
+    left: 494px;
 }
-.jaipurText{
+.JaipurText{
 	position: absolute;
 	top: 50%;
     left: 35%;
 }
-.jaipurNumber{
+.JaipurNumber{
 	position: absolute;
 	top: 60%;
     left: 43%;
@@ -64,8 +64,8 @@
 
 .dausa{
 	    position: absolute;
-    top: 344px;
-    left: 570px;
+    top: 314px;
+    left: 600px;
 }
 .dausaText{
 	position: absolute;
@@ -80,8 +80,8 @@
 
 .karauli{
 	position: absolute;
-  	top: 372px;
-    left: 596px;
+  	top: 342px;
+    left: 626px;
 }
 .karauliText{
 	position: absolute;
@@ -97,7 +97,7 @@
 .dholpur{
 	position: absolute;
   	top: 374px;
-    left: 662px;
+    left: 692px;
 }
 .dholpurText{
 	position: absolute;
@@ -112,8 +112,8 @@
 
 .bikaner{
 	position: absolute;
-    top: 166px;
-    left: 210px;
+    top: 136px;
+    left: 240px;
 }
 .bikanerText{
 	position: absolute;
@@ -128,8 +128,8 @@
 
 .sri_ganganagar{
 	position: absolute;
-    top: 57px;
-    left: 276px;
+    top: 27px;
+    left: 306px;
 }
 .sri_ganganagarText{
 	position: absolute;
@@ -144,8 +144,8 @@
 
 .hanumangarh{
 	position: absolute;
-    top: 76px;
-    left: 373px;
+    top: 46px;
+    left: 403px;
 }
 .hanumangarhText{
 	position: absolute;
@@ -160,8 +160,8 @@
 
 .churu{
 	position: absolute;
-    top: 176px;
-    left: 376px;
+    top: 146px;
+    left: 406px;
 }
 .churuText{
 	position: absolute;
@@ -176,8 +176,8 @@
 
 .jhunjhunun{
 	position: absolute;
-    top: 219px;
-    left: 478px;
+    top: 189px;
+    left: 508px;
 }
 .jhunjhununText{
 	position: absolute;
@@ -192,8 +192,8 @@
 
 .sikar{
 	position: absolute;
-    top: 249px;
-    left: 446px;
+    top: 219px;
+    left: 476px;
 }
 .sikarText{
 	position: absolute;
@@ -208,8 +208,8 @@
 
 .alwar{
 	position: absolute;
-    top: 250px;
-    left: 569px;
+    top: 220px;
+    left: 599px;
 }
 .alwarText{
 	position: absolute;
@@ -224,8 +224,8 @@
 
 .bharatpur{
 	position: absolute;
-    top: 290px;
-    left: 635px;
+    top: 260px;
+    left: 665px;
 }
 .bharatpurText{
 	position: absolute;
@@ -240,8 +240,8 @@
 
 .barmer{
 	position: absolute;
-    top: 397px;
-    left: 49px;
+    top: 367px;
+    left: 79px;
 }
 .barmerText{
 	position: absolute;
@@ -256,8 +256,8 @@
 
 .jalore{
 	position: absolute;
-    top: 468px;
-    left: 134px;
+    top: 438px;
+    left: 164px;
 }
 .jaloreText{
 	position: absolute;
@@ -272,8 +272,8 @@
 
 .pali{
 	position: absolute;
-    top: 412px;
-    left: 274px;
+    top: 382px;
+    left: 304px;
 }
 .paliText{
 	position: absolute;
@@ -288,8 +288,8 @@
 
 .ajmer{
 	position: absolute;
-    top: 365px;
-    left: 374px;
+    top: 335px;
+    left: 404px;
 }
 .ajmerText{
 	position: absolute;
@@ -304,8 +304,8 @@
 
 .tonk{
 	position: absolute;
-    top: 405px;
-    left: 481px;
+    top: 375px;
+    left: 511px;
 }
 .tonkText{
 	position: absolute;
@@ -320,8 +320,8 @@
 
 .sawai_madhopur{
 	position: absolute;
-    top: 393px;
-    left: 554px;
+    top: 363px;
+    left: 584px;
 }
 .sawai_madhopurText{
 	position: absolute;
@@ -336,8 +336,8 @@
 
 .sirohi{
 	position: absolute;
-    top: 517px;
-    left: 238px;
+    top: 487px;
+    left: 268px;
 }
 .sirohiText{
 	position: absolute;
@@ -352,8 +352,8 @@
 
 .rajsamand{
 	position: absolute;
-    top: 465px;
-    left: 321px;
+    top: 435px;
+    left: 351px;
 }
 .rajsamandText{
 	position: absolute;
@@ -368,8 +368,8 @@
 
 .bhilwara{
 	    position: absolute;
-    top: 458px;
-    left: 382px;
+    top: 428px;
+    left: 412px;
 }
 .bhilwaraText{
 	position: absolute;
@@ -384,8 +384,8 @@
 
 .bundi{
 	position: absolute;
-    top: 470px;
-    left: 490px;
+    top: 440px;
+    left: 520px;
 }
 .bundiText{
 	position: absolute;
@@ -400,8 +400,8 @@
 
 .kota{
 	position: absolute;
-    top: 475px;
-    left: 519px;
+    top: 445px;
+    left: 549px;
 }
 .kotaText{
 	position: absolute;
@@ -416,8 +416,8 @@
 
 .baran{
 	position: absolute;
-    top: 516px;
-    left: 571px;
+    top: 486px;
+    left: 601px;
 }
 .baranText{
 	position: absolute;
@@ -432,8 +432,8 @@
 
 .jhalawar{
 	position: absolute;
-    top: 567px;
-    left: 504px;
+    top: 537px;
+    left: 534px;
 }
 .jhalawarText{
 	position: absolute;
@@ -448,8 +448,8 @@
 
 .udaipur{
 	position: absolute;
-   	top: 552px;
-    left: 295px;
+   	top: 522px;
+    left: 325px;
 }
 .udaipurText{
 	position: absolute;
@@ -464,8 +464,8 @@
 
 .chittorgarh{
 	position: absolute;
-   	top: 531px;
-    left: 396px;
+   	top: 501px;
+    left: 426px;
 }
 .chittorgarhText{
 	position: absolute;
@@ -480,8 +480,8 @@
 
 .dungarpur{
 	position: absolute;
-    top: 642px;
-    left: 323px;
+    top: 612px;
+    left: 353px;
 }
 .dungarpurText{
 	position: absolute;
@@ -494,17 +494,17 @@
     left: 45%;
 }
 
-.pratapgarh{
+.Pratapgarh{
 	position: absolute;
-    top: 599px;
-    left: 405px;
+    top: 569px;
+    left: 435px;
 }
-.pratapgarhText{
+.PratapgarhText{
 	position: absolute;
 	top: 30%;
     left: 15%;
 }
-.pratapgarhNumber{
+.PratapgarhNumber{
 	position: absolute;
 	top: 45%;
     left: 45%;
@@ -512,8 +512,8 @@
 
 .banswara{
 	position: absolute;
-    top: 650px;
-    left: 373px;
+    top: 620px;
+    left: 403px;
 }
 .banswaraText{
 	position: absolute;

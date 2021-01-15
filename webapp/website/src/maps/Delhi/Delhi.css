@@ -3,8 +3,8 @@
 
 .dwarka{
 	position: absolute;
-	left: 5px;
-    top: 410px;
+	left: 30px;
+    top: 320px;
 }
 .dwarkaText{
 	position: absolute;
@@ -18,8 +18,8 @@
 }
 .newDelhi{
 	position: absolute;
-	left:  269px;
-    top: 454px;
+	left:  294px;
+    top: 364px;
 }
 .newDelhiText{
 	position: absolute;
@@ -33,8 +33,8 @@
 }
 .saket{
 	position: absolute;
-	left: 337px;
-    top: 540px;
+	left: 362px;
+    top: 450px;
 }
 .saketText{
 	position: absolute;
@@ -48,8 +48,8 @@
 }
 .defenceColony{
 	position: absolute;
-	left: 454px;
-    top: 492px;
+	left: 479px;
+    top: 402px;
 }
 .defenceColonyText{
 	position: absolute;
@@ -63,8 +63,8 @@
 }
 .preetVihar{
 	position: absolute;
-	left:516px;
-    top: 433px;
+	left:541px;
+    top: 343px;
 }
 .preetViharText{
 	position: absolute;
@@ -78,8 +78,8 @@
 }
 .shahdara{
 	position: absolute;
-	left: 517px;
-    top: 355px;
+	left: 542px;
+    top: 265px;
 }
 .shahdaraText{
 	position: absolute;
@@ -93,8 +93,8 @@
 }
 .centralDaryaganj{
 	position: absolute;
-	left: 414px;
-    top: 249px;
+	left: 439px;
+    top: 159px;
 }
 .centralDaryaganjText{
 	position: absolute;
@@ -108,8 +108,8 @@
 }
 .rajouriGarden{
 	position: absolute;
-	left: 148px;
-    top: 370px;
+	left: 173px;
+    top: 280px;
 }
 .rajouriGardenText{
 	position: absolute;
@@ -123,8 +123,8 @@
 }
 .kanjhwala{
 	position: absolute;
-	left:139px;
-    top: 210px;
+	left:164px;
+    top: 120px;
 }
 .kanjhwalaText{
 	position: absolute;
@@ -138,8 +138,8 @@
 }
 .northNarela{
 	position: absolute;
-	left: 158px;
-    top: 120px;
+	left: 183px;
+    top: 30px;
 }
 .northNarelaText{
 	position: absolute;
@@ -153,8 +153,8 @@
 }
 .northEastSeelampur{
 	position: absolute;
-	left: 463px;
-    top: 248px;
+	left: 488px;
+    top: 158px;
 }
 .northEastSeelampurText{
 	position: absolute;
