@@ -14,4 +14,4 @@ const collageSchema = mongoose.Schema({
                                 ]
 });
 
-module.exports = mongoose.model('collagemaster',collageSchema);
+module.exports = mongoose.model('collagemasters',collageSchema);

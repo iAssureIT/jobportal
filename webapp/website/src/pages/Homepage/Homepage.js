@@ -27,8 +27,14 @@ class HomePage extends Component {
     }
   }
   componentDidMount(){
-   
+    console.log("location",window.location.pathname)  
     var {mapAction} = this.props;
+    var selector = this.props.selector;
+    
+    console.log(selector)
+    selector.countryCode = "IN"; 
+    
+    //selector.stateCode = stateCode; 
 
     mapAction.filterMapData(this.props.selector);
     mapAction.setMapView("India");
@@ -71,7 +77,7 @@ class HomePage extends Component {
     }
   }
   render() {
-      
+    
     return (
       <div className="ViewBodyWrapper container-fluid">
 

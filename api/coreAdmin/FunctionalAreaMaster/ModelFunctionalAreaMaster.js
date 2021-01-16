@@ -14,4 +14,4 @@ const functionalareaSchema = mongoose.Schema({
                                 ]
 });
 
-module.exports = mongoose.model('functionalareamaster',functionalareaSchema);
+module.exports = mongoose.model('functionalareamasters',functionalareaSchema);

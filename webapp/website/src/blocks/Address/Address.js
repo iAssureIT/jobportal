@@ -62,8 +62,8 @@ class Address extends Component{
 		Axios.get("/api/candidatemaster/get/one/"+this.state.candidate_id)
 		.then(response=>{
 			 	this.setState({
-			 		addressArry    : response.data[0].address,
-			 		addressTypeArry: response.data[0].addressType
+			 		addressArry    : response.data.address,
+			 		//addressTypeArry: response.data.addressType
 
 				 })
 			 })

@@ -1,9 +1,6 @@
 import React, {Component, Suspense} from 'react';
 
 const India = React.lazy(() => import('../India/India.js'));
-//const Maharashtra = React.lazy(() => import('../Maharashtra/Maharashtra.js'));
-
-console.log("location",window.location)
 
 const MapView = () => {
 

@@ -14,4 +14,4 @@ const skillSchema = mongoose.Schema({
                                 ]
 });
 
-module.exports = mongoose.model('skillmaster',skillSchema);
+module.exports = mongoose.model('skillmasters',skillSchema);

@@ -14,4 +14,4 @@ const jobCategorySchema = mongoose.Schema({
                                 ]
 });
 
-module.exports = mongoose.model('jobcategorymaster',jobCategorySchema);
+module.exports = mongoose.model('jobcategorymasters',jobCategorySchema);

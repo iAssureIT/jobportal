@@ -3,19 +3,23 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Multiselect }     from 'multiselect-react-dropdown';
 import Axios 			   from 'axios';
 import Swal 			   from 'sweetalert2';
+import $ from 'jquery';
+import axios from 'axios';
+import swal from 'sweetalert';
 import { withRouter }	   from 'react-router-dom';
 import Moment              from 'moment';
+import IAssureTable 	   from '../../coreadmin/IAssureTable/IAssureTable.jsx';	
 import '../BasicInfoForm/BasicInfoForm.css';
 import './Certification.css';
 
 class Certification extends Component{
-	constructor(props){
+	constructor(props){ 
 		super(props);
 
 		this.state={
+			basicInfo 		 	 : [],
 			certificationArry    : [],
 			candidate_id         : this.props.match.params.candidate_id,
-			skillCertificationID : this.props.match.params.skillCertificationID,
 			certificationID      : this.props.match.params.certificationID,
 			certificationName    : "",
 			issuedBy             : "",
@@ -30,10 +34,27 @@ class Certification extends Component{
 			skills               : "",
             skills_id            : "",
             skillslist           : [],
-            isChecked            : false,
+            isPrimary            : true,
             primarySkills        :"",
             secondarySkills      :"",
-            basicArry            :"",
+
+            tableHeading 	    : 	{
+						            	skill 		: "Skill",
+						            	skillType 	: "Type",
+						            	rating 		: "Rating",
+						            	actions     : 'Action',
+	          					 	},
+			tableObjects 	    : 	{
+				paginationApply : false,
+	          	searchApply     : false,
+	          	//editUrl         : '/' + this.props.entity + "/statutory-details/" + this.props.match.params.entityID,
+	          	deleteMethod    : 'delete',
+        	  	apiLink         : '/api/candidatemaster/deleteSkill/' + this.props.match.params.candidate_id,
+	          	downloadApply   : false
+	      	},
+	      	"startRange"        : 0,
+            "limitRange"       	: 10,
+            "IdToDelete" 		: "",	
 		}
 
 		 this.style =  {
@@ -75,34 +96,17 @@ class Certification extends Component{
 			.catch(error=>{
 				Swal.fire("Error while getting List data",error.message,'error');
 			})
-			
-
-
-		Axios.get("/api/candidatemaster/get/one/"+this.state.candidate_id)
-		.then(response=>{
-			console.log(response.data)
-			 	this.setState({
-			 		basicArry    : response.data[0].basicInfo,
-
-				 })
-			 })
-			 .catch(error=>{
-			 	Swal.fire("Submit Error!",error.message,'error');
-			 })
-
+		
 		if(this.props.match.params.certificationID){
 			this.edit()
-
-			}
-			
-}
+		}			
+	}
 
 	//========== User Define Function Start ================
-	 handleChecked (){
+	 handleSwitch (){
   			this.setState({
-  				isChecked: !this.state.isChecked
+  				isPrimary: !this.state.isPrimary
   			});
-  			
     }
 	onChangeSkills(event){
         const {name,value} = event.target;
@@ -121,21 +125,82 @@ class Certification extends Component{
 		Axios.get("/api/candidatemaster/get/one/"+this.state.candidate_id)
 		.then(response=>{
 				this.setState({
-						certificationArry:response.data[0].certifications
+						basicInfo : response.data.basicInfo,
+						certificationArry : response.data.certifications
 			 	})
 			 	
 			 })
 			 .catch(error=>{
 			 	Swal.fire("Submit Error!",error.message,'error');
 			 })
+		var formValues = {candidate_id : this.state.candidate_id}		 
+		Axios.post("/api/candidatemaster/get/getCandidateSkills", formValues)
+		.then(response=>{
+			 	var id = response.data._id;
+			 	var tableData = response.data.skills.map((a, i)=>{
+                return {
+                    _id         : a._id,
+                    skill 		: a.skill_id.skill,
+	            	skillType 	: a.skillType,
+	            	rating 		: a.rating
+                }
+            	})
+            	this.setState({
+	                tableData : tableData
+	            });
+			 })
+			 .catch(error=>{
+			 	Swal.fire("Submit Error!",error.message,'error');
+			 })		 
 	}
-	edit(event){
+	deleteEntity(event){
 		event.preventDefault();
+		this.setState({IdToDelete: event.currentTarget.getAttribute('data-id')})
+		$('#deleteEntityModal').show();
+    }
+    confirmDelete(event){
+    	event.preventDefault();
+    	var candidate_id = this.props.match.params.candidate_id;
+    	var skill_id = this.state.IdToDelete;
+    	axios.delete('/api/candidatemaster/deleteSkill/' + candidate_id + "/" + skill_id)
+            .then((response)=>{
+           		if (response.data) {
+					this.setState({
+						'openForm': false,
+						'skill_id': "",
+						
+					});
+					//this.props.history.push('/' + this.state.pathname + '/statutory-details/' + entityID);
+					//this.statutoryDetails();
+					this.getData();
+           			swal({
+	                    text : "Statutory deleted successfully.",
+	                    // text : (this.state.entityType === "appCompany" ? "Organizational Settings" :this.state.entityType) +" is deleted successfully.",
+					  });
+					  $(".swal-text").css("text-transform", "capitalize");
+           		}	else{
+           			swal({
+	                    text : "Sorry,Failed to delete.",
+	                  });
+           		}
+           		$('#deleteEntityModal').hide();
+            })
+            .catch((error)=>{
+            })
+    }
+    closeModal(event){
+    	event.preventDefault();
+    	$('#deleteEntityModal').hide(); 
+    }
+	edit(){
 		
 			var candidate_id = this.state.candidate_id;
 			var certificationID   = this.state.certificationID;
 			if (certificationID) {
-				var idData ={
+				this.setState({
+					certificationToggel:!this.state.certificationToggel
+				})
+				var idData = {
 					candidate_id : this.state.candidate_id,
 					certificationID : this.state.certificationID,
 				}
@@ -143,12 +208,12 @@ class Certification extends Component{
 				.then(response=>{
 					var editData =response.data;
 				 	this.setState({
-				 		certificationName          :editData[0].skillCertification[0].certName,
-				 		issuedBy                   :editData[0].skillCertification[0].issuedBy,
-				 		certifiedOn                :Moment(editData[0].skillCertification[0].certifiedOn).format("YYYY-MM-DD"),
-				 		validity                   :Moment(editData[0].skillCertification[0].validTill).format("YYYY-MM-DD"),
-				 		rating                     :editData[0].skillCertification[0].rating,
-				 		grade                      :editData[0].skillCertification[0].gradePercent,
+				 		certificationName          :editData.certifications[0].certName,
+				 		issuedBy                   :editData.certifications[0].issuedBy,
+				 		certifiedOn                :Moment(editData.certifications[0].certifiedOn).format("YYYY-MM-DD"),
+				 		validity                   :Moment(editData.certifications[0].validTill).format("YYYY-MM-DD"),
+				 		rating                     :editData.certifications[0].rating,
+				 		grade                      :editData.certifications[0].gradePercent,
 				 		buttonText                 :"Update"
 				 	})
 				 	
@@ -296,26 +361,26 @@ class Certification extends Component{
 		var status =  this.validateForm();
 		// this.changeBlock(event);
 		if(this.state.certificationToggel===false){
-			if(this.state.isChecked===true){
+			if(this.state.isPrimary===true){
 				var formValues = {
 					                candidate_id               : this.state.candidate_id,
-					             
-					                primarySkills:[{
+					                skill: {
 					                	skill                 : this.state.skills,
+					                	skillType 			  : "primary",	
 										rating                : this.state.rating,
-										skillID               : this.state.skills_id
-					                }],					                
+										skill_id              : this.state.skills_id
+					                },					                
 							}
 							this.insetData(formValues,event);
 			}else{
 				var formValues = {
 					                candidate_id            : this.state.candidate_id,
-					               	
-					                secondarySkills 		: [{
+					                 skill: {
 					                	skill                 : this.state.skills,
+					                	skillType 			  : "secondary",	
 										rating                : this.state.rating,
-										skillID               : this.state.skills_id
-					                }]
+										skill_id              : this.state.skills_id
+					                },		
 					                	
 					                
 					                
@@ -329,16 +394,11 @@ class Certification extends Component{
 			var formValues = {
 					                candidate_id               : this.state.candidate_id,
 					                certificationID            : this.state.certificationID,
-					                
 					                	certName               : this.state.certificationName,
 										issuedBy               : this.state.issuedBy,
 										certifiedOn            : this.state.certifiedOn,
 										validTill              : this.state.validity,
-										gradePercent           : this.state.grade,
-					                
-									
-									
-									
+										gradePercent           : this.state.grade,	
 							}	
 		 if(
 		 	this.props.match.params.certificationID )
@@ -381,11 +441,11 @@ class Certification extends Component{
 			Axios.patch("/api/candidatemaster/patch/addCandidateSkill",formValues)
 			 .then(response=>{
 
-					Swal.fire("Congrats","Your skill and rating is insert Successfully","success");
+					Swal.fire("Congrats","Your skill and rating is inserted Successfully","success");
 						this.setState({
 										skills             : [],
 										rating             : "",
-										isChecked		   : false,
+										isPrimary		   : true,
 										buttonText         : "Save"
 									})
 	
@@ -472,8 +532,6 @@ class Certification extends Component{
 		return(
 				<div className="col-lg-12 ">
 					<form>
-
-					
 						<div className="row formWrapper">
 							<div className="col-lg-4 col-lg-offset-4">
 								<div className="input-group genderFeildWrapper">
@@ -504,26 +562,32 @@ class Certification extends Component{
 								<div >
 								<div className="row formWrapper">
 									
-									<div className="col-lg-1 ">
-										<div className="tooltip">Hover me
-										  <span className="tooltiptext">Tooltip text</span>
+									<div className="col-lg-3">
+										
+										<label htmlFor="skills" className="nameTitleForm">
+											Skill 
+											<sup className="nameTitleFormStar">*</sup>
+										</label>
+										<div className="input-group genderFeildWrapper">
+											<div className ={ this.state.isPrimary===true
+													 ? "genderFeild col-lg-6 genderFeildActive"
+													 : "genderFeild col-lg-6"}  
+												 id="togglePrimary" name="primaryToggel" 
+												 value="togglePrimary" onClick={this.handleSwitch.bind(this)}>
+											Primary
+											</div>
+											<div className={this.state.isPrimary === false
+															? "genderFeild col-lg-6 genderFeildActive"
+															: "genderFeild col-lg-6"} 
+												id="toogleSecondary" name="primaryToggel" 
+												value="toogleSecondary" onClick={this.handleSwitch.bind(this)}>
+											Secondary
+											</div>
 										</div>
-										
-										<div className="customCheckBox">
-											
-										
-											<label  className="">
-												<input type="checkbox"  onChange={ this.handleChecked.bind(this) }/>
-											    <span className="checkmark"></span>
-											</label>
-										</div>
-										
-										    
-										
 									</div>
 									<div className="col-lg-6">
 										<label htmlFor="skills" className="nameTitleForm">
-											Primary Skills 
+											Skill 
 											<sup className="nameTitleFormStar">*</sup>
 										</label>
 										<div className="input-group ">
@@ -546,17 +610,19 @@ class Certification extends Component{
 										<span id="skillsError" className="errorMsg"></span>
 									</div>
 
-									<div className="col-lg-4">
+									<div className="col-lg-3">
 										<label htmlFor="rating" className="nameTitleForm">How do you rate yourself  <sup className="nameTitleFormStar">*</sup></label>
 										<div className="input-group ">
-											<span className={this.state.rating=== "1"||this.state.rating=== "2"||this.state.rating=== "3"||this.state.rating=== "4"||this.state.rating=== "5"? "fa fa-star rating stars":"fa fa-star-o rating"} id="1" name="rating"  onClick={this.starClick.bind(this)}></span>
-											<span className={this.state.rating === "2"||this.state.rating=== "3"||this.state.rating=== "4"||this.state.rating=== "5"? "fa fa-star rating stars":"fa fa-star-o rating"} id="2" name="rating"  onClick={this.starClick.bind(this)}></span>
-											<span className={this.state.rating === "3"||this.state.rating=== "4"||this.state.rating=== "5"? "fa fa-star rating stars":"fa fa-star-o rating"} id="3" name="rating"  onClick={this.starClick.bind(this)}></span>
-											<span className={this.state.rating === "4" ||this.state.rating=== "5"? "fa fa-star rating stars":"fa fa-star-o rating"} id="4" name="rating"  onClick={this.starClick.bind(this)}></span>
-											<span className={this.state.rating === "5" ? "fa fa-star rating stars":"fa fa-star-o rating"} id="5" name="rating"  onClick={this.starClick.bind(this)}></span>
+											<span className={this.state.rating=== "1"||this.state.rating=== "2"||this.state.rating=== "3"||this.state.rating=== "4"||this.state.rating=== "5"? "fa fa-star rating stars":"fa fa-star-o rating"} id="1" name="rating" value="1" onClick={this.starClick.bind(this)}></span>
+											<span className={this.state.rating === "2"||this.state.rating=== "3"||this.state.rating=== "4"||this.state.rating=== "5"? "fa fa-star rating stars":"fa fa-star-o rating"} id="2" name="rating" value="2" onClick={this.starClick.bind(this)}></span>
+											<span className={this.state.rating === "3"||this.state.rating=== "4"||this.state.rating=== "5"? "fa fa-star rating stars":"fa fa-star-o rating"} id="3" name="rating" value="3" onClick={this.starClick.bind(this)}></span>
+											<span className={this.state.rating === "4" ||this.state.rating=== "5"? "fa fa-star rating stars":"fa fa-star-o rating"} id="4" name="rating" value="4" onClick={this.starClick.bind(this)}></span>
+											<span className={this.state.rating === "5" ? "fa fa-star rating stars":"fa fa-star-o rating"} id="5" name="rating" value="5" onClick={this.starClick.bind(this)}></span>
 										</div> 
 										<span id="ratingError" className="errorMsg"></span>
 									</div>
+										
+
 								</div>
 							</div>
 							:
@@ -647,7 +713,7 @@ class Certification extends Component{
 														This certificate is proudly presented to
 													</div>
 													<div className="certificateNameText1">
-														{this.state.basicArry.firstName + " " + this.state.basicArry.lastName }
+														{this.state.basicInfo.firstName + " " + this.state.basicInfo.lastName }
 													</div>
 													<div className="certificateText">
 														for
@@ -700,9 +766,16 @@ class Certification extends Component{
 									</div>
 							</div>
 							:
-							<div className="AddressWrapper col-lg-12">
-								
-							</div>
+							<div className="col-lg-12">
+										<IAssureTable 
+                                            tableHeading={this.state.tableHeading}
+                                            //twoLevelHeader={this.state.twoLevelHeader} 
+                                            dataCount={this.state.dataCount}
+                                            tableData={this.state.tableData}
+                                            getData={this.getData.bind(this)}
+                                            tableObjects={this.state.tableObjects}
+                                        />
+									</div>
 						}
 						<button className="buttonBack pull-left" onClick={this.handleBack.bind(this)}>
 						 	<FontAwesomeIcon className="backArrow" icon="arrow-left" /> 

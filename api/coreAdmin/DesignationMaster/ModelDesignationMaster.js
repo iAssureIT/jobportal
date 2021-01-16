@@ -14,4 +14,4 @@ const designationSchema = mongoose.Schema({
                                 ]
 });
 
-module.exports = mongoose.model('designationmaster',designationSchema);
+module.exports = mongoose.model('designationmasters',designationSchema);

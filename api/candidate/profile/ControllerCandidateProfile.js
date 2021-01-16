@@ -70,37 +70,20 @@ exports.getcandidate_id = (req,res,next)=>{
                     });
 }
 exports.getSingleCandidate = (req,res,next)=>{
-    //CandidateProfile.findOne({_id : req.params.candidate_id})
-    CandidateProfile.aggregate([
-        {$match:{"_id": ObjectID(req.params.candidate_id)} },
-        {$lookup:{
-                   from: "addresstypemasters",
-                   localField: "address.addressType",
-                   foreignField: "_id",
-                   as: "addressType" } 
-        },
-        {$lookup:{
-                   from: "qualificationlevelmasters",
-                   localField: "academics.qualificationlevel_id",
-                   foreignField: "_id",
-                   as: "qualificationLevel" } 
-         },   
-         {$lookup:{
-                   from: "qualificationmasters",
-                   localField: "academics.qualification_id",
-                   foreignField: "_id",
-                   as: "qualification" } 
-         },
-         {$lookup:{
-                   from: "universitymasters",
-                   localField: "academics.university_id",
-                   foreignField: "_id",
-                   as: "university" } 
-         }
-         
-         ])
-    .exec()
-    .then(data=>{
+    CandidateProfile.findOne({_id : req.params.candidate_id})
+    .populate('languagesKnown.language_id')
+    .populate('address.addressType')
+    .populate('academics.qualificationlevel_id')
+    .populate('academics.qualification_id')
+    .populate('academics.university_id')
+    
+    .exec(function (err, candidate) {
+    console.log(err)
+    if (err) return res.status(500).json({ error: err });
+    res.status(200).json(candidate);
+    // prints "The author is Ian Fleming"
+    });
+    /*.then(data=>{
         res.status(200).json(data);
     })
     .catch(err =>{
@@ -108,7 +91,7 @@ exports.getSingleCandidate = (req,res,next)=>{
         res.status(500).json({
             error: err
         });
-    });
+    });*/
 };
 function insertLanguage(language, createdBy){ 
     return new Promise(function(resolve,reject){ 
@@ -161,8 +144,7 @@ function insertQualification(qualification, createdBy){
                     });
     });
 }
-function insertUniversity(university, createdBy){ 
-    console.log("university",university)
+function insertUniversity(university, createdBy){
     return new Promise(function(resolve,reject){ 
         const universityMaster = new UniversityMaster({
                         _id                         : new mongoose.Types.ObjectId(),
@@ -397,8 +379,11 @@ exports.addCandidateAcademics = (req,res,next)=>{
 };
 
 exports.getOneCandidateAcademics = (req,res,next)=>{
-    CandidateProfile.find({"_id" : req.body.candidate_id, "academics._id":req.body.academicsID },
+    CandidateProfile.findOne({"_id" : req.body.candidate_id, "academics._id":req.body.academicsID },
         {"academics.$" : 1})
+    .populate('academics.qualificationlevel_id')
+    .populate('academics.qualification_id')
+    .populate('academics.university_id')
     .exec()
     .then(data=>{
         res.status(200).json(data);
@@ -554,68 +539,37 @@ exports.deleteExperience = (req,res,next)=>{
         });
 };
 exports.addCandidateSkill = (req,res,next)=>{
-    var primarySkills   = []
-    var secondarySkills = [];
-    var skillID; 
-    //console.log(req.body)
+    var skills   = [];
+    var skill_id; 
+    console.log(req.body)
     
     processData();
         async function processData(){
 
-            var allSkills = await fetchCandidateSkills(req.body.candidate_id);
-            if (req.body.primarySkills) {
-                for (var i = 0 ; i < req.body.primarySkills.length; i++) {
-                    skillID = req.body.primarySkills[i].skillID != "" ? req.body.primarySkills[i].skillID
-                                        : await insertSkill(req.body.primarySkills[i].skill, req.body.user_id)
-                        
-                    primarySkills.push({ "skillID" : skillID, "rating": req.body.primarySkills[i].rating })
+        skill_id = req.body.skill.skill_id != "" ? req.body.skill.skill_id
+                                : await insertSkill(req.body.skill.skill, req.body.user_id)
+                
+        skills.push({ "skill_id" : ObjectID(skill_id), "skillType" : req.body.skill.skillType, "rating": req.body.skill.rating })
+    
+            CandidateProfile.updateOne(
+                { _id: req.body.candidate_id },  
+                { 
+                    $push : {    "skills"      :  skills}
                 }
-                CandidateProfile.updateOne(
-                        { _id: req.body.candidate_id },  
-                        { 
-                            $push : {    "primarySkills"      : primarySkills }
-                        }
-                    )
-                    .exec()
-                    .then(data=>{
-                        if(data.nModified == 1){
-                            res.status(200).json({ created : true });
-                        }else{
-                            res.status(401).json({ created : false });
-                        }
-                    })
-                    .catch(err =>{
-                        console.log(err)
-                        res.status(500).json({ error: err });
-                    });
-            }
-            if (req.body.secondarySkills) {
-                for (var i = 0 ; i < req.body.secondarySkills.length; i++) {
-                    
-                    skillID = req.body.secondarySkills[i].skillID != "" ? req.body.secondarySkills[i].skillID
-                                    : await insertSkill(req.body.secondarySkills[i].skill, req.body.user_id)
-                    
-                    secondarySkills.push({ "skillID" : skillID, "rating": req.body.secondarySkills[i].rating })
+            )
+            .exec()
+            .then(data=>{
+                if(data.nModified == 1){
+                    res.status(200).json({ created : true });
+                }else{
+                    res.status(401).json({ created : false });
                 }
-                CandidateProfile.updateOne(
-                        { _id: req.body.candidate_id },  
-                        { 
-                            $push : {    "secondarySkills"      : secondarySkills }
-                        }
-                    )
-                    .exec()
-                    .then(data=>{
-                        if(data.nModified == 1){
-                            res.status(200).json({ created : true });
-                        }else{
-                            res.status(401).json({ created : false });
-                        }
-                    })
-                    .catch(err =>{
-                        console.log(err)
-                        res.status(500).json({ error: err });
-                    });
-            }
+            })
+            .catch(err =>{
+                console.log(err)
+                res.status(500).json({ error: err });
+            });
+            
     }   
 };
 
@@ -650,39 +604,26 @@ function insertSkill(skill, createdBy){
     });
 }
 exports.getCandidateSkills = (req,res,next)=>{
-    CandidateProfile.findOne({"_id" : req.body.candidate_id }, {"skills" : 1})
-        .exec()
-        .then(data=>{
-             resolve( data );
-        })
-        .catch(err =>{
-            reject(err);
-        });
+    CandidateProfile.findOne({_id : req.body.candidate_id},{"skills":1})
+    .populate('skills.skill_id')
+    
+    .exec(function (err, candidate) {
+    console.log(err)
+    if (err) return res.status(500).json({ error: err });
+    res.status(200).json(candidate);
+    // prints "The author is Ian Fleming"
+    });
+
+    /*CandidateProfile.aggregate([
+        {       $match: { "_id" : ObjectID(req.body.candidate_id) } },
+        {       $unwind:"$primarySkills"},{$unwind:"$secondarySkills"}*/
+        
 }
-exports.deletePrimarySkill = (req,res,next)=>{
+exports.deleteSkill = (req,res,next)=>{
     CandidateProfile.updateOne(
             { _id:req.params.candidate_id},  
             {
-                $pull: { 'primarySkills' : {_id:req.params.skillID}}
-            }
-        )
-        .exec()
-        .then(data=>{
-            if(data.nModified == 1){
-                res.status(200).json({ deleted : true });
-            }else{
-                res.status(401).json({ deleted : false });
-            }
-        })
-        .catch(err =>{
-            res.status(500).json({ error: err });
-        });
-};
-exports.deleteSecondarySkill = (req,res,next)=>{
-    CandidateProfile.updateOne(
-            { _id:req.params.candidate_id},  
-            {
-                $pull: { 'secondarySkills' : {_id:req.params.skillID}}
+                $pull: { 'skills' : {_id:req.params.skill_id}}
             }
         )
         .exec()
@@ -767,8 +708,9 @@ exports.addCandidateCertification = (req,res,next)=>{
         });   
 };
 exports.getOneCandidateCertification = (req,res,next)=>{
-    CandidateProfile.find({"_id" : req.body.candidate_id },
+    CandidateProfile.findOne({"_id" : req.body.candidate_id, "certifications._id":req.body.certificationID },
         {"certifications.$" : 1})
+   
     .exec()
     .then(data=>{
         res.status(200).json(data);
@@ -825,36 +767,18 @@ exports.deleteCertification = (req,res,next)=>{
         });
 };
 exports.getCandidateList = (req,res,next)=>{
-    //CandidateProfile.find({})
-    CandidateProfile.aggregate([
-        {$lookup:{
-                   from: "addresstypemasters",
-                   localField: "address.addressType",
-                   foreignField: "_id",
-                   as: "addressType" } 
-        },
-        {$lookup:{
-                   from: "qualificationlevelmasters",
-                   localField: "academics.qualificationLevel",
-                   foreignField: "_id",
-                   as: "qualificationlevel" } 
-         },   
-         {$lookup:{
-                   from: "qualificationmasters",
-                   localField: "academics.qualification",
-                   foreignField: "_id",
-                   as: "qualification" } 
-         }
-         
-         ])
-    .exec()
-    .then(data=>{
-        res.status(200).json(data);
-    })
-    .catch(err =>{
-        res.status(500).json({
-            error: err
-        });
+    CandidateProfile.find({_id : req.params.candidate_id})
+    .populate('languagesKnown.language_id')
+    .populate('address.addressType')
+    .populate('academics.qualificationlevel_id')
+    .populate('academics.qualification_id')
+    .populate('academics.university_id')
+    
+    .exec(function (err, candidate) {
+    console.log(err)
+    if (err) return res.status(500).json({ error: err });
+    res.status(200).json(candidate);
+    // prints "The author is Ian Fleming"
     });
 };
 

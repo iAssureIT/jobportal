@@ -14,4 +14,4 @@ const addressTypeSchema = mongoose.Schema({
                                 ]
 });
 
-module.exports = mongoose.model('addresstypemaster',addressTypeSchema);
+module.exports = mongoose.model('addresstypemasters',addressTypeSchema);

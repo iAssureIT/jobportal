@@ -14,4 +14,4 @@ const industrySchema = mongoose.Schema({
                                 ]
 });
 
-module.exports = mongoose.model('industryMaster',industrySchema);
+module.exports = mongoose.model('industrymasters',industrySchema);

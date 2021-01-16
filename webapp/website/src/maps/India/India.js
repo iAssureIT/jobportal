@@ -48,7 +48,7 @@ class India extends Component{
 
 		mapAction.jobCount(selector);
 		
-	    if (this.props.viewMode=="mapView") {
+	    /*if (this.props.viewMode=="mapView") {
 	      mapAction.filterMapData(this.props.selector);
 	    }
 	    if (this.props.viewMode=="functionalView") {
@@ -59,7 +59,7 @@ class India extends Component{
 	    }
 	    if (this.props.viewMode=="industrialView") {
 	      mapAction.filterIndustrialData(this.props.selector);
-	    }
+	    }*/
 		this.props.history.push("state/"+stateCode);
 	}
 	render(){

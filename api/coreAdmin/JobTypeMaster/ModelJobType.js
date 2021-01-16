@@ -14,4 +14,4 @@ const jobTypeSchema = mongoose.Schema({
                                 ]
 });
 
-module.exports = mongoose.model('jobtypemaster',jobTypeSchema);
+module.exports = mongoose.model('jobtypemasters',jobTypeSchema);

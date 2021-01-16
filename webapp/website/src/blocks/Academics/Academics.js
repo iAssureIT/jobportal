@@ -23,17 +23,14 @@ class Academics extends Component{
 			qualificationLevel  : "",
             qualificationlevel_id    : "",
             qualificationLevellist   : [],
-            qualificationLevelArray  : [],
 			qualification       : "",
             qualification_id    : "",
             qualificationlist   : [],
-            qualificationArray  : [],
 			specialization      : "",
 			college             : "",
 			university   		: "",
 			university_id    	: "",
-            universitylist   	: [],
-            universityArray     : [],		
+            universitylist   	: [],	
             addressLine1 	    : "",
 			area                : "",
 			city                : "",
@@ -108,10 +105,7 @@ class Academics extends Component{
 		.then(response=>{
 			
 			 	this.setState({
-						academics  				: response.data,
-						qualificationLevelArray : response.data[0].qualificationLevel,
-						qualificationArray 		: response.data[0].qualification,
-						universityArray			: response.data[0].university
+						academics  				: response.data.academics
 			 	})
 			 	
 			 })
@@ -131,38 +125,27 @@ class Academics extends Component{
 			.then(response=>{
 				var editData =response.data;
 				console.log(response.data)
-				var qualificationLevel = this.state.qualificationLevelArray.filter((data,index)=>{
-                    if (data._id == editData[0].academics[0].qualificationlevel_id) { return data}
-                })
-
-				var qualification = this.state.qualificationArray.filter((data,index)=>{
-                    if (data._id == editData[0].academics[0].qualification_id) { return data}
-                })
-
-                var university = this.state.universityArray.filter((data,index)=>{
-                    if (data._id == editData[0].academics[0].university_id) { return data}
-                })
-
+				
 			 	this.setState({
-			 		qualificationlevel_id  	: editData[0].academics[0].qualificationlevel_id,
-			 		qualificationLevel  	: qualificationLevel[0].qualificationLevel,	
-			 		qualification_id       	: editData[0].academics[0].qualification_id,
-			 		qualification 	  		: qualification[0].qualification,	
-			 		specialization      	: editData[0].academics[0].specialization,
-			 		university_id          	: editData[0].academics[0].university_id,
-			 		university          	: university[0].university,
-			 		addressLine1            : editData[0].academics[0].collegeSchool,
-			 		area 					: editData[0].academics[0].area,
-			 		city                	: editData[0].academics[0].cityVillage,
-			 		district 				: editData[0].academics[0].district,
-			 		states               	: editData[0].academics[0].state,
-			 		stateCode              	: editData[0].academics[0].stateCode,
-			 		country             	: editData[0].academics[0].country,
-			 		countryCode             : editData[0].academics[0].countryCode,
-			 		grade               	: editData[0].academics[0].grade,
-			 		mode                	: editData[0].academics[0].mode,
-			 		passOutYear         	: editData[0].academics[0].passOutYear,
-			 		admisionYear        	: editData[0].academics[0].admisionYear,
+			 		qualificationlevel_id  	: editData.academics[0].qualificationlevel_id,
+			 		qualificationLevel  	: editData.academics[0].qualificationlevel_id.qualificationLevel,	
+			 		qualification_id       	: editData.academics[0].qualification_id,
+			 		qualification 	  		: editData.academics[0].qualification_id.qualification,	
+			 		specialization      	: editData.academics[0].specialization,
+			 		university_id          	: editData.academics[0].university_id,
+			 		university          	: editData.academics[0].university_id.university,
+			 		addressLine1            : editData.academics[0].collegeSchool,
+			 		area 					: editData.academics[0].area,
+			 		city                	: editData.academics[0].cityVillage,
+			 		district 				: editData.academics[0].district,
+			 		states               	: editData.academics[0].state,
+			 		stateCode              	: editData.academics[0].stateCode,
+			 		country             	: editData.academics[0].country,
+			 		countryCode             : editData.academics[0].countryCode,
+			 		grade               	: editData.academics[0].grade,
+			 		mode                	: editData.academics[0].mode,
+			 		passOutYear         	: editData.academics[0].passOutYear,
+			 		admisionYear        	: editData.academics[0].admisionYear,
 			 		buttonText          	: "Update"
 			 	})
 			 	
@@ -839,21 +822,10 @@ class Academics extends Component{
 								{
 								this.state.academics.length > 0
 								?
-								this.state.academics[0].academics.map((elem,index)=>{
-									//console.log(elem)
-									//console.log(this.state.qualificationLevelArray);
-
-
-									var qualificationLevel = this.state.qualificationLevelArray.filter((data,index)=>{
-                        			if (data._id == elem.qualificationlevel_id) { return data}
-                    				})
-                    				var qualification = this.state.qualificationArray.filter((data,index)=>{
-                        			if (data._id == elem.qualification_id) { return data}
-                    				})
-                    				var university = this.state.universityArray.filter((data,index)=>{
-                        			if (data._id == elem.university_id) { return data}
-                    				})
+								this.state.academics.map((elem,index)=>{
 									
+									console.log(elem);
+
 									return(
 										<div className="col-lg-6 AddressOuterWrapper"  key={index}>
 											<div className="col-lg-12 addWrapper">
@@ -865,12 +837,12 @@ class Academics extends Component{
 														<div>
 														<div className="">
 														<div className="addLogoTextDiv" key={index}>
-															{qualificationLevel[0].qualificationLevel}<br/>
+															{elem.qualificationlevel_id.qualificationLevel}<br/>
 														</div>
 														</div>
 														
 														<div className="addLogoTextDiv" key={index}>
-															{qualification[0].qualification}
+															{elem.qualification_id.qualification}
 														</div>
 														</div>
 															
@@ -887,7 +859,7 @@ class Academics extends Component{
 																{elem.collegeSchool}
 															</div>
 															<div className="AddressBoxText">
-															{university[0].university}
+															{}
 															</div>
 															{/*<div className="AddressBoxText">
 																{elem.admisionYear} - {elem.passOutYear}

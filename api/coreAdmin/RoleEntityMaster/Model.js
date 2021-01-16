@@ -14,4 +14,4 @@ const rolesentitymasterSchema = mongoose.Schema({
                           ]
 });
 
-module.exports = mongoose.model('rolesentitymaster', rolesentitymasterSchema);
+module.exports = mongoose.model('rolesentitymasters', rolesentitymasterSchema);

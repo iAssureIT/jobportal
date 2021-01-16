@@ -27,9 +27,9 @@ class Contact extends Component{
 		.then(response=>{
 			 	this.setState({
 			 		
-					mobile         : response.data[0].contact.mobile?response.data[0].contact.mobile:"",
-					alternate      : response.data[0].contact.altMobile?response.data[0].contact.altMobile:"",
-					email          : response.data[0].contact.emailId?response.data[0].contact.emailId:"",
+					mobile         : response.data.contact.mobile?response.data.contact.mobile:"",
+					alternate      : response.data.contact.altMobile?response.data.contact.altMobile:"",
+					email          : response.data.contact.emailId?response.data.contact.emailId:"",
 
 			 	})
 			 })

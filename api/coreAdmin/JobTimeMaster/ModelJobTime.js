@@ -14,4 +14,4 @@ const jobTimeSchema = mongoose.Schema({
                                 ]
 });
 
-module.exports = mongoose.model('jobtimemaster',jobTimeSchema);
+module.exports = mongoose.model('jobtimemasters',jobTimeSchema);

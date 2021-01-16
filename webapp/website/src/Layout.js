@@ -184,7 +184,7 @@ class Layout extends Component  {
 
                                             <Route exact path="/address/:candidate_id/edit/:addressID"                  component={CandidateAddress}  />
                                             <Route exact path="/academics/:candidate_id/edit/:academicsID"              component={CandidateAcademics}  />
-                                            <Route exact path="/certification/:candidate_id/edit/:skillCertificationID" component={CandidateCertification}  />
+                                            <Route exact path="/certification/:candidate_id/edit/:certificationID"     component={CandidateCertification}  />
                                             <Route exact path="/experience/:candidate_id/edit/:workExperienceID"        component={CandidateExperience}  />
 
 

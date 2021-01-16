@@ -14,4 +14,4 @@ const qualificationSchema = mongoose.Schema({
                                 ]
 });
 
-module.exports = mongoose.model('qualificationmaster',qualificationSchema);
+module.exports = mongoose.model('qualificationmasters',qualificationSchema);

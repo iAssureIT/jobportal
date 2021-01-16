@@ -15,4 +15,4 @@ const subindustrySchema = mongoose.Schema({
                                 ]
 });
 
-module.exports = mongoose.model('subindustryMaster',subindustrySchema);
+module.exports = mongoose.model('subindustrymasters',subindustrySchema);

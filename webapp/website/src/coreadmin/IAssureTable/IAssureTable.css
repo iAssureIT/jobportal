@@ -17,8 +17,9 @@
     vertical-align: top;
 }
 .tableiAssure-striped>tbody>tr:nth-of-type(odd) {
-    background-color: #f9f9f9;
+    background-color: var(--main-bg-color) !important;
 }
+
 .tableDwld{
   font-size: 25px;
   border: 1px solid #eee;max-width: 100%;
@@ -36,14 +37,17 @@
 .iAssureITtable-bordered > thead > tr > th, .iAssureITtable-bordered > tbody > tr > th, .iAssureITtable-bordered > tfoot > tr > th, .iAssureITtable-bordered > thead > tr > td, .iAssureITtable-bordered > tbody > tr > td, .iAssureITtable-bordered > tfoot > tr > td {
     border: 1px solid #fff6;
 }
+.table-striped>tbody>tr:nth-of-type(odd){
+  background-color: var(--main-bg-color) !important;
+}
 .table-striped>tbody>tr:nth-of-type(even) {
-    background-color: #fff;
+    background-color: var(--main-bg-color) !important;
 }
 .iAssureITtable-bordered{
   border: 1px solid var(--blue-color );
 }
 .tempTableHeader{
-  background: var(--blue-color ) !important;
+  background: var(--yellow-button-color ) !important;
 }
 .paginationAdminWrap{
   text-align: center !important;
@@ -140,4 +144,26 @@
   width: 150px;
   word-break: break-word;
 
+}
+.modalWrapper{
+  border: 1px solid #D3950A;
+  border-radius: 5px;
+  margin-top: 10%;
+  background: var(--black-background)
+}
+.deletebtn {
+  background-color: #D3950A;
+  color: #fff;
+  border: 1px solid #D3950A;
+  margin-bottom: 2px;
+  font-size: 14px;
+  font-family: 'Montserrat-Bold';
+}
+.cancelbtn {
+  background-color: transparent;
+  color: #fff;
+  border: 1px solid #D3950A;
+  margin-bottom: 2px;
+  font-size: 14px;
+  font-family: 'Montserrat-Bold';
 }

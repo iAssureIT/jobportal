@@ -66,26 +66,22 @@ class BasicInfoForm extends Component{
 			 console.log("response.data",response.data);
 
 			 	var languagesTags = [];
-			 	this.state.languagesSuggestions.map((language,index)=>{
-                    response.data[0].languagesKnown.map((data,ind)=>{
-                        if (language.id == data.language_id) {
-                            languagesTags.push({ id : language.id, text : language.text })
-                        }
-                    })
+			 	response.data.languagesKnown.map((data,ind)=>{
+                    languagesTags.push({ id : data.id, text : data.language_id.language })
                 })
-			 	this.calAge(response.data[0].basicInfo.dob);
+			 	this.calAge(response.data.basicInfo.dob);
 			 	this.setState({
-			 		firstName         : response.data[0].basicInfo.firstName?response.data[0].basicInfo.firstName:"",
-					middleName        : response.data[0].basicInfo.middleName?response.data[0].basicInfo.middleName:"",
-					lastName          : response.data[0].basicInfo.lastName?response.data[0].basicInfo.lastName:"",
-					dob               : response.data[0].basicInfo.dob?Moment(response.data[0].basicInfo.dob).format("YYYY-MM-DD"):"",
-					gender            : response.data[0].basicInfo.gender?response.data[0].basicInfo.gender:"",
-					anniversaryDate   : response.data[0].basicInfo.anniversaryDate?Moment(response.data[0].basicInfo.anniversaryDate).format("YYYY-MM-DD"):"",
-					maritalStatus     : response.data[0].basicInfo.maritalStatus?response.data[0].basicInfo.maritalStatus:"",
-					nationality       : response.data[0].basicInfo.nationality?response.data[0].basicInfo.nationality:"",
-					panCardNo         : response.data[0].panCard?response.data[0].panCard:"",
-					adhaarCardNo      : response.data[0].aadhaarCard?response.data[0].aadhaarCard:"",
-					profilePicture    : response.data[0].profilePicture?response.data[0].profilePicture:"",
+			 		firstName         : response.data.basicInfo.firstName?response.data.basicInfo.firstName:"",
+					middleName        : response.data.basicInfo.middleName?response.data.basicInfo.middleName:"",
+					lastName          : response.data.basicInfo.lastName?response.data.basicInfo.lastName:"",
+					dob               : response.data.basicInfo.dob?Moment(response.data.basicInfo.dob).format("YYYY-MM-DD"):"",
+					gender            : response.data.basicInfo.gender?response.data.basicInfo.gender:"",
+					anniversaryDate   : response.data.basicInfo.anniversaryDate?Moment(response.data.basicInfo.anniversaryDate).format("YYYY-MM-DD"):"",
+					maritalStatus     : response.data.basicInfo.maritalStatus?response.data.basicInfo.maritalStatus:"",
+					nationality       : response.data.basicInfo.nationality?response.data.basicInfo.nationality:"",
+					panCardNo         : response.data.panCard?response.data.panCard:"",
+					adhaarCardNo      : response.data.aadhaarCard?response.data.aadhaarCard:"",
+					profilePicture    : response.data.profilePicture?response.data.profilePicture:"",
 					languagesTags 	  : languagesTags	
 			 	})
 			 })

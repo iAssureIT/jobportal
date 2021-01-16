@@ -14,4 +14,4 @@ const jobRoleSchema = mongoose.Schema({
                                 ]
 });
 
-module.exports = mongoose.model('jobrolemaster',jobRoleSchema);
+module.exports = mongoose.model('jobrolemasters',jobRoleSchema);

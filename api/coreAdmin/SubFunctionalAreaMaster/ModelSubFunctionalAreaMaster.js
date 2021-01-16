@@ -15,4 +15,4 @@ const subfunctionalAreaSchema = mongoose.Schema({
                                 ]
 });
 
-module.exports = mongoose.model('subfunctionalareamaster',subfunctionalAreaSchema);
+module.exports = mongoose.model('subfunctionalareamasters',subfunctionalAreaSchema);
