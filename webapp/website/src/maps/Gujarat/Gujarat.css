@@ -1,8 +1,8 @@
 
 .kachchh{
 	position: absolute;
-	left: 1px;
-	top:  50px;
+	left: 31px;
+	top:  90px;
 }
 .kachchhText{
 	position: absolute;
@@ -16,8 +16,8 @@
 }
 .banasKantha{
 	position: absolute;
-	left: 407px;
-    top: 45px;
+	left: 437px;
+    top: 85px;
 }
 .banasKanthaText{
 	position: absolute;
@@ -31,8 +31,8 @@
 }
 .patan{
 	position: absolute;
-	left: 378px;
-    top: 124px;
+	left: 408px;
+    top: 164px;
 }
 .patanText{
 	position: absolute;
@@ -46,8 +46,8 @@
 }
 .mahesana{
 	position: absolute;
-	left: 497px;
-    top: 129px;
+	left: 527px;
+    top: 169px;
 }
 .mahesanaText{
 	position: absolute;
@@ -61,8 +61,8 @@
 }
 .sabarkantha{
 	position: absolute;
-	left: 598px;
-    top: 76px;
+	left: 628px;
+    top: 116px;
 }
 .sabarkanthaText{
 	position: absolute;
@@ -76,8 +76,8 @@
 }
 .arvalli{
 	position: absolute;
-	left: 630px;
-    top: 156px;
+	left: 660px;
+    top: 196px;
 }
 .arvalliText{
 	position: absolute;
@@ -91,8 +91,8 @@
 }
 .gandhinagar{
 	position: absolute;
-	left: 550px;
-    top: 206px;
+	left: 580px;
+    top: 246px;
 }
 .gandhinagarText{
 	position: absolute;
@@ -106,8 +106,8 @@
 }
 .ahmedabad{
 	position: absolute;
-	left: 483px;
-    top: 215px;
+	left: 513px;
+    top: 255px;
 }
 .ahmedabadText{
 	position: absolute;
@@ -121,8 +121,8 @@
 }
 .surendraNagar{
 	position: absolute;
-	left: 372px;
-    top: 214px;
+	left: 402px;
+    top: 254px;
 }
 .surendraNagarText{
 	position: absolute;
@@ -136,8 +136,8 @@
 }
 .morbi{
 	position: absolute;
-	left: 297px;
-    top: 258px;
+	left: 327px;
+    top: 298px;
 }
 .morbiText{
 	position: absolute;
@@ -151,8 +151,8 @@
 }
 .jamnagar{
 	position: absolute;
-	left: 206px;
-    top: 292px;
+	left: 236px;
+    top: 332px;
 }
 .jamnagarText{
 	position: absolute;
@@ -166,8 +166,8 @@
 }
 .devbhumiDwarka{
 	position: absolute;
-	left: 103px;
-    top: 352px;
+	left: 133px;
+    top: 392px;
 }
 .devbhumiDwarkaText{
 	position: absolute;
@@ -181,8 +181,8 @@
 }
 .porbandar{
 	position: absolute;
-	left: 157px;
-    top: 432px;
+	left: 187px;
+    top: 472px;
 }
 .porbandarText{
 	position: absolute;
@@ -196,8 +196,8 @@
 }
 .rajkot{
 	position: absolute;
-	left: 246px;
-    top: 344px;
+	left: 276px;
+    top: 384px;
 }
 .rajkotText{
 	position: absolute;
@@ -211,23 +211,23 @@
 }
 .botad{
 	position: absolute;
-	left: 423px;
-    top: 373px;
+	left: 453px;
+    top: 413px;
 }
 .botadText{
 	position: absolute;
-	top: 45%;
+	top: 25%;
 	left:45%;
 }
 .botadNumber{
 	position: absolute;
-	top: 55%;
+	top: 35%;
 	left:40%;
 }
 .bhavnagar{
 	position: absolute;
-	left: 437px;
-    top: 412px;
+	left: 467px;
+    top: 452px;
 }
 .bhavnagarText{
 	position: absolute;
@@ -241,8 +241,8 @@
 }
 .amreli{
 	position: absolute;
-	left: 337px;
-    top: 424px;
+	left: 367px;
+    top: 464px;
 }
 .amreliText{
 	position: absolute;
@@ -256,8 +256,8 @@
 }
 .junagadh{
 	position: absolute;
-	left: 234px;
-    top: 472px;
+	left: 264px;
+    top: 512px;
 }
 .junagadhText{
 	position: absolute;
@@ -271,8 +271,8 @@
 }
 .girSomnath{
 	position: absolute;
-	left: 270px;
-    top: 544px;
+	left: 300px;
+    top: 584px;
 }
 .girSomnathText{
 	position: absolute;
@@ -286,8 +286,8 @@
 }
 .mahisagar{
 	position: absolute;
-	left: 665px;
-    top: 221px;
+	left: 695px;
+    top: 261px;
 }
 .mahisagarText{
 	position: absolute;
@@ -301,8 +301,8 @@
 }
 .kheda{
 	position: absolute;
-	left: 568px;
-    top: 259px;
+	left: 598px;
+    top: 299px;
 }
 .khedaText{
 	position: absolute;
@@ -316,8 +316,8 @@
 }
 .anand{
 	position: absolute;
-	left: 546px;
-    top: 325px;
+	left: 576px;
+    top: 365px;
 }
 .anandText{
 	position: absolute;
@@ -331,8 +331,8 @@
 }
 .bharuch{
 	position: absolute;
-	left: 566px;
-    top: 391px;
+	left: 596px;
+    top: 431px;
 }
 .bharuchText{
 	position: absolute;
@@ -346,8 +346,8 @@
 }
 .vadodara{
 	position: absolute;
-	left: 618px;
-    top: 314px;
+	left: 648px;
+    top: 354px;
 }
 .vadodaraText{
 	position: absolute;
@@ -361,8 +361,8 @@
 }
 .panchMahals{
 	position: absolute;
-	left: 682px;
-    top: 271px;
+	left: 712px;
+    top: 311px;
 }
 .panchMahalsText{
 	position: absolute;
@@ -376,8 +376,8 @@
 }
 .dahod{
 	position: absolute;
-	left: 740px;
-    top: 236px;
+	left: 770px;
+    top: 276px;
 }
 .dahodText{
 	position: absolute;
@@ -391,8 +391,8 @@
 }
 .chhotaUdaipur{
 	position: absolute;
-	left: 698px;
-    top: 344px;
+	left: 728px;
+    top: 384px;
 }
 .chhotaUdaipurText{
 	position: absolute;
@@ -406,8 +406,8 @@
 }
 .narmada{
 	position: absolute;
-	left: 675px;
-    top: 416px;
+	left: 705px;
+    top: 456px;
 }
 .narmadaText{
 	position: absolute;
@@ -421,8 +421,8 @@
 }
 .surat{
 	position: absolute;
-	left: 586px;
-    top: 489px;
+	left: 616px;
+    top: 529px;
 }
 .suratText{
 	position: absolute;
@@ -436,8 +436,8 @@
 }
 .tapi{
 	position: absolute;
-	left: 662px;
-    top: 487px;
+	left: 692px;
+    top: 527px;
 }
 .tapiText{
 	position: absolute;
@@ -451,8 +451,8 @@
 }
 .theDangs{
 	position: absolute;
-	left: 699px;
-    top: 567px;
+	left: 729px;
+    top: 607px;
 }
 .theDangsText{
 	position: absolute;
@@ -466,8 +466,8 @@
 }
 .navsari{
 	position: absolute;
-	left: 600px;
-    top: 559px;
+	left: 630px;
+    top: 599px;
 }
 .navsariText{
 	position: absolute;
@@ -481,8 +481,8 @@
 }
 .valsad{
 	position: absolute;
-	left: 603px;
-    top: 602px;
+	left: 633px;
+    top: 642px;
 }
 .valsadText{
 	position: absolute;

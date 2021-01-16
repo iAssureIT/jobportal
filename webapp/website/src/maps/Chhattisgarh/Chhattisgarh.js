@@ -183,12 +183,12 @@ export default class Chhattisgarh extends Component{
 						<span className="koriyaText mapTextLabel text-capitalize">Koriya</span>
 						<span className="koriyaNumber mapCountLabel text-center">{this.search('koriya')}</span>
 					</div>
-					<div className="balrampur1 classHover"> 
+					<div className="Balrampur classHover"> 
 						<img src="/Maps/Chhattisgarh/Balrampur.png"  alt="Balrampur"
 						 onMouseOver={e => (e.currentTarget.src = "/Maps/Chhattisgarh/Balrampur_.png")} 
 						 onMouseOut={e => (e.currentTarget.src = "/Maps/Chhattisgarh/Balrampur.png")}/>
-						<span className="balrampur1Text mapTextLabel text-capitalize">Balrampur</span>
-						<span className="balrampur1Number mapCountLabel text-center">{this.search('balrampur')}</span>
+						<span className="BalrampurText mapTextLabel text-capitalize">Balrampur</span>
+						<span className="BalrampurNumber mapCountLabel text-center">{this.search('balrampur')}</span>
 					</div>
 					<div className="surajpur classHover"> 
 						<img src="/Maps/Chhattisgarh/Surajpur.png"  alt="Surajpur"

@@ -1,7 +1,7 @@
 .peren{
 	position: absolute;
-	left: 10px;
-	top: 650px;
+	left: 30px;
+	top: 700px;
 }
 .perenText{
     position: absolute;
@@ -15,8 +15,8 @@
 }
 .dimapur{
 	position: absolute;
-	left: 79px;
-    top: 524px;
+	left: 99px;
+    top: 574px;
 }
 .dimapurText{
     position: absolute;
@@ -30,8 +30,8 @@
 }
 .kohima{
 	position: absolute;
-	left: 209px;
-    top: 498px;
+	left: 229px;
+    top: 548px;
 }
 .kohimaText{
     position: absolute;
@@ -45,8 +45,8 @@
 }
 .phek{
 	position: absolute;
-	left: 339px;
-    top: 561px;
+	left: 359px;
+    top: 611px;
 }
 .phekText{
     position: absolute;
@@ -60,8 +60,8 @@
 }
 .kiphireSadar{
 	position: absolute;
-	left: 468px;
-    top: 483px;
+	left: 488px;
+    top: 533px;
 }
 .kiphireSadarText{
     position: absolute;
@@ -75,8 +75,8 @@
 }
 .zunhebotoSadar{
 	position: absolute;
-	left: 333px;
-    top: 374px;
+	left: 353px;
+    top: 424px;
 }
 .zunhebotoSadarText{
     position: absolute;
@@ -90,8 +90,8 @@
 }
 .wokhaSadar{
 	position: absolute;
-	left: 227px;
-    top: 272px;
+	left: 247px;
+    top: 322px;
 }
 .wokhaSadarText{
     position: absolute;
@@ -105,8 +105,8 @@
 }
 .tuensangSadar{
 	position: absolute;
-	left: 452px;
-    top: 291px;
+	left: 472px;
+    top: 341px;
 }
 .tuensangSadarText{
     position: absolute;
@@ -120,8 +120,8 @@
 }
 .mokochung{
 	position: absolute;
-	left: 342px;
-    top: 163px;
+	left: 362px;
+    top: 213px;
 }
 .mokochungText{
     position: absolute;
@@ -135,8 +135,8 @@
 }
 .longleng{
 	position: absolute;
-	left: 479px;
-    top: 145px;
+	left: 499px;
+    top: 195px;
 }
 .longlengText{
     position: absolute;
@@ -150,8 +150,8 @@
 }
 .mon{
 	position: absolute;
-	left: 517px;
-    top: 42px;
+	left: 537px;
+    top: 92px;
 }
 .monText{
     position: absolute;

@@ -68,13 +68,13 @@ export default class Gujarat extends Component{
 					<div className="ahmedabad classHover"> 
 						<img src="/Maps/Gujarat/Ahmedabad.png"  alt="Ahmedabad" onMouseOver={e => (e.currentTarget.src = "/Maps/Gujarat/Ahmedabad_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Gujarat/Ahmedabad.png")}/>
 						<span className="fazilkaText mapTextLabel text-capitalize">Ahmedabad</span>
-						<span className="fazilkaNumber mapCountLabel text-center">{this.search('fazilka')}</span>
+						<span className="fazilkaNumber mapCountLabel text-center">{this.search('ahmedabad')}</span>
 					</div>
 
 					<div className="surendraNagar classHover"> 
 						<img src="/Maps/Gujarat/Surendra_Nagar.png"  alt="Surendra_Nagar" onMouseOver={e => (e.currentTarget.src = "/Maps/Gujarat/Surendra_Nagar_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Gujarat/Surendra_Nagar.png")}/>
-						<span className="ahmedabadText mapTextLabel text-capitalize">Ahmedabad</span>
-						<span className="ahmedabadNumber mapCountLabel text-center">{this.search('ahmedabad')}</span>
+						<span className="ahmedabadText mapTextLabel text-capitalize">Surendranagar</span>
+						<span className="ahmedabadNumber mapCountLabel text-center">{this.search('surendraNagar')}</span>
 					</div>
 
 					<div className="morbi classHover"> 

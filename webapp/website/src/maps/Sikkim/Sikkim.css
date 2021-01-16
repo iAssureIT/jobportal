@@ -1,7 +1,7 @@
 .north_sikkim{
 	position: absolute;
-    top: 10px;
-    left: 235px;
+    top: 30px;
+    left: 75px;
 }
 .north_sikkimText{
 	position: absolute;
@@ -16,8 +16,8 @@
 
 .west_sikkim{
 	position: absolute;
-    top: 313px;
-    left: 193px;
+    top: 333px;
+    left: 33px;
 }
 .west_sikkimText{
 	position: absolute;
@@ -32,8 +32,8 @@
 
 .east_sikkim{
 	position: absolute;
-    top: 412px;
-    left: 411px;
+    top: 432px;
+    left: 251px;
 }
 .east_sikkimText{
 	position: absolute;
@@ -48,8 +48,8 @@
 
 .south_sikkim{
 	position: absolute;
-    top: 354px;
-    left: 323px;
+    top: 374px;
+    left: 163px;
 }
 .south_sikkimText{
 	position: absolute;

@@ -1,7 +1,7 @@
 .kokrajhar{
 	position: absolute;
     top: 250px;
-    left:20px;
+    left:50px;
 }
 .kokrajharText{
 	position: absolute;
@@ -17,7 +17,7 @@
 .dhuburi{
 	position: absolute;
     top: 321px;
-    left: 5px;
+    left: 35px;
 }
 .dhuburiText{
 	position: absolute;
@@ -33,7 +33,7 @@
 .chirang{
 	position: absolute;
    top: 246px;
-    left: 86px;
+    left: 116px;
 }
 .chirangText{
 	position: absolute;
@@ -49,7 +49,7 @@
 .bongaigaon{
 	position: absolute;
    top: 302px;
-    left: 97px;
+    left: 127px;
 }
 .bongaigaonText{
 	position: absolute;
@@ -65,7 +65,7 @@
 .gopalpara{
 	position: absolute;
     top: 341px;
-    left: 63px;
+    left: 93px;
 }
 .gopalparaText{
 	position: absolute;
@@ -81,7 +81,7 @@
 .baksa{
 	position: absolute;
     top: 255px;
-    left: 155px;
+    left: 185px;
 }
 .baksaText{
 	position: absolute;
@@ -97,7 +97,7 @@
 .barpeta{
 	position: absolute;
     top: 283px;
-    left: 127px;
+    left: 157px;
 }
 .barpetaText{
 	position: absolute;
@@ -113,7 +113,7 @@
 .nalbari{
 	position: absolute;
     top: 294px;
-    left: 198px;
+    left: 228px;
 }
 .nalbariText{
 	position: absolute;
@@ -129,7 +129,7 @@
 .kamrup{
 	position: absolute;
     top: 300px;
-    left: 163px;
+    left: 193px;
 }
 .kamrupText{
 	position: absolute;
@@ -145,7 +145,7 @@
 .udalguri{
 	position: absolute;
     top: 242px;
-    left: 260px;
+    left: 290px;
 }
 .udalguriText{
 	position: absolute;
@@ -161,7 +161,7 @@
 .darrang{
 	position: absolute;
     top: 283px;
-    left: 268px;
+    left: 298px;
 }
 .darrangText{
 	position: absolute;
@@ -177,7 +177,7 @@
 .kamrup_metro{
 	position: absolute;
     top: 336px;
-    left: 245px;
+    left: 275px;
 }
 .kamrup_metroText{
 	position: absolute;
@@ -193,7 +193,7 @@
 .marigaon{
 	position: absolute;
     top: 300px;
-    left: 295px;
+    left: 325px;
 }
 .marigaonText{
 	position: absolute;
@@ -209,7 +209,7 @@
 .sonitpur{
 	position: absolute;
    	top: 227px;
-    left: 339px;
+    left: 369px;
 }
 .sonitpurText{
 	position: absolute;
@@ -225,7 +225,7 @@
 .biswanath{
 	position: absolute;
    	top: 232px;
-    left: 434px;
+    left: 464px;
 }
 .biswanathText{
 	position: absolute;
@@ -241,7 +241,7 @@
 .majuli{
 	position: absolute;
    	top: 204px;
-    left: 509px;
+    left: 539px;
 }
 .majuliText{
 	position: absolute;
@@ -257,7 +257,7 @@
 .nagaon{
 	position: absolute;
    	top: 275px;
-    left: 350px;
+    left: 380px;
 }
 .nagaonText{
 	position: absolute;
@@ -273,7 +273,7 @@
 .karbi_anglong_west{
 	position: absolute;
    	top: 354px;
-    left: 314px;
+    left: 344px;
 }
 .karbi_anglong_westText{
 	position: absolute;
@@ -289,7 +289,7 @@
 .hojai{
 	position: absolute;
     top: 344px;
-    left: 387px;
+    left: 417px;
 }
 .hojaiText{
 	position: absolute;
@@ -304,7 +304,7 @@
 .karbi_anglong_west{
 	position: absolute;
    	top: 354px;
-    left: 314px;
+    left: 344px;
 }
 .karbi_anglong_westText{
 	position: absolute;
@@ -319,7 +319,7 @@
 .karbi_anglong_east{
 	position: absolute;
    top: 288px;
-    left: 398px;
+    left: 428px;
 }
 .karbi_anglong_eastText{
 	position: absolute;
@@ -335,7 +335,7 @@
 .golaghat{
 	position: absolute;
    top: 257px;
-    left: 462px;
+    left: 492px;
 }
 .golaghatText{
 	position: absolute;
@@ -351,7 +351,7 @@
 .lakhimpur{
 	position: absolute;
    top: 155px;
-    left: 513px;
+    left: 543px;
 }
 .lakhimpurText{
 	position: absolute;
@@ -367,7 +367,7 @@
 .jorhat{
 	position: absolute;
     top: 237px;
-    left: 550px;
+    left: 580px;
 }
 .jorhatText{
 	position: absolute;
@@ -383,7 +383,7 @@
 .sibsagar{
 	position: absolute;
     top: 192px;
-    left: 603px;
+    left: 633px;
 }
 .sibsagarText{
 	position: absolute;
@@ -399,7 +399,7 @@
 .dibrugarh{
 	position: absolute;
     top: 129px;
-    left: 625px;
+    left: 655px;
 }
 .dibrugarhText{
 	position: absolute;
@@ -415,7 +415,7 @@
 .dhemaji{
 	    position: absolute;
     top: 97px;
-    left: 576px;
+    left: 606px;
 }
 .dhemajiText{
 	position: absolute;
@@ -431,7 +431,7 @@
 .tinsukia{
 	position: absolute;
     top: 88px;
-    left: 708px;
+    left: 738px;
 }
 .tinsukiaText{
 	position: absolute;
@@ -447,7 +447,7 @@
 .dima_hasao{
 	position: absolute;
     top: 400px;
-    left: 364px;
+    left: 394px;
 }
 .dima_hasaoText{
 	position: absolute;
@@ -463,7 +463,7 @@
 .cachar{
 	position: absolute;
     top: 498px;
-    left: 349px;
+    left: 379px;
 }
 .cacharText{
 	position: absolute;
@@ -479,7 +479,7 @@
 .hailakandi{
 	position: absolute;
     top: 534px;
-    left: 351px;
+    left: 381px;
 }
 .hailakandiText{
 	position: absolute;
@@ -495,7 +495,7 @@
 .karimganj{
 	position: absolute;
     top: 530px;
-    left: 323px;
+    left: 353px;
 }
 .karimganjText{
 	position: absolute;

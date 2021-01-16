@@ -2,7 +2,7 @@
 
 .bhabua{
 	position: absolute;
-	left: 1px;
+	left: 31px;
 	top:400px;
 }
 .bhabuaText{
@@ -17,7 +17,7 @@
 }
 .rohtas{
 	position: absolute;
-	left: 28px;
+	left: 58px;
     top: 406px;
 }
 .rohtasText{
@@ -32,7 +32,7 @@
 }
 .buxar{
 	position: absolute;
-	left: 68px;
+	left: 98px;
     top: 340px;
 }
 .buxarText{
@@ -47,7 +47,7 @@
 }
 .bhojpur{
 	position: absolute;
-	left: 145px;
+	left: 175px;
     top: 339px;
 }
 .bhojpurText{
@@ -62,7 +62,7 @@
 }
 .arwal{
 	position: absolute;
-	left: 175px;
+	left: 205px;
     top: 412px;
 }
 .arwalText{
@@ -77,7 +77,7 @@
 }
 .aurangabad{
 	position: absolute;
-	left: 109px;
+	left: 139px;
     top: 446px;
 }
 .aurangabadText{
@@ -92,7 +92,7 @@
 }
 .gaya{
 	position: absolute;
-	left: 152px;
+	left: 182px;
     top: 451px;
 }
 .gayaText{
@@ -107,7 +107,7 @@
 }
 .jehanabad{
 	position: absolute;
-	left: 232px;
+	left: 262px;
     top: 411px;
 }
 .jehanabadText{
@@ -122,7 +122,7 @@
 }
 .patna{
 	position: absolute;
-	left: 212px;
+	left: 242px;
     top: 343px;
 }
 .patnaText{
@@ -137,7 +137,7 @@
 }
 .saran{
 	position: absolute;
-	left: 165px;
+	left: 195px;
     top: 258px;
 }
 .saranText{
@@ -152,7 +152,7 @@
 }
 .siwan{
 	position: absolute;
-	left: 104px;
+	left: 134px;
     top: 235px;
 }
 .siwanText{
@@ -167,7 +167,7 @@
 }
 .gopalganj{
 	position: absolute;
-	left: 86px;
+	left: 116px;
     top: 191px;
 }
 .gopalganjText{
@@ -182,7 +182,7 @@
 }
 .bettiah{
 	position: absolute;
-	left: 72px;
+	left: 102px;
     top: 40px;
 }
 .bettiahText{
@@ -197,7 +197,7 @@
 }
 .motihari{
 	position: absolute;
-	left: 175px;
+	left: 205px;
     top: 124px;
 }
 .motihariText{
@@ -212,7 +212,7 @@
 }
 .muzaffrpur{
 	position: absolute;
-	left: 234px;
+	left: 264px;
     top: 229px;
 }
 .muzaffrpurText{
@@ -227,7 +227,7 @@
 }
 .vaishali{
 	position: absolute;
-	left: 265px;
+	left: 295px;
     top: 292px;
 }
 .vaishaliText{
@@ -242,7 +242,7 @@
 }
 .nalanda{
 	position: absolute;
-	left: 283px;
+	left: 313px;
     top: 386px;
 }
 .nalandaText{
@@ -257,7 +257,7 @@
 }
 .nawada{
 	position: absolute;
-	left: 302px;
+	left: 332px;
     top: 445px;
 }
 .nawadaText{
@@ -272,7 +272,7 @@
 }
 .jamui{
 	position: absolute;
-	left: 386px;
+	left: 416px;
     top: 436px;
 }
 .jamuiText{
@@ -287,7 +287,7 @@
 }
 .sheikpura{
 	position: absolute;
-	left: 351px;
+	left: 381px;
     top: 416px;
 }
 .sheikpuraText{
@@ -302,7 +302,7 @@
 }
 .lakhisarai{
 	position: absolute;
-	left: 396px;
+	left: 426px;
     top: 406px;
 }
 .lakhisaraiText{
@@ -317,7 +317,7 @@
 }
 .begusarai{
 	position: absolute;
-	left: 370px;
+	left: 400px;
     top: 332px;
 }
 .begusaraiText{
@@ -332,7 +332,7 @@
 }
 .samastipur{
 	position: absolute;
-	left: 337px;
+	left: 367px;
     top: 282px;
 }
 .samastipurText{
@@ -347,7 +347,7 @@
 }
 .darbhanga{
 	position: absolute;
-	left: 356px;
+	left: 386px;
     top: 219px;
 }
 .darbhangaText{
@@ -362,7 +362,7 @@
 }
 .sitamarihi{
 	position: absolute;
-	left: 288px;
+	left: 318px;
     top: 148px;
 }
 .sitamarihiText{
@@ -377,7 +377,7 @@
 }
 .sheohar{
 	position: absolute;
-	left: 280px;
+	left: 310px;
     top: 185px;
 }
 .sheoharText{
@@ -392,7 +392,7 @@
 }
 .madhubani{
 	position: absolute;
-	left: 367px;
+	left: 397px;
     top: 180px;
 }
 .madhubaniText{
@@ -407,7 +407,7 @@
 }
 .supaul{
 	position: absolute;
-	left: 467px;
+	left: 497px;
     top: 191px;
 }
 .supaulText{
@@ -422,7 +422,7 @@
 }
 .saharsa{
 	position: absolute;
-	left: 456px;
+	left: 486px;
     top: 277px;
 }
 .saharsaText{
@@ -437,7 +437,7 @@
 }
 .khagaria{
 	position: absolute;
-	left: 452px;
+	left: 482px;
     top: 339px;
 }
 .khagariaText{
@@ -452,7 +452,7 @@
 }
 .munger{
 	position: absolute;
-	left: 457px;
+	left: 487px;
     top: 377px;
 }
 .mungerText{
@@ -467,7 +467,7 @@
 }
 .banka{
 	position: absolute;
-	left: 487px;
+	left: 517px;
     top: 440px;
 }
 .bankaText{
@@ -482,7 +482,7 @@
 }
 .bhagalpur{
 	position: absolute;
-	left: 509px;
+	left: 539px;
     top: 374px;
 }
 .bhagalpurText{
@@ -497,7 +497,7 @@
 }
 .mahepura{
 	position: absolute;
-	left: 500px;
+	left: 530px;
     top: 270px;
 }
 .mahepuraText{
@@ -512,7 +512,7 @@
 }
 .araria{
 	position: absolute;
-	left: 563px;
+	left: 593px;
     top: 194px;
 }
 .arariaText{
@@ -527,7 +527,7 @@
 }
 .purnea{
 	position: absolute;
-	left: 559px;
+	left: 589px;
     top: 268px;
 }
 .purneaText{
@@ -542,7 +542,7 @@
 }
 .katihar{
 	position: absolute;
-	left: 594px;
+	left: 624px;
     top: 306px;
 }
 .katiharText{
@@ -557,7 +557,7 @@
 }
 .kishanganj{
 	position: absolute;
-	left: 652px;
+	left: 682px;
     top: 191px;
 }
 .kishanganjText{

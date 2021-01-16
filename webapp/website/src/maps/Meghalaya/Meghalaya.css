@@ -1,6 +1,6 @@
 .southWestGaroHills{
 	position: absolute;
-	left: 10px;
+	left: 30px;
 	top: 250px;
 }
 .southWestGaroHillsText{
@@ -15,7 +15,7 @@
 }
 .westGaroHills{
 	position: absolute;
-	left: 22px;
+	left: 42px;
     top: 128px;
 }
 .westGaroHillsText{
@@ -30,7 +30,7 @@
 }
 .southGaroHills{
 	position: absolute;
-	left: 116px;
+	left: 136px;
     top: 250px;
 }
 .southGaroHillsText{
@@ -45,7 +45,7 @@
 }
 .eastGaroHills{
 	position: absolute;
-	left: 135px;
+	left: 155px;
     top: 142px;
 }
 .eastGaroHillsText{
@@ -60,7 +60,7 @@
 }
 .northGaroHills{
 	position: absolute;
-	left: 135px;
+	left: 155px;
     top: 128px;
 }
 .northGaroHillsText{
@@ -75,7 +75,7 @@
 }
 .westKhasiHills{
 	position: absolute;
-	left: 243px;
+	left: 263px;
     top: 166px;
 }
 .westKhasiHillsText{
@@ -90,7 +90,7 @@
 }
 .southWestKhasiHills{
 	position: absolute;
-	left: 271px;
+	left: 291px;
     top: 264px;
 }
 .southWestKhasiHillsText{
@@ -105,7 +105,7 @@
 }
 .eastKhasiHills{
 	position: absolute;
-	left: 398px;
+	left: 418px;
     top: 204px;
 }
 .eastKhasiHillsText{
@@ -120,7 +120,7 @@
 }
 .riBhoi{
 	position: absolute;
-	left: 388px;
+	left: 408px;
     top: 87px;
 }
 .riBhoiText{
@@ -135,7 +135,7 @@
 }
 .westJaintiaHills{
 	position: absolute;
-	left: 559px;
+	left: 579px;
     top: 181px;
 }
 .westJaintiaHillsText{
@@ -150,7 +150,7 @@
 }
 .eastJaintiaHills{
 	position: absolute;
-	left: 606px;
+	left: 626px;
     top: 258px;
 }
 .eastJaintiaHillsText{

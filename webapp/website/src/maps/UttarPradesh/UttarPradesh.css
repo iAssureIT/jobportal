@@ -1,33 +1,7 @@
-@font-face {
-  font-family:'Montserrat-Bold';
-  src: url('/fonts/Montserrat/Montserrat-Bold.ttf');
-}
 
-.mapTextLabel{
-	font-size: 10px;
-	font-family: 'Montserrat-Regular';
-	color: var(--main-txt-color);
-}
-
-.mapCountLabel{
-	font-size: 11px;
-	font-family: 'Montserrat-Regular';
-	color: var(--main-txt-color);
-}
-
-.classHover:hover .mapTextLabel{
-	font-size: 12px;
-	font-family: 'Montserrat-Bold';
-	z-index: 1;
-}
-
-.classHover:hover .mapCountLabel{
-	font-size: 16px;
-	font-family: 'Montserrat-Bold';
-}
 .sharanpur{
 	position: absolute;
-	left: 0px;
+	left: 40px;
 	top:  1px;
 }
 .sharanpurText{
@@ -42,7 +16,7 @@
 }
 .shamli{
 	position: absolute;
-	left: -5px;
+	left: 35px;
     top: 96px;
 }
 .shamliText{
@@ -57,7 +31,7 @@
 }
 .muzaffarnagar{
 	position: absolute;
-	left: 37px;
+	left: 78px;
     top: 96px;
 }
 .muzaffarnagarText{
@@ -72,7 +46,7 @@
 }
 .bijnor{
 	position: absolute;
-	left: 100px;
+	left: 140px;
     top: 95px;
 }
 .bijnorText{
@@ -87,7 +61,7 @@
 }
 .satari{
 	position: absolute;
-	left: 302px;
+	left: 342px;
     top: 132px;
 }
 .satariText{
@@ -102,7 +76,7 @@
 }
 .meerut{
 	position: absolute;
-	left: 23px;
+	left: 63px;
     top: 160px;
 }
 .meerutText{
@@ -117,7 +91,7 @@
 }
 .bagpat{
 	position: absolute;
-	left: -3px;
+	left: 37px;
     top: 152px;
 }
 .bagpatText{
@@ -132,7 +106,7 @@
 }
 .ghaziabad{
 	position: absolute;
-	left: 2px;
+	left: 42px;
     top: 203px;
 }
 .ghaziabadText{
@@ -147,7 +121,7 @@
 }
 .hapur{
 	position: absolute;
-	left:  38px;
+	left:  78px;
     top: 205px;
 }
 .hapurText{
@@ -162,7 +136,7 @@
 }
 .amroha{
 	position: absolute;
-	left: 107px;
+	left: 147px;
     top: 178px;
 }
 .amrohaText{
@@ -177,7 +151,7 @@
 }
 .moradabad{
 	position: absolute;
-	left: 175px;
+	left: 215px;
     top: 159px;
 }
 .moradabadText{
@@ -192,7 +166,7 @@
 }
 .rampur{
 	position: absolute;
-	left: 197px;
+	left: 237px;
     top: 177px;
 }
 .rampurText{
@@ -207,7 +181,7 @@
 }
 .bareilly{
 	position: absolute;
-	left: 214px;
+	left: 254px;
     top: 213px;
 }
 .bareillyText{
@@ -222,7 +196,7 @@
 }
 .pilibhit{
 	position: absolute;
-	left: 292px;
+	left: 332px;
     top: 210px;
 }
 .pilibhitText{
@@ -237,7 +211,7 @@
 }
 .gautamVuddhaNagar{
 	position: absolute;
-	left: 17px;
+	left: 57px;
     top: 251px;
 }
 .gautamVuddhaNagarText{
@@ -252,7 +226,7 @@
 }
 .bulandshahr{
 	position: absolute;
-	left: 53px;
+	left: 93px;
     top: 238px;
 }
 .bulandshahrText{
@@ -267,7 +241,7 @@
 }
 .sambhal{
 	position: absolute;
-	left: 144px;
+	left: 184px;
     top: 214px;
 }
 .sambhalText{
@@ -282,7 +256,7 @@
 }
 .aligarh{
 	position: absolute;
-	left:  32px;
+	left:  42px;
     top: 308px;
 }
 .aligarhText{
@@ -297,7 +271,7 @@
 }
 .budaun{
 	position: absolute;
-	left: 127px;
+	left: 167px;
     top: 267px;
 }
 .budaunText{
@@ -312,7 +286,7 @@
 }
 .shahjahanpur{
 	position: absolute;
-	left:  258px;
+	left:  298px;
     top: 270px;
 }
 .shahjahanpurText{
@@ -327,7 +301,7 @@
 }
 .lakhimpurKheri{
 	position: absolute;
-	left: 343px;
+	left: 383px;
     top: 239px;
 }
 .lakhimpurKheriText{
@@ -342,7 +316,7 @@
 }
 .aligarh{
 	position: absolute;
-	left: 32px;
+	left: 72px;
     top: 308px;
 }
 .aligarhText{
@@ -357,7 +331,7 @@
 }
 .kasganj{
 	position: absolute;
-	left:  152px;
+	left:  192px;
     top: 329px;
 }
 .kasganjText{
@@ -372,7 +346,7 @@
 }
 .mathura{
 	position: absolute;
-	left:  7px;
+	left:  47px;
     top: 339px;
 }
 .mathuraText{
@@ -387,7 +361,7 @@
 }
 .hathras{
 	position: absolute;
-	left:  69px;
+	left:  109px;
     top: 353px;
 }
 .hathrasText{
@@ -402,7 +376,7 @@
 }
 .etah{
 	position: absolute;
-	left: 113px;
+	left: 153px;
     top: 373px;
 }
 .etahText{
@@ -417,7 +391,7 @@
 }
 .farrukhabad{
 	position: absolute;
-	left: 230px;
+	left: 270px;
     top: 373px;
 }
 .farrukhabadText{
@@ -432,7 +406,7 @@
 }
 .hardoi{
 	position: absolute;
-	left:298px;
+	left:338px;
     top: 366px;
 }
 .hardoiText{
@@ -447,7 +421,7 @@
 }
 .sitapur{
 	position: absolute;
-	left: 370px;
+	left: 410px;
     top: 350px;
 }
 .sitapurText{
@@ -462,7 +436,7 @@
 }
 .bahraich{
 	position: absolute;
-	left:462px;
+	left:502px;
     top: 278px;
 }
 .bahraichText{
@@ -477,7 +451,7 @@
 }
 .shravasti{
 	position: absolute;
-	left:531px;
+	left:571px;
     top: 342px;
 }
 .shravastiText{
@@ -492,7 +466,7 @@
 }
 .balrampur{
 	position: absolute;
-	left: 578px!important;
+	left: 618px!important;
     top: 359px!important;
 }
 .balrampurText{
@@ -507,7 +481,7 @@
 }
 .siddhathnagar{
 	position: absolute;
-	left: 629px;
+	left: 669px;
     top: 394px;
 }
 .siddhathnagarText{
@@ -522,7 +496,7 @@
 }
 .maharajhanj{
 	position: absolute;
-	left: 716px;
+	left: 756px;
     top: 398px;
 }
 .maharajhanjText{
@@ -537,7 +511,7 @@
 }
 .agra{
 	position: absolute;
-	left:  19px;
+	left:  59px;
     top: 408px;
 }
 .agraText{
@@ -552,7 +526,7 @@
 }
 .firozabad{
 	position: absolute;
-	left:  111px;
+	left:  151px;
     top: 397px;
 }
 .firozabadText{
@@ -567,7 +541,7 @@
 }
 .manipuri{
 	position: absolute;
-	left:  181px;
+	left:  221px;
     top: 402px;
 }
 .manipuriText{
@@ -582,7 +556,7 @@
 }
 .kannauj{
 	position: absolute;
-	left: 252px;
+	left: 292px;
     top: 431px;
 }
 .kannaujText{
@@ -597,7 +571,7 @@
 }
 .etawah{
 	position: absolute;
-	left: 184px;
+	left: 224px;
     top: 467px;
 }
 .etawahText{
@@ -612,7 +586,7 @@
 }
 .auraiya{
 	position: absolute;
-	left:242px;
+	left:282px;
     top: 474px;
 }
 .auraiyaText{
@@ -627,7 +601,7 @@
 }
 .kanpurDehat{
 	position: absolute;
-	left:274px;
+	left:314px;
     top: 473px;
 }
 .kanpurDehatText{
@@ -642,7 +616,7 @@
 }
 .kanpurNagar{
 	position: absolute;
-	left:327px;
+	left:367px;
     top: 470px;
 }
 .kanpurNagarText{
@@ -657,7 +631,7 @@
 }
 .unnao{
 	position: absolute;
-	left: 340px;
+	left: 380px;
     top: 462px; 
 }
 .unnaoText{
@@ -672,7 +646,7 @@
 }
 .luchknow{
 	position: absolute;
-	left: 400px;
+	left: 440px;
     top: 446px;
 }
 .luchknowText{
@@ -687,7 +661,7 @@
 }
 .barabanki{
 	position: absolute;
-	left: 445px;
+	left: 485px;
     top: 419px;
 }
 .barabankiText{
@@ -702,7 +676,7 @@
 }
 .gonda{
 	position: absolute;
-	left:520px;
+	left:560px;
     top: 411px;
 }
 .gondaText{
@@ -717,7 +691,7 @@
 }
 .basti{
 	position: absolute;
-	left:604px;
+	left:644px;
     top: 459px;
 }
 .bastiText{
@@ -732,7 +706,7 @@
 }
 .santKabirNagar{
 	position: absolute;
-	left:682px;
+	left:722px;
     top: 461px;
 }
 .santKabirNagarText{
@@ -747,7 +721,7 @@
 }
 .gorakhpur{
 	position: absolute;
-	left:712px;
+	left:752px;
     top: 465px;
 }
 .gorakhpurText{
@@ -762,7 +736,7 @@
 }
 .kushinagar{
 	position: absolute;
-	left:767px;
+	left:807px;
     top: 418px;
 }
 .kushinagarText{
@@ -777,7 +751,7 @@
 }
 .deoria{
 	position: absolute;
-	left:764px;
+	left:804px;
     top: 501px;
 }
 .deoriaText{
@@ -792,7 +766,7 @@
 }
 .jalaun{
 	position: absolute;
-	left:201px;
+	left:241px;
     top: 541px;
 }
 .jalaunText{
@@ -807,7 +781,7 @@
 }
 .hamirpur{
 	position: absolute;
-	left:254px;
+	left:294px;
     top: 580px;
 }
 .hamirpurText{
@@ -822,7 +796,7 @@
 }
 .fatehpur{
 	position: absolute;
-	left: 357px;
+	left: 397px;
     top: 571px;
 }
 .fatehpurText{
@@ -837,7 +811,7 @@
 }
 .raeBareli{
 	position: absolute;
-	left: 417px;
+	left: 457px;
     top: 522px;
 }
 .raeBareliText{
@@ -852,7 +826,7 @@
 }
 .gauriganj{
 	position: absolute;
-	left: 523px;
+	left: 563px;
     top: 514px;
 }
 .gauriganjText{
@@ -867,7 +841,7 @@
 }
 .faizabad{
 	position: absolute;
-	left:  537px;
+	left:  577px;
     top: 490px;
 }
 .faizabadText{
@@ -882,7 +856,7 @@
 }
 .ambedkarNagar{
 	position: absolute;
-	left:  611px;
+	left:  651px;
     top: 515px;
 }
 .ambedkarNagarText{
@@ -897,7 +871,7 @@
 }
 .sultanpur{
 	position: absolute;
-	left:  568px;
+	left:  608px;
     top: 539px;
 }
 .sultanpurText{
@@ -912,7 +886,7 @@
 }
 .azamgarh{
 	position: absolute;
-	left: 662px;
+	left: 702px;
     top: 541px;
 }
 .azamgarhText{
@@ -927,7 +901,7 @@
 }
 .mau{
 	position: absolute;
-	left:735px;
+	left:775px;
     top: 565px;
 }
 .mauText{
@@ -942,7 +916,7 @@
 }
 .ballia{
 	position: absolute;
-	left:793px;
+	left:833px;
     top: 573px;
 }
 .balliaText{
@@ -957,7 +931,7 @@
 }
 .jhansi{
 	position: absolute;
-	left:123px;
+	left:163px;
     top: 611px;
 }
 .jhansiText{
@@ -972,7 +946,7 @@
 }
 .hamirpur{
 	position: absolute;
-	left:254px;
+	left:294px;
     top: 579px;
 }
 .hamirpurText{
@@ -987,7 +961,7 @@
 }
 .mahoba{
 	position: absolute;
-	left:246px;
+	left:286px;
     top: 671px;
 }
 .mahobaText{
@@ -1002,7 +976,7 @@
 }
 .banda{
 	position: absolute;
-	left:349px;
+	left:389px;
     top: 617px;
 }
 .bandaText{
@@ -1017,7 +991,7 @@
 }
 .chitrakoot{
 	position: absolute;
-	left:420px;
+	left:460px;
     top: 666px;
 }
 .chitrakootText{
@@ -1032,7 +1006,7 @@
 }
 .kaushambi{
 	position: absolute;
-	left:475px!important;
+	left:515px!important;
     top: 629px!important;
 }
 .kaushambiText{
@@ -1047,7 +1021,7 @@
 }
 .pratapgarh{
 	position: absolute;
-	left:494px!important;
+	left:534px!important;
     top: 580px!important;
 }
 .pratapgarhText{
@@ -1062,7 +1036,7 @@
 }
 .jaunpur{
 	position: absolute;
-	left:594px;
+	left:634px;
     top: 576px;
 }
 .jaunpurText{
@@ -1077,7 +1051,7 @@
 }
 .allahabad{
 	position: absolute;
-	left:525px;
+	left:565px;
     top: 637px;
 }
 .allahabadText{
@@ -1092,7 +1066,7 @@
 }
 .varanasi{
 	position: absolute;
-	left:665px;
+	left:705px;
     top: 660px;
 }
 .varanasiText{
@@ -1107,7 +1081,7 @@
 }
 .santRavidasNagar{
 	position: absolute;
-	left:604px;
+	left:644px;
     top: 668px;
 }
 .santRavidasNagarText{
@@ -1122,7 +1096,7 @@
 }
 .ghazipur{
 	position: absolute;
-	left: 711px;
+	left: 751px;
     top: 615px;
 }
 .ghazipurText{
@@ -1137,7 +1111,7 @@
 }
 .chandauli{
 	position: absolute;
-	left: 706px;
+	left: 746px;
     top: 666px;
 }
 .chandauliText{
@@ -1152,7 +1126,7 @@
 }
 .mirzapur{
 	position: absolute;
-	left: 595px;
+	left: 635px;
     top: 697px;
 }
 .mirzapurText{
@@ -1167,7 +1141,7 @@
 }
 .sonbhandra{
 	position: absolute;
-	left: 647px;
+	left: 687px;
     top: 753px;
 }
 .sonbhandraText{
@@ -1182,7 +1156,7 @@
 }
 .lalitpur{
 	position: absolute;
-	left: 106px;
+	left: 146px;
     top: 712px;
 }
 .lalitpurText{
