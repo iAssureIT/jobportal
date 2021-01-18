@@ -1,8 +1,8 @@
 
 .pernem{
 	position: absolute;
-	left: 1px;
-	top:  11px;
+	left: 31px;
+	top:  31px;
 }
 .pernemText{
 	position: absolute;
@@ -16,8 +16,8 @@
 }
 .mapusa{
 	position: absolute;
-	left: 40px;
-    top: 123px;
+	left: 70px;
+    top: 143px;
 }
 .mapusaText{
 	position: absolute;
@@ -31,8 +31,8 @@
 }
 .bicholim{
 	position: absolute;
-	left: 192px;
-    top: 108px;
+	left: 222px;
+    top: 128px;
 }
 .bicholimText{
 	position: absolute;
@@ -46,8 +46,8 @@
 }
 .panjim{
 	position: absolute;
-	left: 96px;
-    top: 243px;
+	left: 126px;
+    top: 263px;
 }
 .panjimText{
 	position: absolute;
@@ -61,8 +61,8 @@
 }
 .satari{
 	position: absolute;
-	left: 302px;
-    top: 132px;
+    left: 331px;
+    top: 153px;
 }
 .satariText{
 	position: absolute;
@@ -76,8 +76,8 @@
 }
 .ponda{
 	position: absolute;
-	left: 226px;
-    top: 273px;
+	left: 256px;
+    top: 293px;
 }
 .pondaText{
 	position: absolute;
@@ -91,8 +91,8 @@
 }
 .sanguem{
 	position: absolute;
-	left: 366px;
-    top: 322px;
+	left: 396px;
+    top: 342px;
 }
 .sanguemText{
 	position: absolute;
@@ -106,8 +106,8 @@
 }
 .quepem{
 	position: absolute;
-	left: 238px;
-    top: 544px;
+	left: 268px;
+    top: 564px;
 }
 .quepemText{
 	position: absolute;
@@ -121,8 +121,8 @@
 }
 .canacona{
 	position: absolute;
-	left: 212px;
-    top: 702px;
+	left: 242px;
+    top: 722px;
 }
 .canaconaText{
 	position: absolute;
@@ -136,8 +136,8 @@
 }
 .salcette{
 	position: absolute;
-	left: 88px;
-    top: 401px;
+	left: 118px;
+    top: 421px;
 }
 .salcetteText{
 	position: absolute;

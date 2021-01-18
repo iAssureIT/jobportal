@@ -1,7 +1,7 @@
 
 .uttaraKannada{
 	position: absolute;
-	top: 493px;
+	top: 573px;
 	left: 20px;
 }
 .uttaraKannadaText{
@@ -16,7 +16,7 @@
 }
 .belagavi{
 	position: absolute;
-	top: 247px;
+	top: 327px;
     left: -4px;
 }
 .belagaviText{
@@ -26,12 +26,12 @@
 }
 .belagaviNumber{
 	position: absolute;
-	ttop: 55%;
+	top: 55%;
 	left:35%;
 }
 .vijayapura{
 	position: absolute;
-	top: 172px;
+	top: 252px;
     left: 222px;
 }
 .vijayapuraText{
@@ -46,7 +46,7 @@
 }
 .gulbarga{
 	position: absolute;
-	top: 120px;
+	top: 200px;
     left: 344px;
 }
 .gulbargaText{
@@ -61,7 +61,7 @@
 }
 .bidar{
 	position: absolute;
-	top: 11px;
+	top: 91px;
     left: 440px;
 }
 .bidarText{
@@ -76,7 +76,7 @@
 }
 .yadgir{
 	position: absolute;
-	top: 262px;
+	top: 342px;
     left: 378px;
 }
 .yadgirText{
@@ -91,7 +91,7 @@
 }
 .bagalkot{
 	position: absolute;
-	top: 290px;
+	top: 370px;
     left: 170px;
 }
 .bagalkotText{
@@ -106,7 +106,7 @@
 }
 .dharwad{
 	position: absolute;
-	top: 465px;
+	top: 545px;
     left: 122px;
 }
 .dharwadText{
@@ -121,7 +121,7 @@
 }
 .haveri{
 	position: absolute;
-	top: 553px;
+	top: 633px;
     left: 171px;
 }
 .haveriText{
@@ -136,7 +136,7 @@
 }
 .gadag{
 	position: absolute;
-	top: 438px;
+	top: 518px;
     left: 213px;
 }
 .gadagText{
@@ -151,7 +151,7 @@
 }
 .koppal{
 	position: absolute;
-	top: 417px;
+	top: 497px;
     left: 295px;
 }
 .koppalText{
@@ -166,7 +166,7 @@
 }
 .raichur{
 	position: absolute;
-	top: 326px;
+	top: 406px;
     left: 367px;
 }
 .raichurText{
@@ -181,7 +181,7 @@
 }
 .bellary{
 	position: absolute;
-	top: 449px;
+	top: 529px;
     left: 274px;
 }
 .bellaryText{
@@ -196,7 +196,7 @@
 }
 .davangere{
 	position: absolute;
-	top: 600px;
+	top: 680px;
     left: 234px;
 }
 .davangereText{
@@ -211,7 +211,7 @@
 }
 .shivamogga{
 	position: absolute;
-	top: 641px;
+	top: 721px;
     left: 102px;
 }
 .shivamoggaText{
@@ -226,7 +226,7 @@
 }
 .udupi{
 	position: absolute;
-	top: 751px;
+	top: 831px;
     left: 88px;
 }
 .udupiText{
@@ -241,7 +241,7 @@
 }
 .chikkamagaluru{
 	position: absolute;
-	top: 771px;
+	top: 851px;
     left: 178px;
 }
 .chikkamagaluruText{
@@ -256,7 +256,7 @@
 }
 .chitradurga{
 	position: absolute;
-	top: 581px;
+	top: 661px;
     left: 330px;
 }
 .chitradurgaText{
@@ -271,7 +271,7 @@
 }
 .tumakuru{
 	position: absolute;
-	top: 697px;
+	top: 777px;
     left: 380px;
 }
 .tumakuruText{
@@ -286,7 +286,7 @@
 }
 .hassan{
 	position: absolute;
-	top: 828px;
+	top: 908px;
     left: 250px;
 }
 .hassanText{
@@ -301,7 +301,7 @@
 }
 .kodagu{
 	position: absolute;
-	top: 949px;
+	top: 1029px;
     left: 214px;
 }
 .kodaguText{
@@ -316,7 +316,7 @@
 }
 .mysuru{
 	position: absolute;
-	top: 978px;
+	top: 1058px;
     left: 307px;
 }
 .mysuruText{
@@ -331,7 +331,7 @@
 }
 .chamarajanagar{
 	position: absolute;
-	top: 1039px;
+	top: 1119px;
     left: 386px;
 }
 .chamarajanagarText{
@@ -346,7 +346,7 @@
 }
 .mandya{
 	position: absolute;
-	top: 914px;
+	top: 994px;
     left: 375px;
 }
 .mandyaText{
@@ -361,7 +361,7 @@
 }
 .channapatnaRamanagara{
 	position: absolute;
-	top: 891px;
+	top: 971px;
     left: 496px;
 }
 .channapatnaRamanagaraText{
@@ -376,7 +376,7 @@
 }
 .bengaluru{
 	position: absolute;
-	top: 887px;
+	top: 967px;
     left: 528px;
 }
 .bengaluruText{
@@ -391,7 +391,7 @@
 }
 .bengaluruRural{
 	position: absolute;
-    top: 842px;
+    top: 922px;
     left: 506px;
 }
 .bengaluruRuralText{
@@ -406,7 +406,7 @@
 }
 .chikkaballapur{
 	position: absolute;
-	top: 765px;
+	top: 845px;
     left: 544px;
 }
 .chikkaballapurText{
@@ -421,7 +421,7 @@
 }
 .kolar{
 	position: absolute;
-	top: 824px;
+	top: 904px;
     left: 622px;
 }
 .kolarText{

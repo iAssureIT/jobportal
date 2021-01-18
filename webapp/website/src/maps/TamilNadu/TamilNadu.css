@@ -1,8 +1,8 @@
 
 .tiruvallur{
 	position: absolute;
-	left: 676px;
-    top: 11px;
+	left: 426px;
+    top: 31px;
 }
 .tiruvallurText{
 	position: absolute;
@@ -16,8 +16,8 @@
 }
 .chennai{
 	position: absolute;
-	left: 777px;
-    top: 47px;
+	left: 527px;
+    top: 67px;
 }
 .chennaiText{
 	position: absolute;
@@ -31,8 +31,8 @@
 }
 .kanchipuram{
 	position: absolute;
-	left: 708px;
-    top: 72px;
+	left: 458px;
+    top: 92px;
 }
 .kanchipuramText{
 	position: absolute;
@@ -46,8 +46,8 @@
 }
 .ranipet{
 	position: absolute;
-    left: 660px;
-    top: 54px;
+    left: 410px;
+    top: 74px;
 }
 .ranipetText{
 	position: absolute;
@@ -61,8 +61,8 @@
 }
 .vellore{
 	position: absolute;
-	left: 587px;
-    top: 61px;
+	left: 337px;
+    top: 81px;
 }
 .velloreText{
 	position: absolute;
@@ -76,8 +76,8 @@
 }
 .chengalpattu{
 	position: absolute;
-	left: 718px;
-    top: 88px;
+	left: 468px;
+    top: 108px;
 }
 .chengalpattuText{
 	position: absolute;
@@ -91,8 +91,8 @@
 }
 .tiruvannamalai{
 	position: absolute;
-	left: 588px;
-    top: 100px;
+	left: 338px;
+    top: 120px;
 }
 .tiruvannamalaiText{
 	position: absolute;
@@ -106,8 +106,8 @@
 }
 .tirupattur{
 	position: absolute;
-	left:  562px;
-    top: 91px;
+	left:  312px;
+    top: 111px;
 }
 .tirupatturText{
 	position: absolute;
@@ -121,8 +121,8 @@
 }
 .krishnagiri{
 	position: absolute;
-	left: 442px;
-    top: 93px;
+	left: 192px;
+    top: 113px;
 }
 .krishnagiriText{
 	position: absolute;
@@ -136,8 +136,8 @@
 }
 .viluppuram{
 	position: absolute;
-	left: 663px;
-    top: 151px;
+	left: 413px;
+    top: 171px;
 }
 .viluppuramText{
 	position: absolute;
@@ -151,8 +151,8 @@
 }
 .puducherry{
 	position: absolute;
-	left: 713px;
-    top: 202px;
+	left: 463px;
+    top: 222px;
 }
 .puducherryText{
 	position: absolute;
@@ -166,8 +166,8 @@
 }
 .kallakurichi{
 	position: absolute;
-	left:  588px;
-    top: 198px;
+	left:  338px;
+    top: 218px;
 }
 .kallakurichiText{
 	position: absolute;
@@ -181,8 +181,8 @@
 }
 .dharmapuri{
 	position: absolute;
-	left:466px;
-    top: 143px;
+	left:216px;
+    top: 163px;
 }
 .dharmapuriText{
 	position: absolute;
@@ -196,8 +196,8 @@
 }
 .cuddalore{
 	position: absolute;
-	left:618px;
-    top: 221px;
+	left:368px;
+    top: 241px;
 }
 .cuddaloreText{
 	position: absolute;
@@ -211,8 +211,8 @@
 }
 .salem{
 	position: absolute;
-	left:462px;
-    top: 210px;
+	left:212px;
+    top: 230px;
 }
 .salemText{
 	position: absolute;
@@ -226,8 +226,8 @@
 }
 .erode{
 	position: absolute;
-	left:359px;
-    top: 212px
+	left:109px;
+    top: 232px
 }
 .erodeText{
 	position: absolute;
@@ -241,8 +241,8 @@
 }
 .nilgiris{
 	position: absolute;
-	left:280px;
-    top: 241px;
+	left:30px;
+    top: 261px;
 }
 .nilgirisText{
 	position: absolute;
@@ -256,8 +256,8 @@
 }
 .mayiladuthurai{
 	position: absolute;
-	left: 698px;
-    top: 280px;
+	left: 448px;
+    top: 300px;
 }
 .mayiladuthuraiText{
 	position: absolute;
@@ -271,8 +271,8 @@
 }
 .karaikal{
 	position: absolute;
-	left:725px;
-    top: 336px;
+	left:475px;
+    top: 356px;
 }
 .karaikalText{
 	position: absolute;
@@ -286,8 +286,8 @@
 }
 .nagapattinam{
 	position: absolute;
-	left:715px;
-    top: 347px;
+	left:465px;
+    top: 367px;
 }
 .nagapattinamText{
 	position: absolute;
@@ -301,8 +301,8 @@
 }
 .tiruvarur{
 	position: absolute;
-	left: 670px;
-    top: 334px;
+	left: 420px;
+    top: 354px;
 }
 .tiruvarurText{
 	position: absolute;
@@ -316,8 +316,8 @@
 }
 .airyalur{
 	position: absolute;
-	left: 625px;
-    top: 285px;
+	left: 375px;
+    top: 305px;
 }
 .airyalurText{
 	position: absolute;
@@ -331,8 +331,8 @@
 }
 .thanjavur{
 	position: absolute;
-	left: 615px;
-    top: 314px;
+	left: 365px;
+    top: 334px;
 }
 .thanjavurText{
 	position: absolute;
@@ -346,8 +346,8 @@
 }
 .perambalur{
 	position: absolute;
-	left: 588px;
-    top: 269px;
+	left: 338px;
+    top: 289px;
 }
 .perambalurText{
 	position: absolute;
@@ -361,8 +361,8 @@
 }
 .tirchirappalli{
 	position: absolute;
-	left: 527px;
-    top: 284px;
+	left: 277px;
+    top: 304px;
 }
 .tirchirappalliText{
 	position: absolute;
@@ -376,8 +376,8 @@
 }
 .namakkal{
 	position: absolute;
-	left:468px;
-    top: 259px;
+	left:218px;
+    top: 279px;
 }
 .namakkalText{
 	position: absolute;
@@ -391,8 +391,8 @@
 }
 .karur{
 	position: absolute;
-	left:475px;
-    top: 324px;
+	left:225px;
+    top: 344px;
 }
 .karurText{
 	position: absolute;
@@ -406,8 +406,8 @@
 }
 .tiruppur{
 	position: absolute;
-	left:  381px;
-    top: 287px;
+	left:  131px;
+    top: 307px;
 }
 .tiruppurText{
 	position: absolute;
@@ -421,8 +421,8 @@
 }
 .coimbatore{
 	position: absolute;
-	left:335px;
-    top: 282px;
+	left:85px;
+    top: 302px;
 }
 .coimbatoreText{
 	position: absolute;
@@ -436,8 +436,8 @@
 }
 .pudukkottai{
 	position: absolute;
-	left: 563px;
-    top: 373px;
+	left: 313px;
+    top: 393px;
 }
 .pudukkottaiText{
 	position: absolute;
@@ -451,8 +451,8 @@
 }
 .dindigul{
 	position: absolute;
-	left: 410px;
-    top: 359px;
+	left: 160px;
+    top: 379px;
 }
 .dindigulText{
 	position: absolute;
@@ -466,8 +466,8 @@
 }
 .sivagangai{
 	position: absolute;
-	left: 519px;
-    top: 414px;
+	left: 269px;
+    top: 434px;
 }
 .sivagangaiText{
 	position: absolute;
@@ -481,8 +481,8 @@
 }
 .madurai{
 	position: absolute;
-	left: 432px;
-    top: 421px
+	left: 182px;
+    top: 441px
 }
 .maduraiText{
 	position: absolute;
@@ -496,8 +496,8 @@
 }
 .theni{
 	position: absolute;
-	left: 398px;
-    top: 435px;
+	left: 148px;
+    top: 455px;
 }
 .theniText{
 	position: absolute;
@@ -511,8 +511,8 @@
 }
 .ramanathapuram{
 	position: absolute;
-	left: 536px;
-    top: 475px;
+	left: 286px;
+    top: 495px;
 }
 .ramanathapuramText{
 	position: absolute;
@@ -526,8 +526,8 @@
 }
 .virudhunagar{
 	position: absolute;
-	left: 418px;
-    top: 494px;
+	left: 168px;
+    top: 514px;
 }
 .virudhunagarText{
 	position: absolute;
@@ -541,8 +541,8 @@
 }
 .thoothukudi{
 	position: absolute;
-	left: 458px;
-    top: 547px;
+	left: 208px;
+    top: 567px;
 }
 .thoothukudiText{
 	position: absolute;
@@ -556,8 +556,8 @@
 }
 .tenkasi{
 	position: absolute;
-	left: 394px;
-    top: 541px;
+	left: 144px;
+    top: 561px;
 }
 .tenkasiText{
 	position: absolute;
@@ -571,8 +571,8 @@
 }
 .tirunelveli{
 	position: absolute;
-	left: 396px;
-    top: 602px;
+	left: 146px;
+    top: 622px;
 }
 .tirunelveliText{
 	position: absolute;
@@ -586,8 +586,8 @@
 }
 .kanniyakumari{
 	position: absolute;
-	left:387px;
-    top: 649px;
+	left:137px;
+    top: 669px;
 }
 .kanniyakumariText{
 	position: absolute;

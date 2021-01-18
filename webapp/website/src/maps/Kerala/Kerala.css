@@ -1,8 +1,8 @@
 
 .kasaragod{
 	position: absolute;
-	left: 10px;
-	top: 10px;
+	left: 30px;
+	top: 30px;
 }
 .kasaragodText{
 	position: absolute;
@@ -16,8 +16,8 @@
 }
 .kannur{
 	position: absolute;
-	left: 65px;
-    top: 101px;
+	left: 85px;
+    top: 121px;
 }
 .kannurText{
 	position: absolute;
@@ -31,8 +31,8 @@
 }
 .wayand{
 	position: absolute;
-	left: 177px;
-    top: 160px;
+	left: 197px;
+    top: 180px;
 }
 .wayandText{
 	position: absolute;
@@ -46,8 +46,8 @@
 }
 .kozhikode{
 	position: absolute;
-	left: 133px;
-    top: 195px;
+	left: 153px;
+    top: 215px;
 }
 .kozhikodeText{
 	position: absolute;
@@ -61,8 +61,8 @@
 }
 .malappuram{
 	position: absolute;
-	left: 186px;
-    top: 250px;
+	left: 206px;
+    top: 270px;
 }
 .malappuramText{
 	position: absolute;
@@ -76,8 +76,8 @@
 }
 .palakkad{
 	position: absolute;
-	left: 225px;
-    top: 300px;
+	left: 245px;
+    top: 320px;
 }
 .palakkadText{
 	position: absolute;
@@ -91,8 +91,8 @@
 }
 .thrissur{
 	position: absolute;
-	left: 213px;
-    top: 388px;
+	left: 233px;
+    top: 408px;
 }
 .thrissurText{
 	position: absolute;
@@ -106,8 +106,8 @@
 }
 .ernakulam{
 	position: absolute;
-	left: 253px;
-    top: 479px;
+	left: 273px;
+    top: 499px;
 }
 .ernakulamText{
 	position: absolute;
@@ -121,8 +121,8 @@
 }
 .idukki{
 	position: absolute;
-	left: 336px;
-    top: 466px;
+	left: 356px;
+    top: 486px;
 }
 .idukkiText{
 	position: absolute;
@@ -136,8 +136,8 @@
 }
 .kottayam{
 	position: absolute;
-	left: 289px;
-    top: 557px;
+	left: 309px;
+    top: 577px;
 }
 .kottayamText{
 	position: absolute;
@@ -151,8 +151,8 @@
 }
 .alappuzha{
 	position: absolute;
-	left: 270px;
-    top: 554px;
+	left: 290px;
+    top: 574px;
 }
 .alappuzhaText{
 	position: absolute;
@@ -166,8 +166,8 @@
 }
 .pathanamthitta{
 	position: absolute;
-    left: 308px;
-    top: 630px;
+    left: 328px;
+    top: 650px;
 }
 .pathanamthittaText{
 	position: absolute;
@@ -181,8 +181,8 @@
 }
 .kollam{
 	position: absolute;
-	left: 310px;
-    top: 691px;
+	left: 330px;
+    top: 711px;
 }
 .kollamText{
 	position: absolute;
@@ -196,8 +196,8 @@
 }
 .thiruvanthapuram{
 	position: absolute;
-	left: 340px;
-    top: 748px;
+	left: 360px;
+    top: 768px;
 }
 .thiruvanthapuramText{
 	position: absolute;

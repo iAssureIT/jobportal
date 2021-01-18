@@ -1,8 +1,8 @@
 
 .kurnool{
 	position: absolute;
-	top: 375px;
-	left: 80px;
+	top: 415px;
+	left: 30px;
 }
 .kurnoolText{
     position: absolute;
@@ -16,8 +16,8 @@
 }
 .anantapur {
     position: absolute;
-    top: 476px;
-    left: 62px;
+    top: 516px;
+    left: 12px;
 }
 .anantapurText{
     position: absolute;
@@ -32,8 +32,8 @@
 
 .ysr {
     position: absolute;
-    top: 474px;
-    left: 181px;
+    top: 514px;
+    left: 131px;
 }
 .ysrText {
     position: absolute;
@@ -47,8 +47,8 @@
 }
 .chittoor {
     position: absolute;
-    top: 602px;
-    left: 195px;
+    top: 642px;
+    left: 145px;
 }
 .chittoorText {
     position: absolute;
@@ -62,8 +62,8 @@
 }
 .nellore {
     position: absolute;
-    top: 486px;
-    left: 288px;
+    top: 526px;
+    left: 238px;
 }
 .nelloreText {
     position: absolute;
@@ -77,8 +77,8 @@
 }
 .prakasam {
     position: absolute;
-    top: 366px;
-    left: 254px;
+    top: 406px;
+    left: 204px;
 }
 .prakasamText {
     position: absolute;
@@ -92,8 +92,8 @@
 }
 .guntur {
     position: absolute;
-    top: 310px;
-    left: 299px;
+    top: 350px;
+    left: 249px;
 }
 .gunturText {
     position: absolute;
@@ -107,8 +107,8 @@
 }
 .krishna {
     position: absolute;
-    top: 278px;
-    left: 374px;
+    top: 318px;
+    left: 324px;
 }
 .krishnaText {
     position: absolute;
@@ -122,8 +122,8 @@
 }
 .westGodawari {
     position: absolute;
-    top: 243px;
-    left: 458px;
+    top: 283px;
+    left: 408px;
 }
 .westGodawariText {
     position: absolute;
@@ -137,8 +137,8 @@
 }
 .eastGodawari {
     position: absolute;
-    top: 178px;
-    left: 519px;
+    top: 218px;
+    left: 469px;
 }
 .eastGodawariText {
     position: absolute;
@@ -152,8 +152,8 @@
 }
 .vishakhapatnam {
     position: absolute;
-    top: 126px;
-    left: 554px;
+    top: 166px;
+    left: 504px;
 }
 .vishakhapatnamText {
     position: absolute;
@@ -167,8 +167,8 @@
 }
 .vizianagaram {
     position: absolute;
-    top: 58px;
-    left: 654px;
+    top: 98px;
+    left: 604px;
 }
 .vizianagaramText {
     position: absolute;
@@ -182,8 +182,8 @@
 }
 .srikakulam {
     position: absolute;
-    top: 56px;
-    left: 705px;
+    top: 96px;
+    left: 655px;
 }
 .srikakulamText {
     position: absolute;

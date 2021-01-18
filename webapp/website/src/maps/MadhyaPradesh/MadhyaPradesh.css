@@ -2,7 +2,7 @@
 .alirajpur{
 	position: absolute;
 	left: 10px;
-    top: 700px;
+    top: 550px;
 }
 .alirajpurText{
     position: absolute;
@@ -17,7 +17,7 @@
 .jhabua{
 	position: absolute;
 	left: 45px;
-    top: 624px;
+    top: 574px;
 }
 .jhabuaText{
     position: absolute;
@@ -32,7 +32,7 @@
 .ratlam{
 	position: absolute;
 	left: 69px;
-    top: 535px;
+    top: 485px;
 }
 .ratlamText{
     position: absolute;
@@ -47,7 +47,7 @@
 .mandsaur{
 	position: absolute;
 	left: 112px;
-    top: 425px;
+    top: 375px;
 }
 .mandsaurText{
     position: absolute;
@@ -62,7 +62,7 @@
 .neemuch{
 	position: absolute;
 	left: 91px;
-    top: 389px;
+    top: 339px;
 }
 .neemuchText{
     position: absolute;
@@ -77,7 +77,7 @@
 .barwani{
 	position: absolute;
 	left: 57px;
-    top: 766px;
+    top: 716px;
 }
 .barwaniText{
     position: absolute;
@@ -92,7 +92,7 @@
 .khargone{
 	position: absolute;
 	    left: 157px;
-    top: 711px;
+    top: 661px;
 }
 .khargoneText{
     position: absolute;
@@ -107,7 +107,7 @@
 .burhanpur{
 	position: absolute;
 	left: 254px;
-    top: 836px;
+    top: 786px;
 }
 .burhanpurText{
     position: absolute;
@@ -122,7 +122,7 @@
 .khandwa{
 	position: absolute;
 	left: 256px;
-    top: 738px;
+    top: 688px;
 }
 .khandwaText{
     position: absolute;
@@ -137,7 +137,7 @@
 .harda{
 	position: absolute;
 	left: 346px;
-    top: 711px;
+    top: 661px;
 }
 .hardaText{
     position: absolute;
@@ -152,7 +152,7 @@
 .betul{
 	position: absolute;
 	left: 388px;
-    top: 738px;
+    top: 688px;
 }
 .betulText{
     position: absolute;
@@ -167,7 +167,7 @@
 .chhindwara{
 	position: absolute;
 	left: 526px;
-    top: 689px;
+    top: 639px;
 }
 .chhindwaraText{
     position: absolute;
@@ -182,7 +182,7 @@
 .seoni{
 	position: absolute;
 	left: 641px;
-    top: 675px;
+    top: 625px;
 }
 .seoniText{
     position: absolute;
@@ -197,7 +197,7 @@
 .balaghat{
 	position: absolute;
     left: 680px;
-    top: 736px;
+    top: 686px;
 }
 .balaghatText{
     position: absolute;
@@ -212,7 +212,7 @@
 .mandla{
 	position: absolute;
     left: 726px;
-    top: 643px;
+    top: 593px;
 }
 .mandlaText{
     position: absolute;
@@ -227,7 +227,7 @@
 .dindori{
 	position: absolute;
     left: 779px;
-    top: 611px;
+    top: 561px;
 }
 .dindoriText{
     position: absolute;
@@ -242,7 +242,7 @@
 .annupur{
 	position: absolute;
     left: 858px;
-    top: 599px;
+    top: 549px;
 }
 .annupurText{
     position: absolute;
@@ -257,7 +257,7 @@
 .shahdol{
 	position: absolute;
     left: 834px;
-    top: 500px;
+    top: 450px;
 }
 .shahdolText{
     position: absolute;
@@ -272,7 +272,7 @@
 .sidhi{
 	position: absolute;
     left: 866px;
-    top: 447px;
+    top: 397px;
 }
 .sidhiText{
     position: absolute;
@@ -287,7 +287,7 @@
 .singrauli{
 	position: absolute;
     left: 943px;
-    top: 432px;
+    top: 382px;
 }
 .singrauliText{
     position: absolute;
@@ -302,7 +302,7 @@
 .rewa{
 	position: absolute;
     left: 834px;
-    top: 372px;
+    top: 322px;
 }
 .rewaText{
     position: absolute;
@@ -317,7 +317,7 @@
 .satna{
 	position: absolute;
     left: 750px;
-    top: 367px;
+    top: 317px;
 }
 .satnaText{
     position: absolute;
@@ -332,7 +332,7 @@
 .umaria{
 	position: absolute;
     left: 779px;
-    top: 522px;
+    top: 472px;
 }
 .umariaText{
     position: absolute;
@@ -347,7 +347,7 @@
 .katni{
 	position: absolute;
     left: 702px;
-    top: 520px;
+    top: 470px;
 }
 .katniText{
     position: absolute;
@@ -362,7 +362,7 @@
 .jabalpur{
 	position: absolute;
     left: 651px;
-    top: 583px;
+    top: 533px;
 }
 .jabalpurText{
     position: absolute;
@@ -377,7 +377,7 @@
 .narsinghpur{
 	position: absolute;
     left: 557px;
-    top: 634px;
+    top: 584px;
 }
 .narsinghpurText{
     position: absolute;
@@ -392,7 +392,7 @@
 .hoshangabad{
 	position: absolute;
     left: 396px;
-    top: 663px;
+    top: 613px;
 }
 .hoshangabadText{
     position: absolute;
@@ -407,7 +407,7 @@
 .dewas{
 	position: absolute;
     left: 231px;
-    top: 608px;
+    top: 558px;
 }
 .dewasText{
     position: absolute;
@@ -422,7 +422,7 @@
 .indore{
 	position: absolute;
     left: 178px;
-    top: 645px;
+    top: 595px;
 }
 .indoreText{
     position: absolute;
@@ -437,7 +437,7 @@
 .dhar{
 	position: absolute;
     left: 72px;
-    top: 638px;
+    top: 588px;
 }
 .dharText{
     position: absolute;
@@ -452,7 +452,7 @@
 .ujjain{
 	position: absolute;
     left: 145px;
-    top: 562px;
+    top: 512px;
 }
 .ujjainText{
     position: absolute;
@@ -467,7 +467,7 @@
 .shajapur{
 	position: absolute;
     left: 262px;
-    top: 576px;
+    top: 526px;
 }
 .shajapurText{
     position: absolute;
@@ -482,7 +482,7 @@
 .sehore{
 	position: absolute;
     left: 311px;
-    top: 569px;
+    top: 519px;
 }
 .sehoreText{
     position: absolute;
@@ -497,7 +497,7 @@
 .agarMalwa{
 	position: absolute;
     left: 209px;
-    top: 481px;
+    top: 431px;
 }
 .agarMalwaText{
     position: absolute;
@@ -512,7 +512,7 @@
 .rajgarh{
 	position: absolute;
     left: 274px;
-    top: 489px;
+    top: 439px;
 }
 .rajgarhText{
     position: absolute;
@@ -527,7 +527,7 @@
 .bhopal{
 	position: absolute;
     left: 392px;
-    top: 544px;
+    top: 494px;
 }
 .bhopalText{
     position: absolute;
@@ -542,7 +542,7 @@
 .raisen{
 	position: absolute;
     left: 421px;
-    top: 570px;
+    top: 520px;
 }
 .raisenText{
     position: absolute;
@@ -557,7 +557,7 @@
 .sagar{
     position: absolute;
     left: 494px;
-    top: 473px;
+    top: 423px;
 }
 .sagarText{
     position: absolute;
@@ -572,7 +572,7 @@
 .damoh{
 	position: absolute;
     left: 611px;
-    top: 474px;
+    top: 424px;
 }
 .damohText{
     position: absolute;
@@ -587,7 +587,7 @@
 .panna{
 	position: absolute;
     left: 689px;
-    top: 383px;
+    top: 333px;
 }
 .pannaText{
     position: absolute;
@@ -602,7 +602,7 @@
 .chhatarpur{
 	position: absolute;
     left: 597px;
-    top: 336px;
+    top: 286px;
 }
 .chhatarpurText{
     position: absolute;
@@ -617,7 +617,7 @@
 .tikamgarh{
 	position: absolute;
     left: 559px;
-    top: 357px;
+    top: 307px;
 }
 .tikamgarhText{
     position: absolute;
@@ -632,7 +632,7 @@
 .niwari{
 	position: absolute;
     left: 537px;
-    top: 319px;
+    top: 269px;
 }
 .niwariText{
     position: absolute;
@@ -647,7 +647,7 @@
 .vidisha{
 	position: absolute;
     left: 398px;
-    top: 490px;
+    top: 440px;
 }
 .vidishaText{
     position: absolute;
@@ -661,8 +661,8 @@
 }
 .guna{
 	position: absolute;
-    left: 252px;
-    top: 142px;
+    left: 342px;
+    top: 329px;
 }
 .gunaText{
     position: absolute;
@@ -677,7 +677,7 @@
 .ashoknagar{
 	position: absolute;
     left: 418px;
-    top: 400px;
+    top: 350px;
 }
 .ashoknagarText{
     position: absolute;
@@ -692,7 +692,7 @@
 .shivpuri{
 	position: absolute;
     left: 373px;
-    top: 284px;
+    top: 234px;
 }
 .shivpuriText{
     position: absolute;
@@ -707,7 +707,7 @@
 .sheopur{
 	position: absolute;
     left: 302px;
-    top: 244px;
+    top: 194px;
 }
 .sheopurText{
     position: absolute;
@@ -722,7 +722,7 @@
 .gwalior{
 	position: absolute;
     left: 433px;
-    top: 240px;
+    top: 190px;
 }
 .gwaliorText{
     position: absolute;
@@ -737,7 +737,7 @@
 .datia{
 	position: absolute;
     left: 511px;
-    top: 248px;
+    top: 198px;
 }
 .datiaText{
     position: absolute;
@@ -752,7 +752,7 @@
 .bhind{
 	position: absolute;
     left: 503px;
-    top: 158px;
+    top: 108px;
 }
 .bhindText{
     position: absolute;
@@ -767,7 +767,7 @@
 .morena{
 	position: absolute;
     left: 367px;
-    top: 150px;
+    top: 100px;
 }
 .morenaText{
     position: absolute;
