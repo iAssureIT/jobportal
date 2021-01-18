@@ -26,20 +26,21 @@ class HomePage extends Component {
       subfunctonalAreaJobs  : [],    
     }
   }
-  componentDidMount(){
+  componentDidMount(){ 
     console.log("location",window.location.pathname)  
     var {mapAction} = this.props;
     var selector = this.props.selector;
     
-    console.log(selector)
     selector.countryCode = "IN"; 
-    
+    console.log(window.location.pathname.split("/")[1])
+    if (window.location.pathname.split("/")[1] == "state" ) {
+      selector.stateCode = window.location.pathname.split("/")[2] 
+      console.log(selector)
+    }    
     //selector.stateCode = stateCode; 
 
-    mapAction.filterMapData(this.props.selector);
+    mapAction.filterMapData(selector);
     mapAction.setMapView("India");
-    
-    
   }
   leftDrawerInfo(event){
 
