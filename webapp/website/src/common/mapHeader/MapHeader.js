@@ -26,6 +26,93 @@ class MapHeader extends Component{
 	    
 	    var {mapAction} = this.props;
 	    mapAction.jobCount(this.props.selector);
+
+	    if (window.location.pathname.split("/")[1] == "state" ) {
+	    	var stateName = "";
+	      	//selector.stateCode = window.location.pathname.split("/")[2] 
+	      	switch(window.location.pathname.split("/")[2]) {
+			  case "AP": stateName = "Andhra Pradesh"
+			    break;
+			  case "AR": stateName = "Arunachal Pradesh"
+			    break;
+			  case "AS": stateName = "Assam"
+			    break;
+			  case "BR": stateName = "Bihar"
+			    break;
+			  case "CG": stateName = "Chhattisgarh"
+			    break; 
+			  case "GA": stateName = "Goa"
+			    break;     
+			  case "GJ": stateName = "Gujarat"
+			    break;     
+			  case "HR": stateName = "Haryana"
+			    break;     
+			  case "HP": stateName = "Himachal Pradesh"
+			    break;               
+			  case "JK": stateName = "Jammu and Kashmir"
+			    break;               
+			  case "JH": stateName = "Jharkhand"
+			    break;     
+			  case "KA": stateName = "Karnataka"
+			    break;    
+			  case "KL": stateName = "Kerala"
+			    break;    
+			  case "MP": stateName = "Madhya Pradesh"
+			    break;      
+			  case "MH": stateName = "Maharashtra"
+			    break;             
+			  case "MN": stateName = "Manipur"
+			    break;         
+			  case "ML": stateName = "Meghalaya"
+			    break;                 
+			  case "MZ": stateName = "Mizoram"
+			    break;                 
+			  case "NL": stateName = "Nagaland"
+			    break;   
+			  case "OR": stateName = "Orissa"
+			    break;   
+			  case "PB": stateName = "Punjab"
+			    break;   
+			  case "RJ": stateName = "Rajasthan"
+			    break; 
+			  case "SK": stateName = "Sikkim"
+			    break; 
+			  case "TN": stateName = "Tamil Nadu"
+			    break; 
+			  case "TR": stateName = "Tripura"
+			    break; 
+			  case "UK": stateName = "Uttarakhand"
+			    break; 
+			  case "UP": stateName = "Uttar Pradesh"
+			    break; 
+			  case "UP": stateName = "Uttar Pradesh"
+			    break; 
+			  case "WB": stateName = "West Bengal"
+			    break; 
+			  case "TN": stateName = "Tamil Nadu"
+			    break; 
+			  case "TR": stateName = "Tripura"
+			    break;  
+			  case "AN": stateName = "Andaman and Nicobar"
+			    break;  
+			  case "CH": stateName = "Chandigarh"
+			    break;  
+			  case "DH": stateName = "Dadra and Nagar Haveli"
+			    break;  	
+			  case "DD": stateName = "Daman and Diu"
+			    break;  	
+			  case "DL": stateName = "Delhi"
+			    break;  	
+			  case "LD": stateName = "Lakshadweep"
+			    break;  	
+			  case "PY": stateName = "Pondicherry"
+			    break;  	                      
+			  default:
+			   stateName = "India";
+			}
+
+			mapAction.setMapSelectedState(stateName);
+	    }   
   	}
 	handleOpenModal () {
 	    this.setState({ showModal: true });

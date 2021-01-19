@@ -712,11 +712,16 @@ exports.mapwiseJobs = (req, res, next)=>{
     	selector["$and"].push({ "jobBasicInfo.functionalarea_id" : { $in: funarea_ids } });
     }
     console.log(JSON.stringify(selector))
-
+    if (req.body.stateCode) { 
+        var groupByField = "district"; 
+    }else{
+        var groupByField = "stateCode"; 
+    }
+    
     Jobs.aggregate([
     	{ $match 	: selector },
     	{ $sort 	: {createdAt : -1} }, 
-    	{ $group 	: {_id: "$location.stateCode", count: { $sum: 1}} },
+    	{ $group 	: {_id: "$location."+groupByField, count: { $sum: 1}} },
     ])
     
     .exec()

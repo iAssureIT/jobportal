@@ -71,7 +71,7 @@ export function filterMapData(selector) {
   		dispatch(setFilterSelector(selector));
 	  	return axios.post("/api/jobs/mapwise-jobs",selector)
 	    .then((response)=>{
-	     
+	     console.log("action", response.data)
 	        dispatch(getMapData(response.data));
 	    })
 	    .catch((error)=>{

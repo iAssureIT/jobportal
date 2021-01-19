@@ -3,10 +3,10 @@ import Axios 				from 'axios';
 import Swal 				from 'sweetalert2';
 import {Redirect} from 'react-router-dom';
 import { withRouter }                             from 'react-router-dom';
-import {connect}            from 'react-redux';
-import { bindActionCreators } from 'redux';
 import '../global.css';
 import './india.css';
+import {connect}            from 'react-redux';
+import { bindActionCreators } from 'redux';
 import  * as mapActionCreator from '../../common/actions/index';
 
 
@@ -15,19 +15,18 @@ class India extends Component{
 		super(props);
 
 		this.state = {
-		 }   
-		
-
+		}   
 	}
 	componentDidMount(){
 
 	}
-	componentWillReceiveProps(){
+	componentWillReceiveProps(nextProps){
+		console.log("next",nextProps.mapJobs)
 		var stateWiseCount = {};
 		
-	    for (var i=0; i < this.props.mapJobs.length; i++) {
+	    for (var i=0; i < nextProps.mapJobs.length; i++) {
 	    	
-	       stateWiseCount[this.props.mapJobs[i]._id] =  this.props.mapJobs[i].count;
+	       stateWiseCount[nextProps.mapJobs[i]._id] =  nextProps.mapJobs[i].count;
 	    }
 	    this.setState(stateWiseCount)
 	}
@@ -62,8 +61,8 @@ class India extends Component{
 
 		mapAction.jobCount(selector);
 		
-	    /*if (this.props.viewMode=="mapView") {
-	      mapAction.filterMapData(this.props.selector);
+	    if (this.props.viewMode=="mapView") {
+	     mapAction.filterMapData(selector); 
 	    }
 	    if (this.props.viewMode=="functionalView") {
 	      mapAction.filterFunctionalData(this.props.selector);
@@ -73,11 +72,11 @@ class India extends Component{
 	    }
 	    if (this.props.viewMode=="industrialView") {
 	      mapAction.filterIndustrialData(this.props.selector);
-	    }*/
+	    }
 		this.props.history.push("state/"+stateCode);
 	}
 	render(){
-		console.log(this.state.MH);
+		// /console.log(this.props.mapJobs)
 		return(
 			<section className="mapWrapper">
 				<div className="india">
@@ -169,9 +168,9 @@ class India extends Component{
 						<span className="telanganaNumber mapCountLabel text-center">{this.state.TS ? this.state.TS : 0}</span>
 					</div>
 					<div className="orissa classHover">
-						<img src="Maps/India/Orissa.png" className="img-responsive "  onClick={e => this.onStateClick("Odisha","OD")} onMouseOver={e => (e.currentTarget.src = "/Maps/India/Orissa1.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/India/Orissa.png")}/>
+						<img src="Maps/India/Orissa.png" className="img-responsive "  onClick={e => this.onStateClick("Odisha","OR")} onMouseOver={e => (e.currentTarget.src = "/Maps/India/Orissa1.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/India/Orissa.png")}/>
 						<span className="orissaText mapTextLabel text-capitalize">Odisha</span>
-						<span className="orissaNumber mapCountLabel text-center">{this.state.OD ? this.state.OD : 0}</span>
+						<span className="orissaNumber mapCountLabel text-center">{this.state.OR ? this.state.OR : 0}</span>
 					</div>
 
 					<div className="chhattisgarh classHover">

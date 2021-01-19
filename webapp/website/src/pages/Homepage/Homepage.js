@@ -32,10 +32,8 @@ class HomePage extends Component {
     var selector = this.props.selector;
     
     selector.countryCode = "IN"; 
-    console.log(window.location.pathname.split("/")[1])
     if (window.location.pathname.split("/")[1] == "state" ) {
       selector.stateCode = window.location.pathname.split("/")[2] 
-      console.log(selector)
     }    
     //selector.stateCode = stateCode; 
 
