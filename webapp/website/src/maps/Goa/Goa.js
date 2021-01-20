@@ -1,16 +1,30 @@
 import React, {Component} from 'react';
-
+import Axios 				  from 'axios';
+import Swal 				  from 'sweetalert2';
+import {Redirect}             from 'react-router-dom';
+import { withRouter }         from 'react-router-dom';
+import { connect }            from 'react-redux';
+import { bindActionCreators } from 'redux';
+import  * as mapActionCreator from '../../common/actions/index';
 import './Goa.css';
 import '../global.css';
 
 
-export default class Goa extends Component{
+class Goa extends Component{
 	constructor(props){
 		super(props);
-
+		this.state = {
+		}  		 
 	}
 	componentDidMount(){
+		var stateWiseCount = {};
 		
+	    for (var i=0; i < this.props.mapJobs.length; i++) {
+	    	
+	       stateWiseCount[this.props.mapJobs[i]._id] =  this.props.mapJobs[i].count;
+	    }
+
+	    this.setState(stateWiseCount)
 	}
 	search(nameKey){
 		return 10;
@@ -27,70 +41,70 @@ export default class Goa extends Component{
 						 onMouseOver={e => (e.currentTarget.src = "/Maps/Goa/Pernem_.png")} 
 						 onMouseOut={e => (e.currentTarget.src = "/Maps/Goa/Pernem.png")}/>
 						<span className="pernemText mapTextLabel text-capitalize">Pernem</span>
-						<span className="pernemNumber mapCountLabel text-center">{this.search('pernem')}</span>
+						<span className="pernemNumber mapCountLabel text-center">{this.state.Pernem ? this.state.Pernem : 0}</span>
 					</div>
 					<div className="mapusa classHover"> 
 						<img src="/Maps/Goa/Mapusa.png"  alt="Mapusa" 
 						 onMouseOver={e => (e.currentTarget.src = "/Maps/Goa/Mapusa_.png")} 
 						 onMouseOut={e => (e.currentTarget.src = "/Maps/Goa/Mapusa.png")}/>
 						<span className="mapusaText mapTextLabel text-capitalize">Mapusa</span>
-						<span className="mapusaNumber mapCountLabel text-center">{this.search('mapusa')}</span>
+						<span className="mapusaNumber mapCountLabel text-center">{this.state.Mapusa ? this.state.Mapusa : 0}</span>
 					</div>
 					<div className="bicholim classHover"> 
 						<img src="/Maps/Goa/Bicholim.png"  alt="Bicholim"
 						 onMouseOver={e => (e.currentTarget.src = "/Maps/Goa/Bicholim_.png")}
 						 onMouseOut={e => (e.currentTarget.src = "/Maps/Goa/Bicholim.png")}/>
 						<span className="bicholimText mapTextLabel text-capitalize">Bicholim</span>
-						<span className="bicholimNumber mapCountLabel text-center">{this.search('bicholim')}</span>
+						<span className="bicholimNumber mapCountLabel text-center">{this.state.Bicholim ? this.state.Bicholim : 0}</span>
 					</div>
 					<div className="satari classHover"> 
 						<img src="/Maps/Goa/Satari.png"  alt="Satari"
 						 onMouseOver={e => (e.currentTarget.src = "/Maps/Goa/Satari_.png")} 
 						 onMouseOut={e => (e.currentTarget.src = "/Maps/Goa/Satari.png")}/>
 						<span className="satariText mapTextLabel text-capitalize">Satari</span>
-						<span className="satariNumber mapCountLabel text-center">{this.search('satari')}</span>
+						<span className="satariNumber mapCountLabel text-center">{this.state.Satari ? this.state.Satari : 0}</span>
 					</div>
 					<div className="ponda classHover"> 
 						<img src="/Maps/Goa/Ponda.png"  alt="Ponda"
 						 onMouseOver={e => (e.currentTarget.src = "/Maps/Goa/Ponda_.png")} 
 						 onMouseOut={e => (e.currentTarget.src = "/Maps/Goa/Ponda.png")}/>
 						<span className="pondaText mapTextLabel text-capitalize">Ponda</span>
-						<span className="pondaNumber mapCountLabel text-center">{this.search('ponda')}</span>
+						<span className="pondaNumber mapCountLabel text-center">{this.state.Ponda ? this.state.Ponda : 0}</span>
 					</div>
 					<div className="panjim classHover"> 
 						<img src="/Maps/Goa/Panjim.png"  alt="Panjim" 
 						 onMouseOver={e => (e.currentTarget.src = "/Maps/Goa/Panjim_.png")} 
 						 onMouseOut={e => (e.currentTarget.src = "/Maps/Goa/Panjim.png")}/>
 						<span className="panjimText mapTextLabel text-capitalize">Panjim</span>
-						<span className="panjimNumber mapCountLabel text-center">{this.search('panjim')}</span>
+						<span className="panjimNumber mapCountLabel text-center">{this.state.Panjim ? this.state.Panjim : 0}</span>
 					</div>
 					<div className="sanguem classHover"> 
 						<img src="/Maps/Goa/Sanguem.png"  alt="Sanguem"
 						 onMouseOver={e => (e.currentTarget.src = "/Maps/Goa/Sanguem_.png")} 
 						 onMouseOut={e => (e.currentTarget.src = "/Maps/Goa/Sanguem.png")}/>
 						<span className="sanguemText mapTextLabel text-capitalize">Sanguem</span>
-						<span className="sanguemNumber mapCountLabel text-center">{this.search('sanguem')}</span>
+						<span className="sanguemNumber mapCountLabel text-center">{this.state.Sanguem ? this.state.Sanguem : 0}</span>
 					</div>
 					<div className="quepem classHover"> 
 						<img src="/Maps/Goa/Quepem.png"  alt="Quepem"
 						 onMouseOver={e => (e.currentTarget.src = "/Maps/Goa/Quepem_.png")} 
 						 onMouseOut={e => (e.currentTarget.src = "/Maps/Goa/Quepem.png")}/>
 						<span className="quepemText mapTextLabel text-capitalize">Quepem</span>
-						<span className="quepemNumber mapCountLabel text-center">{this.search('quepem')}</span>
+						<span className="quepemNumber mapCountLabel text-center">{this.state.Quepem ? this.state.Quepem : 0}</span>
 					</div>
 					<div className="canacona classHover"> 
 						<img src="/Maps/Goa/Canacona.png"  alt="Canacona"
 						 onMouseOver={e => (e.currentTarget.src = "/Maps/Goa/Canacona_.png")} 
 						 onMouseOut={e => (e.currentTarget.src = "/Maps/Goa/Canacona.png")}/>
 						<span className="canaconaText mapTextLabel text-capitalize">Canacona</span>
-						<span className="canaconaNumber mapCountLabel text-center">{this.search('canacona')}</span>
+						<span className="canaconaNumber mapCountLabel text-center">{this.state.Canacona ? this.state.Canacona : 0}</span>
 					</div>
 					<div className="salcette classHover"> 
 						<img src="/Maps/Goa/Salcette.png"  alt="Salcette"
 						 onMouseOver={e => (e.currentTarget.src = "/Maps/Goa/Salcette_.png")} 
 						 onMouseOut={e => (e.currentTarget.src = "/Maps/Goa/Salcette.png")}/>
 						<span className="salcetteText mapTextLabel text-capitalize">Salcette</span>
-						<span className="salcetteNumber mapCountLabel text-center">{this.search('salcette')}</span>
+						<span className="salcetteNumber mapCountLabel text-center">{this.state.Salcette ? this.state.Salcette : 0}</span>
 					</div>
 					
 				</div>
@@ -98,3 +112,14 @@ export default class Goa extends Component{
 		);
 	}
 }
+const mapStateToProps = (state)=>{
+    return { 
+        selectedState  		: state.selectedState,  viewMode : state.viewMode,
+        mapJobs           	: state.mapJobs, 		selector : state.selector
+    }
+}
+const mapDispatchToProps = (dispatch) => ({
+	mapAction :  bindActionCreators(mapActionCreator, dispatch)
+}) 
+
+export default connect(mapStateToProps, mapDispatchToProps) (withRouter(Goa));
