@@ -97,9 +97,9 @@ import '../../coreadmin/companysetting/css/CompanySetting.css';
                             <li className="col-lg-12 col-md-12 col-xs-12 col-sm-12">
                             <a className="tabLeft lettersp tablefthr" href="#Industry" data-toggle="tab"  onClick={this.tab.bind(this)}>Industry</a>
                             </li>
-                            <li className="col-lg-12 col-md-12 col-xs-12 col-sm-12">
+                            {/*<li className="col-lg-12 col-md-12 col-xs-12 col-sm-12">
                             <a className="tabLeft lettersp tablefthr" href="#SubIndustry" data-toggle="tab"  onClick={this.tab.bind(this)}>Sub Industry</a>
-                            </li>
+                            </li>*/}
                             
                             <li className="col-lg-12 col-md-12 col-xs-12 col-sm-12">
                             <a className="tabLeft lettersp tablefthr" href="#FunctionalArea" data-toggle="tab"  onClick={this.tab.bind(this)}>Functional Area</a>

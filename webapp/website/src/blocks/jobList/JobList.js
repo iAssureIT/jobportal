@@ -190,7 +190,7 @@ applyJob = (jobid, company_id)=>{
 														</div>
 													</div>
 													<div className="jobListDesignation">
-														{elem.jobBasicInfo.jobTitle}
+														<a href={"job-profile/"+elem._id} className="link">{elem.jobBasicInfo.jobTitle}</a>
 													</div>
 													<div className="jobListCompanyName">
 														<b>iAssure International Technologies Pvt Ltd</b>

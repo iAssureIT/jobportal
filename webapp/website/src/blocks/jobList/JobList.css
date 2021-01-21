@@ -204,3 +204,11 @@
 	margin-left: -20px;
 	margin-right: 20px;
 }
+.link, .link:hover{
+	font-size: 22px;
+	color: var(--main-border-color);
+	margin-top: 3px;
+	margin-left: -5px;
+	font-family: 'Montserrat-SemiBold';
+
+}

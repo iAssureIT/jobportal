@@ -280,59 +280,24 @@ function insertJobTime(jobTime, createdBy){
 
 exports.getJob = (req,res,next)=>{
 	var job_id = req.params.job_id;
-
-	Jobs.aggregate([
-        {$match:{"_id": ObjectID(req.params.job_id)} },
-        {$lookup:{
-                   from: "entitymasters", 		localField: "company_id",
-                   foreignField: "_id",		as: "employer" } 
-        },
-        {$lookup:{
-                   from: "industrymasters", 		localField: "jobBasicInfo.industry_id",
-                   foreignField: "_id",		as: "industry" } 
-        },
-        {$lookup:{
-                   from: "functionalareamasters",	localField: "jobBasicInfo.functionalarea_id",
-                   foreignField: "_id",		as: "functionalArea" } 
-        },
-        {$lookup:{
-                   from: "subfunctionalareamasters",	localField: "jobBasicInfo.subfunctionalarea_id",
-                   foreignField: "_id",		as: "subFunctionalArea" } 
-         },   
-         {$lookup:{
-                   from: "jobrolemasters",			localField: "jobBasicInfo.jobrole_id",
-                   foreignField: "_id", 	as: "jobRole" } 
-         },
-         {$lookup:{
-                   from: "jobtypemasters",			localField: "jobBasicInfo.jobtype_id",
-                   foreignField: "_id",		as: "jobType" } 
-         },
-         {$lookup:{
-                   from: "jobtimemasters",			localField: "jobBasicInfo.jobtime_id",
-                   foreignField: "_id",		as: "jobTime" } 
-         },
-         {$lookup:{
-                   from: "jobcategorymasters",			localField: "jobBasicInfo.jobcategory_id",
-                   foreignField: "_id",		as: "jobCategory" } 
-         }
-
-         ])
-    	.exec()
-		
-		.then(jobsData=> {
-							res.status(200).json({	
-								jobsData 	: jobsData,
-								message	: "Job Details Found",
-							});			
-						})
-		
-		.catch(error=> {
-			console.log(error);
-			res.status(500).json({
-									error 	: error,
-									message : "Some issue occurred finding Job Details"
-								});
-						});
+    Jobs.findOne({"_id": ObjectID(req.params.job_id)})
+    .populate('company_id')
+    .populate('jobBasicInfo.industry_id')
+    .populate('jobBasicInfo.functionalarea_id')
+    .populate('jobBasicInfo.subfunctionalarea_id')
+    .populate('jobBasicInfo.jobrole_id')
+    .populate('jobBasicInfo.jobtype_id')
+    .populate('jobBasicInfo.jobtime_id')
+    .populate('jobBasicInfo.jobcategory_id')
+    .populate('requiredSkills.primarySkills.skill_id')
+    .populate('requiredSkills.secondarySkills.skill_id')
+    .populate('requiredSkills.otherSkills.skill_id')
+    .populate('requiredSkills.preferredSkills.skill_id')
+    .exec(function (err, candidate) {
+        console.log(err)
+        if (err) return res.status(500).json({ error: err });
+        res.status(200).json(candidate);
+    });
 }
 
 exports.getJobList = (req,res,next)=>{
@@ -374,60 +339,12 @@ exports.getJobList = (req,res,next)=>{
     	selector["$and"].push({ "jobBasicInfo.jobrole_id" : { $in: jobroles_ids } });
     }
 
-    //console.log(JSON.stringify(selector))
-
-    Jobs.aggregate([
-    	{ $match 	: selector },
-    	{ $sort 	: {createdAt : -1} },
-    	{$lookup:{
-                   from: "entitymasters", 		localField: "company_id",
-                   foreignField: "_id",		as: "employer" } 
-        },
-    	{ $lookup 	: { from: "industrymasters",
-                   		localField: "jobBasicInfo.industry_id",
-                   		foreignField: "_id",
-                   		as: "industry"}
-        },
-        {$lookup:{
-                   from: "functionalareamasters",
-                   localField: "jobBasicInfo.functionalarea_id",
-                   foreignField: "_id",
-                   as: "functionalArea" } 
-        },
-        {$lookup:{
-                   from: "subfunctionalareamasters",
-                   localField: "jobBasicInfo.subfunctionalarea_id",
-                   foreignField: "_id",
-                   as: "subFunctionalArea" } 
-        },   
-        {$lookup:{
-                   from: "jobrolemasters",
-                   localField: "jobBasicInfo.jobrole_id",
-                   foreignField: "_id",
-                   as: "jobRole" } 
-        },
-        {$lookup:{
-                   from: "jobtypemasters",
-                   localField: "jobBasicInfo.jobtype_id",
-                   foreignField: "_id",
-                   as: "jobType" } 
-        },
-        {$lookup:{
-                   from: "jobtimemasters",
-                   localField: "jobBasicInfo.jobtime_id",
-                   foreignField: "_id",
-                   as: "jobTime" } 
-        },
-        {$lookup:{
-                   from: "jobcategorymasters",
-                   localField: "jobBasicInfo.jobcategory_id",
-                   foreignField: "_id",
-                   as: "jobCategory" } 
-        }
-    ])
+    console.log(JSON.stringify(selector))
+    Jobs.find(selector)
+    
 	.exec()
 	.then(jobList=> {
-						res.status(200).json(jobList);			
+	   res.status(200).json(jobList);			
 	})
 	.catch(error=> {
 		console.log(error);
@@ -541,7 +458,6 @@ exports.getJobListForEmployer = (req,res,next)=>{
 }
 
 exports.updateJob = (req,res,next)=>{
-	console.log("req.body - ", req.body);
 	var functionalarea_id, subfunctionalarea_id, jobcategory_id, jobrole_id, jobtype_id, jobtime_id;
 		processData();
 		async function processData(){

@@ -19,6 +19,7 @@ import FunctionalHeader     from './common/functionalHeader/FunctionalHeader.js'
 import MapHeader            from './common/mapHeader/MapHeader.js'; 
 import Footer               from './common/footer/Footer.js';
 import CoreLayout           from './coreadmin/CoreLayout/CoreLayout.js';
+import Homepage             from './pages/Homepage/Homepage.js'
 
 import PageFunctionWise     from './pages/PageFunctionalAreawiseJobs/PageFunctionWise.js';
 import SubPageFunctionWise  from './pages/PageFunctionalAreawiseJobs/SubPageFunctionWise.js';
@@ -37,49 +38,10 @@ import CandidateExperience  from './pages/ProfileCreation/CandidateExperience.js
 
 
 import CandidateJobList         from './pages/CandidateJobList/CandidateJobList.js'
+
+import JobProfile               from './pages/JobProfile/JobProfile.js'
 import CandidateAppliedJobList  from './pages/CandidateAppliedJobList/CandidateAppliedJobList.js';
 import CandidateJobWishlist     from './pages/CandidateJobWishlist/CandidateJobWishlist.js';
-
-import India from './maps/India/India.js';
-import Maharashtra from './maps/MapComponent/MapComponent.js';
-import AndhraPradesh from './maps/AndhraPradesh/AndhraPradesh.js';
-import ArunachalPradesh from './maps/ArunachalPradesh/ArunachalPradesh.js';
-import Bihar from './maps/Bihar/Bihar.js';
-import Chhattisgarh from './maps/Chhattisgarh/Chhattisgarh.js';
-import Delhi from './maps/Delhi/Delhi.js';
-import Goa from './maps/Goa/Goa.js';
-import Gujarat from './maps/Gujarat/Gujarat.js';
-import HimachalPradesh from './maps/HimachalPradesh/HimachalPradesh.js';
-import JammuKashmirLadakh from './maps/JammuKashmirLadakh/JammuKashmirLadakh.js';
-import Jharkhand from './maps/Jharkhand/Jharkhand.js';
-import Karnataka from './maps/Karnataka/Karnataka.js';
-import Kerala from './maps/Kerala/Kerala.js';
-import MadhyaPradesh from './maps/MadhyaPradesh/MadhyaPradesh.js';
-import Manipur from './maps/Manipur/Manipur.js';
-import Meghalaya from './maps/Meghalaya/Meghalaya.js';
-import Mizoram from './maps/Mizoram/Mizoram.js';
-import Nagaland from './maps/Nagaland/Nagaland.js';
-import Orissa from './maps/Orissa/Orissa.js';
-import Punjab from './maps/Punjab/Punjab.js';
-import Tripura from './maps/Tripura/Tripura.js';
-import WestBengal from './maps/WestBengal/WestBengal.js';
-import TamilNadu from './maps/TamilNadu/TamilNadu.js';
-import Telangana from './maps/Telangana/Telangana.js';
-import UttarPradesh from './maps/UttarPradesh/UttarPradesh.js';
-
-
-
-import Haryana from './maps/Haryana/Haryana.js';
-import Rajasthan from './maps/Rajasthan/Rajasthan.js';
-import Uttarakhand from './maps/Uttarakhand/Uttarakhand.js';
-import Sikkim from './maps/Sikkim/Sikkim.js';
-import Assam from './maps/Assam/Assam.js';
-import Ladakh from './maps/Ladakh/Ladakh.js';
-
-
-
-
-import Homepage from './pages/Homepage/Homepage.js'
 
 class Layout extends Component  {
 
@@ -187,62 +149,6 @@ class Layout extends Component  {
                                             <Route exact path="/certification/:candidate_id/edit/:certificationID"     component={CandidateCertification}  />
                                             <Route exact path="/experience/:candidate_id/edit/:workExperienceID"        component={CandidateExperience}  />
 
-
-                                            
-                                            
-                                            {/*<Route exact path="/Andaman And Nicobar Islands"        component={AndamanAndNicobar }  />
-                                            */}
-                                            <Route exact path="/AndhraPradesh"        component={AndhraPradesh }  />
-                                            <Route exact path="/ArunachalPradesh"        component={ArunachalPradesh }  />
-                                            {/*<Route exact path="/Assam"        component={Assam }  />*/}
-                                            <Route exact path="/Bihar"        component={Bihar }  />
-                                            {/*<Route exact path="/Chandigarh"        component={Chandigarh }  />*/}
-                                            
-                                            <Route exact path="/Chhattisgarh"        component={Chhattisgarh }  />
-                                            {/*<Route exact path="/Dadra And Nagar Haveli"        component={DadraNagarHaveli }  />
-                                            <Route exact path="/Daman And Diu"        component={DamanAndDiu }  />
-                                            */}
-                                            <Route exact path="/Delhi"        component={Delhi }  />
-                                            <Route exact path="/Goa"        component={Goa }  />
-                                            <Route exact path="/Gujarat"        component={Gujarat }  />
-                                            {/*<Route exact path="/Haryana"        component={Haryana }  />*/}
-                                            <Route exact path="/HimachalPradesh"        component={HimachalPradesh }  />
-                                            <Route exact path="/Jammu And Kashmir"        component={JammuKashmirLadakh }  />
-                                            <Route exact path="/Jharkhand"        component={Jharkhand }  />
-                                            <Route exact path="/Karnataka"        component={Karnataka }  />
-                                            <Route exact path="/Kerala"        component={Kerala }  />
-                                            {/*<Route exact path="/Lakshadweep"        component={Lakshadweep }  />*/}
-                                            <Route exact path="/MadhyaPradesh"        component={MadhyaPradesh }  />
-                                            <Route exact path="/Maharashtra"        component={Maharashtra }  />                                                    
-                                            <Route exact path="/Manipur"        component={Manipur }  />
-                                            <Route exact path="/Meghalaya"        component={Meghalaya }  />
-                                            <Route exact path="/Mizoram"        component={Mizoram }  />
-                                            <Route exact path="/Nagaland"        component={Nagaland }  />
-                                            <Route exact path="/Odisha"        component={Orissa }  />
-                                            <Route exact path="/Punjab"        component={Punjab }  />
-
-                                            <Route exact path="/Tripura"        component={Tripura }  />
-                                            <Route exact path="/WestBengal"        component={WestBengal }  />
-                                            <Route exact path="/TamilNadu"        component={TamilNadu }  />
-                                            <Route exact path="/Telangana"        component={Telangana }  />
-                                            <Route exact path="/UttarPradesh"        component={UttarPradesh }  />
-
-
-
-
-
-
-
-
-                                            <Route exact path="/Haryana"        component={Haryana }  />
-                                            <Route exact path="/Rajasthan"        component={Rajasthan }  />
-                                            <Route exact path="/Uttarakhand"        component={Uttarakhand }  />
-                                            <Route exact path="/Sikkim"        component={Sikkim}  />
-                                            <Route exact path="/Assam"        component={Assam}  />
-
-
-
-
                                         </Switch>
                                             </div>
                                             </div>
@@ -269,7 +175,8 @@ class Layout extends Component  {
                             <Route exact path="/state/:stateCode"               component={Homepage}  />
 
                             <Route exact path="/search-jobs"                    component={CandidateJobList}  />  
-                            /**/
+                            <Route path="/job-profile/:job_id"                  component={JobProfile} exact />
+                                                        
 
                             <Route path="/login" exact strict component={Login} />
                             <Route path="/signup" exact strict component={SignUp} />

@@ -55,7 +55,7 @@ class Candidatelist extends Component{
 		// get single job information by jobID
 		Axios.get("/api/jobs/get/one/"+this.props.jobID)
 		.then(response=>{
-			this.setState({jobInfo : response.data.jobsData})
+			this.setState({jobInfo : response.data})
 		})
 		.catch(err=>{
 
@@ -96,36 +96,37 @@ class Candidatelist extends Component{
     }
 	
 	render(){
+		console.log(this.state.jobInfo)
 		return(	
 				<div className="candidateListWrapperMain">
 					<div className="col-lg-12 candidateListWrapper">
 						{
-							<div className="col-lg-8">
+							/*<div className="col-lg-8">
 								<div className="JobInfoContainer">
 									<div className="col-lg-12">
 										<div className="col-lg-11 jobDescBlock">
 											<div className="joblistDesignation">
-												{this.state.jobInfo[0] ? this.state.jobInfo[0].jobBasicInfo.jobTitle : null}
+												{this.state.jobInfo.jobBasicInfo ? this.state.jobInfo.jobBasicInfo.jobTitle : null}
 											</div>
 											<div className="joblistCompanyName">
-												{this.state.jobInfo[0] ? this.state.jobInfo[0].employer[0].companyName : null}
+												{this.state.jobInfo ? "this.state.jobInfo.company_id.companyName" : null}
 											</div>
 											<div> 
-												<i className="fa fa-calendar joblistExperience"></i> &nbsp; Exp: {this.state.jobInfo[0] ? this.state.jobInfo[0].eligibility.minExperience : null}
+												<i className="fa fa-calendar joblistExperience"></i> &nbsp; Exp: {this.state.jobInfo ? this.state.jobInfo.eligibility.minExperience : null}
 											</div>
 											<div> 
-												<i className="fa fa-rupee joblistCtcSal"></i> &nbsp; <i className="fa fa-inr"></i> {this.state.jobInfo[0] ? this.state.jobInfo[0].ctcOffered.minSalary : null} {this.state.jobInfo[0] ? this.state.jobInfo[0].ctcOffered.minSalPeriod : null} - <i className="fa fa-inr"></i> {this.state.jobInfo[0] ? this.state.jobInfo[0].ctcOffered.maxSalary : null} {this.state.jobInfo[0] ? this.state.jobInfo[0].ctcOffered.maxSalPeriod : null}
+												<i className="fa fa-rupee joblistCtcSal"></i> &nbsp; <i className="fa fa-inr"></i> {this.state.jobInfo ? this.state.jobInfo.ctcOffered.minSalary : null} {this.state.jobInfo ? this.state.jobInfo.ctcOffered.minSalPeriod : null} - <i className="fa fa-inr"></i> {this.state.jobInfo ? this.state.jobInfo.ctcOffered.maxSalary : null} {this.state.jobInfo ? this.state.jobInfo.ctcOffered.maxSalPeriod : null}
 											</div>
 											<div>
-												<i className="fa fa-map-marker joblistLocation"></i> &nbsp; {this.state.jobInfo[0] ? this.state.jobInfo[0].location.address : null}
+												<i className="fa fa-map-marker joblistLocation"></i> &nbsp; {this.state.jobInfo ? this.state.jobInfo.location.address : null}
 											</div>
 											<div>
-												<i className="fa fa-users joblistNumPositions"></i> &nbsp; No. of positions : {this.state.jobInfo[0] ? this.state.jobInfo[0].jobBasicInfo.positions : null}
+												<i className="fa fa-users joblistNumPositions"></i> &nbsp; No. of positions : {this.state.jobInfo ? this.state.jobInfo.jobBasicInfo.positions : null}
 											</div>	
 										</div>
 									</div>	
 								</div>
-							</div>
+							</div>*/
 						}	
 					</div>
 					

@@ -66,119 +66,82 @@ export default class JobPostProfile extends Component{
         var otherSkillTags = [];
         var preferredSkillTags = [];
 
-		Axios.get("/api/skillmaster/get/list")
-            .then(skillmaster => {
-                /*var primarySkillSuggestions =  [];
-                response.data.map((elem,index)=>{
-                    primarySkillSuggestions.push({id:elem._id,text:elem.skill})
-                })
-                this.setState({
-                    primarySkillSuggestions   : primarySkillSuggestions,
-                });*/
-  
 		Axios.get("/api/jobs/get/one/"+job_id)
 		.then(response=>{
-           	//console.log("response.skillmaster = ",skillmaster);
-			//console.log("response.data = ",response.data);
-			skillmaster.data.map((skill,index)=>{
-                response.data.jobsData[0].requiredSkills.primarySkills.map((data,ind)=>{
-                    if (skill._id == data.skill_id) {
-                        primarySkillTags.push({ id : skill._id, text : skill.skill })
-                    }
-                })
-            })
-            
-            skillmaster.data.map((skill,index)=>{
-                response.data.jobsData[0].requiredSkills.secondarySkills.map((data,ind)=>{
-                    if (skill._id == data.skill_id) {
-                        secondarySkillTags.push({ id : skill._id, text : skill.skill })
-                    }
-                })
-            })
 
-            skillmaster.data.map((skill,index)=>{
-                response.data.jobsData[0].requiredSkills.otherSkills.map((data,ind)=>{
-                    if (skill._id == data.skill_id) {
-                        otherSkillTags.push({ id : skill._id, text : skill.skill })
-                    }
-                })
+		console.log(response.data)
+			response.data.requiredSkills.primarySkills.map((skill,ind)=>{
+				primarySkillTags.push({ id : skill.skill_id._id, text : skill.skill_id.skill })
             })
-
-            skillmaster.data.map((skill,index)=>{
-                response.data.jobsData[0].requiredSkills.preferredSkills.map((data,ind)=>{
-                    if (skill._id == data.skill_id) {
-                        preferredSkillTags.push({ id : skill._id, text : skill.skill })
-                    }
-                })
+            response.data.requiredSkills.secondarySkills.map((skill,ind)=>{
+				secondarySkillTags.push({ id : skill.skill_id._id, text : skill.skill_id.skill })
             })
-				
-				this.setState({
+            response.data.requiredSkills.otherSkills.map((skill,ind)=>{
+				otherSkillTags.push({ id : skill.skill_id._id, text : skill.skill_id.skill })
+            })
+            response.data.requiredSkills.preferredSkills.map((skill,ind)=>{
+				preferredSkillTags.push({ id : skill.skill_id._id, text : skill.skill_id.skill })
+            })
+			this.setState({
 					job_id				: 	job_id,
-					jobTitle 			: 	response.data.jobsData[0].jobBasicInfo.jobTitle,
-					employerName 		: 	response.data.jobsData[0].employer[0].companyName,
-					employerLogo 		: 	response.data.jobsData[0].employer[0].companyLogo[0] ? response.data.jobsData[0].employer[0].companyLogo[0] : null,
-					industry_id 		: 	response.data.jobsData[0].jobBasicInfo.industry_id,
-					industry 			: 	response.data.jobsData[0].industry[0].industry,
-					functionalarea_id 	: 	response.data.jobsData[0].jobBasicInfo.functionalarea_id,
-					functionalArea 		: 	response.data.jobsData[0].functionalArea[0].functionalArea,
-					subfunctionalarea_id: 	response.data.jobsData[0].jobBasicInfo.subfunctionalarea_id,
-					subFunctionalArea 	: 	response.data.jobsData[0].subFunctionalArea[0].subFunctionalArea,
-					jobrole_id 			: 	response.data.jobsData[0].jobBasicInfo.jobrole_id,
-					jobRole 			: 	response.data.jobsData[0].jobRole[0].jobRole,
-					gender 				: 	response.data.jobsData[0].jobBasicInfo.gender,
-					workFromHome 		: 	response.data.jobsData[0].jobBasicInfo.workFromHome,
-					jobtype_id 			: 	response.data.jobsData[0].jobBasicInfo.jobtype_id,
-					jobType 			: 	response.data.jobsData[0].jobType[0].jobType,
-					jobtime_id 			: 	response.data.jobsData[0].jobBasicInfo.jobtime_id,
-					jobTime 			: 	response.data.jobsData[0].jobTime[0].jobTime,
-					jobcategory_id 		: 	response.data.jobsData[0].jobBasicInfo.jobcategory_id,
-					jobCategory 		: 	response.data.jobsData[0].jobCategory[0].jobCategory,
-					positions           :   response.data.jobsData[0].jobBasicInfo.positions,
-					jobDesc 			: 	response.data.jobsData[0].jobBasicInfo.jobDesc,
-					lastDateOfAppl      : 	response.data.jobsData[0].jobBasicInfo.lastDateOfAppl ? Moment(response.data.jobsData[0].jobBasicInfo.lastDateOfAppl).format("YYYY-MM-DD"):"",
-					contactPersonName 	: 	response.data.jobsData[0].jobBasicInfo.contactPersonName,
-					contactPersonEmail 	: 	response.data.jobsData[0].jobBasicInfo.contactPersonEmail,
-					contactPersonPhone 	: 	response.data.jobsData[0].jobBasicInfo.contactPersonPhone,
+					jobTitle 			: 	response.data.jobBasicInfo.jobTitle,
+					employerName 		: 	response.data.company_id.companyName,
+					employerLogo 		: 	response.data.company_id.companyLogo[0] ? response.data.company_id.companyLogo[0] : null,
+					industry_id 		: 	response.data.jobBasicInfo.industry_id._id,
+					industry 			: 	response.data.jobBasicInfo.industry_id.industry,
+					functionalarea_id 	: 	response.data.jobBasicInfo.functionalarea_id._id,
+					functionalArea 		: 	response.data.jobBasicInfo.functionalarea_id.functionalArea,
+					subfunctionalarea_id: 	response.data.jobBasicInfo.subfunctionalarea_id._id,
+					subFunctionalArea 	: 	response.data.jobBasicInfo.functionalarea_id._id,
+					jobrole_id 			: 	response.data.jobBasicInfo.jobrole_id._id,
+					jobRole 			: 	response.data.jobBasicInfo.jobrole_id.jobRole,
+					gender 				: 	response.data.jobBasicInfo.gender,
+					workFromHome 		: 	response.data.workFromHome,
+					jobtype_id 			: 	response.data.jobBasicInfo.jobtype_id._id,
+					jobType 			: 	response.data.jobBasicInfo.jobtype_id.jobType,
+					jobtime_id 			: 	response.data.jobBasicInfo.jobtime_id._id,
+					jobTime 			: 	response.data.jobBasicInfo.jobtime_id.jobTime,
+					jobcategory_id 		: 	response.data.jobBasicInfo.jobcategory_id._id,
+					jobCategory 		: 	response.data.jobBasicInfo.jobcategory_id.jobCategory,
+					positions           :   response.data.jobBasicInfo.positions,
+					jobDesc 			: 	response.data.jobBasicInfo.jobDesc,
+					lastDateOfAppl      : 	response.data.jobBasicInfo.lastDateOfAppl ? Moment(response.data.jobBasicInfo.lastDateOfAppl).format("YYYY-MM-DD"):"",
+					contactPersonName 	: 	response.data.jobBasicInfo.contactPersonName,
+					contactPersonEmail 	: 	response.data.jobBasicInfo.contactPersonEmail,
+					contactPersonPhone 	: 	response.data.jobBasicInfo.contactPersonPhone,
 					
-					address        		:   response.data.jobsData[0].location.address,
-					area 				: 	response.data.jobsData[0].location.area,
-					cityVillage 		: 	response.data.jobsData[0].location.cityVillage,
-					district 			: 	response.data.jobsData[0].location.district,
-					states 				: 	response.data.jobsData[0].location.states,
-					stateCode 			: 	response.data.jobsData[0].location.stateCode,
-					country 			: 	response.data.jobsData[0].location.country,
-					countryCode 		: 	response.data.jobsData[0].location.countryCode,
-					pincode 			: 	response.data.jobsData[0].location.pincode,
+					address        		:   response.data.location.address,
+					area 				: 	response.data.location.area,
+					cityVillage 		: 	response.data.location.cityVillage,
+					district 			: 	response.data.location.district,
+					states 				: 	response.data.location.states,
+					stateCode 			: 	response.data.location.stateCode,
+					country 			: 	response.data.location.country,
+					countryCode 		: 	response.data.location.countryCode,
+					pincode 			: 	response.data.location.pincode,
 					
-					minSalary 			: 	response.data.jobsData[0].ctcOffered.minSalary,
-					minSalPeriod 		: 	response.data.jobsData[0].ctcOffered.minSalPeriod,
-					maxSalary 			: 	response.data.jobsData[0].ctcOffered.maxSalary,
-					maxSalPeriod		: 	response.data.jobsData[0].ctcOffered.maxSalPeriod,
+					minSalary 			: 	response.data.ctcOffered.minSalary,
+					minSalPeriod 		: 	response.data.ctcOffered.minSalPeriod,
+					maxSalary 			: 	response.data.ctcOffered.maxSalary,
+					maxSalPeriod		: 	response.data.ctcOffered.maxSalPeriod,
 					
-					minEducation 		: 	response.data.jobsData[0].eligibility.minEducation,
-					minExperience 		: 	response.data.jobsData[0].eligibility.minExperience,
+					minEducation 		: 	response.data.eligibility.minEducation,
+					minExperience 		: 	response.data.eligibility.minExperience,
 					
 					primarySkillTags 	: 	primarySkillTags,
-					minPrimExp 			: 	response.data.jobsData[0].requiredSkills.minPrimExp,
+					minPrimExp 			: 	response.data.requiredSkills.minPrimExp,
 					
 					secondarySkillTags 	: 	secondarySkillTags,
-					minSecExp 	        : 	response.data.jobsData[0].requiredSkills.minSecExp,
+					minSecExp 	        : 	response.data.requiredSkills.minSecExp,
 					
 					otherSkillTags 	    : 	otherSkillTags,
-					minOtherExp 		: 	response.data.jobsData[0].requiredSkills.minOtherExp,
+					minOtherExp 		: 	response.data.requiredSkills.minOtherExp,
 					
 					preferredSkillTags  :   preferredSkillTags,
                 })
-               
 			})
-			.catch(error=>	{
-								Swal.fire("Some Error Occured during data fetch",error.message,'error');
-							})
-		
-			})
-            .catch(error => {
-                				Swal.fire("Error while getting List data", error.message, 'error');
-           					})
+        .catch(error=>{	Swal.fire("Some Error Occured during data fetch",error.message,'error'); })
+		   	
 	}	
 	
 	render(){
