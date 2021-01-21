@@ -66,9 +66,12 @@ class BasicInfoForm extends Component{
 			 console.log("response.data",response.data);
 
 			 	var languagesTags = [];
-			 	response.data.languagesKnown.map((data,ind)=>{
-                    languagesTags.push({ id : data.id, text : data.language_id.language })
-                })
+			 	if (response.data.languagesKnown) {
+			 		response.data.languagesKnown.map((data,ind)=>{
+                    	languagesTags.push({ id : data.id, text : data.language_id.language })
+                	})
+			 	}
+			 	
 			 	this.calAge(response.data.basicInfo.dob);
 			 	this.setState({
 			 		firstName         : response.data.basicInfo.firstName?response.data.basicInfo.firstName:"",

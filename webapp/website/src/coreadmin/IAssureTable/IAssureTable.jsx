@@ -704,10 +704,10 @@ class IAssureTable extends Component {
 																			<div className="row">
 																			<br/>
 																			<div className="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-																				<button type="button" className=" btn deletebtn col-lg-7 col-lg-offset-1 col-md-4 col-md-offset-1 col-sm-8 col-sm-offset-1 col-xs-10 col-xs-offset-1" data-dismiss="modal">CANCEL</button>
+																				<button type="button" className="cancelbtn btn  col-lg-7 col-lg-offset-1 col-md-4 col-md-offset-1 col-sm-8 col-sm-offset-1 col-xs-10 col-xs-offset-1" data-dismiss="modal">CANCEL</button>
 																			</div>
 																			<div className="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-																				<button onClick={this.delete.bind(this)} id={(value._id).replace(/-/g, "/")} type="button" className="btn cancelbtn col-lg-7 col-lg-offset-5 col-md-7 col-md-offset-5 col-sm-8 col-sm-offset-3 col-xs-10 col-xs-offset-1" data-dismiss="modal">DELETE</button>
+																				<button onClick={this.delete.bind(this)} id={(value._id).replace(/-/g, "/")} type="button" className="btn deletebtn  col-lg-7 col-lg-offset-5 col-md-7 col-md-offset-5 col-sm-8 col-sm-offset-3 col-xs-10 col-xs-offset-1" data-dismiss="modal">DELETE</button>
 																			</div>
 																			</div>
 																		</div>

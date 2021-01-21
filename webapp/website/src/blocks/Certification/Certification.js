@@ -137,7 +137,9 @@ class Certification extends Component{
 		Axios.post("/api/candidatemaster/get/getCandidateSkills", formValues)
 		.then(response=>{
 			 	var id = response.data._id;
+			 	var diff = [];		
 			 	var tableData = response.data.skills.map((a, i)=>{
+			 	diff.push(a.skill_id._id) 		
                 return {
                     _id         : a._id,
                     skill 		: a.skill_id.skill,
@@ -145,8 +147,14 @@ class Certification extends Component{
 	            	rating 		: a.rating
                 }
             	})
+			 	var skillslist = [];
+			 	
+            	skillslist = this.state.skillslist.filter(function(val) {
+				  return diff.indexOf(val._id) == -1;
+				});
             	this.setState({
-	                tableData : tableData
+	                tableData : tableData,
+	                skillslist: skillslist
 	            });
 			 })
 			 .catch(error=>{
@@ -224,103 +232,55 @@ class Certification extends Component{
 			}
 		
 	}
-	deleteDate(event){
+	deleteCertification(event){
 		event.preventDefault();
 		var data_id =  event.currentTarget.id;
 		
-		if(this.state.certificationToggel===false){
-
-			var data_id =  event.currentTarget.id;
-
-			Swal.fire({
-			title : 'Are you sure? you want to delete this Certification Details!!!',
-			text : 'You will not be able to recover this Certification Details',
-			icon : 'warning',
-			showCancelButton : true,
-			confirmButtonText : 'Yes, delete it!',
-			cancelButtonColor : 'No, keep it',
-			confirmButtonColor : '#d33',
-		
-		  }).then((result) =>{
-			if(result.value){
-				if(data_id){
-					Axios.delete("/api/candidatemaster/deleteSkill/"+this.state.candidate_id+"/delete/"+data_id)
-					.then(response =>{
-							if(response.data.deleted===true){
-							Swal.fire(
-										'Deleted!',
-										'Certification Details has been deleted successfully!',
-										'success'
-								);
-						}
-				})
-					.catch(error=>{
-						
-						Swal.fire(
-									"Some problem occured deleting Certification Details!",
-									error.message,
-									'error'
-							)
-					})
-				}
-					
-					}else if (result.dismiss === Swal.DismissReason.cancel){
-						
-						Swal.fire(
-							'Cancelled',
-							'Your Certification details is safe :)',
-							'error'
-						)
-					}
-				})
-		  this.getData();
-		  
-		}else{
-			
-			var data_id =  event.currentTarget.id;
-			Swal.fire({
-			title : 'Are you sure? you want to delete this Certification Details!!!',
-			text : 'You will not be able to recover this Certification Details',
-			icon : 'warning',
-			showCancelButton : true,
-			confirmButtonText : 'Yes, delete it!',
-			cancelButtonColor : 'No, keep it',
-			confirmButtonColor : '#d33',
-		
-		  }).then((result) =>{
-			if(result.value){
-				if(data_id){
+		Swal.fire({
+		title : 'Are you sure? you want to delete this Certification Details!!!',
+		text : 'You will not be able to recover this Certification Details',
+		icon : 'warning',
+		showCancelButton : true,
+		confirmButtonText : 'Yes, delete it!',
+		cancelButtonColor : 'No, keep it',
+		confirmButtonColor : '#d33',
+	
+	  }).then((result) =>{
+		if(result.value){
+			console.log(data_id)
+			if(data_id){
 					Axios.delete("/api/candidatemaster/deleteCertification/"+this.state.candidate_id+"/delete/"+data_id)
 					.then(response =>{
 							if(response.data.deleted===true){
+
 							Swal.fire(
 										'Deleted!',
 										'Certification Details has been deleted successfully!',
 										'success'
 								);
+							this.getData();
 						}
 				})
-					.catch(error=>{
+				.catch(error=>{
 						
 						Swal.fire(
 									"Some problem occured deleting Certification Details!",
 									error.message,
 									'error'
 							)
-					})
-				}
-					
-					}else if (result.dismiss === Swal.DismissReason.cancel){
-						
-						Swal.fire(
-							'Cancelled',
-							'Your Certification details is safe :)',
-							'error'
-						)
-					}
 				})
-		  this.getData();
-		}
+			}
+					
+		}else if (result.dismiss === Swal.DismissReason.cancel){
+				Swal.fire(
+					'Cancelled',
+					'Your Certification details is safe :)',
+					'error'
+				)
+			}
+		})
+		  
+		
 		
 	}
 
@@ -375,7 +335,7 @@ class Certification extends Component{
 			}else{
 				var formValues = {
 					                candidate_id            : this.state.candidate_id,
-					                 skill: {
+					                skill: {
 					                	skill                 : this.state.skills,
 					                	skillType 			  : "secondary",	
 										rating                : this.state.rating,
@@ -409,9 +369,7 @@ class Certification extends Component{
 				}
 		}
 			 
-				
-		
-		this.getData();	
+	this.getData();	
 	}
 	updateData(formValues,event){
 		var status =  this.validateForm();
@@ -425,7 +383,6 @@ class Certification extends Component{
 													certifiedOn        : "",
 													validity           : "",
 													grade   		   : "",
-												
 													buttonText         : "Save"
 												})
 							this.props.history.push("/certification/"+this.state.candidate_id);
@@ -437,24 +394,28 @@ class Certification extends Component{
 
 		}
 	insetData(formValues,event){
-		if(this.state.certificationToggel===false){
-			Axios.patch("/api/candidatemaster/patch/addCandidateSkill",formValues)
-			 .then(response=>{
+		var status =  this.validateForm();
 
-					Swal.fire("Congrats","Your skill and rating is inserted Successfully","success");
-						this.setState({
-										skills             : [],
-										rating             : "",
-										isPrimary		   : true,
-										buttonText         : "Save"
-									})
-	
-				})
-				.catch(error =>{
-					Swal.fire("Submit Error!",error.message,'error');
-				});
-			}else{
-				Axios.patch("/api/candidatemaster/patch/addCandidateCertification",formValues)
+		if (status) {
+		if(this.state.certificationToggel===false){
+				Axios.patch("/api/candidatemaster/patch/addCandidateSkill",formValues)
+				 .then(response=>{
+
+						Swal.fire("Congrats","Your skill and rating is inserted Successfully","success");
+							this.setState({
+											skills             : [],
+											rating             : "",
+											isPrimary		   : true,
+											buttonText         : "Save"
+										})
+		
+					})
+					.catch(error =>{
+						Swal.fire("Submit Error!",error.message,'error');
+					});
+		}else{
+
+			Axios.patch("/api/candidatemaster/patch/addCandidateCertification",formValues)
 			 .then(response=>{
 
 					Swal.fire("Congrats","Your Certification Details is insert Successfully","success");
@@ -471,7 +432,8 @@ class Certification extends Component{
 				.catch(error =>{
 					Swal.fire("Submit Error!",error.message,'error');
 				});
-			}
+		}
+		}
 	}
 	handleSubmit(event){
 		event.preventDefault();
@@ -482,48 +444,59 @@ class Certification extends Component{
 	//========== Validation Start ==================
 	 validateForm=()=>{
 	 	var status = true;
+	 	//this.state.skills
 
-		
+	 	if(this.state.certificationToggel===false){
+		 	if(this.state.skills.length<=0){
+				document.getElementById("skillsError").innerHTML=  
+				"Please enter your rating";  
+				status=false; 
+			}else{
+				document.getElementById("skillsError").innerHTML=  
+				""; 
+				status = true;
+			}
+			if(this.state.rating.length<=0){
+				document.getElementById("ratingError").innerHTML=  
+				"Please enter your rating";  
+				status=false; 
+			}else{
+				document.getElementById("ratingError").innerHTML=  
+				""; 
+				status = true;
+			}
+	 	}else{
+			if(this.state.certificationName.length<=0){
+				document.getElementById("certificationNameError").innerHTML=  
+				"Please enter your Certification Name";  
+				status=false; 
+			}else{
+				document.getElementById("certificationNameError").innerHTML=  
+				""; 
+				status = true;
+			}
+			if(this.state.issuedBy.length<=0){
+				document.getElementById("issuedByError").innerHTML=  
+				"Please enter your Issued By";  
+				status=false; 
+			}else{
+				document.getElementById("issuedByError").innerHTML=  
+				""; 
+				status = true;
+			}
+			if(this.state.certifiedOn.length<=0){
+				document.getElementById("certifiedOnError").innerHTML=  
+				"Please enter your Certified On";  
+				status=false; 
+			}else{
+				document.getElementById("certifiedOnError").innerHTML=  
+				""; 
+				status = true;
+			}
 
-		// if(this.state.rating.length<=0){
-		// 	document.getElementById("ratingError").innerHTML=  
-		// 	"Please enter your rating";  
-		// 	status=false; 
-		// }else{
-		// 	document.getElementById("ratingError").innerHTML=  
-		// 	""; 
-		// 	status = true;
-		// }
-		// if(this.state.certificationName.length<=0){
-		// 	document.getElementById("certificationNameError").innerHTML=  
-		// 	"Please enter your Certification Name";  
-		// 	status=false; 
-		// }else{
-		// 	document.getElementById("certificationNameError").innerHTML=  
-		// 	""; 
-		// 	status = true;
-		// }
-		// if(this.state.issuedBy.length<=0){
-		// 	document.getElementById("issuedByError").innerHTML=  
-		// 	"Please enter your Issued By";  
-		// 	status=false; 
-		// }else{
-		// 	document.getElementById("issuedByError").innerHTML=  
-		// 	""; 
-		// 	status = true;
-		// }
-		// if(this.state.certifiedOn.length<=0){
-		// 	document.getElementById("certifiedOnError").innerHTML=  
-		// 	"Please enter your Certified On";  
-		// 	status=false; 
-		// }else{
-		// 	document.getElementById("certifiedOnError").innerHTML=  
-		// 	""; 
-		// 	status = true;
-		// }
+	 	}
 
-
-		// return status;
+		return status;
 	}
 
 	//========== Validation End ==================
@@ -541,17 +514,13 @@ class Certification extends Component{
 													 : "genderFeild col-lg-6"}  
 										 id="toggleSkills" name="certificationToggel" 
 										 value="toggleSkills" onClick={this.changeBlock.bind(this)}
-									>
-											Enter Skills
-									</div>
+									> Skills</div>
 									<div className={this.state.certificationToggel === true
 													? "genderFeild col-lg-6 genderFeildActive"
 													: "genderFeild col-lg-6"} 
 										id="toogleCertificate" name="certificationToggel" 
 										value="toogleCertificate" onClick={this.changeBlock.bind(this)}
-									>
-										Enter Certification	
-									</div>
+									> Certification	</div>
 									
 								</div>
 							</div>
@@ -565,7 +534,7 @@ class Certification extends Component{
 									<div className="col-lg-3">
 										
 										<label htmlFor="skills" className="nameTitleForm">
-											Skill 
+											Type 
 											<sup className="nameTitleFormStar">*</sup>
 										</label>
 										<div className="input-group genderFeildWrapper">
@@ -662,7 +631,7 @@ class Certification extends Component{
 							<div className="row formWrapper">
 
 								<div className="col-lg-4">
-									<label htmlFor="validity" className="nameTitleForm">Valid Till<sup className="nameTitleFormStar">*</sup></label>
+									<label htmlFor="validity" className="nameTitleForm">Valid Till</label>
 									<div className="input-group ">
 										<span className="input-group-addon inputBoxIcon"><i className="fa fa-calendar"></i> </span> 
 										<input type="date" name="validity" id="validity" className="form-control inputBox date" value={this.state.validity} onChange={this.handleChange.bind(this)} />
@@ -670,7 +639,7 @@ class Certification extends Component{
 								</div>
 
 								<div className="col-lg-4">
-									<label htmlFor="grade" className="nameTitleForm">Grade / Percentage  <sup className="nameTitleFormStar">*</sup></label>
+									<label htmlFor="grade" className="nameTitleForm">Grade / Percentage  </label>
 									<div className="input-group ">
 										<span className="input-group-addon inputBoxIcon"><FontAwesomeIcon icon="file-alt" /></span> 
 										<input type="text" name="grade" id="grade" className="form-control inputBox" value={this.state.grade} onChange={this.handleChange.bind(this)} />
@@ -750,7 +719,7 @@ class Certification extends Component{
 																
 																<div className="rightIconHide">
 																	<FontAwesomeIcon icon="trash-alt" /> 
-																	<span className="rightIconHideText"  onClick={this.deleteDate.bind(this)}>Delete</span>
+																	<span className="rightIconHideText" id={elem._id} onClick={this.deleteCertification.bind(this)}>Delete</span>
 																</div>
 															</div>
 														</div>

@@ -159,7 +159,7 @@
   font-size: 14px;
   font-family: 'Montserrat-Bold';
 }
-.cancelbtn {
+.cancelbtn, .cancelbtn:hover {
   background-color: transparent;
   color: #fff;
   border: 1px solid #D3950A;
