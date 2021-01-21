@@ -44,13 +44,13 @@ const MapView = () => {
             case "/state/TN":   const TamilNadu = React.lazy(() => import('../TamilNadu/TamilNadu.js'))
                                 return <TamilNadu/> ;  
 
-            case "/state/AD":   const AndhraPradesh = React.lazy(() => import('../AndhraPradesh/AndhraPradesh.js'))
+            case "/state/AP":   const AndhraPradesh = React.lazy(() => import('../AndhraPradesh/AndhraPradesh.js'))
                                 return <AndhraPradesh/> ; 
 
             case "/state/TS":   const Telangana = React.lazy(() => import('../Telangana/Telangana.js'))
                                 return <Telangana/> ;  
 
-            case "/state/OD":   const Orissa = React.lazy(() => import('../Orissa/Orissa.js'))
+            case "/state/OR":   const Orissa = React.lazy(() => import('../Orissa/Orissa.js'))
                                 return <Orissa/> ;  
 
             case "/state/CG":   const Chhattisgarh = React.lazy(() => import('../Chhattisgarh/Chhattisgarh.js'))
