@@ -10,8 +10,9 @@ ont-face {
 
 .FunctionalHeaderWrapper{
 	height: 110px;
-	background-color: #1f262d;
+	background-color: transparent;
 	margin-bottom: 0px !important;
+	
 }
 
 .iconHeader{

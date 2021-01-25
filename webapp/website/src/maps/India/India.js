@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
-import Axios 				from 'axios';
-import Swal 				from 'sweetalert2';
-import {Redirect} from 'react-router-dom';
-import { withRouter }                             from 'react-router-dom';
-import '../global.css';
-import './india.css';
-import {connect}            from 'react-redux';
+import Axios 			  from 'axios';
+import Swal 			  from 'sweetalert2';
+import {Redirect}         from 'react-router-dom';
+import { withRouter }     from 'react-router-dom';
+import {connect}              from 'react-redux';
 import { bindActionCreators } from 'redux';
 import  * as mapActionCreator from '../../common/actions/index';
+import '../global.css';
+import './india.css';
 
 
 class India extends Component{
