@@ -28,7 +28,6 @@ const entitySchema = mongoose.Schema({
                             PANDocument         : Array
                            }],
     locations           :       [
-    
                                 {
                                     locationType        : String,
                                     branchCode          : Number,

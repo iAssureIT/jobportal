@@ -4,18 +4,26 @@ import Moment               from 'moment';
 import { withRouter }	 	from 'react-router-dom';
 import Axios 			 	from 'axios';
 import Swal 			 	from 'sweetalert2';
-
+import _ 					from 'underscore';
 import '../BasicInfoForm/BasicInfoForm.css';
 
 
-class Academics extends Component{
+class Experience extends Component{
 	constructor(props){
 		super(props);
 
 		this.state={
 			experienceArry                : [],
+			industry 				      : "",
+            industry_id             	  : "",
+            industrylist            	  : [],
+            company 				      : "",
+            company_id             	      : "",
+            companylist            	      : [],
+            selectedCompany 			  : [],	
+            city 						  : [],	
 			companyName                   : "",
-			candidate_id                   : this.props.match.params.candidate_id,
+			candidate_id                  : this.props.match.params.candidate_id,
 			workExperienceID              : this.props.match.params.workExperienceID,
 			companyCountry                : "",
 			companyCity                   : "",
@@ -38,10 +46,59 @@ class Academics extends Component{
 	}
 	componentDidMount(){
 		this.getData();
+		Axios.get("/api/industrymaster/get/list")
+            .then(response => {
+                    this.setState({ industrylist : response.data });
+            })
+            .catch(error => {
+                Swal.fire("Error while getting List data", error.message, 'error');
+            })
+        Axios.get("/api/entitymaster/get/corporate")
+            .then(response => {
+                    this.setState({ companylist : response.data });
+            })
+            .catch(error => {
+                Swal.fire("Error while getting List data", error.message, 'error');
+            })    
 		if(this.props.match.params.workExperienceID){
 			this.edit()
 		}
 	}
+	onChangeIndustry(event){
+        const {name,value} = event.target;
+        this.setState({ [name]:value });  
+        
+        var industry_id;
+        if (document.querySelector('#industry option[value="' + value + '"]')) {
+           industry_id = document.querySelector('#industry option[value="' + value + '"]').getAttribute("data-value")
+        }else{industry_id = "" }
+
+        this.setState({industry_id :industry_id },()=>{
+            console.log(this.state)
+        });  
+    }	
+    
+    onChangeCompany(event){
+        const {name,value} = event.target;
+        this.setState({ [name]:value });  
+        
+        var company_id;
+        if (document.querySelector('#company option[value="' + value + '"]')) {
+           company_id = document.querySelector('#company option[value="' + value + '"]').getAttribute("data-value")
+        }else{company_id = "" }
+
+         
+        var selectedCompany = this.state.companylist.filter((val)=>{
+        	if (val._id ==company_id) {
+        		return val;
+        	}
+        })
+        console.log(selectedCompany)
+        var city = _.uniq(selectedCompany[0].locations, 'district')
+        console.log(city);
+        this.setState({company_id :company_id, selectedCompany : selectedCompany, city: city });
+
+    }	
 	//========== User Define Function Start ================
 	edit(){
 		var candidate_id = this.state.candidate_id;
@@ -80,11 +137,11 @@ class Academics extends Component{
 		}
 	}
 	getData(){
+
 		Axios.get("/api/candidatemaster/get/one/"+this.state.candidate_id)
 		.then(response=>{
 			 	this.setState({
-			 		experienceArry: response.data[0].workExperience
-
+			 		experienceArry: response.data.workExperience
 				 })
 			 })
 			 .catch(error=>{
@@ -236,7 +293,7 @@ class Academics extends Component{
 				});
 			}
 	}
-	handelChange(event){
+	handleChange(event){
 		var value = event.currentTarget.value;
 		var name  = event.currentTarget.name;
 
@@ -247,8 +304,19 @@ class Academics extends Component{
 		if(name==="formDate"||name==="toDate"){
 			this.calExperience(value);
 		}
+	}
+	handleChangeCity(event){
+		var value = event.currentTarget.value;
+		var name  = event.currentTarget.name;
+		console.log(document.querySelector('#companyCity option[value="' + value + '"]').getAttribute("data-state"))
 	
-
+		this.setState({
+			[name]  		: value,
+			"companyState" 		: document.querySelector('#companyCity option[value="' + value + '"]').getAttribute("data-state"),
+			"stateCode" 	: document.querySelector('#companyCity option[value="' + value + '"]').getAttribute("data-stateCode"),
+			"companyCountry"   	: document.querySelector('#companyCity option[value="' + value + '"]').getAttribute("data-country"),
+			"countryCode" 	: document.querySelector('#companyCity option[value="' + value + '"]').getAttribute("data-countryCode")
+		})
 	}
 	calExperience(exp){
 		var value = exp.currentTarget.value;
@@ -277,7 +345,7 @@ class Academics extends Component{
 	}
 	//========== User Define Function End ==================
 		//========== Validation Start ==================
-	 validateForm=()=>{
+	validateForm=()=>{
 		var status = true;
 	
 		if(this.state.companyName.length<=0){
@@ -417,9 +485,7 @@ class Academics extends Component{
 			status = true;
 		}
 		
-	
-		
-		 return status;
+		return status;
 	}
 
 	//========== Validation End ==================
@@ -428,42 +494,88 @@ class Academics extends Component{
 				<div className="col-lg-12">
 					<form>
 					<div className="row formWrapper">
-
-							<div className="col-lg-4">
-								<label htmlFor="companyName" className="nameTitleForm">
-									Company Name
-									<sup className="nameTitleFormStar">*</sup>
-								</label>
-								<div className="input-group ">
-									<span className="input-group-addon inputBoxIcon">
-										<FontAwesomeIcon icon="warehouse" />
-									</span> 
-									<input type="text" name="companyName" id="companyName" 
-									 className="form-control inputBox " value={this.state.companyName}
-									 onChange={this.handelChange.bind(this)} />
-								</div> 
-								<span id="companyNameError" className="errorMsg"></span>
+							<div className="col-lg-6">
+								<label htmlFor="industry" className="nameTitleForm"> Industry <span className="nameTitleFormStar">&#42;</span> </label>
+								<div className="input-group">
+									<span className="input-group-addon inputBoxIcon"><i className="fa fa-briefcase"></i></span> 
+										<input type="text" list="industry" className="form-control inputBox" refs="industry" 
+                                         name="industry" id="selectIndustry" maxLength="100" value={this.state.industry} data-value={this.state.industry_id}
+										onChange={this.onChangeIndustry.bind(this)} />
+										<datalist name="industry" id="industry" className="industrylist" >
+										    {this.state.industrylist.map((item, key) =>
+										        <option key={key} value={item.industry} data-value={item._id}/>
+										    )}
+										</datalist>
+								</div>
+                                <span id="industryError" className="errorMsgJobPost"></span>
 							</div>
 
+							<div className="col-lg-6">
+								<label htmlFor="companyName" className="nameTitleForm">
+									Company
+									<sup className="nameTitleFormStar">*</sup>
+								</label>
+								<div className="input-group">
+									<span className="input-group-addon inputBoxIcon"><i className="fa fa-briefcase"></i></span> 
+										<input type="text" list="company" className="form-control inputBox" refs="industry" 
+                                         name="company" id="selectCompany" maxLength="100" value={this.state.company} data-value={this.state.company_id}
+										onChange={this.onChangeCompany.bind(this)} />
+										<datalist name="company" id="company" className="companylist" >
+										    { this.state.companylist.map((item, key) =>
+										        <option key={key} value={item.companyName} data-value={item._id}/>
+										    )}
+										</datalist>
+								</div>
+								<span id="companyNameError" className="errorMsg"></span>
+							</div>
+						</div>	
+
+						<div className="row formWrapper">
 							<div className="col-lg-4">
 								<label htmlFor="companyCity" className="nameTitleForm">
-									Company City
+									 City
 									<sup className="nameTitleFormStar">*</sup>
 								</label>
 								<div className="input-group ">
 									<span className="input-group-addon inputBoxIcon">
 										<FontAwesomeIcon icon="city" />
 									</span> 
-									<input type="text" name="companyCity" id="companyCity" 
-									 className="form-control inputBox " value={this.state.companyCity} 
-									 onChange={this.handelChange.bind(this)} />
+									<input type="text" list="companyCity" className="form-control inputBox" refs="industry" 
+                                         name="companyCity" id="selectCompanyCity" maxLength="100" value={this.state.companyCity}
+										onChange={this.handleChangeCity.bind(this)} />
+										<datalist name="companyCity" id="companyCity" className="companyCity" >
+										    { this.state.city.map((elem, key) =>
+										        <option key={key} value={elem.district} data-stateCode = {elem.stateCode} data-state={elem.state} data-countryCode = {elem.countryCode} data-country = {elem.country}/>
+										    )}
+										</datalist>
+									{/*<select required className="form-control inputBox selectOption" 
+									  id="companyCity" value={this.state.companyCity}
+									  name="companyCity" placeholder="-- Select --" onChange={this.handleChangeCity.bind(this)}>
+									  	<option > -- Select -- </option>
+									  	{
+									  		this.state.city.length>0
+									  		?	
+									  			this.state.city.map((elem,index)=>{
+									  				return(
+									  					<option value={elem.district} key={index} 
+									  					data-stateCode = {elem.stateCode} data-state={elem.state} data-countryCode = {elem.countryCode} data-country = {elem.country} >
+									  						{elem.district}
+									  					</option>
+									  				);
+									  			})
+									  			
+									  		:
+									  			null
+									  	}
+									</select>*/}
+									
 								</div> 
 								<span id="companyCityError" className="errorMsg"></span>
 							</div>
 
 							<div className="col-lg-4">
 								<label htmlFor="companyState" className="nameTitleForm">
-									Company State
+									 State
 									<sup className="nameTitleFormStar">*</sup>
 								</label>
 								<div className="input-group ">
@@ -472,18 +584,13 @@ class Academics extends Component{
 								    </span> 
 									<input type="text" name="companyState" id="companyState" 
 									 className="form-control inputBox" value={this.state.companyState} 
-									 onChange={this.handelChange.bind(this)} />
+									 onChange={this.handleChange.bind(this)} />
 								</div> 
 								<span id="stateError" className="errorMsg"></span>
 							</div>
-
-						</div>
-
-						<div className="row formWrapper">
-							
 							<div className="col-lg-4">
 								<label htmlFor="companyCountry" className="nameTitleForm">
-									Company Country
+									 Country
 								    <sup className="nameTitleFormStar">*</sup>
 								</label>
 								<div className="input-group ">
@@ -492,11 +599,13 @@ class Academics extends Component{
 									</span> 
 									<input type="text" name="companyCountry" id="companyCountry" 
 									 className="form-control inputBox " value={this.state.companyCountry}
-									 onChange={this.handelChange.bind(this)} />
+									 onChange={this.handleChange.bind(this)} />
 								</div> 
 								<span id="companyCountryError" className="errorMsg"></span>
 							</div>
+						</div>
 
+						<div className="row formWrapper">
 							<div className="col-lg-4">
 								<label htmlFor="lastDesignation" className="nameTitleForm">
 									Last Designation
@@ -508,7 +617,7 @@ class Academics extends Component{
 								    </span> 
 									<input type="text" name="lastDesignation" id="lastDesignation" 
 									 className="form-control inputBox" value={this.state.lastDesignation} 
-									 onChange={this.handelChange.bind(this)} />
+									 onChange={this.handleChange.bind(this)} />
 								</div> 
 								<span id="lastDesignationError" className="errorMsg"></span>
 							</div>
@@ -524,7 +633,7 @@ class Academics extends Component{
 									</span> 
 									<input type="text" name="lastDeartment" id="lastDeartment"
 									 className="form-control inputBox" value={this.state.lastDeartment} 
-									 onChange={this.handelChange.bind(this)} />
+									 onChange={this.handleChange.bind(this)} />
 								</div> 
 								<span id="lastDeartmentError" className="errorMsg"></span>
 							</div>
@@ -546,7 +655,7 @@ class Academics extends Component{
 									<input type="date" name="formDate" id="formDate" 
 									 className="form-control inputBox date" 
 									 value={this.state.formDate} 
-									 onChange={this.handelChange.bind(this)} />
+									 onChange={this.handleChange.bind(this)} />
 								</div> 
 								<span id="formDateError" className="errorMsg"></span>
 							</div>
@@ -563,7 +672,7 @@ class Academics extends Component{
 									<input type="date" name="toDate" id="toDate" 
 									 className="form-control inputBox date" 
 									 value={this.state.toDate}
-									 onChange={this.handelChange.bind(this)} />
+									 onChange={this.handleChange.bind(this)} />
 								</div> 
 								<span id="toDateError" className="errorMsg"></span>
 							</div>
@@ -590,7 +699,7 @@ class Academics extends Component{
 									</span> 
 									<input type="text" name="responsibilities" id="responsibilities"
 									 className="form-control inputBox" value={this.state.responsibilities} 
-									 onChange={this.handelChange.bind(this)} />
+									 onChange={this.handleChange.bind(this)} />
 								</div> 
 								<span id="responsibilitiesError" className="errorMsg"></span>
 							</div>
@@ -606,7 +715,7 @@ class Academics extends Component{
 									</span> 
 									<input type="text" name="reportingManager" id="reportingManager" 
 									 className="form-control inputBox" value={this.state.reportingManager} 
-									 onChange={this.handelChange.bind(this)} />
+									 onChange={this.handleChange.bind(this)} />
 								</div> 
 								<span id="reportingManagerError" className="errorMsg"></span>
 							</div>
@@ -623,7 +732,7 @@ class Academics extends Component{
 									<input type="text" name="reportingManagerDesignation" 
 									 id="reportingManagerDesignation" className="form-control inputBox" 
 									 value={this.state.reportingManagerDesignation} 
-									 onChange={this.handelChange.bind(this)} />
+									 onChange={this.handleChange.bind(this)} />
 								</div> 
 								<span id="reportingManagerDesignationError" className="errorMsg"></span>
 							</div>
@@ -641,7 +750,7 @@ class Academics extends Component{
 									</span> 
 									<input type="text" name="lastSalary" id="lastSalary" 
 									 className="form-control inputBox" value={this.state.lastSalary}
-									 onChange={this.handelChange.bind(this)} />
+									 onChange={this.handleChange.bind(this)} />
 								</div> 
 								<span id="lastSalaryError" className="errorMsg"></span>
 							</div>
@@ -657,7 +766,7 @@ class Academics extends Component{
 									</span> 
 									<input type="text" name="expectedSalary" id="expectedSalary" 
 									 className="form-control inputBox" value={this.state.expectedSalary} 
-									 onChange={this.handelChange.bind(this)} />
+									 onChange={this.handleChange.bind(this)} />
 								</div> 
 								<span id="expectedSalaryError" className="errorMsg"></span>
 							</div>
@@ -673,7 +782,7 @@ class Academics extends Component{
 									</span> 
 									<input type="text" name="noticePeriod" id="noticePeriod" 
 									 className="form-control inputBox" value={this.state.noticePeriod}
-									 onChange={this.handelChange.bind(this)} />
+									 onChange={this.handleChange.bind(this)} />
 								</div> 
 								<span id="noticePeriodError" className="errorMsg"></span>
 							</div>
@@ -777,4 +886,4 @@ class Academics extends Component{
 	}
 }
 
-export default withRouter(Academics);
+export default withRouter(Experience);

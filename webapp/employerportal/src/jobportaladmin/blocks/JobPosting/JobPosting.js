@@ -887,7 +887,6 @@ class JobPosting extends Component {
         this.setState({ functionalarea_id : functionalarea_id },()=>{
             console.log(this.state)
         });  
-        
     }	
 
     onChangeSubFunctionalArea(event){
