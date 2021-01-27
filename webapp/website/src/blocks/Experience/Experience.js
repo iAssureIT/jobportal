@@ -21,16 +21,18 @@ class Experience extends Component{
             company_id             	      : "",
             companylist            	      : [],
             selectedCompany 			  : [],	
+            stateArray 				      : [],		
             city 						  : [],	
 			companyName                   : "",
 			candidate_id                  : this.props.match.params.candidate_id,
 			workExperienceID              : this.props.match.params.workExperienceID,
 			companyCountry                : "",
+			countryCode 				  : "IN",
 			companyCity                   : "",
 			lastDesignation               : "",
 			lastDeartment   		      : "",
 			lastSalary                    : "",
-			formDate	                  : "",	
+			fromDate	                  : "",	
 			toDate                        : "",
 			companyState                  : "",
 			responsibilities              : "",
@@ -39,10 +41,11 @@ class Experience extends Component{
 			expectedSalary                : "",
 			noticePeriod                  : "",
 			buttonText                    : "Save",
-
 			expYears                      : 0,
 			expMonths                     : 0,
 		}
+		this.camelCase = this.camelCase.bind(this)
+		this.handleChangeState = this.handleChangeState.bind(this);
 	}
 	componentDidMount(){
 		this.getData();
@@ -59,7 +62,17 @@ class Experience extends Component{
             })
             .catch(error => {
                 Swal.fire("Error while getting List data", error.message, 'error');
-            })    
+            })   
+        Axios.get("http://locations2.iassureit.com/api/states/get/list/IN")
+			.then((response) => {
+				this.setState({
+					stateArray: response.data
+				})
+				
+			})
+			.catch((error) => {
+			})
+			     
 		if(this.props.match.params.workExperienceID){
 			this.edit()
 		}
@@ -94,10 +107,16 @@ class Experience extends Component{
         	}
         })
         console.log(selectedCompany)
-        var city = _.uniq(selectedCompany[0].locations, 'district')
-        console.log(city);
-        this.setState({company_id :company_id, selectedCompany : selectedCompany, city: city });
+        if (selectedCompany[0]) {
+        	var city = _.uniq(selectedCompany[0].locations, 'district')
+        
+        	this.setState({company_id :company_id, selectedCompany : selectedCompany, city: city, });
 
+        }else{
+        	this.setState({company_id :company_id, company : value });
+
+        }
+        
     }	
 	//========== User Define Function Start ================
 	edit(){
@@ -125,7 +144,7 @@ class Experience extends Component{
 			 		reportingManager               :editData[0].workExperience[0].reportingManager,
 			 		noticePeriod                   :editData[0].workExperience[0].noticePeriod,
 			 		reportingManagerDesignation    :editData[0].workExperience[0].reportingManagerDegn,
-			 		formDate                       :Moment(editData[0].workExperience[0].fromDate).format("YYYY-MM-DD"),
+			 		fromDate                       :Moment(editData[0].workExperience[0].fromDate).format("YYYY-MM-DD"),
 			 		toDate                         :Moment(editData[0].workExperience[0].toDate).format("YYYY-MM-DD"),
 			 		buttonText                     :"Update"
 			 	})
@@ -198,23 +217,28 @@ class Experience extends Component{
 	}
 	
 	handleSave(event){
+		event.preventDefault();
 		var status =  this.validateForm();
-		
 		
 		var formValues = {
 								candidate_id        : this.state.candidate_id,
 								experienceID       : this.state.workExperienceID,
 								experience:{
-									companyName                   : this.state.companyName,
+									industry_id 				  : this.state.industry_id,	
+									industry 				  	  : this.state.industry,	
+									company_id 				      : this.state.company_id,
+									company 				      : this.state.company,
+									countryCode 				  : this.state.countryCode,	
 									country                       : this.state.companyCountry,
-									city                          : this.state.companyCity,
-									state                         : this.state.companyState,
+									stateCode 					  : this.state.stateCode,
+									state                         : this.state.companyState,		
+									district                      : this.state.companyCity,
 									lastDegn                      : this.state.lastDesignation,
 									department                    : this.state.lastDeartment,
 									lastSalary                    : this.state.lastSalary,
 									expectedSalary                : this.state.expectedSalary,
 									noticePeriod                  : this.state.noticePeriod,
-									fromDate                      : this.state.formDate,
+									fromDate                      : this.state.fromDate,
 									toDate                        : this.state.toDate,
 									responsibilities              : this.state.responsibilities,
 									reportingManager              : this.state.reportingManager,
@@ -222,7 +246,8 @@ class Experience extends Component{
 								}
 								
 							}
-							
+		console.log(formValues)	
+
 		if(this.props.match.params.workExperienceID){
 			this.updateData(formValues,event);
 		}else{
@@ -233,33 +258,32 @@ class Experience extends Component{
 	updateData(formValues,event){
 		var status =  this.validateForm();
 		if(status==true){
-					Axios.patch("/api/candidatemaster/patch/updateOneCandidateExperience",formValues)
+			Axios.patch("/api/candidatemaster/patch/updateOneCandidateExperience",formValues)
 				 .then(response=>{
 
-									Swal.fire("Congrats","Your Experience Details is update Successfully","success");
-										this.setState({
-													companyName                   : "",
-													companyCountry                : "",
-													companyCity                   : "",
-													lastDesignation               : "",
-													lastDeartment   		      : "",
-													lastSalary                    : "",
-													formDate	                  : "",	
-													companyState	              : "",	
-													expectedSalary	              : "",	
-													toDate                        : "",
-													responsibilities              : "",
-													reportingManager              : "",
-													reportingManagerDesignation   : "",
-													noticePeriod                  : "",
-													buttonText                    : "Save"
-												})
-							
-							this.props.history.push("/experience/"+this.state.candidate_id);
-					})
-					.catch(error =>{
-						Swal.fire("Submit Error!",error.message,'error');
-					});
+					Swal.fire("Congrats","Your Experience Details is update Successfully","success");
+						this.setState({
+									companyName                   : "",
+									companyCountry                : "",
+									companyCity                   : "",
+									lastDesignation               : "",
+									lastDeartment   		      : "",
+									lastSalary                    : "",
+									fromDate	                  : "",	
+									companyState	              : "",	
+									expectedSalary	              : "",	
+									toDate                        : "",
+									responsibilities              : "",
+									reportingManager              : "",
+									reportingManagerDesignation   : "",
+									noticePeriod                  : "",
+									buttonText                    : "Save"
+								})
+					//this.props.history.push("/experience/"+this.state.candidate_id);
+				})
+				.catch(error =>{
+					Swal.fire("Submit Error!",error.message,'error');
+				});
 				}
 
 			
@@ -277,7 +301,7 @@ class Experience extends Component{
 										lastDesignation               : "",
 										lastDeartment   		      : "",
 										lastSalary                    : "",
-										formDate	                  : "",	
+										fromDate	                  : "",	
 										expectedSalary	              : "",	
 										companyState	              : "",	
 										toDate                        : "",
@@ -301,37 +325,50 @@ class Experience extends Component{
 		this.setState({
 			[name]:value,
 		})
-		if(name==="formDate"||name==="toDate"){
+
+		if(name==="fromDate"||name==="toDate"){
 			this.calExperience(value);
 		}
 	}
 	handleChangeCity(event){
 		var value = event.currentTarget.value;
 		var name  = event.currentTarget.name;
-		console.log(document.querySelector('#companyCity option[value="' + value + '"]').getAttribute("data-state"))
-	
-		this.setState({
-			[name]  		: value,
-			"companyState" 		: document.querySelector('#companyCity option[value="' + value + '"]').getAttribute("data-state"),
-			"stateCode" 	: document.querySelector('#companyCity option[value="' + value + '"]').getAttribute("data-stateCode"),
-			"companyCountry"   	: document.querySelector('#companyCity option[value="' + value + '"]').getAttribute("data-country"),
-			"countryCode" 	: document.querySelector('#companyCity option[value="' + value + '"]').getAttribute("data-countryCode")
-		})
+		
+		if (document.querySelector('#companyCity option[value="' + value + '"]')) {
+			this.setState({
+				[name]  		: value,
+				"companyState" 		: document.querySelector('#companyCity option[value="' + value + '"]').getAttribute("data-state"),
+				"stateCode" 	: document.querySelector('#companyCity option[value="' + value + '"]').getAttribute("data-stateCode"),
+				"companyCountry"   	: document.querySelector('#companyCity option[value="' + value + '"]').getAttribute("data-country"),
+				"countryCode" 	: document.querySelector('#companyCity option[value="' + value + '"]').getAttribute("data-countryCode")
+			})
+		}else{
+			this.setState({ [name]  		: value })
+		}
 	}
-	calExperience(exp){
-		var value = exp.currentTarget.value;
-		var a = value.currentTarget.value;
-		var b = value.currentTarget.value;
+	camelCase(str) {
+		return str
+			.toLowerCase()
+			.split(' ')
+			.map(word => word.charAt(0).toUpperCase() + word.slice(1))
+			.join(' ');
+	}
+	calExperience(value){
+		
+		var toDate 		= this.state.toDate == "" ?  Moment(new Date()) : Moment(this.state.toDate);
+		var fromDate 	= this.state.fromDate == "" ?  Moment(new Date()) : Moment(this.state.fromDate);
+		
 
-		var years = a.diff(b, 'year');
-		b.add(years, 'years');
+		var exp     = Moment.duration(toDate.diff(fromDate));
+		var Years   = exp.years();
+		var Months  = exp.months();
+		var weeks   = exp.weeks();
+		
 
-		var months = a.diff(b, 'months');
-		b.add(months, 'months');
-
-		var days = a.diff(b, 'days');
-
-		console.log(years + ' years ' + months + ' months ' + days + ' days');
+		this.setState({
+			expYears : Years,
+			expMonths: Months,
+		})
 	}
 
 	handleBack(event){
@@ -343,6 +380,15 @@ class Experience extends Component{
 			this.props.history.push("/profile/"+this.state.candidate_id);
 			
 	}
+	handleChangeState(event) {
+		const target = event.target;
+	    var state = document.getElementById("states");
+    	var stateCode = state.options[state.selectedIndex].getAttribute("statecode");
+		this.setState({
+			[event.target.name]: event.target.value,
+			stateCode : stateCode
+		});
+	}
 	//========== User Define Function End ==================
 		//========== Validation Start ==================
 	validateForm=()=>{
@@ -350,7 +396,7 @@ class Experience extends Component{
 	
 		if(this.state.companyName.length<=0){
 			document.getElementById("companyNameError").innerHTML=  
-			"Please enter your Company Name";  
+			"Please enter company name";  
 			status=false; 
 		}else{
 			document.getElementById("companyNameError").innerHTML=  
@@ -359,7 +405,7 @@ class Experience extends Component{
 		}
 		if(this.state.companyState.length<=0){
 			document.getElementById("stateError").innerHTML=  
-			"Please enter your Company State";  
+			"Please enter state";  
 			status=false; 
 		}else{
 			document.getElementById("stateError").innerHTML=  
@@ -369,7 +415,7 @@ class Experience extends Component{
 		
 		if(this.state.companyCountry.length<=0){
 			document.getElementById("companyCountryError").innerHTML=  
-			"Please enter your Company Country";  
+			"Please enter country";  
 			status=false; 
 		}else{
 			document.getElementById("companyCountryError").innerHTML=  
@@ -378,7 +424,7 @@ class Experience extends Component{
 		}
 		if(this.state.companyCity.length<=0){
 			document.getElementById("companyCityError").innerHTML=  
-			"Please enter your Company City";  
+			"Please enter city";  
 			status=false; 
 		}else{
 			document.getElementById("companyCityError").innerHTML=  
@@ -387,7 +433,7 @@ class Experience extends Component{
 		}
 		if(this.state.lastDesignation.length<=0){
 			document.getElementById("lastDesignationError").innerHTML=  
-			"Please enter your Last Designation";  
+			"Please enter your last designation";  
 			status=false; 
 		}else{
 			document.getElementById("lastDesignationError").innerHTML=  
@@ -396,7 +442,7 @@ class Experience extends Component{
 		}
 		if(this.state.lastDeartment.length<=0){
 			document.getElementById("lastDeartmentError").innerHTML=  
-			"Please enter your Last Deartment";  
+			"Please enter your last deartment";  
 			status=false; 
 		}else{
 			document.getElementById("lastDeartmentError").innerHTML=  
@@ -405,7 +451,7 @@ class Experience extends Component{
 		}
 		if(this.state.lastSalary.length<=0){
 			document.getElementById("lastSalaryError").innerHTML=  
-			"Please enter your Last Salary";  
+			"Please enter your last salary";  
 			status=false; 
 		}else{
 			document.getElementById("lastSalaryError").innerHTML=  
@@ -414,25 +460,25 @@ class Experience extends Component{
 		}
 		if(this.state.expectedSalary.length<=0){
 			document.getElementById("expectedSalaryError").innerHTML=  
-			"Please enter your Last Salary";  
+			"Please enter your last salary";  
 			status=false; 
 		}else{
 			document.getElementById("expectedSalaryError").innerHTML=  
 			""; 
 			status = true;
 		}
-		if(this.state.formDate.length<=0){
-			document.getElementById("formDateError").innerHTML=  
-			"Please enter your Form Date";  
+		if(this.state.fromDate.length<=0){
+			document.getElementById("fromDateError").innerHTML=  
+			"Please enter date";  
 			status=false; 
 		}else{
-			document.getElementById("formDateError").innerHTML=  
+			document.getElementById("fromDateError").innerHTML=  
 			""; 
 			status = true;
 		}
 		if(this.state.toDate.length<=0){
 			document.getElementById("toDateError").innerHTML=  
-			"Please enter your To Date";  
+			"Please enter date";  
 			status=false; 
 		}else{
 			document.getElementById("toDateError").innerHTML=  
@@ -441,7 +487,7 @@ class Experience extends Component{
 		}
 		if(this.state.toDate.length<=0){
 			document.getElementById("toDateError").innerHTML=  
-			"Please enter your To Date";  
+			"Please enter date";  
 			status=false; 
 		}else{
 			document.getElementById("toDateError").innerHTML=  
@@ -450,7 +496,7 @@ class Experience extends Component{
 		}
 		if(this.state.noticePeriod.length<=0){
 			document.getElementById("noticePeriodError").innerHTML=  
-			"Please enter your To Date";  
+			"Please enter date";  
 			status=false; 
 		}else{
 			document.getElementById("noticePeriodError").innerHTML=  
@@ -459,7 +505,7 @@ class Experience extends Component{
 		}
 		if(this.state.responsibilities.length<=0){
 			document.getElementById("responsibilitiesError").innerHTML=  
-			"Please enter your Responsibilities";  
+			"Please enter your responsibilities";  
 			status=false; 
 		}else{
 			document.getElementById("responsibilitiesError").innerHTML=  
@@ -468,7 +514,7 @@ class Experience extends Component{
 		}
 		if(this.state.reportingManager.length<=0){
 			document.getElementById("reportingManagerError").innerHTML=  
-			"Please enter your Reporting Manager";  
+			"Please enter your reporting manager";  
 			status=false; 
 		}else{
 			document.getElementById("reportingManagerError").innerHTML=  
@@ -477,7 +523,7 @@ class Experience extends Component{
 		}
 		if(this.state.reportingManagerDesignation.length<=0){
 			document.getElementById("reportingManagerDesignationError").innerHTML=  
-			"Please enter your Reporting Manager Designation";  
+			"Please enter your reporting manager designation";  
 			status=false; 
 		}else{
 			document.getElementById("reportingManagerDesignationError").innerHTML=  
@@ -582,9 +628,20 @@ class Experience extends Component{
 									<span className="input-group-addon inputBoxIcon">
 										<i className="fa fa-map"></i>
 								    </span> 
-									<input type="text" name="companyState" id="companyState" 
-									 className="form-control inputBox" value={this.state.companyState} 
-									 onChange={this.handleChange.bind(this)} />
+									
+									<select id="states" className="form-control inputBox selectOption"
+										ref="companyState" value={this.state.companyState} name="companyState" onChange={this.handleChangeState} >
+										<option selected={true}>-- Select --</option>
+										{
+											this.state.stateArray && this.state.stateArray.length > 0 ?
+												this.state.stateArray.map((stateData, index) => {
+													return (
+														<option key={index} statecode={stateData.stateCode}>{this.camelCase(stateData.stateName)}</option>
+													);
+												}
+												) : ''
+										}
+									</select>
 								</div> 
 								<span id="stateError" className="errorMsg"></span>
 							</div>
@@ -644,7 +701,7 @@ class Experience extends Component{
 						<div className="row formWrapper">
 
 							<div className="col-lg-4">
-								<label htmlFor="formDate" className="nameTitleForm">
+								<label htmlFor="fromDate" className="nameTitleForm">
 									Form Date
 									<sup className="nameTitleFormStar">*</sup>
 								</label>
@@ -652,12 +709,12 @@ class Experience extends Component{
 									<span className="input-group-addon inputBoxIcon">
 										<i className="fa fa-calendar"></i> 
 									</span> 
-									<input type="date" name="formDate" id="formDate" 
+									<input type="date" name="fromDate" id="fromDate" 
 									 className="form-control inputBox date" 
-									 value={this.state.formDate} 
+									 value={this.state.fromDate} 
 									 onChange={this.handleChange.bind(this)} />
 								</div> 
-								<span id="formDateError" className="errorMsg"></span>
+								<span id="fromDateError" className="errorMsg"></span>
 							</div>
 
 							<div className="col-lg-4">

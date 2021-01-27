@@ -90,7 +90,7 @@ class LocationDetails extends Component {
 		};
 		this.handleChange = this.handleChange.bind(this);
 		// this.handleChangeCountry = this.handleChangeCountry.bind(this);
-	 	 this.handleChangeState = this.handleChangeState.bind(this);
+	 	this.handleChangeState = this.handleChangeState.bind(this);
 		// this.handleChangeDistrict = this.handleChangeDistrict.bind(this);
 		// this.handleChangeBlock = this.handleChangeBlock.bind(this);
 		this.camelCase = this.camelCase.bind(this)

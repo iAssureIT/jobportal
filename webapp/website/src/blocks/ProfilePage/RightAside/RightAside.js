@@ -5,7 +5,6 @@ import Moment               from 'moment';
 import { withRouter }	 	from 'react-router-dom';
 import './RightAside.css';
 
-
 class RightAside extends Component{
 	constructor(props){
 		super(props);
@@ -21,7 +20,7 @@ class RightAside extends Component{
 		.then(response=>{
 			 
 			 	this.setState({
-			 		certificationArry :response.data[0].certifications,
+			 		certificationArry :response.data.certifications,
 			 	})
 			 })
 			 .catch(error=>{
@@ -80,9 +79,7 @@ class RightAside extends Component{
 									null
 
 						}
-						
-						
-						
+												
 						<div className="caertificationNameWrapper">
 							<div className="col-lg-12">
 							<div className="row">
@@ -111,4 +108,4 @@ class RightAside extends Component{
 	}
 }
 
-export default withRouter(RightAside);
+export default withRouter(RightAside)

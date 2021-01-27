@@ -73,7 +73,6 @@ const candidateSchema = mongoose.Schema({
 	workExperience:[{
 		industry_id 	: { type: mongoose.Schema.Types.ObjectId, ref: 'industrymasters' },
 		company_id 		: { type: mongoose.Schema.Types.ObjectId, ref: 'entitymasters' },
-		companyID 		: Number,
 		countryCode     : String,
         country         : String,
         stateCode       : String,

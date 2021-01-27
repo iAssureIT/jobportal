@@ -16,6 +16,7 @@ const entitySchema = mongoose.Schema({
     companyPhone              : String,
     companyEmail              : String,  
     profileStatus             : String,
+    data_origin               : String,  
     country                   : String,
     countryCode               : String,
     industry_id               : { type: mongoose.Schema.Types.ObjectId, ref: 'industrymaster' },  

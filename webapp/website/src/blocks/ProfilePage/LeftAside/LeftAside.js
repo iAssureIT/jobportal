@@ -4,9 +4,6 @@ import Swal 			 	from 'sweetalert2';
 import Moment               from 'moment';
 import { withRouter }	 	from 'react-router-dom';
 import './LeftAside.css';
-import {connect}            from 'react-redux';
-import { bindActionCreators } from 'redux';
-import  * as mapActionCreator from '../../../common/actions/index';
 
 class LeftAside extends Component{
 	constructor(props){
@@ -17,7 +14,7 @@ class LeftAside extends Component{
 			middleName         : "",
 			lastName           : "",
 			lastDesignation    : "",
-			candidate_id       : this.props.userDetails.candidate_id,
+			candidate_id       : this.props.match.params.candidate_id,
 			mobile             : "",
 			alternate          : "",
 			email              : "",	
@@ -28,8 +25,8 @@ class LeftAside extends Component{
 			district           : "",
 			state	           : "",
 			country	           : "",
-			primarySkillsArry  : [],
-			secondarySkillsArry  : [],
+			primarySkills  	   : [],
+			secondarySkills    : [],
 			pincode	           : 0,	
 				
 		}
@@ -39,35 +36,40 @@ class LeftAside extends Component{
 		Axios.get("/api/candidatemaster/get/one/"+this.state.candidate_id)
 		.then(response=>{
 			 console.log(response.data);
-			 	this.setState({
-			 		primarySkillsArry   : response.data[0].primarySkills,
-			 		secondarySkillsArry : response.data[0].secondarySkills,
-			 		firstName           : response.data[0].basicInfo.firstName?response.data[0].basicInfo.firstName:"",
-					middleName        : response.data[0].basicInfo.middleName?response.data[0].basicInfo.middleName:"",
-					lastName          : response.data[0].basicInfo.lastName?response.data[0].basicInfo.lastName:"",
-					mobile            : response.data[0].contact.mobile?response.data[0].contact.mobile:"",
-					alternate         : response.data[0].contact.altMobile?response.data[0].contact.altMobile:"",
-					email             : response.data[0].contact.emailId?response.data[0].contact.emailId:"",
-					houseNumber       : response.data[0].address[0].houseNumber?response.data[0].address[0].houseNumber:"",
-					address           : response.data[0].address[0].address?response.data[0].address[0].address:"",
-					area              : response.data[0].address[0].area?response.data[0].address[0].area:"",
-					city              : response.data[0].address[0].cityVillage?response.data[0].address[0].cityVillage:"",
-					district          : response.data[0].address[0].district?response.data[0].address[0].district:"",
-					state             : response.data[0].address[0].state?response.data[0].address[0].state:"",
-					country           : response.data[0].address[0].country?response.data[0].address[0].country:"",
-					pincode           : response.data[0].address[0].pincode?response.data[0].address[0].pincode:"",
-					lastDesignation   : response.data[0].workExperience[0].lastDegn?response.data[0].workExperience[0].lastDegn:"",
-					
-
-				
+			 const primarySkills = [];
+			 const secondarySkills = [];
+			 	response.data.skills.map((skill, index)=>{
+			 		if (skill.skillType == "primary") { primarySkills.push(skill) }
+			 		if (skill.skillType == "secondary") { secondarySkills.push(skill) }
 			 	})
-			 })
-			 .catch(error=>{
+
+			 	this.setState({
+			 		primarySkills     : primarySkills,
+			 		secondarySkills   : secondarySkills,
+			 		firstName         : response.data.basicInfo.firstName?response.data.basicInfo.firstName:"",
+					middleName        : response.data.basicInfo.middleName?response.data.basicInfo.middleName:"",
+					lastName          : response.data.basicInfo.lastName?response.data.basicInfo.lastName:"",
+					mobile            : response.data.contact.mobile?response.data.contact.mobile:"",
+					alternate         : response.data.contact.altMobile?response.data.contact.altMobile:"",
+					email             : response.data.contact.emailId?response.data.contact.emailId:"",
+					houseNumber       : response.data.address[0] ? response.data.address[0].houseNumber:"",
+					address           : response.data.address[0] ? response.data.address[0].address:"",
+					area              : response.data.address[0] ? response.data.address[0].area:"",
+					city              : response.data.address[0] ? response.data.address[0].cityVillage:"",
+					district          : response.data.address[0] ? response.data.address[0].district:"",
+					state             : response.data.address[0] ? response.data.address[0].state:"",
+					country           : response.data.address[0] ? response.data.address[0].country:"",
+					pincode           : response.data.address[0] ? response.data.address[0].pincode:"",
+					lastDesignation   : response.data.workExperience[0] ? response.data.workExperience[0].lastDegn:"",
+				})
+			})
+			.catch(error=>{
 			 	Swal.fire("Submit Error!",error.message,'error');
-			 })
+			})
 
 		}
 	render(){
+
 		return(
 				<div className="container-fluid col-lg-12 ">
 					<div className=" leftAsideWrapper ">
@@ -129,7 +131,7 @@ class LeftAside extends Component{
 
 											<div className=" col-lg-10">
 												<div className="candidatePageText row">
-													{this.state.houseNumber+", "+ this.state.address +", "}<br/>
+													{ this.state.houseNumber+", "+ this.state.address +", "}<br/>
 													{ this.state.area + ", "+ this.state.city+ ", "+ this.state.district +", "}<br/>
 													{ this.state.state+", "+this.state.country+", "+this.state.pincode +"."}
 												</div>
@@ -145,7 +147,7 @@ class LeftAside extends Component{
 										My Skills
 									</div>
 								</div>
-								
+								{ this.state.primarySkills.length > 0 ?
 								<div className="row candidateSkillsProgess">
 									<div className="subHeadingText">
 										Primary Skills
@@ -153,15 +155,13 @@ class LeftAside extends Component{
 
 									<ul className="candidateSkillsUl">
 										{
+											this.state.primarySkills.map((elem,index)=>{
 
-											this.state.primarySkillsArry.length > 0
-											?
-											this.state.primarySkillsArry.map((elem,index)=>{
 												return(
 												<li key={index}>
 													<div>
 														<i className="fa fa-square rotate45" ></i>
-															{elem.skillID}
+															{elem.skill_id.skill}
 													</div>
 													<div className="progress candidateprogess">
 														<div className="progress-bar candidateprogessBar"
@@ -175,22 +175,19 @@ class LeftAside extends Component{
 												</li>
 												);
 												})
-												:
-												null
 											}
 										
 									</ul>
 								</div>
-								<div className="row candidateSkillsProgess">
-									<div className="subHeadingText candidateSkillsSubTitle">
-										Secondary Skills
-									</div>
-									<ul className="candidateSkillsUl">
-										{
-
-											this.state.secondarySkillsArry.length > 0
-											?
-											this.state.secondarySkillsArry.map((elem,index)=>{
+								: null }
+								{ this.state.secondarySkills.length>0 ?
+									<div className="row candidateSkillsProgess">
+										<div className="subHeadingText candidateSkillsSubTitle">
+											Secondary Skills
+										</div>
+										<ul className="candidateSkillsUl">
+											{
+											this.state.secondarySkills.map((elem,index)=>{
 												return(
 												<li key={index}>
 													<div>
@@ -210,11 +207,12 @@ class LeftAside extends Component{
 												</li>
 												);
 												})
-												:
-												null
 											}
-									</ul>
-								</div>
+										</ul>
+									</div>
+									
+									: null 
+								}
 							</div>
 						</div>
 					</div>
@@ -223,12 +221,5 @@ class LeftAside extends Component{
 			);
 	}
 }
-const mapStateToProps = (state)=>{
-    return {
-        userDetails  : state.userDetails,
-    }
-}
-const mapDispatchToProps = (dispatch) => ({
-  mapAction :  bindActionCreators(mapActionCreator, dispatch)
-}) 
-export default connect(mapStateToProps,mapDispatchToProps) (withRouter(LeftAside))
+
+export default withRouter(LeftAside)

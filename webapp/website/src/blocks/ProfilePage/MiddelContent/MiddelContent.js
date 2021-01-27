@@ -3,6 +3,7 @@ import Axios 			 	from 'axios';
 import Swal 			 	from 'sweetalert2';
 import Moment               from 'moment';
 import { withRouter }	 	from 'react-router-dom';
+
 import './MiddelContent.css';
 
 class MiddelContent extends Component{
@@ -15,46 +16,27 @@ class MiddelContent extends Component{
 			academicsArry      : [],
 			certificationArry  : [],
 			DegreeArray        : [],
-			classArray         : [],
-			inputUniversity    : [],
-			inputCollege       : [],
 		}
 	}
 	componentDidMount(){
-	Axios.get("/api/universitymaster/get/list")
-	.then(response => {
-		this.setState({inputUniversity : response.data});
-	})
-	.catch(error=>{
-		Swal.fire("Error while getting List data",error.message,'error');
-	})	
-	Axios.get("/api/collagemaster/get/list")
-		.then(response => {
-			this.setState({inputCollege : response.data});
-		})
-		.catch(error=>{
-			Swal.fire("Error while getting List data",error.message,'error');
-		})	
-
+	
 	Axios.get("/api/candidatemaster/get/one/"+this.state.candidate_id)
 	.then(response=>{
-
+			console.log(response.data)
 		 	this.setState({
-
-		 		workExperienceArry:response.data[0].workExperience,
-		 		academicsArry     :response.data[0].academics,
-		 		certificationArry :response.data[0].certifications,	
-				DegreeArray       :response.data[0].qualification,
-				classArray        :response.data[0].qualificationlevel		
+		 		workExperienceArry:response.data.workExperience,
+		 		academicsArry     :response.data.academics,
+		 		certificationArry :response.data.certifications,	
+				DegreeArray       :response.data.academics,	
 		 	})
 		 })
 		 .catch(error=>{
-		 	Swal.fire("Submit Error!",error.message,'error');
+		 	//Swal.fire("Submit Error!uuu",error.message,'error');
 		 })
 	}
 		
 	render(){
-		return(
+		return( 
 				<div className="container-fluid middelContentWrapper col-lg-12">
 					<div className=" ">
 						<div >
@@ -115,7 +97,7 @@ class MiddelContent extends Component{
 													<div className="col-lg-10">
 														<div className="row">
 															<div className="companyName">
-																{elem.companyName }
+																{elem.company_id.companyName }
 															</div>
 															<div className="companyExperience">
 																{Moment(elem.fromDate).format("YYYY MMM") +" - "+Moment(elem.toDate).format("YYYY MMM") + " . " + "9 mos"}
@@ -127,7 +109,11 @@ class MiddelContent extends Component{
 													</div>
 													<div className="companyImages col-lg-2">
 														<div className="row">
-															<img className="pull-right" src="/images/53.png" alt="Company logo"/>
+														{
+															elem.company_id.companyLogo[0] ? 
+															<img className="pull-right" src={elem.company_id.companyLogo[0] } alt="Company logo"/>
+															: <img className="pull-right" src= "https://www.iconsdb.com/icons/preview/white/briefcase-xxl.png" alt="Company logo"/>
+														}
 														</div>
 													</div>
 												</div>
@@ -167,42 +153,24 @@ class MiddelContent extends Component{
 										return(
 												<div key={index}>
 													<div className="SubHeadingPadding">
-														<div>
-															{
-																this.state.inputCollege.map((elem1,index)=>{
-																	return(
-																		<div className="profesion" key={index}>
-																			{elem1.collage}
-																			
-																		</div>
-																	);
-																})
-															}
+														<div className="profesion" key={index}>
+															{elem.collegeSchool}
 														</div>
 														<div>
-															<div className="col-lg-10">
-																<div className="row">
-																	<div>
-																		{
-																			this.state.DegreeArray.map((elem1,index)=>{
-																				return(
-																					<div className="companyName" key={index}>
-																						{elem1.qualification + ", " + elem.specialization + ", "}<br/>
-																						{elem.grade}
-																						
-																					</div>
-																				);
-																			})
-																		}
-																	</div>
-																	<div className="companyExperience">
-																		{Moment(elem.admisionYear).format("YYYY") +" - "+Moment(elem.passOutYear).format("YYYY")}
-																	</div>
-																	<div className="companyAddress">
-																	   {elem.cityVillage + ", " + elem.state + ", " + elem.country }
-																	</div>
+														<div className="col-lg-10">
+															<div className="row">
+																<div className="companyName" key={index}>
+																	{elem.qualificationlevel_id.qualificationLevel + ", " + elem.qualification_id.qualification + ", "}<br/>
+																	{elem.university_id.university}
+																</div>
+																<div className="companyExperience">
+																	{Moment(elem.admisionYear).format("YYYY") +" - "+Moment(elem.passOutYear).format("YYYY")}
+																</div>
+																<div className="companyAddress">
+																   {elem.cityVillage + ", " + elem.state + ", " + elem.country }
 																</div>
 															</div>
+														</div>
 															<div className="companyImages col-lg-2">
 																<div className="row">
 																	<img className="pull-right" src="/images/55.png" alt="College logo"/>
@@ -225,4 +193,4 @@ class MiddelContent extends Component{
 	}
 }
 
-export default withRouter(MiddelContent);
+export default withRouter(MiddelContent)

@@ -168,7 +168,7 @@ class India extends Component{
 						<span className="telanganaNumber mapCountLabel text-center">{this.state.TS ? this.state.TS : 0}</span>
 					</div>
 					<div className="orissa classHover">
-						<img src="Maps/India/Orissa.png" className="img-responsive "  onClick={e => this.onStateClick("Odisha","OR")} onMouseOver={e => (e.currentTarget.src = "/Maps/India/Orissa1.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/India/Orissa.png")}/>
+						<img src="Maps/India/Orissa.png" className="img-responsive "  onClick={e => this.onStateClick("Odisha","OD")} onMouseOver={e => (e.currentTarget.src = "/Maps/India/Orissa1.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/India/Orissa.png")}/>
 						<span className="orissaText mapTextLabel text-capitalize">Odisha</span>
 						<span className="orissaNumber mapCountLabel text-center">{this.state.OR ? this.state.OR : 0}</span>
 					</div>
@@ -182,7 +182,7 @@ class India extends Component{
 					<div className="uttarpradesh classHover">
 						<img src="Maps/India/UttarPradesh.png" className="img-responsive "  onClick={e => this.onStateClick("uttar Pradesh","UP")} onMouseOver={e => (e.currentTarget.src = "/Maps/India/UttarPradesh1.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/India/UttarPradesh.png")}/>
 						<span className="uttarpradeshText mapTextLabel text-capitalize">Uttar Pradesh</span>
-						<span className="uttarpradeshNumber  text-center">{this.state.UP ? this.state.UP : 0}</span>
+						<span className="uttarpradeshNumber mapCountLabel  text-center">{this.state.UP ? this.state.UP : 0}</span>
 					</div>
 					
 					<div className="westbengal classHover">
@@ -199,7 +199,7 @@ class India extends Component{
 					<div className="jharkhand classHover">
 						<img src="Maps/India/Jharkhand.png" className="img-responsive "  onClick={e => this.onStateClick("Jharkhand","JH")} onMouseOver={e => (e.currentTarget.src = "/Maps/India/Jharkhand1.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/India/Jharkhand.png")}/>
 						<span className="jharkhandText mapTextLabel text-capitalize">Jharkhand</span>
-						<span className="jharkhandNumber  text-center">{this.state.JH ? this.state.JH : 0}</span>
+						<span className="jharkhandNumber mapCountLabel text-center">{this.state.JH ? this.state.JH : 0}</span>
 					</div>
 					<div className="sikkim classHover">
 						<img src="Maps/India/Sikkim.png" className="img-responsive "  onClick={e => this.onStateClick("Sikkim","SK")} onMouseOver={e => (e.currentTarget.src = "/Maps/India/Sikkim1.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/India/Sikkim.png")}/>
@@ -245,7 +245,7 @@ class India extends Component{
 					<div className="kerala classHover">
 						<img src="Maps/India/Kerala.png" className="img-responsive "  onClick={e => this.onStateClick("Kerala","KL")} onMouseOver={e => (e.currentTarget.src = "/Maps/India/Kerala1.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/India/Kerala.png")}/>
 						<span className="keralaText mapTextLabel text-capitalize">Kerala</span>
-						<span className="keralaNumber  text-center">{this.state.KL ? this.state.KL : 0}</span>
+						<span className="keralaNumber mapCountLabel text-center">{this.state.KL ? this.state.KL : 0}</span>
 					</div>
 
 					<div className="goa classHover">

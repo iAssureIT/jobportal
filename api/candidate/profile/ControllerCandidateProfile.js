@@ -8,7 +8,8 @@ const LanguageMaster        = require('../../coreAdmin/LanguageMaster/ModelLangu
 const QualificationLevelMaster = require('../../coreAdmin/QualificationLevelMaster/ModelQualificationLevel.js');
 const QualificationMaster   = require('../../coreAdmin/QualificationMaster/ModelQualification.js');
 const UniversityMaster      = require('../../coreAdmin/UniversityMaster/ModelUniversity.js');
-
+const IndustryMaster        = require('../../coreAdmin/IndustryMaster/ModelIndustryMaster.js');
+const EntityMaster          = require('../../coreAdmin/entityMaster/ModelEntityMaster.js');
 
 exports.insertCandidateBasicInfo = (req, res, next)=>{
     
@@ -76,7 +77,9 @@ exports.getSingleCandidate = (req,res,next)=>{
     .populate('academics.qualificationlevel_id')
     .populate('academics.qualification_id')
     .populate('academics.university_id')
-    
+    .populate('skills.skill_id')
+    .populate('workExperience.company_id')
+
     .exec(function (err, candidate) {
     console.log(err)
     if (err) return res.status(500).json({ error: err });
@@ -161,6 +164,72 @@ function insertUniversity(university, createdBy){
                     });
     });
 }
+function insertIndustry(industry, createdBy){ 
+    return new Promise(function(resolve,reject){ 
+        const industryMaster = new IndustryMaster({
+                        _id                         : new mongoose.Types.ObjectId(),
+                        industry                    : industry,
+                        createdBy                   : createdBy,
+                        createdAt                   : new Date()
+                    })
+                    industryMaster.save()
+                    .then(data=>{
+                        resolve( data._id );
+                    })
+                    .catch(err =>{
+                        reject(err); 
+                    });
+    });
+}
+function insertEntity(company, createdBy){ 
+    return new Promise(function(resolve,reject){ 
+
+        const entityMaster = new EntityMaster({
+                        _id                       : new mongoose.Types.ObjectId(),
+                        entityType                : company.entityType,
+                        profileStatus             : company.profileStatus,
+                        companyNo                 : company.companyNo,
+                        companyID                 : company.companyID, 
+                        companyName               : company.companyName,
+                        data_origin               : company.data_origin,
+                        locations                 :  [{
+                            countryCode         : company.countryCode,
+                            country             : company.country,
+                            stateCode           : company.stateCode,
+                            state               : company.state,
+                            district            : company.district,
+                        }]
+                    })
+                    entityMaster.save()
+                    .then(data=>{
+                        resolve( data._id );
+                    })
+                    .catch(err =>{
+                        reject(err); 
+                    });
+    });
+}
+function getNextSequence(entityType) {
+    return new Promise((resolve,reject)=>{
+    EntityMaster.findOne({entityType:entityType})    
+        .sort({companyNo : -1})   
+        .exec()
+        .then(data=>{
+            if (data) { 
+                var seq = data.companyNo;
+                seq = seq+1;
+                resolve(seq) 
+            }else{
+               resolve(2)
+            }
+            
+        })
+        .catch(err =>{
+            reject(0)
+        });
+    });
+}
+
 exports.updateCandidateBasicInfo = (req, res, next)=>{
 	var languages   = [];
     var language_id; 
@@ -450,9 +519,43 @@ exports.deleteAcademics = (req,res,next)=>{
         });
 };
 exports.addCandidateExperience = (req,res,next)=>{
+    var industry_id;
+    var entityType = "corporate";
+
+    processData();
+    async function processData(){
+    industry_id = req.body.experience.industry_id != "" ? req.body.experience.industry_id 
+                                : await insertIndustry(req.body.experience.industry_id,req.body.candidate_id)
+    
+    if (req.body.experience.company_id != "" ) {
+        company_id  = req.body.experience.company_id;
+    }else{
+
+        var getnext = await getNextSequence(entityType)
+        var str = parseInt(getnext)
+        var company =  {
+                    entityType                : entityType,
+                    profileStatus             : "New",
+                    companyNo                 : getnext ? getnext : 1,
+                    companyID                 : str ? str : 1, 
+                    companyName               : req.body.experience.company,
+                    data_origin               : "candidate",
+                    district                  : req.body.experience.district,
+                    state                     : req.body.experience.state,
+                    stateCode                 : req.body.experience.stateCode,
+                    country                   : req.body.experience.country,
+                    countryCode               : req.body.experience.countryCode,
+        }
+        company_id = await insertEntity(company,req.body.candidate_id)
+
+    } 
+
+    req.body.experience.industry_id = industry_id;
+    req.body.experience.company_id = company_id;
+
     CandidateProfile.updateOne(
             { _id: req.body.candidate_id },  
-            {
+            { 
                 $push:  { 'workExperience' : req.body.experience }
             }
         )
@@ -466,7 +569,8 @@ exports.addCandidateExperience = (req,res,next)=>{
         })
         .catch(err =>{
             res.status(500).json({ error: err });
-        });   
+        });  
+    } 
 };
 
 exports.getOneCandidateExperience = (req,res,next)=>{
