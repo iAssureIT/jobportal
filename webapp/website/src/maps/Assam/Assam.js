@@ -47,9 +47,9 @@ class Assam extends Component{
 					</div>
 
 					<div className="dhuburi classHover"> 
-						<img src="/Maps/Assam/Dhuburi.png" alt="Dhuburi" onMouseOver={e => (e.currentTarget.src = "/Maps/Assam/Dhuburi_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Assam/Dhuburi.png")}/>
-						<span className="dhuburiText mapTextLabel text-capitalije">Dhuburi</span>
-						<span className="dhuburiNumber mapCountLabel text-center">{this.state.Dhuburi ? this.state.Dhuburi : 0}</span>
+						<img src="/Maps/Assam/Dhuburi.png" alt="Dhubri" onMouseOver={e => (e.currentTarget.src = "/Maps/Assam/Dhuburi_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Assam/Dhuburi.png")}/>
+						<span className="dhuburiText mapTextLabel text-capitalije">Dhubri</span>
+						<span className="dhuburiNumber mapCountLabel text-center">{this.state.Dhubri ? this.state.Dhubri : 0}</span>
 					</div>
 
 					<div className="chirang classHover"> 
@@ -65,9 +65,9 @@ class Assam extends Component{
 					</div>
 
 					<div className="gopalpara classHover"> 
-						<img src="/Maps/Assam/Gopalpara.png" alt="Gopalpara" onMouseOver={e => (e.currentTarget.src = "/Maps/Assam/Gopalpara_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Assam/Gopalpara.png")}/>
-						<span className="gopalparaText mapTextLabel text-capitalije">Gopalpara</span>
-						<span className="gopalparaNumber mapCountLabel text-center">{this.state.Gopalpara ? this.state.Gopalpara : 0}</span>
+						<img src="/Maps/Assam/Gopalpara.png" alt="Goalpara" onMouseOver={e => (e.currentTarget.src = "/Maps/Assam/Gopalpara_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Assam/Gopalpara.png")}/>
+						<span className="gopalparaText mapTextLabel text-capitalije">Goalpara</span>
+						<span className="gopalparaNumber mapCountLabel text-center">{this.state.Goalpara ? this.state.Goalpara : 0}</span>
 					</div>
 
 					<div className="baksa classHover"> 
@@ -108,14 +108,14 @@ class Assam extends Component{
 
 					<div className="kamrup_metro classHover"> 
 						<img src="/Maps/Assam/Kamrup_Metro.png" alt="Kamrup_Metro" onMouseOver={e => (e.currentTarget.src = "/Maps/Assam/Kamrup_Metro_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Assam/Kamrup_Metro.png")}/>
-						<span className="kamrup_metroText mapTextLabel text-capitalije">Kamrup Metro</span>
-						<span className="kamrup_metroNumber mapCountLabel text-center">{this.state.Kamrup_Metro ? this.state.Kamrup_Metro : 0}</span>
+						<span className="kamrup_metroText mapTextLabel text-capitalije">Kamrup Metropolitan</span>
+						<span className="kamrup_metroNumber mapCountLabel text-center">{this.state.Kamrup_Metropolitan ? this.state.Kamrup_Metropolitan : 0}</span>
 					</div>
 
 					<div className="marigaon classHover"> 
 						<img src="/Maps/Assam/Marigaon.png" alt="Marigaon" onMouseOver={e => (e.currentTarget.src = "/Maps/Assam/Marigaon_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Assam/Marigaon.png")}/>
-						<span className="marigaonText mapTextLabel text-capitalije">Marigaon</span>
-						<span className="marigaonNumber mapCountLabel text-center">{this.state.Marigaon ? this.state.Marigaon : 0}</span>
+						<span className="marigaonText mapTextLabel text-capitalije">Morigaon</span>
+						<span className="marigaonNumber mapCountLabel text-center">{this.state.Morigaon ? this.state.Morigaon : 0}</span>
 					</div>
 
 					<div className="sonitpur classHover"> 
@@ -140,19 +140,19 @@ class Assam extends Component{
 
 					<div className="karbi_anglong_west classHover"> 
 						<img src="/Maps/Assam/Karbi_Anglong_West.png" alt="Karbi_Anglong_West" onMouseOver={e => (e.currentTarget.src = "/Maps/Assam/Karbi_Anglong_West_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Assam/Karbi_Anglong_West.png")}/>
-						<span className="karbi_anglong_westText mapTextLabel text-capitalije">Karbi Anglong West</span>
-						<span className="karbi_anglong_westNumber mapCountLabel text-center">{this.state.Karbi_Anglong_West ? this.state.Karbi_Anglong_West : 0}</span>
+						<span className="karbi_anglong_westText mapTextLabel text-capitalije">West Karbi Anglong West</span>
+						<span className="karbi_anglong_westNumber mapCountLabel text-center">{this.state.West_Karbi_Anglong ? this.state.West_Karbi_Anglong : 0}</span>
 					</div>
 
 					<div className="karbi_anglong_east classHover"> 
 						<img src="/Maps/Assam/Karbi_Anglong_East.png" alt="Karbi_Anglong_East" onMouseOver={e => (e.currentTarget.src = "/Maps/Assam/Karbi_Anglong_East_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Assam/Karbi_Anglong_East.png")}/>
 						<span className="karbi_anglong_eastText mapTextLabel text-capitalije">Karbi Anglong East</span>
-						<span className="karbi_anglong_eastNumber mapCountLabel text-center">{this.state.Karbi_Anglong_East ? this.state.Karbi_Anglong_East : 0}</span>
+						<span className="karbi_anglong_eastNumber mapCountLabel text-center">{this.state.Karbi_Anglong ? this.state.Karbi_Anglong : 0}</span>
 					</div>
 
 					<div className="golaghat classHover"> 
 						<img src="/Maps/Assam/Golaghat.png" alt="Golaghat" onMouseOver={e => (e.currentTarget.src = "/Maps/Assam/Golaghat_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Assam/Golaghat.png")}/>
-						<span className="golaghatText mapTextLabel text-capitalije">Golaghat</span>
+						<span className="golaghatText mapTextLabel text-capitalije">Golaghat</span>_
 						<span className="golaghatNumber mapCountLabel text-center">{this.state.Golaghat ? this.state.Golaghat : 0}</span>
 					</div>
 
@@ -169,9 +169,9 @@ class Assam extends Component{
 					</div>
 
 					<div className="sibsagar classHover"> 
-						<img src="/Maps/Assam/Sibsagar.png" alt="Sibsagar" onMouseOver={e => (e.currentTarget.src = "/Maps/Assam/Sibsagar_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Assam/Sibsagar.png")}/>
-						<span className="sibsagarText mapTextLabel text-capitalije">Sibsagar</span>
-						<span className="sibsagarNumber mapCountLabel text-center">{this.state.Sibsagar ? this.state.Sibsagar : 0}</span>
+						<img src="/Maps/Assam/Sibsagar.png" alt="Sivasagar" onMouseOver={e => (e.currentTarget.src = "/Maps/Assam/Sibsagar_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Assam/Sibsagar.png")}/>
+						<span className="sibsagarText mapTextLabel text-capitalije">Sivasagar</span>
+						<span className="sibsagarNumber mapCountLabel text-center">{this.state.Sivasagar ? this.state.Sivasagar : 0}</span>
 					</div>
 
 					<div className="dibrugarh classHover"> 

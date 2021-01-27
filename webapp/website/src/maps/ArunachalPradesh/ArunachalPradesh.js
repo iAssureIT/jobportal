@@ -42,7 +42,7 @@ class ArunachalPradesh extends Component{
 						 onMouseOver={e => (e.currentTarget.src = "/Maps/Arunachal_Pradesh/Tawang_.png")} 
 						 onMouseOut={e => (e.currentTarget.src = "/Maps/Arunachal_Pradesh/Tawang.png")}/>
 						<span className="tawangText mapTextLabel text-capitalize">Tawang</span>
-						<span className="tawangNumber mapCountLabel text-center">{this.state.Tawang ? this.state.Tawang : 0}</span>
+						<span className="tawangNumber mapCountLabel text-center">{this.state.Kamrup_Metropolitan ? this.state.Kamrup_Metropolitan : 0}</span>
 					</div>
 					<div className="westKameng classHover"> 
 						<img src="/Maps/Arunachal_Pradesh/West_Kameng.png"  alt="West_Kameng"

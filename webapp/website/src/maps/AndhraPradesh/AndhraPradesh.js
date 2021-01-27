@@ -47,15 +47,15 @@ class AndhraPradesh extends Component{
 						<img src="/Maps/Andhra_Pradesh/Anantapur.png" alt="Anantapur"
 						 onMouseOver={e => (e.currentTarget.src = "/Maps/Andhra_Pradesh/Anantapur_.png")} 
 						 onMouseOut={e => (e.currentTarget.src = "/Maps/Andhra_Pradesh/Anantapur.png")}/>
-						<span className="anantapurText mapTextLabel text-capitalize">Anantapur</span>
-						<span className="anantapurNumber mapCountLabel text-center">{this.state.Anantapur ? this.state.Anantapur : 0}</span>
+						<span className="anantapurText mapTextLabel text-capitalize">Anantapuram</span>
+						<span className="anantapurNumber mapCountLabel text-center">{this.state.Anantapuram ? this.state.Anantapuram : 0}</span>
 					</div>
 					<div className="ysr classHover"> 
 						<img src="/Maps/Andhra_Pradesh/Y.S.R.png" alt="Y.S.R"
 						 onMouseOver={e => (e.currentTarget.src = "/Maps/Andhra_Pradesh/Y.S.R._.png")} 
 						 onMouseOut={e => (e.currentTarget.src = "/Maps/Andhra_Pradesh/Y.S.R.png")}/>
 						<span className="ysrText mapTextLabel text-capitalize">Y.S.R.</span>
-						<span className="ysrNumber mapCountLabel text-center">{this.state.YSR ? this.state.YSR : 0}</span>
+						<span className="ysrNumber mapCountLabel text-center">{this.state.YSR_District ? this.state.YSR_District : 0}</span>
 					</div>
 					<div className="chittoor classHover"> 
 						<img src="/Maps/Andhra_Pradesh/Chittoor.png" alt="Chittoor"
@@ -69,7 +69,7 @@ class AndhraPradesh extends Component{
 						 onMouseOver={e => (e.currentTarget.src = "/Maps/Andhra_Pradesh/Nellore_.png")} 
 						 onMouseOut={e => (e.currentTarget.src = "/Maps/Andhra_Pradesh/Nellore.png")}/>
 						<span className="nelloreText mapTextLabel text-capitalize">Nellore</span>
-						<span className="nelloreNumber mapCountLabel text-center">{this.state.Nellore ? this.state.Nellore : 0}</span>
+						<span className="nelloreNumber mapCountLabel text-center">{this.state.Sri_Potti_Sriramulu_Nellore_District ? this.state.Sri_Potti_Sriramulu_Nellore_District : 0}</span>
 					</div>
 					<div className="prakasam classHover"> 
 						<img src="/Maps/Andhra_Pradesh/Prakasam.png" alt="Prakasam"
@@ -96,15 +96,15 @@ class AndhraPradesh extends Component{
 						<img src="/Maps/Andhra_Pradesh/West_Godawari.png" alt="West_Godawari"
 						 onMouseOver={e => (e.currentTarget.src = "/Maps/Andhra_Pradesh/West_Godawari_.png")}
 						  onMouseOut={e => (e.currentTarget.src = "/Maps/Andhra_Pradesh/West_Godawari.png")}/>
-						<span className="westGodawariText mapTextLabel text-capitalize">West_Godawari</span>
-						<span className="westGodawariNumber mapCountLabel text-center">{this.state.West_Godawari ? this.state.West_Godawari : 0}</span>
+						<span className="westGodawariText mapTextLabel text-capitalize">West Godavari</span>
+						<span className="westGodawariNumber mapCountLabel text-center">{this.state.West_Godavari ? this.state.West_Godavari : 0}</span>
 					</div>
 					<div className="eastGodawari classHover"> 
 						<img src="/Maps/Andhra_Pradesh/East_Godawari.png" alt="East_Godawari"
 						 onMouseOver={e => (e.currentTarget.src = "/Maps/Andhra_Pradesh/East_Godawari_.png")} 
 						 onMouseOut={e => (e.currentTarget.src = "/Maps/Andhra_Pradesh/East_Godawari.png")}/>
-						<span className="eastGodawariText mapTextLabel text-capitalize">East_Godawari</span>
-						<span className="eastGodawariNumber mapCountLabel text-center">{this.state.East_Godawari ? this.state.East_Godawari : 0}</span>
+						<span className="eastGodawariText mapTextLabel text-capitalize">East Godavari</span>
+						<span className="eastGodawariNumber mapCountLabel text-center">{this.state.East_Godavari ? this.state.East_Godavari : 0}</span>
 					</div>
 					<div className="vishakhapatnam classHover"> 
 						<img src="/Maps/Andhra_Pradesh/Vishakhapatnam.png" alt="Vishakhapatnam"
