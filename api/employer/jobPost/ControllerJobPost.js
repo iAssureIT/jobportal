@@ -1,6 +1,8 @@
 const mongoose	=	require('mongoose');
 const mongodb	=	require('mongodb');
 const Jobs 		=	require('./ModelJobPost.js');
+
+const IndustryMaster            = require('../../coreAdmin/IndustryMaster/ModelIndustryMaster.js');
 const FunctionalAreaMaster 		= require('../../coreAdmin/FunctionalAreaMaster/ModelFunctionalAreaMaster.js');
 const SubFunctionalAreaMaster 	= require('../../coreAdmin/SubFunctionalAreaMaster/ModelSubFunctionalAreaMaster.js');
 const JobCategoryMaster 		= require('../../coreAdmin/JobCategoryMaster/ModelJobCategory.js');
@@ -8,6 +10,7 @@ const JobRoleMaster 			= require('../../coreAdmin/JobRoleMaster/ModelJobRole.js'
 const JobTypeMaster 			= require('../../coreAdmin/JobTypeMaster/ModelJobType.js');
 const JobTimeMaster 			= require('../../coreAdmin/JobTimeMaster/ModelJobTime.js');
 const SkillMaster           	= require('../../coreAdmin/SkillMaster/ModelSkill.js');
+const QualificationLevel        = require('../../coreAdmin/QualificationLevelMaster/ModelQualificationLevel.js');
 
 var ObjectID 	= 	require('mongodb').ObjectID;
 
@@ -809,11 +812,7 @@ exports.getSearchList = (req,res,next)=>{
 	if(searchTxt !== ""){
 		const pattern = new RegExp("^"+searchTxt) ;
 		const selector1 = {/*elem.jobBasicInfo.*/jobTitle : {$regex: pattern, $options: "i" }  };
-		/*const selector2 = {companyName : {$regex: pattern, $options: "i" }  };*/
-
 		const selector = {$or: [selector1]};
-
-		console.log("selector = ", selector);
 
 		Jobs.find(selector)
 					.then(jobList => {
@@ -828,4 +827,215 @@ exports.getSearchList = (req,res,next)=>{
 						})
 					});
 	}
+}
+
+function getIndustries(){ 
+    return new Promise(function(resolve,reject){ 
+        IndustryMaster.find({})
+            .exec()
+            .then(data => {
+                resolve(data);
+            })
+            .catch(err => {
+                reject(err);
+            });            
+    });
+}
+function getFunctionalAreas(){ 
+    return new Promise(function(resolve,reject){ 
+        FunctionalAreaMaster.find({})
+            .exec()
+            .then(data => {
+                resolve(data);
+            })
+            .catch(err => {
+                reject(err);
+            });            
+    });
+}
+function getSubFunctionalAreas(functionalarea_id){ 
+    return new Promise(function(resolve,reject){ 
+        SubFunctionalAreaMaster.find({"functionalarea_id" : functionalarea_id})
+            .exec()
+            .then(data => {
+                resolve(data);
+            })
+            .catch(err => {
+                reject(err);
+            });            
+    });
+}
+function getJobCategories(){ 
+    return new Promise(function(resolve,reject){ 
+        JobCategoryMaster.find({})
+            .exec()
+            .then(data => {
+                resolve(data);
+            })
+            .catch(err => {
+                reject(err);
+            });            
+    });
+}
+function getJobRoles(){ 
+    return new Promise(function(resolve,reject){ 
+        JobRoleMaster.find({})
+            .exec()
+            .then(data => {
+                resolve(data);
+            })
+            .catch(err => {
+                reject(err);
+            });            
+    });
+}
+function getJobType(){ 
+    return new Promise(function(resolve,reject){ 
+        JobTypeMaster.find({})
+            .exec()
+            .then(data => {
+                resolve(data);
+            })
+            .catch(err => {
+                reject(err);
+            });            
+    });
+}
+function getJobTime(){ 
+    return new Promise(function(resolve,reject){ 
+        JobTimeMaster.find({})
+            .exec()
+            .then(data => {
+                resolve(data);
+            })
+            .catch(err => {
+                reject(err);
+            });            
+    });
+}
+function getQualificationLevel(){ 
+    return new Promise(function(resolve,reject){ 
+        QualificationLevel.find({})
+            .exec()
+            .then(data => {
+                resolve(data);
+            })
+            .catch(err => {
+                reject(err);
+            });            
+    });
+}
+exports.insertBulkJobs = (req,res,next)=>{
+    processData();
+    async function processData() {
+        var industries      = await getIndustries();
+        var funAreas        = await getFunctionalAreas();
+        var jobCategories   = await getJobCategories();
+        var jobRoles        = await getJobRoles();
+        var jobTypes        = await getJobType();
+        var jobTimes        = await getJobTime();
+        var qualificationLevel        = await getQualificationLevel();
+        var gender          = ["Male Only","Female Only","Both (Male & Female)"];
+        var states          = [{"state":"Andaman and Nicobar Islands", "stateCode": "AN"},
+                        {"state": "Andhra Pradesh", "stateCode": "AP"},
+                        {"state": "Arunachal Pradesh", "stateCode": "AR"},
+                        {"state": "Assam", "stateCode": "AS"},
+                        {"state": "Bihar", "stateCode": "BH"},
+                        {"state": "Chandigarh", "stateCode": "CH"},
+                        {"state": "Chattisgarh", "stateCode": "CT"},
+                        {"state": "Dadra and Nagar Haveli", "stateCode": "DN"},
+                        {"state": "Daman and Diu", "stateCode": "DD"},
+                        {"state": "Delhi", "stateCode": "DL"},
+                        {"state": "Goa", "stateCode": "GA"},
+                        {"state": "Gujarat", "stateCode": "GJ"},
+                        {"state": "Haryana", "stateCode": "HR"},
+                        {"state": "Himachal Pradesh", "stateCode": "HP"},
+                        {"state": "Jammu and Kashmir", "stateCode": "JK"},
+                        {"state": "Jharkhand", "stateCode": "JH"},
+                        {"state": "Karnataka", "stateCode": "KA"},
+                        {"state": "Kerala", "stateCode": "KL"},
+                        {"state": "Lakshadweep Islands", "stateCode": "LD"},
+                        {"state": "Madhya Pradesh", "stateCode": "MP"},
+                        {"state": "Maharashtra", "stateCode": "MH"},
+                        {"state": "Manipur", "stateCode": "MN"},
+                        {"state": "Meghalaya", "stateCode": "ML"},
+                        {"state": "Mizoram", "stateCode": "MZ"},
+                        {"state": "Nagaland", "stateCode": "NL"},
+                        {"state": "Odisha", "stateCode": "OR"},
+                        {"state": "Pondicherry", "stateCode": "PY"},
+                        {"state": "Punjab", "stateCode": "PB"},
+                        {"state": "Rajasthan", "stateCode": "RJ"},
+                        {"state": "Sikkim", "stateCode": "SK"},
+                        {"state": "Tamil Nadu", "stateCode": "TN"},
+                        {"state": "Telangana", "stateCode": "TS"},
+                        {"state": "Tripura", "stateCode": "TR"},
+                        {"state": "Uttar Pradesh", "stateCode": "UP"},
+                        {"state": "Uttarakhand", "stateCode": "UT"},
+                        {"state": "West Bengal", "stateCode": "WB"},
+        ]
+        var jobsArray = []; 
+        for (var k = 0; k < req.body.noofjobs; k++) {
+            var industry_id             = industries[Math.floor(Math.random() * industries.length)]._id;
+            var functionalarea_id       = funAreas[Math.floor(Math.random() * funAreas.length)]._id;;
+            var subfunAreas     = await getSubFunctionalAreas(functionalarea_id);
+            var subfunctionalarea_id    = subfunAreas[Math.floor(Math.random() * subfunAreas.length)]._id;
+            var jobcategory_id          = jobCategories[Math.floor(Math.random() * jobCategories.length)]._id;
+            var jobrole_id = jobRoles[Math.floor(Math.random() * jobRoles.length)]._id;
+            var jobtype_id = jobTypes[Math.floor(Math.random() * jobTypes.length)]._id;
+            var jobtime_id = jobTimes[Math.floor(Math.random() * jobTimes.length)]._id;
+            
+            var jobObject = {
+                "jobBasicInfo"  :   {
+                                    "jobTitle"              : jobRoles[Math.floor(Math.random() * jobRoles.length)].jobRole,
+                                    "industry_id"           : industry_id,
+                                    "functionalarea_id"     : functionalarea_id,
+                                    "subfunctionalarea_id"  : subfunctionalarea_id,
+                                    "jobrole_id"            : jobrole_id,
+                                    "gender"                : gender[Math.floor(Math.random() * gender.length)],
+                                    "workFromHome"          : 0,
+                                    "jobtype_id"            : jobtype_id,
+                                    "jobtime_id"            : jobtime_id,
+                                    "jobcategory_id"        : jobcategory_id,
+                                    "positions"             : Math.floor(Math.random()*10),
+                                    "jobDesc"               : "",
+                                    "lastDateOfAppl"        : null,
+                                    "contactPersonName"     : "",
+                                    "contactPersonEmail"    : "",
+                                    "contactPersonPhone"    : ""
+                                },
+                "location"      :   {
+                                    "address"               : "",
+                                    "area"                  : "",
+                                    "cityVillage"           : "",
+                                    "district"              : "",
+                                    "state"                 : states[Math.floor(Math.random() * states.length)].state,
+                                    "stateCode"             : states[Math.floor(Math.random() * states.length)].stateCode,   
+                                    "country"               : "India",
+                                    "countryCode"           : "IN",
+                                    "pincode"               : ""
+                                }, 
+                "ctcOffered"    :   {
+                                    "minSalary"             : Math.floor(Math.random()*20),
+                                    "minSalPeriod"          : "Per Month",
+                                    "maxSalary"             : Math.floor(Math.random()*30),
+                                    "maxSalPeriod"          : "Per Month",
+                                },
+            
+                "eligibility"   :   {
+                                    "minEducation"          : qualificationLevel[Math.floor(Math.random() * qualificationLevel.length)].qualificationLevel,
+                                    "minExperience"         : Math.floor(Math.random()*10)
+                                },  
+                "createdAt"     :   new Date()                                         
+            }
+            jobsArray.push(jobObject) 
+            //jobsData.save()
+        }
+        Jobs.insertMany(jobsArray)
+            .then(data => {
+                res.status(200).json({  created  : true });
+            })
+            .catch(err => {
+                console.log(err);
+            });   
+    }
 }

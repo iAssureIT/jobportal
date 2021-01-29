@@ -1,6 +1,7 @@
-const mongoose	= require("mongoose");
-var ObjectId = require('mongodb').ObjectID;
-const ApplyJob = require('./ModelApplyJob');
+const mongoose	            = require("mongoose");
+var ObjectId                = require('mongodb').ObjectID;
+const ApplyJob              = require('./ModelApplyJob');
+const CandidateProfile      = require('../profile/ModelCandidateProfile.js');
 const _ = require('underscore');   
 
 exports.applyJob = (req,res,next)=>{
@@ -92,53 +93,48 @@ exports.applicantsCountList = (req,res,next)=>{
 };
 //candidatesAppliedToJob
 exports.candidatesAppliedToJob = (req,res,next)=>{
-    ApplyJob.aggregate([
-        { $match : { "jobID" : ObjectId(req.body.jobID) } },
-        { $lookup: {
-                    from: "candidatemasters",
-                    as: "candidate",
-                    localField: "candidate_id",
-                    foreignField: "_id"}
-        },
-        {$lookup:{
-                   from: "addresstypemasters",
-                   localField: "candidate.address.addressType",
-                   foreignField: "_id",
-                   as: "addressType" } 
-        },
-        {$lookup:{
-                   from: "qualificationlevelmasters",
-                   localField: "candidate.academics.qualificationLevel",
-                   foreignField: "_id",
-                   as: "qualificationlevel" } 
-        },   
-        {$lookup:{
-                   from: "qualificationmasters",
-                   localField: "candidate.academics.qualification",
-                   foreignField: "_id",
-                   as: "qualification" } 
-        },
-        {$lookup:{
-                   from: "universitymasters",
-                   localField: "candidate.academics.universityBoard",
-                   foreignField: "_id",
-                   as: "universityBoard" } 
-        },
-        {$lookup:{
-                   from: "collagemasters",
-                   localField: "candidate.academics.collegeSchool",
-                   foreignField: "_id",
-                   as: "collegeSchool" } 
-        }
-            
-    ])
-    .exec()
-    .then(data=>{
-        res.status(200).json(data);
-    })
-    .catch(err =>{
-        res.status(500).json({
-            error: err
-        });
+
+    ApplyJob.find({"jobID" : ObjectId(req.body.jobID)})
+            .populate({path : 'candidate_id', model : 'candidatemasters',
+                populate: {
+                  path: 'address.addressType',
+                  model: 'addresstypemasters'
+                }
+            })
+            .populate({ path : 'candidate_id', model : 'candidatemasters',
+                populate: {
+                  path: 'academics.qualificationlevel_id',
+                  model: 'qualificationlevelmasters'
+                }
+            })
+            .populate({ path: 'candidate_id', model: 'candidatemasters',
+                populate: {
+                  path: 'academics.qualification_id',
+                  model: 'qualificationmasters'
+                }
+            })
+            .populate({ path: 'candidate_id', model: 'candidatemasters',
+                populate: {
+                  path: 'academics.university_id',
+                  model: 'universitymasters'
+                }
+            })
+            .populate({ path: 'candidate_id', model: 'candidatemasters',
+                populate: {
+                  path: 'workExperience.company_id',
+                  model: 'entitymasters'
+                }
+            })
+            .populate({ path: 'candidate_id', model: 'candidatemasters',
+                populate: {
+                  path: 'skills.skill_id',
+                  model: 'skillmasters'
+                }
+            })
+    .exec(function (err, candidate) {
+    console.log(err)
+    if (err) return res.status(500).json({ error: err });
+    res.status(200).json(candidate);
+    // prints "The author is Ian Fleming"
     });
 };

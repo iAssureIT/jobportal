@@ -3,6 +3,8 @@ const router 		 =	express.Router();
 const jobsController =	require("./ControllerJobPost.js");
 
 router.post  ("/post"			   				, jobsController.insertJobs);
+router.post  ("/post/insertBulk"			   	, jobsController.insertBulkJobs);
+
 router.get   ("/get/one/:job_id"  				, jobsController.getJob);
 router.get   ("/get/searchlist/:searchTxt"  	, jobsController.getSearchList);
 router.post   ("/list"	   						, jobsController.getJobList);
