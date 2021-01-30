@@ -1,37 +1,127 @@
-import React,{Component} from 'react';
+import React, {Component} from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import './Header.css';
+import '../header/Header.css';
+import LoginForm from '../../systemSecurity/Login.js';
+import SignUp from '../../systemSecurity/SignUp.js';
+import ForgotPassword from '../../systemSecurity/ForgotPassword.js';
+import ConfirmOtp from '../../systemSecurity/ConfirmOtp.js';
+import ResetPass from '../../systemSecurity/ResetPassword.js'
 import {connect}            from 'react-redux';
 import { bindActionCreators } from 'redux';
 import  * as mapActionCreator from '../../common/actions/index';
+
 
 class Header extends Component{
   constructor(props){
     super(props);
     this.state={
-      profileDisplay        : "none",
-      asideDisplay          : "-600px",
-      notificationDisplay   : "none",
+      showLoginModal    : false,
+      asideDisplay      : "-600px",
+      //selector            : {},
     }
+    this.handleOpenModal  = this.handleOpenModal.bind(this);
+      this.handleCloseModal = this.handleCloseModal.bind(this);
   }
-  componentDidMount() {
-    
-  }
-  profileInfo(event){
+  componentDidMount(){
+      
+      var {mapAction} = this.props;
+      mapAction.jobCount(this.props.selector);
 
-    if(this.state.profileDisplay==="none"){
-  
-      this.setState({
-      profileDisplay  : "block",
-      })
+      if (window.location.pathname.split("/")[1] == "state" ) {
+        var stateName = "";
+          //selector.stateCode = window.location.pathname.split("/")[2] 
+          switch(window.location.pathname.split("/")[2]) {
+        case "AP": stateName = "Andhra Pradesh"
+          break;
+        case "AR": stateName = "Arunachal Pradesh"
+          break;
+        case "AS": stateName = "Assam"
+          break;
+        case "BR": stateName = "Bihar"
+          break;
+        case "CG": stateName = "Chhattisgarh"
+          break; 
+        case "GA": stateName = "Goa"
+          break;     
+        case "GJ": stateName = "Gujarat"
+          break;     
+        case "HR": stateName = "Haryana"
+          break;     
+        case "HP": stateName = "Himachal Pradesh"
+          break;               
+        case "JK": stateName = "Jammu and Kashmir"
+          break;               
+        case "JH": stateName = "Jharkhand"
+          break;     
+        case "KA": stateName = "Karnataka"
+          break;    
+        case "KL": stateName = "Kerala"
+          break;    
+        case "MP": stateName = "Madhya Pradesh"
+          break;      
+        case "MH": stateName = "Maharashtra"
+          break;             
+        case "MN": stateName = "Manipur"
+          break;         
+        case "ML": stateName = "Meghalaya"
+          break;                 
+        case "MZ": stateName = "Mizoram"
+          break;                 
+        case "NL": stateName = "Nagaland"
+          break;   
+        case "OR": stateName = "Orissa"
+          break;   
+        case "PB": stateName = "Punjab"
+          break;   
+        case "RJ": stateName = "Rajasthan"
+          break; 
+        case "SK": stateName = "Sikkim"
+          break; 
+        case "TN": stateName = "Tamil Nadu"
+          break; 
+        case "TR": stateName = "Tripura"
+          break; 
+        case "UK": stateName = "Uttarakhand"
+          break; 
+        case "UP": stateName = "Uttar Pradesh"
+          break; 
+        case "UP": stateName = "Uttar Pradesh"
+          break; 
+        case "WB": stateName = "West Bengal"
+          break; 
+        case "TN": stateName = "Tamil Nadu"
+          break; 
+        case "TR": stateName = "Tripura"
+          break;  
+        case "AN": stateName = "Andaman and Nicobar"
+          break;  
+        case "CH": stateName = "Chandigarh"
+          break;  
+        case "DH": stateName = "Dadra and Nagar Haveli"
+          break;    
+        case "DD": stateName = "Daman and Diu"
+          break;    
+        case "DL": stateName = "Delhi"
+          break;    
+        case "LD": stateName = "Lakshadweep"
+          break;    
+        case "PY": stateName = "Pondicherry"
+          break;                          
+        default:
+         stateName = "India";
+      }
+
+      mapAction.setMapSelectedState(stateName);
+      }   
     }
-    else{
-      this.setState({
-      profileDisplay  : "none",
-      })
+  handleOpenModal () {
+      this.setState({ showModal: true });
     }
+    
+  handleCloseModal () {
+      this.setState({ showModal: false });
   }
-  asideBar(event){
+    asideBar(event){
 
     if(this.state.asideDisplay==="-600px"){
   
@@ -45,114 +135,78 @@ class Header extends Component{
       })
     }
   }
-  notificationBar(event){
-
-    if(this.state.notificationDisplay==="none"){
-  
-      this.setState({
-      notificationDisplay  : "block",
-      })
-    }
-    else{
-      this.setState({
-      notificationDisplay  : "none",
-      })
-    }
-  }
-  logout() {
-        localStorage.removeItem("userDetails")
-      
-        window.location.href = "/";
-        //this.props.history.push("/")
-  }
-  render(){
+    render(){
+    
+    const selectedState = this.props.selectedState;
+    //console.log(this.props.selector)
     return(
-        <div className="headerWrapper col-lg-12">
-          <div className="row">
-            <div className="headerLogoWrapper col-lg-8">
-              <a href="/"><img src="/images/1.png" alt="ijobs logo"/></a>
-            </div>
-            <div className="headerMenuWrapper col-lg-4">
-              <div className="row"> 
-                <div className="headerJobWrapper">
-                  
-                </div>
-                <div className="headerBellWrapper ">
-                  <i className="fa fa-bell-o " onClick={this.notificationBar.bind(this)}></i>
-                  <div className="headerBellbadge">1</div>
-                  <div className="notificationBox" id="notificationBox" style={{display:this.state.notificationDisplay}}>
-                    <div className="notificationCount col-lg-12">
-                      15 Notification
-                    </div>
-                    <div className="notificationMessege col-lg-12">
-                      <FontAwesomeIcon icon="envelope" />
-                      <span className="notificationMessegeText">4 New Messages</span>
-                      <span className="MessagesTime pull-right">2 Mins</span>
-                    </div>
-                    <div className="notificationMessege col-lg-12">
-                      <FontAwesomeIcon icon="users" />
-                      <span className="notificationMessegeText">8 job Request</span>
-                      <span className="MessagesTime pull-right">2 Hours</span>
-                    </div>
-                    <div className="notificationMessege col-lg-12">
-                      <FontAwesomeIcon icon="file-alt" />
-                      <span className="notificationMessegeText">3 New Reports</span>
-                      <span className="MessagesTime pull-right">2 Days</span>
-                    </div>
-                    <div className="notificationCount col-lg-12">
-                      See All Notifications
-                    </div>
-                  </div>
-                </div>
-                <div className="headerProfileWrapper ">
-                  <div className="headerProfileInfo">
-                    <span className="headerProfileName">
-                      Hello, {this.props.userDetails.firstName }
-                    </span>
-                    <img className="headerProfileImg" src='/images/40.png' alt="logo" onClick={this.profileInfo.bind(this)} />
-                    <i className="fa fa-caret-down profileDownArrow" onClick={this.profileInfo.bind(this)}></i>
-                  </div>
-                  <div className="signOutToggel" id="signOutToggel" style={{display:this.state.profileDisplay}}>
-                    <div className="signOutToggelProfileImg">
-                      <img src='/images/40.png' alt="logo"  />
-                    </div>
-                    <div className="signOutToggelProfileName">
-                      Hello, {this.props.userDetails.firstName }
-                    </div>
-                    <div className="signOutToggelButtons">
-                      <div className="col-lg-5 pull-left">
-                        <div className="row">
-                          <a href={"/profile/"+this.props.userDetails.candidate_id} className="whitelink linkA"><div className="signOutButton">Profile</div></a>
-                        </div>
-                      </div>
-                      
-                      <div className="col-lg-5 pull-right">
-                        <div className="row">
-                          <div className="signOutButton" onClick={this.logout.bind(this)}>Sign Out</div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+    <nav className="navbar FunctionalHeaderWrapper container-fluid">
+    <div className="iconHeader col-lg-1">
+        <a href="/"><img src="/images/1.png" alt="icon" /></a>
+    </div>
 
-                <div className="headerToggelWrapper ">
-                  <div className="headerToggel" onClick={this.asideBar.bind(this)}>
-                    <FontAwesomeIcon icon="align-right" />
-                  </div>
-                </div>
-                <div className="functionalbarsToggel" id="barsToggel" style={{top:this.state.asideDisplay}}>
+    <div className="breadCrumbHeader col-lg-2">
+      {/*<ul className="breadCrumbInner">
+        <li className="breadCrumbInnerli"><a href="/">India</a></li>
+        <li className="breadCrumbInnerli selectedState"><a href={"/"+selectedState}>{selectedState}</a></li>  
+       
+      </ul>*/}
+    </div>
+
+          <div className="FunctionWiseTitle col-lg-5">
+           
+          </div>
+
+      <div className="rightFunctionHeader col-lg-4">
+        <div className="row">
+        <div className="rightFunctionHeader1 col-lg-7">
+          <div className="row">
+          <div className="rightFunctionHeader1 col-lg-12 pull-right">
+            <div className="rightFunctionHeader1CityJobs">
+            <div className="cityNameHeader">{selectedState && selectedState != "" ? selectedState : "India"}
+            </div>  
+
+            <div className="cityJobsHeader">{this.props.jobCount[0] ? this.props.jobCount[0].jobCount : 0}
+            </div>              
+          
+            </div>
+          </div>
+          </div>
+        </div>
+
+        <div className="rightFunctionHeader2 col-lg-5">
+          <div className="row">
+          <div className="headerMenu2 col-lg-4">
+            <div className="headerMenu11" >
+                <FontAwesomeIcon icon={['fas', 'bell']} />
+              </div>
+            </div>
+
+            <div className="headerMenu2 col-lg-4">
+            <div className="headerMenu11">
+                <FontAwesomeIcon icon={['fas', 'user']} />
+              </div>
+            </div>
+
+            <div className="headerMenu2 col-lg-4">
+            <div className="headerMenu1" onClick={this.asideBar.bind(this)}>
+                <img src="/images/List_View.png" alt="icon" />
+              </div>
+            </div>
+          </div>
+
+
+          <div className="functionalbarsToggel" id="barsToggel" style={{top:this.state.asideDisplay}}>
 
               <div className="functionalbarsCross col-lg-12">
               
-              <span className="notificationMessegeCross" onClick={this.asideBar.bind(this)}> X </span>
+              <span className="notificationMessegeCross" id="closeAsidebarButton" onClick={this.asideBar.bind(this)}> X </span>
             </div>
 
 
             <div className="functionalbarsItem col-lg-12">
-              <a href="search-jobs" className="aLink"><span className="notificationMessegeText">Jobs </span></a>
-            </div>
-            <div className="functionalbarsItem col-lg-12">
-              <a href="/basic-info" className="aLink"><span className="notificationMessegeText">candidate </span></a>
+              
+              <span className="notificationMessegeText">Jobs </span>
             </div>
             <div className="functionalbarsItem col-lg-12">
               
@@ -175,22 +229,41 @@ class Header extends Component{
               <span className="notificationMessegeText">Contact Us</span>
               
             </div>
-          
+            
+            <div className="functionalbarsItem col-lg-12" id="loginbtndiv" data-toggle="modal" data-target="#loginModal">
+              <FontAwesomeIcon icon="sign-out-alt" />
+              <span className="notificationMessegeText">Sign In</span>
+            </div>
 
           </div>
-                
+        <div className="modal" id="loginModal" role="dialog" tabIndex="-1">
+            <div className="modal-dialog  modal-lg">
+              <div className="modal-body">
+                  <button type="button" className="close" id="closeModalButton" data-dismiss="modal">&times;</button>
+                  <section className="OTPSentWrapper row">
+                        {this.props.selectedModal == "login" ? <LoginForm/> : null }
+                        {this.props.selectedModal == "signup" ? <SignUp/> : null }
+                        {this.props.selectedModal == "forgotpassword" ? <ForgotPassword/> : null }
+                        {this.props.selectedModal == "confirmotp" ? <ConfirmOtp/> : null }
+                        {this.props.selectedModal == "resetpass" ? <ResetPass/> : null }
+                  </section>
               </div>
-
-            </div>
           </div>
         </div>
-
-      );
+        </div>
+      </div>
+    </div>
+  </nav>
+    );
   }
 }
+
 const mapStateToProps = (state)=>{
+  //console.log(state)
     return {
-        userDetails  : state.userDetails,
+        selectedState  : state.selectedState, selectedModal  : state.selectedModal,
+        selector       : state.selector,
+        jobCount       : state.jobCount
     }
 }
 const mapDispatchToProps = (dispatch) => ({

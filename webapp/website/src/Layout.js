@@ -17,6 +17,7 @@ import ResetPasswordFirstLogin from './systemSecurity/ResetPasswordFirstLogin.js
 import Header               from './common/header/Header.js'; 
 import FunctionalHeader     from './common/functionalHeader/FunctionalHeader.js'; 
 import MapHeader            from './common/mapHeader/MapHeader.js'; 
+import NewHeader            from './common/NewHeader/NewHeader.js'; 
 import Footer               from './common/footer/Footer.js';
 import CoreLayout           from './coreadmin/CoreLayout/CoreLayout.js';
 import Homepage             from './pages/Homepage/Homepage.js'
@@ -165,7 +166,7 @@ class Layout extends Component  {
             return (
                 <div className="wrapper PageFunctionWiseWrapper">
 
-                 <MapHeader/> 
+                 <Header/> 
                     
                 
                     <Router >

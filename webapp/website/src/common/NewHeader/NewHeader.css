@@ -136,8 +136,15 @@ font-face {
 	margin-top: 0px;
 	border: 1px solid #999;
 	border-radius: 5px;
-	float: right;
 	
+}
+.headerMenu11{
+	width: 30px;
+	height: 30px;
+	color: #fdfdfd;
+	font-size: 22px;
+	text-align: center;
+	margin-top: 5px;
 }
 .headerMenu1:hover{
 	cursor: pointer;

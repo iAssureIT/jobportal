@@ -1,223 +1,178 @@
-.headerWrapper{
-  position: relative;
-  height:100px;
+font-face {
+  font-family:'Montserrat-Regular';
+  src: url('/fonts/Montserrat/Montserrat-Regular.ttf');
+}
+
+@font-face {
+  font-family:'Montserrat-Bold';
+  src: url('/fonts/Montserrat/Montserrat-Bold.ttf');
+}
+
+.FunctionalHeaderWrapper{
+  height: 110px;
   background-color: transparent;
-  margin-bottom:10px!important;
+  margin-bottom: 0px !important;
   
 }
-.headerLogoWrapper,.headerJobWrapper,
-.headerBellWrapper,.headerProfileWrapper,.headerToggelWrapper{
-  height:45px;
-  background-color:var(--header-bg-color);
-  border-right: 1px solid var(--header-border-color);
-  color:var(--main-txt-color);
-  float:left;
-  border-bottom: 2px solid var(--header-border-color)!important;
-}
-.headerJobWrapper{
-  width:28%;
 
-}
-.headerLogoWrapper{
-  border-right:none;
-}
-.headerBellWrapper{
-  width:12%;
-}
-.headerLogoWrapper img{
-  height:32px;
-  margin-top:5px;
-  margin-left:5px;
-}
-.headerProfileWrapper{
-  width:42%;
-}
-.headerToggelWrapper{
-  width:18%;
-  border-right:none;
-}
-.headerJob{
-  height:25px;
-  width: 70%;
-  margin:auto;
-  margin-top:10px;
-  background-color:var(--yellow-button-color );
-  text-align:center;
-  color:var(--main-txt-color);
-  font-size:10px;
-  padding-top:7px;
-  border-radius:2px;
-}
-.headerJob i{
-  padding-right:5px;
-}
-.headerBellWrapper {
-  text-align:center;
-  font-size:17px;
-  color:var(--main-txt-color);
-
-}
-.headerBellWrapper i{
-  margin-top:13px;
-  transform: translate(-30%, 0%);
-}
-.headerBellWrapper i:hover{
-  cursor: pointer;
-  color:var(--yellow-button-color);
-}
-.headerBellbadge{
-  position: relative;
-  height:10px;
-  width:11px;
-  text-align:center;
-  background-color: var(--red-button-color);  
-  border-radius:50%;
-  font-size:8px;
-  top:9px;
-  left:24px;
-  float:left;
-}
-.headerProfileWrapper{
-  padding-top:8px;
-  
-}
-.headerProfileName{
-  font-size:12px;
-  padding-left:12px;
-}
-.headerProfileImg{
-  width:30px;
-  height:30px;
-  border-radius:50%;
-  margin-left:15px;
-  margin-right:12px;
-}
-.headerBellWrapper i:hover,.headerProfileImg:hover,
-.headerToggel:hover, .headerJob:hover,
-.headerProfileWrapper i:hover{
-  cursor: pointer;
-  color:var(--yellow-button-color);
+.iconHeader{
+  height: 100px;
+  padding-top: 30px;
+  padding-left: 0%;
+  /*background-color: pink;*/
 }
 
-.headerToggel{
-  width:40%;
-  height:23px;
-  background-color: #303A50;
-  margin:auto;
-  margin-top:12px;
-  text-align:center;
-  border: 1px solid #4F515B;
-  border-radius:2px;
-}
-.headerToggel:hover{
-  cursor: pointer;
-}
-.headerToggel i{
-  padding-top:3px;
+.breadCrumbHeader{
+  height: 100px;
+  color: #ddd;
+  text-align: left;
+  padding-top: 50px;
+  font-size: 11px;
+  font-family: 'Montserrat-Regular';
+  /*background-color: blue;*/
 }
 
-.signOutToggel{
-  position: relative;
-  width:100%;
-  height: 150px;
-  margin-top:5px;
-  background-color:var(--header-bg-color  );
-  z-index:5;
-  border: 2px solid var(--header-border-color);
-
+.FunctionWiseTitle{
+  height: 100px;
+  color: #ddd;
+  text-align: left;
+  padding-top: 40px;
+  /*padding-left: 20px;*/
+  font-size: 28px;
+  color: #f5a721;
+  font-family: 'Montserrat-Bold';
+  /*background-color: green;*/
+}
+.rightFunctionHeader{
+  /*background-color: yellow;*/
+  height: 100px;
 }
 
-.signOutToggelProfileImg img{
-  width:60px;
-  height:60px;
-  margin-left:50%;
-  margin-top:15px;
-  transform: translate(-50%,0);
-  border-radius:50%;
+.rightFunctionHeader1{
+  /*background-color:pink;*/
+  height: 100px;
 }
-.signOutToggelProfileName{
-  text-align:center;
-  margin-top:10px;
-  padding-bottom:5px;
-  border-bottom:2px solid var(--header-border-color);
-  
+.rightFunctionHeader2{
+ /* background-color: blue;*/
+  height: 120px;
 }
-.signOutButton{
+
+.breadCrumbInner{
+  color: #eee;
+   list-style: none;
+   padding: 0px;
+   margin: 0px;
+}
+
+.breadCrumbInnerli {
+  display: inline;
+  font-size: 12px;
+  padding-bottom: 5px;
+  border-bottom: 0.5px solid #ddd;
+}
+
+.breadCrumbInnerLI {
+  display: inline;
+  color: #f5a721;
+  font-size: 12px;
+  padding-bottom: 5px;
+  border-bottom: 0.5px solid #f5a721;
+}
+
+.breadCrumbInner li+li:before {
   padding:3px;
-  border:1px solid var(--header-border-color);
-  margin-top:5px;
-  text-align:center;
-  font-size:11px;
-  border-radius:3px;
-  margin-left:5px;
-  margin-right:5px;
-  transition:all 1s;
+  color: #ddd;
+  content: ">\00a0";
 }
-.signOutButton:hover{
-  cursor: pointer;
-  background-color:var(--yellow-button-color);
-}
-.barsToggel{
-  position: relative;
-  width:255px;
-  height: 170px;
-  background:var(--header-bg-color  );
-  z-index:3;
-  margin-top:0px;
-  border:1px solid var(--header-border-color);
-}
-.notificationBox{
-  position: relative;
-  width:225px;
-  height: 170px;
-  background:var(--header-bg-color  );
-  z-index:3;
-  top:10px;
-  border:1px solid var(--header-border-color);
-  left:-173px;
-}
-.notificationCount{
-  text-align:center;
-  height:34px;
-  
-  font-size:13px;
-  border-bottom:1px solid var(--header-border-color);
-  padding-top:7px;
-  background:var(--header-bg-color  );
-}
-.notificationMessege{
-  height:34px;
 
-  font-size:12px;
-  border-bottom:1px solid var(--header-border-color);
-  padding-top:7px;
-  text-align:left;
-  background:var(--header-bg-color  );
+.breadCrumbInner li a {
+  color: #eee;
+  text-decoration: none;
+}
+
+.breadCrumbInner li a:hover{
+  color: #f5a721;
+  text-decoration: none;
+}
+.rightFunctionHeader1CityJobs{
+  width: 100%;
+  height: 85px;
+  margin-top: 20px;
+  background-color: #242933;
+  border: 1px solid #999;
+  border-radius: 5px;
+}
+
+.cityNameHeader{
+  width: 100%;
+  height: 40px;
+  color: #eee;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  padding-top: 10px;
+  font-family: 'Montserrat-Bold';
   
 }
-.notificationMessegeText{
-  margin-left:12px;
-}
-.MessagesTime{
-  font-size:10px;
-  padding-top:3px;
-}
-.notificationMessege:hover{
-  cursor: pointer;
-  background:var(--main-bg-color );
 
+.cityJobsHeader{
+  width: 100%;
+  height: 50px;
+  color: #f5a721;
+  font-size: 25px;
+  font-weight: bold;
+  text-align: center;
+/*  padding-bottom: 10px;*/
+  font-family: 'Montserrat-Regular';
 }
-.notificationCount:hover{
+
+.headerMenu1{
+  width: 30px;
+  height: 30px;
+  color: #aaa;
+  font-size: 18px;
+  text-align: center;
+  margin-left: 5px;
+  margin-top: 0px;
+  border: 1px solid #999;
+  border-radius: 5px;
+  
+}
+.headerMenu11{
+  width: 30px;
+  height: 30px;
+  color: #aaa;
+  font-size: 18px;
+  text-align: center;
+  margin-left: 5px;
+  margin-top: 0px;
+}
+.headerMenu1:hover{
   cursor: pointer;
-  background:var(--main-bg-color );
 }
-.barsToggel .notificationMessege{
-  color:#fff;
+
+.headerMenu2{
+  
+  height: 30px;
+  margin-top: 20px;
+}
+
+.headerMenu11{
+  float: right;
+}
+
+.bind{
+  background-color: #222;
+}
+
+.LayoutWrapper{
+  background-color: #444;
+
 }
 
 .functionalbarsToggel{
   position: fixed;
-    right: 15px;
+    /*right: 15px;*/
     width: auto;
     min-width: 1250px;
   height: auto;
@@ -291,7 +246,3 @@
   cursor: pointer;
 }
 
-
-.aLink{
-  color:#fff!important;
-}

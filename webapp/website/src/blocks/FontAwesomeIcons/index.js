@@ -5,7 +5,7 @@ import {faAlignRight,faCheckSquare ,faRing,faMapMarkedAlt,
 		faUniversity,faFileAlt,faAdjust,faChalkboardTeacher,faCity,faWarehouse,
 		faIdCardAlt,faNetworkWired,faUserClock,faIndustry,faMapMarkerAlt,faEnvelope,
 		faUsers,faSearch,faSignOutAlt,faEllipsisH,faTrashAlt,faPencilAlt,faHome,
-		faRupeeSign,faHourglassStart,faGraduationCap,faArrowRight,faArrowLeft} 
+		faRupeeSign,faHourglassStart,faGraduationCap,faArrowRight,faArrowLeft,faUser,faBell} 
 
 from '@fortawesome/free-solid-svg-icons'
  
@@ -13,5 +13,5 @@ library.add(fab, faCheckSquare, faAlignRight,faRing,faMapMarkedAlt,faUniversity,
 			faFileAlt,faAdjust,faChalkboardTeacher,faCity,faWarehouse,faIdCardAlt,
 			faNetworkWired,faUserClock,faIndustry,faMapMarkerAlt,faEnvelope,faUsers,
 			faSearch,faSignOutAlt,faEllipsisH,faTrashAlt,faPencilAlt,faHome,faRupeeSign,
-			faHourglassStart,faGraduationCap,faArrowRight,faArrowLeft)
+			faHourglassStart,faGraduationCap,faArrowRight,faArrowLeft,faUser,faBell)
 
