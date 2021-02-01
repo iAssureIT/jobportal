@@ -26,10 +26,10 @@ exports.insertCandidateBasicInfo = (req, res, next)=>{
     			"anniversaryDate"	: req.body.anniversaryDate ? req.body.anniversaryDate : null,
     			"nationality" 	 	: req.body.nationality ? req.body.nationality : null,
                 "profilePicture"    : req.body.profilePicture ? req.body.profilePicture : null,
+                "resume"            : req.body.resumeUrl ? req.body.resumeUrl : null,
+                "executiveSummary"  : req.body.executiveSummary ? req.body.executiveSummary : null,
     		},
             "languagesKnown"        : req.body.languagesTags ? req.body.languagesTags : null,
-    		"panCard" 		 		: req.body.panCard ? req.body.panCard : null,
-    		"aadhaarCard" 	 		: req.body.aadhaarCard ? req.body.aadhaarCard  : null,
     		"contact" : {
     			"mobile" 		 	: req.body.mobile,
                 "altMobile"         : req.body.altMobile ? req.body.altMobile : null,
@@ -254,10 +254,13 @@ exports.updateCandidateBasicInfo = (req, res, next)=>{
                         "basicInfo.maritalStatus"  : req.body.maritalStatus,
                         "basicInfo.anniversaryDate": req.body.anniversaryDate == "" ? null : new Date(req.body.anniversaryDate),
                         "basicInfo.nationality"    : req.body.nationality,
+                        "basicInfo.profilePicture" : req.body.profilePicture,
+                        "basicInfo.resume"         : req.body.resumeUrl,
+                        "basicInfo.executiveSummary": req.body.executiveSummary,
                         "languagesKnown"           : languages,
-                        "panCard"                  : req.body.panCard,
-                        "aadhaarCard"              : req.body.aadhaarCard,
-                        "profilePicture"           : req.body.profilePicture,
+                        "contact.mobile"           : req.body.mobile,
+                        "contact.altMobile"        : req.body.altMobile,
+                        "contact.emailId"          : req.body.emailId,
                         }
             }
         )

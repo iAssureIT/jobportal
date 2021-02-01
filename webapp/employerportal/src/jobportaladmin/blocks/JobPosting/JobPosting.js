@@ -1508,17 +1508,11 @@ render(){
 											        id 			= 	"jobDesc"
 											        onInit		=	{ editor =>	{}}
 											        onChange 	=	{(event, editor) => {this.setState({ jobDesc: editor.getData() });} }
-											        
 											        onBlur		=	{ 	
-											        					editor 	=> 	{
-											            								console.log( 'Blur.', editor );
-											          								} 	
+											        					editor 	=> 	{ console.log( 'Blur.', editor ); } 	
 											          				}
-											        
 											        onFocus		=	{ 	
-											        					editor 	=> {
-											            								console.log( 'Focus.', editor );
-											          								} 
+											        					editor 	=> { console.log( 'Focus.', editor ); } 
 											          				}
 										        />	
 										    </div> 

@@ -8,19 +8,17 @@ const candidateSchema = mongoose.Schema({
 		middleName		: String,
 		lastName 		: String,
 		dob 			: Date,
-		//age			: String,
 		gender			: String,
 		maritalStatus	: String,
 		anniversaryDate	: Date,
-		
 		nationality 	: String,
 		profilePicture  : String,
+		resume 			: String,
+		executiveSummary: String
 	},
 	languagesKnown		: [{
 						language_id : { type: mongoose.Schema.Types.ObjectId, ref: 'languagemasters' }
 						}],
-	panCard			: String,
-	aadhaarCard		: String,
 	address : [{
 		addressType		: { type: mongoose.Schema.Types.ObjectId, ref: 'addresstypemasters' },
 		houseNumber 	: String,
@@ -80,18 +78,18 @@ const candidateSchema = mongoose.Schema({
         district        : String,
 		lastDegn		: String,
 		department		: String,
-		lastSalary 		: String,
 		fromDate 		: Date, 
 		toDate  		: Date,
-		noticePeriod    : String,
-		expectedSalary  : String,
 		responsibilities			: String,
 		reportingManager			: String,
 		reportingManagerDegn  		: String,
 	}],
-	user_id	  : { type: mongoose.Schema.Types.ObjectId, ref: 'users' },
-	createdAt : Date,
-	createdBy : String,
+	noticePeriod    	: String,
+	currentCTC 			: String,
+	expectedCTC  		: String,
+	user_id	  			: { type: mongoose.Schema.Types.ObjectId, ref: 'users' },
+	createdAt 			: Date,
+	createdBy 			: String,
 	updateLog : [
 		{updatedBy : String, updatedAt : Date, remark : String }
 	]

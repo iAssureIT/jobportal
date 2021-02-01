@@ -6,6 +6,9 @@ import Axios 			 	        from 'axios';
 import Swal 			 	        from 'sweetalert2';
 import S3FileUpload                 from 'react-s3';
 import { WithContext as ReactTags } from 'react-tag-input';
+import PhoneInput 					from 'react-phone-input-2';
+import CKEditor 					from '@ckeditor/ckeditor5-react';
+import ClassicEditor 				from '@ckeditor/ckeditor5-build-classic';
 import {connect}                    from 'react-redux';
 import { bindActionCreators }       from 'redux';
 import  * as mapActionCreator       from '../../common/actions/index';
@@ -16,10 +19,13 @@ class BasicInfoForm extends Component{
 	constructor(props){
 		super(props);
 		this.state={
+			candidate_id              : this.props.userDetails.candidate_id,
 			firstName                 : "",
 			middleName                : "",
-			candidate_id              : this.props.userDetails.candidate_id,
 			lastName                  : "",
+			mobile        			  : "",
+			alternate     			  : "",
+			email         			  : "",
 			dob                       : "",
 			profilePhoto              : "",
 			profileImageUrl           : "",
@@ -35,14 +41,16 @@ class BasicInfoForm extends Component{
 			ageDays	       	          : 0,
 			age                       : "",
 			inputMaritalStatus        : ["Single",,"Married", "Separated","Divorced","Widowed"],
+			anniversaryDateShow 	  : false,	
 			inputNationality          : ["Indian","American"],
 			languagesTags	          : [],
 			languagesSuggestions	  : [],
 			inputLanguages	          : [],
-
 			imageUploaded             : true,
 			profilePicture            : "",
-
+			resumeUrl 				  : "",
+			resume 					  : [],
+			executiveSummary 		  : ""		
 		}
 		
 	}
@@ -77,14 +85,19 @@ class BasicInfoForm extends Component{
 			 		firstName         : response.data.basicInfo.firstName?response.data.basicInfo.firstName:"",
 					middleName        : response.data.basicInfo.middleName?response.data.basicInfo.middleName:"",
 					lastName          : response.data.basicInfo.lastName?response.data.basicInfo.lastName:"",
+					mobile        	  : response.data.contact.mobile?response.data.contact.mobile:"",
+					alternate     	  : response.data.contact.altMobile?response.data.contact.altMobile:"",
+					email         	  : response.data.contact.emailId?response.data.contact.emailId:"",
 					dob               : response.data.basicInfo.dob?Moment(response.data.basicInfo.dob).format("YYYY-MM-DD"):"",
 					gender            : response.data.basicInfo.gender?response.data.basicInfo.gender:"",
 					anniversaryDate   : response.data.basicInfo.anniversaryDate?Moment(response.data.basicInfo.anniversaryDate).format("YYYY-MM-DD"):"",
 					maritalStatus     : response.data.basicInfo.maritalStatus?response.data.basicInfo.maritalStatus:"",
 					nationality       : response.data.basicInfo.nationality?response.data.basicInfo.nationality:"",
-					panCardNo         : response.data.panCard?response.data.panCard:"",
-					adhaarCardNo      : response.data.aadhaarCard?response.data.aadhaarCard:"",
-					profilePicture    : response.data.profilePicture?response.data.profilePicture:"",
+					profilePicture    : response.data.basicInfo.profilePicture?response.data.basicInfo.profilePicture:"",
+					profileImageUrl   : response.data.basicInfo.profilePicture?response.data.basicInfo.profilePicture:"",	
+					resume     		  : response.data.basicInfo.resume?response.data.basicInfo.resume:"",
+					resumeUrl     	  : response.data.basicInfo.resume?response.data.basicInfo.resume:"",
+					executiveSummary  : response.data.basicInfo.executiveSummary ? response.data.basicInfo.executiveSummary : "",
 					languagesTags 	  : languagesTags	
 			 	})
 			 })
@@ -100,13 +113,7 @@ class BasicInfoForm extends Component{
 		if (event.currentTarget.files ) {
 		const imgFile = event.currentTarget.value;
 		const files   = event.currentTarget.files;
-		// imgValue      = imgFile.split(".");
-		// if(imgValue[1] !== 'jpg'){
-		// 	this.setState({
-
-		// 	})
-		// }
-
+		
 		const imgUrl =  URL.createObjectURL(event.target.files[0]);
 		
 		this.setState({
@@ -159,7 +166,6 @@ class BasicInfoForm extends Component{
             };
             formValues.push(formValue);
 
-          
           return Promise.resolve(formValues);
         }
     
@@ -197,10 +203,102 @@ class BasicInfoForm extends Component{
     }
 		
 	}
+	uploadResume(event){
+		event.preventDefault();
+		var resume = [];
+		if (event.currentTarget.files ) {
+		
+		const resumeUrl =  URL.createObjectURL(event.target.files[0]);
+		
+		this.setState({
+			resumeUrl : resumeUrl
+		})
+		var file = event.currentTarget.files[0];
+		if (file) {
+          var fileName = file.name;
+          var fileSize = file.size;
+          var ext = fileName.split('.').pop();
+          if (ext === "pdf" || ext === "docx" || ext === "doc") {
+            if(fileSize > 1048576){
+              Swal.fire("Allowed file size is 1MB");
+            }else{
+              if (file) {
+                var objTitle = { fileInfo: file }
+                resume.push(objTitle);
+              } else {
+                Swal.fire("Resume is not uploaded");
+              }//file
+            }
+          } else {
+            Swal.fire("Allowed document format is (doc, docx, pdf)");
+            
+          }//file types
+        }
+        if (event.currentTarget.files) {
+	        
+	        main().then(formValues => {
+	         
+	   		console.log(formValues)
+	          this.setState({
+	            resume   : formValues[0].resume,
+	          })
+	        });
 
+	        async function main() {
+	          var formValues = [];
+	        
+	            var config = await getConfig();
+	            var s3url = await s3upload(resume[0].fileInfo, config, this);
+	            const formValue = {
+	              "resume": s3url,
+	              "status": "New"
+	            };
+	            formValues.push(formValue);
+
+	          return Promise.resolve(formValues);
+	        }
+	    
+	    	function s3upload(resume, configuration) {
+	          return new Promise(function (resolve, reject) {
+	            S3FileUpload
+	              .uploadFile(resume, configuration)
+	              .then((Data) => {
+
+	                resolve(Data.location);
+	              })
+	              .catch((error) => {
+	              })
+	          })
+	        }
+	        function getConfig() {
+	          return new Promise(function (resolve, reject) {
+	            Axios.post('/api/projectsettings/getS3Details/S3')
+	              .then((response) => {
+	                const config = {
+	                  bucketName: response.data.bucket,
+	                  dirName: process.env.REACT_APP_ENVIRONMENT,
+	                  region: response.data.region,
+	                  accessKeyId: response.data.key,
+	                  secretAccessKey: response.data.secret,
+	                }
+	                resolve(config);
+	              })
+	              .catch(function (error) {
+	              })
+
+	          })
+	        }
+    		}
+    	}	
+	}
 	delImgPreview(event){
 		this.setState({
 			profileImageUrl:""
+		})
+	}
+	delResumePreview(event){
+		this.setState({
+			resumeUrl:""
 		})
 	}
 
@@ -215,6 +313,13 @@ class BasicInfoForm extends Component{
 		})
 		if(name==="dob"){
 			this.calAge(value);
+		}
+		if (name=="maritalStatus") {
+			if (value=="Married") {
+				this.setState({anniversaryDateShow : true})
+			}else{
+				this.setState({anniversaryDateShow : false})
+			}
 		}
 	}
 	calAge(dob){
@@ -278,16 +383,18 @@ class BasicInfoForm extends Component{
 								candidate_id       : this.state.candidate_id,
 								middleName         : this.state.middleName,
 								lastName           : this.state.lastName,
+								mobile      	   : this.state.mobile,
+								altMobile          : this.state.alternate,
+								emailId            : this.state.email,
 								dob                : this.state.dob,
 								gender             : this.state.gender,
 								anniversaryDate    : this.state.anniversaryDate,	
 								maritalStatus      : this.state.maritalStatus,
 								nationality        : this.state.nationality,
-								panCard            : this.state.panCardNo,
-								aadhaarCard        : this.state.adhaarCardNo,
 								languagesTags	   : this.state.languagesTags,
 								profilePicture	   : this.state.profilePicture,
-								
+								resumeUrl 		   : this.state.resume,
+								executiveSummary   :this.state.executiveSummary	
 							}
 							console.log(formValues);
 			if(status==true){
@@ -310,7 +417,11 @@ class BasicInfoForm extends Component{
 											ageYears	       : 0,	
 											ageMonths	       : 0,	
 											ageDays	       	   : 0,
-											profilePicture     : ""
+											profilePicture     : "",
+											profileImageUrl    : "",	
+											resume 			   : "",	
+											resumeUrl          : "", 
+											executiveSummary   : ""
 										})
 
 						this.props.history.push("/address/"+this.state.candidate_id);
@@ -329,7 +440,10 @@ class BasicInfoForm extends Component{
 	//========== Validation Start ==================
 	 validateForm=()=>{
 		var status = true;
-		
+		var tempEmail = this.state.email.trim(); // value of field with whitespace trimmed off
+    	var emailFilter = /^[^@]+@[^@.]+\.[^@]*\w\w$/;
+    	var illegalChars = /[\(\)\<\>\,\;\:\\\"\[\]]/;
+
 		if(this.state.firstName.length<=0){
 			document.getElementById("firstNameError").innerHTML=  
 			"Please enter your first name";  
@@ -349,7 +463,20 @@ class BasicInfoForm extends Component{
 			""; 
 			status = true;
 		}
-	
+		if(this.state.email.length<=0){
+			document.getElementById("emailError").innerHTML=  
+			"Please enter your Email";  
+			status=false; 
+		}else if (
+			!emailFilter.test(tempEmail)) { //test email for illegal characters
+	        document.getElementById('emailError').innerHTML = "Please enter a valid email address.";
+	    } else if (this.state.email.match(illegalChars)) {
+	        document.getElementById('emailError').innerHTML = "Email contains invalid characters.";
+	    }else{
+			document.getElementById("emailError").innerHTML=
+			""; 
+			status = true;
+		}
 
 		
 		 return status;
@@ -415,11 +542,56 @@ class BasicInfoForm extends Component{
 									 onChange={this.handleChange.bind(this)} />
 								</div> 
 							</div>
-
 						</div>
-
 						<div className="row formWrapper">
+							<div className="col-lg-4">
+								<label htmlFor="mobile" className="nameTitleForm">
+									Mobile Number
+									<sup className="nameTitleFormStar">*</sup>
+								</label>
+								<PhoneInput 
+									country   = {'in'}
+									id        ="mobile" 
+									className ="input-group-addon form-control inputBox" 
+									value     ={this.state.mobile} 
+									onChange  = {mobile => this.setState({ mobile })}
+								 />
+							
+								<span id="mobileError" className="errorMsg"></span>
+							</div>
 
+							<div className="col-lg-4">
+								<label htmlFor="alternate" className="nameTitleForm">
+									Alternate Mobile Number
+								</label>
+								<PhoneInput 
+									country   = {'in'}
+									id        ="alternate" 
+									className ="input-group-addon form-control inputBox" 
+									value     ={this.state.alternate} 
+									onChange  = {alternate => this.setState({ alternate })}
+								 />
+								
+								<span id="alternateError" className="errorMsg"></span>
+							</div>
+
+							<div className="col-lg-4">
+								<label htmlFor="email" className="nameTitleForm">
+									Personal Mail ID
+									<sup className="nameTitleFormStar">*</sup>
+								</label>
+								<div className="input-group ">
+									<span className="input-group-addon inputBoxIcon">
+										<i className="fa fa-envelope-o"></i> 
+									</span> 
+									<input type="email" name="email" id="email" 
+									 className="form-control inputBox email" value={this.state.email} readOnly
+									 onChange={this.handleChange.bind(this)} />
+								</div> 
+								<span id="emailError" className="errorMsg"></span>
+							</div>
+						</div>
+						<div className="row formWrapper">
 							<div className="col-lg-4">
 								<label htmlFor="dob" className="nameTitleForm">
 									Date Of Birth
@@ -487,7 +659,6 @@ class BasicInfoForm extends Component{
 									
 								</div>
 							</div>
-
 						</div>
 
 						<div className="row formWrapper multiselectZ">
@@ -495,7 +666,6 @@ class BasicInfoForm extends Component{
 							<div className="col-lg-4">
 								<label htmlFor="maritalStatus" className="nameTitleForm">
 									Marital Status
-									<sup className="nameTitleFormStar">*</sup>
 								</label>
 								<div className="input-group ">
 									<span className="input-group-addon inputBoxIcon inputBoxIcon1">
@@ -523,25 +693,28 @@ class BasicInfoForm extends Component{
 
 								</div>
 							</div>
-
-							<div className="col-lg-4">
-								<label htmlFor="anniversaryDate" className="nameTitleForm">
-									Anniversary Date
-								</label>
-								<div className="input-group ">
-									<span className="input-group-addon inputBoxIcon inputBoxIcon2 calender">
-										<i className="fa fa-calendar-o"></i>
-									</span> 
-									<input type="date" name="anniversaryDate" id="anniversaryDate" 
-									className="form-control inputBox date" value={this.state.anniversaryDate}
-									onChange={this.handleChange.bind(this)} />
-								</div> 
-							</div>
-
-							<div className="col-lg-4">
+							{
+								this.state.anniversaryDateShow ? 
+								<div className="col-lg-4 anniversaryDate">
+									<label htmlFor="anniversaryDate" className="nameTitleForm">
+										Anniversary Date
+									</label>
+									<div className="input-group ">
+										<span className="input-group-addon inputBoxIcon inputBoxIcon2 calender">
+											<i className="fa fa-calendar-o"></i>
+										</span> 
+										<input type="date" name="anniversaryDate" id="anniversaryDate" 
+										className="form-control inputBox date" value={this.state.anniversaryDate}
+										onChange={this.handleChange.bind(this)} />
+									</div> 
+								</div>
+								: null
+							}
+						</div>
+						<div className="row formWrapper">
+							<div className="col-lg-8">
 								<label htmlFor="languages" className="nameTitleForm">
 									Languages Spoken
-									<sup className="nameTitleFormStar">*</sup>
 								</label>
 								<div className="input-group ">
 									<span className="input-group-addon inputBoxIcon inputBoxIcon2">
@@ -558,11 +731,6 @@ class BasicInfoForm extends Component{
 									handleTagClick={this.onLanguageClick.bind(this)} />
 								</div>
 							</div>
-
-						</div>
-
-						<div className="row formWrapper">
-
 							<div className="col-lg-4">
 								<label htmlFor = "nationality" className = "nameTitleForm" > 
 									Nationality 
@@ -593,37 +761,25 @@ class BasicInfoForm extends Component{
 									</select>
 								</div>
 							</div>
-
-							<div className="col-lg-4">
-								<label htmlFor="panCardNo" className="nameTitleForm">
-									Pan Card No.
-								</label>
-								<div className="input-group ">
-									<span className="input-group-addon inputBoxIcon">
-										<i className="fa fa-id-card-o"></i> 
-									</span> 
-									<input type="text" name="panCardNo" id="panCardNo" 
-									 className="form-control inputBox" value={this.state.panCardNo} 
-									 onChange={this.handleChange.bind(this)} />
-								</div> 
-							</div>
-
-							<div className="col-lg-4">
-								<label htmlFor="adhaarCardNo" className="nameTitleForm">
-									Aadhaar Card No.
-								</label>
-								<div className="input-group ">
-									<span className="input-group-addon inputBoxIcon">
-										<i className="fa fa-id-card-o"></i> 
-									</span> 
-									<input type="text" name="adhaarCardNo" id="adhaarCardNo" 
-									className="form-control inputBox" value={this.state.adhaarCardNo} 
-									onChange={this.handleChange.bind(this)} />
-								</div> 
-							</div>
-
 						</div>
-
+						<div className="row formWrapper">
+							<div className="col-lg-12">
+								<label htmlFor="executiveSummary" className="nameTitleForm">
+									Executive Summary
+								</label>
+								<div>
+									<CKEditor
+								        editor  	= 	{ClassicEditor}
+								        data 		= 	{this.state.executiveSummary}
+								        id 			= 	"executiveSummary"
+								        onInit		=	{ editor =>	{}}
+								        onChange 	=	{(event, editor) => {this.setState({ executiveSummary: editor.getData() });} }
+								        onBlur		=	{ editor 	=> 	{} }
+								        onFocus		=	{ editor 	=> {} }
+							        />	
+								</div>
+							</div>
+						</div>
 						<div className="row formWrapper">
 							<div className="col-lg-4 ">
 								<label htmlFor="profilePicture" className="nameTitleForm">
@@ -638,7 +794,7 @@ class BasicInfoForm extends Component{
 												   onClick={this.delImgPreview.bind(this)}>
 												</i>
 												<img src={this.state.profileImageUrl} alt="profileImage" 
-												className="col-lg-12 profileImage"/>
+												className="profileImage"/>
 											</div>
 										:
 											<div>
@@ -649,7 +805,32 @@ class BasicInfoForm extends Component{
 												/>
 											</div>
 									}
-									
+								</div>
+							</div>
+							<div className="col-lg-4 ">
+								<label htmlFor="profilePicture" className="nameTitleForm">
+									Resume 
+								</label>
+								<div className="input-group ">
+									{
+										this.state.resumeUrl!== ""
+										?	
+											<div>
+												<i className="fa fa-times delResumeIcon" 
+												   onClick={this.delResumePreview.bind(this)}>
+												</i>
+												<img src={"/images/resumeIcon.png"} alt="profileImage" 
+												className="resumeImage"/>
+											</div>
+										:
+											<div>
+
+												<input type="file" className="inputImage" 
+												 name="resume"
+												 onChange={this.uploadResume.bind(this)}
+												/>
+											</div>
+									}
 								</div>
 							</div>
 						</div>

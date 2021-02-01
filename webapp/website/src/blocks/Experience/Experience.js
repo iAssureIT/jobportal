@@ -31,14 +31,14 @@ class Experience extends Component{
 			companyCity                   : "",
 			lastDesignation               : "",
 			lastDeartment   		      : "",
-			lastSalary                    : "",
+			currentCTC                    : "",
 			fromDate	                  : "",	
 			toDate                        : "",
 			companyState                  : "",
 			responsibilities              : "",
 			reportingManager              : "",
 			reportingManagerDesignation   : "",
-			expectedSalary                : "",
+			expectedCTC                   : "",
 			noticePeriod                  : "",
 			buttonText                    : "Save",
 			expYears                      : 0,
@@ -138,8 +138,8 @@ class Experience extends Component{
 			 		companyState                   :editData[0].workExperience[0].state,
 			 		lastDesignation                :editData[0].workExperience[0].lastDegn,
 			 		lastDeartment                  :editData[0].workExperience[0].department,
-			 		lastSalary                     :editData[0].workExperience[0].lastSalary,
-			 		expectedSalary                 :editData[0].workExperience[0].expectedSalary,
+			 		currentCTC                     :editData[0].workExperience[0].currentCTC,
+			 		expectedCTC                    :editData[0].workExperience[0].expectedCTC,
 			 		responsibilities               :editData[0].workExperience[0].responsibilities,
 			 		reportingManager               :editData[0].workExperience[0].reportingManager,
 			 		noticePeriod                   :editData[0].workExperience[0].noticePeriod,
@@ -221,8 +221,8 @@ class Experience extends Component{
 		var status =  this.validateForm();
 		
 		var formValues = {
-								candidate_id        : this.state.candidate_id,
-								experienceID       : this.state.workExperienceID,
+								candidate_id       	: this.state.candidate_id,
+								experienceID       	: this.state.workExperienceID,
 								experience:{
 									industry_id 				  : this.state.industry_id,	
 									industry 				  	  : this.state.industry,	
@@ -235,15 +235,15 @@ class Experience extends Component{
 									district                      : this.state.companyCity,
 									lastDegn                      : this.state.lastDesignation,
 									department                    : this.state.lastDeartment,
-									lastSalary                    : this.state.lastSalary,
-									expectedSalary                : this.state.expectedSalary,
-									noticePeriod                  : this.state.noticePeriod,
 									fromDate                      : this.state.fromDate,
 									toDate                        : this.state.toDate,
 									responsibilities              : this.state.responsibilities,
 									reportingManager              : this.state.reportingManager,
 									reportingManagerDegn          : this.state.reportingManagerDesignation
-								}
+								},
+								currentCTC            : this.state.currentCTC,
+								expectedCTC           : this.state.expectedCTC,
+								noticePeriod          : this.state.noticePeriod,
 								
 							}
 		console.log(formValues)	
@@ -268,10 +268,10 @@ class Experience extends Component{
 									companyCity                   : "",
 									lastDesignation               : "",
 									lastDeartment   		      : "",
-									lastSalary                    : "",
+									currentCTC                    : "",
 									fromDate	                  : "",	
 									companyState	              : "",	
-									expectedSalary	              : "",	
+									expectedCTC	                  : "",	
 									toDate                        : "",
 									responsibilities              : "",
 									reportingManager              : "",
@@ -300,9 +300,9 @@ class Experience extends Component{
 										companyCity                   : "",
 										lastDesignation               : "",
 										lastDeartment   		      : "",
-										lastSalary                    : "",
+										currentCTC                    : "",
 										fromDate	                  : "",	
-										expectedSalary	              : "",	
+										expectedCTC	                  : "",	
 										companyState	              : "",	
 										toDate                        : "",
 										responsibilities              : "",
@@ -449,21 +449,21 @@ class Experience extends Component{
 			""; 
 			status = true;
 		}
-		if(this.state.lastSalary.length<=0){
-			document.getElementById("lastSalaryError").innerHTML=  
+		if(this.state.currentCTC.length<=0){
+			document.getElementById("currentCTCError").innerHTML=  
 			"Please enter your last salary";  
 			status=false; 
 		}else{
-			document.getElementById("lastSalaryError").innerHTML=  
+			document.getElementById("currentCTCError").innerHTML=  
 			""; 
 			status = true;
 		}
-		if(this.state.expectedSalary.length<=0){
-			document.getElementById("expectedSalaryError").innerHTML=  
+		if(this.state.expectedCTC.length<=0){
+			document.getElementById("expectedCTCError").innerHTML=  
 			"Please enter your last salary";  
 			status=false; 
 		}else{
-			document.getElementById("expectedSalaryError").innerHTML=  
+			document.getElementById("expectedCTCError").innerHTML=  
 			""; 
 			status = true;
 		}
@@ -702,7 +702,7 @@ class Experience extends Component{
 
 							<div className="col-lg-4">
 								<label htmlFor="fromDate" className="nameTitleForm">
-									Form Date
+									From Date
 									<sup className="nameTitleFormStar">*</sup>
 								</label>
 								<div className="input-group ">
@@ -797,35 +797,35 @@ class Experience extends Component{
 						</div>
 						<div className="row formWrapper">
 							<div className="col-lg-4">
-								<label htmlFor="lastSalary" className="nameTitleForm">
-									Last Salary Drawn in INR
+								<label htmlFor="currentCTC" className="nameTitleForm">
+									Current CTC (Annual in INR)
 									<sup className="nameTitleFormStar">*</sup>
 								</label>
 								<div className="input-group ">
 									<span className="input-group-addon inputBoxIcon">
 										<FontAwesomeIcon icon="rupee-sign" /> 
 									</span> 
-									<input type="text" name="lastSalary" id="lastSalary" 
-									 className="form-control inputBox" value={this.state.lastSalary}
+									<input type="text" name="currentCTC" id="currentCTC" 
+									 className="form-control inputBox" value={this.state.currentCTC}
 									 onChange={this.handleChange.bind(this)} />
 								</div> 
-								<span id="lastSalaryError" className="errorMsg"></span>
+								<span id="currentCTCError" className="errorMsg"></span>
 							</div>
 
 							<div className="col-lg-4">
-								<label htmlFor="expectedSalary" className="nameTitleForm">
-									Expected Salary Drawn in INR
+								<label htmlFor="expectedCTC" className="nameTitleForm">
+									Expected CTC (Annual in INR)
 									<sup className="nameTitleFormStar">*</sup>
 								</label>
 								<div className="input-group ">
 									<span className="input-group-addon inputBoxIcon">
 										<FontAwesomeIcon icon="rupee-sign" /> 
 									</span> 
-									<input type="text" name="expectedSalary" id="expectedSalary" 
-									 className="form-control inputBox" value={this.state.expectedSalary} 
+									<input type="text" name="expectedCTC" id="expectedCTC" 
+									 className="form-control inputBox" value={this.state.expectedCTC} 
 									 onChange={this.handleChange.bind(this)} />
 								</div> 
-								<span id="expectedSalaryError" className="errorMsg"></span>
+								<span id="expectedCTCError" className="errorMsg"></span>
 							</div>
 
 							<div className="col-lg-4">
@@ -887,7 +887,7 @@ class Experience extends Component{
 																{elem.department}
 															</div>
 															<div className="AddressBoxText">
-																{elem.lastSalary}
+																{elem.currentCTC}
 															</div>
 															<div className="AddressBoxText">
 																{elem.fromDate}
