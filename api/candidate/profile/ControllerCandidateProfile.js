@@ -78,6 +78,7 @@ exports.getSingleCandidate = (req,res,next)=>{
     .populate('academics.qualification_id')
     .populate('academics.university_id')
     .populate('skills.skill_id')
+    .populate('workExperience.industry_id')
     .populate('workExperience.company_id')
 
     .exec(function (err, candidate) {
@@ -528,7 +529,83 @@ exports.addCandidateExperience = (req,res,next)=>{
     processData();
     async function processData(){
     industry_id = req.body.experience.industry_id != "" ? req.body.experience.industry_id 
-                                : await insertIndustry(req.body.experience.industry_id,req.body.candidate_id)
+                                : await insertIndustry(req.body.experience.industry,req.body.candidate_id)
+    
+    if (req.body.experience.company_id != "" ) {
+        company_id  = req.body.experience.company_id;
+    }else{
+
+        var getnext = await getNextSequence(entityType)
+        var str = parseInt(getnext)
+        var company =  {
+                    entityType                : entityType,
+                    profileStatus             : "New",
+                    companyNo                 : getnext ? getnext : 1,
+                    companyID                 : str ? str : 1, 
+                    companyName               : req.body.experience.company,
+                    data_origin               : "candidate",
+                    district                  : req.body.experience.district,
+                    state                     : req.body.experience.state,
+                    stateCode                 : req.body.experience.stateCode,
+                    country                   : req.body.experience.country,
+                    countryCode               : req.body.experience.countryCode,
+        }
+        company_id = await insertEntity(company,req.body.candidate_id)
+    } 
+
+    req.body.experience.industry_id = industry_id;
+    req.body.experience.company_id = company_id;
+
+    CandidateProfile.updateOne(
+            { _id: req.body.candidate_id },  
+            { 
+                $push:  {   'workExperience': req.body.experience },
+                $set:   {   'currentCTC'    : req.body.currentCTC,
+                            'expectedCTC'   : req.body.expectedCTC, 
+                            'noticePeriod'  : req.body.noticePeriod,
+                            'totalExperience': req.body.totalExperience
+                        }
+            }
+        )
+        .exec()
+        .then(data=>{
+            if(data.nModified == 1){
+                res.status(200).json({ created : true });
+            }else{
+                res.status(401).json({ created : false });
+            }
+        })
+        .catch(err =>{
+            res.status(500).json({ error: err });
+        });  
+    } 
+};
+
+exports.getOneCandidateExperience = (req,res,next)=>{
+    CandidateProfile.find({"_id" : req.body.candidate_id, "workExperience._id":req.body.workExperienceID },
+        {"workExperience.$" : 1, "noticePeriod":1, "currentCTC" :1, "expectedCTC":1, "totalExperience":1})
+    .populate('workExperience.industry_id')
+    .populate('workExperience.company_id')
+    .exec()
+    .then(data=>{
+        res.status(200).json(data);
+    })
+    .catch(err =>{
+        res.status(500).json({
+            error: err
+        });
+    });
+};
+
+
+exports.updateOneCandidateExperience = (req,res,next)=>{
+    var industry_id;
+    var entityType = "corporate";
+
+    processData();
+    async function processData(){
+    industry_id = req.body.experience.industry_id != "" ? req.body.experience.industry_id 
+                                : await insertIndustry(req.body.experience.industry,req.body.candidate_id)
     
     if (req.body.experience.company_id != "" ) {
         company_id  = req.body.experience.company_id;
@@ -556,61 +633,31 @@ exports.addCandidateExperience = (req,res,next)=>{
     req.body.experience.industry_id = industry_id;
     req.body.experience.company_id = company_id;
 
-    CandidateProfile.updateOne(
-            { _id: req.body.candidate_id },  
-            { 
-                $push:  { 'workExperience' : req.body.experience }
-            }
-        )
-        .exec()
-        .then(data=>{
-            if(data.nModified == 1){
-                res.status(200).json({ created : true });
-            }else{
-                res.status(401).json({ created : false });
-            }
-        })
-        .catch(err =>{
-            res.status(500).json({ error: err });
-        });  
-    } 
-};
 
-exports.getOneCandidateExperience = (req,res,next)=>{
-    CandidateProfile.find({"_id" : req.body.candidate_id, "workExperience._id":req.body.workExperienceID },
-        {"workExperience.$" : 1})
-    .exec()
-    .then(data=>{
-        res.status(200).json(data);
-    })
-    .catch(err =>{
-        res.status(500).json({
-            error: err
-        });
-    });
-};
-
-
-exports.updateOneCandidateExperience = (req,res,next)=>{
     var experience = req.body.experience;
     
     CandidateProfile.updateOne(
             { "_id":req.body.candidate_id, "workExperience._id": req.body.experienceID},  
             {
-                $set:   { 	"workExperience.$.companyName"          : experience.companyName,
+                $set:   { 	"workExperience.$.industry_id"          : experience.industry_id,
+                            "workExperience.$.company_id"           : experience.company_id,
+                            "workExperience.$.countryCode"          : experience.countryCode,
                             "workExperience.$.country"              : experience.country,
-                            "workExperience.$.city"                 : experience.city,
+                            "workExperience.$.stateCode"            : experience.stateCode,
                             "workExperience.$.state"                : experience.state,
+                            "workExperience.$.district"             : experience.district,
                             "workExperience.$.lastDegn"             : experience.lastDegn,
                             "workExperience.$.department"           : experience.department,
-                            "workExperience.$.lastSalary"           : experience.lastSalary,
                             "workExperience.$.fromDate"             : experience.fromDate,
                             "workExperience.$.toDate"               : experience.toDate,
-                            "workExperience.$.noticePeriod"         : experience.noticePeriod,
-                            "workExperience.$.expectedSalary"       : experience.expectedSalary,
                             "workExperience.$.responsibilities"     : experience.responsibilities,
                             "workExperience.$.reportingManager"     : experience.reportingManager,
                             "workExperience.$.reportingManagerDegn" : experience.reportingManagerDegn,
+                            "workExperience.$.relevantExperience"   : experience.relevantExperience,
+                            "currentCTC"                            : req.body.currentCTC,
+                            "expectedCTC"                           : req.body.expectedCTC,
+                            "noticePeriod"                          : req.body.noticePeriod,
+                            "totalExperience"                       : req.body.totalExperience
                         }
             }
         )
@@ -625,6 +672,7 @@ exports.updateOneCandidateExperience = (req,res,next)=>{
         .catch(err =>{
             res.status(500).json({ error: err });
         });
+    }
 };
 exports.deleteExperience = (req,res,next)=>{   
     CandidateProfile.updateOne(

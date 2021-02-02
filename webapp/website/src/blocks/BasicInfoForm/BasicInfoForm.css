@@ -574,7 +574,7 @@ user agent stylesheet:focus {
 .ck.ck-editor__main>.ck-editor__editable{
     background-color: var(--form-field-background-color) !important;
     border: 1px solid var(--main-border-color) !important;
-    height: 370px;
+    height: 200px;
 }
 
 .ck-rounded-corners .ck.ck-editor__top .ck-sticky-panel .ck-toolbar, .ck.ck-editor__top .ck-sticky-panel .ck-toolbar.ck-rounded-corners{

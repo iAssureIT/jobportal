@@ -31,6 +31,7 @@
 	height:149.5px;
 	text-align: center;
 	overflow: hidden!important;
+	padding: 0px
 }
 .addLogoDiv{
 	font-size:45px;
@@ -39,7 +40,7 @@
 }
 .addLogoTextDiv{
 	font-family:'Montserrat-Bold';
-	font-size:14px;
+	font-size:0.8em;
 }
 .addRightWrapper{
 	height:150px;

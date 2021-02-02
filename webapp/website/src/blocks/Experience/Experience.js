@@ -5,6 +5,8 @@ import { withRouter }	 	from 'react-router-dom';
 import Axios 			 	from 'axios';
 import Swal 			 	from 'sweetalert2';
 import _ 					from 'underscore';
+import CKEditor 					from '@ckeditor/ckeditor5-react';
+import ClassicEditor 				from '@ckeditor/ckeditor5-build-classic';
 import '../BasicInfoForm/BasicInfoForm.css';
 
 
@@ -43,6 +45,8 @@ class Experience extends Component{
 			buttonText                    : "Save",
 			expYears                      : 0,
 			expMonths                     : 0,
+			relevantExperience 			  : "",
+			totalExperience	 			  : ""
 		}
 		this.camelCase = this.camelCase.bind(this)
 		this.handleChangeState = this.handleChangeState.bind(this);
@@ -130,23 +134,30 @@ class Experience extends Component{
 			Axios.post("/api/candidatemaster/post/getOneCandidateExperience",idDate)
 			.then(response=>{
 				var editData =response.data;
-
+				
 			 	this.setState({
-			 		companyName                    :editData[0].workExperience[0].companyName,
-			 		companyCountry                 :editData[0].workExperience[0].country,
-			 		companyCity                    :editData[0].workExperience[0].city,
-			 		companyState                   :editData[0].workExperience[0].state,
-			 		lastDesignation                :editData[0].workExperience[0].lastDegn,
-			 		lastDeartment                  :editData[0].workExperience[0].department,
-			 		currentCTC                     :editData[0].workExperience[0].currentCTC,
-			 		expectedCTC                    :editData[0].workExperience[0].expectedCTC,
-			 		responsibilities               :editData[0].workExperience[0].responsibilities,
-			 		reportingManager               :editData[0].workExperience[0].reportingManager,
-			 		noticePeriod                   :editData[0].workExperience[0].noticePeriod,
-			 		reportingManagerDesignation    :editData[0].workExperience[0].reportingManagerDegn,
-			 		fromDate                       :Moment(editData[0].workExperience[0].fromDate).format("YYYY-MM-DD"),
-			 		toDate                         :Moment(editData[0].workExperience[0].toDate).format("YYYY-MM-DD"),
-			 		buttonText                     :"Update"
+			 		industry_id 				: editData[0].workExperience[0].industry_id,
+			 		industry 				  	: editData[0].workExperience[0].industry_id.industry,
+			 		company_id 					: editData[0].workExperience[0].company_id,
+			 		company 					: editData[0].workExperience[0].company_id.companyName,
+			 		countryCode 				: editData[0].workExperience[0].countryCode,
+			 		companyCountry              : editData[0].workExperience[0].country,
+			 		stateCode 					: editData[0].workExperience[0].stateCode,
+			 		companyCity                 : editData[0].workExperience[0].district,
+			 		companyState                : editData[0].workExperience[0].state,
+			 		lastDesignation             : editData[0].workExperience[0].lastDegn,
+			 		lastDeartment               : editData[0].workExperience[0].department,
+			 		relevantExperience          : editData[0].workExperience[0].relevantExperience,
+			 		responsibilities            : editData[0].workExperience[0].responsibilities,
+			 		reportingManager            : editData[0].workExperience[0].reportingManager,
+			 		reportingManagerDesignation : editData[0].workExperience[0].reportingManagerDegn,
+			 		fromDate                    : Moment(editData[0].workExperience[0].fromDate).format("YYYY-MM-DD"),
+			 		toDate                      : Moment(editData[0].workExperience[0].toDate).format("YYYY-MM-DD"),
+			 		currentCTC                  : editData[0].currentCTC,
+			 		expectedCTC                 : editData[0].expectedCTC,
+			 		noticePeriod                : editData[0].noticePeriod,
+			 		totalExperience             : editData[0].totalExperience,
+			 		buttonText                  : "Update"
 			 	})
 			 	
 			 })
@@ -191,6 +202,7 @@ class Experience extends Component{
 									'Experience Details has been deleted successfully!',
 									'success'
 							);
+						this.getData();
 						this.props.history.push("/experience/"+this.state.candidate_id);
 					}
 			})
@@ -213,7 +225,7 @@ class Experience extends Component{
 					)
 				}
 			})
-	  this.getData();
+	 
 	}
 	
 	handleSave(event){
@@ -239,12 +251,13 @@ class Experience extends Component{
 									toDate                        : this.state.toDate,
 									responsibilities              : this.state.responsibilities,
 									reportingManager              : this.state.reportingManager,
-									reportingManagerDegn          : this.state.reportingManagerDesignation
+									reportingManagerDegn          : this.state.reportingManagerDesignation,
+									relevantExperience  	      : this.state.relevantExperience,
 								},
+								totalExperience  	  : this.state.totalExperience,	
 								currentCTC            : this.state.currentCTC,
 								expectedCTC           : this.state.expectedCTC,
 								noticePeriod          : this.state.noticePeriod,
-								
 							}
 		console.log(formValues)	
 
@@ -253,16 +266,19 @@ class Experience extends Component{
 		}else{
 			this.insetData(formValues,event);
 		}
-		this.getData();
 	}
 	updateData(formValues,event){
 		var status =  this.validateForm();
 		if(status==true){
 			Axios.patch("/api/candidatemaster/patch/updateOneCandidateExperience",formValues)
 				 .then(response=>{
-
+				 	this.getData();
 					Swal.fire("Congrats","Your Experience Details is update Successfully","success");
 						this.setState({
+									industry_id 				  : "",	
+									industry 				  	  : "",	
+									company_id 				      : "",
+									company 					  : "",
 									companyName                   : "",
 									companyCountry                : "",
 									companyCity                   : "",
@@ -277,9 +293,11 @@ class Experience extends Component{
 									reportingManager              : "",
 									reportingManagerDesignation   : "",
 									noticePeriod                  : "",
+									relevantExperience   		  : "",
+									totalExperience	    		  : "",
 									buttonText                    : "Save"
 								})
-					//this.props.history.push("/experience/"+this.state.candidate_id);
+					this.props.history.push("/experience/"+this.state.candidate_id);
 				})
 				.catch(error =>{
 					Swal.fire("Submit Error!",error.message,'error');
@@ -293,8 +311,13 @@ class Experience extends Component{
 		if(status==true){
 			Axios.patch("/api/candidatemaster/patch/addCandidateExperience",formValues)
 			 .then(response=>{
-					Swal.fire("Congrats","Your Experience Details is insert Successfully","success");
+			 	this.getData();
+					Swal.fire("Congrats","Your experience details is inserted Successfully","success");
 						this.setState({
+										industry_id 				  : "",	
+										industry 				  	  : "",	
+										company_id 				      : "",
+										company 					  : "",
 										companyName                   : "",
 										companyCountry                : "",
 										companyCity                   : "",
@@ -309,6 +332,8 @@ class Experience extends Component{
 										reportingManager              : "",
 										reportingManagerDesignation   : "",
 										noticePeriod                  : "",
+										relevantExperience   		  : "",
+										totalExperience	    		  : "",
 										buttonText                    : "Save"
 									})	
 				})
@@ -394,8 +419,8 @@ class Experience extends Component{
 	validateForm=()=>{
 		var status = true;
 	
-		if(this.state.companyName.length<=0){
-			document.getElementById("companyNameError").innerHTML=  
+		if(this.state.company.length<=0 || this.state.company_id.length<=0){
+			document.getElementcompanyNameById("companyNameError").innerHTML=  
 			"Please enter company name";  
 			status=false; 
 		}else{
@@ -503,7 +528,7 @@ class Experience extends Component{
 			""; 
 			status = true;
 		}
-		if(this.state.responsibilities.length<=0){
+		/*if(this.state.responsibilities.length<=0){
 			document.getElementById("responsibilitiesError").innerHTML=  
 			"Please enter your responsibilities";  
 			status=false; 
@@ -511,7 +536,7 @@ class Experience extends Component{
 			document.getElementById("responsibilitiesError").innerHTML=  
 			""; 
 			status = true;
-		}
+		}*/
 		if(this.state.reportingManager.length<=0){
 			document.getElementById("reportingManagerError").innerHTML=  
 			"Please enter your reporting manager";  
@@ -530,7 +555,16 @@ class Experience extends Component{
 			""; 
 			status = true;
 		}
-		
+
+		if(this.state.totalExperience.length<=0){
+			document.getElementById("totalExperienceError").innerHTML=  
+			"Please enter your total experience";  
+			status=false; 
+		}else{
+			document.getElementById("totalExperienceError").innerHTML=  
+			""; 
+			status = true;
+		}
 		return status;
 	}
 
@@ -694,12 +728,36 @@ class Experience extends Component{
 								</div> 
 								<span id="lastDeartmentError" className="errorMsg"></span>
 							</div>
-
-							
-
 						</div>
 						<div className="row formWrapper">
-
+							<div className="col-lg-4">
+								<label htmlFor="lastDeartment" className="nameTitleForm">
+									Total Experience
+									<sup className="nameTitleFormStar">*</sup>
+								</label>
+								<div className="input-group ">
+									<span className="input-group-addon inputBoxIcon"><i className="fa fa-briefcase"></i></span> 
+									<input type="number" name="totalExperience" id="totalExperience"
+									 className="form-control inputBox" value={this.state.totalExperience} 
+									 onChange={this.handleChange.bind(this)} />
+								</div> 
+								<span id="totalExperienceError" className="errorMsg"></span>
+							</div>
+							<div className="col-lg-4">
+								<label htmlFor="lastDeartment" className="nameTitleForm">
+									Relevant Experience
+									<sup className="nameTitleFormStar">*</sup>
+								</label>
+								<div className="input-group ">
+									<span className="input-group-addon inputBoxIcon"><i className="fa fa-briefcase"></i></span> 
+									<input type="number" name="relevantExperience" id="relevantExperience"
+									 className="form-control inputBox" value={this.state.relevantExperience} 
+									 onChange={this.handleChange.bind(this)} />
+								</div> 
+								<span id="relevantExperienceError" className="errorMsg"></span>
+							</div>
+						</div>
+						<div className="row formWrapper">
 							<div className="col-lg-4">
 								<label htmlFor="fromDate" className="nameTitleForm">
 									From Date
@@ -744,23 +802,24 @@ class Experience extends Component{
 
 						</div>
 						<div className="row formWrapper">
-
-							<div className="col-lg-4">
+							<div className="col-lg-12">
 								<label htmlFor="responsibilities" className="nameTitleForm">
 									Responsibilities
-									<sup className="nameTitleFormStar">*</sup>
 								</label>
-								<div className="input-group ">
-									<span className="input-group-addon inputBoxIcon">
-										<FontAwesomeIcon icon="file-alt" />
-									</span> 
-									<input type="text" name="responsibilities" id="responsibilities"
-									 className="form-control inputBox" value={this.state.responsibilities} 
-									 onChange={this.handleChange.bind(this)} />
-								</div> 
-								<span id="responsibilitiesError" className="errorMsg"></span>
+								<div>
+									<CKEditor
+								        editor  	= 	{ClassicEditor}
+								        data 		= 	{this.state.responsibilities}
+								        id 			= 	"responsibilities"
+								        onInit		=	{ editor =>	{}}
+								        onChange 	=	{(event, editor) => {this.setState({ responsibilities: editor.getData() });} }
+								        onBlur		=	{ editor 	=> 	{} }
+								        onFocus		=	{ editor 	=> {} }
+							        />	
+								</div>
 							</div>
-
+						</div>	
+						<div className="row formWrapper">	
 							<div className="col-lg-4">
 								<label htmlFor="reportingManager" className="nameTitleForm">
 									Reporting Manager
@@ -856,6 +915,7 @@ class Experience extends Component{
 								this.state.experienceArry.length > 0
 								?
 								this.state.experienceArry.map((elem,index)=>{
+									console.log(elem)
 									return(
 										<div className="col-lg-6 AddressOuterWrapper"  key={index}>
 											<div className="col-lg-12 addWrapper">
@@ -864,21 +924,21 @@ class Experience extends Component{
 														<div className="addLogoDiv">
 															<FontAwesomeIcon icon="user-clock" /> 
 														</div>
-
 														<div className="addLogoTextDiv" key={index}>
-															{elem.companyName}
-															
+															{elem.company_id.companyName}
 														</div>
-			
 													</div> 
 													<div className="col-lg-8 addRightWrapper">
 														<div className="row">
 														<div className="addRightText ">	
-															<div className="AddressBoxText">
-															{elem.country}
+															<div className="AddressBoxText" key={index}>
+																{elem.company_id.companyName}
+															</div>
+															<div className="AddressBoxText" key={index}>
+																{elem.industry_id.industry}
 															</div>
 															<div className="AddressBoxText">
-																{elem.city}
+															{elem.district +" "+elem.country}
 															</div>
 															<div className="AddressBoxText">
 																{elem.lastDegn}
@@ -887,23 +947,11 @@ class Experience extends Component{
 																{elem.department}
 															</div>
 															<div className="AddressBoxText">
-																{elem.currentCTC}
+																{elem.totalExperience}
 															</div>
-															<div className="AddressBoxText">
-																{elem.fromDate}
-															</div>
-															<div className="AddressBoxText">
-																{elem.toDate}
-															</div>
-															<div className="AddressBoxText">
-																{elem.responsibilities}
-															</div>
-															<div className="AddressBoxText">
-																{elem.reportingManager}
-															</div>
-															<div className="AddressBoxText">
-																{elem.reportingManagerDegn}
-															</div>
+															
+															
+															
 														</div>
 														<div className="col-lg-12">
 								                            <div className="addRightbtn">
