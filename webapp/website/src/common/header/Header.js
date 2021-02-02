@@ -17,10 +17,27 @@ class Header extends Component{
     this.state={
       showLoginModal    : false,
       asideDisplay      : "-600px",
+      userMenu          : "none",
+     
       //selector            : {},
     }
     this.handleOpenModal  = this.handleOpenModal.bind(this);
       this.handleCloseModal = this.handleCloseModal.bind(this);
+  }
+
+  userMenuToggle(event){
+
+    if(this.state.userMenu==="none"){
+  
+      this.setState({
+      userMenu  : "block",
+      })
+    }
+    else{
+      this.setState({
+      userMenu  : "none",
+      })
+    }
   }
   componentDidMount(){
       
@@ -135,126 +152,334 @@ class Header extends Component{
       })
     }
   }
+
+  logout() {
+    
+        var userDetails = localStorage.removeItem("userDetails");
+        //alert()
+        if (userDetails !== null && userDetails !== "undefined") {
+            this.setState({
+                loggedIn: false
+            })
+        }
+        window.location.href = "/";
+        //this.props.history.push("/")
+  }
+
+
     render(){
     
     const selectedState = this.props.selectedState;
     //console.log(this.props.selector)
-    return(
-    <nav className="navbar FunctionalHeaderWrapper container-fluid">
-    <div className="iconHeader col-lg-1">
-        <a href="/"><img src="/images/1.png" alt="icon" /></a>
-    </div>
+    if (this.props.userDetails.loggedIn) {    
+      return(
+        <nav className="navbar FunctionalHeaderWrapper container-fluid">
+        <div className="iconHeader col-lg-1">
+            <a href="/"><img src="/images/1.png" alt="icon" /></a>
+        </div>
 
-    <div className="breadCrumbHeader col-lg-2">
-      {/*<ul className="breadCrumbInner">
-        <li className="breadCrumbInnerli"><a href="/">India</a></li>
-        <li className="breadCrumbInnerli selectedState"><a href={"/"+selectedState}>{selectedState}</a></li>  
-       
-      </ul>*/}
-    </div>
-
-          <div className="FunctionWiseTitle col-lg-5">
+        <div className="breadCrumbHeader col-lg-2">
+        {/*<ul className="breadCrumbInner">
+            <li className="breadCrumbInnerli"><a href="/">India</a></li>
+            <li className="breadCrumbInnerli selectedState"><a href={"/"+selectedState}>{selectedState}</a></li>  
            
-          </div>
-
-      <div className="rightFunctionHeader col-lg-4">
-        <div className="row">
-        <div className="rightFunctionHeader1 col-lg-7">
-          <div className="row">
-          <div className="rightFunctionHeader1 col-lg-12 pull-right">
-            <div className="rightFunctionHeader1CityJobs">
-            <div className="cityNameHeader">{selectedState && selectedState != "" ? selectedState : "India"}
-            </div>  
-
-            <div className="cityJobsHeader">{this.props.jobCount[0] ? this.props.jobCount[0].jobCount : 0}
-            </div>              
-          
-            </div>
-          </div>
-          </div>
+          </ul>*/}
         </div>
 
-        <div className="rightFunctionHeader2 col-lg-5">
-          <div className="row">
-          <div className="headerMenu2 col-lg-4">
-            <div className="headerMenu11" >
-                <FontAwesomeIcon icon={['fas', 'bell']} />
+              <div className="FunctionWiseTitle col-lg-5">
+               
+              </div>
+
+          <div className="rightFunctionHeader col-lg-4">
+            <div className="row">
+            <div className="rightFunctionHeader1 col-lg-7">
+              <div className="row">
+              <div className="rightFunctionHeader1 col-lg-12 pull-right">
+                <div className="rightFunctionHeader1CityJobs">
+                <div className="cityNameHeader">{selectedState && selectedState != "" ? selectedState : "India"}
+                </div>  
+
+                <div className="cityJobsHeader">{this.props.jobCount[0] ? this.props.jobCount[0].jobCount : 0}
+                </div>              
+              
+                </div>
+              </div>
               </div>
             </div>
 
-            <div className="headerMenu2 col-lg-4" id="loginbtndiv" data-toggle="modal" data-target="#loginModal">
-            <div className="headerMenu11">
-                <FontAwesomeIcon icon={['fas', 'user']} />
+            <div className="rightFunctionHeader2 col-lg-5">
+              <div className="row">
+
+                 <div className="headerMenu2 col-lg-4">
+                  <div className="headerMenu11" >
+                    <FontAwesomeIcon icon={['fas', 'bell']} />
+                  </div>
+                </div>
+              
+
+                
+                <div className="headerMenu2 col-lg-4">
+                  <div className="headerMenu11" onClick={this.userMenuToggle.bind(this)}>
+                    <FontAwesomeIcon icon={['fas', 'user']} />
+                  </div>
+                </div>
+              
+
+                 
+
+
+
+                <div className="headerMenu2 col-lg-4">
+                <div className="headerMenu1" onClick={this.asideBar.bind(this)}>
+                    <img src="/images/List_View.png" alt="icon" />
+                  </div>
+                </div>
               </div>
-            </div>
 
-            <div className="headerMenu2 col-lg-4">
-            <div className="headerMenu1" onClick={this.asideBar.bind(this)}>
-                <img src="/images/List_View.png" alt="icon" />
+
+              <div className="functionalbarsToggel" id="functionalbarsToggel" style={{top:this.state.asideDisplay}}>
+
+                <div className="functionalbarsCross col-lg-12">
+                  
+                  <span className="functionalnotificationMessegeCross" id="closeAsidebarButton" onClick={this.asideBar.bind(this)}> X </span>
+                </div>
+
+
+                <div className="functionalbarsItem col-lg-12">
+                  
+                  <span className="functionalnotificationMessegeText">Jobs </span>
+                </div>
+                <div className="functionalbarsItem col-lg-12">
+                  
+                  <span className="functionalnotificationMessegeText">Companies</span>
+                
+                </div>
+                <div className="functionalbarsItem col-lg-12">
+                  
+                  <span className="functionalnotificationMessegeText">Recruiters</span>
+                  
+                </div>
+                <div className="functionalbarsItem col-lg-12">
+                  
+                  <span className="functionalnotificationMessegeText">About Us</span>
+                  
+                </div>
+
+                <div className="functionalbarsItem col-lg-12">
+                  
+                  <span className="functionalnotificationMessegeText">Contact Us</span>
+                  
+                </div>
+                
+               
+
               </div>
-            </div>
-          </div>
 
-
-          <div className="functionalbarsToggel" id="barsToggel" style={{top:this.state.asideDisplay}}>
-
-              <div className="functionalbarsCross col-lg-12">
-              
-              <span className="notificationMessegeCross" id="closeAsidebarButton" onClick={this.asideBar.bind(this)}> X </span>
-            </div>
-
-
-            <div className="functionalbarsItem col-lg-12">
-              
-              <span className="notificationMessegeText">Jobs </span>
-            </div>
-            <div className="functionalbarsItem col-lg-12">
-              
-              <span className="notificationMessegeText">Companies</span>
-            
-            </div>
-            <div className="functionalbarsItem col-lg-12">
-              
-              <span className="notificationMessegeText">Recruiters</span>
-              
-            </div>
-            <div className="functionalbarsItem col-lg-12">
-              
-              <span className="notificationMessegeText">About Us</span>
-              
-            </div>
-
-            <div className="functionalbarsItem col-lg-12">
-              
-              <span className="notificationMessegeText">Contact Us</span>
-              
-            </div>
-            
-            <div className="functionalbarsItem col-lg-12" id="loginbtndiv" data-toggle="modal" data-target="#loginModal">
-              <FontAwesomeIcon icon="sign-out-alt" />
-              <span className="notificationMessegeText">Sign In</span>
-            </div>
-
-          </div>
-        <div className="modal" id="loginModal" role="dialog" tabIndex="-1">
-            <div className="modal-dialog  modal-lg">
-              <div className="modal-body">
-                  <button type="button" className="close" id="closeModalButton" data-dismiss="modal">&times;</button>
-                  <section className="OTPSentWrapper row">
-                        {this.props.selectedModal == "login" ? <LoginForm/> : null }
-                        {this.props.selectedModal == "signup" ? <SignUp/> : null }
-                        {this.props.selectedModal == "forgotpassword" ? <ForgotPassword/> : null }
-                        {this.props.selectedModal == "confirmotp" ? <ConfirmOtp/> : null }
-                        {this.props.selectedModal == "resetpass" ? <ResetPass/> : null }
-                  </section>
+              <div className="modal" id="loginModal" role="dialog" tabIndex="-1">
+                <div className="modal-dialog  modal-lg">
+                  <div className="modal-body">
+                      <button type="button" className="close" id="closeModalButton" data-dismiss="modal">&times;</button>
+                      <section className="OTPSentWrapper row">
+                            {this.props.selectedModal == "login" ? <LoginForm/> : null }
+                            {this.props.selectedModal == "signup" ? <SignUp/> : null }
+                            {this.props.selectedModal == "forgotpassword" ? <ForgotPassword/> : null }
+                            {this.props.selectedModal == "confirmotp" ? <ConfirmOtp/> : null }
+                            {this.props.selectedModal == "resetpass" ? <ResetPass/> : null }
+                      </section>
+                  </div>
+                </div>
               </div>
+
+               <div className="barsToggel pull-right" id="barsToggel" style={{display:this.state.userMenu}}>
+                     
+                      <div className="notificationMessege col-lg-12">
+                        <FontAwesomeIcon icon="search" />
+                        <span className="notificationMessegeText">My Account</span>
+                      </div>
+                      <a href="/job-list"><div className="notificationMessege col-lg-12">
+                        <FontAwesomeIcon icon="briefcase" />
+                        <span className="notificationMessegeText">Applied Jobs</span>
+                      </div></a>
+                      <div className="notificationMessege col-lg-12">
+                        <FontAwesomeIcon icon="users" />
+                        <span className="notificationMessegeText">Favorites</span>
+                      </div>
+                     {/* <div className="notificationMessege col-lg-12">
+                        <FontAwesomeIcon icon="search" />
+                        <span className="notificationMessegeText">Services</span>
+                      </div>
+                      <div className="notificationMessege col-lg-12">
+                        <span className="notificationMessegeText">About Us</span>
+                      </div>
+                      <div className="notificationMessege col-lg-12">
+                        <span className="notificationMessegeText">Contact Us</span>
+                      </div>*/}
+
+                      <div className="notificationMessege col-lg-12 ">
+                         <FontAwesomeIcon icon="logout" /> 
+                          <span className="signOutButton" onClick={this.logout.bind(this)}>Sign Out</span>
+                       
+                      </div>
+                      
+                    </div>
+            </div>
           </div>
         </div>
+      </nav>
+        );
+    }
+
+
+    else{
+       return(
+        <nav className="navbar FunctionalHeaderWrapper container-fluid">
+        <div className="iconHeader col-lg-1">
+            <a href="/"><img src="/images/1.png" alt="icon" /></a>
         </div>
-      </div>
-    </div>
-  </nav>
-    );
+
+        <div className="breadCrumbHeader col-lg-2">
+        {/* <ul className="breadCrumbInner">
+            <li className="breadCrumbInnerli"><a href="/">India</a></li>
+            <li className="breadCrumbInnerli selectedState"><a href={"/"+selectedState}>{selectedState}</a></li>  
+           
+          </ul>*/}
+        </div>
+
+              <div className="FunctionWiseTitle col-lg-5">
+               
+              </div>
+
+          <div className="rightFunctionHeader col-lg-4">
+            <div className="row">
+            <div className="rightFunctionHeader1 col-lg-7">
+              <div className="row">
+              <div className="rightFunctionHeader1 col-lg-12 pull-right">
+                <div className="rightFunctionHeader1CityJobs">
+                <div className="cityNameHeader">{selectedState && selectedState != "" ? selectedState : "India"}
+                </div>  
+
+                <div className="cityJobsHeader">{this.props.jobCount[0] ? this.props.jobCount[0].jobCount : 0}
+                </div>              
+              
+                </div>
+              </div>
+              </div>
+            </div>
+
+            <div className="rightFunctionHeader2 col-lg-5">
+              <div className="row">
+
+                <div className="headerMenu2 col-lg-4">
+                  {/*<div className="headerMenu11" >
+                    <FontAwesomeIcon icon={['fas', 'bell']} />
+                  </div>*/}
+                </div>
+              
+
+                
+               <div className="headerMenu2 col-lg-4" id="loginbtndiv" data-toggle="modal" data-target="#loginModal">
+                  <div className="headerMenu11">
+                    <FontAwesomeIcon icon={['fas', 'user']} />
+                  </div>
+                </div>
+
+               
+
+
+
+                <div className="headerMenu2 col-lg-4">
+                <div className="headerMenu1" onClick={this.asideBar.bind(this)}>
+                    <img src="/images/List_View.png" alt="icon" />
+                  </div>
+                </div>
+              </div>
+
+
+              <div className="functionalbarsToggel" id="functionalbarsToggel" style={{top:this.state.asideDisplay}}>
+
+                <div className="functionalbarsCross col-lg-12">
+                  
+                  <span className="functionalnotificationMessegeCross" id="closeAsidebarButton" onClick={this.asideBar.bind(this)}> X </span>
+                </div>
+
+
+                <div className="functionalbarsItem col-lg-12">
+                  
+                  <span className="functionalnotificationMessegeText">Jobs </span>
+                </div>
+                <div className="functionalbarsItem col-lg-12">
+                  
+                  <span className="functionalnotificationMessegeText">Companies</span>
+                
+                </div>
+                <div className="functionalbarsItem col-lg-12">
+                  
+                  <span className="functionalnotificationMessegeText">Recruiters</span>
+                  
+                </div>
+                <div className="functionalbarsItem col-lg-12">
+                  
+                  <span className="functionalnotificationMessegeText">About Us</span>
+                  
+                </div>
+
+                <div className="functionalbarsItem col-lg-12">
+                  
+                  <span className="functionalnotificationMessegeText">Contact Us</span>
+                  
+                </div>
+                
+                
+
+              </div>
+
+              <div className="modal" id="loginModal" role="dialog" tabIndex="-1">
+                <div className="modal-dialog  modal-lg">
+                  <div className="modal-body">
+                      <button type="button" className="close" id="closeModalButton" data-dismiss="modal">&times;</button>
+                      <section className="OTPSentWrapper row">
+                            {this.props.selectedModal == "login" ? <LoginForm/> : null }
+                            {this.props.selectedModal == "signup" ? <SignUp/> : null }
+                            {this.props.selectedModal == "forgotpassword" ? <ForgotPassword/> : null }
+                            {this.props.selectedModal == "confirmotp" ? <ConfirmOtp/> : null }
+                            {this.props.selectedModal == "resetpass" ? <ResetPass/> : null }
+                      </section>
+                  </div>
+                </div>
+              </div>
+
+               <div className="barsToggel pull-right" id="barsToggel" style={{display:this.state.userMenu}}>
+                     
+                      <div className="notificationMessege col-lg-12">
+                        <FontAwesomeIcon icon="search" />
+                        <span className="notificationMessegeText">Employer Settings</span>
+                      </div>
+                      <a href="/job-list"><div className="notificationMessege col-lg-12">
+                        <FontAwesomeIcon icon="briefcase" />
+                        <span className="notificationMessegeText">Posted Jobs</span>
+                      </div></a>
+                      <div className="notificationMessege col-lg-12">
+                        <FontAwesomeIcon icon="users" />
+                        <span className="notificationMessegeText">Recruiters</span>
+                      </div>
+                      <div className="notificationMessege col-lg-12">
+                        <FontAwesomeIcon icon="search" />
+                        <span className="notificationMessegeText">Services</span>
+                      </div>
+                      <div className="notificationMessege col-lg-12">
+                        <span className="notificationMessegeText">About Us</span>
+                      </div>
+                      <div className="notificationMessege col-lg-12">
+                        <span className="notificationMessegeText">Contact Us</span>
+                      </div>
+                      
+                    </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+        );
+    }
   }
 }
 
@@ -263,7 +488,8 @@ const mapStateToProps = (state)=>{
     return {
         selectedState  : state.selectedState, selectedModal  : state.selectedModal,
         selector       : state.selector,
-        jobCount       : state.jobCount
+        jobCount       : state.jobCount,
+        userDetails     : state.userDetails
     }
 }
 const mapDispatchToProps = (dispatch) => ({

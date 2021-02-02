@@ -216,13 +216,13 @@ font-face {
   
 }
 
-.notificationMessegeText{
+.functionalnotificationMessegeText{
   margin-left:12px;
   /*font-size:30px;
   font-family: 'Montserrat-Regular';*/
 }
 
-.notificationMessegeCross{
+.functionalnotificationMessegeCross{
   padding :10px;
   padding-bottom: 5px;
   font-size:30px;
@@ -231,7 +231,7 @@ font-face {
   font-family: 'Montserrat-Bold'; 
 }
 
-.notificationMessegeCross:hover{
+.functionalnotificationMessegeCross:hover{
   border-bottom: 5px solid #fff;
   color:#fff;
   cursor: pointer;
@@ -246,3 +246,61 @@ font-face {
   cursor: pointer;
 }
 
+.barsToggel{
+  position: relative;
+  width:255px;
+  height: auto;
+  min-height: 120px;
+  background:var(--header-bg-color  );
+  z-index:3;
+  margin-top:10px;
+  border:1px solid var(--header-border-color);
+}
+.notificationBox{
+  position: relative;
+  width:225px;
+  height: 170px;
+  background:var(--header-bg-color  );
+  z-index:3;
+  top:10px;
+  border:1px solid var(--header-border-color);
+  left:-173px;
+}
+.notificationCount{
+  text-align:center;
+  height:34px;
+  
+  font-size:13px;
+  border-bottom:1px solid var(--header-border-color);
+  padding-top:7px;
+  background:var(--header-bg-color  );
+}
+.notificationMessege{
+  height:34px;
+
+  font-size:12px;
+  border-bottom:1px solid var(--header-border-color);
+  padding-top:7px;
+  text-align:left;
+  background:var(--header-bg-color  );
+  
+}
+.notificationMessegeText{
+  margin-left:12px;
+}
+.MessagesTime{
+  font-size:10px;
+  padding-top:3px;
+}
+.notificationMessege:hover{
+  cursor: pointer;
+  background:var(--main-bg-color );
+
+}
+.notificationCount:hover{
+  cursor: pointer;
+  background:var(--main-bg-color );
+}
+.barsToggel .notificationMessege{
+  color:#fff;
+}

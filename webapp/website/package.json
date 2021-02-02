@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@ckeditor/ckeditor5-build-classic": "^23.0.0",
+    "@ckeditor/ckeditor5-build-classic": "^23.1.0",
     "@ckeditor/ckeditor5-react": "^2.1.0",
     "@fortawesome/fontawesome-svg-core": "^1.2.32",
     "@fortawesome/free-brands-svg-icons": "^5.15.1",
@@ -50,7 +50,7 @@
     "react-modal-image": "^2.5.0",
     "react-moment": "^0.9.7",
     "react-multiselect-checkboxes": "^0.1.1",
-    "react-owl-carousel": "^2.3.1",
+    "react-owl-carousel": "^2.3.3",
     "react-phone-input-2": "^2.13.9",
     "react-phone-number-input": "^3.0.13",
     "react-places-autocomplete": "^7.3.0",
