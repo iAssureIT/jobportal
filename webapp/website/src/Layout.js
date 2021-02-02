@@ -116,6 +116,8 @@ class Layout extends Component  {
                                                 <div className="row">
                                               {/*  <CoreLayout />*/}
                                         <Switch >
+                                            <Route path="/login" exact strict component={Login} />
+                                            <Route path="/signup" exact strict component={SignUp} />
                                             <Route exact path="/functional-area"                component={PageFunctionWise}  />
                                             <Route exact path="/subfunctional-area"             component={SubPageFunctionWise}  />
 

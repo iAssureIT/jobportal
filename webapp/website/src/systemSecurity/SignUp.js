@@ -32,6 +32,7 @@ class SignUp extends Component {
 				lastNameV: "",
 				mobileV: "",
 				emailIDV: "",
+        "mobileNumberAvailable" : true, 
 			},
 			employerArray : [],
 			vendor_Id : "",
@@ -48,6 +49,19 @@ class SignUp extends Component {
 	componentWillMount() {
 
 	}
+
+  changeMobile(event) {
+    this.setState({
+      mobileNumber: event
+    }, () => {
+      if (this.state.mobileNumber) {
+        this.setState({
+      mobileNumberAvailable: this.state.mobileNumber === "+" || this.state.mobileNumber.length<15 ? true : false
+        },()=>{
+        })
+      }
+    })
+  }
 	componentDidMount() {
 		
 		$(".checkUserExistsError").hide();
@@ -89,24 +103,27 @@ class SignUp extends Component {
   }
 	validateForm=()=>{
     var status = true;
+    var regName = /^[a-zA-Z]+$/;
+    var firstName=this.state.firstName;
+    var lastName=this.state.lastName;
     var tempEmail = this.state.emailAddress.trim(); // value of field with whitespace trimmed off
-    var emailFilter = /^[^@]+@[^@.]+\.[^@]*\w\w$/;
+    var emailFilter = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
     var illegalChars = /[\(\)\<\>\,\;\:\\\"\[\]]/;
-    var phoneno = /^\d{10}$/;
+    var phoneno = /^\+?([0-9]{2})\)?[-. ]?([0-9]{5})[-. ]?([0-9]{5})$/;
 
     if(this.state.firstName<=0)  {
       document.getElementById("firstNameError").innerHTML=  
       "Please enter valid Name";  
       status=false; 
     }
-    else if(this.state.firstName.match(illegalChars)){
+  
+    else if(!regName.test(firstName)){
       document.getElementById("firstNameError").innerHTML=  
-      "Please enter valid name";  
+      "Please enter valid name,......";  
       status=false; 
     }
     else{
-      document.getElementById("firstNameError").innerHTML=  
-       ""; 
+      
       status = true;
     }
 
@@ -115,14 +132,14 @@ class SignUp extends Component {
       "Please enter valid Name";  
       status=false; 
     }
-    else if(this.state.lastName.match(illegalChars)){
+    else if(!regName.test(lastName)){
       document.getElementById("lastNameError").innerHTML=  
-      "Please enter valid name";  
+      "Please enter valid name.....";  
       status=false; 
     }
     else{
       document.getElementById("lastNameError").innerHTML=  
-       ""; 
+       " ."; 
       status = true;
     }
 
@@ -133,17 +150,14 @@ class SignUp extends Component {
     }else if (
       !emailFilter.test(tempEmail)) { //test email for illegal characters
           document.getElementById('emailAddressError').innerHTML = "Please enter a valid email address.";
-      } else if (this.state.emailAddress.match(illegalChars)) {
-          document.getElementById('emailAddressError').innerHTML = "Email contains invalid characters.";
-      }else{
+      } else{
       document.getElementById("emailAddressError").innerHTML=
-      ""; 
+      " ."; 
       status = true;
     }
 
     if(this.state.mobileNumber.match(phoneno)){
-      document.getElementById("mobileNumberError").innerHTML=  
-      ""; 
+      
       status = true;
       
     }else{
@@ -165,7 +179,7 @@ class SignUp extends Component {
     }
     else{
       document.getElementById("passwordError").innerHTML=  
-      ""; 
+      " ."; 
       status = true;
     }
 
@@ -182,7 +196,7 @@ class SignUp extends Component {
     }
     else{
       document.getElementById("confirmPasswordError").innerHTML=  
-      ""; 
+      " ."; 
       status = true;
     }
 
@@ -366,7 +380,7 @@ class SignUp extends Component {
                         </div>
                     </div>*/}
 
-
+                    <div className="row">
                     <div className="col-lg-6 form-group" >
                         <div className="input-group">
                             <span className="input-group-addon registrationInputIcon"><i className="fa fa-user"></i></span>
@@ -382,8 +396,9 @@ class SignUp extends Component {
                         </div>
                          <span id="lastNameError" className="errorMsg"></span>
                     </div>
+                    </div>
 
-                   
+                   <div className="row">
                     <div className="col-lg-6 form-group" >
                         <div className="input-group">
                             <span className="input-group-addon registrationInputIcon1"><i className="fa fa-envelope"></i></span>
@@ -393,16 +408,23 @@ class SignUp extends Component {
                     </div>
 
                     <div className="col-lg-6 form-group" >
-                        <PhoneInput 
-                          country   = {'in'}
-                          id        ="mobileNumber" 
-                          className ="input-group-addon form-control inputBox" 
-                          value     ={this.state.mobileNumber} 
-                          onChange  = {mobileNumber => this.setState({ mobileNumber })}
-                         />
-                         <span id="mobileNumberError" className="errorMsg"></span>
+                       
+                         <PhoneInput
+                                  country={'in'}
+                                  value={this.state.mobileNumber}
+                                  name="companyPhone"
+                                  inputProps={{
+                                    name: 'mobileNumber',
+                                    required: true
+                                  }}
+                                  onChange={this.changeMobile.bind(this)}
+                                />
+                         
+                        
                     </div>
+                    </div>  
 
+                    <div className="row">
                      <div className="col-lg-6 form-group" >
                         <div className="input-group">
                             <span className="input-group-addon registrationInputIcon"><i className="fa fa-lock"></i></span>
@@ -423,6 +445,7 @@ class SignUp extends Component {
                                 value={this.state.showPassword2}></i></span>
                         </div>
                          <span id="confirmPasswordError" className="errorMsg"></span>
+                    </div>
                     </div>
 
 

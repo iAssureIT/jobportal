@@ -182,7 +182,7 @@ class Header extends Component{
               </div>
             </div>
 
-            <div className="headerMenu2 col-lg-4">
+            <div className="headerMenu2 col-lg-4" id="loginbtndiv" data-toggle="modal" data-target="#loginModal">
             <div className="headerMenu11">
                 <FontAwesomeIcon icon={['fas', 'user']} />
               </div>
