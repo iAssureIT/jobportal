@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Axios from  'axios';
 import Swal  from  'sweetalert2';
+import Moment 					from "moment";
 import "./JobList.css";
 import { connect }        from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -186,17 +187,17 @@ applyJob = (jobid, company_id)=>{
 																<li><i className="fa fa-sun-o"></i></li>
 																<li><i className="fa fa-clock-o"></i></li>
 															</ul>
-															<div className="infoLog"> 15 Days Ago </div>
+															<div className="infoLog"> {Moment(elem.createdAt).startOf('seconds').fromNow()}  </div>
 														</div>
 													</div>
 													<div className="jobListDesignation">
 														<a href={"job-profile/"+elem._id} className="link">{elem.jobBasicInfo.jobTitle}</a>
 													</div>
 													<div className="jobListCompanyName">
-														<b>iAssure International Technologies Pvt Ltd</b>
+														<b>{elem.company_id ? elem.company_id.companyName : "Anonymous"}</b>
 													</div>
 													<div> 
-														<i className="fa fa-calendar jobListExperience"></i> &nbsp; Exp: {elem.eligibility.minEducation} To {elem.eligibility.minExperience}
+														<i className="fa fa-calendar jobListExperience"></i> &nbsp; Exp: {elem.eligibility.minEducation} and {elem.eligibility.minExperience} years
 													</div>
 													<div> 
 														<i className="fa fa-rupee jobListMonSal"></i> &nbsp; <i className="fa fa-inr"></i> {elem.ctcOffered.minSalary} - <i className="fa fa-inr"></i> {elem.ctcOffered.maxSalary} a month
@@ -240,7 +241,6 @@ applyJob = (jobid, company_id)=>{
 
 const mapStateToProps = (state)=>{
     return {
-    		
     	userDetails 	: state.userDetails,	selector        : state.selector, 	
     	jobList 		: state.jobList,		jobWishlist 	: state.jobWishlist
     }

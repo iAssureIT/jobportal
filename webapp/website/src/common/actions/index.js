@@ -71,7 +71,6 @@ export function filterMapData(selector) {
   		dispatch(setFilterSelector(selector));
 	  	return axios.post("/api/jobs/mapwise-jobs",selector)
 	    .then((response)=>{
-	     console.log("action", response.data)
 	        dispatch(getMapData(response.data));
 	    })
 	    .catch((error)=>{
@@ -165,7 +164,7 @@ export function getAppliedJoblist(candidate_id) {
   	return dispatch =>{
   		var formValue={"candidate_id":candidate_id}
   		console.log(formValue)
-	  	return axios.post("/api/applyJob/get/candidateAppliedJobList",formValue)
+	  	return axios.post("/api/applyJob/get/appliedJobList",formValue)
 	    .then((response)=>{
 	        dispatch(setAppliedJoblist(response.data ));
 	    })

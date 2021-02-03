@@ -210,7 +210,7 @@ class Candidatelist extends Component{
 																									<div className=" Col-lg-11 postNameWrapper">
 																										<div className="postName">{elem.candidate_id.workExperience[elem.candidate_id.workExperience.length-1] ? elem.candidate_id.workExperience[elem.candidate_id.workExperience.length-1].lastDegn : null}</div> 
 																										<div className="postName">{elem.candidate_id.workExperience[elem.candidate_id.workExperience.length-1] ? elem.candidate_id.workExperience[elem.candidate_id.workExperience.length-1].department : null} </div>
-																										<div className="postName">{ 0 }</div>
+																										<div className="postName">{ elem.candidate_id.totalExperience ? elem.candidate_id.totalExperience +" years" : "Fresher" }</div>
 																										<div className="postName">{elem.candidate_id.workExperience[elem.candidate_id.workExperience.length-1] ? elem.candidate_id.workExperience[elem.candidate_id.workExperience.length-1].district : null} </div>
 																									</div>
 																								</div>
@@ -302,7 +302,7 @@ class Candidatelist extends Component{
 																							Current CTC
 																						</div>
 																						<div className="row expectSalaryBlockSubHeading">
-																							{/*{elem.candidate_id.workExperience[index] ? elem.candidate_id.workExperience[index].lastSalary : null}*/} Rs 10 Lakhs
+																							{elem.candidate_id.currentCTC ? elem.candidate_id.currentCTC : null} LPA
 																						</div>
 																						
 																					</div>
@@ -311,7 +311,7 @@ class Candidatelist extends Component{
 																							Expected CTC
 																						</div>
 																						<div className="row expectSalaryBlockSubHeading">
-																							{/*{elem.candidate_id.workExperience[index] ? elem.candidate_id.workExperience[index].expectedSalary : null}*/} Rs 12 Lakhs
+																							{elem.candidate_id.expectedCTC ? elem.candidate_id.expectedCTC : null} LPA
 																						</div>
 																						
 																					</div>
@@ -320,7 +320,7 @@ class Candidatelist extends Component{
 																							Notice Period
 																						</div>
 																						<div className="row expectSalaryBlockSubHeading">
-																							{/*{elem.candidate_id.workExperience[index] ? elem.candidate_id.workExperience[index].noticePeriod : null}*/} 3 Months
+																							{elem.candidate_id.noticePeriod ? elem.candidate_id.noticePeriod : null}
 																						</div>
 																					</div>
 																				</div>

@@ -81,12 +81,12 @@ export default class JobProfile extends Component{
             })
             response.data.requiredSkills.preferredSkills.map((skill,ind)=>{
 				preferredSkillTags.push({ id : skill.skill_id._id, text : skill.skill_id.skill })
-            })
+            }) 
 			this.setState({
 					job_id				: 	job_id,
 					jobTitle 			: 	response.data.jobBasicInfo.jobTitle,
-					employerName 		: 	response.data.company_id.companyName,
-					employerLogo 		: 	response.data.company_id.companyLogo[0] ? response.data.company_id.companyLogo[0] : null,
+					employerName 		: 	response.data.company_id ? response.data.company_id.companyName : "Anonymous",
+					employerLogo 		: 	response.data.company_id ? response.data.company_id.companyLogo[0] : null,
 					industry_id 		: 	response.data.jobBasicInfo.industry_id._id,
 					industry 			: 	response.data.jobBasicInfo.industry_id.industry,
 					functionalarea_id 	: 	response.data.jobBasicInfo.functionalarea_id._id,
@@ -140,10 +140,12 @@ export default class JobProfile extends Component{
 					preferredSkillTags  :   preferredSkillTags,
                 })
 			})
-        .catch(error=>{	Swal.fire("Some Error Occured during data fetch",error.message,'error'); })	
+        .catch(error=>{	Swal.fire("Some Error Occured during data fetch",error.message,'error'); })
+		   	
 	}	
 	
 	render(){
+		console.log(this.state.primarySkillTags)
 		return(
 				<div className="jobPostProfileWrapper container-fluid">
 					<div className="col-lg-9">

@@ -1,85 +1,57 @@
 import React, { Component } from 'react';
 
-import ApplyJoblist        from '../ApplyJoblist/ApplyJoblist.js';
+import AppliedJoblist      from '../AppliedJoblist/AppliedJoblist.js';
 import LeftSideFilters     from '../LeftSideFilters/LeftSideFilters.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
+import { connect }        from 'react-redux';
+import { bindActionCreators } from 'redux';
+import  * as mapActionCreator from '../../common/actions/index';
 import './SubFunctionalpage.css';
 
-export default class CandidateApplyJoblist extends Component {
+class CandidateApplyJoblist extends Component {
 
   constructor(props){
     super(props);
     this.state={
-      leftDrawerDisplay  : "-350px",
-      arrowToggle: false  
-    }
-  }
-
-  leftDrawerInfo(event){
-
-    if(this.state.leftDrawerDisplay==="-350px"){
-  
-      this.setState({
-      leftDrawerDisplay  : "0px",
-      arrowToggle: true
       
-      })
-    }
-    else{
-      this.setState({
-      leftDrawerDisplay  : "-350px",
-      arrowToggle:false
-      })
     }
   }
+  
+  componentDidMount(){
+      var {mapAction} = this.props;
+      mapAction.getAppliedJoblist(this.props.userDetails.candidate_id);
+  }
+
 
   render() {
-    return (
-      <div className="ViewBodyWrapper container-fluid">
-        
-          <div className="filterDiv col-lg-12">
-
-            <div className="row">
-              <div className="filterButton col-lg-1" onClick={this.leftDrawerInfo.bind(this)}>
-                <i className="fa fa-filter filtersIcon" ></i>
-                <i className={this.state.arrowToggle ? "fa fa-arrow-left arrowIcon" : "fa fa-arrow-right arrowIcon"} 
-                              value={this.state.arrowToggle}></i>
-
-                 Filters             
-              </div>
-            </div>
-          </div>
-
-          <div className=" col-lg-3">
+    return ( 
+      <div className="ViewBodyWrapper">
+        <div className="col-lg-3" style={{"marginTop": "30px"}}>
+          <div className="col-lg-12">
             <div className='row'>
-                <div className="viewWrapper col-lg-4">
-                  <div className='row'>
-                    <ul className="nav nav-pills">
-                      <li className="viewDiv active"><a data-toggle="pill" href="#"> Map <br/> View</a></li>
-                      <li className="viewDiv"><a data-toggle="pill" href="#">Functional <br/> View</a></li>
-                      <li className="viewDiv"><a data-toggle="pill" href="#">Industrial <br/> View</a></li>
-                    </ul>
-                  </div>  
-                </div>
-
-                <div className="filterWrapper col-lg-8" style={{left:this.state.leftDrawerDisplay}}>
-                  <div className='row'>
-                    <LeftSideFilters />
-                  </div>
-                </div>
+              <LeftSideFilters />
             </div>
           </div>
+        </div>
 
-          <div className="col-lg-9">
-            <div className="tab-content">
-              <div id="mapwise" className="tab-pane fade in active">
-                <ApplyJoblist />
-              </div>
+        <div className="col-lg-9">
+          <div className="row">
+            <div id="mapwise">
+              <AppliedJoblist appliedJoblist={this.props.appliedJoblist}/>
             </div>
-          </div>
-         
-      </div>
+          </div>  
+        </div>
+    </div>
     );
   }
 }
+const mapStateToProps = (state)=>{
+    return {
+      userDetails       : state.userDetails,      selector      : state.selector,   
+      appliedJoblist    : state.appliedJoblist,   jobWishlist   : state.jobWishlist
+    }
+}
+const mapDispatchToProps = (dispatch) => ({
+  mapAction :  bindActionCreators(mapActionCreator, dispatch)
+}) 
+export default connect(mapStateToProps, mapDispatchToProps) (CandidateApplyJoblist);

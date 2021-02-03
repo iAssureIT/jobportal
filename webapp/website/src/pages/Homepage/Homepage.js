@@ -36,7 +36,7 @@ class HomePage extends Component {
       selector.stateCode = window.location.pathname.split("/")[2] 
     }    
     //selector.stateCode = stateCode; 
-
+   
     mapAction.filterMapData(selector);
     mapAction.setMapView("India");
   }

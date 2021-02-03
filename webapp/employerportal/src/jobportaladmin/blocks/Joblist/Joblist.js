@@ -123,7 +123,7 @@ deleteJob = (event)=>{
 															{elem.jobBasicInfo.jobTitle}
 														</div>
 														<div className="jobListCompanyName">
-															{elem.employer[0].companyName}
+															{elem.company_id.companyName}
 														</div>
 														<div> 
 															<i className="fa fa-calendar jobListExperience"></i> &nbsp; Exp: {elem.eligibility.minExperience}

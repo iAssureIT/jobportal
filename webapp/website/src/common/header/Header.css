@@ -304,3 +304,6 @@ font-face {
 .barsToggel .notificationMessege{
   color:#fff;
 }
+.signOutButton{
+  margin-left: 12px
+}

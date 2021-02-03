@@ -22,7 +22,7 @@ class Header extends Component{
       //selector            : {},
     }
     this.handleOpenModal  = this.handleOpenModal.bind(this);
-      this.handleCloseModal = this.handleCloseModal.bind(this);
+    this.handleCloseModal = this.handleCloseModal.bind(this);
   }
 
   userMenuToggle(event){
@@ -215,19 +215,12 @@ class Header extends Component{
                     <FontAwesomeIcon icon={['fas', 'bell']} />
                   </div>
                 </div>
-              
-
                 
                 <div className="headerMenu2 col-lg-4">
                   <div className="headerMenu11" onClick={this.userMenuToggle.bind(this)}>
                     <FontAwesomeIcon icon={['fas', 'user']} />
                   </div>
                 </div>
-              
-
-                 
-
-
 
                 <div className="headerMenu2 col-lg-4">
                 <div className="headerMenu1" onClick={this.asideBar.bind(this)}>
@@ -240,19 +233,15 @@ class Header extends Component{
               <div className="functionalbarsToggel" id="functionalbarsToggel" style={{top:this.state.asideDisplay}}>
 
                 <div className="functionalbarsCross col-lg-12">
-                  
                   <span className="functionalnotificationMessegeCross" id="closeAsidebarButton" onClick={this.asideBar.bind(this)}> X </span>
                 </div>
 
-
                 <div className="functionalbarsItem col-lg-12">
-                  
-                  <span className="functionalnotificationMessegeText">Jobs </span>
+                  <a href="/search-jobs" style={{color:"#fff"}}>
+                  <span className="functionalnotificationMessegeText">Jobs </span></a>
                 </div>
                 <div className="functionalbarsItem col-lg-12">
-                  
                   <span className="functionalnotificationMessegeText">Companies</span>
-                
                 </div>
                 <div className="functionalbarsItem col-lg-12">
                   
@@ -292,18 +281,16 @@ class Header extends Component{
 
                <div className="barsToggel pull-right" id="barsToggel" style={{display:this.state.userMenu}}>
                      
-                      <div className="notificationMessege col-lg-12">
-                        <FontAwesomeIcon icon="search" />
-                        <span className="notificationMessegeText">My Account</span>
-                      </div>
-                      <a href="/job-list"><div className="notificationMessege col-lg-12">
+                      <a href="/basic-info"><div className="notificationMessege col-lg-12">
+                        <span className="notificationMessegeText">Complete Your Profile</span>
+                      </div></a>
+                      <a href="/applied-jobs"><div className="notificationMessege col-lg-12">
                         <FontAwesomeIcon icon="briefcase" />
                         <span className="notificationMessegeText">Applied Jobs</span>
                       </div></a>
-                      <div className="notificationMessege col-lg-12">
-                        <FontAwesomeIcon icon="users" />
-                        <span className="notificationMessegeText">Favorites</span>
-                      </div>
+                      <a href={"/profile/"+this.props.userDetails.candidate_id}><div className="notificationMessege col-lg-12">
+                        <span className="notificationMessegeText">View Profiles</span>
+                      </div></a>
                      {/* <div className="notificationMessege col-lg-12">
                         <FontAwesomeIcon icon="search" />
                         <span className="notificationMessegeText">Services</span>
@@ -314,11 +301,8 @@ class Header extends Component{
                       <div className="notificationMessege col-lg-12">
                         <span className="notificationMessegeText">Contact Us</span>
                       </div>*/}
-
                       <div className="notificationMessege col-lg-12 ">
-                         <FontAwesomeIcon icon="logout" /> 
                           <span className="signOutButton" onClick={this.logout.bind(this)}>Sign Out</span>
-                       
                       </div>
                       
                     </div>
@@ -368,25 +352,16 @@ class Header extends Component{
 
             <div className="rightFunctionHeader2 col-lg-5">
               <div className="row">
-
                 <div className="headerMenu2 col-lg-4">
                   {/*<div className="headerMenu11" >
                     <FontAwesomeIcon icon={['fas', 'bell']} />
                   </div>*/}
                 </div>
-              
-
-                
                <div className="headerMenu2 col-lg-4" id="loginbtndiv" data-toggle="modal" data-target="#loginModal">
                   <div className="headerMenu11">
                     <FontAwesomeIcon icon={['fas', 'user']} />
                   </div>
                 </div>
-
-               
-
-
-
                 <div className="headerMenu2 col-lg-4">
                 <div className="headerMenu1" onClick={this.asideBar.bind(this)}>
                     <img src="/images/List_View.png" alt="icon" />

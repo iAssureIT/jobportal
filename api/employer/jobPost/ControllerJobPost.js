@@ -296,10 +296,10 @@ exports.getJob = (req,res,next)=>{
     .populate('requiredSkills.secondarySkills.skill_id')
     .populate('requiredSkills.otherSkills.skill_id')
     .populate('requiredSkills.preferredSkills.skill_id')
-    .exec(function (err, candidate) {
+    .exec(function (err, job) {
         console.log(err)
         if (err) return res.status(500).json({ error: err });
-        res.status(200).json(candidate);
+        res.status(200).json(job);
     });
 }
 
@@ -343,19 +343,25 @@ exports.getJobList = (req,res,next)=>{
     }
 
     console.log(JSON.stringify(selector))
-    Jobs.find(selector)
     
-	.exec()
-	.then(jobList=> {
-	   res.status(200).json(jobList);			
-	})
-	.catch(error=> {
-		console.log(error);
-		res.status(500).json({
-								error 	: error,
-								message : "Some issue occurred finding Job List"
-							});
-					});
+    Jobs.find(selector).sort({createdAt:1})
+    .populate('company_id')
+    .populate('jobBasicInfo.industry_id')
+    .populate('jobBasicInfo.functionalarea_id')
+    .populate('jobBasicInfo.subfunctionalarea_id')
+    .populate('jobBasicInfo.jobrole_id')
+    .populate('jobBasicInfo.jobtype_id')
+    .populate('jobBasicInfo.jobtime_id')
+    .populate('jobBasicInfo.jobcategory_id')
+    .populate('requiredSkills.primarySkills.skill_id')
+    .populate('requiredSkills.secondarySkills.skill_id')
+    .populate('requiredSkills.otherSkills.skill_id')
+    .populate('requiredSkills.preferredSkills.skill_id')
+    .exec(function (err, jobs) {
+        console.log(err)
+        if (err) return res.status(500).json({ error: err });
+        res.status(200).json(jobs);
+    });
 }
 
 exports.getJobListForEmployer = (req,res,next)=>{
@@ -397,67 +403,24 @@ exports.getJobListForEmployer = (req,res,next)=>{
     }
 
     console.log(JSON.stringify(selector))
-
-    Jobs.aggregate([
-    	{ $match 	: selector },
-    	{ $sort 	: {createdAt : -1} },
-    	{$lookup:{
-                   from: "entitymasters", 		localField: "company_id",
-                   foreignField: "_id",		as: "employer" } 
-        },
-    	{ $lookup 	: { from: "industrymasters",
-                   		localField: "jobBasicInfo.industry_id",
-                   		foreignField: "_id",
-                   		as: "industry"}
-        },
-        {$lookup:{
-                   from: "functionalareamasters",
-                   localField: "jobBasicInfo.functionalarea_id",
-                   foreignField: "_id",
-                   as: "functionalArea" } 
-        },
-        {$lookup:{
-                   from: "subfunctionalareamasters",
-                   localField: "jobBasicInfo.subfunctionalarea_id",
-                   foreignField: "_id",
-                   as: "subFunctionalArea" } 
-        },   
-        {$lookup:{
-                   from: "jobrolemasters",
-                   localField: "jobBasicInfo.jobrole_id",
-                   foreignField: "_id",
-                   as: "jobRole" } 
-        },
-        {$lookup:{
-                   from: "jobtypemasters",
-                   localField: "jobBasicInfo.jobtype_id",
-                   foreignField: "_id",
-                   as: "jobType" } 
-        },
-        {$lookup:{
-                   from: "jobtimemasters",
-                   localField: "jobBasicInfo.jobtime_id",
-                   foreignField: "_id",
-                   as: "jobTime" } 
-        },
-        {$lookup:{
-                   from: "jobcategorymasters",
-                   localField: "jobBasicInfo.jobcategory_id",
-                   foreignField: "_id",
-                   as: "jobCategory" } 
-        }
-    ])
-	.exec()
-	.then(jobList=> {
-						res.status(200).json(jobList);			
-	})
-	.catch(error=> {
-		console.log(error);
-		res.status(500).json({
-								error 	: error,
-								message : "Some issue occurred finding Job List"
-							});
-					});
+    Jobs.find(selector).sort({createdAt:1})
+    .populate('company_id')
+    .populate('jobBasicInfo.industry_id')
+    .populate('jobBasicInfo.functionalarea_id')
+    .populate('jobBasicInfo.subfunctionalarea_id')
+    .populate('jobBasicInfo.jobrole_id')
+    .populate('jobBasicInfo.jobtype_id')
+    .populate('jobBasicInfo.jobtime_id')
+    .populate('jobBasicInfo.jobcategory_id')
+    .populate('requiredSkills.primarySkills.skill_id')
+    .populate('requiredSkills.secondarySkills.skill_id')
+    .populate('requiredSkills.otherSkills.skill_id')
+    .populate('requiredSkills.preferredSkills.skill_id')
+    .exec(function (err, jobs) {
+        console.log(err)
+        if (err) return res.status(500).json({ error: err });
+        res.status(200).json(jobs);
+    });
 }
 
 exports.updateJob = (req,res,next)=>{
@@ -608,7 +571,7 @@ exports.jobCount = (req, res, next)=>{
     });
 }
 exports.mapwiseJobs = (req, res, next)=>{
-	//console.log("req.body - ", req.body);
+	console.log("req.body - ", req.body);
 	var selector = {}; 
 	var industry_ids = [];
     var funarea_ids = [];
@@ -616,7 +579,9 @@ exports.mapwiseJobs = (req, res, next)=>{
     selector['$and']=[];
     var countryCode = req.body.countryCode ? req.body.countryCode : "IN";
     selector["$and"].push({ "location.countryCode" :  countryCode   })
-   	
+   	if (req.body.stateCode) {
+        selector["$and"].push({ "location.stateCode" :  req.body.stateCode   })
+    }
 
     if (req.body.industry_id) {
     	req.body.industry_id.map(elem => {
@@ -630,7 +595,7 @@ exports.mapwiseJobs = (req, res, next)=>{
     	})
     	selector["$and"].push({ "jobBasicInfo.functionalarea_id" : { $in: funarea_ids } });
     }
-    console.log(JSON.stringify(selector))
+    console.log("stateCode",JSON.stringify(selector))
     if (req.body.stateCode) { 
         var groupByField = "district"; 
     }else{
@@ -775,7 +740,7 @@ exports.industrialJobs = (req, res, next)=>{
     	{ $group 	: {_id: "$jobBasicInfo.industry_id", count: { $sum: 1}} },
     	{ $lookup 	: {from: "industrymasters", localField: "_id", foreignField: "_id", as: "industry"}}
     ])
-
+ 
     .sort({createdAt : -1})
     .exec()
     .then(data=>{
@@ -985,6 +950,7 @@ exports.insertBulkJobs = (req,res,next)=>{
             var jobtime_id = jobTimes[Math.floor(Math.random() * jobTimes.length)]._id;
             
             var jobObject = {
+                "company_id"    : null,
                 "jobBasicInfo"  :   {
                                     "jobTitle"              : jobRoles[Math.floor(Math.random() * jobRoles.length)].jobRole,
                                     "industry_id"           : industry_id,
