@@ -438,22 +438,69 @@ class BasicInfoForm extends Component{
 	//========== User Define Function End ==================
 
 	//========== Validation Start ==================
-	 validateForm=()=>{
+	validateForm=()=>{
+
+
+		console.log(",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,kkkkkkkkkkkkkkkkkkkkkkkkk");
 		var status = true;
+		var regName = /^[a-zA-Z]+$/;
+		var firstName=this.state.firstName;
+		var middleName=this.state.middleName;
+        var lastName=this.state.lastName;
 		var tempEmail = this.state.email.trim(); // value of field with whitespace trimmed off
     	var emailFilter = /^[^@]+@[^@.]+\.[^@]*\w\w$/;
     	var illegalChars = /[\(\)\<\>\,\;\:\\\"\[\]]/;
 
-		if(this.state.firstName.length<=0){
-			document.getElementById("firstNameError").innerHTML=  
-			"Please enter your first name";  
-			status=false; 
-		}
-		 else{
-			document.getElementById("firstNameError").innerHTML=
-			""; 
-			status = true;
-		}
+	    if(this.state.firstName<=0)  {
+	      document.getElementById("firstNameError").innerHTML=  
+	      "Please enter valid Name";  
+	      status=false; 
+	    }
+	  
+	     if(!regName.test(firstName)){
+	      document.getElementById("firstNameError").innerHTML=  
+	      "Please enter valid name,......";  
+	      status=false; 
+	    }
+	    else{
+	      
+	      status = true;
+	    }
+
+	    if(this.state.middleName<=0)  {
+	      document.getElementById("middleNameError").innerHTML=  
+	      "Please enter valid Name";  
+	      status=false; 
+	    }
+	  
+	    if(!regName.test(middleName)){
+	      document.getElementById("middleNameError").innerHTML=  
+	      "Please enter valid name,......";  
+	      status=false; 
+	    }
+	    else{
+	      
+	      status = true;
+	    }
+
+	    if(this.state.lastName<=0)  {
+	      document.getElementById("lastNameError").innerHTML=  
+	      "Please enter valid Name";  
+	      status=false; 
+	    }
+	  
+	    if(!regName.test(lastName)){
+	      document.getElementById("lastNameError").innerHTML=  
+	      "Please enter valid name,......";  
+	      status=false; 
+	    }
+	    else{
+	      
+	      status = true;
+	    }
+
+
+		
 		if(this.state.dob.length<=0){
 			document.getElementById("dobError").innerHTML=  
 			"Please enter your Date Of Birth";  
@@ -526,7 +573,7 @@ class BasicInfoForm extends Component{
 									 className="form-control inputBox" value={this.state.middleName} 
 									 onChange={this.handleChange.bind(this)} />
 								</div> 
-								
+								<span id="middleNameError" className="errorMsg"></span>
 							</div>
 
 							<div className="col-lg-4">
@@ -541,6 +588,7 @@ class BasicInfoForm extends Component{
 									 className="form-control inputBox" value={this.state.lastName}
 									 onChange={this.handleChange.bind(this)} />
 								</div> 
+								<span id="lastNameError" className="errorMsg"></span>
 							</div>
 						</div>
 						<div className="row formWrapper">
@@ -615,7 +663,7 @@ class BasicInfoForm extends Component{
 								</label>
 								<div className="input-group showFeild">
 									{this.state.ageYears + "  Years, " + this.state.ageMonths +
-									  " months, " + " And " + this.state.ageDays + " Days Old"}	
+									  " months"}	
 								</div> 
 							</div>
 

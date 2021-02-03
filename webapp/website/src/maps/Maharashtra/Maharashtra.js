@@ -179,11 +179,7 @@ class Maharashtra extends Component{
 						<span className="parbhaniNumber  mapCountLabel  text-center">{this.state.Parbhani ? this.state.Parbhani : 0}</span>
 					</div>
 
-					<div className="akola classHover"> 
-						<img src="/Maps/Maharashtra/Akola.png" alt="Akola" onMouseOver={e => (e.currentTarget.src = "/Maps/Maharashtra/Akola_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Maharashtra/Akola.png")}/>
-						<span className="akolaText mapTextLabel  text-capitalize">Akola</span>
-						<span className="akolaNumber  mapCountLabel  text-center">{this.state.Akola ? this.state.Akola : 0}</span>
-					</div>
+					
 
 					<div className="washim classHover"> 
 						<img src="/Maps/Maharashtra/Washim.png" alt="Washim" onMouseOver={e => (e.currentTarget.src = "/Maps/Maharashtra/Washim_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Maharashtra/Washim.png")}/>
@@ -249,6 +245,12 @@ class Maharashtra extends Component{
 						<img src="/Maps/Maharashtra/Gadchiroli.png" alt="Gadchiroli" onMouseOver={e => (e.currentTarget.src = "/Maps/Maharashtra/Gadchiroli_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Maharashtra/Gadchiroli.png")}/>
 						<span className="gadchiroliText  mapTextLabel text-capitalize">Gadchiroli</span>
 						<span className="gadchiroliNumber  mapCountLabel  text-center">{this.state.Gadchiroli ? this.state.Gadchiroli : 0}</span>
+					</div>
+
+					<div className="akola classHover"> 
+						<img src="/Maps/Maharashtra/Akola.png" alt="Akola" onMouseOver={e => (e.currentTarget.src = "/Maps/Maharashtra/Akola_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Maharashtra/Akola.png")}/>
+						<span className="akolaText mapTextLabel  text-capitalize">Akola</span>
+						<span className="akolaNumber  mapCountLabel  text-center">{this.state.Akola ? this.state.Akola : 0}</span>
 					</div>
 
 					

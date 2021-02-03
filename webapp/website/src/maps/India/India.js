@@ -170,7 +170,7 @@ class India extends Component{
 					<div className="orissa classHover">
 						<img src="Maps/India/Orissa.png" className="img-responsive "  onClick={e => this.onStateClick("Odisha","OD")} onMouseOver={e => (e.currentTarget.src = "/Maps/India/Orissa1.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/India/Orissa.png")}/>
 						<span className="orissaText mapTextLabel text-capitalize">Odisha</span>
-						<span className="orissaNumber mapCountLabel text-center">{this.state.OR ? this.state.OR : 0}</span>
+						<span className="orissaNumber mapCountLabel text-center">{this.state.OD ? this.state.OD : 0}</span>
 					</div>
 
 					<div className="chhattisgarh classHover">

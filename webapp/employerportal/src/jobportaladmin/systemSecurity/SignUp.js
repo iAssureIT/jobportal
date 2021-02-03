@@ -92,24 +92,28 @@ class SignUp extends Component {
   }
   validateForm=()=>{
     var status = true;
+    var regName = /^[a-zA-Z]+$/;
+    var firstName=this.state.firstName;
+    var lastName=this.state.lastName;
     var tempEmail = this.state.emailAddress.trim(); // value of field with whitespace trimmed off
-    var emailFilter = /^[^@]+@[^@.]+\.[^@]*\w\w$/;
+    var emailFilter =  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
     var illegalChars = /[\(\)\<\>\,\;\:\\\"\[\]]/;
-    var phoneno = /^\d{10}$/;
+    var phoneno = /^\+?([0-9]{2})\)?[-. ]?([0-9]{5})[-. ]?([0-9]{5})$/;
 
+    
     if(this.state.firstName<=0)  {
       document.getElementById("firstNameError").innerHTML=  
       "Please enter valid Name";  
       status=false; 
     }
-    else if(this.state.firstName.match(illegalChars)){
+  
+    else if(!regName.test(firstName)){
       document.getElementById("firstNameError").innerHTML=  
-      "Please enter valid name";  
+      "Please enter valid name,......";  
       status=false; 
     }
     else{
-      document.getElementById("firstNameError").innerHTML=  
-       ""; 
+      
       status = true;
     }
 
@@ -118,14 +122,14 @@ class SignUp extends Component {
       "Please enter valid Name";  
       status=false; 
     }
-    else if(this.state.lastName.match(illegalChars)){
+    else if(!regName.test(lastName)){
       document.getElementById("lastNameError").innerHTML=  
-      "Please enter valid name";  
+      "Please enter valid name.....";  
       status=false; 
     }
     else{
       document.getElementById("lastNameError").innerHTML=  
-       ""; 
+       " ."; 
       status = true;
     }
 
@@ -402,80 +406,85 @@ class SignUp extends Component {
                 <hr className="registrationHr"/>
               </div>
              
-              <div className="col-lg-12 form-group" >
-                <div className="input-group autocomplete">
-                  <span className="input-group-addon registrationInputIcon"><i className="fa fa-briefcase"></i></span>
-                    <Autosuggest 
-                      suggestions={suggestions}
-                      onSuggestionsFetchRequested={this.onSuggestionsFetchRequested.bind(this)}
-                      onSuggestionsClearRequested={this.onSuggestionsClearRequested.bind(this)}
-                      getSuggestionValue={this.getSuggestionValue.bind(this)}
-                      renderSuggestion={this.renderSuggestion.bind(this)}
-                      onSuggestionSelected={this.onSuggestionSelected.bind(this)}
-                      inputProps={inputProps}
-                    />
+              <div className="row">
+                <div className="col-lg-12 form-group" >
+                  <div className="input-group autocomplete">
+                    <span className="input-group-addon registrationInputIcon"><i className="fa fa-briefcase"></i></span>
+                      <Autosuggest 
+                        suggestions={suggestions}
+                        onSuggestionsFetchRequested={this.onSuggestionsFetchRequested.bind(this)}
+                        onSuggestionsClearRequested={this.onSuggestionsClearRequested.bind(this)}
+                        getSuggestionValue={this.getSuggestionValue.bind(this)}
+                        renderSuggestion={this.renderSuggestion.bind(this)}
+                        onSuggestionSelected={this.onSuggestionSelected.bind(this)}
+                        inputProps={inputProps}
+                      />
+                  </div>
                 </div>
-              </div> 
+              </div>  
               
-              <div className="col-lg-6 form-group" >
-                  <div className="input-group">
-                      <span className="input-group-addon registrationInputIcon"><i className="fa fa-user"></i></span>
-                      <input type="text" id="firstName" name="firstName" placeholder="First Name" value={this.state.firstName} onChange={this.handleChange.bind(this)} className="form-control registrationInputBox"/>
-                  </div>
-                   <span id="firstNameError" className="errorMsg"></span>
-              </div>
-
-              <div className="col-lg-6 form-group" >
-                  <div className="input-group">
-                      <span className="input-group-addon registrationInputIcon"><i className="fa fa-user"></i></span>
-                      <input type="text" id="lastName" name="lastName" placeholder="Last Name" value={this.state.lastName} onChange={this.handleChange.bind(this)} className="form-control registrationInputBox"/>
-                  </div>
-                   <span id="lastNameError" className="errorMsg"></span>
-              </div>
-             
-              <div className="col-lg-6 form-group" >
-                  <div className="input-group">
-                      <span className="input-group-addon registrationInputIcon1"><i className="fa fa-envelope"></i></span>
-                      <input type="email" id="emailAddress" name="emailAddress" placeholder="Email Address" value={this.state.emailAddress} onChange={this.handleChange.bind(this)} className="form-control registrationInputBox"/>
-                  </div>
-                   <span id="emailAddressError" className="errorMsg"></span>
-              </div>
-
-              <div className="col-lg-6 form-group" >
-                <PhoneInput 
-                  country   = {'in'}
-                  id        ="mobileNumber" 
-                  className ="input-group-addon form-control inputBox" 
-                  value     ={this.state.mobileNumber} 
-                  onChange  = {mobileNumber => this.setState({ mobileNumber })}
-                />
-                <span id="mobileNumberError" className="errorMsg"></span>
-              </div>
-
-              <div className="col-lg-12 row">
-              <div className="col-lg-6 form-group pqr">
-                <div className="input-group">
-                    <span className="input-group-addon registrationInputIcon"><i className="fa fa-lock"></i></span>
-                    <input type="password" id="password" name="password" placeholder="Password" value={this.state.password} onChange={this.handleChange.bind(this)} className="form-control registrationInputBox"/>
-                      <span className="input-group-addon loginInputIcon3" onClick={this.showPassword1.bind(this)}>
-                        <i className={this.state.showPassword1 ? "fa fa-eye-slash" : "fa fa-eye"} value={this.state.showPassword1}></i>
-                      </span>
+              <div className="row">
+                <div className="col-lg-6 form-group" >
+                    <div className="input-group">
+                        <span className="input-group-addon registrationInputIcon"><i className="fa fa-user"></i></span>
+                        <input type="text" id="firstName" name="firstName" placeholder="First Name" value={this.state.firstName} onChange={this.handleChange.bind(this)} className="form-control registrationInputBox"/>
+                    </div>
+                     <span id="firstNameError" className="errorMsg"></span>
                 </div>
-                <span id="passwordError" className="errorMsg"></span>
+
+                <div className="col-lg-6 form-group" >
+                    <div className="input-group">
+                        <span className="input-group-addon registrationInputIcon"><i className="fa fa-user"></i></span>
+                        <input type="text" id="lastName" name="lastName" placeholder="Last Name" value={this.state.lastName} onChange={this.handleChange.bind(this)} className="form-control registrationInputBox"/>
+                    </div>
+                     <span id="lastNameError" className="errorMsg"></span>
+                </div>
               </div>
 
-              <div className="col-lg-6 form-group abc">
+              <div className="row">
+                <div className="col-lg-6 form-group" >
+                    <div className="input-group">
+                        <span className="input-group-addon registrationInputIcon1"><i className="fa fa-envelope"></i></span>
+                        <input type="email" id="emailAddress" name="emailAddress" placeholder="Email Address" value={this.state.emailAddress} onChange={this.handleChange.bind(this)} className="form-control registrationInputBox"/>
+                    </div>
+                     <span id="emailAddressError" className="errorMsg"></span>
+                </div>
+
+                <div className="col-lg-6 form-group" >
+                  <PhoneInput 
+                    country   = {'in'}
+                    id        ="mobileNumber" 
+                    className ="input-group-addon form-control inputBox" 
+                    value     ={this.state.mobileNumber} 
+                    onChange  = {mobileNumber => this.setState({ mobileNumber })}
+                  />
+                  <span id="mobileNumberError" className="errorMsg"></span>
+                </div>
+              </div>
+
+              <div className="row">
+                <div className="col-lg-6 form-group">
                   <div className="input-group">
-                    <span className="input-group-addon registrationInputIcon"><i className="fa fa-lock"></i></span>
-                    <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" value={this.state.confirmPassword} onChange={this.handleChange.bind(this)} className="form-control registrationInputBox"/>
-                    <span className="input-group-addon loginInputIcon3" onClick={this.showPassword2.bind(this)}>
-                       <i className={this.state.showPassword2 ? "fa fa-eye-slash" : "fa fa-eye"} value={this.state.showPassword2}></i>
-                    </span>
+                      <span className="input-group-addon registrationInputIcon"><i className="fa fa-lock"></i></span>
+                      <input type="password" id="password" name="password" placeholder="Password" value={this.state.password} onChange={this.handleChange.bind(this)} className="form-control registrationInputBox"/>
+                        <span className="input-group-addon loginInputIcon3" onClick={this.showPassword1.bind(this)}>
+                          <i className={this.state.showPassword1 ? "fa fa-eye-slash" : "fa fa-eye"} value={this.state.showPassword1}></i>
+                        </span>
                   </div>
-                   <span id="confirmPasswordError" className="errorMsg"></span>
-              </div>
-             </div> 
+                  <span id="passwordError" className="errorMsg"></span>
+                </div>
 
+                <div className="col-lg-6 form-group ">
+                    <div className="input-group">
+                      <span className="input-group-addon registrationInputIcon"><i className="fa fa-lock"></i></span>
+                      <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" value={this.state.confirmPassword} onChange={this.handleChange.bind(this)} className="form-control registrationInputBox"/>
+                      <span className="input-group-addon loginInputIcon3" onClick={this.showPassword2.bind(this)}>
+                         <i className={this.state.showPassword2 ? "fa fa-eye-slash" : "fa fa-eye"} value={this.state.showPassword2}></i>
+                      </span>
+                    </div>
+                     <span id="confirmPasswordError" className="errorMsg"></span>
+                </div>
+              </div>
             <div className="col-lg-6 col-lg-offset-3 buttonWrapper">
               <button className="btn col-lg-12 buttonSignUp" onClick={this.usersignup.bind(this)}>Sign Up</button>
             </div>
