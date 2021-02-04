@@ -211,7 +211,7 @@ class SignUp extends Component {
 
       var auth = {
         username    : "EMAIL",
-        firstname   : this.state.firstName,
+        firstname   : this.state.firstName, 
         lastname    : this.state.lastName,
         mobNumber   : (this.state.mobileNumber).replace("-", ""),
         email       : this.state.emailAddress,
@@ -219,8 +219,8 @@ class SignUp extends Component {
         company_id  : this.state.employer_id != "" ? this.state.employer_id : null,
         companyID   : this.state.employerID != "" ? this.state.employerID : null,
         companyName : this.state.employerName,
-        role      : 'employer',
-        status      : 'unverified',
+        role        : 'employer',
+        status      : 'blocked',
         "emailSubject"  : "Email Verification", 
         "emailContent"  : "As part of our registration process, we screen every new profile to ensure its credibility by validating email provided by user. While screening the profile, we verify that details put in by user are correct and genuine.",
       }
@@ -234,10 +234,7 @@ class SignUp extends Component {
           if(response.data.message == 'USER_CREATED'){
             swal('Great, Information submitted successfully and OTP is sent to your registered Email.');
             localStorage.setItem('previousUrl' ,'signup');
-
             this.props.history.push("/confirm-otp/" + response.data.ID);
-            
-
           }else{
             swal(response.data.message);
           } 

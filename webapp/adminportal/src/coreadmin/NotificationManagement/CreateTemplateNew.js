@@ -53,24 +53,23 @@ class CreateTemplateNew extends Component {
 			tabtype : 'emailTemplates',
 			fileDetailUrl: "/api/masternotifications/get/filedetails/",
              goodRecordsHeading: {
-	        templateType: "Template Type",
-	        templateName: "Template Name",
-	        role: "Role",
-	        company: "Company Name",
-	        entityType: "eEntity Type",
-	        website: "Website",
-	        content: "Content",
-	        subject: "Subject",
+	        templateType			: "Template Type",
+	        templateName			: "Template Name",
+	        role 					: "Role",
+	        company 				: "Company Name",
+	        entityType				: "eEntity Type",
+	        content 				: "Content",
+	        subject 				: "Subject",
 	        },
 			failedtableHeading: {
-	        templateType: "Template Type",
-	        templateName: "Template Name",
-	        role: "Role",
-	        company: "Company Name",
-	        entityType: "Entity Type",
-	        website: "Website",
-	        content: "Content",
-	        subject: "Subject",
+	        templateType    		: "Template Type",
+	        templateName 			: "Template Name",
+	        role 					: "Role",
+	        company 				: "Company Name",
+	        entityType				: "Entity Type",
+	        content 				: "Content",
+	        subject 				: "Subject",
+	        failedRemark            :  "Failed Data Remark"
       
       }
 		};
@@ -311,9 +310,10 @@ class CreateTemplateNew extends Component {
         });
 
           var tableData = response.data.goodrecords.map((a, i)=>{
+          	console.log("response.data.goodrecords",response.data.goodrecords);
             return{
-                 "templateType": a.templateType ? a.templateType : '-',
-	                "event": a.event ? a.event : '-',
+                 	"templateType": a.templateType ? a.templateType : '-',
+	                // "event": a.event ? a.event : '-',
 	                "entityType": a.entityType ? a.entityType : '-',
 	                "templateName": a.templateName ? a.templateName : '-',
 	                "role": a.role ? a.role : '-',
@@ -325,16 +325,16 @@ class CreateTemplateNew extends Component {
 
           var failedRecordsTable = response.data.failedRecords.map((a, i)=>{
           return{
-                
-                 "templateType": a.templateType ? a.templateType : '-',
-	                "event": a.event ? a.event : '-',
+                	
+                 	"templateType": a.templateType ? a.templateType : '-',
+	                // "event": a.event ? a.event : '-',
 	                "entityType": a.entityType ? a.entityType : '-',
 	                "templateName": a.templateName ? a.templateName : '-',
 	                "role": a.role ? a.role : '-',
 	                "company": a.company ? a.company : '-',
 	                "subject": a.subject ? a.subject : '-',
 	                "content": a.content ? a.content : '-',
-                "failedRemark"  : a.failedRemark     ? a.failedRemark : '-' 
+                	"failedRemark"  : a.failedRemark     ? a.failedRemark : '-' 
           }
           })
           
@@ -534,7 +534,7 @@ class CreateTemplateNew extends Component {
                     <BulkUpload url="/api/masternotifications/bulkUploadNotification"
                         data={{ "entityType": this.state.pathname, "createdBy": localStorage.getItem("user_ID"), "corporateId": localStorage.getItem("corporate_ID") }}
                         uploadedData={this.uploadedData}
-                        fileurl="https://fivebees.s3.ap-south-1.amazonaws.com/prod/master/entitymaster.xlsx"
+                        fileurl="https://fivebees.s3.ap-south-1.amazonaws.com/prod/master/notificationBulk.xls"
                         getFileDetails={this.getFileDetails.bind(this)}
                         fileDetails={this.state.fileDetails}
                         goodRecordsHeading={this.state.goodRecordsHeading}

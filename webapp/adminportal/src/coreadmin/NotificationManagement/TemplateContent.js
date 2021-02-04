@@ -67,7 +67,8 @@ class TemplateContent extends Component{
 
 	
 	changeStatus(event){
-		if(this.props.status == 'active'){
+		console.log('this.state.status==>',this.state.status)
+		if(this.state.status === 'active'){
 			var value = 'inactive';
 		}else{
 			var value = 'active';
@@ -78,7 +79,12 @@ class TemplateContent extends Component{
 		}
 		axios.patch('/api/masternotifications/patch/status',formValues)
 		.then((response)=>{
-			swal("Status changed successfully!")
+			if(response.data.updated === true){
+				swal("Status changed successfully!")
+			}else{
+				swal("Oops some error while updating status. Please try again!")
+			}
+			
 			this.getData();
 		})
 		.catch((error)=>{
@@ -95,7 +101,7 @@ class TemplateContent extends Component{
 	        	subject: response.data.subject,
 	        	content: response.data.content
             })
-            if(response.data.company === null){
+            if(response.data.company === null || response.data.company === undefined || response.data.company === ""){
                 this.setState({
                     companyname : 'All'
                 })
@@ -130,7 +136,7 @@ class TemplateContent extends Component{
 						  	<div className="dropdown_content">
 		      				<ul className="pdcls ulbtm">
 		      					 <li>  
-                                <a href="#" data-toggle="modal" data-target={"#editNotifyModal-"+this.props.templateValues._id} id={this.props.templateValues._id} title="Edit"><i className="fa fa-pencil" aria-hidden="true"></i>&nbsp;&nbsp;Edit</a>
+                                <a href="#" data-toggle="modal" data-target={"#editNotifyModal-"+this.props.templateValues._id+"-"+this.props.token} id={this.props.templateValues._id} title="Edit"><i className="fa fa-pencil" aria-hidden="true"></i>&nbsp;&nbsp;Edit</a>
                               </li>
                               <li>
                                 <a data-toggle="modal" data-target={`#${this.props.templateValues._id}-rm`}  id={this.props.templateValues._id} title="Delete"><i className="fa fa-trash-o" aria-hidden="true"></i>&nbsp;Delete</a>
@@ -141,7 +147,7 @@ class TemplateContent extends Component{
 						</div>
 						
 					</div>
-					<EditNotificationModal emailNot={this.props.templateValues._id} getData={this.getData.bind(this)} data={this.props.templateValues} />
+					<EditNotificationModal token={this.props.token} emailNot={this.props.templateValues._id} getData={this.getData.bind(this)} data={this.props.templateValues} />
 
 					<div className="modal col-lg-12 col-md-12 col-sm-12 col-xs-12" id={`${this.props.templateValues._id}-rm`}  role="dialog">
 	                    <div className=" modal-dialog adminModal adminModal-dialog">

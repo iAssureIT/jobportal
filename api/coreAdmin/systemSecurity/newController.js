@@ -44,7 +44,7 @@ exports.user_signup_user = (req, res, next) => {
 											});
 										} else {
 											var emailOTP  = getRandomInt(1000, 9999);
-											var mobileOTP = 1234;
+											var mobileOTP = getRandomInt(1000, 9999);
 											if(emailOTP && mobileOTP){
 												const user = new User({
 													_id			: new mongoose.Types.ObjectId(),
@@ -61,7 +61,7 @@ exports.user_signup_user = (req, res, next) => {
 																	fullName  	: req.body.firstname + ' ' + req.body.lastname,
 																	email 	  	: emailId.toLowerCase(),
 																	otpEmail    : emailOTP,
-																	otpMobile	: mobileOTP,
+																	otpMobile	: req.body.mobileOTP ? req.body.mobileOTP : mobileOTP,
 																	mobile 		: req.body.mobNumber,
 																	companyID 	: req.body.companyID,
 																	companyName : req.body.companyName,
@@ -103,7 +103,7 @@ exports.user_signup_user = (req, res, next) => {
 															});
 														}
 														if(req.body.mobileValidation){
-															axios.get('http://localhost:'+ globalVariable.port +'/api/globalmaster/get/sms_details')
+															/* axios.get('http://localhost:'+ globalVariable.port +'/api/globalmaster/get/sms_details')
 															.then(smsDetails => {
 																const client 		= new plivo.Client(smsDetails.data.authID, smsDetails.data.authToken);
 												                const sourceMobile  = smsDetails.data.sourceMobile;
@@ -125,7 +125,22 @@ exports.user_signup_user = (req, res, next) => {
 															})
 															.catch(err =>{
 																console.log(err);
-															})
+															}) */
+															// axios.patch('/api/auth/patch/sendOTPwithemail/'+response.data.ID)
+															// .then((sendotp) => {
+															// 	console.log('verifyresetpwdornot in result==>>>', sendotp.data.otpEmail)
+															// 	// var emailOTP = this.getRandomInt(1000, 9999);
+															// 	var sendData = {
+															// 	"event"     : "Event1", //Event Name
+															// 	"toUserId"  : response.data.ID, //To user_id(ref:users)
+															// 	"company_id": localStorage.getItem("corporate_ID"),
+															// 	"variables" : {
+															// 		"UserName": response.data.userDetails.firstName,
+															// 		"OTP"     : sendotp.data.otpEmail,
+															// 		}
+															// 	}
+															// })
+															// .catch((err=>console.log("err",err)));
 														}
 														if(!req.body.emailValidation && !req.body.mobileValidation){
 															res.status(200).json({message: 'USER_CREATED',ID: result._id,})

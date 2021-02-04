@@ -19,8 +19,12 @@ const systemSecurityRoutes 				= require('./coreAdmin/systemSecurity/RoutesSyste
 const userRoutes 						= require('./coreAdmin/userManagement/RoutesUsers.js');
 const rolesRoutes						= require('./coreAdmin/rolesManagement/RoutesRoles.js');
 const rolesentitymasterRoutes			= require('./coreAdmin/RoleEntityMaster/Routes.js');
+const EventMappingRoutes				= require("./coreAdmin/EventMappingMaster/RoutesEventMapping.js");
+const EventTokenRoutes				    = require("./coreAdmin/EventTokenMaster/RoutesEventTokenMaster.js");
+
 const masternotificationRoutes		    = require('./coreAdmin/notificationManagement/RoutesMasterNotification.js');
 const notificationRoutes				= require('./coreAdmin/notificationManagement/RoutesNotification.js');
+
 const CountrySpecificConfig				= require("./coreAdmin/CountrySpecificConfig/RoutesCountrySpecificConfig.js");
 
 const companySettingsRoutes				= require('./coreAdmin/companySettings/RoutesCompanySettings.js');
@@ -130,6 +134,8 @@ app.use("/api/rolesentitymaster", rolesentitymasterRoutes);
 app.use('/api/projectsettings',projectSettingRoutes);
 app.use("/api/auth", systemSecurityRoutes);
 app.use("/api/users", userRoutes);
+app.use("/api/eventmapping", EventMappingRoutes);
+app.use("/api/EventToken", 					EventTokenRoutes);
 app.use("/api/masternotifications",masternotificationRoutes);
 app.use('/api/notifications',notificationRoutes);
 app.use("/api/countryspecificConfig", 	CountrySpecificConfig);

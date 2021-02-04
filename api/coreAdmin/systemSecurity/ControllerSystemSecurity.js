@@ -16,7 +16,7 @@ function getRandomInt(min, max) {
 	return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
-exports.user_signup_user = (req, res, next) => {
+exports.user_signupUser = (req, res, next) => {
 	console.log("req.body==>>", req.body)
 	var username = "EMAIL";
 	if(req.body.username){
@@ -57,27 +57,27 @@ exports.user_signup_user = (req, res, next) => {
 													services: {
 														password: {
 															bcrypt: hash
-
 														},
 													},
 													username: emailId.toLowerCase(),
 													profile: {
-														firstname: req.body.firstname,
-														lastname: req.body.lastname,
-														fullName: req.body.firstname + ' ' + req.body.lastname,
-														email: emailId.toLowerCase(),
-														mobile: req.body.mobNumber,
-														companyID: req.body.companyID,
-														workLocation: req.body.workLocation,
+														firstname    : req.body.firstname,
+														lastname     : req.body.lastname,
+														fullName     : req.body.firstname + ' ' + req.body.lastname,
+														email        : emailId.toLowerCase(),
+														mobile       : req.body.mobNumber,
+														company_id   : ObjectID(req.body.company_id),
+														companyID    : req.body.companyID,
+														workLocation : req.body.workLocation,
 														passwordreset: false,
-														companyName: req.body.companyName,
-														department	: req.body.department,
-														designation	: req.body.designation,
-														city: req.body.cityName,
-														states: req.body.states,
-														status: req.body.status ? req.body.status : "Block",
-														createdBy: req.body.createdBy,
-														createdAt: new Date(),
+														companyName  : req.body.companyName,
+														department	 : req.body.department,
+														designation	 : req.body.designation,
+														city         : req.body.cityName,
+														states       : req.body.states,
+														status       : req.body.status ? req.body.status : "blocked",
+														createdBy    : req.body.createdBy,
+														createdAt    : new Date(),
 													},
 													roles: req.body.role,
 												});
@@ -88,6 +88,7 @@ exports.user_signup_user = (req, res, next) => {
 												
 												user.save()
 													.then(result => {
+
 														res.status(200).json({
 															message: 'USER_CREATED',
 															ID: result._id,
@@ -141,7 +142,7 @@ exports.user_signup_user = (req, res, next) => {
 								.then(user => {
 									if (user.length > 0) {
 										return res.status(200).json({
-											message: 'Mobile number already exits.'
+											message: 'Mobile number already exists.'
 										});
 									} else {
 										bcrypt.hash(req.body.pwd, 10, (err, hash) => {
@@ -245,7 +246,7 @@ function sendEmail(toEmail,subject,content){
 
               // send mail with defined transport object
               var mailOptions = {
-                    from: data.projectName+'" Admin" <' + senderEmail + '>', // sender address
+                    from: data.projectName+' <' + senderEmail + '>', // sender address
                     to: toEmail, // list of receiver
                     subject: subject, // Subject line
                     html: "<pre>" + content + "</pre>", // html body
@@ -320,17 +321,24 @@ exports.user_signup_user_otp = (req, res, next) => {
 														username: emailId.toLowerCase(),
 														profile:
 														{
-															firstname: req.body.firstname,
-															lastname: req.body.lastname,
-															fullName: req.body.firstname + ' ' + req.body.lastname,
-															email: emailId.toLowerCase(),
-															company_id : req.body.company_id,
-															companyID: req.body.companyID, 
-															mobile: req.body.mobNumber,
-															createdAt: new Date(),
-															otpEmail: emailOTP,
-															status: req.body.status ? req.body.status : "Inactive",
-															createdBy: req.body.createdBy,
+															firstname    : req.body.firstname,
+															lastname     : req.body.lastname,
+															fullName     : req.body.firstname + ' ' + req.body.lastname,
+															email        : emailId.toLowerCase(),
+															mobile       : req.body.mobNumber,
+															company_id   : ObjectID(req.body.company_id),
+															companyID    : req.body.companyID,
+															workLocation : req.body.workLocation,
+															passwordreset: false,
+															companyName  : req.body.companyName,
+															department	 : req.body.department,
+															designation	 : req.body.designation,
+															city         : req.body.cityName,
+															states       : req.body.states,
+															otpEmail     : emailOTP,
+															status       : req.body.status ? req.body.status : "blocked",
+															createdBy    : req.body.createdBy,
+															createdAt    : new Date(),
 														},
 														roles: [userRole]
 													});
@@ -456,6 +464,7 @@ exports.user_signup_user_otp = (req, res, next) => {
 															companyID: req.body.companyID,
 															companyName: req.body.companyName,
 															createdAt: new Date(),
+															passwordreset: false,
 															otpMobile: mobileOTP,
 															status: req.body.status ? req.body.status : "Inactive",
 															createdBy: req.body.createdBy,
@@ -551,8 +560,9 @@ exports.check_userID_EmailOTP = (req, res, next) => {
 			});
 		});
 };
-exports.activate_userID_EmailOTP = (req, res, next) => {
-	User.find({ _id: ObjectID(req.params.ID), "profile.otpEmail": req.params.emailotp })
+
+exports.check_userID_mobileOTP = (req, res, next) => {
+	User.find({ _id: ObjectID(req.params.ID), "profile.otpMobile": req.params.mobileotp })
 		.exec()
 		.then(data => {
 			if (data.length > 0) {
@@ -560,14 +570,15 @@ exports.activate_userID_EmailOTP = (req, res, next) => {
 					{ _id: ObjectID(req.params.ID) },
 					{
 						$set: {
-							"profile.otpEmail": 0,
-							"profile.status": "active"
+							"profile.otpMobile": 0,
+							"profile.status": data[0].profile.status
 						}
 					}
 				)
 					.exec()
-					.then(data => {
+					.then(async(data) => {
 						if (data.nModified === 1) {
+							await removeTokens(req.params.ID)
 							res.status(200).json({ message: "SUCCESS", userID: data._id });
 						} else {
 							res.status(200).json({ message: "SUCCESS_OTP_NOT_RESET" });
@@ -576,7 +587,7 @@ exports.activate_userID_EmailOTP = (req, res, next) => {
 					.catch(err => {
 						console.log('user error ', err);
 						res.status(500).json({
-							message: "Failed to update Email OTP",
+							message: "Failed to update Mobile OTP",
 							error: err
 						});
 					})
@@ -592,7 +603,92 @@ exports.activate_userID_EmailOTP = (req, res, next) => {
 			});
 		});
 };
-exports.check_userID_MobileOTP = (req, res, next) => {
+
+exports.check_signup_userID_mobileOTP = (req, res, next) => {
+	User.find({ _id: ObjectID(req.params.ID), "profile.otpMobile": req.params.mobileotp })
+		.exec()
+		.then(data => {
+			if (data.length > 0) {
+				User.updateOne(
+					{ _id: ObjectID(req.params.ID) },
+					{
+						$set: {
+							"profile.otpMobile": 0,
+							"profile.status": "blocked"
+						}
+					}
+				)
+					.exec()
+					.then(data => {
+						if (data.nModified === 1) {
+							res.status(200).json({ message: "SUCCESS", userID: data._id });
+						} else {
+							res.status(200).json({ message: "SUCCESS_OTP_NOT_RESET" });
+						}
+					})
+					.catch(err => {
+						console.log('user error ', err);
+						res.status(500).json({
+							message: "Failed to update Mobile OTP",
+							error: err
+						});
+					})
+			} else {
+				res.status(200).json({ message: "FAILED" });
+			}
+		})
+		.catch(err => {
+			console.log('user error ', err);
+			res.status(500).json({
+				message: "Failed to find the User",
+				error: err
+			});
+		});
+};
+
+exports.check_signup_userID_mobileOTP = (req, res, next) => {
+	User.find({ _id: ObjectID(req.params.ID), "profile.otpMobile": req.params.mobileotp })
+		.exec()
+		.then(data => {
+			if (data.length > 0) {
+				User.updateOne(
+					{ _id: ObjectID(req.params.ID) },
+					{
+						$set: {
+							"profile.otpMobile": 0,
+							"profile.status": "blocked"
+						}
+					}
+				)
+					.exec()
+					.then(data => {
+						if (data.nModified === 1) {
+							res.status(200).json({ message: "SUCCESS", userID: data._id });
+						} else {
+							res.status(200).json({ message: "SUCCESS_OTP_NOT_RESET" });
+						}
+					})
+					.catch(err => {
+						console.log('user error ', err);
+						res.status(500).json({
+							message: "Failed to update Mobile OTP",
+							error: err
+						});
+					})
+			} else {
+				res.status(200).json({ message: "FAILED" });
+			}
+		})
+		.catch(err => {
+			console.log('user error ', err);
+			res.status(500).json({
+				message: "Failed to find the User",
+				error: err
+			});
+		});
+};
+
+exports.check_signup_userID_mobileOTP = (req, res, next) => {
 	User.find({ _id: ObjectID(req.params.ID), "profile.otpMobile": req.params.mobileotp })
 		.exec()
 		.then(data => {
@@ -679,7 +775,7 @@ exports.check_username_EmailOTP = (req, res, next) => {
 		});
 };
 
-exports.user_login_using_email = (req, res, next) => { 
+exports.user_login_using_email = (req, res, next) => {
 	var emailId = (req.body.email).toLowerCase();
 	var role = (req.body.role).toLowerCase();
 	console.log('role', role);
@@ -693,6 +789,7 @@ exports.user_login_using_email = (req, res, next) => {
 			if (user) {
 				if ((user.profile.status).toLowerCase() == "active") {
 					var pwd = user.services.password.bcrypt;
+					console.log('pwd', pwd);
 					if (pwd) {
 						bcrypt.compare(req.body.password, pwd, (err, result) => {
 							if (err) {
@@ -736,8 +833,9 @@ exports.user_login_using_email = (req, res, next) => {
 													firstName: user.profile.firstname,
 													lastName: user.profile.lastname,
 													email: user.profile.email,
-													phone: user.profile.mobile,
+													phone: user.profile.phone,
 													city: user.profile.city,
+													passwordreset: user.profile.passwordreset,
 													companyID: user.profile.companyID,
 													locationID: user.profile.locationID,
 													user_id: user._id,
@@ -795,95 +893,111 @@ exports.user_login_using_mobile = (req, res, next) => {
 	})
 	.exec()
 	.then(user => {
-		if (user) {
-			if ((user.profile.status).toLowerCase() == "active") {
-				var pwd = user.services.password.bcrypt;
-				console.log('pwd', pwd);
-				if (pwd) {
-					bcrypt.compare(req.body.password, pwd, (err, result) => {
-						if (err) {
-							return res.status(200).json({
-								message: 'Auth failed'
-							});
-						}
-						if (result) {
-							const token = jwt.sign({
-								mobile: req.body.mobNumber,
-								userId: user._id,
-							}, globalVariable.JWT_KEY,
-								{
-									expiresIn: "365d"
-								}
-							);
-
-							User.updateOne(
-								{ "username": mobNumber },
-								{
-									$push: {
-										"services.resume.loginTokens": {
-											whenLogin: new Date(),
-											hashedToken: token
-										}
-									}
-								}
-							)
-								.exec()
-								.then(updateUser => {
-									main();
-    								async function main(){
-										var companyContacts = await getCompanyContacts(user.profile.companyID);
-										console.log("companyContacts",companyContacts);
-										if (updateUser.nModified == 1) {
-											res.status(200).json({
-												message: 'Login Auth Successful',
-												token: token,
-												roles: user.roles,
-												ID: user._id,
-												companyID: user.profile.companyID,
-												passwordreset: user.profile.passwordreset,
-												userDetails: {
-													firstName: user.profile.firstname,
-													lastName: user.profile.lastname,
-													email: user.profile.email,
-													phone: user.profile.phone,
-													passwordreset: user.profile.passwordreset,
-													city: user.profile.city,
-													companyID: user.profile.companyID,
-													locationID: user.profile.locationID,
-													user_id: user._id,
-													roles: user.roles,
-													token: token,
-												},
-												companyContacts : companyContacts 
-											});
-										} else {
-											return res.status(200).json({
-												message: 'Auth failed'
-											});
-										}
-									}		
-								})
-
-								.catch(err => {
-									console.log("500 err ", err);
-									res.status(500).json({
-										message: "Failed to save token",
-										error: err
+		if (user){
+			main();
+			async function main(){
+				if((user.profile.status).toLowerCase() == "active") {
+					var pwd = user.services.password.bcrypt;
+					console.log('pwd', pwd);
+					if (pwd) {
+							bcrypt.compare(req.body.password, pwd, (err, result) => {
+								if (err) {
+									return res.status(200).json({
+										message: 'Auth failed'
 									});
-								});
-						} else {
-							return res.status(200).json({
-								message: 'INVALID_PASSWORD'
-							});
-						}
-					})
-				} else {
-					res.status(200).json({ message: "INVALID_PASSWORD",ID: user._id});
+								}
+								if (result) {
+									var login_token = user.services.resume.loginTokens.length > 0 && user.services.resume.loginTokens[user.services.resume.loginTokens.length-1].hashedToken !== undefined ? user.services.resume.loginTokens[user.services.resume.loginTokens.length-1].hashedToken : false;
+									if(login_token){
+										console.log("login_token",login_token);
+										res.status(200).json({
+											message: 'already_loggedin',
+											token: user.token,
+											ID: user._id,
+										});
+									}else{
+									const token = jwt.sign({
+										mobile: req.body.mobNumber,
+										userId: user._id,
+									}, globalVariable.JWT_KEY,
+										{
+											expiresIn: "365d"
+										}
+									);
+		
+									User.updateOne(
+										{ "username": mobNumber },
+										{
+											$push: {
+												"services.resume.loginTokens": {
+													whenLogin: new Date(),
+													hashedToken: token
+												}
+											}
+										}
+									)
+										.exec()
+										.then(updateUser => {
+											main();
+											async function main(){
+												var companyContacts = await getCompanyContacts(user.profile.companyID);
+												console.log("companyContacts",companyContacts);
+												if (updateUser.nModified == 1) {
+													
+														res.status(200).json({
+															message: 'Login Auth Successful',
+															token: token,
+															roles: user.roles,
+															ID: user._id,
+															companyID: user.profile.companyID,
+															passwordreset: user.profile.passwordreset,
+															username : user.username,
+															userDetails: {
+																firstName: user.profile.firstname,
+																lastName: user.profile.lastname,
+																email: user.profile.email,
+																phone: user.profile.phone,
+																passwordreset: user.profile.passwordreset,
+																city: user.profile.city,
+																companyID: user.profile.companyID,
+																locationID: user.profile.locationID,
+																user_id: user._id,
+																roles: user.roles,
+																token: token,
+															},
+															companyContacts : companyContacts 
+														});
+												
+												} else {
+													return res.status(200).json({
+														message: 'Auth failed'
+													});
+												}
+											}		
+										})
+		
+										.catch(err => {
+											console.log("500 err ", err);
+											res.status(500).json({
+												message: "Failed to save token",
+												error: err
+											});
+										});
+									}		
+								} else {
+									return res.status(200).json({
+										message: 'INVALID_PASSWORD'
+									});
+								}
+							})
+					} else {
+						res.status(200).json({ message: "INVALID_PASSWORD",ID: user._id});
+					}
+				} else if ((user.profile.status).toLowerCase() == "blocked") {
+					res.status(200).json({ message: "USER_BLOCK",ID: user._id });
+				} else if ((user.profile.status).toLowerCase() == "unverified") {
+					res.status(200).json({ message: "USER_UNVERIFIED",ID: user._id});
 				}
-			} else if ((user.profile.status).toLowerCase() == "blocked") {
-				res.status(200).json({ message: "USER_BLOCK",ID: user._id });
-			} else if ((user.profile.status).toLowerCase() == "unverified") {
-				res.status(200).json({ message: "USER_UNVERIFIED",ID: user._id});
 			}
 		} else {
 			res.status(200).json({ message: "NOT_REGISTER" });
@@ -897,6 +1011,59 @@ exports.user_login_using_mobile = (req, res, next) => {
 		});
 	});
 };
+
+function removeTokens(user_id){
+   return new Promise(function(resolve,reject){
+	User.findOne({ _id: user_id },{services:1})
+	.exec()
+	.then(user => {
+		var login_token = user.services.resume.loginTokens.length > 0 && user.services.resume.loginTokens[user.services.resume.loginTokens.length-1].hashedToken !== undefined ? user.services.resume.loginTokens[user.services.resume.loginTokens.length-1].hashedToken : false;
+			if(login_token){	
+				User.update(
+					{
+						"_id": user_id,
+						"services.resume.loginTokens.hashedToken":login_token
+					},
+					{
+						$set: {
+							"services.resume.loginTokens.$.logoutTimeStamp": new Date(),
+						},
+						$unset: {
+							"services.resume.loginTokens.$.hashedToken":1
+						}, 
+					})	
+					.exec()
+					.then(data => {
+						resolve(data);
+					})
+					.catch(err => {
+						console.log("err",err)
+					});
+			}else{
+				resolve("Not Found");
+			}	
+		})
+		.catch(err => {
+			console.log('update user status error ',err);
+		});
+    });
+}
+
+exports.checked_token = (req, res, next) => {
+	User.findOne({ _id: req.params.user_id },{services:1})
+	.exec()
+	.then(user => {
+	var login_token = user.services.resume.loginTokens.length > 0 && user.services.resume.loginTokens[user.services.resume.loginTokens.length-1].hashedToken !== undefined ? user.services.resume.loginTokens[user.services.resume.loginTokens.length-1].hashedToken : false;
+		if(req.params.token === login_token){
+			return res.status(200).json({token: true});
+		}else{
+			return res.status(200).json({token: false});
+		}
+	})
+	.catch(err => {
+		console.log('update user status error ',err);
+	});
+}
 
 function getCompanyContacts(companyID){
 	console.log("companyID",companyID)
@@ -915,7 +1082,7 @@ function getCompanyContacts(companyID){
     });
 }
 
-exports.user_login_with_companyID = (req, res, next) => { 
+exports.user_login_with_companyID = (req, res, next) => {
 	var emailId = (req.body.email).toLowerCase();
 	var role = (req.body.role).toLowerCase();
 	User.findOne({
@@ -924,10 +1091,9 @@ exports.user_login_with_companyID = (req, res, next) => {
 	})
 		.exec()
 		.then(user => {
-		if (user) {
-			if ((user.profile.status).toLowerCase() == "active") {
+			if (user) {
 				var loginTokenscount = user.services.resume.loginTokens.length;
-				
+				if (user.profile.companyID != "") {
 					if ((user.profile.status).toLowerCase() == "active") {
 						var pwd = user.services.password.bcrypt;
 						if (pwd) {
@@ -977,7 +1143,6 @@ exports.user_login_with_companyID = (req, res, next) => {
 														phone: user.profile.phone,
 														passwordreset: user.profile.passwordreset,
 														city: user.profile.city,
-														company_id: user.profile.company_id,
 														companyID: user.profile.companyID,
 														workLocation: user.profile.workLocation,
 														locationID: user.profile.locationID,
@@ -1019,13 +1184,9 @@ exports.user_login_with_companyID = (req, res, next) => {
 				} else if (user.profile.companyID == "") {
 					res.status(200).json({ message: "NO_COMPANYID" });
 				}
+			} else {
+				res.status(200).json({ message: "NOT_REGISTER" });
 			}
-			else if ((user.profile.status).toLowerCase() == "blocked") {
-				res.status(200).json({ message: "USER_BLOCK",ID: user._id });
-			} else if ((user.profile.status).toLowerCase() == "unverified") {
-				res.status(200).json({ message: "USER_UNVERIFIED",ID: user._id});
-			}
-		
 		})
 		.catch(err => {
 			console.log(err);
@@ -1190,6 +1351,48 @@ exports.logouthistory = (req, res, next) => {
 		});
 };
 
+exports.logout_mobile = (req, res, next) => {
+	// console.log("res -----");
+	console.log("res -----",req.body);
+	// var emailId = req.body.emailId;
+	User.findOne({ _id: req.body.user_id })
+		.exec()
+		.then(user => {
+			console.log("user",user);
+				User.updateOne(
+					{
+						"_id": req.body.user_id ,
+						"services.resume.loginTokens.hashedToken":req.body.token
+
+					},
+					{
+						$set: {
+							"services.resume.loginTokens.$.logoutTimeStamp": new Date(),
+						},
+						$unset: {
+							"services.resume.loginTokens.$.hashedToken":1
+						}, 
+					}	)	
+					.exec()
+					.then(data => {
+							res.status(201).json({data})
+					})
+					.catch(err => {
+						res.status(500).json({
+							message: "Failed to update User",
+							error: err
+						});
+					});
+					
+					})
+		.catch(err => {
+			console.log('update user status error ',err);
+			res.status(500).json({
+				error: err
+			});
+		});
+};
+
 exports.user_update_password_withoutotp_ID = (req, res, next) => {
 	User.findOne({ _id: req.params.ID })
 		.exec()
@@ -1213,7 +1416,7 @@ exports.user_update_password_withoutotp_ID = (req, res, next) => {
 						.then(data => {
 							console.log('update user data ',data);
 							if (data.nModified == 1) {
-								res.status(200).json({message:"Your password is changed successfully"});
+								res.status(200).json("PASSWORD_RESET");
 								// User.updateOne(
 								// 	{ "username": req.body.emailId.toLowerCase() },
 								// 	{
@@ -1236,7 +1439,7 @@ exports.user_update_password_withoutotp_ID = (req, res, next) => {
 								// 		});
 								
 							} else {
-								res.status(401).json({message:"Failed to reset password"});
+								res.status(401).json("PASSWORD_NOT_RESET");
 							}
 						})
 						.catch(err => {
@@ -1247,7 +1450,7 @@ exports.user_update_password_withoutotp_ID = (req, res, next) => {
 						});
 				});
 			} else {
-				res.status(404).json({message:"User Not Found"});
+				res.status(404).json("User Not Found");
 			}
 		})
 		.catch(err => {
@@ -1280,9 +1483,9 @@ exports.user_update_password_withoutotp_username = (req, res, next) => {
 						.exec()
 						.then(data => {
 							if (data.nModified == 1) {
-								res.status(200).json({message:"Your password is changed successfully"});
+								res.status(200).json("PASSWORD_RESET");
 							} else {
-								res.status(401).json({message:"Failed to reset password"});
+								res.status(401).json("PASSWORD_NOT_RESET");
 							}
 						})
 						.catch(err => {
@@ -1293,7 +1496,7 @@ exports.user_update_password_withoutotp_username = (req, res, next) => {
 						});
 				});
 			} else {
-				res.status(404).json({message:"User Not Found"});
+				res.status(404).json("User Not Found");
 			}
 		})
 		.catch(err => {
@@ -1328,9 +1531,9 @@ exports.user_update_password_with_emailOTP_ID = (req, res, next) => {
 						.exec()
 						.then(data => {
 							if (data.nModified == 1) {
-								res.status(200).json({message:"Your password is changed successfully"});
+								res.status(200).json("PASSWORD_RESET");
 							} else {
-								res.status(401).json({message:"Failed to reset password"});
+								res.status(401).json("PASSWORD_NOT_RESET");
 							}
 						})
 						.catch(err => {
@@ -1376,9 +1579,9 @@ exports.user_update_password_with_emailOTP_username = (req, res, next) => {
 						.exec()
 						.then(data => {
 							if (data.nModified == 1) {
-								res.status(200).json({message:"Your password is changed successfully"});
+								res.status(200).json("PASSWORD_RESET");
 							} else {
-								res.status(401).json({message:"Failed to reset password"});
+								res.status(401).json("PASSWORD_NOT_RESET");
 							}
 						})
 						.catch(err => {
@@ -1400,6 +1603,50 @@ exports.user_update_password_with_emailOTP_username = (req, res, next) => {
 		});
 };
 
+exports.set_send_emailOTPIDWith_usingID = (req, res, next) => {
+	var otpEmail = getRandomInt(1000, 9999);
+	User.updateOne(
+		{ _id: req.params.username },
+		{
+			$set: {
+				"profile.otpEmail": otpEmail,
+			},
+		}
+	)
+		.exec()
+		.then(data => {
+			if (data.nModified === 1) {
+				User.findOne({ _id: req.params.username })
+					.then(user => {
+						if (user) {
+							main();
+							async function main(){ 
+								res.status(200).json({ message: "OTP_UPDATED", otpEmail : otpEmail,ID: user._id })
+							 }
+						} else {
+							res.status(200).json({ message: "User not found" });
+						}
+					})
+					.catch(err => {
+						console.log('user error ', err);
+						res.status(500).json({
+							message: "Failed to find User",
+							error: err
+						});
+					});
+			} else {
+				console.log("data not modified");
+				res.status(401).json({ message: "OTP_NOT_UPDATED" })
+			}
+		})
+		.catch(err => {
+			console.log('user error ', err);
+			res.status(500).json({
+				message: "Failed to update User",
+				error: err
+			});
+		});
+};
 exports.set_send_emailotp_usingID = (req, res, next) => {
 	var otpEmail = getRandomInt(1000, 9999);
 	User.updateOne(
@@ -1416,33 +1663,10 @@ exports.set_send_emailotp_usingID = (req, res, next) => {
 				User.findOne({ _id: req.params.ID })
 					.then(user => {
 						if (user) {
-							// request({
-							// 	"method": "POST",
-							// 	"url": "http://localhost:" + globalVariable.port + "/send-email",
-							// 	"body": {
-							// 		email: user.profile.email,
-							// 		subject: req.body.emailSubject,
-							// 		text: req.body.emailContent + " " + otpEmail,
-							// 	},
-							// 	"json": true,
-							// 	"headers": {
-							// 		"User-Agent": "Test Agent"
-							// 	}
-							// })
-							// 	.then(source => {
-							// 		res.status(201).json({ message: "OTP_UPDATED" })
-							// 	})
-							// 	.catch(err => {
-							// 		console.log(err);
-							// 		res.status(500).json({
-							// 			message: "Failed to Send the send email",
-							// 			error: err
-							// 		});
-							// 	});
 							main();
 							async function main(){ 
 								var sendMail = await sendEmail(user.profile.email,req.body.emailSubject,req.body.emailContent + " Your OTP is " + otpEmail);
-								res.status(200).json({ message: "USER_CREATED", ID: user._id })
+								res.status(200).json({ message: "OTP_UPDATED", ID: user._id })
 							 }
 						} else {
 							res.status(200).json({ message: "User not found" });
@@ -1457,7 +1681,7 @@ exports.set_send_emailotp_usingID = (req, res, next) => {
 					});
 			} else {
 				console.log("data not modified");
-				res.status(401).json({ message: "USER_NOT_UPDATED" })
+				res.status(401).json({ message: "OTP_NOT_UPDATED" })
 			}
 		})
 		.catch(err => {
@@ -1473,18 +1697,18 @@ exports.set_send_mobileotp_usingID = (req, res, next) => {
 	User.findOne({ _id: req.params.ID})
 	.then(user => {
 		if(user){
-			var optMobile = 1234;
+			var otpMobile = getRandomInt(1000, 9999);
 			User.updateOne(
 			{ _id: req.params.ID},
 			{
 				$set: {
-					"profile.otpEmail": optMobile,
+					"profile.otpMobile": otpMobile,
 				},
 			})
 			.exec()
 			.then(data => {
 				// if (data.nModified === 1) {
-					res.status(201).json({ message: "OTP_UPDATED", userID: user._id })
+					res.status(201).json({ message: "OTP_UPDATED", userID: user._id,otpMobile:otpMobile,fullName:user.profile.fullName })
 				// } else {
 				// 	res.status(200).json({ message: "OTP_NOT_UPDATED" })
 				// }
@@ -1554,8 +1778,8 @@ exports.set_send_emailotp_usingEmail = (req, res, next) => {
 									// 	});
 									main();
 									async function main(){ 
-										var sendMail = await sendEmail(req.params.emailId,req.body.emailSubject,req.body.emailContent + " Your OTP is " + optEmail);
-										res.status(200).json({ message: "USER_CREATED", ID: user._id })
+										var sendMail = await sendEmail(req.params.emailId,req.body.emailSubject,req.body.emailContent + " Please enter this otp " + optEmail+ " to reset your password");
+										res.status(200).json({ message: "OTP_UPDATED", ID: user._id })
 									 }
 								} else {
 									res.status(200).json({ message: "User not found" });
@@ -1568,7 +1792,7 @@ exports.set_send_emailotp_usingEmail = (req, res, next) => {
 								});
 							});
 					} else {
-						res.status(401).json({ message: "USER_NOT_UPDATED" })
+						res.status(401).json({ message: "OTP_NOT_UPDATED" })
 					}
 				})
 				.catch(err => {
@@ -1598,21 +1822,22 @@ exports.set_send_emailotp_usingEmail = (req, res, next) => {
 };
 
 exports.set_send_mobileotp_usingMobile = (req, res, next) => {
-	User.findOne({ "profile.mobile": req.params.mobileNo })
+	User.findOne({ "username": req.params.mobileNo })
 	.then(user => {
 		if(user){
-			var optMobile = 1234;
+			var otpMobile = getRandomInt(1000, 9999);
 			User.updateOne(
-			{ "profile.mobile": req.params.mobileNo },
+			{ "username": req.params.mobileNo },
 			{
 				$set: {
-					"profile.otpEmail": optMobile,
+					"profile.otpMobile": otpMobile,
 				},
 			})
 			.exec()
-			.then(data => {
+			.then(async(data) => {
 				// if (data.nModified === 1) {
-					res.status(201).json({ message: "OTP_UPDATED", userID: user._id })
+					
+					res.status(201).json({ message: "OTP_UPDATED", userID: user._id ,fullName:user.profile.fullName,otpMobile:otpMobile})
 				// } else {
 				// 	res.status(200).json({ message: "OTP_NOT_UPDATED" })
 				// }

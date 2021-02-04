@@ -212,7 +212,7 @@ class EditNotificationModal extends Component{
 	        return (
 	        	<div>
 	        		{this.state.shown === true ? 
-					<div className="modal modalHide" id={"editNotifyModal-"+this.props.emailNot} role="dialog">
+					<div className="modal modalHide" id={"editNotifyModal-"+this.props.emailNot+"-"+this.props.token} role="dialog">
 					  	<div className="modal-dialog modal-lg" role="document">
 					    	<div className="modal-content modalContent col-lg-12 NOpadding">
 					      		<div className="modal-header adminModal-header col-lg-12 col-md-12 col-sm-12 col-xs-12">

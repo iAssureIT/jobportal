@@ -154,7 +154,7 @@ class TemplateList extends React.Component {
                         </ul>
                     </div>
                     <div className="col-md-9 col-sm-9">
-                        <TemplateContent templateValues={this.state.templateValues} getData={this.getData.bind(this)} company={this.state.companyname} status={this.state.status} />
+                        <TemplateContent token={this.props.token} templateValues={this.state.templateValues} getData={this.getData.bind(this)} company={this.state.companyname} status={this.state.status} />
                     </div>
                 </div>
                 :

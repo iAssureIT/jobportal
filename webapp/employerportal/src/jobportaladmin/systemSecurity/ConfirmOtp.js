@@ -45,6 +45,20 @@ class ConfirmOtp extends Component {
         [fieldKey]:fieldValue
       });
   }
+  validateForm=()=>{
+    var status = true;
+    if(this.refs.emailotp.value.length<=0){
+      document.getElementById("otpError").innerHTML=  
+      "Please enter OTP";  
+      status=false; 
+    }
+    else{
+      document.getElementById("otpError").innerHTML=  
+      ""; 
+      status = true;
+    }
+    return status;
+  }
   confirmOTP(event) {
     event.preventDefault();
     var url = this.props.match.params;
@@ -65,8 +79,9 @@ class ConfirmOtp extends Component {
       }
     
       //====================================
-    
-      axios.get('/api/auth/get/activate/usingID/' + this.props.match.params.userID + '/' + this.refs.emailotp.value)
+      var status =  this.validateForm();
+      if (status) {
+      axios.get('/api/auth/get/checkemailotp/usingID/' + this.props.match.params.userID + '/' + this.refs.emailotp.value)
         .then((response) => {
 
           if (response.data.message == 'SUCCESS') {
@@ -98,7 +113,7 @@ class ConfirmOtp extends Component {
         .catch((error) => {
           swal(error.response.data.message);
         })
-    
+      }
 
   }
   inputEffect(event) {
@@ -164,6 +179,7 @@ class ConfirmOtp extends Component {
                             <span className="input-group-addon confirmOTPInputIcon1"><i className="fa fa-envelope"></i></span>
                             <input type="text" id="otp" name="otp" ref="emailotp" placeholder="Enter your OTP" value={this.state.OTP} onChange={this.handleChange.bind(this)} className="form-control confirmOTPInputBox"/>
                         </div>
+                        <span id="otpError" className="errorMsg"></span>
                     </div>
 
 

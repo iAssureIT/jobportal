@@ -22,6 +22,7 @@ import GlobalMasters    from '../companysetting/Components/GlobalMasters.js';
 import TechnicalMaster  from '../companysetting/Components/TechnicalMasters.js';
 import Preferences      from '../companysetting/Components/Preferences.js';
 import EventToken from '../NotificationManagement/EventToken.js';
+import CreateTemplateNew from '../NotificationManagement/CreateTemplateNew.js';
 import NotificationTemplate from '../NotificationManagement/NotificationTemplate.js';
 
 //============ Entity Master ======================
@@ -105,6 +106,7 @@ class CoreLayout extends Component {
                 <Route path="/ViewAllNotification" component={ViewAllNotification} exact />
                 <Route path="/EventToken" component={EventToken} exact />
                 <Route path="/ViewTemplates" component={NotificationTemplate} exact />
+                <Route path="/CreateTemplate" component={CreateTemplateNew} exact />
 
                 
                 <Route path="/technicalMaster/location-type" exact strict component={LocationType} />

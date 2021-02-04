@@ -322,7 +322,7 @@ class NotificationTemplate extends React.Component {
 													<h5 className="box-title2 col-lg-2 col-md-11 col-sm-11 col-xs-12 nopadding">Filtered :&nbsp;&nbsp;<b>{this.state.filteredTemplatesCount}</b></h5>
 
 												</div>
-										{/*		<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding firstElement filterWrapper rowPadding">
+												<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding firstElement filterWrapper rowPadding">
 													<div className="col-lg-2 col-md-12 col-sm-12 col-xs-12 nopadding">
 														<button type="button" className="reset selheight" onClick={this.resetFilter.bind(this)}>RESET FILTERS</button>
 													</div>
@@ -378,7 +378,7 @@ class NotificationTemplate extends React.Component {
 	                                                        }
 	                                                    </select>
 													</div>
-												</div>*/}
+												</div>
    											<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 mrgTp1">
 												<ul className="nav nav-pills nav-justified" id="navContents">
 											      <li className="active" onClick={this.clickTab.bind(this,'Email')}>
@@ -394,13 +394,13 @@ class NotificationTemplate extends React.Component {
 
                 								<div className="tab-content" id="nav-tabContent">
 								                  <div className="tab-pane fade in active" id="email" role="tabpanel">
-								                        <TemplateList type={this.state.type} filteredSelectors={this.state.filteredSelectors} />
+								                        <TemplateList type={this.state.type} token="E" filteredSelectors={this.state.filteredSelectors} />
 								                  </div>
 								                  <div className="tab-pane fade" id="sms" role="tabpanel">
-								                        <TemplateList type={this.state.type} filteredSelectors={this.state.filteredSelectors} />
+								                        <TemplateList type={this.state.type} token="S" filteredSelectors={this.state.filteredSelectors} />
 								                  </div>
 								                  <div className="tab-pane fade" id="notification" role="tabpanel">
-								                        <TemplateList type={this.state.type} filteredSelectors={this.state.filteredSelectors} />
+								                        <TemplateList type={this.state.type} token="N" filteredSelectors={this.state.filteredSelectors} />
 								                  </div>
 	               								</div>
    											</div>
