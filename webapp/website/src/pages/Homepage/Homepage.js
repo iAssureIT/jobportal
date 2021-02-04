@@ -79,12 +79,10 @@ class HomePage extends Component {
     
     return (
       <div className="ViewBodyWrapper container-fluid">
-<<<<<<< Updated upstream
 
-=======
         {/*  <Loader type="placeholderloader"  />
           */}
->>>>>>> Stashed changes
+
           <div className="filterDiv col-lg-12">
 
             <div className="row">
