@@ -377,8 +377,8 @@ exports.user_signup_user_otp = (req, res, next) => {
 															// 	});
 															main();
 										                        async function main(){ 
-											                    	var sendMail = await sendEmail(req.body.email,req.body.emailSubject,req.body.emailContent + " Your OTP is " + emailOTP);
-											                    	res.status(200).json({ message: "USER_CREATED", ID: result._id })
+											                    	//var sendMail = await sendEmail(req.body.email,req.body.emailSubject,req.body.emailContent + " Your OTP is " + emailOTP);
+											                    	res.status(200).json({ message: "USER_CREATED", ID: result._id, OTP:emailOTP })
 											                     }
 															}else {
 																res.status(200).json({ message: "USER_NOT_CREATED" })
@@ -1133,6 +1133,7 @@ exports.user_login_with_companyID = (req, res, next) => {
 													token: token,
 													roles: user.roles,
 													ID: user._id,
+													company_id: user.profile.company_id, 
 													companyID: user.profile.companyID,
 													loginTime: user.services.resume.loginTokens,
 													passwordreset: user.profile.passwordreset,
@@ -1143,6 +1144,7 @@ exports.user_login_with_companyID = (req, res, next) => {
 														phone: user.profile.phone,
 														passwordreset: user.profile.passwordreset,
 														city: user.profile.city,
+														company_id:user.profile.company_id,
 														companyID: user.profile.companyID,
 														workLocation: user.profile.workLocation,
 														locationID: user.profile.locationID,

@@ -220,7 +220,7 @@ class SignUp extends Component {
         companyID   : this.state.employerID != "" ? this.state.employerID : null,
         companyName : this.state.employerName,
         role        : 'employer',
-        status      : 'blocked',
+        status      : 'unverified',
         "emailSubject"  : "Email Verification", 
         "emailContent"  : "As part of our registration process, we screen every new profile to ensure its credibility by validating email provided by user. While screening the profile, we verify that details put in by user are correct and genuine.",
       }
@@ -234,6 +234,36 @@ class SignUp extends Component {
           if(response.data.message == 'USER_CREATED'){
             swal('Great, Information submitted successfully and OTP is sent to your registered Email.');
             localStorage.setItem('previousUrl' ,'signup');
+
+            var sendData = {
+              "event"     : "Event1", //Event Name
+              "toUser_id"  : response.data.ID, //To user_id(ref:users)
+              "toUserRole"  : "employer",
+              "variables" : {
+                "UserName": this.state.firstName,
+                "OTP"     : response.data.OTP,
+              }
+            }
+            // console.log('sendData in result==>>>', sendData)
+            
+            axios.post('/api/masternotifications/post/sendNotification', sendData)
+              .then((notificationres) => {})
+              .catch((error) => { console.log('notification error: ', error) })
+
+            var sendData2 = {
+              "event": "Event2", //Event Name
+              "toUser_id": response.data.ID, //To user_id(ref:users)
+              "variables": {
+                'UserName': this.state.firstName + ' ' + this.state.lastName,
+                'EmployerName': this.state.employerName,
+                'EmployerID': this.state.employerID,
+                'EmployerEmailID': this.state.emailAddress,
+                'EmployerContactNumber': (this.state.mobileNumber).replace("-", "")
+              }
+            }
+            axios.post('/api/masternotifications/post/sendNotification', sendData2)
+              .then((notificationres) => {})
+              .catch((error) => { console.log('notification error: ', error) })  
             this.props.history.push("/confirm-otp/" + response.data.ID);
           }else{
             swal(response.data.message);

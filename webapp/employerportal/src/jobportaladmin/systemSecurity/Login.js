@@ -100,55 +100,48 @@ class Login extends Component {
         axios.post('/api/auth/post/loginwithcompanyid', auth)
           .then((response) => {
             console.log("response login",response);
+            if (response.data.message == "Login Auth Successful") { 
+              axios.get('/api/entitymaster/getEntity/'+response.data.userDetails.company_id)
+              .then((resp) => {
+                console.log("resp login",resp);
+                
+                  this.setState({ btnLoading: false });
+                  var  userDetails = {
+                  firstName : response.data.userDetails.firstName, 
+                  lastName  : response.data.userDetails.lastName, 
+                  email     : response.data.userDetails.email, 
+                  phone     : response.data.userDetails.phone, 
+                  city      : response.data.userDetails.city,
+                  company_id : response.data.userDetails.company_id,
+                  companyID : response.data.userDetails.companyID,
+                  companyName : response.data.userDetails.companyName,
+                  user_id   : response.data.userDetails.user_id,
+                  roles     : response.data.userDetails.roles,
+                  token     : response.data.userDetails.token, 
+                  industry_id   : resp.data.industry_id
+                  //loginTime : response.data.userDetails.loginTime, 
+                }
 
-            axios.get('/api/entitymaster/getEntity/'+response.data.userDetails.company_id)
-            .then((resp) => {
-              console.log("resp login",resp);
-              if (response.data.ID) {
-                this.setState({ btnLoading: false });
-                var  userDetails = {
-                firstName : response.data.userDetails.firstName, 
-                lastName  : response.data.userDetails.lastName, 
-                email     : response.data.userDetails.email, 
-                phone     : response.data.userDetails.phone, 
-                city      : response.data.userDetails.city,
-                company_id : response.data.userDetails.company_id,
-                companyID : response.data.userDetails.companyID,
-                companyName : response.data.userDetails.companyName,
-                user_id   : response.data.userDetails.user_id,
-                roles     : response.data.userDetails.roles,
-                token     : response.data.userDetails.token, 
-                industry_id   : resp.data.industry_id
-                //loginTime : response.data.userDetails.loginTime, 
+                localStorage.setItem('userDetails', JSON.stringify(userDetails));
+
+                var {mapAction} = this.props;
+                mapAction.setUserDetails(userDetails);
+   
+                this.setState({ loggedIn: true }, () => {
+                    if (response.data.userDetails.company_id) {
+                      window.location.href='/post-job'
+                    }else{
+                      window.location.href= '/corporate/basic-details'
+                    }
+                  })
+                })
+              .catch((error) => {});
               }
 
-              
-              /*localStorage.setItem("token", response.data.token);
-              localStorage.setItem("user_ID", response.data.ID);
-              localStorage.setItem("roles", response.data.roles);
-              localStorage.setItem("loginTime", response.data.loginTime);
-              
-              localStorage.setItem("company_Id",response.data.userDetails.company_id); 
-              localStorage.setItem("companyID", response.data.userDetails.companyID);
-              localStorage.setItem("industry_id",resp.data.industry_id); */
-              localStorage.setItem('userDetails', JSON.stringify(userDetails));
+              else if (response.data.message === "USER_BLOCK") {
 
-              var {mapAction} = this.props;
-              mapAction.setUserDetails(userDetails);
- 
-              this.setState({
-                  loggedIn: true
-                }, () => {
-                  if (response.data.userDetails.company_id) {
-                    window.location.href='/post-job'
-                  }else{
-                    window.location.href= '/corporate/basic-details'
-                  }
-                  
-                })
-              } else if (response.data.message === "USER_BLOCK") {
                 swal({
-                  text: "You are blocked by admin. Please contact Admin."
+                  text: "Your account is not active. Please contact Admin."
                 });
                 
               } else if (response.data.message === "NOT_REGISTER") {
@@ -180,8 +173,7 @@ class Login extends Component {
                       })
                   });
               }
-            })
-            .catch((error) => {});
+            
           })
           .catch((error) => {
             console.log("error", error);
