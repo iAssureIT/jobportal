@@ -1649,10 +1649,10 @@ exports.set_send_emailOTPIDWith_usingID = (req, res, next) => {
 			});
 		});
 };
-exports.set_send_emailotp_usingID = (req, res, next) => {
+exports.set_otp_usingID = (req, res, next) => {
 	var otpEmail = getRandomInt(1000, 9999);
 	User.updateOne(
-		{ _id: req.params.ID },
+		{ _id: req.body.userid },
 		{
 			$set: {
 				"profile.otpEmail": otpEmail,
@@ -1662,14 +1662,10 @@ exports.set_send_emailotp_usingID = (req, res, next) => {
 		.exec()
 		.then(data => {
 			if (data.nModified === 1) {
-				User.findOne({ _id: req.params.ID })
+				User.findOne({ _id: req.body.userid })
 					.then(user => {
 						if (user) {
-							main();
-							async function main(){ 
-								var sendMail = await sendEmail(user.profile.email,req.body.emailSubject,req.body.emailContent + " Your OTP is " + otpEmail);
-								res.status(200).json({ message: "OTP_UPDATED", ID: user._id })
-							 }
+							res.status(200).json({ message: "OTP_UPDATED", ID: user._id, OTP:optEmail, firstName:user.profile.firstname })
 						} else {
 							res.status(200).json({ message: "User not found" });
 						}
@@ -1737,8 +1733,8 @@ exports.set_otp_usingEmail = (req, res, next) => {
 	User.findOne({ "profile.email": req.body.email })
 	.then(user => {
 		if(user){
-			console.log('user status====',user.profile.status)
- 			if ((user.profile.status).toLowerCase() === "active") {
+			console.log('user status====',user.profile.status )
+ 			if ((user.profile.status).toLowerCase() === "active" || (user.profile.status).toLowerCase() == "unverified") {
  				var optEmail = getRandomInt(1000, 9999);
 				console.log("optEmail", optEmail, req.body);
 				User.updateOne(
@@ -1779,11 +1775,10 @@ exports.set_otp_usingEmail = (req, res, next) => {
  			}else if ((user.profile.status).toLowerCase() == "blocked") {
 				console.log("user.USER_BLOCK IN ==>")
 				res.status(200).json({ message: "USER_BLOCK" });
-			} else if ((user.profile.status).toLowerCase() == "unverified") {
+			} 
+			/*else if ((user.profile.status).toLowerCase() == "unverified") {
 				res.status(200).json({ message: "USER_UNVERIFIED" });
-			}
-
-	
+			}*/
 		}else{
 			res.status(200).json({ message: "NOT_REGISTER" })
 		}		

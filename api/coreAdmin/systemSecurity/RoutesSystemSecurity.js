@@ -17,7 +17,7 @@ router.patch('/patch/change_password_withoutotp/username/:username',UserControll
 
 router.patch('/patch/sendOTPwithemail/:username',UserController.set_send_emailOTPIDWith_usingID);
 
-router.patch('/patch/setsendemailotpusingID/:ID',UserController.set_send_emailotp_usingID); 
+router.patch('/patch/setotpusingID',UserController.set_otp_usingID); 
 router.patch('/patch/setotpusingEmail',UserController.set_otp_usingEmail);
 
 //API for driver app

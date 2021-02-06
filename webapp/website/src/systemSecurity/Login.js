@@ -105,6 +105,7 @@ class Login extends Component {
         role: "candidate"
       }
       var status =  this.validateForm();
+      var {mapAction} = this.props;
       if (status) {
       
         this.setState({ btnLoading: true });
@@ -135,7 +136,7 @@ class Login extends Component {
                  document.getElementById("closeModalButton").click();
                  document.getElementById("closeAsidebarButton").click();
               
-              var {mapAction} = this.props;
+             
               mapAction.setUserDetails(userDetails);
 
               this.setState({
@@ -167,15 +168,27 @@ class Login extends Component {
               swal({
                 text: "You have not verified your account. Please verify your account."
               })
-                .then((value) => {
-                  var emailText = {
-                    "emailSubject": "Email Verification",
-                    "emailContent": "As part of our registration process, we screen every new profile to ensure its credibility by validating email provided by user. While screening the profile, we verify that details put in by user are correct and genuine.",
-                  }
-                  axios.patch('/api/auth/patch/setsendemailotpusingEmail/' + this.refs.loginusername.value, emailText)
+                .then((value) => { 
+                  var formValues = { email : this.refs.loginusername.value }
+                  
+                  axios.patch('/api/auth/patch/setotpusingEmail', formValues)
                     .then((response) => {
+                    var sendData = {
+                      "event"     : "Event3", //Event Name
+                      "toUser_id"  : response.data.ID, //To user_id(ref:users)
+                      "toUserRole"  : "candidate",
+                      "variables" : {
+                        "UserName": response.data.firstName,
+                        "OTP"     : response.data.OTP,
+                      }
+                    }
+                    axios.post('/api/masternotifications/post/sendNotification', sendData)
+                    .then((notificationres) => {})
+                    .catch((error) => { console.log('notification error: ', error) })
+
                       swal("We send you a Verification Code to your registered email. Please verify your account.");
-                      this.props.history.push("/confirm-otp/" + response.data.userID);
+                      mapAction.setUserID(response.data.ID);
+                      mapAction.setSelectedModal("confirmotp");
                     })
                     .catch((error) => {
                       swal(" Failed to sent OTP");
