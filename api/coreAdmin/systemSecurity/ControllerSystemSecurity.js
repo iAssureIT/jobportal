@@ -1733,8 +1733,8 @@ exports.set_send_mobileotp_usingID = (req, res, next) => {
 	});
 };
 
-exports.set_send_emailotp_usingEmail = (req, res, next) => {
-	User.findOne({ "profile.email": req.params.emailId })
+exports.set_otp_usingEmail = (req, res, next) => {
+	User.findOne({ "profile.email": req.body.email })
 	.then(user => {
 		if(user){
 			console.log('user status====',user.profile.status)
@@ -1742,7 +1742,7 @@ exports.set_send_emailotp_usingEmail = (req, res, next) => {
  				var optEmail = getRandomInt(1000, 9999);
 				console.log("optEmail", optEmail, req.body);
 				User.updateOne(
-					{ "profile.email": req.params.emailId },
+					{ "profile.email": req.body.email },
 					{
 						$set: {
 							"profile.otpEmail": optEmail,
@@ -1752,37 +1752,10 @@ exports.set_send_emailotp_usingEmail = (req, res, next) => {
 				.exec()
 				.then(data => {
 					if (data.nModified === 1) {
-						User.findOne({ "profile.email": req.params.emailId })
+						User.findOne({ "profile.email": req.body.email })
 							.then(user => {
 								if (user) {
-
-									// request({
-									// 	"method": "POST",
-									// 	"url": "http://localhost:" + globalVariable.port + "/send-email",
-									// 	"body": {
-									// 		email: user.profile.email,
-									// 		subject: req.body.emailSubject,
-									// 		text: req.body.emailContent + " " + optEmail,
-									// 	},
-									// 	"json": true,
-									// 	"headers": {
-									// 		"User-Agent": "Test Agent"
-									// 	}
-									// })
-									// 	.then(source => {
-									// 		res.status(201).json({ message: "OTP_UPDATED", userID: user._id })
-									// 	})
-									// 	.catch(err => {
-									// 		res.status(500).json({
-									// 			message: "Failed to Send the send email",
-									// 			error: err
-									// 		});
-									// 	});
-									main();
-									async function main(){ 
-										var sendMail = await sendEmail(req.params.emailId,req.body.emailSubject,req.body.emailContent + " Please enter this otp " + optEmail+ " to reset your password");
-										res.status(200).json({ message: "OTP_UPDATED", ID: user._id })
-									 }
+									res.status(200).json({ message: "OTP_UPDATED", ID: user._id, OTP:optEmail, firstName:user.profile.firstname })
 								} else {
 									res.status(200).json({ message: "User not found" });
 								}

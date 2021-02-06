@@ -33,26 +33,40 @@ class ForgotPassword extends Component {
         
         var email = this.refs.emailAddress.value;
         var formValues = {
-            username : email,
-            "emailSubject"	: "Email Verification", 
-			"emailContent"  : "As part of our registration process, we screen every new profile to ensure its credibility by validating email provided by user. While screening the profile, we verify that details put in by user are correct and genuine.",
+            email : email,
+           // "emailSubject"	: "Email Verification", 
+		   //"emailContent"  : "As part of our registration process, we screen every new profile to ensure its credibility by validating email provided by user. While screening the profile, we verify that details put in by user are correct and genuine.",
         }
-            
+             
             $('.fullpageloader').show();
-            axios.patch('/api/auth/patch/setsendemailotpusingEmail/'+email, formValues)
+            axios.patch('/api/auth/patch/setotpusingEmail', formValues)
             .then((response)=>{
               
                 console.log('forgotpassword res===',response.data)
                 if (response.data.ID) {
+                    var sendData = {
+                      "event"     : "Event3", //Event Name
+                      "toUser_id"  : response.data.ID, //To user_id(ref:users)
+                      "toUserRole"  : "employer",
+                      "variables" : {
+                        "UserName": response.data.firstName,
+                        "OTP"     : response.data.OTP,
+                      }
+                    }
+                    axios.post('/api/masternotifications/post/sendNotification', sendData)
+                .then((notificationres) => {})
+                .catch((error) => { console.log('notification error: ', error) })
+
                     localStorage.setItem('previousUrl' ,'forgotpassword');
                     $('.fullpageloader').hide();
                     swal("OTP send to your registered email ID.");
+
                     this.props.history.push('/confirm-otp/'+response.data.ID);
                 } else if(response.data.message == "USER_BLOCK"){
                     console.log("In USER_BLOCK")
                     swal({
-                      title: "You are blocked by admin. Please contact Admin.",
-                      text: "You are blocked by admin. Please contact Admin."
+                      title: "Your account is inactive. Please contact Admin.",
+                      text: "Your account is inactive. Please contact Admin."
                     });
                     this.props.history.push('/login');
 

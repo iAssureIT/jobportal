@@ -242,10 +242,24 @@ class SignUp extends Component {
 
             var {mapAction} = this.props;
             mapAction.setUserID(response.data.ID);
-            mapAction.setSelectedModal("confirmotp");
+            //mapAction.setSelectedModal("confirmotp");
+            var sendData = {
+              "event"     : "Event1", //Event Name
+              "toUser_id"  : response.data.ID, //To user_id(ref:users)
+              "toUserRole"  : "candidate",
+              "variables" : {
+                "UserName": this.state.firstName,
+                "OTP"     : response.data.OTP,
+              }
+            }
+            // console.log('sendData in result==>>>', sendData)
             
+            axios.post('/api/masternotifications/post/sendNotification', sendData)
+              .then((notificationres) => {})
+              .catch((error) => { console.log('notification error: ', error) })
 
-						//this.props.history.push("/confirm-otp/" + response.data.ID);
+
+						this.props.history.push("/confirm-otp/" + response.data.ID);
 					}else{
 						swal(response.data.message);
 					}	
