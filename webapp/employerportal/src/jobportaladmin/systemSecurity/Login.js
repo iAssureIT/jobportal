@@ -20,6 +20,8 @@ class Login extends Component {
       showPassword: false,
       btnLoading: false,
       loggedIn: false,
+      loginusername: "",
+      password: "",
       auth: {
         email: '',
         pwd: '',
@@ -45,20 +47,24 @@ class Login extends Component {
   validateForm=()=>{
     var status = true;
     // var tempEmail = this.state.email.trim(); // value of field with whitespace trimmed off
-  var emailFilter = /^[^@]+@[^@.]+\.[^@]*\w\w$/;
+ var emailFilter = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+       var tempEmail = this.state.loginusername.trim(); 
        var illegalChars = /[\(\)\<\>\,\;\:\\\"\[\]]/;
        //var phoneno = /^\d{10}$/;
 
-    if(this.state.loginusername.match(emailFilter)){
+    if(this.state.loginusername.length<=0){
       document.getElementById("loginusernameError").innerHTML=  
-      ""; 
-      status = true;
-      
-    }else{
-      document.getElementById("loginusernameError").innerHTML=  
-      "Please enter valid Mobile Number";  
+      "Please enter your Email";  
       status=false; 
+    }else if (
+      !emailFilter.test(tempEmail)) { //test email for illegal characters
+          document.getElementById('loginusernameError').innerHTML = "Please enter a valid email address.";
+      } else{
+      document.getElementById("loginusernameError").innerHTML=
+      " ."; 
+      status = true;
     }
+    
     if(this.state.password.length<=0){
       document.getElementById("passwordError").innerHTML=  
       "Please enter Password";  
@@ -255,19 +261,19 @@ class Login extends Component {
                 </div>
                 
                 <div className="loginSocialMedia">
-                  <div className="loginSocialMediaInner">
+                  {/*<div className="loginSocialMediaInner">
                     <div className="loginLinkedIn"><i className="fa fa-linkedin"></i></div>
                     <div className="loginGoogle"><i className="fa fa-google"></i></div>
-                  </div>    
+                  </div>    */}
                 </div>
                 
 
-                <div className="loginOr col-lg-12">
+               {/* <div className="loginOr col-lg-12">
                   <hr className="loginHr"/>
                   <div className="loginOrText">or
                   </div>
                   <hr className="loginHr"/>
-                </div>
+                </div>*/}
                 
 
                     <div className="col-lg-12 form-group loginFormGroup" >

@@ -993,11 +993,12 @@ render(){
                                                         </div>
 													</label>
 												</div>
+
 												<div className="input-group">
 													<span className="input-group-addon addJobFormField"><i className="fa fa-briefcase"></i> </span> 
 													<input type="text" className="form-control addJobFormField" name="jobTitle" id="jobTitle" maxLength="50" value={this.state.jobTitle} onChange={this.handleChange}/>
 												</div>
-												<span id="jobTitleError" className="errorMsgJobPost"></span>
+												<span id="jobTitleError" className="errorMsg"></span>
 											</div>
 											
 											<div className="col-lg-6">
@@ -1055,7 +1056,7 @@ render(){
 														)}
 		                                      		</PlacesAutocomplete>
 												</div>
-                                                <span id="addressError" className="errorMsgJobPost"></span>
+                                                <span id="addressError" className="errorMsg"></span>
 											</div>
 										</div>
 									</div>
@@ -1070,7 +1071,7 @@ render(){
                                                     <input type="text" className="form-control addJobFormField addJobState" ref="states" id="states" name="states" value={this.state.states} onChange={this.handleChange}/>
 													
 												</div>
-                                                <span id="statesError" className="errorMsgJobPost"></span>	
+                                                <span id="statesError" className="errorMsg"></span>	
 											</div>	
 											
 											<div className="col-lg-3 addJobFixzIndex">
@@ -1080,7 +1081,7 @@ render(){
 												<div className="input-group"> 
 													<input type="text" className="form-control addJobFormField addJobState" ref="cityVillage" id="cityVillage" name="cityVillage" maxLength="50" value={this.state.cityVillage} onChange={this.handleChange}/>
 												</div>
-                                                <span id="cityVillageError" className="errorMsgJobPost"></span>
+                                                <span id="cityVillageError" className="errorMsg"></span>
 											</div>
 											
 											<div className="col-lg-3 addJobFixzIndex">
@@ -1090,7 +1091,7 @@ render(){
 												<div className="input-group"> 
 													<input type="text" className="form-control addJobFormField addJobState" ref="district" id="district" name="district" maxLength="50" value={this.state.district} onChange={this.handleChange}/>
 												</div>
-                                                <span id="districtError" className="errorMsgJobPost"></span>
+                                                <span id="districtError" className="errorMsg"></span>
 											</div>
 											
 											<div className="col-lg-3 addJobFixzIndex">
@@ -1100,7 +1101,7 @@ render(){
 												<div className="input-group"> 
 													<input type="text" className="form-control addJobFormField addJobState" ref="pincode" id="pincode" name="pincode" maxLength="06" value={this.state.pincode} onChange={this.keyPressNumber.bind(this)}/>
 												</div>
-                                                <span id="pincodeError" className="errorMsgJobPost"></span>
+                                                <span id="pincodeError" className="errorMsg"></span>
 											</div>
 										</div>
 									</div>
@@ -1121,7 +1122,7 @@ render(){
 														    )}
 														</datalist>
 												</div>
-                                                <span id="functionalAreaError" className="errorMsgJobPost"></span>
+                                                <span id="functionalAreaError" className="errorMsg"></span>
 											</div>			
 											
 											<div className="col-lg-6 addJobFixzIndex">
@@ -1137,7 +1138,7 @@ render(){
                                                             )}
                                                         </datalist>
 												</div>
-                                                <span id="subFunctionalAreaError" className="errorMsgJobPost"></span>
+                                                <span id="subFunctionalAreaError" className="errorMsg"></span>
 											</div>
 										</div>
 									</div>
@@ -1164,7 +1165,7 @@ render(){
                                                             </datalist>
                                                         </div>
 												</div>
-												<span id="jobRoleError" className="errorMsgJobPost"></span>
+												<span id="jobRoleError" className="errorMsg"></span>
 											</div>
 											
 											<div className="col-lg-6">
@@ -1212,6 +1213,7 @@ render(){
                                                             )}
                                                         </datalist>
 												</div>
+                                                <span id="jobTypeError" className="errorMsg"></span>
 											</div>
 											
 											<div className="col-lg-4">
@@ -1226,6 +1228,7 @@ render(){
                                                             )}
                                                         </datalist>
 												</div>
+                                                <span id="jobTimeError" className="errorMsg"></span>
 											</div>
 											
 											<div className="col-lg-4">
@@ -1240,6 +1243,7 @@ render(){
                                                             )}
                                                         </datalist>
 												</div>
+                                                <span id="jobCategoryError" className="errorMsg"></span>
 											</div>
 										</div>
 									</div>
@@ -1254,6 +1258,7 @@ render(){
 													<span className="input-group-addon addJobFormField"><i className="fa fa-users"></i></span> 
 													<input type="text" className="form-control addJobFormField" name="positions" id="positions" maxLength="50" value={this.state.positions} onChange={this.handleChange}/>
 												</div>
+                                                <span id="positionsError" className="errorMsg"></span>
 											</div>
 											
 											<div className="col-lg-4 democlass">
@@ -1262,6 +1267,7 @@ render(){
 													<span className="input-group-addon addJobFormField"><i className="fa fa-calendar"></i></span> 
 													<input type="date" className="form-control addJobFormField" name="lastDateOfAppl" id="lastDateOfAppl" value={this.state.lastDateOfAppl} onChange={this.handleChange}/>
 												</div>
+                                                <span id="dateError" className="errorMsg"></span>
 											</div>
 										</div>	
 									</div>
@@ -1283,6 +1289,7 @@ render(){
 															<span className="input-group-addon addJobFormField"> <i className="fa fa-rupee addJobrupee"></i> </span> 
 															<input type="text" className="form-control addJobFormField" name="minSalary" id="minSalary" maxLength="50" value={this.state.minSalary} onChange={this.handleChange}/>
 														</div>
+                                                        <span id="minSalaryError" className="errorMsg"></span>
 													</div>
 													
 													<div className="col-lg-4">
