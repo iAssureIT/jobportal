@@ -14,21 +14,13 @@ router.patch('/patch/logout',UserController.logouthistory); //Working
 router.patch('/patch/change_password_withoutotp/id/:ID',UserController.user_update_password_withoutotp_ID);
 
 router.patch('/patch/change_password_withoutotp/username/:username',UserController.user_update_password_withoutotp_username);
-<<<<<<< Updated upstream
 
 router.patch('/patch/sendOTPwithemail/:username',UserController.set_send_emailOTPIDWith_usingID);
 
 router.patch('/patch/setotpusingID',UserController.set_otp_usingID); 
 router.patch('/patch/setotpusingEmail',UserController.set_otp_usingEmail);
 
-=======
 
-router.patch('/patch/sendOTPwithemail/:username',UserController.set_send_emailOTPIDWith_usingID);
-
-router.patch('/patch/setsendemailotpusingID/:ID',UserController.set_send_emailotp_usingID);
-router.patch('/patch/setsendemailotpusingEmail/:emailId',UserController.set_send_emailotp_usingEmail);
-
->>>>>>> Stashed changes
 //API for driver app
 router.post('/post/login/mobile',UserController.user_login_using_mobile); //Working
 router.post('/post/signup_user', UserController1.user_signup_user); //Working
