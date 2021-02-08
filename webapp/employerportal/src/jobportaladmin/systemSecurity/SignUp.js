@@ -220,9 +220,11 @@ class SignUp extends Component {
         companyID   : this.state.employerID != "" ? this.state.employerID : null,
         companyName : this.state.employerName,
         role        : 'employer',
+
         status      : 'unverified',
-        "emailSubject"  : "Email Verification", 
-        "emailContent"  : "As part of our registration process, we screen every new profile to ensure its credibility by validating email provided by user. While screening the profile, we verify that details put in by user are correct and genuine.",
+
+       
+        
       }
 
       
@@ -264,6 +266,7 @@ class SignUp extends Component {
             axios.post('/api/masternotifications/post/sendNotification', sendData2)
               .then((notificationres) => {})
               .catch((error) => { console.log('notification error: ', error) })  
+
             this.props.history.push("/confirm-otp/" + response.data.ID);
           }else{
             swal(response.data.message);

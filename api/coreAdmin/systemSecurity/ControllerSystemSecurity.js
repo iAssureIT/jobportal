@@ -630,6 +630,7 @@ exports.check_signup_userID_mobileOTP = (req, res, next) => {
 						console.log('user error ', err);
 						res.status(500).json({
 							message: "Failed to update Mobile OTP",
+<<<<<<< Updated upstream
 							error: err
 						});
 					})
@@ -672,6 +673,8 @@ exports.check_signup_userID_mobileOTP = (req, res, next) => {
 						console.log('user error ', err);
 						res.status(500).json({
 							message: "Failed to update Mobile OTP",
+=======
+>>>>>>> Stashed changes
 							error: err
 						});
 					})
@@ -689,6 +692,51 @@ exports.check_signup_userID_mobileOTP = (req, res, next) => {
 };
 
 exports.check_signup_userID_mobileOTP = (req, res, next) => {
+<<<<<<< Updated upstream
+=======
+	User.find({ _id: ObjectID(req.params.ID), "profile.otpMobile": req.params.mobileotp })
+		.exec()
+		.then(data => {
+			if (data.length > 0) {
+				User.updateOne(
+					{ _id: ObjectID(req.params.ID) },
+					{
+						$set: {
+							"profile.otpMobile": 0,
+							"profile.status": "blocked"
+						}
+					}
+				)
+					.exec()
+					.then(data => {
+						if (data.nModified === 1) {
+							res.status(200).json({ message: "SUCCESS", userID: data._id });
+						} else {
+							res.status(200).json({ message: "SUCCESS_OTP_NOT_RESET" });
+						}
+					})
+					.catch(err => {
+						console.log('user error ', err);
+						res.status(500).json({
+							message: "Failed to update Mobile OTP",
+							error: err
+						});
+					})
+			} else {
+				res.status(200).json({ message: "FAILED" });
+			}
+		})
+		.catch(err => {
+			console.log('user error ', err);
+			res.status(500).json({
+				message: "Failed to find the User",
+				error: err
+			});
+		});
+};
+
+exports.check_signup_userID_mobileOTP = (req, res, next) => {
+>>>>>>> Stashed changes
 	User.find({ _id: ObjectID(req.params.ID), "profile.otpMobile": req.params.mobileotp })
 		.exec()
 		.then(data => {
@@ -1144,7 +1192,10 @@ exports.user_login_with_companyID = (req, res, next) => {
 														phone: user.profile.phone,
 														passwordreset: user.profile.passwordreset,
 														city: user.profile.city,
+<<<<<<< Updated upstream
 														company_id:user.profile.company_id,
+=======
+>>>>>>> Stashed changes
 														companyID: user.profile.companyID,
 														workLocation: user.profile.workLocation,
 														locationID: user.profile.locationID,
@@ -1606,6 +1657,8 @@ exports.user_update_password_with_emailOTP_username = (req, res, next) => {
 };
 
 exports.set_send_emailOTPIDWith_usingID = (req, res, next) => {
+<<<<<<< Updated upstream
+=======
 	var otpEmail = getRandomInt(1000, 9999);
 	User.updateOne(
 		{ _id: req.params.username },
@@ -1649,6 +1702,57 @@ exports.set_send_emailOTPIDWith_usingID = (req, res, next) => {
 			});
 		});
 };
+exports.set_send_emailotp_usingID = (req, res, next) => {
+>>>>>>> Stashed changes
+	var otpEmail = getRandomInt(1000, 9999);
+	User.updateOne(
+		{ _id: req.params.username },
+		{
+			$set: {
+				"profile.otpEmail": otpEmail,
+			},
+		}
+	)
+		.exec()
+		.then(data => {
+			if (data.nModified === 1) {
+				User.findOne({ _id: req.params.username })
+					.then(user => {
+						if (user) {
+							main();
+							async function main(){ 
+<<<<<<< Updated upstream
+								res.status(200).json({ message: "OTP_UPDATED", otpEmail : otpEmail,ID: user._id })
+=======
+								var sendMail = await sendEmail(user.profile.email,req.body.emailSubject,req.body.emailContent + " Your OTP is " + otpEmail);
+								res.status(200).json({ message: "OTP_UPDATED", ID: user._id })
+>>>>>>> Stashed changes
+							 }
+						} else {
+							res.status(200).json({ message: "User not found" });
+						}
+					})
+					.catch(err => {
+						console.log('user error ', err);
+						res.status(500).json({
+							message: "Failed to find User",
+							error: err
+						});
+					});
+			} else {
+				console.log("data not modified");
+				res.status(401).json({ message: "OTP_NOT_UPDATED" })
+<<<<<<< Updated upstream
+			}
+		})
+		.catch(err => {
+			console.log('user error ', err);
+			res.status(500).json({
+				message: "Failed to update User",
+				error: err
+			});
+		});
+};
 exports.set_otp_usingID = (req, res, next) => {
 	var otpEmail = getRandomInt(1000, 9999);
 	User.updateOne(
@@ -1680,6 +1784,8 @@ exports.set_otp_usingID = (req, res, next) => {
 			} else {
 				console.log("data not modified");
 				res.status(401).json({ message: "OTP_NOT_UPDATED" })
+=======
+>>>>>>> Stashed changes
 			}
 		})
 		.catch(err => {
@@ -1751,7 +1857,38 @@ exports.set_otp_usingEmail = (req, res, next) => {
 						User.findOne({ "profile.email": req.body.email })
 							.then(user => {
 								if (user) {
+<<<<<<< Updated upstream
 									res.status(200).json({ message: "OTP_UPDATED", ID: user._id, OTP:optEmail, firstName:user.profile.firstname })
+=======
+
+									// request({
+									// 	"method": "POST",
+									// 	"url": "http://localhost:" + globalVariable.port + "/send-email",
+									// 	"body": {
+									// 		email: user.profile.email,
+									// 		subject: req.body.emailSubject,
+									// 		text: req.body.emailContent + " " + optEmail,
+									// 	},
+									// 	"json": true,
+									// 	"headers": {
+									// 		"User-Agent": "Test Agent"
+									// 	}
+									// })
+									// 	.then(source => {
+									// 		res.status(201).json({ message: "OTP_UPDATED", userID: user._id })
+									// 	})
+									// 	.catch(err => {
+									// 		res.status(500).json({
+									// 			message: "Failed to Send the send email",
+									// 			error: err
+									// 		});
+									// 	});
+									main();
+									async function main(){ 
+										var sendMail = await sendEmail(req.params.emailId,req.body.emailSubject,req.body.emailContent + " Please enter this otp " + optEmail+ " to reset your password");
+										res.status(200).json({ message: "OTP_UPDATED", ID: user._id })
+									 }
+>>>>>>> Stashed changes
 								} else {
 									res.status(200).json({ message: "User not found" });
 								}
