@@ -79,7 +79,6 @@ class HomePage extends Component {
     
     return (
       <div className="ViewBodyWrapper container-fluid">
-        {/*  <Loader type="placeholderloader"  />*/}
 
           <div className="filterDiv col-lg-12">
 
