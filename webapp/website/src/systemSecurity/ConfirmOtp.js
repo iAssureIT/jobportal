@@ -71,8 +71,8 @@ class ConfirmOtp extends Component {
     console.log("candidatemaster",candidatemaster)
     
       //====================================
-     
-      axios.get('/api/auth/get/checkemailotp/usingID/' + this.props.userID + '/' + this.refs.emailotp.value)
+      var checkData = { "user_id": this.props.userID, "emailotp" : this.refs.emailotp.value, "status" : "active" }
+      axios.post('/api/auth/checkemailotp/usingID',checkData)
         .then((response) => {
 
           if (response.data.message == 'SUCCESS') {

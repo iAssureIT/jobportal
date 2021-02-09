@@ -6,7 +6,7 @@ const UserController1 	= require('./newController.js');
 
 router.post('/post/signup/user', UserController.user_signupUser); //Working
 router.post('/post/signup/user/otp', UserController.user_signup_user_otp); //Working
-router.get('/get/checkemailotp/usingID/:ID/:emailotp',UserController.check_userID_EmailOTP);
+router.post('/checkemailotp/usingID',UserController.check_userID_EmailOTP);
 router.get('/get/checkemailotp/usingUsername/:username/:emailotp',UserController.check_username_EmailOTP);
 router.post('/post/login',UserController.user_login_using_email); //Working
 router.post('/post/loginwithcompanyid',UserController.user_login_with_companyID); //Working

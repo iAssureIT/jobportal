@@ -519,17 +519,17 @@ exports.user_signup_user_otp = (req, res, next) => {
 	}		
 };
 
-exports.check_userID_EmailOTP = (req, res, next) => {
-	User.find({ _id: ObjectID(req.params.ID), "profile.otpEmail": req.params.emailotp })
+exports.check_userID_EmailOTP = (req, res, next) => { 
+	User.find({ _id: ObjectID(req.body.user_id), "profile.otpEmail": req.body.emailotp })
 		.exec()
 		.then(data => {
 			if (data.length > 0) {
 				User.updateOne(
-					{ _id: ObjectID(req.params.ID) },
+					{ _id: ObjectID(req.body.user_id) },
 					{
 						$set: {
 							"profile.otpEmail": 0,
-							"profile.status": "blocked"
+							"profile.status": req.body.status
 						}
 					}
 				)

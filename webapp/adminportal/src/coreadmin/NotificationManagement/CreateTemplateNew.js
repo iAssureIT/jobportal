@@ -519,10 +519,15 @@ class CreateTemplateNew extends Component {
         <section className="content">   
           <div className="pageContent col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div  className="col-lg-12 col-md-12 col-sm-12 col-xs-12 mt20">
-              <ul className="nav tabNav nav-pills col-lg-3 col-md-3 col-sm-12 col-xs-12 pull-right">
+              {/*<ul className="nav tabNav nav-pills col-lg-3 col-md-3 col-sm-12 col-xs-12 pull-right">
                 <li className="active col-lg-5 col-md-5 col-xs-5 col-sm-5 NOpadding text-center"><a data-toggle="pill" href="#manual">Manual</a></li>
                 <li className="col-lg-6 col-md-6 col-xs-6 col-sm-6 NOpadding  text-center"><a data-toggle="pill" href="#bulk">Bulk Upload</a></li>
-              </ul>
+              </ul> */}
+            <ul className="nav tabNav nav-pills col-lg-4 col-md-4 col-sm-12 col-xs-12 pull-right">
+                <li className="active col-lg-5 col-md-5 col-xs-5 col-sm-5 NOpadding text-center"><a  href="/EventToken">Event Tokens</a></li>
+                <li className="active col-lg-6 col-md-6 col-xs-6 col-sm-6 NOpadding  text-center"><a  href="/ViewTemplates">View Templates</a></li>
+            </ul>  
+            
             </div>
             <div className="box-header with-border col-lg-12 col-md-12 col-xs-12 col-sm-12 NOpadding-right">
                 <h4 className="weighttitle col-lg-11 col-md-11 col-xs-11 col-sm-11 NOpadding-right">Create Template</h4>

@@ -606,6 +606,7 @@ class BasicInfo extends Component {
             "website": response.data.website,
             "companyPhone": response.data.companyPhone,
             "companyEmail": response.data.companyEmail,
+            "industry_id":response.data.industry_id,
             "CIN": response.data.CIN,
             "COI": response.data.COI,
             "TAN": response.data.TAN,

@@ -39,7 +39,7 @@ class SubFunctionalArea extends Component {
                 secondAttributeName  : "functionalArea"
             },
             "tableHeading"      : {
-                subFunctionalArea     : "Sub Functional Area",
+                subfunctionalArea     : "Sub Functional Area",
                 functionalArea        : "Functional Area",
                 actions               : 'Action',
             },

@@ -77,14 +77,14 @@ exports.fetchSubFunctionalAreas = (req, res, next)=>{
         .aggregate([{
             $lookup:
                 {
-                   from: "industrymasters",
+                   from: "functionalareamasters",
                    localField: "functionalarea_id",
                    foreignField: "_id",
-                   as: "industry"
+                   as: "functionalarea"
                 }
             },
-            { "$unwind": "$industry" },
-            {$addFields: { industry : "$industry.industry"} 
+            { "$unwind": "$functionalarea" },
+            {$addFields: { functionalArea : "$functionalarea.functionalArea"} 
         }])
         .sort({createdAt : -1})
         .skip(req.body.startRange)
@@ -94,12 +94,12 @@ exports.fetchSubFunctionalAreas = (req, res, next)=>{
             var alldata = data.map((a, i)=>{
                     return {
                         "_id"                : a._id,
-                        "industry"           : a.industry,
-                        "subfunctionalArea"     : a.subfunctionalArea,
-                        "functionalarea_id"        : a.functionalarea_id  
+                        "subfunctionalArea"  : a.subfunctionalArea,
+                        "functionalarea_id"  : a.functionalarea_id ,
+                        "functionalArea"     : a.functionalArea  
                     }
             })
-             console.log("alldata = ",alldata);
+            //console.log("alldata = ",alldata);
             res.status(200).json(alldata);
         })
         .catch(err =>{
