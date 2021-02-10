@@ -7,7 +7,7 @@ router.post('/post', designationMaster.insertDesignation);
 
 router.post('/get/list', designationMaster.fetchDesignations);
 
-router.get('/get/list', designationMaster.getAllDesignations);
+router.get('/get/list', designationMaster.getDesignations);
 
 router.get('/get/count', designationMaster.countDesignations);
 
@@ -17,12 +17,12 @@ router.get('/search/:str', designationMaster.searchDesignation);
 
 router.patch('/patch', designationMaster.updateDesignation);
 
-router.post('/bulkUploadDesignation',designationMaster.bulkUploadDesignation);
+router.delete('/delete/:fieldID', designationMaster.deleteDesignation);
 
-router.get('/get/filedetails/:fileName', designationMaster.filedetails);
+router.post('/bulkUploadDesignation',designationMaster.bulkUploadDesignation);
 
 router.post('/get/files', designationMaster.fetch_file); 
 
-router.delete('/delete/:fieldID', designationMaster.deleteDesignation);
+router.get('/get/filedetails/:fileName', designationMaster.filedetails);
 
 module.exports = router;
