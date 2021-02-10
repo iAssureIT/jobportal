@@ -2,7 +2,7 @@ const express 			= require("express");
 const router 			= express.Router();
 const checkAuth       	= require('../middlerware/check-auth.js');
 const UserController  	= require('./ControllerSystemSecurity.js');
-const UserController1 	= require('./newController.js');
+const UserController1 	= require('./newController.js'); 
 
 router.post('/post/signup/user', UserController.user_signupUser); //Working
 router.post('/post/signup/user/otp', UserController.user_signup_user_otp); //Working
