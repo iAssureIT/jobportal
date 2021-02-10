@@ -18,6 +18,8 @@ class SignUp extends Component {
   constructor() {
     super();
     this.state = {
+
+      value : '',
       checkUserExists: 0,
       loggedIn: false,
       showPassword1: false,
@@ -44,6 +46,7 @@ class SignUp extends Component {
       suggestions: []
     }
     this.handleChange = this.handleChange.bind(this);
+    this.onChange = this.onChange.bind(this);
   }
   componentWillMount() {
 
@@ -93,12 +96,30 @@ class SignUp extends Component {
   validateForm=()=>{
     var status = true;
     var regName = /^[a-zA-Z]+$/;
+    var employer =this.state.value;
     var firstName=this.state.firstName;
     var lastName=this.state.lastName;
     var tempEmail = this.state.emailAddress.trim(); // value of field with whitespace trimmed off
     var emailFilter =  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
     var illegalChars = /[\(\)\<\>\,\;\:\\\"\[\]]/;
     var phoneno = /^\+?([0-9]{2})\)?[-. ]?([0-9]{5})[-. ]?([0-9]{5})$/;
+
+
+    if(this.state.employer<=0)  {
+      document.getElementById("employerError").innerHTML=  
+      "Please enter employer  valid Name";  
+      status=false; 
+    }
+  
+    else if(!regName.test(employer)){
+      document.getElementById("employerError").innerHTML=  
+      "Please enter employer valid name,......";  
+      status=false; 
+    }
+    else{
+      
+      status = true;
+    }
 
     
     if(this.state.firstName<=0)  {
@@ -129,7 +150,7 @@ class SignUp extends Component {
     }
     else{
       document.getElementById("lastNameError").innerHTML=  
-       " ."; 
+       " "; 
       status = true;
     }
 
@@ -450,6 +471,7 @@ class SignUp extends Component {
                         inputProps={inputProps}
                       />
                   </div>
+                  <span id="employerError" className="errorMsg"></span>
                 </div>
               </div>  
               

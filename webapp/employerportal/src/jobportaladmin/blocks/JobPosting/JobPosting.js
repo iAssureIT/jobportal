@@ -338,6 +338,8 @@ class JobPosting extends Component {
 
     validateForm = () => {
         var status = true;
+        var regSpaceName = /^[a-zA-Z\s]+$/;
+        var jobTitle=this.state.jobTitle;
         var tempEmail = this.state.contactPersonEmail.trim(); // value of field with whitespace trimmed off
         var emailFilter = /^[^@]+@[^@.]+\.[^@]*\w\w$/;
         var illegalChars = /[\(\)\<\>\,\;\:\\\"\[\]]/;
@@ -345,7 +347,17 @@ class JobPosting extends Component {
         if (this.state.jobTitle.length <= 0) {
             document.getElementById("jobTitleError").innerHTML = "Enter Job Title";
             status = false;
-        } else {
+        }
+        else if (this.state.jobTitle.length > 256) {
+            document.getElementById("jobTitleError").innerHTML = "Job Title should be only 256 characters";
+            status = false;
+        }
+        else if(!regSpaceName.test(jobTitle)){
+         document.getElementById("jobTitleError").innerHTML=  
+         "Please enter valid name,......";  
+         status=false; 
+        }
+        else {
             document.getElementById("jobTitleError").innerHTML = "";
             status = true;
         }
@@ -377,13 +389,13 @@ class JobPosting extends Component {
             document.getElementById("districtError").innerHTML = "";
             status = true;
         }
-        /*if (this.state.pincode.length <= 0) {
+       if (this.state.pincode.length <= 0) {
             document.getElementById("pincodeError").innerHTML = "Enter Pincode";
             status = false;
         } else {
             document.getElementById("pincodeError").innerHTML = "";
             status = true;
-        }*/
+        }
         if (this.state.functionalarea_id.length <= 0) {
             document.getElementById("functionalAreaError").innerHTML = "Select or enter Functional Area";
             status = false;
@@ -996,7 +1008,7 @@ render(){
 
 												<div className="input-group">
 													<span className="input-group-addon addJobFormField"><i className="fa fa-briefcase"></i> </span> 
-													<input type="text" className="form-control addJobFormField" name="jobTitle" id="jobTitle" maxLength="50" value={this.state.jobTitle} onChange={this.handleChange}/>
+													<input type="text" className="form-control addJobFormField" name="jobTitle" id="jobTitle" maxLength="260" value={this.state.jobTitle} onChange={this.handleChange}/>
 												</div>
 												<span id="jobTitleError" className="errorMsg"></span>
 											</div>
