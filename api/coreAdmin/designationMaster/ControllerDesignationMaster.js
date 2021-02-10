@@ -1,25 +1,21 @@
 const mongoose	        = require("mongoose");
-const DesignationMaster     = require('./ModelDesignationMaster.js');
+const DesignationMaster = require('./ModelDesignationMaster.js');
 const FailedRecords     = require('../failedRecords/ModelFailedRecords');
-
 
 exports.insertDesignation = (req,res,next)=>{
     processData();
     async function processData(){
-
-    var allDesignations = await fetchDesignations();
-    var designation = allDesignations.filter((data)=>{
-        if (data.designation == req.body.fieldValue.trim().toLowerCase() && data.companyID == req.body.companyID) {
+    var allDesignations = await fetchDesignations()
+        var designation = allDesignations.filter((data)=>{
+        if (data.designation.trim().toLowerCase() == req.body.fieldValue.trim().toLowerCase()) {
             return data;
         }
-        })    
-
+        })
         if (designation.length > 0) {
             res.status(200).json({ duplicated : true });
         }else{
             const designationMaster = new DesignationMaster({
                             _id                         : new mongoose.Types.ObjectId(),
-                            companyID                   : req.body.companyID,
                             designation                 : req.body.fieldValue,
                             createdBy                   : req.body.createdBy,
                             createdAt                   : new Date()
@@ -29,41 +25,29 @@ exports.insertDesignation = (req,res,next)=>{
                             res.status(200).json({ created : true, fieldID : data._id });
                         })
                         .catch(err =>{
-                            res.status(500).json({ error: err }); 
+                            console.log("err",err.code)
+                            if (err.code == 11000) {
+                                res.status(200).json({ duplicated : true });
+                            }else{
+                                res.status(500).json({ error: err });
+                            }
+                             
                         });
-        }         
-    }    
+        }
+    }       
 };
-var fetchAllDesignations = async ()=>{
-    return new Promise(function(resolve,reject){ 
-    DesignationMaster.find()
-        .sort({createdAt : -1})
-        // .skip(req.body.startRange)
-        // .limit(req.body.limitRange)
-        .then(data=>{
-            resolve( data );
-        })
-        .catch(err =>{
-            reject(err);
-        });
-    });
-};
-
 var fetchDesignations = async ()=>{
     return new Promise(function(resolve,reject){ 
-    DesignationMaster.find()
-        .sort({createdAt : -1})
-        // .skip(req.body.startRange)
-        // .limit(req.body.limitRange)
+    DesignationMaster.find({})
+        .exec()
         .then(data=>{
             resolve( data );
         })
         .catch(err =>{
             reject(err);
-        });
+        }); 
     });
 };
-
 exports.countDesignations = (req, res, next)=>{
     DesignationMaster.find({}).count()
         .exec()
@@ -87,17 +71,15 @@ exports.fetchDesignations = (req, res, next)=>{
             res.status(500).json({ error: err });
         }); 
 };
-
-exports.getAllDesignations = (req, res, next)=>{
+exports.getDesignations = (req, res, next)=>{
     DesignationMaster.find({})
-        .sort({createdAt : -1})
-        .exec()
-        .then(data=>{
-            res.status(200).json(data);
-        })
-        .catch(err =>{
-            res.status(500).json({ error: err });
-        }); 
+    .exec()
+    .then(data=>{
+        res.status(200).json(data);
+    })
+    .catch(err =>{
+        res.status(500).json({ error: err });
+    }); 
 };
 exports.fetchSingleDesignation = (req, res, next)=>{
     DesignationMaster.findOne({ _id: req.params.fieldID })
@@ -166,43 +148,9 @@ exports.deleteDesignation = (req, res, next)=>{
         });            
 };
 
-
-
-exports.fetch_file = (req,res,next)=>{ 
-
-    DesignationMaster.find( { _id : "fileName"})
-    .exec()
-    .then(data=>{
-        res.status(200).json(data.length);
-        //res.status(200).json(data);
-        })
-    .catch(err =>{
-        console.log(err);
-        res.status(500).json({
-            error: err
-        });
-    });   
-};
-exports.fetch_file_count = (req,res,next)=>{
-    //PersonMaster.find({"type" : req.params.type})
-    DesignationMaster.find( { _id : "fileName" } )
-    .exec()
-    .then(data=>{
-        
-        res.status(200).json(data.length);
-    })
-    .catch(err =>{
-        console.log(err);
-        res.status(500).json({
-            error: err
-        });
-    }); 
-};
-
-
-var fetchAllDesignation = async (type)=>{
+var fetchAllDesignations = async (type)=>{
     return new Promise(function(resolve,reject){ 
-    DesignationMaster.find({type: type})
+    DesignationMaster.find()
         .sort({createdAt : -1})
         // .skip(req.body.startRange)
         // .limit(req.body.limitRange)
@@ -296,48 +244,14 @@ var insertFailedRecords = async (invalidData,updateBadData) => {
             })  
     
     })            
-}
-
-function insertDesignation(designation, createdBy){
-    return new Promise(function(resolve,reject){ 
-        const designationMaster = new DesignationMaster({
-                        _id                         : new mongoose.Types.ObjectId(),
-                        designation                 : designation,
-                        createdBy                   : createdBy,
-                        createdAt                   : new Date()
-                    })
-                    designationMaster.save()
-                    .then(data=>{
-                        resolve( data._id );
-                    })
-                    .catch(err =>{
-                        reject(err); 
-                    });
-    });
-}
-
-exports.delete_file = (req,res,next)=>{
-
-    //console.log("type",req.params.type)
-    //console.log("fileName",req.params.fileName)
-    DesignationMaster.deleteMany({"fileName":req.params.fileName, "type" : req.params.type})
-    .exec()
-    .then(data=>{
-        res.status(200).json({
-            "message" : "Records of file "+req.params.fileName+" deleted successfully"
-        });
-    })
-    .catch(err =>{
-        console.log(err);
-        res.status(500).json({
-            error: err
-        });
-    });  
 };
 
+
 exports.bulkUploadDesignation = (req, res, next)=>{
-    var designations = req.body.data;
-    console.log("designations",designations);
+    console.log("inside bulk upload designation");
+     // var industries = [{designation:"mesh"}];
+    var industries = req.body.data;
+    console.log("industries",industries);
 
     var validData = [];
     var validObjects = [];
@@ -350,39 +264,48 @@ exports.bulkUploadDesignation = (req, res, next)=>{
 
     processData();
     async function processData(){
-         // var alldesignations = await fetchDesignations();
-        for(var k = 0 ; k < designations.length ; k++){
-           if (designations[k].designation == '-') {
-                        remark += "designation not found, " ;  
-                    }
+         // var alldepartments = await fetchDepartments();
+        for(var k = 0 ; k < industries.length ; k++){
+            if (industries[k].designation == '-') {
+                remark += "department not found, " ;  
+            }
+            console.log("remark",remark)
 
-                      if (remark == '') {
-                          var alldesignations = await fetchAllDesignations(req.body.reqdata);
-                          var designationExists = alldesignations.filter((data)=>{
-                            if (data.designation == designations[k].designation)
-                                 {
-                                return data;
-                            }
-                        })
-                       
+              if (remark == '') {
+                // var allDepartments = await fetchAllDepartments(req.body.reqdata);
+                // console.log("alldepartments",allDepartments);
+                 console.log()
+                  var allDesignations = await fetchAllDesignations(req.body.reqdata);
+                  var designationExists = allDesignations.filter((data)=>{
+                    if (data.designation == industries[k].designation)
+                         {
+                        return data;
+                    }
+                })
+               
                  console.log("in else validObjects",designationExists);
                 if (designationExists.length==0) {
-                    validObjects = designations[k];
+                    validObjects = industries[k];
                     validObjects.fileName       = req.body.fileName;
                     // validObjects.createdBy      = req.body.reqdata.createdBy;
                     validObjects.createdAt      = new Date();
 
                     validData.push(validObjects); 
 
-                }else{                        
-                        remark += "designation already exists." ; 
-                        invalidObjects = designations[k];
-                        invalidObjects.failedRemark = remark;
-                        invalidData.push(invalidObjects); 
-                    }                      
+                }else{
+                    
+                    remark += "designation already exists." ; 
+
+                    invalidObjects = industries[k];
+                    invalidObjects.failedRemark = remark;
+                    invalidData.push(invalidObjects); 
                 }
+ 
+              
+            }
+
         }
-         DesignationMaster.insertMany(validData)
+        DesignationMaster.insertMany(validData)
         .then(data=>{
 
         })
@@ -400,16 +323,26 @@ exports.bulkUploadDesignation = (req, res, next)=>{
             "message": "Bulk upload process is completed successfully!",
             "completed": true
         });
-
     }
 };
-
+exports.fetch_file = (req,res,next)=>{ 
+    DesignationMaster.find( { _id : "fileName"})
+    .exec()
+    .then(data=>{
+        res.status(200).json(data.length);
+        //res.status(200).json(data);
+        })
+    .catch(err =>{
+        console.log(err);
+        res.status(500).json({
+            error: err
+        });
+    });   
+};
 exports.filedetails = (req,res,next)=>{
     var finaldata = {};
     console.log(req.params.fileName)
-
-    DesignationMaster.find( { fileName:req.params.fileName  } )
-
+    DesignationMaster.find( { fileName:req.params.fileName }  )
     .exec()
     .then(data=>{
         //finaldata.push({goodrecords: data})
@@ -430,8 +363,6 @@ exports.filedetails = (req,res,next)=>{
         });
     });
 };
-
-
 
 
 

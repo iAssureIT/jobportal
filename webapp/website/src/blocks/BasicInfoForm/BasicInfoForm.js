@@ -396,9 +396,9 @@ class BasicInfoForm extends Component{
 								resumeUrl 		   : this.state.resume,
 								executiveSummary   :this.state.executiveSummary	
 							}
-							console.log(formValues);
+							console.log(status);
 			if(status==true){
-				Axios.patch("/api/candidatemaster/patch/updateCandidateBasicInfo",formValues)
+			Axios.patch("/api/candidatemaster/patch/updateCandidateBasicInfo",formValues)
 			 .then(response=>{
 
 						Swal.fire("Congrats","Your Basic details is insert Successfully","success");
@@ -440,8 +440,6 @@ class BasicInfoForm extends Component{
 	//========== Validation Start ==================
 	validateForm=()=>{
 
-
-		console.log(",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,kkkkkkkkkkkkkkkkkkkkkkkkk");
 		var status = true;
 		var regName = /^[a-zA-Z]+$/;
 		var firstName=this.state.firstName;
@@ -450,82 +448,99 @@ class BasicInfoForm extends Component{
 		var tempEmail = this.state.email.trim(); // value of field with whitespace trimmed off
     	var emailFilter = /^[^@]+@[^@.]+\.[^@]*\w\w$/;
     	var illegalChars = /[\(\)\<\>\,\;\:\\\"\[\]]/;
+    	var mobileFilter = /^(\+\d{1,3}[- ]?)?\d{12}$/gm;
 
 	    if(this.state.firstName<=0)  {
-	      document.getElementById("firstNameError").innerHTML=  
-	      "Please enter valid Name";  
+	      document.getElementById("firstNameError").innerHTML = "Please enter valid Name";  
 	      status=false; 
 	    }
 	  
-	     if(!regName.test(firstName)){
-	      document.getElementById("firstNameError").innerHTML=  
-	      "Please enter valid name,......";  
+	    if(!regName.test(firstName)){
+	      document.getElementById("firstNameError").innerHTML = "Please enter valid name,......";  
 	      status=false; 
 	    }
 	    else{
-	      
+	      document.getElementById("firstNameError").innerHTML = ""
 	      status = true;
 	    }
 
 	    if(this.state.middleName<=0)  {
-	      document.getElementById("middleNameError").innerHTML=  
-	      "Please enter valid Name";  
+	      document.getElementById("middleNameError").innerHTML = "Please enter valid Name";  
 	      status=false; 
 	    }
 	  
 	    if(!regName.test(middleName)){
-	      document.getElementById("middleNameError").innerHTML=  
-	      "Please enter valid name,......";  
+	      document.getElementById("middleNameError").innerHTML = "Please enter valid name,......";  
 	      status=false; 
 	    }
 	    else{
-	      
+	      document.getElementById("middleNameError").innerHTML=  ""
 	      status = true;
 	    }
 
 	    if(this.state.lastName<=0)  {
-	      document.getElementById("lastNameError").innerHTML=  
-	      "Please enter valid Name";  
+	      document.getElementById("lastNameError").innerHTML = "Please enter valid Name";  
 	      status=false; 
 	    }
 	  
 	    if(!regName.test(lastName)){
-	      document.getElementById("lastNameError").innerHTML=  
-	      "Please enter valid name,......";  
+	      document.getElementById("lastNameError").innerHTML = "Please enter valid name,......";  
 	      status=false; 
 	    }
 	    else{
-	      
+	      document.getElementById("lastNameError").innerHTML = "";
 	      status = true;
 	    }
 
 
 		
 		if(this.state.dob.length<=0){
-			document.getElementById("dobError").innerHTML=  
-			"Please enter your Date Of Birth";  
+			document.getElementById("dobError").innerHTML = "Please enter your Date Of Birth";  
 			status=false; 
 		}else{
-			document.getElementById("dobError").innerHTML=  
-			""; 
+			document.getElementById("dobError").innerHTML = ""; 
 			status = true;
 		}
 		if(this.state.email.length<=0){
-			document.getElementById("emailError").innerHTML=  
-			"Please enter your Email";  
+			document.getElementById("emailError").innerHTML = "Please enter your Email";  
 			status=false; 
-		}else if (
-			!emailFilter.test(tempEmail)) { //test email for illegal characters
+		}else if (!emailFilter.test(tempEmail)) { //test email for illegal characters
 	        document.getElementById('emailError').innerHTML = "Please enter a valid email address.";
 	    } else if (this.state.email.match(illegalChars)) {
 	        document.getElementById('emailError').innerHTML = "Email contains invalid characters.";
 	    }else{
-			document.getElementById("emailError").innerHTML=
-			""; 
+			document.getElementById("emailError").innerHTML = ""; 
+			status = true;
+		}
+		console.log("mob",this.state.mobile)
+		if(this.state.mobile.length<=0){
+			document.getElementById("mobileError").innerHTML = "Please enter your mobile number";  
+			status=false; 
+		}else if (!mobileFilter.test(this.state.mobile)) { //test email for illegal characters
+	        document.getElementById('mobileError').innerHTML = "Please enter a valid mobile number.";
+	    }else{
+			document.getElementById("mobileError").innerHTML = ""; 
 			status = true;
 		}
 
-		
+		if(this.state.alternate.length>0){
+			
+			if (!mobileFilter.test(this.state.alternate)) { //test email for illegal characters
+	        	document.getElementById('alternateError').innerHTML = "Please enter a valid alternate mobile number.";
+		    }else{
+				document.getElementById("alternateError").innerHTML = ""; 
+				status = true;
+			}
+		}
+
+		if(this.state.executiveSummary.length<=0){
+			document.getElementById("executiveSummaryError").innerHTML = "Please enter your executive summary";  
+			status=false; 
+		}
+		else{
+			document.getElementById("executiveSummaryError").innerHTML = ""; 
+			status = true;
+		}
 		 return status;
 	}
 
@@ -563,7 +578,7 @@ class BasicInfoForm extends Component{
 
 							<div className="col-lg-4">
 								<label htmlFor="middleName" className="nameTitleForm">
-									Middle Name
+									Middle Name <sup className="nameTitleFormStar">*</sup>
 								</label>
 								<div className="input-group ">
 									<span className="input-group-addon inputBoxIcon">
@@ -578,7 +593,7 @@ class BasicInfoForm extends Component{
 
 							<div className="col-lg-4">
 								<label htmlFor="lastName" className="nameTitleForm">
-									Last Name
+									Last Name <sup className="nameTitleFormStar">*</sup>
 								</label>
 								<div className="input-group ">
 									<span className="input-group-addon inputBoxIcon">
@@ -651,7 +666,7 @@ class BasicInfoForm extends Component{
 									</span> 
 									<input type="date" name="dob" id="dob" 
 									 className="form-control inputBox unstyled date" 
-									 value={this.state.dob} 
+									 value={this.state.dob} max={Moment(new Date()).format("YYYY-MM-DD")}
 									 onChange={this.handleChange.bind(this)} />
 								</div> 
 								<span id="dobError" className="errorMsg"></span>
@@ -813,7 +828,7 @@ class BasicInfoForm extends Component{
 						<div className="row formWrapper">
 							<div className="col-lg-12">
 								<label htmlFor="executiveSummary" className="nameTitleForm">
-									Executive Summary
+									Executive Summary <sup className="nameTitleFormStar">*</sup>
 								</label>
 								<div>
 									<CKEditor
@@ -826,6 +841,7 @@ class BasicInfoForm extends Component{
 								        onFocus		=	{ editor 	=> {} }
 							        />	
 								</div>
+								<span id="executiveSummaryError" className="errorMsg"></span>
 							</div>
 						</div>
 						<div className="row formWrapper">
