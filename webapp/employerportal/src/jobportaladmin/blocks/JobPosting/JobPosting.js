@@ -512,7 +512,7 @@ class JobPosting extends Component {
             status = true;
         }
         if (this.state.contactPersonName.length <= 0) {
-            document.getElementById("contactPersonNameError").innerHTML = "Please enter contact person name";
+            document.getElementById("contactPersonNameError").innerHTML = "Please Enter contact person name";
             status = false;
         } else {
             document.getElementById("contactPersonNameError").innerHTML = "";
@@ -1583,7 +1583,7 @@ render(){
 													<span className="input-group-addon addJobFormField"> <i className="fa fa-user"> </i> </span> 
 													<input type="text" className="form-control addJobFormField" name="contactPersonName" id="contactPersonName" maxLength="100" value={this.state.contactPersonName} onChange={this.handleChange}/>
 												</div>
-												<span id="contactPersonNameError" className="errorMsgJobPost"> </span>
+												<span id="contactPersonNameError" className="errorMsg"> </span>
 											</div>
 											
 											<div className="col-lg-4">
@@ -1592,7 +1592,7 @@ render(){
 													<span className="input-group-addon addJobFormField"> <i className="fa fa-envelope-o"> </i> </span> 
 													<input type="text" className="form-control addJobFormField" name="contactPersonEmail" id="contactPersonEmail" maxLength="50" value={this.state.contactPersonEmail} onChange={this.handleChange}/>
 												</div>
-												<span id="contactPersonEmailError" className="errorMsgJobPost"> </span>
+												<span id="contactPersonEmailError" className="errorMsg"> </span>
 											</div>
 											
 											<div className="col-lg-4">
