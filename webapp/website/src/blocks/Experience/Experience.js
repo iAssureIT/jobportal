@@ -262,9 +262,9 @@ class Experience extends Component{
 		console.log(formValues)	
 
 		if(this.props.match.params.workExperienceID){
-			this.updateData(formValues,event);
+			//this.updateData(formValues,event);
 		}else{
-			this.insetData(formValues,event);
+			//this.insetData(formValues,event);
 		}
 	}
 	updateData(formValues,event){
@@ -414,13 +414,23 @@ class Experience extends Component{
 			stateCode : stateCode
 		});
 	}
+	handleChangeCheckbox(event){
+		event.preventDefault();
+	}
 	//========== User Define Function End ==================
-		//========== Validation Start ==================
+	//========== Validation Start ==================
 	validateForm=()=>{
 		var status = true;
-	
+		if(this.state.industry.length<=0 || this.state.industry_id.length<=0){
+			document.getElementById("industryError").innerHTML=  
+			"Please enter industry";  
+			status=false; 
+		}else{
+			document.getElementById("industryError").innerHTML=""; 
+			status = true;
+		}
 		if(this.state.company.length<=0 || this.state.company_id.length<=0){
-			document.getElementcompanyNameById("companyNameError").innerHTML=  
+			document.getElementById("companyNameError").innerHTML=  
 			"Please enter company name";  
 			status=false; 
 		}else{
@@ -587,7 +597,7 @@ class Experience extends Component{
 										    )}
 										</datalist>
 								</div>
-                                <span id="industryError" className="errorMsgJobPost"></span>
+                                <span id="industryError" className="errorMsg"></span>
 							</div>
 
 							<div className="col-lg-6">
@@ -756,18 +766,32 @@ class Experience extends Component{
 								</div> 
 								<span id="relevantExperienceError" className="errorMsg"></span>
 							</div>
+							
 						</div>
 						<div className="row formWrapper">
-							<div className="col-lg-4">
+							<div className="col-lg-3 currentWoking">
+								
+								<div className="customCheckBox">
+									<label  className="">
+										<input type="checkbox" name="currentlyWorkingHere" id="currentlyWorkingHere"
+										value={this.state.currentlyWorkingHere}  onChange={ this.handleChangeCheckbox.bind(this) }/>
+										<span className="checkmark"></span>
+									</label>
+								</div>
+								<label htmlFor="lastDeartment" className="nameTitleForm currentWokingLabel">
+									Currently Working here
+								</label>
+							</div>
+							<div className="col-lg-3">
 								<label htmlFor="fromDate" className="nameTitleForm">
-									From Date
+									Working From
 									<sup className="nameTitleFormStar">*</sup>
 								</label>
 								<div className="input-group ">
 									<span className="input-group-addon inputBoxIcon">
 										<i className="fa fa-calendar"></i> 
 									</span> 
-									<input type="date" name="fromDate" id="fromDate" 
+									<input type="month" name="fromDate" id="fromDate" 
 									 className="form-control inputBox date" 
 									 value={this.state.fromDate} 
 									 onChange={this.handleChange.bind(this)} />
@@ -775,16 +799,16 @@ class Experience extends Component{
 								<span id="fromDateError" className="errorMsg"></span>
 							</div>
 
-							<div className="col-lg-4">
+							<div className="col-lg-3">
 								<label htmlFor="toDate" className="nameTitleForm">
-									To Date
+									Worked Till
 									<sup className="nameTitleFormStar">*</sup>
 								</label>
 								<div className="input-group ">
 									<span className="input-group-addon inputBoxIcon">
 										<i className="fa fa-calendar"></i> 
 									</span> 
-									<input type="date" name="toDate" id="toDate" 
+									<input type="month" name="toDate" id="toDate" 
 									 className="form-control inputBox date" 
 									 value={this.state.toDate}
 									 onChange={this.handleChange.bind(this)} />
@@ -792,7 +816,7 @@ class Experience extends Component{
 								<span id="toDateError" className="errorMsg"></span>
 							</div>
 
-							<div className="col-lg-4">
+							<div className="col-lg-3">
 							<label htmlFor=""></label>
 								<div className="input-group showFeild2" name="exp" id="exp"  >
 									{this.state.expYears + "  Years, " + 

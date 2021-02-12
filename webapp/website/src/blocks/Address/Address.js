@@ -40,6 +40,8 @@ class Address extends Component{
 			buttonText         : "Save",
 			
 		}
+		this.camelCase = this.camelCase.bind(this)
+		this.handleChangeState = this.handleChangeState.bind(this);
 	}
 	componentDidMount(){
 		this.getData();
@@ -52,11 +54,19 @@ class Address extends Component{
 			.catch(error=>{
 				Swal.fire("Error while getting List data",error.message,'error');
 			})
-
+		Axios.get("http://locations2.iassureit.com/api/states/get/list/IN")
+			.then((response) => {
+				this.setState({
+					stateArray: response.data
+				})
+			})
+			.catch((error) => {
+			})	
 		if(this.props.match.params.addressID){
 			this.edit()
 		}
 	}
+
 	getData(){
 		
 		Axios.get("/api/candidatemaster/get/one/"+this.state.candidate_id)
@@ -70,6 +80,22 @@ class Address extends Component{
 			 .catch(error=>{
 			 	Swal.fire("Submit Error!",error.message,'error');
 			 })
+	}
+	camelCase(str) {
+		return str
+			.toLowerCase()
+			.split(' ')
+			.map(word => word.charAt(0).toUpperCase() + word.slice(1))
+			.join(' ');
+	}
+	handleChangeState(event) {
+		const target = event.target;
+	    var state = document.getElementById("states");
+    	var stateCode = state.options[state.selectedIndex].getAttribute("statecode");
+		this.setState({
+			[event.target.name]: event.target.value,
+			stateCode : stateCode
+		});
 	}
 	//========== User Define Function Start ================
 	edit(){
@@ -190,6 +216,7 @@ class Address extends Component{
 								}
 				
 							}
+		//console.log(formValues)					
 		if(this.props.match.params.addressID){
 			this.updateData(formValues);
 		}else{
@@ -344,14 +371,30 @@ class Address extends Component{
 	//========== Validation Start ==================
 	 validateForm=()=>{
 		var status = true;
-	
-		if(this.state.houseNumber.length<=0){
-			document.getElementById("houseNumberError").innerHTML=  
-			"Please enter your House Number";  
+		var regPincode = /^[1-9][0-9]{5}$/;
+
+		if(this.state.addressType.length<=0){
+			document.getElementById("addressTypeError").innerHTML=  
+			"Please select address type";  
 			status=false; 
 		}else{
-			document.getElementById("houseNumberError").innerHTML=  
-			""; 
+			document.getElementById("addressTypeError").innerHTML = ""; 
+			status = true;
+		}
+		if(this.state.addressLine1.length<=0){
+			document.getElementById("addressError").innerHTML=  
+			"Please enter your address";  
+			status=false; 
+		}else{
+			document.getElementById("addressError").innerHTML = ""; 
+			status = true;
+		}
+		if(this.state.area.length<=0){
+			document.getElementById("areaError").innerHTML=  
+			"Please enter your address";  
+			status=false; 
+		}else{
+			document.getElementById("areaError").innerHTML = ""; 
 			status = true;
 		}
 		if(this.state.city.length<=0){
@@ -374,7 +417,7 @@ class Address extends Component{
 		}
 		if(this.state.states.length<=0){
 			document.getElementById("stateError").innerHTML=  
-			"Please enter your State";  
+			"Please enter your state";  
 			status=false; 
 		}else{
 			document.getElementById("stateError").innerHTML=  
@@ -392,12 +435,18 @@ class Address extends Component{
 		}
 		if(this.state.pincode.length<=0){
 			document.getElementById("pincodeError").innerHTML=  
-			"Please enter your Pincode";  
+			"Please enter your pincode";  
 			status=false; 
 		}else{
-			document.getElementById("pincodeError").innerHTML=  
-			""; 
-			status = true;
+
+			if(!regPincode.test(this.state.pincode)){
+		      	document.getElementById("pincodeError").innerHTML = "Please enter valid pincode";  
+		      	status=false; 
+		    }else{
+		    	document.getElementById("pincodeError").innerHTML = ""; 
+				status = true;
+		    }
+			
 		}
 	
 		
@@ -448,14 +497,14 @@ class Address extends Component{
 										  	}
 										</select>
 									</div>
+									<span id="addressTypeError" className="errorMsg"></span>
 								</div>
 
 							
-
 								<div className="col-lg-4">
 									<label htmlFor="houseNumber" className="nameTitleForm">
 										House/Building Number
-										<sup className="nameTitleFormStar">*</sup>
+										
 									</label>
 									<div className="input-group ">
 										<span className="input-group-addon inputBoxIcon inputBoxIcon1">
@@ -470,7 +519,7 @@ class Address extends Component{
 								</div>
 
 								<div className="col-lg-4">
-									<label htmlFor="address" className="nameTitleForm">Address</label>
+									<label htmlFor="address" className="nameTitleForm">Address <sup className="nameTitleFormStar">*</sup></label>
 									<div className="input-group ">
 										<span className="input-group-addon inputBoxIcon">
 											<i className="fa fa-map-marker"></i>
@@ -521,14 +570,14 @@ class Address extends Component{
 	                                        )}
 	                                      </PlacesAutocomplete>
 									</div> 
+									<span id="addressError" className="errorMsg"></span> 
 								</div>
 							</div>
 
 							<div className="row formWrapper">
-
 								<div className="col-lg-4">
 									<label htmlFor="area" className="nameTitleForm">
-										Area/Suburb
+										Area/Suburb <sup className="nameTitleFormStar">*</sup>
 									</label>
 									<div className="input-group ">
 										<span className="input-group-addon inputBoxIcon">
@@ -538,6 +587,7 @@ class Address extends Component{
 										 className="form-control inputBox" value={this.state.area} 
 										 onChange={this.handleChange.bind(this)} />
 									</div> 
+									<span id="areaError" className="errorMsg"></span> 
 								</div>
 
 								<div className="col-lg-4">
@@ -585,25 +635,20 @@ class Address extends Component{
 										<span className="input-group-addon inputBoxIcon">
 											<i className="fa fa-map"></i> 
 										</span> 
-										{/*<select className="form-control inputBox"  id="states"
-										 ref="states" value={this.state.states} name="states" 
-										 onChange={this.handleChangeState.bind(this)} >
-											<option hidden>-- Select --</option>
-											{
-												this.state.stateArray && this.state.stateArray.length > 0 
-												?
-													this.state.stateArray.map((stateData, index) => {
-														return (
-															<option key={index} statecode={stateData.stateCode}>
-																{this.camelCase(stateData.stateName)}
-															</option>
-														);
-													}
-													) 
-												: ''
-											}
-										</select>*/}
-										<input type="text" className="form-control inputBox" ref="states" id="states" name="states" value={this.state.states} onChange={this.handleChange.bind(this)}/>
+										<select id="states" className="form-control inputBox selectOption"
+										ref="states" value={this.state.states} name="states" onChange={this.handleChangeState} >
+										<option selected={true}>-- Select --</option>
+										{
+											this.state.stateArray && this.state.stateArray.length > 0 ?
+												this.state.stateArray.map((stateData, index) => {
+													return (
+														<option key={index} statecode={stateData.stateCode}>{this.camelCase(stateData.stateName)}</option>
+													);
+												}
+												) : ''
+										}
+										</select>
+										{/*<input type="text" className="form-control inputBox" ref="states" id="states" name="states" value={this.state.states} onChange={this.handleChange.bind(this)}/>*/}
 													
 									</div> 
 									<span id="stateError" className="errorMsg"></span>
@@ -635,7 +680,7 @@ class Address extends Component{
 										<span className="input-group-addon inputBoxIcon">
 											<FontAwesomeIcon icon="map-marked-alt" /> 
 										</span> 
-										<input type="number" name="pincode" id="pincode" 
+										<input type="text" name="pincode" id="pincode" 
 										 className="form-control inputBox" 
 										 value={this.state.pincode} 
 										 onChange={this.handleChange.bind(this)} />

@@ -75,11 +75,12 @@ class BasicInfoForm extends Component{
 
 			 	var languagesTags = [];
 			 	if (response.data.languagesKnown) {
+
 			 		response.data.languagesKnown.map((data,ind)=>{
-                    	languagesTags.push({ id : data.id, text : data.language_id.language })
+			 			console.log(data)
+                    	languagesTags.push({ id : data.language_id._id, text : data.language_id.language })
                 	})
 			 	}
-			 	
 			 	this.calAge(response.data.basicInfo.dob);
 			 	this.setState({
 			 		firstName         : response.data.basicInfo.firstName?response.data.basicInfo.firstName:"",
@@ -396,7 +397,7 @@ class BasicInfoForm extends Component{
 								resumeUrl 		   : this.state.resume,
 								executiveSummary   :this.state.executiveSummary	
 							}
-							console.log(status);
+							console.log(formValues);
 			if(status==true){
 			Axios.patch("/api/candidatemaster/patch/updateCandidateBasicInfo",formValues)
 			 .then(response=>{
@@ -648,7 +649,7 @@ class BasicInfoForm extends Component{
 										<i className="fa fa-envelope-o"></i> 
 									</span> 
 									<input type="email" name="email" id="email" 
-									 className="form-control inputBox email" value={this.state.email} readOnly
+									 className="form-control inputBox email" value={this.state.email} 
 									 onChange={this.handleChange.bind(this)} />
 								</div> 
 								<span id="emailError" className="errorMsg"></span>

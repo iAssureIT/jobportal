@@ -35,6 +35,7 @@ class Academics extends Component{
 			area                : "",
 			city                : "",
 			district   		    : "",	
+			stateArray 		    : [],
 			states              : "",
 			stateCode		    : "",
 			country	            : "",
@@ -55,6 +56,8 @@ class Academics extends Component{
 			inputQualification        : [],
 			inputMode                 : ["Part Time","Full Time","Work From Home"],
 		}
+		this.camelCase = this.camelCase.bind(this)
+		this.handleChangeState = this.handleChangeState.bind(this);
 	}
 	componentDidMount(){
 		this.getData();
@@ -92,7 +95,14 @@ class Academics extends Component{
 			.catch(error=>{
 				Swal.fire("Error while getting List data",error.message,'error');
 			})	
-
+		Axios.get("http://locations2.iassureit.com/api/states/get/list/IN")
+			.then((response) => {
+				this.setState({
+					stateArray: response.data
+				})
+			})
+			.catch((error) => {
+			})		
 			if(this.props.match.params.academicsID){
 			this.edit()
 
@@ -112,6 +122,22 @@ class Academics extends Component{
 			 .catch(error=>{
 			 	Swal.fire("Fetch Error!",error.message,'error');
 			 })
+	}
+	camelCase(str) {
+		return str
+			.toLowerCase()
+			.split(' ')
+			.map(word => word.charAt(0).toUpperCase() + word.slice(1))
+			.join(' ');
+	}
+	handleChangeState(event) {
+		const target = event.target;
+	    var state = document.getElementById("states");
+    	var stateCode = state.options[state.selectedIndex].getAttribute("statecode");
+		this.setState({
+			[event.target.name]: event.target.value,
+			stateCode : stateCode
+		});
 	}
 	edit(){
 		var candidate_id = this.state.candidate_id;
@@ -422,17 +448,53 @@ class Academics extends Component{
 		//========== Validation Start ==================
 	 validateForm=()=>{
 		var status = true;
-	
-		if(this.state.grade.length<=0){
-			document.getElementById("gradeError").innerHTML=  
-			"Please enter your Grade";  
+		
+		if(this.state.qualificationLevel.length<=0){
+			document.getElementById("qualificationLevelError").innerHTML=  
+			"Please enter your qualification level";  
 			status=false; 
 		}else{
-			document.getElementById("gradeError").innerHTML=  
-			""; 
+			document.getElementById("qualificationLevelError").innerHTML=""; 
 			status = true;
 		}
+
+		if(this.state.qualification.length<=0){
+			document.getElementById("qualificationError").innerHTML=  
+			"Please enter your qualification";  
+			status=false; 
+		}else{
+			document.getElementById("qualificationError").innerHTML=""; 
+			status = true;
+		}
+
+		// if(this.state.grade.length<=0){
+		// 	document.getElementById("gradeError").innerHTML=  
+		// 	"Please enter your Grade";  
+		// 	status=false; 
+		// }else{
+		// 	document.getElementById("gradeError").innerHTML=  
+		// 	""; 
+		// 	status = true;
+		// }
 		
+		if(this.state.mode.length<=0){
+			document.getElementById("modeError").innerHTML=  
+			"Please enter your qualification";  
+			status=false; 
+		}else{
+			document.getElementById("modeError").innerHTML=""; 
+			status = true;
+		}
+
+		if(this.state.admisionYear.length<=0){
+			document.getElementById("admisionYearError").innerHTML=  
+			"Please enter your Pass Out Year";  
+			status=false; 
+		}else{
+			document.getElementById("admisionYearError").innerHTML=""; 
+			status = true;
+		}
+
 		if(this.state.passOutYear.length<=0){
 			document.getElementById("passOutYearError").innerHTML=  
 			"Please enter your Pass Out Year";  
@@ -466,6 +528,15 @@ class Academics extends Component{
 			status=false; 
 		}else{
 			document.getElementById("cityError").innerHTML=  
+			""; 
+			status = true;
+		}
+		if(this.state.district.length<=0){
+			document.getElementById("districtError").innerHTML=  
+			"Please enter your City";  
+			status=false; 
+		}else{
+			document.getElementById("districtError").innerHTML=  
 			""; 
 			status = true;
 		}
@@ -507,7 +578,7 @@ class Academics extends Component{
 
 							<div className="col-lg-4">
 								<label htmlFor="qualificationLevel" className="nameTitleForm">
-									Qualification Leval
+									Qualification Level
 									<sup className="nameTitleFormStar">*</sup>
 								</label>
 								<div className="input-group ">
@@ -523,6 +594,7 @@ class Academics extends Component{
 									    )}
 									</datalist>
 								</div>
+								<span id="qualificationLevelError" className="errorMsg"></span>
 							</div>
 							<div className="col-lg-4">
 								<label htmlFor="qualification" className="nameTitleForm">
@@ -542,6 +614,7 @@ class Academics extends Component{
 									    )}
 									</datalist>
 								</div>
+								<span id="qualificationError" className="errorMsg"></span>
 							</div>
 							<div className="col-lg-4">
 								<label htmlFor="specialization" className="nameTitleForm">
@@ -565,7 +638,6 @@ class Academics extends Component{
 							<div className="col-lg-4">
 								<label htmlFor="grade" className="nameTitleForm">
 									Grade/Marks/GPA
-									<sup className="nameTitleFormStar">*</sup>
 								</label>
 								<div className="input-group ">
 									<span className="input-group-addon inputBoxIcon">
@@ -608,6 +680,7 @@ class Academics extends Component{
 									  	}
 									</select>
 								</div>
+								<span id="modeError" className="errorMsg"></span>
 							</div>
 						</div>
 
@@ -621,7 +694,7 @@ class Academics extends Component{
 									<span className="input-group-addon inputBoxIcon">
 										<i className="fa fa-calendar"></i>
 									</span> 
-									<input type="text" name="admisionYear" id="admisionYear" 
+									<input type="month" name="admisionYear" id="admisionYear" 
 									 className="form-control inputBox" 
 									 value={this.state.admisionYear} 
 									 onChange={this.handleChange.bind(this)} />
@@ -637,7 +710,7 @@ class Academics extends Component{
 									<span className="input-group-addon inputBoxIcon">
 										<i className="fa fa-calendar"></i>
 									</span> 
-									<input type="text" name="passOutYear" id="passOutYear" 
+									<input type="month" name="passOutYear" id="passOutYear" 
 									 className="form-control inputBox " 
 									 value={this.state.passOutYear} 
 									 onChange={this.handleChange.bind(this)} />
@@ -785,10 +858,20 @@ class Academics extends Component{
 									<span className="input-group-addon inputBoxIcon">
 										<i className="fa fa-map"></i>
 									</span> 
-									<input type="text" name="states" id="states" 
-									 className="form-control inputBox " 
-									 value={this.state.states} 
-									 onChange={this.handleChange.bind(this)} />
+									
+									<select id="states" className="form-control inputBox selectOption"
+										ref="states" value={this.state.states} name="states" onChange={this.handleChangeState} >
+										<option selected={true}>-- Select --</option>
+										{
+											this.state.stateArray && this.state.stateArray.length > 0 ?
+												this.state.stateArray.map((stateData, index) => {
+													return (
+														<option key={index} statecode={stateData.stateCode}>{this.camelCase(stateData.stateName)}</option>
+													);
+												}
+												) : ''
+										}
+									</select>
 								</div> 
 								<span id="stateError" className="errorMsg"></span>
 							</div>
