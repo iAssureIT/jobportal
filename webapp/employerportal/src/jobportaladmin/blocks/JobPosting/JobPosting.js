@@ -342,9 +342,11 @@ class JobPosting extends Component {
         var jobTitle=this.state.jobTitle;
         var minEducation =this.state.minEducation;
         var minExperience =this.state.minExperience;
+        var contactPersonName =this.state.contactPersonName;
         var tempEmail = this.state.contactPersonEmail.trim(); // value of field with whitespace trimmed off
         var emailFilter = /^[^@]+@[^@.]+\.[^@]*\w\w$/;
         var illegalChars = /[\(\)\<\>\,\;\:\\\"\[\]]/;
+        var phoneno = /^\+?([0-9]{2})\)?[-. ]?([0-9]{5})[-. ]?([0-9]{5})$/;
 
         if (this.state.jobTitle.length <= 0) {
             document.getElementById("jobTitleError").innerHTML = "Enter Job Title";
@@ -512,10 +514,20 @@ class JobPosting extends Component {
             status = true;
         }
         if (this.state.contactPersonName.length <= 0) {
-            document.getElementById("contactPersonNameError").innerHTML = "Please Enter contact person name";
+            document.getElementById("contactPersonNameError").innerHTML = "Enter contact person name";
             status = false;
-        } else {
-            document.getElementById("contactPersonNameError").innerHTML = "";
+        }
+        else if (this.state.contactPersonName.length > 256) {
+            document.getElementById("contactPersonNameError").innerHTML = "contact person name should be only 256 characters";
+            status = false;
+        }
+        else if(!regSpaceName.test(contactPersonName)){
+         document.getElementById("contactPersonNameError").innerHTML=  
+         "Please enter valid contact person name,......";  
+         status=false; 
+        }
+        else {
+            document.getElementById("jobTitleError").innerHTML = "";
             status = true;
         }
         
@@ -532,12 +544,15 @@ class JobPosting extends Component {
             status = true;
         }
 
-        if (this.state.contactPersonPhone.length <= 0) {
-            document.getElementById("contactPersonPhoneError").innerHTML = "Please enter phone number";
-            status = false;
-        } else{
-            document.getElementById("contactPersonPhoneError").innerHTML = ""; 
-            status = true;
+        if(this.state.contactPersonPhone.match(phoneno)){
+          document.getElementById("contactPersonPhoneError").innerHTML=  
+          ""; 
+          status = true;
+          
+        }else{
+          document.getElementById("contactPersonPhoneError").innerHTML=  
+          "Please enter valid Mobile Number";  
+          status=false; 
         }
         return status;
     }
@@ -1604,7 +1619,7 @@ render(){
 													value 	  = {this.state.contactPersonPhone}
 													onChange  = {contactPersonPhone => this.setState({ contactPersonPhone })}
 												/>
-												<span id="contactPersonPhoneError" className="errorMsgJobPost"></span>
+												<span id="contactPersonPhoneError" className="errorMsg"></span>
 											</div>
 										</div>
 									</div>
