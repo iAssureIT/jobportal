@@ -458,6 +458,14 @@ class JobPosting extends Component {
             status = true;
         }
 
+        if ((this.state.minSalary) > (this.state.maxSalary)){
+          document.getElementById("maxSalaryError").innerHTML=  
+          "Maximum salary is less than minimum salary";  
+          
+          status=false; 
+        }
+
+
         if (this.state.minSalPeriod.length <= 0) {
             document.getElementById("minSalPeriodError").innerHTML = "Select period";
             status = false;
@@ -1220,7 +1228,7 @@ render(){
 													<label className="addjobformLable col-lg-12"> Pincode <span className="asterisk">&#42;</span> </label>
 												</div>
 												<div className="input-group"> 
-													<input type="text" className="form-control addJobFormField addJobState" ref="pincode" id="pincode" name="pincode" maxLength="06" value={this.state.pincode} onChange={this.keyPressNumber.bind(this)}/>
+													<input type="number" className="form-control addJobFormField addJobState" ref="pincode" id="pincode" name="pincode" maxLength="06" value={this.state.pincode} onChange={this.keyPressNumber.bind(this)}/>
 												</div>
                                                 <span id="pincodeError" className="errorMsg"></span>
 											</div>
