@@ -354,14 +354,48 @@ class JobPosting extends Component {
 
     validateForm = () => {
         var status = true;
+        var regSpaceName = /^[a-zA-Z\s]+$/;
+        var corporate=this.state.corporate;
+        var jobTitle=this.state.jobTitle;
+        var minEducation =this.state.minEducation;
+        var minExperience =this.state.minExperience;
+        var contactPersonName =this.state.contactPersonName;
         var tempEmail = this.state.contactPersonEmail.trim(); // value of field with whitespace trimmed off
         var emailFilter = /^[^@]+@[^@.]+\.[^@]*\w\w$/;
         var illegalChars = /[\(\)\<\>\,\;\:\\\"\[\]]/;
+        var phoneno = /^\+?([0-9]{2})\)?[-. ]?([0-9]{5})[-. ]?([0-9]{5})$/;
+
+
+        if (this.state.corporate.length <= 0) {
+            document.getElementById("corporateError").innerHTML = "Enter Company name";
+            status = false;
+        }
+        
+        else if(!regSpaceName.test(corporate)){
+         document.getElementById("corporateError").innerHTML=  
+         "Please enter valid company name,......";  
+         status=false; 
+        }
+        else {
+            document.getElementById("corporateError").innerHTML = "";
+            status = true;
+        }
+
 
         if (this.state.jobTitle.length <= 0) {
             document.getElementById("jobTitleError").innerHTML = "Enter Job Title";
             status = false;
-        } else {
+        }
+        else if (this.state.jobTitle.length > 256) {
+            document.getElementById("jobTitleError").innerHTML = "Job Title should be only 256 characters";
+            status = false;
+        }
+        else if(!regSpaceName.test(jobTitle)){
+         document.getElementById("jobTitleError").innerHTML=  
+         "Please enter valid name,......";  
+         status=false; 
+        }
+        else {
             document.getElementById("jobTitleError").innerHTML = "";
             status = true;
         }
@@ -379,6 +413,7 @@ class JobPosting extends Component {
             document.getElementById("statesError").innerHTML = "";
             status = true;
         }
+
         if (this.state.cityVillage.length <= 0) {
             document.getElementById("cityVillageError").innerHTML = "Enter City";
             status = false;
@@ -393,27 +428,126 @@ class JobPosting extends Component {
             document.getElementById("districtError").innerHTML = "";
             status = true;
         }
-        /*if (this.state.pincode.length <= 0) {
+       if (this.state.pincode.length <= 0) {
             document.getElementById("pincodeError").innerHTML = "Enter Pincode";
             status = false;
         } else {
             document.getElementById("pincodeError").innerHTML = "";
             status = true;
-        }*/
-        if (this.state.functionalarea_id.length <= 0) {
+        }
+        if (this.state.functionalArea.length <= 0) {
             document.getElementById("functionalAreaError").innerHTML = "Select or enter Functional Area";
             status = false;
         } else {
             document.getElementById("functionalAreaError").innerHTML = "";
             status = true;
         }
-        if (this.state.subfunctionalarea_id.length <= 0) {
+        if (this.state.subFunctionalArea.length <= 0) {
             document.getElementById("subFunctionalAreaError").innerHTML = "Select or enter Sub-Functional Area";
             status = false;
         } else {
             document.getElementById("subFunctionalAreaError").innerHTML = "";
             status = true;
         }
+
+        if (this.state.positions < 0) {
+            document.getElementById("positionsError").innerHTML = "Please enter positive number";
+            status = false;
+        } 
+         else if (this.state.positions.length <= 0) {
+            document.getElementById("positionsError").innerHTML = "Please enter  number";
+            status = false;
+        }
+
+        else {
+            document.getElementById("positionsError").innerHTML = "";
+            status = true;
+        }
+
+        if (this.state.minSalary < 0) {
+            document.getElementById("minSalaryError").innerHTML = "Please enter positive number";
+            status = false;
+        }
+         else if (this.state.minSalary.length <= 0) {
+            document.getElementById("minSalaryError").innerHTML = "Please enter minimum salary";
+            status = false;
+        }
+
+         else {
+            document.getElementById("minSalaryError").innerHTML = "";
+            status = true;
+        }
+
+        if (this.state.maxSalary < 0) {
+            document.getElementById("maxSalaryError").innerHTML = "Please enter positive number";
+            status = false;
+        }
+        else if (this.state.maxSalary.length <= 0) {
+            document.getElementById("maxSalaryError").innerHTML = "Please enter maximum salary";
+            status = false;
+        }
+
+         else {
+            document.getElementById("maxSalaryError").innerHTML = "";
+            status = true;
+        }
+
+        if ((this.state.minSalary) > (this.state.maxSalary)){
+          document.getElementById("maxSalaryError").innerHTML=  
+          "Maximum salary is less than minimum salary";  
+          
+          status=false; 
+        }
+
+
+        if (this.state.minSalPeriod.length <= 0) {
+            document.getElementById("minSalPeriodError").innerHTML = "Select period";
+            status = false;
+        } else {
+            document.getElementById("minSalPeriodError").innerHTML = "";
+            status = true;
+        }
+
+        if (this.state.maxSalPeriod.length <= 0) {
+            document.getElementById("maxSalPeriodError").innerHTML = "Select period";
+            status = false;
+        } else {
+            document.getElementById("maxSalPeriodError").innerHTML = "";
+            status = true;
+        }
+
+        if (this.state.minEducation.length <= 0) {
+            document.getElementById("minEducationError").innerHTML = "Please enter minimum education";
+            status = false;
+        }
+        else if (this.state.minEducation.length > 256) {
+            document.getElementById("minEducationError").innerHTML = "Education should be only 256 characters";
+            status = false;
+        }
+        else if(!regSpaceName.test(minEducation)){
+         document.getElementById("minEducationError").innerHTML=  
+         "Please enter valid education,......";  
+         status=false; 
+        }
+        else {
+            document.getElementById("minEducationError").innerHTML = "";
+            status = true;
+        }
+
+         if (this.state.minExperience < 0) {
+            document.getElementById("minExperienceError").innerHTML = "Please enter positive number";
+            status = false;
+        }
+        else if (this.state.minExperience.length <= 0) {
+            document.getElementById("minExperienceError").innerHTML = "Please enter minimum experience";
+            status = false;
+        }
+
+         else {
+            document.getElementById("minExperienceError").innerHTML = "";
+            status = true;
+        }
+
         if (this.state.jobRole.length <= 0) {
             document.getElementById("jobRoleError").innerHTML = "Please enter Job Role";
             status = false;
@@ -422,10 +556,20 @@ class JobPosting extends Component {
             status = true;
         }
         if (this.state.contactPersonName.length <= 0) {
-            document.getElementById("contactPersonNameError").innerHTML = "Please enter contact person name";
+            document.getElementById("contactPersonNameError").innerHTML = "Enter contact person name";
             status = false;
-        } else {
-            document.getElementById("contactPersonNameError").innerHTML = "";
+        }
+        else if (this.state.contactPersonName.length > 256) {
+            document.getElementById("contactPersonNameError").innerHTML = "contact person name should be only 256 characters";
+            status = false;
+        }
+        else if(!regSpaceName.test(contactPersonName)){
+         document.getElementById("contactPersonNameError").innerHTML=  
+         "Please enter valid contact person name,......";  
+         status=false; 
+        }
+        else {
+            document.getElementById("jobTitleError").innerHTML = "";
             status = true;
         }
         
@@ -442,12 +586,15 @@ class JobPosting extends Component {
             status = true;
         }
 
-        if (this.state.contactPersonPhone.length <= 0) {
-            document.getElementById("contactPersonPhoneError").innerHTML = "Please enter phone number";
-            status = false;
-        } else{
-            document.getElementById("contactPersonPhoneError").innerHTML = ""; 
-            status = true;
+        if(this.state.contactPersonPhone.match(phoneno)){
+          document.getElementById("contactPersonPhoneError").innerHTML=  
+          ""; 
+          status = true;
+          
+        }else{
+          document.getElementById("contactPersonPhoneError").innerHTML=  
+          "Please enter valid Mobile Number";  
+          status=false; 
         }
         return status;
     }
@@ -1044,7 +1191,7 @@ render(){
                                                                 <option key={key} value={item.companyName} data-value={item._id} data-industry={item.industry_id}/>
                                                             )}
                                                         </datalist>
-                                                    <span id="functionalAreaError" className="errorMsgJobPost"></span>
+                                                    <span id="corporateError" className="errorMsgJobPost"></span>
                                                 </div>
                                             </div>
                                         </div>              
@@ -1288,6 +1435,7 @@ render(){
                                                             )}
                                                         </datalist>
                                                 </div>
+                                                 <span id="jobTypeError" className="errorMsgJobPost"></span>
                                             </div>
                                             
                                             <div className="col-lg-4">
@@ -1302,6 +1450,7 @@ render(){
                                                             )}
                                                         </datalist>
                                                 </div>
+                                                <span id="jobTimeError" className="errorMsgJobPost"></span>
                                             </div>
                                             
                                             <div className="col-lg-4">
@@ -1316,6 +1465,7 @@ render(){
                                                             )}
                                                         </datalist>
                                                 </div>
+                                                <span id="jobCategoryError" className="errorMsgJobPost"></span>
                                             </div>
                                         </div>
                                     </div>
@@ -1324,12 +1474,13 @@ render(){
                                         <div className="row">
                                             <div className="col-lg-4">
                                                 <div className="row">
-                                                    <label htmlFor="positions" className="addjobformLable col-lg-12"> No. of Positions </label>
+                                                    <label htmlFor="positions" className="addjobformLable col-lg-12"> No. of Positions  <span className="asterisk">&#42;</span></label>
                                                 </div>
                                                 <div className="input-group">
                                                     <span className="input-group-addon addJobFormField"><i className="fa fa-users"></i></span> 
                                                     <input type="text" className="form-control addJobFormField" name="positions" id="positions" maxLength="50" value={this.state.positions} onChange={this.handleChange}/>
                                                 </div>
+                                                <span id="positionsError" className="errorMsgJobPost"></span>
                                             </div>
                                             
                                             <div className="col-lg-4 democlass">
@@ -1338,6 +1489,7 @@ render(){
                                                     <span className="input-group-addon addJobFormField"><i className="fa fa-calendar"></i></span> 
                                                     <input type="date" className="form-control addJobFormField" name="lastDateOfAppl" id="lastDateOfAppl" value={this.state.lastDateOfAppl} onChange={this.handleChange}/>
                                                 </div>
+                                                 <span id="dateError" className="errorMsgJobPost"></span>
                                             </div>
                                         </div>  
                                     </div>
@@ -1354,11 +1506,12 @@ render(){
                                             <div className="col-lg-6">
                                                 <div className="row row-no-gutters">
                                                     <div className="col-lg-8">
-                                                        <label htmlFor="minSalary" className="addjobformLable"> Minimum Salary <i className="fa fa-rupee"></i> </label>
+                                                        <label htmlFor="minSalary" className="addjobformLable"> Minimum Salary <i className="fa fa-rupee"></i> <span className="asterisk">&#42;</span> </label>
                                                         <div className="input-group">
                                                             <span className="input-group-addon addJobFormField"> <i className="fa fa-rupee addJobrupee"></i> </span> 
                                                             <input type="text" className="form-control addJobFormField" name="minSalary" id="minSalary" maxLength="50" value={this.state.minSalary} onChange={this.handleChange}/>
                                                         </div>
+                                                        <span id="minSalaryError" className="errorMsgJobPost"></span>
                                                     </div>
                                                     
                                                     <div className="col-lg-4">
@@ -1368,6 +1521,7 @@ render(){
                                                             <option> Per Month </option>
                                                             <option> Per Year  </option>
                                                         </select>
+                                                        <span id="minSalPeriodError" className="errorMsgJobPost"></span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1375,11 +1529,12 @@ render(){
                                             <div className="col-lg-6">
                                                 <div className="row row-no-gutters">
                                                     <div className="col-lg-8">
-                                                        <label htmlFor="maxSalary" className="addjobformLable"> Maximum Salary <i className="fa fa-rupee"></i> </label>
+                                                        <label htmlFor="maxSalary" className="addjobformLable"> Maximum Salary <i className="fa fa-rupee"></i> <span className="asterisk">&#42;</span> </label>
                                                         <div className="input-group">
                                                             <span className="input-group-addon addJobFormField"><i className="fa fa-rupee addJobrupee"></i> </span> 
                                                             <input type="text" className="form-control addJobFormField" name="maxSalary" id="maxSalary" maxLength="50" value={this.state.maxSalary} onChange={this.handleChange}/>
                                                         </div>
+                                                        <span id="maxSalaryError" className="errorMsgJobPost"></span>
                                                     </div>
                                                     
                                                     <div className="col-lg-4">
@@ -1389,6 +1544,7 @@ render(){
                                                             <option> Per Month </option>
                                                             <option> Per Year  </option>
                                                         </select>
+                                                        <span id="maxSalPeriodError" className="errorMsgJobPost"></span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1405,19 +1561,21 @@ render(){
                                     <div className="col-lg-12 addJobFieldRow text-left">
                                         <div className="row">
                                             <div className="col-lg-6">
-                                                <label htmlFor="minEducation" className="addjobformLable"> Minimum Education Required </label>
+                                                <label htmlFor="minEducation" className="addjobformLable"> Minimum Education Required <span className="asterisk">&#42;</span></label>
                                                 <div className="input-group">
                                                     <span className="input-group-addon addJobFormField"> <i className="fa fa-graduation-cap"></i> </span> 
                                                     <input type="text" className="form-control addJobFormField" name="minEducation" id="minEducation" maxLength="50" value={this.state.minEducation} onChange={this.handleChange}/>
                                                 </div>
+                                                <span id="minEducationError" className="errorMsgJobPost"></span>
                                             </div>
                                             
                                             <div className="col-lg-6">
-                                                <label htmlFor="minExperience" className="addjobformLable"> Minimum Overall Experience </label>
+                                                <label htmlFor="minExperience" className="addjobformLable"> Minimum Overall Experience <span className="asterisk">&#42;</span></label>
                                                 <div className="input-group">
                                                     <span className="input-group-addon addJobFormField"> <i className="fa fa-history"></i> </span> 
                                                     <input type="text" className="form-control addJobFormField" name="minExperience" id="minExperience" maxLength="50" value={this.state.minExperience} onChange={this.handleChange}/>
                                                 </div>
+                                                <span id="minExperienceError" className="errorMsgJobPost"></span>
                                             </div>
                                         </div>
                                     </div>
