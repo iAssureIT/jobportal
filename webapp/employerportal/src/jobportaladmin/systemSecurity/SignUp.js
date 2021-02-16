@@ -11,6 +11,7 @@ import './SignUp.css';
 import swal from 'sweetalert';
 import axios from 'axios';
 import Autosuggest from 'react-autosuggest';
+import _          from 'underscore';
 import 'react-phone-input-2/lib/style.css';
 
 class SignUp extends Component {
@@ -18,35 +19,41 @@ class SignUp extends Component {
   constructor() {
     super();
     this.state = {
-
-      value : '',
-      checkUserExists: 0,
-      loggedIn: false,
-      showPassword1: false,
-      showPassword2: false,
-      employerID : "",
-      employer_id:"",
-      employerName: "",
-      formerrors: {
-        firstNameV: "",
-        lastNameV: "",
-        mobileV: "",
-        emailIDV: "",
+      value                 : '',
+      checkUserExists       : 0,
+      loggedIn              : false,
+      showPassword1         : false,
+      showPassword2         : false,
+      employerID            : "",
+      employer_id           : "",
+      employerName          : "",
+      company               : "",
+      company_id            : "",
+      companylist           : [],
+      city                  : [], 
+      selectedCompany       : [],
+      stateArray            : [],
+      companyState          : "",
+      companyCountry        : "",
+      countryCode           : "IN",
+      companyCity           : "",
+      formerrors            : {
+        firstNameV          : "",
+        lastNameV           : "",
+        mobileV             : "",
+        emailIDV            : "",
       },
-      employerArray : [],
-      vendor_Id : "",
-      currentCompany :"",
-          firstName  : "",
-          lastName   : "",
-          password   : "",
-          confirmPassword   : "",
-          emailAddress      : "",
-          mobileNumber      : "",
-      value: '',
-      suggestions: []
+      employerArray         : [],
+      firstName             : "",
+      lastName              : "",
+      password              : "",
+      confirmPassword       : "",
+      emailAddress          : "",
+      mobileNumber          : "",
+      value                 : '',
+      suggestions           : []
     }
     this.handleChange = this.handleChange.bind(this);
-    this.onChange = this.onChange.bind(this);
   }
   componentWillMount() {
 
@@ -55,20 +62,29 @@ class SignUp extends Component {
     
     $(".checkUserExistsError").hide();
     //==============
-    axios.get('/api/entitymaster/get/corporate')
-    .then((response) => {
-      
-      var employerArray = [];
-      response.data.map((value,ind)=>{
-        employerArray.push({_id: value._id, companyID : value.companyID, label : value.companyName})
+    axios.get("/api/entitymaster/get/corporate")
+        .then(response => {
+                this.setState({ companylist : response.data });
+        })
+        .catch(error => {
+            swal.fire("Error while getting List data", error.message, 'error');
+        }) 
+    axios.get("http://locations2.iassureit.com/api/states/get/list/IN")
+      .then((response) => {
+        this.setState({
+          stateArray: response.data
+        })
+        
       })
-      console.log('entitymaster==',employerArray)
-      this.setState({
-              employerArray : employerArray
-            })
-    })
-    .catch((error) => {
-    })
+      .catch((error) => {
+      })    
+  }
+  camelCase(str) {
+    return str
+      .toLowerCase()
+      .split(' ')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
   }
   showPassword1=(event)=>{
     event.preventDefault();
@@ -241,11 +257,7 @@ class SignUp extends Component {
         companyID   : this.state.employerID != "" ? this.state.employerID : null,
         companyName : this.state.employerName,
         role        : 'employer',
-
-        status      : 'unverified',
-
-       
-        
+        status      : 'unverified',        
       }
 
       
@@ -383,69 +395,51 @@ class SignUp extends Component {
   proceed() {
 
   }
-  escapeRegexCharacters(str) {
-    return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-  }
+  onChangeCompany(event){
+        const {name,value} = event.target;
+        this.setState({ [name]:value });  
+        
+        var company_id;
+        if (document.querySelector('#company option[value="' + value + '"]')) {
+           company_id = document.querySelector('#company option[value="' + value + '"]').getAttribute("data-value")
+        }else{company_id = "" }
 
-  getSuggestions(value) {
-    const escapedValue = this.escapeRegexCharacters(value.trim());
-    
-    if (escapedValue === '') {
-      return [];
-    }
+         
+        var selectedCompany = this.state.companylist.filter((val)=>{
+          if (val._id ==company_id) {
+            return val;
+          }
+        })
+        console.log(selectedCompany)
+        if (selectedCompany[0]) {
+          var city = _.uniq(selectedCompany[0].locations, 'district')
+        
+          this.setState({company_id :company_id, selectedCompany : selectedCompany, city: city, });
 
-    const regex = new RegExp('^' + escapedValue, 'i');
+        }else{
+          this.setState({company_id :company_id, company : value });
 
-    return this.state.employerArray.filter(employer => regex.test(employer.label));
-  }
-
-  getSuggestionValue(suggestion) {
-    return suggestion.label;
-  }
-
-  renderSuggestion(suggestion) {
-    return (
-      <span className="Autosuggestlist">{suggestion.label}</span>
-    );
-  }
-
-  onChange = (event, { newValue , method}) => {
-    if (method="type") {
-      this.setState({ value: newValue, employerName : newValue})
+        }
+        
+    } 
+    handleChangeCity(event){
+      var value = event.currentTarget.value;
+      var name  = event.currentTarget.name;
       
-    }else{
-      this.setState({
-        value: newValue
-      });
+      if (document.querySelector('#companyCity option[value="' + value + '"]')) {
+        this.setState({
+          [name]      : value,
+          "companyState"    : document.querySelector('#companyCity option[value="' + value + '"]').getAttribute("data-state"),
+          "stateCode"   : document.querySelector('#companyCity option[value="' + value + '"]').getAttribute("data-stateCode"),
+          "companyCountry"    : document.querySelector('#companyCity option[value="' + value + '"]').getAttribute("data-country"),
+          "countryCode"   : document.querySelector('#companyCity option[value="' + value + '"]').getAttribute("data-countryCode")
+        })
+      }else{
+        this.setState({ [name]      : value })
+      }
     }
-  };
- 
-  // Autosuggest will call this function every time you need to update suggestions.
-  // You already implemented this logic above, so just use it.
-  onSuggestionsFetchRequested = ({ value }) => {
-    this.setState({
-      suggestions: this.getSuggestions(value)
-    });
-  };
- 
-  // Autosuggest will call this function every time you need to clear suggestions.
-  onSuggestionsClearRequested = () => {
-    this.setState({
-      suggestions: []
-    });
-  };
-  onSuggestionSelected=(event, { suggestion, suggestionValue, suggestionIndex, sectionIndex, method }) => { 
-    console.log("suggestion",suggestion)
-    
-    this.setState({employer_id : suggestion._id, employerID : suggestion.companyID, employerName : suggestionValue})
-  };
   render() {
-    const { value, suggestions } = this.state;
-    const inputProps = {
-      placeholder: "Employer",
-      value,
-      onChange: this.onChange
-    };
+    
     return (
       
       <section className="container-fluid registrationFormWrapper">
@@ -461,20 +455,76 @@ class SignUp extends Component {
                 <div className="col-lg-12 form-group" >
                   <div className="input-group autocomplete">
                     <span className="input-group-addon registrationInputIcon"><i className="fa fa-briefcase"></i></span>
-                      <Autosuggest 
-                        suggestions={suggestions}
-                        onSuggestionsFetchRequested={this.onSuggestionsFetchRequested.bind(this)}
-                        onSuggestionsClearRequested={this.onSuggestionsClearRequested.bind(this)}
-                        getSuggestionValue={this.getSuggestionValue.bind(this)}
-                        renderSuggestion={this.renderSuggestion.bind(this)}
-                        onSuggestionSelected={this.onSuggestionSelected.bind(this)}
-                        inputProps={inputProps}
-                      />
+                    <input type="text" list="company" className="form-control inputBox" refs="industry" 
+                    name="company" id="selectCompany" maxLength="100" value={this.state.company} data-value={this.state.company_id}
+                    onChange={this.onChangeCompany.bind(this)} />
+                    <datalist name="company" id="company" className="companylist" >
+                        { this.state.companylist.map((item, key) =>
+                            <option key={key} value={item.companyName} data-value={item._id}/>
+                        )}
+                    </datalist>
                   </div>
                   <span id="employerError" className="errorMsg"></span>
                 </div>
               </div>  
-              
+              <div className="row">
+              <div className="col-lg-4 form-group">
+                {/*<label htmlFor="companyCity" className="nameTitleForm">
+                   City
+                  <sup className="nameTitleFormStar">*</sup>
+                </label>*/}
+                <div className="input-group ">
+                  <span className="input-group-addon registrationInputIcon"><i className="fa fa-map-marker"></i></span> 
+                  <input type="text" list="companyCity" className="form-control registrationInputBox" refs="industry" 
+                    name="companyCity" id="selectCompanyCity" maxLength="100" value={this.state.companyCity}
+                    onChange={this.handleChangeCity.bind(this)} />
+                    <datalist name="companyCity" id="companyCity" className="companyCity" >
+                        { this.state.city.map((elem, key) =>
+                            <option key={key} value={elem.district} data-stateCode = {elem.stateCode} data-state={elem.state} data-countryCode = {elem.countryCode} data-country = {elem.country}/>
+                        )}
+                    </datalist>                  
+                </div> 
+                <span id="companyCityError" className="errorMsg"></span>
+              </div>
+
+              <div className="col-lg-4">
+                {/*<label htmlFor="companyState" className="nameTitleForm">
+                   State
+                  <sup className="nameTitleFormStar">*</sup>
+                </label>*/}
+                <div className="input-group ">
+                  <span className="input-group-addon registrationInputIcon"><i className="fa fa-map-marker"></i></span>  
+                  
+                  <select id="states" className="form-control registrationInputBox selectOption"
+                    ref="companyState" value={this.state.companyState} name="companyState" onChange={this.handleChangeState} >
+                    <option selected={true}>-- Select --</option>
+                    {
+                      this.state.stateArray && this.state.stateArray.length > 0 ?
+                        this.state.stateArray.map((stateData, index) => {
+                          return (
+                            <option key={index} statecode={stateData.stateCode}>{this.camelCase(stateData.stateName)}</option>
+                          );
+                        }
+                        ) : ''
+                    }
+                  </select>
+                </div> 
+                <span id="stateError" className="errorMsg"></span>
+              </div>
+              <div className="col-lg-4">
+                {/*<label htmlFor="companyCountry" className="nameTitleForm">
+                   Country
+                    <sup className="nameTitleFormStar">*</sup>
+                </label>*/}
+                <div className="input-group ">
+                  <span className="input-group-addon registrationInputIcon"><i className="fa fa-map-marker"></i></span> 
+                  <input type="text" name="companyCountry" id="companyCountry" 
+                   className="form-control registrationInputBox " value={this.state.companyCountry}
+                   onChange={this.handleChange.bind(this)} />
+                </div> 
+                <span id="companyCountryError" className="errorMsg"></span>
+              </div>
+            </div>
               <div className="row">
                 <div className="col-lg-6 form-group" >
                     <div className="input-group">

@@ -1408,7 +1408,7 @@ class LocationDetails extends Component {
 																		<label className="labelform col-lg-12 col-md-12 col-sm-12 col-xs-12">Flat No/Block No</label>
 																		<input id="Line2" type="text" className="form-control col-lg-12 col-md-12 col-sm-12 col-xs-12" value={this.state.addressLine2} ref="addressLine2" name="addressLine2" onChange={this.handleChange} />
 																	</div>
-																	<div className="col-lg-4 col-md-4 col-sm-12 col-xs-12  " >
+																	<div className="col-lg-4 col-md-4 col-sm-12 col-xs-12  entityLocation" >
 																		<label className="labelform col-lg-12 col-md-12 col-sm-12 col-xs-12">Address Line 2 <i className="astrick">*</i></label>
 																		<PlacesAutocomplete
 								                                        value={this.state.addressLine1}

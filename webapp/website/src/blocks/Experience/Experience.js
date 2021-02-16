@@ -36,6 +36,7 @@ class Experience extends Component{
 			currentCTC                    : "",
 			fromDate	                  : "",	
 			toDate                        : "",
+			currentlyWorkingHere 	      : false,	
 			companyState                  : "",
 			responsibilities              : "",
 			reportingManager              : "",
@@ -153,6 +154,7 @@ class Experience extends Component{
 			 		reportingManagerDesignation : editData[0].workExperience[0].reportingManagerDegn,
 			 		fromDate                    : Moment(editData[0].workExperience[0].fromDate).format("YYYY-MM-DD"),
 			 		toDate                      : Moment(editData[0].workExperience[0].toDate).format("YYYY-MM-DD"),
+			 		currentlyWorkingHere 		: editData[0].workExperience[0].currentlyWorkingHere,	
 			 		currentCTC                  : editData[0].currentCTC,
 			 		expectedCTC                 : editData[0].expectedCTC,
 			 		noticePeriod                : editData[0].noticePeriod,
@@ -249,6 +251,7 @@ class Experience extends Component{
 									department                    : this.state.lastDeartment,
 									fromDate                      : this.state.fromDate,
 									toDate                        : this.state.toDate,
+									currentlyWorkingHere 		  : this.state.currentlyWorkingHere,	
 									responsibilities              : this.state.responsibilities,
 									reportingManager              : this.state.reportingManager,
 									reportingManagerDegn          : this.state.reportingManagerDesignation,
@@ -289,6 +292,7 @@ class Experience extends Component{
 									companyState	              : "",	
 									expectedCTC	                  : "",	
 									toDate                        : "",
+									currentlyWorkingHere 		  : false,	
 									responsibilities              : "",
 									reportingManager              : "",
 									reportingManagerDesignation   : "",
@@ -328,6 +332,7 @@ class Experience extends Component{
 										expectedCTC	                  : "",	
 										companyState	              : "",	
 										toDate                        : "",
+										currentlyWorkingHere 		  : false,	
 										responsibilities              : "",
 										reportingManager              : "",
 										reportingManagerDesignation   : "",
@@ -416,6 +421,13 @@ class Experience extends Component{
 	}
 	handleChangeCheckbox(event){
 		event.preventDefault();
+		this.setState({ currentlyWorkingHere :  !this.state.currentlyWorkingHere })
+		if (this.state.currentlyWorkingHere) {
+			console.log(Moment(new Date()).format("YYYY-MM"))
+			this.setState({ toDate : Moment(new Date()).format("YYYY-MM") })
+		}else{
+			this.setState({ toDate : "" })
+		}
 	}
 	//========== User Define Function End ==================
 	//========== Validation Start ==================
@@ -615,7 +627,7 @@ class Experience extends Component{
 										        <option key={key} value={item.companyName} data-value={item._id}/>
 										    )}
 										</datalist>
-								</div>
+								</div> 
 								<span id="companyNameError" className="errorMsg"></span>
 							</div>
 						</div>	
@@ -770,11 +782,10 @@ class Experience extends Component{
 						</div>
 						<div className="row formWrapper">
 							<div className="col-lg-3 currentWoking">
-								
 								<div className="customCheckBox">
 									<label  className="">
 										<input type="checkbox" name="currentlyWorkingHere" id="currentlyWorkingHere"
-										value={this.state.currentlyWorkingHere}  onChange={ this.handleChangeCheckbox.bind(this) }/>
+										value={this.state.currentlyWorkingHere}  onChange={ this.handleChangeCheckbox.bind(this) } checked={this.state.currentlyWorkingHere} />
 										<span className="checkmark"></span>
 									</label>
 								</div>

@@ -635,7 +635,7 @@ class Address extends Component{
 										<span className="input-group-addon inputBoxIcon">
 											<i className="fa fa-map"></i> 
 										</span> 
-										<select id="states" className="form-control inputBox selectOption"
+										{/*<select id="states" className="form-control inputBox selectOption"
 										ref="states" value={this.state.states} name="states" onChange={this.handleChangeState} >
 										<option selected={true}>-- Select --</option>
 										{
@@ -647,8 +647,8 @@ class Address extends Component{
 												}
 												) : ''
 										}
-										</select>
-										{/*<input type="text" className="form-control inputBox" ref="states" id="states" name="states" value={this.state.states} onChange={this.handleChange.bind(this)}/>*/}
+										</select>*/}
+										<input type="text" className="form-control inputBox" ref="states" id="states" name="states" value={this.state.states} onChange={this.handleChange.bind(this)}/>
 													
 									</div> 
 									<span id="stateError" className="errorMsg"></span>

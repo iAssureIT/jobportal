@@ -312,7 +312,12 @@ exports.getJobList = (req,res,next)=>{
 
     selector['$and'] 	= [];
     selector["$and"].push({ "location.countryCode" :  req.body.countryCode   })
-   	
+   	if (req.body.stateCode) {
+        selector["$and"].push({ "location.stateCode" :  req.body.stateCode   })
+    }
+    if (req.body.district) {
+        selector["$and"].push({ "location.district" :  req.body.district   }) 
+    }
     if (req.body.company_id) {
     	
     	selector["$and"].push({ "jobBasicInfo.company_id" : ObjectID(req.body.company_id)});
@@ -538,6 +543,9 @@ exports.jobCount = (req, res, next)=>{
     
     if (req.body.stateCode) {
         selector["$and"].push({ "location.stateCode" :  req.body.stateCode   })
+    }
+    if (req.body.district) {
+        selector["$and"].push({ "location.district" :  req.body.district   }) 
     }
     if (req.body.industry_id) {
         req.body.industry_id.map(elem => {

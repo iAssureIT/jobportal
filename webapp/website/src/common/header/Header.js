@@ -168,7 +168,7 @@ class Header extends Component{
 
 
     render(){
-    
+    console.log(window.location.pathname.split("/"))
     const selectedState = this.props.selectedState;
     //console.log(this.props.selector)
     if (this.props.userDetails.loggedIn) {    
@@ -179,11 +179,10 @@ class Header extends Component{
         </div>
 
         <div className="breadCrumbHeader col-lg-2">
-        {/*<ul className="breadCrumbInner">
+        <ul className="breadCrumbInner">
             <li className="breadCrumbInnerli"><a href="/">India</a></li>
             <li className="breadCrumbInnerli selectedState"><a href={"/"+selectedState}>{selectedState}</a></li>  
-           
-          </ul>*/}
+        </ul>
         </div>
 
               <div className="FunctionWiseTitle col-lg-5">
@@ -320,14 +319,23 @@ class Header extends Component{
         <div className="iconHeader col-lg-1">
             <a href="/"><img src="/images/1.png" alt="icon" /></a>
         </div>
-
-        <div className="breadCrumbHeader col-lg-2">
-        {/* <ul className="breadCrumbInner">
-            <li className="breadCrumbInnerli"><a href="/">India</a></li>
-            <li className="breadCrumbInnerli selectedState"><a href={"/"+selectedState}>{selectedState}</a></li>  
-           
-          </ul>*/}
-        </div>
+        {
+          window.location.pathname.split("/")[1] == "state" ? 
+          <div className="breadCrumbHeader col-lg-2">
+          <ul className="breadCrumbInner">
+              <li className="breadCrumbInnerli"><a href="/">India</a></li>
+              <li className= {window.location.pathname.split("/")[3] ? "breadCrumbInnerli" : "breadCrumbInnerli selectedState"}>
+              <a href={"/state/"+selectedState}>{selectedState}</a>
+              </li>  
+              { window.location.pathname.split("/")[3] ? 
+              <li className="breadCrumbInnerli selectedState">
+              <a href={"/state/"+window.location.pathname.split("/")[2]+"/"+window.location.pathname.split("/")[3] }>{window.location.pathname.split("/")[3] }</a>
+              </li>  : null }  
+          </ul>
+          </div>
+          : <div className="breadCrumbHeader col-lg-2"></div>
+        }
+        
 
               <div className="FunctionWiseTitle col-lg-5">
                

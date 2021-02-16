@@ -307,3 +307,6 @@ font-face {
 .signOutButton{
   margin-left: 12px
 }
+.selectedState a{
+color: var(--main-heading-font-color) !important
+}

@@ -32,11 +32,25 @@ class Maharashtra extends Component{
 	search(){
 		return 10;
 	}
-	onStateClick = (stateName) => {
+	onDistrictClick = (district,stateCode) => {
 		
+		var {mapAction} = this.props;
+		mapAction.setViewMode("functionalView");
+
+		var selector = this.props.selector;
+		
+		selector.countryCode = "IN"; 
+		selector.stateCode = stateCode; 
+		selector.district = district; 
+
+		mapAction.jobCount(selector);
+		mapAction.filterFunctionalData(this.props.selector);
+
+		this.props.history.push("/state/"+stateCode+"/"+district);
+
+
 	}
 	render(){
-		console.log(this.state)
 		return(
 			<div className="bodyWrapper">
 				<div className="stateWrapper">
@@ -101,7 +115,7 @@ class Maharashtra extends Component{
 						<span className="ahmadnagarNumber  mapCountLabel  text-center">{this.state.Ahmednagar ? this.state.Ahmednagar : 0}</span>
 					</div>
 
-					<div className="pune classHover"> 
+					<div className="pune classHover" onClick={e => this.onDistrictClick("Pune","MH")}> 
 						<img src="/Maps/Maharashtra/Pune.png" alt="Pune" onMouseOver={e => (e.currentTarget.src = "/Maps/Maharashtra/Pune_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Maharashtra/Pune.png")}/>
 						<span className="puneText mapTextLabel  text-capitalize">Pune</span>
 						<span className="puneNumber  mapCountLabel  text-center">{this.state.Pune ? this.state.Pune : 0}</span>
@@ -198,7 +212,7 @@ class Maharashtra extends Component{
 						<span className="nandedText  mapTextLabel text-capitalize">Nanded</span>
 						<span className="nandedNumber  mapCountLabel  text-center">{this.state.Nanded ? this.state.Nanded : 0}</span>
 					</div>
-
+ 
 					<div className="yawatmal classHover"> 
 						<img src="/Maps/Maharashtra/Yawatmal.png" alt="Yavatmal" onMouseOver={e => (e.currentTarget.src = "/Maps/Maharashtra/Yawatmal_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Maharashtra/Yawatmal.png")}/>
 						<span className="yawatmalText  mapTextLabel text-capitalize">Yavatmal</span>

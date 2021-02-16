@@ -370,7 +370,7 @@ class Academics extends Component{
 							}
 		console.log(formValues)						
 		if(this.props.match.params.academicsID){
-			this.updateData(formValues,event);
+			//this.updateData(formValues,event);
 		}else{
 			this.insetData(formValues,event);
 		}
@@ -410,6 +410,7 @@ class Academics extends Component{
 	insetData(formValues,event){
 
 		var status =  this.validateForm();
+		console.log("status",status)
 		if(status==true){
 				Axios.patch("/api/candidatemaster/patch/addCandidateAcademics",formValues)
 			 .then(response=>{
@@ -446,7 +447,7 @@ class Academics extends Component{
 	}
 	//========== User Define Function End ==================
 		//========== Validation Start ==================
-	 validateForm=()=>{
+	validateForm=()=>{
 		var status = true;
 		
 		if(this.state.qualificationLevel.length<=0){

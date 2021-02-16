@@ -462,6 +462,7 @@ exports.getOneCandidateAcademics = (req,res,next)=>{
         res.status(200).json(data);
     })
     .catch(err =>{
+        console.log(err)
         res.status(500).json({
             error: err
         });
@@ -650,7 +651,8 @@ exports.updateOneCandidateExperience = (req,res,next)=>{
                             "workExperience.$.department"           : experience.department,
                             "workExperience.$.fromDate"             : experience.fromDate,
                             "workExperience.$.toDate"               : experience.toDate,
-                            "workExperience.$.responsibilities"     : experience.responsibilities,
+                            "workExperience.$.toDate"               : experience.toDate,
+                            "workExperience.$.currentlyWorkingHere" : experience.currentlyWorkingHere,
                             "workExperience.$.reportingManager"     : experience.reportingManager,
                             "workExperience.$.reportingManagerDegn" : experience.reportingManagerDegn,
                             "workExperience.$.relevantExperience"   : experience.relevantExperience,

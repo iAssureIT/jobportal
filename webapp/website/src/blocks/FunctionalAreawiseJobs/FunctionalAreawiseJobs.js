@@ -20,8 +20,8 @@ export default class FunctionalAreawiseJobs extends Component{
                                         <div className="col-lg-3 AllJobsRow">
                                             <div className="col-lg-12 AllJobsBlock">
                                                 <div className="AllJobsBlockImg">
-                                                  <img src={elem.functionalarea[0].iconUrl} alt="FunctionJobsImg" className="FunctionalJobsPng"/>
-                                                </div>
+                                                  <img src={elem.functionalarea[0].iconUrl ? elem.functionalarea[0].iconUrl : "/images/7.png"} alt="FunctionJobsImg" className="FunctionalJobsPng"/>
+                                                </div> 
 
                                                 <div className="AllJobsBlockName">
                                                     {elem.functionalarea[0].functionalArea}

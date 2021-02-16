@@ -25,20 +25,33 @@ class HomePage extends Component {
       functonalAreaJobs     : [],
       subfunctonalAreaJobs  : [],    
     }
-  }
+  } 
   componentDidMount(){ 
-    console.log("location",window.location.pathname)  
+    
     var {mapAction} = this.props;
     var selector = this.props.selector;
     
     selector.countryCode = "IN"; 
-    if (window.location.pathname.split("/")[1] == "state" ) {
-      selector.stateCode = window.location.pathname.split("/")[2] 
-    }    
+    console.log("path",this.props.match)
+    //if (window.location.pathname.split("/")[1] == "state" ) {
+    if(this.props.match.path=="/"){
+      mapAction.filterMapData(selector);
+    } 
+    if(this.props.match.path=="/state/:stateCode"){
+      selector.stateCode = this.props.match.params.stateCode 
+      mapAction.filterMapData(selector);
+      mapAction.setViewMode("mapView");
+    }  
+    
+    if (this.props.match.path=="/state/:stateCode/:district" ) {
+      selector.stateCode = this.props.match.params.stateCode
+      selector.district  = this.props.match.params.district
+      mapAction.filterFunctionalData(selector);
+      mapAction.setViewMode("functionalView");
+    }  
     //selector.stateCode = stateCode; 
    
-    mapAction.filterMapData(selector);
-    mapAction.setMapView("India");
+    
   }
   leftDrawerInfo(event){
 
@@ -57,7 +70,7 @@ class HomePage extends Component {
       })
     }
   }
-  changeViewMode(viewMode){
+  changeViewMode(viewMode){ 
     var {mapAction} = this.props;
     mapAction.setViewMode(viewMode);
     mapAction.jobCount(this.props.selector);
@@ -99,15 +112,15 @@ class HomePage extends Component {
                 <div className="viewWrapper col-lg-4">
                   <div className='row'>
                     <ul className="nav nav-pills">
-                      <li className="viewDiv active" onClick={this.changeViewMode.bind(this,"mapView")}>
+                      <li className={this.props.viewMode == "mapView" ? "viewDiv active" : "viewDiv"} onClick={this.changeViewMode.bind(this,"mapView")}>
                         <a data-toggle="pill" href="#mapwise" > Map <br/> View</a> 
                       </li>
 
-                      <li className="viewDiv" onClick={this.changeViewMode.bind(this,"functionalView")}>  
+                      <li className={this.props.viewMode == "functionalView" ? "viewDiv active" : "viewDiv"} onClick={this.changeViewMode.bind(this,"functionalView")}>  
                         <a data-toggle="pill" href="#functionwise">Functional <br/> View</a>
                       </li>
 
-                      <li className="viewDiv" onClick={this.changeViewMode.bind(this,"industrialView")}>
+                      <li className={this.props.viewMode == "industrialView" ? "viewDiv active" : "viewDiv"} onClick={this.changeViewMode.bind(this,"industrialView")}>
                         <a data-toggle="pill" href="#industrywise">Industrial <br/> View</a>
                       </li>
 
@@ -123,16 +136,16 @@ class HomePage extends Component {
 
           <div className="col-lg-9">
             <div className="tab-content">
-              <div id="mapwise" className="tab-pane fade in active">
-                <MapComponent />
+              <div id="mapwise" className= {this.props.viewMode == "mapView" ? "tab-pane fade in active" : "tab-pane fade" }>
+                <MapComponent pathname={this.props.match}/> 
               </div>
 
-              <div id="functionwise" className="tab-pane fade">
+              <div id="functionwise" className= {this.props.viewMode == "functionalView" ? "tab-pane fade in active" : "tab-pane fade" } >
                 { this.props.showLoader ? <Loader type="placeholderloader"  /> :
                 <FunctionalAreawiseJobs functionalJobs={this.props.functionalJobs}/> }
               </div>
 
-              <div id="industrywise" className="tab-pane fade">
+              <div id="industrywise" className={this.props.viewMode == "industrialView" ? "tab-pane fade in active" : "tab-pane fade" }>
               { this.props.showLoader ? <Loader type="placeholderloader"  /> :
                 <IndustrywiseJobs industrialJobs={this.props.industrialJobs}/> }
               </div>
@@ -151,7 +164,8 @@ const mapStateToProps = (state)=>{
         functionalJobs    : state.functionalJobs,
         subfunctionalJobs : state.subfunctionalJobs,
         industrialJobs    : state.industrialJobs,
-        showLoader        : state.showLoader
+        showLoader        : state.showLoader,
+        viewMode          : state.viewMode
     }
 }
 const mapDispatchToProps = (dispatch) => ({

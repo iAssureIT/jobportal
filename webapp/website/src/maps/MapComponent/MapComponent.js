@@ -2,10 +2,14 @@ import React, {Component, Suspense} from 'react';
 
 const India = React.lazy(() => import('../India/India.js'));
 
-const MapView = () => {
+const MapView = (pathname) => {
+    
+	      switch(pathname.pathname.pathname.url) {
+             
 
-	      switch(window.location.pathname) {
 	        case "/":   return <India />;
+
+            case "/state/"+pathname.pathname.pathname.params.stateCode+"/"+pathname.pathname.pathname.params.district :   return <India />;
 
 	        case "/state/MH":   const Maharashtra = React.lazy(() => import('../Maharashtra/Maharashtra.js'))
 	        	                return <Maharashtra/> ;
@@ -119,10 +123,10 @@ const MapView = () => {
 	        default:      return <h1>No map match</h1>
 	      }
 	    }
-const MapComponent = () =>(
+const MapComponent = (pathname) =>(
 	<div>
 		<Suspense fallback={<div>Loading...</div>}>
-	        <MapView />
+	        <MapView pathname ={pathname}/>
 	    </Suspense>
 	</div>
 )
