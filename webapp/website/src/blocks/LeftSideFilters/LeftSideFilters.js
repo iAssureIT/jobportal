@@ -147,8 +147,13 @@ class LeftSideFilters extends Component{
 
     selector.countryCode = "IN"; 
     //selector.stateCode = selecteditems.currentTarget.value; 
-
-    
+    if (this.props.match.path=="/state/:stateCode") {
+      selector.stateCode = this.props.match.params.stateCode
+    }
+    if (this.props.match.path=="/state/:stateCode/:district") {
+      selector.district = this.props.match.params.district
+    }
+    console.log(this.props.match)
     if (filterType === 'industry') {
       if (selecteditems.length > 0) {
         selecteditems.map((elem,index)=>{
@@ -288,4 +293,4 @@ const mapDispatchToProps = (dispatch) => ({
     mapAction :  bindActionCreators(mapActionCreator, dispatch)
 })
 
-export default connect(mapStateToProps, mapDispatchToProps) (LeftSideFilters);
+export default connect(mapStateToProps, mapDispatchToProps) (withRouter(LeftSideFilters));
