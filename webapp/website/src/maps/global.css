@@ -24,7 +24,7 @@
 	/*transform: translate(-50%);*/
 	background-color: transparent;
 	position: absolute;
-	top: -135px;
+	top: -100px;
 
 }
 
@@ -47,8 +47,8 @@
 }
 
 .mapCountLabel{
-	font-size: 11px;
-	font-family: 'Montserrat-Regular';
+	font-size: 12px;
+	font-family: 'Montserrat-Bold';
 	color: var(--main-txt-color);
 	text-align: center;
 }
@@ -60,7 +60,7 @@
 }
 
 .classHover:hover .mapCountLabel{
-	font-size: 11px;
+	font-size: 13px;
 	font-family: 'Montserrat-Bold';
 	z-index: 1;
 }
