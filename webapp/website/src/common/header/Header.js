@@ -178,13 +178,13 @@ class Header extends Component{
             <a href="/"><img src="/images/1.png" alt="icon" /></a>
         </div>
 
-       {
+        {
           window.location.pathname.split("/")[1] == "state" ? 
           <div className="breadCrumbHeader col-lg-2">
           <ul className="breadCrumbInner">
               <li className="breadCrumbInnerli"><a href="/">India</a></li>
               <li className= {window.location.pathname.split("/")[3] ? "breadCrumbInnerli" : "breadCrumbInnerli selectedState"}>
-              <a href={"/state/"+selectedState}>{selectedState}</a>
+              <a href={"/state/"+window.location.pathname.split("/")[2]}>{selectedState}</a>
               </li>  
               { window.location.pathname.split("/")[3] ? 
               <li className="breadCrumbInnerli selectedState">
@@ -194,6 +194,7 @@ class Header extends Component{
           </div>
           : <div className="breadCrumbHeader col-lg-2"></div>
         }
+
               <div className="FunctionWiseTitle col-lg-5">
                
               </div>
@@ -334,7 +335,7 @@ class Header extends Component{
           <ul className="breadCrumbInner">
               <li className="breadCrumbInnerli"><a href="/">India</a></li>
               <li className= {window.location.pathname.split("/")[3] ? "breadCrumbInnerli" : "breadCrumbInnerli selectedState"}>
-              <a href={"/state/"+selectedState}>{selectedState}</a>
+              <a href={"/state/"+window.location.pathname.split("/")[2]}>{selectedState}</a>
               </li>  
               { window.location.pathname.split("/")[3] ? 
               <li className="breadCrumbInnerli selectedState">

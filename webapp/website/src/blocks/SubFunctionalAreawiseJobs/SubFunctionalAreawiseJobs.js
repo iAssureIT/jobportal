@@ -24,7 +24,7 @@ export default class SubFunctionalJoblist extends Component{
                                 <div className="col-lg-3 FunctionalJobsRow">
                                     <div className="col-lg-12 FunctionalJobsBlock">
                                         <div className="FunctionalJobsBlockImg">
-                                          <img src="Images/7.png" alt="FunctionJobsImg" className="FunctionalJobsPng"/>
+                                          <img src="/images/7.png" alt="FunctionJobsImg" className="FunctionalJobsPng"/>
                                         </div>
 
                                         <div className="FunctionalJobsBlockName">

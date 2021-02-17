@@ -22,7 +22,7 @@ export default class IndustrywiseJobs extends Component{
                                         <div className="col-lg-3 AllJobsRow">
                                             <div className="col-lg-12 AllJobsBlock">
                                                 <div className="AllJobsBlockImg">
-                                                  <img src="images/7.png" alt="FunctionJobsImg" className="FunctionalJobsPng"/>
+                                                  <img src="/images/7.png" alt="FunctionJobsImg" className="FunctionalJobsPng"/>
                                                 </div>
 
                                                 <div className="AllJobsBlockName">
