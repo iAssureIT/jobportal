@@ -48,9 +48,7 @@ const MapView = (pathname) => {
             case "/state/TN":   const TamilNadu = React.lazy(() => import('../TamilNadu/TamilNadu.js'))
                                 return <TamilNadu/> ;  
 
-
             case "/state/AD":   const AndhraPradesh = React.lazy(() => import('../AndhraPradesh/AndhraPradesh.js'))
-
                                 return <AndhraPradesh/> ; 
 
             case "/state/TS":   const Telangana = React.lazy(() => import('../Telangana/Telangana.js'))

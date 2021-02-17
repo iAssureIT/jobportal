@@ -258,6 +258,7 @@ class SignUp extends Component {
         companyName : this.state.employerName,
         role        : 'employer',
         status      : 'unverified',        
+
       }
 
       
@@ -299,6 +300,7 @@ class SignUp extends Component {
             axios.post('/api/masternotifications/post/sendNotification', sendData2)
               .then((notificationres) => {})
               .catch((error) => { console.log('notification error: ', error) })  
+
 
             this.props.history.push("/confirm-otp/" + response.data.ID);
           }else{

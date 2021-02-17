@@ -81,9 +81,11 @@ class ConfirmOtp extends Component {
       //====================================
       var status =  this.validateForm();
       if (status) {
+
       var checkData = { "user_id": this.props.match.params.userID, "emailotp" : this.refs.emailotp.value, "status" : "blocked" }
       axios.post('/api/auth/checkemailotp/usingID',checkData)
       .then((response) => {
+
 
           if (response.data.message == 'SUCCESS') {
             swal('OTP Verified Successfully.');
