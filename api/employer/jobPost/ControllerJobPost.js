@@ -535,6 +535,7 @@ exports.jobCount = (req, res, next)=>{
     var selector = {}; 
     var industry_ids = [];
     var funarea_ids = [];
+    var jobrole_ids = [];
 
     selector['$and']=[];
    
@@ -558,6 +559,12 @@ exports.jobCount = (req, res, next)=>{
             funarea_ids.push(ObjectID(elem.id))
         })
         selector["$and"].push({ "jobBasicInfo.functionalarea_id" : { $in: funarea_ids } });
+    }
+    if (req.body.jobRole_id) {
+        req.body.jobRole_id.map(elem => {
+            jobrole_ids.push(ObjectID(elem.id))
+        })
+        selector["$and"].push({ "jobBasicInfo.jobrole_id" : { $in: jobrole_ids } });
     }
     console.log("count", JSON.stringify(selector))
 
@@ -583,6 +590,7 @@ exports.mapwiseJobs = (req, res, next)=>{
 	var selector = {}; 
 	var industry_ids = [];
     var funarea_ids = [];
+    var jobrole_ids = [];
 
     selector['$and']=[];
     var countryCode = req.body.countryCode ? req.body.countryCode : "IN";
@@ -602,6 +610,12 @@ exports.mapwiseJobs = (req, res, next)=>{
     		funarea_ids.push(ObjectID(elem.id))
     	})
     	selector["$and"].push({ "jobBasicInfo.functionalarea_id" : { $in: funarea_ids } });
+    }
+    if (req.body.jobRole_id) {
+        req.body.jobRole_id.map(elem => {
+            jobrole_ids.push(ObjectID(elem.id))
+        })
+        selector["$and"].push({ "jobBasicInfo.jobrole_id" : { $in: jobrole_ids } });
     }
     console.log("stateCode",JSON.stringify(selector))
     if (req.body.stateCode) { 
@@ -634,6 +648,7 @@ exports.functonalAreaJobs = (req, res, next)=>{
 	var selector = {}; 
     var industry_ids = [];
     var funarea_ids = [];
+    var jobrole_ids = [];
 
     selector['$and']=[];
     var countryCode = req.body.countryCode ? req.body.countryCode : "IN";
@@ -657,7 +672,12 @@ exports.functonalAreaJobs = (req, res, next)=>{
     	})
     	selector["$and"].push({ "jobBasicInfo.functionalarea_id" : { $in: funarea_ids } });
     }
-    
+    if (req.body.jobRole_id) {
+        req.body.jobRole_id.map(elem => {
+            jobrole_ids.push(ObjectID(elem.id))
+        })
+        selector["$and"].push({ "jobBasicInfo.jobrole_id" : { $in: jobrole_ids } });
+    }
 
     console.log(JSON.stringify(selector))
 
@@ -684,13 +704,14 @@ exports.subfunctionalAreaJobs = (req, res, next)=>{
 	var selector = {}; 
 	var industry_ids = [];
     var funarea_ids = [];
+    var jobrole_ids = [];
 
     selector['$and']=[];
     var countryCode = req.body.countryCode ? req.body.countryCode : "IN";
     selector["$and"].push({ "location.countryCode" :  countryCode })
    	
     console.log(JSON.stringify(selector))
-    
+
     if (req.body.stateCode) {
         selector["$and"].push({ "location.stateCode" :  req.body.stateCode   })
     }
@@ -709,7 +730,12 @@ exports.subfunctionalAreaJobs = (req, res, next)=>{
     	})
     	selector["$and"].push({ "jobBasicInfo.functionalarea_id" : { $in: funarea_ids } });
     }
-    
+    if (req.body.jobRole_id) {
+        req.body.jobRole_id.map(elem => {
+            jobrole_ids.push(ObjectID(elem.id))
+        })
+        selector["$and"].push({ "jobBasicInfo.jobrole_id" : { $in: jobrole_ids } });
+    }
     Jobs.aggregate([
     	{ $match 	: selector },
     	{ $sort 	: {createdAt : -1} },
@@ -734,7 +760,8 @@ exports.industrialJobs = (req, res, next)=>{
 	var selector = {}; 
 	var industry_ids = [];
     var funarea_ids = [];
-
+    var jobrole_ids = [];
+    
     selector['$and']=[];
     var countryCode = req.body.countryCode ? req.body.countryCode : "IN";
     selector["$and"].push({ "location.countryCode" :  countryCode })
@@ -753,7 +780,12 @@ exports.industrialJobs = (req, res, next)=>{
     	})
     	selector["$and"].push({ "jobBasicInfo.functionalarea_id" : { $in: funarea_ids } });
     }
-    
+    if (req.body.jobRole_id) {
+        req.body.jobRole_id.map(elem => {
+            jobrole_ids.push(ObjectID(elem.id))
+        })
+        selector["$and"].push({ "jobBasicInfo.jobrole_id" : { $in: jobrole_ids } });
+    }
     Jobs.aggregate([
     	{ $match 	: selector },
     	{ $sort 	: {createdAt : -1} },

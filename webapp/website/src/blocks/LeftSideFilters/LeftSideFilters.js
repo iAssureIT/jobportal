@@ -143,6 +143,7 @@ class LeftSideFilters extends Component{
     var selector=this.state.selector;
     var industry_ids = [];
     var functionalArea_ids=[];
+    var jobRole_ids=[];
     var {mapAction} = this.props;
 
     selector.countryCode = "IN"; 
@@ -175,7 +176,16 @@ class LeftSideFilters extends Component{
         delete selector.functionalArea_id
       }
     }
-
+    if (filterType === 'jobRole') {
+      if (selecteditems.length > 0) {
+        selecteditems.map((elem,index)=>{
+          jobRole_ids.push(elem.id);
+        })
+        selector.jobRole_id = selecteditems;
+      }else{
+        delete selector.jobRole_id
+      }
+    }
     this.setState({ selector: selector },()=>{
         mapAction.jobCount(this.state.selector);
       if (this.props.viewMode=="mapView") {
@@ -248,9 +258,10 @@ class LeftSideFilters extends Component{
                 
                    <Multiselect className="form-control LeftSideFiltersInputBox LeftSideFiltersDrop"
                     id="allRoles" name="allRoles" placeholder="All Roles"
-                    
                       options={this.state.allRoles}
-                        isObject={false}
+                      displayValue="jobRole"
+                      onSelect={this.onSelectedItemsChange.bind(this,'jobRole')} // Function will trigger on select event
+                      onRemove={this.onSelectedItemsChange.bind(this,'jobRole')}
                         //showCheckbox={true}
                         style={this.style}
                    />    

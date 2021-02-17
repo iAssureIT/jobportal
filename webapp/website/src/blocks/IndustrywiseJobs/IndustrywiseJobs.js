@@ -11,7 +11,6 @@ export default class IndustrywiseJobs extends Component{
     
  
     return(
-           
                 <section className="col-lg-12 AllJobsWrapper">
                     <div className="row">
                         {
@@ -26,7 +25,7 @@ export default class IndustrywiseJobs extends Component{
                                                 </div>
 
                                                 <div className="AllJobsBlockName">
-                                                    {elem.industry[0].industry}
+                                                    {elem.industry[0] ? elem.industry[0].industry : ""}
                                                 </div>
 
                                                 <div className="AllJobsBlockNumber">
