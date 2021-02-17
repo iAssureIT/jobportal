@@ -6,8 +6,16 @@ import Axios 			 	from 'axios';
 import Swal 			 	from 'sweetalert2';
 import { Multiselect }      from 'multiselect-react-dropdown';
 import S3FileUpload         from 'react-s3';
+import { WithContext as ReactTags } from 'react-tag-input';
+import PhoneInput 					from 'react-phone-input-2';
+import CKEditor 					from '@ckeditor/ckeditor5-react';
+import ClassicEditor 				from '@ckeditor/ckeditor5-build-classic';
+import { connect }                  from 'react-redux';
+import { bindActionCreators }       from 'redux';
+import  * as mapActionCreator       from '../../../Common/actions/index';
 
 
+import 'react-phone-input-2/lib/style.css';
 import './BasicInfoForm.css';
 
 
@@ -15,123 +23,92 @@ class BasicInfoForm extends Component{
 	constructor(props){
 		super(props);
 		this.state={
-			firstName          : "",
-			middleName         : "",
-			candidateID        : localStorage.getItem("candidateID"),
-			lastName           : "",
-			dob                : "",
-			profilePhoto       : "",
-			profileImageUrl    : "",
-			gender             : "male",
-			anniversaryDate    : "",	
-			maritalStatus      : "",
-			nationality        : "",
-			panCardNo          : "",
-			adhaarCardNo       : "",
-			selectedValue      : [],
-			ageYears	       : 0,	
-			ageMonths	       : 0,	
-			ageDays	       	   : 0,
-			age                : "",
-			inputMaritalStatus : ["Single",,"Married", "Separated","Divorced","Widowed"],
-			inputNationality   : ["Indian","American"],
-			languages	       : [],
-			inputLanguages	   : [],
-
-			imageUploaded      : true,
-			profilePicture     : "",
-
-			"imageUploaded"    : true,
-
+			candidate_id              : this.props.userDetails.candidate_id,
+			firstName                 : "",
+			middleName                : "",
+			lastName                  : "",
+			mobile        			  : "",
+			alternate     			  : "",
+			email         			  : "",
+			dob                       : "",
+			profilePhoto              : "",
+			profileImageUrl           : "",
+			gender                    : "male",
+			anniversaryDate           : "",	
+			maritalStatus             : "",
+			nationality               : "",
+			panCardNo                 : "",
+			adhaarCardNo              : "",
+			selectedValue             : [],
+			ageYears	              : 0,	
+			ageMonths	              : 0,	
+			ageDays	       	          : 0,
+			age                       : "",
+			inputMaritalStatus        : ["Single",,"Married", "Separated","Divorced","Widowed"],
+			anniversaryDateShow 	  : false,	
+			inputNationality          : ["Indian","American"],
+			languagesTags	          : [],
+			languagesSuggestions	  : [],
+			inputLanguages	          : [],
+			imageUploaded             : true,
+			profilePicture            : "",
+			resumeUrl 				  : "",
+			resume 					  : [],
+			executiveSummary 		  : ""		
 		}
-		 this.style =  {
-					      chips: {
-					         backgroundColor: "#367ea8"
-					      },
-					      searchBox: {
-					        border: "1px solid #ccc",
-					        borderTopLeftRadius: "0px",
-					        borderBottomLeftRadius: "0px",
-					        height:"35px",
-					        overflow:"auto"
-					      },
-					      multiselectContainer: {
-					      	backgroundColor: "#fff",
-					        color: "white",
-					        zIndex:"5!important"
-					      }, 
-					      inputField: {
-						     fontSize:"13.5px",
-						     marginLeft:"5px",
-						     zIndex:"5!important",
-						     backgroundColor: "#fff",
-
-						  },
-						  option: {
-						   	backgroundColor: "#222",
-						   	zIndex:"5!important",
-						   	color: "white",
-						   	paddingTop:"5px",
-						   	paddingBottom:"5px",
-
-						  },
-						  optionContainer:{
-						  	backgroundColor: "#fff",
-						  	border: "1px solid #ccc",
-						  	zIndex:"5!important",
-						  	height: "100px"
-						  }
-						};
+		
 	}
 	componentDidMount(){
-
-		Axios.get("/api/candidatemaster/get/one/"+this.state.candidateID)
-		.then(response=>{
-			 console.log("response.data",response.data);
-			 	this.setState({
-			 		firstName         : response.data[0].basicInfo.firstName?response.data[0].basicInfo.firstName:"",
-					middleName        : response.data[0].basicInfo.middleName?response.data[0].basicInfo.middleName:"",
-					lastName          : response.data[0].basicInfo.lastName?response.data[0].basicInfo.lastName:"",
-					dob               : response.data[0].basicInfo.dob?Moment(response.data[0].basicInfo.dob).format("YYYY-MM-DD"):"",
-					gender            : response.data[0].basicInfo.gender?response.data[0].basicInfo.gender:"",
-					anniversaryDate   : response.data[0].basicInfo.anniversaryDate?Moment(response.data[0].basicInfo.anniversaryDate).format("YYYY-MM-DD"):"",
-					maritalStatus     : response.data[0].basicInfo.maritalStatus?response.data[0].basicInfo.maritalStatus:"",
-					nationality       : response.data[0].basicInfo.nationality?response.data[0].basicInfo.nationality:"",
-					panCardNo         : response.data[0].panCard?response.data[0].panCard:"",
-					adhaarCardNo      : response.data[0].aadhaarCard?response.data[0].aadhaarCard:"",
-					profilePicture      : response.data[0].profilePicture?response.data[0].profilePicture:"",
-		
-					age               : response.data[0].basicInfo.age?response.data[0].basicInfo.age:"",
-					
-
-				
-			 	})
-			 })
-			 .catch(error=>{
-			 	Swal.fire("Submit Error!",error.message,'error');
-			 })
-
 		Axios.get("/api/languagemaster/get/list")
 		.then(response => {
-			this.setState({
-				inputLanguages : response.data
-			});
-			this.state.inputLanguages!=null && this.state.inputLanguages.length > 0 
-			?
-				this.state.inputLanguages.map((elem,index)=>{
-					
-					this.state.languages.push(elem.language);
-					
-					
-				})
-			:
-				this.state.languages.push("select");
+			var languagesSuggestions     =  [];
+                response.data.map((elem,index)=>{
+                    languagesSuggestions.push({id:elem._id,text:elem.language})
+                })
+                this.setState({
+                    languagesSuggestions   : languagesSuggestions
+                });
 		})
 		.catch(error=>{
 			Swal.fire("Error while getting List data",error.message,'error');
 		})
 
-			
+		Axios.get("/api/candidatemaster/get/one/"+this.state.candidate_id)
+		.then(response=>{
+			 console.log("response.data",response.data);
+
+			 	var languagesTags = [];
+			 	if (response.data.languagesKnown) {
+
+			 		response.data.languagesKnown.map((data,ind)=>{
+			 			console.log(data)
+                    	languagesTags.push({ id : data.language_id._id, text : data.language_id.language })
+                	})
+			 	}
+			 	this.calAge(response.data.basicInfo.dob);
+			 	this.setState({
+			 		firstName         : response.data.basicInfo.firstName?response.data.basicInfo.firstName:"",
+					middleName        : response.data.basicInfo.middleName?response.data.basicInfo.middleName:"",
+					lastName          : response.data.basicInfo.lastName?response.data.basicInfo.lastName:"",
+					mobile        	  : response.data.contact.mobile?response.data.contact.mobile:"",
+					alternate     	  : response.data.contact.altMobile?response.data.contact.altMobile:"",
+					email         	  : response.data.contact.emailId?response.data.contact.emailId:"",
+					dob               : response.data.basicInfo.dob?Moment(response.data.basicInfo.dob).format("YYYY-MM-DD"):"",
+					gender            : response.data.basicInfo.gender?response.data.basicInfo.gender:"",
+					anniversaryDate   : response.data.basicInfo.anniversaryDate?Moment(response.data.basicInfo.anniversaryDate).format("YYYY-MM-DD"):"",
+					maritalStatus     : response.data.basicInfo.maritalStatus?response.data.basicInfo.maritalStatus:"",
+					nationality       : response.data.basicInfo.nationality?response.data.basicInfo.nationality:"",
+					profilePicture    : response.data.basicInfo.profilePicture?response.data.basicInfo.profilePicture:"",
+					profileImageUrl   : response.data.basicInfo.profilePicture?response.data.basicInfo.profilePicture:"",	
+					resume     		  : response.data.basicInfo.resume?response.data.basicInfo.resume:"",
+					resumeUrl     	  : response.data.basicInfo.resume?response.data.basicInfo.resume:"",
+					executiveSummary  : response.data.basicInfo.executiveSummary ? response.data.basicInfo.executiveSummary : "",
+					languagesTags 	  : languagesTags	
+			 	})
+			 })
+			 .catch(error=>{
+			 	Swal.fire("Submit Error!",error.message,'error');
+			 })
 }
 
 	//========== User Define Function Start ================
@@ -141,13 +118,7 @@ class BasicInfoForm extends Component{
 		if (event.currentTarget.files ) {
 		const imgFile = event.currentTarget.value;
 		const files   = event.currentTarget.files;
-		// imgValue      = imgFile.split(".");
-		// if(imgValue[1] !== 'jpg'){
-		// 	this.setState({
-
-		// 	})
-		// }
-
+		
 		const imgUrl =  URL.createObjectURL(event.target.files[0]);
 		
 		this.setState({
@@ -182,7 +153,7 @@ class BasicInfoForm extends Component{
         })
         main().then(formValues => {
          
-   	console.log(formValues)
+   		console.log(formValues)
           this.setState({
             profilePicture   : formValues[0].profilePicture,
             imageUploaded : false
@@ -200,7 +171,6 @@ class BasicInfoForm extends Component{
             };
             formValues.push(formValue);
 
-          
           return Promise.resolve(formValues);
         }
     
@@ -238,10 +208,102 @@ class BasicInfoForm extends Component{
     }
 		
 	}
+	uploadResume(event){
+		event.preventDefault();
+		var resume = [];
+		if (event.currentTarget.files ) {
+		
+		const resumeUrl =  URL.createObjectURL(event.target.files[0]);
+		
+		this.setState({
+			resumeUrl : resumeUrl
+		})
+		var file = event.currentTarget.files[0];
+		if (file) {
+          var fileName = file.name;
+          var fileSize = file.size;
+          var ext = fileName.split('.').pop();
+          if (ext === "pdf" || ext === "docx" || ext === "doc") {
+            if(fileSize > 1048576){
+              Swal.fire("Allowed file size is 1MB");
+            }else{
+              if (file) {
+                var objTitle = { fileInfo: file }
+                resume.push(objTitle);
+              } else {
+                Swal.fire("Resume is not uploaded");
+              }//file
+            }
+          } else {
+            Swal.fire("Allowed document format is (doc, docx, pdf)");
+            
+          }//file types
+        }
+        if (event.currentTarget.files) {
+	        
+	        main().then(formValues => {
+	         
+	   		console.log(formValues)
+	          this.setState({
+	            resume   : formValues[0].resume,
+	          })
+	        });
 
+	        async function main() {
+	          var formValues = [];
+	        
+	            var config = await getConfig();
+	            var s3url = await s3upload(resume[0].fileInfo, config, this);
+	            const formValue = {
+	              "resume": s3url,
+	              "status": "New"
+	            };
+	            formValues.push(formValue);
+
+	          return Promise.resolve(formValues);
+	        }
+	    
+	    	function s3upload(resume, configuration) {
+	          return new Promise(function (resolve, reject) {
+	            S3FileUpload
+	              .uploadFile(resume, configuration)
+	              .then((Data) => {
+
+	                resolve(Data.location);
+	              })
+	              .catch((error) => {
+	              })
+	          })
+	        }
+	        function getConfig() {
+	          return new Promise(function (resolve, reject) {
+	            Axios.post('/api/projectsettings/getS3Details/S3')
+	              .then((response) => {
+	                const config = {
+	                  bucketName: response.data.bucket,
+	                  dirName: process.env.REACT_APP_ENVIRONMENT,
+	                  region: response.data.region,
+	                  accessKeyId: response.data.key,
+	                  secretAccessKey: response.data.secret,
+	                }
+	                resolve(config);
+	              })
+	              .catch(function (error) {
+	              })
+
+	          })
+	        }
+    		}
+    	}	
+	}
 	delImgPreview(event){
 		this.setState({
 			profileImageUrl:""
+		})
+	}
+	delResumePreview(event){
+		this.setState({
+			resumeUrl:""
 		})
 	}
 
@@ -256,6 +318,13 @@ class BasicInfoForm extends Component{
 		})
 		if(name==="dob"){
 			this.calAge(value);
+		}
+		if (name=="maritalStatus") {
+			if (value=="Married") {
+				this.setState({anniversaryDateShow : true})
+			}else{
+				this.setState({anniversaryDateShow : false})
+			}
 		}
 	}
 	calAge(dob){
@@ -282,29 +351,59 @@ class BasicInfoForm extends Component{
 			gender:id,
 		})
 	}
+	onLanguageAddition (tag) {
+        if (tag.id == tag.text) {
+            tag.id = "" 
+        }
+    	this.setState(state => ({ languagesTags: [...state.languagesTags, tag] }));
+  	}
+
+    onLanguageClick(index) {
+        console.log('The tag at index ' + index + ' was clicked');
+    }
+
+    onLanguageDrag(tag, currPos, newPos) {
+        const languagesTags = [...this.state.languagesTags];
+        const newTags = languagesTags.slice();
+
+        newTags.splice(currPos, 1);
+        newTags.splice(newPos, 0, tag);
+
+        // re-render
+        this.setState({ languagesTags: newTags });
+    }
+
+    onLanguageDelete (i) {
+        const { languagesTags } = this.state;
+        this.setState({
+          languagesTags: languagesTags.filter((tag, index) => index !== i),
+        });
+    }
 	handleSubmit(event){
 		event.preventDefault();
 		var status =  this.validateForm();
 			var formValues = {
 
 								firstName          : this.state.firstName,
-								candidateID        : this.state.candidateID,
+								candidate_id       : this.state.candidate_id,
 								middleName         : this.state.middleName,
 								lastName           : this.state.lastName,
+								mobile      	   : this.state.mobile,
+								altMobile          : this.state.alternate,
+								emailId            : this.state.email,
 								dob                : this.state.dob,
 								gender             : this.state.gender,
 								anniversaryDate    : this.state.anniversaryDate,	
 								maritalStatus      : this.state.maritalStatus,
 								nationality        : this.state.nationality,
-								panCard            : this.state.panCardNo,
-								aadhaarCard        : this.state.adhaarCardNo,
-								languagesKnown	   : this.state.selectedValue,
-								age	   			   : this.state.age,
+								languagesTags	   : this.state.languagesTags,
 								profilePicture	   : this.state.profilePicture,
-								
+								resumeUrl 		   : this.state.resume,
+								executiveSummary   :this.state.executiveSummary	
 							}
+							console.log(formValues);
 			if(status==true){
-				Axios.patch("/api/candidatemaster/patch/updateCandidateBasicInfo",formValues)
+			Axios.patch("/api/candidatemaster/patch/updateCandidateBasicInfo",formValues)
 			 .then(response=>{
 
 						Swal.fire("Congrats","Your Basic details is insert Successfully","success");
@@ -323,9 +422,14 @@ class BasicInfoForm extends Component{
 											ageYears	       : 0,	
 											ageMonths	       : 0,	
 											ageDays	       	   : 0,
+											profilePicture     : "",
+											profileImageUrl    : "",	
+											resume 			   : "",	
+											resumeUrl          : "", 
+											executiveSummary   : ""
 										})
 
-						this.props.history.push("/address/"+this.state.candidateID);
+						this.props.history.push("/address/"+this.state.candidate_id);
 							
 							
 				})
@@ -337,39 +441,122 @@ class BasicInfoForm extends Component{
 	}
 	
 	//========== User Define Function End ==================
-
 	//========== Validation Start ==================
-	 validateForm=()=>{
+	validateForm=()=>{
+
 		var status = true;
+		var regName = /^[a-zA-Z]+$/;
+		var firstName=this.state.firstName;
+		var middleName=this.state.middleName;
+        var lastName=this.state.lastName;
+		var tempEmail = this.state.email.trim(); // value of field with whitespace trimmed off
+    	var emailFilter = /^[^@]+@[^@.]+\.[^@]*\w\w$/;
+    	var illegalChars = /[\(\)\<\>\,\;\:\\\"\[\]]/;
+    	var mobileFilter = /^(\+\d{1,3}[- ]?)?\d{12}$/gm;
+
+	    if(this.state.firstName<=0)  {
+	      document.getElementById("firstNameError").innerHTML = "Please enter valid Name";  
+	      status=false; 
+	    }
+	  
+	    if(!regName.test(firstName)){
+	      document.getElementById("firstNameError").innerHTML = "Please enter valid name,......";  
+	      status=false; 
+	    }
+	    else{
+	      document.getElementById("firstNameError").innerHTML = ""
+	      status = true;
+	    }
+
+	    if(this.state.middleName<=0)  {
+	      document.getElementById("middleNameError").innerHTML = "Please enter valid Name";  
+	      status=false; 
+	    }
+	  
+	    if(!regName.test(middleName)){
+	      document.getElementById("middleNameError").innerHTML = "Please enter valid name,......";  
+	      status=false; 
+	    }
+	    else{
+	      document.getElementById("middleNameError").innerHTML=  ""
+	      status = true;
+	    }
+
+	    if(this.state.lastName<=0)  {
+	      document.getElementById("lastNameError").innerHTML = "Please enter valid Name";  
+	      status=false; 
+	    }
+	  
+	    if(!regName.test(lastName)){
+	      document.getElementById("lastNameError").innerHTML = "Please enter valid name,......";  
+	      status=false; 
+	    }
+	    else{
+	      document.getElementById("lastNameError").innerHTML = "";
+	      status = true;
+	    }
+
+
 		
-		if(this.state.firstName.length<=0){
-			document.getElementById("firstNameError").innerHTML=  
-			"Please enter your first name";  
-			status=false; 
-		}
-		 else{
-			document.getElementById("firstNameError").innerHTML=
-			""; 
-			status = true;
-		}
 		if(this.state.dob.length<=0){
-			document.getElementById("dobError").innerHTML=  
-			"Please enter your Date Of Birth";  
+			document.getElementById("dobError").innerHTML = "Please enter your Date Of Birth";  
 			status=false; 
 		}else{
-			document.getElementById("dobError").innerHTML=  
-			""; 
+			document.getElementById("dobError").innerHTML = ""; 
 			status = true;
 		}
-	
+		if(this.state.email.length<=0){
+			document.getElementById("emailError").innerHTML = "Please enter your Email";  
+			status=false; 
+		}else if (!emailFilter.test(tempEmail)) { //test email for illegal characters
+	        document.getElementById('emailError').innerHTML = "Please enter a valid email address.";
+	    } else if (this.state.email.match(illegalChars)) {
+	        document.getElementById('emailError').innerHTML = "Email contains invalid characters.";
+	    }else{
+			document.getElementById("emailError").innerHTML = ""; 
+			status = true;
+		}
+		console.log("mob",this.state.mobile)
+		if(this.state.mobile.length<=0){
+			document.getElementById("mobileError").innerHTML = "Please enter your mobile number";  
+			status=false; 
+		}else if (!mobileFilter.test(this.state.mobile)) { //test email for illegal characters
+	        document.getElementById('mobileError').innerHTML = "Please enter a valid mobile number.";
+	    }else{
+			document.getElementById("mobileError").innerHTML = ""; 
+			status = true;
+		}
 
-		
+		if(this.state.alternate.length>0){
+			
+			if (!mobileFilter.test(this.state.alternate)) { //test email for illegal characters
+	        	document.getElementById('alternateError').innerHTML = "Please enter a valid alternate mobile number.";
+		    }else{
+				document.getElementById("alternateError").innerHTML = ""; 
+				status = true;
+			}
+		}
+
+		if(this.state.executiveSummary.length<=0){
+			document.getElementById("executiveSummaryError").innerHTML = "Please enter your executive summary";  
+			status=false; 
+		}
+		else{
+			document.getElementById("executiveSummaryError").innerHTML = ""; 
+			status = true;
+		}
 		 return status;
 	}
 
 	//========== Validation End ==================
 
 	render(){
+		const KeyCodes = {
+		  comma: 188,
+		  enter: 13,
+		};
+
+		const delimiters = [KeyCodes.comma, KeyCodes.enter];
 		return(
 
 				<div className="col-lg-12 pageWrapper">
@@ -405,7 +592,7 @@ class BasicInfoForm extends Component{
 									 className="form-control inputBox" value={this.state.middleName} 
 									 onChange={this.handleChange.bind(this)} />
 								</div> 
-								
+								<span id="middleNameError" className="errorMsg"></span>
 							</div>
 
 							<div className="col-lg-4">
@@ -420,8 +607,58 @@ class BasicInfoForm extends Component{
 									 className="form-control inputBox" value={this.state.lastName}
 									 onChange={this.handleChange.bind(this)} />
 								</div> 
+								<span id="lastNameError" className="errorMsg"></span>
 							</div>
 
+						</div>
+
+						<div className="row formMainWrapper">
+							<div className="col-lg-4">
+								<label htmlFor="mobile" className="nameTitleForm">
+									Mobile Number
+									<sup className="nameTitleFormStar">*</sup>
+								</label>
+								<PhoneInput 
+									country   = {'in'}
+									id        ="mobile" 
+									className ="input-group-addon form-control inputBox" 
+									value     ={this.state.mobile} 
+									onChange  = {mobile => this.setState({ mobile })}
+								 />
+							
+								<span id="mobileError" className="errorMsg"></span>
+							</div>
+
+							<div className="col-lg-4">
+								<label htmlFor="alternate" className="nameTitleForm">
+									Alternate Mobile Number
+								</label>
+								<PhoneInput 
+									country   = {'in'}
+									id        ="alternate" 
+									className ="input-group-addon form-control inputBox" 
+									value     ={this.state.alternate} 
+									onChange  = {alternate => this.setState({ alternate })}
+								 />
+								
+								<span id="alternateError" className="errorMsg"></span>
+							</div>
+
+							<div className="col-lg-4">
+								<label htmlFor="email" className="nameTitleForm">
+									Personal Mail ID
+									<sup className="nameTitleFormStar">*</sup>
+								</label>
+								<div className="input-group ">
+									<span className="input-group-addon inputBoxIcon">
+										<i className="fa fa-envelope-o"></i> 
+									</span> 
+									<input type="email" name="email" id="email" 
+									 className="form-control inputBox email" value={this.state.email} 
+									 onChange={this.handleChange.bind(this)} />
+								</div> 
+								<span id="emailError" className="errorMsg"></span>
+							</div>
 						</div>
 
 						<div className="row formMainWrapper">
@@ -449,7 +686,7 @@ class BasicInfoForm extends Component{
 								</label>
 								<div className="input-group showFeild">
 									{this.state.ageYears + "  Years, " + this.state.ageMonths +
-									  " months, " + " And " + this.state.ageDays + " Days Old"}	
+									  " months"}	
 								</div> 
 							</div>
 
@@ -501,7 +738,6 @@ class BasicInfoForm extends Component{
 							<div className="col-lg-4">
 								<label htmlFor="maritalStatus" className="nameTitleForm">
 									Marital Status
-									<sup className="nameTitleFormStar">*</sup>
 								</label>
 								<div className="input-group ">
 									<span className="input-group-addon inputBoxIcon inputBoxIcon1">
@@ -529,46 +765,45 @@ class BasicInfoForm extends Component{
 
 								</div>
 							</div>
+							{
+								this.state.anniversaryDateShow ? 
+								<div className="col-lg-4 anniversaryDate">
+									<label htmlFor="anniversaryDate" className="nameTitleForm">
+										Anniversary Date
+									</label>
+									<div className="input-group ">
+										<span className="input-group-addon inputBoxIcon inputBoxIcon2 calender">
+											<i className="fa fa-calendar-o"></i>
+										</span> 
+										<input type="date" name="anniversaryDate" id="anniversaryDate" 
+										className="form-control inputBox date" value={this.state.anniversaryDate}
+										onChange={this.handleChange.bind(this)} />
+									</div> 
+								</div>
+								: null
+							}
+						</div>
 
-							<div className="col-lg-4">
-								<label htmlFor="anniversaryDate" className="nameTitleForm">
-									Anniversary Date
-								</label>
-								<div className="input-group ">
-									<span className="input-group-addon inputBoxIcon inputBoxIcon2 calender">
-										<i className="fa fa-calendar-o"></i>
-									</span> 
-									<input type="date" name="anniversaryDate" id="anniversaryDate" 
-									className="form-control inputBox date" value={this.state.anniversaryDate}
-									onChange={this.handleChange.bind(this)} />
-								</div> 
-							</div>
-
-							<div className="col-lg-4">
+						<div className="row formMainWrapper">
+							<div className="col-lg-8">
 								<label htmlFor="languages" className="nameTitleForm">
 									Languages Spoken
-									<sup className="nameTitleFormStar">*</sup>
 								</label>
 								<div className="input-group ">
 									<span className="input-group-addon inputBoxIcon inputBoxIcon2">
 										<i className="fa fa-comment-o"></i>
 									</span> 
-									<Multiselect  name="languages" id="languages" 
-									 className="form-control inputBox " value={this.state.languages} 
-									 onChange={this.handleChange.bind(this)}
-									 options={this.state.languages}
-									 isObject={false}
-									 style={this.style}
-									 closeIcon="cancel"
-									 showCheckbox={false}
-									 />
+									<ReactTags
+							        //ref={this.reactTags}
+							        tags={this.state.languagesTags}
+							        suggestions={this.state.languagesSuggestions}
+							        delimiters={delimiters}
+							        handleDelete={this.onLanguageDelete.bind(this)}
+							        handleAddition={this.onLanguageAddition.bind(this)}
+							        handleDrag={this.onLanguageDrag.bind(this)}
+									handleTagClick={this.onLanguageClick.bind(this)} />
 								</div>
 							</div>
-
-						</div>
-
-						<div className="row formMainWrapper">
-
 							<div className="col-lg-4">
 								<label htmlFor = "nationality" className = "nameTitleForm" > 
 									Nationality 
@@ -581,7 +816,7 @@ class BasicInfoForm extends Component{
 									<select className="form-control inputBox" id = "nationality" 
 									 value ={this.state.nationality} name="nationality" 
 									 onChange={this.handleChange.bind(this)}>
-									  	<option disabled> -- Select -- </option>
+									  	<option disabled > -- Select -- </option>
 									  	{
 									  		this.state.inputNationality.length>0
 									  		?	
@@ -599,37 +834,26 @@ class BasicInfoForm extends Component{
 									</select>
 								</div>
 							</div>
-
-							<div className="col-lg-4">
-								<label htmlFor="panCardNo" className="nameTitleForm">
-									Pan Card No.
-								</label>
-								<div className="input-group ">
-									<span className="input-group-addon inputBoxIcon">
-										<i className="fa fa-id-card-o"></i> 
-									</span> 
-									<input type="text" name="panCardNo" id="panCardNo" 
-									 className="form-control inputBox" value={this.state.panCardNo} 
-									 onChange={this.handleChange.bind(this)} />
-								</div> 
-							</div>
-
-							<div className="col-lg-4">
-								<label htmlFor="adhaarCardNo" className="nameTitleForm">
-									Aadhaar Card No.
-								</label>
-								<div className="input-group ">
-									<span className="input-group-addon inputBoxIcon">
-										<i className="fa fa-id-card-o"></i> 
-									</span> 
-									<input type="text" name="adhaarCardNo" id="adhaarCardNo" 
-									className="form-control " value={this.state.adhaarCardNo} 
-									onChange={this.handleChange.bind(this)} />
-								</div> 
-							</div>
-
 						</div>
-
+						<div className="row formMainWrapper">
+							<div className="col-lg-12">
+								<label htmlFor="executiveSummary" className="nameTitleForm">
+									Executive Summary <sup className="nameTitleFormStar">*</sup>
+								</label>
+								<div>
+									<CKEditor
+								        editor  	= 	{ClassicEditor}
+								        data 		= 	{this.state.executiveSummary}
+								        id 			= 	"executiveSummary"
+								        onInit		=	{ editor =>	{}}
+								        onChange 	=	{(event, editor) => {this.setState({ executiveSummary: editor.getData() });} }
+								        onBlur		=	{ editor 	=> 	{} }
+								        onFocus		=	{ editor 	=> {} }
+							        />	
+								</div>
+								<span id="executiveSummaryError" className="errorMsg"></span>
+							</div>
+						</div>
 						<div className="row formMainWrapper">
 							<div className="col-lg-4 ">
 								<label htmlFor="profilePicture" className="nameTitleForm">
@@ -644,7 +868,7 @@ class BasicInfoForm extends Component{
 												   onClick={this.delImgPreview.bind(this)}>
 												</i>
 												<img src={this.state.profileImageUrl} alt="profileImage" 
-												className="col-lg-12 profileImage"/>
+												className="profileImage"/>
 											</div>
 										:
 											<div>
@@ -655,11 +879,37 @@ class BasicInfoForm extends Component{
 												/>
 											</div>
 									}
-									
+								</div>
+							</div>
+							<div className="col-lg-4 ">
+								<label htmlFor="profilePicture" className="nameTitleForm">
+									Resume 
+								</label>
+								<div className="input-group ">
+									{
+										this.state.resumeUrl!== ""
+										?	
+											<div>
+												<i className="fa fa-times delResumeIcon" 
+												   onClick={this.delResumePreview.bind(this)}>
+												</i>
+												<img src={"/images/resumeIcon.png"} alt="profileImage" 
+												className="resumeImage"/>
+											</div>
+										:
+											<div>
+
+												<input type="file" className="inputImage" 
+												 name="resume"
+												 onChange={this.uploadResume.bind(this)}
+												/>
+											</div>
+									}
 								</div>
 							</div>
 						</div>
 
+						
 						<button className="buttonNext pull-right" onClick={this.handleSubmit.bind(this)}>
 							Next 
 							<FontAwesomeIcon className="nextArrow" icon="arrow-right" />
@@ -672,4 +922,12 @@ class BasicInfoForm extends Component{
 	}
 }
 
-export default withRouter(BasicInfoForm);
+const mapStateToProps = (state)=>{
+    return {
+        userDetails     : state.userDetails,
+    }
+}
+const mapDispatchToProps = (dispatch) => ({
+  mapAction :  bindActionCreators(mapActionCreator, dispatch)
+}) 
+export default connect(mapStateToProps, mapDispatchToProps)(BasicInfoForm)
