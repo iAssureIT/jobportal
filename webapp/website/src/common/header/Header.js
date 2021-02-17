@@ -205,8 +205,25 @@ class Header extends Component{
               <div className="row">
               <div className="rightFunctionHeader1 col-lg-12 pull-right">
                 <div className="rightFunctionHeader1CityJobs">
-                <div className="cityNameHeader">{selectedState && selectedState != "" ? selectedState : "India"}
-                </div>  
+
+                {
+                 window.location.pathname.split("/")[0] == "" && window.location.pathname.split("/")[1] != "state"  ?
+                  <div className="cityNameHeader">{"India"}
+                  </div> 
+                 : null 
+                }
+                {
+                 window.location.pathname.split("/")[1] == "state" && !window.location.pathname.split("/")[3] ?
+                  <div className="cityNameHeader">{selectedState && selectedState != "" ? selectedState : "India"}
+                  </div> 
+                 : null 
+                }
+                {
+                 window.location.pathname.split("/")[1] == "state" && window.location.pathname.split("/")[3] ?
+                  <div className="cityNameHeader">{window.location.pathname.split("/")[3]}
+                  </div> 
+                 : null 
+                }  
 
                 <div className="cityJobsHeader">{this.props.jobCount[0] ? this.props.jobCount[0].jobCount : 0}
                 </div>              

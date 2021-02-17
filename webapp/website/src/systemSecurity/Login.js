@@ -129,14 +129,14 @@ class Login extends Component {
                 pincode: response.data.userDetails.pincode,
                 user_id: response.data.userDetails.user_id,
                 roles: response.data.userDetails.roles,
-                token: response.data.userDetails.token,
+                token: response.data.userDetails.token
               }
 
               axios.get('/api/candidatemaster/get/candidate_id/'+response.data.userDetails.user_id)
               .then((candidate) => {
               //console.log(candidate)
               userDetails.candidate_id = candidate.data[0] ? candidate.data[0]._id : null;
-             
+              userDetails.gender = candidate.data[0] ? candidate.data[0].basicInfo.gender : null;
              localStorage.setItem('userDetails', JSON.stringify(userDetails));
                //window.location.href = '/';
                  document.getElementById("closeModalButton").click();

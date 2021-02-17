@@ -14,7 +14,8 @@ const initialState = {
 		user_id   	: JSON.parse(localStorage.getItem("userDetails")).user_id,
 		roles 		: JSON.parse(localStorage.getItem("userDetails")).roles,
 		token 		: JSON.parse(localStorage.getItem("userDetails")).token, 
-		candidate_id : JSON.parse(localStorage.getItem("userDetails")).candidate_id
+		candidate_id : JSON.parse(localStorage.getItem("userDetails")).candidate_id,
+		gender 	    : JSON.parse(localStorage.getItem("userDetails")).gender,		
 		}
 		: {
 		loggedIn  	: false,	
@@ -27,7 +28,8 @@ const initialState = {
 		user_id   	: "",
 		roles 		: [],
 		token 		: "", 
-		candidate_id : ""
+		gender 		: "",	
+		candidate_id: ""
 	},
 	selectedCountry				: "India",
 	selectedState 				: "",
