@@ -639,6 +639,12 @@ exports.functonalAreaJobs = (req, res, next)=>{
     var countryCode = req.body.countryCode ? req.body.countryCode : "IN";
     selector["$and"].push({ "location.countryCode" :  countryCode })
    	
+    if (req.body.stateCode) {
+        selector["$and"].push({ "location.stateCode" :  req.body.stateCode   })
+    }
+    if (req.body.district) {
+        selector["$and"].push({ "location.district" :  req.body.district   }) 
+    }
     if (req.body.industry_id) {
     	req.body.industry_id.map(elem => {
     		industry_ids.push(ObjectID(elem.id))
@@ -684,7 +690,13 @@ exports.subfunctionalAreaJobs = (req, res, next)=>{
     selector["$and"].push({ "location.countryCode" :  countryCode })
    	
     console.log(JSON.stringify(selector))
-
+    
+    if (req.body.stateCode) {
+        selector["$and"].push({ "location.stateCode" :  req.body.stateCode   })
+    }
+    if (req.body.district) {
+        selector["$and"].push({ "location.district" :  req.body.district   }) 
+    }
     if (req.body.industry_id) {
     	req.body.industry_id.map(elem => {
     		industry_ids.push(ObjectID(elem.id))

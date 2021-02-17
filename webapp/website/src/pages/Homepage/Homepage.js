@@ -74,7 +74,7 @@ class HomePage extends Component {
     var {mapAction} = this.props;
     mapAction.setViewMode(viewMode);
     mapAction.jobCount(this.props.selector);
-    
+    console.log(this.props.selector)
     if (viewMode=="mapView") {
       mapAction.filterMapData(this.props.selector);
     }
