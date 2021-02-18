@@ -699,7 +699,7 @@ exports.functonalAreaJobs = (req, res, next)=>{
     });
 }
 
-exports.subfunctionalAreaJobs = (req, res, next)=>{
+exports.subfunctionalAreaJobs = (req, res, next)=>{ 
 	console.log("req.body - ", req.body);
 	var selector = {}; 
 	var industry_ids = [];
@@ -767,7 +767,12 @@ exports.industrialJobs = (req, res, next)=>{
     selector["$and"].push({ "location.countryCode" :  countryCode })
    	
     console.log(JSON.stringify(selector))
-
+    if (req.body.stateCode) {
+        selector["$and"].push({ "location.stateCode" :  req.body.stateCode   })
+    }
+    if (req.body.district) {
+        selector["$and"].push({ "location.district" :  req.body.district   }) 
+    }
     if (req.body.industry_id) {
     	req.body.industry_id.map(elem => {
     		industry_ids.push(ObjectID(elem.id))
