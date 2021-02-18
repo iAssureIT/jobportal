@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 //import India from '../../maps/India/India.js';
 import MapComponent from '../../maps/MapComponent/MapComponent.js';
+import FunctionalComponent from '../../blocks/FunctionalComponent/FunctionalComponent.js';
+
 import FunctionalAreawiseJobs from '../../blocks/FunctionalAreawiseJobs/FunctionalAreawiseJobs.js';
 import IndustrywiseJobs from '../../blocks/IndustrywiseJobs/IndustrywiseJobs.js';
 import LeftSideFilters from '../../blocks/LeftSideFilters/LeftSideFilters.js';
@@ -32,7 +34,7 @@ class HomePage extends Component {
     var selector = this.props.selector;
     
     selector.countryCode = "IN"; 
-    console.log("path",this.props.match)
+    //console.log("path",this.props.match)
     //if (window.location.pathname.split("/")[1] == "state" ) {
     if(this.props.match.path=="/"){
       mapAction.filterMapData(selector);
@@ -49,6 +51,13 @@ class HomePage extends Component {
       mapAction.filterFunctionalData(selector);
       mapAction.setViewMode("functionalView");
     }  
+    if (this.props.match.path=="/state/:stateCode/:district/:functionalArea" ) {
+      selector.stateCode = this.props.match.params.stateCode
+      selector.district  = this.props.match.params.district
+      selector.functionalArea  = this.props.match.params.functionalArea
+      mapAction.filterSubfunctionalData(selector);
+      mapAction.setViewMode("functionalView");
+    }
     //selector.stateCode = stateCode; 
    
     
@@ -89,7 +98,7 @@ class HomePage extends Component {
     }
   }
   render() {
-    
+    //console.log(this.props.subfunctionalJobs)
     return (
       <div className="ViewBodyWrapper container-fluid">
 
@@ -142,7 +151,7 @@ class HomePage extends Component {
 
               <div id="functionwise" className= {this.props.viewMode == "functionalView" ? "tab-pane fade in active" : "tab-pane fade" } >
                 { this.props.showLoader ? <Loader type="placeholderloader"  /> :
-                <FunctionalAreawiseJobs functionalJobs={this.props.functionalJobs}/> }
+                <FunctionalComponent pathname={this.props.match}/> }
               </div>
 
               <div id="industrywise" className={this.props.viewMode == "industrialView" ? "tab-pane fade in active" : "tab-pane fade" }>

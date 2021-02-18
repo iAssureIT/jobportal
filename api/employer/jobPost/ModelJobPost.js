@@ -42,8 +42,8 @@ const jobsSchema = mongoose.Schema({
 	
 	eligibility 	: 	{
 							minEducation 			: String,
-							minExperience   		: String,
-				  		},
+							minExperience   		: Number,
+				  		}, 
 	
 	requiredSkills  : 	{
 							primarySkills 			: [{

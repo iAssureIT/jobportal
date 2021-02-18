@@ -1,25 +1,27 @@
 import React, {Component} from 'react';
+import { withRouter }       from 'react-router-dom';
+import { connect }          from 'react-redux';
+import { bindActionCreators } from 'redux'; 
+import  * as mapActionCreator from '../../common/actions/index';
 
 import './SubFunctionalAreawiseJobs.css';
 
-export default class SubFunctionalJoblist extends Component{
+class SubFunctionalAreawiseJobs extends Component{
 
     constructor(props){
         super(props);
-        this.state={
-            subFunJoblist:[{name: "Software Engineer", count:"335"}, {name: "Chemical Engineer", count:"45"}, {name: "Civil Engineer", count: "64"}, {name: "Electrical Engineer", count: "87"}, {name: "Mechanical Engineer", count: "64"}]
-        }
+        
     }
  
-  render(){
-
+    render(){
+        console.log(this.props.subfunctionalJobs)
     return(
-        <section className="col-lg-9 FunctionalJobsWrapper">
+        <section className="col-lg-12 AllJobsWrapper">
             <div className="row">
                 {
-                    this.state.subFunJoblist.length > 0
+                    this.props.subfunctionalJobs
                     ?
-                        this.state.subFunJoblist.map((elem,index)=>{
+                        this.props.subfunctionalJobs.map((elem,index)=>{
                             return(
                                 <div className="col-lg-3 FunctionalJobsRow">
                                     <div className="col-lg-12 FunctionalJobsBlock">
@@ -28,7 +30,7 @@ export default class SubFunctionalJoblist extends Component{
                                         </div>
 
                                         <div className="FunctionalJobsBlockName">
-                                            {elem.name}
+                                            {elem.subfunctionalarea[0].subfunctionalArea}
                                         </div>
 
                                         <div className="FunctionalJobsBlockNumber">
@@ -44,7 +46,15 @@ export default class SubFunctionalJoblist extends Component{
             </div>                        
         </section>    
     );
+    }
 }
+const mapStateToProps = (state)=>{
 
-
+    return {
+        subfunctionalJobs    : state.subfunctionalJobs,
+    }
 }
+const mapDispatchToProps = (dispatch) => ({
+  mapAction :  bindActionCreators(mapActionCreator, dispatch)
+}) 
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(SubFunctionalAreawiseJobs));

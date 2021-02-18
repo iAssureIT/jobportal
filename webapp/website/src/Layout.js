@@ -22,9 +22,6 @@ import Footer               from './common/footer/Footer.js';
 import CoreLayout           from './coreadmin/CoreLayout/CoreLayout.js';
 import Homepage             from './pages/Homepage/Homepage.js'
 
-import PageFunctionWise     from './pages/PageFunctionalAreawiseJobs/PageFunctionWise.js';
-import SubPageFunctionWise  from './pages/PageFunctionalAreawiseJobs/SubPageFunctionWise.js';
-
 import CandidateProfile     from './blocks/ProfilePage/CandidateProfile.js';
 import CandidateList        from './blocks/CandidateList/CandidateList.js';
 import CandidateBasicInfo   from './pages/ProfileCreation/CandidateBasicInfo.js';
@@ -53,7 +50,7 @@ class Layout extends Component  {
             sidebar: true,
             empProfileStatus: true,
             stateArray:[],
-            showMapHeader : false,  
+             
         }
     }
 
@@ -61,9 +58,7 @@ class Layout extends Component  {
         var pageUrl = window.location.pathname;
         let lastpara = pageUrl ? pageUrl.split('/') : "";
         
-        if (lastpara[1] == '' || lastpara[1] == '/functional-area' || lastpara[1] == '/subfunctional-area') {
-            this.setState({ showMapHeader: true })
-        }
+        
         this.setState({ currentUrl: pageUrl })
         axios.get("http://locations2.iassureit.com/api/states/get/list/IN")
             .then((response) => {
@@ -73,7 +68,6 @@ class Layout extends Component  {
                     let stateLink = this.state.stateArray.find(element => element.stateName == decodeURIComponent(lastpara[1]) );
                     
                     if (stateLink ) {
-                        this.setState({ showMapHeader: true })
                         this.props.mapAction.setMapSelectedState(decodeURIComponent(lastpara[1]));
                     }  
                 })
@@ -118,12 +112,11 @@ class Layout extends Component  {
                                         <Switch >
                                             <Route path="/login" exact strict component={Login} />
                                             <Route path="/signup" exact strict component={SignUp} />
-                                            <Route exact path="/functional-area"                component={PageFunctionWise}  />
-                                            <Route exact path="/subfunctional-area"             component={SubPageFunctionWise}  />
-
+                                            
                                             <Route exact path="/"                               component={Homepage}  />
                                             <Route exact path="/state/:stateCode"               component={Homepage}  />
                                             <Route exact path="/state/:stateCode/:district"     component={Homepage}  />
+                                            <Route exact path="/state/:stateCode/:district/:functionalArea"     component={Homepage}  />
 
                                             <Route exact path="/basic-info"                     component={CandidateBasicInfo}  />
                                             <Route exact path="/address/:candidate_id"           component={CandidateAddress}  />
@@ -179,6 +172,8 @@ class Layout extends Component  {
                             <Route exact path="/"        component={Homepage}  />
                             <Route exact path="/state/:stateCode"               component={Homepage}  />
                             <Route exact path="/state/:stateCode/:district"     component={Homepage}  />
+                            <Route exact path="/state/:stateCode/:district/:functionalArea"     component={Homepage}  />
+
 
                             <Route exact path="/search-jobs"                    component={CandidateJobList}  />  
                             <Route path="/job-profile/:job_id"                  component={JobProfile} exact />
@@ -190,8 +185,7 @@ class Layout extends Component  {
                             <Route path="/reset-pwd/:user_ID" exact strict component={ResetPassword} />
                             <Route path="/confirm-otp/:userID" exact strict component={ConfirmOtp} />
                             <Route path="/reset-password/:user_ID" exact strict component={ResetPasswordFirstLogin}  />
-                            <Route exact path="/functional-area"        component={PageFunctionWise}  />
-                            <Route exact path="/subfunctional-area"        component={SubPageFunctionWise}  />
+                            
                         </Switch>
                     </Router>
                     <Footer />

@@ -24,7 +24,9 @@ class LeftSideFilters extends Component{
       inputRole             : [],
 
       allExperiences        : "",
-      inputExperience       : ['0-1 year','1-3 years','3-7 years','7+ years'],
+      inputExperience       : [ {"experience": "0-1 year",  "minvalue": 0, "maxvalue": 1 },
+                                {"experience": "1-3 years", "minvalue": 1, "maxvalue": 3 } 
+                              ],
         
       industry              : [],
       functionalArea        : [],
@@ -145,7 +147,7 @@ class LeftSideFilters extends Component{
     var functionalArea_ids=[];
     var jobRole_ids=[];
     var {mapAction} = this.props;
-
+    console.log(selecteditems)
     selector.countryCode = "IN"; 
     //selector.stateCode = selecteditems.currentTarget.value; 
     if (this.props.match.path=="/state/:stateCode") {
@@ -154,7 +156,7 @@ class LeftSideFilters extends Component{
     if (this.props.match.path=="/state/:stateCode/:district") {
       selector.district = this.props.match.params.district
     }
-    console.log(this.props.match)
+    
     if (filterType === 'industry') {
       if (selecteditems.length > 0) {
         selecteditems.map((elem,index)=>{
@@ -186,6 +188,9 @@ class LeftSideFilters extends Component{
         delete selector.jobRole_id
       }
     }
+    if (filterType === "experience") {
+      console.log(selecteditems)
+    }
     this.setState({ selector: selector },()=>{
         mapAction.jobCount(this.state.selector);
       if (this.props.viewMode=="mapView") {
@@ -206,7 +211,9 @@ class LeftSideFilters extends Component{
 
   render(){
     
-   
+    //console.log(this.state.allIndustries)
+    //console.log(this.state.inputExperience)
+
     return(
       <section className="LeftSideFiltersWrapper col-lg-12">
       
@@ -217,7 +224,7 @@ class LeftSideFilters extends Component{
               <div className="input-group filtersColor col-lg-12">
                 
                    <Multiselect className="form-control LeftSideFiltersInputBox LeftSideFiltersDrop"
-                    id="allIndustries" name="allIndustries" placeholder="All Industries"
+                    id="allIndustries" name="allIndustries" placeholder="Industries"
                     //onChange={this.onSelectedItemsChange.bind(this,'industry')}
                     options={this.state.allIndustries}
                     displayValue="industry"
@@ -237,7 +244,7 @@ class LeftSideFilters extends Component{
               <div className="input-group FilterDropDown1 col-lg-12">
                
                    <Multiselect className="form-control LeftSideFiltersInputBox LeftSideFiltersDrop"
-                    id="allFunctionalAreas" name="allFunctionalAreas" placeholder="All Functional Areas"
+                    id="allFunctionalAreas" name="allFunctionalAreas" placeholder="Functional Areas"
                     
                       options={this.state.allFunctionalAreas}
                       displayValue="functionalArea"
@@ -257,7 +264,7 @@ class LeftSideFilters extends Component{
               <div className="input-group col-lg-12">
                 
                    <Multiselect className="form-control LeftSideFiltersInputBox LeftSideFiltersDrop"
-                    id="allRoles" name="allRoles" placeholder="All Roles"
+                    id="allRoles" name="allRoles" placeholder="Roles"
                       options={this.state.allRoles}
                       displayValue="jobRole"
                       onSelect={this.onSelectedItemsChange.bind(this,'jobRole')} // Function will trigger on select event
@@ -275,10 +282,13 @@ class LeftSideFilters extends Component{
               <div className="input-group col-lg-12">
                 
                    <Multiselect className="form-control LeftSideFiltersInputBox LeftSideFiltersDrop"
-                    id="allExperiences" name="aallExperiences" placeholder="All Experiences"
+                    id="allExperiences" name="aallExperiences" placeholder="Experience"
                     
                       options={this.state.inputExperience}
-                        isObject={false}
+                      displayValue="experience" 
+                      onSelect={this.onSelectedItemsChange.bind(this,'experience')} // Function will trigger on select event
+                      onRemove={this.onSelectedItemsChange.bind(this,'experience')}
+
                         //showCheckbox={true}
                         style={this.style}
                    />    

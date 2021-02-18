@@ -168,7 +168,7 @@ class Header extends Component{
 
 
     render(){
-    console.log(window.location.pathname.split("/"))
+    
     const selectedState = this.props.selectedState;
     //console.log(this.props.selector)
     if (this.props.userDetails.loggedIn) {    

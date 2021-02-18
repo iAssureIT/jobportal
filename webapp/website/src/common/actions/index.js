@@ -71,8 +71,8 @@ export function filterMapData(selector) {
   		dispatch(setFilterSelector(selector));
 	  	return axios.post("/api/jobs/mapwise-jobs",selector)
 	    .then((response)=>{
-	    	console.log(selector)
-	    	console.log("resp",response.data)
+	    	//console.log(selector)
+	    	//console.log("resp",response.data)
 	        dispatch(getMapData(response.data));
 	    })
 	    .catch((error)=>{
@@ -112,6 +112,7 @@ export function filterSubfunctionalData(selector) {
   	return dispatch =>{
   		dispatch(showLoader(true));
   		dispatch(setFilterSelector(selector));
+  		console.log(selector)
 	  	return axios.post("/api/jobs/subfunctional-jobs",selector)
 	    .then((response)=>{
 	     	dispatch(showLoader(false));
