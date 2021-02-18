@@ -29,14 +29,29 @@ class Delhi extends Component{
 	search(nameKey){
 		return 10;
 	}
-	onStateClick = (stateName) => {
+	onDistrictClick = (district,stateCode) => {
 		
+		var {mapAction} = this.props;
+		mapAction.setViewMode("functionalView");
+
+		var selector = this.props.selector;
+		
+		selector.countryCode = "IN"; 
+		selector.stateCode = stateCode; 
+		selector.district = district; 
+
+		mapAction.jobCount(selector);
+		mapAction.filterFunctionalData(this.props.selector);
+
+		this.props.history.push("/state/"+stateCode+"/"+district);
+
+
 	}
 	render(){
 		return(
 			<div className="bodyWrapper">
 				<div className="stateWrapper">
-					<div className="dwarka classHover"> 
+					<div className="dwarka classHover" onClick={e => this.onDistrictClick("Pune","MH")}> 
 						<img src="/Maps/Delhi/Dwarka.png"  alt="Dwarka" 
 						 onMouseOver={e => (e.currentTarget.src = "/Maps/Delhi/Dwarka_.png")} 
 						 onMouseOut={e => (e.currentTarget.src = "/Maps/Delhi/Dwarka.png")}/>
