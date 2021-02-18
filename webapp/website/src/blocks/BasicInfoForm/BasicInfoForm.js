@@ -29,7 +29,7 @@ class BasicInfoForm extends Component{
 			dob                       : "",
 			profilePhoto              : "",
 			profileImageUrl           : "",
-			gender                    : "male",
+			gender                    : "",
 			anniversaryDate           : "",	
 			maritalStatus             : "",
 			nationality               : "",

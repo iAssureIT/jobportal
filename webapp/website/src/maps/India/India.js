@@ -156,7 +156,7 @@ class India extends Component{
 						<span className="tamilnaduNumber mapCountLabel text-center">{this.state.TN ? this.state.TN : 0}</span>
 					</div>
 					<div className="andhrapradesh classHover">
-						<img src="/Maps/India/AndhraPradesh.png" className="img-responsive "  onClick={e => this.onStateClick("Andhra Pradesh","AP")} onMouseOver={e => (e.currentTarget.src = "/Maps/India/AndhraPradesh1.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/India/AndhraPradesh.png")}/>
+						<img src="/Maps/India/AndhraPradesh.png" className="img-responsive "  onClick={e => this.onStateClick("Andhra Pradesh","AD")} onMouseOver={e => (e.currentTarget.src = "/Maps/India/AndhraPradesh1.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/India/AndhraPradesh.png")}/>
 						<span className="andhrapradeshText mapTextLabel text-capitalize">Andhra Pradesh</span>
 						<span className="andhrapradeshNumber mapCountLabel text-center">{this.state.AD ? this.state.AD : 0}</span>
 					</div>

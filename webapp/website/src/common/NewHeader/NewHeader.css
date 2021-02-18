@@ -126,26 +126,8 @@ font-face {
 	font-family: 'Montserrat-Regular';
 }
 
-.headerMenu1{
-	width: 30px;
-	height: 30px;
-	color: #aaa;
-	font-size: 18px;
-	text-align: center;
-	margin-left: 5px;
-	margin-top: 0px;
-	border: 1px solid #999;
-	border-radius: 5px;
-	
-}
-.headerMenu11{
-	width: 30px;
-	height: 30px;
-	color: #fdfdfd;
-	font-size: 22px;
-	text-align: center;
-	margin-top: 5px;
-}
+
+
 .headerMenu1:hover{
 	cursor: pointer;
 }
@@ -156,9 +138,7 @@ font-face {
 	margin-top: 20px;
 }
 
-.headerMenu11{
-	float: right;
-}
+
 
 .bind{
 	background-color: #222;

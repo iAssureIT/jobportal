@@ -127,27 +127,27 @@ font-face {
 }
 
 .headerMenu1{
-  width: 30px;
-  height: 30px;
-  color: #aaa;
-  font-size: 18px;
+  width: 35px;
+  height: 35px;
+  color: #fefefe;
+  font-size: 20px;
   text-align: center;
-  margin-left: 5px;
   margin-top: 0px;
-  border: 1px solid #999;
-  border-radius: 5px;
+ 
   
 }
 .headerMenu11{
-  width: 30px;
-  height: 30px;
-  color: #aaa;
-  font-size: 18px;
+  width: 35px;
+  height: 35px;
+  color: #fefefe;
+  font-size: 20px;
   text-align: center;
-  margin-left: 5px;
-  margin-top: 0px;
+  border-radius: 50%;
+  border: 1px solid #efefef;
+ background-color: #ccc;
+
 }
-.headerMenu1:hover{
+.headerMenu1,.headerMenu11:hover{
   cursor: pointer;
 }
 
@@ -157,9 +157,8 @@ font-face {
   margin-top: 20px;
 }
 
-.headerMenu11{
-  float: right;
-}
+
+
 
 .bind{
   background-color: #222;
@@ -309,4 +308,9 @@ font-face {
 }
 .selectedState a{
 color: var(--main-heading-font-color) !important
+}
+
+.classIcon{
+  width: 25px;
+  height: 25px;
 }
