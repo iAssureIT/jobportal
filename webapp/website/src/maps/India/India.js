@@ -38,7 +38,7 @@ class India extends Component{
 	    this.setState(stateWiseCount)
 	}
 	search(nameKey){
-		//console.log(this.props.mapJobs)
+		console.log(this.props.mapJobs)
 		var stateWiseCount = {};
 	    for (var i=0; i < this.props.mapJobs.length; i++) {
 	    	//console.log(nameKey)

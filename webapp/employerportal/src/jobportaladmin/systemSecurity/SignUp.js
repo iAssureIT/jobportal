@@ -24,14 +24,13 @@ class SignUp extends Component {
       loggedIn              : false,
       showPassword1         : false,
       showPassword2         : false,
-      employerID            : "",
-      employer_id           : "",
-      employerName          : "",
+      
+      companyName           : "",
       company               : "",
       company_id            : "",
+      companyID             : "",
       companylist           : [],
       city                  : [], 
-      selectedCompany       : [],
       stateArray            : [],
       companyState          : "",
       companyCountry        : "",
@@ -112,7 +111,7 @@ class SignUp extends Component {
   validateForm=()=>{
     var status = true;
     var regName = /^[a-zA-Z]+$/;
-    var employer =this.state.value;
+    var employer =this.state.companyName;
     var firstName=this.state.firstName;
     var lastName=this.state.lastName;
     var tempEmail = this.state.emailAddress.trim(); // value of field with whitespace trimmed off
@@ -121,15 +120,15 @@ class SignUp extends Component {
     var phoneno = /^\+?([0-9]{2})\)?[-. ]?([0-9]{5})[-. ]?([0-9]{5})$/;
 
 
-    if(this.state.employer<=0)  {
+    if(this.state.companyName<=0)  {
       document.getElementById("employerError").innerHTML=  
-      "Please enter employer  valid Name";  
+      "Please enter valid employer name";  
       status=false; 
     }
   
     else if(!regName.test(employer)){
       document.getElementById("employerError").innerHTML=  
-      "Please enter employer valid name,......";  
+      "Please enter valid employer name";  
       status=false; 
     }
     else{
@@ -253,9 +252,9 @@ class SignUp extends Component {
         mobNumber   : (this.state.mobileNumber).replace("-", ""),
         email       : this.state.emailAddress,
         pwd         : this.state.password,
-        company_id  : this.state.employer_id != "" ? this.state.employer_id : null,
-        companyID   : this.state.employerID != "" ? this.state.employerID : null,
-        companyName : this.state.employerName,
+        company_id  : this.state.company_id != "" ? this.state.company_id : null,
+        companyID   : this.state.companyID != "" ? this.state.companyID : null,
+        companyName : this.state.companyName,
         role        : 'employer',
         status      : 'unverified',        
 
@@ -291,7 +290,7 @@ class SignUp extends Component {
               "toUser_id": response.data.ID, //To user_id(ref:users)
               "variables": {
                 'UserName': this.state.firstName + ' ' + this.state.lastName,
-                'EmployerName': this.state.employerName,
+                'EmployerName': this.state.companyName,
                 'EmployerID': this.state.employerID,
                 'EmployerEmailID': this.state.emailAddress,
                 'EmployerContactNumber': (this.state.mobileNumber).replace("-", "")
@@ -401,10 +400,11 @@ class SignUp extends Component {
         const {name,value} = event.target;
         this.setState({ [name]:value });  
         
-        var company_id;
-        if (document.querySelector('#company option[value="' + value + '"]')) {
-           company_id = document.querySelector('#company option[value="' + value + '"]').getAttribute("data-value")
-        }else{company_id = "" }
+        var company_id, companyID;
+        if (document.querySelector('#companyName option[value="' + value + '"]')) {
+          company_id = document.querySelector('#companyName option[value="' + value + '"]').getAttribute("data-value")
+          companyID = document.querySelector('#companyName option[value="' + value + '"]').getAttribute("data-id")
+        }else{company_id = ""; companyID = "" }
 
          
         var selectedCompany = this.state.companylist.filter((val)=>{
@@ -416,10 +416,10 @@ class SignUp extends Component {
         if (selectedCompany[0]) {
           var city = _.uniq(selectedCompany[0].locations, 'district')
         
-          this.setState({company_id :company_id, selectedCompany : selectedCompany, city: city, });
+          this.setState({company_id :company_id, companyID: companyID, companyName : selectedCompany[0].companyName, city: city, });
 
         }else{
-          this.setState({company_id :company_id, company : value });
+          this.setState({company_id :company_id, companyID: companyID, companyName : value });
 
         }
         
@@ -427,7 +427,7 @@ class SignUp extends Component {
     handleChangeCity(event){
       var value = event.currentTarget.value;
       var name  = event.currentTarget.name;
-      
+      console.log(document.querySelector('#companyCity option[value="' + value + '"]'))
       if (document.querySelector('#companyCity option[value="' + value + '"]')) {
         this.setState({
           [name]      : value,
@@ -441,7 +441,6 @@ class SignUp extends Component {
       }
     }
   render() {
-    
     return (
       
       <section className="container-fluid registrationFormWrapper">
@@ -457,12 +456,12 @@ class SignUp extends Component {
                 <div className="col-lg-12 form-group" >
                   <div className="input-group autocomplete">
                     <span className="input-group-addon registrationInputIcon"><i className="fa fa-briefcase"></i></span>
-                    <input type="text" list="company" className="form-control inputBox" refs="industry" 
-                    name="company" id="selectCompany" maxLength="100" value={this.state.company} data-value={this.state.company_id}
+                    <input type="text" list="companyName" className="form-control inputBox" refs="industry" 
+                    name="companyName" id="selectCompany" maxLength="100" value={this.state.companyName} data-value={this.state.company_id}
                     onChange={this.onChangeCompany.bind(this)} />
-                    <datalist name="company" id="company" className="companylist" >
+                    <datalist name="companyName" id="companyName" className="companylist" >
                         { this.state.companylist.map((item, key) =>
-                            <option key={key} value={item.companyName} data-value={item._id}/>
+                            <option key={key} value={item.companyName} data-value={item._id} data-id={item.companyID}/>
                         )}
                     </datalist>
                   </div>

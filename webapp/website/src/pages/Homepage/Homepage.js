@@ -94,6 +94,15 @@ class HomePage extends Component {
     
     if (viewMode=="mapView") {
       mapAction.filterMapData(this.props.selector);
+      if (this.props.match.path=="/state/:stateCode/:district" ) {
+        this.props.history.push("/state/"+this.props.match.params.stateCode);
+      }
+      if (this.props.match.path=="/state/:stateCode/:district/:functionalArea" ) {
+        this.props.history.push("/state/"+this.props.match.params.stateCode);
+      }
+      if (this.props.match.path=="/state/:stateCode/:district/:functionalArea/:subfunctionalArea" ) {
+        this.props.history.push("/state/"+this.props.match.params.stateCode);
+      }
     }
     if (viewMode=="functionalView") {
       mapAction.filterFunctionalData(this.props.selector);
@@ -106,7 +115,7 @@ class HomePage extends Component {
     }
   }
   render() {
-    //console.log(this.props)
+    console.log(this.props.selector)
     return (
       <div className="ViewBodyWrapper container-fluid">
 

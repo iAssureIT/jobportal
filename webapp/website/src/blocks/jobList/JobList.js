@@ -187,7 +187,7 @@ applyJob = (jobid, company_id)=>{
 																	elem.jobBasicInfo.gender=="Male Only"?
 																	<li><i className="fa fa-male"></i></li>
 																	: elem.jobBasicInfo.gender=="Female Only"?
-																	<li><i className="fa fa-female"></i></li> : <li><i className="fa fa-female"></i></li>
+																	<li><i className="fa fa-female"></i></li> : <li><i><img src="/images/19.png"/></i></li>
 																}	
 																<li><i className="fa fa-sun-o"></i></li>
 																<li><i className="fa fa-clock-o"></i></li>
@@ -196,7 +196,7 @@ applyJob = (jobid, company_id)=>{
 														</div>
 													</div>
 													<div className="jobListDesignation">
-														<a href={"job-profile/"+elem._id} className="link">{elem.jobBasicInfo.jobTitle}</a>
+														<a href={"/job-profile/"+elem._id} className="link">{elem.jobBasicInfo.jobTitle}</a>
 													</div>
 													<div className="jobListCompanyName">
 														<b>{elem.company_id ? elem.company_id.companyName : "Anonymous"}</b>

@@ -868,8 +868,6 @@ class BasicInfo extends Component {
                                 <input type="text" id="groupName" className="form-control col-lg-12 col-md-12 col-sm-12 col-xs-12" value={this.state.groupName} ref="groupName" name="groupName" onChange={this.handleChange} required />
                               </div>
                               
-                              
-
                               <div className="col-lg-1 col-md-1 col-sm-12 col-xs-12 NOpadding ">
                                 <div className="col-lg-12 col-md-3 col-sm-12 col-xs-12">
                                   <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 NOpadding " id="hide">

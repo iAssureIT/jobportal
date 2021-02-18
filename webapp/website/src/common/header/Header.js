@@ -43,7 +43,7 @@ class Header extends Component{
       
       var {mapAction} = this.props;
       mapAction.jobCount(this.props.selector);
-
+      
       if (window.location.pathname.split("/")[1] == "state" ) {
         var stateName = "";
           //selector.stateCode = window.location.pathname.split("/")[2] 
@@ -180,7 +180,7 @@ class Header extends Component{
 
         {
           window.location.pathname.split("/")[1] == "state" ? 
-          <div className="breadCrumbHeader col-lg-3">
+          <div className="breadCrumbHeader col-lg-2">
           <ul className="breadCrumbInner">
               <li className="breadCrumbInnerli"><a href="/">India</a></li>
               <li className= {window.location.pathname.split("/")[3] ? "breadCrumbInnerli" : "breadCrumbInnerli selectedState"}>
@@ -192,10 +192,10 @@ class Header extends Component{
               </li>  : null }  
           </ul>
           </div>
-          : <div className="breadCrumbHeader col-lg-3"></div>
+          : <div className="breadCrumbHeader col-lg-2"></div>
         }
 
-              <div className="FunctionWiseTitle col-lg-4">
+              <div className="FunctionWiseTitle col-lg-5">
                
               </div>
 
@@ -237,30 +237,20 @@ class Header extends Component{
               <div className="row">
 
                  <div className="headerMenu2 col-lg-4">
-                  <div className="headerMenu1" >
+                  <div className="headerMenu11" >
                     <FontAwesomeIcon icon={['fas', 'bell']} />
                   </div>
                 </div>
                 
                 <div className="headerMenu2 col-lg-4">
                   <div className="headerMenu11" onClick={this.userMenuToggle.bind(this)}>
-                    {/*<FontAwesomeIcon icon={['fas', 'user']} />*/}
-                    {
-                      this.props.userDetails.gender=='female'
-                      ? 
-                        <img src="/images/f.png" alt="icon" className="classIcon"/>
-                      :
-                       <img src="/images/m.png" alt="icon" className="classIcon"/>
-                    }
-
-                    
+                    <FontAwesomeIcon icon={['fas', 'user']} />
                   </div>
                 </div>
 
-
                 <div className="headerMenu2 col-lg-4">
                 <div className="headerMenu1" onClick={this.asideBar.bind(this)}>
-                     <FontAwesomeIcon icon={['fas', 'bars']} />
+                    <img src="/images/List_View.png" alt="icon" />
                   </div>
                 </div>
               </div>
@@ -358,7 +348,7 @@ class Header extends Component{
         </div>
         {
           window.location.pathname.split("/")[1] == "state" ? 
-          <div className="breadCrumbHeader col-lg-3">
+          <div className="breadCrumbHeader col-lg-2">
           <ul className="breadCrumbInner">
               <li className="breadCrumbInnerli"><a href="/">India</a></li>
               <li className= {window.location.pathname.split("/")[3] ? "breadCrumbInnerli" : "breadCrumbInnerli selectedState"}>
@@ -370,11 +360,11 @@ class Header extends Component{
               </li>  : null }  
           </ul>
           </div>
-          : <div className="breadCrumbHeader col-lg-3"></div>
+          : <div className="breadCrumbHeader col-lg-2"></div>
         }
         
 
-              <div className="FunctionWiseTitle col-lg-4">
+              <div className="FunctionWiseTitle col-lg-5">
                
               </div>
 
@@ -409,7 +399,7 @@ class Header extends Component{
                 </div>
                 <div className="headerMenu2 col-lg-4">
                 <div className="headerMenu1" onClick={this.asideBar.bind(this)}>
-                     <FontAwesomeIcon icon={['fas', 'bars']} />
+                    <img src="/images/List_View.png" alt="icon" />
                   </div>
                 </div>
               </div>
