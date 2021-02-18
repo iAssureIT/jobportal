@@ -58,6 +58,14 @@ class HomePage extends Component {
       mapAction.filterSubfunctionalData(selector);
       mapAction.setViewMode("functionalView");
     }
+    if (this.props.match.path=="/state/:stateCode/:district/:functionalArea/:subfunctionalArea" ) {
+      selector.stateCode = this.props.match.params.stateCode
+      selector.district  = this.props.match.params.district
+      selector.functionalArea  = this.props.match.params.functionalArea
+      selector.subfunctionalArea  = this.props.match.params.subfunctionalArea
+      mapAction.filterJobList(selector);
+      mapAction.setViewMode("functionalView");
+    }
     //selector.stateCode = stateCode; 
    
     
@@ -83,7 +91,7 @@ class HomePage extends Component {
     var {mapAction} = this.props;
     mapAction.setViewMode(viewMode);
     mapAction.jobCount(this.props.selector);
-    console.log(this.props.selector)
+    
     if (viewMode=="mapView") {
       mapAction.filterMapData(this.props.selector);
     }
@@ -98,7 +106,7 @@ class HomePage extends Component {
     }
   }
   render() {
-    //console.log(this.props.subfunctionalJobs)
+    //console.log(this.props)
     return (
       <div className="ViewBodyWrapper container-fluid">
 

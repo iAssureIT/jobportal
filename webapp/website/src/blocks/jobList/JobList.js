@@ -182,8 +182,13 @@ applyJob = (jobid, company_id)=>{
 												<div className="col-lg-11 jobListLeftContent">
 													<div className="row">
 														<div className="iconsBar">
-															<ul>	
-																<li><i className="fa fa-male"></i></li>
+															<ul>	 
+																{
+																	elem.jobBasicInfo.gender=="Male Only"?
+																	<li><i className="fa fa-male"></i></li>
+																	: elem.jobBasicInfo.gender=="Female Only"?
+																	<li><i className="fa fa-female"></i></li> : <li><i className="fa fa-female"></i></li>
+																}	
 																<li><i className="fa fa-sun-o"></i></li>
 																<li><i className="fa fa-clock-o"></i></li>
 															</ul>

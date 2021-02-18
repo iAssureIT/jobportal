@@ -22,11 +22,19 @@ class India extends Component{
 	}
 	componentWillReceiveProps(nextProps){
 		var stateWiseCount = {};
-		
+		console.log(nextProps.mapJobs)
+		/*if (nextProps.mapJobs.length == 0) {
+			for (var i=0; i < this.state.length; i++) {
+				stateWiseCount[this.state[i]] = 0
+		    }
+	    	
+	    	
+	    }*/
 	    for (var i=0; i < nextProps.mapJobs.length; i++) {
 	    	
 	       stateWiseCount[nextProps.mapJobs[i]._id] =  nextProps.mapJobs[i].count;
 	    }
+
 	    this.setState(stateWiseCount)
 	}
 	search(nameKey){
@@ -74,7 +82,7 @@ class India extends Component{
 		this.props.history.push("state/"+stateCode);
 	}
 	render(){
-		// /console.log(this.props.mapJobs)
+		console.log(this.state)
 		return(
 			<section className="mapWrapper">
 				<div className="india">

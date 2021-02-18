@@ -3,8 +3,8 @@ import React, {Component, Suspense} from 'react';
 const FunctionalAreaJobs = React.lazy(() => import('../FunctionalAreawiseJobs/FunctionalAreawiseJobs.js'));
 
 const FunctionalArea = (pathname) => {
-    console.log(pathname.pathname.pathname)
-    console.log(pathname.pathname.pathname.url)
+    //console.log(pathname.pathname.pathname)
+    //console.log(pathname.pathname.pathname.url)
         switch(pathname.pathname.pathname.url) {
             case "/":   return <FunctionalAreaJobs />;
             case "/state/"+pathname.pathname.pathname.params.stateCode :   return <FunctionalAreaJobs />;
@@ -14,6 +14,9 @@ const FunctionalArea = (pathname) => {
                             const SubFunctionalAreawiseJobs = React.lazy(() => import('../SubFunctionalAreawiseJobs/SubFunctionalAreawiseJobs.js'))
                                 return <SubFunctionalAreawiseJobs/>
 
+            case "/state/"+pathname.pathname.pathname.params.stateCode+"/"+pathname.pathname.pathname.params.district + "/"+pathname.pathname.pathname.params.functionalArea+"/"+pathname.pathname.pathname.params.subfunctionalArea:
+                            const JobList = React.lazy(() => import('../jobList/JobList.js'))
+                                return <JobList/>                    
             default:    return <h1>No map match</h1>
         }
 }

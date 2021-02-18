@@ -117,6 +117,7 @@ class Layout extends Component  {
                                             <Route exact path="/state/:stateCode"               component={Homepage}  />
                                             <Route exact path="/state/:stateCode/:district"     component={Homepage}  />
                                             <Route exact path="/state/:stateCode/:district/:functionalArea"     component={Homepage}  />
+                                            <Route exact path="/state/:stateCode/:district/:functionalArea/:subfunctionalArea"     component={Homepage}  />
 
                                             <Route exact path="/basic-info"                     component={CandidateBasicInfo}  />
                                             <Route exact path="/address/:candidate_id"           component={CandidateAddress}  />
@@ -173,6 +174,7 @@ class Layout extends Component  {
                             <Route exact path="/state/:stateCode"               component={Homepage}  />
                             <Route exact path="/state/:stateCode/:district"     component={Homepage}  />
                             <Route exact path="/state/:stateCode/:district/:functionalArea"     component={Homepage}  />
+                            <Route exact path="/state/:stateCode/:district/:functionalArea/:subfunctionalArea"     component={Homepage}  />
 
 
                             <Route exact path="/search-jobs"                    component={CandidateJobList}  />  

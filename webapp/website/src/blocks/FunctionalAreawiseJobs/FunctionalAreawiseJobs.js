@@ -10,6 +10,13 @@ import '../SubFunctionalAreawiseJobs/SubFunctionalAreawiseJobs.css';
 class FunctionalAreawiseJobs extends Component{
 
     onFunctionalAreaClick = (functionalArea, _id)=>{
+        var {mapAction} = this.props;
+        var selector = this.props.selector;
+        //selector.functionalArea = functionalArea; 
+
+        mapAction.jobCount(selector);
+        mapAction.filterSubfunctionalData(this.props.selector);
+
         this.props.history.push("/state/"+this.props.match.params.stateCode+"/"+this.props.match.params.district+"/"+functionalArea);
     }    
     render(){
@@ -52,6 +59,7 @@ class FunctionalAreawiseJobs extends Component{
 const mapStateToProps = (state)=>{
 
     return {
+        selector          : state.selector,  
         functionalJobs    : state.functionalJobs,
     }
 }
