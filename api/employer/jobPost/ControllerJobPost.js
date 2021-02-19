@@ -2,7 +2,7 @@ const mongoose	=	require('mongoose');
 const mongodb	=	require('mongodb');
 const Jobs 		=	require('./ModelJobPost.js');
 
-const StateMaster            = require('../../coreAdmin/States/ModelStates.js');
+const StateMaster               = require('../../coreAdmin/States/ModelStates.js');
 const IndustryMaster            = require('../../coreAdmin/IndustryMaster/ModelIndustryMaster.js');
 const FunctionalAreaMaster 		= require('../../coreAdmin/FunctionalAreaMaster/ModelFunctionalAreaMaster.js');
 const SubFunctionalAreaMaster 	= require('../../coreAdmin/SubFunctionalAreaMaster/ModelSubFunctionalAreaMaster.js');
@@ -498,13 +498,13 @@ exports.updateJob = (req,res,next)=>{
 								},
 			
 			"requiredSkills": 	{
-									"primarySkills" 	     : primarySkills,
+									"primarySkills" 	     : req.body.primarySkills,
 									"minPrimExp"		     : req.body.minPrimExp,
 									"secondarySkills" 	     : req.body.secondarySkills,
 									"minSecExp"			     : req.body.minSecExp,
-									"otherSkills"		     : otherSkills,
+									"otherSkills"		     : req.body.otherSkills,
 									"minOtherExp" 	  	     : req.body.minOtherExp,
-									"preferredSkills" 	     : preferredSkills
+									"preferredSkills" 	     : req.body.preferredSkills
 								},
 			
 			"createdAt" 	: 	new Date(),
@@ -851,7 +851,18 @@ exports.getSearchList = (req,res,next)=>{
 					});
 	}
 }
-
+function getStates(){ 
+    return new Promise(function(resolve,reject){ 
+        StateMaster.find({})
+            .exec()
+            .then(data => {
+                resolve(data);
+            })
+            .catch(err => {
+                reject(err);
+            });            
+    });
+}
 function getIndustries(){ 
     return new Promise(function(resolve,reject){ 
         IndustryMaster.find({})
