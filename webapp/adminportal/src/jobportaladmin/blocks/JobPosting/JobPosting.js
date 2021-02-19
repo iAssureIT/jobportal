@@ -26,9 +26,9 @@ class JobPosting extends Component {
         super(props);
 
         this.state = {
-            corporate                   :   "", 
-            corporate_id                :   "",
-            corporatelist               :   [],
+            company                   :   "", 
+            company_id                :   "",
+            companylist               :   [],
             company_id                  :   "",
             jobTitle                    :   "",
             industryList                :   [],
@@ -127,10 +127,10 @@ class JobPosting extends Component {
     componentDidMount() { 
         this.getStates();
 
-        Axios.get("/api/entitymaster/get/corporate")
+        Axios.get("/api/entitymaster/get/company")
             .then(response => {
                     this.setState({
-                        corporatelist: response.data
+                        companylist: response.data
                     });
             })
             .catch(error => {
@@ -353,7 +353,7 @@ class JobPosting extends Component {
     validateForm = () => {
         var status = true;
         var regSpaceName = /^[a-zA-Z\s]+$/;
-        var corporate=this.state.corporate;
+        var company=this.state.company;
         var jobTitle=this.state.jobTitle;
         var minEducation =this.state.minEducation;
         var minExperience =this.state.minExperience;
@@ -364,18 +364,18 @@ class JobPosting extends Component {
         var phoneno = /^\+?([0-9]{2})\)?[-. ]?([0-9]{5})[-. ]?([0-9]{5})$/;
 
 
-        if (this.state.corporate.length <= 0) {
-            document.getElementById("corporateError").innerHTML = "Enter Company name";
+        if (this.state.company.length <= 0) {
+            document.getElementById("companyError").innerHTML = "Enter Company name";
             status = false;
         }
         
-        else if(!regSpaceName.test(corporate)){
-         document.getElementById("corporateError").innerHTML=  
+        else if(!regSpaceName.test(company)){
+         document.getElementById("companyError").innerHTML=  
          "Please enter valid company name,......";  
          status=false; 
         }
         else {
-            document.getElementById("corporateError").innerHTML = "";
+            document.getElementById("companyError").innerHTML = "";
             status = true;
         }
 
@@ -639,7 +639,7 @@ class JobPosting extends Component {
         if (this.validateForm()) {
             var formValues = {
                 user_id                 :   this.props.userDetails.user_id,
-                company_id              :   this.state.corporate_id,
+                company_id              :   this.state.company_id,
                 jobTitle                :   this.state.jobTitle,
                 industry_id             :   this.state.industry_id,
                 functionalArea          :   this.state.functionalArea,
@@ -1046,18 +1046,18 @@ class JobPosting extends Component {
 
 
 
-    onChangeCorporate(event){
+    onChangecompany(event){
         const {name,value} = event.target;
         this.setState({ [name]:value });  
         
-        var corporate_id;
+        var company_id;
         var industry_id;
-        if (document.querySelector('#corporate option[value="' + value + '"]')) {
-            corporate_id = document.querySelector('#corporate option[value="' + value + '"]').getAttribute("data-value")
-            industry_id = document.querySelector('#corporate option[value="' + value + '"]').getAttribute("data-industry")
-        }else{ corporate_id = "" }
+        if (document.querySelector('#company option[value="' + value + '"]')) {
+            company_id = document.querySelector('#company option[value="' + value + '"]').getAttribute("data-value")
+            industry_id = document.querySelector('#company option[value="' + value + '"]').getAttribute("data-industry")
+        }else{ company_id = "" }
 
-        this.setState({ corporate_id : corporate_id, industry_id:industry_id },()=>{
+        this.setState({ company_id : company_id, industry_id:industry_id },()=>{
             console.log(this.state)
         });  
     }   
@@ -1175,21 +1175,21 @@ render(){
                                     <div className="col-lg-6 addJobFieldRow text-left">
                                         <div className="row">
                                             <div className="col-lg-12">
-                                                <label htmlFor="corporate" className="addjobformLable">
+                                                <label htmlFor="company" className="addjobformLable">
                                                     Company Name
                                                     <span className="asterisk">&#42;</span>
                                                 </label>
                                              
                                                 <div className="input-group">
                                                     <span className="input-group-addon addJobFormField"><i className="fa fa-briefcase"></i></span> 
-                                                        <input type="text" list="corporate" className="form-control addJobFormField" refs="corporate" id="selectCorporate" value={this.state.corporate} name="corporate"
-                                                        onChange={this.onChangeCorporate.bind(this)} />
-                                                        <datalist name="corporate" id="corporate" className="corporatelist" >
-                                                            {this.state.corporatelist.map((item, key) =>
+                                                        <input type="text" list="company" className="form-control addJobFormField" refs="company" id="selectcompany" value={this.state.company} name="company"
+                                                        onChange={this.onChangecompany.bind(this)} />
+                                                        <datalist name="company" id="company" className="companylist" >
+                                                            {this.state.companylist.map((item, key) =>
                                                                 <option key={key} value={item.companyName} data-value={item._id} data-industry={item.industry_id}/>
                                                             )}
                                                         </datalist>
-                                                    <span id="corporateError" className="errorMsgJobPost"></span>
+                                                    <span id="companyError" className="errorMsgJobPost"></span>
                                                 </div>
                                             </div>
                                         </div>              

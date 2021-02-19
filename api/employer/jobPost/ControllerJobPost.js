@@ -2,6 +2,7 @@ const mongoose	=	require('mongoose');
 const mongodb	=	require('mongodb');
 const Jobs 		=	require('./ModelJobPost.js');
 
+const StateMaster            = require('../../coreAdmin/States/ModelStates.js');
 const IndustryMaster            = require('../../coreAdmin/IndustryMaster/ModelIndustryMaster.js');
 const FunctionalAreaMaster 		= require('../../coreAdmin/FunctionalAreaMaster/ModelFunctionalAreaMaster.js');
 const SubFunctionalAreaMaster 	= require('../../coreAdmin/SubFunctionalAreaMaster/ModelSubFunctionalAreaMaster.js');
