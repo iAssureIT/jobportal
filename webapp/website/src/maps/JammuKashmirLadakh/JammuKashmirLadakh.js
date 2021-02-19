@@ -31,15 +31,30 @@ class JammuKashmirLadakh extends Component{
 	search(nameKey){
 		return 10;
 	}
-	onStateClick = (stateName) => {
+	onDistrictClick = (district,stateCode) => {
 		
+		var {mapAction} = this.props;
+		mapAction.setViewMode("functionalView");
+
+		var selector = this.props.selector;
+		
+		selector.countryCode = "IN"; 
+		selector.stateCode = stateCode; 
+		selector.district = district; 
+
+		mapAction.jobCount(selector);
+		mapAction.filterFunctionalData(this.props.selector);
+
+		this.props.history.push("/state/"+stateCode+"/"+district);
+
+
 	}
 
 	render(){
 		return(
 			<div className="bodyWrapper">
 				<div className="stateWrapper">
-					<div className="jammuAndKashmir classHover"> 
+					<div className="jammuAndKashmir classHover" onClick={e => this.onDistrictClick("Jammu And Kashmir","JK")}> 
 						<img src="/Maps/Jammu_Kashmir___Ladakh/Jammu_And_Kashmir.png" alt="Jammu_And_Kashmir" onMouseOver={e => (e.currentTarget.src = "/Maps/Jammu_Kashmir___Ladakh/Jammu_And_Kashmir_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Jammu_Kashmir___Ladakh/Jammu_And_Kashmir.png")}/>
 						<span className="jammuAndKashmirText mapTextLabel text-capitalize">Jammu And Kashmir</span> 
 						<span className="jammuAndKashmirNumber mapCountLabel text-center">{this.state.Jammu_And_Kashmir ? this.state.Jammu_And_Kashmir : 0}</span>
