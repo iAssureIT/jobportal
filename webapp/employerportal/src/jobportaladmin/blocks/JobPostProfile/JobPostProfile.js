@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import './JobPostProfile.css';
 
 import Axios  from 'axios';
-import Swal   from 'sweetalert2';
+import Swal   from 'sweetalert2'; 
 import Moment from "moment";
 
 export default class JobPostProfile extends Component{
@@ -70,18 +70,26 @@ export default class JobPostProfile extends Component{
 		.then(response=>{
 
 		console.log(response.data)
+		response.data.requiredSkills.primarySkills ? 
 			response.data.requiredSkills.primarySkills.map((skill,ind)=>{
 				primarySkillTags.push({ id : skill.skill_id._id, text : skill.skill_id.skill })
-            })
+            }) : primarySkillTags = [];
+
+        response.data.requiredSkills.secondarySkills ?
             response.data.requiredSkills.secondarySkills.map((skill,ind)=>{
 				secondarySkillTags.push({ id : skill.skill_id._id, text : skill.skill_id.skill })
-            })
+            }) : secondarySkillTags = [];
+
+        response.data.requiredSkills.otherSkills ?     
             response.data.requiredSkills.otherSkills.map((skill,ind)=>{
 				otherSkillTags.push({ id : skill.skill_id._id, text : skill.skill_id.skill })
-            })
+            }) : otherSkillTags = [];
+
+        response.data.requiredSkills.preferredSkills ? 
             response.data.requiredSkills.preferredSkills.map((skill,ind)=>{
 				preferredSkillTags.push({ id : skill.skill_id._id, text : skill.skill_id.skill })
-            })
+            }) : preferredSkillTags = [];
+            
 			this.setState({
 					job_id				: 	job_id,
 					jobTitle 			: 	response.data.jobBasicInfo.jobTitle,

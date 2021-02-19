@@ -217,7 +217,7 @@ class JobPosting extends Component {
                         functionalarea_id       :   response.data.jobBasicInfo.functionalarea_id,
                         functionalArea          :   response.data.functionalarea_id ? response.data.functionalarea_id.functionalArea : "",
                         subfunctionalarea_id    :   response.data.jobBasicInfo.subfunctionalarea_id,
-                        subFunctionalArea       :   response.data.jobBasicInfo.subfunctionalarea_id.subFunctionalArea,
+                        subFunctionalArea       :   response.data.jobBasicInfo.subfunctionalarea_id ? response.data.jobBasicInfo.subfunctionalarea_id.subfunctionalArea : "",
                         jobrole_id              :   response.data.jobBasicInfo.jobrole_id._id,
                         jobRole                 :   response.data.jobBasicInfo.jobrole_id.jobRole,
                         gender                  :   response.data.jobBasicInfo.gender,
@@ -288,35 +288,40 @@ class JobPosting extends Component {
                     var otherSkillTags = [];
                     var preferredSkillTags = [];
 
-
+                    response.data.requiredSkills.primarySkills ?
                     this.state.primarySkillSuggestions.map((skill,index)=>{
                         response.data.requiredSkills.primarySkills.map((data,ind)=>{
                             if (skill.id == data.skill_id) {
                                 primarySkillTags.push({ id : skill.id, text : skill.text })
                             }
                         })
-                    })
+                    }) : primarySkillTags = [];
+                    response.data.requiredSkills.secondarySkills ? 
                     this.state.secondarySkillSuggestions.map((skill,index)=>{
                         response.data.requiredSkills.secondarySkills.map((data,ind)=>{
                             if (skill.id == data.skill_id) {
                                 secondarySkillTags.push({ id : skill.id, text : skill.text })
                             }
                         })
-                    })
+                    }) : secondarySkillTags = [];
+
+                    response.data.requiredSkills.otherSkills ? 
                     this.state.otherSkillSuggestions.map((skill,index)=>{
                         response.data.requiredSkills.otherSkills.map((data,ind)=>{
                             if (skill.id == data.skill_id) {
                                 otherSkillTags.push({ id : skill.id, text : skill.text })
                             }
                         })
-                    })
+                    }) : otherSkillTags = [];
+
+                    response.data.requiredSkills.preferredSkills ? 
                     this.state.preferredSkillSuggestions.map((skill,index)=>{
                         response.data.requiredSkills.preferredSkills.map((data,ind)=>{
                             if (skill.id == data.skill_id) {
                                 preferredSkillTags.push({ id : skill.id, text : skill.text })
                             }
                         })
-                    })
+                    }) : preferredSkillTags = [];
 
                     this.setState({ 
                                     primarySkillTags    : primarySkillTags,
@@ -327,9 +332,9 @@ class JobPosting extends Component {
                     
                 })
 
-                .catch(error => {
-                    Swal.fire("Some error occured while updating job data", error.message, "error");
-                })
+                // .catch(error => {
+                //     Swal.fire("Some error occured while updating job data", error.message, "error");
+                // })
         }
 
     }
@@ -593,6 +598,7 @@ class JobPosting extends Component {
 
     handleSubmit = (event) => { 
         event.preventDefault();
+        console.log(this.validateForm())
         if (this.validateForm()) {
             var formValues = {
                 user_id                 :   this.props.userDetails.user_id,
@@ -723,7 +729,7 @@ class JobPosting extends Component {
     updateData(formValues) {
         Axios.patch("/api/jobs/update", formValues)
             .then(response => {
-                console.log("formValues :", formValues);
+                //console.log("formValues :", formValues);
                 if (response.data.message === "Job details updated Successfully!") {
                     console.log("response.data : ", response.data);
                     Swal.fire("Congrats!", "your profile updated successfully!", "success");
@@ -1088,6 +1094,7 @@ class JobPosting extends Component {
 
 
 render(){	
+
 		const searchOptions =   { componentRestrictions: {country: "in"} }		
 		const KeyCodes = {
 		  comma: 188,
