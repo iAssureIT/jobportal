@@ -221,9 +221,6 @@ class Karnataka extends Component{
 						<span className="chikkaballapurNumber mapCountLabel text-center">{this.state.Chikkaballapur ? this.state.Chikkaballapur : 0}</span>
 					</div>
 
-
-
-
 					<div className="kolar classHover" onClick={e => this.onDistrictClick("Kolar","KA")}> 
 						<img src="/Maps/Karnataka/Kolar.png"  alt="Kolar"  onMouseOver={e => (e.currentTarget.src = "/Maps/Karnataka/Kolar_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Karnataka/Kolar.png")}/>
 						<span className="kolarText mapTextLabel text-capitalize">Kolar</span>

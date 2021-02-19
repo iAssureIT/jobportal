@@ -29,15 +29,29 @@ class Ladakh extends Component{
 	search(nameKey){
 		return 10;
 	}
-	onStateClick = (stateName) => {
+	onDistrictClick = (district,stateCode) => {
 		
-	}
+		var {mapAction} = this.props;
+		mapAction.setViewMode("functionalView");
 
+		var selector = this.props.selector;
+		
+		selector.countryCode = "IN"; 
+		selector.stateCode = stateCode; 
+		selector.district = district; 
+
+		mapAction.jobCount(selector);
+		mapAction.filterFunctionalData(this.props.selector);
+
+		this.props.history.push("/state/"+stateCode+"/"+district);
+
+
+	}
 	render(){
 		return(
 			<div className="bodyWrapper">
 				<div className="stateWrapper">
-					<div className="Ladakh classHover"> 
+					<div className="Ladakh classHover" onClick={e => this.onDistrictClick("Ladakh","LA")}> 
 						<img src="/Maps/Jammu_Kashmir___Ladakh/Ladakh.png" alt="Ladakh" onMouseOver={e => (e.currentTarget.src = "/Maps/Jammu_Kashmir___Ladakh/Ladakh_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Jammu_Kashmir___Ladakh/Ladakh.png")}/>
 						<span className="LadakhText mapTextLabel text-capitalize">Ladakh</span> 
 						<span className="LadakhNumber mapCountLabel text-center">{this.state.Ladakh ? this.state.Ladakh : 0}</span>
