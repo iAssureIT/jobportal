@@ -72,7 +72,7 @@ class JobPosting extends Component {
             maxSalPeriod                :   "",
 
             minEducation                :   "",
-            minExperience               :   "",
+            minExperience               :   0,
 
             primarySkills               :   [],
             minPrimExp                  :   "",
@@ -251,7 +251,7 @@ class JobPosting extends Component {
                         maxSalPeriod            :   response.data.ctcOffered.maxSalPeriod,
 
                         minEducation            :   response.data.eligibility.minEducation,
-                        minExperience           :   response.data.eligibility.minExperience,
+                        minExperience           :   response.data.eligibility.minExperience ? response.data.eligibility.minExperience : 0,
 
                         minPrimExp              :   response.data.requiredSkills.minPrimExp,
                         minSecExp               :   response.data.requiredSkills.minSecExp,
@@ -498,7 +498,7 @@ class JobPosting extends Component {
             status = true;
         }
 
-         if (this.state.minExperience < 0) {
+         if (this.state.minExperience == 0) {
             document.getElementById("minExperienceError").innerHTML = "Please enter positive number";
             status = false;
         }
