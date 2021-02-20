@@ -42,7 +42,19 @@ class Header extends Component{
   componentDidMount(){
       
       var {mapAction} = this.props;
-      mapAction.jobCount(this.props.selector);
+      var selector = this.props.selector;
+      //console.log(window.location.pathname.split("/")[3])
+      if (window.location.pathname.split("/")[0] == "" && window.location.pathname.split("/")[1] != "state") {
+        selector.countryCode = "IN";
+      }
+      if(window.location.pathname.split("/")[1] == "state" && !window.location.pathname.split("/")[3]){
+        selector.stateCode = window.location.pathname.split("/")[2] 
+      }
+      if (window.location.pathname.split("/")[1] == "state" && window.location.pathname.split("/")[3]) {
+        selector.district = window.location.pathname.split("/")[3] 
+      }
+      //console.log(selector)
+      mapAction.jobCount(selector);
       
       if (window.location.pathname.split("/")[1] == "state" ) {
         var stateName = "";

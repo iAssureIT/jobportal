@@ -18,41 +18,38 @@ class India extends Component{
 		}   
 	}
 	componentDidMount(){
-
+		
+		var stateWiseCount = {};
+		for (var i=0; i < this.props.mapJobs.length; i++) {
+	    	
+	       stateWiseCount[this.props.mapJobs[i]._id] =  this.props.mapJobs[i].count;
+	    }
+	    if (this.props.mapJobs.length == 0) {
+	    	for (var key in this.state) {
+			  if (this.state.hasOwnProperty(key)) {
+			    stateWiseCount[key] = 0;
+			  }
+			}
+	    }
+	    this.setState(stateWiseCount)
 	}
 	componentWillReceiveProps(nextProps){
 		var stateWiseCount = {};
-		console.log(nextProps.mapJobs)
-		/*if (nextProps.mapJobs.length == 0) {
-			for (var i=0; i < this.state.length; i++) {
-				stateWiseCount[this.state[i]] = 0
-		    }
-	    	
-	    	
-	    }*/
+		
 	    for (var i=0; i < nextProps.mapJobs.length; i++) {
 	    	
 	       stateWiseCount[nextProps.mapJobs[i]._id] =  nextProps.mapJobs[i].count;
 	    }
-
+	    if (nextProps.mapJobs.length == 0) {
+	    	for (var key in this.state) {
+			  if (this.state.hasOwnProperty(key)) {
+			    stateWiseCount[key] = 0;
+			  }
+			}
+	    }
 	    this.setState(stateWiseCount)
 	}
-	search(nameKey){
-		console.log(this.props.mapJobs)
-		var stateWiseCount = {};
-	    for (var i=0; i < this.props.mapJobs.length; i++) {
-	    	//console.log(nameKey)
-	        if (this.props.mapJobs[i]._id === nameKey) {
-				stateWiseCount[nameKey] =  this.props.mapJobs[i].count;
-	            return this.props.mapJobs[i].count;
-	        }else{
-	        	stateWiseCount[nameKey] = 0;
-	        	return 0
-	        }
-	        
-	    }
-	    
-	}
+	
 	onStateClick = (stateName,stateCode) => { 
 		
 		var {mapAction} = this.props;
@@ -82,7 +79,7 @@ class India extends Component{
 		this.props.history.push("state/"+stateCode);
 	}
 	render(){
-		console.log(this.state)
+		//console.log(this.state)
 		return(
 			<section className="mapWrapper">
 				<div className="india">

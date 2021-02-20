@@ -115,7 +115,7 @@ class HomePage extends Component {
     }
   }
   render() {
-    console.log(this.props.selector)
+    //console.log(this.props.selector)
     return (
       <div className="ViewBodyWrapper container-fluid">
 

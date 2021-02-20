@@ -82,6 +82,7 @@ export function filterMapData(selector) {
 }
 export function jobCount(selector) {
   	return dispatch =>{
+  		//console.log(selector)
   		dispatch(setFilterSelector(selector));
 	  	return axios.post("/api/jobs/job-count",selector)
 	    .then((response)=>{
@@ -112,7 +113,7 @@ export function filterSubfunctionalData(selector) {
   	return dispatch =>{
   		dispatch(showLoader(true));
   		dispatch(setFilterSelector(selector));
-  		console.log(selector)
+  		//console.log(selector)
 	  	return axios.post("/api/jobs/subfunctional-jobs",selector)
 	    .then((response)=>{
 	     	dispatch(showLoader(false));

@@ -3,6 +3,8 @@ const mongodb	=	require('mongodb');
 const Jobs 		=	require('./ModelJobPost.js');
 
 const StateMaster               = require('../../coreAdmin/States/ModelStates.js');
+const DistrictMaster            = require('../../coreAdmin/Districts/ModelDistricts.js');
+const EntityMaster              = require('../../coreAdmin/entityMaster/ModelEntityMaster.js');
 const IndustryMaster            = require('../../coreAdmin/IndustryMaster/ModelIndustryMaster.js');
 const FunctionalAreaMaster 		= require('../../coreAdmin/FunctionalAreaMaster/ModelFunctionalAreaMaster.js');
 const SubFunctionalAreaMaster 	= require('../../coreAdmin/SubFunctionalAreaMaster/ModelSubFunctionalAreaMaster.js');
@@ -863,6 +865,32 @@ function getStates(){
             });            
     });
 }
+function getDistricts(state_id){ 
+    return new Promise(function(resolve,reject){ 
+        console.log("state_id",state_id)
+        DistrictMaster.find({"stateID":ObjectID(state_id)})
+            .exec()
+            .then(data => {
+                resolve(data);
+            })
+            .catch(err => {
+                reject(err);
+            });            
+    });
+}
+
+function getEntity(state_id){ 
+    return new Promise(function(resolve,reject){
+        EntityMaster.find({entityType : "corporate"})
+            .exec()
+            .then(data => {
+                resolve(data);
+            })
+            .catch(err => {
+                reject(err);
+            });            
+    });
+}
 function getIndustries(){ 
     return new Promise(function(resolve,reject){ 
         IndustryMaster.find({})
@@ -962,6 +990,8 @@ function getQualificationLevel(){
 exports.insertBulkJobs = (req,res,next)=>{
     processData();
     async function processData() {
+        var states          = await getStates();
+        var entities        = await getEntity();
         var industries      = await getIndustries();
         var funAreas        = await getFunctionalAreas();
         var jobCategories   = await getJobCategories();
@@ -970,7 +1000,7 @@ exports.insertBulkJobs = (req,res,next)=>{
         var jobTimes        = await getJobTime();
         var qualificationLevel        = await getQualificationLevel();
         var gender          = ["Male Only","Female Only","Both (Male & Female)"];
-        var states          = [{"state":"Andaman and Nicobar Islands", "stateCode": "AN"},
+        /*var states          = [{"state":"Andaman and Nicobar Islands", "stateCode": "AN"},
                         {"state": "Andhra Pradesh", "stateCode": "AP"},
                         {"state": "Arunachal Pradesh", "stateCode": "AR"},
                         {"state": "Assam", "stateCode": "AS"},
@@ -1006,20 +1036,26 @@ exports.insertBulkJobs = (req,res,next)=>{
                         {"state": "Uttar Pradesh", "stateCode": "UP"},
                         {"state": "Uttarakhand", "stateCode": "UT"},
                         {"state": "West Bengal", "stateCode": "WB"},
-        ]
+        ]*/
         var jobsArray = []; 
         for (var k = 0; k < req.body.noofjobs; k++) {
+            var randomStateIndex        = Math.floor(Math.random() * states.length);
+            var districts               = await getDistricts(states[randomStateIndex]._id);
+            var randomDistrictIndex     = Math.floor(Math.random() * districts.length);
+            //console.log("districts[randomDistrictIndex]",districts)
+            var company_id              = entities[Math.floor(Math.random() * entities.length)]._id;
             var industry_id             = industries[Math.floor(Math.random() * industries.length)]._id;
             var functionalarea_id       = funAreas[Math.floor(Math.random() * funAreas.length)]._id;;
-            var subfunAreas     = await getSubFunctionalAreas(functionalarea_id);
-            var subfunctionalarea_id    = subfunAreas[Math.floor(Math.random() * subfunAreas.length)]._id;
+            var subfunAreas             = await getSubFunctionalAreas(functionalarea_id);
+            console.log("subfunAreas",subfunAreas[Math.floor(Math.random() * subfunAreas.length)])
+            var subfunctionalarea_id    = subfunAreas[Math.floor(Math.random() * subfunAreas.length)] ? subfunAreas[Math.floor(Math.random() * subfunAreas.length)]._id : "";
             var jobcategory_id          = jobCategories[Math.floor(Math.random() * jobCategories.length)]._id;
-            var jobrole_id = jobRoles[Math.floor(Math.random() * jobRoles.length)]._id;
-            var jobtype_id = jobTypes[Math.floor(Math.random() * jobTypes.length)]._id;
-            var jobtime_id = jobTimes[Math.floor(Math.random() * jobTimes.length)]._id;
+            var jobrole_id              = jobRoles[Math.floor(Math.random() * jobRoles.length)]._id;
+            var jobtype_id              = jobTypes[Math.floor(Math.random() * jobTypes.length)]._id;
+            var jobtime_id              = jobTimes[Math.floor(Math.random() * jobTimes.length)]._id;
             
             var jobObject = {
-                "company_id"    : null,
+                "company_id"    : company_id,
                 "jobBasicInfo"  :   {
                                     "jobTitle"              : jobRoles[Math.floor(Math.random() * jobRoles.length)].jobRole,
                                     "industry_id"           : industry_id,
@@ -1042,9 +1078,9 @@ exports.insertBulkJobs = (req,res,next)=>{
                                     "address"               : "",
                                     "area"                  : "",
                                     "cityVillage"           : "",
-                                    "district"              : "",
-                                    "state"                 : states[Math.floor(Math.random() * states.length)].state,
-                                    "stateCode"             : states[Math.floor(Math.random() * states.length)].stateCode,   
+                                    "district"              : districts[randomDistrictIndex].districtName,
+                                    "state"                 : states[randomStateIndex].stateName,
+                                    "stateCode"             : states[randomStateIndex].stateCode,   
                                     "country"               : "India",
                                     "countryCode"           : "IN",
                                     "pincode"               : ""
@@ -1062,8 +1098,9 @@ exports.insertBulkJobs = (req,res,next)=>{
                                 },  
                 "createdAt"     :   new Date()                                         
             }
+            console.log(jobObject)
             jobsArray.push(jobObject) 
-            //jobsData.save()
+            
         }
         Jobs.insertMany(jobsArray)
             .then(data => {
