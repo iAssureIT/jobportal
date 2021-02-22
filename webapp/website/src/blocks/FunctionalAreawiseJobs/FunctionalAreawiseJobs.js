@@ -12,12 +12,14 @@ class FunctionalAreawiseJobs extends Component{
     onFunctionalAreaClick = (functionalArea, _id)=>{
         var {mapAction} = this.props;
         var selector = this.props.selector;
-        //selector.functionalArea = functionalArea; 
+        var tempArray = [];
+        tempArray.push({"functionalArea" : functionalArea, "id": _id })
+        selector.functionalArea_id = tempArray; 
 
         mapAction.jobCount(selector);
         mapAction.filterSubfunctionalData(this.props.selector);
 
-        this.props.history.push("/state/"+this.props.match.params.stateCode+"/"+this.props.match.params.district+"/"+functionalArea);
+        this.props.history.push("/state/"+this.props.match.params.stateCode+"/"+this.props.match.params.district+"/"+functionalArea+"/"+_id);
     }    
     render(){
 
@@ -33,11 +35,11 @@ class FunctionalAreawiseJobs extends Component{
                                         <div className="col-lg-3 FunctionalJobsRow">
                                             <div className="col-lg-12 FunctionalJobsBlock" onClick={e => this.onFunctionalAreaClick(elem.functionalarea[0].functionalArea,elem.functionalarea[0]._id)}>
                                                 <div className="FunctionalJobsBlockImg">
-                                                  <img src={elem.functionalarea[0].iconUrl ? elem.functionalarea[0].iconUrl : "/images/7.png"} alt="FunctionJobsImg" className="FunctionalJobsPng"/>
+                                                  <img src={elem.functionalarea[0] ? elem.functionalarea[0].iconUrl ? elem.functionalarea[0].iconUrl : "/images/7.png" : "/images/7.png"} alt="FunctionJobsImg" className="FunctionalJobsPng"/>
                                                 </div> 
 
                                                 <div className="FunctionalJobsBlockName">
-                                                    {elem.functionalarea[0].functionalArea}
+                                                    {elem.functionalarea[0] ? elem.functionalarea[0].functionalArea : ""}
                                                 </div>
 
                                                 <div className="FunctionalJobsBlockNumber">

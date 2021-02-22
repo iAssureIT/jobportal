@@ -190,6 +190,18 @@ class LeftSideFilters extends Component{
     }
     if (filterType === "experience") {
       console.log(selecteditems)
+      var flattened = [], minValue, maxValue;
+      selecteditems.forEach(function (v) {
+        flattened.push(v.minvalue)
+        flattened.push(v.maxvalue)
+      });
+      minValue = Math.min.apply(null, flattened);
+      maxValue = Math.max.apply(null, flattened);
+
+      console.log('min: ' + minValue, ' max: ' + maxValue);
+
+      selector.minExp = minValue
+      selector.maxExp = maxValue
     }
     this.setState({ selector: selector },()=>{
         mapAction.jobCount(this.state.selector);

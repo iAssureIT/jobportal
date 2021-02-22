@@ -101,7 +101,7 @@ class Layout extends Component  {
                 <div className="hold-transition skin-blue fixed sidebar-mini">
                     <div className="wrapper">
 
-                        <Header />
+                        <Header/>
                        
                                 <div className="container-fluid main-container">
                                     <div className="row">
@@ -116,7 +116,7 @@ class Layout extends Component  {
                                             <Route exact path="/"                               component={Homepage}  />
                                             <Route exact path="/state/:stateCode"               component={Homepage}  />
                                             <Route exact path="/state/:stateCode/:district"     component={Homepage}  />
-                                            <Route exact path="/state/:stateCode/:district/:functionalArea"     component={Homepage}  />
+                                            <Route exact path="/state/:stateCode/:district/:functionalArea/:functionalArea_id"     component={Homepage}  />
                                             <Route exact path="/state/:stateCode/:district/:functionalArea/:subfunctionalArea"     component={Homepage}  />
 
                                             <Route exact path="/basic-info"                     component={CandidateBasicInfo}  />
@@ -164,7 +164,7 @@ class Layout extends Component  {
             return (
                 <div className="wrapper PageFunctionWiseWrapper">
 
-                 <Header/> 
+                 <Header /> 
                     
                 
                     <Router >
@@ -173,8 +173,8 @@ class Layout extends Component  {
                             <Route exact path="/"        component={Homepage}  />
                             <Route exact path="/state/:stateCode"               component={Homepage}  />
                             <Route exact path="/state/:stateCode/:district"     component={Homepage}  />
-                            <Route exact path="/state/:stateCode/:district/:functionalArea"     component={Homepage}  />
-                            <Route exact path="/state/:stateCode/:district/:functionalArea/:subfunctionalArea"     component={Homepage}  />
+                            <Route exact path="/state/:stateCode/:district/:functionalArea/:functionalArea_id"     component={Homepage}  />
+                            <Route exact path="/state/:stateCode/:district/:functionalArea/:functionalArea_id/:subfunctionalArea/:subfunctionalArea_id"     component={Homepage}  />
 
 
                             <Route exact path="/search-jobs"                    component={CandidateJobList}  />  

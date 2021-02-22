@@ -51,21 +51,32 @@ class HomePage extends Component {
       mapAction.filterFunctionalData(selector);
       mapAction.setViewMode("functionalView");
     }  
-    if (this.props.match.path=="/state/:stateCode/:district/:functionalArea" ) {
+    if (this.props.match.path=="/state/:stateCode/:district/:functionalArea/:functionalArea_id" ) {
       selector.stateCode = this.props.match.params.stateCode
       selector.district  = this.props.match.params.district
-      selector.functionalArea  = this.props.match.params.functionalArea
+      var tempArray = [];
+      tempArray.push({"functionalArea" : this.props.match.params.functionalArea, "id": this.props.match.params.functionalArea_id })
+      selector.functionalArea_id = tempArray; 
+
       mapAction.filterSubfunctionalData(selector);
       mapAction.setViewMode("functionalView");
     }
-    if (this.props.match.path=="/state/:stateCode/:district/:functionalArea/:subfunctionalArea" ) {
+    if (this.props.match.path=="/state/:stateCode/:district/:functionalArea/:functionalArea_id/:subfunctionalArea/:subfunctionalArea_id" ) {
       selector.stateCode = this.props.match.params.stateCode
       selector.district  = this.props.match.params.district
-      selector.functionalArea  = this.props.match.params.functionalArea
-      selector.subfunctionalArea  = this.props.match.params.subfunctionalArea
+
+      var tempArray = [];
+      tempArray.push({"functionalArea" : this.props.match.params.functionalArea, "id": this.props.match.params.functionalArea_id })
+      selector.functionalArea_id = tempArray; 
+
+      var tempArray2 = [];
+      tempArray2.push({"subfunctionalArea" : this.props.match.params.subfunctionalArea, "id": this.props.match.params.subfunctionalArea_id })
+      selector.subfunctionalArea_id = tempArray2; 
+      
       mapAction.filterJobList(selector);
       mapAction.setViewMode("functionalView");
     }
+    mapAction.jobCount(selector)
     //selector.stateCode = stateCode; 
    
     
@@ -115,7 +126,7 @@ class HomePage extends Component {
     }
   }
   render() {
-    //console.log(this.props.selector)
+    console.log(this.props.selector)
     return (
       <div className="ViewBodyWrapper container-fluid">
 

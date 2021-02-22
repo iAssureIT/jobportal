@@ -82,7 +82,7 @@ export function filterMapData(selector) {
 }
 export function jobCount(selector) {
   	return dispatch =>{
-  		//console.log(selector)
+  		console.log(selector)
   		dispatch(setFilterSelector(selector));
 	  	return axios.post("/api/jobs/job-count",selector)
 	    .then((response)=>{

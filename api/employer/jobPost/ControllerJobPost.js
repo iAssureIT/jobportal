@@ -337,13 +337,14 @@ exports.getJobList = (req,res,next)=>{
     	})
     	selector["$and"].push({ "jobBasicInfo.functionalarea_id" : { $in: funarea_ids } });
     }
+
     if (req.body.subfunctionalArea_id) {
     	req.body.subfunctionalArea_id.map(elem => {
     		subfunarea_ids.push(ObjectID(elem.id))
     	})
     	selector["$and"].push({ "jobBasicInfo.subfunctionalarea_id" : { $in: subfunarea_ids } });
     }
-    if (req.body.jobRoles_id) {
+    if (req.body.jobRole_id) {
     	req.body.jobRoles_id.map(elem => {
     		jobroles_ids.push(ObjectID(elem.id))
     	})
@@ -534,10 +535,11 @@ exports.updateJob = (req,res,next)=>{
 	}
 }
 exports.jobCount = (req, res, next)=>{
-    //console.log("req.body - ", req.body);
+    console.log("req.body - ", req.body);
     var selector = {}; 
     var industry_ids = [];
     var funarea_ids = [];
+    var subfunarea_ids = [];
     var jobrole_ids = [];
 
     selector['$and']=[];
@@ -563,14 +565,23 @@ exports.jobCount = (req, res, next)=>{
         })
         selector["$and"].push({ "jobBasicInfo.functionalarea_id" : { $in: funarea_ids } });
     }
+    if (req.body.subfunctionalArea_id) {
+        req.body.subfunctionalArea_id.map(elem => {
+            subfunarea_ids.push(ObjectID(elem.id))
+        })
+        selector["$and"].push({ "jobBasicInfo.subfunctionalarea_id" : { $in: subfunarea_ids } });
+    }
     if (req.body.jobRole_id) {
         req.body.jobRole_id.map(elem => {
             jobrole_ids.push(ObjectID(elem.id))
         })
         selector["$and"].push({ "jobBasicInfo.jobrole_id" : { $in: jobrole_ids } });
     }
-    console.log("count", JSON.stringify(selector))
-
+    
+    if (req.body.minExp != null  && req.body.maxExp != null) {
+        selector["$and"].push({ "eligibility.minExperience" : { '$gte' : req.body.minExp,  '$lt' : req.body.maxExp} });
+    }
+    
     Jobs.aggregate([
         { $match    : selector },
         { $count    : "jobCount" },
@@ -589,7 +600,7 @@ exports.jobCount = (req, res, next)=>{
     });
 }
 exports.mapwiseJobs = (req, res, next)=>{
-	console.log("req.body - ", req.body);
+	//console.log("req.body - ", req.body);
 	var selector = {}; 
 	var industry_ids = [];
     var funarea_ids = [];
@@ -601,7 +612,9 @@ exports.mapwiseJobs = (req, res, next)=>{
    	if (req.body.stateCode) {
         selector["$and"].push({ "location.stateCode" :  req.body.stateCode   })
     }
-
+    if (req.body.district) {
+        selector["$and"].push({ "location.district" :  req.body.district   }) 
+    }
     if (req.body.industry_id) {
     	req.body.industry_id.map(elem => {
     		industry_ids.push(ObjectID(elem.id))
@@ -614,13 +627,23 @@ exports.mapwiseJobs = (req, res, next)=>{
     	})
     	selector["$and"].push({ "jobBasicInfo.functionalarea_id" : { $in: funarea_ids } });
     }
+    if (req.body.subfunctionalArea_id) {
+        req.body.subfunctionalArea_id.map(elem => {
+            subfunarea_ids.push(ObjectID(elem.id))
+        })
+        selector["$and"].push({ "jobBasicInfo.subfunctionalarea_id" : { $in: subfunarea_ids } });
+    }
     if (req.body.jobRole_id) {
         req.body.jobRole_id.map(elem => {
             jobrole_ids.push(ObjectID(elem.id))
         })
         selector["$and"].push({ "jobBasicInfo.jobrole_id" : { $in: jobrole_ids } });
     }
-    console.log("stateCode",JSON.stringify(selector))
+    if (req.body.minExp != null  && req.body.maxExp != null) {
+        selector["$and"].push({ "eligibility.minExperience" : { '$gte' : req.body.minExp,  '$lt' : req.body.maxExp} });
+    }
+
+    //console.log("stateCode",JSON.stringify(selector))
     if (req.body.stateCode) { 
         var groupByField = "district"; 
     }else{
@@ -675,11 +698,20 @@ exports.functonalAreaJobs = (req, res, next)=>{
     	})
     	selector["$and"].push({ "jobBasicInfo.functionalarea_id" : { $in: funarea_ids } });
     }
+    if (req.body.subfunctionalArea_id) {
+        req.body.subfunctionalArea_id.map(elem => {
+            subfunarea_ids.push(ObjectID(elem.id))
+        })
+        selector["$and"].push({ "jobBasicInfo.subfunctionalarea_id" : { $in: subfunarea_ids } });
+    }
     if (req.body.jobRole_id) {
         req.body.jobRole_id.map(elem => {
             jobrole_ids.push(ObjectID(elem.id))
         })
         selector["$and"].push({ "jobBasicInfo.jobrole_id" : { $in: jobrole_ids } });
+    }
+    if (req.body.minExp != null  && req.body.maxExp != null) {
+        selector["$and"].push({ "eligibility.minExperience" : { '$gte' : req.body.minExp,  '$lt' : req.body.maxExp} });
     }
 
     console.log(JSON.stringify(selector))
@@ -733,12 +765,22 @@ exports.subfunctionalAreaJobs = (req, res, next)=>{
     	})
     	selector["$and"].push({ "jobBasicInfo.functionalarea_id" : { $in: funarea_ids } });
     }
+    if (req.body.subfunctionalArea_id) {
+        req.body.subfunctionalArea_id.map(elem => {
+            subfunarea_ids.push(ObjectID(elem.id))
+        })
+        selector["$and"].push({ "jobBasicInfo.subfunctionalarea_id" : { $in: subfunarea_ids } });
+    }
     if (req.body.jobRole_id) {
         req.body.jobRole_id.map(elem => {
             jobrole_ids.push(ObjectID(elem.id))
         })
         selector["$and"].push({ "jobBasicInfo.jobrole_id" : { $in: jobrole_ids } });
     }
+    if (req.body.minExp != null  && req.body.maxExp != null) {
+        selector["$and"].push({ "eligibility.minExperience" : { '$gte' : req.body.minExp,  '$lt' : req.body.maxExp} });
+    }
+
     Jobs.aggregate([
     	{ $match 	: selector },
     	{ $sort 	: {createdAt : -1} },
@@ -788,12 +830,22 @@ exports.industrialJobs = (req, res, next)=>{
     	})
     	selector["$and"].push({ "jobBasicInfo.functionalarea_id" : { $in: funarea_ids } });
     }
+    if (req.body.subfunctionalArea_id) {
+        req.body.subfunctionalArea_id.map(elem => {
+            subfunarea_ids.push(ObjectID(elem.id))
+        })
+        selector["$and"].push({ "jobBasicInfo.subfunctionalarea_id" : { $in: subfunarea_ids } });
+    }
     if (req.body.jobRole_id) {
         req.body.jobRole_id.map(elem => {
             jobrole_ids.push(ObjectID(elem.id))
         })
         selector["$and"].push({ "jobBasicInfo.jobrole_id" : { $in: jobrole_ids } });
     }
+    if (req.body.minExp != null  && req.body.maxExp != null) {
+        selector["$and"].push({ "eligibility.minExperience" : { '$gte' : req.body.minExp,  '$lt' : req.body.maxExp} });
+    }
+
     Jobs.aggregate([
     	{ $match 	: selector },
     	{ $sort 	: {createdAt : -1} },
@@ -1078,7 +1130,7 @@ exports.insertBulkJobs = (req,res,next)=>{
                                     "address"               : "",
                                     "area"                  : "",
                                     "cityVillage"           : "",
-                                    "district"              : districts[randomDistrictIndex].districtName,
+                                    "district"              : districts[randomDistrictIndex] ? districts[randomDistrictIndex].districtName : "",
                                     "state"                 : states[randomStateIndex].stateName,
                                     "stateCode"             : states[randomStateIndex].stateCode,   
                                     "country"               : "India",

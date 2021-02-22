@@ -40,21 +40,30 @@ class Header extends Component{
     }
   }
   componentDidMount(){
-      
       var {mapAction} = this.props;
-      var selector = this.props.selector;
+      /*var selector = this.props.selector;
+      console.log(window.location.pathname.split("/"))
       //console.log(window.location.pathname.split("/")[3])
-      if (window.location.pathname.split("/")[0] == "" && window.location.pathname.split("/")[1] != "state") {
+      if (window.location.pathname.split("/")[0] == "") {
         selector.countryCode = "IN";
       }
       if(window.location.pathname.split("/")[1] == "state" && !window.location.pathname.split("/")[3]){
         selector.stateCode = window.location.pathname.split("/")[2] 
       }
+      if(window.location.pathname.split("/")[1] == "state" && !window.location.pathname.split("/")[3]){
+        selector.stateCode = window.location.pathname.split("/")[2] 
+      }
+      if(window.location.pathname.split("/")[1] == "state" && !window.location.pathname.split("/")[3] && window.location.pathname.split("/")[5]){
+        selector.stateCode = window.location.pathname.split("/")[2] 
+      }
       if (window.location.pathname.split("/")[1] == "state" && window.location.pathname.split("/")[3]) {
         selector.district = window.location.pathname.split("/")[3] 
       }
+      if (window.location.pathname.split("/")[1] == "state" && window.location.pathname.split("/")[5]) {
+        selector.functionalArea = window.location.pathname.split("/")[5] 
+      } 
       //console.log(selector)
-      mapAction.jobCount(selector);
+      mapAction.jobCount(selector);*/
       
       if (window.location.pathname.split("/")[1] == "state" ) {
         var stateName = "";
@@ -182,7 +191,7 @@ class Header extends Component{
     render(){
     
     const selectedState = this.props.selectedState;
-    //console.log(this.props.selector)
+    
     if (this.props.userDetails.loggedIn) {    
       return(
         <nav className="navbar FunctionalHeaderWrapper container-fluid">
@@ -396,8 +405,24 @@ class Header extends Component{
               <div className="row">
               <div className="rightFunctionHeader1 col-lg-12 pull-right">
                 <div className="rightFunctionHeader1CityJobs">
-                <div className="cityNameHeader">{selectedState && selectedState != "" ? selectedState : "India"}
-                </div>  
+                {
+                 window.location.pathname.split("/")[0] == "" && window.location.pathname.split("/")[1] != "state"  ?
+                  <div className="cityNameHeader">{"India"}
+                  </div> 
+                 : null 
+                }
+                {
+                 window.location.pathname.split("/")[1] == "state" && !window.location.pathname.split("/")[3] ?
+                  <div className="cityNameHeader">{selectedState && selectedState != "" ? selectedState : "India"}
+                  </div> 
+                 : null 
+                }
+                {
+                 window.location.pathname.split("/")[1] == "state" && window.location.pathname.split("/")[3] ?
+                  <div className="cityNameHeader">{window.location.pathname.split("/")[3]}
+                  </div> 
+                 : null 
+                }    
 
                 <div className="cityJobsHeader">{this.props.jobCount[0] ? this.props.jobCount[0].jobCount : 0}
                 </div>              

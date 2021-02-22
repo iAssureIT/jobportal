@@ -15,12 +15,14 @@ class SubFunctionalAreawiseJobs extends Component{
     onSubFunctionalAreaClick = (subfunctionalArea, _id)=>{
         var {mapAction} = this.props;
         var selector = this.props.selector;
-        selector.subfunctionalArea = subfunctionalArea; 
+        var tempArray = [];
+        tempArray.push({"subfunctionalArea" : subfunctionalArea, "id": _id })
+        selector.subfunctionalArea_id = tempArray;  
 
         mapAction.jobCount(selector);
         mapAction.filterJobList(this.props.selector);
 
-        this.props.history.push("/state/"+this.props.match.params.stateCode+"/"+this.props.match.params.district+"/"+this.props.match.params.functionalArea+"/"+subfunctionalArea);
+        this.props.history.push("/state/"+this.props.match.params.stateCode+"/"+this.props.match.params.district+"/"+this.props.match.params.functionalArea+"/"+this.props.match.params.functionalArea_id +"/"+subfunctionalArea+"/"+_id);
     } 
     render(){
     return(
