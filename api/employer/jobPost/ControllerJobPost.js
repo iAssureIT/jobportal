@@ -640,7 +640,7 @@ exports.mapwiseJobs = (req, res, next)=>{
         selector["$and"].push({ "jobBasicInfo.jobrole_id" : { $in: jobrole_ids } });
     }
     if (req.body.minExp != null  && req.body.maxExp != null) {
-        selector["$and"].push({ "eligibility.minExperience" : { '$gte' : req.body.minExp,  '$lt' : req.body.maxExp} });
+        selector["$and"].push({ "eligibility.minExperience" : { '$gte' : req.body.minExp,  '$lte' : req.body.maxExp} });
     }
 
     //console.log("stateCode",JSON.stringify(selector))
