@@ -28,64 +28,79 @@ class Tripura extends Component{
 	search(nameKey){
 		return 10;
 	}
-	onStateClick = (stateName) => {
+	onDistrictClick = (district,stateCode) => {
 		
+		var {mapAction} = this.props;
+		mapAction.setViewMode("functionalView");
+
+		var selector = this.props.selector;
+		
+		selector.countryCode = "IN"; 
+		selector.stateCode = stateCode; 
+		selector.district = district; 
+
+		mapAction.jobCount(selector);
+		mapAction.filterFunctionalData(this.props.selector);
+
+		this.props.history.push("/state/"+stateCode+"/"+district);
+
+
 	}
 	render(){
 		return(
 
 			<div className="bodyWrapper">
 				<div className="stateWrapper ">
-					<div className="northTripura classHover"> 
+					<div className="northTripura classHover" onClick={e => this.onDistrictClick("","TR")}> 
 						<img src="/Maps/Tripura/North_Tripura.png"  alt="North_Tripura" 
 						 onMouseOver={e => (e.currentTarget.src = "/Maps/Tripura/North_Tripura_.png")} 
 						 onMouseOut={e => (e.currentTarget.src = "/Maps/Tripura/North_Tripura.png")}/>
 						<span className="northTripuraText mapTextLabel text-capitalize">North_Tripura</span>
 						<span className="northTripuraNumber mapCountLabel text-center">{this.state.North_Tripura ? this.state.North_Tripura : 0}</span>
 					</div>
-					<div className="unakoti classHover"> 
+					<div className="unakoti classHover" onClick={e => this.onDistrictClick("Unakoti","TR")}> 
 						<img src="/Maps/Tripura/Unakoti.png"  alt="Unakoti" 
 						 onMouseOver={e => (e.currentTarget.src = "/Maps/Tripura/Unakoti_.png")} 
 						 onMouseOut={e => (e.currentTarget.src = "/Maps/Tripura/Unakoti.png")}/>
 						<span className="unakotiText mapTextLabel text-capitalize">Unakoti</span>
 						<span className="unakotiNumber mapCountLabel text-center">{this.state.Unakoti ? this.state.Unakoti : 0}</span>
 					</div>
-					<div className="dhalai classHover"> 
+					<div className="dhalai classHover" onClick={e => this.onDistrictClick("Dhalai","TR")}> 
 						<img src="/Maps/Tripura/Dhalai.png"  alt="Dhalai" 
 						 onMouseOver={e => (e.currentTarget.src = "/Maps/Tripura/Dhalai_.png")} 
 						 onMouseOut={e => (e.currentTarget.src = "/Maps/Tripura/Dhalai.png")}/>
 						<span className="dhalaiText mapTextLabel text-capitalize">Dhalai</span>
 						<span className="dhalaiNumber mapCountLabel text-center">{this.state.Dhalai ? this.state.Dhalai : 0}</span>
 					</div>
-					<div className="khowai classHover"> 
+					<div className="khowai classHover" onClick={e => this.onDistrictClick("Khowai","TR")}> 
 						<img src="/Maps/Tripura/Khowai.png"  alt="Khowai" 
 						 onMouseOver={e => (e.currentTarget.src = "/Maps/Tripura/Khowai_.png")} 
 						 onMouseOut={e => (e.currentTarget.src = "/Maps/Tripura/Khowai.png")}/>
 						<span className="khowaiText mapTextLabel text-capitalize">Khowai</span>
 						<span className="khowaiNumber mapCountLabel text-center">{this.state.Khowai ? this.state.Khowai : 0}</span>
 					</div>
-					<div className="westTripura classHover"> 
+					<div className="westTripura classHover" onClick={e => this.onDistrictClick("West Tripura","TR")}> 
 						<img src="/Maps/Tripura/West_Tripura.png"  alt="West_Tripura" 
 						 onMouseOver={e => (e.currentTarget.src = "/Maps/Tripura/West_Tripura_.png")} 
 						 onMouseOut={e => (e.currentTarget.src = "/Maps/Tripura/West_Tripura.png")}/>
 						<span className="westTripuraText mapTextLabel text-capitalize">West_Tripura</span>
 						<span className="westTripuraNumber mapCountLabel text-center">{this.state.West_Tripura ? this.state.West_Tripura : 0}</span>
 					</div>
-					<div className="gomati classHover"> 
+					<div className="gomati classHover" onClick={e => this.onDistrictClick("Gomati","TR")}> 
 						<img src="/Maps/Tripura/Gomati.png"  alt="Gomati" 
 						 onMouseOver={e => (e.currentTarget.src = "/Maps/Tripura/Gomati_.png")} 
 						 onMouseOut={e => (e.currentTarget.src = "/Maps/Tripura/Gomati.png")}/>
 						<span className="gomatiText mapTextLabel text-capitalize">Gomati</span>
 						<span className="gomatiNumber mapCountLabel text-center">{this.state.Gomati ? this.state.Gomati : 0}</span>
 					</div>
-					<div className="sepahijala classHover"> 
+					<div className="sepahijala classHover" onClick={e => this.onDistrictClick("Sepahijala","TR")}> 
 						<img src="/Maps/Tripura/Sepahijala.png"  alt="Sepahijala" 
 						 onMouseOver={e => (e.currentTarget.src = "/Maps/Tripura/Sepahijala_.png")} 
 						 onMouseOut={e => (e.currentTarget.src = "/Maps/Tripura/Sepahijala.png")}/>
 						<span className="sepahijalaText mapTextLabel text-capitalize">Sepahijala</span>
 						<span className="sepahijalaNumber mapCountLabel text-center">{this.state.Sepahijala ? this.state.Sepahijala : 0}</span>
 					</div>
-					<div className="southTripura classHover"> 
+					<div className="southTripura classHover" onClick={e => this.onDistrictClick("South Tripura","TR")}> 
 						<img src="/Maps/Tripura/South_Tripura.png"  alt="South_Tripura" 
 						 onMouseOver={e => (e.currentTarget.src = "/Maps/Tripura/South_Tripura_.png")} 
 						 onMouseOut={e => (e.currentTarget.src = "/Maps/Tripura/South_Tripura.png")}/>

@@ -30,8 +30,24 @@ class Sikkim extends Component{
 		return 10;
 	}
 
-	onStateClick = (stateName) => {
+	
+	onDistrictClick = (district,stateCode) => {
 		
+		var {mapAction} = this.props;
+		mapAction.setViewMode("functionalView");
+
+		var selector = this.props.selector;
+		
+		selector.countryCode = "IN"; 
+		selector.stateCode = stateCode; 
+		selector.district = district; 
+
+		mapAction.jobCount(selector);
+		mapAction.filterFunctionalData(this.props.selector);
+
+		this.props.history.push("/state/"+stateCode+"/"+district);
+
+
 	}
 	render(){
 		console.log("Sikkim...............................");
@@ -39,26 +55,26 @@ class Sikkim extends Component{
 			<div className="bodyWrapper">
 				<div className="stateWrapper">
 
-					<div className="north_sikkim classHover"> 
+					<div className="north_sikkim classHover" onClick={e => this.onDistrictClick("North Sikkim","SK")}> 
 						<img src="/Maps/Sikkim/North_Sikkim.png" alt="North_Sikkim" onMouseOver={e => (e.currentTarget.src = "/Maps/Sikkim/North_Sikkim_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Sikkim/North_Sikkim.png")}/>
 						<span className="north_sikkimText mapTextLabel text-capitalize">North Sikkim</span>
 						<span className="north_sikkimNumber mapCountLabel text-center">{this.state.North_Sikkim ? this.state.North_Sikkim : 0}</span>
 					</div>
 
-					<div className="west_sikkim classHover"> 
+					<div className="west_sikkim classHover" onClick={e => this.onDistrictClick("West Sikkim","SK")}> 
 						<img src="/Maps/Sikkim/West_Sikkim.png" alt="West_Sikkim" onMouseOver={e => (e.currentTarget.src = "/Maps/Sikkim/West_Sikkim_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Sikkim/West_Sikkim.png")}/>
 						<span className="west_sikkimText mapTextLabel text-capitalize">West Sikkim</span>
 						<span className="west_sikkimNumber mapCountLabel text-center">{this.state.West_Sikkim ? this.state.West_Sikkim : 0}</span>
 					</div>
 
 
-					<div className="east_sikkim classHover"> 
+					<div className="east_sikkim classHover" onClick={e => this.onDistrictClick("East Sikkim","SK")}> 
 						<img src="/Maps/Sikkim/East_Sikkim.png" alt="East_Sikkim" onMouseOver={e => (e.currentTarget.src = "/Maps/Sikkim/East_Sikkim_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Sikkim/East_Sikkim.png")}/>
 						<span className="east_sikkimText mapTextLabel text-capitalize">East Sikkim</span>
 						<span className="east_sikkimNumber mapCountLabel text-center">{this.state.East_Sikkim ? this.state.East_Sikkim : 0}</span>
 					</div>
 
-					<div className="south_sikkim classHover"> 
+					<div className="south_sikkim classHover" onClick={e => this.onDistrictClick("South Sikkim","SK")}> 
 						<img src="/Maps/Sikkim/South_Sikkim.png" alt="South_Sikkim" onMouseOver={e => (e.currentTarget.src = "/Maps/Sikkim/South_Sikkim_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Sikkim/South_Sikkim.png")}/>
 						<span className="south_sikkimText mapTextLabel text-capitalize">South Sikkim</span>
 						<span className="south_sikkimNumber mapCountLabel text-center">{this.state.South_Sikkim ? this.state.South_Sikkim : 0}</span>

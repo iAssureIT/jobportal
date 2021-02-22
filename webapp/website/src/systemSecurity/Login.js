@@ -144,6 +144,7 @@ class Login extends Component {
                  document.getElementById("closeModalButton").click();
                  document.getElementById("closeAsidebarButton").click();
               
+              
              
               mapAction.setUserDetails(userDetails);
 
