@@ -59,7 +59,7 @@ class HomePage extends Component {
 
       mapAction.filterJobList(selector);
       mapAction.setViewMode("functionalView");
-    }
+    } 
 
     //============== StateWise ==========//
     if(this.props.match.path=="/state/:stateCode"){
