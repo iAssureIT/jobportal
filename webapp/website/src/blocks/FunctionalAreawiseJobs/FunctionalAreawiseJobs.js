@@ -19,7 +19,7 @@ class FunctionalAreawiseJobs extends Component{
         mapAction.jobCount(selector);
         mapAction.filterSubfunctionalData(this.props.selector);
         if(this.props.match.path=="/"){
-            this.props.history.push("/functional/"+functionalArea+"/"+_id);
+            this.props.history.push("/country/IN/state/all/city/all/function/"+functionalArea+"/"+_id);
         }
         if(this.props.match.path=="/state/:stateCode"){
             this.props.history.push("/state/"+this.props.match.params.stateCode+"/functional/"+functionalArea+"/"+_id);

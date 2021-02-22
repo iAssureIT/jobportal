@@ -40,7 +40,11 @@ class HomePage extends Component {
     if(this.props.match.path=="/"){
       mapAction.filterMapData(selector);
     } 
-    if(this.props.match.path=="/functional/:functionalArea/:functionalArea_id"){
+    if(this.props.match.path=="/country/:countryCode/state/:stateCode/city/:district/function/:functionalArea/:functionalArea_id"){
+      
+      selector.stateCode = this.props.match.params.stateCode 
+      selector.district  = this.props.match.params.district
+
       var tempArray = [];
       tempArray.push({"functionalArea" : this.props.match.params.functionalArea, "id": this.props.match.params.functionalArea_id })
       selector.functionalArea_id = tempArray; 
@@ -48,7 +52,10 @@ class HomePage extends Component {
       mapAction.filterSubfunctionalData(selector);
       mapAction.setViewMode("functionalView");
     }
-    if(this.props.match.path=="/subfunctional/:functionalArea/:functionalArea_id/:subfunctionalArea/:subfunctionalArea_id"){
+    if(this.props.match.path=="/country/:countryCode/state/:stateCode/city/:district/function/:functionalArea/:functionalArea_id/subfunction/:subfunctionalArea/:subfunctionalArea_id"){
+      selector.stateCode = this.props.match.params.stateCode 
+      selector.district  = this.props.match.params.district
+        
       var tempArray = [];
       tempArray.push({"functionalArea" : this.props.match.params.functionalArea, "id": this.props.match.params.functionalArea_id })
       selector.functionalArea_id = tempArray; 

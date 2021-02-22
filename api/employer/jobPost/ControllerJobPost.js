@@ -315,10 +315,10 @@ exports.getJobList = (req,res,next)=>{
 
     selector['$and'] 	= [];
     selector["$and"].push({ "location.countryCode" :  req.body.countryCode   })
-   	if (req.body.stateCode) {
+   	if (req.body.stateCode && req.body.stateCode != "all") {
         selector["$and"].push({ "location.stateCode" :  req.body.stateCode   })
     }
-    if (req.body.district) {
+    if (req.body.district && req.body.district != "all") {
         selector["$and"].push({ "location.district" :  req.body.district   }) 
     }
     if (req.body.company_id) {
@@ -547,10 +547,10 @@ exports.jobCount = (req, res, next)=>{
     var countryCode = req.body.countryCode ? req.body.countryCode : "IN";
     selector["$and"].push({ "location.countryCode" :  countryCode   })
     
-    if (req.body.stateCode) {
+    if (req.body.stateCode && req.body.stateCode != "all") {
         selector["$and"].push({ "location.stateCode" :  req.body.stateCode   })
     }
-    if (req.body.district) {
+    if (req.body.district  && req.body.district != "all") {
         selector["$and"].push({ "location.district" :  req.body.district   }) 
     }
     if (req.body.industry_id) {
@@ -609,10 +609,10 @@ exports.mapwiseJobs = (req, res, next)=>{
     selector['$and']=[];
     var countryCode = req.body.countryCode ? req.body.countryCode : "IN";
     selector["$and"].push({ "location.countryCode" :  countryCode   })
-   	if (req.body.stateCode) {
+   	if (req.body.stateCode  && req.body.stateCode != "all") {
         selector["$and"].push({ "location.stateCode" :  req.body.stateCode   })
     }
-    if (req.body.district) {
+    if (req.body.district  && req.body.district != "all") {
         selector["$and"].push({ "location.district" :  req.body.district   }) 
     }
     if (req.body.industry_id) {
@@ -644,7 +644,7 @@ exports.mapwiseJobs = (req, res, next)=>{
     }
 
     //console.log("stateCode",JSON.stringify(selector))
-    if (req.body.stateCode) { 
+    if (req.body.stateCode && req.body.stateCode != "all") { 
         var groupByField = "district"; 
     }else{
         var groupByField = "stateCode"; 
@@ -680,10 +680,10 @@ exports.functonalAreaJobs = (req, res, next)=>{
     var countryCode = req.body.countryCode ? req.body.countryCode : "IN";
     selector["$and"].push({ "location.countryCode" :  countryCode })
    	
-    if (req.body.stateCode) {
+    if (req.body.stateCode && req.body.stateCode != "all") {
         selector["$and"].push({ "location.stateCode" :  req.body.stateCode   })
     }
-    if (req.body.district) {
+    if (req.body.district && req.body.district != "all") {
         selector["$and"].push({ "location.district" :  req.body.district   }) 
     }
     if (req.body.industry_id) {
@@ -747,10 +747,10 @@ exports.subfunctionalAreaJobs = (req, res, next)=>{
    	
     console.log(JSON.stringify(selector))
 
-    if (req.body.stateCode) {
+    if (req.body.stateCode && req.body.stateCode != "all") {
         selector["$and"].push({ "location.stateCode" :  req.body.stateCode   })
     }
-    if (req.body.district) {
+    if (req.body.district && req.body.district != "all") {
         selector["$and"].push({ "location.district" :  req.body.district   }) 
     }
     if (req.body.industry_id) {
@@ -812,10 +812,10 @@ exports.industrialJobs = (req, res, next)=>{
     selector["$and"].push({ "location.countryCode" :  countryCode })
    	
     console.log(JSON.stringify(selector))
-    if (req.body.stateCode) {
+    if (req.body.stateCode && req.body.stateCode != "all") {
         selector["$and"].push({ "location.stateCode" :  req.body.stateCode   })
     }
-    if (req.body.district) {
+    if (req.body.district && req.body.district != "all") {
         selector["$and"].push({ "location.district" :  req.body.district   }) 
     }
     if (req.body.industry_id) {
