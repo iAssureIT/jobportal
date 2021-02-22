@@ -18,11 +18,19 @@ class FunctionalAreawiseJobs extends Component{
 
         mapAction.jobCount(selector);
         mapAction.filterSubfunctionalData(this.props.selector);
-
-        this.props.history.push("/state/"+this.props.match.params.stateCode+"/"+this.props.match.params.district+"/"+functionalArea+"/"+_id);
+        if(this.props.match.path=="/"){
+            this.props.history.push("/functional/"+functionalArea+"/"+_id);
+        }
+        if(this.props.match.path=="/state/:stateCode"){
+            this.props.history.push("/state/"+this.props.match.params.stateCode+"/functional/"+functionalArea+"/"+_id);
+        }
+        if(this.props.match.path=="/state/:stateCode/:district"){
+            this.props.history.push("/state/"+this.props.match.params.stateCode+"/"+this.props.match.params.district+"/functional/"+functionalArea+"/"+_id);
+        }
+        //this.props.history.push("/state/"+this.props.match.params.stateCode+"/"+this.props.match.params.district+"/"+functionalArea+"/"+_id);
     }    
     render(){
-
+        console.log(this.props.functionalJobs)
     return(
             
                 <section className="col-lg-12 AllJobsWrapper">

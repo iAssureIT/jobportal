@@ -22,7 +22,16 @@ class SubFunctionalAreawiseJobs extends Component{
         mapAction.jobCount(selector);
         mapAction.filterJobList(this.props.selector);
 
-        this.props.history.push("/state/"+this.props.match.params.stateCode+"/"+this.props.match.params.district+"/"+this.props.match.params.functionalArea+"/"+this.props.match.params.functionalArea_id +"/"+subfunctionalArea+"/"+_id);
+        if(this.props.match.path=="/functional/:functionalArea/:functionalArea_id"){
+            this.props.history.push("/subfunctional/"+this.props.match.params.functionalArea+"/"+this.props.match.params.functionalArea_id +"/"+subfunctionalArea+"/"+_id );
+        }
+        if(this.props.match.path=="/state/:stateCode/functional/:functionalArea/:functionalArea_id"){
+            this.props.history.push("/state/"+this.props.match.params.stateCode+"/subfunctional/"+this.props.match.params.functionalArea+"/"+this.props.match.params.functionalArea_id +"/"+subfunctionalArea+"/"+_id );
+        }
+        if(this.props.match.path=="/state/:stateCode/:district/functional/:functionalArea/:functionalArea_id"){
+            this.props.history.push("/state/"+this.props.match.params.stateCode+"/"+this.props.match.params.district+"/subfunctional/"+this.props.match.params.functionalArea+"/"+this.props.match.params.functionalArea_id +"/"+subfunctionalArea+"/"+_id );
+        }
+        //this.props.history.push("/state/"+this.props.match.params.stateCode+"/"+this.props.match.params.district+"/"+this.props.match.params.functionalArea+"/"+this.props.match.params.functionalArea_id +"/"+subfunctionalArea+"/"+_id);
     } 
     render(){
     return(

@@ -116,6 +116,9 @@ class Layout extends Component  {
                                             <Route exact path="/"                               component={Homepage}  />
                                             <Route exact path="/state/:stateCode"               component={Homepage}  />
                                             <Route exact path="/state/:stateCode/:district"     component={Homepage}  />
+                                            <Route exact path="/:functionalArea/:functionalArea_id"     component={Homepage}  />
+                                            
+
                                             <Route exact path="/state/:stateCode/:district/:functionalArea/:functionalArea_id"     component={Homepage}  />
                                             <Route exact path="/state/:stateCode/:district/:functionalArea/:subfunctionalArea"     component={Homepage}  />
 
@@ -171,11 +174,20 @@ class Layout extends Component  {
                         <Switch >
 
                             <Route exact path="/"        component={Homepage}  />
+                            <Route exact path="/functional/:functionalArea/:functionalArea_id"     component={Homepage}  />
+                            <Route exact path="/subfunctional/:functionalArea/:functionalArea_id/:subfunctionalArea/:subfunctionalArea_id"     component={Homepage}  />
+                                   
                             <Route exact path="/state/:stateCode"               component={Homepage}  />
-                            <Route exact path="/state/:stateCode/:district"     component={Homepage}  />
-                            <Route exact path="/state/:stateCode/:district/:functionalArea/:functionalArea_id"     component={Homepage}  />
-                            <Route exact path="/state/:stateCode/:district/:functionalArea/:functionalArea_id/:subfunctionalArea/:subfunctionalArea_id"     component={Homepage}  />
-
+                            <Route exact path="/state/:stateCode/functional/:functionalArea/:functionalArea_id"               component={Homepage}  />
+                            <Route exact path="/state/:stateCode/subfunctional/:functionalArea/:functionalArea_id/:subfunctionalArea/:subfunctionalArea_id"               component={Homepage}  />
+                            
+                            <Route exact path="/state/:stateCode/:district"               component={Homepage}  />
+                            <Route exact path="/state/:stateCode/:district/functional/:functionalArea/:functionalArea_id"     component={Homepage}  />
+                            <Route exact path="/state/:stateCode/:district/subfunctional/:functionalArea/:functionalArea_id/:subfunctionalArea/:subfunctionalArea_id"     component={Homepage}  />
+                            
+                            {/*<Route exact path="/state/:stateCode/:district"     component={Homepage}  />
+                                                     
+                            */}
 
                             <Route exact path="/search-jobs"                    component={CandidateJobList}  />  
                             <Route path="/job-profile/:job_id"                  component={JobProfile} exact />
