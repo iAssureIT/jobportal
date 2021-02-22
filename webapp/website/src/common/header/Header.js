@@ -266,14 +266,34 @@ class Header extends Component{
                 <div className="headerMenu2 col-lg-4">
                   <div className="headerMenu11" onClick={this.userMenuToggle.bind(this)}>
                     {/*<FontAwesomeIcon icon={['fas', 'user']} />*/}
-                    {
+                   {/* {
                       this.props.userDetails.gender=='female'
                       ? 
                         <img src="/images/f.png" alt="icon" className="classIcon"/>
                       :
                        <img src="/images/m.png" alt="icon" className="classIcon"/>
-                    }
+                    }*/}
 
+                 {/* <img src={(this.props.userDetails.profilePicture)} alt="icon"className="classIcon"/>*/}
+
+
+                 {
+                                
+                                 
+                                   ((this.props.userDetails.profilePicture.length) > 0)
+                                  ?
+                                    <img src={(this.props.userDetails.profilePicture)} alt="icon"className="classIcon"/>
+                                  :
+                                  this.props.userDetails.gender=='female'
+                                 ? 
+                                  <img src="/images/f.png" alt="icon" className="classIcon"/>
+                                  :
+                                   this.props.userDetails.gender=='male'
+                                 ? 
+                                 <img src="/images/m.png" alt="icon" className="classIcon"/>
+                                 :
+                                  <FontAwesomeIcon icon={['fas', 'user']} />
+                  }
                     
                   </div>
                 </div>
