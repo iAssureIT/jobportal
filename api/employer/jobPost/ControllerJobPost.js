@@ -579,7 +579,7 @@ exports.jobCount = (req, res, next)=>{
     }
     
     if (req.body.minExp != null  && req.body.maxExp != null) {
-        selector["$and"].push({ "eligibility.minExperience" : { '$gte' : req.body.minExp,  '$lt' : req.body.maxExp} });
+        selector["$and"].push({ "eligibility.minExperience" : { '$gte' : req.body.minExp,  '$lte' : req.body.maxExp} });
     }
     
     Jobs.aggregate([
@@ -604,6 +604,7 @@ exports.mapwiseJobs = (req, res, next)=>{
 	var selector = {}; 
 	var industry_ids = [];
     var funarea_ids = [];
+    var subfunarea_ids = [];
     var jobrole_ids = [];
 
     selector['$and']=[];
@@ -674,6 +675,7 @@ exports.functonalAreaJobs = (req, res, next)=>{
 	var selector = {}; 
     var industry_ids = [];
     var funarea_ids = [];
+    var subfunarea_ids = [];
     var jobrole_ids = [];
 
     selector['$and']=[];
@@ -711,7 +713,7 @@ exports.functonalAreaJobs = (req, res, next)=>{
         selector["$and"].push({ "jobBasicInfo.jobrole_id" : { $in: jobrole_ids } });
     }
     if (req.body.minExp != null  && req.body.maxExp != null) {
-        selector["$and"].push({ "eligibility.minExperience" : { '$gte' : req.body.minExp,  '$lt' : req.body.maxExp} });
+        selector["$and"].push({ "eligibility.minExperience" : { '$gte' : req.body.minExp,  '$lte' : req.body.maxExp} });
     }
 
     console.log(JSON.stringify(selector))
@@ -739,6 +741,7 @@ exports.subfunctionalAreaJobs = (req, res, next)=>{
 	var selector = {}; 
 	var industry_ids = [];
     var funarea_ids = [];
+    var subfunarea_ids = [];
     var jobrole_ids = [];
 
     selector['$and']=[];
@@ -778,7 +781,7 @@ exports.subfunctionalAreaJobs = (req, res, next)=>{
         selector["$and"].push({ "jobBasicInfo.jobrole_id" : { $in: jobrole_ids } });
     }
     if (req.body.minExp != null  && req.body.maxExp != null) {
-        selector["$and"].push({ "eligibility.minExperience" : { '$gte' : req.body.minExp,  '$lt' : req.body.maxExp} });
+        selector["$and"].push({ "eligibility.minExperience" : { '$gte' : req.body.minExp,  '$lte' : req.body.maxExp} });
     }
 
     Jobs.aggregate([
@@ -805,6 +808,7 @@ exports.industrialJobs = (req, res, next)=>{
 	var selector = {}; 
 	var industry_ids = [];
     var funarea_ids = [];
+    var subfunarea_ids = [];
     var jobrole_ids = [];
     
     selector['$and']=[];
@@ -843,7 +847,7 @@ exports.industrialJobs = (req, res, next)=>{
         selector["$and"].push({ "jobBasicInfo.jobrole_id" : { $in: jobrole_ids } });
     }
     if (req.body.minExp != null  && req.body.maxExp != null) {
-        selector["$and"].push({ "eligibility.minExperience" : { '$gte' : req.body.minExp,  '$lt' : req.body.maxExp} });
+        selector["$and"].push({ "eligibility.minExperience" : { '$gte' : req.body.minExp,  '$lte' : req.body.maxExp} });
     }
 
     Jobs.aggregate([
