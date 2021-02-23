@@ -113,15 +113,9 @@ class Layout extends Component  {
                                             <Route path="/login" exact strict component={Login} />
                                             <Route path="/signup" exact strict component={SignUp} />
                                             
-                                            <Route exact path="/"                               component={Homepage}  />
-                                            <Route exact path="/state/:stateCode"               component={Homepage}  />
-                                            <Route exact path="/state/:stateCode/:district"     component={Homepage}  />
-                                            <Route exact path="/:functionalArea/:functionalArea_id"     component={Homepage}  />
-                                            
-
-                                            <Route exact path="/state/:stateCode/:district/:functionalArea/:functionalArea_id"     component={Homepage}  />
-                                            <Route exact path="/state/:stateCode/:district/:functionalArea/:subfunctionalArea"     component={Homepage}  />
-
+                                            <Route exact path="/"        component={Homepage}  />
+                                            <Route exact path="/country/:countryCode/state/:stateCode/city/:district/function/:functionalArea/:functionalArea_id/subfunction/:subfunctionalArea/:subfunctionalArea_id"     component={Homepage}  />
+                            
                                             <Route exact path="/basic-info"                     component={CandidateBasicInfo}  />
                                             <Route exact path="/address/:candidate_id"           component={CandidateAddress}  />
                                             <Route exact path="/address/:candidate_id/edit/:addressID"        component={CandidateAddress}  />
@@ -176,16 +170,13 @@ class Layout extends Component  {
                             <Route exact path="/"        component={Homepage}  />
                             <Route exact path="/country/:countryCode/state/:stateCode/city/:district/function/:functionalArea/:functionalArea_id/subfunction/:subfunctionalArea/:subfunctionalArea_id"     component={Homepage}  />
                                    
-                            <Route exact path="/country/:countryCode/state/:stateCode"               component={Homepage}  />
+                            {/*<Route exact path="/country/:countryCode/state/:stateCode"               component={Homepage}  />
                             <Route exact path="/country/:countryCode/state/:stateCode/functional/:functionalArea/:functionalArea_id"               component={Homepage}  />
                             <Route exact path="/country/:countryCode/state/:stateCode/subfunctional/:functionalArea/:functionalArea_id/:subfunctionalArea/:subfunctionalArea_id"               component={Homepage}  />
                             
                             <Route exact path="/country/:countryCode/state/:stateCode/:district"               component={Homepage}  />
                             <Route exact path="/country/:countryCode/state/:stateCode/:district/functional/:functionalArea/:functionalArea_id"     component={Homepage}  />
                             <Route exact path="/country/:countryCode/state/:stateCode/:district/subfunctional/:functionalArea/:functionalArea_id/:subfunctionalArea/:subfunctionalArea_id"     component={Homepage}  />
-                            
-                            {/*<Route exact path="/state/:stateCode/:district"     component={Homepage}  />
-                                                     
                             */}
 
                             <Route exact path="/search-jobs"                    component={CandidateJobList}  />  
