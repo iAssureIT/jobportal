@@ -6,103 +6,105 @@ const MapView = (pathname) => {
     
 	      switch(pathname.pathname.pathname.url) {
              
-
+            //case pathname.pathname.pathname.url : return <India />;
 	        case "/":   return <India />;
 
-            case "/state/"+pathname.pathname.pathname.params.stateCode+"/"+pathname.pathname.pathname.params.district :   return <India />;
+            case "/country/"+pathname.pathname.pathname.params.countryCode+"/state/"+pathname.pathname.pathname.params.stateCode+"/"+pathname.pathname.pathname.params.district :   return <India />;
 
-	        case "/state/MH":   const Maharashtra = React.lazy(() => import('../Maharashtra/Maharashtra.js'))
-	        	                return <Maharashtra/> ;
-	        	                
+	        // case "/country/"+pathname.pathname.pathname.params.countryCode+"/state/MH/city/all/function/all/0/subfunction/all/0":   const Maharashtra = React.lazy(() => import('../Maharashtra/Maharashtra.js'))
+	        // 	                return <Maharashtra/> ;
+	        case "/country/"+pathname.pathname.pathname.params.countryCode+"/state/"+pathname.pathname.pathname.params.stateCode+"/city/"+pathname.pathname.pathname.params.district+"/function/"+pathname.pathname.pathname.params.functionalArea+"/"+pathname.pathname.pathname.params.functionalArea_id+"/subfunction/"+pathname.pathname.pathname.params.subfunctionalArea+"/"+pathname.pathname.pathname.params.subfunctionalArea_id :  
+                     const Maharashtra = React.lazy(() => import('../Maharashtra/Maharashtra.js'))
+                                return <Maharashtra/> ; 	                
 
-	        case "/state/JK":   const JammuKashmir = React.lazy(() => import('../JammuKashmirLadakh/JammuKashmirLadakh.js'))
+	        case "/country/"+pathname.pathname.pathname.params.countryCode+"/state/JK/city/all/function/all/0/subfunction/all/0":   const JammuKashmir = React.lazy(() => import('../JammuKashmirLadakh/JammuKashmirLadakh.js'))
 	        	                return <JammuKashmir/> ;
 
-	        case "/state/LA":   const Ladakh = React.lazy(() => import('../Ladakh/Ladakh.js'))
+	        case "/country/"+pathname.pathname.pathname.params.countryCode+"/state/LA/city/all/function/all/0/subfunction/all/0":   const Ladakh = React.lazy(() => import('../Ladakh/Ladakh.js'))
 	        	                return <Ladakh/> ;
 
-            case "/state/PB":   const Punjab = React.lazy(() => import('../Punjab/Punjab.js'))
+            case "/country/"+pathname.pathname.pathname.params.countryCode+"/state/PB/city/all/function/all/0/subfunction/all/0":   const Punjab = React.lazy(() => import('../Punjab/Punjab.js'))
                                 return <Punjab/> ;
 
-            case "/state/HP":   const HimachalPradesh = React.lazy(() => import('../HimachalPradesh/HimachalPradesh.js'))
+            case "/country/"+pathname.pathname.pathname.params.countryCode+"/state/HP/city/all/function/all/0/subfunction/all/0":   const HimachalPradesh = React.lazy(() => import('../HimachalPradesh/HimachalPradesh.js'))
                                 return <HimachalPradesh/> ;
 
-            case "/state/UK":   const Uttarakhand = React.lazy(() => import('../Uttarakhand/Uttarakhand.js'))
+            case "/country/"+pathname.pathname.pathname.params.countryCode+"/state/UK/city/all/function/all/0/subfunction/all/0":   const Uttarakhand = React.lazy(() => import('../Uttarakhand/Uttarakhand.js'))
                                 return <Uttarakhand/> ;
 
-            case "/state/RJ":   const Rajasthan = React.lazy(() => import('../Rajasthan/Rajasthan.js'))
+            case "/country/"+pathname.pathname.pathname.params.countryCode+"/state/RJ/city/all/function/all/0/subfunction/all/0":   const Rajasthan = React.lazy(() => import('../Rajasthan/Rajasthan.js'))
                                 return <Rajasthan/> ; 
 
-            case "/state/HR":   const Haryana = React.lazy(() => import('../Haryana/Haryana.js'))
+            case "/country/"+pathname.pathname.pathname.params.countryCode+"/state/HR/city/all/function/all/0/subfunction/all/0":   const Haryana = React.lazy(() => import('../Haryana/Haryana.js'))
                                 return <Haryana/> ;
 
-            case "/state/GJ":   const Gujarat = React.lazy(() => import('../Gujarat/Gujarat.js'))
+            case "/country/"+pathname.pathname.pathname.params.countryCode+"/state/GJ/city/all/function/all/0/subfunction/all/0":   const Gujarat = React.lazy(() => import('../Gujarat/Gujarat.js'))
                                 return <Gujarat/> ; 
 
-            case "/state/MP":   const MadhyaPradesh = React.lazy(() => import('../MadhyaPradesh/MadhyaPradesh.js'))
+            case "/country/"+pathname.pathname.pathname.params.countryCode+"/state/MP/city/all/function/all/0/subfunction/all/0":   const MadhyaPradesh = React.lazy(() => import('../MadhyaPradesh/MadhyaPradesh.js'))
                                 return <MadhyaPradesh/> ; 
 
-            case "/state/KA":   const Karnataka = React.lazy(() => import('../Karnataka/Karnataka.js'))
+            case "/country/"+pathname.pathname.pathname.params.countryCode+"/state/KA/city/all/function/all/0/subfunction/all/0":   const Karnataka = React.lazy(() => import('../Karnataka/Karnataka.js'))
                                 return <Karnataka/> ;  
 
-            case "/state/TN":   const TamilNadu = React.lazy(() => import('../TamilNadu/TamilNadu.js'))
+            case "/country/"+pathname.pathname.pathname.params.countryCode+"/state/TN/city/all/function/all/0/subfunction/all/0":   const TamilNadu = React.lazy(() => import('../TamilNadu/TamilNadu.js'))
                                 return <TamilNadu/> ;  
 
-            case "/state/AD":   const AndhraPradesh = React.lazy(() => import('../AndhraPradesh/AndhraPradesh.js'))
+            case "/country/"+pathname.pathname.pathname.params.countryCode+"/state/AD/city/all/function/all/0/subfunction/all/0":   const AndhraPradesh = React.lazy(() => import('../AndhraPradesh/AndhraPradesh.js'))
                                 return <AndhraPradesh/> ; 
 
-            case "/state/TS":   const Telangana = React.lazy(() => import('../Telangana/Telangana.js'))
+            case "/country/"+pathname.pathname.pathname.params.countryCode+"/state/TS/city/all/function/all/0/subfunction/all/0":   const Telangana = React.lazy(() => import('../Telangana/Telangana.js'))
                                 return <Telangana/> ;  
 
-            case "/state/OD":   const Orissa = React.lazy(() => import('../Orissa/Orissa.js'))
+            case "/country/"+pathname.pathname.pathname.params.countryCode+"/state/OD/city/all/function/all/0/subfunction/all/0":   const Orissa = React.lazy(() => import('../Orissa/Orissa.js'))
                                 return <Orissa/> ;  
 
-            case "/state/CG":   const Chhattisgarh = React.lazy(() => import('../Chhattisgarh/Chhattisgarh.js'))
+            case "/country/"+pathname.pathname.pathname.params.countryCode+"/state/CG/city/all/function/all/0/subfunction/all/0":   const Chhattisgarh = React.lazy(() => import('../Chhattisgarh/Chhattisgarh.js'))
                                 return <Chhattisgarh/> ;  
 
-            case "/state/UP":   const UttarPradesh = React.lazy(() => import('../UttarPradesh/UttarPradesh.js'))
+            case "/country/"+pathname.pathname.pathname.params.countryCode+"/state/UP/city/all/function/all/0/subfunction/all/0":   const UttarPradesh = React.lazy(() => import('../UttarPradesh/UttarPradesh.js'))
                                 return <UttarPradesh/> ; 
 
-            case "/state/WB":   const WestBengal = React.lazy(() => import('../WestBengal/WestBengal.js'))
+            case "/country/"+pathname.pathname.pathname.params.countryCode+"/state/WB/city/all/function/all/0/subfunction/all/0":   const WestBengal = React.lazy(() => import('../WestBengal/WestBengal.js'))
                                 return <WestBengal/> ; 
 
-            case "/state/BR":   const Bihar = React.lazy(() => import('../Bihar/Bihar.js'))
+            case "/country/"+pathname.pathname.pathname.params.countryCode+"/state/BR/city/all/function/all/0/subfunction/all/0":   const Bihar = React.lazy(() => import('../Bihar/Bihar.js'))
                                 return <Bihar/> ;
 
-            case "/state/JH":   const Jharkhand = React.lazy(() => import('../Jharkhand/Jharkhand.js'))
+            case "/country/"+pathname.pathname.pathname.params.countryCode+"/state/JH/city/all/function/all/0/subfunction/all/0":   const Jharkhand = React.lazy(() => import('../Jharkhand/Jharkhand.js'))
                                 return <Jharkhand/> ;
 
-            case "/state/SK":   const Sikkim = React.lazy(() => import('../Sikkim/Sikkim.js'))
+            case "/country/"+pathname.pathname.pathname.params.countryCode+"/state/SK/city/all/function/all/0/subfunction/all/0":   const Sikkim = React.lazy(() => import('../Sikkim/Sikkim.js'))
                                 return <Sikkim/> ;
 
-            case "/state/AS":   const Assam = React.lazy(() => import('../Assam/Assam.js'))
+            case "/country/"+pathname.pathname.pathname.params.countryCode+"/state/AS/city/all/function/all/0/subfunction/all/0":   const Assam = React.lazy(() => import('../Assam/Assam.js'))
                                 return <Assam/> ;
 
-            case "/state/ML":   const Meghalaya = React.lazy(() => import('../Meghalaya/Meghalaya.js'))
+            case "/country/"+pathname.pathname.pathname.params.countryCode+"/state/ML/city/all/function/all/0/subfunction/all/0":   const Meghalaya = React.lazy(() => import('../Meghalaya/Meghalaya.js'))
                                 return <Meghalaya/> ;
 
-            case "/state/AR":   const ArunachalPradesh = React.lazy(() => import('../ArunachalPradesh/ArunachalPradesh.js'))
+            case "/country/"+pathname.pathname.pathname.params.countryCode+"/state/AR/city/all/function/all/0/subfunction/all/0":   const ArunachalPradesh = React.lazy(() => import('../ArunachalPradesh/ArunachalPradesh.js'))
                                 return <ArunachalPradesh/> ;
 
-             case "/state/NL":   const Nagaland = React.lazy(() => import('../Nagaland/Nagaland.js'))
+            case "/country/"+pathname.pathname.pathname.params.countryCode+"/state/NL/city/all/function/all/0/subfunction/all/0":   const Nagaland = React.lazy(() => import('../Nagaland/Nagaland.js'))
                                 return <Nagaland/> ;
 
-            case "/state/MN":   const Manipur = React.lazy(() => import('../Manipur/Manipur.js'))
+            case "/country/"+pathname.pathname.pathname.params.countryCode+"/state/MN/city/all/function/all/0/subfunction/all/0":   const Manipur = React.lazy(() => import('../Manipur/Manipur.js'))
                                 return <Manipur/> ;
 
-            case "/state/MZ":   const Mizoram = React.lazy(() => import('../Mizoram/Mizoram.js'))
+            case "/country/"+pathname.pathname.pathname.params.countryCode+"/state/MZ/city/all/function/all/0/subfunction/all/0":   const Mizoram = React.lazy(() => import('../Mizoram/Mizoram.js'))
                                 return <Mizoram/> ;
 
-            case "/state/TR":   const Tripura = React.lazy(() => import('../Tripura/Tripura.js'))
+            case "/country/"+pathname.pathname.pathname.params.countryCode+"/state/TR/city/all/function/all/0/subfunction/all/0":   const Tripura = React.lazy(() => import('../Tripura/Tripura.js'))
                                 return <Tripura/> ;
 
-            case "/state/KL":   const Kerala = React.lazy(() => import('../Kerala/Kerala.js'))
+            case "/country/"+pathname.pathname.pathname.params.countryCode+"/state/KL/city/all/function/all/0/subfunction/all/0":   const Kerala = React.lazy(() => import('../Kerala/Kerala.js'))
                                 return <Kerala/> ;
 
-            case "/state/GA":   const Goa = React.lazy(() => import('../Goa/Goa.js'))
+            case "/country/"+pathname.pathname.pathname.params.countryCode+"/state/GA/city/all/function/all/0/subfunction/all/0":   const Goa = React.lazy(() => import('../Goa/Goa.js'))
                                 return <Goa/> ;
 
-            case "/state/DL":   const Delhi = React.lazy(() => import('../Delhi/Delhi.js'))
+            case "/country/"+pathname.pathname.pathname.params.countryCode+"/state/DL/city/all/function/all/0/subfunction/all/0":   const Delhi = React.lazy(() => import('../Delhi/Delhi.js'))
                                 return <Delhi/> ;
 
            /* case "/state/CH":   const Chandigarh = React.lazy(() => import('../Chandigarh/Chandigarh.js'))

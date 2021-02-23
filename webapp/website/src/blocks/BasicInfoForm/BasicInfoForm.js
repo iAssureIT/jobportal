@@ -542,6 +542,7 @@ class BasicInfoForm extends Component{
 			document.getElementById("executiveSummaryError").innerHTML = ""; 
 			status = true;
 		}
+
 		 return status;
 	}
 

@@ -34,25 +34,44 @@ class HomePage extends Component {
     var selector = this.props.selector;
     
     selector.countryCode = "IN"; 
-    console.log("path",this.props.match)
+    //console.log("path",this.props.match)
     //if (window.location.pathname.split("/")[1] == "state" ) {
     //========== HomePage =============// 
     if(this.props.match.path=="/"){
       mapAction.filterMapData(selector);
     } 
-    if(this.props.match.path=="/country/:countryCode/state/:stateCode/city/:district/function/:functionalArea/:functionalArea_id"){
+    if(this.props.match.path=="/country/:countryCode/state/:stateCode"){
+      
+      selector.stateCode = this.props.match.params.stateCode 
+      mapAction.filterMapData(selector);
+    }
+    if(this.props.match.path=="/country/:countryCode/state/:stateCode/city/:district/function/:functionalArea/:functionalArea_id/subfunction/:subfunctionalArea/:subfunctionalArea_id"){
       
       selector.stateCode = this.props.match.params.stateCode 
       selector.district  = this.props.match.params.district
 
-      var tempArray = [];
-      tempArray.push({"functionalArea" : this.props.match.params.functionalArea, "id": this.props.match.params.functionalArea_id })
-      selector.functionalArea_id = tempArray; 
-
-      mapAction.filterSubfunctionalData(selector);
+      if (this.props.match.params.functionalArea != "all") {
+        var tempArray = [];
+        tempArray.push({"functionalArea" : this.props.match.params.functionalArea, "id": this.props.match.params.functionalArea_id })
+        selector.functionalArea_id = tempArray; 
+      }
+      if (this.props.match.params.subfunctionalArea != "all") {
+        var tempArray2 = [];
+        tempArray2.push({"subfunctionalArea" : this.props.match.params.subfunctionalArea, "id": this.props.match.params.subfunctionalArea_id })
+        selector.subfunctionalArea_id = tempArray2;
+      }
+      
+      if (this.props.match.params.functionalArea == "all") {
+        mapAction.filterFunctionalData(selector);
+      }else if(this.props.match.params.subfunctionalArea == "all"){
+        mapAction.filterSubfunctionalData(selector);
+      }else{
+        mapAction.filterJobList(selector);
+      }
+      
       mapAction.setViewMode("functionalView");
     }
-    if(this.props.match.path=="/country/:countryCode/state/:stateCode/city/:district/function/:functionalArea/:functionalArea_id/subfunction/:subfunctionalArea/:subfunctionalArea_id"){
+    /*if(this.props.match.path=="/country/:countryCode/state/:stateCode/city/:district/function/:functionalArea/:functionalArea_id/subfunction/:subfunctionalArea/:subfunctionalArea_id"){
       selector.stateCode = this.props.match.params.stateCode 
       selector.district  = this.props.match.params.district
         
@@ -133,7 +152,7 @@ class HomePage extends Component {
       
       mapAction.filterJobList(selector);
       mapAction.setViewMode("functionalView");
-    }
+    }*/
     mapAction.jobCount(selector)
     //selector.stateCode = stateCode; 
    
@@ -163,10 +182,9 @@ class HomePage extends Component {
     var selector = this.props.selector;
     selector.countryCode = "IN"; 
     
-    
     if (viewMode=="mapView") {
       
-      if (this.props.match.path=="/functional/:functionalArea/:functionalArea_id" ) {
+      /*if (this.props.match.path=="/functional/:functionalArea/:functionalArea_id" ) {
         delete selector.functionalArea_id;
         this.props.history.push("/");
       }
@@ -200,7 +218,8 @@ class HomePage extends Component {
         delete selector.functionalArea_id;
         delete selector.subfunctionalArea_id;
         this.props.history.push("/state/"+this.props.match.params.stateCode);
-      }
+      }*/
+
       mapAction.filterMapData(selector);
     }
     if (viewMode=="functionalView") {
@@ -215,7 +234,7 @@ class HomePage extends Component {
     mapAction.jobCount(selector);
   }
   render() {
-    console.log(this.props.selector)
+    console.log(this.props.viewMode)
     return (
       <div className="ViewBodyWrapper container-fluid">
 

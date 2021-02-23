@@ -76,7 +76,7 @@ class India extends Component{
 	    if (this.props.viewMode=="industrialView") {
 	      mapAction.filterIndustrialData(this.props.selector);
 	    }
-		this.props.history.push("state/"+stateCode);
+		this.props.history.push("/country/IN/state/"+stateCode+"/city/all/function/all/0/subfunction/all/0");
 	}
 	render(){
 		//console.log(this.state)
@@ -163,7 +163,7 @@ class India extends Component{
 					<div className="andhrapradesh classHover">
 						<img src="/Maps/India/AndhraPradesh.png" className="img-responsive "  onClick={e => this.onStateClick("Andhra Pradesh","AD")} onMouseOver={e => (e.currentTarget.src = "/Maps/India/AndhraPradesh1.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/India/AndhraPradesh.png")}/>
 						<span className="andhrapradeshText mapTextLabel text-capitalize">Andhra Pradesh</span>
-						<span className="andhrapradeshNumber mapCountLabel text-center">{this.state.AD ? this.state.AD : 0}</span>
+						<span className="andhrapradeshNumber mapCountLabel text-center">{this.state.AP ? this.state.AP : 0}</span>
 					</div>
 					<div className="telangana classHover">
 						<img src="/Maps/India/Telangana.png" className="img-responsive "  onClick={e => this.onStateClick("Telangana","TS")} onMouseOver={e => (e.currentTarget.src = "/Maps/India/Telangana1.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/India/Telangana.png")}/>

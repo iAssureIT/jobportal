@@ -22,7 +22,7 @@ class SubFunctionalAreawiseJobs extends Component{
         mapAction.jobCount(selector);
         mapAction.filterJobList(this.props.selector);
 
-        if(this.props.match.path=="/country/:countryCode/state/:stateCode/city/:district/function/:functionalArea/:functionalArea_id"){
+        /*if(this.props.match.path=="/country/:countryCode/state/:stateCode/city/:district/function/:functionalArea/:functionalArea_id"){
             this.props.history.push("/country/"+this.props.match.params.countryCode+"/state/"+this.props.match.params.stateCode+"/city/"+this.props.match.params.district+"/function/"+this.props.match.params.functionalArea+"/"+this.props.match.params.functionalArea_id +"/subfunction/"+subfunctionalArea+"/"+_id );
         }
         if(this.props.match.path=="/state/:stateCode/functional/:functionalArea/:functionalArea_id"){
@@ -30,8 +30,8 @@ class SubFunctionalAreawiseJobs extends Component{
         }
         if(this.props.match.path=="/state/:stateCode/:district/functional/:functionalArea/:functionalArea_id"){
             this.props.history.push("/state/"+this.props.match.params.stateCode+"/"+this.props.match.params.district+"/subfunctional/"+this.props.match.params.functionalArea+"/"+this.props.match.params.functionalArea_id +"/"+subfunctionalArea+"/"+_id );
-        }
-        //this.props.history.push("/state/"+this.props.match.params.stateCode+"/"+this.props.match.params.district+"/"+this.props.match.params.functionalArea+"/"+this.props.match.params.functionalArea_id +"/"+subfunctionalArea+"/"+_id);
+        }*/
+        this.props.history.push("/country/"+this.props.match.params.countryCode+"/state/"+this.props.match.params.stateCode+"/city/"+this.props.match.params.district+"/function/"+this.props.match.params.functionalArea+"/"+this.props.match.params.functionalArea_id +"/subfunction/"+subfunctionalArea+"/"+_id);
     } 
     render(){
     return(

@@ -44,8 +44,7 @@ class Manipur extends Component{
 		mapAction.jobCount(selector);
 		mapAction.filterFunctionalData(this.props.selector);
 
-		this.props.history.push("/state/"+stateCode+"/"+district);
-
+		this.props.history.push("/country/"+this.props.match.params.countryCode+"/state/"+stateCode+"/city/"+district+"/function/"+this.props.match.params.functionalArea + "/"+this.props.match.params.functionalArea_id+"/subfunction/"+this.props.match.params.subfunctionalArea + "/"+this.props.match.params.subfunctionalArea_id );
 
 	}
 	render(){

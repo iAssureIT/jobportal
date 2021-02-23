@@ -19,18 +19,14 @@ class FunctionalAreawiseJobs extends Component{
         mapAction.jobCount(selector);
         mapAction.filterSubfunctionalData(this.props.selector);
         if(this.props.match.path=="/"){
-            this.props.history.push("/country/IN/state/all/city/all/function/"+functionalArea+"/"+_id);
+            this.props.history.push("/country/IN/state/all/city/all/function/"+functionalArea+"/"+_id+"/subfunction/all/0");
         }
-        if(this.props.match.path=="/state/:stateCode"){
-            this.props.history.push("/state/"+this.props.match.params.stateCode+"/functional/"+functionalArea+"/"+_id);
+        else{
+            this.props.history.push("/country/"+this.props.match.params.countryCode+"/state/"+this.props.match.params.stateCode+"/city/"+this.props.match.params.district+"/function/"+functionalArea+"/"+_id+"/subfunction/all/0");
         }
-        if(this.props.match.path=="/state/:stateCode/:district"){
-            this.props.history.push("/state/"+this.props.match.params.stateCode+"/"+this.props.match.params.district+"/functional/"+functionalArea+"/"+_id);
-        }
-        //this.props.history.push("/state/"+this.props.match.params.stateCode+"/"+this.props.match.params.district+"/"+functionalArea+"/"+_id);
     }    
     render(){
-        console.log(this.props.functionalJobs)
+        //console.log(this.props.functionalJobs)
     return(
             
                 <section className="col-lg-12 AllJobsWrapper">

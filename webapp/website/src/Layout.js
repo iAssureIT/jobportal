@@ -174,16 +174,15 @@ class Layout extends Component  {
                         <Switch >
 
                             <Route exact path="/"        component={Homepage}  />
-                            <Route exact path="/country/:countryCode/state/:stateCode/city/:district/function/:functionalArea/:functionalArea_id"     component={Homepage}  />
                             <Route exact path="/country/:countryCode/state/:stateCode/city/:district/function/:functionalArea/:functionalArea_id/subfunction/:subfunctionalArea/:subfunctionalArea_id"     component={Homepage}  />
                                    
                             <Route exact path="/country/:countryCode/state/:stateCode"               component={Homepage}  />
                             <Route exact path="/country/:countryCode/state/:stateCode/functional/:functionalArea/:functionalArea_id"               component={Homepage}  />
-                            <Route exact path="/state/:stateCode/subfunctional/:functionalArea/:functionalArea_id/:subfunctionalArea/:subfunctionalArea_id"               component={Homepage}  />
+                            <Route exact path="/country/:countryCode/state/:stateCode/subfunctional/:functionalArea/:functionalArea_id/:subfunctionalArea/:subfunctionalArea_id"               component={Homepage}  />
                             
-                            <Route exact path="/state/:stateCode/:district"               component={Homepage}  />
-                            <Route exact path="/state/:stateCode/:district/functional/:functionalArea/:functionalArea_id"     component={Homepage}  />
-                            <Route exact path="/state/:stateCode/:district/subfunctional/:functionalArea/:functionalArea_id/:subfunctionalArea/:subfunctionalArea_id"     component={Homepage}  />
+                            <Route exact path="/country/:countryCode/state/:stateCode/:district"               component={Homepage}  />
+                            <Route exact path="/country/:countryCode/state/:stateCode/:district/functional/:functionalArea/:functionalArea_id"     component={Homepage}  />
+                            <Route exact path="/country/:countryCode/state/:stateCode/:district/subfunctional/:functionalArea/:functionalArea_id/:subfunctionalArea/:subfunctionalArea_id"     component={Homepage}  />
                             
                             {/*<Route exact path="/state/:stateCode/:district"     component={Homepage}  />
                                                      
