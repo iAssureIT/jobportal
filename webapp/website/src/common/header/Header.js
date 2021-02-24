@@ -277,19 +277,28 @@ class Header extends Component{
 
 
                  {
-                       ((this.props.userDetails.profilePicture.length) > 0)
-                      ?
-                        <img src={(this.props.userDetails.profilePicture)} alt="icon"className="classIcon"/>
-                      :
-                      this.props.userDetails.gender=='female'
-                     ? 
-                      <img src="/images/f.png" alt="icon" className="classIcon"/>
-                      :
-                       this.props.userDetails.gender=='male'
-                     ? 
-                     <img src="/images/m.png" alt="icon" className="classIcon"/>
-                     :
-                      <FontAwesomeIcon icon={['fas', 'user']} />
+
+                                
+                                 
+                                   ((this.props.userDetails.profilePicture)=== undefined)
+                                  ?
+                                  <FontAwesomeIcon icon={['fas', 'user']} />
+                                  :
+
+                                  ((this.props.userDetails.profilePicture.length) > 0)
+                                  ?
+                                    <img src={(this.props.userDetails.profilePicture)} alt="icon"className="classIcon"/>
+                                  :
+                                  this.props.userDetails.gender=='female'
+                                 ? 
+                                  <img src="/images/f.png" alt="icon" className="classIcon"/>
+                                  :
+                                   this.props.userDetails.gender=='male'
+                                 ? 
+                                 <img src="/images/m.png" alt="icon" className="classIcon"/>
+                                 :
+                                  <FontAwesomeIcon icon={['fas', 'user']} />
+
                   }
                     
                   </div>

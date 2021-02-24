@@ -449,7 +449,7 @@ class Certification extends Component{
 	 	if(this.state.certificationToggel===false){
 		 	if(this.state.skills.length<=0){
 				document.getElementById("skillsError").innerHTML=  
-				"Please enter your rating";  
+				"Please enter skills";  
 				status=false; 
 			}else{
 				document.getElementById("skillsError").innerHTML=  

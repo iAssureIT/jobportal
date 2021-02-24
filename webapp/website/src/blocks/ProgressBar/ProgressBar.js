@@ -59,7 +59,7 @@ class ProgressBar extends Component{
 									
 									<div className="stepText">Address</div>
 								</div>
-								<div className="step">
+								{/*<div className="step">
 									<a href={"/contact/"+ this.state.candidate_id}>
 										<div className={this.state.location===("/contact/"+this.state.candidate_id)
 															||this.state.location===("/academics/"+this.state.candidate_id)
@@ -75,7 +75,7 @@ class ProgressBar extends Component{
 									</a>
 									<div className="stepText">Contact Details</div>
 									
-								</div>
+								</div>*/}
 								<div className="step">
 									<a href={"/academics/"+ this.state.candidate_id}>
 										<div className={this.state.location===("/academics/"+this.state.candidate_id)
@@ -86,7 +86,7 @@ class ProgressBar extends Component{
 															"bullet active "
 														:
 															"bullet " }>
-												4
+												3
 										</div>
 									</a>
 									<div className="stepText">Academics</div>
@@ -101,7 +101,7 @@ class ProgressBar extends Component{
 															"bullet active "
 														:
 															"bullet " }>
-												5
+												4
 										</div>
 									</a>
 									<div className="stepText">skills & Certificates</div>
@@ -114,7 +114,7 @@ class ProgressBar extends Component{
 															"bullet active "
 														:
 															"bullet " }>
-												6
+												5
 										</div>
 									</a>
 									<div className="stepText">Work Experience</div>
@@ -130,7 +130,7 @@ class ProgressBar extends Component{
 								<div className="progress progressBar2 row">
 									<div className="progress-bar progress-bar-striped progressBarInner progress-bar-warning progress-bar-striped active" 
 									  role="progressbar" aria-valuenow="0" aria-valuemin="0" 
-									  aria-valuemax="100" style={{width:this.props.width+"%"}}>
+									  aria-valuemax="90" style={{width:this.props.width+"%"}}>
 									    <img src={this.props.img?("/images/"+ this.props.img + ".png"):null}  style={{left:this.props.left+"%"}}/>
 									</div>
 
