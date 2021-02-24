@@ -45,7 +45,7 @@ class HomePage extends Component {
       selector.stateCode = this.props.match.params.stateCode 
       mapAction.filterMapData(selector);
     }
-    if(this.props.match.path=="/country/:countryCode/state/:stateCode/city/:district/function/:functionalArea/:functionalArea_id/subfunction/:subfunctionalArea/:subfunctionalArea_id"){
+    if(this.props.match.path=="/country/:countryCode/state/:stateCode/city/:district/industry/:industryName/:industry_id/function/:functionalArea/:functionalArea_id/subfunction/:subfunctionalArea/:subfunctionalArea_id"){
       
       selector.stateCode = this.props.match.params.stateCode 
       selector.district  = this.props.match.params.district
@@ -234,7 +234,7 @@ class HomePage extends Component {
     mapAction.jobCount(selector);
   }
   render() {
-    console.log(this.props.viewMode)
+    //console.log(this.props.viewMode)
     return (
       <div className="ViewBodyWrapper container-fluid">
 

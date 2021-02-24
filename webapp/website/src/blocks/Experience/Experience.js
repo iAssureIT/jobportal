@@ -265,9 +265,9 @@ class Experience extends Component{
 		console.log(formValues)	
 
 		if(this.props.match.params.workExperienceID){
-			//this.updateData(formValues,event);
+			this.updateData(formValues,event);
 		}else{
-			//this.insetData(formValues,event);
+			this.insetData(formValues,event);
 		}
 	}
 	updateData(formValues,event){
@@ -433,7 +433,8 @@ class Experience extends Component{
 	//========== Validation Start ==================
 	validateForm=()=>{
 		var status = true;
-		if(this.state.industry.length<=0 || this.state.industry_id.length<=0){
+		
+		if(this.state.industry.length<=0 ){
 			document.getElementById("industryError").innerHTML=  
 			"Please enter industry";  
 			status=false; 
@@ -592,6 +593,7 @@ class Experience extends Component{
 
 	//========== Validation End ==================
 	render(){
+		
 		return(
 				<div className="col-lg-12">
 					<form>
@@ -821,7 +823,7 @@ class Experience extends Component{
 									</span> 
 									<input type="month" name="toDate" id="toDate" 
 									 className="form-control inputBox date" 
-									 value={this.state.toDate}
+									 value={this.state.toDate} min={Moment(this.state.fromDate).format("YYYY-MM")}
 									 onChange={this.handleChange.bind(this)} />
 								</div> 
 								<span id="toDateError" className="errorMsg"></span>

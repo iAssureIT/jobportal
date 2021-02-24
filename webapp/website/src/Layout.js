@@ -114,7 +114,7 @@ class Layout extends Component  {
                                             <Route path="/signup" exact strict component={SignUp} />
                                             
                                             <Route exact path="/"        component={Homepage}  />
-                                            <Route exact path="/country/:countryCode/state/:stateCode/city/:district/function/:functionalArea/:functionalArea_id/subfunction/:subfunctionalArea/:subfunctionalArea_id"     component={Homepage}  />
+                                            <Route exact path="/country/:countryCode/state/:stateCode/city/:district/industry/:industryName/:industry_id/function/:functionalArea/:functionalArea_id/subfunction/:subfunctionalArea/:subfunctionalArea_id"     component={Homepage}  />
                             
                                             <Route exact path="/basic-info"                     component={CandidateBasicInfo}  />
                                             <Route exact path="/address/:candidate_id"           component={CandidateAddress}  />

@@ -76,7 +76,7 @@ class India extends Component{
 	    if (this.props.viewMode=="industrialView") {
 	      mapAction.filterIndustrialData(this.props.selector);
 	    }
-		this.props.history.push("/country/IN/state/"+stateCode+"/city/all/function/all/0/subfunction/all/0");
+		this.props.history.push("/country/IN/state/"+stateCode+"/city/all/industry/all/0/function/all/0/subfunction/all/0");
 	}
 	render(){
 		//console.log(this.state)

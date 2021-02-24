@@ -19,10 +19,10 @@ class FunctionalAreawiseJobs extends Component{
         mapAction.jobCount(selector);
         mapAction.filterSubfunctionalData(this.props.selector);
         if(this.props.match.path=="/"){
-            this.props.history.push("/country/IN/state/all/city/all/function/"+functionalArea+"/"+_id+"/subfunction/all/0");
+            this.props.history.push("/country/IN/state/all/city/all/industry/all/0/function/"+functionalArea+"/"+_id+"/subfunction/all/0");
         }
         else{
-            this.props.history.push("/country/"+this.props.match.params.countryCode+"/state/"+this.props.match.params.stateCode+"/city/"+this.props.match.params.district+"/function/"+functionalArea+"/"+_id+"/subfunction/all/0");
+            this.props.history.push("/country/"+this.props.match.params.countryCode+"/state/"+this.props.match.params.stateCode+"/city/"+this.props.match.params.district+"/industry/"+this.props.match.params.industryName+"/"+this.props.match.params.industry_id+"/function/"+functionalArea+"/"+_id+"/subfunction/all/0");
         }
     }    
     render(){

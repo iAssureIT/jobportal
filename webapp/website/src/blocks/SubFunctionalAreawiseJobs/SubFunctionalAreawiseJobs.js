@@ -31,7 +31,7 @@ class SubFunctionalAreawiseJobs extends Component{
         if(this.props.match.path=="/state/:stateCode/:district/functional/:functionalArea/:functionalArea_id"){
             this.props.history.push("/state/"+this.props.match.params.stateCode+"/"+this.props.match.params.district+"/subfunctional/"+this.props.match.params.functionalArea+"/"+this.props.match.params.functionalArea_id +"/"+subfunctionalArea+"/"+_id );
         }*/
-        this.props.history.push("/country/"+this.props.match.params.countryCode+"/state/"+this.props.match.params.stateCode+"/city/"+this.props.match.params.district+"/function/"+this.props.match.params.functionalArea+"/"+this.props.match.params.functionalArea_id +"/subfunction/"+subfunctionalArea+"/"+_id);
+        this.props.history.push("/country/"+this.props.match.params.countryCode+"/state/"+this.props.match.params.stateCode+"/city/"+this.props.match.params.district+"/industry/"+this.props.match.params.industryName+"/"+this.props.match.params.industry_id+"/function/"+this.props.match.params.functionalArea+"/"+this.props.match.params.functionalArea_id +"/subfunction/"+subfunctionalArea+"/"+_id);
     } 
     render(){
     return(

@@ -64,11 +64,11 @@ class Header extends Component{
       } 
       //console.log(selector)
       mapAction.jobCount(selector);*/
-      
-      if (window.location.pathname.split("/")[1] == "state" ) {
+      console.log(window.location.pathname.split("/"))
+      if (window.location.pathname.split("/")[3] == "state" ) {
         var stateName = "";
           //selector.stateCode = window.location.pathname.split("/")[2] 
-          switch(window.location.pathname.split("/")[2]) {
+          switch(window.location.pathname.split("/")[4]) {
         case "AP": stateName = "Andhra Pradesh"
           break;
         case "AR": stateName = "Arunachal Pradesh"
@@ -200,25 +200,24 @@ class Header extends Component{
         </div>
 
         {
-          window.location.pathname.split("/")[1] == "state" ? 
+          window.location.pathname.split("/")[3] == "state" ? 
           <div className="breadCrumbHeader col-lg-3">
           <ul className="breadCrumbInner">
               <li className="breadCrumbInnerli"><a href="/">India</a></li>
-              <li className= {window.location.pathname.split("/")[3] ? "breadCrumbInnerli" : "breadCrumbInnerli selectedState"}>
-              <a href={"/state/"+window.location.pathname.split("/")[2]}>{selectedState}</a>
+              <li className= {window.location.pathname.split("/")[3] == "state" && window.location.pathname.split("/")[6]!="all" ? "breadCrumbInnerli" : "breadCrumbInnerli selectedState"}>
+              <a href={"/country/"+window.location.pathname.split("/")[2] +"/state/"+window.location.pathname.split("/")[4]+"/city/all/industry/"+window.location.pathname.split("/")[8]+"/"+window.location.pathname.split("/")[9]+"/function/"+window.location.pathname.split("/")[11]+"/"+window.location.pathname.split("/")[12]+"/subfunction/"+window.location.pathname.split("/")[14]+"/"+window.location.pathname.split("/")[15]}>{selectedState}</a>
               </li>  
-              { window.location.pathname.split("/")[3] ? 
+              { window.location.pathname.split("/")[3] == "state" && window.location.pathname.split("/")[6]!="all" ? 
               <li className="breadCrumbInnerli selectedState">
-              <a href={"/state/"+window.location.pathname.split("/")[2]+"/"+window.location.pathname.split("/")[3] }>{window.location.pathname.split("/")[3] }</a>
+              <a href={"/country/"+window.location.pathname.split("/")[2]+"/state/"+window.location.pathname.split("/")[4]+"/city/"+window.location.pathname.split("/")[6]+"/industry/"+window.location.pathname.split("/")[8]+"/"+window.location.pathname.split("/")[9]+"/function/"+window.location.pathname.split("/")[11]+"/"+window.location.pathname.split("/")[12]+"/subfunction/" +window.location.pathname.split("/")[14]+"/"+window.location.pathname.split("/")[15]}>{window.location.pathname.split("/")[6] }</a>
               </li>  : null }  
           </ul>
           </div>
           : <div className="breadCrumbHeader col-lg-3"></div>
         }
 
-              <div className="FunctionWiseTitle col-lg-4">
-               
-              </div>
+          <div className="FunctionWiseTitle col-lg-4">
+          </div>
 
           <div className="rightFunctionHeader col-lg-4">
             <div className="row">
@@ -228,20 +227,20 @@ class Header extends Component{
                 <div className="rightFunctionHeader1CityJobs">
 
                 {
-                 window.location.pathname.split("/")[0] == "" && window.location.pathname.split("/")[1] != "state"  ?
+                 window.location.pathname.split("/")[0] == "" && window.location.pathname.split("/")[3] != "state"  ?
                   <div className="cityNameHeader">{"India"}
                   </div> 
                  : null 
                 }
                 {
-                 window.location.pathname.split("/")[1] == "state" && !window.location.pathname.split("/")[3] ?
+                 window.location.pathname.split("/")[3] == "state" && window.location.pathname.split("/")[6]=="all" ?
                   <div className="cityNameHeader">{selectedState && selectedState != "" ? selectedState : "India"}
                   </div> 
                  : null 
                 }
                 {
-                 window.location.pathname.split("/")[1] == "state" && window.location.pathname.split("/")[3] ?
-                  <div className="cityNameHeader">{window.location.pathname.split("/")[3]}
+                 window.location.pathname.split("/")[3] == "state" && window.location.pathname.split("/")[6]!="all" ?
+                  <div className="cityNameHeader">{window.location.pathname.split("/")[6]}
                   </div> 
                  : null 
                 }  
@@ -278,21 +277,19 @@ class Header extends Component{
 
 
                  {
-                                
-                                 
-                                   ((this.props.userDetails.profilePicture.length) > 0)
-                                  ?
-                                    <img src={(this.props.userDetails.profilePicture)} alt="icon"className="classIcon"/>
-                                  :
-                                  this.props.userDetails.gender=='female'
-                                 ? 
-                                  <img src="/images/f.png" alt="icon" className="classIcon"/>
-                                  :
-                                   this.props.userDetails.gender=='male'
-                                 ? 
-                                 <img src="/images/m.png" alt="icon" className="classIcon"/>
-                                 :
-                                  <FontAwesomeIcon icon={['fas', 'user']} />
+                       ((this.props.userDetails.profilePicture.length) > 0)
+                      ?
+                        <img src={(this.props.userDetails.profilePicture)} alt="icon"className="classIcon"/>
+                      :
+                      this.props.userDetails.gender=='female'
+                     ? 
+                      <img src="/images/f.png" alt="icon" className="classIcon"/>
+                      :
+                       this.props.userDetails.gender=='male'
+                     ? 
+                     <img src="/images/m.png" alt="icon" className="classIcon"/>
+                     :
+                      <FontAwesomeIcon icon={['fas', 'user']} />
                   }
                     
                   </div>
@@ -312,7 +309,6 @@ class Header extends Component{
                 <div className="functionalbarsCross col-lg-12">
                   <span className="functionalnotificationMessegeCross" id="closeAsidebarButton" onClick={this.asideBar.bind(this)}> X </span>
                 </div>
-
                 <div className="functionalbarsItem col-lg-12">
                   <a href="/search-jobs" style={{color:"#fff"}}>
                   <span className="functionalnotificationMessegeText">Jobs </span></a>
