@@ -137,14 +137,14 @@ font-face {
   
 }
 .headerMenu11{
-  width: 35px;
-  height: 35px;
+  width: 40px;
+  height: 40px;
   color: #fefefe;
   font-size: 20px;
   text-align: center;
   border-radius: 50%;
-  border: 1px solid #efefef;
- background-color: #ccc;
+  border: 2px solid #efefef;
+ background-color: transparent;
 
 }
 .headerMenu1,.headerMenu11:hover{
@@ -313,5 +313,5 @@ color: var(--main-heading-font-color) !important
 .classIcon{
   width: 35px;
   height: 35px;
-  border-radius: 60%;
+  border-radius: 50%;
     }

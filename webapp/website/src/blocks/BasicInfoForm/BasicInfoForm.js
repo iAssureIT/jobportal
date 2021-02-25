@@ -650,7 +650,7 @@ class BasicInfoForm extends Component{
 										<i className="fa fa-envelope-o"></i> 
 									</span> 
 									<input type="email" name="email" id="email" 
-									 className="form-control inputBox email" value={this.state.email} 
+									 className="form-control email" value={this.state.email} 
 									 onChange={this.handleChange.bind(this)} />
 								</div> 
 								<span id="emailError" className="errorMsg"></span>

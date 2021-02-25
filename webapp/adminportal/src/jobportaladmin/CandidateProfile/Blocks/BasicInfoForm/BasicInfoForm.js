@@ -520,9 +520,9 @@ class BasicInfoForm extends Component{
 		if(this.state.mobile.length<=0){
 			document.getElementById("mobileError").innerHTML = "Please enter your mobile number";  
 			status=false; 
-		}else if (!mobileFilter.test(this.state.mobile)) { //test email for illegal characters
+		}/*else if (!mobileFilter.test(this.state.mobile)) { //test email for illegal characters
 	        document.getElementById('mobileError').innerHTML = "Please enter a valid mobile number.";
-	    }else{
+	    }*/else{
 			document.getElementById("mobileError").innerHTML = ""; 
 			status = true;
 		}
@@ -545,6 +545,7 @@ class BasicInfoForm extends Component{
 			document.getElementById("executiveSummaryError").innerHTML = ""; 
 			status = true;
 		}
+
 		 return status;
 	}
 
@@ -562,7 +563,7 @@ class BasicInfoForm extends Component{
 				<div className="col-lg-12 pageWrapper">
 					<form className="mainForm">
 
-						<div className="row formMainWrapper">
+						<div className="row formWrapper">
 
 							<div className="col-lg-4">
 								<label htmlFor="firstName" className="nameTitleForm">
@@ -582,7 +583,7 @@ class BasicInfoForm extends Component{
 
 							<div className="col-lg-4">
 								<label htmlFor="middleName" className="nameTitleForm">
-									Middle Name
+									Middle Name <sup className="nameTitleFormStar">*</sup>
 								</label>
 								<div className="input-group ">
 									<span className="input-group-addon inputBoxIcon">
@@ -597,7 +598,7 @@ class BasicInfoForm extends Component{
 
 							<div className="col-lg-4">
 								<label htmlFor="lastName" className="nameTitleForm">
-									Last Name
+									Last Name <sup className="nameTitleFormStar">*</sup>
 								</label>
 								<div className="input-group ">
 									<span className="input-group-addon inputBoxIcon">
@@ -609,10 +610,8 @@ class BasicInfoForm extends Component{
 								</div> 
 								<span id="lastNameError" className="errorMsg"></span>
 							</div>
-
 						</div>
-
-						<div className="row formMainWrapper">
+						<div className="row formWrapper">
 							<div className="col-lg-4">
 								<label htmlFor="mobile" className="nameTitleForm">
 									Mobile Number
@@ -654,15 +653,13 @@ class BasicInfoForm extends Component{
 										<i className="fa fa-envelope-o"></i> 
 									</span> 
 									<input type="email" name="email" id="email" 
-									 className="form-control inputBox email" value={this.state.email} 
+									 className="form-control email" value={this.state.email} 
 									 onChange={this.handleChange.bind(this)} />
 								</div> 
 								<span id="emailError" className="errorMsg"></span>
 							</div>
 						</div>
-
-						<div className="row formMainWrapper">
-
+						<div className="row formWrapper">
 							<div className="col-lg-4">
 								<label htmlFor="dob" className="nameTitleForm">
 									Date Of Birth
@@ -674,7 +671,7 @@ class BasicInfoForm extends Component{
 									</span> 
 									<input type="date" name="dob" id="dob" 
 									 className="form-control inputBox unstyled date" 
-									 value={this.state.dob} 
+									 value={this.state.dob} max={Moment(new Date()).format("YYYY-MM-DD")}
 									 onChange={this.handleChange.bind(this)} />
 								</div> 
 								<span id="dobError" className="errorMsg"></span>
@@ -730,10 +727,9 @@ class BasicInfoForm extends Component{
 									
 								</div>
 							</div>
-
 						</div>
 
-						<div className="row formMainWrapper multiselectZ">
+						<div className="row formWrapper multiselectZ">
 
 							<div className="col-lg-4">
 								<label htmlFor="maritalStatus" className="nameTitleForm">
@@ -783,8 +779,7 @@ class BasicInfoForm extends Component{
 								: null
 							}
 						</div>
-
-						<div className="row formMainWrapper">
+						<div className="row formWrapper">
 							<div className="col-lg-8">
 								<label htmlFor="languages" className="nameTitleForm">
 									Languages Spoken
@@ -835,7 +830,7 @@ class BasicInfoForm extends Component{
 								</div>
 							</div>
 						</div>
-						<div className="row formMainWrapper">
+						<div className="row formWrapper">
 							<div className="col-lg-12">
 								<label htmlFor="executiveSummary" className="nameTitleForm">
 									Executive Summary <sup className="nameTitleFormStar">*</sup>
@@ -854,7 +849,7 @@ class BasicInfoForm extends Component{
 								<span id="executiveSummaryError" className="errorMsg"></span>
 							</div>
 						</div>
-						<div className="row formMainWrapper">
+						<div className="row formWrapper">
 							<div className="col-lg-4 ">
 								<label htmlFor="profilePicture" className="nameTitleForm">
 									Profile Picture
@@ -909,7 +904,6 @@ class BasicInfoForm extends Component{
 							</div>
 						</div>
 
-						
 						<button className="buttonNext pull-right" onClick={this.handleSubmit.bind(this)}>
 							Next 
 							<FontAwesomeIcon className="nextArrow" icon="arrow-right" />
