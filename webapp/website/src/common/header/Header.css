@@ -178,7 +178,7 @@ font-face {
   min-height: 600px;
   background-color: #191c24;
   z-index:300;
-  margin-top:0px;
+  margin-top:-15px;
   border:1px solid #4b5666;
   transition: 1s;
   transition-timing-function: ease;

@@ -13,7 +13,7 @@
 }
 .step{
 	text-align:center;
-	width: 19.6%;
+	width: 25%;
 	z-index:;
 }
 .step6{
@@ -46,7 +46,7 @@
 	position:absolute;
 	width:200px; 
 	height:1px;
-	left:16px;
+	left:18px;
 	top:8px;
 	background:var(--yellow-button-color);
 	z-index:-2;

@@ -10,11 +10,11 @@ class CandidateCertification extends Component{
 		return(
 				<div className="mainPagesWrapper col-lg-12">
 					<div className="row">
-						<ProgressBar width="80" left="77.5" img="37" location={window.location.pathname} />
+						<ProgressBar width="75" left="73" img="37" location={window.location.pathname} />
 					</div>
 					<div className="basicInfoWrapper row">
 						<div className=" col-lg-8 col-lg-offset-2 BasicInfoBlock">
-							<TitleLayout title="Skills & Certification"  pageNumber="5"/>
+							<TitleLayout title="Skills & Certification"  pageNumber="4"/>
 							<Certification/>
 						</div>
 					</div>

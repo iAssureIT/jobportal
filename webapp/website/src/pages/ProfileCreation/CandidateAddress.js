@@ -12,7 +12,7 @@ class CandidateAddress extends Component{
 				<div className="mainPagesWrapper col-lg-12">
 					<div className="row">
 						
-						<ProgressBar width="20" left="17.5" img="37" location={window.location.pathname} />
+						<ProgressBar width="25" left="23" img="37" location={window.location.pathname} />
 						
 					
 					</div>

@@ -148,9 +148,9 @@ font-face {
 
 }
 
-.functionalbarsToggel{
+/*.functionalbarsToggel{
 	position: fixed;
-    /*right: 15px;*/
+    right: 15px;
     width: auto;
     min-width: 1250px;
 	height: auto;
@@ -162,7 +162,7 @@ font-face {
 	transition: 1s;
 	transition-timing-function: ease;
 
-}
+}*/
 .notificationBox{
 	position: relative;
 	width:200px;

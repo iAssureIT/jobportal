@@ -11,11 +11,11 @@ class CandidateAcademics extends Component{
 		return(
 				<div className="mainPagesWrapper col-lg-12">
 					<div className="row">
-						<ProgressBar width="60" left="57.5" img="37" location={window.location.pathname}/>
+						<ProgressBar width="50" left="48" img="37" location={window.location.pathname}/>
 					</div>
 					<div className="basicInfoWrapper row">
 						<div className=" col-lg-8 col-lg-offset-2 BasicInfoBlock">
-							<TitleLayout title="Academics" subtitle="Education Qualification" pageNumber="4"/>
+							<TitleLayout title="Academics" subtitle="Education Qualification" pageNumber="3"/>
 							<Academics/>
 						</div>
 					</div>

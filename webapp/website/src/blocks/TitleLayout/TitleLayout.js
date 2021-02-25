@@ -10,7 +10,7 @@ class TitleLayout extends Component{
 					<div className="row">
 						<div className="BasicInfoTitle col-lg-12">
 							{this.props.title}
-							<span className="BasicInfoStep pull-right">Step {this.props.pageNumber}/6</span>
+							<span className="BasicInfoStep pull-right">Step {this.props.pageNumber}/5</span>
 						</div>
 
 						<div className="BasicInfoSubTitle">
