@@ -403,16 +403,16 @@ class Header extends Component{
             <a href="/"><img src="/images/1.png" alt="icon" /></a>
         </div>
         {
-          window.location.pathname.split("/")[1] == "state" ? 
+          window.location.pathname.split("/")[3] == "state" ? 
           <div className="breadCrumbHeader col-lg-3">
           <ul className="breadCrumbInner">
               <li className="breadCrumbInnerli"><a href="/">India</a></li>
-              <li className= {window.location.pathname.split("/")[3] ? "breadCrumbInnerli" : "breadCrumbInnerli selectedState"}>
-              <a href={"/state/"+window.location.pathname.split("/")[2]}>{selectedState}</a>
+              <li className= {window.location.pathname.split("/")[3] == "state" && window.location.pathname.split("/")[6]!="all" ? "breadCrumbInnerli" : "breadCrumbInnerli selectedState"}>
+              <a href={"/country/"+window.location.pathname.split("/")[2] +"/state/"+window.location.pathname.split("/")[4]+"/city/all/industry/"+window.location.pathname.split("/")[8]+"/"+window.location.pathname.split("/")[9]+"/function/"+window.location.pathname.split("/")[11]+"/"+window.location.pathname.split("/")[12]+"/subfunction/"+window.location.pathname.split("/")[14]+"/"+window.location.pathname.split("/")[15]}>{selectedState}</a>
               </li>  
-              { window.location.pathname.split("/")[3] ? 
+              { window.location.pathname.split("/")[3] == "state" && window.location.pathname.split("/")[6]!="all" ? 
               <li className="breadCrumbInnerli selectedState">
-              <a href={"/state/"+window.location.pathname.split("/")[2]+"/"+window.location.pathname.split("/")[3] }>{window.location.pathname.split("/")[3] }</a>
+              <a href={"/country/"+window.location.pathname.split("/")[2]+"/state/"+window.location.pathname.split("/")[4]+"/city/"+window.location.pathname.split("/")[6]+"/industry/"+window.location.pathname.split("/")[8]+"/"+window.location.pathname.split("/")[9]+"/function/"+window.location.pathname.split("/")[11]+"/"+window.location.pathname.split("/")[12]+"/subfunction/" +window.location.pathname.split("/")[14]+"/"+window.location.pathname.split("/")[15]}>{window.location.pathname.split("/")[6] }</a>
               </li>  : null }  
           </ul>
           </div>
