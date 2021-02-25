@@ -616,19 +616,19 @@ exports.mapwiseJobs = (req, res, next)=>{
     if (req.body.district  && req.body.district != "all") {
         selector["$and"].push({ "location.district" :  req.body.district   }) 
     }
-    if (req.body.industry_id) {
+    if (req.body.industry_id && req.body.industry_id != "all") {
     	req.body.industry_id.map(elem => {
     		industry_ids.push(ObjectID(elem.id))
     	})
     	selector["$and"].push({ "jobBasicInfo.industry_id" : { $in: industry_ids } });
     }
-    if (req.body.functionalArea_id) {
+    if (req.body.functionalArea_id && req.body.functionalArea_id != "all") {
     	req.body.functionalArea_id.map(elem => {
     		funarea_ids.push(ObjectID(elem.id))
     	})
     	selector["$and"].push({ "jobBasicInfo.functionalarea_id" : { $in: funarea_ids } });
     }
-    if (req.body.subfunctionalArea_id) {
+    if (req.body.subfunctionalArea_id && req.body.subfunctionalArea_id != "all" ) {
         req.body.subfunctionalArea_id.map(elem => {
             subfunarea_ids.push(ObjectID(elem.id))
         })
@@ -688,19 +688,19 @@ exports.functonalAreaJobs = (req, res, next)=>{
     if (req.body.district && req.body.district != "all") {
         selector["$and"].push({ "location.district" :  req.body.district   }) 
     }
-    if (req.body.industry_id) {
+    if (req.body.industry_id && req.body.industry_id != "all") {
     	req.body.industry_id.map(elem => {
     		industry_ids.push(ObjectID(elem.id))
     	})
     	selector["$and"].push({ "jobBasicInfo.industry_id" : { $in: industry_ids } });
     }
-    if (req.body.functionalArea_id) {
+    if (req.body.functionalArea_id && req.body.functionalArea_id != "all") {
     	req.body.functionalArea_id.map(elem => {
     		funarea_ids.push(ObjectID(elem.id))
     	})
     	selector["$and"].push({ "jobBasicInfo.functionalarea_id" : { $in: funarea_ids } });
     }
-    if (req.body.subfunctionalArea_id) {
+    if (req.body.subfunctionalArea_id && req.body.subfunctionalArea_id != "all") {
         req.body.subfunctionalArea_id.map(elem => {
             subfunarea_ids.push(ObjectID(elem.id))
         })
@@ -756,19 +756,19 @@ exports.subfunctionalAreaJobs = (req, res, next)=>{
     if (req.body.district && req.body.district != "all") {
         selector["$and"].push({ "location.district" :  req.body.district   }) 
     }
-    if (req.body.industry_id) {
+    if (req.body.industry_id && req.body.industry_id != "") {
     	req.body.industry_id.map(elem => {
     		industry_ids.push(ObjectID(elem.id))
     	})
     	selector["$and"].push({ "jobBasicInfo.industry_id" : { $in: industry_ids } });
     }
-    if (req.body.functionalArea_id) {
+    if (req.body.functionalArea_id && req.body.functionalArea_id != "all") {
     	req.body.functionalArea_id.map(elem => {
     		funarea_ids.push(ObjectID(elem.id))
     	})
     	selector["$and"].push({ "jobBasicInfo.functionalarea_id" : { $in: funarea_ids } });
     }
-    if (req.body.subfunctionalArea_id) {
+    if (req.body.subfunctionalArea_id && req.body.subfunctionalArea_id != "all") {
         req.body.subfunctionalArea_id.map(elem => {
             subfunarea_ids.push(ObjectID(elem.id))
         })
@@ -822,19 +822,19 @@ exports.industrialJobs = (req, res, next)=>{
     if (req.body.district && req.body.district != "all") {
         selector["$and"].push({ "location.district" :  req.body.district   }) 
     }
-    if (req.body.industry_id) {
+    if (req.body.industry_id && req.body.industry_id != "all") {
     	req.body.industry_id.map(elem => {
     		industry_ids.push(ObjectID(elem.id))
     	})
     	selector["$and"].push({ "jobBasicInfo.industry_id" : { $in: industry_ids } });
     }
-    if (req.body.functionalArea_id) {
+    if (req.body.functionalArea_id && req.body.functionalArea_id != "all") {
     	req.body.functionalArea_id.map(elem => {
     		funarea_ids.push(ObjectID(elem.id))
     	})
     	selector["$and"].push({ "jobBasicInfo.functionalarea_id" : { $in: funarea_ids } });
     }
-    if (req.body.subfunctionalArea_id) {
+    if (req.body.subfunctionalArea_id && req.body.subfunctionalArea_id != "all") {
         req.body.subfunctionalArea_id.map(elem => {
             subfunarea_ids.push(ObjectID(elem.id))
         })

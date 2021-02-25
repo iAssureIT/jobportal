@@ -168,7 +168,7 @@ class Layout extends Component  {
                         <Switch >
 
                             <Route exact path="/"        component={Homepage}  />
-                            <Route exact path="/country/:countryCode/state/:stateCode/city/:district/function/:functionalArea/:functionalArea_id/subfunction/:subfunctionalArea/:subfunctionalArea_id"     component={Homepage}  />
+                            <Route exact path="/country/:countryCode/state/:stateCode/city/:district/industry/:industryName/:industry_id/function/:functionalArea/:functionalArea_id/subfunction/:subfunctionalArea/:subfunctionalArea_id"     component={Homepage}  />
                                    
                             {/*<Route exact path="/country/:countryCode/state/:stateCode"               component={Homepage}  />
                             <Route exact path="/country/:countryCode/state/:stateCode/functional/:functionalArea/:functionalArea_id"               component={Homepage}  />

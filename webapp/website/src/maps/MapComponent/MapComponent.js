@@ -9,7 +9,8 @@ const MapView = (pathname) => {
             //case pathname.pathname.pathname.url : return <India />;
 	        case "/":   return <India />;
 
-            case "/country/"+pathname.pathname.pathname.params.countryCode+"/state/"+pathname.pathname.pathname.params.stateCode+"/"+pathname.pathname.pathname.params.district :   return <India />;
+            case "/country/"+pathname.pathname.pathname.params.countryCode+"/state/all/city/"+pathname.pathname.pathname.params.district+"/industry/"+pathname.pathname.pathname.params.industryName+"/"+pathname.pathname.pathname.params.industry_id+"/function/"+pathname.pathname.pathname.params.functionalArea+"/"+pathname.pathname.pathname.params.functionalArea_id+"/subfunction/"+pathname.pathname.pathname.params.subfunctionalArea+"/"+pathname.pathname.pathname.params.subfunctionalArea_id :  
+                    return <India />;
 
 	        // case "/country/"+pathname.pathname.pathname.params.countryCode+"/state/MH/city/all/function/all/0/subfunction/all/0":   const Maharashtra = React.lazy(() => import('../Maharashtra/Maharashtra.js'))
 	        // 	                return <Maharashtra/> ;

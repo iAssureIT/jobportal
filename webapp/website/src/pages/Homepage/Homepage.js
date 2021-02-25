@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 //import India from '../../maps/India/India.js';
 import MapComponent from '../../maps/MapComponent/MapComponent.js';
 import FunctionalComponent from '../../blocks/FunctionalComponent/FunctionalComponent.js';
+import IndustrialComponent from '../../blocks/IndustrialComponent/IndustrialComponent.js';
 
-import FunctionalAreawiseJobs from '../../blocks/FunctionalAreawiseJobs/FunctionalAreawiseJobs.js';
 import IndustrywiseJobs from '../../blocks/IndustrywiseJobs/IndustrywiseJobs.js';
 import LeftSideFilters from '../../blocks/LeftSideFilters/LeftSideFilters.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -34,17 +34,12 @@ class HomePage extends Component {
     var selector = this.props.selector;
     
     selector.countryCode = "IN"; 
-    //console.log("path",this.props.match)
-    //if (window.location.pathname.split("/")[1] == "state" ) {
+    
     //========== HomePage =============// 
     if(this.props.match.path=="/"){
       mapAction.filterMapData(selector);
     } 
-    if(this.props.match.path=="/country/:countryCode/state/:stateCode"){
-      
-      selector.stateCode = this.props.match.params.stateCode 
-      mapAction.filterMapData(selector);
-    }
+    
     if(this.props.match.path=="/country/:countryCode/state/:stateCode/city/:district/industry/:industryName/:industry_id/function/:functionalArea/:functionalArea_id/subfunction/:subfunctionalArea/:subfunctionalArea_id"){
       
       selector.stateCode = this.props.match.params.stateCode 
@@ -65,6 +60,8 @@ class HomePage extends Component {
         mapAction.filterFunctionalData(selector);
       }else if(this.props.match.params.subfunctionalArea == "all"){
         mapAction.filterSubfunctionalData(selector);
+      }else if(this.props.match.params.industryName != "all"){
+        mapAction.filterJobList(selector);
       }else{
         mapAction.filterJobList(selector);
       }
@@ -229,7 +226,12 @@ class HomePage extends Component {
       mapAction.filterSubfunctionalData(this.props.selector);
     }
     if (viewMode=="industrialView") {
-      mapAction.filterIndustrialData(this.props.selector);
+      if (this.props.match.industryName=="all") {
+        mapAction.filterIndustrialData(this.props.selector);
+      }else{
+        mapAction.filterJobList(this.props.selector);
+      }
+      
     }
     mapAction.jobCount(selector);
   }
@@ -292,7 +294,7 @@ class HomePage extends Component {
 
               <div id="industrywise" className={this.props.viewMode == "industrialView" ? "tab-pane fade in active" : "tab-pane fade" }>
               { this.props.showLoader ? <Loader type="placeholderloader"  /> :
-                <IndustrywiseJobs industrialJobs={this.props.industrialJobs}/> }
+                <IndustrialComponent pathname={this.props.match}/> }
               </div>
             </div>
           </div>
