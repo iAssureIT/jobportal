@@ -22,7 +22,7 @@ const FunctionalArea = (pathname) => {
             var Comp =  React.lazy(() => import('../jobList/JobList.js')) 
             Comp = <Comp/> 
         }
-        console.log("in else if")
+        //console.log("in else if")
         return Comp
     }
     

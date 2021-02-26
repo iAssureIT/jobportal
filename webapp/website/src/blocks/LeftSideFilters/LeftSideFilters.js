@@ -150,11 +150,14 @@ class LeftSideFilters extends Component{
     console.log(selecteditems)
     selector.countryCode = "IN"; 
     //selector.stateCode = selecteditems.currentTarget.value; 
-    if (this.props.match.path=="/state/:stateCode") {
+    // if (this.props.match.path=="/") {
+    //   selector.stateCode = this.props.match.params.stateCode
+    // }
+    if (this.props.match.path=="/country/:countryCode/state/:stateCode/city/:district/industry/:industryName/:industry_id/function/:functionalArea/:functionalArea_id/subfunction/:subfunctionalArea/:subfunctionalArea_id") {
+      
       selector.stateCode = this.props.match.params.stateCode
-    }
-    if (this.props.match.path=="/state/:stateCode/:district") {
       selector.district = this.props.match.params.district
+
     }
     
     if (filterType === 'industry') {
@@ -231,7 +234,7 @@ class LeftSideFilters extends Component{
       
       <div className="row">
 
-          <div className="form-group col-lg-12">
+          {/*<div className="form-group col-lg-12">
             <div className='row'>
               <div className="input-group filtersColor col-lg-12">
                 
@@ -268,7 +271,7 @@ class LeftSideFilters extends Component{
                             
               </div>
             </div>
-          </div> 
+          </div> */}
 
 
            <div className="form-group col-lg-12">

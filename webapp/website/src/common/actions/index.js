@@ -68,6 +68,7 @@ export const setAppliedJoblist = (appliedJoblist )=> ({
 });
 export function filterMapData(selector) {
   	return dispatch =>{
+  		console.log(selector)
   		dispatch(setFilterSelector(selector));
 	  	return axios.post("/api/jobs/mapwise-jobs",selector)
 	    .then((response)=>{
@@ -82,7 +83,7 @@ export function filterMapData(selector) {
 }
 export function jobCount(selector) {
   	return dispatch =>{
-  		console.log(selector)
+  		//console.log(selector)
   		dispatch(setFilterSelector(selector));
 	  	return axios.post("/api/jobs/job-count",selector)
 	    .then((response)=>{

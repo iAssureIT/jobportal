@@ -20,33 +20,31 @@ class India extends Component{
 	componentDidMount(){
 		
 		var stateWiseCount = {};
+		for (var key in this.state) {
+		  if (this.state.hasOwnProperty(key)) {
+		    stateWiseCount[key] = 0;
+		  }
+		}
 		for (var i=0; i < this.props.mapJobs.length; i++) {
-	    	
+	    		
 	       stateWiseCount[this.props.mapJobs[i]._id] =  this.props.mapJobs[i].count;
 	    }
-	    if (this.props.mapJobs.length == 0) {
-	    	for (var key in this.state) {
-			  if (this.state.hasOwnProperty(key)) {
-			    stateWiseCount[key] = 0;
-			  }
-			}
-	    }
+	    
 	    this.setState(stateWiseCount)
 	}
 	componentWillReceiveProps(nextProps){
 		var stateWiseCount = {};
-		
+		console.log("state",this.state)
+	    for (var key in this.state) {
+		  if (this.state.hasOwnProperty(key)) {
+		    stateWiseCount[key] = 0;
+		  }
+		}
 	    for (var i=0; i < nextProps.mapJobs.length; i++) {
-	    	
-	       stateWiseCount[nextProps.mapJobs[i]._id] =  nextProps.mapJobs[i].count;
+	    	  
+			stateWiseCount[nextProps.mapJobs[i]._id] =  nextProps.mapJobs[i].count;
 	    }
-	    if (nextProps.mapJobs.length == 0) {
-	    	for (var key in this.state) {
-			  if (this.state.hasOwnProperty(key)) {
-			    stateWiseCount[key] = 0;
-			  }
-			}
-	    }
+	  
 	    this.setState(stateWiseCount)
 	}
 	

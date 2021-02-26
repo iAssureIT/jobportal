@@ -13,12 +13,12 @@ const Industrial = (pathname) => {
     else if (pathname.pathname.pathname.url == "/country/"+pathname.pathname.pathname.params.countryCode+"/state/"+pathname.pathname.pathname.params.stateCode+"/city/"+pathname.pathname.pathname.params.district+"/industry/"+pathname.pathname.pathname.params.industryName+"/"+pathname.pathname.pathname.params.industry_id+"/function/"+pathname.pathname.pathname.params.functionalArea+"/"+pathname.pathname.pathname.params.functionalArea_id+"/subfunction/"+pathname.pathname.pathname.params.subfunctionalArea+"/"+pathname.pathname.pathname.params.subfunctionalArea_id) {
         
         if (pathname.pathname.pathname.params.industryName != "all") {
-            console.log("in all")
+            //console.log("in all")
             var Comp =  React.lazy(() => import('../jobList/JobList.js')) 
             Comp = <Comp/> 
         }
         else {
-            console.log("jsahh")
+            //console.log("jsahh")
             var Comp =  IndustrialJobs
             Comp = <Comp/> 
         }

@@ -28,7 +28,7 @@ class IndustrywiseJobs extends Component{
   
     render(){
     
-    console.log(this.props.industrialJobs)
+    //console.log(this.props.industrialJobs)
 
     return(
                 <section className="col-lg-12 AllJobsWrapper">

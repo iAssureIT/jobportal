@@ -226,7 +226,8 @@ class HomePage extends Component {
       mapAction.filterSubfunctionalData(this.props.selector);
     }
     if (viewMode=="industrialView") {
-      if (this.props.match.industryName=="all") {
+      console.log(this.props)
+      if (this.props.match.path == "/" || this.props.match.industryName=="all") {
         mapAction.filterIndustrialData(this.props.selector);
       }else{
         mapAction.filterJobList(this.props.selector);

@@ -50,6 +50,7 @@ const designationMasterRoutes			= require("./coreAdmin/designationMaster/RoutesD
 const jobCategoryMasterRoutes			= require("./coreAdmin/JobCategoryMaster/RoutesJobCategory.js");
 const jobTypeMasterRoutes				= require("./coreAdmin/JobTypeMaster/RoutesJobType.js");
 const jobRoleMasterRoutes				= require("./coreAdmin/JobRoleMaster/RoutesJobRole.js");
+const jobSectorMasterRoutes				= require("./coreAdmin/JobSectorMaster/RoutesJobSector.js");
 const jobTimeMasterRoutes				= require("./coreAdmin/JobTimeMaster/RoutesJobTime.js");
 
 const qualificationLevelMasterRoutes	= require("./coreAdmin/QualificationLevelMaster/RoutesQualificationLevel.js");
@@ -162,6 +163,7 @@ app.use("/api/jobcategorymaster", jobCategoryMasterRoutes);
 app.use("/api/jobtypemaster", jobTypeMasterRoutes);
 app.use("/api/jobtimemaster", jobTimeMasterRoutes);
 app.use("/api/jobrolemaster", jobRoleMasterRoutes);
+app.use("/api/jobsectormaster", jobSectorMasterRoutes);
 
 app.use("/api/qualificationlevelmaster", qualificationLevelMasterRoutes);
 app.use("/api/qualificationmaster", qualificationMasterRoutes);

@@ -64,7 +64,7 @@ class Header extends Component{
       } 
       //console.log(selector)
       mapAction.jobCount(selector);*/
-      console.log(window.location.pathname.split("/"))
+
       if (window.location.pathname.split("/")[3] == "state" ) {
         var stateName = "";
           //selector.stateCode = window.location.pathname.split("/")[2] 
@@ -189,7 +189,8 @@ class Header extends Component{
 
 
     render(){
-    
+    // console.log(window.location.pathname.split("/"))
+    // console.log(window.location.pathname.split("/")[6])
     const selectedState = this.props.selectedState;
     
     if (this.props.userDetails.loggedIn) {    
@@ -204,13 +205,16 @@ class Header extends Component{
           <div className="breadCrumbHeader col-lg-3">
           <ul className="breadCrumbInner">
               <li className="breadCrumbInnerli"><a href="/">India</a></li>
+              { window.location.pathname.split("/")[4] != "all" ?
               <li className= {window.location.pathname.split("/")[3] == "state" && window.location.pathname.split("/")[6]!="all" ? "breadCrumbInnerli" : "breadCrumbInnerli selectedState"}>
               <a href={"/country/"+window.location.pathname.split("/")[2] +"/state/"+window.location.pathname.split("/")[4]+"/city/all/industry/"+window.location.pathname.split("/")[8]+"/"+window.location.pathname.split("/")[9]+"/function/"+window.location.pathname.split("/")[11]+"/"+window.location.pathname.split("/")[12]+"/subfunction/"+window.location.pathname.split("/")[14]+"/"+window.location.pathname.split("/")[15]}>{selectedState}</a>
-              </li>  
-              { window.location.pathname.split("/")[3] == "state" && window.location.pathname.split("/")[6]!="all" ? 
+              </li>
+              : null }    
+              { window.location.pathname.split("/")[4] != "all" && window.location.pathname.split("/")[6] != "all" ? 
               <li className="breadCrumbInnerli selectedState">
               <a href={"/country/"+window.location.pathname.split("/")[2]+"/state/"+window.location.pathname.split("/")[4]+"/city/"+window.location.pathname.split("/")[6]+"/industry/"+window.location.pathname.split("/")[8]+"/"+window.location.pathname.split("/")[9]+"/function/"+window.location.pathname.split("/")[11]+"/"+window.location.pathname.split("/")[12]+"/subfunction/" +window.location.pathname.split("/")[14]+"/"+window.location.pathname.split("/")[15]}>{window.location.pathname.split("/")[6] }</a>
-              </li>  : null }  
+              </li>  : null } 
+
           </ul>
           </div>
           : <div className="breadCrumbHeader col-lg-3"></div>
@@ -407,13 +411,16 @@ class Header extends Component{
           <div className="breadCrumbHeader col-lg-3">
           <ul className="breadCrumbInner">
               <li className="breadCrumbInnerli"><a href="/">India</a></li>
+              { window.location.pathname.split("/")[4] != "all" ?
               <li className= {window.location.pathname.split("/")[3] == "state" && window.location.pathname.split("/")[6]!="all" ? "breadCrumbInnerli" : "breadCrumbInnerli selectedState"}>
               <a href={"/country/"+window.location.pathname.split("/")[2] +"/state/"+window.location.pathname.split("/")[4]+"/city/all/industry/"+window.location.pathname.split("/")[8]+"/"+window.location.pathname.split("/")[9]+"/function/"+window.location.pathname.split("/")[11]+"/"+window.location.pathname.split("/")[12]+"/subfunction/"+window.location.pathname.split("/")[14]+"/"+window.location.pathname.split("/")[15]}>{selectedState}</a>
-              </li>  
-              { window.location.pathname.split("/")[3] == "state" && window.location.pathname.split("/")[6]!="all" ? 
+              </li>
+              : null }    
+              { window.location.pathname.split("/")[4] != "all" && window.location.pathname.split("/")[6] != "all" ? 
               <li className="breadCrumbInnerli selectedState">
               <a href={"/country/"+window.location.pathname.split("/")[2]+"/state/"+window.location.pathname.split("/")[4]+"/city/"+window.location.pathname.split("/")[6]+"/industry/"+window.location.pathname.split("/")[8]+"/"+window.location.pathname.split("/")[9]+"/function/"+window.location.pathname.split("/")[11]+"/"+window.location.pathname.split("/")[12]+"/subfunction/" +window.location.pathname.split("/")[14]+"/"+window.location.pathname.split("/")[15]}>{window.location.pathname.split("/")[6] }</a>
-              </li>  : null }  
+              </li>  : null } 
+
           </ul>
           </div>
           : <div className="breadCrumbHeader col-lg-3"></div>

@@ -44,9 +44,9 @@ class JobPosting extends Component {
             jobTime                     :   "",
             jobtime_id                  :   "",
             jobTimeArray                :   [],
-            jobCategory                 :   "",
-            jobcategory_id              :   "",
-            jobCategoryArray            :   [],
+            jobSector                 :   "",
+            jobsector_id              :   "",
+            jobSectorArray            :   [],
             positions                   :   "",
             jobDesc                     :   "",
             lastDateOfAppl              :   "",
@@ -173,12 +173,12 @@ class JobPosting extends Component {
                 Swal.fire("Error while getting List data", error.message, 'error');
             })
 
-        Axios.get("/api/jobcategorymaster/get/list")
+        Axios.get("/api/jobsectormaster/get/list")
             .then(response => {
                 this.setState({
-                    jobCategoryArray: response.data
+                    jobSectorArray: response.data
                 });
-                /*console.log("jobCategoryArray", this.state.jobCategoryArray);*/
+                /*console.log("jobSectorArray", this.state.jobSectorArray);*/
             })
             .catch(error => {
                 Swal.fire("Error while getting List data", error.message, 'error');
@@ -226,8 +226,8 @@ class JobPosting extends Component {
                         jobType                 :   response.data.jobBasicInfo.jobtype_id.jobType,
                         jobtime_id              :   response.data.jobBasicInfo.jobtime_id,
                         jobTime                 :   response.data.jobBasicInfo.jobtime_id.jobTime,
-                        jobcategory_id          :   response.data.jobBasicInfo.jobcategory_id,
-                        jobCategory             :   response.data.jobBasicInfo.jobcategory_id.jobCategory,
+                        jobsector_id          :   response.data.jobBasicInfo.jobsector_id,
+                        jobSector             :   response.data.jobBasicInfo.jobsector_id.jobSector,
                         positions               :   response.data.jobBasicInfo.positions,
                         jobDesc                 :   response.data.jobBasicInfo.jobDesc,
                         lastDateOfAppl          :   response.data.jobBasicInfo.lastDateOfAppl ? Moment(response.data.jobBasicInfo.lastDateOfAppl).format("YYYY-MM-DD") : "",
@@ -280,8 +280,8 @@ class JobPosting extends Component {
                     var jobTime = this.state.jobTimeArray.filter((data,index)=>{
                         if (data._id == this.state.jobtime_id) { return data}
                     })
-                    var jobCategory = this.state.jobCategoryArray.filter((data,index)=>{
-                        if (data._id == this.state.jobcategory_id) { return data}
+                    var jobSector = this.state.jobSectorArray.filter((data,index)=>{
+                        if (data._id == this.state.jobsector_id) { return data}
                     })
                     var primarySkillTags = [];
                     var secondarySkillTags = [];
@@ -617,8 +617,8 @@ class JobPosting extends Component {
                 jobtype_id              :   this.state.jobtype_id,
                 jobTime                 :   this.state.jobTime,
                 jobtime_id              :   this.state.jobtime_id,
-                jobCategory             :   this.state.jobCategory,
-                jobcategory_id          :   this.state.jobcategory_id,
+                jobSector               :   this.state.jobSector,
+                jobsector_id            :   this.state.jobsector_id,
                 positions               :   this.state.positions,
                 jobDesc                 :   this.state.jobDesc,
                 lastDateOfAppl          :   this.state.lastDateOfAppl,
@@ -682,7 +682,7 @@ class JobPosting extends Component {
                         workFromHome            :   false,
                         jobtype_id              :   "",
                         jobtime_id              :   "",
-                        jobcategory_id          :   "",
+                        jobsector_id            :   "",
                         positions               :   "",
                         jobDesc                 :   "",
                         lastDateOfAppl          :   "",
@@ -1078,16 +1078,16 @@ class JobPosting extends Component {
         
     }
 
-    onChangeJobCategory(event){
+    onChangeJobSector(event){
         const {name,value} = event.target;
         this.setState({ [name]:value });  
         
-        var jobcategory_id;
-        if (document.querySelector('#jobCategory option[value="' + value + '"]')) {
-            jobcategory_id = document.querySelector('#jobCategory option[value="' + value + '"]').getAttribute("data-value")
-        }else{ jobcategory_id = "" }
+        var jobsector_id;
+        if (document.querySelector('#jobSector option[value="' + value + '"]')) {
+            jobsector_id = document.querySelector('#jobSector option[value="' + value + '"]').getAttribute("data-value")
+        }else{ jobsector_id = "" }
 
-        this.setState({ jobcategory_id : jobcategory_id },()=>{
+        this.setState({ jobsector_id : jobsector_id },()=>{
             console.log(this.state)
         });  
     }
@@ -1335,6 +1335,20 @@ render(){
 									
 									<div className="col-lg-12 addJobFieldRow text-left">
 										<div className="row">
+                                            <div className="col-lg-4">
+                                                <label htmlFor="jobSector" className="addjobformLable"> Job Sector </label>
+                                                <div className="input-group">
+                                                    <span className="input-group-addon addJobFormField"><i className="fa fa-list-alt"></i></span> 
+                                                       <input type="text" list="jobSector" className="form-control addJobFormField" refs="jobSector" id="selectjobSector" maxLength="50" value={this.state.jobSector} name="jobSector"
+                                                        onChange={this.onChangeJobSector.bind(this)} />
+                                                        <datalist name="jobSector" id="jobSector" className="jobSectorArray" >
+                                                            {this.state.jobSectorArray.map((item, key) =>
+                                                              <option key={key} value={item.jobSector} data-value={item._id}/>
+                                                            )}
+                                                        </datalist>
+                                                </div>
+                                                <span id="jobSectorError" className="errorMsg"></span>
+                                            </div>
 											<div className="col-lg-4">
 												<label htmlFor="jobType" className="addjobformLable"> Job Type </label>
 												<div className="input-group col-lg-12">
@@ -1365,20 +1379,7 @@ render(){
                                                 <span id="jobTimeError" className="errorMsg"></span>
 											</div>
 											
-											<div className="col-lg-4">
-												<label htmlFor="jobCategory" className="addjobformLable"> Job Category </label>
-												<div className="input-group">
-													<span className="input-group-addon addJobFormField"><i className="fa fa-list-alt"></i></span> 
-													   <input type="text" list="jobCategory" className="form-control addJobFormField" refs="jobCategory" id="selectjobCategory" maxLength="50" value={this.state.jobCategory} name="jobCategory"
-                                                        onChange={this.onChangeJobCategory.bind(this)} />
-                                                        <datalist name="jobCategory" id="jobCategory" className="jobCategoryArray" >
-                                                            {this.state.jobCategoryArray.map((item, key) =>
-                                                              <option key={key} value={item.jobCategory} data-value={item._id}/>
-                                                            )}
-                                                        </datalist>
-												</div>
-                                                <span id="jobCategoryError" className="errorMsg"></span>
-											</div>
+											
 										</div>
 									</div>
 
