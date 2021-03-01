@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const jobSectorSchema = mongoose.Schema({
+const jobRoleSchema = mongoose.Schema({
     _id                       : mongoose.Schema.Types.ObjectId,
     jobSector                 : { type: String, index: true, unique: true  },
     createdBy                 : { type: mongoose.Schema.Types.ObjectId, ref: 'users' },
@@ -14,4 +14,4 @@ const jobSectorSchema = mongoose.Schema({
                                 ]
 });
 
-module.exports = mongoose.model('jobsectormasters',jobSectorSchema);
+module.exports = mongoose.model('jobshiftmasters',jobRoleSchema);

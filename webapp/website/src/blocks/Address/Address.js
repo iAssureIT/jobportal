@@ -437,7 +437,7 @@ class Address extends Component{
 			document.getElementById("pincodeError").innerHTML=  
 			"Please enter your pincode";  
 			status=false; 
-		}else{
+		}else{ 
 
 			if(!regPincode.test(this.state.pincode)){
 		      	document.getElementById("pincodeError").innerHTML = "Please enter valid pincode";  
@@ -450,7 +450,7 @@ class Address extends Component{
 		}
 	
 		
-		 return status;
+		return status;
 	}
 
 	//========== Validation End ==================
