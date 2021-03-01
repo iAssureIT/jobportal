@@ -285,7 +285,11 @@ class Address extends Component{
 	
 	handleSubmit(event){
 		event.preventDefault();
-    	this.props.history.push("/academics/"+this.state.candidate_id);
+		var status =  this.validateForm();
+		console.log(status);
+			if(status==true){
+    		this.props.history.push("/academics/"+this.state.candidate_id);
+    	}
 	}
 	
 	camelCase(str) {
@@ -680,7 +684,7 @@ class Address extends Component{
 										<span className="input-group-addon inputBoxIcon">
 											<FontAwesomeIcon icon="map-marked-alt" /> 
 										</span> 
-										<input type="text" name="pincode" id="pincode" 
+										<input type="number" name="pincode" id="pincode" 
 										 className="form-control inputBox" 
 										 value={this.state.pincode} 
 										 onChange={this.handleChange.bind(this)} />

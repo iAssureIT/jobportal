@@ -284,7 +284,7 @@ class Header extends Component{
 
                                 
                                  
-                                   ((this.props.userDetails.profilePicture)=== undefined)
+                                   ((this.props.userDetails.profilePicture)=== undefined || (this.props.userDetails.profilePicture)===  null)
                                   ?
                                   <FontAwesomeIcon icon={['far', 'user']} />
                                   :

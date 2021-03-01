@@ -396,7 +396,7 @@ class Certification extends Component{
 	insetData(formValues,event){
 		var status =  this.validateForm();
 
-		if (status) {
+		if (status==true) {
 		if(this.state.certificationToggel===false){
 				Axios.patch("/api/candidatemaster/patch/addCandidateSkill",formValues)
 				 .then(response=>{
@@ -437,7 +437,11 @@ class Certification extends Component{
 	}
 	handleSubmit(event){
 		event.preventDefault();
+		var status =  this.validateForm();
+
+		if (status==true) {
 		 this.props.history.push("/experience/"+this.state.candidate_id);
+		}
 	}
 
 	//========== User Define Function End ==================
@@ -537,7 +541,7 @@ class Certification extends Component{
 											Type 
 											<sup className="nameTitleFormStar">*</sup>
 										</label>
-										<div className="input-group genderFeildWrapper">
+										<div className="input-group genderFeildWrapper skillsGenderWrapper">
 											<div className ={ this.state.isPrimary===true
 													 ? "genderFeild col-lg-6 genderFeildActive"
 													 : "genderFeild col-lg-6"}  
