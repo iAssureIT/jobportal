@@ -20,12 +20,22 @@ class LeftSideFilters extends Component{
 
       allIndustries         : [],
       allFunctionalAreas    : [],
+      allSectors            : [],
       allRoles              : [],
+      allJobTypes           : [],
+      allJobTime            : [],
+      allJobShift           : [],
+      allSkills             : [],
       inputRole             : [],
 
       allExperiences        : "",
       inputExperience       : [ {"experience": "0-1 year",  "minvalue": 0, "maxvalue": 1 },
-                                {"experience": "1-3 years", "minvalue": 1, "maxvalue": 3 } 
+                                {"experience": "1-3 years", "minvalue": 1, "maxvalue": 3 },
+                                {"experience": "3-5 year",  "minvalue": 3, "maxvalue": 5 },
+                                {"experience": "5-7 years", "minvalue": 5, "maxvalue": 7 },
+                                {"experience": "7-10 years", "minvalue": 7, "maxvalue": 10 },
+                                {"experience": "10-12 years", "minvalue": 10, "maxvalue": 12 }, 
+                                {"experience": "12-15 years", "minvalue": 12, "maxvalue": 15 }   
                               ],
         
       industry              : [],
@@ -92,7 +102,13 @@ class LeftSideFilters extends Component{
  componentDidMount(){
   let allIndustries       = [];
   let allFunctionalAreas  = [];
-  let allRoles            = [] 
+  let allSectors          = [];
+  let allJobTypes         = [];
+  let allJobTime          = [];
+  let allJobShift         = [];
+  let allRoles            = []; 
+  let allSkills            = [];
+
       Axios.get("/api/industrymaster/get/list")
       .then(response => {
         
@@ -120,6 +136,54 @@ class LeftSideFilters extends Component{
         Swal.fire("Error while getting functional areas",error.message,'error');
       })
 
+      Axios.get("/api/jobsectormaster/get/list")
+      .then(response => {
+        response.data.map((elem,index)=>{
+            
+            allSectors.push({jobSector : elem.jobSector, id: elem._id});
+        })
+        this.setState({allSectors:allSectors})
+      })
+      .catch(error=>{
+        Swal.fire("Error while getting job sectors",error.message,'error');
+      })
+
+      Axios.get("/api/jobtypemaster/get/list")
+      .then(response => {
+        response.data.map((elem,index)=>{
+            
+            allJobTypes.push({jobType : elem.jobType, id: elem._id});
+        })
+        this.setState({allJobTypes:allJobTypes})
+      })
+      .catch(error=>{
+        Swal.fire("Error while getting job type",error.message,'error');
+      })
+      
+      Axios.get("/api/jobtimemaster/get/list")
+      .then(response => {
+        response.data.map((elem,index)=>{
+            
+            allJobTime.push({jobTime : elem.jobTime, id: elem._id});
+        })
+        this.setState({allJobTime:allJobTime})
+      })
+      .catch(error=>{
+        Swal.fire("Error while getting job time",error.message,'error');
+      })
+
+      Axios.get("/api/jobshiftmaster/get/list")
+      .then(response => {
+        response.data.map((elem,index)=>{
+            
+            allJobShift.push({jobShift : elem.jobShift, id: elem._id});
+        })
+        this.setState({allJobShift:allJobShift})
+      })
+      .catch(error=>{
+        Swal.fire("Error while getting job shift",error.message,'error');
+      })
+
       Axios.get("/api/jobrolemaster/get/list")
       .then(response => {
         response.data.map((elem,index)=>{
@@ -131,6 +195,18 @@ class LeftSideFilters extends Component{
       .catch(error=>{
         Swal.fire("Error while getting job roles",error.message,'error');
       })
+
+      Axios.get("/api/skillmaster/get/list")
+      .then(response => {
+        response.data.map((elem,index)=>{
+            allSkills.push({skill : elem.skill, id: elem._id});
+        })
+        this.setState({allSkills:allSkills})
+      })
+      .catch(error=>{
+        Swal.fire("Error while getting skill",error.message,'error');
+      })
+      
   }
   onSelect(selectedList, selectedItem) {
     console.log(selectedList)
@@ -143,9 +219,7 @@ class LeftSideFilters extends Component{
 
   onSelectedItemsChange(filterType, selecteditems){
     var selector=this.state.selector;
-    var industry_ids = [];
-    var functionalArea_ids=[];
-    var jobRole_ids=[];
+    
     var {mapAction} = this.props;
     console.log(selecteditems)
     selector.countryCode = "IN"; 
@@ -162,9 +236,6 @@ class LeftSideFilters extends Component{
     
     if (filterType === 'industry') {
       if (selecteditems.length > 0) {
-        selecteditems.map((elem,index)=>{
-          industry_ids.push(elem.id);
-        })
         selector.industry_id = selecteditems;
       }else{
         delete selector.industry_id;
@@ -173,26 +244,47 @@ class LeftSideFilters extends Component{
 
     if (filterType === 'functionalArea') {
       if (selecteditems.length > 0) {
-        selecteditems.map((elem,index)=>{
-          functionalArea_ids.push(elem.id);
-        })
         selector.functionalArea_id = selecteditems;
       }else{
         delete selector.functionalArea_id
       }
     }
+    if (filterType === 'jobSector') {
+      if (selecteditems.length > 0) {
+        selector.jobSector_id = selecteditems;
+      }else{
+        delete selector.jobSector_id
+      }
+    }
+    if (filterType === 'jobType') {
+      if (selecteditems.length > 0) {
+        selector.jobType_id = selecteditems;
+      }else{
+        delete selector.jobType_id
+      }
+    }
+    if (filterType === 'jobTime') {
+      if (selecteditems.length > 0) {
+        selector.jobTime_id = selecteditems;
+      }else{
+        delete selector.jobTime_id
+      }
+    }
+    if (filterType === 'jobShift') {
+      if (selecteditems.length > 0) {
+        selector.jobShift_id = selecteditems;
+      }else{
+        delete selector.jobShift_id
+      }
+    }
     if (filterType === 'jobRole') {
       if (selecteditems.length > 0) {
-        selecteditems.map((elem,index)=>{
-          jobRole_ids.push(elem.id);
-        })
         selector.jobRole_id = selecteditems;
       }else{
         delete selector.jobRole_id
       }
     }
     if (filterType === "experience") {
-      console.log(selecteditems)
       var flattened = [], minValue, maxValue;
       selecteditems.forEach(function (v) {
         flattened.push(v.minvalue)
@@ -219,6 +311,9 @@ class LeftSideFilters extends Component{
       }
       if (this.props.viewMode=="industrialView") {
         mapAction.filterIndustrialData(this.state.selector);
+      }
+      if (this.props.viewMode=="listView") {
+        mapAction.filterJobList(this.state.selector);
       }
     })
     
@@ -273,8 +368,75 @@ class LeftSideFilters extends Component{
             </div>
           </div> */}
 
-
-           <div className="form-group col-lg-12">
+          <div className="form-group col-lg-12">
+            <div className='row'>
+              <div className="input-group col-lg-12">
+                
+                   <Multiselect className="form-control LeftSideFiltersInputBox LeftSideFiltersDrop"
+                    id="allSectors" name="allSectors" placeholder="Sector"
+                      options={this.state.allSectors}
+                      displayValue="jobSector"
+                      onSelect={this.onSelectedItemsChange.bind(this,'jobSector')} // Function will trigger on select event
+                      onRemove={this.onSelectedItemsChange.bind(this,'jobSector')}
+                        //showCheckbox={true}
+                      style={this.style}
+                   />    
+                                 
+              </div>
+            </div>
+          </div> 
+          <div className="form-group col-lg-12">
+            <div className='row'>
+              <div className="input-group col-lg-12">
+                
+                   <Multiselect className="form-control LeftSideFiltersInputBox LeftSideFiltersDrop"
+                    id="allJobTypes" name="allJobTypes" placeholder="Types"
+                      options={this.state.allJobTypes}
+                      displayValue="jobType"
+                      onSelect={this.onSelectedItemsChange.bind(this,'jobType')} // Function will trigger on select event
+                      onRemove={this.onSelectedItemsChange.bind(this,'jobType')}
+                        //showCheckbox={true}
+                        style={this.style}
+                   />    
+                                 
+              </div>
+            </div>
+          </div> 
+          <div className="form-group col-lg-12">
+            <div className='row'>
+              <div className="input-group col-lg-12">
+                
+                   <Multiselect className="form-control LeftSideFiltersInputBox LeftSideFiltersDrop"
+                    id="allJobTime" name="allJobTime" placeholder="Time"
+                      options={this.state.allJobTime}
+                      displayValue="jobTime"
+                      onSelect={this.onSelectedItemsChange.bind(this,'jobTime')} // Function will trigger on select event
+                      onRemove={this.onSelectedItemsChange.bind(this,'jobTime')}
+                        //showCheckbox={true}
+                        style={this.style}
+                   />    
+                                 
+              </div>
+            </div>
+          </div>
+          <div className="form-group col-lg-12">
+            <div className='row'>
+              <div className="input-group col-lg-12">
+                
+                   <Multiselect className="form-control LeftSideFiltersInputBox LeftSideFiltersDrop"
+                    id="allJobShift" name="allJobShift" placeholder="Shift"
+                      options={this.state.allJobShift}
+                      displayValue="jobShift"
+                      onSelect={this.onSelectedItemsChange.bind(this,'jobShift')} // Function will trigger on select event
+                      onRemove={this.onSelectedItemsChange.bind(this,'jobShift')}
+                        //showCheckbox={true}
+                        style={this.style}
+                   />    
+                                 
+              </div>
+            </div>
+          </div>
+          <div className="form-group col-lg-12">
             <div className='row'>
               <div className="input-group col-lg-12">
                 
@@ -291,7 +453,23 @@ class LeftSideFilters extends Component{
               </div>
             </div>
           </div> 
-    
+        <div className="form-group col-lg-12">
+            <div className='row'>
+              <div className="input-group col-lg-12">
+                
+                   <Multiselect className="form-control LeftSideFiltersInputBox LeftSideFiltersDrop"
+                    id="allSkills" name="allSkills" placeholder="Skills"
+                      options={this.state.allSkills}
+                      displayValue="skill"
+                      onSelect={this.onSelectedItemsChange.bind(this,'skill')} // Function will trigger on select event
+                      onRemove={this.onSelectedItemsChange.bind(this,'skill')}
+                        //showCheckbox={true}
+                        style={this.style}
+                   />    
+                                 
+              </div>
+            </div>
+          </div>
         <div className="form-group col-lg-12">
             <div className="row">
               <div className="input-group col-lg-12">

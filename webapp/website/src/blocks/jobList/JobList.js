@@ -211,7 +211,7 @@ applyJob = (jobid, company_id)=>{
 														<i className="fa fa-map-marker jobListLocation"></i> &nbsp; {elem.location.address}
 													</div>
 													<div> 
-														<i className="fa fa-users jobListNumPositions"></i> &nbsp; No of position : 10
+														<i className="fa fa-users jobListNumPositions"></i> &nbsp; No of position : {elem.jobBasicInfo.positions}
 													</div>
 												</div>
 												<div className="col-lg-1 jobListRightContent">

@@ -57,16 +57,20 @@ class HomePage extends Component {
       }
       
       if (this.props.match.params.functionalArea == "all") {
+        mapAction.setViewMode("functionalView");
         mapAction.filterFunctionalData(selector);
       }else if(this.props.match.params.subfunctionalArea == "all"){
+        mapAction.setViewMode("functionalView");
         mapAction.filterSubfunctionalData(selector);
       }else if(this.props.match.params.industryName != "all"){
+        mapAction.setViewMode("listView");
         mapAction.filterJobList(selector);
       }else{
+        mapAction.setViewMode("listView");
         mapAction.filterJobList(selector);
       }
       
-      mapAction.setViewMode("functionalView");
+      
     }
     /*if(this.props.match.path=="/country/:countryCode/state/:stateCode/city/:district/function/:functionalArea/:functionalArea_id/subfunction/:subfunctionalArea/:subfunctionalArea_id"){
       selector.stateCode = this.props.match.params.stateCode 
@@ -232,7 +236,9 @@ class HomePage extends Component {
       }else{
         mapAction.filterJobList(this.props.selector);
       }
-      
+    }
+    if (viewMode=="listView") {
+      mapAction.filterJobList(this.props.selector);
     }
     mapAction.jobCount(selector);
   }
@@ -264,7 +270,7 @@ class HomePage extends Component {
                         <a data-toggle="pill" href="#mapwise" > Map <br/> View</a> 
                       </li>
 
-                      <li className={this.props.viewMode == "functionalView" ? "viewDiv active" : "viewDiv"} onClick={this.changeViewMode.bind(this,"functionalView")}>  
+                      <li className={this.props.viewMode == "functionalView" || this.props.viewMode == "listView" ? "viewDiv active" : "viewDiv"} onClick={this.changeViewMode.bind(this,"functionalView")}>  
                         <a data-toggle="pill" href="#functionwise">Functional <br/> View</a>
                       </li>
 
@@ -288,7 +294,7 @@ class HomePage extends Component {
                 <MapComponent pathname={this.props.match}/> 
               </div>
 
-              <div id="functionwise" className= {this.props.viewMode == "functionalView" ? "tab-pane fade in active" : "tab-pane fade" } >
+              <div id="functionwise" className= {this.props.viewMode == "functionalView" || this.props.viewMode == "listView"  ? "tab-pane fade in active" : "tab-pane fade" } >
                 { this.props.showLoader ? <Loader type="placeholderloader"  /> :
                 <FunctionalComponent pathname={this.props.match}/> }
               </div>

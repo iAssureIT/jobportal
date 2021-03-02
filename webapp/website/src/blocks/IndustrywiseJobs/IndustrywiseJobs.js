@@ -17,6 +17,8 @@ class IndustrywiseJobs extends Component{
 
         mapAction.jobCount(selector);
         mapAction.filterJobList(this.props.selector);
+        mapAction.setViewMode("listView");
+        
         if(this.props.match.path=="/"){
             this.props.history.push("/country/IN/state/all/city/all/industry/"+industry+"/"+_id+"/function/all/0/subfunction/all/0");
         }

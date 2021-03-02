@@ -235,15 +235,15 @@ function insertJobSector(jobSector, createdBy){
                     });
     });
 }
-function insertJobShift(jobSector, createdBy){ 
+function insertJobShift(jobShift, createdBy){ 
     return new Promise(function(resolve,reject){ 
-        const jobSectorMaster = new JobSectorMaster({
+        const jobShiftMaster = new JobShiftMaster({
                         _id                         : new mongoose.Types.ObjectId(),
                         jobShift                    : jobShift,
                         createdBy                   : createdBy,
                         createdAt                   : new Date()
                     })
-                    jobSectorMaster.save()
+                    jobShiftMaster.save()
                     .then(data=>{
                         resolve( data._id );
                     })
@@ -334,6 +334,10 @@ exports.getJobList = (req,res,next)=>{
 	var industry_ids 	= [];
     var funarea_ids 	= [];
     var subfunarea_ids 	= [];
+    var jobsector_ids   = [];
+    var jobtype_ids     = [];
+    var jobtime_ids     = [];
+    var jobshift_ids    = []; 
     var jobroles_ids 	= [];
 
     selector['$and'] 	= [];
@@ -354,19 +358,44 @@ exports.getJobList = (req,res,next)=>{
     	})
     	selector["$and"].push({ "jobBasicInfo.industry_id" : { $in: industry_ids } });
     }
-    if (req.body.functionalArea_id) {
+    if (req.body.functionalArea_id ) {
     	req.body.functionalArea_id.map(elem => {
     		funarea_ids.push(ObjectID(elem.id))
     	})
     	selector["$and"].push({ "jobBasicInfo.functionalarea_id" : { $in: funarea_ids } });
     }
 
-    if (req.body.subfunctionalArea_id) {
+    if (req.body.subfunctionalArea_id ) {
     	req.body.subfunctionalArea_id.map(elem => {
     		subfunarea_ids.push(ObjectID(elem.id))
     	})
     	selector["$and"].push({ "jobBasicInfo.subfunctionalarea_id" : { $in: subfunarea_ids } });
     }
+    if (req.body.jobSector_id) {
+        req.body.jobSector_id.map(elem => {
+            jobsector_ids.push(ObjectID(elem.id))
+        })
+        selector["$and"].push({ "jobBasicInfo.jobsector_id" : { $in: jobsector_ids } });
+    }
+    if (req.body.jobType_id) {
+        req.body.jobType_id.map(elem => {
+            jobtype_ids.push(ObjectID(elem.id))
+        })
+        selector["$and"].push({ "jobBasicInfo.jobtype_id" : { $in: jobtype_ids } });
+    }
+    if (req.body.jobTime_id) {
+        req.body.jobTime_id.map(elem => {
+            jobtime_ids.push(ObjectID(elem.id))
+        })
+        selector["$and"].push({ "jobBasicInfo.jobtime_id" : { $in: jobtime_ids } });
+    }
+    if (req.body.jobShift_id) {
+        req.body.jobShift_id.map(elem => {
+            jobshift_ids.push(ObjectID(elem.id))
+        })
+        selector["$and"].push({ "jobBasicInfo.jobshift_id" : { $in: jobshift_ids } });
+    }
+    
     if (req.body.jobRole_id) {
     	req.body.jobRoles_id.map(elem => {
     		jobroles_ids.push(ObjectID(elem.id))
@@ -374,7 +403,7 @@ exports.getJobList = (req,res,next)=>{
     	selector["$and"].push({ "jobBasicInfo.jobrole_id" : { $in: jobroles_ids } });
     }
 
-    console.log(JSON.stringify(selector))
+    console.log("list selector - ", selector);
     
     Jobs.find(selector).sort({createdAt:1})
     .populate('company_id')
@@ -402,6 +431,10 @@ exports.getJobListForEmployer = (req,res,next)=>{
 	var industry_ids 	= [];
     var funarea_ids 	= [];
     var subfunarea_ids 	= [];
+    var jobsector_ids   = [];
+    var jobtype_ids     = [];
+    var jobtime_ids     = [];
+    var jobshift_ids    = [];
     var jobroles_ids 	= [];
 
     selector['$and'] 	= [];
@@ -416,7 +449,7 @@ exports.getJobListForEmployer = (req,res,next)=>{
     	})
     	selector["$and"].push({ "jobBasicInfo.industry_id" : { $in: industry_ids } });
     }
-    if (req.body.functionalArea_id) {
+    if (req.body.functionalArea_id ) {
     	req.body.functionalArea_id.map(elem => {
     		funarea_ids.push(ObjectID(elem.id))
     	})
@@ -428,7 +461,31 @@ exports.getJobListForEmployer = (req,res,next)=>{
     	})
     	selector["$and"].push({ "jobBasicInfo.subfunctionalarea_id" : { $in: subfunarea_ids } });
     }
-    if (req.body.jobRoles_id) {
+    if (req.body.jobSector_id) {
+        req.body.jobSector_id.map(elem => {
+            jobsector_ids.push(ObjectID(elem.id))
+        })
+        selector["$and"].push({ "jobBasicInfo.jobsector_id" : { $in: jobsector_ids } });
+    }
+    if (req.body.jobType_id) {
+        req.body.jobType_id.map(elem => {
+            jobtype_ids.push(ObjectID(elem.id))
+        })
+        selector["$and"].push({ "jobBasicInfo.jobtype_id" : { $in: jobtype_ids } });
+    }
+    if (req.body.jobTime_id) {
+        req.body.jobTime_id.map(elem => {
+            jobtime_ids.push(ObjectID(elem.id))
+        })
+        selector["$and"].push({ "jobBasicInfo.jobtime_id" : { $in: jobtime_ids } });
+    }
+    if (req.body.jobShift_id) {
+        req.body.jobShift_id.map(elem => {
+            jobshift_ids.push(ObjectID(elem.id))
+        })
+        selector["$and"].push({ "jobBasicInfo.jobshift_id" : { $in: jobshift_ids } });
+    }
+    if (req.body.jobRoles_id ) {
     	req.body.jobRoles_id.map(elem => {
     		jobroles_ids.push(ObjectID(elem.id))
     	})
@@ -564,12 +621,16 @@ exports.updateJob = (req,res,next)=>{
 	}
 }
 exports.jobCount = (req, res, next)=>{
-    console.log("req.body - ", req.body);
-    var selector = {}; 
-    var industry_ids = [];
-    var funarea_ids = [];
-    var subfunarea_ids = [];
-    var jobrole_ids = [];
+    
+    var selector        = {}; 
+    var industry_ids    = [];
+    var funarea_ids     = [];
+    var subfunarea_ids  = [];
+    var jobsector_ids   = [];
+    var jobtype_ids     = [];
+    var jobtime_ids     = [];
+    var jobshift_ids    = [];
+    var jobrole_ids     = [];
 
     selector['$and']=[];
    
@@ -588,19 +649,43 @@ exports.jobCount = (req, res, next)=>{
         })
         selector["$and"].push({ "jobBasicInfo.industry_id" : { $in: industry_ids } });
     }
-    if (req.body.functionalArea_id) {
+    if (req.body.functionalArea_id ) {
         req.body.functionalArea_id.map(elem => {
             funarea_ids.push(ObjectID(elem.id))
         })
         selector["$and"].push({ "jobBasicInfo.functionalarea_id" : { $in: funarea_ids } });
     }
-    if (req.body.subfunctionalArea_id) {
+    if (req.body.subfunctionalArea_id ) {
         req.body.subfunctionalArea_id.map(elem => {
             subfunarea_ids.push(ObjectID(elem.id))
         })
         selector["$and"].push({ "jobBasicInfo.subfunctionalarea_id" : { $in: subfunarea_ids } });
     }
-    if (req.body.jobRole_id) {
+    if (req.body.jobSector_id) {
+        req.body.jobSector_id.map(elem => {
+            jobsector_ids.push(ObjectID(elem.id))
+        })
+        selector["$and"].push({ "jobBasicInfo.jobsector_id" : { $in: jobsector_ids } });
+    }
+    if (req.body.jobType_id) {
+        req.body.jobType_id.map(elem => {
+            jobtype_ids.push(ObjectID(elem.id))
+        })
+        selector["$and"].push({ "jobBasicInfo.jobtype_id" : { $in: jobtype_ids } });
+    }
+    if (req.body.jobTime_id) {
+        req.body.jobTime_id.map(elem => {
+            jobtime_ids.push(ObjectID(elem.id))
+        })
+        selector["$and"].push({ "jobBasicInfo.jobtime_id" : { $in: jobtime_ids } });
+    }
+    if (req.body.jobShift_id) {
+        req.body.jobShift_id.map(elem => {
+            jobshift_ids.push(ObjectID(elem.id))
+        })
+        selector["$and"].push({ "jobBasicInfo.jobshift_id" : { $in: jobshift_ids } });
+    }
+    if (req.body.jobRole_id ) {
         req.body.jobRole_id.map(elem => {
             jobrole_ids.push(ObjectID(elem.id))
         })
@@ -610,7 +695,7 @@ exports.jobCount = (req, res, next)=>{
     if (req.body.minExp != null  && req.body.maxExp != null) {
         selector["$and"].push({ "eligibility.minExperience" : { '$gte' : req.body.minExp,  '$lte' : req.body.maxExp} });
     }
-    
+    console.log("count selector - ", selector);
     Jobs.aggregate([
         { $match    : selector },
         { $count    : "jobCount" },
@@ -630,11 +715,15 @@ exports.jobCount = (req, res, next)=>{
 }
 exports.mapwiseJobs = (req, res, next)=>{
 	//console.log("req.body - ", req.body);
-	var selector = {}; 
-	var industry_ids = [];
-    var funarea_ids = [];
-    var subfunarea_ids = [];
-    var jobrole_ids = [];
+	var selector        = {}; 
+	var industry_ids    = [];
+    var funarea_ids     = [];
+    var subfunarea_ids  = [];
+    var jobsector_ids   = [];
+    var jobtype_ids     = [];
+    var jobtime_ids     = [];
+    var jobshift_ids    = [];
+    var jobrole_ids     = [];
 
     selector['$and']=[];
     var countryCode = req.body.countryCode ? req.body.countryCode : "IN";
@@ -645,23 +734,47 @@ exports.mapwiseJobs = (req, res, next)=>{
     if (req.body.district  && req.body.district != "all") {
         selector["$and"].push({ "location.district" :  req.body.district   }) 
     }
-    if (req.body.industry_id && req.body.industry_id != "all") {
+    if (req.body.industry_id ) {
     	req.body.industry_id.map(elem => {
     		industry_ids.push(ObjectID(elem.id))
     	})
     	selector["$and"].push({ "jobBasicInfo.industry_id" : { $in: industry_ids } });
     }
-    if (req.body.functionalArea_id && req.body.functionalArea_id != "all") {
+    if (req.body.functionalArea_id ) {
     	req.body.functionalArea_id.map(elem => {
     		funarea_ids.push(ObjectID(elem.id))
     	})
     	selector["$and"].push({ "jobBasicInfo.functionalarea_id" : { $in: funarea_ids } });
     }
-    if (req.body.subfunctionalArea_id && req.body.subfunctionalArea_id != "all" ) {
+    if (req.body.subfunctionalArea_id ) {
         req.body.subfunctionalArea_id.map(elem => {
             subfunarea_ids.push(ObjectID(elem.id))
         })
         selector["$and"].push({ "jobBasicInfo.subfunctionalarea_id" : { $in: subfunarea_ids } });
+    }
+    if (req.body.jobSector_id) {
+        req.body.jobSector_id.map(elem => {
+            jobsector_ids.push(ObjectID(elem.id))
+        })
+        selector["$and"].push({ "jobBasicInfo.jobsector_id" : { $in: jobsector_ids } });
+    }
+    if (req.body.jobType_id) {
+        req.body.jobType_id.map(elem => {
+            jobtype_ids.push(ObjectID(elem.id))
+        })
+        selector["$and"].push({ "jobBasicInfo.jobtype_id" : { $in: jobtype_ids } });
+    }
+    if (req.body.jobTime_id) {
+        req.body.jobTime_id.map(elem => {
+            jobtime_ids.push(ObjectID(elem.id))
+        })
+        selector["$and"].push({ "jobBasicInfo.jobtime_id" : { $in: jobtime_ids } });
+    }
+    if (req.body.jobShift_id) {
+        req.body.jobShift_id.map(elem => {
+            jobshift_ids.push(ObjectID(elem.id))
+        })
+        selector["$and"].push({ "jobBasicInfo.jobshift_id" : { $in: jobshift_ids } });
     }
     if (req.body.jobRole_id) {
         req.body.jobRole_id.map(elem => {
@@ -701,11 +814,15 @@ exports.mapwiseJobs = (req, res, next)=>{
 
 exports.functonalAreaJobs = (req, res, next)=>{
 	//console.log("req.body - ", req.body);
-	var selector = {}; 
-    var industry_ids = [];
-    var funarea_ids = [];
-    var subfunarea_ids = [];
-    var jobrole_ids = [];
+	var selector        = {}; 
+    var industry_ids    = [];
+    var funarea_ids     = [];
+    var subfunarea_ids  = [];
+    var jobsector_ids   = [];
+    var jobtype_ids     = [];
+    var jobtime_ids     = [];
+    var jobshift_ids    = [];
+    var jobrole_ids     = [];
 
     selector['$and']=[];
     var countryCode = req.body.countryCode ? req.body.countryCode : "IN";
@@ -717,23 +834,47 @@ exports.functonalAreaJobs = (req, res, next)=>{
     if (req.body.district && req.body.district != "all") {
         selector["$and"].push({ "location.district" :  req.body.district   }) 
     }
-    if (req.body.industry_id && req.body.industry_id != "all") {
+    if (req.body.industry_id) {
     	req.body.industry_id.map(elem => {
     		industry_ids.push(ObjectID(elem.id))
     	})
     	selector["$and"].push({ "jobBasicInfo.industry_id" : { $in: industry_ids } });
     }
-    if (req.body.functionalArea_id && req.body.functionalArea_id != "all") {
+    if (req.body.functionalArea_id) {
     	req.body.functionalArea_id.map(elem => {
     		funarea_ids.push(ObjectID(elem.id))
     	})
     	selector["$and"].push({ "jobBasicInfo.functionalarea_id" : { $in: funarea_ids } });
     }
-    if (req.body.subfunctionalArea_id && req.body.subfunctionalArea_id != "all") {
+    if (req.body.subfunctionalArea_id) {
         req.body.subfunctionalArea_id.map(elem => {
             subfunarea_ids.push(ObjectID(elem.id))
         })
         selector["$and"].push({ "jobBasicInfo.subfunctionalarea_id" : { $in: subfunarea_ids } });
+    }
+    if (req.body.jobSector_id) {
+        req.body.jobSector_id.map(elem => {
+            jobsector_ids.push(ObjectID(elem.id))
+        })
+        selector["$and"].push({ "jobBasicInfo.jobsector_id" : { $in: jobsector_ids } });
+    }
+    if (req.body.jobType_id) {
+        req.body.jobType_id.map(elem => {
+            jobtype_ids.push(ObjectID(elem.id))
+        })
+        selector["$and"].push({ "jobBasicInfo.jobtype_id" : { $in: jobtype_ids } });
+    }
+    if (req.body.jobTime_id) {
+        req.body.jobTime_id.map(elem => {
+            jobtime_ids.push(ObjectID(elem.id))
+        })
+        selector["$and"].push({ "jobBasicInfo.jobtime_id" : { $in: jobtime_ids } });
+    }
+    if (req.body.jobShift_id) {
+        req.body.jobShift_id.map(elem => {
+            jobshift_ids.push(ObjectID(elem.id))
+        })
+        selector["$and"].push({ "jobBasicInfo.jobshift_id" : { $in: jobshift_ids } });
     }
     if (req.body.jobRole_id) {
         req.body.jobRole_id.map(elem => {
@@ -767,11 +908,15 @@ exports.functonalAreaJobs = (req, res, next)=>{
 
 exports.subfunctionalAreaJobs = (req, res, next)=>{ 
 	console.log("req.body - ", req.body);
-	var selector = {}; 
-	var industry_ids = [];
-    var funarea_ids = [];
+	var selector       = {}; 
+	var industry_ids   = [];
+    var funarea_ids    = [];
     var subfunarea_ids = [];
-    var jobrole_ids = [];
+    var jobsector_ids  = [];
+    var jobtype_ids    = [];
+    var jobtime_ids    = [];
+    var jobshift_ids   = [];
+    var jobrole_ids    = [];
 
     selector['$and']=[];
     var countryCode = req.body.countryCode ? req.body.countryCode : "IN";
@@ -785,23 +930,47 @@ exports.subfunctionalAreaJobs = (req, res, next)=>{
     if (req.body.district && req.body.district != "all") {
         selector["$and"].push({ "location.district" :  req.body.district   }) 
     }
-    if (req.body.industry_id && req.body.industry_id != "") {
+    if (req.body.industry_id ) {
     	req.body.industry_id.map(elem => {
     		industry_ids.push(ObjectID(elem.id))
     	})
     	selector["$and"].push({ "jobBasicInfo.industry_id" : { $in: industry_ids } });
     }
-    if (req.body.functionalArea_id && req.body.functionalArea_id != "all") {
+    if (req.body.functionalArea_id) {
     	req.body.functionalArea_id.map(elem => {
     		funarea_ids.push(ObjectID(elem.id))
     	})
     	selector["$and"].push({ "jobBasicInfo.functionalarea_id" : { $in: funarea_ids } });
     }
-    if (req.body.subfunctionalArea_id && req.body.subfunctionalArea_id != "all") {
+    if (req.body.subfunctionalArea_id) {
         req.body.subfunctionalArea_id.map(elem => {
             subfunarea_ids.push(ObjectID(elem.id))
         })
         selector["$and"].push({ "jobBasicInfo.subfunctionalarea_id" : { $in: subfunarea_ids } });
+    }
+    if (req.body.jobSector_id) {
+        req.body.jobSector_id.map(elem => {
+            jobsector_ids.push(ObjectID(elem.id))
+        })
+        selector["$and"].push({ "jobBasicInfo.jobsector_id" : { $in: jobsector_ids } });
+    }
+    if (req.body.jobType_id) {
+        req.body.jobType_id.map(elem => {
+            jobtype_ids.push(ObjectID(elem.id))
+        })
+        selector["$and"].push({ "jobBasicInfo.jobtype_id" : { $in: jobtype_ids } });
+    }
+    if (req.body.jobTime_id) {
+        req.body.jobTime_id.map(elem => {
+            jobtime_ids.push(ObjectID(elem.id))
+        })
+        selector["$and"].push({ "jobBasicInfo.jobtime_id" : { $in: jobtime_ids } });
+    }
+    if (req.body.jobShift_id) {
+        req.body.jobShift_id.map(elem => {
+            jobshift_ids.push(ObjectID(elem.id))
+        })
+        selector["$and"].push({ "jobBasicInfo.jobshift_id" : { $in: jobshift_ids } });
     }
     if (req.body.jobRole_id) {
         req.body.jobRole_id.map(elem => {
@@ -834,12 +1003,16 @@ exports.subfunctionalAreaJobs = (req, res, next)=>{
 }
 exports.industrialJobs = (req, res, next)=>{
 	console.log("req.body - ", req.body);
-	var selector = {}; 
-	var industry_ids = [];
-    var funarea_ids = [];
-    var subfunarea_ids = [];
-    var jobrole_ids = [];
-    
+	var selector        = {}; 
+	var industry_ids    = [];
+    var funarea_ids     = [];
+    var subfunarea_ids  = [];
+    var jobsector_ids   = [];
+    var jobtype_ids     = [];
+    var jobtime_ids     = [];
+    var jobshift_ids    = [];
+    var jobrole_ids     = [];
+     
     selector['$and']=[];
     var countryCode = req.body.countryCode ? req.body.countryCode : "IN";
     selector["$and"].push({ "location.countryCode" :  countryCode })
@@ -851,23 +1024,47 @@ exports.industrialJobs = (req, res, next)=>{
     if (req.body.district && req.body.district != "all") {
         selector["$and"].push({ "location.district" :  req.body.district   }) 
     }
-    if (req.body.industry_id && req.body.industry_id != "all") {
+    if (req.body.industry_id ) {
     	req.body.industry_id.map(elem => {
     		industry_ids.push(ObjectID(elem.id))
     	})
     	selector["$and"].push({ "jobBasicInfo.industry_id" : { $in: industry_ids } });
     }
-    if (req.body.functionalArea_id && req.body.functionalArea_id != "all") {
+    if (req.body.functionalArea_id ) {
     	req.body.functionalArea_id.map(elem => {
     		funarea_ids.push(ObjectID(elem.id))
     	})
     	selector["$and"].push({ "jobBasicInfo.functionalarea_id" : { $in: funarea_ids } });
     }
-    if (req.body.subfunctionalArea_id && req.body.subfunctionalArea_id != "all") {
+    if (req.body.subfunctionalArea_id ) {
         req.body.subfunctionalArea_id.map(elem => {
             subfunarea_ids.push(ObjectID(elem.id))
         })
         selector["$and"].push({ "jobBasicInfo.subfunctionalarea_id" : { $in: subfunarea_ids } });
+    }
+    if (req.body.jobSector_id) {
+        req.body.jobSector_id.map(elem => {
+            jobsector_ids.push(ObjectID(elem.id))
+        })
+        selector["$and"].push({ "jobBasicInfo.jobsector_id" : { $in: jobsector_ids } });
+    }
+    if (req.body.jobType_id) {
+        req.body.jobType_id.map(elem => {
+            jobtype_ids.push(ObjectID(elem.id))
+        })
+        selector["$and"].push({ "jobBasicInfo.jobtype_id" : { $in: jobtype_ids } });
+    }
+    if (req.body.jobTime_id) {
+        req.body.jobTime_id.map(elem => {
+            jobtime_ids.push(ObjectID(elem.id))
+        })
+        selector["$and"].push({ "jobBasicInfo.jobtime_id" : { $in: jobtime_ids } });
+    }
+    if (req.body.jobShift_id) {
+        req.body.jobShift_id.map(elem => {
+            jobshift_ids.push(ObjectID(elem.id))
+        })
+        selector["$and"].push({ "jobBasicInfo.jobshift_id" : { $in: jobshift_ids } });
     }
     if (req.body.jobRole_id) {
         req.body.jobRole_id.map(elem => {
