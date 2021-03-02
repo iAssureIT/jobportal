@@ -99,7 +99,10 @@ class BasicInfoForm extends Component{
 					resume     		  : response.data.basicInfo.resume?response.data.basicInfo.resume:"",
 					resumeUrl     	  : response.data.basicInfo.resume?response.data.basicInfo.resume:"",
 					executiveSummary  : response.data.basicInfo.executiveSummary ? response.data.basicInfo.executiveSummary : "",
-					languagesTags 	  : languagesTags	
+					languagesTags 	  : languagesTags,
+					ageYears	              : 0,	
+					ageMonths	              : 0,	
+					ageDays	       	          : 0,
 			 	})
 			 })
 			 .catch(error=>{
@@ -492,8 +495,6 @@ class BasicInfoForm extends Component{
 	      document.getElementById("lastNameError").innerHTML = "";
 	      status = true;
 	    }
-
-
 		
 		if(this.state.dob.length<=0){
 			document.getElementById("dobError").innerHTML = "Please enter your Date Of Birth";  
@@ -513,7 +514,6 @@ class BasicInfoForm extends Component{
 			document.getElementById("emailError").innerHTML = ""; 
 			status = true;
 		}
-		console.log("mob",this.state.mobile)
 		if(this.state.mobile.length<=0){
 			document.getElementById("mobileError").innerHTML = "Please enter your mobile number";  
 			status=false; 
@@ -658,34 +658,7 @@ class BasicInfoForm extends Component{
 						</div>
 						<div className="row formWrapper">
 							<div className="col-lg-4">
-								<label htmlFor="dob" className="nameTitleForm">
-									Date Of Birth
-									<sup className="nameTitleFormStar">*</sup>
-								</label>
-								<div className="input-group ">
-									<span className="input-group-addon inputBoxIcon">
-										<i className="fa fa-birthday-cake"></i>
-									</span> 
-									<input type="date" name="dob" id="dob" 
-									 className="form-control inputBox unstyled date" 
-									 value={this.state.dob} max={Moment(new Date()).format("YYYY-MM-DD")}
-									 onChange={this.handleChange.bind(this)} />
-								</div> 
-								<span id="dobError" className="errorMsg"></span>
-							</div>
-
-							<div className="col-lg-4">
-								<label htmlFor="age" className="nameTitleForm nameTitleFormAge">
-									Age
-								</label>
-								<div className="input-group showFeild">
-									{this.state.ageYears + "  Years, " + this.state.ageMonths +
-									  " months"}	
-								</div> 
-							</div>
-
-							<div className="col-lg-4">
-								<label htmlFor="gender" className="nameTitleForm nameTitleFormAge">
+								<label htmlFor="gender" className="nameTitleForm ">
 									Gender
 								</label>
 								<div className="input-group genderFeildWrapper">
@@ -723,6 +696,32 @@ class BasicInfoForm extends Component{
 									</div>		
 									
 								</div>
+							</div>
+							<div className="col-lg-4">
+								<label htmlFor="dob" className="nameTitleForm">
+									Date Of Birth
+									<sup className="nameTitleFormStar">*</sup>
+								</label>
+								<div className="input-group ">
+									<span className="input-group-addon inputBoxIcon">
+										<i className="fa fa-birthday-cake"></i>
+									</span> 
+									<input type="date" name="dob" id="dob" 
+									 className="form-control inputBox unstyled date" 
+									 value={this.state.dob} max={Moment(new Date()).format("YYYY-MM-DD")}
+									 onChange={this.handleChange.bind(this)} />
+								</div> 
+								<span id="dobError" className="errorMsg"></span>
+							</div>
+
+							<div className="col-lg-4">
+								<label htmlFor="age" className="nameTitleForm ">
+									Age
+								</label>
+								<div className="input-group showFeild">
+									{this.state.ageYears + "  Years, " + this.state.ageMonths +
+									  " months"}	
+								</div> 
 							</div>
 						</div>
 

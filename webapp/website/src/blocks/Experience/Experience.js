@@ -233,7 +233,7 @@ class Experience extends Component{
 	handleSave(event){
 		event.preventDefault();
 		var status =  this.validateForm();
-		
+		if(status==true){
 		var formValues = {
 								candidate_id       	: this.state.candidate_id,
 								experienceID       	: this.state.workExperienceID,
@@ -262,7 +262,7 @@ class Experience extends Component{
 								expectedCTC           : this.state.expectedCTC,
 								noticePeriod          : this.state.noticePeriod,
 							}
-		console.log(formValues)	
+					}
 
 		if(this.props.match.params.workExperienceID){
 			this.updateData(formValues,event);
@@ -407,7 +407,10 @@ class Experience extends Component{
 		}
 	handelSubmit(event){
 		event.preventDefault();
+		var status =  this.validateForm();
+		if(status==true){
 			this.props.history.push("/profile/"+this.state.candidate_id);
+		}
 			
 	}
 	handleChangeState(event) {
@@ -533,15 +536,6 @@ class Experience extends Component{
 			""; 
 			status = true;
 		}
-		if(this.state.toDate.length<=0){
-			document.getElementById("toDateError").innerHTML=  
-			"Please enter date";  
-			status=false; 
-		}else{
-			document.getElementById("toDateError").innerHTML=  
-			""; 
-			status = true;
-		}
 		if(this.state.noticePeriod.length<=0){
 			document.getElementById("noticePeriodError").innerHTML=  
 			"Please enter date";  
@@ -551,15 +545,7 @@ class Experience extends Component{
 			""; 
 			status = true;
 		}
-		/*if(this.state.responsibilities.length<=0){
-			document.getElementById("responsibilitiesError").innerHTML=  
-			"Please enter your responsibilities";  
-			status=false; 
-		}else{
-			document.getElementById("responsibilitiesError").innerHTML=  
-			""; 
-			status = true;
-		}*/
+	
 		if(this.state.reportingManager.length<=0){
 			document.getElementById("reportingManagerError").innerHTML=  
 			"Please enter your reporting manager";  
@@ -587,6 +573,25 @@ class Experience extends Component{
 			document.getElementById("totalExperienceError").innerHTML=  
 			""; 
 			status = true;
+		}
+		if(this.state.relevantExperience.length<=0){
+			document.getElementById("relevantExperienceError").innerHTML=  
+			"Please enter your relevant experience";  
+			status=false; 
+		}else{
+			document.getElementById("relevantExperienceError").innerHTML=  
+			""; 
+			status = true;
+		}
+
+		if(this.state.relevantExperience.length<=0 && this.state.totalExperience.length<=0 
+			&& this.state.reportingManagerDesignation.length<=0 && this.state.reportingManager.length<=0
+			&& this.state.noticePeriod.length<=0 && this.state.toDate.length<=0 &&  this.state.fromDate.length<=0 
+			&& this.state.expectedCTC.length<=0 && this.state.currentCTC.length<=0 && this.state.lastDeartment.length<=0
+			&& this.state.lastDesignation.length<=0 && this.state.companyCity.length<=0 && this.state.companyCountry.length<=0
+			&& this.state.companyState.length<=0 && this.state.industry.length<=0  && this.state.company.length<=0
+			&& this.state.company_id.length<=0){
+			status=false; 
 		}
 		return status;
 	}
@@ -795,7 +800,7 @@ class Experience extends Component{
 									Currently Working here
 								</label>
 							</div>
-							<div className="col-lg-3">
+							<div className="col-lg-3 experienceBoxWidth">
 								<label htmlFor="fromDate" className="nameTitleForm">
 									Working From
 									<sup className="nameTitleFormStar">*</sup>
@@ -812,7 +817,7 @@ class Experience extends Component{
 								<span id="fromDateError" className="errorMsg"></span>
 							</div>
 
-							<div className="col-lg-3">
+							<div className="col-lg-3 experienceBoxWidth">
 								<label htmlFor="toDate" className="nameTitleForm">
 									Worked Till
 									<sup className="nameTitleFormStar">*</sup>
@@ -901,7 +906,7 @@ class Experience extends Component{
 									<span className="input-group-addon inputBoxIcon">
 										<FontAwesomeIcon icon="rupee-sign" /> 
 									</span> 
-									<input type="text" name="currentCTC" id="currentCTC" 
+									<input type="number" name="currentCTC" id="currentCTC" 
 									 className="form-control inputBox" value={this.state.currentCTC}
 									 onChange={this.handleChange.bind(this)} />
 								</div> 
@@ -917,7 +922,7 @@ class Experience extends Component{
 									<span className="input-group-addon inputBoxIcon">
 										<FontAwesomeIcon icon="rupee-sign" /> 
 									</span> 
-									<input type="text" name="expectedCTC" id="expectedCTC" 
+									<input type="number" name="expectedCTC" id="expectedCTC" 
 									 className="form-control inputBox" value={this.state.expectedCTC} 
 									 onChange={this.handleChange.bind(this)} />
 								</div> 

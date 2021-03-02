@@ -17,14 +17,14 @@ class Academics extends Component{
 
 		this.state={
 			
-			candidate_id        : this.props.match.params.candidate_id,
-			academicsID         : this.props.match.params.academicsID,
-			academics  			: [],
-			qualificationLevel  : "",
-            qualificationlevel_id    : "",
-            qualificationLevellist   : [],
-			qualification       : "",
-            qualification_id    : "",
+			candidate_id               : this.props.match.params.candidate_id,
+			academicsID                : this.props.match.params.academicsID,
+			academics  			       : [],
+			qualificationLevel         : "",
+            qualificationlevel_id      : "",
+            qualificationLevellist     : [],
+			qualification              : "",
+            qualification_id           : "",
             qualificationlist   : [],
 			specialization      : "",
 			college             : "",
@@ -240,7 +240,7 @@ class Academics extends Component{
 	}
 	handleBack(event){
 		event.preventDefault();
-		this.props.history.push("/contact/"+this.state.candidate_id);
+		this.props.history.push("/address/"+this.state.candidate_id);
 	}
 	onChangeQualificationLevel(event){
         const {name,value} = event.target;
@@ -341,7 +341,7 @@ class Academics extends Component{
 	handleSave(event){
 		event.preventDefault();
 		var status =  this.validateForm();
-		
+		if(status==true){
 			var formValues = {
 								candidate_id   : this.state.candidate_id,
 								academicsID   : this.state.academicsID,
@@ -368,6 +368,7 @@ class Academics extends Component{
 									admisionYear         : this.state.admisionYear
 								}
 							}
+			}
 		console.log(formValues)						
 		if(this.props.match.params.academicsID){
 			//this.updateData(formValues,event);
@@ -408,9 +409,7 @@ class Academics extends Component{
 			
 		}
 	insetData(formValues,event){
-
 		var status =  this.validateForm();
-		console.log("status",status)
 		if(status==true){
 				Axios.patch("/api/candidatemaster/patch/addCandidateAcademics",formValues)
 			 .then(response=>{
@@ -443,13 +442,15 @@ class Academics extends Component{
 	}
 	handleSubmit(event){
 		event.preventDefault();
+		var status =  this.validateForm();
+		if(status==true){
 			this.props.history.push("/certification/"+this.state.candidate_id);
+		}
 	}
 	//========== User Define Function End ==================
 		//========== Validation Start ==================
 	validateForm=()=>{
 		var status = true;
-		
 		if(this.state.qualificationLevel.length<=0){
 			document.getElementById("qualificationLevelError").innerHTML=  
 			"Please enter your qualification level";  
@@ -559,7 +560,12 @@ class Academics extends Component{
 			""; 
 			status = true;
 		}
-		
+		if(this.state.country.length<=0 && this.state.states.length<=0 && this.state.district.length<=0
+			&& this.state.city.length<=0 && this.state.college.length<=0 && this.state.university.length<=0
+			&& this.state.passOutYear.length<=0 && this.state.admisionYear.length<=0 &&  this.state.mode.length<=0
+			&& this.state.qualification.length<=0 && this.state.qualificationLevel.length<=0){
+			status=false; 
+		}
 	
 		
 		 return status;
