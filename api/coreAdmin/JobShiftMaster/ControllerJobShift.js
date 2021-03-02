@@ -7,16 +7,19 @@ exports.insertJobShift = (req,res,next)=>{
     async function processData(){
     var allJobShift = await fetchJobShift()
         var jobShift = allJobShift.filter((data)=>{
+            console.log(data.jobShift.trim().toLowerCase())
+            console.log(req.body.fieldValue.trim().toLowerCase())
         if (data.jobShift.trim().toLowerCase() == req.body.fieldValue.trim().toLowerCase()) {
             return data;
         }
         })
+        console.log(jobShift)
         if (jobShift.length > 0) {
             res.status(200).json({ duplicated : true });
         }else{
             const jobShiftMaster = new JobShiftMaster({
                             _id                         : new mongoose.Types.ObjectId(),
-                            jobShift                   : req.body.fieldValue,
+                            jobShift                    : req.body.fieldValue,
                             createdBy                   : req.body.createdBy,
                             createdAt                   : new Date()
                         })
@@ -25,7 +28,8 @@ exports.insertJobShift = (req,res,next)=>{
                             res.status(200).json({ created : true, fieldID : data._id });
                         })
                         .catch(err =>{
-                            console.log("err",err.code)
+
+                            console.log("err",err)
                             if (err.code == 11000) {
                                 res.status(200).json({ duplicated : true });
                             }else{

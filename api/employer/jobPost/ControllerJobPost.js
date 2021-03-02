@@ -8,9 +8,11 @@ const EntityMaster              = require('../../coreAdmin/entityMaster/ModelEnt
 const IndustryMaster            = require('../../coreAdmin/IndustryMaster/ModelIndustryMaster.js');
 const FunctionalAreaMaster 		= require('../../coreAdmin/FunctionalAreaMaster/ModelFunctionalAreaMaster.js');
 const SubFunctionalAreaMaster 	= require('../../coreAdmin/SubFunctionalAreaMaster/ModelSubFunctionalAreaMaster.js');
-const JobCategoryMaster 		= require('../../coreAdmin/JobCategoryMaster/ModelJobCategory.js');
+const JobSectorMaster           = require('../../coreAdmin/JobSectorMaster/ModelJobSector.js');
+
 const JobRoleMaster 			= require('../../coreAdmin/JobRoleMaster/ModelJobRole.js');
 const JobTypeMaster 			= require('../../coreAdmin/JobTypeMaster/ModelJobType.js');
+const JobShiftMaster            = require('../../coreAdmin/JobShiftMaster/ModelJobShift.js');
 const JobTimeMaster 			= require('../../coreAdmin/JobTimeMaster/ModelJobTime.js');
 const SkillMaster           	= require('../../coreAdmin/SkillMaster/ModelSkill.js');
 const QualificationLevel        = require('../../coreAdmin/QualificationLevelMaster/ModelQualificationLevel.js');
@@ -19,7 +21,7 @@ var ObjectID 	= 	require('mongodb').ObjectID;
 
 exports.insertJobs = (req, res, next)=>{
 		console.log(req.body)	
-		var functionalarea_id, subfunctionalarea_id, jobcategory_id, jobrole_id, jobtype_id, jobtime_id;
+		var functionalarea_id, subfunctionalarea_id, jobsector_id, jobrole_id, jobtype_id, jobshift_id, jobtime_id;
 		var primarySkills   = [];
 	    var secondarySkills = [];
 	    var otherSkills 	= [];
@@ -34,16 +36,19 @@ exports.insertJobs = (req, res, next)=>{
 			subfunctionalarea_id  	= req.body.subfunctionalarea_id != "" ? req.body.subfunctionalarea_id 
     							: await insertSubFunctArea(functionalarea_id, req.body.subFunctionalArea,req.body.user_id)
 			
-			jobcategory_id  		= req.body.jobcategory_id != "" ? req.body.jobcategory_id 
-    							: await insertJobCategory(req.body.jobCategory,req.body.user_id)
+			jobsector_id  		= req.body.jobsector_id != "" ? req.body.jobsector_id 
+    							: await insertJobSector(req.body.jobSector,req.body.user_id)
 			
-			jobrole_id  			= req.body.jobrole_id != "" ? req.body.jobrole_id 
+			jobrole_id  		= req.body.jobrole_id != "" ? req.body.jobrole_id 
     							: await insertJobRole(req.body.jobRole,req.body.user_id)
 			
-			jobtype_id  			= req.body.jobtype_id != "" ? req.body.jobtype_id 
+			jobtype_id  		= req.body.jobtype_id != "" ? req.body.jobtype_id 
     							: await insertJobType(req.body.jobType,req.body.user_id)
 
-			jobtime_id  			= req.body.jobtime_id != "" ? req.body.jobtime_id 
+            jobshift_id         = req.body.jobshift_id != "" ? req.body.jobshift_id 
+                                : await insertJobShift(req.body.jobShift,req.body.user_id)
+                            
+			jobtime_id  		= req.body.jobtime_id != "" ? req.body.jobtime_id 
     							: await insertJobTime(req.body.jobTime,req.body.user_id)
 		
     			
@@ -82,12 +87,13 @@ exports.insertJobs = (req, res, next)=>{
 									"industry_id"			: req.body.industry_id,
 									"functionalarea_id" 	: functionalarea_id,
 									"subfunctionalarea_id"	: subfunctionalarea_id,
+                                    "jobsector_id"          : jobsector_id,
 									"jobrole_id"			: jobrole_id,
 									"gender"				: req.body.gender,
 									"workFromHome" 			: req.body.workFromHome,
 									"jobtype_id" 			: jobtype_id,
+                                    "jobshift_id"           : jobshift_id,
 									"jobtime_id" 			: jobtime_id,
-									"jobcategory_id" 		: jobcategory_id,
 									"positions" 			: req.body.positions,
 									"jobDesc" 				: req.body.jobDesc,
 									"lastDateOfAppl" 		: new Date(req.body.lastDateOfAppl),
@@ -212,15 +218,15 @@ function insertSubFunctArea(functionalarea_id, subFunctionalArea, createdBy){
     });
 }
 
-function insertJobCategory(jobCategory, createdBy){ 
+function insertJobSector(jobSector, createdBy){ 
     return new Promise(function(resolve,reject){ 
-        const jobCategoryMaster = new JobCategoryMaster({
+        const jobSectorMaster = new JobSectorMaster({
                         _id                         : new mongoose.Types.ObjectId(),
-                        jobCategory           		: jobCategory,
+                        jobSector           		: jobSector,
                         createdBy                   : createdBy,
                         createdAt                   : new Date()
                     })
-                    jobCategoryMaster.save()
+                    jobSectorMaster.save()
                     .then(data=>{
                         resolve( data._id );
                     })
@@ -229,7 +235,23 @@ function insertJobCategory(jobCategory, createdBy){
                     });
     });
 }
-
+function insertJobShift(jobSector, createdBy){ 
+    return new Promise(function(resolve,reject){ 
+        const jobSectorMaster = new JobSectorMaster({
+                        _id                         : new mongoose.Types.ObjectId(),
+                        jobShift                    : jobShift,
+                        createdBy                   : createdBy,
+                        createdAt                   : new Date()
+                    })
+                    jobSectorMaster.save()
+                    .then(data=>{
+                        resolve( data._id );
+                    })
+                    .catch(err =>{
+                        reject(err); 
+                    });
+    });
+}
 function insertJobRole(jobRole, createdBy){ 
     return new Promise(function(resolve,reject){ 
         const jobRoleMaster = new JobRoleMaster({
@@ -294,7 +316,8 @@ exports.getJob = (req,res,next)=>{
     .populate('jobBasicInfo.jobrole_id')
     .populate('jobBasicInfo.jobtype_id')
     .populate('jobBasicInfo.jobtime_id')
-    .populate('jobBasicInfo.jobcategory_id')
+    .populate('jobBasicInfo.jobsector_id')
+    .populate('jobBasicInfo.jobshift_id')
     .populate('requiredSkills.primarySkills.skill_id')
     .populate('requiredSkills.secondarySkills.skill_id')
     .populate('requiredSkills.otherSkills.skill_id')
@@ -361,7 +384,8 @@ exports.getJobList = (req,res,next)=>{
     .populate('jobBasicInfo.jobrole_id')
     .populate('jobBasicInfo.jobtype_id')
     .populate('jobBasicInfo.jobtime_id')
-    .populate('jobBasicInfo.jobcategory_id')
+    .populate('jobBasicInfo.jobsector_id')
+    .populate('jobBasicInfo.jobshift_id')
     .populate('requiredSkills.primarySkills.skill_id')
     .populate('requiredSkills.secondarySkills.skill_id')
     .populate('requiredSkills.otherSkills.skill_id')
@@ -420,7 +444,8 @@ exports.getJobListForEmployer = (req,res,next)=>{
     .populate('jobBasicInfo.jobrole_id')
     .populate('jobBasicInfo.jobtype_id')
     .populate('jobBasicInfo.jobtime_id')
-    .populate('jobBasicInfo.jobcategory_id')
+    .populate('jobBasicInfo.jobsector_id')
+    .populate('jobBasicInfo.jobshift_id')
     .populate('requiredSkills.primarySkills.skill_id')
     .populate('requiredSkills.secondarySkills.skill_id')
     .populate('requiredSkills.otherSkills.skill_id')
@@ -433,7 +458,7 @@ exports.getJobListForEmployer = (req,res,next)=>{
 }
 
 exports.updateJob = (req,res,next)=>{
-	var functionalarea_id, subfunctionalarea_id, jobcategory_id, jobrole_id, jobtype_id, jobtime_id;
+	var functionalarea_id, subfunctionalarea_id, jobsector_id, jobrole_id, jobtype_id, jobtime_id, jobshift_id;
 		processData();
 		async function processData(){
     		functionalarea_id  		= req.body.functionalarea_id != "" ? req.body.functionalarea_id 
@@ -442,16 +467,19 @@ exports.updateJob = (req,res,next)=>{
 			subfunctionalarea_id  	= req.body.subfunctionalarea_id != "" ? req.body.subfunctionalarea_id 
     							: await insertSubFunctArea(functionalarea_id, req.body.subFunctionalArea,req.body.user_id)
 			
-			jobcategory_id  		= req.body.jobcategory_id != "" ? req.body.jobcategory_id 
-    							: await insertJobCategory(req.body.jobCategory,req.body.user_id)
+			jobsector_id  		= req.body.jobsector_id != "" ? req.body.jobsector_id 
+    							: await insertJobSector(req.body.jobSector,req.body.user_id)
 			
-			jobrole_id  			= req.body.jobrole_id != "" ? req.body.jobrole_id 
+			jobrole_id  		= req.body.jobrole_id != "" ? req.body.jobrole_id 
     							: await insertJobRole(req.body.jobRole,req.body.user_id)
 			
-			jobtype_id  			= req.body.jobtype_id != "" ? req.body.jobtype_id 
+			jobtype_id  		= req.body.jobtype_id != "" ? req.body.jobtype_id 
     							: await insertJobType(req.body.jobType,req.body.user_id)
 
-			jobtime_id  			= req.body.jobtime_id != "" ? req.body.jobtime_id 
+            jobshift_id         = req.body.jobshift_id != "" ? req.body.jobshift_id 
+                                : await insertJobShift(req.body.jobShift,req.body.user_id)
+
+			jobtime_id  		= req.body.jobtime_id != "" ? req.body.jobtime_id 
     							: await insertJobTime(req.body.jobTime,req.body.user_id)
 		
 	Jobs.updateOne(
@@ -469,7 +497,8 @@ exports.updateJob = (req,res,next)=>{
 									"workFromHome" 			: req.body.workFromHome,
 									"jobtype_id" 			: jobtype_id,
 									"jobtime_id" 			: jobtime_id,
-									"jobcategory_id" 		: jobcategory_id,
+									"jobsector_id" 		    : jobsector_id,
+                                    "jobshift_id"           : jobshift_id,
 									"positions" 			: req.body.positions,
 									"jobDesc" 				: req.body.jobDesc,
 									"lastDateOfAppl" 		: new Date(req.body.lastDateOfAppl),
@@ -983,9 +1012,9 @@ function getSubFunctionalAreas(functionalarea_id){
             });            
     });
 }
-function getJobCategories(){ 
+function getJobSectors(){ 
     return new Promise(function(resolve,reject){ 
-        JobCategoryMaster.find({})
+        JobSectorMaster.find({})
             .exec()
             .then(data => {
                 resolve(data);
@@ -1008,6 +1037,18 @@ function getJobRoles(){
     });
 }
 function getJobType(){ 
+    return new Promise(function(resolve,reject){ 
+        JobTypeMaster.find({})
+            .exec()
+            .then(data => {
+                resolve(data);
+            })
+            .catch(err => {
+                reject(err);
+            });            
+    });
+}
+function getJobShift(){ 
     return new Promise(function(resolve,reject){ 
         JobTypeMaster.find({})
             .exec()
@@ -1050,9 +1091,10 @@ exports.insertBulkJobs = (req,res,next)=>{
         var entities        = await getEntity();
         var industries      = await getIndustries();
         var funAreas        = await getFunctionalAreas();
-        var jobCategories   = await getJobCategories();
+        var jobSectors      = await getJobSectors();
         var jobRoles        = await getJobRoles();
         var jobTypes        = await getJobType();
+        var jobShifts       = await getJobShift();
         var jobTimes        = await getJobTime();
         var qualificationLevel        = await getQualificationLevel();
         var gender          = ["Male Only","Female Only","Both (Male & Female)"];
@@ -1105,10 +1147,11 @@ exports.insertBulkJobs = (req,res,next)=>{
             var subfunAreas             = await getSubFunctionalAreas(functionalarea_id);
             console.log("subfunAreas",subfunAreas[Math.floor(Math.random() * subfunAreas.length)])
             var subfunctionalarea_id    = subfunAreas[Math.floor(Math.random() * subfunAreas.length)] ? subfunAreas[Math.floor(Math.random() * subfunAreas.length)]._id : "";
-            var jobcategory_id          = jobCategories[Math.floor(Math.random() * jobCategories.length)]._id;
+            var jobsector_id            = jobSectors[Math.floor(Math.random() * jobSectors.length)]._id;
             var jobrole_id              = jobRoles[Math.floor(Math.random() * jobRoles.length)]._id;
             var jobtype_id              = jobTypes[Math.floor(Math.random() * jobTypes.length)]._id;
             var jobtime_id              = jobTimes[Math.floor(Math.random() * jobTimes.length)]._id;
+            var jobshift_id             = jobShifts[Math.floor(Math.random() * jobShifts.length)]._id;
             
             var jobObject = {
                 "company_id"    : company_id,
@@ -1121,8 +1164,9 @@ exports.insertBulkJobs = (req,res,next)=>{
                                     "gender"                : gender[Math.floor(Math.random() * gender.length)],
                                     "workFromHome"          : 0,
                                     "jobtype_id"            : jobtype_id,
+                                    "jobshift_id"           : jobshift_id,
                                     "jobtime_id"            : jobtime_id,
-                                    "jobcategory_id"        : jobcategory_id,
+                                    "jobsector_id"          : jobsector_id,
                                     "positions"             : Math.floor(Math.random()*10),
                                     "jobDesc"               : "",
                                     "lastDateOfAppl"        : null,
