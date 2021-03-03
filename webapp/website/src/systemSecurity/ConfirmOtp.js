@@ -13,7 +13,8 @@ class ConfirmOtp extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      showMessage: false
+      showMessage: false,
+      user_id           :this.props.userDetails.user_id
     }
   }
   componentDidMount() {
@@ -54,7 +55,7 @@ class ConfirmOtp extends Component {
     var url = this.props;
     var {mapAction} = this.props;
     var formValues = {
-      "user_ID": this.props.userID,
+      "user_ID": this.state.user_id,
       "emailOTP": parseInt(this.refs.emailotp.value),
       "status": "Active"
     }
@@ -71,7 +72,7 @@ class ConfirmOtp extends Component {
     console.log("candidatemaster",candidatemaster)
     
       //====================================
-      var checkData = { "user_id": this.props.userID, "emailotp" : this.refs.emailotp.value, "status" : "active" }
+      var checkData = { "user_id": this.state.user_id, "emailotp" : this.refs.emailotp.value, "status" : "active" }
       axios.post('/api/auth/checkemailotp/usingID',checkData)
         .then((response) => {
 
@@ -83,10 +84,10 @@ class ConfirmOtp extends Component {
               //this.props.history.push('/reset-pwd/' + this.props.userID);
               
               mapAction.setUserID(this.props.userID);
-              mapAction.setSelectedModal("resetpass");
+              mapAction.setSelectedModal("resetpassword");
               
             } else {
-              localStorage.removeItem("previousUrl");
+             
               
               //================================
 
@@ -220,7 +221,8 @@ class ConfirmOtp extends Component {
 const mapStateToProps = (state)=>{ 
     return {
         selectedModal  : state.selectedModal,
-        userID         : state.userID 
+        userID         : state.userID,
+        userDetails    : state.userDetails
     }
 }
 const mapDispatchToProps = (dispatch) => ({

@@ -22,7 +22,7 @@ class Header extends Component{
       showLoginModal    : false,
       asideDisplay      : "-600px",
       userMenu          : "none",
-      user_id            :this.props.userDetails.user_id
+      user_id           :this.props.userDetails.user_id
      
       //selector            : {},
     }
@@ -67,7 +67,7 @@ class Header extends Component{
                       var {mapAction} = this.props;
                       mapAction.setUserID(response.data.ID);
                       mapAction.setSelectedModal("confirmotp"); 
-                      document.getElementById("loginbtndiv").click();
+                      document.getElementById("changepassworddiv").click();
 
                 } 
             })
@@ -351,10 +351,10 @@ class Header extends Component{
                                   <FontAwesomeIcon icon={['far', 'user']} />
                                   :
 
-                                 /* ((this.props.userDetails.profilePicture.length) > 0)
+                                  ((this.props.userDetails.profilePicture.length) > 0)
                                   ?
                                     <img src={(this.props.userDetails.profilePicture)} alt="icon"className="classIcon"/>
-                                  :*/
+                                  :
                                   this.props.userDetails.gender=='female'
                                  ? 
                                   <img src="/images/f.png" alt="icon" className="classIcon"/>
@@ -412,14 +412,14 @@ class Header extends Component{
 
               </div>
 
-              <div className="modal" id="loginModal" role="dialog" tabIndex="-1">
+              <div className="modal" id="confirmOTPModal" role="dialog" tabIndex="-1">
                 <div className="modal-dialog  modal-lg">
                   <div className="modal-body">
                       <button type="button" className="close" id="closeModalButton" data-dismiss="modal">&times;</button>
                       <section className="OTPSentWrapper row">
-                            {this.props.selectedModal == "login" ? <LoginForm/> : null }
+                           {/* {this.props.selectedModal == "login" ? <LoginForm/> : null }
                             {this.props.selectedModal == "signup" ? <SignUp/> : null }
-                            {this.props.selectedModal == "forgotpassword" ? <ForgotPassword/> : null }
+                            {this.props.selectedModal == "forgotpassword" ? <ForgotPassword/> : null }*/}
                             {this.props.selectedModal == "confirmotp" ? <ConfirmOtp/> : null }
                             {this.props.selectedModal == "resetpassword" ? <ResetPassword/> : null }
                       </section>
@@ -456,14 +456,16 @@ class Header extends Component{
                         <span className="notificationMessegeText">Reset Password</span>
                       </div></a>*/}
                       
-                      <div className="notificationMessege col-lg-12" id="loginbtndiv" data-toggle="modal" data-target="#loginModal" onClick={this.sendOTP.bind(this)}>
-                          <span className="notificationMessegeText">Reset Password</span>
+                      <div className="notificationMessege col-lg-12"  onClick={this.sendOTP.bind(this)}>
+                          <span className="notificationMessegeText">Change Password</span>
                       </div>
                      
                       <div className="notificationMessege col-lg-12 ">
                           <span className="signOutButton" onClick={this.logout.bind(this)}>Sign Out</span>
                       </div>
-                      
+                      <div id="changepassworddiv" data-toggle="modal" data-target="#confirmOTPModal"> { console.log("dicvvv")
+                      }</div>
+
                     </div>
             </div>
           </div>
