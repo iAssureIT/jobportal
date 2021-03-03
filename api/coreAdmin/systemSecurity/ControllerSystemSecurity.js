@@ -536,7 +536,7 @@ exports.check_userID_EmailOTP = (req, res, next) => {
 					.exec()
 					.then(data => {
 						if (data.nModified === 1) {
-							res.status(200).json({ message: "SUCCESS", userID: data._id });
+							res.status(200).json({ message: "SUCCESS", userID: data._id, passwordreset: data.profile.passwordreset });
 						} else {
 							res.status(200).json({ message: "SUCCESS_OTP_NOT_RESET" });
 						}
