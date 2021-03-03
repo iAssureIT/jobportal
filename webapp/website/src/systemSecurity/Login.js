@@ -252,6 +252,13 @@ class Login extends Component {
 
     mapAction.setSelectedModal("forgotpassword");
   }
+
+  ShowResetPass(event){
+    event.preventDefault();
+    var {mapAction} = this.props;
+
+    mapAction.setSelectedModal("resetpassword");
+  }
   
   render() {
     
@@ -337,6 +344,8 @@ class Login extends Component {
                       <div className="col-lg-6">
                        <a href="#" className="loginForgotPassword" onClick={this.ShowForgotPass.bind(this)}><u>Forgot Password?</u></a>
                       </div>
+
+                     
                     </div>  
                   </div>
             </form>

@@ -112,6 +112,7 @@ class Layout extends Component  {
                                         <Switch >
                                             <Route path="/login" exact strict component={Login} />
                                             <Route path="/signup" exact strict component={SignUp} />
+                                            <Route path="/reset-pwd/:user_ID" exact strict component={ResetPassword} />
                                             
                                             <Route exact path="/"        component={Homepage}  />
                                             <Route exact path="/country/:countryCode/state/:stateCode/city/:district/industry/:industryName/:industry_id/function/:functionalArea/:functionalArea_id/subfunction/:subfunctionalArea/:subfunctionalArea_id"     component={Homepage}  />

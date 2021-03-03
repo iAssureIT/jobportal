@@ -1,11 +1,15 @@
 import React, {Component} from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import $ from 'jquery';
+import jQuery from 'jquery';
+import axios from 'axios';
+import swal from 'sweetalert';
 import '../header/Header.css';
 import LoginForm from '../../systemSecurity/Login.js';
 import SignUp from '../../systemSecurity/SignUp.js';
 import ForgotPassword from '../../systemSecurity/ForgotPassword.js';
 import ConfirmOtp from '../../systemSecurity/ConfirmOtp.js';
-import ResetPass from '../../systemSecurity/ResetPassword.js'
+import ResetPassword from '../../systemSecurity/ResetPassword.js'
 import {connect}            from 'react-redux';
 import { bindActionCreators } from 'redux';
 import  * as mapActionCreator from '../../common/actions/index';
@@ -18,12 +22,62 @@ class Header extends Component{
       showLoginModal    : false,
       asideDisplay      : "-600px",
       userMenu          : "none",
+      user_id            :this.props.userDetails.user_id
      
       //selector            : {},
     }
     this.handleOpenModal  = this.handleOpenModal.bind(this);
     this.handleCloseModal = this.handleCloseModal.bind(this);
   }
+
+ sendOTP(event) {
+
+       console.log(this.props.userDetails.user_id);
+
+        var formValues = {
+           userid : this.state.user_id,
+
+        }
+            console.log(formValues+"mmllllllllllllllllllllll");
+
+            $('.fullpageloader').show();
+            axios.patch('/api/auth/patch/setotpusingID', formValues)
+            .then((response)=>{
+              
+                console.log('sendOTP res===',response.data)
+                if (response.data.message == "OTP_UPDATED") {
+                    var sendData = {
+                      "event"     : "Event1", //Event Name
+                      "toUser_id"  : response.data.ID, //To user_id(ref:users)
+                      "toUserRole"  : "candidate",
+                      "variables" : {
+                      "UserName": response.data.firstName,
+                      "OTP"     : response.data.OTP,
+                      }
+                    }
+                    axios.post('/api/masternotifications/post/sendNotification', sendData)
+                    .then((notificationres) => {})
+                    .catch((error) => { console.log('notification error: ', error) })
+                     
+                   
+                    swal("OTP send to your registered email ID.");
+                    //this.props.history.push('/confirm-otp/'+response.data.ID);optEmail is not defined
+                    
+                     
+                      var {mapAction} = this.props;
+                      mapAction.setUserID(response.data.ID);
+                      mapAction.setSelectedModal("confirmotp"); 
+                      document.getElementById("loginbtndiv").click();
+
+                } 
+            })
+            .catch((error)=>{
+                //document.getElementById("sendlink").innerHTML = 'Reset Password';
+                swal("error.....");
+                $('.fullpageloader').hide();
+            })
+        
+    }
 
   userMenuToggle(event){
 
@@ -187,6 +241,14 @@ class Header extends Component{
         //this.props.history.push("/")
   }
 
+  ShowResetPass(event){
+    event.preventDefault();
+    var {mapAction} = this.props;
+
+    mapAction.setSelectedModal("resetpassword");
+  }
+  
+
 
     render(){
     // console.log(window.location.pathname.split("/"))
@@ -289,10 +351,10 @@ class Header extends Component{
                                   <FontAwesomeIcon icon={['far', 'user']} />
                                   :
 
-                                  ((this.props.userDetails.profilePicture.length) > 0)
+                                 /* ((this.props.userDetails.profilePicture.length) > 0)
                                   ?
                                     <img src={(this.props.userDetails.profilePicture)} alt="icon"className="classIcon"/>
-                                  :
+                                  :*/
                                   this.props.userDetails.gender=='female'
                                  ? 
                                   <img src="/images/f.png" alt="icon" className="classIcon"/>
@@ -359,11 +421,23 @@ class Header extends Component{
                             {this.props.selectedModal == "signup" ? <SignUp/> : null }
                             {this.props.selectedModal == "forgotpassword" ? <ForgotPassword/> : null }
                             {this.props.selectedModal == "confirmotp" ? <ConfirmOtp/> : null }
-                            {this.props.selectedModal == "resetpass" ? <ResetPass/> : null }
+                            {this.props.selectedModal == "resetpassword" ? <ResetPassword/> : null }
                       </section>
                   </div>
                 </div>
               </div>
+
+              <div className="modal" id="resetPasswordModal" role="dialog" tabIndex="-1">
+                <div className="modal-dialog  modal-lg">
+                  <div className="modal-body">
+                      <button type="button" className="close" id="closeModalButton" data-dismiss="modal">&times;</button>
+                      <section className="OTPSentWrapper row">
+                            <ResetPassword />
+                      </section>
+                  </div>
+                </div>
+              </div>
+
 
                <div className="barsToggel pull-right" id="barsToggel" style={{display:this.state.userMenu}}>
                      
@@ -377,16 +451,15 @@ class Header extends Component{
                       <a href={"/profile/"+this.props.userDetails.candidate_id}><div className="notificationMessege col-lg-12">
                         <span className="notificationMessegeText">View Profiles</span>
                       </div></a>
-                     {/* <div className="notificationMessege col-lg-12">
-                        <FontAwesomeIcon icon="search" />
-                        <span className="notificationMessegeText">Services</span>
+
+                      {/*<a href={"/reset-pwd/"+this.props.userDetails.candidate_id}><div className="notificationMessege col-lg-12">
+                        <span className="notificationMessegeText">Reset Password</span>
+                      </div></a>*/}
+                      
+                      <div className="notificationMessege col-lg-12" id="loginbtndiv" data-toggle="modal" data-target="#loginModal" onClick={this.sendOTP.bind(this)}>
+                          <span className="notificationMessegeText">Reset Password</span>
                       </div>
-                      <div className="notificationMessege col-lg-12">
-                        <span className="notificationMessegeText">About Us</span>
-                      </div>
-                      <div className="notificationMessege col-lg-12">
-                        <span className="notificationMessegeText">Contact Us</span>
-                      </div>*/}
+                     
                       <div className="notificationMessege col-lg-12 ">
                           <span className="signOutButton" onClick={this.logout.bind(this)}>Sign Out</span>
                       </div>
@@ -531,7 +604,7 @@ class Header extends Component{
                             {this.props.selectedModal == "signup" ? <SignUp/> : null }
                             {this.props.selectedModal == "forgotpassword" ? <ForgotPassword/> : null }
                             {this.props.selectedModal == "confirmotp" ? <ConfirmOtp/> : null }
-                            {this.props.selectedModal == "resetpass" ? <ResetPass/> : null }
+                            {this.props.selectedModal == "resetpassword" ? <ResetPassword/> : null }
                       </section>
                   </div>
                 </div>

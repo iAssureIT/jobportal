@@ -13,6 +13,13 @@ class ResetPassword extends Component {
     constructor(props) {
         super(props);
         this.state = {
+
+          oldPassword : '',
+          newPassword : "",
+          confirmNewPassword : "",
+          showPassword1: false,
+          showPassword2: false,
+          showPassword3: false,
             bannerData: {
                 title: "MY SHOPPING CART",
                 breadcrumb: 'My Shopping Cart',
@@ -24,10 +31,71 @@ class ResetPassword extends Component {
     componentDidMount(){
        
     }
+
+    showPassword1=(event)=>{
+    event.preventDefault();
+    var passwordToggle1 = document.getElementById("oldPassword");
+    if (passwordToggle1.type === "password") {
+        passwordToggle1.type = "text";
+        this.setState({showPassword1:true});
+      } else {
+        passwordToggle1.type = "password";
+        this.setState({showPassword1:false});
+      }
+    }
+
+
+    showPassword2=(event)=>{
+    event.preventDefault();
+    var passwordToggle2 = document.getElementById("newPassword");
+    if (passwordToggle2.type === "password") {
+        passwordToggle2.type = "text";
+        this.setState({showPassword2:true});
+      } else {
+        passwordToggle2.type = "password";
+        this.setState({showPassword2:false});
+      }
+    }
+
+
+    showPassword3=(event)=>{
+    event.preventDefault();
+    var passwordToggle3 = document.getElementById("confirmNewPassword");
+    if (passwordToggle3.type === "password") {
+        passwordToggle3.type = "text";
+        this.setState({showPassword3:true});
+      } else {
+        passwordToggle3.type = "password";
+        this.setState({showPassword3:false});
+      }
+    }
+
+
     validateForm=()=>{
     var status = true;
 
-    if(this.state.newPassword.length<=0){
+    var oldPassword= this.state.oldPassword;
+    var newPassword=this.state.newPassword;
+    var confirmNewPassword =this.state.confirmNewPassword;
+
+   /* if(this.state.oldPassword.length =0) {
+      document.getElementById("oldPasswordError").innerHTML=  
+      "Please enter Password";  
+      status=false; 
+    }
+
+    if(this.state.oldPassword.length<8){
+      document.getElementById("oldPasswordError").innerHTML=  
+      "Please enter atleast 8 characters";  
+      status=false; 
+    }
+    else{
+      document.getElementById("oldPasswordError").innerHTML=  
+      ""; 
+      status = true;
+    }
+*/
+    if(this.state.newPassword.length =0) {
       document.getElementById("newPasswordError").innerHTML=  
       "Please enter Password";  
       status=false; 
@@ -44,7 +112,7 @@ class ResetPassword extends Component {
       status = true;
     }
 
-    if(this.state.confirmNewPassword.length<=0){
+    if(this.state.confirmNewPassword.length =0){
       document.getElementById("confirmNewPasswordError").innerHTML=  
       "Please enter Confirm Password";  
       status=false; 
@@ -81,6 +149,20 @@ class ResetPassword extends Component {
         });
     }
 
+    logout() {
+    
+        var userDetails = localStorage.removeItem("userDetails");
+        //alert()
+        if (userDetails !== null && userDetails !== "undefined") {
+            this.setState({
+                loggedIn: false
+            })
+        }
+        window.location.href = "/";
+        //this.props.history.push("/")
+  }
+
+
     resetPassword(event) {
         event.preventDefault();
         var userID = this.props.userID;
@@ -90,16 +172,17 @@ class ResetPassword extends Component {
         var status =  this.validateForm();
         if(status){
             $('.fullpageloader').show();
-            axios.patch('/api/auth/patch/change_password_withoutotp/id/'+userID, formValues)
+            axios.patch('/api/auth/patch/change_password_withoutotp/id/'+this.props.userDetails.user_id, formValues)
             .then((response)=>{
                 $('.fullpageloader').hide();
                 this.setState({
                     "showMessage" : true,
                 })
-                swal(response.data.message);
-                //this.props.history.push('/login');
-                var {mapAction} = this.props;
-                mapAction.setSelectedModal("login");
+                 swal({
+                      text : "Password reset successful"
+                    });
+                    //this.props.history.push('/login');
+                   this.logout();
             })
             .catch((error)=>{
                 $('.fullpageloader').hide();
@@ -151,11 +234,24 @@ class ResetPassword extends Component {
 
                     <hr className="resetPasswordHr"/>
 
+                     <div className="col-lg-12 form-group" >
+                        <div className="input-group">
+                            <span className="input-group-addon resetPasswordInputIcon"><i className="fa fa-lock"></i></span>
+                            <input type="password" id="oldPassword" name="oldPassword" placeholder="Enter old Password" ref="oldPassword" value={this.state.oldPassword} onChange={this.handleChange.bind(this)} className="form-control resetPasswordInputBox"/>
+                             <span className="input-group-addon loginInputIcon3" onClick={this.showPassword1.bind(this)}>
+                             <i className={this.state.showPassword1 ? "fa fa-eye-slash" : "fa fa-eye"} 
+                             value={this.state.showPassword1}></i></span>
+                        </div>
+                         <span id="oldPasswordError" className="errorMsg"></span>
+                    </div>
+
                     <div className="col-lg-12 form-group" >
                         <div className="input-group">
                             <span className="input-group-addon resetPasswordInputIcon"><i className="fa fa-lock"></i></span>
                             <input type="password" id="newPassword" name="newPassword" placeholder="Enter new Password" ref="newPassword" value={this.state.newPassword} onChange={this.handleChange.bind(this)} className="form-control resetPasswordInputBox"/>
-                        </div>
+                        <span className="input-group-addon loginInputIcon3" onClick={this.showPassword2.bind(this)}>
+                             <i className={this.state.showPassword2 ? "fa fa-eye-slash" : "fa fa-eye"} 
+                             value={this.state.showPassword2}></i></span></div>
                          <span id="newPasswordError" className="errorMsg"></span>
                     </div>
 
@@ -163,6 +259,9 @@ class ResetPassword extends Component {
                         <div className="input-group">
                             <span className="input-group-addon resetPasswordInputIcon"><i className="fa fa-lock"></i></span>
                             <input type="password" id="confirmNewPassword" name="confirmNewPassword" placeholder="Confirm new Password" value={this.state.confirmNewPassword} onChange={this.handleChange.bind(this)} className="form-control resetPasswordInputBox"/>
+                            <span className="input-group-addon loginInputIcon3" onClick={this.showPassword3.bind(this)}>
+                             <i className={this.state.showPassword3 ? "fa fa-eye-slash" : "fa fa-eye"} 
+                             value={this.state.showPassword3}></i></span>
                         </div>
                          <span id="confirmNewPasswordError" className="errorMsg"></span>
                     </div>
@@ -183,7 +282,8 @@ class ResetPassword extends Component {
 const mapStateToProps = (state)=>{
     return {
         selectedModal  : state.selectedModal,
-        userID         : state.userID
+        userID         : state.userID,
+        userDetails    : state.userDetails
     }
 }
 const mapDispatchToProps = (dispatch) => ({

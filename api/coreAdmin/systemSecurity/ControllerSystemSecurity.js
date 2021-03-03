@@ -1761,7 +1761,7 @@ exports.set_otp_usingID = (req, res, next) => {
 				User.findOne({ _id: req.body.userid })
 					.then(user => {
 						if (user) {
-							res.status(200).json({ message: "OTP_UPDATED", ID: user._id, OTP:optEmail, firstName:user.profile.firstname })
+							res.status(200).json({ message: "OTP_UPDATED", ID: user._id, OTP:otpEmail, firstName:user.profile.firstname })
 						} else {
 							res.status(200).json({ message: "User not found" });
 						}
