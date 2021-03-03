@@ -26,6 +26,7 @@ class LeftSideFilters extends Component{
       allJobTime            : [],
       allJobShift           : [],
       allSkills             : [],
+      allQualifications     : [],
       inputRole             : [],
 
       allExperiences        : "",
@@ -42,7 +43,6 @@ class LeftSideFilters extends Component{
       functionalArea        : [],
       role                  : '-',
       experience            : '-',
-
       selector              : {},
 
     };
@@ -107,7 +107,8 @@ class LeftSideFilters extends Component{
   let allJobTime          = [];
   let allJobShift         = [];
   let allRoles            = []; 
-  let allSkills            = [];
+  let allSkills           = [];
+  let allQualifications   = [];
 
       Axios.get("/api/industrymaster/get/list")
       .then(response => {
@@ -207,6 +208,17 @@ class LeftSideFilters extends Component{
         Swal.fire("Error while getting skill",error.message,'error');
       })
       
+      Axios.get("/api/qualificationmaster/get/list")
+      .then(response => {
+        response.data.map((elem,index)=>{
+            allQualifications.push({qualification : elem.qualification, id: elem._id});
+        })
+        this.setState({allQualifications:allQualifications})
+      })
+      .catch(error=>{
+        Swal.fire("Error while getting skill",error.message,'error');
+      })
+      
   }
   onSelect(selectedList, selectedItem) {
     console.log(selectedList)
@@ -284,6 +296,20 @@ class LeftSideFilters extends Component{
         delete selector.jobRole_id
       }
     }
+    if (filterType === 'skill') {
+      if (selecteditems.length > 0) {
+        selector.skill_id = selecteditems;
+      }else{
+        delete selector.skill_id
+      }
+    }
+    if (filterType === 'qualification') {
+      if (selecteditems.length > 0) {
+        selector.qualification_id = selecteditems;
+      }else{
+        delete selector.qualification_id
+      }
+    }
     if (filterType === "experience") {
       var flattened = [], minValue, maxValue;
       selecteditems.forEach(function (v) {
@@ -298,6 +324,7 @@ class LeftSideFilters extends Component{
       selector.minExp = minValue
       selector.maxExp = maxValue
     }
+
     this.setState({ selector: selector },()=>{
         mapAction.jobCount(this.state.selector);
       if (this.props.viewMode=="mapView") {
@@ -469,7 +496,25 @@ class LeftSideFilters extends Component{
                                  
               </div>
             </div>
-          </div>
+        </div>
+        
+        <div className="form-group col-lg-12">
+            <div className='row'>
+              <div className="input-group col-lg-12">
+                
+                   <Multiselect className="form-control LeftSideFiltersInputBox LeftSideFiltersDrop"
+                    id="allQualifications" name="allQualifications" placeholder="Qualification"
+                      options={this.state.allQualifications}
+                      displayValue="qualification"
+                      onSelect={this.onSelectedItemsChange.bind(this,'qualification')} // Function will trigger on select event
+                      onRemove={this.onSelectedItemsChange.bind(this,'qualification')}
+                        //showCheckbox={true}
+                        style={this.style}
+                   />    
+                                 
+              </div>
+            </div>
+        </div>
         <div className="form-group col-lg-12">
             <div className="row">
               <div className="input-group col-lg-12">

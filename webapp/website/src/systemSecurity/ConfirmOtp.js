@@ -80,7 +80,6 @@ class ConfirmOtp extends Component {
             swal('OTP Verified Successfully.');
             var url = localStorage.getItem('previousUrl');
             if (response.data.passwordreset === true) {
-              localStorage.removeItem("previousUrl");
               //this.props.history.push('/reset-pwd/' + this.props.userID);
               
               mapAction.setUserID(this.props.userID);

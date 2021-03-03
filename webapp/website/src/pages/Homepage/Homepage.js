@@ -270,7 +270,7 @@ class HomePage extends Component {
                         <a data-toggle="pill" href="#mapwise" > Map <br/> View</a> 
                       </li>
 
-                      <li className={this.props.viewMode == "functionalView" || this.props.viewMode == "listView" ? "viewDiv active" : "viewDiv"} onClick={this.changeViewMode.bind(this,"functionalView")}>  
+                      <li className={this.props.viewMode == "functionalView" || this.props.viewMode == "listView" ? "viewDiv active" : "viewDiv"} onClick={this.changeViewMode.bind(this,this.props.match.path == "/" ? "functionalView" : this.props.match.params.subfunctionalArea == "all" ? "functionalView" : "listView")}>  
                         <a data-toggle="pill" href="#functionwise">Functional <br/> View</a>
                       </li>
 
