@@ -460,15 +460,15 @@ class Header extends Component{
                         <span className="notificationMessegeText">Reset Password</span>
                       </div></a>*/}
                       
-                      <div className="notificationMessege col-lg-12"  onClick={this.sendOTP.bind(this)}>
+                      <div className="notificationMessege col-lg-12" id="changepassworddiv" data-toggle="modal" data-target="#resetPasswordModal">
                           <span className="notificationMessegeText">Change Password</span>
                       </div>
                      
                       <div className="notificationMessege col-lg-12 ">
                           <span className="signOutButton" onClick={this.logout.bind(this)}>Sign Out</span>
                       </div>
-                      <div id="changepassworddiv" data-toggle="modal" data-target="#confirmOTPModal"> { console.log("dicvvv")
-                      }</div>
+                      {/*<div id="changepassworddiv" data-toggle="modal" data-target="#confirmOTPModal"> { console.log("dicvvv")
+                      }</div>*/}
 
                     </div>
             </div>

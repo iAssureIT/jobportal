@@ -1,0 +1,16 @@
+
+.Lakshadweep{
+	position: absolute;
+	top: 100px;
+    left: 100px;
+}
+.LakshadweepText{
+	position: absolute;
+	top: 45%;
+	left: 45%;
+}
+.LakshadweepNumber{
+	position: absolute;
+	top: 50%;
+	left: 45%;
+}

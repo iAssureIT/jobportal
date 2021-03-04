@@ -1,0 +1,16 @@
+
+.DamanDiu{
+	position: absolute;
+	top: 100px;
+    left: 100px;
+}
+.DamanDiuText{
+	position: absolute;
+	top: 45%;
+	left: 45%;
+}
+.DamanDiuNumber{
+	position: absolute;
+	top: 50%;
+	left: 45%;
+}

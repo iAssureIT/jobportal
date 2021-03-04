@@ -138,18 +138,26 @@ const MapView = (pathname) => {
                     const Delhi = React.lazy(() => import('../Delhi/Delhi.js'))
                                 return <Delhi/> ;
 
-           /* case "/state/CH":   const Chandigarh = React.lazy(() => import('../Chandigarh/Chandigarh.js'))
+            case "/country/"+pathname.pathname.pathname.params.countryCode+"/state/AN/city/"+pathname.pathname.pathname.params.district+"/industry/"+pathname.pathname.pathname.params.industryName+"/"+pathname.pathname.pathname.params.industry_id+"/function/"+pathname.pathname.pathname.params.functionalArea+"/"+pathname.pathname.pathname.params.functionalArea_id+"/subfunction/"+pathname.pathname.pathname.params.subfunctionalArea+"/"+pathname.pathname.pathname.params.subfunctionalArea_id :  
+                    const Andaman_Nicobar = React.lazy(() => import('../Andaman_Nicobar/Andaman_Nicobar.js'))
+                                return <Andaman_Nicobar/> ;
+
+            case "/country/"+pathname.pathname.pathname.params.countryCode+"/state/CH/city/"+pathname.pathname.pathname.params.district+"/industry/"+pathname.pathname.pathname.params.industryName+"/"+pathname.pathname.pathname.params.industry_id+"/function/"+pathname.pathname.pathname.params.functionalArea+"/"+pathname.pathname.pathname.params.functionalArea_id+"/subfunction/"+pathname.pathname.pathname.params.subfunctionalArea+"/"+pathname.pathname.pathname.params.subfunctionalArea_id :  
+                    const Chandigarh = React.lazy(() => import('../Chandigarh/Chandigarh.js'))
                                 return <Chandigarh/> ;
+          
+            case "/country/"+pathname.pathname.pathname.params.countryCode+"/state/DD/city/"+pathname.pathname.pathname.params.district+"/industry/"+pathname.pathname.pathname.params.industryName+"/"+pathname.pathname.pathname.params.industry_id+"/function/"+pathname.pathname.pathname.params.functionalArea+"/"+pathname.pathname.pathname.params.functionalArea_id+"/subfunction/"+pathname.pathname.pathname.params.subfunctionalArea+"/"+pathname.pathname.pathname.params.subfunctionalArea_id :  
+                    const DamanDiu = React.lazy(() => import('../DamanDiu/DamanDiu.js'))
+                                return <DamanDiu/> ;
 
-            case "/state/AN":   const Assam = React.lazy(() => import('../Assam/Assam.js'))
-                                return <Assam/> ;
-
-            case "/state/LD":   const Assam = React.lazy(() => import('../Assam/Assam.js'))
-                                return <Assam/> ;
-
-                  */
-
-
+            case "/country/"+pathname.pathname.pathname.params.countryCode+"/state/DH/city/"+pathname.pathname.pathname.params.district+"/industry/"+pathname.pathname.pathname.params.industryName+"/"+pathname.pathname.pathname.params.industry_id+"/function/"+pathname.pathname.pathname.params.functionalArea+"/"+pathname.pathname.pathname.params.functionalArea_id+"/subfunction/"+pathname.pathname.pathname.params.subfunctionalArea+"/"+pathname.pathname.pathname.params.subfunctionalArea_id :  
+                    const DadaraNagarHaveli = React.lazy(() => import('../DadaraNagarHaveli/DadaraNagarHaveli.js'))
+                                return <DadaraNagarHaveli/> ;
+          
+             case "/country/"+pathname.pathname.pathname.params.countryCode+"/state/LD/city/"+pathname.pathname.pathname.params.district+"/industry/"+pathname.pathname.pathname.params.industryName+"/"+pathname.pathname.pathname.params.industry_id+"/function/"+pathname.pathname.pathname.params.functionalArea+"/"+pathname.pathname.pathname.params.functionalArea_id+"/subfunction/"+pathname.pathname.pathname.params.subfunctionalArea+"/"+pathname.pathname.pathname.params.subfunctionalArea_id :  
+                    const Lakshadweep = React.lazy(() => import('../Lakshadweep/Lakshadweep.js'))
+                                return <Lakshadweep/> ;
+          
 
 	        default:      return <h1>No map match</h1>
 	      }

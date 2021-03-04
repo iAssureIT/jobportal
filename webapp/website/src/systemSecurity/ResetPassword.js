@@ -78,24 +78,20 @@ class ResetPassword extends Component {
     var newPassword=this.state.newPassword;
     var confirmNewPassword =this.state.confirmNewPassword;
 
-   /* if(this.state.oldPassword.length =0) {
+    if((this.state.oldPassword) == null) {
       document.getElementById("oldPasswordError").innerHTML=  
       "Please enter Password";  
       status=false; 
     }
 
-    if(this.state.oldPassword.length<8){
-      document.getElementById("oldPasswordError").innerHTML=  
-      "Please enter atleast 8 characters";  
-      status=false; 
-    }
+    
     else{
       document.getElementById("oldPasswordError").innerHTML=  
       ""; 
       status = true;
     }
-*/
-    if(this.state.newPassword.length =0) {
+
+    if(this.state.newPassword == null) {
       document.getElementById("newPasswordError").innerHTML=  
       "Please enter Password";  
       status=false; 
@@ -112,7 +108,7 @@ class ResetPassword extends Component {
       status = true;
     }
 
-    if(this.state.confirmNewPassword.length =0){
+    if(this.state.confirmNewPassword == null){
       document.getElementById("confirmNewPasswordError").innerHTML=  
       "Please enter Confirm Password";  
       status=false; 

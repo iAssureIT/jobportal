@@ -1,6 +1,14 @@
 import React,{Component} from 'react';
 import { FontAwesomeIcon }      from '@fortawesome/react-fontawesome';
-
+import $ from 'jquery';
+import axios from 'axios';
+import jQuery from 'jquery';
+import 'jquery-validation';
+import swal from 'sweetalert';
+import { connect }        from 'react-redux';
+import { bindActionCreators } from 'redux';
+import  * as mapActionCreator from '../actions/index';
+import ResetPassword from '../../systemSecurity/ResetPassword.js'
 import './Header.css';
 
 class Header extends Component{
@@ -131,6 +139,12 @@ class Header extends Component{
                     <div className="signOutToggelProfileName">
                        Hello, {this.state.userDetails.firstName }
                     </div>
+
+                    
+                    <a href={"/reset-pwd/"+this.props.userDetails.user_id}><div className="changePassword col-lg-12">
+                        <span>Reset Password</span>
+                      </div></a>
+
                     <div className="signOutToggelButtons">
                       <div className="col-lg-5 pull-left">
                         <div className="row">
@@ -191,4 +205,14 @@ class Header extends Component{
   }
 }
 
-export default Header;
+const mapStateToProps = (state)=>{
+    return {
+        selectedModal  : state.selectedModal,
+        userDetails    : state.userDetails 
+    }
+}
+const mapDispatchToProps = (dispatch) => ({
+  mapAction :  bindActionCreators(mapActionCreator, dispatch)
+}) 
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

@@ -104,7 +104,9 @@ class Layout extends Component  {
                                                         <Route path="/job-list"                         component={JoblistPage} exact />
                                                         <Route path="/applied-candidate-list/:jobID"    component={CandidatelistPage} exact />
                                                         <Route path="/candidate-profile/:candidate_id"  component={CandidateProfile} exact />
-                                                    </Switch>
+                                                        <Route path="/forgot-password"       exact strict component={ForgotPassword} />
+                                                        <Route path="/reset-pwd/:user_ID"   exact strict component={ResetPassword} />
+                                                        <Route path="/confirm-otp/:userID"  exact strict component={ConfirmOtp} /></Switch>
                                                 </div>
                                             </div>
                                         </div>

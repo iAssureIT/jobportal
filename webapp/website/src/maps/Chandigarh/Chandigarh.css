@@ -1,0 +1,16 @@
+
+.Chandigarh{
+	position: absolute;
+	top: 100px;
+    left: 100px;
+}
+.ChandigarhText{
+	position: absolute;
+	top: 45%;
+	left: 45%;
+}
+.ChandigarhNumber{
+	position: absolute;
+	top: 50%;
+	left: 45%;
+}

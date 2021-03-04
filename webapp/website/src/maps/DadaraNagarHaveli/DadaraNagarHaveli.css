@@ -1,0 +1,16 @@
+
+.DadaraNagarHaveli{
+	position: absolute;
+	top: 100px;
+    left: 100px;
+}
+.DadaraNagarHaveliText{
+	position: absolute;
+	top: 45%;
+	left: 45%;
+}
+.DadaraNagarHaveliNumber{
+	position: absolute;
+	top: 50%;
+	left: 45%;
+}
