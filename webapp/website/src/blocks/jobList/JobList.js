@@ -170,7 +170,7 @@ applyJob = (jobid, company_id)=>{
 				                
 				                if (y && y.length > 0) {
 				                  var appliedClass = '';
-				                  var appliedtooltipMsg = 'Applied';
+				                  var appliedtooltipMsg = 'Remove from applied job';
 				                } else {
 				                  var appliedClass = '-o';
 				                  var appliedtooltipMsg = 'Apply Job';
@@ -185,12 +185,22 @@ applyJob = (jobid, company_id)=>{
 															<ul>	 
 																{
 																	elem.jobBasicInfo.gender=="Male Only"?
-																	<li><i className="fa fa-male"></i></li>
+																	<li><i className="fa fa-male" title="Only male candidates can apply"></i></li>
 																	: elem.jobBasicInfo.gender=="Female Only"?
-																	<li><i className="fa fa-female"></i></li> : <li><i><img src="/images/19.png"/></i></li>
+																	<li><i className="fa fa-female" title="Only female candidates can apply"></i></li> : <li><i className="fa fa-male" title="male & female candidates both can apply"></i><i className="fa fa-female bothIcon" title="male & female candidates both can apply"></i></li>
+																}
+																{	
+																	elem.jobBasicInfo.jobshift_id.jobShift=="Day shift"?
+																	<li><i className="fa fa-sun-o" title="Day shift"></i></li>
+																	: elem.jobBasicInfo.jobshift_id.jobShift=="Night shift"?
+																	<li><i className="fa fa-moon-o" title="Night shift"></i></li> : <li><i className="fa fa-repeat" title="Rotational shift"></i></li> 
 																}	
-																<li><i className="fa fa-sun-o"></i></li>
-																<li><i className="fa fa-clock-o"></i></li>
+																{	
+																	elem.jobBasicInfo.jobtime_id.jobTime=="Full time"?
+																	<li><i className="fa fa-clock-o" title="Full time"></i></li>
+																	: elem.jobBasicInfo.jobtime_id.jobTime=="Part time"?
+																	<li><i className="fa fa-hourglass-start" title="Part time"></i></li> : <li><i className="fa fa-hourglass-o" title="None"></i></li> 
+																}	
 															</ul>
 															<div className="infoLog"> {Moment(elem.createdAt).startOf('seconds').fromNow()}  </div>
 														</div>
@@ -202,7 +212,7 @@ applyJob = (jobid, company_id)=>{
 														<b>{elem.company_id ? elem.company_id.companyName : "Anonymous"}</b>
 													</div>
 													<div> 
-														<i className="fa fa-calendar jobListExperience"></i> &nbsp; Exp: {elem.eligibility.minEducation} and {elem.eligibility.minExperience} years
+														<i className="fa fa-calendar jobListExperience"></i> &nbsp; Exp: {elem.eligibility.minExperience} years
 													</div>
 													<div> 
 														<i className="fa fa-rupee jobListMonSal"></i> &nbsp; <i className="fa fa-inr"></i> {elem.ctcOffered.minSalary} - <i className="fa fa-inr"></i> {elem.ctcOffered.maxSalary} a month
@@ -220,9 +230,8 @@ applyJob = (jobid, company_id)=>{
 															<div className="jobListVerticleIcons">
 																<ul>
 																	
-																	<li><i title={appliedtooltipMsg} className={"fa fa-check-square"+appliedClass} 
-																	onClick={applyJob => this.applyJob(elem._id, elem.company_id)}></i></li>
-																	<li ><i title={tooltipMsg} onClick={wishlist => this.handleclick(elem._id)} className={"fa fa-heart" + wishClass }></i></li>
+																	<li><i title={appliedtooltipMsg} onClick={applyJob => this.applyJob(elem._id, elem.company_id)} className={"fa fa-check-square" + appliedClass}></i></li>
+																	<li ><i title={tooltipMsg} onClick={wishlist => this.handleclick(elem._id)} className={"fa fa-heart" + wishClass}></i></li>
 																	<li><i className="fa fa-youtube-play"></i></li>
 																</ul>
 															</div>

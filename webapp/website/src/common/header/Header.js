@@ -448,6 +448,10 @@ class Header extends Component{
                         <FontAwesomeIcon icon="briefcase" />
                         <span className="notificationMessegeText">Applied Jobs</span>
                       </div></a>
+                      <a href="/wishlist"><div className="notificationMessege col-lg-12">
+                        <FontAwesomeIcon icon="briefcase" />
+                        <span className="notificationMessegeText">Wishlist Jobs</span>
+                      </div></a>
                       <a href={"/profile/"+this.props.userDetails.candidate_id}><div className="notificationMessege col-lg-12">
                         <span className="notificationMessegeText">View Profiles</span>
                       </div></a>

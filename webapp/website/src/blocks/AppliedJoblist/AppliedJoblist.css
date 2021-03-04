@@ -52,7 +52,7 @@
 }
 
 .jobListLeftContent .infoLog{
-	padding: 6px 9px;
+	/*padding: 6px 9px;
 	height: 29px;
 	color: var(--main-border-color);
 	border-radius: 3px;
@@ -61,7 +61,18 @@
 	margin-left: 18px;
 	font-size: 11px;
 	float: left;
+	margin-top: 2px;*/
+	padding: 6px 10px;
+	height: 29px;
+	border-radius: 3px;
+	margin-left: 18px;
+	font-size: 11px;
+	float: left;
 	margin-top: 2px;
+	font-weight: 500;
+	border: 1px solid var(--main-border-color);
+	color: var(--main-border-color);
+	background-color: var(--form-field-background-color);
 }
 
 .jobListDesignation{
@@ -69,13 +80,15 @@
 	color: var(--main-border-color);
 	margin-top: 3px;
 	margin-left: -5px;
-	font-family: 'Montserrat-SemiBold';
+	/*font-family: 'Montserrat-SemiBold';*/
+	font-weight: 600;
 }
 
 .jobListCompanyName{
 	margin-top: 7px;
 	margin-left: -5px;
-	font-family: 'Montserrat-SemiBold';
+	/*font-family: 'Montserrat-SemiBold';*/
+	font-weight: 600;
 }
 
 .jobListExperience{

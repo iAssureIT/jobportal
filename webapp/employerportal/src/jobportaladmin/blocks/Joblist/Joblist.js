@@ -107,14 +107,33 @@ deleteJob = (event)=>{
 																{/*<FontAwesomeIcon className="restRoomIcon" icon={['fas', 'restroom']} />*/}
 																
 																<ul>
-																	{
+																	{/*{
 																		elem.jobBasicInfo.gender=="Male Only"?
 																		<li><i className="fa fa-male"></i></li>
 																		:
 																		<li><i className="fa fa-female"></i></li>
 																	}	
 																	<li><i className="fa fa-sun-o sunIcon"></i></li>
-																	<li><i className="fa fa-clock-o clockIcon"></i></li>
+																	<li><i className="fa fa-clock-o clockIcon"></i></li>*/}
+
+																{
+																	elem.jobBasicInfo.gender=="Male Only"?
+																	<li><i className="fa fa-male" title="Only male candidates can apply"></i></li>
+																	: elem.jobBasicInfo.gender=="Female Only"?
+																	<li><i className="fa fa-female" title="Only female candidates can apply"></i></li> : <li><i className="fa fa-male" title="male & female candidates both can apply"></i><i className="fa fa-female bothIcon" title="male & female candidates both can apply"></i></li>
+																}
+																{	
+																	elem.jobBasicInfo.jobshift_id.jobShift=="Day shift"?
+																	<li><i className="fa fa-sun-o" title="Day shift"></i></li>
+																	: elem.jobBasicInfo.jobshift_id.jobShift=="Night shift"?
+																	<li><i className="fa fa-moon-o" title="Night shift"></i></li> : <li><i className="fa fa-repeat" title="Rotational shift"></i></li> 
+																}	
+																{	
+																	elem.jobBasicInfo.jobtime_id.jobTime=="Full time"?
+																	<li><i className="fa fa-clock-o" title="Full time"></i></li>
+																	: elem.jobBasicInfo.jobtime_id.jobTime=="Part time"?
+																	<li><i className="fa fa-hourglass-start" title="Part time"></i></li> : <li><i className="fa fa-hourglass-o" title="None"></i></li> 
+																}	
 																</ul>
 																<div className="infoLog"> {Moment(elem.createdAt).startOf('seconds').fromNow()}  </div>
 															</div>

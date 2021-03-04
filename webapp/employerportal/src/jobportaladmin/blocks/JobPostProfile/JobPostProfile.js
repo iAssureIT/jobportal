@@ -20,6 +20,7 @@ export default class JobPostProfile extends Component{
 						jobsector_id 		: 	"",
 						jobtype_id 			: 	"",
 						jobshift_id 		: 	"",
+						jobTime             :   "Fulltime",
 						jobtime_id 			: 	"",
 						positions           :   "",
 						jobDesc 			: 	"",

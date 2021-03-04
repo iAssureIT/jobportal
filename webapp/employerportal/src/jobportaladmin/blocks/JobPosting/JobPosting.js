@@ -738,6 +738,7 @@ class JobPosting extends Component {
                         gender                  :   "Male Only",
                         workFromHome            :   false,
                         jobtype_id              :   "",
+                        jobTime                 :   "",
                         jobtime_id              :   "",
                         jobsector_id            :   "",
                         jobshift_id             :   "",
@@ -944,8 +945,6 @@ class JobPosting extends Component {
         console.log('The tag at index ' + index + ' was clicked');
     }
  
-  	
-
     onprimarySkillAddition (tag) {
         if (tag.id == tag.text) {
             tag.id = "" 
@@ -974,7 +973,6 @@ class JobPosting extends Component {
           primarySkillTags: primarySkillTags.filter((tag, index) => index !== i),
         });
     }
- 	
     
     onsecondarySkillAddition (tag) {  
         if (tag.id == tag.text) {
@@ -1035,7 +1033,6 @@ class JobPosting extends Component {
         });
     }
 
-
     onPreferredAddition (tag) {
         if (tag.id == tag.text) {
             tag.id = "" 
@@ -1065,7 +1062,6 @@ class JobPosting extends Component {
         });
     }
 
-    
     onChangeFunctionalArea(event){
         const {name,value} = event.target;
         this.setState({ [name]:value });  
@@ -1135,6 +1131,7 @@ class JobPosting extends Component {
         });  
         
     }
+    
     onChangeJobShift(event){
         const {name,value} = event.target;
         this.setState({ [name]:value });  
@@ -1149,6 +1146,7 @@ class JobPosting extends Component {
         });  
         
     }
+    
     onChangeJobSector(event){
         const {name,value} = event.target;
         this.setState({ [name]:value });  
@@ -1167,10 +1165,10 @@ class JobPosting extends Component {
 render(){	
 
 		const searchOptions =   { componentRestrictions: {country: "in"} }		
-		const KeyCodes = {
-		  comma: 188,
-		  enter: 13,
-		};
+		const KeyCodes  =  {
+		                      comma: 188,
+		                      enter: 13,
+		                   };
 
 		const delimiters = [KeyCodes.comma, KeyCodes.enter];
 	return(
@@ -1441,6 +1439,13 @@ render(){
 													<span className="input-group-addon addJobFormField"><FontAwesomeIcon icon={['fas', 'business-time']} /></span> 
 													   <input type="text" list="jobTime" className="form-control addJobFormField" refs="jobTime" id="selectJobTime" maxLength="50" value={this.state.jobTime} name="jobTime"
                                                         onChange={this.onChangeJobTime.bind(this)} />
+
+                                                        {/*<input type="text" list="jobTime" className="form-control addJobFormField">
+                                                            <div className={this.state.jobTime==="Fulltime"}  id="Fulltime" name="jobTime" value="Fulltime"> </div>
+                                                            <div className={this.state.jobTime==="Part time"} id="Part time" name="jobTime" value="Part time"> </div>
+                                                        </input>*/}
+
+
                                                         <datalist name="jobTime" id="jobTime" className="jobTimeArray" >
                                                             {this.state.jobTimeArray.map((item, key) =>
                                                               <option key={key} value={item.jobTime} data-value={item._id}/>
@@ -1505,7 +1510,7 @@ render(){
 											<div className="col-lg-6">
 												<div className="row row-no-gutters">
 													<div className="col-lg-8">
-														<label htmlFor="minSalary" className="addjobformLable"> Minimum Salary<i className="fa fa-rupee"></i> <span className="asterisk"> &#42; </span>  </label>
+														<label htmlFor="minSalary" className="addjobformLable"> Minimum Salary <i className="fa fa-rupee"></i> <span className="asterisk"> &#42; </span>  </label>
 														<div className="input-group">
 															<span className="input-group-addon addJobFormField"> <i className="fa fa-rupee addJobrupee"></i> </span> 
 															<input type="number" className="form-control addJobFormField" name="minSalary" id="minSalary" maxLength="50" value={this.state.minSalary} onChange={this.handleChange}/>
@@ -1528,7 +1533,7 @@ render(){
 											<div className="col-lg-6">
 												<div className="row row-no-gutters">
 													<div className="col-lg-8">
-														<label htmlFor="maxSalary" className="addjobformLable"> Maximum Salary <i className="fa fa-rupee"></i> <span className="asterisk"> &#42; </span></label>
+														<label htmlFor="maxSalary" className="addjobformLable"> Maximum Salary <i className="fa fa-rupee"></i> <span className="asterisk"> &#42; </span>  </label>
 														<div className="input-group">
 															<span className="input-group-addon addJobFormField"><i className="fa fa-rupee addJobrupee"></i> </span> 
 															<input type="number" className="form-control addJobFormField" name="maxSalary" id="maxSalary" maxLength="50" value={this.state.maxSalary} onChange={this.handleChange}/>
@@ -1601,7 +1606,7 @@ render(){
 													        handleAddition={this.onprimarySkillAddition.bind(this)}
 													        handleDrag={this.onprimarySkillDrag.bind(this)}
           													handleTagClick={this.onprimarySkillClick.bind(this)} />
-													</div>
+												</div>
 											</div>
 											
 											<div className="col-lg-4">
