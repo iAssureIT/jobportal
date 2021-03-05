@@ -122,7 +122,7 @@ exports.insertJobs = (req, res, next)=>{
 								},
 			
 			"eligibility" 	: 	{
-									"minEducation" 	        : mineducation_id,
+									"mineducation_id" 	    : mineducation_id,
 									"minExperience"         : req.body.minExperience
 								},
 			
@@ -660,7 +660,7 @@ exports.updateJob = (req,res,next)=>{
 								},
 			
 			"eligibility" 	: 	{
-									"minEducation" 	         : mineducation_id,
+									"mineducation_id" 	     : mineducation_id,
 									"minExperience"          : req.body.minExperience
 								},
 			
@@ -1424,7 +1424,7 @@ function getJobType(){
 }
 function getJobShift(){ 
     return new Promise(function(resolve,reject){ 
-        JobTypeMaster.find({})
+        JobShiftMaster.find({})
             .exec()
             .then(data => {
                 resolve(data);
@@ -1525,6 +1525,7 @@ exports.insertBulkJobs = (req,res,next)=>{
             var jobtype_id              = jobTypes[Math.floor(Math.random() * jobTypes.length)]._id;
             var jobtime_id              = jobTimes[Math.floor(Math.random() * jobTimes.length)]._id;
             var jobshift_id             = jobShifts[Math.floor(Math.random() * jobShifts.length)]._id;
+            var mineducation_id         = qualifications[Math.floor(Math.random() * qualifications.length)]._id
             
             var jobObject = {
                 "company_id"    : company_id,
@@ -1566,7 +1567,7 @@ exports.insertBulkJobs = (req,res,next)=>{
                                 },
             
                 "eligibility"   :   {
-                                    "minEducation"          : qualifications[Math.floor(Math.random() * qualifications.length)].qualifications,
+                                    "mineducation_id"       : mineducation_id,
                                     "minExperience"         : Math.floor(Math.random()*10)
                                 },  
                 "createdAt"     :   new Date()                                         

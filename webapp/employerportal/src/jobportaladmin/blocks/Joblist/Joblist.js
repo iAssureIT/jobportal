@@ -123,10 +123,12 @@ deleteJob = (event)=>{
 																	<li><i className="fa fa-female" title="Only female candidates can apply"></i></li> : <li><i className="fa fa-male" title="male & female candidates both can apply"></i><i className="fa fa-female bothIcon" title="male & female candidates both can apply"></i></li>
 																}
 																{	
-																	elem.jobBasicInfo.jobshift_id.jobShift=="Day shift"?
+																	elem.jobBasicInfo.jobshift_id ? elem.jobBasicInfo.jobshift_id.jobShift=="Day shift"?
 																	<li><i className="fa fa-sun-o" title="Day shift"></i></li>
 																	: elem.jobBasicInfo.jobshift_id.jobShift=="Night shift"?
 																	<li><i className="fa fa-moon-o" title="Night shift"></i></li> : <li><i className="fa fa-repeat" title="Rotational shift"></i></li> 
+																	:
+																	<li><i className="fa fa-sun-o" title="Day shift"></i></li>
 																}	
 																{	
 																	elem.jobBasicInfo.jobtime_id.jobTime=="Full time"?
