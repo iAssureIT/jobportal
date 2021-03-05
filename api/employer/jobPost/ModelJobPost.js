@@ -43,7 +43,7 @@ const jobsSchema = mongoose.Schema({
 				 		},
 	
 	eligibility 	: 	{
-							minEducation 			: String,
+							mineducation_id 		: { type: mongoose.Schema.Types.ObjectId, ref: 'qualificationmasters' },
 							minExperience   		: Number,
 				  		}, 
 	

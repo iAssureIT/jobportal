@@ -34,7 +34,7 @@ class India extends Component{
 	}
 	componentWillReceiveProps(nextProps){
 		var stateWiseCount = {};
-		console.log("state",this.state)
+		//console.log("state",this.state)
 	    for (var key in this.state) {
 		  if (this.state.hasOwnProperty(key)) {
 		    stateWiseCount[key] = 0;

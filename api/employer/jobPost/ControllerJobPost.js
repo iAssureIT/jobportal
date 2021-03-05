@@ -15,13 +15,13 @@ const JobTypeMaster 			= require('../../coreAdmin/JobTypeMaster/ModelJobType.js'
 const JobShiftMaster            = require('../../coreAdmin/JobShiftMaster/ModelJobShift.js');
 const JobTimeMaster 			= require('../../coreAdmin/JobTimeMaster/ModelJobTime.js');
 const SkillMaster           	= require('../../coreAdmin/SkillMaster/ModelSkill.js');
-const QualificationLevel        = require('../../coreAdmin/QualificationLevelMaster/ModelQualificationLevel.js');
+const QualificationMaster       = require('../../coreAdmin/QualificationMaster/ModelQualification.js');
 
 var ObjectID 	= 	require('mongodb').ObjectID;
 
 exports.insertJobs = (req, res, next)=>{
 		console.log(req.body)	
-		var functionalarea_id, subfunctionalarea_id, jobsector_id, jobrole_id, jobtype_id, jobshift_id, jobtime_id;
+		var functionalarea_id, subfunctionalarea_id, jobsector_id, jobrole_id, jobtype_id, jobshift_id, jobtime_id, mineducation_id;
 		var primarySkills   = [];
 	    var secondarySkills = [];
 	    var otherSkills 	= [];
@@ -51,8 +51,10 @@ exports.insertJobs = (req, res, next)=>{
 			jobtime_id  		= req.body.jobtime_id != "" ? req.body.jobtime_id 
     							: await insertJobTime(req.body.jobTime,req.body.user_id)
 		
-    			
-    		for (var i = 0 ; i < req.body.primarySkillTags.length; i++) {
+    		mineducation_id     = req.body.mineducation_id != "" ? req.body.mineducation_id 
+                                : await insertQualification(req.body.minEducation,req.body.user_id)	
+    		
+            for (var i = 0 ; i < req.body.primarySkillTags.length; i++) {
                 skill_id = req.body.primarySkillTags[i].id != "" ? req.body.primarySkillTags[i].id
                                     : await insertSkill(req.body.primarySkillTags[i].text, req.body.user_id)
                     
@@ -120,7 +122,7 @@ exports.insertJobs = (req, res, next)=>{
 								},
 			
 			"eligibility" 	: 	{
-									"minEducation" 	        : req.body.minEducation,
+									"minEducation" 	        : mineducation_id,
 									"minExperience"         : req.body.minExperience
 								},
 			
@@ -306,6 +308,23 @@ function insertJobTime(jobTime, createdBy){
     });
 }
 
+function insertQualification(qualification, createdBy){ 
+    return new Promise(function(resolve,reject){ 
+        const qualification = new QualificationMaster({
+                        _id                         : new mongoose.Types.ObjectId(),
+                        qualification               : qualification,
+                        createdBy                   : createdBy,
+                        createdAt                   : new Date()
+                    })
+                    qualification.save()
+                    .then(data=>{
+                        resolve( data._id );
+                    })
+                    .catch(err =>{
+                        reject(err); 
+                    });
+    });
+}
 exports.getJob = (req,res,next)=>{
 	var job_id = req.params.job_id;
     Jobs.findOne({"_id": ObjectID(req.params.job_id)})
@@ -318,6 +337,7 @@ exports.getJob = (req,res,next)=>{
     .populate('jobBasicInfo.jobtime_id')
     .populate('jobBasicInfo.jobsector_id')
     .populate('jobBasicInfo.jobshift_id')
+    .populate('eligibility.mineducation_id')
     .populate('requiredSkills.primarySkills.skill_id')
     .populate('requiredSkills.secondarySkills.skill_id')
     .populate('requiredSkills.otherSkills.skill_id')
@@ -339,6 +359,7 @@ exports.getJobList = (req,res,next)=>{
     var jobtime_ids     = [];
     var jobshift_ids    = []; 
     var jobroles_ids 	= [];
+    var qualification_ids    = [];
 
     selector['$and'] 	= [];
     selector["$and"].push({ "location.countryCode" :  req.body.countryCode   })
@@ -406,12 +427,19 @@ exports.getJobList = (req,res,next)=>{
     }
     // 11
     if (req.body.jobRole_id) {
-    	req.body.jobRoles_id.map(elem => {
+    	req.body.jobRole_id.map(elem => {
     		jobroles_ids.push(ObjectID(elem.id))
     	})
     	selector["$and"].push({ "jobBasicInfo.jobrole_id" : { $in: jobroles_ids } });
     }
     // 12
+    if (req.body.qualification_id) {
+        req.body.qualification_id.map(elem => {
+            qualification_ids.push(ObjectID(elem.id))
+        })
+        selector["$and"].push({ "eligibility.mineducation_id" : { $in: qualification_ids } });
+    }
+    // 13
     if (req.body.minExp != null  && req.body.maxExp != null) {
         selector["$and"].push({ "eligibility.minExperience" : { '$gte' : req.body.minExp,  '$lte' : req.body.maxExp} });
     }
@@ -427,6 +455,7 @@ exports.getJobList = (req,res,next)=>{
     .populate('jobBasicInfo.jobtime_id')
     .populate('jobBasicInfo.jobsector_id')
     .populate('jobBasicInfo.jobshift_id')
+    .populate('eligibility.mineducation_id')
     .populate('requiredSkills.primarySkills.skill_id')
     .populate('requiredSkills.secondarySkills.skill_id')
     .populate('requiredSkills.otherSkills.skill_id')
@@ -448,6 +477,7 @@ exports.getJobListForEmployer = (req,res,next)=>{
     var jobtime_ids     = [];
     var jobshift_ids    = [];
     var jobroles_ids 	= [];
+    var qualification_ids    = [];
 
     selector['$and'] 	= [];
     selector["$and"].push({ "location.countryCode" :  req.body.countryCode   })
@@ -519,13 +549,20 @@ exports.getJobListForEmployer = (req,res,next)=>{
         selector["$and"].push({ "jobBasicInfo.jobshift_id" : { $in: jobshift_ids } });
     }
     // 11
-    if (req.body.jobRoles_id ) {
-    	req.body.jobRoles_id.map(elem => {
+    if (req.body.jobRole_id ) {
+    	req.body.jobRole_id.map(elem => {
     		jobroles_ids.push(ObjectID(elem.id))
     	})
     	selector["$and"].push({ "jobBasicInfo.jobrole_id" : { $in: jobroles_ids } });
     }
     // 12
+    if (req.body.qualification_id) {
+        req.body.qualification_id.map(elem => {
+            qualification_ids.push(ObjectID(elem.id))
+        })
+        selector["$and"].push({ "eligibility.mineducation_id" : { $in: qualification_ids } });
+    }
+    // 13
     if (req.body.minExp != null  && req.body.maxExp != null) {
         selector["$and"].push({ "eligibility.minExperience" : { '$gte' : req.body.minExp,  '$lte' : req.body.maxExp} });
     }
@@ -540,6 +577,7 @@ exports.getJobListForEmployer = (req,res,next)=>{
     .populate('jobBasicInfo.jobtime_id')
     .populate('jobBasicInfo.jobsector_id')
     .populate('jobBasicInfo.jobshift_id')
+    .populate('eligibility.mineducation_id')
     .populate('requiredSkills.primarySkills.skill_id')
     .populate('requiredSkills.secondarySkills.skill_id')
     .populate('requiredSkills.otherSkills.skill_id')
@@ -552,7 +590,7 @@ exports.getJobListForEmployer = (req,res,next)=>{
 }
 
 exports.updateJob = (req,res,next)=>{
-	var functionalarea_id, subfunctionalarea_id, jobsector_id, jobrole_id, jobtype_id, jobtime_id, jobshift_id;
+	var functionalarea_id, subfunctionalarea_id, jobsector_id, jobrole_id, jobtype_id, jobtime_id, jobshift_id, mineducation_id;
 		processData();
 		async function processData(){
     		functionalarea_id  		= req.body.functionalarea_id != "" ? req.body.functionalarea_id 
@@ -575,7 +613,10 @@ exports.updateJob = (req,res,next)=>{
 
 			jobtime_id  		= req.body.jobtime_id != "" ? req.body.jobtime_id 
     							: await insertJobTime(req.body.jobTime,req.body.user_id)
-		
+		    
+            mineducation_id     = req.body.mineducation_id != "" ? req.body.mineducation_id 
+                                : await insertQualification(req.body.minEducation,req.body.user_id) 
+            
 	Jobs.updateOne(
 					{_id : req.body.job_id},
 					{$set 	: 	{
@@ -619,7 +660,7 @@ exports.updateJob = (req,res,next)=>{
 								},
 			
 			"eligibility" 	: 	{
-									"minEducation" 	         : req.body.minEducation,
+									"minEducation" 	         : mineducation_id,
 									"minExperience"          : req.body.minExperience
 								},
 			
@@ -668,6 +709,7 @@ exports.jobCount = (req, res, next)=>{
     var jobtime_ids     = [];
     var jobshift_ids    = [];
     var jobrole_ids     = [];
+    var qualification_ids    = []; 
 
     selector['$and']=[];
    
@@ -738,6 +780,13 @@ exports.jobCount = (req, res, next)=>{
         selector["$and"].push({ "jobBasicInfo.jobrole_id" : { $in: jobrole_ids } });
     }
     // 11
+    if (req.body.qualification_id) {
+        req.body.qualification_id.map(elem => {
+            qualification_ids.push(ObjectID(elem.id))
+        })
+        selector["$and"].push({ "eligibility.mineducation_id" : { $in: qualification_ids } });
+    }
+    // 12
     if (req.body.minExp != null  && req.body.maxExp != null) {
         selector["$and"].push({ "eligibility.minExperience" : { '$gte' : req.body.minExp,  '$lte' : req.body.maxExp} });
     }
@@ -770,6 +819,7 @@ exports.mapwiseJobs = (req, res, next)=>{
     var jobtime_ids     = [];
     var jobshift_ids    = [];
     var jobrole_ids     = [];
+    var qualification_ids    = [];
 
     selector['$and']=[];
     var countryCode = req.body.countryCode ? req.body.countryCode : "IN";
@@ -839,6 +889,13 @@ exports.mapwiseJobs = (req, res, next)=>{
         selector["$and"].push({ "jobBasicInfo.jobrole_id" : { $in: jobrole_ids } });
     }
     // 11
+    if (req.body.qualification_id) {
+        req.body.qualification_id.map(elem => {
+            qualification_ids.push(ObjectID(elem.id))
+        })
+        selector["$and"].push({ "eligibility.mineducation_id" : { $in: qualification_ids } });
+    }
+    // 12
     if (req.body.minExp != null  && req.body.maxExp != null) {
         selector["$and"].push({ "eligibility.minExperience" : { '$gte' : req.body.minExp,  '$lte' : req.body.maxExp} });
     }
@@ -880,6 +937,7 @@ exports.functonalAreaJobs = (req, res, next)=>{
     var jobtime_ids     = [];
     var jobshift_ids    = [];
     var jobrole_ids     = [];
+    var qualification_ids    = [];
 
     selector['$and']=[];
     var countryCode = req.body.countryCode ? req.body.countryCode : "IN";
@@ -949,6 +1007,13 @@ exports.functonalAreaJobs = (req, res, next)=>{
         selector["$and"].push({ "jobBasicInfo.jobrole_id" : { $in: jobrole_ids } });
     }
     // 11
+    if (req.body.qualification_id) {
+        req.body.qualification_id.map(elem => {
+            qualification_ids.push(ObjectID(elem.id))
+        })
+        selector["$and"].push({ "eligibility.mineducation_id" : { $in: qualification_ids } });
+    }
+    // 12
     if (req.body.minExp != null  && req.body.maxExp != null) {
         selector["$and"].push({ "eligibility.minExperience" : { '$gte' : req.body.minExp,  '$lte' : req.body.maxExp} });
     }
@@ -984,7 +1049,8 @@ exports.subfunctionalAreaJobs = (req, res, next)=>{
     var jobtime_ids    = [];
     var jobshift_ids   = [];
     var jobrole_ids    = [];
-
+    var qualification_ids    = [];
+    
     selector['$and']=[];
     var countryCode = req.body.countryCode ? req.body.countryCode : "IN";
     selector["$and"].push({ "location.countryCode" :  countryCode })
@@ -1055,6 +1121,13 @@ exports.subfunctionalAreaJobs = (req, res, next)=>{
         selector["$and"].push({ "jobBasicInfo.jobrole_id" : { $in: jobrole_ids } });
     }
     // 11
+    if (req.body.qualification_id) {
+        req.body.qualification_id.map(elem => {
+            qualification_ids.push(ObjectID(elem.id))
+        })
+        selector["$and"].push({ "eligibility.mineducation_id" : { $in: qualification_ids } });
+    }
+    // 12
     if (req.body.minExp != null  && req.body.maxExp != null) {
         selector["$and"].push({ "eligibility.minExperience" : { '$gte' : req.body.minExp,  '$lte' : req.body.maxExp} });
     }
@@ -1097,72 +1170,85 @@ exports.industrialJobs = (req, res, next)=>{
     selector["$and"].push({ "location.countryCode" :  countryCode })
    	
     console.log(JSON.stringify(selector))
+    // 1
     if (req.body.stateCode && req.body.stateCode != "all") {
         selector["$and"].push({ "location.stateCode" :  req.body.stateCode   })
     }
+    // 2
     if (req.body.district && req.body.district != "all") {
         selector["$and"].push({ "location.district" :  req.body.district   }) 
     }
+    // 3
     if (req.body.industry_id ) {
     	req.body.industry_id.map(elem => {
     		industry_ids.push(ObjectID(elem.id))
     	})
     	selector["$and"].push({ "jobBasicInfo.industry_id" : { $in: industry_ids } });
     }
+    // 4
     if (req.body.functionalArea_id ) {
     	req.body.functionalArea_id.map(elem => {
     		funarea_ids.push(ObjectID(elem.id))
     	})
     	selector["$and"].push({ "jobBasicInfo.functionalarea_id" : { $in: funarea_ids } });
     }
+    // 5
     if (req.body.subfunctionalArea_id ) {
         req.body.subfunctionalArea_id.map(elem => {
             subfunarea_ids.push(ObjectID(elem.id))
         })
         selector["$and"].push({ "jobBasicInfo.subfunctionalarea_id" : { $in: subfunarea_ids } });
     }
+    // 6
     if (req.body.jobSector_id) {
         req.body.jobSector_id.map(elem => {
             jobsector_ids.push(ObjectID(elem.id))
         })
         selector["$and"].push({ "jobBasicInfo.jobsector_id" : { $in: jobsector_ids } });
     }
+    // 7
     if (req.body.jobType_id) {
         req.body.jobType_id.map(elem => {
             jobtype_ids.push(ObjectID(elem.id))
         })
         selector["$and"].push({ "jobBasicInfo.jobtype_id" : { $in: jobtype_ids } });
     }
+    // 8
     if (req.body.jobTime_id) {
         req.body.jobTime_id.map(elem => {
             jobtime_ids.push(ObjectID(elem.id))
         })
         selector["$and"].push({ "jobBasicInfo.jobtime_id" : { $in: jobtime_ids } });
     }
+    // 9
     if (req.body.jobShift_id) {
         req.body.jobShift_id.map(elem => {
             jobshift_ids.push(ObjectID(elem.id))
         })
         selector["$and"].push({ "jobBasicInfo.jobshift_id" : { $in: jobshift_ids } });
     }
+    // 10
     if (req.body.jobRole_id) {
         req.body.jobRole_id.map(elem => {
             jobrole_ids.push(ObjectID(elem.id))
         })
         selector["$and"].push({ "jobBasicInfo.jobrole_id" : { $in: jobrole_ids } });
     }
-    if (req.body.skill_id) {
-        req.body.skill_id.map(elem => {
-            skill_ids.push(ObjectID(elem.id))
-        })
-        //selector["$and"].push({ "jobBasicInfo.jobrole_id" : { $in: skill_ids } });
-    }
+    //12
     if (req.body.qualification_id) {
         req.body.qualification_id.map(elem => {
             qualification_ids.push(ObjectID(elem.id))
         })
         //selector["$and"].push({ "jobBasicInfo.jobrole_id" : { $in: qualification_ids } });
     }
+    // 11
+    if (req.body.skill_id) {
+        req.body.skill_id.map(elem => {
+            skill_ids.push(ObjectID(elem.id))
+        })
+        //selector["$and"].push({ "jobBasicInfo.jobrole_id" : { $in: skill_ids } });
+    }
+    // 13
     if (req.body.minExp != null  && req.body.maxExp != null) {
         selector["$and"].push({ "eligibility.minExperience" : { '$gte' : req.body.minExp,  '$lte' : req.body.maxExp} });
     }
@@ -1360,9 +1446,9 @@ function getJobTime(){
             });            
     });
 }
-function getQualificationLevel(){ 
+function getQualification(){ 
     return new Promise(function(resolve,reject){ 
-        QualificationLevel.find({})
+        QualificationMaster.find({})
             .exec()
             .then(data => {
                 resolve(data);
@@ -1384,7 +1470,7 @@ exports.insertBulkJobs = (req,res,next)=>{
         var jobTypes        = await getJobType();
         var jobShifts       = await getJobShift();
         var jobTimes        = await getJobTime();
-        var qualificationLevel        = await getQualificationLevel();
+        var qualifications  = await getQualification();
         var gender          = ["Male Only","Female Only","Both (Male & Female)"];
         /*var states          = [{"state":"Andaman and Nicobar Islands", "stateCode": "AN"},
                         {"state": "Andhra Pradesh", "stateCode": "AP"},
@@ -1433,7 +1519,6 @@ exports.insertBulkJobs = (req,res,next)=>{
             var industry_id             = industries[Math.floor(Math.random() * industries.length)]._id;
             var functionalarea_id       = funAreas[Math.floor(Math.random() * funAreas.length)]._id;;
             var subfunAreas             = await getSubFunctionalAreas(functionalarea_id);
-            console.log("subfunAreas",subfunAreas[Math.floor(Math.random() * subfunAreas.length)])
             var subfunctionalarea_id    = subfunAreas[Math.floor(Math.random() * subfunAreas.length)] ? subfunAreas[Math.floor(Math.random() * subfunAreas.length)]._id : "";
             var jobsector_id            = jobSectors[Math.floor(Math.random() * jobSectors.length)]._id;
             var jobrole_id              = jobRoles[Math.floor(Math.random() * jobRoles.length)]._id;
@@ -1481,7 +1566,7 @@ exports.insertBulkJobs = (req,res,next)=>{
                                 },
             
                 "eligibility"   :   {
-                                    "minEducation"          : qualificationLevel[Math.floor(Math.random() * qualificationLevel.length)].qualificationLevel,
+                                    "minEducation"          : qualifications[Math.floor(Math.random() * qualifications.length)].qualifications,
                                     "minExperience"         : Math.floor(Math.random()*10)
                                 },  
                 "createdAt"     :   new Date()                                         

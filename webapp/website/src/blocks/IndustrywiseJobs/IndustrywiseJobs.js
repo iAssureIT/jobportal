@@ -13,7 +13,7 @@ class IndustrywiseJobs extends Component{
         var selector = this.props.selector;
         var tempArray = [];
         tempArray.push({"industry" : industry, "id": _id })
-        selector.industry_id_id = tempArray; 
+        selector.industry_id = tempArray; 
 
         mapAction.jobCount(selector);
         mapAction.filterJobList(this.props.selector);

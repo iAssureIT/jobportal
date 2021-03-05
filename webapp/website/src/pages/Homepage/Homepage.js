@@ -56,13 +56,15 @@ class HomePage extends Component {
         selector.subfunctionalArea_id = tempArray2;
       }
       
-      if (this.props.match.params.functionalArea == "all") {
+      if (this.props.match.params.industryName == "all" && this.props.match.params.functionalArea == "all") {
         mapAction.setViewMode("functionalView");
         mapAction.filterFunctionalData(selector);
-      }else if(this.props.match.params.subfunctionalArea == "all"){
+      }else if(this.props.match.params.industryName == "all" && this.props.match.params.subfunctionalArea == "all"){
+        
         mapAction.setViewMode("functionalView");
         mapAction.filterSubfunctionalData(selector);
-      }else if(this.props.match.params.industryName != "all"){
+      }else if(this.props.match.params.industryName != "all" && this.props.match.params.subfunctionalArea == "all"){
+        
         mapAction.setViewMode("listView");
         mapAction.filterJobList(selector);
       }else{
@@ -176,7 +178,8 @@ class HomePage extends Component {
       })
     }
   }
-  changeViewMode(viewMode){ 
+  changeViewMode(viewMode){
+  console.log(viewMode) 
     var {mapAction} = this.props;
     mapAction.setViewMode(viewMode);
 
@@ -230,11 +233,17 @@ class HomePage extends Component {
       mapAction.filterSubfunctionalData(this.props.selector);
     }
     if (viewMode=="industrialView") {
-      console.log(this.props)
-      if (this.props.match.path == "/" || this.props.match.industryName=="all") {
-        mapAction.filterIndustrialData(this.props.selector);
+      if (this.props.match.path != "/") {
+        var selector = this.props.selector;
+        delete selector.functionalArea_id;
+
+        this.props.history.push("/country/"+this.props.match.params.countryCode+"/state/"+this.props.match.params.stateCode+"/city/"+this.props.match.params.district+"/industry/"+this.props.match.params.industryName+"/"+this.props.match.params.industry_id+"/function/all/0/subfunction/all/0");
+      }
+      if (this.props.match.path == "/" || this.props.match.params.industryName=="all") {
+        console.log("in if")
+        mapAction.filterIndustrialData(selector);
       }else{
-        mapAction.filterJobList(this.props.selector);
+        mapAction.filterJobList(selector);
       }
     }
     if (viewMode=="listView") {
@@ -243,7 +252,9 @@ class HomePage extends Component {
     mapAction.jobCount(selector);
   }
   render() {
-    //console.log(this.props.viewMode)
+    console.log(this.props)
+    console.log(this.props.match.params.industryName == "all" && (this.props.viewMode == "industrialView" || this.props.viewMode == "listView"))
+    console.log(this.props.match.params.industryName != "all" && (this.props.viewMode == "industrialView" || this.props.viewMode == "listView"))
     return (
       <div className="ViewBodyWrapper container-fluid">
 
@@ -270,11 +281,11 @@ class HomePage extends Component {
                         <a data-toggle="pill" href="#mapwise" > Map <br/> View</a> 
                       </li>
 
-                      <li className={this.props.viewMode == "functionalView" || this.props.viewMode == "listView" ? "viewDiv active" : "viewDiv"} onClick={this.changeViewMode.bind(this,this.props.match.path == "/" ? "functionalView" : this.props.match.params.subfunctionalArea == "all" ? "functionalView" : "listView")}>  
+                      <li className={this.props.match.params.industryName == "all" && (this.props.viewMode == "functionalView" || this.props.viewMode == "listView") ? "viewDiv active" : "viewDiv"} onClick={this.changeViewMode.bind(this,this.props.match.path == "/" ? "functionalView" : this.props.match.params.subfunctionalArea == "all" ? "functionalView" : "listView")}>  
                         <a data-toggle="pill" href="#functionwise">Functional <br/> View</a>
                       </li>
 
-                      <li className={this.props.viewMode == "industrialView" ? "viewDiv active" : "viewDiv"} onClick={this.changeViewMode.bind(this,"industrialView")}>
+                      <li className={this.props.match.params.industryName != "all" && (this.props.viewMode == "industrialView" || this.props.viewMode == "listView") ? "viewDiv active" : "viewDiv"} onClick={this.changeViewMode.bind(this, this.props.match.path == "/" ? "industrialView" : this.props.match.params.industryName == "all" ? "industrialView" : "listView") }>
                         <a data-toggle="pill" href="#industrywise">Industrial <br/> View</a>
                       </li>
 
@@ -294,12 +305,13 @@ class HomePage extends Component {
                 <MapComponent pathname={this.props.match}/> 
               </div>
 
-              <div id="functionwise" className= {this.props.viewMode == "functionalView" || this.props.viewMode == "listView"  ? "tab-pane fade in active" : "tab-pane fade" } >
+              <div id="functionwise" className= {this.props.match.params.industryName == "all" && (this.props.viewMode == "functionalView" || this.props.viewMode == "listView")  ?
+                             this.props.match.params.industryName != "all" && this.props.match.params.functionalArea_id == "all" && (this.props.viewMode == "functionalView" || this.props.viewMode == "listView") ? "tab-pane fade in active"  : "tab-pane fade in" : "tab-pane fade" } >
                 { this.props.showLoader ? <Loader type="placeholderloader"  /> :
                 <FunctionalComponent pathname={this.props.match}/> }
               </div>
 
-              <div id="industrywise" className={this.props.viewMode == "industrialView" ? "tab-pane fade in active" : "tab-pane fade" }>
+              <div id="industrywise" className={this.props.match.params.industryName != "all" && (this.props.viewMode == "industrialView" || this.props.viewMode == "listView") ? "tab-pane fade in active" : "tab-pane fade" }>
               { this.props.showLoader ? <Loader type="placeholderloader"  /> :
                 <IndustrialComponent pathname={this.props.match}/> }
               </div>

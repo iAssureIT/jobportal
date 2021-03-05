@@ -70,11 +70,14 @@ class JobPosting extends Component {
             pincodeExists               :   true,
 
             minSalary                   :   "",
-            minSalPeriod                :   "",
+            minSalPeriod                :   "Per Year",
             maxSalary                   :   "",
-            maxSalPeriod                :   "",
+            maxSalPeriod                :   "Per Year",
 
             minEducation                :   "",
+            mineducation_id             :   "",
+            minEducationArray           :   [],
+
             minExperience               :   0,
 
             primarySkills               :   [],
@@ -196,8 +199,19 @@ class JobPosting extends Component {
             })
             .catch(error => {
                 Swal.fire("Error while getting List data", error.message, 'error');
-            })    
+            })   
 
+        Axios.get("/api/qualificationmaster/get/list")
+            .then(response => {
+                this.setState({
+                    minEducationArray: response.data
+                });
+                /*console.log("jobSectorArray", this.state.jobSectorArray);*/
+            })
+            .catch(error => {
+                Swal.fire("Error while getting List data", error.message, 'error');
+            })  
+                
         Axios.get("/api/skillmaster/get/list")
             .then(response => {
                 var primarySkillSuggestions =  [];
@@ -699,6 +713,7 @@ class JobPosting extends Component {
                 maxSalPeriod            :   this.state.maxSalPeriod,
 
                 minEducation            :   this.state.minEducation,
+                mineducation_id         :   this.state.mineducation_id,
                 minExperience           :   this.state.minExperience,
 
                 primarySkillTags        :   this.state.primarySkillTags,
@@ -1160,10 +1175,21 @@ class JobPosting extends Component {
             //console.log(this.state)
         });  
     }
+    onChangeMinEducation(event){
+        const {name,value} = event.target;
+        this.setState({ [name]:value });  
+        
+        var mineducation_id;
+        if (document.querySelector('#minEducation option[value="' + value + '"]')) {
+            mineducation_id = document.querySelector('#minEducation option[value="' + value + '"]').getAttribute("data-value")
+        }else{ mineducation_id = "" }
 
+        this.setState({ mineducation_id : mineducation_id },()=>{
+            //console.log(this.state)
+        });  
+    }
 
 render(){	
-
 		const searchOptions =   { componentRestrictions: {country: "in"} }		
 		const KeyCodes  =  {
 		                      comma: 188,
@@ -1521,9 +1547,7 @@ render(){
 													<div className="col-lg-4">
 														<label htmlFor="minSalPeriod" className="addjobformLable"> &nbsp; </label>
 														<select className="form-control addJobFormField minSalaryDropdown" name="minSalPeriod" id="minSalPeriod" value={this.state.minSalPeriod} onChange={this.handleChange}>
-															<option hidden> -- Select -- </option>
-															<option> Per Month </option>
-															<option> Per Year  </option>
+															<option selected> Per Year  </option>
 													    </select>
                                                         <span id="minSalPeriodError" className="errorMsg"></span>
 													</div>
@@ -1544,9 +1568,7 @@ render(){
 													<div className="col-lg-4">
 														<label htmlFor="maxSalPeriod" className="addjobformLable"> &nbsp; </label>
 														<select className="form-control addJobFormField maxSalaryDropdown" name="maxSalPeriod" id="maxSalPeriod" value={this.state.maxSalPeriod} onChange={this.handleChange}>
-															<option hidden> -- Select -- </option>
-															<option> Per Month </option>
-															<option> Per Year  </option>
+															<option selected> Per Year  </option>
 													    </select>
                                                         <span id="maxSalPeriodError" className="errorMsg"></span>
 													</div>
@@ -1568,8 +1590,18 @@ render(){
 												<label htmlFor="minEducation" className="addjobformLable"> Minimum Education Required<span className="asterisk"> &#42; </span> </label>
 												<div className="input-group">
 													<span className="input-group-addon addJobFormField"> <i className="fa fa-graduation-cap"></i> </span> 
-													<input type="text" className="form-control addJobFormField" name="minEducation" id="minEducation" maxLength="50" value={this.state.minEducation} onChange={this.handleChange}/>
-												</div>
+												    <input type="text" list="minEducation" className="form-control addJobFormField" refs="minEducation" id="selectminEducation" maxLength="50" value={this.state.minEducation} name="minEducation"
+                                                    onChange={this.onChangeMinEducation.bind(this)} />
+                                                    <datalist name="minEducation" id="minEducation" className="minEducationArray" >
+                                                        {this.state.minEducationArray.map((item, key) =>
+                                                          <option key={key} value={item.qualification} data-value={item._id}/>
+                                                        )}
+                                                    </datalist>	
+                                                </div>
+
+                                                
+
+
                                                 <span id="minEducationError" className="errorMsg"></span>
 											</div>
 											

@@ -467,8 +467,6 @@ class Header extends Component{
                       <div className="notificationMessege col-lg-12 ">
                           <span className="signOutButton" onClick={this.logout.bind(this)}>Sign Out</span>
                       </div>
-                      {/*<div id="changepassworddiv" data-toggle="modal" data-target="#confirmOTPModal"> { console.log("dicvvv")
-                      }</div>*/}
 
                     </div>
             </div>
