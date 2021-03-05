@@ -81,7 +81,6 @@ class ConfirmOtp extends Component {
             var url = localStorage.getItem('previousUrl');
             if (response.data.passwordreset === true) {
               //this.props.history.push('/reset-pwd/' + this.props.userID);
-              
               mapAction.setUserID(this.props.userID);
               mapAction.setSelectedModal("resetpassword");
               

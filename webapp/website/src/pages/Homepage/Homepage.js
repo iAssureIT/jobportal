@@ -305,8 +305,8 @@ class HomePage extends Component {
                 <MapComponent pathname={this.props.match}/> 
               </div>
 
-              <div id="functionwise" className= {this.props.match.params.industryName == "all" && (this.props.viewMode == "functionalView" || this.props.viewMode == "listView")  ?
-                             this.props.match.params.industryName != "all" && this.props.match.params.functionalArea_id == "all" && (this.props.viewMode == "functionalView" || this.props.viewMode == "listView") ? "tab-pane fade in active"  : "tab-pane fade in" : "tab-pane fade" } >
+              <div id="functionwise" className= {this.props.match.params.industryName == "all" && (this.props.viewMode == "functionalView" || this.props.viewMode == "listView")  ? "tab-pane fade in active" :
+                             this.props.match.params.industryName != "all" && this.props.match.params.functionalArea_id == "all" && (this.props.viewMode == "functionalView" || this.props.viewMode == "listView") ? "tab-pane fade in active"  : "tab-pane fade in" } >
                 { this.props.showLoader ? <Loader type="placeholderloader"  /> :
                 <FunctionalComponent pathname={this.props.match}/> }
               </div>
