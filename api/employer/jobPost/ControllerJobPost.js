@@ -1326,7 +1326,7 @@ function getStates(){
 }
 function getDistricts(state_id){ 
     return new Promise(function(resolve,reject){ 
-        console.log("state_id",state_id)
+        
         DistrictMaster.find({"stateID":ObjectID(state_id)})
             .exec()
             .then(data => {
@@ -1551,8 +1551,8 @@ exports.insertBulkJobs = (req,res,next)=>{
                                     "address"               : "",
                                     "area"                  : "",
                                     "cityVillage"           : "",
-                                    "district"              : districts[randomDistrictIndex] ? districts[randomDistrictIndex].districtName : "",
-                                    "state"                 : states[randomStateIndex].stateName,
+                                    "district"              : districts[randomDistrictIndex] ? camelCase(districts[randomDistrictIndex].districtName) : "",
+                                    "state"                 : camelCase(states[randomStateIndex].stateName),
                                     "stateCode"             : states[randomStateIndex].stateCode,   
                                     "country"               : "India",
                                     "countryCode"           : "IN",
@@ -1571,7 +1571,7 @@ exports.insertBulkJobs = (req,res,next)=>{
                                 },  
                 "createdAt"     :   new Date()                                         
             }
-            console.log(jobObject)
+            //console.log(jobObject)
             jobsArray.push(jobObject) 
             
         }
@@ -1583,4 +1583,10 @@ exports.insertBulkJobs = (req,res,next)=>{
                 console.log(err);
             });   
     }
+}
+function camelCase(str) {
+        return str.toLowerCase()
+            .split(' ')
+            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+            .join(' ');
 }
