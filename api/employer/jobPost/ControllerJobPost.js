@@ -1560,10 +1560,10 @@ exports.insertBulkJobs = (req,res,next)=>{
                                     "pincode"               : ""
                                 }, 
                 "ctcOffered"    :   {
-                                    "minSalary"             : Math.floor(Math.random()*20),
-                                    "minSalPeriod"          : "Per Month",
-                                    "maxSalary"             : Math.floor(Math.random()*30),
-                                    "maxSalPeriod"          : "Per Month",
+                                    "minSalary"             : Math.floor(Math.random()*20000),
+                                    "minSalPeriod"          : "Per Year",
+                                    "maxSalary"             : Math.floor(Math.random()*30000),
+                                    "maxSalPeriod"          : "Per Year",
                                 },
             
                 "eligibility"   :   {
