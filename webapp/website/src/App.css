@@ -133,3 +133,10 @@ button.close{
 a:hover{
   text-decoration: none!important;
 }
+.swal2-styled.swal2-cancel{
+  border: 1px solid var(--main-border-color ) !important;
+  border-radius: .25em;
+  background-color: transparent !important;
+  color: #fff;
+  font-size: 1.0625em;
+}

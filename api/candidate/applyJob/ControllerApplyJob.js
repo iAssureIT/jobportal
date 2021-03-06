@@ -9,8 +9,8 @@ exports.applyJob = (req,res,next)=>{
     const applyjob = new ApplyJob({
             _id                   : new mongoose.Types.ObjectId(),                    
             candidate_id          : req.body.candidate_id,
-            jobID                 : req.body.jobID,
-            employerID            : req.body.employerID,
+            job_id                 : req.body.job_id,
+            entity_id            : req.body.entity_id,
             appliedDate           : new Date(),
             status                : req.body.status,   
             applicationViewed     : false,  
@@ -38,7 +38,7 @@ exports.appliedJobList = (req,res,next)=>{
         { "$lookup": {
             "from": "jobs",
             "as": "jobDetails",
-            "localField": "jobID",
+            "localField": "job_id",
             "foreignField": "_id"
         }}
     ])    
@@ -59,7 +59,7 @@ exports.appliedJobCount = (req,res,next)=>{
         { "$lookup": {
             "from": "jobs",
             "as": "jobDetail",
-            "localField": "jobID",
+            "localField": "job_id",
             "foreignField": "_id"
         }},
             
@@ -78,8 +78,8 @@ exports.appliedJobCount = (req,res,next)=>{
 exports.applicantsCountList = (req,res,next)=>{
     //console.log(req.params.candidate_id);
     ApplyJob.aggregate([
-        { "$match" : { "employerID" : ObjectId(req.body.employerID) } },
-        { "$group" : { _id: "$jobID", candidatesApplied: { $sum: 1 } }}
+        { "$match" : { "entity_id" : ObjectId(req.body.entity_id) } },
+        { "$group" : { _id: "$job_id", candidatesApplied: { $sum: 1 } }}
     ])
     .exec()
     .then(data=>{
@@ -94,7 +94,7 @@ exports.applicantsCountList = (req,res,next)=>{
 //candidatesAppliedToJob
 exports.candidatesAppliedToJob = (req,res,next)=>{
 
-    ApplyJob.find({"jobID" : ObjectId(req.body.jobID)})
+    ApplyJob.find({"job_id" : ObjectId(req.body.job_id)})
             .populate({path : 'candidate_id', model : 'candidatemasters',
                 populate: {
                   path: 'address.addressType',
@@ -136,5 +136,17 @@ exports.candidatesAppliedToJob = (req,res,next)=>{
     if (err) return res.status(500).json({ error: err });
     res.status(200).json(candidate);
     // prints "The author is Ian Fleming"
+    });
+};
+exports.removeApplication = (req,res,next)=>{
+    ApplyJob.deleteOne({_id:req.body.job_id})
+    .exec()
+    .then(data=>{
+       
+            res.status(200).json({ deleted : true });
+        
+    })
+    .catch(err =>{
+        res.status(500).json({ error: err });
     });
 };

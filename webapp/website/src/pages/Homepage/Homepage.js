@@ -32,7 +32,9 @@ class HomePage extends Component {
     
     var {mapAction} = this.props;
     var selector = this.props.selector;
-    
+    mapAction.getJobWishlist(this.props.userDetails.candidate_id);
+    mapAction.getAppliedJoblist(this.props.userDetails.candidate_id);
+
     selector.countryCode = "IN"; 
     
     //========== HomePage =============// 
@@ -325,6 +327,7 @@ class HomePage extends Component {
 const mapStateToProps = (state)=>{
 
     return {
+        userDetails       : state.userDetails,
         selector          : state.selector,
         mapJobs           : state.mapJobs,
         functionalJobs    : state.functionalJobs,

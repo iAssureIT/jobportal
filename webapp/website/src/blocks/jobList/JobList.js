@@ -29,7 +29,7 @@ handleclick = (jobid)=>{
 	if (this.props.userDetails.loggedIn) {
 		var formValues = {
 			candidate_id : this.props.userDetails.candidate_id,
-			jobID  		: jobid,
+			job_id  		: jobid,
 			createdBy   : this.props.userDetails.user_id
 		}
 		Axios.post("/api/wishlist/post",formValues)
@@ -82,19 +82,18 @@ applyJob = (jobid, company_id)=>{
 	if (this.props.userDetails.loggedIn) {
 	var formValues = { 
 						candidate_id   		: this.props.userDetails.candidate_id,
-						jobID         		: jobid,
-					    employerID    		: company_id,
+						job_id         		: jobid,
+					    entity_id    		: company_id,
 					    status        	  	: "Applied"
 	}
 	console.log(formValues)
 	Swal.fire({
-		title 				: 'Are you sure? you want to apply for this job!!!',
-		text 				: 'You will be able to add this to applied joblist',
+		title 				: 'Are you sure? Do you want to apply for this job!!!',
 		icon 				: 'success',
 		showCancelButton 	: true,
 		confirmButtonText 	: 'Yes, Add it!',
 		cancelButtonColor 	: 'No, keep it',
-		confirmButtonColor  : '#d33',
+		confirmButtonColor  : '#f5a721',
 	
 	}).then((result) =>{
 		console.log("result", result.value)
@@ -109,7 +108,7 @@ applyJob = (jobid, company_id)=>{
 
 						Swal.fire(
 									'Applied!',
-									'Applied job successfully!',
+									'You have applied job successfully!',
 									'success'
 							);
 					}
@@ -123,14 +122,24 @@ applyJob = (jobid, company_id)=>{
 				})
 			
 				}else if (result.dismiss === Swal.DismissReason.cancel){
-					Swal.fire(
-						'Cancelled',
-						'Not added to applied joblist',
-						'error'
-					)
+					// Swal.fire(
+					// 	'Cancelled',
+					// 	'Not added to applied joblist',
+					// 	'error'
+					// )
 				}
 			})
 
+	}else{
+		document.getElementById("loginbtndiv").click();
+	}
+}
+removeApplication(job_id){
+	if (this.props.userDetails.loggedIn) {
+		var formValues = { 
+			candidate_id   		: this.props.userDetails.candidate_id,
+			job_id         		: job_id
+		}
 	}else{
 		document.getElementById("loginbtndiv").click();
 	}
@@ -155,7 +164,7 @@ applyJob = (jobid, company_id)=>{
 									//console.log(elem._id )
 									
 								var x = this.props.jobWishlist && this.props.jobWishlist.length > 0 ?
-								this.props.jobWishlist.filter((wishlistitem) => wishlistitem.wishlistItems.jobID == elem._id) : [];
+								this.props.jobWishlist.filter((wishlistitem) => wishlistitem.wishlistItems.job_id == elem._id) : [];
 				                
 				                if (x && x.length > 0) {
 				                  var wishClass = '';
@@ -166,8 +175,8 @@ applyJob = (jobid, company_id)=>{
 				                }
 
 				                var y = this.props.appliedJoblist && this.props.appliedJoblist.length > 0 ?
-								this.props.appliedJoblist.filter((applieditem) => applieditem.jobID == elem._id) : [];
-				                
+								this.props.appliedJoblist.filter((applieditem) => applieditem.job_id == elem._id) : [];
+				                console.log(this.props.appliedJoblist)
 				                if (y && y.length > 0) {
 				                  var appliedClass = '';
 				                  var appliedtooltipMsg = 'Remove from applied job';
@@ -190,17 +199,22 @@ applyJob = (jobid, company_id)=>{
 																	<li><i className="fa fa-female" title="Only female candidates can apply"></i></li> : <li><i className="fa fa-male" title="male & female candidates both can apply"></i><i className="fa fa-female bothIcon" title="male & female candidates both can apply"></i></li>
 																}
 																{	
-																	elem.jobBasicInfo.jobshift_id ? elem.jobBasicInfo.jobshift_id.jobShift=="Day shift"?
-																	<li><i className="fa fa-sun-o" title="Day shift"></i></li>
-																	: elem.jobBasicInfo.jobshift_id.jobShift=="Night shift"?
-																	<li><i className="fa fa-moon-o" title="Night shift"></i></li> : <li><i className="fa fa-repeat" title="Rotational shift"></i></li> 
-																	: <li><i className="fa fa-sun-o" title="Day shift"></i></li>
+																	elem.jobBasicInfo.jobshift_id ? 
+																	elem.jobBasicInfo.jobshift_id.jobShift=="Day Shift" ?
+																	<li><i className="fa fa-sun-o" title="Day Shift"></i></li>
+																	: elem.jobBasicInfo.jobshift_id.jobShift=="Night Shift"?
+																	<li><i className="fa fa-moon-o" title="Night Shift"></i></li> 
+																	: <li><i className="fa fa-repeat" title="Rotational shift"></i></li> 
+																	:
+																	<li><i className="fa fa-sun-o" title="Day Shift"></i></li>
 																}	
 																{	
-																	elem.jobBasicInfo.jobtime_id.jobTime=="Full time"?
-																	<li><i className="fa fa-clock-o" title="Full time"></i></li>
-																	: elem.jobBasicInfo.jobtime_id.jobTime=="Part time"?
-																	<li><i className="fa fa-hourglass-start" title="Part time"></i></li> : <li><i className="fa fa-hourglass-o" title="None"></i></li> 
+																	elem.jobBasicInfo.jobtime_id.jobTime=="Full Time"?
+																	<li><i className="fa fa-clock-o" title="Full Time"></i></li>
+																	: elem.jobBasicInfo.jobtime_id.jobTime=="Part Time" ? <li><i className="fa fa-hourglass-start" title="Part Time"></i></li>
+																	: elem.jobBasicInfo.jobtime_id.jobTime=="Hourly Basis"? 
+																	<li><i className="fa fa-hourglass-o" title="Hourly Basis"></i></li> 
+																	: <li><i className="fa fa-hourglass-o" title="Hourly Basis"></i></li>
 																}	
 															</ul>
 															<div className="infoLog"> {Moment(elem.createdAt).startOf('seconds').fromNow()}  </div>
@@ -219,7 +233,7 @@ applyJob = (jobid, company_id)=>{
 														<i className="fa fa-rupee jobListMonSal"></i> &nbsp; <i className="fa fa-inr"></i> {elem.ctcOffered.minSalary} - <i className="fa fa-inr"></i> {elem.ctcOffered.maxSalary} a month
 													</div>
 													<div className="joblistLocationInfo">
-														<i className="fa fa-map-marker jobListLocation"></i> &nbsp; {elem.location.address}
+														<i className="fa fa-map-marker jobListLocation"></i> &nbsp; {elem.location.address + " "+ elem.location.district + ", "+elem.location.state+", "+elem.location.country}
 													</div>
 													<div> 
 														<i className="fa fa-users jobListNumPositions"></i> &nbsp; No of position : {elem.jobBasicInfo.positions}
@@ -231,7 +245,7 @@ applyJob = (jobid, company_id)=>{
 															<div className="jobListVerticleIcons">
 																<ul>
 																	
-																	<li><i title={appliedtooltipMsg} onClick={applyJob => this.applyJob(elem._id, elem.company_id)} className={"fa fa-check-square" + appliedClass}></i></li>
+																	<li><i title={appliedtooltipMsg} className={"fa fa-check-square" + appliedClass}  onClick={appliedClass == '-o' ? applyJob => this.applyJob(elem._id, elem.company_id) : this.removeApplication(elem._id) } ></i></li>
 																	<li ><i title={tooltipMsg} onClick={wishlist => this.handleclick(elem._id)} className={"fa fa-heart" + wishClass}></i></li>
 																	<li><i className="fa fa-youtube-play"></i></li>
 																</ul>
@@ -257,7 +271,8 @@ applyJob = (jobid, company_id)=>{
 const mapStateToProps = (state)=>{
     return {
     	userDetails 	: state.userDetails,	selector        : state.selector, 	
-    	jobList 		: state.jobList,		jobWishlist 	: state.jobWishlist
+    	jobList 		: state.jobList,		jobWishlist 	: state.jobWishlist, 
+    	appliedJoblist  : state.appliedJoblist
     }
 }
 const mapDispatchToProps = (dispatch) => ({

@@ -14,7 +14,7 @@ router.post('/get/applicantsCountList',ControllerApplyJob.applicantsCountList);
 
 router.post('/get/candidatesAppliedToJob',ControllerApplyJob.candidatesAppliedToJob);
 
-//router.delete('/delete/:wishlistID',wishlistsController.delete_wishlist);
+router.delete('/removeApplication',ControllerApplyJob.removeApplication);
 
 
 module.exports = router;

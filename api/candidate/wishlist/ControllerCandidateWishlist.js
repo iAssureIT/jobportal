@@ -10,14 +10,14 @@ exports.manage_wishlist = (req,res,next)=>{
 		.then(data =>{
             
             if(data){
-                Wishlist.findOne({"candidate_id": req.body.candidate_id, "wishlistItems.jobID": req.body.jobID })
+                Wishlist.findOne({"candidate_id": req.body.candidate_id, "wishlistItems.job_id": req.body.job_id })
                 .exec()
                 .then(jobdata =>{
                     console.log("jobdata",jobdata)
                     if (jobdata) {
                         Wishlist.updateOne(
                         {"candidate_id": req.body.candidate_id},
-                        { $pull: {"wishlistItems":{"jobID": req.body.jobID } } }
+                        { $pull: {"wishlistItems":{"job_id": req.body.job_id } } }
                         )
                         .exec()
                         .then(data=>{
@@ -33,7 +33,7 @@ exports.manage_wishlist = (req,res,next)=>{
                         });
                     }else{
                         var wishlistItems = {
-                            'jobID' : req.body.jobID
+                            'job_id' : req.body.job_id
                         }
                         Wishlist.updateOne(
                             {"candidate_id": req.body.candidate_id},
@@ -73,7 +73,7 @@ exports.manage_wishlist = (req,res,next)=>{
                 const wishlists = new Wishlist({
                     _id                   : new mongoose.Types.ObjectId(),                    
                     candidate_id           : req.body.candidate_id,
-                    wishlistItems         : [{"jobID": req.body.jobID}],  
+                    wishlistItems         : [{"job_id": req.body.job_id}],  
                     createdBy             : req.body.createdBy,
                     createdAt             : new Date()
                 });
@@ -110,7 +110,7 @@ exports.getCandidateWishlist = (req,res,next)=>{
         { "$lookup": {
             "from": "jobs",
             "as": "wishlistItems.jobDetail",
-            "localField": "wishlistItems.jobID",
+            "localField": "wishlistItems.job_id",
             "foreignField": "_id"
         }},
         { "$unwind": "$wishlistItems.jobDetail" }    
@@ -134,7 +134,7 @@ exports.countCandidateWishlist = (req,res,next)=>{
         { "$lookup": {
             "from": "jobs",
             "as": "wishlistItems.jobDetail",
-            "localField": "wishlistItems.jobID",
+            "localField": "wishlistItems.job_id",
             "foreignField": "_id"
         }},
             
