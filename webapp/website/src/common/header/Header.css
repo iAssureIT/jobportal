@@ -280,10 +280,11 @@ font-face {
   height:34px;
 
   font-size:12px;
+  font-family: 'Montserrat-Regular';
   border-bottom:1px solid var(--header-border-color);
   padding-top:7px;
   text-align:left;
-  padding-left: 20px;
+  padding-left: 90px;
   background:var(--header-bg-color  );
   
 }
@@ -297,6 +298,8 @@ font-face {
 .notificationMessege:hover{
   cursor: pointer;
   background:var(--main-bg-color );
+  font-family: 'Montserrat-Bold';
+
 
 }
 .notificationCount:hover{

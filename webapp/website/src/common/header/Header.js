@@ -469,17 +469,22 @@ class Header extends Component{
                       </div>
                      
                       <a href="/basic-info"><div className="notificationMessege col-lg-12">
+
+                        <i className="fa fa-user-o"></i>
                         <span className="notificationMessegeText">Complete Your Profile</span>
                       </div></a>
                       <a href="/applied-jobs"><div className="notificationMessege col-lg-12">
-                        <FontAwesomeIcon icon="briefcase" />
+                       <i className="fa fa-briefcase"></i>
                         <span className="notificationMessegeText">Applied Jobs</span>
                       </div></a>
                       <a href="/wishlist"><div className="notificationMessege col-lg-12">
-                        <FontAwesomeIcon icon="briefcase" />
+                        <i className="fa fa-heart"></i>
                         <span className="notificationMessegeText">Wishlist Jobs</span>
                       </div></a>
-                      <a href={"/profile/"+this.props.userDetails.candidate_id}><div className="notificationMessege col-lg-12">
+                      <a href={"/profile/"+this.props.userDetails.candidate_id}>
+
+                      <div className="notificationMessege col-lg-12">
+                      <i class="fa fa-eye"></i>
                         <span className="notificationMessegeText">View Profiles</span>
                       </div></a>
 
@@ -488,7 +493,7 @@ class Header extends Component{
                       </div></a>*/}
                       
                       <div className="notificationMessege col-lg-12" id="changepassworddiv" data-toggle="modal" data-target="#resetPasswordModal">
-                          <span className="notificationMessegeText">Change Password</span>
+                          <i class="fa fa-key"></i><span className="notificationMessegeText">Change Password</span>
                       </div>
                      
                       <div className="menuProfileSignOut col-lg-12 ">
