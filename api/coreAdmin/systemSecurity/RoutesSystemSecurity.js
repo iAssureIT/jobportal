@@ -19,6 +19,7 @@ router.patch('/patch/sendOTPwithemail/:username',UserController.set_send_emailOT
 
 router.patch('/patch/setotpusingID',UserController.set_otp_usingID); 
 router.patch('/patch/setotpusingEmail',UserController.set_otp_usingEmail);
+router.patch('/patch/resetpwd/:user_id',UserController.update_user_resetpwd);
 
 
 //API for driver app

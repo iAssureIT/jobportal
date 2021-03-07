@@ -20,6 +20,9 @@ class ResetPassword extends Component {
           showPassword1: false,
           showPassword2: false,
           showPassword3: false,
+          emailId      :this.props.userDetails.email,
+          user_ID      :this.props.userDetails.user_id,
+
             bannerData: {
                 title: "MY SHOPPING CART",
                 breadcrumb: 'My Shopping Cart',
@@ -161,28 +164,80 @@ class ResetPassword extends Component {
 
     resetPassword(event) {
         event.preventDefault();
-        var userID = this.props.userID;
-        var formValues = {
-            "pwd" : this.refs.newPassword.value
-        }
+       
         var status =  this.validateForm();
-        if(status){
-            $('.fullpageloader').show();
-            axios.patch('/api/auth/patch/change_password_withoutotp/id/'+this.props.userDetails.user_id, formValues)
-            .then((response)=>{
-                $('.fullpageloader').hide();
+        if(status == true){
+           console.log("In resettttttttttttttttttttttttt");
+       var user_id = this.state.user_ID;
+       var auth= {
+      email : this.state.emailId,
+      password : this.state.oldpassword,
+          role: "candidate"
+      } 
+        axios
+        .post('/api/auth/post/login',auth)
+      .then(response => {
+        console.log('response',response);
+        console.log('response',response.data.emailId);
+        if(response){
+          
+            if(this.state.newpassword === this.state.confirmPassword){
+              var body = {
+                pwd : this.state.newpassword,
+                user_id : this.state.user_ID,
+                emailId : this.state.emailId,
+              }
+
+
+              axios.patch('/api/auth/patch/resetpwd/'+this.props.userDetails.user_id,body)
+              .then((response)=>{
+                console.log("In response===>>>",response);
+                swal(" ", "Your Password has been changed");
+
                 this.setState({
-                    "showMessage" : true,
+                  oldpassword:"",
+                  newpassword:"",
+                  confirmPassword:"",
                 })
-                 swal({
+
+                  var token = localStorage.removeItem("token");
+                if(token!==null){
+                console.log("Header Token = ",token);
+                this.setState({
+                  loggedIn : false
+                },()=>{
+                  localStorage.removeItem("emailId")
+                  localStorage.removeItem("center_ID")
+                  localStorage.removeItem("centerName")
+                  localStorage.removeItem("fullName")
+                  localStorage.removeItem('role')
+                })
+                  console.log("token",token);
+                  // browserHistory.push("/login"); 
+
+                            swal({
                       text : "Password reset successful"
                     });
                     //this.props.history.push('/login');
                    this.logout();
-            })
-            .catch((error)=>{
-                $('.fullpageloader').hide();
-            })
+                  }
+              })
+              .catch((error)=>{
+              console.log('error',error)
+              })
+            }else{
+              swal("Invalid Password","Please Enter valid New password and confirm password");
+            }
+          
+        }
+      })
+      .catch(error => {
+        if (error.response.status === 401) {
+          console.log("ERROR in Responce");
+          swal("Invalid Password","Please Enter correct password");
+          this.setState({invalidpassword:true})
+        }
+    })
         }
     }
 

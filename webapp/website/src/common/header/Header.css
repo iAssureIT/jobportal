@@ -247,13 +247,15 @@ font-face {
 
 .barsToggel{
   position: relative;
-  width:255px;
+  width:340px;
   height: auto;
   min-height: 120px;
   background:var(--header-bg-color  );
   z-index:3;
-  margin-top:10px;
+  margin-top:60px;
   border:1px solid var(--header-border-color);
+  border-radius: 10px;
+  box-shadow: 0px 0px 20px var(--header-border-color);
 }
 .notificationBox{
   position: relative;
@@ -281,11 +283,12 @@ font-face {
   border-bottom:1px solid var(--header-border-color);
   padding-top:7px;
   text-align:left;
+  padding-left: 20px;
   background:var(--header-bg-color  );
   
 }
 .notificationMessegeText{
-  margin-left:12px;
+  margin-left: 25px;
 }
 .MessagesTime{
   font-size:10px;
@@ -304,7 +307,18 @@ font-face {
   color:#fff;
 }
 .signOutButton{
-  margin-left: 12px
+  border: 1px solid #efefef;
+  border-radius: 5px;
+  color: #efefef;
+  font-family: 'Montserrat-Regular';
+  padding: 5px 10px;
+}
+
+.signOutButton:hover{
+
+  background-color: #efefef;
+  color: var(--main-bg-color);
+  cursor: pointer;
 }
 .selectedState a{
 color: var(--main-heading-font-color) !important
@@ -315,3 +329,64 @@ color: var(--main-heading-font-color) !important
   height: 35px;
   border-radius: 50%;
     }
+
+.helloUser{
+  height: 20px;
+  width: 100%;
+  color: #fff;
+  text-align: left;
+  font-size: 11px;
+}
+
+.menuProfile{
+  height: 180px;
+  border-bottom:1px solid var(--header-border-color);
+}
+
+.menuProfilePicture{
+  height: 90px;
+  width: 30%;
+  margin: auto;
+  margin-top: 10px;
+  border:2px solid var(--header-border-color);
+  border-radius: 50%;
+}
+
+.menuProfilePicture:hover{
+  cursor: pointer;
+  
+ 
+}
+
+
+.menuProfilePictureIcon{
+ width: 86px;
+  height: 86px;
+  border-radius: 50%;
+}
+
+.menuProfileName{
+  height: 20px;
+  color: #fff;
+  font-size: 15px;
+  font-family:'Montserrat-Regular';
+  text-align:  center;
+  margin-top: 10px;
+
+}
+
+.menuProfileEmail{
+   height: 25px;
+  color: #ccc;
+  font-size: 14px;
+  font-family:'Montserrat-Regular';
+  text-align:  center;
+  margin-top: 10px;
+
+}
+
+.menuProfileSignOut{
+  height: 70px; 
+  padding-top: 20px;
+  padding-left: 35%;
+}

@@ -330,18 +330,7 @@ class Header extends Component{
                 
                 <div className="headerMenu2 col-lg-4">
                   <div className="headerMenu11" onClick={this.userMenuToggle.bind(this)}>
-                    {/*<FontAwesomeIcon icon={['fas', 'user']} />*/}
-                   {/* {
-                      this.props.userDetails.gender=='female'
-                      ? 
-                        <img src="/images/f.png" alt="icon" className="classIcon"/>
-                      :
-                       <img src="/images/m.png" alt="icon" className="classIcon"/>
-                    }*/}
-
-                 {/* <img src={(this.props.userDetails.profilePicture)} alt="icon"className="classIcon"/>*/}
-
-
+                   
                  {
 
                                 
@@ -368,6 +357,7 @@ class Header extends Component{
                   }
                     
                   </div>
+
                 </div>
 
 
@@ -440,6 +430,43 @@ class Header extends Component{
 
 
                <div className="barsToggel pull-right" id="barsToggel" style={{display:this.state.userMenu}}>
+
+                      <div className="menuProfile col-lg-12">
+                        <div className="menuProfilePicture">
+                          {
+
+                                
+                                 
+                                   ((this.props.userDetails.profilePicture)=== undefined || (this.props.userDetails.profilePicture)===  null)
+                                  ?
+                                  <FontAwesomeIcon icon={['far', 'user']} />
+                                  :
+
+                                  ((this.props.userDetails.profilePicture.length) > 0)
+                                  ?
+                                    <img src={(this.props.userDetails.profilePicture)} alt="icon"className="menuProfilePictureIcon"/>
+                                  :
+                                  this.props.userDetails.gender=='female'
+                                 ? 
+                                  <img src="/images/f.png" alt="icon" className="menuProfilePictureIcon"/>
+                                  :
+                                   this.props.userDetails.gender=='male'
+                                 ? 
+                                 <img src="/images/m.png" alt="icon" className="menuProfilePictureIcon"/>
+                                 :
+                                  <FontAwesomeIcon icon={['fas', 'user']} />
+
+                           }
+                        </div>
+
+                        <div className="menuProfileName col-lg-12">
+                            {this.props.userDetails.firstName} &nbsp;{this.props.userDetails.lastName}
+                        </div>
+
+                         <div className="menuProfileEmail col-lg-12">
+                            {this.props.userDetails.email}
+                        </div>
+                      </div>
                      
                       <a href="/basic-info"><div className="notificationMessege col-lg-12">
                         <span className="notificationMessegeText">Complete Your Profile</span>
@@ -464,7 +491,7 @@ class Header extends Component{
                           <span className="notificationMessegeText">Change Password</span>
                       </div>
                      
-                      <div className="notificationMessege col-lg-12 ">
+                      <div className="menuProfileSignOut col-lg-12 ">
                           <span className="signOutButton" onClick={this.logout.bind(this)}>Sign Out</span>
                       </div>
 

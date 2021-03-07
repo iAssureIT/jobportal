@@ -1928,3 +1928,52 @@ exports.set_send_mobileotp_usingMobile = (req, res, next) => {
 		});
 	});	
 };
+
+
+exports.update_user_resetpwd = (req, res, next) => {
+	// console.log("reset pwd")
+	User.findOne({ "profile.emailId": req.body.emailId })
+	.exec()
+	.then(user => {
+		// console.log("reset pwd user",user)
+		if (user) {
+			// console.log("reset pwd user1",user)
+			bcrypt.hash(req.body.pwd, 10, (err, hash) => {
+			User.updateOne(
+				{ _id: user._id },
+				{
+					$set: {
+							services: {
+								password: {
+								bcrypt: hash
+							},
+						},
+					}
+				}
+			)
+			.exec()
+			.then(data => {
+				if (data.nModified == 1) {
+					// console.log("reset data==>> ",data)
+					res.status(200).json("Password Updated");
+				} else {
+					res.status(401).json("Password Not Found");
+				}
+			})
+			.catch(err => {
+				console.log(err);
+				res.status(500).json({
+					error: err
+				});
+			});
+		});
+		} else {
+			res.status(404).json("User Not Found");
+		}
+	})
+	.catch(err => {
+		res.status(500).json({
+		error: err
+		});
+	});
+}
