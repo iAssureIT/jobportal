@@ -82,7 +82,7 @@ class ConfirmOtp extends Component {
             if (response.data.passwordreset === true) {
               //this.props.history.push('/reset-pwd/' + this.props.userID);
               mapAction.setUserID(this.props.userID);
-              mapAction.setSelectedModal("resetpassword");
+              mapAction.setSelectedModal("changepassword");
               
             } else {
              

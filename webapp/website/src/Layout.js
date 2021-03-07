@@ -13,7 +13,6 @@ import ConfirmOtp           from './systemSecurity/ConfirmOtp.js';
 import ForgotPassword       from './systemSecurity/ForgotPassword.js';
 import ResetPassword        from './systemSecurity/ResetPassword.js';
 import SignUp               from './systemSecurity/SignUp.js';
-import ResetPasswordFirstLogin from './systemSecurity/ResetPasswordFirstLogin.js';
 import Header               from './common/header/Header.js'; 
 import FunctionalHeader     from './common/functionalHeader/FunctionalHeader.js'; 
 import MapHeader            from './common/mapHeader/MapHeader.js'; 
@@ -189,7 +188,6 @@ class Layout extends Component  {
                             <Route path="/forgot-password" exact strict component={ForgotPassword} />
                             <Route path="/reset-pwd/:user_ID" exact strict component={ResetPassword} />
                             <Route path="/confirm-otp/:userID" exact strict component={ConfirmOtp} />
-                            <Route path="/reset-password/:user_ID" exact strict component={ResetPasswordFirstLogin}  />
                             
                         </Switch>
                     </Router>

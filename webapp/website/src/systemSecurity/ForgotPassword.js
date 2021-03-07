@@ -36,7 +36,7 @@ class ForgotPassword extends Component {
         
         var email = this.refs.emailAddress.value;
         var formValues = {
-            username : email,
+            email : email,
             //"emailSubject"	: "Email Verification", 
 			//"emailContent"  : "As part of our registration process, we screen every new profile to ensure its credibility by validating email provided by user. While screening the profile, we verify that details put in by user are correct and genuine.",
         }
@@ -47,7 +47,7 @@ class ForgotPassword extends Component {
               
                 console.log('forgotpassword res===',response.data)
                 if (response.data.ID) {
-                    var sendData = {
+                    /*var sendData = {
                       "event"     : "Event3", //Event Name
                       "toUser_id"  : response.data.ID, //To user_id(ref:users)
                       "toUserRole"  : "candidate",
@@ -58,7 +58,7 @@ class ForgotPassword extends Component {
                     }
                     axios.post('/api/masternotifications/post/sendNotification', sendData)
                     .then((notificationres) => {})
-                    .catch((error) => { console.log('notification error: ', error) })
+                    .catch((error) => { console.log('notification error: ', error) })*/
 
                     localStorage.setItem('previousUrl' ,'forgotpassword');
                     $('.fullpageloader').hide();

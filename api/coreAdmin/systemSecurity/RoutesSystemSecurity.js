@@ -11,7 +11,7 @@ router.get('/get/checkemailotp/usingUsername/:username/:emailotp',UserController
 router.post('/post/login',UserController.user_login_using_email); //Working
 router.post('/post/loginwithcompanyid',UserController.user_login_with_companyID); //Working
 router.patch('/patch/logout',UserController.logouthistory); //Working
-router.patch('/patch/change_password_withoutotp/id/:ID',UserController.user_update_password_withoutotp_ID);
+router.patch('/patch/change_password_withoutotp/id',UserController.user_update_password_withoutotp_ID);
 
 router.patch('/patch/change_password_withoutotp/username/:username',UserController.user_update_password_withoutotp_username);
 
@@ -19,8 +19,7 @@ router.patch('/patch/sendOTPwithemail/:username',UserController.set_send_emailOT
 
 router.patch('/patch/setotpusingID',UserController.set_otp_usingID); 
 router.patch('/patch/setotpusingEmail',UserController.set_otp_usingEmail);
-router.patch('/patch/resetpwd/:user_id',UserController.update_user_resetpwd);
-
+router.patch('/patch/resetpwd',UserController.update_user_resetpwd);
 
 //API for driver app
 router.post('/post/login/mobile',UserController.user_login_using_mobile); //Working

@@ -139,11 +139,17 @@ exports.candidatesAppliedToJob = (req,res,next)=>{
     });
 };
 exports.removeApplication = (req,res,next)=>{
-    ApplyJob.deleteOne({_id:req.body.job_id})
+    console.log(req.body)
+    ApplyJob.deleteOne({job_id : ObjectId(req.body.job_id) })
     .exec()
     .then(data=>{
-       
-            res.status(200).json({ deleted : true });
+        if (data.deletedCount == 1) {
+           res.status(200).json({ deleted : true }); 
+       }else{
+
+            res.status(200).json({ deleted : false });
+       }
+            
         
     })
     .catch(err =>{

@@ -1,18 +1,19 @@
-import React, {Component} from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import $ from 'jquery';
+import React, {Component}   from 'react';
+import { FontAwesomeIcon }  from '@fortawesome/react-fontawesome';
+import $      from 'jquery';
 import jQuery from 'jquery';
-import axios from 'axios';
-import swal from 'sweetalert';
+import axios  from 'axios';
+import swal   from 'sweetalert';
 import '../header/Header.css';
-import LoginForm from '../../systemSecurity/Login.js';
-import SignUp from '../../systemSecurity/SignUp.js';
-import ForgotPassword from '../../systemSecurity/ForgotPassword.js';
-import ConfirmOtp from '../../systemSecurity/ConfirmOtp.js';
-import ResetPassword from '../../systemSecurity/ResetPassword.js'
-import {connect}            from 'react-redux';
-import { bindActionCreators } from 'redux';
-import  * as mapActionCreator from '../../common/actions/index';
+import LoginForm                from '../../systemSecurity/Login.js';
+import SignUp                   from '../../systemSecurity/SignUp.js';
+import ForgotPassword           from '../../systemSecurity/ForgotPassword.js';
+import ConfirmOtp               from '../../systemSecurity/ConfirmOtp.js';
+import ResetPassword            from '../../systemSecurity/ResetPassword.js'
+import ChangePassword           from '../../systemSecurity/ChangePassword.js'
+import {connect}                from 'react-redux';
+import { bindActionCreators }   from 'redux';
+import  * as mapActionCreator   from '../../common/actions/index';
 
 
 class Header extends Component{
@@ -412,6 +413,7 @@ class Header extends Component{
                             {this.props.selectedModal == "forgotpassword" ? <ForgotPassword/> : null }*/}
                             {this.props.selectedModal == "confirmotp" ? <ConfirmOtp/> : null }
                             {this.props.selectedModal == "resetpassword" ? <ResetPassword/> : null }
+                            
                       </section>
                   </div>
                 </div>
@@ -641,6 +643,7 @@ class Header extends Component{
                             {this.props.selectedModal == "forgotpassword" ? <ForgotPassword/> : null }
                             {this.props.selectedModal == "confirmotp" ? <ConfirmOtp/> : null }
                             {this.props.selectedModal == "resetpassword" ? <ResetPassword/> : null }
+                            {this.props.selectedModal == "changepassword" ? <ChangePassword/> : null }
                       </section>
                   </div>
                 </div>

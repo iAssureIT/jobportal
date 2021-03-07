@@ -88,7 +88,7 @@ applyJob = (jobid, company_id)=>{
 	}
 	console.log(formValues)
 	Swal.fire({
-		title 				: 'Are you sure? Do you want to apply for this job!!!',
+		title 				: 'Are you sure, do you want to apply for this job?',
 		icon 				: 'success',
 		showCancelButton 	: true,
 		confirmButtonText 	: 'Yes, Add it!',
@@ -134,12 +134,49 @@ applyJob = (jobid, company_id)=>{
 		document.getElementById("loginbtndiv").click();
 	}
 }
-removeApplication(job_id){
+removeApplication = (job_id) => {
+	console.log(job_id)
 	if (this.props.userDetails.loggedIn) {
 		var formValues = { 
 			candidate_id   		: this.props.userDetails.candidate_id,
 			job_id         		: job_id
 		}
+		Swal.fire({
+		title 				: 'Are you sure, do you want to remove this job application?',
+		icon 				: 'success',
+		showCancelButton 	: true,
+		confirmButtonText 	: 'Yes, remove it!',
+		cancelButtonColor 	: 'No, keep it',
+		confirmButtonColor  : '#db3700',
+	
+		}).then((result) =>{
+			if(result.value){
+
+				Axios.post("/api/applyJob/removeApplication", formValues)
+				.then(response =>{
+					
+					var {mapAction} = this.props;
+					mapAction.getAppliedJoblist(this.props.userDetails.candidate_id);
+
+					if(response.data.deleted){
+
+						Swal.fire(
+									'Applied!',
+									'You have removed job application!',
+									'success'
+							);
+					}
+				})
+				.catch(error=>{
+					Swal.fire(
+								"Some problem occured while removing job application!",
+								error.message,
+								'error'
+						)
+				})
+			}
+
+		})
 	}else{
 		document.getElementById("loginbtndiv").click();
 	}
@@ -177,6 +214,7 @@ removeApplication(job_id){
 				                var y = this.props.appliedJoblist && this.props.appliedJoblist.length > 0 ?
 								this.props.appliedJoblist.filter((applieditem) => applieditem.job_id == elem._id) : [];
 				                console.log(this.props.appliedJoblist)
+				                console.log(elem._id)
 				                if (y && y.length > 0) {
 				                  var appliedClass = '';
 				                  var appliedtooltipMsg = 'Remove from applied job';
@@ -245,7 +283,7 @@ removeApplication(job_id){
 															<div className="jobListVerticleIcons">
 																<ul>
 																	
-																	<li><i title={appliedtooltipMsg} className={"fa fa-check-square" + appliedClass}  onClick={appliedClass == '-o' ? applyJob => this.applyJob(elem._id, elem.company_id) : this.removeApplication(elem._id) } ></i></li>
+																	<li><i title={appliedtooltipMsg} className={"fa fa-check-square" + appliedClass}  onClick={appliedClass == '-o' ? applyJob => this.applyJob(elem._id, elem.company_id) : removeApplication => this.removeApplication(elem._id) } ></i></li>
 																	<li ><i title={tooltipMsg} onClick={wishlist => this.handleclick(elem._id)} className={"fa fa-heart" + wishClass}></i></li>
 																	<li><i className="fa fa-youtube-play"></i></li>
 																</ul>

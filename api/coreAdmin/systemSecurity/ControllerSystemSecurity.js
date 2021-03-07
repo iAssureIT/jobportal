@@ -520,10 +520,11 @@ exports.user_signup_user_otp = (req, res, next) => {
 };
 
 exports.check_userID_EmailOTP = (req, res, next) => { 
-	User.find({ _id: ObjectID(req.body.user_id), "profile.otpEmail": req.body.emailotp })
+	User.findOne({ _id: ObjectID(req.body.user_id), "profile.otpEmail": req.body.emailotp })
 		.exec()
-		.then(data => {
-			if (data.length > 0) {
+		.then(user => {
+			console.log(user)
+			if (user) {
 				User.updateOne(
 					{ _id: ObjectID(req.body.user_id) },
 					{
@@ -535,8 +536,9 @@ exports.check_userID_EmailOTP = (req, res, next) => {
 				)
 					.exec()
 					.then(data => {
+						console.log(data)
 						if (data.nModified === 1) {
-							res.status(200).json({ message: "SUCCESS", userID: data._id, passwordreset: data.profile.passwordreset });
+							res.status(200).json({ message: "SUCCESS", userID: user._id, passwordreset : user.profile.passwordreset });
 						} else {
 							res.status(200).json({ message: "SUCCESS_OTP_NOT_RESET" });
 						}
@@ -824,7 +826,7 @@ exports.check_username_EmailOTP = (req, res, next) => {
 exports.user_login_using_email = (req, res, next) => {
 	var emailId = (req.body.email).toLowerCase();
 	var role = (req.body.role).toLowerCase();
-	console.log('role', role);
+	console.log('body', req.body);
 	User.findOne({
 		"username": emailId,
 		"roles": role,
@@ -833,11 +835,13 @@ exports.user_login_using_email = (req, res, next) => {
 		.exec()
 		.then(user => {
 			if (user) {
+
 				if ((user.profile.status).toLowerCase() == "active") {
 					var pwd = user.services.password.bcrypt;
 					console.log('pwd', pwd);
 					if (pwd) {
 						bcrypt.compare(req.body.password, pwd, (err, result) => {
+							console.log(err)
 							if (err) {
 								return res.status(200).json({
 									message: 'Auth failed'
@@ -1444,13 +1448,15 @@ exports.logout_mobile = (req, res, next) => {
 };
 
 exports.user_update_password_withoutotp_ID = (req, res, next) => {
-	User.findOne({ _id: req.params.ID })
+	console.log(req.body)
+	User.findOne({ _id: req.body.user_id })
 		.exec()
 		.then(user => {
 			if (user) {
+				console.log(req.body.pwd)
 				bcrypt.hash(req.body.pwd, 10, (err, hash) => {
 					User.updateOne(
-						{ _id: req.params.ID },
+						{ _id: req.body.user_id },
 						{
 							$set: {
 								services: {
@@ -1458,7 +1464,7 @@ exports.user_update_password_withoutotp_ID = (req, res, next) => {
 										bcrypt: hash
 									},
 								},
-								"profile.passwordreset": true,
+								//"profile.passwordreset": true,
 							}
 						}
 					)
@@ -1827,6 +1833,7 @@ exports.set_send_mobileotp_usingID = (req, res, next) => {
 };
 
 exports.set_otp_usingEmail = (req, res, next) => {
+	console.log(req.body)
 	User.findOne({ "profile.email": req.body.email })
 	.then(user => {
 		if(user){
@@ -1838,7 +1845,8 @@ exports.set_otp_usingEmail = (req, res, next) => {
 					{ "profile.email": req.body.email },
 					{
 						$set: {
-							"profile.otpEmail": optEmail,
+							"profile.otpEmail"		: optEmail,
+							"profile.passwordreset"	: (user.profile.status).toLowerCase() == "active" ? true : false,
 						},
 					}
 				)
@@ -1871,7 +1879,9 @@ exports.set_otp_usingEmail = (req, res, next) => {
 						error: err
 					});
 				});
- 			}else if ((user.profile.status).toLowerCase() == "blocked") {
+ 			}
+ 			
+ 			else if ((user.profile.status).toLowerCase() == "blocked") {
 				console.log("user.USER_BLOCK IN ==>")
 				res.status(200).json({ message: "USER_BLOCK" });
 			} 
@@ -1931,8 +1941,8 @@ exports.set_send_mobileotp_usingMobile = (req, res, next) => {
 
 
 exports.update_user_resetpwd = (req, res, next) => {
-	// console.log("reset pwd")
-	User.findOne({ "profile.emailId": req.body.emailId })
+	console.log(req.body)
+	User.findOne({ "profile.email": req.body.emailId })
 	.exec()
 	.then(user => {
 		// console.log("reset pwd user",user)

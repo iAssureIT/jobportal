@@ -254,9 +254,6 @@ class HomePage extends Component {
     mapAction.jobCount(selector);
   }
   render() {
-    console.log(this.props)
-    console.log(this.props.match.params.industryName == "all" && (this.props.viewMode == "industrialView" || this.props.viewMode == "listView"))
-    console.log(this.props.match.params.industryName != "all" && (this.props.viewMode == "industrialView" || this.props.viewMode == "listView"))
     return (
       <div className="ViewBodyWrapper container-fluid">
 

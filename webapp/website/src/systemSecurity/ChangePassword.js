@@ -9,44 +9,20 @@ import { bindActionCreators } from 'redux';
 import { withRouter }   from 'react-router-dom';
 import  * as mapActionCreator from '../common/actions/index';
 
-class ResetPassword extends Component {
+class ChangePassword extends Component {
     constructor(props) {
         super(props);
         this.state = {
 
-          oldPassword : '',
           newPassword : "",
           confirmNewPassword : "",
-          showPassword1: false,
           showPassword2: false,
           showPassword3: false,
-          emailId      :this.props.userDetails.email,
-          user_ID      :this.props.userDetails.user_id,
-
-            bannerData: {
-                title: "MY SHOPPING CART",
-                breadcrumb: 'My Shopping Cart',
-                backgroungImage: '/images/cartBanner.png',
-            },
-            showMessage : false
         }
     }
     componentDidMount(){
        
     }
-
-    showPassword1=(event)=>{
-    event.preventDefault();
-    var passwordToggle1 = document.getElementById("oldPassword");
-    if (passwordToggle1.type === "password") {
-        passwordToggle1.type = "text";
-        this.setState({showPassword1:true});
-      } else {
-        passwordToggle1.type = "password";
-        this.setState({showPassword1:false});
-      }
-    }
-
 
     showPassword2=(event)=>{
     event.preventDefault();
@@ -77,23 +53,10 @@ class ResetPassword extends Component {
     validateForm=()=>{
     var status = true;
 
-    var oldPassword= this.state.oldPassword;
     var newPassword=this.state.newPassword;
     var confirmNewPassword =this.state.confirmNewPassword;
 
-    if((this.state.oldPassword) == null) {
-      document.getElementById("oldPasswordError").innerHTML=  
-      "Please enter Password";  
-      status=false; 
-    }
-
     
-    else{
-      document.getElementById("oldPasswordError").innerHTML=  
-      ""; 
-      status = true;
-    }
-
     if(this.state.newPassword == null) {
       document.getElementById("newPasswordError").innerHTML=  
       "Please enter Password";  
@@ -161,78 +124,41 @@ class ResetPassword extends Component {
   }
 
 
-    resetPassword(event) {
+    changePassword(event) {
         event.preventDefault();
        
         var status =  this.validateForm();
         if(status == true){
-        var user_id = this.state.user_ID;
-        var auth= {
-          email : this.state.emailId,
-          password : this.state.oldPassword,
-          role: "candidate"
-        } 
-        axios.post('/api/auth/post/login',auth)
-        .then(response => {
+        
+        
+        console.log(this.state.newPassword)
+        if(this.state.newPassword === this.state.confirmNewPassword){
+          var body = {
+            pwd : this.state.newPassword,
+            user_id : this.props.userID,
+          }
 
-        if(response){
+
+          axios.patch('/api/auth/patch/change_password_withoutotp/id', body)
+          .then((response)=>{
+
+            swal(" ", "Your Password has been changed");
+            this.setState({
+              newPassword:"",
+              confirmNewPassword:"",
+            })
+            var {mapAction} = this.props;
+            mapAction.setUserID(response.data.ID);
+            mapAction.setSelectedModal("login");
             
-            if(this.state.newPassword === this.state.confirmNewPassword){
-              var body = {
-                pwd : this.state.newPassword,
-                user_id : this.state.user_ID,
-                emailId : this.state.emailId,
-              }
-
-              console.log(body)
-              axios.patch('/api/auth/patch/resetpwd', body )
-              .then((response)=>{
-
-                
-                this.setState({
-                  oldPassword:"",
-                  newPassword:"",
-                  confirmNewPassword:"",
-                })
-
-                var token = localStorage.removeItem("token");
-                if(token!==null){
-                console.log("Header Token = ",token);
-                this.setState({
-                  loggedIn : false
-                },()=>{
-                  localStorage.removeItem("userDetails")
-                  localStorage.removeItem("emailId")
-                  localStorage.removeItem("center_ID")
-                  localStorage.removeItem("centerName")
-                  localStorage.removeItem("fullName")
-                  localStorage.removeItem('role')
-                })
-                  console.log("token",token);
-                  // browserHistory.push("/login"); 
-
-                   swal(" ", "Your Password has been changed");
-                    //this.props.history.push('/login');
-                   this.logout();
-                  }
-              })
-              .catch((error)=>{
-              console.log('error',error)
-              })
-            }else{
-              swal("Invalid Password","Please Enter valid New password and confirm password");
-            }
-          
+          })
+          .catch((error)=>{
+          console.log('error',error)
+          })
+        }else{
+          swal("Invalid Password","Please Enter valid New password and confirm password");
         }
-      })
-      .catch(error => {
-        if (error.response.status === 401) {
-          console.log("ERROR in Responce");
-          swal("Invalid Password","Please Enter correct password");
-          this.setState({invalidpassword:true})
-        }
-    })
-        }
+      }
     }
 
     Closepagealert(event){
@@ -278,18 +204,6 @@ class ResetPassword extends Component {
                     </div>
 
                     <hr className="resetPasswordHr"/>
-
-                     <div className="col-lg-12 form-group" >
-                        <div className="input-group">
-                            <span className="input-group-addon resetPasswordInputIcon"><i className="fa fa-lock"></i></span>
-                            <input type="password" id="oldPassword" name="oldPassword" placeholder="Enter old Password" ref="oldPassword" value={this.state.oldPassword} onChange={this.handleChange.bind(this)} className="form-control resetPasswordInputBox"/>
-                             <span className="input-group-addon loginInputIcon3" onClick={this.showPassword1.bind(this)}>
-                             <i className={this.state.showPassword1 ? "fa fa-eye-slash" : "fa fa-eye"} 
-                             value={this.state.showPassword1}></i></span>
-                        </div>
-                         <span id="oldPasswordError" className="errorMsg"></span>
-                    </div>
-
                     <div className="col-lg-12 form-group" >
                         <div className="input-group">
                             <span className="input-group-addon resetPasswordInputIcon"><i className="fa fa-lock"></i></span>
@@ -311,9 +225,8 @@ class ResetPassword extends Component {
                          <span id="confirmNewPasswordError" className="errorMsg"></span>
                     </div>
 
-
                     <div className="col-lg-12 buttonWrapper">
-                   <button className="btn col-lg-12 buttonResetPassword" onClick={this.resetPassword.bind(this)}>Reset Password</button>
+                   <button className="btn col-lg-12 buttonResetPassword" onClick={this.changePassword.bind(this)}>Change Password</button>
                   </div>
 
                 
@@ -334,4 +247,4 @@ const mapStateToProps = (state)=>{
 const mapDispatchToProps = (dispatch) => ({
   mapAction :  bindActionCreators(mapActionCreator, dispatch)
 })
-export default connect(mapStateToProps, mapDispatchToProps) (ResetPassword);
+export default connect(mapStateToProps, mapDispatchToProps) (ChangePassword);
