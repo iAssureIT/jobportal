@@ -3,9 +3,11 @@ import Axios from  'axios';
 import Swal  from  'sweetalert2';
 import Moment 					from "moment";
 import "./JobList.css";
+import '../../App.css';
 import { connect }        from 'react-redux';
 import { bindActionCreators } from 'redux';
 import  * as mapActionCreator from '../../common/actions/index';
+import UploadVideoModal from '../UploadVideoModal/UploadVideoModal.js';
 
 class Joblist extends Component{
 	constructor(props){
@@ -285,12 +287,24 @@ removeApplication = (job_id) => {
 																	
 																	<li><i title={appliedtooltipMsg} className={"fa fa-check-square" + appliedClass}  onClick={appliedClass == '-o' ? applyJob => this.applyJob(elem._id, elem.company_id) : removeApplication => this.removeApplication(elem._id) } ></i></li>
 																	<li ><i title={tooltipMsg} onClick={wishlist => this.handleclick(elem._id)} className={"fa fa-heart" + wishClass}></i></li>
-																	<li><i className="fa fa-youtube-play"></i></li>
+																	<li><i className="fa fa-youtube-play" id="video" data-toggle="modal" data-target="#videoModal"></i></li>
 																</ul>
 															</div>
 														</div>
 													</div>
 												</div>
+
+												 <div className="modal" id="videoModal" role="dialog" tabIndex="-1">
+									                <div className="modal-dialog  modal-lg">
+									                  <div className="modal-body">
+									                      <button type="button" className="close" id="closeModalButton" data-dismiss="modal">&times;</button>
+									                      <section className="OTPSentWrapper row">
+									                           
+									                        <UploadVideoModal/>
+									                      </section>
+									                  </div>
+									                </div>
+									              </div>
 											</div>	
 										</div>
 									</div>
