@@ -360,8 +360,11 @@ exports.getJobList = (req,res,next)=>{
     var jobshift_ids    = []; 
     var jobroles_ids 	= [];
     var qualification_ids    = [];
+    var skill_ids       = [];
 
+    selector['$or']    = [];
     selector['$and'] 	= [];
+
     selector["$and"].push({ "location.countryCode" :  req.body.countryCode   })
     // 1
    	if (req.body.stateCode && req.body.stateCode != "all") {
@@ -440,6 +443,19 @@ exports.getJobList = (req,res,next)=>{
         selector["$and"].push({ "eligibility.mineducation_id" : { $in: qualification_ids } });
     }
     // 13
+    if (req.body.skill_id) {
+        req.body.skill_id.map(elem => {
+            skill_ids.push(ObjectID(elem.id))
+        })
+        selector["$or"].push({ "requiredSkills.primarySkills.skill_id" : { $in: skill_ids } });
+        selector["$or"].push({ "requiredSkills.secondarySkills.skill_id" : { $in: skill_ids } });
+        selector["$or"].push({ "requiredSkills.otherSkills.skill_id" : { $in: skill_ids } });
+        selector["$or"].push({ "requiredSkills.preferredSkills.skill_id" : { $in: skill_ids } });
+        
+    }else{
+        delete selector["$or"];
+    }
+    // 14
     if (req.body.minExp != null  && req.body.maxExp != null) {
         selector["$and"].push({ "eligibility.minExperience" : { '$gte' : req.body.minExp,  '$lte' : req.body.maxExp} });
     }
@@ -478,8 +494,11 @@ exports.getJobListForEmployer = (req,res,next)=>{
     var jobshift_ids    = [];
     var jobroles_ids 	= [];
     var qualification_ids    = [];
+    var skill_ids       = [];
 
     selector['$and'] 	= [];
+    selector["$or"]     = [];
+
     selector["$and"].push({ "location.countryCode" :  req.body.countryCode   })
    	// 1
     if (req.body.company_id) {
@@ -563,6 +582,19 @@ exports.getJobListForEmployer = (req,res,next)=>{
         selector["$and"].push({ "eligibility.mineducation_id" : { $in: qualification_ids } });
     }
     // 13
+    if (req.body.skill_id) {
+        req.body.skill_id.map(elem => {
+            skill_ids.push(ObjectID(elem.id))
+        })
+        selector["$or"].push({ "requiredSkills.primarySkills.skill_id" : { $in: skill_ids } });
+        selector["$or"].push({ "requiredSkills.secondarySkills.skill_id" : { $in: skill_ids } });
+        selector["$or"].push({ "requiredSkills.otherSkills.skill_id" : { $in: skill_ids } });
+        selector["$or"].push({ "requiredSkills.preferredSkills.skill_id" : { $in: skill_ids } });
+        
+    }else{
+        delete selector["$or"];
+    }
+    // 14
     if (req.body.minExp != null  && req.body.maxExp != null) {
         selector["$and"].push({ "eligibility.minExperience" : { '$gte' : req.body.minExp,  '$lte' : req.body.maxExp} });
     }
@@ -591,7 +623,13 @@ exports.getJobListForEmployer = (req,res,next)=>{
 
 exports.updateJob = (req,res,next)=>{
 	var functionalarea_id, subfunctionalarea_id, jobsector_id, jobrole_id, jobtype_id, jobtime_id, jobshift_id, mineducation_id;
-		processData();
+	var primarySkills   = [];
+    var secondarySkills = [];
+    var otherSkills     = [];
+    var preferredSkills = [];
+    var skill_id; 
+
+    	processData();
 		async function processData(){
     		functionalarea_id  		= req.body.functionalarea_id != "" ? req.body.functionalarea_id 
     							: await insertFunctArea(req.body.functionalArea,req.body.user_id)
@@ -617,6 +655,30 @@ exports.updateJob = (req,res,next)=>{
             mineducation_id     = req.body.mineducation_id != "" ? req.body.mineducation_id 
                                 : await insertQualification(req.body.minEducation,req.body.user_id) 
             
+            for (var i = 0 ; i < req.body.primarySkillTags.length; i++) {
+                skill_id = req.body.primarySkillTags[i].id != "" ? req.body.primarySkillTags[i].id
+                                    : await insertSkill(req.body.primarySkillTags[i].text, req.body.user_id)
+                    
+                primarySkills.push({ "skill_id" : skill_id })
+            }   
+            for (var i = 0 ; i < req.body.secondarySkillTags.length; i++) {
+                skill_id = req.body.secondarySkillTags[i].id != "" ? req.body.secondarySkillTags[i].id
+                                    : await insertSkill(req.body.secondarySkillTags[i].text, req.body.user_id)
+                    
+                secondarySkills.push({ "skill_id" : skill_id })
+            }
+            for (var i = 0 ; i < req.body.otherSkillTags.length; i++) {
+                skill_id = req.body.otherSkillTags[i].id != "" ? req.body.otherSkillTags[i].id
+                                    : await insertSkill(req.body.otherSkillTags[i].text, req.body.user_id)
+                    
+                otherSkills.push({ "skill_id" : skill_id })
+            }       
+            for (var i = 0 ; i < req.body.preferredSkillTags.length; i++) {
+                skill_id = req.body.preferredSkillTags[i].id != "" ? req.body.preferredSkillTags[i].id
+                                    : await insertSkill(req.body.preferredSkillTags[i].text, req.body.user_id)
+                    
+                preferredSkills.push({ "skill_id" : skill_id })
+            }
 	Jobs.updateOne(
 					{_id : req.body.job_id},
 					{$set 	: 	{
@@ -665,13 +727,13 @@ exports.updateJob = (req,res,next)=>{
 								},
 			
 			"requiredSkills": 	{
-									"primarySkills" 	     : req.body.primarySkills,
+									"primarySkills" 	     : primarySkills,
 									"minPrimExp"		     : req.body.minPrimExp,
-									"secondarySkills" 	     : req.body.secondarySkills,
+									"secondarySkills" 	     : secondarySkills,
 									"minSecExp"			     : req.body.minSecExp,
-									"otherSkills"		     : req.body.otherSkills,
+									"otherSkills"		     : otherSkills,
 									"minOtherExp" 	  	     : req.body.minOtherExp,
-									"preferredSkills" 	     : req.body.preferredSkills
+									"preferredSkills" 	     : preferredSkills
 								},
 			
 			"createdAt" 	: 	new Date(),
@@ -710,8 +772,8 @@ exports.jobCount = (req, res, next)=>{
     var jobshift_ids    = [];
     var jobrole_ids     = [];
     var qualification_ids    = []; 
-
-    selector['$and']=[];
+    var skill_ids       = [];
+    selector['$and']=[]; selector['$or']=[];
    
     var countryCode = req.body.countryCode ? req.body.countryCode : "IN";
     selector["$and"].push({ "location.countryCode" :  countryCode   })
@@ -787,10 +849,23 @@ exports.jobCount = (req, res, next)=>{
         selector["$and"].push({ "eligibility.mineducation_id" : { $in: qualification_ids } });
     }
     // 12
+    if (req.body.skill_id) {
+        req.body.skill_id.map(elem => {
+            skill_ids.push(ObjectID(elem.id))
+        })
+        selector["$or"].push({ "requiredSkills.primarySkills.skill_id" : { $in: skill_ids } });
+        selector["$or"].push({ "requiredSkills.secondarySkills.skill_id" : { $in: skill_ids } });
+        selector["$or"].push({ "requiredSkills.otherSkills.skill_id" : { $in: skill_ids } });
+        selector["$or"].push({ "requiredSkills.preferredSkills.skill_id" : { $in: skill_ids } });
+        
+    }else{
+        delete selector["$or"];
+    }
+    // 13
     if (req.body.minExp != null  && req.body.maxExp != null) {
         selector["$and"].push({ "eligibility.minExperience" : { '$gte' : req.body.minExp,  '$lte' : req.body.maxExp} });
     }
-    console.log("count selector - ", selector);
+    console.log("count selector - ", JSON.stringify(selector));
     Jobs.aggregate([
         { $match    : selector },
         { $count    : "jobCount" },
@@ -820,8 +895,11 @@ exports.mapwiseJobs = (req, res, next)=>{
     var jobshift_ids    = [];
     var jobrole_ids     = [];
     var qualification_ids    = [];
+    var skill_ids       = [];
 
     selector['$and']=[];
+    selector['$or']=[];
+
     var countryCode = req.body.countryCode ? req.body.countryCode : "IN";
     selector["$and"].push({ "location.countryCode" :  countryCode   })
     // 1
@@ -896,6 +974,19 @@ exports.mapwiseJobs = (req, res, next)=>{
         selector["$and"].push({ "eligibility.mineducation_id" : { $in: qualification_ids } });
     }
     // 12
+    if (req.body.skill_id) {
+        req.body.skill_id.map(elem => {
+            skill_ids.push(ObjectID(elem.id))
+        })
+        selector["$or"].push({ "requiredSkills.primarySkills.skill_id" : { $in: skill_ids } });
+        selector["$or"].push({ "requiredSkills.secondarySkills.skill_id" : { $in: skill_ids } });
+        selector["$or"].push({ "requiredSkills.otherSkills.skill_id" : { $in: skill_ids } });
+        selector["$or"].push({ "requiredSkills.preferredSkills.skill_id" : { $in: skill_ids } });
+        
+    }else{
+        delete selector["$or"];
+    }
+    // 13
     if (req.body.minExp != null  && req.body.maxExp != null) {
         selector["$and"].push({ "eligibility.minExperience" : { '$gte' : req.body.minExp,  '$lte' : req.body.maxExp} });
     }
@@ -938,8 +1029,11 @@ exports.functonalAreaJobs = (req, res, next)=>{
     var jobshift_ids    = [];
     var jobrole_ids     = [];
     var qualification_ids    = [];
+    var skill_ids       = [];
 
     selector['$and']=[];
+    selector['$or']=[];
+
     var countryCode = req.body.countryCode ? req.body.countryCode : "IN";
     selector["$and"].push({ "location.countryCode" :  countryCode })
    	// 1
@@ -1014,6 +1108,19 @@ exports.functonalAreaJobs = (req, res, next)=>{
         selector["$and"].push({ "eligibility.mineducation_id" : { $in: qualification_ids } });
     }
     // 12
+    if (req.body.skill_id) {
+        req.body.skill_id.map(elem => {
+            skill_ids.push(ObjectID(elem.id))
+        })
+        selector["$or"].push({ "requiredSkills.primarySkills.skill_id" : { $in: skill_ids } });
+        selector["$or"].push({ "requiredSkills.secondarySkills.skill_id" : { $in: skill_ids } });
+        selector["$or"].push({ "requiredSkills.otherSkills.skill_id" : { $in: skill_ids } });
+        selector["$or"].push({ "requiredSkills.preferredSkills.skill_id" : { $in: skill_ids } });
+        
+    }else{
+        delete selector["$or"];
+    }
+    // 13
     if (req.body.minExp != null  && req.body.maxExp != null) {
         selector["$and"].push({ "eligibility.minExperience" : { '$gte' : req.body.minExp,  '$lte' : req.body.maxExp} });
     }
@@ -1050,8 +1157,11 @@ exports.subfunctionalAreaJobs = (req, res, next)=>{
     var jobshift_ids   = [];
     var jobrole_ids    = [];
     var qualification_ids    = [];
-    
+    var skill_ids      = [];
+
     selector['$and']=[];
+    selector['$or']=[];
+
     var countryCode = req.body.countryCode ? req.body.countryCode : "IN";
     selector["$and"].push({ "location.countryCode" :  countryCode })
    	
@@ -1128,6 +1238,19 @@ exports.subfunctionalAreaJobs = (req, res, next)=>{
         selector["$and"].push({ "eligibility.mineducation_id" : { $in: qualification_ids } });
     }
     // 12
+    if (req.body.skill_id) {
+        req.body.skill_id.map(elem => {
+            skill_ids.push(ObjectID(elem.id))
+        })
+        selector["$or"].push({ "requiredSkills.primarySkills.skill_id" : { $in: skill_ids } });
+        selector["$or"].push({ "requiredSkills.secondarySkills.skill_id" : { $in: skill_ids } });
+        selector["$or"].push({ "requiredSkills.otherSkills.skill_id" : { $in: skill_ids } });
+        selector["$or"].push({ "requiredSkills.preferredSkills.skill_id" : { $in: skill_ids } });
+        
+    }else{
+        delete selector["$or"];
+    }
+    // 13
     if (req.body.minExp != null  && req.body.maxExp != null) {
         selector["$and"].push({ "eligibility.minExperience" : { '$gte' : req.body.minExp,  '$lte' : req.body.maxExp} });
     }
@@ -1166,6 +1289,8 @@ exports.industrialJobs = (req, res, next)=>{
     var qualification_ids     = [];
 
     selector['$and']=[];
+    selector['$or']=[];
+
     var countryCode = req.body.countryCode ? req.body.countryCode : "IN";
     selector["$and"].push({ "location.countryCode" :  countryCode })
    	
@@ -1241,14 +1366,20 @@ exports.industrialJobs = (req, res, next)=>{
         })
         //selector["$and"].push({ "jobBasicInfo.jobrole_id" : { $in: qualification_ids } });
     }
-    // 11
+    // 13
     if (req.body.skill_id) {
         req.body.skill_id.map(elem => {
             skill_ids.push(ObjectID(elem.id))
         })
-        //selector["$and"].push({ "jobBasicInfo.jobrole_id" : { $in: skill_ids } });
+        selector["$or"].push({ "requiredSkills.primarySkills.skill_id" : { $in: skill_ids } });
+        selector["$or"].push({ "requiredSkills.secondarySkills.skill_id" : { $in: skill_ids } });
+        selector["$or"].push({ "requiredSkills.otherSkills.skill_id" : { $in: skill_ids } });
+        selector["$or"].push({ "requiredSkills.preferredSkills.skill_id" : { $in: skill_ids } });
+        
+    }else{
+        delete selector["$or"];
     }
-    // 13
+    // 14
     if (req.body.minExp != null  && req.body.maxExp != null) {
         selector["$and"].push({ "eligibility.minExperience" : { '$gte' : req.body.minExp,  '$lte' : req.body.maxExp} });
     }

@@ -1833,14 +1833,12 @@ exports.set_send_mobileotp_usingID = (req, res, next) => {
 };
 
 exports.set_otp_usingEmail = (req, res, next) => {
-	console.log(req.body)
 	User.findOne({ "profile.email": req.body.email })
 	.then(user => {
 		if(user){
-			console.log('user status====',user.profile.status )
- 			if ((user.profile.status).toLowerCase() === "active" || (user.profile.status).toLowerCase() == "unverified") {
+			if ((user.profile.status).toLowerCase() === "active" || (user.profile.status).toLowerCase() == "unverified") {
  				var optEmail = getRandomInt(1000, 9999);
-				console.log("optEmail", optEmail, req.body);
+				//console.log("optEmail", optEmail, req.body);
 				User.updateOne(
 					{ "profile.email": req.body.email },
 					{

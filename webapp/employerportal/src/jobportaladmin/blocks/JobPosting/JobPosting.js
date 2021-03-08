@@ -242,9 +242,9 @@ class JobPosting extends Component {
                         employerLogo            :   response.data.company_id.companyLogo[0] ? response.data.company_id.companyLogo[0] : null,
                         industry_id             :   response.data.jobBasicInfo.industry_id ? response.data.jobBasicInfo.industry_id._id : "",
                         industry                :   response.data.jobBasicInfo.industry_id ? response.data.jobBasicInfo.industry_id.industry : "",
-                        functionalarea_id       :   response.data.jobBasicInfo.functionalarea_id,
-                        functionalArea          :   response.data.functionalarea_id ? response.data.functionalarea_id.functionalArea : "",
-                        subfunctionalarea_id    :   response.data.jobBasicInfo.subfunctionalarea_id,
+                        functionalarea_id       :   response.data.jobBasicInfo.functionalarea_id._id,
+                        functionalArea          :   response.data.jobBasicInfo.functionalarea_id ? response.data.jobBasicInfo.functionalarea_id.functionalArea : "",
+                        subfunctionalarea_id    :   response.data.jobBasicInfo.subfunctionalarea_id._id,
                         subFunctionalArea       :   response.data.jobBasicInfo.subfunctionalarea_id ? response.data.jobBasicInfo.subfunctionalarea_id.subfunctionalArea : "",
                         jobrole_id              :   response.data.jobBasicInfo.jobrole_id._id,
                         jobRole                 :   response.data.jobBasicInfo.jobrole_id.jobRole,
@@ -252,11 +252,11 @@ class JobPosting extends Component {
                         workFromHome            :   response.data.jobBasicInfo.workFromHome,
                         jobtype_id              :   response.data.jobBasicInfo.jobtype_id._id,
                         jobType                 :   response.data.jobBasicInfo.jobtype_id.jobType,
-                        jobtime_id              :   response.data.jobBasicInfo.jobtime_id,
+                        jobtime_id              :   response.data.jobBasicInfo.jobtime_id._id,
                         jobTime                 :   response.data.jobBasicInfo.jobtime_id.jobTime,
-                        jobsector_id            :   response.data.jobBasicInfo.jobsector_id,
+                        jobsector_id            :   response.data.jobBasicInfo.jobsector_id._id,
                         jobSector               :   response.data.jobBasicInfo.jobsector_id.jobSector,
-                        jobshift_id             :   response.data.jobBasicInfo.jobshift_id,
+                        jobshift_id             :   response.data.jobBasicInfo.jobshift_id._id,
                         jobShift                :   response.data.jobBasicInfo.jobshift_id.jobShift,
                         positions               :   response.data.jobBasicInfo.positions,
                         jobDesc                 :   response.data.jobBasicInfo.jobDesc,
@@ -280,7 +280,8 @@ class JobPosting extends Component {
                         maxSalary               :   response.data.ctcOffered.maxSalary,
                         maxSalPeriod            :   response.data.ctcOffered.maxSalPeriod,
 
-                        minEducation            :   response.data.eligibility.minEducation,
+                        mineducation_id         :   response.data.eligibility.mineducation_id._id,
+                        minEducation            :   response.data.eligibility.mineducation_id.qualification,
                         minExperience           :   response.data.eligibility.minExperience ? response.data.eligibility.minExperience : 0,
 
                         minPrimExp              :   response.data.requiredSkills.minPrimExp,
@@ -806,7 +807,7 @@ class JobPosting extends Component {
                 //console.log("formValues :", formValues);
                 if (response.data.message === "Job details updated Successfully!") {
                     console.log("response.data : ", response.data);
-                    Swal.fire("Congrats!", "your profile updated successfully!", "success");
+                    Swal.fire("Success!", "your profile updated successfully!", "success");
                     this.props.history.push("/job-profile/" + this.state.job_id);
                 }
             })

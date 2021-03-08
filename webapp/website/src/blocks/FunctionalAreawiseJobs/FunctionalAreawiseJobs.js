@@ -18,6 +18,7 @@ class FunctionalAreawiseJobs extends Component{
 
         mapAction.jobCount(selector);
         mapAction.filterSubfunctionalData(this.props.selector);
+        
         if(this.props.match.path=="/"){
             this.props.history.push("/country/IN/state/all/city/all/industry/all/0/function/"+functionalArea+"/"+_id+"/subfunction/all/0");
         }
@@ -26,7 +27,7 @@ class FunctionalAreawiseJobs extends Component{
         }
     }    
     render(){
-        //console.log(this.props.functionalJobs)
+        
     return(
             
                 <section className="col-lg-12 AllJobsWrapper">

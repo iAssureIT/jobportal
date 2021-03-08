@@ -319,21 +319,21 @@ class LeftSideFilters extends Component{
       minValue = Math.min.apply(null, flattened);
       maxValue = Math.max.apply(null, flattened);
 
-      console.log('min: ' + minValue, ' max: ' + maxValue);
+      //console.log('min: ' + minValue, ' max: ' + maxValue);
 
       selector.minExp = minValue
       selector.maxExp = maxValue
     }
-
+    
     this.setState({ selector: selector },()=>{
         mapAction.jobCount(this.state.selector);
       if (this.props.viewMode=="mapView") {
         mapAction.filterMapData(this.state.selector);
       }
-      if (this.props.viewMode=="functionalView") {
+      if (this.props.viewMode=="functionalView" && this.props.match.params.functionalArea == "all") {
         mapAction.filterFunctionalData(this.state.selector);
       }
-      if (this.props.viewMode=="subfunctionalView") {
+      if (this.props.viewMode=="functionalView" && this.props.match.params.functionalArea != "all") {
         mapAction.filterSubfunctionalData(this.state.selector);
       }
       if (this.props.viewMode=="industrialView") {

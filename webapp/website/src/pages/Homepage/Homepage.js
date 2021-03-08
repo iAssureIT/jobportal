@@ -181,7 +181,7 @@ class HomePage extends Component {
     }
   }
   changeViewMode(viewMode){
-  console.log(viewMode) 
+  
     var {mapAction} = this.props;
     mapAction.setViewMode(viewMode);
 
@@ -254,6 +254,7 @@ class HomePage extends Component {
     mapAction.jobCount(selector);
   }
   render() {
+    //console.log(this.props.viewMode) 
     return (
       <div className="ViewBodyWrapper container-fluid">
 
