@@ -47,7 +47,7 @@ class ForgotPassword extends Component {
               
                 console.log('forgotpassword res===',response.data)
                 if (response.data.ID) {
-                    /*var sendData = {
+                    var sendData = {
                       "event"     : "Event3", //Event Name
                       "toUser_id"  : response.data.ID, //To user_id(ref:users)
                       "toUserRole"  : "candidate",
@@ -58,7 +58,7 @@ class ForgotPassword extends Component {
                     }
                     axios.post('/api/masternotifications/post/sendNotification', sendData)
                     .then((notificationres) => {})
-                    .catch((error) => { console.log('notification error: ', error) })*/
+                    .catch((error) => { console.log('notification error: ', error) })
 
                     localStorage.setItem('previousUrl' ,'forgotpassword');
                     $('.fullpageloader').hide();

@@ -167,11 +167,12 @@ class ResetPassword extends Component {
         var status =  this.validateForm();
         if(status == true){
         var user_id = this.state.user_ID;
-        var auth= {
+        var auth = {
           email : this.state.emailId,
           password : this.state.oldPassword,
           role: "candidate"
         } 
+        
         axios.post('/api/auth/post/login',auth)
         .then(response => {
 
