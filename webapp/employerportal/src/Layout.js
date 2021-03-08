@@ -11,7 +11,7 @@ import Login from './jobportaladmin/systemSecurity/Login.js';
 import ConfirmOtp from './jobportaladmin/systemSecurity/ConfirmOtp.js';
 import ForgotPassword from './jobportaladmin/systemSecurity/ForgotPassword.js';
 import ResetPassword from './jobportaladmin/systemSecurity/ResetPassword.js';
-//import ResetPasswordFirstLogin from './coreadmin/systemSecurity/ResetPasswordFirstLogin.js';
+import ChangePassword from './jobportaladmin/systemSecurity/ChangePassword.js';
 import SignUp from './jobportaladmin/systemSecurity/SignUp.js';
 
 /*import Footer                                   from './coreadmin/common/footer/Footer.js';*/
@@ -104,8 +104,7 @@ class Layout extends Component  {
                                                         <Route path="/job-list"                         component={JoblistPage} exact />
                                                         <Route path="/applied-candidate-list/:jobID"    component={CandidatelistPage} exact />
                                                         <Route path="/candidate-profile/:candidate_id"  component={CandidateProfile} exact />
-                                                        <Route path="/forgot-password"       exact strict component={ForgotPassword} />
-                                                        <Route path="/reset-pwd/:user_ID"   exact strict component={ResetPassword} />
+                                                        <Route path="/change-pwd/:user_ID"   exact strict component={ChangePassword} />
                                                         <Route path="/confirm-otp/:userID"  exact strict component={ConfirmOtp} /></Switch>
                                                 </div>
                                             </div>

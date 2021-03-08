@@ -81,22 +81,23 @@ class ConfirmOtp extends Component {
       //====================================
       var status =  this.validateForm();
       if (status) {
-
-      var checkData = { "user_id": this.props.match.params.userID, "emailotp" : this.refs.emailotp.value, "status" : "blocked" }
-      axios.post('/api/auth/checkemailotp/usingID',checkData)
+      var url = localStorage.getItem('previousUrl');
+      var userStatus =  url == 'signup' ? 'blocked' : 'active';
+      var checkData = { "user_id": this.props.match.params.userID, "emailotp" : this.refs.emailotp.value, "status" : userStatus }
+      axios.post('/api/auth/checkemailotp/usingID',checkData) 
       .then((response) => {
 
 
-          if (response.data.message == 'SUCCESS') {
+          if (response.data.message == 'SUCCESS') { 
             swal('OTP Verified Successfully.');
-            this.props.history.push('/login');
-            var url = localStorage.getItem('previousUrl');
+            
+            
             if (url == 'forgotpassword') {
               localStorage.removeItem("previousUrl");
               this.props.history.push('/reset-pwd/' + this.props.match.params.userID);
             } else {
               localStorage.removeItem("previousUrl");
-              
+              this.props.history.push('/login');
               //================================
 
                 /*axios.post('/api/candidatemaster/post', candidatemaster)

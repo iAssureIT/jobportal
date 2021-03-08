@@ -9,19 +9,18 @@ import { bindActionCreators } from 'redux';
 import { withRouter }   from 'react-router-dom';
 import  * as mapActionCreator from '../common/actions/index';
 
-class ResetPassword extends Component {
+class ChangePassword extends Component {
     constructor(props) {
         super(props);
         this.state = {
-
+          emailId     : this.props.userDetails.email,
+          user_ID     : this.props.userDetails.user_id,
           oldPassword : '',
           newPassword : "",
           confirmNewPassword : "",
           showPassword1: false,
           showPassword2: false,
           showPassword3: false,
-          emailId      :this.props.userDetails.email,
-          user_ID      :this.props.userDetails.user_id,
         }
     }
     componentDidMount(){
@@ -79,6 +78,11 @@ class ResetPassword extends Component {
       "Please enter Password";  
       status=false; 
     }
+    if(this.state.oldPassword.length<8){
+      document.getElementById("newPasswordError").innerHTML=  
+      "Please enter atleast 8 characters";  
+      status=false; 
+    }
 
     
     else{
@@ -133,8 +137,7 @@ class ResetPassword extends Component {
   } 
     handleChange(event){
         var fieldValue=event.currentTarget.value;
-        // console.log("fieldValue",fieldValue);
-         var fieldKey=event.currentTarget.name;
+        var fieldKey=event.currentTarget.name;
         this.setState({
           [fieldKey]:fieldValue
         });
@@ -154,11 +157,12 @@ class ResetPassword extends Component {
   }
 
 
-    resetPassword(event) {
+    changePassword(event) {
         event.preventDefault();
-       
-        var status =  this.validateForm();
-        if(status == true){
+
+        var status =  this.validateForm(); 
+        if(status){
+
         var user_id = this.state.user_ID;
         var auth = {
           email : this.state.emailId,
@@ -191,16 +195,11 @@ class ResetPassword extends Component {
 
                 var token = localStorage.removeItem("token");
                 if(token!==null){
-                console.log("Header Token = ",token);
                 this.setState({
                   loggedIn : false
                 },()=>{
                   localStorage.removeItem("userDetails")
-                  localStorage.removeItem("emailId")
-                  localStorage.removeItem("center_ID")
-                  localStorage.removeItem("centerName")
-                  localStorage.removeItem("fullName")
-                  localStorage.removeItem('role')
+                  
                 })
                   console.log("token",token);
                   // browserHistory.push("/login"); 
@@ -226,8 +225,28 @@ class ResetPassword extends Component {
           this.setState({invalidpassword:true})
         }
       })
+          /*var userID = this.props.userID;
+          var formValues = {
+              "pwd" : this.refs.newPassword.value
+          }
+            $('.fullpageloader').show();
+            axios.patch('/api/auth/patch/change_password_withoutotp/id/'+this.props.userDetails.user_id, formValues)
+            .then((response)=>{
+                $('.fullpageloader').hide();
+                this.setState({
+                    "showMessage" : true,
+                })
+                 swal({
+                      text : "Password reset successful"
+                    });
+                    //this.props.history.push('/login');
+                   this.logout();
+            })
+            .catch((error)=>{
+                $('.fullpageloader').hide();
+            })*/
+        }
     }
-  }
 
     Closepagealert(event){
         event.preventDefault();
@@ -255,17 +274,17 @@ class ResetPassword extends Component {
     showConfirmPass(){
         $('.showPwd2').toggleClass('showPwd3');
         $('.hidePwd2').toggleClass('hidePwd3');
-        return $('#confirmNewPassword').attr('type', 'text');
+        return $('#confirmPassword').attr('type', 'text');
     }
     hideConfirmPass(){
         $('.showPwd2').toggleClass('showPwd3');
         $('.hidePwd2').toggleClass('hidePwd3');
-        return $('#confirmNewPassword').attr('type', 'password');
+        return $('#confirmPassword').attr('type', 'password');
     }
     render() {
         return (
             <section className="container-fluid resetPasswordWrapper">
-                <div className="resetPassword col-lg-6 col-lg-offset-3">
+                <div className="resetPassword col-lg-4 col-lg-offset-4">
                   <form>
 
                     <div className="resetPasswordTitle col-lg-12">Reset Password
@@ -307,7 +326,7 @@ class ResetPassword extends Component {
 
 
                     <div className="col-lg-12 buttonWrapper">
-                   <button className="btn col-lg-12 buttonResetPassword" onClick={this.resetPassword.bind(this)}>Reset Password</button>
+                   <button className="btn col-lg-12 buttonResetPassword" onClick={this.changePassword.bind(this)}>Reset Password</button>
                   </div>
 
                 
@@ -328,4 +347,4 @@ const mapStateToProps = (state)=>{
 const mapDispatchToProps = (dispatch) => ({
   mapAction :  bindActionCreators(mapActionCreator, dispatch)
 })
-export default connect(mapStateToProps, mapDispatchToProps) (ResetPassword);
+export default connect(mapStateToProps, mapDispatchToProps) (ChangePassword);

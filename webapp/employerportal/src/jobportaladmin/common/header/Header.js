@@ -141,7 +141,7 @@ class Header extends Component{
                     </div>
 
                     
-                    <a href={"/reset-pwd/"+this.props.userDetails.user_id}><div className="changePassword col-lg-12">
+                    <a href={"/change-pwd/"+this.props.userDetails.user_id}><div className="changePassword col-lg-12">
                         <span>Reset Password</span>
                       </div></a>
 
