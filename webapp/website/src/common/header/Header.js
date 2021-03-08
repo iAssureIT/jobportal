@@ -412,7 +412,7 @@ class Header extends Component{
                             {this.props.selectedModal == "signup" ? <SignUp/> : null }
                             {this.props.selectedModal == "forgotpassword" ? <ForgotPassword/> : null }*/}
                             {this.props.selectedModal == "confirmotp" ? <ConfirmOtp/> : null }
-                            {this.props.selectedModal == "resetpassword" ? <ResetPassword/> : null }
+                            {this.props.selectedModal == "changepassword" ? <ChangePassword/> : null }
                             
                       </section>
                   </div>
@@ -424,7 +424,7 @@ class Header extends Component{
                   <div className="modal-body">
                       <button type="button" className="close" id="closeModalButton" data-dismiss="modal">&times;</button>
                       <section className="OTPSentWrapper row">
-                            <ResetPassword />
+                            <ChangePassword />
                       </section>
                   </div>
                 </div>
