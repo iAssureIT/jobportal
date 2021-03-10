@@ -1,3 +1,21 @@
+:root {
+  --main-bg-color                   : #1f262d;
+  --header-bg-color                 : #191c24;
+  --footer-bg-color                 : #191c24;
+  --input-bg-color                  : #242933;
+
+  --main-txt-color                  : #ffffff;
+
+  --main-heading-font-color         : #f5a721;
+  --main-subheading-font-color      : #f5a721;
+  --main-white-subheading-font-color: #f5a721;
+
+  --header-border-color             : #4b5666;
+  --main-border-color               : #f5a721;
+
+  --yellow-button-color             : #f5a721;
+  --red-button-color                : #ff4444;
+}
 @font-face{
   font-family: 'Montserrat-Bold'; 
   src: url('/Fonts/Montserrat/Montserrat-Bold.ttf');
