@@ -260,9 +260,11 @@ class EditUserProfile extends Component {
 									{
 										url !== '/editadminprofile/'+this.state.adminpathname?
 											<div className="col-lg-6 col-md-6 col-xs-12 col-sm-12 ">
-												<div className="pull-right" data-toggle="modal" aria-labelledby="verifyresetpwdornot" data-target="#verifyresetpwdornot" aria-hidden="true">
+												<a href="/change-password">
+												<div className="pull-right">
 													<p className="btn btnhvr btn-primary ">Reset Password</p>
 												</div>
+												</a>
 											</div>
 											:
 											null

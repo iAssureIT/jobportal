@@ -12,6 +12,7 @@ import ConfirmOtp           from './coreadmin/systemSecurity/ConfirmOtp.js';
 import ForgotPassword       from './coreadmin/systemSecurity/ForgotPassword.js';
 import ResetPassword        from './coreadmin/systemSecurity/ResetPassword.js';
 import SignUp               from './coreadmin/systemSecurity/SignUp.js';
+import ChangePassword               from './coreadmin/systemSecurity/ChangePassword.js';
 
 import Dashboard            from './jobportaladmin/Dashboard/Dashboard.js';
 
@@ -130,6 +131,8 @@ class Layout extends Component  {
 
                                                        
                                                         <Route path="/joblist" exact strict component={JobListView} />
+
+                                                        <Route path="/change-password" exact strict component={ChangePassword} />
 
 
                                                         <Route path="/address-type" exact strict component={AddressType} />
