@@ -237,6 +237,7 @@ class JobPosting extends Component {
                     console.log("response.data : ", response.data);
                     this.setState({
                         job_id                  :   job_id,
+                        company_id              :   response.data.company_id._id,
                         jobTitle                :   response.data.jobBasicInfo.jobTitle,
                         employerName            :   response.data.company_id.companyName,
                         employerLogo            :   response.data.company_id.companyLogo[0] ? response.data.company_id.companyLogo[0] : null,
@@ -1599,9 +1600,6 @@ render(){
                                                         )}
                                                     </datalist>	
                                                 </div>
-
-                                                
-
 
                                                 <span id="minEducationError" className="errorMsg"></span>
 											</div>

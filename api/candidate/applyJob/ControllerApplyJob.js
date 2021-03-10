@@ -53,7 +53,7 @@ exports.appliedJobList = (req,res,next)=>{
     });
 };
 exports.appliedJobCount = (req,res,next)=>{
-    console.log(req.params.candidate_id);
+    //console.log(req.params.candidate_id);
     ApplyJob.aggregate([
         { "$match" : { "candidate_id" : ObjectId(req.params.candidate_id) } },
         { "$lookup": {
@@ -76,24 +76,40 @@ exports.appliedJobCount = (req,res,next)=>{
 };
 //applicantsCountList
 exports.applicantsCountList = (req,res,next)=>{
-    //console.log(req.params.candidate_id);
-    ApplyJob.aggregate([
-        { "$match" : { "entity_id" : ObjectId(req.body.entity_id) } },
-        { "$group" : { _id: "$job_id", candidatesApplied: { $sum: 1 } }}
-    ])
-    .exec()
-    .then(data=>{
-        res.status(200).json(data);
-    })
-    .catch(err =>{
-        res.status(500).json({
-            error: err
+    console.log("count",req.body);
+    if (req.body.entity_id) {
+        ApplyJob.aggregate([
+            { "$match" : { "entity_id" : ObjectId(req.body.entity_id) } },
+            { "$group" : { _id: "$job_id", candidatesApplied: { $sum: 1 } }}
+        ])
+        .exec()
+        .then(data=>{
+            res.status(200).json(data);
+        })
+        .catch(err =>{
+            res.status(500).json({
+                error: err
+            });
         });
-    });
+    }else{
+        ApplyJob.aggregate([
+            { "$group" : { _id: "$job_id", candidatesApplied: { $sum: 1 } }}
+        ])
+        .exec()
+        .then(data=>{
+            res.status(200).json(data);
+        })
+        .catch(err =>{
+            res.status(500).json({
+                error: err
+            });
+        });
+    }
+    
 };
 //candidatesAppliedToJob
 exports.candidatesAppliedToJob = (req,res,next)=>{
-
+    console.log(req.body)
     ApplyJob.find({"job_id" : ObjectId(req.body.job_id)})
             .populate({path : 'candidate_id', model : 'candidatemasters',
                 populate: {

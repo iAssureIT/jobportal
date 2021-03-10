@@ -168,7 +168,7 @@ export default class JobPostProfile extends Component{
 										<div className="col-lg-3 leftImgContainer">
 											<div className="col-lg-12">
 												<div className="imgbox col-lg-9">
-													<img src={this.state.employerLogo} className="companyProfileLogo"  alt="not found"/>
+													<img src={this.state.employerLogo ? this.state.employerLogo : "/images/logonotfound.jpg"} className="companyProfileLogo"  alt="not found"/>
 												</div>
 											</div>	
 										</div>
@@ -221,7 +221,7 @@ export default class JobPostProfile extends Component{
 															</li>
 															<li>
 																<span className="eduSubtitle"> Minimum Overall Experience </span><br/>
-																<span className="eduDuration"> {this.state.minExperience} </span>
+																<span className="eduDuration"> {this.state.minExperience} { Number(this.state.minExperience) > 1 ? "Years" : "Year"} </span>
 															</li>
 														</ul>
 													</div>
@@ -411,7 +411,19 @@ export default class JobPostProfile extends Component{
 									<p className="rightSideSub">
 										{this.state.industry}
 									</p>
+									<div className="rightSideTitle">
+										Sector
+									</div>
+									<p className="rightSideSub">
+										{this.state.jobSector}
+									</p>
+									<div className="rightSideTitle">
+										Funtional Area
+									</div>
 									
+									<p className="rightSideSub">
+										{this.state.functionalArea}
+									</p>
 									<div className="rightSideTitle">
 										Gender
 									</div>
@@ -432,15 +444,7 @@ export default class JobPostProfile extends Component{
 									<p className="rightSideSub">
 										{this.state.jobType}
 									</p>
-									
-									<div className="rightSideTitle">
-										Funtional Area
-									</div>
-									
-									<p className="rightSideSub">
-										{this.state.functionalArea}
-									</p>
-									
+																		
 									<div className="rightSideTitle">
 										Role
 									</div>

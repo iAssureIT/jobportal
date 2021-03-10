@@ -98,9 +98,9 @@ export function filterJobList(selector) {
     }
 } 
 
-export function applicantsCountList(selector) {
+export function applicantsCountList() {
     return dispatch =>{
-      return axios.post("/api/applyJob/get/applicantsCountList",selector)
+      return axios.post("/api/applyJob/get/applicantsCountList")
       .then((response)=>{
           dispatch(getApplicantsCountList(response.data));
       })

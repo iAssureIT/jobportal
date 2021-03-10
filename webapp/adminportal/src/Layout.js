@@ -21,9 +21,11 @@ import JobPostProfile       from './jobportaladmin/blocks/JobPostProfile/JobPost
 import CandidateProfile     from './jobportaladmin/blocks/CandidateProfile/CandidateProfile.js';
 
 import JoblistPage          from './jobportaladmin/pages/JoblistPage/JoblistPage.js';
-import CandidatelistPage    from './jobportaladmin/pages/CandidatelistPage/CandidatelistPage.js';
+import AppliedCandidatelistPage    from './jobportaladmin/pages/AppliedCandidatelistPage/AppliedCandidatelistPage.js';
 
 import JobListView          from './jobportaladmin/blocks/Joblist/Joblist.js';
+
+import CandidatelistPage    from './jobportaladmin/pages/CandidatelistPage/CandidatelistPage.js';
 
 import Header               from './coreadmin/common/header/Header.js'; 
 import Footer               from './coreadmin/common/footer/Footer.js';
@@ -116,11 +118,11 @@ class Layout extends Component  {
                                                         <Route path="/post-job/:job_id" exact strict component={JobPosting} />
                                                         <Route path="/job-profile/:job_id" exact strict component={JobPostProfile} />
                                                         <Route path="/job-profile" exact strict component={JobPostProfile} />
-                                                        <Route path="/job/list" exact strict component={JoblistPage} />
-                                                        <Route path="/applied-candidate-list/:jobID"    component={CandidatelistPage} />
+                                                        <Route path="/job/list" exact strict component={JoblistPage} /> 
+                                                        <Route path="/applied-candidate-list/:job_id"    component={AppliedCandidatelistPage} />
                                                         <Route path="/candidate-profile/:candidate_id"  component={CandidateProfile} />
 
-                                                        <Route path="/candidate/list" exact strict component={CandidateMainPage} />
+                                                        <Route path="/candidate/list" exact strict component={CandidatelistPage} />
                                                         <Route path="/candidate/basic-info" exact strict component={CandidateBasicInfo} />
                                                         <Route path="/candidate/address/:candidateID" exact strict component={CandidateAddress} />
                                                         <Route path="/candidate/academics/:candidateID" exact strict component={CandidateAcademics} />

@@ -34,8 +34,9 @@
 }
 
 .leftImgContainer .companyProfileLogo{
-	height: 55px;
-	margin-top: 40px;
+	width: 100%;
+    height: auto;
+	margin-top: 0px;
 	border-radius: 5px;
 }
 

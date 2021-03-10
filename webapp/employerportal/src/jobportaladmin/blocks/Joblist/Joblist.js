@@ -88,8 +88,6 @@ deleteJob = (event)=>{
 							this.props.jobList
 							?
 								this.props.jobList.map((elem,index1)=>{
-									console.log(elem._id)
-									console.log(elem.jobBasicInfo.jobshift_id.jobShift)
 									var applicantsCount = this.props.applicantsCountList.filter((appl, ind)=>{
 										if (appl._id == elem._id) {
 											return appl.candidatesApplied;

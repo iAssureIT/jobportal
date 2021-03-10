@@ -18,7 +18,7 @@ class Candidatelist extends Component{
 			dataArry            : 	[],
 			skillsArry          : 	[],
 			jobInfo 		    : 	[], 	
-			candidateSelector   : 	{ "jobID" :  this.props.jobID },
+			candidateSelector   : 	{ "job_id" :  this.props.job_id },
 			view 			    : 	'Grid',
 			RecordsTable 	    : 	[],
 			tableHeading 	    : 	{
@@ -52,8 +52,8 @@ class Candidatelist extends Component{
 		var {mapAction}  = this.props;
 		mapAction.filterCandidatesApplied(this.state.candidateSelector)	
 		
-		// get single job information by jobID
-		Axios.get("/api/jobs/get/one/"+this.props.jobID)
+		// get single job information by job_id
+		Axios.get("/api/jobs/get/one/"+this.props.job_id)
 		.then(response=>{
 			this.setState({jobInfo : response.data})
 		})
@@ -66,13 +66,13 @@ class Candidatelist extends Component{
 		var tableData = this.props.candidateList.map((a, i)=>{
 			console.log(a)
 		var addressDetails = a.candidate_id.address.map((l,i)=>{
-			return "<ul class='nopadding'><li><b>"+l.addressType.addressType+ " Address</b>: "+l.address+"</li></ul>"
+			return "<ul className='nopadding'><li><b>"+l.addressType.addressType+ " Address</b>: "+l.address+"</li></ul>"
 		})
 		var academicsData = a.candidate_id.academics.map((c,i)=>{
-			return "<ul class='nopadding'><li>"+c.qualificationlevel_id.qualificationLevel+" "+c.qualification_id.qualification+", "+(c.university_id.university)+" " + c.collegeSchool+" "+c.state+" " +c.country+"</li></ul>"
+			return "<ul className='nopadding'><li>"+c.qualificationlevel_id.qualificationLevel+" "+c.qualification_id.qualification+", "+(c.university_id.university)+" " + c.collegeSchool+" "+c.state+" " +c.country+"</li></ul>"
 		})
 		var workExperience = a.candidate_id.workExperience.map((c,i)=>{
-			return "<ul class='nopadding'><li>"+c.lastDegn+" "+c.company_id.companyName+" "+c.city+ ", "+c.state+" " + c.country+ "</li></ul>"
+			return "<ul className='nopadding'><li>"+c.lastDegn+" "+c.company_id.companyName+" "+c.city+ ", "+c.state+" " + c.country+ "</li></ul>"
 		})
         return{
             name 	: a.candidate_id.basicInfo.firstName + " "+a.candidate_id.basicInfo.lastName,
@@ -132,8 +132,8 @@ class Candidatelist extends Component{
 					
 					<div className="col-lg-12 downloadCount">
 						Candidates applied to job  : 
-						<i class="fa fa-th-list fa-lg btn pull-right listViewIcon viewBtn" title="List view" name="view" ref="view" value={this.state.view} onClick={this.showView.bind(this,'List')} onChange={this.handleChange} aria-hidden="true"></i>
-						<i class="fa fa-th fa-lg btn pull-right gridBtnActive gridViewIcon viewBtn" title="Grid view" name="view" ref="view" value={this.state.view} onClick={this.showView.bind(this,'Grid')} onChange={this.handleChange} aria-hidden="true"></i>
+						<i className="fa fa-th-list fa-lg btn pull-right listViewIcon viewBtn" title="List view" name="view" ref="view" value={this.state.view} onClick={this.showView.bind(this,'List')} onChange={this.handleChange} aria-hidden="true"></i>
+						<i className="fa fa-th fa-lg btn pull-right gridBtnActive gridViewIcon viewBtn" title="Grid view" name="view" ref="view" value={this.state.view} onClick={this.showView.bind(this,'Grid')} onChange={this.handleChange} aria-hidden="true"></i>
 					</div>
 
 					{this.state.view === 'List' ?
@@ -190,7 +190,7 @@ class Candidatelist extends Component{
 																							<div className="row">
 																								<div className="displayCandidateName">
 																										<a href={"/candidate-profile/"+elem.candidate_id}> {elem.candidate_id.basicInfo.firstName} </a>
-																									<span className="candidateIdNumber">(1234)</span>
+																									<span className="candidateIdNumber"></span>
 																								</div>
 																								<div className=" candidatePosts">
 																									<div className=" col-lg-1">
@@ -210,8 +210,8 @@ class Candidatelist extends Component{
 																									<div className=" Col-lg-11 postNameWrapper">
 																										<div className="postName">{elem.candidate_id.workExperience[elem.candidate_id.workExperience.length-1] ? elem.candidate_id.workExperience[elem.candidate_id.workExperience.length-1].lastDegn : null}</div> 
 																										<div className="postName">{elem.candidate_id.workExperience[elem.candidate_id.workExperience.length-1] ? elem.candidate_id.workExperience[elem.candidate_id.workExperience.length-1].department : null} </div>
-																										<div className="postName">{ elem.candidate_id.totalExperience ? elem.candidate_id.totalExperience +" years" : "Fresher" }</div>
-																										<div className="postName">{elem.candidate_id.workExperience[elem.candidate_id.workExperience.length-1] ? elem.candidate_id.workExperience[elem.candidate_id.workExperience.length-1].district : null} </div>
+																										<div className="postName">{elem.candidate_id.totalExperience ? elem.candidate_id.totalExperience +" years" : "Fresher" }</div>
+																										<div className="postName">{elem.candidate_id.address[elem.candidate_id.address.length-1] ? elem.candidate_id.address[elem.candidate_id.address.length-1].district + ", "+elem.candidate_id.address[elem.candidate_id.address.length-1].state : null} </div>
 																									</div>
 																								</div>
 																							</div>

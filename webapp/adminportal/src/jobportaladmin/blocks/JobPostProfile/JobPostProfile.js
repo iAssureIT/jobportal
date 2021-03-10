@@ -19,7 +19,7 @@ export default class JobPostProfile extends Component{
 						workFromHome 		: 	false,
 						jobtype_id 			: 	"",
 						jobtime_id 			: 	"",
-						jobcategory_id 		: 	"",
+						jobsector_id 		: 	"",
 						positions           :   "",
 						jobDesc 			: 	"",
 						lastDateOfAppl 		: 	"",
@@ -66,47 +66,29 @@ export default class JobPostProfile extends Component{
         var otherSkillTags = [];
         var preferredSkillTags = [];
 
-		Axios.get("/api/skillmaster/get/list")
-            .then(skillmaster => {
-                /*var primarySkillSuggestions =  [];
-                response.data.map((elem,index)=>{
-                    primarySkillSuggestions.push({id:elem._id,text:elem.skill})
-                })
-                this.setState({
-                    primarySkillSuggestions   : primarySkillSuggestions,
-                });*/
-  
 		Axios.get("/api/jobs/get/one/"+job_id)
 		.then(response=>{
-           	//console.log("response.skillmaster = ",skillmaster);
-			//console.log("response.data = ",response.data);
-			response.data.requiredSkills.primarySkills ? 
+
+		console.log(response.data)
 			response.data.requiredSkills.primarySkills.map((skill,ind)=>{
 				primarySkillTags.push({ id : skill.skill_id._id, text : skill.skill_id.skill })
-            }) : primarySkillTags = [];
-
-	        response.data.requiredSkills.secondarySkills ?
-	            response.data.requiredSkills.secondarySkills.map((skill,ind)=>{
-					secondarySkillTags.push({ id : skill.skill_id._id, text : skill.skill_id.skill })
-	            }) : secondarySkillTags = [];
-
-	        response.data.requiredSkills.otherSkills ?     
-	            response.data.requiredSkills.otherSkills.map((skill,ind)=>{
-					otherSkillTags.push({ id : skill.skill_id._id, text : skill.skill_id.skill })
-	            }) : otherSkillTags = [];
-
-	        response.data.requiredSkills.preferredSkills ? 
-	            response.data.requiredSkills.preferredSkills.map((skill,ind)=>{
-					preferredSkillTags.push({ id : skill.skill_id._id, text : skill.skill_id.skill })
-	            }) : preferredSkillTags = [];
-				
-				this.setState({
+            })
+            response.data.requiredSkills.secondarySkills.map((skill,ind)=>{
+				secondarySkillTags.push({ id : skill.skill_id._id, text : skill.skill_id.skill })
+            })
+            response.data.requiredSkills.otherSkills.map((skill,ind)=>{
+				otherSkillTags.push({ id : skill.skill_id._id, text : skill.skill_id.skill })
+            })
+            response.data.requiredSkills.preferredSkills.map((skill,ind)=>{
+				preferredSkillTags.push({ id : skill.skill_id._id, text : skill.skill_id.skill })
+            }) 
+			this.setState({
 					job_id				: 	job_id,
 					jobTitle 			: 	response.data.jobBasicInfo.jobTitle,
-					employerName 		: 	response.data.company_id.companyName,
-					employerLogo 		: 	response.data.company_id.companyLogo[0] ? response.data.company_id.companyLogo[0] : null,
-					industry_id 		: 	response.data.jobBasicInfo.industry_id._id,
-					industry 			: 	response.data.jobBasicInfo.industry_id.industry,
+					employerName 		: 	response.data.company_id ? response.data.company_id.companyName : "Anonymous",
+					employerLogo 		: 	response.data.company_id ? response.data.company_id.companyLogo[0] : null,
+					industry_id 		: 	response.data.jobBasicInfo.industry_id ? response.data.jobBasicInfo.industry_id._id : "",
+					industry 			: 	response.data.jobBasicInfo.industry_id ? response.data.jobBasicInfo.industry_id.industry : "",
 					functionalarea_id 	: 	response.data.jobBasicInfo.functionalarea_id._id,
 					functionalArea 		: 	response.data.jobBasicInfo.functionalarea_id.functionalArea,
 					subfunctionalarea_id: 	response.data.jobBasicInfo.subfunctionalarea_id._id,
@@ -119,8 +101,8 @@ export default class JobPostProfile extends Component{
 					jobType 			: 	response.data.jobBasicInfo.jobtype_id.jobType,
 					jobtime_id 			: 	response.data.jobBasicInfo.jobtime_id._id,
 					jobTime 			: 	response.data.jobBasicInfo.jobtime_id.jobTime,
-					jobcategory_id 		: 	response.data.jobBasicInfo.jobcategory_id._id,
-					jobCategory 		: 	response.data.jobBasicInfo.jobcategory_id.jobCategory,
+					jobsector_id 		: 	response.data.jobBasicInfo.jobsector_id._id,
+					jobSector 			: 	response.data.jobBasicInfo.jobsector_id.jobSector,
 					positions           :   response.data.jobBasicInfo.positions,
 					jobDesc 			: 	response.data.jobBasicInfo.jobDesc,
 					lastDateOfAppl      : 	response.data.jobBasicInfo.lastDateOfAppl ? Moment(response.data.jobBasicInfo.lastDateOfAppl).format("YYYY-MM-DD"):"",
@@ -143,7 +125,8 @@ export default class JobPostProfile extends Component{
 					maxSalary 			: 	response.data.ctcOffered.maxSalary,
 					maxSalPeriod		: 	response.data.ctcOffered.maxSalPeriod,
 					
-					minEducation 		: 	response.data.eligibility.minEducation,
+					mineducation_id 	: 	response.data.eligibility.mineducation_id._id,
+					minEducation 		: 	response.data.eligibility.mineducation_id.qualification,
 					minExperience 		: 	response.data.eligibility.minExperience,
 					
 					primarySkillTags 	: 	primarySkillTags,
@@ -157,16 +140,7 @@ export default class JobPostProfile extends Component{
 					
 					preferredSkillTags  :   preferredSkillTags,
                 })
-               
 			})
-			.catch(error=>	{
-								Swal.fire("Some Error Occured during data fetch",error.message,'error');
-							})
-		
-			})
-            .catch(error => {
-                				Swal.fire("Error while getting List data", error.message, 'error');
-           					})
 	}	
 	
 	render(){
@@ -181,8 +155,8 @@ export default class JobPostProfile extends Component{
 									<div className="row">
 										<div className="col-lg-3 leftImgContainer">
 											<div className="col-lg-12">
-												<div className="imgbox col-lg-9">
-													<img src={this.state.employerLogo} className="companyProfileLogo"  alt="not found"/>
+												<div className="imgbox col-lg-12">
+													<img src={this.state.employerLogo ? this.state.employerLogo : "/images/logonotfound.jpg"} className="companyProfileLogo"  alt="not found"/>
 												</div>
 											</div>	
 										</div>
@@ -234,7 +208,7 @@ export default class JobPostProfile extends Component{
 															</li>
 															<li>
 																<span className="eduSubtitle"> Minimum Overall Experience </span><br/>
-																<span className="eduDuration"> {this.state.minExperience} </span>
+																<span className="eduDuration"> {this.state.minExperience} { Number(this.state.minExperience) > 1 ? "Years" : "Year"}</span>
 															</li>
 														</ul>
 													</div>
@@ -424,6 +398,20 @@ export default class JobPostProfile extends Component{
 									<p className="rightSideSub">
 										{this.state.industry}
 									</p>
+									<div className="rightSideTitle">
+										Sector
+									</div>
+									<p className="rightSideSub">
+										{this.state.jobSector}
+									</p>
+
+									<div className="rightSideTitle">
+										Funtional Area
+									</div>
+									
+									<p className="rightSideSub">
+										{this.state.functionalArea}
+									</p>
 									
 									<div className="rightSideTitle">
 										Gender
@@ -445,15 +433,7 @@ export default class JobPostProfile extends Component{
 									<p className="rightSideSub">
 										{this.state.jobType}
 									</p>
-									
-									<div className="rightSideTitle">
-										Funtional Area
-									</div>
-									
-									<p className="rightSideSub">
-										{this.state.functionalArea}
-									</p>
-									
+																		
 									<div className="rightSideTitle">
 										Role
 									</div>

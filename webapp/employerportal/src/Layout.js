@@ -102,7 +102,7 @@ class Layout extends Component  {
                                                         <Route path="/post-job/:job_id"                 component={JobPosting} exact />
                                                         <Route path="/job-profile/:job_id"              component={JobPostProfile} exact />
                                                         <Route path="/job-list"                         component={JoblistPage} exact />
-                                                        <Route path="/applied-candidate-list/:jobID"    component={CandidatelistPage} exact />
+                                                        <Route path="/applied-candidate-list/:job_id"   component={CandidatelistPage} exact />
                                                         <Route path="/candidate-profile/:candidate_id"  component={CandidateProfile} exact />
                                                         <Route path="/change-pwd/:user_ID"   exact strict component={ChangePassword} />
                                                         <Route path="/confirm-otp/:userID"  exact strict component={ConfirmOtp} /></Switch>

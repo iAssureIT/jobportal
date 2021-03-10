@@ -18,21 +18,31 @@ class JoblistPage extends Component{
 						}
 
 	componentDidMount(){
-							var selector=this.state.selector;
-							selector.countryCode = "IN";
-							selector.company_id = this.props.company_id 
-							this.setState({ selector: selector })
+		var selector=this.state.selector; 
+		selector.countryCode = "IN";
+		//selector.company_id = this.props.company_id 
+		this.setState({ selector: selector })
 
-							var {mapAction} = this.props;
-							mapAction.filterJobList(selector);
+		var {mapAction} = this.props;
+		mapAction.filterJobList(selector);
 
-							mapAction.applicantsCountList({employerID : this.props.company_id});
-						}
-
+		mapAction.applicantsCountList();
+	}
+						
+	redirectTo(event){
+    	this.props.history.push("/post-job")
+    }					
 	render(){
-				return(
+				return( 
 						<div>
-				        	<List />
+				        	{/*<List />*/}
+				        	<div className="box-header with-border col-lg-12 col-md-12 col-xs-12 col-sm-12 NOpadding-right">
+									<h4 className="weighttitle col-lg-5 col-md-11 col-xs-11 col-sm-11">Job List</h4>
+									<div className="col-lg-5 col-md-12 col-sm-12 col-xs-12 pull-right">
+										<span className="col-lg-6 col-lg-offset-6 sentanceCase addButtonList" onClick={this.redirectTo.bind(this)}><i  className="fa fa-plus-circle"></i>&nbsp;&nbsp;{"Add Job"} 
+										</span>
+									</div>
+								</div>
 				            <Joblist jobList={this.props.jobList} />
 				        </div>	
 					);
@@ -41,10 +51,9 @@ class JoblistPage extends Component{
 
 	const mapStateToProps = (state)	=>	{
 										    return {
-												    	/*user_ID 		: state.user_ID, selector        : state.selector, 	
-												    	jobList 		: state.jobList*/
+												    	
 
-												    	 user_id     : state.userDetails.user_id,  company_id   : state.userDetails.company_id,
+												    	user_id     : state.userDetails.user_id, 
                                               			selector    : state.selector, 
 										    		}
 										}

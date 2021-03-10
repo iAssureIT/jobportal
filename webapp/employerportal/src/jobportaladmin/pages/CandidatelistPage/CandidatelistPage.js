@@ -10,7 +10,7 @@ class CandidatelistPage extends Component{
 		return(
 					<div className="container-fluid">
 						<div className="row">
-							<Candidatelist jobID={this.props.match.params.jobID } />
+							<Candidatelist job_id={this.props.match.params.job_id } />
 						</div>
 					</div>
 			);	

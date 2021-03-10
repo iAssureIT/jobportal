@@ -8,9 +8,9 @@ import { bindActionCreators } from 'redux';
 import  * as mapActionCreator from '../../Common/actions/index';
 import $                      from 'jquery';
 import IAssureTable 		  from '../../../coreadmin/IAssureTable/IAssureTable.jsx';
-import './Candidatelist.css';
+import './AppliedCandidatelist.css';
 
-class Candidatelist extends Component{ 
+class AppliedCandidatelist extends Component{ 
 	constructor(props){
 		super(props);
 		
@@ -50,7 +50,7 @@ class Candidatelist extends Component{
 	componentDidMount(){
 		console.log(this.props);
 		var {mapAction}  = this.props;
-		mapAction.filterCandidates(this.state.candidateSelector)	
+		mapAction.filterCandidatesApplied(this.state.candidateSelector)	
 		
 		// get single job information by job_id
 		Axios.get("/api/jobs/get/one/"+this.props.job_id)
@@ -355,4 +355,4 @@ const mapDispatchToProps = (dispatch) => ({
   mapAction :  bindActionCreators(mapActionCreator, dispatch)
 })
 
-export default connect(mapStateToProps, mapDispatchToProps) (Candidatelist);
+export default connect(mapStateToProps, mapDispatchToProps) (AppliedCandidatelist);

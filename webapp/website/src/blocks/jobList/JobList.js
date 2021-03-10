@@ -8,6 +8,11 @@ import { connect }        from 'react-redux';
 import { bindActionCreators } from 'redux';
 import  * as mapActionCreator from '../../common/actions/index';
 import UploadVideoModal from '../UploadVideoModal/UploadVideoModal.js';
+import {
+  RecordWebcam,
+  useRecordWebcam,
+  CAMERA_STATUS
+} from "react-record-webcam";
 
 class Joblist extends Component{
 	constructor(props){
@@ -17,6 +22,7 @@ class Joblist extends Component{
 		isToggle 		: true,
 		appliedItems 	: [],
 	}
+
 }
 
 componentDidMount(){
@@ -30,8 +36,8 @@ handleclick = (jobid)=>{
 	this.setState({isToggle:!this.state.isToggle})
 	if (this.props.userDetails.loggedIn) {
 		var formValues = {
-			candidate_id : this.props.userDetails.candidate_id,
-			job_id  		: jobid,
+			candidate_id: this.props.userDetails.candidate_id,
+			job_id  	: jobid,
 			createdBy   : this.props.userDetails.user_id
 		}
 		Axios.post("/api/wishlist/post",formValues)
@@ -297,7 +303,7 @@ removeApplication = (job_id) => {
 												 <div className="modal" id="videoModal" role="dialog" tabIndex="-1">
 									                <div className="modal-dialog  modal-lg">
 									                  <div className="modal-body">
-									                      <button type="button" className="close" id="closeModalButton" data-dismiss="modal">&times;</button>
+									                      <button type="button" className="close" id="videoModalCloseButton" data-dismiss="modal">&times;</button>
 									                      <section className="OTPSentWrapper row">
 									                           
 									                        <UploadVideoModal/>

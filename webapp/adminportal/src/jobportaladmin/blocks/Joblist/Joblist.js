@@ -70,7 +70,7 @@ deleteJob = (event)=>{
 
 	render(){
 
-		console.log(this.props.userDetails)
+		//console.log(this.props.userDetails)
 		return(
 			<section className="jobListWrapper">
 				<div className="col-lg-12 jobListWrapperMain">
@@ -81,10 +81,10 @@ deleteJob = (event)=>{
 						</div> 
 					</div> */}
 						{
-							this.props.jobList
+							this.props.jobList 
 							?
 								this.props.jobList.map((elem,index1)=>{
-									console.log(elem);
+									//console.log(elem);
 									var applicantsCount = this.props.applicantsCountList.filter((appl, ind)=>{
 										if (appl._id == elem._id) {
 											return appl.candidatesApplied;
@@ -97,18 +97,36 @@ deleteJob = (event)=>{
 										<div className="col-lg-12">
 											<div className="jobListContainer">
 												<div className="col-lg-12">
-													<div className="col-lg-11 jobListLeftContent">
+													<div className="col-lg-11 jobListLeftContent"> 
 														<div className="row">
 															<div className="iconsBar">
 																<ul>
 																	{
 																		elem.jobBasicInfo.gender=="Male Only"?
-																		<li><i className="fa fa-male"></i></li>
+																		<li><i className="fa fa-male" title="Only male candidates can apply"></i></li>
+																		: elem.jobBasicInfo.gender=="Female Only"?
+																		<li><i className="fa fa-female" title="Only female candidates can apply"></i></li> 
+																		: <li><i className="fa fa-male" title="male & female candidates both can apply"></i><i className="fa fa-female bothIcon" title="male & female candidates both can apply"></i></li>
+																	}
+																	{	 
+																		elem.jobBasicInfo.jobshift_id ? 
+																		elem.jobBasicInfo.jobshift_id.jobShift=="Day Shift" ?
+																		<li><i className="fa fa-sun-o" title="Day Shift"></i></li>
+																		: elem.jobBasicInfo.jobshift_id.jobShift=="Night Shift"?
+																		<li><i className="fa fa-moon-o" title="Night Shift"></i></li> 
+																		: <li><i className="fa fa-repeat" title="Rotational shift"></i></li> 
 																		:
-																		<li><i className="fa fa-female"></i></li>
+																		<li><i className="fa fa-sun-o" title="Day Shift"></i></li>
+																		
 																	}	
-																	<li><i className="fa fa-sun-o sunIcon"></i></li>
-																	<li><i className="fa fa-clock-o clockIcon"></i></li>
+																	{	
+																		elem.jobBasicInfo.jobtime_id.jobTime=="Full Time"?
+																		<li><i className="fa fa-clock-o" title="Full Time"></i></li>
+																		: elem.jobBasicInfo.jobtime_id.jobTime=="Part Time" ? <li><i className="fa fa-hourglass-start" title="Part Time"></i></li>
+																		: elem.jobBasicInfo.jobtime_id.jobTime=="Hourly Basis"? 
+																		<li><i className="fa fa-hourglass-o" title="Hourly Basis"></i></li> 
+																		: <li><i className="fa fa-hourglass-o" title="Hourly Basis"></i></li> 
+																	}	
 																</ul>
 																<div className="infoLog"> {Moment(elem.createdAt).startOf('seconds').fromNow()}  </div>
 															</div>
@@ -128,7 +146,7 @@ deleteJob = (event)=>{
 															<i className="fa fa-rupee jobListMonSal"></i> &nbsp; <i className="fa fa-inr"></i> {elem.ctcOffered.minSalary} {elem.ctcOffered.minSalPeriod} &nbsp;-&nbsp; <i className="fa fa-inr"></i> {elem.ctcOffered.maxSalary} {elem.ctcOffered.maxSalPeriod}
 														</div>
 														<div>
-															<i className="fa fa-map-marker jobListLocation"></i> &nbsp; {elem.location.address}
+															<i className="fa fa-map-marker jobListLocation"></i> &nbsp; &nbsp; {elem.location.address + " "+ elem.location.district + ", "+elem.location.state+", "+elem.location.country}
 														</div>
 														<div> 
 															<i className="fa fa-users jobListNumPositions"></i> &nbsp; No of position : {elem.jobBasicInfo.positions} 

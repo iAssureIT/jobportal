@@ -74,3 +74,12 @@
     text-align: center;
     color: #efefef;
    }
+ #uplodVideoInput{
+ 	display: block;
+    background: 0 0;
+    opacity: 0;
+    cursor: pointer;
+    position: absolute;
+    top: 1px;
+    height: 100%;
+  } 

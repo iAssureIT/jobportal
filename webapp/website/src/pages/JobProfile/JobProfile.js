@@ -19,7 +19,7 @@ export default class JobProfile extends Component{
 						workFromHome 		: 	false,
 						jobtype_id 			: 	"",
 						jobtime_id 			: 	"",
-						jobcategory_id 		: 	"",
+						jobsector_id 		: 	"",
 						positions           :   "",
 						jobDesc 			: 	"",
 						lastDateOfAppl 		: 	"",
@@ -101,8 +101,8 @@ export default class JobProfile extends Component{
 					jobType 			: 	response.data.jobBasicInfo.jobtype_id.jobType,
 					jobtime_id 			: 	response.data.jobBasicInfo.jobtime_id._id,
 					jobTime 			: 	response.data.jobBasicInfo.jobtime_id.jobTime,
-					jobcategory_id 		: 	response.data.jobBasicInfo.jobcategory_id._id,
-					jobCategory 		: 	response.data.jobBasicInfo.jobcategory_id.jobCategory,
+					jobsector_id 		: 	response.data.jobBasicInfo.jobsector_id._id,
+					jobSector 			: 	response.data.jobBasicInfo.jobsector_id.jobSector,
 					positions           :   response.data.jobBasicInfo.positions,
 					jobDesc 			: 	response.data.jobBasicInfo.jobDesc,
 					lastDateOfAppl      : 	response.data.jobBasicInfo.lastDateOfAppl ? Moment(response.data.jobBasicInfo.lastDateOfAppl).format("YYYY-MM-DD"):"",
@@ -125,7 +125,8 @@ export default class JobProfile extends Component{
 					maxSalary 			: 	response.data.ctcOffered.maxSalary,
 					maxSalPeriod		: 	response.data.ctcOffered.maxSalPeriod,
 					
-					minEducation 		: 	response.data.eligibility.minEducation,
+					mineducation_id 	: 	response.data.eligibility.mineducation_id._id,
+					minEducation 		: 	response.data.eligibility.mineducation_id.qualification,
 					minExperience 		: 	response.data.eligibility.minExperience,
 					
 					primarySkillTags 	: 	primarySkillTags,
@@ -140,7 +141,7 @@ export default class JobProfile extends Component{
 					preferredSkillTags  :   preferredSkillTags,
                 })
 			})
-        .catch(error=>{	Swal.fire("Some Error Occured during data fetch",error.message,'error'); })
+        //.catch(error=>{	Swal.fire("Some Error Occured during data fetch",error.message,'error'); })
 		   	
 	}	
 	
@@ -156,7 +157,7 @@ export default class JobProfile extends Component{
 										<div className="col-lg-3 leftImgContainer">
 											<div className="col-lg-12">
 												<div className="imgbox col-lg-9">
-													<img src={this.state.employerLogo} className="companyProfileLogo"  alt="not found"/>
+													<img src={this.state.employerLogo ? this.state.employerLogo : "/images/logonotfound.jpg"} className="companyProfileLogo"  alt="not found"/>
 												</div>
 											</div>	
 										</div>
@@ -206,10 +207,10 @@ export default class JobProfile extends Component{
 															<li><span className="eduSubtitle">
 																Minimum Education Required</span><br/>
 																<span className="eduDuration"> {this.state.minEducation} </span>
-															</li>
+															</li> 
 															<li>
 																<span className="eduSubtitle"> Minimum Overall Experience </span><br/>
-																<span className="eduDuration"> {this.state.minExperience} </span>
+																<span className="eduDuration"> {this.state.minExperience } { Number(this.state.minExperience) > 1 ? "Years" : "Year"}  </span>
 															</li>
 														</ul>
 													</div>
@@ -399,6 +400,20 @@ export default class JobProfile extends Component{
 									<p className="rightSideSub">
 										{this.state.industry}
 									</p>
+									<div className="rightSideTitle">
+										Sector
+									</div>
+									<p className="rightSideSub">
+										{this.state.jobSector}
+									</p>
+
+									<div className="rightSideTitle">
+										Funtional Area
+									</div>
+									
+									<p className="rightSideSub">
+										{this.state.functionalArea}
+									</p>
 									
 									<div className="rightSideTitle">
 										Gender
@@ -420,15 +435,7 @@ export default class JobProfile extends Component{
 									<p className="rightSideSub">
 										{this.state.jobType}
 									</p>
-									
-									<div className="rightSideTitle">
-										Funtional Area
-									</div>
-									
-									<p className="rightSideSub">
-										{this.state.functionalArea}
-									</p>
-									
+																		
 									<div className="rightSideTitle">
 										Role
 									</div>

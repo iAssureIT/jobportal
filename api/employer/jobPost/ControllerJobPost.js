@@ -598,7 +598,7 @@ exports.getJobListForEmployer = (req,res,next)=>{
     if (req.body.minExp != null  && req.body.maxExp != null) {
         selector["$and"].push({ "eligibility.minExperience" : { '$gte' : req.body.minExp,  '$lte' : req.body.maxExp} });
     }
-    console.log(JSON.stringify(selector))
+    //console.log("hagshg",JSON.stringify(selector))
     Jobs.find(selector).sort({createdAt:1})
     .populate('company_id')
     .populate('jobBasicInfo.industry_id')

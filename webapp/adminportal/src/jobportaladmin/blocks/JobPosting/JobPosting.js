@@ -27,16 +27,15 @@ class JobPosting extends Component {
 
         this.state = {
             company                   :   "", 
-            company_id                :   "",
+            company_id                :   "Select Employer",
             companylist               :   [],
-            company_id                  :   "",
             jobTitle                    :   "",
             industryList                :   [],
             functionalArea              :   "",
             functionalarea_id           :   "",
             functionalArealist          :   [],
             subFunctionalArea           :   "",
-            subfunctionalarea_id        :   "",
+            subfunctionalarea_id        :   "", 
             subFunctionalArealist       :   [],
             jobRole                     :   "",
             jobrole_id                  :   "",
@@ -49,9 +48,12 @@ class JobPosting extends Component {
             jobTime                     :   "",
             jobtime_id                  :   "",
             jobTimeArray                :   [],
-            jobCategory                 :   "",
-            jobcategory_id              :   "",
-            jobCategoryArray            :   [],
+            jobSector                   :   "",
+            jobsector_id                :   "",
+            jobSectorArray              :   [],
+            jobShift                    :   "",
+            jobshift_id                 :   "",
+            jobShiftArray               :   [],
             positions                   :   "",
             jobDesc                     :   "",
             lastDateOfAppl              :   "",
@@ -72,12 +74,15 @@ class JobPosting extends Component {
             pincodeExists               :   true,
 
             minSalary                   :   "",
-            minSalPeriod                :   "",
+            minSalPeriod                :   "Per Year",
             maxSalary                   :   "",
-            maxSalPeriod                :   "",
+            maxSalPeriod                :   "Per Year",
 
             minEducation                :   "",
-            minExperience               :   "",
+            mineducation_id             :   "",
+            minEducationArray           :   [],
+
+            minExperience               :   0,
 
             primarySkills               :   [],
             minPrimExp                  :   "",
@@ -188,16 +193,38 @@ class JobPosting extends Component {
                 Swal.fire("Error while getting List data", error.message, 'error');
             })
 
-        Axios.get("/api/jobcategorymaster/get/list")
+        Axios.get("/api/jobsectormaster/get/list")
             .then(response => {
                 this.setState({
-                    jobCategoryArray: response.data
+                    jobSectorArray: response.data
                 });
-                /*console.log("jobCategoryArray", this.state.jobCategoryArray);*/
+                /*console.log("jobSectorArray", this.state.jobSectorArray);*/
             })
             .catch(error => {
                 Swal.fire("Error while getting List data", error.message, 'error');
             })
+
+        Axios.get("/api/jobshiftmaster/get/list")
+            .then(response => {
+                this.setState({
+                    jobShiftArray: response.data
+                });
+                /*console.log("jobSectorArray", this.state.jobSectorArray);*/
+            })
+            .catch(error => {
+                Swal.fire("Error while getting List data", error.message, 'error');
+            })   
+
+        Axios.get("/api/qualificationmaster/get/list")
+            .then(response => {
+                this.setState({
+                    minEducationArray: response.data
+                });
+                /*console.log("jobSectorArray", this.state.jobSectorArray);*/
+            })
+            .catch(error => {
+                Swal.fire("Error while getting List data", error.message, 'error');
+            }) 
 
         Axios.get("/api/skillmaster/get/list")
             .then(response => {
@@ -224,15 +251,15 @@ class JobPosting extends Component {
                     console.log("response.data : ", response.data);
                     this.setState({
                         job_id                  :   job_id,
-                        company_id              :   response.data.jobBasicInfo.company_id,
+                        company_id              :   response.data.company_id._id,
                         jobTitle                :   response.data.jobBasicInfo.jobTitle,
                         employerName            :   response.data.company_id.companyName,
                         employerLogo            :   response.data.company_id.companyLogo[0] ? response.data.company_id.companyLogo[0] : null,
                         industry_id             :   response.data.jobBasicInfo.industry_id ? response.data.jobBasicInfo.industry_id._id : "",
                         industry                :   response.data.jobBasicInfo.industry_id ? response.data.jobBasicInfo.industry_id.industry : "",
-                        functionalarea_id       :   response.data.jobBasicInfo.functionalarea_id,
-                        functionalArea          :   response.data.functionalarea_id ? response.data.functionalarea_id.functionalArea : "",
-                        subfunctionalarea_id    :   response.data.jobBasicInfo.subfunctionalarea_id,
+                        functionalarea_id       :   response.data.jobBasicInfo.functionalarea_id._id,
+                        functionalArea          :   response.data.jobBasicInfo.functionalarea_id ? response.data.jobBasicInfo.functionalarea_id.functionalArea : "",
+                        subfunctionalarea_id    :   response.data.jobBasicInfo.subfunctionalarea_id._id,
                         subFunctionalArea       :   response.data.jobBasicInfo.subfunctionalarea_id ? response.data.jobBasicInfo.subfunctionalarea_id.subfunctionalArea : "",
                         jobrole_id              :   response.data.jobBasicInfo.jobrole_id._id,
                         jobRole                 :   response.data.jobBasicInfo.jobrole_id.jobRole,
@@ -240,10 +267,12 @@ class JobPosting extends Component {
                         workFromHome            :   response.data.jobBasicInfo.workFromHome,
                         jobtype_id              :   response.data.jobBasicInfo.jobtype_id._id,
                         jobType                 :   response.data.jobBasicInfo.jobtype_id.jobType,
-                        jobtime_id              :   response.data.jobBasicInfo.jobtime_id,
+                        jobtime_id              :   response.data.jobBasicInfo.jobtime_id._id,
                         jobTime                 :   response.data.jobBasicInfo.jobtime_id.jobTime,
-                        jobcategory_id          :   response.data.jobBasicInfo.jobcategory_id,
-                        jobCategory             :   response.data.jobBasicInfo.jobcategory_id.jobCategory,
+                        jobsector_id            :   response.data.jobBasicInfo.jobsector_id._id,
+                        jobSector               :   response.data.jobBasicInfo.jobsector_id.jobSector,
+                        jobshift_id             :   response.data.jobBasicInfo.jobshift_id._id,
+                        jobShift                :   response.data.jobBasicInfo.jobshift_id.jobShift,
                         positions               :   response.data.jobBasicInfo.positions,
                         jobDesc                 :   response.data.jobBasicInfo.jobDesc,
                         lastDateOfAppl          :   response.data.jobBasicInfo.lastDateOfAppl ? Moment(response.data.jobBasicInfo.lastDateOfAppl).format("YYYY-MM-DD") : "",
@@ -266,7 +295,8 @@ class JobPosting extends Component {
                         maxSalary               :   response.data.ctcOffered.maxSalary,
                         maxSalPeriod            :   response.data.ctcOffered.maxSalPeriod,
 
-                        minEducation            :   response.data.eligibility.minEducation,
+                        mineducation_id         :   response.data.eligibility.mineducation_id._id,
+                        minEducation            :   response.data.eligibility.mineducation_id.qualification,
                         minExperience           :   response.data.eligibility.minExperience ? response.data.eligibility.minExperience : 0,
 
                         minPrimExp              :   response.data.requiredSkills.minPrimExp,
@@ -281,24 +311,7 @@ class JobPosting extends Component {
                         document.getElementById("workFromHome").checked = false;
                     }
 
-                    var functionalArea = this.state.functionalArealist.filter((data,index)=>{
-                        if (data._id == this.state.functionalarea_id) { return data}
-                    })
-                    var subFunctionalArea = this.state.subFunctionalArealist.filter((data,index)=>{
-                        if (data._id == this.state.subfunctionalarea_id) { return data}
-                    })
-                    var jobRole = this.state.jobRoleArray.filter((data,index)=>{
-                        if (data._id == this.state.jobrole_id) { return data}
-                    })
-                    var jobType = this.state.jobTypeArray.filter((data,index)=>{
-                        if (data._id == this.state.jobtype_id) { return data}
-                    })
-                    var jobTime = this.state.jobTimeArray.filter((data,index)=>{
-                        if (data._id == this.state.jobtime_id) { return data}
-                    })
-                    var jobCategory = this.state.jobCategoryArray.filter((data,index)=>{
-                        if (data._id == this.state.jobcategory_id) { return data}
-                    })
+                    
                     var primarySkillTags = [];
                     var secondarySkillTags = [];
                     var otherSkillTags = [];
@@ -369,17 +382,18 @@ class JobPosting extends Component {
         var illegalChars = /[\(\)\<\>\,\;\:\\\"\[\]]/;
         var phoneno = /^\+?([0-9]{2})\)?[-. ]?([0-9]{5})[-. ]?([0-9]{5})$/;
 
+        console.log(this.state.company_id)
 
-        if (this.state.company.length <= 0) {
-            document.getElementById("companyError").innerHTML = "Enter Company name";
+        if (this.state.company_id == "Select Employer") {
+            document.getElementById("companyError").innerHTML = "Select Employer";
             status = false;
         }
         
-        else if(!regSpaceName.test(company)){
-         document.getElementById("companyError").innerHTML=  
-         "Please enter valid company name,......";  
-         status=false; 
-        }
+        // else if(!regSpaceName.test(company)){
+        //  document.getElementById("companyError").innerHTML=  
+        //  "Please enter valid company name......";  
+        //  status=false; 
+        // }
         else {
             document.getElementById("companyError").innerHTML = "";
             status = true;
@@ -559,6 +573,34 @@ class JobPosting extends Component {
             document.getElementById("jobRoleError").innerHTML = "";
             status = true;
         }
+        if (this.state.jobSector.length <= 0) {
+            document.getElementById("jobSectorError").innerHTML = "Please enter Job Sector";
+            status = false;
+        } else {
+            document.getElementById("jobSectorError").innerHTML = "";
+            status = true;
+        }
+        if (this.state.jobType.length <= 0) {
+            document.getElementById("jobTypeError").innerHTML = "Please enter Job Type";
+            status = false;
+        } else {
+            document.getElementById("jobTypeError").innerHTML = "";
+            status = true;
+        }
+        if (this.state.jobTime.length <= 0) {
+            document.getElementById("jobTimeError").innerHTML = "Please enter Job Time";
+            status = false;
+        } else {
+            document.getElementById("jobTimeError").innerHTML = "";
+            status = true;
+        }
+        if (this.state.jobShift.length <= 0) {
+            document.getElementById("jobShiftError").innerHTML = "Please enter Job Shift";
+            status = false;
+        } else {
+            document.getElementById("jobShiftError").innerHTML = "";
+            status = true;
+        }
         if (this.state.contactPersonName.length <= 0) {
             document.getElementById("contactPersonNameError").innerHTML = "Enter contact person name";
             status = false;
@@ -660,8 +702,10 @@ class JobPosting extends Component {
                 jobtype_id              :   this.state.jobtype_id,
                 jobTime                 :   this.state.jobTime,
                 jobtime_id              :   this.state.jobtime_id,
-                jobCategory             :   this.state.jobCategory,
-                jobcategory_id          :   this.state.jobcategory_id,
+                jobSector               :   this.state.jobSector,
+                jobsector_id            :   this.state.jobsector_id,
+                jobShift                :   this.state.jobShift,
+                jobshift_id             :   this.state.jobshift_id,
                 positions               :   this.state.positions,
                 jobDesc                 :   this.state.jobDesc,
                 lastDateOfAppl          :   this.state.lastDateOfAppl,
@@ -685,6 +729,7 @@ class JobPosting extends Component {
                 maxSalPeriod            :   this.state.maxSalPeriod,
 
                 minEducation            :   this.state.minEducation,
+                mineducation_id         :   this.state.mineducation_id,
                 minExperience           :   this.state.minExperience,
 
                 primarySkillTags        :   this.state.primarySkillTags,
@@ -725,7 +770,8 @@ class JobPosting extends Component {
                         workFromHome            :   false,
                         jobtype_id              :   "",
                         jobtime_id              :   "",
-                        jobcategory_id          :   "",
+                        jobsector_id            :   "",
+                        jobshift_id             :   "",
                         positions               :   "",
                         jobDesc                 :   "",
                         lastDateOfAppl          :   "",
@@ -1058,12 +1104,13 @@ class JobPosting extends Component {
         
         var company_id;
         var industry_id;
-        if (document.querySelector('#company option[value="' + value + '"]')) {
-            company_id = document.querySelector('#company option[value="' + value + '"]').getAttribute("data-value")
-            industry_id = document.querySelector('#company option[value="' + value + '"]').getAttribute("data-industry")
-        }else{ company_id = "" }
+        if (document.querySelector('#company_id option[value="' + value + '"]')) {
+            //company_id = document.querySelector('#company option[value="' + value + '"]').getAttribute("data-value")
+            industry_id = document.querySelector('#company_id option[value="' + value + '"]').getAttribute("data-industry")
+        }else{ //company_id = "" 
+        }
 
-        this.setState({ company_id : company_id, industry_id:industry_id },()=>{
+        this.setState({  industry_id:industry_id },()=>{
             console.log(this.state)
         });  
     }   
@@ -1142,17 +1189,45 @@ class JobPosting extends Component {
         
     }
 
-    onChangeJobCategory(event){
+    onChangeJobShift(event){
         const {name,value} = event.target;
         this.setState({ [name]:value });  
         
-        var jobcategory_id;
-        if (document.querySelector('#jobCategory option[value="' + value + '"]')) {
-            jobcategory_id = document.querySelector('#jobCategory option[value="' + value + '"]').getAttribute("data-value")
-        }else{ jobcategory_id = "" }
+        var jobshift_id;
+        if (document.querySelector('#jobShift option[value="' + value + '"]')) {
+            jobshift_id = document.querySelector('#jobShift option[value="' + value + '"]').getAttribute("data-value")
+        }else{ jobshift_id = "" }
 
-        this.setState({ jobcategory_id : jobcategory_id },()=>{
-            console.log(this.state)
+        this.setState({ jobshift_id : jobshift_id },()=>{
+            //console.log(this.state)
+        });  
+        
+    }
+    
+    onChangeJobSector(event){
+        const {name,value} = event.target;
+        this.setState({ [name]:value });  
+        
+        var jobsector_id;
+        if (document.querySelector('#jobSector option[value="' + value + '"]')) {
+            jobsector_id = document.querySelector('#jobSector option[value="' + value + '"]').getAttribute("data-value")
+        }else{ jobsector_id = "" }
+
+        this.setState({ jobsector_id : jobsector_id },()=>{
+            //console.log(this.state)
+        });  
+    }
+    onChangeMinEducation(event){
+        const {name,value} = event.target;
+        this.setState({ [name]:value });  
+        
+        var mineducation_id;
+        if (document.querySelector('#minEducation option[value="' + value + '"]')) {
+            mineducation_id = document.querySelector('#minEducation option[value="' + value + '"]').getAttribute("data-value")
+        }else{ mineducation_id = "" }
+
+        this.setState({ mineducation_id : mineducation_id },()=>{
+            //console.log(this.state)
         });  
     }
 
@@ -1188,13 +1263,15 @@ render(){
                                              
                                                 <div className="input-group">
                                                     <span className="input-group-addon addJobFormField"><i className="fa fa-briefcase"></i></span> 
-                                                        <input type="text" list="company" className="form-control addJobFormField" refs="company" id="selectcompany" value={this.state.company} name="company"
-                                                        onChange={this.onChangecompany.bind(this)} />
-                                                        <datalist name="company" id="company" className="companylist" >
+                                                        {/*<input type="text" list="company" className="form-control addJobFormField" refs="company" id="selectcompany" value={this.state.company} name="company"
+                                                        onChange={this.onChangecompany.bind(this)} />*/}
+                                                        
+                                                        <select name="company_id" id="company_id" className="companylist form-control addJobFormField" onChange={this.onChangecompany.bind(this)} value={this.state.company_id} >
+                                                            <option disabled value="Select Employer" >Select Employer</option>
                                                             {this.state.companylist.map((item, key) =>
-                                                                <option key={key} value={item.companyName} data-value={item._id} data-industry={item.industry_id}/>
+                                                                <option key={key} value={item._id} data-industry={item.industry_id}>{item.companyName}</option>
                                                             )}
-                                                        </datalist>
+                                                        </select>
                                                     <span id="companyError" className="errorMsgJobPost"></span>
                                                 </div>
                                             </div>
@@ -1427,6 +1504,20 @@ render(){
                                     
                                     <div className="col-lg-12 addJobFieldRow text-left">
                                         <div className="row">
+                                        <div className="col-lg-4">
+                                                <label htmlFor="jobSector" className="addjobformLable"> Job Sector </label>
+                                                <div className="input-group">
+                                                    <span className="input-group-addon addJobFormField"><i className="fa fa-list-alt"></i></span> 
+                                                       <input type="text" list="jobSector" className="form-control addJobFormField" refs="jobSector" id="selectjobSector" maxLength="50" value={this.state.jobSector} name="jobSector"
+                                                        onChange={this.onChangeJobSector.bind(this)} />
+                                                        <datalist name="jobSector" id="jobSector" className="jobSectorArray" >
+                                                            {this.state.jobSectorArray.map((item, key) =>
+                                                              <option key={key} value={item.jobSector} data-value={item._id}/>
+                                                            )}
+                                                        </datalist>
+                                                </div>
+                                                <span id="jobSectorError" className="errorMsg"></span>
+                                            </div>
                                             <div className="col-lg-4">
                                                 <label htmlFor="jobType" className="addjobformLable"> Job Type </label>
                                                 <div className="input-group col-lg-12">
@@ -1456,26 +1547,25 @@ render(){
                                                 </div>
                                                 <span id="jobTimeError" className="errorMsgJobPost"></span>
                                             </div>
-                                            
-                                            <div className="col-lg-4">
-                                                <label htmlFor="jobCategory" className="addjobformLable"> Job Category </label>
-                                                <div className="input-group">
-                                                    <span className="input-group-addon addJobFormField"><i className="fa fa-list-alt"></i></span> 
-                                                       <input type="text" list="jobCategory" className="form-control addJobFormField" refs="jobCategory" id="selectjobCategory" maxLength="50" value={this.state.jobCategory} name="jobCategory"
-                                                        onChange={this.onChangeJobCategory.bind(this)} />
-                                                        <datalist name="jobCategory" id="jobCategory" className="jobCategoryArray" >
-                                                            {this.state.jobCategoryArray.map((item, key) =>
-                                                              <option key={key} value={item.jobCategory} data-value={item._id}/>
-                                                            )}
-                                                        </datalist>
-                                                </div>
-                                                <span id="jobCategoryError" className="errorMsgJobPost"></span>
-                                            </div>
                                         </div>
                                     </div>
 
                                     <div className="col-lg-12 addJobFieldRow text-left">
                                         <div className="row">
+                                            <div className="col-lg-4">
+                                                <label htmlFor="jobShift" className="addjobformLable"> Job Shift </label>
+                                                <div className="input-group">
+                                                    <span className="input-group-addon addJobFormField"><FontAwesomeIcon icon={['fas', 'business-time']} /></span> 
+                                                       <input type="text" list="jobShift" className="form-control addJobFormField" refs="jobShift" id="selectJobShift" maxLength="50" value={this.state.jobShift} name="jobShift"
+                                                        onChange={this.onChangeJobShift.bind(this)} />
+                                                        <datalist name="jobShift" id="jobShift" className="jobShiftArray" >
+                                                            {this.state.jobShiftArray.map((item, key) =>
+                                                              <option key={key} value={item.jobShift} data-value={item._id}/>
+                                                            )}
+                                                        </datalist>
+                                                </div>
+                                                <span id="jobShiftError" className="errorMsg"></span>
+                                            </div>
                                             <div className="col-lg-4">
                                                 <div className="row">
                                                     <label htmlFor="positions" className="addjobformLable col-lg-12"> No. of Positions  <span className="asterisk">&#42;</span></label>
@@ -1521,9 +1611,8 @@ render(){
                                                     <div className="col-lg-4">
                                                         <label htmlFor="minSalPeriod" className="addjobformLable"> &nbsp; </label>
                                                         <select className="form-control addJobFormField minSalaryDropdown" name="minSalPeriod" id="minSalPeriod" value={this.state.minSalPeriod} onChange={this.handleChange}>
-                                                            <option hidden> -- Select -- </option>
-                                                            <option> Per Month </option>
-                                                            <option> Per Year  </option>
+                                                            
+                                                            <option selected> Per Year  </option>
                                                         </select>
                                                         <span id="minSalPeriodError" className="errorMsgJobPost"></span>
                                                     </div>
@@ -1544,9 +1633,8 @@ render(){
                                                     <div className="col-lg-4">
                                                         <label htmlFor="maxSalPeriod" className="addjobformLable"> &nbsp; </label>
                                                         <select className="form-control addJobFormField maxSalaryDropdown" name="maxSalPeriod" id="maxSalPeriod" value={this.state.maxSalPeriod} onChange={this.handleChange}>
-                                                            <option hidden> -- Select -- </option>
-                                                            <option> Per Month </option>
-                                                            <option> Per Year  </option>
+                                                            
+                                                            <option selected> Per Year  </option>
                                                         </select>
                                                         <span id="maxSalPeriodError" className="errorMsgJobPost"></span>
                                                     </div>
@@ -1568,7 +1656,13 @@ render(){
                                                 <label htmlFor="minEducation" className="addjobformLable"> Minimum Education Required <span className="asterisk">&#42;</span></label>
                                                 <div className="input-group">
                                                     <span className="input-group-addon addJobFormField"> <i className="fa fa-graduation-cap"></i> </span> 
-                                                    <input type="text" className="form-control addJobFormField" name="minEducation" id="minEducation" maxLength="50" value={this.state.minEducation} onChange={this.handleChange}/>
+                                                    <input type="text" list="minEducation" className="form-control addJobFormField" refs="minEducation" id="selectminEducation" maxLength="50" value={this.state.minEducation} name="minEducation"
+                                                    onChange={this.onChangeMinEducation.bind(this)} />
+                                                    <datalist name="minEducation" id="minEducation" className="minEducationArray" >
+                                                        {this.state.minEducationArray.map((item, key) =>
+                                                          <option key={key} value={item.qualification} data-value={item._id}/>
+                                                        )}
+                                                    </datalist> 
                                                 </div>
                                                 <span id="minEducationError" className="errorMsgJobPost"></span>
                                             </div>
@@ -1577,7 +1671,7 @@ render(){
                                                 <label htmlFor="minExperience" className="addjobformLable"> Minimum Overall Experience <span className="asterisk">&#42;</span></label>
                                                 <div className="input-group">
                                                     <span className="input-group-addon addJobFormField"> <i className="fa fa-history"></i> </span> 
-                                                    <input type="text" className="form-control addJobFormField" name="minExperience" id="minExperience" maxLength="50" value={this.state.minExperience} onChange={this.handleChange}/>
+                                                    <input type="number" className="form-control addJobFormField" name="minExperience" id="minExperience" maxLength="50" value={this.state.minExperience} onChange={this.handleChange}/>
                                                 </div>
                                                 <span id="minExperienceError" className="errorMsgJobPost"></span>
                                             </div>

@@ -244,6 +244,7 @@ class Address extends Component{
 														pincode            : "",
 														buttonText         : "Save",
 													})	
+							this.getData();			
 							this.props.history.push("/address/"+this.state.candidate_id);
 					})
 					.catch(error =>{
@@ -274,6 +275,7 @@ class Address extends Component{
 														pincode            : "",
 														buttonText         : "Save"
 													})	
+										this.getData();
 					})
 					.catch(error =>{
 						Swal.fire("Submit Error!",error.message,'error');
