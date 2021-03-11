@@ -8,9 +8,9 @@ import { bindActionCreators } from 'redux';
 import  * as mapActionCreator from '../../common/actions/index';
 import $                      from 'jquery';
 import IAssureTable 		  from '../../../coreadmin/IAssureTable/IAssureTable.jsx';
-import './Candidatelist.css';
+import './AppliedCandidatelist.css';
 
-class Candidatelist extends Component{ 
+class AppliedCandidatelist extends Component{ 
 	constructor(props){
 		super(props);
 		
@@ -63,7 +63,7 @@ class Candidatelist extends Component{
 	}
 	
 	getData(){
-		var tableData = this.props.candidateList.map((a, i)=>{
+		var tableData = this.props.appliedCandidateList.map((a, i)=>{
 			console.log(a)
 		var addressDetails = a.candidate_id.address.map((l,i)=>{
 			return "<ul className='nopadding'><li><b>"+l.addressType.addressType+ " Address</b>: "+l.address+"</li></ul>"
@@ -160,9 +160,9 @@ class Candidatelist extends Component{
 									<div className="container-fluid  candidateList col-lg-12">
 										{
 
-											this.props.candidateList
+											this.props.appliedCandidateList
 											? 	
-											this.props.candidateList.map((elem,index)=>{
+											this.props.appliedCandidateList.map((elem,index)=>{
 												var primarySkills   = [];
 												var secondarySkills = [];
 												if (elem.candidate_id.skills) {
@@ -347,12 +347,12 @@ class Candidatelist extends Component{
 
 const mapStateToProps = (state)=>{
     return {
-        candidateSelector   : state.candidateSelector,
-        candidateList 		: state.candidateList 
+        candidateSelector   		: state.candidateSelector,
+        appliedCandidateList 		: state.appliedCandidateList 
     }
 }
 const mapDispatchToProps = (dispatch) => ({
   mapAction :  bindActionCreators(mapActionCreator, dispatch)
 })
 
-export default connect(mapStateToProps, mapDispatchToProps) (Candidatelist);
+export default connect(mapStateToProps, mapDispatchToProps) (AppliedCandidatelist);

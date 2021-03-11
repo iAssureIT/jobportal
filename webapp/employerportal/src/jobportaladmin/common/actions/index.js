@@ -25,7 +25,10 @@ export const getCandidateList = (candidateList )=> ({
       type           : 'GET_CANDIDATE_LIST',
       candidateList  : candidateList
 });
-
+export const getAppliedCandidateList = (appliedCandidateList )=> ({ 
+      type                    : 'GET_APPLIED_CANDIDATE_LIST',
+      appliedCandidateList    : appliedCandidateList
+});
 export function filterJobList(selector) {
   	return dispatch =>{
   		dispatch(setFilterSelector(selector));
@@ -54,7 +57,7 @@ export function filterCandidatesApplied(candidateSelector) {
       dispatch(setCandidateFilterSelector(candidateSelector));
       return axios.post("/api/applyJob/get/candidatesAppliedToJob",candidateSelector)
       .then((response)=>{
-          dispatch(getCandidateList(response.data));
+          dispatch(getAppliedCandidateList(response.data));
       })
       .catch((error)=>{
             console.log('error', error);

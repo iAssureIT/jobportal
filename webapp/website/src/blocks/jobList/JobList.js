@@ -293,7 +293,7 @@ removeApplication = (job_id) => {
 																	
 																	<li><i title={appliedtooltipMsg} className={"fa fa-check-square" + appliedClass}  onClick={appliedClass == '-o' ? applyJob => this.applyJob(elem._id, elem.company_id) : removeApplication => this.removeApplication(elem._id) } ></i></li>
 																	<li ><i title={tooltipMsg} onClick={wishlist => this.handleclick(elem._id)} className={"fa fa-heart" + wishClass}></i></li>
-																	<li><i className="fa fa-youtube-play" id="video" data-toggle="modal" data-target="#videoModal"></i></li>
+																	{/*<li><i className="fa fa-youtube-play" id="video" data-toggle="modal" data-target="#videoModal"></i></li>*/}
 																</ul>
 															</div>
 														</div>

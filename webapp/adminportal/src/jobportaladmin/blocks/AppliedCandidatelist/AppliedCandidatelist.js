@@ -63,7 +63,7 @@ class AppliedCandidatelist extends Component{
 	}
 	
 	getData(){
-		var tableData = this.props.candidateList.map((a, i)=>{
+		var tableData = this.props.appliedCandidateList.map((a, i)=>{
 			console.log(a)
 		var addressDetails = a.candidate_id.address.map((l,i)=>{
 			return "<ul class='nopadding'><li><b>"+l.addressType.addressType+ " Address</b>: "+l.address+"</li></ul>"
@@ -160,9 +160,9 @@ class AppliedCandidatelist extends Component{
 									<div className="container-fluid  candidateList col-lg-12">
 										{
 
-											this.props.candidateList
+											this.props.appliedCandidateList
 											? 	
-											this.props.candidateList.map((elem,index)=>{
+											this.props.appliedCandidateList.map((elem,index)=>{
 												var primarySkills   = [];
 												var secondarySkills = [];
 												if (elem.candidate_id.skills) {
@@ -347,8 +347,8 @@ class AppliedCandidatelist extends Component{
 
 const mapStateToProps = (state)=>{
     return {
-        candidateSelector   : state.candidateSelector,
-        candidateList 		: state.candidateList 
+        candidateSelector   		: state.candidateSelector,
+        appliedCandidateList 		: state.appliedCandidateList 
     }
 }
 const mapDispatchToProps = (dispatch) => ({

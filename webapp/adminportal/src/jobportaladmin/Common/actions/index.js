@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 export const fetchRolewiseAccess = rolewiseAccessToModule => ({
-  type: 'FETCH_ROLEWISE_ACCESS',
-  rolewiseAccessToModule: rolewiseAccessToModule
+  type                    : 'FETCH_ROLEWISE_ACCESS',
+  rolewiseAccessToModule  : rolewiseAccessToModule
 });
 
 export const fetchAccessToFacility = accessToFacility => ({
@@ -26,20 +26,23 @@ export const setCandidateFilterSelector = (candidateSelector )=> ({
 });
 
 export const getJobList = (jobList )=> ({ 
-      type        : 'GET_JOB_LIST',
+      type          : 'GET_JOB_LIST',
       jobList       : jobList
 });
 
 export const getApplicantsCountList = (applicantsCountList )=> ({ 
-      type                       : 'GET_APPLICANTS_COUNT',
-      applicantsCountList        : applicantsCountList
+      type                    : 'GET_APPLICANTS_COUNT',
+      applicantsCountList     : applicantsCountList
 });
 
 export const getCandidateList = (candidateList )=> ({ 
       type           : 'GET_CANDIDATE_LIST',
       candidateList  : candidateList
 });
-
+export const getAppliedCandidateList = (appliedCandidateList )=> ({ 
+      type                    : 'GET_APPLIED_CANDIDATE_LIST',
+      appliedCandidateList    : appliedCandidateList
+});
 export function getRoleWiseAccessToModule(moduleName) {
 
   return dispatch =>{
@@ -115,7 +118,7 @@ export function filterCandidatesApplied(candidateSelector) {
       dispatch(setCandidateFilterSelector(candidateSelector));
       return axios.post("/api/applyJob/get/candidatesAppliedToJob",candidateSelector)
       .then((response)=>{
-          dispatch(getCandidateList(response.data));
+          dispatch(getAppliedCandidateList(response.data));
       })
       .catch((error)=>{
             console.log('error', error);
