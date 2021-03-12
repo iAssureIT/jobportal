@@ -18,7 +18,7 @@ class AppliedCandidatelist extends Component{
 			dataArry            : 	[],
 			skillsArry          : 	[],
 			jobInfo 		    : 	[], 	
-			candidateSelector   : 	{ "job_id" :  this.props.job_id },
+			appliedCandidateSelector   : 	{ "job_id" :  this.props.job_id },
 			view 			    : 	'Grid',
 			RecordsTable 	    : 	[],
 			tableHeading 	    : 	{
@@ -50,7 +50,7 @@ class AppliedCandidatelist extends Component{
 	componentDidMount(){
 		console.log(this.props);
 		var {mapAction}  = this.props;
-		mapAction.filterCandidatesApplied(this.state.candidateSelector)	
+		mapAction.filterCandidatesApplied(this.state.appliedCandidateSelector)	
 		
 		// get single job information by job_id
 		Axios.get("/api/jobs/get/one/"+this.props.job_id)
@@ -347,7 +347,7 @@ class AppliedCandidatelist extends Component{
 
 const mapStateToProps = (state)=>{
     return {
-        candidateSelector   		: state.candidateSelector,
+        appliedCandidateSelector   		: state.appliedCandidateSelector,
         appliedCandidateList 		: state.appliedCandidateList 
     }
 }
