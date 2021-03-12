@@ -8,11 +8,11 @@ import { connect }        from 'react-redux';
 import { bindActionCreators } from 'redux';
 import  * as mapActionCreator from '../../common/actions/index';
 import UploadVideoModal from '../UploadVideoModal/UploadVideoModal.js';
-import {
+/*import {
   RecordWebcam,
   useRecordWebcam,
   CAMERA_STATUS
-} from "react-record-webcam";
+} from "react-record-webcam";*/
 
 class Joblist extends Component{
 	constructor(props){
