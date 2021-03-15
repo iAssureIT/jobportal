@@ -14,7 +14,8 @@ class ConfirmOtp extends Component {
     super(props);
     this.state = {
       showMessage: false,
-      user_id           :this.props.userDetails.user_id
+      user_id           :this.props.userDetails.user_id,
+      email          :this.props.userDetails.email
     }
   }
   componentDidMount() {
@@ -147,6 +148,14 @@ class ConfirmOtp extends Component {
         swal(" Failed to sent OTP");
       })  
   }
+ /*resendOtp(event){
+
+  console.log("in resend");
+  var {mapAction} = this.props;
+                   
+  mapAction.setSelectedModal("forgotpassword");
+}
+*/
   Closepagealert(event) {
     event.preventDefault();
     $(".toast-error").html('');
@@ -159,6 +168,81 @@ class ConfirmOtp extends Component {
     $(".toast-warning").removeClass('toast');
 
   }
+
+  sendLink(event) {
+    console.log("kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk");
+        event.preventDefault();
+        
+        var formValues = {
+            email : this.props.userDetails.email
+
+            //"emailSubject"  : "Email Verification", 
+      //"emailContent"  : "As part of our registration process, we screen every new profile to ensure its credibility by validating email provided by user. While screening the profile, we verify that details put in by user are correct and genuine.",
+        }
+        console.log(formValues);console.log(this.state.email);
+            
+            $('.fullpageloader').show();
+            axios.patch('/api/auth/patch/setotpusingEmail', formValues)
+            .then((response)=>{
+              
+                console.log('forgotpassword res===',response.data)
+                if (response.data.ID) {
+                    var sendData = {
+                      "event"     : "Event3", //Event Name
+                      "toUser_id"  : response.data.ID, //To user_id(ref:users)
+                      "toUserRole"  : "candidate",
+                      "variables" : {
+                        "UserName": response.data.firstName,
+                        "OTP"     : response.data.OTP,
+                      }
+                    }
+                    axios.post('/api/masternotifications/post/sendNotification', sendData)
+                    .then((notificationres) => {})
+                    .catch((error) => { console.log('notification error: ', error) })
+
+                    localStorage.setItem('previousUrl' ,'forgotpassword');
+                    $('.fullpageloader').hide();
+                    swal("OTP send to your registered email ID.");
+                    //this.props.history.push('/confirm-otp/'+response.data.ID);
+                    var {mapAction} = this.props;
+                    mapAction.setUserID(response.data.ID);
+                    mapAction.setSelectedModal("confirmotp");
+
+                } else if(response.data.message == "USER_BLOCK"){
+                    console.log("In USER_BLOCK")
+                    swal({
+                      title: "Your account is inactive. Please contact Admin.",
+                      text: "Your account is inactive. Please contact Admin."
+                    });
+                    //this.props.history.push('/login');
+                    var {mapAction} = this.props;
+                    mapAction.setSelectedModal("login");
+                  }else if(response.data.message == "USER_UNVERIFIED"){
+                    console.log("In USER_UNVERIFIED")
+                    swal({
+                      text : "You have not verified your account. Please verify your account."
+                    });
+                    //this.props.history.push('/login');
+                    var {mapAction} = this.props;
+                    mapAction.setSelectedModal("login");
+                  }else if(response.data.message == "NOT_REGISTER"){
+                    console.log("In NOT_REGISTER")
+                    swal({
+                      text : "This email is not registered. Please do signup."
+                    });
+                    //this.props.history.push('/login');
+                    var {mapAction} = this.props;
+                    mapAction.setSelectedModal("login");
+                  }
+
+            })
+            .catch((error)=>{
+                //document.getElementById("sendlink").innerHTML = 'Reset Password';
+                swal("This Email ID is not registered");
+                $('.fullpageloader').hide();
+            })
+        
+    }
   render() {
 
     var resendOtpWrap = "resendOtpWrap resendOtpWrapcss";
