@@ -168,8 +168,8 @@ class ChangePassword extends Component {
         
         axios.post('/api/auth/post/login',auth)
         .then(response => {
-
-        if(response){
+          console.log(response);
+        if(response.data.message==="Login Auth Successful"){
             
             if(this.state.newPassword === this.state.confirmNewPassword){
               var body = {
@@ -216,7 +216,15 @@ class ChangePassword extends Component {
             }else{
               swal("Invalid Password","Please Enter valid new password and confirm password");
             }
+
+           
           
+        }
+
+        else{
+          console.log("ERROR in Responce");
+          swal("Invalid Password","Please Enter correct password");
+
         }
       })
       .catch(error => {
