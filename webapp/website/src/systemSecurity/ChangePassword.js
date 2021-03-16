@@ -223,7 +223,7 @@ class ChangePassword extends Component {
 
         else{
           console.log("ERROR in Responce");
-          swal("Invalid Password","Please Enter correct password");
+          swal("Invalid Old Password","Please Enter correct old password");
 
         }
       })
@@ -276,7 +276,7 @@ class ChangePassword extends Component {
                 <div className="resetPassword col-lg-6 col-lg-offset-3">
                   <form>
 
-                    <div className="resetPasswordTitle col-lg-12">Reset Password
+                    <div className="resetPasswordTitle col-lg-12">Change Password
                     </div>
 
                     <hr className="resetPasswordHr"/>

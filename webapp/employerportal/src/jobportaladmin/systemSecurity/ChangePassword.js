@@ -227,7 +227,7 @@ class ChangePassword extends Component {
       .catch(error => {
         if (error.response.status === 401) {
           console.log("ERROR in Responce");
-          swal("Invalid Password","Please Enter correct password");
+          swal("Invalid Old Password","Please Enter correct old password");
           this.setState({invalidpassword:true})
         }
       })
@@ -293,7 +293,7 @@ class ChangePassword extends Component {
                 <div className="resetPassword col-lg-4 col-lg-offset-4">
                   <form>
 
-                    <div className="resetPasswordTitle col-lg-12">Reset Password
+                    <div className="resetPasswordTitle col-lg-12">Change Password
                     </div>
 
                     <hr className="resetPasswordHr"/>

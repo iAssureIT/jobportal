@@ -121,10 +121,13 @@ class ConfirmOtp extends Component {
     }
   }
   resendOtp(event) {
-    document.getElementById("resendOtpBtn").innerHTML = 'Please wait...';
+    event.preventDefault();
+    console.log(".....................................");
+   /* document.getElementById("resendOtpBtn").innerHTML = 'Please wait...';*/
     const userid = this.props.userID;
     var formValues = { userid : userid }
     var {mapAction} = this.props;
+    console.log(formValues);
     axios.patch('/api/auth/patch/setotpusingID', formValues)
       .then((response) => {
       var sendData = {
@@ -142,7 +145,7 @@ class ConfirmOtp extends Component {
 
         swal("We send you a Verification Code to your registered email. Please verify your account.");
         mapAction.setUserID(response.data.ID);
-        //mapAction.setSelectedModal("login");
+        mapAction.setSelectedModal("confirmotp");
       })
       .catch((error) => {
         swal(" Failed to sent OTP");
