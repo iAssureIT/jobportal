@@ -1,0 +1,226 @@
+/*@font-face {
+  font-family:'Montserrat-Regular';
+  src: url('/fonts/Montserrat/Montserrat-Regular.ttf');
+}
+
+@font-face {
+  font-family:'Montserrat-Bold';
+  src: url('/fonts/Montserrat/Montserrat-Bold.ttf');
+}*/
+
+.LeftSideFiltersWrapper{
+  height: auto;
+  margin-left: 12px;
+  min-height: 250px;
+  background-color: #1f262d;
+}
+
+
+.LeftSideFiltersDrop{
+  background-color: #242933;
+  color: #fff;
+  overflow-x: hidden;
+
+}
+
+.LeftSideFiltersInputBox{
+  height:auto;
+  min-height: 40px;
+  margin-top: 15px;
+  text-align:left;
+  padding-left: 10px;
+  border: 1px solid #999;
+  background-color: #242933 !important;
+  color: #fff !important;
+  border-radius: 10px !important;
+   overflow-x: scroll;
+}
+
+.LeftSideFiltersInputBox:focus{
+  border-color: #999;
+  box-shadow: 0px 1px 1px rgba(153, 153, 153, 0.075) inset, 0px 0px 8px rgba(153, 153, 153, 0.5)  !important;
+}
+
+.optionContainer,
+.optionContainer .highlight{
+  background-color: #242933!important;
+  color: #fff;
+  z-index: 1;
+}
+
+.multiselect-container > li > a { white-space: none !important; }
+
+/*
+.ApplyFilters{
+  width: 72%;
+  height: 35px;
+  background-color: #242933;
+  color: #ccc;
+  text-align: left;
+  font-size: 14px;
+  font-family: 'Montserrat-Regular';
+  padding: 5px;
+  border:1px solid #4b5666;
+  border-radius: 5px;
+  padding-left: 10px;
+ 
+}
+.filtersIcon{
+  padding: 5px;
+}
+.FilterDropDown{
+  margin-top: 15px;
+}
+.leftDrawerToggel{
+ 
+  position: absolute;
+  
+  transition:all 1s; 
+  z-index: 0;
+  transition-timing-function: ease-in-out;
+}*/
+
+.filtersColor{
+  color: #fff !important;
+}
+form-control{
+  color: #fff !important;
+}
+
+.showCheckbox {
+                 background-color: #D3950A !important;
+              }
+
+
+
+.optionContainer{
+  background-color: var(--main-bg-color);
+  white-space: nowrap; 
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border: 1px solid var(--main-border-color) !important;
+}
+
+.optionContainer li:hover,
+.optionContainer .highlight{
+  background-color: var(--main-border-color);
+  color: var(--main-txt-color);
+  z-index:50;
+  width: 100%; 
+}
+
+._7ahQImyV4dj0EpcNOjnwA{
+  color: var(--main-txt-color);
+  background-color: var(--main-border-color) !important;
+}
+
+.optionContainer .highlight{
+  color: var(--main-txt-color);
+  background-color: var(--main-bg-color) !important;
+}
+
+.optionContainer li:hover {
+    background-color: var(--main-border-color) !important;
+}
+
+._2iA8p44d0WZ-WqRBGcAuEV{
+  /*padding: 4px !important;
+  padding-top: 7px !important;*/
+  border-radius: 4px;
+}
+
+.placeholder:{
+               color : #fff !important;
+              }
+
+.searchBox: {
+                  border: 1px solid #4b5666;
+                  color:#fff !important;
+                  
+                }
+
+.filterDiv{
+  height: 30px;
+  /*background-color: blue;*/
+}
+.filterButton{
+  /*background-color: yellow;*/
+  height: auto;
+  width: 3.64%;
+  border: 1px solid var(--yellow-button-color);
+  margin-left: 5px;
+  border-radius: 5px;
+  margin-bottom: 2px;
+}
+
+.filterButton:hover{
+  cursor: pointer;
+}
+
+.arrowIcon{
+  padding:5px;
+  border-radius: 5px;
+  background-color: var(--yellow-button-color);
+  /*border: 1px solid #4b5666;*/
+}
+
+.filtersIcon{
+  padding: 5px;
+  color: var(--yellow-button-color);
+
+}
+
+.viewDiv{
+  width: 90%;
+  margin: auto;
+  height: 50px;
+  border: 1px solid var(--yellow-button-color);
+  border-radius: 5px;
+  background-color: var(--main-bg-color);
+  margin-bottom: 10px;
+  text-align: center;
+  margin-bottom: 20px;
+
+}
+
+.viewDiv a {
+  color: var(--main-txt-color) !important;
+  font-family: 'Montserrat-Regular' !important;
+  padding:7px 5px !important;
+  font-size: 13px !important;
+}
+
+.viewDiv a:hover{
+  height: 50px !important;
+  background-color: var(--yellow-button-color) !important;
+  color: var(--main-txt-color) !important;
+  font-family: 'Montserrat-Regular' !important;
+  padding:7px 5px !important;
+  font-size: 13px !important;
+
+}
+
+.viewDiv.active>a{
+  height: 50px !important;
+  background-color: var(--yellow-button-color) !important;
+  color: var(--main-txt-color) !important;
+  font-family: 'Montserrat-Regular' !important;
+  padding:7px 5px !important;
+  font-size: 13px !important;
+
+}
+
+.viewWrapper{
+  height: auto;
+  min-height: 300px;
+  
+  z-index: 200;
+}
+.filterWrapper{
+  height: auto;
+  min-height: 400px;
+  
+  z-index: 100;
+  transition:all 2s; 
+  transition-timing-function: ease-in-out;
+}              

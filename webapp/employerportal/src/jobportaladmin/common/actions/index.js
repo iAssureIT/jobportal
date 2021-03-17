@@ -95,9 +95,10 @@ export function filterCandidatesApplied(appliedCandidateSelector) {
     }  
 }
 export function filterCandidates(candidateSelector) {
+  console.log("candidateSelector",candidateSelector)
     return dispatch =>{ 
       dispatch(setCandidateFilterSelector(candidateSelector));
-      return axios.post("/api/applyJob/get/candidatesAppliedToJob",candidateSelector)
+      return axios.post("/api/candidatemaster/get/list",candidateSelector)
       .then((response)=>{
           dispatch(getCandidateList(response.data));
       })

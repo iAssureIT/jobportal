@@ -17,9 +17,8 @@ class CandidatesList extends Component{
 		
 		this.state={
 			dataArry            : 	[],
-			skillsArry          : 	[],
-			jobInfo 		    : 	[], 	
-			candidateSelector   : 	{ "job_id" :  this.props.job_id },
+			skillsArry          : 	[], 	
+			candidateSelector   : 	{},
 			view 			    : 	'Grid',
 			RecordsTable 	    : 	[],
 			tableHeading 	    : 	{
@@ -49,36 +48,28 @@ class CandidatesList extends Component{
 	
 	
 	componentDidMount(){
-		console.log(this.props);
-		var {mapAction}  = this.props;
-		mapAction.filterCandidatesApplied(this.state.candidateSelector)	
 		
-		// get single job information by job_id
-		Axios.get("/api/jobs/get/one/"+this.props.job_id)
-		.then(response=>{
-			this.setState({jobInfo : response.data})
-		})
-		.catch(err=>{
-
-		})
+		var {mapAction}  = this.props;
+		//mapAction.filterCandidatesApplied(this.state.candidateSelector)	
+		
 	}
 	
 	getData(){
-		var tableData = this.props.appliedCandidateList.map((a, i)=>{
+		var tableData = this.props.candidateList.map((a, i)=>{
 			console.log(a)
-		var addressDetails = a.candidate_id.address.map((l,i)=>{
+		var addressDetails = a.address.map((l,i)=>{
 			return "<ul className='nopadding'><li><b>"+l.addressType.addressType+ " Address</b>: "+l.address+"</li></ul>"
 		})
-		var academicsData = a.candidate_id.academics.map((c,i)=>{
+		var academicsData = a.academics.map((c,i)=>{
 			return "<ul className='nopadding'><li>"+c.qualificationlevel_id.qualificationLevel+" "+c.qualification_id.qualification+", "+(c.university_id.university)+" " + c.collegeSchool+" "+c.state+" " +c.country+"</li></ul>"
 		})
-		var workExperience = a.candidate_id.workExperience.map((c,i)=>{
+		var workExperience = a.workExperience.map((c,i)=>{
 			return "<ul className='nopadding'><li>"+c.lastDegn+" "+c.company_id.companyName+" "+c.city+ ", "+c.state+" " + c.country+ "</li></ul>"
 		})
         return{
-            name 	: a.candidate_id.basicInfo.firstName + " "+a.candidate_id.basicInfo.lastName,
-            gender  : a.candidate_id.basicInfo.gender,
-            contactDetails:"<b>Email : </b>"+a.candidate_id.contact.emailId+"<br><b>Mobile No. : </b>"+a.candidate_id.contact.mobile,
+            name 	: a.basicInfo.firstName + " "+a.basicInfo.lastName,
+            gender  : a.basicInfo.gender,
+            contactDetails:"<b>Email : </b>"+a.contact.emailId+"<br><b>Mobile No. : </b>"+a.contact.mobile,
             address :addressDetails && addressDetails.length > 0 ? addressDetails : "No Address Added Yet",
             academics:academicsData && academicsData.length > 0 ? academicsData : "No Academics Added Yet",
             workExperience : workExperience && workExperience.length > 0 ? workExperience : "No Experiences Added Yet", 
@@ -97,25 +88,27 @@ class CandidatesList extends Component{
     }
 
 	render(){
+		
 		return(
 
 			<div className="container-fluid  candidateList col-lg-12">
 										{
 
-											this.props.appliedCandidateList
+											this.props.candidateList
 											? 	
-											this.props.appliedCandidateList.map((elem,index)=>{
+											this.props.candidateList.map((elem,index)=>{
+												console.log(elem)
 												var primarySkills   = [];
 												var secondarySkills = [];
-												if (elem.candidate_id.skills) {
-													elem.candidate_id.skills.map((skill,ind)=>{
+												if (elem.skills) {
+													elem.skills.map((skill,ind)=>{
 														if (skill.skillType == "primary") { primarySkills.push(skill) }
 					 									if (skill.skillType == "secondary") { secondarySkills.push(skill) }
 													})
 												}
 
 												return(
-														<div className="col-lg-4 " key={index}>
+														<div className="col-lg-6 " key={index}>
 															<div>
 																<div className="col-lg-12 candidateBlockWrapper">
 																	<div className="row">
@@ -131,7 +124,7 @@ class CandidatesList extends Component{
 																						<div className="col-lg-7 displayInfoCandidate">
 																							<div className="row">
 																								<div className="displayCandidateName">
-																										<a href={"/candidate-profile/"+elem.candidate_id}> {elem.candidate_id.basicInfo.firstName} </a>
+																										<a href={"/candidate-profile/"+elem._id}> {elem.basicInfo.firstName} </a>
 																									<span className="candidateIdNumber"></span>
 																								</div>
 																								<div className=" candidatePosts">
@@ -150,10 +143,10 @@ class CandidatesList extends Component{
 																										</div>
 																									</div>
 																									<div className=" Col-lg-11 postNameWrapper">
-																										<div className="postName">{elem.candidate_id.workExperience[elem.candidate_id.workExperience.length-1] ? elem.candidate_id.workExperience[elem.candidate_id.workExperience.length-1].lastDegn : null}</div> 
-																										<div className="postName">{elem.candidate_id.workExperience[elem.candidate_id.workExperience.length-1] ? elem.candidate_id.workExperience[elem.candidate_id.workExperience.length-1].department : null} </div>
-																										<div className="postName">{elem.candidate_id.totalExperience ? elem.candidate_id.totalExperience +" years" : "Fresher" }</div>
-																										<div className="postName">{elem.candidate_id.address[elem.candidate_id.address.length-1] ? elem.candidate_id.address[elem.candidate_id.address.length-1].district + ", "+elem.candidate_id.address[elem.candidate_id.address.length-1].state : null} </div>
+																										<div className="postName">{elem.workExperience[elem.workExperience.length-1] ? elem.workExperience[elem.workExperience.length-1].lastDegn : null}</div> 
+																										<div className="postName">{elem.workExperience[elem.workExperience.length-1] ? elem.workExperience[elem.workExperience.length-1].department : null} </div>
+																										<div className="postName">{elem.totalExperience ? elem.totalExperience +" years" : "Fresher" }</div>
+																										<div className="postName">{elem.address[elem.address.length-1] ? elem.address[elem.address.length-1].district + ", "+elem.address[elem.address.length-1].state : null} </div>
 																									</div>
 																								</div>
 																							</div>
@@ -244,7 +237,7 @@ class CandidatesList extends Component{
 																							Current CTC
 																						</div>
 																						<div className="row expectSalaryBlockSubHeading">
-																							{elem.candidate_id.currentCTC ? elem.candidate_id.currentCTC : null} LPA
+																							{elem.currentCTC ? elem.currentCTC : null} LPA
 																						</div>
 																						
 																					</div>
@@ -253,7 +246,7 @@ class CandidatesList extends Component{
 																							Expected CTC
 																						</div>
 																						<div className="row expectSalaryBlockSubHeading">
-																							{elem.candidate_id.expectedCTC ? elem.candidate_id.expectedCTC : null} LPA
+																							{elem.expectedCTC ? elem.expectedCTC : null} LPA
 																						</div>
 																						
 																					</div>
@@ -262,7 +255,7 @@ class CandidatesList extends Component{
 																							Notice Period
 																						</div>
 																						<div className="row expectSalaryBlockSubHeading">
-																							{elem.candidate_id.noticePeriod ? elem.candidate_id.noticePeriod : null}
+																							{elem.noticePeriod ? elem.noticePeriod : null}
 																						</div>
 																					</div>
 																				</div>
@@ -288,7 +281,7 @@ class CandidatesList extends Component{
 const mapStateToProps = (state)=>{
     return {
         candidateSelector   		: state.candidateSelector,
-        appliedCandidateList 		: state.appliedCandidateList 
+        candidateList 		: state.candidateList 
     }
 }
 const mapDispatchToProps = (dispatch) => ({

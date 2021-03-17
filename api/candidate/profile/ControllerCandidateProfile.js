@@ -923,14 +923,63 @@ exports.deleteCertification = (req,res,next)=>{
             res.status(500).json({ error: err });
         });
 };
-exports.getCandidateList = (req,res,next)=>{
-    CandidateProfile.find({_id : req.params.candidate_id})
+exports.getCandidateList = (req,res,next)=>{ 
+    var selector            = {};
+    var qualification_ids   = [];
+    var skill_ids           = [];
+    var industry_ids        = [];
+
+    //selector['$or']         = [];
+    selector['$and']        = [];
+
+    selector["$and"].push({ "address.countryCode" :  req.body.countryCode   })
+    // 1
+    if (req.body.stateCode && req.body.stateCode != "all") {
+        selector["$and"].push({ "address.stateCode" :  req.body.stateCode   })
+    }
+    // 2
+    if (req.body.district && req.body.district != "all") {
+        selector["$and"].push({ "address.district" :  req.body.district   }) 
+    }
+    // 3
+    if (req.body.qualification_id) {
+        req.body.qualification_id.map(elem => {
+       qualification_ids.push(ObjectID(elem.id))
+        })
+        selector["$and"].push({ "academics.qualification_id" : { $in: qualification_ids } });
+    }
+    // 4
+    if (req.body.industry_id) {
+        req.body.industry_id.map(elem => {
+            industry_ids.push(ObjectID(elem.id))
+        })
+        selector["$and"].push({ "workExperience.industry_id" : { $in: industry_ids } });
+        
+    }
+    // 5
+    if (req.body.skill_id) {
+        req.body.skill_id.map(elem => {
+            skill_ids.push(ObjectID(elem.id))
+        })
+        selector["$and"].push({ "skills.skill_id" : { $in: skill_ids } });
+        
+    }
+    // 6
+    if (req.body.minExp != null  && req.body.maxExp != null) {
+        selector["$and"].push({ "totalExperience" : { '$gte' : req.body.minExp,  '$lte' : req.body.maxExp} });
+    }
+    console.log(selector)
+
+    CandidateProfile.find(selector)
     .populate('languagesKnown.language_id')
     .populate('address.addressType')
     .populate('academics.qualificationlevel_id')
     .populate('academics.qualification_id')
     .populate('academics.university_id')
-    
+    .populate('workExperience.company_id')
+    .populate('workExperience.industry_id')
+    .populate('skills.skill_id')
+
     .exec(function (err, candidate) {
     console.log(err)
     if (err) return res.status(500).json({ error: err });

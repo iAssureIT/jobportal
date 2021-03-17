@@ -28,7 +28,7 @@ import CandidateProfile                         from './jobportaladmin/blocks/Ca
 
 import JoblistPage                              from './jobportaladmin/pages/JoblistPage/JoblistPage.js';
 import AppliedCandidatelistPage                 from './jobportaladmin/pages/AppliedCandidatelistPage/AppliedCandidatelistPage.js';
-import CandidatesListPage                 from './jobportaladmin/pages/CandidatesListPage/CandidatesListPage.js';
+import CandidatesListPage                       from './jobportaladmin/pages/CandidatesListPage/CandidatesListPage.js';
 
 import axios                from 'axios';
 import CoreLayout           from './coreadmin/CoreLayout/CoreLayout.js';
@@ -104,7 +104,7 @@ class Layout extends Component  {
                                                         <Route path="/job-profile/:job_id"              component={JobPostProfile} exact />
                                                         <Route path="/job-list"                         component={JoblistPage} exact />
                                                         <Route path="/applied-candidate-list/:job_id"   component={AppliedCandidatelistPage} exact />
-                                                        <Route path="/candidates-list"   component={CandidatesListPage} exact />
+                                                        <Route path="/candidate-list"                   component={CandidatesListPage} exact />
                                                         <Route path="/candidate-profile/:candidate_id"  component={CandidateProfile} exact />
                                                         <Route path="/change-pwd/:user_ID"   exact strict component={ChangePassword} />
                                                         <Route path="/confirm-otp/:userID"  exact strict component={ConfirmOtp} /></Switch>
