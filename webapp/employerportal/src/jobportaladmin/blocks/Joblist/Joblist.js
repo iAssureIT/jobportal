@@ -143,8 +143,15 @@ deleteJob = (event)=>{
 																}	
 																</ul>
 																<div className="infoLog"> {Moment(elem.createdAt).startOf('seconds').fromNow()}  </div>
-															</div>
+															
+
+																<div className="joblistNoCount"> 
+																     &nbsp; <a href={"/applied-candidate-list/" + elem._id}> Total Applicants : {applicantsCount.length > 0 ? applicantsCount[0].candidatesApplied :  0}</a> 
+															    </div>
+															</div>    
 														</div>
+
+
 														<div className="jobListDesignation">
 															{elem.jobBasicInfo.jobTitle}
 														</div>
@@ -163,9 +170,7 @@ deleteJob = (event)=>{
 														<div> 
 															<i className="fa fa-users jobListNumPositions"></i> &nbsp; No. of positions : {elem.jobBasicInfo.positions}
 														</div>
-														<div className="joblistNoCount"> 
-															<i className="fa fa-check-circle jobListNumapply"></i> &nbsp; <a href={"/applied-candidate-list/" + elem._id}> No. of applicants : {applicantsCount.length > 0 ? applicantsCount[0].candidatesApplied :  0}</a> 
-														</div>
+														
 													</div>
 													<div className="col-lg-1 jobListRightContent">
 														<div className="row">
