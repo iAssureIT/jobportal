@@ -8,7 +8,7 @@ export const fetchRolewiseAccess = rolewiseAccessToModule => ({
 export const fetchAccessToFacility = accessToFacility => ({
   type: 'FETCH_ACCESS_FACILITY',
   accessToFacility: accessToFacility
-});
+}); 
 
 export const setUserDetails = (userDetails )=> ({
       type            : 'SET_USER_DETAILS',
@@ -19,7 +19,10 @@ export const setFilterSelector = (selector )=> ({
       type          : 'SET_FILTER_SELECTOR',
       selector      : selector
 });
-
+export const showLoader = (showLoader )=> ({
+      type          : 'SHOW_LOADER',
+      showLoader    : showLoader
+});
 export const setCandidateFilterSelector = (candidateSelector )=> ({
       type                    : 'SET_CANDIDATE_FILTER_SELECTOR',
       candidateSelector       : candidateSelector

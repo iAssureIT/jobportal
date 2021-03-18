@@ -101,8 +101,8 @@ export default class JobPostProfile extends Component{
 					jobType 			: 	response.data.jobBasicInfo.jobtype_id.jobType,
 					jobtime_id 			: 	response.data.jobBasicInfo.jobtime_id._id,
 					jobTime 			: 	response.data.jobBasicInfo.jobtime_id.jobTime,
-					jobsector_id 		: 	response.data.jobBasicInfo.jobsector_id._id,
-					jobSector 			: 	response.data.jobBasicInfo.jobsector_id.jobSector,
+					jobsector_id 		: 	response.data.jobBasicInfo.jobsector_id ? response.data.jobBasicInfo.jobsector_id._id : "",
+					jobSector 			: 	response.data.jobBasicInfo.jobsector_id ? response.data.jobBasicInfo.jobsector_id.jobSector : "",
 					positions           :   response.data.jobBasicInfo.positions,
 					jobDesc 			: 	response.data.jobBasicInfo.jobDesc,
 					lastDateOfAppl      : 	response.data.jobBasicInfo.lastDateOfAppl ? Moment(response.data.jobBasicInfo.lastDateOfAppl).format("YYYY-MM-DD"):"",
@@ -125,8 +125,8 @@ export default class JobPostProfile extends Component{
 					maxSalary 			: 	response.data.ctcOffered.maxSalary,
 					maxSalPeriod		: 	response.data.ctcOffered.maxSalPeriod,
 					
-					mineducation_id 	: 	response.data.eligibility.mineducation_id._id,
-					minEducation 		: 	response.data.eligibility.mineducation_id.qualification,
+					mineducation_id 	: 	response.data.eligibility.mineducation_id ? response.data.eligibility.mineducation_id._id : "",
+					minEducation 		: 	response.data.eligibility.mineducation_id ? response.data.eligibility.mineducation_id.qualification : "",
 					minExperience 		: 	response.data.eligibility.minExperience,
 					
 					primarySkillTags 	: 	primarySkillTags,

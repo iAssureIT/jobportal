@@ -201,7 +201,7 @@ class ContactDetails extends Component {
 		  .then((response) => {
 		  	var entity = "";
 		  	if (this.props.entity == 'corporate') {
-		  		entity = "employer"
+		  		entity = "Employer"
 		  	}
 			var rolesArray = response.data.filter(a=>a.rolesentity == entity)
 			this.setState({
@@ -818,7 +818,7 @@ class ContactDetails extends Component {
 				if ($('#ContactDetail').valid()) {
 					if(this.state.alreadyHasUser === true){
 						this.updateUser();
-						this.updatePerson();
+						//this.updatePerson();
 					}else if(this.state.createUser === true){
 						formValues.contactDetails.userID = await this.createUser();
 						//formValues.contactDetails.personID = await this.savePerson(formValues.contactDetails.userID);
