@@ -120,12 +120,14 @@ deleteJob = (event)=>{
 																		
 																	}	
 																	{	
+																		elem.jobBasicInfo.jobtime_id ?
 																		elem.jobBasicInfo.jobtime_id.jobTime=="Full Time"?
 																		<li><i className="fa fa-clock-o" title="Full Time"></i></li>
 																		: elem.jobBasicInfo.jobtime_id.jobTime=="Part Time" ? <li><i className="fa fa-hourglass-start" title="Part Time"></i></li>
 																		: elem.jobBasicInfo.jobtime_id.jobTime=="Hourly Basis"? 
 																		<li><i className="fa fa-hourglass-o" title="Hourly Basis"></i></li> 
 																		: <li><i className="fa fa-hourglass-o" title="Hourly Basis"></i></li> 
+																		: <li><i className="fa fa-clock-o" title="Full Time"></i></li>
 																	}	
 																</ul>
 																<div className="infoLog"> {Moment(elem.createdAt).startOf('seconds').fromNow()}  </div>
