@@ -29,7 +29,7 @@ deleteJob = (event)=>{
 		text 				: 'You will not be able to recover this profile',
 		icon 				: 'warning',
 		showCancelButton 	: true,
-		confirmButtonText 	: 'Yes, delete it!',
+		confirmButtonText 	: 'Delete',
 		cancelButtonColor 	: 'No, keep it',
 		confirmButtonColor 	: '#d33',
 	
@@ -40,7 +40,7 @@ deleteJob = (event)=>{
 				.then(response =>{
 					if(response.data.message==="Job details deleted Successfully!"){
 						var {mapAction} = this.props;
-						mapAction.filterJobList(this.state.selector);
+						mapAction.filterJobList(this.props.selector);
 
 						Swal.fire(
 									'Deleted!',
