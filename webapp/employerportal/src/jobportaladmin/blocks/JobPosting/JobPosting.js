@@ -237,7 +237,7 @@ class JobPosting extends Component {
                     console.log("response.data : ", response.data);
                     this.setState({
                         job_id                  :   job_id,
-                        company_id              :   response.data.company_id._id,
+                        company_id              :   response.data.company_id ? response.data.company_id._id : "",
                         jobTitle                :   response.data.jobBasicInfo.jobTitle,
                         employerName            :   response.data.company_id.companyName,
                         employerLogo            :   response.data.company_id.companyLogo[0] ? response.data.company_id.companyLogo[0] : null,
@@ -255,10 +255,10 @@ class JobPosting extends Component {
                         jobType                 :   response.data.jobBasicInfo.jobtype_id.jobType,
                         jobtime_id              :   response.data.jobBasicInfo.jobtime_id._id,
                         jobTime                 :   response.data.jobBasicInfo.jobtime_id.jobTime,
-                        jobsector_id            :   response.data.jobBasicInfo.jobsector_id._id,
-                        jobSector               :   response.data.jobBasicInfo.jobsector_id.jobSector,
-                        jobshift_id             :   response.data.jobBasicInfo.jobshift_id._id,
-                        jobShift                :   response.data.jobBasicInfo.jobshift_id.jobShift,
+                        jobsector_id            :   response.data.jobBasicInfo.jobsector_id ? response.data.jobBasicInfo.jobsector_id._id : "",
+                        jobSector               :   response.data.jobBasicInfo.jobsector_id ? response.data.jobBasicInfo.jobsector_id.jobSector : "",
+                        jobshift_id             :   response.data.jobBasicInfo.jobshift_id ? response.data.jobBasicInfo.jobshift_id._id : "",
+                        jobShift                :   response.data.jobBasicInfo.jobshift_id ? response.data.jobBasicInfo.jobshift_id.jobShift : "",
                         positions               :   response.data.jobBasicInfo.positions,
                         jobDesc                 :   response.data.jobBasicInfo.jobDesc,
                         lastDateOfAppl          :   response.data.jobBasicInfo.lastDateOfAppl ? Moment(response.data.jobBasicInfo.lastDateOfAppl).format("YYYY-MM-DD") : "",
@@ -281,8 +281,8 @@ class JobPosting extends Component {
                         maxSalary               :   response.data.ctcOffered.maxSalary,
                         maxSalPeriod            :   response.data.ctcOffered.maxSalPeriod,
 
-                        mineducation_id         :   response.data.eligibility.mineducation_id._id,
-                        minEducation            :   response.data.eligibility.mineducation_id.qualification,
+                        mineducation_id         :   response.data.eligibility.mineducation_id ? response.data.eligibility.mineducation_id._id : "",
+                        minEducation            :   response.data.eligibility.mineducation_id ? response.data.eligibility.mineducation_id.qualification : "",
                         minExperience           :   response.data.eligibility.minExperience ? response.data.eligibility.minExperience : 0,
 
                         minPrimExp              :   response.data.requiredSkills.minPrimExp,
@@ -326,7 +326,7 @@ class JobPosting extends Component {
                     response.data.requiredSkills.primarySkills ?
                     this.state.primarySkillSuggestions.map((skill,index)=>{
                         response.data.requiredSkills.primarySkills.map((data,ind)=>{
-                            if (skill.id == data.skill_id) {
+                            if (skill.id == data.skill_id._id) {
                                 primarySkillTags.push({ id : skill.id, text : skill.text })
                             }
                         })
@@ -334,7 +334,7 @@ class JobPosting extends Component {
                     response.data.requiredSkills.secondarySkills ? 
                     this.state.secondarySkillSuggestions.map((skill,index)=>{
                         response.data.requiredSkills.secondarySkills.map((data,ind)=>{
-                            if (skill.id == data.skill_id) {
+                            if (skill.id == data.skill_id._id) {
                                 secondarySkillTags.push({ id : skill.id, text : skill.text })
                             }
                         })
@@ -343,7 +343,7 @@ class JobPosting extends Component {
                     response.data.requiredSkills.otherSkills ? 
                     this.state.otherSkillSuggestions.map((skill,index)=>{
                         response.data.requiredSkills.otherSkills.map((data,ind)=>{
-                            if (skill.id == data.skill_id) {
+                            if (skill.id == data.skill_id._id) {
                                 otherSkillTags.push({ id : skill.id, text : skill.text })
                             }
                         })
@@ -352,7 +352,7 @@ class JobPosting extends Component {
                     response.data.requiredSkills.preferredSkills ? 
                     this.state.preferredSkillSuggestions.map((skill,index)=>{
                         response.data.requiredSkills.preferredSkills.map((data,ind)=>{
-                            if (skill.id == data.skill_id) {
+                            if (skill.id == data.skill_id._id) {
                                 preferredSkillTags.push({ id : skill.id, text : skill.text })
                             }
                         })

@@ -321,15 +321,16 @@ class JobPosting extends Component {
                     response.data.requiredSkills.primarySkills ?
                     this.state.primarySkillSuggestions.map((skill,index)=>{
                         response.data.requiredSkills.primarySkills.map((data,ind)=>{
-                            if (skill.id == data.skill_id) {
+                            if (skill.id == data.skill_id._id) {
                                 primarySkillTags.push({ id : skill.id, text : skill.text })
                             }
                         })
                     }) : primarySkillTags = [];
+
                     response.data.requiredSkills.secondarySkills ? 
                     this.state.secondarySkillSuggestions.map((skill,index)=>{
                         response.data.requiredSkills.secondarySkills.map((data,ind)=>{
-                            if (skill.id == data.skill_id) {
+                            if (skill.id == data.skill_id._id) {
                                 secondarySkillTags.push({ id : skill.id, text : skill.text })
                             }
                         })
@@ -338,7 +339,7 @@ class JobPosting extends Component {
                     response.data.requiredSkills.otherSkills ? 
                     this.state.otherSkillSuggestions.map((skill,index)=>{
                         response.data.requiredSkills.otherSkills.map((data,ind)=>{
-                            if (skill.id == data.skill_id) {
+                            if (skill.id == data.skill_id._id) {
                                 otherSkillTags.push({ id : skill.id, text : skill.text })
                             }
                         })
@@ -347,12 +348,11 @@ class JobPosting extends Component {
                     response.data.requiredSkills.preferredSkills ? 
                     this.state.preferredSkillSuggestions.map((skill,index)=>{
                         response.data.requiredSkills.preferredSkills.map((data,ind)=>{
-                            if (skill.id == data.skill_id) {
+                            if (skill.id == data.skill_id._id) {
                                 preferredSkillTags.push({ id : skill.id, text : skill.text })
                             }
                         })
                     }) : preferredSkillTags = [];
-
                     this.setState({ 
                                     primarySkillTags    : primarySkillTags,
                                     secondarySkillTags  : secondarySkillTags,

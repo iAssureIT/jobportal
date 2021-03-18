@@ -216,13 +216,13 @@ exports.singleEntity = (req,res,next)=>{
                     // if(data.contactPersons[k].bookingApprovalRequired == 'Yes'){
 
                       
-                    manager1Details = await getManagerDetails(data.contactPersons[k].approvingAuthorityId1,data.companyID)
+                    // manager1Details = await getManagerDetails(data.contactPersons[k].approvingAuthorityId1,data.companyID)
                     
                    
-                    manager2Details = await getManagerDetails(data.contactPersons[k].approvingAuthorityId2,data.companyID)
+                    // manager2Details = await getManagerDetails(data.contactPersons[k].approvingAuthorityId2,data.companyID)
                     
                    
-                    manager3Details = await getManagerDetails(data.contactPersons[k].approvingAuthorityId3,data.companyID)
+                    // manager3Details = await getManagerDetails(data.contactPersons[k].approvingAuthorityId3,data.companyID)
 
                        
                     // }
