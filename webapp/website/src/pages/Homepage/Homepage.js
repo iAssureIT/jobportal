@@ -20,7 +20,7 @@ class HomePage extends Component {
   constructor(props){
     super(props);
     this.state={
-      leftDrawerDisplay     : "-350px",
+      leftDrawerDisplay     : "-610px",
       arrowToggle           : false,
       //selector              : {},
       mapwiseJobs           : [],
@@ -165,7 +165,7 @@ class HomePage extends Component {
   }
   leftDrawerInfo(event){
 
-    if(this.state.leftDrawerDisplay==="-450px"){
+    if(this.state.leftDrawerDisplay==="-610px"){
   
       this.setState({
       leftDrawerDisplay  : "0px",
@@ -175,7 +175,8 @@ class HomePage extends Component {
     }
     else{
       this.setState({
-      leftDrawerDisplay  : "-450px",
+
+      leftDrawerDisplay  : "-610px",
       arrowToggle:false
       })
     }
