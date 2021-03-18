@@ -3,34 +3,32 @@ import CandidateFilters			from '../../blocks/CandidateFilters/CandidateFilters.j
 import CandidatesList			from '../../blocks/Candidatelist/Candidatelist.js';
 import { connect }            	from 'react-redux';
 import { bindActionCreators } 	from 'redux';
-import  * as mapActionCreator 	from '../../common/actions/index';
+import  * as mapActionCreator 	from '../../Common/actions/index.js';
 
 
 class CandidatesListPage extends Component{
 	constructor(props){
 		super(props);
 		this.state={
-			selector             : {},
+			candidateSelector             : {},
 		}
 	}
-	componentDidMount(){
+	componentDidMount(){ 
  
-      var selector=this.state.selector;
-      selector.countryCode = "IN";
-      this.setState({ selector: selector })
+      var candidateSelector=this.state.candidateSelector;
+      candidateSelector.countryCode = "IN";
+      this.setState({ candidateSelector: candidateSelector })
 
       var {mapAction} = this.props;
-      mapAction.filterCandidates(selector);
+      mapAction.filterCandidates(candidateSelector);
 
   	}
 	render(){
 		return(
 				<div className="ViewBodyWrapper">
-                    <div className="col-lg-3" style={{"marginTop": "30px"}}>
-                      <div className="col-lg-12">
-                        <div className='row'>
+                    <div className="col-lg-3" >
+                      <div className='row'>
                           <CandidateFilters /> 
-                        </div>
                       </div>
                     </div>
 
@@ -49,7 +47,7 @@ class CandidatesListPage extends Component{
 }
 
 const mapStateToProps = (state)=>{
-                                    return {	selector    : state.selector }
+                                    return {	candidateSelector    : state.candidateSelector }
                                   }
 
 const mapDispatchToProps = (dispatch) => ({

@@ -706,34 +706,8 @@ class IAssureTableUM extends Component {
 		return $('.eye').attr('type', 'password');
 	}
 	showprofile(id,getrole) {
-		// console.log("type in id===>",getrole.type);
 		var userID = id
-		axios.get("/api/personmaster/get/details/" +userID)
-				.then((response) => {					
-					console.log("type in response===>",response.data[0]);
-					var type = response.data[0].type;
-					var entityType =response.data[0].entityType;
-					/*if (type == "driver" && entityType == "vendor") {
-
-						this.props.history.push("/vendor/driver/master/" + response.data[0]._id)
-					}else */
-					if (entityType == "vendor") {
-						if (type == "driver") {
-						this.props.history.push("/vendor/driver/master/" + response.data[0]._id)
-
-					}else{
-						this.props.history.push("/vendor/employee/master/" + response.data[0]._id)
-
-					}
-
-						
-					}else {
-						this.props.history.push("/"+type+"/users/" + response.data[0]._id)
-					}
-					// this.props.history.push("/"+type+"/master/" + response.data[0]._id)
-				})
-				.catch((error) => {
-				})
+		this.props.history.push("/edituserprofile/" + id)
 		// this.props.history.push('/edituserprofile/' + e.currentTarget.id);
 		// this.props.history.push("/driver/master/" + id)
 	}

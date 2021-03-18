@@ -8,7 +8,7 @@ import { connect }        from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { withRouter }   from 'react-router-dom';
 
-import  * as mapActionCreator from '../../common/actions/index.js';
+import  * as mapActionCreator from '../../Common/actions/index.js';
 
 
 class CandidateFilters extends Component{
@@ -49,7 +49,7 @@ class CandidateFilters extends Component{
 
     this.style =  {
                 chips: {
-                  backgroundColor: "#D3950A",
+                  backgroundColor: "#fff",
                   overflow:"hidden!important",
                   whiteSpcae:"none!important",
                 },
@@ -59,7 +59,7 @@ class CandidateFilters extends Component{
                   
                 },
                 multiselectContainer: {
-                  backgroundColor: "#242931",
+                  backgroundColor: "#fff",
                   color: "#fff!important",
                   zIndex:"5!important",
                   
@@ -71,7 +71,7 @@ class CandidateFilters extends Component{
                  color: "#fff!important",
                 },
                 option: {
-                  backgroundColor: "#242933",
+                  backgroundColor: "#fff",
                   zIndex:"5!important",
                   color: "#fff!important",
                   width:"auto!important",
@@ -316,7 +316,8 @@ class CandidateFilters extends Component{
     //console.log(this.state.inputExperience)
 
     return(
-      <section className="LeftSideFiltersWrapper col-lg-12">
+    <div className="container-fluid  candidateList" >
+      <section className="LeftSideFiltersWrapper col-lg-12" style={{"marginTop": "30px"}}>
       
       <div className="row">
 
@@ -499,9 +500,10 @@ class CandidateFilters extends Component{
               </div>
             </div>
         </div> 
-     </div>
+      </div>
         
-    </section>
+      </section>
+    </div>
     );
   }
 

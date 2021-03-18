@@ -122,7 +122,7 @@
 .displayCandidateName{
 	font-size: 17px;
 	font-weight: bold;
-	color: var(--main-heading-font-color);
+	color: var(--main-txt-color);
 	margin-left:12px;
 	margin-bottom:3px;
 }
@@ -155,7 +155,7 @@
 }
 
 .postName{
-	height:18px;
+	/*height:18px;*/
 	font-size:13px;
 	color: var(--admin-main-txt-color);
 }

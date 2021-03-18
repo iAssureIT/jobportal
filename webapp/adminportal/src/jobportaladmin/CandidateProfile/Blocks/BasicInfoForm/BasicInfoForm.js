@@ -23,7 +23,7 @@ class BasicInfoForm extends Component{
 	constructor(props){
 		super(props);
 		this.state={
-			candidate_id              : this.props.userDetails.candidate_id,
+			candidate_id              : this.props.match.params.candidateID,
 			firstName                 : "",
 			middleName                : "",
 			lastName                  : "",
@@ -73,42 +73,45 @@ class BasicInfoForm extends Component{
 			Swal.fire("Error while getting List data",error.message,'error');
 		})
 
-		Axios.get("/api/candidatemaster/get/one/"+this.state.candidate_id)
-		.then(response=>{
-			 console.log("response.data",response.data);
+		if (this.props.match.params.candidateID) {
+			Axios.get("/api/candidatemaster/get/one/"+this.state.candidate_id)
+			.then(response=>{
+				 console.log("response.data",response.data);
 
-			 	var languagesTags = [];
-			 	if (response.data.languagesKnown) {
+				 	var languagesTags = [];
+				 	if (response.data.languagesKnown) {
 
-			 		response.data.languagesKnown.map((data,ind)=>{
-			 			console.log(data)
-                    	languagesTags.push({ id : data.language_id._id, text : data.language_id.language })
-                	})
-			 	}
-			 	this.calAge(response.data.basicInfo.dob);
-			 	this.setState({
-			 		firstName         : response.data.basicInfo.firstName?response.data.basicInfo.firstName:"",
-					middleName        : response.data.basicInfo.middleName?response.data.basicInfo.middleName:"",
-					lastName          : response.data.basicInfo.lastName?response.data.basicInfo.lastName:"",
-					mobile        	  : response.data.contact.mobile?response.data.contact.mobile:"",
-					alternate     	  : response.data.contact.altMobile?response.data.contact.altMobile:"",
-					email         	  : response.data.contact.emailId?response.data.contact.emailId:"",
-					dob               : response.data.basicInfo.dob?Moment(response.data.basicInfo.dob).format("YYYY-MM-DD"):"",
-					gender            : response.data.basicInfo.gender?response.data.basicInfo.gender:"",
-					anniversaryDate   : response.data.basicInfo.anniversaryDate?Moment(response.data.basicInfo.anniversaryDate).format("YYYY-MM-DD"):"",
-					maritalStatus     : response.data.basicInfo.maritalStatus?response.data.basicInfo.maritalStatus:"",
-					nationality       : response.data.basicInfo.nationality?response.data.basicInfo.nationality:"",
-					profilePicture    : response.data.basicInfo.profilePicture?response.data.basicInfo.profilePicture:"",
-					profileImageUrl   : response.data.basicInfo.profilePicture?response.data.basicInfo.profilePicture:"",	
-					resume     		  : response.data.basicInfo.resume?response.data.basicInfo.resume:"",
-					resumeUrl     	  : response.data.basicInfo.resume?response.data.basicInfo.resume:"",
-					executiveSummary  : response.data.basicInfo.executiveSummary ? response.data.basicInfo.executiveSummary : "",
-					languagesTags 	  : languagesTags	
-			 	})
-			 })
-			 .catch(error=>{
-			 	Swal.fire("Submit Error!",error.message,'error');
-			 })
+				 		response.data.languagesKnown.map((data,ind)=>{
+				 			console.log(data)
+	                    	languagesTags.push({ id : data.language_id._id, text : data.language_id.language })
+	                	})
+				 	}
+				 	this.calAge(response.data.basicInfo.dob);
+				 	this.setState({
+				 		firstName         : response.data.basicInfo.firstName?response.data.basicInfo.firstName:"",
+						middleName        : response.data.basicInfo.middleName?response.data.basicInfo.middleName:"",
+						lastName          : response.data.basicInfo.lastName?response.data.basicInfo.lastName:"",
+						mobile        	  : response.data.contact.mobile?response.data.contact.mobile:"",
+						alternate     	  : response.data.contact.altMobile?response.data.contact.altMobile:"",
+						email         	  : response.data.contact.emailId?response.data.contact.emailId:"",
+						dob               : response.data.basicInfo.dob?Moment(response.data.basicInfo.dob).format("YYYY-MM-DD"):"",
+						gender            : response.data.basicInfo.gender?response.data.basicInfo.gender:"",
+						anniversaryDate   : response.data.basicInfo.anniversaryDate?Moment(response.data.basicInfo.anniversaryDate).format("YYYY-MM-DD"):"",
+						maritalStatus     : response.data.basicInfo.maritalStatus?response.data.basicInfo.maritalStatus:"",
+						nationality       : response.data.basicInfo.nationality?response.data.basicInfo.nationality:"",
+						profilePicture    : response.data.basicInfo.profilePicture?response.data.basicInfo.profilePicture:"",
+						profileImageUrl   : response.data.basicInfo.profilePicture?response.data.basicInfo.profilePicture:"",	
+						resume     		  : response.data.basicInfo.resume?response.data.basicInfo.resume:"",
+						resumeUrl     	  : response.data.basicInfo.resume?response.data.basicInfo.resume:"",
+						executiveSummary  : response.data.basicInfo.executiveSummary ? response.data.basicInfo.executiveSummary : "",
+						languagesTags 	  : languagesTags	
+				 	})
+				 })
+				 .catch(error=>{
+				 	Swal.fire("Submit Error!",error.message,'error');
+				 })
+		}
+		
 }
 
 	//========== User Define Function Start ================
@@ -924,4 +927,4 @@ const mapStateToProps = (state)=>{
 const mapDispatchToProps = (dispatch) => ({
   mapAction :  bindActionCreators(mapActionCreator, dispatch)
 }) 
-export default connect(mapStateToProps, mapDispatchToProps)(BasicInfoForm)
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(BasicInfoForm))

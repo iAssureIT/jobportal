@@ -23,6 +23,7 @@ class EditUserProfile extends Component {
 	}
 
 	handleSubmit(event) {
+		event.preventDefault();
 		if ($('#editUser').valid()) {
 			var userid = this.state.UserId;
 
@@ -39,10 +40,10 @@ class EditUserProfile extends Component {
 						title: " ",
 						text: "User updated successfully",
 					});
-					this.props.history.push('/dashboard');
+					this.props.history.push('/umlistofusers');
 				})
 				.catch((error) => {
-					window.location = '/dashboard';
+					window.location = '/umlistofusers';
 				});
 		}
 	}

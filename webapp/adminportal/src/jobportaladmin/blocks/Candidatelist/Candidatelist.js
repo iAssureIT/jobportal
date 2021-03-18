@@ -2,10 +2,11 @@ import React,{Component} 	  from 'react';
 import Axios 			 	  from 'axios';
 import Swal 			 	  from 'sweetalert2';
 import Moment                 from 'moment';
+import { Route, withRouter } from 'react-router-dom';
 import { FontAwesomeIcon } 	  from '@fortawesome/react-fontawesome';
 import { connect }        	  from 'react-redux';
 import { bindActionCreators } from 'redux';
-import  * as mapActionCreator from '../../common/actions/index';
+import  * as mapActionCreator from '../../Common/actions/index';
 import $                      from 'jquery';
 import IAssureTable 		  from '../../../coreadmin/IAssureTable/IAssureTable.jsx';
 import './Candidatelist.css';
@@ -86,7 +87,68 @@ class CandidatesList extends Component{
     		view : value
     	})
     }
+    edit(event) {
+		event.preventDefault();
+		var id = event.target.id;
 
+		this.props.history.push("/candidate/basic-info/"+id); 
+	}
+	delete(event){
+		event.preventDefault();
+		var candidate_id = event.target.getAttribute('id')
+		var user_id = event.target.getAttribute('data-userid')
+
+		console.log(candidate_id)
+		console.log(user_id)
+		
+		Swal.fire({
+			title : 'Are you sure, do you want to delete this candidate ?',
+			text : 'You will not be able to recover this Address details',
+			icon : 'warning',
+			showCancelButton : true,
+			confirmButtonText : 'Delete',
+			cancelButtonColor : 'Cancel',
+			confirmButtonColor : '#d33',
+	
+	  	}).then((result) =>{
+			if(result.value){
+				Axios.delete("/api/candidatemaster/delete/"+candidate_id)
+				.then(response =>{
+						if(response.data.deleted===true){
+							Axios.delete("/api/users/delete/"+user_id)
+							.then(response =>{
+								if (response.data.message=="USER_DELETED") {
+
+									var {mapAction} = this.props;
+      								mapAction.filterCandidates(this.props.candidateSelector);
+      								Swal.fire(
+										'Deleted!',
+										'Candidate details has been deleted successfully!',
+										'success'
+									);
+
+								}else{
+
+								}
+								
+							})
+
+							
+							
+						}
+				})
+				.catch(error=>{
+					
+					Swal.fire(
+								"Some problem occured deleting candidate details!",
+								error.message,
+								'error'
+						)
+				})
+			}
+		})
+
+	}
 	render(){
 		
 		return(
@@ -94,7 +156,7 @@ class CandidatesList extends Component{
 			<div className="container-fluid  candidateList col-lg-12">
 										{
 
-											this.props.candidateList
+											this.props.candidateList.length > 0
 											? 	
 											this.props.candidateList.map((elem,index)=>{
 												console.log(elem)
@@ -124,8 +186,11 @@ class CandidatesList extends Component{
 																						<div className="col-lg-7 displayInfoCandidate">
 																							<div className="row">
 																								<div className="displayCandidateName">
-																										<a href={"/candidate-profile/"+elem._id}> {elem.basicInfo.firstName} </a>
-																									<span className="candidateIdNumber"></span>
+																									<div className="col-lg-8 nopadding">	<a href={"/candidate-profile/"+elem._id}> {elem.basicInfo.firstName} </a>
+																									<span className="candidateIdNumber"></span></div>
+																									<div className="col-lg-4 NOpadding-left text-right"><span>
+																									<i className="fa fa-pencil" title="Edit" id={elem._id} onClick={this.edit.bind(this)}></i>
+																									&nbsp;<i className={"fa fa-trash redFont " + elem._id} id={elem._id} data-userid = {elem.user_id}  onClick={this.delete.bind(this)}></i></span></div>
 																								</div>
 																								<div className=" candidatePosts">
 																									<div className=" col-lg-1">
@@ -268,7 +333,7 @@ class CandidatesList extends Component{
 													);
 												})
 										:
-											null
+											<h3 style={{marginTop:"100px"}}>No Candidates available</h3>
 										}	
 									</div>
 
@@ -288,4 +353,4 @@ const mapDispatchToProps = (dispatch) => ({
   mapAction :  bindActionCreators(mapActionCreator, dispatch)
 })
 
-export default connect(mapStateToProps, mapDispatchToProps) (CandidatesList);
+export default connect(mapStateToProps, mapDispatchToProps) (withRouter(CandidatesList));

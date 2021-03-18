@@ -20,8 +20,8 @@ class Header2 extends Component{
       showNotification: false,
       inAppNotifications:[],
       notifCount:0,
-      token : ""
-    
+      token : "",
+      userDetails : JSON.parse(localStorage.getItem("userDetails"))
     }
   }
   componentDidMount(){
@@ -34,24 +34,23 @@ class Header2 extends Component{
     $("html,body").scrollTop(0);
 
     //======= User Details ==========
-    var userDetails = JSON.parse(localStorage.getItem("userDetails")) ;
-    const Token     = userDetails ? userDetails.token : null;
+    const Token     = this.state.userDetails ? this.state.userDetails.token : null;
     
 
     if(Token){
       axios.get('/api/entitymaster/get/one/companyName/1')
           .then(companyDetails=>{
-              // console.log("companyDetails = ", companyDetails.data);
-               var fullName = localStorage.getItem('fullname')
+            console.log("companyDetails = ", companyDetails);
+              console.log("companyDetails = ", this.state.userDetails);
                var profileImg = localStorage.getItem('profileImg')
 
               this.setState({
-                  token       : userDetails.token,
-                  user_ID       : userDetails.user_id,
-                  email         : userDetails.email,
-                  profileImage  : profileImg ? profileImg : userDetails.image,
-                  fullname      : fullName ? fullName : userDetails.firstName+' '+userDetails.lastName,
-                  companyID     : userDetails.companyID,
+                  token         : this.state.userDetails.token,
+                  user_ID       : this.state.userDetails.user_id,
+                  email         : this.state.userDetails.email,
+                  profileImage  : this.state.userDetails.image,
+                  fullname      : this.state.userDetails.firstName ? this.state.userDetails.firstName+' '+this.state.userDetails.lastName :' ',
+                  companyID     : this.state.userDetails.companyID,
                   companyName   : companyDetails.data.companyName,
                   companyLogo   : companyDetails.data.companyLogo[0],
                 });
@@ -101,12 +100,6 @@ class Header2 extends Component{
         this.setState({ inAppNotifications: notifications.data,notifCount: notifications.data.length })
       })
       .catch(error => {
-      })
-      //====
-     var fullName = localStorage.getItem('fullname')
-     // console.log('abd header===',fullName)
-      this.setState({
-        fullname :fullName
       })
   }
   componentWillUnmount(){
@@ -206,6 +199,7 @@ class Header2 extends Component{
   }
 
   render(){
+    console.log(this.state.fullname)
     return(
       <div className="">
         <header className="main-header newMain-header">

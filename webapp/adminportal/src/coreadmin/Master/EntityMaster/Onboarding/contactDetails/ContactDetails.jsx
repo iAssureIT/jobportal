@@ -199,8 +199,11 @@ class ContactDetails extends Component {
 	getRoles() {
 		axios.post("/api/roles/get/list")
 		  .then((response) => {
-
-			var rolesArray = response.data.filter(a=>a.rolesentity == this.props.entity)
+		  	var entity = "";
+		  	if (this.props.entity == 'corporate') {
+		  		entity = "employer"
+		  	}
+			var rolesArray = response.data.filter(a=>a.rolesentity == entity)
 			this.setState({
 			  rolesArray: rolesArray
 			},()=>{
@@ -576,7 +579,7 @@ class ContactDetails extends Component {
 					console.log("emp id =>",this.state.listOfEmpID.indexOf(this.state.employeeID))
 					if(this.state.createUser === true){
 						formValues.contactDetails.userID = await this.createUser();
-						formValues.contactDetails.personID = await this.savePerson(formValues.contactDetails.userID);
+						//formValues.contactDetails.personID = await this.savePerson(formValues.contactDetails.userID);
 						var formValues1 = {
 						userID: formValues.contactDetails.userID,
 						role: "employee",
@@ -717,7 +720,7 @@ class ContactDetails extends Component {
 
 					swal({
 						title : "Contact added successfully.",
-						text : this.state.createUser ? "Login credentials created and emailed to user. \n LoginID : "+this.state.email+" \n Default Password :"+"welcome123 \n Contact also added in employee list." : ""
+						text : this.state.createUser ? "Login credentials created and emailed to user. \n LoginID : "+this.state.email+" \n Default Password :"+"welcome123 \n" : ""
 					});
 
 					this.setState({
@@ -818,7 +821,7 @@ class ContactDetails extends Component {
 						this.updatePerson();
 					}else if(this.state.createUser === true){
 						formValues.contactDetails.userID = await this.createUser();
-						formValues.contactDetails.personID = await this.savePerson(formValues.contactDetails.userID);
+						//formValues.contactDetails.personID = await this.savePerson(formValues.contactDetails.userID);
 
 					}
 					

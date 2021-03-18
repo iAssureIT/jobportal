@@ -155,7 +155,7 @@
 }
 
 .postName{
-	height:18px;
+	/*height:18px;*/
 	font-size:13px;
 	color: var(--admin-main-txt-color);
 }

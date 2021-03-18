@@ -111,12 +111,12 @@ class Address extends Component{
 		var data_id =  event.currentTarget.id;
 
 		Swal.fire({
-		title : 'Are you sure? you want to delete this Address details!!!',
+		title : 'Are you sure, do you want to delete this address details?',
 		text : 'You will not be able to recover this Address details',
 		icon : 'warning',
 		showCancelButton : true,
-		confirmButtonText : 'Yes, delete it!',
-		cancelButtonColor : 'No, keep it',
+		confirmButtonText : 'Delete',
+		cancelButtonColor : 'Cancel',
 		confirmButtonColor : '#d33',
 	
 	  }).then((result) =>{

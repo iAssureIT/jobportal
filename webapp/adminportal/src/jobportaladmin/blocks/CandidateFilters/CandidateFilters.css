@@ -12,16 +12,9 @@
   height: auto;
   margin-left: 12px;
   min-height: 250px;
-  background-color: #1f262d;
+  background-color: transparent;
 }
 
-
-.LeftSideFiltersDrop{
-  background-color: #242933;
-  color: #fff;
-  overflow-x: hidden;
-
-}
 
 .LeftSideFiltersInputBox{
   height:auto;
@@ -43,8 +36,8 @@
 
 .optionContainer,
 .optionContainer .highlight{
-  background-color: #242933!important;
-  color: #fff;
+  background-color: var(--admin-main-bg-color);
+  color: var(--admin-main-txt-color);
   z-index: 1;
 }
 
@@ -94,7 +87,7 @@ form-control{
 
 
 .optionContainer{
-  background-color: var(--main-bg-color);
+  background-color: var(--admin-main-bg-color);
   white-space: nowrap; 
   overflow: hidden;
   text-overflow: ellipsis;
@@ -111,12 +104,12 @@ form-control{
 
 ._7ahQImyV4dj0EpcNOjnwA{
   color: var(--main-txt-color);
-  background-color: var(--main-border-color) !important;
+  background-color: var(--admin-main-border-color) !important;
 }
 
 .optionContainer .highlight{
   color: var(--main-txt-color);
-  background-color: var(--main-bg-color) !important;
+  background-color: var(--admin-main-bg-color) !important;
 }
 
 .optionContainer li:hover {

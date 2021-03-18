@@ -124,6 +124,8 @@ class Layout extends Component  {
 
                                                         <Route path="/candidate/list" exact strict component={CandidatelistPage} />
                                                         <Route path="/candidate/basic-info" exact strict component={CandidateBasicInfo} />
+                                                        <Route path="/candidate/basic-info/:candidateID" exact strict component={CandidateBasicInfo} />
+                                                        
                                                         <Route path="/candidate/address/:candidateID" exact strict component={CandidateAddress} />
                                                         <Route path="/candidate/academics/:candidateID" exact strict component={CandidateAcademics} />
                                                         <Route path="/candidate/contact/:candidateID" exact strict component={CandidateContact} />
