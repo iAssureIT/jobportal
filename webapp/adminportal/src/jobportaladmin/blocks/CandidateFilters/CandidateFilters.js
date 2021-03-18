@@ -3,7 +3,7 @@ import { Multiselect }    from 'multiselect-react-dropdown';
 import Axios        from 'axios';
 import Swal         from 'sweetalert2';
 
-import './CandidateFilters.css'; 
+import './Candidatelist.css'; 
 import { connect }        from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { withRouter }   from 'react-router-dom';

@@ -3,7 +3,11 @@ import CandidateFilters			from '../../blocks/CandidateFilters/CandidateFilters.j
 import CandidatesList			from '../../blocks/Candidatelist/Candidatelist.js';
 import { connect }            	from 'react-redux';
 import { bindActionCreators } 	from 'redux';
+<<<<<<< Updated upstream
 import  * as mapActionCreator 	from '../../Common/actions/index.js';
+=======
+import  * as mapActionCreator 	from '../../Common/actions/index';
+>>>>>>> Stashed changes
 
 
 class CandidatesListPage extends Component{

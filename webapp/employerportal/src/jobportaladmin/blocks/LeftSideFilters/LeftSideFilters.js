@@ -326,22 +326,12 @@ class LeftSideFilters extends Component{
     }
     
     this.setState({ selector: selector },()=>{
-        mapAction.jobCount(this.state.selector);
-      if (this.props.viewMode=="mapView") {
-        mapAction.filterMapData(this.state.selector);
-      }
-      if (this.props.viewMode=="functionalView" && this.props.match.params.functionalArea == "all") {
-        mapAction.filterFunctionalData(this.state.selector);
-      }
-      if (this.props.viewMode=="functionalView" && this.props.match.params.functionalArea != "all") {
-        mapAction.filterSubfunctionalData(this.state.selector);
-      }
-      if (this.props.viewMode=="industrialView") {
-        mapAction.filterIndustrialData(this.state.selector);
-      }
-      if (this.props.viewMode=="listView") {
-        mapAction.filterJobList(this.state.selector);
-      }
+       /* mapAction.jobCount(this.state.selector);
+    */
+  /*  filterJobList(this.state.selector);*/
+      
+/*        mapAction.filterJobList(this.state.selector);*/
+      
     })
     
   }
