@@ -175,7 +175,6 @@ class HomePage extends Component {
     }
     else{
       this.setState({
-
       leftDrawerDisplay  : "-610px",
       arrowToggle:false
       })
