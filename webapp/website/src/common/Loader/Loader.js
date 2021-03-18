@@ -163,7 +163,10 @@ export default class Loader extends Component {
           </div>
         );
       }
-       else{
+      else if(this.props.type === "joblistloader"){
+        
+      }
+      else{
         return (null);
       }
       

@@ -63,6 +63,8 @@ class JoblistPage extends Component{
                         <div className="col-lg-9">
                           <div className="row">
                             <div id="mapwise">
+
+
                               <Joblist jobList={this.props.jobList}/>
                             </div>
                           </div>  
@@ -76,7 +78,8 @@ class JoblistPage extends Component{
 const mapStateToProps = (state)=>{
                                     return {
                                               user_id     : state.userDetails.user_id,  company_id   : state.userDetails.company_id,
-                                              selector    : state.selector,             jobList     : state.jobList,
+                                              selector    : state.selector,             
+                                              showLoader  : state.showLoader,     jobList     : state.jobList,
                                             }
                                   }
 

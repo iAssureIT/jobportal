@@ -61,9 +61,11 @@ export const setJobWishlist = (jobWishlist )=> ({
 
 export function filterJobList(selector) {
   	return dispatch =>{
+      dispatch(showLoader(true));
   		dispatch(setFilterSelector(selector));
 	  	return axios.post("/api/jobs/joblist-for-employer",selector)
 	    .then((response)=>{
+          dispatch(showLoader(false));
 	        dispatch(getJobList(response.data));
 	    })
 	    .catch((error)=>{

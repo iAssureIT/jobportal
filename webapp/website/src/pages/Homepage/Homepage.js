@@ -308,7 +308,8 @@ class HomePage extends Component {
 
               <div id="functionwise" className= {this.props.match.params.industryName == "all" && (this.props.viewMode == "functionalView" || this.props.viewMode == "listView")  ? "tab-pane fade in active" :
                              this.props.match.params.industryName != "all" && this.props.match.params.functionalArea_id == "all" && (this.props.viewMode == "functionalView" || this.props.viewMode == "listView") ? "tab-pane fade in active"  : "tab-pane fade in" } >
-                { this.props.showLoader ? <Loader type="placeholderloader"  /> :
+               
+                { this.props.showLoader ? <Loader type="placeholderloader"  /> : 
                 <FunctionalComponent pathname={this.props.match}/> }
               </div>
 
