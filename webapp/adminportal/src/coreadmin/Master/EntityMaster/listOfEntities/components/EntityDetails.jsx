@@ -389,49 +389,12 @@ class EntityDetails extends Component {
 																				<ul className="col-lg-5 col-md-6 col-sm-6 col-xs-6 locationULContact noPadding">
 														        			<li className="nameOfEmpED" ><a target="_blank" title="view profile" href={"/employee-profile/"+contact.personID}>{contact.firstName+" "+contact.lastName+" ( Emp ID : "+ (contact.employeeID?contact.employeeID:" - ") +" )"}</a></li>
 														        			<li><i className="fa fa-envelope " aria-hidden="true" ></i>&nbsp;&nbsp;{contact.email}</li>
-																					<li><i className="fa fa-mobile "></i> &nbsp;&nbsp;{contact.phone ? contact.phone : " - "}</li>
+																			<li><i className="fa fa-mobile "></i> &nbsp;&nbsp;{contact.phone ? contact.phone : " - "}</li>
+															        		<li>Department : {contact.departmentName} </li>
+															        		<li>Designation : {contact.designationName ? contact.designationName : " -NA- "}</li>
+																			
 															        	</ul>
-															        	{this.state.entityInfo.entityType === "corporate"?
-															        	<div className="col-lg-12 col-md-6 col-sm-6 col-xs-6 noPadding">
-															        	<label className="bookingReq">Booking Approval Required : </label>&nbsp;{contact.bookingApprovalRequired}
 															        	
-														        		<div>
-															        		<div className="col-lg-4 col-md-6 col-sm-6 col-xs-6 NOpadding-left">
-															        			<label className="">Approving Authority 1  </label>
-															        			<ul className="col-lg-12 col-md-12 col-sm-12 col-xs-12 locationULContact noPadding">
-																        			<li>Emp ID :&nbsp;{contact.approvingAuthorityId1 ? contact.approvingAuthorityId1:" -NA- " }</li>
-																        			<li>Name :&nbsp;{contact.manager1Details?contact.manager1Details.firstName + " " + contact.manager1Details.lastName:"-NA- "}</li>
-																							<li>Mobile :&nbsp;{contact.manager1Details?contact.manager1Details.contactNo:"-NA- "}</li>
-																							<li>Department :&nbsp;{contact.manager1Details ? (contact.manager1Details.departmentId?contact.manager1Details.departmentId.department:"-NA- " ):" -NA- "}</li>
-																							<li>Designation :&nbsp;{contact.manager1Details ? (contact.manager1Details.designationId?contact.manager1Details.designationId.designation:"-NA- " ):" -NA- "}</li>
-																	        	</ul>
-															        		</div>
-															        		<div className="col-lg-4 col-md-6 col-sm-6 col-xs-6 NOpadding-left">
-															        			<label className="">Approving Authority 2  </label>
-															        			<ul className="col-lg-12 col-md-12 col-sm-12 col-xs-12 locationULContact noPadding">
-																        			<li>Emp ID :&nbsp;{contact.approvingAuthorityId2 ? contact.approvingAuthorityId2 :" -NA- " }</li>
-																        			<li>Name :&nbsp;{contact.manager2Details?contact.manager2Details.firstName + " " + contact.manager2Details.lastName:"-NA-"}</li>
-																							<li>Mobile :&nbsp;{contact.manager2Details?contact.manager2Details.contactNo:"-NA-"}</li>
-																							<li>Department :&nbsp;{contact.manager2Details ? (contact.manager2Details.departmentId?contact.manager2Details.departmentId.department:"" ):" -NA- "}</li>
-																							<li>Designation :&nbsp;{contact.manager2Details ? (contact.manager2Details.designationId?contact.manager2Details.designationId.designation:"" ):" -NA- "}</li>
-																	        	</ul>
-																	        </div>
-															        		<div className="col-lg-4 col-md-6 col-sm-6 col-xs-6 NOpadding-left">
-															        			<label className="">Approving Authority 3  </label>
-															        				<ul className="col-lg-12 col-md-12 col-sm-12 col-xs-12 locationULContact noPadding">
-																        			<li>Emp ID :&nbsp;{contact.approvingAuthorityId3 ? contact.approvingAuthorityId3 :" -NA- " }</li>
-																        			<li>Name :&nbsp;{contact.manager3Details?contact.manager3Details.firstName + " " + contact.manager3Details.lastName:"- NA -"}</li>
-																							<li>Mobile :&nbsp;{contact.manager3Details?contact.manager3Details.contactNo:"- NA -"}</li>
-																							<li>Department :&nbsp;{contact.manager3Details ? (contact.manager3Details.departmentId?contact.manager3Details.departmentId.department:"- NA -" ):" -NA- "}</li>
-																							<li>Designation :&nbsp;{contact.manager3Details ? (contact.manager3Details.designationId?contact.manager3Details.designationId.designation:"- NA -" ):" -NA- "}</li>
-																	        	</ul>
-																	        </div>
-														        		</div>
-
-															        	
-															        	</div>	
-															        	:null
-															        	}
 																			</div>
 																			:
 																			null

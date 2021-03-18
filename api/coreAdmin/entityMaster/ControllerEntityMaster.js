@@ -261,7 +261,7 @@ exports.singleEntity = (req,res,next)=>{
                         preApprovedKilometer     : data.contactPersons[k].preApprovedKilometer,
                         preApprovedAmount        : data.contactPersons[k].preApprovedAmount,
                         preApprovedRides         : data.contactPersons[k].preApprovedRides,
-
+                        userID                   : data.contactPersons[k].userID,
                         manager1Details           : manager1Details,
                         manager2Details           : manager2Details,
                         manager3Details           : manager3Details,

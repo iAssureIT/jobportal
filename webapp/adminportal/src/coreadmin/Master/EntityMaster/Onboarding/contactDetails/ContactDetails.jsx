@@ -35,7 +35,7 @@ class ContactDetails extends Component {
 	            empName              :"Emp Name & ID",
 	            contactDetails       :"Contact Details",
 	           
-	            preApprovedLimits    : "PreApproved Limits",
+	            //preApprovedLimits    : "PreApproved Limits",
 	             actions:"Action"
 	          }
 	          :{
@@ -632,6 +632,7 @@ class ContactDetails extends Component {
 			mobNumber				: this.state.phone,
 			email				    : this.state.email,
 			companyID				: this.state.companyID,
+			company_id				: this.state.entityID,
 			companyName			    : this.state.companyName,
 			pwd						: "welcome123",
 			role					: [ this.state.role ],
@@ -639,6 +640,7 @@ class ContactDetails extends Component {
 			"emailSubject"	: "Email Verification",
 			"emailContent"	: "As part of our registration process, we screen every new profile to ensure its credibility by validating email provided by user. While screening the profile, we verify that details put in by user are correct and genuine.",
 		}
+		console.log(this.state.entityID)
 
 		return new Promise(function(resolve, reject){
 			axios.post('/api/auth/post/signup/user', userDetails)
@@ -662,7 +664,7 @@ class ContactDetails extends Component {
 				type                    : "employee",
 				companyID				: this.state.companyID,
 				profileStatus			: "New",
-				company_Id				: this.state.entityID,
+				company_id				: this.state.entityID,
 				companyName 		    : this.state.companyName,
 				workLocation            : this.state.workLocation,
 				workLocationId          : this.state.workLocationId,
@@ -896,7 +898,7 @@ class ContactDetails extends Component {
 		var userDetails = {
 			personID        		: this.state.personID,
 			companyID				: this.state.companyID,
-			company_Id				: this.state.entityID,
+			company_id				: this.state.entityID,
 			companyName 		    : this.state.companyName,
 			branchCode              : this.state.branchCode,
 			workLocation            : this.state.workLocation,
@@ -1059,6 +1061,7 @@ class ContactDetails extends Component {
 		var entityID = this.state.entityID;
 		var locationID = event.target.id;
 		var email = event.currentTarget.getAttribute("email_ID");
+		var user_id = event.currentTarget.getAttribute("data-userid");
 		var formValues = {
 			entityID: entityID,
 			location_ID: locationID
@@ -1082,54 +1085,14 @@ class ContactDetails extends Component {
 					'designation'       		: '',
 					
 				})
-				axios.get('/api/personmaster/get/emailID/' + email)
-					.then((response) => {
-						this.setState({
-							personID: response.data.data[0]._id,
-							userId: response.data.data[0].userId,
-							username: response.data.data[0].firstName + " " + response.data.data[0].lastName
-
-						},()=>{
-							axios.delete("/api/personmaster/delete/"+this.state.personID)
-					            .then((response)=>{
-					            	/*var formValues = {
-										selectedUser: this.state.userId,
-										status: 'deleted',
-										username: this.state.username,
-									}*/
-									var id = this.state.userId;
-									const token = '';
-									const url = '/api/users/delete/' + id;
-									const headers = {
-										"Authorization": token,
-										"Content-Type": "application/json",
-									};
-									axios({
-										method: "DELETE",
-										url: url,
-										headers: headers,
-										timeout: 3000,
-										data: null,
-									})
-										.then((response) => {
-											console.log("Deleted permented")
-											
-										}).catch((error) => {
-										});
-											           		
-				            })
-
-						})
+				
+	            axios.delete("/api/users/delete/"+user_id)
+					.then((response)=>{
+						this.contactDetails();
+						this.getAllEntites();
+						this.props.history.push('/'+this.state.pathname+'/contact-details/' + entityID);
+						swal("Contact is deleted successfully.");
 					})
-					.catch((error) => {
-						
-					})
-	            .catch((error)=>{
-	            })
-				this.contactDetails();
-				this.getAllEntites();
-				this.props.history.push('/'+this.state.pathname+'/contact-details/' + entityID);
-				swal("Contact deleted successfully.");
 			})
 			.catch((error) => {
 				
@@ -1181,7 +1144,7 @@ class ContactDetails extends Component {
 	            approvingAuthorityId1:a.bookingApprovalRequired="Yes" ? ("<b>Emp ID : </b>"+(a.approvingAuthorityId1 ? a.approvingAuthorityId1 :"- NA -")+ "<br><b>Name : </b>" +(a.manager1Details ?a.manager1Details.firstName +' '+a.manager1Details.lastName:"-NA-" )) : "- NA -",
 	            approvingAuthorityId2:a.bookingApprovalRequired="Yes" ? ("<b>Emp ID : </b>"+(a.approvingAuthorityId2 ? a.approvingAuthorityId2 :"- NA -")+ "<br><b>Name : </b>" +(a.manager2Details ?a.manager2Details.firstName +' '+a.manager2Details.lastName:"-NA-") ) : "- NA -",
 	            approvingAuthorityId3:a.bookingApprovalRequired="Yes" ? ("<b>Emp ID : </b>"+(a.approvingAuthorityId3 ? a.approvingAuthorityId3 :"- NA -")+ "<br><b>Name : </b>" +(a.manager3Details ?a.manager3Details.firstName +' '+a.manager3Details.lastName:"-NA-") ) : "- NA -",
-	            preApprovedLimits :a.bookingApprovalRequired="Yes"  ? ("<b>Amount :</b> " + (a.preApprovedAmount ? a.preApprovedAmount :"- NA -") + "<br><b>Kilometer :</b> " + (a.preApprovedKilometer ? a.preApprovedKilometer :"- NA -") + "<br><b>Rides : </b>" + (a.preApprovedRides ? a.preApprovedRides :"- NA -")):"- NA -",
+	            //preApprovedLimits :a.bookingApprovalRequired="Yes"  ? ("<b>Amount :</b> " + (a.preApprovedAmount ? a.preApprovedAmount :"- NA -") + "<br><b>Kilometer :</b> " + (a.preApprovedKilometer ? a.preApprovedKilometer :"- NA -") + "<br><b>Rides : </b>" + (a.preApprovedRides ? a.preApprovedRides :"- NA -")):"- NA -",
 	        }
 	      })
           this.setState({RecordsTable:tableData})
@@ -1492,6 +1455,7 @@ class ContactDetails extends Component {
 													<h4 className=" col-lg-12 col-md-12 col-sm-12 col-sm-12 ">List of Contacts</h4>
 													{this.state.contactarray && this.state.contactarray.length > 0 ?
 														this.state.contactarray.map((data, index) => {
+															console.log(data)
 															return (
 																<div className="col-lg-6  col-md-6  col-sm-6 col-xs-12 " key={index}>
 																	<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 boxul1">
@@ -1505,54 +1469,9 @@ class ContactDetails extends Component {
 																			<li>Branch Code: {data.branchCode  + ( data.locationType ? " ("+ data.locationType+ ")":"")}</li>
 																			{/*<li>Branch Code: {data.branchCode +" ("+data.branchName+")"}</li>*/}
 																			<li>Company Branch: {data.branchName?data.branchName :" -NA- "}</li>
-																			<li>Department &  Designation : {data.departmentName && data.designationName ? data.departmentName+" , "+data.designationName : " -NA- "}</li>
+																			<li>Department : {data.departmentName} </li>
+															        		<li>Designation : {data.designationName ? data.designationName : " -NA- "}</li>
 																			{/*<li>Designation: {data.designationName ? data.designationName : " -NA- "}</li>*/}
-																			{this.state.pathname === "vendor"?
-																			null
-																			:
-																			<div>
-																				<li>{data.empCategory ? "Employee Category:" + data.empCategory : ""}</li>
-																				<li>{data.empPriority ?"Employee Priority: "+(data.empPriority == "1" ? "★" : data.empPriority == "2" ? "★ ★" : "★ ★ ★" ): ""}</li>
-																			</div>
-																			}
-
-																			{data.approvingAuthorityId1 ?
-																				<li>Approving Authority Employee ID 1: {data.approvingAuthorityId1}</li>	
-																			:
-																			null
-																			}
-																			{data.approvingAuthorityId2 ?
-																				<li>Approving Authority Employee ID 2: {data.approvingAuthorityId2}</li>	
-																			:
-																			null
-																			}																	
-																			{data.approvingAuthorityId3 ?
-																				<li>Approving Authority Employee ID 3: {data.approvingAuthorityId3}</li>	
-																			:
-																			null
-																			}
-																			{data.bookingApprovalRequired === 'Yes'?
-																				<li>Booking Approval Required: Yes</li>	
-																			:
-																				null
-																			}																		
-
-																			{data.preApprovedAmount ?
-																				<li>Pre Approved Amount:  &#8377; {data.preApprovedAmount}</li>	
-																				:
-																				null
-																			}
-
-																			{data.preApprovedRides?
-																				<li>Pre Approved Rides : {data.preApprovedRides}</li>	
-																				:
-																				null
-																			}
-																			{data.preApprovedKilometer?
-																				<li>Pre Approved Kilometer : {data.preApprovedKilometer}</li>	
-																				:
-																				null
-																			}					
 																											
 																																				
 																			{data.createUser?
@@ -1569,7 +1488,7 @@ class ContactDetails extends Component {
 																						<a href={"/"+this.state.pathname+"/contact-details/" + this.props.match.params.entityID + "/" + data._id}><i className="fa fa-pencil penmrleft" aria-hidden="true"></i>&nbsp;&nbsp;Edit</a>
 																					</li>
 																					<li name={index}>
-																						<span onClick={this.contactDelete.bind(this)} email_ID={data.email} id={data._id}><i className="fa fa-trash-o" aria-hidden="true"></i> &nbsp; Delete</span>
+																						<span onClick={this.contactDelete.bind(this)} data-userid={data.userID}  email_ID={data.email} id={data._id}><i className="fa fa-trash-o" aria-hidden="true"></i> &nbsp; Delete</span>
 																					</li>
 																				</ul>
 																			</div>
