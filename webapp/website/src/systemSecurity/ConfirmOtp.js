@@ -122,8 +122,7 @@ class ConfirmOtp extends Component {
   }
   resendOtp(event) {
     event.preventDefault();
-    console.log(".....................................");
-   /* document.getElementById("resendOtpBtn").innerHTML = 'Please wait...';*/
+   
     const userid = this.props.userID;
     var formValues = { userid : userid }
     var {mapAction} = this.props;

@@ -105,5 +105,5 @@
 	
 	z-index: 100;
 	transition:all 0.5s; 
-  transition-timing-function: ease-in-out;
+  transition-timing-function: ease-in;
 }

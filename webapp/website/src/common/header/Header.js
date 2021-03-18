@@ -338,7 +338,7 @@ class Header extends Component{
                                  
                                    ((this.props.userDetails.profilePicture)=== undefined || (this.props.userDetails.profilePicture)===  null)
                                   ?
-                                  <FontAwesomeIcon icon={['far', 'user']} />
+                                  <FontAwesomeIcon icon={['fas', 'user']} />
                                   :
 
                                   ((this.props.userDetails.profilePicture.length) > 0)
