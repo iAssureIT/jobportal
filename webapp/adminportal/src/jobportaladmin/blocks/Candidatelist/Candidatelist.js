@@ -219,7 +219,7 @@ class CandidatesList extends Component{
 																					</div>
 																				</div>
 																				<div className="col-lg-12 candidateSkillsBlocks">
-																				<div className="">
+																				<div className="col-lg-12">
 																					<div className="skillsHeading">	
 																						Primary skills
 																					</div>
@@ -244,7 +244,7 @@ class CandidatesList extends Component{
 																					: <div className="skillsSubHeading">No primary skills added</div>
 																					}
 																				</div>
-																				<div className="skillsHeadingBlock">
+																				<div className="col-lg-12">
 																					<div className="skillsHeading">	
 																						Secondary skills
 																					</div>
@@ -252,11 +252,12 @@ class CandidatesList extends Component{
 																					<div className=" skillsSubHeadingWrapper">	
 																						{
 																							secondarySkills.map((elem,index)=>{
+																								console.log(elem)
 																								return(
 																										<div className="col-lg-6" key={index}>
 																											<div className="row skillsSubHeading">
 																												<i className="fa fa-square rotate45 listRoatate45" ></i>
-																													{elem.secondarySkills[index]}
+																													{elem.skill_id.skill}
 																											</div>
 																										</div>
 																									);
