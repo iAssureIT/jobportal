@@ -706,7 +706,9 @@ exports.addCandidateSkill = (req,res,next)=>{
         skill_id = req.body.skill.skill_id != "" ? req.body.skill.skill_id
                                 : await insertSkill(req.body.skill.skill, req.body.user_id)
                 
-        skills.push({ "skill_id" : ObjectID(skill_id), "skillType" : req.body.skill.skillType, "rating": req.body.skill.rating,"experience": req.body.skill.experience })
+
+        skills.push({ "skill_id" : ObjectID(skill_id), "skillType" : req.body.skill.skillType, "rating": req.body.skill.rating ,"experience": req.body.skill.experience})
+
     
             CandidateProfile.updateOne(
                 { _id: req.body.candidate_id },  
