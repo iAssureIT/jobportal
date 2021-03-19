@@ -190,7 +190,8 @@
 	margin-right: 20px;
 	padding-top: 10px;
 	font-size: 18px;
-	font-family: 'Montserrat-SemiBold';
+	/*font-family: 'Montserrat-SemiBold';*/
+	font-weight: 600;
 	border: 1px solid  var(--main-border-color);
 	border-radius:5px;
 

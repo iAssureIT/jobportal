@@ -4,6 +4,8 @@ import Joblist				        from '../../blocks/Joblist/Joblist.js';
 import { connect }            from 'react-redux';
 import { bindActionCreators } from 'redux';
 import  * as mapActionCreator from '../../common/actions/index';
+import Loader                 from '../../common/Loader/Loader.js';
+
 
 import "./Joblist.css";
 
@@ -62,10 +64,9 @@ class JoblistPage extends Component{
 
                         <div className="col-lg-9">
                           <div className="row">
-                            <div id="mapwise">
-
-
-                              <Joblist jobList={this.props.jobList}/>
+                            <div id="mapwise"> 
+                              { this.props.showLoader ? <Loader type="joblistloader"  /> : <Joblist jobList={this.props.jobList}/> }
+                              {/*{ <Loader type="joblistloader"  /> }*/}
                             </div>
                           </div>  
                         </div>
@@ -77,9 +78,11 @@ class JoblistPage extends Component{
 
 const mapStateToProps = (state)=>{
                                     return {
-                                              user_id     : state.userDetails.user_id,  company_id   : state.userDetails.company_id,
+                                              user_id     : state.userDetails.user_id, 
+                                              company_id  : state.userDetails.company_id,
                                               selector    : state.selector,             
-                                              showLoader  : state.showLoader,     jobList     : state.jobList,
+                                              showLoader  : state.showLoader,
+                                              jobList     : state.jobList,
                                             }
                                   }
 
@@ -87,6 +90,4 @@ const mapDispatchToProps = (dispatch) => ({
                                             mapAction :  bindActionCreators(mapActionCreator, dispatch)
                                           }) 
 
-export default connect(mapStateToProps, mapDispatchToProps)(JoblistPage)
-
-
+export default connect(mapStateToProps, mapDispatchToProps)(JoblistPage)                             
