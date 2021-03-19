@@ -52,6 +52,7 @@ class JoblistPage extends Component{
   }
 	
   render(){
+    console.log(this.props.showLoader)
         		return(
                 		<div className="ViewBodyWrapper">
                         <div className="col-lg-3" style={{"marginTop": "30px"}}>

@@ -85,7 +85,7 @@ deleteJob = (event)=>{
 						</div> 
 					</div>*/} 
 						{
-							this.props.jobList
+							this.props.jobList.length>0
 							?
 								this.props.jobList.map((elem,index1)=>{
 									var applicantsCount = this.props.applicantsCountList.filter((appl, ind)=>{
@@ -193,7 +193,7 @@ deleteJob = (event)=>{
 									);
 								})
 							:
-								null
+								<h3 style={{margin:"100px"}}>No Jobs Found</h3>
 						}
 				</div>
 			</section>

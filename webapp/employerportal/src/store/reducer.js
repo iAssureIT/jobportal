@@ -31,6 +31,7 @@ const initialState = {
 		industry_id : ""
 	},
 	selector 					: {},
+	showLoader 					: false,
 	jobList 					: [],
 	candidateSelector 			: {},
 	appliedCandidateSelector 	: {},
@@ -54,6 +55,9 @@ const reducer = (state = initialState, action) => {
 	}
 	if(action.type === "SET_USER_DETAILS"){
 		newState.userDetails 	= action.userDetails;
+	}
+	if (action.type === "SHOW_LOADER") {
+		newState.showLoader = action.showLoader;
 	}
 	if(action.type === "SET_FILTER_SELECTOR"){
 		newState.selector 	= action.selector;
