@@ -166,12 +166,25 @@ export default class Loader extends Component {
       else if(this.props.type === "joblistloader"){
         return (
           <div  className="joblistLoaderWrapper col-lg-12">
-            <div className="col-lg-12">
-              <div className="joblistLoaderContainer">
-              </div>
+            <div className="col-lg-6">
               <div className="joblistLoaderContainer">
               </div>
             </div>
+
+            <div className="col-lg-6">
+              <div className="joblistLoaderContainer">
+              </div>
+            </div>
+
+            <div className="col-lg-6">
+              <div className="joblistLoaderContainer">
+              </div>
+            </div>
+
+            <div className="col-lg-6">
+              <div className="joblistLoaderContainer">
+              </div>
+            </div> 
           </div>
         );
       }
