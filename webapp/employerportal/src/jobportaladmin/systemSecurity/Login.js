@@ -110,36 +110,42 @@ class Login extends Component {
               axios.get('/api/entitymaster/getEntity/'+response.data.userDetails.company_id)
               .then((resp) => {
                 console.log("resp login",resp);
-                
-                  this.setState({ btnLoading: false });
-                  var  userDetails = {
-                  firstName : response.data.userDetails.firstName, 
-                  lastName  : response.data.userDetails.lastName, 
-                  email     : response.data.userDetails.email, 
-                  phone     : response.data.userDetails.phone, 
-                  city      : response.data.userDetails.city,
-                  company_id : response.data.userDetails.company_id,
-                  companyID : response.data.userDetails.companyID,
-                  companyName : response.data.userDetails.companyName,
-                  user_id   : response.data.userDetails.user_id,
-                  roles     : response.data.userDetails.roles,
-                  token     : response.data.userDetails.token, 
-                  industry_id   : resp.data.industry_id
-                  //loginTime : response.data.userDetails.loginTime, 
-                }
-
-                localStorage.setItem('userDetails', JSON.stringify(userDetails));
-
-                var {mapAction} = this.props;
-                mapAction.setUserDetails(userDetails);
-   
-                this.setState({ loggedIn: true }, () => {
-                    if (response.data.userDetails.company_id) {
-                      window.location.href='/post-job'
-                    }else{
-                      window.location.href= '/corporate/basic-details'
+                  if (resp.data === null) {
+                    swal({
+                      text: "Please contact admin"
+                    });
+                  }else{
+                    this.setState({ btnLoading: false });
+                    var  userDetails = {
+                      firstName : response.data.userDetails.firstName, 
+                      lastName  : response.data.userDetails.lastName, 
+                      email     : response.data.userDetails.email, 
+                      phone     : response.data.userDetails.phone, 
+                      city      : response.data.userDetails.city,
+                      company_id : response.data.userDetails.company_id,
+                      companyID : response.data.userDetails.companyID,
+                      companyName : response.data.userDetails.companyName,
+                      user_id   : response.data.userDetails.user_id,
+                      roles     : response.data.userDetails.roles,
+                      token     : response.data.userDetails.token, 
+                      industry_id   : resp.data.industry_id
+                      //loginTime : response.data.userDetails.loginTime, 
                     }
-                  })
+
+                    localStorage.setItem('userDetails', JSON.stringify(userDetails));
+
+                    var {mapAction} = this.props;
+                    mapAction.setUserDetails(userDetails);
+       
+                    this.setState({ loggedIn: true }, () => {
+                        if (response.data.userDetails.company_id) {
+                          window.location.href='/post-job'
+                        }else{
+                          window.location.href= '/corporate/basic-details'
+                        }
+                      })
+                  }
+                  
                 })
               .catch((error) => {});
               }

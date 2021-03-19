@@ -934,7 +934,7 @@ exports.getCandidateList = (req,res,next)=>{
     //selector['$or']         = [];
     selector['$and']        = [];
 
-    selector["$and"].push({ "address.countryCode" :  req.body.countryCode   })
+    //selector["$and"].push({ "address.countryCode" :  req.body.countryCode   })
     // 1
     if (req.body.stateCode && req.body.stateCode != "all") {
         selector["$and"].push({ "address.stateCode" :  req.body.stateCode   })
