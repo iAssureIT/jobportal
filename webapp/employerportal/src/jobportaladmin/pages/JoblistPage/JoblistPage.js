@@ -66,7 +66,7 @@ class JoblistPage extends Component{
                         <div className="col-lg-9">
                           <div className="row">
                             <div id="mapwise"> 
-                              { this.props.showLoader ? <Loader type="jobListLoader"  /> : <Joblist jobList={this.props.jobList}/> }
+                              { this.props.showLoader ? <Loader type="joblistLoader"  /> : <Joblist jobList={this.props.jobList}/> }
                               {/*{ <Loader type="jobListLoader"  /> }*/}
                             </div>
                           </div>  

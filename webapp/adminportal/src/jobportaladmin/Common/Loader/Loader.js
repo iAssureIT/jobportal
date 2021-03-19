@@ -7,26 +7,26 @@ export default class Loader extends Component {
     }
 
     render(){
-      if(this.props.type === "candidateJoblistLoader"){
+      if(this.props.type === "candidatelistLoader"){
           return (  
-                <div  className="candidateJoblistLoaderWrapper col-lg-12">
+                <div  className="candidatelistLoaderWrapper col-lg-12">
                   <div className="col-lg-6">
-                    <div className="loaderContainer">
+                    <div className="candidatelistLoaderContainer">
                     </div>
                   </div>
 
                   <div className="col-lg-6">
-                    <div className="loaderContainer">
+                    <div className="candidatelistLoaderContainer">
                     </div>
                   </div>
 
                   <div className="col-lg-6">
-                    <div className="loaderContainer">
+                    <div className="candidatelistLoaderContainer">
                     </div>
                   </div>
 
                   <div className="col-lg-6">
-                    <div className="loaderContainer">
+                    <div className="candidatelistLoaderContainer">
                     </div>
                   </div>  
                 </div>              
@@ -41,8 +41,6 @@ export default class Loader extends Component {
                   <div className="joblistLoaderContainer">
                   </div>
                 </div>
-                
-                
               </div>
               );
           }

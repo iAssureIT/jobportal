@@ -183,7 +183,7 @@
 
 }
 
-.loaderContainer{
+.candidatelistLoaderContainer{
   height: 340px;
   margin-top: 30px;
   border-radius: 10px;
@@ -191,7 +191,7 @@
   background-color: var(--admin-form-field-background-color);
 }
 
-.candidateJoblistLoaderWrapper{
+.candidatelistLoaderWrapper{
   margin-bottom: 30px;
   background-color: var(--admin-form-field-background-color);
 }

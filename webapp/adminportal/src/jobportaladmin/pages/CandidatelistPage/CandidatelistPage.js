@@ -37,7 +37,7 @@ class CandidatesListPage extends Component{
                     <div className="col-lg-9">
                       <div className="row">
                         <div id="mapwise">
-                          { this.props.showLoader ? <Loader type="candidateJoblistLoader"  /> : <CandidatesList /> }
+                          { this.props.showLoader ? <Loader type="candidatelistLoader"  /> : <CandidatesList /> }
                         </div>
                       </div>  
                     </div>
@@ -49,7 +49,10 @@ class CandidatesListPage extends Component{
 }
 
 const mapStateToProps = (state)=>{
-                                    return {	candidateSelector    : state.candidateSelector }
+                                    return {	
+                                              candidateSelector    : state.candidateSelector,
+                                              showLoader           : state.showLoader 
+                                            }
                                   }
 
 const mapDispatchToProps = (dispatch) => ({
