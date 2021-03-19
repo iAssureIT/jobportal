@@ -30,12 +30,13 @@ class SignUp extends Component {
       company_id            : "",
       companyID             : "",
       companylist           : [],
+      branchArray           : [],
       city                  : [], 
       stateArray            : [],
       companyState          : "",
       companyCountry        : "",
       countryCode           : "IN",
-      companyCity           : "",
+      branchCode           : "",
       formerrors            : {
         firstNameV          : "",
         lastNameV           : "",
@@ -255,6 +256,7 @@ class SignUp extends Component {
         company_id  : this.state.company_id != "" ? this.state.company_id : null,
         companyID   : this.state.companyID != "" ? this.state.companyID : null,
         companyName : this.state.companyName,
+        branchCode  : this.state.branchCode,
         role        : 'employer',
         status      : 'unverified',        
 
@@ -263,14 +265,14 @@ class SignUp extends Component {
       
     console.log('auth sign=======',auth) 
 
-      axios.post('/api/auth/post/signup/user/otp', auth)
+      /*axios.post('/api/auth/post/signup/user/otp', auth)
         .then((response) => {
           console.log("signup res===",response.data)
           if(response.data.message == 'USER_CREATED'){
             swal('Great, Information submitted successfully and OTP is sent to your registered Email.');
             localStorage.setItem('previousUrl' ,'signup');
 
-            var sendData = {
+            /*var sendData = {
               "event"     : "Event1", //Event Name
               "toUser_id"  : response.data.ID, //To user_id(ref:users)
               "toUserRole"  : "employer",
@@ -299,7 +301,7 @@ class SignUp extends Component {
             axios.post('/api/masternotifications/post/sendNotification', sendData2)
               .then((notificationres) => {})
               .catch((error) => { console.log('notification error: ', error) })  
-
+            
 
             this.props.history.push("/confirm-otp/" + response.data.ID);
           }else{
@@ -308,7 +310,7 @@ class SignUp extends Component {
         })
         .catch((error) => {
           
-        }) 
+        }) */
     }
    
   }
@@ -355,7 +357,7 @@ class SignUp extends Component {
     });
     
   }
-    changeMobile(event) {
+  changeMobile(event) {
     this.setState({
       mobileNumber: event
     }, () => {
@@ -400,7 +402,7 @@ class SignUp extends Component {
         const {name,value} = event.target;
         this.setState({ [name]:value });  
         
-        var company_id, companyID;
+        var company_id, companyID; 
         if (document.querySelector('#companyName option[value="' + value + '"]')) {
           company_id = document.querySelector('#companyName option[value="' + value + '"]').getAttribute("data-value")
           companyID = document.querySelector('#companyName option[value="' + value + '"]').getAttribute("data-id")
@@ -413,28 +415,36 @@ class SignUp extends Component {
           }
         })
         console.log(selectedCompany)
+
         if (selectedCompany[0]) {
+
+          this.setState({ branchArray : selectedCompany[0].locations })
+
           var city = _.uniq(selectedCompany[0].locations, 'district')
         
           this.setState({company_id :company_id, companyID: companyID, companyName : selectedCompany[0].companyName, city: city, });
 
-        }else{
+        }else{ 
           this.setState({company_id :company_id, companyID: companyID, companyName : value });
 
         }
         
     } 
-    handleChangeCity(event){
+    handleChangeBranch(event){
       var value = event.currentTarget.value;
       var name  = event.currentTarget.name;
-      console.log(document.querySelector('#companyCity option[value="' + value + '"]'))
-      if (document.querySelector('#companyCity option[value="' + value + '"]')) {
+      console.log(document.querySelector('#branchCode option[value="' + value + '"]'))
+      if (document.querySelector('#branchCode option[value="' + value + '"]')) {
+
+        var locationname = document.querySelector('#branchCode option[value="' + value + '"]').getAttribute("branch_location");
+        var locationId = document.querySelector('#branchCode option[value="' + value + '"]').getAttribute("branch_location_id");
+        var locationType = document.querySelector('#branchCode option[value="' + value + '"]').getAttribute("data_locationType");
+        
         this.setState({
           [name]      : value,
-          "companyState"    : document.querySelector('#companyCity option[value="' + value + '"]').getAttribute("data-state"),
-          "stateCode"   : document.querySelector('#companyCity option[value="' + value + '"]').getAttribute("data-stateCode"),
-          "companyCountry"    : document.querySelector('#companyCity option[value="' + value + '"]').getAttribute("data-country"),
-          "countryCode"   : document.querySelector('#companyCity option[value="' + value + '"]').getAttribute("data-countryCode")
+          "workLocation" : locationname,
+          "workLocationId" :locationId,
+          "locationType" :locationType
         })
       }else{
         this.setState({ [name]      : value })
@@ -470,22 +480,22 @@ class SignUp extends Component {
               </div>  
               <div className="row">
               <div className="col-lg-4 form-group">
-                {/*<label htmlFor="companyCity" className="nameTitleForm">
+                {/*<label htmlFor="branchCode" className="nameTitleForm">
                    City
                   <sup className="nameTitleFormStar">*</sup>
                 </label>*/}
                 <div className="input-group ">
                   <span className="input-group-addon registrationInputIcon"><i className="fa fa-map-marker"></i></span> 
-                  <input type="text" list="companyCity" className="form-control registrationInputBox" refs="industry" 
-                    name="companyCity" id="selectCompanyCity" maxLength="100" value={this.state.companyCity}
-                    onChange={this.handleChangeCity.bind(this)} />
-                    <datalist name="companyCity" id="companyCity" className="companyCity" >
-                        { this.state.city.map((elem, key) =>
-                            <option key={key} value={elem.district} data-stateCode = {elem.stateCode} data-state={elem.state} data-countryCode = {elem.countryCode} data-country = {elem.country}/>
+                  <input type="text" list="branchCode" className="form-control registrationInputBox" value={this.state.branchCode} ref="branchCode" name="branchCode"
+                   id="selectCompanyCity" maxLength="100" value={this.state.branchCode}
+                    onChange={this.handleChangeBranch.bind(this)} />
+                    <datalist name="branchCode" id="branchCode" className="branchCode" >
+                        { this.state.branchArray.map((elem, key) =>
+                            <option key={key} branch_location_id={elem._id} branch_location={(elem.addressLine2 ? elem.addressLine2 : "") +" "+(elem.addressLine1)} value={((elem.locationType).match(/\b(\w)/g)).join('')+ "-"+ elem.area + elem.city + ","+ elem.stateCode+ "-"+ elem.countryCode} data-branchCode ={elem.branchCode} data_locationType={elem.locationType} />
                         )}
                     </datalist>                  
                 </div> 
-                <span id="companyCityError" className="errorMsg"></span>
+                <span id="branchCodeError" className="errorMsg"></span>
               </div>
 
               <div className="col-lg-4">
@@ -508,7 +518,7 @@ class SignUp extends Component {
                         }
                         ) : ''
                     }
-                  </select>
+                  </select> 
                 </div> 
                 <span id="stateError" className="errorMsg"></span>
               </div>

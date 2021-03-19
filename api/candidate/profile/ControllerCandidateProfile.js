@@ -971,11 +971,9 @@ exports.getCandidateList = (req,res,next)=>{
         selector["$and"].push({ "totalExperience" : { '$gte' : req.body.minExp,  '$lte' : req.body.maxExp} });
     }
     if (selector["$and"].length == 0) {
-        console.log(selector["$and"])
         selector = {}
     }
     
-    console.log(selector)
 
     CandidateProfile.find(selector)
     .populate('languagesKnown.language_id')
