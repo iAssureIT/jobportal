@@ -184,11 +184,10 @@ exports.singleEntity = (req,res,next)=>{
     EntityMaster.findOne({_id : req.params.entityID})
     .exec()
     .then(data=>{
-        main();
-        async function main(){
-            var k = 0 ;
-            var returnData = [];
-            if(data){
+        
+        var k = 0 ;
+        var returnData = [];
+        if(data){
             if(data.contactPersons && data.contactPersons.length > 0){
                 var contactData = [];
                 for(k = 0 ; k < data.contactPersons.length ; k++){
@@ -290,12 +289,8 @@ exports.singleEntity = (req,res,next)=>{
                         userID                  : data.userID,  
                         contactData             : contactData
                     })
-            }//data
-            res.status(200).json(returnData);
-            
-        }
-        
-        
+            }
+        res.status(200).json(returnData);
     })
     .catch(err =>{
         res.status(500).json({
