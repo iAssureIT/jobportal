@@ -26,6 +26,7 @@ class Certification extends Component{
 			certifiedOn          : "",
 			validity             : "",
 			grade   		     : "",
+			experience   		 : "",
 			selectArry   		 : [],
 			certificationToggel  : false,
 			rating               : "",
@@ -42,6 +43,7 @@ class Certification extends Component{
 						            	skill 		: "Skill",
 						            	skillType 	: "Type",
 						            	rating 		: "Rating",
+						            	experience 	: "Experience",
 						            	actions     : 'Action',
 	          					 	},
 			tableObjects 	    : 	{
@@ -144,7 +146,8 @@ class Certification extends Component{
                     _id         : a._id,
                     skill 		: a.skill_id.skill,
 	            	skillType 	: a.skillType,
-	            	rating 		: a.rating
+	            	rating 		: a.rating,
+	            	experience 	: a.experience,
                 }
             	})
 			 	var skillslist = [];
@@ -323,23 +326,25 @@ class Certification extends Component{
 		if(this.state.certificationToggel===false){
 			if(this.state.isPrimary===true){
 				var formValues = {
-					                candidate_id               : this.state.candidate_id,
+					                candidate_id              : this.state.candidate_id,
 					                skill: {
 					                	skill                 : this.state.skills,
 					                	skillType 			  : "primary",	
 										rating                : this.state.rating,
-										skill_id              : this.state.skills_id
+										skill_id              : this.state.skills_id,
+										experience            : this.state.experience
 					                },					                
 							}
 							this.insetData(formValues,event);
 			}else{
 				var formValues = {
-					                candidate_id            : this.state.candidate_id,
+					                candidate_id              : this.state.candidate_id,
 					                skill: {
 					                	skill                 : this.state.skills,
 					                	skillType 			  : "secondary",	
 										rating                : this.state.rating,
-										skill_id              : this.state.skills_id
+										skill_id              : this.state.skills_id,
+										experience            : this.state.experience
 					                },		
 					                	
 					                
@@ -405,6 +410,7 @@ class Certification extends Component{
 							this.setState({
 											skills             : [],
 											rating             : "",
+											experience         : "",
 											isPrimary		   : true,
 											buttonText         : "Save"
 										})
@@ -497,6 +503,15 @@ class Certification extends Component{
 				""; 
 				status = true;
 			}
+			if(this.state.experience.length<=0){
+				document.getElementById("experienceError").innerHTML=  
+				"Please enter your Experience";  
+				status=false; 
+			}else{
+				document.getElementById("experienceError").innerHTML=  
+				""; 
+				status = true;
+			}
 
 	 	}
 
@@ -535,7 +550,7 @@ class Certification extends Component{
 								<div >
 								<div className="row formWrapper">
 									
-									<div className="col-lg-3">
+									<div className="col-lg-2">
 										
 										<label htmlFor="skills" className="nameTitleForm">
 											Type 
@@ -547,18 +562,22 @@ class Certification extends Component{
 													 : "genderFeild col-lg-6"}  
 												 id="togglePrimary" name="primaryToggel" 
 												 value="togglePrimary" onClick={this.handleSwitch.bind(this)}>
-											Primary
+												<div className="row">
+													Primary
+												</div>
 											</div>
 											<div className={this.state.isPrimary === false
 															? "genderFeild col-lg-6 genderFeildActive"
 															: "genderFeild col-lg-6"} 
 												id="toogleSecondary" name="primaryToggel" 
 												value="toogleSecondary" onClick={this.handleSwitch.bind(this)}>
-											Secondary
+												<div className="row">
+													Secondary
+												</div>
 											</div>
 										</div>
 									</div>
-									<div className="col-lg-6">
+									<div className="col-lg-4">
 										<label htmlFor="skills" className="nameTitleForm">
 											Skill 
 											<sup className="nameTitleFormStar">*</sup>
@@ -593,6 +612,14 @@ class Certification extends Component{
 											<span className={this.state.rating === "5" ? "fa fa-star rating stars":"fa fa-star-o rating"} id="5" name="rating" value="5" onClick={this.starClick.bind(this)}></span>
 										</div> 
 										<span id="ratingError" className="errorMsg"></span>
+									</div>
+									<div className="col-lg-3">
+										<label htmlFor="experience" className="nameTitleForm">Experience in Years<sup className="nameTitleFormStar">*</sup></label>
+										<div className="input-group ">
+											<span className="input-group-addon inputBoxIcon"><FontAwesomeIcon icon="chalkboard-teacher" /></span> 
+											<input type="number" name="experience" id="experience" className="form-control inputBox " value={this.state.experience} onChange={this.handleChange.bind(this)} />
+										</div> 
+										<span id="experienceError" className="errorMsg"></span>
 									</div>
 										
 
@@ -740,6 +767,7 @@ class Certification extends Component{
 							</div>
 							:
 							<div className="col-lg-12">
+								<div className="row">
 										<IAssureTable 
                                             tableHeading={this.state.tableHeading}
                                             //twoLevelHeader={this.state.twoLevelHeader} 
@@ -749,6 +777,7 @@ class Certification extends Component{
                                             tableObjects={this.state.tableObjects}
                                         />
 									</div>
+								</div>
 						}
 						<button className="buttonBack pull-left" onClick={this.handleBack.bind(this)}>
 						 	<FontAwesomeIcon className="backArrow" icon="arrow-left" /> 

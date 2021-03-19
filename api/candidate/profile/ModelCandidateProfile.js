@@ -59,7 +59,8 @@ const candidateSchema = mongoose.Schema({
 	}],
 	skills 	: [{ 	skill_id 	: {type: mongoose.Schema.Types.ObjectId, ref: 'skillmasters'}, 
 					skillType 	: String,			
-					rating  	: String 
+					rating  	: String,
+					experience  : Number,
 			}],
 	certifications : [{
 		certName		: String,
