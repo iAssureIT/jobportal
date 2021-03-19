@@ -4,6 +4,7 @@ import CandidatesList			      from '../../blocks/CandidatesList/CandidatesList.j
 import { connect }            	from 'react-redux';
 import { bindActionCreators } 	from 'redux';
 import  * as mapActionCreator 	from '../../common/actions/index';
+import Loader                   from '../../common/Loader/Loader.js';
 
 
 class CandidatesListPage extends Component{
@@ -26,24 +27,22 @@ class CandidatesListPage extends Component{
 	render(){
 		return(
 				<div className="ViewBodyWrapper">
-                    <div className="col-lg-3" style={{"marginTop": "30px"}}>
-                      <div className="col-lg-12">
-                        <div className='row'>
-                          <CandidateFilters /> 
-                        </div>
-                      </div>
-                    </div>
+          <div className="col-lg-3" style={{"marginTop": "30px"}}>
+            <div className="col-lg-12">
+              <div className='row'>
+                <CandidateFilters /> 
+              </div>
+            </div>
+          </div>
 
-                    <div className="col-lg-9">
-                      <div className="row">
-                        <div id="mapwise">
-                          <CandidatesList />
-                        </div>
-                      </div>  
-                    </div>
-                     
-                </div>
-					
+          <div className="col-lg-9">
+            <div className="row">
+              <div id="mapwise">
+                { this.props.showLoader ? <Loader type = "candidateJoblistLoader" /> : <CandidatesList /> }
+              </div>
+            </div>  
+          </div>
+        </div>
 			);	
 	} 
 }

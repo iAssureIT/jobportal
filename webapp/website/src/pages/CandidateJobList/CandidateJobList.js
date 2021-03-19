@@ -72,8 +72,10 @@ class CandidateJobList extends Component{
 const mapStateToProps = (state)=>{
     return {
     	userDetails 	: state.userDetails,
-        selector        : state.selector, 	jobList 		: state.jobList,
-        jobWishlist 	: state.jobWishlist, appliedJoblist : state.appliedJoblist
+        selector        : state.selector, 	
+        jobList 		: state.jobList,
+        jobWishlist 	: state.jobWishlist, 
+        appliedJoblist 	: state.appliedJoblist
     }
 }
 const mapDispatchToProps = (dispatch) => ({

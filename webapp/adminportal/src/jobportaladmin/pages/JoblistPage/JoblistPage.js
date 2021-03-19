@@ -6,6 +6,7 @@ import  * as mapActionCreator from '../../Common/actions/index';
 
 import Joblist 	  	  		  from '../../blocks/Joblist/Joblist.js';
 import List 		  		  from '../../blocks/List/List.jsx';
+import Loader                 from '../../Common/Loader/Loader.js';
 
 class JoblistPage extends Component{
 	
@@ -43,7 +44,7 @@ class JoblistPage extends Component{
 										</span>
 									</div>
 								</div>
-				            <Joblist jobList={this.props.jobList} />
+				            { this.props.showLoader ? <Loader type = "JoblistLoader" />	: <Joblist jobList={this.props.jobList} /> }
 				        </div>	
 					);
 			}

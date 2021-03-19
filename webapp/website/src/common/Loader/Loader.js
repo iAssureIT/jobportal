@@ -163,7 +163,9 @@ export default class Loader extends Component {
           </div>
         );
       }
-       
-    }
-}
+      else{
+        return (null);
+      }
+  }
+}      
 

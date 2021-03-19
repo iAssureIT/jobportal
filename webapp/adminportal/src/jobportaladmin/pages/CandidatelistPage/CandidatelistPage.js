@@ -4,6 +4,7 @@ import CandidatesList			from '../../blocks/Candidatelist/Candidatelist.js';
 import { connect }            	from 'react-redux';
 import { bindActionCreators } 	from 'redux';
 import  * as mapActionCreator 	from '../../Common/actions/index.js';
+import Loader                 from '../../Common/Loader/Loader.js';
 
 
 
@@ -36,7 +37,7 @@ class CandidatesListPage extends Component{
                     <div className="col-lg-9">
                       <div className="row">
                         <div id="mapwise">
-                          <CandidatesList />
+                          { this.props.showLoader ? <Loader type="candidateJoblistLoader"  /> : <CandidatesList /> }
                         </div>
                       </div>  
                     </div>

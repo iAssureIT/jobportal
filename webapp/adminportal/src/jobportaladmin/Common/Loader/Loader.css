@@ -184,25 +184,27 @@
 }
 
 .loaderContainer{
+  height: 340px;
+  margin-top: 30px;
+  border-radius: 10px;
+  border: 2px solid var(--admin-main-border-color);
+  background-color: var(--admin-form-field-background-color);
+}
+
+.candidateJoblistLoaderWrapper{
+  margin-bottom: 30px;
+  background-color: var(--admin-form-field-background-color);
+}
+
+.joblistLoaderContainer{
   height: 300px;
   margin-top: 30px;
   border-radius: 10px;
-  border: 1px solid var(--main-border-color);
-  background-color: var(--form-field-background-color);
+  border: 1px solid var(--admin-main-border-color);
+  background-color: var(--admin-form-field-background-color);
 }
 
 .joblistLoaderWrapper{
   margin-bottom: 30px;
-}
-
-.candidateLoaderContainer{
-  height: 340px;
-  margin-top: 30px;
-  border-radius: 10px;
-  border: 2px solid var(--main-border-color);
-  background-color: var(--form-field-background-color);
-}
-
-.candidateLoaderWrapper{
-  margin-bottom: 30px;
+  background-color: var(--admin-form-field-background-color);
 }
