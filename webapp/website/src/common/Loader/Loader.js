@@ -14,6 +14,7 @@ export default class Loader extends Component {
         /*for (var i = 0; i < this.props.placeholderCount; i++) {
         tempdata.push(i);
       }*/
+      console.log(this.props.type)
       if (this.props.type === "fullpageloader" ) {
         return(
           <div>

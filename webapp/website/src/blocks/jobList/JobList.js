@@ -221,8 +221,8 @@ removeApplication = (job_id) => {
 
 				                var y = this.props.appliedJoblist && this.props.appliedJoblist.length > 0 ?
 								this.props.appliedJoblist.filter((applieditem) => applieditem.job_id == elem._id) : [];
-				                console.log(this.props.appliedJoblist)
-				                console.log(elem._id)
+				                //console.log(this.props.appliedJoblist)
+				                //console.log(elem._id)
 				                if (y && y.length > 0) {
 				                  var appliedClass = '';
 				                  var appliedtooltipMsg = 'Remove from applied job';

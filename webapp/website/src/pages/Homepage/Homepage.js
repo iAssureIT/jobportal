@@ -254,7 +254,7 @@ class HomePage extends Component {
     mapAction.jobCount(selector);
   }
   render() {
-    //console.log(this.props.viewMode) 
+    console.log(this.props.viewMode) 
     return (
       <div className="ViewBodyWrapper container-fluid">
 
@@ -307,14 +307,18 @@ class HomePage extends Component {
 
               <div id="functionwise" className= {this.props.match.params.industryName == "all" && (this.props.viewMode == "functionalView" || this.props.viewMode == "listView")  ? "tab-pane fade in active" :
                              this.props.match.params.industryName != "all" && this.props.match.params.functionalArea_id == "all" && (this.props.viewMode == "functionalView" || this.props.viewMode == "listView") ? "tab-pane fade in active"  : "tab-pane fade in" } >
-               
-                { this.props.showLoader ? <Loader type="placeholderloader"  /> : 
-                <FunctionalComponent pathname={this.props.match}/> }
+                
+                { this.props.showLoader ?  
+                    this.props.viewMode == "functionalView" ? <Loader type="placeholderloader"  />  : 
+                    this.props.viewMode == "listView" ? <Loader type="joblistloader"  />  : <FunctionalComponent pathname={this.props.match}/>
+                  :  <FunctionalComponent pathname={this.props.match}/> }
               </div>
 
               <div id="industrywise" className={this.props.match.params.industryName != "all" && (this.props.viewMode == "industrialView" || this.props.viewMode == "listView") ? "tab-pane fade in active" : "tab-pane fade" }>
-              { this.props.showLoader ? <Loader type="placeholderloader"  /> :
-                <IndustrialComponent pathname={this.props.match}/> }
+              { this.props.showLoader ? 
+                this.props.viewMode == "industrialView" ? <Loader type="placeholderloader"  />  : 
+                this.props.viewMode == "listView" ? <Loader type="joblistloader"  />  : <IndustrialComponent pathname={this.props.match}/>
+                : <IndustrialComponent pathname={this.props.match}/> }
               </div>
             </div>
           </div>

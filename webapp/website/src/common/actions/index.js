@@ -141,10 +141,11 @@ export function filterIndustrialData(selector) {
 }
 export function filterJobList(selector) {
   	return dispatch =>{
+  		dispatch(showLoader(true));
   		dispatch(setFilterSelector(selector));
 	  	return axios.post("/api/jobs/list",selector)
 	    .then((response)=>{
-	     
+	     	dispatch(showLoader(false));
 	        dispatch(getJobList(response.data));
 	    })
 	    .catch((error)=>{

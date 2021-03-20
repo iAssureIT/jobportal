@@ -47,20 +47,7 @@ class AppliedCandidatelist extends Component{
 	}
 	
 	
-	componentDidMount(){
-		console.log(this.props);
-		var {mapAction}  = this.props;
-		mapAction.filterCandidatesApplied(this.state.appliedCandidateSelector)	
-		
-		// get single job information by job_id
-		Axios.get("/api/jobs/get/one/"+this.props.job_id)
-		.then(response=>{
-			this.setState({jobInfo : response.data})
-		})
-		.catch(err=>{
-
-		})
-	}
+	
 	
 	getData(){
 		var tableData = this.props.appliedCandidateList.map((a, i)=>{
@@ -96,7 +83,7 @@ class AppliedCandidatelist extends Component{
     }
 	
 	render(){
-		console.log(this.state.jobInfo)
+		console.log(this.props.jobInfo);
 		return(	
 				<div className="candidateListWrapperMain">
 					<div className="col-lg-12 candidateListWrapper">
@@ -106,22 +93,22 @@ class AppliedCandidatelist extends Component{
 									<div className="col-lg-12">
 										<div className="col-lg-11 jobDescBlock">
 											<div className="joblistDesignation">
-												{this.state.jobInfo.jobBasicInfo ? this.state.jobInfo.jobBasicInfo.jobTitle : null}
+												{this.props.jobInfo ? this.props.jobInfo.jobBasicInfo.jobTitle : null}
 											</div>
 											<div className="joblistCompanyName">
-												{this.state.jobInfo.company_id ? this.state.jobInfo.company_id.companyName : null}
+												{this.props.jobInfo ? this.props.jobInfo.company_id.companyName : null}
 											</div>
 											<div> 
-												<i className="fa fa-calendar joblistExperience"></i> &nbsp; Exp: {this.state.jobInfo.eligibility ? this.state.jobInfo.eligibility.minExperience : null}
+												<i className="fa fa-calendar joblistExperience"></i> &nbsp; Exp: {this.props.jobInfo ? this.props.jobInfo.eligibility.minExperience : null}
 											</div>
 											<div> 
-												<i className="fa fa-rupee joblistCtcSal"></i> &nbsp; <i className="fa fa-inr"></i> {this.state.jobInfo.ctcOffered ? this.state.jobInfo.ctcOffered.minSalary : null} {this.state.jobInfo.ctcOffered ? this.state.jobInfo.ctcOffered.minSalPeriod : null} - <i className="fa fa-inr"></i> {this.state.jobInfo.ctcOffered ? this.state.jobInfo.ctcOffered.maxSalary : null} {this.state.jobInfo.ctcOffered ? this.state.jobInfo.ctcOffered.maxSalPeriod : null}
+												<i className="fa fa-rupee joblistCtcSal"></i> &nbsp; <i className="fa fa-inr"></i> {this.props.jobInfo ? this.props.jobInfo.ctcOffered.minSalary : null} {this.props.jobInfo ? this.props.jobInfo.ctcOffered.minSalPeriod : null} - <i className="fa fa-inr"></i> {this.props.jobInfo ? this.props.jobInfo.ctcOffered.maxSalary : null} {this.props.jobInfo ? this.props.jobInfo.ctcOffered.maxSalPeriod : null}
 											</div>
 											<div>
-												<i className="fa fa-map-marker joblistLocation"></i> &nbsp; {this.state.jobInfo.location ? this.state.jobInfo.location.address : null}
+												<i className="fa fa-map-marker joblistLocation"></i> &nbsp; {this.props.jobInfo ? this.props.jobInfo.location.address + " "+ this.props.jobInfo.location.district + ", "+this.props.jobInfo.location.state+", "+this.props.jobInfo.location.country : null} 
 											</div>
 											<div>
-												<i className="fa fa-users joblistNumPositions"></i> &nbsp; No. of positions : {this.state.jobInfo.jobBasicInfo ? this.state.jobInfo.jobBasicInfo.positions : null}
+												<i className="fa fa-users joblistNumPositions"></i> &nbsp; No. of positions : {this.props.jobInfo ? this.props.jobInfo.jobBasicInfo.positions : null}
 											</div>	
 										</div>
 									</div>	
@@ -160,7 +147,7 @@ class AppliedCandidatelist extends Component{
 									<div className="container-fluid  candidateList col-lg-12">
 										{
 
-											this.props.appliedCandidateList
+											this.props.appliedCandidateList.length>0
 											? 	
 											this.props.appliedCandidateList.map((elem,index)=>{
 												var primarySkills   = [];
@@ -333,7 +320,7 @@ class AppliedCandidatelist extends Component{
 													);
 												})
 										:
-											null
+											<h3 style={{margin:"100px"}}>No Candidates Found</h3>
 										}	
 									</div>
 									:

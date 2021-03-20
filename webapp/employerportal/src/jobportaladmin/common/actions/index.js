@@ -90,7 +90,7 @@ export function filterCandidatesApplied(appliedCandidateSelector) {
       dispatch(setAppliedCandidateFilterSelector(appliedCandidateSelector));
       return axios.post("/api/applyJob/get/candidatesAppliedToJob",appliedCandidateSelector)
       .then((response)=>{
-        dispatch(showLoader(false));
+       dispatch(showLoader(false));
           dispatch(getAppliedCandidateList(response.data));
       })
       .catch((error)=>{

@@ -94,7 +94,7 @@ class CandidatesList extends Component{
 			<div className="container-fluid  candidateList col-lg-12">
 										{
 
-											this.props.candidateList
+											this.props.candidateList.length > 0
 											? 	
 											this.props.candidateList.map((elem,index)=>{
 												console.log(elem)
@@ -268,7 +268,7 @@ class CandidatesList extends Component{
 													);
 												})
 										:
-											null
+											<h3 style={{margin:"100px"}}>No Candidates Found</h3>
 										}	
 									</div>
 
@@ -280,7 +280,7 @@ class CandidatesList extends Component{
 
 const mapStateToProps = (state)=>{
     return {
-        candidateSelector   		: state.candidateSelector,
+        candidateSelector   : state.candidateSelector,
         candidateList 		: state.candidateList 
     }
 }
