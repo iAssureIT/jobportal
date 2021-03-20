@@ -36,7 +36,8 @@ class SignUp extends Component {
       companyState          : "",
       companyCountry        : "",
       countryCode           : "IN",
-      branchCode           : "",
+      branch                : "",
+      branchCode            : "",
       formerrors            : {
         firstNameV          : "",
         lastNameV           : "",
@@ -111,7 +112,7 @@ class SignUp extends Component {
   }
   validateForm=()=>{
     var status = true;
-    var regName = /^[a-zA-Z]+$/;
+    var regName = /^[a-zA-Z]/;
     var employer =this.state.companyName;
     var firstName=this.state.firstName;
     var lastName=this.state.lastName;
@@ -120,22 +121,50 @@ class SignUp extends Component {
     var illegalChars = /[\(\)\<\>\,\;\:\\\"\[\]]/;
     var phoneno = /^\+?([0-9]{2})\)?[-. ]?([0-9]{5})[-. ]?([0-9]{5})$/;
 
-
     if(this.state.companyName<=0)  {
       document.getElementById("employerError").innerHTML=  
       "Please enter valid employer name";  
       status=false; 
     }
-  
+    
     else if(!regName.test(employer)){
       document.getElementById("employerError").innerHTML=  
       "Please enter valid employer name";  
       status=false; 
     }
     else{
-      
+      document.getElementById("employerError").innerHTML="";
       status = true;
     }
+
+    if (this.state.branch == "") {
+      document.getElementById("branchError").innerHTML=  
+      "Please enter valid location";  
+      status=false; 
+    }else{
+      document.getElementById("branchError").innerHTML=  "";
+      status = true;
+    }
+
+    
+    if (this.state.companyState == "") {
+      document.getElementById("stateError").innerHTML=  
+      "Please select State";  
+      status=false; 
+    }else{
+      document.getElementById("stateError").innerHTML=  "";
+      status = true;
+    }
+
+    if (this.state.companyCountry == "") {
+      document.getElementById("companyCountryError").innerHTML=  
+      "Please enter country";  
+      status=false; 
+    }else{
+      document.getElementById("companyCountryError").innerHTML=  "";
+      status = true;
+    }
+
 
     
     if(this.state.firstName<=0)  {
@@ -150,7 +179,7 @@ class SignUp extends Component {
       status=false; 
     }
     else{
-      
+      document.getElementById("firstNameError").innerHTML= "";
       status = true;
     }
 
@@ -243,7 +272,7 @@ class SignUp extends Component {
   usersignup(event) {
     event.preventDefault();
     var status =  this.validateForm();
-   
+    console.log('auth sign=======',this.state) 
      if(status == true){
 
       var auth = {
@@ -256,23 +285,59 @@ class SignUp extends Component {
         company_id  : this.state.company_id != "" ? this.state.company_id : null,
         companyID   : this.state.companyID != "" ? this.state.companyID : null,
         companyName : this.state.companyName,
-        branchCode  : this.state.branchCode,
+        branchCode  : this.state.branchCode == "" ? 0 : this.state.branchCode,
         role        : 'employer',
         status      : 'unverified',        
-
+        city        : this.state.branch,
+        stateName   : this.state.StristateNameng,
+        stateCode   : this.state.companyState,
+        country     : this.state.companyCountry,
+        countryCode : this.state.countryCode,
       }
 
       
+      
     console.log('auth sign=======',auth) 
 
-      /*axios.post('/api/auth/post/signup/user/otp', auth)
+      axios.post('/api/auth/post/signup/user/otp', auth)
         .then((response) => {
-          console.log("signup res===",response.data)
           if(response.data.message == 'USER_CREATED'){
             swal('Great, Information submitted successfully and OTP is sent to your registered Email.');
             localStorage.setItem('previousUrl' ,'signup');
+            if(this.state.branchCode == ""){
+                
+            }else{
+              var contactData = {
+              'entityID'              : this.state.company_id,
+              'contactDetails'        : {
+                "branchCode" : this.state.branchCode,
+                "branchName" : this.state.branch,
+                "locationType" : this.state.locationType,
+                "firstName" : this.state.firstName,
+                "lastName" : this.state.lastName,
+                "phone" : (this.state.mobileNumber).replace("-", ""),
+                "email" : this.state.emailAddress,
+                "createUser" : true,
+                "role" : "employer",
+                "userID" : response.data.ID
+              }
+            }
+            axios.patch('/api/entitymaster/patch/addContact' ,contactData)
+            .then((response) => {
+                if(response.data.duplicated)
+                {
+                  swal({
+                    title : "Contact already exists.",
+                  });
 
-            /*var sendData = {
+                }
+            })
+            .catch((error) => {
+            
+            })
+            }
+            
+            var sendData = {
               "event"     : "Event1", //Event Name
               "toUser_id"  : response.data.ID, //To user_id(ref:users)
               "toUserRole"  : "employer",
@@ -302,7 +367,7 @@ class SignUp extends Component {
               .then((notificationres) => {})
               .catch((error) => { console.log('notification error: ', error) })  
             
-
+            
             this.props.history.push("/confirm-otp/" + response.data.ID);
           }else{
             swal(response.data.message);
@@ -310,7 +375,7 @@ class SignUp extends Component {
         })
         .catch((error) => {
           
-        }) */
+        }) 
     }
    
   }
@@ -433,18 +498,19 @@ class SignUp extends Component {
     handleChangeBranch(event){
       var value = event.currentTarget.value;
       var name  = event.currentTarget.name;
-      if (document.querySelector('#branchCode option[value="' + value + '"]')) {
-        console.log(document.querySelector('#branchCode option[value="' + value + '"]').getAttribute("data-country"))
+      if (document.querySelector('#branch option[value="' + value + '"]')) {
+        console.log(document.querySelector('#branch option[value="' + value + '"]').getAttribute("data-country"))
       
-        var locationname = document.querySelector('#branchCode option[value="' + value + '"]').getAttribute("branch_location");
-        var locationId = document.querySelector('#branchCode option[value="' + value + '"]').getAttribute("branch_location_id");
-        var locationType = document.querySelector('#branchCode option[value="' + value + '"]').getAttribute("data_locationType");
+        var locationname = document.querySelector('#branch option[value="' + value + '"]').getAttribute("branch_location");
+        var locationId = document.querySelector('#branch option[value="' + value + '"]').getAttribute("branch_location_id");
+        var locationType = document.querySelector('#branch option[value="' + value + '"]').getAttribute("data_locationType");
         
         this.setState({
           [name]      : value,
-          "companyState" : document.querySelector('#branchCode option[value="' + value + '"]').getAttribute("data-statecode"),
-          "companyCountry" : document.querySelector('#branchCode option[value="' + value + '"]').getAttribute("data-country"),
-          "countryCode" : document.querySelector('#branchCode option[value="' + value + '"]').getAttribute("data-countrycode"),
+          "branchCode" : document.querySelector('#branch option[value="' + value + '"]').getAttribute("data-branchcode"),
+          "companyState" : document.querySelector('#branch option[value="' + value + '"]').getAttribute("data-statecode"),
+          "companyCountry" : document.querySelector('#branch option[value="' + value + '"]').getAttribute("data-country"),
+          "countryCode" : document.querySelector('#branch option[value="' + value + '"]').getAttribute("data-countrycode"),
           "workLocation" : locationname,
           "workLocationId" :locationId,
           "locationType" :locationType
@@ -452,6 +518,14 @@ class SignUp extends Component {
       }else{
         this.setState({ [name]      : value })
       }
+    }
+    handleChangeState(event){
+      var value = event.currentTarget.value;
+      var name  = event.currentTarget.name;
+        this.setState({
+          [name]      : value,
+          "stateName" : event.currentTarget.getAttribute("state")
+        });
     }
   render() {
     return (
@@ -483,26 +557,26 @@ class SignUp extends Component {
               </div>  
               <div className="row">
               <div className="col-lg-4 form-group">
-                {/*<label htmlFor="branchCode" className="nameTitleForm">
+                {/*<label htmlFor="branch" className="nameTitleForm">
                    City
                   <sup className="nameTitleFormStar">*</sup>
                 </label>*/}
                 <div className="input-group ">
                   <span className="input-group-addon registrationInputIcon"><i className="fa fa-map-marker"></i></span> 
-                  <input type="text" list="branchCode" className="form-control registrationInputBox" value={this.state.branchCode} ref="branchCode" name="branchCode"
-                   id="selectCompanyCity" maxLength="100" value={this.state.branchCode}
+                  <input type="text" list="branch" className="form-control registrationInputBox" value={this.state.branch} ref="branch" name="branch"
+                   id="selectCompanyCity" maxLength="100" value={this.state.branch}
                     onChange={this.handleChangeBranch.bind(this)} />
-                    <datalist name="branchCode" id="branchCode" className="branchCode" >
+                    <datalist name="branch" id="branch" className="branch" >
                         { this.state.branchArray.map((elem, key) =>
                             <option key={key} branch_location_id={elem._id} branch_location={(elem.addressLine2 ? elem.addressLine2 : "") +" "+(elem.addressLine1)} 
                             value={((elem.locationType).match(/\b(\w)/g)).join('')+ "-"+ elem.area + elem.city + ","+ elem.stateCode+ "-"+ elem.countryCode} 
-                            data-branchCode ={elem.branchCode} data_locationType={elem.locationType}  
+                            data-branchcode ={elem.branchCode} data_locationType={elem.locationType}  
                             data-statecode={elem.stateCode} data-state={elem.state} 
                             data-country={elem.country} data-countrycode={elem.countryCode} />
                         )}
                     </datalist>                  
                 </div> 
-                <span id="branchCodeError" className="errorMsg"></span>
+                <span id="branchError" className="errorMsg"></span>
               </div>
 
               <div className="col-lg-4">
@@ -511,13 +585,13 @@ class SignUp extends Component {
                   <span className="input-group-addon registrationInputIcon"><i className="fa fa-map-marker"></i></span>  
                   
                   <select id="states" className="form-control registrationInputBox selectOption"
-                    ref="companyState" value={this.state.companyState} name="companyState" onChange={this.handleChangeState} >
+                    ref="companyState" value={this.state.companyState} name="companyState" onChange={this.handleChangeState.bind(this)} >
                     <option selected={true}>-- Select --</option>
                     {
                       this.state.stateArray && this.state.stateArray.length > 0 ?
                         this.state.stateArray.map((stateData, index) => {
                           return (
-                            <option key={index} statecode={stateData.stateCode} value={stateData.stateCode}>{this.camelCase(stateData.stateName)}</option>
+                            <option key={index} statecode={stateData.stateCode} state={this.camelCase(stateData.stateName)} value={stateData.stateCode}>{this.camelCase(stateData.stateName)}</option>
                           );
                         }
                         ) : ''
