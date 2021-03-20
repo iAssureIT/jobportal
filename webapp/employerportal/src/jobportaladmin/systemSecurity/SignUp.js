@@ -433,15 +433,18 @@ class SignUp extends Component {
     handleChangeBranch(event){
       var value = event.currentTarget.value;
       var name  = event.currentTarget.name;
-      console.log(document.querySelector('#branchCode option[value="' + value + '"]'))
       if (document.querySelector('#branchCode option[value="' + value + '"]')) {
-
+        console.log(document.querySelector('#branchCode option[value="' + value + '"]').getAttribute("data-country"))
+      
         var locationname = document.querySelector('#branchCode option[value="' + value + '"]').getAttribute("branch_location");
         var locationId = document.querySelector('#branchCode option[value="' + value + '"]').getAttribute("branch_location_id");
         var locationType = document.querySelector('#branchCode option[value="' + value + '"]').getAttribute("data_locationType");
         
         this.setState({
           [name]      : value,
+          "companyState" : document.querySelector('#branchCode option[value="' + value + '"]').getAttribute("data-statecode"),
+          "companyCountry" : document.querySelector('#branchCode option[value="' + value + '"]').getAttribute("data-country"),
+          "countryCode" : document.querySelector('#branchCode option[value="' + value + '"]').getAttribute("data-countrycode"),
           "workLocation" : locationname,
           "workLocationId" :locationId,
           "locationType" :locationType
@@ -491,7 +494,11 @@ class SignUp extends Component {
                     onChange={this.handleChangeBranch.bind(this)} />
                     <datalist name="branchCode" id="branchCode" className="branchCode" >
                         { this.state.branchArray.map((elem, key) =>
-                            <option key={key} branch_location_id={elem._id} branch_location={(elem.addressLine2 ? elem.addressLine2 : "") +" "+(elem.addressLine1)} value={((elem.locationType).match(/\b(\w)/g)).join('')+ "-"+ elem.area + elem.city + ","+ elem.stateCode+ "-"+ elem.countryCode} data-branchCode ={elem.branchCode} data_locationType={elem.locationType} />
+                            <option key={key} branch_location_id={elem._id} branch_location={(elem.addressLine2 ? elem.addressLine2 : "") +" "+(elem.addressLine1)} 
+                            value={((elem.locationType).match(/\b(\w)/g)).join('')+ "-"+ elem.area + elem.city + ","+ elem.stateCode+ "-"+ elem.countryCode} 
+                            data-branchCode ={elem.branchCode} data_locationType={elem.locationType}  
+                            data-statecode={elem.stateCode} data-state={elem.state} 
+                            data-country={elem.country} data-countrycode={elem.countryCode} />
                         )}
                     </datalist>                  
                 </div> 
@@ -499,10 +506,7 @@ class SignUp extends Component {
               </div>
 
               <div className="col-lg-4">
-                {/*<label htmlFor="companyState" className="nameTitleForm">
-                   State
-                  <sup className="nameTitleFormStar">*</sup>
-                </label>*/}
+                
                 <div className="input-group ">
                   <span className="input-group-addon registrationInputIcon"><i className="fa fa-map-marker"></i></span>  
                   
@@ -513,7 +517,7 @@ class SignUp extends Component {
                       this.state.stateArray && this.state.stateArray.length > 0 ?
                         this.state.stateArray.map((stateData, index) => {
                           return (
-                            <option key={index} statecode={stateData.stateCode}>{this.camelCase(stateData.stateName)}</option>
+                            <option key={index} statecode={stateData.stateCode} value={stateData.stateCode}>{this.camelCase(stateData.stateName)}</option>
                           );
                         }
                         ) : ''

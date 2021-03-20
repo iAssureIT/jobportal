@@ -193,24 +193,37 @@ class BasicInfo extends Component {
         }
       }
     });
-    this.getCountryConfigDetails()
-    axios.get("/api/entitymaster/get/"+this.props.entity)
-      .then((response) => {
-        this.setState({
-          entityList   : response.data,
-          entityID     : response.data[0]._id
-        },()=>{
-          console.log("entityID",this.state.entityID,this.state.entityList)
-         {/* if (this.state.entityList.length > 0 && this.state.entityList[0].entityType === "appCompany")
-          {
-           this.props.history.push('/org-profile/' + this.state.entityID);
-           this.edit();
 
-          }*/}
+    /*axios.get('/api/entitymaster/getEntity/' + company_id)
+        .then((response) => {
+          var industry = this.state.industryArray.filter((industry)=>{
+            return industry._id  == response.data.industry_id
+          })
+          //console.log("response", industry)
+          this.setState({
+            "entityID": this.props.match.params.entityID,
+            "entityType": response.data.entityType,
+            "companyName": response.data.companyName,
+            "groupName": response.data.groupName,
+            "website": response.data.website,
+            "companyPhone": response.data.companyPhone,
+            "companyEmail": response.data.companyEmail,
+            "CIN": response.data.CIN,
+            "COI": response.data.COI,
+            "TAN": response.data.TAN,
+            "companyLogo": response.data.companyLogo,
+            "country": response.data.country,
+            "countryCode": response.data.countryCode,
+            "statutoryDetails": response.data.statutoryDetails,
+            "value": industry[0] ? industry[0].label : "",
+            suggestions: industry[0] ? this.getSuggestions(industry[0].label) : [] ,
+            "userID": response.data.ID,
+            "createdBy": localStorage.getItem("user_ID")
+          })
         })
-       })
-      .catch((error) => {
-      })
+        .catch((error) => {
+        })
+        this.getCountryConfigDetails()*/
       axios.get('/api/industrymaster/get/list')
       .then((response) => {
         

@@ -86,9 +86,11 @@ export function applicantsCountList(selector) {
 }
 export function filterCandidatesApplied(appliedCandidateSelector) {
     return dispatch =>{ 
+      dispatch(showLoader(true));
       dispatch(setAppliedCandidateFilterSelector(appliedCandidateSelector));
       return axios.post("/api/applyJob/get/candidatesAppliedToJob",appliedCandidateSelector)
       .then((response)=>{
+        dispatch(showLoader(false));
           dispatch(getAppliedCandidateList(response.data));
       })
       .catch((error)=>{
@@ -99,9 +101,11 @@ export function filterCandidatesApplied(appliedCandidateSelector) {
 export function filterCandidates(candidateSelector) {
   console.log("candidateSelector",candidateSelector)
     return dispatch =>{ 
+      dispatch(showLoader(true));
       dispatch(setCandidateFilterSelector(candidateSelector));
       return axios.post("/api/candidatemaster/get/list",candidateSelector)
       .then((response)=>{
+          dispatch(showLoader(false));
           dispatch(getCandidateList(response.data));
       })
       .catch((error)=>{

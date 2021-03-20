@@ -550,7 +550,7 @@ class ContactDetails extends Component {
 				'entityID' 						: entityID,
 				'contactDetails' 				: {
 					'branchCode'        		: this.state.branchCode,
-					'branchName'        		: this.state.workLocation,
+					'branchName'        		: this.state.workLocation, 
 					'locationType'				: this.state.locationType,
 					'firstName'               	: this.state.firstName,
 					'middleName'               	: this.state.middleName,
