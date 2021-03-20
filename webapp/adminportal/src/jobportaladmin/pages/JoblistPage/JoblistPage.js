@@ -55,7 +55,8 @@ class JoblistPage extends Component{
 												    	
 
 												    	user_id     : state.userDetails.user_id, 
-                                              			selector    : state.selector, 
+                                              			selector    : state.selector,
+                                              			showLoader 	: state.showLoader 
 										    		}
 										}
 	

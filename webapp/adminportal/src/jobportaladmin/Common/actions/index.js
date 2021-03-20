@@ -95,10 +95,11 @@ export function getAccessToFacility(moduleName, facilityName) {
 
 export function filterJobList(selector) {
     return dispatch =>{
+      dispatch(showLoader(true));
       dispatch(setFilterSelector(selector));
       return axios.post("/api/jobs/list",selector)
       .then((response)=>{
-       
+          dispatch(showLoader(false));
           dispatch(getJobList(response.data));
       })
       .catch((error)=>{
@@ -119,10 +120,12 @@ export function applicantsCountList() {
     }  
 }
 export function filterCandidatesApplied(appliedCandidateSelector) {
-    return dispatch =>{ 
+    return dispatch =>{
+      dispatch(showLoader(true)); 
       dispatch(setAppliedCandidateFilterSelector(appliedCandidateSelector));
       return axios.post("/api/applyJob/get/candidatesAppliedToJob",appliedCandidateSelector)
       .then((response)=>{
+          dispatch(showLoader(false));
           dispatch(getAppliedCandidateList(response.data));
       })
       .catch((error)=>{
@@ -131,10 +134,12 @@ export function filterCandidatesApplied(appliedCandidateSelector) {
     }  
 }
 export function filterCandidates(candidateSelector) {
-    return dispatch =>{ 
+    return dispatch =>{
+      dispatch(showLoader(true)); 
       dispatch(setCandidateFilterSelector(candidateSelector));
       return axios.post("/api/candidatemaster/get/list",candidateSelector)
       .then((response)=>{
+          dispatch(showLoader(false));
           dispatch(getCandidateList(response.data));
       })
       .catch((error)=>{
