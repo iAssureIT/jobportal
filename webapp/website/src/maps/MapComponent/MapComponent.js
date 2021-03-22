@@ -62,7 +62,7 @@ const MapView = (pathname) => {
                     const TamilNadu = React.lazy(() => import('../TamilNadu/TamilNadu.js'))
                                 return <TamilNadu/> ;  
 
-            case "/country/"+pathname.pathname.pathname.params.countryCode+"/state/AP/city/"+pathname.pathname.pathname.params.district+"/industry/"+pathname.pathname.pathname.params.industryName+"/"+pathname.pathname.pathname.params.industry_id+"/function/"+pathname.pathname.pathname.params.functionalArea+"/"+pathname.pathname.pathname.params.functionalArea_id+"/subfunction/"+pathname.pathname.pathname.params.subfunctionalArea+"/"+pathname.pathname.pathname.params.subfunctionalArea_id :  
+            case "/country/"+pathname.pathname.pathname.params.countryCode+"/state/AD/city/"+pathname.pathname.pathname.params.district+"/industry/"+pathname.pathname.pathname.params.industryName+"/"+pathname.pathname.pathname.params.industry_id+"/function/"+pathname.pathname.pathname.params.functionalArea+"/"+pathname.pathname.pathname.params.functionalArea_id+"/subfunction/"+pathname.pathname.pathname.params.subfunctionalArea+"/"+pathname.pathname.pathname.params.subfunctionalArea_id :  
                     const AndhraPradesh = React.lazy(() => import('../AndhraPradesh/AndhraPradesh.js'))
                                 return <AndhraPradesh/> ; 
 
