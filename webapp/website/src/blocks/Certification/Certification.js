@@ -443,11 +443,9 @@ class Certification extends Component{
 	}
 	handleSubmit(event){
 		event.preventDefault();
-		var status =  this.validateForm();
-
-		if (status==true) {
+	
 		 this.props.history.push("/experience/"+this.state.candidate_id);
-		}
+		
 	}
 
 	//========== User Define Function End ==================
@@ -472,6 +470,15 @@ class Certification extends Component{
 				status=false; 
 			}else{
 				document.getElementById("ratingError").innerHTML=  
+				""; 
+				status = true;
+			}
+			if(this.state.experience.length<=0){
+				document.getElementById("experienceError").innerHTML=  
+				"Please enter your Experience";  
+				status=false; 
+			}else{
+				document.getElementById("experienceError").innerHTML=  
 				""; 
 				status = true;
 			}
@@ -503,15 +510,7 @@ class Certification extends Component{
 				""; 
 				status = true;
 			}
-			if(this.state.experience.length<=0){
-				document.getElementById("experienceError").innerHTML=  
-				"Please enter your Experience";  
-				status=false; 
-			}else{
-				document.getElementById("experienceError").innerHTML=  
-				""; 
-				status = true;
-			}
+			
 
 	 	}
 

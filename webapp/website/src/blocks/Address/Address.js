@@ -287,11 +287,8 @@ class Address extends Component{
 	
 	handleSubmit(event){
 		event.preventDefault();
-		var status =  this.validateForm();
-		console.log(status);
-			if(status==true){
-    		this.props.history.push("/academics/"+this.state.candidate_id);
-    	}
+    	this.props.history.push("/academics/"+this.state.candidate_id);
+  
 	}
 	
 	camelCase(str) {

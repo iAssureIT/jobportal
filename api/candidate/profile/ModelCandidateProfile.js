@@ -10,11 +10,13 @@ const candidateSchema = mongoose.Schema({
 		dob 			: Date,
 		gender			: String,
 		maritalStatus	: String,
-		anniversaryDate	: Date,
+		// anniversaryDate	: Date,
 		nationality 	: String,
 		profilePicture  : String,
 		resume 			: String,
-		executiveSummary: String
+		executiveSummary: String,
+		passport        : String,
+		visa        	: String,
 	},
 	languagesKnown		: [{
 						language_id : { type: mongoose.Schema.Types.ObjectId, ref: 'languagemasters' }
@@ -81,7 +83,7 @@ const candidateSchema = mongoose.Schema({
 		department		: String,
 		fromDate 		: String, 
 		toDate  		: String,
-		currentlyWorkingHere 		: Boolean,
+		currentlyWorkingHere 		: String,
 		relevantExperience 			: Number,
 		responsibilities			: String,
 		reportingManager			: String,

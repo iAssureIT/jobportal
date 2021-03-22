@@ -77,7 +77,7 @@
 	font-family: 'Montserrat-Medium';
 }
 .showFeild2{
-	margin-top:14px;
+	margin-top:8px;
 	font-size:12px;
 	font-weight:100!important;
 	letter-spacing: 1px;
@@ -89,6 +89,9 @@
 	width:100%;
 	border-radius:20px;
 	margin-top:3px;
+}
+.genderFeildWrapper2{
+    margin-top:6px;
 }
 .genderFeild{
 	height:21px;
@@ -640,7 +643,7 @@ user agent stylesheet:focus {
 /* Create a custom checkbox */
 .checkmark {
   position: absolute;
-  top: 20px;
+  top: 7px;
   left: 0;
   height: 20px;
   width: 20px;
@@ -730,7 +733,7 @@ user agent stylesheet:focus {
 /*********************************************Properties Of Experience***********************************************/
 
 .experienceBoxWidth .input-group .form-control {
-    width: 90%;
+    width: 91%;
 }
 /*********************************************Properties Of Experience***********************************************/
 

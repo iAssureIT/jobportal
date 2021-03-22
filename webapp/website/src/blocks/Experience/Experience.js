@@ -36,7 +36,7 @@ class Experience extends Component{
 			currentCTC                    : "",
 			fromDate	                  : "",	
 			toDate                        : "",
-			currentlyWorkingHere 	      : false,	
+			currentlyWorkingHere 	      : "",	
 			companyState                  : "",
 			responsibilities              : "",
 			reportingManager              : "",
@@ -152,8 +152,8 @@ class Experience extends Component{
 			 		responsibilities            : editData[0].workExperience[0].responsibilities,
 			 		reportingManager            : editData[0].workExperience[0].reportingManager,
 			 		reportingManagerDesignation : editData[0].workExperience[0].reportingManagerDegn,
-			 		fromDate                    : Moment(editData[0].workExperience[0].fromDate).format("YYYY-MM-DD"),
-			 		toDate                      : Moment(editData[0].workExperience[0].toDate).format("YYYY-MM-DD"),
+			 		fromDate                    : Moment(editData[0].workExperience[0].fromDate).format("YYYY-MM"),
+			 		toDate                      : Moment(editData[0].workExperience[0].toDate).format("YYYY-MM"),
 			 		currentlyWorkingHere 		: editData[0].workExperience[0].currentlyWorkingHere,	
 			 		currentCTC                  : editData[0].currentCTC,
 			 		expectedCTC                 : editData[0].expectedCTC,
@@ -332,7 +332,7 @@ class Experience extends Component{
 										expectedCTC	                  : "",	
 										companyState	              : "",	
 										toDate                        : "",
-										currentlyWorkingHere 		  : false,	
+										currentlyWorkingHere 		  : "",	
 										responsibilities              : "",
 										reportingManager              : "",
 										reportingManagerDesignation   : "",
@@ -407,10 +407,7 @@ class Experience extends Component{
 		}
 	handelSubmit(event){
 		event.preventDefault();
-		var status =  this.validateForm();
-		if(status==true){
-			this.props.history.push("/profile/"+this.state.candidate_id);
-		}
+		this.props.history.push("/profile/"+this.state.candidate_id);
 			
 	}
 	handleChangeState(event) {
@@ -424,12 +421,18 @@ class Experience extends Component{
 	}
 	handleChangeCheckbox(event){
 		event.preventDefault();
-		this.setState({ currentlyWorkingHere :  !this.state.currentlyWorkingHere })
-		if (this.state.currentlyWorkingHere) {
+		// this.setState({ currentlyWorkingHere : " !this.state.currentlyWorkingHere" })
+		var id  = event.currentTarget.id;
+		var currentlyWorkingHere = this.state.currentlyWorkingHere
+		if (id=="Yes") {
 			console.log(Moment(new Date()).format("YYYY-MM"))
-			this.setState({ toDate : Moment(new Date()).format("YYYY-MM") })
+			this.setState({ 
+				toDate : Moment(new Date()).format("YYYY-MM"),
+				currentlyWorkingHere: "Yes"
+				})
+			
 		}else{
-			this.setState({ toDate : "" })
+			this.setState({ toDate : "" ,currentlyWorkingHere: "No"})
 		}
 	}
 	//========== User Define Function End ==================
@@ -788,17 +791,42 @@ class Experience extends Component{
 							
 						</div>
 						<div className="row formWrapper">
-							<div className="col-lg-3 currentWoking">
-								<div className="customCheckBox">
+							<div className="col-lg-3 ">
+							<label htmlFor="currentlyWorkingHere" className="nameTitleForm ">
+									Currently Working here
+								</label>
+								{/*<div className="customCheckBox">
 									<label  className="">
 										<input type="checkbox" name="currentlyWorkingHere" id="currentlyWorkingHere"
 										value={this.state.currentlyWorkingHere}  onChange={ this.handleChangeCheckbox.bind(this) } checked={this.state.currentlyWorkingHere} />
 										<span className="checkmark"></span>
 									</label>
+								</div>*/}
+								<div className="input-group genderFeildWrapper genderFeildWrapper2">
+									<div className={this.state.currentlyWorkingHere==="Yes"
+														? 
+														"genderFeild col-lg-6 genderFeildActive" 
+														: 
+														"genderFeild col-lg-6" }  
+											 id="Yes" name="currentlyWorkingHere" 
+											 onClick={this.handleChangeCheckbox.bind(this)}>
+
+											<div className="row" >
+												Yes
+											</div>
+									</div>
+									<div className={this.state.currentlyWorkingHere==="No"
+									                ? "genderFeild col-lg-6 genderFeildActive" 
+									                : "genderFeild col-lg-6" } 
+									     id="No" name="currentlyWorkingHere" 
+									     onClick={this.handleChangeCheckbox.bind(this)}>
+
+										<div className="row">
+											No
+										</div>
+									</div>
 								</div>
-								<label htmlFor="lastDeartment" className="nameTitleForm currentWokingLabel">
-									Currently Working here
-								</label>
+								
 							</div>
 							<div className="col-lg-3 experienceBoxWidth">
 								<label htmlFor="fromDate" className="nameTitleForm">
@@ -835,7 +863,9 @@ class Experience extends Component{
 							</div>
 
 							<div className="col-lg-3">
-							<label htmlFor=""></label>
+								<label htmlFor="fromDate" className="nameTitleForm">
+									Experience
+								</label>
 								<div className="input-group showFeild2" name="exp" id="exp"  >
 									{this.state.expYears + "  Years, " + 
 									 this.state.expMonths + " months"}	

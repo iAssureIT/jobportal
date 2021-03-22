@@ -23,11 +23,13 @@ exports.insertCandidateBasicInfo = (req, res, next)=>{
     			//"age" 			 	: req.body.age ? req.body.age : null,
     			"gender"	 	 	: req.body.gender ? req.body.gender : null,
     			"maritalStatus"  	: req.body.maritalStatus ? req.body.maritalStatus : null,
-    			"anniversaryDate"	: req.body.anniversaryDate ? req.body.anniversaryDate : null,
+    			// "anniversaryDate"	: req.body.anniversaryDate ? req.body.anniversaryDate : null,
     			"nationality" 	 	: req.body.nationality ? req.body.nationality : null,
                 "profilePicture"    : req.body.profilePicture ? req.body.profilePicture : null,
                 "resume"            : req.body.resumeUrl ? req.body.resumeUrl : null,
                 "executiveSummary"  : req.body.executiveSummary ? req.body.executiveSummary : null,
+                "passport"          : req.body.passport ? req.body.passport : null,
+                "visa"              : req.body.visa ? req.body.visa : null,
     		},
             "languagesKnown"        : req.body.languagesTags ? req.body.languagesTags : null,
     		"contact" : {
@@ -253,7 +255,7 @@ exports.updateCandidateBasicInfo = (req, res, next)=>{
                         //"basicInfo.age"            : req.body.dob,
                         "basicInfo.gender"         : req.body.gender,
                         "basicInfo.maritalStatus"  : req.body.maritalStatus,
-                        "basicInfo.anniversaryDate": req.body.anniversaryDate == "" ? null : new Date(req.body.anniversaryDate),
+                        // "basicInfo.anniversaryDate": req.body.anniversaryDate == "" ? null : new Date(req.body.anniversaryDate),
                         "basicInfo.nationality"    : req.body.nationality,
                         "basicInfo.profilePicture" : req.body.profilePicture,
                         "basicInfo.resume"         : req.body.resumeUrl,
@@ -262,6 +264,8 @@ exports.updateCandidateBasicInfo = (req, res, next)=>{
                         "contact.mobile"           : req.body.mobile,
                         "contact.altMobile"        : req.body.altMobile,
                         "contact.emailId"          : req.body.emailId,
+                        "basicInfo.passport"         : req.body.passport,
+                        "basicInfo.visa"             : req.body.visa,
                         }
             }
         )
@@ -934,7 +938,7 @@ exports.getCandidateList = (req,res,next)=>{
     //selector['$or']         = [];
     selector['$and']        = [];
 
-    //selector["$and"].push({ "address.countryCode" :  req.body.countryCode   })
+    selector["$and"].push({ "address.countryCode" :  req.body.countryCode   })
     // 1
     if (req.body.stateCode && req.body.stateCode != "all") {
         selector["$and"].push({ "address.stateCode" :  req.body.stateCode   })
@@ -970,10 +974,7 @@ exports.getCandidateList = (req,res,next)=>{
     if (req.body.minExp != null  && req.body.maxExp != null) {
         selector["$and"].push({ "totalExperience" : { '$gte' : req.body.minExp,  '$lte' : req.body.maxExp} });
     }
-    if (selector["$and"].length == 0) {
-        selector = {}
-    }
-    
+    console.log(selector)
 
     CandidateProfile.find(selector)
     .populate('languagesKnown.language_id')
