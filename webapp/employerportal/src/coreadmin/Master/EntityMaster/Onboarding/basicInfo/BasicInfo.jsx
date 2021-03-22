@@ -15,6 +15,10 @@ import 'react-phone-input-2/lib/style.css';
 import "bootstrap-toggle/css/bootstrap2-toggle.min.css";
 import "bootstrap-toggle/js/bootstrap2-toggle.min.js";
 
+import { connect }            from 'react-redux';
+import { bindActionCreators }   from 'redux';
+import  * as mapActionCreator   from '../../../../../jobportaladmin/common/actions/index';
+
 class BasicInfo extends Component {
   constructor(props) {
     super(props);
@@ -70,12 +74,12 @@ class BasicInfo extends Component {
   }
   componentDidMount() {
     axios.defaults.headers.common['Authorization'] = 'Bearer '+ localStorage.getItem("token");
-    console.log(this.props.match.params)
-    if (this.props.match.params.entityID) {
+    console.log(this.props.userDetails.company_id)
+    if (this.props.userDetails.company_id) {
       this.setState({
-      entityID: this.props.match.params.entityID
+      entityID: this.props.userDetails.company_id
     }, () => {
-      console.log("this.props.match.params.entityID",this.props.match.params.entityID)
+      console.log("this.props.userDetails.company_id",this.props.userDetails.company_id)
       this.edit();
     })
     }
@@ -194,7 +198,7 @@ class BasicInfo extends Component {
       }
     });
 
-    /*axios.get('/api/entitymaster/getEntity/' + company_id)
+    axios.get('/api/entitymaster/getEntity/' + this.props.userDetails.company_id)
         .then((response) => {
           var industry = this.state.industryArray.filter((industry)=>{
             return industry._id  == response.data.industry_id
@@ -223,7 +227,7 @@ class BasicInfo extends Component {
         })
         .catch((error) => {
         })
-        this.getCountryConfigDetails()*/
+        this.getCountryConfigDetails()
       axios.get('/api/industrymaster/get/list')
       .then((response) => {
         
@@ -824,7 +828,7 @@ class BasicInfo extends Component {
                 <div className="nav-center OnboardingTabs col-lg-12 col-md-12 col-sm-12 col-xs-12">
                   <ul className="nav nav-pills vendorpills col-lg-12 col-md-12  col-sm-12 col-xs-12">
                     <li className="active col-lg-3 col-md-3 col-sm-12 col-xs-12 pdcls pdclsOne btn1 NOpadding-left">
-                      <a href={this.props.match.params.entityID ? "/"+this.props.entity+"/basic-details/"+this.props.match.params.entityID : "/"+this.props.entity+"/basic-details"} className="basic-info-pillss pills">
+                      <a href={this.props.userDetails.company_id ? "/"+this.props.entity+"/basic-details/"+this.props.userDetails.company_id : "/"+this.props.entity+"/basic-details"} className="basic-info-pillss pills">
                         <i className="fa fa-info-circle" aria-hidden="true"></i> &nbsp;
                         Basic Info
                       </a>
@@ -832,7 +836,7 @@ class BasicInfo extends Component {
                     </li>
                     <li className="col-lg-3 col-md-3 col-sm-12 col-xs-12 transactionTab pdcls pdclsOne btn2 disabled">
                       <div className="triangletwo" id="triangle-right1"></div>
-                      <a href={this.props.match.params.entityID ? "/"+this.props.entity+"/statutory-details/"+this.props.match.params.entityID : "/"+this.props.entity+"/statutory-details" } className="basic-info-pillss backcolor">
+                      <a href={this.props.userDetails.company_id ? "/"+this.props.entity+"/statutory-details/"+this.props.userDetails.company_id : "/"+this.props.entity+"/statutory-details" } className="basic-info-pillss backcolor">
                         <i className="fa fa-info-circle iconMarginLeft" aria-hidden="true"></i> &nbsp;
                         Statutory Info
                       </a>
@@ -840,7 +844,7 @@ class BasicInfo extends Component {
                     </li>
                     <li className="col-lg-3 col-md-3 col-sm-12 col-xs-12 transactionTab pdcls pdclsOne btn2 disabled">
                       <div className="triangletwo" id="triangle-right1"></div>
-                      <a href={this.props.match.params.entityID ? "/"+this.props.entity+"/location-details/"+this.props.match.params.entityID : "/"+this.props.entity+"/location-details" } className="basic-info-pillss backcolor">
+                      <a href={this.props.userDetails.company_id ? "/"+this.props.entity+"/location-details/"+this.props.userDetails.company_id : "/"+this.props.entity+"/location-details" } className="basic-info-pillss backcolor">
                         <i className="fa fa-map-marker iconMarginLeft" aria-hidden="true"></i> &nbsp;
                         Locations
                       </a>
@@ -848,7 +852,7 @@ class BasicInfo extends Component {
                     </li>
                     <li className="col-lg-3 col-md-3 col-sm-12 col-xs-12 transactionTab noRightPadding pdcls btn4 disabled">
                       <div className="trianglesix" id="triangle-right2"></div>
-                      <a href={this.props.match.params.entityID ? "/"+this.props.entity+"/contact-details/"+this.props.match.params.entityID : "/"+this.props.entity+"/contact-details"} className="basic-info-pillss backcolor">
+                      <a href={this.props.userDetails.company_id ? "/"+this.props.entity+"/contact-details/"+this.props.userDetails.company_id : "/"+this.props.entity+"/contact-details"} className="basic-info-pillss backcolor">
                         <i className="fa fa-phone phoneIcon" aria-hidden="true"></i> &nbsp;
                         Contact 
                       </a>
@@ -1095,4 +1099,18 @@ class BasicInfo extends Component {
 //   }
 // }
 // export default connect(mapStateToProps, mapDispatchToProps)(withRouter(BasicInfo));
-export default withRouter(BasicInfo);
+/*export default withRouter(BasicInfo);
+*/
+const mapStateToProps = (state)=>{
+    return {
+        user_ID     : state.user_ID,    candidate_id   : state.candidate_id,
+        selector    : state.selector,   jobList     : state.jobList,
+
+        userDetails    : state.userDetails ,
+        applicantsCountList : state.applicantsCountList
+    }
+}
+const mapDispatchToProps = (dispatch) => ({
+  mapAction :  bindActionCreators(mapActionCreator, dispatch)
+})
+export default connect(mapStateToProps, mapDispatchToProps)(BasicInfo)
