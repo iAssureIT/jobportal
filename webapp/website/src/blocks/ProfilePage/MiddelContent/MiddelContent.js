@@ -103,7 +103,7 @@ class MiddelContent extends Component{
 																{Moment(elem.fromDate).format("YYYY MMM") +" - "+Moment(elem.toDate).format("YYYY MMM") + " . " + "9 mos"}
 															</div>
 															<div className="companyAddress">
-																{elem.city+", "+elem.state+", "+elem.country} 
+																{elem.district+", "+elem.state+", "+elem.country} 
 															</div>
 														</div>
 													</div>

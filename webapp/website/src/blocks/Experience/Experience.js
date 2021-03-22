@@ -530,15 +530,15 @@ class Experience extends Component{
 			""; 
 			status = true;
 		}
-		if(this.state.toDate.length<=0){
-			document.getElementById("toDateError").innerHTML=  
-			"Please enter date";  
-			status=false; 
-		}else{
-			document.getElementById("toDateError").innerHTML=  
-			""; 
-			status = true;
-		}
+		// if(this.state.toDate.length<=0){
+		// 	document.getElementById("toDateError").innerHTML=  
+		// 	"Please enter date";  
+		// 	status=false; 
+		// }else{
+		// 	document.getElementById("toDateError").innerHTML=  
+		// 	""; 
+		// 	status = true;
+		// }
 		if(this.state.noticePeriod.length<=0){
 			document.getElementById("noticePeriodError").innerHTML=  
 			"Please enter date";  
@@ -848,7 +848,6 @@ class Experience extends Component{
 							<div className="col-lg-3 experienceBoxWidth">
 								<label htmlFor="toDate" className="nameTitleForm">
 									Worked Till
-									<sup className="nameTitleFormStar">*</sup>
 								</label>
 								<div className="input-group ">
 									<span className="input-group-addon inputBoxIcon">

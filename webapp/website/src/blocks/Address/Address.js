@@ -288,7 +288,6 @@ class Address extends Component{
 	handleSubmit(event){
 		event.preventDefault();
     	this.props.history.push("/academics/"+this.state.candidate_id);
-  
 	}
 	
 	camelCase(str) {
