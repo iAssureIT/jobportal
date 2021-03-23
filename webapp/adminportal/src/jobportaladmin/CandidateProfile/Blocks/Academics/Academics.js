@@ -5,6 +5,10 @@ import { withRouter }	 	from 'react-router-dom';
 import Axios 			 	from 'axios';
 import Swal 			 	from 'sweetalert2';
 import { Multiselect }      from 'multiselect-react-dropdown';
+import PlacesAutocomplete, {
+  		geocodeByAddress,
+  		getLatLng
+} from "react-places-autocomplete";
 
 import '../BasicInfoForm/BasicInfoForm.css';
 
@@ -13,17 +17,31 @@ class Academics extends Component{
 		super(props);
 
 		this.state={
-			qualificationArray  : [],
-			qualificationLevel  : "",
-			candidateID         : this.props.match.params.candidateID,
-			academicsID         : this.props.match.params.academicsID,
-			qualification       : "",
+			
+			candidate_id               : this.props.match.params.candidate_id,
+			academicsID                : this.props.match.params.academicsID,
+			academics  			       : [],
+			qualificationLevel         : "",
+            qualificationlevel_id      : "",
+            qualificationLevellist     : [],
+			qualification              : "",
+            qualification_id           : "",
+            qualificationlist   : [],
 			specialization      : "",
 			college             : "",
 			university   		: "",
-			state               : "",
-			country	            : "",	
+			university_id    	: "",
+            universitylist   	: [],	
+            addressLine1 	    : "",
+			area                : "",
 			city                : "",
+			district   		    : "",	
+			stateArray 		    : [],
+			states              : "",
+			stateCode		    : "",
+			country	            : "",
+			countryCode 	    : "",
+			pincode             : "",
 			grade               : "",
 			mode                : "",
 			passOutYear         : "",
@@ -39,13 +57,15 @@ class Academics extends Component{
 			inputQualification        : [],
 			inputMode                 : ["Part Time","Full Time","Work From Home"],
 		}
+		this.camelCase = this.camelCase.bind(this)
+		this.handleChangeState = this.handleChangeState.bind(this);
 	}
 	componentDidMount(){
 		this.getData();
 
-			Axios.get("/api/qualificationlevelmaster/get/list")
+		Axios.get("/api/qualificationlevelmaster/get/list")
 			.then(response => {
-				this.setState({inputQualificationLevel : response.data});
+				this.setState({qualificationLevellist : response.data});
 			})
 			.catch(error=>{
 				Swal.fire("Error while getting List data",error.message,'error');
@@ -54,7 +74,7 @@ class Academics extends Component{
 		Axios.get("/api/qualificationmaster/get/list")
 			.then(response => {
 				this.setState({
-					inputQualification : response.data
+					qualificationlist : response.data
 				});
 			})
 			.catch(error=>{
@@ -63,12 +83,12 @@ class Academics extends Component{
 		Axios.get("/api/universitymaster/get/list")
 			.then(response => {
 				
-				this.setState({inputUniversity : response.data});
+				this.setState({universitylist : response.data});
 			})
 			.catch(error=>{
 				Swal.fire("Error while getting List data",error.message,'error');
 			})	
-		Axios.get("/api/collagemaster/get/list")
+		Axios.post("/api/collagemaster/get/list")
 			.then(response => {
 				
 				this.setState({inputCollege : response.data});
@@ -76,7 +96,14 @@ class Academics extends Component{
 			.catch(error=>{
 				Swal.fire("Error while getting List data",error.message,'error');
 			})	
-
+		Axios.get("http://locations2.iassureit.com/api/states/get/list/IN")
+			.then((response) => {
+				this.setState({
+					stateArray: response.data
+				})
+			})
+			.catch((error) => {
+			})		
 			if(this.props.match.params.academicsID){
 			this.edit()
 
@@ -85,51 +112,73 @@ class Academics extends Component{
 
 	//========== User Define Function Start ================
 	getData(){
-		Axios.get("/api/candidatemaster/get/one/"+this.state.candidateID)
+		Axios.get("/api/candidatemaster/get/one/"+this.state.candidate_id)
 		.then(response=>{
 			
 			 	this.setState({
-						qualificationArray:response.data[0].academics,
-						DegreeArray       :response.data[0].qualification,
-						classArray        :response.data[0].qualificationlevel
+						academics  				: response.data.academics
 			 	})
 			 	
 			 })
 			 .catch(error=>{
-			 	Swal.fire("Submit Error!",error.message,'error');
+			 	Swal.fire("Fetch Error!",error.message,'error');
 			 })
 	}
+	camelCase(str) {
+		return str
+			.toLowerCase()
+			.split(' ')
+			.map(word => word.charAt(0).toUpperCase() + word.slice(1))
+			.join(' ');
+	}
+	handleChangeState(event) {
+		const target = event.target;
+	    var state = document.getElementById("states");
+    	var stateCode = state.options[state.selectedIndex].getAttribute("statecode");
+		this.setState({
+			[event.target.name]: event.target.value,
+			stateCode : stateCode
+		});
+	}
 	edit(){
-		var candidateID = this.state.candidateID;
+		var candidate_id = this.state.candidate_id;
 		var academicsID   = this.state.academicsID;
 		if (academicsID) {
 			var idData ={
-				candidateID : this.state.candidateID,
+				candidate_id : this.state.candidate_id,
 				academicsID : this.state.academicsID,
 			}
 			Axios.post("/api/candidatemaster/post/getOneCandidateAcademics",idData)
 			.then(response=>{
 				var editData =response.data;
+				console.log(response.data)
 				
 			 	this.setState({
-			 		qualificationLevel  :editData[0].academics[0].qualificationLevel,
-			 		qualification       :editData[0].academics[0].qualification,
-			 		specialization      :editData[0].academics[0].specialization,
-			 		college             :editData[0].academics[0].collegeSchool,
-			 		university          :editData[0].academics[0].universityBoard,
-			 		state               :editData[0].academics[0].state,
-			 		city                :editData[0].academics[0].cityVillage,
-			 		country             :editData[0].academics[0].country,
-			 		grade               :editData[0].academics[0].grade,
-			 		mode                :editData[0].academics[0].mode,
-			 		passOutYear         :editData[0].academics[0].passOutYear,
-			 		admisionYear        :editData[0].academics[0].admisionYear,
-			 		buttonText          :"Update"
+			 		qualificationlevel_id  	: editData.academics[0].qualificationlevel_id,
+			 		qualificationLevel  	: editData.academics[0].qualificationlevel_id.qualificationLevel,	
+			 		qualification_id       	: editData.academics[0].qualification_id,
+			 		qualification 	  		: editData.academics[0].qualification_id.qualification,	
+			 		specialization      	: editData.academics[0].specialization,
+			 		university_id          	: editData.academics[0].university_id,
+			 		university          	: editData.academics[0].university_id.university,
+			 		addressLine1            : editData.academics[0].collegeSchool,
+			 		area 					: editData.academics[0].area,
+			 		city                	: editData.academics[0].cityVillage,
+			 		district 				: editData.academics[0].district,
+			 		states               	: editData.academics[0].state,
+			 		stateCode              	: editData.academics[0].stateCode,
+			 		country             	: editData.academics[0].country,
+			 		countryCode             : editData.academics[0].countryCode,
+			 		grade               	: editData.academics[0].grade,
+			 		mode                	: editData.academics[0].mode,
+			 		passOutYear         	: editData.academics[0].passOutYear,
+			 		admisionYear        	: editData.academics[0].admisionYear,
+			 		buttonText          	: "Update"
 			 	})
 			 	
 			 })
 			 .catch(error=>{
-			 	Swal.fire("Submit Error!",error.message,'error');
+			 	Swal.fire("edit Error!",error.message,'error');
 			 })
 		}
 	}
@@ -149,7 +198,7 @@ class Academics extends Component{
 	  }).then((result) =>{
 		if(result.value){
 			if(data_id){
-				Axios.delete("/api/candidatemaster/deleteAcademics/"+this.state.candidateID+"/delete/"+data_id)
+				Axios.delete("/api/candidatemaster/deleteAcademics/"+this.state.candidate_id+"/delete/"+data_id)
 				.then(response =>{
 						if(response.data.deleted===true){
 						Swal.fire(
@@ -192,52 +241,157 @@ class Academics extends Component{
 	}
 	handleBack(event){
 		event.preventDefault();
-		this.props.history.push("/contact/"+this.state.candidateID);
+		this.props.history.push("/address/"+this.state.candidate_id);
 	}
-	
+	onChangeQualificationLevel(event){
+        const {name,value} = event.target;
+        this.setState({ [name]:value });  
+        
+        var qualificationlevel_id;
+        if (document.querySelector('#qualificationLevel option[value="' + value + '"]')) {
+            qualificationlevel_id = document.querySelector('#qualificationLevel option[value="' + value + '"]').getAttribute("data-value")
+        }else{ qualificationlevel_id = "" }
+
+        this.setState({ qualificationlevel_id : qualificationlevel_id });  
+    }    
+    onChangeQualification(event){
+        const {name,value} = event.target;
+        this.setState({ [name]:value });  
+        
+        var qualification_id;
+        if (document.querySelector('#qualification option[value="' + value + '"]')) {
+            qualification_id = document.querySelector('#qualification option[value="' + value + '"]').getAttribute("data-value")
+        }else{ qualification_id = "" }
+
+        this.setState({ qualification_id : qualification_id });  
+    }
+    onChangeUniversity(event){
+        const {name,value} = event.target;
+        this.setState({ [name]:value });  
+        
+        var university_id;
+        if (document.querySelector('#university option[value="' + value + '"]')) {
+            university_id = document.querySelector('#university option[value="' + value + '"]').getAttribute("data-value")
+        }else{ university_id = "" }
+
+        this.setState({ university_id : university_id });  
+    }
+    handleChangePlaces = address => {
+	    this.setState({ addressLine1 : address});
+	};
+	handleSelect = address => {
+
+    geocodeByAddress(address)
+     .then((results) =>{ 
+      	for (var i = 0; i < results[0].address_components.length; i++) {
+          	for (var b = 0; b < results[0].address_components[i].types.length; b++) {
+              	switch (results[0].address_components[i].types[b]) {
+                  case 'sublocality_level_1':
+                      var area = results[0].address_components[i].long_name;
+                      break;
+                  case 'sublocality_level_2':
+                      area = results[0].address_components[i].long_name;
+                      break;
+                  case 'locality':
+                      var city = results[0].address_components[i].long_name;
+                      break;
+                  case 'administrative_area_level_1':
+                      var state = results[0].address_components[i].long_name;
+                      var stateCode = results[0].address_components[i].short_name;
+                      break;
+                  case 'administrative_area_level_2':
+                      var district = results[0].address_components[i].long_name;
+                      break;
+                  case 'country':
+                     var country = results[0].address_components[i].long_name;
+                     var countryCode = results[0].address_components[i].short_name;
+                    break; 
+                  case 'postal_code':
+                     var pincode = results[0].address_components[i].long_name;
+                      break;
+                  default :
+                  		break;
+              }
+          	}
+      	}
+
+      this.setState({
+        area       : area,
+        city       : city,
+        district   : district,
+        states     : state,
+        country    : country,
+        pincode    : pincode,
+        stateCode  : stateCode,
+        countryCode: countryCode
+      })
+
+       
+    })
+     
+      .catch(error => console.error('Error', error));
+
+      geocodeByAddress(address)
+      .then(results => getLatLng(results[0]))
+      .then(latLng => this.setState({'latLng': latLng}))
+      .catch(error => console.error('Error', error));
+     
+      this.setState({ addressLine1 : address});
+  	};
+
 	handleSave(event){
 		event.preventDefault();
 		var status =  this.validateForm();
-		
+		if(status==true){
 			var formValues = {
-								candidateID   : this.state.candidateID,
+								candidate_id   : this.state.candidate_id,
 								academicsID   : this.state.academicsID,
 								academics:{
 									qualificationLevel   : this.state.qualificationLevel,
+									qualificationlevel_id: this.state.qualificationlevel_id,
 									qualification        : this.state.qualification,
+									qualification_id     : this.state.qualification_id,
 									specialization       : this.state.specialization,
-									collegeSchool        : this.state.college,
-									universityBoard      : this.state.university,
-									state                : this.state.state,
-									country              : this.state.country,
-									cityVillage          : this.state.city,
+									university 		     : this.state.university,
+									university_id 		 : this.state.university_id,	
+									collegeSchool 		 : this.state.addressLine1,
+									area       			 : this.state.area,
+							        city       			 : this.state.city,
+							        district   			 : this.state.district,
+							        states     			 : this.state.states,
+							        country    			 : this.state.country,
+							        pincode    			 : this.state.pincode,
+							        stateCode  			 : this.state.stateCode,
+							        countryCode 		 : this.state.countryCode,
 									grade                : this.state.grade,
 									mode                 : this.state.mode,
 									passOutYear          : this.state.passOutYear,
 									admisionYear         : this.state.admisionYear
 								}
 							}
+			}
+		console.log(formValues)						
 		if(this.props.match.params.academicsID){
-			this.updateData(formValues,event);
+			//this.updateData(formValues,event);
 		}else{
 			this.insetData(formValues,event);
 		}
-		this.getData();
+		
 	}
 	updateData(formValues,event){
 		var status =  this.validateForm();
 		if(status==true){
-					Axios.patch("/api/candidatemaster/patch/updateOneCandidateAcademics",formValues)
+			Axios.patch("/api/candidatemaster/patch/updateOneCandidateAcademics",formValues)
 				 .then(response=>{
 							Swal.fire("Congrats","Your Academics details update Successfully","success");
 								this.setState({
-											
 												qualificationLevel  : "",
 												qualification       : "",
 												specialization      : "",
 												college             : "",
 												university   		: "",
-												state               : "",
+												addressLine1        : "",
+												states              : "",
 												country	            : "",	
 												city                : "",
 												grade               : "",
@@ -245,9 +399,8 @@ class Academics extends Component{
 												passOutYear         : "",
 												admisionYear        : "",
 												buttonText         : "Save"
-											
 										})
-							this.props.history.push("/academics/"+this.state.candidateID);
+							this.props.history.push("/academics/"+this.state.candidate_id);
 					})
 					.catch(error =>{
 						Swal.fire("Submit Error!",error.message,'error');
@@ -257,7 +410,6 @@ class Academics extends Component{
 			
 		}
 	insetData(formValues,event){
-
 		var status =  this.validateForm();
 		if(status==true){
 				Axios.patch("/api/candidatemaster/patch/addCandidateAcademics",formValues)
@@ -269,9 +421,9 @@ class Academics extends Component{
 											qualificationLevel  : "",
 											qualification       : "",
 											specialization      : "",
-											college             : "",
+											addressLine1        : "",
 											university   		: "",
-											state               : "",
+											states              : "",
 											country	            : "",	
 											city                : "",
 											grade               : "",
@@ -281,6 +433,7 @@ class Academics extends Component{
 											buttonText         : "Save"
 										
 									})
+						this.getData();
 							
 				})
 				.catch(error =>{
@@ -290,23 +443,58 @@ class Academics extends Component{
 	}
 	handleSubmit(event){
 		event.preventDefault();
-			this.props.history.push("/certification/"+this.state.candidateID);
+		this.props.history.push("/certification/"+this.state.candidate_id);
 	}
 	//========== User Define Function End ==================
 		//========== Validation Start ==================
-	 validateForm=()=>{
+	validateForm=()=>{
 		var status = true;
-	
-		if(this.state.grade.length<=0){
-			document.getElementById("gradeError").innerHTML=  
-			"Please enter your Grade";  
+		if(this.state.qualificationLevel.length<=0){
+			document.getElementById("qualificationLevelError").innerHTML=  
+			"Please enter your qualification level";  
 			status=false; 
 		}else{
-			document.getElementById("gradeError").innerHTML=  
-			""; 
+			document.getElementById("qualificationLevelError").innerHTML=""; 
 			status = true;
 		}
+
+		if(this.state.qualification.length<=0){
+			document.getElementById("qualificationError").innerHTML=  
+			"Please enter your qualification";  
+			status=false; 
+		}else{
+			document.getElementById("qualificationError").innerHTML=""; 
+			status = true;
+		}
+
+		// if(this.state.grade.length<=0){
+		// 	document.getElementById("gradeError").innerHTML=  
+		// 	"Please enter your Grade";  
+		// 	status=false; 
+		// }else{
+		// 	document.getElementById("gradeError").innerHTML=  
+		// 	""; 
+		// 	status = true;
+		// }
 		
+		if(this.state.mode.length<=0){
+			document.getElementById("modeError").innerHTML=  
+			"Please enter your qualification";  
+			status=false; 
+		}else{
+			document.getElementById("modeError").innerHTML=""; 
+			status = true;
+		}
+
+		if(this.state.admisionYear.length<=0){
+			document.getElementById("admisionYearError").innerHTML=  
+			"Please enter your Pass Out Year";  
+			status=false; 
+		}else{
+			document.getElementById("admisionYearError").innerHTML=""; 
+			status = true;
+		}
+
 		if(this.state.passOutYear.length<=0){
 			document.getElementById("passOutYearError").innerHTML=  
 			"Please enter your Pass Out Year";  
@@ -343,7 +531,16 @@ class Academics extends Component{
 			""; 
 			status = true;
 		}
-		if(this.state.state.length<=0){
+		if(this.state.district.length<=0){
+			document.getElementById("districtError").innerHTML=  
+			"Please enter your City";  
+			status=false; 
+		}else{
+			document.getElementById("districtError").innerHTML=  
+			""; 
+			status = true;
+		}
+		if(this.state.states.length<=0){
 			document.getElementById("stateError").innerHTML=  
 			"Please enter your State";  
 			status=false; 
@@ -361,7 +558,12 @@ class Academics extends Component{
 			""; 
 			status = true;
 		}
-		
+		if(this.state.country.length<=0 && this.state.states.length<=0 && this.state.district.length<=0
+			&& this.state.city.length<=0 && this.state.college.length<=0 && this.state.university.length<=0
+			&& this.state.passOutYear.length<=0 && this.state.admisionYear.length<=0 &&  this.state.mode.length<=0
+			&& this.state.qualification.length<=0 && this.state.qualificationLevel.length<=0){
+			status=false; 
+		}
 	
 		
 		 return status;
@@ -369,43 +571,35 @@ class Academics extends Component{
 
 	//========== Validation End ==================
 	render(){
+		const searchOptions = {
+	      // types: ['(cities)'],
+	      componentRestrictions: {country: "in"}
+	    }
 		return(
-				<div className="col-lg-12 pageWrapper">
-			
-						<form className="mainForm">
+				<div className="col-lg-12 ">
+					<form>
 
-							<div className="row formMainWrapper">
+						<div className="row formWrapper">
 
 							<div className="col-lg-4">
 								<label htmlFor="qualificationLevel" className="nameTitleForm">
-									Qualification Leval
+									Qualification Level
 									<sup className="nameTitleFormStar">*</sup>
 								</label>
 								<div className="input-group ">
 									<span className="input-group-addon inputBoxIcon">
 										<FontAwesomeIcon icon="file-alt" />
 									</span> 
-									<select className="form-control inputBox" 
-									 id="qualificationLevel" value={this.state.qualificationLevel}
-									 name="qualificationLevel" onChange={this.handleChange.bind(this)}>
-									  	<option > -- select -- </option>
-									  	{
-									  		this.state.inputQualificationLevel!=null
-									  			 && this.state.inputQualificationLevel.length>0
-									  		?	
-									  			this.state.inputQualificationLevel.map((elem,index)=>{
-									  				return(
-									  					<option value={elem._id}  key={index}>
-									  						{elem.qualificationLevel}
-									  					</option>
-									  				);
-									  			})
-									  			
-									  		:
-									  			null
-									  	}
-									</select>
+									<input type="text" list="qualificationLevel" className="form-control inputBox" refs="qualificationLevel" 
+                                     name="qualificationLevel" id="selectqualificationLevel" maxLength="100" value={this.state.qualificationLevel} data-value={this.state.qualificationlevel_id}
+									onChange={this.onChangeQualificationLevel.bind(this)} />
+									<datalist name="qualificationLevel" id="qualificationLevel" className="qualificationLevellist" >
+									    {this.state.qualificationLevellist.map((item, key) =>
+									        <option key={key} value={item.qualificationLevel} data-value={item._id}/>
+									    )}
+									</datalist>
 								</div>
+								<span id="qualificationLevelError" className="errorMsg"></span>
 							</div>
 							<div className="col-lg-4">
 								<label htmlFor="qualification" className="nameTitleForm">
@@ -416,27 +610,16 @@ class Academics extends Component{
 									<span className="input-group-addon inputBoxIcon">
 										<i className="fa fa-graduation-cap"></i>
 									</span> 
-									<select className="form-control inputBox" 
-									 id="qualification" value={this.state.qualification} 
-									 name="qualification" onChange={this.handleChange.bind(this)}>
-									  	<option > -- select -- </option>
-									  	{
-									  		this.state.inputQualification!=null 
-									  			&& this.state.inputQualification.length>0
-									  		?	
-									  			this.state.inputQualification.map((elem,index)=>{
-									  				return(
-									  					<option value={elem._id} key={index}>
-									  						{elem.qualification}
-									  					</option>
-									  				);
-									  			})
-									  			
-									  		:
-									  			null
-									  	}
-									</select>
+									<input type="text" list="qualification" className="form-control inputBox" refs="qualification" 
+                                     name="qualification" id="selectqualification" maxLength="100" value={this.state.qualification} data-value={this.state.qualification_id}
+									onChange={this.onChangeQualification.bind(this)} />
+									<datalist name="qualification" id="qualification" className="qualificationlist" >
+									    {this.state.qualificationlist.map((item, key) =>
+									        <option key={key} value={item.qualification} data-value={item._id}/>
+									    )}
+									</datalist>
 								</div>
+								<span id="qualificationError" className="errorMsg"></span>
 							</div>
 							<div className="col-lg-4">
 								<label htmlFor="specialization" className="nameTitleForm">
@@ -455,12 +638,11 @@ class Academics extends Component{
 
 						</div>
 
-						<div className="row formMainWrapper">
+						<div className="row formWrapper">
 
 							<div className="col-lg-4">
 								<label htmlFor="grade" className="nameTitleForm">
 									Grade/Marks/GPA
-									<sup className="nameTitleFormStar">*</sup>
 								</label>
 								<div className="input-group ">
 									<span className="input-group-addon inputBoxIcon">
@@ -503,8 +685,11 @@ class Academics extends Component{
 									  	}
 									</select>
 								</div>
+								<span id="modeError" className="errorMsg"></span>
 							</div>
+						</div>
 
+						<div className="row formWrapper">
 							<div className="col-lg-4">
 								<label htmlFor="admisionYear" className="nameTitleForm">
 									Admission Year
@@ -514,18 +699,13 @@ class Academics extends Component{
 									<span className="input-group-addon inputBoxIcon">
 										<i className="fa fa-calendar"></i>
 									</span> 
-									<input type="text" name="admisionYear" id="admisionYear" 
+									<input type="month" name="admisionYear" id="admisionYear" 
 									 className="form-control inputBox" 
 									 value={this.state.admisionYear} 
 									 onChange={this.handleChange.bind(this)} />
 								</div> 
 								<span id="admisionYearError" className="errorMsg"></span>
 							</div>
-
-						</div>
-
-						<div className="row formMainWrapper">
-
 							<div className="col-lg-4">
 								<label htmlFor="passOutYear" className="nameTitleForm">
 									Pass-out-year
@@ -535,15 +715,36 @@ class Academics extends Component{
 									<span className="input-group-addon inputBoxIcon">
 										<i className="fa fa-calendar"></i>
 									</span> 
-									<input type="text" name="passOutYear" id="passOutYear" 
+									<input type="month" name="passOutYear" id="passOutYear" 
 									 className="form-control inputBox " 
 									 value={this.state.passOutYear} 
 									 onChange={this.handleChange.bind(this)} />
 								</div> 
 								<span id="passOutYearError" className="errorMsg"></span>
 							</div>
-
-							<div className="col-lg-4">
+						</div>	
+						<div className="row formWrapper">	
+							<div className="col-lg-6">
+								<label htmlFor="university" className="nameTitleForm">
+									University/Boards Name
+									<sup className="nameTitleFormStar">*</sup>
+								</label>
+								<div className="input-group ">
+									<span className="input-group-addon inputBoxIcon">
+										<FontAwesomeIcon icon="university" />
+									</span> 
+									<input type="text" list="university" className="form-control inputBox" refs="university" 
+                                     name="university" id="selectuniversity" maxLength="100" value={this.state.university} data-value={this.state.university_id}
+									onChange={this.onChangeUniversity.bind(this)} />
+									<datalist name="university" id="university" className="universitylist" >
+									    {this.state.universitylist.map((item, key) =>
+									        <option key={key} value={item.university} data-value={item._id}/>
+									    )}
+									</datalist>
+								</div> 
+								<span id="universityError" className="errorMsg"></span>
+							</div>
+							<div className="col-lg-6">
 								<label htmlFor="college" className="nameTitleForm">
 									College/School Name<sup className="nameTitleFormStar">*</sup>
 								</label>
@@ -551,7 +752,7 @@ class Academics extends Component{
 									<span className="input-group-addon inputBoxIcon">
 										<FontAwesomeIcon icon="university" />
 									</span> 
-									<select className="form-control inputBox" id="college" 
+									{/*<select className="form-control inputBox" id="college" 
 									 value={this.state.college} name="college" 
 									 onChange={this.handleChange.bind(this)}>
 										  	<option > -- select -- </option>
@@ -570,45 +771,58 @@ class Academics extends Component{
 										  		:
 										  			null
 										  	}
-										</select>
+									</select>*/}
+									<PlacesAutocomplete
+                                        value={this.state.addressLine1}
+                                        onChange={this.handleChangePlaces}
+                                        onSelect={this.handleSelect}
+                                        searchOptions={searchOptions}
+                                      	>
+                                        {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+                                          <div>
+                                            <input
+                                              {...getInputProps({
+                                                placeholder: 'Search Address ...',
+                                                className: 'location-search-input form-control inputBox',
+                                                id:"addressLine1",
+                                                name:"addressLine1",
+                                              })}
+                                            />
+                                            <div className={this.state.addressLine1 
+                                            				? 
+                                            				"autocomplete-dropdown-container SearchListContainer inputSearch" 
+                                            				: 
+                                            				""}>
+                                              {loading && <div>Loading...</div>}
+                                              {suggestions.map(suggestion => {
+                                                const className = suggestion.active
+                                                  ? 'suggestion-item--active'
+                                                  : 'suggestion-item';
+                                                // inline style for demonstration purpose
+                                                const style = suggestion.active
+                                                  ? { backgroundColor: '#f5a721', cursor: 'pointer' }
+                                                  : { backgroundColor: '#242933', cursor: 'pointer'};
+                                                return (
+                                                  <div
+                                                    {...getSuggestionItemProps(suggestion, {
+                                                      className,
+                                                      style,
+                                                    })}
+                                                  >
+                                                    <span>{suggestion.description}</span>
+                                                  </div>
+                                                );
+                                              })}
+                                            </div>
+                                          </div>
+                                        )}
+                                      </PlacesAutocomplete>
 								</div> 
 								<span id="collegeError" className="errorMsg"></span>
 							</div>
-
-							<div className="col-lg-4">
-								<label htmlFor="university" className="nameTitleForm">
-									University/Boards Name
-									<sup className="nameTitleFormStar">*</sup>
-								</label>
-								<div className="input-group ">
-									<span className="input-group-addon inputBoxIcon">
-										<FontAwesomeIcon icon="university" />
-									</span> 
-									<select className="form-control inputBox" id="university" value={this.state.university} name="university" onChange={this.handleChange.bind(this)}>
-										  	<option > -- select -- </option>
-										  	{
-										  		this.state.inputUniversity!=null 
-										  			&& this.state.inputUniversity.length>0
-										  		?	
-										  			this.state.inputUniversity.map((elem,index)=>{
-										  				return(
-										  					<option value={elem._id} key={index}>
-										  						{elem.university}
-										  					</option>
-										  				);
-										  			})
-										  			
-										  		:
-										  			null
-										  	}
-										</select>
-								</div> 
-								<span id="universityError" className="errorMsg"></span>
-							</div>
-
 						</div>
 
-						<div className="row formMainWrapper">
+						<div className="row formWrapper">
 							<div className="col-lg-4">
 								<label htmlFor="city" className="nameTitleForm">
 									City
@@ -624,6 +838,21 @@ class Academics extends Component{
 								</div>
 								<span id="cityError" className="errorMsg"></span>
 							</div>
+							<div className="col-lg-4">
+								<label htmlFor="district" className="nameTitleForm">
+									District
+									<sup className="nameTitleFormStar">*</sup>
+								</label>
+								<div className="input-group ">
+									<span className="input-group-addon inputBoxIcon">
+										<FontAwesomeIcon icon="city" /> 
+									</span> 
+									<input type="text" name="district" id="district" 
+									 className="form-control inputBox" value={this.state.district} 
+									 onChange={this.handleChange.bind(this)} />
+								</div>
+								<span id="districtError" className="errorMsg"></span>
+							</div>
 
 							<div className="col-lg-4">
 								<label htmlFor="state" className="nameTitleForm">
@@ -634,14 +863,25 @@ class Academics extends Component{
 									<span className="input-group-addon inputBoxIcon">
 										<i className="fa fa-map"></i>
 									</span> 
-									<input type="text" name="state" id="state" 
-									 className="form-control inputBox " 
-									 value={this.state.state} 
-									 onChange={this.handleChange.bind(this)} />
+									
+									<select id="states" className="form-control inputBox selectOption"
+										ref="states" value={this.state.states} name="states" onChange={this.handleChangeState} >
+										<option selected={true}>-- Select --</option>
+										{
+											this.state.stateArray && this.state.stateArray.length > 0 ?
+												this.state.stateArray.map((stateData, index) => {
+													return (
+														<option key={index} statecode={stateData.stateCode}>{this.camelCase(stateData.stateName)}</option>
+													);
+												}
+												) : ''
+										}
+									</select>
 								</div> 
 								<span id="stateError" className="errorMsg"></span>
 							</div>
-							
+						</div>	
+						<div className="row formWrapper">	
 							<div className="col-lg-4">
 								<label htmlFor="country" className="nameTitleForm">
 									Country
@@ -668,9 +908,12 @@ class Academics extends Component{
 						<div className=" AddressWrapper col-lg-12" >
 							 <div className="row">
 								{
-								this.state.qualificationArray.length > 0
+								this.state.academics.length > 0
 								?
-								this.state.qualificationArray.map((elem,index)=>{
+								this.state.academics.map((elem,index)=>{
+									
+									console.log(elem);
+
 									return(
 										<div className="col-lg-6 AddressOuterWrapper"  key={index}>
 											<div className="col-lg-12 addWrapper">
@@ -679,18 +922,16 @@ class Academics extends Component{
 														<div className="addLogoDiv">
 															<FontAwesomeIcon icon="graduation-cap" /> 
 														</div>
-
 														<div>
-															{
-																this.state.DegreeArray.map((elem1,index)=>{
-																	return(
-																		<div className="addLogoTextDiv" key={index}>
-																			{elem1.qualification}
-																			
-																		</div>
-																	);
-																})
-															}
+														<div className="">
+														<div className="addLogoTextDiv" key={index}>
+															{elem.qualificationlevel_id.qualificationLevel}<br/>
+														</div>
+														</div>
+														
+														<div className="addLogoTextDiv" key={index}>
+															{elem.qualification_id.qualification}
+														</div>
 														</div>
 															
 														
@@ -698,57 +939,24 @@ class Academics extends Component{
 													<div className="col-lg-8 addRightWrapper">
 														<div className="row">
 														<div className="addRightText ">
-															<div>
-																{
-																	this.state.classArray.map((elem1,index)=>{
-																		return(
-																			<div className="AddressBoxText" key={index}>
-																				{elem1.qualificationLevel}
-																				
-																			</div>
-																		);
-																	})
-																}
-															</div>
+															
 															<div className="AddressBoxText">
 															{elem.specialization}
 															</div>
+															<div className="AddressBoxText" key={index}>
+																{elem.collegeSchool}
+															</div>
+															<div className="AddressBoxText">
+															{}
+															</div>
+															{/*<div className="AddressBoxText">
+																{elem.admisionYear} - {elem.passOutYear}
+															</div>
+															
 															<div className="AddressBoxText">
 																{elem.grade}
 															</div>
-															<div className="AddressBoxText">
-																{elem.mode}
-															</div>
-															<div className="AddressBoxText">
-																{elem.passOutYear}
-															</div>
-															<div className="AddressBoxText">
-																{elem.admisionYear}
-															</div>
-															<div>
-																{
-																	this.state.inputCollege.map((elem1,index)=>{
-																		return(
-																			<div className="AddressBoxText" key={index}>
-																				{elem1.collage}
-																				
-																			</div>
-																		);
-																	})
-																}
-															</div>
-															<div>
-																{
-																	this.state.inputUniversity.map((elem1,index)=>{
-																		return(
-																			<div className="AddressBoxText" key={index}>
-																				{elem1.university}
-																				
-																			</div>
-																		);
-																	})
-																}
-															</div>
+															
 															<div className="AddressBoxText">
 																{elem.state}
 															</div>
@@ -757,11 +965,11 @@ class Academics extends Component{
 															</div>
 															<div className="AddressBoxText">
 																{elem.cityVillage}
-															</div>
+															</div>*/}
 														</div>
 														<div className="col-lg-12">
 								                            <div className="addRightbtn">
-								                                <a id={elem._id} href={"/academics/"+this.state.candidateID+"/edit/"+elem._id}>
+								                                <a id={elem._id} href={"/academics/"+this.state.candidate_id+"/edit/"+elem._id}>
 								                            	    <div className="editBtn pull-left">Edit</div>
 								                            	</a>
 								                            	<div className="dltBtn pull-right" id={elem._id} onClick={this.deleteDate.bind(this)}>Delete</div>

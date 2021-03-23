@@ -18,7 +18,7 @@ class Address extends Component{
 
 		this.state={
 			addressID          : this.props.match.params.addressID,
-			candidateID        : this.props.match.params.candidateID,
+			candidate_id        : this.props.match.params.candidate_id,
 			addressArry        : [],
 			addressLine1 	   : "",
 			address 	       : "",
@@ -32,7 +32,7 @@ class Address extends Component{
 			area               : "",
 			city               : "",
 			district   		   : "",	
-			state              : "",
+			states             : "",
 			country	           : "",
 			pincode            : "",
 			inputAddressType   : [],
@@ -40,30 +40,40 @@ class Address extends Component{
 			buttonText         : "Save",
 			
 		}
+		this.camelCase = this.camelCase.bind(this)
+		this.handleChangeState = this.handleChangeState.bind(this);
 	}
 	componentDidMount(){
 		this.getData();
-		this.getStates();
-
+		
 		Axios.get("/api/addresstypemaster/get/list")
 			.then(response => {
 				this.setState({inputAddressType : response.data});
+				console.log(response.data);
 			})
 			.catch(error=>{
 				Swal.fire("Error while getting List data",error.message,'error');
 			})
-
+		Axios.get("http://locations2.iassureit.com/api/states/get/list/IN")
+			.then((response) => {
+				this.setState({
+					stateArray: response.data
+				})
+			})
+			.catch((error) => {
+			})	
 		if(this.props.match.params.addressID){
 			this.edit()
 		}
 	}
+
 	getData(){
 		
-		Axios.get("/api/candidatemaster/get/one/"+this.state.candidateID)
+		Axios.get("/api/candidatemaster/get/one/"+this.state.candidate_id)
 		.then(response=>{
 			 	this.setState({
-			 		addressArry    : response.data[0].address,
-			 		addressTypeArry: response.data[0].addressType
+			 		addressArry    : response.data.address,
+			 		//addressTypeArry: response.data.addressType
 
 				 })
 			 })
@@ -71,13 +81,29 @@ class Address extends Component{
 			 	Swal.fire("Submit Error!",error.message,'error');
 			 })
 	}
+	camelCase(str) {
+		return str
+			.toLowerCase()
+			.split(' ')
+			.map(word => word.charAt(0).toUpperCase() + word.slice(1))
+			.join(' ');
+	}
+	handleChangeState(event) {
+		const target = event.target;
+	    var state = document.getElementById("states");
+    	var stateCode = state.options[state.selectedIndex].getAttribute("statecode");
+		this.setState({
+			[event.target.name]: event.target.value,
+			stateCode : stateCode
+		});
+	}
 	//========== User Define Function Start ================
 	edit(){
-		var candidateID = this.state.candidateID;
+		var candidate_id = this.state.candidate_id;
 		var addressID   = this.state.addressID;
 		if (addressID) {
 			var idDate ={
-				candidateID : this.state.candidateID,
+				candidate_id : this.state.candidate_id,
 				addressID : this.state.addressID,
 			}
 			Axios.post("/api/candidatemaster/post/getOneCandidateAddress",idDate)
@@ -111,18 +137,18 @@ class Address extends Component{
 		var data_id =  event.currentTarget.id;
 
 		Swal.fire({
-		title : 'Are you sure, do you want to delete this address details?',
+		title : 'Are you sure? you want to delete this Address details!!!',
 		text : 'You will not be able to recover this Address details',
 		icon : 'warning',
 		showCancelButton : true,
-		confirmButtonText : 'Delete',
-		cancelButtonColor : 'Cancel',
+		confirmButtonText : 'Yes, delete it!',
+		cancelButtonColor : 'No, keep it',
 		confirmButtonColor : '#d33',
 	
 	  }).then((result) =>{
 		if(result.value){
 			if(data_id){
-				Axios.delete("/api/candidatemaster/deleteAddress/"+this.state.candidateID+"/delete/"+data_id)
+				Axios.delete("/api/candidatemaster/deleteAddress/"+this.state.candidate_id+"/delete/"+data_id)
 				.then(response =>{
 						if(response.data.deleted===true){
 						Swal.fire(
@@ -172,7 +198,7 @@ class Address extends Component{
 		event.preventDefault();
 		var status =  this.validateForm();
 			var formValues = {	
-								candidateID   : this.state.candidateID,
+								candidate_id   : this.state.candidate_id,
 								addressID     : this.state.addressID,
 								address       :   
 								{
@@ -190,6 +216,7 @@ class Address extends Component{
 								}
 				
 							}
+		//console.log(formValues)					
 		if(this.props.match.params.addressID){
 			this.updateData(formValues);
 		}else{
@@ -217,7 +244,8 @@ class Address extends Component{
 														pincode            : "",
 														buttonText         : "Save",
 													})	
-							this.props.history.push("/address/"+this.state.candidateID);
+							this.getData();			
+							this.props.history.push("/address/"+this.state.candidate_id);
 					})
 					.catch(error =>{
 						Swal.fire("Submit Error!",error.message,'error');
@@ -247,6 +275,7 @@ class Address extends Component{
 														pincode            : "",
 														buttonText         : "Save"
 													})	
+										this.getData();
 					})
 					.catch(error =>{
 						Swal.fire("Submit Error!",error.message,'error');
@@ -258,19 +287,9 @@ class Address extends Component{
 	
 	handleSubmit(event){
 		event.preventDefault();
-    	this.props.history.push("/contact/"+this.state.candidateID);
+    	this.props.history.push("/academics/"+this.state.candidate_id);
 	}
-	getStates() {
-		Axios.get("http://locations2.iassureit.com/api/states/get/list/IN")
-			.then((response) => {
-				this.setState({
-					stateArray: response.data
-				})
-				document.getElementById('Statedata').val(this.state.states);
-			})
-			.catch((error) => {
-			})
-	}
+	
 	camelCase(str) {
 		return str
 			.toLowerCase()
@@ -354,14 +373,30 @@ class Address extends Component{
 	//========== Validation Start ==================
 	 validateForm=()=>{
 		var status = true;
-	
-		if(this.state.houseNumber.length<=0){
-			document.getElementById("houseNumberError").innerHTML=  
-			"Please enter your House Number";  
+		var regPincode = /^[1-9][0-9]{5}$/;
+
+		if(this.state.addressType.length<=0){
+			document.getElementById("addressTypeError").innerHTML=  
+			"Please select address type";  
 			status=false; 
 		}else{
-			document.getElementById("houseNumberError").innerHTML=  
-			""; 
+			document.getElementById("addressTypeError").innerHTML = ""; 
+			status = true;
+		}
+		if(this.state.addressLine1.length<=0){
+			document.getElementById("addressError").innerHTML=  
+			"Please enter your address";  
+			status=false; 
+		}else{
+			document.getElementById("addressError").innerHTML = ""; 
+			status = true;
+		}
+		if(this.state.area.length<=0){
+			document.getElementById("areaError").innerHTML=  
+			"Please enter your address";  
+			status=false; 
+		}else{
+			document.getElementById("areaError").innerHTML = ""; 
 			status = true;
 		}
 		if(this.state.city.length<=0){
@@ -384,7 +419,7 @@ class Address extends Component{
 		}
 		if(this.state.states.length<=0){
 			document.getElementById("stateError").innerHTML=  
-			"Please enter your State";  
+			"Please enter your state";  
 			status=false; 
 		}else{
 			document.getElementById("stateError").innerHTML=  
@@ -402,31 +437,37 @@ class Address extends Component{
 		}
 		if(this.state.pincode.length<=0){
 			document.getElementById("pincodeError").innerHTML=  
-			"Please enter your Pincode";  
+			"Please enter your pincode";  
 			status=false; 
-		}else{
-			document.getElementById("pincodeError").innerHTML=  
-			""; 
-			status = true;
+		}else{ 
+
+			if(!regPincode.test(this.state.pincode)){
+		      	document.getElementById("pincodeError").innerHTML = "Please enter valid pincode";  
+		      	status=false; 
+		    }else{
+		    	document.getElementById("pincodeError").innerHTML = ""; 
+				status = true;
+		    }
+			
 		}
 	
 		
-		 return status;
+		return status;
 	}
 
 	//========== Validation End ==================
 
 	render(){
-		const searchOptions = {
+	const searchOptions = {
       // types: ['(cities)'],
       componentRestrictions: {country: "in"}
-       }	
+    }	
 		return(
-				<div className="col-lg-12 pageWrapper">
-			
-						<form className="mainForm">
+				<div className="mainFormWrapper col-lg-12">
+					<div className="row">
+						<form>
 
-							<div className="row formMainWrapper">
+							<div className="row formWrapper">
 
 								<div className="col-lg-4">
 									<label htmlFor="addressType" className="nameTitleForm">
@@ -458,14 +499,14 @@ class Address extends Component{
 										  	}
 										</select>
 									</div>
+									<span id="addressTypeError" className="errorMsg"></span>
 								</div>
 
 							
-
 								<div className="col-lg-4">
 									<label htmlFor="houseNumber" className="nameTitleForm">
 										House/Building Number
-										<sup className="nameTitleFormStar">*</sup>
+										
 									</label>
 									<div className="input-group ">
 										<span className="input-group-addon inputBoxIcon inputBoxIcon1">
@@ -479,8 +520,8 @@ class Address extends Component{
 									<span id="houseNumberError" className="errorMsg"></span>
 								</div>
 
-								<div className="col-lg-4">
-									<label htmlFor="address" className="nameTitleForm">Address</label>
+								<div className="col-lg-4 ">
+									<label htmlFor="address" className="nameTitleForm">Address <sup className="nameTitleFormStar">*</sup></label>
 									<div className="input-group ">
 										<span className="input-group-addon inputBoxIcon">
 											<i className="fa fa-map-marker"></i>
@@ -531,14 +572,14 @@ class Address extends Component{
 	                                        )}
 	                                      </PlacesAutocomplete>
 									</div> 
+									<span id="addressError" className="errorMsg"></span> 
 								</div>
 							</div>
 
-							<div className="row formMainWrapper">
-
+							<div className="row formWrapper">
 								<div className="col-lg-4">
 									<label htmlFor="area" className="nameTitleForm">
-										Area/Suburb
+										Area/Suburb <sup className="nameTitleFormStar">*</sup>
 									</label>
 									<div className="input-group ">
 										<span className="input-group-addon inputBoxIcon">
@@ -548,6 +589,7 @@ class Address extends Component{
 										 className="form-control inputBox" value={this.state.area} 
 										 onChange={this.handleChange.bind(this)} />
 									</div> 
+									<span id="areaError" className="errorMsg"></span> 
 								</div>
 
 								<div className="col-lg-4">
@@ -584,10 +626,10 @@ class Address extends Component{
 
 							</div>
 
-							<div className="row formMainWrapper">
+							<div className="row formWrapper">
 
 								<div className="col-lg-4">
-									<label htmlFor="state" className="nameTitleForm">
+									<label htmlFor="states" className="nameTitleForm">
 										State
 										<sup className="nameTitleFormStar">*</sup>
 									</label>
@@ -595,24 +637,21 @@ class Address extends Component{
 										<span className="input-group-addon inputBoxIcon">
 											<i className="fa fa-map"></i> 
 										</span> 
-										<select className="form-control inputBox"  id="states"
-										 ref="states" value={this.state.states} name="states" 
-										 onChange={this.handleChangeState.bind(this)} >
-											<option hidden>-- Select --</option>
-											{
-												this.state.stateArray && this.state.stateArray.length > 0 
-												?
-													this.state.stateArray.map((stateData, index) => {
-														return (
-															<option key={index} statecode={stateData.stateCode}>
-																{this.camelCase(stateData.stateName)}
-															</option>
-														);
-													}
-													) 
-												: ''
-											}
-										</select>
+										{/*<select id="states" className="form-control inputBox selectOption"
+										ref="states" value={this.state.states} name="states" onChange={this.handleChangeState} >
+										<option selected={true}>-- Select --</option>
+										{
+											this.state.stateArray && this.state.stateArray.length > 0 ?
+												this.state.stateArray.map((stateData, index) => {
+													return (
+														<option key={index} statecode={stateData.stateCode}>{this.camelCase(stateData.stateName)}</option>
+													);
+												}
+												) : ''
+										}
+										</select>*/}
+										<input type="text" className="form-control inputBox" ref="states" id="states" name="states" value={this.state.states} onChange={this.handleChange.bind(this)}/>
+													
 									</div> 
 									<span id="stateError" className="errorMsg"></span>
 								</div>
@@ -694,7 +733,7 @@ class Address extends Component{
 															{elem.state +" , "+elem.country +" , "+elem.pincode+" ."}
 														</div>
 							                            <div className="addRightbtn">
-							                                <a id={elem._id} href={"/address/"+this.state.candidateID+"/edit/"+elem._id}>
+							                                <a id={elem._id} href={"/address/"+this.state.candidate_id+"/edit/"+elem._id}>
 							                            	    <div className="editBtn pull-left">Edit</div>
 							                            	</a>
 							                            	<div className="dltBtn pull-right" id={elem._id} onClick={this.deleteDate.bind(this)}>Delete</div>
@@ -726,7 +765,7 @@ class Address extends Component{
 							</button>
 						</form>
 					</div>
-				
+				</div>
 			);
 	}
 }

@@ -47,6 +47,7 @@ exports.insertCandidateBasicInfo = (req, res, next)=>{
     			.then(data => {
     			res.status(200).json({							
     				message	: "Candidate details inserted successfully",
+                    data: data,
     			});
     		})
     		.catch(error=>{

@@ -78,7 +78,7 @@ class LeftAside extends Component{
 						<div className="">
 							<div className="col-lg-8 col-lg-offset-2 candidateProfileImg">
 								<div className="candidateImgWrapper row">
-									<img src={this.state.profilePicture} alt="Candidate Profile" />
+									<img src={this.state.profilePicture?this.state.profilePicture:"/images/person.jpg"} alt="Candidate Profile" />
 									<div className="candidateName mainText">
 										{this.state.firstName+" "+this.state.lastName }
 									</div>

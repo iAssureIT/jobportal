@@ -33,17 +33,19 @@ class BasicInfoForm extends Component{
 			dob                       : "",
 			profilePhoto              : "",
 			profileImageUrl           : "",
-			gender                    : "male",
-			anniversaryDate           : "",	
+			gender                    : "",
+			passport                  : "",
+			visa                  	  : "",
+			//anniversaryDate           : "",	
 			maritalStatus             : "",
 			nationality               : "",
 			panCardNo                 : "",
 			adhaarCardNo              : "",
 			selectedValue             : [],
-			ageYears	              : 0,	
-			ageMonths	              : 0,	
-			ageDays	       	          : 0,
-			age                       : "",
+			// ageYears	              : 0,	
+			// ageMonths	          : 0,	
+			// ageDays	       	      : 0,
+			// age                    : "",
 			inputMaritalStatus        : ["Single",,"Married", "Separated","Divorced","Widowed"],
 			anniversaryDateShow 	  : false,	
 			inputNationality          : ["Indian","American"],
@@ -74,44 +76,49 @@ class BasicInfoForm extends Component{
 		})
 
 		if (this.props.match.params.candidateID) {
-			Axios.get("/api/candidatemaster/get/one/"+this.state.candidate_id)
-			.then(response=>{
-				 console.log("response.data",response.data);
 
-				 	var languagesTags = [];
-				 	if (response.data.languagesKnown) {
+		Axios.get("/api/candidatemaster/get/one/"+this.state.candidate_id)
+		.then(response=>{
+			 console.log("response.data",response.data);
 
-				 		response.data.languagesKnown.map((data,ind)=>{
-				 			console.log(data)
-	                    	languagesTags.push({ id : data.language_id._id, text : data.language_id.language })
-	                	})
-				 	}
-				 	this.calAge(response.data.basicInfo.dob);
-				 	this.setState({
-				 		firstName         : response.data.basicInfo.firstName?response.data.basicInfo.firstName:"",
-						middleName        : response.data.basicInfo.middleName?response.data.basicInfo.middleName:"",
-						lastName          : response.data.basicInfo.lastName?response.data.basicInfo.lastName:"",
-						mobile        	  : response.data.contact.mobile?response.data.contact.mobile:"",
-						alternate     	  : response.data.contact.altMobile?response.data.contact.altMobile:"",
-						email         	  : response.data.contact.emailId?response.data.contact.emailId:"",
-						dob               : response.data.basicInfo.dob?Moment(response.data.basicInfo.dob).format("YYYY-MM-DD"):"",
-						gender            : response.data.basicInfo.gender?response.data.basicInfo.gender:"",
-						anniversaryDate   : response.data.basicInfo.anniversaryDate?Moment(response.data.basicInfo.anniversaryDate).format("YYYY-MM-DD"):"",
-						maritalStatus     : response.data.basicInfo.maritalStatus?response.data.basicInfo.maritalStatus:"",
-						nationality       : response.data.basicInfo.nationality?response.data.basicInfo.nationality:"",
-						profilePicture    : response.data.basicInfo.profilePicture?response.data.basicInfo.profilePicture:"",
-						profileImageUrl   : response.data.basicInfo.profilePicture?response.data.basicInfo.profilePicture:"",	
-						resume     		  : response.data.basicInfo.resume?response.data.basicInfo.resume:"",
-						resumeUrl     	  : response.data.basicInfo.resume?response.data.basicInfo.resume:"",
-						executiveSummary  : response.data.basicInfo.executiveSummary ? response.data.basicInfo.executiveSummary : "",
-						languagesTags 	  : languagesTags	
-				 	})
-				 })
-				 .catch(error=>{
-				 	Swal.fire("Submit Error!",error.message,'error');
-				 })
-		}
-		
+			 	var languagesTags = [];
+			 	if (response.data.languagesKnown) {
+
+			 		response.data.languagesKnown.map((data,ind)=>{
+			 			console.log(data)
+                    	languagesTags.push({ id : data.language_id._id, text : data.language_id.language })
+                	})
+			 	}
+			 	// this.calAge(response.data.basicInfo.dob);
+			 	this.setState({
+			 		firstName         : response.data.basicInfo.firstName?response.data.basicInfo.firstName:"",
+					middleName        : response.data.basicInfo.middleName?response.data.basicInfo.middleName:"",
+					lastName          : response.data.basicInfo.lastName?response.data.basicInfo.lastName:"",
+					mobile        	  : response.data.contact.mobile?response.data.contact.mobile:"",
+					alternate     	  : response.data.contact.altMobile?response.data.contact.altMobile:"",
+					email         	  : response.data.contact.emailId?response.data.contact.emailId:"",
+					dob               : response.data.basicInfo.dob?Moment(response.data.basicInfo.dob).format("YYYY-MM-DD"):"",
+					gender            : response.data.basicInfo.gender?response.data.basicInfo.gender:"",
+					//anniversaryDate   : response.data.basicInfo.anniversaryDate?Moment(response.data.basicInfo.anniversaryDate).format("YYYY-MM-DD"):"",
+					maritalStatus     : response.data.basicInfo.maritalStatus?response.data.basicInfo.maritalStatus:"",
+					nationality       : response.data.basicInfo.nationality?response.data.basicInfo.nationality:"",
+					passport          : response.data.basicInfo.passport?response.data.basicInfo.passport:"",
+					visa              : response.data.basicInfo.visa?response.data.basicInfo.visa:"",
+					profilePicture    : response.data.basicInfo.profilePicture?response.data.basicInfo.profilePicture:"",
+					profileImageUrl   : response.data.basicInfo.profilePicture?response.data.basicInfo.profilePicture:"",	
+					resume     		  : response.data.basicInfo.resume?response.data.basicInfo.resume:"",
+					resumeUrl     	  : response.data.basicInfo.resume?response.data.basicInfo.resume:"",
+					executiveSummary  : response.data.basicInfo.executiveSummary ? response.data.basicInfo.executiveSummary : "",
+					languagesTags 	  : languagesTags,
+					// ageYears	              : 0,	
+					// ageMonths	              : 0,	
+					// ageDays	       	          : 0,
+			 	})
+			 })
+			 .catch(error=>{
+			 	Swal.fire("Submit Error!",error.message,'error');
+			 })
+			}
 }
 
 	//========== User Define Function Start ================
@@ -319,32 +326,49 @@ class BasicInfoForm extends Component{
 		this.setState({
 			[name]:value,
 		})
-		if(name==="dob"){
-			this.calAge(value);
-		}
-		if (name=="maritalStatus") {
-			if (value=="Married") {
-				this.setState({anniversaryDateShow : true})
-			}else{
-				this.setState({anniversaryDateShow : false})
-			}
-		}
+		// if(name==="dob"){
+		// 	this.calAge(value);
+		// }
+		// if (name=="maritalStatus") {
+		// 	if (value=="Married") {
+		// 		this.setState({anniversaryDateShow : true})
+		// 	}else{
+		// 		this.setState({anniversaryDateShow : false})
+		// 	}
+		// }
 	}
-	calAge(dob){
-		var currentDate = Moment(new Date());
-			var age     = Moment.duration(currentDate.diff(dob));
-			var Years   = age.years();
-			var Months  = age.months();
-			var weeks   = age.weeks();
+	// calAge(dob){
+	// 	var currentDate = Moment(new Date());
+	// 		var age     = Moment.duration(currentDate.diff(dob));
+	// 		var Years   = age.years();
+	// 		var Months  = age.months();
+	// 		var weeks   = age.weeks();
 			
 
-			this.setState({
-				ageYears : Years,
-				ageMonths: Months,
-				ageWeeks : weeks,
-			})
-	}
+	// 		this.setState({
+	// 			ageYears : Years,
+	// 			ageMonths: Months,
+	// 			ageWeeks : weeks,
+	// 		})
+	// }
+	passport(event){
+		event.preventDefault();
 
+		var value = event.currentTarget.value;
+		var id  = event.currentTarget.id;
+		this.setState({
+			passport:id,
+		})
+	}
+	visa(event){
+		event.preventDefault();
+
+		var value = event.currentTarget.value;
+		var id  = event.currentTarget.id;
+		this.setState({
+			visa:id,
+		})
+	}
 	setGender(event){
 		event.preventDefault();
 
@@ -396,17 +420,19 @@ class BasicInfoForm extends Component{
 								emailId            : this.state.email,
 								dob                : this.state.dob,
 								gender             : this.state.gender,
-								anniversaryDate    : this.state.anniversaryDate,	
+								//anniversaryDate    : this.state.anniversaryDate,	
 								maritalStatus      : this.state.maritalStatus,
 								nationality        : this.state.nationality,
 								languagesTags	   : this.state.languagesTags,
 								profilePicture	   : this.state.profilePicture,
 								resumeUrl 		   : this.state.resume,
-								executiveSummary   :this.state.executiveSummary	
+								executiveSummary   : this.state.executiveSummary,
+								passport   		   : this.state.passport,
+								visa   		   	   : this.state.visa,
 							}
 							console.log(formValues);
 			if(status==true){
-			Axios.patch("/api/candidatemaster/patch/updateCandidateBasicInfo",formValues)
+			Axios.post("/api/candidatemaster/post",formValues)
 			 .then(response=>{
 
 						Swal.fire("Congrats","Your Basic details is insert Successfully","success");
@@ -416,23 +442,25 @@ class BasicInfoForm extends Component{
 											lastName           : "",
 											dob                : "",
 											gender             : "male",
-											anniversaryDate    : "",	
+											//anniversaryDate    : "",	
 											maritalStatus      : "",
 											languages          : [],
 											nationality        : "",
 											panCardNo          : "",
 											adhaarCardNo       : "",
-											ageYears	       : 0,	
-											ageMonths	       : 0,	
-											ageDays	       	   : 0,
+											// ageYears	       : 0,	
+											// ageMonths	       : 0,	
+											// ageDays	       	   : 0,
 											profilePicture     : "",
 											profileImageUrl    : "",	
 											resume 			   : "",	
-											resumeUrl          : "", 
-											executiveSummary   : ""
+											resumeUrl          : [], 
+											executiveSummary   : "",
+											passport           : "",
+											visa               : "",
 										})
 
-						this.props.history.push("/address/"+this.state.candidate_id);
+						this.props.history.push("/address/"+response.data._id);
 							
 							
 				})
@@ -444,6 +472,7 @@ class BasicInfoForm extends Component{
 	}
 	
 	//========== User Define Function End ==================
+
 	//========== Validation Start ==================
 	validateForm=()=>{
 
@@ -498,8 +527,6 @@ class BasicInfoForm extends Component{
 	      document.getElementById("lastNameError").innerHTML = "";
 	      status = true;
 	    }
-
-
 		
 		if(this.state.dob.length<=0){
 			document.getElementById("dobError").innerHTML = "Please enter your Date Of Birth";  
@@ -508,37 +535,36 @@ class BasicInfoForm extends Component{
 			document.getElementById("dobError").innerHTML = ""; 
 			status = true;
 		}
-		if(this.state.email.length<=0){
-			document.getElementById("emailError").innerHTML = "Please enter your Email";  
-			status=false; 
-		}else if (!emailFilter.test(tempEmail)) { //test email for illegal characters
-	        document.getElementById('emailError').innerHTML = "Please enter a valid email address.";
-	    } else if (this.state.email.match(illegalChars)) {
-	        document.getElementById('emailError').innerHTML = "Email contains invalid characters.";
-	    }else{
-			document.getElementById("emailError").innerHTML = ""; 
-			status = true;
-		}
-		console.log("mob",this.state.mobile)
-		if(this.state.mobile.length<=0){
-			document.getElementById("mobileError").innerHTML = "Please enter your mobile number";  
-			status=false; 
-		}/*else if (!mobileFilter.test(this.state.mobile)) { //test email for illegal characters
-	        document.getElementById('mobileError').innerHTML = "Please enter a valid mobile number.";
-	    }*/else{
-			document.getElementById("mobileError").innerHTML = ""; 
-			status = true;
-		}
+		// if(this.state.email.length<=0){
+		// 	document.getElementById("emailError").innerHTML = "Please enter your Email";  
+		// 	status=false; 
+		// }else if (!emailFilter.test(tempEmail)) { //test email for illegal characters
+	 //        document.getElementById('emailError').innerHTML = "Please enter a valid email address.";
+	 //    } else if (this.state.email.match(illegalChars)) {
+	 //        document.getElementById('emailError').innerHTML = "Email contains invalid characters.";
+	 //    }else{
+		// 	document.getElementById("emailError").innerHTML = ""; 
+		// 	status = true;
+		// }
+		// if(this.state.mobile.length<=0){
+		// 	document.getElementById("mobileError").innerHTML = "Please enter your mobile number";  
+		// 	status=false; 
+		// }else if (!mobileFilter.test(this.state.mobile)) { //test email for illegal characters
+	 //        document.getElementById('mobileError').innerHTML = "Please enter a valid mobile number.";
+	 //    }else{
+		// 	document.getElementById("mobileError").innerHTML = ""; 
+		// 	status = true;
+		// }
 
-		if(this.state.alternate.length>0){
+		// if(this.state.alternate.length>0){
 			
-			if (!mobileFilter.test(this.state.alternate)) { //test email for illegal characters
-	        	document.getElementById('alternateError').innerHTML = "Please enter a valid alternate mobile number.";
-		    }else{
-				document.getElementById("alternateError").innerHTML = ""; 
-				status = true;
-			}
-		}
+		// 	if (!mobileFilter.test(this.state.alternate)) { //test email for illegal characters
+	 //        	document.getElementById('alternateError').innerHTML = "Please enter a valid alternate mobile number.";
+		//     }else{
+		// 		document.getElementById("alternateError").innerHTML = ""; 
+		// 		status = true;
+		// 	}
+		// }
 
 		if(this.state.executiveSummary.length<=0){
 			document.getElementById("executiveSummaryError").innerHTML = "Please enter your executive summary";  
@@ -663,6 +689,7 @@ class BasicInfoForm extends Component{
 							</div>
 						</div>
 						<div className="row formWrapper">
+							
 							<div className="col-lg-4">
 								<label htmlFor="dob" className="nameTitleForm">
 									Date Of Birth
@@ -681,17 +708,93 @@ class BasicInfoForm extends Component{
 							</div>
 
 							<div className="col-lg-4">
-								<label htmlFor="age" className="nameTitleForm nameTitleFormAge">
-									Age
+								<label htmlFor="maritalStatus" className="nameTitleForm">
+									Marital Status
 								</label>
-								<div className="input-group showFeild">
-									{this.state.ageYears + "  Years, " + this.state.ageMonths +
-									  " months"}	
-								</div> 
-							</div>
+								<div className="input-group ">
+									<span className="input-group-addon inputBoxIcon inputBoxIcon1">
+										<FontAwesomeIcon icon="ring" />
+									</span> 
+									<select required className="form-control inputBox selectOption" 
+									  id="maritalStatus" value={this.state.maritalStatus}
+									  name="maritalStatus" placeholder="-- Select --" onChange={this.handleChange.bind(this)}>
+									  	<option > -- Select -- </option>
+									  	{
+									  		this.state.inputMaritalStatus.length>0
+									  		?	
+									  			this.state.inputMaritalStatus.map((elem,index)=>{
+									  				return(
+									  					<option value={elem._id} key={index}>
+									  						{elem}
+									  					</option>
+									  				);
+									  			})
+									  			
+									  		:
+									  			null
+									  	}
+									</select>
 
+								</div>
+							</div>
 							<div className="col-lg-4">
-								<label htmlFor="gender" className="nameTitleForm nameTitleFormAge">
+								<label htmlFor = "nationality" className = "nameTitleForm" > 
+									Nationality 
+									<sup className = "nameTitleFormStar"> * </sup>
+								</label>
+								<div className="input-group ">
+									<span className="input-group-addon inputBoxIcon">
+										<i className="fa fa-flag-o"></i>
+									</span> 
+									<select required className="form-control inputBox selectOption" id = "nationality" 
+									 value ={this.state.nationality} name="nationality" 
+									 onChange={this.handleChange.bind(this)}>
+									  	<option disabled > -- Select -- </option>
+									  	{
+									  		this.state.inputNationality.length>0
+									  		?	
+									  			this.state.inputNationality.map((elem,index)=>{
+									  				return(
+									  					<option value={elem._id} key={index}>
+									  					 	{elem}
+									  					</option>
+									  				);
+									  			})
+									  			
+									  		:
+									  			null
+									  	}
+									</select>
+								</div>
+							</div>
+						</div>
+
+						{// <div className="row formWrapper multiselectZ">
+
+							
+						// 	
+						// 		this.state.anniversaryDateShow ? 
+						// 		<div className="col-lg-4 anniversaryDate">
+						// 			<label htmlFor="anniversaryDate" className="nameTitleForm">
+						// 				Anniversary Date
+						// 			</label>
+						// 			<div className="input-group ">
+						// 				<span className="input-group-addon inputBoxIcon inputBoxIcon2 calender">
+						// 					<i className="fa fa-calendar-o"></i>
+						// 				</span> 
+						// 				<input type="date" name="anniversaryDate" id="anniversaryDate" 
+						// 				className="form-control inputBox date" value={this.state.anniversaryDate}
+						// 				onChange={this.handleChange.bind(this)} />
+						// 			</div> 
+						// 		</div>
+						// 		: null
+						// 	
+						// </div>
+						}
+						
+						<div className="row formWrapper">
+							<div className="col-lg-4">
+								<label htmlFor="gender" className="nameTitleForm ">
 									Gender
 								</label>
 								<div className="input-group genderFeildWrapper">
@@ -730,60 +833,67 @@ class BasicInfoForm extends Component{
 									
 								</div>
 							</div>
-						</div>
-
-						<div className="row formWrapper multiselectZ">
-
 							<div className="col-lg-4">
-								<label htmlFor="maritalStatus" className="nameTitleForm">
-									Marital Status
+								<label htmlFor="passport" className="nameTitleForm ">
+									Do You Have Passport?
 								</label>
-								<div className="input-group ">
-									<span className="input-group-addon inputBoxIcon inputBoxIcon1">
-										<FontAwesomeIcon icon="ring" />
-									</span> 
-									<select required className="form-control inputBox selectOption" 
-									  id="maritalStatus" value={this.state.maritalStatus}
-									  name="maritalStatus" placeholder="-- Select --" onChange={this.handleChange.bind(this)}>
-									  	<option > -- Select -- </option>
-									  	{
-									  		this.state.inputMaritalStatus.length>0
-									  		?	
-									  			this.state.inputMaritalStatus.map((elem,index)=>{
-									  				return(
-									  					<option value={elem._id} key={index}>
-									  						{elem}
-									  					</option>
-									  				);
-									  			})
-									  			
-									  		:
-									  			null
-									  	}
-									</select>
+								<div className="input-group genderFeildWrapper">
+									<div className={this.state.passport==="Yes"
+														? 
+														"genderFeild col-lg-6 genderFeildActive" 
+														: 
+														"genderFeild col-lg-6" }  
+											 id="Yes" name="passport" 
+											 onClick={this.passport.bind(this)}>
 
+											<div className="row" >
+												Yes
+											</div>
+									</div>
+									<div className={this.state.passport==="No"
+									                ? "genderFeild col-lg-6 genderFeildActive" 
+									                : "genderFeild col-lg-6" } 
+									     id="No" name="passport" 
+									     onClick={this.passport.bind(this)}>
+
+										<div className="row">
+											No
+										</div>
+									</div>
 								</div>
-							</div>
-							{
-								this.state.anniversaryDateShow ? 
-								<div className="col-lg-4 anniversaryDate">
-									<label htmlFor="anniversaryDate" className="nameTitleForm">
-										Anniversary Date
-									</label>
-									<div className="input-group ">
-										<span className="input-group-addon inputBoxIcon inputBoxIcon2 calender">
-											<i className="fa fa-calendar-o"></i>
-										</span> 
-										<input type="date" name="anniversaryDate" id="anniversaryDate" 
-										className="form-control inputBox date" value={this.state.anniversaryDate}
-										onChange={this.handleChange.bind(this)} />
-									</div> 
+							</div> 
+							<div className="col-lg-4">
+								<label htmlFor="visa" className="nameTitleForm ">
+									Do You Have Visa?
+								</label>
+								<div className="input-group genderFeildWrapper">
+									<div className={this.state.visa==="Yes"
+														? 
+														"genderFeild col-lg-6 genderFeildActive" 
+														: 
+														"genderFeild col-lg-6" }  
+											 id="Yes" name="visa" 
+											 onClick={this.visa.bind(this)}>
+
+											<div className="row" >
+												Yes
+											</div>
+									</div>
+									<div className={this.state.visa==="No"
+									                ? "genderFeild col-lg-6 genderFeildActive" 
+									                : "genderFeild col-lg-6" } 
+									     id="No" name="visa" 
+									     onClick={this.visa.bind(this)}>
+
+										<div className="row">
+											No
+										</div>
+									</div>
 								</div>
-								: null
-							}
+							</div> 
 						</div>
 						<div className="row formWrapper">
-							<div className="col-lg-8">
+							<div className="col-lg-12">
 								<label htmlFor="languages" className="nameTitleForm">
 									Languages Spoken
 								</label>
@@ -800,36 +910,6 @@ class BasicInfoForm extends Component{
 							        handleAddition={this.onLanguageAddition.bind(this)}
 							        handleDrag={this.onLanguageDrag.bind(this)}
 									handleTagClick={this.onLanguageClick.bind(this)} />
-								</div>
-							</div>
-							<div className="col-lg-4">
-								<label htmlFor = "nationality" className = "nameTitleForm" > 
-									Nationality 
-									<sup className = "nameTitleFormStar"> * </sup>
-								</label>
-								<div className="input-group ">
-									<span className="input-group-addon inputBoxIcon">
-										<i className="fa fa-flag-o"></i>
-									</span> 
-									<select className="form-control inputBox" id = "nationality" 
-									 value ={this.state.nationality} name="nationality" 
-									 onChange={this.handleChange.bind(this)}>
-									  	<option disabled > -- Select -- </option>
-									  	{
-									  		this.state.inputNationality.length>0
-									  		?	
-									  			this.state.inputNationality.map((elem,index)=>{
-									  				return(
-									  					<option value={elem._id} key={index}>
-									  					 	{elem}
-									  					</option>
-									  				);
-									  			})
-									  			
-									  		:
-									  			null
-									  	}
-									</select>
 								</div>
 							</div>
 						</div>
@@ -921,10 +1001,10 @@ class BasicInfoForm extends Component{
 
 const mapStateToProps = (state)=>{
     return {
-        userDetails     : state.userDetails,
+        userDetails  : state.userDetails,
     }
 }
 const mapDispatchToProps = (dispatch) => ({
   mapAction :  bindActionCreators(mapActionCreator, dispatch)
 }) 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(BasicInfoForm))
+export default connect(mapStateToProps,mapDispatchToProps) (withRouter(BasicInfoForm));

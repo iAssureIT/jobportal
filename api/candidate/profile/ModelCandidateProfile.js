@@ -13,7 +13,7 @@ const candidateSchema = mongoose.Schema({
 		// anniversaryDate	: Date,
 		nationality 	: String,
 		profilePicture  : String,
-		resume 			: String,
+		resume 			: Array,
 		executiveSummary: String,
 		passport        : String,
 		visa        	: String,

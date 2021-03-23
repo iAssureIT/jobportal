@@ -16,6 +16,8 @@ class MiddelContent extends Component{
 			academicsArry      : [],
 			certificationArry  : [],
 			DegreeArray        : [],
+			basicInfoArry      : [],
+			executiveSummary   : "",
 		}
 	}
 	componentDidMount(){
@@ -25,14 +27,18 @@ class MiddelContent extends Component{
 			console.log(response.data)
 		 	this.setState({
 		 		workExperienceArry:response.data.workExperience,
+		 		basicInfoArry     :response.data.basicInfo,
 		 		academicsArry     :response.data.academics,
 		 		certificationArry :response.data.certifications,	
 				DegreeArray       :response.data.academics,	
+				executiveSummary  :response.data.basicInfo.executiveSummary?response.data.basicInfo.executiveSummary:"",
 		 	})
+		 	console.log("basicInfoArry",this.state.basicInfoArry)
 		 })
 		 .catch(error=>{
 		 	//Swal.fire("Submit Error!uuu",error.message,'error');
 		 })
+
 	}
 		
 	render(){
@@ -52,20 +58,8 @@ class MiddelContent extends Component{
 									</div>
 								</div>
 							</div>
-							<div className="middelContentText col-lg-12">
-								{
-									this.state.certificationArry.length > 0
-									?
-									this.state.certificationArry.map((elem,index)=>{
-										return(
-												<div className="SubHeadingPadding" key={index}>
-													<p>{elem.skilldesc}</p>
-												</div>
-												);
-									})
-									:
-									null
-								}
+							<div className="middelContentText executiveSummaryWraap col-lg-12">
+								<div dangerouslySetInnerHTML = {{ __html : this.state.executiveSummary}} />
 							</div>
 						</div>
 
@@ -112,7 +106,7 @@ class MiddelContent extends Component{
 														{
 															elem.company_id.companyLogo[0] ? 
 															<img className="pull-right" src={elem.company_id.companyLogo[0] } alt="Company logo"/>
-															: <img className="pull-right" src= "https://www.iconsdb.com/icons/preview/white/briefcase-xxl.png" alt="Company logo"/>
+															: <img className="pull-right" src= "/images/logonotfound.jpg" alt="Company logo"/>
 														}
 														</div>
 													</div>

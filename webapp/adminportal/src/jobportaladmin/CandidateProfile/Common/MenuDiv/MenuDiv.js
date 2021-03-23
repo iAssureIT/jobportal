@@ -9,9 +9,10 @@ export default class MenuDiv extends Component {
 
     render(){
       return(
-           <div className="nav-center OnboardingTabs col-lg-12 col-md-12 col-sm-12 col-xs-12">
+           <div className="nav-center OnboardingTabs OnboardingTabs2 col-lg-10 col-lg-offset-1 col-md-12 col-sm-12 col-xs-12">
+              <div className="row">
                   <ul className="nav nav-pills vendorpills col-lg-12 col-md-12  col-sm-12 col-xs-12">
-                    <li className="active col-lg-2 col-md-3 col-sm-12 col-xs-12 pdcls pdclsOne btn1 NOpadding-left">
+                    <li className="active col-lg-3 col-md-3 col-sm-12 col-xs-12 pdcls pdclsOne btn1 NOpadding-left">
                       <a href="/candidate/basic-info" className="basic-info-pillss pills">
                         
                         Basic Info
@@ -23,14 +24,6 @@ export default class MenuDiv extends Component {
                       <a href="/candidate/address/:candidateID" className="basic-info-pillss backcolor">
                         
                         Address
-                      </a>
-                      <div className="trianglethree forActive" id="triangle-right"></div>
-                    </li>
-                    <li className="col-lg-2 col-md-3 col-sm-12 col-xs-12 transactionTab pdcls pdclsOne btn2 disabled">
-                      <div className="triangletwo" id="triangle-right1"></div>
-                      <a  href="/candidate/contact/:candidateID" className="basic-info-pillss backcolor">
-                        
-                        Contact
                       </a>
                       <div className="trianglethree forActive" id="triangle-right"></div>
                     </li>
@@ -50,7 +43,7 @@ export default class MenuDiv extends Component {
                       </a>
                       <div className="trianglethree forActive" id="triangle-right"></div>
                     </li>
-                    <li className="col-lg-2 col-md-3 col-sm-12 col-xs-12 transactionTab noRightPadding pdcls btn4 disabled">
+                    <li className="col-lg-3 col-md-3 col-sm-12 col-xs-12 transactionTab noRightPadding pdcls btn4 disabled">
                       <div className="trianglesix" id="triangle-right2"></div>
                       <a  href="/candidate/experience/:candidateID" className="basic-info-pillss backcolor">
                         
@@ -58,7 +51,8 @@ export default class MenuDiv extends Component {
                       </a>
                     </li>
                   </ul>
-                </div>
+              </div>
+          </div>
       );
     
       

@@ -75,3 +75,34 @@
 .AddressBoxRightIcon{
 	position:absolute;
 }
+.iAssureITtable-bordered > tbody > tr > th,
+.iAssureITtable-bordered > tfoot > tr > th,
+.iAssureITtable-bordered > tbody > tr > td,
+.iAssureITtable-bordered > tfoot > tr > td {
+   border: 1px solid  var(--main-border-color)!important;
+}
+.iAssureITtable-bordered > thead > tr > th, 
+ .iAssureITtable-bordered > thead > tr > td{
+ 	 border: 2px groove #fff6;
+}
+.col-lg-12.col-sm-12.col-md-12.col-xs-12.NOpadding.marginTop8,#tableComponent{
+	padding-left: 0px;
+	padding-right: 0px;
+}
+
+#tableComponent,.col-lg-12.col-sm-12.col-md-12.col-xs-12.NOpadding.marginTop8 {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+th.umDynamicHeader.srpadd.text-center{
+	text-align: left;
+}
+td#ActionContent{
+	text-align: left!important;
+}
+.textAlignCenter,th.umDynamicHeader.srpadd.text-center{
+	text-align: left!important;
+}
+.skillsGenderWrapper{
+	margin-top: 6px;
+}
