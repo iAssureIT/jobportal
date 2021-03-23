@@ -15,6 +15,7 @@
 	margin-bottom: 30px;
 	border-radius: 10px;
 	border: 1px solid var(--main-border-color);
+	background-color: var(--form-field-background-color);
 }
 
 .jobListContainer .jobListLeftContent{
@@ -223,11 +224,27 @@
 	margin-left: -20px;
 	margin-right: 20px;
 }
-.link, .link:hover{
+
+
+
+.link{
 	font-size: 21px;
 	color: var(--main-border-color);
 	margin-top: 3px;
 	margin-left: -5px;
+}
+
+/*.link:hover{
+	text-decoration: underline;
+}*/
+
+.jobListDesignation a{
+	text-decoration: none;
+}
+
+.jobListDesignation a:hover{
+	color: var(--main-border-color);
+	text-decoration: underline !important;
 }
 
 /***************************swal custom classes**********************************/

@@ -153,7 +153,7 @@ deleteJob = (event)=>{
 
 
 														<div className="jobListDesignation">
-															{elem.jobBasicInfo.jobTitle}
+															<a className="link">{elem.jobBasicInfo.jobTitle}</a>
 														</div>
 														<div className="jobListCompanyName">
 															{elem.company_id.companyName}

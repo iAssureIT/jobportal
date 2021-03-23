@@ -24,10 +24,10 @@ componetDidMount(){
 			<section className="jobListWrapper">
 				<div className="col-lg-12 JobListWrapperMain">
 					<div className="col-lg-4 col-lg-offset-8">
-						<div className="input-group searchMainTab">
+						{/*<div className="input-group searchMainTab">
 							<input type="text" name="search" id="search" className="form-control jobListSearchTab" placeholder="Search by Job Title..." onChange={this.search}/>
 							<span className="input-group-addon searchTabAddOn"><i className="fa fa-search"></i> </span> 
-						</div> 
+						</div> */}
 					</div> 
 						{
 							this.props.appliedJoblist.length > 0
@@ -35,15 +35,38 @@ componetDidMount(){
 								this.props.appliedJoblist.map((elem,index)=>{
 									return(
 										<div className="col-lg-6">
-											<div className="jobListContainer">
+											<div className="appliedJobListContainer">
 												<div className="col-lg-12">
 													<div className="col-lg-11 jobListLeftContent">
 														<div className="row">
 															<div className="iconsBar">
 																<ul>	
-																	<li><i className="fa fa-male"></i></li>
-																	<li><i className="fa fa-sun-o"></i></li>
-																	<li><i className="fa fa-clock-o"></i></li>
+																	{
+																	elem.jobDetails[0].jobBasicInfo.gender=="Male Only"?
+																	<li><i className="fa fa-male" title="Only male candidates can apply"></i></li>
+																	: elem.jobDetails[0].jobBasicInfo.gender=="Female Only"?
+																	<li><i className="fa fa-female" title="Only female candidates can apply"></i></li> 
+																	: <li><i className="fa fa-male" title="male & female candidates both can apply"></i><i className="fa fa-female bothIcon" title="male & female candidates both can apply"></i></li>
+																	}
+																	{	 
+																		elem.jobDetails[0].jobBasicInfo.jobshift_id ? 
+																		elem.jobDetails[0].jobBasicInfo.jobshift_id.jobShift=="Day Shift" ?
+																		<li><i className="fa fa-sun-o" title="Day Shift"></i></li>
+																		: elem.jobDetails[0].jobBasicInfo.jobshift_id.jobShift=="Night Shift"?
+																		<li><i className="fa fa-moon-o" title="Night Shift"></i></li> 
+																		: <li><i className="fa fa-repeat" title="Rotational shift"></i></li> 
+																		:
+																		<li><i className="fa fa-sun-o" title="Day Shift"></i></li>
+																		
+																	}	
+																	{	
+																		elem.jobDetails[0].jobBasicInfo.jobtime_id.jobTime=="Full Time"?
+																		<li><i className="fa fa-clock-o" title="Full Time"></i></li>
+																		: elem.jobDetails[0].jobBasicInfo.jobtime_id.jobTime=="Part Time" ? <li><i className="fa fa-hourglass-start" title="Part Time"></i></li>
+																		: elem.jobDetails[0].jobBasicInfo.jobtime_id.jobTime=="Hourly Basis"? 
+																		<li><i className="fa fa-hourglass-o" title="Hourly Basis"></i></li> 
+																		: <li><i className="fa fa-hourglass-o" title="Hourly Basis"></i></li> 
+																	}
 																</ul>
 																<div className="infoLog"> 15 Days Ago </div>
 															</div>
@@ -52,16 +75,17 @@ componetDidMount(){
 															{elem.jobDetails[0].jobBasicInfo.jobTitle}
 														</div>
 														<div className="jobListCompanyName">
-															<b>{elem.company_id ? elem.company_id.companyName : null}</b>
+															{/*<b>{elem.company_id ? elem.company_id.companyName : null}</b>*/}
+															{elem.company_id ? elem.company_id.companyName : "Anonymous"}
 														</div>
 														<div> 
-															<i className="fa fa-calendar jobListExperience"></i> &nbsp; Exp: {elem.jobDetails[0].eligibility.minEducation} To {elem.jobDetails[0].eligibility.minExperience}
+															<i className="fa fa-calendar jobListExperience"></i> &nbsp; Exp: {elem.jobDetails[0].eligibility.minExperience}
 														</div>
 														<div> 
 															<i className="fa fa-rupee jobListMonSal"></i> &nbsp; <i className="fa fa-inr"></i> {elem.jobDetails[0].ctcOffered.minSalary} - <i className="fa fa-inr"></i> {elem.jobDetails[0].ctcOffered.maxSalary} a month
 														</div>
-														<div>
-															<i className="fa fa-map-marker jobListLocation"></i> &nbsp; {elem.jobDetails[0].jobBasicInfo.jobLocationCity}
+														<div className="joblistLocationInfo">
+															<i className="fa fa-map-marker jobListLocation"></i> &nbsp; {elem.jobDetails[0].location.address + " "+ elem.jobDetails[0].location.district + ", "+elem.jobDetails[0].location.state+", "+elem.jobDetails[0].location.country}
 														</div>
 														<div> 
 															<i className="fa fa-users jobListNumPositions"></i> &nbsp; No of position : 10
@@ -74,7 +98,7 @@ componetDidMount(){
 																	<ul>
 																		{/*<li><i className="fa fa-check" onClick={this.applyJob}></i></li>*/}
 																		<li><i onClick={wishlist => this.handleclick(elem._id)} className={this.state.isToggle ? 'fa fa-heart-o':'fa fa-heart'}></i></li>
-																		<li><i className="fa fa-youtube-play"></i></li>
+																		{/*<li><i className="fa fa-youtube-play"></i></li>*/}
 																	</ul>
 																</div>
 															</div>

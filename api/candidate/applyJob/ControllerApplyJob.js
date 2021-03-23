@@ -31,6 +31,7 @@ exports.applyJob = (req,res,next)=>{
 
 
 exports.appliedJobList = (req,res,next)=>{
+    console.log(req.body.candidate_id);
      //ApplyJob.find({"candidate_id": req.params.candidate_id}) 
 
     ApplyJob.aggregate([
