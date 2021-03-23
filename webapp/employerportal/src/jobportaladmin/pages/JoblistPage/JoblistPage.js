@@ -17,19 +17,27 @@ class JoblistPage extends Component{
 	      arrowToggle          : false ,
         jobList              : [],
         selector             : {}, 
+        startLimit           : 0,
+        endLimit             : 5,
+        activePage           : 1,
 	    }
 	}
   
   componentDidMount(){
  
       var selector=this.state.selector;
-      selector.countryCode = "IN"; 
-      selector.company_id = this.props.company_id
+      selector.countryCode  = "IN"; 
+      selector.company_id   = this.props.company_id;
+      selector.startLimit   = this.state.startLimit;
+      selector.endLimit     = this.state.endLimit;
+      selector.activePage   = this.state.activePage;
+
       this.setState({ selector: selector })
 
       var {mapAction} = this.props;
-      mapAction.filterJobList(selector);
- 
+      mapAction.filterJobList(selector); 
+      mapAction.jobCount(selector); 
+
       mapAction.applicantsCountList({entity_id : this.props.company_id});
 
   }
@@ -52,7 +60,6 @@ class JoblistPage extends Component{
   }
 	
   render(){
-    console.log(this.props.showLoader)
         		return(
                 		<div className="ViewBodyWrapper">
                         <div className="col-lg-3" style={{"marginTop": "30px"}}>

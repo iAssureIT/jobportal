@@ -33,6 +33,7 @@ const initialState = {
 	selector 					: {},
 	showLoader 					: false,
 	jobList 					: [],
+	jobCount 					: 0,
 	candidateSelector 			: {},
 	appliedCandidateSelector 	: {},
 	candidateList 				: [],
@@ -58,6 +59,9 @@ const reducer = (state = initialState, action) => {
 	}
 	if (action.type === "SHOW_LOADER") {
 		newState.showLoader = action.showLoader;
+	}
+	if(action.type === "GET_JOBCOUNT"){
+		newState.jobCount = action.jobCount;
 	}
 	if(action.type === "SET_FILTER_SELECTOR"){
 		newState.selector 	= action.selector;

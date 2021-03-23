@@ -1,4 +1,5 @@
 import React, {Component} 		from 'react';
+
 import Axios 			  		from 'axios';
 import Swal  					from 'sweetalert2';
 import Moment 					from "moment";
@@ -6,12 +7,17 @@ import { FontAwesomeIcon } 		from '@fortawesome/react-fontawesome';
 import { connect }        		from 'react-redux';
 import { bindActionCreators } 	from 'redux';
 import  * as mapActionCreator 	from '../../common/actions/index';
+import Pagination from "react-js-pagination";
+require("bootstrap/less/bootstrap.less");
 
 class JobListView extends Component{
 	constructor(props){
 	super(props);
 	this.state={
-		jobList : [],
+		jobList 	: [],
+		activePage	: this.props.selector.activePage,
+		startLimit 	: this.props.selector.startLimit,
+		endLimit 	: this.props.selector.endLimit,
 	}
 }	
 
@@ -24,7 +30,22 @@ componentDidMount(){
 	var {mapAction} = this.props;
 	mapAction.filterJobList(selector);*/
 }
+handlePageChange(pageNumber) {
+	//console.log(`active page is ${pageNumber}`);
+	this.setState({activePage: pageNumber});
+	
+	var activePage = pageNumber;
 
+	var selector=this.props.selector;
+  	
+  	selector.startLimit   = (activePage-1) * 5;
+  	selector.endLimit     = activePage * 5;
+  	selector.activePage   = pageNumber;
+
+  	var {mapAction} = this.props;
+    mapAction.filterJobList(selector);
+
+}
 deleteJob = (event)=>{
 	event.preventDefault();
 	const job_id = event.currentTarget.id;
@@ -81,7 +102,6 @@ deleteJob = (event)=>{
 					{/*<div className="col-lg-4 col-lg-offset-8">
 						<div className="input-group searchMainTab">
 							<input type="text" name="jobTitle" id="jobTitle" className="form-control jobListSearchTab" placeholder="Search by Job Title..." onChange={this.search}/>
-							<span className="input-group-addon searchTabAddOn"><i className="fa fa-search"></i> </span> 
 						</div> 
 					</div>*/} 
 						{
@@ -195,7 +215,17 @@ deleteJob = (event)=>{
 							:
 								<h3 style={{margin:"100px"}}>No Jobs Found</h3>
 						}
+					<div className="col-lg-12">
+				        <Pagination
+				          activePage={this.state.activePage}
+				          itemsCountPerPage={5}
+				          totalItemsCount={this.props.jobCount[0] ? this.props.jobCount[0].jobCount : 0}
+				          pageRangeDisplayed={5}
+				          onChange={this.handlePageChange.bind(this)}
+				        />
+				    </div>	
 				</div>
+				
 			</section>
 		);
 	}
@@ -205,6 +235,7 @@ const mapStateToProps = (state)=>{
     return {
         user_ID     : state.user_ID,  	candidate_id   : state.candidate_id,
         selector    : state.selector,   jobList     : state.jobList,
+        jobCount  	: state.jobCount,
         applicantsCountList : state.applicantsCountList
     }
 }

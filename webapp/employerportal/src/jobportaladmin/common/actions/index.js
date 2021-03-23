@@ -38,6 +38,10 @@ export const showLoader = (showLoader )=> ({
       type        : 'SHOW_LOADER',
       showLoader    : showLoader
 });
+export const getJobCount = (jobCount )=> ({
+      type        : 'GET_JOBCOUNT',
+      jobCount      : jobCount
+});
 export const getFunctionalData = (functionalJobs )=> ({
       type        : 'GET_FUNCTIONAL_DATA',
       functionalJobs  : functionalJobs
@@ -58,7 +62,20 @@ export const setJobWishlist = (jobWishlist )=> ({
       type        : 'GET_JOB_WISHLIST',
       jobWishlist     : jobWishlist
 });
-
+export function jobCount(selector) {
+    return dispatch =>{
+      //console.log(selector)
+      dispatch(setFilterSelector(selector));
+      return axios.post("/api/jobs/job-count",selector)
+      .then((response)=>{
+       
+          dispatch(getJobCount(response.data));
+      })
+      .catch((error)=>{
+            console.log('error', error);
+      }) 
+    }  
+}
 export function filterJobList(selector) {
   	return dispatch =>{
       dispatch(showLoader(true));
@@ -72,7 +89,7 @@ export function filterJobList(selector) {
 	          console.log('error', error);
 	    }) 
   	}  
-}
+} 
 export function applicantsCountList(selector) {
     return dispatch =>{
       return axios.post("/api/applyJob/get/applicantsCountList",selector)

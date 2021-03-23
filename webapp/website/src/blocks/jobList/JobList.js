@@ -8,19 +8,25 @@ import { connect }        from 'react-redux';
 import { bindActionCreators } from 'redux';
 import  * as mapActionCreator from '../../common/actions/index';
 import UploadVideoModal from '../UploadVideoModal/UploadVideoModal.js';
+import Pagination from "react-js-pagination";
+require("bootstrap/less/bootstrap.less");
+
 /*import {
   RecordWebcam,
   useRecordWebcam,
   CAMERA_STATUS
 } from "react-record-webcam";*/
 
-class Joblist extends Component{
+class Joblist extends Component{ 
 	constructor(props){
 	super(props);
 	this.state={
 		jobList  		: [],
 		isToggle 		: true,
 		appliedItems 	: [],
+		activePage	: this.props.selector.activePage,
+		startLimit 	: this.props.selector.startLimit,
+		endLimit 	: this.props.selector.endLimit,
 	}
 
 }
@@ -28,7 +34,22 @@ class Joblist extends Component{
 componentDidMount(){
 	
 }
+handlePageChange(pageNumber) {
+	//console.log(`active page is ${pageNumber}`);
+	this.setState({activePage: pageNumber});
+	
+	var activePage = pageNumber;
 
+	var selector=this.props.selector;
+  	
+  	selector.startLimit   = (activePage-1) * 5;
+  	selector.endLimit     = activePage * 5;
+  	selector.activePage   = pageNumber;
+
+  	var {mapAction} = this.props;
+    mapAction.filterJobList(selector);
+
+}
 
 
 handleclick = (jobid)=>{
@@ -316,8 +337,17 @@ removeApplication = (job_id) => {
 								);
 							})
 							:
-							null
+							<h3 style={{margin:"100px"}}>No Jobs Found</h3>
 						}
+						<div className="col-lg-12">
+					        <Pagination
+					          activePage={this.state.activePage}
+					          itemsCountPerPage={5}
+					          totalItemsCount={this.props.jobCount[0] ? this.props.jobCount[0].jobCount : 0}
+					          pageRangeDisplayed={5}
+					          onChange={this.handlePageChange.bind(this)}
+					        />
+					    </div>
 					</div>
 				</div>
 			</section>
@@ -328,7 +358,8 @@ removeApplication = (job_id) => {
 const mapStateToProps = (state)=>{
     return {
     	userDetails 	: state.userDetails,	selector        : state.selector, 	
-    	jobList 		: state.jobList,		jobWishlist 	: state.jobWishlist, 
+    	jobList 		: state.jobList,		jobCount  	: state.jobCount,
+    	jobWishlist 	: state.jobWishlist, 
     	appliedJoblist  : state.appliedJoblist
     }
 }

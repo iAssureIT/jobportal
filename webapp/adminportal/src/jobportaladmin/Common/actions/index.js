@@ -31,6 +31,10 @@ export const setAppliedCandidateFilterSelector = (appliedCandidateSelector )=> (
       type                    : 'SET_APPLIED_CANDIDATE_FILTER_SELECTOR',
       appliedCandidateSelector: appliedCandidateSelector
 });
+export const getJobCount = (jobCount )=> ({
+      type        : 'GET_JOBCOUNT',
+      jobCount      : jobCount
+});
 export const getJobList = (jobList )=> ({ 
       type          : 'GET_JOB_LIST',
       jobList       : jobList
@@ -92,7 +96,20 @@ export function getAccessToFacility(moduleName, facilityName) {
         })
   }  
 }
-
+export function jobCount(selector) {
+    return dispatch =>{
+      //console.log(selector)
+      dispatch(setFilterSelector(selector));
+      return axios.post("/api/jobs/job-count",selector)
+      .then((response)=>{
+       
+          dispatch(getJobCount(response.data));
+      })
+      .catch((error)=>{
+            console.log('error', error);
+      }) 
+    }  
+}
 export function filterJobList(selector) {
     return dispatch =>{
       dispatch(showLoader(true));

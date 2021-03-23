@@ -6,20 +6,40 @@ import { FontAwesomeIcon } 		from '@fortawesome/react-fontawesome';
 import { connect }        		from 'react-redux';
 import { bindActionCreators } 	from 'redux';
 import  * as mapActionCreator 	from '../../Common/actions/index';
-
 import './Joblist.css';
+import Pagination from "react-js-pagination";
+require("bootstrap/less/bootstrap.less");
 
 class Joblist extends Component{
 	constructor(props){
 	super(props);
 	this.state={
-		jobList : []
+		jobList : [],
+		activePage	: this.props.selector.activePage,
+		startLimit 	: this.props.selector.startLimit,
+		endLimit 	: this.props.selector.endLimit,
 	}
 }	
 
 componentDidMount(){
 }
 
+handlePageChange(pageNumber) {
+	//console.log(`active page is ${pageNumber}`);
+	this.setState({activePage: pageNumber});
+	
+	var activePage = pageNumber;
+
+	var selector=this.props.selector;
+  	
+  	selector.startLimit   = (activePage-1) * 5;
+  	selector.endLimit     = activePage * 5;
+  	selector.activePage   = pageNumber;
+
+  	var {mapAction} = this.props;
+    mapAction.filterJobList(selector);
+
+}
 deleteJob = (event)=>{
 	event.preventDefault();
 	const job_id = event.currentTarget.id;
@@ -178,8 +198,17 @@ deleteJob = (event)=>{
 									);
 								})
 							:
-								null
-						}	
+								<h3 style={{margin:"100px"}}>No Jobs Found</h3>
+						}
+						<div className="col-lg-12">
+					        <Pagination
+					          activePage={this.state.activePage}
+					          itemsCountPerPage={5}
+					          totalItemsCount={this.props.jobCount[0] ? this.props.jobCount[0].jobCount : 0}
+					          pageRangeDisplayed={5}
+					          onChange={this.handlePageChange.bind(this)}
+					        />
+					    </div>	
 				</div>
 			</section>
 		);
@@ -188,7 +217,7 @@ deleteJob = (event)=>{
 
 const mapStateToProps = (state)	=>	{
 									    return {	
-											    	userDetails 	: state.userDetails,	selector : state.selector, 	
+											    	userDetails 	: state.userDetails,	selector : state.selector, jobCount  	: state.jobCount,	
 											    	jobList 		: state.jobList,		applicantsCountList : state.applicantsCountList
 									    		}
 									}

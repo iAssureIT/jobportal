@@ -25,7 +25,10 @@ class HomePage extends Component {
       //selector              : {},
       mapwiseJobs           : [],
       functonalAreaJobs     : [],
-      subfunctonalAreaJobs  : [],    
+      subfunctonalAreaJobs  : [],
+      startLimit            : 0,
+      endLimit              : 5,
+      activePage            : 1,    
     }
   } 
   componentDidMount(){ 
@@ -67,9 +70,19 @@ class HomePage extends Component {
         mapAction.filterSubfunctionalData(selector);
       }else if(this.props.match.params.industryName != "all" && this.props.match.params.subfunctionalArea == "all"){
         
+
+        selector.startLimit   = this.state.startLimit;
+        selector.endLimit     = this.state.endLimit;
+        selector.activePage   = this.state.activePage;
+
         mapAction.setViewMode("listView");
         mapAction.filterJobList(selector);
       }else{
+        
+        selector.startLimit   = this.state.startLimit;
+        selector.endLimit     = this.state.endLimit;
+        selector.activePage   = this.state.activePage;
+
         mapAction.setViewMode("listView");
         mapAction.filterJobList(selector);
       }
@@ -242,13 +255,15 @@ class HomePage extends Component {
         this.props.history.push("/country/"+this.props.match.params.countryCode+"/state/"+this.props.match.params.stateCode+"/city/"+this.props.match.params.district+"/industry/"+this.props.match.params.industryName+"/"+this.props.match.params.industry_id+"/function/all/0/subfunction/all/0");
       }
       if (this.props.match.path == "/" || this.props.match.params.industryName=="all") {
-        console.log("in if")
+        //console.log("in if")
         mapAction.filterIndustrialData(selector);
       }else{
+
         mapAction.filterJobList(selector);
       }
     }
     if (viewMode=="listView") {
+
       mapAction.filterJobList(this.props.selector);
     }
     mapAction.jobCount(selector);
