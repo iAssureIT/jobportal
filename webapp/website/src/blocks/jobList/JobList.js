@@ -273,7 +273,7 @@ removeApplication = (job_id) => {
 														<b>{elem.company_id ? elem.company_id.companyName : "Anonymous"}</b>
 													</div>
 													<div> 
-														<i className="fa fa-calendar jobListExperience"></i> &nbsp; Exp: {elem.eligibility.minExperience} years
+														<i className="fa fa-calendar jobListExperience"></i> &nbsp; Exp: {elem.eligibility.minExperience}
 													</div>
 													<div> 
 														<i className="fa fa-rupee jobListMonSal"></i> &nbsp; <i className="fa fa-inr"></i> {elem.ctcOffered.minSalary} - <i className="fa fa-inr"></i> {elem.ctcOffered.maxSalary} a month
@@ -290,7 +290,6 @@ removeApplication = (job_id) => {
 														<div className="col-lg-offset-2 col-lg-12">
 															<div className="jobListVerticleIcons">
 																<ul>
-																	
 																	<li><i title={appliedtooltipMsg} className={"fa fa-check-square" + appliedClass}  onClick={appliedClass == '-o' ? applyJob => this.applyJob(elem._id, elem.company_id) : removeApplication => this.removeApplication(elem._id) } ></i></li>
 																	<li ><i title={tooltipMsg} onClick={wishlist => this.handleclick(elem._id)} className={"fa fa-heart" + wishClass}></i></li>
 																	{/*<li><i className="fa fa-youtube-play" id="video" data-toggle="modal" data-target="#videoModal"></i></li>*/}
