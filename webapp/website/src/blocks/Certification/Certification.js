@@ -444,7 +444,6 @@ class Certification extends Component{
 	handleSubmit(event){
 		event.preventDefault();
 		 this.props.history.push("/experience/"+this.state.candidate_id);
-	
 	}
 
 	//========== User Define Function End ==================

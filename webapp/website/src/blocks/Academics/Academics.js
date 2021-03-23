@@ -442,7 +442,7 @@ class Academics extends Component{
 	}
 	handleSubmit(event){
 		event.preventDefault();
-		this.props.history.push("/certification/"+this.state.candidate_id);
+			this.props.history.push("/certification/"+this.state.candidate_id);
 	}
 	//========== User Define Function End ==================
 		//========== Validation Start ==================
