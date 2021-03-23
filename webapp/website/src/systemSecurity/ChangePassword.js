@@ -170,7 +170,7 @@ class ChangePassword extends Component {
         .then(response => {
           console.log(response);
         if(response.data.message==="Login Auth Successful"){
-            
+          if(this.state.oldPassword !=this.state.newPassword)  {
             if(this.state.newPassword === this.state.confirmNewPassword){
               var body = {
                 pwd : this.state.newPassword,
@@ -216,7 +216,10 @@ class ChangePassword extends Component {
             }else{
               swal("Invalid Password","Please Enter valid new password and confirm password");
             }
-
+          }
+           else{
+              swal("Same  Password","Old password and New password must be different");
+            }  
            
           
         }

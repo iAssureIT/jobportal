@@ -73,6 +73,8 @@ class BasicInfo extends Component {
     this.SubmitBasicInfo           = this.SubmitBasicInfo.bind(this);
   }
   componentDidMount() {
+
+    this.edit();
     axios.defaults.headers.common['Authorization'] = 'Bearer '+ localStorage.getItem("token");
     console.log(this.props.userDetails.company_id)
     if (this.props.userDetails.company_id) {
@@ -197,13 +199,14 @@ class BasicInfo extends Component {
         }
       }
     });
-
+/*
     axios.get('/api/entitymaster/getEntity/' + this.props.userDetails.company_id)
         .then((response) => {
           var industry = this.state.industryArray.filter((industry)=>{
             return industry._id  == response.data.industry_id
           })
-          //console.log("response", industry)
+          console.log("response", industry)
+          
           this.setState({
             "entityID": this.props.match.params.entityID,
             "entityType": response.data.entityType,
@@ -224,10 +227,12 @@ class BasicInfo extends Component {
             "userID": response.data.ID,
             "createdBy": localStorage.getItem("user_ID")
           })
+
+          console.log(".............................",response.data.entityType);
         })
         .catch((error) => {
         })
-        this.getCountryConfigDetails()
+        this.getCountryConfigDetails()*/
       axios.get('/api/industrymaster/get/list')
       .then((response) => {
         
