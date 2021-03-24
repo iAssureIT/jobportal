@@ -460,10 +460,11 @@ class Header extends Component{
 
                            }
                         </div>
-
-                        <div className="menuProfileName col-lg-12">
-                            {this.props.userDetails.firstName} &nbsp;{this.props.userDetails.lastName}
-                        </div>
+                        <a href={"/profile/"+this.props.userDetails.candidate_id}>
+                          <div className="menuProfileName col-lg-12">
+                              {this.props.userDetails.firstName} &nbsp;{this.props.userDetails.lastName}
+                          </div>
+                        </a>
 
                          <div className="menuProfileEmail col-lg-12">
                             {this.props.userDetails.email}
@@ -483,12 +484,12 @@ class Header extends Component{
                         <i className="fa fa-heart"></i>
                         <span className="notificationMessegeText">Wishlist Jobs</span>
                       </div></a>
-                      <a href={"/profile/"+this.props.userDetails.candidate_id}>
+                      {/*<a href={"/profile/"+this.props.userDetails.candidate_id}>
 
                       <div className="notificationMessege col-lg-12">
                       <i class="fa fa-eye"></i>
                         <span className="notificationMessegeText">View Profiles</span>
-                      </div></a>
+                      </div></a>*/}
 
                       {/*<a href={"/reset-pwd/"+this.props.userDetails.candidate_id}><div className="notificationMessege col-lg-12">
                         <span className="notificationMessegeText">Reset Password</span>
@@ -499,7 +500,10 @@ class Header extends Component{
                       </div>
                      
                       <div className="menuProfileSignOut col-lg-12 ">
-                          <span className="signOutButton" onClick={this.logout.bind(this)}>Sign Out</span>
+                          <a href={"/profile/"+this.props.userDetails.candidate_id}>
+                            <span className="myProfileButton col-lg-6">My Profile</span>
+                          </a>
+                          <span className="signOutButton col-lg-6" onClick={this.logout.bind(this)}>Sign Out</span>
                       </div>
 
                     </div>
