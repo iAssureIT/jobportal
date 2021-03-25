@@ -18,24 +18,25 @@ class JoblistPage extends Component{
         jobList              : [],
         selector             : {}, 
         startLimit           : 0,
-        endLimit             : 5,
-        activePage           : 1,
+        initialLimit         : 5,
+        showMoreLimit        : 25,
 	    }
 	}
   
   componentDidMount(){
  
       var selector=this.state.selector;
-      selector.countryCode  = "IN"; 
-      selector.company_id   = this.props.company_id;
-      selector.startLimit   = this.state.startLimit;
-      selector.endLimit     = this.state.endLimit;
-      selector.activePage   = this.state.activePage;
+      selector.countryCode    = "IN";  
+      selector.company_id     = this.props.company_id;
+      selector.startLimit     = this.state.startLimit;
+      selector.initialLimit   = this.state.initialLimit;
+      selector.showMoreLimit  = this.state.showMoreLimit;
 
       this.setState({ selector: selector })
 
       var {mapAction} = this.props;
       mapAction.filterJobList(selector); 
+      console.log(selector)
       mapAction.jobCount(selector); 
 
       mapAction.applicantsCountList({entity_id : this.props.company_id});

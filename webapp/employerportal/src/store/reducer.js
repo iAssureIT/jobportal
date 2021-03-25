@@ -73,7 +73,7 @@ const reducer = (state = initialState, action) => {
 		newState.appliedCandidateSelector 	= action.appliedCandidateSelector;
 	}
 	if(action.type === "GET_JOB_LIST"){
-		newState.jobList = action.jobList;
+		newState.jobList = state.jobList.concat(action.jobList) ;
 	}
 	if(action.type === "GET_APPLICANTS_COUNT"){
 		newState.applicantsCountList = action.applicantsCountList;

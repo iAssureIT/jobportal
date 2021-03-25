@@ -264,6 +264,13 @@
 	color: #fff;
 	font-weight: 600;
 }
+.showMoreBtn{
+	background-color: var(--yellow-button-color);
+    color: #fff;
+    height: 30px;
+    line-height: 15px;
+    margin: 20px 0;
+}
 .pagination{
 	float: right
 }

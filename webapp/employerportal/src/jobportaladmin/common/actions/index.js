@@ -17,7 +17,7 @@ export const setAppliedCandidateFilterSelector = (appliedCandidateSelector )=> (
       type                    : 'SET_APPLIED_CANDIDATE_FILTER_SELECTOR',
       appliedCandidateSelector: appliedCandidateSelector
 });
-export const getJobList = (jobList )=> ({ 
+export const getJobList = (jobList )=> ({  
       type 				   : 'GET_JOB_LIST',
       jobList 			 : jobList
 });

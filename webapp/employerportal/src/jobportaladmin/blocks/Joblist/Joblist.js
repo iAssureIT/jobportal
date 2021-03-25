@@ -14,10 +14,9 @@ class JobListView extends Component{
 	constructor(props){
 	super(props);
 	this.state={
-		jobList 	: [],
-		activePage	: this.props.selector.activePage,
-		startLimit 	: this.props.selector.startLimit,
-		endLimit 	: this.props.selector.endLimit,
+		jobList 		: [],
+		activePage		: this.props.selector.activePage,
+		startLimit 		: this.props.selector.startLimit,
 	}
 }	
 
@@ -29,6 +28,17 @@ componentDidMount(){
 
 	var {mapAction} = this.props;
 	mapAction.filterJobList(selector);*/
+}
+showMore(){
+
+	var selector 		  	= this.props.selector;
+
+	selector.startLimit   	= this.props.selector.startLimit === 0 
+	? this.props.selector.startLimit + this.props.selector.initialLimit  
+	: this.props.selector.startLimit + this.props.selector.showMoreLimit
+
+  	var {mapAction} = this.props;
+    mapAction.filterJobList(selector);
 }
 handlePageChange(pageNumber) {
 	//console.log(`active page is ${pageNumber}`);
@@ -95,7 +105,7 @@ deleteJob = (event)=>{
 		}
 
 	render(){
-		
+		console.log(this.props.jobList)
 		return(
 			<section className="jobListWrapper">
 				<div className="col-lg-12 EmployeeListWrapperMain">
@@ -108,6 +118,7 @@ deleteJob = (event)=>{
 							this.props.jobList.length>0
 							?
 								this.props.jobList.map((elem,index1)=>{
+									//console.log(elem)
 									var applicantsCount = this.props.applicantsCountList.filter((appl, ind)=>{
 										if (appl._id == elem._id) {
 											return appl.candidatesApplied;
@@ -126,15 +137,6 @@ deleteJob = (event)=>{
 																{/*<FontAwesomeIcon className="restRoomIcon" icon={['fas', 'restroom']} />*/}
 																
 																<ul>
-																	{/*{
-																		elem.jobBasicInfo.gender=="Male Only"?
-																		<li><i className="fa fa-male"></i></li>
-																		:
-																		<li><i className="fa fa-female"></i></li>
-																	}	
-																	<li><i className="fa fa-sun-o sunIcon"></i></li>
-																	<li><i className="fa fa-clock-o clockIcon"></i></li>*/}
-
 																{
 																	elem.jobBasicInfo.gender=="Male Only"?
 																	<li><i className="fa fa-male" title="Only male candidates can apply"></i></li>
@@ -216,13 +218,22 @@ deleteJob = (event)=>{
 								<h3 style={{margin:"100px"}}>No Jobs Found</h3>
 						}
 					<div className="col-lg-12">
-				        <Pagination
+						{
+							this.props.jobCount[0] ? 
+							(this.props.selector.startLimit + this.props.selector.showMoreLimit) >= this.props.jobCount[0].jobCount ? null :
+							<button className="btn buttonYellow" style={{float:"right", margin:"20px 0"}} onClick={this.showMore.bind(this)}>Show {this.props.selector.showMoreLimit} More</button>
+				        
+				        	: 
+				        	<button className="btn buttonYellow" style={{float:"right", margin:"20px 0"}} onClick={this.showMore.bind(this)}> Show More </button>
+				        
+						}
+						{/*<Pagination
 				          activePage={this.state.activePage}
 				          itemsCountPerPage={5}
 				          totalItemsCount={this.props.jobCount[0] ? this.props.jobCount[0].jobCount : 0}
 				          pageRangeDisplayed={5}
 				          onChange={this.handlePageChange.bind(this)}
-				        />
+				        />*/}
 				    </div>	
 				</div>
 				

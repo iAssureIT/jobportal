@@ -598,8 +598,13 @@ exports.getJobListForEmployer = (req,res,next)=>{
     if (req.body.minExp != null  && req.body.maxExp != null) {
         selector["$and"].push({ "eligibility.minExperience" : { '$gte' : req.body.minExp,  '$lte' : req.body.maxExp} });
     }
-    //console.log("hagshg",req.body)
-    Jobs.find(selector).skip(req.body.startLimit).limit(req.body.endLimit).sort({createdAt:-1})
+    console.log("hagshg",req.body.startLimit)
+    //console.log("hagshg",req.body.endLimit)
+    console.log("selector",selector)
+
+    var limit = req.body.startLimit === 0 ? req.body.initialLimit : req.body.showMoreLimit
+
+    Jobs.find(selector).skip(req.body.startLimit).limit(limit).sort({createdAt:-1})
     .populate('company_id')
     .populate('jobBasicInfo.industry_id')
     .populate('jobBasicInfo.functionalarea_id')
