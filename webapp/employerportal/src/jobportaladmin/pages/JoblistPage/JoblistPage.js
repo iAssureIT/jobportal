@@ -18,7 +18,7 @@ class JoblistPage extends Component{
         jobList              : [],
         selector             : {}, 
         startLimit           : 0,
-        initialLimit         : 5,
+        initialLimit         : 25,
         showMoreLimit        : 25,
 	    }
 	}

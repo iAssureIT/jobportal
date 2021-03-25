@@ -37,6 +37,8 @@ showMore(){
 	? this.props.selector.startLimit + this.props.selector.initialLimit  
 	: this.props.selector.startLimit + this.props.selector.showMoreLimit
 
+	console.log(selector)
+  	
   	var {mapAction} = this.props;
     mapAction.filterJobList(selector);
 }
