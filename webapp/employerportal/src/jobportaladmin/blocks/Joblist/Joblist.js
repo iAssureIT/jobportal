@@ -15,7 +15,6 @@ class JobListView extends Component{
 	super(props);
 	this.state={
 		jobList 		: [],
-		activePage		: this.props.selector.activePage,
 		startLimit 		: this.props.selector.startLimit,
 	}
 }	
@@ -107,7 +106,7 @@ deleteJob = (event)=>{
 		}
 
 	render(){
-		console.log(this.props.jobList)
+		console.log(this.props.jobCount)
 		return(
 			<section className="jobListWrapper">
 				<div className="col-lg-12 EmployeeListWrapperMain">
@@ -171,7 +170,7 @@ deleteJob = (event)=>{
 
 																<div className="joblistNoCount"> 
 																     &nbsp; <a href={"/applied-candidate-list/" + elem._id}> Total Applicants : {applicantsCount.length > 0 ? applicantsCount[0].candidatesApplied :  0}</a> 
-															    </div>
+															    </div> 
 															</div>    
 														</div>
 
@@ -221,8 +220,8 @@ deleteJob = (event)=>{
 						}
 					<div className="col-lg-12">
 						{
-							this.props.jobCount[0] ? 
-							(this.props.selector.startLimit + this.props.selector.showMoreLimit) >= this.props.jobCount[0].jobCount ? null :
+							this.props.jobCount ? 
+							(this.props.selector.startLimit + this.props.selector.showMoreLimit) >= this.props.jobCount ? null :
 							<button className="btn buttonYellow" style={{float:"right", margin:"20px 0"}} onClick={this.showMore.bind(this)}>Show {this.props.selector.showMoreLimit} More</button>
 				        
 				        	: 

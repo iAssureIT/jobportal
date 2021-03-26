@@ -460,8 +460,12 @@ exports.getJobList = (req,res,next)=>{
         selector["$and"].push({ "eligibility.minExperience" : { '$gte' : req.body.minExp,  '$lte' : req.body.maxExp} });
     }
     console.log("list selector - ", selector);
+
+    var limit = req.body.startLimit === 0 ? req.body.initialLimit : req.body.showMoreLimit
+    console.log(req.body.startLimit)
+    console.log(limit)
     
-    Jobs.find(selector).skip(req.body.startLimit).limit(req.body.endLimit).sort({createdAt:-1})
+    Jobs.find(selector).skip(req.body.startLimit).limit(limit).sort({createdAt:-1})
     .populate('company_id')
     .populate('jobBasicInfo.industry_id')
     .populate('jobBasicInfo.functionalarea_id')
@@ -600,7 +604,7 @@ exports.getJobListForEmployer = (req,res,next)=>{
     }
     console.log("hagshg",req.body.startLimit)
     //console.log("hagshg",req.body.endLimit)
-    console.log("selector",selector)
+    console.log("selector",selector) 
 
     var limit = req.body.startLimit === 0 ? req.body.initialLimit : req.body.showMoreLimit
 
@@ -875,11 +879,7 @@ exports.jobCount = (req, res, next)=>{
         selector["$and"].push({ "eligibility.minExperience" : { '$gte' : req.body.minExp,  '$lte' : req.body.maxExp} });
     }
     console.log("count selector - ", JSON.stringify(selector));
-    Jobs.aggregate([
-        { $match    : selector },
-        { $count    : "jobCount" },
-    ])
-    
+    Jobs.find(selector).count()
     .exec()
     .then(data=>{
         //create states array

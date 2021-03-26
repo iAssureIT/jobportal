@@ -166,7 +166,7 @@ class NewHeader extends Component{
 						<div className="cityNameHeader">{selectedState && selectedState != "" ? selectedState : "India"}
 						</div>	
 
-						<div className="cityJobsHeader">{this.props.jobCount[0] ? this.props.jobCount[0].jobCount : 0}
+						<div className="cityJobsHeader">{this.props.jobCount ? this.props.jobCount : 0}
 						</div>			     		
 	     		
 	     			</div>

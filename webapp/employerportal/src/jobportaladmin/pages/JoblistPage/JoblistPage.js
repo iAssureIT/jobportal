@@ -9,7 +9,7 @@ import Loader                 from '../../common/Loader/Loader.js';
 
 import "./Joblist.css";
 
-class JoblistPage extends Component{
+class JoblistPage extends Component{ 
 	constructor(props){
 		super(props);
 		this.state={
@@ -36,7 +36,7 @@ class JoblistPage extends Component{
 
       var {mapAction} = this.props;
       mapAction.filterJobList(selector); 
-      console.log(selector)
+      //console.log(selector)
       mapAction.jobCount(selector); 
 
       mapAction.applicantsCountList({entity_id : this.props.company_id});

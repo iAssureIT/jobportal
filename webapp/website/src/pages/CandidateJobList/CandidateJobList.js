@@ -13,6 +13,9 @@ class CandidateJobList extends Component{
 		this.state={
 			jobList  		: [],
 			selector 		: {},
+			startLimit           : 0,
+	        initialLimit         : 25,
+	        showMoreLimit        : 25,
 		}
 	}
 
@@ -20,12 +23,15 @@ class CandidateJobList extends Component{
 
 		var selector=this.state.selector;
 	    selector.countryCode = "IN"; 
+	    selector.startLimit     = this.state.startLimit;
+      	selector.initialLimit   = this.state.initialLimit;
+      	selector.showMoreLimit  = this.state.showMoreLimit;
 
 	    this.setState({ selector: selector })
 
 	    var {mapAction} = this.props;
 	    mapAction.filterJobList(selector);
-
+	    mapAction.jobCount(selector); 
 	    mapAction.getJobWishlist(this.props.userDetails.candidate_id);
 	    mapAction.getAppliedJoblist(this.props.userDetails.candidate_id);
 

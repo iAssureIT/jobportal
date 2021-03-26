@@ -56,7 +56,11 @@ export const getIndustrialData = (industrialJobs )=> ({
 });
 export const getJobList = (jobList )=> ({
       type 				: 'GET_JOB_LIST',
-      jobList 			: jobList
+      jobList 		: jobList
+});
+export const appendJobList = (jobList )=> ({  
+      type           : 'APPEND_JOB_LIST',
+      jobList        : jobList
 });
 export const setJobWishlist = (jobWishlist )=> ({
       type 				: 'GET_JOB_WISHLIST',
