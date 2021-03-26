@@ -124,7 +124,7 @@ class Header extends Component{
         var stateName = "";
           //selector.stateCode = window.location.pathname.split("/")[2] 
           switch(window.location.pathname.split("/")[4]) {
-        case "AP": stateName = "Andhra Pradesh"
+        case "AD": stateName = "Andhra Pradesh"
           break;
         case "AR": stateName = "Arunachal Pradesh"
           break;

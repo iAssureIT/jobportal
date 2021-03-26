@@ -178,17 +178,17 @@ class HomePage extends Component {
   }
   leftDrawerInfo(event){
 
-    if(this.state.leftDrawerDisplay==="-610px"){
+    if(this.state.leftDrawerDisplay==="-380%"){
   
       this.setState({
-      leftDrawerDisplay  : "0px",
+      leftDrawerDisplay  : "0%",
       arrowToggle: true
       
       })
     }
     else{
       this.setState({
-      leftDrawerDisplay  : "-610px",
+      leftDrawerDisplay  : "-380%",
       arrowToggle:false
       })
     }

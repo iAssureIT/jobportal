@@ -8,7 +8,7 @@ import { connect }        from 'react-redux';
 import { bindActionCreators } from 'redux';
 import  * as mapActionCreator from '../../common/actions/index';
 import UploadVideoModal from '../UploadVideoModal/UploadVideoModal.js';
-import Pagination from "react-js-pagination";
+/*import Pagination from "react-js-pagination";*/
 require("bootstrap/less/bootstrap.less");
 
 /*import {
@@ -339,7 +339,7 @@ removeApplication = (job_id) => {
 							:
 							<h3 style={{margin:"100px"}}>No Jobs Found</h3>
 						}
-						<div className="col-lg-12">
+						{/*<div className="col-lg-12">
 					        <Pagination
 					          activePage={this.state.activePage}
 					          itemsCountPerPage={5}
@@ -347,7 +347,7 @@ removeApplication = (job_id) => {
 					          pageRangeDisplayed={5}
 					          onChange={this.handlePageChange.bind(this)}
 					        />
-					    </div>
+					    </div>*/}
 					</div>
 				</div>
 			</section>

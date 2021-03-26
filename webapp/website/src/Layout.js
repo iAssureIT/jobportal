@@ -21,6 +21,8 @@ import Footer               from './common/footer/Footer.js';
 import CoreLayout           from './coreadmin/CoreLayout/CoreLayout.js';
 import Homepage             from './pages/Homepage/Homepage.js'
 
+import TestProfile          from './blocks/TestProfile/TestProfile.js';
+
 import CandidateProfile     from './blocks/ProfilePage/CandidateProfile.js';
 import CandidateList        from './blocks/CandidateList/CandidateList.js';
 import CandidateBasicInfo   from './pages/ProfileCreation/CandidateBasicInfo.js';
@@ -142,9 +144,9 @@ class Layout extends Component  {
 
                                             <Route exact path="/address/:candidate_id/edit/:addressID"                  component={CandidateAddress}  />
                                             <Route exact path="/academics/:candidate_id/edit/:academicsID"              component={CandidateAcademics}  />
-                                            <Route exact path="/certification/:candidate_id/edit/:certificationID"     component={CandidateCertification}  />
+                                            <Route exact path="/certification/:candidate_id/edit/:certificationID"      component={CandidateCertification}  />
                                             <Route exact path="/experience/:candidate_id/edit/:workExperienceID"        component={CandidateExperience}  />
-
+                                            <Route exact path="/test-profile"                                           component={TestProfile}  />
                                         </Switch>
                                             </div>
                                             </div>
