@@ -795,9 +795,9 @@ class BasicInfo extends Component {
       <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 NOPadding">
         <section className="content">   
           <div className="pageContent col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        {
+        { 
             this.props.match.params.entityID && this.state.pathname === "appCompany" ? 
-            null:
+            null: 
             <div  className="col-lg-12 col-md-12 col-sm-12 col-xs-12 mt20">
               <ul className="nav tabNav nav-pills col-lg-3 col-md-3 col-sm-12 col-xs-12 pull-right">
                 <li className="active col-lg-5 col-md-5 col-xs-5 col-sm-5 NOpadding text-center"><a data-toggle="pill" href="#manual">Manual</a></li>
@@ -813,14 +813,14 @@ class BasicInfo extends Component {
                 <h4 className="weighttitle col-lg-11 col-md-11 col-xs-11 col-sm-11 NOpadding-right">Organization Settings</h4>
               }
             </div>
-
+ 
             <section className="Content tab-content">
                 <div id="bulk" className="tab-pane fade in col-lg-12 col-md-1f2 col-sm-12 col-xs-12 mt">
                   <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 outerForm">
                     <BulkUpload url="/api/entitymaster/bulkUploadEntity"
-                        data={{ "entityType": this.state.pathname, "createdBy": localStorage.getItem("user_ID"), "corporateId": localStorage.getItem("corporate_ID") }}
+                        data={{ "createdBy": localStorage.getItem("user_ID") }}
                         uploadedData={this.uploadedData}
-                        fileurl="https://fivebees.s3.ap-south-1.amazonaws.com/prod/master/entitymaster.xlsx"
+                        fileurl="https://testjobportal.s3.amazonaws.com/EntityBulkUpload.xlsx"
                         getFileDetails={this.getFileDetails.bind(this)}
                         fileDetails={this.state.fileDetails}
                         goodRecordsHeading={this.state.goodRecordsHeading}

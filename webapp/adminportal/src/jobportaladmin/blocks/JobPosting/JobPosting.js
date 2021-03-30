@@ -15,6 +15,7 @@ import PlacesAutocomplete, {
 import { connect }                  from 'react-redux';
 import { bindActionCreators }       from 'redux';
 import  * as mapActionCreator       from '../../Common/actions/index';
+import BulkUpload                   from "../../../coreadmin/Master/BulkUpload/BulkUpload.js";
 
 import './JobPosting.css';
 import 'react-phone-input-2/lib/style.css';
@@ -117,7 +118,9 @@ class JobPosting extends Component {
             preferredSkillSuggestions   :   [],
 
             
-            submitBtnText               :   "SUBMIT"
+            submitBtnText               :   "SUBMIT",
+            fileDetailUrl               :   "/api/jobs/get/filedetails/"
+
         }
 
         this.reactTags = React.createRef();
@@ -1243,6 +1246,18 @@ render(){
     return(
                 <div className="pageWrapper addJobBackgroundColor container-fluid">
                     <div className="row">
+                        <div  className="col-lg-12 col-md-12 col-sm-12 col-xs-12 mt20">
+                          <ul className="nav tabNav nav-pills col-lg-3 col-md-3 col-sm-12 col-xs-12 pull-right">
+                            <li className="active col-lg-5 col-md-5 col-xs-5 col-sm-5 NOpadding text-center"><a data-toggle="pill" href="#manual">Manual</a></li>
+                            <li className="col-lg-6 col-md-6 col-xs-6 col-sm-6 NOpadding  text-center"><a data-toggle="pill" href="#bulk">Bulk Upload</a></li>
+                          </ul>
+                        </div>
+                        <div id="bulk" className="tab-pane fade in col-lg-12 col-md-1f2 col-sm-12 col-xs-12 mt">
+                          <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 outerForm">
+                            
+                          </div>
+                        </div>
+                        <div id="manual" className="tab-pane fade in active col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding">
                         <div className="col-lg-12 addJobForm pageWrapperBorder borderColor">
                             <div className="col-lg-10 col-lg-offset-1 mainFormSection">
                                 <div className="addJobFormHeading col-lg-12"> Post A Job <div className="addJobFormHr col-lg-12"></div> </div>
@@ -1862,6 +1877,7 @@ render(){
                                     </div>
                                 </form>
                             </div>
+                        </div>
                         </div>
                     </div>
                 </div>

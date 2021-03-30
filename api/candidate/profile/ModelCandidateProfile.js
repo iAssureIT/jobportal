@@ -3,7 +3,8 @@ mongoose.pluralize(null);
 
 const candidateSchema = mongoose.Schema({
 	_id : mongoose.Schema.Types.ObjectId,
-	basicInfo : {
+	candidateID	: Number, 
+	basicInfo 	: {
 		firstName		: String,
 		middleName		: String,
 		lastName 		: String,

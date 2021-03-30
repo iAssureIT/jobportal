@@ -12,10 +12,16 @@ const IndustryMaster        = require('../../coreAdmin/IndustryMaster/ModelIndus
 const EntityMaster          = require('../../coreAdmin/entityMaster/ModelEntityMaster.js');
 
 exports.insertCandidateBasicInfo = (req, res, next)=>{
-    
-    	const candidateData = new CandidateProfile({
-    		"_id" : new mongoose.Types.ObjectId(),
-    		"basicInfo" : {
+        processData();
+        async function processData(){
+
+        var getnext             = await getCandidateNextSequence() 
+        var candidateID         = parseInt(getnext) 
+
+    	const candidateData = new CandidateProfile({ 
+    		"_id"         : new mongoose.Types.ObjectId(),
+            "candidateID" : candidateID,
+    		"basicInfo"   : {
     			"firstName"			: req.body.firstName,
     			"middleName"		: req.body.middleName ? req.body.middleName : null,
     			"lastName" 		 	: req.body.lastName,
@@ -56,9 +62,29 @@ exports.insertCandidateBasicInfo = (req, res, next)=>{
     				error 	: error,
     				message : "Failed to insert candidate details."
     			});
-    		});		
+    		});	
+        }	
 }
-
+function getCandidateNextSequence() {
+    return new Promise((resolve,reject)=>{
+    CandidateProfile.findOne({})    
+        .sort({candidateID : -1})   
+        .exec()
+        .then(data=>{
+            if (data) { 
+                var seq = data.candidateID;
+                seq = seq+1;
+                resolve(seq) 
+            }else{
+               resolve(1)
+            }
+            
+        })
+        .catch(err =>{
+            reject(0)
+        });
+    });
+}
 
 exports.getcandidate_id = (req,res,next)=>{
     CandidateProfile.find({user_id: req.params.userID})

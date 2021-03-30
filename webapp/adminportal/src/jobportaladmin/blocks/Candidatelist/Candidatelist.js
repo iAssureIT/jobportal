@@ -186,7 +186,7 @@ class CandidatesList extends Component{
 																						<div className="col-lg-7 displayInfoCandidate">
 																							<div className="row">
 																								<div className="displayCandidateName">
-																									<div className="col-lg-8 nopadding">	<a href={"/candidate-profile/"+elem._id}> {elem.basicInfo.firstName} </a>
+																									<div className="col-lg-8 nopadding">	<a href={"/candidate-profile/"+elem._id}> {elem.basicInfo.firstName +" ("+ elem.candidateID +")"} </a>
 																									<span className="candidateIdNumber"></span></div>
 																									<div className="col-lg-4 NOpadding-left text-right"><span>
 																									<i className="fa fa-pencil" title="Edit" id={elem._id} onClick={this.edit.bind(this)}></i>
