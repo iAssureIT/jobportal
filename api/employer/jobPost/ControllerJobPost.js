@@ -21,6 +21,7 @@ var ObjectID 	= 	require('mongodb').ObjectID;
 
 exports.insertJobs = (req, res, next)=>{
 		console.log(req.body)	
+        
 		var functionalarea_id, subfunctionalarea_id, jobsector_id, jobrole_id, jobtype_id, jobshift_id, jobtime_id, mineducation_id;
 		var primarySkills   = [];
 	    var secondarySkills = [];
@@ -30,6 +31,9 @@ exports.insertJobs = (req, res, next)=>{
 
 		processData();
     	async function processData(){
+            var getnext             = await getNextSequence() 
+            var jobID               = parseInt(getnext)
+
     		functionalarea_id  		= req.body.functionalarea_id != "" ? req.body.functionalarea_id 
     							: await insertFunctArea(req.body.functionalArea,req.body.user_id)
 			
@@ -81,7 +85,7 @@ exports.insertJobs = (req, res, next)=>{
 		const jobsData = new Jobs({
 			
 			"_id" 			: 	new mongoose.Types.ObjectId(),
-			
+			"jobID"         :   jobID ? jobID : 1,
 			"company_id"	: 	req.body.company_id,
 			
 			"jobBasicInfo" 	: 	{
@@ -1598,9 +1602,31 @@ function getQualification(){
             });            
     });
 }
+function getNextSequence() {
+    return new Promise((resolve,reject)=>{
+    Jobs.findOne({})    
+        .sort({jobID : -1})   
+        .exec()
+        .then(data=>{
+            console.log(data)
+            if (data) { 
+                var seq = data.jobID;
+                seq = seq+1;
+                resolve(seq) 
+            }else{
+               resolve(1)
+            }
+            
+        })
+        .catch(err =>{
+            reject(0)
+        });
+    });
+}
 exports.insertBulkJobs = (req,res,next)=>{
     processData();
     async function processData() {
+        
         var states          = await getStates();
         var entities        = await getEntity();
         var industries      = await getIndustries();
@@ -1650,7 +1676,10 @@ exports.insertBulkJobs = (req,res,next)=>{
                         {"state": "West Bengal", "stateCode": "WB"},
         ]*/
         var jobsArray = []; 
+        var getnext                 = await getNextSequence() 
+        var jobID                   = parseInt(getnext)
         for (var k = 0; k < req.body.noofjobs; k++) {
+            
             var randomStateIndex        = Math.floor(Math.random() * states.length);
             var districts               = await getDistricts(states[randomStateIndex]._id);
             var randomDistrictIndex     = Math.floor(Math.random() * districts.length);
@@ -1668,6 +1697,7 @@ exports.insertBulkJobs = (req,res,next)=>{
             var mineducation_id         = qualifications[Math.floor(Math.random() * qualifications.length)]._id
             
             var jobObject = {
+                "jobID"         : jobID ? jobID : 1,
                 "company_id"    : company_id,
                 "jobBasicInfo"  :   {
                                     "jobTitle"              : jobRoles[Math.floor(Math.random() * jobRoles.length)].jobRole,
@@ -1714,7 +1744,7 @@ exports.insertBulkJobs = (req,res,next)=>{
             }
             //console.log(jobObject)
             jobsArray.push(jobObject) 
-            
+            jobID = jobID + 1;
         }
         Jobs.insertMany(jobsArray)
             .then(data => {
