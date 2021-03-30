@@ -167,7 +167,7 @@ class Joblist extends Component{
 															</div>
 														</div>
 														<div className="jobListDesignation">
-															{elem.jobBasicInfo.jobTitle}
+															{elem.jobBasicInfo.jobTitle + " (" +elem.jobID+ ")"}
 														</div>
 														<div className="jobListCompanyName">
 
