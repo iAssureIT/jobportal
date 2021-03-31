@@ -226,7 +226,7 @@ class BasicInfoForm extends Component{
           var fileName = file.name;
           var fileSize = file.size;
           var ext = fileName.split('.').pop();
-          if (ext === "pdf" || ext === "docx" || ext === "doc") {
+          if (ext === "pdf" || ext === "docx" || ext === "doc" ) {
             if(fileSize > 1048576){
               Swal.fire("Allowed file size is 1MB");
             }else{
