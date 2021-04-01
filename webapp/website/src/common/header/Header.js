@@ -496,7 +496,7 @@ class Header extends Component{
                       </div></a>*/}
                       
                       <div className="notificationMessege col-lg-12" id="changepassworddiv" data-toggle="modal" data-target="#resetPasswordModal">
-                          <i class="fa fa-key"></i><span className="notificationMessegeText">Change Password</span>
+                          <i className="fa fa-key"></i><span className="notificationMessegeText">Change Password</span>
                       </div>
                      
                       <div className="menuProfileSignOut col-lg-12 ">

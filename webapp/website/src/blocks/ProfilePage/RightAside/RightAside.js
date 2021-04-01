@@ -18,7 +18,7 @@ class RightAside extends Component{
 
 		Axios.get("/api/candidatemaster/get/one/"+this.state.candidate_id)
 		.then(response=>{
-			 
+			 console.log(response.data)
 			 	this.setState({
 			 		certificationArry :response.data.certifications,
 			 	})
@@ -58,7 +58,7 @@ class RightAside extends Component{
 															{"Issued " + Moment(elem.certifiedOn).format("MMM YYYY")}
 														</div>
 														<div className="expireDate">
-															No Expiration Date
+															{"Expired " + Moment(elem.validTill).format("MMM YYYY")}
 														</div>
 													</div>
 												</div>

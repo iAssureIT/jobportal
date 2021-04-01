@@ -96,6 +96,7 @@ class BasicInfoForm extends Component{
 					dob               : response.data.basicInfo.dob?Moment(response.data.basicInfo.dob).format("YYYY-MM-DD"):"",
 					gender            : response.data.basicInfo.gender?response.data.basicInfo.gender:"",
 					country           : response.data.basicInfo.country?response.data.basicInfo.country:"",
+					countryShow       : response.data.basicInfo.visa=="Yes"?true:false,
 					//anniversaryDate   : response.data.basicInfo.anniversaryDate?Moment(response.data.basicInfo.anniversaryDate).format("YYYY-MM-DD"):"",
 					maritalStatus     : response.data.basicInfo.maritalStatus?response.data.basicInfo.maritalStatus:"",
 					nationality       : response.data.basicInfo.nationality?response.data.basicInfo.nationality:"",
@@ -303,6 +304,7 @@ class BasicInfoForm extends Component{
     	}	
 	}
 	delImgPreview(event){
+		console.log("heelo")
 		this.setState({
 			profileImageUrl:""
 		})
@@ -322,6 +324,17 @@ class BasicInfoForm extends Component{
 		this.setState({
 			[name]:value,
 		})
+		if(name=="country"){
+			if(this.state.visa=="Yes"){
+				this.setState({
+					[name]:value,
+				})
+			}else{
+				this.setState({
+					[name]:"",
+				})
+			}
+		}
 		// if(name==="dob"){
 		// 	this.calAge(value);
 		// }
@@ -462,7 +475,7 @@ class BasicInfoForm extends Component{
 											// ageDays	       	   : 0,
 											profilePicture     : "",
 											profileImageUrl    : "",	
-											resume 			   : "",	
+											resume 			   : [],	
 											resumeUrl          : "", 
 											executiveSummary   : "",
 											passport           : "",
@@ -758,7 +771,7 @@ class BasicInfoForm extends Component{
 									<select required className="form-control inputBox selectOption" id = "nationality" 
 									 value ={this.state.nationality} name="nationality" 
 									 onChange={this.handleChange.bind(this)}>
-									  	<option disabled > -- Select -- </option>
+									  	<option  > -- Select -- </option>
 									  	{
 									  		this.state.inputNationality.length>0
 									  		?	
@@ -969,12 +982,14 @@ class BasicInfoForm extends Component{
 									{
 										this.state.profileImageUrl!== ""
 										?	
-											<div>
-												<i className="fa fa-times delImgIcon" 
-												   onClick={this.delImgPreview.bind(this)}>
-												</i>
-												<img src={this.state.profileImageUrl} alt="profileImage" 
-												className="profileImage"/>
+											<div className="profileImageWrapper col-lg-12">
+												<div className="row">
+													<i className="fa fa-times delImgIcon" 
+													   onClick={this.delImgPreview.bind(this)}>
+													</i>
+													<img src={this.state.profileImageUrl} alt="profileImage" 
+													className="profileImage"/>
+												</div>
 											</div>
 										:
 											<div>
@@ -995,12 +1010,14 @@ class BasicInfoForm extends Component{
 									{
 										this.state.resumeUrl!== ""
 										?	
-											<div>
-												<i className="fa fa-times delResumeIcon" 
-												   onClick={this.delResumePreview.bind(this)}>
-												</i>
-												<img src={"/images/resumeIcon.png"} alt="profileImage" 
-												className="resumeImage"/>
+											<div className="profileImageWrapper col-lg-12">
+												<div className="row">
+													<i className="fa fa-times delResumeIcon" 
+													   onClick={this.delResumePreview.bind(this)}>
+													</i>
+													<img src={"/images/resumeIcon.png"} alt="profileImage" 
+													className="resumeImage"/>
+												</div>
 											</div>
 										:
 											<div>
