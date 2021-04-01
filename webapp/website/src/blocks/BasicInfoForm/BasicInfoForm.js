@@ -32,7 +32,8 @@ class BasicInfoForm extends Component{
 			gender                    : "",
 			passport                  : "",
 			visa                  	  : "",
-			//anniversaryDate           : "",	
+			country                   : "",	
+			countryShow               : false,	
 			maritalStatus             : "",
 			nationality               : "",
 			panCardNo                 : "",
@@ -93,7 +94,7 @@ class BasicInfoForm extends Component{
 					email         	  : response.data.contact.emailId?response.data.contact.emailId:"",
 					dob               : response.data.basicInfo.dob?Moment(response.data.basicInfo.dob).format("YYYY-MM-DD"):"",
 					gender            : response.data.basicInfo.gender?response.data.basicInfo.gender:"",
-					//anniversaryDate   : response.data.basicInfo.anniversaryDate?Moment(response.data.basicInfo.anniversaryDate).format("YYYY-MM-DD"):"",
+					country           : response.data.basicInfo.country?response.data.basicInfo.country:"",
 					maritalStatus     : response.data.basicInfo.maritalStatus?response.data.basicInfo.maritalStatus:"",
 					nationality       : response.data.basicInfo.nationality?response.data.basicInfo.nationality:"",
 					passport          : response.data.basicInfo.passport?response.data.basicInfo.passport:"",
@@ -322,13 +323,7 @@ class BasicInfoForm extends Component{
 		// if(name==="dob"){
 		// 	this.calAge(value);
 		// }
-		// if (name=="maritalStatus") {
-		// 	if (value=="Married") {
-		// 		this.setState({anniversaryDateShow : true})
-		// 	}else{
-		// 		this.setState({anniversaryDateShow : false})
-		// 	}
-		// }
+
 	}
 	// calAge(dob){
 	// 	var currentDate = Moment(new Date());
@@ -355,9 +350,18 @@ class BasicInfoForm extends Component{
 	}
 	visa(event){
 		event.preventDefault();
+			
 
 		var value = event.currentTarget.value;
 		var id  = event.currentTarget.id;
+		var name  = event.currentTarget.name;
+			if (id=="Yes") {
+				this.setState({countryShow : true})
+			}else{
+				this.setState({countryShow : false})
+			}
+		
+
 		this.setState({
 			visa:id,
 		})
@@ -413,7 +417,7 @@ class BasicInfoForm extends Component{
 								emailId            : this.state.email,
 								dob                : this.state.dob,
 								gender             : this.state.gender,
-								//anniversaryDate    : this.state.anniversaryDate,	
+								country            : this.state.country,	
 								maritalStatus      : this.state.maritalStatus,
 								nationality        : this.state.nationality,
 								languagesTags	   : this.state.languagesTags,
@@ -435,7 +439,8 @@ class BasicInfoForm extends Component{
 											lastName           : "",
 											dob                : "",
 											gender             : "male",
-											//anniversaryDate    : "",	
+											country            : "",	
+											countryShow        : false,	
 											maritalStatus      : "",
 											languages          : [],
 											nationality        : "",
@@ -884,6 +889,26 @@ class BasicInfoForm extends Component{
 									</div>
 								</div>
 							</div> 
+							{
+								this.state.countryShow ? 
+									<div className="col-lg-4 country">
+										<label htmlFor="country" className="nameTitleForm">
+											Country
+										</label>
+										<div className="input-group ">
+											<span className="input-group-addon inputBoxIcon">
+												<i className="fa fa-flag"></i> 
+											</span> 
+											<input type="text" name="country" id="country" 
+											 className="form-control inputBox" 
+											 value={this.state.country} 
+											 onChange={this.handleChange.bind(this)} />
+										</div> 
+									</div>
+								:
+								null
+							}
+							
 						</div>
 						<div className="row formWrapper">
 							<div className="col-lg-12">

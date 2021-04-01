@@ -30,6 +30,7 @@ exports.insertCandidateBasicInfo = (req, res, next)=>{
                 "executiveSummary"  : req.body.executiveSummary ? req.body.executiveSummary : null,
                 "passport"          : req.body.passport ? req.body.passport : null,
                 "visa"              : req.body.visa ? req.body.visa : null,
+                "country"           : req.body.country ? req.body.country : null,
     		},
             "languagesKnown"        : req.body.languagesTags ? req.body.languagesTags : null,
     		"contact" : {
@@ -256,7 +257,7 @@ exports.updateCandidateBasicInfo = (req, res, next)=>{
                         //"basicInfo.age"            : req.body.dob,
                         "basicInfo.gender"         : req.body.gender,
                         "basicInfo.maritalStatus"  : req.body.maritalStatus,
-                        // "basicInfo.anniversaryDate": req.body.anniversaryDate == "" ? null : new Date(req.body.anniversaryDate),
+                        "basicInfo.country"       : req.body.country,
                         "basicInfo.nationality"    : req.body.nationality,
                         "basicInfo.profilePicture" : req.body.profilePicture,
                         "basicInfo.resume"         : req.body.resumeUrl,

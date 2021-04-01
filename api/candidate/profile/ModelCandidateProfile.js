@@ -17,6 +17,7 @@ const candidateSchema = mongoose.Schema({
 		executiveSummary: String,
 		passport        : String,
 		visa        	: String,
+		country        	: String,
 	},
 	languagesKnown		: [{
 						language_id : { type: mongoose.Schema.Types.ObjectId, ref: 'languagemasters' }
