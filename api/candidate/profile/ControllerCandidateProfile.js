@@ -284,7 +284,7 @@ exports.updateCandidateBasicInfo = (req, res, next)=>{
                         "basicInfo.gender"         : req.body.gender,
                         "basicInfo.maritalStatus"  : req.body.maritalStatus,
                         "basicInfo.country"       : req.body.country,
-                        // "basicInfo.anniversaryDate": req.body.anniversaryDate == "" ? null : new Date(req.body.anniversaryDate),
+
                         "basicInfo.nationality"    : req.body.nationality,
                         "basicInfo.profilePicture" : req.body.profilePicture,
                         "basicInfo.resume"         : req.body.resumeUrl,
