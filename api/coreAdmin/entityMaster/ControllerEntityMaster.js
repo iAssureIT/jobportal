@@ -9,7 +9,7 @@ const IndustryMaster = require('../IndustryMaster/ModelIndustryMaster.js');
 const globalVariable= require("../../nodemon.js");
 const axios = require('axios');
 const NodeGeocoder = require('node-geocoder');
-
+const _                   = require("underscore");
 var request = require('request-promise');
 var ObjectID = require('mongodb').ObjectID;
 
@@ -1322,32 +1322,6 @@ var fetchAllEntities = async (type) => {
             });
     });
 };
-exports.filedetails = (req,res,next)=>{
-    // console.log('req------',req,'res',res);
-    var finaldata = {};
-    console.log(req.params.fileName)
-    EntityMaster.find( { fileName:req.params.fileName  }
-    )
-    .exec()
-    .then(data=>{
-        // finaldata.push({goodrecords: data})
-        finaldata.goodrecords = data;
-        FailedRecords.find({fileName:req.params.fileName})  
-            .exec()
-            .then(badData=>{
-                finaldata.failedRecords = badData[0].failedRecords
-                finaldata.totalRecords = badData[0].totalRecords
-                res.status(200).json(finaldata);
-            })
-        
-    })
-    .catch(err =>{
-        console.log(err);
-        res.status(500).json({
-            error: err
-        });
-    });
-};
 
 function insertContactDetails(department, createdBy) {
     return new Promise(function (resolve, reject) {
@@ -1434,7 +1408,7 @@ function getLatLong(address){
 
 exports.bulkUploadEntity = (req, res, next) => {
     var entity = req.body.data;
-    console.log("entity...",entity);
+    //console.log("entity...",entity);
     var validData = [];
     var validObjects = [];
     var invalidData = [];
@@ -1443,6 +1417,8 @@ exports.bulkUploadEntity = (req, res, next) => {
     var failedRecords = [];
     var Count = 0;
     var DuplicateCount = 0;
+    var uploadTime = new Date();
+
     processData();
     async function processData() {
 
@@ -1747,7 +1723,7 @@ exports.bulkUploadEntity = (req, res, next) => {
                 departments               : entityDept,
                 companyNo                 : getnext ? getnext : 1,
                 companyID                 : str ? str : 1,   
-               
+                uploadTime                : uploadTime
            }
 
           validData.push(validObjects);
@@ -1770,14 +1746,14 @@ exports.bulkUploadEntity = (req, res, next) => {
                             departments               : entityDept,
                             companyNo                 : getnext ? getnext : 1,
                             companyID                 : str ? str : 1,   
-
+                            uploadTime                : uploadTime
 
                          })
            // console.log("entity1entity1",entity1.companyPhone);
                           entity1.save()
                             .then(data=>{
                                 console.log("data to save",data)
-                                    // res.status(200).json({ created : true, entityID : data._id ,companyID : data.companyID});
+                                    //res.status(200).json({ created : true, entityID : data._id ,companyID : data.companyID});
                                 })
                             .catch(err => {
                                 console.log(err);
@@ -1911,3 +1887,109 @@ var insertFailedRecords = async (invalidData, updateBadData) => {
 
     })
 }
+exports.filedetails = (req,res,next)=>{
+    // console.log('req------',req,'res',res);
+    var finaldata = {};
+    EntityMaster.find( { fileName:req.params.fileName  })
+    .exec()
+    .then(data=>{
+        // finaldata.push({goodrecords: data})
+        finaldata.goodrecords = data;
+        FailedRecords.find({fileName:req.params.fileName})  
+            .exec()
+            .then(badData=>{
+                finaldata.failedRecords = badData[0].failedRecords
+                finaldata.totalRecords = badData[0].totalRecords
+                res.status(200).json(finaldata);
+            })
+        
+    })
+    .catch(err =>{
+        console.log(err);
+        res.status(500).json({
+            error: err
+        });
+    });
+};
+exports.fetch_file = (req,res,next)=>{
+    EntityMaster.aggregate([
+                {
+                    $group: {
+                        _id : {
+                            "fileName"   :"$fileName", 
+                            "uploadTime" :"$uploadTime",
+                        }, 
+                        'count':{$sum:1} 
+                    }  
+                },
+                {
+                    $project: {    
+                        "fileName"   :"$_id.fileName", 
+                        "uploadTime" :"$_id.uploadTime",
+                        'count'      : 1
+                    }
+                }
+            ])
+    .sort({"uploadTime":-1})
+    .exec()
+    .then(data=>{
+        console.log('data',data);
+        var tableData = data.filter((a, i)=>{
+            if (a.fileName) {
+                return {
+                  fileName    : a.fileName ? a.fileName : "Manual", 
+                  uploadTime  : a.uploadTime !== null ? a.uploadTime : "-", 
+                  count       : a.count !== NaN ? "<p>"+a.count+"</p>" : "a", 
+                  _id         : a.fileName+ "/" + a.uploadTime, 
+                }
+            }          
+        })
+        console.log(tableData)
+        res.status(200).json(tableData.slice(req.body.startRange, req.body.limitRange));
+    })
+    .catch(err =>{
+        console.log(err);
+        res.status(500).json({
+            error: err
+        });
+    });
+};
+exports.fetch_file_count = (req,res,next)=>{
+    EntityMaster.find({})
+    .exec()
+    .then(data=>{
+        var x = _.unique(_.pluck(data, "fileName"));
+        var z = [];
+        for(var i=0; i<x.length; i++){
+            var y = data.filter((a)=> a.fileName == x[i]);
+            z.push({
+                "fileName": x[i],
+                'count': y.length,
+                "_id" : x[i]
+            })
+        }
+        res.status(200).json(z.length);
+    })
+    .catch(err =>{
+        console.log(err);
+        res.status(500).json({
+            error: err
+        });
+    });
+};
+exports.delete_file = (req,res,next)=>{
+    console.log(req.params.uploadTime)
+    EntityMaster.deleteMany({"fileName":req.params.fileName, "uploadTime":req.params.uploadTime})
+    .exec()
+    .then(data=>{
+        res.status(200).json({
+            "message" : "Employers of file "+req.params.fileName+" deleted successfully"
+        });
+    })
+    .catch(err =>{
+        console.log(err);
+        res.status(500).json({
+            error: err
+        });
+    });  
+};

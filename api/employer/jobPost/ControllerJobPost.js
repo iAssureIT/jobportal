@@ -1761,3 +1761,24 @@ function camelCase(str) {
             .map(word => word.charAt(0).toUpperCase() + word.slice(1))
             .join(' ');
 }
+
+
+
+exports.bulkUploadJobs = (req, res, next) => {
+    var jobs = req.body.data;
+    //console.log("entity...",entity);
+    var validData = [];
+    var validObjects = [];
+    var invalidData = [];
+    var invalidObjects = [];
+    var remark = '';
+    var failedRecords = [];
+    var Count = 0;
+    var DuplicateCount = 0;
+    var uploadTime = new Date();
+
+    processData();
+    async function processData() {
+
+    }
+}

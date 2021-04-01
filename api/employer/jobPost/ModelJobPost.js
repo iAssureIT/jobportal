@@ -68,6 +68,8 @@ const jobsSchema = mongoose.Schema({
 	
 	createdAt 		: 	Date,
 	createdBy 		: 	String,
+	fileName        : 	String,
+    uploadTime      : 	Date,
 	updateLog 		: 	[
 							{updatedBy: String, updatedAt:Date, remark:String}
 						]

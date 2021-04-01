@@ -7,7 +7,7 @@ import { connect }        		from 'react-redux';
 import { bindActionCreators } 	from 'redux';
 import  * as mapActionCreator 	from '../../Common/actions/index';
 import './Joblist.css';
-import Pagination from "react-js-pagination";
+//import Pagination from "react-js-pagination";
 require("bootstrap/less/bootstrap.less");
 
 class Joblist extends Component{

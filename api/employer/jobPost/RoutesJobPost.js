@@ -4,6 +4,7 @@ const jobsController =	require("./ControllerJobPost.js");
 
 router.post  ("/post"			   				, jobsController.insertJobs);
 router.post  ("/post/insertBulk"			   	, jobsController.insertBulkJobs);
+router.post  ("/post/bulk-upload-jobs"			, jobsController.bulkUploadJobs);
 
 router.get   ("/get/one/:job_id"  				, jobsController.getJob);
 router.get   ("/get/searchlist/:searchTxt"  	, jobsController.getSearchList);
