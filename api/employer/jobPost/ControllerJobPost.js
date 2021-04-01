@@ -21,6 +21,7 @@ var ObjectID 	= 	require('mongodb').ObjectID;
 
 exports.insertJobs = (req, res, next)=>{
 		console.log(req.body)	
+        
 		var functionalarea_id, subfunctionalarea_id, jobsector_id, jobrole_id, jobtype_id, jobshift_id, jobtime_id, mineducation_id;
 		var primarySkills   = [];
 	    var secondarySkills = [];
@@ -30,6 +31,9 @@ exports.insertJobs = (req, res, next)=>{
 
 		processData();
     	async function processData(){
+            var getnext             = await getNextSequence() 
+            var jobID               = parseInt(getnext)
+
     		functionalarea_id  		= req.body.functionalarea_id != "" ? req.body.functionalarea_id 
     							: await insertFunctArea(req.body.functionalArea,req.body.user_id)
 			
@@ -81,7 +85,7 @@ exports.insertJobs = (req, res, next)=>{
 		const jobsData = new Jobs({
 			
 			"_id" 			: 	new mongoose.Types.ObjectId(),
-			
+			"jobID"         :   jobID ? jobID : 1,
 			"company_id"	: 	req.body.company_id,
 			
 			"jobBasicInfo" 	: 	{
@@ -460,8 +464,12 @@ exports.getJobList = (req,res,next)=>{
         selector["$and"].push({ "eligibility.minExperience" : { '$gte' : req.body.minExp,  '$lte' : req.body.maxExp} });
     }
     console.log("list selector - ", selector);
+
+    var limit = req.body.startLimit === 0 ? req.body.initialLimit : req.body.showMoreLimit
+    console.log(req.body.startLimit)
+    console.log(limit)
     
-    Jobs.find(selector).sort({createdAt:1})
+    Jobs.find(selector).skip(req.body.startLimit).limit(limit).sort({createdAt:-1})
     .populate('company_id')
     .populate('jobBasicInfo.industry_id')
     .populate('jobBasicInfo.functionalarea_id')
@@ -598,8 +606,13 @@ exports.getJobListForEmployer = (req,res,next)=>{
     if (req.body.minExp != null  && req.body.maxExp != null) {
         selector["$and"].push({ "eligibility.minExperience" : { '$gte' : req.body.minExp,  '$lte' : req.body.maxExp} });
     }
-    //console.log("hagshg",JSON.stringify(selector))
-    Jobs.find(selector).sort({createdAt:1})
+    console.log("hagshg",req.body.startLimit)
+    //console.log("hagshg",req.body.endLimit)
+    console.log("selector",selector) 
+
+    var limit = req.body.startLimit === 0 ? req.body.initialLimit : req.body.showMoreLimit
+
+    Jobs.find(selector).skip(req.body.startLimit).limit(limit).sort({createdAt:-1})
     .populate('company_id')
     .populate('jobBasicInfo.industry_id')
     .populate('jobBasicInfo.functionalarea_id')
@@ -778,77 +791,81 @@ exports.jobCount = (req, res, next)=>{
     var countryCode = req.body.countryCode ? req.body.countryCode : "IN";
     selector["$and"].push({ "location.countryCode" :  countryCode   })
     // 1
+    if (req.body.company_id) {
+        selector["$and"].push({ "company_id" : ObjectID(req.body.company_id)});
+    }
+    // 2
     if (req.body.stateCode && req.body.stateCode != "all") {
         selector["$and"].push({ "location.stateCode" :  req.body.stateCode   })
     }
-    // 2
+    // 3
     if (req.body.district  && req.body.district != "all") {
         selector["$and"].push({ "location.district" :  req.body.district   }) 
     }
-    // 3
+    // 4
     if (req.body.industry_id) {
         req.body.industry_id.map(elem => {
             industry_ids.push(ObjectID(elem.id))
         })
         selector["$and"].push({ "jobBasicInfo.industry_id" : { $in: industry_ids } });
     }
-    // 4
+    // 5
     if (req.body.functionalArea_id ) {
         req.body.functionalArea_id.map(elem => {
             funarea_ids.push(ObjectID(elem.id))
         })
         selector["$and"].push({ "jobBasicInfo.functionalarea_id" : { $in: funarea_ids } });
     }
-    // 5
+    // 6
     if (req.body.subfunctionalArea_id ) {
         req.body.subfunctionalArea_id.map(elem => {
             subfunarea_ids.push(ObjectID(elem.id))
         })
         selector["$and"].push({ "jobBasicInfo.subfunctionalarea_id" : { $in: subfunarea_ids } });
     }
-    // 6
+    // 7
     if (req.body.jobSector_id) {
         req.body.jobSector_id.map(elem => {
             jobsector_ids.push(ObjectID(elem.id))
         })
         selector["$and"].push({ "jobBasicInfo.jobsector_id" : { $in: jobsector_ids } });
     }
-    // 7
+    // 8
     if (req.body.jobType_id) {
         req.body.jobType_id.map(elem => {
             jobtype_ids.push(ObjectID(elem.id))
         })
         selector["$and"].push({ "jobBasicInfo.jobtype_id" : { $in: jobtype_ids } });
     }
-    // 8
+    // 9
     if (req.body.jobTime_id) {
         req.body.jobTime_id.map(elem => {
             jobtime_ids.push(ObjectID(elem.id))
         })
         selector["$and"].push({ "jobBasicInfo.jobtime_id" : { $in: jobtime_ids } });
     }
-    // 9
+    // 10
     if (req.body.jobShift_id) {
         req.body.jobShift_id.map(elem => {
             jobshift_ids.push(ObjectID(elem.id))
         })
         selector["$and"].push({ "jobBasicInfo.jobshift_id" : { $in: jobshift_ids } });
     }
-    // 10
+    // 11
     if (req.body.jobRole_id ) {
         req.body.jobRole_id.map(elem => {
             jobrole_ids.push(ObjectID(elem.id))
         })
         selector["$and"].push({ "jobBasicInfo.jobrole_id" : { $in: jobrole_ids } });
     }
-    // 11
+    // 12
     if (req.body.qualification_id) {
         req.body.qualification_id.map(elem => {
             qualification_ids.push(ObjectID(elem.id))
         })
         selector["$and"].push({ "eligibility.mineducation_id" : { $in: qualification_ids } });
     }
-    // 12
+    // 13
     if (req.body.skill_id) {
         req.body.skill_id.map(elem => {
             skill_ids.push(ObjectID(elem.id))
@@ -861,16 +878,12 @@ exports.jobCount = (req, res, next)=>{
     }else{
         delete selector["$or"];
     }
-    // 13
+    // 14
     if (req.body.minExp != null  && req.body.maxExp != null) {
         selector["$and"].push({ "eligibility.minExperience" : { '$gte' : req.body.minExp,  '$lte' : req.body.maxExp} });
     }
     console.log("count selector - ", JSON.stringify(selector));
-    Jobs.aggregate([
-        { $match    : selector },
-        { $count    : "jobCount" },
-    ])
-    
+    Jobs.find(selector).count()
     .exec()
     .then(data=>{
         //create states array
@@ -1589,9 +1602,31 @@ function getQualification(){
             });            
     });
 }
+function getNextSequence() {
+    return new Promise((resolve,reject)=>{
+    Jobs.findOne({})    
+        .sort({jobID : -1})   
+        .exec()
+        .then(data=>{
+            console.log(data)
+            if (data) { 
+                var seq = data.jobID;
+                seq = seq+1;
+                resolve(seq) 
+            }else{
+               resolve(1)
+            }
+            
+        })
+        .catch(err =>{
+            reject(0)
+        });
+    });
+}
 exports.insertBulkJobs = (req,res,next)=>{
     processData();
     async function processData() {
+        
         var states          = await getStates();
         var entities        = await getEntity();
         var industries      = await getIndustries();
@@ -1641,7 +1676,10 @@ exports.insertBulkJobs = (req,res,next)=>{
                         {"state": "West Bengal", "stateCode": "WB"},
         ]*/
         var jobsArray = []; 
+        var getnext                 = await getNextSequence() 
+        var jobID                   = parseInt(getnext)
         for (var k = 0; k < req.body.noofjobs; k++) {
+            
             var randomStateIndex        = Math.floor(Math.random() * states.length);
             var districts               = await getDistricts(states[randomStateIndex]._id);
             var randomDistrictIndex     = Math.floor(Math.random() * districts.length);
@@ -1659,6 +1697,7 @@ exports.insertBulkJobs = (req,res,next)=>{
             var mineducation_id         = qualifications[Math.floor(Math.random() * qualifications.length)]._id
             
             var jobObject = {
+                "jobID"         : jobID ? jobID : 1,
                 "company_id"    : company_id,
                 "jobBasicInfo"  :   {
                                     "jobTitle"              : jobRoles[Math.floor(Math.random() * jobRoles.length)].jobRole,
@@ -1705,7 +1744,7 @@ exports.insertBulkJobs = (req,res,next)=>{
             }
             //console.log(jobObject)
             jobsArray.push(jobObject) 
-            
+            jobID = jobID + 1;
         }
         Jobs.insertMany(jobsArray)
             .then(data => {

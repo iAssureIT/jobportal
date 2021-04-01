@@ -54,6 +54,7 @@
     "react-imask": "^6.0.5",
     "react-inline-editing": "^1.0.10",
     "react-input-mask": "^2.0.4",
+    "react-js-pagination": "^3.0.3",
     "react-load-image": "^0.1.7",
     "react-moment": "^0.9.7",
     "react-multiselect-checkboxes": "^0.1.1",

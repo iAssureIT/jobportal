@@ -132,7 +132,7 @@ class Department extends Component {
     render() {
       return (
       <div className="container-fluid">
-        <div className="col-lg-12 col-md-12 col-xs-12 col-sm-12 companyDisplayForm">
+        <div className="col-lg-12 col-md-12 col-xs-12 col-sm-12">
           <div className="col-lg-12 col-md-12 col-xs-12 col-sm-12">
             <OneFieldForm fields={this.state.fields}
               tableHeading={this.state.tableHeading}
@@ -141,7 +141,7 @@ class Department extends Component {
               history={this.props.history}
               
               masterFieldForm = {true}
-              bulkRequired={true}
+              bulkRequired={false}
               url="/api/departmentmaster/bulkUploadDepartment" 
               data={{ "createdBy" : localStorage.getItem("user_ID"),  }} 
               uploadedData={this.uploadedData} 

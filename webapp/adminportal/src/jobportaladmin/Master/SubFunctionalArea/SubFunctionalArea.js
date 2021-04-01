@@ -175,7 +175,7 @@ class SubFunctionalArea extends Component {
                                         oneeditId ={this.props.oneFieldEditId}
                                         history={this.props.history}   
                                         
-                                        bulkRequired={true}
+                                        bulkRequired={false}
                                         onefieldurl="/api/functionalAreamaster/bulkUploadbrand" 
                                         onefieldfileurl="https://fivebees.s3.ap-south-1.amazonaws.com/prod/master/VehicleBrand.xlsx"
                                         getOneFieldFileDetails={this.getOneFieldFileDetails.bind(this)}
@@ -189,7 +189,7 @@ class SubFunctionalArea extends Component {
                                         oneFieldgoodRecordsTable={this.state.oneFieldgoodRecordsTable}
                                         oneFieldgoodDataCount={this.state.oneFieldgoodDataCount}
 
-                                        twofieldBulkRequired={true}
+                                        twofieldBulkRequired={false}
                                         url="/api/functionalareamaster/bulkUploadFunctionalArea" 
                                         twofieldfileurl="https://fivebees.s3.ap-south-1.amazonaws.com/prod/master/VehicleFunctionalArea.xlsx"
                                         getTwoFieldFileDetails={this.getTwoFieldFileDetails.bind(this)}

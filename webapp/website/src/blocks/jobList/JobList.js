@@ -8,19 +8,23 @@ import { connect }        from 'react-redux';
 import { bindActionCreators } from 'redux';
 import  * as mapActionCreator from '../../common/actions/index';
 import UploadVideoModal from '../UploadVideoModal/UploadVideoModal.js';
+import Pagination from "react-js-pagination";
+require("bootstrap/less/bootstrap.less");
+
 /*import {
   RecordWebcam,
   useRecordWebcam,
   CAMERA_STATUS
 } from "react-record-webcam";*/
 
-class Joblist extends Component{
+class Joblist extends Component{ 
 	constructor(props){
 	super(props);
 	this.state={
 		jobList  		: [],
 		isToggle 		: true,
 		appliedItems 	: [],
+		startLimit 		: this.props.selector.startLimit,
 	}
 
 }
@@ -28,7 +32,35 @@ class Joblist extends Component{
 componentDidMount(){
 	
 }
+showMore(){
 
+	var selector 		  	= this.props.selector;
+
+	selector.startLimit   	= this.props.selector.startLimit === 0 
+	? this.props.selector.startLimit + this.props.selector.initialLimit  
+	: this.props.selector.startLimit + this.props.selector.showMoreLimit
+
+	console.log(selector)
+  	
+  	var {mapAction} = this.props;
+    mapAction.filterJobList(selector);
+}
+handlePageChange(pageNumber) {
+	//console.log(`active page is ${pageNumber}`);
+	this.setState({activePage: pageNumber});
+	
+	var activePage = pageNumber;
+
+	var selector=this.props.selector;
+  	
+  	selector.startLimit   = (activePage-1) * 5;
+  	selector.endLimit     = activePage * 5;
+  	selector.activePage   = pageNumber;
+
+  	var {mapAction} = this.props;
+    mapAction.filterJobList(selector);
+
+}
 
 
 handleclick = (jobid)=>{
@@ -316,8 +348,19 @@ removeApplication = (job_id) => {
 								);
 							})
 							:
-							null
+							<h3 style={{margin:"100px"}}>No Jobs Found</h3>
 						}
+						<div className="col-lg-12">
+					       	{
+								this.props.jobCount ? 
+								(this.props.selector.startLimit + this.props.selector.showMoreLimit) >= this.props.jobCount ? null :
+								<button className="btn buttonYellow" style={{float:"right", margin:"20px 0"}} onClick={this.showMore.bind(this)}>Show {this.props.selector.showMoreLimit} More</button>
+					        
+					        	: 
+					        	<button className="btn buttonYellow" style={{float:"right", margin:"20px 0"}} onClick={this.showMore.bind(this)}> Show More </button>
+					        
+							}
+					    </div>
 					</div>
 				</div>
 			</section>
@@ -328,7 +371,8 @@ removeApplication = (job_id) => {
 const mapStateToProps = (state)=>{
     return {
     	userDetails 	: state.userDetails,	selector        : state.selector, 	
-    	jobList 		: state.jobList,		jobWishlist 	: state.jobWishlist, 
+    	jobList 		: state.jobList,		jobCount  	: state.jobCount,
+    	jobWishlist 	: state.jobWishlist, 
     	appliedJoblist  : state.appliedJoblist
     }
 }

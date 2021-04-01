@@ -35,14 +35,14 @@ class AppliedCandidatelistPage extends Component{
 					<div className="container-fluid">
 						<div className="row">
 							 { this.props.showLoader ? <Loader type = "candidatelistLoader" /> : <AppliedCandidatelist jobInfo={this.state.jobInfo } /> }
-							
 						</div> 
 					</div>
 			);	 
 	}
 }
+
 const mapStateToProps = (state)=>{
-                                    return {	selector    : state.selector, showLoader : state.showLoader }
+                                    return { selector    : state.selector, showLoader : state.showLoader }
                                   }
 
 const mapDispatchToProps = (dispatch) => ({

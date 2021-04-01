@@ -89,18 +89,16 @@ class LocationType extends Component {
   render() {
     return (
       <div className="container-fluid">
-        <div className="col-lg-12 col-md-12 col-xs-12 col-sm-12 companyDisplayForm">
-              <div className="col-lg-12 col-md-12 col-xs-12 col-sm-12">
-                  <OneFieldForm 
-                      fields={this.state.fields}
-                      tableHeading={this.state.tableHeading}
-                      tableObjects={this.state.tableObjects}
-                      editId = {this.props.editId}
-                      masterFieldForm = {true}
-                      history={this.props.history} 
-                  /> 
-              </div>
-        </div>
+          <div className="col-lg-12 col-md-12 col-xs-12 col-sm-12">
+              <OneFieldForm   
+                  fields={this.state.fields}
+                  tableHeading={this.state.tableHeading}
+                  tableObjects={this.state.tableObjects}
+                  editId = {this.props.editId}
+                  masterFieldForm = {true}
+                  history={this.props.history} 
+              /> 
+          </div>
       </div>
     );
   }

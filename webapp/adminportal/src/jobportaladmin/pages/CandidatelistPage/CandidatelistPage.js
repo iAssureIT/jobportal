@@ -25,24 +25,34 @@ class CandidatesListPage extends Component{
       mapAction.filterCandidates(candidateSelector);
 
   	}
+    redirectTo(event){
+      this.props.history.push("/candidate/basic-info")
+    }
 	render(){
 		return(
 				<div className="ViewBodyWrapper">
-                    <div className="col-lg-3" >
-                      <div className='row'>
-                          <CandidateFilters /> 
-                      </div>
-                    </div>
+          <div className="box-header with-border col-lg-12 col-md-12 col-xs-12 col-sm-12 NOpadding-right">
+            <h4 className="weighttitle col-lg-5 col-md-11 col-xs-11 col-sm-11">Candidate List</h4>
+            <div className="col-lg-5 col-md-12 col-sm-12 col-xs-12 pull-right">
+              <span className="col-lg-6 col-lg-offset-6 sentanceCase addButtonList" onClick={this.redirectTo.bind(this)}><i  className="fa fa-plus-circle"></i>&nbsp;&nbsp;{"Add Candidate"} 
+              </span>
+            </div>
+          </div> 
+          <div className="col-lg-3" >
+            <div className='row'>
+                <CandidateFilters /> 
+            </div>
+          </div>
 
-                    <div className="col-lg-9">
-                      <div className="row">
-                        <div id="mapwise">
-                          { this.props.showLoader ? <Loader type="candidatelistLoader"  /> : <CandidatesList /> }
-                        </div>
-                      </div>  
-                    </div>
+          <div className="col-lg-9">
+            <div className="row">
+              <div id="mapwise">
+                { this.props.showLoader ? <Loader type="candidatelistLoader"  /> : <CandidatesList /> }
+              </div>
+            </div>  
+          </div>
                      
-                </div>
+        </div>
 					
 			);	
 	} 

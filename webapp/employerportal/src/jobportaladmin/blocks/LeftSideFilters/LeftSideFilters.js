@@ -44,7 +44,7 @@ class LeftSideFilters extends Component{
       role                  : '-',
       experience            : '-',
       selector              : {},
-
+      
     };
 
     this.style =  {
@@ -234,7 +234,8 @@ class LeftSideFilters extends Component{
     
     var {mapAction} = this.props;
     console.log(selecteditems)
-    selector.countryCode = "IN"; 
+    selector.countryCode  = "IN"; 
+    
     //selector.stateCode = selecteditems.currentTarget.value; 
     // if (this.props.match.path=="/") {
     //   selector.stateCode = this.props.match.params.stateCode
@@ -319,18 +320,23 @@ class LeftSideFilters extends Component{
       minValue = Math.min.apply(null, flattened);
       maxValue = Math.max.apply(null, flattened);
 
+
       //console.log('min: ' + minValue, ' max: ' + maxValue);
 
       selector.minExp = minValue
       selector.maxExp = maxValue
     }
     
+    selector.startLimit     = 0;
+    selector.initialLimit   = 25;
+    selector.showMoreLimit  = 25;
+
     this.setState({ selector: selector },()=>{
        /* mapAction.jobCount(this.state.selector);
     */
   /*  filterJobList(this.state.selector);*/
-      
-/*        mapAction.filterJobList(this.state.selector);*/
+      mapAction.jobCount(selector);  
+      mapAction.filterJobList(this.state.selector);
       
     })
     

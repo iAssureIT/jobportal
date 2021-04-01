@@ -13,20 +13,26 @@ class JoblistPage extends Component{
 	constructor(props)	{
 							super(props);
 							this.state={
-											jobList  		: [],
-											selector 		: {}
+											jobList  			: [],
+											selector 			: {},
+											startLimit          : 0,
+									        initialLimit        : 25,
+									        showMoreLimit       : 25,
 										}
 						}
 
 	componentDidMount(){
 		var selector=this.state.selector; 
-		selector.countryCode = "IN";
+		selector.countryCode  = "IN";
+		selector.startLimit     = this.state.startLimit;
+	    selector.initialLimit   = this.state.initialLimit;
+	    selector.showMoreLimit  = this.state.showMoreLimit;
 		//selector.company_id = this.props.company_id 
 		this.setState({ selector: selector })
 
 		var {mapAction} = this.props;
 		mapAction.filterJobList(selector);
-
+		mapAction.jobCount(selector); 
 		mapAction.applicantsCountList();
 	}
 						

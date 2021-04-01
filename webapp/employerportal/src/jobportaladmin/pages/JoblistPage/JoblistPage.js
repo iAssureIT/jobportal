@@ -9,7 +9,7 @@ import Loader                 from '../../common/Loader/Loader.js';
 
 import "./Joblist.css";
 
-class JoblistPage extends Component{
+class JoblistPage extends Component{ 
 	constructor(props){
 		super(props);
 		this.state={
@@ -17,19 +17,28 @@ class JoblistPage extends Component{
 	      arrowToggle          : false ,
         jobList              : [],
         selector             : {}, 
+        startLimit           : 0,
+        initialLimit         : 25,
+        showMoreLimit        : 25,
 	    }
 	}
   
   componentDidMount(){
  
       var selector=this.state.selector;
-      selector.countryCode = "IN"; 
-      selector.company_id = this.props.company_id
+      selector.countryCode    = "IN";  
+      selector.company_id     = this.props.company_id;
+      selector.startLimit     = this.state.startLimit;
+      selector.initialLimit   = this.state.initialLimit;
+      selector.showMoreLimit  = this.state.showMoreLimit;
+
       this.setState({ selector: selector })
 
       var {mapAction} = this.props;
-      mapAction.filterJobList(selector);
- 
+      mapAction.filterJobList(selector); 
+      //console.log(selector)
+      mapAction.jobCount(selector); 
+
       mapAction.applicantsCountList({entity_id : this.props.company_id});
 
   }
@@ -52,7 +61,6 @@ class JoblistPage extends Component{
   }
 	
   render(){
-    console.log(this.props.showLoader)
         		return(
                 		<div className="ViewBodyWrapper">
                         <div className="col-lg-3" style={{"marginTop": "30px"}}>

@@ -309,18 +309,26 @@ font-face {
 .barsToggel .notificationMessege{
   color:#fff;
 }
-.signOutButton{
-  border: 1px solid #efefef;
+.signOutButton,.myProfileButton{
+  border: 1px solid var(--yellow-button-color);
   border-radius: 5px;
-  color: #efefef;
+  color: var(--main-bg-color);
+  background-color: var(--yellow-button-color);
   font-family: 'Montserrat-Regular';
   padding: 5px 10px;
+  width: 40%;
+  height: 30px;
+  float: right;
+  text-align: center;
+}
+.myProfileButton{
+  float: left;
 }
 
-.signOutButton:hover{
+.signOutButton:hover,.myProfileButton:hover{
 
-  background-color: #efefef;
-  color: var(--main-bg-color);
+  background-color: var(--main-bg-color);
+  color: var(--yellow-button-color);
   cursor: pointer;
 }
 .selectedState a{
@@ -372,15 +380,18 @@ color: var(--main-heading-font-color) !important
   height: 20px;
   color: #fff;
   font-size: 15px;
-  font-family:'Montserrat-Regular';
+  font-family:'Montserrat-Bold';
   text-align:  center;
   margin-top: 10px;
-
+  text-transform: capitalize;
+}
+.menuProfileName:hover{
+  color: var(--yellow-button-color);
 }
 
 .menuProfileEmail{
-   height: 25px;
-  color: #ccc;
+  height: 25px;
+  color:var(--yellow-button-color);
   font-size: 14px;
   font-family:'Montserrat-Regular';
   text-align:  center;
@@ -391,5 +402,5 @@ color: var(--main-heading-font-color) !important
 .menuProfileSignOut{
   height: 70px; 
   padding-top: 20px;
-  padding-left: 35%;
+ /* padding-left: 35%;*/
 }

@@ -586,7 +586,7 @@ class ContactDetails extends Component {
 						}
 						if(this.state.pathname === "corporate" && (this.state.role === "manager" || this.state.role === "corporateadmin" ))
 						{
-							axios
+							axios 
 							.patch('/api/users/patch/role/assign/' + formValues1.userID, formValues1)
 							.then(
 								(res) => {

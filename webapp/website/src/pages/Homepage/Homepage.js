@@ -25,7 +25,10 @@ class HomePage extends Component {
       //selector              : {},
       mapwiseJobs           : [],
       functonalAreaJobs     : [],
-      subfunctonalAreaJobs  : [],    
+      subfunctonalAreaJobs  : [],
+      startLimit            : 0,
+      initialLimit          : 25,
+      showMoreLimit         : 25,   
     }
   } 
   componentDidMount(){ 
@@ -66,10 +69,24 @@ class HomePage extends Component {
         mapAction.setViewMode("functionalView");
         mapAction.filterSubfunctionalData(selector);
       }else if(this.props.match.params.industryName != "all" && this.props.match.params.subfunctionalArea == "all"){
+        var tempArray3 = [];
+        tempArray3.push({"industry" : this.props.match.params.industryName, "id": this.props.match.params.industry_id })
+        selector.industry_id = tempArray3;
         
+        console.log(this.props.match.params.industry_id)
+
+        selector.startLimit     = this.state.startLimit;
+        selector.initialLimit   = this.state.initialLimit;
+        selector.showMoreLimit  = this.state.showMoreLimit;
+
         mapAction.setViewMode("listView");
         mapAction.filterJobList(selector);
       }else{
+        
+        selector.startLimit     = this.state.startLimit;
+        selector.initialLimit   = this.state.initialLimit;
+        selector.showMoreLimit  = this.state.showMoreLimit;
+
         mapAction.setViewMode("listView");
         mapAction.filterJobList(selector);
       }
@@ -242,13 +259,15 @@ class HomePage extends Component {
         this.props.history.push("/country/"+this.props.match.params.countryCode+"/state/"+this.props.match.params.stateCode+"/city/"+this.props.match.params.district+"/industry/"+this.props.match.params.industryName+"/"+this.props.match.params.industry_id+"/function/all/0/subfunction/all/0");
       }
       if (this.props.match.path == "/" || this.props.match.params.industryName=="all") {
-        console.log("in if")
+        //console.log("in if")
         mapAction.filterIndustrialData(selector);
       }else{
+
         mapAction.filterJobList(selector);
       }
     }
     if (viewMode=="listView") {
+
       mapAction.filterJobList(this.props.selector);
     }
     mapAction.jobCount(selector);

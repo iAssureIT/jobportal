@@ -17,11 +17,14 @@ export const setAppliedCandidateFilterSelector = (appliedCandidateSelector )=> (
       type                    : 'SET_APPLIED_CANDIDATE_FILTER_SELECTOR',
       appliedCandidateSelector: appliedCandidateSelector
 });
-export const getJobList = (jobList )=> ({ 
+export const getJobList = (jobList )=> ({  
       type 				   : 'GET_JOB_LIST',
       jobList 			 : jobList
 });
-
+export const appendJobList = (jobList )=> ({  
+      type           : 'APPEND_JOB_LIST',
+      jobList        : jobList
+});
 export const getApplicantsCountList = (applicantsCountList )=> ({ 
       type                       : 'GET_APPLICANTS_COUNT',
       applicantsCountList        : applicantsCountList
@@ -37,6 +40,10 @@ export const getAppliedCandidateList = (appliedCandidateList )=> ({
 export const showLoader = (showLoader )=> ({
       type        : 'SHOW_LOADER',
       showLoader    : showLoader
+});
+export const getJobCount = (jobCount )=> ({
+      type        : 'GET_JOBCOUNT',
+      jobCount      : jobCount
 });
 export const getFunctionalData = (functionalJobs )=> ({
       type        : 'GET_FUNCTIONAL_DATA',
@@ -58,7 +65,20 @@ export const setJobWishlist = (jobWishlist )=> ({
       type        : 'GET_JOB_WISHLIST',
       jobWishlist     : jobWishlist
 });
-
+export function jobCount(selector) {
+    return dispatch =>{
+      //console.log(selector)
+      dispatch(setFilterSelector(selector));
+      return axios.post("/api/jobs/job-count",selector)
+      .then((response)=>{
+       
+          dispatch(getJobCount(response.data));
+      })
+      .catch((error)=>{
+            console.log('error', error);
+      }) 
+    }  
+}
 export function filterJobList(selector) {
   	return dispatch =>{
       dispatch(showLoader(true));
@@ -66,13 +86,18 @@ export function filterJobList(selector) {
 	  	return axios.post("/api/jobs/joblist-for-employer",selector)
 	    .then((response)=>{
           dispatch(showLoader(false));
-	        dispatch(getJobList(response.data));
+          if (selector.startLimit == 0) {
+            dispatch(getJobList(response.data));
+          }else{
+            dispatch(appendJobList(response.data));
+          }
+	        
 	    })
 	    .catch((error)=>{
 	          console.log('error', error);
 	    }) 
   	}  
-}
+} 
 export function applicantsCountList(selector) {
     return dispatch =>{
       return axios.post("/api/applyJob/get/applicantsCountList",selector)

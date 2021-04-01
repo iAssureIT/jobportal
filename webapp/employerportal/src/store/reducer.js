@@ -33,6 +33,7 @@ const initialState = {
 	selector 					: {},
 	showLoader 					: false,
 	jobList 					: [],
+	jobCount 					: 0,
 	candidateSelector 			: {},
 	appliedCandidateSelector 	: {},
 	candidateList 				: [],
@@ -59,6 +60,9 @@ const reducer = (state = initialState, action) => {
 	if (action.type === "SHOW_LOADER") {
 		newState.showLoader = action.showLoader;
 	}
+	if(action.type === "GET_JOBCOUNT"){
+		newState.jobCount = action.jobCount;
+	}
 	if(action.type === "SET_FILTER_SELECTOR"){
 		newState.selector 	= action.selector;
 	}
@@ -69,7 +73,10 @@ const reducer = (state = initialState, action) => {
 		newState.appliedCandidateSelector 	= action.appliedCandidateSelector;
 	}
 	if(action.type === "GET_JOB_LIST"){
-		newState.jobList = action.jobList;
+		newState.jobList = action.jobList ;
+	}
+	if(action.type === "APPEND_JOB_LIST"){
+		newState.jobList = state.jobList.concat(action.jobList) ;
 	}
 	if(action.type === "GET_APPLICANTS_COUNT"){
 		newState.applicantsCountList = action.applicantsCountList;

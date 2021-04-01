@@ -1,4 +1,5 @@
 import React, {Component} 		from 'react';
+
 import Axios 			  		from 'axios';
 import Swal  					from 'sweetalert2';
 import Moment 					from "moment";
@@ -6,12 +7,15 @@ import { FontAwesomeIcon } 		from '@fortawesome/react-fontawesome';
 import { connect }        		from 'react-redux';
 import { bindActionCreators } 	from 'redux';
 import  * as mapActionCreator 	from '../../common/actions/index';
+import Pagination from "react-js-pagination";
+require("bootstrap/less/bootstrap.less");
 
 class JobListView extends Component{
 	constructor(props){
 	super(props);
 	this.state={
-		jobList : [],
+		jobList 		: [],
+		startLimit 		: this.props.selector.startLimit,
 	}
 }	
 
@@ -24,7 +28,35 @@ componentDidMount(){
 	var {mapAction} = this.props;
 	mapAction.filterJobList(selector);*/
 }
+showMore(){
 
+	var selector 		  	= this.props.selector;
+
+	selector.startLimit   	= this.props.selector.startLimit === 0 
+	? this.props.selector.startLimit + this.props.selector.initialLimit  
+	: this.props.selector.startLimit + this.props.selector.showMoreLimit
+
+	console.log(selector)
+  	
+  	var {mapAction} = this.props;
+    mapAction.filterJobList(selector);
+}
+handlePageChange(pageNumber) {
+	//console.log(`active page is ${pageNumber}`);
+	this.setState({activePage: pageNumber});
+	
+	var activePage = pageNumber;
+
+	var selector=this.props.selector;
+  	
+  	selector.startLimit   = (activePage-1) * 5;
+  	selector.endLimit     = activePage * 5;
+  	selector.activePage   = pageNumber;
+
+  	var {mapAction} = this.props;
+    mapAction.filterJobList(selector);
+
+}
 deleteJob = (event)=>{
 	event.preventDefault();
 	const job_id = event.currentTarget.id;
@@ -74,20 +106,20 @@ deleteJob = (event)=>{
 		}
 
 	render(){
-		
+		console.log(this.props.jobCount)
 		return(
 			<section className="jobListWrapper">
 				<div className="col-lg-12 EmployeeListWrapperMain">
 					{/*<div className="col-lg-4 col-lg-offset-8">
 						<div className="input-group searchMainTab">
 							<input type="text" name="jobTitle" id="jobTitle" className="form-control jobListSearchTab" placeholder="Search by Job Title..." onChange={this.search}/>
-							<span className="input-group-addon searchTabAddOn"><i className="fa fa-search"></i> </span> 
 						</div> 
 					</div>*/} 
 						{
 							this.props.jobList.length>0
 							?
 								this.props.jobList.map((elem,index1)=>{
+									//console.log(elem)
 									var applicantsCount = this.props.applicantsCountList.filter((appl, ind)=>{
 										if (appl._id == elem._id) {
 											return appl.candidatesApplied;
@@ -106,15 +138,6 @@ deleteJob = (event)=>{
 																{/*<FontAwesomeIcon className="restRoomIcon" icon={['fas', 'restroom']} />*/}
 																
 																<ul>
-																	{/*{
-																		elem.jobBasicInfo.gender=="Male Only"?
-																		<li><i className="fa fa-male"></i></li>
-																		:
-																		<li><i className="fa fa-female"></i></li>
-																	}	
-																	<li><i className="fa fa-sun-o sunIcon"></i></li>
-																	<li><i className="fa fa-clock-o clockIcon"></i></li>*/}
-
 																{
 																	elem.jobBasicInfo.gender=="Male Only"?
 																	<li><i className="fa fa-male" title="Only male candidates can apply"></i></li>
@@ -147,13 +170,13 @@ deleteJob = (event)=>{
 
 																<div className="joblistNoCount"> 
 																     &nbsp; <a href={"/applied-candidate-list/" + elem._id}> Total Applicants : {applicantsCount.length > 0 ? applicantsCount[0].candidatesApplied :  0}</a> 
-															    </div>
+															    </div> 
 															</div>    
 														</div>
 
 
 														<div className="jobListDesignation">
-															<a className="link">{elem.jobBasicInfo.jobTitle}</a>
+															<a className="link">{elem.jobBasicInfo.jobTitle + " (" +elem.jobID+ ")"} </a>
 														</div>
 														<div className="jobListCompanyName">
 															{elem.company_id.companyName}
@@ -195,7 +218,26 @@ deleteJob = (event)=>{
 							:
 								<h3 style={{margin:"100px"}}>No Jobs Found</h3>
 						}
+					<div className="col-lg-12">
+						{
+							this.props.jobCount ? 
+							(this.props.selector.startLimit + this.props.selector.showMoreLimit) >= this.props.jobCount ? null :
+							<button className="btn buttonYellow" style={{float:"right", margin:"20px 0"}} onClick={this.showMore.bind(this)}>Show {this.props.selector.showMoreLimit} More</button>
+				        
+				        	: 
+				        	<button className="btn buttonYellow" style={{float:"right", margin:"20px 0"}} onClick={this.showMore.bind(this)}> Show More </button>
+				        
+						}
+						{/*<Pagination
+				          activePage={this.state.activePage}
+				          itemsCountPerPage={5}
+				          totalItemsCount={this.props.jobCount[0] ? this.props.jobCount[0].jobCount : 0}
+				          pageRangeDisplayed={5}
+				          onChange={this.handlePageChange.bind(this)}
+				        />*/}
+				    </div>	
 				</div>
+				
 			</section>
 		);
 	}
@@ -205,6 +247,7 @@ const mapStateToProps = (state)=>{
     return {
         user_ID     : state.user_ID,  	candidate_id   : state.candidate_id,
         selector    : state.selector,   jobList     : state.jobList,
+        jobCount  	: state.jobCount,
         applicantsCountList : state.applicantsCountList
     }
 }
