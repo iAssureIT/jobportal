@@ -443,7 +443,6 @@ class Academics extends Component{
 	handleSubmit(event,formValues){
 		event.preventDefault();
 			this.props.history.push("/certification/"+this.state.candidate_id);
-			console.log(formValues);
 	}
 	//========== User Define Function End ==================
 		//========== Validation Start ==================

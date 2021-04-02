@@ -335,6 +335,7 @@ class BasicInfoForm extends Component{
 				})
 			}
 		}
+
 		// if(name==="dob"){
 		// 	this.calAge(value);
 		// }
