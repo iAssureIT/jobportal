@@ -1763,6 +1763,64 @@ function camelCase(str) {
 }
 
 
+function insertIndustry(industry, createdBy) {
+    return new Promise(function (resolve, reject) {
+        const industryMaster = new IndustryMaster({
+            _id                 : new mongoose.Types.ObjectId(),
+            industry            : industry,
+            createdBy           : createdBy,
+            createdAt           : new Date()
+        })
+
+        industryMaster.save()
+            .then(data => {
+                resolve(data._id);
+            })
+
+            .catch(err => {
+                reject(err);
+            });   
+    });
+}
+function insertFunctionalArea(functionalarea, createdBy) {
+    return new Promise(function (resolve, reject) {
+        const functionalareaMaster = new FunctionalAreaMaster({
+            _id                 : new mongoose.Types.ObjectId(),
+            functionalArea      : functionalarea,
+            createdBy           : createdBy,
+            createdAt           : new Date()
+        })
+
+        functionalareaMaster.save()
+            .then(data => {
+                resolve(data._id);
+            })
+
+            .catch(err => {
+                reject(err);
+            });   
+    });
+}
+function insertSubFunctionalArea(functionalarea_id, subfunctionalArea, createdBy) {
+    return new Promise(function (resolve, reject) {
+        const subfunctionalareaMaster = new SubFunctionalAreaMaster({
+            _id                 : new mongoose.Types.ObjectId(),
+            functionalarea_id   : functionalarea_id,
+            subfunctionalArea   : subfunctionalArea,
+            createdBy           : createdBy,
+            createdAt           : new Date()
+        })
+
+        subfunctionalareaMaster.save()
+            .then(data => {
+                resolve(data._id);
+            })
+
+            .catch(err => {
+                reject(err);
+            });   
+    });
+}
 
 exports.bulkUploadJobs = (req, res, next) => {
     var jobs = req.body.data;
@@ -1779,6 +1837,132 @@ exports.bulkUploadJobs = (req, res, next) => {
 
     processData();
     async function processData() {
+        var industries      = await getIndustries();
+        var funAreas        = await getFunctionalAreas();
+        var jobSectors      = await getJobSectors();
+        var jobRoles        = await getJobRoles();
+        var jobTypes        = await getJobType();
+        var jobShifts       = await getJobShift();
+        var jobTimes        = await getJobTime();
+        var qualifications  = await getQualification();
 
+
+        for (var k = 0; k < jobs.length; k++) {
+            if (jobs[k].jobTitle == '-') {
+                remark += "jobTitle not found, ";
+            }
+            if (jobs[k].industry == '-') {
+                remark += "industry not found, ";
+            }
+            if (jobs[k].functionalarea == '-') {
+                remark += "functionalarea not found, ";
+            }
+            if (jobs[k].subfunctionalarea == '-') {
+                remark += "subfunctionalarea not found, ";
+            }
+            if (jobs[k].jobrole == '-') {
+                remark += "jobrole not found, ";
+            }
+            if (jobs[k].gender == '-') {
+                remark += "gender not found, ";
+            }
+            if (jobs[k].jobsector == '-') {
+                remark += "jobsector not found, ";
+            }
+            if (jobs[k].jobtype == '-') {
+                remark += "jobtype not found, ";
+            }
+            if (jobs[k].jobshift == '-') {
+                remark += "jobshift not found, ";
+            }
+            if (jobs[k].jobtime == '-') {
+                remark += "jobshift not found, ";
+            }
+            if (jobs[k].jobshift == '-') {
+                remark += "jobshift not found, ";
+            }
+            if (jobs[k].positions == '-') {
+                remark += "positions not found, ";
+            }
+            if (jobs[k].jobDesc == '-') {
+                remark += "jobDesc not found, ";
+            }
+            if (jobs[k].contactPersonName == '-') {
+                remark += "contactPersonName not found, ";
+            }
+            if (jobs[k].contactPersonEmail == '-') {
+                remark += "contactPersonEmail not found, ";
+            }
+            if (jobs[k].contactPersonPhoneCoountryCode == '-') {
+                remark += "contactPersonPhoneCoountryCode not found, ";
+            }
+            if (jobs[k].contactPersonPhone == '-') {
+                remark += "contactPersonPhone not found, ";
+            }
+            if (jobs[k].address == '-') {
+                remark += "address not found, ";
+            }
+            if (jobs[k].district == '-') {
+                remark += "district not found, ";
+            }
+            if (jobs[k].state == '-') {
+                remark += "state not found, ";
+            }
+            if (jobs[k].stateCode == '-') {
+                remark += "stateCode not found, ";
+            }
+            if (jobs[k].country == '-') {
+                remark += "country not found, ";
+            }
+            if (jobs[k].countryCode == '-') {
+                remark += "countryCode not found, ";
+            }
+            if (jobs[k].pincode == '-') {
+                remark += "pincode not found, ";
+            }
+            if (jobs[k].minSalary == '-') {
+                remark += "minSalary not found, ";
+            }
+            if (jobs[k].mineducation == '-') {
+                remark += "mineducation not found, ";
+            }
+            if (jobs[k].minExperience == '-') {
+                remark += "minExperience not found, ";
+            }
+            
+            if (remark == '') {
+                var industry_id;
+                var industryExists = industries.filter((data) => {
+                    if (data.industry.trim().toLowerCase() == jobs[k].industry.trim().toLowerCase()) {
+                        return data;
+                    }
+                })
+                if (industryExists.length > 0) {
+                    industry_id = industryExists[0]._id;
+                } 
+                else {
+                    if(jobs[k].industry != '-'){
+                    industry_id = await insertIndustry(jobs[k].industry,req.body.reqdata.createdBy);
+                   }
+                }
+
+                var functionalarea_id;
+                var functionalareaExists = funAreas.filter((data) => {
+                    if (data.functionalArea.trim().toLowerCase() == jobs[k].functionalarea.trim().toLowerCase()) {
+                        return data;
+                    }
+                })
+                if (functionalareaExists.length > 0) {
+                    functionalarea_id = functionalareaExists[0]._id;
+                } 
+                else {
+                    if(jobs[k].functionalarea != '-'){
+                    functionalarea_id = await insertFunctionalArea(jobs[k].functionalarea,req.body.reqdata.createdBy);
+                    }
+                }
+                
+            }
+
+        }
     }
 }

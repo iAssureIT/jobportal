@@ -182,17 +182,17 @@ class HomePage extends Component {
   }
   leftDrawerInfo(event){
 
-    if(this.state.leftDrawerDisplay==="-610px"){
+    if(this.state.leftDrawerDisplay==="-380%"){
   
       this.setState({
-      leftDrawerDisplay  : "0px",
+      leftDrawerDisplay  : "0%",
       arrowToggle: true
       
       })
     }
     else{
       this.setState({
-      leftDrawerDisplay  : "-610px",
+      leftDrawerDisplay  : "-380%",
       arrowToggle:false
       })
     }
@@ -277,9 +277,10 @@ class HomePage extends Component {
     return (
       <div className="ViewBodyWrapper container-fluid">
 
+
           <div className="filterDiv col-lg-12">
 
-            <div className="row">
+          
               <div className="filterButton" onClick={this.leftDrawerInfo.bind(this)}>
                
                 <i className="fa fa-filter filtersIcon" ></i>
@@ -288,11 +289,11 @@ class HomePage extends Component {
 
                 &nbsp; Filters              
               </div>
-            </div>
+           
           </div>
 
           <div className=" col-lg-3">
-            <div className='row'>
+            
                 <div className="viewWrapper col-lg-4">
                   <div className='row'>
                     <ul className="nav nav-pills">
@@ -315,7 +316,7 @@ class HomePage extends Component {
                 <div className="filterWrapper col-lg-8" style={{left:this.state.leftDrawerDisplay}}>
                     <LeftSideFilters />
                 </div>
-            </div>
+           
           </div>
 
           <div className="col-lg-9">

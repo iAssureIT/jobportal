@@ -40,21 +40,24 @@
 }
 
 .mapTextLabel{
-	font-size: 10px;
+	font-size: 9px;
 	font-family: 'Montserrat-Regular';
 	color: var(--main-txt-color);
 	text-align: center;
+	z-index: 1;
 }
 
 .mapCountLabel{
+	width: 20%;
 	font-size: 12px;
 	font-family: 'Montserrat-Bold';
 	color: var(--main-txt-color);
 	text-align: center;
+	z-index: 1;
 }
 
 .classHover:hover .mapTextLabel{
-	font-size: 10px;
+	font-size: 9px;
 	font-family: 'Montserrat-Bold';
 	z-index: 1;
 }

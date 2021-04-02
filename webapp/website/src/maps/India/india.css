@@ -38,8 +38,8 @@
 }
 .ladakhText{
 	position: absolute;
-	top: 40%;
-    left: 24%;
+	top: 37%;
+    left: 32%;
 }
 .ladakhNumber{
 	position: absolute;
@@ -69,7 +69,7 @@
 }
 .chandigarhText{
 	position: absolute;
-	top: 48%;
+	top: 10%;
     left: 34%;
 }
 .chandigarhNumber{
@@ -100,13 +100,13 @@
 }
 .himachalText{
 	position: absolute;
-	top: 38%;
-    left: 34%;
+	top: 29%;
+    left: 3%;
 }
 .himachalNumber{
 	position: absolute;
-	top: 65%;
-    left: 45%;
+	top: 56%;
+    left: 40%;
 }
 .uttarakhand{
 	position: absolute;
@@ -115,13 +115,13 @@
 }
 .uttarakhandText{
 	position: absolute;
-	top: 42%;
-    left: 24%;	
+	top: 35%;
+    left: 15%;
 }
 .uttarakhandNumber{
 	position: absolute;
-	top: 56%;
-    left: 34%;	
+	top: 50%;
+    left: 40%;
 }
 .haryana{
 	position: absolute;
@@ -175,13 +175,13 @@
 }
 .maharashtraText{
 	position: absolute;
-    top: 33%;
-    left: 24%;
+    top: 40%;
+    left: 22%;
 }
 .maharashtraNumber{
 	position: absolute;
-    top: 41%;
-    left: 34%;
+    top: 50%;
+    left: 22%;
 }
 .madhyapradesh{
 	position: absolute;
@@ -196,7 +196,7 @@
 .madhyapradeshNumber{
 	position: absolute;
 	top: 66%;
-    left: 45%;
+    left: 35%;
 }
 .goa{
 	position: absolute;
@@ -220,13 +220,13 @@
 }
 .karnatakaText{
 	position: absolute;
-	top: 32%;
+	top: 50%;
     left: 15%;	
 }
 .karnatakaNumber{
 	position: absolute;
-	top: 38%;
-    left: 30%;	
+	top: 58%;
+    left: 25%;	
 }
 .kerala{
 	position: absolute;
@@ -311,7 +311,7 @@
 .chhattisgarhText{
 	position: absolute;
 	top: 38%;
-    left: 20%;	
+    left:23%;	
 }
 .chhattisgarhNumber{
 	position: absolute;
@@ -325,13 +325,13 @@
 }
 .uttarpradeshText{
 	position: absolute;
-	top: 42%;
-    left: 30%;	
+	top: 45%;
+    left: 25%;
 }
 .uttarpradeshNumber{
 	position: absolute;
-	top: 50%;
-    left: 43%;
+	top: 55%;
+    left: 35%;
 }
 .westbengal{
 	position: absolute;
@@ -400,13 +400,13 @@
 }
 .assamText{
 	position: absolute;
-	top: 42%;
+	top: 45%;
     left: 11%;		
 }
 .assamNumber{
 	position: absolute;
 	top: 42%;
-    left: 37%;		
+    left: 40%;		
 }
 .meghalaya{
 	position: absolute;
@@ -430,12 +430,12 @@
 }
 .arunachalpradeshText{
 	position: absolute;
-	top: 17%;
+	top: 37%;
     left: 30%;		
 }
 .arunachalpradeshNumber{
 	position: absolute;
-	top: 42%;
+	top: 55%;
     left: 30%;		
 }
 .nagaland{
@@ -445,13 +445,13 @@
 }
 .nagalandText{
 	position: absolute;
-	top: 23%;
-    left: 61%;	
+	top: 30%;
+    left: 20%;	
 }
 .nagalandNumber{
 	position: absolute;
-	top: 46%;
-    left: 100%;		
+	top: 50%;
+    left: 45%;		
 }
 .manipur{
 	position: absolute;
@@ -460,12 +460,12 @@
 }
 .manipurText{
 	position: absolute;
-	top: 19%;
-    left: 30%;		
+	top: 35%;
+    left: 10%;		
 }
 .manipurNumber{
 	position: absolute;
-	top: 42%;
+	top: 55%;
     left: 30%;		
 }
 .mizoram{
@@ -475,8 +475,8 @@
 }
 .mizoramText{
 	position: absolute;
-	top: 42%;
-    left: 30%;		
+	top: 35%;
+    left: 5%;		
 }
 .mizoramNumber{
 	position: absolute;
@@ -490,13 +490,13 @@
 }
 .tripuraText{
 	position: absolute;
-	top: 48%;
-    left: -51%;		
+	top: 35%;
+    left: 0%;		
 }
 .tripuraNumber{
 	position: absolute;
-	top: 74%;
-    left: -36%;		
+	top: 60%;
+    left: 0%;		
 }
 
 

@@ -124,7 +124,7 @@ class Header extends Component{
         var stateName = "";
           //selector.stateCode = window.location.pathname.split("/")[2] 
           switch(window.location.pathname.split("/")[4]) {
-        case "AP": stateName = "Andhra Pradesh"
+        case "AD": stateName = "Andhra Pradesh"
           break;
         case "AR": stateName = "Arunachal Pradesh"
           break;
@@ -259,8 +259,10 @@ class Header extends Component{
     if (this.props.userDetails.loggedIn) {    
       return(
         <nav className="navbar FunctionalHeaderWrapper container-fluid">
-        <div className="iconHeader col-lg-1">
+        <div className="col-lg-1">
+          <div className="iconHeader">
             <a href="/"><img src="/images/1.png" alt="icon" /></a>
+          </div>
         </div>
 
         {
@@ -518,8 +520,10 @@ class Header extends Component{
     else{
        return(
         <nav className="navbar FunctionalHeaderWrapper container-fluid">
-        <div className="iconHeader col-lg-1">
+        <div className="col-lg-1">
+          <div className="iconHeader">
             <a href="/"><img src="/images/1.png" alt="icon" /></a>
+          </div>
         </div>
         {
           window.location.pathname.split("/")[3] == "state" ? 

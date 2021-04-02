@@ -7,7 +7,7 @@ import { FontAwesomeIcon } 		from '@fortawesome/react-fontawesome';
 import { connect }        		from 'react-redux';
 import { bindActionCreators } 	from 'redux';
 import  * as mapActionCreator 	from '../../common/actions/index';
-import Pagination from "react-js-pagination";
+/*import Pagination from "react-js-pagination";*/
 require("bootstrap/less/bootstrap.less");
 
 class JobListView extends Component{
@@ -179,7 +179,7 @@ deleteJob = (event)=>{
 															<a className="link">{elem.jobBasicInfo.jobTitle + " (" +elem.jobID+ ")"} </a>
 														</div>
 														<div className="jobListCompanyName">
-															{elem.company_id.companyName}
+															{elem.company_id ? elem.company_id.companyName : ""}
 														</div>
 														<div> 
 															<i className="fa fa-calendar jobListExperience"></i> &nbsp; Exp: {elem.eligibility.minExperience} years
@@ -218,6 +218,7 @@ deleteJob = (event)=>{
 							:
 								<h3 style={{margin:"100px"}}>No Jobs Found</h3>
 						}
+
 					<div className="col-lg-12">
 						{
 							this.props.jobCount ? 
@@ -228,14 +229,9 @@ deleteJob = (event)=>{
 				        	<button className="btn buttonYellow" style={{float:"right", margin:"20px 0"}} onClick={this.showMore.bind(this)}> Show More </button>
 				        
 						}
-						{/*<Pagination
-				          activePage={this.state.activePage}
-				          itemsCountPerPage={5}
-				          totalItemsCount={this.props.jobCount[0] ? this.props.jobCount[0].jobCount : 0}
-				          pageRangeDisplayed={5}
-				          onChange={this.handlePageChange.bind(this)}
-				        />*/}
+
 				    </div>	
+
 				</div>
 				
 			</section>
@@ -255,4 +251,3 @@ const mapDispatchToProps = (dispatch) => ({
   mapAction :  bindActionCreators(mapActionCreator, dispatch)
 })
 export default connect(mapStateToProps, mapDispatchToProps)(JobListView)
-															
