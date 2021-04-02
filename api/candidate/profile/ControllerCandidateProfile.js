@@ -262,6 +262,7 @@ function getNextSequence(entityType) {
 }
 
 exports.updateCandidateBasicInfo = (req, res, next)=>{
+    console.log(res.data);
 	var languages   = [];
     var language_id; 
     processData();
@@ -273,6 +274,7 @@ exports.updateCandidateBasicInfo = (req, res, next)=>{
             languages.push({ "language_id" : language_id })
         }
         CandidateProfile.updateOne(
+
             { "_id":req.body.candidate_id},  
             {
                 $set:   {   
@@ -300,7 +302,7 @@ exports.updateCandidateBasicInfo = (req, res, next)=>{
         )
 		.exec()
 				.then(data => {
-
+                    console.log(data)
 				if(data.nModified == 1){
                     res.status(200).json({ updated : true });
                 }else{

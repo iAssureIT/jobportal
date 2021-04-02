@@ -71,7 +71,7 @@ class FilewiseEntityList extends Component{
     }
   render() {
     return (
-      <div className="container-fluid col-lg-12 col-md-12 col-xs-12 col-sm-12">
+      <div className="container-fluid col-lg-12 col-md-12 col-xs-12 col-sm-12 modifiedTableIassure">
         <div className="row">
           <div className="formWrapper"> 
             <section className="content">

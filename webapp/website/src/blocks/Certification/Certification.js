@@ -320,11 +320,13 @@ class Certification extends Component{
 		})
 	}
 	handleSave(event){
-		event.preventDefault();
+		
 		var status =  this.validateForm();
 		// this.changeBlock(event);
 		if(this.state.certificationToggel===false){
+			event.preventDefault();
 			if(this.state.isPrimary===true){
+				
 				var formValues = {
 					                candidate_id              : this.state.candidate_id,
 					                skill: {
@@ -356,6 +358,7 @@ class Certification extends Component{
 			
 
 		}else{
+			event.preventDefault();
 			var formValues = {
 					                candidate_id               : this.state.candidate_id,
 					                certificationID            : this.state.certificationID,
@@ -479,6 +482,9 @@ class Certification extends Component{
 				document.getElementById("experienceError").innerHTML=  
 				""; 
 				status = true;
+			}
+			if(this.state.experience.length<=0 && this.state.rating.length<=0 && this.state.skills.length<=0 ){
+				status=false;
 			}
 	 	}else{
 			if(this.state.certificationName.length<=0){

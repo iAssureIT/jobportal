@@ -580,7 +580,7 @@ class IAssureTableFilewise extends Component {
     }
 	render() {
         return (
-	       	<div id="tableComponent" className={this.props.displayTable ? this.props.displayTable : " "+ "col-lg-12 col-sm-12 col-md-12 col-xs-12"}>	
+	       	<div id="tableComponent" className={this.props.displayTable ? this.props.displayTable : " "+ "col-lg-12 col-sm-12 col-md-12 col-xs-12 "}>	
 	       	{
 	       		this.state.tableObjects.searchApply === true ? 
 		       		<div className="col-lg-4 col-md-4  col-xs-12 col-sm-12 marginTop8 NOpadding pull-left">
