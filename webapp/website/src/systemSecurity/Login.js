@@ -63,7 +63,7 @@ class Login extends Component {
           document.getElementById('loginusernameError').innerHTML = "Please enter a valid email address.";
       } else{
       document.getElementById("loginusernameError").innerHTML=
-      " ."; 
+      ""; 
       status = true;
     }
     

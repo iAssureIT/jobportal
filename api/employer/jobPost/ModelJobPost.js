@@ -3,6 +3,7 @@ mongoose.pluralize(null);
 
 const jobsSchema = mongoose.Schema({
 	_id 			: 	mongoose.Schema.Types.ObjectId,
+	jobID 			: 	Number,
 	company_id 		: 	{ type: mongoose.Schema.Types.ObjectId, ref: 'entitymasters' },
 	jobBasicInfo 	: 	{ 
 							jobTitle				: String,
@@ -67,6 +68,8 @@ const jobsSchema = mongoose.Schema({
 	
 	createdAt 		: 	Date,
 	createdBy 		: 	String,
+	fileName        : 	String,
+    uploadTime      : 	Date,
 	updateLog 		: 	[
 							{updatedBy: String, updatedAt:Date, remark:String}
 						]

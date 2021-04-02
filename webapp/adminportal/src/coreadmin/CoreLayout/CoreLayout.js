@@ -45,6 +45,7 @@ import CorporateLocationDetails from '../Master/CorporateMaster/CorporateLocatio
 import CorporateContactDetails from '../Master/CorporateMaster/CorporateContactDetails.js';
 import CorporateListOfEntities from '../Master/CorporateMaster/CorporateListOfEntities.js';
 
+import FilewiseEntityList from '../Master/FilewiseEntity/FilewiseEntityList.js';
 
 
 // ============ Payment Process =======================
@@ -149,6 +150,8 @@ class CoreLayout extends Component {
                 <Route path="/corporate/contact-details/:entityID" exact strict component={CorporateContactDetails} />
                 <Route path="/corporate/contact-details/:entityID/:contactID" exact strict component={CorporateContactDetails} />
                 <Route path="/corporate/list" exact strict component={CorporateListOfEntities} />
+                <Route path="/filewise/employers" exact strict component={FilewiseEntityList} />
+                
 
                 
                  { /* Orgnizational Setting */}

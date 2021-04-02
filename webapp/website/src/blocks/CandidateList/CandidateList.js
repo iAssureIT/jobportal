@@ -26,8 +26,8 @@ class CandidateList extends Component{
 			 	this.setState({
 
 			 		dataArry            : response.data,
-			 		primarySkillsArry   : response.data[0].primarySkills,
-			 		secondarySkillsArry : response.data[0].secondarySkills
+			 		primarySkillsArry   : response.data.primarySkills,
+			 		secondarySkillsArry : response.data.secondarySkills
 			 	})
 			 })
 			 .catch(error=>{

@@ -312,7 +312,7 @@ class Header extends Component{
                  : null 
                 }  
 
-                <div className="cityJobsHeader">{this.props.jobCount[0] ? this.props.jobCount[0].jobCount : 0}
+                <div className="cityJobsHeader">{this.props.jobCount ? this.props.jobCount : 0}
                 </div>              
               
                 </div>
@@ -496,7 +496,7 @@ class Header extends Component{
                       </div></a>*/}
                       
                       <div className="notificationMessege col-lg-12" id="changepassworddiv" data-toggle="modal" data-target="#resetPasswordModal">
-                          <i class="fa fa-key"></i><span className="notificationMessegeText">Change Password</span>
+                          <i className="fa fa-key"></i><span className="notificationMessegeText">Change Password</span>
                       </div>
                      
                       <div className="menuProfileSignOut col-lg-12 ">
@@ -571,7 +571,7 @@ class Header extends Component{
                  : null 
                 }    
 
-                <div className="cityJobsHeader">{this.props.jobCount[0] ? this.props.jobCount[0].jobCount : 0}
+                <div className="cityJobsHeader">{this.props.jobCount ? this.props.jobCount : 0}
                 </div>              
               
                 </div>

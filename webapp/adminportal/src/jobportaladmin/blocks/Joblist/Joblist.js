@@ -7,7 +7,7 @@ import { connect }        		from 'react-redux';
 import { bindActionCreators } 	from 'redux';
 import  * as mapActionCreator 	from '../../Common/actions/index';
 import './Joblist.css';
-import Pagination from "react-js-pagination";
+//import Pagination from "react-js-pagination";
 require("bootstrap/less/bootstrap.less");
 
 class Joblist extends Component{
@@ -15,78 +15,88 @@ class Joblist extends Component{
 	super(props);
 	this.state={
 		jobList : [],
-		activePage	: this.props.selector.activePage,
-		startLimit 	: this.props.selector.startLimit,
-		endLimit 	: this.props.selector.endLimit,
+		startLimit 		: this.props.selector.startLimit
 	}
 }	
 
-componentDidMount(){
-}
+	componentDidMount(){
+	}
+	showMore(){
 
-handlePageChange(pageNumber) {
-	//console.log(`active page is ${pageNumber}`);
-	this.setState({activePage: pageNumber});
-	
-	var activePage = pageNumber;
+		var selector 		  	= this.props.selector;
 
-	var selector=this.props.selector;
-  	
-  	selector.startLimit   = (activePage-1) * 5;
-  	selector.endLimit     = activePage * 5;
-  	selector.activePage   = pageNumber;
+		selector.startLimit   	= this.props.selector.startLimit === 0 
+		? this.props.selector.startLimit + this.props.selector.initialLimit  
+		: this.props.selector.startLimit + this.props.selector.showMoreLimit
 
-  	var {mapAction} = this.props;
-    mapAction.filterJobList(selector);
+		console.log(selector)
+	  	
+	  	var {mapAction} = this.props;
+	    mapAction.filterJobList(selector);
+	}
+	handlePageChange(pageNumber) {
+		//console.log(`active page is ${pageNumber}`);
+		this.setState({activePage: pageNumber});
+		
+		var activePage = pageNumber;
 
-}
-deleteJob = (event)=>{
-	event.preventDefault();
-	const job_id = event.currentTarget.id;
+		var selector=this.props.selector;
+	  	
+	  	selector.startLimit   = (activePage-1) * 5;
+	  	selector.endLimit     = activePage * 5;
+	  	selector.activePage   = pageNumber;
 
-	Swal.fire({
-		title 				: 'Are you sure? you want to delete this profile!!!',
-		text 				: 'You will not be able to recover this profile',
-		icon 				: 'warning',
-		showCancelButton 	: true,
-		confirmButtonText 	: 'Delete',
-		cancelButtonColor 	: 'No, keep it',
-		confirmButtonColor 	: '#d33',
-	
-	}).then((result) =>{
-		if(result.value){
-			if(job_id){
-				Axios.delete("/api/jobs/delete/"+job_id)
-				.then(response =>{
-					if(response.data.message==="Job details deleted Successfully!"){
-						var {mapAction} = this.props;
-						mapAction.filterJobList(this.props.selector);
+	  	var {mapAction} = this.props;
+	    mapAction.filterJobList(selector);
 
+	}
+	deleteJob = (event)=>{
+		event.preventDefault();
+		const job_id = event.currentTarget.id;
+
+		Swal.fire({
+			title 				: 'Are you sure? you want to delete this profile!!!',
+			text 				: 'You will not be able to recover this profile',
+			icon 				: 'warning',
+			showCancelButton 	: true,
+			confirmButtonText 	: 'Delete',
+			cancelButtonColor 	: 'No, keep it',
+			confirmButtonColor 	: '#d33',
+		
+		}).then((result) =>{
+			if(result.value){
+				if(job_id){
+					Axios.delete("/api/jobs/delete/"+job_id)
+					.then(response =>{
+						if(response.data.message==="Job details deleted Successfully!"){
+							var {mapAction} = this.props;
+							mapAction.filterJobList(this.props.selector);
+
+							Swal.fire(
+										'Deleted!',
+										'Job Profile has been deleted successfully!',
+										'success'
+								);
+						}
+					})
+					.catch(error=>{
 						Swal.fire(
-									'Deleted!',
-									'Job Profile has been deleted successfully!',
-									'success'
-							);
+									"Some problem occured deleting job!",
+									error.message,
+									'error'
+							)
+					})
+				}
+					
+					}else if (result.dismiss === Swal.DismissReason.cancel){
+						Swal.fire(
+							'Cancelled',
+							'Your job Profile is safe :)',
+							'error'
+						)
 					}
 				})
-				.catch(error=>{
-					Swal.fire(
-								"Some problem occured deleting job!",
-								error.message,
-								'error'
-						)
-				})
-			}
-				
-				}else if (result.dismiss === Swal.DismissReason.cancel){
-					Swal.fire(
-						'Cancelled',
-						'Your job Profile is safe :)',
-						'error'
-					)
-				}
-			})
-		}
+	}
 
 	render(){
 
@@ -151,10 +161,13 @@ deleteJob = (event)=>{
 																	}	
 																</ul>
 																<div className="infoLog"> {Moment(elem.createdAt).startOf('seconds').fromNow()}  </div>
+																<div className="joblistNoCount"> 
+																     &nbsp; <a href={"/applied-candidate-list/" + elem._id}> Total Applicants : {applicantsCount.length > 0 ? applicantsCount[0].candidatesApplied :  0}</a> 
+															    </div>
 															</div>
 														</div>
 														<div className="jobListDesignation">
-															{elem.jobBasicInfo.jobTitle}
+															{elem.jobBasicInfo.jobTitle + " (" +elem.jobID+ ")"}
 														</div>
 														<div className="jobListCompanyName">
 
@@ -173,9 +186,7 @@ deleteJob = (event)=>{
 														<div> 
 															<i className="fa fa-users jobListNumPositions"></i> &nbsp; No of position : {elem.jobBasicInfo.positions} 
 														</div>
-														<div className="joblistNoCount"> 
-															<i className="fa fa-check-circle jobListNumapply"></i> &nbsp; <a href={"/applied-candidate-list/" + elem._id}> No. of applicants : {applicantsCount.length > 0 ? applicantsCount[0].candidatesApplied :  0}</a> 
-														</div>
+														
 													</div>
 													<div className="col-lg-1 jobListRightContent">
 														<div className="row">
@@ -201,13 +212,14 @@ deleteJob = (event)=>{
 								<h3 style={{margin:"100px"}}>No Jobs Found</h3>
 						}
 						<div className="col-lg-12">
-					        <Pagination
-					          activePage={this.state.activePage}
-					          itemsCountPerPage={5}
-					          totalItemsCount={this.props.jobCount[0] ? this.props.jobCount[0].jobCount : 0}
-					          pageRangeDisplayed={5}
-					          onChange={this.handlePageChange.bind(this)}
-					        />
+					        {
+								this.props.jobCount ? 
+								(this.props.selector.startLimit + this.props.selector.showMoreLimit) >= this.props.jobCount ? null :
+								<button className="btn buttonYellow" style={{float:"right", margin:"20px 0"}} onClick={this.showMore.bind(this)}>Show {this.props.selector.showMoreLimit} More</button>
+					        
+					        	: 
+					        	<button className="btn buttonYellow" style={{float:"right", margin:"20px 0"}} onClick={this.showMore.bind(this)}> Show More </button>
+							}
 					    </div>	
 				</div>
 			</section>

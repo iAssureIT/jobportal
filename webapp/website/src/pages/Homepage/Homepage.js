@@ -27,8 +27,8 @@ class HomePage extends Component {
       functonalAreaJobs     : [],
       subfunctonalAreaJobs  : [],
       startLimit            : 0,
-      endLimit              : 5,
-      activePage            : 1,    
+      initialLimit          : 25,
+      showMoreLimit         : 25,   
     }
   } 
   componentDidMount(){ 
@@ -69,19 +69,23 @@ class HomePage extends Component {
         mapAction.setViewMode("functionalView");
         mapAction.filterSubfunctionalData(selector);
       }else if(this.props.match.params.industryName != "all" && this.props.match.params.subfunctionalArea == "all"){
+        var tempArray3 = [];
+        tempArray3.push({"industry" : this.props.match.params.industryName, "id": this.props.match.params.industry_id })
+        selector.industry_id = tempArray3;
         
+        console.log(this.props.match.params.industry_id)
 
-        selector.startLimit   = this.state.startLimit;
-        selector.endLimit     = this.state.endLimit;
-        selector.activePage   = this.state.activePage;
+        selector.startLimit     = this.state.startLimit;
+        selector.initialLimit   = this.state.initialLimit;
+        selector.showMoreLimit  = this.state.showMoreLimit;
 
         mapAction.setViewMode("listView");
         mapAction.filterJobList(selector);
       }else{
         
-        selector.startLimit   = this.state.startLimit;
-        selector.endLimit     = this.state.endLimit;
-        selector.activePage   = this.state.activePage;
+        selector.startLimit     = this.state.startLimit;
+        selector.initialLimit   = this.state.initialLimit;
+        selector.showMoreLimit  = this.state.showMoreLimit;
 
         mapAction.setViewMode("listView");
         mapAction.filterJobList(selector);

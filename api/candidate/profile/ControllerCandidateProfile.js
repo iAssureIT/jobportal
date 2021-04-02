@@ -12,10 +12,16 @@ const IndustryMaster        = require('../../coreAdmin/IndustryMaster/ModelIndus
 const EntityMaster          = require('../../coreAdmin/entityMaster/ModelEntityMaster.js');
 
 exports.insertCandidateBasicInfo = (req, res, next)=>{
-    
-    	const candidateData = new CandidateProfile({
-    		"_id" : new mongoose.Types.ObjectId(),
-    		"basicInfo" : {
+        processData();
+        async function processData(){
+
+        var getnext             = await getCandidateNextSequence() 
+        var candidateID         = parseInt(getnext) 
+
+    	const candidateData = new CandidateProfile({ 
+    		"_id"         : new mongoose.Types.ObjectId(),
+            "candidateID" : candidateID,
+    		"basicInfo"   : {
     			"firstName"			: req.body.firstName,
     			"middleName"		: req.body.middleName ? req.body.middleName : null,
     			"lastName" 		 	: req.body.lastName,
@@ -30,6 +36,7 @@ exports.insertCandidateBasicInfo = (req, res, next)=>{
                 "executiveSummary"  : req.body.executiveSummary ? req.body.executiveSummary : null,
                 "passport"          : req.body.passport ? req.body.passport : null,
                 "visa"              : req.body.visa ? req.body.visa : null,
+                "country"           : req.body.country ? req.body.country : null,
     		},
             "languagesKnown"        : req.body.languagesTags ? req.body.languagesTags : null,
     		"contact" : {
@@ -56,9 +63,29 @@ exports.insertCandidateBasicInfo = (req, res, next)=>{
     				error 	: error,
     				message : "Failed to insert candidate details."
     			});
-    		});		
+    		});	
+        }	
 }
-
+function getCandidateNextSequence() {
+    return new Promise((resolve,reject)=>{
+    CandidateProfile.findOne({})    
+        .sort({candidateID : -1})   
+        .exec()
+        .then(data=>{
+            if (data) { 
+                var seq = data.candidateID;
+                seq = seq+1;
+                resolve(seq) 
+            }else{
+               resolve(1)
+            }
+            
+        })
+        .catch(err =>{
+            reject(0)
+        });
+    });
+}
 
 exports.getcandidate_id = (req,res,next)=>{
     CandidateProfile.find({user_id: req.params.userID})
@@ -256,6 +283,7 @@ exports.updateCandidateBasicInfo = (req, res, next)=>{
                         //"basicInfo.age"            : req.body.dob,
                         "basicInfo.gender"         : req.body.gender,
                         "basicInfo.maritalStatus"  : req.body.maritalStatus,
+                        "basicInfo.country"       : req.body.country,
                         // "basicInfo.anniversaryDate": req.body.anniversaryDate == "" ? null : new Date(req.body.anniversaryDate),
                         "basicInfo.nationality"    : req.body.nationality,
                         "basicInfo.profilePicture" : req.body.profilePicture,

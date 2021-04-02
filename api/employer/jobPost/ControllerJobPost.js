@@ -21,6 +21,7 @@ var ObjectID 	= 	require('mongodb').ObjectID;
 
 exports.insertJobs = (req, res, next)=>{
 		console.log(req.body)	
+        
 		var functionalarea_id, subfunctionalarea_id, jobsector_id, jobrole_id, jobtype_id, jobshift_id, jobtime_id, mineducation_id;
 		var primarySkills   = [];
 	    var secondarySkills = [];
@@ -30,6 +31,9 @@ exports.insertJobs = (req, res, next)=>{
 
 		processData();
     	async function processData(){
+            var getnext             = await getNextSequence() 
+            var jobID               = parseInt(getnext)
+
     		functionalarea_id  		= req.body.functionalarea_id != "" ? req.body.functionalarea_id 
     							: await insertFunctArea(req.body.functionalArea,req.body.user_id)
 			
@@ -81,7 +85,7 @@ exports.insertJobs = (req, res, next)=>{
 		const jobsData = new Jobs({
 			
 			"_id" 			: 	new mongoose.Types.ObjectId(),
-			
+			"jobID"         :   jobID ? jobID : 1,
 			"company_id"	: 	req.body.company_id,
 			
 			"jobBasicInfo" 	: 	{
@@ -460,8 +464,12 @@ exports.getJobList = (req,res,next)=>{
         selector["$and"].push({ "eligibility.minExperience" : { '$gte' : req.body.minExp,  '$lte' : req.body.maxExp} });
     }
     console.log("list selector - ", selector);
+
+    var limit = req.body.startLimit === 0 ? req.body.initialLimit : req.body.showMoreLimit
+    console.log(req.body.startLimit)
+    console.log(limit)
     
-    Jobs.find(selector).skip(req.body.startLimit).limit(req.body.endLimit).sort({createdAt:-1})
+    Jobs.find(selector).skip(req.body.startLimit).limit(limit).sort({createdAt:-1})
     .populate('company_id')
     .populate('jobBasicInfo.industry_id')
     .populate('jobBasicInfo.functionalarea_id')
@@ -600,7 +608,7 @@ exports.getJobListForEmployer = (req,res,next)=>{
     }
     console.log("hagshg",req.body.startLimit)
     //console.log("hagshg",req.body.endLimit)
-    console.log("selector",selector)
+    console.log("selector",selector) 
 
     var limit = req.body.startLimit === 0 ? req.body.initialLimit : req.body.showMoreLimit
 
@@ -875,11 +883,7 @@ exports.jobCount = (req, res, next)=>{
         selector["$and"].push({ "eligibility.minExperience" : { '$gte' : req.body.minExp,  '$lte' : req.body.maxExp} });
     }
     console.log("count selector - ", JSON.stringify(selector));
-    Jobs.aggregate([
-        { $match    : selector },
-        { $count    : "jobCount" },
-    ])
-    
+    Jobs.find(selector).count()
     .exec()
     .then(data=>{
         //create states array
@@ -1598,9 +1602,31 @@ function getQualification(){
             });            
     });
 }
+function getNextSequence() {
+    return new Promise((resolve,reject)=>{
+    Jobs.findOne({})    
+        .sort({jobID : -1})   
+        .exec()
+        .then(data=>{
+            console.log(data)
+            if (data) { 
+                var seq = data.jobID;
+                seq = seq+1;
+                resolve(seq) 
+            }else{
+               resolve(1)
+            }
+            
+        })
+        .catch(err =>{
+            reject(0)
+        });
+    });
+}
 exports.insertBulkJobs = (req,res,next)=>{
     processData();
     async function processData() {
+        
         var states          = await getStates();
         var entities        = await getEntity();
         var industries      = await getIndustries();
@@ -1650,7 +1676,10 @@ exports.insertBulkJobs = (req,res,next)=>{
                         {"state": "West Bengal", "stateCode": "WB"},
         ]*/
         var jobsArray = []; 
+        var getnext                 = await getNextSequence() 
+        var jobID                   = parseInt(getnext)
         for (var k = 0; k < req.body.noofjobs; k++) {
+            
             var randomStateIndex        = Math.floor(Math.random() * states.length);
             var districts               = await getDistricts(states[randomStateIndex]._id);
             var randomDistrictIndex     = Math.floor(Math.random() * districts.length);
@@ -1668,6 +1697,7 @@ exports.insertBulkJobs = (req,res,next)=>{
             var mineducation_id         = qualifications[Math.floor(Math.random() * qualifications.length)]._id
             
             var jobObject = {
+                "jobID"         : jobID ? jobID : 1,
                 "company_id"    : company_id,
                 "jobBasicInfo"  :   {
                                     "jobTitle"              : jobRoles[Math.floor(Math.random() * jobRoles.length)].jobRole,
@@ -1714,7 +1744,7 @@ exports.insertBulkJobs = (req,res,next)=>{
             }
             //console.log(jobObject)
             jobsArray.push(jobObject) 
-            
+            jobID = jobID + 1;
         }
         Jobs.insertMany(jobsArray)
             .then(data => {
@@ -1730,4 +1760,209 @@ function camelCase(str) {
             .split(' ')
             .map(word => word.charAt(0).toUpperCase() + word.slice(1))
             .join(' ');
+}
+
+
+function insertIndustry(industry, createdBy) {
+    return new Promise(function (resolve, reject) {
+        const industryMaster = new IndustryMaster({
+            _id                 : new mongoose.Types.ObjectId(),
+            industry            : industry,
+            createdBy           : createdBy,
+            createdAt           : new Date()
+        })
+
+        industryMaster.save()
+            .then(data => {
+                resolve(data._id);
+            })
+
+            .catch(err => {
+                reject(err);
+            });   
+    });
+}
+function insertFunctionalArea(functionalarea, createdBy) {
+    return new Promise(function (resolve, reject) {
+        const functionalareaMaster = new FunctionalAreaMaster({
+            _id                 : new mongoose.Types.ObjectId(),
+            functionalArea      : functionalarea,
+            createdBy           : createdBy,
+            createdAt           : new Date()
+        })
+
+        functionalareaMaster.save()
+            .then(data => {
+                resolve(data._id);
+            })
+
+            .catch(err => {
+                reject(err);
+            });   
+    });
+}
+function insertSubFunctionalArea(functionalarea_id, subfunctionalArea, createdBy) {
+    return new Promise(function (resolve, reject) {
+        const subfunctionalareaMaster = new SubFunctionalAreaMaster({
+            _id                 : new mongoose.Types.ObjectId(),
+            functionalarea_id   : functionalarea_id,
+            subfunctionalArea   : subfunctionalArea,
+            createdBy           : createdBy,
+            createdAt           : new Date()
+        })
+
+        subfunctionalareaMaster.save()
+            .then(data => {
+                resolve(data._id);
+            })
+
+            .catch(err => {
+                reject(err);
+            });   
+    });
+}
+
+exports.bulkUploadJobs = (req, res, next) => {
+    var jobs = req.body.data;
+    //console.log("entity...",entity);
+    var validData = [];
+    var validObjects = [];
+    var invalidData = [];
+    var invalidObjects = [];
+    var remark = '';
+    var failedRecords = [];
+    var Count = 0;
+    var DuplicateCount = 0;
+    var uploadTime = new Date();
+
+    processData();
+    async function processData() {
+        var industries      = await getIndustries();
+        var funAreas        = await getFunctionalAreas();
+        var jobSectors      = await getJobSectors();
+        var jobRoles        = await getJobRoles();
+        var jobTypes        = await getJobType();
+        var jobShifts       = await getJobShift();
+        var jobTimes        = await getJobTime();
+        var qualifications  = await getQualification();
+
+
+        for (var k = 0; k < jobs.length; k++) {
+            if (jobs[k].jobTitle == '-') {
+                remark += "jobTitle not found, ";
+            }
+            if (jobs[k].industry == '-') {
+                remark += "industry not found, ";
+            }
+            if (jobs[k].functionalarea == '-') {
+                remark += "functionalarea not found, ";
+            }
+            if (jobs[k].subfunctionalarea == '-') {
+                remark += "subfunctionalarea not found, ";
+            }
+            if (jobs[k].jobrole == '-') {
+                remark += "jobrole not found, ";
+            }
+            if (jobs[k].gender == '-') {
+                remark += "gender not found, ";
+            }
+            if (jobs[k].jobsector == '-') {
+                remark += "jobsector not found, ";
+            }
+            if (jobs[k].jobtype == '-') {
+                remark += "jobtype not found, ";
+            }
+            if (jobs[k].jobshift == '-') {
+                remark += "jobshift not found, ";
+            }
+            if (jobs[k].jobtime == '-') {
+                remark += "jobshift not found, ";
+            }
+            if (jobs[k].jobshift == '-') {
+                remark += "jobshift not found, ";
+            }
+            if (jobs[k].positions == '-') {
+                remark += "positions not found, ";
+            }
+            if (jobs[k].jobDesc == '-') {
+                remark += "jobDesc not found, ";
+            }
+            if (jobs[k].contactPersonName == '-') {
+                remark += "contactPersonName not found, ";
+            }
+            if (jobs[k].contactPersonEmail == '-') {
+                remark += "contactPersonEmail not found, ";
+            }
+            if (jobs[k].contactPersonPhoneCoountryCode == '-') {
+                remark += "contactPersonPhoneCoountryCode not found, ";
+            }
+            if (jobs[k].contactPersonPhone == '-') {
+                remark += "contactPersonPhone not found, ";
+            }
+            if (jobs[k].address == '-') {
+                remark += "address not found, ";
+            }
+            if (jobs[k].district == '-') {
+                remark += "district not found, ";
+            }
+            if (jobs[k].state == '-') {
+                remark += "state not found, ";
+            }
+            if (jobs[k].stateCode == '-') {
+                remark += "stateCode not found, ";
+            }
+            if (jobs[k].country == '-') {
+                remark += "country not found, ";
+            }
+            if (jobs[k].countryCode == '-') {
+                remark += "countryCode not found, ";
+            }
+            if (jobs[k].pincode == '-') {
+                remark += "pincode not found, ";
+            }
+            if (jobs[k].minSalary == '-') {
+                remark += "minSalary not found, ";
+            }
+            if (jobs[k].mineducation == '-') {
+                remark += "mineducation not found, ";
+            }
+            if (jobs[k].minExperience == '-') {
+                remark += "minExperience not found, ";
+            }
+            
+            if (remark == '') {
+                var industry_id;
+                var industryExists = industries.filter((data) => {
+                    if (data.industry.trim().toLowerCase() == jobs[k].industry.trim().toLowerCase()) {
+                        return data;
+                    }
+                })
+                if (industryExists.length > 0) {
+                    industry_id = industryExists[0]._id;
+                } 
+                else {
+                    if(jobs[k].industry != '-'){
+                    industry_id = await insertIndustry(jobs[k].industry,req.body.reqdata.createdBy);
+                   }
+                }
+
+                var functionalarea_id;
+                var functionalareaExists = funAreas.filter((data) => {
+                    if (data.functionalArea.trim().toLowerCase() == jobs[k].functionalarea.trim().toLowerCase()) {
+                        return data;
+                    }
+                })
+                if (functionalareaExists.length > 0) {
+                    functionalarea_id = functionalareaExists[0]._id;
+                } 
+                else {
+                    if(jobs[k].functionalarea != '-'){
+                    functionalarea_id = await insertFunctionalArea(jobs[k].functionalarea,req.body.reqdata.createdBy);
+                    }
+                }
+                
+            }
+
+        }
+    }
 }

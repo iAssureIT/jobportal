@@ -4,6 +4,7 @@
 	background-color: var(--main-bg-color);
 	padding-top:40px;
 	padding-bottom:20px;
+	font-family: 'Montserrat-Medium';
 
 }
 .progressBar{
@@ -22,6 +23,7 @@
 }
 .stepText{
 	font-size:11px;
+	
 }
 .bullet{
 	display:inline-block;

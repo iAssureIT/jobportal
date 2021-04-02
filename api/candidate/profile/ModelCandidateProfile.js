@@ -3,7 +3,8 @@ mongoose.pluralize(null);
 
 const candidateSchema = mongoose.Schema({
 	_id : mongoose.Schema.Types.ObjectId,
-	basicInfo : {
+	candidateID	: Number, 
+	basicInfo 	: {
 		firstName		: String,
 		middleName		: String,
 		lastName 		: String,
@@ -17,6 +18,7 @@ const candidateSchema = mongoose.Schema({
 		executiveSummary: String,
 		passport        : String,
 		visa        	: String,
+		country        	: String,
 	},
 	languagesKnown		: [{
 						language_id : { type: mongoose.Schema.Types.ObjectId, ref: 'languagemasters' }

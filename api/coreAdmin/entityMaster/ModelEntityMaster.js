@@ -109,7 +109,7 @@ const entitySchema = mongoose.Schema({
     createdBy                 : { type: mongoose.Schema.Types.ObjectId, ref: 'users' },
     createdAt                 : Date,
     fileName                  : String,
-
+    uploadTime                : Date,
     updateLog                 : [
                                 {
                                     updatedAt           : Date,

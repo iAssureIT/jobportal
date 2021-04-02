@@ -194,7 +194,7 @@ class LeftAside extends Component{
 												<li key={index}>
 													<div>
 														<i className="fa fa-square rotate45" ></i>
-															{elem.skillID}
+															{elem.skill_id.skill}
 													</div>
 													<div className="progress candidateprogess">
 														<div className="progress-bar candidateprogessBar" 

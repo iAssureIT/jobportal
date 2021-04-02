@@ -712,18 +712,12 @@ class Address extends Component{
 														<div className="addLogoDiv">
 															<FontAwesomeIcon icon="home" /> 
 														</div>
-														<div className="">
-														{
-															this.state.addressTypeArry.map((elem1,index)=>{
-																return(
+														
 																	<div className="addLogoTextDiv" key={index}>
-																		{elem1.addressType}<br/>
+																		{elem.addressType.addressType}<br/>
 																		Address
 																	</div>
-																);
-															})
-														}
-														</div>
+													
 														
 													</div> 
 													<div className="col-lg-8 addRightWrapper">

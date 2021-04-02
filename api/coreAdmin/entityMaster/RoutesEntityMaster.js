@@ -81,8 +81,11 @@ router.post('/bulkUploadEntity',entityMaster.bulkUploadEntity);
 
 router.get('/get/filedetails/:fileName', entityMaster.filedetails);
 
+router.post('/get/files',entityMaster.fetch_file); 
 
-// router.get('/get/filedetails/:fileName', departmentMaster.filedetails);
+router.get('/get/files/count',entityMaster.fetch_file_count);
+
+router.delete('/file/delete/:fileName/:uploadTime',entityMaster.delete_file);
 
 router.patch('/addStatutoryDetails', entityMaster.addStatutoryDetails);
 

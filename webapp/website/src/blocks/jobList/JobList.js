@@ -24,15 +24,26 @@ class Joblist extends Component{
 		jobList  		: [],
 		isToggle 		: true,
 		appliedItems 	: [],
-		activePage	: this.props.selector.activePage,
-		startLimit 	: this.props.selector.startLimit,
-		endLimit 	: this.props.selector.endLimit,
+		startLimit 		: this.props.selector.startLimit,
 	}
 
 }
 
 componentDidMount(){
 	
+}
+showMore(){
+
+	var selector 		  	= this.props.selector;
+
+	selector.startLimit   	= this.props.selector.startLimit === 0 
+	? this.props.selector.startLimit + this.props.selector.initialLimit  
+	: this.props.selector.startLimit + this.props.selector.showMoreLimit
+
+	console.log(selector)
+  	
+  	var {mapAction} = this.props;
+    mapAction.filterJobList(selector);
 }
 handlePageChange(pageNumber) {
 	//console.log(`active page is ${pageNumber}`);
@@ -339,6 +350,7 @@ removeApplication = (job_id) => {
 							:
 							<h3 style={{margin:"100px"}}>No Jobs Found</h3>
 						}
+
 						{/*<div className="col-lg-12">
 					        <Pagination
 					          activePage={this.state.activePage}
@@ -348,6 +360,19 @@ removeApplication = (job_id) => {
 					          onChange={this.handlePageChange.bind(this)}
 					        />
 					    </div>*/}
+
+						<div className="col-lg-12">
+					       	{
+								this.props.jobCount ? 
+								(this.props.selector.startLimit + this.props.selector.showMoreLimit) >= this.props.jobCount ? null :
+								<button className="btn buttonYellow" style={{float:"right", margin:"20px 0"}} onClick={this.showMore.bind(this)}>Show {this.props.selector.showMoreLimit} More</button>
+					        
+					        	: 
+					        	<button className="btn buttonYellow" style={{float:"right", margin:"20px 0"}} onClick={this.showMore.bind(this)}> Show More </button>
+					        
+							}
+					    </div>
+
 					</div>
 				</div>
 			</section>
