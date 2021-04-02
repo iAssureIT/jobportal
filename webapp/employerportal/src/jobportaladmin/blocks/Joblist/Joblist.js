@@ -251,4 +251,3 @@ const mapDispatchToProps = (dispatch) => ({
   mapAction :  bindActionCreators(mapActionCreator, dispatch)
 })
 export default connect(mapStateToProps, mapDispatchToProps)(JobListView)
-															

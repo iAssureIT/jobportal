@@ -259,8 +259,10 @@ class Header extends Component{
     if (this.props.userDetails.loggedIn) {    
       return(
         <nav className="navbar FunctionalHeaderWrapper container-fluid">
-        <div className="iconHeader col-lg-1">
+        <div className="col-lg-1">
+          <div className="iconHeader">
             <a href="/"><img src="/images/1.png" alt="icon" /></a>
+          </div>
         </div>
 
         {
@@ -518,8 +520,10 @@ class Header extends Component{
     else{
        return(
         <nav className="navbar FunctionalHeaderWrapper container-fluid">
-        <div className="iconHeader col-lg-1">
+        <div className="col-lg-1">
+          <div className="iconHeader">
             <a href="/"><img src="/images/1.png" alt="icon" /></a>
+          </div>
         </div>
         {
           window.location.pathname.split("/")[3] == "state" ? 
