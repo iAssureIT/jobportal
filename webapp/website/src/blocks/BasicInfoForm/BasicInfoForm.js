@@ -726,6 +726,7 @@ class BasicInfoForm extends Component{
 									 className="form-control inputBox unstyled date" 
 									 value={this.state.dob} max={Moment(new Date()).format("YYYY-MM-DD")}
 									 onChange={this.handleChange.bind(this)} />
+									 <div className="dateLine"></div>
 								</div> 
 								<span id="dobError" className="errorMsg"></span>
 							</div>
@@ -857,7 +858,7 @@ class BasicInfoForm extends Component{
 								</div>
 							</div>
 							<div className="col-lg-2">
-								<label htmlFor="passport" className="nameTitleForm ">
+								<label htmlFor="passport" className="nameTitleForm passportFont">
 									Do You Have Passport?
 								</label>
 								<div className="input-group genderFeildWrapper">
@@ -886,7 +887,7 @@ class BasicInfoForm extends Component{
 								</div>
 							</div> 
 							<div className="col-lg-2">
-								<label htmlFor="visa" className="nameTitleForm ">
+								<label htmlFor="visa" className="nameTitleForm passportFont">
 									Do You Have Visa?
 								</label>
 								<div className="input-group genderFeildWrapper">

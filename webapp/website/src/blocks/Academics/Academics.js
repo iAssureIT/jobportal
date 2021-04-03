@@ -702,6 +702,7 @@ class Academics extends Component{
 									 className="form-control inputBox" 
 									 value={this.state.admisionYear} 
 									 onChange={this.handleChange.bind(this)} />
+									 <div className="dateLine"></div>
 								</div> 
 								<span id="admisionYearError" className="errorMsg"></span>
 							</div>
@@ -718,6 +719,7 @@ class Academics extends Component{
 									 className="form-control inputBox " 
 									 value={this.state.passOutYear} 
 									 onChange={this.handleChange.bind(this)} />
+									 <div className="dateLine"></div>
 								</div> 
 								<span id="passOutYearError" className="errorMsg"></span>
 							</div>

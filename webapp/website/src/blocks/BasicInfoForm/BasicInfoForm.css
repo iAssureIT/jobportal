@@ -31,15 +31,11 @@
 
 }
 .nameTitleForm{
-	font-family: 'Montserrat-Medium';
+	font-family: 'Montserrat-Medium',Sans-Serif;
 	font-size:12px;
 	font-weight:100!important;
 
 	color: #eee;
-}
-.nameTitleFormAge{
-	font-family: 'Montserrat-Bold';
-	color: #fff;
 }
 .nameTitleFormStar{
 	color:#f00;
@@ -47,6 +43,7 @@
 }
 .inputBoxIcon{
 	border:1px solid var(--main-border-color)!important;
+
 	border-right:none!important;
 	background-color: var(--input-bg-color)!important;
 	color:var(--main-txt-color)!important;
@@ -66,6 +63,7 @@
     font-size:13.5px!important;
     z-index:0!important;
     text-transform:capitalize;
+    font-family: 'Montserrat-Medium',Sans-Serif;
 
 }
 
@@ -74,14 +72,14 @@
 	font-size:12px;
 	font-weight:100!important;
 	letter-spacing: 1px;
-	font-family: 'Montserrat-Medium';
+	font-family: 'Montserrat-Medium',Sans-Serif;
 }
 .showFeild2{
 	margin-top:8px;
 	font-size:12px;
 	font-weight:100!important;
 	letter-spacing: 1px;
-	font-family: 'Montserrat-Medium';
+	font-family: 'Montserrat-Medium',Sans-Serif;
 }
 .genderFeildWrapper{
 	height:25px;
@@ -123,7 +121,7 @@
 	margin-top:30px;
 	border:1px solid var(--main-border-color)!important;
 	border-radius:5px;
-	font-family: 'Montserrat-Medium';
+	font-family: 'Montserrat-Medium',Sans-Serif;
 	font-size:13px;
 
 }
@@ -142,7 +140,7 @@
 	border:1px solid var(--main-border-color)!important;
 	border-radius:5px;
 	background-color:var(--main-bg-color);
-	font-family: 'Montserrat-Medium';
+	font-family: 'Montserrat-Medium',Sans-Serif;
 	font-size:13px;
 	transition:all 0.5s;
 
@@ -226,6 +224,7 @@
 /********************************************Properties Of React Tag Input******************************************/
 
 div.ReactTags__tags {
+    font-family: 'Montserrat-Medium',Sans-Serif;
     position: relative;
     border-bottom-right-radius: 4px;
     border-top-right-radius: 4px;
@@ -235,6 +234,7 @@ div.ReactTags__tags {
 }
 
 div.ReactTags__tagInput {
+
     border-radius: 2px;
     display: inline-block;
 }
@@ -352,6 +352,7 @@ input::placeholder{
 /********************************************Properties Of ReactTags******************************************/
 
 div.ReactTags__tags {
+    font-family: 'Montserrat-Medium',Sans-Serif;
     position: relative;
     border-bottom-right-radius: 4px;
     border-top-right-radius: 4px;
@@ -473,6 +474,7 @@ user agent stylesheet:focus {
 /*********************************************Properties Of Ckeditor***********************************************/
 
 .ck-editor {
+    font-family: 'Montserrat-Medium',Sans-Serif;
      /* Overrides the border radius setting in the theme. */
     --ck-border-radius: 4px;
 
@@ -581,6 +583,7 @@ user agent stylesheet:focus {
 }
 
 .ck-rounded-corners .ck.ck-button{
+    font-family: 'Montserrat-Medium',Sans-Serif;
     background-color: var(--main-bg-color);
 }
 
@@ -598,9 +601,9 @@ user agent stylesheet:focus {
     background-color: var(--form-field-background-color) !important;
 }
 
-/*.ck.ck-dropdown.ck-heading-dropdown .ck-dropdown__button .ck-button__label{
-    background-color: var(--form-field-background-color) !important;
-}*/
+.ck.ck-dropdown.ck-heading-dropdown .ck-dropdown__button .ck-button__label{
+   font-family:'Montserrat-Medium',Sans-Serif;
+}
 
 .ck.ck-dropdown .ck-button.ck-dropdown__button.ck-on{
     background-color: var(--form-field-background-color) !important;
@@ -609,7 +612,12 @@ user agent stylesheet:focus {
 .ck.ck-list__item .ck-button.ck-on{
     background-color: var(--main-border-color) !important
 }
-
+.ck.ck-editor__main{
+    font-family:'Montserrat-Medium',Sans-Serif;
+}
+.ck.ck-button.ck-on:not(.ck-disabled):hover{
+    background-color: var(--yellow-button-color);
+}
 .ck .ck-insert-table-dropdown-grid-box.ck-on{
     border-color: var(--main-border-color) !important;
     background-color: var(--form-field-background-color) !important;
@@ -751,5 +759,23 @@ user agent stylesheet:focus {
 }
 
 /*********************************************Properties Of Experience***********************************************/
+/*********************************************Properties Of Date***********************************************/
 
-
+.dateLine,.dateLine1{
+    position: absolute;
+    width: 1px;
+    background: var(--main-border-color);
+    height: 33px;
+    z-index: 148;
+    right: 43px;
+}
+.dateLine1 {
+     right: 55px;
+}
+.styled-select select {
+    position: absolute;
+}
+.passportFont{
+    font-size: 10.5px;
+}
+/*********************************************Properties Of Date***********************************************/

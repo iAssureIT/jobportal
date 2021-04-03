@@ -841,6 +841,7 @@ class Experience extends Component{
 									 className="form-control inputBox date" 
 									 value={this.state.fromDate} 
 									 onChange={this.handleChange.bind(this)} />
+									 <div className="dateLine1"></div>
 								</div> 
 								<span id="fromDateError" className="errorMsg"></span>
 							</div>
@@ -857,6 +858,7 @@ class Experience extends Component{
 									 className="form-control inputBox date" 
 									 value={this.state.toDate} min={Moment(this.state.fromDate).format("YYYY-MM")}
 									 onChange={this.handleChange.bind(this)} />
+									 <div className="dateLine1"></div>
 								</div> 
 								<span id="toDateError" className="errorMsg"></span>
 							</div>

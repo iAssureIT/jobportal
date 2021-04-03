@@ -654,8 +654,13 @@ class Certification extends Component{
 								<div className="col-lg-4">
 									<label htmlFor="certifiedOn" className="nameTitleForm">Certified ON<sup className="nameTitleFormStar">*</sup></label>
 									<div className="input-group ">
-										<span className="input-group-addon inputBoxIcon"><FontAwesomeIcon icon="chalkboard-teacher" /></span> 
-										<input type="Date" name="certifiedOn" id="certifiedOn" className="form-control inputBox date" value={this.state.certifiedOn} onChange={this.handleChange.bind(this)} />
+										<span className="input-group-addon inputBoxIcon">
+											<FontAwesomeIcon icon="chalkboard-teacher" />
+										</span> 
+										<input type="Date" name="certifiedOn" id="certifiedOn"
+										 className="form-control inputBox date" 
+										 value={this.state.certifiedOn} onChange={this.handleChange.bind(this)} />
+										 <div className="dateLine"></div>
 									</div> 
 									<span id="certifiedOnError" className="errorMsg"></span>
 								</div>
@@ -668,7 +673,10 @@ class Certification extends Component{
 									<label htmlFor="validity" className="nameTitleForm">Valid Till</label>
 									<div className="input-group ">
 										<span className="input-group-addon inputBoxIcon"><i className="fa fa-calendar"></i> </span> 
-										<input type="date" name="validity" id="validity" className="form-control inputBox date" value={this.state.validity} onChange={this.handleChange.bind(this)} />
+										<input type="date" name="validity" id="validity" 
+										 className="form-control inputBox date" value={this.state.validity} 
+										 onChange={this.handleChange.bind(this)} />
+										 <div className="dateLine"></div>
 									</div> 
 								</div>
 
@@ -769,7 +777,7 @@ class Certification extends Component{
 									</div>
 							</div>
 							:
-							<div className="col-lg-12">
+							<div className="col-lg-12 iAssureTable1">
 								<div className="row">
 										<IAssureTable 
                                             tableHeading={this.state.tableHeading}

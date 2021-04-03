@@ -4,7 +4,7 @@
 	background-color: var(--main-bg-color);
 	padding-top:40px;
 	padding-bottom:20px;
-	font-family: 'Montserrat-Medium';
+	font-family: 'Montserrat-Medium',Sans-Serif;
 
 }
 .progressBar{
@@ -85,4 +85,9 @@
 }
 .step a{
 	color:#999!important;
+}
+@media (min-width:1400px){
+	.bullet::after{
+		width: 300px;
+	}
 }

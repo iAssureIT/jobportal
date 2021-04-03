@@ -33,7 +33,7 @@
 	font-size:16px;
 	letter-spacing:1px;
 	color: var(--main-heading-font-color);
-	font-family: Montserrat-Bold;
+	font-family: Montserrat-Bold,Sans-Serif;
 	padding-top: 2px;
 }
 .middelContentText{
@@ -42,7 +42,7 @@
 	margin-bottom:5px;
 	padding-bottom:12px;
 	border-left:2px solid var(--main-heading-font-color);
-	font-family: Montserrat-Medium;
+	font-family: Montserrat-Medium,Sans-Serif;
 	font-size:13px;
 }
 .secondP{
@@ -62,18 +62,18 @@
 	font-weight:800;
 	padding-top:5px;
 	padding-bottom:10px;
-	font-family: Montserrat-Medium;
+	font-family: Montserrat-Medium,Sans-Serif;
 }
 .companyName{
 	font-size:13px;
 	font-weight:600;
 	color: var(--main-txt-color);
-	font-family: Montserrat-Medium;
+	font-family: Montserrat-Medium,Sans-Serif;
 }
 .companyExperience,.companyAddress{
 	padding-top:3px;
 	font-size:12px;
-	font-family: Montserrat-Medium;
+	font-family: Montserrat-Medium,Sans-Serif;
 }
 
 .middleContentHr{

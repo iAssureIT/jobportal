@@ -1,11 +1,11 @@
 .AddressWrapper{
-	min-height:200px;
+	min-height:0px;
 	height:auto;
-	margin-top:15px;
 	padding-top:15px;
 	border-radius:3px;
 	padding-bottom:15px;
 	background:var(--main);
+	font-family: 'Montserrat-Medium',Sans-Serif;
 }
 
 .SearchListContainer{
@@ -21,7 +21,7 @@
 }
 .addWrapper{
 	height:156px;
-	font-family:'Montserrat-Regular';
+	font-family:'Montserrat-Regular',Sans-Serif;
 	margin-bottom:25px;
 	border: 3px inset var(--main-border-color);
 	text-transform:capitalize;
@@ -36,10 +36,11 @@
 .addLogoDiv{
 	font-size:45px;
 	padding-top:15px;
+	padding-bottom:15px;
 
 }
 .addLogoTextDiv{
-	font-family:'Montserrat-Bold';
+	font-family:'Montserrat-Bold',Sans-Serif;
 	font-size:0.8em;
 }
 .addRightWrapper{
@@ -64,7 +65,7 @@
 	border:1px solid var(--main-border-color)!important;
 	border-radius:4px;
 	background-color:var(--main-bg-color);
-	font-family: 'Montserrat-Medium';
+	font-family: 'Montserrat-Medium',Sans-Serif;
 	font-size:13px;
 	transition:all 0.5s;
 	text-align: center;
@@ -77,7 +78,7 @@
 	border:1px solid var(--main-border-color)!important;
 	border-radius:4px;
 	background-color:var(--main-bg-color);
-	font-family: 'Montserrat-Medium';
+	font-family: 'Montserrat-Medium',Sans-Serif;
 	font-size:13px;
 	transition:all 0.5s;
 	text-align: center;
@@ -158,6 +159,7 @@
 	margin-top:5px;
 	padding-left:15px;
 	font-size:12px;
+	font-family: 'Montserrat-Medium',Sans-Serif;
 }
 .AddressOuterWrapper{
 	margin-top:20px;
