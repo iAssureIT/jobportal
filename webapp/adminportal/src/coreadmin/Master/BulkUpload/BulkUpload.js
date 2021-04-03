@@ -100,7 +100,7 @@ class BulkUpload extends Component{
     else reader.readAsArrayBuffer(file);
   }
   bulkUpload() {
-    $('.fullpageloader').show();
+    //$('.fullpageloader').show();
     var initialLmt = 0;
     var factor = 200;
     var endLmt = initialLmt+factor;
@@ -148,8 +148,8 @@ class BulkUpload extends Component{
               if (percentage > 99 ) {
                 percentage = 100;
                 
-                $('.fullpageloader').hide();
-                $('.filedetailsDiv').show();
+                //$('.fullpageloader').hide();
+                //$('.filedetailsDiv').show();
                 this.props.getFileDetails(this.state.fileName); 
                 // this.props.getData(this.state.startRange, this.state.limitRange) 
               }

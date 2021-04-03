@@ -662,7 +662,7 @@ class BasicInfo extends Component {
 
     })
   }
-   getFileDetails(fileName){
+  getFileDetails(fileName){
      axios
       .get(this.state.fileDetailUrl+fileName)
       .then((response)=> {

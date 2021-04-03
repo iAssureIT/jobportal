@@ -16,7 +16,7 @@ import { connect }                  from 'react-redux';
 import { bindActionCreators }       from 'redux';
 import  * as mapActionCreator       from '../../Common/actions/index';
 import BulkUpload                   from "../../../coreadmin/Master/BulkUpload/BulkUpload.js";
-
+ 
 import './JobPosting.css';
 import 'react-phone-input-2/lib/style.css';
 
@@ -119,8 +119,34 @@ class JobPosting extends Component {
 
             
             submitBtnText               :   "SUBMIT",
-            fileDetailUrl               :   "/api/jobs/get/filedetails/"
+            fileDetailUrl               :   "/api/jobs/get/filedetails/",
 
+            goodRecordsHeading: {
+       
+                entityType: "Entity Type",
+                companyName: "Company Name",
+                groupName: "Group Name",
+                website: "Website",
+                companyPhone: "Contact No",
+                companyEmail: "Company Email",
+                CIN: "CIN",
+                COI: "COI",
+                TAN: "TAN",
+               
+              },
+              failedtableHeading: {
+               
+                entityType: "Entity Type",
+                companyName: "Company Name",
+                groupName: "Group Name",
+                website: "Website",
+                companyPhone: "Contact No",
+                companyEmail: "Company Email",
+                CIN: "CIN",
+                COI: "COI",
+                TAN: "TAN",
+                failedRemark              : "Failed Data Remark"
+              }
         }
 
         this.reactTags = React.createRef();
@@ -1233,7 +1259,59 @@ class JobPosting extends Component {
             //console.log(this.state)
         });  
     }
+    getFileDetails(fileName){
+     Axios
+      .get(this.state.fileDetailUrl+fileName)
+      .then((response)=> {
+      $('.fullpageloader').hide();  
+      if (response) {
+        this.setState({
+            fileDetails         : response.data,
+            failedRecordsCount  : response.data.failedRecords.length,
+            goodDataCount       : response.data.goodrecords.length
+        });
+          console.log("response.data.goodrecords----",response.data.goodrecords);
+          var tableData = response.data.goodrecords.map((a, i)=>{
+            return{
+                
+                "entityType": a.entityType ? a.entityType : '-',
+                "companyName": a.companyName ? a.companyName : '-',
+                "groupName": a.groupName ? a.groupName : '-',
+                "website": a.website ? a.website : '-',
+                "companyPhone": a.companyPhone ? a.companyPhone : '-',
+                "companyEmail": a.companyEmail ? a.companyEmail : '-',
+                "CIN": a.CIN ? a.CIN : '-',
+                "COI": a.COI ? a.COI : '-',
+                "TAN": a.TAN ? a.TAN : "-",
+            }
+          })
 
+          var failedRecordsTable = response.data.failedRecords.map((a, i)=>{
+          return{
+                
+                "entityType": a.entityType ? a.entityType : '-',
+                "companyName": a.companyName ? a.companyName : '-',
+                "groupName": a.groupName ? a.groupName : '-',
+                "website": a.website ? a.website : '-',
+                "companyPhone": a.companyPhone ? a.companyPhone : '-',
+                "companyEmail": a.companyEmail ? a.companyEmail : '-',
+                "CIN": a.CIN ? a.CIN : '-',
+                "COI": a.COI ? a.COI : '-',
+                "TAN": a.TAN ? a.TAN : "-",
+                "failedRemark"  : a.failedRemark     ? a.failedRemark : '-' 
+          }
+          })
+          
+        this.setState({
+            goodRecordsTable    : tableData,
+            failedRecordsTable  : failedRecordsTable
+        })
+      }
+      })
+      .catch((error)=> { 
+        console.log('error', error);
+      }) 
+  }
 
 render(){   
         const searchOptions =   { componentRestrictions: {country: "in"} }      
@@ -1252,633 +1330,650 @@ render(){
                             <li className="col-lg-6 col-md-6 col-xs-6 col-sm-6 NOpadding  text-center"><a data-toggle="pill" href="#bulk">Bulk Upload</a></li>
                           </ul>
                         </div>
+
+                    <section className="Content tab-content">    
                         <div id="bulk" className="tab-pane fade in col-lg-12 col-md-1f2 col-sm-12 col-xs-12 mt">
                           <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 outerForm">
-                            
+                            <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 outerForm">
+                                <BulkUpload url="/api/jobs/post/bulk-upload-jobs"
+                                    data={{ "createdBy": localStorage.getItem("user_ID") }}
+                                    uploadedData={this.uploadedData}
+                                    fileurl="https://testjobportal.s3.amazonaws.com/JobBulkUplaod.xlsx"
+                                    getFileDetails={this.getFileDetails.bind(this)}
+                                    fileDetails={this.state.fileDetails}
+                                    goodRecordsHeading={this.state.goodRecordsHeading}
+                                    failedtableHeading={this.state.failedtableHeading}
+                                    failedRecordsTable={this.state.failedRecordsTable}
+                                    failedRecordsCount={this.state.failedRecordsCount}
+                                    goodRecordsTable={this.state.goodRecordsTable}
+                                    goodDataCount={this.state.goodDataCount}
+                                />
+                              </div>
                           </div>
                         </div>
                         <div id="manual" className="tab-pane fade in active col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding">
-                        <div className="col-lg-12 addJobForm pageWrapperBorder borderColor">
-                            <div className="col-lg-10 col-lg-offset-1 mainFormSection">
-                                <div className="addJobFormHeading col-lg-12"> Post A Job <div className="addJobFormHr col-lg-12"></div> </div>
-                                <form id="addJob" autoComplete="off">
+                            <div className="col-lg-12 addJobForm pageWrapperBorder borderColor">
+                                <div className="col-lg-10 col-lg-offset-1 mainFormSection">
+                                    <div className="addJobFormHeading col-lg-12"> Post A Job <div className="addJobFormHr col-lg-12"></div> </div>
+                                    <form id="addJob" autoComplete="off">
 
-                                    <div className="addJobMainHead col-lg-12">
-                                        <i className="fa fa-info"></i> 
-                                        <span className="addcompLeftPadding"> Add Company </span>
-                                    </div>
+                                        <div className="addJobMainHead col-lg-12">
+                                            <i className="fa fa-info"></i> 
+                                            <span className="addcompLeftPadding"> Add Company </span>
+                                        </div>
 
-                                    <div className="col-lg-6 addJobFieldRow text-left">
-                                        <div className="row">
-                                            <div className="col-lg-12">
-                                                <label htmlFor="company" className="addjobformLable">
-                                                    Company Name
-                                                    <span className="asterisk">&#42;</span>
-                                                </label>
-                                             
-                                                <div className="input-group">
-                                                    <span className="input-group-addon addJobFormField"><i className="fa fa-briefcase"></i></span> 
-                                                        {/*<input type="text" list="company" className="form-control addJobFormField" refs="company" id="selectcompany" value={this.state.company} name="company"
-                                                        onChange={this.onChangecompany.bind(this)} />*/}
-                                                        
-                                                        <select name="company_id" id="company_id" className="companylist form-control addJobFormField" onChange={this.onChangecompany.bind(this)} value={this.state.company_id} >
-                                                            <option disabled value="Select Employer" >Select Employer</option>
-                                                            {this.state.companylist.map((item, key) =>
-                                                                <option key={key} value={item._id} data-industry={item.industry_id}>{item.companyName}</option>
-                                                            )}
-                                                        </select>
-                                                    <span id="companyError" className="errorMsgJobPost"></span>
-                                                </div>
-                                            </div>
-                                        </div>              
-                                    </div>    
-
-                                    <div className="addJobFormHr col-lg-12"></div>
-                                
-                                    <div className="addJobMainHead col-lg-12">
-                                        <i className="fa fa-info"></i> 
-                                        <div className="labelLeftPadding"> Basic Info </div>
-                                    </div>
-
-                                    <div className="col-lg-12 addJobFieldRow text-left">
-                                        <div className="row">
-                                            <div className="col-lg-6">
-                                                <div className="row">
-                                                    <label htmlFor="jobTitle" className="addjobformLable col-lg-12">
-                                                        Job Title
-                                                        <span className="asterisk"> &#42; </span>
-                                                        <div href="#" data-tip data-for='jobTitleTooltip' className="pull-right">
-                                                            <i title="Please enter job title" className="fa fa-question-circle"></i>
-                                                        </div>
+                                        <div className="col-lg-6 addJobFieldRow text-left">
+                                            <div className="row">
+                                                <div className="col-lg-12">
+                                                    <label htmlFor="company" className="addjobformLable">
+                                                        Company Name
+                                                        <span className="asterisk">&#42;</span>
                                                     </label>
+                                                 
+                                                    <div className="input-group">
+                                                        <span className="input-group-addon addJobFormField"><i className="fa fa-briefcase"></i></span> 
+                                                            {/*<input type="text" list="company" className="form-control addJobFormField" refs="company" id="selectcompany" value={this.state.company} name="company"
+                                                            onChange={this.onChangecompany.bind(this)} />*/}
+                                                            
+                                                            <select name="company_id" id="company_id" className="companylist form-control addJobFormField" onChange={this.onChangecompany.bind(this)} value={this.state.company_id} >
+                                                                <option disabled value="Select Employer" >Select Employer</option>
+                                                                {this.state.companylist.map((item, key) =>
+                                                                    <option key={key} value={item._id} data-industry={item.industry_id}>{item.companyName}</option>
+                                                                )}
+                                                            </select>
+                                                        <span id="companyError" className="errorMsgJobPost"></span>
+                                                    </div>
                                                 </div>
-                                                <div className="input-group">
-                                                    <span className="input-group-addon addJobFormField"><i className="fa fa-briefcase"></i> </span> 
-                                                    <input type="text" className="form-control addJobFormField" name="jobTitle" id="jobTitle" maxLength="50" value={this.state.jobTitle} onChange={this.handleChange}/>
+                                            </div>              
+                                        </div>    
+
+                                        <div className="addJobFormHr col-lg-12"></div>
+                                    
+                                        <div className="addJobMainHead col-lg-12">
+                                            <i className="fa fa-info"></i> 
+                                            <div className="labelLeftPadding"> Basic Info </div>
+                                        </div>
+
+                                        <div className="col-lg-12 addJobFieldRow text-left">
+                                            <div className="row">
+                                                <div className="col-lg-6">
+                                                    <div className="row">
+                                                        <label htmlFor="jobTitle" className="addjobformLable col-lg-12">
+                                                            Job Title
+                                                            <span className="asterisk"> &#42; </span>
+                                                            <div href="#" data-tip data-for='jobTitleTooltip' className="pull-right">
+                                                                <i title="Please enter job title" className="fa fa-question-circle"></i>
+                                                            </div>
+                                                        </label>
+                                                    </div>
+                                                    <div className="input-group">
+                                                        <span className="input-group-addon addJobFormField"><i className="fa fa-briefcase"></i> </span> 
+                                                        <input type="text" className="form-control addJobFormField" name="jobTitle" id="jobTitle" maxLength="50" value={this.state.jobTitle} onChange={this.handleChange}/>
+                                                    </div>
+                                                    <span id="jobTitleError" className="errorMsgJobPost"></span>
                                                 </div>
-                                                <span id="jobTitleError" className="errorMsgJobPost"></span>
-                                            </div>
-                                            
-                                            <div className="col-lg-6">
-                                                <div className="row">
-                                                    <label htmlFor="address" className="addjobformLable col-lg-12"> Job Location <span className="asterisk">&#42;</span> </label>
-                                                </div>  
-                                                <div className="input-group">
-                                                    <span className="input-group-addon addJobFormField">
-                                                        <FontAwesomeIcon className="addJobLocationIcon" icon={['fas', 'map-marker-alt']} />
-                                                    </span> 
-                                                    <PlacesAutocomplete
-                                                        value           =   {this.state.address}
-                                                        onChange        =   {this.handleChangePlaces}
-                                                        onSelect        =   {this.handleSelect}
-                                                        searchOptions   =   {searchOptions}>
-                                                        
-                                                        {({ getInputProps, suggestions, getSuggestionItemProps, loading }) =>   (
-                                                                <div className="col-lg-12 form-control addJobFormField">
-                                                                    <input maxLength="200"
-                                                                        {...getInputProps({
-                                                                                            placeholder: 'Search Address ...',
-                                                                                            className: 'col-lg-12 location-search-input errorinputText',
-                                                                                            id:"address",
-                                                                                            name:"address"
-                                                                                        })
-                                                                        }
-                                                                    />
-                                                                    
-                                                                    <div className={this.state.address ? "autocomplete-dropdown-container col-lg-12" : ""}>
-                                                                        {loading && <div>Loading...</div>}
-                                                                        {suggestions.map(suggestion => {
-                                                                                                            const className = suggestion.active
-                                                                                                                ? 'suggestion-item--active'
-                                                                                                                : 'suggestion-item';
-                                                                                                            // inline style for demonstration purpose
-                                                                                                            const style = suggestion.active
-                                                                                                                ? { backgroundColor: 'var(--main-border-color)', cursor: 'pointer'}
-                                                                                                                : { backgroundColor: 'var(--form-field-background-color)', cursor: 'pointer', paddingLeft: '10px'};
+                                                
+                                                <div className="col-lg-6">
+                                                    <div className="row">
+                                                        <label htmlFor="address" className="addjobformLable col-lg-12"> Job Location <span className="asterisk">&#42;</span> </label>
+                                                    </div>  
+                                                    <div className="input-group">
+                                                        <span className="input-group-addon addJobFormField">
+                                                            <FontAwesomeIcon className="addJobLocationIcon" icon={['fas', 'map-marker-alt']} />
+                                                        </span> 
+                                                        <PlacesAutocomplete
+                                                            value           =   {this.state.address}
+                                                            onChange        =   {this.handleChangePlaces}
+                                                            onSelect        =   {this.handleSelect}
+                                                            searchOptions   =   {searchOptions}>
+                                                            
+                                                            {({ getInputProps, suggestions, getSuggestionItemProps, loading }) =>   (
+                                                                    <div className="col-lg-12 form-control addJobFormField">
+                                                                        <input maxLength="200"
+                                                                            {...getInputProps({
+                                                                                                placeholder: 'Search Address ...',
+                                                                                                className: 'col-lg-12 location-search-input errorinputText',
+                                                                                                id:"address",
+                                                                                                name:"address"
+                                                                                            })
+                                                                            }
+                                                                        />
                                                                         
-                                                                                                            return (
-                                                                                                                        <div
-                                                                                                                            {...getSuggestionItemProps(suggestion, {
-                                                                                                                                                                        className,
-                                                                                                                                                                        style,
-                                                                                                                            }                           )          }
-                                                                                                                        >
-                                                                                                                        <span> {suggestion.description} </span>
-                                                                                                                        </div>
-                                                                                                                    );
-                                                                                                        }
-                                                                                        )
-                                                                        }
+                                                                        <div className={this.state.address ? "autocomplete-dropdown-container col-lg-12" : ""}>
+                                                                            {loading && <div>Loading...</div>}
+                                                                            {suggestions.map(suggestion => {
+                                                                                                                const className = suggestion.active
+                                                                                                                    ? 'suggestion-item--active'
+                                                                                                                    : 'suggestion-item';
+                                                                                                                // inline style for demonstration purpose
+                                                                                                                const style = suggestion.active
+                                                                                                                    ? { backgroundColor: 'var(--main-border-color)', cursor: 'pointer'}
+                                                                                                                    : { backgroundColor: 'var(--form-field-background-color)', cursor: 'pointer', paddingLeft: '10px'};
+                                                                            
+                                                                                                                return (
+                                                                                                                            <div
+                                                                                                                                {...getSuggestionItemProps(suggestion, {
+                                                                                                                                                                            className,
+                                                                                                                                                                            style,
+                                                                                                                                }                           )          }
+                                                                                                                            >
+                                                                                                                            <span> {suggestion.description} </span>
+                                                                                                                            </div>
+                                                                                                                        );
+                                                                                                            }
+                                                                                            )
+                                                                            }
+                                                                        </div>
                                                                     </div>
-                                                                </div>
-                                                        )}
-                                                    </PlacesAutocomplete>
+                                                            )}
+                                                        </PlacesAutocomplete>
+                                                    </div>
+                                                    <span id="addressError" className="errorMsgJobPost"></span>
                                                 </div>
-                                                <span id="addressError" className="errorMsgJobPost"></span>
                                             </div>
                                         </div>
-                                    </div>
 
-                                    <div className="col-lg-12 addJobFieldRow text-left">
-                                        <div className="row">
-                                            <div className="col-lg-3 addJobFixzIndex">
-                                                <div className="row">
-                                                    <label htmlFor="states" className="addjobformLable col-lg-12"> State <span className="asterisk">&#42;</span> </label>
-                                                </div>
-                                                <div className="input-group"> 
-                                                    <input type="text" className="form-control addJobFormField addJobState" ref="states" id="states" name="states" value={this.state.states} onChange={this.handleChange}/>
-                                                    
-                                                </div>
-                                                <span id="statesError" className="errorMsgJobPost"></span>  
-                                            </div>  
-                                            
-                                            <div className="col-lg-3 addJobFixzIndex">
-                                                <div className="row">
-                                                    <label className="addjobformLable col-lg-12"> City <span className="asterisk">&#42;</span> </label>
+                                        <div className="col-lg-12 addJobFieldRow text-left">
+                                            <div className="row">
+                                                <div className="col-lg-3 addJobFixzIndex">
+                                                    <div className="row">
+                                                        <label htmlFor="states" className="addjobformLable col-lg-12"> State <span className="asterisk">&#42;</span> </label>
+                                                    </div>
+                                                    <div className="input-group"> 
+                                                        <input type="text" className="form-control addJobFormField addJobState" ref="states" id="states" name="states" value={this.state.states} onChange={this.handleChange}/>
+                                                        
+                                                    </div>
+                                                    <span id="statesError" className="errorMsgJobPost"></span>  
                                                 </div>  
-                                                <div className="input-group"> 
-                                                    <input type="text" className="form-control addJobFormField addJobState" ref="cityVillage" id="cityVillage" name="cityVillage" maxLength="50" value={this.state.cityVillage} onChange={this.handleChange}/>
+                                                
+                                                <div className="col-lg-3 addJobFixzIndex">
+                                                    <div className="row">
+                                                        <label className="addjobformLable col-lg-12"> City <span className="asterisk">&#42;</span> </label>
+                                                    </div>  
+                                                    <div className="input-group"> 
+                                                        <input type="text" className="form-control addJobFormField addJobState" ref="cityVillage" id="cityVillage" name="cityVillage" maxLength="50" value={this.state.cityVillage} onChange={this.handleChange}/>
+                                                    </div>
+                                                    <span id="cityVillageError" className="errorMsgJobPost"></span>
                                                 </div>
-                                                <span id="cityVillageError" className="errorMsgJobPost"></span>
-                                            </div>
-                                            
-                                            <div className="col-lg-3 addJobFixzIndex">
-                                                <div className="row">
-                                                    <label className="addjobformLable col-lg-12"> District <span className="asterisk">&#42;</span> </label>
+                                                
+                                                <div className="col-lg-3 addJobFixzIndex">
+                                                    <div className="row">
+                                                        <label className="addjobformLable col-lg-12"> District <span className="asterisk">&#42;</span> </label>
+                                                    </div>
+                                                    <div className="input-group"> 
+                                                        <input type="text" className="form-control addJobFormField addJobState" ref="district" id="district" name="district" maxLength="50" value={this.state.district} onChange={this.handleChange}/>
+                                                    </div>
+                                                    <span id="districtError" className="errorMsgJobPost"></span>
                                                 </div>
-                                                <div className="input-group"> 
-                                                    <input type="text" className="form-control addJobFormField addJobState" ref="district" id="district" name="district" maxLength="50" value={this.state.district} onChange={this.handleChange}/>
+                                                
+                                                <div className="col-lg-3 addJobFixzIndex">
+                                                    <div className="row">
+                                                        <label className="addjobformLable col-lg-12"> Pincode <span className="asterisk">&#42;</span> </label>
+                                                    </div>
+                                                    <div className="input-group"> 
+                                                        <input type="text" className="form-control addJobFormField addJobState" ref="pincode" id="pincode" name="pincode" maxLength="06" value={this.state.pincode} onChange={this.keyPressNumber.bind(this)} onChange={this.handleChange}/>
+                                                    </div>
+                                                    <span id="pincodeError" className="errorMsgJobPost"></span>
                                                 </div>
-                                                <span id="districtError" className="errorMsgJobPost"></span>
-                                            </div>
-                                            
-                                            <div className="col-lg-3 addJobFixzIndex">
-                                                <div className="row">
-                                                    <label className="addjobformLable col-lg-12"> Pincode <span className="asterisk">&#42;</span> </label>
-                                                </div>
-                                                <div className="input-group"> 
-                                                    <input type="text" className="form-control addJobFormField addJobState" ref="pincode" id="pincode" name="pincode" maxLength="06" value={this.state.pincode} onChange={this.keyPressNumber.bind(this)} onChange={this.handleChange}/>
-                                                </div>
-                                                <span id="pincodeError" className="errorMsgJobPost"></span>
                                             </div>
                                         </div>
-                                    </div>
-                                    
+                                        
 
-                                    <div className="form-group col-lg-12 addJobFieldRow text-left">
-                                        <div className="row">
-                                            <div className="col-lg-6">
-                                                <label htmlFor="functionalArea" className="addjobformLable"> Functional Area <span className="asterisk">&#42;</span> </label>
-                                                <div className="input-group">
-                                                    <span className="input-group-addon addJobFormField"><i className="fa fa-briefcase"></i></span> 
-                                                        <input type="text" list="functionalArea" className="form-control addJobFormField" refs="functionalArea" 
-                                                         name="functionalArea" id="selectFunctionalArea" maxLength="100" value={this.state.functionalArea} data-value={this.state.functionalarea_id}
-                                                        onChange={this.onChangeFunctionalArea.bind(this)} />
-                                                        <datalist name="functionalArea" id="functionalArea" className="functionalArealist" >
-                                                            {this.state.functionalArealist.map((item, key) =>
-                                                                <option key={key} value={item.functionalArea} data-value={item._id}/>
-                                                            )}
-                                                        </datalist>
-                                                </div>
-                                                <span id="functionalAreaError" className="errorMsgJobPost"></span>
-                                            </div>          
-                                            
-                                            <div className="col-lg-6 addJobFixzIndex">
-                                                <label htmlFor="subFunctionalArea" className="addjobformLable"> Sub-Functional Area <span className="asterisk">&#42;</span> </label>
-                                                <div className="input-group">
-                                                    <span className="input-group-addon addJobFormField"><FontAwesomeIcon icon={['fas', 'briefcase']} /></span> 
-                                                        <input type="text" list="subFunctionalArea" className="form-control addJobFormField" refs="subFunctionalArea"
-                                                         id="selectSubFunctionalArea" maxLength="100" value={this.state.subFunctionalArea} name="subFunctionalArea"
-                                                        onChange={this.onChangeSubFunctionalArea.bind(this)} />
-                                                        <datalist name="subFunctionalArea" id="subFunctionalArea" className="subFunctionalArealist" >
-                                                            {this.state.subFunctionalArealist.map((item, key) =>
-                                                                <option key={key} value={item.subfunctionalArea} data-value={item._id}/>
-                                                            )}
-                                                        </datalist>
-                                                </div>
-                                                <span id="subFunctionalAreaError" className="errorMsgJobPost"></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                    <div className="form-group col-lg-12 text-left">
-                                        <div className="row">
-                                            <div className="col-lg-6">
-                                                <div className="row">
-                                                    <label htmlFor="jobRole" className="addjobformLable col-lg-12"> Role <span className="asterisk">&#42;</span>
-                                                        <div href="#" data-tip data-for='jobTitleTooltip' className="pull-right">
-                                                            <i title="Please enter job role" className="fa fa-question-circle"></i>
-                                                        </div>
-                                                    </label>
-                                                </div>
-                                                <div className="input-group">
-                                                    <span className="input-group-addon addJobFormField"><FontAwesomeIcon icon={['fas', 'briefcase']} /></span> 
-                                                        <div className="input-group col-lg-12">
-                                                            <input type="text" list="jobRole" className="form-control addJobFormField" refs="jobRole" id="selectrole" maxLength="50" value={this.state.jobRole} name="jobRole"
-                                                            onChange={this.onChangeRole.bind(this)} />
-                                                            <datalist name="jobRole" id="jobRole" className="jobRoleArray" >
-                                                                {this.state.jobRoleArray.map((item, key) =>
-                                                                    <option key={key} value={item.jobRole} data-value={item._id}/>
+                                        <div className="form-group col-lg-12 addJobFieldRow text-left">
+                                            <div className="row">
+                                                <div className="col-lg-6">
+                                                    <label htmlFor="functionalArea" className="addjobformLable"> Functional Area <span className="asterisk">&#42;</span> </label>
+                                                    <div className="input-group">
+                                                        <span className="input-group-addon addJobFormField"><i className="fa fa-briefcase"></i></span> 
+                                                            <input type="text" list="functionalArea" className="form-control addJobFormField" refs="functionalArea" 
+                                                             name="functionalArea" id="selectFunctionalArea" maxLength="100" value={this.state.functionalArea} data-value={this.state.functionalarea_id}
+                                                            onChange={this.onChangeFunctionalArea.bind(this)} />
+                                                            <datalist name="functionalArea" id="functionalArea" className="functionalArealist" >
+                                                                {this.state.functionalArealist.map((item, key) =>
+                                                                    <option key={key} value={item.functionalArea} data-value={item._id}/>
                                                                 )}
                                                             </datalist>
-                                                        </div>
-                                                </div>
-                                                <span id="jobRoleError" className="errorMsgJobPost"></span>
-                                            </div>
-                                            
-                                            <div className="col-lg-6">
-                                                <label htmlFor="gender" className="addJobGenderTitle"> Who Can Apply </label>
-                                                <div className="input-group addJobGenderFeildWrapper">
-                                                    <div className={this.state.gender==="Male Only"? "addJobGenderField col-lg-4 addJobGenderActive" : "addJobGenderField col-lg-4" }  id="Male Only" name="gender" value="Male Only" onClick={this.setGender.bind(this)}>
-                                                        <div className="row">
-                                                            Male Only
-                                                        </div>
                                                     </div>
-                                                    <div className={this.state.gender==="Female Only"? "addJobGenderField col-lg-4 addJobGenderActive" : "addJobGenderField col-lg-4" } id="Female Only" name="gender" value="Female Only" onClick={this.setGender.bind(this)}>
-                                                        <div className="row">
-                                                            Female Only
-                                                        </div>
+                                                    <span id="functionalAreaError" className="errorMsgJobPost"></span>
+                                                </div>          
+                                                
+                                                <div className="col-lg-6 addJobFixzIndex">
+                                                    <label htmlFor="subFunctionalArea" className="addjobformLable"> Sub-Functional Area <span className="asterisk">&#42;</span> </label>
+                                                    <div className="input-group">
+                                                        <span className="input-group-addon addJobFormField"><FontAwesomeIcon icon={['fas', 'briefcase']} /></span> 
+                                                            <input type="text" list="subFunctionalArea" className="form-control addJobFormField" refs="subFunctionalArea"
+                                                             id="selectSubFunctionalArea" maxLength="100" value={this.state.subFunctionalArea} name="subFunctionalArea"
+                                                            onChange={this.onChangeSubFunctionalArea.bind(this)} />
+                                                            <datalist name="subFunctionalArea" id="subFunctionalArea" className="subFunctionalArealist" >
+                                                                {this.state.subFunctionalArealist.map((item, key) =>
+                                                                    <option key={key} value={item.subfunctionalArea} data-value={item._id}/>
+                                                                )}
+                                                            </datalist>
                                                     </div>
-                                                    <div className={this.state.gender==="Both (Male & Female)"? "addJobGenderField col-lg-4 addJobGenderActive" : "addJobGenderField col-lg-4" } id="Both (Male & Female)" name="gender" value="Both (Male & Female)"  onClick={this.setGender.bind(this)}>
-                                                        <div className="row">
-                                                            Both (Male & Female)
-                                                        </div>
-                                                    </div>          
+                                                    <span id="subFunctionalAreaError" className="errorMsgJobPost"></span>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    
-                                    <div className="col-lg-3 text-left">
-                                        <label htmlFor="workFromHome" className="containerWfh">
-                                            Work From Home
-                                            <input type="checkbox" name="workFromHome" id="workFromHome" value={this.state.workFromHome} onChange={this.setWorkFromHome.bind(this)} />
-                                            <span className="checkmark2"></span>
-                                        </label>
-                                    </div>
-                                    
-                                    <div className="col-lg-12 addJobFieldRow text-left">
-                                        <div className="row">
-                                        <div className="col-lg-4">
-                                                <label htmlFor="jobSector" className="addjobformLable"> Job Sector </label>
-                                                <div className="input-group">
-                                                    <span className="input-group-addon addJobFormField"><i className="fa fa-list-alt"></i></span> 
-                                                       <input type="text" list="jobSector" className="form-control addJobFormField" refs="jobSector" id="selectjobSector" maxLength="50" value={this.state.jobSector} name="jobSector"
-                                                        onChange={this.onChangeJobSector.bind(this)} />
-                                                        <datalist name="jobSector" id="jobSector" className="jobSectorArray" >
-                                                            {this.state.jobSectorArray.map((item, key) =>
-                                                              <option key={key} value={item.jobSector} data-value={item._id}/>
-                                                            )}
-                                                        </datalist>
+                                        
+                                        <div className="form-group col-lg-12 text-left">
+                                            <div className="row">
+                                                <div className="col-lg-6">
+                                                    <div className="row">
+                                                        <label htmlFor="jobRole" className="addjobformLable col-lg-12"> Role <span className="asterisk">&#42;</span>
+                                                            <div href="#" data-tip data-for='jobTitleTooltip' className="pull-right">
+                                                                <i title="Please enter job role" className="fa fa-question-circle"></i>
+                                                            </div>
+                                                        </label>
+                                                    </div>
+                                                    <div className="input-group">
+                                                        <span className="input-group-addon addJobFormField"><FontAwesomeIcon icon={['fas', 'briefcase']} /></span> 
+                                                            <div className="input-group col-lg-12">
+                                                                <input type="text" list="jobRole" className="form-control addJobFormField" refs="jobRole" id="selectrole" maxLength="50" value={this.state.jobRole} name="jobRole"
+                                                                onChange={this.onChangeRole.bind(this)} />
+                                                                <datalist name="jobRole" id="jobRole" className="jobRoleArray" >
+                                                                    {this.state.jobRoleArray.map((item, key) =>
+                                                                        <option key={key} value={item.jobRole} data-value={item._id}/>
+                                                                    )}
+                                                                </datalist>
+                                                            </div>
+                                                    </div>
+                                                    <span id="jobRoleError" className="errorMsgJobPost"></span>
                                                 </div>
-                                                <span id="jobSectorError" className="errorMsg"></span>
-                                            </div>
-                                            <div className="col-lg-4">
-                                                <label htmlFor="jobType" className="addjobformLable"> Job Type </label>
-                                                <div className="input-group col-lg-12">
-                                                    <span className="input-group-addon addJobFormField"><i className="fa fa-briefcase"></i> </span> 
-                                                        <input type="text" list="jobType" className="form-control addJobFormField" refs="jobType" id="selectjobType" maxLength="50" value={this.state.jobType} name="jobType"
-                                                        onChange={this.onChangeJobType.bind(this)} />
-                                                        <datalist name="jobType" id="jobType" className="jobTypeArray" >
-                                                            {this.state.jobTypeArray.map((item, key) =>
-                                                                <option key={key} value={item.jobType} data-value={item._id}/>
-                                                            )}
-                                                        </datalist>
+                                                
+                                                <div className="col-lg-6">
+                                                    <label htmlFor="gender" className="addJobGenderTitle"> Who Can Apply </label>
+                                                    <div className="input-group addJobGenderFeildWrapper">
+                                                        <div className={this.state.gender==="Male Only"? "addJobGenderField col-lg-4 addJobGenderActive" : "addJobGenderField col-lg-4" }  id="Male Only" name="gender" value="Male Only" onClick={this.setGender.bind(this)}>
+                                                            <div className="row">
+                                                                Male Only
+                                                            </div>
+                                                        </div>
+                                                        <div className={this.state.gender==="Female Only"? "addJobGenderField col-lg-4 addJobGenderActive" : "addJobGenderField col-lg-4" } id="Female Only" name="gender" value="Female Only" onClick={this.setGender.bind(this)}>
+                                                            <div className="row">
+                                                                Female Only
+                                                            </div>
+                                                        </div>
+                                                        <div className={this.state.gender==="Both (Male & Female)"? "addJobGenderField col-lg-4 addJobGenderActive" : "addJobGenderField col-lg-4" } id="Both (Male & Female)" name="gender" value="Both (Male & Female)"  onClick={this.setGender.bind(this)}>
+                                                            <div className="row">
+                                                                Both (Male & Female)
+                                                            </div>
+                                                        </div>          
+                                                    </div>
                                                 </div>
-                                                 <span id="jobTypeError" className="errorMsgJobPost"></span>
-                                            </div>
-                                            
-                                            <div className="col-lg-4">
-                                                <label htmlFor="jobTime" className="addjobformLable"> Job Time </label>
-                                                <div className="input-group">
-                                                    <span className="input-group-addon addJobFormField"><FontAwesomeIcon icon={['fas', 'business-time']} /></span> 
-                                                       <input type="text" list="jobTime" className="form-control addJobFormField" refs="jobTime" id="selectJobTime" maxLength="50" value={this.state.jobTime} name="jobTime"
-                                                        onChange={this.onChangeJobTime.bind(this)} />
-                                                        <datalist name="jobTime" id="jobTime" className="jobTimeArray" >
-                                                            {this.state.jobTimeArray.map((item, key) =>
-                                                              <option key={key} value={item.jobTime} data-value={item._id}/>
-                                                            )}
-                                                        </datalist>
-                                                </div>
-                                                <span id="jobTimeError" className="errorMsgJobPost"></span>
                                             </div>
                                         </div>
-                                    </div>
+                                        
+                                        <div className="col-lg-3 text-left">
+                                            <label htmlFor="workFromHome" className="containerWfh">
+                                                Work From Home
+                                                <input type="checkbox" name="workFromHome" id="workFromHome" value={this.state.workFromHome} onChange={this.setWorkFromHome.bind(this)} />
+                                                <span className="checkmark2"></span>
+                                            </label>
+                                        </div>
+                                        
+                                        <div className="col-lg-12 addJobFieldRow text-left">
+                                            <div className="row">
+                                            <div className="col-lg-4">
+                                                    <label htmlFor="jobSector" className="addjobformLable"> Job Sector </label>
+                                                    <div className="input-group">
+                                                        <span className="input-group-addon addJobFormField"><i className="fa fa-list-alt"></i></span> 
+                                                           <input type="text" list="jobSector" className="form-control addJobFormField" refs="jobSector" id="selectjobSector" maxLength="50" value={this.state.jobSector} name="jobSector"
+                                                            onChange={this.onChangeJobSector.bind(this)} />
+                                                            <datalist name="jobSector" id="jobSector" className="jobSectorArray" >
+                                                                {this.state.jobSectorArray.map((item, key) =>
+                                                                  <option key={key} value={item.jobSector} data-value={item._id}/>
+                                                                )}
+                                                            </datalist>
+                                                    </div>
+                                                    <span id="jobSectorError" className="errorMsg"></span>
+                                                </div>
+                                                <div className="col-lg-4">
+                                                    <label htmlFor="jobType" className="addjobformLable"> Job Type </label>
+                                                    <div className="input-group col-lg-12">
+                                                        <span className="input-group-addon addJobFormField"><i className="fa fa-briefcase"></i> </span> 
+                                                            <input type="text" list="jobType" className="form-control addJobFormField" refs="jobType" id="selectjobType" maxLength="50" value={this.state.jobType} name="jobType"
+                                                            onChange={this.onChangeJobType.bind(this)} />
+                                                            <datalist name="jobType" id="jobType" className="jobTypeArray" >
+                                                                {this.state.jobTypeArray.map((item, key) =>
+                                                                    <option key={key} value={item.jobType} data-value={item._id}/>
+                                                                )}
+                                                            </datalist>
+                                                    </div>
+                                                     <span id="jobTypeError" className="errorMsgJobPost"></span>
+                                                </div>
+                                                
+                                                <div className="col-lg-4">
+                                                    <label htmlFor="jobTime" className="addjobformLable"> Job Time </label>
+                                                    <div className="input-group">
+                                                        <span className="input-group-addon addJobFormField"><FontAwesomeIcon icon={['fas', 'business-time']} /></span> 
+                                                           <input type="text" list="jobTime" className="form-control addJobFormField" refs="jobTime" id="selectJobTime" maxLength="50" value={this.state.jobTime} name="jobTime"
+                                                            onChange={this.onChangeJobTime.bind(this)} />
+                                                            <datalist name="jobTime" id="jobTime" className="jobTimeArray" >
+                                                                {this.state.jobTimeArray.map((item, key) =>
+                                                                  <option key={key} value={item.jobTime} data-value={item._id}/>
+                                                                )}
+                                                            </datalist>
+                                                    </div>
+                                                    <span id="jobTimeError" className="errorMsgJobPost"></span>
+                                                </div>
+                                            </div>
+                                        </div>
 
-                                    <div className="col-lg-12 addJobFieldRow text-left">
-                                        <div className="row">
-                                            <div className="col-lg-4">
-                                                <label htmlFor="jobShift" className="addjobformLable"> Job Shift </label>
-                                                <div className="input-group">
-                                                    <span className="input-group-addon addJobFormField"><FontAwesomeIcon icon={['fas', 'business-time']} /></span> 
-                                                       <input type="text" list="jobShift" className="form-control addJobFormField" refs="jobShift" id="selectJobShift" maxLength="50" value={this.state.jobShift} name="jobShift"
-                                                        onChange={this.onChangeJobShift.bind(this)} />
-                                                        <datalist name="jobShift" id="jobShift" className="jobShiftArray" >
-                                                            {this.state.jobShiftArray.map((item, key) =>
-                                                              <option key={key} value={item.jobShift} data-value={item._id}/>
+                                        <div className="col-lg-12 addJobFieldRow text-left">
+                                            <div className="row">
+                                                <div className="col-lg-4">
+                                                    <label htmlFor="jobShift" className="addjobformLable"> Job Shift </label>
+                                                    <div className="input-group">
+                                                        <span className="input-group-addon addJobFormField"><FontAwesomeIcon icon={['fas', 'business-time']} /></span> 
+                                                           <input type="text" list="jobShift" className="form-control addJobFormField" refs="jobShift" id="selectJobShift" maxLength="50" value={this.state.jobShift} name="jobShift"
+                                                            onChange={this.onChangeJobShift.bind(this)} />
+                                                            <datalist name="jobShift" id="jobShift" className="jobShiftArray" >
+                                                                {this.state.jobShiftArray.map((item, key) =>
+                                                                  <option key={key} value={item.jobShift} data-value={item._id}/>
+                                                                )}
+                                                            </datalist>
+                                                    </div>
+                                                    <span id="jobShiftError" className="errorMsg"></span>
+                                                </div>
+                                                <div className="col-lg-4">
+                                                    <div className="row">
+                                                        <label htmlFor="positions" className="addjobformLable col-lg-12"> No. of Positions  <span className="asterisk">&#42;</span></label>
+                                                    </div>
+                                                    <div className="input-group">
+                                                        <span className="input-group-addon addJobFormField"><i className="fa fa-users"></i></span> 
+                                                        <input type="text" className="form-control addJobFormField" name="positions" id="positions" maxLength="50" value={this.state.positions} onChange={this.handleChange}/>
+                                                    </div>
+                                                    <span id="positionsError" className="errorMsgJobPost"></span>
+                                                </div>
+                                                
+                                                <div className="col-lg-4 democlass">
+                                                    <label htmlFor="lastDateOfAppl" className="addjobformLable"> Last Date of Application </label>
+                                                    <div className="input-group">
+                                                        <span className="input-group-addon addJobFormField"><i className="fa fa-calendar"></i></span> 
+                                                        <input type="date" className="form-control addJobFormField" name="lastDateOfAppl" id="lastDateOfAppl" value={this.state.lastDateOfAppl} onChange={this.handleChange}/>
+                                                    </div>
+                                                     <span id="dateError" className="errorMsgJobPost"></span>
+                                                </div>
+                                            </div>  
+                                        </div>
+
+                                        <div className="col-lg-12 addJobFieldRow"> <div className="addJobFormHr col-lg-12"></div> </div>    
+                                        
+                                        <div className="addJobSubHead addJobSubHeadSalary col-lg-12">
+                                            <i className="fa fa-rupee salaryIcon"></i>
+                                            <div className="labelLeftPadding"> Salary </div>
+                                        </div>
+                                        
+                                        <div className="col-lg-12 addJobFieldRow text-left">
+                                            <div className="row">
+                                                <div className="col-lg-6">
+                                                    <div className="row row-no-gutters">
+                                                        <div className="col-lg-8">
+                                                            <label htmlFor="minSalary" className="addjobformLable"> Minimum Salary <i className="fa fa-rupee"></i> <span className="asterisk">&#42;</span> </label>
+                                                            <div className="input-group">
+                                                                <span className="input-group-addon addJobFormField"> <i className="fa fa-rupee addJobrupee"></i> </span> 
+                                                                <input type="text" className="form-control addJobFormField" name="minSalary" id="minSalary" maxLength="50" value={this.state.minSalary} onChange={this.handleChange}/>
+                                                            </div>
+                                                            <span id="minSalaryError" className="errorMsgJobPost"></span>
+                                                        </div>
+                                                        
+                                                        <div className="col-lg-4">
+                                                            <label htmlFor="minSalPeriod" className="addjobformLable"> &nbsp; </label>
+                                                            <select className="form-control addJobFormField minSalaryDropdown" name="minSalPeriod" id="minSalPeriod" value={this.state.minSalPeriod} onChange={this.handleChange}>
+                                                                
+                                                                <option selected> Per Year  </option>
+                                                            </select>
+                                                            <span id="minSalPeriodError" className="errorMsgJobPost"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div className="col-lg-6">
+                                                    <div className="row row-no-gutters">
+                                                        <div className="col-lg-8">
+                                                            <label htmlFor="maxSalary" className="addjobformLable"> Maximum Salary <i className="fa fa-rupee"></i> <span className="asterisk">&#42;</span> </label>
+                                                            <div className="input-group">
+                                                                <span className="input-group-addon addJobFormField"><i className="fa fa-rupee addJobrupee"></i> </span> 
+                                                                <input type="text" className="form-control addJobFormField" name="maxSalary" id="maxSalary" maxLength="50" value={this.state.maxSalary} onChange={this.handleChange}/>
+                                                            </div>
+                                                            <span id="maxSalaryError" className="errorMsgJobPost"></span>
+                                                        </div>
+                                                        
+                                                        <div className="col-lg-4">
+                                                            <label htmlFor="maxSalPeriod" className="addjobformLable"> &nbsp; </label>
+                                                            <select className="form-control addJobFormField maxSalaryDropdown" name="maxSalPeriod" id="maxSalPeriod" value={this.state.maxSalPeriod} onChange={this.handleChange}>
+                                                                
+                                                                <option selected> Per Year  </option>
+                                                            </select>
+                                                            <span id="maxSalPeriodError" className="errorMsgJobPost"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div className="col-lg-12 addJobFieldRow"> <div className="addJobFormHr col-lg-12"> </div> </div>
+                                        
+                                        <div className="col-lg-12 addJobSubHead">
+                                            <i className="fa fa-book"></i>
+                                            <div className="labelLeftPadding"> Required Education & Experience </div>
+                                        </div>
+                                        
+                                        <div className="col-lg-12 addJobFieldRow text-left">
+                                            <div className="row">
+                                                <div className="col-lg-6">
+                                                    <label htmlFor="minEducation" className="addjobformLable"> Minimum Education Required <span className="asterisk">&#42;</span></label>
+                                                    <div className="input-group">
+                                                        <span className="input-group-addon addJobFormField"> <i className="fa fa-graduation-cap"></i> </span> 
+                                                        <input type="text" list="minEducation" className="form-control addJobFormField" refs="minEducation" id="selectminEducation" maxLength="50" value={this.state.minEducation} name="minEducation"
+                                                        onChange={this.onChangeMinEducation.bind(this)} />
+                                                        <datalist name="minEducation" id="minEducation" className="minEducationArray" >
+                                                            {this.state.minEducationArray.map((item, key) =>
+                                                              <option key={key} value={item.qualification} data-value={item._id}/>
                                                             )}
-                                                        </datalist>
+                                                        </datalist> 
+                                                    </div>
+                                                    <span id="minEducationError" className="errorMsgJobPost"></span>
                                                 </div>
-                                                <span id="jobShiftError" className="errorMsg"></span>
+                                                
+                                                <div className="col-lg-6">
+                                                    <label htmlFor="minExperience" className="addjobformLable"> Minimum Overall Experience <span className="asterisk">&#42;</span></label>
+                                                    <div className="input-group">
+                                                        <span className="input-group-addon addJobFormField"> <i className="fa fa-history"></i> </span> 
+                                                        <input type="number" className="form-control addJobFormField" name="minExperience" id="minExperience" maxLength="50" value={this.state.minExperience} onChange={this.handleChange}/>
+                                                    </div>
+                                                    <span id="minExperienceError" className="errorMsgJobPost"></span>
+                                                </div>
                                             </div>
-                                            <div className="col-lg-4">
-                                                <div className="row">
-                                                    <label htmlFor="positions" className="addjobformLable col-lg-12"> No. of Positions  <span className="asterisk">&#42;</span></label>
-                                                </div>
-                                                <div className="input-group">
-                                                    <span className="input-group-addon addJobFormField"><i className="fa fa-users"></i></span> 
-                                                    <input type="text" className="form-control addJobFormField" name="positions" id="positions" maxLength="50" value={this.state.positions} onChange={this.handleChange}/>
-                                                </div>
-                                                <span id="positionsError" className="errorMsgJobPost"></span>
-                                            </div>
-                                            
-                                            <div className="col-lg-4 democlass">
-                                                <label htmlFor="lastDateOfAppl" className="addjobformLable"> Last Date of Application </label>
-                                                <div className="input-group">
-                                                    <span className="input-group-addon addJobFormField"><i className="fa fa-calendar"></i></span> 
-                                                    <input type="date" className="form-control addJobFormField" name="lastDateOfAppl" id="lastDateOfAppl" value={this.state.lastDateOfAppl} onChange={this.handleChange}/>
-                                                </div>
-                                                 <span id="dateError" className="errorMsgJobPost"></span>
-                                            </div>
-                                        </div>  
-                                    </div>
-
-                                    <div className="col-lg-12 addJobFieldRow"> <div className="addJobFormHr col-lg-12"></div> </div>    
-                                    
-                                    <div className="addJobSubHead addJobSubHeadSalary col-lg-12">
-                                        <i className="fa fa-rupee salaryIcon"></i>
-                                        <div className="labelLeftPadding"> Salary </div>
-                                    </div>
-                                    
-                                    <div className="col-lg-12 addJobFieldRow text-left">
-                                        <div className="row">
-                                            <div className="col-lg-6">
-                                                <div className="row row-no-gutters">
-                                                    <div className="col-lg-8">
-                                                        <label htmlFor="minSalary" className="addjobformLable"> Minimum Salary <i className="fa fa-rupee"></i> <span className="asterisk">&#42;</span> </label>
-                                                        <div className="input-group">
-                                                            <span className="input-group-addon addJobFormField"> <i className="fa fa-rupee addJobrupee"></i> </span> 
-                                                            <input type="text" className="form-control addJobFormField" name="minSalary" id="minSalary" maxLength="50" value={this.state.minSalary} onChange={this.handleChange}/>
+                                        </div>
+                                        
+                                        <div className="col-lg-12 addJobFieldRow"> <div className="addJobFormHr col-lg-12"> </div> </div>
+                                        
+                                        <div className="col-lg-12 addJobSubHead addJobSubHeadSkills">
+                                            <i className='fa fa-cog'> </i> 
+                                            <div className="labelLeftPadding"> Expected Skills </div>
+                                        </div>
+                                        
+                                        <div className="col-lg-12 addJobFieldRow text-left">
+                                            <div className="row">
+                                                <div className="col-lg-8 primarySkillsField">
+                                                    <label htmlFor="primarySkills" className="addjobformLable"> Primary Skills </label>
+                                                    <div className="input-group col-lg-12">
+                                                        <span className="input-group-addon addJobFormField"> <i className='fa fa-cog'></i> </span>
+                                                            <ReactTags
+                                                                //ref={this.reactTags}
+                                                                tags={this.state.primarySkillTags}
+                                                                suggestions={this.state.primarySkillSuggestions}
+                                                                delimiters={delimiters}
+                                                                handleDelete={this.onprimarySkillDelete.bind(this)}
+                                                                handleAddition={this.onprimarySkillAddition.bind(this)}
+                                                                handleDrag={this.onprimarySkillDrag.bind(this)}
+                                                                handleTagClick={this.onprimarySkillClick.bind(this)} />
                                                         </div>
-                                                        <span id="minSalaryError" className="errorMsgJobPost"></span>
-                                                    </div>
-                                                    
-                                                    <div className="col-lg-4">
-                                                        <label htmlFor="minSalPeriod" className="addjobformLable"> &nbsp; </label>
-                                                        <select className="form-control addJobFormField minSalaryDropdown" name="minSalPeriod" id="minSalPeriod" value={this.state.minSalPeriod} onChange={this.handleChange}>
-                                                            
-                                                            <option selected> Per Year  </option>
-                                                        </select>
-                                                        <span id="minSalPeriodError" className="errorMsgJobPost"></span>
-                                                    </div>
                                                 </div>
-                                            </div>
-                                            
-                                            <div className="col-lg-6">
-                                                <div className="row row-no-gutters">
-                                                    <div className="col-lg-8">
-                                                        <label htmlFor="maxSalary" className="addjobformLable"> Maximum Salary <i className="fa fa-rupee"></i> <span className="asterisk">&#42;</span> </label>
-                                                        <div className="input-group">
-                                                            <span className="input-group-addon addJobFormField"><i className="fa fa-rupee addJobrupee"></i> </span> 
-                                                            <input type="text" className="form-control addJobFormField" name="maxSalary" id="maxSalary" maxLength="50" value={this.state.maxSalary} onChange={this.handleChange}/>
-                                                        </div>
-                                                        <span id="maxSalaryError" className="errorMsgJobPost"></span>
-                                                    </div>
-                                                    
-                                                    <div className="col-lg-4">
-                                                        <label htmlFor="maxSalPeriod" className="addjobformLable"> &nbsp; </label>
-                                                        <select className="form-control addJobFormField maxSalaryDropdown" name="maxSalPeriod" id="maxSalPeriod" value={this.state.maxSalPeriod} onChange={this.handleChange}>
-                                                            
-                                                            <option selected> Per Year  </option>
-                                                        </select>
-                                                        <span id="maxSalPeriodError" className="errorMsgJobPost"></span>
+                                                
+                                                <div className="col-lg-4">
+                                                    <label htmlFor="minPrimExp" className="addjobformLable"> Min. Experience Req. </label>
+                                                    <div className="input-group">
+                                                        <span className="input-group-addon addJobFormField"> <i className="fa fa-bar-chart"></i> </span> 
+                                                        <input type="text" className="form-control addJobFormField" name="minPrimExp" id="minPrimExp" maxLength="50" value={this.state.minPrimExp} onChange={this.handleChange}/>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-
-                                    <div className="col-lg-12 addJobFieldRow"> <div className="addJobFormHr col-lg-12"> </div> </div>
-                                    
-                                    <div className="col-lg-12 addJobSubHead">
-                                        <i className="fa fa-book"></i>
-                                        <div className="labelLeftPadding"> Required Education & Experience </div>
-                                    </div>
-                                    
-                                    <div className="col-lg-12 addJobFieldRow text-left">
-                                        <div className="row">
-                                            <div className="col-lg-6">
-                                                <label htmlFor="minEducation" className="addjobformLable"> Minimum Education Required <span className="asterisk">&#42;</span></label>
-                                                <div className="input-group">
-                                                    <span className="input-group-addon addJobFormField"> <i className="fa fa-graduation-cap"></i> </span> 
-                                                    <input type="text" list="minEducation" className="form-control addJobFormField" refs="minEducation" id="selectminEducation" maxLength="50" value={this.state.minEducation} name="minEducation"
-                                                    onChange={this.onChangeMinEducation.bind(this)} />
-                                                    <datalist name="minEducation" id="minEducation" className="minEducationArray" >
-                                                        {this.state.minEducationArray.map((item, key) =>
-                                                          <option key={key} value={item.qualification} data-value={item._id}/>
-                                                        )}
-                                                    </datalist> 
-                                                </div>
-                                                <span id="minEducationError" className="errorMsgJobPost"></span>
-                                            </div>
-                                            
-                                            <div className="col-lg-6">
-                                                <label htmlFor="minExperience" className="addjobformLable"> Minimum Overall Experience <span className="asterisk">&#42;</span></label>
-                                                <div className="input-group">
-                                                    <span className="input-group-addon addJobFormField"> <i className="fa fa-history"></i> </span> 
-                                                    <input type="number" className="form-control addJobFormField" name="minExperience" id="minExperience" maxLength="50" value={this.state.minExperience} onChange={this.handleChange}/>
-                                                </div>
-                                                <span id="minExperienceError" className="errorMsgJobPost"></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                    <div className="col-lg-12 addJobFieldRow"> <div className="addJobFormHr col-lg-12"> </div> </div>
-                                    
-                                    <div className="col-lg-12 addJobSubHead addJobSubHeadSkills">
-                                        <i className='fa fa-cog'> </i> 
-                                        <div className="labelLeftPadding"> Expected Skills </div>
-                                    </div>
-                                    
-                                    <div className="col-lg-12 addJobFieldRow text-left">
-                                        <div className="row">
-                                            <div className="col-lg-8 primarySkillsField">
-                                                <label htmlFor="primarySkills" className="addjobformLable"> Primary Skills </label>
-                                                <div className="input-group col-lg-12">
-                                                    <span className="input-group-addon addJobFormField"> <i className='fa fa-cog'></i> </span>
-                                                        <ReactTags
-                                                            //ref={this.reactTags}
-                                                            tags={this.state.primarySkillTags}
-                                                            suggestions={this.state.primarySkillSuggestions}
-                                                            delimiters={delimiters}
-                                                            handleDelete={this.onprimarySkillDelete.bind(this)}
-                                                            handleAddition={this.onprimarySkillAddition.bind(this)}
-                                                            handleDrag={this.onprimarySkillDrag.bind(this)}
-                                                            handleTagClick={this.onprimarySkillClick.bind(this)} />
+                                        <div className="col-lg-12 addJobFieldRow text-left">
+                                            <div className="row">
+                                                <div className="col-lg-8 secondarySkillsField">
+                                                    <label htmlFor="secondarySkills" className="addjobformLable"> Secondary Skills </label>
+                                                    <div className="input-group col-lg-12">
+                                                        <span className="input-group-addon addJobFormField"> <i className='fa fa-cog'></i> </span>
+                                                            <ReactTags
+                                                                tags={this.state.secondarySkillTags}
+                                                                suggestions={this.state.secondarySkillSuggestions}
+                                                                delimiters={delimiters}
+                                                                handleDelete={this.onsecondarySkillDelete.bind(this)}
+                                                                handleAddition={this.onsecondarySkillAddition.bind(this)}
+                                                                handleDrag={this.onsecondarySkillDrag.bind(this)}
+                                                                handleTagClick={this.onsecondarySkillClick.bind(this)}
+                                                                />
                                                     </div>
-                                            </div>
-                                            
-                                            <div className="col-lg-4">
-                                                <label htmlFor="minPrimExp" className="addjobformLable"> Min. Experience Req. </label>
-                                                <div className="input-group">
-                                                    <span className="input-group-addon addJobFormField"> <i className="fa fa-bar-chart"></i> </span> 
-                                                    <input type="text" className="form-control addJobFormField" name="minPrimExp" id="minPrimExp" maxLength="50" value={this.state.minPrimExp} onChange={this.handleChange}/>
+                                                </div>
+                                                
+                                                <div className="col-lg-4">
+                                                    <label htmlFor="minSecExp" className="addjobformLable"> Min. Experience Req. </label>
+                                                    <div className="input-group">
+                                                        <span className="input-group-addon addJobFormField"> <i className="fa fa-bar-chart"></i> </span> 
+                                                        <input type="text" className="form-control addJobFormField" name="minSecExp" id="minSecExp" maxLength="50" value={this.state.minSecExp} onChange={this.handleChange}/>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div className="col-lg-12 addJobFieldRow text-left">
-                                        <div className="row">
-                                            <div className="col-lg-8 secondarySkillsField">
-                                                <label htmlFor="secondarySkills" className="addjobformLable"> Secondary Skills </label>
-                                                <div className="input-group col-lg-12">
-                                                    <span className="input-group-addon addJobFormField"> <i className='fa fa-cog'></i> </span>
-                                                        <ReactTags
-                                                            tags={this.state.secondarySkillTags}
-                                                            suggestions={this.state.secondarySkillSuggestions}
-                                                            delimiters={delimiters}
-                                                            handleDelete={this.onsecondarySkillDelete.bind(this)}
-                                                            handleAddition={this.onsecondarySkillAddition.bind(this)}
-                                                            handleDrag={this.onsecondarySkillDrag.bind(this)}
-                                                            handleTagClick={this.onsecondarySkillClick.bind(this)}
-                                                            />
+                                        <div className="col-lg-12 addJobFieldRow text-left">
+                                            <div className="row">
+                                                <div className="col-lg-8 otherSkillsField">
+                                                    <label htmlFor="otherSkills" className="addjobformLable"> Other Skills </label>
+                                                    <div className="input-group col-lg-12">
+                                                        <span className="input-group-addon addJobFormField"> <i className='fa fa-cog'></i> </span>
+                                                            <ReactTags
+                                                                tags={this.state.otherSkillTags}
+                                                                suggestions={this.state.otherSkillSuggestions}
+                                                                delimiters={delimiters}
+                                                                handleDelete={this.onOtherSkillDelete.bind(this)}
+                                                                handleAddition={this.onOtherSkillAddition.bind(this)}
+                                                                handleDrag={this.onOtherSkillDrag.bind(this)}
+                                                                handleTagClick={this.onOtherSkillClick.bind(this)}
+                                                                />
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            
-                                            <div className="col-lg-4">
-                                                <label htmlFor="minSecExp" className="addjobformLable"> Min. Experience Req. </label>
-                                                <div className="input-group">
-                                                    <span className="input-group-addon addJobFormField"> <i className="fa fa-bar-chart"></i> </span> 
-                                                    <input type="text" className="form-control addJobFormField" name="minSecExp" id="minSecExp" maxLength="50" value={this.state.minSecExp} onChange={this.handleChange}/>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="col-lg-12 addJobFieldRow text-left">
-                                        <div className="row">
-                                            <div className="col-lg-8 otherSkillsField">
-                                                <label htmlFor="otherSkills" className="addjobformLable"> Other Skills </label>
-                                                <div className="input-group col-lg-12">
-                                                    <span className="input-group-addon addJobFormField"> <i className='fa fa-cog'></i> </span>
-                                                        <ReactTags
-                                                            tags={this.state.otherSkillTags}
-                                                            suggestions={this.state.otherSkillSuggestions}
-                                                            delimiters={delimiters}
-                                                            handleDelete={this.onOtherSkillDelete.bind(this)}
-                                                            handleAddition={this.onOtherSkillAddition.bind(this)}
-                                                            handleDrag={this.onOtherSkillDrag.bind(this)}
-                                                            handleTagClick={this.onOtherSkillClick.bind(this)}
-                                                            />
-                                                </div>
-                                            </div>
-                                            
-                                            <div className="col-lg-4">
-                                                <label htmlFor="minOtherExp" className="addjobformLable"> Min. Experience Req. </label>
-                                                <div className="input-group">
-                                                    <span className="input-group-addon addJobFormField"> <i className="fa fa-bar-chart"></i> </span> 
-                                                    <input type="text" className="form-control addJobFormField" name="minOtherExp" id="minOtherExp" maxLength="50" value={this.state.minOtherExp} onChange={this.handleChange}/>
+                                                
+                                                <div className="col-lg-4">
+                                                    <label htmlFor="minOtherExp" className="addjobformLable"> Min. Experience Req. </label>
+                                                    <div className="input-group">
+                                                        <span className="input-group-addon addJobFormField"> <i className="fa fa-bar-chart"></i> </span> 
+                                                        <input type="text" className="form-control addJobFormField" name="minOtherExp" id="minOtherExp" maxLength="50" value={this.state.minOtherExp} onChange={this.handleChange}/>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    
-                                    <div className="col-lg-12 addJobFieldRow text-left">
-                                        <label htmlFor="preferredSkills" className="addjobformLable"> Preferred Skills but not mandatory </label>
-                                        <div className="input-group col-lg-12 preferredSkillsField">
-                                            <span className="input-group-addon addJobFormField"> <i className='fa fa-cog'></i> </span>
-                                                <ReactTags
-                                                    tags={this.state.preferredSkillTags}
-                                                    suggestions={this.state.preferredSkillSuggestions}
-                                                    delimiters={delimiters}
-                                                    handleDelete={this.onPreferredDelete.bind(this)}
-                                                    handleAddition={this.onPreferredAddition.bind(this)}
-                                                    handleDrag={this.onPreferredDrag.bind(this)}
-                                                    handleTagClick={this.onPreferredClick.bind(this)}
+                                        
+                                        <div className="col-lg-12 addJobFieldRow text-left">
+                                            <label htmlFor="preferredSkills" className="addjobformLable"> Preferred Skills but not mandatory </label>
+                                            <div className="input-group col-lg-12 preferredSkillsField">
+                                                <span className="input-group-addon addJobFormField"> <i className='fa fa-cog'></i> </span>
+                                                    <ReactTags
+                                                        tags={this.state.preferredSkillTags}
+                                                        suggestions={this.state.preferredSkillSuggestions}
+                                                        delimiters={delimiters}
+                                                        handleDelete={this.onPreferredDelete.bind(this)}
+                                                        handleAddition={this.onPreferredAddition.bind(this)}
+                                                        handleDrag={this.onPreferredDrag.bind(this)}
+                                                        handleTagClick={this.onPreferredClick.bind(this)}
+                                                        />
+                                            </div>
+                                        </div>
+                                        
+                                        <div className="col-lg-12 addJobFieldRow"> <div className="addJobFormHr col-lg-12"> </div> </div>
+                                        
+                                        <div className="addJobMainHead col-lg-12">
+                                            <i className="fa fa-info"> </i> 
+                                            <div className="labelLeftPadding"> Contact Info </div>
+                                        </div>
+                                        <div className="col-lg-12 addJobFieldRow text-left">
+                                            <div className="row">
+                                                <div className="col-lg-4">
+                                                    <label htmlFor="contactPersonName" className="addjobformLable"> Contact Person <span className="asterisk">&#42;</span> </label>
+                                                    <div className="input-group">
+                                                        <span className="input-group-addon addJobFormField"> <i className="fa fa-user"> </i> </span> 
+                                                        <input type="text" className="form-control addJobFormField" name="contactPersonName" id="contactPersonName" maxLength="100" value={this.state.contactPersonName} onChange={this.handleChange}/>
+                                                    </div>
+                                                    <span id="contactPersonNameError" className="errorMsgJobPost"> </span>
+                                                </div>
+                                                
+                                                <div className="col-lg-4">
+                                                    <label htmlFor="contactPersonEmail" className="addjobformLable"> Email <span className="asterisk">&#42;</span> </label>
+                                                    <div className="input-group">
+                                                        <span className="input-group-addon addJobFormField"> <i className="fa fa-envelope-o"> </i> </span> 
+                                                        <input type="text" className="form-control addJobFormField" name="contactPersonEmail" id="contactPersonEmail" maxLength="50" value={this.state.contactPersonEmail} onChange={this.handleChange}/>
+                                                    </div>
+                                                    <span id="contactPersonEmailError" className="errorMsgJobPost"> </span>
+                                                </div>
+                                                
+                                                <div className="col-lg-4">
+                                                    <label htmlFor="contactPersonPhone" className="addjobformLable"> Phone Number <span className="asterisk">&#42;</span> </label>
+                                                    <PhoneInput
+                                                        className = "input-group-addon addJobFormField form-control" 
+                                                        country   = {'in'}
+                                                        id        = "contactPersonPhone"
+                                                        value     = {this.state.contactPersonPhone}
+                                                        onChange  = {contactPersonPhone => this.setState({ contactPersonPhone })}
                                                     />
-                                        </div>
-                                    </div>
-                                    
-                                    <div className="col-lg-12 addJobFieldRow"> <div className="addJobFormHr col-lg-12"> </div> </div>
-                                    
-                                    <div className="addJobMainHead col-lg-12">
-                                        <i className="fa fa-info"> </i> 
-                                        <div className="labelLeftPadding"> Contact Info </div>
-                                    </div>
-                                    <div className="col-lg-12 addJobFieldRow text-left">
-                                        <div className="row">
-                                            <div className="col-lg-4">
-                                                <label htmlFor="contactPersonName" className="addjobformLable"> Contact Person <span className="asterisk">&#42;</span> </label>
-                                                <div className="input-group">
-                                                    <span className="input-group-addon addJobFormField"> <i className="fa fa-user"> </i> </span> 
-                                                    <input type="text" className="form-control addJobFormField" name="contactPersonName" id="contactPersonName" maxLength="100" value={this.state.contactPersonName} onChange={this.handleChange}/>
+                                                    <span id="contactPersonPhoneError" className="errorMsgJobPost"></span>
                                                 </div>
-                                                <span id="contactPersonNameError" className="errorMsgJobPost"> </span>
-                                            </div>
-                                            
-                                            <div className="col-lg-4">
-                                                <label htmlFor="contactPersonEmail" className="addjobformLable"> Email <span className="asterisk">&#42;</span> </label>
-                                                <div className="input-group">
-                                                    <span className="input-group-addon addJobFormField"> <i className="fa fa-envelope-o"> </i> </span> 
-                                                    <input type="text" className="form-control addJobFormField" name="contactPersonEmail" id="contactPersonEmail" maxLength="50" value={this.state.contactPersonEmail} onChange={this.handleChange}/>
-                                                </div>
-                                                <span id="contactPersonEmailError" className="errorMsgJobPost"> </span>
-                                            </div>
-                                            
-                                            <div className="col-lg-4">
-                                                <label htmlFor="contactPersonPhone" className="addjobformLable"> Phone Number <span className="asterisk">&#42;</span> </label>
-                                                <PhoneInput
-                                                    className = "input-group-addon addJobFormField form-control" 
-                                                    country   = {'in'}
-                                                    id        = "contactPersonPhone"
-                                                    value     = {this.state.contactPersonPhone}
-                                                    onChange  = {contactPersonPhone => this.setState({ contactPersonPhone })}
-                                                />
-                                                <span id="contactPersonPhoneError" className="errorMsgJobPost"></span>
                                             </div>
                                         </div>
-                                    </div>
 
-                                    <div className="col-lg-12 addJobFieldRow"> <div className="addJobFormHr col-lg-12"> </div> </div>
+                                        <div className="col-lg-12 addJobFieldRow"> <div className="addJobFormHr col-lg-12"> </div> </div>
 
-                                    <div className="addJobSubHead col-lg-12">
-                                        <i className="fa fa-briefcase"> </i>
-                                        <div className="labelLeftPadding"> Job Description </div>
-                                    </div>
-                                    
-                                    <div className="description text-left col-lg-12">
-                                        <div className="form-group">
-                                          <label htmlFor="jobDesc" className="addjobformLable jobDesc"> Describe the responsibilities of this job, required work experience, skills, or education. </label>
-                                            <div> 
-                                                <CKEditor
-                                                    editor      =   {ClassicEditor}
-                                                    data        =   {this.state.jobDesc}
-                                                    id          =   "jobDesc"
-                                                    onInit      =   { editor => {}}
-                                                    onChange    =   {(event, editor) => {this.setState({ jobDesc: editor.getData() });} }
-                                                    
-                                                    onBlur      =   {   
-                                                                        editor  =>  {
-                                                                                        console.log( 'Blur.', editor );
-                                                                                    }   
-                                                                    }
-                                                    
-                                                    onFocus     =   {   
-                                                                        editor  => {
-                                                                                        console.log( 'Focus.', editor );
-                                                                                    } 
-                                                                    }
-                                                />  
-                                            </div> 
+                                        <div className="addJobSubHead col-lg-12">
+                                            <i className="fa fa-briefcase"> </i>
+                                            <div className="labelLeftPadding"> Job Description </div>
                                         </div>
-                                    </div>                                                                                                                      
-                                    
-                                    <div className="col-lg-3 pull-right">
-                                        <button className="btn buttonYellow addJobSubmitBtn"  onClick={this.handleSubmit}> {this.state.submitBtnText} </button>
-                                    </div>
-                                </form>
+                                        
+                                        <div className="description text-left col-lg-12">
+                                            <div className="form-group">
+                                              <label htmlFor="jobDesc" className="addjobformLable jobDesc"> Describe the responsibilities of this job, required work experience, skills, or education. </label>
+                                                <div> 
+                                                    <CKEditor
+                                                        editor      =   {ClassicEditor}
+                                                        data        =   {this.state.jobDesc}
+                                                        id          =   "jobDesc"
+                                                        onInit      =   { editor => {}}
+                                                        onChange    =   {(event, editor) => {this.setState({ jobDesc: editor.getData() });} }
+                                                        
+                                                        onBlur      =   {   
+                                                                            editor  =>  {
+                                                                                            console.log( 'Blur.', editor );
+                                                                                        }   
+                                                                        }
+                                                        
+                                                        onFocus     =   {   
+                                                                            editor  => {
+                                                                                            console.log( 'Focus.', editor );
+                                                                                        } 
+                                                                        }
+                                                    />  
+                                                </div> 
+                                            </div>
+                                        </div>                                                                                                                      
+                                        
+                                        <div className="col-lg-3 pull-right">
+                                            <button className="btn buttonYellow addJobSubmitBtn"  onClick={this.handleSubmit}> {this.state.submitBtnText} </button>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
                         </div>
-                        </div>
+                    </section>    
                     </div>
                 </div>
             );

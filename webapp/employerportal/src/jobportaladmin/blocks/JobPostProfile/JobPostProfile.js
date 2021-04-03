@@ -137,7 +137,7 @@ export default class JobPostProfile extends Component{
 					maxSalary 			: 	response.data.ctcOffered.maxSalary,
 					maxSalPeriod		: 	response.data.ctcOffered.maxSalPeriod,
 					
-					minEducation 		: 	response.data.eligibility.minEducation,
+					minEducation 		: 	response.data.eligibility.mineducation_id.qualification,
 					minExperience 		: 	response.data.eligibility.minExperience,
 					
 					primarySkillTags 	: 	primarySkillTags,
@@ -157,7 +157,7 @@ export default class JobPostProfile extends Component{
 	}	
 	
 	render(){
-		console.log(this.state.primarySkillTags)
+		//console.log(this.state.)
 		return(
 				<div className="jobPostProfileWrapper container-fluid">
 					<div className="col-lg-9">
