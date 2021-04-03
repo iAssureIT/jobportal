@@ -335,7 +335,6 @@ class BasicInfoForm extends Component{
 				})
 			}
 		}
-
 		// if(name==="dob"){
 		// 	this.calAge(value);
 		// }
@@ -385,6 +384,7 @@ class BasicInfoForm extends Component{
 		
 		var value = event.currentTarget.value;
 		var id  = event.currentTarget.id;
+
 		this.setState({
 			visa:id,
 		})
