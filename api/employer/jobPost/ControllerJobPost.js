@@ -17,7 +17,7 @@ const JobShiftMaster = require('../../coreAdmin/JobShiftMaster/ModelJobShift.js'
 const JobTimeMaster = require('../../coreAdmin/JobTimeMaster/ModelJobTime.js');
 const SkillMaster = require('../../coreAdmin/SkillMaster/ModelSkill.js');
 const QualificationMaster = require('../../coreAdmin/QualificationMaster/ModelQualification.js');
-
+var moment      = require('moment');
 var ObjectID = require('mongodb').ObjectID;
 
 exports.insertJobs = (req, res, next) => {
@@ -2403,6 +2403,7 @@ exports.bulkUploadJobs = (req, res, next) => {
     async function processData() {
         var getnext         = await getNextSequence()
         var jobID           = parseInt(getnext)
+        var entities        = await getEntity();
         var industries      = await getIndustries();
         var funAreas        = await getFunctionalAreas();
         var jobSectors      = await getJobSectors();
@@ -2420,6 +2421,9 @@ exports.bulkUploadJobs = (req, res, next) => {
         for (var k = 0; k < jobs.length; k++) {
             if (jobs[k].jobTitle == '-') {
                 remark += "jobTitle not found, ";
+            }
+            if (jobs[k].companyID == '-') {
+                remark += "companyID not found, ";
             }
             if (jobs[k].industry == '-') {
                 remark += "industry not found, ";
@@ -2501,6 +2505,13 @@ exports.bulkUploadJobs = (req, res, next) => {
             }
 
             if (remark == '') {
+                var companyID;
+                var companyExists = entities.filter((data) => {
+                    if (data.companyID == jobs[k].companyID) {
+                        return data;
+                    }
+                })
+                console.log("companyExists",companyExists)
                 var industry_id;
                 var industryExists = industries.filter((data) => {
                     if (data.industry.trim().toLowerCase() == jobs[k].industry.trim().toLowerCase()) {
@@ -2621,7 +2632,7 @@ exports.bulkUploadJobs = (req, res, next) => {
                         return data;
                     }
                 })
-                console.log("mineducationExists",mineducationExists)
+                //console.log("mineducationExists",mineducationExists)
 
                 if (mineducationExists.length > 0) {
                     mineducation_id = mineducationExists[0]._id;
@@ -2722,8 +2733,9 @@ exports.bulkUploadJobs = (req, res, next) => {
                         "skill_id": skill_id
                     })
                 }
-
+                
                 validObjects = {
+                    company_id      : companyExists[0]._id,
                     jobID           : jobID,
                     jobBasicInfo    : {
                         jobTitle                : jobs[k].jobTitle,
@@ -2739,7 +2751,7 @@ exports.bulkUploadJobs = (req, res, next) => {
                         jobtime_id              : jobtime_id,
                         positions               : jobs[k].positions,
                         jobDesc                 : jobs[k].jobDesc,
-                        lastDateOfAppl          : jobs[k].lastDateOfAppl,
+                        lastDateOfAppl          : moment(jobs[k].lastDateOfAppl, 'DD-MM-YYYY'),
                         contactPersonName       : jobs[k].contactPersonName,
                         contactPersonEmail      : jobs[k].contactPersonEmail,
                         contactPersonPhone      : jobs[k].contactPersonPhone,    
@@ -2774,12 +2786,14 @@ exports.bulkUploadJobs = (req, res, next) => {
                         "minOtherExp"       : jobs[k].minOtherExp,
                         "preferredSkills"   : preferredSkillsArray
                     },
-                    fileName        : req.body.fileName
+                    fileName        : req.body.fileName,
+                    uploadTime      : new Date()
                 }
 
                 jobID = jobID + 1;
                 validData.push(validObjects);
-            }// remark
+            }
+            // remark
             else{
                 invalidObjects = entity[k];
                 invalidObjects.failedRemark = remark;
@@ -2799,7 +2813,7 @@ exports.bulkUploadJobs = (req, res, next) => {
         failedRecords.totalRecords = req.body.totalRecords;
 
         await insertFailedRecords(failedRecords, req.body.updateBadData);
-        console.log("validData",validData)
+        //console.log("validData",validData)
         res.status(200).json({
             "message": "Bulk upload process is completed successfully!",
             "completed": true
@@ -2922,3 +2936,134 @@ var insertFailedRecords = async (invalidData, updateBadData) => {
 
     })
 }
+exports.filedetails = (req, res, next) => {
+    // console.log('req------',req,'res',res);
+    var finaldata = {};
+    // Jobs.find({
+    //         fileName: req.params.fileName
+    //     })
+    Jobs.find({ fileName: req.params.fileName })
+        .populate('company_id')
+        .populate('jobBasicInfo.industry_id')
+        .populate('jobBasicInfo.functionalarea_id')
+        .populate('jobBasicInfo.subfunctionalarea_id')
+        .populate('jobBasicInfo.jobrole_id')
+        .populate('jobBasicInfo.jobtype_id')
+        .populate('jobBasicInfo.jobtime_id')
+        .populate('jobBasicInfo.jobsector_id')
+        .populate('jobBasicInfo.jobshift_id')
+        .populate('eligibility.mineducation_id')
+        .populate('requiredSkills.primarySkills.skill_id')
+        .populate('requiredSkills.secondarySkills.skill_id')
+        .populate('requiredSkills.otherSkills.skill_id')
+        .populate('requiredSkills.preferredSkills.skill_id')
+        .exec()
+        .then(data => {
+            // finaldata.push({goodrecords: data})
+            finaldata.goodrecords = data;
+            FailedRecords.find({
+                    fileName: req.params.fileName
+                })
+                .exec()
+                .then(badData => {
+                    finaldata.failedRecords = badData[0].failedRecords
+                    finaldata.totalRecords = badData[0].totalRecords
+                    res.status(200).json(finaldata);
+                })
+
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({
+                error: err
+            });
+        });
+};
+exports.fetch_file = (req, res, next) => {
+    Jobs.aggregate([{
+                $group: {
+                    _id: {
+                        "fileName": "$fileName",
+                        "uploadTime": "$uploadTime",
+                    },
+                    'count': {
+                        $sum: 1
+                    }
+                }
+            },
+            {
+                $project: {
+                    "fileName": "$_id.fileName",
+                    "uploadTime": "$_id.uploadTime",
+                    'count': 1
+                }
+            }
+        ])
+        .sort({
+            "uploadTime": -1
+        })
+        .exec()
+        .then(data => {
+            console.log('data', data);
+            var tableData = data.filter((a, i) => {
+                if (a.fileName) {
+                    return {
+                        fileName: a.fileName ? a.fileName : "Manual",
+                        uploadTime: a.uploadTime !== null ? a.uploadTime : "-",
+                        count: a.count !== NaN ? "<p>" + a.count + "</p>" : "a",
+                        _id: a.fileName + "/" + a.uploadTime,
+                    }
+                }
+            })
+            console.log(tableData)
+            res.status(200).json(tableData.slice(req.body.startRange, req.body.limitRange));
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({
+                error: err
+            });
+        });
+};
+exports.fetch_file_count = (req, res, next) => {
+    Jobs.find({})
+        .exec()
+        .then(data => {
+            var x = _.unique(_.pluck(data, "fileName"));
+            var z = [];
+            for (var i = 0; i < x.length; i++) {
+                var y = data.filter((a) => a.fileName == x[i]);
+                z.push({
+                    "fileName": x[i],
+                    'count': y.length,
+                    "_id": x[i]
+                })
+            }
+            res.status(200).json(z.length);
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({
+                error: err
+            });
+        });
+};
+exports.delete_file = (req, res, next) => {
+    //console.log(req.params.uploadTime)
+    Jobs.deleteMany({
+            "fileName": req.params.fileName,
+            "uploadTime": req.params.uploadTime
+        })
+        .exec()
+        .then(data => {
+            res.status(200).json({
+                "message": "Jobs of file " + req.params.fileName + " deleted successfully"
+            });
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({
+                error: err
+            });
+        });
+};

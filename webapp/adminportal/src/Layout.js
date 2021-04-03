@@ -21,10 +21,11 @@ import JobPostProfile       from './jobportaladmin/blocks/JobPostProfile/JobPost
 import CandidateProfile     from './jobportaladmin/blocks/CandidateProfile/CandidateProfile.js';
 
 import JoblistPage          from './jobportaladmin/pages/JoblistPage/JoblistPage.js';
+
 import AppliedCandidatelistPage    from './jobportaladmin/pages/AppliedCandidatelistPage/AppliedCandidatelistPage.js';
 
 import JobListView          from './jobportaladmin/blocks/Joblist/Joblist.js';
-
+import FilewiseJobList      from './jobportaladmin/pages/FilewiseJobList/FilewiseJobList.js';
 import CandidatelistPage    from './jobportaladmin/pages/CandidatelistPage/CandidatelistPage.js';
 
 import Header               from './coreadmin/common/header/Header.js'; 
@@ -135,7 +136,8 @@ class Layout extends Component  {
 
                                                        
                                                         <Route path="/joblist" exact strict component={JobListView} />
-
+                                                        <Route path="/filewise/jobs" exact strict component={FilewiseJobList} />
+                
                                                         <Route path="/change-password" exact strict component={ChangePassword} />
 
 

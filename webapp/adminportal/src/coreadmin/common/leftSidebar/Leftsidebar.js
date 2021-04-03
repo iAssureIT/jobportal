@@ -124,13 +124,28 @@ export default class AdminDashboard extends Component{
                 <span className="sidebarMenuTitle">Dashboard</span>
               </a>
             </li>
-            <li className="singleTreeview" onClick={this.clickDashboard.bind(this)}>
-              <a href="/job/list"  title="All Jobs" onClick={()=>this.openMenu("dashboard")}>
-                <i className="fa fa-ticket" aria-hidden="true"></i>
-                <span className="sidebarMenuTitle">All Jobs</span>
+            
+            <li className="treeview" >
+              <a href="JavaScript:void(0);" onClick={()=>this.openMenu("corporateData")} title="Job Master">
+                <i className="fa fa-users" aria-hidden="true"></i>
+                <span className="smsidenames sidebarMenuTitle"> Jobs </span>
+                <span className="pull-right-container">
+                  <i className={"fa pull-right menu-icon-toggle "+(corporateData?this.openIcon:this.closeIcon)} />
+                </span>
               </a>
+              <ul className="treeview-menu" >                    
+                <li className="noPadLR"> 
+                  <a href="/job/list" data-id="/job/list" title="Job List" onClick={this.activeMenu.bind(this)}>
+                    <i className="fa fa-circle-o dashr" />All Jobs
+                  </a> 
+                </li>
+                <li className="noPadLR"> 
+                  <a href="/filewise/employers" data-id="/filewise/jobs" title="Filewise List" onClick={this.activeMenu.bind(this)}>
+                    <i className="fa fa-circle-o dashr" />Filewise Jobs
+                  </a> 
+                </li>   
+              </ul>
             </li>
-        
             <li className="treeview" >
               <a href="JavaScript:void(0);" onClick={()=>this.openMenu("contractmanagement")} title="Reports">
                 <i className="fa fa-database" aria-hidden="true"></i>

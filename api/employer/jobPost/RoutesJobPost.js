@@ -21,4 +21,12 @@ router.post ("/industrial-jobs"		   			, jobsController.industrialJobs);
 
 router.delete("/delete/:job_id"					, jobsController.deleteJob);
 
+router.get('/get/filedetails/:fileName'			, jobsController.filedetails);
+
+router.post('/get/files'						,jobsController.fetch_file); 
+
+router.get('/get/files/count'					,jobsController.fetch_file_count);
+
+router.delete('/file/delete/:fileName/:uploadTime',jobsController.delete_file);
+
 module.exports = router ;
