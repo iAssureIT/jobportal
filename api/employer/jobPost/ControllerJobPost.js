@@ -2507,6 +2507,7 @@ exports.bulkUploadJobs = (req, res, next) => {
             if (remark == '') {
                 var companyID;
                 var companyExists = entities.filter((data) => {
+                    console.log(data.companyID);
                     if (data.companyID == jobs[k].companyID) {
                         return data;
                     }
@@ -2735,7 +2736,7 @@ exports.bulkUploadJobs = (req, res, next) => {
                 }
                 
                 validObjects = {
-                    company_id      : companyExists[0]._id,
+                    company_id      : companyExists[0] ? companyExists[0]._id : null,
                     jobID           : jobID,
                     jobBasicInfo    : {
                         jobTitle                : jobs[k].jobTitle,
