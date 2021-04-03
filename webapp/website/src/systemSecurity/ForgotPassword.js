@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import $ from 'jquery';
 import jQuery from 'jquery';
+import 'jquery-validation';
 import axios from 'axios';
 import swal from 'sweetalert';
 import './ForgotPassword.css';
@@ -22,6 +23,30 @@ class ForgotPassword extends Component {
     componentDidMount(){
       
     }
+
+    validateForm=()=>{
+       var status = true;
+      // var tempEmail = this.state.loginusername.trim(); // value of field with whitespace trimmed off
+       var emailFilter = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+       var tempEmail = this.state.emailAddress.trim(); 
+       var illegalChars = /[\(\)\<\>\,\;\:\\\"\[\]]/;
+       //var phoneno = /^\d{10}$/;
+
+     if(this.state.emailAddress == "NULL"){
+      document.getElementById("emailAddressError").innerHTML=  
+      "Please enter your Email";  
+      status=false; 
+        }else if (
+          !emailFilter.test(tempEmail)) { //test email for illegal characters
+              document.getElementById('emailAddressError').innerHTML = "Please enter a valid email address.";
+          } else{
+          document.getElementById("emailAddressError").innerHTML=
+          ""; 
+          status = true;
+        }
+        return status;
+    }
+
     handleChange(event){
         var fieldValue=event.currentTarget.value;
         // console.log("fieldValue",fieldValue);
@@ -33,6 +58,9 @@ class ForgotPassword extends Component {
     }
     sendLink(event) {
         event.preventDefault();
+        var status =  this.validateForm();
+        console.log(status);
+        if(status){
         
         var email = this.refs.emailAddress.value;
         var formValues = {
@@ -101,7 +129,7 @@ class ForgotPassword extends Component {
                 swal("This Email ID is not registered");
                 $('.fullpageloader').hide();
             })
-        
+        }
     }
     Closepagealert(event){
         event.preventDefault();
@@ -125,6 +153,30 @@ class ForgotPassword extends Component {
     render() {
         return (
             <section className="container-fluid forgotPasswordWrapper">
+
+          <div className="img1LoginFP">
+              <img src="/images/Sign_In/1.png" alt="img1Login" className="img1oginInnerFP"/>
+          </div>
+
+           <div className="img2LoginFP">
+              <img src="/images/Sign_In/2.png" alt="img2Login" className="img2loginInnerFP"/>
+          </div>
+
+           <div className="img3LoginFP">
+              <img src="/images/Sign_In/3.png" alt="img3Login" className="img3loginInnerFP"/>
+          </div>
+
+           <div className="img4LoginFP">
+              <img src="/images/Sign_In/4.png" alt="img4Login" className="img4loginInnerFP"/>
+          </div>
+
+           <div className="img5LoginFP">
+              <img src="/images/Sign_In/5.png" alt="img5Login" className="img5loginInnerFP"/>
+          </div>
+
+           <div className="img6LoginFP">
+              <img src="/images/Sign_In/6.png" alt="img6Login" className="img6loginInnerFP"/>
+          </div>
                 <div className="forgotPassword col-lg-6 col-lg-offset-3">
                   <form>
                     <div className="forgotPasswordTitle col-lg-12">Forgot Password ?
@@ -141,6 +193,7 @@ class ForgotPassword extends Component {
                             <span className="input-group-addon forgotPasswordInputIcon1"><i className="fa fa-envelope"></i></span>
                             <input type="email" id="emailAddress" name="emailAddress" ref="emailAddress" placeholder="Email Address" value={this.state.emailAddress} onChange={this.handleChange.bind(this)} className="form-control forgotPasswordInputBox"/>
                         </div>
+                         <span id="emailAddressError" className="errorMsg"></span>
                     </div>
 
                     

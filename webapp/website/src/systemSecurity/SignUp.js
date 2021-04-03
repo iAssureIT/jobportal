@@ -365,7 +365,31 @@ class SignUp extends Component {
 	render() {
 		return (
 			<section className="container-fluid registrationFormWrapper">
-                <div className="registrationForm col-lg-8 col-lg-offset-2">
+
+          <div className="img1LoginSU">
+              <img src="/images/Sign_In/1.png" alt="img1Login" className="img1oginInnerSU"/>
+          </div>
+
+           <div className="img2LoginSU">
+              <img src="/images/Sign_In/2.png" alt="img2Login" className="img2loginInnerSU"/>
+          </div>
+
+           <div className="img3LoginSU">
+              <img src="/images/Sign_In/3.png" alt="img3Login" className="img3loginInnerSU"/>
+          </div>
+
+           <div className="img4LoginSU">
+              <img src="/images/Sign_In/4.png" alt="img4Login" className="img4loginInnerSU"/>
+          </div>
+
+           <div className="img5LoginSU">
+              <img src="/images/Sign_In/5.png" alt="img5Login" className="img5loginInnerSU"/>
+          </div>
+
+           <div className="img6LoginSU">
+              <img src="/images/Sign_In/6.png" alt="img6Login" className="img6loginInnerSU"/>
+          </div>
+                <div className="registrationForm col-lg-6 col-lg-offset-3">
                   <form>
 
                     <div className="signUpTitle col-lg-12">Sign Up
@@ -391,8 +415,8 @@ class SignUp extends Component {
                         </div>
                     </div>*/}
 
-                    <div className="row">
-                    <div className="col-lg-6 form-group" >
+                  
+                    <div className="col-lg-12 form-group" >
                         <div className="input-group">
                             <span className="input-group-addon registrationInputIcon"><i className="fa fa-user"></i></span>
                             <input type="text" id="firstName" name="firstName" placeholder="First Name" value={this.state.firstName} onChange={this.handleChange.bind(this)} className="form-control registrationInputBox"/>
@@ -400,17 +424,17 @@ class SignUp extends Component {
                          <span id="firstNameError" className="errorMsg"></span>
                     </div>
 
-                    <div className="col-lg-6 form-group" >
+                    <div className="col-lg-12 form-group" >
                         <div className="input-group">
                             <span className="input-group-addon registrationInputIcon"><i className="fa fa-user"></i></span>
                             <input type="text" id="lastName" name="lastName" placeholder="Last Name" value={this.state.lastName} onChange={this.handleChange.bind(this)} className="form-control registrationInputBox"/>
                         </div>
                          <span id="lastNameError" className="errorMsg"></span>
                     </div>
-                    </div>
+                 
 
-                   <div className="row">
-                    <div className="col-lg-6 form-group" >
+                 
+                    <div className="col-lg-12 form-group" >
                         <div className="input-group">
                             <span className="input-group-addon registrationInputIcon1"><i className="fa fa-envelope"></i></span>
                             <input type="email" id="emailAddress" name="emailAddress" placeholder="Email Address" value={this.state.emailAddress} onChange={this.handleChange.bind(this)} className="form-control registrationInputBox"/>
@@ -418,7 +442,7 @@ class SignUp extends Component {
                          <span id="emailAddressError" className="errorMsg"></span>
                     </div>
 
-                    <div className="col-lg-6 form-group" >
+                    <div className="col-lg-12 form-group" >
                        
                          <PhoneInput
                                   country={'in'}
@@ -431,12 +455,12 @@ class SignUp extends Component {
                                   onChange={this.changeMobile.bind(this)}
                                 />
                          
-                        
+                        <span id="mobileNumberError" className="errorMsg"></span>
                     </div>
-                    </div>  
+                    
 
-                    <div className="row">
-                     <div className="col-lg-6 form-group" >
+                   
+                     <div className="col-lg-12 form-group" >
                         <div className="input-group">
                             <span className="input-group-addon registrationInputIcon"><i className="fa fa-lock"></i></span>
                             <input type="password" id="password" name="password" placeholder="Password" value={this.state.password} onChange={this.handleChange.bind(this)} className="form-control registrationInputBox"/>
@@ -447,7 +471,7 @@ class SignUp extends Component {
                          <span id="passwordError" className="errorMsg"></span>
                     </div>
 
-                    <div className="col-lg-6 form-group" >
+                    <div className="col-lg-12 form-group" >
                         <div className="input-group">
                             <span className="input-group-addon registrationInputIcon"><i className="fa fa-lock"></i></span>
                             <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" value={this.state.confirmPassword} onChange={this.handleChange.bind(this)} className="form-control registrationInputBox"/>
@@ -457,8 +481,7 @@ class SignUp extends Component {
                         </div>
                          <span id="confirmPasswordError" className="errorMsg"></span>
                     </div>
-                    </div>
-
+                   
 
                     <div className="col-lg-6 col-lg-offset-3 buttonWrapper">
                    <button className="btn col-lg-12 buttonSignUp" onClick={this.usersignup.bind(this)}>Sign Up</button>

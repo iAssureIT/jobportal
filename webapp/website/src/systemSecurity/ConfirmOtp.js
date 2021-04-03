@@ -79,7 +79,7 @@ class ConfirmOtp extends Component {
 
           if (response.data.message == 'SUCCESS') {
             swal('OTP Verified Successfully.');
-            var url = localStorage.getItem('previousUrl');
+             mapAction.setSelectedModal("login");
             if (response.data.passwordreset === true) {
               //this.props.history.push('/reset-pwd/' + this.props.userID);
               mapAction.setUserID(this.props.userID);
@@ -179,6 +179,29 @@ class ConfirmOtp extends Component {
 
     return (
       <section className="container-fluid confirmOTPWrapper">
+          <div className="img1LoginFP">
+              <img src="/images/Sign_In/1.png" alt="img1Login" className="img1oginInnerFP"/>
+          </div>
+
+           <div className="img2LoginFP">
+              <img src="/images/Sign_In/2.png" alt="img2Login" className="img2loginInnerFP"/>
+          </div>
+
+           <div className="img3LoginFP">
+              <img src="/images/Sign_In/3.png" alt="img3Login" className="img3loginInnerFP"/>
+          </div>
+
+           <div className="img4LoginFP">
+              <img src="/images/Sign_In/4.png" alt="img4Login" className="img4loginInnerFP"/>
+          </div>
+
+           <div className="img5LoginFP">
+              <img src="/images/Sign_In/5.png" alt="img5Login" className="img5loginInnerFP"/>
+          </div>
+
+           <div className="img6LoginFP">
+              <img src="/images/Sign_In/6.png" alt="img6Login" className="img6loginInnerFP"/>
+          </div>
                 <div className="confirmOTP col-lg-6 col-lg-offset-3">
                   <form>
                     <div className="confirmOTPTitle col-lg-12">Confirm OTP
