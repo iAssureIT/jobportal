@@ -11,7 +11,7 @@
 }
 .kangraNumber{
 	position: absolute;
-	left: 50%;
+	left: 45%;
 	top: 55%;
 }
 .chamba{
@@ -41,7 +41,7 @@
 }
 .keylongNumber{
 	position: absolute;
-	left: 50%;
+	left: 44%;
 	top: 45%;
 }
 .kullu{
@@ -56,7 +56,7 @@
 }
 .kulluNumber{
 	position: absolute;
-	left: 50%;
+	left: 45%;
 	top: 45%;
 }
 .mandi{
@@ -146,7 +146,7 @@
 }
 .shimlaNumber{
 	position: absolute;
-	left: 50%;
+	left: 45%;
 	top: 52%;
 }
 .kinnaur{
@@ -156,12 +156,12 @@
 }
 .kinnaurText{
 	position: absolute;
-	left: 50%;
+	left: 45%;
 	top: 40%;
 }
 .kinnaurNumber{
 	position: absolute;
-	left: 50%;
+	left: 42%;
 	top: 47%;
 }
 .sirmaur{
