@@ -2793,7 +2793,9 @@ exports.bulkUploadJobs = (req, res, next) => {
                         "preferredSkills"   : preferredSkillsArray
                     },
                     fileName        : req.body.fileName,
-                    uploadTime      : uploadTime
+                    uploadTime      : uploadTime,
+                    createdAt       : new Date(),
+                    createdBy       : req.body.reqdata.createdBy,
                 }
 
                 jobID = jobID + 1;

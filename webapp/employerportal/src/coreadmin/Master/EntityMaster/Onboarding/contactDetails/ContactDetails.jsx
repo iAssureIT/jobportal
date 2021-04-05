@@ -31,7 +31,6 @@ class ContactDetails extends Component {
 			tableHeading:this.props.entity === "corporate" ?{
 	            empName              :"Emp Name & ID",
 	            contactDetails       :"Contact Details",
-	            preApprovedLimits    : "PreApproved Limits",
 	             actions:"Action"
 	          }
 	          :{
@@ -249,7 +248,6 @@ class ContactDetails extends Component {
 				employeeID: {
 					required: true,
 					//regexpremployeeID :/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/,
-
 				},
 			},
 			errorPlacement: function (error, element) {

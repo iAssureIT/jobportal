@@ -75,13 +75,25 @@ class BasicInfo extends Component {
   componentDidMount() {
 
     this.edit();
+    axios.get('/api/industrymaster/get/list')
+      .then((response) => {
+        
+        var industryArray = [];
+        response.data.map((value,ind)=>{
+          industryArray.push({_id: value._id, label : value.industry})
+        })
+
+        this.setState({ industryArray : industryArray })
+      })
+      .catch((error) => {
+      })
     axios.defaults.headers.common['Authorization'] = 'Bearer '+ localStorage.getItem("token");
-    console.log(this.props.userDetails.company_id)
+    //console.log(this.props.userDetails.company_id)
     if (this.props.userDetails.company_id) {
       this.setState({
       entityID: this.props.userDetails.company_id
     }, () => {
-      console.log("this.props.userDetails.company_id",this.props.userDetails.company_id)
+      //console.log("this.props.userDetails.company_id",this.props.userDetails.company_id)
       this.edit();
     })
     }
@@ -199,16 +211,19 @@ class BasicInfo extends Component {
         }
       }
     });
-/*
+
     axios.get('/api/entitymaster/getEntity/' + this.props.userDetails.company_id)
         .then((response) => {
+
           var industry = this.state.industryArray.filter((industry)=>{
+            //console.log(industry._id)
             return industry._id  == response.data.industry_id
           })
-          console.log("response", industry)
+          //console.log("industry", industry)
+          //console.log("response", response.data)
           
           this.setState({
-            "entityID": this.props.match.params.entityID,
+            "entityID": this.props.userDetails.company_id,
             "entityType": response.data.entityType,
             "companyName": response.data.companyName,
             "groupName": response.data.groupName,
@@ -228,23 +243,12 @@ class BasicInfo extends Component {
             "createdBy": localStorage.getItem("user_ID")
           })
 
-          console.log(".............................",response.data.entityType);
+          //console.log(".............................",response.data.entityType);
         })
-        .catch((error) => {
-        })
-        this.getCountryConfigDetails()*/
-      axios.get('/api/industrymaster/get/list')
-      .then((response) => {
-        
-        var industryArray = [];
-        response.data.map((value,ind)=>{
-          industryArray.push({_id: value._id, label : value.industry})
-        })
-
-        this.setState({ industryArray : industryArray })
-      })
-      .catch((error) => {
-      })
+        // .catch((error) => {
+        // })
+        this.getCountryConfigDetails()
+      
   }
   
   handleChange(event) {
@@ -301,7 +305,7 @@ class BasicInfo extends Component {
       var formValues = {
         "supplierOf": this.props.vendorID ? this.props.vendorID : localStorage.getItem("user_ID"),
         "profileStatus":"New",
-        "entityID": this.props.match.params.entityID,
+        "entityID": this.props.userDetails.company_id,
         "entityType": this.state.pathname,
         "companyName": this.state.companyName,
         "groupName": this.state.groupName,
@@ -321,7 +325,7 @@ class BasicInfo extends Component {
       }
 
       console.log('formValues=>',formValues)
-      if (this.props.match.params.entityID) {
+      if (this.props.userDetails.company_id) {
         
         axios.patch('/api/entitymaster/patch', formValues)
           .then((response) => {
@@ -329,7 +333,7 @@ class BasicInfo extends Component {
             swal((this.state.pathname === "appCompany" ? "Organzational Settings" : this.state.pathname ) + " updated successfully.");
             $(".swal-text").css("text-transform", "capitalize");
             $(".swal-text").css("font-family", "sans-serif");
-            this.props.history.push('/' + this.state.pathname + '/statutory-details/' + this.props.match.params.entityID)
+            this.props.history.push('/' + this.state.pathname + '/statutory-details/' + this.props.userDetails.company_id)
           })
           .catch((error) => {
 
@@ -607,7 +611,7 @@ class BasicInfo extends Component {
     console.log("nextProps",nextProps)
     if (nextProps.entityID) {
       this.setState({
-      entityID: this.props.match.params.entityID
+      entityID: this.props.userDetails.company_id
     }, () => {
       
       this.edit();
@@ -630,7 +634,7 @@ class BasicInfo extends Component {
           })
           //console.log("response", industry)
           this.setState({
-            "entityID": this.props.match.params.entityID,
+            "entityID": this.props.userDetails.company_id,
             "entityType": response.data.entityType,
             "companyName": response.data.companyName,
             "groupName": response.data.groupName,
