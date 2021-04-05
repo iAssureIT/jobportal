@@ -171,7 +171,7 @@ class EntityDetails extends Component {
 												<li id={this.state.entityInfo._id}  title="Delete" data-index data-id={this.state.entityInfo._id} onClick={this.deleteEntity.bind(this)}>
 													<a><i className="fa fa-trash" aria-hidden="true"></i>&nbsp;&nbsp;Delete</a>
 												</li>
-												{this.state.role.indexOf("admin")>-1?
+												{ /*this.state.role.indexOf("admin")>-1?
 												<div>
 												<li id={this.state.entityInfo._id}  title="Add Employee" >
 													<a href={"/"+this.state.entityType +"/employee/lists"}><i className="fa fa-user-plus" aria-hidden="true"></i>&nbsp;&nbsp;Add Employee</a>
@@ -188,7 +188,7 @@ class EntityDetails extends Component {
 												</li>
 												</div>
 												:
-												null
+												null */
 												}
 											</ul>
 										</div>

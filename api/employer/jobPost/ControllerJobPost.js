@@ -2793,7 +2793,7 @@ exports.bulkUploadJobs = (req, res, next) => {
                         "preferredSkills"   : preferredSkillsArray
                     },
                     fileName        : req.body.fileName,
-                    uploadTime      : new Date()
+                    uploadTime      : uploadTime
                 }
 
                 jobID = jobID + 1;
@@ -2997,7 +2997,7 @@ exports.fetch_file = (req, res, next) => {
                     }
                 }
             },
-            {
+            { 
                 $project: {
                     "fileName": "$_id.fileName",
                     "uploadTime": "$_id.uploadTime",
