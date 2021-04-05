@@ -125,13 +125,13 @@ class Layout extends Component  {
 
                                                         <Route path="/candidate/list" exact strict component={CandidatelistPage} />
                                                         <Route path="/candidate/basic-info" exact strict component={CandidateBasicInfo} />
-                                                        <Route path="/candidate/basic-info/:candidateID" exact strict component={CandidateBasicInfo} />
+                                                        <Route path="/candidate/basic-info/:candidate_id" exact strict component={CandidateBasicInfo} />
                                                         
-                                                        <Route path="/candidate/address/:candidateID" exact strict component={CandidateAddress} />
-                                                        <Route path="/candidate/academics/:candidateID" exact strict component={CandidateAcademics} />
-                                                        <Route path="/candidate/contact/:candidateID" exact strict component={CandidateContact} />
-                                                        <Route path="/candidate/experience/:candidateID" exact strict component={CandidateExperience} />
-                                                        <Route path="/candidate/certification/:candidateID" exact strict component={CandidateCertification} />
+                                                        <Route path="/candidate/address/:candidate_id" exact strict component={CandidateAddress} />
+                                                        <Route path="/candidate/academics/:candidate_id" exact strict component={CandidateAcademics} />
+                                                        <Route path="/candidate/contact/:candidate_id" exact strict component={CandidateContact} />
+                                                        <Route path="/candidate/experience/:candidate_id" exact strict component={CandidateExperience} />
+                                                        <Route path="/candidate/certification/:candidate_id" exact strict component={CandidateCertification} />
 
 
                                                        

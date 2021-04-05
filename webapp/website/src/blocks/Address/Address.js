@@ -54,7 +54,7 @@ class Address extends Component{
 			.catch(error=>{
 				Swal.fire("Error while getting List data",error.message,'error');
 			})
-		Axios.get("http://locations2.iassureit.com/api/states/get/list/IN")
+		Axios.get("/api/states/get/list/IN")
 			.then((response) => {
 				this.setState({
 					stateArray: response.data

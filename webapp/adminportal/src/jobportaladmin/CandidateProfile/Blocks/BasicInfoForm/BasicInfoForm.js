@@ -23,7 +23,7 @@ class BasicInfoForm extends Component{
 	constructor(props){
 		super(props);
 		this.state={
-			candidate_id              : this.props.match.params.candidateID,
+			candidate_id              : this.props.match.params.candidate_id,
 			firstName                 : "",
 			middleName                : "",
 			lastName                  : "",
@@ -75,7 +75,7 @@ class BasicInfoForm extends Component{
 			Swal.fire("Error while getting List data",error.message,'error');
 		})
 
-		if (this.props.match.params.candidateID) {
+		if (this.props.match.params.candidate_id) {
 
 		Axios.get("/api/candidatemaster/get/one/"+this.state.candidate_id)
 		.then(response=>{
@@ -122,7 +122,7 @@ class BasicInfoForm extends Component{
 }
 
 	//========== User Define Function Start ================
-	selectImage(event){
+	selectImage(event){ 
 		event.preventDefault();
 		var profilePicture = [];
 		if (event.currentTarget.files ) {
@@ -408,7 +408,7 @@ class BasicInfoForm extends Component{
     }
 	handleSubmit(event){
 		event.preventDefault();
-		var status =  this.validateForm();
+		var status =  this.validateForm(); 
 			var formValues = {
 
 								firstName          : this.state.firstName,
@@ -432,7 +432,8 @@ class BasicInfoForm extends Component{
 							}
 							console.log(formValues);
 			if(status==true){
-			Axios.post("/api/candidatemaster/post",formValues)
+				if (this.props.match.params.candidate_id) {
+					Axios.patch("/api/candidatemaster/patch/updateCandidateBasicInfo",formValues)
 			 .then(response=>{
 
 						Swal.fire("Congrats","Your Basic details is insert Successfully","success");
@@ -442,6 +443,8 @@ class BasicInfoForm extends Component{
 											lastName           : "",
 											dob                : "",
 											gender             : "male",
+											country            : "",	
+											countryShow        : false,	
 											//anniversaryDate    : "",	
 											maritalStatus      : "",
 											languages          : [],
@@ -453,20 +456,59 @@ class BasicInfoForm extends Component{
 											// ageDays	       	   : 0,
 											profilePicture     : "",
 											profileImageUrl    : "",	
-											resume 			   : "",	
-											resumeUrl          : [], 
+											resume 			   : [],	
+											resumeUrl          : "", 
 											executiveSummary   : "",
 											passport           : "",
 											visa               : "",
 										})
 
-						this.props.history.push("/address/"+response.data._id);
+						this.props.history.push("/address/"+this.state.candidate_id);
 							
 							
 				})
 				.catch(error =>{
 					Swal.fire("Submit Error!",error.message,'error');
 				});
+				}	
+				else{
+					Axios.post("/api/candidatemaster/post",formValues)
+					.then(response=>{
+
+								Swal.fire("Congrats","Your Basic details is insert Successfully","success");
+									this.setState({
+													firstName          : "",
+													middleName         : "",
+													lastName           : "",
+													dob                : "",
+													gender             : "male",
+													//anniversaryDate    : "",	
+													maritalStatus      : "",
+													languages          : [],
+													nationality        : "",
+													panCardNo          : "",
+													adhaarCardNo       : "",
+													// ageYears	       : 0,	
+													// ageMonths	       : 0,	
+													// ageDays	       	   : 0,
+													profilePicture     : "",
+													profileImageUrl    : "",	
+													resume 			   : "",	
+													resumeUrl          : [], 
+													executiveSummary   : "",
+													passport           : "",
+													visa               : "",
+												})
+
+								this.props.history.push("/candidate/address/"+response.data._id);
+									
+									
+						})
+						.catch(error =>{
+							Swal.fire("Submit Error!",error.message,'error');
+						});
+				}
+			
 			}
 		
 	}
