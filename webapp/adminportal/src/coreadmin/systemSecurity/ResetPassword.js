@@ -359,7 +359,7 @@ class ResetPassword extends Component {
     render() {
         return (
             <section className="container-fluid resetPasswordWrapper">
-                <div className="resetPassword col-lg-6 col-lg-offset-3">
+                <div className="resetPassword col-lg-4 col-lg-offset-4">
                   <form>
 
                     <div className="resetPasswordTitle col-lg-12">Reset Password
