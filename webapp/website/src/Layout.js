@@ -61,7 +61,7 @@ class Layout extends Component  {
         
         
         this.setState({ currentUrl: pageUrl })
-        axios.get("http://locations2.iassureit.com/api/states/get/list/IN")
+        axios.get("/api/states/get/list/IN")
             .then((response) => {
                 this.setState({
                     stateArray: response.data

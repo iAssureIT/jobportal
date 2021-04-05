@@ -195,7 +195,7 @@ class CompanyInformation extends Component{
       this.getStates(target.value)
     }
     getStates(StateCode){
-      axios.get("http://locations2.iassureit.com/api/states/get/list/"+StateCode)
+      axios.get("/api/states/get/list/"+StateCode)
             .then((response)=>{
               this.setState({
                   stateArray : response.data

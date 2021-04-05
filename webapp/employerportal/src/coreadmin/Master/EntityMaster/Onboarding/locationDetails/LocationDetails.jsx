@@ -334,7 +334,7 @@ class LocationDetails extends Component {
 	// 	this.getStates(event.target.value.split('|')[0])
 	// }
 	getStates() {
-		axios.get("http://locations2.iassureit.com/api/states/get/list/IN")
+		axios.get("/api/states/get/list/IN")
 			.then((response) => {
 				this.setState({
 					stateArray: response.data
