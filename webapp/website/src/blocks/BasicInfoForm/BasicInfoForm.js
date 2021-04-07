@@ -703,7 +703,6 @@ class BasicInfoForm extends Component{
 								<span id="alternateError" className="errorMsg"></span>
 							</div>
 
-
 						</div>
 						<div className="row formWrapper">
 							
