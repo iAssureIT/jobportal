@@ -628,7 +628,9 @@
 .ck .ck-insert-table-dropdown__label {
 	color: var(--admin-main-txt-color);
 }
-
+.ck.ck-reset_all, .ck.ck-reset_all *{
+	color:	var(--ck-custom-background);
+}
 /********************************************Properties Of ReactTags******************************************/
 
 div.ReactTags__tags {

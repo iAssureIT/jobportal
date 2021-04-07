@@ -801,7 +801,7 @@ class IAssureTableFilewise extends Component {
 																			</div>
 																	}
 																</span>
-																<div className="modal fade" id={"showDeleteModal-"+i} role="dialog">
+																<div className="modal" id={"showDeleteModal-"+i} role="dialog">
 			                                                        <div className=" adminModal adminModal-dialog col-lg-12 col-md-12 col-sm-12 col-xs-12">
 			                                                          <div className="modal-content adminModal-content col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1 col-xs-12 noPadding">
 			                                                            <div className="modal-header adminModal-header col-lg-12 col-md-12 col-sm-12 col-xs-12">
