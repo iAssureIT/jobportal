@@ -11,8 +11,8 @@
 }
 .fazilkaNumber{
 	position: absolute;
-	top: 60%;
-    left: 33%;
+	top: 58%;
+    left: 25%;
 }
 
 .sri_muktsar_sahib{
@@ -27,8 +27,8 @@
 }
 .sri_muktsar_sahibNumber{
 	position: absolute;
-    top: 57%;
-    left: 40%;
+    top: 56%;
+    left: 37%;
 }
 
 .bathinda{
@@ -44,7 +44,7 @@
 .bathindaNumber{
 	position: absolute;
     top: 56%;
-    left: 47%;
+    left: 40%;
 }
 
 .faridkot{
@@ -54,14 +54,13 @@
 }
 .faridkotText{
 	position: absolute;
-	top: 37%;
-    left: 39%;
+	top: 40%;
+    left: 40%;
 }
 .faridkotNumber{
 	position: absolute;
-        position: absolute;
     top: 52%;
-    left: 52%;
+    left: 50%;
 }
 
 .ferozepur{
@@ -71,13 +70,13 @@
 }
 .ferozepurText{
 	position: absolute;
-	top: 37%;
-    left: 39%;
+	top: 40%;
+    left: 45%;
 }
 .ferozepurNumber{
 	position: absolute;
     top: 52%;
-    left: 52%;
+    left: 45%;
 }
 
 .tarn_taran{
@@ -93,7 +92,7 @@
 .tarn_taranNumber{
 	position: absolute;
     top: 52%;
-    left: 40%;
+    left: 30%;
 }
 
 .amritsar{
@@ -108,8 +107,8 @@
 }
 .amritsarNumber{
 	position: absolute;
-    top: 65%;
-    left: 40%;
+    top: 60%;
+    left: 30%;
 }
 
 .gurdaspur{
@@ -119,12 +118,12 @@
 }
 .gurdaspurText{
 	position: absolute;
-	top: 37%;
-    left: 30%;
+	top: 45%;
+    left: 35%;
 }
 .gurdaspurNumber{
 	position: absolute;
-    top: 52%;
+    top: 54%;
     left: 40%;
 }
 
@@ -135,13 +134,13 @@
 }
 .pathankotText{
 	position: absolute;
-	top: 37%;
-    left: 30%;
+	top: 52%;
+    left: 16%;
 }
 .pathankotNumber{
 	position: absolute;
-    top: 52%;
-    left: 40%;
+    top: 65%;
+    left: 20%;
 }
 
 .hoshiarpur{
@@ -151,13 +150,13 @@
 }
 .hoshiarpurText{
 	position: absolute;
-	top: 37%;
-    left: 23%;
+	top: 42%;
+    left: 27%;
 }
 .hoshiarpurNumber{
 	position: absolute;
-    top: 44%;
-    left: 36%;
+    top: 48%;
+    left: 30%;
 }
 
 .kapurthala{
@@ -172,8 +171,8 @@
 }
 .kapurthalaNumber{
 	position: absolute;
-    top: 63%;
-    left: 48%;
+    top: 60%;
+    left: 45%;
 }
 
 .jalandhar{
@@ -189,7 +188,7 @@
 .jalandharNumber{
 	position: absolute;
     top: 75%;
-    left: 48%;
+    left: 42%;
 }
 
 .singh_nagar{
@@ -199,13 +198,13 @@
 }
 .singh_nagarText{
 	position: absolute;
-	top: 45%;
-    left: 30%;
+	top: 50%;
+    left: 35%;
 }
 .singh_nagarNumber{
 	position: absolute;
     top: 65%;
-    left: 48%;
+    left: 45%;
 }
 
 .rupnagar{
@@ -232,12 +231,12 @@
 .a_KapurthalaText{
 	position: absolute;
 	top: 25%;
-    left: 20%;
+    left: 4%;
 }
 .a_KapurthalaNumber{
 	position: absolute;
     top: 45%;
-    left: 20%;
+    left: 25%;
 }
 
 .moga{
@@ -311,7 +310,7 @@
 }
 .sangrurText{
 	position: absolute;
-	top: 35%;
+	top: 40%;
     left: 40%;
 }
 .sangrurNumber{
@@ -344,8 +343,8 @@
 }
 .patialaText{
 	position: absolute;
-	top: 30%;
-    left: 40%;
+	top: 34%;
+    left: 42%;
 }
 .patialaNumber{
 	position: absolute;
@@ -361,13 +360,13 @@
 }
 .mohaliText{
 	position: absolute;
-	top: 30%;
-    left: 40%;
+	top: 45%;
+    left: 35%;
 }
 .mohaliNumber{
 	position: absolute;
-    top: 40%;
-    left: 40%;
+    top: 55%;
+    left: 45%;
 }
 
 

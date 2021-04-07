@@ -245,7 +245,7 @@ class Address extends Component{
 														buttonText         : "Save",
 													})	
 							this.getData();			
-							this.props.history.push("/address/"+this.state.candidate_id);
+							this.props.history.push("/candidate/address/"+this.state.candidate_id);
 					})
 					.catch(error =>{
 						Swal.fire("Submit Error!",error.message,'error');
@@ -287,7 +287,7 @@ class Address extends Component{
 	
 	handleSubmit(event){
 		event.preventDefault();
-    	this.props.history.push("/academics/"+this.state.candidate_id);
+    	this.props.history.push("/candidate/academics/"+this.state.candidate_id);
 	}
 	
 	camelCase(str) {

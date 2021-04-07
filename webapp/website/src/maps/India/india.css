@@ -507,13 +507,13 @@
 }
 .andaman_nicobarText{
 	position: absolute;
-	top: 48%;
-    left: 30%;		
+	top: 30%;
+    left: 40%;		
 }
 .andaman_nicobarNumber{
 	position: absolute;
-	top: 74%;
-    left: 36%;		
+	top: 50%;
+    left: 60%;		
 }
 
 .lakshadweep{
@@ -523,12 +523,12 @@
 }
 .lakshadweepText{
 	position: absolute;
-	top: 48%;
-    left: 51%;		
+	top: 110%;
+    left: -40%;		
 }
 .lakshadweepNumber{
 	position: absolute;
-	top: 74%;
+	top: 140%;
     left: 36%;		
 }
 

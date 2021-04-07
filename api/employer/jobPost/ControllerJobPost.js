@@ -2503,15 +2503,21 @@ exports.bulkUploadJobs = (req, res, next) => {
             if (jobs[k].minExperience == '-') {
                 remark += "minExperience not found, ";
             }
+            var companyID;
+            var companyExists = entities.filter((data) => {
+
+                console.log(data.companyID);
+                if (data.companyID == jobs[k].companyID) {
+                    return data;
+                }
+            })
+            console.log("companyExists",companyExists)
+            if (companyExists.length == 0) {
+                remark += "Company with companyID does not found ";
+            }
 
             if (remark == '') {
-                var companyID;
-                var companyExists = entities.filter((data) => {
-                    if (data.companyID == jobs[k].companyID) {
-                        return data;
-                    }
-                })
-                console.log("companyExists",companyExists)
+                
                 var industry_id;
                 var industryExists = industries.filter((data) => {
                     if (data.industry.trim().toLowerCase() == jobs[k].industry.trim().toLowerCase()) {
@@ -2733,9 +2739,9 @@ exports.bulkUploadJobs = (req, res, next) => {
                         "skill_id": skill_id
                     })
                 }
-                
+                console.log(moment(jobs[k].lastDateOfAppl, 'DD-MM-YYYY'))
                 validObjects = {
-                    company_id      : companyExists[0]._id,
+                    company_id      : companyExists[0] ? companyExists[0]._id : null,
                     jobID           : jobID,
                     jobBasicInfo    : {
                         jobTitle                : jobs[k].jobTitle,
@@ -2787,7 +2793,9 @@ exports.bulkUploadJobs = (req, res, next) => {
                         "preferredSkills"   : preferredSkillsArray
                     },
                     fileName        : req.body.fileName,
-                    uploadTime      : new Date()
+                    uploadTime      : uploadTime,
+                    createdAt       : new Date(),
+                    createdBy       : req.body.reqdata.createdBy,
                 }
 
                 jobID = jobID + 1;
@@ -2795,7 +2803,7 @@ exports.bulkUploadJobs = (req, res, next) => {
             }
             // remark
             else{
-                invalidObjects = entity[k];
+                invalidObjects = jobs[k];
                 invalidObjects.failedRemark = remark;
                 invalidData.push(invalidObjects);
             }
@@ -2991,7 +2999,7 @@ exports.fetch_file = (req, res, next) => {
                     }
                 }
             },
-            {
+            { 
                 $project: {
                     "fileName": "$_id.fileName",
                     "uploadTime": "$_id.uploadTime",

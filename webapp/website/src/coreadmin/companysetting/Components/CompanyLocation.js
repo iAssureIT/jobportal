@@ -168,8 +168,8 @@ class CompanyLocation extends Component{
       country : target.options[target.selectedIndex].innerHTML })
     this.getStates(target.value)
   }
-    getStates(StateCode){
-      axios.get("http://locations2.iassureit.com/api/states/get/list/"+StateCode)
+    getStates(CountryCode){
+      axios.get("/api/states/get/list/"+CountryCode)
             .then((response)=>{
           
               this.setState({

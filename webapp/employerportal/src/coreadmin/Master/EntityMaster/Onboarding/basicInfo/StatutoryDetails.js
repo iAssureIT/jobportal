@@ -191,7 +191,7 @@ class StatutoryDetails extends Component {
 	}
 	
 	getStates(country) {
-		axios.get("http://locations2.iassureit.com/api/states/get/list/"+country)
+		axios.get("/api/states/get/list/"+country)
 			.then((response) => {
 				this.setState({
 					stateArray: response.data

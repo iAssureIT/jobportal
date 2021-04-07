@@ -297,7 +297,7 @@ div.ReactTags__selected a.ReactTags__remove {
 }
 
 /* Styles for suggestions */
-div.ReactTags__suggestions {
+/*div.ReactTags__suggestions {
 	margin-left: 5px;
     position: absolute;
     z-index: 100 !important;
@@ -309,7 +309,6 @@ div.ReactTags__suggestions ul {
     list-style-type: none;
     box-shadow: .05em .01em .5em rgba(0,0,0,.2);
     margin-top: 3px;
-    /*background-color: var(--main-bg-color);*/
     border: 1px solid var(--main-border-color);
     color: #fff !important;
     border-radius: 4px;
@@ -318,7 +317,6 @@ div.ReactTags__suggestions ul {
 }
 
 div.ReactTags__suggestions li {
-    /*border-bottom: 1px solid #ddd;*/
     padding: 5px 10px;
     margin: 0;
     margin-left: -40px !important;
@@ -328,7 +326,6 @@ div.ReactTags__suggestions li mark {
     text-decoration: underline;
     background: none;
     font-weight: 600;
-    /*color: #fff !important;*/
     color: var(--main-border-color) !important;
 }
 
@@ -336,9 +333,8 @@ div.ReactTags__suggestions ul li.ReactTags__activeSuggestion {
     cursor: pointer;
     background-color: var(--main-bg-color) !important;
     color: #fff !important;
-    /*background-color: var(--main-border-color) !important;*/
 }
-
+*/
 /*input.ReactTags__tagInputField:focus{
 	border: none !important;
 }*/

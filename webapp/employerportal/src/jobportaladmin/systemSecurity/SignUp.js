@@ -70,7 +70,7 @@ class SignUp extends Component {
         .catch(error => {
             swal.fire("Error while getting List data", error.message, 'error');
         }) 
-    axios.get("http://locations2.iassureit.com/api/states/get/list/IN")
+    axios.get("/api/states/get/list/IN")
       .then((response) => {
         this.setState({
           stateArray: response.data

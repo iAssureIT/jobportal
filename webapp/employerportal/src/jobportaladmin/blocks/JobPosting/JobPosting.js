@@ -639,7 +639,7 @@ class JobPosting extends Component {
         return status;
     }
     getStates() {
-        Axios.get("http://locations2.iassureit.com/api/states/get/list/IN").then((response) => {
+        Axios.get("/api/states/get/list/IN").then((response) => {
                 this.setState({
                     stateArray: response.data
                 })

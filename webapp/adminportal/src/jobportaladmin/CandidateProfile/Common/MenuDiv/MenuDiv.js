@@ -21,7 +21,7 @@ export default class MenuDiv extends Component {
                     </li>
                     <li className="col-lg-2 col-md-3 col-sm-12 col-xs-12 transactionTab pdcls pdclsOne btn2 disabled">
                       <div className="triangletwo" id="triangle-right1"></div>
-                      <a href="/candidate/address/:candidateID" className="basic-info-pillss backcolor">
+                      <a href="/candidate/address/:candidate_id" className="basic-info-pillss backcolor">
                         
                         Address
                       </a>
@@ -29,7 +29,7 @@ export default class MenuDiv extends Component {
                     </li>
                     <li className="col-lg-2 col-md-3 col-sm-12 col-xs-12 transactionTab pdcls pdclsOne btn2 disabled">
                       <div className="triangletwo" id="triangle-right1"></div>
-                      <a  href="/candidate/academics/:candidateID" className="basic-info-pillss backcolor">
+                      <a  href="/candidate/academics/:candidate_id" className="basic-info-pillss backcolor">
                         
                         Academics
                       </a>
@@ -37,7 +37,7 @@ export default class MenuDiv extends Component {
                     </li>
                     <li className="col-lg-2 col-md-3 col-sm-12 col-xs-12 transactionTab pdcls pdclsOne btn2 disabled">
                       <div className="triangletwo" id="triangle-right1"></div>
-                      <a  href="/candidate/certification/:candidateID" className="basic-info-pillss backcolor">
+                      <a  href="/candidate/certification/:candidate_id" className="basic-info-pillss backcolor">
                         
                         Skills
                       </a>
@@ -45,7 +45,7 @@ export default class MenuDiv extends Component {
                     </li>
                     <li className="col-lg-3 col-md-3 col-sm-12 col-xs-12 transactionTab noRightPadding pdcls btn4 disabled">
                       <div className="trianglesix" id="triangle-right2"></div>
-                      <a  href="/candidate/experience/:candidateID" className="basic-info-pillss backcolor">
+                      <a  href="/candidate/experience/:candidate_id" className="basic-info-pillss backcolor">
                         
                         Experience 
                       </a>
