@@ -704,21 +704,6 @@ class BasicInfoForm extends Component{
 							</div>
 
 
-							<div className="col-lg-4">
-								<label htmlFor="email" className="nameTitleForm">
-									Personal Mail ID
-									<sup className="nameTitleFormStar">*</sup>
-								</label>
-								<div className="input-group ">
-									<span className="input-group-addon inputBoxIcon">
-										<i className="fa fa-envelope-o"></i> 
-									</span> 
-									<input type="email" name="email" id="email" 
-									 className="form-control email inputBox" value={this.state.email} 
-									 onChange={this.handleChange.bind(this)} />
-								</div> 
-								<span id="emailError" className="errorMsg"></span>
-							</div>
 						</div>
 						<div className="row formWrapper">
 							

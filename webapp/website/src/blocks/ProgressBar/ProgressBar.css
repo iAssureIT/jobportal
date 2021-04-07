@@ -88,6 +88,6 @@
 }
 @media (min-width:1400px){
 	.bullet::after{
-		width: 300px;
+		width: 220px;
 	}
 }
