@@ -99,18 +99,24 @@
     width: 100%;
     border-radius: 20px;
     margin-top: 3px;
+    padding: 2px;
+}
+.genderFeildWrapper2{
+    margin-top:6px;
 }
 .genderFeild{
 	height: 21px;
-    margin-top: 1px;
     border-radius: 20px;
     font-size: 10px;
     font-weight: 100!important;
     padding-top: 4px;
     text-align: center;
+    transition: all 1s;
+    background-color: var(--input-bg-color)!important;
 }
 .genderFeild:hover{
 	cursor: pointer;
+    background-color:var(--gray-bg-color )!important;
 }
 .genderFeildActive{
 	background-color:var(--gray-bg-color )!important;
@@ -169,7 +175,12 @@
 .multiselectZ{
 	z-index:6!important;
 }
-
+::-webkit-calendar-picker-indicator {
+  filter: invert(100%);
+}
+::-webkit-calendar-picker-indicator:hover{
+    cursor: pointer;
+}
 
 .date{
 	text-transform:uppercase;
@@ -187,9 +198,21 @@
 .inputImage:hover{
 	cursor: pointer;
 }
+.profileImageWrapper{
+    border:1px dashed var(--main-border-color);
+    width:150px;
+    height: 140px;
+    position: absolute;
+    top: 15px;
+    left: 50px;
+}
 .profileImage{
-    width:200px;
-	margin-top:5px;
+    width:140px;
+    height:130px;
+    margin:4px;
+}
+.resumeImage{
+    background-color: #fff;
 }
 .delImgIcon{
 	position: absolute;
@@ -763,4 +786,103 @@ user agent stylesheet:focus {
 .triangleones {
     border-left: 20px solid var(--blue-bg-color) !important;
     right: -13px;
+}
+
+/*********************************************Properties Of Date***********************************************/
+
+.dateLine,.dateLine1{
+    position: absolute;
+    width: 1px;
+    background: var(--main-border-color);
+    height: 33px;
+    z-index: 148;
+    right: 43px;
+}
+.dateLine1 {
+     right: 55px;
+}
+.styled-select select {
+    position: absolute;
+}
+.passportFont{
+    font-size: 9px;
+}
+/*********************************************Properties Of Date***********************************************/
+.uploadImageClient,
+.uploadImageClient2{
+    /*position: absolute;*/
+    height: 34px !important;
+    width: 150px;
+    background-size: 232px 128px;
+    background-repeat: no-repeat;
+    background: var(--form-field-background-color);
+    border: 1px dashed var(--main-border-color);
+    height: 150px;
+    padding: 0
+}
+.LogoImageUpOne{
+    /*background-size: 232px 128px;*/
+    /*background-repeat: no-repeat;*/
+    background: var(--form-field-background-color);
+    border: 1px dashed var(--main-border-color);
+    cursor: pointer;
+    height: 10em!important;
+    padding: 0;
+    align-items: center;
+    text-align: center;
+    display: grid;
+    margin-top: 15px;
+    margin-left: 50px;
+}
+.uploadImageClient1,.LogoImageUp1{
+    position: absolute;
+}
+.LogoImageUpOne i,
+.LogoImageUpOne2 i{
+    position: absolute;
+    font-size: 40px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.LogoImageUp,
+.LogoImageUp2{
+    /*position: absolute;*/
+    top: 1px;
+    height: 100%;
+}
+.uploadImageClient input[type=file],.uploadImageClient2 input[type=file]  {
+    display: block;
+    background: 0 0;
+    opacity: 0;
+    cursor: pointer;
+}
+.basicInfoHr{
+    border-top: 1px solid var(--main-border-color)!important;
+}
+.LogoImageUpOne2{
+    background: var(--form-field-background-color);
+    border: 1px dashed var(--main-border-color);
+    cursor: pointer;
+    height: 100px!important;
+    padding: 0;
+    align-items: center;
+    text-align: center;
+    display: grid;
+}
+.profileImageWrapper2{
+    border:1px dashed var(--main-border-color);
+    width:150px;
+    height: 100px;
+    background-color: var(--input-bg-color) !important;
+}
+.resumeImage {
+    width: 45px;
+    height: 45px;
+    margin-top: 34%;
+    margin-left: 50%;
+    transform: translate(-50%, -50%);
+}
+.attachedDocument{
+    margin-bottom: 20px;
 }

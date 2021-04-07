@@ -33,8 +33,7 @@ class Academics extends Component{
             universitylist   	: [],	
             addressLine1 	    : "",
 			area                : "",
-			city                : "",
-			district   		    : "",	
+			city                : "",	
 			stateArray 		    : [],
 			states              : "",
 			stateCode		    : "",
@@ -163,7 +162,6 @@ class Academics extends Component{
 			 		addressLine1            : editData.academics[0].collegeSchool,
 			 		area 					: editData.academics[0].area,
 			 		city                	: editData.academics[0].cityVillage,
-			 		district 				: editData.academics[0].district,
 			 		states               	: editData.academics[0].state,
 			 		stateCode              	: editData.academics[0].stateCode,
 			 		country             	: editData.academics[0].country,
@@ -317,7 +315,6 @@ class Academics extends Component{
       this.setState({
         area       : area,
         city       : city,
-        district   : district,
         states     : state,
         country    : country,
         pincode    : pincode,
@@ -356,7 +353,6 @@ class Academics extends Component{
 									collegeSchool 		 : this.state.addressLine1,
 									area       			 : this.state.area,
 							        city       			 : this.state.city,
-							        district   			 : this.state.district,
 							        states     			 : this.state.states,
 							        country    			 : this.state.country,
 							        pincode    			 : this.state.pincode,
@@ -466,15 +462,6 @@ class Academics extends Component{
 			status = true;
 		}
 
-		// if(this.state.grade.length<=0){
-		// 	document.getElementById("gradeError").innerHTML=  
-		// 	"Please enter your Grade";  
-		// 	status=false; 
-		// }else{
-		// 	document.getElementById("gradeError").innerHTML=  
-		// 	""; 
-		// 	status = true;
-		// }
 		
 		if(this.state.mode.length<=0){
 			document.getElementById("modeError").innerHTML=  
@@ -530,15 +517,6 @@ class Academics extends Component{
 			""; 
 			status = true;
 		}
-		if(this.state.district.length<=0){
-			document.getElementById("districtError").innerHTML=  
-			"Please enter your City";  
-			status=false; 
-		}else{
-			document.getElementById("districtError").innerHTML=  
-			""; 
-			status = true;
-		}
 		if(this.state.states.length<=0){
 			document.getElementById("stateError").innerHTML=  
 			"Please enter your State";  
@@ -557,7 +535,7 @@ class Academics extends Component{
 			""; 
 			status = true;
 		}
-		if(this.state.country.length<=0 && this.state.states.length<=0 && this.state.district.length<=0
+		if(this.state.country.length<=0 && this.state.states.length<=0
 			&& this.state.city.length<=0 && this.state.college.length<=0 && this.state.university.length<=0
 			&& this.state.passOutYear.length<=0 && this.state.admisionYear.length<=0 &&  this.state.mode.length<=0
 			&& this.state.qualification.length<=0 && this.state.qualificationLevel.length<=0){
@@ -654,41 +632,6 @@ class Academics extends Component{
 								</div> 
 								<span id="gradeError" className="errorMsg"></span>
 							</div>
-
-							<div className="col-lg-4">
-								<label htmlFor="mode" className="nameTitleForm">
-									Mode
-									<sup className="nameTitleFormStar">*</sup>
-								</label>
-								<div className="input-group ">
-									<span className="input-group-addon inputBoxIcon">
-										<FontAwesomeIcon icon="adjust" />
-									</span> 
-									<select className="form-control inputBox" id="mode" 
-									 value={this.state.mode} name="mode" 
-									 onChange={this.handleChange.bind(this)}>
-									  	<option > -- select -- </option>
-									  	{
-									  		this.state.inputMode.length > 0
-									  		?	
-									  			this.state.inputMode.map((elem,index)=>{
-									  				return(
-									  					<option value={elem._id} key={index}>
-									  						{elem}
-									  					</option>
-									  				);
-									  			})
-									  			
-									  		:
-									  			null
-									  	}
-									</select>
-								</div>
-								<span id="modeError" className="errorMsg"></span>
-							</div>
-						</div>
-
-						<div className="row formWrapper">
 							<div className="col-lg-4">
 								<label htmlFor="admisionYear" className="nameTitleForm">
 									Admission Year
@@ -708,7 +651,7 @@ class Academics extends Component{
 							</div>
 							<div className="col-lg-4">
 								<label htmlFor="passOutYear" className="nameTitleForm">
-									Pass-out-year
+									Pass-out-Year
 									<sup className="nameTitleFormStar">*</sup>
 								</label>
 								<div className="input-group ">
@@ -723,9 +666,11 @@ class Academics extends Component{
 								</div> 
 								<span id="passOutYearError" className="errorMsg"></span>
 							</div>
-						</div>	
+							
+						</div>
+
 						<div className="row formWrapper">	
-							<div className="col-lg-6">
+							<div className="col-lg-4">
 								<label htmlFor="university" className="nameTitleForm">
 									University/Boards Name
 									<sup className="nameTitleFormStar">*</sup>
@@ -745,7 +690,7 @@ class Academics extends Component{
 								</div> 
 								<span id="universityError" className="errorMsg"></span>
 							</div>
-							<div className="col-lg-6">
+							<div className="col-lg-4">
 								<label htmlFor="college" className="nameTitleForm">
 									College/School Name<sup className="nameTitleFormStar">*</sup>
 								</label>
@@ -821,6 +766,37 @@ class Academics extends Component{
 								</div> 
 								<span id="collegeError" className="errorMsg"></span>
 							</div>
+							<div className="col-lg-4">
+								<label htmlFor="mode" className="nameTitleForm">
+									Mode
+									<sup className="nameTitleFormStar">*</sup>
+								</label>
+								<div className="input-group ">
+									<span className="input-group-addon inputBoxIcon">
+										<FontAwesomeIcon icon="adjust" />
+									</span> 
+									<select className="form-control inputBox" id="mode" 
+									 value={this.state.mode} name="mode" 
+									 onChange={this.handleChange.bind(this)}>
+									  	<option > -- select -- </option>
+									  	{
+									  		this.state.inputMode.length > 0
+									  		?	
+									  			this.state.inputMode.map((elem,index)=>{
+									  				return(
+									  					<option value={elem._id} key={index}>
+									  						{elem}
+									  					</option>
+									  				);
+									  			})
+									  			
+									  		:
+									  			null
+									  	}
+									</select>
+								</div>
+								<span id="modeError" className="errorMsg"></span>
+							</div>
 						</div>
 
 						<div className="row formWrapper">
@@ -839,21 +815,7 @@ class Academics extends Component{
 								</div>
 								<span id="cityError" className="errorMsg"></span>
 							</div>
-							<div className="col-lg-4">
-								<label htmlFor="district" className="nameTitleForm">
-									District
-									<sup className="nameTitleFormStar">*</sup>
-								</label>
-								<div className="input-group ">
-									<span className="input-group-addon inputBoxIcon">
-										<FontAwesomeIcon icon="city" /> 
-									</span> 
-									<input type="text" name="district" id="district" 
-									 className="form-control inputBox" value={this.state.district} 
-									 onChange={this.handleChange.bind(this)} />
-								</div>
-								<span id="districtError" className="errorMsg"></span>
-							</div>
+							
 
 							<div className="col-lg-4">
 								<label htmlFor="state" className="nameTitleForm">
@@ -881,8 +843,6 @@ class Academics extends Component{
 								</div> 
 								<span id="stateError" className="errorMsg"></span>
 							</div>
-						</div>	
-						<div className="row formWrapper">	
 							<div className="col-lg-4">
 								<label htmlFor="country" className="nameTitleForm">
 									Country
@@ -899,7 +859,7 @@ class Academics extends Component{
 								</div> 
 								<span id="countryError" className="errorMsg"></span>
 							</div>
-						</div>
+						</div>	
 						<div>
 							<button className="buttonBack pull-right" 
 							 onClick={this.handleSave.bind(this)}> 

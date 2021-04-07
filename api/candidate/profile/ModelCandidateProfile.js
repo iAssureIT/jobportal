@@ -54,7 +54,6 @@ const candidateSchema = mongoose.Schema({
 		collegeSchool 	: String,			
 		area 			: String,
 		cityVillage  	: String,
-		district 		: String,
 		state 			: String,
 		stateCode 		: String,	
 		country 		: String,

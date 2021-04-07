@@ -23,7 +23,7 @@ class BasicInfoForm extends Component{
 	constructor(props){
 		super(props);
 		this.state={
-			candidate_id              : this.props.match.params.candidateID,
+			candidate_id              : this.props.userDetails.candidate_id,
 			firstName                 : "",
 			middleName                : "",
 			lastName                  : "",
@@ -36,16 +36,13 @@ class BasicInfoForm extends Component{
 			gender                    : "",
 			passport                  : "",
 			visa                  	  : "",
-			//anniversaryDate           : "",	
+			country                   : "",	
+			countryShow               : false,		
 			maritalStatus             : "",
 			nationality               : "",
 			panCardNo                 : "",
 			adhaarCardNo              : "",
 			selectedValue             : [],
-			// ageYears	              : 0,	
-			// ageMonths	          : 0,	
-			// ageDays	       	      : 0,
-			// age                    : "",
 			inputMaritalStatus        : ["Single",,"Married", "Separated","Divorced","Widowed"],
 			anniversaryDateShow 	  : false,	
 			inputNationality          : ["Indian","American"],
@@ -89,7 +86,6 @@ class BasicInfoForm extends Component{
                     	languagesTags.push({ id : data.language_id._id, text : data.language_id.language })
                 	})
 			 	}
-			 	// this.calAge(response.data.basicInfo.dob);
 			 	this.setState({
 			 		firstName         : response.data.basicInfo.firstName?response.data.basicInfo.firstName:"",
 					middleName        : response.data.basicInfo.middleName?response.data.basicInfo.middleName:"",
@@ -99,7 +95,8 @@ class BasicInfoForm extends Component{
 					email         	  : response.data.contact.emailId?response.data.contact.emailId:"",
 					dob               : response.data.basicInfo.dob?Moment(response.data.basicInfo.dob).format("YYYY-MM-DD"):"",
 					gender            : response.data.basicInfo.gender?response.data.basicInfo.gender:"",
-					//anniversaryDate   : response.data.basicInfo.anniversaryDate?Moment(response.data.basicInfo.anniversaryDate).format("YYYY-MM-DD"):"",
+					country           : response.data.basicInfo.country?response.data.basicInfo.country:"",
+					countryShow       : response.data.basicInfo.visa=="Yes"?true:false,
 					maritalStatus     : response.data.basicInfo.maritalStatus?response.data.basicInfo.maritalStatus:"",
 					nationality       : response.data.basicInfo.nationality?response.data.basicInfo.nationality:"",
 					passport          : response.data.basicInfo.passport?response.data.basicInfo.passport:"",
@@ -110,9 +107,6 @@ class BasicInfoForm extends Component{
 					resumeUrl     	  : response.data.basicInfo.resume?response.data.basicInfo.resume:"",
 					executiveSummary  : response.data.basicInfo.executiveSummary ? response.data.basicInfo.executiveSummary : "",
 					languagesTags 	  : languagesTags,
-					// ageYears	              : 0,	
-					// ageMonths	              : 0,	
-					// ageDays	       	          : 0,
 			 	})
 			 })
 			 .catch(error=>{
@@ -326,31 +320,19 @@ class BasicInfoForm extends Component{
 		this.setState({
 			[name]:value,
 		})
-		// if(name==="dob"){
-		// 	this.calAge(value);
-		// }
-		// if (name=="maritalStatus") {
-		// 	if (value=="Married") {
-		// 		this.setState({anniversaryDateShow : true})
-		// 	}else{
-		// 		this.setState({anniversaryDateShow : false})
-		// 	}
-		// }
+		if(name=="country"){
+			if(this.state.visa=="Yes"){
+				this.setState({
+					[name]:value,
+				})
+			}else{
+				this.setState({
+					[name]:"",
+				})
+			}
+		}
 	}
-	// calAge(dob){
-	// 	var currentDate = Moment(new Date());
-	// 		var age     = Moment.duration(currentDate.diff(dob));
-	// 		var Years   = age.years();
-	// 		var Months  = age.months();
-	// 		var weeks   = age.weeks();
-			
 
-	// 		this.setState({
-	// 			ageYears : Years,
-	// 			ageMonths: Months,
-	// 			ageWeeks : weeks,
-	// 		})
-	// }
 	passport(event){
 		event.preventDefault();
 
@@ -359,12 +341,24 @@ class BasicInfoForm extends Component{
 		this.setState({
 			passport:id,
 		})
+
 	}
 	visa(event){
 		event.preventDefault();
 
+
 		var value = event.currentTarget.value;
 		var id  = event.currentTarget.id;
+		var name  = event.currentTarget.name;
+			if (id=="Yes") {
+				this.setState({countryShow : true})
+			}else{
+				this.setState({countryShow : false})
+			}
+		
+		var value = event.currentTarget.value;
+		var id  = event.currentTarget.id;
+
 		this.setState({
 			visa:id,
 		})
@@ -420,7 +414,7 @@ class BasicInfoForm extends Component{
 								emailId            : this.state.email,
 								dob                : this.state.dob,
 								gender             : this.state.gender,
-								//anniversaryDate    : this.state.anniversaryDate,	
+								country            : this.state.country,		
 								maritalStatus      : this.state.maritalStatus,
 								nationality        : this.state.nationality,
 								languagesTags	   : this.state.languagesTags,
@@ -442,19 +436,17 @@ class BasicInfoForm extends Component{
 											lastName           : "",
 											dob                : "",
 											gender             : "male",
-											//anniversaryDate    : "",	
+											country            : "",	
+											countryShow        : false,		
 											maritalStatus      : "",
 											languages          : [],
 											nationality        : "",
 											panCardNo          : "",
 											adhaarCardNo       : "",
-											// ageYears	       : 0,	
-											// ageMonths	       : 0,	
-											// ageDays	       	   : 0,
 											profilePicture     : "",
 											profileImageUrl    : "",	
-											resume 			   : "",	
-											resumeUrl          : [], 
+											resume 			   : [],	
+											resumeUrl          : "", 
 											executiveSummary   : "",
 											passport           : "",
 											visa               : "",
@@ -535,36 +527,36 @@ class BasicInfoForm extends Component{
 			document.getElementById("dobError").innerHTML = ""; 
 			status = true;
 		}
-		// if(this.state.email.length<=0){
-		// 	document.getElementById("emailError").innerHTML = "Please enter your Email";  
-		// 	status=false; 
-		// }else if (!emailFilter.test(tempEmail)) { //test email for illegal characters
-	 //        document.getElementById('emailError').innerHTML = "Please enter a valid email address.";
-	 //    } else if (this.state.email.match(illegalChars)) {
-	 //        document.getElementById('emailError').innerHTML = "Email contains invalid characters.";
-	 //    }else{
-		// 	document.getElementById("emailError").innerHTML = ""; 
-		// 	status = true;
-		// }
-		// if(this.state.mobile.length<=0){
-		// 	document.getElementById("mobileError").innerHTML = "Please enter your mobile number";  
-		// 	status=false; 
-		// }else if (!mobileFilter.test(this.state.mobile)) { //test email for illegal characters
-	 //        document.getElementById('mobileError').innerHTML = "Please enter a valid mobile number.";
-	 //    }else{
-		// 	document.getElementById("mobileError").innerHTML = ""; 
-		// 	status = true;
-		// }
+		if(this.state.email.length<=0){
+			document.getElementById("emailError").innerHTML = "Please enter your Email";  
+			status=false; 
+		}else if (!emailFilter.test(tempEmail)) { //test email for illegal characters
+	        document.getElementById('emailError').innerHTML = "Please enter a valid email address.";
+	    } else if (this.state.email.match(illegalChars)) {
+	        document.getElementById('emailError').innerHTML = "Email contains invalid characters.";
+	    }else{
+			document.getElementById("emailError").innerHTML = ""; 
+			status = true;
+		}
+		if(this.state.mobile.length<=0){
+			document.getElementById("mobileError").innerHTML = "Please enter your mobile number";  
+			status=false; 
+		}else if (!mobileFilter.test(this.state.mobile)) { //test email for illegal characters
+	        document.getElementById('mobileError').innerHTML = "Please enter a valid mobile number.";
+	    }else{
+			document.getElementById("mobileError").innerHTML = ""; 
+			status = true;
+		}
 
-		// if(this.state.alternate.length>0){
+		if(this.state.alternate.length>0){
 			
-		// 	if (!mobileFilter.test(this.state.alternate)) { //test email for illegal characters
-	 //        	document.getElementById('alternateError').innerHTML = "Please enter a valid alternate mobile number.";
-		//     }else{
-		// 		document.getElementById("alternateError").innerHTML = ""; 
-		// 		status = true;
-		// 	}
-		// }
+			if (!mobileFilter.test(this.state.alternate)) { //test email for illegal characters
+	        	document.getElementById('alternateError').innerHTML = "Please enter a valid alternate mobile number.";
+		    }else{
+				document.getElementById("alternateError").innerHTML = ""; 
+				status = true;
+			}
+		}
 
 		if(this.state.executiveSummary.length<=0){
 			document.getElementById("executiveSummaryError").innerHTML = "Please enter your executive summary";  
@@ -625,6 +617,37 @@ class BasicInfoForm extends Component{
 								<span id="middleNameError" className="errorMsg"></span>
 							</div>
 
+							
+							<div className="col-lg-4 ">
+								<label htmlFor="profilePicture" className="nameTitleForm">
+									
+								</label>
+								<div className="input-group ">
+									{
+										this.state.profileImageUrl!== ""
+										?	
+											<div className="profileImageWrapper col-lg-12">
+												<div className="row">
+													<i className="fa fa-times delImgIcon" 
+													   onClick={this.delImgPreview.bind(this)}>
+													</i>
+													<img src={this.state.profileImageUrl} alt="profileImage" 
+													className="profileImage"/>
+												</div>
+											</div>
+										:
+											<div className="uploadImageClient uploadImageClient1 LogoImageUpOne " >
+												<div><i className="fa fa-camera cursorPointer"></i></div>
+												<input type="file" className=" LogoImageUp LogoImageUp1" 
+												 name="profilePicture"
+												 onChange={this.selectImage.bind(this)}
+												/>
+											</div>
+									}
+								</div>
+							</div>
+						</div>
+						<div className="row formWrapper">
 							<div className="col-lg-4">
 								<label htmlFor="lastName" className="nameTitleForm">
 									Last Name <sup className="nameTitleFormStar">*</sup>
@@ -638,6 +661,22 @@ class BasicInfoForm extends Component{
 									 onChange={this.handleChange.bind(this)} />
 								</div> 
 								<span id="lastNameError" className="errorMsg"></span>
+							</div>
+							
+							<div className="col-lg-4">
+								<label htmlFor="email" className="nameTitleForm">
+									Personal Mail ID
+									<sup className="nameTitleFormStar">*</sup>
+								</label>
+								<div className="input-group ">
+									<span className="input-group-addon inputBoxIcon">
+										<i className="fa fa-envelope-o"></i> 
+									</span> 
+									<input type="email" name="email" id="email" 
+									 className="form-control email inputBox" value={this.state.email} 
+									 onChange={this.handleChange.bind(this)} />
+								</div> 
+								<span id="emailError" className="errorMsg"></span>
 							</div>
 						</div>
 						<div className="row formWrapper">
@@ -672,21 +711,6 @@ class BasicInfoForm extends Component{
 								<span id="alternateError" className="errorMsg"></span>
 							</div>
 
-							<div className="col-lg-4">
-								<label htmlFor="email" className="nameTitleForm">
-									Personal Mail ID
-									<sup className="nameTitleFormStar">*</sup>
-								</label>
-								<div className="input-group ">
-									<span className="input-group-addon inputBoxIcon">
-										<i className="fa fa-envelope-o"></i> 
-									</span> 
-									<input type="email" name="email" id="email" 
-									 className="form-control email" value={this.state.email} 
-									 onChange={this.handleChange.bind(this)} />
-								</div> 
-								<span id="emailError" className="errorMsg"></span>
-							</div>
 						</div>
 						<div className="row formWrapper">
 							
@@ -703,6 +727,7 @@ class BasicInfoForm extends Component{
 									 className="form-control inputBox unstyled date" 
 									 value={this.state.dob} max={Moment(new Date()).format("YYYY-MM-DD")}
 									 onChange={this.handleChange.bind(this)} />
+									 <div className="dateLine"></div>
 								</div> 
 								<span id="dobError" className="errorMsg"></span>
 							</div>
@@ -749,7 +774,7 @@ class BasicInfoForm extends Component{
 									<select required className="form-control inputBox selectOption" id = "nationality" 
 									 value ={this.state.nationality} name="nationality" 
 									 onChange={this.handleChange.bind(this)}>
-									  	<option disabled > -- Select -- </option>
+									  	<option  > -- Select -- </option>
 									  	{
 									  		this.state.inputNationality.length>0
 									  		?	
@@ -768,30 +793,6 @@ class BasicInfoForm extends Component{
 								</div>
 							</div>
 						</div>
-
-						{// <div className="row formWrapper multiselectZ">
-
-							
-						// 	
-						// 		this.state.anniversaryDateShow ? 
-						// 		<div className="col-lg-4 anniversaryDate">
-						// 			<label htmlFor="anniversaryDate" className="nameTitleForm">
-						// 				Anniversary Date
-						// 			</label>
-						// 			<div className="input-group ">
-						// 				<span className="input-group-addon inputBoxIcon inputBoxIcon2 calender">
-						// 					<i className="fa fa-calendar-o"></i>
-						// 				</span> 
-						// 				<input type="date" name="anniversaryDate" id="anniversaryDate" 
-						// 				className="form-control inputBox date" value={this.state.anniversaryDate}
-						// 				onChange={this.handleChange.bind(this)} />
-						// 			</div> 
-						// 		</div>
-						// 		: null
-						// 	
-						// </div>
-						}
-						
 						<div className="row formWrapper">
 							<div className="col-lg-4">
 								<label htmlFor="gender" className="nameTitleForm ">
@@ -833,8 +834,8 @@ class BasicInfoForm extends Component{
 									
 								</div>
 							</div>
-							<div className="col-lg-4">
-								<label htmlFor="passport" className="nameTitleForm ">
+							<div className="col-lg-2">
+								<label htmlFor="passport" className="nameTitleForm passportFont">
 									Do You Have Passport?
 								</label>
 								<div className="input-group genderFeildWrapper">
@@ -862,8 +863,8 @@ class BasicInfoForm extends Component{
 									</div>
 								</div>
 							</div> 
-							<div className="col-lg-4">
-								<label htmlFor="visa" className="nameTitleForm ">
+							<div className="col-lg-2">
+								<label htmlFor="visa" className="nameTitleForm passportFont">
 									Do You Have Visa?
 								</label>
 								<div className="input-group genderFeildWrapper">
@@ -891,6 +892,25 @@ class BasicInfoForm extends Component{
 									</div>
 								</div>
 							</div> 
+							{
+								this.state.countryShow ? 
+									<div className="col-lg-4 country">
+										<label htmlFor="country" className="nameTitleForm">
+											Country
+										</label>
+										<div className="input-group ">
+											<span className="input-group-addon inputBoxIcon">
+												<i className="fa fa-flag"></i> 
+											</span> 
+											<input type="text" name="country" id="country" 
+											 className="form-control inputBox" 
+											 value={this.state.country} 
+											 onChange={this.handleChange.bind(this)} />
+										</div> 
+									</div>
+								:
+								null
+							}
 						</div>
 						<div className="row formWrapper">
 							<div className="col-lg-12">
@@ -932,52 +952,32 @@ class BasicInfoForm extends Component{
 								<span id="executiveSummaryError" className="errorMsg"></span>
 							</div>
 						</div>
+						<hr className="basicInfoHr"/>
 						<div className="row formWrapper">
-							<div className="col-lg-4 ">
-								<label htmlFor="profilePicture" className="nameTitleForm">
-									Profile Picture
-								</label>
-								<div className="input-group ">
-									{
-										this.state.profileImageUrl!== ""
-										?	
-											<div>
-												<i className="fa fa-times delImgIcon" 
-												   onClick={this.delImgPreview.bind(this)}>
-												</i>
-												<img src={this.state.profileImageUrl} alt="profileImage" 
-												className="profileImage"/>
-											</div>
-										:
-											<div>
-
-												<input type="file" className="inputImage" 
-												 name="profilePicture"
-												 onChange={this.selectImage.bind(this)}
-												/>
-											</div>
-									}
-								</div>
+							<div className="BasicInfoTitle attachedDocument">
+								Attached Document
 							</div>
 							<div className="col-lg-4 ">
 								<label htmlFor="profilePicture" className="nameTitleForm">
-									Resume 
+									Attached Document
 								</label>
 								<div className="input-group ">
 									{
 										this.state.resumeUrl!== ""
 										?	
-											<div>
-												<i className="fa fa-times delResumeIcon" 
-												   onClick={this.delResumePreview.bind(this)}>
-												</i>
-												<img src={"/images/resumeIcon.png"} alt="profileImage" 
-												className="resumeImage"/>
+											<div className="profileImageWrapper2 col-lg-12">
+												<div className="row">
+													<i className="fa fa-times delResumeIcon" 
+													   onClick={this.delResumePreview.bind(this)}>
+													</i>
+													<img src={"/images/resumeIcon.png"} alt="resumeImage" 
+													className="resumeImage"/>
+												</div>
 											</div>
 										:
-											<div>
-
-												<input type="file" className="inputImage" 
+											<div className="uploadImageClient2 LogoImageUpOne2">
+												<div><i className="fa fa-upload"></i></div>
+												<input type="file" className="LogoImageUp2" 
 												 name="resume"
 												 onChange={this.uploadResume.bind(this)}
 												/>

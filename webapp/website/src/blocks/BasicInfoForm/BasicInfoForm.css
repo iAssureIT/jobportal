@@ -92,12 +92,6 @@
 .genderFeildWrapper2{
     margin-top:6px;
 }
-.genderFeildWrapper2{
-    margin-top:6px;
-}
-.genderFeildWrapper2{
-    margin-top:6px;
-}
 .genderFeild{
 	height:21px;
 	border-radius:20px;
@@ -188,16 +182,17 @@
 	cursor: pointer;
 }
 .profileImageWrapper{
-    border:1px solid var(--main-border-color);
+    border:1px dashed var(--main-border-color);
     width:150px;
-    height: 150px;
-    border-radius: 5px!important;
+    height: 140px;
+    position: absolute;
+    top: 30px;
+    left: 50px;
 }
-.profileImage,.resumeImage{
+.profileImage{
     width:140px;
-    height:140px;
+    height:130px;
 	margin:4px;
-    border-radius: 5px!important;
 }
 .resumeImage{
     background-color: #fff;
@@ -782,3 +777,81 @@ user agent stylesheet:focus {
     font-size: 10.5px;
 }
 /*********************************************Properties Of Date***********************************************/
+.uploadImageClient,
+.uploadImageClient2{
+    /*position: absolute;*/
+    height: 34px !important;
+    width: 150px;
+    background-size: 232px 128px;
+    background-repeat: no-repeat;
+    background: var(--form-field-background-color);
+    border: 1px dashed var(--main-border-color);
+    height: 150px;
+    padding: 0
+}
+.LogoImageUpOne{
+    /*background-size: 232px 128px;*/
+    /*background-repeat: no-repeat;*/
+    background: var(--form-field-background-color);
+    border: 1px dashed var(--main-border-color);
+    cursor: pointer;
+    height: 10em!important;
+    padding: 0;
+    align-items: center;
+    text-align: center;
+    display: grid;
+    margin-top: 30px;
+    margin-left: 50px;
+}
+.uploadImageClient1,.LogoImageUp1{
+    position: absolute;
+}
+.LogoImageUpOne i,
+.LogoImageUpOne2 i{
+    position: absolute;
+    font-size: 40px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.LogoImageUp,
+.LogoImageUp2{
+    /*position: absolute;*/
+    top: 1px;
+    height: 100%;
+}
+.uploadImageClient input[type=file],.uploadImageClient2 input[type=file]  {
+    display: block;
+    background: 0 0;
+    opacity: 0;
+    cursor: pointer;
+}
+.basicInfoHr{
+    border-top: 1px solid var(--main-border-color)!important;
+}
+.LogoImageUpOne2{
+    background: var(--form-field-background-color);
+    border: 1px dashed var(--main-border-color);
+    cursor: pointer;
+    height: 100px!important;
+    padding: 0;
+    align-items: center;
+    text-align: center;
+    display: grid;
+}
+.profileImageWrapper2{
+    border:1px dashed var(--main-border-color);
+    width:150px;
+    height: 100px;
+    background-color: var(--input-bg-color) !important;
+}
+.resumeImage {
+    width: 45px;
+    height: 45px;
+    margin-top: 34%;
+    margin-left: 50%;
+    transform: translate(-50%, -50%);
+}
+.attachedDocument{
+    margin-bottom: 20px;
+}

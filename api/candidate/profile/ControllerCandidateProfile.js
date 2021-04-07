@@ -453,7 +453,6 @@ exports.addCandidateAcademics = (req,res,next)=>{
                                     collegeSchool        : req.body.academics.collegeSchool,
                                     area                 : req.body.academics.area,
                                     cityVillage          : req.body.academics.city,
-                                    district             : req.body.academics.district,
                                     state                : req.body.academics.states,
                                     country              : req.body.academics.country,
                                     pincode              : req.body.academics.pincode,

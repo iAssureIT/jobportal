@@ -760,8 +760,39 @@ class Experience extends Component{
 								</div> 
 								<span id="lastDeartmentError" className="errorMsg"></span>
 							</div>
+							<div className="col-lg-4">
+								<label htmlFor="reportingManager" className="nameTitleForm">
+									Reporting Manager
+									<sup className="nameTitleFormStar">*</sup>
+								</label>
+								<div className="input-group ">
+									<span className="input-group-addon inputBoxIcon">
+										<i className="fa fa-user-circle"></i>
+									</span> 
+									<input type="text" name="reportingManager" id="reportingManager" 
+									 className="form-control inputBox" value={this.state.reportingManager} 
+									 onChange={this.handleChange.bind(this)} />
+								</div> 
+								<span id="reportingManagerError" className="errorMsg"></span>
+							</div>
 						</div>
 						<div className="row formWrapper">
+							<div className="col-lg-4">
+								<label htmlFor="reportingManagerDesignation" className="nameTitleForm">
+									Reporting Manager Designation
+									<sup className="nameTitleFormStar">*</sup>
+								</label>
+								<div className="input-group ">
+									<span className="input-group-addon inputBoxIcon">
+										<FontAwesomeIcon icon="id-card-alt" /> 
+									</span> 
+									<input type="text" name="reportingManagerDesignation" 
+									 id="reportingManagerDesignation" className="form-control inputBox" 
+									 value={this.state.reportingManagerDesignation} 
+									 onChange={this.handleChange.bind(this)} />
+								</div> 
+								<span id="reportingManagerDesignationError" className="errorMsg"></span>
+							</div>
 							<div className="col-lg-4">
 								<label htmlFor="lastDeartment" className="nameTitleForm">
 									Total Experience
@@ -892,41 +923,6 @@ class Experience extends Component{
 								</div>
 							</div>
 						</div>	
-						<div className="row formWrapper">	
-							<div className="col-lg-4">
-								<label htmlFor="reportingManager" className="nameTitleForm">
-									Reporting Manager
-									<sup className="nameTitleFormStar">*</sup>
-								</label>
-								<div className="input-group ">
-									<span className="input-group-addon inputBoxIcon">
-										<i className="fa fa-user-circle"></i>
-									</span> 
-									<input type="text" name="reportingManager" id="reportingManager" 
-									 className="form-control inputBox" value={this.state.reportingManager} 
-									 onChange={this.handleChange.bind(this)} />
-								</div> 
-								<span id="reportingManagerError" className="errorMsg"></span>
-							</div>
-
-							<div className="col-lg-4">
-								<label htmlFor="reportingManagerDesignation" className="nameTitleForm">
-									Reporting Manager Designation
-									<sup className="nameTitleFormStar">*</sup>
-								</label>
-								<div className="input-group ">
-									<span className="input-group-addon inputBoxIcon">
-										<FontAwesomeIcon icon="id-card-alt" /> 
-									</span> 
-									<input type="text" name="reportingManagerDesignation" 
-									 id="reportingManagerDesignation" className="form-control inputBox" 
-									 value={this.state.reportingManagerDesignation} 
-									 onChange={this.handleChange.bind(this)} />
-								</div> 
-								<span id="reportingManagerDesignationError" className="errorMsg"></span>
-							</div>
-
-						</div>
 						<div className="row formWrapper">
 							<div className="col-lg-4">
 								<label htmlFor="currentCTC" className="nameTitleForm">

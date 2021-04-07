@@ -1,7 +1,6 @@
 .AddressWrapper{
-	min-height:200px;
+	min-height:0px;
 	height:auto;
-	margin-top:15px;
 	padding-top:15px;
 	border-radius:3px;
 	padding-bottom:15px;
