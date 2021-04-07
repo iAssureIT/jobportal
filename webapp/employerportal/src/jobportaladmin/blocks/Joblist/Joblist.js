@@ -114,7 +114,12 @@ deleteJob = (event)=>{
 						<div className="input-group searchMainTab">
 							<input type="text" name="jobTitle" id="jobTitle" className="form-control jobListSearchTab" placeholder="Search by Job Title..." onChange={this.search}/>
 						</div> 
-					</div>*/} 
+					</div>*/}
+					<div className="col-lg-8 col-lg-offset-2 row btnsRow">
+						<div className="col-lg-4 activeBtn btn active row">Active Jobs</div>
+						<div className="col-lg-4 inactiveBtn btn row">Inactive Jobs</div>
+						<div className="col-lg-4 draftBtn btn row">Drafts Jobs</div>
+					</div> 
 						{
 							this.props.jobList.length>0
 							?

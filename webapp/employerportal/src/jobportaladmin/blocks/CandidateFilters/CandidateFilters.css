@@ -10,6 +10,7 @@
 
 .LeftSideFiltersWrapper{
   height: auto;
+  margin-top: 72px;
   margin-left: 12px;
   min-height: 250px;
   background-color: #1f262d;
