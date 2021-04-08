@@ -5,13 +5,13 @@
 }
 .uttarkashiText{
 	position: absolute;
-	top: 40%;
+	top: 50%;
     left: 40%;
 }
 .uttarkashiNumber{
 	position: absolute;
-	top: 50%;
-    left: 45%;
+	top: 55%;
+    left: 37%;
 }
 
 .dehradun{
@@ -27,7 +27,7 @@
 .dehradunNumber{
 	position: absolute;
 	top: 58%;
-    left: 45%;
+    left: 40%;
 }
 
 .haridwar{
@@ -43,7 +43,7 @@
 .haridwarNumber{
 	position: absolute;
 	top: 58%;
-    left: 45%;
+    left: 40%;
 }
 
 .tehri_garhwal{
@@ -53,13 +53,13 @@
 }
 .tehri_garhwalText{
 	position: absolute;
-	top: 60%;
+	top: 55%;
     left: 40%;
 }
 .tehri_garhwalNumber{
 	position: absolute;
-	top: 70%;
-    left: 50%;
+	top: 63%;
+    left: 45%;
 }
 
 .rudraprayag{
@@ -90,8 +90,8 @@
 }
 .chamoliNumber{
 	position: absolute;
-	top: 50%;
-    left: 50%;
+	top: 45%;
+    left: 40%;
 }
 
 .pithoragarh{
@@ -107,7 +107,7 @@
 .pithoragarhNumber{
 	position: absolute;
 	top: 50%;
-    left: 50%;
+    left: 40%;
 }
 
 .bageshwar{
@@ -149,28 +149,13 @@
 }
 .almoraText{
 	position: absolute;
-	top: 50%;
-    left: 40%;
+	top: 40%;
+    left: 30%;
 }
 .almoraNumber{
 	position: absolute;
-	top: 60%;
-    left: 50%;
-}
-.almora{
-	position: absolute;
-    top: 396px;
-    left: 346px;
-}
-.almoraText{
-	position: absolute;
 	top: 50%;
-    left: 40%;
-}
-.almoraNumber{
-	position: absolute;
-	top: 60%;
-    left: 50%;
+    left: 30%;
 }
 
 .nainital{
@@ -181,12 +166,12 @@
 .nainitalText{
 	position: absolute;
 	top: 40%;
-    left: 40%;
+    left: 45%;
 }
 .nainitalNumber{
 	position: absolute;
 	top: 50%;
-    left: 50%;
+    left: 45%;
 }
 
 .champawat{
@@ -212,12 +197,12 @@
 }
 .udham_singh_nagarText{
 	position: absolute;
-	top: 40%;
-    left: 30%;
+	top: 45%;
+    left: 25%;
 }
 .udham_singh_nagarNumber{
 	position: absolute;
-	top: 50%;
-    left: 40%;
+	top: 55%;
+    left: 35%;
 }
 

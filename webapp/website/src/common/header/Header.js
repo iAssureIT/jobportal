@@ -641,18 +641,20 @@ class Header extends Component{
 
               </div>
 
-              <div className="modal" id="loginModal" role="dialog" tabIndex="-1">
-                <div className="modal-dialog  modal-lg">
-                  <div className="modal-body">
-                      <button type="button" className="close" id="closeModalButton" data-dismiss="modal">&times;</button>
-                      <section className="OTPSentWrapper row">
-                            {this.props.selectedModal == "login" ? <LoginForm/> : null }
-                            {this.props.selectedModal == "signup" ? <SignUp/> : null }
-                            {this.props.selectedModal == "forgotpassword" ? <ForgotPassword/> : null }
-                            {this.props.selectedModal == "confirmotp" ? <ConfirmOtp/> : null }
-                            {this.props.selectedModal == "resetpassword" ? <ResetPassword/> : null }
-                            {this.props.selectedModal == "changepassword" ? <ChangePassword/> : null }
-                      </section>
+              <div className="modal col-lg-12" id="loginModal" role="dialog" tabIndex="-1">
+                <div className="row">
+                  <div className="modal-dialog  modal-lg ">
+                    <div className="modal-body">
+                        <button type="button" className="close" id="closeModalButton" data-dismiss="modal">&times;</button>
+                        <section className="OTPSentWrapper row">
+                              {this.props.selectedModal == "login" ? <LoginForm/> : null }
+                              {this.props.selectedModal == "signup" ? <SignUp/> : null }
+                              {this.props.selectedModal == "forgotpassword" ? <ForgotPassword/> : null }
+                              {this.props.selectedModal == "confirmotp" ? <ConfirmOtp/> : null }
+                              {this.props.selectedModal == "resetpassword" ? <ResetPassword/> : null }
+                              {this.props.selectedModal == "changepassword" ? <ChangePassword/> : null }
+                        </section>
+                    </div>
                   </div>
                 </div>
               </div>

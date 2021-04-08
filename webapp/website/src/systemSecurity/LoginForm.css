@@ -11,23 +11,19 @@
 
 
 
-.loginFormWrapper{
-	min-height: 650px;
-	height: auto;
-	background-color:#242931;
-}
 
 .loginFormOuter{
-	height: 650px;
-	/*background-color: #1f262d;*/
+	 min-height: 650px;
+    height: auto;
+  /*background-color:#242931;*/
+  padding-bottom: 50px;
 	
 }
 
 .loginFormInner{
-	height:auto;
-	min-height: 400px;
-	padding-bottom: 50px;
-	margin-top: 120px;
+	height: auto;
+	min-height: 300px;
+	margin-top: 100px;
 	background-color: #242931;
 	border:3px solid #D3950A !important;
 	border-radius: 10px;
@@ -202,17 +198,30 @@
 	height: 30px;
 }
 
-.loginSignUp{
+.loginSignUp1{
+	height: 50px !important;;
+	margin-top: 25px !important;;
+	margin-bottom: 40px !important;;
 	color: #aaa !important;
-	text-align: left;
+	text-align: center !important;
 	font-size: 14px;
 	font-family: 'Montserrat-Regular';
-	float: left;
+	float: center;
+}
+.loginSignUp{
+	height: 50px !important;;
+	margin-top: 25px !important;;
+	margin-bottom: 40px !important;;
+	color: #aaa !important;
+	text-align: center !important;
+	font-size: 14px;
+	font-family: 'Montserrat-Regular';
+	float: center;
 }
 
 .loginSignUp:hover{
 	color: #fff!important;
-	font-size: 15px;
+	font-size: 14px;
 }
 
 .loginForgotPassword{
@@ -220,19 +229,19 @@
 	text-align: right;
 	font-size: 14px;
 	font-family: 'Montserrat-Regular';
-	float: right;
+	float: left;
 }
 
 .loginForgotPassword:hover{
 	color: #fff!important;
-	font-size: 15px;
+	
 }
 
 .img1Login{
 	position: absolute;
 	height: 200px;
 	width: 125px;
-	top:15px;
+	top:0px;
 	left:55%;
 	z-index: 1;
 }
@@ -249,8 +258,8 @@
 	position: absolute;
 	height: 300px;
 	width: 180px;
-	bottom: 110px;
-	left:9%;
+	bottom: 30px;
+	left:23%;
 	z-index: 1;
 
 	
@@ -268,8 +277,8 @@
 	position: absolute;
 	height: 290px;
 	width: 110px;
-	bottom: 110px;
-	left:69%;
+	bottom: 40px;
+	left:61.5%;
 	z-index: 1;
 	
 }
@@ -286,7 +295,7 @@
 	height: 150px;
 	width: 80px;
 	
-	bottom: 75px;
+	bottom: 0px;
     left: 38%;
 	z-index: 1;
 }
@@ -315,7 +324,7 @@
 	height: 90px;
 	width: 70px;
 	top: 130px;
-    left: 18.6%;
+    left: 28.6%;
 	z-index: 0;
 }
 
@@ -380,4 +389,8 @@
 	border: 2px solid #D3950A;
 	font-weight: bold;
 	margin-bottom: 0px;
+}
+
+.form-group{
+	margin-bottom: 24px;
 }
