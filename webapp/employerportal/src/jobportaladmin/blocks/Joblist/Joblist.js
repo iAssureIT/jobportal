@@ -27,9 +27,23 @@ componentDidMount(){
 
 	var {mapAction} = this.props;
 	mapAction.filterJobList(selector);*/
-}
-showMore(){
 
+}
+
+/*statusJob = (jobid, company_id)=>{
+
+	var formValues = { 
+						job_id         		: jobid,
+					    entity_id    		: company_id,	
+					    status 				: "Active"
+					}
+
+	console.log(formValues);
+	console.log(status);
+}*/
+
+
+showMore(){
 	var selector 		  	= this.props.selector;
 
 	selector.startLimit   	= this.props.selector.startLimit === 0 
@@ -41,6 +55,7 @@ showMore(){
   	var {mapAction} = this.props;
     mapAction.filterJobList(selector);
 }
+
 handlePageChange(pageNumber) {
 	//console.log(`active page is ${pageNumber}`);
 	this.setState({activePage: pageNumber});
@@ -55,8 +70,8 @@ handlePageChange(pageNumber) {
 
   	var {mapAction} = this.props;
     mapAction.filterJobList(selector);
-
 }
+
 deleteJob = (event)=>{
 	event.preventDefault();
 	const job_id = event.currentTarget.id;

@@ -272,6 +272,13 @@
 	line-height: 15px;
 }
 
+.saveFLBtn{
+	height: 40px;
+	width: 150px;
+	margin-top: 40px;
+	margin-left: -360px;
+}
+
 .addJobPreviewBtn{
 	height: 40px;
 	width: 150px;
@@ -760,6 +767,10 @@ input::placeholder{
 	margin-left: 208px;
 }
 
+.saveFLBtn {
+    margin-left: -408px;
+}
+
 }
 
 
@@ -767,6 +778,10 @@ input::placeholder{
 
 .addJobPreviewBtn{
 	margin-left: 140px;
+}
+
+.saveFLBtn {
+    margin-left: -360px;
 }
 
 
