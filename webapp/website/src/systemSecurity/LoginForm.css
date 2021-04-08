@@ -13,10 +13,10 @@
 
 
 .loginFormOuter{
-	 min-height: 650px;
+	min-height: 500px;
     height: auto;
   /*background-color:#242931;*/
-  padding-bottom: 50px;
+ 	padding-bottom: 100px;
 	
 }
 
@@ -27,6 +27,7 @@
 	background-color: #242931;
 	border:3px solid #D3950A !important;
 	border-radius: 10px;
+	padding-bottom: 30px;
 }
 
 .signInTitle{
@@ -201,7 +202,7 @@
 .loginSignUp1{
 	height: 50px !important;;
 	margin-top: 25px !important;;
-	margin-bottom: 40px !important;;
+	margin-bottom: 30px !important;;
 	color: #aaa !important;
 	text-align: center !important;
 	font-size: 14px;
@@ -258,7 +259,7 @@
 	position: absolute;
 	height: 300px;
 	width: 180px;
-	bottom: 30px;
+	bottom: 70px;
 	left:23%;
 	z-index: 1;
 
@@ -277,7 +278,7 @@
 	position: absolute;
 	height: 290px;
 	width: 110px;
-	bottom: 40px;
+	bottom: 75px;
 	left:61.5%;
 	z-index: 1;
 	
@@ -292,45 +293,45 @@
 
 .img4Login{
 	position: absolute;
-	height: 150px;
-	width: 80px;
+	height: 100px;
+	width: 50px;
 	
-	bottom: 0px;
+	bottom: 65px;
     left: 38%;
 	z-index: 1;
 }
 
 .img4loginInner{
-	height: 150px;
-	width: 80px;
+	height: 100px;
+	width: 50px;
 }
 
 .img5Login{
 	position: absolute;
-	height: 150px;
-	width: 140px;
-	bottom: 150px;
-    left: 73%;
+	height: 135px;
+	width: 125px;
+	bottom: 100px;
+    left: 65%;
 	z-index: 0;
 }
 
 .img5loginInner{
-	height: 150px;
-	width: 140px;
+	height: 135px;
+	width: 125px;
 }
 
 .img6Login{
 	position: absolute;
-	height: 90px;
-	width: 70px;
+	height: 80px;
+	width: 60px;
 	top: 130px;
-    left: 28.6%;
+    left: 29.6%;
 	z-index: 0;
 }
 
 .img6loginInner{
-	height: 90px;
-	width: 70px;
+	height: 80px;
+	width: 60px;
 }
 
 
