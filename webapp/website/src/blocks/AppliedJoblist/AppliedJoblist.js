@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-
 import Axios from  'axios';
 import Swal  from  'sweetalert2';
+import Moment 					from "moment";
 import { connect }        from 'react-redux';
 import { bindActionCreators } from 'redux';
 import  * as mapActionCreator from '../../common/actions/index';
@@ -82,7 +82,10 @@ handleclick = (jobid)=>{
 		Axios.post("/api/wishlist/post",formValues)
 			.then(response =>{
 				var {mapAction} = this.props;
-				mapAction.getJobWishlist(this.props.userDetails.candidate_id);
+				var jobWishlistSelector = this.props.jobWishlistSelector;
+			    jobWishlistSelector.candidate_id = this.props.userDetails.candidate_id;
+			    mapAction.getJobWishlist(jobWishlistSelector);
+				//mapAction.getJobWishlist(this.props.userDetails.candidate_id);
 
 				console.log("wishlist response=", response.data);
 				if(response.data.message==="Job is removed from wishlist"){
@@ -120,7 +123,19 @@ handleclick = (jobid)=>{
 							this.props.appliedJoblist.length > 0
 							?
 								this.props.appliedJoblist.map((elem,index)=>{
+
+									var x = this.props.jobWishlist && this.props.jobWishlist.length > 0 ?
+									this.props.jobWishlist[0].wishlistItems.filter((wishlistitem) => wishlistitem.job_id._id == elem.job_id._id) : [];
+					                
+					                if (x && x.length > 0) {
+					                  var wishClass = '';
+					                  var tooltipMsg = 'Remove from wishlist';
+					                } else {
+					                  var wishClass = '-o';
+					                  var tooltipMsg = 'Add to wishlist';
+					                }
 									return(
+										elem.job_id ?
 										<div className="col-lg-6">
 											<div className="appliedJobListContainer">
 												<div className="col-lg-12">
@@ -155,7 +170,7 @@ handleclick = (jobid)=>{
 																		: <li><i className="fa fa-hourglass-o" title="Hourly Basis"></i></li> 
 																	}
 																</ul>
-																<div className="infoLog"> 15 Days Ago </div>
+																<div className="infoLog"> {Moment(elem.createdAt).startOf('seconds').fromNow()} </div>
 															</div>
 														</div>
 														<div className="jobListDesignation">
@@ -185,9 +200,10 @@ handleclick = (jobid)=>{
 																	<ul>
 																		{/*<li><i className="fa fa-check" onClick={this.applyJob}></i></li>*/}
 																		<li><i title="Remove from applied job" className={"fa fa-check-square"}  onClick={ removeApplication => this.removeApplication(elem.job_id._id) } ></i></li>
+																		<li ><i title={tooltipMsg} onClick={wishlist => this.handleclick(elem.job_id._id)} className={"fa fa-heart" + wishClass}></i></li>
 																	
-																		<li><i onClick={wishlist => this.handleclick(elem._id)} className={this.state.isToggle ? 'fa fa-heart-o':'fa fa-heart'}></i></li>
-																		{/*<li><i className="fa fa-youtube-play"></i></li>*/}
+																		{/*<li><i onClick={wishlist => this.handleclick(elem._id)} className={this.state.isToggle ? 'fa fa-heart-o':'fa fa-heart'}></i></li>
+																		<li><i className="fa fa-youtube-play"></i></li>*/}
 																	</ul>
 																</div>
 															</div>
@@ -196,6 +212,7 @@ handleclick = (jobid)=>{
 												</div>	
 											</div>
 										</div>
+										: null
 									);
 								})
 							:
@@ -209,8 +226,8 @@ handleclick = (jobid)=>{
 const mapStateToProps = (state)=>{
     return {
     	userDetails 	: state.userDetails, 	appliedJobSelector : state.appliedJobSelector,		
-    	jobList 		: state.jobList,		jobCount  	: state.jobCount,
-    	jobWishlist 	: state.jobWishlist, 
+    	jobList 		: state.jobList,		jobCount  	: state.jobCount, 
+    	jobWishlist 	: state.jobWishlist, 	jobWishlistSelector : state.jobWishlistSelector,
     	appliedJoblist  : state.appliedJoblist
     }
 }

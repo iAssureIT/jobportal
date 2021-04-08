@@ -32,8 +32,7 @@ exports.applyJob = (req,res,next)=>{
 
 exports.appliedJobList = (req,res,next)=>{
     console.log("candidate_id",req.body.candidate_id);
-     //ApplyJob.find({"candidate_id": req.params.candidate_id}) 
-
+    
     var selector = {};
     var industry_ids = [];
     var funarea_ids = [];
@@ -50,12 +49,9 @@ exports.appliedJobList = (req,res,next)=>{
     selector['$and'] = [];
 
     selector["$and"].push({
-        "location.countryCode": req.body.countryCode
+        "location.countryCode": "IN"
     })
-
-    selector["$and"].push({
-        "candidate_id": req.body.candidate_id
-    })
+    
     // 1
     if (req.body.stateCode && req.body.stateCode != "all") {
         selector["$and"].push({
@@ -114,7 +110,7 @@ exports.appliedJobList = (req,res,next)=>{
             jobsector_ids.push(ObjectId(elem.id))
         })
         selector["$and"].push({
-            "job_id.jobBasicInfo.jobsector_id": {
+            "jobBasicInfo.jobsector_id": {
                 $in: jobsector_ids
             }
         });
@@ -212,37 +208,23 @@ exports.appliedJobList = (req,res,next)=>{
             }
         });
     }
-    console.log("list selector - ", selector);
+    //console.log("list selector - ", selector);
 
-    /*var limit = req.body.startLimit === 0 ? req.body.initialLimit : req.body.showMoreLimit
+    var limit = req.body.startLimit === 0 ? req.body.initialLimit : req.body.showMoreLimit
     console.log(req.body.startLimit)
-    console.log(limit)*/
+    console.log(limit)
     
-    ApplyJob.find(selector).sort({ createdAt: -1 })
-    .populate('job_id' ) 
-    // .populate({path : 'job_id', model : 'jobs',
-    //             populate: {
-    //               path: 'address.addressType',
-    //               model: 'addresstypemasters'
-    //             }
-    //         })
-    // ApplyJob.aggregate([
-    //     { "$match" : { "candidate_id" : ObjectId(req.body.candidate_id) } },
-    //     { "$lookup": {
-    //         "from": "jobs",
-    //         "as": "jobDetails",
-    //         "localField": "job_id",
-    //         "foreignField": "_id"
-    //     }}
-    // ])    
+    ApplyJob.find({"candidate_id": req.body.candidate_id}).sort({ createdAt: -1 })
+    .populate( 'job_id', null, selector )   
     .exec(function(err, jobs) {
             console.log(err)
             if (err) return res.status(500).json({
                 error: err
             });
-                console.log(jobs)
+                //console.log("jobs",jobs)
             res.status(200).json(jobs);
         });
+    
 };
 exports.appliedJobCount = (req,res,next)=>{
     //console.log(req.params.candidate_id);

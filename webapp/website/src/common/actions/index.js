@@ -165,12 +165,15 @@ export function filterJobList(selector) {
 	    }) 
   	}  
 }
-export function getJobWishlist(candidate_id) {
+export function getJobWishlist(jobWishlistSelector) {
   	return dispatch =>{
-  		var formValue={"candidate_id":candidate_id}
-	  	return axios.post("/api/wishlist/candidateWishlist",formValue)
+  		//var formValue={"candidate_id":candidate_id}
+      dispatch(showLoader(true));
+      dispatch(setJobWishlistFilterSelector(jobWishlistSelector));
+      
+	  	return axios.post("/api/wishlist/candidateWishlist",jobWishlistSelector)
 	    .then((response)=>{
-	     	
+	     	  dispatch(showLoader(false));
 	        dispatch(setJobWishlist(response.data ));
 	    })
 	    .catch((error)=>{

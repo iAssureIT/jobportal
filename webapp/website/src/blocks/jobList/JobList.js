@@ -75,7 +75,9 @@ handleclick = (jobid)=>{
 		Axios.post("/api/wishlist/post",formValues)
 			.then(response =>{
 				var {mapAction} = this.props;
-				mapAction.getJobWishlist(this.props.userDetails.candidate_id);
+				var jobWishlistSelector = this.props.jobWishlistSelector;
+			    jobWishlistSelector.candidate_id = this.props.userDetails.candidate_id;
+			    mapAction.getJobWishlist(jobWishlistSelector);
 
 				console.log("wishlist response=", response.data);
 				if(response.data.message==="Job is removed from wishlist"){
@@ -244,10 +246,9 @@ removeApplication = (job_id) => {
 							this.props.jobList 
 							?
 								this.props.jobList.map((elem,index)=>{
-									//console.log(elem._id )
 									
 								var x = this.props.jobWishlist && this.props.jobWishlist.length > 0 ?
-								this.props.jobWishlist.filter((wishlistitem) => wishlistitem.wishlistItems.job_id._id == elem._id) : [];
+								this.props.jobWishlist[0].wishlistItems.filter((wishlistitem) => wishlistitem.job_id._id == elem._id) : [];
 				                
 				                if (x && x.length > 0) {
 				                  var wishClass = '';
@@ -259,7 +260,7 @@ removeApplication = (job_id) => {
 
 				                var y = this.props.appliedJoblist && this.props.appliedJoblist.length > 0 ?
 								this.props.appliedJoblist.filter((applieditem) => applieditem.job_id._id == elem._id) : [];
-				                console.log(this.props.appliedJoblist)
+				                //console.log(this.props.appliedJoblist)
 				                //console.log(elem._id)
 				                if (y && y.length > 0) {
 				                  var appliedClass = '';

@@ -16,12 +16,16 @@ class CandidateApplyJoblist extends Component {
       
     }
   } 
-  
+   
   componentDidMount(){
       var {mapAction} = this.props; 
       var appliedJobSelector  = this.props.appliedJobSelector;
       appliedJobSelector.candidate_id = this.props.userDetails.candidate_id;
-      mapAction.getAppliedJoblist(appliedJobSelector);
+      mapAction.getAppliedJoblist(appliedJobSelector); 
+
+      var jobWishlistSelector = this.props.jobWishlistSelector;
+      jobWishlistSelector.candidate_id = this.props.userDetails.candidate_id;
+      mapAction.getJobWishlist(jobWishlistSelector);
   }
 
 
@@ -43,15 +47,15 @@ class CandidateApplyJoblist extends Component {
             </div>
           </div>  
         </div>
-    </div>
+      </div>
     );
   }
 }
 const mapStateToProps = (state)=>{
     return {
-      userDetails       : state.userDetails,      selector      : state.selector, 
-      appliedJobSelector: state.appliedJobSelector,  
-      appliedJoblist    : state.appliedJoblist,   jobWishlist   : state.jobWishlist
+      userDetails       : state.userDetails,          selector      : state.selector, 
+      appliedJobSelector: state.appliedJobSelector,   jobWishlistSelector : state.jobWishlistSelector,
+      appliedJoblist    : state.appliedJoblist,       jobWishlist   : state.jobWishlist
     }
 }
 const mapDispatchToProps = (dispatch) => ({

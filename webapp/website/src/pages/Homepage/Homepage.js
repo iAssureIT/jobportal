@@ -37,7 +37,6 @@ class HomePage extends Component {
     var selector = this.props.selector;
     var appliedJobSelector  = this.props.appliedJobSelector;
     appliedJobSelector.candidate_id = this.props.userDetails.candidate_id;
-    console.log(appliedJobSelector)
     mapAction.getAppliedJoblist(appliedJobSelector);
 
 
@@ -281,7 +280,7 @@ class HomePage extends Component {
     mapAction.jobCount(selector);
   }
   render() {
-    console.log(this.props.viewMode) 
+    //console.log(this.props.viewMode) 
     return (
       <div className="ViewBodyWrapper container-fluid">
 
