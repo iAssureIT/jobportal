@@ -65,7 +65,7 @@ const jobsSchema = mongoose.Schema({
 								skill_id : { type: mongoose.Schema.Types.ObjectId, ref: 'skillmasters' }
 							}],
 					 	},
-	
+	status			: 	String,
 	createdAt 		: 	Date,
 	createdBy 		: 	String,
 	fileName        : 	String,

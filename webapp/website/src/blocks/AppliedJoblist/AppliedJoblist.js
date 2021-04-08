@@ -2,10 +2,12 @@ import React, {Component} from 'react';
 
 import Axios from  'axios';
 import Swal  from  'sweetalert2';
-
+import { connect }        from 'react-redux';
+import { bindActionCreators } from 'redux';
+import  * as mapActionCreator from '../../common/actions/index';
 import "./AppliedJoblist.css";
 
-export default class AppliedJoblist extends Component{
+class AppliedJoblist extends Component{
 	constructor(props){
 	super(props);
 	this.state={
@@ -18,7 +20,92 @@ export default class AppliedJoblist extends Component{
 componetDidMount(){
 	
 }
+removeApplication = (job_id) => {
+	console.log(job_id)
+	if (this.props.userDetails.loggedIn) {
+		var formValues = { 
+			candidate_id   		: this.props.userDetails.candidate_id,
+			job_id         		: job_id
+		}
+		Swal.fire({
+		title 				: 'Are you sure, do you want to remove this job application?',
+		icon 				: 'success',
+		showCancelButton 	: true,
+		confirmButtonText 	: 'Yes, remove it!',
+		cancelButtonColor 	: 'No, keep it',
+		confirmButtonColor  : '#db3700',
 	
+		}).then((result) =>{
+			if(result.value){
+
+				Axios.post("/api/applyJob/removeApplication", formValues)
+				.then(response =>{
+					
+					var {mapAction} = this.props;
+					var appliedJobSelector  = this.props.appliedJobSelector;
+				    appliedJobSelector.candidate_id = this.props.userDetails.candidate_id;
+				    mapAction.getAppliedJoblist(appliedJobSelector);
+					//mapAction.getAppliedJoblist(this.props.userDetails.candidate_id);
+
+					if(response.data.deleted){
+
+						Swal.fire(
+									'Applied!',
+									'You have removed job application!',
+									'success'
+							);
+					}
+				})
+				.catch(error=>{
+					Swal.fire(
+								"Some problem occured while removing job application!",
+								error.message,
+								'error'
+						)
+				})
+			}
+
+		})
+	}else{
+		document.getElementById("loginbtndiv").click();
+	}
+}	
+handleclick = (jobid)=>{
+	console.log("jobid : ", jobid);
+	this.setState({isToggle:!this.state.isToggle})
+	if (this.props.userDetails.loggedIn) {
+		var formValues = {
+			candidate_id: this.props.userDetails.candidate_id,
+			job_id  	: jobid,
+			createdBy   : this.props.userDetails.user_id
+		}
+		Axios.post("/api/wishlist/post",formValues)
+			.then(response =>{
+				var {mapAction} = this.props;
+				mapAction.getJobWishlist(this.props.userDetails.candidate_id);
+
+				console.log("wishlist response=", response.data);
+				if(response.data.message==="Job is removed from wishlist"){
+							Swal.fire(
+									'Removed!',
+									'Job is removed from wishlist',
+									'success'
+							);
+				}else{
+					Swal.fire(
+									'Added!',
+									'Job is added to wishlist',
+									'success'
+							);
+				}
+			})
+			.catch(error=>{
+				console.log(error);
+			})	
+	}else{
+		document.getElementById("loginbtndiv").click();
+	}
+}
 	render(){
 		return(
 			<section className="jobListWrapper">
@@ -42,17 +129,17 @@ componetDidMount(){
 															<div className="iconsBar">
 																<ul>	
 																	{
-																	elem.jobDetails[0].jobBasicInfo.gender=="Male Only"?
+																	elem.job_id.jobBasicInfo.gender=="Male Only"?
 																	<li><i className="fa fa-male" title="Only male candidates can apply"></i></li>
-																	: elem.jobDetails[0].jobBasicInfo.gender=="Female Only"?
+																	: elem.job_id.jobBasicInfo.gender=="Female Only"?
 																	<li><i className="fa fa-female" title="Only female candidates can apply"></i></li> 
 																	: <li><i className="fa fa-male" title="male & female candidates both can apply"></i><i className="fa fa-female bothIcon" title="male & female candidates both can apply"></i></li>
 																	}
 																	{	 
-																		elem.jobDetails[0].jobBasicInfo.jobshift_id ? 
-																		elem.jobDetails[0].jobBasicInfo.jobshift_id.jobShift=="Day Shift" ?
+																		elem.job_id.jobBasicInfo.jobshift_id ? 
+																		elem.job_id.jobBasicInfo.jobshift_id.jobShift=="Day Shift" ?
 																		<li><i className="fa fa-sun-o" title="Day Shift"></i></li>
-																		: elem.jobDetails[0].jobBasicInfo.jobshift_id.jobShift=="Night Shift"?
+																		: elem.job_id.jobBasicInfo.jobshift_id.jobShift=="Night Shift"?
 																		<li><i className="fa fa-moon-o" title="Night Shift"></i></li> 
 																		: <li><i className="fa fa-repeat" title="Rotational shift"></i></li> 
 																		:
@@ -60,10 +147,10 @@ componetDidMount(){
 																		
 																	}	
 																	{	
-																		elem.jobDetails[0].jobBasicInfo.jobtime_id.jobTime=="Full Time"?
+																		elem.job_id.jobBasicInfo.jobtime_id.jobTime=="Full Time"?
 																		<li><i className="fa fa-clock-o" title="Full Time"></i></li>
-																		: elem.jobDetails[0].jobBasicInfo.jobtime_id.jobTime=="Part Time" ? <li><i className="fa fa-hourglass-start" title="Part Time"></i></li>
-																		: elem.jobDetails[0].jobBasicInfo.jobtime_id.jobTime=="Hourly Basis"? 
+																		: elem.job_id.jobBasicInfo.jobtime_id.jobTime=="Part Time" ? <li><i className="fa fa-hourglass-start" title="Part Time"></i></li>
+																		: elem.job_id.jobBasicInfo.jobtime_id.jobTime=="Hourly Basis"? 
 																		<li><i className="fa fa-hourglass-o" title="Hourly Basis"></i></li> 
 																		: <li><i className="fa fa-hourglass-o" title="Hourly Basis"></i></li> 
 																	}
@@ -72,23 +159,23 @@ componetDidMount(){
 															</div>
 														</div>
 														<div className="jobListDesignation">
-															{elem.jobDetails[0].jobBasicInfo.jobTitle}
+															{elem.job_id.jobBasicInfo.jobTitle}
 														</div>
 														<div className="jobListCompanyName">
 															{/*<b>{elem.company_id ? elem.company_id.companyName : null}</b>*/}
 															{elem.company_id ? elem.company_id.companyName : "Anonymous"}
 														</div>
 														<div> 
-															<i className="fa fa-calendar jobListExperience"></i> &nbsp; Exp: {elem.jobDetails[0].eligibility.minExperience}
+															<i className="fa fa-calendar jobListExperience"></i> &nbsp; Exp: {elem.job_id.eligibility.minExperience}
 														</div>
 														<div> 
-															<i className="fa fa-rupee jobListMonSal"></i> &nbsp; <i className="fa fa-inr"></i> {elem.jobDetails[0].ctcOffered.minSalary} - <i className="fa fa-inr"></i> {elem.jobDetails[0].ctcOffered.maxSalary} a month
+															<i className="fa fa-rupee jobListMonSal"></i> &nbsp; <i className="fa fa-inr"></i> {elem.job_id.ctcOffered.minSalary} - <i className="fa fa-inr"></i> {elem.job_id.ctcOffered.maxSalary} a month
 														</div>
 														<div className="joblistLocationInfo">
-															<i className="fa fa-map-marker jobListLocation"></i> &nbsp; {elem.jobDetails[0].location.address + " "+ elem.jobDetails[0].location.district + ", "+elem.jobDetails[0].location.state+", "+elem.jobDetails[0].location.country}
+															<i className="fa fa-map-marker jobListLocation"></i> &nbsp; {elem.job_id.location.address + " "+ elem.job_id.location.district + ", "+elem.job_id.location.state+", "+elem.job_id.location.country}
 														</div>
 														<div> 
-															<i className="fa fa-users jobListNumPositions"></i> &nbsp; No of position : 10
+															<i className="fa fa-users jobListNumPositions"></i> &nbsp; No of position : {elem.job_id.jobBasicInfo.positions}
 														</div>
 													</div>
 													<div className="col-lg-1 jobListRightContent">
@@ -97,6 +184,8 @@ componetDidMount(){
 																<div className="jobProfileVerticleIcons">
 																	<ul>
 																		{/*<li><i className="fa fa-check" onClick={this.applyJob}></i></li>*/}
+																		<li><i title="Remove from applied job" className={"fa fa-check-square"}  onClick={ removeApplication => this.removeApplication(elem.job_id._id) } ></i></li>
+																	
 																		<li><i onClick={wishlist => this.handleclick(elem._id)} className={this.state.isToggle ? 'fa fa-heart-o':'fa fa-heart'}></i></li>
 																		{/*<li><i className="fa fa-youtube-play"></i></li>*/}
 																	</ul>
@@ -117,3 +206,15 @@ componetDidMount(){
 		);
 	}
 }
+const mapStateToProps = (state)=>{
+    return {
+    	userDetails 	: state.userDetails, 	appliedJobSelector : state.appliedJobSelector,		
+    	jobList 		: state.jobList,		jobCount  	: state.jobCount,
+    	jobWishlist 	: state.jobWishlist, 
+    	appliedJoblist  : state.appliedJoblist
+    }
+}
+const mapDispatchToProps = (dispatch) => ({
+  mapAction :  bindActionCreators(mapActionCreator, dispatch)
+}) 
+export default connect(mapStateToProps, mapDispatchToProps) (AppliedJoblist);

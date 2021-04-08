@@ -62,9 +62,17 @@ export const appendJobList = (jobList )=> ({
       type           : 'APPEND_JOB_LIST',
       jobList        : jobList
 });
+export const setJobWishlistFilterSelector = (jobWishlistSelector )=> ({
+      type        : 'SET_WISHLIST_FILTER_SELECTOR',
+      jobWishlistSelector      : jobWishlistSelector
+});
 export const setJobWishlist = (jobWishlist )=> ({
       type 				: 'GET_JOB_WISHLIST',
-      jobWishlist 		: jobWishlist
+      jobWishlist : jobWishlist
+});
+export const setAppliedJobFilterSelector = (appliedJobSelector )=> ({
+      type        : 'SET_APPLIEDJOB_FILTER_SELECTOR',
+      appliedJobSelector      : appliedJobSelector
 });
 export const setAppliedJoblist = (appliedJoblist )=> ({
       type 				: 'GET_APPLIED_JOBLIST',
@@ -170,12 +178,16 @@ export function getJobWishlist(candidate_id) {
 	    }) 
   	}  
 }
-export function getAppliedJoblist(candidate_id) {
+export function getAppliedJoblist(appliedJobSelector) { 
   	return dispatch =>{
-  		var formValue={"candidate_id":candidate_id}
-  		console.log(formValue)
-	  	return axios.post("/api/applyJob/get/appliedJobList",formValue)
+  		//var formValue={"candidate_id":candidate_id}
+  		console.log(appliedJobSelector)
+      dispatch(showLoader(true));
+      dispatch(setAppliedJobFilterSelector(appliedJobSelector));
+
+	  	return axios.post("/api/applyJob/get/appliedJobList",appliedJobSelector)
 	    .then((response)=>{
+          dispatch(showLoader(false));
 	        dispatch(setAppliedJoblist(response.data ));
 	    })
 	    .catch((error)=>{
