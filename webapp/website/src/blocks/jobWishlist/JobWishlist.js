@@ -182,8 +182,11 @@ removeApplication = (job_id) => {
 							this.props.jobWishlist[0]
 							?
 								this.props.jobWishlist[0].wishlistItems.map((elem,index)=>{
+									console.log(elem.job_id)
+									
 									//console.log(elem)
-									var y = this.props.appliedJoblist && this.props.appliedJoblist.length > 0 ?
+									
+									var y = this.props.appliedJoblist && this.props.appliedJoblist.length > 0 && elem.job_id ?
 									this.props.appliedJoblist.filter((applieditem) => applieditem.job_id._id == elem.job_id._id) : [];
 					                //console.log(this.props.appliedJoblist)
 					                //console.log(elem._id)
@@ -194,7 +197,10 @@ removeApplication = (job_id) => {
 					                  var appliedClass = '-o';
 					                  var appliedtooltipMsg = 'Apply Job';
 					                }
+					               	
 									return(
+										<div>
+									 	{ elem.job_id ?
 										<div className="col-lg-6">
 											<div className="appliedJobListContainer">
 												<div className="col-lg-12">
@@ -267,7 +273,13 @@ removeApplication = (job_id) => {
 												</div>	
 											</div>
 										</div>
+
+										: null
+										}
+										</div>	
 									);
+									
+									
 								})
 							:
 								null

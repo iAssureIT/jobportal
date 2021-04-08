@@ -43,7 +43,7 @@ class JobWishlistFilters extends Component{
       functionalArea        : [],
       role                  : '-',
       experience            : '-',
-      appliedJobSelector    : {},
+      jobWishlistSelector    : {},
       
     };
 
@@ -230,88 +230,88 @@ class JobWishlistFilters extends Component{
   }
 
   onSelectedItemsChange(filterType, selecteditems){
-    var appliedJobSelector=this.state.appliedJobSelector;
+    var jobWishlistSelector=this.state.jobWishlistSelector;
     
     var {mapAction} = this.props;
     console.log(selecteditems)
-    appliedJobSelector.countryCode = "IN"; 
+    jobWishlistSelector.countryCode = "IN"; 
 
-    appliedJobSelector.candidate_id = this.props.userDetails.candidate_id;
+    jobWishlistSelector.candidate_id = this.props.userDetails.candidate_id;
     
 
-    //appliedJobSelector.stateCode = selecteditems.currentTarget.value; 
+    //jobWishlistSelector.stateCode = selecteditems.currentTarget.value; 
     // if (this.props.match.path=="/") {
-    //   appliedJobSelector.stateCode = this.props.match.params.stateCode
+    //   jobWishlistSelector.stateCode = this.props.match.params.stateCode
     // }
     if (this.props.match.path=="/country/:countryCode/state/:stateCode/city/:district/industry/:industryName/:industry_id/function/:functionalArea/:functionalArea_id/subfunction/:subfunctionalArea/:subfunctionalArea_id") {
       
-      appliedJobSelector.stateCode = this.props.match.params.stateCode
-      appliedJobSelector.district = this.props.match.params.district
+      jobWishlistSelector.stateCode = this.props.match.params.stateCode
+      jobWishlistSelector.district = this.props.match.params.district
 
     }
     
     if (filterType === 'industry') {
       if (selecteditems.length > 0) {
-        appliedJobSelector.industry_id = selecteditems;
+        jobWishlistSelector.industry_id = selecteditems;
       }else{
-        delete appliedJobSelector.industry_id;
+        delete jobWishlistSelector.industry_id;
       }
     }
 
     if (filterType === 'functionalArea') {
       if (selecteditems.length > 0) {
-        appliedJobSelector.functionalArea_id = selecteditems;
+        jobWishlistSelector.functionalArea_id = selecteditems;
       }else{
-        delete appliedJobSelector.functionalArea_id
+        delete jobWishlistSelector.functionalArea_id
       }
     }
     if (filterType === 'jobSector') {
       if (selecteditems.length > 0) {
-        appliedJobSelector.jobSector_id = selecteditems;
+        jobWishlistSelector.jobSector_id = selecteditems;
       }else{
-        delete appliedJobSelector.jobSector_id
+        delete jobWishlistSelector.jobSector_id
       }
     }
     if (filterType === 'jobType') {
       if (selecteditems.length > 0) {
-        appliedJobSelector.jobType_id = selecteditems;
+        jobWishlistSelector.jobType_id = selecteditems;
       }else{
-        delete appliedJobSelector.jobType_id
+        delete jobWishlistSelector.jobType_id
       }
     }
     if (filterType === 'jobTime') {
       if (selecteditems.length > 0) {
-        appliedJobSelector.jobTime_id = selecteditems;
+        jobWishlistSelector.jobTime_id = selecteditems;
       }else{
-        delete appliedJobSelector.jobTime_id
+        delete jobWishlistSelector.jobTime_id
       }
     }
     if (filterType === 'jobShift') {
       if (selecteditems.length > 0) {
-        appliedJobSelector.jobShift_id = selecteditems;
+        jobWishlistSelector.jobShift_id = selecteditems;
       }else{
-        delete appliedJobSelector.jobShift_id
+        delete jobWishlistSelector.jobShift_id
       }
     }
     if (filterType === 'jobRole') {
       if (selecteditems.length > 0) {
-        appliedJobSelector.jobRole_id = selecteditems;
+        jobWishlistSelector.jobRole_id = selecteditems;
       }else{
-        delete appliedJobSelector.jobRole_id
+        delete jobWishlistSelector.jobRole_id
       }
     }
     if (filterType === 'skill') {
       if (selecteditems.length > 0) {
-        appliedJobSelector.skill_id = selecteditems;
+        jobWishlistSelector.skill_id = selecteditems;
       }else{
-        delete appliedJobSelector.skill_id
+        delete jobWishlistSelector.skill_id
       }
     }
     if (filterType === 'qualification') {
       if (selecteditems.length > 0) {
-        appliedJobSelector.qualification_id = selecteditems;
+        jobWishlistSelector.qualification_id = selecteditems;
       }else{
-        delete appliedJobSelector.qualification_id
+        delete jobWishlistSelector.qualification_id
       }
     }
     if (filterType === "experience") {
@@ -325,17 +325,17 @@ class JobWishlistFilters extends Component{
 
       //console.log('min: ' + minValue, ' max: ' + maxValue);
 
-      appliedJobSelector.minExp = minValue
-      appliedJobSelector.maxExp = maxValue
+      jobWishlistSelector.minExp = minValue
+      jobWishlistSelector.maxExp = maxValue
     }
     
-    appliedJobSelector.startLimit     = 0;
-    appliedJobSelector.initialLimit   = 25;
-    appliedJobSelector.showMoreLimit  = 25;
+    jobWishlistSelector.startLimit     = 0;
+    jobWishlistSelector.initialLimit   = 25;
+    jobWishlistSelector.showMoreLimit  = 25; 
       
-    this.setState({ appliedJobSelector: appliedJobSelector },()=>{
-        //mapAction.jobCount(this.state.appliedJobSelector);
-        mapAction.getAppliedJoblist(appliedJobSelector);
+    this.setState({ jobWishlistSelector: jobWishlistSelector },()=>{
+        //mapAction.jobCount(this.state.jobWishlistSelector);
+        mapAction.getJobWishlist(jobWishlistSelector);
 
       
     })

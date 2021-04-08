@@ -135,7 +135,8 @@ handleclick = (jobid)=>{
 					                  var tooltipMsg = 'Add to wishlist';
 					                }
 									return(
-										elem.job_id ?
+										<div>
+									 	{ elem.job_id ?
 										<div className="col-lg-6">
 											<div className="appliedJobListContainer">
 												<div className="col-lg-12">
@@ -213,6 +214,8 @@ handleclick = (jobid)=>{
 											</div>
 										</div>
 										: null
+										}
+										</div>	
 									);
 								})
 							:
