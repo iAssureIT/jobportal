@@ -250,11 +250,11 @@ deleteJob = (event)=>{
 									<button className="btn buttonYellow" style={{float:"right", margin:"20px 0"}} onClick={this.showMore.bind(this)}>Show {this.props.selector.showMoreLimit} More</button>
 						        
 						        	: 
-						        	<button className="btn buttonYellow" style={{float:"right", margin:"20px 0"}} onClick={this.showMore.bind(this)}> Show More </button>
-						        
+						        	<button className="btn buttonYellow" style={{float:"right", margin:"20px 0"}} onClick={this.showMore.bind(this)}> Show More </button> 
 								}
 						    </div>
 						</div>
+						
 						<div id="inactivejobs" class="tab-pane fade">
 							{
 								this.props.jobList.length>0
@@ -382,10 +382,10 @@ deleteJob = (event)=>{
 						        
 						        	: 
 						        	<button className="btn buttonYellow" style={{float:"right", margin:"20px 0"}} onClick={this.showMore.bind(this)}> Show More </button>
-						        
 								}
 						    </div>
 						</div>
+						
 						<div id="draftjobs" class="tab-pane fade">
 							{
 								this.props.jobList.length>0
@@ -513,7 +513,6 @@ deleteJob = (event)=>{
 						        
 						        	: 
 						        	<button className="btn buttonYellow" style={{float:"right", margin:"20px 0"}} onClick={this.showMore.bind(this)}> Show More </button>
-						        
 								}
 						    </div>
 						</div>
