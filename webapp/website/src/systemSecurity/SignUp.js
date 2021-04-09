@@ -364,7 +364,7 @@ class SignUp extends Component {
   }
 	render() {
 		return (
-			<section className="container-fluid registrationFormWrapper">
+			<section className="registrationFormWrapper col-lg-12 col-md-12">
 
           <div className="img1LoginSU">
               <img src="/images/Sign_In/1.png" alt="img1Login" className="img1oginInnerSU"/>
@@ -389,17 +389,17 @@ class SignUp extends Component {
            <div className="img6LoginSU">
               <img src="/images/Sign_In/6.png" alt="img6Login" className="img6loginInnerSU"/>
           </div>
-                <div className="registrationForm col-lg-6 col-lg-offset-3">
+                <div className="registrationForm col-lg-4 col-lg-offset-4">
                   <form>
 
                     <div className="signUpTitle col-lg-12">Sign Up
                     </div>
 
-                    <div className="row">
+                     {/*<div className="row">
                       <hr className="registrationHr"/>
                     </div>
                    
-                    {/*<div className="form-group col-lg-12">
+                   <div className="form-group col-lg-12">
                         <div className="input-group">
                         <span className="input-group-addon registrationInputIcon1"><i className="fa fa-envelope"></i></span>
                         <select className="form-control col-lg-12 registrationInputBox registrationCompany" id="currentCompany" name="currentCompany" value={this.state.currentCompany} onChange={this.handleChange1.bind(this)}>
@@ -416,7 +416,7 @@ class SignUp extends Component {
                     </div>*/}
 
                   
-                    <div className="col-lg-12 form-group" >
+                    <div className="col-lg-10 col-lg-offset-1 form-group" >
                         <div className="input-group">
                             <span className="input-group-addon registrationInputIcon"><i className="fa fa-user"></i></span>
                             <input type="text" id="firstName" name="firstName" placeholder="First Name" value={this.state.firstName} onChange={this.handleChange.bind(this)} className="form-control registrationInputBox"/>
@@ -424,7 +424,7 @@ class SignUp extends Component {
                          <span id="firstNameError" className="errorMsg"></span>
                     </div>
 
-                    <div className="col-lg-12 form-group" >
+                    <div className="col-lg-10 col-lg-offset-1 form-group" >
                         <div className="input-group">
                             <span className="input-group-addon registrationInputIcon"><i className="fa fa-user"></i></span>
                             <input type="text" id="lastName" name="lastName" placeholder="Last Name" value={this.state.lastName} onChange={this.handleChange.bind(this)} className="form-control registrationInputBox"/>
@@ -434,7 +434,7 @@ class SignUp extends Component {
                  
 
                  
-                    <div className="col-lg-12 form-group" >
+                    <div className="col-lg-10 col-lg-offset-1 form-group" >
                         <div className="input-group">
                             <span className="input-group-addon registrationInputIcon1"><i className="fa fa-envelope"></i></span>
                             <input type="email" id="emailAddress" name="emailAddress" placeholder="Email Address" value={this.state.emailAddress} onChange={this.handleChange.bind(this)} className="form-control registrationInputBox"/>
@@ -442,8 +442,8 @@ class SignUp extends Component {
                          <span id="emailAddressError" className="errorMsg"></span>
                     </div>
 
-                    <div className="col-lg-12 form-group" >
-                       
+                    <div className="col-lg-10 col-lg-offset-1 form-group" >
+                  
                          <PhoneInput
                                   country={'in'}
                                   value={this.state.mobileNumber}
@@ -460,7 +460,7 @@ class SignUp extends Component {
                     
 
                    
-                     <div className="col-lg-12 form-group" >
+                     <div className="col-lg-10 col-lg-offset-1 form-group" >
                         <div className="input-group">
                             <span className="input-group-addon registrationInputIcon"><i className="fa fa-lock"></i></span>
                             <input type="password" id="password" name="password" placeholder="Password" value={this.state.password} onChange={this.handleChange.bind(this)} className="form-control registrationInputBox"/>
@@ -471,7 +471,7 @@ class SignUp extends Component {
                          <span id="passwordError" className="errorMsg"></span>
                     </div>
 
-                    <div className="col-lg-12 form-group" >
+                    <div className="col-lg-10 col-lg-offset-1 form-group" >
                         <div className="input-group">
                             <span className="input-group-addon registrationInputIcon"><i className="fa fa-lock"></i></span>
                             <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" value={this.state.confirmPassword} onChange={this.handleChange.bind(this)} className="form-control registrationInputBox"/>
@@ -482,10 +482,16 @@ class SignUp extends Component {
                          <span id="confirmPasswordError" className="errorMsg"></span>
                     </div>
                    
+                    <div className="col-lg-10 col-lg-offset-1" >
+                        <div className="col-lg-6">
+                        </div>
 
-                    <div className="col-lg-6 col-lg-offset-3 buttonWrapper">
-                   <button className="btn col-lg-12 buttonSignUp" onClick={this.usersignup.bind(this)}>Sign Up</button>
-                  </div>
+                        <div className="col-lg-6  buttonWrapper">
+                          <div className="row">
+                            <button className="btn col-lg-12 buttonSignUp" onClick={this.usersignup.bind(this)}>Sign Up</button>
+                          </div>
+                        </div>
+                    </div>    
 
                   <div className="col-lg-12 registrationLinks" >
                     <a className="alreadyAccount" href="#" onClick={this.ShowLogin.bind(this)}><u>Already have an Account?Sign In</u></a>
