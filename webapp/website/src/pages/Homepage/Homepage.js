@@ -35,9 +35,16 @@ class HomePage extends Component {
     
     var {mapAction} = this.props;
     var selector = this.props.selector;
-    mapAction.getJobWishlist(this.props.userDetails.candidate_id);
-    mapAction.getAppliedJoblist(this.props.userDetails.candidate_id);
+    var appliedJobSelector  = this.props.appliedJobSelector;
+    appliedJobSelector.candidate_id = this.props.userDetails.candidate_id;
+    mapAction.getAppliedJoblist(appliedJobSelector);
 
+
+    var jobWishlistSelector = this.props.jobWishlistSelector;
+    jobWishlistSelector.candidate_id = this.props.userDetails.candidate_id;
+
+    mapAction.getJobWishlist(jobWishlistSelector);
+    
     selector.countryCode = "IN"; 
     
     //========== HomePage =============// 
@@ -273,7 +280,7 @@ class HomePage extends Component {
     mapAction.jobCount(selector);
   }
   render() {
-    console.log(this.props.viewMode) 
+    //console.log(this.props.viewMode) 
     return (
       <div className="ViewBodyWrapper container-fluid">
 
@@ -352,6 +359,8 @@ const mapStateToProps = (state)=>{
     return {
         userDetails       : state.userDetails,
         selector          : state.selector,
+        appliedJobSelector  : state.appliedJobSelector,
+        jobWishlistSelector : state.jobWishlistSelector,
         mapJobs           : state.mapJobs,
         functionalJobs    : state.functionalJobs,
         subfunctionalJobs : state.subfunctionalJobs,

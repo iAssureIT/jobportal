@@ -56,7 +56,7 @@ export default class JobPostProfile extends Component{
 						otherSkillTags      :   [],
 						minOtherExp	 		: 	"",
 						
-						preferredSkillTags  :   [],
+						preferredSkillTags  :   []
 		}
 
 	}	
@@ -149,7 +149,7 @@ export default class JobPostProfile extends Component{
 					otherSkillTags 	    : 	otherSkillTags,
 					minOtherExp 		: 	response.data.requiredSkills.minOtherExp,
 					
-					preferredSkillTags  :   preferredSkillTags,
+					preferredSkillTags  :   preferredSkillTags
                 })
 			})
         .catch(error=>{	Swal.fire("Some Error Occured during data fetch",error.message,'error'); })

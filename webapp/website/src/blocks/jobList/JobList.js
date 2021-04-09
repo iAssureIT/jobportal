@@ -75,7 +75,9 @@ handleclick = (jobid)=>{
 		Axios.post("/api/wishlist/post",formValues)
 			.then(response =>{
 				var {mapAction} = this.props;
-				mapAction.getJobWishlist(this.props.userDetails.candidate_id);
+				var jobWishlistSelector = this.props.jobWishlistSelector;
+			    jobWishlistSelector.candidate_id = this.props.userDetails.candidate_id;
+			    mapAction.getJobWishlist(jobWishlistSelector);
 
 				console.log("wishlist response=", response.data);
 				if(response.data.message==="Job is removed from wishlist"){
@@ -131,7 +133,7 @@ applyJob = (jobid, company_id)=>{
 		title 				: 'Are you sure, do you want to apply for this job?',
 		icon 				: 'success',
 		showCancelButton 	: true,
-		confirmButtonText 	: 'Yes, Add it!',
+		confirmButtonText 	: 'Apply',
 		cancelButtonColor 	: 'No, keep it',
 		confirmButtonColor  : '#f5a721',
 	
@@ -141,8 +143,11 @@ applyJob = (jobid, company_id)=>{
 			Axios.post("/api/applyJob/post", formValues)
 				.then(response =>{
 					
-					var {mapAction} = this.props;
-					mapAction.getAppliedJoblist(this.props.userDetails.candidate_id);
+					var {mapAction} = this.props; 
+					var appliedJobSelector  = this.props.appliedJobSelector;
+				    appliedJobSelector.candidate_id = this.props.userDetails.candidate_id;
+				    
+					mapAction.getAppliedJoblist(appliedJobSelector);
 
 					if(response.data.message==="You have applied to job"){
 
@@ -196,7 +201,10 @@ removeApplication = (job_id) => {
 				.then(response =>{
 					
 					var {mapAction} = this.props;
-					mapAction.getAppliedJoblist(this.props.userDetails.candidate_id);
+					var appliedJobSelector  = this.props.appliedJobSelector;
+				    appliedJobSelector.candidate_id = this.props.userDetails.candidate_id;
+				    
+					mapAction.getAppliedJoblist(appliedJobSelector);
 
 					if(response.data.deleted){
 
@@ -238,10 +246,9 @@ removeApplication = (job_id) => {
 							this.props.jobList 
 							?
 								this.props.jobList.map((elem,index)=>{
-									//console.log(elem._id )
 									
 								var x = this.props.jobWishlist && this.props.jobWishlist.length > 0 ?
-								this.props.jobWishlist.filter((wishlistitem) => wishlistitem.wishlistItems.job_id == elem._id) : [];
+								this.props.jobWishlist[0].wishlistItems.filter((wishlistitem) => wishlistitem.job_id._id == elem._id) : [];
 				                
 				                if (x && x.length > 0) {
 				                  var wishClass = '';
@@ -252,7 +259,7 @@ removeApplication = (job_id) => {
 				                }
 
 				                var y = this.props.appliedJoblist && this.props.appliedJoblist.length > 0 ?
-								this.props.appliedJoblist.filter((applieditem) => applieditem.job_id == elem._id) : [];
+								this.props.appliedJoblist.filter((applieditem) => applieditem.job_id._id == elem._id) : [];
 				                //console.log(this.props.appliedJoblist)
 				                //console.log(elem._id)
 				                if (y && y.length > 0) {
@@ -274,7 +281,9 @@ removeApplication = (job_id) => {
 																	elem.jobBasicInfo.gender=="Male Only"?
 																	<li><i className="fa fa-male" title="Only male candidates can apply"></i></li>
 																	: elem.jobBasicInfo.gender=="Female Only"?
-																	<li><i className="fa fa-female" title="Only female candidates can apply"></i></li> : <li><i className="fa fa-male" title="male & female candidates both can apply"></i><i className="fa fa-female bothIcon" title="male & female candidates both can apply"></i></li>
+																	<li><i className="fa fa-female" title="Only female candidates can apply"></i></li>
+																	 : <li><i className="fa fa-male" title="male & female candidates both can apply"></i>
+																	 <i className="fa fa-female bothIcon" title="male & female candidates both can apply"></i></li>
 																}
 																{	
 																	elem.jobBasicInfo.jobshift_id ? 
@@ -382,10 +391,10 @@ removeApplication = (job_id) => {
 
 const mapStateToProps = (state)=>{
     return {
-    	userDetails 	: state.userDetails,	selector        : state.selector, 	
-    	jobList 		: state.jobList,		jobCount  	: state.jobCount,
-    	jobWishlist 	: state.jobWishlist, 
-    	appliedJoblist  : state.appliedJoblist
+    	userDetails 	: state.userDetails,	selector        	: state.selector, 	
+    	jobList 		: state.jobList,		jobCount  			: state.jobCount,
+    	jobWishlist 	: state.jobWishlist, 	jobWishlistSelector : state.jobWishlistSelector,
+    	appliedJoblist  : state.appliedJoblist, appliedJobSelector 	: state.appliedJobSelector
     }
 }
 const mapDispatchToProps = (dispatch) => ({

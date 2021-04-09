@@ -48,7 +48,9 @@ const initialState = {
 	industrialJobs 				: [],
 	jobList 					: [],
 	jobWishlist 				: [],
-	appliedJoblist 				: []
+	appliedJoblist 				: [],
+	appliedJobSelector 			: {},
+	jobWishlistSelector 		: {}	
 }
 
 const reducer = (state = initialState,action) => {
@@ -108,6 +110,12 @@ const newState = {...state};
 	}
 	if(action.type === "GET_JOB_WISHLIST"){
 		newState.jobWishlist = action.jobWishlist;
+	}
+	if(action.type === "SET_APPLIEDJOB_FILTER_SELECTOR"){
+		newState.appliedJobSelector = action.appliedJobSelector;
+	}
+	if(action.type === "SET_WISHLIST_FILTER_SELECTOR"){
+		newState.jobWishlistSelector = action.jobWishlistSelector;
 	}
 	if(action.type === "GET_APPLIED_JOBLIST"){
 		newState.appliedJoblist = action.appliedJoblist;

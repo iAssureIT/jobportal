@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import AppliedJoblist      from '../AppliedJoblist/AppliedJoblist.js';
-import LeftSideFilters     from '../LeftSideFilters/LeftSideFilters.js';
+import AppliedJobFilters   from '../AppliedJobFilters/AppliedJobFilters.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { connect }        from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -15,11 +15,17 @@ class CandidateApplyJoblist extends Component {
     this.state={
       
     }
-  }
-  
+  } 
+   
   componentDidMount(){
-      var {mapAction} = this.props;
-      mapAction.getAppliedJoblist(this.props.userDetails.candidate_id);
+      var {mapAction} = this.props; 
+      var appliedJobSelector  = this.props.appliedJobSelector;
+      appliedJobSelector.candidate_id = this.props.userDetails.candidate_id;
+      mapAction.getAppliedJoblist(appliedJobSelector); 
+
+      var jobWishlistSelector = this.props.jobWishlistSelector;
+      jobWishlistSelector.candidate_id = this.props.userDetails.candidate_id;
+      mapAction.getJobWishlist(jobWishlistSelector);
   }
 
 
@@ -29,7 +35,7 @@ class CandidateApplyJoblist extends Component {
         <div className="col-lg-3" style={{"marginTop": "30px"}}>
           <div className="col-lg-12">
             <div className='row'>
-              <LeftSideFilters />
+              <AppliedJobFilters />
             </div>
           </div>
         </div>
@@ -41,14 +47,15 @@ class CandidateApplyJoblist extends Component {
             </div>
           </div>  
         </div>
-    </div>
+      </div>
     );
   }
 }
 const mapStateToProps = (state)=>{
     return {
-      userDetails       : state.userDetails,      selector      : state.selector,   
-      appliedJoblist    : state.appliedJoblist,   jobWishlist   : state.jobWishlist
+      userDetails       : state.userDetails,          selector      : state.selector, 
+      appliedJobSelector: state.appliedJobSelector,   jobWishlistSelector : state.jobWishlistSelector,
+      appliedJoblist    : state.appliedJoblist,       jobWishlist   : state.jobWishlist
     }
 }
 const mapDispatchToProps = (dispatch) => ({

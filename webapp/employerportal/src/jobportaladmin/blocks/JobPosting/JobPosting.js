@@ -112,8 +112,9 @@ class JobPosting extends Component {
             preferredSkillTags          :   [],
             preferredSkillSuggestions   :   [],
 
-            
-            submitBtnText               :   "SUBMIT"
+            status                      :   "Active",
+
+            submitBtnText               :   "PUBLISH"
         }
 
         this.reactTags = React.createRef();
@@ -288,6 +289,7 @@ class JobPosting extends Component {
                         minPrimExp              :   response.data.requiredSkills.minPrimExp,
                         minSecExp               :   response.data.requiredSkills.minSecExp,
                         minOtherExp             :   response.data.requiredSkills.minOtherExp,
+                        status                  :   response.data.status,
                         submitBtnText           :   "UPDATE"
                     })
 
@@ -331,6 +333,7 @@ class JobPosting extends Component {
                             }
                         })
                     }) : primarySkillTags = [];
+                    
                     response.data.requiredSkills.secondarySkills ? 
                     this.state.secondarySkillSuggestions.map((skill,index)=>{
                         response.data.requiredSkills.secondarySkills.map((data,ind)=>{
@@ -638,6 +641,7 @@ class JobPosting extends Component {
         }
         return status;
     }
+    
     getStates() {
         Axios.get("/api/states/get/list/IN").then((response) => {
                 this.setState({
@@ -666,6 +670,14 @@ class JobPosting extends Component {
             gender: id,
         })
     }
+
+    /*setStatus(event) {
+        event.preventDefault();
+        var id = event.currentTarget.id;
+        this.setState({
+            status: id,
+        })
+    }*/
 
     handleSubmit = (event) => { 
         event.preventDefault();
@@ -726,6 +738,8 @@ class JobPosting extends Component {
                 minOtherExp             :   this.state.minOtherExp,
                 preferredSkillTags      :   this.state.preferredSkillTags,
 
+                status                  :   this.state.status
+
             };
 
             console.log("formValues :", formValues);
@@ -743,6 +757,7 @@ class JobPosting extends Component {
         Axios.post("/api/jobs/post", formValues)
 
             .then(response => {
+                console.log(formValues);
                 if (response.data.created) {
                     let job_id = response.data.jobsData._id;
 
@@ -790,6 +805,9 @@ class JobPosting extends Component {
                         otherSkills             :   "",
                         minOtherExp             :   "",
                         preferredSkills         :   "",
+
+                        status                  :   "Active"
+
                     });
 
                     this.props.history.push("/job-profile/" + job_id);
@@ -1789,13 +1807,29 @@ render(){
 									</div>																														
 									
 									<div className="col-lg-7 col-lg-offset-5 pull-right">
-										<button type="button" data-toggle="modal" data-target="#robust" data-dismiss="modal" className="btn addJobFormField addJobPreviewBtn"> 
-											PREVIEW 
-										</button>
+                                        {/*<button className={this.state.status==="Draft"? "btn addJobFormField saveFLBtn pull-left" : "btn addJobFormField saveFLBtn pull-left"} id="Draft" name="status" value="Draft" onClick={this.setStatus.bind(this)}>
+                                            Save for Later 
+                                        </button>
 
-										<PreviewModal jobInfo = {this.state} />
+                                        <button type="button" data-toggle="modal" data-target="#robust" data-dismiss="modal" className="btn addJobFormField addJobPreviewBtn"> 
+                                            PREVIEW 
+                                        </button>
 
-										<button className="btn buttonYellow addJobSubmitBtn"  onClick={this.handleSubmit}> {this.state.submitBtnText} </button>
+                                        <PreviewModal jobInfo = {this.state} />
+
+                                        <button className={this.state.status==="Active"? "btn buttonYellow addJobSubmitBtn" : "btn buttonYellow addJobSubmitBtn"} id="Active" name="status" value="Active"  onClick={this.setStatus.bind(this)}> {this.state.submitBtnText} </button>*/}
+                                         
+                                        <button className="btn addJobFormField saveFLBtn pull-left">
+                                            Save for Later 
+                                        </button>
+
+                                        <button type="button" data-toggle="modal" data-target="#robust" data-dismiss="modal" className="btn addJobFormField addJobPreviewBtn"> 
+                                            PREVIEW 
+                                        </button>
+
+                                        <PreviewModal jobInfo = {this.state} />
+
+                                        <button className="btn buttonYellow addJobSubmitBtn"  onClick={this.handleSubmit}> {this.state.submitBtnText} </button>
 									</div>
 								</form>
 							</div>

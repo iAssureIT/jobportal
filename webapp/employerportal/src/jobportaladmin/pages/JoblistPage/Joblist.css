@@ -402,11 +402,18 @@ color: #fff;
 /***********************************/
 
 .btnsRow{
+	padding-top: 30px;
 	text-align: center;
 }
 
-.activeBtn{
-	padding: 10px;
+.nav-pills>li.active>a{
+    color: #fff;
+    background-color: var(--form-field-background-color);
+    font-weight: 600;
+}
+
+/*.activeBtn{
+	padding: 13px;
 	border-radius: 4px;
 	background-color: var(--main-border-color);
 	margin-right: 30px;
@@ -417,33 +424,47 @@ color: #fff;
 }
 
 .inactiveBtn{
-	padding: 10px;
+	padding: 13px;
 	border-radius: 4px;
 	margin-top: 30px;
 	cursor: pointer;
 	font-weight: 600;
-	/*background-color: yellow;*/
 	border: 1px solid var(--main-border-color);
 }
 
 .draftBtn{
-	padding: 10px;
+	padding: 13px;
 	border-radius: 4px;
 	margin-top: 30px;
 	cursor: pointer;
 	font-weight: 600;
-	/*background-color: blue;*/
 	margin-left: 30px;
 	border: 1px solid var(--main-border-color);
-}
+}*/
 
-.activeBtn:hover, .inactiveBtn:hover, .draftBtn:hover{
+/*.activeBtn:hover, .inactiveBtn:hover, .draftBtn:hover{
 	color: #fff;
 }
 
 .active, .btn:hover {
   background-color: var(--main-border-color);
   color: white;
+}*/
+
+.nav-justified>li>a {
+    border: 1px solid var(--main-border-color);
+    color: #fff;
+    font-weight: 600;
+}
+
+.nav>li>a:focus, .nav>li>a:hover {
+    text-decoration: none;
+    background-color: var(--main-border-color);
+}
+
+.nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover {
+    color: #fff;
+    background-color: var(--main-border-color);
 }
 
 /************************************************************Media Query*************************************************************/

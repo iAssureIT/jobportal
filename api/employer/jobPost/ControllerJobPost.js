@@ -148,7 +148,7 @@ exports.insertJobs = (req, res, next) => {
                 "minOtherExp": req.body.minOtherExp,
                 "preferredSkills": preferredSkills
             },
-
+            "status"   : req.body.status, 
             "createdAt": new Date(),
             "createdBy": req.body.user_id,
             "updateLog": [{
