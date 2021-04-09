@@ -528,14 +528,14 @@ class Certification extends Component{
 								<div className="input-group genderFeildWrapper">
 
 									<div className ={ this.state.certificationToggel===false
-													 ? "genderFeild genderFeild1 col-lg-6 genderFeildActive"
-													 : "genderFeild genderFeild1 col-lg-6"}  
+													 ? "genderFeild  col-lg-6 genderFeildActive"
+													 : "genderFeild  col-lg-6"}  
 										 id="toggleSkills" name="certificationToggel" 
 										 value="toggleSkills" onClick={this.changeBlock.bind(this)}
 									> Skills</div>
 									<div className={this.state.certificationToggel === true
-													? "genderFeild genderFeild1 col-lg-6 genderFeildActive"
-													: "genderFeild genderFeild1 col-lg-6"} 
+													? "genderFeild  col-lg-6 genderFeildActive"
+													: "genderFeild  col-lg-6"} 
 										id="toogleCertificate" name="certificationToggel" 
 										value="toogleCertificate" onClick={this.changeBlock.bind(this)}
 									> Certification	</div>
@@ -557,8 +557,8 @@ class Certification extends Component{
 										</label>
 										<div className="input-group genderFeildWrapper skillsGenderWrapper">
 											<div className ={ this.state.isPrimary===true
-													 ? "genderFeild genderFeild1 col-lg-6 genderFeildActive"
-													 : "genderFeild genderFeild1 col-lg-6"}  
+													 ? "genderFeild  col-lg-6 genderFeildActive"
+													 : "genderFeild  col-lg-6"}  
 												 id="togglePrimary" name="primaryToggel" 
 												 value="togglePrimary" onClick={this.handleSwitch.bind(this)}>
 												<div className="row">
@@ -566,8 +566,8 @@ class Certification extends Component{
 												</div>
 											</div>
 											<div className={this.state.isPrimary === false
-															? "genderFeild genderFeild1 col-lg-6 genderFeildActive"
-															: "genderFeild genderFeild1 col-lg-6"} 
+															? "genderFeild  col-lg-6 genderFeildActive"
+															: "genderFeild  col-lg-6"} 
 												id="toogleSecondary" name="primaryToggel" 
 												value="toogleSecondary" onClick={this.handleSwitch.bind(this)}>
 												<div className="row">

@@ -11,7 +11,6 @@ class ProgressBar extends Component{
 			location 		: this.props.location,
 			candidate_id  	: this.props.userDetails.candidate_id
 		}
-		console.log('candidate_id',this.state.candidate_id);
 	}
 
 	render(){
