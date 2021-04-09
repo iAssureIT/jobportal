@@ -51,6 +51,7 @@ class CandidatesList extends Component{
 	componentDidMount(){
 		
 		var {mapAction}  = this.props;
+		console.log("this.props",this.props)
 		//mapAction.filterCandidatesApplied(this.state.candidateSelector)	
 		
 	}

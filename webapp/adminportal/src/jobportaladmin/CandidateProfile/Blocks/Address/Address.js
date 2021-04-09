@@ -192,7 +192,7 @@ class Address extends Component{
 	}
 	handleBack(event){
 		event.preventDefault();
-		this.props.history.push("/basic-info");
+		this.props.history.push("/candidate/basic-info");
 	}
 	handleSave(event){
 		event.preventDefault();

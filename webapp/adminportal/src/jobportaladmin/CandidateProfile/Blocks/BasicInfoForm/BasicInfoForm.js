@@ -76,6 +76,7 @@ class BasicInfoForm extends Component{
 
 		Axios.get("/api/candidatemaster/get/one/"+this.state.candidate_id)
 		.then(response=>{
+			 console.log("response.data",this.state.candidate_id);
 			 console.log("response.data",response.data);
 
 			 	var languagesTags = [];
@@ -453,7 +454,7 @@ class BasicInfoForm extends Component{
 											visa               : "",
 										})
 
-						this.props.history.push("/address/"+this.state.candidate_id);
+						this.props.history.push("/candidate/address/"+this.state.candidate_id);
 							
 							
 				})

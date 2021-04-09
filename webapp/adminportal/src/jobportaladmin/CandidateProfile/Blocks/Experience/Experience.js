@@ -301,7 +301,7 @@ class Experience extends Component{
 									totalExperience	    		  : "",
 									buttonText                    : "Save"
 								})
-					this.props.history.push("/experience/"+this.state.candidate_id);
+					this.props.history.push("/candidate/experience/"+this.state.candidate_id);
 				})
 				.catch(error =>{
 					Swal.fire("Submit Error!",error.message,'error');
@@ -403,11 +403,11 @@ class Experience extends Component{
 
 	handleBack(event){
 			event.preventDefault();
-			this.props.history.push("/certification/"+this.state.candidate_id);
+			this.props.history.push("/candidate/certification/"+this.state.candidate_id);
 		}
 	handelSubmit(event){
 		event.preventDefault();
-		this.props.history.push("/profile/"+this.state.candidate_id);
+		this.props.history.push("/candidate/profile/"+this.state.candidate_id);
 			
 	}
 	handleChangeState(event) {
@@ -760,8 +760,39 @@ class Experience extends Component{
 								</div> 
 								<span id="lastDeartmentError" className="errorMsg"></span>
 							</div>
+							<div className="col-lg-4">
+								<label htmlFor="reportingManager" className="nameTitleForm">
+									Reporting Manager
+									<sup className="nameTitleFormStar">*</sup>
+								</label>
+								<div className="input-group ">
+									<span className="input-group-addon inputBoxIcon">
+										<i className="fa fa-user-circle"></i>
+									</span> 
+									<input type="text" name="reportingManager" id="reportingManager" 
+									 className="form-control inputBox" value={this.state.reportingManager} 
+									 onChange={this.handleChange.bind(this)} />
+								</div> 
+								<span id="reportingManagerError" className="errorMsg"></span>
+							</div>
 						</div>
 						<div className="row formWrapper">
+							<div className="col-lg-4">
+								<label htmlFor="reportingManagerDesignation" className="nameTitleForm">
+									Reporting Manager Designation
+									<sup className="nameTitleFormStar">*</sup>
+								</label>
+								<div className="input-group ">
+									<span className="input-group-addon inputBoxIcon">
+										<FontAwesomeIcon icon="id-card-alt" /> 
+									</span> 
+									<input type="text" name="reportingManagerDesignation" 
+									 id="reportingManagerDesignation" className="form-control inputBox" 
+									 value={this.state.reportingManagerDesignation} 
+									 onChange={this.handleChange.bind(this)} />
+								</div> 
+								<span id="reportingManagerDesignationError" className="errorMsg"></span>
+							</div>
 							<div className="col-lg-4">
 								<label htmlFor="lastDeartment" className="nameTitleForm">
 									Total Experience
@@ -841,6 +872,7 @@ class Experience extends Component{
 									 className="form-control inputBox date" 
 									 value={this.state.fromDate} 
 									 onChange={this.handleChange.bind(this)} />
+									 <div className="dateLine1"></div>
 								</div> 
 								<span id="fromDateError" className="errorMsg"></span>
 							</div>
@@ -857,6 +889,7 @@ class Experience extends Component{
 									 className="form-control inputBox date" 
 									 value={this.state.toDate} min={Moment(this.state.fromDate).format("YYYY-MM")}
 									 onChange={this.handleChange.bind(this)} />
+									 <div className="dateLine1"></div>
 								</div> 
 								<span id="toDateError" className="errorMsg"></span>
 							</div>
@@ -890,41 +923,6 @@ class Experience extends Component{
 								</div>
 							</div>
 						</div>	
-						<div className="row formWrapper">	
-							<div className="col-lg-4">
-								<label htmlFor="reportingManager" className="nameTitleForm">
-									Reporting Manager
-									<sup className="nameTitleFormStar">*</sup>
-								</label>
-								<div className="input-group ">
-									<span className="input-group-addon inputBoxIcon">
-										<i className="fa fa-user-circle"></i>
-									</span> 
-									<input type="text" name="reportingManager" id="reportingManager" 
-									 className="form-control inputBox" value={this.state.reportingManager} 
-									 onChange={this.handleChange.bind(this)} />
-								</div> 
-								<span id="reportingManagerError" className="errorMsg"></span>
-							</div>
-
-							<div className="col-lg-4">
-								<label htmlFor="reportingManagerDesignation" className="nameTitleForm">
-									Reporting Manager Designation
-									<sup className="nameTitleFormStar">*</sup>
-								</label>
-								<div className="input-group ">
-									<span className="input-group-addon inputBoxIcon">
-										<FontAwesomeIcon icon="id-card-alt" /> 
-									</span> 
-									<input type="text" name="reportingManagerDesignation" 
-									 id="reportingManagerDesignation" className="form-control inputBox" 
-									 value={this.state.reportingManagerDesignation} 
-									 onChange={this.handleChange.bind(this)} />
-								</div> 
-								<span id="reportingManagerDesignationError" className="errorMsg"></span>
-							</div>
-
-						</div>
 						<div className="row formWrapper">
 							<div className="col-lg-4">
 								<label htmlFor="currentCTC" className="nameTitleForm">

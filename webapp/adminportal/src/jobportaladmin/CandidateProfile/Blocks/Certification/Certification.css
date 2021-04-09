@@ -6,7 +6,7 @@
 	color:var(--main-border-color);
 }
 .stars{
-	color: var(--main-border-color);
+	color: var(--blue-bg-color);
 }
 .rating:hover{
 	cursor: pointer;
@@ -105,4 +105,10 @@ td#ActionContent{
 }
 .skillsGenderWrapper{
 	margin-top: 6px;
+}
+ .iAssureITtable-bordered > thead > tr > td,noTempData{
+	color: var(--main-txt-color)!important;
+}
+.genderFeild1{
+	color: var(--main-txt-color);
 }

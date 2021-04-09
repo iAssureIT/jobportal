@@ -1,9 +1,7 @@
 .AddressWrapper{
 	min-height:0px;
 	height:auto;
-	padding-top:15px;
 	border-radius:3px;
-	padding-bottom:15px;
 	background:var(--main);
 	font-family: 'Montserrat-Medium',Sans-Serif;
 }

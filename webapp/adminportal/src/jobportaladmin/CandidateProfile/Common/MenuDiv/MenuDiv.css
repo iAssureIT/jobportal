@@ -5,3 +5,17 @@
 .OnboardingTabs2 {
 	margin-top: 0%;
 }
+#triangle-right{
+	border-top: 20px solid transparent;
+    border-left: 22px solid #ebebeb;
+    border-bottom: 17px solid transparent;
+}
+.trianglethree {
+    position: absolute;
+    top: -1px;
+    right: -16px;
+    z-index: 2;
+}
+.triangleone{
+	top: -1px;
+}

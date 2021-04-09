@@ -116,12 +116,14 @@
 }
 .genderFeild:hover{
 	cursor: pointer;
-    background-color:var(--gray-bg-color )!important;
+    background-color:var(--blue-color)!important;
+    color:var(--main-bg-color)!important;
+    font-weight:800!important;
 }
 .genderFeildActive{
-	background-color:var(--gray-bg-color )!important;
+	background-color:var(--blue-color )!important;
 	transition:all 2s;
-	color:var(--main-txt-color);
+	color:var(--main-bg-color)!important;
 	font-weight:800!important;
 
 }
@@ -271,11 +273,11 @@ div.ReactTags__tagInput input.ReactTags__tagInputField:focus {
 
 /* Styles for selected tags */
 div.ReactTags__selected span.ReactTags__tag {
-    background: var(--gray-bg-color)!important;
+    background: var(--blue-bg-colo)!important;
     font-size: 12px;
     display: inline-block;
     margin-top: 2px;
-    padding-left: 5px;
+    padding-left: 10px;
     padding-right: 5px;
     padding-top: 2px;
     padding-bottom: 1px;
@@ -284,6 +286,7 @@ div.ReactTags__selected span.ReactTags__tag {
     border-radius: 10px;
     margin-top: 5px;
     color:#333;
+    font-weight:800;
 }
 
 div.ReactTags__selected a.ReactTags__remove {
@@ -393,11 +396,11 @@ div.ReactTags__tagInput input.ReactTags__tagInputField:focus {
 
 /* Styles for selected tags */
 div.ReactTags__selected span.ReactTags__tag {
-    background: var(--main-border-color );
+    background: var(--blue-bg-color)!important;
     font-size: 12px;
     display: inline-block;
     margin-top: 2px;
-    padding-left: 5px;
+    padding-left: 10px;
     padding-right: 5px;
     padding-top: 2px;
     padding-bottom: 2px;
@@ -405,7 +408,7 @@ div.ReactTags__selected span.ReactTags__tag {
     cursor: move;
     border-radius: 10px;
     margin-top: 5px;
-    color: #333;
+    color: var(--main-bg-color);
 }
 
 div.ReactTags__selected a.ReactTags__remove {
@@ -475,7 +478,7 @@ user agent stylesheet:focus {
 .ReactTags__remove{
 	background: transparent;
 	border: none;
-	color:#333!important;
+	color:var(--main-bg-color)!important;
 }
 .resumeImage{
     width: 65px;
@@ -484,7 +487,7 @@ user agent stylesheet:focus {
 /*****************************************************End Of ReactTags Properties****************************************************/
 /*********************************************Properties Of Ckeditor***********************************************/
 .ck.ck-button:not(.ck-disabled):active,.ck.ck-button:not(.ck-disabled):hover{
-	background:var(--gray-bg-color)!important;
+	background:var(--blue-bg-colo)!important;
 	box-shadow: inset 0 2px 2px var(--gray-bg-color);
 
 }
@@ -766,9 +769,9 @@ user agent stylesheet:focus {
 .experienceBoxWidth .input-group .form-control {
     width: 80%;
 }
-.genderFeild{
+/*.genderFeild{
     color: #333!important;
-}
+}*/
 .showFeild2{
     color: #333!important;
     margin-top: 8px;
@@ -881,4 +884,7 @@ user agent stylesheet:focus {
 }
 .attachedDocument{
     margin-bottom: 20px;
+}
+.react-tel-input .selected-flag .arrow {
+    border-top: 4px solid #000 !important;
 }

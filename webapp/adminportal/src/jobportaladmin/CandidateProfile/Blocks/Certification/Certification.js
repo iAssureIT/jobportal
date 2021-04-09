@@ -290,7 +290,7 @@ class Certification extends Component{
 
 	handleBack(event){
 		event.preventDefault();
-		this.props.history.push("/academics/"+this.state.candidate_id);
+		this.props.history.push("/candidate/academics/"+this.state.candidate_id);
 	}
 
 
@@ -391,7 +391,7 @@ class Certification extends Component{
 													grade   		   : "",
 													buttonText         : "Save"
 												})
-							this.props.history.push("/certification/"+this.state.candidate_id);
+							this.props.history.push("/candidate/certification/"+this.state.candidate_id);
 					})
 					.catch(error =>{
 						Swal.fire("Submit Error!",error.message,'error');
@@ -444,7 +444,7 @@ class Certification extends Component{
 	}
 	handleSubmit(event){
 		event.preventDefault();
-		 this.props.history.push("/experience/"+this.state.candidate_id);
+		 this.props.history.push("/candidate/experience/"+this.state.candidate_id);
 	
 	}
 
@@ -528,14 +528,14 @@ class Certification extends Component{
 								<div className="input-group genderFeildWrapper">
 
 									<div className ={ this.state.certificationToggel===false
-													 ? "genderFeild col-lg-6 genderFeildActive"
-													 : "genderFeild col-lg-6"}  
+													 ? "genderFeild genderFeild1 col-lg-6 genderFeildActive"
+													 : "genderFeild genderFeild1 col-lg-6"}  
 										 id="toggleSkills" name="certificationToggel" 
 										 value="toggleSkills" onClick={this.changeBlock.bind(this)}
 									> Skills</div>
 									<div className={this.state.certificationToggel === true
-													? "genderFeild col-lg-6 genderFeildActive"
-													: "genderFeild col-lg-6"} 
+													? "genderFeild genderFeild1 col-lg-6 genderFeildActive"
+													: "genderFeild genderFeild1 col-lg-6"} 
 										id="toogleCertificate" name="certificationToggel" 
 										value="toogleCertificate" onClick={this.changeBlock.bind(this)}
 									> Certification	</div>
@@ -557,8 +557,8 @@ class Certification extends Component{
 										</label>
 										<div className="input-group genderFeildWrapper skillsGenderWrapper">
 											<div className ={ this.state.isPrimary===true
-													 ? "genderFeild col-lg-6 genderFeildActive"
-													 : "genderFeild col-lg-6"}  
+													 ? "genderFeild genderFeild1 col-lg-6 genderFeildActive"
+													 : "genderFeild genderFeild1 col-lg-6"}  
 												 id="togglePrimary" name="primaryToggel" 
 												 value="togglePrimary" onClick={this.handleSwitch.bind(this)}>
 												<div className="row">
@@ -566,8 +566,8 @@ class Certification extends Component{
 												</div>
 											</div>
 											<div className={this.state.isPrimary === false
-															? "genderFeild col-lg-6 genderFeildActive"
-															: "genderFeild col-lg-6"} 
+															? "genderFeild genderFeild1 col-lg-6 genderFeildActive"
+															: "genderFeild genderFeild1 col-lg-6"} 
 												id="toogleSecondary" name="primaryToggel" 
 												value="toogleSecondary" onClick={this.handleSwitch.bind(this)}>
 												<div className="row">
