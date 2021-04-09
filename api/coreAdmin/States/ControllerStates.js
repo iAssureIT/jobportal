@@ -133,7 +133,7 @@ var insertState = async (data, reqdata, fileName) => {
             if (statePresent==0) {
             const state = new States({
                         _id                     : new mongoose.Types.ObjectId(),                    
-                        countryID               : reqdata.countryID,
+                        countryID               : ObjectId(reqdata.countryID),
                         stateName               : data.stateName,
                         stateCode               : data.stateCode,
                         fileName                : fileName,
