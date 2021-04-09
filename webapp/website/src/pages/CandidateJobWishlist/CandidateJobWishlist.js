@@ -7,7 +7,7 @@ import { bindActionCreators } 	from 'redux';
 import  * as mapActionCreator 	from '../../common/actions/index';
 
 
-class CandidateJobWishlist extends Component{
+class CandidateJobWishlist extends Component{ 
 	constructor(props){
 		super(props);
 

@@ -5,7 +5,7 @@ import axios                  from 'axios';
 //import Loader                 from "../../../common/Loader.js";
 import BulkUpload             from "../BulkUpload/BulkUpload.js";
 import IAssureTable           from "../../IAssureTable/IAssureTable.jsx";
-//import "./location.css";
+//  import "./location.css";
 
 class StateBulkUpload extends Component{
   
@@ -71,7 +71,7 @@ class StateBulkUpload extends Component{
         countryArray : response.data, 
         countryID : response.data[0]._id, 
       },()=>{
-        // console.log('countryID',this.state.countryID);
+         console.log('countryID',this.state.countryID);
       })
     })
     .catch((error)=> {     
