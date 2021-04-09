@@ -3,6 +3,7 @@ mongoose.Promise = global.Promise;
 const async = require("async");
 const States = require('./ModelStates.js');
 const FailedRecords = require('../failedRecords/ModelFailedRecords');
+var ObjectID = require('mongodb').ObjectID;
 
 const _          = require("underscore");
 
@@ -133,7 +134,7 @@ var insertState = async (data, reqdata, fileName) => {
             if (statePresent==0) {
             const state = new States({
                         _id                     : new mongoose.Types.ObjectId(),                    
-                        countryID               : ObjectId(reqdata.countryID),
+                        countryID               : ObjectID(reqdata.countryID),
                         stateName               : data.stateName,
                         stateCode               : data.stateCode,
                         fileName                : fileName,
