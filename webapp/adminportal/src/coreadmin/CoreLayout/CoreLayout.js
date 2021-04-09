@@ -36,6 +36,7 @@ import SelectVendor from '../Master/EntityMaster/SelectVendor/SelectVendor.js';
 import CityClassification from '../Master/CityClassification/CityClassification.js';
 import CityType from '../Master/CityType/CityType.js';
 
+import StateBulkUpload from '../Master/LocationMaster/StateBulkUpload.js';
 
 import CompanyPaymentGateway from '../companysetting/Components/CompanyPaymentGateway.js';
 //============= Corporate Master ====================
@@ -121,7 +122,9 @@ class CoreLayout extends Component {
                 <Route path="/city-type" exact strict component={CityType} />
                 <Route path="/city-type/:fieldID" exact strict component={CityType} />
 
-
+                <Route path="/state-bulkupload" exact strict component={StateBulkUpload} />
+                
+                
                 <Route path="/package-master" exact strict component={PackageMaster} />
                 <Route path="/package-master/:packageID" exact strict component={PackageMaster} />
                 <Route path="/package-master/package-type" exact strict component={PackageMaster} />

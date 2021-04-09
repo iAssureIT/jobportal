@@ -17,7 +17,7 @@ class JobWishlist extends Component{
 	}
 }
 componetDidMount(){
-	
+	 
 }
 handleclick = (jobid)=>{
 	console.log("jobid : ", jobid);
