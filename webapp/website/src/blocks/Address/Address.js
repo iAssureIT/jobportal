@@ -740,7 +740,7 @@ class Address extends Component{
 									);
 									})
 									:
-										null
+										<div className="noData">Address Record Not Found</div>
 									}
 								</div>
 							</div>

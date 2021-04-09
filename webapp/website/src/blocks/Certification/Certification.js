@@ -772,7 +772,7 @@ class Certification extends Component{
 										);
 										})
 										:
-											null
+											<div className="noData">Certificate Record Not Found</div>
 										}
 									</div>
 							</div>

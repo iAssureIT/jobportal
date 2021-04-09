@@ -190,8 +190,8 @@
     left: 50px;
 }
 .profileImage{
-    width:140px;
-    height:130px;
+    width:254px;
+    height:192px;
 	margin:4px;
 }
 .resumeImage{
@@ -786,8 +786,11 @@ user agent stylesheet:focus {
     background-repeat: no-repeat;
     background: var(--form-field-background-color);
     border: 1px dashed var(--main-border-color);
-    height: 150px;
+    
     padding: 0
+}
+.LogoImageUpOne{
+    width: 255px;
 }
 .LogoImageUpOne{
     /*background-size: 232px 128px;*/
@@ -795,13 +798,11 @@ user agent stylesheet:focus {
     background: var(--form-field-background-color);
     border: 1px dashed var(--main-border-color);
     cursor: pointer;
-    height: 10em!important;
+    height: 192px!important;
     padding: 0;
     align-items: center;
     text-align: center;
     display: grid;
-    margin-top: 30px;
-    margin-left: 50px;
 }
 .uploadImageClient1,.LogoImageUp1{
     position: absolute;

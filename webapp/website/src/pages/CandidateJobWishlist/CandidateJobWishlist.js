@@ -1,5 +1,5 @@
 import React,{Component}     	from 'react';
-import JobWishlist    	 		from '../../blocks/JobWishlist/JobWishlist.js';
+import JobWishlist    	 		from '../../blocks/jobWishlist/JobWishlist.js';
 import JobWishlistFilters    	from '../../blocks/JobWishlistFilters/JobWishlistFilters.js';
 
 import { connect }        		from 'react-redux';

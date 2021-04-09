@@ -18,23 +18,25 @@
 	text-decoration: none;
 }
 .addWrapper{
-	height:156px;
+	height:165px;
 	font-family:'Montserrat-Regular',Sans-Serif;
-	margin-bottom:25px;
-	border: 3px inset var(--main-border-color);
+	margin-bottom:15px;
+	margin-top:15px;
+	border: 5px groove var(--main-border-color);
 	text-transform:capitalize;
 }
 .addLeftWrapper{
-	background:var(--main-border-color );
-	height:150px;
+	background:var(--input-bg-color );
+	height:155px;
 	text-align: center;
 	overflow: hidden!important;
-	padding: 0px
+	padding: 0px;
+	border-right:5px groove var(--main-border-color);
 }
 .addLogoDiv{
-	font-size:45px;
-	padding-top:15px;
-	padding-bottom:15px;
+	font-size:30px;
+	padding-top:30px;
+	padding-bottom:10px;
 
 }
 .addLogoTextDiv{
@@ -42,7 +44,7 @@
 	font-size:0.8em;
 }
 .addRightWrapper{
-	height:150px;
+	height:155px;
 	background-color: var(--input-bg-color );
 
 }
@@ -183,4 +185,13 @@
 .SearchListContainer{
 	position:absolute;
 	top:50px;
+}
+.noData{
+	font-size: 13px;
+	font-family: 'Montserrat-Medium',Sans-Serif;
+	margin-top: 30px;
+	border: 1px solid var(--main-border-color);
+	padding: 15px;
+	border-radius: 5px;
+	background-color: var(--input-bg-color);
 }

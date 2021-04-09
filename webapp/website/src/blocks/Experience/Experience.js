@@ -1040,7 +1040,7 @@ class Experience extends Component{
 									);
 									})
 									:
-										null
+										<div className="noData">Experience Record Not Found</div>
 									}
 							</div>
 						</div>

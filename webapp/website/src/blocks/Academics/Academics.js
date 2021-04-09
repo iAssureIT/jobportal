@@ -872,9 +872,6 @@ class Academics extends Component{
 								this.state.academics.length > 0
 								?
 								this.state.academics.map((elem,index)=>{
-									
-									console.log(elem);
-
 									return(
 										<div className="col-lg-6 AddressOuterWrapper"  key={index}>
 											<div className="col-lg-12 addWrapper">
@@ -910,7 +907,7 @@ class Academics extends Component{
 															<div className="AddressBoxText">
 															{}
 															</div>
-															{/*<div className="AddressBoxText">
+															<div className="AddressBoxText">
 																{elem.admisionYear} - {elem.passOutYear}
 															</div>
 															
@@ -926,7 +923,7 @@ class Academics extends Component{
 															</div>
 															<div className="AddressBoxText">
 																{elem.cityVillage}
-															</div>*/}
+															</div>}
 														</div>
 														<div className="col-lg-12">
 								                            <div className="addRightbtn">
@@ -946,7 +943,7 @@ class Academics extends Component{
 									);
 									})
 									:
-										null
+										<div className="noData">Academics Record Not Found</div>
 									}
 								</div>
 							</div>

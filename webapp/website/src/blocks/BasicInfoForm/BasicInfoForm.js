@@ -612,7 +612,7 @@ class BasicInfoForm extends Component{
 							
 							<div className="col-lg-4 ">
 								<label htmlFor="profilePicture" className="nameTitleForm">
-									
+									Profile Picture
 								</label>
 								<div className="input-group ">
 									{
