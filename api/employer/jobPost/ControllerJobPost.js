@@ -2340,6 +2340,7 @@ exports.insertBulkJobs = (req, res, next) => {
                     "mineducation_id": mineducation_id,
                     "minExperience": Math.floor(Math.random() * 10)
                 },
+                "status"   : "draft",
                 "createdAt": new Date()
             }
             //console.log(jobObject)
@@ -2793,6 +2794,7 @@ exports.bulkUploadJobs = (req, res, next) => {
                         "preferredSkills"   : preferredSkillsArray
                     },
                     fileName        : req.body.fileName,
+                    status          : "draft",
                     uploadTime      : uploadTime,
                     createdAt       : new Date(),
                     createdBy       : req.body.reqdata.createdBy,
