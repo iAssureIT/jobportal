@@ -112,7 +112,7 @@ class JobPosting extends Component {
             preferredSkillTags          :   [],
             preferredSkillSuggestions   :   [],
 
-            status                      :   "Active",
+            //jobStatus                   :   "Active",
 
             submitBtnText               :   "PUBLISH"
         }
@@ -289,7 +289,7 @@ class JobPosting extends Component {
                         minPrimExp              :   response.data.requiredSkills.minPrimExp,
                         minSecExp               :   response.data.requiredSkills.minSecExp,
                         minOtherExp             :   response.data.requiredSkills.minOtherExp,
-                        status                  :   response.data.status,
+                        //jobStatus               :   response.data.status,
                         submitBtnText           :   "UPDATE"
                     })
 
@@ -679,9 +679,9 @@ class JobPosting extends Component {
         })
     }*/
 
-    handleSubmit = (event) => { 
+    handleSubmit = ( event ) => { 
         event.preventDefault();
-        console.log(this.validateForm())
+        console.log("jobStatus",event.target.getAttribute('data-status'))
         if (this.validateForm()) {
             var formValues = {
                 user_id                 :   this.props.userDetails.user_id,
@@ -738,7 +738,7 @@ class JobPosting extends Component {
                 minOtherExp             :   this.state.minOtherExp,
                 preferredSkillTags      :   this.state.preferredSkillTags,
 
-                status                  :   this.state.status
+                status                  :   event.target.getAttribute('data-status')
 
             };
 
@@ -1819,7 +1819,7 @@ render(){
 
                                         <button className={this.state.status==="Active"? "btn buttonYellow addJobSubmitBtn" : "btn buttonYellow addJobSubmitBtn"} id="Active" name="status" value="Active"  onClick={this.setStatus.bind(this)}> {this.state.submitBtnText} </button>*/}
                                          
-                                        <button className="btn addJobFormField saveFLBtn pull-left">
+                                        <button className="btn addJobFormField saveFLBtn pull-left" data-status = "draft" onClick={this.handleSubmit.bind(this)}>
                                             Save for Later 
                                         </button>
 
@@ -1829,7 +1829,7 @@ render(){
 
                                         <PreviewModal jobInfo = {this.state} />
 
-                                        <button className="btn buttonYellow addJobSubmitBtn"  onClick={this.handleSubmit}> {this.state.submitBtnText} </button>
+                                        <button className="btn buttonYellow addJobSubmitBtn"  data-status = "active" onClick={this.handleSubmit.bind(this)}> {this.state.submitBtnText} </button>
 									</div>
 								</form>
 							</div>
