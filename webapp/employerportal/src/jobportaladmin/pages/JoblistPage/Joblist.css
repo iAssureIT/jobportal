@@ -501,3 +501,36 @@ color: #fff;
 }
 
 }
+
+
+
+.genderFeildWrapper{
+	height:25px;
+	border:1px solid var(--main-border-color)!important;
+	width:100%;
+	border-radius:20px;
+	margin-top:3px;
+    padding: 2px;
+}
+.genderFeildWrapper2{
+    margin-top:6px;
+}
+.genderFeild{
+	height:21px;
+	border-radius:20px;
+	font-size:10px;
+	font-weight:100!important;
+	padding-top:4px;
+	text-align:center;
+	background-color: var(--input-bg-color);
+    transition: all 1s;
+}
+.genderFeild:hover{
+	cursor: pointer;
+    background-color:var(--main-border-color);
+}
+.genderFeildActive{
+	background-color:var(--main-border-color);
+	transition:all 2s;
+
+}

@@ -388,6 +388,10 @@ exports.getJobList = (req, res, next) => {
     selector['$and'] = [];
 
     selector["$and"].push({
+        "status": "active"
+    })
+
+    selector["$and"].push({
         "location.countryCode": req.body.countryCode
     })
     // 1
@@ -596,6 +600,9 @@ exports.getJobListForEmployer = (req, res, next) => {
 
     selector["$and"].push({
         "location.countryCode": req.body.countryCode
+    })
+    selector["$and"].push({
+        "status": req.body.status
     })
     // 1
     if (req.body.company_id) {
@@ -1995,6 +2002,46 @@ exports.deleteJob = (req, res, next) => {
         });
 }
 
+exports.activeJob = (req, res, next) => {
+    console.log("req.body - ", req.body);
+    var job_id = req.params.job_id;
+    Jobs.updateOne({    "_id": job_id },
+                   {    $set: { "status": "active" } })
+
+        .then(data => {
+            res.status(200).json({
+                data: data,
+                message: "Job is activated Successfully!"
+            });
+        })
+
+        .catch(error => {
+            res.status(500).json({
+                error: error,
+                message: "Some issue occurred while deleting job details!"
+            })
+        });
+}
+
+exports.inactiveJob = (req, res, next) => {
+    console.log("req.body - ", req.body);
+    var job_id = req.params.job_id;
+    Jobs.updateOne({    "_id": job_id },
+                   {    $set: { "status": "inactive" } })
+        .then(data => {
+            res.status(200).json({
+                data: data,
+                message: "Job is inactivated successfully!"
+            });
+        })
+
+        .catch(error => {
+            res.status(500).json({
+                error: error,
+                message: "Some issue occurred while deleting job details!"
+            })
+        });
+}
 exports.getSearchList = (req, res, next) => {
     const searchTxt = req.params.searchTxt;
     if (searchTxt !== "") {
