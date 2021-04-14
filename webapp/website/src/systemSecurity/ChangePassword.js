@@ -275,7 +275,7 @@ class ChangePassword extends Component {
     }
     render() {
         return (
-            <section className="container-fluid resetPasswordWrapper">
+            <section className="col-lg-12 resetPasswordWrapper">
 
             <div className="img1LoginFP">
                 <img src="/images/Sign_In/1.png" alt="img1Login" className="img1oginInnerFP"/>
@@ -300,15 +300,15 @@ class ChangePassword extends Component {
              <div className="img6LoginFP">
                 <img src="/images/Sign_In/6.png" alt="img6Login" className="img6loginInnerFP"/>
             </div>
-                <div className="resetPassword col-lg-6 col-lg-offset-3">
+                <div className="resetPassword col-lg-4 col-lg-offset-4">
                   <form>
 
-                    <div className="resetPasswordTitle col-lg-12">Change Password
+                    <div className="resetPasswordTitle col-lg-10 col-lg-offset-1">Change Password
                     </div>
 
                     <hr className="resetPasswordHr"/>
 
-                     <div className="col-lg-12 form-group" >
+                     <div className="col-lg-10 col-lg-offset-1 form-group" >
                         <div className="input-group">
                             <span className="input-group-addon resetPasswordInputIcon"><i className="fa fa-lock"></i></span>
                             <input type="password" id="oldPassword" name="oldPassword" placeholder="Enter old Password" ref="oldPassword" value={this.state.oldPassword} onChange={this.handleChange.bind(this)} className="form-control resetPasswordInputBox"/>
@@ -319,7 +319,7 @@ class ChangePassword extends Component {
                          <span id="oldPasswordError" className="errorMsg"></span>
                     </div>
 
-                    <div className="col-lg-12 form-group" >
+                    <div className="col-lg-10 col-lg-offset-1 form-group" >
                         <div className="input-group">
                             <span className="input-group-addon resetPasswordInputIcon"><i className="fa fa-lock"></i></span>
                             <input type="password" id="newPassword" name="newPassword" placeholder="Enter new Password" ref="newPassword" value={this.state.newPassword} onChange={this.handleChange.bind(this)} className="form-control resetPasswordInputBox"/>
@@ -329,7 +329,7 @@ class ChangePassword extends Component {
                          <span id="newPasswordError" className="errorMsg"></span>
                     </div>
 
-                    <div className="col-lg-12 form-group" >
+                    <div className="col-lg-10 col-lg-offset-1 form-group" >
                         <div className="input-group">
                             <span className="input-group-addon resetPasswordInputIcon"><i className="fa fa-lock"></i></span>
                             <input type="password" id="confirmNewPassword" name="confirmNewPassword" placeholder="Confirm new Password" value={this.state.confirmNewPassword} onChange={this.handleChange.bind(this)} className="form-control resetPasswordInputBox"/>
@@ -341,8 +341,8 @@ class ChangePassword extends Component {
                     </div>
 
 
-                    <div className="col-lg-12 buttonWrapper">
-                   <button className="btn col-lg-12 buttonResetPassword" onClick={this.changePassword.bind(this)}>Reset Password</button>
+                    <div className="col-lg-10 col-lg-offset-1 buttonWrapper">
+                   <button className="btn col-lg-6 col-lg-offset-3 buttonResetPassword" onClick={this.changePassword.bind(this)}>Change Password</button>
                   </div>
 
                 

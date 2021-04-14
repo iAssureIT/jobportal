@@ -78,6 +78,12 @@ class SignUp extends Component {
 		})
 	}
 
+  setWorkFromHome(event) {
+        this.setState({
+            workFromHome: event.target.checked
+        });
+    }
+
   showPassword1=(event)=>{
     event.preventDefault();
     var passwordToggle1 = document.getElementById("password");
@@ -484,17 +490,25 @@ class SignUp extends Component {
                    
                     <div className="col-lg-10 col-lg-offset-1" >
                         <div className="col-lg-6">
+                          <div className="row">
+                            <label htmlFor="workFromHome" className="agreeTC">
+                            
+                              <input type="checkbox" name="workFromHome" className="checkmark2" id="workFromHome" value={this.state.workFromHome} onChange={this.setWorkFromHome.bind(this)} />
+                            
+                               <div className="textTC"> I agree to the <br/>Terms & Conditions</div>
+                            </label>
+                          </div>  
                         </div>
 
                         <div className="col-lg-6  buttonWrapper">
                           <div className="row">
-                            <button className="btn col-lg-12 buttonSignUp" onClick={this.usersignup.bind(this)}>Sign Up</button>
+                            <button className="btn col-lg-12 buttonSignUp" onClick={this.usersignup.bind(this)}>Sign Up >></button>
                           </div>
                         </div>
                     </div>    
 
-                  <div className="col-lg-12 registrationLinks" >
-                    <a className="alreadyAccount" href="#" onClick={this.ShowLogin.bind(this)}><u>Already have an Account?Sign In</u></a>
+                  <div className="col-lg-10 col-lg-offset-1 registrationLinks" >
+                    <a className="alreadyAccount col-lg-4 col-lg-offset-6" href="#" onClick={this.ShowLogin.bind(this)}><u>Sign In >></u></a>
                   </div>
 
                 </form>

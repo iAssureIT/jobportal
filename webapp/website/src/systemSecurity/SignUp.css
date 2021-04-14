@@ -80,22 +80,21 @@
   color: #fff;
   border: 1px solid #D3950A;
   margin-bottom: 2px;
-  font-size: 16px;
+  font-size: 14px;
   font-family: 'Montserrat-Bold';
 }
 
 .buttonSignUp:hover{
   background-color: transparent;
   color: #D3950A;
-  border: 2px solid #D3950A;
-  font-weight: bold;
-  margin-bottom: 0px;
+
 }
 
 .registrationLinks{
   text-align: center;
   margin-top: 20px;
   height: 30px;
+  float: right;
   /*background-color: pink;*/;
 
 }
@@ -104,16 +103,13 @@
 .alreadyAccount{
   color: #aaa !important;
   text-align: center;
-  font-size: 14px;
-  margin-top: 50px;
+  font-size: 13px;
   font-family: 'Montserrat-Regular';
   
 }
 
 .alreadyAccount:hover{
-  color: #fff!important;
-  font-size: 15px;
-   font-family: 'Montserrat-Regular';
+  color: #fff!important; 
 }
 
 .registrationCompany{
@@ -282,4 +278,34 @@
 .img6loginInnerSU{
   height: 80px;
   width: 60px;
+}
+
+.agreeTC{
+
+    font-size: 11px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    color: #eee;
+    font-family: 'Montserrat-Regular';
+    /*background-color: red;*/
+}
+
+.checkmark2 {
+   
+    height: 15px;
+    width: 15px;
+    border-radius: 3px;
+    cursor: pointer;
+    border: 2px solid var(--main-border-color) !important;
+    float: left;
+
+}
+
+.textTC{
+  margin-left: 24px;
+  margin-right: 10px;
+  width: 100%;
+  height: 20px;
 }
