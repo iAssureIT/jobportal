@@ -2011,7 +2011,7 @@ exports.activeJob = (req, res, next) => {
         .then(data => {
             res.status(200).json({
                 data: data,
-                message: "Job is activated Successfully!"
+                message: "Job is activated successfully!"
             });
         })
 
