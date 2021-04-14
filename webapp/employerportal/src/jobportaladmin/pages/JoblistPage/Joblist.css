@@ -62,13 +62,13 @@
 	margin-top: 7px;
 }
 
-.iconsBar .sunIcon{
+/*.iconsBar .sunIcon{
 	margin-left: 25px;
 }
 
 .iconsBar .clockIcon{
 	margin-left: 25px;
-}
+}*/
 
 .jobListRightContent .excelDownload i{
 	color: var(--main-border-color);
@@ -307,6 +307,9 @@
 	color: #fff;
 	font-weight: 600;
 }
+
+/*********************************************************************************/
+
 .showMoreBtn{
 	background-color: var(--yellow-button-color);
     color: #fff;
@@ -314,9 +317,11 @@
     line-height: 15px;
     margin: 20px 0;
 }
+
 .pagination{
 	float: right
 }
+
 .pagination>.disabled>a, .pagination>.disabled>a:focus, 
 .pagination>.disabled>a:hover, .pagination>.disabled>span, 
 .pagination>.disabled>span:focus, .pagination>.disabled>span:hover{
@@ -324,12 +329,14 @@ color: #fff;
     background-color: #242933;
     border-color: var(--main-border-color);
 }
+
 .pagination>li>a, .pagination>li>span{
 	background-color: var(--main-bg-color);
 	color: #fff;
 	border: 1px solid var(--main-border-color);
 
 }
+
 .pagination>.active>a, .pagination>.active>a:focus, 
 .pagination>.active>a:hover, .pagination>.active>span, 
 .pagination>.active>span:focus, .pagination>.active>span:hover{

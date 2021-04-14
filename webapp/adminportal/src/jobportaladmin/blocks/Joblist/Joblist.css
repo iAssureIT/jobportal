@@ -11,8 +11,9 @@
 }
 
 .jobListContainer{
-	height: 300px;
-	margin-top: 30px;
+	height: 296px;
+	/*margin-top: 30px;*/
+	margin-bottom: 30px;
 	border-radius: 10px;
 	border: 1px solid var(--admin-main-border-color);
 }
@@ -25,7 +26,7 @@
 
 .jobListLeftContent .iconsBar{
 	background-color: yellow;
-	margin-left: -11px;
+	margin-left: -33px;
 	margin-top: -5px;
 }
 
@@ -52,6 +53,12 @@
 	height: 20px;
 }
 
+.bothIcon{
+	border-left: 2px solid #F5A721;
+	margin-left: 5px !important;
+	padding-left: 3px;	
+}
+
 .jobListLeftContent .infoLog{
 	padding: 6px 10px;
 	height: 29px;
@@ -67,23 +74,76 @@
 }
 
 .jobListDesignation{
-	font-size: 22px;
-	color: var(--blue-color);
-	margin-top: 3px;
-	margin-left: -5px;
+	font-size: 21px;
+	color: var(--main-border-color);
+	padding-top: 3px;
+	margin-left: -25px;
 	font-family: 'Montserrat-SemiBold';
+	/*font-weight: 600;*/
+	white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+	/*background-color: cyan;*/
 }
 
-.jobListCompanyName{
+.jobListDesignation a{
+	text-decoration: none;
+}
+
+.jobListDesignation a:hover{
+	color: var(--blue-color);
+	cursor: pointer;
+	text-decoration: underline !important;
+}
+
+.jobListCompanyTitle{
+	padding-top: 7px;
+	padding-left: 5px;
+	/*font-family: 'Montserrat-SemiBold';*/
+	font-weight: 600;
+	white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+	/*background-color: blue;*/
+}
+
+.jobListExperienceTitle{
+	padding-top: 10px;
+	margin-left: -23px;
+	white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+	/*background-color: purple;*/
+}
+
+/*.jobListCompanyName{
 	margin-top: 7px;
 	margin-left: -5px;
 	font-family: 'Montserrat-SemiBold';
-}
+}*/
 
 .jobListExperience{
-	font-size: 14px !important;
-	margin-left: -5px;
-	margin-top: 13px;
+	font-size: 14px;
+	color: var(--main-border-color);
+	padding-right: 3px;
+	color: var(--admin-icon-color);
+}
+
+.jobListCtcSalTitle{
+	padding-top: 13px;
+	margin-left: -25px;
+	white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+	/*background-color: grey;*/
+}
+
+.jobListCtcSal{
+	font-size: 14px; 
+	border: 1px solid var(--admin-icon-color);
+	padding: 2px 4px 0px 4px;
+	margin-right: 2px;
+	border-radius: 50%;
 	color: var(--admin-icon-color);
 }
 
@@ -98,19 +158,34 @@
 }
 
 .jobListLocation{
-	font-size: 16px !important;
+	font-size: 14px;
 	padding: 3px 5px;
 	border-radius: 50%;
-	margin-top: 9px;
-	margin-left: -9px;
 	color: var(--admin-icon-color);
 }
 
+.joblistLocationInfo{
+	padding-top: 12px;
+	margin-left: -26px;
+	white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    /*background-color: lightblue;*/
+}
+
 .jobListNumPositions{
-	font-size: 13px !important;
-	margin-left: -6px;
-	margin-top: 13px;
+	font-size: 14px;
+	padding-right: 2px;
 	color: var(--admin-icon-color);
+}
+
+.jobListNumPositionsTitle{
+	padding-top: 13px;
+	margin-left: -25px;
+	white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+	/*background-color: darkblue;*/
 }
 
 .jobListRightContent{
@@ -153,8 +228,19 @@
 }
 
 .joblistNoCount{
-	margin-left: -3px;
-	margin-top: -3px;
+	margin-top: 10px;
+	height: 43px;
+	/*float: right;
+	margin-right: 20px;*/
+	/*padding-right: 10px;*/
+	
+	padding-top: 9px;
+	font-size: 15px;
+	/*font-family: 'Montserrat-SemiBold';*/
+	font-weight: 600;
+	text-align: center;
+	border: 1px solid  var(--main-border-color);
+	border-radius: 5px;
 }
 
 a{
@@ -184,6 +270,7 @@ a:hover{
 	margin-left: -20px;
 	margin-right: 20px;
 }
+
 .bothIcon{
 	border-left: 2px solid #666666;
 	margin-left: 5px !important;
@@ -194,19 +281,101 @@ a:hover{
   color: #fff;
   background-color: #3c8dbc;
 }
+
 .pagination{
 	float: right
 }
-.joblistNoCount {
-    margin-top: 5px;
-    width: 30%;
-    height: 50px;
-    float: right;
-    margin-right: 20px;
-    padding-top: 10px;
-    font-size: 18px;
-    /* font-family: 'Montserrat-SemiBold'; */
+
+
+/********************tabs******************/
+
+.leftSideMainBox{
+	/*background-color: pink;*/
+}
+
+.leftSideBox{
+	height: 235px;
+	padding-top: 10px;
+	/*background-color: red;*/
+}
+
+.rightSideBox{
+	height: 235px;
+	/*background-color: yellow;*/
+}
+
+.tierOneRow{
+	padding-top: 16px;
+}
+
+.react1{
+	border: 1px solid var(--main-border-color);
+	height: 48px;
+	font-size: 11px;
+	font-weight: 400;
+	padding-top: 7px;
+	border-radius: 4px;
+	margin-left: -15px;
+	white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.react2{
+	border: 1px solid var(--main-border-color);
+	height: 48px;
+	font-size: 11px;
+	font-weight: 400;
+	padding-top: 7px;
+	border-radius: 4px;
+	margin-left: 30px;
+	white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.react3{
+	border: 1px solid var(--main-border-color);
+	height: 48px;
+	font-size: 11px;
+	font-weight: 400;
+	padding-top: 7px;
+	border-radius: 4px;
+	margin-left: 30px;
+	white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.multiCount{
+	font-size: 13px;
+}
+
+/***********************************/
+
+.btnsRow{
+	padding-top: 30px;
+	padding-bottom: 20px;
+	text-align: center;
+}
+
+.nav-pills>li.active>a{
+    color: #fff;
+    background-color: var(--form-field-background-color);
     font-weight: 600;
+}
+.nav-justified>li>a {
     border: 1px solid var(--main-border-color);
-    border-radius: 5px;
+    color: var(--main-txt-color);
+    font-weight: 600;
+}
+
+.nav>li>a:focus, .nav>li>a:hover {
+    text-decoration: none;
+    background-color: var(--main-border-color);
+}
+
+.nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover {
+    color: #fff;
+    background-color: var(--main-border-color);
 }

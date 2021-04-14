@@ -103,125 +103,416 @@ class Joblist extends Component{
 		//console.log(this.props.userDetails)
 		return(
 			<section className="jobListWrapper">
-				<div className="col-lg-12 jobListWrapperMain">
+				<div className="col-lg-12 EmployeeListWrapperMain">
 					{/*<div className="col-lg-4 col-lg-offset-8">
 						<div className="input-group searchMainTab">
 							<input type="text" name="jobTitle" id="jobTitle" className="form-control jobListSearchTab" placeholder="Search by Job Title..." onChange={this.search}/>
-							<span className="input-group-addon searchTabAddOn"><i className="fa fa-search"></i> </span> 
 						</div> 
-					</div> */}
-						{
-							this.props.jobList 
-							?
-								this.props.jobList.map((elem,index1)=>{
-									//console.log(elem);
-									var applicantsCount = this.props.applicantsCountList.filter((appl, ind)=>{
-										if (appl._id == elem._id) {
-											return appl.candidatesApplied;
-										}else{
-											return 0
-										}
-										
-									})
-									return(
-										<div className="col-lg-12">
-											<div className="jobListContainer">
-												<div className="col-lg-12">
-													<div className="col-lg-11 jobListLeftContent"> 
-														<div className="row">
-															<div className="iconsBar">
-																<ul>
-																	{
-																		elem.jobBasicInfo.gender=="Male Only"?
-																		<li><i className="fa fa-male" title="Only male candidates can apply"></i></li>
-																		: elem.jobBasicInfo.gender=="Female Only"?
-																		<li><i className="fa fa-female" title="Only female candidates can apply"></i></li> 
-																		: <li><i className="fa fa-male" title="male & female candidates both can apply"></i><i className="fa fa-female bothIcon" title="male & female candidates both can apply"></i></li>
-																	}
-																	{	 
-																		elem.jobBasicInfo.jobshift_id ? 
-																		elem.jobBasicInfo.jobshift_id.jobShift=="Day Shift" ?
-																		<li><i className="fa fa-sun-o" title="Day Shift"></i></li>
-																		: elem.jobBasicInfo.jobshift_id.jobShift=="Night Shift"?
-																		<li><i className="fa fa-moon-o" title="Night Shift"></i></li> 
-																		: <li><i className="fa fa-repeat" title="Rotational shift"></i></li> 
-																		:
-																		<li><i className="fa fa-sun-o" title="Day Shift"></i></li>
-																		
-																	}	
-																	{	
-																		elem.jobBasicInfo.jobtime_id ?
-																		elem.jobBasicInfo.jobtime_id.jobTime=="Full Time"?
-																		<li><i className="fa fa-clock-o" title="Full Time"></i></li>
-																		: elem.jobBasicInfo.jobtime_id.jobTime=="Part Time" ? <li><i className="fa fa-hourglass-start" title="Part Time"></i></li>
-																		: elem.jobBasicInfo.jobtime_id.jobTime=="Hourly Basis"? 
-																		<li><i className="fa fa-hourglass-o" title="Hourly Basis"></i></li> 
-																		: <li><i className="fa fa-hourglass-o" title="Hourly Basis"></i></li> 
-																		: <li><i className="fa fa-clock-o" title="Full Time"></i></li>
-																	}	
-																</ul>
-																<div className="infoLog"> {Moment(elem.createdAt).startOf('seconds').fromNow()}  </div>
-																<div className="joblistNoCount"> 
-																     &nbsp; <a href={"/applied-candidate-list/" + elem._id}> Total Applicants : {applicantsCount.length > 0 ? applicantsCount[0].candidatesApplied :  0}</a> 
-															    </div>
+					</div>*/}
+					<div className="col-lg-8 col-lg-offset-2 row btnsRow">
+						<ul class="nav nav-pills nav-justified">
+						  	<li class="active col-lg-4 row"><a data-toggle="pill" href="#activejobs">Active Jobs</a></li>
+						  	<li class="col-lg-4 row"><a data-toggle="pill" href="#inactivejobs">Inactive Jobs</a></li>
+						  	<li class="col-lg-4 row"><a data-toggle="pill" href="#draftjobs">Drafts Jobs</a></li>
+						</ul>
+					</div>	
+
+					<div class="tab-content col-lg-12">
+						<div id="activejobs" class="tab-pane fade in active">
+							{
+								this.props.jobList.length>0
+								?
+									this.props.jobList.map((elem,index1)=>{
+										//console.log(elem)
+										var applicantsCount = this.props.applicantsCountList.filter((appl, ind)=>{
+											if (appl._id == elem._id) {
+												return appl.candidatesApplied;
+											}else{
+												return 0
+											}
+											
+										})
+										return(
+											<div className="col-lg-12" key={index1}>
+												<div className="jobListContainer">
+													<div className="col-lg-12">
+														<div className="col-lg-11 jobListLeftContent">
+															<div className="row">
+																<div className="leftSideMainBox col-lg-12">
+																	<div className="col-lg-6 leftSideBox">
+																		<div className="iconsBar">
+																			{/*<FontAwesomeIcon className="restRoomIcon" icon={['fas', 'restroom']} />*/}
+																			<ul>
+																				{
+																					elem.jobBasicInfo.gender=="Male Only"?
+																					<li><i className="fa fa-male" title="Only male candidates can apply"></i></li>
+																					: elem.jobBasicInfo.gender=="Female Only"?
+																					<li><i className="fa fa-female" title="Only female candidates can apply"></i></li> 
+																					: <li><i className="fa fa-male" title="male & female candidates both can apply"></i><i className="fa fa-female bothIcon" title="male & female candidates both can apply"></i></li>
+																				}
+																				{	 
+																					elem.jobBasicInfo.jobshift_id ? 
+																					elem.jobBasicInfo.jobshift_id.jobShift=="Day Shift" ?
+																					<li><i className="fa fa-sun-o" title="Day Shift"></i></li>
+																					: elem.jobBasicInfo.jobshift_id.jobShift=="Night Shift"?
+																					<li><i className="fa fa-moon-o" title="Night Shift"></i></li> 
+																					: <li><i className="fa fa-repeat" title="Rotational shift"></i></li> 
+																					:
+																					<li><i className="fa fa-sun-o" title="Day Shift"></i></li>	
+																				}	
+																				{	
+																					elem.jobBasicInfo.jobtime_id.jobTime=="Full Time"?
+																					<li><i className="fa fa-clock-o" title="Full Time"></i></li>
+																					: elem.jobBasicInfo.jobtime_id.jobTime=="Part Time" ? <li><i className="fa fa-hourglass-start" title="Part Time"></i></li>
+																					: elem.jobBasicInfo.jobtime_id.jobTime=="Hourly Basis"? 
+																					<li><i className="fa fa-hourglass-o" title="Hourly Basis"></i></li> 
+																					: <li><i className="fa fa-hourglass-o" title="Hourly Basis"></i></li> 
+																				}	
+																			</ul>
+																		</div>	
+																		<div className="infoLog"> {Moment(elem.createdAt).startOf('seconds').fromNow()}  </div>
+																		<div className="jobListDesignation col-lg-12 row">
+																			<a className="link">{elem.jobBasicInfo.jobTitle + " (" +elem.jobID+ ")"} </a>
+																		</div>
+																		<div className="jobListCompanyTitle col-lg-12 row">
+																			{elem.company_id ? elem.company_id.companyName : ""}
+																		</div>
+																		<div className="jobListExperienceTitle col-lg-12 row"> 
+																			<i className="fa fa-calendar jobListExperience"></i> &nbsp; Exp&nbsp;:&nbsp;{elem.eligibility.minExperience} years
+																		</div>
+																		<div className="jobListCtcSalTitle col-lg-12 row"> 
+																			<i className="fa fa-rupee jobListCtcSal"></i> &nbsp; <i className="fa fa-inr"></i> {elem.ctcOffered.minSalary} {elem.ctcOffered.minSalPeriod}&nbsp;&nbsp;-&nbsp;&nbsp;<i className="fa fa-inr"></i> {elem.ctcOffered.maxSalary} {elem.ctcOffered.maxSalPeriod}
+																		</div>
+																		<div className="joblistLocationInfo col-lg-12 row">
+																			<i className="fa fa-map-marker jobListLocation"></i> &nbsp; {elem.location.address + " " + elem.location.district + ", " + elem.location.state + ", " +elem.location.country}
+																		</div>
+																		<div className="jobListNumPositionsTitle col-lg-12 row"> 
+																			<i className="fa fa-users jobListNumPositions"></i> &nbsp; No. of positions : {elem.jobBasicInfo.positions}
+																		</div>
+																	</div>
+																	<div className="col-lg-6 rightSideBox">
+																		<div className="joblistNoCount col-lg-12"> 
+																			&nbsp; <a href={"/applied-candidate-list/" + elem._id}> Candidates Applied : {applicantsCount.length > 0 ? applicantsCount[0].candidatesApplied :  0}</a> 
+																		</div>
+																		<div className="tierOneRow col-lg-12 "> 
+																			<div className="col-lg-4 react1 row">Pune<br /><span className="multiCount">150</span></div>
+																			<div className="col-lg-4 react2 row">Rest of Maharashtra<br /><span className="multiCount">90</span></div>
+																			<div className="col-lg-4 react3 row">Rest of India<br /><span className="multiCount">120</span></div> 
+																		</div>
+																		<div className="tierOneRow col-lg-12 "> 
+																			<div className="col-lg-4 react1 row">Male<br /><span className="multiCount">160</span></div>
+																			<div className="col-lg-4 react2 row">Female<br /><span className="multiCount">200</span></div>
+																			<div className="col-lg-4 react3 row">Other<br /><span className="multiCount">0</span></div> 
+																		</div>
+																		<div className="tierOneRow col-lg-12 "> 
+																			<div className="col-lg-4 react1 row">Exp&nbsp;:&nbsp;0 To 2<br /><span className="multiCount">105</span></div>
+																			<div className="col-lg-4 react2 row">Exp&nbsp;:&nbsp;2 To 6<br /><span className="multiCount">95</span></div>
+																			<div className="col-lg-4 react3 row">Exp&nbsp;:&nbsp;6 To 7<br /><span className="multiCount">160</span></div> 
+																		</div> 
+																	</div>
+																</div>
+															</div>			
+														</div>
+														<div className="col-lg-1 jobListRightContent">
+															<div className="row">
+																<div className="col-lg-12">
+																	<div className="listEditBtn">
+																		<a title = "Edit Profile" href={"/post-job/" + elem._id}><i className="fa fa-edit"></i></a>
+																	</div>
+																	<div className="listViewBtn">	
+																		<a title = "View Profile" href={"/job-profile/" + elem._id}><i className="fa fa-eye"></i></a>
+																	</div>
+																	<div className="listDelBtn">	
+																		<i title = "Delete Profile" className="fa fa-trash" onClick={this.deleteJob} id = {elem._id}></i>
+																	</div>
+																</div>
 															</div>
 														</div>
-														<div className="jobListDesignation">
-															{elem.jobBasicInfo.jobTitle + " (" +elem.jobID+ ")"}
-														</div>
-														<div className="jobListCompanyName">
-
-															{elem.company_id.companyName}
-
-														</div>
-														<div> 
-															<i className="fa fa-calendar jobListExperience"></i> &nbsp; Exp : {elem.eligibility.minExperience}
-														</div>
-														<div> 
-															<i className="fa fa-rupee jobListMonSal"></i> &nbsp; <i className="fa fa-inr"></i> {elem.ctcOffered.minSalary} {elem.ctcOffered.minSalPeriod} &nbsp;-&nbsp; <i className="fa fa-inr"></i> {elem.ctcOffered.maxSalary} {elem.ctcOffered.maxSalPeriod}
-														</div>
-														<div>
-															<i className="fa fa-map-marker jobListLocation"></i> &nbsp; &nbsp; {elem.location.address + " "+ elem.location.district + ", "+elem.location.state+", "+elem.location.country}
-														</div>
-														<div> 
-															<i className="fa fa-users jobListNumPositions"></i> &nbsp; No of position : {elem.jobBasicInfo.positions} 
-														</div>
-														
-													</div>
-													<div className="col-lg-1 jobListRightContent">
-														<div className="row">
-															<div className="col-lg-12">
-																<div className="listEditBtn">
-																	<a title = "Edit Profile" href={"/post-job/" + elem._id}><i className="fa fa-edit"></i></a>
-																</div>
-																<div className="listViewBtn">	
-																	<a title = "View Profile" href={"/job-profile/" + elem._id}><i className="fa fa-eye"></i></a>
-																</div>
-																<div className="listDelBtn">	
-																	<i title = "Delete Profile" className="fa fa-trash" onClick={this.deleteJob} id = {elem._id}></i>
-																</div>
-															</div>
-														</div>
-													</div>
-												</div>	
+													</div>	
+												</div>
 											</div>
-										</div>
-									);
-								})
-							:
-								<h3 style={{margin:"100px"}}>No Jobs Found</h3>
-						}
-						<div className="col-lg-12">
-					        {
-								this.props.jobCount ? 
-								(this.props.selector.startLimit + this.props.selector.showMoreLimit) >= this.props.jobCount ? null :
-								<button className="btn buttonYellow" style={{float:"right", margin:"20px 0"}} onClick={this.showMore.bind(this)}>Show {this.props.selector.showMoreLimit} More</button>
-					        
-					        	: 
-					        	<button className="btn buttonYellow" style={{float:"right", margin:"20px 0"}} onClick={this.showMore.bind(this)}> Show More </button>
+										);
+									})
+								:
+									<h3 style={{margin:"100px"}}>No Jobs Found</h3>
 							}
-					    </div>	
+
+							<div className="col-lg-12">
+								{
+									this.props.jobCount ? 
+									(this.props.selector.startLimit + this.props.selector.showMoreLimit) >= this.props.jobCount ? null :
+									<button className="btn buttonYellow" style={{float:"right", margin:"20px 0"}} onClick={this.showMore.bind(this)}>Show {this.props.selector.showMoreLimit} More</button>
+						        
+						        	: 
+						        	<button className="btn buttonYellow" style={{float:"right", margin:"20px 0"}} onClick={this.showMore.bind(this)}> Show More </button> 
+								}
+						    </div>
+						</div>
+						
+						<div id="inactivejobs" class="tab-pane fade">
+							{
+								this.props.jobList.length>0
+								?
+									this.props.jobList.map((elem,index1)=>{
+										//console.log(elem)
+										var applicantsCount = this.props.applicantsCountList.filter((appl, ind)=>{
+											if (appl._id == elem._id) {
+												return appl.candidatesApplied;
+											}else{
+												return 0
+											}
+											
+										})
+										return(
+											<div className="col-lg-12" key={index1}>
+												<div className="jobListContainer">
+													<div className="col-lg-12">
+														<div className="col-lg-11 jobListLeftContent">
+															<div className="row">
+																<div className="leftSideMainBox col-lg-12">
+																	<div className="col-lg-6 leftSideBox">
+																		<div className="iconsBar">
+																			{/*<FontAwesomeIcon className="restRoomIcon" icon={['fas', 'restroom']} />*/}
+																			<ul>
+																				{
+																					elem.jobBasicInfo.gender=="Male Only"?
+																					<li><i className="fa fa-male" title="Only male candidates can apply"></i></li>
+																					: elem.jobBasicInfo.gender=="Female Only"?
+																					<li><i className="fa fa-female" title="Only female candidates can apply"></i></li> 
+																					: <li><i className="fa fa-male" title="male & female candidates both can apply"></i><i className="fa fa-female bothIcon" title="male & female candidates both can apply"></i></li>
+																				}
+																				{	 
+																					elem.jobBasicInfo.jobshift_id ? 
+																					elem.jobBasicInfo.jobshift_id.jobShift=="Day Shift" ?
+																					<li><i className="fa fa-sun-o" title="Day Shift"></i></li>
+																					: elem.jobBasicInfo.jobshift_id.jobShift=="Night Shift"?
+																					<li><i className="fa fa-moon-o" title="Night Shift"></i></li> 
+																					: <li><i className="fa fa-repeat" title="Rotational shift"></i></li> 
+																					:
+																					<li><i className="fa fa-sun-o" title="Day Shift"></i></li>	
+																				}	
+																				{	
+																					elem.jobBasicInfo.jobtime_id.jobTime=="Full Time"?
+																					<li><i className="fa fa-clock-o" title="Full Time"></i></li>
+																					: elem.jobBasicInfo.jobtime_id.jobTime=="Part Time" ? <li><i className="fa fa-hourglass-start" title="Part Time"></i></li>
+																					: elem.jobBasicInfo.jobtime_id.jobTime=="Hourly Basis"? 
+																					<li><i className="fa fa-hourglass-o" title="Hourly Basis"></i></li> 
+																					: <li><i className="fa fa-hourglass-o" title="Hourly Basis"></i></li> 
+																				}	
+																			</ul>
+																		</div>	
+																		<div className="infoLog"> {Moment(elem.createdAt).startOf('seconds').fromNow()}  </div>
+																		<div className="jobListDesignation col-lg-12 row">
+																			<a className="link">{elem.jobBasicInfo.jobTitle + " (" +elem.jobID+ ")"} </a>
+																		</div>
+																		<div className="jobListCompanyTitle col-lg-12 row">
+																			{elem.company_id ? elem.company_id.companyName : ""}
+																		</div>
+																		<div className="jobListExperienceTitle col-lg-12 row"> 
+																			<i className="fa fa-calendar jobListExperience"></i> &nbsp; Exp&nbsp;:&nbsp;{elem.eligibility.minExperience} years
+																		</div>
+																		<div className="jobListCtcSalTitle col-lg-12 row"> 
+																			<i className="fa fa-rupee jobListCtcSal"></i> &nbsp; <i className="fa fa-inr"></i> {elem.ctcOffered.minSalary} {elem.ctcOffered.minSalPeriod}&nbsp;&nbsp;-&nbsp;&nbsp;<i className="fa fa-inr"></i> {elem.ctcOffered.maxSalary} {elem.ctcOffered.maxSalPeriod}
+																		</div>
+																		<div className="joblistLocationInfo col-lg-12 row">
+																			<i className="fa fa-map-marker jobListLocation"></i> &nbsp; {elem.location.address + " " + elem.location.district + ", " + elem.location.state + ", " +elem.location.country}
+																		</div>
+																		<div className="jobListNumPositionsTitle col-lg-12 row"> 
+																			<i className="fa fa-users jobListNumPositions"></i> &nbsp; No. of positions : {elem.jobBasicInfo.positions}
+																		</div>
+																	</div>
+																	<div className="col-lg-6 rightSideBox">
+																		<div className="joblistNoCount col-lg-12"> 
+																			&nbsp; <a href={"/applied-candidate-list/" + elem._id}> Candidates Applied : {applicantsCount.length > 0 ? applicantsCount[0].candidatesApplied :  0}</a> 
+																		</div>
+																		<div className="tierOneRow col-lg-12 "> 
+																			<div className="col-lg-4 react1 row">Pune<br /><span className="multiCount">150</span></div>
+																			<div className="col-lg-4 react2 row">Rest of Maharashtra<br /><span className="multiCount">90</span></div>
+																			<div className="col-lg-4 react3 row">Rest of India<br /><span className="multiCount">120</span></div> 
+																		</div>
+																		<div className="tierOneRow col-lg-12 "> 
+																			<div className="col-lg-4 react1 row">Male<br /><span className="multiCount">160</span></div>
+																			<div className="col-lg-4 react2 row">Female<br /><span className="multiCount">200</span></div>
+																			<div className="col-lg-4 react3 row">Other<br /><span className="multiCount">0</span></div> 
+																		</div>
+																		<div className="tierOneRow col-lg-12 "> 
+																			<div className="col-lg-4 react1 row">Exp&nbsp;:&nbsp;0 To 2<br /><span className="multiCount">105</span></div>
+																			<div className="col-lg-4 react2 row">Exp&nbsp;:&nbsp;2 To 6<br /><span className="multiCount">95</span></div>
+																			<div className="col-lg-4 react3 row">Exp&nbsp;:&nbsp;6 To 7<br /><span className="multiCount">160</span></div> 
+																		</div> 
+																	</div>
+																</div>
+															</div>			
+														</div>
+														<div className="col-lg-1 jobListRightContent">
+															<div className="row">
+																<div className="col-lg-12">
+																	<div className="listEditBtn">
+																		<a title = "Edit Profile" href={"/post-job/" + elem._id}><i className="fa fa-edit"></i></a>
+																	</div>
+																	<div className="listViewBtn">	
+																		<a title = "View Profile" href={"/job-profile/" + elem._id}><i className="fa fa-eye"></i></a>
+																	</div>
+																	<div className="listDelBtn">	
+																		<i title = "Delete Profile" className="fa fa-trash" onClick={this.deleteJob} id = {elem._id}></i>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>	
+												</div>
+											</div>
+										);
+									})
+								:
+									<h3 style={{margin:"100px"}}>No Jobs Found</h3>
+							}
+
+							<div className="col-lg-12">
+								{
+									this.props.jobCount ? 
+									(this.props.selector.startLimit + this.props.selector.showMoreLimit) >= this.props.jobCount ? null :
+									<button className="btn buttonYellow" style={{float:"right", margin:"20px 0"}} onClick={this.showMore.bind(this)}>Show {this.props.selector.showMoreLimit} More</button>
+						        
+						        	: 
+						        	<button className="btn buttonYellow" style={{float:"right", margin:"20px 0"}} onClick={this.showMore.bind(this)}> Show More </button>
+								}
+						    </div>
+						</div>
+						
+						<div id="draftjobs" class="tab-pane fade">
+							{
+								this.props.jobList.length>0
+								?
+									this.props.jobList.map((elem,index1)=>{
+										//console.log(elem)
+										var applicantsCount = this.props.applicantsCountList.filter((appl, ind)=>{
+											if (appl._id == elem._id) {
+												return appl.candidatesApplied;
+											}else{
+												return 0
+											}
+											
+										})
+										return(
+											<div className="col-lg-12" key={index1}>
+												<div className="jobListContainer">
+													<div className="col-lg-12">
+														<div className="col-lg-11 jobListLeftContent">
+															<div className="row">
+																<div className="leftSideMainBox col-lg-12">
+																	<div className="col-lg-6 leftSideBox">
+																		<div className="iconsBar">
+																			{/*<FontAwesomeIcon className="restRoomIcon" icon={['fas', 'restroom']} />*/}
+																			<ul>
+																				{
+																					elem.jobBasicInfo.gender=="Male Only"?
+																					<li><i className="fa fa-male" title="Only male candidates can apply"></i></li>
+																					: elem.jobBasicInfo.gender=="Female Only"?
+																					<li><i className="fa fa-female" title="Only female candidates can apply"></i></li> 
+																					: <li><i className="fa fa-male" title="male & female candidates both can apply"></i><i className="fa fa-female bothIcon" title="male & female candidates both can apply"></i></li>
+																				}
+																				{	 
+																					elem.jobBasicInfo.jobshift_id ? 
+																					elem.jobBasicInfo.jobshift_id.jobShift=="Day Shift" ?
+																					<li><i className="fa fa-sun-o" title="Day Shift"></i></li>
+																					: elem.jobBasicInfo.jobshift_id.jobShift=="Night Shift"?
+																					<li><i className="fa fa-moon-o" title="Night Shift"></i></li> 
+																					: <li><i className="fa fa-repeat" title="Rotational shift"></i></li> 
+																					:
+																					<li><i className="fa fa-sun-o" title="Day Shift"></i></li>	
+																				}	
+																				{	
+																					elem.jobBasicInfo.jobtime_id.jobTime=="Full Time"?
+																					<li><i className="fa fa-clock-o" title="Full Time"></i></li>
+																					: elem.jobBasicInfo.jobtime_id.jobTime=="Part Time" ? <li><i className="fa fa-hourglass-start" title="Part Time"></i></li>
+																					: elem.jobBasicInfo.jobtime_id.jobTime=="Hourly Basis"? 
+																					<li><i className="fa fa-hourglass-o" title="Hourly Basis"></i></li> 
+																					: <li><i className="fa fa-hourglass-o" title="Hourly Basis"></i></li> 
+																				}	
+																			</ul>
+																		</div>	
+																		<div className="infoLog"> {Moment(elem.createdAt).startOf('seconds').fromNow()}  </div>
+																		<div className="jobListDesignation col-lg-12 row">
+																			<a className="link">{elem.jobBasicInfo.jobTitle + " (" +elem.jobID+ ")"} </a>
+																		</div>
+																		<div className="jobListCompanyTitle col-lg-12 row">
+																			{elem.company_id ? elem.company_id.companyName : ""}
+																		</div>
+																		<div className="jobListExperienceTitle col-lg-12 row"> 
+																			<i className="fa fa-calendar jobListExperience"></i> &nbsp; Exp&nbsp;:&nbsp;{elem.eligibility.minExperience} years
+																		</div>
+																		<div className="jobListCtcSalTitle col-lg-12 row"> 
+																			<i className="fa fa-rupee jobListCtcSal"></i> &nbsp; <i className="fa fa-inr"></i> {elem.ctcOffered.minSalary} {elem.ctcOffered.minSalPeriod}&nbsp;&nbsp;-&nbsp;&nbsp;<i className="fa fa-inr"></i> {elem.ctcOffered.maxSalary} {elem.ctcOffered.maxSalPeriod}
+																		</div>
+																		<div className="joblistLocationInfo col-lg-12 row">
+																			<i className="fa fa-map-marker jobListLocation"></i> &nbsp; {elem.location.address + " " + elem.location.district + ", " + elem.location.state + ", " +elem.location.country}
+																		</div>
+																		<div className="jobListNumPositionsTitle col-lg-12 row"> 
+																			<i className="fa fa-users jobListNumPositions"></i> &nbsp; No. of positions : {elem.jobBasicInfo.positions}
+																		</div>
+																	</div>
+																	<div className="col-lg-6 rightSideBox">
+																		<div className="joblistNoCount col-lg-12"> 
+																			&nbsp; <a href={"/applied-candidate-list/" + elem._id}> Candidates Applied : {applicantsCount.length > 0 ? applicantsCount[0].candidatesApplied :  0}</a> 
+																		</div>
+																		<div className="tierOneRow col-lg-12 "> 
+																			<div className="col-lg-4 react1 row">Pune<br /><span className="multiCount">150</span></div>
+																			<div className="col-lg-4 react2 row">Rest of Maharashtra<br /><span className="multiCount">90</span></div>
+																			<div className="col-lg-4 react3 row">Rest of India<br /><span className="multiCount">120</span></div> 
+																		</div>
+																		<div className="tierOneRow col-lg-12 "> 
+																			<div className="col-lg-4 react1 row">Male<br /><span className="multiCount">160</span></div>
+																			<div className="col-lg-4 react2 row">Female<br /><span className="multiCount">200</span></div>
+																			<div className="col-lg-4 react3 row">Other<br /><span className="multiCount">0</span></div> 
+																		</div>
+																		<div className="tierOneRow col-lg-12 "> 
+																			<div className="col-lg-4 react1 row">Exp&nbsp;:&nbsp;0 To 2<br /><span className="multiCount">105</span></div>
+																			<div className="col-lg-4 react2 row">Exp&nbsp;:&nbsp;2 To 6<br /><span className="multiCount">95</span></div>
+																			<div className="col-lg-4 react3 row">Exp&nbsp;:&nbsp;6 To 7<br /><span className="multiCount">160</span></div> 
+																		</div> 
+																	</div>
+																</div>
+															</div>			
+														</div>
+														<div className="col-lg-1 jobListRightContent">
+															<div className="row">
+																<div className="col-lg-12">
+																	<div className="listEditBtn">
+																		<a title = "Edit Profile" href={"/post-job/" + elem._id}><i className="fa fa-edit"></i></a>
+																	</div>
+																	<div className="listViewBtn">	
+																		<a title = "View Profile" href={"/job-profile/" + elem._id}><i className="fa fa-eye"></i></a>
+																	</div>
+																	<div className="listDelBtn">	
+																		<i title = "Delete Profile" className="fa fa-trash" onClick={this.deleteJob} id = {elem._id}></i>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>	
+												</div>
+											</div>
+										);
+									})
+								:
+									<h3 style={{margin:"100px"}}>No Jobs Found</h3>
+							}
+
+							<div className="col-lg-12">
+								{
+									this.props.jobCount ? 
+									(this.props.selector.startLimit + this.props.selector.showMoreLimit) >= this.props.jobCount ? null :
+									<button className="btn buttonYellow" style={{float:"right", margin:"20px 0"}} onClick={this.showMore.bind(this)}>Show {this.props.selector.showMoreLimit} More</button>
+						        
+						        	: 
+						        	<button className="btn buttonYellow" style={{float:"right", margin:"20px 0"}} onClick={this.showMore.bind(this)}> Show More </button>
+								}
+						    </div>
+						</div>
+					</div> 
 				</div>
+				
 			</section>
 		);
 	}
