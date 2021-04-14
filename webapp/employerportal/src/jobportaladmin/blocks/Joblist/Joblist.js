@@ -315,7 +315,7 @@ deleteJob = (event)=>{
 																			 value="togglePrimary" onClick={this.handleSwitch.bind(this)}>
 																				<div className="row">Inactive</div>
 																			</div>
-																		</div>		
+																		</div>
 																	</div>
 																	<div className="listDelBtn">	
 																		<i title = "Delete" className="fa fa-trash" onClick={this.deleteJob} id = {elem._id}></i>
