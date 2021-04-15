@@ -9,24 +9,25 @@
 }
 
 .registrationFormWrapper{
-  min-height: 400px;
+  min-height: 500px;
   height: auto;
   /*background-color:#242931;*/
-  padding-bottom: 50px;
+  padding-bottom: 100px;
 
 }
 
 .registrationForm{
   min-height: 300px;
   height: auto;
-  margin-top: 120px;
+  margin-top: 100px;
   background-color: #242931;
   border:3px solid #D3950A;
   border-radius: 10px;
+  padding-bottom: 50px;
 }
 
 .signUpTitle{
-  height: 80px;
+  height: 100px;
   color: #D3950A;
   font-size:20px;
   text-align: center;
@@ -79,22 +80,21 @@
   color: #fff;
   border: 1px solid #D3950A;
   margin-bottom: 2px;
-  font-size: 16px;
+  font-size: 14px;
   font-family: 'Montserrat-Bold';
 }
 
 .buttonSignUp:hover{
   background-color: transparent;
   color: #D3950A;
-  border: 2px solid #D3950A;
-  font-weight: bold;
-  margin-bottom: 0px;
+
 }
 
 .registrationLinks{
   text-align: center;
   margin-top: 20px;
   height: 30px;
+  float: right;
   /*background-color: pink;*/;
 
 }
@@ -103,16 +103,13 @@
 .alreadyAccount{
   color: #aaa !important;
   text-align: center;
-  font-size: 14px;
-  margin-top: 50px;
+  font-size: 13px;
   font-family: 'Montserrat-Regular';
   
 }
 
 .alreadyAccount:hover{
-  color: #fff!important;
-  font-size: 15px;
-   font-family: 'Montserrat-Regular';
+  color: #fff!important; 
 }
 
 .registrationCompany{
@@ -191,7 +188,7 @@
   position: absolute;
   height: 200px;
   width: 125px;
-  top:21px;
+  top:0px;
   left:55%;
   z-index: 1;
 }
@@ -208,8 +205,8 @@
   position: absolute;
   height: 300px;
   width: 180px;
-  bottom: 30px;
-  left:9%;
+  bottom: 70px;
+  left:23%;
   z-index: 1;
 
   
@@ -227,8 +224,8 @@
   position: absolute;
   height: 290px;
   width: 110px;
-  bottom: 30px;
-  left:69%;
+  bottom: 75px;
+  left:61.5%;
   z-index: 1;
   
 }
@@ -242,44 +239,73 @@
 
 .img4LoginSU{
   position: absolute;
-  height: 150px;
-  width: 80px;
+  height: 100px;
+  width: 50px;
   
-  bottom: 20px;
-  left: 28%;
+  bottom: 65px;
+    left: 38%;
   z-index: 1;
 }
 
 .img4loginInnerSU{
-  height: 150px;
-  width: 80px;
+  height: 100px;
+  width: 50px;
 }
 
 .img5LoginSU{
   position: absolute;
-  height: 150px;
-  width: 140px;
-  
- bottom: 65px;
-    left: 73%;
+  height: 135px;
+  width: 125px;
+  bottom: 100px;
+    left: 65%;
   z-index: 0;
 }
 
 .img5loginInnerSU{
-  height: 150px;
-  width: 140px;
+  height: 135px;
+  width: 125px;
 }
 
 .img6LoginSU{
   position: absolute;
-  height: 90px;
-  width: 70px;
+  height: 80px;
+  width: 60px;
   top: 130px;
-    left: 18.6%;
+    left: 29.6%;
   z-index: 0;
 }
 
 .img6loginInnerSU{
-  height: 90px;
-  width: 70px;
+  height: 80px;
+  width: 60px;
+}
+
+.agreeTC{
+
+    font-size: 11px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    color: #eee;
+    font-family: 'Montserrat-Regular';
+    /*background-color: red;*/
+}
+
+.checkmark2 {
+   
+    height: 15px;
+    width: 15px;
+    border-radius: 3px;
+    cursor: pointer;
+    border: 2px solid var(--main-border-color) !important;
+    float: left;
+
+}
+
+.textTC{
+  margin-left: 24px;
+  margin-right: 10px;
+  width: 100%;
+  height: 20px;
 }

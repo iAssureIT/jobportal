@@ -414,6 +414,13 @@ class SignUp extends Component {
     }
   }
 
+
+  setWorkFromHome(event) {
+        this.setState({
+            workFromHome: event.target.checked
+        });
+    }
+
   handleChange(event) {
     // var dropDown = this.refs.dropDown.value;
     // console.log("dropDown",dropDown);
@@ -530,17 +537,40 @@ class SignUp extends Component {
   render() {
     return (
       
-      <section className="container-fluid registrationFormWrapper">
-          <div className="registrationForm col-lg-6 col-lg-offset-3">
+      <section className="col-lg-12 registrationFormWrapper">
+         <div className="img1LoginSU">
+              <img src="/images/Sign_In/1.png" alt="img1Login" className="img1oginInnerSU"/>
+          </div>
+
+           <div className="img2LoginSU">
+              <img src="/images/Sign_In/2.png" alt="img2Login" className="img2loginInnerSU"/>
+          </div>
+
+           <div className="img3LoginSU">
+              <img src="/images/Sign_In/3.png" alt="img3Login" className="img3loginInnerSU"/>
+          </div>
+
+           <div className="img4LoginSU">
+              <img src="/images/Sign_In/4.png" alt="img4Login" className="img4loginInnerSU"/>
+          </div>
+
+           <div className="img5LoginSU">
+              <img src="/images/Sign_In/5.png" alt="img5Login" className="img5loginInnerSU"/>
+          </div>
+
+           <div className="img6LoginSU">
+              <img src="/images/Sign_In/6.png" alt="img6Login" className="img6loginInnerSU"/>
+          </div>
+          <div className="registrationForm col-lg-4 col-lg-offset-4">
             <form>
               <div className="signUpTitle col-lg-12">Sign Up</div>
 
-              <div className="row">
+             {/* <div className="row">
                 <hr className="registrationHr"/>
-              </div>
+              </div>*/}
              
-              <div className="row">
-                <div className="col-lg-12 form-group" >
+              
+                <div className="col-lg-10 col-lg-offset-1 form-group" >
                   <div className="input-group autocomplete">
                     <span className="input-group-addon registrationInputIcon"><i className="fa fa-briefcase"></i></span>
                     <input type="text" list="companyName" className="form-control inputBox" refs="industry" 
@@ -554,9 +584,9 @@ class SignUp extends Component {
                   </div>
                   <span id="employerError" className="errorMsg"></span>
                 </div>
-              </div>  
-              <div className="row">
-              <div className="col-lg-4 form-group">
+              
+            
+              <div className="col-lg-10 col-lg-offset-1 form-group">
                 {/*<label htmlFor="branch" className="nameTitleForm">
                    City
                   <sup className="nameTitleFormStar">*</sup>
@@ -579,7 +609,7 @@ class SignUp extends Component {
                 <span id="branchError" className="errorMsg"></span>
               </div>
 
-              <div className="col-lg-4">
+              <div className="col-lg-10 col-lg-offset-1 form-group">
                 
                 <div className="input-group ">
                   <span className="input-group-addon registrationInputIcon"><i className="fa fa-map-marker"></i></span>  
@@ -600,7 +630,7 @@ class SignUp extends Component {
                 </div> 
                 <span id="stateError" className="errorMsg"></span>
               </div>
-              <div className="col-lg-4">
+              <div className="col-lg-10 col-lg-offset-1 form-group">
                 {/*<label htmlFor="companyCountry" className="nameTitleForm">
                    Country
                     <sup className="nameTitleFormStar">*</sup>
@@ -613,9 +643,9 @@ class SignUp extends Component {
                 </div> 
                 <span id="companyCountryError" className="errorMsg"></span>
               </div>
-            </div>
-              <div className="row">
-                <div className="col-lg-6 form-group" >
+            
+              
+                <div className="col-lg-10 col-lg-offset-1 form-group" >
                     <div className="input-group">
                         <span className="input-group-addon registrationInputIcon"><i className="fa fa-user"></i></span>
                         <input type="text" id="firstName" name="firstName" placeholder="First Name" value={this.state.firstName} onChange={this.handleChange.bind(this)} className="form-control registrationInputBox"/>
@@ -623,17 +653,15 @@ class SignUp extends Component {
                      <span id="firstNameError" className="errorMsg"></span>
                 </div>
 
-                <div className="col-lg-6 form-group" >
+                <div className="col-lg-10 col-lg-offset-1 form-group" >
                     <div className="input-group">
                         <span className="input-group-addon registrationInputIcon"><i className="fa fa-user"></i></span>
                         <input type="text" id="lastName" name="lastName" placeholder="Last Name" value={this.state.lastName} onChange={this.handleChange.bind(this)} className="form-control registrationInputBox"/>
                     </div>
                      <span id="lastNameError" className="errorMsg"></span>
                 </div>
-              </div>
-
-              <div className="row">
-                <div className="col-lg-6 form-group" >
+            
+                <div className="col-lg-10 col-lg-offset-1 form-group" >
                     <div className="input-group">
                         <span className="input-group-addon registrationInputIcon1"><i className="fa fa-envelope"></i></span>
                         <input type="email" id="emailAddress" name="emailAddress" placeholder="Email Address" value={this.state.emailAddress} onChange={this.handleChange.bind(this)} className="form-control registrationInputBox"/>
@@ -641,7 +669,7 @@ class SignUp extends Component {
                      <span id="emailAddressError" className="errorMsg"></span>
                 </div>
 
-                <div className="col-lg-6 form-group" >
+                <div className="col-lg-10 col-lg-offset-1 form-group" >
                   <PhoneInput 
                     country   = {'in'}
                     id        ="mobileNumber" 
@@ -651,10 +679,8 @@ class SignUp extends Component {
                   />
                   <span id="mobileNumberError" className="errorMsg"></span>
                 </div>
-              </div>
-
-              <div className="row">
-                <div className="col-lg-6 form-group">
+              
+                <div className="col-lg-10 col-lg-offset-1 form-group">
                   <div className="input-group">
                       <span className="input-group-addon registrationInputIcon"><i className="fa fa-lock"></i></span>
                       <input type="password" id="password" name="password" placeholder="Password" value={this.state.password} onChange={this.handleChange.bind(this)} className="form-control registrationInputBox"/>
@@ -665,7 +691,7 @@ class SignUp extends Component {
                   <span id="passwordError" className="errorMsg"></span>
                 </div>
 
-                <div className="col-lg-6 form-group ">
+                <div className="col-lg-10 col-lg-offset-1 form-group ">
                     <div className="input-group">
                       <span className="input-group-addon registrationInputIcon"><i className="fa fa-lock"></i></span>
                       <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" value={this.state.confirmPassword} onChange={this.handleChange.bind(this)} className="form-control registrationInputBox"/>
@@ -675,14 +701,30 @@ class SignUp extends Component {
                     </div>
                      <span id="confirmPasswordError" className="errorMsg"></span>
                 </div>
-              </div>
-            <div className="col-lg-6 col-lg-offset-3 buttonWrapper">
-              <button className="btn col-lg-12 buttonSignUp" onClick={this.usersignup.bind(this)}>Sign Up</button>
-            </div>
+            
+                <div className="col-lg-10 col-lg-offset-1" >
+                      <div className="col-lg-6">
+                        <div className="row">
+                          <label htmlFor="workFromHome" className="agreeTC">
+                          
+                            <input type="checkbox" name="workFromHome" className="checkmark2" id="workFromHome" value={this.state.workFromHome} onChange={this.setWorkFromHome.bind(this)} />
+                          
+                             <div className="textTC"> I agree to the <br/>Terms & Conditions</div>
+                          </label>
+                        </div>  
+                      </div>
 
-            <div className="col-lg-12 registrationLinks">
-              <a className="alreadyAccount" href="/login"><u>Already have an Account?Sign In</u></a>
-            </div>
+                      <div className="col-lg-6  buttonWrapper">
+                        <div className="row">
+                          <button className="btn col-lg-12 buttonSignUp" onClick={this.usersignup.bind(this)}>Sign Up >></button>
+                        </div>
+                      </div>
+                </div>    
+
+                <div className="col-lg-10 col-lg-offset-1 registrationLinks" >
+                  <a className="alreadyAccount col-lg-4 col-lg-offset-6" href="/login"><u>Sign In >></u></a>
+                </div>
+
 
           </form>
         </div>

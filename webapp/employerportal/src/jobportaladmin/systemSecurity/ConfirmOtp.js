@@ -177,7 +177,32 @@ class ConfirmOtp extends Component {
     var resendOtp = "";
 
     return (
-      <section className="container-fluid confirmOTPWrapper">
+      <section className="col-lg-12 confirmOTPWrapper">
+
+              <div className="img1LoginFP">
+                  <img src="/images/Sign_In/1.png" alt="img1Login" className="img1oginInnerFP"/>
+              </div>
+
+               <div className="img2LoginFP">
+                  <img src="/images/Sign_In/2.png" alt="img2Login" className="img2loginInnerFP"/>
+              </div>
+
+               <div className="img3LoginFP">
+                  <img src="/images/Sign_In/3.png" alt="img3Login" className="img3loginInnerFP"/>
+              </div>
+
+               <div className="img4LoginFP">
+                  <img src="/images/Sign_In/4.png" alt="img4Login" className="img4loginInnerFP"/>
+              </div>
+
+               <div className="img5LoginFP">
+                  <img src="/images/Sign_In/5.png" alt="img5Login" className="img5loginInnerFP"/>
+              </div>
+
+               <div className="img6LoginFP">
+                  <img src="/images/Sign_In/6.png" alt="img6Login" className="img6loginInnerFP"/>
+              </div>
+              
                 <div className="confirmOTP col-lg-4 col-lg-offset-4">
                   <form>
                     <div className="confirmOTPTitle col-lg-12">Confirm OTP
@@ -186,28 +211,50 @@ class ConfirmOtp extends Component {
                     <hr className="confirmOTPHr"/>
 
                     <div className="confirmOTPSentence col-lg-12">
-                         We have sent you an OTP to your registered email address.
-                        Please enter your OTP below
+                        Please enter OTP sent you on your email
 
                     </div>
 
-                    <div className="col-lg-12 form-group" >
-                        <div className="input-group">
-                            <span className="input-group-addon confirmOTPInputIcon1"><i className="fa fa-envelope"></i></span>
-                            <input type="text" id="otp" name="otp" ref="emailotp" placeholder="Enter your OTP" value={this.state.OTP} onChange={this.handleChange.bind(this)} className="form-control confirmOTPInputBox"/>
+                    <div className="col-lg-10 col-lg-offset-1">
+
+                        <div className="otpBox form-group" >
+                            <div className="input-group ">
+                               
+                                <input type="text" id="otp" maxlength="1" name="otp" ref="emailotp" placeholder="_" value={this.state.OTP} onChange={this.handleChange.bind(this)} className="form-control confirmOTPInputBox"/>
+                            </div>
+                           
                         </div>
-                        <span id="otpError" className="errorMsg"></span>
-                    </div>
 
 
-                    <div className="col-lg-12 confirmOTPLinks">
-                        Found your Password? &nbsp;
-                        <a className="confirmOTPSignIn" href="/login"><u>Sign In</u></a>
-                    </div>
-                    
+                        <div className="otpBox form-group" >
+                            <div className="input-group ">
+                               
+                                <input type="text" id="otp" maxlength="1" name="otp" ref="emailotp" placeholder="_" value={this.state.OTP} onChange={this.handleChange.bind(this)} className="form-control confirmOTPInputBox"/>
+                            </div>
+                           
+                        </div>
+                        <div className="otpBox form-group" >
+                            <div className="input-group ">
+                               
+                                <input type="text" id="otp" maxlength="1" name="otp" ref="emailotp" placeholder="_" value={this.state.OTP} onChange={this.handleChange.bind(this)} className="form-control confirmOTPInputBox"/>
+                            </div>
+                           
+                        </div>
+
+                        <div className="otpBox form-group" >
+                            <div className="input-group ">
+                               
+                                <input type="text" id="otp" maxlength="1" name="otp" ref="emailotp" placeholder="_" value={this.state.OTP} onChange={this.handleChange.bind(this)} className="form-control confirmOTPInputBox"/>
+                            </div>
+                           
+                        </div>
+                      <span id="otpError" className="errorMsg"></span>
+                     </div>  
+
+                  
                     
                      
-                    <div className="col-lg-12 buttonWrapper">
+                    <div className="col-lg-10 col-lg-offset-1 buttonWrapper">
                       <div className="row">
                         <div className="col-lg-6">
                             <button className="btn col-lg-12 buttonConfirmOTP" onClick={this.resendOtp.bind(this)}>Resend OTP</button>

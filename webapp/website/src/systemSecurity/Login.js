@@ -263,7 +263,7 @@ class Login extends Component {
   render() {
     
     return (
-        <section className="loginFormOuter col-lg-12">
+        <section className="loginFormOuter col-lg-12 col-md-12">
           <div className="img1Login">
               <img src="/images/Sign_In/1.png" alt="img1Login" className="img1oginInner"/>
           </div>
@@ -288,10 +288,10 @@ class Login extends Component {
               <img src="/images/Sign_In/6.png" alt="img6Login" className="img6loginInner"/>
           </div>
 
-          <div className="loginFormInner col-lg-4 col-lg-offset-4">
-            <form>
+          <div className="loginFormInner col-lg-4 col-lg-offset-4 col-md-4 col-md-offset-4">
+            <form autocomplete="off">
 
-              <div className="signInTitle col-lg-12"> Sign In
+              <div className="signInTitle col-lg-12 col-md-12"> Sign In
               </div>
               
              {/* <div className="loginSocialMedia">
@@ -309,16 +309,16 @@ class Login extends Component {
                 <hr className="loginHr"/>
               </div>*/}
               
-              <div className="col-lg-10 col-lg-offset-1">
+              <div className="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1">
                         <div className="loginSignUp1" onClick={this.ShowSignUp.bind(this)}>
-                        Don't have and Account ?
-                          <a href="#"><u className="loginSignUp">Sign Up?</u></a>
+                        Don't have an Account ?
+                          <a href="#"><u className="loginSignUp"> Sign Up</u></a>
                         </div>
               </div>
                     
 
-                  <div className="col-lg-10 col-lg-offset-1 form-group loginFormGroup" >
-                    <div className="input-group">
+                  <div className="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 form-group loginFormGroup" >
+                    <div className="input-group" autocomplete="off">
                       <span className="input-group-addon loginInputIcon1"><i className="fa fa-mobile"></i></span>
                       <input type="tel" id="loginusername" name="loginusername" placeholder="Email Id" 
                       value={this.state.loginusername} ref="loginusername"
@@ -327,7 +327,7 @@ class Login extends Component {
                     <span id="loginusernameError" className="errorMsg"></span>
                   </div>
 
-                  <div className="col-lg-10 col-lg-offset-1 form-group" >
+                  <div className="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 form-group" >
                     <div className="input-group">
                       <span className="input-group-addon loginInputIcon2"><i className="fa fa-lock"></i></span>
                       <input type="password" id="password" name="password" placeholder="Password" value={this.state.password} ref="loginpassword" onChange={this.handleChange.bind(this)} className="form-control loginInputBox"/>
@@ -338,16 +338,18 @@ class Login extends Component {
                     <span id="passwordError" className="errorMsg"></span>
                   </div>
 
-                  <div className="col-lg-10 col-lg-offset-1 buttonWrapper">
-                    <div className="col-lg-6">
+                  <div className="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 buttonWrapper">
+                    <div className="col-lg-6 col-md-6">
                       <div className="row">
                          <a href="#" className="loginForgotPassword" onClick={this.ShowForgotPass.bind(this)}><u>Forgot Password?</u></a>
                       </div>  
                     </div>
-                   <button className="btn col-lg-6 buttonSignIn" onClick={this.userlogin.bind(this)}>Sign In</button>
+                   <button className="btn col-lg-6 col-md-6 buttonSignIn" onClick={this.userlogin.bind(this)}>
+                    Sign In
+                   </button>
                   </div>
 
-                  <div className="col-lg-12 loginLinks">
+                  <div className="col-lg-12 col-md-12 loginLinks"> 
                     <div className="row">
                       {/*<div className="col-lg-6">
                         <a href="#" className="loginSignUp" onClick={this.ShowSignUp.bind(this)}><u>Sign Up?</u></a>

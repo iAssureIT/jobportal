@@ -1,54 +1,66 @@
+body{
+ 
+ background-color: var(--main-bg-color )!important;
+}
+
 .confirmOTPWrapper{
-	min-height: 650px;
-	height: auto;
-	background-color:#242931;
+	min-height: 500px;
+    height: auto;
+    background-color:#242931;
+ 	padding-bottom: 100px;
+ 	margin-top: 20px;
 }
 
 .confirmOTP{
-	height: 350px;
-	margin-top: 150px;
+	height: auto;
+	min-height: 400px;
+	margin-top: 115px;
 	background-color: #242931;
 	border:3px solid #D3950A !important;
 	border-radius: 10px;
+	padding-bottom: 70px;
 }
 
 .confirmOTPTitle{
-	height: 80px;
+	height: 95px;
 	color: #D3950A;
 	font-size:20px;
 	text-align: center;
 	padding-top: 40px;
+	margin-top: 40px;
 }
 
 .confirmOTPHr{
-	width:92%;
+	width:80%;
 	
-	border-top: 1px solid #D3950A !important;
+	border-top: 1px solid #D3950A;
 }
 
 .confirmOTPSentence{
 	text-align: center;
 	color: #aaa;
-	height: 60px;
+	height: 50px;
 	line-height: 1.8;
 	letter-spacing: 1px;
 	margin-bottom: 10px;
+	font-size: 13px;
 }
 
 .confirmOTPInputIcon1{
 	font-size: 14px;
-	border: 1px solid #D3950A  !important;
+	border: 1px solid #D3950A !important;
 	background-color: transparent !important;
 	color: #eee;
 }
 
 .confirmOTPInputBox{
-  
-  text-align:left;
+  width: 20%;
+  text-align:center;
   padding-left: 10px;
   border: 1px solid #D3950A !important;
   background-color: transparent !important;
   color: #fff;
+  float: left;
 
 }
 
@@ -94,4 +106,118 @@
 .confirmOTPSignIn:hover{
 	color: #fff!important;
 	font-size: 15px;
+}
+
+.img1LoginFP{
+	position: absolute;
+	height: 200px;
+	width: 125px;
+	top:0px;
+	left:55%;
+	z-index: 1;
+}
+
+.img1oginInnerFP{
+	height: 200px;
+	width: 125px;
+
+	
+}
+
+
+.img2LoginFP{
+	position: absolute;
+	height: 300px;
+	width: 180px;
+	bottom: 70px;
+	left:23%;
+	z-index: 1;
+
+	
+}
+
+.img2loginInnerFP{
+	height: 300px;
+	width: 180px;
+}
+
+
+
+
+.img3LoginFP{
+	position: absolute;
+	height: 290px;
+	width: 110px;
+	bottom: 75px;
+	left:61.5%;
+	z-index: 1;
+	
+}
+
+.img3loginInnerFP{
+	height: 290px;
+	width: 110px;
+}
+
+
+
+.img4LoginFP{
+	position: absolute;
+	height: 100px;
+	width: 50px;
+	
+	bottom: 65px;
+    left: 38%;
+	z-index: 1;
+}
+
+.img4loginInnerFP{
+	height: 100px;
+	width: 50px;
+}
+
+.img5LoginFP{
+	position: absolute;
+	height: 135px;
+	width: 125px;
+	bottom: 100px;
+    left: 65%;
+	z-index: 0;
+}
+
+.img5loginInnerFP{
+	height: 135px;
+	width: 125px;
+}
+
+.img6LoginFP{
+	position: absolute;
+	height: 80px;
+	width: 60px;
+	top: 130px;
+    left: 29.6%;
+	z-index: 0;
+}
+
+.img6loginInnerFP{
+	height: 80px;
+	width: 60px;
+}
+
+.input-group .form-control{
+	border-bottom-right-radius: 0px !important;
+    border-top-right-radius: 0px !important;
+    border-bottom-left-radius: 0px;
+    border-top-left-radius: 0px;
+}
+.otpBox{
+	width: 20%;
+	margin-left: 2.5%;
+	margin-right: 2.5%;
+	float: left;
+
+}
+
+.buttonWrapper{
+	margin-top: 20px;
 }

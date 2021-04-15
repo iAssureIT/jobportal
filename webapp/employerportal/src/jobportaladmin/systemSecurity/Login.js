@@ -266,13 +266,13 @@ class Login extends Component {
                 <div className="signInTitle col-lg-12">Sign In
                 </div>
                 
-                <div className="loginSocialMedia">
-                  {/*<div className="loginSocialMediaInner">
+                {/*<div className="loginSocialMedia">
+                  <div className="loginSocialMediaInner">
                     <div className="loginLinkedIn"><i className="fa fa-linkedin"></i></div>
                     <div className="loginGoogle"><i className="fa fa-google"></i></div>
-                  </div>    */}
+                  </div>    
                 </div>
-                
+                */}
 
                {/* <div className="loginOr col-lg-12">
                   <hr className="loginHr"/>
@@ -280,9 +280,15 @@ class Login extends Component {
                   </div>
                   <hr className="loginHr"/>
                 </div>*/}
-                
+                    
+                    <div className="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1">
+                        <div className="loginSignUp1" >
+                        Don't have an Account ?
+                           <a className="loginSignUp" href="/signup"><u>Sign Up</u></a>
+                        </div>
+                    </div>
 
-                    <div className="col-lg-12 form-group loginFormGroup" >
+                    <div className="col-lg-10 col-lg-offset-1 form-group loginFormGroup" >
                       <div className="input-group">
                         <span className="input-group-addon loginInputIcon1"><i className="fa fa-mobile"></i></span>
                         <input type="tel" id="loginusername" name="loginusername" placeholder="Email Id" value={this.state.loginusername} ref="loginusername" onChange={this.handleChange.bind(this)} className="form-control loginInputBox"/>
@@ -290,7 +296,7 @@ class Login extends Component {
                       <span id="loginusernameError" className="errorMsg"></span>
                     </div>
 
-                    <div className="col-lg-12 form-group" >
+                    <div className="col-lg-10 col-lg-offset-1 form-group" >
                       <div className="input-group">
                         <span className="input-group-addon loginInputIcon2"><i className="fa fa-lock"></i></span>
                         <input type="password" id="password" name="password" placeholder="Password" value={this.state.password} ref="loginpassword" onChange={this.handleChange.bind(this)} className="form-control loginInputBox"/>
@@ -301,21 +307,15 @@ class Login extends Component {
                       <span id="passwordError" className="errorMsg"></span>
                     </div>
 
-                    <div className="col-lg-12 buttonWrapper">
-                     <button className="btn col-lg-12 buttonSignIn" onClick={this.userlogin.bind(this)}>Sign In</button>
-                    </div>
-
-                    <div className="col-lg-12 loginLinks">
-                      <div className="row">
-                        <div className="col-lg-6">
-                          <a className="loginSignUp" href="/signup"><u>Sign Up?</u></a>
-                        </div>
-                      
-                        <div className="col-lg-6">
+                    <div className="col-lg-10 col-lg-offset-1 buttonWrapper">
+                      <div className="col-lg-6">
+                       <div className="row">
                           <a className="loginForgotPassword" href="/forgot-password"><u>Forgot Password?</u></a>
                         </div>
                       </div>  
+                     <button className="btn col-lg-6 buttonSignIn" onClick={this.userlogin.bind(this)}>Sign In</button>
                     </div>
+
               </form>
             </div>
           </div>

@@ -31,6 +31,7 @@ class JoblistPage extends Component{
       selector.startLimit     = this.state.startLimit;
       selector.initialLimit   = this.state.initialLimit;
       selector.showMoreLimit  = this.state.showMoreLimit;
+      selector.status         = "active";
 
       this.setState({ selector: selector })
 

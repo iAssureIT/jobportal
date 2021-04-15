@@ -22,7 +22,7 @@
 
 .loginFormInner{
 	height: auto;
-	min-height: 300px;
+	min-height: 400px;
 	margin-top: 100px;
 	background-color: #242931;
 	border:3px solid #D3950A !important;
@@ -133,8 +133,8 @@
   text-align:left;
   padding-left: 10px;
   border: 1px solid #D3950A !important;
-  background-color: transparent !important;
-  color: #fff;
+  background-color: #242933 !important;
+  color: #fff ;
   font-size: 14px;
   font-family: 'Montserrat-Regular';
   letter-spacing: 1px;
@@ -179,7 +179,7 @@
 	color: #fff;
 	border: 1px solid #D3950A !important;
 	margin-bottom: 2px;
-	font-size: 16px;
+	font-size: 14px;
 	font-family: 'Montserrat-Bold';
 }
 
@@ -231,6 +231,7 @@
 	font-size: 14px;
 	font-family: 'Montserrat-Regular';
 	float: left;
+	margin-top: 7px;
 }
 
 .loginForgotPassword:hover{
@@ -394,4 +395,19 @@
 
 .form-group{
 	margin-bottom: 24px;
+}
+
+/* Change the white to any color */
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active
+{
+ -webkit-box-shadow: 0 0 0 30px #242931 inset !important;
+}
+
+/*Change text in autofill textbox*/
+input:-webkit-autofill
+{
+ -webkit-text-fill-color: #efefef !important;
 }

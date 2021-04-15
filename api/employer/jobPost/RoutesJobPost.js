@@ -21,6 +21,10 @@ router.post ("/industrial-jobs"		   			, jobsController.industrialJobs);
 
 router.delete("/delete/:job_id"					, jobsController.deleteJob);
 
+router.delete("/active/:job_id"					, jobsController.activeJob);
+
+router.delete("/inactive/:job_id"				, jobsController.inactiveJob);
+
 router.get('/get/filedetails/:fileName'			, jobsController.filedetails);
 
 router.post('/get/files'						,jobsController.fetch_file); 

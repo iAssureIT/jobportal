@@ -28,7 +28,7 @@ class ForgotPassword extends Component {
        var status = true;
       // var tempEmail = this.state.loginusername.trim(); // value of field with whitespace trimmed off
        var emailFilter = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-       var tempEmail = this.state.emailAddress.trim(); 
+       var tempEmail = this.state.emailAddress; 
        var illegalChars = /[\(\)\<\>\,\;\:\\\"\[\]]/;
        //var phoneno = /^\d{10}$/;
 
@@ -152,7 +152,7 @@ class ForgotPassword extends Component {
     }
     render() {
         return (
-            <section className="container-fluid forgotPasswordWrapper">
+            <section className="col-lg-12 forgotPasswordWrapper">
 
           <div className="img1LoginFP">
               <img src="/images/Sign_In/1.png" alt="img1Login" className="img1oginInnerFP"/>
@@ -177,18 +177,18 @@ class ForgotPassword extends Component {
            <div className="img6LoginFP">
               <img src="/images/Sign_In/6.png" alt="img6Login" className="img6loginInnerFP"/>
           </div>
-                <div className="forgotPassword col-lg-6 col-lg-offset-3">
+                <div className="forgotPassword col-lg-4 col-lg-offset-4">
                   <form>
                     <div className="forgotPasswordTitle col-lg-12">Forgot Password ?
                     </div>
 
                     <hr className="forgotPasswordHr"/>
 
-                    <div className="forgotPasswordSentence col-lg-12">
+                    <div className="forgotPasswordSentence col-lg-10 col-lg-offset-1">
                         Please enter your registered email address below to receive OTP
                     </div>
 
-                    <div className="col-lg-12 form-group" >
+                    <div className="col-lg-10 col-lg-offset-1 form-group" >
                         <div className="input-group">
                             <span className="input-group-addon forgotPasswordInputIcon1"><i className="fa fa-envelope"></i></span>
                             <input type="email" id="emailAddress" name="emailAddress" ref="emailAddress" placeholder="Email Address" value={this.state.emailAddress} onChange={this.handleChange.bind(this)} className="form-control forgotPasswordInputBox"/>
@@ -198,13 +198,13 @@ class ForgotPassword extends Component {
 
                     
 
-                    <div className="col-lg-12 buttonWrapper">
+                    <div className="col-lg-6 col-lg-offset-3 buttonWrapper">
                         <button className="btn col-lg-12 buttonSendOTP" onClick={this.sendLink.bind(this)}>Send OTP</button>
                     </div>
 
-                    <div className="col-lg-12 forgotPasswordLinks">
+                   {/* <div className="col-lg-12 forgotPasswordLinks">
                         <a className="forgotPasswordSignIn" href="#" onClick={this.ShowLogin.bind(this)}><u>Sign In</u></a>
-                      </div>
+                      </div>*/}
                   </form>
                 </div>
          </section>

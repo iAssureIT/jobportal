@@ -16,6 +16,7 @@ class JobListView extends Component{
 	this.state={
 		jobList 		: [],
 		startLimit 		: this.props.selector.startLimit,
+		isActive 		: true
 	}
 }	
 
@@ -42,7 +43,18 @@ componentDidMount(){
 	console.log(status);
 }*/
 
+getJobs(event){
+	//console.log(event.target)
+	var selector 	= this.props.selector;
+	selector.status = event.target.getAttribute('data-status');
+	selector.startLimit     = 0;
+    selector.initialLimit   = 25;
+    selector.showMoreLimit  = 25;
+	var {mapAction} = this.props;
+    mapAction.filterJobList(selector);
 
+	console.log(event.target.getAttribute('data-status'))
+}
 showMore(){
 	var selector 		  	= this.props.selector;
 
@@ -77,20 +89,20 @@ deleteJob = (event)=>{
 	const job_id = event.currentTarget.id;
 
 	Swal.fire({
-		title 				: 'Are you sure? you want to delete this job!!!',
+		title 				: 'Are you sure, do you want to delete this job!!!',
 		text 				: 'You will not be able to recover this job',
 		icon 				: 'warning',
 		showCancelButton 	: true,
-		confirmButtonText 	: 'Yes, delete it!',
+		confirmButtonText 	: 'Delete',
 		cancelButtonText 	: 'No, keep it',
-		confirmButtonColor 	: '#f5a721',
+		confirmButtonColor 	: 'red',
 	
 	}).then((result) =>{
 		if(result.value){
 			if(job_id){
 				Axios.delete("/api/jobs/delete/"+job_id)
 				.then(response =>{
-					if(response.data.message==="Job details deleted Successfully!"){
+					if(response.data.message==="Job details is deleted successfully!"){
 						var {mapAction} = this.props;
 						mapAction.filterJobList(this.state.selector);
 
@@ -118,8 +130,59 @@ deleteJob = (event)=>{
 					)
 				}
 			})
-		}
+	}
+	handleSwitch (){
+  			this.setState({
+  				isActive: !this.state.isActive
+  			});
+    }
+	inactiveJob(event){
+		event.preventDefault();
+		const job_id = event.currentTarget.id;
 
+	Swal.fire({
+		title 				: 'Are you sure, do you want to inactive this job!!!',
+		//text 				: 'You will not be able to recover this job',
+		icon 				: 'warning',
+		showCancelButton 	: true,
+		confirmButtonText 	: 'Inactive!',
+		cancelButtonText 	: 'No, keep it',
+		confirmButtonColor 	: '#f5a721',
+	
+	}).then((result) =>{
+		if(result.value){
+			if(job_id){
+				Axios.delete("/api/jobs/inactive/"+job_id)
+				.then(response =>{
+					if(response.data.message==="Job is inactivated successfully!"){
+						var {mapAction} = this.props;
+						mapAction.filterJobList(this.state.selector);
+
+						Swal.fire(
+									'Deleted!',
+									'Job has been inactivated successfully!',
+									'success'
+							);
+					}
+				})
+				.catch(error=>{
+					Swal.fire(
+								"Some problem occured deleting job!",
+								error.message,
+								'error'
+						)
+				})
+			}
+				
+				}else if (result.dismiss === Swal.DismissReason.cancel){
+					Swal.fire(
+						'Cancelled',
+						'Your job is safe :)',
+						'error'
+					)
+				}
+			})
+	}	
 	render(){
 		console.log(this.props.jobCount)
 		return(
@@ -131,15 +194,15 @@ deleteJob = (event)=>{
 						</div> 
 					</div>*/}
 					<div className="col-lg-8 col-lg-offset-2 row btnsRow">
-						<ul class="nav nav-pills nav-justified">
-						  	<li class="active col-lg-4 row"><a data-toggle="pill" href="#activejobs">Active Jobs</a></li>
-						  	<li class="col-lg-4 row"><a data-toggle="pill" href="#inactivejobs">Inactive Jobs</a></li>
-						  	<li class="col-lg-4 row"><a data-toggle="pill" href="#draftjobs">Drafts Jobs</a></li>
+						<ul className="nav nav-pills nav-justified">
+						  	<li className="active col-lg-4 row" data-status="active" onClick={this.getJobs.bind(this)}  ><a data-toggle="pill" href="#activejobs" data-status="active" >Active Jobs</a></li>
+						  	<li className="col-lg-4 row" data-status="inactive" onClick={this.getJobs.bind(this)}><a data-toggle="pill" href="#inactivejobs" data-status="inactive">Inactive Jobs</a></li>
+						  	<li className="col-lg-4 row" data-status="draft" onClick={this.getJobs.bind(this)}><a data-toggle="pill" href="#draftjobs" data-status="draft">Drafts Jobs</a></li>
 						</ul>
 					</div>	
 
-					<div class="tab-content col-lg-12">
-						<div id="activejobs" class="tab-pane fade in active">
+					<div className="tab-content col-lg-12">
+						<div id="activejobs" className="tab-pane fade in active">
 							{
 								this.props.jobList.length>0
 								?
@@ -238,13 +301,24 @@ deleteJob = (event)=>{
 															<div className="row">
 																<div className="col-lg-12">
 																	<div className="listEditBtn">
-																		<a title = "Edit Profile" href={"/post-job/" + elem._id}><i className="fa fa-edit"></i></a>
+																		<a title = "Edit" href={"/post-job/" + elem._id}><i className="fa fa-edit"></i></a>
+																	</div>	
+																	<div className="listViewBtn">	
+																		<a title = "View" href={"/job-profile/" + elem._id}><i className="fa fa-eye"></i></a>
 																	</div>
 																	<div className="listViewBtn">	
-																		<a title = "View Profile" href={"/job-profile/" + elem._id}><i className="fa fa-eye"></i></a>
+																		{/*<a title = "Inactive" onClick={this.inactiveJob} id = {elem._id}><i className="fa fa-eye-slash"></i></a>
+																		*/}
+																		<div className="input-group genderFeildWrapper">
+																			<div className = {this.state.isActive ? "genderFeild col-lg-6 genderFeildActive" : "genderFeild col-lg-6" }
+																			 id="togglePrimary" name="primaryToggel" 
+																			 value="togglePrimary" onClick={this.handleSwitch.bind(this)}>
+																				<div className="row">Inactive</div>
+																			</div>
+																		</div>
 																	</div>
 																	<div className="listDelBtn">	
-																		<i title = "Delete Profile" className="fa fa-trash" onClick={this.deleteJob} id = {elem._id}></i>
+																		<i title = "Delete" className="fa fa-trash" onClick={this.deleteJob} id = {elem._id}></i>
 																	</div>
 																</div>
 															</div>
@@ -270,7 +344,7 @@ deleteJob = (event)=>{
 						    </div>
 						</div>
 						
-						<div id="inactivejobs" class="tab-pane fade">
+						<div id="inactivejobs" className="tab-pane fade">
 							{
 								this.props.jobList.length>0
 								?
@@ -401,7 +475,7 @@ deleteJob = (event)=>{
 						    </div>
 						</div>
 						
-						<div id="draftjobs" class="tab-pane fade">
+						<div id="draftjobs" className="tab-pane fade">
 							{
 								this.props.jobList.length>0
 								?
@@ -542,7 +616,7 @@ deleteJob = (event)=>{
 const mapStateToProps = (state)=>{
     return {
         user_ID     : state.user_ID,  	candidate_id   : state.candidate_id,
-        selector    : state.selector,   jobList     : state.jobList,
+        selector    : state.selector,   jobList        : state.jobList,
         jobCount  	: state.jobCount,
         applicantsCountList : state.applicantsCountList
     }
