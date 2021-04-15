@@ -4,6 +4,7 @@ import Axios 			  		from 'axios';
 import Swal  					from 'sweetalert2';
 import Moment 					from "moment";
 import { FontAwesomeIcon } 		from '@fortawesome/react-fontawesome';
+import Modal 					from '../Modal/Modal.js';
 import { connect }        		from 'react-redux';
 import { bindActionCreators } 	from 'redux';
 import  * as mapActionCreator 	from '../../common/actions/index';
@@ -30,18 +31,6 @@ componentDidMount(){
 	mapAction.filterJobList(selector);*/
 
 }
-
-/*statusJob = (jobid, company_id)=>{
-
-	var formValues = { 
-						job_id         		: jobid,
-					    entity_id    		: company_id,	
-					    status 				: "Active"
-					}
-
-	console.log(formValues);
-	console.log(status);
-}*/
 
 getJobs(event){
 	//console.log(event.target)
@@ -84,25 +73,25 @@ handlePageChange(pageNumber) {
     mapAction.filterJobList(selector);
 }
 
-deleteJob = (event)=>{
+/*deleteJob = (event)=>{
 	event.preventDefault();
 	const job_id = event.currentTarget.id;
 
 	Swal.fire({
-		title 				: 'Are you sure, do you want to delete this job!!!',
+		title 				: 'Are you sure? you want to delete this job!!!',
 		text 				: 'You will not be able to recover this job',
 		icon 				: 'warning',
 		showCancelButton 	: true,
-		confirmButtonText 	: 'Delete',
+		confirmButtonText 	: 'Yes, delete it!',
 		cancelButtonText 	: 'No, keep it',
-		confirmButtonColor 	: 'red',
+		confirmButtonColor 	: '#f5a721',
 	
 	}).then((result) =>{
 		if(result.value){
 			if(job_id){
 				Axios.delete("/api/jobs/delete/"+job_id)
 				.then(response =>{
-					if(response.data.message==="Job details is deleted successfully!"){
+					if(response.data.message==="Job details deleted Successfully!"){
 						var {mapAction} = this.props;
 						mapAction.filterJobList(this.state.selector);
 
@@ -130,18 +119,20 @@ deleteJob = (event)=>{
 					)
 				}
 			})
-	}
+		}*/
+	
 	handleSwitch (){
   			this.setState({
   				isActive: !this.state.isActive
   			});
     }
+	
 	inactiveJob(event){
 		event.preventDefault();
 		const job_id = event.currentTarget.id;
 
 	Swal.fire({
-		title 				: 'Are you sure, do you want to inactive this job!!!',
+		title 				: 'Are you sure do you want to inactive this job!!!',
 		//text 				: 'You will not be able to recover this job',
 		icon 				: 'warning',
 		showCancelButton 	: true,
@@ -183,6 +174,7 @@ deleteJob = (event)=>{
 				}
 			})
 	}	
+	
 	render(){
 		var {mapAction} = this.props;
 		console.log(this.props.jobCount)
@@ -311,16 +303,17 @@ deleteJob = (event)=>{
 																	<div className="listViewBtn">	
 																		{/*<a title = "Inactive" onClick={this.inactiveJob} id = {elem._id}><i className="fa fa-eye-slash"></i></a>
 																		*/}
-																		<div className="input-group genderFeildWrapper">
-																			<div className = {this.state.isActive ? "genderFeild col-lg-6 genderFeildActive" : "genderFeild col-lg-6" }
-																			 id="togglePrimary" name="primaryToggel" 
-																			 value="togglePrimary" onClick={this.handleSwitch.bind(this)}>
-																				<div className="row">Inactive</div>
-																			</div>
-																		</div>
 																	</div>
 																	<div className="listDelBtn">	
-																		<i title = "Delete" className="fa fa-trash" onClick={this.deleteJob} id = {elem._id}></i>
+																		<i title = "Delete" className="fa fa-trash" data-toggle="modal" data-target="#delModal" data-dismiss="modal" onClick={this.deleteJob} id = {elem._id}></i>
+																	</div>
+																	<Modal />
+																	<div className="input-group jobStatusToggleWrapper">
+																		<div className = {this.state.isActive ? "genderFeild col-lg-6 genderFeildActive" : "genderFeild col-lg-6" }
+																		 id="togglePrimary" name="primaryToggel" 
+																		 value="togglePrimary" onClick={this.handleSwitch.bind(this)}>
+																			<div className="row">Inactive</div>
+																		</div>
 																	</div>
 																</div>
 															</div>

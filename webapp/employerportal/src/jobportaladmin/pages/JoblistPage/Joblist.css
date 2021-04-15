@@ -287,9 +287,14 @@
 
 .swal2-container:not(.swal2-top):not(.swal2-top-start):not(.swal2-top-end):not(.swal2-top-left):not(.swal2-top-right):not(.swal2-center-start):not(.swal2-center-end):not(.swal2-center-left):not(.swal2-center-right):not(.swal2-bottom):not(.swal2-bottom-start):not(.swal2-bottom-end):not(.swal2-bottom-left):not(.swal2-bottom-right):not(.swal2-grow-fullscreen)>.swal2-modal {
 	border: 1px solid var(--main-border-color);
-	padding: 30px;
+	padding-top: 80px;
+	padding-bottom: 70px;
 	border-radius: 5px;
-	background-color: var(--form-field-background-color);
+	background-color: var(--main-bg-color);
+}
+
+.swal2-popup{
+	width: 50em;
 }
 
 [class^=swal2]{
@@ -299,13 +304,68 @@
 .swal2-styled.swal2-confirm{
 	box-shadow: none;
 	color: #fff;
+	height: 33px;
+	font-size: 11px;
 	font-weight: 600;
+	/*margin-right: 80px;*/
+	margin-top: 30px;
+	padding-top: 9px;
+	/*padding-left: 53px;
+	padding-right: 53px;*/
+	background-color: var(--form-field-background-color) !important;
+	border: 1px solid var(--main-border-color) !important;
+}
+
+.swal2-styled.swal2-confirm:hover{
+	background-color: var(--main-border-color) !important;
 }
 
 .swal2-styled.swal2-cancel{
 	box-shadow: none;
 	color: #fff;
+	height: 33px;
+	font-size: 11px;
 	font-weight: 600;
+	/*margin-right: 30px;*/
+	margin-top: 30px;
+	padding-top: 9px;
+	/*padding-left: 53px;*/
+	/*padding-right: 53px;*/
+	background-color: var(--form-field-background-color) !important;
+	border: 1px solid var(--main-border-color) !important;
+}
+
+.swal2-styled.swal2-cancel:hover{
+	background-color: var(--main-border-color) !important;
+}
+
+.swal2-title{
+	font-size: 16px;
+	font-weight: 400;
+}
+
+.swal2-content{
+	font-size: 16px;
+	font-weight: 400;
+}
+
+/*.swal2-actions .swal2-confirm .swal2-styled:nth-child(1){
+	margin-left: 80px;
+}*/
+
+.swal2-close{
+	/*background-color: var(--main-border-color);*/
+    /*padding-left: 483px;
+    padding-right: 16px;
+    position: absolute;
+    left: 0px;
+    height: 30px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;*/
+}
+
+.swal2-close:hover{
+	/*background-color: var(--main-border-color);*/
 }
 
 /*********************************************************************************/
@@ -344,6 +404,7 @@ color: #fff;
     border-color: var(--main-border-color);
 }
 
+/*********************************************************************************/	
 .leftSideMainBox{
 	/*background-color: pink;*/
 }
@@ -419,45 +480,6 @@ color: #fff;
     font-weight: 600;
 }
 
-/*.activeBtn{
-	padding: 13px;
-	border-radius: 4px;
-	background-color: var(--main-border-color);
-	margin-right: 30px;
-	margin-top: 30px;
-	cursor: pointer;
-	font-weight: 600;
-	border: 1px solid var(--main-border-color);
-}
-
-.inactiveBtn{
-	padding: 13px;
-	border-radius: 4px;
-	margin-top: 30px;
-	cursor: pointer;
-	font-weight: 600;
-	border: 1px solid var(--main-border-color);
-}
-
-.draftBtn{
-	padding: 13px;
-	border-radius: 4px;
-	margin-top: 30px;
-	cursor: pointer;
-	font-weight: 600;
-	margin-left: 30px;
-	border: 1px solid var(--main-border-color);
-}*/
-
-/*.activeBtn:hover, .inactiveBtn:hover, .draftBtn:hover{
-	color: #fff;
-}
-
-.active, .btn:hover {
-  background-color: var(--main-border-color);
-  color: white;
-}*/
-
 .nav-justified>li>a {
     border: 1px solid var(--main-border-color);
     color: #fff;
@@ -511,33 +533,36 @@ color: #fff;
 
 
 
-.genderFeildWrapper{
+.jobStatusToggleWrapper{
 	height:25px;
 	border:1px solid var(--main-border-color)!important;
-	width:100%;
-	border-radius:20px;
-	margin-top:3px;
+	border-radius: 20px;
+	margin-top: 15px;
+	margin-left: 5px;
     padding: 2px;
 }
+
 .genderFeildWrapper2{
     margin-top:6px;
 }
+
 .genderFeild{
-	height:21px;
-	border-radius:20px;
-	font-size:10px;
-	font-weight:100!important;
-	padding-top:4px;
-	text-align:center;
+	height: 21px;
+	border-radius: 20px;
+	font-size: 10px;
+	font-weight: 100!important;
+	padding-top: 4px;
+	text-align: center;
 	background-color: var(--input-bg-color);
     transition: all 1s;
 }
+
 .genderFeild:hover{
 	cursor: pointer;
-    background-color:var(--main-border-color);
+    /*background-color:var(--main-border-color);*/
 }
+
 .genderFeildActive{
 	background-color:var(--main-border-color);
 	transition:all 2s;
-
 }
