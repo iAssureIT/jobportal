@@ -49,7 +49,9 @@ class BasicInfoForm extends Component{
 			profilePicture            : "",
 			resumeUrl 				  : "",
 			resume 					  : [],
-			executiveSummary 		  : ""		
+			executiveSummary 		  : "",
+			fields: {},
+               errors: {}
 		}
 		
 	}
@@ -308,7 +310,9 @@ class BasicInfoForm extends Component{
 		event.preventDefault();
 		var value = event.currentTarget.value;
 		var name  = event.currentTarget.name;
-
+		let fields = this.state.fields;
+            fields[value] = event.target.value;        
+            this.setState({fields});
 		
 		this.setState({
 			[name]:value,
@@ -559,7 +563,24 @@ class BasicInfoForm extends Component{
 			status = true;
 		}
 
-		 return status;
+		 
+		 let fields = this.state.fields;
+            let errors = {};
+            let formIsValid = true;
+            if(!fields["name"]){
+               formIsValid = false;
+               errors["name"] = "Cannot be empty";
+            }
+      
+            if(typeof fields["name"] !== "undefined"){
+               if(!fields["name"].match(/^[a-zA-Z]+$/)){
+                  formIsValid = false;
+                  errors["name"] = "Only letters";
+               }        
+            }
+            this.setState({errors: errors});
+           return formIsValid;
+            return status;
 	}
 
 	//========== Validation End ==================
@@ -589,9 +610,9 @@ class BasicInfoForm extends Component{
 									</span> 
 									<input type="text" name="firstName" id="firstName" 
 									 className="form-control inputBox" value={this.state.firstName} 
-									 onChange={this.handleChange.bind(this)} />
+									 onChange={this.handleChange.bind(this)}/>
 								</div> 
-								<span id="firstNameError" className="errorMsg"></span>
+								<span id="firstNameError" className="errorMsg">{this.state.errors["name"]}</span>
 							</div>
 
 							<div className="col-lg-4">

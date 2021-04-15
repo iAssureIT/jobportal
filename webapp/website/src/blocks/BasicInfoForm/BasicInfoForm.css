@@ -183,15 +183,13 @@
 }
 .profileImageWrapper{
     border:1px dashed var(--main-border-color);
-    width:150px;
-    height: 140px;
+    width:254px;
+    height: 192px;
     position: absolute;
-    top: 30px;
-    left: 50px;
 }
 .profileImage{
-    width:254px;
-    height:192px;
+    width:244px;
+    height:182px;
 	margin:4px;
 }
 .resumeImage{
