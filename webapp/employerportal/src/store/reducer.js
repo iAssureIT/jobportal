@@ -38,7 +38,16 @@ const initialState = {
 	appliedCandidateSelector 	: {},
 	candidateList 				: [],
 	appliedCandidateList 		: [],
-	applicantsCountList 		: []
+	totalApplicantsCountList 	: [],
+	countryApplicantsCountList 	: [],
+	stateApplicantsCountList	: [],
+	districtApplicantsCountList	: [],	
+	maleApplicantsCountList		: [],
+	femaleApplicantsCountList	: [],
+	otherApplicantsCountList 	: [],
+	exp02ApplicantsCountList 	: [],
+	exp26ApplicantsCountList 	: [],
+	exp610ApplicantsCountList 	: [],
 }
 
 const reducer = (state = initialState, action) => {
@@ -78,8 +87,35 @@ const reducer = (state = initialState, action) => {
 	if(action.type === "APPEND_JOB_LIST"){
 		newState.jobList = state.jobList.concat(action.jobList) ;
 	}
-	if(action.type === "GET_APPLICANTS_COUNT"){
-		newState.applicantsCountList = action.applicantsCountList;
+	if(action.type === "GET_TOTAL_APPLICANTS_COUNT"){
+		newState.totalApplicantsCountList = action.totalApplicantsCountList;
+	}
+	if(action.type === "GET_COUNTRY_APPLICANTS_COUNT"){
+		newState.countryApplicantsCountList = action.countryApplicantsCountList;
+	}
+	if(action.type === "GET_STATE_APPLICANTS_COUNT"){
+		newState.stateApplicantsCountList = action.stateApplicantsCountList;
+	}
+	if(action.type === "GET_DISTRICT_APPLICANTS_COUNT"){
+		newState.districtApplicantsCountList = action.districtApplicantsCountList;
+	}
+	if(action.type === "GET_MALE_APPLICANTS_COUNT"){
+		newState.maleApplicantsCountList = action.maleApplicantsCountList;
+	}
+	if(action.type === "GET_FEMALE_APPLICANTS_COUNT"){
+		newState.femaleApplicantsCountList = action.femaleApplicantsCountList;
+	}
+	if(action.type === "GET_OTHER_APPLICANTS_COUNT"){
+		newState.otherApplicantsCountList = action.otherApplicantsCountList;
+	}
+	if(action.type === "GET_EXP02_APPLICANTS_COUNT"){
+		newState.exp02ApplicantsCountList = action.exp02ApplicantsCountList;
+	}
+	if(action.type === "GET_EXP26_APPLICANTS_COUNT"){
+		newState.exp26ApplicantsCountList = action.exp26ApplicantsCountList;
+	}
+	if(action.type === "GET_EXP610_APPLICANTS_COUNT"){
+		newState.exp610ApplicantsCountList = action.exp610ApplicantsCountList;
 	}
 	if(action.type === "GET_CANDIDATE_LIST"){
 		newState.candidateList = action.candidateList;

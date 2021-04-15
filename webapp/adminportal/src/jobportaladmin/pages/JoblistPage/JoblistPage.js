@@ -33,7 +33,7 @@ class JoblistPage extends Component{
 		var {mapAction} = this.props;
 		mapAction.filterJobList(selector);
 		mapAction.jobCount(selector); 
-		mapAction.applicantsCountList();
+		mapAction.totalApplicantsCountList();
 	}
 						
 	redirectTo(event){

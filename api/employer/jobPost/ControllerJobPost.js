@@ -394,6 +394,12 @@ exports.getJobList = (req, res, next) => {
     selector["$and"].push({
         "location.countryCode": req.body.countryCode
     })
+    if (req.body.status) {
+        selector["$and"].push({
+            "status": req.body.status
+        })
+    }
+    
     // 1
     if (req.body.stateCode && req.body.stateCode != "all") {
         selector["$and"].push({
@@ -601,9 +607,12 @@ exports.getJobListForEmployer = (req, res, next) => {
     selector["$and"].push({
         "location.countryCode": req.body.countryCode
     })
-    selector["$and"].push({
-        "status": req.body.status
-    })
+    if (req.body.status) {
+        selector["$and"].push({
+            "status": req.body.status
+        })
+    }
+    
     // 1
     if (req.body.company_id) {
         selector["$and"].push({

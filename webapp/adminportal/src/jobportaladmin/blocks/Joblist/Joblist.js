@@ -124,7 +124,7 @@ class Joblist extends Component{
 								?
 									this.props.jobList.map((elem,index1)=>{
 										//console.log(elem)
-										var applicantsCount = this.props.applicantsCountList.filter((appl, ind)=>{
+										var applicantsCount = this.props.totalApplicantsCountList.filter((appl, ind)=>{
 											if (appl._id == elem._id) {
 												return appl.candidatesApplied;
 											}else{
@@ -255,7 +255,7 @@ class Joblist extends Component{
 								?
 									this.props.jobList.map((elem,index1)=>{
 										//console.log(elem)
-										var applicantsCount = this.props.applicantsCountList.filter((appl, ind)=>{
+										var applicantsCount = this.props.totalApplicantsCountList.filter((appl, ind)=>{
 											if (appl._id == elem._id) {
 												return appl.candidatesApplied;
 											}else{
@@ -386,7 +386,7 @@ class Joblist extends Component{
 								?
 									this.props.jobList.map((elem,index1)=>{
 										//console.log(elem)
-										var applicantsCount = this.props.applicantsCountList.filter((appl, ind)=>{
+										var applicantsCount = this.props.totalApplicantsCountList.filter((appl, ind)=>{
 											if (appl._id == elem._id) {
 												return appl.candidatesApplied;
 											}else{
@@ -521,7 +521,7 @@ class Joblist extends Component{
 const mapStateToProps = (state)	=>	{
 									    return {	
 											    	userDetails 	: state.userDetails,	selector : state.selector, jobCount  	: state.jobCount,	
-											    	jobList 		: state.jobList,		applicantsCountList : state.applicantsCountList
+											    	jobList 		: state.jobList,		totalApplicantsCountList : state.totalApplicantsCountList
 									    		}
 									}
 

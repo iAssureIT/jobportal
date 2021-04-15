@@ -184,6 +184,7 @@ deleteJob = (event)=>{
 			})
 	}	
 	render(){
+		var {mapAction} = this.props;
 		console.log(this.props.jobCount)
 		return(
 			<section className="jobListWrapper">
@@ -207,8 +208,9 @@ deleteJob = (event)=>{
 								this.props.jobList.length>0
 								?
 									this.props.jobList.map((elem,index1)=>{
+										mapAction.stateApplicantsCountList({entity_id : this.props.company_id, stateCode : elem.location.stateCode});
 										//console.log(elem)
-										var applicantsCount = this.props.applicantsCountList.filter((appl, ind)=>{
+										var applicantsCount = this.props.totalApplicantsCountList.filter((appl, ind)=>{
 											if (appl._id == elem._id) {
 												return appl.candidatesApplied;
 											}else{
@@ -256,7 +258,7 @@ deleteJob = (event)=>{
 																		</div>	
 																		<div className="infoLog"> {Moment(elem.createdAt).startOf('seconds').fromNow()}  </div>
 																		<div className="jobListDesignation col-lg-12 row">
-																			<a className="link">{elem.jobBasicInfo.jobTitle + " (" +elem.jobID+ ")"} </a>
+																			<a className="link" href={"/job-profile/" +  elem._id}>{elem.jobBasicInfo.jobTitle + " (" +elem.jobID+ ")"} </a>
 																		</div>
 																		<div className="jobListCompanyTitle col-lg-12 row">
 																			{elem.company_id ? elem.company_id.companyName : ""}
@@ -350,7 +352,7 @@ deleteJob = (event)=>{
 								?
 									this.props.jobList.map((elem,index1)=>{
 										//console.log(elem)
-										var applicantsCount = this.props.applicantsCountList.filter((appl, ind)=>{
+										var applicantsCount = this.props.totalApplicantsCountList.filter((appl, ind)=>{
 											if (appl._id == elem._id) {
 												return appl.candidatesApplied;
 											}else{
@@ -481,7 +483,7 @@ deleteJob = (event)=>{
 								?
 									this.props.jobList.map((elem,index1)=>{
 										//console.log(elem)
-										var applicantsCount = this.props.applicantsCountList.filter((appl, ind)=>{
+										var applicantsCount = this.props.totalApplicantsCountList.filter((appl, ind)=>{
 											if (appl._id == elem._id) {
 												return appl.candidatesApplied;
 											}else{
@@ -618,7 +620,7 @@ const mapStateToProps = (state)=>{
         user_ID     : state.user_ID,  	candidate_id   : state.candidate_id,
         selector    : state.selector,   jobList        : state.jobList,
         jobCount  	: state.jobCount,
-        applicantsCountList : state.applicantsCountList
+        totalApplicantsCountList : state.totalApplicantsCountList
     }
 }
 const mapDispatchToProps = (dispatch) => ({

@@ -19,7 +19,11 @@ class SubFunctionalAreawiseJobs extends Component{
         tempArray.push({"subfunctionalArea" : subfunctionalArea, "id": _id })
         selector.subfunctionalArea_id = tempArray;  
 
-        mapAction.jobCount(selector);
+        selector.startLimit            = 0;
+        selector.initialLimit          = 25;
+        selector.showMoreLimit         = 25;
+          
+        mapAction.jobCount(selector); 
         mapAction.filterJobList(this.props.selector);
         mapAction.setViewMode("listView");
         /*if(this.props.match.path=="/country/:countryCode/state/:stateCode/city/:district/function/:functionalArea/:functionalArea_id"){
