@@ -82,6 +82,7 @@
   margin-bottom: 2px;
   font-size: 14px;
   font-family: 'Montserrat-Bold';
+  float: right;
 }
 
 .buttonSignUp:hover{
@@ -206,7 +207,7 @@
   height: 300px;
   width: 180px;
   bottom: 70px;
-  left:23%;
+  left:15%;
   z-index: 1;
 
   
@@ -225,7 +226,7 @@
   height: 290px;
   width: 110px;
   bottom: 75px;
-  left:61.5%;
+  left:69.8%;
   z-index: 1;
   
 }
@@ -257,7 +258,7 @@
   height: 135px;
   width: 125px;
   bottom: 100px;
-    left: 65%;
+    left: 74%;
   z-index: 0;
 }
 
@@ -271,7 +272,7 @@
   height: 80px;
   width: 60px;
   top: 130px;
-    left: 29.6%;
+    left: 21.6%;
   z-index: 0;
 }
 
