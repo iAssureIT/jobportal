@@ -200,7 +200,7 @@ handlePageChange(pageNumber) {
 								this.props.jobList.length>0
 								?
 									this.props.jobList.map((elem,index1)=>{
-										mapAction.stateApplicantsCountList({entity_id : this.props.company_id, stateCode : elem.location.stateCode});
+										//mapAction.stateApplicantsCountList({entity_id : this.props.company_id, stateCode : elem.location.stateCode});
 										//console.log(elem)
 										var applicantsCount = this.props.totalApplicantsCountList.filter((appl, ind)=>{
 											if (appl._id == elem._id) {
@@ -208,8 +208,80 @@ handlePageChange(pageNumber) {
 											}else{
 												return 0
 											}
-											
 										})
+
+										var countryApplicantsCount = this.props.countryApplicantsCountList.filter((appl, ind)=>{
+											if (appl._id == elem._id) {
+												return appl.candidatesApplied;
+											}else{
+												return 0
+											}
+										})
+
+										var countryApplicantsCount = this.props.countryApplicantsCountList.filter((appl, ind)=>{
+											if (appl._id == elem._id) {
+												return appl.candidatesApplied;
+											}else{
+												return 0
+											}
+										})
+										/*var stateApplicantsCount = this.props.stateApplicantsCountList.filter((appl, ind)=>{
+											if (appl._id == elem._id) {
+												return appl.candidatesApplied;
+											}else{
+												return 0
+											}
+										})
+										var districtApplicantsCount = this.props.districtApplicantsCountList.filter((appl, ind)=>{
+											if (appl._id == elem._id) {
+												return appl.candidatesApplied;
+											}else{
+												return 0
+											}
+										})*/
+										var maleApplicantsCount = this.props.maleApplicantsCountList.filter((appl, ind)=>{
+											if (appl._id == elem._id) {
+												return appl.candidatesApplied;
+											}else{
+												return 0
+											}
+										})
+										var femaleApplicantsCount = this.props.femaleApplicantsCountList.filter((appl, ind)=>{
+											if (appl._id == elem._id) {
+												return appl.candidatesApplied;
+											}else{
+												return 0
+											}
+										})
+										var otherApplicantsCount = this.props.otherApplicantsCountList.filter((appl, ind)=>{
+											if (appl._id == elem._id) {
+												return appl.candidatesApplied;
+											}else{
+												return 0
+											}
+										})
+										var exp02ApplicantsCount = this.props.exp02ApplicantsCountList.filter((appl, ind)=>{
+											if (appl._id == elem._id) {
+												return appl.candidatesApplied;
+											}else{
+												return 0
+											}
+										})
+										var exp26ApplicantsCount = this.props.exp26ApplicantsCountList.filter((appl, ind)=>{
+											if (appl._id == elem._id) {
+												return appl.candidatesApplied;
+											}else{
+												return 0
+											}
+										})
+										var exp610ApplicantsCount = this.props.exp610ApplicantsCountList.filter((appl, ind)=>{
+											if (appl._id == elem._id) {
+												return appl.candidatesApplied;
+											}else{
+												return 0
+											}
+										})
+
 										return(
 											<div className="col-lg-12" key={index1}>
 												<div className="jobListContainer">
@@ -275,17 +347,17 @@ handlePageChange(pageNumber) {
 																		<div className="tierOneRow col-lg-12 "> 
 																			<div className="col-lg-4 react1 row">Pune<br /><span className="multiCount">150</span></div>
 																			<div className="col-lg-4 react2 row">Rest of Maharashtra<br /><span className="multiCount">90</span></div>
-																			<div className="col-lg-4 react3 row">Rest of India<br /><span className="multiCount">120</span></div> 
+																			<div className="col-lg-4 react3 row">Rest of India<br /><span className="multiCount">{countryApplicantsCount.length > 0 ? countryApplicantsCount[0].candidatesApplied : 0}</span></div> 
 																		</div>
 																		<div className="tierOneRow col-lg-12 "> 
-																			<div className="col-lg-4 react1 row">Male<br /><span className="multiCount">160</span></div>
-																			<div className="col-lg-4 react2 row">Female<br /><span className="multiCount">200</span></div>
-																			<div className="col-lg-4 react3 row">Other<br /><span className="multiCount">0</span></div> 
+																			<div className="col-lg-4 react1 row">Male<br /><span className="multiCount"></span>{maleApplicantsCount.length > 0 ? maleApplicantsCount[0].candidatesApplied : 0}</div>
+																			<div className="col-lg-4 react2 row">Female<br /><span className="multiCount">{femaleApplicantsCount.length > 0 ? femaleApplicantsCount[0].candidatesApplied : 0 }</span></div>
+																			<div className="col-lg-4 react3 row">Other<br /><span className="multiCount"> {otherApplicantsCount.length > 0 ? otherApplicantsCount[0].candidatesApplied : 0 }</span></div> 
 																		</div>
 																		<div className="tierOneRow col-lg-12 "> 
-																			<div className="col-lg-4 react1 row">Exp&nbsp;:&nbsp;0 To 2<br /><span className="multiCount">105</span></div>
-																			<div className="col-lg-4 react2 row">Exp&nbsp;:&nbsp;2 To 6<br /><span className="multiCount">95</span></div>
-																			<div className="col-lg-4 react3 row">Exp&nbsp;:&nbsp;6 To 7<br /><span className="multiCount">160</span></div> 
+																			<div className="col-lg-4 react1 row">Exp&nbsp;:&nbsp;0 To 2<br /><span className="multiCount">{exp02ApplicantsCount.length > 0 ? exp02ApplicantsCount[0].candidatesApplied : 0}</span></div>
+																			<div className="col-lg-4 react2 row">Exp&nbsp;:&nbsp;2 To 6<br /><span className="multiCount">{exp26ApplicantsCount.length > 0 ? exp26ApplicantsCount[0].candidatesApplied : 0}</span></div>
+																			<div className="col-lg-4 react3 row">Exp&nbsp;:&nbsp;6 To 7<br /><span className="multiCount">{exp610ApplicantsCount.length > 0 ? exp610ApplicantsCount[0].candidatesApplied : 0}</span></div> 
 																		</div> 
 																	</div>
 																</div>
@@ -612,8 +684,16 @@ const mapStateToProps = (state)=>{
     return {
         user_ID     : state.user_ID,  	candidate_id   : state.candidate_id,
         selector    : state.selector,   jobList        : state.jobList,
-        jobCount  	: state.jobCount,
-        totalApplicantsCountList : state.totalApplicantsCountList
+        jobCount  	: state.jobCount,	
+        countryApplicantsCountList  : state.countryApplicantsCountList,
+        stateApplicantsCountList 	: state.stateApplicantsCountList,
+        maleApplicantsCountList 	: state.maleApplicantsCountList,
+        femaleApplicantsCountList 	: state.femaleApplicantsCountList,
+        otherApplicantsCountList 	: state.otherApplicantsCountList,
+        exp02ApplicantsCountList  	: state.exp02ApplicantsCountList,
+        exp26ApplicantsCountList 	: state.exp26ApplicantsCountList,
+        exp610ApplicantsCountList 	: state.exp610ApplicantsCountList,
+        totalApplicantsCountList 	: state.totalApplicantsCountList
     }
 }
 const mapDispatchToProps = (dispatch) => ({
