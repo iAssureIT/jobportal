@@ -973,42 +973,52 @@ class Experience extends Component{
 							</div>
 
 						</div>
-						<div>
-							<button className="buttonBack pull-right" onClick={this.handleSave.bind(this)}> 
-								{this.state.buttonText}
-							</button>
+						<div className="row">
+							<div className="col-lg-12">
+								<button className="buttonBack pull-right"
+								  onClick={this.handleSave.bind(this)}> 
+								  {this.state.buttonText}
+								 </button>
+							</div>
 						</div>
-						<div className=" AddressWrapper col-lg-12" >
+						<div className=" AddressWrapper" >
 							<div className="row">
 								{
+								!this.state.workExperienceID
+								?
 								this.state.experienceArry.length > 0
 								?
 								this.state.experienceArry.map((elem,index)=>{
 									console.log(elem)
 									return(
-										<div className="col-lg-6 AddressOuterWrapper"  key={index}>
+										<div className="col-lg-4 AddressOuterWrapper"  key={index}>
 											<div className="col-lg-12 addWrapper">
 												<div className="row">
-													<div className="col-lg-4 addLeftWrapper">
-														<div className="addLogoDiv">
+													<div className="col-lg-12 addLeftWrapper key={index}">
+														<div className="col-lg-1 iconAdd" >
 															<FontAwesomeIcon icon="user-clock" /> 
 														</div>
-														<div className="addLogoTextDiv" key={index}>
-															{elem.company_id.companyName}
+														<div className="col-lg-8 titleAdd" >
+															{elem.industry_id.industry}
+														</div>
+														<div className="col-lg-2 buttonAdd" >
+															<div className="row">
+																 <a id={elem._id} href={"/experience/"+this.state.candidate_id+"/edit/"+elem._id}>
+																 	<span className="editAdd" title="Edit">
+																 		<FontAwesomeIcon icon="pencil-alt" />
+																 	</span> 
+																 </a>
+																<span className="deleteAdd" title="Delete" id={elem._id} onClick={this.deleteDate.bind(this)}>
+																	<FontAwesomeIcon icon="trash-alt" /> 
+																</span>
+															</div>
 														</div>
 													</div> 
-													<div className="col-lg-8 addRightWrapper">
-														<div className="row">
+												</div>
+												<div className="row">
+													<div className="col-lg-12 addRightWrapper">
+														<div className="">
 														<div className="addRightText ">	
-															<div className="AddressBoxText" key={index}>
-																{elem.company_id.companyName}
-															</div>
-															<div className="AddressBoxText" key={index}>
-																{elem.industry_id.industry}
-															</div>
-															<div className="AddressBoxText">
-															{elem.district +" "+elem.country}
-															</div>
 															<div className="AddressBoxText">
 																{elem.lastDegn}
 															</div>
@@ -1016,20 +1026,17 @@ class Experience extends Component{
 																{elem.department}
 															</div>
 															<div className="AddressBoxText">
-																{elem.totalExperience}
+																Total Experience : {elem.totalExperience}
+															</div>
+															<div className="AddressBoxText">
+																{elem.company_id.companyName}
+															</div>
+															<div className="AddressBoxText">
+																{elem.district+", "+elem.state +", "+elem.country+"."}
 															</div>
 															
-															
-															
 														</div>
-														<div className="col-lg-12">
-								                            <div className="addRightbtn">
-								                                <a id={elem._id} href={"/experience/"+this.state.candidate_id+"/edit/"+elem._id}>
-								                            	    <div className="editBtn pull-left">Edit</div>
-								                            	</a>
-								                            	<div className="dltBtn pull-right" id={elem._id} onClick={this.deleteDate.bind(this)}>Delete</div>
-								                            </div>
-							                            </div>
+														
 													</div>
 													</div>
 												</div> 
@@ -1040,7 +1047,13 @@ class Experience extends Component{
 									);
 									})
 									:
-										<div className="noData">Experience Record Not Found</div>
+										<div className="col-lg-12">
+											<hr className="basicInfoHr"/>
+											<div className="noData">Academics Record Not Found</div>
+										</div>
+									:
+										null
+									
 									}
 							</div>
 						</div>

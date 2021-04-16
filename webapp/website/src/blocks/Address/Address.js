@@ -76,6 +76,7 @@ class Address extends Component{
 			 		//addressTypeArry: response.data.addressType
 
 				 })
+			 	console.log(response.data);
 			 })
 			 .catch(error=>{
 			 	Swal.fire("Submit Error!",error.message,'error');
@@ -98,10 +99,12 @@ class Address extends Component{
 		});
 	}
 	//========== User Define Function Start ================
-	edit(){
+	edit(event){
+
 		var candidate_id = this.state.candidate_id;
 		var addressID   = this.state.addressID;
 		if (addressID) {
+
 			var idDate ={
 				candidate_id : this.state.candidate_id,
 				addressID : this.state.addressID,
@@ -225,9 +228,10 @@ class Address extends Component{
 		this.getData();
 	}
 	updateData(formValues){
+
 		var status =  this.validateForm();
 		if(status==true){
-					Axios.patch("/api/candidatemaster/patch/updateOneCandidateAddress",formValues)
+				 Axios.patch("/api/candidatemaster/patch/updateOneCandidateAddress",formValues)
 				 .then(response=>{
 
 									Swal.fire("Congrats","Your Address details update Successfully","success");
@@ -235,17 +239,18 @@ class Address extends Component{
 														addressType        : "",
 														pincodeExists 	   : true,
 														houseNumber        : "",
-														addressLine1            : "",
+														addressLine1       : "",
 														area               : "",
 														city               : "",
 														district   		   : "",	
-														states              : "",
+														states             : "",
 														country	           : "",
 														pincode            : "",
 														buttonText         : "Save",
 													})	
-							this.getData();			
+									
 							this.props.history.push("/address/"+this.state.candidate_id);
+							this.getData();	
 					})
 					.catch(error =>{
 						Swal.fire("Submit Error!",error.message,'error');
@@ -691,57 +696,74 @@ class Address extends Component{
 								</div>
 
 							</div>
-							<div>
-								<button className="buttonBack pull-right"
-								  onClick={this.handleSave.bind(this)}> 
-								  {this.state.buttonText}
-								 </button>
+							<div className="row">
+								<div className="col-lg-12">
+									<button className="buttonBack pull-right"
+									  onClick={this.handleSave.bind(this)}> 
+									  {this.state.buttonText}
+									 </button>
+								</div>
 							</div>
-							<div className=" AddressWrapper col-lg-12" >
+							<div className=" AddressWrapper " >
 								<div className="row">
 								{
-								this.state.addressArry.length > 0
-								?
-								this.state.addressArry.map((elem,index)=>{
-									return(
-									
-										<div className="col-lg-6 AddressOuterWrapper"  key={index}>
-											<div className="col-lg-12 addWrapper">
-												<div className="row">
-													<div className="col-lg-4 addLeftWrapper">
-														<div className="addLogoDiv">
-															<FontAwesomeIcon icon="home" /> 
-														</div>
-														
-																	<div className="addLogoTextDiv" key={index}>
-																		{elem.addressType.addressType}<br/>
-																		Address
+									!this.state.addressID
+									?
+									this.state.addressArry.length > 0
+									?
+										this.state.addressArry.map((elem,index)=>{
+											return(
+											
+												<div className="col-lg-4 AddressOuterWrapper"  key={index}>
+													<div className="">
+														<div className="col-lg-12 addWrapper">
+															<div className="row">
+																<div className="col-lg-12 addLeftWrapper key={index}">
+																		<div className="col-lg-1 iconAdd" >
+																			<FontAwesomeIcon icon="home" /> 
+																		</div>
+																		<div className="col-lg-8 titleAdd" >
+																			{elem.addressType.addressType} Address
+																		</div>
+																		<div className="col-lg-2 buttonAdd" >
+																			<div className="row">
+																				 <a id={elem._id} href={"/address/"+this.state.candidate_id+"/edit/"+elem._id}>
+																				 	<span className="editAdd" title="Edit">
+																				 		<FontAwesomeIcon icon="pencil-alt" />
+																				 	</span> 
+																				 </a>
+																				<span className="deleteAdd" title="Delete" id={elem._id} onClick={this.deleteDate.bind(this)}>
+																					<FontAwesomeIcon icon="trash-alt" /> 
+																				</span>
+																			</div>
+																		</div>
+																</div> 
+															</div> 
+															<div className="row">
+																<div className="col-lg-12 addRightWrapper">
+																	<div className="addRightText paddingAddress">
+																		{elem.houseNumber +", "+ elem.address+" , "}<br/>
+																		{elem.area +" , "+ elem.district+" , "}<br/>
+																		{elem.state +" , "+elem.country +" , "+elem.pincode+" ."}
 																	</div>
-													
-														
-													</div> 
-													<div className="col-lg-8 addRightWrapper">
-														<div className="addRightText paddingAddress">
-															{elem.houseNumber +", "+ elem.address+" , "}<br/>
-															{elem.area +" , "+ elem.district+" , "}<br/>
-															{elem.state +" , "+elem.country +" , "+elem.pincode+" ."}
+										                        
+																</div>
+															</div> 
 														</div>
-							                            <div className="addRightbtn">
-							                                <a id={elem._id} href={"/address/"+this.state.candidate_id+"/edit/"+elem._id}>
-							                            	    <div className="editBtn pull-left">Edit</div>
-							                            	</a>
-							                            	<div className="dltBtn pull-right" id={elem._id} onClick={this.deleteDate.bind(this)}>Delete</div>
-							                            </div>
 													</div>
-												</div> 
-											</div>
-										</div>
-										
-									);
-									})
+												</div>
+												
+											);
+										})
 									:
-										<div className="noData">Address Record Not Found</div>
-									}
+										<div className="col-lg-12">
+											<hr className="basicInfoHr"/>
+											<div className="noData">Address Record Not Found</div>
+										</div>
+									:
+									null
+
+								}
 								</div>
 							</div>
 							

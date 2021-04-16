@@ -18,45 +18,53 @@
 	text-decoration: none;
 }
 .addWrapper{
-	height:165px;
+	height:150px;
 	font-family:'Montserrat-Regular',Sans-Serif;
 	margin-bottom:15px;
 	margin-top:15px;
-	border: 5px groove var(--main-border-color);
+	border: 1px solid var(--main-border-color);
+	border-radius: 5px;
 	text-transform:capitalize;
 }
 .addLeftWrapper{
-	background:var(--input-bg-color );
-	height:155px;
-	text-align: center;
+	height:40px;
 	overflow: hidden!important;
 	padding: 0px;
-	border-right:5px groove var(--main-border-color);
+	border-bottom:1px solid var(--main-border-color);
+	font-family:'Montserrat-Bold',Sans-Serif;
+	font-size:16px;
+	padding-top: 5px;
+	/*text-align: center;*/
+	/*color: var(--main-border-color);*/
 }
-.addLogoDiv{
-	font-size:30px;
-	padding-top:30px;
-	padding-bottom:10px;
 
+.addLogoDiv{
+	font-size:25px;
+	padding-top: 3px;
+	padding-right: 0px!important;
+	padding-left: 10px!important;
 }
 .addLogoTextDiv{
 	font-family:'Montserrat-Bold',Sans-Serif;
-	font-size:0.8em;
+	font-size:15px;
+	height:40px;
+	padding-top: 10px;
+	padding-right: 0px!important;
+	padding-left: 20px!important;
 }
-.addRightWrapper{
-	height:155px;
-	background-color: var(--input-bg-color );
-
-}
+/*.addRightWrapper{
+	height:158px;
+}*/
 .addRightText{
-	height:100px;
-	padding-top:5px;
+	height: 100px;
+    padding-top: 9px;
 	font-size:12px;
 	overflow: hidden!important;
 	margin-bottom:5px;
+	font-family: 'Montserrat-Medium',Sans-Serif;
 }
 .paddingAddress{
-	padding-top:15px;
+	padding-top:10px;
 }
 .editBtn{
 	height: 25px;
@@ -122,8 +130,8 @@
 	position:absolute;
 	color:var(--main-subheading-font-color);
 	top:0px;
-	right:-30px;
-	width:100px;
+	right:-5px;
+	width:50px;
 }
 .AddressBoxRightIcon:hover{
 	position:absolute;
@@ -135,19 +143,19 @@
 }
 .rightIconHideWrapper{
 	position:relative;
-	height:55px;
-	width:80px;
-	left:-5px;
+	height:50px;
+	width:30px;
+	left:5px;
 	font-size:12px;
-	box-shadow:0px 0px 5px var(--main-border-color );
+	border:1px solid var(--main-border-color );
 	border-radius:4px;
 	display:none;
 	color:#fff!important;
 	text-align:left;
 }
 .rightIconHide{
-	padding-left:10px;
-	padding-top:7px;
+	padding-left:8px;
+	padding-top:5px;
 }
 .rightIconHideText{
 	padding-left:8px;
@@ -156,8 +164,7 @@
 }
 
 .AddressBoxText{
-	margin-top:5px;
-	padding-left:15px;
+	margin-top:1px;
 	font-size:12px;
 	font-family: 'Montserrat-Medium',Sans-Serif;
 }
@@ -189,9 +196,52 @@
 .noData{
 	font-size: 13px;
 	font-family: 'Montserrat-Medium',Sans-Serif;
-	margin-top: 30px;
-	border: 1px solid var(--main-border-color);
-	padding: 15px;
+	padding-top: 5px;
 	border-radius: 5px;
-	background-color: var(--input-bg-color);
+	text-align: center;
+}
+.editAdd {
+    padding-right: 10px;
+    font-size: 14px;
+    padding-left: 5px;
+    padding-top: 5px;
+    height: 40px;
+    transition: all 0.2s;
+}
+.editAdd:hover{
+	cursor: pointer;
+	color: var(--main-border-color);
+}
+.deleteAdd{
+	font-size: 14px;
+	height: 40px;
+	transition: all 0.5s;
+}
+.deleteAdd:hover{
+	cursor: pointer;
+	color: var(--red-button-color);
+}
+.iconAdd{
+	font-size: 20px;
+	height:40px;
+	margin-left:-5px;
+	margin-right: 5px;
+	/*margin-left: -5px;
+	padding-right: 5px;*/
+}
+.buttonAdd {
+    padding-top: 3px;
+}
+.buttonAdd a{
+	color: #fff;
+}
+.titleAdd{
+	padding-left: 15px;
+	padding-top: 5px;
+	font-size: 14px;
+	height: 25px;
+	overflow: hidden;
+}
+.rightIconHideDel:hover{
+	color: var(--red-button-color)!important;
 }

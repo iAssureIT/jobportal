@@ -186,11 +186,13 @@
     width:254px;
     height: 192px;
     position: absolute;
+    border-radius: 5px;
 }
 .profileImage{
     width:244px;
     height:182px;
 	margin:4px;
+
 }
 .resumeImage{
     background-color: #fff;
@@ -198,8 +200,8 @@
 
 .delImgIcon{
 	position: absolute;
-	top:-15px;
-	right:0px;
+	top:-18px;
+	right:-4px;
 	font-size: 14px;
 	color:#f00;
 }
@@ -208,8 +210,8 @@
 }
 .delResumeIcon{
     position: absolute;
-    top:-15px;
-    right:0px;
+    top:-18px;
+    right:-4px;
     font-size: 14px;
     color:#f00;
 }
@@ -801,6 +803,7 @@ user agent stylesheet:focus {
     align-items: center;
     text-align: center;
     display: grid;
+    border-radius: 5px;
 }
 .uploadImageClient1,.LogoImageUp1{
     position: absolute;
@@ -837,12 +840,14 @@ user agent stylesheet:focus {
     align-items: center;
     text-align: center;
     display: grid;
+    border-radius: 5px;
 }
 .profileImageWrapper2{
     border:1px dashed var(--main-border-color);
     width:150px;
     height: 100px;
     background-color: var(--input-bg-color) !important;
+    border-radius: 5px;
 }
 .resumeImage {
     width: 45px;

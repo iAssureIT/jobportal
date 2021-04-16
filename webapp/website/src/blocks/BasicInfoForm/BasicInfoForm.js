@@ -466,55 +466,52 @@ class BasicInfoForm extends Component{
 
 		var status = true;
 		var regName = /^[a-zA-Z]+$/;
-		var firstName=this.state.firstName;
-		var middleName=this.state.middleName;
-        var lastName=this.state.lastName;
 		var tempEmail = this.state.email.trim(); // value of field with whitespace trimmed off
     	var emailFilter = /^[^@]+@[^@.]+\.[^@]*\w\w$/;
     	var illegalChars = /[\(\)\<\>\,\;\:\\\"\[\]]/;
     	var mobileFilter = /^(\+\d{1,3}[- ]?)?\d{12}$/gm;
 
-	    if(this.state.firstName<=0)  {
-	      document.getElementById("firstNameError").innerHTML = "Please enter valid Name";  
-	      status=false; 
-	    }
+	    // if(this.state.firstName<=0)  {
+	    //   document.getElementById("firstNameError").innerHTML = "Please enter valid Name";  
+	    //   status=false; 
+	    // }
 	  
-	    if(!regName.test(firstName)){
-	      document.getElementById("firstNameError").innerHTML = "Please enter valid name,......";  
-	      status=false; 
-	    }
-	    else{
-	      document.getElementById("firstNameError").innerHTML = ""
-	      status = true;
-	    }
+	    // if(!regName.test(firstName)){
+	    //   document.getElementById("firstNameError").innerHTML = "Please enter valid name,......";  
+	    //   status=false; 
+	    // }
+	    // else{
+	    //   document.getElementById("firstNameError").innerHTML = ""
+	    //   status = true;
+	    // }
 
-	    if(this.state.middleName<=0)  {
-	      document.getElementById("middleNameError").innerHTML = "Please enter valid Name";  
-	      status=false; 
-	    }
+	    // if(this.state.middleName<=0)  {
+	    //   document.getElementById("middleNameError").innerHTML = "Please enter valid Name";  
+	    //   status=false; 
+	    // }
 	  
-	    if(!regName.test(middleName)){
-	      document.getElementById("middleNameError").innerHTML = "Please enter valid name,......";  
-	      status=false; 
-	    }
-	    else{
-	      document.getElementById("middleNameError").innerHTML=  ""
-	      status = true;
-	    }
+	    // if(!regName.test(middleName)){
+	    //   document.getElementById("middleNameError").innerHTML = "Please enter valid name,......";  
+	    //   status=false; 
+	    // }
+	    // else{
+	    //   document.getElementById("middleNameError").innerHTML=  ""
+	    //   status = true;
+	    // }
 
-	    if(this.state.lastName<=0)  {
-	      document.getElementById("lastNameError").innerHTML = "Please enter valid Name";  
-	      status=false; 
-	    }
+	    // if(this.state.lastName<=0)  {
+	    //   document.getElementById("lastNameError").innerHTML = "Please enter valid Name";  
+	    //   status=false; 
+	    // }
 	  
-	    if(!regName.test(lastName)){
-	      document.getElementById("lastNameError").innerHTML = "Please enter valid name,......";  
-	      status=false; 
-	    }
-	    else{
-	      document.getElementById("lastNameError").innerHTML = "";
-	      status = true;
-	    }
+	    // if(!regName.test(lastName)){
+	    //   document.getElementById("lastNameError").innerHTML = "Please enter valid name,......";  
+	    //   status=false; 
+	    // }
+	    // else{
+	    //   document.getElementById("lastNameError").innerHTML = "";
+	    //   status = true;
+	    // }
 		
 		if(this.state.dob.length<=0){
 			document.getElementById("dobError").innerHTML = "Please enter your Date Of Birth";  
@@ -564,22 +561,37 @@ class BasicInfoForm extends Component{
 		}
 
 		 
-		 let fields = this.state.fields;
-            let errors = {};
+		 
+            
             let formIsValid = true;
-            if(!fields["name"]){
-               formIsValid = false;
-               errors["name"] = "Cannot be empty";
-            }
+       
       
-            if(typeof fields["name"] !== "undefined"){
-               if(!fields["name"].match(/^[a-zA-Z]+$/)){
+            if(typeof this.state.firstName !== "undefined"){
+               if(!this.state.firstName.match(regName)){
                   formIsValid = false;
-                  errors["name"] = "Only letters";
-               }        
+                  document.getElementById("firstNameError").innerHTML = "Please enter a valid first name";
+               }else{
+               		document.getElementById("firstNameError").innerHTML = "";
+               }       
             }
-            this.setState({errors: errors});
-           return formIsValid;
+            if(typeof this.state.middleName !== "undefined"){
+               if(!this.state.middleName.match(regName)){
+                  formIsValid = false;
+                  document.getElementById("middleNameError").innerHTML = "Please enter a valid middle name";
+               }else{
+               		document.getElementById("middleNameError").innerHTML = "";
+               }       
+            }
+            if(typeof this.state.lastName !== "undefined"){
+               if(!this.state.lastName.match(regName)){
+                  formIsValid = false;
+                  document.getElementById("lastNameError").innerHTML = "Please enter a valid last name";
+               }else{
+               		document.getElementById("lastNameError").innerHTML = "";
+               }       
+            }
+          
+           	return formIsValid;
             return status;
 	}
 
@@ -612,7 +624,7 @@ class BasicInfoForm extends Component{
 									 className="form-control inputBox" value={this.state.firstName} 
 									 onChange={this.handleChange.bind(this)}/>
 								</div> 
-								<span id="firstNameError" className="errorMsg">{this.state.errors["name"]}</span>
+								<span id="firstNameError" className="errorMsg"></span>
 							</div>
 
 							<div className="col-lg-4">

@@ -860,81 +860,72 @@ class Academics extends Component{
 								<span id="countryError" className="errorMsg"></span>
 							</div>
 						</div>	
-						<div>
-							<button className="buttonBack pull-right" 
-							 onClick={this.handleSave.bind(this)}> 
-							 	{this.state.buttonText}
-							 </button>
+						<div className="row">
+							<div className="col-lg-12">
+								<button className="buttonBack pull-right"
+								  onClick={this.handleSave.bind(this)}> 
+								  {this.state.buttonText}
+								 </button>
+							</div>
 						</div>
-						<div className=" AddressWrapper col-lg-12" >
+						<div className=" AddressWrapper" >
 							 <div className="row">
 								{
+								!this.state.academicsID
+								?
+
 								this.state.academics.length > 0
 								?
 								this.state.academics.map((elem,index)=>{
 									return(
-										<div className="col-lg-6 AddressOuterWrapper"  key={index}>
+										<div className="col-lg-4 AddressOuterWrapper"  key={index}>
 											<div className="col-lg-12 addWrapper">
 												<div className="row">
-													<div className="col-lg-4 addLeftWrapper">
-														<div className="addLogoDiv">
-															<FontAwesomeIcon icon="graduation-cap" /> 
+													<div className="col-lg-12 addLeftWrapper key={index}">
+														<div className="col-lg-1 iconAdd" >
+															<FontAwesomeIcon icon="home" /> 
 														</div>
-														<div>
-														<div className="">
-														<div className="addLogoTextDiv" key={index}>
-															{elem.qualificationlevel_id.qualificationLevel}<br/>
+														<div className="col-lg-8 titleAdd" >
+															{elem.qualificationlevel_id.qualificationLevel}
 														</div>
+														<div className="col-lg-2 buttonAdd" >
+															<div className="row">
+																 <a id={elem._id} href={"/academics/"+this.state.candidate_id+"/edit/"+elem._id}>
+																 	<span className="editAdd" title="Edit">
+																 		<FontAwesomeIcon icon="pencil-alt" />
+																 	</span> 
+																 </a>
+																<span className="deleteAdd" title="Delete" id={elem._id} onClick={this.deleteDate.bind(this)}>
+																	<FontAwesomeIcon icon="trash-alt" /> 
+																</span>
+															</div>
 														</div>
-														
-														<div className="addLogoTextDiv" key={index}>
-															{elem.qualification_id.qualification}
-														</div>
-														</div>
-															
-														
 													</div> 
-													<div className="col-lg-8 addRightWrapper">
-														<div className="row">
+												</div> 
+												<div className="row">
+													<div className="col-lg-12 addRightWrapper">
+														
 														<div className="addRightText ">
 															
 															<div className="AddressBoxText">
-															{elem.specialization}
-															</div>
-															<div className="AddressBoxText" key={index}>
-																{elem.collegeSchool}
+																{elem.qualification_id.qualification}
 															</div>
 															<div className="AddressBoxText">
-															{}
+																{elem.specialization}
+															</div>
+															<div className="AddressBoxText">
+																{elem.collegeSchool}
 															</div>
 															<div className="AddressBoxText">
 																{elem.admisionYear} - {elem.passOutYear}
 															</div>
-															
 															<div className="AddressBoxText">
-																{elem.grade}
+																{elem.cityVillage+", "+elem.state+", "+elem.country+"."}
 															</div>
 															
-															<div className="AddressBoxText">
-																{elem.state}
-															</div>
-															<div className="AddressBoxText">
-																{elem.country}
-															</div>
-															<div className="AddressBoxText">
-																{elem.cityVillage}
-															</div>}
 														</div>
-														<div className="col-lg-12">
-								                            <div className="addRightbtn">
-								                                <a id={elem._id} href={"/academics/"+this.state.candidate_id+"/edit/"+elem._id}>
-								                            	    <div className="editBtn pull-left">Edit</div>
-								                            	</a>
-								                            	<div className="dltBtn pull-right" id={elem._id} onClick={this.deleteDate.bind(this)}>Delete</div>
-								                            </div>
-							                            </div>
 													</div>
-													</div>
+													
 												</div> 
 											</div>
 										</div>
@@ -943,7 +934,12 @@ class Academics extends Component{
 									);
 									})
 									:
-										<div className="noData">Academics Record Not Found</div>
+										<div className="col-lg-12">
+											<hr className="basicInfoHr"/>
+											<div className="noData">Academics Record Not Found</div>
+										</div>
+									:
+										null
 									}
 								</div>
 							</div>

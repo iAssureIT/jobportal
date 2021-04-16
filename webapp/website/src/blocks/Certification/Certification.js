@@ -692,76 +692,86 @@ class Certification extends Component{
 						</div>
 
 						}
-						<div>
-							<button className="buttonBack pull-right" onClick={this.handleSave.bind(this)}> {this.state.buttonText}</button>
+						<div className="row">
+							<div className="col-lg-12">
+								<button className="buttonBack pull-right"
+								  onClick={this.handleSave.bind(this)}> 
+								  {this.state.buttonText}
+								 </button>
+							</div>
 						</div>
 						
 						{
 							this.state.certificationToggel===true
 							?
-							<div className=" AddressWrapper col-lg-12" >
+							<div className=" AddressWrapper" >
 								 <div className="row">
 									{
+									!this.state.certificationID
+									?
 									this.state.certificationArry.length > 0
 									?
 									this.state.certificationArry.map((elem,index)=>{
 
 										return(
 										
-											<div className="col-lg-6 " key={index}>
+											<div className="col-lg-4 " key={index}>
 												<div className="col-lg-12 certifiedWrapper">
-													<div className="col-lg-12 certificateTitleWrapperd">
-														<div className="row">
-															<div className="certificateTitle">
-																Certificate
-															</div>
-														</div>
-													</div>
-													<div className="certificateLogoWrppaer">
-														<img className="certificateLogo" src="/images/56.png" alt="certificateLogo"/>
-													</div>
-													<div className="certificateText">
-														This certificate is proudly presented to
-													</div>
-													<div className="certificateNameText1">
-														{this.state.basicInfo.firstName + " " + this.state.basicInfo.lastName }
-													</div>
-													<div className="certificateText">
-														for
-													</div>
-													<div className="certificateNameText1">
-														{elem.certName}
-													</div>
-													<div className="col-ld-12 certificateFooter">
-														<div className="row">
-															<div className="col-lg-4 col-lg-offset-1 IssueDate">
-																<div className="certificateNameText2">{Moment(elem.certifiedOn).format("YYYY-MM-DD")} </div>
-																<div className="certificateText2">date</div>
-															</div>
-															<div className="col-lg-2">
-																<img className="certificateLogo2" src="/images/57.png" alt="certificateLogo"/>
-															</div>
-															<div className="col-lg-4 IssueDate">
-																<div className="certificateNameText2">{elem.issuedBy}</div>
-																<div className="certificateText2">Issued By</div>
-															</div>
-														</div>
-													</div>
-													<div className="AddressBoxRightIcon hoverEdit pull-right">
-														<div className="row">
-															<FontAwesomeIcon icon="ellipsis-h" />
-															<div className="rightIconHideWrapper" >
-															
-																<div className="rightIconHide"   >
-																	<a id={elem._id} href={"/certification/"+this.state.candidate_id+"/edit/"+elem._id}>
-																		<FontAwesomeIcon icon="pencil-alt" /> 
-																		<span className="rightIconHideText" >Edit</span>
-																	</a>
+													<div className="row">
+														<div className="col-lg-12 certificateTitleWrapperd">
+															<div className="row">
+																<div className="certificateTitle">
+																	Certificate
 																</div>
+															</div>
+														</div>
+														<div className="certificateLogoWrppaer">
+															<img className="certificateLogo" src="/images/56.png" alt="certificateLogo"/>
+														</div>
+														<div className="certificateText col-lg-12">
+															This certificate is proudly presented to
+														</div>
+														<div className="certificateNameText1">
+															{this.state.basicInfo.firstName + " " + this.state.basicInfo.lastName }
+														</div>
+														<div className="certificateText">
+															for
+														</div>
+														<div className="certificateNameText1">
+															{elem.certName}
+														</div>
+														<div className="col-ld-12 certificateFooter">
+															<div className="row">
+																<div className="col-lg-4 col-lg-offset-1 IssueDate">
+																	<div className="certificateNameText2">{Moment(elem.certifiedOn).format("YYYY-MM-DD")} </div>
+																	<div className="certificateText2">date</div>
+																</div>
+																<div className="col-lg-2">
+																	<div className="row">
+																		<img className="certificateLogo2" src="/images/57.png" alt="certificateLogo"/>
+																	</div>
+																</div>
+																<div className="col-lg-4 IssueDate">
+																	<div className="certificateNameText2">{elem.issuedBy}</div>
+																	<div className="certificateText2">Issued By</div>
+																</div>
+															</div>
+														</div>
+														<div className="AddressBoxRightIcon hoverEdit pull-right">
+															<div className="">
+																<FontAwesomeIcon icon="ellipsis-h" />
+																<div className="rightIconHideWrapper" >
 																
-																<div className="rightIconHide">
-																	<FontAwesomeIcon icon="trash-alt" /> 
-																	<span className="rightIconHideText" id={elem._id} onClick={this.deleteCertification.bind(this)}>Delete</span>
+																	<div className="rightIconHide" title="Edit"  >
+																		<a id={elem._id} href={"/certification/"+this.state.candidate_id+"/edit/"+elem._id} >
+																			<FontAwesomeIcon icon="pencil-alt" /> 
+																		</a>
+																	</div>
+																	
+																	<div className="rightIconHide rightIconHideDel" title="Edit" id={elem._id} onClick={this.deleteCertification.bind(this)}>
+																		<FontAwesomeIcon icon="trash-alt" title="Delete" /> 
+																	
+																	</div>
 																</div>
 															</div>
 														</div>
@@ -772,7 +782,12 @@ class Certification extends Component{
 										);
 										})
 										:
-											<div className="noData">Certificate Record Not Found</div>
+											<div className="col-lg-12">
+												<hr className="basicInfoHr"/>
+												<div className="noData">Academics Record Not Found</div>
+											</div>
+										:
+											null
 										}
 									</div>
 							</div>
