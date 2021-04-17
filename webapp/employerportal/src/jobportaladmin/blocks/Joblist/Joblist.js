@@ -17,7 +17,8 @@ class JobListView extends Component{
 	this.state={
 		jobList 		: [],
 		startLimit 		: this.props.selector.startLimit,
-		isActive 		: true
+		isActive 		: true,
+		job_id          : "" 
 	}
 }	
 
@@ -44,6 +45,7 @@ getJobs(event){
 
 	console.log(event.target.getAttribute('data-status'))
 }
+
 showMore(){
 	var selector 		  	= this.props.selector;
 
@@ -73,11 +75,13 @@ handlePageChange(pageNumber) {
     mapAction.filterJobList(selector);
 }
 
-/*deleteJob = (event)=>{
+deleteJob = (event)=>{
 	event.preventDefault();
 	const job_id = event.currentTarget.id;
 
-	Swal.fire({
+	this.setState({job_id:job_id})
+
+	/*Swal.fire({
 		title 				: 'Are you sure? you want to delete this job!!!',
 		text 				: 'You will not be able to recover this job',
 		icon 				: 'warning',
@@ -118,8 +122,45 @@ handlePageChange(pageNumber) {
 						'error'
 					)
 				}
-			})
-		}*/
+			})*/
+		}
+
+	/*deleteJob = (event)=>{
+	event.preventDefault();
+	const job_id = event.currentTarget.id;
+
+	Swal.fire({
+		title 				: 'Are you sure? you want to delete this job!!!',
+		text 				: 'You will not be able to recover this job',
+		icon 				: 'warning',
+		showCancelButton 	: true,
+		confirmButtonText 	: 'Yes, delete it!',
+		cancelButtonText 	: 'No, keep it',
+		confirmButtonColor 	: '#f5a721',
+	
+	}).then((result) =>	{
+							console.log('result:',result);
+							if(result.value){
+												if(job_id){
+															Axios.delete("/api/jobs/delete/"+job_id)
+															.then(response 	=>	{
+																					if(response.data.message==="Job details deleted Successfully!")
+																					{
+																						var {mapAction} = this.props;
+																						mapAction.filterJobList(this.state.selector);
+																					}
+																				}
+																)
+															.catch(error	=>	{
+																				
+																				}
+																	)
+															}
+									
+											}
+						}
+			)
+		}*/	
 	
 	handleSwitch (){
   			this.setState({
@@ -375,18 +416,21 @@ handlePageChange(pageNumber) {
 																	<div className="listViewBtn">	
 																		{/*<a title = "Inactive" onClick={this.inactiveJob} id = {elem._id}><i className="fa fa-eye-slash"></i></a>
 																		*/}
+																		<a title = "Inactive" onClick={this.inactiveJob} id = {elem._id}><i className="fa fa-eye-slash"></i></a>	
 																	</div>
 																	<div className="listDelBtn">	
 																		<i title = "Delete" className="fa fa-trash" data-toggle="modal" data-target="#delModal" data-dismiss="modal" onClick={this.deleteJob} id = {elem._id}></i>
 																	</div>
-																	<Modal />
+
+																	<Modal job_id={this.state.job_id}/>
+
 																	<div className="input-group jobStatusToggleWrapper">
 																		<div className = {this.state.isActive ? "genderFeild col-lg-6 genderFeildActive" : "genderFeild col-lg-6" }
 																		 id="togglePrimary" name="primaryToggel" 
 																		 value="togglePrimary" onClick={this.handleSwitch.bind(this)}>
 																			<div className="row">Inactive</div>
 																		</div>
-																	</div>
+																	</div>	
 																</div>
 															</div>
 														</div>

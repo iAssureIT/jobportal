@@ -1,16 +1,27 @@
 const mongoose	            = require("mongoose");
 var ObjectId                = require('mongodb').ObjectID;
 const ApplyJob              = require('./ModelApplyJob');
+const Jobs                  = require('../../employer/jobPost/ModelJobPost.js');
 const CandidateProfile      = require('../profile/ModelCandidateProfile.js');
 const _ = require('underscore');   
 
 exports.applyJob = (req,res,next)=>{
     console.log(req.body)
+
+    var male        = req.body.male;
+    var female      = req.body.female;
+    var other       = req.body.other;
+    var state       = req.body.state;
+    var country     = req.body.country;
+    var exp0to2     = req.body.exp0to2;
+    var exp2to6     = req.body.exp2to6;
+    var exp6to10    = req.body.exp6to10;
+
     const applyjob = new ApplyJob({
             _id                   : new mongoose.Types.ObjectId(),                    
             candidate_id          : req.body.candidate_id,
-            job_id                 : req.body.job_id,
-            entity_id            : req.body.entity_id,
+            job_id                : req.body.job_id,
+            entity_id             : req.body.entity_id,
             appliedDate           : new Date(),
             status                : req.body.status,   
             applicationViewed     : false,  
@@ -19,6 +30,73 @@ exports.applyJob = (req,res,next)=>{
         });
         applyjob.save()
 		.then(data =>{
+
+            CandidateProfile.findOne({_id: req.body.candidate_id})
+                    .exec()
+                    .then(candidatedata=>{
+                        console.log(candidatedata)
+                        if (candidatedata.basicInfo.gender == "male") {
+                            male++;
+                        }
+                        if (candidatedata.basicInfo.gender == "female") {
+                            female++;
+                        }
+                        if (candidatedata.basicInfo.gender == "other") {
+                            other++;
+                        }
+                        if (candidatedata.totalExperience >= 0 && candidatedata.totalExperience <= 2) {
+                            exp0to2++;
+                        }
+                        if (candidatedata.totalExperience >= 2 && candidatedata.totalExperience <= 6) {
+                            exp2to6++;
+                        }
+                        if (candidatedata.totalExperience >= 6 && candidatedata.totalExperience <= 10) {
+                            exp6to10++;
+                        }
+
+                        for(var i = 0; i < candidatedata.address.length; i++){
+                            console.log("male",candidatedata.address[i].state)
+                            if (req.body.jobstateCode == candidatedata.address[i].stateCode ) {
+                                state++;
+                                break;
+                            }
+                        }
+                        for(var i = 0; i < candidatedata.address.length; i++){
+                            console.log("male",candidatedata.address[i].state)
+                            if (req.body.jobcountryCode == candidatedata.address[i].countryCode ) {
+                                country++;
+                                break;
+                            }
+                        }
+                        console.log("male",male)
+                        console.log("female",female)
+                        console.log("other",other)
+                        console.log("exp0to2",exp0to2)
+                        console.log("exp2to6",exp2to6)
+                        console.log("exp6to10",exp6to10)
+                        console.log("state",state)
+                        console.log("country", country)
+                        Jobs.updateOne({ _id: req.body.job_id }, 
+                        {
+                            $set: {
+                            "applicantStatistics":  {   
+                                        "male"          : male,
+                                        "female"        : female,
+                                        "other"         : other,
+                                        "state"         : state,
+                                        "country"       : country,
+                                        "exp0to2"       : exp0to2,
+                                        "exp2to6"       : exp2to6,
+                                        "exp6to10"      : exp6to10
+                                    }
+                                }
+                        })
+                        .then(data => {
+                            console.log(data)
+                        })
+                        //res.status(200).json(data);
+                    })
+
             res.status(200).json({ "message": "You have applied to job" });		
 	})
 	.catch(err =>{
@@ -28,10 +106,104 @@ exports.applyJob = (req,res,next)=>{
 		});
 	});
 };
+exports.removeApplication = (req,res,next)=>{
+    console.log("body",req.body)
 
+    var male        = req.body.male;
+    var female      = req.body.female;
+    var other       = req.body.other;
+    var state       = req.body.state;
+    var country     = req.body.country;
+    var exp0to2     = req.body.exp0to2;
+    var exp2to6     = req.body.exp2to6;
+    var exp6to10    = req.body.exp6to10;
+
+    ApplyJob.deleteOne({job_id : ObjectId(req.body.job_id) })
+    .exec()
+    .then(data=>{
+        if (data.deletedCount == 1) {
+
+           CandidateProfile.findOne({_id: req.body.candidate_id})
+            .exec()
+            .then(candidatedata=>{
+                console.log(candidatedata)
+
+                if (candidatedata.basicInfo.gender == "male") {
+                    male--;
+                }
+                if (candidatedata.basicInfo.gender == "female") {
+                    female--;
+                }
+                if (candidatedata.basicInfo.gender == "other") {
+                    other--;
+                }
+                if (candidatedata.totalExperience >= 0 && candidatedata.totalExperience <= 2) {
+                    exp0to2--;
+                }
+                if (candidatedata.totalExperience >= 2 && candidatedata.totalExperience <= 6) {
+                    exp2to6--;
+                }
+                if (candidatedata.totalExperience >= 6 && candidatedata.totalExperience <= 10) {
+                    exp6to10--;
+                }
+
+                for(var i = 0; i < candidatedata.address.length; i++){
+                    console.log("male",candidatedata.address[i].state)
+                    if (req.body.jobstateCode == candidatedata.address[i].stateCode ) {
+                        state--;
+                        break;
+                    }
+                }
+                for(var i = 0; i < candidatedata.address.length; i++){
+                    console.log("male",candidatedata.address[i].state)
+                    if (req.body.jobcountryCode == candidatedata.address[i].countryCode ) {
+                        country--;
+                        break;
+                    }
+                }
+                console.log("male",male)
+                console.log("female",female)
+                console.log("other",other)
+                console.log("exp0to2",exp0to2)
+                console.log("exp2to6",exp2to6)
+                console.log("exp6to10",exp6to10)
+                console.log("state",state)
+                console.log("country", country)
+                Jobs.updateOne({ _id: req.body.job_id }, 
+                {
+                    $set: {
+                    "applicantStatistics":  {   
+                                "male"          : male,
+                                "female"        : female,
+                                "other"         : other,
+                                "state"         : state,
+                                "country"       : country,
+                                "exp0to2"       : exp0to2,
+                                "exp2to6"       : exp2to6,
+                                "exp6to10"      : exp6to10
+                            }
+                        }
+                })
+                .then(data => {
+                    console.log(data)
+                })
+                //res.status(200).json(data);
+            }) 
+           res.status(200).json({ deleted : true }); 
+       }else{
+
+            res.status(200).json({ deleted : false });
+       }
+            
+        
+    })
+    .catch(err =>{
+        res.status(500).json({ error: err });
+    });
+};
 
 exports.appliedJobList = (req,res,next)=>{
-    console.log("candidate_id",req.body.candidate_id);
+    //console.log("candidate_id",req.body.candidate_id);
     
     var selector = {};
     var industry_ids = [];
@@ -211,8 +383,8 @@ exports.appliedJobList = (req,res,next)=>{
     //console.log("list selector - ", selector);
 
     var limit = req.body.startLimit === 0 ? req.body.initialLimit : req.body.showMoreLimit
-    console.log(req.body.startLimit)
-    console.log(limit)
+    //console.log(req.body.startLimit)
+    //console.log(limit)
     
     ApplyJob.find({"candidate_id": req.body.candidate_id}).sort({ createdAt: -1 })
     .populate( 'job_id', null, selector )   
@@ -672,23 +844,5 @@ exports.candidatesAppliedToJob = (req,res,next)=>{
     if (err) return res.status(500).json({ error: err });
     res.status(200).json(candidate);
     // prints "The author is Ian Fleming"
-    });
-};
-exports.removeApplication = (req,res,next)=>{
-    console.log(req.body)
-    ApplyJob.deleteOne({job_id : ObjectId(req.body.job_id) })
-    .exec()
-    .then(data=>{
-        if (data.deletedCount == 1) {
-           res.status(200).json({ deleted : true }); 
-       }else{
-
-            res.status(200).json({ deleted : false });
-       }
-            
-        
-    })
-    .catch(err =>{
-        res.status(500).json({ error: err });
     });
 };

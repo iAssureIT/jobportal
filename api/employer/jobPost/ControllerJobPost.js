@@ -149,6 +149,16 @@ exports.insertJobs = (req, res, next) => {
                 "preferredSkills": preferredSkills
             },
             "status"   : req.body.status, 
+            "applicantStatistics":  {   
+                "male"          : 0,
+                "female"        : 0,
+                "other"         : 0,
+                "state"         : 0,
+                "country"       : 0,
+                "exp0to2"       : 0,
+                "exp2to6"       : 0,
+                "exp6to10"      : 0
+            },
             "createdAt": new Date(),
             "createdBy": req.body.user_id,
             "updateLog": [{
@@ -2397,6 +2407,16 @@ exports.insertBulkJobs = (req, res, next) => {
                     "minExperience": Math.floor(Math.random() * 10)
                 },
                 "status"   : "draft",
+                "applicantStatistics":  {   
+                    "male"          : 0,
+                    "female"        : 0,
+                    "other"         : 0,
+                    "state"         : 0,
+                    "country"       : 0,
+                    "exp0to2"       : 0,
+                    "exp2to6"       : 0,
+                    "exp6to10"      : 0
+                },
                 "createdAt": new Date()
             }
             //console.log(jobObject)
@@ -2851,6 +2871,16 @@ exports.bulkUploadJobs = (req, res, next) => {
                     },
                     fileName        : req.body.fileName,
                     status          : "draft",
+                    "applicantStatistics":  {   
+                        "male"          : 0,
+                        "female"        : 0,
+                        "other"         : 0,
+                        "state"         : 0,
+                        "country"       : 0,
+                        "exp0to2"       : 0,
+                        "exp2to6"       : 0,
+                        "exp6to10"      : 0
+                    },
                     uploadTime      : uploadTime,
                     createdAt       : new Date(),
                     createdBy       : req.body.reqdata.createdBy,

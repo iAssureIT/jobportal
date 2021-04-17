@@ -41,7 +41,7 @@ class JoblistPage extends Component{
       mapAction.jobCount(selector); 
  
       mapAction.totalApplicantsCountList({entity_id : this.props.company_id});
-      mapAction.countryApplicantsCountList({entity_id : this.props.company_id, countryCode : "IN"});
+      /* mapAction.countryApplicantsCountList({entity_id : this.props.company_id, countryCode : "IN"});
       // mapAction.stateApplicantsCountList({entity_id : this.props.company_id});
       // mapAction.districtApplicantsCountList({entity_id : this.props.company_id});
       mapAction.maleApplicantsCountList({entity_id : this.props.company_id});
@@ -49,7 +49,7 @@ class JoblistPage extends Component{
       mapAction.otherApplicantsCountList({entity_id : this.props.company_id});
       mapAction.exp02ApplicantsCountList({entity_id : this.props.company_id, minExp: 0, maxExp: 2});
       
-
+      */
   }
 	
   leftDrawerInfo(event){

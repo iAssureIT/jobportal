@@ -918,22 +918,21 @@ exports.getOneCandidateCertification = (req,res,next)=>{
 };
 
 exports.updateOneCandidateCertification = (req,res,next)=>{
-    console.log(req.body);
     CandidateProfile.updateOne(
-            { "_id":req.body.candidate_id, "certifications._id": req.body.certificationID},  
+            { "_id":ObjectID(req.body.candidate_id), "certifications._id": ObjectID(req.body.certificationID)},  
             {
-                $set:   {   
+
+                $set:   {    
                             "certifications.$.certName"        : req.body.certName,
                             "certifications.$.issuedBy"        : req.body.issuedBy,
                             "certifications.$.certifiedOn"     : req.body.certifiedOn,
-                            "certifications.$.validTill"       : req.body.validTill,
-                            "certifications.$.gradePercent"    : req.body.gradePercent
+                            "certifications.$.validTill"       : req.body.validTill ? req.body.validTill : null,
+                            "certifications.$.gradePercent"    : req.body.gradePercent 
                         }
             }
         )
         .exec()
         .then(data=>{
-            console.log(data);
             if(data.nModified == 1){
 
                 res.status(200).json({ updated : true });

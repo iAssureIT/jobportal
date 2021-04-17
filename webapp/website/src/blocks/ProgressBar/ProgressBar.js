@@ -1,4 +1,5 @@
 import React,{Component} from 'react';
+import { withRouter }	 	        from 'react-router-dom';
 import {connect}            from 'react-redux';
 import { bindActionCreators } from 'redux';
 import  * as mapActionCreator from '../../common/actions/index';
@@ -7,21 +8,15 @@ import './ProgressBar.css';
 class ProgressBar extends Component{
 	constructor(props){
 		super(props);
-		this.state = {
+		this.state = { 
 			location 		: this.props.location,
 			candidate_id  	: this.props.userDetails.candidate_id,
-			addressID  	    : this.props.userDetails.addressID,
-			academicsID  	: this.props.userDetails.academicsID,
-			certificationID  	: this.props.userDetails.certificationID,
-			workExperienceID  	: this.props.userDetails.workExperienceID,
 		}
-	}
-	componentDidMount(){
-		console.log("this.props.userDetails",this.props.userDetails)
 	}
 
 	render(){
-		
+		console.log(this.props.match)
+		console.log(this.state.location.pathname)
 		return(
 				<div className="progressBarWrapper col-lg-12">
 					<div className="row">
@@ -31,15 +26,17 @@ class ProgressBar extends Component{
 							<div className="progressBar col-lg-12">
 									<div className="step">
 										<a href="/basic-info">
-											<div className={this.state.location===("/basic-info")
-																||this.state.location===("/address/"+this.state.candidate_id)
-																||this.state.location===("/academics/"+this.state.candidate_id)
-																||this.state.location===("/certification/"+this.state.candidate_id)
-																||this.state.location===("/experience/"+this.state.candidate_id)
-																||this.state.location===("/address/"+this.state.candidate_id+"/edit/"+this.state.addressID)
-																||this.state.location===("/academics/"+this.state.candidate_id+"/edit/"+this.state.academicsID)
-																||this.state.location===("/certification/"+this.state.candidate_id+"/edit/"+this.state.certificationID)
-																||this.state.location===("/experience/"+this.state.candidate_id+"/edit/"+this.state.workExperienceID)
+
+											<div className={this.state.location.pathname===("/basic-info")
+																||this.state.location.pathname===("/address/"+this.state.candidate_id)
+																||this.state.location.pathname===("/contact/"+this.state.candidate_id)
+																||this.state.location.pathname===("/academics/"+this.state.candidate_id)
+																||this.state.location.pathname===("/certification/"+this.state.candidate_id)
+																||this.state.location.pathname===("/experience/"+this.state.candidate_id)
+																||this.state.location.pathname===("/address/"+this.state.candidate_id+"/edit/"+this.props.match.params.addressID)
+																||this.state.location.pathname===("/academics/"+this.state.candidate_id+"/edit/"+this.props.match.params.academicsID)
+																||this.state.location.pathname===("/certification/"+this.state.candidate_id+"/edit/"+this.props.match.params.certificationID)
+																||this.state.location.pathname===("/experience/"+this.state.candidate_id+"/edit/"+this.props.match.params.workExperienceID)
 																
 															?
 																"bullet active "
@@ -54,14 +51,16 @@ class ProgressBar extends Component{
 									</div>
 									<div className="step">
 										<a href={"/address/"+ this.state.candidate_id}>
-											<div className={this.state.location===("/address/"+this.state.candidate_id)
-																||this.state.location===("/academics/"+this.state.candidate_id)
-																||this.state.location===("/certification/"+this.state.candidate_id)
-																||this.state.location===("/experience/"+this.state.candidate_id)
-																||this.state.location===("/academics/"+this.state.candidate_id+"/edit/"+this.state.academicsID)
-																||this.state.location===("/certification/"+this.state.candidate_id+"/edit/"+this.state.certificationID)
-																||this.state.location===("/experience/"+this.state.candidate_id+"/edit/"+this.state.workExperienceID)
-																
+
+											<div className={this.state.location.pathname===("/address/"+this.state.candidate_id)
+																||this.state.location.pathname===("/contact/"+this.state.candidate_id)
+																||this.state.location.pathname===("/academics/"+this.state.candidate_id)
+																||this.state.location.pathname===("/certification/"+this.state.candidate_id)
+																||this.state.location.pathname===("/experience/"+this.state.candidate_id)
+																||this.state.location.pathname===("/address/"+this.state.candidate_id+"/edit/"+this.props.match.params.addressID)
+																||this.state.location.pathname===("/academics/"+this.state.candidate_id+"/edit/"+this.props.match.params.academicsID)
+																||this.state.location.pathname===("/certification/"+this.state.candidate_id+"/edit/"+this.props.match.params.certificationID)
+																||this.state.location.pathname===("/experience/"+this.state.candidate_id+"/edit/"+this.props.match.params.workExperienceID)
 																
 															?
 																"bullet active "
@@ -75,10 +74,10 @@ class ProgressBar extends Component{
 									</div>
 									{/*<div className="step">
 										<a href={"/contact/"+ this.state.candidate_id}>
-											<div className={this.state.location===("/contact/"+this.state.candidate_id)
-																||this.state.location===("/academics/"+this.state.candidate_id)
-																||this.state.location===("/certification/"+this.state.candidate_id)
-																||this.state.location===("/experience/"+this.state.candidate_id)
+											<div className={this.state.location.pathname===("/contact/"+this.state.candidate_id)
+																||this.state.location.pathname===("/academics/"+this.state.candidate_id)
+																||this.state.location.pathname===("/certification/"+this.state.candidate_id)
+																||this.state.location.pathname===("/experience/"+this.state.candidate_id)
 																
 															?
 																"bullet active "
@@ -92,11 +91,13 @@ class ProgressBar extends Component{
 									</div>*/}
 									<div className="step">
 										<a href={"/academics/"+ this.state.candidate_id}>
-											<div className={this.state.location===("/academics/"+this.state.candidate_id)
-																||this.state.location===("/certification/"+this.state.candidate_id)
-																||this.state.location===("/experience/"+this.state.candidate_id)
-																||this.state.location===("/certification/"+this.state.candidate_id+"/edit/"+this.state.certificationID)
-																||this.state.location===("/experience/"+this.state.candidate_id+"/edit/"+this.state.workExperienceID)
+
+											<div className={this.state.location.pathname===("/academics/"+this.state.candidate_id)
+																||this.state.location.pathname===("/certification/"+this.state.candidate_id)
+																||this.state.location.pathname===("/experience/"+this.state.candidate_id)
+																||this.state.location.pathname===("/academics/"+this.state.candidate_id+"/edit/"+this.props.match.params.academicsID)
+																||this.state.location.pathname===("/certification/"+this.state.candidate_id+"/edit/"+this.props.match.params.certificationID)
+																||this.state.location.pathname===("/experience/"+this.state.candidate_id+"/edit/"+this.props.match.params.workExperienceID)
 															
 															?
 																"bullet active "
@@ -110,10 +111,10 @@ class ProgressBar extends Component{
 									</div>
 									<div className="step">
 										<a href={"/certification/"+ this.state.candidate_id}>
-											<div className={this.state.location===("/certification/"+this.state.candidate_id)
-																||this.state.location===("/certification/"+this.state.candidate_id+"/edit/"+this.state.certificationID)
-																||this.state.location===("/experience/"+this.state.candidate_id)
-																||this.state.location===("/experience/"+this.state.candidate_id+"/edit/"+this.state.workExperienceID)
+											<div className={this.state.location.pathname===("/certification/"+this.state.candidate_id)
+																||this.state.location.pathname===("/experience/"+this.state.candidate_id)
+																||this.state.location.pathname===("/certification/"+this.state.candidate_id+"/edit/"+this.props.match.params.certificationID)
+																||this.state.location.pathname===("/experience/"+this.state.candidate_id+"/edit/"+this.props.match.params.workExperienceID)
 																
 															?
 																"bullet active "
@@ -127,7 +128,8 @@ class ProgressBar extends Component{
 									</div>
 									<div className="step">
 										<a href={"/experience/"+ this.state.candidate_id}>
-											<div className={this.state.location===("/experience/"+this.state.candidate_id)
+											<div className={this.state.location.pathname===("/experience/"+this.state.candidate_id)
+																||this.state.location.pathname===("/experience/"+this.state.candidate_id+"/edit/"+this.props.match.params.workExperienceID)
 															?
 																"bullet active "
 															:
@@ -172,4 +174,4 @@ const mapStateToProps = (state)=>{
 const mapDispatchToProps = (dispatch) => ({
   mapAction :  bindActionCreators(mapActionCreator, dispatch)
 }) 
-export default connect(mapStateToProps,mapDispatchToProps) (ProgressBar);
+export default connect(mapStateToProps,mapDispatchToProps) (withRouter(ProgressBar));

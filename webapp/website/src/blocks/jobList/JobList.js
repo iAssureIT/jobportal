@@ -30,7 +30,7 @@ class Joblist extends Component{
 }
 
 componentDidMount(){
-	
+	 
 }
 showMore(){
 
@@ -118,7 +118,7 @@ search = (event)=>{
 	}
 }
 
-applyJob = (jobid, company_id)=>{
+applyJob = (jobid, company_id, male, female, other, state, stateCode, country,countryCode, exp0to2, exp2to6, exp6to10 )=>{
 	console.log("jobid :", jobid);
 	
 	if (this.props.userDetails.loggedIn) {
@@ -126,7 +126,17 @@ applyJob = (jobid, company_id)=>{
 						candidate_id   		: this.props.userDetails.candidate_id,
 						job_id         		: jobid,
 					    entity_id    		: company_id,
-					    status        	  	: "Applied"
+					    status        	  	: "Applied",
+					    male 				: male,
+					    female 				: female,
+					    other				: other,
+					    state 				: state,
+					    jobstateCode 		: stateCode,
+					    country 			: country,
+					    jobcountryCode 		: countryCode,
+					    exp0to2 			: exp0to2,
+					    exp2to6 			: exp2to6,
+					    exp6to10 			: exp6to10
 	}
 	console.log(formValues)
 	Swal.fire({
@@ -144,6 +154,9 @@ applyJob = (jobid, company_id)=>{
 				.then(response =>{
 					
 					var {mapAction} = this.props; 
+
+					mapAction.filterJobList(this.props.selector);
+
 					var appliedJobSelector  = this.props.appliedJobSelector;
 				    appliedJobSelector.candidate_id = this.props.userDetails.candidate_id;
 				    
@@ -179,12 +192,22 @@ applyJob = (jobid, company_id)=>{
 		document.getElementById("loginbtndiv").click();
 	}
 }
-removeApplication = (job_id) => {
+removeApplication = (job_id, male, female, other, state, stateCode, country,countryCode, exp0to2, exp2to6, exp6to10) => {
 	console.log(job_id)
 	if (this.props.userDetails.loggedIn) {
 		var formValues = { 
 			candidate_id   		: this.props.userDetails.candidate_id,
-			job_id         		: job_id
+			job_id         		: job_id,
+			male 				: male,
+		    female 				: female,
+		    other				: other,
+		    state 				: state,
+		    jobstateCode 		: stateCode,
+		    country 			: country,
+		    jobcountryCode 		: countryCode,
+		    exp0to2 			: exp0to2,
+		    exp2to6 			: exp2to6,
+		    exp6to10 			: exp6to10
 		}
 		Swal.fire({
 		title 				: 'Are you sure, do you want to remove this job application?',
@@ -201,6 +224,8 @@ removeApplication = (job_id) => {
 				.then(response =>{
 					
 					var {mapAction} = this.props;
+					mapAction.filterJobList(this.props.selector);
+					
 					var appliedJobSelector  = this.props.appliedJobSelector;
 				    appliedJobSelector.candidate_id = this.props.userDetails.candidate_id;
 				    
@@ -331,7 +356,20 @@ removeApplication = (job_id) => {
 														<div className="col-lg-offset-2 col-lg-12">
 															<div className="jobListVerticleIcons">
 																<ul>
-																	<li><i title={appliedtooltipMsg} className={"fa fa-check-square" + appliedClass}  onClick={appliedClass == '-o' ? applyJob => this.applyJob(elem._id, elem.company_id) : removeApplication => this.removeApplication(elem._id) } ></i></li>
+																	<li><i title={appliedtooltipMsg} className={"fa fa-check-square" + appliedClass}  
+																	onClick={appliedClass == '-o' ? 
+																	applyJob => this.applyJob(elem._id, elem.company_id, elem.applicantStatistics.male, 
+																								elem.applicantStatistics.female, elem.applicantStatistics.other, 
+																								elem.applicantStatistics.state, elem.location.stateCode,
+																								elem.applicantStatistics.country, elem.location.countryCode,
+																								elem.applicantStatistics.exp0to2,  elem.applicantStatistics.exp2to6, 
+																								elem.applicantStatistics.exp6to10) 
+																	: removeApplication => this.removeApplication(elem._id, elem.applicantStatistics.male, 
+																								elem.applicantStatistics.female, elem.applicantStatistics.other, 
+																								elem.applicantStatistics.state, elem.location.stateCode,
+																								elem.applicantStatistics.country, elem.location.countryCode,
+																								elem.applicantStatistics.exp0to2,  elem.applicantStatistics.exp2to6, 
+																								elem.applicantStatistics.exp6to10 ) } ></i></li>
 																	<li ><i title={tooltipMsg} onClick={wishlist => this.handleclick(elem._id)} className={"fa fa-heart" + wishClass}></i></li>
 																	{/*<li><i className="fa fa-youtube-play" id="video" data-toggle="modal" data-target="#videoModal"></i></li>*/}
 																</ul>
