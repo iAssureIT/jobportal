@@ -5,7 +5,7 @@ import Moment 					from "moment";
 import { connect }        from 'react-redux';
 import { bindActionCreators } from 'redux';
 import  * as mapActionCreator from '../../common/actions/index';
-import "./JobWishlist.css";
+//import "./JobWishlist.css";
 
 class JobWishlist extends Component{
 	constructor(props){

@@ -573,7 +573,7 @@ class SignUp extends Component {
                 <div className="col-lg-10 col-lg-offset-1 form-group" >
                   <div className="input-group autocomplete">
                     <span className="input-group-addon registrationInputIcon"><i className="fa fa-briefcase"></i></span>
-                    <input type="text" list="companyName" className="form-control inputBox" refs="industry" 
+                    <input type="text" list="companyName" className="form-control inputBox" refs="industry" placeholder="Company Name"
                     name="companyName" id="selectCompany" maxLength="100" value={this.state.companyName} data-value={this.state.company_id}
                     onChange={this.onChangeCompany.bind(this)} />
                     <datalist name="companyName" id="companyName" className="companylist" >
@@ -593,7 +593,7 @@ class SignUp extends Component {
                 </label>*/}
                 <div className="input-group ">
                   <span className="input-group-addon registrationInputIcon"><i className="fa fa-map-marker"></i></span> 
-                  <input type="text" list="branch" className="form-control registrationInputBox" value={this.state.branch} ref="branch" name="branch"
+                  <input type="text" list="branch" className="form-control registrationInputBox" value={this.state.branch}  placeholder="Branch" ref="branch" name="branch"
                    id="selectCompanyCity" maxLength="100" value={this.state.branch}
                     onChange={this.handleChangeBranch.bind(this)} />
                     <datalist name="branch" id="branch" className="branch" >
@@ -616,7 +616,7 @@ class SignUp extends Component {
                   
                   <select id="states" className="form-control registrationInputBox selectOption"
                     ref="companyState" value={this.state.companyState} name="companyState" onChange={this.handleChangeState.bind(this)} >
-                    <option selected={true}>-- Select --</option>
+                    <option selected={true}>-- Select State --</option>
                     {
                       this.state.stateArray && this.state.stateArray.length > 0 ?
                         this.state.stateArray.map((stateData, index) => {
@@ -637,7 +637,7 @@ class SignUp extends Component {
                 </label>*/}
                 <div className="input-group ">
                   <span className="input-group-addon registrationInputIcon"><i className="fa fa-map-marker"></i></span> 
-                  <input type="text" name="companyCountry" id="companyCountry" 
+                  <input type="text" name="companyCountry" id="companyCountry" placeholder="Country"
                    className="form-control registrationInputBox " value={this.state.companyCountry}
                    onChange={this.handleChange.bind(this)} />
                 </div> 

@@ -4,6 +4,7 @@ import Axios 			  		from 'axios';
 import Swal  					from 'sweetalert2';
 import Moment 					from "moment";
 import { FontAwesomeIcon } 		from '@fortawesome/react-fontawesome';
+import Modal 					from '../Modal/Modal.js';
 import { connect }        		from 'react-redux';
 import { bindActionCreators } 	from 'redux';
 import  * as mapActionCreator 	from '../../common/actions/index';
@@ -30,18 +31,6 @@ componentDidMount(){
 	mapAction.filterJobList(selector);*/
 
 }
-
-/*statusJob = (jobid, company_id)=>{
-
-	var formValues = { 
-						job_id         		: jobid,
-					    entity_id    		: company_id,	
-					    status 				: "Active"
-					}
-
-	console.log(formValues);
-	console.log(status);
-}*/
 
 getJobs(event){
 	//console.log(event.target)
@@ -84,25 +73,25 @@ handlePageChange(pageNumber) {
     mapAction.filterJobList(selector);
 }
 
-deleteJob = (event)=>{
+/*deleteJob = (event)=>{
 	event.preventDefault();
 	const job_id = event.currentTarget.id;
 
 	Swal.fire({
-		title 				: 'Are you sure, do you want to delete this job!!!',
+		title 				: 'Are you sure? you want to delete this job!!!',
 		text 				: 'You will not be able to recover this job',
 		icon 				: 'warning',
 		showCancelButton 	: true,
-		confirmButtonText 	: 'Delete',
+		confirmButtonText 	: 'Yes, delete it!',
 		cancelButtonText 	: 'No, keep it',
-		confirmButtonColor 	: 'red',
+		confirmButtonColor 	: '#f5a721',
 	
 	}).then((result) =>{
 		if(result.value){
 			if(job_id){
 				Axios.delete("/api/jobs/delete/"+job_id)
 				.then(response =>{
-					if(response.data.message==="Job details is deleted successfully!"){
+					if(response.data.message==="Job details deleted Successfully!"){
 						var {mapAction} = this.props;
 						mapAction.filterJobList(this.state.selector);
 
@@ -130,18 +119,20 @@ deleteJob = (event)=>{
 					)
 				}
 			})
-	}
+		}*/
+	
 	handleSwitch (){
   			this.setState({
   				isActive: !this.state.isActive
   			});
     }
+	
 	inactiveJob(event){
 		event.preventDefault();
 		const job_id = event.currentTarget.id;
 
 	Swal.fire({
-		title 				: 'Are you sure, do you want to inactive this job!!!',
+		title 				: 'Are you sure do you want to inactive this job!!!',
 		//text 				: 'You will not be able to recover this job',
 		icon 				: 'warning',
 		showCancelButton 	: true,
@@ -183,7 +174,9 @@ deleteJob = (event)=>{
 				}
 			})
 	}	
+	
 	render(){
+		var {mapAction} = this.props;
 		console.log(this.props.jobCount)
 		return(
 			<section className="jobListWrapper">
@@ -207,15 +200,88 @@ deleteJob = (event)=>{
 								this.props.jobList.length>0
 								?
 									this.props.jobList.map((elem,index1)=>{
+										//mapAction.stateApplicantsCountList({entity_id : this.props.company_id, stateCode : elem.location.stateCode});
 										//console.log(elem)
-										var applicantsCount = this.props.applicantsCountList.filter((appl, ind)=>{
+										var applicantsCount = this.props.totalApplicantsCountList.filter((appl, ind)=>{
 											if (appl._id == elem._id) {
 												return appl.candidatesApplied;
 											}else{
 												return 0
 											}
-											
 										})
+
+										var countryApplicantsCount = this.props.countryApplicantsCountList.filter((appl, ind)=>{
+											if (appl._id == elem._id) {
+												return appl.candidatesApplied;
+											}else{
+												return 0
+											}
+										})
+
+										var countryApplicantsCount = this.props.countryApplicantsCountList.filter((appl, ind)=>{
+											if (appl._id == elem._id) {
+												return appl.candidatesApplied;
+											}else{
+												return 0
+											}
+										})
+										/*var stateApplicantsCount = this.props.stateApplicantsCountList.filter((appl, ind)=>{
+											if (appl._id == elem._id) {
+												return appl.candidatesApplied;
+											}else{
+												return 0
+											}
+										})
+										var districtApplicantsCount = this.props.districtApplicantsCountList.filter((appl, ind)=>{
+											if (appl._id == elem._id) {
+												return appl.candidatesApplied;
+											}else{
+												return 0
+											}
+										})*/
+										var maleApplicantsCount = this.props.maleApplicantsCountList.filter((appl, ind)=>{
+											if (appl._id == elem._id) {
+												return appl.candidatesApplied;
+											}else{
+												return 0
+											}
+										})
+										var femaleApplicantsCount = this.props.femaleApplicantsCountList.filter((appl, ind)=>{
+											if (appl._id == elem._id) {
+												return appl.candidatesApplied;
+											}else{
+												return 0
+											}
+										})
+										var otherApplicantsCount = this.props.otherApplicantsCountList.filter((appl, ind)=>{
+											if (appl._id == elem._id) {
+												return appl.candidatesApplied;
+											}else{
+												return 0
+											}
+										})
+										var exp02ApplicantsCount = this.props.exp02ApplicantsCountList.filter((appl, ind)=>{
+											if (appl._id == elem._id) {
+												return appl.candidatesApplied;
+											}else{
+												return 0
+											}
+										})
+										var exp26ApplicantsCount = this.props.exp26ApplicantsCountList.filter((appl, ind)=>{
+											if (appl._id == elem._id) {
+												return appl.candidatesApplied;
+											}else{
+												return 0
+											}
+										})
+										var exp610ApplicantsCount = this.props.exp610ApplicantsCountList.filter((appl, ind)=>{
+											if (appl._id == elem._id) {
+												return appl.candidatesApplied;
+											}else{
+												return 0
+											}
+										})
+
 										return(
 											<div className="col-lg-12" key={index1}>
 												<div className="jobListContainer">
@@ -256,7 +322,7 @@ deleteJob = (event)=>{
 																		</div>	
 																		<div className="infoLog"> {Moment(elem.createdAt).startOf('seconds').fromNow()}  </div>
 																		<div className="jobListDesignation col-lg-12 row">
-																			<a className="link">{elem.jobBasicInfo.jobTitle + " (" +elem.jobID+ ")"} </a>
+																			<a className="link" href={"/job-profile/" +  elem._id}>{elem.jobBasicInfo.jobTitle + " (" +elem.jobID+ ")"} </a>
 																		</div>
 																		<div className="jobListCompanyTitle col-lg-12 row">
 																			{elem.company_id ? elem.company_id.companyName : ""}
@@ -281,17 +347,17 @@ deleteJob = (event)=>{
 																		<div className="tierOneRow col-lg-12 "> 
 																			<div className="col-lg-4 react1 row">Pune<br /><span className="multiCount">150</span></div>
 																			<div className="col-lg-4 react2 row">Rest of Maharashtra<br /><span className="multiCount">90</span></div>
-																			<div className="col-lg-4 react3 row">Rest of India<br /><span className="multiCount">120</span></div> 
+																			<div className="col-lg-4 react3 row">Rest of India<br /><span className="multiCount">{countryApplicantsCount.length > 0 ? countryApplicantsCount[0].candidatesApplied : 0}</span></div> 
 																		</div>
 																		<div className="tierOneRow col-lg-12 "> 
-																			<div className="col-lg-4 react1 row">Male<br /><span className="multiCount">160</span></div>
-																			<div className="col-lg-4 react2 row">Female<br /><span className="multiCount">200</span></div>
-																			<div className="col-lg-4 react3 row">Other<br /><span className="multiCount">0</span></div> 
+																			<div className="col-lg-4 react1 row">Male<br /><span className="multiCount"></span>{maleApplicantsCount.length > 0 ? maleApplicantsCount[0].candidatesApplied : 0}</div>
+																			<div className="col-lg-4 react2 row">Female<br /><span className="multiCount">{femaleApplicantsCount.length > 0 ? femaleApplicantsCount[0].candidatesApplied : 0 }</span></div>
+																			<div className="col-lg-4 react3 row">Other<br /><span className="multiCount"> {otherApplicantsCount.length > 0 ? otherApplicantsCount[0].candidatesApplied : 0 }</span></div> 
 																		</div>
 																		<div className="tierOneRow col-lg-12 "> 
-																			<div className="col-lg-4 react1 row">Exp&nbsp;:&nbsp;0 To 2<br /><span className="multiCount">105</span></div>
-																			<div className="col-lg-4 react2 row">Exp&nbsp;:&nbsp;2 To 6<br /><span className="multiCount">95</span></div>
-																			<div className="col-lg-4 react3 row">Exp&nbsp;:&nbsp;6 To 7<br /><span className="multiCount">160</span></div> 
+																			<div className="col-lg-4 react1 row">Exp&nbsp;:&nbsp;0 To 2<br /><span className="multiCount">{exp02ApplicantsCount.length > 0 ? exp02ApplicantsCount[0].candidatesApplied : 0}</span></div>
+																			<div className="col-lg-4 react2 row">Exp&nbsp;:&nbsp;2 To 6<br /><span className="multiCount">{exp26ApplicantsCount.length > 0 ? exp26ApplicantsCount[0].candidatesApplied : 0}</span></div>
+																			<div className="col-lg-4 react3 row">Exp&nbsp;:&nbsp;6 To 7<br /><span className="multiCount">{exp610ApplicantsCount.length > 0 ? exp610ApplicantsCount[0].candidatesApplied : 0}</span></div> 
 																		</div> 
 																	</div>
 																</div>
@@ -309,16 +375,17 @@ deleteJob = (event)=>{
 																	<div className="listViewBtn">	
 																		{/*<a title = "Inactive" onClick={this.inactiveJob} id = {elem._id}><i className="fa fa-eye-slash"></i></a>
 																		*/}
-																		<div className="input-group genderFeildWrapper">
-																			<div className = {this.state.isActive ? "genderFeild col-lg-6 genderFeildActive" : "genderFeild col-lg-6" }
-																			 id="togglePrimary" name="primaryToggel" 
-																			 value="togglePrimary" onClick={this.handleSwitch.bind(this)}>
-																				<div className="row">Inactive</div>
-																			</div>
-																		</div>
 																	</div>
 																	<div className="listDelBtn">	
-																		<i title = "Delete" className="fa fa-trash" onClick={this.deleteJob} id = {elem._id}></i>
+																		<i title = "Delete" className="fa fa-trash" data-toggle="modal" data-target="#delModal" data-dismiss="modal" onClick={this.deleteJob} id = {elem._id}></i>
+																	</div>
+																	<Modal />
+																	<div className="input-group jobStatusToggleWrapper">
+																		<div className = {this.state.isActive ? "genderFeild col-lg-6 genderFeildActive" : "genderFeild col-lg-6" }
+																		 id="togglePrimary" name="primaryToggel" 
+																		 value="togglePrimary" onClick={this.handleSwitch.bind(this)}>
+																			<div className="row">Inactive</div>
+																		</div>
 																	</div>
 																</div>
 															</div>
@@ -350,7 +417,7 @@ deleteJob = (event)=>{
 								?
 									this.props.jobList.map((elem,index1)=>{
 										//console.log(elem)
-										var applicantsCount = this.props.applicantsCountList.filter((appl, ind)=>{
+										var applicantsCount = this.props.totalApplicantsCountList.filter((appl, ind)=>{
 											if (appl._id == elem._id) {
 												return appl.candidatesApplied;
 											}else{
@@ -481,7 +548,7 @@ deleteJob = (event)=>{
 								?
 									this.props.jobList.map((elem,index1)=>{
 										//console.log(elem)
-										var applicantsCount = this.props.applicantsCountList.filter((appl, ind)=>{
+										var applicantsCount = this.props.totalApplicantsCountList.filter((appl, ind)=>{
 											if (appl._id == elem._id) {
 												return appl.candidatesApplied;
 											}else{
@@ -617,8 +684,16 @@ const mapStateToProps = (state)=>{
     return {
         user_ID     : state.user_ID,  	candidate_id   : state.candidate_id,
         selector    : state.selector,   jobList        : state.jobList,
-        jobCount  	: state.jobCount,
-        applicantsCountList : state.applicantsCountList
+        jobCount  	: state.jobCount,	
+        countryApplicantsCountList  : state.countryApplicantsCountList,
+        stateApplicantsCountList 	: state.stateApplicantsCountList,
+        maleApplicantsCountList 	: state.maleApplicantsCountList,
+        femaleApplicantsCountList 	: state.femaleApplicantsCountList,
+        otherApplicantsCountList 	: state.otherApplicantsCountList,
+        exp02ApplicantsCountList  	: state.exp02ApplicantsCountList,
+        exp26ApplicantsCountList 	: state.exp26ApplicantsCountList,
+        exp610ApplicantsCountList 	: state.exp610ApplicantsCountList,
+        totalApplicantsCountList 	: state.totalApplicantsCountList
     }
 }
 const mapDispatchToProps = (dispatch) => ({

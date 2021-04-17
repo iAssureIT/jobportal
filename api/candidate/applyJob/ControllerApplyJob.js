@@ -248,8 +248,8 @@ exports.appliedJobCount = (req,res,next)=>{
         });
     });
 };
-//applicantsCountList
-exports.applicantsCountList = (req,res,next)=>{
+//totalApplicantsCountList
+exports.totalApplicantsCountList = (req,res,next)=>{
     console.log("count",req.body);
     if (req.body.entity_id) {
         ApplyJob.aggregate([
@@ -278,8 +278,354 @@ exports.applicantsCountList = (req,res,next)=>{
                 error: err
             });
         });
-    }
-    
+    } 
+};
+exports.countryApplicantsCountList = (req,res,next)=>{
+    console.log("count",req.body);
+    if (req.body.entity_id) {
+        ApplyJob.aggregate([
+            {
+                $lookup:    {
+                                from: "candidatemasters",
+                                localField: "candidate_id",
+                                foreignField: "_id",
+                                as: "candidates"
+                            }
+            },    
+            { "$match" : {  "entity_id" : ObjectId(req.body.entity_id), "candidates.address.countryCode" : req.body.countryCode } },
+            { "$group" : { _id: "$job_id", candidatesApplied: { $sum: 1 } }}
+        ])
+        .exec()
+        .then(data=>{
+            res.status(200).json(data);
+        })
+        .catch(err =>{
+            res.status(500).json({
+                error: err
+            });
+        });
+    }else{
+        ApplyJob.aggregate([
+            {
+                $lookup:    {
+                                from: "candidatemasters",
+                                localField: "candidate_id",
+                                foreignField: "_id",
+                                as: "candidates"
+                            }
+            },    
+            { "$match" : {  "candidates.address.countryCode" : req.body.countryCode } },
+            { "$group" : { _id: "$job_id", candidatesApplied: { $sum: 1 } }}
+        ])
+        
+        .exec()
+        .then(data=>{
+            res.status(200).json(data);
+        })
+        .catch(err =>{
+            res.status(500).json({
+                error: err
+            });
+        });
+    } 
+};
+
+exports.stateApplicantsCountList = (req,res,next)=>{
+    console.log("count",req.body);
+    if (req.body.entity_id) {
+        ApplyJob.aggregate([
+            {
+                $lookup:    {
+                                from: "candidatemasters",
+                                localField: "candidate_id",
+                                foreignField: "_id",
+                                as: "candidates"
+                            }
+            },    
+            { "$match" : {  "entity_id" : ObjectId(req.body.entity_id), "candidates.address.stateCode" : req.body.stateCode } },
+            { "$group" : { _id: "$job_id", candidatesApplied: { $sum: 1 } }}
+        ])
+        .exec()
+        .then(data=>{
+            res.status(200).json(data);
+        })
+        .catch(err =>{
+            res.status(500).json({
+                error: err
+            });
+        });
+    }else{
+        ApplyJob.aggregate([
+            {
+                $lookup:    {
+                                from: "candidatemasters",
+                                localField: "candidate_id",
+                                foreignField: "_id",
+                                as: "candidates"
+                            }
+            },    
+            { "$match" : {  "candidates.address.stateCode" : req.body.stateCode } },
+            { "$group" : { _id: "$job_id", candidatesApplied: { $sum: 1 } }}
+        ])
+        
+        .exec()
+        .then(data=>{
+            res.status(200).json(data);
+        })
+        .catch(err =>{
+            res.status(500).json({
+                error: err
+            });
+        });
+    } 
+};
+exports.districtApplicantsCountList = (req,res,next)=>{
+    console.log("count",req.body);
+    if (req.body.entity_id) {
+        ApplyJob.aggregate([
+            {
+                $lookup:    {
+                                from: "candidatemasters",
+                                localField: "candidate_id",
+                                foreignField: "_id",
+                                as: "candidates"
+                            }
+            },    
+            { "$match" : {  "entity_id" : ObjectId(req.body.entity_id), "candidates.address.district" : req.body.district } },
+            { "$group" : { _id: "$job_id", candidatesApplied: { $sum: 1 } }}
+        ])
+        .exec()
+        .then(data=>{
+            res.status(200).json(data);
+        })
+        .catch(err =>{
+            res.status(500).json({
+                error: err
+            });
+        });
+    }else{
+        ApplyJob.aggregate([
+            {
+                $lookup:    {
+                                from: "candidatemasters",
+                                localField: "candidate_id",
+                                foreignField: "_id",
+                                as: "candidates"
+                            }
+            },    
+            { "$match" : {  "candidates.address.district" : req.body.district } },
+            { "$group" : { _id: "$job_id", candidatesApplied: { $sum: 1 } }}
+        ])
+        
+        .exec()
+        .then(data=>{
+            res.status(200).json(data);
+        })
+        .catch(err =>{
+            res.status(500).json({
+                error: err
+            });
+        });
+    } 
+};
+//maleApplicantsCountList
+exports.maleApplicantsCountList = (req,res,next)=>{
+    console.log("count",req.body);
+    if (req.body.entity_id) {
+        ApplyJob.aggregate([
+            {
+                $lookup:    {
+                                from: "candidatemasters",
+                                localField: "candidate_id",
+                                foreignField: "_id",
+                                as: "candidates"
+                            }
+            },    
+            { "$match" : {  "entity_id" : ObjectId(req.body.entity_id), "candidates.basicInfo.gender" : "male" } },
+            { "$group" : { _id: "$job_id", candidatesApplied: { $sum: 1 } }}
+        ])
+        .exec()
+        .then(data=>{
+            res.status(200).json(data);
+        })
+        .catch(err =>{
+            res.status(500).json({
+                error: err
+            });
+        });
+    }else{
+        ApplyJob.aggregate([
+            {
+                $lookup:    {
+                                from: "candidatemasters",
+                                localField: "candidate_id",
+                                foreignField: "_id",
+                                as: "candidates"
+                            }
+            },    
+            { "$match" : {  "candidates.basicInfo.gender" : "male" } },
+            { "$group" : { _id: "$job_id", candidatesApplied: { $sum: 1 } }}
+        ])
+        
+        .exec()
+        .then(data=>{
+            res.status(200).json(data);
+        })
+        .catch(err =>{
+            res.status(500).json({
+                error: err
+            });
+        });
+    } 
+};
+
+exports.femaleApplicantsCountList = (req,res,next)=>{
+    console.log("count",req.body);
+    if (req.body.entity_id) {
+        ApplyJob.aggregate([
+            {
+                $lookup:    {
+                                from: "candidatemasters",
+                                localField: "candidate_id",
+                                foreignField: "_id",
+                                as: "candidates"
+                            }
+            },    
+            { "$match" : {  "entity_id" : ObjectId(req.body.entity_id), "candidates.basicInfo.gender" : "female" } },
+            { "$group" : { _id: "$job_id", candidatesApplied: { $sum: 1 } }}
+        ])
+        .exec()
+        .then(data=>{
+            res.status(200).json(data);
+        })
+        .catch(err =>{
+            res.status(500).json({
+                error: err
+            });
+        });
+    }else{
+        ApplyJob.aggregate([
+            {
+                $lookup:    {
+                                from: "candidatemasters",
+                                localField: "candidate_id",
+                                foreignField: "_id",
+                                as: "candidates"
+                            }
+            },    
+            { "$match" : {  "candidates.basicInfo.gender" : "female" } },
+            { "$group" : { _id: "$job_id", candidatesApplied: { $sum: 1 } }}
+        ])
+        
+        .exec()
+        .then(data=>{
+            res.status(200).json(data);
+        })
+        .catch(err =>{
+            res.status(500).json({
+                error: err
+            });
+        });
+    } 
+};
+
+exports.otherApplicantsCountList = (req,res,next)=>{
+    console.log("count",req.body);
+    if (req.body.entity_id) {
+        ApplyJob.aggregate([
+            {
+                $lookup:    {
+                                from: "candidatemasters",
+                                localField: "candidate_id",
+                                foreignField: "_id",
+                                as: "candidates"
+                            }
+            },    
+            { "$match" : {  "entity_id" : ObjectId(req.body.entity_id), "candidates.basicInfo.gender" : "transgender" } },
+            { "$group" : { _id: "$job_id", candidatesApplied: { $sum: 1 } }}
+        ])
+        .exec()
+        .then(data=>{
+            res.status(200).json(data);
+        })
+        .catch(err =>{
+            res.status(500).json({
+                error: err
+            });
+        });
+    }else{
+        ApplyJob.aggregate([
+            {
+                $lookup:    {
+                                from: "candidatemasters",
+                                localField: "candidate_id",
+                                foreignField: "_id",
+                                as: "candidates"
+                            }
+            },    
+            { "$match" : {  "candidates.basicInfo.gender" : "transgender" } },
+            { "$group" : { _id: "$job_id", candidatesApplied: { $sum: 1 } }}
+        ])
+        
+        .exec()
+        .then(data=>{
+            res.status(200).json(data);
+        })
+        .catch(err =>{
+            res.status(500).json({
+                error: err
+            });
+        });
+    } 
+};
+exports.expApplicantsCountList = (req,res,next)=>{
+    console.log("count",req.body);
+    if (req.body.entity_id) {
+        ApplyJob.aggregate([
+            {
+                $lookup:    {
+                                from: "candidatemasters",
+                                localField: "candidate_id",
+                                foreignField: "_id",
+                                as: "candidates"
+                            }
+            },    
+            { "$match" : {  "entity_id" : ObjectId(req.body.entity_id), "candidates.totalExperience" : { '$gte': req.body.minExp , '$lte' : req.body.maxExp } } },
+            { "$group" : { _id: "$job_id", candidatesApplied: { $sum: 1 } }}
+        ])
+        .exec()
+        .then(data=>{
+            res.status(200).json(data);
+        })
+        .catch(err =>{
+            res.status(500).json({
+                error: err
+            });
+        });
+    }else{
+        ApplyJob.aggregate([
+            {
+                $lookup:    {
+                                from: "candidatemasters",
+                                localField: "candidate_id",
+                                foreignField: "_id",
+                                as: "candidates"
+                            }
+            },    
+            { "$match" : {  "candidates.totalExperience" : { '$gte': req.body.minExp , '$lte' : req.body.maxExp } } },
+            { "$group" : { _id: "$job_id", candidatesApplied: { $sum: 1 } }}
+        ])
+        
+        .exec()
+        .then(data=>{
+            res.status(200).json(data);
+        })
+        .catch(err =>{
+            res.status(500).json({
+                error: err
+            });
+        });
+    } 
 };
 //candidatesAppliedToJob
 exports.candidatesAppliedToJob = (req,res,next)=>{

@@ -25,9 +25,45 @@ export const appendJobList = (jobList )=> ({
       type           : 'APPEND_JOB_LIST',
       jobList        : jobList
 });
-export const getApplicantsCountList = (applicantsCountList )=> ({ 
-      type                       : 'GET_APPLICANTS_COUNT',
-      applicantsCountList        : applicantsCountList
+export const getTotalApplicantsCountList = (totalApplicantsCountList )=> ({ 
+      type                       : 'GET_TOTAL_APPLICANTS_COUNT',
+      totalApplicantsCountList   : totalApplicantsCountList
+});
+export const getCountryApplicantsCountList = (countryApplicantsCountList )=> ({ 
+      type                       : 'GET_COUNTRY_APPLICANTS_COUNT',
+      countryApplicantsCountList : countryApplicantsCountList
+});
+export const getStateApplicantsCountList = (stateApplicantsCountList )=> ({ 
+      type                       : 'GET_STATE_APPLICANTS_COUNT',
+      stateApplicantsCountList   : stateApplicantsCountList
+});
+export const getDistrictApplicantsCountList = (districtApplicantsCountList )=> ({ 
+      type                       : 'GET_DISTRICT_APPLICANTS_COUNT',
+      districtApplicantsCountList: districtApplicantsCountList
+});
+export const getMaleApplicantsCountList = (maleApplicantsCountList )=> ({ 
+      type                       : 'GET_MALE_APPLICANTS_COUNT',
+      maleApplicantsCountList    : maleApplicantsCountList
+});
+export const getFemaleApplicantsCountList = (femaleApplicantsCountList )=> ({ 
+      type                       : 'GET_FEMALE_APPLICANTS_COUNT',
+      femaleApplicantsCountList  : femaleApplicantsCountList
+});
+export const getOtherApplicantsCountList = (otherApplicantsCountList )=> ({ 
+      type                       : 'GET_OTHER_APPLICANTS_COUNT',
+      otherApplicantsCountList   : otherApplicantsCountList
+});
+export const getExp02ApplicantsCountList = (exp02ApplicantsCountList )=> ({ 
+      type                       : 'GET_EXP02_APPLICANTS_COUNT',
+      exp02ApplicantsCountList   : exp02ApplicantsCountList
+});
+export const getExp26ApplicantsCountList = (exp26ApplicantsCountList )=> ({ 
+      type                       : 'GET_EXP26_APPLICANTS_COUNT',
+      exp26ApplicantsCountList   : exp26ApplicantsCountList
+});
+export const getExp610ApplicantsCountList = (exp610ApplicantsCountList )=> ({ 
+      type                       : 'GET_EXP610_APPLICANTS_COUNT',
+      exp610ApplicantsCountList  : exp610ApplicantsCountList
 });
 export const getCandidateList = (candidateList )=> ({ 
       type           : 'GET_CANDIDATE_LIST',
@@ -98,11 +134,114 @@ export function filterJobList(selector) {
 	    }) 
   	}  
 } 
-export function applicantsCountList(selector) {
+export function totalApplicantsCountList(selector) {
     return dispatch =>{
-      return axios.post("/api/applyJob/get/applicantsCountList",selector)
+      return axios.post("/api/applyJob/get/totalApplicantsCountList",selector)
       .then((response)=>{
-          dispatch(getApplicantsCountList(response.data));
+          dispatch(getTotalApplicantsCountList(response.data));
+      })
+      .catch((error)=>{
+            console.log('error', error);
+      }) 
+    }  
+}
+
+export function countryApplicantsCountList(selector) {
+    return dispatch =>{
+      return axios.post("/api/applyJob/get/countryApplicantsCountList",selector)
+      .then((response)=>{
+          dispatch(getCountryApplicantsCountList(response.data));
+      })
+      .catch((error)=>{
+            console.log('error', error);
+      }) 
+    }  
+}
+
+export function stateApplicantsCountList(selector) {
+    return dispatch =>{
+      return axios.post("/api/applyJob/get/stateApplicantsCountList",selector)
+      .then((response)=>{
+          dispatch(getStateApplicantsCountList(response.data));
+      })
+      .catch((error)=>{
+            console.log('error', error);
+      }) 
+    }  
+}
+
+export function districtApplicantsCountList(selector) {
+    return dispatch =>{
+      return axios.post("/api/applyJob/get/districtApplicantsCountList",selector)
+      .then((response)=>{
+          dispatch(getDistrictApplicantsCountList(response.data));
+      })
+      .catch((error)=>{
+            console.log('error', error);
+      }) 
+    }  
+}
+export function maleApplicantsCountList(selector) {
+    return dispatch =>{
+      return axios.post("/api/applyJob/get/maleApplicantsCountList",selector)
+      .then((response)=>{
+          dispatch(getMaleApplicantsCountList(response.data));
+      })
+      .catch((error)=>{
+            console.log('error', error);
+      }) 
+    }  
+}
+export function femaleApplicantsCountList(selector) {
+    return dispatch =>{
+      return axios.post("/api/applyJob/get/femaleApplicantsCountList",selector)
+      .then((response)=>{
+          dispatch(getFemaleApplicantsCountList(response.data));
+      })
+      .catch((error)=>{
+            console.log('error', error);
+      }) 
+    }  
+}
+
+export function otherApplicantsCountList(selector) {
+    return dispatch =>{
+      return axios.post("/api/applyJob/get/otherApplicantsCountList",selector)
+      .then((response)=>{
+          dispatch(getOtherApplicantsCountList(response.data));
+      })
+      .catch((error)=>{
+            console.log('error', error);
+      }) 
+    }  
+}
+export function exp02ApplicantsCountList(selector) {
+    return dispatch =>{
+      return axios.post("/api/applyJob/get/expApplicantsCountList",selector)
+      .then((response)=>{
+          dispatch(getExp02ApplicantsCountList(response.data));
+      })
+      .catch((error)=>{
+            console.log('error', error);
+      }) 
+    }  
+}
+export function exp26ApplicantsCountList(selector) {
+    return dispatch =>{
+      return axios.post("/api/applyJob/get/expApplicantsCountList",selector)
+      .then((response)=>{
+          dispatch(getExp26ApplicantsCountList(response.data));
+      })
+      .catch((error)=>{
+            console.log('error', error);
+      }) 
+    }  
+}
+export function exp610ApplicantsCountList(selector) {
+    return dispatch =>{
+      return axios.post("/api/applyJob/get/expApplicantsCountList",selector)
+      .then((response)=>{
+          dispatch(getExp610ApplicantsCountList(response.data));
       })
       .catch((error)=>{
             console.log('error', error);

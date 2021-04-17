@@ -47,7 +47,7 @@ class ConfirmOtp extends Component {
   }
   validateForm=()=>{
     var status = true;
-    if(this.refs.emailotp.value.length<=0){
+    if(this.refs.emailotp1.value.length<=0 && this.refs.emailotp2.value.length<=0 && this.refs.emailotp3.value.length<=0 && this.refs.emailotp4.value.length<=0){
       document.getElementById("otpError").innerHTML=  
       "Please enter OTP";  
       status=false; 
@@ -64,11 +64,11 @@ class ConfirmOtp extends Component {
     var url = this.props.match.params;
     var formValues = {
       "user_ID": this.props.match.params.userID,
-      "emailOTP": parseInt(this.refs.emailotp.value),
+      "emailOTP": this.refs.emailotp1.value + this.refs.emailotp2.value + this.refs.emailotp3.value + this.refs.emailotp4.value,
       "status": "Active"
     }
     //========person master===============
-
+    console.log(formValues)
       var candidatemaster   = {
         'firstName'       : this.state.firstName,
         'lastName'        : this.state.lastName,
@@ -83,7 +83,9 @@ class ConfirmOtp extends Component {
       if (status) {
       var url = localStorage.getItem('previousUrl');
       var userStatus =  url == 'signup' ? 'blocked' : 'active';
-      var checkData = { "user_id": this.props.match.params.userID, "emailotp" : this.refs.emailotp.value, "status" : userStatus }
+      var checkData = { "user_id": this.props.match.params.userID, 
+                        "emailotp"  : this.refs.emailotp1.value + this.refs.emailotp2.value + this.refs.emailotp3.value + this.refs.emailotp4.value, 
+                        "status" : userStatus }
       axios.post('/api/auth/checkemailotp/usingID',checkData) 
       .then((response) => {
 
@@ -220,7 +222,7 @@ class ConfirmOtp extends Component {
                         <div className="otpBox form-group" >
                             <div className="input-group ">
                                
-                                <input type="text" id="otp" maxlength="1" name="otp" ref="emailotp" placeholder="_" value={this.state.OTP} onChange={this.handleChange.bind(this)} className="form-control confirmOTPInputBox"/>
+                                <input type="text" id="otp" maxlength="1" name="otp" ref="emailotp1" placeholder="_" value={this.state.OTP} onChange={this.handleChange.bind(this)} className="form-control confirmOTPInputBox"/>
                             </div>
                            
                         </div>
@@ -229,14 +231,14 @@ class ConfirmOtp extends Component {
                         <div className="otpBox form-group" >
                             <div className="input-group ">
                                
-                                <input type="text" id="otp" maxlength="1" name="otp" ref="emailotp" placeholder="_" value={this.state.OTP} onChange={this.handleChange.bind(this)} className="form-control confirmOTPInputBox"/>
+                                <input type="text" id="otp" maxlength="1" name="otp" ref="emailotp2" placeholder="_" value={this.state.OTP} onChange={this.handleChange.bind(this)} className="form-control confirmOTPInputBox"/>
                             </div>
                            
                         </div>
                         <div className="otpBox form-group" >
                             <div className="input-group ">
                                
-                                <input type="text" id="otp" maxlength="1" name="otp" ref="emailotp" placeholder="_" value={this.state.OTP} onChange={this.handleChange.bind(this)} className="form-control confirmOTPInputBox"/>
+                                <input type="text" id="otp" maxlength="1" name="otp" ref="emailotp3" placeholder="_" value={this.state.OTP} onChange={this.handleChange.bind(this)} className="form-control confirmOTPInputBox"/>
                             </div>
                            
                         </div>
@@ -244,7 +246,7 @@ class ConfirmOtp extends Component {
                         <div className="otpBox form-group" >
                             <div className="input-group ">
                                
-                                <input type="text" id="otp" maxlength="1" name="otp" ref="emailotp" placeholder="_" value={this.state.OTP} onChange={this.handleChange.bind(this)} className="form-control confirmOTPInputBox"/>
+                                <input type="text" id="otp" maxlength="1" name="otp" ref="emailotp4" placeholder="_" value={this.state.OTP} onChange={this.handleChange.bind(this)} className="form-control confirmOTPInputBox"/>
                             </div>
                            
                         </div>

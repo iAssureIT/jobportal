@@ -632,13 +632,8 @@ class Header extends Component{
                 </div>
 
                 <div className="functionalbarsItem col-lg-12">
-                  
                   <span className="functionalnotificationMessegeText">Contact Us</span>
-                  
                 </div>
-                
-                
-
               </div>
 
               <div className="modal col-lg-12" id="loginModal" role="dialog" tabIndex="-1">

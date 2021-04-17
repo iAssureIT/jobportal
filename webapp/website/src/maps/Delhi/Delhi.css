@@ -13,7 +13,7 @@
 }
 .dwarkaNumber{
 	position: absolute;
-	left: 50%;
+	left: 40%;
     top: 50%;
 }
 .newDelhi{
@@ -28,7 +28,7 @@
 }
 .newDelhiNumber{
 	position: absolute;
-	left: 45%;
+	left: 40%;
     top: 37%;
 }
 .saket{
@@ -43,7 +43,7 @@
 }
 .saketNumber{
 	position: absolute;
-	left: 55%;
+	left: 45%;
     top: 56%;
 }
 .defenceColony{
@@ -98,13 +98,13 @@
 }
 .centralDaryaganjText{
 	position: absolute;
-	left:10%;
-    top: 70%;
+	left:5%;
+    top: 60%;
 }
 .centralDaryaganjNumber{
 	position: absolute;
-	left: 50%;
-    top: 77%;
+	left: 35%;
+    top: 67%;
 }
 .rajouriGarden{
 	position: absolute;
@@ -118,7 +118,7 @@
 }
 .rajouriGardenNumber{
 	position: absolute;
-	left: 50%;
+	left: 40%;
     top: 50%;
 }
 .kanjhwala{
@@ -133,7 +133,7 @@
 }
 .kanjhwalaNumber{
 	position: absolute;
-	left: 35%;
+	left: 30%;
     top: 57%;
 }
 .northNarela{
@@ -148,7 +148,7 @@
 }
 .northNarelaNumber{
 	position: absolute;
-	left: 50%;
+	left: 45%;
     top: 45%;
 }
 .northEastSeelampur{
@@ -158,7 +158,7 @@
 }
 .northEastSeelampurText{
 	position: absolute;
-	left: 45%;
+	left: 20%;
     top: 45%;
 }
 .northEastSeelampurNumber{

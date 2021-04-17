@@ -161,7 +161,7 @@ class ArunachalPradesh extends Component{
 						<span className="lowerDibangValleyText mapTextLabel text-capitalize">Lower_Dibang_Valley</span>
 						<span className="lowerDibangValleyNumber mapCountLabel text-center">{this.state.Lower_Dibang_Valley ? this.state.Lower_Dibang_Valley : 0}</span>
 					</div>
-					<div className="changlang classHover" onClick={e => this.onDistrictClick("changlangNumberlang","AR")}> 
+					<div className="changlang classHover" onClick={e => this.onDistrictClick("Changlang","AR")}> 
 						<img src="/Maps/Arunachal_Pradesh/Changlang.png"  alt="Changlang"
 						 onMouseOver={e => (e.currentTarget.src = "/Maps/Arunachal_Pradesh/Changlang_.png")} 
 						 onMouseOut={e => (e.currentTarget.src = "/Maps/Arunachal_Pradesh/Changlang.png")}/>

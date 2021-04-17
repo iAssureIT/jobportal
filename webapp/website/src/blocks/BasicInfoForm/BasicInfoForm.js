@@ -590,7 +590,7 @@ class BasicInfoForm extends Component{
                		document.getElementById("lastNameError").innerHTML = "";
                }       
             }
-          
+
            	return formIsValid;
             return status;
 	}
@@ -956,6 +956,7 @@ class BasicInfoForm extends Component{
 							        handleDrag={this.onLanguageDrag.bind(this)}
 									handleTagClick={this.onLanguageClick.bind(this)} />
 								</div>
+								<span id="languagesError" className="errorMsg"></span>
 							</div>
 						</div>
 						<div className="row formWrapper">

@@ -5,13 +5,13 @@
 }
 .sirsaText{
 	position: absolute;
-	top: 50%;
-    left: 25%;
+	top: 40%;
+    left: 45%;
 }
 .sirsaNumber{
 	position: absolute;
-	top: 60%;
-    left: 33%;
+	top: 50%;
+    left: 45%;
 }
 
 .fatehabad{
@@ -37,13 +37,13 @@
 }
 .jindText{
 	position: absolute;
-	top: 40%;
-    left: 25%;
+	top: 50%;
+    left: 45%;
 }
 .jindNumber{
 	position: absolute;
-	top: 50%;
-    left: 33%;
+	top: 60%;
+    left: 40%;
 }
 
 .kaithal{
@@ -53,12 +53,12 @@
 }
 .kaithalText{
 	position: absolute;
-	top: 40%;
+	top: 50%;
     left: 25%;
 }
 .kaithalNumber{
 	position: absolute;
-	top: 50%;
+	top: 60%;
     left: 33%;
 }
 
@@ -70,12 +70,12 @@
 .kurukshetraText{
 	position: absolute;
 	top: 40%;
-    left: 25%;
+    left: 35%;
 }
 .kurukshetraNumber{
 	position: absolute;
 	top: 55%;
-    left: 33%;
+    left: 45%;
 }
 
 .ambala{
@@ -102,7 +102,7 @@
 .panchkulaText{
 	position: absolute;
 	top: 40%;
-    left: 35%;
+    left: 25%;
 }
 .panchkulaNumber{
 	position: absolute;
@@ -118,12 +118,12 @@
 .yamunanagarText{
 	position: absolute;
 	top: 40%;
-    left: 35%;
+    left: 20%;
 }
 .yamunanagarNumber{
 	position: absolute;
 	top: 55%;
-    left: 43%;
+    left: 30%;
 }
 
 .karnal{
@@ -134,7 +134,7 @@
 .karnalText{
 	position: absolute;
 	top: 40%;
-    left: 35%;
+    left: 45%;
 }
 .karnalNumber{
 	position: absolute;
@@ -186,7 +186,7 @@
 }
 .rohtakNumber{
 	position: absolute;
-	top: 55%;
+	top: 50%;
     left: 43%;
 }
 
@@ -203,7 +203,7 @@
 .bhiwaniNumber{
 	position: absolute;
 	top: 55%;
-    left: 43%;
+    left: 40%;
 }
 
 .hisar{
@@ -215,12 +215,12 @@
 .hisarText{
 	position: absolute;
 	top: 40%;
-    left: 35%;
+    left: 45%;
 }
 .hisarNumber{
 	position: absolute;
-	top: 55%;
-    left: 43%;
+	top: 50%;
+    left: 45%;
 }
 
 .mahendragarh{
@@ -232,12 +232,12 @@
 .mahendragarhText{
 	position: absolute;
 	top: 40%;
-    left: 35%;
+    left: 20%;
 }
 .mahendragarhNumber{
 	position: absolute;
 	top: 55%;
-    left: 43%;
+    left: 30%;
 }
 
 .rewari{
@@ -249,7 +249,7 @@
 .rewariText{
 	position: absolute;
 	top: 40%;
-    left: 35%;
+    left: 30%;
 }
 .rewariNumber{
 	position: absolute;
@@ -265,12 +265,12 @@
 
 .jhajjarText{
 	position: absolute;
-	top: 40%;
+	top: 35%;
     left: 35%;
 }
 .jhajjarNumber{
 	position: absolute;
-	top: 55%;
+	top: 50%;
     left: 43%;
 }
 
@@ -317,7 +317,7 @@
 .faridabadText{
 	position: absolute;
 	top: 40%;
-    left: 30%;
+    left: 20%;
 }
 .faridabadNumber{
 	position: absolute;

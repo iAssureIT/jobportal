@@ -286,7 +286,9 @@ exports.updateCandidateBasicInfo = (req, res, next)=>{
                         "basicInfo.gender"         : req.body.gender,
                         "basicInfo.maritalStatus"  : req.body.maritalStatus,
                         "basicInfo.country"       : req.body.country,
+
                         // "basicInfo.anniversaryDate": req.body.anniversaryDate == "" ? null : new Date(req.body.anniversaryDate),
+
                         "basicInfo.nationality"    : req.body.nationality,
                         "basicInfo.profilePicture" : req.body.profilePicture,
                         "basicInfo.resume"         : req.body.resumeUrl,
@@ -916,21 +918,24 @@ exports.getOneCandidateCertification = (req,res,next)=>{
 };
 
 exports.updateOneCandidateCertification = (req,res,next)=>{
+    console.log(req.body);
     CandidateProfile.updateOne(
             { "_id":req.body.candidate_id, "certifications._id": req.body.certificationID},  
             {
                 $set:   {   
-                            "certName"        : req.body.certName,
-                            "issuedBy"        : req.body.issuedBy,
-                            "certifiedOn"     : req.body.certifiedOn,
-                            "validTill"       : req.body.validTill,
-                            "gradePercent"    : req.body.gradePercent
+                            "certifications.$.certName"        : req.body.certName,
+                            "certifications.$.issuedBy"        : req.body.issuedBy,
+                            "certifications.$.certifiedOn"     : req.body.certifiedOn,
+                            "certifications.$.validTill"       : req.body.validTill,
+                            "certifications.$.gradePercent"    : req.body.gradePercent
                         }
             }
         )
         .exec()
         .then(data=>{
+            console.log(data);
             if(data.nModified == 1){
+
                 res.status(200).json({ updated : true });
             }else{
                 res.status(200).json({ updated : false });

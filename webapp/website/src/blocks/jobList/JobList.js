@@ -231,7 +231,7 @@ removeApplication = (job_id) => {
 }
 	
 	render(){
-		
+		console.log(this.props.selector)
 		return(
 			<section className="jobListWrapper">
 				<div className="col-lg-12 JobListWrapperMain">

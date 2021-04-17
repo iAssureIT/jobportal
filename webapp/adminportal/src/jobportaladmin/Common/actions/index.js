@@ -40,9 +40,9 @@ export const getJobList = (jobList )=> ({
       jobList       : jobList
 });
 
-export const getApplicantsCountList = (applicantsCountList )=> ({ 
-      type                    : 'GET_APPLICANTS_COUNT',
-      applicantsCountList     : applicantsCountList
+export const getTotalApplicantsCountList = (totalApplicantsCountList )=> ({ 
+      type                        : 'GET_TOTAL_APPLICANTS_COUNT',
+      totalApplicantsCountList    : totalApplicantsCountList
 });
 
 export const getCandidateList = (candidateList )=> ({ 
@@ -125,11 +125,11 @@ export function filterJobList(selector) {
     }
 } 
 
-export function applicantsCountList() {
+export function totalApplicantsCountList() {
     return dispatch =>{
-      return axios.post("/api/applyJob/get/applicantsCountList")
+      return axios.post("/api/applyJob/get/totalApplicantsCountList")
       .then((response)=>{
-          dispatch(getApplicantsCountList(response.data));
+          dispatch(getTotalApplicantsCountList(response.data));
       })
       .catch((error)=>{
             console.log('error', error);

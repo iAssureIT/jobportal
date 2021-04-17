@@ -395,7 +395,7 @@ class SignUp extends Component {
            <div className="img6LoginSU">
               <img src="/images/Sign_In/6.png" alt="img6Login" className="img6loginInnerSU"/>
           </div>
-                <div className="registrationForm col-lg-4 col-lg-offset-4">
+                <div className="registrationForm col-lg-6 col-lg-offset-3">
                   <form>
 
                     <div className="signUpTitle col-lg-12">Sign Up
@@ -421,90 +421,100 @@ class SignUp extends Component {
                         </div>
                     </div>*/}
 
-                  
-                    <div className="col-lg-10 col-lg-offset-1 form-group" >
+                  <div className="col-lg-10 col-lg-offset-1">
+                    <div className="row">
+                      <div className="col-lg-6 form-group" >
+
                         <div className="input-group">
                             <span className="input-group-addon registrationInputIcon"><i className="fa fa-user"></i></span>
                             <input type="text" id="firstName" name="firstName" placeholder="First Name" value={this.state.firstName} onChange={this.handleChange.bind(this)} className="form-control registrationInputBox"/>
                         </div>
                          <span id="firstNameError" className="errorMsg"></span>
-                    </div>
+                      </div>
 
-                    <div className="col-lg-10 col-lg-offset-1 form-group" >
+                      <div className="col-lg-6  form-group" >
                         <div className="input-group">
                             <span className="input-group-addon registrationInputIcon"><i className="fa fa-user"></i></span>
                             <input type="text" id="lastName" name="lastName" placeholder="Last Name" value={this.state.lastName} onChange={this.handleChange.bind(this)} className="form-control registrationInputBox"/>
                         </div>
                          <span id="lastNameError" className="errorMsg"></span>
-                    </div>
-                 
+                      </div>
+                    </div>  
+                  </div>
 
-                 
-                    <div className="col-lg-10 col-lg-offset-1 form-group" >
-                        <div className="input-group">
-                            <span className="input-group-addon registrationInputIcon1"><i className="fa fa-envelope"></i></span>
-                            <input type="email" id="emailAddress" name="emailAddress" placeholder="Email Address" value={this.state.emailAddress} onChange={this.handleChange.bind(this)} className="form-control registrationInputBox"/>
+                  <div className="col-lg-10 col-lg-offset-1">
+                    <div className="row">
+                        <div className="col-lg-6 form-group" >
+                            <div className="input-group">
+                                <span className="input-group-addon registrationInputIcon1"><i className="fa fa-envelope"></i></span>
+                                <input type="email" id="emailAddress" name="emailAddress" placeholder="Email Address" value={this.state.emailAddress} onChange={this.handleChange.bind(this)} className="form-control registrationInputBox"/>
+                            </div>
+                             <span id="emailAddressError" className="errorMsg"></span>
                         </div>
-                         <span id="emailAddressError" className="errorMsg"></span>
-                    </div>
 
-                    <div className="col-lg-10 col-lg-offset-1 form-group" >
-                  
-                         <PhoneInput
-                                  country={'in'}
-                                  value={this.state.mobileNumber}
-                                  name="companyPhone"
-                                  inputProps={{
-                                    name: 'mobileNumber',
-                                    required: true
-                                  }}
-                                  onChange={this.changeMobile.bind(this)}
-                                />
-                         
-                        <span id="mobileNumberError" className="errorMsg"></span>
-                    </div>
-                    
-
-                   
-                     <div className="col-lg-10 col-lg-offset-1 form-group" >
-                        <div className="input-group">
-                            <span className="input-group-addon registrationInputIcon"><i className="fa fa-lock"></i></span>
-                            <input type="password" id="password" name="password" placeholder="Password" value={this.state.password} onChange={this.handleChange.bind(this)} className="form-control registrationInputBox"/>
-                            <span className="input-group-addon loginInputIcon3" onClick={this.showPassword1.bind(this)}>
-                              <i className={this.state.showPassword1 ? "fa fa-eye-slash" : "fa fa-eye"} 
-                                  value={this.state.showPassword1}></i></span>
+                        <div className="col-lg-6 form-group" >
+                      
+                             <PhoneInput
+                                      country={'in'}
+                                      value={this.state.mobileNumber}
+                                      name="companyPhone"
+                                      inputProps={{
+                                        name: 'mobileNumber',
+                                        required: true
+                                      }}
+                                      onChange={this.changeMobile.bind(this)}
+                                    />
+                             
+                            <span id="mobileNumberError" className="errorMsg"></span>
                         </div>
-                         <span id="passwordError" className="errorMsg"></span>
+                      </div>
                     </div>
 
-                    <div className="col-lg-10 col-lg-offset-1 form-group" >
-                        <div className="input-group">
-                            <span className="input-group-addon registrationInputIcon"><i className="fa fa-lock"></i></span>
-                            <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" value={this.state.confirmPassword} onChange={this.handleChange.bind(this)} className="form-control registrationInputBox"/>
-                            <span className="input-group-addon loginInputIcon3" onClick={this.showPassword2.bind(this)}>
-                               <i className={this.state.showPassword2 ? "fa fa-eye-slash" : "fa fa-eye"} 
-                                value={this.state.showPassword2}></i></span>
+                    <div className="col-lg-10 col-lg-offset-1">
+                      <div className="row">
+                         <div className="col-lg-6 form-group" >
+                            <div className="input-group">
+                                <span className="input-group-addon registrationInputIcon"><i className="fa fa-lock"></i></span>
+                                <input type="password" id="password" name="password" placeholder="Password" value={this.state.password} onChange={this.handleChange.bind(this)} className="form-control registrationInputBox"/>
+                                <span className="input-group-addon loginInputIcon3" onClick={this.showPassword1.bind(this)}>
+                                  <i className={this.state.showPassword1 ? "fa fa-eye-slash" : "fa fa-eye"} 
+                                      value={this.state.showPassword1}></i></span>
+                            </div>
+                             <span id="passwordError" className="errorMsg"></span>
                         </div>
-                         <span id="confirmPasswordError" className="errorMsg"></span>
+
+                        <div className="col-lg-6 form-group" >
+                            <div className="input-group">
+                                <span className="input-group-addon registrationInputIcon"><i className="fa fa-lock"></i></span>
+                                <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" value={this.state.confirmPassword} onChange={this.handleChange.bind(this)} className="form-control registrationInputBox"/>
+                                <span className="input-group-addon loginInputIcon3" onClick={this.showPassword2.bind(this)}>
+                                   <i className={this.state.showPassword2 ? "fa fa-eye-slash" : "fa fa-eye"} 
+                                    value={this.state.showPassword2}></i></span>
+                            </div>
+                             <span id="confirmPasswordError" className="errorMsg"></span>
+                        </div>
+                      </div>
                     </div>
-                   
+                       
                     <div className="col-lg-10 col-lg-offset-1" >
+                      <div className="row">
                         <div className="col-lg-6">
-                          <div className="row">
+                         
                             <label htmlFor="workFromHome" className="agreeTC">
                             
                               <input type="checkbox" name="workFromHome" className="checkmark2" id="workFromHome" value={this.state.workFromHome} onChange={this.setWorkFromHome.bind(this)} />
                             
                                <div className="textTC"> I agree to the <br/>Terms & Conditions</div>
                             </label>
-                          </div>  
+                         
                         </div>
 
                         <div className="col-lg-6  buttonWrapper">
-                          <div className="row">
+                          
                             <button className="btn col-lg-12 buttonSignUp" onClick={this.usersignup.bind(this)}>Sign Up >></button>
-                          </div>
+                          
                         </div>
+                      </div>
                     </div>    
 
                   <div className="col-lg-10 col-lg-offset-1 registrationLinks" >

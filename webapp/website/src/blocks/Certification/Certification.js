@@ -362,25 +362,30 @@ class Certification extends Component{
 			var formValues = {
 					                candidate_id               : this.state.candidate_id,
 					                certificationID            : this.state.certificationID,
+					              
 					                	certName               : this.state.certificationName,
 										issuedBy               : this.state.issuedBy,
 										certifiedOn            : this.state.certifiedOn,
 										validTill              : this.state.validity,
 										gradePercent           : this.state.grade,	
+					                
+					                	
 							}	
-		 if(
-		 	this.props.match.params.certificationID )
+							console.log(formValues);
+		 if(this.props.match.params.certificationID )
 				 {
-				 	this.updateData(formValues,event);
+				 	this.updateData(formValues);
 				 }else{
-					this.insetData(formValues,event);
+					this.insetData(formValues);
 				}
 		}
 			 
 	this.getData();	
 	}
-	updateData(formValues,event){
+	updateData(formValues){
+		console.log("formValuesformValues",formValues)
 		var status =  this.validateForm();
+		if(status==true){
 				Axios.patch("/api/candidatemaster/patch/updateOneCandidateCertification",formValues)
 				 .then(response=>{
 
@@ -398,7 +403,7 @@ class Certification extends Component{
 					.catch(error =>{
 						Swal.fire("Submit Error!",error.message,'error');
 					});
-				
+				}
 
 		}
 	insetData(formValues,event){
