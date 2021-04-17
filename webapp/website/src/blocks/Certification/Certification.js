@@ -222,7 +222,7 @@ class Certification extends Component{
 				 		certificationName          :editData.certifications[0].certName,
 				 		issuedBy                   :editData.certifications[0].issuedBy,
 				 		certifiedOn                :Moment(editData.certifications[0].certifiedOn).format("YYYY-MM-DD"),
-				 		validity                   :Moment(editData.certifications[0].validTill).format("YYYY-MM-DD"),
+				 		validity                   :editData.certifications[0].validTill ? Moment(editData.certifications[0].validTill).format("YYYY-MM-DD") : null,
 				 		rating                     :editData.certifications[0].rating,
 				 		grade                      :editData.certifications[0].gradePercent,
 				 		buttonText                 :"Update"

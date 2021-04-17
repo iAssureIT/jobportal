@@ -918,20 +918,23 @@ exports.getOneCandidateCertification = (req,res,next)=>{
 };
 
 exports.updateOneCandidateCertification = (req,res,next)=>{
+    console.log(req.body)
+
     CandidateProfile.updateOne(
-            { "_id":req.body.candidate_id, "certifications._id": req.body.certificationID},  
+            { "_id":ObjectID(req.body.candidate_id), "certifications._id": ObjectID(req.body.certificationID)},  
             {
-                $set:   {   
-                            "certName"        : req.body.certName,
-                            "issuedBy"        : req.body.issuedBy,
-                            "certifiedOn"     : req.body.certifiedOn,
-                            "validTill"       : req.body.validTill,
-                            "gradePercent"    : req.body.gradePercent
+                $set:   {    
+                            "certifications.$.certName"        : req.body.certName,
+                            "certifications.$.issuedBy"        : req.body.issuedBy,
+                            "certifications.$.certifiedOn"     : req.body.certifiedOn,
+                            "certifications.$.validTill"       : req.body.validTill ? req.body.validTill : null,
+                            "certifications.$.gradePercent"    : req.body.gradePercent 
                         }
             }
         )
         .exec()
         .then(data=>{
+            console.log(data)
             if(data.nModified == 1){
                 res.status(200).json({ updated : true });
             }else{
