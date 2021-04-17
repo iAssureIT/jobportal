@@ -1,10 +1,58 @@
 import React, { Component } from 'react';
 
 import { FontAwesomeIcon }  from '@fortawesome/react-fontawesome';
+import Axios                from 'axios';
+/*import Swal                 from 'sweetalert2';*/
 
 import './Modal.css';
 
 export default class Modal extends Component{
+
+constructor(props){
+    super(props);
+  }
+
+/*getJobs = (event)=>{
+
+        Axios.post("/api/jobs/joblist-for-employer")
+        .then(response =>{
+          console.log("employer joblist");
+        })
+        .catch(error=>{
+          console.log("some error occured while getting joblist");
+        })
+
+}  */
+
+deleteJob = (event)=>{
+  
+  const job_id = this.props.job_id;
+  console.log("job_id",job_id);  
+  
+  if(job_id){
+        Axios.delete("/api/jobs/delete/"+job_id)
+        .then(response =>{
+          if(response.data.message==="Job details deleted Successfully!"){
+            var {mapAction} = this.props;
+
+            /*Swal.fire(
+                  'Deleted!',
+                  'Job has been deleted successfully!',
+                  'success'
+              );*/
+
+            window.location.reload();
+          }
+        })
+        .catch(error=>{
+          /*Swal.fire(
+                "Some problem occured deleting job!",
+                error.message,
+                'error'
+            )*/
+        })
+      }
+  }
 
   render(){
             return (
@@ -23,7 +71,7 @@ export default class Modal extends Component{
                       </div>
                       <div className="col-lg-12 delMainBtnDiv">
                           <button type="button" class="btn btn-default delModalBtnOne col-lg-3" data-dismiss="modal">NO</button> 
-                          <button type="button" class="btn btn-default delModalBtnTwo col-lg-3" data-dismiss="modal">YES</button>
+                          <button type="button" class="btn btn-default delModalBtnTwo col-lg-3" data-dismiss="modal" onClick={this.deleteJob}>YES</button>
                       </div> 
                     </div>
                   </div>
