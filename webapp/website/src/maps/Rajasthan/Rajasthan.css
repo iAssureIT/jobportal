@@ -5,13 +5,13 @@
 }
 .jaisalmerText{
 	position: absolute;
-	top: 50%;
-    left: 25%;
+	top: 45%;
+    left: 40%;
 }
 .jaisalmerNumber{
 	position: absolute;
-	top: 60%;
-    left: 33%;
+	top: 55%;
+    left: 40%;
 }
 
 .jodhpur{
@@ -21,13 +21,13 @@
 }
 .jodhpurText{
 	position: absolute;
-	top: 50%;
-    left: 25%;
+	top: 45%;
+    left: 35%;
 }
 .jodhpurNumber{
 	position: absolute;
-	top: 60%;
-    left: 33%;
+	top: 55%;
+    left: 35%;
 }
 
 .nagaur{
@@ -37,13 +37,13 @@
 }
 .nagaurText{
 	position: absolute;
-	top: 50%;
-    left: 25%;
+	top: 45%;
+    left: 40%;
 }
 .nagaurNumber{
 	position: absolute;
 	top: 60%;
-    left: 33%;
+    left: 40%;
 }
 
 .Jaipur{
@@ -54,12 +54,12 @@
 .JaipurText{
 	position: absolute;
 	top: 50%;
-    left: 35%;
+    left: 45%;
 }
 .JaipurNumber{
 	position: absolute;
 	top: 60%;
-    left: 43%;
+    left: 45%;
 }
 
 .dausa{
@@ -75,7 +75,7 @@
 .dausaNumber{
 	position: absolute;
 	top: 40%;
-    left: 33%;
+    left: 20%;
 }
 
 .karauli{
@@ -85,13 +85,13 @@
 }
 .karauliText{
 	position: absolute;
-	top: 15%;
-    left: 25%;
+	top: 40%;
+    left: 50%;
 }
 .karauliNumber{
 	position: absolute;
-	top: 40%;
-    left: 63%;
+	top: 55%;
+    left: 60%;
 }
 
 .dholpur{
@@ -101,13 +101,13 @@
 }
 .dholpurText{
 	position: absolute;
-	top: 20%;
+	top: 35%;
     left: 25%;
 }
 .dholpurNumber{
 	position: absolute;
-	top: 40%;
-    left: 33%;
+	top: 50%;
+    left: 30%;
 }
 
 .bikaner{
@@ -117,13 +117,13 @@
 }
 .bikanerText{
 	position: absolute;
-	top: 30%;
-    left: 25%;
+	top: 40%;
+    left: 45%;
 }
 .bikanerNumber{
 	position: absolute;
-	top: 40%;
-    left: 33%;
+	top: 50%;
+    left: 45%;
 }
 
 .sri_ganganagar{
@@ -133,8 +133,8 @@
 }
 .sri_ganganagarText{
 	position: absolute;
-	top: 30%;
-    left: 25%;
+	top: 40%;
+    left: 30%;
 }
 .sri_ganganagarNumber{
 	position: absolute;
@@ -149,13 +149,13 @@
 }
 .hanumangarhText{
 	position: absolute;
-	top: 30%;
-    left: 25%;
+	top: 45%;
+    left: 20%;
 }
 .hanumangarhNumber{
 	position: absolute;
-	top: 45%;
-    left: 33%;
+	top: 60%;
+    left: 35%;
 }
 
 .churu{
@@ -166,11 +166,11 @@
 .churuText{
 	position: absolute;
 	top: 30%;
-    left: 25%;
+    left: 35%;
 }
 .churuNumber{
 	position: absolute;
-	top: 45%;
+	top: 40%;
     left: 33%;
 }
 
@@ -181,12 +181,12 @@
 }
 .jhunjhununText{
 	position: absolute;
-	top: 30%;
-    left: 25%;
+	top: 35%;
+    left: 20%;
 }
 .jhunjhununNumber{
 	position: absolute;
-	top: 45%;
+	top: 55%;
     left: 33%;
 }
 
@@ -197,13 +197,13 @@
 }
 .sikarText{
 	position: absolute;
-	top: 40%;
+	top: 45%;
     left: 25%;
 }
 .sikarNumber{
 	position: absolute;
-	top: 55%;
-    left: 33%;
+	top: 60%;
+    left: 30%;
 }
 
 .alwar{
@@ -213,12 +213,12 @@
 }
 .alwarText{
 	position: absolute;
-	top: 40%;
+	top: 45%;
     left: 25%;
 }
 .alwarNumber{
 	position: absolute;
-	top: 55%;
+	top: 60%;
     left: 33%;
 }
 
@@ -229,12 +229,12 @@
 }
 .bharatpurText{
 	position: absolute;
-	top: 40%;
+	top: 50%;
     left: 25%;
 }
 .bharatpurNumber{
 	position: absolute;
-	top: 55%;
+	top: 60%;
     left: 33%;
 }
 
@@ -245,12 +245,12 @@
 }
 .barmerText{
 	position: absolute;
-	top: 40%;
+	top: 45%;
     left: 35%;
 }
 .barmerNumber{
 	position: absolute;
-	top: 55%;
+	top: 50%;
     left: 43%;
 }
 
@@ -261,13 +261,13 @@
 }
 .jaloreText{
 	position: absolute;
-	top: 40%;
-    left: 45%;
+	top: 45%;
+    left: 50%;
 }
 .jaloreNumber{
 	position: absolute;
-	top: 55%;
-    left: 53%;
+	top: 60%;
+    left: 48%;
 }
 
 .pali{
@@ -278,12 +278,12 @@
 .paliText{
 	position: absolute;
 	top: 45%;
-    left: 25%;
+    left: 35%;
 }
 .paliNumber{
 	position: absolute;
 	top: 55%;
-    left: 35%;
+    left: 30%;
 }
 
 .ajmer{
@@ -293,13 +293,13 @@
 }
 .ajmerText{
 	position: absolute;
-	top: 40%;
-    left: 45%;
+	top: 45%;
+    left: 50%;
 }
 .ajmerNumber{
 	position: absolute;
-	top: 55%;
-    left: 45%;
+	top: 60%;
+    left: 50%;
 }
 
 .tonk{

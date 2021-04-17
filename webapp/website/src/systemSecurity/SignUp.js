@@ -22,6 +22,7 @@ class SignUp extends Component {
 	constructor() {
 		super();
 		this.state = {
+      checkTC: false,
 			checkUserExists: 0,
 			loggedIn: false,
       showPassword1: false,
@@ -80,8 +81,9 @@ class SignUp extends Component {
 
   setWorkFromHome(event) {
         this.setState({
-            workFromHome: event.target.checked
+            checkTC: event.target.checked
         });
+         console.log("tc==",this.state.checkTC);
     }
 
   showPassword1=(event)=>{
@@ -158,7 +160,7 @@ class SignUp extends Component {
           document.getElementById('emailAddressError').innerHTML = "Please enter a valid email address.";
       } else{
       document.getElementById("emailAddressError").innerHTML=
-      " ."; 
+      ""; 
       status = true;
     }
 
@@ -214,11 +216,20 @@ class SignUp extends Component {
       status=false; 
     }
 
+    if(this.state.checkTC == true){
+      status= true;
+    }
+    if (this.state.checkTC == false) {
+      swal('Please accept Term and Conditions');
+      status =false;
+    }
+
     return status;
   } 
 	usersignup(event) {
 		event.preventDefault();
 		var status =  this.validateForm();
+     console.log("tc==",this.state.checkTC);
 
 	    if(status == true){
 			var auth = {
@@ -395,7 +406,7 @@ class SignUp extends Component {
            <div className="img6LoginSU">
               <img src="/images/Sign_In/6.png" alt="img6Login" className="img6loginInnerSU"/>
           </div>
-                <div className="registrationForm col-lg-6 col-lg-offset-3">
+                <div className="registrationForm col-lg-4 col-lg-offset-4">
                   <form>
 
                     <div className="signUpTitle col-lg-12">Sign Up
@@ -421,8 +432,8 @@ class SignUp extends Component {
                         </div>
                     </div>*/}
 
-                  <div className="col-lg-10 col-lg-offset-1">
-                    <div className="row">
+                  <div className="col-lg-12">
+                    
                       <div className="col-lg-6 form-group" >
 
                         <div className="input-group">
@@ -439,20 +450,21 @@ class SignUp extends Component {
                         </div>
                          <span id="lastNameError" className="errorMsg"></span>
                       </div>
-                    </div>  
+                    
                   </div>
 
-                  <div className="col-lg-10 col-lg-offset-1">
-                    <div className="row">
-                        <div className="col-lg-6 form-group" >
+                      <div className="col-lg-12">
+                        <div className="col-lg-12 form-group" >
                             <div className="input-group">
                                 <span className="input-group-addon registrationInputIcon1"><i className="fa fa-envelope"></i></span>
                                 <input type="email" id="emailAddress" name="emailAddress" placeholder="Email Address" value={this.state.emailAddress} onChange={this.handleChange.bind(this)} className="form-control registrationInputBox"/>
                             </div>
                              <span id="emailAddressError" className="errorMsg"></span>
                         </div>
+                      </div>
 
-                        <div className="col-lg-6 form-group" >
+                      <div className="col-lg-12">
+                        <div className="col-lg-12 form-group" >
                       
                              <PhoneInput
                                       country={'in'}
@@ -468,11 +480,9 @@ class SignUp extends Component {
                             <span id="mobileNumberError" className="errorMsg"></span>
                         </div>
                       </div>
-                    </div>
 
-                    <div className="col-lg-10 col-lg-offset-1">
-                      <div className="row">
-                         <div className="col-lg-6 form-group" >
+                    <div className="col-lg-12">
+                         <div className="col-lg-12 form-group" >
                             <div className="input-group">
                                 <span className="input-group-addon registrationInputIcon"><i className="fa fa-lock"></i></span>
                                 <input type="password" id="password" name="password" placeholder="Password" value={this.state.password} onChange={this.handleChange.bind(this)} className="form-control registrationInputBox"/>
@@ -482,8 +492,10 @@ class SignUp extends Component {
                             </div>
                              <span id="passwordError" className="errorMsg"></span>
                         </div>
+                    </div>
 
-                        <div className="col-lg-6 form-group" >
+                    <div className="col-lg-12">
+                        <div className="col-lg-12 form-group" >
                             <div className="input-group">
                                 <span className="input-group-addon registrationInputIcon"><i className="fa fa-lock"></i></span>
                                 <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" value={this.state.confirmPassword} onChange={this.handleChange.bind(this)} className="form-control registrationInputBox"/>
@@ -493,16 +505,14 @@ class SignUp extends Component {
                             </div>
                              <span id="confirmPasswordError" className="errorMsg"></span>
                         </div>
-                      </div>
                     </div>
                        
-                    <div className="col-lg-10 col-lg-offset-1" >
-                      <div className="row">
+                    <div className="col-lg-12">
                         <div className="col-lg-6">
                          
-                            <label htmlFor="workFromHome" className="agreeTC">
+                            <label htmlFor="checkTC" className="agreeTC container">
                             
-                              <input type="checkbox" name="workFromHome" className="checkmark2" id="workFromHome" value={this.state.workFromHome} onChange={this.setWorkFromHome.bind(this)} />
+                              <input type="checkbox" name="checkTC" className="checkmark2" id="checkTC" value={this.state.checkTC} onChange={this.setWorkFromHome.bind(this)} />
                             
                                <div className="textTC"> I agree to the <br/>Terms & Conditions</div>
                             </label>
@@ -514,7 +524,7 @@ class SignUp extends Component {
                             <button className="btn col-lg-12 buttonSignUp" onClick={this.usersignup.bind(this)}>Sign Up >></button>
                           
                         </div>
-                      </div>
+                      
                     </div>    
 
                   <div className="col-lg-10 col-lg-offset-1 registrationLinks" >
