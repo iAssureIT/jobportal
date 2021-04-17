@@ -414,8 +414,12 @@ deleteJob = (event)=>{
 																		<a title = "View" href={"/job-profile/" + elem._id}><i className="fa fa-eye"></i></a>
 																	</div>
 																	<div className="listViewBtn">	
+<<<<<<< Updated upstream
 																		{/*<a title = "Inactive" onClick={this.inactiveJob} id = {elem._id}><i className="fa fa-eye-slash"></i></a>
 																		*/}
+=======
+																		<a title = "Inactive" onClick={this.inactiveJob} id = {elem._id}><i className="fa fa-eye-slash"></i></a>	
+>>>>>>> Stashed changes
 																	</div>
 																	<div className="listDelBtn">	
 																		<i title = "Delete" className="fa fa-trash" data-toggle="modal" data-target="#delModal" data-dismiss="modal" onClick={this.deleteJob} id = {elem._id}></i>
@@ -430,6 +434,13 @@ deleteJob = (event)=>{
 																			<div className="row">Inactive</div>
 																		</div>
 																	</div>
+																	<div className="input-group genderFeildWrapper">
+																		<div className = {this.state.isActive ? "genderFeild col-lg-6 genderFeildActive" : "genderFeild col-lg-6" }
+																		 id="togglePrimary" name="primaryToggel" 
+																		 value="togglePrimary" onClick={this.handleSwitch.bind(this)}>
+																			<div className="row">Inactive</div>
+																		</div>
+																	</div>	
 																</div>
 															</div>
 														</div>
