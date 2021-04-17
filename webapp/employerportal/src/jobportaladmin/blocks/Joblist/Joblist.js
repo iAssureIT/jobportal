@@ -420,7 +420,9 @@ deleteJob = (event)=>{
 																	<div className="listDelBtn">	
 																		<i title = "Delete" className="fa fa-trash" data-toggle="modal" data-target="#delModal" data-dismiss="modal" onClick={this.deleteJob} id = {elem._id}></i>
 																	</div>
+
 																	<Modal job_id={this.state.job_id}/>
+
 																	<div className="input-group jobStatusToggleWrapper">
 																		<div className = {this.state.isActive ? "genderFeild col-lg-6 genderFeildActive" : "genderFeild col-lg-6" }
 																		 id="togglePrimary" name="primaryToggel" 

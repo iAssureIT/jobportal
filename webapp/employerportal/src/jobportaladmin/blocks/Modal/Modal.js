@@ -3,7 +3,9 @@ import React, { Component } from 'react';
 import { FontAwesomeIcon }  from '@fortawesome/react-fontawesome';
 import Axios                from 'axios';
 /*import Swal                 from 'sweetalert2';*/
-
+import { connect }            from 'react-redux';
+import { bindActionCreators }   from 'redux';
+import  * as mapActionCreator   from '../../common/actions/index';
 import './Modal.css';
 
 export default class Modal extends Component{
@@ -34,7 +36,7 @@ deleteJob = (event)=>{
         .then(response =>{
           if(response.data.message==="Job details deleted Successfully!"){
             var {mapAction} = this.props;
-
+            mapAction.filterJobList(this.state.selector);
             /*Swal.fire(
                   'Deleted!',
                   'Job has been deleted successfully!',
