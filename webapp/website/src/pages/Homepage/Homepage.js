@@ -205,7 +205,7 @@ class HomePage extends Component {
     }
   }
   changeViewMode(viewMode){
-  
+    console.log(viewMode)
     var {mapAction} = this.props;
     mapAction.setViewMode(viewMode);
 

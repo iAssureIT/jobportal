@@ -68,14 +68,17 @@ const jobsSchema = mongoose.Schema({
 	status			: 	String,
 	applicantStatistics :
 						{
+
 							male 		: Number,
 							female 		: Number,
 							other 		: Number,
+							district 	: Number,
 							state 		: Number,
 							country 	: Number,
 							exp0to2 	: Number,
 							exp2to6 	: Number,
-							exp6to10 	: Number
+							exp6to10 	: Number,
+							total 		: Number
 						},
 	createdAt 		: 	Date,
 	createdBy 		: 	String,
