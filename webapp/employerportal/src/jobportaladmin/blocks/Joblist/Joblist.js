@@ -314,7 +314,7 @@ deleteJob = (event)=>{
 																	<div className="col-lg-6 rightSideBox">
 																		<div className="joblistNoCount col-lg-12"> 
 																			&nbsp; <a href={"/applied-candidate-list/" + elem._id}> Candidates Applied : {	elem.applicantStatistics.total ? elem.applicantStatistics.total  :  0}</a> 
-																		</div>
+																		</div> 
 																		<div className="tierOneRow col-lg-12 "> 
 																			<div className="col-lg-4 react1 row">Pune<br /><span className="multiCount">{elem.applicantStatistics.district}</span></div>
 																			<div className="col-lg-4 react2 row">Rest of Maharashtra<br /><span className="multiCount">{elem.applicantStatistics.state ? ( elem.applicantStatistics.state - elem.applicantStatistics.district ) : 0 } </span></div>
