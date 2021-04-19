@@ -316,9 +316,9 @@ deleteJob = (event)=>{
 																			&nbsp; <a href={"/applied-candidate-list/" + elem._id}> Candidates Applied : {	elem.applicantStatistics.total ? elem.applicantStatistics.total  :  0}</a> 
 																		</div> 
 																		<div className="tierOneRow col-lg-12 "> 
-																			<div className="col-lg-4 react1 row">Pune<br /><span className="multiCount">{elem.applicantStatistics.district}</span></div>
-																			<div className="col-lg-4 react2 row">Rest of Maharashtra<br /><span className="multiCount">{elem.applicantStatistics.state ? ( elem.applicantStatistics.state - elem.applicantStatistics.district ) : 0 } </span></div>
-																			<div className="col-lg-4 react3 row">Rest of India<br /><span className="multiCount">{elem.applicantStatistics.country ? ( elem.applicantStatistics.country - elem.applicantStatistics.state ) : 0}</span></div> 
+																			<div className="col-lg-4 react1 row">{elem.location.district}<br /><span className="multiCount">{elem.applicantStatistics.district}</span></div>
+																			<div className="col-lg-4 react2 row">Rest of {elem.location.state}<br /><span className="multiCount">{elem.applicantStatistics.state ? ( elem.applicantStatistics.state - elem.applicantStatistics.district ) : 0 } </span></div>
+																			<div className="col-lg-4 react3 row">Rest of {elem.location.country}<br /><span className="multiCount">{elem.applicantStatistics.country ? ( elem.applicantStatistics.country - elem.applicantStatistics.state ) : 0}</span></div> 
 																		</div>
 																		<div className="tierOneRow col-lg-12 "> 
 																			<div className="col-lg-4 react1 row">Male<br /><span className="multiCount"></span>{elem.applicantStatistics.male  ? elem.applicantStatistics.male : 0}</div>
@@ -328,7 +328,7 @@ deleteJob = (event)=>{
 																		<div className="tierOneRow col-lg-12 "> 
 																			<div className="col-lg-4 react1 row">Exp&nbsp;:&nbsp;0 To 2<br /><span className="multiCount">{elem.applicantStatistics.exp0to2  ? elem.applicantStatistics.exp0to2 : 0}</span></div>
 																			<div className="col-lg-4 react2 row">Exp&nbsp;:&nbsp;2 To 6<br /><span className="multiCount">{elem.applicantStatistics.exp2to6 ? elem.applicantStatistics.exp2to6 : 0}</span></div>
-																			<div className="col-lg-4 react3 row">Exp&nbsp;:&nbsp;6 To 7<br /><span className="multiCount">{elem.applicantStatistics.exp6to10 ? elem.applicantStatistics.exp6to10 : 0}</span></div> 
+																			<div className="col-lg-4 react3 row">Exp&nbsp;:&nbsp;6 To 10<br /><span className="multiCount">{elem.applicantStatistics.exp6to10 ? elem.applicantStatistics.exp6to10 : 0}</span></div> 
 																		</div> 
 																	</div>
 																</div>
