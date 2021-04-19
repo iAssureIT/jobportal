@@ -8,6 +8,8 @@ import './ForgotPassword.css';
 import { connect }        from 'react-redux';
 import { bindActionCreators } from 'redux';
 import  * as mapActionCreator from '../common/actions/index';
+import PhoneInput from 'react-phone-input-2';
+
 
 class ForgotPassword extends Component {
     constructor(props) {
@@ -29,16 +31,20 @@ class ForgotPassword extends Component {
       // var tempEmail = this.state.loginusername.trim(); // value of field with whitespace trimmed off
        var emailFilter = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
        var tempEmail = this.state.emailAddress; 
+
        var illegalChars = /[\(\)\<\>\,\;\:\\\"\[\]]/;
        //var phoneno = /^\d{10}$/;
 
-     if(this.state.emailAddress == "NULL"){
+     if(tempEmail <= 0){
       document.getElementById("emailAddressError").innerHTML=  
       "Please enter your Email";  
       status=false; 
-        }else if (
+
+        }
+       if (
           !emailFilter.test(tempEmail)) { //test email for illegal characters
               document.getElementById('emailAddressError').innerHTML = "Please enter a valid email address.";
+            status=false;
           } else{
           document.getElementById("emailAddressError").innerHTML=
           ""; 
@@ -144,6 +150,19 @@ class ForgotPassword extends Component {
 
     }
 
+    changeMobile(event) {
+    this.setState({
+      mobileNumber: event
+    }, () => {
+      if (this.state.mobileNumber) {
+        this.setState({
+      mobileNumberAvailable: this.state.mobileNumber === "+" || this.state.mobileNumber.length<15 ? true : false
+        },()=>{
+        })
+      }
+    })
+  }
+
     ShowLogin(event){
         event.preventDefault();
         var {mapAction} = this.props;
@@ -182,12 +201,33 @@ class ForgotPassword extends Component {
                     <div className="forgotPasswordTitle col-lg-12">Forgot Password ?
                     </div>
 
-                    <hr className="forgotPasswordHr"/>
+                    
+                      <div className="col-lg-10 col-lg-offset-1 form-group" >
+                    
+                           <PhoneInput
+                                    country={'in'}
+                                    value={this.state.mobileNumber}
+                                    name="companyPhone"
+                                    inputProps={{
+                                      name: 'mobileNumber',
+                                      required: true
+                                    }}
+                                    onChange={this.changeMobile.bind(this)}
+                                  />
+                           
+                          <span id="mobileNumberError" className="errorMsg"></span>
+                      </div>
+                  
+                      <div className="col-lg-10 col-lg-offset-1 orLine">
 
-                    <div className="forgotPasswordSentence col-lg-10 col-lg-offset-1">
+                          <hr className="forgotPasswordHr"/>
+                          <div className="orCircle"> Or </div>
+                          <hr className="forgotPasswordHr"/>
+                      </div>
+                  {/* <div className="forgotPasswordSentence col-lg-10 col-lg-offset-1">
                         Please enter your registered email address below to receive OTP
                     </div>
-
+*/}
                     <div className="col-lg-10 col-lg-offset-1 form-group" >
                         <div className="input-group">
                             <span className="input-group-addon forgotPasswordInputIcon1"><i className="fa fa-envelope"></i></span>

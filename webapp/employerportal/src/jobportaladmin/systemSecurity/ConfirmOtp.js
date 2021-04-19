@@ -35,6 +35,12 @@ class ConfirmOtp extends Component {
     })
 
   }
+
+ movetoNext(current, nextFieldID) {
+if (current.value.length >= current.maxLength) {
+document.getElementById(nextFieldID).focus();
+}
+}
   
   handleChange(event){
       var fieldValue=event.currentTarget.value;
