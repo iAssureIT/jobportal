@@ -227,6 +227,7 @@ class Certification extends Component{
 				 		grade                      :editData.certifications[0].gradePercent,
 				 		buttonText                 :"Update"
 				 	})
+				 	this.getData();
 				 	
 				 })
 				 .catch(error=>{
@@ -250,7 +251,6 @@ class Certification extends Component{
 	
 	  }).then((result) =>{
 		if(result.value){
-			console.log(data_id)
 			if(data_id){
 					Axios.delete("/api/candidatemaster/deleteCertification/"+this.state.candidate_id+"/delete/"+data_id)
 					.then(response =>{
@@ -307,7 +307,6 @@ class Certification extends Component{
 		this.setState({
 			certificationToggel:!this.state.certificationToggel
 		})
-		console.log("certificationToggel",this.state.certificationToggel);
 	}
 	starClick(event){
 		event.preventDefault();
@@ -354,8 +353,6 @@ class Certification extends Component{
 							}
 							this.insetData(formValues,event);
 			}
-			console.log(formValues);
-			
 
 		}else{
 			event.preventDefault();
@@ -371,7 +368,7 @@ class Certification extends Component{
 					                
 					                	
 							}	
-							console.log(formValues);
+				
 		 if(this.props.match.params.certificationID )
 				 {
 				 	this.updateData(formValues);
@@ -383,7 +380,6 @@ class Certification extends Component{
 	this.getData();	
 	}
 	updateData(formValues){
-		console.log("formValuesformValues",formValues)
 		var status =  this.validateForm();
 		if(status==true){
 				Axios.patch("/api/candidatemaster/patch/updateOneCandidateCertification",formValues)
@@ -398,7 +394,10 @@ class Certification extends Component{
 													grade   		   : "",
 													buttonText         : "Save"
 												})
+										this.getData();
+
 							this.props.history.push("/certification/"+this.state.candidate_id);
+							window.location.reload(false);
 					})
 					.catch(error =>{
 						Swal.fire("Submit Error!",error.message,'error');
@@ -441,7 +440,6 @@ class Certification extends Component{
 										grade   		   : "",
 										buttonText         : "Save"
 									})
-				console.log("formWrapper",formValues);
 				})
 				.catch(error =>{
 					Swal.fire("Submit Error!",error.message,'error');

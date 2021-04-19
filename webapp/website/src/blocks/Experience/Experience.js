@@ -92,7 +92,6 @@ class Experience extends Component{
         }else{industry_id = "" }
 
         this.setState({industry_id :industry_id },()=>{
-            console.log(this.state)
         });  
     }	
     
@@ -107,11 +106,10 @@ class Experience extends Component{
 
          
         var selectedCompany = this.state.companylist.filter((val)=>{
-        	if (val._id ==company_id) {
+        	if (val._id ===company_id) {
         		return val;
         	}
         })
-        console.log(selectedCompany)
         if (selectedCompany[0]) {
         	var city = _.uniq(selectedCompany[0].locations, 'district')
         
@@ -125,7 +123,6 @@ class Experience extends Component{
     }	
 	//========== User Define Function Start ================
 	edit(){
-		var candidate_id = this.state.candidate_id;
 		var workExperienceID   = this.state.workExperienceID;
 		if (workExperienceID) {
 			var idDate ={
@@ -233,7 +230,7 @@ class Experience extends Component{
 	handleSave(event){
 		event.preventDefault();
 		var status =  this.validateForm();
-		if(status==true){
+		if(status===true){
 		var formValues = {
 								candidate_id       	: this.state.candidate_id,
 								experienceID       	: this.state.workExperienceID,
@@ -272,7 +269,7 @@ class Experience extends Component{
 	}
 	updateData(formValues,event){
 		var status =  this.validateForm();
-		if(status==true){
+		if(status===true){
 			Axios.patch("/api/candidatemaster/patch/updateOneCandidateExperience",formValues)
 				 .then(response=>{
 				 	this.getData();
@@ -301,6 +298,7 @@ class Experience extends Component{
 									totalExperience	    		  : "",
 									buttonText                    : "Save"
 								})
+						window.location.reload(false);
 					this.props.history.push("/experience/"+this.state.candidate_id);
 				})
 				.catch(error =>{
@@ -312,7 +310,7 @@ class Experience extends Component{
 		}
 	insetData(formValues,event){
 		var status =  this.validateForm();
-		if(status==true){
+		if(status===true){
 			Axios.patch("/api/candidatemaster/patch/addCandidateExperience",formValues)
 			 .then(response=>{
 			 	this.getData();
@@ -385,14 +383,13 @@ class Experience extends Component{
 	}
 	calExperience(value){
 		
-		var toDate 		= this.state.toDate == "" ?  Moment(new Date()) : Moment(this.state.toDate);
-		var fromDate 	= this.state.fromDate == "" ?  Moment(new Date()) : Moment(this.state.fromDate);
+		var toDate 		= this.state.toDate === "" ?  Moment(new Date()) : Moment(this.state.toDate);
+		var fromDate 	= this.state.fromDate === "" ?  Moment(new Date()) : Moment(this.state.fromDate);
 		
 
 		var exp     = Moment.duration(toDate.diff(fromDate));
 		var Years   = exp.years();
 		var Months  = exp.months();
-		var weeks   = exp.weeks();
 		
 
 		this.setState({
@@ -411,7 +408,6 @@ class Experience extends Component{
 			
 	}
 	handleChangeState(event) {
-		const target = event.target;
 	    var state = document.getElementById("states");
     	var stateCode = state.options[state.selectedIndex].getAttribute("statecode");
 		this.setState({
@@ -423,9 +419,7 @@ class Experience extends Component{
 		event.preventDefault();
 		// this.setState({ currentlyWorkingHere : " !this.state.currentlyWorkingHere" })
 		var id  = event.currentTarget.id;
-		var currentlyWorkingHere = this.state.currentlyWorkingHere
-		if (id=="Yes") {
-			console.log(Moment(new Date()).format("YYYY-MM"))
+		if (id==="Yes") {
 			this.setState({ 
 				toDate : Moment(new Date()).format("YYYY-MM"),
 				currentlyWorkingHere: "Yes"
@@ -989,7 +983,7 @@ class Experience extends Component{
 								this.state.experienceArry.length > 0
 								?
 								this.state.experienceArry.map((elem,index)=>{
-									console.log(elem)
+									
 									return(
 										<div className="col-lg-4 AddressOuterWrapper"  key={index}>
 											<div className="col-lg-12 addWrapper">

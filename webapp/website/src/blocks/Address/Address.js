@@ -49,7 +49,6 @@ class Address extends Component{
 		Axios.get("/api/addresstypemaster/get/list")
 			.then(response => {
 				this.setState({inputAddressType : response.data});
-				console.log(response.data);
 			})
 			.catch(error=>{
 				Swal.fire("Error while getting List data",error.message,'error');
@@ -76,7 +75,6 @@ class Address extends Component{
 			 		//addressTypeArry: response.data.addressType
 
 				 })
-			 	console.log(response.data);
 			 })
 			 .catch(error=>{
 			 	Swal.fire("Submit Error!",error.message,'error');
@@ -136,7 +134,7 @@ class Address extends Component{
 		}
 	}
 	deleteDate(event){
-		event.preventDefault();
+
 		var data_id =  event.currentTarget.id;
 
 		Swal.fire({
@@ -154,11 +152,13 @@ class Address extends Component{
 				Axios.delete("/api/candidatemaster/deleteAddress/"+this.state.candidate_id+"/delete/"+data_id)
 				.then(response =>{
 						if(response.data.deleted===true){
+
 						Swal.fire(
 									'Deleted!',
 									'Address details has been deleted successfully!',
 									'success'
 							);
+						this.getData();
 					}
 			})
 				.catch(error=>{
@@ -218,8 +218,7 @@ class Address extends Component{
         							countryCode   : this.state.countryCode
 								}
 				
-							}
-		//console.log(formValues)					
+							}					
 		if(this.props.match.params.addressID){
 			this.updateData(formValues);
 		}else{
@@ -228,9 +227,9 @@ class Address extends Component{
 		this.getData();
 	}
 	updateData(formValues){
-
 		var status =  this.validateForm();
 		if(status==true){
+			
 				 Axios.patch("/api/candidatemaster/patch/updateOneCandidateAddress",formValues)
 				 .then(response=>{
 
@@ -248,9 +247,12 @@ class Address extends Component{
 														pincode            : "",
 														buttonText         : "Save",
 													})	
+										this.getData();	
 									
-							this.props.history.push("/address/"+this.state.candidate_id);
-							this.getData();	
+							   this.props.history.push("/address/"+this.state.candidate_id);
+							   window.location.reload(false);
+							   
+							
 					})
 					.catch(error =>{
 						Swal.fire("Submit Error!",error.message,'error');

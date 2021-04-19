@@ -149,7 +149,6 @@ class Academics extends Component{
 			Axios.post("/api/candidatemaster/post/getOneCandidateAcademics",idData)
 			.then(response=>{
 				var editData =response.data;
-				console.log(response.data)
 				
 			 	this.setState({
 			 		qualificationlevel_id  	: editData.academics[0].qualificationlevel_id,
@@ -203,6 +202,7 @@ class Academics extends Component{
 									'Academics details has been deleted successfully!',
 									'success'
 							);
+						this.getData();
 					}
 			})
 				.catch(error=>{
@@ -338,7 +338,7 @@ class Academics extends Component{
 	handleSave(event){
 		event.preventDefault();
 		var status =  this.validateForm();
-		if(status==true){
+		if(status===true){
 			var formValues = {
 								candidate_id   : this.state.candidate_id,
 								academicsID   : this.state.academicsID,
@@ -364,10 +364,9 @@ class Academics extends Component{
 									admisionYear         : this.state.admisionYear
 								}
 							}
-			}
-		console.log(formValues)						
+			}					
 		if(this.props.match.params.academicsID){
-			//this.updateData(formValues,event);
+			this.updateData(formValues,event);
 		}else{
 			this.insetData(formValues,event);
 		}
@@ -375,7 +374,7 @@ class Academics extends Component{
 	}
 	updateData(formValues,event){
 		var status =  this.validateForm();
-		if(status==true){
+		if(status===true){
 			Axios.patch("/api/candidatemaster/patch/updateOneCandidateAcademics",formValues)
 				 .then(response=>{
 							Swal.fire("Congrats","Your Academics details update Successfully","success");
@@ -396,6 +395,7 @@ class Academics extends Component{
 												buttonText         : "Save"
 										})
 							this.props.history.push("/academics/"+this.state.candidate_id);
+							window.location.reload(false);
 					})
 					.catch(error =>{
 						Swal.fire("Submit Error!",error.message,'error');
@@ -406,7 +406,7 @@ class Academics extends Component{
 		}
 	insetData(formValues,event){
 		var status =  this.validateForm();
-		if(status==true){
+		if(status===true){
 				Axios.patch("/api/candidatemaster/patch/addCandidateAcademics",formValues)
 			 .then(response=>{
 						

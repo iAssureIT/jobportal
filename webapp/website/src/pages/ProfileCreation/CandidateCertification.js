@@ -10,7 +10,7 @@ class CandidateCertification extends Component{
 		return(
 				<div className="mainPagesWrapper col-lg-12">
 					<div className="row">
-						<ProgressBar width="75" left="73" img="37" location={window.location.pathname} />
+						<ProgressBar width="75" left="73" img="37" />
 					</div>
 					<div className="basicInfoWrapper row">
 						<div className=" col-lg-8 col-lg-offset-2 BasicInfoBlock">

@@ -9,7 +9,7 @@ class CandidateExperience extends Component{
 		return(
 				<div className="mainPagesWrapper col-lg-12">
 					<div className="row">
-						<ProgressBar width="100" left="98" img="38" location={window.location.pathname} />
+						<ProgressBar width="100" left="98" img="38"  />
 					</div>
 					<div className="basicInfoWrapper row">
 						<div className=" col-lg-8 col-lg-offset-2 BasicInfoBlock">

@@ -24,7 +24,6 @@ class MiddelContent extends Component{
 	
 	Axios.get("/api/candidatemaster/get/one/"+this.state.candidate_id)
 	.then(response=>{
-			console.log(response.data)
 		 	this.setState({
 		 		workExperienceArry:response.data.workExperience,
 		 		basicInfoArry     :response.data.basicInfo,
@@ -33,7 +32,7 @@ class MiddelContent extends Component{
 				DegreeArray       :response.data.academics,	
 				executiveSummary  :response.data.basicInfo.executiveSummary?response.data.basicInfo.executiveSummary:"",
 		 	})
-		 	console.log("basicInfoArry",this.state.basicInfoArry)
+		 	
 		 })
 		 .catch(error=>{
 		 	//Swal.fire("Submit Error!uuu",error.message,'error');

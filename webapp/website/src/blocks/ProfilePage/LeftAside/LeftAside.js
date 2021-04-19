@@ -36,7 +36,6 @@ class LeftAside extends Component{
 		
 		Axios.get("/api/candidatemaster/get/one/"+this.state.candidate_id)
 		.then(response=>{
-			 console.log(response.data);
 			 const primarySkills = [];
 			 const secondarySkills = [];
 			 	response.data.skills.map((skill, index)=>{

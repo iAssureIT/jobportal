@@ -50,8 +50,6 @@ class BasicInfoForm extends Component{
 			resumeUrl 				  : "",
 			resume 					  : [],
 			executiveSummary 		  : "",
-			fields: {},
-               errors: {}
 		}
 		
 	}
@@ -72,13 +70,11 @@ class BasicInfoForm extends Component{
 
 		Axios.get("/api/candidatemaster/get/one/"+this.state.candidate_id)
 		.then(response=>{
-			 console.log("response.data",response.data);
 
 			 	var languagesTags = [];
 			 	if (response.data.languagesKnown) {
 
 			 		response.data.languagesKnown.map((data,ind)=>{
-			 			console.log(data)
                     	languagesTags.push({ id : data.language_id._id, text : data.language_id.language })
                 	})
 			 	}
@@ -151,8 +147,7 @@ class BasicInfoForm extends Component{
           gotProfileImage:true
         })
         main().then(formValues => {
-         
-   		console.log(formValues)
+
           this.setState({
             profilePicture   : formValues[0].profilePicture,
             imageUploaded : false
@@ -241,8 +236,7 @@ class BasicInfoForm extends Component{
         if (event.currentTarget.files) {
 	        
 	        main().then(formValues => {
-	         
-	   		console.log(formValues)
+
 	          this.setState({
 	            resume   : formValues[0].resume,
 	          })
@@ -301,6 +295,7 @@ class BasicInfoForm extends Component{
 		})
 	}
 	delResumePreview(event){
+		
 		this.setState({
 			resumeUrl:""
 		})
@@ -420,7 +415,6 @@ class BasicInfoForm extends Component{
 								passport   		   : this.state.passport,
 								visa   		   	   : this.state.visa,
 							}
-							console.log(formValues);
 			if(status==true){
 			Axios.patch("/api/candidatemaster/patch/updateCandidateBasicInfo",formValues)
 			 .then(response=>{

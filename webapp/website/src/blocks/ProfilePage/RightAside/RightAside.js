@@ -18,7 +18,7 @@ class RightAside extends Component{
 
 		Axios.get("/api/candidatemaster/get/one/"+this.state.candidate_id)
 		.then(response=>{
-			 console.log(response.data)
+		
 			 	this.setState({
 			 		certificationArry :response.data.certifications,
 			 	})

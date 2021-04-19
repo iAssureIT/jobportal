@@ -15,8 +15,6 @@ class ProgressBar extends Component{
 	}
 
 	render(){
-		console.log(this.props.match)
-		console.log(this.state.location.pathname)
 		return(
 				<div className="progressBarWrapper col-lg-12">
 					<div className="row">
@@ -152,7 +150,7 @@ class ProgressBar extends Component{
 									<div className="progress-bar progress-bar-striped progressBarInner progress-bar-warning progress-bar-striped active" 
 									  role="progressbar" aria-valuenow="0" aria-valuemin="0" 
 									  aria-valuemax="100" style={{width:this.props.width+"%"}}>
-									    <img src={this.props.img?("/images/"+ this.props.img + ".png"):null}  style={{left:this.props.left+"%"}}/>
+									    <img src={this.props.img?("/images/"+ this.props.img + ".png"):null} alt={this.props.img?"progress":null} style={{left:this.props.left+"%"}}/>
 									</div>
 
 								</div>
