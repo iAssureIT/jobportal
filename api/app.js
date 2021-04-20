@@ -33,6 +33,7 @@ const globalMasterRoutes 				= require('./coreAdmin/globalMaster/RoutesGlobalMas
 const preferencesRoutes 				= require('./coreAdmin/preferences/RoutesPreferences.js');
 const locationTypeMasterRoutes		    = require("./coreAdmin/locationTypeMaster/RoutesLocationTypeMaster.js");
 
+const packageMaster 					= require("./coreAdmin/packageMaster/RoutesPackageMaster.js")
 const paymentgatewayRoutes 				= require('./coreAdmin/paymentgateway/Routes.js');
 const paymentTermsRoutes 				= require('./coreAdmin/PaymentTerms/PaymentTermsRoutes.js');
 //const personMasterRoutes				= require("./coreAdmin/personMaster/RoutesPersonMaster.js");
@@ -150,6 +151,8 @@ app.use("/api/entitymaster", entityRoutes);
 app.use("/api/countries", countryRoutes);
 app.use("/api/states", stateRoutes);
 app.use("/api/locationtypemaster", locationTypeMasterRoutes);
+app.use("/api/packagemaster", packageMaster);
+
 app.use("/api/paymentgateway", paymentgatewayRoutes);
 app.use("/api/paymentterms", paymentTermsRoutes);
 app.use("/api/timeformat", 					TimeFormatRoutes);

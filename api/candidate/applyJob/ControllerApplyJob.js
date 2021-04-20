@@ -9,7 +9,7 @@ exports.applyJob = (req,res,next)=>{
     console.log("body",req.body)
 
     var total       = req.body.total;
-
+    
     var male        = req.body.male;
     var female      = req.body.female;
     var other       = req.body.other;
@@ -77,14 +77,14 @@ exports.applyJob = (req,res,next)=>{
                                 break;
                             }
                         }
-                        console.log("male",male)
+                        /*console.log("male",male)
                         console.log("female",female)
                         console.log("other",other)
                         console.log("exp0to2",exp0to2)
                         console.log("exp2to6",exp2to6)
                         console.log("exp6to10",exp6to10)
                         console.log("state",state)
-                        console.log("country", country)
+                        console.log("country", country)*/
                         
                         Jobs.updateOne({ _id: req.body.job_id }, 
                         {

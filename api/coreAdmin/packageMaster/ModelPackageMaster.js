@@ -2,11 +2,16 @@ const mongoose = require('mongoose');
 
 const packageMasterSchema = mongoose.Schema({
 	_id			                : mongoose.Schema.Types.ObjectId,
-    packageTypeId               : { type: mongoose.Schema.Types.ObjectId, ref: 'packagetypemasters' },
+    //packageTypeId               : { type: mongoose.Schema.Types.ObjectId, ref: 'packagetypemasters' },
     packageName                 : String,
-    fixCharges                  : Number,
-    maxHours                    : Number,
-    maxKm                       : Number,
+    validity                    : String,
+    jobsPublish                 : Number,
+    resumeDownloads             : Number,
+    maxEmails                   : Number,
+    videoIntroduction           : Number,
+    robotInterviews             : Number,
+    currency                    : String,
+    price                       : Number,
     createdBy                   : { type: mongoose.Schema.Types.ObjectId, ref: 'users' },
     createdAt                   : Date,
     updateLog                   : [
