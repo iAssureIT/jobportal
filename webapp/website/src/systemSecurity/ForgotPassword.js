@@ -68,15 +68,15 @@ class ForgotPassword extends Component {
         console.log(status);
         if(status){
         
-        var email = this.refs.emailAddress.value;
+        var mobileNo = this.state.mobileNumber;
         var formValues = {
-            email : email,
+            mobileNo : mobileNo,
             //"emailSubject"	: "Email Verification", 
 			//"emailContent"  : "As part of our registration process, we screen every new profile to ensure its credibility by validating email provided by user. While screening the profile, we verify that details put in by user are correct and genuine.",
         }
             
             $('.fullpageloader').show();
-            axios.patch('/api/auth/patch/setotpusingEmail', formValues)
+            axios.patch('/api/auth/patch/setsendmobileotpusingMobile', formValues)
             .then((response)=>{
               
                 console.log('forgotpassword res===',response.data)
@@ -90,10 +90,10 @@ class ForgotPassword extends Component {
                         "OTP"     : response.data.OTP,
                       }
                     }
-                    axios.post('/api/masternotifications/post/sendNotification', sendData)
+                    /*axios.post('/api/masternotifications/post/sendNotification', sendData)
                     .then((notificationres) => {})
                     .catch((error) => { console.log('notification error: ', error) })
-
+                    */
                     localStorage.setItem('previousUrl' ,'forgotpassword');
                     $('.fullpageloader').hide();
                     swal("OTP send to your registered email ID.");

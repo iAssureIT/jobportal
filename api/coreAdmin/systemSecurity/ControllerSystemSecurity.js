@@ -1957,32 +1957,39 @@ exports.set_otp_usingEmail = (req, res, next) => {
 };
 
 exports.set_send_mobileotp_usingMobile = (req, res, next) => {
-	User.findOne({ "username": req.params.mobileNo })
+	User.findOne({ "username": req.body.mobileNo })
 	.then(user => {
 		if(user){
-			var otpMobile = getRandomInt(1000, 9999);
-			User.updateOne(
-			{ "username": req.params.mobileNo },
-			{
-				$set: {
-					"profile.otpMobile": otpMobile,
-				},
-			})
-			.exec()
-			.then(async(data) => {
-				// if (data.nModified === 1) {
-					
-					res.status(201).json({ message: "OTP_UPDATED", userID: user._id ,fullName:user.profile.fullName,otpMobile:otpMobile})
-				// } else {
-				// 	res.status(200).json({ message: "OTP_NOT_UPDATED" })
-				// }
-			})
-			.catch(err => {
-				res.status(500).json({
-					message: "Failed to update User",
-					error: err
+			if ((user.profile.status).toLowerCase() === "active" || (user.profile.status).toLowerCase() == "unverified") {
+ 				var otpMobile = 1234
+				//var otpMobile = getRandomInt(1000, 9999);
+				User.updateOne(
+				{ "username": req.body.mobileNo },
+				{
+					$set: {
+						"profile.otpMobile": otpMobile,
+					},
+				})
+				.exec()
+				.then(async(data) => {
+					// if (data.nModified === 1) {
+						
+						res.status(201).json({ message: "OTP_UPDATED", userID: user._id ,fullName:user.profile.fullName,otpMobile:otpMobile})
+					// } else {
+					// 	res.status(200).json({ message: "OTP_NOT_UPDATED" })
+					// }
+				})
+				.catch(err => {
+					res.status(500).json({
+						message: "Failed to update User",
+						error: err
+					});
 				});
-			});
+			}
+			else if ((user.profile.status).toLowerCase() == "blocked") {
+				console.log("user.USER_BLOCK IN ==>")
+				res.status(200).json({ message: "USER_BLOCK" });
+			} 
 		}else{
 			res.status(200).json({ message: "NOT_REGISTER" })
 		}

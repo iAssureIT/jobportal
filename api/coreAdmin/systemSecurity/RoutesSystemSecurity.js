@@ -27,7 +27,7 @@ router.post('/post/signup_user', UserController1.user_signup_user); //Working
 router.post('/checkmobileotp/usingID',UserController.check_userID_mobileOTP);//Working
 router.get('/get/checkmobileotpforsignup/usingID/:ID/:mobileotp',UserController.check_signup_userID_mobileOTP);//Working
 router.patch('/patch/setsendmobileotpusingID/:ID',UserController.set_send_mobileotp_usingID);//working
-router.patch('/patch/setsendmobileotpusingMobile/:mobileNo',UserController.set_send_mobileotp_usingMobile);//working
+router.patch('/patch/setsendmobileotpusingMobile',UserController.set_send_mobileotp_usingMobile);//working
 router.patch('/patch/logout/mobile',UserController.logout_mobile); //Working
 router.get('/get/checked_token/:token/:user_id',UserController.checked_token); //Working
 
