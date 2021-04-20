@@ -21,13 +21,13 @@
 }
 .banasKanthaText{
 	position: absolute;
-	top: 45%;
-	left:45%;
+	top: 35%;
+	left:25%;
 }
 .banasKanthaNumber{
 	position: absolute;
-	top: 55%;
-	left:40%;
+	top: 50%;
+	left:30%;
 }
 .patan{
 	position: absolute;
@@ -41,7 +41,7 @@
 }
 .patanNumber{
 	position: absolute;
-	top: 55%;
+	top: 60%;
 	left:40%;
 }
 .mahesana{
@@ -52,7 +52,7 @@
 .mahesanaText{
 	position: absolute;
 	top: 45%;
-	left:45%;
+	left:30%;
 }
 .mahesanaNumber{
 	position: absolute;
@@ -66,12 +66,12 @@
 }
 .sabarkanthaText{
 	position: absolute;
-	top: 45%;
-	left:45%;
+	top: 40%;
+	left:30%;
 }
 .sabarkanthaNumber{
 	position: absolute;
-	top: 55%;
+	top: 50%;
 	left:40%;
 }
 .arvalli{
@@ -97,7 +97,7 @@
 .gandhinagarText{
 	position: absolute;
 	top: 45%;
-	left:45%;
+	left:15%;
 }
 .gandhinagarNumber{
 	position: absolute;
@@ -112,7 +112,7 @@
 .ahmedabadText{
 	position: absolute;
 	top: 45%;
-	left:45%;
+	left:25%;
 }
 .ahmedabadNumber{
 	position: absolute;
@@ -127,7 +127,7 @@
 .surendraNagarText{
 	position: absolute;
 	top: 45%;
-	left:45%;
+	left:30%;
 }
 .surendraNagarNumber{
 	position: absolute;
@@ -157,7 +157,7 @@
 .jamnagarText{
 	position: absolute;
 	top: 45%;
-	left:45%;
+	left:30%;
 }
 .jamnagarNumber{
 	position: absolute;
@@ -172,11 +172,11 @@
 .devbhumiDwarkaText{
 	position: absolute;
 	top: 45%;
-	left:45%;
+	left:20%;
 }
 .devbhumiDwarkaNumber{
 	position: absolute;
-	top: 55%;
+	top: 60%;
 	left:40%;
 }
 .porbandar{
@@ -186,13 +186,13 @@
 }
 .porbandarText{
 	position: absolute;
-	top: 45%;
-	left:45%;
+	top: 35%;
+	left:35%;
 }
 .porbandarNumber{
 	position: absolute;
-	top: 55%;
-	left:40%;
+	top: 50%;
+	left:45%;
 }
 .rajkot{
 	position: absolute;
@@ -232,7 +232,7 @@
 .bhavnagarText{
 	position: absolute;
 	top: 45%;
-	left:45%;
+	left:30%;
 }
 .bhavnagarNumber{
 	position: absolute;
@@ -261,12 +261,12 @@
 }
 .junagadhText{
 	position: absolute;
-	top: 45%;
-	left:45%;
+	top: 35%;
+	left:35%;
 }
 .junagadhNumber{
 	position: absolute;
-	top: 55%;
+	top: 50%;
 	left:40%;
 }
 .girSomnath{
@@ -281,8 +281,8 @@
 }
 .girSomnathNumber{
 	position: absolute;
-	top: 55%;
-	left:40%;
+	top: 65%;
+	left:50%;
 }
 .mahisagar{
 	position: absolute;
@@ -296,8 +296,8 @@
 }
 .mahisagarNumber{
 	position: absolute;
-	top: 55%;
-	left:40%;
+	top: 35%;
+	left:35%;
 }
 .kheda{
 	position: absolute;
@@ -337,7 +337,7 @@
 .bharuchText{
 	position: absolute;
 	top: 45%;
-	left:45%;
+	left:30%;
 }
 .bharuchNumber{
 	position: absolute;
@@ -366,8 +366,8 @@
 }
 .panchMahalsText{
 	position: absolute;
-	top: 45%;
-	left:45%;
+	top: 40%;
+	left:10%;
 }
 .panchMahalsNumber{
 	position: absolute;
@@ -382,7 +382,7 @@
 .dahodText{
 	position: absolute;
 	top: 45%;
-	left:45%;
+	left:35%;
 }
 .dahodNumber{
 	position: absolute;
@@ -397,7 +397,7 @@
 .chhotaUdaipurText{
 	position: absolute;
 	top: 45%;
-	left:45%;
+	left:5%;
 }
 .chhotaUdaipurNumber{
 	position: absolute;
@@ -412,7 +412,7 @@
 .narmadaText{
 	position: absolute;
 	top: 45%;
-	left:45%;
+	left:30%;
 }
 .narmadaNumber{
 	position: absolute;
@@ -426,13 +426,13 @@
 }
 .suratText{
 	position: absolute;
-	top: 45%;
-	left:45%;
+	top: 30%;
+	left:30%;
 }
 .suratNumber{
 	position: absolute;
-	top: 55%;
-	left:40%;
+	top: 45%;
+	left:30%;
 }
 .tapi{
 	position: absolute;
@@ -442,12 +442,12 @@
 .tapiText{
 	position: absolute;
 	top: 45%;
-	left:45%;
+	left:20%;
 }
 .tapiNumber{
 	position: absolute;
 	top: 55%;
-	left:40%;
+	left:15%;
 }
 .theDangs{
 	position: absolute;
@@ -456,8 +456,8 @@
 }
 .theDangsText{
 	position: absolute;
-	top: 45%;
-	left:40%;
+	top: 35%;
+	left:15%;
 }
 .theDangsNumber{
 	position: absolute;
@@ -486,11 +486,11 @@
 }
 .valsadText{
 	position: absolute;
-	top: 45%;
+	top: 35%;
 	left:40%;
 }
 .valsadNumber{
 	position: absolute;
-	top: 55%;
+	top: 45%;
 	left:40%;
 }
