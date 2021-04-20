@@ -22,7 +22,7 @@ body{
 }
 
 .confirmOTPTitle{
-	height: 95px;
+	height: 140px;
 	color: #D3950A;
 	font-size:20px;
 	text-align: center;
@@ -55,6 +55,7 @@ body{
 
 .confirmOTPInputBox{
   width: 20%;
+  height: 35px;
   text-align:center;
   padding-left: 10px;
   border: 1px solid #D3950A !important;
@@ -205,15 +206,15 @@ body{
 }
 
 .input-group .form-control{
-	border-bottom-right-radius: 0px !important;
-    border-top-right-radius: 0px !important;
-    border-bottom-left-radius: 0px;
-    border-top-left-radius: 0px;
+	border-bottom-right-radius: 5px !important;
+    border-top-right-radius:  5px !important;
+    border-bottom-left-radius:  5px !important;
+    border-top-left-radius: 5px !important;
 }
 .otpBox{
-	width: 20%;
-	margin-left: 2.5%;
-	margin-right: 2.5%;
+	width: 15%;
+	margin-left: 5%;
+	margin-right: 5%;
 	float: left;
 
 }

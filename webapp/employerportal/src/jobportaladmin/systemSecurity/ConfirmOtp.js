@@ -213,19 +213,15 @@ document.getElementById(nextFieldID).focus();
               
                 <div className="confirmOTP col-lg-4 col-lg-offset-4">
                   <form>
-                    <div className="confirmOTPTitle col-lg-12">Confirm OTP
+                    <div className="confirmOTPTitle col-lg-12">Please enter OTP sent you on your Phone or Email
                     </div>
 
-                    <hr className="confirmOTPHr"/>
+                  
 
-                    <div className="confirmOTPSentence col-lg-12">
-                        Please enter OTP sent you on your email
+                   
+                    <div className="col-lg-8 col-lg-offset-2">
 
-                    </div>
-
-                    <div className="col-lg-10 col-lg-offset-1">
-
-                        <div className="otpBox form-group" >
+                        <div className="otpBox  form-group" >
                             <div className="input-group ">
                                
                                 <input type="text" id="otp1" maxlength="1" onkeyup="movetoNext(this, 'otp2')" name="otp" ref="emailotp1" placeholder="_" value={this.state.OTP} onChange={this.handleChange.bind(this)} className="form-control confirmOTPInputBox"/>
