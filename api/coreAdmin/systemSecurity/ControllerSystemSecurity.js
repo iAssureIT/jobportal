@@ -596,11 +596,11 @@ exports.check_userID_EmailOTP = (req, res, next) => {
 
 exports.check_userID_mobileOTP = (req, res, next) => {
 	console.log("user", req.body)
-	User.find({ _id: ObjectID(req.body.user_id), "profile.otpMobile": req.body.mobileotp })
+	User.findOne({ _id: ObjectID(req.body.user_id), "profile.otpMobile": req.body.mobileotp })
 		.exec()
 		.then(user => {
-			console.log("user", user)
-			if (user.length > 0) {
+			//console.log("user", user)
+			if (user) {
 				User.updateOne(
 					{ _id: ObjectID(req.body.user_id) },
 					{
@@ -613,7 +613,7 @@ exports.check_userID_mobileOTP = (req, res, next) => {
 					.exec()
 					.then(async(data) => {
 						
-						console.log("data", data)
+						//console.log("data", data)
 						if (data.nModified === 1) {
 							await removeTokens(req.body.user_id)
 							//res.status(200).json({ message: "SUCCESS", userID: data._id });
@@ -624,7 +624,7 @@ exports.check_userID_mobileOTP = (req, res, next) => {
 						}
 					})
 					.catch(err => {
-						console.log('user error ', err);
+						//console.log('user error ', err);
 						res.status(500).json({
 							message: "Failed to update Mobile OTP",
 							error: err
@@ -1032,7 +1032,7 @@ exports.user_login_using_mobile = (req, res, next) => {
 												if (updateUser.nModified == 1) {
 													
 														res.status(200).json({
-															message: 'Login Auth Successful',
+															/*message: 'Login Auth Successful',
 															token: token,
 															roles: user.roles,
 															ID: user._id,
@@ -1052,7 +1052,28 @@ exports.user_login_using_mobile = (req, res, next) => {
 																roles: user.roles,
 																token: token,
 															},
-															companyContacts : companyContacts 
+															companyContacts : companyContacts */
+
+															message: 'Login Auth Successful',
+															token: token,
+															roles: user.roles,
+															ID: user._id,
+															companyID: user.profile.companyID,
+															passwordreset: user.profile.passwordreset,
+															username : user.username,
+															userDetails: {
+																firstName: user.profile.firstname,
+																lastName: user.profile.lastname,
+																email: user.profile.email,
+																phone: user.profile.phone,
+																city: user.profile.city,
+																passwordreset: user.profile.passwordreset,
+																companyID: user.profile.companyID,
+																locationID: user.profile.locationID,
+																user_id: user._id,
+																roles: user.roles,
+																token: token,
+															}
 														});
 												
 												} else {

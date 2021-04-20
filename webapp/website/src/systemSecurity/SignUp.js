@@ -265,7 +265,7 @@ class SignUp extends Component {
               "toUser_id"  : response.data.ID, //To user_id(ref:users)
               "toUserRole"  : "candidate",
               "variables" : {
-                "UserName": this.state.firstName,
+                "UserName": this.state.firstName, 
                 "OTP"     : response.data.OTP,
               }
             }

@@ -115,7 +115,7 @@ class Login extends Component {
       if (status) {
       
         this.setState({ btnLoading: true });
-        axios.post('/api/auth/post/login', auth)
+        axios.post('/api/auth/post/login/mobile', auth)
           .then((response) => {
             //console.log("response login",response);
             if (response.data.ID) {
