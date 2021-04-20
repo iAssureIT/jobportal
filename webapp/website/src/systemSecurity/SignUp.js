@@ -259,7 +259,7 @@ class SignUp extends Component {
 
             var {mapAction} = this.props;
             mapAction.setUserID(response.data.ID);
-            mapAction.setSelectedModal("confirmotp");
+            mapAction.setSelectedModal("confirmotp"); 
             var sendData = {
               "event"     : "Event1", //Event Name
               "toUser_id"  : response.data.ID, //To user_id(ref:users)
