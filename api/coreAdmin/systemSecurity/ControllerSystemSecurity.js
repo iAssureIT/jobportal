@@ -328,8 +328,10 @@ exports.user_signup_user_otp = (req, res, next) => {
 															mobile       : req.body.mobNumber,
 															company_id   : ObjectID(req.body.company_id),
 															companyID    : req.body.companyID,
+															branch_id 	 : req.body.branch_id,	
+															branchCode 	 : req.body.branchCode,	
 															workLocation : req.body.workLocation,
-															passwordreset: false,
+															passwordreset: false, 
 															companyName  : req.body.companyName,
 															department	 : req.body.department,
 															designation	 : req.body.designation,
@@ -423,6 +425,7 @@ exports.user_signup_user_otp = (req, res, next) => {
 		}
 	}else if(username==="MOBILE"){
 		if(req.body.mobNumber && req.body.pwd && req.body.role) {
+			var emailId = req.body.email;
 			var mobNumber = req.body.mobNumber;
 			var userRole = (req.body.role).toLowerCase();
 			if (userRole && mobNumber) {
@@ -445,7 +448,8 @@ exports.user_signup_user_otp = (req, res, next) => {
 													error: err
 												});
 											} else {
-												var mobileOTP = getRandomInt(1000, 9999);
+												//var mobileOTP = getRandomInt(1000, 9999);
+												var mobileOTP = 1234;
 												if (mobileOTP) {
 													const user = new User({
 														_id: new mongoose.Types.ObjectId(),
@@ -459,18 +463,42 @@ exports.user_signup_user_otp = (req, res, next) => {
 														username: req.body.mobNumber,
 														profile:
 														{
-															firstname: req.body.firstname,
-															lastname: req.body.lastname,
-															fullName: req.body.firstname + ' ' + req.body.lastname,
-															email: req.body.email,
-															mobile: req.body.mobNumber,
-															companyID: req.body.companyID,
-															companyName: req.body.companyName,
-															createdAt: new Date(),
-															passwordreset: false,
-															otpMobile: mobileOTP,
-															status: req.body.status ? req.body.status : "Inactive",
-															createdBy: req.body.createdBy,
+															// firstname: req.body.firstname,
+															// lastname: req.body.lastname,
+															// fullName: req.body.firstname + ' ' + req.body.lastname,
+															// email: req.body.email,
+															// mobile: req.body.mobNumber,
+															// companyID: req.body.companyID,
+															// companyName: req.body.companyName,
+															// createdAt: new Date(),
+															// passwordreset: false,
+															// otpMobile: mobileOTP,
+															// status: req.body.status ? req.body.status : "Inactive",
+															// createdBy: req.body.createdBy,
+
+															firstname    : req.body.firstname,
+															lastname     : req.body.lastname,
+															fullName     : req.body.firstname + ' ' + req.body.lastname,
+															email        : emailId.toLowerCase(),
+															mobile       : req.body.mobNumber,
+															company_id   : ObjectID(req.body.company_id),
+															companyID    : req.body.companyID,
+															branch_id 	 : req.body.branch_id,	
+															branchCode 	 : req.body.branchCode,	
+															workLocation : req.body.workLocation,
+															passwordreset: false, 
+															companyName  : req.body.companyName,
+															department	 : req.body.department,
+															designation	 : req.body.designation,
+															city		 : req.body.city,
+															stateName	 : req.body.stateName,
+															stateCode 	 : req.body.stateCode,
+															country 	 : req.body.country,
+															countryCode  : req.body.countryCode,
+															otpMobile    : mobileOTP,
+															status       : req.body.status ? req.body.status : "blocked",
+															createdBy    : req.body.createdBy,
+															createdAt    : new Date(),
 														},
 														roles: [userRole]
 													});
@@ -567,24 +595,30 @@ exports.check_userID_EmailOTP = (req, res, next) => {
 };
 
 exports.check_userID_mobileOTP = (req, res, next) => {
-	User.find({ _id: ObjectID(req.params.ID), "profile.otpMobile": req.params.mobileotp })
+	console.log("user", req.body)
+	User.find({ _id: ObjectID(req.body.user_id), "profile.otpMobile": req.body.mobileotp })
 		.exec()
-		.then(data => {
-			if (data.length > 0) {
+		.then(user => {
+			console.log("user", user)
+			if (user.length > 0) {
 				User.updateOne(
-					{ _id: ObjectID(req.params.ID) },
+					{ _id: ObjectID(req.body.user_id) },
 					{
 						$set: {
 							"profile.otpMobile": 0,
-							"profile.status": data[0].profile.status
+							"profile.status": req.body.status
 						}
 					}
 				)
 					.exec()
 					.then(async(data) => {
+						
+						console.log("data", data)
 						if (data.nModified === 1) {
-							await removeTokens(req.params.ID)
-							res.status(200).json({ message: "SUCCESS", userID: data._id });
+							await removeTokens(req.body.user_id)
+							//res.status(200).json({ message: "SUCCESS", userID: data._id });
+
+							res.status(200).json({ message: "SUCCESS", userID: user._id, passwordreset : user.profile.passwordreset });
 						} else {
 							res.status(200).json({ message: "SUCCESS_OTP_NOT_RESET" });
 						}

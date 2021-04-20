@@ -147,7 +147,7 @@ class SignUp extends Component {
     }
     else{
       document.getElementById("lastNameError").innerHTML=  
-       " ."; 
+       ""; 
       status = true;
     }
 
@@ -187,7 +187,7 @@ class SignUp extends Component {
     }
     else{
       document.getElementById("passwordError").innerHTML=  
-      " ."; 
+      ""; 
       status = true;
     }
 
@@ -204,7 +204,7 @@ class SignUp extends Component {
     }
     else{
       document.getElementById("confirmPasswordError").innerHTML=  
-      " ."; 
+      ""; 
       status = true;
     }
 
@@ -233,7 +233,7 @@ class SignUp extends Component {
 
 	    if(status == true){
 			var auth = {
-				username 		: "EMAIL",
+				username 		: "MOBILE",
 				firstname		: this.state.firstName,
 				lastname		: this.state.lastName,
 				mobNumber		: (this.state.mobileNumber).replace("-", ""),
@@ -269,10 +269,10 @@ class SignUp extends Component {
                 "OTP"     : response.data.OTP,
               }
             }
-            axios.post('/api/masternotifications/post/sendNotification', sendData)
+            /*axios.post('/api/masternotifications/post/sendNotification', sendData)
               .then((notificationres) => {})
               .catch((error) => { console.log('notification error: ', error) })
-
+            */
 						//this.props.history.push("/confirm-otp/" + response.data.ID);
 					}else{
 						swal(response.data.message);

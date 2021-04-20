@@ -14,7 +14,8 @@ class ConfirmOtp extends Component {
     super(props);
     this.state = {
       showMessage: false,
-      user_id           :this.props.userDetails.user_id,
+      //user_id        :"607e7716e5a1da0fa91c6d48",
+      user_id        :this.props.userDetails.user_id,
       email          :this.props.userDetails.email
     }
   }
@@ -73,10 +74,15 @@ class ConfirmOtp extends Component {
     console.log("candidatemaster",candidatemaster)
     
       //====================================
+
       var checkData = { "user_id": this.state.user_id, 
-                        "emailotp"  : this.refs.emailotp1.value + this.refs.emailotp2.value + this.refs.emailotp3.value + this.refs.emailotp4.value, 
+                        "mobileotp"  : this.refs.emailotp1.value + this.refs.emailotp2.value + this.refs.emailotp3.value + this.refs.emailotp4.value, 
                         "status" : "active" }
-      axios.post('/api/auth/checkemailotp/usingID',checkData)
+      
+      console.log(checkData)  
+                      
+      // checkmobileotp/usingID 
+      axios.post('/api/auth/checkmobileotp/usingID',checkData)
         .then((response) => {
 
           if (response.data.message == 'SUCCESS') {
