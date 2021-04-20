@@ -417,6 +417,7 @@ removeApplication = (job_id, total, male, female, other, district, jobDistrict, 
 					        />
 					    </div>*/}
 
+
 						<div className="col-lg-12">
 					       	{
 								this.props.jobCount ? 
@@ -428,6 +429,7 @@ removeApplication = (job_id, total, male, female, other, district, jobDistrict, 
 					        
 							}
 					    </div>
+
 
 					</div>
 				</div>

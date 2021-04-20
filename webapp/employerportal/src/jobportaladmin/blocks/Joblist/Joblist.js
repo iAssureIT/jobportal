@@ -629,6 +629,7 @@ deleteJob = (event)=>{
 													</div>	
 												</div>
 											</div>
+
 										);
 									})
 								:
@@ -647,7 +648,23 @@ deleteJob = (event)=>{
 						    </div>
 						</div>
 					</div> 
-				</div>
+
+										</div>
+									);
+								})
+							:
+								<h3 style={{margin:"100px"}}>No Jobs Found</h3>
+						}
+					{/*<div className="col-lg-12">
+				        <Pagination
+				          activePage={this.state.activePage}
+				          itemsCountPerPage={5}
+				          totalItemsCount={this.props.jobCount[0] ? this.props.jobCount[0].jobCount : 0}
+				          pageRangeDisplayed={5}
+				          onChange={this.handlePageChange.bind(this)}
+				        />
+				    </div>	*/}
+			
 				
 			</section>
 		);
