@@ -444,13 +444,14 @@ class Academics extends Component{
 		//========== Validation Start ==================
 	validateForm=()=>{
 		var status = true;
+		var regName = /^[a-zA-Z]+$/;
 		if(this.state.qualificationLevel.length<=0){
 			document.getElementById("qualificationLevelError").innerHTML=  
 			"Please enter your qualification level";  
 			status=false; 
 		}else{
 			document.getElementById("qualificationLevelError").innerHTML=""; 
-			status = true;
+			
 		}
 
 		if(this.state.qualification.length<=0){
@@ -459,7 +460,7 @@ class Academics extends Component{
 			status=false; 
 		}else{
 			document.getElementById("qualificationError").innerHTML=""; 
-			status = true;
+			
 		}
 
 		
@@ -469,7 +470,7 @@ class Academics extends Component{
 			status=false; 
 		}else{
 			document.getElementById("modeError").innerHTML=""; 
-			status = true;
+			
 		}
 
 		if(this.state.admisionYear.length<=0){
@@ -478,7 +479,7 @@ class Academics extends Component{
 			status=false; 
 		}else{
 			document.getElementById("admisionYearError").innerHTML=""; 
-			status = true;
+			
 		}
 
 		if(this.state.passOutYear.length<=0){
@@ -487,8 +488,7 @@ class Academics extends Component{
 			status=false; 
 		}else{
 			document.getElementById("passOutYearError").innerHTML=  
-			""; 
-			status = true;
+			"";
 		}
 		if(this.state.university.length<=0){
 			document.getElementById("universityError").innerHTML=  
@@ -497,7 +497,6 @@ class Academics extends Component{
 		}else{
 			document.getElementById("universityError").innerHTML=  
 			""; 
-			status = true;
 		}
 		if(this.state.college.length<=0){
 			document.getElementById("collegeError").innerHTML=  
@@ -506,42 +505,38 @@ class Academics extends Component{
 		}else{
 			document.getElementById("collegeError").innerHTML=  
 			""; 
-			status = true;
 		}
-		if(this.state.city.length<=0){
-			document.getElementById("cityError").innerHTML=  
-			"Please enter your City";  
-			status=false; 
-		}else{
-			document.getElementById("cityError").innerHTML=  
-			""; 
-			status = true;
-		}
-		if(this.state.states.length<=0){
-			document.getElementById("stateError").innerHTML=  
-			"Please enter your State";  
-			status=false; 
-		}else{
-			document.getElementById("stateError").innerHTML=  
-			""; 
-			status = true;
-		}
-		if(this.state.country.length<=0){
-			document.getElementById("countryError").innerHTML=  
-			"Please enter your Country";  
-			status=false; 
-		}else{
-			document.getElementById("countryError").innerHTML=  
-			""; 
-			status = true;
-		}
+	
 		if(this.state.country.length<=0 && this.state.states.length<=0
 			&& this.state.city.length<=0 && this.state.college.length<=0 && this.state.university.length<=0
 			&& this.state.passOutYear.length<=0 && this.state.admisionYear.length<=0 &&  this.state.mode.length<=0
 			&& this.state.qualification.length<=0 && this.state.qualificationLevel.length<=0){
 			status=false; 
 		}
-	
+		if(typeof this.state.country !== "undefined"){
+           if(!this.state.country.match(regName)){
+              status = false;
+              document.getElementById("countryError").innerHTML = "Please enter a valid country name";
+           }else{
+           		document.getElementById("countryError").innerHTML = "";
+           }       
+        }
+        if(typeof this.state.states !== "undefined"){
+           if(!this.state.states.match(regName)){
+              status = false;
+              document.getElementById("stateError").innerHTML = "Please enter a valid state name";
+           }else{
+           		document.getElementById("stateError").innerHTML = "";
+           }       
+        }
+        if(typeof this.state.city !== "undefined"){
+           if(!this.state.city.match(regName)){
+              status = false;
+              document.getElementById("cityError").innerHTML = "Please enter a valid city name";
+           }else{
+           		document.getElementById("cityError").innerHTML = "";
+           }       
+        }
 		
 		 return status;
 	}
@@ -736,7 +731,7 @@ class Academics extends Component{
                                             />
                                             <div className={this.state.addressLine1 
                                             				? 
-                                            				"autocomplete-dropdown-container SearchListContainer inputSearch" 
+                                            				"autocomplete-dropdown-container SearchListContainer SearchListContainer2 inputSearch" 
                                             				: 
                                             				""}>
                                               {loading && <div>Loading...</div>}

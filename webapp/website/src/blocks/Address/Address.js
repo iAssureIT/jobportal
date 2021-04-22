@@ -381,6 +381,7 @@ class Address extends Component{
 	 validateForm=()=>{
 		var status = true;
 		var regPincode = /^[1-9][0-9]{5}$/;
+		var regName = /^[a-zA-Z]+$/;
 
 		if(this.state.addressType.length<=0){
 			document.getElementById("addressTypeError").innerHTML=  
@@ -406,42 +407,7 @@ class Address extends Component{
 			document.getElementById("areaError").innerHTML = ""; 
 			status = true;
 		}
-		if(this.state.city.length<=0){
-			document.getElementById("cityError").innerHTML=  
-			"Please enter your City";  
-			status=false; 
-		}else{
-			document.getElementById("cityError").innerHTML=  
-			""; 
-			status = true;
-		}
-		if(this.state.district.length<=0){
-			document.getElementById("districtError").innerHTML=  
-			"Please enter your District";  
-			status=false; 
-		}else{
-			document.getElementById("districtError").innerHTML=  
-			""; 
-			status = true;
-		}
-		if(this.state.states.length<=0){
-			document.getElementById("stateError").innerHTML=  
-			"Please enter your state";  
-			status=false; 
-		}else{
-			document.getElementById("stateError").innerHTML=  
-			""; 
-			status = true;
-		}
-		if(this.state.country.length<=0){
-			document.getElementById("countryError").innerHTML=  
-			"Please enter your Country";  
-			status=false; 
-		}else{
-			document.getElementById("countryError").innerHTML=  
-			""; 
-			status = true;
-		}
+		
 		if(this.state.pincode.length<=0){
 			document.getElementById("pincodeError").innerHTML=  
 			"Please enter your pincode";  
@@ -457,6 +423,38 @@ class Address extends Component{
 		    }
 			
 		}
+		if(typeof this.state.country !== "undefined"){
+           if(!this.state.country.match(regName)){
+              status = false;
+              document.getElementById("countryError").innerHTML = "Please enter a valid country name";
+           }else{
+           		document.getElementById("countryError").innerHTML = "";
+           }       
+        }
+        if(typeof this.state.states !== "undefined"){
+           if(!this.state.states.match(regName)){
+              status = false;
+              document.getElementById("statesError").innerHTML = "Please enter a valid state name";
+           }else{
+           		document.getElementById("statesError").innerHTML = "";
+           }       
+        }
+        if(typeof this.state.district !== "undefined"){
+           if(!this.state.district.match(regName)){
+              status = false;
+              document.getElementById("districtError").innerHTML = "Please enter a valid district name";
+           }else{
+           		document.getElementById("districtError").innerHTML = "";
+           }       
+        }
+        if(typeof this.state.city !== "undefined"){
+           if(!this.state.city.match(regName)){
+              status = false;
+              document.getElementById("cityError").innerHTML = "Please enter a valid city name";
+           }else{
+           		document.getElementById("cityError").innerHTML = "";
+           }       
+        }
 	
 		
 		return status;
@@ -541,41 +539,44 @@ class Address extends Component{
 	                                      	>
 	                                        {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
 	                                          <div>
-	                                            <input
-	                                              {...getInputProps({
-	                                                placeholder: 'Search Address ...',
-	                                                className: 'location-search-input form-control inputBox',
-	                                                id:"addressLine1",
-	                                                name:"addressLine1",
-	                                              })}
-	                                            />
-	                                            <div className={this.state.addressLine1 
-	                                            				? 
-	                                            				"autocomplete-dropdown-container SearchListContainer inputSearch" 
-	                                            				: 
-	                                            				""}>
-	                                              {loading && <div>Loading...</div>}
-	                                              {suggestions.map(suggestion => {
-	                                                const className = suggestion.active
-	                                                  ? 'suggestion-item--active'
-	                                                  : 'suggestion-item';
-	                                                // inline style for demonstration purpose
-	                                                const style = suggestion.active
-	                                                  ? { backgroundColor: '#f5a721', cursor: 'pointer' }
-	                                                  : { backgroundColor: '#242933', cursor: 'pointer'};
-	                                                return (
-	                                                  <div
-	                                                    {...getSuggestionItemProps(suggestion, {
-	                                                      className,
-	                                                      style,
-	                                                    })}
-	                                                  >
-	                                                    <span>{suggestion.description}</span>
-	                                                  </div>
-	                                                );
-	                                              })}
-	                                            </div>
-	                                          </div>
+		                                          <div>
+		                                            <input
+		                                              {...getInputProps({
+		                                                placeholder: 'Search Address ...',
+		                                                className: 'location-search-input form-control inputBox',
+		                                                id:"addressLine1",
+		                                                name:"addressLine1",
+		                                              })}
+		                                            />
+		                                            
+		                                          </div>
+		                                          <div className={this.state.addressLine1 
+		                                            				? 
+		                                            				"autocomplete-dropdown-container SearchListContainer SearchListContainer1 inputSearch" 
+		                                            				: 
+		                                            				""}>
+		                                              {loading && <div>Loading...</div>}
+		                                              {suggestions.map(suggestion => {
+		                                                const className = suggestion.active
+		                                                  ? 'suggestion-item--active'
+		                                                  : 'suggestion-item';
+		                                                // inline style for demonstration purpose
+		                                                const style = suggestion.active
+		                                                  ? { backgroundColor: '#f5a721', cursor: 'pointer' }
+		                                                  : { backgroundColor: '#242933', cursor: 'pointer'};
+		                                                return (
+		                                                  <div
+		                                                    {...getSuggestionItemProps(suggestion, {
+		                                                      className,
+		                                                      style,
+		                                                    })}
+		                                                  >
+		                                                    <span>{suggestion.description}</span>
+		                                                  </div>
+		                                                );
+		                                              })}
+		                                            </div>
+		                                        </div>
 	                                        )}
 	                                      </PlacesAutocomplete>
 									</div> 
@@ -660,7 +661,7 @@ class Address extends Component{
 										<input type="text" className="form-control inputBox" ref="states" id="states" name="states" value={this.state.states} onChange={this.handleChange.bind(this)}/>
 													
 									</div> 
-									<span id="stateError" className="errorMsg"></span>
+									<span id="statesError" className="errorMsg"></span>
 								</div>
 
 								<div className="col-lg-4">

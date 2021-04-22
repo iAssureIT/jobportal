@@ -305,9 +305,9 @@ class BasicInfoForm extends Component{
 		event.preventDefault();
 		var value = event.currentTarget.value;
 		var name  = event.currentTarget.name;
-		let fields = this.state.fields;
-            fields[value] = event.target.value;        
-            this.setState({fields});
+		// let fields = this.state.fields;
+  //           fields[value] = event.target.value;        
+  //           this.setState({fields});
 		
 		this.setState({
 			[name]:value,
@@ -465,54 +465,20 @@ class BasicInfoForm extends Component{
     	var illegalChars = /[\(\)\<\>\,\;\:\\\"\[\]]/;
     	var mobileFilter = /^(\+\d{1,3}[- ]?)?\d{12}$/gm;
 
-	    // if(this.state.firstName<=0)  {
-	    //   document.getElementById("firstNameError").innerHTML = "Please enter valid Name";  
-	    //   status=false; 
-	    // }
-	  
-	    // if(!regName.test(firstName)){
-	    //   document.getElementById("firstNameError").innerHTML = "Please enter valid name,......";  
-	    //   status=false; 
-	    // }
-	    // else{
-	    //   document.getElementById("firstNameError").innerHTML = ""
-	    //   status = true;
-	    // }
-
-	    // if(this.state.middleName<=0)  {
-	    //   document.getElementById("middleNameError").innerHTML = "Please enter valid Name";  
-	    //   status=false; 
-	    // }
-	  
-	    // if(!regName.test(middleName)){
-	    //   document.getElementById("middleNameError").innerHTML = "Please enter valid name,......";  
-	    //   status=false; 
-	    // }
-	    // else{
-	    //   document.getElementById("middleNameError").innerHTML=  ""
-	    //   status = true;
-	    // }
-
-	    // if(this.state.lastName<=0)  {
-	    //   document.getElementById("lastNameError").innerHTML = "Please enter valid Name";  
-	    //   status=false; 
-	    // }
-	  
-	    // if(!regName.test(lastName)){
-	    //   document.getElementById("lastNameError").innerHTML = "Please enter valid name,......";  
-	    //   status=false; 
-	    // }
-	    // else{
-	    //   document.getElementById("lastNameError").innerHTML = "";
-	    //   status = true;
-	    // }
 		
 		if(this.state.dob.length<=0){
 			document.getElementById("dobError").innerHTML = "Please enter your Date Of Birth";  
 			status=false; 
 		}else{
 			document.getElementById("dobError").innerHTML = ""; 
-			status = true;
+		
+		}
+		if(this.state.nationality.length<=0){
+			document.getElementById("nationalityError").innerHTML = "Please enter Nationality";  
+			status=false; 
+		}else{
+			document.getElementById("nationalityError").innerHTML = ""; 
+		
 		}
 		if(this.state.email.length<=0){
 			document.getElementById("emailError").innerHTML = "Please enter your Email";  
@@ -523,7 +489,7 @@ class BasicInfoForm extends Component{
 	        document.getElementById('emailError').innerHTML = "Email contains invalid characters.";
 	    }else{
 			document.getElementById("emailError").innerHTML = ""; 
-			status = true;
+			
 		}
 		if(this.state.mobile.length<=0){
 			document.getElementById("mobileError").innerHTML = "Please enter your mobile number";  
@@ -532,7 +498,6 @@ class BasicInfoForm extends Component{
 	        document.getElementById('mobileError').innerHTML = "Please enter a valid mobile number.";
 	    }else{
 			document.getElementById("mobileError").innerHTML = ""; 
-			status = true;
 		}
 
 		if(this.state.alternate.length>0){
@@ -541,7 +506,6 @@ class BasicInfoForm extends Component{
 	        	document.getElementById('alternateError').innerHTML = "Please enter a valid alternate mobile number.";
 		    }else{
 				document.getElementById("alternateError").innerHTML = ""; 
-				status = true;
 			}
 		}
 
@@ -551,41 +515,34 @@ class BasicInfoForm extends Component{
 		}
 		else{
 			document.getElementById("executiveSummaryError").innerHTML = ""; 
-			status = true;
 		}
-
-		 
-		 
-            
-            let formIsValid = true;
-       
       
-            if(typeof this.state.firstName !== "undefined"){
-               if(!this.state.firstName.match(regName)){
-                  formIsValid = false;
-                  document.getElementById("firstNameError").innerHTML = "Please enter a valid first name";
-               }else{
-               		document.getElementById("firstNameError").innerHTML = "";
-               }       
-            }
-            if(typeof this.state.middleName !== "undefined"){
-               if(!this.state.middleName.match(regName)){
-                  formIsValid = false;
-                  document.getElementById("middleNameError").innerHTML = "Please enter a valid middle name";
-               }else{
-               		document.getElementById("middleNameError").innerHTML = "";
-               }       
-            }
-            if(typeof this.state.lastName !== "undefined"){
-               if(!this.state.lastName.match(regName)){
-                  formIsValid = false;
-                  document.getElementById("lastNameError").innerHTML = "Please enter a valid last name";
-               }else{
-               		document.getElementById("lastNameError").innerHTML = "";
-               }       
-            }
+        if(typeof this.state.firstName !== "undefined"){
+           if(!this.state.firstName.match(regName)){
+              status = false;
+              document.getElementById("firstNameError").innerHTML = "Please enter a valid first name";
+           }else{
+           		document.getElementById("firstNameError").innerHTML = "";
+           }       
+        }
+        if(typeof this.state.middleName !== "undefined"){
+           if(!this.state.middleName.match(regName)){
+              status = false;
+              document.getElementById("middleNameError").innerHTML = "Please enter a valid middle name";
+           }else{
+           		document.getElementById("middleNameError").innerHTML = "";
+           }       
+        }
+        if(typeof this.state.lastName !== "undefined"){
+           if(!this.state.lastName.match(regName)){
+              status = false;
+              document.getElementById("lastNameError").innerHTML = "Please enter a valid last name";
+           }else{
+           		document.getElementById("lastNameError").innerHTML = "";
+           }       
+        }
+        
 
-           	return formIsValid;
             return status;
 	}
 
@@ -809,7 +766,9 @@ class BasicInfoForm extends Component{
 									  			null
 									  	}
 									</select>
+
 								</div>
+								<span id="nationalityError" className="errorMsg"></span>
 							</div>
 						</div>
 						<div className="row formWrapper">

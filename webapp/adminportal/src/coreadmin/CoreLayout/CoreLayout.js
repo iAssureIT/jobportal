@@ -57,7 +57,7 @@ import InvoicePageView from "../PaymentProcess/InvoicePageView.js";
 import PaymentResponse from "../PaymentProcess/PaymentResponse.js";
 
 // ============ Rate Master ===========================
-import PackageMaster from "../PackageMaster/PackageMaster.js";
+// import PackageMaster from "../PackageMaster/PackageMaster.js";
 
 // ============ Orgnizational Setting ===========================
 import OrgnizationalBasicInfo from "../OrganizationalSettings/OrganizationalBasicInfo.js";
@@ -124,15 +124,6 @@ class CoreLayout extends Component {
 
                 <Route path="/state-bulkupload" exact strict component={StateBulkUpload} />
                 
-                
-                <Route path="/package-master" exact strict component={PackageMaster} />
-                <Route path="/package-master/:packageID" exact strict component={PackageMaster} />
-                <Route path="/package-master/package-type" exact strict component={PackageMaster} />
-                <Route path="/package-master/package-type/:fieldID" exact strict component={PackageMaster} />
-                <Route path="/package-master/category" exact strict component={PackageMaster} />
-                <Route path="/package-master/category/:fieldID" exact strict component={PackageMaster} />
-                <Route path="/package-master/city-type" exact strict component={PackageMaster} />
-                <Route path="/package-master/city-type/:fieldID" exact strict component={PackageMaster} />
 
 
                 { /* Driver Master */}
