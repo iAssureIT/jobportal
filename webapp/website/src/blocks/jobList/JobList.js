@@ -338,7 +338,7 @@ removeApplication = (job_id, total, male, female, other, district, jobDistrict, 
 														</div>
 													</div>
 													<div className="jobListDesignation">
-														<a href={"/job-profile/"+elem._id} className="link">{elem.jobBasicInfo.jobTitle}</a>
+														<a href={"/job-profile/"+elem._id} className="link">{elem.jobBasicInfo.jobTitle + "("+elem.jobID +")"}</a>
 													</div>
 													<div className="jobListCompanyName">
 														<b>{elem.company_id ? elem.company_id.companyName : "Anonymous"}</b>
