@@ -628,6 +628,7 @@ deleteJob = (event)=>{
 						    </div>
 						</div>
 					</div>
+					
 					<div class="modal fade" id="delModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 					    <div class="modal-dialog delModalMain">
 					      <div class="modal-content delModalContent">
@@ -649,13 +650,7 @@ deleteJob = (event)=>{
 					      </div>
 					    </div>
 					</div> 
-
-										</div>
-									);
-								})
-							:
-								<h3 style={{margin:"100px"}}>No Jobs Found</h3>
-						}
+				</div>		
 					{/*<div className="col-lg-12">
 				        <Pagination
 				          activePage={this.state.activePage}
@@ -664,9 +659,7 @@ deleteJob = (event)=>{
 				          pageRangeDisplayed={5}
 				          onChange={this.handlePageChange.bind(this)}
 				        />
-				    </div>	*/}
-			
-				
+				    </div>	*/}	
 			</section>
 		);
 	}
