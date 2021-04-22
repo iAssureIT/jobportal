@@ -328,8 +328,10 @@ exports.user_signup_user_otp = (req, res, next) => {
 															mobile       : req.body.mobNumber,
 															company_id   : ObjectID(req.body.company_id),
 															companyID    : req.body.companyID,
+															branch_id 	 : req.body.branch_id,	
+															branchCode 	 : req.body.branchCode,	
 															workLocation : req.body.workLocation,
-															passwordreset: false,
+															passwordreset: false, 
 															companyName  : req.body.companyName,
 															department	 : req.body.department,
 															designation	 : req.body.designation,
@@ -423,6 +425,7 @@ exports.user_signup_user_otp = (req, res, next) => {
 		}
 	}else if(username==="MOBILE"){
 		if(req.body.mobNumber && req.body.pwd && req.body.role) {
+			var emailId = req.body.email;
 			var mobNumber = req.body.mobNumber;
 			var userRole = (req.body.role).toLowerCase();
 			if (userRole && mobNumber) {
@@ -445,7 +448,8 @@ exports.user_signup_user_otp = (req, res, next) => {
 													error: err
 												});
 											} else {
-												var mobileOTP = getRandomInt(1000, 9999);
+												//var mobileOTP = getRandomInt(1000, 9999);
+												var mobileOTP = 1234;
 												if (mobileOTP) {
 													const user = new User({
 														_id: new mongoose.Types.ObjectId(),
@@ -459,18 +463,42 @@ exports.user_signup_user_otp = (req, res, next) => {
 														username: req.body.mobNumber,
 														profile:
 														{
-															firstname: req.body.firstname,
-															lastname: req.body.lastname,
-															fullName: req.body.firstname + ' ' + req.body.lastname,
-															email: req.body.email,
-															mobile: req.body.mobNumber,
-															companyID: req.body.companyID,
-															companyName: req.body.companyName,
-															createdAt: new Date(),
-															passwordreset: false,
-															otpMobile: mobileOTP,
-															status: req.body.status ? req.body.status : "Inactive",
-															createdBy: req.body.createdBy,
+															// firstname: req.body.firstname,
+															// lastname: req.body.lastname,
+															// fullName: req.body.firstname + ' ' + req.body.lastname,
+															// email: req.body.email,
+															// mobile: req.body.mobNumber,
+															// companyID: req.body.companyID,
+															// companyName: req.body.companyName,
+															// createdAt: new Date(),
+															// passwordreset: false,
+															// otpMobile: mobileOTP,
+															// status: req.body.status ? req.body.status : "Inactive",
+															// createdBy: req.body.createdBy,
+
+															firstname    : req.body.firstname,
+															lastname     : req.body.lastname,
+															fullName     : req.body.firstname + ' ' + req.body.lastname,
+															email        : emailId.toLowerCase(),
+															mobile       : req.body.mobNumber,
+															company_id   : ObjectID(req.body.company_id),
+															companyID    : req.body.companyID,
+															branch_id 	 : req.body.branch_id,	
+															branchCode 	 : req.body.branchCode,	
+															workLocation : req.body.workLocation,
+															passwordreset: false, 
+															companyName  : req.body.companyName,
+															department	 : req.body.department,
+															designation	 : req.body.designation,
+															city		 : req.body.city,
+															stateName	 : req.body.stateName,
+															stateCode 	 : req.body.stateCode,
+															country 	 : req.body.country,
+															countryCode  : req.body.countryCode,
+															otpMobile    : mobileOTP,
+															status       : req.body.status ? req.body.status : "blocked",
+															createdBy    : req.body.createdBy,
+															createdAt    : new Date(),
 														},
 														roles: [userRole]
 													});
@@ -567,30 +595,36 @@ exports.check_userID_EmailOTP = (req, res, next) => {
 };
 
 exports.check_userID_mobileOTP = (req, res, next) => {
-	User.find({ _id: ObjectID(req.params.ID), "profile.otpMobile": req.params.mobileotp })
+	console.log("user", req.body)
+	User.findOne({ _id: ObjectID(req.body.user_id), "profile.otpMobile": req.body.mobileotp })
 		.exec()
-		.then(data => {
-			if (data.length > 0) {
+		.then(user => {
+			//console.log("user", user)
+			if (user) {
 				User.updateOne(
-					{ _id: ObjectID(req.params.ID) },
+					{ _id: ObjectID(req.body.user_id) },
 					{
 						$set: {
 							"profile.otpMobile": 0,
-							"profile.status": data[0].profile.status
+							"profile.status": req.body.status
 						}
 					}
 				)
 					.exec()
 					.then(async(data) => {
+						
+						//console.log("data", data)
 						if (data.nModified === 1) {
-							await removeTokens(req.params.ID)
-							res.status(200).json({ message: "SUCCESS", userID: data._id });
+							await removeTokens(req.body.user_id)
+							//res.status(200).json({ message: "SUCCESS", userID: data._id });
+
+							res.status(200).json({ message: "SUCCESS", userID: user._id, passwordreset : user.profile.passwordreset });
 						} else {
 							res.status(200).json({ message: "SUCCESS_OTP_NOT_RESET" });
 						}
 					})
 					.catch(err => {
-						console.log('user error ', err);
+						//console.log('user error ', err);
 						res.status(500).json({
 							message: "Failed to update Mobile OTP",
 							error: err
@@ -998,7 +1032,7 @@ exports.user_login_using_mobile = (req, res, next) => {
 												if (updateUser.nModified == 1) {
 													
 														res.status(200).json({
-															message: 'Login Auth Successful',
+															/*message: 'Login Auth Successful',
 															token: token,
 															roles: user.roles,
 															ID: user._id,
@@ -1018,7 +1052,28 @@ exports.user_login_using_mobile = (req, res, next) => {
 																roles: user.roles,
 																token: token,
 															},
-															companyContacts : companyContacts 
+															companyContacts : companyContacts */
+
+															message: 'Login Auth Successful',
+															token: token,
+															roles: user.roles,
+															ID: user._id,
+															companyID: user.profile.companyID,
+															passwordreset: user.profile.passwordreset,
+															username : user.username,
+															userDetails: {
+																firstName: user.profile.firstname,
+																lastName: user.profile.lastname,
+																email: user.profile.email,
+																phone: user.profile.phone,
+																city: user.profile.city,
+																passwordreset: user.profile.passwordreset,
+																companyID: user.profile.companyID,
+																locationID: user.profile.locationID,
+																user_id: user._id,
+																roles: user.roles,
+																token: token,
+															}
 														});
 												
 												} else {
@@ -1902,32 +1957,39 @@ exports.set_otp_usingEmail = (req, res, next) => {
 };
 
 exports.set_send_mobileotp_usingMobile = (req, res, next) => {
-	User.findOne({ "username": req.params.mobileNo })
+	User.findOne({ "username": req.body.mobileNo })
 	.then(user => {
 		if(user){
-			var otpMobile = getRandomInt(1000, 9999);
-			User.updateOne(
-			{ "username": req.params.mobileNo },
-			{
-				$set: {
-					"profile.otpMobile": otpMobile,
-				},
-			})
-			.exec()
-			.then(async(data) => {
-				// if (data.nModified === 1) {
-					
-					res.status(201).json({ message: "OTP_UPDATED", userID: user._id ,fullName:user.profile.fullName,otpMobile:otpMobile})
-				// } else {
-				// 	res.status(200).json({ message: "OTP_NOT_UPDATED" })
-				// }
-			})
-			.catch(err => {
-				res.status(500).json({
-					message: "Failed to update User",
-					error: err
+			if ((user.profile.status).toLowerCase() === "active" || (user.profile.status).toLowerCase() == "unverified") {
+ 				var otpMobile = 1234
+				//var otpMobile = getRandomInt(1000, 9999);
+				User.updateOne(
+				{ "username": req.body.mobileNo },
+				{
+					$set: {
+						"profile.otpMobile": otpMobile,
+					},
+				})
+				.exec()
+				.then(async(data) => {
+					// if (data.nModified === 1) {
+						
+						res.status(201).json({ message: "OTP_UPDATED", userID: user._id ,fullName:user.profile.fullName,otpMobile:otpMobile})
+					// } else {
+					// 	res.status(200).json({ message: "OTP_NOT_UPDATED" })
+					// }
+				})
+				.catch(err => {
+					res.status(500).json({
+						message: "Failed to update User",
+						error: err
+					});
 				});
-			});
+			}
+			else if ((user.profile.status).toLowerCase() == "blocked") {
+				console.log("user.USER_BLOCK IN ==>")
+				res.status(200).json({ message: "USER_BLOCK" });
+			} 
 		}else{
 			res.status(200).json({ message: "NOT_REGISTER" })
 		}

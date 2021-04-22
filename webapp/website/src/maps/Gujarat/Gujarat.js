@@ -97,14 +97,14 @@ class Gujarat extends Component{
 
 					<div className="ahmedabad classHover" onClick={e => this.onDistrictClick("Ahmedabad","GJ")}> 
 						<img src="/Maps/Gujarat/Ahmedabad.png"  alt="Ahmedabad" onMouseOver={e => (e.currentTarget.src = "/Maps/Gujarat/Ahmedabad_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Gujarat/Ahmedabad.png")}/>
-						<span className="fazilkaText mapTextLabel text-capitalize">Ahmedabad</span>
-						<span className="fazilkaNumber mapCountLabel text-center">{this.state.Ahmedabad ? this.state.Ahmedabad : 0}</span>
+						<span className="ahmedabadText mapTextLabel text-capitalize">Ahmedabad</span>
+						<span className="ahmedabadNumber mapCountLabel text-center">{this.state.Ahmedabad ? this.state.Ahmedabad : 0}</span>
 					</div>
 
 					<div className="surendraNagar classHover" onClick={e => this.onDistrictClick("Surendranagar","GJ")}> 
 						<img src="/Maps/Gujarat/Surendra_Nagar.png"  alt="Surendra_Nagar" onMouseOver={e => (e.currentTarget.src = "/Maps/Gujarat/Surendra_Nagar_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Gujarat/Surendra_Nagar.png")}/>
-						<span className="ahmedabadText mapTextLabel text-capitalize">Surendranagar</span>
-						<span className="ahmedabadNumber mapCountLabel text-center">{this.state.Surendranagar ? this.state.Surendranagar : 0}</span>
+						<span className="surendraNagarText mapTextLabel text-capitalize">Surendranagar</span>
+						<span className="surendraNagarNumber mapCountLabel text-center">{this.state.Surendranagar ? this.state.Surendranagar : 0}</span>
 					</div>
 
 					<div className="morbi classHover" onClick={e => this.onDistrictClick("Morbi","GJ")}> 
@@ -229,20 +229,20 @@ class Gujarat extends Component{
 
 					<div className="tapi classHover" onClick={e => this.onDistrictClick("Tapi","GJ")}> 
 						<img src="/Maps/Gujarat/Tapi.png"  alt="Tapi" onMouseOver={e => (e.currentTarget.src = "/Maps/Gujarat/Tapi_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Gujarat/Tapi.png")}/>
-						<span className="fazilkaText mapTextLabel text-capitalize">Tapi</span>
-						<span className="fazilkaNumber mapCountLabel text-center">{this.state.Tapi ? this.state.Tapi : 0}</span>
+						<span className="tapiText mapTextLabel text-capitalize">Tapi</span>
+						<span className="tapiNumber mapCountLabel text-center">{this.state.Tapi ? this.state.Tapi : 0}</span>
 					</div>
 
 					<div className="theDangs classHover" onClick={e => this.onDistrictClick("The_Dangs","GJ")}> 
 						<img src="/Maps/Gujarat/The_Dangs.png"  alt="The_Dangs" onMouseOver={e => (e.currentTarget.src = "/Maps/Gujarat/The-Dangs_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Gujarat/The_Dangs.png")}/>
-						<span className="tapiText mapTextLabel text-capitalize">The_Dangs</span>
-						<span className="tapiNumber mapCountLabel text-center">{this.state.The_Dangs ? this.state.The_Dangs : 0}</span>
+						<span className="theDangsText mapTextLabel text-capitalize">The_Dangs</span>
+						<span className="theDangsNumber mapCountLabel text-center">{this.state.The_Dangs ? this.state.The_Dangs : 0}</span>
 					</div>
 
 					<div className="navsari classHover" onClick={e => this.onDistrictClick("Navsari","GJ")}> 
 						<img src="/Maps/Gujarat/Navsari.png"  alt="Navsari" onMouseOver={e => (e.currentTarget.src = "/Maps/Gujarat/Navsari_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Gujarat/Navsari.png")}/>
 						<span className="navsariText mapTextLabel text-capitalize">Navsari</span>
-						<span className="navsariNumber mapCountLabel text-center">{this.state.Navsari ? this.state.Navsari : 0}}</span>
+						<span className="navsariNumber mapCountLabel text-center">{this.state.Navsari ? this.state.Navsari : 0}</span>
 					</div>
 
 					<div className="valsad classHover" onClick={e => this.onDistrictClick("Valsad","GJ")}> 

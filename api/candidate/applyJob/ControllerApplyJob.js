@@ -6,11 +6,14 @@ const CandidateProfile      = require('../profile/ModelCandidateProfile.js');
 const _ = require('underscore');   
 
 exports.applyJob = (req,res,next)=>{
-    console.log(req.body)
+    console.log("body",req.body)
 
+    var total       = req.body.total;
+    
     var male        = req.body.male;
     var female      = req.body.female;
     var other       = req.body.other;
+    var district    = req.body.district;
     var state       = req.body.state;
     var country     = req.body.country;
     var exp0to2     = req.body.exp0to2;
@@ -30,15 +33,15 @@ exports.applyJob = (req,res,next)=>{
         });
         applyjob.save()
 		.then(data =>{
-
+            total++;
             CandidateProfile.findOne({_id: req.body.candidate_id})
                     .exec()
                     .then(candidatedata=>{
-                        console.log(candidatedata)
+                        //console.log(candidatedata)
                         if (candidatedata.basicInfo.gender == "male") {
                             male++;
                         }
-                        if (candidatedata.basicInfo.gender == "female") {
+                        if (candidatedata.basicInfo.gender == "female"  ) {
                             female++;
                         }
                         if (candidatedata.basicInfo.gender == "other") {
@@ -53,36 +56,45 @@ exports.applyJob = (req,res,next)=>{
                         if (candidatedata.totalExperience >= 6 && candidatedata.totalExperience <= 10) {
                             exp6to10++;
                         }
-
                         for(var i = 0; i < candidatedata.address.length; i++){
-                            console.log("male",candidatedata.address[i].state)
+                            //console.log("male",candidatedata.address[i].state)
+                            if (req.body.jobDistrict == candidatedata.address[i].district ) {
+                                district++;
+                                break;
+                            }
+                        }
+                        for(var i = 0; i < candidatedata.address.length; i++){
+                            //console.log("male",candidatedata.address[i].state)
                             if (req.body.jobstateCode == candidatedata.address[i].stateCode ) {
                                 state++;
                                 break;
                             }
                         }
                         for(var i = 0; i < candidatedata.address.length; i++){
-                            console.log("male",candidatedata.address[i].state)
+                            //console.log("male",candidatedata.address[i].state)
                             if (req.body.jobcountryCode == candidatedata.address[i].countryCode ) {
                                 country++;
                                 break;
                             }
                         }
-                        console.log("male",male)
+                        /*console.log("male",male)
                         console.log("female",female)
                         console.log("other",other)
                         console.log("exp0to2",exp0to2)
                         console.log("exp2to6",exp2to6)
                         console.log("exp6to10",exp6to10)
                         console.log("state",state)
-                        console.log("country", country)
+                        console.log("country", country)*/
+                        
                         Jobs.updateOne({ _id: req.body.job_id }, 
                         {
                             $set: {
-                            "applicantStatistics":  {   
+                            "applicantStatistics":  {
+                                        "total"         : total,   
                                         "male"          : male,
                                         "female"        : female,
                                         "other"         : other,
+                                        "district"      : district,
                                         "state"         : state,
                                         "country"       : country,
                                         "exp0to2"       : exp0to2,
@@ -112,51 +124,59 @@ exports.removeApplication = (req,res,next)=>{
     var male        = req.body.male;
     var female      = req.body.female;
     var other       = req.body.other;
+    var district    = req.body.district;
     var state       = req.body.state;
     var country     = req.body.country;
     var exp0to2     = req.body.exp0to2;
     var exp2to6     = req.body.exp2to6;
     var exp6to10    = req.body.exp6to10;
+    var total       = req.body.total;
 
     ApplyJob.deleteOne({job_id : ObjectId(req.body.job_id) })
     .exec()
     .then(data=>{
         if (data.deletedCount == 1) {
-
-           CandidateProfile.findOne({_id: req.body.candidate_id})
+            total--;
+            CandidateProfile.findOne({_id: req.body.candidate_id})
             .exec()
             .then(candidatedata=>{
-                console.log(candidatedata)
+                //console.log(candidatedata)
 
-                if (candidatedata.basicInfo.gender == "male") {
+                if (candidatedata.basicInfo.gender == "male" && req.body.male != 0) {
                     male--;
                 }
-                if (candidatedata.basicInfo.gender == "female") {
+                if (candidatedata.basicInfo.gender == "female" && req.body.female != 0) {
                     female--;
                 }
-                if (candidatedata.basicInfo.gender == "other") {
+                if (candidatedata.basicInfo.gender == "other" && req.body.other != 0) {
                     other--;
                 }
-                if (candidatedata.totalExperience >= 0 && candidatedata.totalExperience <= 2) {
+                if (candidatedata.totalExperience >= 0 && candidatedata.totalExperience <= 2 && req.body.exp0to2 != 0) {
                     exp0to2--;
                 }
-                if (candidatedata.totalExperience >= 2 && candidatedata.totalExperience <= 6) {
+                if (candidatedata.totalExperience >= 2 && candidatedata.totalExperience <= 6 && req.body.exp2to6 != 0) {
                     exp2to6--;
                 }
-                if (candidatedata.totalExperience >= 6 && candidatedata.totalExperience <= 10) {
+                if (candidatedata.totalExperience >= 6 && candidatedata.totalExperience <= 10 && req.body.exp6to10 != 0) {
                     exp6to10--;
                 }
-
                 for(var i = 0; i < candidatedata.address.length; i++){
-                    console.log("male",candidatedata.address[i].state)
-                    if (req.body.jobstateCode == candidatedata.address[i].stateCode ) {
+                    //console.log("male",candidatedata.address[i].state)
+                    if (req.body.jobDistrict == candidatedata.address[i].district && req.body.district != 0) {
+                        district--;
+                        break;
+                    }
+                }
+                for(var i = 0; i < candidatedata.address.length; i++){
+                    //console.log("male",candidatedata.address[i].state)
+                    if (req.body.jobstateCode == candidatedata.address[i].stateCode && req.body.state != 0) {
                         state--;
                         break;
                     }
                 }
                 for(var i = 0; i < candidatedata.address.length; i++){
-                    console.log("male",candidatedata.address[i].state)
-                    if (req.body.jobcountryCode == candidatedata.address[i].countryCode ) {
+                    //console.log("male",candidatedata.address[i].state)
+                    if (req.body.jobcountryCode == candidatedata.address[i].countryCode && req.body.country != 0) {
                         country--;
                         break;
                     }
@@ -172,10 +192,12 @@ exports.removeApplication = (req,res,next)=>{
                 Jobs.updateOne({ _id: req.body.job_id }, 
                 {
                     $set: {
-                    "applicantStatistics":  {   
+                    "applicantStatistics":  { 
+                                "total"         : total,  
                                 "male"          : male,
                                 "female"        : female,
                                 "other"         : other,
+                                "district"      : district,
                                 "state"         : state,
                                 "country"       : country,
                                 "exp0to2"       : exp0to2,

@@ -273,6 +273,7 @@ class SignUp extends Component {
     event.preventDefault();
     var status =  this.validateForm();
     console.log('auth sign=======',this.state) 
+    
      if(status == true){
 
       var auth = {
@@ -289,7 +290,7 @@ class SignUp extends Component {
         role        : 'employer',
         status      : 'unverified',        
         city        : this.state.branch,
-        stateName   : this.state.StristateNameng,
+        stateName   : this.state.stateName,
         stateCode   : this.state.companyState,
         country     : this.state.companyCountry,
         countryCode : this.state.countryCode,
@@ -298,7 +299,7 @@ class SignUp extends Component {
       
       
     console.log('auth sign=======',auth) 
-
+    
       axios.post('/api/auth/post/signup/user/otp', auth)
         .then((response) => {
           if(response.data.message == 'USER_CREATED'){

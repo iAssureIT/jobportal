@@ -3,20 +3,24 @@ const PackageMaster     = require('./ModelPackageMaster.js');
 
 
 exports.insertPackage = (req,res,next)=>{
-    console.log('body', req.body);
+    
     const packageMaster = new PackageMaster({
                     _id                         : new mongoose.Types.ObjectId(),
-                    packageTypeId               : req.body.packageTypeId,
                     packageName                 : req.body.packageName,
-                    fixCharges                  : req.body.fixCharges, 
-                    maxHours                    : req.body.maxHours, 
-                    maxKm                       : req.body.maxKm,
+                    validity                    : req.body.validity,
+                    jobsPublish                 : req.body.jobsPublish,
+                    resumeDownloads             : req.body.resumeDownloads,
+                    maxEmails                   : req.body.maxEmails,
+                    videoIntroduction           : req.body.videoIntroduction,
+                    robotInterviews             : req.body.robotInterviews,
+                    currency                    : req.body.currency,
+                    price                       : req.body.price,
                     createdBy                   : req.body.createdBy,
                     createdAt                   : new Date()
                 })
                 packageMaster.save()
                 .then(data=>{
-                    res.status(200).json({ created : true, packageId : data._id });
+                    res.status(200).json({ created : true, package_id : data._id });
                 })
                 .catch(err =>{
                     res.status(500).json({ error: err }); 
@@ -34,16 +38,7 @@ exports.countPackages = (req, res, next)=>{
         }); 
 };
 exports.fetchPackages = (req, res, next)=>{
-    console.log()
-    PackageMaster.aggregate([{
-        $lookup:
-            {
-               from: "packagetypemasters",
-               localField: "packageTypeId",
-               foreignField: "_id",
-               as: "packageType"
-            }
-        },{ "$unwind": "$packageType" },{$addFields: { packageType : "$packageType.packageType"} }])
+    PackageMaster.find()
         .sort({createdAt : -1})
         .skip(req.body.startRange)
         .limit(req.body.limitRange)
@@ -68,7 +63,7 @@ exports.fetchListPackages = (req, res, next)=>{
         }); 
 };
 exports.fetchSinglePackage = (req, res, next)=>{
-    PackageMaster.findOne({ _id: req.params.packageID })
+    PackageMaster.findOne({ _id: req.params.package_id })
         .exec()
         .then(data=>{
             res.status(200).json( data);
@@ -80,13 +75,18 @@ exports.fetchSinglePackage = (req, res, next)=>{
 
 exports.updatePackage = (req, res, next)=>{
     PackageMaster.updateOne(
-            { _id:req.body.packageID},  
+            { _id:req.body.package_id},  
             {
-                $set:   {   'packageTypeId'               : req.body.packageTypeId,  
+                $set:   {   
                             'packageName'                 : req.body.packageName,
-                            'fixCharges'                  : req.body.fixCharges, 
-                            'maxHours'                    : req.body.maxHours, 
-                            'maxKm'                       : req.body.maxKm
+                            'validity'                    : req.body.validity,
+                            'jobsPublish'                 : req.body.jobsPublish,
+                            'resumeDownloads'             : req.body.resumeDownloads,
+                            'maxEmails'                   : req.body.maxEmails,
+                            'videoIntroduction'           : req.body.videoIntroduction,
+                            'robotInterviews'             : req.body.robotInterviews,
+                            'currency'                    : req.body.currency,
+                            'price'                       : req.body.price,
                         }
             }
         )
@@ -94,7 +94,7 @@ exports.updatePackage = (req, res, next)=>{
         .then(data=>{
             if(data.nModified == 1){
                 PackageMaster.updateOne(
-                { _id:req.body.packageID},
+                { _id:req.body.package_id},
                 {
                     $push:  { 'updateLog' : [{  updatedAt      : new Date(),
                                                 updatedBy      : req.body.updatedBy 
@@ -115,7 +115,7 @@ exports.updatePackage = (req, res, next)=>{
         });
 };
 exports.deletePackage = (req, res, next)=>{
-    PackageMaster.deleteOne({_id: req.params.packageID})
+    PackageMaster.deleteOne({_id: req.params.package_id})
         .exec()
         .then(data=>{
             if(data.deletedCount === 1){

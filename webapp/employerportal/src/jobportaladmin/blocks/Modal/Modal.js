@@ -8,7 +8,7 @@ import { bindActionCreators }   from 'redux';
 import  * as mapActionCreator   from '../../common/actions/index';
 import './Modal.css';
 
-export default class Modal extends Component{
+class Modal extends Component{
 
 constructor(props){
     super(props);
@@ -82,3 +82,8 @@ deleteJob = (event)=>{
             );
   }
 }
+
+const mapDispatchToProps = (dispatch) => ({
+  mapAction :  bindActionCreators(mapActionCreator, dispatch)
+})
+export default connect( mapDispatchToProps)(Modal)

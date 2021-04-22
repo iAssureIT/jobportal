@@ -11,10 +11,10 @@ router.get('/get/list', packageMaster.fetchListPackages);
 
 router.get('/get/count', packageMaster.countPackages);
 
-router.get('/get/one/:packageID', packageMaster.fetchSinglePackage);
+router.get('/get/one/:package_id', packageMaster.fetchSinglePackage);
 
 router.patch('/patch', packageMaster.updatePackage);
 
-router.delete('/delete/:packageID', packageMaster.deletePackage);
+router.delete('/delete/:package_id', packageMaster.deletePackage);
 
 module.exports = router;

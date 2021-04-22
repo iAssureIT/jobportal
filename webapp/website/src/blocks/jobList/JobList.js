@@ -118,8 +118,8 @@ search = (event)=>{
 	}
 }
 
-applyJob = (jobid, company_id, male, female, other, state, stateCode, country,countryCode, exp0to2, exp2to6, exp6to10 )=>{
-	console.log("jobid :", jobid);
+applyJob = (jobid, company_id, total,  male, female, other, district, jobDistrict, state, stateCode, country,countryCode, exp0to2, exp2to6, exp6to10 )=>{
+	console.log("jobid :", male, female, other);
 	
 	if (this.props.userDetails.loggedIn) {
 	var formValues = { 
@@ -127,9 +127,12 @@ applyJob = (jobid, company_id, male, female, other, state, stateCode, country,co
 						job_id         		: jobid,
 					    entity_id    		: company_id,
 					    status        	  	: "Applied",
+					    total 				: total,
 					    male 				: male,
 					    female 				: female,
 					    other				: other,
+					    district 			: district,
+					    jobDistrict 		: jobDistrict,
 					    state 				: state,
 					    jobstateCode 		: stateCode,
 					    country 			: country,
@@ -192,15 +195,19 @@ applyJob = (jobid, company_id, male, female, other, state, stateCode, country,co
 		document.getElementById("loginbtndiv").click();
 	}
 }
-removeApplication = (job_id, male, female, other, state, stateCode, country,countryCode, exp0to2, exp2to6, exp6to10) => {
-	console.log(job_id)
+removeApplication = (job_id, total, male, female, other, district, jobDistrict, state, stateCode, country,countryCode, exp0to2, exp2to6, exp6to10) => {
+	console.log("jobid :", male, female, other);
+	
 	if (this.props.userDetails.loggedIn) {
 		var formValues = { 
 			candidate_id   		: this.props.userDetails.candidate_id,
 			job_id         		: job_id,
+			total 				: total,
 			male 				: male,
 		    female 				: female,
 		    other				: other,
+		    district 			: district,
+			jobDistrict 		: jobDistrict,
 		    state 				: state,
 		    jobstateCode 		: stateCode,
 		    country 			: country,
@@ -234,7 +241,7 @@ removeApplication = (job_id, male, female, other, state, stateCode, country,coun
 					if(response.data.deleted){
 
 						Swal.fire(
-									'Applied!',
+									'Removed!',
 									'You have removed job application!',
 									'success'
 							);
@@ -256,7 +263,7 @@ removeApplication = (job_id, male, female, other, state, stateCode, country,coun
 }
 	
 	render(){
-		console.log(this.props.selector)
+		//console.log(this.props.selector)
 		return(
 			<section className="jobListWrapper">
 				<div className="col-lg-12 JobListWrapperMain">
@@ -271,7 +278,7 @@ removeApplication = (job_id, male, female, other, state, stateCode, country,coun
 							this.props.jobList 
 							?
 								this.props.jobList.map((elem,index)=>{
-									
+								//console.log("elem.applicantStatistics",elem.applicantStatistics)	
 								var x = this.props.jobWishlist && this.props.jobWishlist.length > 0 ?
 								this.props.jobWishlist[0].wishlistItems.filter((wishlistitem) => wishlistitem.job_id._id == elem._id) : [];
 				                
@@ -358,14 +365,16 @@ removeApplication = (job_id, male, female, other, state, stateCode, country,coun
 																<ul>
 																	<li><i title={appliedtooltipMsg} className={"fa fa-check-square" + appliedClass}  
 																	onClick={appliedClass == '-o' ? 
-																	applyJob => this.applyJob(elem._id, elem.company_id, elem.applicantStatistics.male, 
+																	applyJob => this.applyJob(elem._id, elem.company_id._id, elem.applicantStatistics.total, elem.applicantStatistics.male, 
 																								elem.applicantStatistics.female, elem.applicantStatistics.other, 
+																								elem.applicantStatistics.district, elem.location.district,
 																								elem.applicantStatistics.state, elem.location.stateCode,
 																								elem.applicantStatistics.country, elem.location.countryCode,
 																								elem.applicantStatistics.exp0to2,  elem.applicantStatistics.exp2to6, 
 																								elem.applicantStatistics.exp6to10) 
-																	: removeApplication => this.removeApplication(elem._id, elem.applicantStatistics.male, 
+																	: removeApplication => this.removeApplication(elem._id, elem.applicantStatistics.total, elem.applicantStatistics.male, 
 																								elem.applicantStatistics.female, elem.applicantStatistics.other, 
+																								elem.applicantStatistics.district, elem.location.district,
 																								elem.applicantStatistics.state, elem.location.stateCode,
 																								elem.applicantStatistics.country, elem.location.countryCode,
 																								elem.applicantStatistics.exp0to2,  elem.applicantStatistics.exp2to6, 
@@ -408,6 +417,7 @@ removeApplication = (job_id, male, female, other, state, stateCode, country,coun
 					        />
 					    </div>*/}
 
+
 						<div className="col-lg-12">
 					       	{
 								this.props.jobCount ? 
@@ -419,6 +429,7 @@ removeApplication = (job_id, male, female, other, state, stateCode, country,coun
 					        
 							}
 					    </div>
+
 
 					</div>
 				</div>
