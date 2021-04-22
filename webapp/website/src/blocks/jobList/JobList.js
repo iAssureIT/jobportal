@@ -1,14 +1,14 @@
-import React, {Component} from 'react';
-import Axios from  'axios';
-import Swal  from  'sweetalert2';
-import Moment 					from "moment";
-import "./JobList.css";
-import '../../App.css';
-import { connect }        from 'react-redux';
+import React, {Component} 	  from 'react';
+import Axios 			  	  from  'axios';
+import Swal  			  	  from  'sweetalert2';
+import Moment 				  from "moment";
+import { connect }        	  from 'react-redux';
 import { bindActionCreators } from 'redux';
 import  * as mapActionCreator from '../../common/actions/index';
-import UploadVideoModal from '../UploadVideoModal/UploadVideoModal.js';
+import UploadVideoModal 	  from '../UploadVideoModal/UploadVideoModal.js';
 /*import Pagination from "react-js-pagination";*/
+import "./JobList.css";
+import '../../App.css';
 require("bootstrap/less/bootstrap.less");
 
 /*import {
@@ -32,6 +32,7 @@ class Joblist extends Component{
 componentDidMount(){
 	 
 }
+
 showMore(){
 
 	var selector 		  	= this.props.selector;
@@ -45,6 +46,7 @@ showMore(){
   	var {mapAction} = this.props;
     mapAction.filterJobList(selector);
 }
+
 handlePageChange(pageNumber) {
 	//console.log(`active page is ${pageNumber}`);
 	this.setState({activePage: pageNumber});
@@ -61,7 +63,6 @@ handlePageChange(pageNumber) {
     mapAction.filterJobList(selector);
 
 }
-
 
 handleclick = (jobid)=>{
 	console.log("jobid : ", jobid);
@@ -81,17 +82,17 @@ handleclick = (jobid)=>{
 
 				console.log("wishlist response=", response.data);
 				if(response.data.message==="Job is removed from wishlist"){
-							Swal.fire(
+							/*Swal.fire(
 									'Removed!',
 									'Job is removed from wishlist',
 									'success'
-							);
+							);*/
 				}else{
-					Swal.fire(
+					/*Swal.fire(
 									'Added!',
 									'Job is added to wishlist',
 									'success'
-							);
+							);*/
 				}
 			})
 			.catch(error=>{
@@ -183,11 +184,7 @@ applyJob = (jobid, company_id, total,  male, female, other, district, jobDistric
 				})
 			
 				}else if (result.dismiss === Swal.DismissReason.cancel){
-					// Swal.fire(
-					// 	'Cancelled',
-					// 	'Not added to applied joblist',
-					// 	'error'
-					// )
+					
 				}
 			})
 
@@ -195,6 +192,7 @@ applyJob = (jobid, company_id, total,  male, female, other, district, jobDistric
 		document.getElementById("loginbtndiv").click();
 	}
 }
+
 removeApplication = (job_id, total, male, female, other, district, jobDistrict, state, stateCode, country,countryCode, exp0to2, exp2to6, exp6to10) => {
 	console.log("jobid :", male, female, other);
 	
@@ -357,13 +355,53 @@ removeApplication = (job_id, total, male, female, other, district, jobDistrict, 
 													<div> 
 														<i className="fa fa-users jobListNumPositions"></i> &nbsp; No of position : {elem.jobBasicInfo.positions}
 													</div>
+
+													<div class="modal fade" id="wishlistModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+													    <div class="modal-dialog delModalMain">
+													      <div class="modal-content delModalContent">
+													        <div class="modal-header delHeader">
+													          <button type="button" class="close delCloseBtn" data-dismiss="modal" aria-label="Close">
+													            <span aria-hidden="true">&times;</span>
+													          </button>
+													        </div>
+													        <div class="modal-body delModalBody">
+													          <div class="delBodyText">
+													            Job is added to the wishlist
+													          </div> 
+													        </div>
+													      </div>
+													    </div>
+													</div>
+
+													<div class="modal fade" id="appliedJobModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+													    <div class="modal-dialog delModalMain">
+													      <div class="modal-content delModalContent">
+													        <div class="modal-header delHeader">
+													          <button type="button" class="close delCloseBtn" data-dismiss="modal" aria-label="Close">
+													            <span aria-hidden="true">&times;</span>
+													          </button>
+													        </div>
+													        <div class="modal-body delModalBody">
+													          <div class="delBodyText">
+													            Are you sure <br />
+													            you want to apply for this job?
+													          </div>
+													          <div className="col-lg-12 delMainBtnDiv">
+													              <button type="button" class="btn btn-default delModalBtnOne col-lg-3" data-dismiss="modal">NO</button> 
+													              <button type="button" class="btn btn-default delModalBtnTwo col-lg-3" data-dismiss="modal" onClick={this.deleteJob} id = {elem._id}>YES</button>
+													          </div> 
+													        </div>
+													      </div>
+													    </div>
+													</div>
+
 												</div>
 												<div className="col-lg-1 jobListRightContent">
 													<div className="row">
 														<div className="col-lg-offset-2 col-lg-12">
 															<div className="jobListVerticleIcons">
 																<ul>
-																	<li><i title={appliedtooltipMsg} className={"fa fa-check-square" + appliedClass}  
+																	<li><i title={appliedtooltipMsg} className={"fa fa-check-square" + appliedClass}  data-toggle="modal" data-target="#appliedJobModal" data-dismiss="modal"
 																	onClick={appliedClass == '-o' ? 
 																	applyJob => this.applyJob(elem._id, elem.company_id._id, elem.applicantStatistics.total, elem.applicantStatistics.male, 
 																								elem.applicantStatistics.female, elem.applicantStatistics.other, 
@@ -379,7 +417,7 @@ removeApplication = (job_id, total, male, female, other, district, jobDistrict, 
 																								elem.applicantStatistics.country, elem.location.countryCode,
 																								elem.applicantStatistics.exp0to2,  elem.applicantStatistics.exp2to6, 
 																								elem.applicantStatistics.exp6to10 ) } ></i></li>
-																	<li ><i title={tooltipMsg} onClick={wishlist => this.handleclick(elem._id)} className={"fa fa-heart" + wishClass}></i></li>
+																	<li><i title={tooltipMsg} onClick={wishlist => this.handleclick(elem._id)} className={"fa fa-heart" + wishClass} data-toggle="modal" data-target="#wishlistModal" data-dismiss="modal"></i></li>
 																	{/*<li><i className="fa fa-youtube-play" id="video" data-toggle="modal" data-target="#videoModal"></i></li>*/}
 																</ul>
 															</div>

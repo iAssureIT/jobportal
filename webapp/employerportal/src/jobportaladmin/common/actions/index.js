@@ -127,7 +127,6 @@ export function filterJobList(selector) {
           }else{
             dispatch(appendJobList(response.data));
           }
-	        
 	    })
 	    .catch((error)=>{
 	          console.log('error', error);

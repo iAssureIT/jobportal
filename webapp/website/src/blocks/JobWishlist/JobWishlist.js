@@ -16,9 +16,11 @@ class JobWishlist extends Component{
 		jobIdArray:[]
 	}
 }
+
 componetDidMount(){
 	 
 }
+
 handleclick = (jobid)=>{
 	console.log("jobid : ", jobid);
 	this.setState({isToggle:!this.state.isToggle})
@@ -57,6 +59,7 @@ handleclick = (jobid)=>{
 		document.getElementById("loginbtndiv").click();
 	}
 }
+
 applyJob = (jobid, company_id)=>{
 	console.log("jobid :", jobid);
 	
@@ -118,6 +121,7 @@ applyJob = (jobid, company_id)=>{
 		document.getElementById("loginbtndiv").click();
 	}
 }
+
 removeApplication = (job_id) => {
 	console.log(job_id)
 	if (this.props.userDetails.loggedIn) {
@@ -168,6 +172,8 @@ removeApplication = (job_id) => {
 		document.getElementById("loginbtndiv").click();
 	}
 }	
+	
+
 	render(){
 		return(
 			<section className="jobListWrapper">
@@ -242,10 +248,10 @@ removeApplication = (job_id) => {
 															{elem.job_id.jobBasicInfo.jobTitle}
 														</div>
 														<div className="jobListCompanyName">
-															<b>iAssure International Technologies Pvt Ltd</b>
+															<b>{elem.company_id ? elem.company_id.companyName : "Anonymous"}</b>
 														</div>
 														<div> 
-															<i className="fa fa-calendar jobListExperience"></i> &nbsp; Exp: {elem.job_id.eligibility.minEducation} To {elem.job_id.eligibility.minExperience}
+															<i className="fa fa-calendar jobListExperience"></i> &nbsp;&nbsp;Exp&nbsp;:&nbsp;{elem.job_id.eligibility.minExperience} Years
 														</div>
 														<div> 
 															<i className="fa fa-rupee jobListMonSal"></i> &nbsp; <i className="fa fa-inr"></i> {elem.job_id.ctcOffered.minSalary} - <i className="fa fa-inr"></i> {elem.job_id.ctcOffered.maxSalary} a month
