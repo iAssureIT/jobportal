@@ -13,3 +13,11 @@
    color: #fff;
    font-weight: bold;
 }
+.input-group1{
+	width: 100%;
+}
+.input-group1 .inputBox{
+	border-radius: 3px!important;
+	border-bottom-left-radius: 3px!important;
+    border-top-left-radius: 3px!important;
+}

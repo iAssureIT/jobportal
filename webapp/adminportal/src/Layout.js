@@ -138,6 +138,7 @@ class Layout extends Component  {
 
 
                                                         <Route path="/package-master" exact strict component={PackageMaster} />
+                                                        <Route path="/package-master/:package_id" exact strict component={PackageMaster} />
 
 
                                                        

@@ -48,13 +48,13 @@ class Certification extends Component{
 						            	actions     : 'Action',
 	          					 	},
 			tableObjects 	    : 	{
-				paginationApply : false,
-	          	searchApply     : false,
-	          	//editUrl         : '/' + this.props.entity + "/statutory-details/" + this.props.match.params.entityID,
-	          	deleteMethod    : 'delete',
-        	  	apiLink         : '/api/candidatemaster/deleteSkill/' + this.props.match.params.candidate_id,
-	          	downloadApply   : false
-	      	},
+										paginationApply : false,
+							          	searchApply     : false,
+							          	//editUrl         : '/' + this.props.entity + "/statutory-details/" + this.props.match.params.entityID,
+							          	deleteMethod    : 'delete',
+						        	  	apiLink         : '/api/candidatemaster/deleteSkill/' + this.props.match.params.candidate_id,
+							          	downloadApply   : false
+							      	},
 	      	"startRange"        : 0,
             "limitRange"       	: 10,
             "IdToDelete" 		: "",	
@@ -80,12 +80,12 @@ class Certification extends Component{
 							     zIndex:"5!important"
 						  },
 						  option: {
-						  backgroundColor: "#242933",
-						  zIndex:"5!important"
+								  backgroundColor: "#242933",
+								  zIndex:"5!important"
 						  },
 						  optionContainer:{
-						  	border: "1px solid #D3950A",
-						  	zIndex:"5!important"
+								  	border: "1px solid #D3950A",
+								  	zIndex:"5!important"
 						  }
 						};
 	}
