@@ -32,12 +32,16 @@ const initialState = {
 	},
 	selector 					: {},
 	showLoader 					: false,
+	statusMode 					: "active",
 	jobList 					: [],
 	jobCount 					: 0,
 	candidateSelector 			: {},
 	appliedCandidateSelector 	: {},
 	candidateList 				: [],
 	appliedCandidateList 		: [],
+	
+
+
 	totalApplicantsCountList 	: [],
 	countryApplicantsCountList 	: [],
 	stateApplicantsCountList	: [],
@@ -48,6 +52,7 @@ const initialState = {
 	exp02ApplicantsCountList 	: [],
 	exp26ApplicantsCountList 	: [],
 	exp610ApplicantsCountList 	: [],
+
 }
 
 const reducer = (state = initialState, action) => {
@@ -68,6 +73,10 @@ const reducer = (state = initialState, action) => {
 	}
 	if (action.type === "SHOW_LOADER") {
 		newState.showLoader = action.showLoader;
+	}
+	
+	if(action.type === "CHANGE_STATUS_MODE"){
+		newState.statusMode = action.statusMode;
 	}
 	if(action.type === "GET_JOBCOUNT"){
 		newState.jobCount = action.jobCount;

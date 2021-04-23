@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch,Link,location } from 'react-router-dom';
+import PhoneInput from 'react-phone-input-2';
 import 'font-awesome/css/font-awesome.min.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './LoginForm.css';
@@ -52,21 +53,30 @@ class Login extends Component {
        var emailFilter = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
        var tempEmail = this.state.loginusername.trim(); 
        var illegalChars = /[\(\)\<\>\,\;\:\\\"\[\]]/;
-       //var phoneno = /^\d{10}$/;
+       var phoneno = /^\+?([0-9]{2})\)?[-. ]?([0-9]{5})[-. ]?([0-9]{5})$/;
 
-     if(this.state.loginusername.length<=0){
+     /*if(this.state.loginusername.length<=0){
       document.getElementById("loginusernameError").innerHTML=  
       "Please enter your Email";  
       status=false; 
-    }else if (
+      }else if (
       !emailFilter.test(tempEmail)) { //test email for illegal characters
           document.getElementById('loginusernameError').innerHTML = "Please enter a valid email address.";
       } else{
       document.getElementById("loginusernameError").innerHTML=
       ""; 
       status = true;
+    }*/
+    if(this.state.loginusername.match(phoneno)){
+      
+      status = true;
+      
+    }else{
+      document.getElementById("loginusernameError").innerHTML=  
+      "Please enter valid Mobile Number";  
+      status=false; 
     }
-    
+
     if(this.state.password.length<=0){
       document.getElementById("passwordError").innerHTML=  
       "Please enter Password";  
@@ -103,14 +113,21 @@ class Login extends Component {
         this.setState({showPassword:false});
       }
   }
+  changeMobile(event) {
+    this.setState({
+      loginusername: event
+    })
+  }
   userlogin(event) {
       event.preventDefault();
       var auth = {
-        email: this.refs.loginusername.value,
+        mobNumber: this.state.loginusername,
         password: this.refs.loginpassword.value,
         role: "candidate"
       }
+      console.log(auth)
       var status =  this.validateForm();
+      console.log(status)
       var {mapAction} = this.props;
       if (status) {
       
@@ -310,22 +327,32 @@ class Login extends Component {
               </div>*/}
               
               <div className="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1">
-                        <div className="loginSignUp1" onClick={this.ShowSignUp.bind(this)}>
+                        <div className="loginSignUp1" >
                         Don't have an Account ?
-                          <a href="#"><u className="loginSignUp"> Sign Up</u></a>
+                          <a href="#" onClick={this.ShowSignUp.bind(this)}><u className="loginSignUp" > Sign Up</u></a>
                         </div>
               </div>
                     
 
                   <div className="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 form-group loginFormGroup" >
-                    <div className="input-group" autocomplete="off">
+                    {/*<div className="input-group" autocomplete="off">
                       <span className="input-group-addon loginInputIcon1"><i className="fa fa-mobile"></i></span>
                       <input type="tel" id="loginusername" name="loginusername" placeholder="Email Id" 
                       value={this.state.loginusername} ref="loginusername"
                        onChange={this.handleChange.bind(this)} className="form-control loginInputBox"/>
-                    </div>
+                    </div>*/}
+                    <PhoneInput
+                      country={'in'}
+                      value={this.state.loginusername}
+                      name="loginusername"
+                      inputProps={{
+                        name: 'loginusername',
+                        required: true
+                      }}
+                      onChange={this.changeMobile.bind(this)}
+                    />
                     <span id="loginusernameError" className="errorMsg"></span>
-                  </div>
+                  </div> 
 
                   <div className="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 form-group" >
                     <div className="input-group">

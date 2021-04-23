@@ -705,6 +705,6 @@ color: #fff;
 	pointer-events: none;
 
   /* for "disabled" effect */
-  opacity: 0.5;
+  opacity: 1;
   background-color:var(--main-border-color);
 }

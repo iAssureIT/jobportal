@@ -994,15 +994,16 @@ exports.user_login_using_mobile = (req, res, next) => {
 									});
 								}
 								if (result) {
-									var login_token = user.services.resume.loginTokens.length > 0 && user.services.resume.loginTokens[user.services.resume.loginTokens.length-1].hashedToken !== undefined ? user.services.resume.loginTokens[user.services.resume.loginTokens.length-1].hashedToken : false;
-									if(login_token){
-										console.log("login_token",login_token);
-										res.status(200).json({
-											message: 'already_loggedin',
-											token: user.token,
-											ID: user._id,
-										});
-									}else{
+									// var login_token = user.services.resume.loginTokens.length > 0 && user.services.resume.loginTokens[user.services.resume.loginTokens.length-1].hashedToken !== undefined ? user.services.resume.loginTokens[user.services.resume.loginTokens.length-1].hashedToken : false;
+									// if(login_token){
+									// 	console.log("login_token",login_token);
+									// 	res.status(200).json({
+									// 		message: 'already_loggedin',
+									// 		token: user.token,
+									// 		ID: user._id,
+									// 	});
+									// }
+									// else{
 									const token = jwt.sign({
 										mobile: req.body.mobNumber,
 										userId: user._id,
@@ -1027,8 +1028,8 @@ exports.user_login_using_mobile = (req, res, next) => {
 										.then(updateUser => {
 											main();
 											async function main(){
-												var companyContacts = await getCompanyContacts(user.profile.companyID);
-												console.log("companyContacts",companyContacts);
+												//var companyContacts = await getCompanyContacts(user.profile.companyID);
+												//console.log("companyContacts",companyContacts);
 												if (updateUser.nModified == 1) {
 													
 														res.status(200).json({
@@ -1091,7 +1092,7 @@ exports.user_login_using_mobile = (req, res, next) => {
 												error: err
 											});
 										});
-									}		
+									//}		
 								} else {
 									return res.status(200).json({
 										message: 'INVALID_PASSWORD'
