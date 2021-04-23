@@ -988,6 +988,9 @@ exports.jobCount = (req, res, next) => {
 
     var countryCode = req.body.countryCode ? req.body.countryCode : "IN";
     selector["$and"].push({
+        "status": req.body.status ? req.body.status : "active"
+    })
+    selector["$and"].push({
         "location.countryCode": countryCode
     })
     // 1
