@@ -37,6 +37,7 @@ import CityClassification from '../Master/CityClassification/CityClassification.
 import CityType from '../Master/CityType/CityType.js';
 
 import StateBulkUpload from '../Master/LocationMaster/StateBulkUpload.js';
+import DistrictBulkUpload from '../Master/LocationMaster/DistrictBulkUpload.js';
 
 import CompanyPaymentGateway from '../companysetting/Components/CompanyPaymentGateway.js';
 //============= Corporate Master ====================
@@ -123,6 +124,7 @@ class CoreLayout extends Component {
                 <Route path="/city-type/:fieldID" exact strict component={CityType} />
 
                 <Route path="/state-bulkupload" exact strict component={StateBulkUpload} />
+                <Route path="/district-bulkupload" exact strict component={DistrictBulkUpload} />
                 
 
 

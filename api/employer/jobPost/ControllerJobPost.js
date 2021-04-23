@@ -2302,7 +2302,32 @@ exports.insertBulkJobs = (req, res, next) => {
         var jobShifts   = await getJobShift();
         var jobTimes    = await getJobTime();
         var qualifications = await getQualification();
-        
+        var skills      = await getSkill();
+        var primarySkillsArray      = [];
+        var secondarySkillsArray    = [];
+        var otherSkillsArray        = [];
+        var preferredSkillsArray    = [];
+
+        for (var i = 0; i < 4; i++) {
+            primarySkillsArray.push({
+                    "skill_id":  skills[Math.floor(Math.random() * skills.length)]._id
+                })
+        }    
+        for (var i = 0; i < 4; i++) {
+            secondarySkillsArray.push({
+                    "skill_id":  skills[Math.floor(Math.random() * skills.length)]._id
+                })
+        }
+        for (var i = 0; i < 4; i++) {
+            otherSkillsArray.push({
+                    "skill_id":  skills[Math.floor(Math.random() * skills.length)]._id
+                })
+        }
+        for (var i = 0; i < 4; i++) {
+            preferredSkillsArray.push({
+                    "skill_id":  skills[Math.floor(Math.random() * skills.length)]._id
+                })
+        }
         var gender      = ["Male Only", "Female Only", "Both (Male & Female)"];
         /*var states          = [{"state":"Andaman and Nicobar Islands", "stateCode": "AN"},
                         {"state": "Andhra Pradesh", "stateCode": "AP"},
@@ -2406,6 +2431,15 @@ exports.insertBulkJobs = (req, res, next) => {
                     "mineducation_id": mineducation_id,
                     "minExperience": Math.floor(Math.random() * 10)
                 },
+                "requiredSkills"  : {
+                        "primarySkills"     : primarySkillsArray,
+                        "minPrimExp"        : Math.floor(Math.random() * 5),
+                        "secondarySkills"   : secondarySkillsArray,
+                        "minSecExp"         : Math.floor(Math.random() * 5),
+                        "otherSkills"       : otherSkillsArray,
+                        "minOtherExp"       : Math.floor(Math.random() * 5),
+                        "preferredSkills"   : preferredSkillsArray
+                    },
                 "status"   : "draft",
                 "applicantStatistics":  {   
                     "male"          : 0,
