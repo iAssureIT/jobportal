@@ -41,6 +41,7 @@ const paymentTermsRoutes 				= require('./coreAdmin/PaymentTerms/PaymentTermsRou
 const entityRoutes						= require("./coreAdmin/entityMaster/RoutesEntityMaster.js");
 const countryRoutes						= require("./coreAdmin/Countries/RoutesCountries.js");
 const stateRoutes						= require("./coreAdmin/States/RoutesState.js");
+const districtRoutes					= require("./coreAdmin/Districts/RoutesDistrict.js");
 
 const addressTypeMasterRoutes			= require("./coreAdmin/AddressTypeMaster/RoutesAddressType.js");
 const industryMasterRoutes			    = require("./coreAdmin/IndustryMaster/RoutesIndustryMaster.js");
@@ -150,6 +151,8 @@ app.use('/api/preferences',preferencesRoutes);
 app.use("/api/entitymaster", entityRoutes);
 app.use("/api/countries", countryRoutes);
 app.use("/api/states", stateRoutes);
+app.use("/api/districts", districtRoutes);
+
 app.use("/api/locationtypemaster", locationTypeMasterRoutes);
 app.use("/api/packagemaster", packageMaster);
 

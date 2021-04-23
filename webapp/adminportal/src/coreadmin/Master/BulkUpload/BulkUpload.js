@@ -92,6 +92,7 @@ class BulkUpload extends Component{
             count++;
         }
     }
+      //console.log("documentObj",documentObj)
       this.setState({inputFileData:documentObj},()=>{
         $('.fullpageloader').hide()
       });
