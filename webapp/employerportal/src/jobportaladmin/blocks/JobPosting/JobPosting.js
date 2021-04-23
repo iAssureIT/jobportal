@@ -246,7 +246,7 @@ class JobPosting extends Component {
                         industry                :   response.data.jobBasicInfo.industry_id ? response.data.jobBasicInfo.industry_id.industry : "",
                         functionalarea_id       :   response.data.jobBasicInfo.functionalarea_id._id,
                         functionalArea          :   response.data.jobBasicInfo.functionalarea_id ? response.data.jobBasicInfo.functionalarea_id.functionalArea : "",
-                        subfunctionalarea_id    :   response.data.jobBasicInfo.subfunctionalarea_id._id,
+                        subfunctionalarea_id    :   response.data.jobBasicInfo.subfunctionalarea_id ? response.data.jobBasicInfo.subfunctionalarea_id._id : null,
                         subFunctionalArea       :   response.data.jobBasicInfo.subfunctionalarea_id ? response.data.jobBasicInfo.subfunctionalarea_id.subfunctionalArea : "",
                         jobrole_id              :   response.data.jobBasicInfo.jobrole_id._id,
                         jobRole                 :   response.data.jobBasicInfo.jobrole_id.jobRole,

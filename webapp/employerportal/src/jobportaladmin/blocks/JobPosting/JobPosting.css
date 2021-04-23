@@ -650,7 +650,7 @@ div.ReactTags__tagInput {
 div.ReactTags__tagInput input.ReactTags__tagInputField,
 div.ReactTags__tagInput input.ReactTags__tagInputField:focus {
     height: 34px;
-    margin-left: 5px;
+    margin-left: 3px;
     color: #fff;
     font-size: 12px;
     border: none;

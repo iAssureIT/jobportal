@@ -262,7 +262,8 @@ class HomePage extends Component {
       if (this.props.match.path != "/") {
         var selector = this.props.selector;
         delete selector.functionalArea_id;
-
+        delete selector.subfunctionalArea_id;
+        console.log(selector)
         this.props.history.push("/country/"+this.props.match.params.countryCode+"/state/"+this.props.match.params.stateCode+"/city/"+this.props.match.params.district+"/industry/"+this.props.match.params.industryName+"/"+this.props.match.params.industry_id+"/function/all/0/subfunction/all/0");
       }
       if (this.props.match.path == "/" || this.props.match.params.industryName=="all") {

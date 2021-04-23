@@ -4,7 +4,6 @@ import Axios 			  		from 'axios';
 import Swal  					from 'sweetalert2';
 import Moment 					from "moment";
 import { FontAwesomeIcon } 		from '@fortawesome/react-fontawesome';
-import Modal 					from '../Modal/Modal.js';
 import { connect }        		from 'react-redux';
 import { bindActionCreators } 	from 'redux';
 import  * as mapActionCreator 	from '../../common/actions/index';
@@ -43,7 +42,7 @@ getJobs(event){
 	var {mapAction} = this.props;
     mapAction.filterJobList(selector);
 
-	console.log(event.target.getAttribute('data-status'))
+	console.log("45 inside getjob function",event.target.getAttribute('data-status'))
 }
 
 showMore(){
@@ -77,11 +76,30 @@ handlePageChange(pageNumber) {
 
 deleteJob = (event)=>{
 	event.preventDefault();
+	const job_id = this.state.job_id;
+
+	if(job_id){
+        Axios.delete("/api/jobs/delete/"+job_id)
+        .then(response =>{
+          if(response.data.message==="Job details deleted Successfully!"){
+            var {mapAction} = this.props;
+            mapAction.filterJobList(this.props.selector);
+            /*this.getJobs();*/
+          }
+        })
+        .catch(error=>{
+        })
+      }
+
+	}	
+
+/*deleteJob = (event)=>{
+	event.preventDefault();
 	const job_id = event.currentTarget.id;
 
 	this.setState({job_id:job_id})
 
-	/*Swal.fire({
+	Swal.fire({
 		title 				: 'Are you sure? you want to delete this job!!!',
 		text 				: 'You will not be able to recover this job',
 		icon 				: 'warning',
@@ -122,45 +140,10 @@ deleteJob = (event)=>{
 						'error'
 					)
 				}
-			})*/
-		}
+			})
+		}*/
 
-	/*deleteJob = (event)=>{
-	event.preventDefault();
-	const job_id = event.currentTarget.id;
 
-	Swal.fire({
-		title 				: 'Are you sure? you want to delete this job!!!',
-		text 				: 'You will not be able to recover this job',
-		icon 				: 'warning',
-		showCancelButton 	: true,
-		confirmButtonText 	: 'Yes, delete it!',
-		cancelButtonText 	: 'No, keep it',
-		confirmButtonColor 	: '#f5a721',
-	
-	}).then((result) =>	{
-							console.log('result:',result);
-							if(result.value){
-												if(job_id){
-															Axios.delete("/api/jobs/delete/"+job_id)
-															.then(response 	=>	{
-																					if(response.data.message==="Job details deleted Successfully!")
-																					{
-																						var {mapAction} = this.props;
-																						mapAction.filterJobList(this.state.selector);
-																					}
-																				}
-																)
-															.catch(error	=>	{
-																				
-																				}
-																	)
-															}
-									
-											}
-						}
-			)
-		}*/	
 	
 	handleSwitch (){ 
   			this.setState({
@@ -217,6 +200,7 @@ deleteJob = (event)=>{
 	}	
 	
 	render(){
+		console.log("selector",this.props.selector);
 		var {mapAction} = this.props;
 		console.log(this.props.jobCount)
 		return(
@@ -344,15 +328,11 @@ deleteJob = (event)=>{
 																		<a title = "View" href={"/job-profile/" + elem._id}><i className="fa fa-eye"></i></a>
 																	</div>
 																	<div className="listViewBtn">	
-																		{/*<a title = "Inactive" onClick={this.inactiveJob} id = {elem._id}><i className="fa fa-eye-slash"></i></a>
-																		*/}
 																		<a title = "Inactive" onClick={this.inactiveJob} id = {elem._id}><i className="fa fa-eye-slash"></i></a>	
 																	</div>
 																	<div className="listDelBtn">	
-																		<i title = "Delete" className="fa fa-trash" data-toggle="modal" data-target="#delModal" data-dismiss="modal" onClick={this.deleteJob} id = {elem._id}></i>
+																		<i title = "Delete" className="fa fa-trash" data-toggle="modal" data-target="#delModal" data-dismiss="modal" onClick={() => {this.setState({job_id:elem._id})}} id = {elem._id}></i>
 																	</div>
-
-																	<Modal job_id={this.state.job_id}/>
 
 																	<div className="input-group jobStatusToggleWrapper">
 																		<div className = {this.state.isActive ? "genderFeild col-lg-6 genderFeildActive" : "genderFeild col-lg-6" }
@@ -647,14 +627,30 @@ deleteJob = (event)=>{
 								}
 						    </div>
 						</div>
+					</div>
+					
+					<div class="modal fade" id="delModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+					    <div class="modal-dialog delModalMain">
+					      <div class="modal-content delModalContent">
+					        <div class="modal-header delHeader">
+					          <button type="button" class="close delCloseBtn" data-dismiss="modal" aria-label="Close">
+					            <span aria-hidden="true">&times;</span>
+					          </button>
+					        </div>
+					        <div class="modal-body delModalBody">
+					          <div class="delBodyText">
+					            Are you sure <br />
+					            you want to delete this job?
+					          </div>
+					          <div className="col-lg-12 delMainBtnDiv">
+					              <button type="button" class="btn btn-default delModalBtnOne col-lg-3" data-dismiss="modal">NO</button> 
+					              <button type="button" class="btn btn-default delModalBtnTwo col-lg-3" data-dismiss="modal" onClick={this.deleteJob}>YES</button>
+					          </div> 
+					        </div>
+					      </div>
+					    </div>
 					</div> 
-
-										</div>
-									);
-								})
-							:
-								<h3 style={{margin:"100px"}}>No Jobs Found</h3>
-						}
+				</div>		
 					{/*<div className="col-lg-12">
 				        <Pagination
 				          activePage={this.state.activePage}
@@ -663,9 +659,7 @@ deleteJob = (event)=>{
 				          pageRangeDisplayed={5}
 				          onChange={this.handlePageChange.bind(this)}
 				        />
-				    </div>	*/}
-			
-				
+				    </div>	*/}	
 			</section>
 		);
 	}

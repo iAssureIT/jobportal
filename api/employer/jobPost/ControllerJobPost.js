@@ -123,8 +123,8 @@ exports.insertJobs = (req, res, next) => {
                 "district": req.body.district,
                 "state": req.body.states,
                 "stateCode": req.body.stateCode,
-                "country": req.body.country,
-                "countryCode": req.body.countryCode,
+                "country": req.body.country ? req.body.country : "India",
+                "countryCode": req.body.countryCode ? req.body.countryCode : "IN",
                 "pincode": req.body.pincode
             },
             "ctcOffered": {
@@ -918,8 +918,8 @@ exports.updateJob = (req, res, next) => {
                         "district": req.body.district,
                         "state": req.body.states,
                         "stateCode": req.body.stateCode,
-                        "country": req.body.country,
-                        "countryCode": req.body.countryCode,
+                        "country": req.body.country ? req.body.country : "India",
+                        "countryCode": req.body.countryCode ? req.body.countryCode : "IN",
                         "pincode": req.body.pincode
                     },
                     "ctcOffered": {
@@ -1561,7 +1561,7 @@ exports.functonalAreaJobs = (req, res, next) => {
                 $lookup: {
                     from: "functionalareamasters",
                     localField: "_id",
-                    foreignField: "_id",
+                    foreignField: "_id", 
                     as: "functionalarea"
                 }
             }
