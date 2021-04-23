@@ -321,6 +321,17 @@ deleteJob = (event)=>{
 														<div className="col-lg-1 jobListRightContent">
 															<div className="row">
 																<div className="col-lg-12">
+																	<div className="input-group jobStatusToggleWrapper">
+																		<div className = {this.state.isActive ? "genderFeild genderFeildVerti genderFeildActive" : "genderFeild genderFeildVerti" }
+																		 id="togglePrimary" name="primaryToggel" 
+																		 value="togglePrimary" onClick={this.handleSwitch.bind(this)} title="Active">
+																		</div>
+																		<div className = {!this.state.isActive ? "genderFeild genderFeildVerti genderFeildInActive" : "genderFeild genderFeildVerti" }
+																		 id="togglePrimary" name="primaryToggel" 
+																		 value="togglePrimary" onClick={this.handleSwitch.bind(this)} title="Inactive">
+																			
+																		</div>
+																	</div>	
 																	<div className="listEditBtn">
 																		<a title = "Edit" href={"/post-job/" + elem._id}><i className="fa fa-edit"></i></a>
 																	</div>	
@@ -334,13 +345,7 @@ deleteJob = (event)=>{
 																		<i title = "Delete" className="fa fa-trash" data-toggle="modal" data-target="#delModal" data-dismiss="modal" onClick={() => {this.setState({job_id:elem._id})}} id = {elem._id}></i>
 																	</div>
 
-																	<div className="input-group jobStatusToggleWrapper">
-																		<div className = {this.state.isActive ? "genderFeild col-lg-6 genderFeildActive" : "genderFeild col-lg-6" }
-																		 id="togglePrimary" name="primaryToggel" 
-																		 value="togglePrimary" onClick={this.handleSwitch.bind(this)}>
-																			<div className="row">Inactive</div>
-																		</div>
-																	</div>	
+																	
 																</div>
 															</div>
 														</div>

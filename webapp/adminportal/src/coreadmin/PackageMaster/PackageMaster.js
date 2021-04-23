@@ -8,7 +8,6 @@ class packagemaster extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      package_id        : this.props.match.params.package_id,
       packageName       : "",
       validity          : "",
       jobsPublish       : "",
@@ -44,9 +43,11 @@ class packagemaster extends Component {
   }
   /*======= componentDidMount() =======*/
   componentDidMount() {
-
-
-      this.getData();
+      if(this.props.match.params.package_id){
+          this.edit()
+        }
+        console.log("this.props.match.params.package_id",this.props.match.params.package_id)
+        this.getData();
         Axios.get("/api/packagemaster/get/list")
         .then(response=>{
           console.log(response.data)
@@ -54,9 +55,13 @@ class packagemaster extends Component {
         .catch(error=>{
           console.log(error)
         })
-        if(this.props.match.params.package_id){
-          this.edit()
-        }
+         Axios.get("/api/packagemaster/get/one/"+this.props.match.params.package_id)
+      .then(response=>{
+           
+      }).catch(error=>{
+        console.log(error);
+      })
+        
       //fetchSinglePackage
   }
  
@@ -72,27 +77,30 @@ class packagemaster extends Component {
   }
   /*======= edit() =======*/
   edit(){
-      Axios.get("/api/packagemaster/get/one/"+this.state.package_id )
+      Axios.get("/api/packagemaster/get/one/"+this.props.match.params.package_id)
       .then(response=>{
             var edit=response.data;
-            console.log("my",response.data)
-        this.setState({
-                        packageName       : edit.packageName,
-                        validity          : edit.validity,
-                        jobsPublish       : edit.jobsPublish,
-                        resumeDownloads   : edit.resumeDownloads,
-                        maxEmails         : edit.maxEmails,
-                        videoIntroduction : edit.videoIntroduction,
-                        robotInterviews   : edit.robotInterviews,
-                        price             : edit.price,
-                        buttonText        :"Update"
-        })
+            this.setState({
+                            packageName       : edit.packageName,
+                            validity          : edit.validity,
+                            jobsPublish       : edit.jobsPublish,
+                            resumeDownloads   : edit.resumeDownloads,
+                            maxEmails         : edit.maxEmails,
+                            videoIntroduction : edit.videoIntroduction,
+                            robotInterviews   : edit.robotInterviews,
+                            price             : edit.price,
+                            buttonText        :"Update"
+            })
+        this.getData();
+      }).catch(error=>{
+        console.log(error);
       })
 
   }
   /*======= getData() =======*/
   getData(){
-  var formValues={startRange:this.state.startRange,limitRange:this.state.limitRange}
+
+    var formValues={startRange:this.state.startRange,limitRange:this.state.limitRange}
     Axios.post("/api/packagemaster/get/list",formValues)
           .then(response=>{
               var tableData = response.data.map((a, i)=>{
@@ -119,10 +127,11 @@ class packagemaster extends Component {
   }
   
   /*======= handleSubmit() =======*/
-  handleSubmit(){
+  handleSubmit(event){
+  event.preventDefault();
     var formValues = { 
-                        package_id       : this.state.package_id,
                         packageName       : this.state.packageName,
+                        package_id        : this.props.match.params.package_id, 
                         validity          : this.state.validity,
                         jobsPublish       : this.state.jobsPublish,
                         resumeDownloads   : this.state.resumeDownloads,
@@ -133,53 +142,116 @@ class packagemaster extends Component {
                         currency          : this.state.currency,
                       }
 
-      if(this.props.match.params.package_id){
+         if(this.props.match.params.package_id){
           this.updateData(formValues);
         }else{
           this.insetData(formValues);
         }
-    console.log(formValues);
-    
+        this.getData();
   }
+  /*======= insetData() =======*/
   insetData(formValues){
-    console.log("im in insert data")
-      Axios.post("/api/packagemaster/post",formValues)
-         .then(response=>{
-              this.setState({
-                  packageName        : "",
-                  validity           : "",
-                  jobsPublish        : "",
-                  resumeDownloads    : "",
-                  maxEmails          : "",
-                  videoIntroduction  : "",
-                  robotInterviews    : "",
-                  price              : "",
-                  currency           : "Rs",
-                  buttonText         : "Submit",
-              })
-         }).catch(error=>{
-            console.log(error)
-         })
+    let status =  this.validateForm();
+        if(status){
+          Axios.post("/api/packagemaster/post",formValues)
+             .then(response=>{
+                  this.setState({
+                      packageName        : "",
+                      validity           : "",
+                      jobsPublish        : "",
+                      resumeDownloads    : "",
+                      maxEmails          : "",
+                      videoIntroduction  : "",
+                      robotInterviews    : "",
+                      price              : "",
+                      currency           : "Rs",
+                      buttonText         : "Submit",
+                  })
+             }).catch(error=>{
+                console.log(error)
+             })
+       }
   }
+  /*======= updateData() =======*/
   updateData(formValues){
-       Axios.patch("/api/packagemaster/patch",formValues)
-         .then(response=>{
-              this.setState({
-                  packageName        : "",
-                  validity           : "",
-                  jobsPublish        : "",
-                  resumeDownloads    : "",
-                  maxEmails          : "",
-                  videoIntroduction  : "",
-                  robotInterviews    : "",
-                  price              : "",
-                  currency           : "Rs",
-                  buttonText         : "Submit",
-              })
-              this.props.history.push("/package-master");
-         }).catch(error=>{
-            console.log(error)
-         })
+        let status =  this.validateForm();
+        if(status){
+            Axios.patch("/api/packagemaster/patch",formValues)
+               .then(response=>{
+                    this.setState({
+                        packageName        : "",
+                        validity           : "",
+                        jobsPublish        : "",
+                        resumeDownloads    : "",
+                        maxEmails          : "",
+                        videoIntroduction  : "",
+                        robotInterviews    : "",
+                        price              : "",
+                        currency           : "Rs",
+                        buttonText         : "Submit",
+                    })
+                    this.props.history.push("/package-master");
+               }).catch(error=>{
+                  console.log(error)
+               })
+        }
+       
+  }
+  /*======= validateForm() =======*/
+  validateForm=()=>{
+      let status = true;
+      let regName = /^[a-zA-Z]+$/;
+      if(typeof this.state.packageName !== "undefined"){
+           if(!this.state.packageName.match(regName)){
+              status = false;
+              document.getElementById("packageNameError").innerHTML = "Please enter a valid Package Name";
+           }else{
+              document.getElementById("packageNameError").innerHTML = "";
+           }       
+        }
+      if(this.state.validity.length<=0){
+          document.getElementById("validityError").innerHTML= "Please Enter address type";  
+          status=false; 
+        }else{
+          document.getElementById("validityError").innerHTML = ""; 
+        } 
+        if(this.state.videoIntroduction.length<=0){
+          document.getElementById("videoIntroductionError").innerHTML= "Please Enter Video Introduction";  
+          status=false; 
+        }else{
+          document.getElementById("videoIntroductionError").innerHTML = ""; 
+        } 
+        if(this.state.maxEmails.length<=0){
+          document.getElementById("maxEmailsError").innerHTML= "Please Enter Max Emails";  
+          status=false; 
+        }else{
+          document.getElementById("maxEmailsError").innerHTML = ""; 
+        } 
+        if(this.state.resumeDownloads.length<=0){
+          document.getElementById("resumeDownloadsError").innerHTML= "Please Enter Resume Downloads";  
+          status=false; 
+        }else{
+          document.getElementById("resumeDownloadsError").innerHTML = ""; 
+        } 
+        if(this.state.jobsPublish.length<=0){
+          document.getElementById("jobsPublishError").innerHTML= "Please Enter Jobs Publish";  
+          status=false; 
+        }else{
+          document.getElementById("jobsPublishError").innerHTML = ""; 
+        } 
+        if(this.state.robotInterviews.length<=0){
+          document.getElementById("robotInterviewsError").innerHTML= "Please Enter Robot Interviews";  
+          status=false; 
+        }else{
+          document.getElementById("robotInterviewsError").innerHTML = ""; 
+        } 
+        if(this.state.price.length<=0){
+          document.getElementById("priceError").innerHTML= "Please Enter Price";  
+          status=false; 
+        }else{
+          document.getElementById("priceError").innerHTML = ""; 
+        } 
+      return status;
   }
   /*======= render() =======*/
   render() {
@@ -217,7 +289,7 @@ class packagemaster extends Component {
                                    value={this.state.validity} 
                                    onChange={this.handleChange.bind(this)} />
                                 </div> 
-                                <span id="validityPeriodError" className="errorMsg"></span>
+                                <span id="validityError" className="errorMsg"></span>
                             </div>
                             <div className="col-lg-4">
                                 <label htmlFor="price" className="nameTitleForm">
@@ -226,7 +298,7 @@ class packagemaster extends Component {
                                 </label>
                                 <div className="input-group input-group1 "> 
                                   <input type="number" name="price" id="price" 
-                                   className="form-control inputBox"
+                                   className="form-control inputBox" 
                                    value={this.state.price} 
                                    onChange={this.handleChange.bind(this)} />
                                 </div> 
@@ -247,7 +319,7 @@ class packagemaster extends Component {
                                    value={this.state.jobsPublish} 
                                    onChange={this.handleChange.bind(this)}/>
                                 </div> 
-                                <span id="jobPublishError" className="errorMsg"></span>
+                                <span id="jobsPublishError" className="errorMsg"></span>
                             </div>
                             <div className="col-lg-4">
                                 <label htmlFor="resumeDownloads" className="nameTitleForm">
@@ -260,7 +332,7 @@ class packagemaster extends Component {
                                    value={this.state.resumeDownloads} 
                                    onChange={this.handleChange.bind(this)}/>
                                 </div> 
-                                <span id="resumeDownloadError" className="errorMsg"></span>
+                                <span id="resumeDownloadsError" className="errorMsg"></span>
                             </div>
                             <div className="col-lg-4">
                                 <label htmlFor="maxEmails" className="nameTitleForm">
@@ -303,7 +375,7 @@ class packagemaster extends Component {
                                    value={this.state.robotInterviews} 
                                    onChange={this.handleChange.bind(this)}/>
                                 </div> 
-                                <span id="robotInterviewError" className="errorMsg"></span>
+                                <span id="robotInterviewsError" className="errorMsg"></span>
                             </div>
                         </div>
                     </div>

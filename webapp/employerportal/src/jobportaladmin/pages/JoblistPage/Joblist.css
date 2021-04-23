@@ -666,12 +666,17 @@ color: #fff;
 .jobStatusToggleWrapper{
 	height:25px;
 	border:1px solid var(--main-border-color)!important;
-	border-radius: 20px;
 	margin-top: 15px;
-	margin-left: 5px;
-    padding: 2px;
+	margin-bottom: 7px;
+	margin-left: 42%;
+    padding: 0px;
+    width: 45%;
+    border-radius: 1px;
+ }
+.genderFeildVerti{
+	border-radius: 0px!important;
+	height: 15px!important;
 }
-
 .genderFeildWrapper2{
     margin-top:6px;
 }
@@ -695,4 +700,11 @@ color: #fff;
 .genderFeildActive{
 	background-color:var(--main-border-color);
 	transition:all 2s;
+}
+.genderFeildInActive{
+	pointer-events: none;
+
+  /* for "disabled" effect */
+  opacity: 0.5;
+  background-color:var(--main-border-color);
 }
