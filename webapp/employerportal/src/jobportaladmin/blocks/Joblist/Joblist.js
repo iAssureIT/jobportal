@@ -332,9 +332,9 @@ deleteJob = (event)=>{
 																		<a title = "View" href={"/job-profile/" + elem._id}><i className="fa fa-eye"></i></a>
 																	</div>
 																	
-																	{/*<div className="listDelBtn">	
+																	{<div className="listDelBtn">	
 																		<i title = "Delete" className="fa fa-trash" data-toggle="modal" data-target="#delModal" data-dismiss="modal" onClick={() => {this.setState({job_id:elem._id})}} id = {elem._id}></i>
-																	</div>*/}
+																	</div>}
 
 																	
 																</div>
