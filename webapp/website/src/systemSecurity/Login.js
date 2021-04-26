@@ -50,7 +50,7 @@ class Login extends Component {
   validateForm=()=>{
        var status = true;
       // var tempEmail = this.state.loginusername.trim(); // value of field with whitespace trimmed off
-       var emailFilter = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+       var emailFilter = /^[a-zA-Z0-9.!#$%&'+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)$/;
        var tempEmail = this.state.loginusername.trim(); 
        var illegalChars = /[\(\)\<\>\,\;\:\\\"\[\]]/;
        var phoneno = /^\+?([0-9]{2})\)?[-. ]?([0-9]{5})[-. ]?([0-9]{5})$/;
@@ -408,4 +408,3 @@ const mapDispatchToProps = (dispatch) => ({
 }) 
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
-

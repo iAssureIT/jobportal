@@ -118,7 +118,7 @@
 .nalbariText{
 	position: absolute;
 	top: 45%;
-    left: 30%;
+    left: 10%;
 }
 .nalbariNumber{
 	position: absolute;
@@ -182,11 +182,11 @@
 .kamrup_metroText{
 	position: absolute;
 	top: 25%;
-    left: 20%;
+    left: 0%;
 }
 .kamrup_metroNumber{
 	position: absolute;
-	top: 45%;
+	top: 95%;
     left: 35%;
 }
 
@@ -425,7 +425,7 @@
 .dhemajiNumber{
 	position: absolute;
 	top: 65%;
-    left: 35%;
+    left: 20%;
 }
 
 .tinsukia{
@@ -467,13 +467,13 @@
 }
 .cacharText{
 	position: absolute;
-	top: 50%;
+	top: 40%;
     left: 40%;
 }
 .cacharNumber{
 	position: absolute;
-	top: 65%;
-    left: 55%;
+	top: 55%;
+    left: 45%;
 }
 
 .hailakandi{
@@ -484,12 +484,12 @@
 .hailakandiText{
 	position: absolute;
 	top: 50%;
-    left: 40%;
+    left: 15%;
 }
 .hailakandiNumber{
 	position: absolute;
 	top: 65%;
-    left: 55%;
+    left: 35%;
 }
 
 .karimganj{
@@ -505,5 +505,5 @@
 .karimganjNumber{
 	position: absolute;
 	top: 45%;
-    left: 15%;
+    left: 30%;
 }

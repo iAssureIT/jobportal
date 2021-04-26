@@ -197,12 +197,12 @@
 	width: 60px;
 }
 
-/*.input-group .form-control{
+.input-group .form-control{
 	border-bottom-right-radius: 0px !important;
     border-top-right-radius: 0px !important;
     border-bottom-left-radius: 0px;
     border-top-left-radius: 0px;
-}*/
+}
 .otpBox{
 	width: 20%;
 	margin-left: 2.5%;
