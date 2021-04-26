@@ -157,7 +157,8 @@ exports.insertJobs = (req, res, next) => {
                 "country"       : 0,
                 "exp0to2"       : 0,
                 "exp2to6"       : 0,
-                "exp6to10"      : 0
+                "exp6to10"      : 0,
+                "total"         : 0
             },
             "createdAt": new Date(),
             "createdBy": req.body.user_id,
@@ -2452,7 +2453,8 @@ exports.insertBulkJobs = (req, res, next) => {
                     "country"       : 0,
                     "exp0to2"       : 0,
                     "exp2to6"       : 0,
-                    "exp6to10"      : 0
+                    "exp6to10"      : 0,
+                    "total"         : 0
                 },
                 "createdAt": new Date()
             }
@@ -2916,7 +2918,8 @@ exports.bulkUploadJobs = (req, res, next) => {
                         "country"       : 0,
                         "exp0to2"       : 0,
                         "exp2to6"       : 0,
-                        "exp6to10"      : 0
+                        "exp6to10"      : 0,
+                        "total"         : 0
                     },
                     uploadTime      : uploadTime,
                     createdAt       : new Date(),
