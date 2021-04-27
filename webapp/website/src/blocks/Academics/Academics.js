@@ -445,24 +445,7 @@ class Academics extends Component{
 	validateForm=()=>{
 		var status = true;
 		var regName = /^[a-zA-Z]+$/;
-		if(this.state.qualificationLevel.length<=0){
-			document.getElementById("qualificationLevelError").innerHTML=  
-			"Please enter your qualification level";  
-			status=false; 
-		}else{
-			document.getElementById("qualificationLevelError").innerHTML=""; 
-			
-		}
-
-		if(this.state.qualification.length<=0){
-			document.getElementById("qualificationError").innerHTML=  
-			"Please enter your qualification";  
-			status=false; 
-		}else{
-			document.getElementById("qualificationError").innerHTML=""; 
-			
-		}
-
+		var regName2 = /^[a-zA-z]+([\s][a-zA-Z]+)*$/;
 		
 		if(this.state.mode.length<=0){
 			document.getElementById("modeError").innerHTML=  
@@ -490,14 +473,6 @@ class Academics extends Component{
 			document.getElementById("passOutYearError").innerHTML=  
 			"";
 		}
-		if(this.state.university.length<=0){
-			document.getElementById("universityError").innerHTML=  
-			"Please enter your University";  
-			status=false; 
-		}else{
-			document.getElementById("universityError").innerHTML=  
-			""; 
-		}
 		if(this.state.college.length<=0){
 			document.getElementById("collegeError").innerHTML=  
 			"Please enter your College";  
@@ -507,12 +482,30 @@ class Academics extends Component{
 			""; 
 		}
 	
-		if(this.state.country.length<=0 && this.state.states.length<=0
-			&& this.state.city.length<=0 && this.state.college.length<=0 && this.state.university.length<=0
-			&& this.state.passOutYear.length<=0 && this.state.admisionYear.length<=0 &&  this.state.mode.length<=0
-			&& this.state.qualification.length<=0 && this.state.qualificationLevel.length<=0){
-			status=false; 
-		}
+		if(typeof this.state.qualificationLevel !== "undefined"){
+           if(!this.state.qualificationLevel.match(regName2)){
+              status = false;
+              document.getElementById("qualificationLevelError").innerHTML = "Please enter a valid Qualification Level";
+           }else{
+           		document.getElementById("qualificationLevelError").innerHTML = "";
+           }       
+        }
+        if(typeof this.state.qualification !== "undefined"){
+           if(!this.state.qualification.match(regName2)){
+              status = false;
+              document.getElementById("qualificationError").innerHTML = "Please enter a valid Qualification";
+           }else{
+           		document.getElementById("qualificationError").innerHTML = "";
+           }       
+        }
+        if( this.state.specialization.length>0){
+           if(!this.state.specialization.match(regName2)){
+              status = false;
+              document.getElementById("specializationError").innerHTML = "Please enter a valid Specialization";
+           }else{
+           		document.getElementById("specializationError").innerHTML = "";
+           }       
+        }
 		if(typeof this.state.country !== "undefined"){
            if(!this.state.country.match(regName)){
               status = false;
@@ -537,7 +530,22 @@ class Academics extends Component{
            		document.getElementById("cityError").innerHTML = "";
            }       
         }
-		
+        if(typeof this.state.university !== "undefined"){
+           if(!this.state.university.match(regName2)){
+              status = false;
+              document.getElementById("universityError").innerHTML = "Please enter a valid university name";
+           }else{
+           		document.getElementById("universityError").innerHTML = "";
+           }       
+        }
+		if(typeof this.state.college !== "undefined"){
+           if(!this.state.college.match(regName2)){
+              status = false;
+              document.getElementById("collegeError").innerHTML = "Please enter a valid college name";
+           }else{
+           		document.getElementById("collegeError").innerHTML = "";
+           }       
+        }
 		 return status;
 	}
 
@@ -606,6 +614,7 @@ class Academics extends Component{
 									 value={this.state.specialization} 
 									 onChange={this.handleChange.bind(this)} />
 								</div> 
+								<span id="specializationError" className="errorMsg"></span>
 							</div>
 
 						</div>

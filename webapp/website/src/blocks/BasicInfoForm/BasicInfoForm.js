@@ -415,6 +415,7 @@ class BasicInfoForm extends Component{
 								passport   		   : this.state.passport,
 								visa   		   	   : this.state.visa,
 							}
+							console.log(formValues.altMobile.length)
 			if(status==true){
 			Axios.patch("/api/candidatemaster/patch/updateCandidateBasicInfo",formValues)
 			 .then(response=>{
@@ -500,10 +501,11 @@ class BasicInfoForm extends Component{
 			document.getElementById("mobileError").innerHTML = ""; 
 		}
 
-		if(this.state.alternate.length>0){
+		if(this.state.alternate.length>2){
 			
 			if (!mobileFilter.test(this.state.alternate)) { //test email for illegal characters
 	        	document.getElementById('alternateError').innerHTML = "Please enter a valid alternate mobile number.";
+	        	 status=false; 
 		    }else{
 				document.getElementById("alternateError").innerHTML = ""; 
 			}

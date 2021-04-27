@@ -1,0 +1,7 @@
+.signUpBoxTitle{
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--main-border-color);
+    text-align: center;
+    margin-top: 10px;
+}

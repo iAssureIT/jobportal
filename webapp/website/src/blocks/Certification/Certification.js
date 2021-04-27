@@ -456,18 +456,11 @@ class Certification extends Component{
 	//========== Validation Start ==================
 	 validateForm=()=>{
 	 	var status = true;
+	 	var regName = /^[a-zA-Z]+$/;
+		var regName2 = /^[a-zA-z]+([\s][a-zA-Z]+)*$/;
 	 	//this.state.skills
 
 	 	if(this.state.certificationToggel===false){
-		 	if(this.state.skills.length<=0){
-				document.getElementById("skillsError").innerHTML=  
-				"Please enter skills";  
-				status=false; 
-			}else{
-				document.getElementById("skillsError").innerHTML=  
-				""; 
-				status = true;
-			}
 			if(this.state.rating.length<=0){
 				document.getElementById("ratingError").innerHTML=  
 				"Please enter your rating";  
@@ -475,7 +468,7 @@ class Certification extends Component{
 			}else{
 				document.getElementById("ratingError").innerHTML=  
 				""; 
-				status = true;
+
 			}
 			if(this.state.experience.length<=0){
 				document.getElementById("experienceError").innerHTML=  
@@ -484,30 +477,35 @@ class Certification extends Component{
 			}else{
 				document.getElementById("experienceError").innerHTML=  
 				""; 
-				status = true;
 			}
 			if(this.state.experience.length<=0 && this.state.rating.length<=0 && this.state.skills.length<=0 ){
 				status=false;
 			}
+			if(typeof this.state.skills !== "undefined"){
+	           if(!this.state.skills.match(regName2)){
+	              status = false;
+	              document.getElementById("skillsError").innerHTML = "Please enter a valid Skills Level";
+	           }else{
+	           		document.getElementById("skillsError").innerHTML = "";
+	           }       
+	        }
 	 	}else{
-			if(this.state.certificationName.length<=0){
-				document.getElementById("certificationNameError").innerHTML=  
-				"Please enter your Certification Name";  
-				status=false; 
-			}else{
-				document.getElementById("certificationNameError").innerHTML=  
-				""; 
-				status = true;
-			}
-			if(this.state.issuedBy.length<=0){
-				document.getElementById("issuedByError").innerHTML=  
-				"Please enter your Issued By";  
-				status=false; 
-			}else{
-				document.getElementById("issuedByError").innerHTML=  
-				""; 
-				status = true;
-			}
+			if(typeof this.state.certificationName !== "undefined"){
+	           if(!this.state.certificationName.match(regName2)){
+	              status = false;
+	              document.getElementById("certificationNameError").innerHTML = "Please enter a valid Certification Name";
+	           }else{
+	           		document.getElementById("certificationNameError").innerHTML = "";
+	           }       
+	        }
+	        if(typeof this.state.issuedBy !== "undefined"){
+	           if(!this.state.issuedBy.match(regName2)){
+	              status = false;
+	              document.getElementById("issuedByError").innerHTML = "Please enter a valid Issued By";
+	           }else{
+	           		document.getElementById("issuedByError").innerHTML = "";
+	           }       
+	        }
 			if(this.state.certifiedOn.length<=0){
 				document.getElementById("certifiedOnError").innerHTML=  
 				"Please enter your Certified On";  
@@ -515,7 +513,6 @@ class Certification extends Component{
 			}else{
 				document.getElementById("certifiedOnError").innerHTML=  
 				""; 
-				status = true;
 			}
 			
 
@@ -760,9 +757,9 @@ class Certification extends Component{
 																</div>
 															</div>
 														</div>
-														<div className="AddressBoxRightIcon hoverEdit pull-right">
+														<div className="AddressBoxRightIcon  pull-right">
 															<div className="">
-																<FontAwesomeIcon icon="ellipsis-h" />
+														
 																<div className="rightIconHideWrapper" >
 																
 																	<div className="rightIconHide" title="Edit"  >

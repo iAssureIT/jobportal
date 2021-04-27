@@ -34,7 +34,6 @@
 	font-family: 'Montserrat-Medium',Sans-Serif;
 	font-size:12px;
 	font-weight:100!important;
-
 	color: #eee;
 }
 .nameTitleFormStar{
@@ -43,7 +42,6 @@
 }
 .inputBoxIcon{
 	border:1px solid var(--main-border-color)!important;
-
 	border-right:none!important;
 	background-color: var(--input-bg-color)!important;
 	color:var(--main-txt-color)!important;
@@ -64,7 +62,6 @@
     z-index:0!important;
     text-transform:capitalize;
     font-family: 'Montserrat-Medium',Sans-Serif;
-
 }
 
 .showFeild{

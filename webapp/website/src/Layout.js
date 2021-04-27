@@ -23,14 +23,14 @@ import Homepage             from './pages/Homepage/Homepage.js'
 
 import TestProfile          from './blocks/TestProfile/TestProfile.js';
 
-import CandidateProfile     from './blocks/ProfilePage/CandidateProfile.js';
-import CandidateList        from './blocks/CandidateList/CandidateList.js';
-import CandidateBasicInfo   from './pages/ProfileCreation/CandidateBasicInfo.js';
-import CandidateAddress     from './pages/ProfileCreation/CandidateAddress.js';
-import CandidateContact     from './pages/ProfileCreation/CandidateContact.js';
-import CandidateAcademics   from './pages/ProfileCreation/CandidateAcademics.js';
+import CandidateProfile        from './blocks/ProfilePage/CandidateProfile.js';
+import CandidateList           from './blocks/CandidateList/CandidateList.js';
+import CandidateBasicInfo      from './pages/ProfileCreation/CandidateBasicInfo.js';
+import CandidateAddress        from './pages/ProfileCreation/CandidateAddress.js';
+import CandidateContact        from './pages/ProfileCreation/CandidateContact.js';
+import CandidateAcademics      from './pages/ProfileCreation/CandidateAcademics.js';
 import CandidateCertification  from './pages/ProfileCreation/CandidateCertification.js';
-import CandidateExperience  from './pages/ProfileCreation/CandidateExperience.js';
+import CandidateExperience     from './pages/ProfileCreation/CandidateExperience.js';
 
 //import CandidateProfile     from './blocks/CandidateProfile/CandidateProfile.js';
 //import CandidateList     from './blocks/CandidateList/CandidateList.js';

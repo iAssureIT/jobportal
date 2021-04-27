@@ -1,0 +1,54 @@
+.ProgressBarSignUpWrapper{
+	height: 50px;
+}
+.progressBar{
+	display:flex;
+	align-items:flex-end;
+	color:#999;
+}
+.step{
+	text-align:center;
+	z-index:2;
+}
+.bullet{
+	display:inline-block;
+	height:45px;
+	width: 45px;
+	font-size:15px;
+	padding-top: 10px;
+	border:2px solid var(--main-border-color);
+	background-color:var(--main-bg-color);
+	margin-bottom:5px;
+	text-align:center;
+	z-index:2;
+	font-weight: 600;
+	border-radius: 100%;
+}
+.bullet::after{
+	content:'';
+	position:absolute;
+	width:180px; 
+	height:2px;
+	left:60px;
+	top:22px;
+	background:var(--yellow-button-color);
+	z-index:-2;
+
+}
+.bullet:hover{
+	cursor: pointer;
+	transition: all 2s;
+	background:var(--yellow-button-color);
+	color: #eee;
+}
+.step:nth-child(3) .bullet::after{
+	width:0px;
+	
+}
+.step .active{
+	color:#fff;
+	background:var(--yellow-button-color)!important;
+}
+.step a{
+	color: #999;
+}

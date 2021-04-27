@@ -183,6 +183,23 @@ export default class AdminDashboard extends Component{
                 </li>   
               </ul>
             </li>
+             <li className="treeview" >
+                <a href="JavaScript:void(0);" onClick={()=>this.openMenu("corporateData")} title="corporate Master">
+                  <i className="fa fa-users" aria-hidden="true"></i>
+                  <span className="smsidenames sidebarMenuTitle"> Package master </span>
+                  <span className="pull-right-container">
+                    <i className={"fa pull-right menu-icon-toggle "+(corporateData?this.openIcon:this.closeIcon)} />
+                  </span>
+                </a>
+                <ul className="treeview-menu" >                    
+                  <li className="noPadLR"> 
+                    <a href="/package-master" data-id="/package-master" title="Vendor List" onClick={this.activeMenu.bind(this)}>
+                      <i className="fa fa-circle-o dashr" />Package Master
+                    </a> 
+                  </li> 
+                    
+                </ul>
+              </li>
             <li className="treeview" >
               <a href="JavaScript:void(0);" onClick={()=>this.openMenu("candidateData")} title="Vendor Master">
                 <i className="fa fa-book" aria-hidden="true"></i>
@@ -191,6 +208,7 @@ export default class AdminDashboard extends Component{
                   <i className={"fa pull-right menu-icon-toggle "+(candidateData?this.openIcon:this.closeIcon)} />
                 </span>
               </a>
+             
               <ul className="treeview-menu" >                    
                 <li className="noPadLR"> 
                   <a href="/candidate/list" data-id="/candidate/list" title="Vendor List" onClick={this.activeMenu.bind(this)}>

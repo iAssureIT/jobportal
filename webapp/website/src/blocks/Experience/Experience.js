@@ -433,163 +433,124 @@ class Experience extends Component{
 	//========== Validation Start ==================
 	validateForm=()=>{
 		var status = true;
-		
-		if(this.state.industry.length<=0 ){
-			document.getElementById("industryError").innerHTML=  
-			"Please enter industry";  
-			status=false; 
-		}else{
-			document.getElementById("industryError").innerHTML=""; 
-			status = true;
-		}
-		if(this.state.company.length<=0 || this.state.company_id.length<=0){
-			document.getElementById("companyNameError").innerHTML=  
-			"Please enter company name";  
-			status=false; 
-		}else{
-			document.getElementById("companyNameError").innerHTML=  
-			""; 
-			status = true;
-		}
-		if(this.state.companyState.length<=0){
-			document.getElementById("stateError").innerHTML=  
-			"Please enter state";  
-			status=false; 
-		}else{
-			document.getElementById("stateError").innerHTML=  
-			""; 
-			status = true;
-		}
-		
-		if(this.state.companyCountry.length<=0){
-			document.getElementById("companyCountryError").innerHTML=  
-			"Please enter country";  
-			status=false; 
-		}else{
-			document.getElementById("companyCountryError").innerHTML=  
-			""; 
-			status = true;
-		}
-		if(this.state.companyCity.length<=0){
-			document.getElementById("companyCityError").innerHTML=  
-			"Please enter city";  
-			status=false; 
-		}else{
-			document.getElementById("companyCityError").innerHTML=  
-			""; 
-			status = true;
-		}
-		if(this.state.lastDesignation.length<=0){
-			document.getElementById("lastDesignationError").innerHTML=  
-			"Please enter your last designation";  
-			status=false; 
-		}else{
-			document.getElementById("lastDesignationError").innerHTML=  
-			""; 
-			status = true;
-		}
-		if(this.state.lastDeartment.length<=0){
-			document.getElementById("lastDeartmentError").innerHTML=  
-			"Please enter your last deartment";  
-			status=false; 
-		}else{
-			document.getElementById("lastDeartmentError").innerHTML=  
-			""; 
-			status = true;
-		}
+		var regName = /^[a-zA-Z]+$/;
+		var regName2 = /^[a-zA-z]+([\s][a-zA-Z]+)*$/;
+	
 		if(this.state.currentCTC.length<=0){
-			document.getElementById("currentCTCError").innerHTML=  
-			"Please enter your last salary";  
+			document.getElementById("currentCTCError").innerHTML=  "Please enter your last salary";  
 			status=false; 
 		}else{
-			document.getElementById("currentCTCError").innerHTML=  
-			""; 
-			status = true;
+			document.getElementById("currentCTCError").innerHTML=  ""; 
 		}
 		if(this.state.expectedCTC.length<=0){
-			document.getElementById("expectedCTCError").innerHTML=  
-			"Please enter your last salary";  
+			document.getElementById("expectedCTCError").innerHTML=  "Please enter your last salary";  
 			status=false; 
 		}else{
-			document.getElementById("expectedCTCError").innerHTML=  
-			""; 
-			status = true;
+			document.getElementById("expectedCTCError").innerHTML=  ""; 
+			
 		}
 		if(this.state.fromDate.length<=0){
-			document.getElementById("fromDateError").innerHTML=  
-			"Please enter date";  
+			document.getElementById("fromDateError").innerHTML=  "Please enter date";  
 			status=false; 
 		}else{
-			document.getElementById("fromDateError").innerHTML=  
-			""; 
-			status = true;
+			document.getElementById("fromDateError").innerHTML=  ""; 
+		
 		}
-		// if(this.state.toDate.length<=0){
-		// 	document.getElementById("toDateError").innerHTML=  
-		// 	"Please enter date";  
-		// 	status=false; 
-		// }else{
-		// 	document.getElementById("toDateError").innerHTML=  
-		// 	""; 
-		// 	status = true;
-		// }
 		if(this.state.noticePeriod.length<=0){
-			document.getElementById("noticePeriodError").innerHTML=  
-			"Please enter date";  
+			document.getElementById("noticePeriodError").innerHTML=  "Please enter date";  
 			status=false; 
 		}else{
-			document.getElementById("noticePeriodError").innerHTML=  
-			""; 
-			status = true;
-		}
-	
-		if(this.state.reportingManager.length<=0){
-			document.getElementById("reportingManagerError").innerHTML=  
-			"Please enter your reporting manager";  
-			status=false; 
-		}else{
-			document.getElementById("reportingManagerError").innerHTML=  
-			""; 
-			status = true;
-		}
-		if(this.state.reportingManagerDesignation.length<=0){
-			document.getElementById("reportingManagerDesignationError").innerHTML=  
-			"Please enter your reporting manager designation";  
-			status=false; 
-		}else{
-			document.getElementById("reportingManagerDesignationError").innerHTML=  
-			""; 
-			status = true;
+			document.getElementById("noticePeriodError").innerHTML=  ""; 
+			
 		}
 
 		if(this.state.totalExperience.length<=0){
-			document.getElementById("totalExperienceError").innerHTML=  
-			"Please enter your total experience";  
+			document.getElementById("totalExperienceError").innerHTML=  "Please enter your total experience";  
 			status=false; 
 		}else{
-			document.getElementById("totalExperienceError").innerHTML=  
-			""; 
-			status = true;
+			document.getElementById("totalExperienceError").innerHTML=  ""; 
+
 		}
 		if(this.state.relevantExperience.length<=0){
-			document.getElementById("relevantExperienceError").innerHTML=  
-			"Please enter your relevant experience";  
+			document.getElementById("relevantExperienceError").innerHTML=  "Please enter your relevant experience";  
 			status=false; 
 		}else{
-			document.getElementById("relevantExperienceError").innerHTML=  
-			""; 
-			status = true;
-		}
+			document.getElementById("relevantExperienceError").innerHTML=  ""; 
 
-		if(this.state.relevantExperience.length<=0 && this.state.totalExperience.length<=0 
-			&& this.state.reportingManagerDesignation.length<=0 && this.state.reportingManager.length<=0
-			&& this.state.noticePeriod.length<=0 && this.state.toDate.length<=0 &&  this.state.fromDate.length<=0 
-			&& this.state.expectedCTC.length<=0 && this.state.currentCTC.length<=0 && this.state.lastDeartment.length<=0
-			&& this.state.lastDesignation.length<=0 && this.state.companyCity.length<=0 && this.state.companyCountry.length<=0
-			&& this.state.companyState.length<=0 && this.state.industry.length<=0  && this.state.company.length<=0
-			&& this.state.company_id.length<=0){
-			status=false; 
 		}
+		 if(typeof this.state.industry !== "undefined"){
+           if(!this.state.industry.match(regName2)){
+              status = false;
+              document.getElementById("industryError").innerHTML = "Please enter a valid Industry";
+           }else{
+           		document.getElementById("industryError").innerHTML = "";
+           }       
+	     }
+	      if(typeof this.state.company !== "undefined"){
+           if(!this.state.company.match(regName2)){
+              status = false;
+              document.getElementById("companyNameError").innerHTML = "Please enter a valid Company";
+           }else{
+           		document.getElementById("companyNameError").innerHTML = "";
+           }       
+	     }
+	      if(typeof this.state.companyState !== "undefined"){
+           if(!this.state.companyState.match(regName2)){
+              status = false;
+              document.getElementById("stateError").innerHTML = "Please enter a valid state";
+           }else{
+           		document.getElementById("stateError").innerHTML = "";
+           }       
+	     }
+	     if(typeof this.state.companyCountry !== "undefined"){
+           if(!this.state.companyCountry.match(regName2)){
+              status = false;
+              document.getElementById("companyCountryError").innerHTML = "Please enter a valid Country";
+           }else{
+           		document.getElementById("companyCountryError").innerHTML = "";
+           }       
+	     }
+	     if(typeof this.state.companyCity !== "undefined"){
+           if(!this.state.companyCity.match(regName2)){
+              status = false;
+              document.getElementById("companyCityError").innerHTML = "Please enter a valid City";
+           }else{
+           		document.getElementById("companyCityError").innerHTML = "";
+           }       
+	     }
+	     if(typeof this.state.lastDesignation !== "undefined"){
+           if(!this.state.lastDesignation.match(regName2)){
+              status = false;
+              document.getElementById("lastDesignationError").innerHTML = "Please enter a valid last Designation";
+           }else{
+           		document.getElementById("lastDesignationError").innerHTML = "";
+           }       
+	     }
+	     if(typeof this.state.lastDeartment !== "undefined"){
+           if(!this.state.lastDeartment.match(regName2)){
+              status = false;
+              document.getElementById("lastDeartmentError").innerHTML = "Please enter a valid last Deartment";
+           }else{
+           		document.getElementById("lastDeartmentError").innerHTML = "";
+           }       
+	     }
+	     if(typeof this.state.reportingManager !== "undefined"){
+           if(!this.state.reportingManager.match(regName2)){
+              status = false;
+              document.getElementById("reportingManagerError").innerHTML = "Please enter a valid reporting Manager";
+           }else{
+           		document.getElementById("reportingManagerError").innerHTML = "";
+           }       
+	     }
+	     if(typeof this.state.reportingManagerDesignation !== "undefined"){
+           if(!this.state.reportingManagerDesignation.match(regName2)){
+              status = false;
+              document.getElementById("reportingManagerDesignationError").innerHTML = "Please enter a valid reporting Manager Designation";
+           }else{
+           		document.getElementById("reportingManagerDesignationError").innerHTML = "";
+           }       
+	     }
+	        
 		return status;
 	}
 
