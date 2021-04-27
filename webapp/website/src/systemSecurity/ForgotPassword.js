@@ -218,24 +218,24 @@ class ForgotPassword extends Component {
                           <span id="mobileNumberError" className="errorMsg"></span>
                       </div>
                   
-                      <div className="col-lg-10 col-lg-offset-1 orLine">
+                    {/*  <div className="col-lg-10 col-lg-offset-1 orLine">
 
                           <hr className="forgotPasswordHr"/>
                           <div className="orCircle"> Or </div>
                           <hr className="forgotPasswordHr"/>
-                      </div>
+                      </div>*/}
                   {/* <div className="forgotPasswordSentence col-lg-10 col-lg-offset-1">
                         Please enter your registered email address below to receive OTP
                     </div>
 */}
-                    <div className="col-lg-10 col-lg-offset-1 form-group" >
+                   {/* <div className="col-lg-10 col-lg-offset-1 form-group" >
                         <div className="input-group">
                             <span className="input-group-addon forgotPasswordInputIcon1"><i className="fa fa-envelope"></i></span>
                             <input type="email" id="emailAddress" name="emailAddress" ref="emailAddress" placeholder="Email Address" value={this.state.emailAddress} onChange={this.handleChange.bind(this)} className="form-control forgotPasswordInputBox"/>
                         </div>
                          <span id="emailAddressError" className="errorMsg"></span>
                     </div>
-
+*/}
                     
 
                     <div className="col-lg-6 col-lg-offset-3 buttonWrapper">
