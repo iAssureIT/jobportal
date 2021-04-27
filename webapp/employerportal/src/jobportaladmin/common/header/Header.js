@@ -82,7 +82,7 @@ class Header extends Component{
   render(){
     
     var hascompany_Id = localStorage.getItem("company_Id");
-    console.log(hascompany_Id)
+    //console.log(hascompany_Id)
     return(
 
         <div className="headerWrapper col-lg-12">

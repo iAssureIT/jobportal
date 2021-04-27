@@ -152,14 +152,19 @@ class AppliedCandidatelist extends Component{
 											this.props.appliedCandidateList.map((elem,index)=>{
 												var primarySkills   = [];
 												var secondarySkills = [];
-												if (elem.candidate_id.skills) {
-													elem.candidate_id.skills.map((skill,ind)=>{
-														if (skill.skillType == "primary") { primarySkills.push(skill) }
-					 									if (skill.skillType == "secondary") { secondarySkills.push(skill) }
-													})
-												}
+												if(elem.candidate_id )
+												{
+													if (elem.candidate_id.skills) {
+														elem.candidate_id.skills.map((skill,ind)=>{
+															if (skill.skillType == "primary") { primarySkills.push(skill) }
+						 									if (skill.skillType == "secondary") { secondarySkills.push(skill) }
+														})
+													}
+												}	
+													
 
 												return(
+														elem.candidate_id ?
 														<div className="col-lg-4 " key={index}>
 															<div>
 																<div className="col-lg-12 candidateBlockWrapper">
@@ -317,6 +322,7 @@ class AppliedCandidatelist extends Component{
 														    	</div>	
 															</div>
 												    	</div>
+												    	: null 
 													);
 												})
 										:

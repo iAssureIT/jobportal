@@ -119,7 +119,7 @@ class SignUp extends Component {
     var illegalChars = /[\(\)\<\>\,\;\:\\\"\[\]]/;
     var phoneno = /^\+?([0-9]{2})\)?[-. ]?([0-9]{5})[-. ]?([0-9]{5})$/;
 
-    if(this.state.firstName<=0)  {
+    if(this.state.firstName.length<=0)  {
       document.getElementById("firstNameError").innerHTML=  
       "Please enter valid Name";  
       status=false; 
@@ -135,7 +135,7 @@ class SignUp extends Component {
       status = true;
     }
 
-    if(this.state.lastName<=0)  {
+    if(this.state.lastName.length<=0)  {
       document.getElementById("lastNameError").innerHTML=  
       "Please enter valid Name";  
       status=false; 
@@ -223,13 +223,23 @@ class SignUp extends Component {
       swal('Please accept Term and Conditions');
       status =false;
     }
+    console.log(regName.test(firstName))
+    console.log(this.state.mobileNumber.match(phoneno))
 
+    if (this.state.checkTC && this.state.firstName>0 && regName.test(firstName) && 
+      regName.test(lastName) && this.state.emailAddress.length>0 && emailFilter.test(tempEmail) &&
+      this.state.mobileNumber.match(phoneno) && (this.state.password) == (this.state.confirmPassword)
+      ) {
+      status = true
+    }else{
+      status = false
+    }
     return status;
   } 
 	usersignup(event) {
 		event.preventDefault();
 		var status =  this.validateForm();
-     console.log("tc==",this.state.checkTC);
+     console.log("tc==",status);
 
 	    if(status == true){
 			var auth = {

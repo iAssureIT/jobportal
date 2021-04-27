@@ -425,53 +425,108 @@ exports.appliedJobList = (req,res,next)=>{
 exports.candidatesAppliedToJob = (req,res,next)=>{
     console.log(req.body)
     var selector = {}; 
-    selector['$or'] = [];
-    selector['$and'] = [];
+    selector['$or']     = [];
+    selector['$and']    = [];
 
-    selector["$and"].push({
-        "address.countryCode": "IN"
+    selector['$and'].push({
+        "address.countryCode": "IN" 
     })
+
+    if (req.body.stateCode) {
+        selector['$and'].push({
+            "address.stateCode": req.body.stateCode
+        })
+    }
+    if (req.body.district) {
+        selector['$and'].push({
+            "address.district": req.body.district
+        })
+    }
+    if (req.body.gender) {
+        selector['$and'].push({
+            "basicInfo.gender": req.body.gender
+        })
+    }
+    if (req.body.experience) {
+        if (req.body.experience=="0to2") {
+            selector["$and"].push({
+                "eligibility.minExperience": {
+                    '$gte': 0,
+                    '$lte': 2
+                }
+            });
+        }
+        if (req.body.experience=="2to6") {
+            selector["$and"].push({
+                "eligibility.minExperience": {
+                    '$gte': 2,
+                    '$lte': 6
+                }
+            });
+        }
+        if (req.body.experience=="6to10") {
+            selector["$and"].push({
+                "eligibility.minExperience": {
+                    '$gte': 6,
+                    '$lte': 10
+                }
+            });
+        }
+    }
+    if (req.body.skill_id) {
+
+    }else {
+        delete selector["$or"];
+    }
+    console.log(selector)
     // ApplyJob.find({"candidate_id": req.body.candidate_id}).sort({ createdAt: -1 })
     // .populate( 'job_id', null, selector ) 
     ApplyJob.find({"job_id" : ObjectId(req.body.job_id)})
             .populate({path : 'candidate_id', model : 'candidatemasters',
                 populate: {
                   path: 'address.addressType',
-                  model: 'addresstypemasters',
-                  match : {"address.countryCode": "INe"}
-                }
+                  model: 'addresstypemasters'
+                },
+                match : selector 
             })
             .populate({ path : 'candidate_id', model : 'candidatemasters',
                 populate: {
                   path: 'academics.qualificationlevel_id',
                   model: 'qualificationlevelmasters'
-                }
+                },
+                match : selector
             })
             .populate({ path: 'candidate_id', model: 'candidatemasters',
                 populate: {
                   path: 'academics.qualification_id',
                   model: 'qualificationmasters'
-                }
+                },
+                match : selector
             })
             .populate({ path: 'candidate_id', model: 'candidatemasters',
                 populate: {
                   path: 'academics.university_id',
                   model: 'universitymasters'
-                }
+                },
+                match : selector
             })
             .populate({ path: 'candidate_id', model: 'candidatemasters',
                 populate: {
                   path: 'workExperience.company_id',
                   model: 'entitymasters'
-                }
+                },
+                match : selector
             })
             .populate({ path: 'candidate_id', model: 'candidatemasters',
                 populate: {
                   path: 'skills.skill_id',
-                  model: 'skillmasters'
-                }
+                  model: 'skillmasters',
+                  
+                },
+                match : selector
             })
     .exec(function (err, candidate) {
+        console.log("candidate",candidate)
     console.log(err)
     if (err) return res.status(500).json({ error: err });
     res.status(200).json(candidate);
