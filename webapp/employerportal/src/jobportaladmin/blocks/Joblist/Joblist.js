@@ -1,5 +1,5 @@
 import React, {Component} 		from 'react';
-
+import { withRouter }	 	    from 'react-router-dom';
 import Axios 			  		from 'axios';
 import Swal  					from 'sweetalert2';
 import Moment 					from "moment";
@@ -31,6 +31,7 @@ componentDidMount(){
 
 	var {mapAction} = this.props;
 	mapAction.filterJobList(selector);*/
+	
 
 }
 
@@ -199,6 +200,11 @@ deleteJob = (event)=>{
 				)
 		})
 	}
+	redirectTo(job_id, url, parameter){
+		console.log(url)
+		console.log(parameter)
+		this.props.history.push("/applied-candidate-list/"+job_id+"/"+url+"/"+parameter)
+	} 
 	render(){
 		//console.log("selector",this.props.selector);
 		var {mapAction} = this.props;
@@ -291,19 +297,19 @@ deleteJob = (event)=>{
 																			&nbsp; <a href={"/applied-candidate-list/" + elem._id}> Candidates Applied : {	elem.applicantStatistics.total ? elem.applicantStatistics.total  :  0}</a> 
 																		</div> 
 																		<div className="tierOneRow col-lg-12 "> 
-																			<div className="col-lg-4 react1 row">{elem.location.district}<br /><span className="multiCount">{elem.applicantStatistics.district}</span></div>
-																			<div className="col-lg-4 react2 row">Rest of {elem.location.state}<br /><span className="multiCount">{elem.applicantStatistics.state ? ( elem.applicantStatistics.state - elem.applicantStatistics.district ) : 0 } </span></div>
-																			<div className="col-lg-4 react3 row">Rest of {elem.location.country}<br /><span className="multiCount">{elem.applicantStatistics.country ? ( elem.applicantStatistics.country - elem.applicantStatistics.state ) : 0}</span></div> 
+																			<div className="col-lg-4 react1 row" onClick={this.redirectTo.bind(this,elem._id, 'district',elem.location.district)}>{elem.location.district}<br /><span className="multiCount">{elem.applicantStatistics.district}</span></div>
+																			<div className="col-lg-4 react2 row" onClick={this.redirectTo.bind(this,elem._id, 'state',elem.location.stateCode)}>Rest of {elem.location.state}<br /><span className="multiCount">{elem.applicantStatistics.state ? ( elem.applicantStatistics.state - elem.applicantStatistics.district ) : 0 } </span></div>
+																			<div className="col-lg-4 react3 row" onClick={this.redirectTo.bind(this,elem._id, 'country',elem.location.countryCode)}>Rest of {elem.location.country}<br /><span className="multiCount">{elem.applicantStatistics.country ? ( elem.applicantStatistics.country - elem.applicantStatistics.state ) : 0}</span></div> 
 																		</div>
 																		<div className="tierOneRow col-lg-12 "> 
-																			<div className="col-lg-4 react1 row">Male<br /><span className="multiCount"></span>{elem.applicantStatistics.male  ? elem.applicantStatistics.male : 0}</div>
-																			<div className="col-lg-4 react2 row">Female<br /><span className="multiCount">{elem.applicantStatistics.female  ? elem.applicantStatistics.female : 0 }</span></div>
-																			<div className="col-lg-4 react3 row">Other<br /><span className="multiCount"> {elem.applicantStatistics.other  ? elem.applicantStatistics.other : 0 }</span></div> 
+																			<div className="col-lg-4 react1 row" onClick={this.redirectTo.bind(this,elem._id, 'gender','male')}>Male<br /><span className="multiCount"></span>{elem.applicantStatistics.male  ? elem.applicantStatistics.male : 0}</div>
+																			<div className="col-lg-4 react2 row" onClick={this.redirectTo.bind(this,elem._id, 'gender','female')}>Female<br /><span className="multiCount">{elem.applicantStatistics.female  ? elem.applicantStatistics.female : 0 }</span></div>
+																			<div className="col-lg-4 react3 row" onClick={this.redirectTo.bind(this,elem._id, 'gender','transgender')}>Other<br /><span className="multiCount"> {elem.applicantStatistics.other  ? elem.applicantStatistics.other : 0 }</span></div> 
 																		</div>
 																		<div className="tierOneRow col-lg-12 "> 
-																			<div className="col-lg-4 react1 row">Exp&nbsp;:&nbsp;0 To 2<br /><span className="multiCount">{elem.applicantStatistics.exp0to2  ? elem.applicantStatistics.exp0to2 : 0}</span></div>
-																			<div className="col-lg-4 react2 row">Exp&nbsp;:&nbsp;2 To 6<br /><span className="multiCount">{elem.applicantStatistics.exp2to6 ? elem.applicantStatistics.exp2to6 : 0}</span></div>
-																			<div className="col-lg-4 react3 row">Exp&nbsp;:&nbsp;6 To 10<br /><span className="multiCount">{elem.applicantStatistics.exp6to10 ? elem.applicantStatistics.exp6to10 : 0}</span></div> 
+																			<div className="col-lg-4 react1 row" onClick={this.redirectTo.bind(this,elem._id, 'experience','0to2')}>Exp&nbsp;:&nbsp;0 To 2<br /><span className="multiCount">{elem.applicantStatistics.exp0to2  ? elem.applicantStatistics.exp0to2 : 0}</span></div>
+																			<div className="col-lg-4 react2 row" onClick={this.redirectTo.bind(this,elem._id, 'experience','2to6')}>Exp&nbsp;:&nbsp;2 To 6<br /><span className="multiCount">{elem.applicantStatistics.exp2to6 ? elem.applicantStatistics.exp2to6 : 0}</span></div>
+																			<div className="col-lg-4 react3 row" onClick={this.redirectTo.bind(this,elem._id, 'experience','6to10')}>Exp&nbsp;:&nbsp;6 To 10<br /><span className="multiCount">{elem.applicantStatistics.exp6to10 ? elem.applicantStatistics.exp6to10 : 0}</span></div> 
 																		</div> 
 																	</div>
 																</div>
@@ -629,69 +635,69 @@ deleteJob = (event)=>{
 						</div>
 					</div>
 					
-					<div class="modal fade" id="delModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-					    <div class="modal-dialog delModalMain">
-					      <div class="modal-content delModalContent">
-					        <div class="modal-header delHeader">
-					          <button type="button" class="close delCloseBtn" data-dismiss="modal" aria-label="Close">
+					<div className="modal fade" id="delModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+					    <div className="modal-dialog delModalMain">
+					      <div className="modal-content delModalContent">
+					        <div className="modal-header delHeader">
+					          <button type="button" className="close delCloseBtn" data-dismiss="modal" aria-label="Close">
 					            <span aria-hidden="true">&times;</span>
 					          </button>
 					        </div>
-					        <div class="modal-body delModalBody">
-					          <div class="delBodyText">
+					        <div className="modal-body delModalBody">
+					          <div className="delBodyText">
 					            Are you sure <br />
 					            you want to delete this job?
 					          </div>
 					          <div className="col-lg-12 delMainBtnDiv">
-					              <button type="button" class="btn btn-default delModalBtnOne col-lg-3" data-dismiss="modal">NO</button> 
-					              <button type="button" class="btn btn-default delModalBtnTwo col-lg-3" data-dismiss="modal" onClick={this.deleteJob}>YES</button>
+					              <button type="button" className="btn btn-default delModalBtnOne col-lg-3" data-dismiss="modal">NO</button> 
+					              <button type="button" className="btn btn-default delModalBtnTwo col-lg-3" data-dismiss="modal" onClick={this.deleteJob}>YES</button>
 					          </div> 
 					        </div>
 					      </div>
 					    </div>
 					</div> 
 
-					<div class="modal fade" id="inactiveModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-					    <div class="modal-dialog delModalMain">
-					      <div class="modal-content delModalContent">
-					        <div class="modal-header delHeader">
-					          <button type="button" class="close delCloseBtn" data-dismiss="modal" aria-label="Close">
+					<div className="modal fade" id="inactiveModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+					    <div className="modal-dialog delModalMain">
+					      <div className="modal-content delModalContent">
+					        <div className="modal-header delHeader">
+					          <button type="button" className="close delCloseBtn" data-dismiss="modal" aria-label="Close">
 					            <span aria-hidden="true">&times;</span>
 					          </button>
 					        </div>
-					        <div class="modal-body delModalBody">
-					          <div class="delBodyText">
+					        <div className="modal-body delModalBody">
+					          <div className="delBodyText">
 					            Are you sure, <br />
 					            do you want to inactive this job?
 					          </div>
 					          <div className="col-lg-12 delMainBtnDiv">
-					              <button type="button" class="btn btn-default delModalBtnOne col-lg-3" data-dismiss="modal">NO</button> 
-					              <button type="button" class="btn btn-default delModalBtnTwo col-lg-3" data-dismiss="modal" onClick={this.handleSwitch}>YES</button>
+					              <button type="button" className="btn btn-default delModalBtnOne col-lg-3" data-dismiss="modal">NO</button> 
+					              <button type="button" className="btn btn-default delModalBtnTwo col-lg-3" data-dismiss="modal" onClick={this.handleSwitch}>YES</button>
 					          </div> 
 					        </div>
 					      </div>
 					    </div>
 					</div> 
 
-					<div class="modal fade" id="activeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-					    <div class="modal-dialog delModalMain">
-					      <div class="modal-content delModalContent">
-					        <div class="modal-header delHeader">
-					          <button type="button" class="close delCloseBtn" data-dismiss="modal" aria-label="Close">
-					            <span aria-hidden="true">&times;</span>
-					          </button>
-					        </div>
-					        <div class="modal-body delModalBody">
-					          <div class="delBodyText">
-					            Are you sure, <br />
-					            do you want to publish this job?
-					          </div>
-					          <div className="col-lg-12 delMainBtnDiv">
-					              <button type="button" class="btn btn-default delModalBtnOne col-lg-3" data-dismiss="modal">NO</button> 
-					              <button type="button" class="btn btn-default delModalBtnTwo col-lg-3" data-dismiss="modal" onClick={this.handleActiveSwitch}>YES</button>
-					          </div> 
-					        </div>
-					      </div>
+					<div className="modal fade" id="activeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+					    <div className="modal-dialog delModalMain">
+							<div className="modal-content delModalContent">
+							<div className="modal-header delHeader">
+							  <button type="button" className="close delCloseBtn" data-dismiss="modal" aria-label="Close">
+							    <span aria-hidden="true">&times;</span>
+							  </button>
+							</div>
+							<div className="modal-body delModalBody">
+							  <div className="delBodyText">
+							    Are you sure, <br />
+							    do you want to publish this job?
+							  </div>
+							  <div className="col-lg-12 delMainBtnDiv">
+							      <button type="button" className="btn btn-default delModalBtnOne col-lg-3" data-dismiss="modal">NO</button> 
+							      <button type="button" className="btn btn-default delModalBtnTwo col-lg-3" data-dismiss="modal" onClick={this.handleActiveSwitch}>YES</button>
+							  </div> 
+							</div>
+							</div>
 					    </div>
 					</div> 
 				</div>		
@@ -728,4 +734,4 @@ const mapStateToProps = (state)=>{
 const mapDispatchToProps = (dispatch) => ({
   mapAction :  bindActionCreators(mapActionCreator, dispatch)
 })
-export default connect(mapStateToProps, mapDispatchToProps)(JobListView)
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(JobListView))

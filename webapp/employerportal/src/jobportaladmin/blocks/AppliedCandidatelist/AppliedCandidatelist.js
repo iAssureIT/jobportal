@@ -1,5 +1,6 @@
 import React,{Component} 	  from 'react';
 import Axios 			 	  from 'axios';
+import { withRouter }	 	    from 'react-router-dom';
 import Swal 			 	  from 'sweetalert2';
 import Moment                 from 'moment';
 import { FontAwesomeIcon } 	  from '@fortawesome/react-fontawesome';
@@ -48,7 +49,7 @@ class AppliedCandidatelist extends Component{
 	
 	
 	
-	
+
 	getData(){
 		var tableData = this.props.appliedCandidateList.map((a, i)=>{
 			console.log(a)
@@ -81,40 +82,203 @@ class AppliedCandidatelist extends Component{
     		view : value
     	})
     }
-	
+	redirectTo(job_id, url, parameter){
+		console.log(url)
+		console.log(parameter)
+
+		var {mapAction}  = this.props;
+
+		var appliedCandidateSelector = {};
+
+		if (this.props.match.path== "/applied-candidate-list/:job_id") {
+			appliedCandidateSelector.job_id = job_id
+			mapAction.filterCandidatesApplied(appliedCandidateSelector)
+		}
+		else if (url== "state") {
+			appliedCandidateSelector.job_id = job_id
+			appliedCandidateSelector.stateCode = parameter
+			mapAction.filterCandidatesApplied(appliedCandidateSelector)
+		}
+		else if (url== "district") {
+			appliedCandidateSelector.job_id = job_id
+			appliedCandidateSelector.district = parameter
+			mapAction.filterCandidatesApplied(appliedCandidateSelector)
+		}	
+		else if (url== "gender") {
+			appliedCandidateSelector.job_id = job_id
+			appliedCandidateSelector.gender = parameter
+			mapAction.filterCandidatesApplied(appliedCandidateSelector)
+		}
+		else if (url== "experience") {
+			appliedCandidateSelector.job_id = job_id
+			appliedCandidateSelector.experience = parameter
+			mapAction.filterCandidatesApplied(appliedCandidateSelector)
+		}
+		this.props.history.push("/applied-candidate-list/"+job_id+"/"+url+"/"+parameter)
+	}
+	deleteJob = (event)=>{
+	event.preventDefault();
+	const job_id = this.state.job_id;
+
+	if(job_id){
+        Axios.delete("/api/jobs/delete/"+job_id)
+        .then(response =>{
+          if(response.data.message==="Job details deleted Successfully!"){
+            this.props.history.push('job-list')
+            /*this.changeStatus();*/
+          }
+        })
+        .catch(error=>{
+        })
+      }
+
+	}
 	render(){
-		console.log(this.props.jobInfo);
+		//console.log(this.props.jobInfo);
 		return(	
+			<section className="jobListWrapper">
 				<div className="candidateListWrapperMain">
 					<div className="col-lg-12 candidateListWrapper">
-						{
-							<div className="col-lg-8">
-								<div className="JobInfoContainer">
-									<div className="col-lg-12">
-										<div className="col-lg-11 jobDescBlock">
-											<div className="joblistDesignation">
-												{this.props.jobInfo ? this.props.jobInfo.jobBasicInfo.jobTitle : null}
+						
+						<div className="col-lg-8">
+							<div className="jobListContainer">
+								{this.props.jobInfo ?
+								<div className="col-lg-12">
+									
+									<div className="col-lg-11 jobListLeftContent">
+										<div className="row">
+											<div className="leftSideMainBox col-lg-12">
+												<div className="col-lg-6 leftSideBox">
+													<div className="iconsBar">
+														{/*<FontAwesomeIcon className="restRoomIcon" icon={['fas', 'restroom']} />*/}
+														<ul>
+															{
+																this.props.jobInfo.jobBasicInfo.gender=="Male Only"?
+																<li><i className="fa fa-male" title="Only male candidates can apply"></i></li>
+																: this.props.jobInfo.jobBasicInfo.gender=="Female Only"?
+																<li><i className="fa fa-female" title="Only female candidates can apply"></i></li> 
+																: <li><i className="fa fa-male" title="male & female candidates both can apply"></i><i className="fa fa-female bothIcon" title="male & female candidates both can apply"></i></li>
+															}
+															{	 
+																this.props.jobInfo.jobBasicInfo.jobshift_id ? 
+																this.props.jobInfo.jobBasicInfo.jobshift_id.jobShift=="Day Shift" ?
+																<li><i className="fa fa-sun-o" title="Day Shift"></i></li>
+																: this.props.jobInfo.jobBasicInfo.jobshift_id.jobShift=="Night Shift"?
+																<li><i className="fa fa-moon-o" title="Night Shift"></i></li> 
+																: <li><i className="fa fa-repeat" title="Rotational shift"></i></li> 
+																:
+																<li><i className="fa fa-sun-o" title="Day Shift"></i></li>	
+															}	
+															{	
+																this.props.jobInfo.jobBasicInfo.jobtime_id.jobTime=="Full Time"?
+																<li><i className="fa fa-clock-o" title="Full Time"></i></li>
+																: this.props.jobInfo.jobBasicInfo.jobtime_id.jobTime=="Part Time" ? <li><i className="fa fa-hourglass-start" title="Part Time"></i></li>
+																: this.props.jobInfo.jobBasicInfo.jobtime_id.jobTime=="Hourly Basis"? 
+																<li><i className="fa fa-hourglass-o" title="Hourly Basis"></i></li> 
+																: <li><i className="fa fa-hourglass-o" title="Hourly Basis"></i></li> 
+															}	
+														</ul>
+													</div>	
+													<div className="infoLog"> {Moment(this.props.jobInfo.createdAt).startOf('seconds').fromNow()}  </div>
+													<div className="jobListDesignation col-lg-12 row">
+														<a className="link" href={"/job-profile/" +  this.props.jobInfo._id}>{this.props.jobInfo.jobBasicInfo.jobTitle + " (" +this.props.jobInfo.jobID+ ")"} </a>
+													</div>
+													<div className="jobListCompanyTitle col-lg-12 row">
+														{this.props.jobInfo.company_id ? this.props.jobInfo.company_id.companyName : ""}
+													</div>
+													<div className="jobListExperienceTitle col-lg-12 row"> 
+														<i className="fa fa-calendar jobListExperience"></i> &nbsp; Exp&nbsp;:&nbsp;{this.props.jobInfo.eligibility.minExperience} years
+													</div>
+													<div className="jobListCtcSalTitle col-lg-12 row"> 
+														<i className="fa fa-rupee jobListCtcSal"></i> &nbsp; <i className="fa fa-inr"></i> {this.props.jobInfo.ctcOffered.minSalary} {this.props.jobInfo.ctcOffered.minSalPeriod}&nbsp;&nbsp;-&nbsp;&nbsp;<i className="fa fa-inr"></i> {this.props.jobInfo.ctcOffered.maxSalary} {this.props.jobInfo.ctcOffered.maxSalPeriod}
+													</div>
+													<div className="joblistLocationInfo col-lg-12 row">
+														<i className="fa fa-map-marker jobListLocation"></i> &nbsp; {this.props.jobInfo.location.address + " " + this.props.jobInfo.location.district + ", " + this.props.jobInfo.location.state + ", " +this.props.jobInfo.location.country}
+													</div>
+													<div className="jobListNumPositionsTitle col-lg-12 row"> 
+														<i className="fa fa-users jobListNumPositions"></i> &nbsp; No. of positions : {this.props.jobInfo.jobBasicInfo.positions}
+													</div>
+												</div>
+												<div className="col-lg-6 rightSideBox">
+													<div className="joblistNoCount col-lg-12"> 
+														&nbsp; <a href={"/applied-candidate-list/" + this.props.jobInfo._id}> Candidates Applied : {	this.props.jobInfo.applicantStatistics.total ? this.props.jobInfo.applicantStatistics.total  :  0}</a> 
+													</div> 
+													<div className="tierOneRow col-lg-12 "> 
+														<div className="col-lg-4 react1 row" onClick={this.redirectTo.bind(this,this.props.jobInfo._id, 'district',this.props.jobInfo.location.district)}>{this.props.jobInfo.location.district}<br /><span className="multiCount">{this.props.jobInfo.applicantStatistics.district}</span></div>
+														<div className="col-lg-4 react2 row" onClick={this.redirectTo.bind(this,this.props.jobInfo._id, 'state',this.props.jobInfo.location.stateCode)}>Rest of {this.props.jobInfo.location.state}<br /><span className="multiCount">{this.props.jobInfo.applicantStatistics.state ? ( this.props.jobInfo.applicantStatistics.state - this.props.jobInfo.applicantStatistics.district ) : 0 } </span></div>
+														<div className="col-lg-4 react3 row" onClick={this.redirectTo.bind(this,this.props.jobInfo._id, 'country',this.props.jobInfo.location.countryCode)}>Rest of {this.props.jobInfo.location.country}<br /><span className="multiCount">{this.props.jobInfo.applicantStatistics.country ? ( this.props.jobInfo.applicantStatistics.country - this.props.jobInfo.applicantStatistics.state ) : 0}</span></div> 
+													</div>
+													<div className="tierOneRow col-lg-12 "> 
+														<div className="col-lg-4 react1 row" onClick={this.redirectTo.bind(this,this.props.jobInfo._id, 'gender','male')}>Male<br /><span className="multiCount"></span>{this.props.jobInfo.applicantStatistics.male  ? this.props.jobInfo.applicantStatistics.male : 0}</div>
+														<div className="col-lg-4 react2 row" onClick={this.redirectTo.bind(this,this.props.jobInfo._id, 'gender','female')}>Female<br /><span className="multiCount">{this.props.jobInfo.applicantStatistics.female  ? this.props.jobInfo.applicantStatistics.female : 0 }</span></div>
+														<div className="col-lg-4 react3 row" onClick={this.redirectTo.bind(this,this.props.jobInfo._id, 'gender','transgender')}>Other<br /><span className="multiCount"> {this.props.jobInfo.applicantStatistics.other  ? this.props.jobInfo.applicantStatistics.other : 0 }</span></div> 
+													</div>
+													<div className="tierOneRow col-lg-12 "> 
+														<div className="col-lg-4 react1 row" onClick={this.redirectTo.bind(this,this.props.jobInfo._id, 'experience','0to2')}>Exp&nbsp;:&nbsp;0 To 2<br /><span className="multiCount">{this.props.jobInfo.applicantStatistics.exp0to2  ? this.props.jobInfo.applicantStatistics.exp0to2 : 0}</span></div>
+														<div className="col-lg-4 react2 row" onClick={this.redirectTo.bind(this,this.props.jobInfo._id, 'experience','2to6')}>Exp&nbsp;:&nbsp;2 To 6<br /><span className="multiCount">{this.props.jobInfo.applicantStatistics.exp2to6 ? this.props.jobInfo.applicantStatistics.exp2to6 : 0}</span></div>
+														<div className="col-lg-4 react3 row" onClick={this.redirectTo.bind(this,this.props.jobInfo._id, 'experience','6to10')}>Exp&nbsp;:&nbsp;6 To 10<br /><span className="multiCount">{this.props.jobInfo.applicantStatistics.exp6to10 ? this.props.jobInfo.applicantStatistics.exp6to10 : 0}</span></div> 
+													</div> 
+												</div>
 											</div>
-											<div className="joblistCompanyName">
-												{this.props.jobInfo ? this.props.jobInfo.company_id.companyName : null}
+										</div>			
+									</div>
+									<div className="col-lg-1 jobListRightContent">
+										<div className="row">
+											<div className="col-lg-12">
+												{/*<div className="input-group jobStatusToggleWrapper">
+													<div className = {this.state.isActive ? "genderFeild genderFeildVerti genderFeildActive" : "genderFeild genderFeildVerti" }
+													 id={elem._id} name="primaryToggel" data-toggle="modal" data-target="#inactiveModal" data-dismiss="modal" onClick={() => {this.setState({job_id:elem._id})}} id = {elem._id}
+													 value="togglePrimary" title="Inactive"
+													 //onClick={this.handleSwitch.bind(this)} 
+													 >
+													</div>
+													<div className = {!this.state.isActive ? "genderFeild genderFeildVerti genderFeildInActive" : "genderFeild genderFeildVerti" }
+													 id={elem._id} name="primaryToggel" data-toggle="modal" data-target="#inactiveModal" data-dismiss="modal" onClick={() => {this.setState({job_id:elem._id})}} id = {elem._id}
+													 value="togglePrimary" title="Inactive">
+														
+													</div>
+												</div>	*/}
+												<div className="listEditBtn">
+													<a title = "Edit" href={"/post-job/" + this.props.jobInfo._id}><i className="fa fa-edit"></i></a>
+												</div>	
+												<div className="listViewBtn">	
+													<a title = "View" href={"/job-profile/" + this.props.jobInfo._id}><i className="fa fa-eye"></i></a>
+												</div>
+												
+												<div className="listDelBtn">	
+													<i title = "Delete" className="fa fa-trash" data-toggle="modal" data-target="#delModal" data-dismiss="modal" onClick={() => {this.setState({job_id:this.props.jobInfo._id})}} id = {this.props.jobInfo._id}></i>
+												</div>
+
+												
 											</div>
-											<div> 
-												<i className="fa fa-calendar joblistExperience"></i> &nbsp; Exp: {this.props.jobInfo ? this.props.jobInfo.eligibility.minExperience : null}
-											</div>
-											<div> 
-												<i className="fa fa-rupee joblistCtcSal"></i> &nbsp; <i className="fa fa-inr"></i> {this.props.jobInfo ? this.props.jobInfo.ctcOffered.minSalary : null} {this.props.jobInfo ? this.props.jobInfo.ctcOffered.minSalPeriod : null} - <i className="fa fa-inr"></i> {this.props.jobInfo ? this.props.jobInfo.ctcOffered.maxSalary : null} {this.props.jobInfo ? this.props.jobInfo.ctcOffered.maxSalPeriod : null}
-											</div>
-											<div>
-												<i className="fa fa-map-marker joblistLocation"></i> &nbsp; {this.props.jobInfo ? this.props.jobInfo.location.address + " "+ this.props.jobInfo.location.district + ", "+this.props.jobInfo.location.state+", "+this.props.jobInfo.location.country : null} 
-											</div>
-											<div>
-												<i className="fa fa-users joblistNumPositions"></i> &nbsp; No. of positions : {this.props.jobInfo ? this.props.jobInfo.jobBasicInfo.positions : null}
-											</div>	
 										</div>
-									</div>	
+									</div>
+									
 								</div>
+								: null }	
 							</div>
-						}	
+						</div>
+						<div className="modal fade" id="delModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+						    <div className="modal-dialog delModalMain">
+						      <div className="modal-content delModalContent">
+						        <div className="modal-header delHeader">
+						          <button type="button" className="close delCloseBtn" data-dismiss="modal" aria-label="Close">
+						            <span aria-hidden="true">&times;</span>
+						          </button>
+						        </div>
+						        <div className="modal-body delModalBody">
+						          <div className="delBodyText">
+						            Are you sure <br />
+						            you want to delete this job?
+						          </div>
+						          <div className="col-lg-12 delMainBtnDiv">
+						              <button type="button" className="btn btn-default delModalBtnOne col-lg-3" data-dismiss="modal">NO</button> 
+						              <button type="button" className="btn btn-default delModalBtnTwo col-lg-3" data-dismiss="modal" onClick={this.deleteJob}>YES</button>
+						          </div> 
+						        </div>
+						      </div>
+						    </div>
+						</div> 		
 					</div>
 					
 					<div className="col-lg-12 downloadCount">
@@ -152,14 +316,19 @@ class AppliedCandidatelist extends Component{
 											this.props.appliedCandidateList.map((elem,index)=>{
 												var primarySkills   = [];
 												var secondarySkills = [];
-												if (elem.candidate_id.skills) {
-													elem.candidate_id.skills.map((skill,ind)=>{
-														if (skill.skillType == "primary") { primarySkills.push(skill) }
-					 									if (skill.skillType == "secondary") { secondarySkills.push(skill) }
-													})
-												}
+												if(elem.candidate_id )
+												{
+													if (elem.candidate_id.skills) {
+														elem.candidate_id.skills.map((skill,ind)=>{
+															if (skill.skillType == "primary") { primarySkills.push(skill) }
+						 									if (skill.skillType == "secondary") { secondarySkills.push(skill) }
+														})
+													}
+												}	
+													
 
 												return(
+														elem.candidate_id ?
 														<div className="col-lg-4 " key={index}>
 															<div>
 																<div className="col-lg-12 candidateBlockWrapper">
@@ -317,6 +486,7 @@ class AppliedCandidatelist extends Component{
 														    	</div>	
 															</div>
 												    	</div>
+												    	: null 
 													);
 												})
 										:
@@ -328,6 +498,7 @@ class AppliedCandidatelist extends Component{
 					}				
 			);
 				</div>
+			</section>	
 		);
 	}
 }
@@ -342,4 +513,4 @@ const mapDispatchToProps = (dispatch) => ({
   mapAction :  bindActionCreators(mapActionCreator, dispatch)
 })
 
-export default connect(mapStateToProps, mapDispatchToProps) (AppliedCandidatelist);
+export default connect(mapStateToProps, mapDispatchToProps) (withRouter(AppliedCandidatelist));

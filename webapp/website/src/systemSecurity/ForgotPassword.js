@@ -33,9 +33,9 @@ class ForgotPassword extends Component {
        var tempEmail = this.state.emailAddress; 
 
        var illegalChars = /[\(\)\<\>\,\;\:\\\"\[\]]/;
-       //var phoneno = /^\d{10}$/;
+       var phoneno = /^\+?([0-9]{2})\)?[-. ]?([0-9]{5})[-. ]?([0-9]{5})$/;
 
-     if(tempEmail <= 0){
+   /*  if(tempEmail <= 0){
       document.getElementById("emailAddressError").innerHTML=  
       "Please enter your Email";  
       status=false; 
@@ -49,9 +49,27 @@ class ForgotPassword extends Component {
           document.getElementById("emailAddressError").innerHTML=
           ""; 
           status = true;
-        }
-        return status;
+        }*/
+
+    if(this.state.mobileNumber!=(phoneno)){
+       document.getElementById("mobileNumberError").innerHTML=  
+      "Please enter valid Mobile Number";  
+      status = false;
+      console.log(this.state.mobileNumber);
+      
+    }else{
+     
+      status=true; 
     }
+        return status;
+    } 
+
+    ShowLogin(event){
+    event.preventDefault();
+    var {mapAction} = this.props;
+
+    mapAction.setSelectedModal("login");
+  }
 
     handleChange(event){
         var fieldValue=event.currentTarget.value;
@@ -218,30 +236,35 @@ class ForgotPassword extends Component {
                           <span id="mobileNumberError" className="errorMsg"></span>
                       </div>
                   
-                      <div className="col-lg-10 col-lg-offset-1 orLine">
+                    {/*  <div className="col-lg-10 col-lg-offset-1 orLine">
 
                           <hr className="forgotPasswordHr"/>
                           <div className="orCircle"> Or </div>
                           <hr className="forgotPasswordHr"/>
-                      </div>
+                      </div>*/}
                   {/* <div className="forgotPasswordSentence col-lg-10 col-lg-offset-1">
                         Please enter your registered email address below to receive OTP
                     </div>
 */}
-                    <div className="col-lg-10 col-lg-offset-1 form-group" >
+                   {/* <div className="col-lg-10 col-lg-offset-1 form-group" >
                         <div className="input-group">
                             <span className="input-group-addon forgotPasswordInputIcon1"><i className="fa fa-envelope"></i></span>
                             <input type="email" id="emailAddress" name="emailAddress" ref="emailAddress" placeholder="Email Address" value={this.state.emailAddress} onChange={this.handleChange.bind(this)} className="form-control forgotPasswordInputBox"/>
                         </div>
                          <span id="emailAddressError" className="errorMsg"></span>
                     </div>
-
-                    
-
-                    <div className="col-lg-6 col-lg-offset-3 buttonWrapper">
-                        <button className="btn col-lg-12 buttonSendOTP" onClick={this.sendLink.bind(this)}>Send OTP</button>
+    */}             
+                    <div className="col-lg-10 col-lg-offset-1">
+                      <div className="row">
+                        <div className="col-lg-6 buttonWrapper">
+                            <a href="#" onClick={this.ShowLogin.bind(this)}><u className="loginSignUp" > Login ?</u></a>
+                        </div>
+                     
+                        <div className="col-lg-6 buttonWrapper">
+                            <button className="btn col-lg-12 buttonSendOTP" onClick={this.sendLink.bind(this)}>Send OTP</button>
+                        </div>
+                      </div>
                     </div>
-
                    {/* <div className="col-lg-12 forgotPasswordLinks">
                         <a className="forgotPasswordSignIn" href="#" onClick={this.ShowLogin.bind(this)}><u>Sign In</u></a>
                       </div>*/}

@@ -113,7 +113,7 @@ class India extends Component{
 					<div className="uttarakhand classHover">
 						<img src="/Maps/India/Uttarakhand.png" className="img-responsive "  onClick={e => this.onStateClick("Uttarakhand","UK")} onMouseOver={e => (e.currentTarget.src = "/Maps/India/Uttarakhand1.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/India/Uttarakhand.png")}/>
 						<span className="uttarakhandText mapTextLabel text-capitalize">Uttarakhand</span>
-						<span className="uttarakhandNumber mapCountLabel text-center">{this.state.UK ? this.state.UK : 0}</span>
+						<span className="uttarakhandNumber mapCountLabel text-center">{this.state.UT ? this.state.UT : 0}</span>
 					</div>
 
 					<div className="rajasthan classHover">

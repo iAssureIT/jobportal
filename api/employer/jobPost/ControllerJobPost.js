@@ -1180,6 +1180,9 @@ exports.mapwiseJobs = (req, res, next) => {
     selector['$and'] = [];
     selector['$or'] = [];
 
+    selector["$and"].push({
+        "status": req.body.status ? req.body.status : "active"
+    })
     var countryCode = req.body.countryCode ? req.body.countryCode : "IN";
     selector["$and"].push({
         "location.countryCode": countryCode
@@ -1388,6 +1391,10 @@ exports.functonalAreaJobs = (req, res, next) => {
 
     selector['$and'] = [];
     selector['$or'] = [];
+
+    selector["$and"].push({
+        "status": req.body.status ? req.body.status : "active"
+    })
 
     var countryCode = req.body.countryCode ? req.body.countryCode : "IN";
     selector["$and"].push({
@@ -1598,6 +1605,10 @@ exports.subfunctionalAreaJobs = (req, res, next) => {
 
     selector['$and'] = [];
     selector['$or'] = [];
+
+    selector["$and"].push({
+        "status": req.body.status ? req.body.status : "active"
+    })
 
     var countryCode = req.body.countryCode ? req.body.countryCode : "IN";
     selector["$and"].push({
@@ -1811,6 +1822,10 @@ exports.industrialJobs = (req, res, next) => {
 
     selector['$and'] = [];
     selector['$or'] = [];
+
+    selector["$and"].push({
+        "status": req.body.status ? req.body.status : "active"
+    })
 
     var countryCode = req.body.countryCode ? req.body.countryCode : "IN";
     selector["$and"].push({

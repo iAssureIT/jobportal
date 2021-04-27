@@ -34,6 +34,10 @@
   font-family: Montserrat-SemiBold;
   src: url("/fonts/Montserrat-SemiBold.ttf");
 }
+@font-face {
+  font-family: Montserrat-Light;
+  src: url("/fonts/Montserrat-Light.ttf");
+}
 body{
   padding: 0px !important;
  background-color: var(--main-bg-color )!important;
