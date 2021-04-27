@@ -115,7 +115,7 @@ class JobPosting extends Component {
 
             job_id                      :   "",
 
-            submitBtnText               :   "PUBLISH"
+            submitBtnText               :   "PUBLISH" 
         }
 
         this.reactTags = React.createRef();
@@ -680,8 +680,7 @@ class JobPosting extends Component {
 
     handleSubmit = ( event ) => { 
         event.preventDefault();
-        console.log("jobStatus",event.target.getAttribute('data-status'))
-        if (this.validateForm()) {
+        if (true) {
             var formValues = {
                 user_id                 :   this.props.userDetails.user_id,
                 company_id              :   this.props.userDetails.company_id,
@@ -716,8 +715,8 @@ class JobPosting extends Component {
                 district                :   this.state.district,
                 states                  :   this.state.states,
                 stateCode               :   this.state.stateCode,
-                country                 :   this.state.country,
-                countryCode             :   this.state.countryCode,
+                country                 :   "India",
+                countryCode             :   "IN",
                 pincode                 :   this.state.pincode,
 
                 minSalary               :   this.state.minSalary,
@@ -787,8 +786,8 @@ class JobPosting extends Component {
                         district                :   "",
                         states                  :   "",
                         stateCode               :   "",
-                        country                 :   "",
-                        countryCode             :   "",
+                        country                 :   "India",
+                        countryCode             :   "IN",
                         pincode                 :   "",
 
                         minSalary               :   "",
@@ -869,11 +868,13 @@ class JobPosting extends Component {
     }
 
     handleChangeState(event) {
-        var designation = document.getElementById("states");
-        var stateCode = designation.options[designation.selectedIndex].getAttribute("statecode");
+        var states = document.getElementById("states");
+        //console.log(states)
+        var state = states.options[states.selectedIndex].getAttribute("state");
+        //console.log(state)
         this.setState({
             [event.target.name]: event.target.value,
-            stateCode: stateCode
+            states: state
         });
     }
 
@@ -1316,10 +1317,22 @@ render(){
                                                 <div className="row">
 												    <label htmlFor="states" className="addjobformLable col-lg-12"> State <span className="asterisk">&#42;</span> </label>
                                                 </div>
-												<div className="input-group"> 
+												{/*<div className="input-group"> 
                                                     <input type="text" className="form-control addJobFormField addJobState" ref="states" id="states" name="states" value={this.state.states} onChange={this.handleChange}/>
-													
-												</div>
+												</div>*/}
+                                                <select id="states" className="form-control registrationInputBox selectOption"
+                                                    ref="stateCode" value={this.state.stateCode} name="stateCode" onChange={this.handleChangeState.bind(this)} >
+                                                    <option selected={true}>-- Select State --</option>
+                                                    {
+                                                      this.state.stateArray && this.state.stateArray.length > 0 ?
+                                                        this.state.stateArray.map((stateData, index) => {
+                                                          return (
+                                                            <option key={index} statecode={stateData.stateCode} state={this.camelCase(stateData.stateName)} value={stateData.stateCode}>{this.camelCase(stateData.stateName)}</option>
+                                                          );
+                                                        }
+                                                        ) : ''
+                                                    }
+                                                </select>
                                                 <span id="statesError" className="errorMsgJobPost"></span>	
 											</div>	
 											
