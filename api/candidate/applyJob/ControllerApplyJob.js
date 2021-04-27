@@ -450,7 +450,7 @@ exports.candidatesAppliedToJob = (req,res,next)=>{
     if (req.body.experience) {
         if (req.body.experience=="0to2") {
             selector["$and"].push({
-                "eligibility.minExperience": {
+                "totalExperience": {
                     '$gte': 0,
                     '$lte': 2
                 }
@@ -458,7 +458,7 @@ exports.candidatesAppliedToJob = (req,res,next)=>{
         }
         if (req.body.experience=="2to6") {
             selector["$and"].push({
-                "eligibility.minExperience": {
+                "totalExperience": {
                     '$gte': 2,
                     '$lte': 6
                 }
@@ -466,7 +466,7 @@ exports.candidatesAppliedToJob = (req,res,next)=>{
         }
         if (req.body.experience=="6to10") {
             selector["$and"].push({
-                "eligibility.minExperience": {
+                "totalExperience": {
                     '$gte': 6,
                     '$lte': 10
                 }

@@ -44,6 +44,7 @@ exports.insertCandidateBasicInfo = (req, res, next)=>{
                 "altMobile"         : req.body.altMobile ? req.body.altMobile : null,
     			"emailId" 		 	: req.body.emailId,
     		},
+            "totalExperience"       : 0,
     		"user_id"		 	 	: req.body.user_id,	
     		"createdAt" : new Date(),
     		"createdBy" : req.body.createdBy,

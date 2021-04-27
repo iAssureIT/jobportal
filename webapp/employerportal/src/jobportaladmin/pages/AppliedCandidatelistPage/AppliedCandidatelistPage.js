@@ -15,7 +15,9 @@ class AppliedCandidatelistPage extends Component{
 			appliedCandidateSelector   : 	{},
 		}
 	}
-
+	componentWillReceiveProps(newProps) {    
+      console.log('Component WILL RECIEVE PROPS!',newProps)
+   }
 	componentDidMount(){
 		console.log("props",this.props)
 		var {mapAction}  = this.props;
@@ -55,6 +57,7 @@ class AppliedCandidatelistPage extends Component{
 
 		})
 	}
+
 	render(){
 
 		return(
