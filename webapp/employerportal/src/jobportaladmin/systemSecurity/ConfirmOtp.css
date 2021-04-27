@@ -205,7 +205,7 @@ body{
 	width: 60px;
 }
 
-.input-group .form-control{
+.input-group  .roundCorner{
 	border-bottom-right-radius: 5px !important;
     border-top-right-radius:  5px !important;
     border-bottom-left-radius:  5px !important;

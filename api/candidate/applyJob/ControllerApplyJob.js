@@ -420,6 +420,65 @@ exports.appliedJobList = (req,res,next)=>{
         });
     
 };
+
+//candidatesAppliedToJob
+exports.candidatesAppliedToJob = (req,res,next)=>{
+    console.log(req.body)
+    var selector = {}; 
+    selector['$or'] = [];
+    selector['$and'] = [];
+
+    selector["$and"].push({
+        "address.countryCode": "IN"
+    })
+    // ApplyJob.find({"candidate_id": req.body.candidate_id}).sort({ createdAt: -1 })
+    // .populate( 'job_id', null, selector ) 
+    ApplyJob.find({"job_id" : ObjectId(req.body.job_id)})
+            .populate({path : 'candidate_id', model : 'candidatemasters',
+                populate: {
+                  path: 'address.addressType',
+                  model: 'addresstypemasters',
+                  match : {"address.countryCode": "INe"}
+                }
+            })
+            .populate({ path : 'candidate_id', model : 'candidatemasters',
+                populate: {
+                  path: 'academics.qualificationlevel_id',
+                  model: 'qualificationlevelmasters'
+                }
+            })
+            .populate({ path: 'candidate_id', model: 'candidatemasters',
+                populate: {
+                  path: 'academics.qualification_id',
+                  model: 'qualificationmasters'
+                }
+            })
+            .populate({ path: 'candidate_id', model: 'candidatemasters',
+                populate: {
+                  path: 'academics.university_id',
+                  model: 'universitymasters'
+                }
+            })
+            .populate({ path: 'candidate_id', model: 'candidatemasters',
+                populate: {
+                  path: 'workExperience.company_id',
+                  model: 'entitymasters'
+                }
+            })
+            .populate({ path: 'candidate_id', model: 'candidatemasters',
+                populate: {
+                  path: 'skills.skill_id',
+                  model: 'skillmasters'
+                }
+            })
+    .exec(function (err, candidate) {
+    console.log(err)
+    if (err) return res.status(500).json({ error: err });
+    res.status(200).json(candidate);
+    // prints "The author is Ian Fleming"
+    });
+};
+
 exports.appliedJobCount = (req,res,next)=>{
     //console.log(req.params.candidate_id);
     ApplyJob.aggregate([
@@ -821,50 +880,4 @@ exports.expApplicantsCountList = (req,res,next)=>{
         });
     } 
 };
-//candidatesAppliedToJob
-exports.candidatesAppliedToJob = (req,res,next)=>{
-    console.log(req.body)
-    ApplyJob.find({"job_id" : ObjectId(req.body.job_id)})
-            .populate({path : 'candidate_id', model : 'candidatemasters',
-                populate: {
-                  path: 'address.addressType',
-                  model: 'addresstypemasters'
-                }
-            })
-            .populate({ path : 'candidate_id', model : 'candidatemasters',
-                populate: {
-                  path: 'academics.qualificationlevel_id',
-                  model: 'qualificationlevelmasters'
-                }
-            })
-            .populate({ path: 'candidate_id', model: 'candidatemasters',
-                populate: {
-                  path: 'academics.qualification_id',
-                  model: 'qualificationmasters'
-                }
-            })
-            .populate({ path: 'candidate_id', model: 'candidatemasters',
-                populate: {
-                  path: 'academics.university_id',
-                  model: 'universitymasters'
-                }
-            })
-            .populate({ path: 'candidate_id', model: 'candidatemasters',
-                populate: {
-                  path: 'workExperience.company_id',
-                  model: 'entitymasters'
-                }
-            })
-            .populate({ path: 'candidate_id', model: 'candidatemasters',
-                populate: {
-                  path: 'skills.skill_id',
-                  model: 'skillmasters'
-                }
-            })
-    .exec(function (err, candidate) {
-    console.log(err)
-    if (err) return res.status(500).json({ error: err });
-    res.status(200).json(candidate);
-    // prints "The author is Ian Fleming"
-    });
-};
+

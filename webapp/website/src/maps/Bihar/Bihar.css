@@ -12,7 +12,7 @@
 }
 .bhabuaNumber{
 	position: absolute;
-	top: 60%;
+	top: 50%;
     left: 33%;
 }
 .rohtas{
@@ -27,8 +27,8 @@
 }
 .rohtasNumber{
 	position: absolute;
-	top: 60%;
-    left: 33%;
+	top: 50%;
+    left: 40%;
 }
 .buxar{
 	position: absolute;
@@ -38,12 +38,12 @@
 .buxarText{
 	position: absolute;
 	top: 40%;
-    left: 25%;
+    left: 40%;
 }
 .buxarNumber{
 	position: absolute;
 	top: 60%;
-    left: 33%;
+    left: 40%;
 }
 .bhojpur{
 	position: absolute;
@@ -98,12 +98,12 @@
 .gayaText{
 	position: absolute;
 	top: 40%;
-    left: 45%;
+    left: 50%;
 }
 .gayaNumber{
 	position: absolute;
-	top: 60%;
-    left: 33%;
+	top: 55%;
+    left: 45%;
 }
 .jehanabad{
 	position: absolute;
@@ -128,12 +128,12 @@
 .patnaText{
 	position: absolute;
 	top: 40%;
-    left: 20%;
+    left: 15%;
 }
 .patnaNumber{
 	position: absolute;
 	top: 60%;
-    left: 20%;
+    left: 15%;
 }
 .saran{
 	position: absolute;
@@ -143,12 +143,12 @@
 .saranText{
 	position: absolute;
 	top: 40%;
-    left: 25%;
+    left: 30%;
 }
 .saranNumber{
 	position: absolute;
-	top: 60%;
-    left: 33%;
+	top: 55%;
+    left: 35%;
 }
 .siwan{
 	position: absolute;
@@ -188,7 +188,7 @@
 .bettiahText{
 	position: absolute;
 	top: 40%;
-    left: 35%;
+    left: 45%;
 }
 .bettiahNumber{
 	position: absolute;
@@ -202,13 +202,13 @@
 }
 .motihariText{
 	position: absolute;
-	top: 40%;
-    left: 25%;
+	top: 45%;
+    left: 40%;
 }
 .motihariNumber{
 	position: absolute;
 	top: 60%;
-    left: 33%;
+    left: 45%;
 }
 .muzaffrpur{
 	position: absolute;
@@ -217,12 +217,12 @@
 }
 .muzaffrpurText{
 	position: absolute;
-	top: 40%;
+	top: 30%;
     left: 25%;
 }
 .muzaffrpurNumber{
 	position: absolute;
-	top: 60%;
+	top: 45%;
     left: 33%;
 }
 .vaishali{
@@ -233,12 +233,12 @@
 .vaishaliText{
 	position: absolute;
 	top: 40%;
-    left: 25%;
+    left: 35%;
 }
 .vaishaliNumber{
 	position: absolute;
-	top: 60%;
-    left: 33%;
+	top: 55%;
+    left: 45%;
 }
 .nalanda{
 	position: absolute;
@@ -253,7 +253,7 @@
 .nalandaNumber{
 	position: absolute;
 	top: 60%;
-    left: 33%;
+    left: 25%;
 }
 .nawada{
 	position: absolute;
@@ -263,12 +263,12 @@
 .nawadaText{
 	position: absolute;
 	top: 40%;
-    left: 25%;
+    left: 20%;
 }
 .nawadaNumber{
 	position: absolute;
 	top: 60%;
-    left: 33%;
+    left: 20%;
 }
 .jamui{
 	position: absolute;
@@ -282,8 +282,8 @@
 }
 .jamuiNumber{
 	position: absolute;
-	top: 60%;
-    left: 33%;
+	top: 50%;
+    left: 50%;
 }
 .sheikpura{
 	position: absolute;
@@ -372,8 +372,8 @@
 }
 .sitamarihiNumber{
 	position: absolute;
-	top: 60%;
-    left: 33%;
+	top: 55%;
+    left: 45%;
 }
 .sheohar{
 	position: absolute;
@@ -383,7 +383,7 @@
 .sheoharText{
 	position: absolute;
 	top: 40%;
-    left: 25%;
+    left: 0%;
 }
 .sheoharNumber{
 	position: absolute;
@@ -397,12 +397,12 @@
 }
 .madhubaniText{
 	position: absolute;
-	top: 40%;
+	top: 25%;
     left: 25%;
 }
 .madhubaniNumber{
 	position: absolute;
-	top: 60%;
+	top: 40%;
     left: 33%;
 }
 .supaul{
@@ -417,8 +417,8 @@
 }
 .supaulNumber{
 	position: absolute;
-	top: 60%;
-    left: 33%;
+	top: 55%;
+    left: 50%;
 }
 .saharsa{
 	position: absolute;
