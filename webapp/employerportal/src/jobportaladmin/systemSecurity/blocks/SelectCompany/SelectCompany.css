@@ -43,3 +43,6 @@
 .inputBox{
 	text-transform:capitalize!important;
 }
+.signUpBoxForm .input-group{
+    width: 100%;
+}
