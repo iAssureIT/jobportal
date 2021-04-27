@@ -16,6 +16,7 @@ render() {
                     <a href="/selectcompanypage">
                         <div className={this.state.location===("/selectcompanypage")
                                         ||this.state.location===("/empsignuppage")
+                                        ||this.state.location===("/select-package-page")
                                         ?
                                             "bullet active"
                                         :
@@ -27,7 +28,7 @@ render() {
                 </div>
                 <div className="step col-lg-4">
                     <a href="/empsignuppage">
-                    <div className={this.state.location===("/empsignuppage")
+                    <div className={this.state.location===("/empsignuppage")||this.state.location===("/select-package-page")
                                     ?
                                         "bullet active"
                                     :
@@ -38,9 +39,11 @@ render() {
                     </a>
                 </div>
                 <div className="step col-lg-4">
-                    <div className="bullet">
-                        3
-                    </div>
+                    <a href="/select-package-page">
+                        <div className={this.state.location===("/select-package-page")?"bullet active":"bullet"}>
+                            3
+                        </div>
+                    </a>
                 </div>
 			</div>
 		</div>

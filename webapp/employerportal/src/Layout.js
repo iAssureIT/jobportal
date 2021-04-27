@@ -33,6 +33,7 @@ import CandidatesListPage                       from './jobportaladmin/pages/Can
 
 import SelectCompanyPage                       from './jobportaladmin/systemSecurity/pages/SelectCompanyPage.js';
 import EmpSignUpPage                           from './jobportaladmin/systemSecurity/pages/EmpSignUpPage.js';
+import SelectPackagePage                           from './jobportaladmin/systemSecurity/pages/SelectPackagePage.js';
 
 import axios                from 'axios';
 import CoreLayout           from './coreadmin/CoreLayout/CoreLayout.js';
@@ -114,6 +115,7 @@ class Layout extends Component  {
                                                         <Route path="/confirm-otp/:userID"              exact strict component={ConfirmOtp} />
                                                         <Route path="/selectcompanypage"                exact strict component={SelectCompanyPage} />
                                                         <Route path="/empsignuppage"                    exact strict component={EmpSignUpPage} />
+                                                        <Route path="/select-package-page"              exact strict component={SelectPackagePage} />
                                                     </Switch>
                                                 </div>
                                             </div>

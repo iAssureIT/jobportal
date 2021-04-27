@@ -27,9 +27,8 @@
 .bullet::after{
 	content:'';
 	position:absolute;
-	width:180px; 
+	width:100%; 
 	height:2px;
-	left:60px;
 	top:22px;
 	background:var(--yellow-button-color);
 	z-index:-2;

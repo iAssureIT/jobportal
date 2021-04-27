@@ -76,7 +76,7 @@ render() {
                     <div className="col-lg-10 col-lg-offset-1">
                         <button className="buttonNext pull-right" onClick={this.handleSubmit.bind(this)}>
                             Next 
-                            <FontAwesomeIcon className="nextArrow" icon="arrow-right" />
+                            <FontAwesomeIcon className="nextArrow" icon="angle-double-right" />
                         </button>
                     </div>
                 </div>
