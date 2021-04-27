@@ -306,7 +306,7 @@ class ChangePassword extends Component {
                     <div className="resetPasswordTitle col-lg-10 col-lg-offset-1">Change Password
                     </div>
 
-                    <hr className="resetPasswordHr"/>
+                   {/* <hr className="resetPasswordHr"/>*/}
 
                      <div className="col-lg-10 col-lg-offset-1 form-group" >
                         <div className="input-group">
@@ -342,7 +342,7 @@ class ChangePassword extends Component {
 
 
                     <div className="col-lg-10 col-lg-offset-1 buttonWrapper">
-                   <button className="btn col-lg-6 col-lg-offset-3 buttonResetPassword" onClick={this.changePassword.bind(this)}>Change Password</button>
+                   <button className="btn col-lg-8 col-lg-offset-4 buttonResetPassword" onClick={this.changePassword.bind(this)}>Change Password</button>
                   </div>
 
                 

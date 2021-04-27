@@ -33,9 +33,9 @@ class ForgotPassword extends Component {
        var tempEmail = this.state.emailAddress; 
 
        var illegalChars = /[\(\)\<\>\,\;\:\\\"\[\]]/;
-       //var phoneno = /^\d{10}$/;
+       var phoneno = /^\+?([0-9]{2})\)?[-. ]?([0-9]{5})[-. ]?([0-9]{5})$/;
 
-     if(tempEmail <= 0){
+   /*  if(tempEmail <= 0){
       document.getElementById("emailAddressError").innerHTML=  
       "Please enter your Email";  
       status=false; 
@@ -49,9 +49,27 @@ class ForgotPassword extends Component {
           document.getElementById("emailAddressError").innerHTML=
           ""; 
           status = true;
-        }
-        return status;
+        }*/
+
+    if(this.state.mobileNumber!=(phoneno)){
+       document.getElementById("mobileNumberError").innerHTML=  
+      "Please enter valid Mobile Number";  
+      status = false;
+      console.log(this.state.mobileNumber);
+      
+    }else{
+     
+      status=true; 
     }
+        return status;
+    } 
+
+    ShowLogin(event){
+    event.preventDefault();
+    var {mapAction} = this.props;
+
+    mapAction.setSelectedModal("login");
+  }
 
     handleChange(event){
         var fieldValue=event.currentTarget.value;
@@ -235,13 +253,18 @@ class ForgotPassword extends Component {
                         </div>
                          <span id="emailAddressError" className="errorMsg"></span>
                     </div>
-*/}
-                    
-
-                    <div className="col-lg-6 col-lg-offset-3 buttonWrapper">
-                        <button className="btn col-lg-12 buttonSendOTP" onClick={this.sendLink.bind(this)}>Send OTP</button>
+    */}             
+                    <div className="col-lg-10 col-lg-offset-1">
+                      <div className="row">
+                        <div className="col-lg-6 buttonWrapper">
+                            <a href="#" onClick={this.ShowLogin.bind(this)}><u className="loginSignUp" > Login ?</u></a>
+                        </div>
+                     
+                        <div className="col-lg-6 buttonWrapper">
+                            <button className="btn col-lg-12 buttonSendOTP" onClick={this.sendLink.bind(this)}>Send OTP</button>
+                        </div>
+                      </div>
                     </div>
-
                    {/* <div className="col-lg-12 forgotPasswordLinks">
                         <a className="forgotPasswordSignIn" href="#" onClick={this.ShowLogin.bind(this)}><u>Sign In</u></a>
                       </div>*/}

@@ -212,22 +212,22 @@ class ConfirmOtp extends Component {
           </div>
                 <div className="confirmOTP col-lg-4 col-lg-offset-4">
                   <form>
-                    <div className="confirmOTPTitle col-lg-12">Confirm OTP
+                    <div className="confirmOTPTitle col-lg-10 col-lg-offset-1">Please enter OTP sent you on your Phone
                     </div>
 
-                    <hr className="confirmOTPHr"/>
+                  {/*  <hr className="confirmOTPHr"/>
 
                     <div className="confirmOTPSentence col-lg-10 col-lg-offset-1">
                         Please enter OTP sent you on your email
 
-                    </div>
+                    </div>*/}
 
                        <div className="col-lg-10 col-lg-offset-1">
 
                         <div className="otpBox form-group" >
                             <div className="input-group ">
                                
-                                <input type="text" id="otp" maxlength="1" name="otp" ref="emailotp1" placeholder="_" value={this.state.OTP} onChange={this.handleChange.bind(this)} className="form-control confirmOTPInputBox"/>
+                                <input type="text" id="otp" maxlength="1" name="otp" ref="emailotp1" placeholder="_" value={this.state.OTP} onChange={this.handleChange.bind(this)} className="form-control roundCorner confirmOTPInputBox"/>
                             </div>
                            
                         </div>
@@ -236,14 +236,14 @@ class ConfirmOtp extends Component {
                         <div className="otpBox form-group" >
                             <div className="input-group ">
                                
-                                <input type="text" id="otp" maxlength="1" name="otp" ref="emailotp2" placeholder="_" value={this.state.OTP} onChange={this.handleChange.bind(this)} className="form-control confirmOTPInputBox"/>
+                                <input type="text" id="otp" maxlength="1" name="otp" ref="emailotp2" placeholder="_" value={this.state.OTP} onChange={this.handleChange.bind(this)} className="form-control roundCorner confirmOTPInputBox"/>
                             </div>
                            
                         </div>
                         <div className="otpBox form-group" >
                             <div className="input-group ">
                                
-                                <input type="text" id="otp" maxlength="1" name="otp" ref="emailotp3" placeholder="_" value={this.state.OTP} onChange={this.handleChange.bind(this)} className="form-control confirmOTPInputBox"/>
+                                <input type="text" id="otp" maxlength="1" name="otp" ref="emailotp3" placeholder="_" value={this.state.OTP} onChange={this.handleChange.bind(this)} className="form-control roundCorner confirmOTPInputBox"/>
                             </div>
                            
                         </div>
@@ -251,7 +251,7 @@ class ConfirmOtp extends Component {
                         <div className="otpBox form-group" >
                             <div className="input-group ">
                                
-                                <input type="text" id="otp" maxlength="1" name="otp" ref="emailotp4" placeholder="_" value={this.state.OTP} onChange={this.handleChange.bind(this)} className="form-control confirmOTPInputBox"/>
+                                <input type="text" id="otp" maxlength="1" name="otp" ref="emailotp4" placeholder="_" value={this.state.OTP} onChange={this.handleChange.bind(this)} className="form-control roundCorner confirmOTPInputBox"/>
                             </div>
                            
                         </div>
