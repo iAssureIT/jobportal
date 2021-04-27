@@ -168,21 +168,21 @@
 	font-weight: 400;
 }
 
-.input-group .form-control:not(:first-child):not(:last-child), .input-group-addon:not(:first-child):not(:last-child), .input-group-btn:not(:first-child):not(:last-child) {
+/*.input-group .form-control:not(:first-child):not(:last-child), .input-group-addon:not(:first-child):not(:last-child), .input-group-btn:not(:first-child):not(:last-child) {
     border-bottom-right-radius: 4px;
     border-top-right-radius: 4px;
-}
+}*/
 
-.input-group{
+/*.input-group{
 	width: 100%
-}
+}*/
 
-.input-group .form-control:first-child{
+/*.input-group .form-control:first-child{
 	border-bottom-right-radius: 4px;
     border-top-right-radius: 4px;
     border-bottom-left-radius: 0px;
     border-top-left-radius: 0px;
-}
+}*/
 
 .addJobFieldRow .minSalaryDropdown{
 	margin-left: 2px;
@@ -758,6 +758,45 @@ input::placeholder{
   background-color: var(--main-border-color);
 }
 
+
+/********************************************************Modal custom classes********************************************************/
+
+.publishBodyText{
+	color: #fff;
+	text-align: center;
+	padding-top: 40px;
+}
+
+.pubMsgOne{
+	margin-top: 10px;
+}
+
+.pubMsgTwo{
+	/*margin-top: 0px;*/
+}
+
+.publishModalIcon{
+	font-size: 50px;
+	color: #a5dc86;
+}
+
+.publishBtn{
+	background-color: var(--form-field-background-color);
+	border: 1px solid var(--main-border-color);
+	color: #fff;
+	font-size: 12px;
+	font-weight: 500;
+	margin-top: 20px;
+}
+
+.publishBtn:hover{
+	color: #fff;
+	background-color: var(--yellow-button-color);
+}
+
+.dummyBtn{
+	/*display: none;*/
+}
 
 /************************************************************Media Query*************************************************************/
 

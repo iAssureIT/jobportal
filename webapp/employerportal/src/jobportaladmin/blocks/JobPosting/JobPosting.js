@@ -1,23 +1,24 @@
-import React, {Component} from 'react';
-import './JobPosting.css';
-import 'react-phone-input-2/lib/style.css';
-import $ from 'jquery';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import PreviewModal from '../PreviewModal/PreviewModal.js';
-import Axios from 'axios';
-import Swal from 'sweetalert2';
-import CKEditor from '@ckeditor/ckeditor5-react';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import PhoneInput from 'react-phone-input-2';
-import Moment from "moment";
+import React, {Component}           from 'react';
+import $                            from 'jquery';
+import { FontAwesomeIcon }          from '@fortawesome/react-fontawesome';
+import PreviewModal                 from '../PreviewModal/PreviewModal.js';
+import Axios                        from 'axios';
+import Swal                         from 'sweetalert2';
+import CKEditor                     from '@ckeditor/ckeditor5-react';
+import ClassicEditor                from '@ckeditor/ckeditor5-build-classic';
+import PhoneInput                   from 'react-phone-input-2';
+import Moment                       from "moment";
 import { WithContext as ReactTags } from 'react-tag-input';
-import PlacesAutocomplete, {
-        geocodeByAddress,
-        getLatLng
-} from "react-places-autocomplete";
-import { connect }        from 'react-redux';
-import { bindActionCreators } from 'redux';
-import  * as mapActionCreator from '../../common/actions/index';
+import PlacesAutocomplete, 
+        {
+            geocodeByAddress,
+            getLatLng
+        }                           from "react-places-autocomplete";
+import { connect }                  from 'react-redux';
+import { bindActionCreators }       from 'redux';
+import  * as mapActionCreator       from '../../common/actions/index';
+import 'react-phone-input-2/lib/style.css';
+import './JobPosting.css';
 
 class JobPosting extends Component {
 
@@ -112,7 +113,7 @@ class JobPosting extends Component {
             preferredSkillTags          :   [],
             preferredSkillSuggestions   :   [],
 
-            //jobStatus                   :   "Active",
+            job_id                      :   "",
 
             submitBtnText               :   "PUBLISH"
         }
@@ -230,6 +231,7 @@ class JobPosting extends Component {
             .catch(error => {
                 Swal.fire("Error while getting List data", error.message, 'error');
             })
+        
         if (this.props.match.params.job_id) {
         let job_id = this.props.match.params.job_id;
 
@@ -289,7 +291,6 @@ class JobPosting extends Component {
                         minPrimExp              :   response.data.requiredSkills.minPrimExp,
                         minSecExp               :   response.data.requiredSkills.minSecExp,
                         minOtherExp             :   response.data.requiredSkills.minOtherExp,
-                        //jobStatus               :   response.data.status,
                         submitBtnText           :   "UPDATE"
                     })
 
@@ -320,6 +321,7 @@ class JobPosting extends Component {
                     var jobShift = this.state.jobShiftArray.filter((data,index)=>{
                         if (data._id == this.state.jobshift_id) { return data}
                     })*/
+                    
                     var primarySkillTags = [];
                     var secondarySkillTags = [];
                     var otherSkillTags = [];
@@ -631,7 +633,7 @@ class JobPosting extends Component {
             document.getElementById('contactPersonEmailError').innerHTML = "Please enter a valid email address.";
         } else if (this.state.contactPersonEmail.match(illegalChars)) {
             document.getElementById('contactPersonEmailError').innerHTML = "Email contains invalid characters.";
-        } else{
+        } else {
             document.getElementById("contactPersonEmailError").innerHTML = ""; 
             status = true;
         }
@@ -640,7 +642,7 @@ class JobPosting extends Component {
           document.getElementById("contactPersonPhoneError").innerHTML=  ""; 
           status = true;
           
-        }else{
+        } else {
           document.getElementById("contactPersonPhoneError").innerHTML=  "Please enter valid Mobile Number";  
           status=false; 
         }
@@ -675,14 +677,6 @@ class JobPosting extends Component {
             gender: id,
         })
     }
-
-    /*setStatus(event) {
-        event.preventDefault();
-        var id = event.currentTarget.id;
-        this.setState({
-            status: id,
-        })
-    }*/
 
     handleSubmit = ( event ) => { 
         event.preventDefault();
@@ -759,6 +753,7 @@ class JobPosting extends Component {
     }
 
     insertData(formValues) {
+        document.getElementById("dummyBtn").click();
         Axios.post("/api/jobs/post", formValues)
 
             .then(response => {
@@ -766,7 +761,7 @@ class JobPosting extends Component {
                 if (response.data.created) {
                     let job_id = response.data.jobsData._id;
 
-                    Swal.fire("Congrats", "Your Data is Submitted Successfully", "success");
+                    /*Swal.fire("Congrats", "Your Data is Submitted Successfully", "success");*/
                     this.setState({
                         jobTitle                :   "",
                         functionalarea_id       :   "",
@@ -1659,7 +1654,8 @@ render(){
 													        handleDelete={this.onprimarySkillDelete.bind(this)}
 													        handleAddition={this.onprimarySkillAddition.bind(this)}
 													        handleDrag={this.onprimarySkillDrag.bind(this)}
-          													handleTagClick={this.onprimarySkillClick.bind(this)} />
+          													handleTagClick={this.onprimarySkillClick.bind(this)}
+                                                            />
 												</div>
 											</div>
 											
@@ -1811,19 +1807,7 @@ render(){
 									    </div>
 									</div>																														
 									
-									<div className="col-lg-7 col-lg-offset-5 pull-right">
-                                        {/*<button className={this.state.status==="Draft"? "btn addJobFormField saveFLBtn pull-left" : "btn addJobFormField saveFLBtn pull-left"} id="Draft" name="status" value="Draft" onClick={this.setStatus.bind(this)}>
-                                            Save for Later 
-                                        </button>
-
-                                        <button type="button" data-toggle="modal" data-target="#robust" data-dismiss="modal" className="btn addJobFormField addJobPreviewBtn"> 
-                                            PREVIEW 
-                                        </button>
-
-                                        <PreviewModal jobInfo = {this.state} />
-
-                                        <button className={this.state.status==="Active"? "btn buttonYellow addJobSubmitBtn" : "btn buttonYellow addJobSubmitBtn"} id="Active" name="status" value="Active"  onClick={this.setStatus.bind(this)}> {this.state.submitBtnText} </button>*/}
-                                         
+									<div className="col-lg-7 col-lg-offset-5 pull-right"> 
                                         <button className="btn addJobFormField saveFLBtn pull-left" data-status = "draft" onClick={this.handleSubmit.bind(this)}>
                                             Save for Later 
                                         </button>
@@ -1834,12 +1818,32 @@ render(){
 
                                         <PreviewModal jobInfo = {this.state} />
 
-                                        <button className="btn buttonYellow addJobSubmitBtn"  data-status = "active" onClick={this.handleSubmit.bind(this)}> {this.state.submitBtnText} </button>
+                                        <button className="btn buttonYellow addJobSubmitBtn" id="dummyBtn" data-status = "active" onClick={this.handleSubmit.bind(this)}> {this.state.submitBtnText} </button>
+                                        <button className="btn dummyBtn" data-toggle="modal" data-target="#publishModal" data-dismiss="modal"> Dummy </button>
 									</div>
 								</form>
 							</div>
 						</div>
 					</div>
+                    <div class="modal fade" id="publishModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog delModalMain">
+                            <div class="modal-content delModalContent">
+                                <div class="modal-header delHeader">
+                                  <button type="button" class="close delCloseBtn" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <div class="modal-body delModalBody">
+                                  <div class="publishBodyText">
+                                    <i class="fa fa-check-circle publishModalIcon" aria-hidden="true"></i>
+                                    <h4 className="pubMsgOne">Congratulations!</h4>
+                                    <h4 className="pubMsgTwo">Your Data is Submitted Successfully</h4>
+                                    <button type="button" class="btn btn-default publishBtn col-lg-4 col-lg-offset-4" data-dismiss="modal"> <a href={"/job-profile/" /*+ {job_id}*/}>OK</a></button>
+                                  </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 				</div>
 			);
 }

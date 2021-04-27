@@ -681,23 +681,23 @@ deleteJob = (event)=>{
 
 					<div className="modal fade" id="activeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 					    <div className="modal-dialog delModalMain">
-					      <div className="modal-content delModalContent">
-					        <div className="modal-header delHeader">
-					          <button type="button" className="close delCloseBtn" data-dismiss="modal" aria-label="Close">
-					            <span aria-hidden="true">&times;</span>
-					          </button>
-					        </div>
-					        <div className="modal-body delModalBody">
-					          <div className="delBodyText">
-					            Are you sure, <br />
-					            do you want to publish this job?
-					          </div>
-					          <div className="col-lg-12 delMainBtnDiv">
-					              <button type="button" className="btn btn-default delModalBtnOne col-lg-3" data-dismiss="modal">NO</button> 
-					              <button type="button" className="btn btn-default delModalBtnTwo col-lg-3" data-dismiss="modal" onClick={this.handleActiveSwitch}>YES</button>
-					          </div> 
-					        </div>
-					      </div>
+							<div className="modal-content delModalContent">
+							<div className="modal-header delHeader">
+							  <button type="button" className="close delCloseBtn" data-dismiss="modal" aria-label="Close">
+							    <span aria-hidden="true">&times;</span>
+							  </button>
+							</div>
+							<div className="modal-body delModalBody">
+							  <div className="delBodyText">
+							    Are you sure, <br />
+							    do you want to publish this job?
+							  </div>
+							  <div className="col-lg-12 delMainBtnDiv">
+							      <button type="button" className="btn btn-default delModalBtnOne col-lg-3" data-dismiss="modal">NO</button> 
+							      <button type="button" className="btn btn-default delModalBtnTwo col-lg-3" data-dismiss="modal" onClick={this.handleActiveSwitch}>YES</button>
+							  </div> 
+							</div>
+							</div>
 					    </div>
 					</div> 
 				</div>		
