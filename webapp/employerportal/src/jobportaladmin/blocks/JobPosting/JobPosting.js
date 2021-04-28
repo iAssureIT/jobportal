@@ -113,8 +113,6 @@ class JobPosting extends Component {
             preferredSkillTags          :   [],
             preferredSkillSuggestions   :   [],
 
-            job_id                      :   "",
-
             submitBtnText               :   "PUBLISH" 
         }
 
@@ -376,7 +374,6 @@ class JobPosting extends Component {
                 //     Swal.fire("Some error occured while updating job data", error.message, "error");
                 // })
         }
-
     }
 
     validateForm = () => {
@@ -400,9 +397,9 @@ class JobPosting extends Component {
             status = false;
         }
         else if(!regSpaceName.test(jobTitle)){
-         document.getElementById("jobTitleError").innerHTML=  
-         "Please enter valid name,......";  
-         status=false; 
+            document.getElementById("jobTitleError").innerHTML=  
+            "Please enter valid name,......";  
+            status=false; 
         }
         else {
             document.getElementById("jobTitleError").innerHTML = "";
@@ -513,10 +510,10 @@ class JobPosting extends Component {
         }
 
         if ((this.state.minSalary) > (this.state.maxSalary)){
-          document.getElementById("maxSalaryError").innerHTML=  
-          "Maximum salary is less than minimum salary";  
-          
-          status=false; 
+            document.getElementById("maxSalaryError").innerHTML=  
+            "Maximum salary is less than minimum salary";  
+
+            status=false; 
         }
 
 
@@ -545,9 +542,9 @@ class JobPosting extends Component {
             status = false;
         }
         else if(!regSpaceName.test(minEducation)){
-         document.getElementById("minEducationError").innerHTML=  
-         "Please enter valid education,......";  
-         status=false; 
+            document.getElementById("minEducationError").innerHTML=  
+            "Please enter valid education,......";  
+            status=false; 
         }
         else {
             document.getElementById("minEducationError").innerHTML = "";
@@ -616,9 +613,9 @@ class JobPosting extends Component {
             status = false;
         }
         else if(!regSpaceName.test(contactPersonName)){
-         document.getElementById("contactPersonNameError").innerHTML=  
-         "Please enter valid contact person name,......";  
-         status=false; 
+            document.getElementById("contactPersonNameError").innerHTML=  
+            "Please enter valid contact person name,......";  
+            status=false; 
         }
         else {
             document.getElementById("jobTitleError").innerHTML = "";
@@ -639,12 +636,12 @@ class JobPosting extends Component {
         }
 
         if(this.state.contactPersonPhone.match(phoneno)){
-          document.getElementById("contactPersonPhoneError").innerHTML=  ""; 
-          status = true;
+            document.getElementById("contactPersonPhoneError").innerHTML=  ""; 
+            status = true;
           
         } else {
-          document.getElementById("contactPersonPhoneError").innerHTML=  "Please enter valid Mobile Number";  
-          status=false; 
+            document.getElementById("contactPersonPhoneError").innerHTML=  "Please enter valid Mobile Number";  
+            status=false; 
         }
         return status;
     }
@@ -752,7 +749,6 @@ class JobPosting extends Component {
     }
 
     insertData(formValues) {
-        document.getElementById("dummyBtn").click();
         Axios.post("/api/jobs/post", formValues)
 
             .then(response => {
@@ -760,7 +756,7 @@ class JobPosting extends Component {
                 if (response.data.created) {
                     let job_id = response.data.jobsData._id;
 
-                    /*Swal.fire("Congrats", "Your Data is Submitted Successfully", "success");*/
+                    Swal.fire("Congrats", "Your Data is Submitted Successfully", "success");
                     this.setState({
                         jobTitle                :   "",
                         functionalarea_id       :   "",
@@ -806,8 +802,8 @@ class JobPosting extends Component {
                         preferredSkills         :   "",
 
                         status                  :   "Active"
-
                     });
+
 
                     this.props.history.push("/job-profile/" + job_id);
                 }
@@ -1165,7 +1161,6 @@ class JobPosting extends Component {
         this.setState({ jobtime_id : jobtime_id },()=>{
             //console.log(this.state)
         });  
-        
     }
     
     onChangeJobShift(event){
@@ -1180,7 +1175,6 @@ class JobPosting extends Component {
         this.setState({ jobshift_id : jobshift_id },()=>{
             //console.log(this.state)
         });  
-        
     }
     
     onChangeJobSector(event){
@@ -1196,6 +1190,7 @@ class JobPosting extends Component {
             //console.log(this.state)
         });  
     }
+    
     onChangeMinEducation(event){
         const {name,value} = event.target;
         this.setState({ [name]:value });  
@@ -1375,7 +1370,7 @@ render(){
 												<label htmlFor="functionalArea" className="addjobformLable"> Functional Area <span className="asterisk">&#42;</span> </label>
 												<div className="input-group">
 													<span className="input-group-addon addJobFormField"><i className="fa fa-briefcase"></i></span> 
-														<input type="text" list="functionalArea" className="form-control addJobFormField" refs="functionalArea" 
+														<input type="text" list="functionalArea" className="form-control addJobFormField addJobBorderRadius" refs="functionalArea" 
                                                          name="functionalArea" id="selectFunctionalArea" maxLength="100" value={this.state.functionalArea} data-value={this.state.functionalarea_id}
 														onChange={this.onChangeFunctionalArea.bind(this)} />
 														<datalist name="functionalArea" id="functionalArea" className="functionalArealist" >
@@ -1391,7 +1386,7 @@ render(){
 												<label htmlFor="subFunctionalArea" className="addjobformLable"> Sub-Functional Area <span className="asterisk">&#42;</span> </label>
 												<div className="input-group">
 													<span className="input-group-addon addJobFormField"><FontAwesomeIcon icon={['fas', 'briefcase']} /></span> 
-                                                        <input type="text" list="subFunctionalArea" className="form-control addJobFormField" refs="subFunctionalArea"
+                                                        <input type="text" list="subFunctionalArea" className="form-control addJobFormField addJobBorderRadius" refs="subFunctionalArea"
                                                          id="selectSubFunctionalArea" maxLength="100" value={this.state.subFunctionalArea} name="subFunctionalArea"
                                                         onChange={this.onChangeSubFunctionalArea.bind(this)} />
                                                         <datalist name="subFunctionalArea" id="subFunctionalArea" className="subFunctionalArealist" >
@@ -1418,7 +1413,7 @@ render(){
 												<div className="input-group">
 													<span className="input-group-addon addJobFormField"><FontAwesomeIcon icon={['fas', 'briefcase']} /></span> 
                                                         <div className="input-group col-lg-12">
-                                                            <input type="text" list="jobRole" className="form-control addJobFormField" refs="jobRole" id="selectrole" maxLength="50" value={this.state.jobRole} name="jobRole"
+                                                            <input type="text" list="jobRole" className="form-control addJobFormField addJobBorderRadiusFix" refs="jobRole" id="selectrole" maxLength="50" value={this.state.jobRole} name="jobRole"
                                                             onChange={this.onChangeRole.bind(this)} />
                                                             <datalist name="jobRole" id="jobRole" className="jobRoleArray" >
                                                                 {this.state.jobRoleArray.map((item, key) =>
@@ -1467,7 +1462,7 @@ render(){
                                                 <label htmlFor="jobSector" className="addjobformLable"> Job Sector </label>
                                                 <div className="input-group">
                                                     <span className="input-group-addon addJobFormField"><i className="fa fa-list-alt"></i></span> 
-                                                       <input type="text" list="jobSector" className="form-control addJobFormField" refs="jobSector" id="selectjobSector" maxLength="50" value={this.state.jobSector} name="jobSector"
+                                                       <input type="text" list="jobSector" className="form-control addJobFormField addJobBorderRadius" refs="jobSector" id="selectjobSector" maxLength="50" value={this.state.jobSector} name="jobSector"
                                                         onChange={this.onChangeJobSector.bind(this)} />
                                                         <datalist name="jobSector" id="jobSector" className="jobSectorArray" >
                                                             {this.state.jobSectorArray.map((item, key) =>
@@ -1481,7 +1476,7 @@ render(){
 												<label htmlFor="jobType" className="addjobformLable"> Job Type </label>
 												<div className="input-group col-lg-12">
 													<span className="input-group-addon addJobFormField"><i className="fa fa-briefcase"></i> </span> 
-														<input type="text" list="jobType" className="form-control addJobFormField" refs="jobType" id="selectjobType" maxLength="50" value={this.state.jobType} name="jobType"
+														<input type="text" list="jobType" className="form-control addJobFormField addJobBorderRadius" refs="jobType" id="selectjobType" maxLength="50" value={this.state.jobType} name="jobType"
                                                         onChange={this.onChangeJobType.bind(this)} />
                                                         <datalist name="jobType" id="jobType" className="jobTypeArray" >
                                                             {this.state.jobTypeArray.map((item, key) =>
@@ -1496,7 +1491,7 @@ render(){
 												<label htmlFor="jobTime" className="addjobformLable"> Job Time </label>
 												<div className="input-group">
 													<span className="input-group-addon addJobFormField"><FontAwesomeIcon icon={['fas', 'business-time']} /></span> 
-													   <input type="text" list="jobTime" className="form-control addJobFormField" refs="jobTime" id="selectJobTime" maxLength="50" value={this.state.jobTime} name="jobTime"
+													   <input type="text" list="jobTime" className="form-control addJobFormField addJobBorderRadius" refs="jobTime" id="selectJobTime" maxLength="50" value={this.state.jobTime} name="jobTime"
                                                         onChange={this.onChangeJobTime.bind(this)} />
 
                                                         {/*<input type="text" list="jobTime" className="form-control addJobFormField">
@@ -1513,9 +1508,6 @@ render(){
 												</div>
                                                 <span id="jobTimeError" className="errorMsgJobPost"></span>
 											</div>
-
-											
-											
 										</div>
 									</div>
 
@@ -1525,7 +1517,7 @@ render(){
                                                 <label htmlFor="jobShift" className="addjobformLable"> Job Shift </label>
                                                 <div className="input-group">
                                                     <span className="input-group-addon addJobFormField"><FontAwesomeIcon icon={['fas', 'business-time']} /></span> 
-                                                       <input type="text" list="jobShift" className="form-control addJobFormField" refs="jobShift" id="selectJobShift" maxLength="50" value={this.state.jobShift} name="jobShift"
+                                                       <input type="text" list="jobShift" className="form-control addJobFormField addJobBorderRadius" refs="jobShift" id="selectJobShift" maxLength="50" value={this.state.jobShift} name="jobShift"
                                                         onChange={this.onChangeJobShift.bind(this)} />
                                                         <datalist name="jobShift" id="jobShift" className="jobShiftArray" >
                                                             {this.state.jobShiftArray.map((item, key) =>
@@ -1620,10 +1612,10 @@ render(){
 									<div className="col-lg-12 addJobFieldRow text-left">
 										<div className="row">
 											<div className="col-lg-6">
-												<label htmlFor="minEducation" className="addjobformLable"> Minimum Education Required<span className="asterisk"> &#42; </span> </label>
+												<label htmlFor="minEducation" className="addjobformLable"> Minimum Education Required <span className="asterisk"> &#42; </span> </label>
 												<div className="input-group">
 													<span className="input-group-addon addJobFormField"> <i className="fa fa-graduation-cap"></i> </span> 
-												    <input type="text" list="minEducation" className="form-control addJobFormField" refs="minEducation" id="selectminEducation" maxLength="50" value={this.state.minEducation} name="minEducation"
+												    <input type="text" list="minEducation" className="form-control addJobFormField addJobBorderRadius" refs="minEducation" id="selectminEducation" maxLength="50" value={this.state.minEducation} name="minEducation"
                                                     onChange={this.onChangeMinEducation.bind(this)} />
                                                     <datalist name="minEducation" id="minEducation" className="minEducationArray" >
                                                         {this.state.minEducationArray.map((item, key) =>
@@ -1661,14 +1653,14 @@ render(){
 													<span className="input-group-addon addJobFormField"> <i className='fa fa-cog'></i> </span>
 														<ReactTags
 													        //ref={this.reactTags}
-													        tags={this.state.primarySkillTags}
-													        suggestions={this.state.primarySkillSuggestions}
-													        delimiters={delimiters}
-													        handleDelete={this.onprimarySkillDelete.bind(this)}
-													        handleAddition={this.onprimarySkillAddition.bind(this)}
-													        handleDrag={this.onprimarySkillDrag.bind(this)}
-          													handleTagClick={this.onprimarySkillClick.bind(this)}
-                                                            />
+													        tags             =   {this.state.primarySkillTags}
+													        suggestions      =   {this.state.primarySkillSuggestions}
+													        delimiters       =   {delimiters}
+													        handleDelete     =   {this.onprimarySkillDelete.bind(this)}
+													        handleAddition   =   {this.onprimarySkillAddition.bind(this)}
+													        handleDrag       =   {this.onprimarySkillDrag.bind(this)}
+          													handleTagClick   =   {this.onprimarySkillClick.bind(this)}
+                                                        />
 												</div>
 											</div>
 											
@@ -1688,14 +1680,14 @@ render(){
 												<div className="input-group col-lg-12">
 													<span className="input-group-addon addJobFormField"> <i className='fa fa-cog'></i> </span>
 														<ReactTags
-                                                            tags={this.state.secondarySkillTags}
-                                                            suggestions={this.state.secondarySkillSuggestions}
-                                                            delimiters={delimiters}
-                                                            handleDelete={this.onsecondarySkillDelete.bind(this)}
-                                                            handleAddition={this.onsecondarySkillAddition.bind(this)}
-                                                            handleDrag={this.onsecondarySkillDrag.bind(this)}
-                                                            handleTagClick={this.onsecondarySkillClick.bind(this)}
-                                                            />
+                                                            tags            =    {this.state.secondarySkillTags}
+                                                            suggestions     =    {this.state.secondarySkillSuggestions}
+                                                            delimiters      =    {delimiters}
+                                                            handleDelete    =    {this.onsecondarySkillDelete.bind(this)}
+                                                            handleAddition  =    {this.onsecondarySkillAddition.bind(this)}
+                                                            handleDrag      =    {this.onsecondarySkillDrag.bind(this)}
+                                                            handleTagClick  =    {this.onsecondarySkillClick.bind(this)}
+                                                        />
 												</div>
 											</div>
 											
@@ -1715,14 +1707,14 @@ render(){
 												<div className="input-group col-lg-12">
 													<span className="input-group-addon addJobFormField"> <i className='fa fa-cog'></i> </span>
 														<ReactTags
-                                                            tags={this.state.otherSkillTags}
-                                                            suggestions={this.state.otherSkillSuggestions}
-                                                            delimiters={delimiters}
-                                                            handleDelete={this.onOtherSkillDelete.bind(this)}
-                                                            handleAddition={this.onOtherSkillAddition.bind(this)}
-                                                            handleDrag={this.onOtherSkillDrag.bind(this)}
-                                                            handleTagClick={this.onOtherSkillClick.bind(this)}
-                                                            />
+                                                            tags            =   {this.state.otherSkillTags}
+                                                            suggestions     =   {this.state.otherSkillSuggestions}
+                                                            delimiters      =   {delimiters}
+                                                            handleDelete    =   {this.onOtherSkillDelete.bind(this)}
+                                                            handleAddition  =   {this.onOtherSkillAddition.bind(this)}
+                                                            handleDrag      =   {this.onOtherSkillDrag.bind(this)}
+                                                            handleTagClick  =   {this.onOtherSkillClick.bind(this)}
+                                                        />
 												</div>
 											</div>
 											
@@ -1741,14 +1733,14 @@ render(){
 										<div className="input-group col-lg-12 preferredSkillsField">
 											<span className="input-group-addon addJobFormField"> <i className='fa fa-cog'></i> </span>
 												<ReactTags
-                                                    tags={this.state.preferredSkillTags}
-                                                    suggestions={this.state.preferredSkillSuggestions}
-                                                    delimiters={delimiters}
-                                                    handleDelete={this.onPreferredDelete.bind(this)}
-                                                    handleAddition={this.onPreferredAddition.bind(this)}
-                                                    handleDrag={this.onPreferredDrag.bind(this)}
-                                                    handleTagClick={this.onPreferredClick.bind(this)}
-                                                    />
+                                                    tags            =   {this.state.preferredSkillTags}
+                                                    suggestions     =   {this.state.preferredSkillSuggestions}
+                                                    delimiters      =   {delimiters}
+                                                    handleDelete    =   {this.onPreferredDelete.bind(this)}
+                                                    handleAddition  =   {this.onPreferredAddition.bind(this)}
+                                                    handleDrag      =   {this.onPreferredDrag.bind(this)}
+                                                    handleTagClick  =   {this.onPreferredClick.bind(this)}
+                                                />
 										</div>
 									</div>
 									
@@ -1780,13 +1772,13 @@ render(){
 											
 											<div className="col-lg-4">
 												<label htmlFor="contactPersonPhone" className="addjobformLable"> Phone Number <span className="asterisk">&#42;</span> </label>
-												<PhoneInput
-													className = "input-group-addon addJobFormField form-control" 
-													country   = {'in'}
-													id 		  = "contactPersonPhone"
-													value 	  = {this.state.contactPersonPhone}
-													onChange  = {contactPersonPhone => this.setState({ contactPersonPhone })}
-												/>
+        											<PhoneInput
+        												className = "input-group-addon addJobFormField form-control" 
+        												country   = {'in'}
+        												id 		  = "contactPersonPhone"
+        												value 	  = {this.state.contactPersonPhone}
+        												onChange  = {contactPersonPhone => this.setState({ contactPersonPhone })}
+        											/>
 												<span id="contactPersonPhoneError" className="errorMsgJobPost"></span>
 											</div>
 										</div>
@@ -1831,32 +1823,12 @@ render(){
 
                                         <PreviewModal jobInfo = {this.state} />
 
-                                        <button className="btn buttonYellow addJobSubmitBtn" id="dummyBtn" data-status = "active" onClick={this.handleSubmit.bind(this)}> {this.state.submitBtnText} </button>
-                                        <button className="btn dummyBtn" data-toggle="modal" data-target="#publishModal" data-dismiss="modal"> Dummy </button>
+                                        <button className="btn buttonYellow addJobSubmitBtn" data-status = "active" onClick={this.handleSubmit.bind(this)}> {this.state.submitBtnText} </button>
 									</div>
 								</form>
 							</div>
 						</div>
 					</div>
-                    <div class="modal fade" id="publishModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                        <div class="modal-dialog delModalMain">
-                            <div class="modal-content delModalContent">
-                                <div class="modal-header delHeader">
-                                  <button type="button" class="close delCloseBtn" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                  </button>
-                                </div>
-                                <div class="modal-body delModalBody">
-                                  <div class="publishBodyText">
-                                    <i class="fa fa-check-circle publishModalIcon" aria-hidden="true"></i>
-                                    <h4 className="pubMsgOne">Congratulations!</h4>
-                                    <h4 className="pubMsgTwo">Your Data is Submitted Successfully</h4>
-                                    <button type="button" class="btn btn-default publishBtn col-lg-4 col-lg-offset-4" data-dismiss="modal"> <a href={"/job-profile/" /*+ {job_id}*/}>OK</a></button>
-                                  </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 				</div>
 			);
 }

@@ -6,9 +6,9 @@ import { connect }        	  from 'react-redux';
 import { bindActionCreators } from 'redux';
 import  * as mapActionCreator from '../../common/actions/index';
 import UploadVideoModal 	  from '../UploadVideoModal/UploadVideoModal.js';
-/*import Pagination from "react-js-pagination";*/
 import "./JobList.css";
 import '../../App.css';
+/*import Pagination from "react-js-pagination";*/
 require("bootstrap/less/bootstrap.less");
 
 /*import {
@@ -204,12 +204,12 @@ removeApplication = (job_id, total, male, female, other, district, jobDistrict, 
 		    exp6to10 			: exp6to10
 		}
 		Swal.fire({
-		title 				: 'Are you sure, do you want to remove this job application?',
-		icon 				: 'success',
-		showCancelButton 	: true,
-		confirmButtonText 	: 'Yes, remove it!',
-		cancelButtonColor 	: 'No, keep it',
-		confirmButtonColor  : '#db3700',
+			title 				: 'Are you sure, do you want to remove this job application?',
+			icon 				: 'success',
+			showCancelButton 	: true,
+			confirmButtonText 	: 'Yes, remove it!',
+			cancelButtonColor 	: 'No, keep it',
+			confirmButtonColor  : '#db3700',
 	
 		}).then((result) =>{
 			if(result.value){

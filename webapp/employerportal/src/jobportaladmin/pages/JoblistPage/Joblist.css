@@ -287,14 +287,14 @@
 
 .swal2-container:not(.swal2-top):not(.swal2-top-start):not(.swal2-top-end):not(.swal2-top-left):not(.swal2-top-right):not(.swal2-center-start):not(.swal2-center-end):not(.swal2-center-left):not(.swal2-center-right):not(.swal2-bottom):not(.swal2-bottom-start):not(.swal2-bottom-end):not(.swal2-bottom-left):not(.swal2-bottom-right):not(.swal2-grow-fullscreen)>.swal2-modal {
 	border: 1px solid var(--main-border-color);
-	padding-top: 80px;
-	padding-bottom: 70px;
+	padding-top: 30px;
+	padding-bottom: 35px;
 	border-radius: 5px;
 	background-color: var(--main-bg-color);
 }
 
 .swal2-popup{
-	width: 50em;
+	width: 40em;
 }
 
 [class^=swal2]{
@@ -347,25 +347,11 @@
 .swal2-content{
 	font-size: 16px;
 	font-weight: 400;
-}
-
-/*.swal2-actions .swal2-confirm .swal2-styled:nth-child(1){
-	margin-left: 80px;
-}*/
-
-.swal2-close{
-	/*background-color: var(--main-border-color);*/
-    /*padding-left: 483px;
-    padding-right: 16px;
-    position: absolute;
-    left: 0px;
-    height: 30px;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;*/
+	margin-top: 2px;
 }
 
 .swal2-close:hover{
-	/*background-color: var(--main-border-color);*/
+	color: var(--main-border-color) !important;
 }
 
 /*********************************************************************************/
@@ -511,9 +497,6 @@ color: #fff;
 	display: table;
 
 	width: 32%;
-	
-	/*top: 50% !important;
-	transform: translateY(-50%) !important;*/
 }
 
 .delModalMain > .modal-content .delModalContent{
@@ -526,8 +509,6 @@ color: #fff;
 	border-bottom: none;
 	padding-top: 11px !important;
 	padding-right: 8px;
-	/*border-top-left-radius: 4px;
-	border-top-right-radius: 4px;*/
 	border-radius: 4px;
 }
 
@@ -572,9 +553,6 @@ color: #fff;
 }
 
 .delMainBtnDiv{
-	/*margin-left: 90px;
-	margin-right: 50px;*/
-
 	margin-left: 70px;
 	margin-right: 50px;
 }
@@ -622,17 +600,17 @@ color: #fff;
     margin-left: 25px;
 }
 
-.delMainBtnDiv{
-	margin-left: 150px;
-}
+.jobStatusToggleWrapper{
+    width: 20% !important;
+ }
 
 }
 
 @media  screen and (max-width: 1600px) {
 
-.delMainBtnDiv{
-	margin-left: 64px;
-}
+.jobStatusToggleWrapper{
+    width: 45% !important;
+ }
 
 }
 
@@ -641,6 +619,23 @@ color: #fff;
 .delMainBtnDiv{
 	margin-left: 55px;
 }
+
+.listEditBtn i {
+    margin-left: 19px;
+}
+
+.listViewBtn i {
+    margin-left: 18px;
+}
+
+.listDelBtn i {
+    margin-left: 20px;
+}
+
+.jobStatusToggleWrapper{
+    width: 47% !important;
+    margin-left: 18px !important; 
+ }
 
 }
 
@@ -658,10 +653,6 @@ color: #fff;
     margin-left: 19px;
 }
 
-.delMainBtnDiv{
-	margin-left: 50px;
-}
-
 }
 
 
@@ -670,16 +661,18 @@ color: #fff;
 	height:25px;
 	border:1px solid var(--main-border-color)!important;
 	margin-top: 15px;
-	margin-bottom: 7px;
-	margin-left: 42%;
+	margin-bottom: 13px;
+	margin-left: 22px;
     padding: 0px;
     width: 45%;
     border-radius: 1px;
  }
+
 .genderFeildVerti{
 	border-radius: 0px!important;
 	height: 15px!important;
 }
+
 .genderFeildWrapper2{
     margin-top:6px;
 }
@@ -704,9 +697,9 @@ color: #fff;
 	background-color:var(--main-border-color);
 	transition:all 2s;
 }
-.genderFeildInActive{
-	pointer-events: none;
 
+.genderFeildInActive{
+  pointer-events: none;
   /* for "disabled" effect */
   opacity: 1;
   background-color:var(--main-border-color);
