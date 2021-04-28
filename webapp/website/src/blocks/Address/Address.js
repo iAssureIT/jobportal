@@ -38,7 +38,7 @@ class Address extends Component{
 			inputAddressType   : [], 
 			addressTypeArry    : [],
 			buttonText         : "Save",
-			
+			profileCompletion  : 0
 		}
 		this.camelCase = this.camelCase.bind(this)
 		this.handleChangeState = this.handleChangeState.bind(this);
@@ -72,6 +72,7 @@ class Address extends Component{
 		.then(response=>{
 			 	this.setState({
 			 		addressArry    : response.data.address,
+			 		profileCompletion 	: response.data.profileCompletion
 			 		//addressTypeArry: response.data.addressType
 
 				 })
@@ -216,7 +217,8 @@ class Address extends Component{
 									pincode       : this.state.pincode,
 									stateCode 	  : this.state.stateCode,
         							countryCode   : this.state.countryCode
-								}
+								},
+								profileCompletion : this.state.profileCompletion
 				
 							}					
 		if(this.props.match.params.addressID){
@@ -424,12 +426,12 @@ class Address extends Component{
            }       
         }
         if(typeof this.state.states !== "undefined"){
-           if(!this.state.states.match(regName)){
+           /*if(!this.state.states.match(regName)){
               status = false;
               document.getElementById("statesError").innerHTML = "Please enter a valid state name";
            }else{
            		document.getElementById("statesError").innerHTML = "";
-           }       
+           }  */     
         }
         if(typeof this.state.district !== "undefined"){
            if(!this.state.district.match(regName)){

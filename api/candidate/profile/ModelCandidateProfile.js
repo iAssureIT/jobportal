@@ -94,6 +94,7 @@ const candidateSchema = mongoose.Schema({
 	noticePeriod    	: String,
 	currentCTC 			: Number,
 	expectedCTC  		: Number,
+	profileCompletion	: Number,
 	user_id	  			: { type: mongoose.Schema.Types.ObjectId, ref: 'users' },
 	createdAt 			: Date,
 	createdBy 			: String,

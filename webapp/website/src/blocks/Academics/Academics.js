@@ -45,7 +45,7 @@ class Academics extends Component{
 			passOutYear         : "",
 			admisionYear        : "",
 			buttonText          : "Save",
-			
+			profileCompletion  	: 0,
 			
 			DegreeArray               : [],
 			classArray                : [],
@@ -114,7 +114,8 @@ class Academics extends Component{
 		.then(response=>{
 			
 			 	this.setState({
-						academics  				: response.data.academics
+						academics  				: response.data.academics,
+						profileCompletion 	: response.data.profileCompletion
 			 	})
 			 	
 			 })
@@ -362,7 +363,8 @@ class Academics extends Component{
 									mode                 : this.state.mode,
 									passOutYear          : this.state.passOutYear,
 									admisionYear         : this.state.admisionYear
-								}
+								},
+								profileCompletion : this.state.profileCompletion
 							}
 			}					
 		if(this.props.match.params.academicsID){
@@ -538,13 +540,13 @@ class Academics extends Component{
            		document.getElementById("universityError").innerHTML = "";
            }       
         }
-		if(typeof this.state.college !== "undefined"){
-           /*if(!this.state.college.match(regName2)){
+		if(typeof this.state.addressLine1 !== "undefined"){
+           /*if(!this.state.addressLine1.match(regName2)){
               status = false;
               document.getElementById("collegeError").innerHTML = "Please enter a valid college name";
            }else{
            		document.getElementById("collegeError").innerHTML = "";
-           }   */    
+           }*/       
         }
 		 return status;
 	}

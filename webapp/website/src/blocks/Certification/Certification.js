@@ -38,7 +38,7 @@ class Certification extends Component{
             isPrimary            : true,
             primarySkills        :"",
             secondarySkills      :"",
-
+            profileCompletion  	 : 0,
             tableHeading 	    : 	{
 						            	skill 		: "Skill",
 						            	skillType 	: "Type",
@@ -128,7 +128,8 @@ class Certification extends Component{
 		.then(response=>{
 				this.setState({
 						basicInfo : response.data.basicInfo,
-						certificationArry : response.data.certifications
+						certificationArry : response.data.certifications,
+						profileCompletion 	: response.data.profileCompletion
 			 	})
 			 	
 			 })
@@ -334,7 +335,8 @@ class Certification extends Component{
 										rating                : this.state.rating,
 										skill_id              : this.state.skills_id,
 										experience            : this.state.experience
-					                },					                
+					                },	
+					                profileCompletion : this.state.profileCompletion				                
 							}
 							this.insetData(formValues,event);
 			}else{
@@ -347,9 +349,7 @@ class Certification extends Component{
 										skill_id              : this.state.skills_id,
 										experience            : this.state.experience
 					                },		
-					                	
-					                
-					                
+					                profileCompletion : this.state.profileCompletion	
 							}
 							this.insetData(formValues,event);
 			}

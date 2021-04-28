@@ -45,6 +45,7 @@ exports.insertCandidateBasicInfo = (req, res, next)=>{
     			"emailId" 		 	: req.body.emailId,
     		},
             "totalExperience"       : 0,
+            "profileCompletion"     : 20,
     		"user_id"		 	 	: req.body.user_id,	
     		"createdAt" : new Date(),
     		"createdBy" : req.body.createdBy,
@@ -322,15 +323,31 @@ exports.updateCandidateBasicInfo = (req, res, next)=>{
 }
 
 exports.addCandidateAddress = (req,res,next)=>{
-    
+
+    var profileCompletion
+    if (req.body.profileCompletion == 20 ) {
+        profileCompletion = 40 
+    }
+    else if (req.body.profileCompletion == 40 ) {
+        profileCompletion = 60 
+    }
+    else if (req.body.profileCompletion == 60 ) {
+        profileCompletion = 80 
+    }
+    else if (req.body.profileCompletion == 80 ) {
+        profileCompletion = 100 
+    }
     CandidateProfile.updateOne(
-            { _id: req.body.candidate_id },  
+            { _id: req.body.candidate_id }, 
+            
             { 
-                $push:  { 'address' : req.body.address }
+                $push:  { 'address' : req.body.address },
+                $set:   { 'profileCompletion' : profileCompletion }
             }
         )
         .exec()
         .then(data=>{
+            
             if(data.nModified == 1){
                 res.status(200).json({ created : true });
             }else{
@@ -432,7 +449,19 @@ exports.updateCandidateContact = (req,res,next)=>{
 exports.addCandidateAcademics = (req,res,next)=>{
     console.log(req.body)
     var qualificationlevel_id, qualification_id, university_id; 
-
+    var profileCompletion
+    if (req.body.profileCompletion == 20 ) {
+        profileCompletion = 40 
+    }
+    else if (req.body.profileCompletion == 40 ) {
+        profileCompletion = 60 
+    }
+    else if (req.body.profileCompletion == 60 ) {
+        profileCompletion = 80 
+    }
+    else if (req.body.profileCompletion == 80 ) {
+        profileCompletion = 100 
+    }
     processData();
         async function processData(){
             qualificationlevel_id   = req.body.academics.qualificationlevel_id != "" ? req.body.academics.qualificationlevel_id 
@@ -471,7 +500,8 @@ exports.addCandidateAcademics = (req,res,next)=>{
     CandidateProfile.updateOne(
             { _id: req.body.candidate_id },  
             {
-                $push:  { 'academics' :academics }
+                $push:  { 'academics' :academics },
+                $set:   { 'profileCompletion' : profileCompletion }
             }
         )
         .exec()
@@ -563,7 +593,19 @@ exports.deleteAcademics = (req,res,next)=>{
 exports.addCandidateExperience = (req,res,next)=>{
     var industry_id;
     var entityType = "corporate";
-
+    var profileCompletion
+    if (req.body.profileCompletion == 20 ) {
+        profileCompletion = 40 
+    }
+    else if (req.body.profileCompletion == 40 ) {
+        profileCompletion = 60 
+    }
+    else if (req.body.profileCompletion == 60 ) {
+        profileCompletion = 80 
+    }
+    else if (req.body.profileCompletion == 80 ) {
+        profileCompletion = 100 
+    }
     processData();
     async function processData(){
     industry_id = req.body.experience.industry_id != "" ? req.body.experience.industry_id 
@@ -597,11 +639,12 @@ exports.addCandidateExperience = (req,res,next)=>{
     CandidateProfile.updateOne(
             { _id: req.body.candidate_id },  
             { 
-                $push:  {   'workExperience': req.body.experience },
-                $set:   {   'currentCTC'    : req.body.currentCTC,
-                            'expectedCTC'   : req.body.expectedCTC, 
-                            'noticePeriod'  : req.body.noticePeriod,
-                            'totalExperience': req.body.totalExperience
+                $push:  {   'workExperience'    : req.body.experience },
+                $set:   {   'currentCTC'        : req.body.currentCTC,
+                            'expectedCTC'       : req.body.expectedCTC, 
+                            'noticePeriod'      : req.body.noticePeriod,
+                            'totalExperience'   : req.body.totalExperience,
+                            'profileCompletion' : profileCompletion 
                         }
             }
         )
@@ -736,7 +779,19 @@ exports.addCandidateSkill = (req,res,next)=>{
     var skills   = [];
     var skill_id; 
     console.log(req.body)
-    
+    var profileCompletion
+    if (req.body.profileCompletion == 20 ) {
+        profileCompletion = 40 
+    }
+    else if (req.body.profileCompletion == 40 ) {
+        profileCompletion = 60 
+    }
+    else if (req.body.profileCompletion == 60 ) {
+        profileCompletion = 80 
+    }
+    else if (req.body.profileCompletion == 80 ) {
+        profileCompletion = 100 
+    }
     processData();
         async function processData(){
 
@@ -750,7 +805,8 @@ exports.addCandidateSkill = (req,res,next)=>{
             CandidateProfile.updateOne(
                 { _id: req.body.candidate_id },  
                 { 
-                    $push : {    "skills"      :  skills}
+                    $push : {    "skills"      :  skills},
+                    $set:   { 'profileCompletion' : profileCompletion }
                 }
             )
             .exec()
