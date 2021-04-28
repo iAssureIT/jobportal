@@ -86,8 +86,8 @@ deleteJob = (event)=>{
 	const job_id = event.currentTarget.id;
 
 	Swal.fire({
-		title 				: 'Are you sure?',
-		text 				: 'You want to delete this job!',
+		title 				: 'Are you sure',
+		text 				: 'You want to delete this job?',
 		icon 				: 'warning',
 		showCloseButton		: true,
 		showCancelButton 	: true,
