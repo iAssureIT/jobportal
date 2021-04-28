@@ -9,10 +9,21 @@
     padding-top: 20px;
     padding-bottom: 20px; 
 }
-.signUpBoxFormWrapper2{
-    padding-bottom: 50px;
-    padding-top: 25px;
+.signUpBoxWrapper1{
+    min-height: 560px;
+
+
 }
+.signUpBoxTitle{
+    font-family: "Montserrat-Bold",Sans-Serif;
+    font-size: 22px;
+    font-weight: bold;
+    color: var(--main-border-color);
+    text-align: center;
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+
 
 .signUpBoxFormWrapper{
 	margin-top: 5px;

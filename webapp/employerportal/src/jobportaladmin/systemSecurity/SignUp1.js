@@ -1,6 +1,6 @@
 import React, { Component }  from 'react';
 import { FontAwesomeIcon }   from '@fortawesome/react-fontawesome';
-import "../SelectCompany/SelectCompany.css";
+import "./SelectCompany.css";
 
 class SignUp extends Component {
 constructor() {
@@ -25,6 +25,7 @@ handleChange(event){
 render() {
     return (
             <form className="signUpBoxFormWrapper">
+                <div className="signUpBoxTitle">Sign Up</div> 
                 <div className="row signUpBoxForm">
                     <div className="col-lg-5 col-lg-offset-1">
                         <div className="input-group ">

@@ -31,9 +31,7 @@ import AppliedCandidatelistPage                 from './jobportaladmin/pages/App
 import CandidatesListPage                       from './jobportaladmin/pages/CandidatesListPage/CandidatesListPage.js';
 
 
-import SelectCompanyPage                       from './jobportaladmin/systemSecurity/pages/SelectCompanyPage.js';
-import EmpSignUpPage                           from './jobportaladmin/systemSecurity/pages/EmpSignUpPage.js';
-import SelectPackagePage                           from './jobportaladmin/systemSecurity/pages/SelectPackagePage.js';
+import EmpSignUpPage                           from './jobportaladmin/systemSecurity/EmpSignUpPage.js';
 
 import axios                from 'axios';
 import CoreLayout           from './coreadmin/CoreLayout/CoreLayout.js';
@@ -140,9 +138,8 @@ class Layout extends Component  {
                     <Router >
                     <CoreLayout />
                         <Switch >
-                            <Route path="/selectcompanypage"                exact strict component={SelectCompanyPage} />
                             <Route path="/empsignuppage"                    exact strict component={EmpSignUpPage} />
-                            <Route path="/select-package-page"              exact strict component={SelectPackagePage} />
+                            
                         
                             <Route path="/"                     exact strict component={Login} />
                             <Route path="/login"                exact strict component={Login} />

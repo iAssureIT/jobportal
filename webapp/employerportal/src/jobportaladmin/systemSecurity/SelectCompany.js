@@ -28,6 +28,7 @@ handleSubmit(event){
 render() {
     return (
             <form className="signUpBoxFormWrapper">
+                <div className="signUpBoxTitle">Select Company</div>
                 <div className="row signUpBoxForm">
                     <div className="col-lg-10 col-lg-offset-1">
                         <div className="input-group ">

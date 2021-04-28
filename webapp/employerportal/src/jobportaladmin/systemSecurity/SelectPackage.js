@@ -1,7 +1,7 @@
 import React, { Component }  from 'react';
 import { FontAwesomeIcon }   from '@fortawesome/react-fontawesome';
 import Axios                 from 'axios';
-import "../SelectCompany/SelectCompany.css";
+import "./SelectCompany.css";
 import "./SelectPackage.css";
 
 
@@ -42,7 +42,8 @@ handleSubmit(event){
 render() {
     return (
             <form className=" col-lg-10 col-lg-offset-1 signUpBoxFormWrapper signUpBoxFormWrapper2">
-                <div className="row signUpBoxForm">
+                 <div className="signUpBoxTitle">Select Package</div>
+                <div className="row signUpBoxForm signUpBoxForm2">
                     {
                         this.state.packagemasterArray.length > 0
                      ?
@@ -50,7 +51,7 @@ render() {
                             console.log("index",elem,index);
                         return(
                             <div className="col-lg-4" key={index}>
-                                <div className={( index===2)||( index===0)?" selectPackageWrapper":"row selectPackageWrapper1"}>
+                                <div className="selectPackageWrapper">
                                     <div className="selectPackageTitle">
                                         {elem.packageName}
                                     </div>
@@ -115,13 +116,7 @@ render() {
                                             </div>     
                                         </div>
                                     </div>
-                                    <div className="">
-                                        <button className="buttonNext buttonNext1 center-block">
-                                            Select Package 
-
-                                            <FontAwesomeIcon  icon="angle-double-right" />
-                                        </button>
-                                    </div>
+                                    
                                 </div>
                             </div>
                             );
