@@ -112,35 +112,41 @@ class SignUp extends Component {
 	validateForm=()=>{
     var status = true;
     var regName = /^[a-zA-Z]+$/;
-    var firstName=this.state.firstName;
-    var lastName=this.state.lastName;
+    var first_name=this.state.firstName;
+    var last_name=this.state.lastName;
     var tempEmail = this.state.emailAddress.trim(); // value of field with whitespace trimmed off
     var emailFilter = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
     var illegalChars = /[\(\)\<\>\,\;\:\\\"\[\]]/;
     var phoneno = /^\+?([0-9]{2})\)?[-. ]?([0-9]{5})[-. ]?([0-9]{5})$/;
+     console.log("firstname===....",first_name);
+      console.log("lastname===....",last_name);
 
-    if(this.state.firstName.length<=0)  {
+    if(first_name.length<=0)  {
+ 
       document.getElementById("firstNameError").innerHTML=  
-      "Please enter valid Name";  
+      "Please enter valid Name!";  
+      
       status=false; 
     }
   
-    else if(!regName.test(firstName)){
+    else if(!regName.test(first_name)){
       document.getElementById("firstNameError").innerHTML=  
       "Please enter valid name,......";  
       status=false; 
+      console.log("firstname",this.state.firstName);
     }
     else{
-      
+      document.getElementById("firstNameError").innerHTML=  
+       ""; 
       status = true;
     }
 
-    if(this.state.lastName.length<=0)  {
+    if(last_name.length<=0)  {
       document.getElementById("lastNameError").innerHTML=  
       "Please enter valid Name";  
       status=false; 
     }
-    else if(!regName.test(lastName)){
+    else if(!regName.test(last_name)){
       document.getElementById("lastNameError").innerHTML=  
       "Please enter valid name.....";  
       status=false; 
@@ -165,7 +171,8 @@ class SignUp extends Component {
     }
 
     if(this.state.mobileNumber.match(phoneno)){
-      
+       document.getElementById("mobileNumberError").innerHTML=
+      ""; 
       status = true;
       
     }else{
@@ -174,30 +181,51 @@ class SignUp extends Component {
       status=false; 
     }
 
-    if(this.state.password.length<=0){
+     if(this.state.password.length <=0) {
+   document.getElementById("passwordError").innerHTML=  
+      ""; 
+  document.getElementById("passwordError").innerHTML=  
+      "Please enter Password";  
+      status=false; 
+} 
+ if (this.state.password.length<8) {
+  document.getElementById("passwordError").innerHTML=  
+            "Please enter atleast 8 characters";  
+            status=false; 
+} else {
+   document.getElementById("passwordError").innerHTML=  
+      ""; 
+      status = true;
+ 
+}
+
+   /* if(this.state.password.length=0){
       document.getElementById("passwordError").innerHTML=  
       "Please enter Password";  
       status=false; 
-    }
+   
 
-    if(this.state.password.length<8){
-      document.getElementById("passwordError").innerHTML=  
-      "Please enter atleast 8 characters";  
-      status=false; 
+           if(this.state.password.length<8){
+            document.getElementById("passwordError").innerHTML=  
+            "Please enter atleast 8 characters";  
+            status=false; 
+          }
     }
     else{
       document.getElementById("passwordError").innerHTML=  
       ""; 
       status = true;
-    }
+    }*/
 
     if(this.state.confirmPassword.length<=0){
+      document.getElementById("confirmPasswordError").innerHTML=  
+      ""; 
       document.getElementById("confirmPasswordError").innerHTML=  
       "Please enter Confirm Password";  
       status=false; 
     }
 
-    if(this.state.confirmPassword.length<8){
+     if(this.state.confirmPassword.length<8){
       document.getElementById("confirmPasswordError").innerHTML=  
       "Please enter atleast 8 characters";  
       status=false; 
@@ -223,17 +251,17 @@ class SignUp extends Component {
       swal('Please accept Term and Conditions');
       status =false;
     }
-    console.log(regName.test(firstName))
+    console.log(regName.test(this.state.firstName))
     console.log(this.state.mobileNumber.match(phoneno))
 
-    if (this.state.checkTC && this.state.firstName>0 && regName.test(firstName) && 
-      regName.test(lastName) && this.state.emailAddress.length>0 && emailFilter.test(tempEmail) &&
+  /*  if (this.state.checkTC  && regName.test(this.state.firstName) && 
+      regName.test(this.state.lastName) && this.state.emailAddress.length>0 && emailFilter.test(tempEmail) &&
       this.state.mobileNumber.match(phoneno) && (this.state.password) == (this.state.confirmPassword)
       ) {
       status = true
     }else{
       status = false
-    }
+    }*/
     return status;
   } 
 	usersignup(event) {
