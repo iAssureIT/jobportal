@@ -120,9 +120,6 @@ class Layout extends Component  {
                                                         <Route path="/candidate-profile/:candidate_id"  component={CandidateProfile} exact />
                                                         <Route path="/change-pwd/:user_ID"              exact strict component={ChangePassword} />
                                                         <Route path="/confirm-otp/:userID"              exact strict component={ConfirmOtp} />
-                                                        <Route path="/selectcompanypage"                exact strict component={SelectCompanyPage} />
-                                                        <Route path="/empsignuppage"                    exact strict component={EmpSignUpPage} />
-                                                        <Route path="/select-package-page"              exact strict component={SelectPackagePage} />
                                                     </Switch>
                                                 </div>
                                             </div>
@@ -143,6 +140,10 @@ class Layout extends Component  {
                     <Router >
                     <CoreLayout />
                         <Switch >
+                            <Route path="/selectcompanypage"                exact strict component={SelectCompanyPage} />
+                            <Route path="/empsignuppage"                    exact strict component={EmpSignUpPage} />
+                            <Route path="/select-package-page"              exact strict component={SelectPackagePage} />
+                        
                             <Route path="/"                     exact strict component={Login} />
                             <Route path="/login"                exact strict component={Login} />
                             <Route path="/signup"               exact strict component={SignUp} />

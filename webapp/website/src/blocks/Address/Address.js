@@ -24,7 +24,7 @@ class Address extends Component{
 			address 	       : "",
 			addressType        : "",
 			stateCode		   : "",
-			countryCode 	   : "",
+			countryCode 	   : "IN",
 			stateArray 		   : [],
 			districtArray 	   : [],
 			pincodeExists 	   : true,
@@ -33,9 +33,9 @@ class Address extends Component{
 			city               : "",
 			district   		   : "",	
 			states             : "",
-			country	           : "",
+			country	           : "India",
 			pincode            : "",
-			inputAddressType   : [],
+			inputAddressType   : [], 
 			addressTypeArry    : [],
 			buttonText         : "Save",
 			
@@ -89,11 +89,11 @@ class Address extends Component{
 	}
 	handleChangeState(event) {
 		const target = event.target;
-	    var state = document.getElementById("states");
-    	var stateCode = state.options[state.selectedIndex].getAttribute("statecode");
+	    var states = document.getElementById("states");
+    	var state = states.options[states.selectedIndex].getAttribute("state");
 		this.setState({
 			[event.target.name]: event.target.value,
-			stateCode : stateCode
+			states: state
 		});
 	}
 	//========== User Define Function Start ================
@@ -202,8 +202,8 @@ class Address extends Component{
 		var status =  this.validateForm();
 			var formValues = {	
 								candidate_id   : this.state.candidate_id,
-								addressID     : this.state.addressID,
-								address       :   
+								addressID      : this.state.addressID,
+								address        :   
 								{
 									addressType   : this.state.addressType,
 									houseNumber   : this.state.houseNumber,
@@ -265,7 +265,7 @@ class Address extends Component{
 	insetData(formValues){
 		var status =  this.validateForm();
 			if(status==true){
-					Axios.patch("/api/candidatemaster/patch/addCandidateAddress",formValues)
+			Axios.patch("/api/candidatemaster/patch/addCandidateAddress",formValues)
 				 .then(response=>{
 
 									Swal.fire("Congrats","Your Address details is insert Successfully","success");
@@ -304,15 +304,7 @@ class Address extends Component{
 			.map(word => word.charAt(0).toUpperCase() + word.slice(1))
 			.join(' ');
 	}
-	handleChangeState(event) {
-	    var designation = document.getElementById("states");
-    	var stateCode = designation.options[designation.selectedIndex].getAttribute("statecode");
-		this.setState({
-			[event.target.name]: event.target.value,
-			stateCode : stateCode
-		});
-	}
-
+	
     handleChangePlaces = address => {
 	    this.setState({ addressLine1 : address});
 	};
@@ -644,22 +636,22 @@ class Address extends Component{
 									<div className="input-group ">
 										<span className="input-group-addon inputBoxIcon">
 											<i className="fa fa-map"></i> 
-										</span> 
-										{/*<select id="states" className="form-control inputBox selectOption"
-										ref="states" value={this.state.states} name="states" onChange={this.handleChangeState} >
+										</span>
+										<select id="states" className="form-control inputBox selectOption"
+										ref="stateCode" value={this.state.states} name="stateCode" onChange={this.handleChangeState} >
 										<option selected={true}>-- Select --</option>
 										{
 											this.state.stateArray && this.state.stateArray.length > 0 ?
 												this.state.stateArray.map((stateData, index) => {
 													return (
-														<option key={index} statecode={stateData.stateCode}>{this.camelCase(stateData.stateName)}</option>
+														<option key={index} statecode={stateData.stateCode} state={this.camelCase(stateData.stateName)}>{this.camelCase(stateData.stateName)}</option>
 													);
 												}
 												) : ''
 										}
-										</select>*/}
-										<input type="text" className="form-control inputBox" ref="states" id="states" name="states" value={this.state.states} onChange={this.handleChange.bind(this)}/>
-													
+										</select>
+										{/*<input type="text" className="form-control inputBox" ref="states" id="states" name="states" value={this.state.states} onChange={this.handleChange.bind(this)}/>
+										*/} 			
 									</div> 
 									<span id="statesError" className="errorMsg"></span>
 								</div>

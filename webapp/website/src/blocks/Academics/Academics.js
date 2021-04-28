@@ -37,8 +37,8 @@ class Academics extends Component{
 			stateArray 		    : [],
 			states              : "",
 			stateCode		    : "",
-			country	            : "",
-			countryCode 	    : "",
+			country	            : "India",
+			countryCode 	    : "IN",
 			pincode             : "",
 			grade               : "",
 			mode                : "",
@@ -103,7 +103,7 @@ class Academics extends Component{
 			.catch((error) => {
 			})		
 			if(this.props.match.params.academicsID){
-			this.edit()
+				this.edit()
 
 			}
 		}
@@ -473,7 +473,7 @@ class Academics extends Component{
 			document.getElementById("passOutYearError").innerHTML=  
 			"";
 		}
-		if(this.state.college.length<=0){
+		if(this.state.addressLine1.length<=0){
 			document.getElementById("collegeError").innerHTML=  
 			"Please enter your College";  
 			status=false; 
@@ -539,12 +539,12 @@ class Academics extends Component{
            }       
         }
 		if(typeof this.state.college !== "undefined"){
-           if(!this.state.college.match(regName2)){
+           /*if(!this.state.college.match(regName2)){
               status = false;
               document.getElementById("collegeError").innerHTML = "Please enter a valid college name";
            }else{
            		document.getElementById("collegeError").innerHTML = "";
-           }       
+           }   */    
         }
 		 return status;
 	}
