@@ -370,6 +370,9 @@ redirectTo(job_id, url, parameter){
 																			<div className="listViewBtn">	
 																				<a title = "View" href={"/job-profile/" + elem._id}><i className="fa fa-eye"></i></a>
 																			</div>
+																			<div className="listDelBtn">	
+																				<i title = "Delete" className="fa fa-trash" onClick={this.deleteJob} id = {elem._id}></i>
+																			</div>
 																		</div>
 																	</div>
 																</div>
@@ -491,7 +494,6 @@ redirectTo(job_id, url, parameter){
 																	<div className="listViewBtn">	
 																		<a title = "View" href={"/job-profile/" + elem._id}><i className="fa fa-eye"></i></a>
 																	</div>
-																	
 																	<div className="listDelBtn">	
 																		<i title = "Delete" className="fa fa-trash" onClick={this.deleteJob} id = {elem._id}></i>
 																	</div>
