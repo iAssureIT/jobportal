@@ -15,6 +15,7 @@ class ForgotPassword extends Component {
     constructor(props) {
         super(props);
         this.state = {
+          mobileNumber:"",
             bannerData: {
                 title: "MY SHOPPING CART",
                 breadcrumb: 'My Shopping Cart',
@@ -29,12 +30,13 @@ class ForgotPassword extends Component {
     validateForm=()=>{
        var status = true;
       // var tempEmail = this.state.loginusername.trim(); // value of field with whitespace trimmed off
-       var emailFilter = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+     /*  var emailFilter = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
        var tempEmail = this.state.emailAddress; 
 
-       var illegalChars = /[\(\)\<\>\,\;\:\\\"\[\]]/;
+       var illegalChars = /[\(\)\<\>\,\;\:\\\"\[\]]/;*/
        var phoneno = /^\+?([0-9]{2})\)?[-. ]?([0-9]{5})[-. ]?([0-9]{5})$/;
-
+       var mobile =this.state.mobileNumber;
+        console.log("mobile",mobile);
    /*  if(tempEmail <= 0){
       document.getElementById("emailAddressError").innerHTML=  
       "Please enter your Email";  
@@ -51,16 +53,18 @@ class ForgotPassword extends Component {
           status = true;
         }*/
 
-    if(this.state.mobileNumber!=(phoneno)){
-       document.getElementById("mobileNumberError").innerHTML=  
-      "Please enter valid Mobile Number";  
-      status = false;
-      console.log(this.state.mobileNumber);
+     if(mobile.match(phoneno)){
+      console.log("mobile",this.state.mobileNumber);
+       document.getElementById("mobileNumberError").innerHTML=
+      ""; 
+      status = true;
       
     }else{
-     
-      status=true; 
+      document.getElementById("mobileNumberError").innerHTML=  
+      "Please enter valid Mobile Number";  
+      status=false; 
     }
+
         return status;
     } 
 
@@ -83,7 +87,7 @@ class ForgotPassword extends Component {
     sendLink(event) {
         event.preventDefault();
         var status =  this.validateForm();
-        console.log(status);
+        console.log("validateForm status",status);
         if(status){
         
         var mobileNo = this.state.mobileNumber;
@@ -98,7 +102,7 @@ class ForgotPassword extends Component {
             .then((response)=>{
               
                 console.log('forgotpassword res===',response.data)
-                if (response.data.ID) {
+                if (response.data.message == "OTP_UPDATED") {
                     var sendData = {
                       "event"     : "Event3", //Event Name
                       "toUser_id"  : response.data.ID, //To user_id(ref:users)
@@ -114,7 +118,7 @@ class ForgotPassword extends Component {
                     */
                     localStorage.setItem('previousUrl' ,'forgotpassword');
                     $('.fullpageloader').hide();
-                    swal("OTP send to your registered email ID.");
+                    swal("OTP send to your registered Phone Number");
                     //this.props.history.push('/confirm-otp/'+response.data.ID);
                     var {mapAction} = this.props;
                     mapAction.setUserID(response.data.ID);

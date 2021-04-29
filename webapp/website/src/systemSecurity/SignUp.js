@@ -171,6 +171,7 @@ class SignUp extends Component {
     }
 
     if(this.state.mobileNumber.match(phoneno)){
+      console.log("mobile",this.state.mobileNumber);
        document.getElementById("mobileNumberError").innerHTML=
       ""; 
       status = true;
@@ -312,9 +313,9 @@ class SignUp extends Component {
               .catch((error) => { console.log('notification error: ', error) })
             */
 						//this.props.history.push("/confirm-otp/" + response.data.ID);
-					}else{
+					}/*else{
 						swal(response.data.message);
-					}	
+					}	*/
 				})
 				.catch((error) => {
 					
