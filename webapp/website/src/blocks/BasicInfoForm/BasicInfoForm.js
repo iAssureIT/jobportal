@@ -394,6 +394,8 @@ class BasicInfoForm extends Component{
 	handleSubmit(event){
 		event.preventDefault();
 		var status =  this.validateForm();
+		var {mapAction} = this.props;
+
 			var formValues = {
 
 								firstName          : this.state.firstName,
@@ -420,7 +422,13 @@ class BasicInfoForm extends Component{
 			Axios.patch("/api/candidatemaster/patch/updateCandidateBasicInfo",formValues)
 			 .then(response=>{
 
-						Swal.fire("Congrats","Your Basic details is insert Successfully","success");
+			 	var userDetails = this.props.userDetails;
+				userDetails.gender = this.state.gender;
+				userDetails.profilePicture = this.state.profilePicture;
+				//console.log(userDetails)
+				mapAction.setUserDetails(userDetails);
+
+						Swal.fire("Congrats","Your basic details is inserted successfully","success");
 							this.setState({
 											firstName          : "",
 											middleName         : "",

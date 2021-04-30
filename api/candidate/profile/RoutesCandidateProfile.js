@@ -18,7 +18,7 @@ router.post("/post/getOneCandidateAddress", CandidateProfileController.getOneCan
 
 router.patch("/patch/updateOneCandidateAddress", CandidateProfileController.updateOneCandidateAddress);
 
-router.delete('/deleteAddress/:candidate_id/delete/:addressID',CandidateProfileController.deleteAddress);
+router.delete('/deleteAddress/:candidate_id/delete/:addressID/:profileCompletion',CandidateProfileController.deleteAddress);
 
 router.patch("/patch/updateCandidateContact", CandidateProfileController.updateCandidateContact);
 
@@ -29,16 +29,18 @@ router.post("/post/getOneCandidateAcademics", CandidateProfileController.getOneC
 
 router.patch("/patch/updateOneCandidateAcademics", CandidateProfileController.updateOneCandidateAcademics);
 
-router.delete('/deleteAcademics/:candidate_id/delete/:academicsID',CandidateProfileController.deleteAcademics);
+router.delete('/deleteAcademics/:candidate_id/delete/:academicsID/:profileCompletion',CandidateProfileController.deleteAcademics);
 
 // =========================== candidate Experience =====================================//
+router.patch("/patch/updateCandidateTotalExperience", CandidateProfileController.updateCandidateTotalExperience);
+
 router.patch("/patch/addCandidateExperience", CandidateProfileController.addCandidateExperience);
 
 router.post("/post/getOneCandidateExperience", CandidateProfileController.getOneCandidateExperience);
 
 router.patch("/patch/updateOneCandidateExperience", CandidateProfileController.updateOneCandidateExperience);
 
-router.delete('/deleteExperience/:candidate_id/delete/:experienceID',CandidateProfileController.deleteExperience);
+router.delete('/deleteExperience/:candidate_id/delete/:experienceID/:profileCompletion',CandidateProfileController.deleteExperience);
  
 // =========================== candidate Experience =====================================//
 router.patch("/patch/addCandidateSkill", CandidateProfileController.addCandidateSkill); 

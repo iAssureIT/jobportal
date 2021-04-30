@@ -677,7 +677,8 @@ class JobPosting extends Component {
 
     handleSubmit = ( event ) => { 
         event.preventDefault();
-        if (true) {
+        var status = this.validateForm();
+        if (status) {
             var formValues = {
                 user_id                 :   this.props.userDetails.user_id,
                 company_id              :   this.props.userDetails.company_id,
@@ -756,7 +757,7 @@ class JobPosting extends Component {
                 if (response.data.created) {
                     let job_id = response.data.jobsData._id;
 
-                    Swal.fire("Congrats", "Your Data is Submitted Successfully", "success");
+                    Swal.fire("Congrats", "Your Data is submitted successfully", "success");
                     this.setState({
                         jobTitle                :   "",
                         functionalarea_id       :   "",

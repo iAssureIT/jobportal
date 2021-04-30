@@ -4,6 +4,9 @@ import Moment               from 'moment';
 import { withRouter }	 	from 'react-router-dom';
 import Axios 			 	from 'axios';
 import Swal 			 	from 'sweetalert2';
+import { connect }        	from 'react-redux';
+import { bindActionCreators } from 'redux';
+import  * as mapActionCreator from '../../common/actions/index';
 import { Multiselect }      from 'multiselect-react-dropdown';
 import PlacesAutocomplete, {
   		geocodeByAddress,
@@ -182,6 +185,7 @@ class Academics extends Component{
 	deleteDate(event){
 		event.preventDefault();
 		var data_id =  event.currentTarget.id;
+		var {mapAction} = this.props;
 
 		Swal.fire({
 		title : 'Are you sure? you want to delete this Academics details!!!',
@@ -195,9 +199,23 @@ class Academics extends Component{
 	  }).then((result) =>{
 		if(result.value){
 			if(data_id){
-				Axios.delete("/api/candidatemaster/deleteAcademics/"+this.state.candidate_id+"/delete/"+data_id)
+
+				var profileCompletion = this.state.profileCompletion
+				if (this.state.academics.length == 1) {
+					profileCompletion = profileCompletion - 20;
+				}else{
+					profileCompletion = this.state.profileCompletion
+				}
+
+				Axios.delete("/api/candidatemaster/deleteAcademics/"+this.state.candidate_id+"/delete/"+data_id+"/"+profileCompletion)
 				.then(response =>{
 						if(response.data.deleted===true){
+
+						var userDetails = this.props.userDetails;
+						userDetails.profileCompletion = profileCompletion;
+
+						mapAction.setUserDetails(userDetails);
+
 						Swal.fire(
 									'Deleted!',
 									'Academics details has been deleted successfully!',
@@ -339,7 +357,14 @@ class Academics extends Component{
 	handleSave(event){
 		event.preventDefault();
 		var status =  this.validateForm();
+
 		if(status===true){
+			var profileCompletion = this.state.profileCompletion
+			if (!this.state.academics.length) {
+				profileCompletion = profileCompletion + 20;
+			}else{
+				profileCompletion = this.state.profileCompletion
+			}
 			var formValues = {
 								candidate_id   : this.state.candidate_id,
 								academicsID   : this.state.academicsID,
@@ -364,7 +389,7 @@ class Academics extends Component{
 									passOutYear          : this.state.passOutYear,
 									admisionYear         : this.state.admisionYear
 								},
-								profileCompletion : this.state.profileCompletion
+								profileCompletion : profileCompletion
 							}
 			}					
 		if(this.props.match.params.academicsID){
@@ -408,10 +433,16 @@ class Academics extends Component{
 		}
 	insetData(formValues,event){
 		var status =  this.validateForm();
+		var {mapAction} = this.props;
+
 		if(status===true){
 				Axios.patch("/api/candidatemaster/patch/addCandidateAcademics",formValues)
-			 .then(response=>{
-						
+			 	.then(response=>{
+					var userDetails = this.props.userDetails;
+					userDetails.profileCompletion = formValues.profileCompletion;
+
+					mapAction.setUserDetails(userDetails);
+
 					Swal.fire("Congrats","Your Academics details insert Successfully","success");
 						this.setState({
 										
@@ -965,5 +996,14 @@ class Academics extends Component{
 			);
 	}
 }
+const mapStateToProps = (state)=>{
+    return {
+        userDetails    : state.userDetails 
+    }
+}
+const mapDispatchToProps = (dispatch) => ({
+  mapAction :  bindActionCreators(mapActionCreator, dispatch)
+}) 
 
-export default withRouter(Academics);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Academics));
+

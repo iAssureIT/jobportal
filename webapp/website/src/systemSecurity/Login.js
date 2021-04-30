@@ -155,6 +155,7 @@ class Login extends Component {
               userDetails.candidate_id = candidate.data[0] ? candidate.data[0]._id : null;
               userDetails.gender = candidate.data[0] ? candidate.data[0].basicInfo.gender : null;
               userDetails.profilePicture = candidate.data[0] ? candidate.data[0].basicInfo.profilePicture : null;
+              userDetails.profileCompletion = candidate.data[0] ? candidate.data[0].profileCompletion : null;
 
              localStorage.setItem('userDetails', JSON.stringify(userDetails));
                //window.location.href = '/';

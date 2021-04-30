@@ -476,7 +476,7 @@ class Header extends Component{
                       <a href="/basic-info"><div className="notificationMessege col-lg-12">
 
                         <i className="fa fa-user-o"></i>
-                        <span className="notificationMessegeText">Complete Your Profile</span>
+                        <span className="notificationMessegeText">Complete Your Profile ({this.props.userDetails.profileCompletion}%)</span>
                       </div></a>
                       <a href="/applied-jobs"><div className="notificationMessege col-lg-12">
                        <i className="fa fa-briefcase"></i>

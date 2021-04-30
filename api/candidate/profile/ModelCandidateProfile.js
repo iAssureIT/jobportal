@@ -91,6 +91,7 @@ const candidateSchema = mongoose.Schema({
 		reportingManagerDegn  		: String,
 	}],
 	totalExperience 	: Number,
+	experienceLevel 	: String,
 	noticePeriod    	: String,
 	currentCTC 			: Number,
 	expectedCTC  		: Number,

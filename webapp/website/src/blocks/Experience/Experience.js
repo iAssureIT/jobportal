@@ -7,6 +7,9 @@ import Swal from "sweetalert2";
 import _ from "underscore";
 import CKEditor from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import { connect }          from 'react-redux';
+import { bindActionCreators } from 'redux';
+import  * as mapActionCreator from '../../common/actions/index';
 import "../BasicInfoForm/BasicInfoForm.css";
 
 class Experience extends Component {
@@ -46,9 +49,10 @@ class Experience extends Component {
       expYears: 0,
       expMonths: 0,
       relevantExperience: "",
-      totalExperience: "",
+      totalExperience: 0,
       working: "fresher",
       profileCompletion: 0,
+      experienceLevel  : "" 
     };
     this.camelCase = this.camelCase.bind(this);
     this.handleChangeState = this.handleChangeState.bind(this);
@@ -181,8 +185,10 @@ class Experience extends Component {
     Axios.get("/api/candidatemaster/get/one/" + this.state.candidate_id)
       .then((response) => {
         this.setState({
+          totalExperience : response.data.totalExperience,
           experienceArry: response.data.workExperience,
           profileCompletion: response.data.profileCompletion,
+          experienceLevel : response.data.experienceLevel
         });
       })
       .catch((error) => {
@@ -192,6 +198,7 @@ class Experience extends Component {
   deleteDate(event) {
     event.preventDefault();
     var data_id = event.currentTarget.id;
+    var {mapAction} = this.props;
 
     Swal.fire({
       title: "Are you sure? you want to delete this Experience Details!!!",
@@ -204,14 +211,27 @@ class Experience extends Component {
     }).then((result) => {
       if (result.value) {
         if (data_id) {
+          var profileCompletion = this.state.profileCompletion
+          if (this.state.experienceArry.length == 1) {
+            profileCompletion = profileCompletion - 20;
+          }else{
+            profileCompletion = this.state.profileCompletion
+          }
+
           Axios.delete(
             "/api/candidatemaster/deleteExperience/" +
               this.state.candidate_id +
               "/delete/" +
-              data_id
+              data_id+"/"+profileCompletion
           )
             .then((response) => {
               if (response.data.deleted === true) {
+
+                var userDetails = this.props.userDetails;
+                userDetails.profileCompletion = profileCompletion;
+
+                mapAction.setUserDetails(userDetails);
+
                 Swal.fire(
                   "Deleted!",
                   "Experience Details has been deleted successfully!",
@@ -241,6 +261,16 @@ class Experience extends Component {
     event.preventDefault();
     var status = this.validateForm();
     if (status === true) {
+      var profileCompletion = this.state.profileCompletion
+      console.log(!this.state.experienceArry.length)
+      console.log(this.state.experienceLevel)
+      console.log(!this.state.experienceArry.length && (this.state.experienceLevel == "" || this.state.experienceLevel == "fresher" ))
+
+      if (!this.state.experienceArry.length && this.state.profileCompletion != 100 && (this.state.experienceLevel == "" || this.state.experienceLevel == "fresher" )) {
+        profileCompletion = profileCompletion + 20;
+      }else{
+        profileCompletion = this.state.profileCompletion
+      }
       var formValues = {
         candidate_id: this.state.candidate_id,
         experienceID: this.state.workExperienceID,
@@ -268,7 +298,8 @@ class Experience extends Component {
         currentCTC: this.state.currentCTC,
         expectedCTC: this.state.expectedCTC,
         noticePeriod: this.state.noticePeriod,
-        profileCompletion: this.state.profileCompletion,
+        profileCompletion: profileCompletion,
+        experienceLevel : "experienced"
       };
     }
 
@@ -313,7 +344,7 @@ class Experience extends Component {
             reportingManagerDesignation: "",
             noticePeriod: "",
             relevantExperience: "",
-            totalExperience: "",
+            totalExperience: 0,
             buttonText: "Save",
           });
           window.location.reload(false);
@@ -326,12 +357,18 @@ class Experience extends Component {
   }
   insetData(formValues, event) {
     var status = this.validateForm();
+    var {mapAction} = this.props;
     if (status === true) {
       Axios.patch(
         "/api/candidatemaster/patch/addCandidateExperience",
         formValues
       )
         .then((response) => {
+          var userDetails = this.props.userDetails;
+          userDetails.profileCompletion = formValues.profileCompletion;
+
+          mapAction.setUserDetails(userDetails);
+
           this.getData();
           Swal.fire(
             "Congrats",
@@ -359,7 +396,7 @@ class Experience extends Component {
             reportingManagerDesignation: "",
             noticePeriod: "",
             relevantExperience: "",
-            totalExperience: "",
+            totalExperience: 0,
             buttonText: "Save",
           });
         })
@@ -437,6 +474,42 @@ class Experience extends Component {
     event.preventDefault();
     this.props.history.push("/profile/" + this.state.candidate_id);
   }
+  updateTotalExperience(event) {
+    event.preventDefault();
+    var profileCompletion = this.state.profileCompletion;
+    var {mapAction} = this.props;
+    console.log(this.state.totalExperience)
+    console.log(this.state.experienceLevel)
+
+    if (this.state.profileCompletion != 100 && (this.state.experienceLevel == "" || this.state.experienceLevel == "experienced")) {
+      profileCompletion = profileCompletion + 20;
+
+      console.log(profileCompletion)
+      console.log(this.state.totalExperience)
+
+      var formValues =  {  
+                          candidate_id      : this.state.candidate_id,
+                          totalExperience   : this.state.totalExperience, 
+                          profileCompletion : profileCompletion
+                        }
+      console.log(formValues)                  
+      Axios.patch("/api/candidatemaster/patch/updateCandidateTotalExperience",formValues)
+           .then(response=>{
+              this.getData();
+              var userDetails = this.props.userDetails;
+              userDetails.profileCompletion = profileCompletion;
+
+              mapAction.setUserDetails(userDetails);
+              Swal.fire("Congrats","Your experience details is saved","success");
+              this.props.history.push("/profile/" + this.state.candidate_id);
+            })
+            .catch(error =>{
+              Swal.fire("Submit Error!",error.message,'error');
+            });
+    }else{
+      this.props.history.push("/profile/" + this.state.candidate_id);
+    }
+  }
   handleChangeState(event) {
     var state = document.getElementById("states");
     var stateCode = state.options[state.selectedIndex].getAttribute(
@@ -461,7 +534,7 @@ class Experience extends Component {
     
   }
   handleChangeFresher(event){
-       event.preventDefault();
+    event.preventDefault();
     var id = event.currentTarget.id;
     if (id === "fresher") {
       this.setState({
@@ -506,7 +579,7 @@ class Experience extends Component {
       document.getElementById("noticePeriodError").innerHTML = "";
     }
 
-    if (this.state.totalExperience.length <= 0) {
+    if (this.state.totalExperience == 0) {
       document.getElementById("totalExperienceError").innerHTML =
         "Please enter your total experience";
       status = false;
@@ -1258,11 +1331,11 @@ class Experience extends Component {
             :
             <button
                 className="buttonNext pull-right"
-                onClick={this.handelSubmit.bind(this)}
+                onClick={this.updateTotalExperience.bind(this)}
               >
                 Finish
                 <FontAwesomeIcon className="nextArrow" icon="arrow-right" />
-              </button>
+            </button>
           }
           
         </form>
@@ -1270,5 +1343,15 @@ class Experience extends Component {
     );
   }
 }
+const mapStateToProps = (state)=>{
+    return {
+        userDetails    : state.userDetails 
+    }
+}
+const mapDispatchToProps = (dispatch) => ({
+  mapAction :  bindActionCreators(mapActionCreator, dispatch)
+}) 
 
-export default withRouter(Experience);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Experience));
+
+

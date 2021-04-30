@@ -4,6 +4,9 @@ import Moment               from 'moment';
 import { withRouter }	 	from 'react-router-dom';
 import Axios 			 	from 'axios';
 import Swal 			 	from 'sweetalert2';
+import { connect }        	from 'react-redux';
+import { bindActionCreators } from 'redux';
+import  * as mapActionCreator from '../../common/actions/index';
 import '../BasicInfoForm/BasicInfoForm.css';
 import './Address.css';
 
@@ -137,9 +140,11 @@ class Address extends Component{
 	deleteDate(event){
 
 		var data_id =  event.currentTarget.id;
+		var {mapAction} = this.props;
 
+		console.log(this.state.addressArry.length)
 		Swal.fire({
-		title : 'Are you sure? you want to delete this Address details!!!',
+		title : 'Are you sure, do you want to delete this address details!!!',
 		text : 'You will not be able to recover this Address details',
 		icon : 'warning',
 		showCancelButton : true,
@@ -150,9 +155,22 @@ class Address extends Component{
 	  }).then((result) =>{
 		if(result.value){
 			if(data_id){
-				Axios.delete("/api/candidatemaster/deleteAddress/"+this.state.candidate_id+"/delete/"+data_id)
+
+				var profileCompletion = this.state.profileCompletion
+				if (this.state.addressArry.length == 1) {
+					profileCompletion = profileCompletion - 20;
+				}else{
+					profileCompletion = this.state.profileCompletion
+				}
+
+				Axios.delete("/api/candidatemaster/deleteAddress/"+this.state.candidate_id+"/delete/"+data_id+"/"+profileCompletion)
 				.then(response =>{
 						if(response.data.deleted===true){
+
+						var userDetails = this.props.userDetails;
+						userDetails.profileCompletion = profileCompletion;
+
+						mapAction.setUserDetails(userDetails);
 
 						Swal.fire(
 									'Deleted!',
@@ -161,7 +179,7 @@ class Address extends Component{
 							);
 						this.getData();
 					}
-			})
+				})
 				.catch(error=>{
 					
 					Swal.fire(
@@ -201,6 +219,14 @@ class Address extends Component{
 	handleSave(event){
 		event.preventDefault();
 		var status =  this.validateForm();
+			//console.log(this.state.addressArry.length )
+
+			var profileCompletion = this.state.profileCompletion
+			if (!this.state.addressArry.length) {
+				profileCompletion = profileCompletion + 20;
+			}else{
+				profileCompletion = this.state.profileCompletion
+			}
 			var formValues = {	
 								candidate_id   : this.state.candidate_id,
 								addressID      : this.state.addressID,
@@ -218,7 +244,7 @@ class Address extends Component{
 									stateCode 	  : this.state.stateCode,
         							countryCode   : this.state.countryCode
 								},
-								profileCompletion : this.state.profileCompletion
+								profileCompletion : profileCompletion
 				
 							}					
 		if(this.props.match.params.addressID){
@@ -235,21 +261,21 @@ class Address extends Component{
 				 Axios.patch("/api/candidatemaster/patch/updateOneCandidateAddress",formValues)
 				 .then(response=>{
 
-									Swal.fire("Congrats","Your Address details update Successfully","success");
-										this.setState({
-														addressType        : "",
-														pincodeExists 	   : true,
-														houseNumber        : "",
-														addressLine1       : "",
-														area               : "",
-														city               : "",
-														district   		   : "",	
-														states             : "",
-														country	           : "",
-														pincode            : "",
-														buttonText         : "Save",
-													})	
-										this.getData();	
+							Swal.fire("Congrats","Your Address details update Successfully","success");
+								this.setState({
+												addressType        : "",
+												pincodeExists 	   : true,
+												houseNumber        : "",
+												addressLine1       : "",
+												area               : "",
+												city               : "",
+												district   		   : "",	
+												states             : "",
+												country	           : "",
+												pincode            : "",
+												buttonText         : "Save",
+											})	
+								this.getData();	
 									
 							   this.props.history.push("/address/"+this.state.candidate_id);
 							   window.location.reload(false);
@@ -266,25 +292,31 @@ class Address extends Component{
 		
 	insetData(formValues){
 		var status =  this.validateForm();
+		var {mapAction} = this.props;
 			if(status==true){
 			Axios.patch("/api/candidatemaster/patch/addCandidateAddress",formValues)
 				 .then(response=>{
+				 	
+				 	var userDetails = this.props.userDetails;
+					userDetails.profileCompletion = formValues.profileCompletion;
 
-									Swal.fire("Congrats","Your Address details is insert Successfully","success");
-										this.setState({
-														addressType        : "",
-														pincodeExists 	   : true,
-														houseNumber        : "",
-														addressLine1       : "",
-														area               : "",
-														city               : "",
-														district   		   : "",	
-														states             : "",
-														country	           : "",
-														pincode            : "",
-														buttonText         : "Save"
-													})	
-										this.getData();
+					mapAction.setUserDetails(userDetails);
+
+					Swal.fire("Congrats","Your Address details is insert Successfully","success");
+						this.setState({
+										addressType        : "",
+										pincodeExists 	   : true,
+										houseNumber        : "",
+										addressLine1       : "",
+										area               : "",
+										city               : "",
+										district   		   : "",	
+										states             : "",
+										country	           : "",
+										pincode            : "",
+										buttonText         : "Save"
+									})	
+						this.getData();
 					})
 					.catch(error =>{
 						Swal.fire("Submit Error!",error.message,'error');
@@ -782,5 +814,14 @@ class Address extends Component{
 			);
 	}
 }
+const mapStateToProps = (state)=>{
+    return {
+        userDetails    : state.userDetails 
+    }
+}
+const mapDispatchToProps = (dispatch) => ({
+  mapAction :  bindActionCreators(mapActionCreator, dispatch)
+}) 
 
-export default withRouter(Address);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Address));
+

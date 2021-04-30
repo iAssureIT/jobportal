@@ -6,6 +6,9 @@ import Swal 			   from 'sweetalert2';
 import $ from 'jquery';
 import axios from 'axios';
 import swal from 'sweetalert';
+import { connect }        	from 'react-redux';
+import { bindActionCreators } from 'redux';
+import  * as mapActionCreator from '../../common/actions/index';
 import { withRouter }	   from 'react-router-dom';
 import Moment              from 'moment';
 import IAssureTable 	   from '../../coreadmin/IAssureTable/IAssureTable.jsx';	
@@ -172,10 +175,26 @@ class Certification extends Component{
     }
     confirmDelete(event){
     	event.preventDefault();
+    	console.log(this.state.tableData)
+    	var {mapAction} = this.props;
     	var candidate_id = this.props.match.params.candidate_id;
     	var skill_id = this.state.IdToDelete;
-    	axios.delete('/api/candidatemaster/deleteSkill/' + candidate_id + "/" + skill_id)
+    	var profileCompletion = this.state.profileCompletion
+
+			if (this.state.tableData.length==1) {
+				profileCompletion = profileCompletion - 20;
+			}else{
+				profileCompletion = this.state.profileCompletion
+			}
+
+    	axios.delete('/api/candidatemaster/deleteSkill/' + candidate_id + "/" + skill_id+"/")
             .then((response)=>{
+
+            	var userDetails = this.props.userDetails;
+				userDetails.profileCompletion = profileCompletion;
+
+				mapAction.setUserDetails(userDetails);
+
            		if (response.data) {
 					this.setState({
 						'openForm': false,
@@ -325,6 +344,15 @@ class Certification extends Component{
 		// this.changeBlock(event);
 		if(this.state.certificationToggel===false){
 			event.preventDefault();
+			var profileCompletion = this.state.profileCompletion
+
+			console.log(this.state.tableData)
+			if (!this.state.tableData.length) {
+				profileCompletion = profileCompletion + 20;
+			}else{
+				profileCompletion = this.state.profileCompletion
+			}
+			console.log(profileCompletion)
 			if(this.state.isPrimary===true){
 				
 				var formValues = {
@@ -336,7 +364,7 @@ class Certification extends Component{
 										skill_id              : this.state.skills_id,
 										experience            : this.state.experience
 					                },	
-					                profileCompletion : this.state.profileCompletion				                
+					                profileCompletion 		  : profileCompletion				                
 							}
 							this.insetData(formValues,event);
 			}else{
@@ -349,7 +377,7 @@ class Certification extends Component{
 										skill_id              : this.state.skills_id,
 										experience            : this.state.experience
 					                },		
-					                profileCompletion : this.state.profileCompletion	
+					                profileCompletion         : profileCompletion	
 							}
 							this.insetData(formValues,event);
 			}
@@ -377,7 +405,7 @@ class Certification extends Component{
 				}
 		}
 			 
-	this.getData();	
+	
 	}
 	updateData(formValues){
 		var status =  this.validateForm();
@@ -407,11 +435,18 @@ class Certification extends Component{
 		}
 	insetData(formValues,event){
 		var status =  this.validateForm();
+		var {mapAction} = this.props;
 
 		if (status==true) {
+			
 		if(this.state.certificationToggel===false){
 				Axios.patch("/api/candidatemaster/patch/addCandidateSkill",formValues)
 				 .then(response=>{
+
+				 		var userDetails = this.props.userDetails;
+						userDetails.profileCompletion = formValues.profileCompletion;
+
+						mapAction.setUserDetails(userDetails);
 
 						Swal.fire("Congrats","Your skill and rating is inserted Successfully","success");
 							this.setState({
@@ -421,7 +456,7 @@ class Certification extends Component{
 											isPrimary		   : true,
 											buttonText         : "Save"
 										})
-		
+						this.getData();	
 					})
 					.catch(error =>{
 						Swal.fire("Submit Error!",error.message,'error');
@@ -819,5 +854,14 @@ class Certification extends Component{
 			);
 	}
 }
+const mapStateToProps = (state)=>{
+    return {
+        userDetails    : state.userDetails 
+    }
+}
+const mapDispatchToProps = (dispatch) => ({
+  mapAction :  bindActionCreators(mapActionCreator, dispatch)
+}) 
 
-export default withRouter(Certification);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Certification));
+

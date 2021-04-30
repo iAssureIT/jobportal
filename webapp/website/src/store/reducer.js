@@ -17,6 +17,7 @@ const initialState = {
 		candidate_id : JSON.parse(localStorage.getItem("userDetails")).candidate_id,
 		gender 	    : JSON.parse(localStorage.getItem("userDetails")).gender,
 		profilePicture : JSON.parse(localStorage.getItem("userDetails")).profilePicture,		
+		profileCompletion : JSON.parse(localStorage.getItem("userDetails")).profileCompletion
 		}
 		: {
 		loggedIn  	: false,	
@@ -31,7 +32,8 @@ const initialState = {
 		token 		: "", 
 		gender 		: "",	
 		profilePicture : "",
-		candidate_id: ""
+		candidate_id: "",
+		profileCompletion : 0
 	},
 	selectedCountry				: "India",
 	selectedState 				: "",
