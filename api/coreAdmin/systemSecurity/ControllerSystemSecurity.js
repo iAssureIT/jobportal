@@ -596,6 +596,7 @@ exports.check_userID_EmailOTP = (req, res, next) => {
 
 exports.check_userID_mobileOTP = (req, res, next) => {
 	console.log("user", req.body)
+
 	User.findOne({ _id: ObjectID(req.body.user_id), "profile.otpMobile": req.body.mobileotp })
 		.exec()
 		.then(user => {
@@ -1969,6 +1970,7 @@ exports.set_send_mobileotp_usingMobile = (req, res, next) => {
 				{
 					$set: {
 						"profile.otpMobile": otpMobile,
+						"profile.passwordreset"	: (user.profile.status).toLowerCase() == "active" ? true : false,
 					},
 				})
 				.exec()
