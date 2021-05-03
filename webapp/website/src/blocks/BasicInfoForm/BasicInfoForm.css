@@ -859,3 +859,26 @@ user agent stylesheet:focus {
 .fresherWrapper{
     margin-top: 20px;
 }
+.certificationWrapper .modal-dialog{
+    width: 25%!important;
+    margin: 12% 50%!important;
+    transform: translateX(-50%)!important;
+}
+.certificationWrapper .modal-dialog .cancelbtn{
+    margin-left: 0%!important;
+    padding-left: 9px;
+}
+.certificationWrapper .modal-dialog .deletebtn{
+    padding-left: 10px;
+}
+.certificationWrapper .modal-dialog .button.close{
+    margin-right: 0px!important;
+}
+.certificationWrapper .modal-dialog .blackLightFont{
+    text-align: center!important;
+}
+.certificationWrapper .modal-dialog .modalWrapper{
+    padding-left: 15px!important;
+    padding-right: 15px!important;
+    padding-bottom: 15px!important;
+}

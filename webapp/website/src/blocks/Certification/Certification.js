@@ -560,7 +560,7 @@ class Certification extends Component{
 	render(){
 		
 		return(
-				<div className="col-lg-12 ">
+				<div className="col-lg-12 certificationWrapper">
 					<form>
 						<div className="row formWrapper">
 							<div className="col-lg-4 col-lg-offset-4">
