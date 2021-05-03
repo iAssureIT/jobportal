@@ -1,5 +1,10 @@
 import React, { Component }  from 'react';
 import { FontAwesomeIcon }   from '@fortawesome/react-fontawesome';
+import swal                  from 'sweetalert';
+import axios                 from 'axios';
+import { connect }           from 'react-redux';
+import { bindActionCreators }   from 'redux';
+import  * as mapActionCreator   from '../common/actions/index';
 import "./SelectCompany.css";
 
 class SignUp extends Component {
@@ -23,6 +28,7 @@ handleChange(event){
     })
 }
 render() {
+    console.log(this.props.selectedCompanyDetails)
     return (
             <form className="signUpBoxFormWrapper">
                 <div className="signUpBoxTitle">Sign Up</div> 
@@ -101,4 +107,15 @@ render() {
 }
 
 }
-export default SignUp;
+const mapStateToProps = (state)=>{ 
+    return {
+        selectedCompanyDetails  : state.selectedCompanyDetails
+    }
+}
+const mapDispatchToProps = (dispatch) => ({
+  mapAction :  bindActionCreators(mapActionCreator, dispatch)
+})
+
+export default connect(mapStateToProps, mapDispatchToProps) (SignUp);
+
+

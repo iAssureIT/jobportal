@@ -10,7 +10,6 @@ import 'font-awesome/css/font-awesome.min.css';
 import './SignUp.css';
 import swal from 'sweetalert';
 import axios from 'axios';
-import Autosuggest from 'react-autosuggest';
 import _          from 'underscore';
 import 'react-phone-input-2/lib/style.css';
 
@@ -44,7 +43,6 @@ class SignUp extends Component {
         mobileV             : "",
         emailIDV            : "",
       },
-      employerArray         : [],
       firstName             : "",
       lastName              : "",
       password              : "",
@@ -52,7 +50,7 @@ class SignUp extends Component {
       emailAddress          : "",
       mobileNumber          : "",
       value                 : '',
-      suggestions           : []
+
     }
     this.handleChange = this.handleChange.bind(this);
   }
@@ -501,7 +499,6 @@ class SignUp extends Component {
           this.setState({company_id :company_id, companyID: companyID, companyName : value });
 
         }
-        
     } 
     handleChangeBranch(event){
       var value = event.currentTarget.value;
