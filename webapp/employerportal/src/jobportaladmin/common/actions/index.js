@@ -1,5 +1,9 @@
 import axios from 'axios';
 
+export const selectedCompanyDetails = (selectedCompanyDetails )=> ({
+      type                      : 'SELECTED_COMPANY_DETAILS',
+      selectedCompanyDetails    : selectedCompanyDetails
+});
 export const setUserDetails = (userDetails )=> ({
       type 				   : 'SET_USER_DETAILS',
       userDetails 	 : userDetails
@@ -13,13 +17,13 @@ export const setFilterSelector = (selector )=> ({
       selector 			 : selector
 });
 export const setCandidateFilterSelector = (candidateSelector )=> ({
-      type                    : 'SET_CANDIDATE_FILTER_SELECTOR',
-      candidateSelector       : candidateSelector
+      type                      : 'SET_CANDIDATE_FILTER_SELECTOR',
+      candidateSelector         : candidateSelector
 });
 
 export const setAppliedCandidateFilterSelector = (appliedCandidateSelector )=> ({
-      type                    : 'SET_APPLIED_CANDIDATE_FILTER_SELECTOR',
-      appliedCandidateSelector: appliedCandidateSelector
+      type                      : 'SET_APPLIED_CANDIDATE_FILTER_SELECTOR',
+      appliedCandidateSelector  : appliedCandidateSelector
 });
 export const getJobList = (jobList )=> ({  
       type 				   : 'GET_JOB_LIST',

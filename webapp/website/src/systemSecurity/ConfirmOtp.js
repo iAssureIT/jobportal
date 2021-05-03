@@ -15,7 +15,7 @@ class ConfirmOtp extends Component {
     this.state = {
       showMessage: false,
       //user_id        :"607e7716e5a1da0fa91c6d48",
-      user_id        :this.props.userDetails.user_id,
+      user_id        :this.props.userID,
       email          :this.props.userDetails.email
     }
   }
@@ -24,7 +24,7 @@ class ConfirmOtp extends Component {
     //==================================
     var user_id = this.props.userID;
     console.log('user_id==',user_id)  
-
+ 
     axios.get('/api/users/get/'+user_id)
     .then((response) => {
       console.log('userInfo==',response.data)
@@ -56,11 +56,7 @@ class ConfirmOtp extends Component {
     event.preventDefault();
     var url = this.props;
     var {mapAction} = this.props;
-    var formValues = {
-      "user_ID": this.state.user_id,
-      "emailOTP": this.refs.emailotp1.value + this.refs.emailotp2.value + this.refs.emailotp3.value + this.refs.emailotp4.value,
-      "status": "Active"
-    }
+    
     //========person master===============
 
       var candidatemaster   = {
@@ -75,19 +71,20 @@ class ConfirmOtp extends Component {
     
       //====================================
 
-      var checkData = { "user_id": this.state.user_id, 
+      var checkData = { "user_id": this.props.userID, 
                         "mobileotp"  : this.refs.emailotp1.value + this.refs.emailotp2.value + this.refs.emailotp3.value + this.refs.emailotp4.value, 
                         "status" : "active" }
       
       console.log(checkData)  
                       
-      // checkmobileotp/usingID 
+      // checkmobileotp/usingID  
       axios.post('/api/auth/checkmobileotp/usingID',checkData)
         .then((response) => {
 
           if (response.data.message == 'SUCCESS') {
             swal('OTP Verified Successfully.');
              mapAction.setSelectedModal("login");
+             
             if (response.data.passwordreset === true) {
               //this.props.history.push('/reset-pwd/' + this.props.userID);
               mapAction.setUserID(this.props.userID);
@@ -299,3 +296,4 @@ const mapDispatchToProps = (dispatch) => ({
   mapAction :  bindActionCreators(mapActionCreator, dispatch)
 })
 export default connect(mapStateToProps, mapDispatchToProps) (ConfirmOtp);
+

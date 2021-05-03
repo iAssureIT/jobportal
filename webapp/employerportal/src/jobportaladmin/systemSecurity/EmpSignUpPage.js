@@ -93,13 +93,13 @@ render() {
                     </div>
                 </div>
                 <div className="row"> 
-                    {showHide1 && <SelectCompany />}
+                    {showHide1 && <SelectCompany hideComponent = {this.hideComponent.bind(this)} />}
                 </div>
                 <div className="row"> 
-                    {showHide2 && <SignUp />}
+                    {showHide2 && <SignUp hideComponent = {this.hideComponent.bind(this)} />}
                 </div>
                 <div className="row"> 
-                    {showHide3 && <SelectPackage />}
+                    {showHide3 && <SelectPackage hideComponent = {this.hideComponent.bind(this)} />}
                 </div>
             </div>
         </section>

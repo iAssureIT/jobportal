@@ -93,8 +93,8 @@ class ForgotPassword extends Component {
         var mobileNo = this.state.mobileNumber;
         var formValues = {
             mobileNo : mobileNo,
-            //"emailSubject"	: "Email Verification", 
-			//"emailContent"  : "As part of our registration process, we screen every new profile to ensure its credibility by validating email provided by user. While screening the profile, we verify that details put in by user are correct and genuine.",
+          //"emailSubject"	: "Email Verification", 
+			    //"emailContent"  : "As part of our registration process, we screen every new profile to ensure its credibility by validating email provided by user. While screening the profile, we verify that details put in by user are correct and genuine.",
         }
             
             $('.fullpageloader').show();
@@ -104,12 +104,12 @@ class ForgotPassword extends Component {
                 console.log('forgotpassword res===',response.data)
                 if (response.data.message == "OTP_UPDATED") {
                     var sendData = {
-                      "event"     : "Event3", //Event Name
-                      "toUser_id"  : response.data.ID, //To user_id(ref:users)
+                      "event"       : "Event3", //Event Name
+                      "toUser_id"   : response.data.ID, //To user_id(ref:users)
                       "toUserRole"  : "candidate",
-                      "variables" : {
-                        "UserName": response.data.firstName,
-                        "OTP"     : response.data.OTP,
+                      "variables"   : {
+                        "UserName"  : response.data.firstName,
+                        "OTP"       : response.data.OTP,
                       }
                     }
                     /*axios.post('/api/masternotifications/post/sendNotification', sendData)
@@ -121,7 +121,8 @@ class ForgotPassword extends Component {
                     swal("OTP send to your registered Phone Number");
                     //this.props.history.push('/confirm-otp/'+response.data.ID);
                     var {mapAction} = this.props;
-                    mapAction.setUserID(response.data.ID);
+                    //console.log(response.data.userID)
+                    mapAction.setUserID(response.data.userID);
                     mapAction.setSelectedModal("confirmotp");
 
                 } else if(response.data.message == "USER_BLOCK"){
