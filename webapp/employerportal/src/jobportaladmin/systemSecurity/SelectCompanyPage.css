@@ -59,7 +59,7 @@
 	background:var(--yellow-button-color);
 	color: #eee;
 }
-.step:nth-child(3) .bullet::after{
+.step:nth-child(4) .bullet::after{
 	width:0px;
 	
 }

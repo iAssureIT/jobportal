@@ -8,7 +8,7 @@ import 'font-awesome/css/font-awesome.min.css';
 
 // Section: 1 - SystemSecurity ******************************************************
 import Login from './jobportaladmin/systemSecurity/Login.js';
-import ConfirmOtp from './jobportaladmin/systemSecurity/ConfirmOtp.js';
+import ConfirmOtp from './jobportaladmin/systemSecurity/ConfirmOtp1.js';
 import ForgotPassword from './jobportaladmin/systemSecurity/ForgotPassword.js';
 import ResetPassword from './jobportaladmin/systemSecurity/ResetPassword.js';
 import ChangePassword from './jobportaladmin/systemSecurity/ChangePassword.js';

@@ -212,13 +212,19 @@ body{
     border-top-left-radius: 5px !important;
 }
 .otpBox{
-	width: 15%;
-	margin-left: 5%;
-	margin-right: 5%;
+	width: 18%;
+	margin-left: 3.5%;
+	margin-right: 3.5%;
 	float: left;
 
 }
 
 .buttonWrapper{
 	margin-top: 20px;
+}
+.signUpBoxOtpForm{
+	margin-top:30px;
+}
+.buttonOtpWrapper{
+	margin-top:20px;
 }

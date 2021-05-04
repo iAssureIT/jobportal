@@ -339,8 +339,8 @@ render() {
             <form className="signUpBoxFormWrapper">
 
              <div className="img1EmpSignUp">
-              <img src="/images/Sign_In/1.png" alt="img1EmpSignUp" className="img1oginInner"/>
-          </div>
+                <img src="/images/Sign_In/1.png" alt="img1EmpSignUp" className="img1oginInner"/>
+            </div>
 
            <div className="img2EmpSignUp">
               <img src="/images/Sign_In/2.png" alt="img2EmpSignUp" className="img2EmpSignUpInner"/>
