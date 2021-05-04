@@ -677,8 +677,8 @@ class JobPosting extends Component {
 
     handleSubmit = ( event ) => { 
         event.preventDefault();
-        var status = this.validateForm();
-        if (status) {
+
+        if (this.validateForm()) {
             var formValues = {
                 user_id                 :   this.props.userDetails.user_id,
                 company_id              :   this.props.userDetails.company_id,
@@ -735,7 +735,6 @@ class JobPosting extends Component {
                 preferredSkillTags      :   this.state.preferredSkillTags,
 
                 status                  :   event.target.getAttribute('data-status')
-
             };
 
             console.log("formValues :", formValues);
@@ -757,7 +756,12 @@ class JobPosting extends Component {
                 if (response.data.created) {
                     let job_id = response.data.jobsData._id;
 
-                    Swal.fire("Congrats", "Your Data is submitted successfully", "success");
+                    if(formValues.status==='draft'){
+                        Swal.fire("", "Your job has been saved into draft jobs!", "");
+                    }else{
+                        Swal.fire("", "Your data is submitted successfully", "");
+                    }
+                    
                     this.setState({
                         jobTitle                :   "",
                         functionalarea_id       :   "",
@@ -1040,7 +1044,6 @@ class JobPosting extends Component {
         if (tag.id == tag.text) {
             tag.id = "" 
         }
-        
         this.setState(state => ({ otherSkillTags: [...state.otherSkillTags, tag] }));
     }
 
@@ -1132,7 +1135,6 @@ class JobPosting extends Component {
 
         this.setState({ jobrole_id : jobrole_id },()=>{
         });  
-        
     }
 
     onChangeJobType(event){
@@ -1146,8 +1148,7 @@ class JobPosting extends Component {
 
         this.setState({ jobtype_id : jobtype_id },()=>{
             //console.log(this.state)
-        });  
-        
+        });   
     }
 
     onChangeJobTime(event){
@@ -1363,7 +1364,6 @@ render(){
 											</div>
 										</div>
 									</div>
-									
 
 									<div className="form-group col-lg-12 addJobFieldRow text-left">
 										<div className="row">

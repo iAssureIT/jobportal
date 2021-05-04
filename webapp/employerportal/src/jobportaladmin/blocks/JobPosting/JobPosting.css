@@ -88,6 +88,30 @@
 	margin-top: -32px;
 }
 
+.addJobFixzIndex{
+	z-index: 1;
+}
+
+.addJobState{
+	border-radius: 4px !important;
+}
+
+.addJobBorderRadius{
+	border-top-right-radius: 4px !important;
+	border-bottom-right-radius: 4px !important;
+}
+
+.addJobBorderRadiusFix{
+	border-bottom-left-radius: 0px !important;
+	border-top-left-radius: 0px !important;
+	border-top-right-radius: 4px !important;
+	border-bottom-right-radius: 4px !important;
+}
+
+.fa-question-circle{
+	cursor: pointer;
+}
+
 /***********************************************************Geolocation Css Properties************************************************/
 
 .location-search-input{
@@ -121,26 +145,10 @@
   outline: none;
 }
 
-.addJobFixzIndex{
-	z-index: 1;
+.registrationInputBox{
+	font-family: 'Montserrat', sans-serif !important;
+	font-weight: 400;
 }
-
-.addJobState{
-	border-radius: 4px !important;
-}
-
-.addJobBorderRadius{
-	border-top-right-radius: 4px !important;
-	border-bottom-right-radius: 4px !important;
-}
-
-.addJobBorderRadiusFix{
-	border-bottom-left-radius: 0px !important;
-	border-top-left-radius: 0px !important;
-	border-top-right-radius: 4px !important;
-	border-bottom-right-radius: 4px !important;
-}
-
 /*********************************************************End Of Geolocation Css Properties******************************************/
 
 .jobDesc{

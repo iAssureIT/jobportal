@@ -283,79 +283,8 @@
 	margin-left: 80px;
 }
 
-/***************************swal custom classes**********************************/
 
-.swal2-container:not(.swal2-top):not(.swal2-top-start):not(.swal2-top-end):not(.swal2-top-left):not(.swal2-top-right):not(.swal2-center-start):not(.swal2-center-end):not(.swal2-center-left):not(.swal2-center-right):not(.swal2-bottom):not(.swal2-bottom-start):not(.swal2-bottom-end):not(.swal2-bottom-left):not(.swal2-bottom-right):not(.swal2-grow-fullscreen)>.swal2-modal {
-	border: 1px solid var(--main-border-color);
-	padding-top: 30px;
-	padding-bottom: 35px;
-	border-radius: 5px;
-	background-color: var(--main-bg-color);
-}
-
-.swal2-popup{
-	width: 40em;
-}
-
-[class^=swal2]{
-	color: #fff;
-}
-
-.swal2-styled.swal2-confirm{
-	box-shadow: none;
-	color: #fff;
-	height: 33px;
-	font-size: 11px;
-	font-weight: 600;
-	/*margin-right: 80px;*/
-	margin-top: 30px;
-	padding-top: 9px;
-	/*padding-left: 53px;
-	padding-right: 53px;*/
-	background-color: var(--form-field-background-color) !important;
-	border: 1px solid var(--main-border-color) !important;
-}
-
-.swal2-styled.swal2-confirm:hover{
-	background-color: var(--main-border-color) !important;
-}
-
-.swal2-styled.swal2-cancel{
-	box-shadow: none;
-	color: #fff;
-	height: 33px;
-	font-size: 11px;
-	font-weight: 600;
-	/*margin-right: 30px;*/
-	margin-top: 30px;
-	padding-top: 9px;
-	/*padding-left: 53px;*/
-	/*padding-right: 53px;*/
-	background-color: var(--form-field-background-color) !important;
-	border: 1px solid var(--main-border-color) !important;
-}
-
-.swal2-styled.swal2-cancel:hover{
-	background-color: var(--main-border-color) !important;
-}
-
-.swal2-title{
-	font-size: 16px;
-	font-weight: 400;
-}
-
-.swal2-content{
-	font-size: 16px;
-	font-weight: 400;
-	margin-top: 2px;
-}
-
-.swal2-close:hover{
-	color: var(--main-border-color) !important;
-}
-
-/*********************************************************************************/
-
+/***************************************************/
 .showMoreBtn{
 	background-color: var(--yellow-button-color);
     color: #fff;
@@ -456,7 +385,7 @@ color: #fff;
 	font-size: 13px;
 }
 
-/***********************************/
+/************************************************Bootstrap Tabs & Pills*************************************************************/
 
 .btnsRow{
 	padding-top: 30px;
@@ -487,7 +416,7 @@ color: #fff;
 
 /*********************************************************Modal custom class********************************************************/
 
-.delModalMain{
+/*.delModalMain{
 	position: fixed;
 	left: 0;
 	right: 0;
@@ -582,7 +511,126 @@ color: #fff;
 .delModalBtnTwo:hover{
 	color: #fff;
 	background-color: var(--yellow-button-color);
+}*/
+
+/*******************************************************swal custom classes*******************************************************************/
+
+.swal2-container:not(.swal2-top):not(.swal2-top-start):not(.swal2-top-end):not(.swal2-top-left):not(.swal2-top-right):not(.swal2-center-start):not(.swal2-center-end):not(.swal2-center-left):not(.swal2-center-right):not(.swal2-bottom):not(.swal2-bottom-start):not(.swal2-bottom-end):not(.swal2-bottom-left):not(.swal2-bottom-right):not(.swal2-grow-fullscreen)>.swal2-modal {
+  border: 1px solid var(--main-border-color);
+  /*padding-top: 30px;*/
+  /*padding-bottom: 35px;*/
+  border-radius: 5px;
+  background-color: var(--main-bg-color);
 }
+
+.swal2-container.swal2-shown {
+    background-color: rgba(31, 38, 45, 0.8);
+}
+
+.swal2-popup{
+  width: 45em;
+}
+
+[class^=swal2]{
+  color: #fff;
+}
+
+.swal2-header{
+  background-color: var(--main-border-color);
+  height: 34px;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  margin-bottom: 50px !important;
+}
+
+.swal2-icon{
+  /*margin-bottom: -65px;*/
+  margin-top: 50px;
+}
+
+.swal2-x-mark{
+  /*margin-bottom: 40px !important;*/
+}
+
+.swal2-popup{
+  padding: 0;
+}
+
+.swal2-styled.swal2-confirm{
+  box-shadow: none;
+  /*color: #FF7F50;*/
+  height: 33px;
+  width: 28%;
+  font-size: 12px;
+  font-weight: 500;
+  margin-top: 30px;
+  color: #fff;
+  background-color: var(--form-field-background-color) !important;
+  border: 1px solid var(--main-border-color) !important;
+}
+
+.swal2-styled.swal2-confirm:hover{
+  background-color: var(--main-border-color) !important;
+  color: #fff;
+}
+
+.swal2-styled.swal2-cancel{
+  box-shadow: none;
+  color: #fff;
+  height: 33px;
+  width: 28%;
+  font-size: 12px;
+  font-weight: 500;
+  margin-top: 30px;
+  margin-right: 60px;
+  background-color: var(--form-field-background-color) !important;
+  border: 1px solid var(--main-border-color) !important;
+}
+
+.swal2-styled.swal2-cancel:hover{
+  background-color: var(--main-border-color) !important;
+  color: #fff;
+}
+
+.swal2-title{
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.swal2-header .swal2-content .swal2-content{
+  padding-top: 30px;
+}
+
+.swal2-content{
+  font-size: 16px;
+  font-weight: 400;
+  /*margin-bottom: 50px !important;*/
+  /*margin-top: 36px;*/
+}
+
+.swal2-actions{
+    margin-bottom: 60px;
+}
+
+.swal2-close{
+  /*z-index: 5;*/
+  color: #333;
+  font-weight: 100;
+  font-size: 15px;
+  background-color: #fff;
+  border-radius: 2px;
+  height: 15px;
+  width: 15px;
+  margin-top: 9px;
+  margin-right: 9px;
+}
+
+.swal2-close:hover{
+  color: #000 !important;
+  background-color: #E6E7EB;
+}
+
+/************************************************************************************************************************************/
 
 /************************************************************Media Query*************************************************************/
 

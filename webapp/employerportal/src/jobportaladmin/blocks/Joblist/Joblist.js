@@ -31,12 +31,10 @@ componentDidMount(){
 
 	var {mapAction} = this.props;
 	mapAction.filterJobList(selector);*/
-	
-
 }
 
 changeStatus(status){
-	console.log(status)
+	console.log(status);
 
 	var {mapAction} = this.props;
     mapAction.changeStatusMode(status);
@@ -54,7 +52,6 @@ changeStatus(status){
 
 showMore(){
 	var selector 		  	= this.props.selector;
-
 	selector.startLimit   	= this.props.selector.startLimit === 0 
 	? this.props.selector.startLimit + this.props.selector.initialLimit  
 	: this.props.selector.startLimit + this.props.selector.showMoreLimit
@@ -86,14 +83,16 @@ deleteJob = (event)=>{
 	const job_id = event.currentTarget.id;
 
 	Swal.fire({
-		title 				: 'Are you sure',
-		text 				: 'You want to delete this job?',
+		title 				: ' ',
+		html				: 'Are you sure<br />you want to delete this job?',
+		text 				: '',
 		icon 				: 'warning',
 		showCloseButton		: true,
 		showCancelButton 	: true,
-		confirmButtonText 	: 'Yes, delete it!',
-		cancelButtonText 	: 'No, keep it',
+		confirmButtonText 	: 'YES',
+		cancelButtonText 	: 'NO',
 		confirmButtonColor 	: '#f5a721',
+		reverseButtons		: true
 	
 	}).then((result) =>{
 		if(result.value){
@@ -105,9 +104,9 @@ deleteJob = (event)=>{
 						mapAction.filterJobList(this.props.selector);
 
 						Swal.fire(
-									'Deleted!',
+									'',
 									'Job has been deleted successfully!',
-									'success'
+									''
 							);
 					}
 				})
@@ -121,11 +120,11 @@ deleteJob = (event)=>{
 			}
 				
 				}else if (result.dismiss === Swal.DismissReason.cancel){
-					Swal.fire(
-						'Cancelled',
-						'Your job is safe :)',
-						'error'
-					)
+					/*Swal.fire(
+						'',
+						'Your job is safe',
+						''
+					)*/
 				}
 			})
 		}	
@@ -143,9 +142,7 @@ handleSwitch = (event)=>{
 
 }
 
-inactiveJob(job_id){
-	//event.preventDefault();
-	//const job_id = event.currentTarget.id;
+/*inactiveJob(job_id){
 Axios.delete("/api/jobs/inactive/"+job_id)
 	.then(response =>{
 		this.setState({
@@ -168,39 +165,78 @@ Axios.delete("/api/jobs/inactive/"+job_id)
 					error.message,
 					'error'
 			)
-	})
-			
-	
-/*Swal.fire({
-	title 				: 'Are you sure do you want to inactive this job!!!',
-	//text 				: 'You will not be able to recover this job',
-	icon 				: 'warning',
-	showCancelButton 	: true,
-	confirmButtonText 	: 'Inactive',
-	cancelButtonText 	: 'Cancel',
-	confirmButtonColor 	: '#f5a721',
+	})*/
 
-}).then((result) =>{
-	console.log(result)
-	if(result.value){
-		console.log(job_id)
-			
+
+inactiveJob(event){
+	event.preventDefault();
+	const job_id = event.currentTarget.id;
+	console.log(job_id);
 		
-		}else if (result.dismiss === Swal.DismissReason.cancel){
-				// Swal.fire(
-				// 	'Cancelled',
-				// 	'Your job is safe :)',
-				// 	'error'
-				// )
-			}
-		})*/
-}	
+		Swal.fire({
+				title 				: ' ',
+				html 				: 'Are you sure<br />you want to make this job inactive?',
+				text 				: '',
+				icon 				: 'warning',
+				showCloseButton		: true,
+				showCancelButton 	: true,
+				confirmButtonText 	: 'YES',
+				cancelButtonText 	: 'NO',
+				confirmButtonColor 	: '#f5a721',
+				reverseButtons		: true
+			
+			}).then((result) =>{
+				if(result.value){
+					if(job_id){
+						console.log(job_id);
+						Axios.delete("/api/jobs/inactive/"+job_id)
+							.then(response =>{
+								console.log("inside then");
+								/*this.setState({
+										isActive: true
+									});*/
+								console.log("inside then1");
+								console.log(response.data.message)
+								if(response.data.message==="Job is inactivated successfully!"){
+									console.log("response");
+
+									Swal.fire(
+												'',
+												'Job has been inactivated successfully!',
+												''
+										);
+
+								/*var {mapAction} = this.props;
+								mapAction.filterJobList(this.props.selector);*/
+								/*var status="active";
+								console.log(status);*/
+
+								/*var {mapAction} = this.props;
+							    mapAction.changeStatusMode(status);
+
+								var selector 	= this.props.selector;
+								var {mapAction} = this.props;
+							    mapAction.filterJobList(selector);*/
+								console.log("selector",this.props.selector);
+								}
+							})
+							.catch(error=>{
+								console.log("inside catch");
+								Swal.fire(
+											"Some problem occured while making job inactive!",
+											error.message,
+											'error'
+									)
+							})
+						}
+					}
+				})
+			}			
 	
 handleActiveSwitch = (event)=>{
 	event.preventDefault();
 	const job_id = this.state.job_id;
-	this.activateJob(job_id);
-	
+	this.activateJob(job_id);	
 }
 	
 activateJob(job_id){
@@ -218,15 +254,15 @@ Axios.delete("/api/jobs/active/"+job_id)
 			mapAction.filterJobList(this.props.selector);
 
 			Swal.fire(
-						'Published!',
-						'Job has been published successfully!',
-						'success'
+						'',
+						'Job activated successfully!',
+						''
 				);
 		}
 	})
 	.catch(error=>{
 		Swal.fire(
-					"Some problem occured deleting job!",
+					"Some problem occured while making job active!",
 					error.message,
 					'error'
 			)
@@ -354,13 +390,12 @@ redirectTo(job_id, url, parameter){
 																		<div className="col-lg-12">
 																			<div className="input-group jobStatusToggleWrapper">
 																				<div className = {this.state.isActive ? "genderFeild genderFeildVerti genderFeildActive" : "genderFeild genderFeildVerti" }
-																				 id={elem._id} name="primaryToggel" data-toggle="modal" data-target="#inactiveModal" data-dismiss="modal" onClick={() => {this.setState({job_id:elem._id})}} id = {elem._id}
+																				 id={elem._id} name="primaryToggel" onClick={this.inactiveJob} id = {elem._id}
 																				 value="togglePrimary" title="Inactive"
-																				 //onClick={this.handleSwitch.bind(this)} 
 																				 >
 																				</div>
 																				<div className = {!this.state.isActive ? "genderFeild genderFeildVerti genderFeildInActive" : "genderFeild genderFeildVerti" }
-																				 id={elem._id} name="primaryToggel" data-toggle="modal" data-target="#inactiveModal" data-dismiss="modal" onClick={() => {this.setState({job_id:elem._id})}} id = {elem._id}
+																				 id={elem._id} name="primaryToggel" onClick={this.inactiveJob} id = {elem._id} 
 																				 value="togglePrimary" title="Inactive">
 																				</div>
 																			</div>	
