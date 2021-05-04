@@ -12,6 +12,7 @@ class SignUp extends Component {
 constructor() {
     super();
     this.state = {
+        checkTC: false,
         showPassword1         : false,
         showPassword2         : false,
         firstName             : "",
@@ -35,8 +36,13 @@ handleChange(event){
         [name]:value,
     })
 }
-validateForm=()=>{
-}
+
+setWorkFromHome(event) {
+        this.setState({
+            checkTC: event.target.checked
+        });
+         console.log("tc==",this.state.checkTC);
+    }
 showPassword1=(event)=>{
     event.preventDefault();
     var passwordToggle1 = document.getElementById("password");
@@ -61,105 +67,119 @@ showPassword1=(event)=>{
       }
   }
   validateForm=()=>{
-    var status = true;
-    var regName = /^[a-zA-Z]/;
-    var firstName=this.state.firstName;
-    var lastName=this.state.lastName;
+    var status = false;
+    var regName = /^[a-zA-Z]+$/;
+    var first_name=this.state.firstName;
+    var last_name=this.state.lastName;
     var tempEmail = this.state.email.trim(); // value of field with whitespace trimmed off
-    var emailFilter =  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    var emailFilter = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
     var illegalChars = /[\(\)\<\>\,\;\:\\\"\[\]]/;
     var phoneno = /^\+?([0-9]{2})\)?[-. ]?([0-9]{5})[-. ]?([0-9]{5})$/;
-    
-    if(this.state.firstName<=0)  {
+    var statusFN=false;
+    var statusLN=false;
+    var statusEmail=false;
+    var statusPhone=false;
+    var statusPwd=false;
+    var statusCPwd=false;
+    var statusPwd2=false;
+    var statusCTC=false;
+
+    if(first_name.length<=0)  {
+ 
       document.getElementById("firstNameError").innerHTML=  
-      "Please enter valid Name";  
-      status=false; 
+      "Please enter valid Name!";  
+      statusFN=false; 
     }
   
-    else if(!regName.test(firstName)){
+    else if(!regName.test(first_name)){
       document.getElementById("firstNameError").innerHTML=  
       "Please enter valid name,......";  
-      status=false; 
+      statusFN=false; 
+      console.log("firstname",this.state.firstName);
     }
     else{
-      document.getElementById("firstNameError").innerHTML= "";
-      status = true;
+      document.getElementById("firstNameError").innerHTML=  
+       ""; 
+      statusFN = true;
+      
     }
 
-    if(this.state.lastName<=0)  {
+    if(last_name.length<=0)  {
       document.getElementById("lastNameError").innerHTML=  
       "Please enter valid Name";  
-      status=false; 
+      statusLN=false; 
     }
-    else if(!regName.test(lastName)){
+    else if(!regName.test(last_name)){
       document.getElementById("lastNameError").innerHTML=  
       "Please enter valid name.....";  
-      status=false; 
+      statusLN=false; 
     }
     else{
       document.getElementById("lastNameError").innerHTML=  
-       " "; 
-      status = true;
+       ""; 
+      statusLN = true;
+
     }
 
     if(this.state.email.length<=0){
       document.getElementById("emailError").innerHTML=  
       "Please enter your Email";  
-      status=false; 
+      statusEmail=false; 
     }else if (
       !emailFilter.test(tempEmail)) { //test email for illegal characters
           document.getElementById('emailError').innerHTML = "Please enter a valid email address.";
-      } else if (this.state.email.match(illegalChars)) {
-          document.getElementById('emailError').innerHTML = "Email contains invalid characters.";
-      }else{
+      } else{
       document.getElementById("emailError").innerHTML=
       ""; 
-      status = true;
+      statusEmail = true;
     }
 
     if(this.state.mobile.match(phoneno)){
-      document.getElementById("mobileError").innerHTML=  
+      console.log("mobile",this.state.mobile);
+       document.getElementById("mobileError").innerHTML=
       ""; 
-      status = true;
+      statusPhone = true;
       
     }else{
       document.getElementById("mobileError").innerHTML=  
       "Please enter valid Mobile Number";  
-      status=false; 
+      statusPhone=false; 
     }
 
-    if(this.state.password.length<=0){
-      document.getElementById("passwordError").innerHTML=  
-      "Please enter Password";  
-      status=false; 
-    }
-
-    if(this.state.password.length<8){
-      document.getElementById("passwordError").innerHTML=  
-      "Please enter atleast 8 characters";  
-      status=false; 
-    }
-    else{
-      document.getElementById("passwordError").innerHTML=  
+     if(this.state.password.length <=0) {
+   document.getElementById("passwordError").innerHTML=  
       ""; 
-      status = true;
-    }
-
+  document.getElementById("passwordError").innerHTML=  
+      "Please enter Password";  
+      statusPwd=false; 
+} 
+ if (this.state.password.length<8) {
+  document.getElementById("passwordError").innerHTML=  
+            "Please enter atleast 8 characters";  
+            statusPwd=false; 
+} else {
+   document.getElementById("passwordError").innerHTML=  
+      ""; 
+      statusPwd = true;
+ 
+}
     if(this.state.confirmPassword.length<=0){
       document.getElementById("confirmPasswordError").innerHTML=  
+      ""; 
+      document.getElementById("confirmPasswordError").innerHTML=  
       "Please enter Confirm Password";  
-      status=false; 
+      statusCPwd=false; 
     }
 
-    if(this.state.confirmPassword.length<8){
+     if(this.state.confirmPassword.length<8){
       document.getElementById("confirmPasswordError").innerHTML=  
       "Please enter atleast 8 characters";  
-      status=false; 
+      statusCPwd=false; 
     }
     else{
       document.getElementById("confirmPasswordError").innerHTML=  
       ""; 
-      status = true;
+      statusCPwd = true;
     }
 
     if ((this.state.password) != (this.state.confirmPassword)){
@@ -167,13 +187,45 @@ showPassword1=(event)=>{
       "Passwords do not match";  
       document.getElementById("confirmPasswordError").innerHTML=  
       "Passwords do not match"; 
-      status=false; 
+      statusPwd2=false; 
     }
+    else{
+       document.getElementById("passwordError").innerHTML=  
+      "";  
+      document.getElementById("confirmPasswordError").innerHTML=  
+      ""; 
+
+      statusPwd2=true;
+    }
+
+    if(this.state.checkTC == true){
+      statusCTC= true;
+    }
+    if (this.state.checkTC == false) {
+      swal('Please accept Term and Conditions');
+      statusCTC =false;
+    }
+  
+    console.log("all......",statusFN,statusLN,statusEmail,statusPhone,statusPwd,statusCPwd,statusPwd2,statusCTC);
+
+    if(statusFN==true && statusLN==true && 
+      statusEmail==true && statusPhone ==true && 
+      statusPwd==true && statusCPwd==true && 
+      statusCTC==true){
+     
+      status= true;
+    }
+    else{
+      status=false;
+    }
+    console.log("End.....",status);
     return status;
-    } 
+    
+  } 
     signUp(event){
         event.preventDefault();
         var status =  this.validateForm();
+        console.log(status);
         var {mapAction} = this.props;
         console.log(this.props.selectedCompanyDetails)
         var selectedCompanyDetails = this.props.selectedCompanyDetails
@@ -271,9 +323,9 @@ showPassword1=(event)=>{
                 
                 
                 this.props.history.push("/confirm-otp/" + response.data.ID);
-              }else{
+              }/*else{
                 swal(response.data.message);
-              } 
+              } */
             })
             .catch((error) => {
               
@@ -285,9 +337,34 @@ render() {
     console.log(this.props.selectedCompanyDetails)
     return (
             <form className="signUpBoxFormWrapper">
+
+             <div className="img1EmpSignUp">
+              <img src="/images/Sign_In/1.png" alt="img1EmpSignUp" className="img1oginInner"/>
+          </div>
+
+           <div className="img2EmpSignUp">
+              <img src="/images/Sign_In/2.png" alt="img2EmpSignUp" className="img2EmpSignUpInner"/>
+          </div>
+
+           <div className="img3EmpSignUp">
+              <img src="/images/Sign_In/3.png" alt="img3EmpSignUp" className="img3EmpSignUpInner"/>
+          </div>
+
+           <div className="img4EmpSignUp">
+              <img src="/images/Sign_In/4.png" alt="img4EmpSignUp" className="img4EmpSignUpInner"/>
+          </div>
+
+           <div className="img5EmpSignUp">
+              <img src="/images/Sign_In/5.png" alt="img5EmpSignUp" className="img5EmpSignUpInner"/>
+          </div>
+
+           <div className="img6EmpSignUp">
+              <img src="/images/Sign_In/6.png" alt="img6EmpSignUp" className="img6EmpSignUpInner"/>
+          </div>
                 <div className="signUpBoxTitle">Sign Up</div> 
-                <div className="row signUpBoxForm">
-                    <div className="col-lg-5 col-lg-offset-1">
+                <div className=" signUpBoxForm">
+                    <div className="col-lg-5 col-lg-offset-1 form-group">
+
                         <div className="input-group ">
                             <span className="input-group-addon registrationInputIcon">
                                 <i className="fa fa-user-circle"></i> 
@@ -299,11 +376,13 @@ render() {
                         </div> 
                         <span id="firstNameError" className="errorMsg"></span>
                     </div>
-                    <div className="col-lg-5 ">
+                    <div className="col-lg-5  form-group">
                         <div className="input-group ">
+
                             <span className="input-group-addon registrationInputIcon">
                                 <i className="fa fa-user-circle"></i> 
                             </span>
+
                             <input type="text" name="lastName" id="lastName" 
                              className="form-control inputBox" placeholder="Last Name"
                              value={this.state.lastName}
@@ -312,9 +391,10 @@ render() {
                         <span id="lastNameError" className="errorMsg"></span>
                     </div>
                 </div>
-                <div className="row signUpBoxForm">
-                    <div className="col-lg-10 col-lg-offset-1">
+                <div className=" signUpBoxForm">
+                    <div className="col-lg-10 col-lg-offset-1 form-group">
                         <div className="input-group ">
+
                             <span className="input-group-addon registrationInputIcon">
                                 <i className="fa fa-envelope-o"></i> 
                             </span> 
@@ -326,8 +406,9 @@ render() {
                         <span id="emailError" className="errorMsg"></span>
                     </div>
                 </div>
-                <div className="row signUpBoxForm">
-                    <div className="col-lg-10 col-lg-offset-1">
+
+                <div className="signUpBoxForm">
+                    <div className="col-lg-10 col-lg-offset-1 form-group">
                         
                             <PhoneInput 
                               country   = {'in'}
@@ -340,31 +421,58 @@ render() {
                         <span id="mobileError" className="errorMsg"></span>
                     </div>
                 </div>
-                <div className="row signUpBoxForm">
-                    <div className="col-lg-5 col-lg-offset-1">
+
+                <div className=" signUpBoxForm">
+                    <div className="col-lg-10 col-lg-offset-1 form-group">
                         <div className="input-group ">
+
                             <span className="input-group-addon registrationInputIcon"><i className="fa fa-lock"></i></span>
-                            <input type="text" name="password" id="password" 
+
+                            <input type="password" name="password" id="password" 
                              className="form-control inputBox" placeholder="Password"
                              value={this.state.password}
                              onChange={this.handleChange.bind(this)}/>
+                             <span className="input-group-addon loginInputIcon3" onClick={this.showPassword1.bind(this)}>
+                                  <i className={this.state.showPassword1 ? "fa fa-eye-slash" : "fa fa-eye"} 
+                                      value={this.state.showPassword1}></i></span>
                         </div> 
                         <span id="passwordError" className="errorMsg"></span>
                     </div>
-                    <div className="col-lg-5">
+
+                  </div>
+                  
+                  <div className="signUpBoxForm">  
+                    <div className="col-lg-10 col-lg-offset-1 form-group">
                         <div className="input-group ">
+
                             <span className="input-group-addon registrationInputIcon"><i className="fa fa-lock"></i></span>
-                            <input type="text" name="confirmPassword" id="confirmPassword" 
+
+                            <input type="password" name="confirmPassword" id="confirmPassword" 
                              className="form-control inputBox" placeholder="Confirm Password"
                              value={this.state.confirmPassword}
                              onChange={this.handleChange.bind(this)}/>
+                             <span className="input-group-addon loginInputIcon3" onClick={this.showPassword2.bind(this)}>
+                                   <i className={this.state.showPassword2 ? "fa fa-eye-slash" : "fa fa-eye"} 
+                                    value={this.state.showPassword2}></i></span>
                         </div> 
                         <span id="confirmPasswordError" className="errorMsg"></span>
                     </div>
                 </div>
-                <div className="row signUpBoxForm">
+                <div className=" signUpBoxForm">
                     <div className="col-lg-10 col-lg-offset-1">
-                        <button className="buttonNext pull-right" onClick={this.signUp.bind(this)}>
+
+                        <div className="col-lg-6">
+                          <div className="row">
+                            <label htmlFor="checkTC" className="agreeTC container">
+                            
+                              <input type="checkbox" name="checkTC" className="checkmark3" id="checkTC" value={this.state.checkTC} onChange={this.setWorkFromHome.bind(this)} />
+                            
+                               <div className="textTC"> I agree to the <br/>Terms & Conditions</div>
+                            </label>
+                          </div>
+                        </div>
+
+                        <button className="buttonNext col-lg-5 pull-right" onClick={this.signUp.bind(this)}>
                             Sign Up
                         </button>
                     </div>

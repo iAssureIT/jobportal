@@ -204,11 +204,35 @@ componentDidMount() {
     }
 render() {
     return (
-            <form className="signUpBoxFormWrapper">
+            <form>
+          <div className="img1EmpSignUp">
+              <img src="/images/Sign_In/1.png" alt="img1EmpSignUp" className="img1oginInner"/>
+          </div>
+
+           <div className="img2EmpSignUp">
+              <img src="/images/Sign_In/2.png" alt="img2EmpSignUp" className="img2EmpSignUpInner"/>
+          </div>
+
+           <div className="img3EmpSignUp">
+              <img src="/images/Sign_In/3.png" alt="img3EmpSignUp" className="img3EmpSignUpInner"/>
+          </div>
+
+           <div className="img4EmpSignUp">
+              <img src="/images/Sign_In/4.png" alt="img4EmpSignUp" className="img4EmpSignUpInner"/>
+          </div>
+
+           <div className="img5EmpSignUp">
+              <img src="/images/Sign_In/5.png" alt="img5EmpSignUp" className="img5EmpSignUpInner"/>
+          </div>
+
+           <div className="img6EmpSignUp">
+              <img src="/images/Sign_In/6.png" alt="img6EmpSignUp" className="img6EmpSignUpInner"/>
+          </div>
+            
                 <div className="signUpBoxTitle">Select Company</div>
-                <div className="row signUpBoxForm">
-                    <div className="col-lg-10 col-lg-offset-1">
-                        <div className="input-group ">
+                <div className="signUpBoxForm">
+                    <div className="col-lg-10 col-lg-offset-1 form-group">
+                        <div className="input-group roundCorner">
                             <span className="input-group-addon registrationInputIcon"><i className="fa fa-briefcase"></i></span>
                             <input type="text" list="companyName" name="companyName" id="companyName" 
                              className="form-control inputBox" placeholder="Start typing your Company & Select"
@@ -223,9 +247,9 @@ render() {
                         <span id="employerError" className="errorMsg"></span>
                     </div>
                 </div>
-                <div className="row signUpBoxForm">
-                    <div className="col-lg-10 col-lg-offset-1">
-                        <div className="input-group ">
+                <div className="signUpBoxForm">
+                    <div className="col-lg-10 col-lg-offset-1  form-group">
+                        <div className="input-group roundCorner">
                             <span className="input-group-addon registrationInputIcon"><i className="fa fa-map-marker"></i></span> 
                             <input type="text" list="branch"  ref="branch" name="branch" 
                              className="form-control inputBox" placeholder="Branch"
@@ -244,9 +268,9 @@ render() {
                         <span id="branchError" className="errorMsg"></span>
                     </div>
                 </div>
-                <div className="row signUpBoxForm">
-                    <div className="col-lg-10 col-lg-offset-1">
-                        <div className="input-group ">
+                <div className="signUpBoxForm">
+                    <div className="col-lg-10 col-lg-offset-1 form-group">
+                        <div className="input-group roundCorner">
                             <span className="input-group-addon registrationInputIcon"><i className="fa fa-map-marker"></i></span>  
                   
                             <select id="states" className="form-control registrationInputBox selectOption"
@@ -266,9 +290,9 @@ render() {
                         <span id="stateError" className="errorMsg"></span>
                     </div>
                 </div>
-                <div className="row signUpBoxForm">
-                    <div className="col-lg-10 col-lg-offset-1">
-                        <div className="input-group ">
+                <div className="signUpBoxForm">
+                    <div className="col-lg-10 col-lg-offset-1 form-group">
+                        <div className="input-group roundCorner">
                             <span className="input-group-addon registrationInputIcon"><i className="fa fa-map-marker"></i></span> 
                   
                             <input type="text" name="companyCountry" id="companyCountry" 
@@ -279,10 +303,17 @@ render() {
                         <span id="companyCountryError" className="errorMsg"></span>
                     </div>
                 </div>
-                <div className="row signUpBoxForm">
+                <div className="signUpBoxForm">
                     <div className="col-lg-10 col-lg-offset-1">
-                        <button className="buttonNext pull-right" onClick={this.handleSubmit.bind(this)}>
-                            Next 
+
+                      <div className="col-lg-6 registrationLinks1" >
+                        <div className="row">
+                          <a className="alreadyAccount" href="/login"><u>Sign In >></u></a>
+                        </div>
+                      </div>
+
+                        <button className="buttonNext col-lg-5 pull-right" onClick={this.handleSubmit.bind(this)}>
+                            Next &nbsp;
                             <FontAwesomeIcon className="nextArrow" icon="arrow-right" />
                         </button>
                     </div>

@@ -1,14 +1,4 @@
-.signUpBoxWrapper{
-	min-height: 400px;
-	height: auto;
-	background-color: var(--main-bg-color );
-	margin-top: 50px;
-	margin-bottom: 50px;
-	border: 3px solid var(--main-border-color);
-    border-radius: 10px;
-    padding-top: 20px;
-    padding-bottom: 20px; 
-}
+
 .signUpBoxWrapper1{
     min-height: 560px;
 
@@ -32,13 +22,13 @@
 	margin-top: 5px;
 }
 
-.signUpBoxForm{
+/*.signUpBoxForm{
 	margin-top: 20px;
-}
+}*/
 
 .buttonNext {
     height: 28px;
-    width: 110px;
+   
     background-color:var(--main-bg-color);
     border: 1px solid var(--main-border-color)!important;
     border-radius: 5px;
@@ -46,7 +36,7 @@
     font-size: 13px;
     margin-top: 10px;
     margin-bottom: 10px;
-    transition: all 2s;
+    /*transition: all 2s;*/
     color: #ccc;
 }
 .buttonNext:hover{
@@ -62,8 +52,123 @@
 }
 .signUpBoxForm .input-group{
     width: 100%;
+
 }
 .
 .signUpBoxForm .react-tel-input .selected-flag {
     width: 44px!important;
+}
+ 
+.registrationLinks1{
+  text-align: left;
+  margin-top: 20px;
+  height: 30px;
+  float: left;
+  /*background-color: pink;*/;
+
+}
+
+ .form-control{
+     /* border-bottom-right-radius: 5px !important;
+    border-top-right-radius:  5px !important;
+  border-bottom-left-radius:  5px !important;
+    border-top-left-radius: 5px !important;*/
+}
+
+/************Images*************/
+
+
+.img1EmpSignUp{
+    position: absolute;
+    height: 200px;
+    width: 125px;
+    top:-115px;
+    left:55%;
+    z-index: 1;
+}
+
+.img1oginInner{
+    height: 200px;
+    width: 125px;
+
+    
+}
+
+
+.img2EmpSignUp{
+    position: absolute;
+    height: 300px;
+    width: 180px;
+    bottom: -20px;
+    left: -34%;
+    z-index: 1;
+
+    
+}
+
+.img2EmpSignUpInner{
+    height: 300px;
+    width: 180px;
+}
+
+
+
+
+.img3EmpSignUp{
+    position: absolute;
+    height: 290px;
+    width: 110px;
+    bottom:-10px;
+    left:86%;
+    z-index: 1;
+    
+}
+
+.img3EmpSignUpInner{
+    height: 290px;
+    width: 110px;
+}
+
+
+
+.img4EmpSignUp{
+    position: absolute;
+    height: 100px;
+    width: 50px; 
+   bottom: -35px;
+    left: 20%;
+    z-index: 1;
+}
+
+.img4EmpSignUpInner{
+    height: 100px;
+    width: 50px;
+}
+
+.img5EmpSignUp{
+    position: absolute;
+    height: 135px;
+    width: 125px;
+    bottom: 10px;
+    left: 100%;
+    z-index: 0;
+}
+
+.img5EmpSignUpInner{
+    height: 135px;
+    width: 125px;
+}
+
+.img6EmpSignUp{
+    position: absolute;
+    height: 80px;
+    width: 60px;
+    top: 130px;
+    left: -14.6%;
+    z-index: 0;
+}
+
+.img6EmpSignUpInner{
+    height: 80px;
+    width: 60px;
 }
