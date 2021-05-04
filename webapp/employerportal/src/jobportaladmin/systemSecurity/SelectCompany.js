@@ -313,7 +313,6 @@ render() {
                       </div>
 
                         <button className="buttonNext col-lg-5 pull-right" onClick={this.handleSubmit.bind(this)}>
-
                             Next &nbsp;
                             <FontAwesomeIcon className="nextArrow" icon="arrow-right" />
                         </button>
