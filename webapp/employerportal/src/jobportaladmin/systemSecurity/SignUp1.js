@@ -366,9 +366,11 @@ render() {
                     <div className="col-lg-5 col-lg-offset-1 form-group">
 
                         <div className="input-group ">
+
                             <span className="input-group-addon registrationInputIcon">
                                 <i className="fa fa-user-circle"></i> 
                             </span> 
+
                             <input type="text" name="firstName" id="firstName" 
                              className="form-control inputBox" placeholder="First Name"
                              value={this.state.firstName}
@@ -395,9 +397,11 @@ render() {
                     <div className="col-lg-10 col-lg-offset-1 form-group">
                         <div className="input-group ">
 
+
                             <span className="input-group-addon registrationInputIcon">
                                 <i className="fa fa-envelope-o"></i> 
                             </span> 
+
                             <input type="text" name="email" id="email" 
                              className="form-control inputBox inputBox1" placeholder="Email"
                              value={this.state.email}
@@ -406,6 +410,7 @@ render() {
                         <span id="emailError" className="errorMsg"></span>
                     </div>
                 </div>
+
 
                 <div className="signUpBoxForm">
                     <div className="col-lg-10 col-lg-offset-1 form-group">
@@ -438,6 +443,7 @@ render() {
                         </div> 
                         <span id="passwordError" className="errorMsg"></span>
                     </div>
+
 
                   </div>
                   

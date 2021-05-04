@@ -1,7 +1,9 @@
 .signUpFormMainWrapper
 {	height: auto;
+
 	min-height: 800px;
 	margin-bottom: 150px;
+
 	
 }
 
@@ -13,7 +15,9 @@
 	border: 3px solid var(--main-border-color);
     border-radius: 10px;
     padding-top: 20px;
+
     padding-bottom: 80px; 
+
 }
 
 .ProgressBarSignUpWrapper{
@@ -70,6 +74,4 @@
 .step a{
 	color: #999;
 }
-
-
 
