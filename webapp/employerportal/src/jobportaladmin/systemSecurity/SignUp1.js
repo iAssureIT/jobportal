@@ -2,6 +2,7 @@ import React, { Component }  from 'react';
 import { FontAwesomeIcon }   from '@fortawesome/react-fontawesome';
 import swal                  from 'sweetalert';
 import axios                 from 'axios';
+import PhoneInput           from 'react-phone-input-2';
 import { connect }           from 'react-redux';
 import { bindActionCreators }   from 'redux';
 import  * as mapActionCreator   from '../common/actions/index';
@@ -17,11 +18,14 @@ constructor() {
         lastName              : "",
         password              : "",
         confirmPassword       : "",
-        emailAddress          : "",
-        mobileNumber          : "",
+        email          : "",
+        mobile          : "",
         value                 : '',
     }	
 }	
+componentDidMount(){
+  console.log(this.props)
+}
 handleChange(event){
     event.preventDefault();
     var value = event.currentTarget.value;
@@ -61,7 +65,7 @@ showPassword1=(event)=>{
     var regName = /^[a-zA-Z]/;
     var firstName=this.state.firstName;
     var lastName=this.state.lastName;
-    var tempEmail = this.state.emailAddress.trim(); // value of field with whitespace trimmed off
+    var tempEmail = this.state.email.trim(); // value of field with whitespace trimmed off
     var emailFilter =  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
     var illegalChars = /[\(\)\<\>\,\;\:\\\"\[\]]/;
     var phoneno = /^\+?([0-9]{2})\)?[-. ]?([0-9]{5})[-. ]?([0-9]{5})$/;
@@ -98,28 +102,28 @@ showPassword1=(event)=>{
       status = true;
     }
 
-    if(this.state.emailAddress.length<=0){
-      document.getElementById("emailAddressError").innerHTML=  
+    if(this.state.email.length<=0){
+      document.getElementById("emailError").innerHTML=  
       "Please enter your Email";  
       status=false; 
     }else if (
       !emailFilter.test(tempEmail)) { //test email for illegal characters
-          document.getElementById('emailAddressError').innerHTML = "Please enter a valid email address.";
-      } else if (this.state.emailAddress.match(illegalChars)) {
-          document.getElementById('emailAddressError').innerHTML = "Email contains invalid characters.";
+          document.getElementById('emailError').innerHTML = "Please enter a valid email address.";
+      } else if (this.state.email.match(illegalChars)) {
+          document.getElementById('emailError').innerHTML = "Email contains invalid characters.";
       }else{
-      document.getElementById("emailAddressError").innerHTML=
+      document.getElementById("emailError").innerHTML=
       ""; 
       status = true;
     }
 
-    if(this.state.mobileNumber.match(phoneno)){
-      document.getElementById("mobileNumberError").innerHTML=  
+    if(this.state.mobile.match(phoneno)){
+      document.getElementById("mobileError").innerHTML=  
       ""; 
       status = true;
       
     }else{
-      document.getElementById("mobileNumberError").innerHTML=  
+      document.getElementById("mobileError").innerHTML=  
       "Please enter valid Mobile Number";  
       status=false; 
     }
@@ -175,25 +179,28 @@ showPassword1=(event)=>{
         var selectedCompanyDetails = this.props.selectedCompanyDetails
 
         if(status == true){
+           this.props.hideComponent("showHide3")
             var auth = {
                 username    : "EMAIL",
                 firstname   : this.state.firstName, 
                 lastname    : this.state.lastName,
-                mobNumber   : (this.state.mobileNumber).replace("-", ""),
-                email       : this.state.emailAddress,
+                mobNumber   : (this.state.mobile).replace("-", ""),
+                email       : this.state.email,
                 pwd         : this.state.password,
                 company_id  : selectedCompanyDetails.company_id != "" ? selectedCompanyDetails.company_id : null,
-                //companyID   : this.state.companyID != "" ? this.state.companyID : null,
-                // companyName : this.state.companyName,
-                // branchCode  : this.state.branchCode == "" ? 0 : this.state.branchCode,
-                // role        : 'employer',
-                // status      : 'unverified',        
-                // city        : this.state.branch,
-                // stateName   : this.state.stateName,
-                // stateCode   : this.state.companyState,
-                // country     : this.state.companyCountry,
-                // countryCode : this.state.countryCode,
+                // companyID   : this.state.companyID != "" ? this.state.companyID : null,
+                companyName : selectedCompanyDetails.companyName,
+                branchCode  : selectedCompanyDetails.branchCode == "" ? 0 : selectedCompanyDetails.branchCode,
+                branch_id : selectedCompanyDetails.branch_id == "" ? 0 : selectedCompanyDetails.branch_id,
+                role        : selectedCompanyDetails.role,
+                status      : selectedCompanyDetails.status,        
+                city        : selectedCompanyDetails.city,
+                stateName   : selectedCompanyDetails.stateName,
+                stateCode   : selectedCompanyDetails.stateCode,
+                country     : selectedCompanyDetails.country,
+                countryCode : selectedCompanyDetails.countryCode,
             }
+            console.log("auth",auth)
             axios.post('/api/auth/post/signup/user/otp', auth)
             .then((response) => {
               if(response.data.message == 'USER_CREATED'){
@@ -210,8 +217,8 @@ showPassword1=(event)=>{
                     "locationType" : this.state.locationType,
                     "firstName" : this.state.firstName,
                     "lastName" : this.state.lastName,
-                    "phone" : (this.state.mobileNumber).replace("-", ""),
-                    "email" : this.state.emailAddress,
+                    "phone" : (this.state.mobile).replace("-", ""),
+                    "email" : this.state.email,
                     "createUser" : true,
                     "role" : "employer",
                     "userID" : response.data.ID
@@ -254,8 +261,8 @@ showPassword1=(event)=>{
                     'UserName': this.state.firstName + ' ' + this.state.lastName,
                     'EmployerName': this.state.companyName,
                     'EmployerID': this.state.employerID,
-                    'EmployerEmailID': this.state.emailAddress,
-                    'EmployerContactNumber': (this.state.mobileNumber).replace("-", "")
+                    'EmployerEmailID': this.state.email,
+                    'EmployerContactNumber': (this.state.mobile).replace("-", "")
                   }
                 }
                 axios.post('/api/masternotifications/post/sendNotification', sendData2)
@@ -282,6 +289,9 @@ render() {
                 <div className="row signUpBoxForm">
                     <div className="col-lg-5 col-lg-offset-1">
                         <div className="input-group ">
+                            <span className="input-group-addon registrationInputIcon">
+                                <i className="fa fa-user-circle"></i> 
+                            </span> 
                             <input type="text" name="firstName" id="firstName" 
                              className="form-control inputBox" placeholder="First Name"
                              value={this.state.firstName}
@@ -291,6 +301,9 @@ render() {
                     </div>
                     <div className="col-lg-5 ">
                         <div className="input-group ">
+                            <span className="input-group-addon registrationInputIcon">
+                                <i className="fa fa-user-circle"></i> 
+                            </span>
                             <input type="text" name="lastName" id="lastName" 
                              className="form-control inputBox" placeholder="Last Name"
                              value={this.state.lastName}
@@ -302,28 +315,35 @@ render() {
                 <div className="row signUpBoxForm">
                     <div className="col-lg-10 col-lg-offset-1">
                         <div className="input-group ">
+                            <span className="input-group-addon registrationInputIcon">
+                                <i className="fa fa-envelope-o"></i> 
+                            </span> 
                             <input type="text" name="email" id="email" 
-                             className="form-control inputBox" placeholder="Email"
+                             className="form-control inputBox inputBox1" placeholder="Email"
                              value={this.state.email}
                              onChange={this.handleChange.bind(this)}/>
                         </div> 
-                        <span id="emailAddressError" className="errorMsg"></span>
+                        <span id="emailError" className="errorMsg"></span>
                     </div>
                 </div>
                 <div className="row signUpBoxForm">
                     <div className="col-lg-10 col-lg-offset-1">
-                        <div className="input-group ">
-                            <input type="text" name="mobile" id="mobile" 
-                             className="form-control inputBox" placeholder="Mobile Number"
-                             value={this.state.mobile}
-                             onChange={this.handleChange.bind(this)}/>
-                        </div> 
-                        <span id="mobileNumberError" className="errorMsg"></span>
+                        
+                            <PhoneInput 
+                              country   = {'in'}
+                              id        ="mobile" 
+                              className ="input-group-addon form-control inputBox" 
+                              value     ={this.state.mobile} 
+                              onChange  = {mobile => this.setState({ mobile })}
+                             />
+                        
+                        <span id="mobileError" className="errorMsg"></span>
                     </div>
                 </div>
                 <div className="row signUpBoxForm">
                     <div className="col-lg-5 col-lg-offset-1">
                         <div className="input-group ">
+                            <span className="input-group-addon registrationInputIcon"><i className="fa fa-lock"></i></span>
                             <input type="text" name="password" id="password" 
                              className="form-control inputBox" placeholder="Password"
                              value={this.state.password}
@@ -333,6 +353,7 @@ render() {
                     </div>
                     <div className="col-lg-5">
                         <div className="input-group ">
+                            <span className="input-group-addon registrationInputIcon"><i className="fa fa-lock"></i></span>
                             <input type="text" name="confirmPassword" id="confirmPassword" 
                              className="form-control inputBox" placeholder="Confirm Password"
                              value={this.state.confirmPassword}

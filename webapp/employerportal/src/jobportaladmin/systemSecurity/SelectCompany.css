@@ -23,8 +23,11 @@
     margin-bottom: 15px;
     margin-top: 15px;
 }
-
-
+.registrationInputBox{
+    font-size: 13px !important;
+    font-family: 'Montserrat-Regular',Sans-Serif!important;
+    color:#999!important;
+}
 .signUpBoxFormWrapper{
 	margin-top: 5px;
 }
@@ -54,6 +57,13 @@
 .inputBox{
 	text-transform:capitalize!important;
 }
+.inputBox1{
+    text-transform: none!important;
+}
 .signUpBoxForm .input-group{
     width: 100%;
+}
+.
+.signUpBoxForm .react-tel-input .selected-flag {
+    width: 44px!important;
 }
