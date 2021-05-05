@@ -2,6 +2,8 @@ import React,{Component} from 'react';
 import LeftAside    	 from './LeftAside/LeftAside.js';
 import MiddelContent     from './MiddelContent/MiddelContent.js';
 import RightAside    	 from './RightAside/RightAside.js';
+import html2canvas from 'html2canvas';
+import { jsPDF } from "jspdf";
 
 /*import $                 from 'jquery';
 import  jsPDF  		 	 from "jspdf"; */
@@ -27,37 +29,56 @@ class CandidateProfile extends Component{
 			    doc.save('sample-page.pdf'); 
 			});*/
 		}
+printDocument() {
+    const input = document.getElementById('divToPrint');
+    html2canvas(input)
+      .then((canvas) => {
+        const imgData = canvas.toDataURL('image/png');
+        const pdf =  new jsPDF("p", "mm", "a4");
 
+    var width = pdf.internal.pageSize.getWidth();
+    var height = pdf.internal.pageSize.getHeight();
+        pdf.addImage(imgData, 'JPEG', 0, 0,width,height);
+        // pdf.output('dataurlnewwindow');
+        pdf.save("download.pdf");
+      })
+    ;
+  }
 	render(){
 		return(
-				<div className="container-fluid candidateProfileWrapper">
-			        <div className="col-lg-12" id="content">
-						<div className=" candidateProfile">
-							<div className="row">
-								<div className="  col-lg-12">
-									<div className="col-lg-3">
-										 
-											<LeftAside/>
-										
-									</div>
-									<div className="col-lg-6">
-										<div className="row">
-											
-											<MiddelContent/>
-										
-										</div>
-									</div>
-									<div className="col-lg-3">
-										
-											<RightAside/>
-										
-									</div>
-								</div>
-							</div>
-						</div>
-					</div><div id="page"></div>
-					{/*<button id="submit">Export to  PDF</button> */}		
-				</div>
+        <div>
+          <div className="col-lg-12">
+            <button className="center-block buttonNext buttonNextResume " onClick={this.printDocument}>Print</button>
+          </div>
+    				  <div className="container-fluid candidateProfileWrapper" id="divToPrint">
+    			        <div className="col-lg-12" id="content">
+    						<div className=" candidateProfile">
+    							<div className="row">
+    								<div className="  col-lg-12">
+    									<div className="col-lg-3">
+    										 
+    											<LeftAside/>
+    										
+    									</div>
+    									<div className="col-lg-6">
+    										<div className="row">
+    											
+    											<MiddelContent/>
+    										
+    										</div>
+    									</div>
+    									<div className="col-lg-3">
+    										
+    											<RightAside/>
+    										
+    									</div>
+    								</div>
+    							</div>
+    						</div>
+    					</div><div id="page"></div>
+    					{/*<button id="submit">Export to  PDF</button> */}		
+    				</div>
+        </div>
 			);
 	}
 }

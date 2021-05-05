@@ -191,7 +191,7 @@ class CandidatesList extends Component{
 																										<div className="col-lg-6" key={index}>
 																											<div className="row skillsSubHeading">
 																												<i className="fa fa-square rotate45 listRoatate45" ></i>
-																													{elem.secondarySkills[index]}
+																													{elem.skill_id.skill}
 																											</div>
 																										</div>
 																									);

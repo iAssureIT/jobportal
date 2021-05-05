@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
-import html2canvas from 'html2canvas';
-import { jsPDF } from "jspdf";
+
 import './JobPostProfile.css';
 
 import Axios  from 'axios';
@@ -62,21 +61,7 @@ export default class JobPostProfile extends Component{
 		}
 
 	}	
-	printDocument() {
-    const input = document.getElementById('divToPrint');
-    html2canvas(input)
-      .then((canvas) => {
-        const imgData = canvas.toDataURL('image/png');
-        const pdf =  new jsPDF("p", "mm", "a4");
 
-		var width = pdf.internal.pageSize.getWidth();
-		var height = pdf.internal.pageSize.getHeight();
-        pdf.addImage(imgData, 'JPEG', 0, 0,width,height);
-        // pdf.output('dataurlnewwindow');
-        pdf.save("download.pdf");
-      })
-    ;
-  }
 	componentDidMount(){
 		var job_id = this.props.match.params.job_id;
 		var primarySkillTags = [];
@@ -175,12 +160,9 @@ export default class JobPostProfile extends Component{
 	render(){
 		//console.log(this.state.)
 		return(
-				<div>
-				<div className="col-lg-12">
-						<button className="center-block buttonNext buttonNextResume " onClick={this.printDocument}>Print</button>
-					</div>
+				
 					
-					<div className="jobPostProfileWrapper container-fluid" id="divToPrint">
+					<div className="jobPostProfileWrapper container-fluid" >
 						
 						<div className="col-lg-9" >
 							<div className="col-lg-12 leftSideMain">
@@ -484,8 +466,7 @@ export default class JobPostProfile extends Component{
 							</div>
 						</div>	
 					</div>
-					
-				</div>
+				
 			);
 		}
 	}
