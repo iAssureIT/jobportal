@@ -118,7 +118,9 @@ search = (event)=>{
 	}
 }
 
-applyJob = (jobid, company_id, male, female, other, state, stateCode, country,countryCode, exp0to2, exp2to6, exp6to10 )=>{
+
+applyJob = (jobid, company_id, total,  male, female, other, district, jobDistrict, state, stateCode, country,countryCode, exp0to2, exp2to6, exp6to10 )=>{
+
 	console.log("jobid :", jobid);
 	
 	if (this.props.userDetails.loggedIn) {

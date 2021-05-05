@@ -58,7 +58,7 @@ class IndustrywiseJobs extends Component{
                                     );
                                 })
                             :
-                            <h2>No data available</h2>
+                            <h2>No Industrial data available</h2>
                         }
                     </div>                  
                 </section>

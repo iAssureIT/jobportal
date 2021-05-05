@@ -160,8 +160,8 @@ inactiveJob(event){
 			}).then((result) =>{
 				if(result.value){
 					if(job_id){
-						console.log(job_id);
-						Axios.delete("/api/jobs/inactive/"+job_id)
+						console.log(job_id); 
+						Axios.patch("/api/jobs/inactive/"+job_id)
 							.then(response =>{
 								console.log("inside then");
 								/*this.setState({
@@ -216,7 +216,7 @@ handleActiveSwitch = (event)=>{
 				activateJob: !this.state.activateJob
 			});
 	
-Axios.delete("/api/jobs/active/"+job_id)
+Axios.patch("/api/jobs/active/"+job_id)
 	.then(response =>{
 		if(response.data.message==="Job is activated successfully!"){
 			var {mapAction} = this.props;
