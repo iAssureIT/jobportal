@@ -1,13 +1,13 @@
-import React, {Component} 	  from 'react';
-import Axios 			  	  from  'axios';
-import Swal  			  	  from  'sweetalert2';
-import Moment 				  from "moment";
-import { connect }        	  from 'react-redux';
-import { bindActionCreators } from 'redux';
-import  * as mapActionCreator from '../../common/actions/index';
-import UploadVideoModal 	  from '../UploadVideoModal/UploadVideoModal.js';
+import React, {Component} from 'react';
+import Axios from  'axios';
+import Swal  from  'sweetalert2';
+import Moment 					from "moment";
 import "./JobList.css";
 import '../../App.css';
+import { connect }        from 'react-redux';
+import { bindActionCreators } from 'redux';
+import  * as mapActionCreator from '../../common/actions/index';
+import UploadVideoModal from '../UploadVideoModal/UploadVideoModal.js';
 /*import Pagination from "react-js-pagination";*/
 require("bootstrap/less/bootstrap.less");
 
@@ -24,7 +24,6 @@ class Joblist extends Component{
 		jobList  		: [],
 		isToggle 		: true,
 		appliedItems 	: [],
-		job_id          : "",
 		startLimit 		: this.props.selector.startLimit,
 	}
 
@@ -33,7 +32,6 @@ class Joblist extends Component{
 componentDidMount(){
 	 
 }
-
 showMore(){
 
 	var selector 		  	= this.props.selector;
@@ -47,7 +45,6 @@ showMore(){
   	var {mapAction} = this.props;
     mapAction.filterJobList(selector);
 }
-
 handlePageChange(pageNumber) {
 	//console.log(`active page is ${pageNumber}`);
 	this.setState({activePage: pageNumber});
@@ -64,6 +61,7 @@ handlePageChange(pageNumber) {
     mapAction.filterJobList(selector);
 
 }
+
 
 handleclick = (jobid)=>{
 	console.log("jobid : ", jobid);
@@ -83,17 +81,17 @@ handleclick = (jobid)=>{
 
 				console.log("wishlist response=", response.data);
 				if(response.data.message==="Job is removed from wishlist"){
-							/*Swal.fire(
-									'Removed!',
+							Swal.fire(
+									'',
 									'Job is removed from wishlist',
-									'success'
-							);*/
+									''
+							);
 				}else{
-					/*Swal.fire(
-									'Added!',
+					Swal.fire(
+									'',
 									'Job is added to wishlist',
-									'success'
-							);*/
+									''
+							);
 				}
 			})
 			.catch(error=>{
@@ -120,8 +118,8 @@ search = (event)=>{
 	}
 }
 
-applyJob = (jobid, company_id, total,  male, female, other, district, jobDistrict, state, stateCode, country,countryCode, exp0to2, exp2to6, exp6to10 )=>{
-	console.log("jobid :", total);
+applyJob = (jobid, company_id, male, female, other, state, stateCode, country,countryCode, exp0to2, exp2to6, exp6to10 )=>{
+	console.log("jobid :", jobid);
 	
 	if (this.props.userDetails.loggedIn) {
 	var formValues = { 
@@ -129,12 +127,9 @@ applyJob = (jobid, company_id, total,  male, female, other, district, jobDistric
 						job_id         		: jobid,
 					    entity_id    		: company_id,
 					    status        	  	: "Applied",
-					    total 				: total,
 					    male 				: male,
 					    female 				: female,
 					    other				: other,
-					    district 			: district,
-					    jobDistrict 		: jobDistrict,
 					    state 				: state,
 					    jobstateCode 		: stateCode,
 					    country 			: country,
@@ -144,8 +139,20 @@ applyJob = (jobid, company_id, total,  male, female, other, district, jobDistric
 					    exp6to10 			: exp6to10
 	}
 	console.log(formValues)
-	const job_id = this.state.job_id;
-		if(job_id){
+	Swal.fire({
+		title 				: ' ',
+		html 				: 'Are you sure<br />you want to apply for this job?',
+		text 				: '',
+		showCloseButton		: true,
+		showCancelButton 	: true,
+		confirmButtonText 	: 'Yes',
+		cancelButtonText 	: 'NO',
+		confirmButtonColor  : '#f5a721',
+		reverseButtons		: true
+	
+	}).then((result) =>{
+		console.log("result", result.value)
+		if(result.value){
 			Axios.post("/api/applyJob/post", formValues)
 				.then(response =>{
 					
@@ -160,41 +167,43 @@ applyJob = (jobid, company_id, total,  male, female, other, district, jobDistric
 
 					if(response.data.message==="You have applied to job"){
 
-						/*Swal.fire(
-									'Applied!',
+						Swal.fire(
+									'',
 									'You have applied job successfully!',
-									'success'
-							);*/
+									''
+							);
 					}
 				})
 				.catch(error=>{
-					/*Swal.fire(
+					Swal.fire(
+								'',
 								"Some problem occured while applying job!",
-								error.message,
-								'error'
-						)*/
+								''
+						)
 				})
 			
+				}else if (result.dismiss === Swal.DismissReason.cancel){
+					// Swal.fire(
+					// 	'Cancelled',
+					// 	'Not added to applied joblist',
+					// 	'error'
+					// )
 				}
+			})
 
 	}else{
 		document.getElementById("loginbtndiv").click();
 	}
 }
-
-removeApplication = (job_id, total, male, female, other, district, jobDistrict, state, stateCode, country,countryCode, exp0to2, exp2to6, exp6to10) => {
-	console.log("jobid :", male, female, other);
-	
+removeApplication = (job_id, male, female, other, state, stateCode, country,countryCode, exp0to2, exp2to6, exp6to10) => {
+	console.log(job_id)
 	if (this.props.userDetails.loggedIn) {
 		var formValues = { 
 			candidate_id   		: this.props.userDetails.candidate_id,
 			job_id         		: job_id,
-			total 				: total,
 			male 				: male,
 		    female 				: female,
 		    other				: other,
-		    district 			: district,
-			jobDistrict 		: jobDistrict,
 		    state 				: state,
 		    jobstateCode 		: stateCode,
 		    country 			: country,
@@ -204,12 +213,16 @@ removeApplication = (job_id, total, male, female, other, district, jobDistrict, 
 		    exp6to10 			: exp6to10
 		}
 		Swal.fire({
-			title 				: 'Are you sure, do you want to remove this job application?',
-			icon 				: 'success',
-			showCancelButton 	: true,
-			confirmButtonText 	: 'Yes, remove it!',
-			cancelButtonColor 	: 'No, keep it',
-			confirmButtonColor  : '#db3700',
+		title 				: '',
+		html 				: 'Are you sure<br />do you want to remove this job application?',
+		text 				: '',
+		icon 				: 'success',
+		showCloseButton		: true,
+		showCancelButton 	: true,
+		confirmButtonText 	: 'Yes',
+		cancelButtonColor 	: 'No',
+		confirmButtonColor  : '#db3700',
+		reverseButtons		: true
 	
 		}).then((result) =>{
 			if(result.value){
@@ -228,17 +241,17 @@ removeApplication = (job_id, total, male, female, other, district, jobDistrict, 
 					if(response.data.deleted){
 
 						Swal.fire(
-									'Removed!',
+									'',
 									'You have removed job application!',
-									'success'
+									''
 							);
 					}
 				})
 				.catch(error=>{
 					Swal.fire(
+								'',
 								"Some problem occured while removing job application!",
-								error.message,
-								'error'
+								''
 						)
 				})
 			}
@@ -250,7 +263,7 @@ removeApplication = (job_id, total, male, female, other, district, jobDistrict, 
 }
 	
 	render(){
-		//console.log(this.props.selector)
+		console.log(this.props.selector)
 		return(
 			<section className="jobListWrapper">
 				<div className="col-lg-12 JobListWrapperMain">
@@ -265,7 +278,7 @@ removeApplication = (job_id, total, male, female, other, district, jobDistrict, 
 							this.props.jobList 
 							?
 								this.props.jobList.map((elem,index)=>{
-								//console.log("elem.applicantStatistics",elem.applicantStatistics)	
+									
 								var x = this.props.jobWishlist && this.props.jobWishlist.length > 0 ?
 								this.props.jobWishlist[0].wishlistItems.filter((wishlistitem) => wishlistitem.job_id._id == elem._id) : [];
 				                
@@ -327,7 +340,7 @@ removeApplication = (job_id, total, male, female, other, district, jobDistrict, 
 														</div>
 													</div>
 													<div className="jobListDesignation">
-														<a href={"/job-profile/"+elem._id} className="link">{elem.jobBasicInfo.jobTitle + "("+elem.jobID +")"}</a>
+														<a href={"/job-profile/"+elem._id} className="link">{elem.jobBasicInfo.jobTitle}</a>
 													</div>
 													<div className="jobListCompanyName">
 														<b>{elem.company_id ? elem.company_id.companyName : "Anonymous"}</b>
@@ -350,23 +363,21 @@ removeApplication = (job_id, total, male, female, other, district, jobDistrict, 
 														<div className="col-lg-offset-2 col-lg-12">
 															<div className="jobListVerticleIcons">
 																<ul>
-																	<li><i title={appliedtooltipMsg} className={"fa fa-check-square" + appliedClass}  data-toggle="modal" data-target="#appliedJobModal" data-dismiss="modal"
+																	<li><i title={appliedtooltipMsg} className={"fa fa-check-square" + appliedClass}  
 																	onClick={appliedClass == '-o' ? 
-																	applyJob => this.applyJob(elem._id, elem.company_id._id, elem.applicantStatistics.total, elem.applicantStatistics.male, 
+																	applyJob => this.applyJob(elem._id, elem.company_id, elem.applicantStatistics.male, 
 																								elem.applicantStatistics.female, elem.applicantStatistics.other, 
-																								elem.applicantStatistics.district, elem.location.district,
 																								elem.applicantStatistics.state, elem.location.stateCode,
 																								elem.applicantStatistics.country, elem.location.countryCode,
 																								elem.applicantStatistics.exp0to2,  elem.applicantStatistics.exp2to6, 
 																								elem.applicantStatistics.exp6to10) 
-																	: removeApplication => this.removeApplication(elem._id, elem.applicantStatistics.total, elem.applicantStatistics.male, 
+																	: removeApplication => this.removeApplication(elem._id, elem.applicantStatistics.male, 
 																								elem.applicantStatistics.female, elem.applicantStatistics.other, 
-																								elem.applicantStatistics.district, elem.location.district,
 																								elem.applicantStatistics.state, elem.location.stateCode,
 																								elem.applicantStatistics.country, elem.location.countryCode,
 																								elem.applicantStatistics.exp0to2,  elem.applicantStatistics.exp2to6, 
 																								elem.applicantStatistics.exp6to10 ) } ></i></li>
-																	<li><i title={tooltipMsg} onClick={wishlist => this.handleclick(elem._id)} className={"fa fa-heart" + wishClass} data-toggle="modal" data-target="#applyWishlistModal" data-dismiss="modal" onClick={this.handleclick}></i></li>
+																	<li ><i title={tooltipMsg} onClick={wishlist => this.handleclick(elem._id)} className={"fa fa-heart" + wishClass}></i></li>
 																	{/*<li><i className="fa fa-youtube-play" id="video" data-toggle="modal" data-target="#videoModal"></i></li>*/}
 																</ul>
 															</div>
@@ -412,69 +423,11 @@ removeApplication = (job_id, total, male, female, other, district, jobDistrict, 
 					        
 					        	: 
 					        	<button className="btn buttonYellow" style={{float:"right", margin:"20px 0"}} onClick={this.showMore.bind(this)}> Show More </button>
-					        
 							}
 					    </div>
 
 					</div>
 				</div>
-
-				<div class="modal fade" id="appliedJobModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-				    <div class="modal-dialog delModalMain">
-				      <div class="modal-content delModalContent">
-				        <div class="modal-header delHeader">
-				          <button type="button" class="close delCloseBtn" data-dismiss="modal" aria-label="Close">
-				            <span aria-hidden="true">&times;</span>
-				          </button>
-				        </div>
-				        <div class="modal-body delModalBody">
-				          <div class="delBodyText">
-				            Are you sure <br />
-				            you want to apply for this job?
-				          </div>
-				          <div className="col-lg-12 delMainBtnDiv">
-				              <button type="button" class="btn btn-default delModalBtnOne col-lg-3" data-dismiss="modal">NO</button> 
-				              <button type="button" class="btn btn-default delModalBtnTwo col-lg-3" data-dismiss="modal" onClick={this.applyJob}>YES</button>
-				          </div> 
-				        </div>
-				      </div>
-				    </div>
-				</div>
-
-				<div class="modal fade" id="applyWishlistModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-				    <div class="modal-dialog delModalMain">
-				      <div class="modal-content delModalContent">
-				        <div class="modal-header delHeader">
-				          <button type="button" class="close delCloseBtn" data-dismiss="modal" aria-label="Close">
-				            <span aria-hidden="true">&times;</span>
-				          </button>
-				        </div>
-				        <div class="modal-body delModalBody">
-				          <div class="delBodyText">
-				            Job is added to the wishlist
-				          </div> 
-				        </div>
-				      </div>
-				    </div>
-				</div>
-
-				<div class="modal fade" id="removeWishlistModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-				    <div class="modal-dialog delModalMain">
-				      <div class="modal-content delModalContent">
-				        <div class="modal-header delHeader">
-				          <button type="button" class="close delCloseBtn" data-dismiss="modal" aria-label="Close">
-				            <span aria-hidden="true">&times;</span>
-				          </button>
-				        </div>
-				        <div class="modal-body delModalBody">
-				          <div class="delBodyText">
-				            Job is removed from wishlist
-				          </div> 
-				        </div>
-				      </div>
-				    </div>
-				</div>
-
 			</section>
 		);
 	}

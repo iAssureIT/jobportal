@@ -135,7 +135,7 @@ class JobPosting extends Component {
                     });
             })
             .catch(error => {
-                Swal.fire("Error while getting List data", error.message, 'error');
+                Swal.fire("", "Error while getting List data", "");
             })
 
         Axios.get("/api/subfunctionalareamaster/get/list")
@@ -145,7 +145,7 @@ class JobPosting extends Component {
                 });
             })
             .catch(error => {
-                Swal.fire("Error while getting List data", error.message, 'error');
+                Swal.fire("", "Error while getting List data", "");
             })
 
         Axios.get("/api/jobrolemaster/get/list")
@@ -155,7 +155,7 @@ class JobPosting extends Component {
                 });
             })
             .catch(error => {
-                Swal.fire("Error while getting List data", error.message, 'error');
+                Swal.fire("", "Error while getting List data", "");
             })    
 
         Axios.get("/api/jobtypemaster/get/list")
@@ -165,7 +165,7 @@ class JobPosting extends Component {
                 });
             })
             .catch(error => {
-                Swal.fire("Error while getting List data", error.message, 'error');
+                Swal.fire("", "Error while getting List data", "");
             })
 
         Axios.get("/api/JobTimeMaster/get/list")
@@ -176,7 +176,7 @@ class JobPosting extends Component {
                 /*console.log("jobTimeArray", this.state.jobTimeArray);*/
             })
             .catch(error => {
-                Swal.fire("Error while getting List data", error.message, 'error');
+                Swal.fire("", "Error while getting List data", "");
             })
 
         Axios.get("/api/jobsectormaster/get/list")
@@ -187,7 +187,7 @@ class JobPosting extends Component {
                 /*console.log("jobSectorArray", this.state.jobSectorArray);*/
             })
             .catch(error => {
-                Swal.fire("Error while getting List data", error.message, 'error');
+                Swal.fire("", "Error while getting List data", "");
             })
 
         Axios.get("/api/jobshiftmaster/get/list")
@@ -198,7 +198,7 @@ class JobPosting extends Component {
                 /*console.log("jobSectorArray", this.state.jobSectorArray);*/
             })
             .catch(error => {
-                Swal.fire("Error while getting List data", error.message, 'error');
+                Swal.fire("", "Error while getting List data", "");
             })   
 
         Axios.get("/api/qualificationmaster/get/list")
@@ -209,7 +209,7 @@ class JobPosting extends Component {
                 /*console.log("jobSectorArray", this.state.jobSectorArray);*/
             })
             .catch(error => {
-                Swal.fire("Error while getting List data", error.message, 'error');
+                Swal.fire("", "Error while getting List data", "");
             })  
                 
         Axios.get("/api/skillmaster/get/list")
@@ -227,7 +227,7 @@ class JobPosting extends Component {
 
             })
             .catch(error => {
-                Swal.fire("Error while getting List data", error.message, 'error');
+                Swal.fire("", "Error while getting List data", "");
             })
         
         if (this.props.match.params.job_id) {
@@ -397,8 +397,7 @@ class JobPosting extends Component {
             status = false;
         }
         else if(!regSpaceName.test(jobTitle)){
-            document.getElementById("jobTitleError").innerHTML=  
-            "Please enter valid name,......";  
+            document.getElementById("jobTitleError").innerHTML = "Please enter valid name,......";  
             status=false; 
         }
         else {
@@ -510,8 +509,7 @@ class JobPosting extends Component {
         }
 
         if ((this.state.minSalary) > (this.state.maxSalary)){
-            document.getElementById("maxSalaryError").innerHTML=  
-            "Maximum salary is less than minimum salary";  
+            document.getElementById("maxSalaryError").innerHTML = "Maximum salary is less than minimum salary";  
 
             status=false; 
         }
@@ -542,8 +540,7 @@ class JobPosting extends Component {
             status = false;
         }
         else if(!regSpaceName.test(minEducation)){
-            document.getElementById("minEducationError").innerHTML=  
-            "Please enter valid education,......";  
+            document.getElementById("minEducationError").innerHTML = "Please enter valid education,......";  
             status=false; 
         }
         else {
@@ -613,8 +610,7 @@ class JobPosting extends Component {
             status = false;
         }
         else if(!regSpaceName.test(contactPersonName)){
-            document.getElementById("contactPersonNameError").innerHTML=  
-            "Please enter valid contact person name,......";  
+            document.getElementById("contactPersonNameError").innerHTML = "Please enter valid contact person name,......";  
             status=false; 
         }
         else {
@@ -623,7 +619,7 @@ class JobPosting extends Component {
         }
         
         if(this.state.contactPersonEmail.length <=0 ){
-            document.getElementById("contactPersonEmailError").innerHTML=  "Please enter your Email";  
+            document.getElementById("contactPersonEmailError").innerHTML = "Please enter your Email";  
             status=false; 
         } else if (
             !emailFilter.test(tempEmail)) { //test email for illegal characters
@@ -636,11 +632,11 @@ class JobPosting extends Component {
         }
 
         if(this.state.contactPersonPhone.match(phoneno)){
-            document.getElementById("contactPersonPhoneError").innerHTML=  ""; 
+            document.getElementById("contactPersonPhoneError").innerHTML = ""; 
             status = true;
           
         } else {
-            document.getElementById("contactPersonPhoneError").innerHTML=  "Please enter valid Mobile Number";  
+            document.getElementById("contactPersonPhoneError").innerHTML = "Please enter valid Mobile Number";  
             status=false; 
         }
         return status;
@@ -816,7 +812,7 @@ class JobPosting extends Component {
 
             .catch(error => {
                 console.log(error);
-                Swal.fire("Submit Error!", error.message, 'error');
+                Swal.fire("", "Submit Error!", "");
             })
     }
 
@@ -826,13 +822,13 @@ class JobPosting extends Component {
                 //console.log("formValues :", formValues);
                 if (response.data.message === "Job details updated Successfully!") {
                     console.log("response.data : ", response.data);
-                    Swal.fire("Success!", "your profile updated successfully!", "success");
+                    Swal.fire("", "your profile updated successfully!", "");
                     this.props.history.push("/job-profile/" + this.state.job_id);
                 }
             })
             .catch(error => {
                 console.log(error);
-                Swal.fire("Update Error!", error.message, 'error');
+                Swal.fire("", "Update Error!", "");
             })
     }
 
