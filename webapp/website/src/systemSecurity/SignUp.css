@@ -16,6 +16,10 @@
 
 }
 
+.zIndex{
+  z-index: 100;
+}
+
 .registrationForm{
   min-height: 300px;
   height: auto;

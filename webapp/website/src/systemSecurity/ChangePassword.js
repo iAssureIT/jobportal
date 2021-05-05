@@ -20,7 +20,7 @@ class ChangePassword extends Component {
           showPassword1: false,
           showPassword2: false,
           showPassword3: false,
-          emailId      :this.props.userDetails.email,
+          phone     :this.props.userDetails.phone,
           user_ID      :this.props.userDetails.user_id,
         }
     }
@@ -156,17 +156,19 @@ class ChangePassword extends Component {
 
     changePassword(event) {
         event.preventDefault();
-       
+        console.log(this.state.phone);
+        console.log(this.props.userDetails);
+        console.log(this.state.user_ID);
         var status =  this.validateForm();
         if(status == true){
         var user_id = this.state.user_ID;
         var auth = {
-          email : this.state.emailId,
+          mobNumber : this.state.phone,
           password : this.state.oldPassword,
           role: "candidate"
         } 
-        
-        axios.post('/api/auth/post/login',auth)
+        console.log(auth);
+        axios.post('/api/auth/post/login/mobile',auth)
         .then(response => {
           console.log(response);
         if(response.data.message==="Login Auth Successful"){

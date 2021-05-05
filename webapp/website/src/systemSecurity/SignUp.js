@@ -522,7 +522,7 @@ class SignUp extends Component {
 
                     <div className="col-lg-12">
                          <div className="col-lg-12 form-group" >
-                            <div className="input-group">
+                            <div className="input-group zIndex">
                                 <span className="input-group-addon registrationInputIcon"><i className="fa fa-lock"></i></span>
                                 <input type="password" id="password" name="password" placeholder="Password" value={this.state.password} onChange={this.handleChange.bind(this)} className="form-control registrationInputBox"/>
                                 <span className="input-group-addon loginInputIcon3" onClick={this.showPassword1.bind(this)}>
@@ -535,7 +535,7 @@ class SignUp extends Component {
 
                     <div className="col-lg-12">
                         <div className="col-lg-12 form-group" >
-                            <div className="input-group">
+                            <div className="input-group zIndex">
                                 <span className="input-group-addon registrationInputIcon"><i className="fa fa-lock"></i></span>
                                 <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" value={this.state.confirmPassword} onChange={this.handleChange.bind(this)} className="form-control registrationInputBox"/>
                                 <span className="input-group-addon loginInputIcon3" onClick={this.showPassword2.bind(this)}>

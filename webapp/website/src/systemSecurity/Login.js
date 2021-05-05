@@ -130,7 +130,7 @@ class Login extends Component {
       console.log(status)
       var {mapAction} = this.props;
       if (status) {
-      
+          
         this.setState({ btnLoading: true });
         axios.post('/api/auth/post/login/mobile', auth)
           .then((response) => {
@@ -139,6 +139,7 @@ class Login extends Component {
               this.setState({ btnLoading: false });
               var userDetails = { 
                 loggedIn    : true,
+                username: response.data.username,
                 firstName: response.data.userDetails.firstName,
                 lastName: response.data.userDetails.lastName,
                 email: response.data.userDetails.email,
@@ -146,8 +147,10 @@ class Login extends Component {
                 pincode: response.data.userDetails.pincode,
                 user_id: response.data.userDetails.user_id,
                 roles: response.data.userDetails.roles,
-                token: response.data.userDetails.token
+                token: response.data.userDetails.token,
+                username: response.data.userDetails.username,
               }
+              console.log("..........................................",response);
 
               axios.get('/api/candidatemaster/get/candidate_id/'+response.data.userDetails.user_id)
               .then((candidate) => {
