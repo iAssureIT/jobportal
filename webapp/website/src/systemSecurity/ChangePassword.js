@@ -163,7 +163,7 @@ class ChangePassword extends Component {
         if(status == true){
         var user_id = this.state.user_ID;
         var auth = {
-          mobNumber : this.state.phone,
+          mobNumber : this.props.userDetails.username,
           password : this.state.oldPassword,
           role: "candidate"
         } 
@@ -177,7 +177,7 @@ class ChangePassword extends Component {
               var body = {
                 pwd : this.state.newPassword,
                 user_id : this.state.user_ID,
-                emailId : this.state.emailId,
+                mobileNo : this.props.userDetails.username,
               }
 
               console.log(body)

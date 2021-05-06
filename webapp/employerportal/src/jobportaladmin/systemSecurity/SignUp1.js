@@ -36,7 +36,15 @@ handleChange(event){
         [name]:value,
     })
 }
-
+changeMobile(event) {
+    console.log(event)
+    this.setState({
+      mobile: event
+    }, () => {
+      console.log(this.state.mobile)
+      
+    })
+}
 setWorkFromHome(event) {
         this.setState({
             checkTC: event.target.checked
@@ -424,7 +432,8 @@ render() {
                               id        ="mobile" 
                               className ="input-group-addon form-control inputBox" 
                               value     ={this.state.mobile} 
-                              onChange  = {mobile => this.setState({ mobile })}
+                              onChange={this.changeMobile.bind(this)}
+                              //onChange  = {mobile => this.setState({ mobile })}
                              />
                         
                         <span id="mobileError" className="errorMsg"></span>

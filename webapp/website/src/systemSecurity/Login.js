@@ -116,12 +116,15 @@ class Login extends Component {
   changeMobile(event) {
     this.setState({
       loginusername: event
+    },() => {
+      console.log(this.state.loginusername)
     })
+    
   }
   userlogin(event) {
       event.preventDefault();
       var auth = {
-        mobNumber: this.state.loginusername,
+        mobNumber: (this.state.loginusername).replace("-", ""),
         password: this.refs.loginpassword.value,
         role: "candidate"
       }
@@ -134,7 +137,9 @@ class Login extends Component {
         this.setState({ btnLoading: true });
         axios.post('/api/auth/post/login/mobile', auth)
           .then((response) => {
-            //console.log("response login",response);
+            console.log("response login",response);
+            console.log("response login username",response.data.username);
+
             if (response.data.ID) {
               this.setState({ btnLoading: false });
               var userDetails = { 
@@ -148,9 +153,9 @@ class Login extends Component {
                 user_id: response.data.userDetails.user_id,
                 roles: response.data.userDetails.roles,
                 token: response.data.userDetails.token,
-                username: response.data.userDetails.username,
+    
               }
-              console.log("..........................................",response);
+              console.log("..........................................",userDetails);
 
               axios.get('/api/candidatemaster/get/candidate_id/'+response.data.userDetails.user_id)
               .then((candidate) => {
@@ -186,7 +191,7 @@ class Login extends Component {
               
             } else if (response.data.message === "NOT_REGISTER") {
               swal({
-                text: "This Email ID is not registered. Please try again."
+                text: "This mobile number is not registered. Please try again."
               });
              
             } else if (response.data.message === "INVALID_PASSWORD") {

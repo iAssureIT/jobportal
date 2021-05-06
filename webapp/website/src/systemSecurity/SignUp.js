@@ -52,9 +52,11 @@ class SignUp extends Component {
 	}
 
   changeMobile(event) {
+    console.log(event)
     this.setState({
       mobileNumber: event
     }, () => {
+      console.log(this.state.mobileNumber)
       if (this.state.mobileNumber) {
         this.setState({
       mobileNumberAvailable: this.state.mobileNumber === "+" || this.state.mobileNumber.length<15 ? true : false
@@ -274,7 +276,7 @@ class SignUp extends Component {
 			var auth = {
 				username 		: "MOBILE",
 				firstname		: this.state.firstName,
-				lastname		: this.state.lastName,
+				lastname		: this.state.lastName, 
 				mobNumber		: (this.state.mobileNumber).replace("-", ""),
 				email			: this.state.emailAddress,
 				pwd				: this.state.password,
@@ -299,6 +301,7 @@ class SignUp extends Component {
             var {mapAction} = this.props;
             mapAction.setUserID(response.data.ID);
             mapAction.setSelectedModal("confirmotp"); 
+
             var sendData = {
               "event"     : "Event1", //Event Name
               "toUser_id"  : response.data.ID, //To user_id(ref:users)
@@ -313,9 +316,9 @@ class SignUp extends Component {
               .catch((error) => { console.log('notification error: ', error) })
             */
 						//this.props.history.push("/confirm-otp/" + response.data.ID);
-					}/*else{
+					}else{
 						swal(response.data.message);
-					}	*/
+					}	
 				})
 				.catch((error) => {
 					
@@ -506,13 +509,11 @@ class SignUp extends Component {
                         <div className="col-lg-12 form-group" >
                       
                              <PhoneInput
-                                      country={'in'}
+                                      country   = {'in'}
+                                      //id        ="mobileNumber" 
                                       value={this.state.mobileNumber}
-                                      name="companyPhone"
-                                      inputProps={{
-                                        name: 'mobileNumber',
-                                        required: true
-                                      }}
+                                      //name="companyPhone"
+                                      //onChange  = {mobileNumber => this.setState({ mobileNumber })}
                                       onChange={this.changeMobile.bind(this)}
                                     />
                              

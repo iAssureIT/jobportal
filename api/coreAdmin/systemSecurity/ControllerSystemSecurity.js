@@ -2008,7 +2008,7 @@ exports.set_send_mobileotp_usingMobile = (req, res, next) => {
 
 exports.update_user_resetpwd = (req, res, next) => {
 	console.log(req.body)
-	User.findOne({ "profile.email": req.body.emailId })
+	User.findOne({ "username": req.body.mobileNo })
 	.exec()
 	.then(user => {
 		// console.log("reset pwd user",user)
