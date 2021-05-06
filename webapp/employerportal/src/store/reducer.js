@@ -7,7 +7,8 @@ const initialState = {
 	candidate_id 				: localStorage.getItem("candidate_id"),
 	userDetails 				: localStorage.getItem("userDetails") ?
 		{
-		loggedIn  	: true,		
+		loggedIn  	: true,	
+		username	: JSON.parse(localStorage.getItem("userDetails")).username ,	
 		firstName 	: JSON.parse(localStorage.getItem("userDetails")).firstName , 
 		lastName  	: JSON.parse(localStorage.getItem("userDetails")).lastName , 
 		email 		: JSON.parse(localStorage.getItem("userDetails")).email,
@@ -20,7 +21,8 @@ const initialState = {
 		industry_id : JSON.parse(localStorage.getItem("userDetails")).industry_id
 		}
 		: {
-		loggedIn  	: false,	
+		loggedIn  	: false,
+		username	: "", 	
 		firstName 	: "", 
 		lastName  	: "", 
 		email 		: "",

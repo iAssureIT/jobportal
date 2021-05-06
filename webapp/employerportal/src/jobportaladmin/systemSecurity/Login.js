@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch,Link,location } from 'react-router-dom';
+import PhoneInput from 'react-phone-input-2';
 import 'font-awesome/css/font-awesome.min.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './LoginForm.css';
@@ -91,19 +92,28 @@ class Login extends Component {
       });    
   }
 
-  
+  changeMobile(event) {
+    this.setState({
+      loginusername: event
+    },() => {
+      console.log(this.state.loginusername)
+    })
+  }
   userlogin(event) {
       event.preventDefault();
+      
       var auth = {
-        email: this.refs.loginusername.value,
+        mobNumber: (this.state.loginusername).replace("-", ""),
         password: this.refs.loginpassword.value,
         role: "employer"
       }
+      console.log(auth)
       var status =  this.validateForm();
+
       if (status) {
       
         this.setState({ btnLoading: true });
-        axios.post('/api/auth/post/loginwithcompanyid', auth)
+        axios.post('/api/auth/post/login/mobile', auth)
           .then((response) => {
             console.log("response login",response);
             if (response.data.message == "Login Auth Successful") { 
@@ -117,6 +127,8 @@ class Login extends Component {
                   }else{
                     this.setState({ btnLoading: false });
                     var  userDetails = {
+                      loggedIn    : true,
+                      UserName    : response.data.username,
                       firstName : response.data.userDetails.firstName, 
                       lastName  : response.data.userDetails.lastName, 
                       email     : response.data.userDetails.email, 
@@ -158,7 +170,7 @@ class Login extends Component {
                 
               } else if (response.data.message === "NOT_REGISTER") {
                 swal({
-                  text: "This Email ID is not registered. Please try again."
+                  text: "This mobile number is not registered. Please try again."
                 });
                
               } else if (response.data.message === "INVALID_PASSWORD") {
@@ -171,11 +183,11 @@ class Login extends Component {
                   text: "You have not verified your account. Please verify your account."
                 })
                   .then((value) => {
-                    var formValues = { email : this.refs.loginusername.value }
+                    var formValues = { mobileNo : (this.state.loginusername).replace("-", "") }
                   
-                    axios.patch('/api/auth/patch/setotpusingEmail', formValues)
+                    axios.patch('/api/auth/patch/setsendmobileotpusingMobile', formValues)
                       .then((response) => {
-                      var sendData = {
+                      /*var sendData = {
                         "event"     : "Event3", //Event Name
                         "toUser_id"  : response.data.ID, //To user_id(ref:users)
                         "toUserRole"  : "candidate",
@@ -186,9 +198,9 @@ class Login extends Component {
                       }
                       axios.post('/api/masternotifications/post/sendNotification', sendData)
                       .then((notificationres) => {})
-                      .catch((error) => { console.log('notification error: ', error) })
+                      .catch((error) => { console.log('notification error: ', error) })*/
 
-                        swal("We send you a Verification Code to your registered email. Please verify your account.");
+                        swal("We send you a Verification Code to your registered mobile number. Please verify your account");
                         this.props.history.push("/confirm-otp/" + response.data.ID);
                       })
                       .catch((error) => {
@@ -289,10 +301,20 @@ class Login extends Component {
                     </div>
 
                     <div className="col-lg-10 col-lg-offset-1 form-group loginFormGroup" >
-                      <div className="input-group">
+                      {/*<div className="input-group">
                         <span className="input-group-addon loginInputIcon1"><i className="fa fa-mobile"></i></span>
                         <input type="tel" id="loginusername" name="loginusername" placeholder="Email Id" value={this.state.loginusername} ref="loginusername" onChange={this.handleChange.bind(this)} className="form-control loginInputBox"/>
-                      </div>
+                      </div>*/}
+                      <PhoneInput
+                        country={'in'}
+                        value={this.state.loginusername}
+                        name="loginusername"
+                        inputProps={{
+                          name: 'loginusername',
+                          required: true
+                        }}
+                        onChange={this.changeMobile.bind(this)}
+                      />
                       <span id="loginusernameError" className="errorMsg"></span>
                     </div>
 

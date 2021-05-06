@@ -975,6 +975,10 @@ exports.user_login_using_email = (req, res, next) => {
 exports.user_login_using_mobile = (req, res, next) => {
 	var mobNumber = req.body.mobNumber;
 	var role = (req.body.role).toLowerCase();
+
+	console.log("mobNumber",mobNumber)
+	console.log("role",role)
+
 	User.findOne({
 		"username": mobNumber,
 		"roles": role,
@@ -1060,6 +1064,7 @@ exports.user_login_using_mobile = (req, res, next) => {
 															token: token,
 															roles: user.roles,
 															ID: user._id,
+															company_id: user.profile.company_id,
 															companyID: user.profile.companyID,
 															passwordreset: user.profile.passwordreset,
 															username : user.username,
@@ -1070,12 +1075,15 @@ exports.user_login_using_mobile = (req, res, next) => {
 																phone: user.profile.phone,
 																city: user.profile.city,
 																passwordreset: user.profile.passwordreset,
+																company_id:user.profile.company_id,
 																companyID: user.profile.companyID,
-																locationID: user.profile.locationID,
+																workLocation: user.profile.workLocation,
+																branch_id: user.profile.branch_id,
+																branchCode: user.profile.branchCode,
 																user_id: user._id,
 																roles: user.roles,
 																token: token,
-															}
+															}  
 														});
 												
 												} else {

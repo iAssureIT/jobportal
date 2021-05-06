@@ -15,7 +15,7 @@ import  * as mapActionCreator from '../common/actions/index';
 
 class Login extends Component {
 
-  constructor() {
+  constructor() { 
     super();
     this.state = {
       showPassword: false,
@@ -119,7 +119,6 @@ class Login extends Component {
     },() => {
       console.log(this.state.loginusername)
     })
-    
   }
   userlogin(event) {
       event.preventDefault();
@@ -132,13 +131,14 @@ class Login extends Component {
       var status =  this.validateForm();
       console.log(status)
       var {mapAction} = this.props;
+      
       if (status) {
-          
         this.setState({ btnLoading: true });
         axios.post('/api/auth/post/login/mobile', auth)
           .then((response) => {
+
             console.log("response login",response);
-            console.log("response login username",response.data.username);
+            //console.log("response login username",response.data.username);
 
             if (response.data.ID) {
               this.setState({ btnLoading: false });
@@ -186,7 +186,7 @@ class Login extends Component {
 
             } else if (response.data.message === "USER_BLOCK") {
               swal({
-                text: "You are blocked by admin. Please contact Admin."
+                text: "Your account is not active. Please contact Admin."
               });
               
             } else if (response.data.message === "NOT_REGISTER") {
@@ -201,14 +201,14 @@ class Login extends Component {
               
             } else if (response.data.message === "USER_UNVERIFIED") {
               swal({
-                text: "You have not verified your account. Please verify your account."
+                text: "You have not verified your account. Please verify your account"
               })
                 .then((value) => { 
-                  var formValues = { email : this.refs.loginusername.value }
+                  var formValues = { mobileNo : (this.state.loginusername).replace("-", "") }
                   
-                  axios.patch('/api/auth/patch/setotpusingEmail', formValues)
+                  axios.patch('/api/auth/patch/setsendmobileotpusingMobile', formValues)
                     .then((response) => {
-                    var sendData = {
+                    /*var sendData = {
                       "event"     : "Event3", //Event Name
                       "toUser_id"  : response.data.ID, //To user_id(ref:users)
                       "toUserRole"  : "candidate",
@@ -220,8 +220,8 @@ class Login extends Component {
                     axios.post('/api/masternotifications/post/sendNotification', sendData)
                     .then((notificationres) => {})
                     .catch((error) => { console.log('notification error: ', error) })
-
-                      swal("We send you a Verification Code to your registered email. Please verify your account.");
+                    */
+                      swal("We send you a Verification Code to your registered mobile number. Please verify your account.");
                       mapAction.setUserID(response.data.ID);
                       mapAction.setSelectedModal("confirmotp");
                     })
