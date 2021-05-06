@@ -2,7 +2,8 @@ const initialState = {
 	rolewiseAccessToModule 		: false,
 	accessToFacility 			: false,
 	selectedCompanyDetails 		: {}, 
-	user_ID 					: localStorage.getItem("user_ID"),
+	user_id 					: "",
+	userCredentials 			: { username : "", password: "" },
 	candidate_id 				: localStorage.getItem("candidate_id"),
 	userDetails 				: localStorage.getItem("userDetails") ?
 		{
@@ -69,9 +70,17 @@ const reducer = (state = initialState, action) => {
 	if(action.type === "FETCH_ACCESS_FACILITY"){
 		newState.accessToFacility 	= action.accessToFacility;
 	}
+
 	if(action.type === "SELECTED_COMPANY_DETAILS"){
 		newState.selectedCompanyDetails 	= action.selectedCompanyDetails;
 	}
+	if(action.type === "SET_USERID"){
+		newState.user_id 	= action.user_id;
+	}
+	if(action.type === "SET_USER_CREDENTIALS"){
+		newState.userCredentials 	= action.userCredentials;
+	}
+	
 	if(action.type === "SET_USER_DETAILS"){
 		newState.userDetails 	= action.userDetails;
 	}

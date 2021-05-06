@@ -20,6 +20,7 @@ constructor() {
         city                  : [], 
         stateArray            : [],
         companyState          : "",
+        companyStateCode      : "",
         companyCountry        : "",
         countryCode           : "IN",
         branch                : "",
@@ -106,7 +107,8 @@ componentDidMount() {
         this.setState({
           [name]      : value,
           "branchCode" : document.querySelector('#branch option[value="' + value + '"]').getAttribute("data-branchcode"),
-          "companyState" : document.querySelector('#branch option[value="' + value + '"]').getAttribute("data-statecode"),
+          "companyState" : document.querySelector('#branch option[value="' + value + '"]').getAttribute("data-state"),
+          "companyStateCode": document.querySelector('#branch option[value="' + value + '"]').getAttribute("data-statecode"),
           "companyCountry" : document.querySelector('#branch option[value="' + value + '"]').getAttribute("data-country"),
           "countryCode" : document.querySelector('#branch option[value="' + value + '"]').getAttribute("data-countrycode"),
           "workLocation" : locationname,
@@ -122,8 +124,10 @@ componentDidMount() {
       var name  = event.currentTarget.name;
         this.setState({
           [name]      : value,
-          "stateName" : event.currentTarget.getAttribute("state")
+          "companyState" : document.querySelector('#states option[value="' + value + '"]').getAttribute("state")
         });
+
+        //console.log(document.querySelector('#states option[value="' + value + '"]').getAttribute("state"))
     }
     validateForm=()=>{
         var status = true;
@@ -181,7 +185,7 @@ componentDidMount() {
         var {mapAction} = this.props;
         
         if(status == true){
-
+  
         this.props.hideComponent("showHide2")
 
         var selectedCompanyDetails = {
@@ -190,11 +194,12 @@ componentDidMount() {
             companyName : this.state.companyName,
             branch_id   : this.state.branch_id,
             branchCode  : this.state.branchCode == "" ? 0 : this.state.branchCode,
+            locationType: this.state.locationType, 
             role        : 'employer',
             status      : 'unverified',        
             city        : this.state.branch,
-            stateName   : this.state.stateName,
-            stateCode   : this.state.companyState,
+            stateName   : this.state.companyState,
+            stateCode   : this.state.companyStateCode,
             country     : this.state.companyCountry,
             countryCode : this.state.countryCode,
         }
@@ -274,7 +279,7 @@ render() {
                             <span className="input-group-addon registrationInputIcon"><i className="fa fa-map-marker"></i></span>  
                   
                             <select id="states" className="form-control registrationInputBox selectOption"
-                            ref="companyState" value={this.state.companyState} name="companyState" onChange={this.handleChangeState.bind(this)} >
+                            ref="companyStateCode" value={this.state.companyStateCode} name="companyStateCode" onChange={this.handleChangeState.bind(this)} >
                             <option selected={true}>-- Select State --</option>
                             {
                               this.state.stateArray && this.state.stateArray.length > 0 ?

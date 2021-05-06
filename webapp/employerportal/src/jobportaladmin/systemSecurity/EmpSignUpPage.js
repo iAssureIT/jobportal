@@ -67,10 +67,6 @@ render() {
     const { showHide1, showHide2, showHide3 ,showHide4} = this.state;
     return (
     	<section className="signUpFormMainWrapper">
-
-         
-
-          
             <div className={showHide4 ?"col-lg-8 col-lg-offset-2 signUpBoxWrapper signUpBoxWrapper1":"col-lg-4 col-lg-offset-4 signUpBoxWrapper "}>
                 <div className="row">
                     <div className="ProgressBarSignUpWrapper">

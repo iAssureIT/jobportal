@@ -3,9 +3,13 @@ import swal from 'sweetalert';
 import $ from "jquery";
 import jQuery from 'jquery';
 import axios from 'axios';
+import { withRouter }   from 'react-router-dom';
+import { connect }           from 'react-redux';
+import { bindActionCreators }   from 'redux';
+import  * as mapActionCreator   from '../common/actions/index';
 import './ConfirmOtp.css';
 
-class ConfirmOtp extends Component {
+class ConfirmOtp extends Component { 
   constructor(props) {
     super(props);
     this.state = {
@@ -13,7 +17,7 @@ class ConfirmOtp extends Component {
     }
   }
   componentDidMount() {
-    
+    console.log(this.props.user_id)
     //==================================
     // var user_id = this.props.match.params.userID;
     // console.log('user_id==',user_id)  
@@ -36,11 +40,11 @@ class ConfirmOtp extends Component {
 
   }
 
- movetoNext(current, nextFieldID) {
-if (current.value.length >= current.maxLength) {
-document.getElementById(nextFieldID).focus();
-}
-}
+  movetoNext(current, nextFieldID) {
+    if (current.value.length >= current.maxLength) {
+    document.getElementById(nextFieldID).focus();
+    }
+  }
   
   handleChange(event){
       var fieldValue=event.currentTarget.value;
@@ -68,55 +72,33 @@ document.getElementById(nextFieldID).focus();
   confirmOTP(event) {
     event.preventDefault();
     var url = this.props.match.params;
-    var formValues = {
-      "user_ID": this.props.match.params.userID,
-      "emailOTP": this.refs.emailotp1.value + this.refs.emailotp2.value + this.refs.emailotp3.value + this.refs.emailotp4.value,
-      "status": "Active"
-    }
-    //========person master===============
-    console.log(formValues)
-      var candidatemaster   = {
-        'firstName'       : this.state.firstName,
-        'lastName'        : this.state.lastName,
-        'mobile'          : this.state.mobile,
-        'emailId'         : this.state.emailId,
-        "user_id"         : this.state.user_id,
-        "createdBy"       : this.state.createdBy
-      }
     
-      //====================================
+      
       var status =  this.validateForm();
       if (status) {
       var url = localStorage.getItem('previousUrl');
       var userStatus =  url == 'signup' ? 'blocked' : 'active';
-      var checkData = { "user_id": this.props.match.params.userID, 
-                        "emailotp"  : this.refs.emailotp1.value + this.refs.emailotp2.value + this.refs.emailotp3.value + this.refs.emailotp4.value, 
-                        "status" : userStatus }
-      axios.post('/api/auth/checkemailotp/usingID',checkData) 
+      var checkData = { "user_id": this.props.user_id, 
+                        "mobileotp"  : this.refs.emailotp1.value + this.refs.emailotp2.value + this.refs.emailotp3.value + this.refs.emailotp4.value, 
+                        "status" : userStatus } 
+      console.log(checkData)                  
+      axios.post('/api/auth/checkmobileotp/usingID',checkData) 
       .then((response) => {
-
 
           if (response.data.message == 'SUCCESS') { 
             swal('OTP Verified Successfully.');
             
-            
             if (url == 'forgotpassword') {
               localStorage.removeItem("previousUrl");
-              this.props.history.push('/reset-pwd/' + this.props.match.params.userID);
+              this.props.history.push('/reset-pwd/' + this.props.user_id);
             } else {
+
               localStorage.removeItem("previousUrl");
-              this.props.history.push('/login');
-              //================================
 
-                /*axios.post('/api/candidatemaster/post', candidatemaster)
-                .then((response) => {
+              console.log(this.props.userCredentials)
+              //this.props.history.push('/login');
 
-                  console.log('in result Res data==>>>', response.data);
-                  this.props.history.push('/login');
-                })
-                .catch((error) => {})*/
-              
-            //================================
+
             }
           } else {
             swal('Please enter valid OTP.');
@@ -137,9 +119,9 @@ document.getElementById(nextFieldID).focus();
     }
   }
   resendOtp(event) {
-     event.preventDefault();
-     console.log(".....................................");
-    const userid = this.props.match.params.userID;
+    event.preventDefault();
+    console.log(".....................................");
+    const userid = this.props.user_id;
     var formValues = { userid : userid }
     var {mapAction} = this.props;
     console.log(formValues);
@@ -187,10 +169,6 @@ document.getElementById(nextFieldID).focus();
     return (
             <form className="signUpBoxFormWrapper">
                 <div className="signUpBoxTitle col-lg-10 col-lg-offset-1">Please enter OTP sent you on your Phone or Email</div>
-                
-
-                  
-
                    
                     <div className="signUpBoxForm signUpBoxOtpForm col-lg-6 col-lg-offset-3">
 
@@ -201,7 +179,6 @@ document.getElementById(nextFieldID).focus();
                             </div>
                            
                         </div>
-
 
                         <div className="otpBox form-group" >
                             <div className="input-group ">
@@ -242,4 +219,15 @@ document.getElementById(nextFieldID).focus();
     );
   }
 }
-export default ConfirmOtp;
+
+const mapStateToProps = (state)=>{ 
+    return {
+        user_id         : state.user_id,
+        userCredentials : state.userCredentials
+    }
+}
+const mapDispatchToProps = (dispatch) => ({
+  mapAction :  bindActionCreators(mapActionCreator, dispatch)
+})
+
+export default connect(mapStateToProps, mapDispatchToProps) (withRouter(ConfirmOtp));

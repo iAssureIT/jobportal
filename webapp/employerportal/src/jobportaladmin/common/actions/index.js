@@ -4,7 +4,16 @@ export const selectedCompanyDetails = (selectedCompanyDetails )=> ({
       type                      : 'SELECTED_COMPANY_DETAILS',
       selectedCompanyDetails    : selectedCompanyDetails
 });
-export const setUserDetails = (userDetails )=> ({
+export const setUserID = (user_id )=> ({
+      type        : 'SET_USERID',
+      user_id      : user_id
+});
+export const setUserCredentials = (userCredentials )=> ({
+      type                : 'SET_USER_CREDENTIALS',
+      userCredentials     : userCredentials
+});
+
+export const setUserDetails = (userDetails )=> ({ 
       type 				   : 'SET_USER_DETAILS',
       userDetails 	 : userDetails
 });
