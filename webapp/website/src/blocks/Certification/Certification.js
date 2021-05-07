@@ -127,6 +127,7 @@ class Certification extends Component{
     } 
 	
 	getData(){
+		var {mapAction} = this.props;
 		Axios.get("/api/candidatemaster/get/one/"+this.state.candidate_id)
 		.then(response=>{
 				this.setState({
@@ -134,7 +135,10 @@ class Certification extends Component{
 						certificationArry : response.data.certifications,
 						profileCompletion 	: response.data.profileCompletion
 			 	})
-			 	
+			 	var userDetails = this.props.userDetails;
+				userDetails.profileCompletion = response.data.profileCompletion;
+
+				mapAction.setUserDetails(userDetails);
 			 })
 			 .catch(error=>{
 			 	Swal.fire("Submit Error!",error.message,'error');
@@ -180,7 +184,7 @@ class Certification extends Component{
     	var candidate_id = this.props.match.params.candidate_id;
     	var skill_id = this.state.IdToDelete;
     	var profileCompletion = this.state.profileCompletion
-
+ 
 			if (this.state.tableData.length==1) {
 				profileCompletion = profileCompletion - 20;
 			}else{

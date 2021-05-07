@@ -182,14 +182,23 @@ class Experience extends Component {
     }
   }
   getData() {
+    var {mapAction} = this.props;
     Axios.get("/api/candidatemaster/get/one/" + this.state.candidate_id)
       .then((response) => {
+        console.log(response.data.profileCompletion)
+        
         this.setState({
           totalExperience : response.data.totalExperience,
           experienceArry: response.data.workExperience,
           profileCompletion: response.data.profileCompletion,
           experienceLevel : response.data.experienceLevel
         });
+
+        var userDetails = this.props.userDetails;
+        userDetails.profileCompletion = response.data.profileCompletion;
+
+        mapAction.setUserDetails(userDetails);
+
       })
       .catch((error) => {
         Swal.fire("Submit Error!", error.message, "error");

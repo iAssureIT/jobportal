@@ -113,14 +113,19 @@ class Academics extends Component{
 
 	//========== User Define Function Start ================
 	getData(){
+		var {mapAction} = this.props;
 		Axios.get("/api/candidatemaster/get/one/"+this.state.candidate_id)
 		.then(response=>{
-			
+				
 			 	this.setState({
 						academics  				: response.data.academics,
-						profileCompletion 	: response.data.profileCompletion
+						profileCompletion 		: response.data.profileCompletion
 			 	})
 			 	
+			 	var userDetails = this.props.userDetails;
+		        userDetails.profileCompletion = response.data.profileCompletion;
+
+		        mapAction.setUserDetails(userDetails);
 			 })
 			 .catch(error=>{
 			 	Swal.fire("Fetch Error!",error.message,'error');
