@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import $ from 'jquery';
 import jQuery from 'jquery';
-import swal from 'sweetalert';
+import Swal           from 'sweetalert2';
 import axios from 'axios';
 import './ResetPassword.css';
 import { connect }        from 'react-redux';
@@ -207,7 +207,7 @@ class ChangePassword extends Component {
                   console.log("token",token);
                   // browserHistory.push("/login"); 
 
-                   swal(" ", "Your Password has been changed");
+                   Swal.fire('', "Your Password has been changed", '');
                     //this.props.history.push('/login');
                    this.logout();
                   }
@@ -216,11 +216,11 @@ class ChangePassword extends Component {
               console.log('error',error)
               })
             }else{
-              swal("Invalid Password","Please Enter valid new password and confirm password");
+              Swal.fire('', "Invalid Password","Please Enter valid new password and confirm password", '');
             }
           }
            else{
-              swal("Same  Password","Old password and New password must be different");
+              Swal.fire('', "Same  Password","Old password and New password must be different", '');
             }  
            
           
@@ -228,14 +228,14 @@ class ChangePassword extends Component {
 
         else{
           console.log("ERROR in Responce");
-          swal("Invalid Old Password","Please Enter correct old password");
+          Swal.fire('', "Invalid Old Password","Please Enter correct old password", '');
 
         }
       })
       .catch(error => {
         if (error.response.status === 401) {
           console.log("ERROR in Responce");
-          swal("Invalid Password","Please Enter correct password");
+          Swal.fire('', "Invalid Password","Please Enter correct password", '');
           this.setState({invalidpassword:true})
         }
       })

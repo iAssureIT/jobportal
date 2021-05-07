@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import swal from 'sweetalert';
+import Swal  					from 'sweetalert2';
 import axios from 'axios';
 import $ from 'jquery';
 import jQuery from 'jquery';
@@ -612,9 +612,10 @@ class IAssureTableUM extends Component {
 					.then((res) => {
 						axios.get('/api/users/get/' + id)
 						.then((res) => {
-							swal({
-								title: " ",
-								text: res.data.firstname+"'s"+" password has been changed successfully!!",
+							Swal.fire({
+								title 				: ' ',
+								html				: res.data.firstname+"'s"+" password has been changed successfully!!",
+								text 				: ''
 							}).then((success) => {
 								if (success) {
 									 window.location.reload();
@@ -629,10 +630,11 @@ class IAssureTableUM extends Component {
 					
 					})
 					.catch((error) => {
-						swal({
-							title: "",
-							text: "Sorry! Something went wrong",
-						});
+						Swal.fire(
+							'',
+							"Sorry! Something went wrong",
+							''
+						);
 						var modalid = "RestpwdModal-" + id;
 						var modal = document.getElementById(modalid);
 						modal.style.display = "none";
@@ -640,14 +642,15 @@ class IAssureTableUM extends Component {
 
 					});
 				} else {
-					swal(" ", "Password should be at least 6 characters long");
+					Swal.fire('', "Password should be at least 6 characters long", '');
 				}
 			} else {
 
-				swal({
-					title: " ",
+				swal(
+					'',
 					text: "Passwords don't match",
-				});
+					''
+				);
 			}
 		} else {
 			this.setState({
@@ -849,7 +852,7 @@ class IAssureTableUM extends Component {
 					this.props.getData(data)
 					checkedUsersList = [];
 					if (this.state.activeswal === true) {
-						swal(" ", "Account activated successfully").then((success) => {
+						Swal.fire('', "Account activated successfully", '').then((success) => {
 							if (success) {
 								//  window.location.reload();
 							}
@@ -965,7 +968,7 @@ class IAssureTableUM extends Component {
 
 						checkedUsersList = [];
 						if (this.state.blockswal === true) {
-							swal(" ", "User removed from user's list successfully");
+							Swal.fire('', "User removed from user's list successfully", '');
 						}
 					})
 				}

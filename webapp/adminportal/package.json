@@ -101,7 +101,7 @@
     "terra-time-input": "^4.29.0",
     "timeago-react": "^3.0.0",
     "to-words": "^2.2.1",
-    "underscore": "^1.9.1",
+    "underscore": "^1.13.1",
     "validator": "^11.0.0",
     "xlsx": "^0.15.5"
   },

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import swal from 'sweetalert';
+import Swal           from 'sweetalert2';
 import $ from "jquery";
 import jQuery from 'jquery';
 import axios from 'axios';
@@ -82,7 +82,7 @@ class ConfirmOtp extends Component {
         .then((response) => {
 
           if (response.data.message == 'SUCCESS') {
-            swal('OTP Verified Successfully.');
+            Swal.fire('', 'OTP Verified Successfully.', '');
              mapAction.setSelectedModal("login");
              
             if (response.data.passwordreset === true) {
@@ -108,11 +108,11 @@ class ConfirmOtp extends Component {
             //================================
             }
           } else {
-            swal('Please enter valid OTP.');
+            Swal.fire('', 'Please enter valid OTP.', '');
           }
         })
         .catch((error) => {
-          swal(error.response.data.message);
+          Swal.fire(error.response.data.message);
         })
     
 
@@ -147,12 +147,12 @@ class ConfirmOtp extends Component {
       .then((notificationres) => {})
       .catch((error) => { console.log('notification error: ', error) })
 
-        swal("We send you a Verification Code to your registered email. Please verify your account.");
+        Swal.fire('', "We send you a Verification Code to your registered email. Please verify your account.", '');
         mapAction.setUserID(response.data.ID);
         mapAction.setSelectedModal("confirmotp");
       })
       .catch((error) => {
-        swal(" Failed to sent OTP");
+        Swal.fire('', "Failed to sent OTP", '');
       })  
   }
  /*resendOtp(event){

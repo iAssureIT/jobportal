@@ -8,7 +8,7 @@ import $ from 'jquery';
 import axios from 'axios';
 import jQuery from 'jquery'; 
 import 'jquery-validation';
-import swal from 'sweetalert';
+import Swal           from 'sweetalert2';
 import { connect }        from 'react-redux';
 import { bindActionCreators } from 'redux';
 import  * as mapActionCreator from '../common/actions/index';
@@ -185,24 +185,32 @@ class Login extends Component {
               });
 
             } else if (response.data.message === "USER_BLOCK") {
-              swal({
-                text: "Your account is not active. Please contact Admin."
-              });
+              Swal.fire(
+                '',
+                "Your account is not active, Please contact Admin.",
+                ''
+              );
               
             } else if (response.data.message === "NOT_REGISTER") {
-              swal({
-                text: "This mobile number is not registered. Please try again."
-              });
+              Swal.fire(
+                '',
+                "This mobile number is not registered, Please try again.",
+                ''
+              );
              
             } else if (response.data.message === "INVALID_PASSWORD") {
-              swal({
-                text: "You have entered wrong password. Please try again."
-              });
+              Swal.fire(
+                '',
+                "You have entered wrong password, Please try again.",
+                ''
+              );
               
             } else if (response.data.message === "USER_UNVERIFIED") {
-              swal({
-                text: "You have not verified your account. Please verify your account"
-              })
+              Swal.fire(
+                '',
+                "You have not verified your account, Please verify your account",
+                ''
+              )
                 .then((value) => { 
                   var formValues = { mobileNo : (this.state.loginusername).replace("-", "") }
                   
@@ -221,21 +229,23 @@ class Login extends Component {
                     .then((notificationres) => {})
                     .catch((error) => { console.log('notification error: ', error) })
                     */
-                      swal("We send you a Verification Code to your registered mobile number. Please verify your account.");
+                      Swal.fire('', "We send you a Verification Code to your registered mobile number. Please verify your account.", '');
                       mapAction.setUserID(response.data.ID);
                       mapAction.setSelectedModal("confirmotp");
                     })
                     .catch((error) => {
-                      swal(" Failed to sent OTP");
+                      Swal.fire('', "Failed to sent OTP", '');
                     })
                 });
             }
           })
           .catch((error) => {
             console.log("error", error);
-            swal({
-              text: "Please enter valid Email ID and Password"
-            })
+            Swal.fire(
+              '',
+              "Please enter valid Email ID and Password",
+              ''
+            )
             this.setState({ btnLoading: false });
             // document.getElementById("logInBtn").value = 'Sign In';
             // if (localStorage !== null) {

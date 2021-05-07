@@ -8,7 +8,7 @@ import 'bootstrap/js/modal.js';
 import 'bootstrap/js/tab.js';
 import 'font-awesome/css/font-awesome.min.css';
 import './SignUp.css';
-import swal from 'sweetalert';
+import Swal           from 'sweetalert2';
 import axios from 'axios';
 import { connect }        from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -247,7 +247,7 @@ class SignUp extends Component {
       statusCTC= true;
     }
     if (this.state.checkTC == false) {
-      swal('Please accept Term and Conditions');
+      Swal.fire('', 'Please accept Term and Conditions', '');
       statusCTC =false;
     }
   
@@ -295,7 +295,7 @@ class SignUp extends Component {
 				.then((response) => {
 					console.log("signup res===",response.data)
 					if(response.data.message == 'USER_CREATED'){
-						swal('Great, Information submitted successfully and OTP is sent to your registered Email.');
+						Swal.fire('', 'Information submitted successfully and OTP is sent to your registered Email', '');
 						localStorage.setItem('previousUrl' ,'signup');
 
             var {mapAction} = this.props;
@@ -317,7 +317,7 @@ class SignUp extends Component {
             */
 						//this.props.history.push("/confirm-otp/" + response.data.ID);
 					}else{
-						swal(response.data.message);
+						Swal.fire(response.data.message);
 					}	
 				})
 				.catch((error) => {

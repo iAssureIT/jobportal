@@ -5,7 +5,6 @@ import Axios 			   from 'axios';
 import Swal 			   from 'sweetalert2';
 import $ from 'jquery';
 import axios from 'axios';
-import swal from 'sweetalert';
 import { connect }        	from 'react-redux';
 import { bindActionCreators } from 'redux';
 import  * as mapActionCreator from '../../common/actions/index';
@@ -208,15 +207,19 @@ class Certification extends Component{
 					//this.props.history.push('/' + this.state.pathname + '/statutory-details/' + entityID);
 					//this.statutoryDetails();
 					this.getData();
-           			Swal.fire({
-	                    text : "Statutory deleted successfully.",
+           			Swal.fire(
+           				'',
+	                    "Statutory deleted successfully.",
+	                    ''
 	                    // text : (this.state.entityType === "appCompany" ? "Organizational Settings" :this.state.entityType) +" is deleted successfully.",
-					  });
+					  );
 					  $(".swal-text").css("text-transform", "capitalize");
            		}	else{
-           			Swal.fire({
-	                    text : "Sorry,Failed to delete.",
-	                  });
+           			Swal.fire(
+           				'',
+	                    "Sorry,Failed to delete.",
+	                    ''
+	                  );
            		}
            		$('#deleteEntityModal').hide();
             })
