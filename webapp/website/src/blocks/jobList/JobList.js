@@ -4,6 +4,7 @@ import Swal  from  'sweetalert2';
 import Moment 					from "moment";
 import "./JobList.css";
 import '../../App.css';
+import { withRouter }     from 'react-router-dom';
 import { connect }        from 'react-redux';
 import { bindActionCreators } from 'redux';
 import  * as mapActionCreator from '../../common/actions/index';
@@ -124,7 +125,9 @@ applyJob = (jobid, company_id, total,  male, female, other, district, jobDistric
 	console.log("jobid :", jobid);
 	
 	if (this.props.userDetails.loggedIn) {
-	var formValues = { 
+
+		if (this.props.userDetails.profileCompletion == 100) {
+			var formValues = { 
 						candidate_id   		: this.props.userDetails.candidate_id,
 						job_id         		: jobid,
 					    entity_id    		: company_id,
@@ -139,22 +142,22 @@ applyJob = (jobid, company_id, total,  male, female, other, district, jobDistric
 					    exp0to2 			: exp0to2,
 					    exp2to6 			: exp2to6,
 					    exp6to10 			: exp6to10
-	}
-	console.log(formValues)
-	Swal.fire({
-		title 				: ' ',
-		html 				: 'Are you sure<br />you want to apply for this job?',
-		text 				: '',
-		showCloseButton		: true,
-		showCancelButton 	: true,
-		confirmButtonText 	: 'Yes',
-		cancelButtonText 	: 'NO',
-		confirmButtonColor  : '#f5a721',
-		reverseButtons		: true
-	
-	}).then((result) =>{
-		console.log("result", result.value)
-		if(result.value){
+			}
+			console.log(formValues)
+			Swal.fire({
+				title 				: ' ',
+				html 				: 'Are you sure<br />you want to apply for this job?',
+				text 				: '',
+				showCloseButton		: true,
+				showCancelButton 	: true,
+				confirmButtonText 	: 'Yes',
+				cancelButtonText 	: 'NO',
+				confirmButtonColor  : '#f5a721',
+				reverseButtons		: true
+			
+			}).then((result) =>{
+			console.log("result", result.value)
+			if(result.value){
 			Axios.post("/api/applyJob/post", formValues)
 				.then(response =>{
 					
@@ -192,6 +195,19 @@ applyJob = (jobid, company_id, total,  male, female, other, district, jobDistric
 					// )
 				}
 			})
+		}else{
+			Swal.fire(
+						'',
+						'Please complete your profile',
+						''
+				).then((result) =>{
+				console.log("result", result.value)
+				if(result.value){
+					this.props.history.push("/basic-info")
+				}
+			})
+		}
+			
 
 	}else{
 		document.getElementById("loginbtndiv").click();
@@ -446,4 +462,5 @@ const mapStateToProps = (state)=>{
 const mapDispatchToProps = (dispatch) => ({
   mapAction :  bindActionCreators(mapActionCreator, dispatch)
 }) 
-export default connect(mapStateToProps, mapDispatchToProps) (Joblist);
+export default connect(mapStateToProps, mapDispatchToProps) (withRouter(Joblist));
+

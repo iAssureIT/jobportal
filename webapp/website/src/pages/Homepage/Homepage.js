@@ -296,8 +296,8 @@ class HomePage extends Component {
     mapAction.jobCount(selector);
   }
   render() {
-    console.log(this.props.viewMode) 
-    console.log(this.props.match.params) 
+    //console.log(this.props.viewMode) 
+    //console.log(this.props.match.params) 
     return (
       <div className="ViewBodyWrapper container-fluid">
 

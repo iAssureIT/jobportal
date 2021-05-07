@@ -14,7 +14,7 @@ import ChangePassword           from '../../systemSecurity/ChangePassword.js'
 import {connect}                from 'react-redux';
 import { bindActionCreators }   from 'redux';
 import  * as mapActionCreator   from '../../common/actions/index';
-
+import { withRouter }     from 'react-router-dom';
 
 class Header extends Component{
   constructor(props){
@@ -252,7 +252,8 @@ class Header extends Component{
 
 
     render(){
-    // console.log(window.location.pathname.split("/"))
+      console.log(this.props.match)
+    //console.log(window.location.pathname.split("/"))
     // console.log(window.location.pathname.split("/")[6])
     const selectedState = this.props.selectedState;
     
@@ -538,7 +539,7 @@ class Header extends Component{
               { window.location.pathname.split("/")[4] != "all" && window.location.pathname.split("/")[6] != "all" ? 
               <li className="breadCrumbInnerli selectedState">
               <a href={"/country/"+window.location.pathname.split("/")[2]+"/state/"+window.location.pathname.split("/")[4]+"/city/"+window.location.pathname.split("/")[6]+"/industry/"+window.location.pathname.split("/")[8]+"/"+window.location.pathname.split("/")[9]+"/function/"+window.location.pathname.split("/")[11]+"/"+window.location.pathname.split("/")[12]+"/subfunction/" +window.location.pathname.split("/")[14]+"/"+window.location.pathname.split("/")[15]}>{window.location.pathname.split("/")[6] }</a>
-              </li>  : null } 
+              </li>  : null }
 
           </ul>
           </div>
@@ -557,23 +558,23 @@ class Header extends Component{
               <div className="rightFunctionHeader1 col-lg-12 pull-right">
                 <div className="rightFunctionHeader1CityJobs">
                 {
-                 window.location.pathname.split("/")[0] == "" && window.location.pathname.split("/")[1] != "state"  ?
+                 window.location.pathname.split("/")[0] == "" && window.location.pathname.split("/")[3] != "state"  ?
                   <div className="cityNameHeader">{"India"}
                   </div> 
                  : null 
                 }
                 {
-                 window.location.pathname.split("/")[1] == "state" && !window.location.pathname.split("/")[3] ?
+                 window.location.pathname.split("/")[3] == "state" && window.location.pathname.split("/")[6]=="all" ?
                   <div className="cityNameHeader">{selectedState && selectedState != "" ? selectedState : "India"}
                   </div> 
                  : null 
                 }
                 {
-                 window.location.pathname.split("/")[1] == "state" && window.location.pathname.split("/")[3] ?
-                  <div className="cityNameHeader">{window.location.pathname.split("/")[3]}
+                 window.location.pathname.split("/")[3] == "state" && window.location.pathname.split("/")[6]!="all" ?
+                  <div className="cityNameHeader">{window.location.pathname.split("/")[6]}
                   </div> 
                  : null 
-                }    
+                }     
 
                 <div className="cityJobsHeader">{this.props.jobCount ? this.props.jobCount : 0}
                 </div>              
@@ -701,4 +702,5 @@ const mapStateToProps = (state)=>{
 const mapDispatchToProps = (dispatch) => ({
   mapAction :  bindActionCreators(mapActionCreator, dispatch)
 }) 
-export default connect(mapStateToProps,mapDispatchToProps) (Header);
+export default connect(mapStateToProps,mapDispatchToProps) ((Header) );
+
