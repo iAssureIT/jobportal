@@ -65,7 +65,7 @@ class BasicInfoForm extends Component{
                 });
 		})
 		.catch(error=>{
-			Swal.fire("Error while getting List data",error.message,'error');
+			Swal.fire('', "Error while getting List data", '');
 		})
 
 		Axios.get("/api/candidatemaster/get/one/"+this.state.candidate_id)
@@ -102,7 +102,7 @@ class BasicInfoForm extends Component{
 			 	})
 			 })
 			 .catch(error=>{
-			 	Swal.fire("Submit Error!",error.message,'error');
+			 	Swal.fire('', "Submit Error!", '');
 			 })
 }
 
@@ -126,17 +126,17 @@ class BasicInfoForm extends Component{
           var ext = fileName.split('.').pop();
           if (ext === "jpg" || ext === "png" || ext === "jpeg" || ext === "JPG" || ext === "PNG" || ext === "JPEG") {
             if(fileSize > 1048576){
-              Swal.fire("Allowed file size is 1MB");
+              Swal.fire('', "Allowed file size is 1MB", '');
             }else{
               if (file) {
                 var objTitle = { fileInfo: file }
                 profilePicture.push(objTitle);
               } else {
-                Swal.fire("Images not uploaded");
+                Swal.fire('', "Images not uploaded", '');
               }//file
             }
           } else {
-            Swal.fire("Allowed images formats are (jpg,png,jpeg)");
+            Swal.fire('', "Allowed images formats are (jpg,png,jpeg)", '');
             this.setState({
               gotProfileImage:false
             })
@@ -219,17 +219,17 @@ class BasicInfoForm extends Component{
           var ext = fileName.split('.').pop();
           if (ext === "pdf" || ext === "docx" || ext === "doc" ) {
             if(fileSize > 1048576){
-              Swal.fire("Allowed file size is 1MB");
+              Swal.fire('', "Allowed file size is 1MB", '');
             }else{
               if (file) {
                 var objTitle = { fileInfo: file }
                 resume.push(objTitle);
               } else {
-                Swal.fire("Resume is not uploaded");
+                Swal.fire('', "Resume is not uploaded", '');
               }//file
             }
           } else {
-            Swal.fire("Allowed document format is (doc, docx, pdf)");
+            Swal.fire('', "Allowed document format is (doc, docx, pdf)", '');
             
           }//file types
         }
@@ -428,7 +428,7 @@ class BasicInfoForm extends Component{
 				//console.log(userDetails)
 				mapAction.setUserDetails(userDetails);
 
-						Swal.fire("Congrats","Your basic details is inserted successfully","success");
+						Swal.fire('', "Your basic details is inserted successfully", '');
 							this.setState({
 											firstName          : "",
 											middleName         : "",
@@ -456,7 +456,7 @@ class BasicInfoForm extends Component{
 							
 				})
 				.catch(error =>{
-					Swal.fire("Submit Error!",error.message,'error');
+					Swal.fire('', "Submit Error!", '');
 				});
 			}
 		

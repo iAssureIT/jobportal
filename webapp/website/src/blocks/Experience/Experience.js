@@ -64,14 +64,14 @@ class Experience extends Component {
         this.setState({ industrylist: response.data });
       })
       .catch((error) => {
-        Swal.fire("Error while getting List data", error.message, "error");
+        Swal.fire('', "Error while getting List data", '');
       });
     Axios.get("/api/entitymaster/get/corporate")
       .then((response) => {
         this.setState({ companylist: response.data });
       })
       .catch((error) => {
-        Swal.fire("Error while getting List data", error.message, "error");
+        Swal.fire('', "Error while getting List data", '');
       });
     Axios.get("/api/states/get/list/IN")
       .then((response) => {
@@ -177,7 +177,7 @@ class Experience extends Component {
           });
         })
         .catch((error) => {
-          Swal.fire("Submit Error!", error.message, "error");
+          Swal.fire('', "Submit Error!", '');
         });
     }
   }
@@ -201,7 +201,7 @@ class Experience extends Component {
 
       })
       .catch((error) => {
-        Swal.fire("Submit Error!", error.message, "error");
+        Swal.fire('', "Submit Error!", '');
       });
   }
   deleteDate(event) {
@@ -210,13 +210,16 @@ class Experience extends Component {
     var {mapAction} = this.props;
 
     Swal.fire({
-      title: "Are you sure? you want to delete this Experience Details!!!",
-      text: "You will not be able to recover this Experience Details",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonText: "Yes, delete it!",
-      cancelButtonColor: "No, keep it",
-      confirmButtonColor: "#d33",
+      title               : ' ',
+      html                : 'Are you sure<br />you want to delete this experience details?',
+      text                : '',
+      icon                : 'warning',
+      showCloseButton     : true,
+      showCancelButton    : true,
+      confirmButtonText   : 'YES',
+      cancelButtonText    : 'NO',
+      confirmButtonColor  : '#d33',
+      reverseButtons      : true
     }).then((result) => {
       if (result.value) {
         if (data_id) {
@@ -242,9 +245,9 @@ class Experience extends Component {
                 mapAction.setUserDetails(userDetails);
 
                 Swal.fire(
-                  "Deleted!",
+                  '',
                   "Experience Details has been deleted successfully!",
-                  "success"
+                  ''
                 );
                 this.getData();
                 this.props.history.push(
@@ -254,14 +257,14 @@ class Experience extends Component {
             })
             .catch((error) => {
               Swal.fire(
+                '',
                 "Some problem occured deleting Experience Details!",
-                error.message,
-                "error"
+                ''
               );
             });
         }
       } else if (result.dismiss === Swal.DismissReason.cancel) {
-        Swal.fire("Cancelled", "Your Experience details is safe :)", "error");
+        /*Swal.fire('', "Your Experience details is safe", '');*/
       }
     });
   }
@@ -328,9 +331,9 @@ class Experience extends Component {
         .then((response) => {
           this.getData();
           Swal.fire(
-            "Congrats",
+            '',
             "Your Experience Details is update Successfully",
-            "success"
+            ''
           );
           this.setState({
             industry_id: "",
@@ -360,7 +363,7 @@ class Experience extends Component {
           this.props.history.push("/experience/" + this.state.candidate_id);
         })
         .catch((error) => {
-          Swal.fire("Submit Error!", error.message, "error");
+          Swal.fire('', "Submit Error!", '');
         });
     }
   }
@@ -380,9 +383,9 @@ class Experience extends Component {
 
           this.getData();
           Swal.fire(
-            "Congrats",
+            '',
             "Your experience details is inserted Successfully",
-            "success"
+            ''
           );
           this.setState({
             industry_id: "",
@@ -410,7 +413,7 @@ class Experience extends Component {
           });
         })
         .catch((error) => {
-          Swal.fire("Submit Error!", error.message, "error");
+          Swal.fire('', "Submit Error!", '');
         });
     }
   }
@@ -509,11 +512,11 @@ class Experience extends Component {
               userDetails.profileCompletion = profileCompletion;
 
               mapAction.setUserDetails(userDetails);
-              Swal.fire("Congrats","Your experience details is saved","success");
+              Swal.fire('', "Your experience details is saved", '');
               this.props.history.push("/profile/" + this.state.candidate_id);
             })
             .catch(error =>{
-              Swal.fire("Submit Error!",error.message,'error');
+              Swal.fire('', "Submit Error!", '');
             });
     }else{
       this.props.history.push("/profile/" + this.state.candidate_id);

@@ -65,7 +65,7 @@ class LeftAside extends Component{
 				})
 			})
 			.catch(error=>{
-			 	Swal.fire("Submit Error!",error.message,'error');
+			 	Swal.fire('', "Submit Error!", '');
 			})
 
 		}

@@ -111,7 +111,7 @@ search = (event)=>{
 				this.setState({jobList : response.data.jobList });
 			})
 			.catch(error=>{
-				Swal.fire("Error while getting List data", error.message, 'error');
+				Swal.fire('', "Error while getting List data", '');
 			});
 	}else{
 		this.getJobsData();
@@ -222,7 +222,7 @@ removeApplication = (job_id, male, female, other, state, stateCode, country,coun
 		showCloseButton		: true,
 		showCancelButton 	: true,
 		confirmButtonText 	: 'Yes',
-		cancelButtonColor 	: 'No',
+		cancelButtonText 	: 'NO',
 		confirmButtonColor  : '#db3700',
 		reverseButtons		: true
 	

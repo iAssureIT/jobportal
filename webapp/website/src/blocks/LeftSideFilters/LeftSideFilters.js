@@ -120,7 +120,7 @@ class LeftSideFilters extends Component{
             
       })
       .catch(error=>{
-        Swal.fire("Error while getting  industries",error.message,'error');
+        Swal.fire('', "Error while getting industries", '');
       })
 
 
@@ -134,7 +134,7 @@ class LeftSideFilters extends Component{
           this.setState({allFunctionalAreas:allFunctionalAreas})
       })
       .catch(error=>{
-        Swal.fire("Error while getting functional areas",error.message,'error');
+        Swal.fire('', "Error while getting functional areas", '');
       })
 
       Axios.get("/api/jobsectormaster/get/list")
@@ -146,7 +146,7 @@ class LeftSideFilters extends Component{
         this.setState({allSectors:allSectors})
       })
       .catch(error=>{
-        Swal.fire("Error while getting job sectors",error.message,'error');
+        Swal.fire('', "Error while getting job sectors", '');
       })
 
       Axios.get("/api/jobtypemaster/get/list")
@@ -158,7 +158,7 @@ class LeftSideFilters extends Component{
         this.setState({allJobTypes:allJobTypes})
       })
       .catch(error=>{
-        Swal.fire("Error while getting job type",error.message,'error');
+        Swal.fire('', "Error while getting job type", '');
       })
       
       Axios.get("/api/jobtimemaster/get/list")
@@ -170,7 +170,7 @@ class LeftSideFilters extends Component{
         this.setState({allJobTime:allJobTime})
       })
       .catch(error=>{
-        Swal.fire("Error while getting job time",error.message,'error');
+        Swal.fire('', "Error while getting job time", '');
       })
 
       Axios.get("/api/jobshiftmaster/get/list")
@@ -182,7 +182,7 @@ class LeftSideFilters extends Component{
         this.setState({allJobShift:allJobShift})
       })
       .catch(error=>{
-        Swal.fire("Error while getting job shift",error.message,'error');
+        Swal.fire('', "Error while getting job shift", '');
       })
 
       Axios.get("/api/jobrolemaster/get/list")
@@ -194,7 +194,7 @@ class LeftSideFilters extends Component{
         this.setState({allRoles:allRoles})
       })
       .catch(error=>{
-        Swal.fire("Error while getting job roles",error.message,'error');
+        Swal.fire('', "Error while getting job roles", '');
       })
 
       Axios.get("/api/skillmaster/get/list")
@@ -205,7 +205,7 @@ class LeftSideFilters extends Component{
         this.setState({allSkills:allSkills})
       })
       .catch(error=>{
-        Swal.fire("Error while getting skill",error.message,'error');
+        Swal.fire('', "Error while getting skill", '');
       })
       
       Axios.get("/api/qualificationmaster/get/list")
@@ -216,7 +216,7 @@ class LeftSideFilters extends Component{
         this.setState({allQualifications:allQualifications})
       })
       .catch(error=>{
-        Swal.fire("Error while getting skill",error.message,'error');
+        Swal.fire('', "Error while getting skill", '');
       })
       
   }

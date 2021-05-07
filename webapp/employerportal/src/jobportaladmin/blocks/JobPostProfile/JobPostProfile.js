@@ -153,7 +153,7 @@ export default class JobPostProfile extends Component{
 					preferredSkillTags  :   preferredSkillTags
                 })
 			})
-        .catch(error=>{	Swal.fire("Some Error Occured during data fetch",error.message,'error'); })
+        .catch(error=>{	Swal.fire('', "Some Error Occured during data fetch", ''); })
 		   	
 	}	
 	

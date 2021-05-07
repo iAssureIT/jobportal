@@ -69,7 +69,7 @@ class Academics extends Component{
 				this.setState({qualificationLevellist : response.data});
 			})
 			.catch(error=>{
-				Swal.fire("Error while getting List data",error.message,'error');
+				Swal.fire('', "Error while getting List data", '');
 			})
 
 		Axios.get("/api/qualificationmaster/get/list")
@@ -79,7 +79,7 @@ class Academics extends Component{
 				});
 			})
 			.catch(error=>{
-				Swal.fire("Error while getting List data",error.message,'error');
+				Swal.fire('', "Error while getting List data", '');
 			})	
 		Axios.get("/api/universitymaster/get/list")
 			.then(response => {
@@ -95,7 +95,7 @@ class Academics extends Component{
 				this.setState({inputCollege : response.data});
 			})
 			.catch(error=>{
-				Swal.fire("Error while getting List data",error.message,'error');
+				Swal.fire('', "Error while getting List data", '');
 			})	
 		Axios.get("/api/states/get/list/IN")
 			.then((response) => {
@@ -128,7 +128,7 @@ class Academics extends Component{
 		        mapAction.setUserDetails(userDetails);
 			 })
 			 .catch(error=>{
-			 	Swal.fire("Fetch Error!",error.message,'error');
+			 	Swal.fire('', "Fetch Error!", '');
 			 })
 	}
 	camelCase(str) {
@@ -183,7 +183,7 @@ class Academics extends Component{
 			 	
 			 })
 			 .catch(error=>{
-			 	Swal.fire("edit Error!",error.message,'error');
+			 	Swal.fire('', "edit Error!",'');
 			 })
 		}
 	}
@@ -193,13 +193,16 @@ class Academics extends Component{
 		var {mapAction} = this.props;
 
 		Swal.fire({
-		title : 'Are you sure? you want to delete this Academics details!!!',
-		text : 'You will not be able to recover this Academics details',
-		icon : 'warning',
-		showCancelButton : true,
-		confirmButtonText : 'Yes, delete it!',
-		cancelButtonColor : 'No, keep it',
-		confirmButtonColor : '#d33',
+		title 				: ' ',
+		html				: 'Are you sure<br />you want to delete this Academics details?',
+		text 				: '',
+		icon 				: 'warning',
+		showCloseButton		: true,
+		showCancelButton 	: true,
+		confirmButtonText 	: 'YES',
+		cancelButtonText 	: 'NO',
+		confirmButtonColor 	: '#d33',
+		reverseButtons		: true
 	
 	  }).then((result) =>{
 		if(result.value){
@@ -222,9 +225,9 @@ class Academics extends Component{
 						mapAction.setUserDetails(userDetails);
 
 						Swal.fire(
-									'Deleted!',
+									'',
 									'Academics details has been deleted successfully!',
-									'success'
+									''
 							);
 						this.getData();
 					}
@@ -232,20 +235,20 @@ class Academics extends Component{
 				.catch(error=>{
 					
 					Swal.fire(
+								'',
 								"Some problem occured deleting Academics details!",
-								error.message,
-								'error'
+								''
 						)
 				})
 			}
 				
 				}else if (result.dismiss === Swal.DismissReason.cancel){
 					
-					Swal.fire(
-						'Cancelled',
+					/*Swal.fire(
+						'',
 						'Your Academics details is safe :)',
-						'error'
-					)
+						''
+					)*/
 				}
 			})
 	  this.getData();
@@ -409,7 +412,7 @@ class Academics extends Component{
 		if(status===true){
 			Axios.patch("/api/candidatemaster/patch/updateOneCandidateAcademics",formValues)
 				 .then(response=>{
-							Swal.fire("Congrats","Your Academics details update Successfully","success");
+							Swal.fire('' ,"Your Academics details update Successfully", '');
 								this.setState({
 												qualificationLevel  : "",
 												qualification       : "",
@@ -430,7 +433,7 @@ class Academics extends Component{
 							window.location.reload(false);
 					})
 					.catch(error =>{
-						Swal.fire("Submit Error!",error.message,'error');
+						Swal.fire('', "Submit Error!", '');
 					});
 				}
 
@@ -448,7 +451,7 @@ class Academics extends Component{
 
 					mapAction.setUserDetails(userDetails);
 
-					Swal.fire("Congrats","Your Academics details insert Successfully","success");
+					Swal.fire('' ,"Your Academics details insert Successfully", '');
 						this.setState({
 										
 											qualificationLevel  : "",
@@ -470,7 +473,7 @@ class Academics extends Component{
 							
 				})
 				.catch(error =>{
-					Swal.fire("Submit Error!",error.message,'error');
+					Swal.fire('', "Submit Error!", '');
 				});
 			}
 	}

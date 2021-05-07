@@ -54,7 +54,7 @@ class Address extends Component{
 				this.setState({inputAddressType : response.data});
 			})
 			.catch(error=>{
-				Swal.fire("Error while getting List data",error.message,'error');
+				Swal.fire('', "Error while getting List data", '');
 			})
 		Axios.get("/api/states/get/list/IN")
 			.then((response) => {
@@ -84,7 +84,7 @@ class Address extends Component{
 		        mapAction.setUserDetails(userDetails);
 			 })
 			 .catch(error=>{
-			 	Swal.fire("Submit Error!",error.message,'error');
+			 	Swal.fire('', "Submit Error!", '');
 			 })
 	}
 	camelCase(str) {
@@ -136,7 +136,7 @@ class Address extends Component{
 			 	
 			 })
 			 .catch(error=>{
-			 	Swal.fire("Submit Error!",error.message,'error');
+			 	Swal.fire('', "Submit Error!", '');
 			 })
 		}
 	}
@@ -147,13 +147,16 @@ class Address extends Component{
 
 		console.log(this.state.addressArry.length)
 		Swal.fire({
-		title : 'Are you sure, do you want to delete this address details!!!',
-		text : 'You will not be able to recover this Address details',
-		icon : 'warning',
-		showCancelButton : true,
-		confirmButtonText : 'Yes, delete it!',
-		cancelButtonColor : 'No, keep it',
-		confirmButtonColor : '#d33',
+		title 				: ' ',
+		html				: 'Are you sure<br />you want to delete this address details?',
+		text 				: '',
+		icon 				: 'warning',
+		showCloseButton		: true,
+		showCancelButton 	: true,
+		confirmButtonText 	: 'YES',
+		cancelButtonText 	: 'NO',
+		confirmButtonColor 	: '#d33',
+		reverseButtons		: true
 	
 	  }).then((result) =>{
 		if(result.value){
@@ -176,9 +179,9 @@ class Address extends Component{
 						mapAction.setUserDetails(userDetails);
 
 						Swal.fire(
-									'Deleted!',
+									'',
 									'Address details has been deleted successfully!',
-									'success'
+									''
 							);
 						this.getData();
 					}
@@ -186,20 +189,20 @@ class Address extends Component{
 				.catch(error=>{
 					
 					Swal.fire(
+								'',
 								"Some problem occured deleting Address details!",
-								error.message,
-								'error'
+								''
 						)
 				})
 			}
 				
 				}else if (result.dismiss === Swal.DismissReason.cancel){
 					
-					Swal.fire(
-						'Cancelled',
+					/*Swal.fire(
+						'',
 						'Your Address details is safe :)',
-						'error'
-					)
+						''
+					)*/
 				}
 			})
 	  this.getData();
@@ -264,7 +267,7 @@ class Address extends Component{
 				 Axios.patch("/api/candidatemaster/patch/updateOneCandidateAddress",formValues)
 				 .then(response=>{
 
-							Swal.fire("Congrats","Your Address details update Successfully","success");
+							Swal.fire('', "Your Address details update Successfully", '');
 								this.setState({
 												addressType        : "",
 												pincodeExists 	   : true,
@@ -286,7 +289,7 @@ class Address extends Component{
 							
 					})
 					.catch(error =>{
-						Swal.fire("Submit Error!",error.message,'error');
+						Swal.fire('', "Submit Error!", '');
 					});
 				}
 
@@ -305,7 +308,7 @@ class Address extends Component{
 
 					mapAction.setUserDetails(userDetails);
 
-					Swal.fire("Congrats","Your Address details is insert Successfully","success");
+					Swal.fire('', "Your Address details is insert Successfully", '');
 						this.setState({
 										addressType        : "",
 										pincodeExists 	   : true,
@@ -322,7 +325,7 @@ class Address extends Component{
 						this.getData();
 					})
 					.catch(error =>{
-						Swal.fire("Submit Error!",error.message,'error');
+						Swal.fire('', "Submit Error!", '');
 					});
 				}
 

@@ -3,7 +3,7 @@ import { FontAwesomeIcon }  from '@fortawesome/react-fontawesome';
 import $      from 'jquery';
 import jQuery from 'jquery';
 import axios  from 'axios';
-import swal   from 'sweetalert';
+import Swal           from 'sweetalert2';
 import '../header/Header.css';
 import LoginForm                from '../../systemSecurity/Login.js';
 import SignUp                   from '../../systemSecurity/SignUp.js';
@@ -61,7 +61,7 @@ class Header extends Component{
                     .catch((error) => { console.log('notification error: ', error) })
                      
                    
-                    swal("OTP send to your registered email ID.");
+                    Swal.fire('', "OTP send to your registered email ID.", '');
                     //this.props.history.push('/confirm-otp/'+response.data.ID);optEmail is not defined
                     
                      
@@ -74,7 +74,7 @@ class Header extends Component{
             })
             .catch((error)=>{
                 //document.getElementById("sendlink").innerHTML = 'Reset Password';
-                swal("error.....");
+                Swal.fire('', "error.....", '');
                 $('.fullpageloader').hide();
             })
         
