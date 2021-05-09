@@ -8,6 +8,7 @@ import 'font-awesome/css/font-awesome.min.css';
 
 // Section: 1 - SystemSecurity ******************************************************
 import Login from './jobportaladmin/systemSecurity/Login.js';
+import Invoice from './jobportaladmin/systemSecurity/invoice.js';
 import ConfirmOtp from './jobportaladmin/systemSecurity/ConfirmOtp1.js';
 import ForgotPassword from './jobportaladmin/systemSecurity/ForgotPassword.js';
 import ResetPassword from './jobportaladmin/systemSecurity/ResetPassword.js';
@@ -118,6 +119,7 @@ class Layout extends Component  {
                                                         <Route path="/candidate-profile/:candidate_id"  component={CandidateProfile} exact />
                                                         <Route path="/change-pwd/:user_ID"              exact strict component={ChangePassword} />
                                                         <Route path="/confirm-otp/:userID"              exact strict component={ConfirmOtp} />
+                                                        <Route path="/invoice"                          exact strict component={Invoice} />
                                                     </Switch>
                                                 </div>
                                             </div>
