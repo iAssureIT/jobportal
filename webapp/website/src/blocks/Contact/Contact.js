@@ -34,7 +34,7 @@ class Contact extends Component{
 			 	})
 			 })
 			 .catch(error=>{
-			 	Swal.fire("Submit Error!",error.message,'error');
+			 	Swal.fire('', "Submit Error!", '');
 			 })
 
 }
@@ -70,7 +70,7 @@ class Contact extends Component{
 				Axios.patch("/api/candidatemaster/patch/updateCandidateContact",formValues)
 			 .then(response=>{
 
-						Swal.fire("Congrats","Your Profile is update Successfully","success");
+						Swal.fire('', "Your Profile is update Successfully", '');
 							this.setState({
 
 											mobile        : "",
@@ -84,7 +84,7 @@ class Contact extends Component{
 							
 				})
 				.catch(error =>{
-					Swal.fire("Submit Error!",error.message,'error');
+					Swal.fire('', "Submit Error!", '');
 				});
 			}
 	}

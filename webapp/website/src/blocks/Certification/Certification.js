@@ -5,7 +5,6 @@ import Axios 			   from 'axios';
 import Swal 			   from 'sweetalert2';
 import $ from 'jquery';
 import axios from 'axios';
-import swal from 'sweetalert';
 import { connect }        	from 'react-redux';
 import { bindActionCreators } from 'redux';
 import  * as mapActionCreator from '../../common/actions/index';
@@ -99,7 +98,7 @@ class Certification extends Component{
 				this.setState({skillslist : response.data});
 			})
 			.catch(error=>{
-				Swal.fire("Error while getting List data",error.message,'error');
+				Swal.fire('', "Error while getting List data", '');
 			})
 		
 		if(this.props.match.params.certificationID){
@@ -127,6 +126,7 @@ class Certification extends Component{
     } 
 	
 	getData(){
+		var {mapAction} = this.props;
 		Axios.get("/api/candidatemaster/get/one/"+this.state.candidate_id)
 		.then(response=>{
 				this.setState({
@@ -134,10 +134,13 @@ class Certification extends Component{
 						certificationArry : response.data.certifications,
 						profileCompletion 	: response.data.profileCompletion
 			 	})
-			 	
+			 	var userDetails = this.props.userDetails;
+				userDetails.profileCompletion = response.data.profileCompletion;
+
+				mapAction.setUserDetails(userDetails);
 			 })
 			 .catch(error=>{
-			 	Swal.fire("Submit Error!",error.message,'error');
+			 	Swal.fire('', "Submit Error!", '');
 			 })
 		var formValues = {candidate_id : this.state.candidate_id}		 
 		Axios.post("/api/candidatemaster/get/getCandidateSkills", formValues)
@@ -165,7 +168,7 @@ class Certification extends Component{
 	            });
 			 })
 			 .catch(error=>{
-			 	Swal.fire("Submit Error!",error.message,'error');
+			 	Swal.fire('', "Submit Error!", '');
 			 })		 
 	}
 	deleteEntity(event){
@@ -180,7 +183,7 @@ class Certification extends Component{
     	var candidate_id = this.props.match.params.candidate_id;
     	var skill_id = this.state.IdToDelete;
     	var profileCompletion = this.state.profileCompletion
-
+ 
 			if (this.state.tableData.length==1) {
 				profileCompletion = profileCompletion - 20;
 			}else{
@@ -204,15 +207,19 @@ class Certification extends Component{
 					//this.props.history.push('/' + this.state.pathname + '/statutory-details/' + entityID);
 					//this.statutoryDetails();
 					this.getData();
-           			swal({
-	                    text : "Statutory deleted successfully.",
+           			Swal.fire(
+           				'',
+	                    "Statutory deleted successfully.",
+	                    ''
 	                    // text : (this.state.entityType === "appCompany" ? "Organizational Settings" :this.state.entityType) +" is deleted successfully.",
-					  });
+					  );
 					  $(".swal-text").css("text-transform", "capitalize");
            		}	else{
-           			swal({
-	                    text : "Sorry,Failed to delete.",
-	                  });
+           			Swal.fire(
+           				'',
+	                    "Sorry,Failed to delete.",
+	                    ''
+	                  );
            		}
            		$('#deleteEntityModal').hide();
             })
@@ -251,7 +258,7 @@ class Certification extends Component{
 				 	
 				 })
 				 .catch(error=>{
-				 	Swal.fire("Submit Error!",error.message,'error');
+				 	Swal.fire('', "Submit Error!", '');
 				 })
 			}
 		
@@ -261,13 +268,16 @@ class Certification extends Component{
 		var data_id =  event.currentTarget.id;
 		
 		Swal.fire({
-		title : 'Are you sure? you want to delete this Certification Details!!!',
-		text : 'You will not be able to recover this Certification Details',
-		icon : 'warning',
-		showCancelButton : true,
-		confirmButtonText : 'Yes, delete it!',
-		cancelButtonColor : 'No, keep it',
-		confirmButtonColor : '#d33',
+		title 				: ' ',
+		html				: 'Are you sure<br />you want to delete this certification details?',
+		text 				: '',
+		icon 				: 'warning',
+		showCloseButton		: true,
+		showCancelButton 	: true,
+		confirmButtonText 	: 'YES',
+		cancelButtonText 	: 'NO',
+		confirmButtonColor 	: '#d33',
+		reverseButtons		: true
 	
 	  }).then((result) =>{
 		if(result.value){
@@ -277,9 +287,9 @@ class Certification extends Component{
 							if(response.data.deleted===true){
 
 							Swal.fire(
-										'Deleted!',
-										'Certification Details has been deleted successfully!',
-										'success'
+										'',
+										"Certification details has been deleted successfully!",
+										''
 								);
 							this.getData();
 						}
@@ -287,19 +297,19 @@ class Certification extends Component{
 				.catch(error=>{
 						
 						Swal.fire(
-									"Some problem occured deleting Certification Details!",
-									error.message,
-									'error'
+									'',
+									"Some problem occured while deleting certification details!",
+									''
 							)
 				})
 			}
 					
 		}else if (result.dismiss === Swal.DismissReason.cancel){
-				Swal.fire(
+				/*Swal.fire(
 					'Cancelled',
-					'Your Certification details is safe :)',
+					'Your certification details is safe :)',
 					'error'
-				)
+				)*/
 			}
 		})
 		  
@@ -413,7 +423,7 @@ class Certification extends Component{
 				Axios.patch("/api/candidatemaster/patch/updateOneCandidateCertification",formValues)
 				 .then(response=>{
 
-									Swal.fire("Congrats","Your Certification Details is update Successfully","success");
+									Swal.fire('', "Your Certification Details is update Successfully", '');
 										this.setState({
 													certificationName  : "",
 													issuedBy           : "",
@@ -428,7 +438,7 @@ class Certification extends Component{
 							window.location.reload(false);
 					})
 					.catch(error =>{
-						Swal.fire("Submit Error!",error.message,'error');
+						Swal.fire('', "Submit Error!", '');
 					});
 				}
 
@@ -448,7 +458,7 @@ class Certification extends Component{
 
 						mapAction.setUserDetails(userDetails);
 
-						Swal.fire("Congrats","Your skill and rating is inserted Successfully","success");
+						Swal.fire('', "Your skill and rating is inserted Successfully", '');
 							this.setState({
 											skills             : [],
 											rating             : "",
@@ -459,14 +469,14 @@ class Certification extends Component{
 						this.getData();	
 					})
 					.catch(error =>{
-						Swal.fire("Submit Error!",error.message,'error');
+						Swal.fire('', "Submit Error!", '');
 					});
 		}else{
 
 			Axios.patch("/api/candidatemaster/patch/addCandidateCertification",formValues)
 			 .then(response=>{
 
-					Swal.fire("Congrats","Your Certification Details is insert Successfully","success");
+					Swal.fire('' ,"Your Certification Details is insert Successfully", '');
 						this.setState({
 										certificationName  : "",
 										issuedBy           : "",
@@ -477,7 +487,7 @@ class Certification extends Component{
 									})
 				})
 				.catch(error =>{
-					Swal.fire("Submit Error!",error.message,'error');
+					Swal.fire('', "Submit Error!", '');
 				});
 		}
 		}

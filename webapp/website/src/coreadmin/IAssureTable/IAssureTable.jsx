@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Route, withRouter } from 'react-router-dom';
-import swal from 'sweetalert';
+import Swal  					from 'sweetalert2';
 import axios from 'axios';
 import $ from 'jquery';
 import jQuery from 'jquery';
@@ -128,10 +128,11 @@ class IAssureTable extends Component {
                 this.props.history.push(this.props.tableObjects.editUrl);
             }
 			// this.props.history.push(tableObjects.editUrl);
-			swal({
-				title : " ",
-				text  : "Record deleted successfully",
-			});
+			Swal.fire(
+				'',
+				"Record deleted successfully",
+				''
+			);
 		}).catch((error) => {
 		});
 	}

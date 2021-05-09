@@ -3,7 +3,7 @@ import {Route, withRouter} 			from 'react-router-dom';
 import $ 							from 'jquery';
 import jQuery 						from 'jquery';
 import axios from 'axios';
-import swal                     	from 'sweetalert';
+import Swal  						from 'sweetalert2';
 
 
 class ViewAllNotifications extends Component {
@@ -43,8 +43,10 @@ class ViewAllNotifications extends Component {
 			      })
 			      .catch(error => {
 			      })
-	    	swal({
-				title: "Deleted successfully",
+	    	Swal.fire({
+	    		'',
+				"Deleted successfully",
+				''
 			});
 		}).catch((error)=> {
 		});

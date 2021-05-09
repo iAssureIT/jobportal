@@ -36,7 +36,15 @@ handleChange(event){
         [name]:value,
     })
 }
-
+changeMobile(event) {
+    console.log(event)
+    this.setState({
+      mobile: event
+    }, () => {
+      console.log(this.state.mobile)
+      
+    })
+}
 setWorkFromHome(event) {
         this.setState({
             checkTC: event.target.checked
@@ -147,132 +155,138 @@ showPassword1=(event)=>{
     }
 
      if(this.state.password.length <=0) {
-   document.getElementById("passwordError").innerHTML=  
-      ""; 
-  document.getElementById("passwordError").innerHTML=  
-      "Please enter Password";  
-      statusPwd=false; 
-} 
- if (this.state.password.length<8) {
-  document.getElementById("passwordError").innerHTML=  
-            "Please enter atleast 8 characters";  
-            statusPwd=false; 
-} else {
-   document.getElementById("passwordError").innerHTML=  
-      ""; 
-      statusPwd = true;
- 
-}
-    if(this.state.confirmPassword.length<=0){
-      document.getElementById("confirmPasswordError").innerHTML=  
-      ""; 
-      document.getElementById("confirmPasswordError").innerHTML=  
-      "Please enter Confirm Password";  
-      statusCPwd=false; 
-    }
-
-     if(this.state.confirmPassword.length<8){
-      document.getElementById("confirmPasswordError").innerHTML=  
-      "Please enter atleast 8 characters";  
-      statusCPwd=false; 
-    }
-    else{
-      document.getElementById("confirmPasswordError").innerHTML=  
-      ""; 
-      statusCPwd = true;
-    }
-
-    if ((this.state.password) != (this.state.confirmPassword)){
-      document.getElementById("passwordError").innerHTML=  
-      "Passwords do not match";  
-      document.getElementById("confirmPasswordError").innerHTML=  
-      "Passwords do not match"; 
-      statusPwd2=false; 
-    }
-    else{
        document.getElementById("passwordError").innerHTML=  
-      "";  
-      document.getElementById("confirmPasswordError").innerHTML=  
-      ""; 
-
-      statusPwd2=true;
-    }
-
-    if(this.state.checkTC == true){
-      statusCTC= true;
-    }
-    if (this.state.checkTC == false) {
-      swal('Please accept Term and Conditions');
-      statusCTC =false;
-    }
-  
-    console.log("all......",statusFN,statusLN,statusEmail,statusPhone,statusPwd,statusCPwd,statusPwd2,statusCTC);
-
-    if(statusFN==true && statusLN==true && 
-      statusEmail==true && statusPhone ==true && 
-      statusPwd==true && statusCPwd==true && 
-      statusCTC==true){
+          ""; 
+      document.getElementById("passwordError").innerHTML=  
+          "Please enter Password";  
+          statusPwd=false; 
+    } 
+     if (this.state.password.length<8) {
+      document.getElementById("passwordError").innerHTML=  
+                "Please enter atleast 8 characters";  
+                statusPwd=false; 
+    } else {
+       document.getElementById("passwordError").innerHTML=  
+          ""; 
+          statusPwd = true;
      
-      status= true;
     }
-    else{
-      status=false;
-    }
-    console.log("End.....",status);
-    return status;
-    
-  } 
-    signUp(event){
-        event.preventDefault();
-        var status =  this.validateForm();
-        console.log(status);
-        var {mapAction} = this.props;
-        console.log(this.props.selectedCompanyDetails)
-        var selectedCompanyDetails = this.props.selectedCompanyDetails
+        if(this.state.confirmPassword.length<=0){
+          document.getElementById("confirmPasswordError").innerHTML=  
+          ""; 
+          document.getElementById("confirmPasswordError").innerHTML=  
+          "Please enter Confirm Password";  
+          statusCPwd=false; 
+        }
+
+         if(this.state.confirmPassword.length<8){
+          document.getElementById("confirmPasswordError").innerHTML=  
+          "Please enter atleast 8 characters";  
+          statusCPwd=false; 
+        }
+        else{
+          document.getElementById("confirmPasswordError").innerHTML=  
+          ""; 
+          statusCPwd = true;
+        }
+
+        if ((this.state.password) != (this.state.confirmPassword)){
+          document.getElementById("passwordError").innerHTML=  
+          "Passwords do not match";  
+          document.getElementById("confirmPasswordError").innerHTML=  
+          "Passwords do not match"; 
+          statusPwd2=false; 
+        }
+        else{
+           document.getElementById("passwordError").innerHTML=  
+          "";  
+          document.getElementById("confirmPasswordError").innerHTML=  
+          ""; 
+
+          statusPwd2=true;
+        }
+
+        if(this.state.checkTC == true){
+          statusCTC= true;
+        }
+        if (this.state.checkTC == false) {
+          swal('Please accept Term and Conditions');
+          statusCTC =false;
+        }
+      
+        console.log("all......",statusFN,statusLN,statusEmail,statusPhone,statusPwd,statusCPwd,statusPwd2,statusCTC);
+
+        if(statusFN==true && statusLN==true && 
+          statusEmail==true && statusPhone ==true && 
+          statusPwd==true && statusCPwd==true && 
+          statusCTC==true){
+         
+          status= true;
+        }
+        else{
+          status=false;
+        }
+        console.log("End.....",status);
+        return status;
+        
+        } 
+        signUp(event){
+            event.preventDefault();
+            var status =  this.validateForm();
+            console.log(status);
+            var {mapAction} = this.props;
+            console.log(this.props.selectedCompanyDetails)
+            var selectedCompanyDetails = this.props.selectedCompanyDetails
 
         if(status == true){
-           this.props.hideComponent("showHide3")
+           //this.props.hideComponent("showHide3") 
             var auth = {
-                username    : "EMAIL",
+                username    : "MOBILE",
                 firstname   : this.state.firstName, 
                 lastname    : this.state.lastName,
                 mobNumber   : (this.state.mobile).replace("-", ""),
                 email       : this.state.email,
                 pwd         : this.state.password,
                 company_id  : selectedCompanyDetails.company_id != "" ? selectedCompanyDetails.company_id : null,
-                // companyID   : this.state.companyID != "" ? this.state.companyID : null,
+                companyID   : selectedCompanyDetails.companyID != "" ? selectedCompanyDetails.companyID : null,
                 companyName : selectedCompanyDetails.companyName,
+                branch_id   : selectedCompanyDetails.branch_id == "" ? 0 : selectedCompanyDetails.branch_id,
                 branchCode  : selectedCompanyDetails.branchCode == "" ? 0 : selectedCompanyDetails.branchCode,
-                branch_id : selectedCompanyDetails.branch_id == "" ? 0 : selectedCompanyDetails.branch_id,
-                role        : selectedCompanyDetails.role,
-                status      : selectedCompanyDetails.status,        
-                city        : selectedCompanyDetails.city,
+                workLocation: selectedCompanyDetails.city,
+                city        : selectedCompanyDetails.city, 
                 stateName   : selectedCompanyDetails.stateName,
                 stateCode   : selectedCompanyDetails.stateCode,
                 country     : selectedCompanyDetails.country,
                 countryCode : selectedCompanyDetails.countryCode,
+                role        : selectedCompanyDetails.role,
+                status      : selectedCompanyDetails.status,        
+                
             }
-            console.log("auth",auth)
+            console.log("auth",auth) 
             axios.post('/api/auth/post/signup/user/otp', auth)
             .then((response) => {
               if(response.data.message == 'USER_CREATED'){
+                mapAction.setUserID(response.data.ID) 
+
+                mapAction.setUserCredentials({ username : (this.state.mobile).replace("-", ""), password: this.state.password })
+                
                 swal('Great, Information submitted successfully and OTP is sent to your registered Email.');
                 localStorage.setItem('previousUrl' ,'signup');
                 if(this.state.branchCode == ""){
                     
                 }else{
                   var contactData = { 
-                  'entityID'              : this.state.company_id,
+                  'entityID'              : selectedCompanyDetails.company_id,
                   'contactDetails'        : {
-                    "branchCode" : this.state.branchCode,
-                    "branchName" : this.state.branch,
-                    "locationType" : this.state.locationType,
+                    "branchCode" : selectedCompanyDetails.branchCode,
+                    "branchName" : selectedCompanyDetails.companyName,
+                    "locationType" : selectedCompanyDetails.locationType,
                     "firstName" : this.state.firstName,
                     "lastName" : this.state.lastName,
                     "phone" : (this.state.mobile).replace("-", ""),
                     "email" : this.state.email,
                     "createUser" : true,
-                    "role" : "employer",
+                    "role" : selectedCompanyDetails.role,
                     "userID" : response.data.ID
                   }
                 }
@@ -284,6 +298,8 @@ showPassword1=(event)=>{
                         title : "Contact already exists.",
                       });
 
+                    }else{
+                        this.props.hideComponent("showHide3")
                     }
                 })
                 .catch((error) => {
@@ -302,10 +318,10 @@ showPassword1=(event)=>{
                 }
                 // console.log('sendData in result==>>>', sendData)
                 
-                axios.post('/api/masternotifications/post/sendNotification', sendData)
+                /*axios.post('/api/masternotifications/post/sendNotification', sendData)
                   .then((notificationres) => {})
                   .catch((error) => { console.log('notification error: ', error) })
-
+                
                 var sendData2 = {
                   "event": "Event2", //Event Name
                   "toUser_id": response.data.ID, //To user_id(ref:users)
@@ -320,9 +336,10 @@ showPassword1=(event)=>{
                 axios.post('/api/masternotifications/post/sendNotification', sendData2)
                   .then((notificationres) => {})
                   .catch((error) => { console.log('notification error: ', error) })  
+                */
                 
+                //this.props.history.push("/confirm-otp/" + response.data.ID);
                 
-                this.props.history.push("/confirm-otp/" + response.data.ID);
               }/*else{
                 swal(response.data.message);
               } */
@@ -334,7 +351,7 @@ showPassword1=(event)=>{
 
     }        
 render() {
-    console.log(this.props.selectedCompanyDetails)
+    //console.log(this.props.selectedCompanyDetails)
     return (
             <form className="signUpBoxFormWrapper">
 
@@ -415,7 +432,8 @@ render() {
                               id        ="mobile" 
                               className ="input-group-addon form-control inputBox" 
                               value     ={this.state.mobile} 
-                              onChange  = {mobile => this.setState({ mobile })}
+                              onChange={this.changeMobile.bind(this)}
+                              //onChange  = {mobile => this.setState({ mobile })}
                              />
                         
                         <span id="mobileError" className="errorMsg"></span>

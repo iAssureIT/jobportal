@@ -80,7 +80,7 @@ export const setAppliedJoblist = (appliedJoblist )=> ({
 });
 export function filterMapData(selector) {
   	return dispatch =>{
-  		console.log(selector)
+  		//console.log(selector)
   		dispatch(setFilterSelector(selector));
 	  	return axios.post("/api/jobs/mapwise-jobs",selector)
 	    .then((response)=>{
@@ -184,7 +184,7 @@ export function getJobWishlist(jobWishlistSelector) {
 export function getAppliedJoblist(appliedJobSelector) { 
   	return dispatch =>{
   		//var formValue={"candidate_id":candidate_id}
-  		console.log(appliedJobSelector)
+  		//console.log(appliedJobSelector)
       dispatch(showLoader(true));
       dispatch(setAppliedJobFilterSelector(appliedJobSelector));
 

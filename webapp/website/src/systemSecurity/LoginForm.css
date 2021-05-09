@@ -168,6 +168,7 @@
 	border-left: transparent!important;
 	background-color: transparent !important;
 	color: #eee;
+	z-index: 100;
 }
 
 .loginformGroup{

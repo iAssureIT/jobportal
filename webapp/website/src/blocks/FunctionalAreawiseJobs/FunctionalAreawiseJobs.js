@@ -55,7 +55,7 @@ class FunctionalAreawiseJobs extends Component{
                                     );
                                 })
                             :
-                            <h2>No data available</h2>
+                            <h2>No functional data available</h2>
                         }
                     </div>                  
                 </section>

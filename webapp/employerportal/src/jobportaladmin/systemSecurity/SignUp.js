@@ -432,6 +432,7 @@ class SignUp extends Component {
     this.setState({
       mobileNumber: event
     }, () => {
+      
       if (this.state.mobileNumber) {
         this.setState({
           companyPhoneAvailable: this.state.companyPhone === "+" || this.state.companyPhone.length<15 ? false : true

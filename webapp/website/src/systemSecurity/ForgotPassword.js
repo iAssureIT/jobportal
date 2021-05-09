@@ -3,7 +3,7 @@ import $ from 'jquery';
 import jQuery from 'jquery';
 import 'jquery-validation';
 import axios from 'axios';
-import swal from 'sweetalert';
+import Swal           from 'sweetalert2';
 import './ForgotPassword.css';
 import { connect }        from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -118,7 +118,7 @@ class ForgotPassword extends Component {
                     */
                     localStorage.setItem('previousUrl' ,'forgotpassword');
                     $('.fullpageloader').hide();
-                    swal("OTP send to your registered Phone Number");
+                    Swal.fire('', "OTP send to your registered Phone Number", '');
                     //this.props.history.push('/confirm-otp/'+response.data.ID);
                     var {mapAction} = this.props;
                     //console.log(response.data.userID)
@@ -127,26 +127,31 @@ class ForgotPassword extends Component {
 
                 } else if(response.data.message == "USER_BLOCK"){
                     console.log("In USER_BLOCK")
-                    swal({
-                      title: "Your account is inactive. Please contact Admin.",
-                      text: "Your account is inactive. Please contact Admin."
-                    });
+                    Swal.fire(
+                      '',
+                      "Your account is inactive. Please contact Admin.",
+                      ''
+                    );
                     //this.props.history.push('/login');
                     var {mapAction} = this.props;
                     mapAction.setSelectedModal("login");
                   }else if(response.data.message == "USER_UNVERIFIED"){
                     console.log("In USER_UNVERIFIED")
-                    swal({
-                      text : "You have not verified your account. Please verify your account."
-                    });
+                    Swal.fire(
+                      '',
+                      "You have not verified your account. Please verify your account.",
+                      ''
+                    );
                     //this.props.history.push('/login');
                     var {mapAction} = this.props;
                     mapAction.setSelectedModal("login");
                   }else if(response.data.message == "NOT_REGISTER"){
                     console.log("In NOT_REGISTER")
-                    swal({
-                      text : "This email is not registered. Please do signup."
-                    });
+                    Swal.fire(
+                      '',
+                      "This email is not registered. Please do signup.",
+                      ''
+                    );
                     //this.props.history.push('/login');
                     var {mapAction} = this.props;
                     mapAction.setSelectedModal("login");
@@ -155,7 +160,7 @@ class ForgotPassword extends Component {
             })
             .catch((error)=>{
                 //document.getElementById("sendlink").innerHTML = 'Reset Password';
-                swal("This Email ID is not registered");
+                Swal.fire('', "This Email ID is not registered", '');
                 $('.fullpageloader').hide();
             })
         }

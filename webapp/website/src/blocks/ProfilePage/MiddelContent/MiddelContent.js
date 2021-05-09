@@ -35,7 +35,7 @@ class MiddelContent extends Component{
 		 	
 		 })
 		 .catch(error=>{
-		 	//Swal.fire("Submit Error!uuu",error.message,'error');
+		 	//Swal.fire('', "Submit Error!", '');
 		 })
 
 	}

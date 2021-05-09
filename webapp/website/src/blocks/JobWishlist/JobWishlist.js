@@ -40,15 +40,15 @@ handleclick = (jobid)=>{
 				console.log("wishlist response=", response.data);
 				if(response.data.message==="Job is removed from wishlist"){
 							Swal.fire(
-									'Removed!',
+									'',
 									'Job is removed from wishlist',
-									'success'
+									''
 							);
 				}else{
 					Swal.fire(
-									'Added!',
+									'',
 									'Job is added to wishlist',
-									'success'
+									''
 							);
 				}
 			})
@@ -72,11 +72,14 @@ applyJob = (jobid, company_id)=>{
 	}
 	console.log(formValues)
 	Swal.fire({
-		title 				: 'Are you sure, do you want to apply for this job?',
+		title 				: ' ',
+		html				: 'Are you sure<br />you want to apply for this job?',
+		text 				: '',
 		icon 				: 'success',
+		showCloseButton		: true,
 		showCancelButton 	: true,
-		confirmButtonText 	: 'Apply',
-		cancelButtonColor 	: 'No, keep it',
+		confirmButtonText 	: 'YES',
+		cancelButtonText 	: 'NO',
 		confirmButtonColor  : '#f5a721',
 	
 	}).then((result) =>{
@@ -94,17 +97,17 @@ applyJob = (jobid, company_id)=>{
 					if(response.data.message==="You have applied to job"){
 
 						Swal.fire(
-									'Applied!',
+									'',
 									'You have applied job successfully!',
-									'success'
+									''
 							);
 					}
 				})
 				.catch(error=>{
 					Swal.fire(
+								'',
 								"Some problem occured while applying job!",
-								error.message,
-								'error'
+								''
 						)
 				})
 			
@@ -130,11 +133,14 @@ removeApplication = (job_id) => {
 			job_id         		: job_id
 		}
 		Swal.fire({
-		title 				: 'Are you sure, do you want to remove this job application?',
+		title 				: ' ',
+		html				: 'Are you sure<br />do you want to remove this job application?',
+		text 				: '',
 		icon 				: 'success',
+		showCloseButton		: true,
 		showCancelButton 	: true,
-		confirmButtonText 	: 'Yes, remove it!',
-		cancelButtonColor 	: 'No, keep it',
+		confirmButtonText 	: 'YES',
+		cancelButtonText 	: 'NO',
 		confirmButtonColor  : '#db3700',
 	
 		}).then((result) =>{
@@ -152,17 +158,17 @@ removeApplication = (job_id) => {
 					if(response.data.deleted){
 
 						Swal.fire(
-									'Applied!',
+									'',
 									'You have removed job application!',
-									'success'
+									''
 							);
 					}
 				})
 				.catch(error=>{
 					Swal.fire(
+								'',
 								"Some problem occured while removing job application!",
-								error.message,
-								'error'
+								''
 						)
 				})
 			}

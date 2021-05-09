@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import $ from 'jquery';
 import jQuery from 'jquery';
-import swal from 'sweetalert';
+import Swal           from 'sweetalert2';
 import axios from 'axios';
 import './ResetPassword.css';
 import { connect }        from 'react-redux';
@@ -142,7 +142,7 @@ class ResetPassword extends Component {
           axios.patch('/api/auth/patch/change_password_withoutotp/id', body)
           .then((response)=>{
 
-            swal(" ", "Your Password has been changed");
+            Swal.fire('', "Your Password has been changed", '');
             this.setState({
               newPassword:"",
               confirmNewPassword:"",
@@ -156,7 +156,11 @@ class ResetPassword extends Component {
           console.log('error',error)
           })
         }else{
-          swal("Invalid Password","Please Enter valid New password and confirm password");
+          Swal.fire({
+            title       : ' ',
+            html        : 'Invalid Password<br />Please Enter valid New password and confirm password',
+            text        : ''
+          })
         }
       }
     }

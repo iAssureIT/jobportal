@@ -2035,7 +2035,7 @@ exports.deleteJob = (req, res, next) => {
         .catch(error => {
             res.status(500).json({
                 error: error,
-                message: "Some issue occurred while deleting job details!"
+                message: "Some issue occurred while deleting job!"
             })
         });
 }
@@ -2056,7 +2056,7 @@ exports.activeJob = (req, res, next) => {
         .catch(error => {
             res.status(500).json({
                 error: error,
-                message: "Some issue occurred while deleting job details!"
+                message: "Some issue occurred while making job active!"
             })
         });
 }
@@ -2076,7 +2076,7 @@ exports.inactiveJob = (req, res, next) => {
         .catch(error => {
             res.status(500).json({
                 error: error,
-                message: "Some issue occurred while deleting job details!"
+                message: "Some issue occurred while making job inactive!"
             })
         });
 }

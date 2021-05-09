@@ -33,17 +33,17 @@ export  default class UploadVideoModal extends Component {
           console.log(fileSize  )
           if (ext === "mp4" ) {
             if(fileSize > 1048576){
-              Swal.fire("Allowed file size is 1MB");
+              Swal.fire('', "Allowed file size is 1MB", '');
             }else{
               if (file) {
                 var objTitle = { fileInfo: file }
                 uploadedVideo.push(objTitle);
               } else {
-                Swal.fire("Images not uploaded");
+                Swal.fire('', "Images not uploaded", '');
               }//file
             }
           } else {
-            Swal.fire("Allowed images formats are (jpg,png,jpeg)");
+            Swal.fire('', "Allowed images formats are (jpg,png,jpeg)", '');
             this.setState({
               gotProfileImage:false
             })
@@ -61,9 +61,9 @@ export  default class UploadVideoModal extends Component {
             imageUploaded : false
           })
           Swal.fire(
-                        'Uploaded!',
+                        '',
                         'Your video interview is saved',
-                        'success'
+                        ''
                 );
           document.getElementById("videoModalCloseButton").click();
         });

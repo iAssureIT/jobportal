@@ -46,8 +46,6 @@ changeStatus(status){
     selector.showMoreLimit  = 25;
 	var {mapAction} = this.props;
     mapAction.filterJobList(selector);
-
-	//console.log("45 inside getjob function",event.target.getAttribute('data-status'))
 }
 
 showMore(){
@@ -95,78 +93,38 @@ deleteJob = (event)=>{
 		reverseButtons		: true
 	
 	}).then((result) =>{
-		if(result.value){
-			if(job_id){
-				Axios.delete("/api/jobs/delete/"+job_id)
-				.then(response =>{
-					if(response.data.message==="Job details deleted Successfully!"){
-						var {mapAction} = this.props;
-						mapAction.filterJobList(this.props.selector);
+			if(result.value){
+				if(job_id){
+					Axios.delete("/api/jobs/delete/"+job_id)
+					.then(response =>{
+						if(response.data.message==="Job details deleted Successfully!"){
+							var {mapAction} = this.props;
+							mapAction.filterJobList(this.props.selector);
 
+							Swal.fire(
+										'',
+										"Job has been deleted successfully!",
+										''
+								);
+						}
+					})
+					.catch(error=>{
 						Swal.fire(
 									'',
-									'Job has been deleted successfully!',
+									"Some problem occured deleting job!",
 									''
-							);
-					}
-				})
-				.catch(error=>{
-					Swal.fire(
-								"Some problem occured deleting job!",
-								error.message,
-								'error'
-						)
-				})
-			}
-				
+							)
+					})
 				}else if (result.dismiss === Swal.DismissReason.cancel){
-					/*Swal.fire(
-						'',
-						'Your job is safe',
-						''
-					)*/
-				}
+						/*Swal.fire(
+							'',
+							'Your job is safe',
+							''
+						)*/
+					}
+				}	
 			})
-		}	
-
-	
-handleSwitch = (event)=>{ 
-		event.preventDefault();
-			// this.setState({
-			// 	isActive: !this.state.isActive
-			// });
-			const job_id = this.state.job_id;
-			//const job_id = event.currentTarget.id;
-			console.log(job_id)
-			this.inactiveJob(job_id)
-
-}
-
-/*inactiveJob(job_id){
-Axios.delete("/api/jobs/inactive/"+job_id)
-	.then(response =>{
-		this.setState({
-				isActive: !this.state.isActive
-			});
-		if(response.data.message==="Job is inactivated successfully!"){
-			var {mapAction} = this.props;
-			mapAction.filterJobList(this.props.selector);
-
-			Swal.fire(
-						'Inactivated!',
-						'Job has been inactivated successfully!',
-						'success'
-				);
-		}
-	})
-	.catch(error=>{
-		Swal.fire(
-					"Some problem occured deleting job!",
-					error.message,
-					'error'
-			)
-	})*/
-
+	}	
 
 inactiveJob(event){
 	event.preventDefault();
@@ -177,7 +135,6 @@ inactiveJob(event){
 				title 				: ' ',
 				html 				: 'Are you sure<br />you want to make this job inactive?',
 				text 				: '',
-				icon 				: 'warning',
 				showCloseButton		: true,
 				showCancelButton 	: true,
 				confirmButtonText 	: 'YES',
@@ -188,86 +145,95 @@ inactiveJob(event){
 			}).then((result) =>{
 				if(result.value){
 					if(job_id){
-						console.log(job_id);
-						Axios.delete("/api/jobs/inactive/"+job_id)
+						console.log(job_id); 
+						Axios.patch("/api/jobs/inactive/"+job_id)
 							.then(response =>{
-								console.log("inside then");
-								/*this.setState({
-										isActive: true
-									});*/
-								console.log("inside then1");
-								console.log(response.data.message)
+								this.setState({
+													isActive: !this.state.isActive
+												});
 								if(response.data.message==="Job is inactivated successfully!"){
-									console.log("response");
+									var {mapAction} = this.props;
+									mapAction.filterJobList(this.props.selector);
 
 									Swal.fire(
 												'',
-												'Job has been inactivated successfully!',
+												"Job has been inactivated successfully!",
 												''
-										);
-
-								/*var {mapAction} = this.props;
-								mapAction.filterJobList(this.props.selector);*/
-								/*var status="active";
-								console.log(status);*/
-
-								/*var {mapAction} = this.props;
-							    mapAction.changeStatusMode(status);
-
-								var selector 	= this.props.selector;
-								var {mapAction} = this.props;
-							    mapAction.filterJobList(selector);*/
-								console.log("selector",this.props.selector);
+											);
 								}
 							})
 							.catch(error=>{
-								console.log("inside catch");
 								Swal.fire(
+											'',
 											"Some problem occured while making job inactive!",
-											error.message,
-											'error'
+											''
+									)
+								})
+						}else if (result.dismiss === Swal.DismissReason.cancel){
+							/*Swal.fire(
+								'',
+								'Your job is safe',
+								''
+							)*/
+						}
+					}	
+				})
+			}
+
+activateJob(event){
+	event.preventDefault();
+	const job_id = event.currentTarget.id;
+	console.log(job_id);
+	
+	this.setState({
+					activateJob: !this.state.activateJob
+				});
+
+			Swal.fire({
+				title 				: ' ',
+				html				: 'Are you sure<br />you want to make this job active?',
+				text 				: '',
+				icon 				: 'warning',
+				showCloseButton		: true,
+				showCancelButton 	: true,
+				confirmButtonText 	: 'YES',
+				cancelButtonText 	: 'NO',
+				confirmButtonColor 	: '#f5a721',
+				reverseButtons		: true
+
+			}).then((result) =>{
+				if(result.value){
+					if(job_id){
+						Axios.patch("/api/jobs/active/"+job_id)
+						.then(response =>{
+							if(response.data.message==="Job is activated successfully!"){
+								var {mapAction} = this.props;
+								mapAction.filterJobList(this.props.selector);
+
+								Swal.fire(
+											'',
+											"Job activated successfully!",
+											''
+										);
+								}
+							})
+						.catch(error=>{
+							Swal.fire(
+										'',
+										"Some problem occured while making job active!",
+										''
 									)
 							})
-						}
-					}
-				})
-			}			
-	
-handleActiveSwitch = (event)=>{
-	event.preventDefault();
-	const job_id = this.state.job_id;
-	this.activateJob(job_id);	
-}
-	
-activateJob(job_id){
-	//event.preventDefault();
-	this.setState({
-				activateJob: !this.state.activateJob
-			});
-
-		//const job_id = event.currentTarget.id;
-	
-Axios.delete("/api/jobs/active/"+job_id)
-	.then(response =>{
-		if(response.data.message==="Job is activated successfully!"){
-			var {mapAction} = this.props;
-			mapAction.filterJobList(this.props.selector);
-
-			Swal.fire(
+					}else if (result.dismiss === Swal.DismissReason.cancel){
+					/*Swal.fire(
 						'',
-						'Job activated successfully!',
+						'Your job is safe',
 						''
-				);
+					)*/
+					}
+				}	
+			})
 		}
-	})
-	.catch(error=>{
-		Swal.fire(
-					"Some problem occured while making job active!",
-					error.message,
-					'error'
-			)
-	})
-}
 	
 redirectTo(job_id, url, parameter){
 	console.log(url)
@@ -390,12 +356,12 @@ redirectTo(job_id, url, parameter){
 																		<div className="col-lg-12">
 																			<div className="input-group jobStatusToggleWrapper">
 																				<div className = {this.state.isActive ? "genderFeild genderFeildVerti genderFeildActive" : "genderFeild genderFeildVerti" }
-																				 id={elem._id} name="primaryToggel" onClick={this.inactiveJob} id = {elem._id}
+																				 id={elem._id} name="primaryToggel" onClick={this.inactiveJob.bind(this)}
 																				 value="togglePrimary" title="Inactive"
 																				 >
 																				</div>
 																				<div className = {!this.state.isActive ? "genderFeild genderFeildVerti genderFeildInActive" : "genderFeild genderFeildVerti" }
-																				 id={elem._id} name="primaryToggel" onClick={this.inactiveJob} id = {elem._id} 
+																				 id={elem._id} name="primaryToggel" onClick={this.inactiveJob.bind(this)} 
 																				 value="togglePrimary" title="Inactive">
 																				</div>
 																			</div>	
@@ -562,7 +528,7 @@ redirectTo(job_id, url, parameter){
 								?
 									this.props.jobList.map((elem,index1)=>{
 										//mapAction.stateApplicantsCountList({entity_id : this.props.company_id, stateCode : elem.location.stateCode});
-										//console.log(elem)
+										{/*console.log(elem._id)*/}
 										
 										return(
 											<div className="col-lg-12" key={index1}>
@@ -650,11 +616,11 @@ redirectTo(job_id, url, parameter){
 																<div className="col-lg-12">
 																	<div className="input-group jobStatusToggleWrapper">
 																		<div className = {this.state.activateJob ? "genderFeild genderFeildVerti genderFeildActive" : "genderFeild genderFeildVerti" }
-																		 id={elem._id} name="primaryToggel" data-toggle="modal" data-target="#activeModal" data-dismiss="modal" onClick={() => {this.setState({job_id:elem._id})}} id = {elem._id}
+																		 id={elem._id} name="primaryToggel" onClick={this.activateJob.bind(this)}
 																		 value="togglePrimary" title="Active">
 																		</div>
 																		<div className = {!this.state.activateJob ? "genderFeild genderFeildVerti genderFeildInActive" : "genderFeild genderFeildVerti" }
-																		 id={elem._id} name="primaryToggel" data-toggle="modal" data-target="#activeModal" data-dismiss="modal" onClick={() => {this.setState({job_id:elem._id})}} id = {elem._id} 
+																		 id={elem._id} name="primaryToggel" onClick={this.activateJob.bind(this)} 
 																		 value="togglePrimary" title="Inactive">
 																		</div>
 																	</div>	
@@ -691,50 +657,6 @@ redirectTo(job_id, url, parameter){
 						    </div>
 						</div>
 					</div>
-					
-					<div className="modal fade" id="inactiveModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-					    <div className="modal-dialog delModalMain">
-							<div className="modal-content delModalContent">
-								<div className="modal-header delHeader">
-									<button type="button" className="close delCloseBtn" data-dismiss="modal" aria-label="Close">
-										<span aria-hidden="true">&times;</span>
-									</button>
-								</div>
-								<div className="modal-body delModalBody">
-									<div className="delBodyText">
-										Are you sure, <br />
-										do you want to inactive this job?
-									</div>
-									<div className="col-lg-12 delMainBtnDiv">
-										<button type="button" className="btn btn-default delModalBtnOne col-lg-3" data-dismiss="modal">NO</button> 
-										<button type="button" className="btn btn-default delModalBtnTwo col-lg-3" data-dismiss="modal" onClick={this.handleSwitch}>YES</button>
-									</div> 
-								</div>
-							</div>
-					    </div>
-					</div> 
-
-					<div className="modal fade" id="activeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-					    <div className="modal-dialog delModalMain">
-							<div className="modal-content delModalContent">
-								<div className="modal-header delHeader">
-									<button type="button" className="close delCloseBtn" data-dismiss="modal" aria-label="Close">
-										<span aria-hidden="true">&times;</span>
-									</button>
-								</div>
-								<div className="modal-body delModalBody">
-									<div className="delBodyText">
-										Are you sure, <br />
-										do you want to publish this job?
-									</div>
-									<div className="col-lg-12 delMainBtnDiv">
-										<button type="button" className="btn btn-default delModalBtnOne col-lg-3" data-dismiss="modal">NO</button> 
-										<button type="button" className="btn btn-default delModalBtnTwo col-lg-3" data-dismiss="modal" onClick={this.handleActiveSwitch}>YES</button>
-									</div> 
-								</div>
-							</div>
-					    </div>
-					</div> 
 				</div>		
 					{/*<div className="col-lg-12">
 				        <Pagination

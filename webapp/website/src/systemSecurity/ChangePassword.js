@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import $ from 'jquery';
 import jQuery from 'jquery';
-import swal from 'sweetalert';
+import Swal           from 'sweetalert2';
 import axios from 'axios';
 import './ResetPassword.css';
 import { connect }        from 'react-redux';
@@ -20,7 +20,7 @@ class ChangePassword extends Component {
           showPassword1: false,
           showPassword2: false,
           showPassword3: false,
-          emailId      :this.props.userDetails.email,
+          phone     :this.props.userDetails.phone,
           user_ID      :this.props.userDetails.user_id,
         }
     }
@@ -156,17 +156,19 @@ class ChangePassword extends Component {
 
     changePassword(event) {
         event.preventDefault();
-       
+        console.log(this.state.phone);
+        console.log(this.props.userDetails);
+        console.log(this.state.user_ID);
         var status =  this.validateForm();
         if(status == true){
         var user_id = this.state.user_ID;
         var auth = {
-          email : this.state.emailId,
+          mobNumber : this.props.userDetails.username,
           password : this.state.oldPassword,
           role: "candidate"
         } 
-        
-        axios.post('/api/auth/post/login',auth)
+        console.log(auth);
+        axios.post('/api/auth/post/login/mobile',auth)
         .then(response => {
           console.log(response);
         if(response.data.message==="Login Auth Successful"){
@@ -175,7 +177,7 @@ class ChangePassword extends Component {
               var body = {
                 pwd : this.state.newPassword,
                 user_id : this.state.user_ID,
-                emailId : this.state.emailId,
+                mobileNo : this.props.userDetails.username,
               }
 
               console.log(body)
@@ -205,7 +207,7 @@ class ChangePassword extends Component {
                   console.log("token",token);
                   // browserHistory.push("/login"); 
 
-                   swal(" ", "Your Password has been changed");
+                   Swal.fire('', "Your Password has been changed", '');
                     //this.props.history.push('/login');
                    this.logout();
                   }
@@ -214,11 +216,11 @@ class ChangePassword extends Component {
               console.log('error',error)
               })
             }else{
-              swal("Invalid Password","Please Enter valid new password and confirm password");
+              Swal.fire('', "Invalid Password","Please Enter valid new password and confirm password", '');
             }
           }
            else{
-              swal("Same  Password","Old password and New password must be different");
+              Swal.fire('', "Same  Password","Old password and New password must be different", '');
             }  
            
           
@@ -226,14 +228,14 @@ class ChangePassword extends Component {
 
         else{
           console.log("ERROR in Responce");
-          swal("Invalid Old Password","Please Enter correct old password");
+          Swal.fire('', "Invalid Old Password","Please Enter correct old password", '');
 
         }
       })
       .catch(error => {
         if (error.response.status === 401) {
           console.log("ERROR in Responce");
-          swal("Invalid Password","Please Enter correct password");
+          Swal.fire('', "Invalid Password","Please Enter correct password", '');
           this.setState({invalidpassword:true})
         }
       })

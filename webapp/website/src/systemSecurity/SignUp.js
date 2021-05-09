@@ -8,7 +8,7 @@ import 'bootstrap/js/modal.js';
 import 'bootstrap/js/tab.js';
 import 'font-awesome/css/font-awesome.min.css';
 import './SignUp.css';
-import swal from 'sweetalert';
+import Swal           from 'sweetalert2';
 import axios from 'axios';
 import { connect }        from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -52,9 +52,11 @@ class SignUp extends Component {
 	}
 
   changeMobile(event) {
+    console.log(event)
     this.setState({
       mobileNumber: event
     }, () => {
+      console.log(this.state.mobileNumber)
       if (this.state.mobileNumber) {
         this.setState({
       mobileNumberAvailable: this.state.mobileNumber === "+" || this.state.mobileNumber.length<15 ? true : false
@@ -245,7 +247,7 @@ class SignUp extends Component {
       statusCTC= true;
     }
     if (this.state.checkTC == false) {
-      swal('Please accept Term and Conditions');
+      Swal.fire('', 'Please accept Term and Conditions', '');
       statusCTC =false;
     }
   
@@ -274,10 +276,10 @@ class SignUp extends Component {
 			var auth = {
 				username 		: "MOBILE",
 				firstname		: this.state.firstName,
-				lastname		: this.state.lastName,
+				lastname		: this.state.lastName, 
 				mobNumber		: (this.state.mobileNumber).replace("-", ""),
-				email			: this.state.emailAddress,
-				pwd				: this.state.password,
+				email			  : this.state.emailAddress,
+				pwd				  : this.state.password,
 				companyID		: this.state.employerID,
 				companyName	: this.state.employerName,
 				role			: 'candidate',
@@ -293,12 +295,13 @@ class SignUp extends Component {
 				.then((response) => {
 					console.log("signup res===",response.data)
 					if(response.data.message == 'USER_CREATED'){
-						swal('Great, Information submitted successfully and OTP is sent to your registered Email.');
+						Swal.fire('', 'Information submitted successfully and OTP is sent to your registered Email', '');
 						localStorage.setItem('previousUrl' ,'signup');
 
             var {mapAction} = this.props;
             mapAction.setUserID(response.data.ID);
             mapAction.setSelectedModal("confirmotp"); 
+
             var sendData = {
               "event"     : "Event1", //Event Name
               "toUser_id"  : response.data.ID, //To user_id(ref:users)
@@ -313,9 +316,9 @@ class SignUp extends Component {
               .catch((error) => { console.log('notification error: ', error) })
             */
 						//this.props.history.push("/confirm-otp/" + response.data.ID);
-					}/*else{
-						swal(response.data.message);
-					}	*/
+					}else{
+						Swal.fire(response.data.message);
+					}	
 				})
 				.catch((error) => {
 					
@@ -506,13 +509,11 @@ class SignUp extends Component {
                         <div className="col-lg-12 form-group" >
                       
                              <PhoneInput
-                                      country={'in'}
+                                      country   = {'in'}
+                                      //id        ="mobileNumber" 
                                       value={this.state.mobileNumber}
-                                      name="companyPhone"
-                                      inputProps={{
-                                        name: 'mobileNumber',
-                                        required: true
-                                      }}
+                                      //name="companyPhone"
+                                      //onChange  = {mobileNumber => this.setState({ mobileNumber })}
                                       onChange={this.changeMobile.bind(this)}
                                     />
                              
@@ -522,7 +523,7 @@ class SignUp extends Component {
 
                     <div className="col-lg-12">
                          <div className="col-lg-12 form-group" >
-                            <div className="input-group">
+                            <div className="input-group zIndex">
                                 <span className="input-group-addon registrationInputIcon"><i className="fa fa-lock"></i></span>
                                 <input type="password" id="password" name="password" placeholder="Password" value={this.state.password} onChange={this.handleChange.bind(this)} className="form-control registrationInputBox"/>
                                 <span className="input-group-addon loginInputIcon3" onClick={this.showPassword1.bind(this)}>
@@ -535,7 +536,7 @@ class SignUp extends Component {
 
                     <div className="col-lg-12">
                         <div className="col-lg-12 form-group" >
-                            <div className="input-group">
+                            <div className="input-group zIndex">
                                 <span className="input-group-addon registrationInputIcon"><i className="fa fa-lock"></i></span>
                                 <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" value={this.state.confirmPassword} onChange={this.handleChange.bind(this)} className="form-control registrationInputBox"/>
                                 <span className="input-group-addon loginInputIcon3" onClick={this.showPassword2.bind(this)}>

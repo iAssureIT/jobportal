@@ -5,6 +5,7 @@ const initialState = {
 	userDetails 				: localStorage.getItem("userDetails") ?
 		{
 		loggedIn  	: true,		
+		username	:JSON.parse(localStorage.getItem("userDetails")).username , 
 		firstName 	: JSON.parse(localStorage.getItem("userDetails")).firstName , 
 		lastName  	: JSON.parse(localStorage.getItem("userDetails")).lastName , 
 		email 		: JSON.parse(localStorage.getItem("userDetails")).email,
@@ -20,7 +21,8 @@ const initialState = {
 		profileCompletion : JSON.parse(localStorage.getItem("userDetails")).profileCompletion
 		}
 		: {
-		loggedIn  	: false,	
+		loggedIn  	: false,
+		username	:"",	
 		firstName 	: "", 
 		lastName  	: "", 
 		email 		: "",

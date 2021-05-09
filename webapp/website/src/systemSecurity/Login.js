@@ -8,14 +8,14 @@ import $ from 'jquery';
 import axios from 'axios';
 import jQuery from 'jquery'; 
 import 'jquery-validation';
-import swal from 'sweetalert';
+import Swal           from 'sweetalert2';
 import { connect }        from 'react-redux';
 import { bindActionCreators } from 'redux';
 import  * as mapActionCreator from '../common/actions/index';
 
 class Login extends Component {
 
-  constructor() {
+  constructor() { 
     super();
     this.state = {
       showPassword: false,
@@ -116,12 +116,14 @@ class Login extends Component {
   changeMobile(event) {
     this.setState({
       loginusername: event
+    },() => {
+      console.log(this.state.loginusername)
     })
   }
   userlogin(event) {
       event.preventDefault();
       var auth = {
-        mobNumber: this.state.loginusername,
+        mobNumber: (this.state.loginusername).replace("-", ""),
         password: this.refs.loginpassword.value,
         role: "candidate"
       }
@@ -129,16 +131,20 @@ class Login extends Component {
       var status =  this.validateForm();
       console.log(status)
       var {mapAction} = this.props;
-      if (status) {
       
+      if (status) {
         this.setState({ btnLoading: true });
         axios.post('/api/auth/post/login/mobile', auth)
           .then((response) => {
-            //console.log("response login",response);
+
+            console.log("response login",response);
+            //console.log("response login username",response.data.username);
+
             if (response.data.ID) {
               this.setState({ btnLoading: false });
               var userDetails = { 
                 loggedIn    : true,
+                username: response.data.username,
                 firstName: response.data.userDetails.firstName,
                 lastName: response.data.userDetails.lastName,
                 email: response.data.userDetails.email,
@@ -146,8 +152,10 @@ class Login extends Component {
                 pincode: response.data.userDetails.pincode,
                 user_id: response.data.userDetails.user_id,
                 roles: response.data.userDetails.roles,
-                token: response.data.userDetails.token
+                token: response.data.userDetails.token,
+    
               }
+              console.log("..........................................",userDetails);
 
               axios.get('/api/candidatemaster/get/candidate_id/'+response.data.userDetails.user_id)
               .then((candidate) => {
@@ -177,30 +185,38 @@ class Login extends Component {
               });
 
             } else if (response.data.message === "USER_BLOCK") {
-              swal({
-                text: "You are blocked by admin. Please contact Admin."
-              });
+              Swal.fire(
+                '',
+                "Your account is not active, Please contact Admin.",
+                ''
+              );
               
             } else if (response.data.message === "NOT_REGISTER") {
-              swal({
-                text: "This Email ID is not registered. Please try again."
-              });
+              Swal.fire(
+                '',
+                "This mobile number is not registered, Please try again.",
+                ''
+              );
              
             } else if (response.data.message === "INVALID_PASSWORD") {
-              swal({
-                text: "You have entered wrong password. Please try again."
-              });
+              Swal.fire(
+                '',
+                "You have entered wrong password, Please try again.",
+                ''
+              );
               
             } else if (response.data.message === "USER_UNVERIFIED") {
-              swal({
-                text: "You have not verified your account. Please verify your account."
-              })
+              Swal.fire(
+                '',
+                "You have not verified your account, Please verify your account",
+                ''
+              )
                 .then((value) => { 
-                  var formValues = { email : this.refs.loginusername.value }
+                  var formValues = { mobileNo : (this.state.loginusername).replace("-", "") }
                   
-                  axios.patch('/api/auth/patch/setotpusingEmail', formValues)
+                  axios.patch('/api/auth/patch/setsendmobileotpusingMobile', formValues)
                     .then((response) => {
-                    var sendData = {
+                    /*var sendData = {
                       "event"     : "Event3", //Event Name
                       "toUser_id"  : response.data.ID, //To user_id(ref:users)
                       "toUserRole"  : "candidate",
@@ -212,22 +228,24 @@ class Login extends Component {
                     axios.post('/api/masternotifications/post/sendNotification', sendData)
                     .then((notificationres) => {})
                     .catch((error) => { console.log('notification error: ', error) })
-
-                      swal("We send you a Verification Code to your registered email. Please verify your account.");
+                    */
+                      Swal.fire('', "We send you a Verification Code to your registered mobile number. Please verify your account.", '');
                       mapAction.setUserID(response.data.ID);
                       mapAction.setSelectedModal("confirmotp");
                     })
                     .catch((error) => {
-                      swal(" Failed to sent OTP");
+                      Swal.fire('', "Failed to sent OTP", '');
                     })
                 });
             }
           })
           .catch((error) => {
             console.log("error", error);
-            swal({
-              text: "Please enter valid Email ID and Password"
-            })
+            Swal.fire(
+              '',
+              "Please enter valid Email ID and Password",
+              ''
+            )
             this.setState({ btnLoading: false });
             // document.getElementById("logInBtn").value = 'Sign In';
             // if (localStorage !== null) {

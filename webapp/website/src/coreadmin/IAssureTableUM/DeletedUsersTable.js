@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import swal from 'sweetalert';
+import Swal  					from 'sweetalert2';
 import axios from 'axios';
 import $ from 'jquery';
 import jQuery from 'jquery';
@@ -686,10 +686,11 @@ class DeletedUsersTable extends Component {
 			data: null,
 		})
 			.then((response) => {
-				swal({
-					title: " ",
-					text: "User permanently deleted.",
-				}).then((success) => {
+				Swal.fire(
+					'',
+					"User permanently deleted.",
+					''
+				).then((success) => {
 					if (success) {
 						//  window.location.reload();
 
@@ -863,7 +864,7 @@ class DeletedUsersTable extends Component {
 					this.props.getData(this.state.startRange, this.state.limitRange)
 					checkedUsersList = [];
 					if (this.state.activeswal === true) {
-						swal(" ", "Account activated successfully").then((success) => {
+						Swal.fire('', "Account activated successfully", '').then((success) => {
 							if (success) {
 								//  window.location.reload();
 							}
