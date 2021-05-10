@@ -12,7 +12,7 @@ constructor() {
       showHide1: true,
       showHide2: false,
       showHide3: false,
-      showHide4: false,
+      showHide4: false, 
     };
     this.hideComponent = this.hideComponent.bind(this);
 }
