@@ -772,14 +772,15 @@ class JobPosting extends Component {
     }
     
     getStates() {
-        Axios.get("/api/states/get/list/IN").then((response) => {
+        Axios.get("/api/states/get/list/IN")
+            .then((response) => {
                 this.setState({
                     stateArray: response.data
                 })
-                document.getElementById('Statedata').val(this.state.states);
+                //document.getElementById('Statedata').val(this.state.states);
             })
-
             .catch((error) => {
+              console.log(error)
               if(error.message === "Request failed with status code 401"){
                   var userDetails =  localStorage.removeItem("userDetails");
                   localStorage.clear();

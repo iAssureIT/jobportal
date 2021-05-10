@@ -2,12 +2,13 @@ const express = require('express');
 const router = express.Router();
 
 const CandidateProfileController = require("./ControllerCandidateProfile.js");
+const checkAuth 	 = require('../../middleware/check-auth.js');
 
 router.post("/post", CandidateProfileController.insertCandidateBasicInfo);
 
 router.get("/get/candidate_id/:userID", CandidateProfileController.getcandidate_id);
 
-router.get("/get/one/:candidate_id", CandidateProfileController.getSingleCandidate);
+router.get("/get/one/:candidate_id", checkAuth, CandidateProfileController.getSingleCandidate);
 
 router.patch("/patch/updateCandidateBasicInfo", CandidateProfileController.updateCandidateBasicInfo);
 

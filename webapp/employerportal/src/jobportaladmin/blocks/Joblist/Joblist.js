@@ -31,6 +31,9 @@ componentDidMount(){
 
 	var {mapAction} = this.props;
 	mapAction.filterJobList(selector);*/
+	const userDetails = JSON.parse(localStorage.getItem("userDetails"));
+    const token = userDetails.token;
+    Axios.defaults.headers.common['Authorization'] = 'Bearer '+ token;
 }
 
 changeStatus(status){
@@ -109,11 +112,19 @@ deleteJob = (event)=>{
 						}
 					})
 					.catch(error=>{
-						Swal.fire(
-									'',
-									"Some problem occured deleting job!",
-									''
-							)
+						if(error.message === "Request failed with status code 401"){
+				            var userDetails =  localStorage.removeItem("userDetails");
+				            localStorage.clear();
+				            Swal.fire({//title : "Your session is expired", 
+				                     text  : "Your session is expired! You need to login again. Click OK to go to Login Page"
+				                 }).then(okay => {
+				            if (okay) {
+				              window.location.href = "/login";
+				            }
+				          });
+				        }else{
+				            Swal.fire("", "Some problem occured deleting job", "");
+				        }
 					})
 				}else if (result.dismiss === Swal.DismissReason.cancel){
 						/*Swal.fire(
@@ -163,12 +174,20 @@ inactiveJob(event){
 								}
 							})
 							.catch(error=>{
-								Swal.fire(
-											'',
-											"Some problem occured while making job inactive!",
-											''
-									)
-								})
+								if(error.message === "Request failed with status code 401"){
+						            var userDetails =  localStorage.removeItem("userDetails");
+						            localStorage.clear();
+						            Swal.fire({//title : "Your session is expired", 
+						                     text  : "Your session is expired! You need to login again. Click OK to go to Login Page"
+						                 }).then(okay => {
+						            if (okay) {
+						              window.location.href = "/login";
+						            }
+						          });
+						        }else{
+						            Swal.fire("", "Some problem occured while making job inactive", "");
+						        }
+							})
 						}else if (result.dismiss === Swal.DismissReason.cancel){
 							/*Swal.fire(
 								'',
@@ -218,12 +237,20 @@ activateJob(event){
 								}
 							})
 						.catch(error=>{
-							Swal.fire(
-										'',
-										"Some problem occured while making job active!",
-										''
-									)
-							})
+							if(error.message === "Request failed with status code 401"){
+					            var userDetails =  localStorage.removeItem("userDetails");
+					            localStorage.clear();
+					            Swal.fire({//title : "Your session is expired", 
+					                     text  : "Your session is expired! You need to login again. Click OK to go to Login Page"
+					                 }).then(okay => {
+					            if (okay) {
+					              window.location.href = "/login";
+					            }
+					          });
+					        }else{
+					            Swal.fire("", "Some problem occured while making job active", "");
+					        }
+						})
 					}else if (result.dismiss === Swal.DismissReason.cancel){
 					/*Swal.fire(
 						'',

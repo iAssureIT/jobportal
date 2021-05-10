@@ -32,7 +32,10 @@ class LeftAside extends Component{
 		}
 	}
 	componentDidMount(){
-		
+		const userDetails = JSON.parse(localStorage.getItem("userDetails"));
+      	const token = userDetails.token;
+      	Axios.defaults.headers.common['Authorization'] = 'Bearer '+ token;
+
 		Axios.get("/api/candidatemaster/get/one/"+this.state.candidate_id)
 		.then(response=>{
 			 console.log(response.data);
@@ -64,7 +67,19 @@ class LeftAside extends Component{
 				})
 			})
 			.catch(error=>{
-			 	Swal.fire("Submit Error!",error.message,'error');
+				if(error.message === "Request failed with status code 401"){
+		            var userDetails =  localStorage.removeItem("userDetails");
+		            localStorage.clear();
+		            Swal.fire({//title : "Your session is expired", 
+		                     text  : "Your session is expired! You need to login again. Click OK to go to Login Page"
+		                 }).then(okay => {
+		            if (okay) {
+		              window.location.href = "/login";
+		            }
+		          });
+		        }else{
+		            Swal.fire("", "Error while getting candidate data", "");
+		        }
 			})
 
 		}
