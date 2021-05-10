@@ -2,10 +2,11 @@ const express 	= require("express");
 const router 	= express.Router();
 
 const jobSectorMaster = require('./ControllerJobSector.js');
+const checkAuth 	 = require('../../middleware/check-auth.js');
 
 router.post('/post', jobSectorMaster.insertJobSector);
 
-router.post('/get/list', jobSectorMaster.fetchJobSectors);
+router.post('/get/list', checkAuth, jobSectorMaster.fetchJobSectors);
 
 router.get('/get/list', jobSectorMaster.getJobSectors);
 

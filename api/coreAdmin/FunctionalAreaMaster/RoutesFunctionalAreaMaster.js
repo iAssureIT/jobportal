@@ -2,10 +2,11 @@ const express 	= require("express");
 const router 	= express.Router();
 
 const functionalAreaMaster = require('./ControllerFunctionalAreaMaster.js');
+const checkAuth 	 = require('../../middleware/check-auth.js');
 
 router.post('/post', functionalAreaMaster.insertFunctionalArea);
 
-router.post('/get/list', functionalAreaMaster.fetchFunctionalAreas);
+router.post('/get/list',  checkAuth, functionalAreaMaster.fetchFunctionalAreas);
 
 router.get('/get/list', functionalAreaMaster.getFunctionalAreas);
 

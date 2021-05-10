@@ -1,10 +1,15 @@
 import axios from 'axios';
 import Swal         from 'sweetalert2';
 
-const userDetails = JSON.parse(localStorage.getItem("userDetails"));
-const token = userDetails.token;
 
-axios.defaults.headers.common['Authorization'] = 'Bearer '+ token;
+const userDetails = JSON.parse(localStorage.getItem("userDetails"));
+
+if (userDetails) {
+  const token = userDetails.token;
+
+  axios.defaults.headers.common['Authorization'] = 'Bearer '+ token;
+}
+
  
 export const selectedCompanyDetails = (selectedCompanyDetails )=> ({
       type                      : 'SELECTED_COMPANY_DETAILS',

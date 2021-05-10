@@ -2,10 +2,11 @@ const express 	= require("express");
 const router 	= express.Router();
 
 const jobTimeMaster = require('./ControllerJobTime.js');
+const checkAuth 	 = require('../../middleware/check-auth.js');
 
 router.post('/post', jobTimeMaster.insertJobTime);
 
-router.post('/get/list', jobTimeMaster.fetchJobTimes);
+router.post('/get/list', checkAuth, jobTimeMaster.fetchJobTimes);
 
 router.get('/get/list', jobTimeMaster.getJobTimes);
 

@@ -2,10 +2,11 @@ const express 	= require("express");
 const router 	= express.Router();
 
 const industryMaster = require('./ControllerIndustryMaster.js');
+const checkAuth 	 = require('../../middleware/check-auth.js');
 
 router.post('/post', industryMaster.insertIndustry);
 
-router.post('/get/list', industryMaster.fetchIndustries);
+router.post('/get/list', checkAuth, industryMaster.fetchIndustries);
 
 router.get('/get/list', industryMaster.getIndustries);
 

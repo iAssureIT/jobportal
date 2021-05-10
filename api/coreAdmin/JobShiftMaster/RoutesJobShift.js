@@ -2,10 +2,11 @@ const express 	= require("express");
 const router 	= express.Router();
 
 const jobShiftMaster = require('./ControllerJobShift.js');
+const checkAuth 	 = require('../../middleware/check-auth.js');
 
 router.post('/post', jobShiftMaster.insertJobShift);
 
-router.post('/get/list', jobShiftMaster.fetchJobShifts);
+router.post('/get/list', checkAuth, jobShiftMaster.fetchJobShifts);
 
 router.get('/get/list', jobShiftMaster.getJobShifts);
 

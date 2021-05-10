@@ -2,10 +2,11 @@ const express 	= require("express");
 const router 	= express.Router();
 
 const skillMaster = require('./ControllerSkill.js');
+const checkAuth 	 = require('../../middleware/check-auth.js');
 
 router.post('/post', skillMaster.insertSkill);
 
-router.post('/get/list', skillMaster.fetchSkills);
+router.post('/get/list', checkAuth, skillMaster.fetchSkills);
 
 router.get('/get/list', skillMaster.getSkills);
 

@@ -2,12 +2,13 @@ const express 	= require("express");
 const router 	= express.Router();
 
 const subfunctionalAreaMaster = require('./ControllerSubFunctionalAreaMaster.js');
+const checkAuth 	 = require('../../middleware/check-auth.js');
 
 router.post('/post', subfunctionalAreaMaster.insertSubFunctionalArea);
 
-router.post('/get/list', subfunctionalAreaMaster.fetchSubFunctionalAreas);
+router.post('/get/list', checkAuth, subfunctionalAreaMaster.fetchSubFunctionalAreas);
 
-router.get('/get/list', subfunctionalAreaMaster.getSubFunctionalAreas);
+router.get('/get/list',  subfunctionalAreaMaster.getSubFunctionalAreas);
 
 router.get('/get/subfunctionalArealist/:id', subfunctionalAreaMaster.fetchSubFunctionalAreaData); 
 

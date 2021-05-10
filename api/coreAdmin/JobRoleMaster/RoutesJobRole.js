@@ -2,10 +2,11 @@ const express 	= require("express");
 const router 	= express.Router();
 
 const jobRoleMaster = require('./ControllerJobRole.js');
+const checkAuth 	 = require('../../middleware/check-auth.js');
 
 router.post('/post', jobRoleMaster.insertJobRole);
 
-router.post('/get/list', jobRoleMaster.fetchJobRoles);
+router.post('/get/list', checkAuth, jobRoleMaster.fetchJobRoles);
 
 router.get('/get/list', jobRoleMaster.getJobRoles);
 
