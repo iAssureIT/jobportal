@@ -2,10 +2,11 @@ const express 	= require("express");
 const router 	= express.Router();
 
 const qualificationMaster = require('./ControllerQualification.js');
+const checkAuth 	 = require('../../middleware/check-auth.js');
 
 router.post('/post', qualificationMaster.insertQualification);
 
-router.post('/get/list', qualificationMaster.fetchQualifications);
+router.post('/get/list', checkAuth, qualificationMaster.fetchQualifications);
 
 router.get('/get/list', qualificationMaster.getQualifications);
 

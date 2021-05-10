@@ -150,6 +150,7 @@ class Layout extends Component  {
                             <Route path="/reset-pwd/:user_ID"   exact strict component={ResetPassword} />
                             <Route path="/confirm-otp/:userID"  exact strict component={ConfirmOtp} />
                              <Route path="/invoice"                          exact strict component={Invoice} />
+
                             {/*<Route path="/reset-password/:user_ID" exact strict component={ResetPasswordFirstLogin}  />*/}
                         </Switch>
                     </Router>

@@ -128,7 +128,7 @@ class Login extends Component {
                     this.setState({ btnLoading: false });
                     var  userDetails = {
                       loggedIn    : true,
-                      UserName    : response.data.username,
+                      username    : response.data.username,
                       firstName : response.data.userDetails.firstName, 
                       lastName  : response.data.userDetails.lastName, 
                       email     : response.data.userDetails.email, 
@@ -296,7 +296,7 @@ class Login extends Component {
                     <div className="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1">
                         <div className="loginSignUp1" >
                         Don't have an Account ?
-                           <a className="loginSignUp" href="/empsignuppage"><u>Sign Up</u></a>
+                           <a className="loginSignUp" href="/empsignuppage"><u> Sign Up</u></a>
                         </div>
                     </div>
 

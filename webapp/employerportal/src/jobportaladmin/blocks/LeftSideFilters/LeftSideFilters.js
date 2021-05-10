@@ -110,7 +110,7 @@ class LeftSideFilters extends Component{
   let allSkills           = [];
   let allQualifications   = [];
 
-      Axios.get("/api/industrymaster/get/list")
+      Axios.post("/api/industrymaster/get/list", {"startRange":0,"limitRange":10000})
       .then(response => {
         
           response.data.map((elem,index)=>{
@@ -120,11 +120,23 @@ class LeftSideFilters extends Component{
             
       })
       .catch(error=>{
-        Swal.fire("Error while getting  industries",error.message,'error');
+        if(error.message === "Request failed with status code 401"){
+            var userDetails =  localStorage.removeItem("userDetails");
+            localStorage.clear();
+            Swal.fire({//title : "Your session is expired", 
+                     text  : "Your session is expired! You need to login again. Click OK to go to Login Page"
+                 }).then(okay => {
+            if (okay) {
+              window.location.href = "/login";
+            }
+          });
+        }else{
+            Swal.fire("", "Error while getting industries", "");
+        }
       })
 
 
-      Axios.get("/api/functionalareamaster/get/list")
+      Axios.post("/api/functionalareamaster/get/list", {"startRange":0,"limitRange":10000})
       .then(response => {
           response.data.map((elem,index)=>{
             
@@ -134,10 +146,22 @@ class LeftSideFilters extends Component{
           this.setState({allFunctionalAreas:allFunctionalAreas})
       })
       .catch(error=>{
-        Swal.fire("Error while getting functional areas",error.message,'error');
+        if(error.message === "Request failed with status code 401"){
+            var userDetails =  localStorage.removeItem("userDetails");
+            localStorage.clear();
+            Swal.fire({//title : "Your session is expired", 
+                     text  : "Your session is expired! You need to login again. Click OK to go to Login Page"
+                 }).then(okay => {
+            if (okay) {
+              window.location.href = "/login";
+            }
+          });
+        }else{
+            Swal.fire("", "Error while getting functional areas", "");
+        }
       })
 
-      Axios.get("/api/jobsectormaster/get/list")
+      Axios.post("/api/jobsectormaster/get/list", {"startRange":0,"limitRange":10000})
       .then(response => {
         response.data.map((elem,index)=>{
             
@@ -146,10 +170,22 @@ class LeftSideFilters extends Component{
         this.setState({allSectors:allSectors})
       })
       .catch(error=>{
-        Swal.fire("Error while getting job sectors",error.message,'error');
+        if(error.message === "Request failed with status code 401"){
+            var userDetails =  localStorage.removeItem("userDetails");
+            localStorage.clear();
+            Swal.fire({//title : "Your session is expired", 
+                     text  : "Your session is expired! You need to login again. Click OK to go to Login Page"
+                 }).then(okay => {
+            if (okay) {
+              window.location.href = "/login";
+            }
+          });
+        }else{
+            Swal.fire("", "Error while getting sectors", "");
+        }
       })
 
-      Axios.get("/api/jobtypemaster/get/list")
+      Axios.post("/api/jobtypemaster/get/list", {"startRange":0,"limitRange":10000})
       .then(response => {
         response.data.map((elem,index)=>{
             
@@ -158,10 +194,22 @@ class LeftSideFilters extends Component{
         this.setState({allJobTypes:allJobTypes})
       })
       .catch(error=>{
-        Swal.fire("Error while getting job type",error.message,'error');
+        if(error.message === "Request failed with status code 401"){
+            var userDetails =  localStorage.removeItem("userDetails");
+            localStorage.clear();
+            Swal.fire({//title : "Your session is expired", 
+                     text  : "Your session is expired! You need to login again. Click OK to go to Login Page"
+                 }).then(okay => {
+            if (okay) {
+              window.location.href = "/login";
+            }
+          });
+        }else{
+            Swal.fire("", "Error while getting job types", "");
+        }
       })
       
-      Axios.get("/api/jobtimemaster/get/list")
+      Axios.post("/api/jobtimemaster/get/list", {"startRange":0,"limitRange":10000})
       .then(response => {
         response.data.map((elem,index)=>{
             
@@ -170,10 +218,22 @@ class LeftSideFilters extends Component{
         this.setState({allJobTime:allJobTime})
       })
       .catch(error=>{
-        Swal.fire("Error while getting job time",error.message,'error');
+        if(error.message === "Request failed with status code 401"){
+            var userDetails =  localStorage.removeItem("userDetails");
+            localStorage.clear();
+            Swal.fire({//title : "Your session is expired", 
+                     text  : "Your session is expired! You need to login again. Click OK to go to Login Page"
+                 }).then(okay => {
+            if (okay) {
+              window.location.href = "/login";
+            }
+          });
+        }else{
+            Swal.fire("", "Error while getting job times", "");
+        }
       })
 
-      Axios.get("/api/jobshiftmaster/get/list")
+      Axios.post("/api/jobshiftmaster/get/list", {"startRange":0,"limitRange":10000})
       .then(response => {
         response.data.map((elem,index)=>{
             
@@ -182,10 +242,22 @@ class LeftSideFilters extends Component{
         this.setState({allJobShift:allJobShift})
       })
       .catch(error=>{
-        Swal.fire("Error while getting job shift",error.message,'error');
+        if(error.message === "Request failed with status code 401"){
+            var userDetails =  localStorage.removeItem("userDetails");
+            localStorage.clear();
+            Swal.fire({//title : "Your session is expired", 
+                     text  : "Your session is expired! You need to login again. Click OK to go to Login Page"
+                 }).then(okay => {
+            if (okay) {
+              window.location.href = "/login";
+            }
+          });
+        }else{
+            Swal.fire("", "Error while getting job shift", "");
+        }
       })
 
-      Axios.get("/api/jobrolemaster/get/list")
+      Axios.post("/api/jobrolemaster/get/list", {"startRange":0,"limitRange":10000})
       .then(response => {
         response.data.map((elem,index)=>{
             
@@ -194,10 +266,22 @@ class LeftSideFilters extends Component{
         this.setState({allRoles:allRoles})
       })
       .catch(error=>{
-        Swal.fire("Error while getting job roles",error.message,'error');
+        if(error.message === "Request failed with status code 401"){
+            var userDetails =  localStorage.removeItem("userDetails");
+            localStorage.clear();
+            Swal.fire({//title : "Your session is expired", 
+                     text  : "Your session is expired! You need to login again. Click OK to go to Login Page"
+                 }).then(okay => {
+            if (okay) {
+              window.location.href = "/login";
+            }
+          });
+        }else{
+            Swal.fire("", "Error while getting job roles", "");
+        }
       })
 
-      Axios.get("/api/skillmaster/get/list")
+      Axios.post("/api/skillmaster/get/list", {"startRange":0,"limitRange":10000})
       .then(response => {
         response.data.map((elem,index)=>{
             allSkills.push({skill : elem.skill, id: elem._id});
@@ -205,10 +289,22 @@ class LeftSideFilters extends Component{
         this.setState({allSkills:allSkills})
       })
       .catch(error=>{
-        Swal.fire("Error while getting skill",error.message,'error');
+        if(error.message === "Request failed with status code 401"){
+            var userDetails =  localStorage.removeItem("userDetails");
+            localStorage.clear();
+            Swal.fire({//title : "Your session is expired", 
+                     text  : "Your session is expired! You need to login again. Click OK to go to Login Page"
+                 }).then(okay => {
+            if (okay) {
+              window.location.href = "/login";
+            }
+          });
+        }else{
+            Swal.fire("", "Error while getting skills", "");
+        }
       })
       
-      Axios.get("/api/qualificationmaster/get/list")
+      Axios.post("/api/qualificationmaster/get/list", {"startRange":0,"limitRange":10000})
       .then(response => {
         response.data.map((elem,index)=>{
             allQualifications.push({qualification : elem.qualification, id: elem._id});
@@ -216,6 +312,19 @@ class LeftSideFilters extends Component{
         this.setState({allQualifications:allQualifications})
       })
       .catch(error=>{
+        if(error.message === "Request failed with status code 401"){
+            var userDetails =  localStorage.removeItem("userDetails");
+            localStorage.clear();
+            Swal.fire({//title : "Your session is expired", 
+                     text  : "Your session is expired! You need to login again. Click OK to go to Login Page"
+                 }).then(okay => {
+            if (okay) {
+              window.location.href = "/login";
+            }
+          });
+        }else{
+            Swal.fire("", "Error while getting qualifications", "");
+        }
         Swal.fire("Error while getting skill",error.message,'error');
       })
       

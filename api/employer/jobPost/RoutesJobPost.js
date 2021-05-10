@@ -11,7 +11,7 @@ router.get   ("/get/one/:job_id"  				, jobsController.getJob);
 router.get   ("/get/searchlist/:searchTxt"  	, jobsController.getSearchList);
 router.post   ("/list"	   						, jobsController.getJobList);
 router.post   ("/joblist-for-employer"	   		, checkAuth, jobsController.getJobListForEmployer);
-router.patch ("/update"		   					, jobsController.updateJob);
+router.patch ("/update"		   					, checkAuth, jobsController.updateJob);
 
 router.post ("/job-count"		   				, jobsController.jobCount);
 router.post ("/mapwise-jobs"		   			, jobsController.mapwiseJobs);
@@ -20,11 +20,11 @@ router.post ("/functional-jobs"		   			, jobsController.functonalAreaJobs);
 router.post ("/subfunctional-jobs"		   		, jobsController.subfunctionalAreaJobs);
 router.post ("/industrial-jobs"		   			, jobsController.industrialJobs);
 
-router.delete("/delete/:job_id"					, jobsController.deleteJob);
+router.delete("/delete/:job_id"					, checkAuth, jobsController.deleteJob);
 
-router.patch("/active/:job_id"					, jobsController.activeJob);
+router.patch("/active/:job_id"					, checkAuth, jobsController.activeJob);
 
-router.patch("/inactive/:job_id"				, jobsController.inactiveJob);
+router.patch("/inactive/:job_id"				, checkAuth, jobsController.inactiveJob);
 
 router.get('/get/filedetails/:fileName'			, jobsController.filedetails);
 

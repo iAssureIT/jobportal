@@ -1,9 +1,12 @@
 import axios from 'axios';
 
 const userDetails = JSON.parse(localStorage.getItem("userDetails"));
-const token = userDetails.token;
+if (userDetails) {
+  const token = userDetails.token;
 
-axios.defaults.headers.common['Authorization'] = 'Bearer '+ token;
+  axios.defaults.headers.common['Authorization'] = 'Bearer '+ token; 
+}
+
 
 export const setMapSelectedState = (selectedState )=> ({
       type 				: 'SET_MAP_STATE',
