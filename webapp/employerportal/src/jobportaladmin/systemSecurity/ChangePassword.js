@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import $ from 'jquery';
 import jQuery from 'jquery';
-import swal from 'sweetalert';
+import Swal from 'sweetalert2';
 import axios from 'axios';
 import './ResetPassword.css';
 import { connect }        from 'react-redux';
@@ -13,7 +13,7 @@ class ChangePassword extends Component {
     constructor(props) {
         super(props);
         this.state = {
-          emailId     : this.props.userDetails.email,
+          emailId     : this.props.userDetails.username,
           user_ID     : this.props.userDetails.user_id,
           oldPassword : '',
           newPassword : "",
@@ -165,76 +165,83 @@ class ChangePassword extends Component {
 
         var user_id = this.state.user_ID;
         var auth = {
-          email : this.state.emailId,
+          mobNumber : this.props.userDetails.username,
           password : this.state.oldPassword,
           role: "employer"
         } 
         
-        axios.post('/api/auth/post/login',auth)
+        axios.post('/api/auth/post/login/mobile',auth)
         .then(response => {
             console.log(response);
-         if(response.data.message==="Login Auth Successful"){
-           if(this.state.oldPassword !=this.state.newPassword)  {  
-            if(this.state.newPassword === this.state.confirmNewPassword){
-              var body = {
-                pwd : this.state.newPassword,
-                user_id : this.state.user_ID,
-                emailId : this.state.emailId,
-              }
+          if(response.data.message==="Login Auth Successful"){
+            if(this.state.oldPassword !=this.state.newPassword)  {  
+              if(this.state.newPassword === this.state.confirmNewPassword){
+                var body = {
+                  pwd : this.state.newPassword,
+                  user_id : this.state.user_ID,
+                  mobileNo : this.props.userDetails.username
+                }
 
-              console.log(body)
-              axios.patch('/api/auth/patch/resetpwd', body )
-              .then((response)=>{
+                console.log(body)
+                axios.patch('/api/auth/patch/resetpwd', body )
+                .then((response)=>{
 
-                
-                this.setState({
-                  oldPassword:"",
-                  newPassword:"",
-                  confirmNewPassword:"",
-                })
-
-                var token = localStorage.removeItem("token");
-                if(token!==null){
-                this.setState({
-                  loggedIn : false
-                },()=>{
-                  localStorage.removeItem("userDetails")
                   
-                })
-                  console.log("token",token);
-                  // browserHistory.push("/login"); 
+                  this.setState({
+                    oldPassword:"",
+                    newPassword:"",
+                    confirmNewPassword:"",
+                  })
 
-                   swal(" ", "Your Password has been changed");
-                    //this.props.history.push('/login');
-                   this.logout();
+                  var token = localStorage.removeItem("token");
+                  if(token!==null){
+                  this.setState({
+                    loggedIn : false
+                  },()=>{
+                    localStorage.removeItem("userDetails")
+                    
+                  })
+                    console.log("token",token);
+                    // browserHistory.push("/login"); 
+
+                     Swal(" ", "Your Password has been changed");
+                      //this.props.history.push('/login');
+                     this.logout();
+                    }
+                })
+                .catch((error)=>{
+                  if(error.message === "Request failed with status code 401"){
+                    var userDetails =  localStorage.removeItem("userDetails");
+                    localStorage.clear();
+                    Swal.fire({//title : "Your session is expired", 
+                               text  : "Your session is expired! You need to login again. Click OK to go to Login Page"
+                           }).then(okay => {
+                      if (okay) {
+                        window.location.href = "/login";
+                      }
+                    });
+                  }else{
+                      Swal.fire("", "Error while getting functional data", "");
                   }
-              })
-              .catch((error)=>{
-              console.log('error',error)
-              })
-            }else{
-              swal("Invalid Password","Please Enter valid new password and confirm password");
+                })
+              }else{
+                Swal("", "Please enter valid new password and confirm password", "");
+              }
+            }
+            else{
+              console.log("ERROR in old");
+              Swal.fire("", "Please enter different new password", "");
             }
           }
-           else{
-          console.log("ERROR in Responce");
-          swal("Invalid Old Password","Please Enter correct old password");
 
-        }
-        }
+          else{
+            console.log("ERROR in Responce");
+            Swal.fire("", "Please enter correct old password", "");
 
-        else{
-          console.log("ERROR in Responce");
-          swal("Invalid Password","Please Enter correct password");
-
-        }
+          }
       })
       .catch(error => {
-        if (error.response.status === 401) {
-          console.log("ERROR in Responce");
-          swal("Invalid Old Password","Please Enter correct old password");
-          this.setState({invalidpassword:true})
-        }
+        
       })
           /*var userID = this.props.userID;
           var formValues = {

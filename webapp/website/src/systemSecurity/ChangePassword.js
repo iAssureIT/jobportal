@@ -213,7 +213,19 @@ class ChangePassword extends Component {
                   }
               })
               .catch((error)=>{
-              console.log('error',error)
+                if(error.message === "Request failed with status code 401"){
+                  var userDetails =  localStorage.removeItem("userDetails");
+                  localStorage.clear();
+                  Swal.fire({//title : "Your session is expired", 
+                             text  : "Your session is expired! You need to login again. Click OK to go to Login Page"
+                         }).then(okay => {
+                    if (okay) {
+                      window.location.href = "/login";
+                    }
+                  });
+                }else{
+                    Swal.fire("", "Error while getting functional data", "");
+                }
               })
             }else{
               Swal.fire('', "Invalid Password","Please Enter valid new password and confirm password", '');
