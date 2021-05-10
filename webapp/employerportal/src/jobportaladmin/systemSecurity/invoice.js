@@ -25,12 +25,12 @@ componentDidMount(){
 
 render() {
     return (
-          <div className=" col-lg-12">
-                <div className="row invoiceWrapper">
-                    <div className="">
+          <div className="row">
+                <div className=" col-lg-12 invoiceWrapper">
+                    <div className="row">
                         <div className="col-lg-6 invoiceLogoWrapper">
                             <div className=" row">
-                                <div className="invoiceLogo col-lg-8">
+                                <div className="invoiceLogo col-lg-10">
                                     <img src="/images/1.png" className="invoiceLogoImg" alt="ijobs logo"/>
                                 </div>
                                 <div className="invoiceLogo2 col-lg-2">
@@ -38,39 +38,39 @@ render() {
                             </div>
                             <div className="row invoiceLogoText">
                                 <div className="col-lg-8 col-lg-offset-1">
-                                    <div className="col-lg-12 invoiceTOText">
+                                    <div className=" invoiceTOText">
                                         INVOICE TO
                                     </div>
-                                    <div className="col-lg-12 invoiceNameText">
+                                    <div className=" invoiceNameText">
                                         John Doe
                                     </div>
-                                    <div className="col-lg-12 invoiceTOText">
+                                    <div className=" invoiceTOText">
                                         H. R. Manager, ABC Company
                                     </div>
                                 </div>
-                                <div className="col-lg-8 col-lg-offset-1 invoicePersonalInfo">
-                                    <div className="col-lg-12">
+                                <div className="col-lg-10 col-lg-offset-1 invoicePersonalInfo">
+                                    <div className="">
                                         <div className="row">
-                                            <div className="col-lg-3 invoicePersonalInfoTitle">
+                                            <div className="col-lg-4 invoicePersonalInfoTitle">
                                                 Mobile No 
                                             </div>
-                                            <div className="col-lg-9 invoicePersonalInfoSubTitle">
+                                            <div className="col-lg-8 invoicePersonalInfoSubTitle">
                                                 <span className="commaInvoice"> : </span>  +91 99233 93733
                                             </div>
                                         </div>
                                         <div className="row">
-                                            <div className="col-lg-3 invoicePersonalInfoTitle">
+                                            <div className="col-lg-4 invoicePersonalInfoTitle">
                                                 Email
                                             </div>
-                                            <div className="col-lg-9 invoicePersonalInfoSubTitle">
+                                            <div className="col-lg-8 invoicePersonalInfoSubTitle">
                                                 <span className="commaInvoice"> : </span> jhonedoe@abc.com
                                             </div>
                                         </div>
                                         <div className="row">
-                                            <div className="col-lg-3 invoicePersonalInfoTitle">
+                                            <div className="col-lg-4 invoicePersonalInfoTitle">
                                                 Address 
                                             </div>
-                                            <div className="col-lg-9 invoicePersonalInfoSubTitle">
+                                            <div className="col-lg-8 invoicePersonalInfoSubTitle">
                                                 <span className="commaInvoice"> : </span> 31/12/2021
                                             </div>
                                         </div>
@@ -80,36 +80,36 @@ render() {
                             </div>
                         </div>
                         <div className="col-lg-6 invoiceLogoWrapper ">
-                            <div className="col-lg-8 col-lg-offset-4">
+                            <div className="col-lg-10 col-lg-offset-2">
                                 <div className="col-lg-12 invoiceBigHeading">
                                     INVOICE 
                                 </div>
                                 <div className="col-lg-12">
                                     <div className="row">
-                                        <div className="col-lg-4 invoicePersonalInfoTitle">
+                                        <div className="col-lg-5 invoicePersonalInfoTitle">
                                             Invoice No 
                                         </div>
-                                        <div className="col-lg-8 invoicePersonalInfoSubTitle">
+                                        <div className="col-lg-7 invoicePersonalInfoSubTitle">
                                             <span className="commaInvoice"> : </span>  034567
                                         </div>
                                     </div>
                                 </div>
                                 <div className="col-lg-12">
                                     <div className="row">
-                                        <div className="col-lg-4 invoicePersonalInfoTitle">
+                                        <div className="col-lg-5 invoicePersonalInfoTitle">
                                             Start Date
                                         </div>
-                                        <div className="col-lg-8 invoicePersonalInfoSubTitle">
+                                        <div className="col-lg-7 invoicePersonalInfoSubTitle">
                                             <span className="commaInvoice"> : </span>   01/01/2021
                                         </div>
                                     </div>
                                 </div>
                                 <div className="col-lg-12">
                                     <div className="row">
-                                        <div className="col-lg-4 invoicePersonalInfoTitle">
+                                        <div className="col-lg-5 invoicePersonalInfoTitle">
                                             End Date
                                         </div>
-                                        <div className="col-lg-8 invoicePersonalInfoSubTitle">
+                                        <div className="col-lg-7 invoicePersonalInfoSubTitle">
                                             <span className="commaInvoice"> : </span>    31/12/2021
                                         </div>
                                     </div>
@@ -134,55 +134,16 @@ render() {
                                 <table className="table invoiceTable">
                                     <thead className="invoiceTableHead">
                                       <tr className="invoiceTableHeadRow">
-                                        <th  >SR.NO.</th>
                                         <th >ITEM DESCRIPTION </th>
                                         <th >PRICE</th>
-                                        <th >QTY.</th>
                                         <th >TOTAL</th>
                                       </tr>
                                     </thead>
-                                    <tbody className="invoiceTableBody ">
+                                    <tbody className="invoiceTableBody invoiceTableStriped">
                                       <tr >
-                                        <td>01</td>
                                         <td>Professional Package 12 Months</td>
                                         <td>₹ 1,200</td>
-                                        <td>1</td>
                                         <td>₹ 1,200</td>
-                                      </tr>
-                                      <tr className="invoiceTableStriped">
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                      </tr>
-                                      <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                      </tr>
-                                      <tr className="invoiceTableStriped">
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                      </tr>
-                                      <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                      </tr>
-                                       <tr className="invoiceTableStriped">
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
                                       </tr>
                                     </tbody>
                                   </table>
@@ -192,34 +153,34 @@ render() {
                     <div className="">
                         <div className="col-lg-6 featuresWrapper">
                             <div className="col-lg-10 col-lg-offset-1">
-                                <div className="col-lg-12 featuresTitle">
+                                <div className=" featuresTitle">
                                     Features
                                 </div>
-                                <div className="col-lg-12 featuresPonits">
+                                <div className=" featuresPonits">
                                     <span className="selectPackageIcon1">
                                         <FontAwesomeIcon icon="plus-circle" />
                                     </span>
                                         Unlimited Jobs Publish   
                                 </div>
-                                <div className="col-lg-12 featuresPonits">
+                                <div className=" featuresPonits">
                                     <span className="selectPackageIcon1">
                                         <FontAwesomeIcon icon="plus-circle" />
                                     </span>
                                         999 Resumes Download    
                                 </div>
-                                <div className="col-lg-12 featuresPonits">
+                                <div className=" featuresPonits">
                                     <span className="selectPackageIcon1">
                                         <FontAwesomeIcon icon="plus-circle" />
                                     </span>
                                         9999 Max Emails    
                                 </div>
-                                <div className="col-lg-12 featuresPonits">
+                                <div className=" featuresPonits">
                                     <span className="selectPackageIcon1">
                                         <FontAwesomeIcon icon="plus-circle" />
                                     </span>
                                         999 Video Introduction  
                                 </div>
-                                <div className="col-lg-12 featuresPonits">
+                                <div className=" featuresPonits">
                                     <span className="selectPackageIcon1">
                                         <FontAwesomeIcon icon="plus-circle" />
                                     </span>
@@ -228,10 +189,10 @@ render() {
                             </div>
                         </div>
                         <div className="col-lg-6 featuresWrapper">
-                            <div className="col-lg-5 col-lg-offset-6">
+                            <div className="col-lg-8 col-lg-offset-3">
                                 <div className="row featuresBill">
                                     <div className="col-lg-6 invoicePersonalInfoTitle invoicePersonalInfoTitle2">
-                                        Subtotal
+                                        <div className="row">  Subtotal </div>
                                     </div>
                                     <div className="col-lg-6 invoicePersonalInfoSubTitle invoicePersonalInfoSubTitle2">
                                         ₹ 1,200
@@ -239,7 +200,7 @@ render() {
                                 </div>
                                 <div className="row featuresBill">
                                     <div className="col-lg-6 invoicePersonalInfoTitle invoicePersonalInfoTitle2">
-                                        GST (18%)
+                                       <div className="row">  GST (18%) </div>
                                     </div>
                                     <div className="col-lg-6 invoicePersonalInfoSubTitle invoicePersonalInfoSubTitle2">
                                         ₹ 108
@@ -247,20 +208,22 @@ render() {
                                 </div>
                                 <div className="row featuresBill">
                                     <div className="col-lg-6 invoicePersonalInfoTitle invoicePersonalInfoTitle2">
-                                        Total Tax
+                                       <div className="row">  Total Tax </div>
                                     </div>
                                     <div className="col-lg-6 invoicePersonalInfoSubTitle invoicePersonalInfoSubTitle2">
                                         ₹ 216
                                     </div>
                                 </div>
-                                <hr className="col-lg-10 featuresBillHr"/>
+                                <hr className="row featuresBillHr"/>
                                 <div className="row featuresBill">
+
                                     <div className="col-lg-6 invoicePersonalInfoTitle invoicePersonalInfoTitle2">
-                                        Grand Total
+                                        <div className="row"> Grand Total</div>
                                     </div>
                                     <div className="col-lg-6 invoicePersonalInfoSubTitle invoicePersonalInfoSubTitle2">
                                         ₹ 1416
                                     </div>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -268,22 +231,22 @@ render() {
                     <div className="">
                         <div className="col-lg-6 conditionWrapper">
                             <div className="col-lg-10 col-lg-offset-1">
-                                <div className="col-lg-12 invoicePersonalInfoTitle invoiceConditionTitle">
+                                <div className=" invoicePersonalInfoTitle invoiceConditionTitle">
                                    TRMS & CONDITIONS
                                 </div>
-                                <div className="col-lg-12 featuresPonits conditionPoints">
+                                <div className=" featuresPonits conditionPoints">
                                     <span className="selectPackageIcon2">
                                         <FontAwesomeIcon icon="square-full" />
                                     </span>
                                          Lorem ipsum dolor sit amet, consectetuer adipiscing elit
                                 </div>
-                                <div className="col-lg-12 featuresPonits conditionPoints">
+                                <div className=" featuresPonits conditionPoints">
                                     <span className="selectPackageIcon2">
                                         <FontAwesomeIcon icon="square-full" />
                                     </span>
                                          Lorem ipsum dolor sit amet, consectetuer adipiscing elit
                                 </div>
-                                <div className="col-lg-12 featuresPonits conditionPoints">
+                                <div className=" featuresPonits conditionPoints">
                                     <span className="selectPackageIcon2">
                                         <FontAwesomeIcon icon="square-full" />
                                     </span>
@@ -293,7 +256,7 @@ render() {
                         </div>
                         <div className="col-lg-6 conditionWrapper">
                             <div className="col-lg-12">
-                                 <button className="buttonNext  invoiceButtonNext col-lg-3 col-lg-offset-8" >
+                                 <button className="buttonNext  invoiceButtonNext col-lg-6 col-lg-offset-5" >
                                      Make Payment
                                      <span className="invoiceButtonNextIcon">
                                         <FontAwesomeIcon icon="angle-double-right" />
@@ -305,52 +268,54 @@ render() {
                     </div>
                     <div className="row">
                         <div className="col-lg-8 invoiceFooterWrapper">
-                            <div className="col-lg-10 col-lg-offset-1">
-                                <div className="">
-                                    <div className="col-lg-4">
+                            <div className="row">
+                                <div className="col-lg-12">
+                                <div className="row">
+                                    <div className="col-lg-3">
                                         <div className="row">
-                                            <div className="col-lg-2 invoiceFooterIcon">
+                                            <div className="col-lg-1 invoiceFooterIcon">
                                                 <FontAwesomeIcon icon="mobile-alt" />
                                             </div>
-                                            <div className="col-lg-10 invoiceFooterLeft">
-                                                <div className="invoiceFooterLeftText">
+                                            <div className="col-lg-8 invoiceFooterLeft">
+                                                <div className="row invoiceFooterLeftText">
                                                     +91 99233 93733
                                                 </div>
-                                                <div className="invoiceFooterLeftText">
+                                                <div className="row invoiceFooterLeftText">
                                                     +91 99123 45618
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="col-lg-4">
+                                    <div className="col-lg-3">
                                         <div className="row">
                                             <div className="col-lg-2 invoiceFooterIcon">
                                                 <FontAwesomeIcon icon="envelope" />
                                             </div>
-                                            <div className="col-lg-10 invoiceFooterLeft">
-                                                <div className="invoiceFooterLeftText">
+                                            <div className="col-lg-8 invoiceFooterLeft">
+                                                <div className="row invoiceFooterLeftText">
                                                     info@jobportal.com
                                                 </div>
-                                                <div className="invoiceFooterLeftText">
+                                                <div className="row invoiceFooterLeftText">
                                                     hr@jobportal.com
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="col-lg-4">
-                                        <div className="row">
+                                    <div className="col-lg-6">
+                                        <div className="">
                                             <div className="col-lg-2 invoiceFooterIcon">
                                                 <FontAwesomeIcon icon="map-marker-alt" />
                                             </div>
-                                            <div className="col-lg-10 invoiceFooterLeft">
-                                                <div className="invoiceFooterLeftText">
+                                            <div className="col-lg-9 invoiceFooterLeft">
+                                                <div className="row invoiceFooterLeftText">
                                                     # 303, World Trade Center
                                                 </div>
-                                                <div className="invoiceFooterLeftText">
+                                                <div className="row invoiceFooterLeftText">
                                                     Eon Free Zone, MIDC, Pune
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>
                                     </div>
                                 </div>
                             </div>

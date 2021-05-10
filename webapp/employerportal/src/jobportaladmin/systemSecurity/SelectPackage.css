@@ -83,9 +83,13 @@
 	color: var(--main-border-color);
 	padding-right: 10px;
 }
-.buttonNext1{
+.buttonNext2{
 	font-size: 11px;
 	background:var(--main-border-color);
 	color: #fff;
-	margin-bottom: 10px;
+	
+}
+
+.buttonNext2Wrapper{
+	margin-top: 50px;
 }

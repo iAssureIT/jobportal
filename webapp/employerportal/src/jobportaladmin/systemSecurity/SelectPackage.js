@@ -1,6 +1,7 @@
 import React, { Component }  from 'react';
 import { FontAwesomeIcon }   from '@fortawesome/react-fontawesome';
 import Axios                 from 'axios';
+import Invoice from "./invoice.js";
 import "./SelectCompany.css";
 import "./SelectPackage.css";
 
@@ -14,6 +15,9 @@ constructor() {
         companyState    :"",
         companyCountry  :"",
         packagemasterArray  :[],
+        hide :"none",
+        hideForm :"block",
+
     }	
 }	
 componentDidMount(){
@@ -25,6 +29,15 @@ componentDidMount(){
         .catch(error=>{
           console.log(error)
         })
+}
+subscribe(event){
+    event.preventDefault();
+    if(this.state.hide==="none"){
+        this.setState({
+            hide : "block",
+            hideForm : "none",
+        })
+    }
 }
 handleChange(event){
     event.preventDefault();
@@ -41,7 +54,8 @@ handleSubmit(event){
 }
 render() {
     return (
-            <form className=" col-lg-10 col-lg-offset-1 signUpBoxFormWrapper signUpBoxFormWrapper2">
+        <div >
+            <form className=" col-lg-10 col-lg-offset-1 signUpBoxFormWrapper signUpBoxFormWrapper2" style={{display:this.state.hideForm}}>
                  <div className="signUpBoxTitle">Select Package</div>
                 <div className="row signUpBoxForm signUpBoxForm2">
                     {
@@ -124,8 +138,21 @@ render() {
                     :
                     <div className="packagemasterNot">No Package Master Data Found</div>
                     }
+
+                </div>
+                <div className="buttonNext2Wrapper">
+                    <button className="buttonNext buttonNext2 col-lg-2 pull-right" onClick={this.subscribe.bind(this)} >
+                         Subscribe
+                    </button>
                 </div>
             </form>
+            <div className="row" style={{display:this.state.hide}}>
+                <div className="col-lg-10 col-lg-offset-1">
+                    <Invoice/>
+                </div>
+            </div>
+            </div>
+
      
     );
 }
