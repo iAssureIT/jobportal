@@ -41,15 +41,7 @@ componentDidMount(){
           console.log(error)
         })
 }
-subscribe(event){
-    event.preventDefault();
-    if(this.state.hide==="none"){
-        this.setState({
-            hide : "block",
-            hideForm : "none",
-        })
-    }
-}
+
 handleChange(event){
     event.preventDefault();
     var value = event.currentTarget.value;
@@ -71,7 +63,12 @@ subscribePackage(event){
     console.log(this.props.selectedCompanyDetails)
     console.log(this.props.user_id)
     console.log(this.state.validity)
-    
+    if(this.state.hide==="none"){
+        this.setState({
+            hide : "block",
+            hideForm : "none",
+        })
+    }
     var startDate   = Moment(new Date()).format("YYYY-MM-DD")
     var endDate     = Moment(startDate, "YYYY-MM-DD").add('month', this.state.validity).format("YYYY-MM-DD")
 
@@ -202,13 +199,11 @@ render() {
 
                 </div>
                 <div className="buttonNext2Wrapper">
-                    <button className="buttonNext buttonNext2 col-lg-2 pull-right" onClick={this.subscribe.bind(this)} >
+                    <button className="buttonNext buttonNext2 col-lg-2 pull-right" onClick={this.subscribePackage.bind(this)} >
                          Subscribe
                     </button>
                 </div>
-                <div className="col-lg-4 col-lg-offset-9 buttonOtpWrapper">
-                <button className="buttonNext col-lg-5 pull-right" onClick={this.subscribePackage.bind(this)}>Subscribe</button>
-                </div>
+               
             </form>
             <div className="row" style={{display:this.state.hide}}>
                 <div className="col-lg-10 col-lg-offset-1">
