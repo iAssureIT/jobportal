@@ -48,14 +48,30 @@ class Address extends Component{
 	}
 	componentDidMount(){
 		this.getData();
-		
-		Axios.get("/api/addresstypemaster/get/list")
+		const userDetails = JSON.parse(localStorage.getItem("userDetails"));
+        const token = userDetails.token;
+        Axios.defaults.headers.common['Authorization'] = 'Bearer '+ token;
+
+		Axios.post("/api/addresstypemaster/get/list", {"startRange":0,"limitRange":10000})
 			.then(response => {
 				this.setState({inputAddressType : response.data});
 			})
 			.catch(error=>{
-				Swal.fire('', "Error while getting List data", '');
+				if(error.message === "Request failed with status code 401"){
+                  var userDetails =  localStorage.removeItem("userDetails");
+                  localStorage.clear();
+                  Swal.fire({//title : "Your session is expired", 
+                             text  : "Your session is expired! You need to login again. Click OK to go to Login Page"
+                         }).then(okay => {
+                    if (okay) {
+                      window.location.href = "/login";
+                    }
+                  });
+                }else{
+                    Swal.fire("", "Error while getting address type data", "");
+                }
 			})
+
 		Axios.get("/api/states/get/list/IN")
 			.then((response) => {
 				this.setState({
@@ -84,7 +100,19 @@ class Address extends Component{
 		        mapAction.setUserDetails(userDetails);
 			 })
 			 .catch(error=>{
-			 	Swal.fire('', "Submit Error!", '');
+			 	if(error.message === "Request failed with status code 401"){
+                  var userDetails =  localStorage.removeItem("userDetails");
+                  localStorage.clear();
+                  Swal.fire({//title : "Your session is expired", 
+                             text  : "Your session is expired! You need to login again. Click OK to go to Login Page"
+                         }).then(okay => {
+                    if (okay) {
+                      window.location.href = "/login";
+                    }
+                  });
+                }else{
+                    Swal.fire("", "Error while getting data", "");
+                }
 			 })
 	}
 	camelCase(str) {
@@ -136,7 +164,19 @@ class Address extends Component{
 			 	
 			 })
 			 .catch(error=>{
-			 	Swal.fire('', "Submit Error!", '');
+			 	if(error.message === "Request failed with status code 401"){
+                  var userDetails =  localStorage.removeItem("userDetails");
+                  localStorage.clear();
+                  Swal.fire({//title : "Your session is expired", 
+                             text  : "Your session is expired! You need to login again. Click OK to go to Login Page"
+                         }).then(okay => {
+                    if (okay) {
+                      window.location.href = "/login";
+                    }
+                  });
+                }else{
+                    Swal.fire("", "Error while getting data", "");
+                }
 			 })
 		}
 	}
@@ -187,24 +227,31 @@ class Address extends Component{
 					}
 				})
 				.catch(error=>{
-					
-					Swal.fire(
-								'',
-								"Some problem occured deleting Address details!",
-								''
-						)
+					if(error.message === "Request failed with status code 401"){
+	                  	var userDetails =  localStorage.removeItem("userDetails");
+	                  	localStorage.clear();
+	                  	Swal.fire({//title : "Your session is expired", 
+	                             text  : "Your session is expired! You need to login again. Click OK to go to Login Page"
+	                         }).then(okay => {
+	                    if (okay) {
+	                      window.location.href = "/login";
+	                    }
+	                  	});
+	                }else{
+	                    Swal.fire("", "Some problem occured deleting address details", "");
+	                }
 				})
 			}
 				
-				}else if (result.dismiss === Swal.DismissReason.cancel){
-					
-					/*Swal.fire(
-						'',
-						'Your Address details is safe :)',
-						''
-					)*/
-				}
-			})
+			}else if (result.dismiss === Swal.DismissReason.cancel){
+				
+				/*Swal.fire(
+					'',
+					'Your Address details is safe :)',
+					''
+				)*/
+			}
+		})
 	  this.getData();
 	}
 	
@@ -213,7 +260,6 @@ class Address extends Component{
 		var value = event.currentTarget.value;
 		var name  = event.currentTarget.name;
 
-		
 		this.setState({
 			[name]:value,
 		})
@@ -289,7 +335,19 @@ class Address extends Component{
 							
 					})
 					.catch(error =>{
-						Swal.fire('', "Submit Error!", '');
+						if(error.message === "Request failed with status code 401"){
+		                  	var userDetails =  localStorage.removeItem("userDetails");
+		                  	localStorage.clear();
+		                  	Swal.fire({//title : "Your session is expired", 
+		                             text  : "Your session is expired! You need to login again. Click OK to go to Login Page"
+		                         }).then(okay => {
+		                    if (okay) {
+		                      window.location.href = "/login";
+		                    }
+		                  	});
+		                }else{
+		                    Swal.fire("", "Some problem occured updating address details", "");
+		                }
 					});
 				}
 
@@ -325,7 +383,19 @@ class Address extends Component{
 						this.getData();
 					})
 					.catch(error =>{
-						Swal.fire('', "Submit Error!", '');
+						if(error.message === "Request failed with status code 401"){
+		                  	var userDetails =  localStorage.removeItem("userDetails");
+		                  	localStorage.clear();
+		                  	Swal.fire({//title : "Your session is expired", 
+		                             text  : "Your session is expired! You need to login again. Click OK to go to Login Page"
+		                         }).then(okay => {
+		                    if (okay) {
+		                      window.location.href = "/login";
+		                    }
+		                  	});
+		                }else{
+		                    Swal.fire("", "Some problem occured creating address details", "");
+		                }
 					});
 				}
 

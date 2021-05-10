@@ -2,10 +2,11 @@ const express 	= require("express");
 const router 	= express.Router();
 
 const addressTypeMaster = require('./ControllerAddressType.js');
+const checkAuth 	 = require('../../middleware/check-auth.js');
 
 router.post('/post', addressTypeMaster.insertAddressType);
 
-router.post('/get/list', addressTypeMaster.fetchAddressTypes);
+router.post('/get/list', checkAuth, addressTypeMaster.fetchAddressTypes);
 
 router.get('/get/list', addressTypeMaster.getAddressTypes);
 

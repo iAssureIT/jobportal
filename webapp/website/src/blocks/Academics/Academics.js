@@ -64,38 +64,90 @@ class Academics extends Component{
 	componentDidMount(){
 		this.getData();
 
-		Axios.get("/api/qualificationlevelmaster/get/list")
+ 		const userDetails = JSON.parse(localStorage.getItem("userDetails"));
+        const token = userDetails.token;
+        Axios.defaults.headers.common['Authorization'] = 'Bearer '+ token;
+
+		Axios.post("/api/qualificationlevelmaster/get/list", {"startRange":0,"limitRange":10000})
 			.then(response => {
 				this.setState({qualificationLevellist : response.data});
 			})
 			.catch(error=>{
-				Swal.fire('', "Error while getting List data", '');
+				if(error.message === "Request failed with status code 401"){
+                  var userDetails =  localStorage.removeItem("userDetails");
+                  localStorage.clear();
+                  Swal.fire({//title : "Your session is expired", 
+                             text  : "Your session is expired! You need to login again. Click OK to go to Login Page"
+                         }).then(okay => {
+                    if (okay) {
+                      window.location.href = "/login";
+                    }
+                  });
+                }else{
+                    Swal.fire("", "Error while getting qualification data", "");
+                }
 			})
 
-		Axios.get("/api/qualificationmaster/get/list")
+		Axios.post("/api/qualificationmaster/get/list", {"startRange":0,"limitRange":10000})
 			.then(response => {
 				this.setState({
 					qualificationlist : response.data
 				});
 			})
 			.catch(error=>{
-				Swal.fire('', "Error while getting List data", '');
+				if(error.message === "Request failed with status code 401"){
+                  var userDetails =  localStorage.removeItem("userDetails");
+                  localStorage.clear();
+                  Swal.fire({//title : "Your session is expired", 
+                             text  : "Your session is expired! You need to login again. Click OK to go to Login Page"
+                         }).then(okay => {
+                    if (okay) {
+                      window.location.href = "/login";
+                    }
+                  });
+                }else{
+                    Swal.fire("", "Error while getting qualification data", "");
+                }
 			})	
-		Axios.get("/api/universitymaster/get/list")
+		Axios.post("/api/universitymaster/get/list", {"startRange":0,"limitRange":10000})
 			.then(response => {
 				
 				this.setState({universitylist : response.data});
 			})
 			.catch(error=>{
-				Swal.fire("Error while getting List data",error.message,'error');
+				if(error.message === "Request failed with status code 401"){
+                  var userDetails =  localStorage.removeItem("userDetails");
+                  localStorage.clear();
+                  Swal.fire({//title : "Your session is expired", 
+                             text  : "Your session is expired! You need to login again. Click OK to go to Login Page"
+                         }).then(okay => {
+                    if (okay) {
+                      window.location.href = "/login";
+                    }
+                  });
+                }else{
+                    Swal.fire("", "Error while getting university data", "");
+                }
 			})	
-		Axios.post("/api/collagemaster/get/list")
+		Axios.post("/api/collagemaster/get/list", {"startRange":0,"limitRange":10000})
 			.then(response => {
 				
 				this.setState({inputCollege : response.data});
 			})
 			.catch(error=>{
-				Swal.fire('', "Error while getting List data", '');
+				if(error.message === "Request failed with status code 401"){
+                  var userDetails =  localStorage.removeItem("userDetails");
+                  localStorage.clear();
+                  Swal.fire({//title : "Your session is expired", 
+                             text  : "Your session is expired! You need to login again. Click OK to go to Login Page"
+                         }).then(okay => {
+                    if (okay) {
+                      window.location.href = "/login";
+                    }
+                  });
+                }else{
+                    Swal.fire("", "Error while getting collage data", "");
+                }
 			})	
 		Axios.get("/api/states/get/list/IN")
 			.then((response) => {
@@ -128,7 +180,19 @@ class Academics extends Component{
 		        mapAction.setUserDetails(userDetails);
 			 })
 			 .catch(error=>{
-			 	Swal.fire('', "Fetch Error!", '');
+			 	if(error.message === "Request failed with status code 401"){
+                  var userDetails =  localStorage.removeItem("userDetails");
+                  localStorage.clear();
+                  Swal.fire({//title : "Your session is expired", 
+                             text  : "Your session is expired! You need to login again. Click OK to go to Login Page"
+                         }).then(okay => {
+                    if (okay) {
+                      window.location.href = "/login";
+                    }
+                  });
+                }else{
+                    Swal.fire("", "Error while getting data", "");
+                }
 			 })
 	}
 	camelCase(str) {
@@ -183,7 +247,19 @@ class Academics extends Component{
 			 	
 			 })
 			 .catch(error=>{
-			 	Swal.fire('', "edit Error!",'');
+			 	if(error.message === "Request failed with status code 401"){
+                  var userDetails =  localStorage.removeItem("userDetails");
+                  localStorage.clear();
+                  Swal.fire({//title : "Your session is expired", 
+                             text  : "Your session is expired! You need to login again. Click OK to go to Login Page"
+                         }).then(okay => {
+                    if (okay) {
+                      window.location.href = "/login";
+                    }
+                  });
+                }else{
+                    Swal.fire("", "Error while getting data", "");
+                }
 			 })
 		}
 	}
@@ -231,26 +307,33 @@ class Academics extends Component{
 							);
 						this.getData();
 					}
-			})
+				})
 				.catch(error=>{
-					
-					Swal.fire(
-								'',
-								"Some problem occured deleting Academics details!",
-								''
-						)
+					if(error.message === "Request failed with status code 401"){
+	                  	var userDetails =  localStorage.removeItem("userDetails");
+	                  	localStorage.clear();
+	                  	Swal.fire({//title : "Your session is expired", 
+	                             text  : "Your session is expired! You need to login again. Click OK to go to Login Page"
+	                         }).then(okay => {
+	                    if (okay) {
+	                      window.location.href = "/login";
+	                    }
+	                  	});
+	                }else{
+	                    Swal.fire("", "Some problem occured deleting academics details", "");
+	                }
 				})
 			}
 				
-				}else if (result.dismiss === Swal.DismissReason.cancel){
-					
-					/*Swal.fire(
-						'',
-						'Your Academics details is safe :)',
-						''
-					)*/
-				}
-			})
+			}else if (result.dismiss === Swal.DismissReason.cancel){
+				
+				/*Swal.fire(
+					'',
+					'Your Academics details is safe :)',
+					''
+				)*/
+			}
+		})
 	  this.getData();
 	}
 
@@ -433,7 +516,19 @@ class Academics extends Component{
 							window.location.reload(false);
 					})
 					.catch(error =>{
-						Swal.fire('', "Submit Error!", '');
+						if(error.message === "Request failed with status code 401"){
+		                  	var userDetails =  localStorage.removeItem("userDetails");
+		                  	localStorage.clear();
+		                  	Swal.fire({//title : "Your session is expired", 
+		                             text  : "Your session is expired! You need to login again. Click OK to go to Login Page"
+		                         }).then(okay => {
+		                    if (okay) {
+		                      window.location.href = "/login";
+		                    }
+		                  	});
+		                }else{
+		                    Swal.fire("", "Some problem occured updating academics details", "");
+		                }
 					});
 				}
 
@@ -473,7 +568,19 @@ class Academics extends Component{
 							
 				})
 				.catch(error =>{
-					Swal.fire('', "Submit Error!", '');
+					if(error.message === "Request failed with status code 401"){
+	                  	var userDetails =  localStorage.removeItem("userDetails");
+	                  	localStorage.clear();
+	                  	Swal.fire({//title : "Your session is expired", 
+	                             text  : "Your session is expired! You need to login again. Click OK to go to Login Page"
+	                         }).then(okay => {
+	                    if (okay) {
+	                      window.location.href = "/login";
+	                    }
+	                  	});
+	                }else{
+	                    Swal.fire("", "Some problem occured creating academics details", "");
+	                }
 				});
 			}
 	}

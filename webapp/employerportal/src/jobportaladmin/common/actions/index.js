@@ -300,6 +300,19 @@ export function filterCandidatesApplied(appliedCandidateSelector) {
           dispatch(getAppliedCandidateList(response.data));
       })
       .catch((error)=>{
+        if(error.message === "Request failed with status code 401"){
+            var userDetails =  localStorage.removeItem("userDetails");
+            localStorage.clear();
+            Swal.fire({//title : "Your session is expired", 
+                     text  : "Your session is expired! You need to login again. Click OK to go to Login Page"
+                 }).then(okay => {
+            if (okay) {
+              window.location.href = "/login";
+            }
+          });
+        }else{
+            Swal.fire("", "Error!", "");
+        }
             console.log('error', error);
       }) 
     }  
@@ -315,6 +328,19 @@ export function filterCandidates(candidateSelector) {
           dispatch(getCandidateList(response.data));
       })
       .catch((error)=>{
+        if(error.message === "Request failed with status code 401"){
+            var userDetails =  localStorage.removeItem("userDetails");
+            localStorage.clear();
+            Swal.fire({//title : "Your session is expired", 
+                     text  : "Your session is expired! You need to login again. Click OK to go to Login Page"
+                 }).then(okay => {
+            if (okay) {
+              window.location.href = "/login";
+            }
+          });
+        }else{
+            Swal.fire("", "Error!", "");
+        }
             console.log('error', error);
       }) 
     }  
@@ -365,29 +391,4 @@ export function filterIndustrialData(selector) {
     }  
 }
 
-export function getJobWishlist(candidate_id) {
-    return dispatch =>{
-      var formValue={"candidate_id":candidate_id}
-      return axios.post("/api/wishlist/candidateWishlist",formValue)
-      .then((response)=>{
-        
-          dispatch(setJobWishlist(response.data ));
-      })
-      .catch((error)=>{
-            console.log('error', error);
-      }) 
-    }  
-}
-export function getAppliedJoblist(candidate_id) {
-    return dispatch =>{
-      var formValue={"candidate_id":candidate_id}
-      console.log(formValue)
-      return axios.post("/api/applyJob/get/appliedJobList",formValue)
-      .then((response)=>{
-          dispatch(setAppliedJoblist(response.data ));
-      })
-      .catch((error)=>{
-            console.log('error', error);
-      }) 
-    }  
-}
+

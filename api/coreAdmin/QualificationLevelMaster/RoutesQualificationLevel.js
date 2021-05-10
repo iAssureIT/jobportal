@@ -2,10 +2,11 @@ const express 	= require("express");
 const router 	= express.Router();
 
 const qualificationLevelMaster = require('./ControllerQualificationLevel.js');
+const checkAuth 	 = require('../../middleware/check-auth.js');
 
 router.post('/post', qualificationLevelMaster.insertQualificationLevel);
 
-router.post('/get/list', qualificationLevelMaster.fetchQualificationLevels);
+router.post('/get/list', checkAuth, qualificationLevelMaster.fetchQualificationLevels);
 
 router.get('/get/list', qualificationLevelMaster.getQualificationLevels);
 
