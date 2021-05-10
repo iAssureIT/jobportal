@@ -14,17 +14,33 @@ const PackageSubscription   = require('./ModelPackageSubscription.js');
 //End of payment gateway integration
 exports.create_order = (req, res, next) => {
 	
+	var paymentData = {
+		"amount" 			: req.body.amount,
+		"currency"			: req.body.currency,
+		"receipt"			: req.body.receipt, 
+		"payment_capture"	: req.body.payment_capture,
+	};
+	var paymentStatus=""
+	if (req.body.amount > 0) {
+		paymentStatus = "unpaid"
+	}else{
+		paymentStatus = "paid"
+	}	
 	var order = new PackageSubscription({
 				"_id"           	: mongoose.Types.ObjectId(), 
 				"package_id" 		: req.body.package_id,
+				"company_id"		: req.body.company_id,
+				"companyID"			: req.body.companyID,
+				"branch_id"			: req.body.branch_id,
+
 				"startDate" 		: req.body.startDate, //"YYYY-MM-DD"
 				"endDate" 			: req.body.endDate, //"YYYY-MM-DD"
 				"planStatus" 		: "active", //"Active" or "Inactive"
-				"amountPaid" 		: req.body.amountPaid,
-				"paymentMethod" 	: req.body.paymentMethod,
+				"amountPaid" 		: req.body.amount,
+				"paymentMethod" 	: "",
 				//"transactionID" 	: req.body.transactionID,
-				"paymentOrderID" 	: req.body.paymentOrderID,
-				"paymentStatus"	    : req.body.paymentStatus, //Paid or Failed
+				"paymentOrderID" 	: "",
+				"paymentStatus"	    : paymentStatus, //Paid or Failed
 				"createdAt" 		: new Date(),
 				"createdBy"			: req.body.user_id				
 			});

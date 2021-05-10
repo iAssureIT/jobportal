@@ -4,7 +4,7 @@ const packageMasterSchema = mongoose.Schema({
 	_id			                : mongoose.Schema.Types.ObjectId,
     //packageTypeId               : { type: mongoose.Schema.Types.ObjectId, ref: 'packagetypemasters' },
     packageName                 : String,
-    validity                    : String,
+    validity                    : Number,
     jobsPublish                 : Number,
     resumeDownloads             : Number,
     maxEmails                   : Number,

@@ -32,7 +32,6 @@ class EmployeeProfile extends Component {
 			}, () => {
 				this.getManagerData(this.state.personInfo.approvingAuthorityId1,this.state.personInfo.approvingAuthorityId2,this.state.personInfo.approvingAuthorityId3);
 				this.getRoles(this.state.personInfo.userId)
-
 			});
 		})
 		.catch((error) => {

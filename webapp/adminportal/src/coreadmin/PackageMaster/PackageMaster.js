@@ -1,7 +1,7 @@
 import React, { Component }     from 'react';
 import Axios                    from 'axios';
 import IAssureTable             from '../IAssureTable/IAssureTable.jsx';
-
+import { withRouter }   from 'react-router-dom';
 import './PackageMaster.css'
 
 class packagemaster extends Component {
@@ -22,7 +22,7 @@ class packagemaster extends Component {
       "limitRange"      : 10,
       tableHeading      :   {
                           packageName        : "Package Name",
-                          validity           : "Validity Period",
+                          validity           : "Validity Period In Months",
                           jobsPublish        : "Jobs Publish",
                           resumeDownloads    : "Resume Downloads",
                           maxEmails          : "Max Emails",
@@ -43,28 +43,17 @@ class packagemaster extends Component {
   }
   /*======= componentDidMount() =======*/
   componentDidMount() {
-      if(this.props.match.params.package_id){
-          this.edit()
-        }
-        console.log("this.props.match.params.package_id",this.props.match.params.package_id)
-        this.getData();
-        Axios.get("/api/packagemaster/get/list")
-        .then(response=>{
-          console.log(response.data)
-        })
-        .catch(error=>{
-          console.log(error)
-        })
-         Axios.get("/api/packagemaster/get/one/"+this.props.match.params.package_id)
-      .then(response=>{
-           
-      }).catch(error=>{
-        console.log(error);
-      })
-        
-      //fetchSinglePackage
+    this.getData();
+    if (this.props.match.params.package_id) {
+      this.edit(this.props.match.params.package_id)
+    }
   }
- 
+  componentWillReceiveProps(nextProps){
+    if(nextProps.match.params.package_id){
+      this.edit(nextProps.match.params.package_id)
+    }
+
+  }
   /*======= handleChange() =======*/
   handleChange(event){
     var value = event.currentTarget.value;
@@ -76,8 +65,8 @@ class packagemaster extends Component {
     })
   }
   /*======= edit() =======*/
-  edit(){
-      Axios.get("/api/packagemaster/get/one/"+this.props.match.params.package_id)
+  edit(package_id){
+      Axios.get("/api/packagemaster/get/one/"+package_id)
       .then(response=>{
             var edit=response.data;
             this.setState({
@@ -280,11 +269,11 @@ class packagemaster extends Component {
                             </div>
                             <div className="col-lg-4">
                                 <label htmlFor="validity" className="nameTitleForm">
-                                  Validity Period
+                                  Validity Period (In Months)
                                     <sup className="nameTitleFormStar">*</sup>
                                 </label>
                                 <div className="input-group input-group1 ">
-                                  <input type="text" name="validity" id="validity" 
+                                  <input type="Number" name="validity" id="validity" 
                                    className="form-control inputBox"
                                    value={this.state.validity} 
                                    onChange={this.handleChange.bind(this)} />
@@ -401,4 +390,5 @@ class packagemaster extends Component {
   }
 }
 
-export default packagemaster;
+export default withRouter(packagemaster);
+

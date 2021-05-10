@@ -1,15 +1,16 @@
 const express		 =	require('express');
 const router 		 =	express.Router();
 const jobsController =	require("./ControllerJobPost.js");
+const checkAuth 	 = require('../../middleware/check-auth.js');
 
-router.post  ("/post"			   				, jobsController.insertJobs);
+router.post  ("/post"			   				, checkAuth, jobsController.insertJobs);
 router.post  ("/post/insertBulk"			   	, jobsController.insertBulkJobs);
 router.post  ("/post/bulk-upload-jobs"			, jobsController.bulkUploadJobs);
 
 router.get   ("/get/one/:job_id"  				, jobsController.getJob);
 router.get   ("/get/searchlist/:searchTxt"  	, jobsController.getSearchList);
 router.post   ("/list"	   						, jobsController.getJobList);
-router.post   ("/joblist-for-employer"	   		, jobsController.getJobListForEmployer);
+router.post   ("/joblist-for-employer"	   		, checkAuth, jobsController.getJobListForEmployer);
 router.patch ("/update"		   					, jobsController.updateJob);
 
 router.post ("/job-count"		   				, jobsController.jobCount);

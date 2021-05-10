@@ -73,6 +73,7 @@ const TimeFormatRoutes					= require("./coreAdmin/timeFormat/RoutesTimeFormat.js
 
 const candidateProfileRoutes			= require("./candidate/profile/RoutesCandidateProfile.js");
 
+const packageSubscriptionRoutes			= require("./employer/packageSubscription/RoutesPackageSubscription.js");
 const jobPostRoutes				    	= require("./employer/jobPost/RoutesJobPost.js");
 const condidateProfileRoutes	    	= require("./candidate/profile/RoutesCandidateProfile.js");
 const mapRoutes	    					= require("./website/maps/RoutesMap.js");
@@ -186,6 +187,9 @@ app.use("/api/collagemaster", collageMasterRoutes);
 app.use("/api/modulemaster", moduleRoutes);
 app.use("/api/facilitymaster", facilityRoutes);
 app.use("/api/candidatemaster", candidateProfileRoutes);
+
+app.use("/api/packagesubscription", packageSubscriptionRoutes);
+
 app.use("/api/jobs", jobPostRoutes);
 app.use("/api/candidateProfile", condidateProfileRoutes);
 app.use("/api/map", mapRoutes);
