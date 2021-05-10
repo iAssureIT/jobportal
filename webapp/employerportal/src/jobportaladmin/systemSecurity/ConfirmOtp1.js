@@ -94,7 +94,7 @@ class ConfirmOtp extends Component {
             } else {
 
               localStorage.removeItem("previousUrl");
-
+              this.props.hideComponent("showHide4")
               console.log(this.props.userCredentials)
               //this.props.history.push('/login');
 

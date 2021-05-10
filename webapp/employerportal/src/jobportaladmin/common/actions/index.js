@@ -1,5 +1,11 @@
 import axios from 'axios';
+import Swal         from 'sweetalert2';
 
+const userDetails = JSON.parse(localStorage.getItem("userDetails"));
+const token = userDetails.token;
+
+axios.defaults.headers.common['Authorization'] = 'Bearer '+ token;
+ 
 export const selectedCompanyDetails = (selectedCompanyDetails )=> ({
       type                      : 'SELECTED_COMPANY_DETAILS',
       selectedCompanyDetails    : selectedCompanyDetails
@@ -147,6 +153,21 @@ export function filterJobList(selector) {
 	    })
 	    .catch((error)=>{
 	          console.log('error', error);
+            if(error.message === "Request failed with status code 401"){
+              var userDetails =  localStorage.removeItem("userDetails");
+              localStorage.clear();
+              Swal({  
+                  title : "Your Session is expired.",                
+                  text: "You need to login again. Click OK to go to Login Page",
+                  // confirmButtonColor: "#f00",
+                  // icon:"error"
+                })
+              .then(okay => {
+                if (okay) {
+                  window.location.href = "/login";
+                }
+              });
+            }
 	    }) 
   	}  
 } 
