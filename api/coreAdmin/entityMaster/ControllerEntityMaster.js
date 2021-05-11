@@ -976,9 +976,10 @@ exports.addContact = (req, res, next) => {
             }]
         }
     } else {
+        //console.log(contactdetails)
         var selector = {
             _id: req.body.entityID,
-            $or: [{
+            $and: [{
                 "contactPersons.email": contactdetails.email
             }, {
                 "contactPersons.employeeID": contactdetails.employeeID
@@ -987,6 +988,7 @@ exports.addContact = (req, res, next) => {
     }
     EntityMaster.find(selector)
         .then((datas) => {
+            //console.log(datas)
             if (datas.length > 0) {
                 res.status(200).json({
                     duplicated: true
