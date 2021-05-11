@@ -1,6 +1,6 @@
 import React, { Component }  from 'react';
 import { FontAwesomeIcon }   from '@fortawesome/react-fontawesome';
-import swal                  from 'sweetalert';
+import Swal from 'sweetalert2';
 import axios                 from 'axios';
 import _                     from 'underscore';
 import { connect }           from 'react-redux';
@@ -35,7 +35,7 @@ componentDidMount() {
                 this.setState({ companylist : response.data });
         })
         .catch(error => {
-            swal.fire("Error while getting List data", error.message, 'error');
+            Swal.fire('', "Error while getting List data", '');
         }) 
     axios.get("/api/states/get/list/IN")
       .then((response) => {

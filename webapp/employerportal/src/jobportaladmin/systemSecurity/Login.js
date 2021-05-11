@@ -8,7 +8,7 @@ import $ from 'jquery';
 import axios from 'axios';
 import jQuery from 'jquery';
 import 'jquery-validation';
-import swal from 'sweetalert';
+import Swal from 'sweetalert2';
 import { connect }        from 'react-redux';
 import { bindActionCreators } from 'redux';
 import  * as mapActionCreator from '../common/actions/index';
@@ -118,9 +118,7 @@ class Login extends Component {
               .then((resp) => {
                 console.log("resp login",resp);
                   if (resp.data === null) {
-                    swal({
-                      text: "Please contact admin"
-                    });
+                    Swal.fire('', "Please contact admin", '');
                   }else{
                     this.setState({ btnLoading: false });
                     var  userDetails = {
@@ -161,23 +159,31 @@ class Login extends Component {
 
               else if (response.data.message === "USER_BLOCK") {
 
-                swal({
-                  text: "Your account is not active. Please contact Admin."
+                Swal.fire({
+                  title       : ' ',
+                  html        : "Your account is not active<br />Please contact Admin",
+                  text        : '',
                 });
                 
               } else if (response.data.message === "NOT_REGISTER") {
-                swal({
-                  text: "This mobile number is not registered. Please try again."
+                Swal.fire({
+                  title       : ' ',
+                  html        : "This mobile number is not registered<br />Please try again",
+                  text        : '',
                 });
                
               } else if (response.data.message === "INVALID_PASSWORD") {
-                swal({
-                  text: "You have entered wrong password. Please try again."
+                Swal.fire({
+                  title       : ' ',
+                  html        : "You have entered wrong password<br />Please try again",
+                  text        : '',
                 });
                 
               } else if (response.data.message === "USER_UNVERIFIED") {
-                swal({
-                  text: "You have not verified your account. Please verify your account."
+                Swal.fire({
+                  title       : ' ',
+                  html        : "You have not verified your account<br />Please verify your account",
+                  text        : '',
                 })
                   .then((value) => {
                     var formValues = { mobileNo : (this.state.loginusername).replace("-", "") }
@@ -197,11 +203,15 @@ class Login extends Component {
                       .then((notificationres) => {})
                       .catch((error) => { console.log('notification error: ', error) })*/
 
-                        swal("We send you a Verification Code to your registered mobile number. Please verify your account");
+                        Swal.fire({
+                                      title       : ' ',
+                                      html        : "We send you a Verification Code to your registered mobile number<br />Please verify your account",
+                                      text        : '',
+                                  });
                         this.props.history.push("/confirm-otp/" + response.data.ID);
                       })
                       .catch((error) => {
-                        swal(" Failed to sent OTP");
+                        Swal.fire('', "Failed to sent OTP", '');
                       })
                   });
               }

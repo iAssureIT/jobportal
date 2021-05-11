@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import $ from 'jquery';
 import jQuery from 'jquery';
 import axios from 'axios';
-import swal from 'sweetalert';
+import Swal from 'sweetalert2';
 import './ForgotPassword.css';
 
 class ForgotPassword extends Component {
@@ -59,28 +59,33 @@ class ForgotPassword extends Component {
 
                     localStorage.setItem('previousUrl' ,'forgotpassword');
                     $('.fullpageloader').hide();
-                    swal("OTP send to your registered email ID.");
+                    Swal.fire('', 'OTP send to your registered email ID', '');
 
                     this.props.history.push('/confirm-otp/'+response.data.ID);
                 } else if(response.data.message == "USER_BLOCK"){
                     console.log("In USER_BLOCK")
-                    swal({
-                      title: "Your account is inactive. Please contact Admin.",
-                      text: "Your account is inactive. Please contact Admin."
+                    Swal.fire({
+                      title       : ' ',
+                      html        : 'Your account is inactive<br />Please contact Admin',
+                      text        : '',
                     });
                     this.props.history.push('/login');
 
                   }else if(response.data.message == "USER_UNVERIFIED"){
                     console.log("In USER_UNVERIFIED")
-                    swal({
-                      text : "You have not verified your account. Please verify your account."
+                    Swal.fire({
+                      title       : ' ',
+                      html        : 'You have not verified your account<br />Please verify your account',
+                      text        : '',
                     });
                     this.props.history.push('/login');
 
                   }else if(response.data.message == "NOT_REGISTER"){
                     console.log("In NOT_REGISTER")
-                    swal({
-                      text : "This email is not registered. Please do signup."
+                    Swal.fire({
+                      title       : ' ',
+                      html        : 'This email is not registered<br />Please do signup',
+                      text        : '',
                     });
                     this.props.history.push('/login');
                     
@@ -89,7 +94,7 @@ class ForgotPassword extends Component {
             })
             .catch((error)=>{
                 //document.getElementById("sendlink").innerHTML = 'Reset Password';
-                swal("This Email ID is not registered");
+                Swal.fire('', "This Email ID is not registered", '');
                 $('.fullpageloader').hide();
             })
         
