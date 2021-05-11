@@ -131,52 +131,73 @@ componentDidMount() {
     }
     validateForm=()=>{
         var status = true;
-        var regName = /^[a-zA-Z]/;
+        var regName =/^[.@&]?[a-zA-Z0-9 ]+[ !.@&()]?[ a-zA-Z0-9!()]+/;
+        var regName1 = /^[a-zA-Z]+$/;
         var employer =this.state.companyName;
-    
+        var country= this.state.companyCountry;
+        var statusCompany= false;
+        var statusBranch= false;
+        var statusState=false;
+        var statusCountry=false;
+
         if(this.state.companyName<=0)  {
           document.getElementById("employerError").innerHTML=  
           "Please enter valid employer name";  
-          status=false; 
+          statusCompany=false; 
         }
         
         else if(!regName.test(employer)){
           document.getElementById("employerError").innerHTML=  
           "Please enter valid employer name";  
-          status=false; 
+          statusCompany=false; 
         }
         else{
           document.getElementById("employerError").innerHTML="";
-          status = true;
+          statusCompany = true;
         }
 
         if (this.state.branch == "") {
           document.getElementById("branchError").innerHTML=  
           "Please enter valid location";  
-          status=false; 
+          statusBranch=false; 
         }else{
           document.getElementById("branchError").innerHTML=  "";
-          status = true;
+          statusBranch = true;
         }
 
         
         if (this.state.companyState == "") {
           document.getElementById("stateError").innerHTML=  
           "Please select State";  
-          status=false; 
+          statusState=false; 
         }else{
           document.getElementById("stateError").innerHTML=  "";
-          status = true;
+          statusState = true;
         }
 
         if (this.state.companyCountry == "") {
           document.getElementById("companyCountryError").innerHTML=  
-          "Please enter country";  
-          status=false; 
+          "Please enter valid country";  
+          statusCountry=false; 
+        }
+         else if(!regName1.test(country)){
+         
+          document.getElementById("employerError").innerHTML=  
+          "Please enter valid Country name";  
+          statusCountry=false; 
         }else{
           document.getElementById("companyCountryError").innerHTML=  "";
-          status = true;
+          statusCountry = true;
         }
+
+        if(statusCompany==true && statusBranch==true &&
+            statusState==true && statusCountry==true){
+            status=true;
+        }
+        else{
+          status=false;
+        }
+
         return status;
       }
     handleSubmit(event){
