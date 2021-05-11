@@ -51,16 +51,13 @@ class Login extends Component {
  var emailFilter = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
        var tempEmail = this.state.loginusername.trim(); 
        var illegalChars = /[\(\)\<\>\,\;\:\\\"\[\]]/;
-       //var phoneno = /^\d{10}$/;
+        var phoneno = /^\+?([0-9]{2})\)?[-. ]?([0-9]{5})[-. ]?([0-9]{5})$/;
 
-    if(this.state.loginusername.length<=0){
+     if(this.state.loginusername.match(phoneno)){
       document.getElementById("loginusernameError").innerHTML=  
-      "Please enter your Email";  
+      "Please enter valid phone number";  
       status=false; 
-    }else if (
-      !emailFilter.test(tempEmail)) { //test email for illegal characters
-          document.getElementById('loginusernameError').innerHTML = "Please enter a valid email address.";
-      } else{
+    }else{
       document.getElementById("loginusernameError").innerHTML=
       ""; 
       status = true;
