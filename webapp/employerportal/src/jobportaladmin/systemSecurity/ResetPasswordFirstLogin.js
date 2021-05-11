@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import $ from 'jquery';
 import jQuery from 'jquery';
-import swal from 'sweetalert';
+import Swal from 'sweetalert2';
 import axios from 'axios';
 
 class ResetPassword extends Component {
@@ -34,7 +34,7 @@ class ResetPassword extends Component {
         if($('#resetPassword').valid()){
             $('.fullpageloader').show();
             if(formValues.pwd === "welcome123" || formValues.pwd === "Welcome@123"){
-                swal("Your new password must be different from your old password.");
+                Swal.fire('', "Your new password must be different from your old password", '');
             }else{
                 axios.patch('/api/auth/patch/change_password_withoutotp/id/'+userID, formValues)
                 .then((response)=>{
@@ -42,7 +42,7 @@ class ResetPassword extends Component {
                     this.setState({
                         "showMessage" : true,
                     })
-                    swal(response.data.message);
+                    Swal.fire(response.data.message);
                     this.logout();
                 })
                 .catch((error)=>{

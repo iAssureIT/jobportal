@@ -121,15 +121,16 @@ class LeftSideFilters extends Component{
       })
       .catch(error=>{
         if(error.message === "Request failed with status code 401"){
-            var userDetails =  localStorage.removeItem("userDetails");
-            localStorage.clear();
-            Swal.fire({//title : "Your session is expired", 
-                     text  : "Your session is expired! You need to login again. Click OK to go to Login Page"
-                 }).then(okay => {
-            if (okay) {
-              window.location.href = "/login";
-            }
-          });
+          var userDetails =  localStorage.removeItem("userDetails");
+          localStorage.clear();
+          Swal.fire({title  : ' ',
+                    html    : "Your session is expired! You need to login again. "+"<br>"+" Click OK to go to Login Page",
+                    text    :  "" })
+              .then(okay => {
+                if (okay) {
+                  window.location.href = "/login";
+                }
+              });
         }else{
             Swal.fire("", "Error while getting industries", "");
         }
@@ -147,15 +148,16 @@ class LeftSideFilters extends Component{
       })
       .catch(error=>{
         if(error.message === "Request failed with status code 401"){
-            var userDetails =  localStorage.removeItem("userDetails");
-            localStorage.clear();
-            Swal.fire({//title : "Your session is expired", 
-                     text  : "Your session is expired! You need to login again. Click OK to go to Login Page"
-                 }).then(okay => {
-            if (okay) {
-              window.location.href = "/login";
-            }
-          });
+          var userDetails =  localStorage.removeItem("userDetails");
+          localStorage.clear();
+          Swal.fire({title  : ' ',
+                    html    : "Your session is expired! You need to login again. "+"<br>"+" Click OK to go to Login Page",
+                    text    :  "" })
+              .then(okay => {
+                if (okay) {
+                  window.location.href = "/login";
+                }
+              });
         }else{
             Swal.fire("", "Error while getting functional areas", "");
         }
@@ -171,15 +173,16 @@ class LeftSideFilters extends Component{
       })
       .catch(error=>{
         if(error.message === "Request failed with status code 401"){
-            var userDetails =  localStorage.removeItem("userDetails");
-            localStorage.clear();
-            Swal.fire({//title : "Your session is expired", 
-                     text  : "Your session is expired! You need to login again. Click OK to go to Login Page"
-                 }).then(okay => {
-            if (okay) {
-              window.location.href = "/login";
-            }
-          });
+          var userDetails =  localStorage.removeItem("userDetails");
+          localStorage.clear();
+          Swal.fire({title  : ' ',
+                    html    : "Your session is expired! You need to login again. "+"<br>"+" Click OK to go to Login Page",
+                    text    :  "" })
+              .then(okay => {
+                if (okay) {
+                  window.location.href = "/login";
+                }
+              });
         }else{
             Swal.fire("", "Error while getting sectors", "");
         }
@@ -195,15 +198,16 @@ class LeftSideFilters extends Component{
       })
       .catch(error=>{
         if(error.message === "Request failed with status code 401"){
-            var userDetails =  localStorage.removeItem("userDetails");
-            localStorage.clear();
-            Swal.fire({//title : "Your session is expired", 
-                     text  : "Your session is expired! You need to login again. Click OK to go to Login Page"
-                 }).then(okay => {
-            if (okay) {
-              window.location.href = "/login";
-            }
-          });
+          var userDetails =  localStorage.removeItem("userDetails");
+          localStorage.clear();
+          Swal.fire({title  : ' ',
+                    html    : "Your session is expired! You need to login again. "+"<br>"+" Click OK to go to Login Page",
+                    text    :  "" })
+              .then(okay => {
+                if (okay) {
+                  window.location.href = "/login";
+                }
+              });
         }else{
             Swal.fire("", "Error while getting job types", "");
         }
@@ -219,15 +223,16 @@ class LeftSideFilters extends Component{
       })
       .catch(error=>{
         if(error.message === "Request failed with status code 401"){
-            var userDetails =  localStorage.removeItem("userDetails");
-            localStorage.clear();
-            Swal.fire({//title : "Your session is expired", 
-                     text  : "Your session is expired! You need to login again. Click OK to go to Login Page"
-                 }).then(okay => {
-            if (okay) {
-              window.location.href = "/login";
-            }
-          });
+          var userDetails =  localStorage.removeItem("userDetails");
+          localStorage.clear();
+          Swal.fire({title  : ' ',
+                    html    : "Your session is expired! You need to login again. "+"<br>"+" Click OK to go to Login Page",
+                    text    :  "" })
+              .then(okay => {
+                if (okay) {
+                  window.location.href = "/login";
+                }
+              });
         }else{
             Swal.fire("", "Error while getting job times", "");
         }
@@ -243,15 +248,16 @@ class LeftSideFilters extends Component{
       })
       .catch(error=>{
         if(error.message === "Request failed with status code 401"){
-            var userDetails =  localStorage.removeItem("userDetails");
-            localStorage.clear();
-            Swal.fire({//title : "Your session is expired", 
-                     text  : "Your session is expired! You need to login again. Click OK to go to Login Page"
-                 }).then(okay => {
-            if (okay) {
-              window.location.href = "/login";
-            }
-          });
+          var userDetails =  localStorage.removeItem("userDetails");
+          localStorage.clear();
+          Swal.fire({title  : ' ',
+                    html    : "Your session is expired! You need to login again. "+"<br>"+" Click OK to go to Login Page",
+                    text    :  "" })
+              .then(okay => {
+                if (okay) {
+                  window.location.href = "/login";
+                }
+              });
         }else{
             Swal.fire("", "Error while getting job shift", "");
         }
@@ -267,15 +273,16 @@ class LeftSideFilters extends Component{
       })
       .catch(error=>{
         if(error.message === "Request failed with status code 401"){
-            var userDetails =  localStorage.removeItem("userDetails");
-            localStorage.clear();
-            Swal.fire({//title : "Your session is expired", 
-                     text  : "Your session is expired! You need to login again. Click OK to go to Login Page"
-                 }).then(okay => {
-            if (okay) {
-              window.location.href = "/login";
-            }
-          });
+          var userDetails =  localStorage.removeItem("userDetails");
+          localStorage.clear();
+          Swal.fire({title  : ' ',
+                    html    : "Your session is expired! You need to login again. "+"<br>"+" Click OK to go to Login Page",
+                    text    :  "" })
+              .then(okay => {
+                if (okay) {
+                  window.location.href = "/login";
+                }
+              });
         }else{
             Swal.fire("", "Error while getting job roles", "");
         }
@@ -290,15 +297,16 @@ class LeftSideFilters extends Component{
       })
       .catch(error=>{
         if(error.message === "Request failed with status code 401"){
-            var userDetails =  localStorage.removeItem("userDetails");
-            localStorage.clear();
-            Swal.fire({//title : "Your session is expired", 
-                     text  : "Your session is expired! You need to login again. Click OK to go to Login Page"
-                 }).then(okay => {
-            if (okay) {
-              window.location.href = "/login";
-            }
-          });
+          var userDetails =  localStorage.removeItem("userDetails");
+          localStorage.clear();
+          Swal.fire({title  : ' ',
+                    html    : "Your session is expired! You need to login again. "+"<br>"+" Click OK to go to Login Page",
+                    text    :  "" })
+              .then(okay => {
+                if (okay) {
+                  window.location.href = "/login";
+                }
+              });
         }else{
             Swal.fire("", "Error while getting skills", "");
         }
@@ -313,19 +321,19 @@ class LeftSideFilters extends Component{
       })
       .catch(error=>{
         if(error.message === "Request failed with status code 401"){
-            var userDetails =  localStorage.removeItem("userDetails");
-            localStorage.clear();
-            Swal.fire({//title : "Your session is expired", 
-                     text  : "Your session is expired! You need to login again. Click OK to go to Login Page"
-                 }).then(okay => {
-            if (okay) {
-              window.location.href = "/login";
-            }
-          });
+          var userDetails =  localStorage.removeItem("userDetails");
+          localStorage.clear();
+          Swal.fire({title  : ' ',
+                    html    : "Your session is expired! You need to login again. "+"<br>"+" Click OK to go to Login Page",
+                    text    :  "" })
+              .then(okay => {
+                if (okay) {
+                  window.location.href = "/login";
+                }
+              });
         }else{
             Swal.fire("", "Error while getting qualifications", "");
         }
-        Swal.fire("Error while getting skill",error.message,'error');
       })
       
   }

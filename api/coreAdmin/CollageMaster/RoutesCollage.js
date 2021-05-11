@@ -2,10 +2,11 @@ const express 	= require("express");
 const router 	= express.Router();
 
 const collageMaster = require('./ControllerCollage.js');
+const checkAuth 	 = require('../../middleware/check-auth.js');
 
 router.post('/post', collageMaster.insertCollage);
 
-router.post('/get/list', collageMaster.fetchCollages);
+router.post('/get/list', checkAuth, collageMaster.fetchCollages);
 
 router.get('/get/list', collageMaster.getCollages);
 

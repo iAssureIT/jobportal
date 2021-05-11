@@ -1,6 +1,6 @@
 import React, { Component }  from 'react';
 import { FontAwesomeIcon }   from '@fortawesome/react-fontawesome';
-import swal                  from 'sweetalert';
+import Swal from 'sweetalert2';
 import axios                 from 'axios';
 import PhoneInput           from 'react-phone-input-2';
 import { connect }           from 'react-redux';
@@ -210,7 +210,7 @@ showPassword1=(event)=>{
           statusCTC= true;
         }
         if (this.state.checkTC == false) {
-          swal('Please accept Term and Conditions');
+          Swal.fire('', "Please accept Term and Conditions", '');
           statusCTC =false;
         }
       
@@ -270,7 +270,12 @@ showPassword1=(event)=>{
 
                 mapAction.setUserCredentials({ username : (this.state.mobile).replace("-", ""), password: this.state.password })
                 
-                swal('Great, Information submitted successfully and OTP is sent to your registered Email.');
+                Swal.fire({
+                        title       : ' ',
+                        html        : 'Great, Information submitted successfully &<br />OTP is sent to your registered Email',
+                        text        : '', 
+                      })
+                
                 localStorage.setItem('previousUrl' ,'signup');
                 if(this.state.branchCode == ""){
                     
@@ -294,9 +299,7 @@ showPassword1=(event)=>{
                 .then((response) => {
                     if(response.data.duplicated)
                     {
-                      swal({
-                        title : "Contact already exists.",
-                      });
+                      Swal.fire('', "Contact already exists", '');
 
                     }else{
                         this.props.hideComponent("showHide3")

@@ -18,10 +18,14 @@ class AppliedJoblist extends Component{
 }
 
 componetDidMount(){
-	
+	const userDetails = JSON.parse(localStorage.getItem("userDetails"));
+  	const token = userDetails.token;
+  	Axios.defaults.headers.common['Authorization'] = 'Bearer '+ token;
 }
 removeApplication = (job_id) => {
-	console.log(job_id)
+	 
+	var {mapAction} = this.props;
+
 	if (this.props.userDetails.loggedIn) {
 		var formValues = { 
 			candidate_id   		: this.props.userDetails.candidate_id,
@@ -44,7 +48,6 @@ removeApplication = (job_id) => {
 				Axios.post("/api/applyJob/removeApplication", formValues)
 				.then(response =>{
 					
-					var {mapAction} = this.props;
 					var appliedJobSelector  = this.props.appliedJobSelector;
 				    appliedJobSelector.candidate_id = this.props.userDetails.candidate_id;
 				    mapAction.getAppliedJoblist(appliedJobSelector);
@@ -60,11 +63,41 @@ removeApplication = (job_id) => {
 					}
 				})
 				.catch(error=>{
-					Swal.fire(
+					if(error.message === "Request failed with status code 401"){
+			        var userDetails =  localStorage.removeItem("userDetails");
+			        localStorage.clear();
+
+			        Swal.fire({title  : ' ',
+			                  html    : "Your session is expired! You need to login again. "+"<br>"+" Click OK to go to Login Page",
+			                  text    :  "" })
+			            .then(okay => {
+			              if (okay) { 
+			                var userDetails = {
+			                    loggedIn    : false,
+			                    username  :"",  
+			                    firstName   : "", 
+			                    lastName    : "", 
+			                    email     : "",
+			                    phone     : "", 
+			                    user_id     : "",
+			                    roles     : [],
+			                    token     : "", 
+			                    gender    : "", 
+			                    profilePicture : "",
+			                    candidate_id: "",
+			                    profileCompletion : 0
+			                    }
+			                    mapAction.setUserDetails(userDetails);
+			                    document.getElementById("loginbtndiv").click();
+			                    }
+			                  });
+			            }else{
+			            	Swal.fire(
 								'',
 								"Some problem occured while removing job application!",
-								''
-						)
+								'')
+			            }
+						
 				})
 			}
 
@@ -73,9 +106,11 @@ removeApplication = (job_id) => {
 		document.getElementById("loginbtndiv").click();
 	}
 }	
-handleclick = (jobid)=>{
-	console.log("jobid : ", jobid);
+wishlistJob = (jobid)=>{
+	var {mapAction} = this.props;
+
 	this.setState({isToggle:!this.state.isToggle})
+
 	if (this.props.userDetails.loggedIn) {
 		var formValues = {
 			candidate_id: this.props.userDetails.candidate_id,
@@ -84,7 +119,7 @@ handleclick = (jobid)=>{
 		}
 		Axios.post("/api/wishlist/post",formValues)
 			.then(response =>{
-				var {mapAction} = this.props;
+				
 				var jobWishlistSelector = this.props.jobWishlistSelector;
 			    jobWishlistSelector.candidate_id = this.props.userDetails.candidate_id;
 			    mapAction.getJobWishlist(jobWishlistSelector);
@@ -106,6 +141,40 @@ handleclick = (jobid)=>{
 				}
 			})
 			.catch(error=>{
+				if(error.message === "Request failed with status code 401"){
+			        var userDetails =  localStorage.removeItem("userDetails");
+			        localStorage.clear();
+
+			        Swal.fire({title  : ' ',
+			                  html    : "Your session is expired! You need to login again. "+"<br>"+" Click OK to go to Login Page",
+			                  text    :  "" })
+			            .then(okay => {
+			              if (okay) { 
+			                var userDetails = {
+			                    loggedIn    : false,
+			                    username  :"",  
+			                    firstName   : "", 
+			                    lastName    : "", 
+			                    email     : "",
+			                    phone     : "", 
+			                    user_id     : "",
+			                    roles     : [],
+			                    token     : "", 
+			                    gender    : "", 
+			                    profilePicture : "",
+			                    candidate_id: "",
+			                    profileCompletion : 0
+			                    }
+			                    mapAction.setUserDetails(userDetails);
+			                    document.getElementById("loginbtndiv").click();
+			                    }
+			                  });
+			    }else{
+	            	Swal.fire(
+						'',
+						"Error!",
+						'')
+	            }
 				console.log(error);
 			})	
 	}else{
@@ -204,9 +273,9 @@ handleclick = (jobid)=>{
 																	<ul>
 																		{/*<li><i className="fa fa-check" onClick={this.applyJob}></i></li>*/}
 																		<li><i title="Remove from applied job" className={"fa fa-check-square"}  onClick={ removeApplication => this.removeApplication(elem.job_id._id) } ></i></li>
-																		<li ><i title={tooltipMsg} onClick={wishlist => this.handleclick(elem.job_id._id)} className={"fa fa-heart" + wishClass}></i></li>
+																		<li ><i title={tooltipMsg} onClick={wishlist => this.wishlistJob(elem.job_id._id)} className={"fa fa-heart" + wishClass}></i></li>
 																	
-																		{/*<li><i onClick={wishlist => this.handleclick(elem._id)} className={this.state.isToggle ? 'fa fa-heart-o':'fa fa-heart'}></i></li>
+																		{/*<li><i onClick={wishlist => this.wishlistJob(elem._id)} className={this.state.isToggle ? 'fa fa-heart-o':'fa fa-heart'}></i></li>
 																		<li><i className="fa fa-youtube-play"></i></li>*/}
 																	</ul>
 																</div>

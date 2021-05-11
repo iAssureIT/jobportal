@@ -2,10 +2,11 @@ const express 	= require("express");
 const router 	= express.Router();
 
 const languageMaster = require('./ControllerLanguage.js');
+const checkAuth 	 = require('../../middleware/check-auth.js');
 
 router.post('/post', languageMaster.insertLanguage);
 
-router.post('/get/list', languageMaster.fetchLanguages);
+router.post('/get/list', checkAuth, languageMaster.fetchLanguages);
 
 router.get('/get/list', languageMaster.getLanguages);
 

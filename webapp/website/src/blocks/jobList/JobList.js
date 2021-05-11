@@ -31,7 +31,9 @@ class Joblist extends Component{
 }
 
 componentDidMount(){
-	 
+	const userDetails = JSON.parse(localStorage.getItem("userDetails"));
+  	const token = userDetails.token;
+  	Axios.defaults.headers.common['Authorization'] = 'Bearer '+ token;
 }
 showMore(){
 
@@ -65,7 +67,7 @@ handlePageChange(pageNumber) {
 
 
 handleclick = (jobid)=>{
-	console.log("jobid : ", jobid);
+	var {mapAction} = this.props;
 	this.setState({isToggle:!this.state.isToggle})
 	if (this.props.userDetails.loggedIn) {
 		var formValues = {
@@ -80,7 +82,6 @@ handleclick = (jobid)=>{
 			    jobWishlistSelector.candidate_id = this.props.userDetails.candidate_id;
 			    mapAction.getJobWishlist(jobWishlistSelector);
 
-				console.log("wishlist response=", response.data);
 				if(response.data.message==="Job is removed from wishlist"){
 							Swal.fire(
 									'',
@@ -96,6 +97,40 @@ handleclick = (jobid)=>{
 				}
 			})
 			.catch(error=>{
+				if(error.message === "Request failed with status code 401"){
+			        var userDetails =  localStorage.removeItem("userDetails");
+			        localStorage.clear();
+
+			        Swal.fire({title  : ' ',
+			                  html    : "Your session is expired! You need to login again. "+"<br>"+" Click OK to go to Login Page",
+			                  text    :  "" })
+			            .then(okay => {
+			              if (okay) { 
+			                var userDetails = {
+			                    loggedIn    : false,
+			                    username  :"",  
+			                    firstName   : "", 
+			                    lastName    : "", 
+			                    email     : "",
+			                    phone     : "", 
+			                    user_id     : "",
+			                    roles     : [],
+			                    token     : "", 
+			                    gender    : "", 
+			                    profilePicture : "",
+			                    candidate_id: "",
+			                    profileCompletion : 0
+			                    }
+			                    mapAction.setUserDetails(userDetails);
+			                    document.getElementById("loginbtndiv").click();
+			                    }
+			                  });
+			    }else{
+			    	Swal.fire(
+								'',
+								"Some problem occured!",
+								'')
+			    }
 				console.log(error);
 			})	
 	}else{
@@ -121,7 +156,7 @@ search = (event)=>{
 
 
 applyJob = (jobid, company_id, total,  male, female, other, district, jobDistrict, state, stateCode, country,countryCode, exp0to2, exp2to6, exp6to10 )=>{
-
+	var {mapAction} = this.props;	
 	console.log("jobid :", jobid);
 	
 	if (this.props.userDetails.loggedIn) {
@@ -180,11 +215,43 @@ applyJob = (jobid, company_id, total,  male, female, other, district, jobDistric
 					}
 				})
 				.catch(error=>{
-					Swal.fire(
+
+					if(error.message === "Request failed with status code 401"){
+				        var userDetails =  localStorage.removeItem("userDetails");
+				        localStorage.clear();
+
+				        Swal.fire({title  : ' ',
+				                  html    : "Your session is expired! You need to login again. "+"<br>"+" Click OK to go to Login Page",
+				                  text    :  "" })
+				            .then(okay => {
+				              if (okay) { 
+				                var userDetails = {
+				                    loggedIn    : false,
+				                    username  :"",  
+				                    firstName   : "", 
+				                    lastName    : "", 
+				                    email     : "",
+				                    phone     : "", 
+				                    user_id     : "",
+				                    roles     : [],
+				                    token     : "", 
+				                    gender    : "", 
+				                    profilePicture : "",
+				                    candidate_id: "",
+				                    profileCompletion : 0
+				                    }
+				                    mapAction.setUserDetails(userDetails);
+				                    document.getElementById("loginbtndiv").click();
+				                    }
+				                  });
+				    }else{
+				    	Swal.fire(
 								'',
 								"Some problem occured while applying job!",
 								''
 						)
+				    }
+					
 				})
 			
 				}else if (result.dismiss === Swal.DismissReason.cancel){
@@ -214,7 +281,7 @@ applyJob = (jobid, company_id, total,  male, female, other, district, jobDistric
 	}
 }
 removeApplication = (job_id, male, female, other, state, stateCode, country,countryCode, exp0to2, exp2to6, exp6to10) => {
-	console.log(job_id)
+	var {mapAction} = this.props;	
 	if (this.props.userDetails.loggedIn) {
 		var formValues = { 
 			candidate_id   		: this.props.userDetails.candidate_id,
@@ -266,11 +333,42 @@ removeApplication = (job_id, male, female, other, state, stateCode, country,coun
 					}
 				})
 				.catch(error=>{
-					Swal.fire(
+					if(error.message === "Request failed with status code 401"){
+				        var userDetails =  localStorage.removeItem("userDetails");
+				        localStorage.clear();
+
+				        Swal.fire({title  : ' ',
+				                  html    : "Your session is expired! You need to login again. "+"<br>"+" Click OK to go to Login Page",
+				                  text    :  "" })
+				            .then(okay => {
+				              if (okay) { 
+				                var userDetails = {
+				                    loggedIn    : false,
+				                    username  :"",  
+				                    firstName   : "", 
+				                    lastName    : "", 
+				                    email     : "",
+				                    phone     : "", 
+				                    user_id     : "",
+				                    roles     : [],
+				                    token     : "", 
+				                    gender    : "", 
+				                    profilePicture : "",
+				                    candidate_id: "",
+				                    profileCompletion : 0
+				                    }
+				                    mapAction.setUserDetails(userDetails);
+				                    document.getElementById("loginbtndiv").click();
+				                    }
+				                  });
+				    }else{
+				    	Swal.fire(
 								'',
 								"Some problem occured while removing job application!",
 								''
 						)
+				    }
+					
 				})
 			}
 

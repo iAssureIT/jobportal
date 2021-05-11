@@ -113,15 +113,16 @@ deleteJob = (event)=>{
 					})
 					.catch(error=>{
 						if(error.message === "Request failed with status code 401"){
-				            var userDetails =  localStorage.removeItem("userDetails");
-				            localStorage.clear();
-				            Swal.fire({//title : "Your session is expired", 
-				                     text  : "Your session is expired! You need to login again. Click OK to go to Login Page"
-				                 }).then(okay => {
-				            if (okay) {
-				              window.location.href = "/login";
-				            }
-				          });
+				          var userDetails =  localStorage.removeItem("userDetails");
+				          localStorage.clear();
+				          Swal.fire({title  : ' ',
+				                    html    : "Your session is expired! You need to login again. "+"<br>"+" Click OK to go to Login Page",
+				                    text    :  "" })
+				              .then(okay => {
+				                if (okay) {
+				                  window.location.href = "/login";
+				                }
+				              });
 				        }else{
 				            Swal.fire("", "Some problem occured deleting job", "");
 				        }
@@ -143,6 +144,7 @@ inactiveJob(event){
 	console.log(job_id);
 		
 		Swal.fire({
+
 				title 				: ' ',
 				html 				: 'Are you sure<br />you want to make this job inactive?',
 				text 				: '',
@@ -174,20 +176,23 @@ inactiveJob(event){
 								}
 							})
 							.catch(error=>{
+
 								if(error.message === "Request failed with status code 401"){
-						            var userDetails =  localStorage.removeItem("userDetails");
-						            localStorage.clear();
-						            Swal.fire({//title : "Your session is expired", 
-						                     text  : "Your session is expired! You need to login again. Click OK to go to Login Page"
-						                 }).then(okay => {
-						            if (okay) {
-						              window.location.href = "/login";
-						            }
-						          });
+						          var userDetails =  localStorage.removeItem("userDetails");
+						          localStorage.clear();
+						          Swal.fire({title  : ' ',
+						                    html    : "Your session is expired! You need to login again. "+"<br>"+" Click OK to go to Login Page",
+						                    text    :  "" })
+						              .then(okay => {
+						                if (okay) {
+						                  window.location.href = "/login";
+						                }
+						              });
 						        }else{
 						            Swal.fire("", "Some problem occured while making job inactive", "");
 						        }
 							})
+
 						}else if (result.dismiss === Swal.DismissReason.cancel){
 							/*Swal.fire(
 								'',
@@ -238,19 +243,21 @@ activateJob(event){
 							})
 						.catch(error=>{
 							if(error.message === "Request failed with status code 401"){
-					            var userDetails =  localStorage.removeItem("userDetails");
-					            localStorage.clear();
-					            Swal.fire({//title : "Your session is expired", 
-					                     text  : "Your session is expired! You need to login again. Click OK to go to Login Page"
-					                 }).then(okay => {
-					            if (okay) {
-					              window.location.href = "/login";
-					            }
-					          });
+					          var userDetails =  localStorage.removeItem("userDetails");
+					          localStorage.clear();
+					          Swal.fire({title  : ' ',
+					                    html    : "Your session is expired! You need to login again. "+"<br>"+" Click OK to go to Login Page",
+					                    text    :  "" })
+					              .then(okay => {
+					                if (okay) {
+					                  window.location.href = "/login";
+					                }
+					              });
 					        }else{
 					            Swal.fire("", "Some problem occured while making job active", "");
 					        }
 						})
+
 					}else if (result.dismiss === Swal.DismissReason.cancel){
 					/*Swal.fire(
 						'',

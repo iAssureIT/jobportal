@@ -157,21 +157,21 @@ export function filterJobList(selector) {
           }
 	    })
 	    .catch((error)=>{
+        //{"loggedIn":true,"username":"+91 7709502481","firstName":"Priteshi","lastName":"Joshi","email":"preteshi@tcl.com","city":"HB-Pune,MH-IN","company_id":"602a44e532320431da676bd7","companyID":"2","user_id":"609590a0a50be16c70e5bb2e","roles":["employer"],"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtb2JpbGUiOiIrOTEgNzcwOTUwMjQ4MSIsInVzZXJJZCI6IjYwOTU5MGEwYTUwYmUxNmM3MGU1YmIyZSIsImlhdCI6MTYyMDcxMDkzNCwiZXhwIjoxNjUyMjQ2OTM0fQ.2WJySo17C7yCM9Yk54xe8SVBPMoAxVsEB96hCO1aeP","industry_id":"602a407c32320431da676bac"}
 	          console.log('error', error);
             if(error.message === "Request failed with status code 401"){
               var userDetails =  localStorage.removeItem("userDetails");
               localStorage.clear();
-              Swal({  
-                  title : "Your Session is expired.",                
-                  text: "You need to login again. Click OK to go to Login Page",
-                  // confirmButtonColor: "#f00",
-                  // icon:"error"
-                })
-              .then(okay => {
-                if (okay) {
-                  window.location.href = "/login";
-                }
-              });
+              Swal.fire({title  : ' ',
+                        html    : "Your session is expired! You need to login again. "+"<br>"+" Click OK to go to Login Page",
+                        text    :  "" })
+                  .then(okay => {
+                    if (okay) {
+                      window.location.href = "/login";
+                    }
+                  });
+            }else{
+              Swal.fire("", "Error while getting job list", "");
             }
 	    }) 
   	}  
@@ -300,7 +300,21 @@ export function filterCandidatesApplied(appliedCandidateSelector) {
           dispatch(getAppliedCandidateList(response.data));
       })
       .catch((error)=>{
-            console.log('error', error);
+        if(error.message === "Request failed with status code 401"){
+          var userDetails =  localStorage.removeItem("userDetails");
+          localStorage.clear();
+          Swal.fire({title  : ' ',
+                    html    : "Your session is expired! You need to login again. "+"<br>"+" Click OK to go to Login Page",
+                    text    :  "" })
+              .then(okay => {
+                if (okay) {
+                  window.location.href = "/login";
+                }
+              });
+        }
+        else{
+            Swal.fire("", "Error!", "");
+        }
       }) 
     }  
 }
@@ -315,7 +329,20 @@ export function filterCandidates(candidateSelector) {
           dispatch(getCandidateList(response.data));
       })
       .catch((error)=>{
-            console.log('error', error);
+        if(error.message === "Request failed with status code 401"){
+          var userDetails =  localStorage.removeItem("userDetails");
+          localStorage.clear();
+          Swal.fire({title  : ' ',
+                    html    : "Your session is expired! You need to login again. "+"<br>"+" Click OK to go to Login Page",
+                    text    :  "" })
+              .then(okay => {
+                if (okay) {
+                  window.location.href = "/login";
+                }
+              });
+        }else{
+            Swal.fire("", "Error!", "");
+        }
       }) 
     }  
 }
@@ -365,29 +392,4 @@ export function filterIndustrialData(selector) {
     }  
 }
 
-export function getJobWishlist(candidate_id) {
-    return dispatch =>{
-      var formValue={"candidate_id":candidate_id}
-      return axios.post("/api/wishlist/candidateWishlist",formValue)
-      .then((response)=>{
-        
-          dispatch(setJobWishlist(response.data ));
-      })
-      .catch((error)=>{
-            console.log('error', error);
-      }) 
-    }  
-}
-export function getAppliedJoblist(candidate_id) {
-    return dispatch =>{
-      var formValue={"candidate_id":candidate_id}
-      console.log(formValue)
-      return axios.post("/api/applyJob/get/appliedJobList",formValue)
-      .then((response)=>{
-          dispatch(setAppliedJoblist(response.data ));
-      })
-      .catch((error)=>{
-            console.log('error', error);
-      }) 
-    }  
-}
+

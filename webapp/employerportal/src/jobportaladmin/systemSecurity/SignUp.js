@@ -8,7 +8,7 @@ import 'bootstrap/js/modal.js';
 import 'bootstrap/js/tab.js';
 import 'font-awesome/css/font-awesome.min.css';
 import './SignUp.css';
-import swal from 'sweetalert';
+import Swal from 'sweetalert2';
 import axios from 'axios';
 import _          from 'underscore';
 import 'react-phone-input-2/lib/style.css';
@@ -66,7 +66,7 @@ class SignUp extends Component {
                 this.setState({ companylist : response.data });
         })
         .catch(error => {
-            swal.fire("Error while getting List data", error.message, 'error');
+            Swal.fire('', "Error while getting List data", '');
         }) 
     axios.get("/api/states/get/list/IN")
       .then((response) => {
@@ -301,7 +301,11 @@ class SignUp extends Component {
       axios.post('/api/auth/post/signup/user/otp', auth)
         .then((response) => {
           if(response.data.message == 'USER_CREATED'){
-            swal('Great, Information submitted successfully and OTP is sent to your registered Email.');
+            Swal.fire({
+                        title       : ' ',
+                        html        : 'Great, Information submitted successfully &<br />OTP is sent to your registered Email',
+                        text        : '', 
+                      })
             localStorage.setItem('previousUrl' ,'signup');
             if(this.state.branchCode == ""){
                 
@@ -325,10 +329,7 @@ class SignUp extends Component {
             .then((response) => {
                 if(response.data.duplicated)
                 {
-                  swal({
-                    title : "Contact already exists.",
-                  });
-
+                  Swal.fire('', "Contact already exists", '');
                 }
             })
             .catch((error) => {
@@ -369,7 +370,7 @@ class SignUp extends Component {
             
             this.props.history.push("/confirm-otp/" + response.data.ID);
           }else{
-            swal(response.data.message);
+            Swal.fire(response.data.message);
           } 
         })
         .catch((error) => {

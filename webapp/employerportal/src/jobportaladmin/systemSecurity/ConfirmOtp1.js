@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import swal from 'sweetalert';
+import Swal from 'sweetalert2';
 import $ from "jquery";
 import jQuery from 'jquery';
 import axios from 'axios';
@@ -86,7 +86,7 @@ class ConfirmOtp extends Component {
       .then((response) => {
 
           if (response.data.message == 'SUCCESS') { 
-            swal('OTP Verified Successfully.');
+            Swal.fire('', "OTP Verified Successfully", '');
             
             if (url == 'forgotpassword') {
               localStorage.removeItem("previousUrl");
@@ -101,11 +101,11 @@ class ConfirmOtp extends Component {
 
             }
           } else {
-            swal('Please enter valid OTP.');
+            Swal.fire('', "Please enter valid OTP", '');
           }
         })
         .catch((error) => {
-          swal(error.response.data.message);
+          Swal.fire(error.response.data.message);
         })
       }
 
@@ -140,12 +140,12 @@ class ConfirmOtp extends Component {
       .then((notificationres) => {})
       .catch((error) => { console.log('notification error: ', error) })
 
-        swal("We send you a Verification Code to your registered email. Please verify your account.");
+        Swal.fire('', "We send you a Verification Code to your registered email. Please verify your account", '');
        /* mapAction.setUserID(response.data.ID);*/
         //mapAction.setSelectedModal("login");
       })
       .catch((error) => {
-        swal(" Failed to sent OTP");
+        Swal.fire('', "Failed to sent OTP", '');
       })
   }
   Closepagealert(event) {
@@ -168,6 +168,29 @@ class ConfirmOtp extends Component {
 
     return (
             <form className="signUpBoxFormWrapper">
+               <div className="img1EmpSignUp">
+                <img src="/images/Sign_In/1.png" alt="img1EmpSignUp" className="img1oginInner"/>
+            </div>
+
+           <div className="img2EmpSignUp">
+              <img src="/images/Sign_In/2.png" alt="img2EmpSignUp" className="img2EmpSignUpInner"/>
+          </div>
+
+           <div className="img3EmpSignUp">
+              <img src="/images/Sign_In/3.png" alt="img3EmpSignUp" className="img3EmpSignUpInner"/>
+          </div>
+
+           <div className="img4EmpSignUp">
+              <img src="/images/Sign_In/4.png" alt="img4EmpSignUp" className="img4EmpSignUpInner"/>
+          </div>
+
+           <div className="img5EmpSignUp">
+              <img src="/images/Sign_In/5.png" alt="img5EmpSignUp" className="img5EmpSignUpInner"/>
+          </div>
+
+           <div className="img6EmpSignUp">
+              <img src="/images/Sign_In/6.png" alt="img6EmpSignUp" className="img6EmpSignUpInner"/>
+          </div>
                 <div className="signUpBoxTitle col-lg-10 col-lg-offset-1">Please enter OTP sent you on your Phone or Email</div>
                    
                     <div className="signUpBoxForm signUpBoxOtpForm col-lg-6 col-lg-offset-3">
@@ -208,9 +231,14 @@ class ConfirmOtp extends Component {
                   
                     
                      
-                    <div className="col-lg-8 col-lg-offset-2 buttonOtpWrapper">
-                       <button className="buttonNext col-lg-5 pull-left" onClick={this.resendOtp.bind(this)}>Resend OTP</button>
-                       <button className="buttonNext col-lg-5 pull-right" onClick={this.confirmOTP.bind(this)}>Confirm OTP</button>
+                    <div className="col-lg-10 col-lg-offset-1 buttonOtpWrapper">
+                      <div className="col-lg-6">
+                         <button className="buttonNext col-lg-12 pull-left" onClick={this.resendOtp.bind(this)}>Resend OTP</button>
+                      </div>
+
+                      <div className="col-lg-6">
+                        <button className="buttonNext col-lg-12 pull-right" onClick={this.confirmOTP.bind(this)}>Confirm OTP</button>
+                      </div>
                     </div>
                   </form> 
 

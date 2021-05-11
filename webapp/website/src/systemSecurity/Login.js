@@ -157,6 +157,7 @@ class Login extends Component {
               }
               console.log("..........................................",userDetails);
 
+              axios.defaults.headers.common['Authorization'] = 'Bearer '+ response.data.userDetails.token;
               axios.get('/api/candidatemaster/get/candidate_id/'+response.data.userDetails.user_id)
               .then((candidate) => {
               //console.log(candidate)

@@ -25,7 +25,9 @@ class ChangePassword extends Component {
         }
     }
     componentDidMount(){
-       
+        const userDetails = JSON.parse(localStorage.getItem("userDetails"));
+        const token = userDetails.token;
+        axios.defaults.headers.common['Authorization'] = 'Bearer '+ token;
     }
 
     showPassword1=(event)=>{
@@ -156,10 +158,9 @@ class ChangePassword extends Component {
 
     changePassword(event) {
         event.preventDefault();
-        console.log(this.state.phone);
-        console.log(this.props.userDetails);
-        console.log(this.state.user_ID);
+        var {mapAction} = this.props;
         var status =  this.validateForm();
+
         if(status == true){
         var user_id = this.state.user_ID;
         var auth = {
@@ -216,24 +217,42 @@ class ChangePassword extends Component {
                 if(error.message === "Request failed with status code 401"){
                   var userDetails =  localStorage.removeItem("userDetails");
                   localStorage.clear();
-                  Swal.fire({//title : "Your session is expired", 
-                             text  : "Your session is expired! You need to login again. Click OK to go to Login Page"
-                         }).then(okay => {
-                    if (okay) {
-                      window.location.href = "/login";
-                    }
-                  });
-                }else{
-                    Swal.fire("", "Error while getting functional data", "");
-                }
+
+                  Swal.fire({title  : ' ',
+                            html    : "Your session is expired! You need to login again. "+"<br>"+" Click OK to go to Login Page",
+                            text    :  "" })
+                      .then(okay => {
+                        if (okay) { 
+                          var userDetails = {
+                              loggedIn    : false,
+                              username  :"",  
+                              firstName   : "", 
+                              lastName    : "", 
+                              email     : "",
+                              phone     : "", 
+                              user_id     : "",
+                              roles     : [],
+                              token     : "", 
+                              gender    : "", 
+                              profilePicture : "",
+                              candidate_id: "",
+                              profileCompletion : 0
+                              }
+                              mapAction.setUserDetails(userDetails);
+                              document.getElementById("loginbtndiv").click();
+                              }
+                            });
+              }else{
+                Swal.fire('', " Error!", '');
+              }
               })
             }else{
-              Swal.fire('', "Invalid Password","Please Enter valid new password and confirm password", '');
+              Swal.fire("", "Please enter valid new password and confirm password", "");
             }
           }
-           else{
-              Swal.fire('', "Same  Password","Old password and New password must be different", '');
-            }  
+          else{
+              Swal.fire("", "Please enter different new password", "");
+          }  
            
           
         }

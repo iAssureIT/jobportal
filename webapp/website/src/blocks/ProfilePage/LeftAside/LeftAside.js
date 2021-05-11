@@ -3,6 +3,9 @@ import Axios 			 	from 'axios';
 import Swal 			 	from 'sweetalert2';
 import Moment               from 'moment';
 import { withRouter }	 	from 'react-router-dom';
+import { connect }        from 'react-redux';
+import { bindActionCreators } from 'redux';
+import  * as mapActionCreator from '../../../common/actions/index.js';
 import './LeftAside.css';
 
 class LeftAside extends Component{
@@ -33,7 +36,11 @@ class LeftAside extends Component{
 		}
 	}
 	componentDidMount(){
-		
+		var {mapAction} = this.props;
+	    const userDetails = JSON.parse(localStorage.getItem("userDetails"));
+	    const token = userDetails.token;
+	    Axios.defaults.headers.common['Authorization'] = 'Bearer '+ token;
+
 		Axios.get("/api/candidatemaster/get/one/"+this.state.candidate_id)
 		.then(response=>{
 			 const primarySkills = [];
@@ -65,7 +72,37 @@ class LeftAside extends Component{
 				})
 			})
 			.catch(error=>{
-			 	Swal.fire('', "Submit Error!", '');
+				if(error.message === "Request failed with status code 401"){
+			        var userDetails =  localStorage.removeItem("userDetails");
+			        localStorage.clear();
+
+			        Swal.fire({title  : ' ',
+			                  html    : "Your session is expired! You need to login again. "+"<br>"+" Click OK to go to Login Page",
+			                  text    :  "" })
+			            .then(okay => {
+			              if (okay) { 
+			                var userDetails = {
+			                    loggedIn    : false,
+			                    username  :"",  
+			                    firstName   : "", 
+			                    lastName    : "", 
+			                    email     : "",
+			                    phone     : "", 
+			                    user_id     : "",
+			                    roles     : [],
+			                    token     : "", 
+			                    gender    : "", 
+			                    profilePicture : "",
+			                    candidate_id: "",
+			                    profileCompletion : 0
+			                    }
+			                    mapAction.setUserDetails(userDetails);
+			                    document.getElementById("loginbtndiv").click();
+			                    }
+			                  });
+			    }else{
+			    	Swal.fire('', " Error!", '');
+			    }
 			})
 
 		}
@@ -222,5 +259,13 @@ class LeftAside extends Component{
 			);
 	}
 }
+const mapStateToProps = (state)=>{
+    return {
+      userDetails : state.userDetails
+    }
+}
+const mapDispatchToProps = (dispatch) => ({
+    mapAction :  bindActionCreators(mapActionCreator, dispatch)
+})
+export default connect(mapStateToProps, mapDispatchToProps) (withRouter(LeftAside));
 
-export default withRouter(LeftAside)

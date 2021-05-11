@@ -54,7 +54,12 @@ class BasicInfoForm extends Component{
 		
 	}
 	componentDidMount(){
-		Axios.get("/api/languagemaster/get/list")
+		const userDetails = JSON.parse(localStorage.getItem("userDetails"));
+	    const token = userDetails.token;
+	    Axios.defaults.headers.common['Authorization'] = 'Bearer '+ token;
+		var {mapAction} = this.props;
+
+		Axios.post("/api/languagemaster/get/list", {"startRange":0,"limitRange":10000})
 		.then(response => {
 			var languagesSuggestions     =  [];
                 response.data.map((elem,index)=>{
@@ -65,7 +70,38 @@ class BasicInfoForm extends Component{
                 });
 		})
 		.catch(error=>{
-			Swal.fire('', "Error while getting List data", '');
+			if(error.message === "Request failed with status code 401"){
+		        var userDetails =  localStorage.removeItem("userDetails");
+		        localStorage.clear();
+
+		        Swal.fire({title  : ' ',
+		                  html    : "Your session is expired! You need to login again. "+"<br>"+" Click OK to go to Login Page",
+		                  text    :  "" })
+		            .then(okay => {
+		              if (okay) { 
+		                var userDetails = {
+		                    loggedIn    : false,
+		                    username  :"",  
+		                    firstName   : "", 
+		                    lastName    : "", 
+		                    email     : "",
+		                    phone     : "", 
+		                    user_id     : "",
+		                    roles     : [],
+		                    token     : "", 
+		                    gender    : "", 
+		                    profilePicture : "",
+		                    candidate_id: "",
+		                    profileCompletion : 0
+		                    }
+		                    mapAction.setUserDetails(userDetails);
+		                    document.getElementById("loginbtndiv").click();
+		                    }
+		                  });
+		            }else{
+		            	Swal.fire('', "Error while getting data", '');	
+		            }
+			
 		})
 
 		Axios.get("/api/candidatemaster/get/one/"+this.state.candidate_id)
@@ -102,7 +138,37 @@ class BasicInfoForm extends Component{
 			 	})
 			 })
 			 .catch(error=>{
-			 	Swal.fire('', "Submit Error!", '');
+			 	if(error.message === "Request failed with status code 401"){
+		        var userDetails =  localStorage.removeItem("userDetails");
+		        localStorage.clear();
+
+		        Swal.fire({title  : ' ',
+		                  html    : "Your session is expired! You need to login again. "+"<br>"+" Click OK to go to Login Page",
+		                  text    :  "" })
+		            .then(okay => {
+		              if (okay) { 
+		                var userDetails = {
+		                    loggedIn    : false,
+		                    username  :"",  
+		                    firstName   : "", 
+		                    lastName    : "", 
+		                    email     : "",
+		                    phone     : "", 
+		                    user_id     : "",
+		                    roles     : [],
+		                    token     : "", 
+		                    gender    : "", 
+		                    profilePicture : "",
+		                    candidate_id: "",
+		                    profileCompletion : 0
+		                    }
+		                    mapAction.setUserDetails(userDetails);
+		                    document.getElementById("loginbtndiv").click();
+		                    }
+		                  });
+		            }else{
+			 		Swal.fire('', "Submit Error!", '');
+			 		}
 			 })
 }
 
@@ -453,10 +519,39 @@ class BasicInfoForm extends Component{
 
 						this.props.history.push("/address/"+this.state.candidate_id);
 							
-							
 				})
 				.catch(error =>{
-					Swal.fire('', "Submit Error!", '');
+					if(error.message === "Request failed with status code 401"){
+				        var userDetails =  localStorage.removeItem("userDetails");
+				        localStorage.clear();
+
+				        Swal.fire({title  : ' ',
+				                  html    : "Your session is expired! You need to login again. "+"<br>"+" Click OK to go to Login Page",
+				                  text    :  "" })
+				            .then(okay => {
+				              if (okay) { 
+				                var userDetails = {
+				                    loggedIn    : false,
+				                    username  :"",  
+				                    firstName   : "", 
+				                    lastName    : "", 
+				                    email     : "",
+				                    phone     : "", 
+				                    user_id     : "",
+				                    roles     : [],
+				                    token     : "", 
+				                    gender    : "", 
+				                    profilePicture : "",
+				                    candidate_id: "",
+				                    profileCompletion : 0
+				                    }
+				                    mapAction.setUserDetails(userDetails);
+				                    document.getElementById("loginbtndiv").click();
+				                    }
+				                  });
+			            }else{
+						Swal.fire('', "Error!", '');
+						}
 				});
 			}
 		

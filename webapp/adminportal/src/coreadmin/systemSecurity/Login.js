@@ -210,7 +210,7 @@ class Login extends Component {
                 </div>                
                 <div className="col-lg-12 form-group loginFormGroup" >
                   <div className="input-group">
-                    <span className="loginInputIcon1 input-group-addon "><i className="fa fa-mobile"></i></span>
+                    <span className="loginInputIcon1 input-group-addon "><i className="fa fa-envelope"></i></span>
                     <input type="tel" id="loginusername" name="loginusername" placeholder="Email Id" value={this.state.loginusername} ref="loginusername" onChange={this.handleChange.bind(this)} className="form-control loginInputBox"/>
                   </div>
                   <span id="loginusernameError" className="errorMsg"></span>
