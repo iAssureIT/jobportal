@@ -143,13 +143,14 @@ class JobPosting extends Component {
                 if(error.message === "Request failed with status code 401"){
                   var userDetails =  localStorage.removeItem("userDetails");
                   localStorage.clear();
-                  Swal.fire({//title : "Your session is expired", 
-                             text  : "Your session is expired! You need to login again. Click OK to go to Login Page"
-                         }).then(okay => {
-                    if (okay) {
-                      window.location.href = "/login";
-                    }
-                  });
+                  Swal.fire({title  : ' ',
+                            html    : "Your session is expired! You need to login again. "+"<br>"+" Click OK to go to Login Page",
+                            text    :  "" })
+                      .then(okay => {
+                        if (okay) {
+                          window.location.href = "/login";
+                        }
+                      });
                 }else{
                     Swal.fire("", "Error while getting functional data", "");
                 }
@@ -166,13 +167,14 @@ class JobPosting extends Component {
                 if(error.message === "Request failed with status code 401"){
                   var userDetails =  localStorage.removeItem("userDetails");
                   localStorage.clear();
-                  Swal.fire({//title : "Your session is expired", 
-                             text  : "Your session is expired! You need to login again. Click OK to go to Login Page"
-                         }).then(okay => {
-                    if (okay) {
-                      window.location.href = "/login";
-                    }
-                  });
+                  Swal.fire({title  : ' ',
+                            html    : "Your session is expired! You need to login again. "+"<br>"+" Click OK to go to Login Page",
+                            text    :  "" })
+                      .then(okay => {
+                        if (okay) {
+                          window.location.href = "/login";
+                        }
+                      });
                 }else{
                     Swal.fire("", "Error while getting subfunctional data", "");
                 }
@@ -189,13 +191,14 @@ class JobPosting extends Component {
                 if(error.message === "Request failed with status code 401"){
                   var userDetails =  localStorage.removeItem("userDetails");
                   localStorage.clear();
-                  Swal.fire({//title : "Your session is expired", 
-                             text  : "Your session is expired! You need to login again. Click OK to go to Login Page"
-                         }).then(okay => {
-                    if (okay) {
-                      window.location.href = "/login";
-                    }
-                  });
+                  Swal.fire({title  : ' ',
+                            html    : "Your session is expired! You need to login again. "+"<br>"+" Click OK to go to Login Page",
+                            text    :  "" })
+                      .then(okay => {
+                        if (okay) {
+                          window.location.href = "/login";
+                        }
+                      });
                 }else{
                     Swal.fire("", "Error while getting job role data", "");
                 }
@@ -212,13 +215,14 @@ class JobPosting extends Component {
                 if(error.message === "Request failed with status code 401"){
                   var userDetails =  localStorage.removeItem("userDetails");
                   localStorage.clear();
-                  Swal.fire({//title : "Your session is expired", 
-                             text  : "Your session is expired! You need to login again. Click OK to go to Login Page"
-                         }).then(okay => {
-                    if (okay) {
-                      window.location.href = "/login";
-                    }
-                  });
+                  Swal.fire({title  : ' ',
+                            html    : "Your session is expired! You need to login again. "+"<br>"+" Click OK to go to Login Page",
+                            text    :  "" })
+                      .then(okay => {
+                        if (okay) {
+                          window.location.href = "/login";
+                        }
+                      });
                 }else{
                     Swal.fire("", "Error while getting job type data", "");   
                 }
@@ -236,13 +240,14 @@ class JobPosting extends Component {
                 if(error.message === "Request failed with status code 401"){
                   var userDetails =  localStorage.removeItem("userDetails");
                   localStorage.clear();
-                  Swal.fire({//title : "Your session is expired", 
-                             text  : "Your session is expired! You need to login again. Click OK to go to Login Page"
-                         }).then(okay => {
-                    if (okay) {
-                      window.location.href = "/login";
-                    }
-                  });
+                  Swal.fire({title  : ' ',
+                            html    : "Your session is expired! You need to login again. "+"<br>"+" Click OK to go to Login Page",
+                            text    :  "" })
+                      .then(okay => {
+                        if (okay) {
+                          window.location.href = "/login";
+                        }
+                      });
                 }else{
                     Swal.fire("", "Error while getting job time data", "");
                 }
@@ -260,13 +265,14 @@ class JobPosting extends Component {
                 if(error.message === "Request failed with status code 401"){
                   var userDetails =  localStorage.removeItem("userDetails");
                   localStorage.clear();
-                  Swal.fire({//title : "Your session is expired", 
-                             text  : "Your session is expired! You need to login again. Click OK to go to Login Page"
-                         }).then(okay => {
-                    if (okay) {
-                      window.location.href = "/login";
-                    }
-                  });
+                  Swal.fire({title  : ' ',
+                            html    : "Your session is expired! You need to login again. "+"<br>"+" Click OK to go to Login Page",
+                            text    :  "" })
+                      .then(okay => {
+                        if (okay) {
+                          window.location.href = "/login";
+                        }
+                      });
                 }else{
                 Swal.fire("", "Error while getting job sector data", "");
                 }
@@ -283,13 +289,14 @@ class JobPosting extends Component {
                 if(error.message === "Request failed with status code 401"){
                   var userDetails =  localStorage.removeItem("userDetails");
                   localStorage.clear();
-                  Swal.fire({//title : "Your session is expired", 
-                             text  : "Your session is expired! You need to login again. Click OK to go to Login Page"
-                         }).then(okay => {
-                    if (okay) {
-                      window.location.href = "/login";
-                    }
-                  });
+                  Swal.fire({title  : ' ',
+                            html    : "Your session is expired! You need to login again. "+"<br>"+" Click OK to go to Login Page",
+                            text    :  "" })
+                      .then(okay => {
+                        if (okay) {
+                          window.location.href = "/login";
+                        }
+                      });
                 }else{
                     Swal.fire("", "Error while getting job shift data", "");
                 }
@@ -306,13 +313,14 @@ class JobPosting extends Component {
                 if(error.message === "Request failed with status code 401"){
                   var userDetails =  localStorage.removeItem("userDetails");
                   localStorage.clear();
-                  Swal.fire({//title : "Your session is expired", 
-                             text  : "Your session is expired! You need to login again. Click OK to go to Login Page"
-                         }).then(okay => {
-                    if (okay) {
-                      window.location.href = "/login";
-                    }
-                  });
+                  Swal.fire({title  : ' ',
+                            html    : "Your session is expired! You need to login again. "+"<br>"+" Click OK to go to Login Page",
+                            text    :  "" })
+                      .then(okay => {
+                        if (okay) {
+                          window.location.href = "/login";
+                        }
+                      });
                 }else{
                     Swal.fire("", "Error while getting qualification data", "");
                 }
@@ -335,13 +343,14 @@ class JobPosting extends Component {
                 if(error.message === "Request failed with status code 401"){
                   var userDetails =  localStorage.removeItem("userDetails");
                   localStorage.clear();
-                  Swal.fire({//title : "Your session is expired", 
-                             text  : "Your session is expired! You need to login again. Click OK to go to Login Page"
-                         }).then(okay => {
-                    if (okay) {
-                      window.location.href = "/login";
-                    }
-                  });
+                  Swal.fire({title  : ' ',
+                            html    : "Your session is expired! You need to login again. "+"<br>"+" Click OK to go to Login Page",
+                            text    :  "" })
+                      .then(okay => {
+                        if (okay) {
+                          window.location.href = "/login";
+                        }
+                      });
                 }else{
                     Swal.fire("", "Error while getting skills data", "");
                 }
@@ -491,13 +500,14 @@ class JobPosting extends Component {
                     if(error.message === "Request failed with status code 401"){
                       var userDetails =  localStorage.removeItem("userDetails");
                       localStorage.clear();
-                      Swal.fire({//title : "Your session is expired", 
-                                 text  : "Your session is expired! You need to login again. Click OK to go to Login Page"
-                             }).then(okay => {
-                        if (okay) {
-                          window.location.href = "/login";
-                        }
-                      });
+                      Swal.fire({title  : ' ',
+                                html    : "Your session is expired! You need to login again. "+"<br>"+" Click OK to go to Login Page",
+                                text    :  "" })
+                          .then(okay => {
+                            if (okay) {
+                              window.location.href = "/login";
+                            }
+                          });
                     }else{
                         Swal.fire("", "Some error occured while getting job data", "");
                     }
@@ -782,16 +792,17 @@ class JobPosting extends Component {
             .catch((error) => {
               console.log(error)
               if(error.message === "Request failed with status code 401"){
-                  var userDetails =  localStorage.removeItem("userDetails");
-                  localStorage.clear();
-                  Swal.fire({//title : "Your session is expired", 
-                             text  : "Your session is expired! You need to login again. Click OK to go to Login Page"
-                         }).then(okay => {
-                    if (okay) {
-                      window.location.href = "/login";
-                    }
-                  });
-                }else{
+                var userDetails =  localStorage.removeItem("userDetails");
+                localStorage.clear();
+                Swal.fire({title  : ' ',
+                          html    : "Your session is expired! You need to login again. "+"<br>"+" Click OK to go to Login Page",
+                          text    :  "" })
+                    .then(okay => {
+                      if (okay) {
+                        window.location.href = "/login";
+                      }
+                    });
+              }else{
                     Swal.fire("", "Some error occured while getting states data", "");
                 }
 
@@ -958,13 +969,14 @@ class JobPosting extends Component {
                 if(error.message === "Request failed with status code 401"){
                   var userDetails =  localStorage.removeItem("userDetails");
                   localStorage.clear();
-                  Swal.fire({//title : "Your session is expired", 
-                             text  : "Your session is expired! You need to login again. Click OK to go to Login Page"
-                         }).then(okay => {
-                    if (okay) {
-                      window.location.href = "/login";
-                    }
-                  });
+                  Swal.fire({title  : ' ',
+                            html    : "Your session is expired! You need to login again. "+"<br>"+" Click OK to go to Login Page",
+                            text    :  "" })
+                      .then(okay => {
+                        if (okay) {
+                          window.location.href = "/login";
+                        }
+                      });
                 }else{
                     Swal.fire("", "Submit Error!", "");
                 }
@@ -986,13 +998,14 @@ class JobPosting extends Component {
                 if(error.message === "Request failed with status code 401"){
                   var userDetails =  localStorage.removeItem("userDetails");
                   localStorage.clear();
-                  Swal.fire({//title : "Your session is expired", 
-                             text  : "Your session is expired! You need to login again. Click OK to go to Login Page"
-                         }).then(okay => {
-                    if (okay) {
-                      window.location.href = "/login";
-                    }
-                  });
+                  Swal.fire({title  : ' ',
+                            html    : "Your session is expired! You need to login again. "+"<br>"+" Click OK to go to Login Page",
+                            text    :  "" })
+                      .then(okay => {
+                        if (okay) {
+                          window.location.href = "/login";
+                        }
+                      });
                 }else{
                     Swal.fire("", "Update Error!", "");
                 }

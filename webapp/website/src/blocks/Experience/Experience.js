@@ -58,6 +58,7 @@ class Experience extends Component {
     this.handleChangeState = this.handleChangeState.bind(this);
   }
   componentDidMount() {
+    
     this.getData();
     Axios.get("/api/industrymaster/get/list")
       .then((response) => {

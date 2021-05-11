@@ -213,13 +213,14 @@ class ChangePassword extends Component {
                   if(error.message === "Request failed with status code 401"){
                     var userDetails =  localStorage.removeItem("userDetails");
                     localStorage.clear();
-                    Swal.fire({//title : "Your session is expired", 
-                               text  : "Your session is expired! You need to login again. Click OK to go to Login Page"
-                           }).then(okay => {
-                      if (okay) {
-                        window.location.href = "/login";
-                      }
-                    });
+                    Swal.fire({title  : ' ',
+                              html    : "Your session is expired! You need to login again. "+"<br>"+" Click OK to go to Login Page",
+                              text    :  "" })
+                        .then(okay => {
+                          if (okay) {
+                            window.location.href = "/login";
+                          }
+                        });
                   }else{
                       Swal.fire("", "Error while getting functional data", "");
                   }
