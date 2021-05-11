@@ -13,7 +13,9 @@ import {	faAlignRight, faCheckSquare,
 	      	faBriefcase, faEnvelope,
 	      	faUsers, faSearch, faSignOutAlt,
 	      	faEllipsisH, faTrashAlt, 
-	      	faPencilAlt,faHome, faPlusCircle,faRupeeSign,faArrowRight,faAngleDoubleRight,faSquareFull,faMobileAlt
+	      	faPencilAlt,faHome, faPlusCircle,
+	      	faRupeeSign,faArrowRight,faAngleDoubleRight,
+	      	faSquareFull,faMobileAlt,faCheck
 	   } 									from '@fortawesome/free-solid-svg-icons'
  
 library.add(fab, faCheckSquare, faAlignRight,
@@ -25,4 +27,5 @@ library.add(fab, faCheckSquare, faAlignRight,
  			faBusinessTime, faBriefcase, faEnvelope,
  			faUsers, faSearch, faSignOutAlt, 
  			faEllipsisH, faTrashAlt, faPencilAlt,
- 			faPlusCircle,faRupeeSign,faArrowRight,faAngleDoubleRight,faSquareFull,faMobileAlt)
+ 			faPlusCircle,faRupeeSign,faArrowRight,
+ 			faAngleDoubleRight,faSquareFull,faMobileAlt,faCheck)
