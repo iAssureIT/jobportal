@@ -58,14 +58,48 @@ class Experience extends Component {
     this.handleChangeState = this.handleChangeState.bind(this);
   }
   componentDidMount() {
-    
+    var {mapAction} = this.props;
+    const userDetails = JSON.parse(localStorage.getItem("userDetails"));
+    const token = userDetails.token;
+    Axios.defaults.headers.common['Authorization'] = 'Bearer '+ token;
+
     this.getData();
-    Axios.get("/api/industrymaster/get/list")
+    Axios.post("/api/industrymaster/get/list", {"startRange":0,"limitRange":10000})
       .then((response) => {
         this.setState({ industrylist: response.data });
       })
       .catch((error) => {
-        Swal.fire('', "Error while getting List data", '');
+        if(error.message === "Request failed with status code 401"){
+        var userDetails =  localStorage.removeItem("userDetails");
+        localStorage.clear();
+
+        Swal.fire({title  : ' ',
+                  html    : "Your session is expired! You need to login again. "+"<br>"+" Click OK to go to Login Page",
+                  text    :  "" })
+            .then(okay => {
+              if (okay) { 
+                var userDetails = {
+                    loggedIn    : false,
+                    username  :"",  
+                    firstName   : "", 
+                    lastName    : "", 
+                    email     : "",
+                    phone     : "", 
+                    user_id     : "",
+                    roles     : [],
+                    token     : "", 
+                    gender    : "", 
+                    profilePicture : "",
+                    candidate_id: "",
+                    profileCompletion : 0
+                    }
+                    mapAction.setUserDetails(userDetails);
+                    document.getElementById("loginbtndiv").click();
+                    }
+                  });
+          }else{
+            Swal.fire('', "Error while getting industries list", ''); 
+          }
       });
     Axios.get("/api/entitymaster/get/corporate")
       .then((response) => {
@@ -134,6 +168,7 @@ class Experience extends Component {
   }
   //========== User Define Function Start ================
   edit() {
+    var {mapAction} = this.props;
     var workExperienceID = this.state.workExperienceID;
     if (workExperienceID) {
       var idDate = {
@@ -178,7 +213,37 @@ class Experience extends Component {
           });
         })
         .catch((error) => {
-          Swal.fire('', "Submit Error!", '');
+          if(error.message === "Request failed with status code 401"){
+            var userDetails =  localStorage.removeItem("userDetails");
+            localStorage.clear();
+
+            Swal.fire({title  : ' ',
+                      html    : "Your session is expired! You need to login again. "+"<br>"+" Click OK to go to Login Page",
+                      text    :  "" })
+                .then(okay => {
+                  if (okay) { 
+                    var userDetails = {
+                        loggedIn    : false,
+                        username  :"",  
+                        firstName   : "", 
+                        lastName    : "", 
+                        email     : "",
+                        phone     : "", 
+                        user_id     : "",
+                        roles     : [],
+                        token     : "", 
+                        gender    : "", 
+                        profilePicture : "",
+                        candidate_id: "",
+                        profileCompletion : 0
+                        }
+                        mapAction.setUserDetails(userDetails);
+                        document.getElementById("loginbtndiv").click();
+                        }
+                      });
+                }else{
+                  Swal.fire('', "Error", ''); 
+                }
         });
     }
   }
@@ -202,7 +267,37 @@ class Experience extends Component {
 
       })
       .catch((error) => {
-        Swal.fire('', "Submit Error!", '');
+        if(error.message === "Request failed with status code 401"){
+        var userDetails =  localStorage.removeItem("userDetails");
+        localStorage.clear();
+
+        Swal.fire({title  : ' ',
+                  html    : "Your session is expired! You need to login again. "+"<br>"+" Click OK to go to Login Page",
+                  text    :  "" })
+            .then(okay => {
+              if (okay) { 
+                var userDetails = {
+                    loggedIn    : false,
+                    username  :"",  
+                    firstName   : "", 
+                    lastName    : "", 
+                    email     : "",
+                    phone     : "", 
+                    user_id     : "",
+                    roles     : [],
+                    token     : "", 
+                    gender    : "", 
+                    profilePicture : "",
+                    candidate_id: "",
+                    profileCompletion : 0
+                    }
+                    mapAction.setUserDetails(userDetails);
+                    document.getElementById("loginbtndiv").click();
+                    }
+                  });
+            }else{
+              Swal.fire('', "Error while getting data", ''); 
+            }
       });
   }
   deleteDate(event) {
@@ -257,11 +352,42 @@ class Experience extends Component {
               }
             })
             .catch((error) => {
-              Swal.fire(
-                '',
-                "Some problem occured deleting Experience Details!",
-                ''
-              );
+              if(error.message === "Request failed with status code 401"){
+                var userDetails =  localStorage.removeItem("userDetails");
+                localStorage.clear();
+
+                Swal.fire({title  : ' ',
+                          html    : "Your session is expired! You need to login again. "+"<br>"+" Click OK to go to Login Page",
+                          text    :  "" })
+                    .then(okay => {
+                      if (okay) { 
+                        var userDetails = {
+                            loggedIn    : false,
+                            username  :"",  
+                            firstName   : "", 
+                            lastName    : "", 
+                            email     : "",
+                            phone     : "", 
+                            user_id     : "",
+                            roles     : [],
+                            token     : "", 
+                            gender    : "", 
+                            profilePicture : "",
+                            candidate_id: "",
+                            profileCompletion : 0
+                            }
+                            mapAction.setUserDetails(userDetails);
+                            document.getElementById("loginbtndiv").click();
+                            }
+                          });
+                  }else{
+                    Swal.fire(
+                      '',
+                      "Some problem occured deleting experience Details!",
+                      ''
+                    );
+                  }
+              
             });
         }
       } else if (result.dismiss === Swal.DismissReason.cancel) {
@@ -324,6 +450,7 @@ class Experience extends Component {
   }
   updateData(formValues, event) {
     var status = this.validateForm();
+    var {mapAction} = this.props;
     if (status === true) {
       Axios.patch(
         "/api/candidatemaster/patch/updateOneCandidateExperience",
@@ -364,7 +491,38 @@ class Experience extends Component {
           this.props.history.push("/experience/" + this.state.candidate_id);
         })
         .catch((error) => {
-          Swal.fire('', "Submit Error!", '');
+          if(error.message === "Request failed with status code 401"){
+            var userDetails =  localStorage.removeItem("userDetails");
+            localStorage.clear();
+
+            Swal.fire({title  : ' ',
+                      html    : "Your session is expired! You need to login again. "+"<br>"+" Click OK to go to Login Page",
+                      text    :  "" })
+                .then(okay => {
+                  if (okay) { 
+                    var userDetails = {
+                        loggedIn    : false,
+                        username  :"",  
+                        firstName   : "", 
+                        lastName    : "", 
+                        email     : "",
+                        phone     : "", 
+                        user_id     : "",
+                        roles     : [],
+                        token     : "", 
+                        gender    : "", 
+                        profilePicture : "",
+                        candidate_id: "",
+                        profileCompletion : 0
+                        }
+                        mapAction.setUserDetails(userDetails);
+                        document.getElementById("loginbtndiv").click();
+                        }
+                      });
+                }else{
+                  Swal.fire('', " Error!", '');
+                }
+          
         });
     }
   }
@@ -414,7 +572,37 @@ class Experience extends Component {
           });
         })
         .catch((error) => {
-          Swal.fire('', "Submit Error!", '');
+          if(error.message === "Request failed with status code 401"){
+            var userDetails =  localStorage.removeItem("userDetails");
+            localStorage.clear();
+
+            Swal.fire({title  : ' ',
+                      html    : "Your session is expired! You need to login again. "+"<br>"+" Click OK to go to Login Page",
+                      text    :  "" })
+                .then(okay => {
+                  if (okay) { 
+                    var userDetails = {
+                        loggedIn    : false,
+                        username  :"",  
+                        firstName   : "", 
+                        lastName    : "", 
+                        email     : "",
+                        phone     : "", 
+                        user_id     : "",
+                        roles     : [],
+                        token     : "", 
+                        gender    : "", 
+                        profilePicture : "",
+                        candidate_id: "",
+                        profileCompletion : 0
+                        }
+                        mapAction.setUserDetails(userDetails);
+                        document.getElementById("loginbtndiv").click();
+                        }
+                      });
+                }else{
+                  Swal.fire('', "Error ", ''); 
+                }
         });
     }
   }
@@ -517,7 +705,37 @@ class Experience extends Component {
               this.props.history.push("/profile/" + this.state.candidate_id);
             })
             .catch(error =>{
-              Swal.fire('', "Submit Error!", '');
+              if(error.message === "Request failed with status code 401"){
+                var userDetails =  localStorage.removeItem("userDetails");
+                localStorage.clear();
+
+                Swal.fire({title  : ' ',
+                          html    : "Your session is expired! You need to login again. "+"<br>"+" Click OK to go to Login Page",
+                          text    :  "" })
+                    .then(okay => {
+                      if (okay) { 
+                        var userDetails = {
+                            loggedIn    : false,
+                            username  :"",  
+                            firstName   : "", 
+                            lastName    : "", 
+                            email     : "",
+                            phone     : "", 
+                            user_id     : "",
+                            roles     : [],
+                            token     : "", 
+                            gender    : "", 
+                            profilePicture : "",
+                            candidate_id: "",
+                            profileCompletion : 0
+                            }
+                            mapAction.setUserDetails(userDetails);
+                            document.getElementById("loginbtndiv").click();
+                            }
+                          });
+              }else{
+                Swal.fire('', " Error!", '');
+              }
             });
     }else{
       this.props.history.push("/profile/" + this.state.candidate_id);

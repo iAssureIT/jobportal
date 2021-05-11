@@ -1,4 +1,5 @@
 import axios from 'axios';
+import Swal         from 'sweetalert2';
 
 const userDetails = JSON.parse(localStorage.getItem("userDetails"));
 if (userDetails) {
@@ -185,7 +186,37 @@ export function getJobWishlist(jobWishlistSelector) {
 	        dispatch(setJobWishlist(response.data ));
 	    })
 	    .catch((error)=>{
-	          console.log('error', error);
+	          if(error.message === "Request failed with status code 401"){
+              var userDetails =  localStorage.removeItem("userDetails");
+              localStorage.clear();
+
+              Swal.fire({title  : ' ',
+                        html    : "Your session is expired! You need to login again. "+"<br>"+" Click OK to go to Login Page",
+                        text    :  "" })
+                  .then(okay => {
+                    if (okay) { 
+                      var userDetails = {
+                          loggedIn    : false,
+                          username  :"",  
+                          firstName   : "", 
+                          lastName    : "", 
+                          email     : "",
+                          phone     : "", 
+                          user_id     : "",
+                          roles     : [],
+                          token     : "", 
+                          gender    : "", 
+                          profilePicture : "",
+                          candidate_id: "",
+                          profileCompletion : 0
+                          }
+                          dispatch(setUserDetails(userDetails));
+                          document.getElementById("loginbtndiv").click();
+                          }
+                        });
+          }else{
+            Swal.fire('', " Error!", '');
+          }
 	    }) 
   	}  
 }
@@ -202,7 +233,37 @@ export function getAppliedJoblist(appliedJobSelector) {
 	        dispatch(setAppliedJoblist(response.data ));
 	    })
 	    .catch((error)=>{
-	          console.log('error', error);
+	          if(error.message === "Request failed with status code 401"){
+              var userDetails =  localStorage.removeItem("userDetails");
+              localStorage.clear();
+
+              Swal.fire({title  : ' ',
+                        html    : "Your session is expired! You need to login again. "+"<br>"+" Click OK to go to Login Page",
+                        text    :  "" })
+                  .then(okay => {
+                    if (okay) { 
+                      var userDetails = {
+                          loggedIn    : false,
+                          username  :"",  
+                          firstName   : "", 
+                          lastName    : "", 
+                          email     : "",
+                          phone     : "", 
+                          user_id     : "",
+                          roles     : [],
+                          token     : "", 
+                          gender    : "", 
+                          profilePicture : "",
+                          candidate_id: "",
+                          profileCompletion : 0
+                          }
+                          dispatch(setUserDetails(userDetails));
+                          document.getElementById("loginbtndiv").click();
+                          }
+                        });
+          }else{
+            Swal.fire('', " Error!", '');
+          }
 	    }) 
   	}  
 }

@@ -18,21 +18,54 @@ class CandidateList extends Component{
 			secondarySkillsArry :[],
 		}
 	}
-		componentDidMount(){
-
+	componentDidMount(){
+		var {mapAction} = this.props;
+		const userDetails = JSON.parse(localStorage.getItem("userDetails"));
+	    const token = userDetails.token;
+	    Axios.defaults.headers.common['Authorization'] = 'Bearer '+ token;
+	    
 		Axios.get("/api/candidatemaster/get/one/"+this.state.candidate_id)
 		.then(response=>{
 			 
 			 	this.setState({
-
 			 		dataArry            : response.data,
 			 		primarySkillsArry   : response.data.primarySkills,
 			 		secondarySkillsArry : response.data.secondarySkills
 			 	})
 			 })
 			 .catch(error=>{
-			 	Swal.fire('', "Submit Error!", '');
-			 })
+			 	if(error.message === "Request failed with status code 401"){
+			        var userDetails =  localStorage.removeItem("userDetails");
+			        localStorage.clear();
+
+			        Swal.fire({title  : ' ',
+			                  html    : "Your session is expired! You need to login again. "+"<br>"+" Click OK to go to Login Page",
+			                  text    :  "" })
+			            .then(okay => {
+			              if (okay) { 
+			                var userDetails = {
+			                    loggedIn    : false,
+			                    username  :"",  
+			                    firstName   : "", 
+			                    lastName    : "", 
+			                    email     : "",
+			                    phone     : "", 
+			                    user_id     : "",
+			                    roles     : [],
+			                    token     : "", 
+			                    gender    : "", 
+			                    profilePicture : "",
+			                    candidate_id: "",
+			                    profileCompletion : 0
+			                    }
+			                    mapAction.setUserDetails(userDetails);
+			                    document.getElementById("loginbtndiv").click();
+			                    }
+			                  });
+		            }else{
+		            	Swal.fire('', " Error!", '');
+		            }
+			})
 		}
 	render(){
 		return(

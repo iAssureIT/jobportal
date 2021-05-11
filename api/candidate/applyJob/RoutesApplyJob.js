@@ -4,7 +4,7 @@ const router 	= express.Router();
 const ControllerApplyJob = require('./ControllerApplyJob');
 const checkAuth 	 = require('../../middleware/check-auth.js');
 
-router.post('/post', ControllerApplyJob.applyJob);
+router.post('/post', checkAuth, ControllerApplyJob.applyJob);
 
 // router.patch('/', wishlistsController.update_wishlists);
 router.get('/get/appliedJobCount/:candidate_id',checkAuth, ControllerApplyJob.appliedJobCount);

@@ -491,41 +491,8 @@ class Header extends Component{
                       </div>
                     </div>
                   </div>
-                  <div
-                    className="headerMenu2 col-lg-4"
-                    id="loginbtndiv"
-                    data-toggle="modal"
-                    data-target="#loginModal"
-                    style={{ display: "none" }}
-                  >
-                    <div className="headerMenu11">
-                      <FontAwesomeIcon icon={["fas", "user"]} />
-                    </div>
-                  </div>
-                  <div
-                    className="modal col-lg-12"
-                    id="loginModal"
-                    role="dialog"
-                    tabIndex="-1"
-                  >
-                    <div className="row">
-                      <div className="modal-dialog  modal-lg ">
-                        <div className="modal-body">
-                          <button
-                            type="button"
-                            className="close"
-                            id="closeModalButton"
-                            data-dismiss="modal"
-                          >
-                            &times;
-                          </button>
-                          <section className="OTPSentWrapper row">
-                            {this.props.selectedModal == "login" ? <LoginForm /> : null}
-                          </section>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                  
+
                   <div
                     className="barsToggel pull-right"
                     id="barsToggel"

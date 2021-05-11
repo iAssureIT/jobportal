@@ -47,11 +47,14 @@ class Address extends Component{
 		this.handleChangeState = this.handleChangeState.bind(this);
 	}
 	componentDidMount(){
-		this.getData();
+		var {mapAction} = this.props;
 		const userDetails = JSON.parse(localStorage.getItem("userDetails"));
         const token = userDetails.token;
         Axios.defaults.headers.common['Authorization'] = 'Bearer '+ token;
 
+
+		this.getData();
+		
 		Axios.post("/api/addresstypemaster/get/list", {"startRange":0,"limitRange":10000})
 			.then(response => {
 				this.setState({inputAddressType : response.data});
@@ -60,12 +63,29 @@ class Address extends Component{
 				if(error.message === "Request failed with status code 401"){
 		          var userDetails =  localStorage.removeItem("userDetails");
 		          localStorage.clear();
+
 		          Swal.fire({title  : ' ',
 		                    html    : "Your session is expired! You need to login again. "+"<br>"+" Click OK to go to Login Page",
 		                    text    :  "" })
 		              .then(okay => {
-		                if (okay) {
-		                  window.location.href = "/login";
+		                if (okay) { 
+		                	var userDetails = {
+								loggedIn  	: false,
+								username	:"",	
+								firstName 	: "", 
+								lastName  	: "", 
+								email 		: "",
+								phone 		: "", 
+								user_id   	: "",
+								roles 		: [],
+								token 		: "", 
+								gender 		: "",	
+								profilePicture : "",
+								candidate_id: "",
+								profileCompletion : 0
+							}
+		                mapAction.setUserDetails(userDetails);
+		                document.getElementById("loginbtndiv").click();
 		                }
 		              });
 		        }else{
@@ -101,19 +121,9 @@ class Address extends Component{
 		        mapAction.setUserDetails(userDetails);
 			 })
 			 .catch(error=>{
-			 	if(error.message === "Request failed with status code 401"){
-                  var userDetails =  localStorage.removeItem("userDetails");
-                  localStorage.clear();
-                  Swal.fire({//title : "Your session is expired", 
-                             text  : "Your session is expired! You need to login again. Click OK to go to Login Page"
-                         }).then(okay => {
-                    if (okay) {
-                      window.location.href = "/login";
-                    }
-                  });
-                }else{
+			 	
                     Swal.fire("", "Error while getting data", "");
-                }
+                
 			 })
 	}
 	camelCase(str) {
@@ -165,19 +175,9 @@ class Address extends Component{
 			 	
 			 })
 			 .catch(error=>{
-			 	if(error.message === "Request failed with status code 401"){
-                  var userDetails =  localStorage.removeItem("userDetails");
-                  localStorage.clear();
-                  Swal.fire({//title : "Your session is expired", 
-                             text  : "Your session is expired! You need to login again. Click OK to go to Login Page"
-                         }).then(okay => {
-                    if (okay) {
-                      window.location.href = "/login";
-                    }
-                  });
-                }else{
+			 	
                     Swal.fire("", "Error while getting data", "");
-                }
+                
 			 })
 		}
 	}
@@ -229,16 +229,34 @@ class Address extends Component{
 				})
 				.catch(error=>{
 					if(error.message === "Request failed with status code 401"){
-	                  	var userDetails =  localStorage.removeItem("userDetails");
-	                  	localStorage.clear();
-	                  	Swal.fire({//title : "Your session is expired", 
-	                             text  : "Your session is expired! You need to login again. Click OK to go to Login Page"
-	                         }).then(okay => {
-	                    if (okay) {
-	                      window.location.href = "/login";
-	                    }
-	                  	});
-	                }else{
+		          var userDetails =  localStorage.removeItem("userDetails");
+		          localStorage.clear();
+
+		          Swal.fire({title  : ' ',
+		                    html    : "Your session is expired! You need to login again. "+"<br>"+" Click OK to go to Login Page",
+		                    text    :  "" })
+		              .then(okay => {
+		                if (okay) { 
+		                	var userDetails = {
+								loggedIn  	: false,
+								username	:"",	
+								firstName 	: "", 
+								lastName  	: "", 
+								email 		: "",
+								phone 		: "", 
+								user_id   	: "",
+								roles 		: [],
+								token 		: "", 
+								gender 		: "",	
+								profilePicture : "",
+								candidate_id: "",
+								profileCompletion : 0
+							}
+		                mapAction.setUserDetails(userDetails);
+		                document.getElementById("loginbtndiv").click();
+		                }
+		              });
+		        }else{
 	                    Swal.fire("", "Some problem occured deleting address details", "");
 	                }
 				})
@@ -309,6 +327,8 @@ class Address extends Component{
 	}
 	updateData(formValues){
 		var status =  this.validateForm();
+		var {mapAction} = this.props;
+		
 		if(status==true){
 			
 				 Axios.patch("/api/candidatemaster/patch/updateOneCandidateAddress",formValues)
@@ -337,16 +357,34 @@ class Address extends Component{
 					})
 					.catch(error =>{
 						if(error.message === "Request failed with status code 401"){
-		                  	var userDetails =  localStorage.removeItem("userDetails");
-		                  	localStorage.clear();
-		                  	Swal.fire({//title : "Your session is expired", 
-		                             text  : "Your session is expired! You need to login again. Click OK to go to Login Page"
-		                         }).then(okay => {
-		                    if (okay) {
-		                      window.location.href = "/login";
-		                    }
-		                  	});
-		                }else{
+				          var userDetails =  localStorage.removeItem("userDetails");
+				          localStorage.clear();
+
+				          Swal.fire({title  : ' ',
+				                    html    : "Your session is expired! You need to login again. "+"<br>"+" Click OK to go to Login Page",
+				                    text    :  "" })
+				              .then(okay => {
+				                if (okay) { 
+				                	var userDetails = {
+										loggedIn  	: false,
+										username	:"",	
+										firstName 	: "", 
+										lastName  	: "", 
+										email 		: "",
+										phone 		: "", 
+										user_id   	: "",
+										roles 		: [],
+										token 		: "", 
+										gender 		: "",	
+										profilePicture : "",
+										candidate_id: "",
+										profileCompletion : 0
+									}
+				                mapAction.setUserDetails(userDetails);
+				                document.getElementById("loginbtndiv").click();
+				                }
+				              });
+				        }else{
 		                    Swal.fire("", "Some problem occured updating address details", "");
 		                }
 					});
@@ -385,16 +423,34 @@ class Address extends Component{
 					})
 					.catch(error =>{
 						if(error.message === "Request failed with status code 401"){
-		                  	var userDetails =  localStorage.removeItem("userDetails");
-		                  	localStorage.clear();
-		                  	Swal.fire({//title : "Your session is expired", 
-		                             text  : "Your session is expired! You need to login again. Click OK to go to Login Page"
-		                         }).then(okay => {
-		                    if (okay) {
-		                      window.location.href = "/login";
-		                    }
-		                  	});
-		                }else{
+				          var userDetails =  localStorage.removeItem("userDetails");
+				          localStorage.clear();
+
+				          Swal.fire({title  : ' ',
+				                    html    : "Your session is expired! You need to login again. "+"<br>"+" Click OK to go to Login Page",
+				                    text    :  "" })
+				              .then(okay => {
+				                if (okay) { 
+				                	var userDetails = {
+										loggedIn  	: false,
+										username	:"",	
+										firstName 	: "", 
+										lastName  	: "", 
+										email 		: "",
+										phone 		: "", 
+										user_id   	: "",
+										roles 		: [],
+										token 		: "", 
+										gender 		: "",	
+										profilePicture : "",
+										candidate_id: "",
+										profileCompletion : 0
+									}
+				                mapAction.setUserDetails(userDetails);
+				                document.getElementById("loginbtndiv").click();
+				                }
+				              });
+				        }else{
 		                    Swal.fire("", "Some problem occured creating address details", "");
 		                }
 					});
