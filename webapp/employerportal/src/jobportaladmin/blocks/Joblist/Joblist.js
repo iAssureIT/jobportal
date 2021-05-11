@@ -143,6 +143,7 @@ inactiveJob(event){
 	console.log(job_id);
 		
 		Swal.fire({
+
 				title 				: ' ',
 				html 				: 'Are you sure<br />you want to make this job inactive?',
 				text 				: '',
@@ -174,6 +175,7 @@ inactiveJob(event){
 								}
 							})
 							.catch(error=>{
+
 								if(error.message === "Request failed with status code 401"){
 						            var userDetails =  localStorage.removeItem("userDetails");
 						            localStorage.clear();
@@ -188,6 +190,7 @@ inactiveJob(event){
 						            Swal.fire("", "Some problem occured while making job inactive", "");
 						        }
 							})
+
 						}else if (result.dismiss === Swal.DismissReason.cancel){
 							/*Swal.fire(
 								'',
@@ -251,6 +254,7 @@ activateJob(event){
 					            Swal.fire("", "Some problem occured while making job active", "");
 					        }
 						})
+
 					}else if (result.dismiss === Swal.DismissReason.cancel){
 					/*Swal.fire(
 						'',

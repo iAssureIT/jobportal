@@ -109,6 +109,7 @@ class Academics extends Component{
                     Swal.fire("", "Error while getting qualification data", "");
                 }
 			})	
+		
 		Axios.post("/api/universitymaster/get/list", {"startRange":0,"limitRange":10000})
 			.then(response => {
 				
@@ -309,6 +310,7 @@ class Academics extends Component{
 					}
 				})
 				.catch(error=>{
+
 					if(error.message === "Request failed with status code 401"){
 	                  	var userDetails =  localStorage.removeItem("userDetails");
 	                  	localStorage.clear();
@@ -334,6 +336,7 @@ class Academics extends Component{
 				)*/
 			}
 		})
+	  
 	  this.getData();
 	}
 

@@ -207,6 +207,7 @@ class Certification extends Component{
 					//this.props.history.push('/' + this.state.pathname + '/statutory-details/' + entityID);
 					//this.statutoryDetails();
 					this.getData();
+
            			Swal.fire(
            				'',
 	                    "Statutory deleted successfully.",
