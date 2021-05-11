@@ -63,12 +63,13 @@ class Academics extends Component{
 	}
 	componentDidMount(){
 		this.getData();
+		var {mapAction} = this.props;
 
  		const userDetails = JSON.parse(localStorage.getItem("userDetails"));
         const token = userDetails.token;
         Axios.defaults.headers.common['Authorization'] = 'Bearer '+ token;
 
-		Axios.post("/api/qualificationlevelmaster/get/list", {"startRange":0,"limitRange":10000})
+        Axios.post("/api/qualificationlevelmaster/get/list", {"startRange":0,"limitRange":10000})
 			.then(response => {
 				this.setState({qualificationLevellist : response.data});
 			})
@@ -76,12 +77,29 @@ class Academics extends Component{
 				if(error.message === "Request failed with status code 401"){
 		          var userDetails =  localStorage.removeItem("userDetails");
 		          localStorage.clear();
+
 		          Swal.fire({title  : ' ',
 		                    html    : "Your session is expired! You need to login again. "+"<br>"+" Click OK to go to Login Page",
 		                    text    :  "" })
 		              .then(okay => {
-		                if (okay) {
-		                  window.location.href = "/login";
+		                if (okay) { 
+		                	var userDetails = {
+								loggedIn  	: false,
+								username	:"",	
+								firstName 	: "", 
+								lastName  	: "", 
+								email 		: "",
+								phone 		: "", 
+								user_id   	: "",
+								roles 		: [],
+								token 		: "", 
+								gender 		: "",	
+								profilePicture : "",
+								candidate_id: "",
+								profileCompletion : 0
+							}
+		                mapAction.setUserDetails(userDetails);
+		                document.getElementById("loginbtndiv").click();
 		                }
 		              });
 		        }else{
@@ -99,12 +117,29 @@ class Academics extends Component{
 				if(error.message === "Request failed with status code 401"){
 		          var userDetails =  localStorage.removeItem("userDetails");
 		          localStorage.clear();
+
 		          Swal.fire({title  : ' ',
 		                    html    : "Your session is expired! You need to login again. "+"<br>"+" Click OK to go to Login Page",
 		                    text    :  "" })
 		              .then(okay => {
-		                if (okay) {
-		                  window.location.href = "/login";
+		                if (okay) { 
+		                	var userDetails = {
+								loggedIn  	: false,
+								username	:"",	
+								firstName 	: "", 
+								lastName  	: "", 
+								email 		: "",
+								phone 		: "", 
+								user_id   	: "",
+								roles 		: [],
+								token 		: "", 
+								gender 		: "",	
+								profilePicture : "",
+								candidate_id: "",
+								profileCompletion : 0
+							}
+		                mapAction.setUserDetails(userDetails);
+		                document.getElementById("loginbtndiv").click();
 		                }
 		              });
 		        }else{
@@ -121,12 +156,29 @@ class Academics extends Component{
 				if(error.message === "Request failed with status code 401"){
 		          var userDetails =  localStorage.removeItem("userDetails");
 		          localStorage.clear();
+
 		          Swal.fire({title  : ' ',
 		                    html    : "Your session is expired! You need to login again. "+"<br>"+" Click OK to go to Login Page",
 		                    text    :  "" })
 		              .then(okay => {
-		                if (okay) {
-		                  window.location.href = "/login";
+		                if (okay) { 
+		                	var userDetails = {
+								loggedIn  	: false,
+								username	:"",	
+								firstName 	: "", 
+								lastName  	: "", 
+								email 		: "",
+								phone 		: "", 
+								user_id   	: "",
+								roles 		: [],
+								token 		: "", 
+								gender 		: "",	
+								profilePicture : "",
+								candidate_id: "",
+								profileCompletion : 0
+							}
+		                mapAction.setUserDetails(userDetails);
+		                document.getElementById("loginbtndiv").click();
 		                }
 		              });
 		        }else{
@@ -142,12 +194,29 @@ class Academics extends Component{
 				if(error.message === "Request failed with status code 401"){
 		          var userDetails =  localStorage.removeItem("userDetails");
 		          localStorage.clear();
+
 		          Swal.fire({title  : ' ',
 		                    html    : "Your session is expired! You need to login again. "+"<br>"+" Click OK to go to Login Page",
 		                    text    :  "" })
 		              .then(okay => {
-		                if (okay) {
-		                  window.location.href = "/login";
+		                if (okay) { 
+		                	var userDetails = {
+								loggedIn  	: false,
+								username	:"",	
+								firstName 	: "", 
+								lastName  	: "", 
+								email 		: "",
+								phone 		: "", 
+								user_id   	: "",
+								roles 		: [],
+								token 		: "", 
+								gender 		: "",	
+								profilePicture : "",
+								candidate_id: "",
+								profileCompletion : 0
+							}
+		                mapAction.setUserDetails(userDetails);
+		                document.getElementById("loginbtndiv").click();
 		                }
 		              });
 		        }else{
@@ -188,12 +257,29 @@ class Academics extends Component{
 			 	if(error.message === "Request failed with status code 401"){
 		          var userDetails =  localStorage.removeItem("userDetails");
 		          localStorage.clear();
+
 		          Swal.fire({title  : ' ',
 		                    html    : "Your session is expired! You need to login again. "+"<br>"+" Click OK to go to Login Page",
 		                    text    :  "" })
 		              .then(okay => {
-		                if (okay) {
-		                  window.location.href = "/login";
+		                if (okay) { 
+		                	var userDetails = {
+								loggedIn  	: false,
+								username	:"",	
+								firstName 	: "", 
+								lastName  	: "", 
+								email 		: "",
+								phone 		: "", 
+								user_id   	: "",
+								roles 		: [],
+								token 		: "", 
+								gender 		: "",	
+								profilePicture : "",
+								candidate_id: "",
+								profileCompletion : 0
+							}
+		                mapAction.setUserDetails(userDetails);
+		                document.getElementById("loginbtndiv").click();
 		                }
 		              });
 		        }else{
@@ -218,6 +304,7 @@ class Academics extends Component{
 		});
 	}
 	edit(){
+		var {mapAction} = this.props;
 		var candidate_id = this.state.candidate_id;
 		var academicsID   = this.state.academicsID;
 		if (academicsID) {
@@ -256,12 +343,29 @@ class Academics extends Component{
 			 	if(error.message === "Request failed with status code 401"){
 		          var userDetails =  localStorage.removeItem("userDetails");
 		          localStorage.clear();
+
 		          Swal.fire({title  : ' ',
 		                    html    : "Your session is expired! You need to login again. "+"<br>"+" Click OK to go to Login Page",
 		                    text    :  "" })
 		              .then(okay => {
-		                if (okay) {
-		                  window.location.href = "/login";
+		                if (okay) { 
+		                	var userDetails = {
+								loggedIn  	: false,
+								username	:"",	
+								firstName 	: "", 
+								lastName  	: "", 
+								email 		: "",
+								phone 		: "", 
+								user_id   	: "",
+								roles 		: [],
+								token 		: "", 
+								gender 		: "",	
+								profilePicture : "",
+								candidate_id: "",
+								profileCompletion : 0
+							}
+		                mapAction.setUserDetails(userDetails);
+		                document.getElementById("loginbtndiv").click();
 		                }
 		              });
 		        }else{
@@ -320,12 +424,29 @@ class Academics extends Component{
 					if(error.message === "Request failed with status code 401"){
 			          var userDetails =  localStorage.removeItem("userDetails");
 			          localStorage.clear();
+
 			          Swal.fire({title  : ' ',
 			                    html    : "Your session is expired! You need to login again. "+"<br>"+" Click OK to go to Login Page",
 			                    text    :  "" })
 			              .then(okay => {
-			                if (okay) {
-			                  window.location.href = "/login";
+			                if (okay) { 
+			                	var userDetails = {
+									loggedIn  	: false,
+									username	:"",	
+									firstName 	: "", 
+									lastName  	: "", 
+									email 		: "",
+									phone 		: "", 
+									user_id   	: "",
+									roles 		: [],
+									token 		: "", 
+									gender 		: "",	
+									profilePicture : "",
+									candidate_id: "",
+									profileCompletion : 0
+								}
+			                mapAction.setUserDetails(userDetails);
+			                document.getElementById("loginbtndiv").click();
 			                }
 			              });
 			        }else{
@@ -534,7 +655,7 @@ class Academics extends Component{
 				                    text    :  "" })
 				              .then(okay => {
 				                if (okay) {
-				                  window.location.href = "/login";
+				                  document.getElementById("loginbtndiv").click();
 				                }
 				              });
 				        }else{
@@ -587,7 +708,7 @@ class Academics extends Component{
 			                    text    :  "" })
 			              .then(okay => {
 			                if (okay) {
-			                  window.location.href = "/login";
+			                  document.getElementById("loginbtndiv").click();
 			                }
 			              });
 			        }else{
