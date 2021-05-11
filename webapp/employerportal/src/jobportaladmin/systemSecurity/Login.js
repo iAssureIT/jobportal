@@ -219,7 +219,7 @@ class Login extends Component {
           })
           .catch((error) => {
             console.log("error", error);
-            swal({
+            Swal({
               text: "Please enter valid Email ID and Password"
             })
             this.setState({ btnLoading: false });
