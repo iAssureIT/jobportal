@@ -2,7 +2,7 @@ import React, { Component }  from 'react';
 import { FontAwesomeIcon }   from '@fortawesome/react-fontawesome';
 import Axios                 from 'axios';
 import Invoice               from "./invoice.js";
-import Sucsses               from "./sucsses.js";
+import Success               from "./Success.js";
 import Moment                from 'moment';
 import { withRouter }        from 'react-router-dom';
 import { connect }           from 'react-redux';
@@ -23,13 +23,14 @@ constructor() {
         packagemasterArray  :[],
         hide :"none",
         hideForm :"block",
-
+        hideSuccess :"none",
         
         packagemasterArray  : [],
         package_id          : "",
         price               : 0,
         validity            : "",
-        paymentDetails      : {}
+        paymentDetails      : {},
+        invoiceDetails      : {}
     }	
 }	
 componentDidMount(){
@@ -64,12 +65,7 @@ subscribePackage(event){
     console.log(this.props.selectedCompanyDetails)
     console.log(this.props.user_id)
     console.log(this.state.validity)
-    if(this.state.hide==="none"){
-        this.setState({
-            hide : "block",
-            hideForm : "none",
-        })
-    }
+    
     var startDate   = Moment(new Date()).format("YYYY-MM-DD")
     var endDate     = Moment(startDate, "YYYY-MM-DD").add('month', this.state.validity).format("YYYY-MM-DD")
 
@@ -89,27 +85,49 @@ subscribePackage(event){
       "user_id"           : this.props.user_id  
     } 
     console.log(formValues)
+    Axios.get('/api/packagesubscription/paymentOrderDetails/609590aaa50be16c70e5bb30')
+            .then((orderdetails)=>{
+                if(this.state.hide==="none"){
+                    this.setState({
+                        hide : "block",
+                        hideForm : "none",
+                        invoiceDetails : orderdetails.data
+                    })
+                }
+            })
+            .catch(function(error){
 
-    Axios.post('/api/packagesubscription/post',formValues)
-      .then((response)=>{ 
+            })
+    /*Axios.post('/api/packagesubscription/post',formValues)
+    .then((response)=>{ 
         this.setState({
           paymentDetails : response.data,
         })
         if (this.state.paymentDetails.amountPaid > 0) {
-            this.props.history.push("/invoicePage/"+this.state.paymentDetails.id);
+            
+            Axios.post('/api/subscriptionorders/paymentOrderDetails/'+response.data._id)
+            .then((orderdetails)=>{
+                if(this.state.hide==="none"){
+                    this.setState({
+                        hide : "block",
+                        hideForm : "none",
+                    })
+                }
+                this.setState({ invoiceDetails : orderdetails })
+            })
+            .catch(function(error){
+
+            })
+            
+            //this.props.history.push("/invoicePage/"+this.state.paymentDetails.id);
         }else{
             this.props.history.push("/login");
         }
         
-      })
-      .catch(function(error){
-          // if(error.message === "Request failed with status code 401")
-          // {
-          //    swal("Your session is expired! Please login again.","", "error");
-          //    this.props.history.push("/");
-          // }
-      })
-    //this.props.history.push("/login");
+        })
+    .catch(function(error){
+      
+    })*/
 }
 render() {
     return (
@@ -204,12 +222,14 @@ render() {
                          Subscribe
                     </button>
                 </div>
-                <Sucsses />
+                <div className="row" style={{display:this.state.hideSuccess}}>
+                    <Success />
+                </div>
                
             </form>
             <div className="row" style={{display:this.state.hide}}>
                 <div className="col-lg-10 col-lg-offset-1">
-                    <Invoice/>
+                    <Invoice invoiceDetails={this.state.invoiceDetails}/>
                 </div>
             </div>
             </div>

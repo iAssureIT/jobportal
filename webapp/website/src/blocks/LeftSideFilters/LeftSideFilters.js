@@ -111,11 +111,11 @@ class LeftSideFilters extends Component{
   let allQualifications   = [];
 
       var {mapAction} = this.props;
-      const userDetails = JSON.parse(localStorage.getItem("userDetails"));
-      const token = userDetails.token;
-      Axios.defaults.headers.common['Authorization'] = 'Bearer '+ token;
+      // const userDetails = JSON.parse(localStorage.getItem("userDetails"));
+      // const token = userDetails.token;
+      // Axios.defaults.headers.common['Authorization'] = 'Bearer '+ token;
 
-      Axios.post("/api/industrymaster/get/list", {"startRange":0,"limitRange":10000})
+      Axios.get("/api/industrymaster/get/list")
       .then(response => {
         
           response.data.map((elem,index)=>{
@@ -125,41 +125,11 @@ class LeftSideFilters extends Component{
             
       })
       .catch(error=>{
-        if(error.message === "Request failed with status code 401"){
-        var userDetails =  localStorage.removeItem("userDetails");
-        localStorage.clear();
-
-        Swal.fire({title  : ' ',
-                  html    : "Your session is expired! You need to login again. "+"<br>"+" Click OK to go to Login Page",
-                  text    :  "" })
-            .then(okay => {
-              if (okay) { 
-                var userDetails = {
-                    loggedIn    : false,
-                    username  :"",  
-                    firstName   : "", 
-                    lastName    : "", 
-                    email     : "",
-                    phone     : "", 
-                    user_id     : "",
-                    roles     : [],
-                    token     : "", 
-                    gender    : "", 
-                    profilePicture : "",
-                    candidate_id: "",
-                    profileCompletion : 0
-                    }
-                    mapAction.setUserDetails(userDetails);
-                    document.getElementById("loginbtndiv").click();
-                    }
-                  });
-            }else{
               Swal.fire('', "Error while getting industries list", ''); 
-            }
       })
 
 
-      Axios.post("/api/functionalareamaster/get/list", {"startRange":0,"limitRange":10000})
+      Axios.get("/api/functionalareamaster/get/list")
       .then(response => {
           response.data.map((elem,index)=>{
             
@@ -172,7 +142,7 @@ class LeftSideFilters extends Component{
         Swal.fire('', "Error while getting functional areas", '');
       })
 
-      Axios.post("/api/jobsectormaster/get/list", {"startRange":0,"limitRange":10000})
+      Axios.get("/api/jobsectormaster/get/list" )
       .then(response => {
         response.data.map((elem,index)=>{
             
@@ -184,7 +154,7 @@ class LeftSideFilters extends Component{
         Swal.fire('', "Error while getting job sectors", '');
       })
 
-      Axios.post("/api/jobtypemaster/get/list", {"startRange":0,"limitRange":10000})
+      Axios.get("/api/jobtypemaster/get/list")
       .then(response => {
         response.data.map((elem,index)=>{
             
@@ -196,7 +166,7 @@ class LeftSideFilters extends Component{
         Swal.fire('', "Error while getting job type", '');
       })
       
-      Axios.post("/api/jobtimemaster/get/list", {"startRange":0,"limitRange":10000})
+      Axios.get("/api/jobtimemaster/get/list")
       .then(response => {
         response.data.map((elem,index)=>{
             
@@ -208,7 +178,7 @@ class LeftSideFilters extends Component{
         Swal.fire('', "Error while getting job time", '');
       })
 
-      Axios.post("/api/jobshiftmaster/get/list", {"startRange":0,"limitRange":10000})
+      Axios.get("/api/jobshiftmaster/get/list")
       .then(response => {
         response.data.map((elem,index)=>{
             
@@ -220,7 +190,7 @@ class LeftSideFilters extends Component{
         Swal.fire('', "Error while getting job shift", '');
       })
 
-      Axios.post("/api/jobrolemaster/get/list", {"startRange":0,"limitRange":10000})
+      Axios.get("/api/jobrolemaster/get/list")
       .then(response => {
         response.data.map((elem,index)=>{
             
@@ -232,7 +202,7 @@ class LeftSideFilters extends Component{
         Swal.fire('', "Error while getting job roles", '');
       })
 
-      Axios.post("/api/skillmaster/get/list", {"startRange":0,"limitRange":10000})
+      Axios.get("/api/skillmaster/get/list")
       .then(response => {
         response.data.map((elem,index)=>{
             allSkills.push({skill : elem.skill, id: elem._id});
@@ -243,7 +213,7 @@ class LeftSideFilters extends Component{
         Swal.fire('', "Error while getting skill", '');
       })
       
-      Axios.post("/api/qualificationmaster/get/list", {"startRange":0,"limitRange":10000})
+      Axios.get("/api/qualificationmaster/get/list")
       .then(response => {
         response.data.map((elem,index)=>{
             allQualifications.push({qualification : elem.qualification, id: elem._id});

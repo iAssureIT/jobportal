@@ -14,6 +14,7 @@ const packagesubscriptionSchema = mongoose.Schema({
 	transactionID 	: Number,
 	paymentOrderID 	: String,
 	paymentStatus	: String, //Paid or Failed
+	invoiceNumber 	: Number,
 	createdAt 		: Date,
 	createdBy		: {type: mongoose.Schema.Types.ObjectId, ref: 'users'}
 	

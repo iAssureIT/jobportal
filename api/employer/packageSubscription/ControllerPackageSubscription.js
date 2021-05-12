@@ -26,7 +26,10 @@ exports.create_order = (req, res, next) => {
 	}else{
 		paymentStatus = "paid"
 	}	
-	var order = new PackageSubscription({
+	PackageSubscription.find()
+			.count()
+		    .then((maxInvoiceNum)=>{
+		    	var order = new PackageSubscription({
 				"_id"           	: mongoose.Types.ObjectId(), 
 				"package_id" 		: req.body.package_id,
 				"company_id"		: req.body.company_id,
@@ -41,24 +44,49 @@ exports.create_order = (req, res, next) => {
 				//"transactionID" 	: req.body.transactionID,
 				"paymentOrderID" 	: "",
 				"paymentStatus"	    : paymentStatus, //Paid or Failed
+				"invoiceNumber"		: maxInvoiceNum,
 				"createdAt" 		: new Date(),
 				"createdBy"			: req.body.user_id				
 			});
-	console.log("order ",order);
-	order.save()
-        .then(data=>{
-                res.status(200).json({							
-    				message	: "Package is subscribed successfully",
-                    data: data,
-    			});
-            })
+				console.log("order ",order);
+				order.save()
+		        .then(data=>{
+		                res.status(200).json({							
+		    				message	: "Package is subscribed successfully",
+		                    data: data,
+		    			});
+		            })
+		            .catch(err =>{
+		                console.log(err);
+		                res.status(500).json({
+		                	message: "Some issue occured in Order Insert",
+		                    error: err
+		                });
+		            });
+				    })
             .catch(err =>{
                 console.log(err);
                 res.status(500).json({
-                	message: "Some issue occured in Order Insert",
+                	message: "Some issue occured while finding Max Invoice Number",
                     error: err
                 });
             });	
+		
 };
+
+
+exports.paymentOrderDetails = (req,res,next) =>{
+	PackageSubscription.findOne({_id: req.params.paymentOrderId})
+	.populate('createdBy','profile')
+	.populate('package_id')
+	.populate('company_id')
+	.exec(function(err, details) {
+            console.log(err)
+            if (err) return res.status(500).json({
+                error: err
+            });
+            res.status(200).json(details);
+        });
+}
 
 

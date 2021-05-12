@@ -2,7 +2,7 @@ import React, { Component }  from 'react';
 import "./invoice.css";
 import Axios from 'axios';
 import { FontAwesomeIcon }   from '@fortawesome/react-fontawesome';
-
+import Moment                from 'moment';
 
 class Invoice extends Component {
 constructor() {
@@ -24,7 +24,9 @@ componentDidMount(){
 }
 
 render() {
+    console.log(this.props.invoiceDetails)
     return (
+        this.props.invoiceDetails ? 
           <div className="row">
                 <div className=" col-lg-12 invoiceWrapper">
                     <div className="row">
@@ -42,10 +44,10 @@ render() {
                                         INVOICE TO
                                     </div>
                                     <div className=" invoiceNameText">
-                                        John Doe
+                                        {this.props.invoiceDetails.createdBy ? this.props.invoiceDetails.createdBy.profile.fullName : ""}
                                     </div>
                                     <div className=" invoiceTOText">
-                                        H. R. Manager, ABC Company
+                                    { this.props.invoiceDetails.company_id ? this.props.invoiceDetails.company_id.companyName : "" }
                                     </div>
                                 </div>
                                 <div className="col-lg-10 col-lg-offset-1 invoicePersonalInfo">
@@ -55,7 +57,7 @@ render() {
                                                 Mobile No 
                                             </div>
                                             <div className="col-lg-8 invoicePersonalInfoSubTitle">
-                                                <span className="commaInvoice"> : </span>  +91 99233 93733
+                                                <span className="commaInvoice"> : </span>  {this.props.invoiceDetails.createdBy ? this.props.invoiceDetails.createdBy.profile.mobile : ""}
                                             </div>
                                         </div>
                                         <div className="row">
@@ -63,7 +65,7 @@ render() {
                                                 Email
                                             </div>
                                             <div className="col-lg-8 invoicePersonalInfoSubTitle">
-                                                <span className="commaInvoice"> : </span> jhonedoe@abc.com
+                                                <span className="commaInvoice"> : </span> {this.props.invoiceDetails.createdBy ? this.props.invoiceDetails.createdBy.profile.email : ""}
                                             </div>
                                         </div>
                                         <div className="row">
@@ -71,7 +73,7 @@ render() {
                                                 Address 
                                             </div>
                                             <div className="col-lg-8 invoicePersonalInfoSubTitle">
-                                                <span className="commaInvoice"> : </span> 31/12/2021
+                                                <span className="commaInvoice"> : </span> 
                                             </div>
                                         </div>
                                     </div>
@@ -90,7 +92,7 @@ render() {
                                             Invoice No 
                                         </div>
                                         <div className="col-lg-7 invoicePersonalInfoSubTitle">
-                                            <span className="commaInvoice"> : </span>  034567
+                                            <span className="commaInvoice"> : </span>  {this.props.invoiceDetails.invoiceNumber ? this.props.invoiceDetails.invoiceNumber : ""}
                                         </div>
                                     </div>
                                 </div>
@@ -100,7 +102,7 @@ render() {
                                             Start Date
                                         </div>
                                         <div className="col-lg-7 invoicePersonalInfoSubTitle">
-                                            <span className="commaInvoice"> : </span>   01/01/2021
+                                            <span className="commaInvoice"> : </span> {Moment(this.props.invoiceDetails.startDate).format("DD-MM-YYYY")}  
                                         </div>
                                     </div>
                                 </div>
@@ -110,7 +112,7 @@ render() {
                                             End Date
                                         </div>
                                         <div className="col-lg-7 invoicePersonalInfoSubTitle">
-                                            <span className="commaInvoice"> : </span>    31/12/2021
+                                            <span className="commaInvoice"> : </span>    {Moment(this.props.invoiceDetails.endDate).format("DD-MM-YYYY")} 
                                         </div>
                                     </div>
                                 </div>
@@ -141,9 +143,10 @@ render() {
                                     </thead>
                                     <tbody className="invoiceTableBody invoiceTableStriped">
                                       <tr >
-                                        <td>Professional Package 12 Months</td>
-                                        <td>₹ 1,200</td>
-                                        <td>₹ 1,200</td>
+                                        <td>{this.props.invoiceDetails.package_id ? 
+                                            this.props.invoiceDetails.package_id.packageName+" Package "+ this.props.invoiceDetails.package_id.validity + " Months " : "" } </td>
+                                        <td>₹ {this.props.invoiceDetails.package_id ? this.props.invoiceDetails.package_id.price : ""}</td>
+                                        <td>₹ {this.props.invoiceDetails.package_id ? this.props.invoiceDetails.package_id.price : ""}</td>
                                       </tr>
                                     </tbody>
                                   </table>
@@ -166,25 +169,25 @@ render() {
                                     <span className="selectPackageIcon1">
                                         <FontAwesomeIcon icon="plus-circle" />
                                     </span>
-                                        999 Resumes Download    
+                                        {this.props.invoiceDetails.package_id ? this.props.invoiceDetails.package_id.resumeDownloads : 999 } Resumes Download    
                                 </div>
                                 <div className=" featuresPonits">
                                     <span className="selectPackageIcon1">
                                         <FontAwesomeIcon icon="plus-circle" />
                                     </span>
-                                        9999 Max Emails    
+                                        {this.props.invoiceDetails.package_id ? this.props.invoiceDetails.package_id.maxEmails : 999 } Max Emails    
                                 </div>
                                 <div className=" featuresPonits">
                                     <span className="selectPackageIcon1">
                                         <FontAwesomeIcon icon="plus-circle" />
                                     </span>
-                                        999 Video Introduction  
+                                        {this.props.invoiceDetails.package_id ? this.props.invoiceDetails.package_id.videoIntroduction : 999 }  Video Introduction  
                                 </div>
                                 <div className=" featuresPonits">
                                     <span className="selectPackageIcon1">
                                         <FontAwesomeIcon icon="plus-circle" />
                                     </span>
-                                        0 Robot based screening Interview 
+                                        {this.props.invoiceDetails.package_id ? this.props.invoiceDetails.package_id.robotInterviews : 999 }  Robot based screening Interview 
                                 </div>
                             </div>
                         </div>
@@ -195,7 +198,7 @@ render() {
                                         <div className="row">  Subtotal </div>
                                     </div>
                                     <div className="col-lg-6 invoicePersonalInfoSubTitle invoicePersonalInfoSubTitle2">
-                                        ₹ 1,200
+                                        ₹ {this.props.invoiceDetails.package_id ? this.props.invoiceDetails.package_id.price : 0}
                                     </div>
                                 </div>
                                 <div className="row featuresBill">
@@ -203,17 +206,10 @@ render() {
                                        <div className="row">  GST (18%) </div>
                                     </div>
                                     <div className="col-lg-6 invoicePersonalInfoSubTitle invoicePersonalInfoSubTitle2">
-                                        ₹ 108
+                                        ₹ {this.props.invoiceDetails.package_id && this.state.orderDetails ? parseInt(((this.state.orderDetails.amountPaid)/100)*18) : 0}
                                     </div>
                                 </div>
-                                <div className="row featuresBill">
-                                    <div className="col-lg-6 invoicePersonalInfoTitle invoicePersonalInfoTitle2">
-                                       <div className="row">  Total Tax </div>
-                                    </div>
-                                    <div className="col-lg-6 invoicePersonalInfoSubTitle invoicePersonalInfoSubTitle2">
-                                        ₹ 216
-                                    </div>
-                                </div>
+                                
                                 <hr className="row featuresBillHr"/>
                                 <div className="row featuresBill">
 
@@ -229,7 +225,7 @@ render() {
                         </div>
                     </div>
                     <div className="">
-                        <div className="col-lg-6 conditionWrapper">
+                        {/*<div className="col-lg-6 conditionWrapper">
                             <div className="col-lg-10 col-lg-offset-1">
                                 <div className=" invoicePersonalInfoTitle invoiceConditionTitle">
                                    TRMS & CONDITIONS
@@ -253,8 +249,8 @@ render() {
                                          Lorem ipsum dolor sit amet, consectetuer adipiscing elit
                                 </div>
                             </div>
-                        </div>
-                        <div className="col-lg-6 conditionWrapper">
+                        </div>*/}
+                        <div className="col-lg-offset-6 col-lg-6 conditionWrapper">
                             <div className="col-lg-12">
                                  <button className="buttonNext  invoiceButtonNext col-lg-6 col-lg-offset-5" >
                                      Make Payment
@@ -325,6 +321,7 @@ render() {
                     </div>
                 </div>
           </div>
+          : null
      );
 }
 

@@ -35,15 +35,19 @@ class HomePage extends Component {
     
     var {mapAction} = this.props;
     var selector = this.props.selector;
-    var appliedJobSelector  = this.props.appliedJobSelector;
-    appliedJobSelector.candidate_id = this.props.userDetails.candidate_id;
-    mapAction.getAppliedJoblist(appliedJobSelector);
+
+    if (this.props.userDetails.loggedIn) {
+      var appliedJobSelector  = this.props.appliedJobSelector;
+      appliedJobSelector.candidate_id = this.props.userDetails.candidate_id;
+      mapAction.getAppliedJoblist(appliedJobSelector);
 
 
-    var jobWishlistSelector = this.props.jobWishlistSelector;
-    jobWishlistSelector.candidate_id = this.props.userDetails.candidate_id;
+      var jobWishlistSelector = this.props.jobWishlistSelector;
+      jobWishlistSelector.candidate_id = this.props.userDetails.candidate_id;
 
-    mapAction.getJobWishlist(jobWishlistSelector);
+      mapAction.getJobWishlist(jobWishlistSelector);
+    } 
+    
     
     selector.countryCode = "IN"; 
     

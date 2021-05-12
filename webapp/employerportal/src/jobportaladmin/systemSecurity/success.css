@@ -1,4 +1,4 @@
-.sucssesWrapper{
+.successWrapper{
 	height: 430px;
 	background-color: var(--form-field-background-color);
 	border:1px solid var(--main-border-color);
@@ -6,12 +6,12 @@
 	color: #fff;
 	margin-top: 50px;
 }
-.sucssesHeader{
+.successHeader{
 	height: 70px;
 	background-color: var(--main-border-color);
 	border-radius-top-left: 6px;
 }
-.sucssesTitle{
+.successTitle{
 	color: var(--main-heading-font-color);
     font-family: 'Montserrat-Bold',Sans-Serif;
     font-weight: 600;
@@ -20,13 +20,13 @@
     margin-top: 50px;
 
 }
-.sucssesSubTitle{
+.successSubTitle{
 	font-family: 'Montserrat-SemiBold',Sans-Serif;
 	 text-align:center;
 	 margin-bottom: 10px;
 	  letter-spacing: 1px;
 }
-.sucssesPointTitle{
+.successPointTitle{
 	font-family: 'Montserrat-Regular',Sans-Serif;
  	font-size: 12px;
  	margin-top: 5px;

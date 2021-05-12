@@ -1,7 +1,10 @@
 const express 			= require("express");
 const router 			= express.Router();
-const PackageSelection 	= require('./ControllerPackageSubscription.js');
+const PackageSubscription 	= require('./ControllerPackageSubscription.js');
 
-router.post('/post', PackageSelection.create_order);
+router.post('/post', PackageSubscription.create_order);
+
+router.get('/paymentOrderDetails/:paymentOrderId', PackageSubscription.paymentOrderDetails);
+
 
 module.exports = router;
