@@ -123,8 +123,8 @@ class CandidatesList extends Component{
 																						</div>
 																						<div className="col-lg-7 displayInfoCandidate">
 																							<div className="row">
-																								<div className="displayCandidateName">
-																										<a href={"/candidate-profile/"+elem._id}> {elem.basicInfo.firstName} </a>
+																								<div className="displayCandidateName1">
+																										<a className="displayCandidateName2" href={"/candidate-profile/"+elem._id}> {elem.basicInfo.firstName} </a>
 																									<span className="candidateIdNumber"></span>
 																								</div>
 																								<div className=" candidatePosts">

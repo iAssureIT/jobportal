@@ -22,7 +22,7 @@
 .belagaviText{
 	position: absolute;
 	top: 45%;
-	left:30%;
+	left:40%;
 }
 .belagaviNumber{
 	position: absolute;
@@ -37,12 +37,12 @@
 .vijayapuraText{
 	position: absolute;
 	top: 45%;
-	left:30%;
+	left:40%;
 }
 .vijayapuraNumber{
 	position: absolute;
 	top: 55%;
-	left:35%;
+	left:40%;
 }
 .gulbarga{
 	position: absolute;
@@ -52,12 +52,12 @@
 .gulbargaText{
 	position: absolute;
 	top: 45%;
-	left:30%;
+	left:40%;
 }
 .gulbargaNumber{
 	position: absolute;
 	top: 55%;
-	left:35%;
+	left:40%;
 }
 .bidar{
 	position: absolute;
@@ -67,12 +67,12 @@
 .bidarText{
 	position: absolute;
 	top: 45%;
-	left:30%;
+	left:40%;
 }
 .bidarNumber{
 	position: absolute;
 	top: 55%;
-	left:35%;
+	left:40%;
 }
 .yadgir{
 	position: absolute;
@@ -81,13 +81,13 @@
 }
 .yadgirText{
 	position: absolute;
-	top: 45%;
-	left:30%;
+	top: 20%;
+	left:45%;
 }
 .yadgirNumber{
 	position: absolute;
-	top: 55%;
-	left:35%;
+	top: 35%;
+	left:45%;
 }
 .bagalkot{
 	position: absolute;
@@ -96,13 +96,13 @@
 }
 .bagalkotText{
 	position: absolute;
-	top: 45%;
-	left:30%;
+	top: 55%;
+	left:40%;
 }
 .bagalkotNumber{
 	position: absolute;
-	top: 55%;
-	left:35%;
+	top: 65%;
+	left:40%;
 }
 .dharwad{
 	position: absolute;
@@ -142,7 +142,7 @@
 .gadagText{
 	position: absolute;
 	top: 45%;
-	left:30%;
+	left:35%;
 }
 .gadagNumber{
 	position: absolute;
@@ -156,13 +156,13 @@
 }
 .koppalText{
 	position: absolute;
-	top: 55%;
+	top: 45%;
 	left:35%;
 }
 .koppalNumber{
 	position: absolute;
-	top: 417px;
-    left: 295px;
+	top: 55%;
+    left: 35%;
 }
 .raichur{
 	position: absolute;
@@ -172,7 +172,7 @@
 .raichurText{
 	position: absolute;
 	top: 45%;
-	left:30%;
+	left:35%;
 }
 .raichurNumber{
 	position: absolute;
@@ -187,12 +187,12 @@
 .bellaryText{
 	position: absolute;
 	top: 45%;
-	left:30%;
+	left:50%;
 }
 .bellaryNumber{
 	position: absolute;
 	top: 55%;
-	left:35%;
+	left:45%;
 }
 .davangere{
 	position: absolute;
@@ -207,7 +207,7 @@
 .davangereNumber{
 	position: absolute;
 	top: 55%;
-	left:35%;
+	left:30%;
 }
 .shivamogga{
 	position: absolute;
@@ -232,7 +232,7 @@
 .udupiText{
 	position: absolute;
 	top: 45%;
-	left:30%;
+	left:35%;
 }
 .udupiNumber{
 	position: absolute;
@@ -247,12 +247,12 @@
 .chikkamagaluruText{
 	position: absolute;
 	top: 45%;
-	left:30%;
+	left:25%;
 }
 .chikkamagaluruNumber{
 	position: absolute;
 	top: 55%;
-	left:35%;
+	left:30%;
 }
 .chitradurga{
 	position: absolute;
@@ -261,12 +261,12 @@
 }
 .chitradurgaText{
 	position: absolute;
-	top: 45%;
+	top: 55%;
 	left:30%;
 }
 .chitradurgaNumber{
 	position: absolute;
-	top: 55%;
+	top: 65%;
 	left:35%;
 }
 .tumakuru{
@@ -276,12 +276,12 @@
 }
 .tumakuruText{
 	position: absolute;
-	top: 45%;
+	top: 50%;
 	left:30%;
 }
 .tumakuruNumber{
 	position: absolute;
-	top: 55%;
+	top: 60%;
 	left:35%;
 }
 .hassan{
@@ -292,7 +292,7 @@
 .hassanText{
 	position: absolute;
 	top: 45%;
-	left:30%;
+	left:35%;
 }
 .hassanNumber{
 	position: absolute;
@@ -322,7 +322,7 @@
 .mysuruText{
 	position: absolute;
 	top: 45%;
-	left:30%;
+	left:35%;
 }
 .mysuruNumber{
 	position: absolute;
@@ -381,13 +381,13 @@
 }
 .bengaluruText{
 	position: absolute;
-	top: 45%;
+	top: 40%;
 	left:30%;
 }
 .bengaluruNumber{
 	position: absolute;
 	top: 55%;
-	left:35%;
+	left:45%;
 }
 .bengaluruRural{
 	position: absolute;
@@ -397,7 +397,7 @@
 .bengaluruRuralText{
 	position: absolute;
     top: 20%;
-	left:30%;
+	left:20%;
 }
 .bengaluruRuralNumber{
 	position: absolute;
@@ -411,13 +411,13 @@
 }
 .chikkaballapurText{
 	position: absolute;
-	top: 45%;
+	top: 40%;
 	left:30%;
 }
 .chikkaballapurNumber{
 	position: absolute;
 	top: 55%;
-	left:35%;
+	left:45%;
 }
 .kolar{
 	position: absolute;
@@ -427,7 +427,7 @@
 .kolarText{
 	position: absolute;
 	top: 45%;
-	left:30%;
+	left:35%;
 }
 .kolarNumber{
 	position: absolute;

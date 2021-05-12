@@ -337,7 +337,7 @@ class ChangePassword extends Component {
 
                     <hr className="resetPasswordHr"/>
 
-                     <div className="col-lg-12 form-group" >
+                     <div className="col-lg-10 col-lg-offset-1 form-group" >
                         <div className="input-group">
                             <span className="input-group-addon resetPasswordInputIcon"><i className="fa fa-lock"></i></span>
                             <input type="password" id="oldPassword" name="oldPassword" placeholder="Enter old Password" ref="oldPassword" value={this.state.oldPassword} onChange={this.handleChange.bind(this)} className="form-control resetPasswordInputBox"/>
@@ -348,7 +348,7 @@ class ChangePassword extends Component {
                          <span id="oldPasswordError" className="errorMsg"></span>
                     </div>
 
-                    <div className="col-lg-12 form-group" >
+                    <div className="col-lg-10 col-lg-offset-1 form-group" >
                         <div className="input-group">
                             <span className="input-group-addon resetPasswordInputIcon"><i className="fa fa-lock"></i></span>
                             <input type="password" id="newPassword" name="newPassword" placeholder="Enter new Password" ref="newPassword" value={this.state.newPassword} onChange={this.handleChange.bind(this)} className="form-control resetPasswordInputBox"/>
@@ -358,7 +358,7 @@ class ChangePassword extends Component {
                          <span id="newPasswordError" className="errorMsg"></span>
                     </div>
 
-                    <div className="col-lg-12 form-group" >
+                    <div className="col-lg-10 col-lg-offset-1 form-group" >
                         <div className="input-group">
                             <span className="input-group-addon resetPasswordInputIcon"><i className="fa fa-lock"></i></span>
                             <input type="password" id="confirmNewPassword" name="confirmNewPassword" placeholder="Confirm new Password" value={this.state.confirmNewPassword} onChange={this.handleChange.bind(this)} className="form-control resetPasswordInputBox"/>
@@ -370,7 +370,7 @@ class ChangePassword extends Component {
                     </div>
 
 
-                    <div className="col-lg-12 buttonWrapper">
+                    <div className="col-lg-10 col-lg-offset-1 buttonWrapper">
                    <button className="btn col-lg-12 buttonResetPassword" onClick={this.changePassword.bind(this)}>Reset Password</button>
                   </div>
 

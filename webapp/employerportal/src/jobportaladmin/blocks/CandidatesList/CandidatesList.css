@@ -120,12 +120,15 @@
 	height:110px;
 }
 
-.displayCandidateName{
+.displayCandidateName1{
 	font-size: 17px;
 	font-weight: bold;
-	color: var(--main-heading-font-color);
+	
 	margin-left:12px;
 	margin-bottom:3px;
+}
+.displayCandidateName2{
+color: #F5A72F  !important;
 }
 
 .candidateIdNumber{
