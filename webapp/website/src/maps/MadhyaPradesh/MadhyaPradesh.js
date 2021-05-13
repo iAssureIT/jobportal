@@ -259,7 +259,7 @@ class MadhyaPradesh extends Component{
 					<div className="tikamgarh classHover" onClick={e => this.onDistrictClick("Tikamgarh","MP")}> 
 						<img src="/Maps/Madhya_Pradesh/Tikamgarh.png" alt="Tikamgarh"  onMouseOver={e => e.currentTarget.src = "/Maps/Madhya_Pradesh/Tikamgarh_.png"} onMouseOut={e => e.currentTarget.src = "/Maps/Madhya_Pradesh/Tikamgarh.png"}/>
 						<span className="tikamgarhText  mapTextLabel text-capitalize">Tikamgarh</span>
-						<span className="tikamgarhNumber  mapCountLabel  text-center">{this.search('Tikamgarh')}{this.state.Tikamgarh ? this.state.Tikamgarh : 0}</span>
+						<span className="tikamgarhNumber  mapCountLabel  text-center">{this.state.Tikamgarh ? this.state.Tikamgarh : 0}</span>
 					</div>
 					<div className="niwari classHover" onClick={e => this.onDistrictClick("Niwari","MP")}> 
 						<img src="/Maps/Madhya_Pradesh/Niwari.png" alt="Niwari"  onMouseOver={e => e.currentTarget.src = "/Maps/Madhya_Pradesh/Niwari_.png"} onMouseOut={e => e.currentTarget.src = "/Maps/Madhya_Pradesh/Niwari.png"}/>

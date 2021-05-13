@@ -128,7 +128,7 @@ class SignUp extends Component {
     var statusCPwd=false;
     var statusPwd2=false;
     var statusCTC=false;
-
+/*
     if(first_name.length<=0)  {
  
       document.getElementById("firstNameError").innerHTML=  
@@ -136,7 +136,7 @@ class SignUp extends Component {
       statusFN=false; 
     }
   
-    else if(!regName.test(first_name)){
+    else*/ if(!regName.test(first_name)){
       document.getElementById("firstNameError").innerHTML=  
       "Please enter valid name,......";  
       statusFN=false; 
@@ -317,7 +317,7 @@ class SignUp extends Component {
             */
 						//this.props.history.push("/confirm-otp/" + response.data.ID);
 					}else{
-						Swal.fire(response.data.message);
+						Swal.fire('',response.data.message,'');
 					}	
 				})
 				.catch((error) => {

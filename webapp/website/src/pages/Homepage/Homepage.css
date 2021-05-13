@@ -7,9 +7,9 @@
   font-family:'Montserrat-Bold';
   src: url('/fonts/Montserrat/Montserrat-Bold.ttf');
 }
-.ViewBodyWrapper{
+.ViewBodyWrapper1{
 	height: auto;
-	min-height: 650px;
+	min-height: 1200px;
 	/*background-color: pink;*/
 }
 

@@ -303,7 +303,7 @@ class HomePage extends Component {
     //console.log(this.props.viewMode) 
     //console.log(this.props.match.params) 
     return (
-      <div className="ViewBodyWrapper container-fluid">
+      <div className="ViewBodyWrapper1 container-fluid">
 
 
           <div className="filterDiv col-lg-12">

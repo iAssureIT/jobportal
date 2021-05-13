@@ -8,7 +8,6 @@ import Department                   from  '../../Master/Department/DepartmentMas
 import Designation                  from  '../../Master/Designation/DesignationMaster-GlobalMaster.js';
 import CompanyBankDetails           from  './CompanyBankDetails.js';
 import PaymentTerms                 from  './PaymentTerms.js';
-// import CompanyTaxDetails            from  '../../../projectadmin/TaxRate/TaxRate.js';
 import CompanyTaxDetails            from  './CompanyTaxDetails.js';
 
 import '../css/CompanySetting.css';
@@ -97,6 +96,7 @@ import '../css/CompanySetting.css';
                             <li className="col-lg-12 col-md-12 col-xs-12 col-sm-12"><a className="tabLeft lettersp tablefthr" href="#SMSGateway" data-toggle="tab">Department</a></li>
                             <li className="col-lg-12 col-md-12 col-xs-12 col-sm-12"><a className="tabLeft lettersp tablefthr" href="#amazon" data-toggle="tab">Designation</a></li>
                             <li className="col-lg-12 col-md-12 col-xs-12 col-sm-12"><a className="tabLeft lettersp tablefthr" href="#googleapikey" data-toggle="tab">Bank Details</a></li>
+                            <li className="col-lg-12 col-md-12 col-xs-12 col-sm-12"><a className="tabLeft lettersp tablefthr" href="#CompanyTaxDetails" data-toggle="tab">Tax Details</a></li>
                             <li className="col-lg-12 col-md-12 col-xs-12 col-sm-12"><a className="tabLeft lettersp tablefthr" href="#PaymentTerms" data-toggle="tab">Payment Terms</a></li>
                            {/*} <li className="col-lg-12 col-md-12 col-xs-12 col-sm-12"><a className="tabLeft lettersp tablefthr" href="#CompanyPaymentGateway" data-toggle="tab">Tax Master</a></li>*/}
                           </ul>   
@@ -107,8 +107,7 @@ import '../css/CompanySetting.css';
                         <div className="tab-pane" id="amazon">                <Designation        editId={this.state.editId}/>  </div>                                
                         <div className="tab-pane" id="googleapikey">          <CompanyBankDetails editId={this.state.editId}/>  </div>          
                         <div className="tab-pane" id="PaymentTerms">          <PaymentTerms       editId={this.state.editId}/>  </div>          
-                       {/*} <div className="tab-pane" id="CompanyPaymentGateway"> <CompanyTaxDetails  editId={this.state.editId} oneFieldEditId={this.state.oneFieldEditId}
-                                                                                                     history={this.props.history} />  </div>*/}
+                        <div className="tab-pane" id="CompanyTaxDetails">     <CompanyTaxDetails      editId={this.state.editId} />  </div>
                       </div> 
 
                     </div>

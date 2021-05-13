@@ -223,4 +223,6 @@
   border:  1px solid var(--header-border-color);
   padding-left: 10px;
   padding-top: 5px;
+  color: #efefef;
+  font-size: 13px;
 }

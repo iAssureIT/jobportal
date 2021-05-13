@@ -343,9 +343,9 @@ showPassword1=(event)=>{
                 
                 //this.props.history.push("/confirm-otp/" + response.data.ID);
                 
-              }/*else{
-                swal(response.data.message);
-              } */
+              }else{
+                Swal.fire("",response.data.message, "");
+              } 
             })
             .catch((error) => {
               

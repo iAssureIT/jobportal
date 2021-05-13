@@ -99,23 +99,14 @@ render() {
                                 <div className="col-lg-12">
                                     <div className="row">
                                         <div className="col-lg-5 invoicePersonalInfoTitle">
-                                            Start Date
+                                            Invoice Date
                                         </div>
                                         <div className="col-lg-7 invoicePersonalInfoSubTitle">
                                             <span className="commaInvoice"> : </span> {Moment(this.props.invoiceDetails.startDate).format("DD-MM-YYYY")}  
                                         </div>
                                     </div>
                                 </div>
-                                <div className="col-lg-12">
-                                    <div className="row">
-                                        <div className="col-lg-5 invoicePersonalInfoTitle">
-                                            End Date
-                                        </div>
-                                        <div className="col-lg-7 invoicePersonalInfoSubTitle">
-                                            <span className="commaInvoice"> : </span>    {Moment(this.props.invoiceDetails.endDate).format("DD-MM-YYYY")} 
-                                        </div>
-                                    </div>
-                                </div>
+                                
                                 <div className="col-lg-12 invoicePaymentHeading">
                                     Payment Method
                                 </div>
@@ -137,6 +128,7 @@ render() {
                                     <thead className="invoiceTableHead">
                                       <tr className="invoiceTableHeadRow">
                                         <th >ITEM DESCRIPTION </th>
+                                        <th >VALID UPTO </th>
                                         <th >PRICE</th>
                                         <th >TOTAL</th>
                                       </tr>
@@ -145,6 +137,7 @@ render() {
                                       <tr >
                                         <td>{this.props.invoiceDetails.package_id ? 
                                             this.props.invoiceDetails.package_id.packageName+" Package "+ this.props.invoiceDetails.package_id.validity + " Months " : "" } </td>
+                                        <td>{Moment(this.props.invoiceDetails.endDate).format("DD-MM-YYYY")} </td>
                                         <td>₹ {this.props.invoiceDetails.package_id ? this.props.invoiceDetails.package_id.price : ""}</td>
                                         <td>₹ {this.props.invoiceDetails.package_id ? this.props.invoiceDetails.package_id.price : ""}</td>
                                       </tr>
