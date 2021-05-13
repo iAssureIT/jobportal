@@ -110,6 +110,7 @@ class Experience extends Component {
       });
     Axios.get("/api/states/get/list/IN")
       .then((response) => {
+
         this.setState({
           stateArray: response.data,
         });
@@ -168,6 +169,10 @@ class Experience extends Component {
   }
   //========== User Define Function Start ================
   edit() {
+    this.setState({
+      working: "experienced",
+            experienceLevel: "experienced",
+    })
     var {mapAction} = this.props;
     var workExperienceID = this.state.workExperienceID;
     if (workExperienceID) {
@@ -178,7 +183,7 @@ class Experience extends Component {
       Axios.post("/api/candidatemaster/post/getOneCandidateExperience", idDate)
         .then((response) => {
           var editData = response.data;
-
+          console.log("editdsta",response.data)
           this.setState({
             industry_id: editData[0].workExperience[0].industry_id,
             industry: editData[0].workExperience[0].industry_id.industry,
@@ -210,6 +215,8 @@ class Experience extends Component {
             noticePeriod: editData[0].noticePeriod,
             totalExperience: editData[0].totalExperience,
             buttonText: "Update",
+            working: "experienced",
+            experienceLevel: "experienced",
           });
         })
         .catch((error) => {
@@ -251,7 +258,8 @@ class Experience extends Component {
     var {mapAction} = this.props;
     Axios.get("/api/candidatemaster/get/one/" + this.state.candidate_id)
       .then((response) => {
-        console.log(response.data.profileCompletion)
+
+        console.log("response.data.response.data",response.data)
         
         this.setState({
           totalExperience : response.data.totalExperience,
@@ -438,10 +446,11 @@ class Experience extends Component {
         expectedCTC: this.state.expectedCTC,
         noticePeriod: this.state.noticePeriod,
         profileCompletion: profileCompletion,
-        experienceLevel : "experienced"
+        experienceLevel : "experienced",
+        working: "experienced",
       };
     }
-
+    console.log("formValuesExp",formValues)
     if (this.props.match.params.workExperienceID) {
       this.updateData(formValues, event);
     } else {
@@ -486,6 +495,8 @@ class Experience extends Component {
             relevantExperience: "",
             totalExperience: 0,
             buttonText: "Save",
+            working: "experienced",
+             experienceLevel: "experienced",
           });
           window.location.reload(false);
           this.props.history.push("/experience/" + this.state.candidate_id);
@@ -569,6 +580,8 @@ class Experience extends Component {
             relevantExperience: "",
             totalExperience: 0,
             buttonText: "Save",
+             working: "experienced",
+             experienceLevel: "experienced",
           });
         })
         .catch((error) => {
@@ -1512,7 +1525,7 @@ class Experience extends Component {
                                         {elem.department}
                                       </div>
                                       <div className="AddressBoxText">
-                                        Total Experience : {elem.totalExperience}
+                                        Total Experience : {this.state.totalExperience}
                                       </div>
                                       <div className="AddressBoxText">
                                         {elem.company_id.companyName}
@@ -1536,7 +1549,7 @@ class Experience extends Component {
                     ) : (
                       <div className="col-lg-12">
                         <hr className="basicInfoHr" />
-                        <div className="noData">Academics Record Not Found</div>
+                        <div className="noData">Experience Record Not Found</div>
                       </div>
                     )
                   ) : null}

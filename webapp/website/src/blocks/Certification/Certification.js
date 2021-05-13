@@ -1111,7 +1111,7 @@ class Certification extends Component{
 										:
 											<div className="col-lg-12">
 												<hr className="basicInfoHr"/>
-												<div className="noData">Academics Record Not Found</div>
+												<div className="noData">Certification Record Not Found</div>
 											</div>
 										:
 											null

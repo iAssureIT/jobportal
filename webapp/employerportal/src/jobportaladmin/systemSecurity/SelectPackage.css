@@ -7,20 +7,14 @@
 	border: 1px solid var(--main-border-color);
 	border-radius: 10px;
 	text-transform: capitalize;
-	transition: all 0.2s,margin-left 0s ;
-	transition-timing-function: linear;
+	  cursor: pointer;
+    -moz-osx-font-smoothing: grayscale;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+    transition: transform 0.25s linear;
 }
 .selectPackageWrapper:hover{
-	transition: all 0.2s,margin-left 0s ;
-	transition-timing-function: linear;
-	width: 120%;
-	margin-left: -10%;
-	min-height:380px;
-	height: auto;
-	margin-top: 0px;
-	padding-top: 30px;
-	cursor: pointer;
-	box-shadow: 0px 0px 7px var(--main-border-color);
+	transform: scale(1.05);
 }
 .packagemasterNot{
 	font-family: "Montserrat-Bold",Sans-Serif;

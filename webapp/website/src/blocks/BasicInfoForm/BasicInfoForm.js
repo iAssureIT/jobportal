@@ -50,6 +50,7 @@ class BasicInfoForm extends Component{
 			resumeUrl 				  : "",
 			resume 					  : [],
 			executiveSummary 		  : "",
+			maxDate 		          : "",
 		}
 		
 	}
@@ -371,6 +372,7 @@ class BasicInfoForm extends Component{
 		event.preventDefault();
 		var value = event.currentTarget.value;
 		var name  = event.currentTarget.name;
+		var max  = event.currentTarget.max;
 		// let fields = this.state.fields;
   //           fields[value] = event.target.value;        
   //           this.setState({fields});
@@ -389,6 +391,15 @@ class BasicInfoForm extends Component{
 				})
 			}
 		}
+		if(name=="dob"){
+			this.setState({
+				
+				[name]:value,
+				maxDate:max,
+			})
+			console.log(this.state.maxDate)
+		}
+		
 	}
 
 	passport(event){
@@ -568,14 +579,23 @@ class BasicInfoForm extends Component{
     	var emailFilter = /^[^@]+@[^@.]+\.[^@]*\w\w$/;
     	var illegalChars = /[\(\)\<\>\,\;\:\\\"\[\]]/;
     	var mobileFilter = /^(\+\d{1,3}[- ]?)?\d{12}$/gm;
+    	var max = this.state.maxDate
 
 		
 		if(this.state.dob.length<=0){
 			document.getElementById("dobError").innerHTML = "Please enter your Date Of Birth";  
 			status=false; 
-		}else{
+		}
+		else if(this.state.dob>max){
+			document.getElementById("dobError").innerHTML = "Please enter Valid Date Of Birth";  
+			status=false;  
+		
+		}
+		else if(this.state.dob<=max){
 			document.getElementById("dobError").innerHTML = ""; 
 		
+		}else{
+			document.getElementById("dobError").innerHTML = ""; 
 		}
 		if(this.state.nationality.length<=0){
 			document.getElementById("nationalityError").innerHTML = "Please enter Nationality";  
