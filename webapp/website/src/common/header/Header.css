@@ -372,7 +372,7 @@ color: var(--main-heading-font-color) !important
 
 
 .menuProfilePictureIcon{
- width: 86px;
+  width: 86px;
   height: 86px;
   border-radius: 50%;
 }

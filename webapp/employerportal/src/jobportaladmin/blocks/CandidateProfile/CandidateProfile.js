@@ -31,6 +31,7 @@ class CandidateProfile extends Component{
 		}
 printDocument() {
     const input = document.getElementById('divToPrint');
+    
     html2canvas(input)
       .then((canvas) => {
         const imgData = canvas.toDataURL('image/png');
@@ -40,7 +41,7 @@ printDocument() {
     var height = pdf.internal.pageSize.getHeight();
         pdf.addImage(imgData, 'JPEG', 0, 0,width,height);
         // pdf.output('dataurlnewwindow');
-        pdf.save("download.pdf");
+        pdf.save("Resume.pdf");
       })
     ;
   }
@@ -48,7 +49,7 @@ printDocument() {
 		return(
         <div>
           <div className="col-lg-12">
-            <button className="center-block buttonNext buttonNextResume " onClick={this.printDocument}>Print</button>
+            <button className="center-block buttonNext buttonNextResume " onClick={this.printDocument.bind(this)}>Print</button>
           </div>
     				  <div className="container-fluid candidateProfileWrapper" id="divToPrint">
     			        <div className="col-lg-12" id="content">

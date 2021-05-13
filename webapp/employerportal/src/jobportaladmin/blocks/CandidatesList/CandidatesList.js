@@ -50,6 +50,7 @@ class CandidatesList extends Component{
 	componentDidMount(){
 		
 		var {mapAction}  = this.props;
+		console.log("this.props.userDetails",this.props.candidateList)
 		//mapAction.filterCandidatesApplied(this.state.candidateSelector)	
 		
 	}
@@ -97,7 +98,7 @@ class CandidatesList extends Component{
 											this.props.candidateList.length > 0
 											? 	
 											this.props.candidateList.map((elem,index)=>{
-												console.log(elem)
+												console.log("elem",elem.basicInfo.gender)
 												var primarySkills   = [];
 												var secondarySkills = [];
 												if (elem.skills) {
@@ -106,7 +107,7 @@ class CandidatesList extends Component{
 					 									if (skill.skillType == "secondary") { secondarySkills.push(skill) }
 													})
 												}
-
+												console.log("elem.basicInfo.profilePicture",elem.profilePicture)
 												return(
 														<div className="col-lg-6 " key={index}>
 															<div>
@@ -116,9 +117,40 @@ class CandidatesList extends Component{
 																			<div className="row">
 																				<div className="col-lg-12 candidateImgBlock">
 																					<div className="row">
-																						<div className="col-lg-5 imageOfCandidate">
-																							<div className="row">
-																								<img src="/images/43.png" alt="candidateName"/>
+																						<div className="col-lg-5 ">
+																							<div className="imageOfCandidate1">
+																								{
+																			                        	elem.basicInfo.profilePicture
+																			                        	? 
+																				                          <img
+																				                            src={elem.basicInfo.profilePicture}
+																				                            alt="icon"
+																				                            className="menuProfilePictureIcon"
+																				                          />
+																			                            : 
+																			                          
+																			                            elem.basicInfo.gender ==="female"
+																			                            ?
+																				                          <img
+																				                            src="/images/f.png"
+																				                            alt="icon"
+																				                            className="menuProfilePictureIcon"
+																				                          />
+																			                        	 :
+																			                        	 elem.basicInfo.gender == "male"
+																			                        	  ? 
+																				                          <img
+																				                            src="/images/m.png"
+																				                            alt="icon"
+																				                            className="menuProfilePictureIcon"
+																				                          />
+																			                        	: 
+																			                         	 <img
+																				                            src="/images/u.png"
+																				                            alt="icon"
+																				                            className="menuProfilePictureIcon"
+																				                          />
+																			                        }
 																							</div>
 																						</div>
 																						<div className="col-lg-7 displayInfoCandidate">
@@ -154,52 +186,58 @@ class CandidatesList extends Component{
 																					</div>
 																				</div>
 																				<div className="col-lg-12 candidateSkillsBlocks">
-																				<div className="">
-																					<div className="skillsHeading">	
-																						Primary skills
-																					</div>
-
-																					{ primarySkills.length > 0 ?	
-																					<div className=" marginForSkillHeading">
-																						<div className=" skillsSubHeadingWrapper">	
-																							{
-																								primarySkills.map((elem,index)=>{
-																									return(
-																											<div className="col-lg-6" key={index}>
-																												<div className="row skillsSubHeading">
-																													<i className="fa fa-square rotate45 listRoatate45" ></i>
-																														{elem.skill_id.skill}
-																												</div>
-																											</div>
-																										);
-																								})
-																							}																							
+																				<div className="row primaryBlock">
+																					<div className="col-lg-12">
+																						<div className="skillsHeading">	
+																							Primary skills
 																						</div>
-																					</div>
-																					: <div className="skillsSubHeading">No primary skills added</div>
-																					}
-																				</div>
-																				<div className="skillsHeadingBlock">
-																					<div className="skillsHeading">	
-																						Secondary skills
-																					</div>
-																					{   secondarySkills.length > 0	?
-																					<div className=" skillsSubHeadingWrapper">	
-																						{
-																							secondarySkills.map((elem,index)=>{
-																								return(
-																										<div className="col-lg-6" key={index}>
-																											<div className="row skillsSubHeading">
-																												<i className="fa fa-square rotate45 listRoatate45" ></i>
-																													{elem.skill_id.skill}
-																											</div>
-																										</div>
-																									);
-																							})
-																							
+
+																						{ primarySkills.length > 0 ?	
+																						<div className=" marginForSkillHeading">
+																							<div className=" skillsSubHeadingWrapper">	
+																								{
+																									primarySkills.map((elem,index)=>{
+																										return(
+																												<div className="col-lg-6" key={index}>
+																													<div className="row skillsSubHeading">
+																														<i className="fa fa-square rotate45 listRoatate45" ></i>
+																															{elem.skill_id.skill}
+																													</div>
+																												</div>
+																											);
+																									})
+																								}																							
+																							</div>
+																						</div>
+																						: <div className="skillsSubHeading">No primary skills added</div>
 																						}
-																					</div>: <div className="skillsSubHeading">No secondary skills added</div>
-																					}
+																					</div>
+																				</div>
+																				<div className="row secondaryBlock">
+																					<div className="col-lg-12">
+																						<div className="skillsHeadingBlock">
+																							<div className="skillsHeading">	
+																								Secondary skills
+																							</div>
+																							{   secondarySkills.length > 0	?
+																							<div className=" skillsSubHeadingWrapper">	
+																								{
+																									secondarySkills.map((elem,index)=>{
+																										return(
+																												<div className="col-lg-6" key={index}>
+																													<div className="row skillsSubHeading">
+																														<i className="fa fa-square rotate45 listRoatate45" ></i>
+																															{elem.skill_id.skill}
+																													</div>
+																												</div>
+																											);
+																									})
+																									
+																								}
+																							</div>: <div className="skillsSubHeading">No secondary skills added</div>
+																							}
+																						</div> 
+																					</div> 
 																				</div> 
 																				</div>
 																			</div>
@@ -218,10 +256,14 @@ class CandidatesList extends Component{
 																				<img src="/images/47.png" alt="Profile Logo"/>
 																			</div>
 																			<div className="row profileSymbols">
+																				
 																				<img src="/images/48.png" alt="Profile Logo"/>
+																				
 																			</div>
 																			<div className="row profileExlIcon">
-																				<i className="fa fa-file-excel-o" title="Download as excel file" aria-hidden="true"></i>
+																				<a  href={"/candidate-profile/"+elem._id}>
+																				<i className="fa fa-file-excel-o" title="Download Resume" aria-hidden="true"></i>
+																				</a>
 																			</div>
 																		</div>	
 																	</div>
@@ -281,7 +323,8 @@ class CandidatesList extends Component{
 const mapStateToProps = (state)=>{
     return {
         candidateSelector   : state.candidateSelector,
-        candidateList 		: state.candidateList 
+        candidateList 		: state.candidateList ,
+        userDetails         : state.userDetails
     }
 }
 const mapDispatchToProps = (dispatch) => ({

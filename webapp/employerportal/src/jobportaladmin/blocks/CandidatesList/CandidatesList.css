@@ -73,9 +73,14 @@
 	/*font-family: Montserrat-Regular;*/
 	font-weight: 400;
 }
-
+..menuProfilePictureIconWrapper{
+	height: 80px;
+	width: 80px;
+	background: #fff!important;
+	border:2px solid var(--main-border-color);
+}
 .candidateBlockWrapper{
-	height:340px;
+	height:375px;
 	margin-top: 30px;
 	border:2px solid var(--main-border-color);
 	border-radius:10px;
@@ -83,7 +88,7 @@
 }
 
 .candidateInfoBlock{
-	height:263px;
+	height:300px;
 	border-right:1px solid var(--main-border-color);
 }
 
@@ -101,23 +106,26 @@
 
 .candidateSkillsBlocks{
 	height:100px;
-	margin-top: 30px;
+	margin-top: 20px;
 
 }
 
-.imageOfCandidate{
+.imageOfCandidate1{
 	height:110px;
+	background-color: #fff;
 }
 
-.imageOfCandidate img{
-	width:80%;
-	margin-left:12%;
-	height:90px;
+.imageOfCandidate1 img{
+	width:90%;
+	height:100px;
+	margin-top: 5px;
+	margin-left: 5%;
 
 }
 
 .displayInfoCandidate{
 	height:110px;
+	text-transform: capitalize;
 }
 
 .displayCandidateName1{
@@ -148,6 +156,7 @@ color: #F5A72F  !important;
 	height: 18px;
 	font-size: 10px;
 	color:var(--main-heading-font-color);
+	margin-top: 2px;
 }
 
 .candListIcon4{
@@ -160,8 +169,13 @@ color: #F5A72F  !important;
 
 .postName{
 	height:18px;
-	font-size:13px;
+	font-size:11px;
 	color: var(--main-txt-color);
+	margin-top: 2px;
+}
+.primaryBlock,.secondaryBlock{
+	height: 70px;
+	overflow: hidden;
 }
 
 .skillsHeading{
@@ -187,7 +201,7 @@ color: #F5A72F  !important;
 }
 
 .candidateSkillsBlocks .skillsHeadingBlock{
-	padding-top:20px!important;
+	padding-top:5px!important;
 }
 
 .marginForSkillHeading{
@@ -199,7 +213,7 @@ color: #F5A72F  !important;
 }
 
 .profileSymbols{
-	height:40px;
+	height:45px;
 }
 
 .profileSymbols img{
@@ -292,7 +306,6 @@ color: #F5A72F  !important;
 	color:var(--main-heading-font-color);
 }
 
-.imageOfCandidate img{
-	height: 110px;
+.profileExlIcon a{
+	color:var(--main-heading-font-color);
 }
-

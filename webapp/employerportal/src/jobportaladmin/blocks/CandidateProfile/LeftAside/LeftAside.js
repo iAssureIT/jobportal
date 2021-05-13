@@ -25,6 +25,7 @@ class LeftAside extends Component{
 			district           : "",
 			state	           : "",
 			country	           : "",
+			profilePicture	           : "",
 			primarySkills  	   : [],
 			secondarySkills    : [],
 			pincode	           : 0,	
@@ -51,6 +52,7 @@ class LeftAside extends Component{
 			 		secondarySkills   : secondarySkills,
 			 		firstName         : response.data.basicInfo.firstName?response.data.basicInfo.firstName:"",
 					middleName        : response.data.basicInfo.middleName?response.data.basicInfo.middleName:"",
+					profilePicture    : response.data.basicInfo.profilePicture?response.data.basicInfo.profilePicture:"",
 					lastName          : response.data.basicInfo.lastName?response.data.basicInfo.lastName:"",
 					mobile            : response.data.contact.mobile?response.data.contact.mobile:"",
 					alternate         : response.data.contact.altMobile?response.data.contact.altMobile:"",
@@ -92,7 +94,7 @@ class LeftAside extends Component{
 						<div className="">
 							<div className="col-lg-8 col-lg-offset-2 candidateProfileImg">
 								<div className="candidateImgWrapper row">
-									<img src="/images/43.png" alt="Candidate" />
+									<img src={this.state.profilePicture?this.state.profilePicture:"/images/person.jpg"} alt="Candidate" />
 									<div className="candidateName mainText">
 										{this.state.firstName+" "+this.state.lastName }
 									</div>
