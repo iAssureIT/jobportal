@@ -317,7 +317,7 @@ class SignUp extends Component {
             */
 						//this.props.history.push("/confirm-otp/" + response.data.ID);
 					}else{
-						Swal.fire(response.data.message);
+						Swal.fire('',response.data.message,'');
 					}	
 				})
 				.catch((error) => {
