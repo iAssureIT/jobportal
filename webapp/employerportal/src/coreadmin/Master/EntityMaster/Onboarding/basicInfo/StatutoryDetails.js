@@ -900,7 +900,7 @@ class StatutoryDetails extends Component {
 															</div>
 															<div className="col-lg-3 col-md-3 col-sm-12 col-xs-12  " >
 																<label className="labelform col-lg-12 col-md-12 col-sm-12 col-xs-12">{this.state.taxName}<i className="astrick">*</i>
-																	<a data-tip data-for='basicInfo4Tooltip' className="pull-right"> <i title="Eg. 29ABCDE1234F1Z5" className="fa fa-question-circle"></i> </a>
+																	<a data-tip data-for='basicInfo4Tooltip' className="emplTooltip pull-right"> <i title="Eg. 29ABCDE1234F1Z5" className="fa fa-question-circle"></i> </a>
 																</label>
 																<input type="text" id="GSTIN" placeholder="29ABCDE1234F1Z5" className="form-control uppercase col-lg-12 col-md-12 col-sm-12 col-xs-12" value={this.state.GSTIN} ref="GSTIN" name="GSTIN" onChange={this.handleChange} />
 															</div>
@@ -965,7 +965,7 @@ class StatutoryDetails extends Component {
 
 																<div className="form-margin col-lg-4 col-md-4 col-sm-12 col-xs-12  " >
 																	<label className="labelform col-lg-12 col-md-12 col-sm-12 col-xs-12">PAN<i className="astrick">*</i>
-																		<a data-tip data-for='basicInfo4Tooltip' className="pull-right"> <i title="Eg. ABCDE1234E" className="fa fa-question-circle"></i> </a>
+																		<a data-tip data-for='basicInfo4Tooltip' className="emplTooltip pull-right"> <i title="Eg. ABCDE1234E" className="fa fa-question-circle"></i> </a>
 																	</label>
 																	<input type="text" id="PAN" placeholder="ABCDE1234E" className="form-control uppercase col-lg-12 col-md-12 col-sm-12 col-xs-12" value={this.state.PAN} ref="PAN" name="PAN" onChange={this.handleChange} />
 																</div>

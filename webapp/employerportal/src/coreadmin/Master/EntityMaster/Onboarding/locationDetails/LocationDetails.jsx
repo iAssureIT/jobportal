@@ -1671,7 +1671,7 @@ class LocationDetails extends Component {
 											{this.state.locationarray && this.state.locationarray.length > 0 ?
 												<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 													<div className="col-lg-12 col-md-12 col-sm-12 col-sm-12 foothd">
-														<h4>List of Locations</h4>
+														<h4 className="locationDetTitle">List of Locations</h4>
 													</div>
 													<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 NOpadding" style={{"display" : "block"}}>
 														{this.state.locationarray && this.state.locationarray.length > 0 ?

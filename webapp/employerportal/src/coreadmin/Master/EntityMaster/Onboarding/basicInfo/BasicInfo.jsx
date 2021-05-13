@@ -885,20 +885,20 @@ class BasicInfo extends Component {
                           <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 pdcls ">
                           <div className="row"> 
                             <div className="form-margin col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
-                              <div className=" col-lg-5 col-md-5 col-sm-12 col-xs-12">
+                              <div className=" col-lg-4 col-md-5 col-sm-12 col-xs-12">
                                 <label className="labelform col-lg-12 col-md-12 col-sm-12 col-xs-12 NOpadding-left">Company Name<i className="astrick">*</i></label>
                                 <input type="text" id="companyName" className="form-control col-lg-12 col-md-12 col-sm-12 col-xs-12" value={this.state.companyName} ref="companyName" name="companyName" onChange={this.handleChange} />
                               </div>
-                              <div className="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                              <div className="col-lg-4 col-md-3 col-sm-12 col-xs-12">
                                 <label className="labelform col-lg-12 col-md-12 col-sm-12 col-xs-12 NOpadding-left">Group Name<i className="astrick">*</i></label>
                                 <input type="text" id="groupName" className="form-control col-lg-12 col-md-12 col-sm-12 col-xs-12" value={this.state.groupName} ref="groupName" name="groupName" onChange={this.handleChange} required />
                               </div>
                               
-                              <div className="col-lg-1 col-md-1 col-sm-12 col-xs-12 NOpadding ">
+                              <div className="col-lg-4 col-md-1 col-sm-12 col-xs-12 NOpadding ">
                                 <div className="col-lg-12 col-md-3 col-sm-12 col-xs-12">
                                   <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 NOpadding " id="hide">
-                                    <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 uploadImageClient" id="LogoImageUpOne" title="Upload Image">
-                                      <div><i className="fa fa-camera cursorPointer"></i></div>
+                                    <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 uploadImageEmp" id="LogoImageUpOne" title="Upload Image">
+                                      <div><i className="empCamIcon fa fa-camera cursorPointer"></i></div>
                                       <input multiple onChange={this.imgBrowse.bind(this)} id="LogoImageUp" type="file" className="form-control col-lg-12 col-md-12 col-sm-12 col-xs-12" title="" name="companyLogo" />
                                     </div>
                                   </div>
@@ -937,50 +937,76 @@ class BasicInfo extends Component {
                           </div>
                           </div>
                           <div className="form-margin col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
-                          <div className="row">
-                              <div className="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-                                <label className="labelform col-lg-12 col-md-12 col-sm-12 col-xs-12 NOpadding-left">Industry<i className="astrick">*</i></label>
-                                <Autosuggest 
-                                suggestions={suggestions}
-                                onSuggestionsFetchRequested={this.onSuggestionsFetchRequested.bind(this)}
-                                onSuggestionsClearRequested={this.onSuggestionsClearRequested.bind(this)}
-                                getSuggestionValue={this.getSuggestionValue.bind(this)}
-                                renderSuggestion={this.renderSuggestion.bind(this)}
-                                onSuggestionSelected={this.onSuggestionSelected.bind(this)}
-                                inputProps={inputProps}
-                              />
-                              </div>
-                              <div className=" col-lg-3 col-md-3 col-sm-12 col-xs-12">
-                                <label className="labelform col-lg-12 col-md-12 col-sm-12 col-xs-12 NOpadding-left">Email<i className="astrick">*</i></label>
-                                <input  type="email" id="companyEmail" className="form-control col-lg-12 col-md-12 col-sm-12 col-xs-12" value={this.state.companyEmail} ref="companyEmail" name="companyEmail" onChange={this.handleChange} required />
-                              </div>
-
-                              <div className="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-                                <label className="labelform  NOpadding-left">Company Number<i className="astrick">*</i></label>
-                                <PhoneInput
-                                  country={'in'}
-                                  value={this.state.companyPhone}
-                                  name="companyPhone"
-                                  inputProps={{
-                                    name: 'companyPhone',
-                                    required: true
-                                  }}
-                                  onChange={this.changeMobile.bind(this)}
+                            <div className="row">
+                                <div className="col-lg-4 col-md-3 col-sm-12 col-xs-12">
+                                  <label className="labelform col-lg-12 col-md-12 col-sm-12 col-xs-12 NOpadding-left">Industry<i className="astrick">*</i></label>
+                                  <Autosuggest 
+                                  suggestions={suggestions}
+                                  onSuggestionsFetchRequested={this.onSuggestionsFetchRequested.bind(this)}
+                                  onSuggestionsClearRequested={this.onSuggestionsClearRequested.bind(this)}
+                                  getSuggestionValue={this.getSuggestionValue.bind(this)}
+                                  renderSuggestion={this.renderSuggestion.bind(this)}
+                                  onSuggestionSelected={this.onSuggestionSelected.bind(this)}
+                                  inputProps={inputProps}
                                 />
+                                </div>
+                                <div className="col-lg-4 col-md-3 col-sm-12 col-xs-12">
+                                  <label className="labelform col-lg-12 col-md-12 col-sm-12 col-xs-12 NOpadding-left">Email<i className="astrick">*</i></label>
+                                  <input  type="email" id="companyEmail" className="form-control col-lg-12 col-md-12 col-sm-12 col-xs-12" value={this.state.companyEmail} ref="companyEmail" name="companyEmail" onChange={this.handleChange} required />
+                                </div>
 
-                                {this.state.companyPhoneAvailable === true ? null : <label className="error">Please enter valid number</label>}
-                                
-                              </div>                                 
-                            
-                              <div className="col-lg-3 col-md-3 col-sm-12 col-xs-12" >
-                                <label className="labelform col-lg-12 col-md-12 col-sm-12 col-xs-12 NOpadding-left">Website
-                                  <a href="#" data-tip data-for='basicInfo4Tooltip' className="pull-right"> <i title="Eg. www.abc.xyz" className="fa fa-question-circle"></i> </a>
-                                </label>
-                                <input type="text" id="website" className="form-control col-lg-12 col-md-12 col-sm-12 col-xs-12 inputText" onKeyDown={this.keyPressWeb} value={this.state.website} ref="website" name="website" onChange={this.handleChange} />
-                              </div>
-                             
-                          </div>  
+                                {/*<div className="col-lg-4 col-md-3 col-sm-12 col-xs-12">
+                                  <label className="labelform  NOpadding-left">Company Number<i className="astrick">*</i></label>
+                                  <PhoneInput
+                                    country={'in'}
+                                    value={this.state.companyPhone}
+                                    name="companyPhone"
+                                    inputProps={{
+                                      name: 'companyPhone',
+                                      required: true
+                                    }}
+                                    onChange={this.changeMobile.bind(this)}
+                                  />
+
+                                  {this.state.companyPhoneAvailable === true ? null : <label className="error">Please enter valid number</label>}
+                                  
+                                </div>                                 
+                              
+                                <div className="col-lg-4 col-md-3 col-sm-12 col-xs-12" >
+                                  <label className="labelform col-lg-12 col-md-12 col-sm-12 col-xs-12 NOpadding-left">Website
+                                    <a href="#" data-tip data-for='basicInfo4Tooltip' className="pull-right"> <i title="Eg. www.abc.xyz" className="fa fa-question-circle"></i> </a>
+                                  </label>
+                                  <input type="text" id="website" className="form-control col-lg-12 col-md-12 col-sm-12 col-xs-12 inputText" onKeyDown={this.keyPressWeb} value={this.state.website} ref="website" name="website" onChange={this.handleChange} />
+                                </div>*/}
+                               
+                            </div>  
                           </div>
+                          <div className="form-margin col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+                            <div className="row">
+                            <div className="form-margin1 col-lg-4 col-md-3 col-sm-12 col-xs-12">
+                              <label className="labelform  NOpadding-left">Company Number<i className="astrick">*</i></label>
+                              <PhoneInput
+                                country={'in'}
+                                value={this.state.companyPhone}
+                                name="companyPhone"
+                                inputProps={{
+                                  name: 'companyPhone',
+                                  required: true
+                                }}
+                                onChange={this.changeMobile.bind(this)}
+                              />
+
+                              {this.state.companyPhoneAvailable === true ? null : <label className="error">Please enter valid number</label>} 
+                            </div>                                 
+                          
+                            <div className="form-margin2 col-lg-4 col-md-3 col-sm-12 col-xs-12" >
+                              <label className="labelform col-lg-12 col-md-12 col-sm-12 col-xs-12 NOpadding-left">Website
+                                <a href="#" data-tip data-for='basicInfo4Tooltip' className="emplTooltip pull-right"> <i title="Eg.www.abc.xyz" className="fa fa-question-circle"></i> </a>
+                              </label>
+                              <input type="text" id="website" className="form-control col-lg-12 col-md-12 col-sm-12 col-xs-12 inputText" onKeyDown={this.keyPressWeb} value={this.state.website} ref="website" name="website" onChange={this.handleChange} />
+                            </div>
+                            </div>
+                            </div>
                           </div>
                         </div>
                         </div>
@@ -1003,13 +1029,13 @@ class BasicInfo extends Component {
                         </div>
                         <div className="col-lg-3 col-md-3 col-sm-12 col-xs-12 panerror" >
                           <label className="labelform col-lg-12 col-md-12 col-sm-12 col-xs-12 NOpadding-left">Tax Deduction Account Number
-                            <a href="#" data-tip data-for='basicInfo2Tooltip' className="pull-right"> <i title="Eg. NGPO02911G" className="fa fa-question-circle"></i> </a>
+                            <a href="#" data-tip data-for='basicInfo2Tooltip' className="emplTooltip pull-right"> <i title="Eg. NGPO02911G" className="fa fa-question-circle"></i> </a>
                           </label>
                           <input maxLength="10" type="text" id="TAN" className="form-control col-lg-12 col-md-12 col-sm-12 col-xs-12 inputText UpperCase" value={this.state.TAN} ref="TAN" name="TAN" onChange={this.handleChange} placeholder="NGPO02911G" />
                         </div>
                         <div className="col-lg-3 col-md-3 col-sm-12 col-xs-12" >
                           <label className="labelform col-lg-12 col-md-12 col-sm-12 col-xs-12 NOpadding-left">Company Identification Number
-                            <a href="#" data-tip data-for='basicInfo7Tooltip' className="pull-right"> <i title="Eg. L12345MH2019PTC123456" className="fa fa-question-circle"></i> </a>
+                            <a href="#" data-tip data-for='basicInfo7Tooltip' className="emplTooltip pull-right"> <i title="Eg. L12345MH2019PTC123456" className="fa fa-question-circle"></i> </a>
                           </label>
                           <input type="text" id="CIN" maxLength="21" className="form-control col-lg-12 col-md-12 col-sm-12 col-xs-12 UpperCase inputText" placeholder="L12345MH2019PTC123456" value={this.state.CIN} ref="CIN" name="CIN" onChange={this.handleChange} />
                         </div>

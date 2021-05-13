@@ -1409,7 +1409,7 @@ class ContactDetails extends Component {
 											<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 NOPadding">
 										 	{this.state.contactarray && this.state.contactarray.length > 0 ?
 												<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 NOPadding">
-													<h4 className=" col-lg-12 col-md-12 col-sm-12 col-sm-12 ">List of Contacts</h4>
+													<h4 className="locationDetTitle col-lg-12 col-md-12 col-sm-12 col-sm-12 ">List of Contacts</h4>
 													{this.state.contactarray && this.state.contactarray.length > 0 ?
 														this.state.contactarray.map((data, index) => {
 															return (

@@ -79,3 +79,113 @@ body{
 .whitelink, .whitelink:hover{
   color: #fff
 }
+
+
+
+/*******************************************************swal custom classes*******************************************************************/
+
+/*.swal2-container:not(.swal2-top):not(.swal2-top-start):not(.swal2-top-end):not(.swal2-top-left):not(.swal2-top-right):not(.swal2-center-start):not(.swal2-center-end):not(.swal2-center-left):not(.swal2-center-right):not(.swal2-bottom):not(.swal2-bottom-start):not(.swal2-bottom-end):not(.swal2-bottom-left):not(.swal2-bottom-right):not(.swal2-grow-fullscreen)>.swal2-modal {
+  border: 1px solid var(--main-border-color);
+  border-radius: 5px;
+  background-color: var(--main-bg-color);
+}
+
+.swal2-container.swal2-shown {
+    background-color: rgba(31, 38, 45, 0.8);
+}
+
+.swal2-popup{
+  width: 45em;
+}
+
+[class^=swal2]{
+  color: #fff;
+}
+
+.swal2-header{
+  background-color: var(--main-border-color);
+  height: 34px;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  margin-bottom: 50px !important;
+}
+
+.swal2-icon{
+  margin-top: 50px;
+}
+
+.swal2-popup{
+  padding: 0;
+}
+
+.swal2-styled.swal2-confirm{
+  box-shadow: none;
+  height: 33px;
+  width: 28%;
+  font-size: 12px;
+  font-weight: 500;
+  margin-top: 30px;
+  color: #fff;
+  background-color: var(--form-field-background-color) !important;
+  border: 1px solid var(--main-border-color) !important;
+}
+
+.swal2-styled.swal2-confirm:hover{
+  background-color: var(--main-border-color) !important;
+  color: #fff;
+}
+
+.swal2-styled.swal2-cancel{
+  box-shadow: none;
+  color: #fff;
+  height: 33px;
+  width: 28%;
+  font-size: 12px;
+  font-weight: 500;
+  margin-top: 30px;
+  margin-right: 60px;
+  background-color: var(--form-field-background-color) !important;
+  border: 1px solid var(--main-border-color) !important;
+}
+
+.swal2-styled.swal2-cancel:hover{
+  background-color: var(--main-border-color) !important;
+  color: #fff;
+}
+
+.swal2-title{
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.swal2-header .swal2-content .swal2-content{
+  padding-top: 30px;
+}
+
+.swal2-content{
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.swal2-actions{
+    margin-bottom: 60px;
+}
+
+.swal2-close{
+  color: #333;
+  font-weight: 100;
+  font-size: 15px;
+  background-color: #fff;
+  border-radius: 2px;
+  height: 15px;
+  width: 15px;
+  margin-top: 9px;
+  margin-right: 9px;
+}
+
+.swal2-close:hover{
+  color: #000 !important;
+  background-color: #E6E7EB;
+}*/
+
+/************************************************************************************************************************************/
