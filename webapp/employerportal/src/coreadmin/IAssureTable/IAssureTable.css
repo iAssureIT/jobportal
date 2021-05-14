@@ -141,3 +141,34 @@
   word-break: break-word;
 
 }
+
+.table-striped>tbody>tr:nth-of-type(odd) {
+    background-color: var(--main-bg-color) !important;
+    color: var(--main-txt-color);
+/*    font-weight: 500;*/
+}
+
+.table-striped>tbody>tr:nth-of-type(even) {
+    background-color: var(--main-bg-color) !important;
+    color: var(--main-txt-color);
+/*    font-weight: 500;*/
+}
+
+.tableEditIcon{
+  color: var(--main-txt-color);
+  cursor: pointer;
+}
+
+.tableDeleteIcon{
+  color: var(--main-txt-color);
+  cursor: pointer;
+}
+
+
+.tableEditIcon:hover{
+  color: var(--yellow-button-color);
+}
+
+.tableDeleteIcon:hover{
+  color: #FF6347 !important;
+}

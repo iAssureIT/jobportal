@@ -28,6 +28,7 @@ import './coreadmin/css/root.css';
 import Layout from './Layout.js';
 import './lib/router.js';
 import axios from 'axios';
+import Swal  					from 'sweetalert2';
 import $ from 'jquery';
 import '../node_modules/font-awesome/css/font-awesome.min.css';
 import ReactDependentScript from "react-dependent-script";

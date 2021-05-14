@@ -689,8 +689,8 @@ class IAssureTable extends Component {
 														<td className="textAlignCenter" id="ActionContent">
 															<span>
 																{this.props.tableObjects.editUrl ?
-																	<i className="fa fa-pencil" title="Edit" id={value._id.split("-").join("/")} onClick={this.edit.bind(this)}></i> : null}&nbsp; &nbsp;
-																	{this.props.editId && this.props.editId === value._id ? null : <i className={"fa fa-trash redFont " + value._id} id={value._id + '-Delete'} data-toggle="modal" title="Delete" data-target={"#showDeleteModal-" + value._id}></i>}
+																	<i className="fa fa-pencil tableEditIcon" title="Edit" id={value._id.split("-").join("/")} onClick={this.edit.bind(this)}></i> : null}&nbsp; &nbsp;
+																	{this.props.editId && this.props.editId === value._id ? null : <i className={"fa fa-trash tableDeleteIcon " + value._id} id={value._id + '-Delete'} data-toggle="modal" title="Delete" data-target={"#showDeleteModal-" + value._id}></i>}
 															</span>
 															<div className="modal" id={"showDeleteModal-" + value._id} role="dialog">
 																<div className=" adminModal adminModal-dialog col-lg-12 col-md-12 col-sm-12 col-xs-12">

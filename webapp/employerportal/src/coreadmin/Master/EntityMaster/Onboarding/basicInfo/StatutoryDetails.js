@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import $ from 'jquery';
 import jQuery from 'jquery';
 import axios from 'axios';
-import swal from 'sweetalert';
+import Swal 			   from 'sweetalert2';
 import 'bootstrap/js/tab.js';
 import S3FileUpload from 'react-s3';
 import { withRouter } from 'react-router-dom';
@@ -223,7 +223,7 @@ class StatutoryDetails extends Component {
 		var entityID = this.props.match.params.entityID;
 
 		if (this.state.GSTIN || this.state.PAN || this.state.states || this.state.stateCode || this.state.GSTDocument.length > 0  || this.state.PANDocument.length > 0) {
-			swal({
+			Swal.fire({
 				// title: 'abc',
 				text: "It seems that you are trying to enter statutory details. Click 'Cancel' to continue entering. Click 'Ok' to go to next page. But you may lose values if already entered in the form",
 				buttons: {
@@ -297,9 +297,9 @@ class StatutoryDetails extends Component {
 					this.getData();
 					$(".swal-text").css("font-family", "sans-serif");
 					if(response.data.duplicated === true){
-						swal('Statutory details already exist')
+						Swal.fire('', "Statutory details already exist", '')
 					}else{
-						swal('Statutory details added successfully.');
+						Swal.fire('', "Statutory details added successfully", '');
 					}
 					// this.setState({			
 					// 	openFormIcon : this.state.openFormIcon === false ? true : false
@@ -317,7 +317,7 @@ class StatutoryDetails extends Component {
 		event.preventDefault();
 		var entityID = this.props.match.params.entityID;
 		if (this.state.stateCode || this.state.GSTIN || this.state.GSTDocument.length > 0 || this.state.PAN || this.state.PANDocument.length > 0) {
-			swal({
+			Swal.fire({
 				// title: 'abc',
 				text: "It seems that you are trying to enter a statutory details. Click 'Cancel' to continue entering. Click 'Ok' to go to next page. But you may lose values if already entered in the form",
 				buttons: {
@@ -444,15 +444,18 @@ class StatutoryDetails extends Component {
 					this.props.history.push('/' + this.state.pathname + '/statutory-details/' + entityID);
 					this.statutoryDetails();
 					this.getData();
-           			swal({
-	                    text : "Statutory deleted successfully.",
+           			Swal.fire('',
+	                    "Statutory deleted successfully.",
+	                    ''
 	                    // text : (this.state.entityType === "appCompany" ? "Organizational Settings" :this.state.entityType) +" is deleted successfully.",
-					  });
+					  );
 					  $(".swal-text").css("text-transform", "capitalize");
            		}	else{
-           			swal({
-	                    text : "Sorry,Failed to delete.",
-	                  });
+           			Swal.fire(
+           				'',
+	                    "Sorry,Failed to delete.",
+	                    ''
+	                  );
            		}
            		$('#deleteEntityModal').hide();
 	              this.props.getEntities();
@@ -490,7 +493,7 @@ class StatutoryDetails extends Component {
 				this.statutoryDetails();
 				this.getData();
 				$(".swal-text").css("font-family", "sans-serif");
-				swal('Statutory deleted successfully.');
+				Swal.fire('', "Statutory deleted successfully", '');
 			})
 			.catch((error) => {
 			})
@@ -534,9 +537,9 @@ class StatutoryDetails extends Component {
 					$('#states').prop('disabled', false);
 					$(".swal-text").css("font-family", "sans-serif");
 					if(response.data.duplicated === true){
-						swal('Statutory details already exist')
+						Swal.fire('', "Statutory details already exist", '')
 					}else{
-						swal('Statutory details updated successfully.');
+						Swal.fire('', "Statutory details updated successfully", '');
 					}
 					// swal('Location details updated successfully');					
 					$("#locationsDetail").validate().resetForm();
@@ -568,7 +571,7 @@ class StatutoryDetails extends Component {
 					var ext = fileName.split('.').pop();
 					if (ext === "jpg" || ext === "png" || ext === "jpeg" || ext === "pdf" || ext === "JPG" || ext === "PNG" || ext === "JPEG" || ext === "PDF") {
 						if(fileSize > 1048576){
-							swal("Allowed file size is 1MB");
+							Swal.fire('', "Allowed file size is 1MB", '');
 							this.setState({
 								'gotImageGSTIN' : false
 							})
@@ -641,11 +644,11 @@ class StatutoryDetails extends Component {
 								}
 	
 							} else {
-								swal("File not uploaded");
+								Swal.fire('', "File not uploaded", '');
 							}//file
 						}
 					} else {
-						swal("Allowed file formats are (jpg, png, jpeg, pdf)");
+						Swal.fire('', "Allowed file formats are (jpg, png, jpeg, pdf)", '');
 					}//file types
 				}//file
 			}//for 
@@ -666,7 +669,7 @@ class StatutoryDetails extends Component {
 					var ext = fileName.split('.').pop();
 					if (ext === "jpg" || ext === "png" || ext === "jpeg" || ext === "pdf" || ext === "JPG" || ext === "PNG" || ext === "JPEG" || ext === "PDF") {
 						if(fileSize > 1048576){
-							swal("Allowed file size is 1MB");
+							Swal.fire('', "Allowed file size is 1MB", '');
 							this.setState({
 								'gotImagePAN' : false
 							})
@@ -739,11 +742,11 @@ class StatutoryDetails extends Component {
 								}
 
 							} else {
-								swal("File not uploaded");
+								Swal.fire('', "File not uploaded", '');
 							}//file
 						}
 					} else {
-						swal("Allowed file formats are (jpg, png, jpeg, pdf)");
+						Swal.fire('', "Allowed file formats are (jpg, png, jpeg, pdf)", '');
 					}//file types
 				}//file
 			}//for 
