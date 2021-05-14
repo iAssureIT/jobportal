@@ -1967,6 +1967,7 @@ exports.set_otp_usingEmail = (req, res, next) => {
 };
 
 exports.set_send_mobileotp_usingMobile = (req, res, next) => {
+	console.log(req.body.mobileNo)
 	User.findOne({ "username": req.body.mobileNo })
 	.then(user => {
 		if(user){

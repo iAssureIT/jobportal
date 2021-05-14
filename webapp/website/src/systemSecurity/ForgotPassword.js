@@ -92,12 +92,12 @@ class ForgotPassword extends Component {
         
         var mobileNo = this.state.mobileNumber;
         var formValues = {
-            mobileNo : mobileNo,
+            mobileNo : mobileNo.replace("-", ""),
           //"emailSubject"	: "Email Verification", 
 			    //"emailContent"  : "As part of our registration process, we screen every new profile to ensure its credibility by validating email provided by user. While screening the profile, we verify that details put in by user are correct and genuine.",
         }
             
-            $('.fullpageloader').show();
+            $('.fullpageloader').show(); 
             axios.patch('/api/auth/patch/setsendmobileotpusingMobile', formValues)
             .then((response)=>{
               

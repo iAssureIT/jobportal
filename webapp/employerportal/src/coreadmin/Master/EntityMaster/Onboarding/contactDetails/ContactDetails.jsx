@@ -163,8 +163,12 @@ class ContactDetails extends Component {
 	getRoles() {
 		axios.post("/api/roles/get/list")
 		  .then((response) => {
+		  	var entity = "";
+		  	if (this.props.entity == 'corporate') {
+		  		entity = "Employer"
+		  	}
+			var rolesArray = response.data.filter(a=>a.rolesentity == entity)
 
-			var rolesArray = response.data.filter(a=>a.rolesentity == this.props.entity)
 			this.setState({
 			  rolesArray: rolesArray
 			},()=>{
@@ -1348,7 +1352,7 @@ class ContactDetails extends Component {
 					                                              ref="role" name="role" id="role" value={this.state.role} onChange={this.handleChange}>
 					                                              <option value="" disabled={true}>-- Select Role --</option>
 					                                              	{this.state.rolesArray && this.state.rolesArray.length > 0 ?
-																		this.state.rolesArray.map((rolesArray, index) => {
+																		this.state.rolesArray.map((rolesArray, index) => { 
 																		return (
 																			<option key={index} value={rolesArray.role}>{rolesArray.role}</option>
 																		);
