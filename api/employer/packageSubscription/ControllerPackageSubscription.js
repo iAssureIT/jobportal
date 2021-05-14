@@ -92,82 +92,33 @@ exports.paymentOrderDetails = (req,res,next) =>{
 exports.payment_response = (req,res,next) =>{ 
 	var _id = req.params.order_id;
 	
-	var generated_signature = sha256.hmac('VgF165CC3e5vKlfqwPnbeckJ', req.body.razorpay_order_id+"|"+req.body.razorpay_payment_id);
-	console.log("generated_signature",generated_signature);
-	if (generated_signature == req.body.razorpay_signature) { 
-	  PackageSubscription.updateOne(
+	PackageSubscription.updateOne(
                     { "_id": _id},
 
                     {
                         $set : {
-								"transactionId" 	: req.body.razorpay_payment_id,
+								//"transactionId" 	: req.body.razorpay_payment_id,
 								"paymentStatus"		: "Paid",
                         }
                     }
                     )
  		
-         .exec()
-         .then(data=>{
+        .exec()
+        .then(data=>{
          	// res.redirect("http://localhost:3000/paymentResponse");
             if(data.nModified === 1){
-         	console.log("req.body.razorpay_order_id",req.body.razorpay_order_id);
-
-         		PackageSubscription.findOne({ "paymentOrderId":req.body.razorpay_order_id})
-         		.then((orderDetails)=>{
-         			console.log("orderDetails--",orderDetails);
-         			console.log("globalVariable.url ",globalVariable.url);
-         			
-         			var url = globalVariable.url+"payment-response/"+orderDetails.paymentOrderId;
-         			if(url){
-						res.redirect(url);
-         			}
-         		})
-	            .catch(err =>{
-	                console.log(err);
-	                res.status(500).json({
-	                    error: err
-	                });
-	            });	
-            }else{
-                res.status(200).json({message : "SIGNATURE_MATCHED_BUT_ORDER_NOT_UPDATED"})
+            	res.status(200).json({							
+	    				message	: "Payment is done successfully",
+	                    data: data,
+	    			});
             }
-         })
-	} else {
-		console.log("payment Failed",JSON.stringify(req.body));
-		console.log("req.body.razorpay_order_id",req.body.razorpay_order_id);
-		PackageSubscription.updateOne(
-                        { "_id" : _id},
-                        {
-                            $set : {
-								"transactionId" 	: req.body.razorpay_payment_id,
-								"paymentStatus"		: "Failed",
-                            }
-                        }
-                    )
-         .exec()
-         .then(data=>{
-         	if(data.nModified === 1){
-         	console.log("req.body.razorpay_order_id",req.body.razorpay_order_id);
-
-         		PackageSubscription.findOne({ "_id":_id})
-         		.then((orderDetails)=>{
-         			console.log("orderDetails--",orderDetails);
-         			console.log("globalVariable.url ",globalVariable.url);
-         			var url = globalVariable.url+"payment-response/"+orderDetails.paymentOrderId;
-         			if(url){
-						res.redirect(url);
-         			}
-         		})
-	            .catch(err =>{
-	                console.log(err);
-	                res.status(500).json({
-	                    error: err
-	                });
-	            });	
-            }else{
-                res.status(200).json({message : "SIGNATURE_MATCHED_BUT_ORDER_NOT_UPDATED"})
-            }
-         	
-         })
-	}
+        })
+        .catch(err =>{
+            console.log(err);
+            res.status(500).json({
+            	message: "Some issue occured while making payment",
+                error: err
+            });
+        });
+	
 }

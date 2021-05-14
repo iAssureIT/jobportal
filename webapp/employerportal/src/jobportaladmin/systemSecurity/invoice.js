@@ -10,13 +10,17 @@ constructor() {
     this.state = {
         
         packagemasterArray  :[],
+        taxrate             : {}
     }	
 }	
 componentDidMount(){
-   Axios.get("/api/packagemaster/get/list")
+   Axios.get("/api/globalmaster/getTaxData")
         .then(response=>{
           console.log(response.data);
-          this.setState({packagemasterArray : response.data});
+          var taxrate = response.data.filter((data)=>{
+            if(data.taxType=="GST"){return data}
+          })
+          this.setState({taxrate : taxrate});
         })
         .catch(error=>{
           console.log(error)
@@ -24,7 +28,13 @@ componentDidMount(){
 }
 
 render() {
+    
     console.log(this.props.invoiceDetails)
+    var taxrate     = this.state.taxrate[0] ? this.state.taxrate[0].taxRating : 0
+    //console.log(tax)
+    var tax = this.props.invoiceDetails.package_id && this.state.orderDetails ? parseInt(((this.state.orderDetails.amountPaid)/100)*tax) : 0
+    var price   = this.props.invoiceDetails.package_id ? this.props.invoiceDetails.package_id.price : 0
+    var total = price + tax;
     return (
         this.props.invoiceDetails ? 
           <div className="row">
@@ -196,10 +206,10 @@ render() {
                                 </div>
                                 <div className="row featuresBill">
                                     <div className="col-lg-6 invoicePersonalInfoTitle invoicePersonalInfoTitle2">
-                                       <div className="row">  GST (18%) </div>
+                                       <div className="row">  GST ({this.state.taxrate[0] ? this.state.taxrate[0].taxRating : 0 }%) </div>
                                     </div>
                                     <div className="col-lg-6 invoicePersonalInfoSubTitle invoicePersonalInfoSubTitle2">
-                                        ₹ {this.props.invoiceDetails.package_id && this.state.orderDetails ? parseInt(((this.state.orderDetails.amountPaid)/100)*18) : 0}
+                                        ₹ {this.props.invoiceDetails.package_id && this.state.orderDetails ? parseInt(((this.state.orderDetails.amountPaid)/100)*tax) : 0}
                                     </div>
                                 </div>
                                 
@@ -210,7 +220,7 @@ render() {
                                         <div className="row"> Grand Total</div>
                                     </div>
                                     <div className="col-lg-6 invoicePersonalInfoSubTitle invoicePersonalInfoSubTitle2">
-                                        ₹ 1416
+                                        ₹ {total}
                                     </div>
                                     
                                 </div>
@@ -245,12 +255,12 @@ render() {
                         </div>*/}
                         <div className="col-lg-offset-6 col-lg-6 conditionWrapper">
                             <div className="col-lg-12">
-                                 <button className="buttonNext  invoiceButtonNext col-lg-6 col-lg-offset-5" >
+                                 <a className="buttonNext  invoiceButtonNext col-lg-6 col-lg-offset-5" >
                                      Make Payment
-                                     <span className="invoiceButtonNextIcon">
+                                     <span className="invoiceButtonNextIcon" onClick={this.props.makePayment(this.props.invoiceDetails._id)}>
                                         <FontAwesomeIcon icon="angle-double-right" />
                                     </span>
-                                </button>
+                                </a>
                             </div>
                         
                         </div>

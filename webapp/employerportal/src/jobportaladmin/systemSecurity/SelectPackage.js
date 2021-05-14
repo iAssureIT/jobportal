@@ -30,8 +30,10 @@ constructor() {
         price               : 0,
         validity            : "",
         paymentDetails      : {},
-        invoiceDetails      : {}
+        invoiceDetails      : {},
+        subscription_id     : ""
     }	
+    this.makePayment = this.makePayment.bind(this);
 }	
 componentDidMount(){
     Axios.get("/api/packagemaster/get/list")
@@ -85,35 +87,37 @@ subscribePackage(event){
       "user_id"           : this.props.user_id  
     } 
     console.log(formValues)
-    Axios.get('/api/packagesubscription/paymentOrderDetails/609590aaa50be16c70e5bb30')
-            .then((orderdetails)=>{
-                if(this.state.hide==="none"){
-                    this.setState({
-                        hide : "block",
-                        hideForm : "none",
-                        invoiceDetails : orderdetails.data
-                    })
-                }
-            })
-            .catch(function(error){
+    // Axios.get('/api/packagesubscription/paymentOrderDetails/609590aaa50be16c70e5bb30')
+    //         .then((orderdetails)=>{
+    //             if(this.state.hide==="none"){
+    //                 this.setState({
+    //                     hide : "block",
+    //                     hideForm : "none",
+    //                     invoiceDetails : orderdetails.data,
+    //                     subscription_id: "609590aaa50be16c70e5bb30"
+    //                 })
+    //             }
+    //         })
+    //         .catch(function(error){
 
-            })
-    /*Axios.post('/api/packagesubscription/post',formValues)
+    //         })
+    Axios.post('/api/packagesubscription/post',formValues)
     .then((response)=>{ 
         this.setState({
           paymentDetails : response.data,
         })
         if (this.state.paymentDetails.amountPaid > 0) {
             
-            Axios.post('/api/subscriptionorders/paymentOrderDetails/'+response.data._id)
+            Axios.post('/api/packagesubscription/paymentOrderDetails/'+response.data._id)
             .then((orderdetails)=>{
                 if(this.state.hide==="none"){
                     this.setState({
                         hide : "block",
                         hideForm : "none",
+                        invoiceDetails : orderdetails.data,
+                        subscription_id: response.data._id
                     })
                 }
-                this.setState({ invoiceDetails : orderdetails })
             })
             .catch(function(error){
 
@@ -127,7 +131,26 @@ subscribePackage(event){
         })
     .catch(function(error){
       
-    })*/
+    })
+}
+makePayment (subscription_id) { 
+    console.log("makePayment",subscription_id)
+
+    Axios.get('/api/packagesubscription/payment-response/'+subscription_id)
+            .then((orderdetails)=>{
+                if(this.state.hideSuccess==="none"){
+                    this.setState({
+                        hide : "none",
+                        hideForm : "none",
+                        hideSuccess : "block"
+                        //invoiceDetails : orderdetails.data,
+                        //subscription_id: response.data._id
+                    })
+                }
+            })
+            .catch(function(error){
+
+            })
 }
 render() {
     return (
@@ -222,14 +245,15 @@ render() {
                          Subscribe
                     </button>
                 </div>
-                <div className="row" style={{display:this.state.hideSuccess}}>
-                    <Success />
-                </div>
-               
             </form>
+            <div className="row" style={{display:this.state.hideSuccess}}>
+                <Success />
+            </div>
             <div className="row" style={{display:this.state.hide}}>
                 <div className="col-lg-10 col-lg-offset-1">
-                    <Invoice invoiceDetails={this.state.invoiceDetails}/>
+                    <Invoice    invoiceDetails = {this.state.invoiceDetails} 
+                                //subscription_id = {this.state.subscription_id}
+                                makePayment = {this.makePayment.bind(this)}/>
                 </div>
             </div>
             </div>

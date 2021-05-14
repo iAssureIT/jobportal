@@ -1,9 +1,19 @@
 import axios from 'axios';
+import Swal         from 'sweetalert2';
+
+const userDetails = JSON.parse(localStorage.getItem("userDetails"));
+
+if (userDetails) {
+  const token = userDetails.token;
+
+  axios.defaults.headers.common['Authorization'] = 'Bearer '+ token;
+}
 
 export const fetchRolewiseAccess = rolewiseAccessToModule => ({
   type                    : 'FETCH_ROLEWISE_ACCESS',
   rolewiseAccessToModule  : rolewiseAccessToModule
 });
+
 
 export const fetchAccessToFacility = accessToFacility => ({
   type: 'FETCH_ACCESS_FACILITY',
@@ -120,7 +130,20 @@ export function filterJobList(selector) {
           dispatch(getJobList(response.data));
       })
       .catch((error)=>{
-            console.log('error', error);
+          if(error.message === "Request failed with status code 401"){
+              var userDetails =  localStorage.removeItem("userDetails");
+              localStorage.clear();
+              Swal.fire({title  : ' ',
+                        html    : "Your session is expired! You need to login again. "+"<br>"+" Click OK to go to Login Page",
+                        text    :  "" })
+                  .then(okay => {
+                    if (okay) {
+                      window.location.href = "/login";
+                    }
+                  });
+            }else{
+              Swal.fire("", "Error while getting job list", "");
+            }
       }) 
     }
 } 
@@ -146,7 +169,20 @@ export function filterCandidatesApplied(appliedCandidateSelector) {
           dispatch(getAppliedCandidateList(response.data));
       })
       .catch((error)=>{
-            console.log('error', error);
+            if(error.message === "Request failed with status code 401"){
+              var userDetails =  localStorage.removeItem("userDetails");
+              localStorage.clear();
+              Swal.fire({title  : ' ',
+                        html    : "Your session is expired! You need to login again. "+"<br>"+" Click OK to go to Login Page",
+                        text    :  "" })
+                  .then(okay => {
+                    if (okay) {
+                      window.location.href = "/login";
+                    }
+                  });
+            }else{
+                Swal.fire("", "Error!", "");
+            }
       }) 
     }  
 }
@@ -160,7 +196,21 @@ export function filterCandidates(candidateSelector) {
           dispatch(getCandidateList(response.data));
       })
       .catch((error)=>{
-            console.log('error', error);
+        if(error.message === "Request failed with status code 401"){
+          var userDetails =  localStorage.removeItem("userDetails");
+          localStorage.clear();
+          Swal.fire({title  : ' ',
+                    html    : "Your session is expired! You need to login again. "+"<br>"+" Click OK to go to Login Page",
+                    text    :  "" })
+              .then(okay => {
+                if (okay) {
+                  window.location.href = "/login";
+                }
+              });
+        }
+        else{
+            Swal.fire("", "Error!", "");
+        }
       }) 
     }  
 }
