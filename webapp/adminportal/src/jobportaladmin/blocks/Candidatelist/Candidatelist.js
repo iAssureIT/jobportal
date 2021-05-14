@@ -179,19 +179,50 @@ class CandidatesList extends Component{
 																			<div className="row">
 																				<div className="col-lg-12 candidateImgBlock">
 																					<div className="row">
-																						<div className="col-lg-5 imageOfCandidate">
-																							<div className="row">
-																								<img src="/images/43.png" alt="candidateName"/>
+																						<div className="col-lg-5 ">
+																							<div className="imageOfCandidate1">
+																								{
+																			                        	elem.basicInfo.profilePicture
+																			                        	? 
+																				                          <img
+																				                            src={elem.basicInfo.profilePicture}
+																				                            alt="icon"
+																				                            className="menuProfilePictureIcon"
+																				                          />
+																			                            : 
+																			                          
+																			                            elem.basicInfo.gender ==="female"
+																			                            ?
+																				                          <img
+																				                            src="/images/f.png"
+																				                            alt="icon"
+																				                            className="menuProfilePictureIcon"
+																				                          />
+																			                        	 :
+																			                        	 elem.basicInfo.gender == "male"
+																			                        	  ? 
+																				                          <img
+																				                            src="/images/m.png"
+																				                            alt="icon"
+																				                            className="menuProfilePictureIcon"
+																				                          />
+																			                        	: 
+																			                         	 <img
+																				                            src="/images/u.png"
+																				                            alt="icon"
+																				                            className="menuProfilePictureIcon"
+																				                          />
+																			                        }
 																							</div>
 																						</div>
 																						<div className="col-lg-7 displayInfoCandidate">
 																							<div className="row">
-																								<div className="displayCandidateName">
-																									<div className="col-lg-8 nopadding">	<a href={"/candidate-profile/"+elem._id}> {elem.basicInfo.firstName +" ("+ elem.candidateID +")"} </a>
+																								<div className="displayCandidateName1">
+																									<div className="col-lg-8 nopadding">	<a className="displayCandidateName2" href={"/candidate-profile/"+elem._id}> {elem.basicInfo.firstName +" ("+ elem.candidateID +")"} </a>
 																									<span className="candidateIdNumber"></span></div>
 																									<div className="col-lg-4 NOpadding-left text-right"><span>
 																									<i className="fa fa-pencil" title="Edit" id={elem._id} onClick={this.edit.bind(this)}></i>
-																									&nbsp;<i className={"fa fa-trash redFont " + elem._id} id={elem._id} data-userid = {elem.user_id}  onClick={this.delete.bind(this)}></i></span></div>
+																									&nbsp;<i className={"fa fa-trash redFont deleteIcon2 " + elem._id} id={elem._id} data-userid = {elem.user_id}  onClick={this.delete.bind(this)}></i></span></div>
 																								</div>
 																								<div className=" candidatePosts">
 																									<div className=" col-lg-1">
@@ -220,32 +251,36 @@ class CandidatesList extends Component{
 																					</div>
 																				</div>
 																				<div className="col-lg-12 candidateSkillsBlocks">
-																				<div className="col-lg-12">
-																					<div className="skillsHeading">	
-																						Primary skills
-																					</div>
+																					<div className="row primaryBlock">
+																						<div className="col-lg-12">
+																							<div className="skillsHeading">	
+																								Primary skills
+																							</div>
 
-																					{ primarySkills.length > 0 ?	
-																					<div className=" marginForSkillHeading">
-																						<div className=" skillsSubHeadingWrapper">	
-																							{
-																								primarySkills.map((elem,index)=>{
-																									return(
-																											<div className="col-lg-6" key={index}>
-																												<div className="row skillsSubHeading">
-																													<i className="fa fa-square rotate45 listRoatate45" ></i>
-																														{elem.skill_id.skill}
-																												</div>
-																											</div>
-																										);
-																								})
-																							}																							
+																							{ primarySkills.length > 0 ?	
+																							<div className=" marginForSkillHeading">
+																								<div className=" skillsSubHeadingWrapper">	
+																									{
+																										primarySkills.map((elem,index)=>{
+																											return(
+																													<div className="col-lg-6" key={index}>
+																														<div className="row skillsSubHeading">
+																															<i className="fa fa-square rotate45 listRoatate45" ></i>
+																																{elem.skill_id.skill}
+																														</div>
+																													</div>
+																												);
+																										})
+																									}																							
+																								</div>
+																							</div>
+																							: <div className="skillsSubHeading">No primary skills added</div>
+																							}
 																						</div>
 																					</div>
-																					: <div className="skillsSubHeading">No primary skills added</div>
-																					}
-																				</div>
-																				<div className="col-lg-12">
+																				<div className="row secondaryBlock">
+																					<div className="col-lg-12">
+																						<div className="skillsHeadingBlock">
 																					<div className="skillsHeading">	
 																						Secondary skills
 																					</div>
@@ -269,23 +304,25 @@ class CandidatesList extends Component{
 																					}
 																				</div> 
 																				</div>
+																				</div>
+																				</div>
 																			</div>
 																		</div>
 																		<div className="col-lg-2 profileSymbolsWrapper">
 																			<div className="row profileSymbols">
-																				<img src="/images/44.png" alt="Profile Logo"/>
+																				<img className="grayscale" src="/images/44.png" alt="Profile Logo"/>
 																			</div>
 																			<div className="row profileSymbols">
-																				<img src="/images/45.png" alt="Profile Logo"/>
+																				<img className="grayscale" src="/images/45.png" alt="Profile Logo"/>
 																			</div>
 																			<div className="row profileSymbols">
-																				<img src="/images/46.png" alt="Profile Logo"/>
+																				<img className="grayscale" src="/images/46.png" alt="Profile Logo"/>
 																			</div>
 																			<div className="row profileSymbols">
-																				<img src="/images/47.png" alt="Profile Logo"/>
+																				<img className="grayscale" src="/images/47.png" alt="Profile Logo"/>
 																			</div>
 																			<div className="row profileSymbols">
-																				<img src="/images/48.png" alt="Profile Logo"/>
+																				<img className="grayscale" src="/images/48.png" alt="Profile Logo"/>
 																			</div>
 																			<div className="row profileExlIcon">
 																				<i className="fa fa-file-excel-o" title="Download as excel file" aria-hidden="true"></i>

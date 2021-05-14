@@ -56,13 +56,12 @@ import CoreLayout           from './coreadmin/CoreLayout/CoreLayout.js';
 import GlobalMaster         from "./coreadmin/companysetting/Components/GlobalMasters.js";
 
 // =============  Candidate =======================
-import CandidateMainPage        from "./jobportaladmin/CandidateProfile/CandidateMainPage/CandidateMainPage.jsx";
-import CandidateBasicInfo       from "./jobportaladmin/CandidateProfile/Pages/ProfileCreation/CandidateBasicInfo.js";
-import CandidateAddress         from "./jobportaladmin/CandidateProfile/Pages/ProfileCreation/CandidateAddress.js";
-import CandidateAcademics       from "./jobportaladmin/CandidateProfile/Pages/ProfileCreation/CandidateAcademics.js";
-import CandidateContact         from "./jobportaladmin/CandidateProfile/Pages/ProfileCreation/CandidateContact.js";
-import CandidateExperience      from "./jobportaladmin/CandidateProfile/Pages/ProfileCreation/CandidateExperience.js";
-import CandidateCertification   from "./jobportaladmin/CandidateProfile/Pages/ProfileCreation/CandidateCertification.js";
+import CandidateMainPage        from "./jobportaladmin/blocks/CandidateMainPage/CandidateMainPage.jsx";
+import CandidateBasicInfo       from "./jobportaladmin/pages/ProfileCreation/CandidateBasicInfo.js";
+import CandidateAddress         from "./jobportaladmin/pages/ProfileCreation/CandidateAddress.js";
+import CandidateAcademics       from "./jobportaladmin/pages/ProfileCreation/CandidateAcademics.js";
+import CandidateExperience      from "./jobportaladmin/pages/ProfileCreation/CandidateExperience.js";
+import CandidateCertification   from "./jobportaladmin/pages/ProfileCreation/CandidateCertification.js";
 
 // =============  Package master =======================
 import PackageMaster        from "./coreadmin/PackageMaster/PackageMaster.js";
@@ -132,7 +131,7 @@ class Layout extends Component  {
                                                         
                                                         <Route path="/candidate/address/:candidate_id" exact strict component={CandidateAddress} />
                                                         <Route path="/candidate/academics/:candidate_id" exact strict component={CandidateAcademics} />
-                                                        <Route path="/candidate/contact/:candidate_id" exact strict component={CandidateContact} />
+                                                
                                                         <Route path="/candidate/experience/:candidate_id" exact strict component={CandidateExperience} />
                                                         <Route path="/candidate/certification/:candidate_id" exact strict component={CandidateCertification} />
 

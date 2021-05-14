@@ -6,7 +6,7 @@ import Axios 			 	from 'axios';
 import Swal 			 	from 'sweetalert2';
 import { connect }        	from 'react-redux';
 import { bindActionCreators } from 'redux';
-import  * as mapActionCreator from '../../common/actions/index.js';
+import  * as mapActionCreator from '../../Common/actions/index.js';
 import '../BasicInfoForm/BasicInfoForm.css';
 import './Address.css';
 
@@ -63,34 +63,15 @@ class Address extends Component{
 				if(error.message === "Request failed with status code 401"){
 		          var userDetails =  localStorage.removeItem("userDetails");
 		          localStorage.clear();
-
-		          Swal.fire({title  : ' ',
-		                    html    : "Your session is expired! You need to login again. "+"<br>"+" Click OK to go to Login Page",
-		                    text    :  "" })
+		          Swal.fire("","Error while getting industries","error")
 		              .then(okay => {
-		                if (okay) { 
-		                	var userDetails = {
-								loggedIn  	: false,
-								username	:"",	
-								firstName 	: "", 
-								lastName  	: "", 
-								email 		: "",
-								phone 		: "", 
-								user_id   	: "",
-								roles 		: [],
-								token 		: "", 
-								gender 		: "",	
-								profilePicture : "",
-								candidate_id: "",
-								profileCompletion : 0
-							}
-		                mapAction.setUserDetails(userDetails);
-		                document.getElementById("loginbtndiv").click();
+		                if (okay) {
+		                  window.location.href = "/login";
 		                }
 		              });
 		        }else{
-                    Swal.fire("", "Error while getting address type data", "");
-                }
+		            Swal.fire("", "Error while getting industries", "");
+		        }
 			})
 
 		Axios.get("/api/states/get/list/IN")
@@ -229,36 +210,17 @@ class Address extends Component{
 				})
 				.catch(error=>{
 					if(error.message === "Request failed with status code 401"){
-		          var userDetails =  localStorage.removeItem("userDetails");
-		          localStorage.clear();
-
-		          Swal.fire({title  : ' ',
-		                    html    : "Your session is expired! You need to login again. "+"<br>"+" Click OK to go to Login Page",
-		                    text    :  "" })
-		              .then(okay => {
-		                if (okay) { 
-		                	var userDetails = {
-								loggedIn  	: false,
-								username	:"",	
-								firstName 	: "", 
-								lastName  	: "", 
-								email 		: "",
-								phone 		: "", 
-								user_id   	: "",
-								roles 		: [],
-								token 		: "", 
-								gender 		: "",	
-								profilePicture : "",
-								candidate_id: "",
-								profileCompletion : 0
-							}
-		                mapAction.setUserDetails(userDetails);
-		                document.getElementById("loginbtndiv").click();
-		                }
-		              });
-		        }else{
-	                    Swal.fire("", "Some problem occured deleting address details", "");
-	                }
+			          var userDetails =  localStorage.removeItem("userDetails");
+			          localStorage.clear();
+			          Swal.fire("","Error while getting industries","error")
+			              .then(okay => {
+			                if (okay) {
+			                  window.location.href = "/login";
+			                }
+			              });
+			        }else{
+			            Swal.fire("", "Error while getting industries", "");
+			        }
 				})
 			}
 				
@@ -285,7 +247,7 @@ class Address extends Component{
 	}
 	handleBack(event){
 		event.preventDefault();
-		this.props.history.push("/basic-info");
+		this.props.history.push("/candidate/basic-info");
 	}
 	handleSave(event){
 		event.preventDefault();
@@ -351,7 +313,7 @@ class Address extends Component{
 											})	
 								this.getData();	
 									
-							   this.props.history.push("/address/"+this.state.candidate_id);
+							   this.props.history.push("/candidate/address/"+this.state.candidate_id);
 							   window.location.reload(false);
 							   
 							
@@ -360,34 +322,15 @@ class Address extends Component{
 						if(error.message === "Request failed with status code 401"){
 				          var userDetails =  localStorage.removeItem("userDetails");
 				          localStorage.clear();
-
-				          Swal.fire({title  : ' ',
-				                    html    : "Your session is expired! You need to login again. "+"<br>"+" Click OK to go to Login Page",
-				                    text    :  "" })
+				          Swal.fire("","Error while getting industries","error")
 				              .then(okay => {
-				                if (okay) { 
-				                	var userDetails = {
-										loggedIn  	: false,
-										username	:"",	
-										firstName 	: "", 
-										lastName  	: "", 
-										email 		: "",
-										phone 		: "", 
-										user_id   	: "",
-										roles 		: [],
-										token 		: "", 
-										gender 		: "",	
-										profilePicture : "",
-										candidate_id: "",
-										profileCompletion : 0
-									}
-				                mapAction.setUserDetails(userDetails);
-				                document.getElementById("loginbtndiv").click();
+				                if (okay) {
+				                  window.location.href = "/login";
 				                }
 				              });
 				        }else{
-		                    Swal.fire("", "Some problem occured updating address details", "");
-		                }
+				            Swal.fire("", "Error while getting industries", "");
+				        }
 					});
 				}
 
@@ -426,34 +369,15 @@ class Address extends Component{
 						if(error.message === "Request failed with status code 401"){
 				          var userDetails =  localStorage.removeItem("userDetails");
 				          localStorage.clear();
-
-				          Swal.fire({title  : ' ',
-				                    html    : "Your session is expired! You need to login again. "+"<br>"+" Click OK to go to Login Page",
-				                    text    :  "" })
+				          Swal.fire("","Error while getting industries","error")
 				              .then(okay => {
-				                if (okay) { 
-				                	var userDetails = {
-										loggedIn  	: false,
-										username	:"",	
-										firstName 	: "", 
-										lastName  	: "", 
-										email 		: "",
-										phone 		: "", 
-										user_id   	: "",
-										roles 		: [],
-										token 		: "", 
-										gender 		: "",	
-										profilePicture : "",
-										candidate_id: "",
-										profileCompletion : 0
-									}
-				                mapAction.setUserDetails(userDetails);
-				                document.getElementById("loginbtndiv").click();
+				                if (okay) {
+				                  window.location.href = "/login";
 				                }
 				              });
 				        }else{
-		                    Swal.fire("", "Some problem occured creating address details", "");
-		                }
+				            Swal.fire("", "Error while getting industries", "");
+				        }
 					});
 				}
 
@@ -462,7 +386,7 @@ class Address extends Component{
 	
 	handleSubmit(event){
 		event.preventDefault();
-    	this.props.history.push("/academics/"+this.state.candidate_id);
+    	this.props.history.push("/candidate/academics/"+this.state.candidate_id);
 	}
 	
 	camelCase(str) {
@@ -891,7 +815,7 @@ class Address extends Component{
 																		</div>
 																		<div className="col-lg-2 buttonAdd" >
 																			<div className="row">
-																				 <a id={elem._id} href={"/address/"+this.state.candidate_id+"/edit/"+elem._id}>
+																				 <a id={elem._id} href={"/candidate/address/"+this.state.candidate_id+"/edit/"+elem._id}>
 																				 	<span className="editAdd" title="Edit">
 																				 		<FontAwesomeIcon icon="pencil-alt" />
 																				 	</span> 

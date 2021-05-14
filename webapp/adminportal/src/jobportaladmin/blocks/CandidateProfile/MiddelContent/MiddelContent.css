@@ -2,7 +2,8 @@
 .middelContentWrapper{
 	min-height:700px;
 	height:auto;
-	color: var(--admin-main-txt-color);
+	color: #dddddd;
+	text-transform: capitalize;
 }
 .middelContentHeadingWrapper i{
 	margin-left:-3px;
@@ -29,18 +30,19 @@
     transform: rotate(45deg);
 }
 .middleContentHeading{
-	font-size:19px;
+	font-size:16px;
 	letter-spacing:1px;
-	color: var(--blue-color);
-	font-family: Montserrat-SemiBold;
+	color: var(--main-heading-font-color);
+	font-family: Montserrat-Bold,Sans-Serif;
+	padding-top: 2px;
 }
 .middelContentText{
 	min-height:100px;
 	height:auto;
 	margin-bottom:5px;
 	padding-bottom:12px;
-	border-left:2px solid var(--admin-main-border-color);
-	font-family: Montserrat-Medium;
+	border-left:2px solid var(--main-heading-font-color);
+	font-family: Montserrat-Medium,Sans-Serif;
 	font-size:13px;
 }
 .secondP{
@@ -56,30 +58,32 @@
 }
 .profesion{
 	font-size:14px;
-	color: var(--blue-color);
+	color: var(--main-subheading-font-color);
 	font-weight:800;
 	padding-top:5px;
 	padding-bottom:10px;
-	font-family: Montserrat-Medium;
+	font-family: Montserrat-Medium,Sans-Serif;
 }
 .companyName{
 	font-size:13px;
 	font-weight:600;
 	color: var(--main-txt-color);
-	font-family: Montserrat-Medium;
+	font-family: Montserrat-Medium,Sans-Serif;
 }
 .companyExperience,.companyAddress{
 	padding-top:3px;
 	font-size:12px;
-	font-family: Montserrat-Medium;
+	font-family: Montserrat-Medium,Sans-Serif;
 }
 
 .middleContentHr{
 	height:1px!important;
 	border:none;
-	background-color:var(--blue-color);
+	background-color:var(--main-heading-font-color);
 }
 .companyImages img{
 	width:70px;
-	padding-top:15px;
+}
+.executiveSummaryWraap{
+	padding-left: 10px;
 }

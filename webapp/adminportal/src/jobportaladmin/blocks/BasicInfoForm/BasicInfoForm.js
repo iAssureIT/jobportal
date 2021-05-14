@@ -1,17 +1,21 @@
-import React,{Component}            from 'react';
-import { FontAwesomeIcon }          from '@fortawesome/react-fontawesome';
-import Moment                       from 'moment';
-import { withRouter }	 	        from 'react-router-dom';
-import Axios 			 	        from 'axios';
-import Swal 			 	        from 'sweetalert2';
-import S3FileUpload                 from 'react-s3';
+import React,{Component}    from 'react';
+import { FontAwesomeIcon }  from '@fortawesome/react-fontawesome';
+import Moment               from 'moment';
+import { withRouter }	 	from 'react-router-dom';
+import Axios 			 	from 'axios';
+import Swal 			 	from 'sweetalert2';
+import { Multiselect }      from 'multiselect-react-dropdown';
+import S3FileUpload         from 'react-s3';
 import { WithContext as ReactTags } from 'react-tag-input';
 import PhoneInput 					from 'react-phone-input-2';
 import CKEditor 					from '@ckeditor/ckeditor5-react';
 import ClassicEditor 				from '@ckeditor/ckeditor5-build-classic';
-import {connect}                    from 'react-redux';
+import { connect }                  from 'react-redux';
 import { bindActionCreators }       from 'redux';
-import  * as mapActionCreator       from '../../common/actions/index';
+import  * as mapActionCreator       from '../../Common/actions/index';
+
+
+import 'react-phone-input-2/lib/style.css';
 import './BasicInfoForm.css';
 
 
@@ -19,7 +23,7 @@ class BasicInfoForm extends Component{
 	constructor(props){
 		super(props);
 		this.state={
-			candidate_id              : this.props.userDetails.candidate_id,
+			candidate_id              : this.props.match.params.candidate_id,
 			firstName                 : "",
 			middleName                : "",
 			lastName                  : "",
@@ -50,7 +54,7 @@ class BasicInfoForm extends Component{
 			resumeUrl 				  : "",
 			resume 					  : [],
 			executiveSummary 		  : "",
-			maxDate 		          : "",
+			maxDate 		          : "",	
 		}
 		
 	}
@@ -72,46 +76,31 @@ class BasicInfoForm extends Component{
 		})
 		.catch(error=>{
 			if(error.message === "Request failed with status code 401"){
-		        var userDetails =  localStorage.removeItem("userDetails");
-		        localStorage.clear();
-
-		        Swal.fire({title  : ' ',
-		                  html    : "Your session is expired! You need to login again. "+"<br>"+" Click OK to go to Login Page",
-		                  text    :  "" })
-		            .then(okay => {
-		              if (okay) { 
-		                var userDetails = {
-		                    loggedIn    : false,
-		                    username  :"",  
-		                    firstName   : "", 
-		                    lastName    : "", 
-		                    email     : "",
-		                    phone     : "", 
-		                    user_id     : "",
-		                    roles     : [],
-		                    token     : "", 
-		                    gender    : "", 
-		                    profilePicture : "",
-		                    candidate_id: "",
-		                    profileCompletion : 0
-		                    }
-		                    mapAction.setUserDetails(userDetails);
-		                    document.getElementById("loginbtndiv").click();
-		                    }
-		                  });
-		            }else{
-		            	Swal.fire('', "Error while getting data", '');	
-		            }
-			
+		          var userDetails =  localStorage.removeItem("userDetails");
+		          localStorage.clear();
+		          Swal.fire("","Error while getting industries","error")
+		              .then(okay => {
+		                if (okay) {
+		                  window.location.href = "/login";
+		                }
+		              });
+		        }else{
+		            Swal.fire("", "Error while getting industries", "");
+		        }
 		})
+
+		if (this.props.match.params.candidate_id) {
 
 		Axios.get("/api/candidatemaster/get/one/"+this.state.candidate_id)
 		.then(response=>{
+			 console.log("response.data",this.state.candidate_id);
+			 console.log("response.data",response.data);
 
 			 	var languagesTags = [];
 			 	if (response.data.languagesKnown) {
 
 			 		response.data.languagesKnown.map((data,ind)=>{
+			 			console.log(data)
                     	languagesTags.push({ id : data.language_id._id, text : data.language_id.language })
                 	})
 			 	}
@@ -141,41 +130,23 @@ class BasicInfoForm extends Component{
 			 })
 			 .catch(error=>{
 			 	if(error.message === "Request failed with status code 401"){
-		        var userDetails =  localStorage.removeItem("userDetails");
-		        localStorage.clear();
-
-		        Swal.fire({title  : ' ',
-		                  html    : "Your session is expired! You need to login again. "+"<br>"+" Click OK to go to Login Page",
-		                  text    :  "" })
-		            .then(okay => {
-		              if (okay) { 
-		                var userDetails = {
-		                    loggedIn    : false,
-		                    username  :"",  
-		                    firstName   : "", 
-		                    lastName    : "", 
-		                    email     : "",
-		                    phone     : "", 
-		                    user_id     : "",
-		                    roles     : [],
-		                    token     : "", 
-		                    gender    : "", 
-		                    profilePicture : "",
-		                    candidate_id: "",
-		                    profileCompletion : 0
-		                    }
-		                    mapAction.setUserDetails(userDetails);
-		                    document.getElementById("loginbtndiv").click();
-		                    }
-		                  });
-		            }else{
-			 		Swal.fire('', "Submit Error!", '');
-			 		}
+		          var userDetails =  localStorage.removeItem("userDetails");
+		          localStorage.clear();
+		          Swal.fire("","Error while getting industries","error")
+		              .then(okay => {
+		                if (okay) {
+		                  window.location.href = "/login";
+		                }
+		              });
+		        }else{
+		            Swal.fire("", "Error while getting industries", "");
+		        }
 			 })
+			}
 }
 
 	//========== User Define Function Start ================
-	selectImage(event){
+	selectImage(event){ 
 		event.preventDefault();
 		var profilePicture = [];
 		if (event.currentTarget.files ) {
@@ -194,17 +165,17 @@ class BasicInfoForm extends Component{
           var ext = fileName.split('.').pop();
           if (ext === "jpg" || ext === "png" || ext === "jpeg" || ext === "JPG" || ext === "PNG" || ext === "JPEG") {
             if(fileSize > 1048576){
-              Swal.fire('', "Allowed file size is 1MB", '');
+              Swal.fire("Allowed file size is 1MB");
             }else{
               if (file) {
                 var objTitle = { fileInfo: file }
                 profilePicture.push(objTitle);
               } else {
-                Swal.fire('', "Images not uploaded", '');
+                Swal.fire("Images not uploaded");
               }//file
             }
           } else {
-            Swal.fire('', "Allowed images formats are (jpg,png,jpeg)", '');
+            Swal.fire("Allowed images formats are (jpg,png,jpeg)");
             this.setState({
               gotProfileImage:false
             })
@@ -215,7 +186,8 @@ class BasicInfoForm extends Component{
           gotProfileImage:true
         })
         main().then(formValues => {
-
+         
+   		console.log(formValues)
           this.setState({
             profilePicture   : formValues[0].profilePicture,
             imageUploaded : false
@@ -285,26 +257,27 @@ class BasicInfoForm extends Component{
           var fileName = file.name;
           var fileSize = file.size;
           var ext = fileName.split('.').pop();
-          if (ext === "pdf" || ext === "docx" || ext === "doc" ) {
+          if (ext === "pdf" || ext === "docx" || ext === "doc" || ext === "xlsx") {
             if(fileSize > 1048576){
-              Swal.fire('', "Allowed file size is 1MB", '');
+              Swal.fire("Allowed file size is 1MB");
             }else{
               if (file) {
                 var objTitle = { fileInfo: file }
                 resume.push(objTitle);
               } else {
-                Swal.fire('', "Resume is not uploaded", '');
+                Swal.fire("Resume is not uploaded");
               }//file
             }
           } else {
-            Swal.fire('', "Allowed document format is (doc, docx, pdf)", '');
+            Swal.fire("Allowed document format is (doc, docx, pdf)");
             
           }//file types
         }
         if (event.currentTarget.files) {
 	        
 	        main().then(formValues => {
-
+	         
+	   		console.log(formValues)
 	          this.setState({
 	            resume   : formValues[0].resume,
 	          })
@@ -363,18 +336,16 @@ class BasicInfoForm extends Component{
 		})
 	}
 	delResumePreview(event){
-		
 		this.setState({
 			resumeUrl:""
 		})
 	}
 
-	handleChange(event){
+		handleChange(event){
 		event.preventDefault();
 		var value = event.currentTarget.value;
 		var name  = event.currentTarget.name;
 		var max  = event.currentTarget.max;
-
 		
 		this.setState({
 			[name]:value,
@@ -408,6 +379,7 @@ class BasicInfoForm extends Component{
 		this.setState({
 			passport:id,
 		})
+
 	}
 	visa(event){
 		event.preventDefault();
@@ -468,9 +440,8 @@ class BasicInfoForm extends Component{
     }
 	handleSubmit(event){
 		event.preventDefault();
-		var status =  this.validateForm();
+		var status =  this.validateForm(); 
 		var {mapAction} = this.props;
-
 			var formValues = {
 
 								firstName          : this.state.firstName,
@@ -492,17 +463,18 @@ class BasicInfoForm extends Component{
 								passport   		   : this.state.passport,
 								visa   		   	   : this.state.visa,
 							}
+							console.log(formValues);
 			if(status==true){
-			Axios.patch("/api/candidatemaster/patch/updateCandidateBasicInfo",formValues)
+				if (this.props.match.params.candidate_id) {
+					Axios.patch("/api/candidatemaster/patch/updateCandidateBasicInfo",formValues)
 			 .then(response=>{
-
 			 	var userDetails = this.props.userDetails;
 				userDetails.gender = this.state.gender;
 				userDetails.profilePicture = this.state.profilePicture;
 				//console.log(userDetails)
 				mapAction.setUserDetails(userDetails);
 
-						Swal.fire('', "Your basic details is inserted successfully", '');
+						Swal.fire("Congrats","Your Basic details is insert Successfully","success");
 							this.setState({
 											firstName          : "",
 											middleName         : "",
@@ -525,42 +497,79 @@ class BasicInfoForm extends Component{
 											visa               : "",
 										})
 
-						this.props.history.push("/address/"+this.state.candidate_id);
+						this.props.history.push("/candidate/address/"+this.state.candidate_id);
+							
 							
 				})
 				.catch(error =>{
 					if(error.message === "Request failed with status code 401"){
-				        var userDetails =  localStorage.removeItem("userDetails");
-				        localStorage.clear();
-
-				        Swal.fire({title  : ' ',
-				                  html    : "Your session is expired! You need to login again. "+"<br>"+" Click OK to go to Login Page",
-				                  text    :  "" })
-				            .then(okay => {
-				              if (okay) { 
-				                var userDetails = {
-				                    loggedIn    : false,
-				                    username  :"",  
-				                    firstName   : "", 
-				                    lastName    : "", 
-				                    email     : "",
-				                    phone     : "", 
-				                    user_id     : "",
-				                    roles     : [],
-				                    token     : "", 
-				                    gender    : "", 
-				                    profilePicture : "",
-				                    candidate_id: "",
-				                    profileCompletion : 0
-				                    }
-				                    mapAction.setUserDetails(userDetails);
-				                    document.getElementById("loginbtndiv").click();
-				                    }
-				                  });
-			            }else{
-						Swal.fire('', "Error!", '');
-						}
+			          var userDetails =  localStorage.removeItem("userDetails");
+			          localStorage.clear();
+			          Swal.fire("","Error while getting industries","error")
+			              .then(okay => {
+			                if (okay) {
+			                  window.location.href = "/login";
+			                }
+			              });
+			        }else{
+			            Swal.fire("", "Error while getting industries", "");
+			        }
 				});
+				}	
+				else{
+					Axios.post("/api/candidatemaster/post",formValues)
+					.then(response=>{
+							var userDetails = this.props.userDetails;
+							userDetails.gender = this.state.gender;
+							userDetails.profilePicture = this.state.profilePicture;
+							//console.log(userDetails)
+							mapAction.setUserDetails(userDetails);
+
+								Swal.fire("Congrats","Your Basic details is insert Successfully","success");
+									this.setState({
+													firstName          : "",
+													middleName         : "",
+													lastName           : "",
+													dob                : "",
+													gender             : "male",
+													//anniversaryDate    : "",	
+													maritalStatus      : "",
+													languages          : [],
+													nationality        : "",
+													panCardNo          : "",
+													adhaarCardNo       : "",
+													// ageYears	       : 0,	
+													// ageMonths	       : 0,	
+													// ageDays	       	   : 0,
+													profilePicture     : "",
+													profileImageUrl    : "",	
+													resume 			   : "",	
+													resumeUrl          : [], 
+													executiveSummary   : "",
+													passport           : "",
+													visa               : "",
+												})
+
+								this.props.history.push("/candidate/address/"+response.data._id);
+									
+									
+						})
+						.catch(error =>{
+							if(error.message === "Request failed with status code 401"){
+					          var userDetails =  localStorage.removeItem("userDetails");
+					          localStorage.clear();
+					          Swal.fire("","Error while getting industries","error")
+					              .then(okay => {
+					                if (okay) {
+					                  window.location.href = "/login";
+					                }
+					              });
+					        }else{
+					            Swal.fire("", "Error while getting industries", "");
+					        }
+						});
+				}
+			
 			}
 		
 	}

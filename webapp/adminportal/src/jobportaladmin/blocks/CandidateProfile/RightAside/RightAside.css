@@ -2,7 +2,7 @@
 .rightAsideWrapper{
 	min-height:700px;
 	height:auto;
-	color: var(--admin-main-txt-color);
+	color: #dddddd;
 	padding-bottom:20px;
 }
 .videoWrapper{
@@ -10,7 +10,7 @@
 	height:180px;
 	border-radius:5px;
 	margin-bottom: 20px;
-	/*background-image:url("/Images/50.png");*/
+	background-image:url("/images/50.png");
 	background-repeat:no-repeat;
 	background-size:cover;
 }
@@ -27,14 +27,14 @@
 	width:60px;
 }
 .certificationHeading{
-	font-size: 19px;
-	color: var(--blue-color);
-	font-family: Montserrat-SemiBold;
+	font-size: 17px;
+	color: var(--main-heading-font-color);
+	font-family: Montserrat-Bold,Sans-Serif;
 }
 .caertificationName{
-	font-size:17px;
-	color: var(--blue-color);
-	font-family: Montserrat-SemiBold;
+	font-size:14px;
+	color: var(--main-subheading-font-color);
+	font-family: Montserrat-Bold,Sans-Serif;
 	
 }
 .caertificationNameWrapper{
@@ -45,12 +45,12 @@
 	font-weight:600;
 	color: var(--main-txt-color);
 	margin-top:5px;
-	font-family: Montserrat-Medium;
+	font-family: Montserrat-Medium,Sans-Serif;
 }
 .issueDate,.expireDate{
 	padding-top:3px;
 	font-size:12px;
-	font-family: Montserrat-Medium;
+	font-family: Montserrat-Medium,Sans-Serif;
 }
 .certificationImages img{
 	width:50px;
@@ -65,4 +65,3 @@
 	border-radius:5px;
 
 }
-
