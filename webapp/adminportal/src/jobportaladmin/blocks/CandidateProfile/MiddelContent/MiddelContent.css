@@ -32,7 +32,7 @@
 .middleContentHeading{
 	font-size:16px;
 	letter-spacing:1px;
-	color: var(--main-heading-font-color);
+	color: var(--main-border-color);
 	font-family: Montserrat-Bold,Sans-Serif;
 	padding-top: 2px;
 }
@@ -41,9 +41,10 @@
 	height:auto;
 	margin-bottom:5px;
 	padding-bottom:12px;
-	border-left:2px solid var(--main-heading-font-color);
+	border-left:2px solid var(--main-border-color);
 	font-family: Montserrat-Medium,Sans-Serif;
 	font-size:13px;
+	color: var(--main-txt-color);
 }
 .secondP{
 	margin-top:20px;
@@ -79,7 +80,7 @@
 .middleContentHr{
 	height:1px!important;
 	border:none;
-	background-color:var(--main-heading-font-color);
+	background-color:var(--main-border-color);
 }
 .companyImages img{
 	width:70px;
