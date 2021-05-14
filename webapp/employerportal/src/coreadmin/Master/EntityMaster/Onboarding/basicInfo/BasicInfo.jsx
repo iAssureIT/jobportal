@@ -6,7 +6,7 @@ import swal from 'sweetalert';
 import S3FileUpload from 'react-s3';
 import PhoneInput from 'react-phone-input-2';
 import { withRouter } from 'react-router-dom';
-import BulkUpload from "../../../BulkUpload/BulkUpload.js";
+//import BulkUpload from "../../../BulkUpload/BulkUpload.js";
 import Autosuggest from 'react-autosuggest';
 
 import 'bootstrap/js/tab.js';
