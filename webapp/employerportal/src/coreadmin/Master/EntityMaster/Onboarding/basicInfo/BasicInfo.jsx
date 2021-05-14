@@ -219,7 +219,7 @@ class BasicInfo extends Component {
             //console.log(industry._id)
             return industry._id  == response.data.industry_id
           })
-          //console.log("industry", industry)
+          console.log("industry", industry)
           //console.log("response", response.data)
           
           this.setState({
@@ -238,6 +238,7 @@ class BasicInfo extends Component {
             "countryCode": response.data.countryCode,
             "statutoryDetails": response.data.statutoryDetails,
             "value": industry[0] ? industry[0].label : "",
+            "industry_id": industry[0] ? industry[0]._id : "",
             suggestions: industry[0] ? this.getSuggestions(industry[0].label) : [] ,
             "userID": response.data.ID,
             "createdBy": localStorage.getItem("user_ID")

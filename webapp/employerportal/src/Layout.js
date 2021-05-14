@@ -99,7 +99,7 @@ class Layout extends Component  {
                                         <div className="row">
                                             <div className="dashboardWrapper" >
                                                 <div className="backColor col-lg-12 col-md-12 col-sm-12 col-xs-12" >
-                                                    <CoreLayout />
+                                                    {<CoreLayout />}
                                                    {/* <Leftsidebar/>*/}
                                                     <Switch >
                                                         <Route path="/"                                 component={Dashboard} exact />
@@ -138,7 +138,7 @@ class Layout extends Component  {
             return (
                 <div>
                     <Router >
-                    <CoreLayout />
+                    {<CoreLayout />}
                         <Switch >
                             <Route path="/empsignuppage"                    exact strict component={EmpSignUpPage} />
                             

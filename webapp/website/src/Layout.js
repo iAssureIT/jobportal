@@ -17,8 +17,6 @@ import Header               from './common/header/Header.js';
 import FunctionalHeader     from './common/functionalHeader/FunctionalHeader.js'; 
 import MapHeader            from './common/mapHeader/MapHeader.js'; 
 import NewHeader            from './common/NewHeader/NewHeader.js'; 
-import Footer               from './common/footer/Footer.js';
-import CoreLayout           from './coreadmin/CoreLayout/CoreLayout.js';
 import Homepage             from './pages/Homepage/Homepage.js'
 
 import TestProfile          from './blocks/TestProfile/TestProfile.js';
@@ -155,7 +153,7 @@ class Layout extends Component  {
                              
                         </div>
                         </div>
-                        <Footer />
+                       {/* <Footer />*/}
                 </div>
             </Router>
             );
@@ -193,7 +191,7 @@ class Layout extends Component  {
                             
                         </Switch>
                     </Router>
-                    <Footer />
+                    {/*<Footer />*/}
                 </div>
             );
         }

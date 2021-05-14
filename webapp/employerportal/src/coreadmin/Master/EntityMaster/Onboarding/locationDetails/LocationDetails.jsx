@@ -6,7 +6,7 @@ import swal from 'sweetalert';
 import 'bootstrap/js/tab.js';
 import S3FileUpload from 'react-s3';
 import { withRouter } from 'react-router-dom';
-import OneFieldForm             from '../../../OneFieldForm/OneFieldForm.js';
+//import OneFieldForm             from '../../../OneFieldForm/OneFieldForm.js';
 import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng
