@@ -182,7 +182,7 @@ componentDidMount() {
         }
          else if(!regName1.test(country)){
          
-          document.getElementById("employerError").innerHTML=  
+          document.getElementById("companyCountryError").innerHTML=  
           "Please enter valid Country name";  
           statusCountry=false; 
         }else{

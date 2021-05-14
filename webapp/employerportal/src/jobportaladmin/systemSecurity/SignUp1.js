@@ -80,7 +80,8 @@ showPassword1=(event)=>{
     var first_name=this.state.firstName;
     var last_name=this.state.lastName;
     var tempEmail = this.state.email.trim(); // value of field with whitespace trimmed off
-    var emailFilter = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    var emailFilter = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
     var illegalChars = /[\(\)\<\>\,\;\:\\\"\[\]]/;
     var phoneno = /^\+?([0-9]{2})\)?[-. ]?([0-9]{5})[-. ]?([0-9]{5})$/;
     var statusFN=false;
@@ -155,9 +156,7 @@ showPassword1=(event)=>{
     }
 
      if(this.state.password.length <=0) {
-       document.getElementById("passwordError").innerHTML=  
-          ""; 
-      document.getElementById("passwordError").innerHTML=  
+         document.getElementById("passwordError").innerHTML=  
           "Please enter Password";  
           statusPwd=false; 
     } 
@@ -172,8 +171,7 @@ showPassword1=(event)=>{
      
     }
         if(this.state.confirmPassword.length<=0){
-          document.getElementById("confirmPasswordError").innerHTML=  
-          ""; 
+        
           document.getElementById("confirmPasswordError").innerHTML=  
           "Please enter Confirm Password";  
           statusCPwd=false; 
@@ -190,20 +188,49 @@ showPassword1=(event)=>{
           statusCPwd = true;
         }
 
-        if ((this.state.password) != (this.state.confirmPassword)){
-          document.getElementById("passwordError").innerHTML=  
-          "Passwords do not match";  
-          document.getElementById("confirmPasswordError").innerHTML=  
-          "Passwords do not match"; 
-          statusPwd2=false; 
-        }
-        else{
-           document.getElementById("passwordError").innerHTML=  
-          "";  
-          document.getElementById("confirmPasswordError").innerHTML=  
-          ""; 
+        if ((this.state.password) == (this.state.confirmPassword) ){
 
-          statusPwd2=true;
+                if (this.state.password.length>0 && this.state.confirmPassword.length>0){
+                    if(this.state.password.length>8 && this.state.confirmPassword.length>8){
+                        console.log("length",this.state.password.length);
+                          document.getElementById("passwordError").innerHTML=  
+                        "";  
+                        document.getElementById("confirmPasswordError").innerHTML=  
+                        ""; 
+
+                        statusPwd2=true;
+                      }
+                    else if(this.state.password.length<8){
+                            document.getElementById("passwordError").innerHTML=  
+                        "Please enter atleast 8 characters";  
+                      }
+                    else if(this.state.confirmPassword.length<8){
+                            document.getElementById("passwordError").innerHTML=  
+                        "Please enter atleast 8 characters";  
+                      }
+                    else{
+                        document.getElementById("passwordError").innerHTML=  
+                        "Please enter correct password........";  
+                        document.getElementById("confirmPasswordError").innerHTML=  
+                        "Please enter correct password......."; 
+                        statusPwd2=false; 
+                      }
+                }
+                else{
+                document.getElementById("passwordError").innerHTML=  
+                "Please enter  password";  
+                document.getElementById("confirmPasswordError").innerHTML=  
+                "Please enter confirm password"; 
+                statusPwd2=false; 
+                 }
+        }
+
+        else{
+            document.getElementById("passwordError").innerHTML=  
+            "Please enter correct password";  
+            document.getElementById("confirmPasswordError").innerHTML=  
+            "Please enter correct password"; 
+            statusPwd2=false; 
         }
 
         if(this.state.checkTC == true){
