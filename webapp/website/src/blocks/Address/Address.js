@@ -851,7 +851,7 @@ class Address extends Component{
 										</span> 
 										<input type="number" name="pincode" id="pincode" 
 										 className="form-control inputBox" 
-										 value={this.state.pincode} 
+										 value={this.state.pincode} max="6"
 										 onChange={this.handleChange.bind(this)} />
 									</div> 
 									<span id="pincodeError" className="errorMsg"></span>

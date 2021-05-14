@@ -497,8 +497,9 @@ class Experience extends Component {
             buttonText: "Save",
             working: "experienced",
              experienceLevel: "experienced",
+             workExperienceID:undefined
           });
-          window.location.reload(false);
+          //window.location.reload(false);
           this.props.history.push("/experience/" + this.state.candidate_id);
         })
         .catch((error) => {
@@ -925,6 +926,7 @@ class Experience extends Component {
 
   //========== Validation End ==================
   render() {
+    console.log(!this.state.workExperienceID)
     return (
       <div className="col-lg-12">
         <form>
