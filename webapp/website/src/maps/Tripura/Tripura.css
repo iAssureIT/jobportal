@@ -7,12 +7,12 @@
 .northTripuraText{
 	position: absolute;
 	top: 48%;
-    left: 43%;
+    left: 50%;
 }
 .northTripuraNumber{
 	position: absolute;
 	top: 51%;
-    left: 50%;
+    left: 60%;
 }
 .unakoti{
 	position: absolute;
@@ -22,12 +22,12 @@
 .unakotiText{
 	position: absolute;
 	top: 45%;
-    left: 35%;
+    left: 30%;
 }
 .unakotiNumber{
 	position: absolute;
 	top: 50%;
-    left: 40%;
+    left: 30%;
 }
 .dhalai{
 	position: absolute;
@@ -42,7 +42,7 @@
 .dhalaiNumber{
 	position: absolute;
 	top: 38%;
-    left: 40%;
+    left: 30%;
 }
 .khowai{
 	position: absolute;
@@ -57,7 +57,7 @@
 .khowaiNumber{
 	position: absolute;
 	top: 55%;
-    left: 55%;
+    left: 45%;
 }
 .westTripura{
 	position: absolute;
@@ -87,7 +87,7 @@
 .gomatiNumber{
 	position: absolute;
 	top: 45%;
-    left: 45%;
+    left: 35%;
 }
 .sepahijala{
 	position: absolute;
@@ -102,7 +102,7 @@
 .sepahijalaNumber{
 	position: absolute;
 	top: 40%;
-    left: 30%;
+    left: 25%;
 }
 .southTripura{
 	position: absolute;

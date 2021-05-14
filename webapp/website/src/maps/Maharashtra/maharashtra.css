@@ -22,12 +22,12 @@
 }
 .thaneText{
 	position: absolute;
-	top: 45%;
+	top: 40%;
     left: 40%;
 }
 .thaneNumber{
 	position: absolute;
-	top: 65%;
+	top: 60%;
     left: 45%;
 }
 
@@ -84,13 +84,13 @@
 }
 .kolhapurText{
 	position: absolute;
-    top: 39%;
-    left: 12%;
+    top: 40%;
+    left: 20%;
 }
 .kolhapurNumber{
 	position: absolute;
-	top: 52%;
-    left: 26%;
+	top: 50%;
+    left: 30%;
 }
 .sangli{
 	position: absolute;
@@ -100,7 +100,7 @@
 .sangliText{
 	position: absolute;
 	top: 39%;
-    left: 39%;	
+    left: 45%;	
 }
 .sangliNumber{
 	position: absolute;
@@ -129,12 +129,12 @@
 }
 .palgharText{
 	position: absolute;
-	top: 30%;
+	top: 40%;
     left: 19%;	
 }
 .palgharNumber{
 	position: absolute;
-	top: 50%;
+	top: 60%;
     left: 30%;
 }
 .pune{
@@ -144,13 +144,13 @@
 }
 .puneText{
 	position: absolute;
-	top: 30%;
-    left: 18%;	
+	top: 40%;
+    left: 25%;	
 }
 .puneNumber{
 	position: absolute;
-	top: 42%;
-    left: 18%;
+	top: 50%;
+    left: 25%;
 }
 .ahmadnagar{
 	position: absolute;
@@ -159,13 +159,13 @@
 }
 .ahmadnagarText{
 	position: absolute;
-	top: 23%;
-    left: 30%;
+	top: 40%;
+    left: 40%;
 }
 .ahmadnagarNumber{
 	position: absolute;
-    top: 33%;
-    left: 34%;
+    top: 55%;
+    left: 40%;
 }
 .aurangabadMah{
 	position: absolute;
@@ -175,12 +175,12 @@
 .aurangabadMahText{
 	position: absolute;
 	top: 43%;
-    left: 18%;	
+    left: 25%;	
 }
 .aurangabadMahNumber{
 	position: absolute;
 	top: 55%;
-    left: 20%;
+    left: 35%;
 }
 .nashik{
 	position: absolute;
@@ -190,12 +190,12 @@
 .nashikText{
 	position: absolute;
 	top: 30%;
-    left: 30%;	
+    left: 40%;	
 }
 .nashikNumber{
 	position: absolute;
 	top: 45%;
-    left: 30%;
+    left: 40%;
 }
 .dhule{
 	position: absolute;
@@ -205,7 +205,7 @@
 .dhuleText{
 	position: absolute;
 	top: 42%;
-    left: 40%;	
+    left: 45%;	
 }
 .dhuleNumber{
 	position: absolute;
@@ -219,13 +219,13 @@
 }
 .nandurbarText{
 	position: absolute;
-	top: 13%;
+	top: 18%;
     left: 30%;	
 }
 .nandurbarNumber{
 	position: absolute;
-	top: 26%;
-    left: 30%;
+	top: 30%;
+    left: 45%;
 }
 .jalgaon{
 	position: absolute;
@@ -255,7 +255,7 @@
 .buldhanaNumber{
 	position: absolute;
 	top: 45%;
-    left: 23%;
+    left: 35%;
 }
 .jalna{
 	position: absolute;
@@ -285,7 +285,7 @@
 .beedNumber{
 	position: absolute;
 	top: 45%;
-    left: 44%;
+    left: 40%;
 }
 .usmanabad{
 	position: absolute;
@@ -294,8 +294,8 @@
 }
 .usmanabadText{
 	position: absolute;
-	top: 8%;
-    left: 12%;	
+	top: 10%;
+    left: 15%;	
 }
 .usmanabadNumber{
 	position: absolute;
@@ -309,13 +309,13 @@
 }
 .solapurText{
 	position: absolute;
-	top: 30%;
-    left: 30%;	
+	top: 40%;
+    left: 40%;	
 }
 .solapurNumber{
 	position: absolute;
-	top: 45%;
-    left: 30%;
+	top: 50%;
+    left: 40%;
 }
 .latur{
 	position: absolute;
@@ -339,13 +339,13 @@
 }
 .parbhaniText{
 	position: absolute;
-	top: 20%;
+	top: 35%;
     left: 13%;	
 }
 .parbhaniNumber{
 	position: absolute;
-	top: 33%;
-    left: 20%;
+	top: 50%;
+    left: 30%;
 }
 .akola{
 	position: absolute;
@@ -370,12 +370,12 @@
 .washimText{
 	position: absolute;
 	top: 45%;
-    left: 30%;	
+    left: 40%;	
 }
 .washimNumber{
 	position: absolute;
 	top: 58%;
-    left: 30%;
+    left: 40%;
 }
 .hingoli{
 	position: absolute;
@@ -385,12 +385,12 @@
 .hingoliText{
 	position: absolute;
 	top: 30%;
-    left: 30%;	
+    left: 40%;	
 }
 .hingoliNumber{
 	position: absolute;
 	top: 45%;
-    left: 30%;
+    left: 40%;
 }
 .nanded{
 	position: absolute;
@@ -474,13 +474,13 @@
 }
 .chandrpurText{
 	position: absolute;
-	top: 30%;
+	top: 40%;
     left: 30%;	
 }
 .chandrpurNumber{
 	position: absolute;
-	top: 45%;
-    left: 30%;
+	top: 55%;
+    left: 40%;
 }
 .bhandara{
 	position: absolute;
@@ -489,13 +489,13 @@
 }
 .bhandaraText{
 	position: absolute;
-	top: 30%;
-    left: -15%;	
+	top: 40%;
+    left: 15%;	
 }
 .bhandaraNumber{
 	position: absolute;
-	top: 45%;
-    left: -15%;
+	top: 55%;
+    left: 40%;
 }
 .gondia{
 	position: absolute;
@@ -504,13 +504,13 @@
 }
 .gondiaText{
 	position: absolute;
-	top: 30%;
+	top: 35%;
     left: 30%;	
 }
 .gondiaNumber{
 	position: absolute;
-	top: 45%;
-    left: 30%;
+	top: 50%;
+    left: 40%;
 }
 .gadchiroli{
 	position: absolute;
@@ -519,12 +519,12 @@
 }
 .gadchiroliText{
 	position: absolute;
-	top: 35%;
-    left: -8%;	
+	top: 37%;
+    left: 15%;	
 }
 .gadchiroliNumber{
 	position: absolute;
-	top: 44%;
-    left: 6%;
+	top: 45%;
+    left: 25%;
 }
 
