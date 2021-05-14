@@ -54,13 +54,13 @@ class Login extends Component {
         var phoneno = /^\+?([0-9]{2})\)?[-. ]?([0-9]{5})[-. ]?([0-9]{5})$/;
 
      if(this.state.loginusername.match(phoneno)){
-      document.getElementById("loginusernameError").innerHTML=  
-      "Please enter valid phone number";  
-      status=false; 
-    }else{
       document.getElementById("loginusernameError").innerHTML=
       ""; 
       status = true;
+    }else{
+      document.getElementById("loginusernameError").innerHTML=  
+      "Please enter valid phone number";  
+      status=false; 
     }
     
     if(this.state.password.length<=0){

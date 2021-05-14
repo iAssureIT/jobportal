@@ -81,7 +81,7 @@
 .westKhasiHillsText{
     position: absolute;
     top: 40%;
-    left: 20%;
+    left: 30%;
 }
 .westKhasiHillsNumber{
     position: absolute;
@@ -96,7 +96,7 @@
 .southWestKhasiHillsText{
     position: absolute;
     top: 43%;
-    left: 25%;
+    left: 35%;
 }
 .southWestKhasiHillsNumber{
     position: absolute;
@@ -131,7 +131,7 @@
 .riBhoiNumber{
     position: absolute;
     top: 55%;
-    left: 62%;
+    left: 55%;
 }
 .westJaintiaHills{
 	position: absolute;
@@ -155,11 +155,11 @@
 }
 .eastJaintiaHillsText{
     position: absolute;
-    top: 23%;
+    top: 35%;
     left: 25%;
 }
 .eastJaintiaHillsNumber{
     position: absolute;
-    top: 35%;
+    top: 45%;
     left: 35%;
 }
