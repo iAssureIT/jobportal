@@ -817,6 +817,7 @@ exports.addCandidateSkill = (req,res,next)=>{
         skill_id = req.body.skill.skill_id != "" ? req.body.skill.skill_id
                                 : await insertSkill(req.body.skill.skill, req.body.user_id)
                 
+        //console.log("skill_id",skill_id.code) 
 
         skills.push({ "skill_id" : ObjectID(skill_id), "skillType" : req.body.skill.skillType, "rating": req.body.skill.rating ,"experience": req.body.skill.experience})
 
@@ -870,6 +871,7 @@ function insertSkill(skill, createdBy){
                         resolve( data._id );
                     })
                     .catch(err =>{
+                        console.log("err", err.code)
                         reject(err); 
                     });
     });
