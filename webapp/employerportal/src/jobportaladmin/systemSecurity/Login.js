@@ -154,7 +154,6 @@ class Login extends Component {
                     })
                   .catch((error) => {});
                 }else{
-
                   window.location.href= '/corporate/basic-details'
                 }
               

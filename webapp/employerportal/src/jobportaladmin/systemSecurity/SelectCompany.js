@@ -26,8 +26,8 @@ constructor() {
         branch                : "",
         branch_id             : "",  
         branchCode            : "",
-    }	
-}	
+    } 
+} 
 componentDidMount() {
    
     axios.get("/api/entitymaster/get/corporate")

@@ -22,8 +22,8 @@ constructor() {
         email          : "",
         mobile          : "",
         value                 : '',
-    }	
-}	
+    } 
+} 
 componentDidMount(){
   console.log(this.props)
 }
@@ -542,5 +542,3 @@ const mapDispatchToProps = (dispatch) => ({
 })
 
 export default connect(mapStateToProps, mapDispatchToProps) (SignUp);
-
-
