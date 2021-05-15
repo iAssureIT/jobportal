@@ -114,6 +114,21 @@ class Login extends Component {
           .then((response) => {
             console.log("response login",response);
             if (response.data.message == "Login Auth Successful") { 
+              var  userDetails = {
+                  loggedIn    : true,
+                  username    : response.data.username,
+                  firstName : response.data.userDetails.firstName, 
+                  lastName  : response.data.userDetails.lastName, 
+                  email     : response.data.userDetails.email, 
+                  phone     : response.data.userDetails.phone, 
+                  city      : response.data.userDetails.city,
+                  company_id : response.data.userDetails.company_id,
+                  companyID : response.data.userDetails.companyID,
+                  companyName : response.data.userDetails.companyName,
+                  user_id   : response.data.userDetails.user_id,
+                  roles     : response.data.userDetails.roles,
+                  token     : response.data.userDetails.token 
+                }
               if (response.data.userDetails.company_id) {
                 axios.get('/api/entitymaster/getEntity/'+response.data.userDetails.company_id)
                   .then((resp) => {
@@ -122,23 +137,10 @@ class Login extends Component {
                         Swal.fire('', "Please contact admin", '');
                       }else{
                         this.setState({ btnLoading: false });
-                        var  userDetails = {
-                          loggedIn    : true,
-                          username    : response.data.username,
-                          firstName : response.data.userDetails.firstName, 
-                          lastName  : response.data.userDetails.lastName, 
-                          email     : response.data.userDetails.email, 
-                          phone     : response.data.userDetails.phone, 
-                          city      : response.data.userDetails.city,
-                          company_id : response.data.userDetails.company_id,
-                          companyID : response.data.userDetails.companyID,
-                          companyName : response.data.userDetails.companyName,
-                          user_id   : response.data.userDetails.user_id,
-                          roles     : response.data.userDetails.roles,
-                          token     : response.data.userDetails.token, 
-                          industry_id   : resp.data.industry_id
+                         
+                          userDetails.industry_id   = resp.data.industry_id
                           //loginTime : response.data.userDetails.loginTime, 
-                        }
+                        
 
                         localStorage.setItem('userDetails', JSON.stringify(userDetails));
 
@@ -154,6 +156,10 @@ class Login extends Component {
                     })
                   .catch((error) => {});
                 }else{
+                  localStorage.setItem('userDetails', JSON.stringify(userDetails));
+
+                  var {mapAction} = this.props;
+                  mapAction.setUserDetails(userDetails);
                   window.location.href= '/corporate/basic-details'
                 }
               
