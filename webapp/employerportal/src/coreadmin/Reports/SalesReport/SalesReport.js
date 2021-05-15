@@ -2,7 +2,7 @@ import React, { Component }     from 'react';
 import $                        from 'jquery';
 import jQuery                   from 'jquery';
 import axios                    from 'axios';
-import swal                     from 'sweetalert';
+import Swal                     from 'sweetalert2';
 import moment                   from 'moment';
 import _                        from 'underscore';
 import IAssureTable             from "../../IAssureTable/IAssureTable.jsx";
@@ -554,7 +554,7 @@ class SalesReport extends Component {
         }
       });
      }else{
-      swal('From date should not be less than To date')
+      Swal.fire('', 'From date should not be less than To date', '')
       this.setState({
         todate:this.state.fromdate
       },()=>{
