@@ -285,7 +285,14 @@ exports.getCandidateWishlist = (req,res,next)=>{
     console.log(limit)
 
     Wishlist.find({"candidate_id": ObjectId(req.body.candidate_id)}).sort({ createdAt: -1 })
-    .populate( 'wishlistItems.job_id', null, selector )   
+    .populate( 'wishlistItems.job_id', null, selector ) 
+    .populate({path : 'wishlistItems.job_id', model : 'jobs',
+                populate: {
+                  path: 'company_id',
+                  model: 'entitymasters'
+                },
+                match : selector 
+            })  
     .exec(function(err, jobs) {
             console.log(err)
             if (err) return res.status(500).json({

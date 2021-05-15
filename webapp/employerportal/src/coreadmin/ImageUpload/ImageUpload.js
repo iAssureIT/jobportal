@@ -1,7 +1,7 @@
 import React, { Component }   from 'react';
 import $                      from 'jquery';
 import axios                  from 'axios';
-import swal                   from 'sweetalert';
+import Swal                   from 'sweetalert2';
 import S3FileUpload           from 'react-s3';
 import { deleteFile }         from 'react-s3';
 import IAssureTable           from "../../coreAdmin/IAssureTable/IAssureTable.jsx";
@@ -52,7 +52,7 @@ class ImageUpload extends Component{
       .catch(function(error){
         if(error.message === "Request failed with status code 401")
         {
-             swal("Your session is expired! Please login again.","", "error");
+             Swal.fire('', "Your session is expired! Please login again", '');
              this.props.history.push("/");
         }
       })
@@ -89,10 +89,18 @@ class ImageUpload extends Component{
               .catch((error)=>{
               })
           }else{        
-            swal("Image not uploaded","Something went wrong");
+            Swal.fire({
+              title       : ' ',
+              html        : 'Image not uploaded<br />Something went wrong',
+              text        : ''
+              });
           }
         }else{
-          swal("Please upload Image","Only Upload Images format (jpg,png,jpeg)"); 
+          Swal.fire({
+              title       : ' ',
+              html        : 'Please upload Image<br />Only Upload Images format (jpg,png,jpeg)',
+              text        : ''
+            }); 
         }
       }
     }
@@ -140,10 +148,18 @@ class ImageUpload extends Component{
               .catch((error)=>{
               })
           }else{        
-            swal("File not uploaded","Something went wrong");
+            Swal.fire({
+                title       : ' ',
+                html        : 'File not uploaded<br />Something went wrong',
+                text        : ''
+              });
           }
         }else{
-          swal("Please upload file","Only Upload  File format (jpg,png,jpeg)"); 
+          Swal.fire({"Please upload file","Only Upload  File format (jpg,png,jpeg)"
+                title       : ' ',
+                html        : 'Please upload file<br />Only Upload  File format (jpg,png,jpeg)',
+                text        : '' 
+              });
         }
       }
     }
@@ -156,9 +172,10 @@ class ImageUpload extends Component{
     var data = filePath.split("/");
     var imageName = data[4];
     if(index){
-      swal({
-        title: "Are you sure you want to delete this image?",
-        text: "Once deleted, you will not be able to recover this image!",
+      Swal.fire({
+        title       : ' ',
+        html        : 'Are you sure you want to delete this image?',
+        text        : '' 
         buttons: true,
         dangerMode: true,
       })
@@ -166,12 +183,12 @@ class ImageUpload extends Component{
         if (willDelete) {
           var array = this.state.fileArray; // make a separate copy of the array
           array.splice(index, 1);
-          swal("abc", "Image deleted successfully");
+          Swal.fire('', "Image deleted successfully", '');
           this.setState({
             fileArray: array
           });
         }else {
-          swal("Are you sure you want to delete this image?","Your image is safe!");
+          /*Swal.fire("Your image is safe!");*/
         }
       });
     }
@@ -182,9 +199,10 @@ class ImageUpload extends Component{
     var configData =  this.props.configData;
     var id = event.target.getAttribute('data-id');
     if(id){
-      swal({
-        title: "Are you sure you want to delete this File?",
-        text: "Once deleted, you will not be able to recover this File!",
+      Swal.fire({
+        title       : ' ',
+        html        : 'Are you sure you want to delete this File?',
+        text        : ''
         icon: "warning",
         buttons: true,
         dangerMode: true,
@@ -196,7 +214,7 @@ class ImageUpload extends Component{
                 url   : configData.apiLink+id
             }).then((response)=> {
                 if(response.data=='workspace deleted'){
-                  swal("Workspace deleted successfully");
+                  Swal.fire('', "Workspace deleted successfully", '');
                   this.props.history.push(configData.pageURL);
                   window.location.reload();
                  
@@ -205,12 +223,12 @@ class ImageUpload extends Component{
               .catch(function (error) {
                     if(error.message === "Request failed with status code 401")
                       {
-                           swal("Your session is expired! Please login again.","", "error");
+                           Swal.fire('', "Your session is expired! Please login again", '');
                            this.props.history.push("/");
                       }
               });
         } else {
-          swal("Your information is safe!");
+          /*Swal.fire("Your information is safe!");*/
         }
       });
     }

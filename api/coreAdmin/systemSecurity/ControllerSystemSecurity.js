@@ -481,7 +481,7 @@ exports.user_signup_user_otp = (req, res, next) => {
 															fullName     : req.body.firstname + ' ' + req.body.lastname,
 															email        : emailId.toLowerCase(),
 															mobile       : req.body.mobNumber,
-															company_id   : ObjectID(req.body.company_id),
+															company_id   : req.body.company_id ? ObjectID(req.body.company_id) : null,
 															companyID    : req.body.companyID,
 															branch_id 	 : req.body.branch_id,	
 															branchCode 	 : req.body.branchCode,	

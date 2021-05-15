@@ -251,7 +251,7 @@ wishlistJob = (jobid)=>{
 														</div>
 														<div className="jobListCompanyName">
 															{/*<b>{elem.company_id ? elem.company_id.companyName : null}</b>*/}
-															{elem.company_id ? elem.company_id.companyName : "Anonymous"}
+															{elem.entity_id ? elem.entity_id.companyName : "Anonymous"}
 														</div>
 														<div> 
 															<i className="fa fa-calendar jobListExperience"></i> &nbsp; Exp: {elem.job_id.eligibility.minExperience}

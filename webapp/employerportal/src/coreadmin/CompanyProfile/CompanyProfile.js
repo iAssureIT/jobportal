@@ -2,7 +2,7 @@ import React, { Component }   from 'react';
 import $                      from 'jquery';
 import axios                  from 'axios';
 import {withRouter}  		  		from 'react-router-dom';
-import swal                   from 'sweetalert';
+import Swal 			   from 'sweetalert2';
 import IAssureTable           from './IAssureTable.jsx';
 import ReactToPdf             from 'react-to-pdf';
 import jspdf                 from 'jspdf';
@@ -215,15 +215,19 @@ class CompanyProfile extends Component {
     .then((response) => {
       if (response.data.deleted) {
       	$('#deleteEntityModal').hide();
-          swal({
-              text: "Data deleted successfully.",
-          });
+          Swal.fire(
+          	'',
+            "Data deleted successfully",
+            ''
+          );
         	this.getCompanyData(this.state.entityID)
 
       } else {
-          swal({
-              text: "Failed to delete.",
-          });
+          Swal.fire(
+          	'',
+            "Failed to delete",
+            ''
+          );
       }
       this.getContracts();
       $('#deleteEntityModal').hide();

@@ -29,6 +29,7 @@ exports.create_order = (req, res, next) => {
 	PackageSubscription.find()
 			.count()
 		    .then((maxInvoiceNum)=>{
+		    	++maxInvoiceNum;
 		    	var order = new PackageSubscription({
 				"_id"           	: mongoose.Types.ObjectId(), 
 				"package_id" 		: req.body.package_id,
@@ -39,7 +40,7 @@ exports.create_order = (req, res, next) => {
 				"startDate" 		: req.body.startDate, //"YYYY-MM-DD"
 				"endDate" 			: req.body.endDate, //"YYYY-MM-DD"
 				"planStatus" 		: "active", //"Active" or "Inactive"
-				"amountPaid" 		: req.body.amount,
+				"amountPaid" 		: 0,
 				"paymentMethod" 	: "",
 				//"transactionID" 	: req.body.transactionID,
 				"paymentOrderID" 	: "",
@@ -90,15 +91,15 @@ exports.paymentOrderDetails = (req,res,next) =>{
 }
 
 exports.payment_response = (req,res,next) =>{ 
-	var _id = req.params.order_id;
+	var _id = req.body.order_id;
 	
 	PackageSubscription.updateOne(
                     { "_id": _id},
 
                     {
                         $set : {
-								//"transactionId" 	: req.body.razorpay_payment_id,
-								"paymentStatus"		: "Paid",
+								"amountPaid" 	: req.body.amountPaid,
+								"paymentStatus"	: "Paid",
                         }
                     }
                     )

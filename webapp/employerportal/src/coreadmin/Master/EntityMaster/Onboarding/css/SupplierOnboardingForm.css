@@ -8,6 +8,14 @@
   --form-field-background-color: #242933;
 }
 
+.NOpadding{
+    padding: 0;
+}
+
+.NOpadding-right{
+    padding: 0;
+}
+
 /*@font-face{
     font-family: 'Montserrat-Bold'; 
     src: url('/font/Montserrat-Bold.ttf');
@@ -19,7 +27,8 @@
 }*/
 
 .basic-info-pillss {
-    padding: 8px 15px!important
+    padding: 8px 15px!important;
+    border-radius: 0px !important;
 }
 
 .supplierForm {
@@ -357,7 +366,8 @@
     margin-bottom: 3%;
     flex: 1 1;
     font-size: 13px;
-    background-color: /*var(--white-color)*/ #242933;
+    cursor: pointer;
+    background-color: var(--form-field-background-color);
     color: #fff;
     border: 1px solid #f5a721;
     /*box-shadow: 2px 2px 10px -5px #ddd;*/
@@ -365,7 +375,7 @@
 
 }
 .boxul1:hover{
-        box-shadow: 1px 3px 6px 1px #999;
+        /*box-shadow: 1px 3px 6px 1px #999;*/
 
 }
 
@@ -475,15 +485,15 @@
 
 }
 
-.locationIcon {
+.empLocationIcon {
     text-align: center;
-    margin-top: 5px;
+    margin-top: 8px;
     font-size: 16px;
     padding: 6px 0 4px 0;
 }
 
 .addrbox {
-    padding: 11px 5px 7px 5px;
+    padding: 16px 5px 7px 5px;
 }
 .addrbox .gst,
 .addrbox .pan{
@@ -592,7 +602,7 @@
     padding: 7px 7px;
     text-decoration: none;
     display: block;
-    border-radius: 3px
+    border-radius: 8px;
 }
 
 .dropdown-content a:hover {
@@ -762,42 +772,42 @@
 
 .triangleone {
     position: absolute;
-    top: -.5px;
-    right: -15px;
-    z-index: 2
+    top: 0px;
+    right: -18px;
+    z-index: 2;
 }
 
-.trianglethree {
+/*.trianglethree {
     position: absolute;
-    top: -.5px;
-    right: -4px;
-    z-index: 2
-}
+    top: 0px;
+    right: -18px;
+    z-index: 2;
+}*/
 
-.trianglefive {
+/*.trianglefive {
     position: absolute;
-    top: -.5px;
+    top: -5px;
     right: -16px;
-    z-index: 2
+    z-index: 2;
 }
 
 .triangletwo {
     position: absolute;
-    top: -.5px;
-    z-index: 1
+    top: -5px;
+    z-index: 1;
 }
 
 .trianglefour {
     position: absolute;
-    top: -.5px;
-    z-index: 1
+    top: -5px;
+    z-index: 1;
 }
 
 .trianglesix {
     position: absolute;
-    top: -.5px;
-    z-index: 1
-}
+    top: -5px;
+    z-index: 1;
+}*/
 
 .fa-cube {
     margin-left: 10px
@@ -1013,7 +1023,10 @@ input:checked+.slider:before {
     font-weight: 600;
     font-size: 14px;
     border:1px solid #aaaaaa6b;
-    padding: 5px !important;
+    border-radius: 4px;
+    /*padding: 5px !important;*/
+    padding-top: 12px;
+    padding-bottom: 12px;
    /*background-color: var(--yellow-button-color) !important;*/
     font-size: 15px;
     /*font-family: 'Montserrat-Bold';*/
@@ -1035,9 +1048,9 @@ input:checked+.slider:before {
 #triangle-right {
     width: 0;
     height: 0;
-    border-top: 20px solid transparent;
+    border-top: 19px solid transparent;
     border-left: 24px solid #ebebeb;
-    border-bottom: 17px solid transparent;
+    border-bottom: 18px solid transparent;
 }
 
 #triangle-right1,
@@ -1056,6 +1069,10 @@ input:checked+.slider:before {
     position: absolute;
     top: -.5px;
     z-index: 1;
+}
+
+.trianglePosiFix{
+    right: -9px;
 }
 
 #LogoImageUp {
@@ -1153,7 +1170,7 @@ width: 100%;
 }
 .uploadImageEmp{
     position: absolute;
-    top: 20px;
+    top: 21px;
     height: 200px;
     border-radius: 5px;
     /*width: 50px;*/
@@ -1239,6 +1256,29 @@ width: 100%;
     /*height: 195px;*/
     border-radius: 4px;
     /*position: absolute;*/
+}
+
+.dropdown-contentLocation ul li{
+    list-style: none;
+}
+
+.location-search-input-emp{
+    padding: 0 !important;
+    padding-left: 10px !important;
+    background-color: var(--form-field-background-color);
+    border: none;
+    height: 34px;
+    width: 100%;
+}
+
+.locationFormRowTwo{
+    margin-top: 15px;
+}
+
+.loginCredbtn{
+    border: 1px solid var(--main-border-color);
+    border-radius: 4px;
+    height: 35px;
 }
 
 .firstElement{
@@ -1355,9 +1395,10 @@ width: 100%;
     font-size: 13px;
     background-color: /*var(--white-color)*/ #242933;
     color: #fff;
-    border: 1px solid #f5a721;
+    border: 1px solid var(--main-border-color);
     /*box-shadow: 2px 2px 10px -5px #ddd;*/
-    min-height: 175px !important;
+    min-height: 150px !important;
+    cursor: pointer;
   }
   .box_style:hover{
         /*box-shadow: 1px 3px 6px 1px #999;*/
@@ -1445,7 +1486,7 @@ width: 100%;
 .pageContent{
   background-color: var(--main-bg-color);
   padding-top: 20px;
-  min-height: 620px;
+  min-height: 690px;
   height: auto;
 }
 
@@ -1553,11 +1594,15 @@ width: 100%;
     color: var(--main-txt-color);
     /*font-family: 'Montserrat-Regular';*/
  }
-.btn-group>.btn.active,.btn-group>.btn:hover {
+.btn-group>.btn.active{
     z-index: 2;
     background-color: var(--yellow-button-color);
     color: var(--main-txt-color);
 }
+
+.btn-group>.btn.active,.btn-group>.btn:hover{
+    color: var(--main-txt-color);
+} 
 
 .ContactDetail{
     height: auto;
@@ -1640,15 +1685,12 @@ width: 100%;
 }
 
 .form-control {
-    width: 100% !important;
-    background-color: var(--input-bg-color) !important;
+    /*width: 100% !important;*/
+    background-color: var(--form-field-background-color) !important;
     border: 1px solid var(--main-border-color) !important;
-    color: #fff !important;
-    font-size: 13px !important;
-}
-
-.tempTableHeader {
-    background: var(--yellow-button-color ) !important;
+    color: var(--main-txt-color);
+    /*color: #fff !important;
+    font-size: 13px !important;*/
 }
 
 .empFormBtn{

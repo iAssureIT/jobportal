@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import $ 				from 'jquery';
 import jQuery 			from 'jquery';
 import axios 			from 'axios';
-import swal 			from 'sweetalert';
+import Swal 			   from 'sweetalert2';
 import 'bootstrap/js/tab.js';
 import PhoneInput 		from 'react-phone-input-2';
 import { withRouter } 	from 'react-router-dom';
@@ -352,7 +352,7 @@ class ContactDetails extends Component {
 		event.preventDefault();
 		var entityID = this.props.match.params.entityID;
 		if (this.state.branchCode || this.state.firstName || this.state.lastName || this.state.email || this.state.department || this.state.designation || this.state.employeeID) {
-			swal({
+			Swal.fire({
 				// title: "abc",
 				text: "It seems that you are trying to enter contact details. Click 'Cancel' to continue entering contact details. Click 'Ok' to go to next page. But you may lose values already entered in the contact details form.",
 				// type: "warning",
@@ -401,7 +401,7 @@ class ContactDetails extends Component {
 		event.preventDefault();
 		var entityID = this.props.match.params.entityID;
 		if (this.state.branchCode || this.state.firstName || this.state.lastName || this.state.email || this.state.department || this.state.designation || this.state.employeeID) {
-			swal({
+			Swal.fire({
 				// title: "abc",
 				text: "It seems that you are trying to enter contact details. Click 'Cancel' to continue entering contact details. Click 'Ok' to go to next page. But you may lose values already entered in the contact details form.",
 				// type: "warning",
@@ -426,7 +426,7 @@ class ContactDetails extends Component {
 						if(entityID === undefined){
 						this.props.history.push("/"+(this.state.pathname === "appCompany" ? "appCompany/basic-details" :this.state.pathname+"/list"));
 						}else{
-						swal("Changes Saved");
+						Swal.fire('', "Changes Saved", '');
 						this.props.history.push("/"+(this.state.pathname === "appCompany" ? "org-profile" :this.state.pathname+"/list"));
 						}
 					}else{
@@ -443,7 +443,7 @@ class ContactDetails extends Component {
 			if(entityID === undefined){
 			this.props.history.push("/"+(this.state.pathname === "appCompany" ? "appCompany/basic-details" :this.state.pathname+"/list"));
 			}else{
-			swal("Changes Saved");
+			Swal.fire('', "Changes Saved", '');
 
 			this.props.history.push("/"+(this.state.pathname === "appCompany" ? "org-profile" :this.state.pathname+"/list"));
 			}
@@ -453,7 +453,7 @@ class ContactDetails extends Component {
 		event.preventDefault();
 		var entityID = this.props.match.params.entityID;
 		if (this.state.branchCode || this.state.firstName || this.state.lastName || this.state.email || this.state.department || this.state.designation || this.state.employeeID) {
-			swal({
+			Swal.fire({
 				// title: "abc",
 				text: "It seems that you are trying to enter contact details. Click 'Cancel' to continue entering contact details. Click 'Ok' to go to next page. But you may lose values already entered in the contact details form.",
 				// type: "warning",
@@ -478,7 +478,7 @@ class ContactDetails extends Component {
 						if(entityID === undefined){
 						this.props.history.push("/"+(this.state.pathname === "appCompany" ? "appCompany/basic-details" :this.state.pathname+"/list"));
 						}else{
-						swal("Changes Saved");
+						Swal.fire('', "Changes Saved", '');
 						this.props.history.push("/company-profile");
 						}
 					}else{
@@ -495,7 +495,7 @@ class ContactDetails extends Component {
 			if(entityID === undefined){
 			this.props.history.push("/"+(this.state.pathname === "appCompany" ? "appCompany/basic-details" :this.state.pathname+"/list"));
 			}else{
-			swal("Changes Saved");
+			Swal.fire('', "Changes Saved", '');
 
 			this.props.history.push("/company-profile");
 			}
@@ -603,7 +603,7 @@ class ContactDetails extends Component {
 				if(response.data.message === 'USER_CREATED'){
 					
 				}else{
-					swal(response.data.message);
+					Swal.fire(response.data.message);
 				}
 				
 			})
@@ -658,23 +658,22 @@ class ContactDetails extends Component {
 	saveContact = (formValues)=>{
 		if(this.state.listOfEmpID.indexOf(this.state.employeeID)>-1)
 		{
-			swal("Employee ID already exists..!")
+			Swal.fire('', "Employee ID already exists..!", '')
 		}else{
 		axios.patch('/api/entitymaster/patch/addContact' ,formValues)
 		.then((response) => {
 				if(response.data.duplicated)
 				{
-					swal({
-						title : "Contact already exists.",
-					});
+					Swal.fire('', "Contact already exists", '');
 
 				}else{
 					this.contactDetails();
 					this.getAllEntites()
 
-					swal({
-						title : "Contact added successfully.",
-						text : this.state.createUser ? "Login credentials created and emailed to user. \n LoginID : "+this.state.email+" \n Default Password :"+"welcome123 \n Contact also added in employee list." : ""
+					Swal.fire({
+						title : "",
+						html  : this.state.createUser ? "Contact added successfully"+"<br>"+"Login credentials created and emailed to user. <br /> LoginID : "+this.state.email+" <br /> Default Password :"+"welcome123 <br /> Contact also added in employee list." : "",
+						text: ''
 					});
 
 					this.setState({
@@ -827,7 +826,7 @@ class ContactDetails extends Component {
 		.then((response)=>{
 			if(response.data.message  === 'USER_CREATED'){
 			}else{
-				swal(response.data.message);
+				Swal.fire(response.data.message);
 			}
 			
 		})
@@ -915,7 +914,7 @@ class ContactDetails extends Component {
 				editData                    : null
 			})
 			this.props.history.push("/"+this.state.pathname+'/contact-details/'+this.props.match.params.entityID);
-			swal("Contact updated successfully.");
+			Swal.fire('', "Contact updated successfully", '');
 		})
 		.catch((error) => {
 			
@@ -1072,7 +1071,7 @@ class ContactDetails extends Component {
 				this.contactDetails();
 				this.getAllEntites();
 				this.props.history.push('/'+this.state.pathname+'/contact-details/' + entityID);
-				swal("Contact deleted successfully.");
+				Swal.fire('', "Contact deleted successfully", '');
 			})
 			.catch((error) => {
 				
@@ -1325,10 +1324,10 @@ class ContactDetails extends Component {
 											              	</div>
 														</div>
 														
-														<div className="height40 form-margin col-lg-12 col-md-12 col-sm-12 col-xs-12 NOpadding">
+														<div className="height40 col-lg-12 col-md-12 col-sm-12 col-xs-12 NOpadding">
 															<div className="col-lg-4 col-md-4 col-sm-12 col-xs-12 ">
 																<label className="labelform col-lg-12 col-md-12 col-sm-12 col-xs-12">Create Login Credentials</label>
-																<div className="btn-group btn-group-toggle" data-toggle="buttons">
+																<div className="btn-group btn-group-toggle loginCredbtn" data-toggle="buttons">
 																	<label className={this.state.createUser === true ? "btn toggleButton customToggleButtonPermission btn-secondary active":"btn toggleButton customToggleButtonPermission btn-secondary"} value={true} onClick={this.loginCredentials.bind(this,true)}>
 																	<input type="radio"
 																		name="options" 
@@ -1410,9 +1409,9 @@ class ContactDetails extends Component {
 						                      tableName={"Contact"}
 						                      /> 
 											:
-											<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 NOPadding">
+											<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 NOPadding row">
 										 	{this.state.contactarray && this.state.contactarray.length > 0 ?
-												<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 NOPadding">
+												<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 NOPadding row">
 													<h4 className="locationDetTitle col-lg-12 col-md-12 col-sm-12 col-sm-12 ">List of Contacts</h4>
 													{this.state.contactarray && this.state.contactarray.length > 0 ?
 														this.state.contactarray.map((data, index) => {

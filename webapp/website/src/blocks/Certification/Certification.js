@@ -738,6 +738,7 @@ class Certification extends Component{
 										grade   		   : "",
 										buttonText         : "Save"
 									})
+					this.getData();		
 				})
 				.catch(error =>{
 					if(error.message === "Request failed with status code 401"){

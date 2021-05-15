@@ -26,7 +26,9 @@ componentDidMount(){
           console.log(error)
         })
 }
-
+makePayment(subscription_id, amountPaid){
+    this.props.makePayment(subscription_id, amountPaid)
+}
 render() {
     
     console.log(this.props.invoiceDetails)
@@ -257,7 +259,9 @@ render() {
                             <div className="col-lg-12">
                                  <a className="buttonNext  invoiceButtonNext col-lg-6 col-lg-offset-5" >
                                      Make Payment
-                                     <span className="invoiceButtonNextIcon" onClick={this.props.makePayment(this.props.invoiceDetails._id)}>
+                                     <span className="invoiceButtonNextIcon" 
+                                     onClick={this.makePayment.bind(this, this.props.invoiceDetails._id, this.props.invoiceDetails.amountPaid)}
+                                     >
                                         <FontAwesomeIcon icon="angle-double-right" />
                                     </span>
                                 </a>

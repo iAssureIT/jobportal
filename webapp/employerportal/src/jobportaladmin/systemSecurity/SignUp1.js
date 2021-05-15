@@ -22,8 +22,8 @@ constructor() {
         email          : "",
         mobile          : "",
         value                 : '',
-    }	
-}	
+    } 
+} 
 componentDidMount(){
   console.log(this.props)
 }
@@ -191,7 +191,7 @@ showPassword1=(event)=>{
         if ((this.state.password) == (this.state.confirmPassword) ){
 
                 if (this.state.password.length>0 && this.state.confirmPassword.length>0){
-                    if(this.state.password.length>8 && this.state.confirmPassword.length>8){
+                    if(this.state.password.length>=8 && this.state.confirmPassword.length>=8){
                         console.log("length",this.state.password.length);
                           document.getElementById("passwordError").innerHTML=  
                         "";  
@@ -382,7 +382,7 @@ showPassword1=(event)=>{
     }        
 render() {
   
-    //console.log(this.props.selectedCompanyDetails)
+    console.log(this.props.selectedCompanyDetails)
     return (
             <form className="signUpBoxFormWrapper">
 
@@ -542,5 +542,3 @@ const mapDispatchToProps = (dispatch) => ({
 })
 
 export default connect(mapStateToProps, mapDispatchToProps) (SignUp);
-
-

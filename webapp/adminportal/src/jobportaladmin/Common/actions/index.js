@@ -133,9 +133,7 @@ export function filterJobList(selector) {
           if(error.message === "Request failed with status code 401"){
               var userDetails =  localStorage.removeItem("userDetails");
               localStorage.clear();
-              Swal.fire({title  : ' ',
-                        html    : "Your session is expired! You need to login again. "+"<br>"+" Click OK to go to Login Page",
-                        text    :  "" })
+              Swal.fire("","Error while getting data","error")
                   .then(okay => {
                     if (okay) {
                       window.location.href = "/login";
@@ -172,9 +170,7 @@ export function filterCandidatesApplied(appliedCandidateSelector) {
             if(error.message === "Request failed with status code 401"){
               var userDetails =  localStorage.removeItem("userDetails");
               localStorage.clear();
-              Swal.fire({title  : ' ',
-                        html    : "Your session is expired! You need to login again. "+"<br>"+" Click OK to go to Login Page",
-                        text    :  "" })
+              Swal.fire("","Error while getting data","error")
                   .then(okay => {
                     if (okay) {
                       window.location.href = "/login";
@@ -199,9 +195,7 @@ export function filterCandidates(candidateSelector) {
         if(error.message === "Request failed with status code 401"){
           var userDetails =  localStorage.removeItem("userDetails");
           localStorage.clear();
-          Swal.fire({title  : ' ',
-                    html    : "Your session is expired! You need to login again. "+"<br>"+" Click OK to go to Login Page",
-                    text    :  "" })
+          Swal.fire("","Error while getting data","error")
               .then(okay => {
                 if (okay) {
                   window.location.href = "/login";

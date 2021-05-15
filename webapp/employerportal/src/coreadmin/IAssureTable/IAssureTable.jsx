@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Route, withRouter } from 'react-router-dom';
-import swal from 'sweetalert';
+import Swal 			   from 'sweetalert2';
 import axios from 'axios';
 import $ from 'jquery';
 import jQuery from 'jquery';
@@ -128,10 +128,7 @@ class IAssureTable extends Component {
                 this.props.history.push(this.props.tableObjects.editUrl);
             }
 			// this.props.history.push(tableObjects.editUrl);
-			swal({
-				title : " ",
-				text  : "Record deleted successfully",
-			});
+			Swal.fire('', "Record deleted successfully", '');
 		}).catch((error) => {
 		});
 	}
@@ -615,10 +612,10 @@ class IAssureTable extends Component {
 									{
 										this.state.showCompanyId ?
 
-										<th className="umDynamicHeader srpadd text-center">Company ID</th>
+										<th className="umDynamicHeader srpadd textAlignCenter">Company ID</th>
 
 										:
-										<th className="umDynamicHeader srpadd text-center">Sr. No.</th>
+										<th className="umDynamicHeader srpadd textAlignCenter">Sr. No.</th>
 
 									}
 									{this.state.tableHeading ?
@@ -626,11 +623,11 @@ class IAssureTable extends Component {
 											([key, value], i) => {
 												if (key === 'actions') {
 													return (
-														<th key={i} className="umDynamicHeader srpadd text-center" id="ActionContent">{value}</th>
+														<th key={i} className="umDynamicHeader srpadd textAlignCenter" id="ActionContent">{value}</th>
 													);
 												} else {
 													return (
-														<th key={i} className="umDynamicHeader srpadd textAlignLeft">{value} <span onClick={this.sort.bind(this)} id={key} className="fa fa-sort tableSort"></span></th>
+														<th key={i} className="umDynamicHeader srpadd textAlignCenter">{value} <span onClick={this.sort.bind(this)} id={key} className="fa fa-sort tableSort"></span></th>
 													);
 												}
 
@@ -661,17 +658,17 @@ class IAssureTable extends Component {
 																	var value2 = value1 ? value1.replace(regex, '') : '';
 																	var aN = value2.replace(this.state.reA, "");
 																	if (aN && $.type(aN) === 'string') {
-																		var textAlign = 'textAlignLeft fixedWidth'
+																		var textAlign = 'textAlignCenter fixedWidth'
 																	} else {
 																		var bN = value1 ? parseInt(value1.replace(this.state.reN, ""), 10) : '';
 																		if (bN) {
-																			var textAlign = 'textAlignLeft fixedWidth';
+																			var textAlign = 'textAlignCenter fixedWidth';
 																		} else {
-																			var textAlign = 'textAlignLeft fixedWidth';
+																			var textAlign = 'textAlignCenter fixedWidth';
 																		}
 																	}
 																} else {
-																	var textAlign = 'textAlignLeft fixedWidth';
+																	var textAlign = 'textAlignCenter fixedWidth';
 																}
 																var found = Object.keys(this.state.tableHeading).filter((k) => {
 																	return k === key;

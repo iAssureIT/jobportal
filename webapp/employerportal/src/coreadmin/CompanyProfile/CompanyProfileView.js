@@ -2,7 +2,7 @@ import React, { Component }   from 'react';
 import $                      from 'jquery';
 import axios                  from 'axios';
 import {withRouter}  		  		from 'react-router-dom';
-import swal                   from 'sweetalert';
+import Swal           		  from 'sweetalert2';
 import IAssureTable           from './IAssureTable.jsx';
 import ReactToPdf             from 'react-to-pdf';
 import _                      from 'underscore';

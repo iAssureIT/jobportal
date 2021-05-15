@@ -40,10 +40,10 @@
     background-color: #fff;
 }
 .iAssureITtable-bordered{
-  border: 1px solid var(--blue-color );
+  /*border: 1px solid var(--blue-color )*/;
 }
 .tempTableHeader{
-  background: var(--blue-color ) !important;
+  background: var(--yellow-button-color );
 }
 .paginationAdminWrap{
   text-align: center !important;
@@ -76,7 +76,7 @@
   text-align: center;
 }
 .marginTop8{
-  margin-top: 8px;
+  margin-top: 20px;
 }
 .marginTop17{
   margin-top: 17px;
@@ -101,7 +101,7 @@
 .tableicons{
   font-size: 20px;
     padding: 5px 8px;
-    box-shadow: 0 0 10px #ede1e1;
+    /*box-shadow: 0 0 10px #ede1e1;*/
     color: #777;
     background-color: #fff;
     border: 1px solid #979797 !important;
@@ -109,7 +109,7 @@
 }
 .tableprintincon{
   font-size: 15px;
-    box-shadow: 0 0 10px #ede1e1;
+    /*box-shadow: 0 0 10px #ede1e1;*/
     color: #777 !important;
     background-color: #fff;
     border: 1px solid #979797 !important;
@@ -137,19 +137,19 @@
 
 }
 .fixedWidth{
-  width: 150px;
+  width: 200px;
   word-break: break-word;
 
 }
 
 .table-striped>tbody>tr:nth-of-type(odd) {
-    background-color: var(--main-bg-color) !important;
+    background-color: var(--form-field-background-color) !important;
     color: var(--main-txt-color);
 /*    font-weight: 500;*/
 }
 
 .table-striped>tbody>tr:nth-of-type(even) {
-    background-color: var(--main-bg-color) !important;
+    background-color: var(--form-field-background-color) !important;
     color: var(--main-txt-color);
 /*    font-weight: 500;*/
 }

@@ -367,7 +367,7 @@ removeApplication = (job_id) => {
 															{elem.job_id.jobBasicInfo.jobTitle}
 														</div>
 														<div className="jobListCompanyName">
-															<b>{elem.company_id ? elem.company_id.companyName : "Anonymous"}</b>
+															<b>{elem.job_id ? elem.job_id.company_id.companyName : "Anonymous"}</b>
 														</div>
 														<div> 
 															<i className="fa fa-calendar jobListExperience"></i> &nbsp;&nbsp;Exp&nbsp;:&nbsp;{elem.job_id.eligibility.minExperience} Years

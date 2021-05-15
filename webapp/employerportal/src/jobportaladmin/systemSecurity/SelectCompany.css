@@ -19,11 +19,11 @@
     color:#999!important;
 }
 .signUpBoxFormWrapper{
-	margin-top: 5px;
+    margin-top: 5px;
 }
 
 /*.signUpBoxForm{
-	margin-top: 20px;
+    margin-top: 20px;
 }*/
 
 .buttonNext {
@@ -41,12 +41,12 @@
     
 }
 .buttonNext:hover{
-	color: #ccc;
-	cursor: pointer;
-	background-color: var(--main-bg-color);
+    color: #ccc;
+    cursor: pointer;
+    background-color: var(--main-bg-color);
 }
 .inputBox{
-	text-transform:capitalize!important;
+    text-transform:capitalize!important;
 }
 .inputBox1{
     text-transform: none!important;
