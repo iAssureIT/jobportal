@@ -106,7 +106,8 @@ subscribePackage(event){
         this.setState({
           paymentDetails : response.data,
         })
-        if (this.state.paymentDetails.amountPaid > 0) {
+        console.log(response.data)
+        if (this.state.price > 0) {
             
             Axios.post('/api/packagesubscription/paymentOrderDetails/'+response.data._id)
             .then((orderdetails)=>{
@@ -133,10 +134,10 @@ subscribePackage(event){
       
     })
 }
-makePayment (subscription_id) { 
+makePayment (subscription_id, amountPaid) { 
     console.log("makePayment",subscription_id)
-
-    Axios.get('/api/packagesubscription/payment-response/'+subscription_id)
+    var formValues = { "subscription_id" : subscription_id , amountPaid: amountPaid}
+    Axios.patch('/api/packagesubscription/payment-response', formValues)
             .then((orderdetails)=>{
                 if(this.state.hideSuccess==="none"){
                     this.setState({
@@ -253,7 +254,8 @@ render() {
                 <div className="col-lg-10 col-lg-offset-1">
                     <Invoice    invoiceDetails = {this.state.invoiceDetails} 
                                 //subscription_id = {this.state.subscription_id}
-                                makePayment = {this.makePayment.bind(this)}/>
+                                makePayment = {this.makePayment.bind(this)}
+                                />
                 </div>
             </div>
             </div>

@@ -110,9 +110,13 @@ class CandidateFilters extends Component{
   let allSkills           = [];
   let allQualifications   = [];
 
-      Axios.get("/api/industrymaster/get/list")
+      const userDetails = JSON.parse(localStorage.getItem("userDetails"));
+      const token = userDetails.token;
+      Axios.defaults.headers.common['Authorization'] = 'Bearer '+ token;
+
+      Axios.post("/api/industrymaster/get/list", {"startRange":0,"limitRange":10000})
       .then(response => {
-        
+         
           response.data.map((elem,index)=>{
             allIndustries.push({industry:elem.industry,id:elem._id})             
           })
@@ -120,7 +124,19 @@ class CandidateFilters extends Component{
             
       })
       .catch(error=>{
-        Swal.fire("Error while getting  industries",error.message,'error');
+        if(error.message === "Request failed with status code 401"){
+          var userDetails =  localStorage.removeItem("userDetails");
+          localStorage.clear();
+          Swal.fire("","Error while getting industries","error")
+              .then(okay => {
+                if (okay) {
+                  window.location.href = "/login";
+                }
+              });
+        }else{
+            Swal.fire("", "Error while getting industries", "");
+        }
+        //Swal.fire("Error while getting  industries",error.message,'error');
       })
 
 
