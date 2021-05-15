@@ -23,8 +23,8 @@ class Header extends Component{
       showLoginModal    : false,
       asideDisplay      : "-600px",
       userMenu          : "none",
-      user_id           :this.props.userDetails.user_id
-     
+      user_id           :this.props.userDetails.user_id,
+      profileCompletion : 0
       //selector            : {},
     }
     this.handleOpenModal  = this.handleOpenModal.bind(this);
@@ -205,7 +205,62 @@ class Header extends Component{
       }
 
       mapAction.setMapSelectedState(stateName);
-      }   
+      } 
+
+      const userDetails = JSON.parse(localStorage.getItem("userDetails"));
+      if (userDetails) {
+        const token = userDetails.token;
+        axios.defaults.headers.common['Authorization'] = 'Bearer '+ token;
+        axios.get("/api/candidatemaster/get/one/"+userDetails.candidate_id)
+        .then(response=>{
+          console.log(response.data.profileCompletion)
+          this.setState({
+              profileCompletion     : response.data.profileCompletion
+          })
+          var userDetails = this.props.userDetails;
+          userDetails.profileCompletion = response.data.profileCompletion;
+
+          mapAction.setUserDetails(userDetails);
+        })
+        .catch(error=>{
+          if(error.message === "Request failed with status code 401"){
+                var userDetails =  localStorage.removeItem("userDetails");
+                localStorage.clear();
+
+                Swal.fire({title  : ' ',
+                          html    : "Your session is expired! You need to login again. "+"<br>"+" Click OK to go to Login Page",
+                          text    :  "" })
+                    .then(okay => {
+                      if (okay) { 
+                        var userDetails = {
+                          loggedIn    : false,
+                          username  :"",  
+                          firstName   : "", 
+                          lastName    : "", 
+                          email     : "",
+                          phone     : "", 
+                          user_id     : "",
+                          roles     : [],
+                          token     : "", 
+                          gender    : "", 
+                          profilePicture : "",
+                          candidate_id: "",
+                          profileCompletion : 0
+                        }
+                      mapAction.setUserDetails(userDetails);
+                      document.getElementById("loginbtndiv").click();
+                      }
+                    });
+              }else{
+                console.log(error)
+                Swal.fire("", "Error while getting data", "");
+              }
+         })
+      }
+      
+
+
+        
     }
   handleOpenModal () {
       this.setState({ showModal: true });

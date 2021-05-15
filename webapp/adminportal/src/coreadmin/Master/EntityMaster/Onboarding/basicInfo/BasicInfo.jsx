@@ -14,7 +14,7 @@ import 'react-phone-input-2/lib/style.css';
 import "bootstrap-toggle/css/bootstrap2-toggle.min.css";
 import "bootstrap-toggle/js/bootstrap2-toggle.min.js";
 
-class BasicInfo extends Component {
+class BasicInfo extends Component { 
   constructor(props) {
     super(props);
     this.state = {
@@ -615,6 +615,7 @@ class BasicInfo extends Component {
             "countryCode": response.data.countryCode,
             "statutoryDetails": response.data.statutoryDetails,
             "value": industry[0] ? industry[0].label : "",
+            "industry_id": industry[0] ? industry[0]._id : "",
             suggestions: industry[0] ? this.getSuggestions(industry[0].label) : [] ,
             "userID": response.data.ID,
             "createdBy": localStorage.getItem("user_ID")
