@@ -114,47 +114,50 @@ class Login extends Component {
           .then((response) => {
             console.log("response login",response);
             if (response.data.message == "Login Auth Successful") { 
-              axios.get('/api/entitymaster/getEntity/'+response.data.userDetails.company_id)
-              .then((resp) => {
-                console.log("resp login",resp);
-                  if (resp.data === null) {
-                    Swal.fire('', "Please contact admin", '');
-                  }else{
-                    this.setState({ btnLoading: false });
-                    var  userDetails = {
-                      loggedIn    : true,
-                      username    : response.data.username,
-                      firstName : response.data.userDetails.firstName, 
-                      lastName  : response.data.userDetails.lastName, 
-                      email     : response.data.userDetails.email, 
-                      phone     : response.data.userDetails.phone, 
-                      city      : response.data.userDetails.city,
-                      company_id : response.data.userDetails.company_id,
-                      companyID : response.data.userDetails.companyID,
-                      companyName : response.data.userDetails.companyName,
-                      user_id   : response.data.userDetails.user_id,
-                      roles     : response.data.userDetails.roles,
-                      token     : response.data.userDetails.token, 
-                      industry_id   : resp.data.industry_id
-                      //loginTime : response.data.userDetails.loginTime, 
-                    }
-
-                    localStorage.setItem('userDetails', JSON.stringify(userDetails));
-
-                    var {mapAction} = this.props;
-                    mapAction.setUserDetails(userDetails);
-       
-                    this.setState({ loggedIn: true }, () => {
-                        if (response.data.userDetails.company_id) {
-                          window.location.href='/post-job'
-                        }else{
-                          window.location.href= '/corporate/basic-details'
+              if (response.data.userDetails.company_id) {
+                axios.get('/api/entitymaster/getEntity/'+response.data.userDetails.company_id)
+                  .then((resp) => {
+                    console.log("resp login",resp);
+                      if (resp.data === null) {
+                        Swal.fire('', "Please contact admin", '');
+                      }else{
+                        this.setState({ btnLoading: false });
+                        var  userDetails = {
+                          loggedIn    : true,
+                          username    : response.data.username,
+                          firstName : response.data.userDetails.firstName, 
+                          lastName  : response.data.userDetails.lastName, 
+                          email     : response.data.userDetails.email, 
+                          phone     : response.data.userDetails.phone, 
+                          city      : response.data.userDetails.city,
+                          company_id : response.data.userDetails.company_id,
+                          companyID : response.data.userDetails.companyID,
+                          companyName : response.data.userDetails.companyName,
+                          user_id   : response.data.userDetails.user_id,
+                          roles     : response.data.userDetails.roles,
+                          token     : response.data.userDetails.token, 
+                          industry_id   : resp.data.industry_id
+                          //loginTime : response.data.userDetails.loginTime, 
                         }
-                      })
-                  }
-                  
-                })
-              .catch((error) => {});
+
+                        localStorage.setItem('userDetails', JSON.stringify(userDetails));
+
+                        var {mapAction} = this.props;
+                        mapAction.setUserDetails(userDetails);
+           
+                        this.setState({ loggedIn: true }, () => {
+                          window.location.href='/post-job'
+                            
+                          })
+                      }
+                      
+                    })
+                  .catch((error) => {});
+                }else{
+
+                  window.location.href= '/corporate/basic-details'
+                }
+              
               }
 
               else if (response.data.message === "USER_BLOCK") {

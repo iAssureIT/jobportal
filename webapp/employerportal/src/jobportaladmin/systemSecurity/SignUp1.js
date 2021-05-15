@@ -382,7 +382,7 @@ showPassword1=(event)=>{
     }        
 render() {
   
-    //console.log(this.props.selectedCompanyDetails)
+    console.log(this.props.selectedCompanyDetails)
     return (
             <form className="signUpBoxFormWrapper">
 
