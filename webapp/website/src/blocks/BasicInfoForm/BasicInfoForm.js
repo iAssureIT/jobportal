@@ -359,7 +359,8 @@ class BasicInfoForm extends Component{
 	}
 	delImgPreview(event){
 		this.setState({
-			profileImageUrl:""
+			profileImageUrl:"",
+			profilePicture: ""
 		})
 	}
 	delResumePreview(event){
