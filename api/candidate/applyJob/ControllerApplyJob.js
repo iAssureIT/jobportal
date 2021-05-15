@@ -409,7 +409,9 @@ exports.appliedJobList = (req,res,next)=>{
     //console.log(limit)
     
     ApplyJob.find({"candidate_id": req.body.candidate_id}).sort({ createdAt: -1 })
-    .populate( 'job_id', null, selector )   
+    .populate( 'job_id', null, selector ) 
+    .populate('entity_id')
+    
     .exec(function(err, jobs) {
             console.log(err)
             if (err) return res.status(500).json({

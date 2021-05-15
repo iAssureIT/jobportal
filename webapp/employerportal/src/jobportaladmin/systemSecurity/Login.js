@@ -148,7 +148,7 @@ class Login extends Component {
                         mapAction.setUserDetails(userDetails);
            
                         this.setState({ loggedIn: true }, () => {
-                          window.location.href='/post-job'
+                          window.location.href='/'
                             
                           })
                       }
