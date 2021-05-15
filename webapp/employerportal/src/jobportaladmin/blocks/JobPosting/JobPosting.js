@@ -989,7 +989,7 @@ class JobPosting extends Component {
                 //console.log("formValues :", formValues);
                 if (response.data.message === "Job details updated Successfully!") {
                     console.log("response.data : ", response.data);
-                    Swal.fire("", "your profile updated successfully!", "");
+                    Swal.fire("", "Your profile updated successfully!", "");
                     this.props.history.push("/job-profile/" + this.state.job_id);
                 }
             })

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import $ from 'jquery';
 import jQuery from 'jquery';
 import axios from 'axios';
-import swal from 'sweetalert';
+import Swal 			   from 'sweetalert2';
 import 'bootstrap/js/tab.js';
 import S3FileUpload from 'react-s3';
 import { withRouter } from 'react-router-dom';
@@ -446,7 +446,7 @@ class LocationDetails extends Component {
 		var entityID = this.props.match.params.entityID;
 
 		if (this.state.locationType || this.state.addressLine1 || this.state.countryCode || this.state.stateCode || this.state.district || this.state.city || this.state.area || this.state.pincode || this.state.GSTIN || this.state.GSTDocument.length > 0 || this.state.PAN || this.state.PANDocument.length > 0) {
-			swal({
+			Swal.fire({
 				// title: 'abc',
 				text: "It seems that you are trying to enter a location. Click 'Cancel' to continue entering location. Click 'Ok' to go to next page. But you may lose values if already entered in the location form",
 				buttons: {
@@ -547,9 +547,9 @@ class LocationDetails extends Component {
 					this.getData();
 					$(".swal-text").css("font-family", "sans-serif");
 					if(response.data.duplicated === true){
-						swal('Location details already exist')
+						Swal.fire('', 'Location details already exist', '')
 					}else{
-						swal('Location details added successfully.');
+						Swal.fire('', 'Location details added successfully', '');
 					}
 					// this.setState({			
 					// 	openFormIcon : this.state.openFormIcon === false ? true : false
@@ -567,7 +567,7 @@ class LocationDetails extends Component {
 		event.preventDefault();
 		var entityID = this.props.match.params.entityID;
 		if (this.state.locationType || this.state.addressLine1 || this.state.countryCode || this.state.stateCode || this.state.district || this.state.city || this.state.area || this.state.pincode || this.state.GSTIN || this.state.GSTDocument.length > 0 || this.state.PAN || this.state.PANDocument.length > 0) {
-			swal({
+			Swal.fire({
 				// title: 'abc',
 				text: "It seems that you are trying to enter a location. Click 'Cancel' to continue entering location. Click 'Ok' to go to next page. But you may lose values if already entered in the location form",
 				buttons: {
@@ -706,15 +706,19 @@ class LocationDetails extends Component {
 					});
 					this.props.history.push('/' + this.state.pathname + '/location-details/' + entityID);
 					this.locationDetails();
-           			swal({
-	                    text : "Location deleted successfully.",
+           			Swal.fire(
+           				'',
+	                    "Location deleted successfully",
+	                    ''
 	                    // text : (this.state.entityType === "appCompany" ? "Organizational Settings" :this.state.entityType) +" is deleted successfully.",
-					  });
+					  );
 					  $(".swal-text").css("text-transform", "capitalize");
            		}	else{
-           			swal({
-	                    text : "Sorry,Failed to delete.",
-	                  });
+           			Swal.fire(
+           				'',
+	                    "Sorry, Failed to delete",
+	                    ''
+	                  );
            		}
            		$('#deleteEntityModal').hide();
 	              this.props.getEntities();
@@ -761,7 +765,7 @@ class LocationDetails extends Component {
 				this.props.history.push('/' +this.state.pathname + '/location-details/' + entityID);
 				this.locationDetails();
 				$(".swal-text").css("font-family", "sans-serif");
-				swal('Location deleted successfully.');
+				Swal.fire('', 'Location deleted successfully', '');
 			})
 			.catch((error) => {
 			})
@@ -828,9 +832,9 @@ class LocationDetails extends Component {
 
 					$(".swal-text").css("font-family", "sans-serif");
 					if(response.data.duplicated === true){
-						swal('Location details already exist')
+						Swal.fire('', 'Location details already exist', '')
 					}else{
-						swal('Location details updated successfully.');
+						Swal.fire('', 'Location details updated successfully.', '');
 					}
 					// swal('Location details updated successfully');					
 					$("#locationsDetail").validate().resetForm();
@@ -903,7 +907,7 @@ class LocationDetails extends Component {
 					var ext = fileName.split('.').pop();
 					if (ext === "jpg" || ext === "png" || ext === "jpeg" || ext === "pdf" || ext === "JPG" || ext === "PNG" || ext === "JPEG" || ext === "PDF") {
 						if(fileSize > 1048576){
-							swal("Allowed file size is 1MB");
+							Swal.fire('', "Allowed file size is 1MB", '');
 							this.setState({
 								'gotImageGSTIN' : false
 							})
@@ -976,11 +980,11 @@ class LocationDetails extends Component {
 								}
 	
 							} else {
-								swal("File not uploaded");
+								Swal.fire('', "File not uploaded", '');
 							}//file
 						}
 					} else {
-						swal("Allowed file formats are (jpg, png, jpeg, pdf)");
+						Swal.fire('', "Allowed file formats are (jpg, png, jpeg, pdf)", '');
 					}//file types
 				}//file
 			}//for 
@@ -1001,7 +1005,7 @@ class LocationDetails extends Component {
 					var ext = fileName.split('.').pop();
 					if (ext === "jpg" || ext === "png" || ext === "jpeg" || ext === "pdf" || ext === "JPG" || ext === "PNG" || ext === "JPEG" || ext === "PDF") {
 						if(fileSize > 1048576){
-							swal("Allowed file size is 1MB");
+							Swal.fire('', "Allowed file size is 1MB", '');
 							this.setState({
 								'gotImagePAN' : false
 							})
@@ -1074,11 +1078,11 @@ class LocationDetails extends Component {
 								}
 
 							} else {
-								swal("File not uploaded");
+								Swal.fire('', "File not uploaded", '');
 							}//file
 						}
 					} else {
-						swal("Allowed file formats are (jpg, png, jpeg, pdf)");
+						Swal.fire('', "Allowed file formats are (jpg, png, jpeg, pdf)", '');
 					}//file types
 				}//file
 			}//for 
@@ -1278,7 +1282,7 @@ class LocationDetails extends Component {
         );
         })
       .catch((error) =>{
-          swal(error)
+          Swal.fire(error)
       })
     })
   }
@@ -1341,13 +1345,13 @@ class LocationDetails extends Component {
 											</a>
 											<div className="triangleone forActive" id="triangle-right"></div>
 										</li>
-										<li className="active col-lg-3 col-md-3 col-sm-12 col-xs-12 transactionTab noRightPadding pdcls btn4 disabled">
+										<li className="active col-lg-3 col-md-3 col-sm-12 col-xs-12 transactionTab pdcls btn4 disabled">
 											<div className="triangletwo" id="triangle-right1"></div>
 											<a href={this.props.match.params.entityID ? "/"+this.props.entity+"/location-details/"+this.props.match.params.entityID : "/"+this.props.entity+"/location-details" } className="basic-info-pillss backcolor">
 												<i className="fa fa-map-marker iconMarginLeft" aria-hidden="true"></i> &nbsp;
 												Location
 											</a>
-											<div className="triangleone triangleones forActive" id="triangle-right"></div>
+											<div className="triangleone triangleones forActive trianglePosiFix" id="triangle-right"></div>
 										</li>
 										<li className="col-lg-3 col-md-3 col-sm-12 col-xs-12 transactionTab noRightPadding pdcls btn4 disabled">
 											<div className="trianglesix" id="triangle-right2"></div>
@@ -1408,7 +1412,7 @@ class LocationDetails extends Component {
 																		<label className="labelform col-lg-12 col-md-12 col-sm-12 col-xs-12">Flat No/Block No</label>
 																		<input id="Line2" type="text" className="form-control col-lg-12 col-md-12 col-sm-12 col-xs-12" value={this.state.addressLine2} ref="addressLine2" name="addressLine2" onChange={this.handleChange} />
 																	</div>
-																	<div className="col-lg-4 col-md-4 col-sm-12 col-xs-12  " >
+																	<div className="col-lg-4 col-md-4 col-sm-12 col-xs-12" >
 																		<label className="labelform col-lg-12 col-md-12 col-sm-12 col-xs-12">Address Line 2 <i className="astrick">*</i></label>
 																		{/*<input id="addressLine1" type="text" className="form-control col-lg-12 col-md-12 col-sm-12 col-xs-12" value={this.state.addressLine1} ref="addressLine1" name="addressLine1" onChange={this.handleChange} />*/}
 																		 <PlacesAutocomplete
@@ -1422,7 +1426,7 @@ class LocationDetails extends Component {
 								                                            <input
 								                                              {...getInputProps({
 								                                                placeholder: 'Search Address ...',
-								                                                className: 'location-search-input col-lg-12 form-control errorinputText',
+								                                                className: 'location-search-input-emp col-lg-12 form-control errorinputText',
 								                                                id:"addressLine1",
 								                                                name:"addressLine1"
 								                                              })}
@@ -1456,7 +1460,7 @@ class LocationDetails extends Component {
 																	
 																</div>
 																
-																<div className="form-margin col-lg-12 col-md-12 col-sm-12 col-xs-12 NOpadding">
+																<div className="locationFormRowTwo col-lg-12 col-md-12 col-sm-12 col-xs-12 NOpadding">
 																	<div className="col-lg-3 col-md-3 col-sm-12 col-xs-12  " >
 																		<label className="labelform col-lg-12 col-md-12 col-sm-12 col-xs-12">State <i className="astrick">*</i> {this.props.typeOption == 'Local' ? <i className="astrick">*</i> : null}
 																		</label>
@@ -1677,10 +1681,10 @@ class LocationDetails extends Component {
 														{this.state.locationarray && this.state.locationarray.length > 0 ?
 															this.state.locationarray.map((Suppliersdata, index) => {
 																return (
-																	<div className="col-lg-6 col-md-6 col-sm-6 col-xs-12 " key={index}>
+																	<div className="col-lg-5 col-md-6 col-sm-6 col-xs-12 " key={index}>
 																		<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 box_style">
 																			<div className=" col-lg-1 col-md-1 col-sm-1 col-xs-1 NOpadding">
-																				<div className="locationIcon col-lg-10 col-md-10 col-sm-10 col-xs-10 ">
+																				<div className="empLocationIcon col-lg-10 col-md-10 col-sm-10 col-xs-10 ">
 																					<i className="fa fa-map-marker" aria-hidden="true"></i>
 																				</div>
 																			</div>

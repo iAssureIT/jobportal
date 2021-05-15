@@ -122,7 +122,7 @@
   position: relative;
   width:100%;
   height: auto;
-  min-height: 180px;
+  min-height: 183px;
   margin-top:5px;
   background-color:var(--header-bg-color  );
   z-index:5;

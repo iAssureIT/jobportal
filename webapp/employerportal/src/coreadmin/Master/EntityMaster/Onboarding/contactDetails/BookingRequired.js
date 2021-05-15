@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import $                    from 'jquery';
 import jQuery               from 'jquery';
-import swal                 from 'sweetalert';
 import { withRouter }       from 'react-router-dom';
 import _                    from 'underscore';
 import 'bootstrap/js/tab.js';
