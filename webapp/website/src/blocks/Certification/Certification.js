@@ -621,12 +621,14 @@ class Certification extends Component{
 													certifiedOn        : "",
 													validity           : "",
 													grade   		   : "",
-													buttonText         : "Save"
+													buttonText         : "Save",
+													certificationToggel : true,
+
 												})
 										this.getData();
 
 							this.props.history.push("/certification/"+this.state.candidate_id);
-							window.location.reload(false);
+							
 					})
 					.catch(error =>{
 						if(error.message === "Request failed with status code 401"){

@@ -72,14 +72,14 @@ class Experience extends Component {
         if(error.message === "Request failed with status code 401"){
 		          var userDetails =  localStorage.removeItem("userDetails");
 		          localStorage.clear();
-		          Swal.fire("","Error while getting industries","error")
+		          Swal.fire("","Error while getting industries details","error")
 		              .then(okay => {
 		                if (okay) {
 		                  window.location.href = "/login";
 		                }
 		              });
 		        }else{
-		            Swal.fire("", "Error while getting industries", "");
+		            Swal.fire("", "Error while getting industries details", "");
 		        }
       });
     Axios.get("/api/entitymaster/get/corporate")
@@ -204,14 +204,14 @@ class Experience extends Component {
           if(error.message === "Request failed with status code 401"){
 		          var userDetails =  localStorage.removeItem("userDetails");
 		          localStorage.clear();
-		          Swal.fire("","Error while getting industries","error")
+		          Swal.fire("","Error while getting experience details","error")
 		              .then(okay => {
 		                if (okay) {
 		                  window.location.href = "/login";
 		                }
 		              });
 		        }else{
-		            Swal.fire("", "Error while getting industries", "");
+		            Swal.fire("", "Error while getting experience details", "");
 		        }
         });
     }
@@ -240,14 +240,14 @@ class Experience extends Component {
         if(error.message === "Request failed with status code 401"){
 		          var userDetails =  localStorage.removeItem("userDetails");
 		          localStorage.clear();
-		          Swal.fire("","Error while getting industries","error")
+		          Swal.fire("","Error while getting candidate details","error")
 		              .then(okay => {
 		                if (okay) {
 		                  window.location.href = "/login";
 		                }
 		              });
 		        }else{
-		            Swal.fire("", "Error while getting industries", "");
+		            Swal.fire("", "Error while getting candidate details", "");
 		        }
       });
   }
@@ -306,14 +306,14 @@ class Experience extends Component {
              if(error.message === "Request failed with status code 401"){
 		          var userDetails =  localStorage.removeItem("userDetails");
 		          localStorage.clear();
-		          Swal.fire("","Error while getting industries","error")
+		          Swal.fire("","Error while delete experience details","error")
 		              .then(okay => {
 		                if (okay) {
 		                  window.location.href = "/login";
 		                }
 		              });
 		        }else{
-		            Swal.fire("", "Error while getting industries", "");
+		            Swal.fire("", "Error while delete experience details", "");
 		        }
               
             });
@@ -426,14 +426,14 @@ class Experience extends Component {
           if(error.message === "Request failed with status code 401"){
 		          var userDetails =  localStorage.removeItem("userDetails");
 		          localStorage.clear();
-		          Swal.fire("","Error while getting industries","error")
+		          Swal.fire("","Error while update experience details","error")
 		              .then(okay => {
 		                if (okay) {
 		                  window.location.href = "/login";
 		                }
 		              });
 		        }else{
-		            Swal.fire("", "Error while getting industries", "");
+		            Swal.fire("", "Error while update experience details", "");
 		        }
           
         });
@@ -490,14 +490,14 @@ class Experience extends Component {
           if(error.message === "Request failed with status code 401"){
 		          var userDetails =  localStorage.removeItem("userDetails");
 		          localStorage.clear();
-		          Swal.fire("","Error while getting industries","error")
+		          Swal.fire("","Error while insert experience details","error")
 		              .then(okay => {
 		                if (okay) {
 		                  window.location.href = "/login";
 		                }
 		              });
 		        }else{
-		            Swal.fire("", "Error while getting industries", "");
+		            Swal.fire("", "Error while insert experience details", "");
 		        }
         });
     }
@@ -604,14 +604,14 @@ class Experience extends Component {
               if(error.message === "Request failed with status code 401"){
 		          var userDetails =  localStorage.removeItem("userDetails");
 		          localStorage.clear();
-		          Swal.fire("","Error while getting industries","error")
+		          Swal.fire("","Error while updateData total experience details","error")
 		              .then(okay => {
 		                if (okay) {
 		                  window.location.href = "/login";
 		                }
 		              });
 		        }else{
-		            Swal.fire("", "Error while getting industries", "");
+		            Swal.fire("", "Error while update total experience details", "");
 		        }
             });
     }else{

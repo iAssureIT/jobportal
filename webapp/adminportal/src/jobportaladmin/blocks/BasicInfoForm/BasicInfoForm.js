@@ -78,14 +78,14 @@ class BasicInfoForm extends Component{
 			if(error.message === "Request failed with status code 401"){
 		          var userDetails =  localStorage.removeItem("userDetails");
 		          localStorage.clear();
-		          Swal.fire("","Error while getting industries","error")
+		          Swal.fire("","Error while getting languages","error")
 		              .then(okay => {
 		                if (okay) {
 		                  window.location.href = "/login";
 		                }
 		              });
 		        }else{
-		            Swal.fire("", "Error while getting industries", "");
+		            Swal.fire("", "Error while getting languages", "");
 		        }
 		})
 
@@ -132,14 +132,14 @@ class BasicInfoForm extends Component{
 			 	if(error.message === "Request failed with status code 401"){
 		          var userDetails =  localStorage.removeItem("userDetails");
 		          localStorage.clear();
-		          Swal.fire("","Error while getting industries","error")
+		          Swal.fire("","Error while getting candidate basic info","error")
 		              .then(okay => {
 		                if (okay) {
 		                  window.location.href = "/login";
 		                }
 		              });
 		        }else{
-		            Swal.fire("", "Error while getting industries", "");
+		            Swal.fire("", "Error while getting candidate", "");
 		        }
 			 })
 			}
@@ -474,7 +474,7 @@ class BasicInfoForm extends Component{
 				//console.log(userDetails)
 				mapAction.setUserDetails(userDetails);
 
-						Swal.fire("Congrats","Your Basic details is insert Successfully","success");
+						Swal.fire("Congrats","Your Basic details is update Successfully","success");
 							this.setState({
 											firstName          : "",
 											middleName         : "",
@@ -505,14 +505,14 @@ class BasicInfoForm extends Component{
 					if(error.message === "Request failed with status code 401"){
 			          var userDetails =  localStorage.removeItem("userDetails");
 			          localStorage.clear();
-			          Swal.fire("","Error while getting industries","error")
+			          Swal.fire("","Error while  update candidate info","error")
 			              .then(okay => {
 			                if (okay) {
 			                  window.location.href = "/login";
 			                }
 			              });
 			        }else{
-			            Swal.fire("", "Error while getting industries", "");
+			            Swal.fire("", "Error while update  candidate basic info", "");
 			        }
 				});
 				}	
@@ -558,14 +558,14 @@ class BasicInfoForm extends Component{
 							if(error.message === "Request failed with status code 401"){
 					          var userDetails =  localStorage.removeItem("userDetails");
 					          localStorage.clear();
-					          Swal.fire("","Error while getting industries","error")
+					          Swal.fire("","Error while insert candidate basic info","error")
 					              .then(okay => {
 					                if (okay) {
 					                  window.location.href = "/login";
 					                }
 					              });
 					        }else{
-					            Swal.fire("", "Error while getting industries", "");
+					            Swal.fire("", "Error while insert candidate basic info", "");
 					        }
 						});
 				}
