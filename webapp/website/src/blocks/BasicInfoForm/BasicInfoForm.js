@@ -51,10 +51,12 @@ class BasicInfoForm extends Component{
 			resume 					  : [],
 			executiveSummary 		  : "",
 			maxDate 		          : "",
+			language                  :"",
 		}
 		
 	}
 	componentDidMount(){
+		
 		const userDetails = JSON.parse(localStorage.getItem("userDetails"));
 	    const token = userDetails.token;
 	    Axios.defaults.headers.common['Authorization'] = 'Bearer '+ token;
@@ -107,7 +109,7 @@ class BasicInfoForm extends Component{
 
 		Axios.get("/api/candidatemaster/get/one/"+this.state.candidate_id)
 		.then(response=>{
-
+			
 			 	var languagesTags = [];
 			 	if (response.data.languagesKnown) {
 
@@ -439,10 +441,13 @@ class BasicInfoForm extends Component{
 		})
 	}
 	onLanguageAddition (tag) {
+		
         if (tag.id == tag.text) {
             tag.id = "" 
         }
-    	this.setState(state => ({ languagesTags: [...state.languagesTags, tag] }));
+        var language = tag.text
+    	this.setState(state => ({ languagesTags: [...state.languagesTags, tag],language:language }));
+    	
   	}
 
     onLanguageClick(index) {
@@ -491,7 +496,9 @@ class BasicInfoForm extends Component{
 								executiveSummary   : this.state.executiveSummary,
 								passport   		   : this.state.passport,
 								visa   		   	   : this.state.visa,
+								language   		   : this.state.language,
 							}
+							
 			if(status==true){
 			Axios.patch("/api/candidatemaster/patch/updateCandidateBasicInfo",formValues)
 			 .then(response=>{
@@ -540,15 +547,15 @@ class BasicInfoForm extends Component{
 				              if (okay) { 
 				                var userDetails = {
 				                    loggedIn    : false,
-				                    username  :"",  
+				                    username    :"",  
 				                    firstName   : "", 
 				                    lastName    : "", 
-				                    email     : "",
-				                    phone     : "", 
+				                    email       : "",
+				                    phone       : "", 
 				                    user_id     : "",
-				                    roles     : [],
-				                    token     : "", 
-				                    gender    : "", 
+				                    roles       : [],
+				                    token       : "", 
+				                    gender      : "", 
 				                    profilePicture : "",
 				                    candidate_id: "",
 				                    profileCompletion : 0
@@ -576,7 +583,8 @@ class BasicInfoForm extends Component{
     	var emailFilter = /^[^@]+@[^@.]+\.[^@]*\w\w$/;
     	var illegalChars = /[\(\)\<\>\,\;\:\\\"\[\]]/;
     	var mobileFilter = /^(\+\d{1,3}[- ]?)?\d{12}$/gm;
-    	var max = this.state.maxDate
+    	var max = this.state.maxDate;
+
 
 		
 		if(this.state.dob.length<=0){
@@ -638,7 +646,14 @@ class BasicInfoForm extends Component{
 		else{
 			document.getElementById("executiveSummaryError").innerHTML = ""; 
 		}
-      
+      	 if(typeof this.state.language !== "undefined"){
+           if(!this.state.language.match(regName)){
+              status = false;
+              document.getElementById("languageError").innerHTML = "Please enter a valid language name";
+           }else{
+           		document.getElementById("languageError").innerHTML = "";
+           }       
+        }
         if(typeof this.state.firstName !== "undefined"){
            if(!this.state.firstName.match(regName)){
               status = false;
@@ -1031,7 +1046,7 @@ class BasicInfoForm extends Component{
 							        handleDrag={this.onLanguageDrag.bind(this)}
 									handleTagClick={this.onLanguageClick.bind(this)} />
 								</div>
-								<span id="languagesError" className="errorMsg"></span>
+								<span id="languageError" className="errorMsg"></span>
 							</div>
 						</div>
 						<div className="row formWrapper">

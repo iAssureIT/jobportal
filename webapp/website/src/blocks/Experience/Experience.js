@@ -50,7 +50,7 @@ class Experience extends Component {
       expMonths: 0,
       relevantExperience: "",
       totalExperience: 0,
-      working: "fresher",
+      working: "experienced",
       profileCompletion: 0,
       experienceLevel  : "" 
     };
@@ -327,6 +327,7 @@ class Experience extends Component {
     }).then((result) => {
       if (result.value) {
         if (data_id) {
+           console.log(" this.state.profileCompletion",this.state.profileCompletion)
           var profileCompletion = this.state.profileCompletion
           if (this.state.experienceArry.length == 1) {
             profileCompletion = profileCompletion - 20;
@@ -629,7 +630,7 @@ class Experience extends Component {
     });
 
     if (name === "fromDate" || name === "toDate") {
-      this.calExperience(value);
+      this.calExperience(name,value);
     }
   }
   handleChangeCity(event) {
@@ -663,15 +664,39 @@ class Experience extends Component {
       .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
       .join(" ");
   }
-  calExperience(value) {
-    var toDate =
-      this.state.toDate === "" ? Moment(new Date()) : Moment(this.state.toDate);
-    var fromDate =
-      this.state.fromDate === ""
-        ? Moment(new Date())
-        : Moment(this.state.fromDate);
+  calExperience(name,value) {
+    var name = name;
+    var value = value;
+    console.log("name",name)
+    var toDate ="";
+    var fromDate ="";
+    if(name==="toDate"){
+      // toDate = this.state.toDate === "" ? value : Moment(this.state.toDate);
+     
+            toDate = Moment(value);
+     
+      
+    }else{
+        toDate = Moment(this.state.toDate)
+    }
+    if(name==="fromDate"){
+        //  fromDate =
+        //  this.state.fromDate === ""
+        // ? value
+        // : Moment(this.state.fromDate);
+       
+            fromDate = Moment(value);
+           
+    
+    }else{
+        fromDate = Moment(this.state.fromDate)
+    }
+   
+    console.log("toDate",toDate);
+    console.log("fromDate",fromDate);
+    if( fromDate&& toDate){
+      var exp = Moment.duration(toDate.diff(fromDate));
 
-    var exp = Moment.duration(toDate.diff(fromDate));
     var Years = exp.years();
     var Months = exp.months();
 
@@ -679,7 +704,10 @@ class Experience extends Component {
       expYears: Years,
       expMonths: Months,
     });
+    
+    
   }
+}
 
   handleBack(event) {
     event.preventDefault();
