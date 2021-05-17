@@ -1,7 +1,7 @@
 import React, { Component }     from 'react';
 import { render }               from 'react-dom';
 import $ from "jquery";
-import swal from 'sweetalert';
+import Swal  from  'sweetalert2';
 import axios from 'axios';
 import InputMask  from 'react-input-mask';
 
@@ -280,10 +280,7 @@ class CompanyLocation extends Component{
         axios.patch('/api/companysettings/addLocation',companyLocationFormValue)
           .then( (response)=> {
             
-            swal({
-              title: "Location is added successfully",
-              text: "Location is added successfully",
-            });
+            Swal.fire('', "Location is added successfully", '');
             this.setState({
               locationType         :"",
               companycontact          :"",
@@ -315,10 +312,7 @@ class CompanyLocation extends Component{
         axios.patch('/api/companysettings/update_location',companyLocationFormValueupdate)
         .then( (response)=> {
           // handle success
-          swal({
-              title: "Location is updated successfully",
-              text: "Location is updated successfully",
-            });
+          Swal.fire('', "Location is updated successfully", '');
           this.setState({
             locationType         :"",
             companycontact          :"",
@@ -407,10 +401,7 @@ selectType(event){
       axios.patch('/api/companysettings/deleteLocation/'+this.state.companyId+'/'+id)
         .then( (response)=> {
           // handle success
-          swal({
-              title: "Location is deleted successfully",
-              text: "Location is deleted successfully",
-            });
+          Swal.fire('', "Location is deleted successfully", '');
           axios.get('/api/companysettings/')
             .then( (res)=>{   
               this.setState({allLoc: res.data.companyLocationsInfo}) 

@@ -695,14 +695,14 @@ class IAssureTable extends Component {
 															</span>
 															<div className="modal " id={"showDeleteModal-" + value._id} role="dialog">
 																<div className=" modal-dialog">
-																		<div className="modal-body modalWrapper">
-																			<button type="button" className="close" id="closeModalButton" data-dismiss="modal">&times;</button>
-																			<div className="row">
+																	<div className="modal-body modalWrapper">
+																		<button type="button" className="close" id="closeModalButton" data-dismiss="modal">&times;</button>
+																		<div className="row">
 																			<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 																				<h4 className="blackLightFont textAlignCenter examDeleteFont col-lg-12 col-md-12 col-sm-12 col-xs-12">Are you sure you want to delete?</h4>
 																			</div>
-																			</div>
-																			<div className="row">
+																		</div>
+																		<div className="row">
 																			<br/>
 																			<div className="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 																				<button type="button" className="cancelbtn btn  col-lg-7 col-lg-offset-1 col-md-4 col-md-offset-1 col-sm-8 col-sm-offset-1 col-xs-10 col-xs-offset-1" data-dismiss="modal">CANCEL</button>
@@ -710,10 +710,8 @@ class IAssureTable extends Component {
 																			<div className="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 																				<button onClick={this.delete.bind(this)} id={(value._id).replace(/-/g, "/")} type="button" className="btn deletebtn  col-lg-7 col-lg-offset-5 col-md-7 col-md-offset-5 col-sm-8 col-sm-offset-3 col-xs-10 col-xs-offset-1" data-dismiss="modal">DELETE</button>
 																			</div>
-																			</div>
 																		</div>
-
-																		
+																	</div>
 																</div>
 															</div>
 														</td>

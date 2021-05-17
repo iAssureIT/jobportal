@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { render } from 'react-dom';
 import $ from "jquery";
 import axios from 'axios';
-import swal from 'sweetalert';
+import Swal  from  'sweetalert2';
 import PhoneInput               from 'react-phone-input-2';
 
 class CompanySMSGateway extends Component {
@@ -100,9 +100,7 @@ class CompanySMSGateway extends Component {
           axios.post('/api/projectsettings/post',formvalue)
           .then((response)=> {
             this.getData();
-            swal({                
-                  text: "SMS Gateway details added successfully!",
-                });
+            Swal.fire('', "SMS Gateway details added successfully", '');
             
             // this.setState({
             //   authID    : "", 
@@ -112,9 +110,7 @@ class CompanySMSGateway extends Component {
             this.getData();
           })
           .catch((error)=> {
-            swal({                
-                  text: "Failed to add SMS Gateway details!",
-                });
+            Swal.fire('', "Failed to add SMS Gateway details!", '');
           })
         }
  
@@ -134,9 +130,7 @@ class CompanySMSGateway extends Component {
         axios.patch('/api/projectsettings/patch/SMS',formvalues)
         .then((response)=> {
           this.getData();
-          swal({                
-                text: "SMS Gateway details Updated successfully!",
-              });
+          Swal.fire('', "SMS Gateway details Updated successfully", '');
           // this.setState({
           //   smsid:"",
           //     authID    : "", 
@@ -145,9 +139,7 @@ class CompanySMSGateway extends Component {
           // })
         })
         .catch((error)=> {
-          swal({                
-                text: "Failed to Updated SMS Gateway details!",
-              });
+          Swal.fire('', "Failed to Updated SMS Gateway details", '');
         })
       }
 

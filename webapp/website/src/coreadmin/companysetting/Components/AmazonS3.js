@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { render } from 'react-dom';
 import $ from "jquery";
 import axios from 'axios';
-import swal from 'sweetalert';
+import Swal  from  'sweetalert2';
 class AmazonS3 extends Component {
   constructor(props) {
     super(props);
@@ -59,9 +59,7 @@ class AmazonS3 extends Component {
           .then((response)=> {
             console.log("response===>",response.data);
             this.getData();
-            swal({                
-                  text: "S3 details added successfully!",
-                });
+            Swal.fire('', "S3 details added successfully", '');
               this.setState({
                 key    : "",
                 secret : "",
@@ -71,9 +69,7 @@ class AmazonS3 extends Component {
             this.getData();
           })
           .catch((error)=> {
-            swal({                
-                  text: "Failed to add S3 details!",
-                });
+            Swal.fire('', "Failed to add S3 details!", '');
           })
         
   
@@ -93,9 +89,7 @@ class AmazonS3 extends Component {
         axios.patch('/api/projectsettings/patch/S3',formvalues)
         .then((response)=> {
           this.getData();
-          swal({                
-                text: "S3 details Updated successfully!",
-              });
+          Swal.fire('', "S3 details Updated successfully", '');
               this.setState({
                 key    : "",
                 secret : "",
@@ -104,9 +98,7 @@ class AmazonS3 extends Component {
               })
         })
         .catch((error)=> {
-          swal({                
-                text: "Failed to Updated S3 details!",
-              });
+          Swal.fire('', "Failed to Updated S3 details", '');
         })
       
 
@@ -141,16 +133,12 @@ class AmazonS3 extends Component {
     event.preventDefault();
     axios.delete('/api/paymentgateway/delete/'+this.state.deleteID)
     .then((response)=> {
-      swal({                
-            text: "Payment Gateway details Deleted successfully!",
-          });
+      Swal.fire('', "Payment Gateway details Deleted successfully", '');
       $('#deleteModal').hide(); 
       this.getData();
     })
     .catch((error)=> {
-      swal({                
-            text: "Failed to Delete payment gateway details!",
-          });
+      Swal.fire('', "Failed to Delete payment gateway details", '');
     })
     
   }

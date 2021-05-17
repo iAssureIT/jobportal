@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { render } from 'react-dom';
 import $ from "jquery";
 import axios from 'axios';
-import swal from 'sweetalert';
+import Swal  from  'sweetalert2';
 class GoogleApiKey extends Component {
   constructor(props) {
     super(props);
@@ -45,9 +45,7 @@ class GoogleApiKey extends Component {
           axios.post('/api/projectsettings/post',formvalue)
           .then((response)=> {
             this.getData();
-            swal({                
-                  text: "Google API Key details added successfully!",
-                });
+            Swal.fire('', "Google API Key details added successfully", '');
             
             // this.setState({
             //     googleapikey    : "",
@@ -55,9 +53,7 @@ class GoogleApiKey extends Component {
             this.getData();
           })
           .catch((error)=> {
-            swal({                
-                  text: "Failed to add Google API Key details!",
-                });
+            Swal.fire('', "Failed to add Google API Key details", '');
           })
         
   
@@ -74,18 +70,14 @@ class GoogleApiKey extends Component {
         axios.patch('/api/projectsettings/patch/GOOGLE',formvalues)
         .then((response)=> {
           this.getData();
-          swal({                
-                text: "Google API Key details Updated successfully!",
-              });
+          Swal.fire('', "Google API Key details Updated successfully", '');
           
           // this.setState({
           //   googleapikey    : "",
           // })
         })
         .catch((error)=> {
-          swal({                
-                text: "Failed to Updated Google API Key details!",
-              });
+          Swal.fire('', "Failed to Updated Google API Key details!", '');
         })
       
 
@@ -113,16 +105,12 @@ class GoogleApiKey extends Component {
     event.preventDefault();
     axios.delete('/api/paymentgateway/delete/'+this.state.deleteID)
     .then((response)=> {
-      swal({                
-            text: "Payment Gateway details Deleted successfully!",
-          });
+      Swal.fire('', "Payment Gateway details Deleted successfully", '');
       $('#deleteModal').hide(); 
       this.getData();
     })
     .catch((error)=> {
-      swal({                
-            text: "Failed to Delete payment gateway details!",
-          });
+      Swal.fire('', "Failed to Delete payment gateway details", '');
     })
     
   }

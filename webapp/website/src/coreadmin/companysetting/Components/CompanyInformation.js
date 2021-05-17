@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { render }           from 'react-dom';
 import $ from "jquery";
 import axios from 'axios';
-import swal from 'sweetalert';
+import Swal  from  'sweetalert2';
 import S3FileUpload           from 'react-s3';
 import { deleteFile }         from 'react-s3';
 import InputMask  from 'react-input-mask';
@@ -301,10 +301,7 @@ class CompanyInformation extends Component{
         .then( (response)=> { 
           // handle success
           this.props.handler();
-          swal({
-            title: "Company Information submitted Successfully",
-            text: "Company Information submitted Successfully",
-          });
+          Swal.fire('', "Company information submitted successfully", '');
           this.setState({
             companyName             : "",
             companyContactNumber    : "",
@@ -329,10 +326,7 @@ class CompanyInformation extends Component{
         })
         .catch(function (error) {
           // handle error
-          swal({
-            title: "Company Information submition failed!",
-            text: "Company Information submition failed!",
-          });
+          Swal.fire('', "Company information submition failed!", '');
         })
         .finally(function () {
           // always executed
@@ -343,18 +337,12 @@ class CompanyInformation extends Component{
       axios.patch('/api/companysettings/information',companyInfoFormValueUpdate)
         .then( (response)=> {
           // handle success
-          swal({
-            title: "Company Information Updated Successfully",
-            text: "Company Information Updated Successfully",
-          });
+          Swal.fire('', "Company information updated successfully", '');
         })
         .catch(function (error) {
           // handle error
           if (error.response.status==401) {
-            swal({
-                title: "Nothing to update!",
-                text: "Nothing to update!",
-              });
+            Swal.fire('', "Nothing to update!", '');
           }
         });
     }

@@ -1,7 +1,7 @@
 import React, { Component }     from 'react';
 import { render }               from 'react-dom';
 import $ from "jquery";
-import swal from 'sweetalert';
+import Swal  from  'sweetalert2';
 import InputMask      		from 'react-input-mask';
 import axios from 'axios';
 
@@ -94,9 +94,7 @@ class CompanyBankDetails extends Component{
         axios.post('/api/companysettings/bankDetails',companyBankDetailsFormValue)
         .then((response)=>{
           // handle success
-          swal({                
-                text: "Bank details added successfully!",
-              });
+          Swal.fire('', "Bank details added successfully", '');
 
           this.getData();
 
@@ -112,17 +110,13 @@ class CompanyBankDetails extends Component{
           
         })
         .catch((error)=>{
-          swal({                
-                text: "Failed to add bank details!",
-              });
+          Swal.fire('', "Failed to add bank details", '');
         })
       }else{
         console.log('bankDetailsUpdateFormValue: ',bankDetailsUpdateFormValue)
         axios.patch('/api/companysettings/updateBankDetails',bankDetailsUpdateFormValue)
         .then((response)=>{
-          swal({                
-                text: "Bank details updated successfully!",
-              });
+          Swal.fire('', "Bank details updated successfully", '');
           this.getData();
           this.setState({
             accNickName : "",
@@ -137,9 +131,7 @@ class CompanyBankDetails extends Component{
         })
         .catch((error)=>{
           if (error.response.status==404) {
-            swal({                
-                text: "Nothing to update!",
-              });
+            Swal.fire('', "Nothing to update", '');
           }
           
         })
@@ -192,17 +184,13 @@ confirmDelete(event){
   event.preventDefault();
   axios.delete('/api/companysettings/delete/'+this.state.deleteID)
   .then((response)=> {
-    swal({                
-          text: "Bank details Deleted successfully!",
-        });
+    Swal.fire('', "Bank details Deleted successfully", '');
     this.setState({deleteID:""})
     $('#deleteModal').hide(); 
     this.getData();
   })
   .catch((error)=> {
-    swal({                
-          text: "Failed to Delete payment gateway details!",
-        });
+    Swal.fire('', "Failed to delete payment gateway details", '');
   })
   
 }

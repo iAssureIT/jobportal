@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { render } from 'react-dom';
 import $ from "jquery";
 import axios from 'axios';
-import swal from 'sweetalert';
+import Swal  from  'sweetalert2';
 class SmsGateway extends Component {
   constructor(props) {
     super(props);
@@ -69,9 +69,7 @@ class SmsGateway extends Component {
           axios.post('/api/paymentgateway/post',paymentgateway)
           .then((response)=> {
             this.getData(this.state.startRange, this.state.limitRange);
-            swal({                
-                  text: "Payment Gateway details added successfully!",
-                });
+            Swal.fire('', "Payment Gateway details added successfully", '');
             
             this.setState({
               namepayg    : " ",
@@ -83,9 +81,7 @@ class SmsGateway extends Component {
             this.getData(this.state.startRange, this.state.limitRange);
           })
           .catch((error)=> {
-            swal({                
-                  text: "Failed to add payment gateway details!",
-                });
+            Swal.fire('', "Failed to add payment gateway details", '');
           })
         
   
@@ -110,9 +106,7 @@ class SmsGateway extends Component {
         axios.patch('/api/paymentgateway/patch/'+paymentgatewayid,paymentgateway)
         .then((response)=> {
           this.getData(this.state.startRange, this.state.limitRange);
-          swal({                
-                text: "Payment Gateway details Updated successfully!",
-              });
+          Swal.fire('', "Payment Gateway details Updated successfully", '');
           
           this.setState({
             namepayg    : " ",
@@ -123,9 +117,7 @@ class SmsGateway extends Component {
           })
         })
         .catch((error)=> {
-          swal({                
-                text: "Failed to Updated payment gateway details!",
-              });
+          Swal.fire('', "Failed to Updated payment gateway details", '');
         })
       
 
@@ -169,16 +161,12 @@ class SmsGateway extends Component {
     event.preventDefault();
     axios.delete('/api/paymentgateway/delete/'+this.state.deleteID)
     .then((response)=> {
-      swal({                
-            text: "Payment Gateway details Deleted successfully!",
-          });
+      Swal.fire('', "Payment Gateway details Deleted successfully", '');
       $('#deleteModal').hide(); 
       this.getData(this.state.startRange, this.state.limitRange);
     })
     .catch((error)=> {
-      swal({                
-            text: "Failed to Delete payment gateway details!",
-          });
+      Swal.fire('', "Failed to Delete payment gateway details", '');
     })
     
   }

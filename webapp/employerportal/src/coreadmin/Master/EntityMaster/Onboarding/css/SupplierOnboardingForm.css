@@ -1135,7 +1135,8 @@ width: 100%;
 }
 
 .error {
-    color: #ea0202;
+    color: red;
+    font-weight: 400;
     display: block !important;
 }
 .deletelogo{

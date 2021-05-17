@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { render }           from 'react-dom';
 import $ from "jquery";
 import axios from 'axios';
-import swal from 'sweetalert';
+import Swal  from  'sweetalert2';
 
 
 class CompanyEmailGateway extends Component{
@@ -90,15 +90,11 @@ class CompanyEmailGateway extends Component{
         if($("#CompanyEmailGatewayForm").valid()){
           axios.post('/api/projectsettings/post',formvalue)
           .then((response)=> {
-            swal({                
-                  text: "Email Gateway details added successfully!",
-                });
+            Swal.fire('', "Email Gateway details added successfully", '');
            
           })
           .catch((error)=> {
-            swal({                
-                  text: "Failed to add Email Gateway details!",
-                });
+            Swal.fire('', "Failed to add Email Gateway details", '');
           })
         }
   }
@@ -117,15 +113,11 @@ class CompanyEmailGateway extends Component{
       if($("#CompanyEmailGatewayForm").valid()){
         axios.patch('/api/projectsettings/patch/EMAIL',formvalues)
         .then((response)=> {
-          swal({                
-                text: "Email Gateway details Updated successfully!",
-              });
+          Swal.fire('', "Email Gateway details Updated successfully", '');
          
         })
         .catch((error)=> {
-          swal({                
-                text: "Failed to Updated Email Gateway details!",
-              });
+          Swal.fire('', "Failed to Updated Email Gateway details", '');
         })
       }
 

@@ -3,7 +3,7 @@ import { render }           from 'react-dom';
 import $ from "jquery";
 import axios from 'axios';
 import moment from 'moment';
-import swal from 'sweetalert';
+import Swal  from  'sweetalert2';
 
 const formValid = formerrors=>{
   let valid = true;
@@ -96,30 +96,22 @@ class CompanyTaxDetails extends Component{
         .then((response)=> {
           if(response.status === 200)
           {
-          swal({                
-                  text: "Tax details added successfully!",
-          });
+          Swal.fire('', "Tax details added successfully", '');
           } 
            this.getData() 
         })
         .catch((error)=> {
-          swal({
-                  text: "Failed to add tax details!",
-                });
+          Swal.fire('', "Failed to add tax details", '');
         })
       }else{
         axios.patch('/api/globalmaster/updateTaxSettings',updatedtaxinfo)
         .then((response)=> {
          
-          swal({
-                  text: "Tax details updated successfully!",
-          });
+          Swal.fire('', "Tax details updated successfully", '');
          this.getData()
         })
         .catch((error)=> {
-          swal({
-                  text: "Failed to update tax details!",
-                });
+          Swal.fire('', "Failed to update tax details", '');
         })
       }
       this.setState({
@@ -156,7 +148,7 @@ editTax(event){
     })
   })
   .catch((error)=>{
-    swal(error)
+    Swal.fire(error)
   })
     
 }
@@ -182,7 +174,7 @@ delTax(event){
         }
         axios.patch('/api/globalmaster/patch/status',formValues)
         .then((response)=>{
-          swal('Deleted successfully!');
+          Swal.fire('', 'Deleted successfully', '');
           this.setState({deleteID:""})
            $('#deleteModal').hide();
             axios.get('/api/globalmaster/getTaxData')
@@ -194,7 +186,7 @@ delTax(event){
             })
         })
         .catch((error)=>{
-          swal(error)
+          Swal.fire(error)
        
         })
 }
