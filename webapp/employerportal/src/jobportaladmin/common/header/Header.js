@@ -31,6 +31,8 @@ class Header extends Component{
   
       this.setState({
       profileDisplay  : "block",
+      asideDisplay  : "none",
+      notificationDisplay  : "none",
       })
     }
     else{
@@ -45,6 +47,8 @@ class Header extends Component{
   
       this.setState({
       asideDisplay  : "block",
+      profileDisplay  : "none",
+      notificationDisplay  : "none",
       })
     }
     else{
@@ -59,6 +63,8 @@ class Header extends Component{
   
       this.setState({
       notificationDisplay  : "block",
+      profileDisplay  : "none",
+      asideDisplay  : "none",
       })
     }
     else{

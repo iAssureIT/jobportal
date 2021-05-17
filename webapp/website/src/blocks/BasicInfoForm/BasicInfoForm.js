@@ -56,7 +56,7 @@ class BasicInfoForm extends Component{
 		
 	}
 	componentDidMount(){
-		
+		console.log("languagesTags",this.state.languagesTags)
 		const userDetails = JSON.parse(localStorage.getItem("userDetails"));
 	    const token = userDetails.token;
 	    Axios.defaults.headers.common['Authorization'] = 'Bearer '+ token;
@@ -109,7 +109,7 @@ class BasicInfoForm extends Component{
 
 		Axios.get("/api/candidatemaster/get/one/"+this.state.candidate_id)
 		.then(response=>{
-			
+			console.log("response.dta",response.data)
 			 	var languagesTags = [];
 			 	if (response.data.languagesKnown) {
 
@@ -368,7 +368,8 @@ class BasicInfoForm extends Component{
 	delResumePreview(event){
 		
 		this.setState({
-			resumeUrl:""
+			resumeUrl:"",
+			resume:"",
 		})
 	}
 
@@ -470,6 +471,7 @@ class BasicInfoForm extends Component{
         const { languagesTags } = this.state;
         this.setState({
           languagesTags: languagesTags.filter((tag, index) => index !== i),
+          language                  :""
         });
     }
 	handleSubmit(event){
@@ -499,7 +501,7 @@ class BasicInfoForm extends Component{
 								visa   		   	   : this.state.visa,
 								language   		   : this.state.language,
 							}
-							
+						console.log(formValues);	
 			if(status==true){
 			Axios.patch("/api/candidatemaster/patch/updateCandidateBasicInfo",formValues)
 			 .then(response=>{
@@ -648,7 +650,7 @@ class BasicInfoForm extends Component{
 			document.getElementById("executiveSummaryError").innerHTML = ""; 
 		}
       	 if(typeof this.state.language !== "undefined"){
-           if(!this.state.language.match(regName)){
+           if(!this.state.language.match(regName)&& !this.state.language == ""){
               status = false;
               document.getElementById("languageError").innerHTML = "Please enter a valid language name";
            }else{

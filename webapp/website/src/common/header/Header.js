@@ -30,6 +30,9 @@ class Header extends Component{
     this.handleOpenModal  = this.handleOpenModal.bind(this);
     this.handleCloseModal = this.handleCloseModal.bind(this);
   }
+  componentDidMount(){
+    console.log("console.log(this.props.userDetails.user_id);",this.props.userDetails);
+  }
 
  sendOTP(event) {
 
