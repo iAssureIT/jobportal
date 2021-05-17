@@ -59,6 +59,7 @@ class BasicInfoForm extends Component{
 		
 	}
 	componentDidMount(){
+		console.log("userDetails",this.props.match.params.candidate_id)
 		const userDetails = JSON.parse(localStorage.getItem("userDetails"));
 	    const token = userDetails.token;
 	    Axios.defaults.headers.common['Authorization'] = 'Bearer '+ token;
@@ -445,7 +446,6 @@ class BasicInfoForm extends Component{
 			var formValues = {
 
 								firstName          : this.state.firstName,
-								candidate_id       : this.state.candidate_id,
 								middleName         : this.state.middleName,
 								lastName           : this.state.lastName,
 								mobile      	   : this.state.mobile,
@@ -466,6 +466,7 @@ class BasicInfoForm extends Component{
 							console.log(formValues);
 			if(status==true){
 				if (this.props.match.params.candidate_id) {
+					console.log("update mai hu")
 					Axios.patch("/api/candidatemaster/patch/updateCandidateBasicInfo",formValues)
 			 .then(response=>{
 			 	var userDetails = this.props.userDetails;
@@ -476,6 +477,7 @@ class BasicInfoForm extends Component{
 
 						Swal.fire("Congrats","Your Basic details is update Successfully","success");
 							this.setState({
+
 											firstName          : "",
 											middleName         : "",
 											lastName           : "",
@@ -517,12 +519,15 @@ class BasicInfoForm extends Component{
 				});
 				}	
 				else{
+					console.log("insert mai hu")
 					Axios.post("/api/candidatemaster/post",formValues)
 					.then(response=>{
+						console.log("response.data",response)
+						console.log("response.data._id",response.data._id)
 							var userDetails = this.props.userDetails;
 							userDetails.gender = this.state.gender;
 							userDetails.profilePicture = this.state.profilePicture;
-							//console.log(userDetails)
+							console.log("userDetails",userDetails)
 							mapAction.setUserDetails(userDetails);
 
 								Swal.fire("Congrats","Your Basic details is insert Successfully","success");
@@ -550,7 +555,7 @@ class BasicInfoForm extends Component{
 													visa               : "",
 												})
 
-								this.props.history.push("/candidate/address/"+response.data._id);
+								this.props.history.push("/candidate/address/"+response.data.data._id);
 									
 									
 						})
@@ -1099,7 +1104,7 @@ class BasicInfoForm extends Component{
 
 						<button className="buttonNext pull-right" onClick={this.handleSubmit.bind(this)}>
 							Next 
-							<FontAwesomeIcon className="nextArrow" icon="arrow-right" />
+							// <FontAwesomeIcon className="nextArrow" icon="arrow-right" />
 						</button>
 						
 					</form>

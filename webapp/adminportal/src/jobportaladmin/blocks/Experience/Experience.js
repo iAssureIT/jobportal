@@ -569,7 +569,7 @@ class Experience extends Component {
   }
   handelSubmit(event) {
     event.preventDefault();
-    this.props.history.push("/candidate/profile/" + this.state.candidate_id);
+    this.props.history.push("/candidate-profile/" + this.state.candidate_id);
   }
   updateTotalExperience(event) {
     event.preventDefault();
@@ -598,7 +598,7 @@ class Experience extends Component {
 
               mapAction.setUserDetails(userDetails);
               Swal.fire('', "Your experience details is saved", '');
-              this.props.history.push("/candidate/profile/" + this.state.candidate_id);
+              this.props.history.push("/candidate-profile/" + this.state.candidate_id);
             })
             .catch(error =>{
               if(error.message === "Request failed with status code 401"){
@@ -615,7 +615,7 @@ class Experience extends Component {
 		        }
             });
     }else{
-      this.props.history.push("/candidate/profile/" + this.state.candidate_id);
+      this.props.history.push("/candidate-profile/" + this.state.candidate_id);
     }
   }
   handleChangeState(event) {

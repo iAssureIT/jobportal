@@ -14,6 +14,9 @@
   font-family: Montserrat-SemiBold;
   src: url("/fonts/Montserrat-SemiBold.ttf");
 }
+.email{
+    text-transform: lowercase!important;
+}
 .formWrapper{
 	margin-top:20px!important;
 	background: none!important;;

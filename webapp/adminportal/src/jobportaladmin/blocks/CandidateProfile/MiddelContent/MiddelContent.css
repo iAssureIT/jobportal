@@ -59,7 +59,7 @@
 }
 .profesion{
 	font-size:14px;
-	color: var(--main-subheading-font-color);
+	color: var(--main-txt-color);
 	font-weight:800;
 	padding-top:5px;
 	padding-bottom:10px;

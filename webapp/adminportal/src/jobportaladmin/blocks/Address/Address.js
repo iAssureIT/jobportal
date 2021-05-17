@@ -20,7 +20,7 @@ class Address extends Component{
 		super(props);
 
 		this.state={
-			addressID          : this.props.match.params.addressID,
+			addressID          : this.props.addressID,
 			candidate_id        : this.props.match.params.candidate_id,
 			addressArry        : [],
 			addressLine1 	   : "",
@@ -47,6 +47,7 @@ class Address extends Component{
 		this.handleChangeState = this.handleChangeState.bind(this);
 	}
 	componentDidMount(){
+		console.log("this.props",this.props.addressID)
 		var {mapAction} = this.props;
 		const userDetails = JSON.parse(localStorage.getItem("userDetails"));
         const token = userDetails.token;
