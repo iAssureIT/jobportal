@@ -33,9 +33,9 @@ exports.insertEntity = (req, res, next) => {
         EntityMaster.findOne({
                 companyName: req.body.companyName,
                 groupName: req.body.groupName,
-                companyEmail: req.body.companyEmail,
-                companyPhone: req.body.companyPhone,
-                website: req.body.website
+                //companyEmail: req.body.companyEmail,
+                //companyPhone: req.body.companyPhone,
+                //website: req.body.website
             })
             .exec()
             .then(data => {

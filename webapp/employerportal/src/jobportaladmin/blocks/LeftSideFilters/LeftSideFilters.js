@@ -354,7 +354,8 @@ class LeftSideFilters extends Component{
     var {mapAction} = this.props;
     //console.log(selecteditems)
     selector.countryCode  = "IN"; 
-    selector.status = propsSelector.status
+    selector.company_id   = propsSelector.company_id;
+    selector.status       = propsSelector.status
     //selector.stateCode = selecteditems.currentTarget.value; 
     // if (this.props.match.path=="/") {
     //   selector.stateCode = this.props.match.params.stateCode

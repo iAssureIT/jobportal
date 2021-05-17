@@ -278,7 +278,9 @@ redirectTo(job_id, url, parameter){
 	render(){
 		//console.log("selector",this.props.selector);
 		var {mapAction} = this.props;
-		//console.log(this.props.jobCount)
+		console.log(this.props.jobCount)
+		console.log(this.props.selector.startLimit)	
+		console.log(this.props.selector.showMoreLimit)
 		return(
 			<section className="jobListWrapper">
 				<div className="col-lg-12 EmployeeListWrapperMain">
@@ -422,12 +424,12 @@ redirectTo(job_id, url, parameter){
 
 							<div className="col-lg-12">
 								{
-									this.props.jobCount ? 
+									this.props.jobCount != 0 ? 
 									(this.props.selector.startLimit + this.props.selector.showMoreLimit) >= this.props.jobCount ? null :
 									<button className="btn buttonYellow" style={{float:"right", margin:"20px 0"}} onClick={this.showMore.bind(this)}>Show {this.props.selector.showMoreLimit} More</button>
 						        
-						        	: 
-						        	<button className="btn buttonYellow" style={{float:"right", margin:"20px 0"}} onClick={this.showMore.bind(this)}> Show More </button> 
+						        	: null
+						        	//<button className="btn buttonYellow" style={{float:"right", margin:"20px 0"}} onClick={this.showMore.bind(this)}> Show More </button> 
 								}
 						    </div>
 						</div>
@@ -546,12 +548,11 @@ redirectTo(job_id, url, parameter){
 
 							<div className="col-lg-12">
 								{
-									this.props.jobCount ? 
+									this.props.jobCount != 0 ? 
 									(this.props.selector.startLimit + this.props.selector.showMoreLimit) >= this.props.jobCount ? null :
 									<button className="btn buttonYellow" style={{float:"right", margin:"20px 0"}} onClick={this.showMore.bind(this)}>Show {this.props.selector.showMoreLimit} More</button>
 						        
-						        	: 
-						        	<button className="btn buttonYellow" style={{float:"right", margin:"20px 0"}} onClick={this.showMore.bind(this)}> Show More </button> 
+						        	: null
 								}
 						    </div>
 						</div>
@@ -682,11 +683,11 @@ redirectTo(job_id, url, parameter){
 
 							<div className="col-lg-12">
 								{
-									this.props.jobCount ? 
+									this.props.jobCount != 0 ? 
 									(this.props.selector.startLimit + this.props.selector.showMoreLimit) >= this.props.jobCount ? null :
 									<button className="btn buttonYellow" style={{float:"right", margin:"20px 0"}} onClick={this.showMore.bind(this)}>Show {this.props.selector.showMoreLimit} More</button>
-						        	: 
-						        	<button className="btn buttonYellow" style={{float:"right", margin:"20px 0"}} onClick={this.showMore.bind(this)}> Show More </button> 
+						        
+						        	: null
 								}
 						    </div>
 						</div>
