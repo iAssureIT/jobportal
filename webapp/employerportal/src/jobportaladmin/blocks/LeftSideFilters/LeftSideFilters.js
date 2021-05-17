@@ -347,12 +347,14 @@ class LeftSideFilters extends Component{
   }
 
   onSelectedItemsChange(filterType, selecteditems){
+    var propsSelector=this.props.selector;
+    
     var selector=this.state.selector;
     
     var {mapAction} = this.props;
-    console.log(selecteditems)
+    //console.log(selecteditems)
     selector.countryCode  = "IN"; 
-    
+    selector.status = propsSelector.status
     //selector.stateCode = selecteditems.currentTarget.value; 
     // if (this.props.match.path=="/") {
     //   selector.stateCode = this.props.match.params.stateCode
@@ -657,9 +659,7 @@ class LeftSideFilters extends Component{
 
 
 const mapStateToProps = (state)=>{
-    return {
-            viewMode    : state.viewMode
-    }
+    return { selector: state.selector }
 }
 const mapDispatchToProps = (dispatch) => ({
     mapAction :  bindActionCreators(mapActionCreator, dispatch)
