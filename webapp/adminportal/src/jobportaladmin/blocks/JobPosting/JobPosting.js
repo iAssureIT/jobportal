@@ -179,58 +179,123 @@ class JobPosting extends Component {
 
     componentDidMount() { 
         this.getStates();
-
-        Axios.get("/api/entitymaster/get/corporate")
+        
+        const userDetails = JSON.parse(localStorage.getItem("userDetails"));
+        const token = userDetails.token;
+        Axios.defaults.headers.common['Authorization'] = 'Bearer '+ token;
+        
+        Axios.get("/api/entitymaster/get/corporate", {"startRange":0,"limitRange":10000})
             .then(response => {
                     this.setState({
                         companylist: response.data
                     });
             })
             .catch(error => {
-                Swal.fire("Error while getting List data", error.message, 'error');
+                if(error.message === "Request failed with status code 401"){
+                  var userDetails =  localStorage.removeItem("userDetails");
+                  localStorage.clear();
+                  Swal.fire("","Error while getting List data","error")
+                      .then(okay => {
+                        if (okay) {
+                          window.location.href = "/login";
+                        }
+                      });
+                }else{
+                    Swal.fire("", "Error while getting List data", "");
+                }
+
+
             })
 
-        Axios.get("/api/functionalareamaster/get/list")
+        Axios.get("/api/functionalareamaster/get/list", {"startRange":0,"limitRange":10000})
             .then(response => {
                     this.setState({
                         functionalArealist: response.data
                     });
             })
             .catch(error => {
-                Swal.fire("Error while getting List data", error.message, 'error');
+                if(error.message === "Request failed with status code 401"){
+                  var userDetails =  localStorage.removeItem("userDetails");
+                  localStorage.clear();
+                  Swal.fire("","Error while getting List data","error")
+                      .then(okay => {
+                        if (okay) {
+                          window.location.href = "/login";
+                        }
+                      });
+                }else{
+                    Swal.fire("", "Error while getting List data", "");
+                }
+
             })
 
-        Axios.get("/api/subfunctionalareamaster/get/list")
+        Axios.get("/api/subfunctionalareamaster/get/list", {"startRange":0,"limitRange":10000})
             .then(response => {
                 this.setState({
                     subFunctionalArealist: response.data
                 });
             })
             .catch(error => {
-                Swal.fire("Error while getting List data", error.message, 'error');
+                if(error.message === "Request failed with status code 401"){
+                  var userDetails =  localStorage.removeItem("userDetails");
+                  localStorage.clear();
+                  Swal.fire("","Error while getting List data","error")
+                      .then(okay => {
+                        if (okay) {
+                          window.location.href = "/login";
+                        }
+                      });
+                }else{
+                    Swal.fire("", "Error while getting List data", "");
+                }
+
             })
 
-        Axios.get("/api/jobrolemaster/get/list")
+        Axios.get("/api/jobrolemaster/get/list", {"startRange":0,"limitRange":10000})
             .then(response => {
                 this.setState({
                     jobRoleArray: response.data
                 });
             })
             .catch(error => {
-                Swal.fire("Error while getting List data", error.message, 'error');
+                if(error.message === "Request failed with status code 401"){
+                  var userDetails =  localStorage.removeItem("userDetails");
+                  localStorage.clear();
+                  Swal.fire("","Error while getting List data","error")
+                      .then(okay => {
+                        if (okay) {
+                          window.location.href = "/login";
+                        }
+                      });
+                }else{
+                    Swal.fire("", "Error while getting List data", "");
+                }
+
             })    
 
-        Axios.get("/api/jobtypemaster/get/list")
+        Axios.get("/api/jobtypemaster/get/list", {"startRange":0,"limitRange":10000})
             .then(response => {
                 this.setState({
                     jobTypeArray: response.data
                 });
             })
             .catch(error => {
-                Swal.fire("Error while getting List data", error.message, 'error');
+                if(error.message === "Request failed with status code 401"){
+                  var userDetails =  localStorage.removeItem("userDetails");
+                  localStorage.clear();
+                  Swal.fire("","Error while getting List data","error")
+                      .then(okay => {
+                        if (okay) {
+                          window.location.href = "/login";
+                        }
+                      });
+                }else{
+                    Swal.fire("", "Error while getting List data", "");
+                }
+
             })
 
-        Axios.get("/api/JobTimeMaster/get/list")
+        Axios.get("/api/JobTimeMaster/get/list", {"startRange":0,"limitRange":10000})
             .then(response => {
                 this.setState({
                     jobTimeArray: response.data
@@ -239,9 +304,22 @@ class JobPosting extends Component {
             })
             .catch(error => {
                 Swal.fire("Error while getting List data", error.message, 'error');
+                if(error.message === "Request failed with status code 401"){
+                  var userDetails =  localStorage.removeItem("userDetails");
+                  localStorage.clear();
+                  Swal.fire("","Error while getting List data","error")
+                      .then(okay => {
+                        if (okay) {
+                          window.location.href = "/login";
+                        }
+                      });
+                }else{
+                    Swal.fire("", "Error while getting List data", "");
+                }
+
             })
 
-        Axios.get("/api/jobsectormaster/get/list")
+        Axios.get("/api/jobsectormaster/get/list", {"startRange":0,"limitRange":10000})
             .then(response => {
                 this.setState({
                     jobSectorArray: response.data
@@ -249,10 +327,23 @@ class JobPosting extends Component {
                 /*console.log("jobSectorArray", this.state.jobSectorArray);*/
             })
             .catch(error => {
-                Swal.fire("Error while getting List data", error.message, 'error');
+                if(error.message === "Request failed with status code 401"){
+                  var userDetails =  localStorage.removeItem("userDetails");
+                  localStorage.clear();
+                  Swal.fire("","Error while getting List data","error")
+                      .then(okay => {
+                        if (okay) {
+                          window.location.href = "/login";
+                        }
+                      });
+                }else{
+                    Swal.fire("", "Error while getting List data", "");
+                }
+
+                
             })
 
-        Axios.get("/api/jobshiftmaster/get/list")
+        Axios.get("/api/jobshiftmaster/get/list", {"startRange":0,"limitRange":10000})
             .then(response => {
                 this.setState({
                     jobShiftArray: response.data
@@ -260,10 +351,23 @@ class JobPosting extends Component {
                 /*console.log("jobSectorArray", this.state.jobSectorArray);*/
             })
             .catch(error => {
-                Swal.fire("Error while getting List data", error.message, 'error');
+                if(error.message === "Request failed with status code 401"){
+                  var userDetails =  localStorage.removeItem("userDetails");
+                  localStorage.clear();
+                  Swal.fire("","Error while getting List data","error")
+                      .then(okay => {
+                        if (okay) {
+                          window.location.href = "/login";
+                        }
+                      });
+                }else{
+                    Swal.fire("", "Error while getting List data", "");
+                }
+
+                
             })   
 
-        Axios.get("/api/qualificationmaster/get/list")
+        Axios.get("/api/qualificationmaster/get/list", {"startRange":0,"limitRange":10000})
             .then(response => {
                 this.setState({
                     minEducationArray: response.data
@@ -271,10 +375,23 @@ class JobPosting extends Component {
                 /*console.log("jobSectorArray", this.state.jobSectorArray);*/
             })
             .catch(error => {
+                if(error.message === "Request failed with status code 401"){
+                  var userDetails =  localStorage.removeItem("userDetails");
+                  localStorage.clear();
+                  Swal.fire("","Error while getting List data","error")
+                      .then(okay => {
+                        if (okay) {
+                          window.location.href = "/login";
+                        }
+                      });
+                }else{
+                    Swal.fire("", "Error while getting List data", "");
+                }
+
                 Swal.fire("Error while getting List data", error.message, 'error');
             }) 
 
-        Axios.get("/api/skillmaster/get/list")
+        Axios.get("/api/skillmaster/get/list", {"startRange":0,"limitRange":10000})
             .then(response => {
                 var primarySkillSuggestions =  [];
                 response.data.map((elem,index)=>{
@@ -289,7 +406,20 @@ class JobPosting extends Component {
 
             })
             .catch(error => {
-                Swal.fire("Error while getting List data", error.message, 'error');
+                if(error.message === "Request failed with status code 401"){
+                  var userDetails =  localStorage.removeItem("userDetails");
+                  localStorage.clear();
+                  Swal.fire("","Error while getting List data","error")
+                      .then(okay => {
+                        if (okay) {
+                          window.location.href = "/login";
+                        }
+                      });
+                }else{
+                    Swal.fire("", "Error while getting List data", "");
+                }
+
+                
             })
         if (this.props.match.params.job_id) {
         let job_id = this.props.match.params.job_id;

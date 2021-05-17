@@ -10,6 +10,7 @@ import 'font-awesome/css/font-awesome.min.css';
 import Login from './jobportaladmin/systemSecurity/Login.js';
 import Invoice from './jobportaladmin/systemSecurity/invoice.js';
 import ConfirmOtp from './jobportaladmin/systemSecurity/ConfirmOtp1.js';
+import ConfirmOtpFP from './jobportaladmin/systemSecurity/ConfirmOtp.js';
 import ForgotPassword from './jobportaladmin/systemSecurity/ForgotPassword.js';
 import ResetPassword from './jobportaladmin/systemSecurity/ResetPassword.js';
 import ChangePassword from './jobportaladmin/systemSecurity/ChangePassword.js';
@@ -119,6 +120,7 @@ class Layout extends Component  {
                                                         <Route path="/candidate-profile/:candidate_id"  component={CandidateProfile} exact />
                                                         <Route path="/change-pwd/:user_ID"              exact strict component={ChangePassword} />
                                                         <Route path="/confirm-otp/:userID"              exact strict component={ConfirmOtp} />
+                                                        <Route path="/confirm-otp-fp/:userID"              exact strict component={ConfirmOtpFP} />
                                                        
                                                     </Switch>
                                                 </div>
@@ -149,6 +151,7 @@ class Layout extends Component  {
                             <Route path="/forgot-password"       exact strict component={ForgotPassword} />
                             <Route path="/reset-pwd/:user_ID"   exact strict component={ResetPassword} />
                             <Route path="/confirm-otp/:userID"  exact strict component={ConfirmOtp} />
+                            <Route path="/confirm-otp-fp/:userID"              exact strict component={ConfirmOtpFP} />
                              <Route path="/invoice"                          exact strict component={Invoice} />
 
                             {/*<Route path="/reset-password/:user_ID" exact strict component={ResetPasswordFirstLogin}  />*/}

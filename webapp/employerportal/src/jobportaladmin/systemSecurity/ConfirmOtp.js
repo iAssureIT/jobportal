@@ -5,7 +5,7 @@ import jQuery from 'jquery';
 import axios from 'axios';
 import './ConfirmOtp.css';
 
-class ConfirmOtp extends Component {
+class ConfirmOtpFP extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -73,16 +73,6 @@ document.getElementById(nextFieldID).focus();
       "emailOTP": this.refs.emailotp1.value + this.refs.emailotp2.value + this.refs.emailotp3.value + this.refs.emailotp4.value,
       "status": "Active"
     }
-    //========person master===============
-    console.log(formValues)
-      var candidatemaster   = {
-        'firstName'       : this.state.firstName,
-        'lastName'        : this.state.lastName,
-        'mobile'          : this.state.mobile,
-        'emailId'         : this.state.emailId,
-        "user_id"         : this.state.user_id,
-        "createdBy"       : this.state.createdBy
-      }
     
       //====================================
       var status =  this.validateForm();
@@ -90,12 +80,13 @@ document.getElementById(nextFieldID).focus();
       var url = localStorage.getItem('previousUrl');
       var userStatus =  url == 'signup' ? 'blocked' : 'active';
       var checkData = { "user_id": this.props.match.params.userID, 
-                        "emailotp"  : this.refs.emailotp1.value + this.refs.emailotp2.value + this.refs.emailotp3.value + this.refs.emailotp4.value, 
+                        "mobileotp"  : this.refs.emailotp1.value + this.refs.emailotp2.value + this.refs.emailotp3.value + this.refs.emailotp4.value, 
                         "status" : userStatus }
-      axios.post('/api/auth/checkemailotp/usingID',checkData) 
+                        console.log("CD>>>>",checkData)
+      axios.post('/api/auth/checkmobileotp/usingID',checkData) 
       .then((response) => {
 
-
+          console.log(response);
           if (response.data.message == 'SUCCESS') { 
             Swal.fire('', "OTP Verified Successfully", '');
             
@@ -186,7 +177,7 @@ document.getElementById(nextFieldID).focus();
 
     return (
       <section className="col-lg-12 confirmOTPWrapper">
-
+              
               <div className="img1LoginFP">
                   <img src="/images/Sign_In/1.png" alt="img1Login" className="img1oginInnerFP"/>
               </div>
@@ -279,4 +270,4 @@ document.getElementById(nextFieldID).focus();
     );
   }
 }
-export default ConfirmOtp;
+export default ConfirmOtpFP;
