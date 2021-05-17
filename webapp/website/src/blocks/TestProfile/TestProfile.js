@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import $                    from 'jquery';
 import axios                from 'axios';
 import { withRouter }       from 'react-router-dom';
-import swal                 from 'sweetalert';
+import Swal                 from 'sweetalert2';
 import _                    from 'underscore';
 import moment               from 'moment';
 import 'bootstrap/js/tab.js';
@@ -207,18 +207,12 @@ class TestProfile extends Component {
               axios
                 .patch('/api/users/patch/deletestatus/', formValues)
                 .then((response) => {
-                  swal({
-                    title: " ",
-                    text: "Record is deleted successfully.",
-                  });
+                  Swal.fire('', "Record is deleted successfully", '');
                 })
                 .catch(function (error) {
                 })
             } else {
-              swal({
-                title: " ",
-                text: "Failed to delete.",
-              });
+              Swal.fire('', "Failed to delete", '');
             }
           })
           .catch((error) => {

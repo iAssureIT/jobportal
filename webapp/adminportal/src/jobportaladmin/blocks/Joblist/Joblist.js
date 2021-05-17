@@ -20,6 +20,9 @@ class Joblist extends Component{
 }	
 
 	componentDidMount(){
+	const userDetails = JSON.parse(localStorage.getItem("userDetails"));
+    const token = userDetails.token;
+    Axios.defaults.headers.common['Authorization'] = 'Bearer '+ token;
 	}
 	showMore(){
 
@@ -80,11 +83,18 @@ class Joblist extends Component{
 						}
 					})
 					.catch(error=>{
-						Swal.fire(
-									"Some problem occured deleting job!",
-									error.message,
-									'error'
-							)
+						if(error.message === "Request failed with status code 401"){
+				          var userDetails =  localStorage.removeItem("userDetails");
+				          localStorage.clear();
+				          Swal.fire("","Error while deleting job","error")
+				              .then(okay => {
+				                if (okay) {
+				                  window.location.href = "/login";
+				                }
+				              });
+				        }else{
+				            Swal.fire("", "Error while deleting job", "");
+				        }
 					})
 				}
 					
