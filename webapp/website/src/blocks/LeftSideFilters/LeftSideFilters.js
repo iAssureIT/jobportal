@@ -239,7 +239,7 @@ class LeftSideFilters extends Component{
     
     var {mapAction} = this.props;
     console.log(selecteditems)
-    selector.countryCode = "IN"; 
+    //selector.countryCode = "IN"; 
     
     //selector.stateCode = selecteditems.currentTarget.value; 
     // if (this.props.match.path=="/") {
@@ -249,9 +249,23 @@ class LeftSideFilters extends Component{
       
       selector.stateCode = this.props.match.params.stateCode
       selector.district = this.props.match.params.district
-
+      if (this.props.match.params.functionalArea != "all") {
+        var tempArray = [];
+        tempArray.push({"functionalArea" : this.props.match.params.functionalArea, "id": this.props.match.params.functionalArea_id })
+        selector.functionalArea_id = tempArray; 
+      }
+      if (this.props.match.params.subfunctionalArea != "all") {
+        var tempArray = [];
+        tempArray.push({"subfunctionalArea" : this.props.match.params.subfunctionalArea, "id": this.props.match.params.subfunctionalArea_id })
+        selector.subfunctionalArea_id = tempArray;  
+      }
+      if (this.props.match.params.industryName != "all") {
+        var tempArray = [];
+        tempArray.push({"industry" : this.props.match.params.industry, "id": this.props.match.params.industry_id })
+        selector.industry_id = tempArray
+      }
     }
-    
+    //console.log(selector)
     if (filterType === 'industry') {
       if (selecteditems.length > 0) {
         selector.industry_id = selecteditems;
@@ -337,13 +351,32 @@ class LeftSideFilters extends Component{
       
     this.setState({ selector: selector },()=>{
         mapAction.jobCount(this.state.selector);
-      if (this.props.viewMode=="mapView") {
-        mapAction.filterMapData(this.state.selector);
+      if (this.props.viewMode=="mapView" ) {
+        mapAction.filterMapData(selector);
       }
-      if (this.props.viewMode=="functionalView" && this.props.match.params.functionalArea == "all") {
+      // if (this.props.viewMode=="mapView" && this.props.match.path == "/country/:countryCode/state/:stateCode/city/:district/industry/:industryName/:industry_id/function/:functionalArea/:functionalArea_id/subfunction/:subfunctionalArea/:subfunctionalArea_id") {
+        
+      //   if (this.props.match.params.functionalArea == "all") {
+      //     selector.
+      //   }
+      //   mapAction.filterMapData(selector);
+      // }
+      if (this.props.viewMode=="functionalView" && this.props.match.path == '/' ) {
         mapAction.filterFunctionalData(this.state.selector);
       }
-      if (this.props.viewMode=="functionalView" && this.props.match.params.functionalArea != "all") {
+      if (this.props.viewMode=="functionalView" && this.props.match.params.functionalArea == "all"
+        && this.props.match.path == "/country/:countryCode/state/:stateCode/city/:district/industry/:industryName/:industry_id/function/:functionalArea/:functionalArea_id/subfunction/:subfunctionalArea/:subfunctionalArea_id" ) {
+        mapAction.filterFunctionalData(this.state.selector);
+      }
+      // if (this.props.viewMode=="functionalView" && this.props.match.params.functionalArea == "all") {
+      //   mapAction.filterFunctionalData(this.state.selector);
+      // }
+      // if (this.props.viewMode=="functionalView" && this.props.match.params.functionalArea != "all") {
+      //   mapAction.filterSubfunctionalData(this.state.selector);
+      // }
+      console.log(this.props.match)
+      if (this.props.viewMode=="functionalView" && this.props.match.params.functionalArea != "all"
+        && this.props.match.path == "/country/:countryCode/state/:stateCode/city/:district/industry/:industryName/:industry_id/function/:functionalArea/:functionalArea_id/subfunction/:subfunctionalArea/:subfunctionalArea_id" ) {
         mapAction.filterSubfunctionalData(this.state.selector);
       }
       if (this.props.viewMode=="industrialView") {
@@ -555,6 +588,7 @@ class LeftSideFilters extends Component{
 
 const mapStateToProps = (state)=>{
     return {
+            selector    : state.selector,
             viewMode    : state.viewMode
     }
 }
