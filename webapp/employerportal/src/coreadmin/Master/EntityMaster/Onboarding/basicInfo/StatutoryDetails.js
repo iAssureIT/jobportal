@@ -833,7 +833,7 @@ class StatutoryDetails extends Component {
 									<i className="fa fa-info-circle iconMarginLeft" aria-hidden="true"></i> &nbsp;
 									Statutory Info
 								</a>
-								<div className="triangleone triangleones forActive" id="triangle-right"></div>
+								<div className="triangleone triangleones forActive BasicInfotriangle" id="triangle-right"></div>
 							</li>
 		                    <li className="col-lg-3 col-md-3 col-sm-12 col-xs-12 transactionTab pdcls pdclsOne btn2 disabled">
 		                      <div className="triangletwo" id="triangle-right1"></div>
@@ -841,7 +841,7 @@ class StatutoryDetails extends Component {
 		                        <i className="fa fa-map-marker iconMarginLeft" aria-hidden="true"></i> &nbsp;
 		                        Locations
 		                      </a>
-		                      <div className="triangleone forActive" id="triangle-right"></div>
+		                      <div className="triangleone forActive BasicInfotriangle" id="triangle-right"></div>
 		                    </li>
 		                    <li className="col-lg-3 col-md-3 col-sm-12 col-xs-12 transactionTab noRightPadding pdcls btn4 disabled">
 		                      <div className="trianglesix" id="triangle-right2"></div>

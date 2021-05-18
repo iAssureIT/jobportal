@@ -15,8 +15,9 @@
 }
 .registrationInputBox{
     font-size: 13px !important;
-    font-family: 'Montserrat-Regular',Sans-Serif!important;
-    color:#999!important;
+    /*font-family: 'Montserrat-Regular',Sans-Serif!important;*/
+    font-weight: 400;
+    color: var(--main-txt-color);
 }
 .signUpBoxFormWrapper{
     margin-top: 5px;

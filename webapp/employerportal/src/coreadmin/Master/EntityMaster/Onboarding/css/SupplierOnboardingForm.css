@@ -166,14 +166,14 @@
     top: 5.5em;
     left: 9.7em;
     display: none;
-    cursor: pointer
+    cursor: pointer;
 }
 
 .addpicmr:hover .addlogoImg {
     position: absolute;
     top: 5.5em;
     left: 9.7em;
-    display: block
+    display: block;
 }
 .logoStyle1 {
     /*padding: 0;*/
@@ -191,7 +191,7 @@
     background: #ebebeb;
     /*border: 1px dashed #999;*/
     height: 4em;
-    padding: 0
+    padding: 0;
 }
 .brdlogos1 {
     background-size: 232p/*x 128px;
@@ -200,16 +200,15 @@
     border: 1px dashed #999;
     height: 34px !important;
     width: 50px !important;
-    padding: 0
+    padding: 0;
 }
 #LogoImageUpOne{
     /*background-size: 232px 128px;*/
     /*background-repeat: no-repeat;*/
     /*background: #ebebeb;*/
     /*border: 1px dashed #999;*/
-    cursor: pointer;
     /*height: 8.2em;*/
-    padding: 0
+    padding: 0;
 }
 .locationDocsImg{
     height: 3em !important;
@@ -217,12 +216,12 @@
 .logoStyle2 {
     height: 100%;
     padding: 0;
-    width: 100%
+    width: 100%;
 }
 .profileImageDivlogoStyle2 {
     height: 100% !important;
     padding: 0;
-    width: 100%
+    width: 100%;
 }
 .brdlogos2 {
     background-size: 232px 128px;
@@ -230,7 +229,7 @@
     background: #ebebeb;
     border: 1px dashed #999;
     height: 5.1em;
-    padding: 0
+    padding: 0;
 }
 .profileImageDiv {
     background-size: 232px 128px;
@@ -238,16 +237,16 @@
     background: #ebebeb;
     border: 1px dashed #999;
     height: 15em;
-    padding: 0
+    padding: 0;
 }
 
 .addpicmr {
-    padding-right: 0
+    padding-right: 0;
 }
 
 .boxhr {
     border-bottom: 1px solid #66666659;
-    margin-top: 2%
+    margin-top: 2%;
 }
 
 .attachDocuments {
@@ -255,7 +254,7 @@
     font-size: 16px;
     margin-bottom: 1%;
     padding: 0;
-    font-weight: 600
+    font-weight: 600;
 }
 
 .attachDoc {
@@ -265,7 +264,7 @@
     margin: 0 auto;
     border: 1px dashed #ddd;
     margin-bottom: 3%;
-    border-radius: 5px
+    border-radius: 5px;
 }
 
 .uploadlogo {
@@ -273,7 +272,7 @@
     font-size: 43px;
     color: #ccc;
     position: relative;
-    margin-top: 20px
+    margin-top: 20px;
 }
 
 .uploadlogoTwo {
@@ -282,17 +281,17 @@
     color: #ccc;
     position: relative;
     margin-top: 20px;
-    margin-left: 44%
+    margin-left: 44%;
 }
 
 .liheader {
     padding: 12px 0 7px 0;
-    font-weight: 700
+    font-weight: 700;
 }
 
 .drag {
     font-size: 13px;
-    letter-spacing: 1px
+    letter-spacing: 1px;
 }
 .padding30{
     padding: 0px 38px 0px 38px !important;
@@ -307,7 +306,7 @@
     padding: 0 1px;
     border-radius: 10px;
     cursor: pointer;
-    padding: 2.5px
+    padding: 2.5px;
 }
 /*.autocomplete-dropdown-container{
     padding: 0px !important;
@@ -383,7 +382,7 @@
     border-radius: 10px;
     box-shadow: -4px 7px 39px -5px #ddd;
     margin-bottom: 2%;
-    border: 1px solid #ddd
+    border: 1px solid #ddd;
 }
 
 .foothd {
@@ -391,17 +390,17 @@
 }
 
 .palfclr {
-    padding-left: 0
+    padding-left: 0;
 }
 
 .iconpd {
-    padding: 1px 5px
+    padding: 1px 5px;
 }
 
 .usericn {
     padding: 14px 6px;
     text-align: center;
-    font-size: 31px
+    font-size: 31px;
 }
 
 .checkinp {
@@ -410,7 +409,7 @@
 
 .OnboardingTabs {
     margin-top: 2%;
-    margin-bottom: 2%
+    margin-bottom: 2%;
 }
 
 .whitesp {
@@ -465,7 +464,7 @@
 .liheader1 {
     text-align: center;
     margin-top: 0px;
-    padding: 6px 0 7px 0
+    padding: 6px 0 7px 0;
 }
 .dotsContainerLD {
     text-align: center;
@@ -513,20 +512,20 @@
     background-color: var(--white-color);
     border: solid 1px #666f77;
     border-radius: 6px;
-    color: #666f77
+    color: #666f77;
 }
 
 #hide input[type=file]:active+label {
     background-image: none;
     background-color: #2d6c7a;
-    color: var(--white-color)
+    color: var(--white-color);
 }
 
 #hidedoc input[type=file] {
     display: block;
     background: 0 0;
     opacity: 0;
-    cursor: pointer
+    cursor: pointer;
 }
 
 #hidedoc input[type=file]+label {
@@ -536,18 +535,18 @@
     background-color: var(--white-background);
     border: solid 1px #666f77;
     border-radius: 6px;
-    color: #666f77
+    color: #666f77;
 }
 
 #hidedoc input[type=file]:active+label {
     background-image: none;
     background-color: #2d6c7a;
-    color: var(--white-color)
+    color: var(--white-color);
 }
 
 #hidedoc {
     margin-bottom: 20px;
-    padding: 0
+    padding: 0;
 }
 
 .ulbtm {
@@ -559,7 +558,7 @@
     background: #dddddd52;
     border: 1px dashed #ddd;
     height: 8.6em;
-    position: absolute
+    position: absolute;
 }
 
 .dropbtn {
@@ -567,12 +566,12 @@
     padding: 9px 11px!important;
     font-size: 16px;
     border: none;
-    cursor: pointer
+    cursor: pointer;
 }
 
 .dropdown {
     position: relative;
-    display: inline-block
+    display: inline-block;
 }
 
 .dropdown-content:after {
@@ -583,7 +582,7 @@
     border-right: 6px solid transparent;
     border-bottom: 6px solid #f1f1f1;
     border-left: 6px solid transparent;
-    content: ''
+    content: '';
 }
 
 .dropdown-content {
@@ -594,7 +593,7 @@
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, .2);
     z-index: 1;
     right: 5px;
-    border-radius: 8px
+    border-radius: 8px;
 }
 
 .dropdown-content a {
@@ -615,30 +614,30 @@
     padding: 7px 7px;
     text-decoration: none;
     display: block;
-    border-radius: 3px
+    border-radius: 3px;
 }
 
 .dropdown-content span:hover {
-    background-color: #f1f1f1
+    background-color: #f1f1f1;
 }
 
 .dropdown:hover .dropdown-content {
-    display: block
+    display: block;
 }
 
 .penmrleft {
-    margin-left: -13px
+    margin-left: -13px;
 }
 
 .dropdown1 {
-    position: relative
+    position: relative;
 }
 
 .dropbtn1 {
     font-size: 16px;
     cursor: pointer;
     color: var(--white-color);
-    border: none
+    border: none;
 }
 
 .dropdown-content1:after {
@@ -649,7 +648,7 @@
     border-right: 6px solid transparent;
     border-bottom: 6px solid #f1f1f1;
     border-left: 6px solid transparent;
-    content: ''
+    content: '';
 }
 
 .dropdown-content2:after {
@@ -671,7 +670,7 @@
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, .2);
     z-index: 1;
     right: 5px;
-    border-radius: 8px
+    border-radius: 8px;
 }
 
 .dropdown-content2 {
@@ -683,7 +682,7 @@
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, .2);
     z-index: 1;
     right: 5px;
-    border-radius: 8px
+    border-radius: 8px;
 }
 
 .dropdown-content1 a {
@@ -691,7 +690,7 @@
     padding: 7px 15px;
     text-decoration: none;
     display: block;
-    border-radius: 8px
+    border-radius: 8px;
 }
 
 
@@ -700,28 +699,28 @@
     padding: 7px 17px;
     text-decoration: none;
     display: block;
-    border-radius: 8px
+    border-radius: 8px;
 }
 
 .dropdown-content1 a:hover {
-    background-color: #f1f1f1
+    background-color: #f1f1f1;
 }
 
 .dropdown1:hover .dropdown-content1 {
-    display: block
+    display: block;
 }
 
 
 .dropdown-content2 a:hover {
-    background-color: #f1f1f1
+    background-color: #f1f1f1;
 }
 
 .dropdown1:hover .dropdown-content2 {
-    display: block
+    display: block;
 }
 
 .mrflfedit {
-    margin-right: 10px
+    margin-right: 10px;
 }
 
 .marginsBottom {
@@ -738,11 +737,11 @@
 .levelOneBox,
 .levelThreeBox,
 .levelTwoBox {
-    height: 73px
+    height: 73px;
 }
 
 .textAlign {
-    text-align: center
+    text-align: center;
 }
 /*
 .button4 {
@@ -773,6 +772,7 @@
 .triangleone {
     position: absolute;
     top: 0px;
+    /*right: -18px;*/
     right: -18px;
     z-index: 2;
 }
@@ -810,7 +810,7 @@
 }*/
 
 .fa-cube {
-    margin-left: 10px
+    margin-left: 10px;
 }
 
 .triangle3,
@@ -823,11 +823,11 @@
 .noteSupplier {
     font-size: 12px;
     margin-top: 2em;
-    font-style: italic
+    font-style: italic;
 }
 
 .contactDetailTitle {
-    padding: 0
+    padding: 0;
 }
 
 .nav>li.disabled>.pillsHover:focus,
@@ -837,20 +837,20 @@
 
 .contactSubmit {
     margin-bottom: 3em;
-    margin-top: 3em
+    margin-top: 3em;
 }
 
 .clickHere {
     cursor: pointer;
-    margin-bottom: 15px
+    margin-bottom: 15px;
 }
 
 .addContactForm {
-    padding: 0
+    padding: 0;
 }
 
 .contactForm {
-    padding: 0
+    padding: 0;
 }
 
 .dropdown-contentLocation {
@@ -874,27 +874,27 @@
 .CancelButtonSwal {
     background: var(--white-background)!important;
     color: #000;
-    text-transform: uppercase
+    text-transform: uppercase;
 }
 
 .OkButtonSwal {
     background: red;
-    color: var(--white-background)
+    color: var(--white-background);
 }
 
 .postionSwalRight {
     position: unset!important;
-    float: right
+    float: right;
 }
 
 .postionSwalLeft {
     position: unset!important;
-    float: left
+    float: left;
 }
 
 .switchFieldType {
     padding: 1px;
-    overflow: hidden
+    overflow: hidden;
 }
 
 .switchFieldType input {
@@ -903,11 +903,11 @@
     height: 1px;
     width: 1px;
     border: 0;
-    overflow: hidden
+    overflow: hidden;
 }
 
 .switchFieldType label {
-    float: left
+    float: left;
 }
 
 .switchFieldType label {
@@ -927,18 +927,18 @@
     -moz-transition: all .1s ease-in-out;
     -ms-transition: all .1s ease-in-out;
     -o-transition: all .1s ease-in-out;
-    transition: all .1s ease-in-out
+    transition: all .1s ease-in-out;
 }
 
 .switchFieldType label:hover {
-    cursor: pointer
+    cursor: pointer;
 }
 
 .switchFieldType input:checked+label {
     background-color: var(--black-background);
     -webkit-box-shadow: none;
     box-shadow: none;
-    color: var(--white-color)
+    color: var(--white-color);
 }
 
 .basic-info-pillss:focus {
@@ -952,7 +952,7 @@
     color: var(--white-color);
     height: 35px;
     border-radius: 100%;
-    cursor: pointer
+    cursor: pointer;
 }
 
 .form-margin {
@@ -963,13 +963,13 @@
     position: relative;
     display: inline-block;
     width: 60px;
-    height: 34px
+    height: 34px;
 }
 
 .switch input {
     opacity: 0;
     width: 0;
-    height: 0
+    height: 0;
 }
 
 .slider {
@@ -981,7 +981,7 @@
     bottom: 0;
     background-color: #ccc;
     -webkit-transition: .4s;
-    transition: .4s
+    transition: .4s;
 }
 
 .slider:before {
@@ -997,25 +997,25 @@
 }
 
 input:checked+.slider {
-    background-color: #2196f3
+    background-color: #2196f3;
 }
 
 input:focus+.slider {
-    box-shadow: 0 0 1px #2196f3
+    box-shadow: 0 0 1px #2196f3;
 }
 
 input:checked+.slider:before {
     -webkit-transform: translateX(26px);
     -ms-transform: translateX(26px);
-    transform: translateX(26px)
+    transform: translateX(26px);
 }
 
 .slider.round {
-    border-radius: 34px
+    border-radius: 34px;
 }
 
 .slider.round:before {
-    border-radius: 50%
+    border-radius: 50%;
 }
 
 .vendorpills {
@@ -1024,9 +1024,10 @@ input:checked+.slider:before {
     font-size: 14px;
     border:1px solid #aaaaaa6b;
     border-radius: 4px;
-    /*padding: 5px !important;*/
-    padding-top: 12px;
-    padding-bottom: 12px;
+    padding: 5px !important;
+    padding-right: 19px !important;
+    /*padding-top: 12px;
+    padding-bottom: 12px;*/
    /*background-color: var(--yellow-button-color) !important;*/
     font-size: 15px;
     /*font-family: 'Montserrat-Bold';*/
@@ -1075,9 +1076,22 @@ input:checked+.slider:before {
     right: -9px;
 }
 
+.BasicInfotriangle{
+    right: -18px;
+}
+
+.contactInfoTriangle{
+    right: 9px;
+}
+
+.locationTriangleShape{
+    right: -9px;
+}
+
 #LogoImageUp {
     position: absolute;
     top: 1px;
+    z-index: 20;
     height: 100%;
 }
 
@@ -1121,7 +1135,7 @@ select#gender option[value="others"] {
 }
 
 .react-tel-input .form-control {
-width: 100%;
+  width: 100%;
   height: 34px;
   
   /*font-family: 'MYRIADPROREGULAR';*/
@@ -1132,6 +1146,7 @@ width: 100%;
   border: 1px solid var(--main-border-color) !important;
   border-radius:0px;
   color: var(--main-txt-color);
+  /*z-index: 2;*/
 }
 
 .error {
@@ -1667,7 +1682,7 @@ width: 100%;
   font-size: 16px;
   border-bottom-left-radius: 4px;
   border-bottom-right-radius: 4px;
-  z-index: 2;
+  z-index: 101;
 }
 
 .react-autosuggest__suggestions-list {

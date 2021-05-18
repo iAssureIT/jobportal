@@ -27,7 +27,7 @@
 }
 
 .leftImgContainer .imgbox{
-	margin-top: 45px;
+	margin-top: 35px;
 	margin-left: 15px;
 	height: 130px;
 	border-radius: 3px;
@@ -446,6 +446,7 @@
 
 .skillsHeadFour .skillsTitle{
 	color: var(--main-subheading-font-color);
+	font-size: 15px;
 }
 
 .skillsList{

@@ -331,7 +331,11 @@ class BasicInfo extends Component {
         axios.patch('/api/entitymaster/patch', formValues)
           .then((response) => {
             
-            Swal.fire((this.state.pathname === "appCompany" ? "Organzational Settings" : this.state.pathname ) + " updated successfully.");
+            Swal.fire({
+              title :'',
+              html  :(this.state.pathname === "appCompany" ? "Organzational Settings" : this.state.pathname ) + " updated successfully.",
+              text  :''
+          });
             $(".swal-text").css("text-transform", "capitalize");
             $(".swal-text").css("font-family", "sans-serif");
             this.props.history.push('/' + this.state.pathname + '/statutory-details/' + this.props.userDetails.company_id)
@@ -343,7 +347,11 @@ class BasicInfo extends Component {
         axios.post('/api/entitymaster/post', formValues)
         .then((response) => {
           console.log("response",response);
-          Swal.fire((this.state.pathname === "appCompany" ? "Organzational Settings" : this.state.pathname ) + " created successfully.");
+          Swal.fire({
+            title :'',
+            html  :(this.state.pathname === "appCompany" ? "Organzational Settings" : this.state.pathname ) + " created successfully.",
+            text  :''
+          });
           $(".swal-text").css("text-transform", "capitalize");
           this.props.history.push('/' + this.state.pathname + '/statutory-details/' + response.data.entityID)
         })
@@ -842,7 +850,7 @@ class BasicInfo extends Component {
                         <i className="fa fa-info-circle" aria-hidden="true"></i> &nbsp;
                         Basic Info
                       </a>
-                      <div className="triangleone triangleones" id="triangle-right"></div>
+                      <div className="triangleone triangleones BasicInfotriangle" id="triangle-right"></div>
                     </li>
                     <li className="col-lg-3 col-md-3 col-sm-12 col-xs-12 transactionTab pdcls pdclsOne btn2 disabled">
                       <div className="triangletwo" id="triangle-right1"></div>
@@ -1039,7 +1047,7 @@ class BasicInfo extends Component {
                             <input type="text" id="CIN" maxLength="21" className="form-control col-lg-12 col-md-12 col-sm-12 col-xs-12 UpperCase inputText" placeholder="L12345MH2019PTC123456" value={this.state.CIN} ref="CIN" name="CIN" onChange={this.handleChange} />
                           </div> 
                           {/*<hr className="empFormHr"/>*/}
-                          <div className="form-margin col-lg-3 col-md-4 col-sm-12 col-xs-12 ">
+                          <div className="form-margin col-lg-12 col-md-4 col-sm-12 col-xs-12 ">
                             <div className="row">
                               <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <label className="labelform col-lg-12 col-md-12 col-sm-12 col-xs-12">Add COI Doc (jpg, jpeg, png, pdf)</label>

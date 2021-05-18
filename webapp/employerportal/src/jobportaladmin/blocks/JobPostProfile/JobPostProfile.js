@@ -272,105 +272,100 @@ export default class JobPostProfile extends Component{
 																</div>
 															</div>
 														</div>
-														<div>
-															<div className="row">
-																<div className="profileContent">
-																	<div className="row">
-																		<ul className="skillsHeadTwo">
-																			<div className="row">
-																				<li className="col-lg-5">
-																					<span className="skillsTitle">
-																						Secondary Skills
-																					</span>
-																				</li>
-																				<li className="col-lg-7">
-																					<span className="skillSubtitle">
-																						Min. Experience Req.
-																					</span><br/>
-																					<span className="skillDuration">
-																						{this.state.minSecExp}
-																					</span>
-																				</li>
-																				<p className="skillsList col-lg-5">
-																					{
-																						this.state.secondarySkillTags.map((skill,index)=>{
-																							return (
-																									<div>{skill.text}</div>
-																									
-																								)
-																						})
-																					}
-																				</p>
-																			</div>
-																		</ul>
-																	</div>	
-																</div>
-															</div>		
-														</div>
-														<div>
-															<div className="row">
-																<div className="profileContent">
-																	<div className="row">
-																		<ul className="skillsHeadThree">
-																			<div className="row">
-																				<li className="col-lg-5">
-																					<span className="skillsTitle">
-																						Other Skills
-																					</span>
-																				</li>
-																				<li className="col-lg-7">
-																					<span className="skillSubtitle">
-																						Min. Experience Req.
-																					</span><br/>
-																					<span className="skillDuration">
-																						{this.state.minOtherExp}
-																					</span>
-																				</li>
-																				<p className="skillsList col-lg-5">
-																					{
-																						this.state.otherSkillTags.map((skill,index)=>{
-																							return (
-																									<div>{skill.text}</div>
-																									
-																								)
-																						})
-																					}
-																				</p>
-																			</div>
-																		</ul>
-																	</div>
+															
+														<div className="row">
+															<div className="profileContent">
+																<div className="row">
+																	<ul className="skillsHeadTwo">
+																		<div className="row">
+																			<li className="col-lg-5">
+																				<span className="skillsTitle">
+																					Secondary Skills
+																				</span>
+																			</li>
+																			<li className="col-lg-7">
+																				<span className="skillSubtitle">
+																					Min. Experience Req.
+																				</span><br/>
+																				<span className="skillDuration">
+																					{this.state.minSecExp}
+																				</span>
+																			</li>
+																			<p className="skillsList col-lg-5">
+																				{
+																					this.state.secondarySkillTags.map((skill,index)=>{
+																						return (
+																								<div>{skill.text}</div>
+																								
+																							)
+																					})
+																				}
+																			</p>
+																		</div>
+																	</ul>
+																</div>	
+															</div>
+														</div>		
+														<div className="row">
+															<div className="profileContent">
+																<div className="row">
+																	<ul className="skillsHeadThree">
+																		<div className="row">
+																			<li className="col-lg-5">
+																				<span className="skillsTitle">
+																					Other Skills
+																				</span>
+																			</li>
+																			<li className="col-lg-7">
+																				<span className="skillSubtitle">
+																					Min. Experience Req.
+																				</span><br/>
+																				<span className="skillDuration">
+																					{this.state.minOtherExp}
+																				</span>
+																			</li>
+																			<p className="skillsList col-lg-5">
+																				{
+																					this.state.otherSkillTags.map((skill,index)=>{
+																						return (
+																								<div>{skill.text}</div>
+																								
+																							)
+																					})
+																				}
+																			</p>
+																		</div>
+																	</ul>
 																</div>
 															</div>
 														</div>
-														<div>
-															<div className="row">
-																<div className="profileContent1">
-																	<div className="row">
-																		<ul className="skillsHeadFour">
-																			<div className="row">
-																				<li className="col-lg-5">
-																					<span className="skillsTitle">
-																						Preferred Skills but not mandatory
-																					</span>
-																				</li>
-																				<li className="col-lg-7">
-																					<span className="skillSubtitle">
-																					</span><br/>
-																					<span className="skillDuration"></span>
-																				</li>
-																				<p className="skillsList col-lg-5">
-																					{
-																						this.state.preferredSkillTags.map((skill,index)=>{
-																							return (
-																									<div>{skill.text}</div>
-																									
-																								)
-																						})
-																					}
-																				</p>
-																			</div>
-																		</ul>
-																	</div>
+														<div className="row">
+															<div className="profileContent1">
+																<div className="row">
+																	<ul className="skillsHeadFour">
+																		<div className="row">
+																			<li className="col-lg-5">
+																				<span className="skillsTitle">
+																					Preferred Skills but not mandatory
+																				</span>
+																			</li>
+																			<li className="col-lg-7">
+																				<span className="skillSubtitle">
+																				</span><br/>
+																				<span className="skillDuration"></span>
+																			</li>
+																			<p className="skillsList col-lg-5">
+																				{
+																					this.state.preferredSkillTags.map((skill,index)=>{
+																						return (
+																								<div>{skill.text}</div>
+																								
+																							)
+																					})
+																				}
+																			</p>
+																		</div>
+																	</ul>
 																</div>
 															</div>
 														</div>

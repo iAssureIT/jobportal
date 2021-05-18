@@ -11,9 +11,11 @@ export default class Loader extends Component {
           return (  
                 <div  className="joblistLoaderWrapper col-lg-12">
                   <div className="col-lg-12">
-                    <div className="loaderContainer">
-                    </div>
-                    <div className="loaderContainer">
+                    <div className="col-lg-12">
+                      <div className="loaderContainer">
+                      </div>
+                      <div className="loaderContainer">
+                      </div>
                     </div>
                   </div>  
                 </div>              

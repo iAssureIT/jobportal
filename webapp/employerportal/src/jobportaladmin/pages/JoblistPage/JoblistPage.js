@@ -85,6 +85,9 @@ class JoblistPage extends Component{
                             <div id="mapwise"> 
                               { this.props.showLoader ? <Loader type="joblistLoader"  /> : <Joblist jobList={this.props.jobList}/> }
                               {/*{ <Loader type="jobListLoader"  /> }*/}
+
+
+                              {/*{ this.props.showLoader ? <Loader type="joblistLoader"  /> : <Loader type="joblistLoader"/> }*/}
                             </div>
                           </div>  
                         </div>

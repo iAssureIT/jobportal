@@ -175,7 +175,6 @@
 
 .row2{
   margin-bottom: 15px;
-
 }
 
 .row3{
@@ -184,20 +183,22 @@
 }
 
 .loaderContainer{
-  height: 300px;
-  margin-top: 100px;
+  height: 296px;
+  margin-top: 32px;
   border-radius: 10px;
   border: 1px solid var(--main-border-color);
   background-color: var(--form-field-background-color);
+  /*background-color: red;*/
 }
 
 .joblistLoaderWrapper{
+  margin-top: 72px;
   margin-bottom: 30px;
+  /*background-color: yellow;*/
 }
 
 .candidateLoaderContainer{
   height: 340px;
-  margin-top: 30px;
   border-radius: 10px;
   border: 2px solid var(--main-border-color);
   background-color: var(--form-field-background-color);
