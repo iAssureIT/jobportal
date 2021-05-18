@@ -843,7 +843,7 @@ class BasicInfo extends Component {
             <section className="Content tab-content">
                 <h4 className="weighttitle col-lg-11 col-md-11 col-xs-11 col-sm-11 NOpadding-right">Employer Details</h4>
              
-                <div className="nav-center OnboardingTabs col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div className="nav-center OnboardingTabs col-lg-12 col-md-12 col-sm-12 col-xs-12 row">
                   <ul className="nav nav-pills vendorpills col-lg-12 col-md-12  col-sm-12 col-xs-12">
                     <li className="active col-lg-3 col-md-3 col-sm-12 col-xs-12 pdcls pdclsOne btn1 NOpadding-left">
                       <a href={this.props.userDetails.company_id ? "/"+this.props.entity+"/basic-details/"+this.props.userDetails.company_id : "/"+this.props.entity+"/basic-details"} className="basic-info-pillss pills">
@@ -891,7 +891,7 @@ class BasicInfo extends Component {
                         <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 pdcls">
                         <div className="row">
 
-                          <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 pdcls ">
+                          <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 pdcls row">
                           <div className="row"> 
                             <div className="form-margin col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
                               <div className=" col-lg-4 col-md-5 col-sm-12 col-xs-12">
@@ -988,7 +988,7 @@ class BasicInfo extends Component {
                                 </div>*/}
                             </div>  
                           </div>
-                          <div className="form-margin col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+                          <div className="form-margin col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <div className="row">
                               <div className="form-margin1 col-lg-4 col-md-3 col-sm-12 col-xs-12">
                                 <label className="labelform  NOpadding-left">Company Number<i className="astrick">*</i></label>
@@ -1017,7 +1017,7 @@ class BasicInfo extends Component {
                           </div>
                         </div>
                         </div>
-                        <div className="form-margin col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+                        <div className="form-margin col-lg-12 col-md-12 col-sm-12 col-xs-12 row">
                           <div className=" col-lg-4 col-md-3 col-sm-12 col-xs-12 ">
                                   <label className="labelform col-lg-12 col-md-12 col-sm-12 col-xs-12 NOpadding-left">Country<i className="astrick">*</i></label>
                                   <select className="form-control col-lg-12 col-md-12 col-sm-12 col-xs-12 errorinputText" value={this.state.country} ref="country" name="country" id="country" onChange={this.handleCountryChange.bind(this)} required>
@@ -1107,7 +1107,7 @@ class BasicInfo extends Component {
                       
                       <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div className="row">
-                          <div className="empFormBtn col-lg-12 col-md-12 col-sm-12 col-xs-12 mt">
+                          <div className="empFormBtn col-lg-12 col-md-12 col-sm-12 col-xs-12 mt row">
                             <button className="btn button3 pull-right" onClick={this.SubmitBasicInfo.bind(this)} >Save & Next&nbsp;<i className="fa fa-angle-double-right" aria-hidden="true"></i></button>
                           </div>
                         </div>

@@ -371,11 +371,13 @@
     border: 1px solid #f5a721;
     /*box-shadow: 2px 2px 10px -5px #ddd;*/
     min-height: 175px !important;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 
 }
 .boxul1:hover{
         /*box-shadow: 1px 3px 6px 1px #999;*/
-
 }
 
 .boxul {
@@ -383,6 +385,14 @@
     box-shadow: -4px 7px 39px -5px #ddd;
     margin-bottom: 2%;
     border: 1px solid #ddd;
+}
+
+.empLocationCard{
+    margin-bottom: 20px;
+}
+
+.empContactCard{
+    margin-bottom: 20px;
 }
 
 .foothd {
@@ -1099,6 +1109,7 @@ input:checked+.slider:before {
     align-items: center;
     text-align: center;
     display: grid;
+    z-index: 1;
 }
 
 /*#LogoImageUpOne i {

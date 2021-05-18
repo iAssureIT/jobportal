@@ -247,9 +247,9 @@ class LocationDetails extends Component {
 				addressLine1: {
 					required: true,
 				},
-				city: {
+				/*city: {
 					required: true,
-				},
+				},*/
 				states: {
 					required: true,
 					regxstate: "-- Select --"
@@ -1681,7 +1681,7 @@ class LocationDetails extends Component {
 														{this.state.locationarray && this.state.locationarray.length > 0 ?
 															this.state.locationarray.map((Suppliersdata, index) => {
 																return (
-																	<div className="col-lg-5 col-md-6 col-sm-6 col-xs-12 " key={index}>
+																	<div className="col-lg-6 col-md-6 col-sm-6 col-xs-12 empLocationCard" key={index}>
 																		<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 box_style">
 																			<div className=" col-lg-1 col-md-1 col-sm-1 col-xs-1 NOpadding">
 																				<div className="empLocationIcon col-lg-10 col-md-10 col-sm-10 col-xs-10 ">
