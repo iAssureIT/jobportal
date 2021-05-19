@@ -66,11 +66,11 @@ componentDidMount() {
     onChangeCompany(event){
         const {name,value} = event.target;
         this.setState({ [name]:value });  
-        
+        console.log(value)
         var company_id, companyID; 
-        if (document.querySelector('#companyName option[value="' + value + '"]')) {
-          company_id = document.querySelector('#companyName option[value="' + value + '"]').getAttribute("data-value")
-          companyID = document.querySelector('#companyName option[value="' + value + '"]').getAttribute("data-id")
+        if (document.querySelector('#companyNames option[value="' + value + '"]')) {
+          company_id = document.querySelector('#companyNames option[value="' + value + '"]').getAttribute("data-value")
+          companyID = document.querySelector('#companyNames option[value="' + value + '"]').getAttribute("data-id")
         }else{company_id = ""; companyID = "" }
 
          
@@ -260,11 +260,11 @@ render() {
                     <div className="col-lg-10 col-lg-offset-1 form-group">
                         <div className="input-group roundCorner">
                             <span className="input-group-addon registrationInputIcon"><i className="fa fa-briefcase"></i></span>
-                            <input type="text" list="companyName" name="companyName" id="companyName" 
+                            <input type="text" list="companyNames" name="companyName" id="companyName" 
                              className="form-control inputBox" placeholder="Start typing your Company & Select"
                              value={this.state.companyName}
                              onChange={this.onChangeCompany.bind(this)}/>
-                             <datalist name="companyName" id="companyName" className="companylist" >
+                             <datalist name="companyName" id="companyNames" className="companylist" >
                                 { this.state.companylist.map((item, key) =>
                                     <option key={key} value={item.companyName} data-value={item._id} data-id={item.companyID}/>
                                 )}
