@@ -16,7 +16,11 @@ class Joblist extends Component{
 	super(props);
 	this.state={
 		jobList : [],
-		startLimit 		: this.props.selector.startLimit
+		startLimit 		: this.props.selector.startLimit,
+		isActive 		: false,
+		activateJob 	: true,
+		job_id          : "",
+		status 	 		: "active"
 	}
 }	
 
@@ -269,7 +273,7 @@ activateJob(event){
 					</div>*/}
 					<div className="col-lg-8 col-lg-offset-2 row btnsRow">
 						<ul className="nav nav-pills nav-justified">
-						  	<li className={this.props.statusMode == "active" ? "active col-lg-4 row" : "col-lg-4 row"}  onClick={this.changeStatus.bind(this, "active")}  ><a data-toggle="pill" href="#activejobs"  >Active Jobs</a></li>
+						  	<li className={this.props.statusMode == "active" ? "active col-lg-4 row" : " col-lg-4 row"}  onClick={this.changeStatus.bind(this, "active")}  ><a data-toggle="pill" href="#activejobs"  >Active Jobs</a></li>
 						  	<li className={this.props.statusMode == "inactive" ? "active col-lg-4 row" : "col-lg-4 row"}  onClick={this.changeStatus.bind(this,"inactive")}><a data-toggle="pill" href="#inactivejobs" >Inactive Jobs</a></li>
 						  	<li className={this.props.statusMode == "draft" ? "active col-lg-4 row" : "col-lg-4 row"}  onClick={this.changeStatus.bind(this,"draft")}><a data-toggle="pill" href="#draftjobs" >Drafts Jobs</a></li>
 						</ul>
@@ -374,6 +378,17 @@ activateJob(event){
 														<div className="col-lg-1 jobListRightContent">
 															<div className="row">
 																<div className="col-lg-12">
+																	<div className="input-group jobStatusToggleWrapper">
+																		<div className = {this.state.isActive ? "genderFeild genderFeildVerti genderFeildActive" : "genderFeild genderFeildVerti" }
+																		 id={elem._id} name="primaryToggel" onClick={this.inactiveJob.bind(this)}
+																		 value="togglePrimary" title="Inactive"
+																		 >
+																		</div>
+																		<div className = {!this.state.isActive ? "genderFeild genderFeildVerti genderFeildInActive" : "genderFeild genderFeildVerti" }
+																		 id={elem._id} name="primaryToggel" onClick={this.inactiveJob.bind(this)} 
+																		 value="togglePrimary" title="Inactive">
+																		</div>
+																	</div>	
 																	<div className="listEditBtn">
 																		<a title = "Edit Profile" href={"/post-job/" + elem._id}><i className="fa fa-edit"></i></a>
 																	</div>
@@ -505,6 +520,15 @@ activateJob(event){
 														<div className="col-lg-1 jobListRightContent">
 															<div className="row">
 																<div className="col-lg-12">
+																	<div className = {this.state.isActive ? "genderFeild genderFeildVerti genderFeildActive" : "genderFeild genderFeildVerti" }
+																	 id={elem._id} name="primaryToggel" onClick={this.inactiveJob.bind(this)}
+																	 value="togglePrimary" title="Inactive"
+																	 >
+																	</div>
+																	<div className = {!this.state.isActive ? "genderFeild genderFeildVerti genderFeildInActive" : "genderFeild genderFeildVerti" }
+																	 id={elem._id} name="primaryToggel" onClick={this.inactiveJob.bind(this)} 
+																	 value="togglePrimary" title="Inactive">
+																	</div>
 																	<div className="listEditBtn">
 																		<a title = "Edit Profile" href={"/post-job/" + elem._id}><i className="fa fa-edit"></i></a>
 																	</div>
@@ -636,6 +660,16 @@ activateJob(event){
 														<div className="col-lg-1 jobListRightContent">
 															<div className="row">
 																<div className="col-lg-12">
+																    <div className = {this.state.isActive ? "genderFeild genderFeildVerti genderFeildActive" : "genderFeild genderFeildVerti" }
+																	 id={elem._id} name="primaryToggel" onClick={this.inactiveJob.bind(this)}
+																	 value="togglePrimary" title="Inactive"
+																	 >
+																	</div>
+																	<div className = {!this.state.isActive ? "genderFeild genderFeildVerti genderFeildInActive" : "genderFeild genderFeildVerti" }
+																	 id={elem._id} name="primaryToggel" onClick={this.inactiveJob.bind(this)} 
+																	 value="togglePrimary" title="Inactive">
+																	</div>
+																	
 																	<div className="listEditBtn">
 																		<a title = "Edit Profile" href={"/post-job/" + elem._id}><i className="fa fa-edit"></i></a>
 																	</div>
@@ -679,12 +713,13 @@ activateJob(event){
 const mapStateToProps = (state)	=>	{
 									    return {	
 											    	userDetails 	: state.userDetails,	selector : state.selector, jobCount  	: state.jobCount,	
-											    	jobList 		: state.jobList,		totalApplicantsCountList : state.totalApplicantsCountList
+											    	jobList 		: state.jobList,		totalApplicantsCountList : state.totalApplicantsCountList,
+											    	statusMode 	   : state.statusMode,
 									    		}
 									}
 
 const mapDispatchToProps = (dispatch) => 	({
-  												mapAction :  bindActionCreators(mapActionCreator, dispatch)
+  												mapAction :  bindActionCreators(mapActionCreator, dispatch),
 											}) 
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Joblist));

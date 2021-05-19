@@ -361,7 +361,7 @@ a:hover{
 
 .nav-pills>li.active>a{
     color: #fff;
-    background-color: var(--form-field-background-color);
+    background-color: var(--main-border-color);
     font-weight: 600;
 }
 .nav-justified>li>a {
@@ -378,4 +378,53 @@ a:hover{
 .nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover {
     color: #fff;
     background-color: var(--main-border-color);
+}
+
+.jobStatusToggleWrapper{
+	height:25px;
+	border:1px solid #3C8DBC !important;
+	margin-top: 15px;
+	margin-bottom: 13px;
+	margin-left: 22px;
+    padding: 0px;
+    width: 45%;
+    border-radius: 1px;
+ }
+
+.jobStatusToggleWrapper .genderFeildVerti{
+	border-radius:  0px !important;
+	height: 15px !important;
+	background-color:#3C8DBC !important;
+}
+
+.jobStatusToggleWrapper .genderFeildWrapper2{
+    margin-top:6px;
+}
+
+.jobStatusToggleWrapper .genderFeild{
+	height: 21px;
+	border-radius: 20px;
+	font-size: 10px;
+	font-weight: 100!important;
+	padding-top: 4px;
+	text-align: center;
+	background-color:#3C8DBC !important;
+    transition: all 1s;
+}
+
+.jobStatusToggleWrapper .genderFeild:hover{
+	cursor: pointer;
+    /*background-color:var(--main-border-color);*/
+}
+
+.jobStatusToggleWrapper .genderFeildActive{
+	background-color:#3C8DBC !important;
+	transition:all 2s;
+}
+
+.jobStatusToggleWrapper .genderFeildInActive{
+  pointer-events: none;
+  /* for "disabled" effect */
+  opacity: 1;
+  background-color:#eee !important;
 }
