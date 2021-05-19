@@ -1,4 +1,5 @@
 import React, {Component} 		from 'react';
+import { withRouter }	 	    from 'react-router-dom';
 import Axios 					from  'axios';
 import Swal  					from  'sweetalert2';
 import Moment 					from "moment";
@@ -108,6 +109,152 @@ class Joblist extends Component{
 				})
 	}
 
+	changeStatus(status){
+	console.log(status);
+
+	var {mapAction} = this.props;
+    mapAction.changeStatusMode(status);
+
+	var selector 	= this.props.selector;
+	selector.status = status;
+	selector.startLimit     = 0;
+    selector.initialLimit   = 25;
+    selector.showMoreLimit  = 25;
+	var {mapAction} = this.props;
+    mapAction.filterJobList(selector);
+}
+
+inactiveJob(event){
+	event.preventDefault();
+	const job_id = event.currentTarget.id;
+	console.log(job_id);
+		
+		Swal.fire({
+
+				title 				: ' ',
+				html 				: 'Are you sure<br />you want to make this job inactive?',
+				text 				: '',
+				showCloseButton		: true,
+				showCancelButton 	: true,
+				confirmButtonText 	: 'YES',
+				cancelButtonText 	: 'NO',
+				confirmButtonColor 	: '#f5a721',
+				reverseButtons		: true
+			
+			}).then((result) =>{
+				if(result.value){
+					if(job_id){
+						console.log(job_id); 
+						Axios.patch("/api/jobs/inactive/"+job_id)
+							.then(response =>{
+								this.setState({
+													isActive: !this.state.isActive
+												});
+								if(response.data.message==="Job is inactivated successfully!"){
+									var {mapAction} = this.props;
+									mapAction.filterJobList(this.props.selector);
+
+									Swal.fire(
+												'',
+												"Job has been inactivated successfully!",
+												''
+											);
+								}
+							})
+							.catch(error=>{
+
+								if(error.message === "Request failed with status code 401"){
+						          var userDetails =  localStorage.removeItem("userDetails");
+						          localStorage.clear();
+						          Swal.fire({title  : ' ',
+						                    html    : "Your session is expired! You need to login again. "+"<br>"+" Click OK to go to Login Page",
+						                    text    :  "" })
+						              .then(okay => {
+						                if (okay) {
+						                  window.location.href = "/login";
+						                }
+						              });
+						        }else{
+						            Swal.fire("", "Some problem occured while making job inactive", "");
+						        }
+							})
+
+						}else if (result.dismiss === Swal.DismissReason.cancel){
+							/*Swal.fire(
+								'',
+								'Your job is safe',
+								''
+							)*/
+						}
+					}	
+				})
+			}
+
+activateJob(event){
+	event.preventDefault();
+	const job_id = event.currentTarget.id;
+	console.log(job_id);
+	
+	this.setState({
+					activateJob: !this.state.activateJob
+				});
+
+			Swal.fire({
+				title 				: ' ',
+				html				: 'Are you sure<br />you want to make this job active?',
+				text 				: '',
+				icon 				: 'warning',
+				showCloseButton		: true,
+				showCancelButton 	: true,
+				confirmButtonText 	: 'YES',
+				cancelButtonText 	: 'NO',
+				confirmButtonColor 	: '#f5a721',
+				reverseButtons		: true
+
+			}).then((result) =>{
+				if(result.value){
+					if(job_id){
+						Axios.patch("/api/jobs/active/"+job_id)
+						.then(response =>{
+							if(response.data.message==="Job is activated successfully!"){
+								var {mapAction} = this.props;
+								mapAction.filterJobList(this.props.selector);
+
+								Swal.fire(
+											'',
+											"Job activated successfully!",
+											''
+										);
+								}
+							})
+						.catch(error=>{
+							if(error.message === "Request failed with status code 401"){
+					          var userDetails =  localStorage.removeItem("userDetails");
+					          localStorage.clear();
+					          Swal.fire({title  : ' ',
+					                    html    : "Your session is expired! You need to login again. "+"<br>"+" Click OK to go to Login Page",
+					                    text    :  "" })
+					              .then(okay => {
+					                if (okay) {
+					                  window.location.href = "/login";
+					                }
+					              });
+					        }else{
+					            Swal.fire("", "Some problem occured while making job active", "");
+					        }
+						})
+
+					}else if (result.dismiss === Swal.DismissReason.cancel){
+					/*Swal.fire(
+						'',
+						'Your job is safe',
+						''
+					)*/
+					}
+				}	
+			})
+		}
+
 	render(){
 
 		//console.log(this.props.userDetails)
@@ -120,10 +267,10 @@ class Joblist extends Component{
 						</div> 
 					</div>*/}
 					<div className="col-lg-8 col-lg-offset-2 row btnsRow">
-						<ul class="nav nav-pills nav-justified">
-						  	<li class="active col-lg-4 row"><a data-toggle="pill" href="#activejobs">Active Jobs</a></li>
-						  	<li class="col-lg-4 row"><a data-toggle="pill" href="#inactivejobs">Inactive Jobs</a></li>
-						  	<li class="col-lg-4 row"><a data-toggle="pill" href="#draftjobs">Drafts Jobs</a></li>
+						<ul className="nav nav-pills nav-justified">
+						  	<li className={this.props.statusMode == "active" ? "active col-lg-4 row" : "col-lg-4 row"}  onClick={this.changeStatus.bind(this, "active")}  ><a data-toggle="pill" href="#activejobs"  >Active Jobs</a></li>
+						  	<li className={this.props.statusMode == "inactive" ? "active col-lg-4 row" : "col-lg-4 row"}  onClick={this.changeStatus.bind(this,"inactive")}><a data-toggle="pill" href="#inactivejobs" >Inactive Jobs</a></li>
+						  	<li className={this.props.statusMode == "draft" ? "active col-lg-4 row" : "col-lg-4 row"}  onClick={this.changeStatus.bind(this,"draft")}><a data-toggle="pill" href="#draftjobs" >Drafts Jobs</a></li>
 						</ul>
 					</div>	
 
@@ -539,4 +686,4 @@ const mapDispatchToProps = (dispatch) => 	({
   												mapAction :  bindActionCreators(mapActionCreator, dispatch)
 											}) 
 
-export default connect(mapStateToProps, mapDispatchToProps) (Joblist);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Joblist));
