@@ -1343,7 +1343,7 @@ exports.mapwiseJobs = (req, res, next) => {
     } else {
         var groupByField = "stateCode";
     }
-
+    console.log("mapwise selector",JSON.stringify(selector))
     Jobs.aggregate([{
                 $match: selector
             },
@@ -1550,7 +1550,7 @@ exports.functonalAreaJobs = (req, res, next) => {
         });
     }
 
-    console.log(JSON.stringify(selector))
+    console.log("functional selector",JSON.stringify(selector))
 
     Jobs.aggregate([{
                 $match: selector
@@ -1765,7 +1765,7 @@ exports.subfunctionalAreaJobs = (req, res, next) => {
             }
         });
     }
-
+    console.log("subfunctional selector",JSON.stringify(selector))
     Jobs.aggregate([{
                 $match: selector
             },
@@ -1978,7 +1978,7 @@ exports.industrialJobs = (req, res, next) => {
             }
         });
     }
-
+    console.log("industrial selector",JSON.stringify(selector))
     Jobs.aggregate([{
                 $match: selector
             },

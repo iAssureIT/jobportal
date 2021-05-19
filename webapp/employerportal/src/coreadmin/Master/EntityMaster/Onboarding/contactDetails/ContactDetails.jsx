@@ -1416,7 +1416,7 @@ class ContactDetails extends Component {
 													{this.state.contactarray && this.state.contactarray.length > 0 ?
 														this.state.contactarray.map((data, index) => {
 															return (
-																<div className="col-lg-6  col-md-6  col-sm-6 col-xs-12 " key={index}>
+																<div className="col-lg-6 col-md-6 col-sm-6 col-xs-12 empContactCard" key={index}>
 																	<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 boxul1">
 																		<div className=" col-lg-1 col-md-1 col-sm-1 col-xs-1">
 																			{/*<i className="fa fa-phone" aria-hidden="true"></i>*/}
@@ -1424,7 +1424,7 @@ class ContactDetails extends Component {
 																		<ul className="col-lg-10 col-md-10 col-sm-10 col-xs-10 palfclr addrbox">
 																			<li className="fz16"><b>{data.firstName} {data.lastName} </b><span className="fz12">( Emp ID : {data.employeeID} )</span></li>
 																			<li>{data.email}, {data.phone}, {data.altPhone}</li>
-																			<li>&nbsp;</li>
+																			{/*<li>&nbsp;</li>*/}
 																			<li>Branch Code: {data.branchCode  + ( data.locationType ? " ("+ data.locationType+ ")":"")}</li>
 																			{/*<li>Branch Code: {data.branchCode +" ("+data.branchName+")"}</li>*/}
 																			<li>Company Branch: {data.branchName?data.branchName :" -NA- "}</li>
