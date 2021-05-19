@@ -4,7 +4,7 @@ import $ from 'jquery';
 import axios from 'axios';
 import jQuery from 'jquery';
 import 'jquery-validation';
-import swal from 'sweetalert';
+import Swal           from 'sweetalert2';
 import { connect }        from 'react-redux';
 import { bindActionCreators } from 'redux';
 import  * as mapActionCreator from '../actions/index';
@@ -18,10 +18,12 @@ class Header extends Component{
       profileDisplay  : "none",
       asideDisplay  : "none",
       notificationDisplay  : "none",
-      userDetails: {}
+      userDetails: {},
+      company_id  : this.props.userDetails.company_id
     }
   }
   componentDidMount() {
+    console.log("userDetails",this.props.userDetails.company_id)
     this.setState({userDetails : JSON.parse(localStorage.getItem("userDetails"))})
     
   }
@@ -56,6 +58,9 @@ class Header extends Component{
       asideDisplay  : "none",
       })
     }
+  }
+  modalPopUp(event){
+    Swal.fire("", "Complete Your Employer Details", "")
   }
   notificationBar(event){
 
@@ -98,10 +103,12 @@ class Header extends Component{
             </div>
             <div className="headerMenuWrapper col-lg-4">
               <div className="row"> 
-                <div className="headerJobWrapper">
-                  <a href="/post-job"><div className="headerJob">
-                    <i className="fa fa-user"></i>Post Job 
-                  </div></a>
+                <div className="headerJobWrapper" >
+                  <div  style={{display: this.state.company_id !==null? "block":"none"}}>
+                    <a href="/post-job"><div className="headerJob">
+                      <i className="fa fa-user"></i>Post Job 
+                    </div></a>
+                  </div>
                 </div>
                 <div className="headerBellWrapper ">
                   <i className="fa fa-bell-o " onClick={this.notificationBar.bind(this)}></i>
@@ -174,18 +181,22 @@ class Header extends Component{
                 </div>
                 <div className="barsToggel pull-right" id="barsToggel" style={{display:this.state.asideDisplay}}>
                   <a href={hascompany_Id ? "/corporate/basic-details/"+hascompany_Id : "/corporate/basic-details"}>
-                  <div className="notificationMessege col-lg-12">
+                  <div className="notificationMessege col-lg-12" >
                     <FontAwesomeIcon icon="setting" />
                     <span className="notificationMessegeText">Employer Settings</span>
                   </div></a>
-                  <a href="/job-list"><div className="notificationMessege col-lg-12">
-                    <FontAwesomeIcon icon="briefcase" />
-                    <span className="notificationMessegeText">Posted Jobs</span>
-                  </div></a>
-                  <a href="/candidate-list"><div className="notificationMessege col-lg-12">
-                    <FontAwesomeIcon icon="users" />
-                    <span className="notificationMessegeText">Search Candidates</span>
-                  </div></a>
+                  <a href={this.state.company_id !==null?"/job-list":"#"}>
+                    <div className="notificationMessege col-lg-12" onClick={this.modalPopUp.bind(this)}>
+                      <FontAwesomeIcon icon="briefcase" />
+                      <span className="notificationMessegeText">Posted Jobs</span>
+                    </div>
+                  </a>
+                  <a href={this.state.company_id !==null?"/candidate-list":"#"}>
+                    <div className="notificationMessege col-lg-12" onClick={this.modalPopUp.bind(this)}>
+                      <FontAwesomeIcon icon="users" />
+                      <span className="notificationMessegeText">Search Candidates</span>
+                    </div>
+                  </a>
                   <div className="notificationMessege col-lg-12">
                     <FontAwesomeIcon icon="users" />
                     <span className="notificationMessegeText">Recruiters</span>

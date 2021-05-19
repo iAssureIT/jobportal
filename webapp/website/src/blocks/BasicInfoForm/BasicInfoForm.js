@@ -180,16 +180,20 @@ class BasicInfoForm extends Component{
 	selectImage(event){
 		event.preventDefault();
 		var profilePicture = [];
+
 		if (event.currentTarget.files ) {
 		const imgFile = event.currentTarget.value;
 		const files   = event.currentTarget.files;
+
 		
 		const imgUrl =  URL.createObjectURL(event.target.files[0]);
 		
 		this.setState({
 			profileImageUrl : imgUrl
 		})
+
 		var file = event.currentTarget.files[0];
+		console.log("event.currentTarget.files ",file )
 		if (file) {
           var fileName = file.name;
           var fileSize = file.size;
@@ -275,6 +279,7 @@ class BasicInfoForm extends Component{
 	uploadResume(event){
 		event.preventDefault();
 		var resume = [];
+
 		if (event.currentTarget.files ) {
 		
 		const resumeUrl =  URL.createObjectURL(event.target.files[0]);
@@ -362,14 +367,13 @@ class BasicInfoForm extends Component{
 	delImgPreview(event){
 		this.setState({
 			profileImageUrl:"",
-			profilePicture: ""
 		})
 	}
 	delResumePreview(event){
 		
 		this.setState({
 			resumeUrl:"",
-			resume:"",
+			
 		})
 	}
 

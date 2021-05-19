@@ -163,7 +163,8 @@
 .barsToggel{
   position: relative;
   width:255px;
-  height: 170px;
+  min-height: 170px;
+  height: auto;
   background:var(--header-bg-color  );
   z-index:3;
   margin-top:0px;

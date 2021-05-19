@@ -4256,3 +4256,13 @@ input:checked+.slider .off {
 .fs16{
     font-size: 16px;
 }
+
+/*================================================*/
+/*.userManagementTableUI .table>tbody>tr>td,
+.userManagementTableUI .table>thead>tr>th {
+    padding: 0px;
+    padding-top: 5px;
+}
+.userManagementTableUI .table>tbody>tr>td:nth-child(8){
+    width: 40px!important;
+}*/

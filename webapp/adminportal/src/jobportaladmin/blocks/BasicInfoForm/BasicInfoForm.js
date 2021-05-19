@@ -159,6 +159,7 @@ class BasicInfoForm extends Component{
 		this.setState({
 			profileImageUrl : imgUrl
 		})
+		console.log("event.currentTarget.files ",this.state.profileImageUrl )
 		var file = event.currentTarget.files[0];
 		if (file) {
           var fileName = file.name;

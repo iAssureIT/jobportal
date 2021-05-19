@@ -373,7 +373,7 @@ class packagemaster extends Component {
                           {this.state.buttonText}
                        </button>
                     </div>
-                    <div className="col-lg-12">
+                    <div className="col-lg-12 ">
                         <IAssureTable 
                               tableHeading={this.state.tableHeading}
                               tableData={this.state.tableData}
