@@ -30,6 +30,7 @@ const initialState = {
 		token 		: "",
 		industry_id : "" 
 	},
+	statusMode 					: "active",
 	selector 					: {},
 	showLoader 					: false, 
 	jobList 					: [],
@@ -60,6 +61,9 @@ const reducer = (state = initialState, action) => {
 	}
 	if (action.type === "SHOW_LOADER") {
 		newState.showLoader = action.showLoader;
+	}
+	if(action.type === "CHANGE_STATUS_MODE"){
+		newState.statusMode = action.statusMode;
 	}
 	if(action.type === "GET_JOBCOUNT"){
 		newState.jobCount = action.jobCount;

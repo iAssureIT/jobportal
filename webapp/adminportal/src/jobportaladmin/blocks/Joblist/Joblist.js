@@ -121,6 +121,7 @@ class Joblist extends Component{
     selector.initialLimit   = 25;
     selector.showMoreLimit  = 25;
 	var {mapAction} = this.props;
+	console.log(selector)
     mapAction.filterJobList(selector);
 }
 

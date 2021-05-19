@@ -24,7 +24,10 @@ export const setUserDetails = (userDetails )=> ({
       type            : 'SET_USER_DETAILS',
       userDetails     : userDetails
 });
-
+export const changeStatusMode = (statusMode )=> ({
+      type           : 'CHANGE_STATUS_MODE',
+      statusMode     : statusMode
+});
 export const setFilterSelector = (selector )=> ({
       type          : 'SET_FILTER_SELECTOR',
       selector      : selector
