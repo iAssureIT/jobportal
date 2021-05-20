@@ -142,12 +142,12 @@ class Login extends Component {
                           //loginTime : response.data.userDetails.loginTime, 
                         
 
-                        localStorage.setItem('userDetails', JSON.stringify(userDetails));
+                          localStorage.setItem('userDetails', JSON.stringify(userDetails));
 
-                        var {mapAction} = this.props;
-                        mapAction.setUserDetails(userDetails);
+                          var {mapAction} = this.props;
+                          mapAction.setUserDetails(userDetails);
            
-                        this.setState({ loggedIn: true }, () => {
+                          this.setState({ loggedIn: true }, () => {
                           window.location.href='/'
                             
                           })
