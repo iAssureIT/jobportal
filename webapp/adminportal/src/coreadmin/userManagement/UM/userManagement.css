@@ -4266,3 +4266,29 @@ input:checked+.slider .off {
 .userManagementTableUI .table>tbody>tr>td:nth-child(8){
     width: 40px!important;
 }*/
+.userManagementTableUI .scrollContent .textAlignLeft{
+        display: table-cell!important;
+}
+.userManagementTableUI .table>tbody>tr>td:nth-child(8){
+    width: 8%!important;
+}
+.userManagementTableUI .table>thead>tr>th{
+        vertical-align: top!important;
+}
+.userManagementTableUI .table>thead>tr>th:nth-child(2) .col1 {
+    width: 163px !important;
+
+}
+.userManagementTableUI .table>thead>tr>th:nth-child(4) .col3{
+    width: 120px !important;
+
+}
+
+
+@media (min-width: 1400px){
+    .userManagementTableUI .table>tbody>tr>td, .userManagementTableUI .table>tbody>tr>th,
+    .userManagementTableUI .table>tfoot>tr>td, .userManagementTableUI .table>tfoot>tr>th, 
+    .userManagementTableUI .table>thead>tr>td, .userManagementTableUI .table>thead>tr>th {
+        padding: 21px;
+    }
+}

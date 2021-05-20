@@ -318,7 +318,8 @@ display: block;
 }
 .scrollContent {
   display: block;
-  height: 350px;
+  min-height: 30px!important;
+  height: auto!important;
   overflow: auto;
   width: 100%;
 }

@@ -1578,7 +1578,7 @@ class UMListOfUsers extends Component {
 	render() {
 		var adminRolesListDataList = this.state.adminRolesListData;
 		return (
-			<div className="container-fluid">
+			<div className="container-fluid userManagementTableUI">
 				<div className="row">
 					<div className="formWrapper">
 						<section className="content">

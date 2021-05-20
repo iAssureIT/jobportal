@@ -172,3 +172,101 @@
 .tableDeleteIcon:hover{
   color: #FF6347 !important;
 }
+/*============================================================*/
+.delModalMain{
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  display: table;
+
+  width: 32%;
+}
+
+.delModalMain > .modal-content .delModalContent{
+  display: table-cell;
+}
+
+.delHeader{
+  height: 36px;
+  background-color: var(--main-border-color);
+  border-bottom: none;
+  padding-top: 11px !important;
+  padding-right: 8px;
+  border-radius: 4px;
+}
+
+.delModalBody{
+  height: 200px;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  background-color: var(--main-bg-color);
+}
+
+.delBodyText{
+  text-align: center;
+  padding-top: 35px;
+  padding-bottom: 45px;
+  font-size: 17px;
+  font-weight: 300px;
+}
+
+.delModalContent{
+  border: 1px solid var(--main-border-color);
+}
+
+.delCloseBtn{
+  background-color: #fff !important;
+  opacity: 1;
+  border-radius: 2px;
+  font-size: 20px;
+  height: 17px;
+  width: 16px;
+  font-weight: 300;
+  border: none !important;
+  color: #000!important;
+  margin-top: -2px!important;
+}
+
+.delCloseBtn{
+  border: none !important;
+}
+
+.delCloseBtn:hover{
+  opacity: 0.8;
+  background-color: #fff;
+}
+
+.delMainBtnDiv{
+  margin-left: 70px;
+  margin-right: 50px;
+}
+
+.delModalBtnOne{
+  background-color: var(--form-field-background-color);
+  border: 1px solid var(--main-border-color);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.delModalBtnOne:hover{
+  color: #fff;
+  background-color: var(--yellow-button-color);
+}
+
+.delModalBtnTwo{
+  background-color: var(--form-field-background-color);
+  border: 1px solid var(--main-border-color);
+  color: #fff;
+  font-size: 12px;
+  margin-left: 100px;
+  font-weight: 500;
+}
+
+.delModalBtnTwo:hover{
+  color: #fff;
+  background-color: var(--yellow-button-color);
+}

@@ -693,26 +693,27 @@ class IAssureTable extends Component {
 																	<i className="fa fa-pencil" title="Edit" id={value._id.split("-").join("/")} onClick={this.edit.bind(this)}></i> : null}&nbsp; &nbsp;
 																	{this.props.editId && this.props.editId === value._id ? null : <i className={"fa fa-trash redFont " + value._id} id={value._id + '-Delete'} data-toggle="modal" title="Delete" data-target={"#showDeleteModal-" + value._id}></i>}
 															</span>
-															<div className="modal " id={"showDeleteModal-" + value._id} role="dialog">
-																<div className=" modal-dialog">
-																	<div className="modal-body modalWrapper">
-																		<button type="button" className="close" id="closeModalButton" data-dismiss="modal">&times;</button>
-																		<div className="row">
-																			<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-																				<h4 className="blackLightFont textAlignCenter examDeleteFont col-lg-12 col-md-12 col-sm-12 col-xs-12">Are you sure you want to delete?</h4>
-																			</div>
-																		</div>
-																		<div className="row">
-																			<br/>
-																			<div className="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-																				<button type="button" className="cancelbtn btn  col-lg-7 col-lg-offset-1 col-md-4 col-md-offset-1 col-sm-8 col-sm-offset-1 col-xs-10 col-xs-offset-1" data-dismiss="modal">CANCEL</button>
-																			</div>
-																			<div className="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-																				<button onClick={this.delete.bind(this)} id={(value._id).replace(/-/g, "/")} type="button" className="btn deletebtn  col-lg-7 col-lg-offset-5 col-md-7 col-md-offset-5 col-sm-8 col-sm-offset-3 col-xs-10 col-xs-offset-1" data-dismiss="modal">DELETE</button>
-																			</div>
-																		</div>
-																	</div>
-																</div>
+															<div className="modal fade " id={"showDeleteModal-" + value._id} role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+																
+																<div className="modal-dialog delModalMain">
+															      <div className="modal-content delModalContent">
+															        <div className="modal-header delHeader">
+															          <button type="button" className="close delCloseBtn" data-dismiss="modal" aria-label="Close">
+															            <span aria-hidden="true">&times;</span>
+															          </button>
+															        </div>
+															        <div className="modal-body delModalBody">
+															          <div className="delBodyText">
+															            Are you sure <br />
+															            you want to delete this job?
+															          </div>
+															          <div className="col-lg-12 delMainBtnDiv">
+															              <button type="button" className="btn btn-default delModalBtnOne col-lg-3" data-dismiss="modal">NO</button> 
+															              <button type="button" className="btn btn-default delModalBtnTwo col-lg-3" data-dismiss="modal" onClick={this.delete.bind(this)} id={(value._id).replace(/-/g, "/")}>YES</button>
+															          </div> 
+															        </div>
+															      </div>
+															    </div>
 															</div>
 														</td>
 														:

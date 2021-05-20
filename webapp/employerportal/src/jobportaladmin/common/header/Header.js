@@ -23,7 +23,8 @@ class Header extends Component{
     }
   }
   componentDidMount() {
-    console.log("userDetails",this.props.userDetails.company_id)
+    console.log(".company_id",this.props.userDetails.company_id);
+    console.log("userDetails",this.props.userDetails);
     this.setState({userDetails : JSON.parse(localStorage.getItem("userDetails"))})
     
   }
@@ -104,7 +105,7 @@ class Header extends Component{
             <div className="headerMenuWrapper col-lg-4">
               <div className="row"> 
                 <div className="headerJobWrapper" >
-                  <div  style={{display: this.state.company_id !==null? "block":"none"}}>
+                  <div  style={{display: this.state.company_id !==undefined? "block":"none"}}>
                     <a href="/post-job"><div className="headerJob">
                       <i className="fa fa-user"></i>Post Job 
                     </div></a>
@@ -185,14 +186,14 @@ class Header extends Component{
                     <FontAwesomeIcon icon="setting" />
                     <span className="notificationMessegeText">Employer Settings</span>
                   </div></a>
-                  <a href={this.state.company_id !==null?"/job-list":"#"}>
-                    <div className="notificationMessege col-lg-12" onClick={this.modalPopUp.bind(this)}>
+                  <a href={this.state.company_id !==undefined?"/job-list":"#"}>
+                    <div className="notificationMessege col-lg-12" onClick={this.state.company_id == undefined ? this.modalPopUp.bind(this) : null}>
                       <FontAwesomeIcon icon="briefcase" />
                       <span className="notificationMessegeText">Posted Jobs</span>
                     </div>
                   </a>
-                  <a href={this.state.company_id !==null?"/candidate-list":"#"}>
-                    <div className="notificationMessege col-lg-12" onClick={this.modalPopUp.bind(this)}>
+                  <a href={this.state.company_id !==undefined?"/candidate-list":"#"}>
+                    <div className="notificationMessege col-lg-12" onClick={this.state.company_id == undefined ? this.modalPopUp.bind(this) : null}>
                       <FontAwesomeIcon icon="users" />
                       <span className="notificationMessegeText">Search Candidates</span>
                     </div>

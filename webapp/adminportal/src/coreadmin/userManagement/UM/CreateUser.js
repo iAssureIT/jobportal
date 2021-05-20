@@ -18,7 +18,7 @@ const formValid = formerrors => {
   return valid;
 }
 
-const nameRegex = RegExp(/^[A-za-z']+( [A-Za-z']+)*$/);
+const nameRegex = RegExp(/^[a-zA-Z]+$/);
 const mobileRegex = RegExp(/^[0-9][0-9]{9}$/);
 const emailRegex = RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
 class CreateUser extends Component {
@@ -230,11 +230,11 @@ class CreateUser extends Component {
       rules: {
         firstname: {
           required: true,
-          regxA1: /^[A-Za-z][A-Za-z0-9\-\s]/,
+          regxA1: /^[a-zA-Z]+$/,
         },
         lastname: {
           required: true,
-          regxA2: /^[A-Za-z][A-Za-z0-9\-\s]/,
+          regxA2: /^[a-zA-Z]+$/,
         },
         signupEmail: {
           required: true,
