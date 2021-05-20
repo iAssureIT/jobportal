@@ -109,7 +109,7 @@ export default class PreviewModal extends Component{
                                                       {this.props.jobInfo.minPrimExp}
                                                     </span>
                                                   </li>
-                                                  <p className="skillsList col-lg-5">
+                                                  <p className="modalSkillsList col-lg-5">
                                                     {
                                                       this.props.jobInfo.primarySkillTags.map((skill,index)=>{
                                                         return (
@@ -123,7 +123,7 @@ export default class PreviewModal extends Component{
                                             </div>
                                           </div>
                                         </div>
-                                        <div>
+                                        
                                           <div className="row">
                                             <div className="profileContent">
                                               <div className="row">
@@ -142,7 +142,7 @@ export default class PreviewModal extends Component{
                                                         {this.props.jobInfo.minSecExp}
                                                       </span>
                                                     </li>
-                                                    <p className="skillsList col-lg-5">
+                                                    <p className="modalSkillsList col-lg-5">
                                                       {
                                                         this.props.jobInfo.secondarySkillTags.map((skill,index)=>{
                                                           return (
@@ -156,8 +156,7 @@ export default class PreviewModal extends Component{
                                               </div>  
                                             </div>
                                           </div>    
-                                        </div>
-                                        <div>
+                                        
                                           <div className="row">
                                             <div className="profileContent">
                                               <div className="row">
@@ -176,7 +175,7 @@ export default class PreviewModal extends Component{
                                                         {this.props.jobInfo.minOtherExp}
                                                       </span>
                                                     </li>
-                                                    <p className="skillsList col-lg-6">
+                                                    <p className="modalSkillsList col-lg-6">
                                                       {
                                                         this.props.jobInfo.otherSkillTags.map((skill,index)=>{
                                                           return(
@@ -190,8 +189,8 @@ export default class PreviewModal extends Component{
                                               </div>
                                             </div>
                                           </div>
-                                        </div>
-                                        <div>
+                                        
+
                                           <div className="row">
                                             <div className="profileContent1">
                                               <div className="row">
@@ -207,7 +206,7 @@ export default class PreviewModal extends Component{
                                                       </span><br/>
                                                       <span className="skillDuration"></span>
                                                     </li>
-                                                    <p className="skillsList col-lg-5">
+                                                    <p className="modalSkillsList col-lg-6">
                                                       {
                                                         this.props.jobInfo.preferredSkillTags.map((skill,index)=>{
                                                           return(
@@ -221,7 +220,6 @@ export default class PreviewModal extends Component{
                                               </div>
                                             </div>
                                           </div>
-                                        </div>
                                       </div>
                                     </div>
                                   </div>
