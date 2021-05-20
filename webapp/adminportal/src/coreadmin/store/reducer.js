@@ -77,8 +77,11 @@ const reducer = (state = initialState, action) => {
 	if(action.type === "SET_APPLIED_CANDIDATE_FILTER_SELECTOR"){
 		newState.appliedCandidateSelector 	= action.appliedCandidateSelector;
 	}
-	if(action.type === "GET_JOB_LIST"){
-		newState.jobList = state.jobList.concat(action.jobList);
+	if(action.type === "GET_JOB_LIST"){ 
+		newState.jobList = action.jobList ;
+	}
+	if(action.type === "APPEND_JOB_LIST"){
+		newState.jobList = state.jobList.concat(action.jobList) ;
 	}
 	if(action.type === "GET_APPLICANTS_COUNT"){
 		newState.applicantsCountList = action.applicantsCountList;

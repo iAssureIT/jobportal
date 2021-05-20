@@ -52,7 +52,10 @@ export const getJobList = (jobList )=> ({
       type          : 'GET_JOB_LIST',
       jobList       : jobList
 });
-
+export const appendJobList = (jobList )=> ({  
+      type           : 'APPEND_JOB_LIST', 
+      jobList        : jobList
+});
 export const getTotalApplicantsCountList = (totalApplicantsCountList )=> ({ 
       type                        : 'GET_TOTAL_APPLICANTS_COUNT',
       totalApplicantsCountList    : totalApplicantsCountList
@@ -130,7 +133,11 @@ export function filterJobList(selector) {
       return axios.post("/api/jobs/list",selector)
       .then((response)=>{
           dispatch(showLoader(false));
-          dispatch(getJobList(response.data));
+          if (selector.startLimit == 0) {
+            dispatch(getJobList(response.data));
+          }else{
+            dispatch(appendJobList(response.data));
+          }
       })
       .catch((error)=>{
           if(error.message === "Request failed with status code 401"){
