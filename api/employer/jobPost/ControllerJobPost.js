@@ -399,7 +399,7 @@ exports.getJobList = (req, res, next) => {
     selector['$and'] = [];
 
     selector["$and"].push({
-        "status": "active"
+        "status": req.body.status ? req.body.status : "active"
     })
 
     selector["$and"].push({

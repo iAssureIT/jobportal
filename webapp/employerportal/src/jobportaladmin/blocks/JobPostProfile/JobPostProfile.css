@@ -375,7 +375,6 @@
 }
 
 .skillsHeadTwo{
-	margin-top: 28px;
 	margin-left: 6px;
 	font-weight: 600;
 	/*background-color: gray;*/
@@ -405,7 +404,6 @@
 
 .skillsHeadThree{
 	margin-left: 6px;
-	margin-top: 28px;
 	font-weight: 600;
 	/*background-color: red;*/
 }
@@ -434,7 +432,7 @@
 
 .skillsHeadFour{
 	margin-left: 6px;
-	margin-top: 28px;
+	margin-top: -5px;
 	/*font-family: 'Montserrat-SemiBold';*/
 	font-weight: 600;
 	/*background-color: red;*/
@@ -451,8 +449,8 @@
 
 .skillsList{
 	/*background-color: brown;*/
-	margin-top: 22px;
-	position: absolute;
+	margin-top: -60px;
+	/*position: absolute;*/
 	/*font-family: 'Montserrat-Regular';*/
 	font-weight: 400;
 }

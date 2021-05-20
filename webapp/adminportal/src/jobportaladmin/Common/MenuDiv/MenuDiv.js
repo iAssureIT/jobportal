@@ -10,7 +10,7 @@ export default class MenuDiv extends Component {
       console.log("window",window);
   	}
 
-    render(){
+    render(){ 
       return(
            <div className="adminBar nav-center OnboardingTabs OnboardingTabs2 col-lg-10 col-lg-offset-1 ">
               <div className="row">

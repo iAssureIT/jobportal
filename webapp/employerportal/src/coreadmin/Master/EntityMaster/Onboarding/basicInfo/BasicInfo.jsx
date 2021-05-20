@@ -7,7 +7,6 @@ import S3FileUpload from 'react-s3';
 import PhoneInput from 'react-phone-input-2';
 import { withRouter } from 'react-router-dom';
 //import BulkUpload from "../../../BulkUpload/BulkUpload.js";
-import Autosuggest from 'react-autosuggest';
 
 import 'bootstrap/js/tab.js';
 import '../css/SupplierOnboardingForm.css';
@@ -74,21 +73,72 @@ class BasicInfo extends Component {
   }
   componentDidMount() {
 
+    const userDetails = JSON.parse(localStorage.getItem("userDetails"));
+    const token = userDetails.token;
+    axios.defaults.headers.common['Authorization'] = 'Bearer '+ token;
     this.edit();
+
     axios.get('/api/industrymaster/get/list')
       .then((response) => {
         
-        var industryArray = [];
-        response.data.map((value,ind)=>{
-          industryArray.push({_id: value._id, label : value.industry})
-        })
+        this.setState({ industryArray : response.data })
 
-        this.setState({ industryArray : industryArray })
+        axios.get('/api/entitymaster/getEntity/' + this.props.userDetails.company_id)
+        .then((response) => {
+
+          var industry = this.state.industryArray.filter((industry)=>{
+            //console.log(industry._id)
+            return industry._id  == response.data.industry_id
+          })
+          console.log("industry", industry)
+          //console.log("response", response.data)
+          
+          this.setState({
+            "entityID": this.props.userDetails.company_id,
+            "entityType": response.data.entityType,
+            "companyName": response.data.companyName,
+            "groupName": response.data.groupName,
+            "website": response.data.website,
+            "companyPhone": response.data.companyPhone,
+            "companyEmail": response.data.companyEmail,
+            "CIN": response.data.CIN,
+            "COI": response.data.COI,
+            "TAN": response.data.TAN,
+            "companyLogo": response.data.companyLogo,
+            "country": response.data.country,
+            "countryCode": response.data.countryCode,
+            "statutoryDetails": response.data.statutoryDetails,
+            "value": industry[0] ? industry[0].label : "",
+            "industry_id": industry[0] ? industry[0]._id : "",
+            "industry": industry[0] ? industry[0].industry : "",
+            //suggestions: industry[0] ? this.getSuggestions(industry[0].label) : [] ,
+            "userID": response.data.ID,
+            "createdBy": localStorage.getItem("user_ID")
+          })
+
+          //console.log(".............................",response.data.entityType);
+        })
+        // .catch((error) => {
+        // })
       })
       .catch((error) => {
+        if(error.message === "Request failed with status code 401"){
+          var userDetails =  localStorage.removeItem("userDetails");
+          localStorage.clear();
+          Swal.fire({title  : ' ',
+                    html    : "Your session is expired! You need to login again. "+"<br>"+" Click OK to go to Login Page",
+                    text    :  "" })
+              .then(okay => {
+                if (okay) {
+                  window.location.href = "/login";
+                }
+              });
+        }else{
+            Swal.fire("", "Error while getting industry data", "");
+        }
       })
-    axios.defaults.headers.common['Authorization'] = 'Bearer '+ localStorage.getItem("token");
-    //console.log(this.props.userDetails.company_id)
+
+    
     if (this.props.userDetails.company_id) {
       this.setState({
       entityID: this.props.userDetails.company_id
@@ -212,43 +262,8 @@ class BasicInfo extends Component {
       }
     });
 
-    axios.get('/api/entitymaster/getEntity/' + this.props.userDetails.company_id)
-        .then((response) => {
-
-          var industry = this.state.industryArray.filter((industry)=>{
-            //console.log(industry._id)
-            return industry._id  == response.data.industry_id
-          })
-          console.log("industry", industry)
-          //console.log("response", response.data)
-          
-          this.setState({
-            "entityID": this.props.userDetails.company_id,
-            "entityType": response.data.entityType,
-            "companyName": response.data.companyName,
-            "groupName": response.data.groupName,
-            "website": response.data.website,
-            "companyPhone": response.data.companyPhone,
-            "companyEmail": response.data.companyEmail,
-            "CIN": response.data.CIN,
-            "COI": response.data.COI,
-            "TAN": response.data.TAN,
-            "companyLogo": response.data.companyLogo,
-            "country": response.data.country,
-            "countryCode": response.data.countryCode,
-            "statutoryDetails": response.data.statutoryDetails,
-            "value": industry[0] ? industry[0].label : "",
-            "industry_id": industry[0] ? industry[0]._id : "",
-            suggestions: industry[0] ? this.getSuggestions(industry[0].label) : [] ,
-            "userID": response.data.ID,
-            "createdBy": localStorage.getItem("user_ID")
-          })
-
-          //console.log(".............................",response.data.entityType);
-        })
-        // .catch((error) => {
-        // })
-        this.getCountryConfigDetails()
+    
+    this.getCountryConfigDetails()
       
   }
   
@@ -330,14 +345,14 @@ class BasicInfo extends Component {
         
         axios.patch('/api/entitymaster/patch', formValues)
           .then((response) => {
-            
+            console.log(response)
             Swal.fire({
               title :'',
               html  :(this.state.pathname === "appCompany" ? "Organzational Settings" : this.state.pathname ) + " updated successfully.",
               text  :''
           });
-            $(".swal-text").css("text-transform", "capitalize");
-            $(".swal-text").css("font-family", "sans-serif");
+            //$(".swal-text").css("text-transform", "capitalize");
+            //$(".swal-text").css("font-family", "sans-serif");
             this.props.history.push('/' + this.state.pathname + '/statutory-details/' + this.props.userDetails.company_id)
           })
           .catch((error) => {
@@ -769,62 +784,19 @@ class BasicInfo extends Component {
     .catch((error) => {
       })
   }
-  escapeRegexCharacters(str) {
-    return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-  }
-
-  getSuggestions(value) {
-    const escapedValue = this.escapeRegexCharacters(value.trim());
-   
-    if (escapedValue === '') {
-      return [];
-    }
-
-    const regex = new RegExp('^' + escapedValue, 'i');
-
-    return this.state.industryArray.filter(industry => regex.test(industry.label));
-  }
-
-  getSuggestionValue(suggestion) {
-    return suggestion.label;
-  }
-
-  renderSuggestion(suggestion) {
-    return (
-      <span className="Autosuggestlist">{suggestion.label}</span>
-    );
-  }
-
-  onChange = (event, { newValue , method}) => {
-    if (method="type") {
-      this.setState({ value: newValue, industry : newValue})
+  onChangeIndustry(event){
+      const {name,value} = event.target;
+      this.setState({ [name]:value });  
       
-    }else{
-      this.setState({
-        value: newValue, industry_id :""
-      });
-    }
-  };
- 
-  // Autosuggest will call this function every time you need to update suggestions.
-  // You already implemented this logic above, so just use it.
-  onSuggestionsFetchRequested = ({ value }) => {
-    this.setState({
-      suggestions: this.getSuggestions(value)
-    });
-  };
- 
-  // Autosuggest will call this function every time you need to clear suggestions.
-  onSuggestionsClearRequested = () => {
-    this.setState({
-      suggestions: []
-    });
-  };
-  onSuggestionSelected=(event, { suggestion, suggestionValue, suggestionIndex, sectionIndex, method }) => { 
-    //console.log("suggestion",suggestion)
-    
-    this.setState({industry_id : suggestion._id, industry : suggestionValue})
-  };
+      var industry_id;
+      if (document.querySelector('#industry option[value="' + value + '"]')) {
+          industry_id = document.querySelector('#industry option[value="' + value + '"]').getAttribute("data-value")
+      }else{ industry_id = "" }
+
+      this.setState({ industry_id : industry_id },()=>{
+          //console.log(this.state)
+      });  
+  }
 
   render() {
     const { value, suggestions } = this.state;
@@ -948,15 +920,14 @@ class BasicInfo extends Component {
                             <div className="row">
                                 <div className="col-lg-4 col-md-3 col-sm-12 col-xs-12">
                                   <label className="labelform col-lg-12 col-md-12 col-sm-12 col-xs-12 NOpadding-left">Industry<i className="astrick">*</i></label>
-                                  <Autosuggest 
-                                  suggestions={suggestions}
-                                  onSuggestionsFetchRequested={this.onSuggestionsFetchRequested.bind(this)}
-                                  onSuggestionsClearRequested={this.onSuggestionsClearRequested.bind(this)}
-                                  getSuggestionValue={this.getSuggestionValue.bind(this)}
-                                  renderSuggestion={this.renderSuggestion.bind(this)}
-                                  onSuggestionSelected={this.onSuggestionSelected.bind(this)}
-                                  inputProps={inputProps}
-                                />
+                                  <input type="text" list="industry" className="form-control addJobFormField addJobBorderRadius" refs="industry" 
+                                    name="industry" id="selectIndustry" maxLength="100" value={this.state.industry} data-value={this.state.industry_id}
+                                    onChange={this.onChangeIndustry.bind(this)} />
+                                    <datalist name="industry" id="industry" className="industryArray" >
+                                        {this.state.industryArray.map((item, key) =>
+                                            <option key={key} value={item.industry} data-value={item._id}/>
+                                        )}
+                                    </datalist>
                                 </div>
                                 <div className="col-lg-4 col-md-3 col-sm-12 col-xs-12">
                                   <label className="labelform col-lg-12 col-md-12 col-sm-12 col-xs-12 NOpadding-left">Email<i className="astrick">*</i></label>
@@ -1155,4 +1126,4 @@ const mapStateToProps = (state)=>{
 const mapDispatchToProps = (dispatch) => ({
   mapAction :  bindActionCreators(mapActionCreator, dispatch)
 })
-export default connect(mapStateToProps, mapDispatchToProps)(BasicInfo)
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(BasicInfo))

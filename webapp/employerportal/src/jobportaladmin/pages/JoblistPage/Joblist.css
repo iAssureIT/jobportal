@@ -593,34 +593,6 @@ color: #fff;
   padding-top: 30px;
 }
 
-.swal2-content{
-  font-size: 16px;
-  font-weight: 400;
-}
-
-.swal2-actions{
-    margin-bottom: 60px;
-}
-
-.swal2-close{
-  color: #333;
-  font-weight: 100;
-  font-size: 15px;
-  background-color: #fff;
-  border-radius: 2px;
-  height: 15px;
-  width: 15px;
-  margin-top: 9px;
-  margin-right: 9px;
-}
-
-.swal2-close:hover{
-  color: #000 !important;
-  background-color: #E6E7EB;
-}*/
-
-/************************************************************************************************************************************/
-
 /************************************************************Media Query*************************************************************/
 
 @media  screen and (max-width: 2880px) {
