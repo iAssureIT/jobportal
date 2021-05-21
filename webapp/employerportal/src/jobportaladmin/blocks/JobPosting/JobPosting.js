@@ -1837,6 +1837,7 @@ render(){
 													        handleAddition   =   {this.onprimarySkillAddition.bind(this)}
 													        handleDrag       =   {this.onprimarySkillDrag.bind(this)}
           													handleTagClick   =   {this.onprimarySkillClick.bind(this)}
+                                                            maxLength        =   "42"
                                                         />
 												</div>
 											</div>
@@ -1864,6 +1865,7 @@ render(){
                                                             handleAddition  =    {this.onsecondarySkillAddition.bind(this)}
                                                             handleDrag      =    {this.onsecondarySkillDrag.bind(this)}
                                                             handleTagClick  =    {this.onsecondarySkillClick.bind(this)}
+                                                            maxLength        =   "42"
                                                         />
 												</div>
 											</div>
@@ -1891,6 +1893,7 @@ render(){
                                                             handleAddition  =   {this.onOtherSkillAddition.bind(this)}
                                                             handleDrag      =   {this.onOtherSkillDrag.bind(this)}
                                                             handleTagClick  =   {this.onOtherSkillClick.bind(this)}
+                                                            maxLength        =   "42"
                                                         />
 												</div>
 											</div>
@@ -1917,6 +1920,7 @@ render(){
                                                     handleAddition  =   {this.onPreferredAddition.bind(this)}
                                                     handleDrag      =   {this.onPreferredDrag.bind(this)}
                                                     handleTagClick  =   {this.onPreferredClick.bind(this)}
+                                                    maxLength        =   "42"
                                                 />
 										</div>
 									</div>
