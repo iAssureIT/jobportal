@@ -10,12 +10,15 @@ class MenuDiv extends Component {
     super(props);
        this.state = {
         location    : window.location.pathname,
+        candidate_id : this.props.match.params.candidate_id ? this.props.match.params.candidate_id : this.props.insertedCandidate_id
       }
       console.log("window",window);
   	}
 
     render(){ 
       console.log(this.props.insertedCandidate_id)
+      console.log("propssss",this.props.match.params.candidate_id)
+console.log("state",this.state.candidate_id)
       return(
            <div className="adminBar nav-center OnboardingTabs OnboardingTabs2 col-lg-10 col-lg-offset-1 ">
               <div className="row">
@@ -40,7 +43,7 @@ class MenuDiv extends Component {
                                    "active col-lg-2  transactionTab pdcls pdclsOne btn2 "
                                   :" col-lg-2 transactionTab pdcls pdclsOne btn2 "}>
                         <div className="triangletwo" id="triangle-right1"></div>
-                        <a href="/candidate/address" className={this.state.location==("/candidate/address")?"basic-info-pillss pills":"active2 basic-info-pillss backcolor"}>
+                        <a href="/candidate/address/:candidate_id" className={this.state.location==("/candidate/address")?"basic-info-pillss pills":"active2 basic-info-pillss backcolor"}>
                           
                           Address
                         </a>
