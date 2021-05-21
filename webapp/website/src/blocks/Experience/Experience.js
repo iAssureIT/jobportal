@@ -667,46 +667,49 @@ class Experience extends Component {
   calExperience(name,value) {
     var name = name;
     var value = value;
-    console.log("name",name)
     var toDate ="";
     var fromDate ="";
     if(name==="toDate"){
-      // toDate = this.state.toDate === "" ? value : Moment(this.state.toDate);
-     
-            toDate = Moment(value);
-     
-      
+        toDate = Moment(value);
+        this.setState({
+          currentlyWorkingHere: "No"
+        });
     }else{
         toDate = Moment(this.state.toDate)
     }
     if(name==="fromDate"){
-        //  fromDate =
-        //  this.state.fromDate === ""
-        // ? value
-        // : Moment(this.state.fromDate);
-       
-            fromDate = Moment(value);
-           
-    
+          fromDate = Moment(value);
     }else{
         fromDate = Moment(this.state.fromDate)
     }
+    if(name==="Yes"){
+        toDate= Moment(new Date());
+        this.setState({
+          toDate: Moment(new Date()).format("YYYY-MM"),
+          currentlyWorkingHere: "Yes"
+        });
+    }
+    if(name==="No"){
+        toDate=Moment("");
+        this.setState({
+          toDate: "",
+          currentlyWorkingHere: "No"
+        });
+    }
    
-    console.log("toDate",toDate);
-    console.log("fromDate",fromDate);
-    if( fromDate&& toDate){
+
+    if( fromDate!==""&& toDate!==""){
       var exp = Moment.duration(toDate.diff(fromDate));
 
     var Years = exp.years();
     var Months = exp.months();
-
     this.setState({
       expYears: Years,
       expMonths: Months,
     });
     
     
-  }
+   }
 }
 
   handleBack(event) {
@@ -796,15 +799,8 @@ class Experience extends Component {
   handleChangeCheckbox(event) {
     event.preventDefault();
     var id = event.currentTarget.id;
-    if (id === "Yes") {
-      this.setState({
-        toDate: Moment(new Date()).format("YYYY-MM"),
-        currentlyWorkingHere: "Yes",
-      });
-    } else {
-      this.setState({ toDate: "", currentlyWorkingHere: "No" });
-    }
-    
+    var name = event.currentTarget.name;
+    this.calExperience(id);
   }
   handleChangeFresher(event){
     event.preventDefault();

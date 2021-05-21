@@ -636,12 +636,14 @@ class BasicInfoForm extends Component{
 			document.getElementById("mobileError").innerHTML = ""; 
 		}
 
-		if(this.state.alternate.length>2){
+		if(this.state.alternate.length>3){
 			
-			if (!mobileFilter.test(this.state.alternate)) { //test email for illegal characters
+			if (!mobileFilter.test(this.state.alternate)) {
+			 status=false;  //test email for illegal characters
 	        	document.getElementById('alternateError').innerHTML = "Please enter a valid alternate mobile number.";
-	        	 status=false; 
+	        	
 		    }else{
+		    	 status=true; 
 				document.getElementById("alternateError").innerHTML = ""; 
 			}
 		}
