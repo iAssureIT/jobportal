@@ -50,7 +50,7 @@ class Experience extends Component {
       expMonths: 0,
       relevantExperience: "",
       totalExperience: 0,
-      working: "experienced",
+      working: "fresher",
       profileCompletion: 0,
       experienceLevel  : "" 
     };

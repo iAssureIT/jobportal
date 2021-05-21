@@ -28,7 +28,7 @@
         border-left: 26px solid var(--waikawagrey-background) !important;
 }
 .vendorpills>li.active #triangle-right{
-    border-left: 26px solid #3c8dbc !important;
+    border-left: 26px solid #337ab7 !important;
 }
 .active2{
     background-color: #ebebeb;
@@ -38,6 +38,12 @@
 }
 
 
-.adminBar .nav>li.active2>a:hover+#triangle-right {
+.adminBar .nav>li.active2 .a:hover+#triangle-right {
      border-left: 26px solid #ddd!important;
+}
+.vendorpills>li.active>a{
+    background-color: #337ab7 !important;
+}
+.active2:hover + #triangle-right:hover{
+        border-left: 26px solid #ddd;
 }

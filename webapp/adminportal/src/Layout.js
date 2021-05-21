@@ -130,10 +130,14 @@ class Layout extends Component  {
                                                         <Route path="/candidate/basic-info/:candidate_id" exact strict component={CandidateBasicInfo} />
                                                         
                                                         <Route path="/candidate/address/:candidate_id" exact strict component={CandidateAddress} />
+                                                        <Route path="/candidate/address" exact strict component={CandidateAddress} />
                                                         <Route path="/candidate/academics/:candidate_id" exact strict component={CandidateAcademics} />
+                                                        <Route path="/candidate/academics" exact strict component={CandidateAcademics} />
                                                 
                                                         <Route path="/candidate/experience/:candidate_id" exact strict component={CandidateExperience} />
+                                                        <Route path="/candidate/experience" exact strict component={CandidateExperience} />
                                                         <Route path="/candidate/certification/:candidate_id" exact strict component={CandidateCertification} />
+                                                        <Route path="/candidate/certification" exact strict component={CandidateCertification} />
 
 
                                                         <Route path="/package-master" exact strict component={PackageMaster} />
