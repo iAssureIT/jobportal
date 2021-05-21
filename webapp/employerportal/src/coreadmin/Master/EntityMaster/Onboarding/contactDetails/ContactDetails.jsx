@@ -1005,77 +1005,99 @@ class ContactDetails extends Component {
 			entityID: entityID,
 			location_ID: locationID
 		}
-		axios.delete('/api/entitymaster/deleteContact/' + entityID + "/delete/" + locationID, formValues)
-			.then((response) => {
 
-				this.setState({
-					'openForm'			: false,
-					'contactID' 		: '',
-					'firstName'         : '',
-					'lastName'          : '',
-					'phone'             : '',
-					'altPhone'          : '',
-					'email'             : '',
-					'createUser' 		: false,
-					'employeeID'        : '',
-					'role'				: '',
-					'branchCode'        		: '',
-					'department'        		: '',
-					'designation'       		: '',
-					
-				})
-				axios.get('/api/personmaster/get/emailID/' + email)
-					.then((response) => {
-						this.setState({
-							personID: response.data.data[0]._id,
-							userId: response.data.data[0].userId,
-							username: response.data.data[0].firstName + " " + response.data.data[0].lastName
+		Swal.fire({
+		title 				: ' ',
+		html				: 'Are you sure<br />you want to delete this contact?',
+		text 				: '',
+		icon 				: 'warning',
+		showCloseButton		: true,
+		showCancelButton 	: true,
+		confirmButtonText 	: 'YES',
+		cancelButtonText 	: 'NO',
+		confirmButtonColor 	: '#f5a721',
+		reverseButtons		: true
+	
+	}).then((result) =>{	if(result.value){
+								axios.delete('/api/entitymaster/deleteContact/' + entityID + "/delete/" + locationID, formValues)
+									.then((response) => {
+															/*console.log("Inside First then");*/
+															this.setState({
+																'openForm'			: false,
+																'contactID' 		: '',
+																'firstName'         : '',
+																'lastName'          : '',
+																'phone'             : '',
+																'altPhone'          : '',
+																'email'             : '',
+																'createUser' 		: false,
+																'employeeID'        : '',
+																'role'				: '',
+																'branchCode'        : '',
+																'department'        : '',
+																'designation'       : '',	
+														})
+													/*axios.get('/api/personmaster/get/emailID/' + email)
+														.then((response) => {
+															console.log("Inside Second then");
+															this.setState({
+																personID: response.data.data[0]._id,
+																userId: response.data.data[0].userId,
+																username: response.data.data[0].firstName + " " + response.data.data[0].lastName
 
-						},()=>{
-							axios.delete("/api/personmaster/delete/"+this.state.personID)
-					            .then((response)=>{
-					            	/*var formValues = {
-										selectedUser: this.state.userId,
-										status: 'deleted',
-										username: this.state.username,
-									}*/
-									var id = this.state.userId;
-									const token = '';
-									const url = '/api/users/delete/' + id;
-									const headers = {
-										"Authorization": token,
-										"Content-Type": "application/json",
-									};
-									axios({
-										method: "DELETE",
-										url: url,
-										headers: headers,
-										timeout: 3000,
-										data: null,
+															},()=>{
+																axios.delete("/api/personmaster/delete/"+this.state.personID)
+														            .then((response)=>{
+														            	console.log("Inside third then");
+																		var id = this.state.userId;
+																		const token = '';
+																		const url = '/api/users/delete/' + id;
+																		const headers = {
+																			"Authorization": token,
+																			"Content-Type": "application/json",
+																		};
+																		axios({
+																			method: "DELETE",
+																			url: url,
+																			headers: headers,
+																			timeout: 3000,
+																			data: null,
+																		})
+																			.then((response) => {
+																				console.log("Deleted permented")
+																				
+																			}).catch((error) => {
+																			});
+																				           		
+													            })
+
+															})
+														})
+														.catch((error) => {
+															
+														})
+										            .catch((error)=>{
+										            })
+													this.contactDetails();
+													this.getAllEntites();
+													this.props.history.push('/'+this.state.pathname+'/contact-details/' + entityID);
+													Swal.fire('', "Contact deleted successfully", '');
+												})*/
+
+												Swal.fire('', "Contact deleted successfully", '');
+												this.contactDetails();
 									})
-										.then((response) => {
-											console.log("Deleted permented")
-											
-										}).catch((error) => {
-										});
-											           		
-				            })
-
-						})
-					})
-					.catch((error) => {
-						
-					})
-	            .catch((error)=>{
-	            })
-				this.contactDetails();
-				this.getAllEntites();
-				this.props.history.push('/'+this.state.pathname+'/contact-details/' + entityID);
-				Swal.fire('', "Contact deleted successfully", '');
-			})
-			.catch((error) => {
-				
-			})
+									.catch((error) => {
+										
+									})
+							}else if (result.dismiss === Swal.DismissReason.cancel){
+										/*Swal.fire(
+											'',
+											'Your contact is safe',
+											''
+										)*/
+									}
+		})	
 	}
 	contactDetails() {
 		axios.get('/api/entitymaster/get/one/' + this.props.match.params.entityID)

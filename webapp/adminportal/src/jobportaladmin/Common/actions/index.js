@@ -1,6 +1,6 @@
 import axios from 'axios';
 import Swal         from 'sweetalert2';
-
+ 
 const userDetails = JSON.parse(localStorage.getItem("userDetails"));
 
 if (userDetails) {
@@ -218,3 +218,7 @@ export function filterCandidates(candidateSelector) {
       }) 
     }  
 }
+export const setInsertedCandidate_id = (insertedCandidate_id )=> ({ 
+      type                    : 'SET_INSERTED_CANDIDATEID',
+      insertedCandidate_id    : insertedCandidate_id
+});
