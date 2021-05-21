@@ -1,7 +1,11 @@
 import React, { Component } 		from 'react';
+import { connect }                  from 'react-redux';
+import { bindActionCreators }       from 'redux';
+import  * as mapActionCreator       from '../actions/index';
+import { withRouter }   from 'react-router-dom';
 import './MenuDiv.css';
 
-export default class MenuDiv extends Component {
+class MenuDiv extends Component {
 	constructor(props){
     super(props);
        this.state = {
@@ -11,6 +15,7 @@ export default class MenuDiv extends Component {
   	}
 
     render(){ 
+      console.log(this.props.insertedCandidate_id)
       return(
            <div className="adminBar nav-center OnboardingTabs OnboardingTabs2 col-lg-10 col-lg-offset-1 ">
               <div className="row">
@@ -35,7 +40,7 @@ export default class MenuDiv extends Component {
                                    "active col-lg-2  transactionTab pdcls pdclsOne btn2 "
                                   :" col-lg-2 transactionTab pdcls pdclsOne btn2 "}>
                         <div className="triangletwo" id="triangle-right1"></div>
-                        <a href="/candidate/address/:candidate_id" className={this.state.location==("/candidate/address/:candidate_id")?"basic-info-pillss pills":"active2 basic-info-pillss backcolor"}>
+                        <a href="/candidate/address" className={this.state.location==("/candidate/address")?"basic-info-pillss pills":"active2 basic-info-pillss backcolor"}>
                           
                           Address
                         </a>
@@ -100,4 +105,15 @@ export default class MenuDiv extends Component {
        
     }
 }
+const mapStateToProps = (state)=>{
+    return {
+        userDetails  : state.userDetails,
+        insertedCandidate_id : state.insertedCandidate_id
+    }
+}
+const mapDispatchToProps = (dispatch) => ({
+  mapAction :  bindActionCreators(mapActionCreator, dispatch)
+}) 
+export default connect(mapStateToProps,mapDispatchToProps) (withRouter(MenuDiv));
+
 

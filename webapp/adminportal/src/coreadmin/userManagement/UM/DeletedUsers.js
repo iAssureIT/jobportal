@@ -91,7 +91,7 @@ class DeletedUsers extends Component {
 						});
 						var tableData = tableData.map((a, i) => {
 							console.log('tableData A==>>>', a);
-							return {
+							return { 
 								_id: a._id,
 								fullName: '<div class="col-lg-12 col-md-12 col-sm-6 col-xs-6 pull-left"><b>' + a.fullName + '</b>' +
 									'<p><i class="fa fa-envelope"></i> ' + (a.email ? a.email :"-") + '&nbsp   &nbsp <br /><i class="fs16 fa fa-mobile"></i> ' + a.mobNumber + '</p>',
@@ -106,6 +106,7 @@ class DeletedUsers extends Component {
 								deletedBy: a.statusupdatedBy
 							}
 						})
+						console.log("deleted tableData",tableData)
 						this.setState({
 							completeDataCount: res.data.length,
 							tableData: tableData,

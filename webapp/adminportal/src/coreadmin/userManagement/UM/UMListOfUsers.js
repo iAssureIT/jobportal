@@ -134,6 +134,8 @@ class UMListOfUsers extends Component {
 						}
 
 					})
+
+					console.log("tableData",tableData)
 					this.setState({
 						completeDataCount: res.data.length,
 						tableData: tableData,

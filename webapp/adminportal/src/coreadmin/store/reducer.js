@@ -39,7 +39,8 @@ const initialState = {
 	appliedCandidateSelector 	: {},
 	appliedCandidateList 		: [],
 	candidateList 				: [],
-	applicantsCountList 		: []
+	applicantsCountList 		: [],
+	insertedCandidate_id 		: ""
 }
 
 const reducer = (state = initialState, action) => {
@@ -91,6 +92,9 @@ const reducer = (state = initialState, action) => {
 	}
 	if(action.type === "GET_APPLIED_CANDIDATE_LIST"){
 		newState.appliedCandidateList = action.appliedCandidateList;
+	}
+	if(action.type === "SET_INSERTED_CANDIDATEID"){
+		newState.insertedCandidate_id = action.insertedCandidate_id;
 	}
 	
 	return newState;

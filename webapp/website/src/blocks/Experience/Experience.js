@@ -262,7 +262,7 @@ class Experience extends Component {
         console.log("response.data.response.data",response.data)
         
         this.setState({
-          totalExperience : response.data.totalExperience,
+          //totalExperience : response.data.totalExperience,
           experienceArry: response.data.workExperience,
           profileCompletion: response.data.profileCompletion,
           experienceLevel : response.data.experienceLevel

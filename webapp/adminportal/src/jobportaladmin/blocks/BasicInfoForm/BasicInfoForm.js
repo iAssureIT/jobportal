@@ -554,8 +554,8 @@ class BasicInfoForm extends Component{
 													executiveSummary   : "",
 													passport           : "",
 													visa               : "",
-												})
-
+												}) 
+								mapAction.setInsertedCandidate_id(response.data.data._id);	
 								this.props.history.push("/candidate/address/"+response.data.data._id);
 									
 									
