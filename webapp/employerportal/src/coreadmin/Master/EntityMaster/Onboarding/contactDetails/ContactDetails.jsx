@@ -1008,7 +1008,7 @@ class ContactDetails extends Component {
 
 		Swal.fire({
 		title 				: ' ',
-		html				: 'Are you sure<br />you want to delete this job?',
+		html				: 'Are you sure<br />you want to delete this contact?',
 		text 				: '',
 		icon 				: 'warning',
 		showCloseButton		: true,
