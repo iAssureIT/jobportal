@@ -30,25 +30,23 @@ class Header extends Component{
     this.handleOpenModal  = this.handleOpenModal.bind(this);
     this.handleCloseModal = this.handleCloseModal.bind(this);
   }
-  componentDidMount(){
-    console.log("console.log(this.props.userDetails.user_id);",this.props.userDetails);
-  }
+
 
  sendOTP(event) {
 
-       console.log(this.props.userDetails.user_id);
+       
 
         var formValues = {
            userid : this.state.user_id,
 
         }
-            console.log(formValues+"mmllllllllllllllllllllll");
+         
 
             $('.fullpageloader').show();
             axios.patch('/api/auth/patch/setotpusingID', formValues)
             .then((response)=>{
               
-                console.log('sendOTP res===',response.data)
+               
                 if (response.data.message == "OTP_UPDATED") {
                     var sendData = {
                       "event"     : "Event1", //Event Name
@@ -216,7 +214,7 @@ class Header extends Component{
         axios.defaults.headers.common['Authorization'] = 'Bearer '+ token;
         axios.get("/api/candidatemaster/get/one/"+userDetails.candidate_id)
         .then(response=>{
-          console.log(response.data.profileCompletion)
+       
           this.setState({
               profileCompletion     : response.data.profileCompletion
           })
@@ -255,7 +253,7 @@ class Header extends Component{
                       }
                     });
               }else{
-                console.log(error)
+                
                 Swal.fire("", "Error while getting data", "");
               }
          })
@@ -310,7 +308,7 @@ class Header extends Component{
 
 
     render(){
-      console.log(this.props)
+     
     //console.log(window.location.pathname.split("/"))
     // console.log(window.location.pathname.split("/")[6])
     const selectedState = this.props.selectedState;
@@ -918,7 +916,7 @@ class Header extends Component{
 }
 
 const mapStateToProps = (state)=>{
-  //console.log(state)
+
     return {
         selectedState  : state.selectedState, selectedModal  : state.selectedModal,
         selector       : state.selector,

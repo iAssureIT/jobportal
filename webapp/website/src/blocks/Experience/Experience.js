@@ -52,7 +52,8 @@ class Experience extends Component {
       totalExperience: 0,
       working: "fresher",
       profileCompletion: 0,
-      experienceLevel  : "" 
+      experienceLevel  : "" ,
+      totalExperience2 :0
     };
     this.camelCase = this.camelCase.bind(this);
     this.handleChangeState = this.handleChangeState.bind(this);
@@ -183,7 +184,7 @@ class Experience extends Component {
       Axios.post("/api/candidatemaster/post/getOneCandidateExperience", idDate)
         .then((response) => {
           var editData = response.data;
-          console.log("editdsta",response.data)
+    
           this.setState({
             industry_id: editData[0].workExperience[0].industry_id,
             industry: editData[0].workExperience[0].industry_id.industry,
@@ -258,11 +259,9 @@ class Experience extends Component {
     var {mapAction} = this.props;
     Axios.get("/api/candidatemaster/get/one/" + this.state.candidate_id)
       .then((response) => {
-
-        console.log("response.data.response.data",response.data)
         
         this.setState({
-          //totalExperience : response.data.totalExperience,
+          totalExperience2 : response.data.totalExperience,
           experienceArry: response.data.workExperience,
           profileCompletion: response.data.profileCompletion,
           experienceLevel : response.data.experienceLevel
@@ -327,7 +326,6 @@ class Experience extends Component {
     }).then((result) => {
       if (result.value) {
         if (data_id) {
-           console.log(" this.state.profileCompletion",this.state.profileCompletion)
           var profileCompletion = this.state.profileCompletion
           if (this.state.experienceArry.length == 1) {
             profileCompletion = profileCompletion - 20;
@@ -410,9 +408,7 @@ class Experience extends Component {
     var status = this.validateForm();
     if (status === true) {
       var profileCompletion = this.state.profileCompletion
-      console.log(!this.state.experienceArry.length)
-      console.log(this.state.experienceLevel)
-      console.log(!this.state.experienceArry.length && (this.state.experienceLevel == "" || this.state.experienceLevel == "fresher" ))
+    
 
       if (!this.state.experienceArry.length && this.state.profileCompletion != 100 && (this.state.experienceLevel == "" || this.state.experienceLevel == "fresher" )) {
         profileCompletion = profileCompletion + 20;
@@ -451,7 +447,7 @@ class Experience extends Component {
         working: "experienced",
       };
     }
-    console.log("formValuesExp",formValues)
+
     if (this.props.match.params.workExperienceID) {
       this.updateData(formValues, event);
     } else {
@@ -724,21 +720,19 @@ class Experience extends Component {
     event.preventDefault();
     var profileCompletion = this.state.profileCompletion;
     var {mapAction} = this.props;
-    console.log(this.state.totalExperience)
-    console.log(this.state.experienceLevel)
+  
 
     if (this.state.profileCompletion != 100 && (this.state.experienceLevel == "" || this.state.experienceLevel == "experienced")) {
       profileCompletion = profileCompletion + 20;
 
-      console.log(profileCompletion)
-      console.log(this.state.totalExperience)
+   
 
       var formValues =  {  
                           candidate_id      : this.state.candidate_id,
                           totalExperience   : this.state.totalExperience, 
                           profileCompletion : profileCompletion
                         }
-      console.log(formValues)                  
+                   
       Axios.patch("/api/candidatemaster/patch/updateCandidateTotalExperience",formValues)
            .then(response=>{
               this.getData();
@@ -950,7 +944,6 @@ class Experience extends Component {
 
   //========== Validation End ==================
   render() {
-    console.log(!this.state.workExperienceID)
     return (
       <div className="col-lg-12">
         <form>
@@ -1551,7 +1544,7 @@ class Experience extends Component {
                                         {elem.department}
                                       </div>
                                       <div className="AddressBoxText">
-                                        Total Experience : {this.state.totalExperience}
+                                        Total Experience : {this.state.totalExperience2}
                                       </div>
                                       <div className="AddressBoxText">
                                         {elem.company_id.companyName}

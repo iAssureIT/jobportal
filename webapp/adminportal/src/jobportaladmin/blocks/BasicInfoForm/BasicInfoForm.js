@@ -59,7 +59,7 @@ class BasicInfoForm extends Component{
 		
 	}
 	componentDidMount(){
-		console.log("userDetails",this.props.match.params.candidate_id)
+		
 		const userDetails = JSON.parse(localStorage.getItem("userDetails"));
 	    const token = userDetails.token;
 	    Axios.defaults.headers.common['Authorization'] = 'Bearer '+ token;
@@ -94,14 +94,12 @@ class BasicInfoForm extends Component{
 
 		Axios.get("/api/candidatemaster/get/one/"+this.state.candidate_id)
 		.then(response=>{
-			 console.log("response.data",this.state.candidate_id);
-			 console.log("response.data",response.data);
-
+			 
 			 	var languagesTags = [];
 			 	if (response.data.languagesKnown) {
 
 			 		response.data.languagesKnown.map((data,ind)=>{
-			 			console.log(data)
+			 			
                     	languagesTags.push({ id : data.language_id._id, text : data.language_id.language })
                 	})
 			 	}
@@ -159,7 +157,7 @@ class BasicInfoForm extends Component{
 		this.setState({
 			profileImageUrl : imgUrl
 		})
-		console.log("event.currentTarget.files ",this.state.profileImageUrl )
+		
 		var file = event.currentTarget.files[0];
 		if (file) {
           var fileName = file.name;
@@ -189,7 +187,6 @@ class BasicInfoForm extends Component{
         })
         main().then(formValues => {
          
-   		console.log(formValues)
           this.setState({
             profilePicture   : formValues[0].profilePicture,
             imageUploaded : false
@@ -279,7 +276,7 @@ class BasicInfoForm extends Component{
 	        
 	        main().then(formValues => {
 	         
-	   		console.log(formValues)
+	   		
 	          this.setState({
 	            resume   : formValues[0].resume,
 	          })
@@ -420,7 +417,7 @@ class BasicInfoForm extends Component{
   	}
 
     onLanguageClick(index) {
-        console.log('The tag at index ' + index + ' was clicked');
+        //console.log('The tag at index ' + index + ' was clicked');
     }
 
     onLanguageDrag(tag, currPos, newPos) {
@@ -464,16 +461,16 @@ class BasicInfoForm extends Component{
 								passport   		   : this.state.passport,
 								visa   		   	   : this.state.visa,
 							}
-							console.log(formValues);
+						
 			if(status==true){
 				if (this.props.match.params.candidate_id) {
-					console.log("update mai hu")
+					
 					Axios.patch("/api/candidatemaster/patch/updateCandidateBasicInfo",formValues)
 			 .then(response=>{
 			 	var userDetails = this.props.userDetails;
 				userDetails.gender = this.state.gender;
 				userDetails.profilePicture = this.state.profilePicture;
-				//console.log(userDetails)
+				
 				mapAction.setUserDetails(userDetails);
 
 						Swal.fire("Congrats","Your Basic details is update Successfully","success");
@@ -520,15 +517,14 @@ class BasicInfoForm extends Component{
 				});
 				}	
 				else{
-					console.log("insert mai hu")
+					
 					Axios.post("/api/candidatemaster/post",formValues)
 					.then(response=>{
-						console.log("response.data",response)
-						console.log("response.data._id",response.data._id)
+						
 							var userDetails = this.props.userDetails;
 							userDetails.gender = this.state.gender;
 							userDetails.profilePicture = this.state.profilePicture;
-							console.log("userDetails",userDetails)
+							
 							mapAction.setUserDetails(userDetails);
 
 								Swal.fire("Congrats","Your Basic details is insert Successfully","success");

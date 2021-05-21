@@ -218,7 +218,7 @@ class Certification extends Component{
     }
     confirmDelete(event){
     	event.preventDefault();
-    	console.log(this.state.tableData)
+   
     	var {mapAction} = this.props;
     	var candidate_id = this.props.match.params.candidate_id;
     	var skill_id = this.state.IdToDelete;
@@ -428,13 +428,13 @@ class Certification extends Component{
 			event.preventDefault();
 			var profileCompletion = this.state.profileCompletion
 
-			console.log(this.state.tableData)
+			
 			if (!this.state.tableData.length) {
 				profileCompletion = profileCompletion + 20;
 			}else{
 				profileCompletion = this.state.profileCompletion
 			}
-			console.log(profileCompletion)
+			
 			if(this.state.isPrimary===true){
 				
 				var formValues = {

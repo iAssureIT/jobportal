@@ -12,13 +12,11 @@ class MenuDiv extends Component {
         location    : this.props.match.path,
         candidate_id : this.props.match.params.candidate_id ? this.props.match.params.candidate_id : this.props.insertedCandidate_id
       }
-      console.log("window",window);
+      
   	}
 
     render(){ 
-      console.log(this.props.insertedCandidate_id)
-      console.log("propssss",this.props.match.params.candidate_id)
-console.log("location",this.state.location)
+   
       return(
            <div className="adminBar nav-center OnboardingTabs OnboardingTabs2 col-lg-10 col-lg-offset-1 ">
               <div className="row">

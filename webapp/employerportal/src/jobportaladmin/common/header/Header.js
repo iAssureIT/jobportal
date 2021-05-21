@@ -23,8 +23,6 @@ class Header extends Component{
     }
   }
   componentDidMount() {
-    console.log(".company_id",this.props.userDetails.company_id);
-    console.log("userDetails",this.props.userDetails);
     this.setState({userDetails : JSON.parse(localStorage.getItem("userDetails"))})
     
   }
@@ -94,7 +92,7 @@ class Header extends Component{
   render(){
     
     var hascompany_Id = localStorage.getItem("company_Id");
-    //console.log(hascompany_Id)
+  
     return(
 
         <div className="headerWrapper col-lg-12">

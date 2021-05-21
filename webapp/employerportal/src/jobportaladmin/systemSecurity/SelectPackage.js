@@ -38,7 +38,6 @@ constructor() {
 componentDidMount(){
     Axios.get("/api/packagemaster/get/list")
         .then(response=>{
-          console.log(response.data);
           this.setState({packagemasterArray : response.data});
         })
         .catch(error=>{
@@ -57,16 +56,14 @@ handleChange(event){
 }
 handleSelection(event){
     event.preventDefault();
-    console.log(event.currentTarget.getAttribute('data-id'))
+  
     this.setState({ package_id : event.currentTarget.getAttribute('data-id'),
                     price : event.currentTarget.getAttribute('data-price'),
                     validity : event.currentTarget.getAttribute('data-validity') })
 }
 subscribePackage(event){
     event.preventDefault();
-    console.log(this.props.selectedCompanyDetails)
-    console.log(this.props.user_id)
-    console.log(this.state.validity)
+    
     
     var startDate   = Moment(new Date()).format("YYYY-MM-DD")
     var endDate     = Moment(startDate, "YYYY-MM-DD").add('month', this.state.validity).format("YYYY-MM-DD")
@@ -86,7 +83,7 @@ subscribePackage(event){
       "amountPaid"        : 0,
       "user_id"           : this.props.user_id  
     } 
-    console.log(formValues)
+  
     // Axios.get('/api/packagesubscription/paymentOrderDetails/609590aaa50be16c70e5bb30')
     //         .then((orderdetails)=>{
     //             if(this.state.hide==="none"){
@@ -106,7 +103,7 @@ subscribePackage(event){
         this.setState({
           paymentDetails : response.data,
         })
-        console.log(response.data)
+        
         if (this.state.price > 0) {
             
             Axios.post('/api/packagesubscription/paymentOrderDetails/'+response.data._id)
@@ -135,7 +132,7 @@ subscribePackage(event){
     })
 }
 makePayment (subscription_id, amountPaid) { 
-    console.log("makePayment",subscription_id)
+  
     var formValues = { "subscription_id" : subscription_id , amountPaid: amountPaid}
     Axios.patch('/api/packagesubscription/payment-response', formValues)
             .then((orderdetails)=>{
@@ -163,7 +160,7 @@ render() {
                         this.state.packagemasterArray.length > 0
                      ?
                         this.state.packagemasterArray.map((elem,index)=>{
-                            //console.log("index",elem,index);
+                           
                         return(
                             <div className="col-lg-4" key={index} onClick={this.handleSelection.bind(this)} data-id={elem._id} data-price={elem.price} data-validity={elem.validity}>
                                 <div className="selectPackageWrapper">

@@ -689,7 +689,6 @@ exports.getOneCandidateExperience = (req,res,next)=>{
         res.status(200).json(data);
     })
     .catch(err =>{
-        console.log("err",err)
         res.status(500).json({
             error: err
         });
@@ -770,7 +769,6 @@ exports.updateOneCandidateExperience = (req,res,next)=>{
             }
         })
         .catch(err =>{
-            console.log("err",err)
             res.status(500).json({ error: err });
         });
     }

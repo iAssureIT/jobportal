@@ -186,7 +186,6 @@ class Address extends Component{
 		var data_id =  event.currentTarget.id;
 		var {mapAction} = this.props;
 
-		console.log(this.state.addressArry.length)
 		Swal.fire({
 		title 				: ' ',
 		html				: 'Are you sure<br />you want to delete this address details?',
@@ -290,7 +289,6 @@ class Address extends Component{
 	handleSave(event){
 		event.preventDefault();
 		var status =  this.validateForm();
-			//console.log(this.state.addressArry.length )
 
 			var profileCompletion = this.state.profileCompletion
 			if (!this.state.addressArry.length) {
@@ -318,7 +316,7 @@ class Address extends Component{
 								profileCompletion : profileCompletion
 				
 							}		
-							console.log(formValues)			
+		
 		if(this.props.match.params.addressID){
 			this.updateData(formValues);
 		}else{

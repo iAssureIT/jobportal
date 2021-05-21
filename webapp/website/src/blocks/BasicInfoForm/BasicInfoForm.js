@@ -56,7 +56,7 @@ class BasicInfoForm extends Component{
 		
 	}
 	componentDidMount(){
-		console.log("languagesTags",this.state.languagesTags)
+
 		const userDetails = JSON.parse(localStorage.getItem("userDetails"));
 	    const token = userDetails.token;
 	    Axios.defaults.headers.common['Authorization'] = 'Bearer '+ token;
@@ -109,7 +109,7 @@ class BasicInfoForm extends Component{
 
 		Axios.get("/api/candidatemaster/get/one/"+this.state.candidate_id)
 		.then(response=>{
-			console.log("response.dta",response.data)
+			
 			 	var languagesTags = [];
 			 	if (response.data.languagesKnown) {
 
@@ -193,7 +193,6 @@ class BasicInfoForm extends Component{
 		})
 
 		var file = event.currentTarget.files[0];
-		console.log("event.currentTarget.files ",file )
 		if (file) {
           var fileName = file.name;
           var fileSize = file.size;
@@ -457,7 +456,7 @@ class BasicInfoForm extends Component{
   	}
 
     onLanguageClick(index) {
-        console.log('The tag at index ' + index + ' was clicked');
+        //console.log('The tag at index ' + index + ' was clicked');
     }
 
     onLanguageDrag(tag, currPos, newPos) {
@@ -505,7 +504,7 @@ class BasicInfoForm extends Component{
 								visa   		   	   : this.state.visa,
 								language   		   : this.state.language,
 							}
-						console.log(formValues);	
+						
 			if(status==true){
 			Axios.patch("/api/candidatemaster/patch/updateCandidateBasicInfo",formValues)
 			 .then(response=>{
@@ -513,7 +512,7 @@ class BasicInfoForm extends Component{
 			 	var userDetails = this.props.userDetails;
 				userDetails.gender = this.state.gender;
 				userDetails.profilePicture = this.state.profilePicture;
-				//console.log(userDetails)
+				
 				mapAction.setUserDetails(userDetails);
 
 						Swal.fire('', "Your basic details is inserted successfully", '');
