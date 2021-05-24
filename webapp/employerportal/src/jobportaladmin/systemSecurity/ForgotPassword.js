@@ -139,21 +139,25 @@ class ForgotPassword extends Component {
                     mapAction.setSelectedModal("login");*/
                   }else if(response.data.message == "USER_UNVERIFIED"){
                     console.log("In USER_UNVERIFIED")
-                    Swal.fire(
-                      '',
-                      "You have not verified your account. Please verify your account.",
-                      ''
-                    );
+
+                    Swal.fire({
+                      title       : ' ',
+                      html        : 'You have not verified your account<br />Please verify your account',
+                      text        : '',
+                    });
+
                     this.props.history.push('/login');
                     /*var {mapAction} = this.props;
                     mapAction.setSelectedModal("login");*/
                   }else if(response.data.message == "NOT_REGISTER"){
                     console.log("In NOT_REGISTER")
-                    Swal.fire(
-                      '',
-                      "This email is not registered. Please do signup.",
-                      ''
-                    );
+
+                    Swal.fire({
+                      title       : ' ',
+                      html        : 'This email is not registered<br />Please do signup',
+                      text        : '',
+                    });
+
                     this.props.history.push('/login');
                   /*  var {mapAction} = this.props;
                     mapAction.setSelectedModal("login");*/
