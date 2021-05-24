@@ -54,7 +54,7 @@
 	font-weight: bold;
 	padding-top: 30px;
 	margin-left: -50px;
-	color: var(--main-subheading-font-color);
+	color:#3C8DBC !important;
 	/*font-family: 'Montserrat-SemiBold';*/
 	font-weight: 600;
 }
@@ -127,7 +127,7 @@
 	font-weight: bold;
 	margin-top: 37px;
 	margin-left: 40px;
-	color: var(--main-subheading-font-color);
+	color:#3C8DBC !important;
 	/*font-family: 'Montserrat-SemiBold';*/
 	font-weight: 600;
 }
@@ -160,7 +160,7 @@
 	left: -18px;
 	font-size: 16px;
 	font-weight: bold;
-	color: var(--main-subheading-font-color);
+	color:#3C8DBC !important;
 }
 
 /*****************************End of Content Wrapper One**********************************/
@@ -189,7 +189,7 @@
 	font-size: 19px;
 	font-weight: bold;
 	margin-top: -1px;
-	color: var(--main-subheading-font-color);
+	color:#3C8DBC !important;
 	margin-left: 40px;
 	/*font-family: 'Montserrat-SemiBold';*/
 	font-weight: 600;
@@ -223,7 +223,7 @@
 	left: -18px;
 	font-size: 16px;
 	font-weight: bold;
-	color: var(--main-subheading-font-color);
+	color:#3C8DBC !important;
 }
 
 .contentWrapper2 .modalEduSubtitle{
@@ -272,7 +272,7 @@
 	position: absolute;
 	font-size: 19px;
 	font-weight: 600;
-	color: var(--main-subheading-font-color);
+	color:#3C8DBC !important;
 	margin-top: -1px;
 	margin-left: 40px;
 	/*font-family: 'Montserrat-SemiBold';*/
@@ -306,7 +306,7 @@
 	left: -18px;
 	font-size: 16px;
 	font-weight: bold;
-	color: var(--main-subheading-font-color);
+	color:#3C8DBC !important;
 }
 
 .contentWrapper3 .eduSubtitle{
@@ -353,7 +353,7 @@
 	font-size: 15px;
 	/*font-family: 'Montserrat-SemiBold';*/
 	font-weight: 600;
-	color: var(--main-subheading-font-color);
+	color:#3C8DBC !important;
 }
 
 .modalSkillsHeadOne .skillSubtitle{
@@ -381,7 +381,7 @@
 	font-size: 15px;
 	/*font-family: 'Montserrat-SemiBold';*/
 	font-weight: 600;
-	color: var(--main-subheading-font-color);
+	color:#3C8DBC !important;
 }
 
 .modalSkillsHeadTwo .skillSubtitle{
@@ -409,7 +409,7 @@
 	font-size: 15px;
 	/*font-family: 'Montserrat-SemiBold';*/
 	font-weight: 600;
-	color: var(--main-subheading-font-color);
+	color:#3C8DBC !important;
 }
 
 .modalSkillsHeadThree .skillSubtitle{
@@ -440,7 +440,7 @@
 }
 
 .modalSkillsHeadFour .skillsTitle{
-	color: var(--main-subheading-font-color);
+	color:#3C8DBC !important;
 }
 
 .skillsList{
@@ -504,7 +504,7 @@
 .rightModalContentHead{
 	font-size: 23px;
 	font-weight: bold;
-	color: var(--main-subheading-font-color);
+	color:#3C8DBC !important;
 	padding-top: 30px;
 	padding-left: 5px;
 	/*font-family: 'Montserrat-SemiBold';*/
@@ -516,7 +516,7 @@
 	font-weight: bold;
 	padding-left: 5px;
 	padding-top: 7px;
-	color: var(--main-subheading-font-color);
+	color:#3C8DBC !important;
 	/*font-family: 'Montserrat-SemiBold';*/
 	font-weight: 600;
 }

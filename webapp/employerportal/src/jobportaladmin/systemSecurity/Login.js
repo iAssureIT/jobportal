@@ -140,7 +140,6 @@ class Login extends Component {
                          
                           userDetails.industry_id   = resp.data.industry_id
                           //loginTime : response.data.userDetails.loginTime, 
-                        
 
                           localStorage.setItem('userDetails', JSON.stringify(userDetails));
 

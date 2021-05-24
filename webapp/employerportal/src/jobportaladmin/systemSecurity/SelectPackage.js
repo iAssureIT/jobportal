@@ -33,9 +33,9 @@ constructor() {
         invoiceDetails      : {},
         subscription_id     : "",
         amountPaid          : 0
-    }	
+    }   
     this.makePayment = this.makePayment.bind(this);
-}	
+}   
 componentDidMount(){
     Axios.get("/api/packagemaster/get/list")
         .then(response=>{
@@ -278,5 +278,3 @@ const mapDispatchToProps = (dispatch) => ({
   mapAction :  bindActionCreators(mapActionCreator, dispatch)
 })
 export default connect(mapStateToProps, mapDispatchToProps) (withRouter(SelectPackage));
-
-
