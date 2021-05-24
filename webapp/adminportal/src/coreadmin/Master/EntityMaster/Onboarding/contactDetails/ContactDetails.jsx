@@ -31,6 +31,11 @@ class ContactDetails extends Component {
 			'designation'  				:"",
 			'editData' 					: null,
 			'role'  				    :"",
+			'city' 						: "",
+			'stateName' 				: "",
+			'stateCode' 				: "",
+			'country' 					: "",
+			'countryCode' 				: "",
 			tableHeading:this.props.entity === "corporate" ?{
 	            empName              :"Emp Name & ID",
 	            contactDetails       :"Contact Details",
@@ -384,7 +389,12 @@ class ContactDetails extends Component {
 				"workLocationId" :locationId,
 				"departmentName" :departmentName,
 				"designationName" :designationName,
-				"locationType" :locationType
+				"locationType" :locationType,
+				"city" 			: vendorLocation.options[vendorLocation.selectedIndex].getAttribute("data-city"),
+				"stateName" 	: vendorLocation.options[vendorLocation.selectedIndex].getAttribute("data-state"),
+	          	"stateCode"		: vendorLocation.options[vendorLocation.selectedIndex].getAttribute("data-statecode"),
+	          	"country" 		: vendorLocation.options[vendorLocation.selectedIndex].getAttribute("data-country"),
+	          	"countryCode" 	: vendorLocation.options[vendorLocation.selectedIndex].getAttribute("data-countrycode"),
 			});
 		
 					
@@ -555,7 +565,7 @@ class ContactDetails extends Component {
 					'firstName'               	: this.state.firstName,
 					'middleName'               	: this.state.middleName,
 					'lastName'                	: this.state.lastName,
-					'phone'             		: this.state.phone,
+					'phone'             		: this.state.phone.replace("-", ""),
 					'altPhone'          		: this.state.altPhone,
 					'DOB'          				: this.state.DOB,
 					'gender'          			: this.state.gender,
@@ -579,7 +589,6 @@ class ContactDetails extends Component {
 					console.log("emp id =>",this.state.listOfEmpID.indexOf(this.state.employeeID))
 					if(this.state.createUser === true){
 						formValues.contactDetails.userID = await this.createUser();
-						//formValues.contactDetails.personID = await this.savePerson(formValues.contactDetails.userID);
 						var formValues1 = {
 						userID: formValues.contactDetails.userID,
 						role: "employee",
@@ -606,7 +615,7 @@ class ContactDetails extends Component {
 				                'EmployeeName': this.state.firstName + ' ' + this.state.lastName,
 				                'CompanyName': this.state.companyName,
 				                'Password': "welcome123",
-				                'mobileNo': this.state.phone,
+				                'mobileNo': this.state.phone.replace("-", ""),
 				                'email': this.state.email,
 				                'sendUrl': this.state.url+"/login",
 				              }
@@ -627,15 +636,23 @@ class ContactDetails extends Component {
 	}
 	createUser = ()=>{
 		var userDetails = {
+			username    			: "MOBILE",
 			firstname				: this.state.firstName,
 			lastname				: this.state.lastName,
-			mobNumber				: this.state.phone,
+			mobNumber				: this.state.phone.replace("-", ""),
 			email				    : this.state.email,
+			company_id 				: this.props.match.params.entityID,
 			companyID				: this.state.companyID,
-			company_id				: this.state.entityID,
-			companyName			    : this.state.companyName,
-			pwd						: "welcome123",
-			role					: [ this.state.role ],
+			companyName				: this.state.companyName,
+			branch_id 				: this.state.workLocationId,
+			branchCode 				: this.state.branchCode,
+			workLocation 			: this.state.workLocation,
+			city 					: this.state.city,
+			stateName  				: this.state.stateName,
+			stateCode 				: this.state.stateCode,
+			country 				: this.state.country,
+			countryCode  			: this.state.countryCode,
+			role						:  this.state.role ,
             "status"				: this.state.role ==="corporateadmin" || this.state.role ==="vendoradmin" || this.state.role === "admin" ? "active" :"blocked",
 			"emailSubject"	: "Email Verification",
 			"emailContent"	: "As part of our registration process, we screen every new profile to ensure its credibility by validating email provided by user. While screening the profile, we verify that details put in by user are correct and genuine.",
@@ -643,7 +660,7 @@ class ContactDetails extends Component {
 		console.log(this.state.entityID)
 
 		return new Promise(function(resolve, reject){
-			axios.post('/api/auth/post/signup/user', userDetails)
+			axios.post('/api/auth/post/signup/user/otp', userDetails)
 			.then((response)=>{				
 				resolve(response.data.ID);
 				if(response.data.message === 'USER_CREATED'){
@@ -657,51 +674,7 @@ class ContactDetails extends Component {
 		})
 	}
 
-	savePerson = (userID)=>{
-		console.log("userID",userID);
-		if(userID){
-			var userDetails = {
-				type                    : "employee",
-				companyID				: this.state.companyID,
-				profileStatus			: "New",
-				company_id				: this.state.entityID,
-				companyName 		    : this.state.companyName,
-				workLocation            : this.state.workLocation,
-				workLocationId          : this.state.workLocationId,
-				branchCode              : this.state.branchCode,
-				firstName               : this.state.firstName,
-				middleName              : this.state.middleName ? this.state.middleName : "",
-				lastName                : this.state.lastName,
-				DOB                     : this.state.DOB ? this.state.DOB : "",
-				gender                  : this.state.gender ? this.state.gender : "",
-				contactNo               : this.state.phone,
-				altContactNo            : this.state.altPhone,
-				email                   : this.state.email,
-				whatsappNo              : this.state.whatsappNo ? this.state.whatsappNo : "",
-				entityType 				: this.state.pathname,
-				profilePhoto            : this.state.profilePhoto ? this.state.profilePhoto : "",
-				empCategory             : this.state.empCategory ? this.state.empCategory : "",
-	            empPriority             : this.state.empPriority ? this.state.empPriority : "",
-				employeeId              : this.state.employeeID,
-				userId 					: userID,
-				status					: "Active",
-			}
-			if(this.state.departmentName)
-			{
-				userDetails.departmentId  = this.state.department;
-				userDetails.designationId = this.state.designation;
-			
-
-			}
-		  return new Promise(function(resolve, reject){
-			axios.post('/api/personmaster/post' ,userDetails)
-			.then((response) => {
-				resolve(response.data.PersonId);
-			})
-			.catch((error) => {})
-		  })
-		}
-	}
+	
 
 	saveContact = (formValues)=>{
 		// if(this.state.listOfEmpID.indexOf(this.state.employeeID)>-1)
@@ -820,11 +793,8 @@ class ContactDetails extends Component {
 				if ($('#ContactDetail').valid()) {
 					if(this.state.alreadyHasUser === true){
 						this.updateUser();
-						//this.updatePerson();
 					}else if(this.state.createUser === true){
 						formValues.contactDetails.userID = await this.createUser();
-						//formValues.contactDetails.personID = await this.savePerson(formValues.contactDetails.userID);
-
 					}
 					
 					this.updateContact(formValues);
@@ -863,7 +833,7 @@ class ContactDetails extends Component {
 		var userDetails = {
 			firstname			: this.state.firstName,
 			lastname			: this.state.lastName,
-			mobNumber			: this.state.phone,
+			mobNumber			: this.state.phone.replace("-", ""),
 			companyID			: this.state.companyID,
 			email					: this.state.email,
 			companyName			: this.state.companyName,
@@ -886,66 +856,7 @@ class ContactDetails extends Component {
 		.catch((error)=>{})
     	}
 	}
-	updatePerson = ()=>{
-		if(this.state.alreadyHasUser && this.state.createUser === false)
-		{
-		   axios.delete("/api/personmaster/delete/"+this.state.personID)
-			.then((response) => {				
-			})
-			.catch((error) => {})
-		}
-		else{
-		var userDetails = {
-			personID        		: this.state.personID,
-			companyID				: this.state.companyID,
-			company_id				: this.state.entityID,
-			companyName 		    : this.state.companyName,
-			branchCode              : this.state.branchCode,
-			workLocation            : this.state.workLocation,
-			workLocationId          : this.state.workLocationId,
-			type                    : 'employee',
-			firstName               : this.state.firstName,
-		    middleName              : this.state.middleName,
-			lastName                : this.state.lastName,
-			DOB                     : this.state.DOB,
-			gender                  : this.state.gender,
-			contactNo               : this.state.phone,
-			altContactNo            : this.state.altPhone,
-			empCategory             : this.state.empCategory ? this.state.empCategory : "",
-            empPriority             : this.state.empPriority ? this.state.empPriority : "",
-			email                   : this.state.email,
-			whatsappNo              : this.state.whatsappNo ? this.state.whatsappNo : "",
-			departmentId            : this.state.department,
-			designationId           : this.state.designation,
-			profilePhoto            : this.state.profilePhoto,
-			employeeId              : this.state.employeeID,
-			address: this.state.country !=="-- Select --" ? [{
-                    addressLine1                : this.state.addressLine1,
-                    addressLine2                : this.state.addressLine2,
-                    landmark                    : this.state.landmark,
-                    area                        : this.state.area,
-                    city                        : this.state.city,
-                    district                    : this.state.district,
-                    state                       : this.state.states.split('|')[1],
-                    stateCode                   : this.state.states.split('|')[0],
-                    country                     : this.state.country.split('|')[1],
-                    countryCode                 : this.state.country.split('|')[0],
-                    pincode                     : this.state.pincode,
-                    addressProof                : this.state.addressProof,
-                    latitude                    : this.state.latLng ? this.state.latLng.lat : "",
-                    longitude                   : this.state.latLng ? this.state.latLng.lng : "",
-                }] : [],
-       
-		  }
-			axios.patch('/api/personmaster/patch',userDetails)
-			.then((response) => {
-				console.log("response",response);
-				
-			})
-			.catch((error) => {})
-		}
-		  
-	}
+	
 	updateContact = (formValues)=>{
 		axios.patch('/api/entitymaster/patch/updateSingleContact', formValues)
 		.then((response) => {
@@ -1088,7 +999,7 @@ class ContactDetails extends Component {
 				
 	            axios.delete("/api/users/delete/"+user_id)
 					.then((response)=>{
-						this.contactDetails();
+						this.contactDetails();	
 						this.getAllEntites();
 						this.props.history.push('/'+this.state.pathname+'/contact-details/' + entityID);
 						swal("Contact is deleted successfully.");
@@ -1268,7 +1179,11 @@ class ContactDetails extends Component {
 																			this.state.branchCodeArry.map((data, index) => {
 																				if(data.branchCode){
 																					return (
-																						<option key={index} branch_location_id={data._id} branch_location={(data.addressLine2 ? data.addressLine2 : "") +" "+(data.addressLine1)} value={data.branchCode} data_locationType={data.locationType}>{((data.locationType).match(/\b(\w)/g)).join('')} - {data.area} {data.city}, {data.stateCode} - {data.countryCode}</option>
+																						<option key={index} branch_location_id={data._id} branch_location={(data.addressLine2 ? data.addressLine2 : "") +" "+(data.addressLine1)} 
+																						value={data.branchCode} data_locationType={data.locationType} data-city={data.city}
+																						data-state={data.state} data-statecode={data.stateCode} 
+																						data-country={data.country} data-countrycode={data.countrycode} 
+																						>{((data.locationType).match(/\b(\w)/g)).join('')} - {data.area} {data.city}, {data.stateCode} - {data.countryCode}</option>
 																					);
 																				}
 																			})

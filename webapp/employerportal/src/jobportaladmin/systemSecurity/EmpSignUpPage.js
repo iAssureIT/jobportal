@@ -17,7 +17,7 @@ constructor() {
     this.hideComponent = this.hideComponent.bind(this);
 }
  hideComponent(name) {
-    console.log(name);
+    //console.log(name);
     switch (name) {
       case "showHide1":
         this.setState({ 

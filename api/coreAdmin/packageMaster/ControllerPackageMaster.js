@@ -52,7 +52,7 @@ exports.fetchPackages = (req, res, next)=>{
 };
 exports.fetchListPackages = (req, res, next)=>{
     PackageMaster.find({})
-        .sort({packageName : 1})
+        .sort({price : 1})
         .exec()
         .then(data=>{
             console.log('data', data);

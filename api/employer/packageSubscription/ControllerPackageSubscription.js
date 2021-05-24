@@ -91,8 +91,8 @@ exports.paymentOrderDetails = (req,res,next) =>{
 }
 
 exports.payment_response = (req,res,next) =>{ 
-	var _id = req.body.order_id;
-	
+	var _id = req.body.subscription_id;
+	console.log(_id)
 	PackageSubscription.updateOne(
                     { "_id": _id},
 
@@ -106,6 +106,7 @@ exports.payment_response = (req,res,next) =>{
  		
         .exec()
         .then(data=>{
+        	
          	// res.redirect("http://localhost:3000/paymentResponse");
             if(data.nModified === 1){
             	res.status(200).json({							

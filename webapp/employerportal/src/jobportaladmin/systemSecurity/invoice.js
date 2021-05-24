@@ -16,7 +16,7 @@ constructor() {
 componentDidMount(){
    Axios.get("/api/globalmaster/getTaxData")
         .then(response=>{
-          console.log(response.data);
+          //console.log(response.data);
           var taxrate = response.data.filter((data)=>{
             if(data.taxType=="GST"){return data}
           })
@@ -257,10 +257,10 @@ render() {
                         </div>*/}
                         <div className="col-lg-offset-6 col-lg-6 conditionWrapper">
                             <div className="col-lg-12">
-                                 <a className="buttonNext  invoiceButtonNext col-lg-6 col-lg-offset-5" >
+                                 <a className="buttonNext  invoiceButtonNext col-lg-6 col-lg-offset-5" onClick={this.makePayment.bind(this, this.props.invoiceDetails._id, total)}>
                                      Make Payment
                                      <span className="invoiceButtonNextIcon" 
-                                     onClick={this.makePayment.bind(this, this.props.invoiceDetails._id, this.props.invoiceDetails.amountPaid)}
+                                     
                                      >
                                         <FontAwesomeIcon icon="angle-double-right" />
                                     </span>

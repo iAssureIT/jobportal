@@ -136,7 +136,7 @@ class packagemaster extends Component {
         }else{
           this.insetData(formValues);
         }
-        this.getData();
+        
   }
   /*======= insetData() =======*/
   insetData(formValues){
@@ -144,6 +144,7 @@ class packagemaster extends Component {
         if(status){
           Axios.post("/api/packagemaster/post",formValues)
              .then(response=>{
+              this.getData();
                   this.setState({
                       packageName        : "",
                       validity           : "",
@@ -156,6 +157,7 @@ class packagemaster extends Component {
                       currency           : "Rs",
                       buttonText         : "Submit",
                   })
+
              }).catch(error=>{
                 console.log(error)
              })
@@ -167,6 +169,7 @@ class packagemaster extends Component {
         if(status){
             Axios.patch("/api/packagemaster/patch",formValues)
                .then(response=>{
+                this.getData();
                     this.setState({
                         packageName        : "",
                         validity           : "",

@@ -31,7 +31,8 @@ constructor() {
         validity            : "",
         paymentDetails      : {},
         invoiceDetails      : {},
-        subscription_id     : ""
+        subscription_id     : "",
+        amountPaid          : 0
     }	
     this.makePayment = this.makePayment.bind(this);
 }	
@@ -56,7 +57,11 @@ handleChange(event){
 }
 handleSelection(event){
     event.preventDefault();
+<<<<<<< Updated upstream
   
+=======
+    //console.log(event.currentTarget.getAttribute('data-id'))
+>>>>>>> Stashed changes
     this.setState({ package_id : event.currentTarget.getAttribute('data-id'),
                     price : event.currentTarget.getAttribute('data-price'),
                     validity : event.currentTarget.getAttribute('data-validity') })
@@ -103,18 +108,25 @@ subscribePackage(event){
         this.setState({
           paymentDetails : response.data,
         })
+<<<<<<< Updated upstream
         
+=======
+        console.log(response.data)
+        console.log(response.data.data._id)
+>>>>>>> Stashed changes
         if (this.state.price > 0) {
             
-            Axios.post('/api/packagesubscription/paymentOrderDetails/'+response.data._id)
+            Axios.get('/api/packagesubscription/paymentOrderDetails/'+response.data.data._id)
             .then((orderdetails)=>{
-                if(this.state.hide==="none"){
+                console.log("hide",this.state.hide)
+                if(this.state.hide=="none"){
                     this.setState({
                         hide : "block",
                         hideForm : "none",
                         invoiceDetails : orderdetails.data,
                         subscription_id: response.data._id
                     })
+                    console.log(this.state.hide)
                 }
             })
             .catch(function(error){
@@ -132,7 +144,11 @@ subscribePackage(event){
     })
 }
 makePayment (subscription_id, amountPaid) { 
+<<<<<<< Updated upstream
   
+=======
+    console.log("makePayment",amountPaid)
+>>>>>>> Stashed changes
     var formValues = { "subscription_id" : subscription_id , amountPaid: amountPaid}
     Axios.patch('/api/packagesubscription/payment-response', formValues)
             .then((orderdetails)=>{
@@ -140,7 +156,8 @@ makePayment (subscription_id, amountPaid) {
                     this.setState({
                         hide : "none",
                         hideForm : "none",
-                        hideSuccess : "block"
+                        hideSuccess : "block",
+                        amountPaid : amountPaid
                         //invoiceDetails : orderdetails.data,
                         //subscription_id: response.data._id
                     })
@@ -151,6 +168,7 @@ makePayment (subscription_id, amountPaid) {
             })
 }
 render() {
+
     return (
         <div >
             <form className=" col-lg-10 col-lg-offset-1 signUpBoxFormWrapper signUpBoxFormWrapper2" style={{display:this.state.hideForm}}>
@@ -245,7 +263,8 @@ render() {
                 </div>
             </form>
             <div className="row" style={{display:this.state.hideSuccess}}>
-                <Success />
+                <Success    amountPaid = {this.state.amountPaid} 
+                            invoiceDetails = {this.state.invoiceDetails}   />
             </div>
             <div className="row" style={{display:this.state.hide}}>
                 <div className="col-lg-10 col-lg-offset-1">

@@ -2,7 +2,7 @@ import React, { Component }  from 'react';
 import "./success.css";
 import Axios from 'axios';
 import { FontAwesomeIcon }   from '@fortawesome/react-fontawesome';
-
+import Moment                from 'moment';
 
 class Success extends Component {
 constructor() {
@@ -15,7 +15,7 @@ constructor() {
 componentDidMount(){
    Axios.get("/api/packagemaster/get/list")
         .then(response=>{
-          console.log(response.data);
+          //console.log(response.data);
           this.setState({packagemasterArray : response.data});
         })
         .catch(error=>{
@@ -24,7 +24,9 @@ componentDidMount(){
 }
 
 render() {
+    console.log(this.props.invoiceDetails )
     return (
+        this.props.invoiceDetails ? 
           <div className="row">
                 <div className="col-lg-10 col-lg-offset-1 successWrapper">
                     <div className="row successHeader">
@@ -58,7 +60,7 @@ render() {
                                 Transaction Number 
                             </div>
                             <div className="col-lg-6 successPointTitle">
-                              <div className="row">  :  001 </div>
+                              <div className="row">  :  {this.props.invoiceDetails.invoiceNumber} </div>
                             </div>
                         </div>
                     </div>
@@ -68,7 +70,7 @@ render() {
                                 Transaction Date 
                             </div>
                             <div className="col-lg-6 successPointTitle">
-                              <div className="row">  :   21/04/2021</div>
+                              <div className="row">  :   {Moment(this.props.invoiceDetails.createdAt).format("DD-MM-YYYY")} </div>
                             </div>
                         </div>
                     </div>
@@ -78,7 +80,7 @@ render() {
                                 Name
                             </div>
                             <div className="col-lg-6 successPointTitle">
-                              <div className="row">  :   John doe </div>
+                              <div className="row">  :    {this.props.invoiceDetails.createdBy ? this.props.invoiceDetails.createdBy.profile.fullName : ""} </div>
                             </div>
                         </div>
                     </div>
@@ -88,7 +90,7 @@ render() {
                                 Mobile Number 
                             </div>
                             <div className="col-lg-6 successPointTitle">
-                              <div className="row">  :  +91 99123 45618 </div>
+                              <div className="row">  :  {this.props.invoiceDetails.createdBy ? this.props.invoiceDetails.createdBy.profile.email : ""} </div>
                             </div>
                         </div>
                     </div>
@@ -99,7 +101,7 @@ render() {
                                 Email ID
                             </div>
                             <div className="col-lg-6 successPointTitle">
-                               <div className="row"> :  johndoe@gmail.com</div>
+                               <div className="row"> :  {this.props.invoiceDetails.createdBy ? this.props.invoiceDetails.createdBy.profile.mobile : ""}</div>
                             </div>
                         </div>
                     </div>
@@ -109,18 +111,18 @@ render() {
                                 Amount
                             </div>
                             <div className="col-lg-6 successPointTitle">
-                              <div className="row">  :   ₹ 1416 </div>
+                              <div className="row">  :   ₹ {this.props.amountPaid} </div>
                             </div>
                         </div>
                     </div>
                     <div className="row buttonWrapperSuccess">
                         <div className="col-lg-6 col-lg-offset-3">
                             <div className="col-lg-12">
-                                <button className="buttonNext buttonNext2 col-lg-4 pull-left">
+                                {/*<button className="buttonNext buttonNext2 col-lg-4 pull-left">
                                      Back
-                                </button>
+                                </button>*/}
                                 <button className="buttonNext buttonNext2 col-lg-4 pull-right"  >
-                                     Print
+                                     Login
                                 </button>
                             </div>
                         </div>
@@ -128,6 +130,7 @@ render() {
 
                 </div>
           </div>
+          : null
      );
 }
 

@@ -23,11 +23,16 @@ class ContactDetails extends Component {
 			'openFormIcon'              : false,
 			'createUser' 				: false,
 			'showBookingApprovalRequired' : true,
-			'branchCode'  				:"",
-			'department'  				:"",
-			'designation'  				:"",
+			'branchCode'  				: "",
+			'department'  				: "",
+			'designation'  				: "",
 			'editData' 					: null,
-			'role'  				    :"",
+			'role'  				    : "",
+			'city' 						: "",
+			'stateName' 				: "",
+			'stateCode' 				: "",
+			'country' 					: "",
+			'countryCode' 				: "",
 			tableHeading:this.props.entity === "corporate" ?{
 	            empName              :"Emp Name & ID",
 	            contactDetails       :"Contact Details",
@@ -132,22 +137,6 @@ class ContactDetails extends Component {
 			.catch((error) => {
 				
 			})
-		axios.post("/api/personmaster/get/list",formvalues)
-		.then((response) => {
-	        
-			this.setState({
-				personList   : response.data,
-			})
-			for(let i=0;i<this.state.personList.length;i++)
-			{
-				listOfEmpID.push(this.state.personList[i].employeeId)
-			}
-			this.setState({
-				listOfEmpID:listOfEmpID
-			})
-		})
-		.catch((error) => {
-		})
 	}
 	getDesignation() {
 		var getcompanyID = localStorage.getItem("companyID")
@@ -339,14 +328,17 @@ class ContactDetails extends Component {
    		 var locationType = vendorLocation.options[vendorLocation.selectedIndex].getAttribute("data_locationType");
 			this.setState({
 				[name]: event.target.value,
-				"workLocation" : locationname,
-				"workLocationId" :locationId,
-				"departmentName" :departmentName,
-				"designationName" :designationName,
-				"locationType" :locationType
+				"workLocation" 		: locationname,
+				"workLocationId" 	: locationId,
+				"departmentName" 	: departmentName,
+				"designationName" 	: designationName,
+				"locationType" 		: locationType,
+				"city" 			: vendorLocation.options[vendorLocation.selectedIndex].getAttribute("data-city"),
+				"stateName" 	: vendorLocation.options[vendorLocation.selectedIndex].getAttribute("data-state"),
+	          	"stateCode"		: vendorLocation.options[vendorLocation.selectedIndex].getAttribute("data-statecode"),
+	          	"country" 		: vendorLocation.options[vendorLocation.selectedIndex].getAttribute("data-country"),
+	          	"countryCode" 	: vendorLocation.options[vendorLocation.selectedIndex].getAttribute("data-countrycode"),
 			});
-		
-					
 	}
 	locationdetailBack(event) {
 		event.preventDefault();
@@ -516,7 +508,7 @@ class ContactDetails extends Component {
 					'profileStatus' 			:"New",
 
 					'lastName'                	: this.state.lastName,
-					'phone'             		: this.state.phone,
+					'phone'             		: this.state.phone.replace("-", ""),
 					'altPhone'          		: this.state.altPhone,
 					'DOB'          				: this.state.DOB,
 					'gender'          			: this.state.gender,
@@ -536,7 +528,6 @@ class ContactDetails extends Component {
 				if ($('#ContactDetail').valid()) {
 					if(this.state.createUser === true && this.state.listOfEmpID.indexOf(this.state.employeeID) === -1){
 						formValues.contactDetails.userID = await this.createUser();
-						formValues.contactDetails.personID = await this.savePerson(formValues.contactDetails.userID);
 						var formValues1 = {
 						userID: formValues.contactDetails.userID,
 						role: "employee",
@@ -554,20 +545,17 @@ class ContactDetails extends Component {
 							});
 						}
 						var sendData = {
-				              "event": "Event2", //Event Name
-				              "toUser_id": formValues.contactDetails.userID, //To user_id(ref:users)
-				              "toUserRole":this.state.role,
-				              "company_id": this.state.entityID, //company_id(ref:entitymaster)
-				              "otherAdminRole":'corporateadmin',
-				              "variables": {
-				                'EmployeeName': this.state.firstName + ' ' + this.state.lastName,
-				                'CompanyName': this.state.companyName,
-				                'Password': "welcome123",
-				                'mobileNo': this.state.phone,
-				                'email': this.state.email,
-				                'sendUrl': this.state.url+"/login",
-				              }
-				            }
+			                  "event": "Event2", //Event Name
+			                  "toUser_id": formValues.contactDetails.userID, //To user_id(ref:users)
+			                  "variables": {
+			                    'UserName': this.state.firstName + ' ' + this.state.lastName,
+			                    'EmployerName': this.state.companyName,
+			                    'EmployerID': this.state.companyID,
+			                    'EmployerEmailID': this.state.email,
+			                    'EmployerContactNumber': (this.state.phone).replace("-", ""),
+			                    'Password': "welcome123",
+			                  }
+			                }
 		                  axios.post('/api/masternotifications/post/sendNotification', sendData)
 		                  .then((res) => {
 		                  console.log('sendDataToUser in result==>>>', res.data)
@@ -584,20 +572,30 @@ class ContactDetails extends Component {
 	}
 	createUser = ()=>{
 		var userDetails = {
+			username    			: "MOBILE",
 			firstname				: this.state.firstName,
 			lastname				: this.state.lastName,
-			mobNumber				: this.state.phone,
-			email						: this.state.email,
+			mobNumber				: this.state.phone.replace("-", ""),
+			email					: this.state.email,
+			pwd						: "welcome123",
+			company_id 				: this.props.match.params.entityID,
 			companyID				: this.state.companyID,
-			companyName			: this.state.companyName,
-			pwd							: "welcome123",
-			role						: [ this.state.role ],
+			companyName				: this.state.companyName,
+			branch_id 				: this.state.workLocationId,
+			branchCode 				: this.state.branchCode,
+			workLocation 			: this.state.workLocation,
+			city 					: this.state.city,
+			stateName  				: this.state.stateName,
+			stateCode 				: this.state.stateCode,
+			country 				: this.state.country,
+			countryCode  			: this.state.countryCode,
+			role						:  this.state.role ,
             "status"					: this.state.role ==="corporateadmin" || this.state.role ==="vendoradmin" || this.state.role === "admin" ? "active" :"blocked",
 			"emailSubject"	: "Email Verification",
 			"emailContent"	: "As part of our registration process, we screen every new profile to ensure its credibility by validating email provided by user. While screening the profile, we verify that details put in by user are correct and genuine.",
 		}
-		return new Promise(function(resolve, reject){
-			axios.post('/api/auth/post/signup/user', userDetails)
+		return new Promise(function(resolve, reject){ 
+			axios.post('/api/auth/post/signup/user/otp', userDetails)
 			.then((response)=>{				
 				resolve(response.data.ID);
 				if(response.data.message === 'USER_CREATED'){
@@ -611,49 +609,6 @@ class ContactDetails extends Component {
 		})
 	}
 
-	savePerson = (userID)=>{
-		console.log("userID",userID);
-		if(userID){
-			var userDetails = {
-				type                    : "employer",
-				companyID				: this.state.companyID,
-				profileStatus			: "New",
-				company_Id				: this.state.entityID,
-				companyName 		    : this.state.companyName,
-				workLocation            : this.state.workLocation,
-				workLocationId          : this.state.workLocationId,
-				branchCode              : this.state.branchCode,
-				firstName               : this.state.firstName,
-				middleName              : this.state.middleName ? this.state.middleName : "",
-				lastName                : this.state.lastName,
-				DOB                     : this.state.DOB ? this.state.DOB : "",
-				gender                  : this.state.gender ? this.state.gender : "",
-				contactNo               : this.state.phone,
-				altContactNo            : this.state.altPhone,
-				email                   : this.state.email,
-				whatsappNo              : this.state.whatsappNo ? this.state.whatsappNo : "",
-				entityType 				: this.state.pathname,
-				profilePhoto            : this.state.profilePhoto ? this.state.profilePhoto : "",
-				employeeId              : this.state.employeeID,
-				userId 					: userID,
-				status					: "Active",
-			}
-			if(this.state.departmentName)
-			{
-				userDetails.departmentId  = this.state.department;
-				userDetails.designationId = this.state.designation;
-			
-
-			}
-		  return new Promise(function(resolve, reject){
-			axios.post('/api/personmaster/post' ,userDetails)
-			.then((response) => {
-				resolve(response.data.PersonId);
-			})
-			.catch((error) => {})
-		  })
-		}
-	}
 
 	saveContact = (formValues)=>{
 		if(this.state.listOfEmpID.indexOf(this.state.employeeID)>-1)
@@ -672,7 +627,7 @@ class ContactDetails extends Component {
 
 					Swal.fire({
 						title : "",
-						html  : this.state.createUser ? "Contact added successfully"+"<br>"+"Login credentials created and emailed to user. <br /> LoginID : "+this.state.email+" <br /> Default Password :"+"welcome123 <br /> Contact also added in employee list." : "",
+						html  : this.state.createUser ? "Contact is added successfully"+"<br>"+"Login credentials created. <br /> LoginID : "+this.state.phone.replace("-", "")+" <br /> Default Password : "+"welcome123 <br />" : "",
 						text: ''
 					});
 
@@ -768,11 +723,8 @@ class ContactDetails extends Component {
 				if ($('#ContactDetail').valid()) {
 					if(this.state.alreadyHasUser === true){
 						this.updateUser();
-						this.updatePerson();
 					}else if(this.state.createUser === true){
 						formValues.contactDetails.userID = await this.createUser();
-						formValues.contactDetails.personID = await this.savePerson(formValues.contactDetails.userID);
-
 					}
 					
 					this.updateContact(formValues);
@@ -811,7 +763,7 @@ class ContactDetails extends Component {
 		var userDetails = {
 			firstname			: this.state.firstName,
 			lastname			: this.state.lastName,
-			mobNumber			: this.state.phone,
+			mobNumber			: this.state.phone.replace("-", ""),
 			companyID			: this.state.companyID,
 			email					: this.state.email,
 			companyName			: this.state.companyName,
@@ -833,61 +785,7 @@ class ContactDetails extends Component {
 		.catch((error)=>{})
     	}
 	}
-	updatePerson = ()=>{
-		if(this.state.alreadyHasUser && this.state.createUser === false)
-		{
-		   axios.delete("/api/personmaster/delete/"+this.state.personID)
-			.then((response) => {				
-			})
-			.catch((error) => {})
-		}
-		else{
-		var userDetails = {
-			personID        		: this.state.personID,
-			companyID				: this.state.companyID,
-			company_Id				: this.state.entityID,
-			companyName 		    : this.state.companyName,
-			branchCode              : this.state.branchCode,
-			workLocation            : this.state.workLocation,
-			workLocationId          : this.state.workLocationId,
-			type                    : 'employee',
-			firstName               : this.state.firstName,
-		    middleName              : this.state.middleName,
-			lastName                : this.state.lastName,
-			DOB                     : this.state.DOB,
-			gender                  : this.state.gender,
-			contactNo               : this.state.phone,
-			email                   : this.state.email,
-			whatsappNo              : this.state.whatsappNo ? this.state.whatsappNo : "",
-			departmentId            : this.state.department,
-			designationId           : this.state.designation,
-			profilePhoto            : this.state.profilePhoto,
-			employeeId              : this.state.employeeID,
-			address: this.state.country !=="-- Select --" ? [{
-                    addressLine1                : this.state.addressLine1,
-                    addressLine2                : this.state.addressLine2,
-                    landmark                    : this.state.landmark,
-                    area                        : this.state.area,
-                    city                        : this.state.city,
-                    district                    : this.state.district,
-                    state                       : this.state.states.split('|')[1],
-                    stateCode                   : this.state.states.split('|')[0],
-                    country                     : this.state.country.split('|')[1],
-                    countryCode                 : this.state.country.split('|')[0],
-                    pincode                     : this.state.pincode,
-                    addressProof                : this.state.addressProof,
-                }] : [],
-       
-		  }
-			axios.patch('/api/personmaster/patch',userDetails)
-			.then((response) => {
-				console.log("response",response);
-				
-			})
-			.catch((error) => {})
-		} 
-		  
-	}
+	
 	updateContact = (formValues)=>{
 		axios.patch('/api/entitymaster/patch/updateSingleContact', formValues)
 		.then((response) => {
@@ -973,7 +871,6 @@ class ContactDetails extends Component {
 						'createUser'        		: contactDetails[0].createUser,
 						'addEmployee'       		: contactDetails[0].addEmployee,
 						'userID' 					: contactDetails[0].userID,
-						'personID' 					: contactDetails[0].personID,
 						'alreadyHasUser' 			: contactDetails[0].createUser,
 						'alreadyHasEmployee' 		: contactDetails[0].addEmployee,
 						
@@ -1001,6 +898,7 @@ class ContactDetails extends Component {
 		var entityID = this.state.entityID;
 		var locationID = event.target.id;
 		var email = event.currentTarget.getAttribute("email_ID");
+		var user_id = event.currentTarget.getAttribute("data-userid");
 		var formValues = {
 			entityID: entityID,
 			location_ID: locationID
@@ -1008,7 +906,7 @@ class ContactDetails extends Component {
 
 		Swal.fire({
 		title 				: ' ',
-		html				: 'Are you sure<br />you want to delete this contact?',
+		html				: 'Are you sure<br /> do you want to delete this contact?',
 		text 				: '',
 		icon 				: 'warning',
 		showCloseButton		: true,
@@ -1018,7 +916,7 @@ class ContactDetails extends Component {
 		confirmButtonColor 	: '#f5a721',
 		reverseButtons		: true
 	
-	}).then((result) =>{	if(result.value){
+	}).then((result) =>{	if(result.value){ 
 								axios.delete('/api/entitymaster/deleteContact/' + entityID + "/delete/" + locationID, formValues)
 									.then((response) => {
 															/*console.log("Inside First then");*/
@@ -1037,55 +935,16 @@ class ContactDetails extends Component {
 																'department'        : '',
 																'designation'       : '',	
 														})
-													/*axios.get('/api/personmaster/get/emailID/' + email)
-														.then((response) => {
-															console.log("Inside Second then");
-															this.setState({
-																personID: response.data.data[0]._id,
-																userId: response.data.data[0].userId,
-																username: response.data.data[0].firstName + " " + response.data.data[0].lastName
-
-															},()=>{
-																axios.delete("/api/personmaster/delete/"+this.state.personID)
-														            .then((response)=>{
-														            	console.log("Inside third then");
-																		var id = this.state.userId;
-																		const token = '';
-																		const url = '/api/users/delete/' + id;
-																		const headers = {
-																			"Authorization": token,
-																			"Content-Type": "application/json",
-																		};
-																		axios({
-																			method: "DELETE",
-																			url: url,
-																			headers: headers,
-																			timeout: 3000,
-																			data: null,
-																		})
-																			.then((response) => {
-																				console.log("Deleted permented")
-																				
-																			}).catch((error) => {
-																			});
-																				           		
-													            })
-
-															})
-														})
-														.catch((error) => {
-															
-														})
-										            .catch((error)=>{
-										            })
-													this.contactDetails();
+													
+												axios.delete("/api/users/delete/"+user_id)
+												.then((response)=>{
+													this.contactDetails();	
 													this.getAllEntites();
-													this.props.history.push('/'+this.state.pathname+'/contact-details/' + entityID);
-													Swal.fire('', "Contact deleted successfully", '');
-												})*/
-
-												Swal.fire('', "Contact deleted successfully", '');
-												this.contactDetails();
+													//this.props.history.push('/'+this.state.pathname+'/contact-details/' + entityID);
+													Swal.fire('', "Contact is deleted successfully", '');
+												})			
+												
+												
 									})
 									.catch((error) => {
 										
@@ -1250,8 +1109,13 @@ class ContactDetails extends Component {
 																		this.state.branchCodeArry && this.state.branchCodeArry.length > 0 ?
 																			this.state.branchCodeArry.map((data, index) => {
 																				if(data.branchCode){
+																					//console.log(data)
 																					return (
-																						<option key={index} branch_location_id={data._id} branch_location={(data.addressLine2 ? data.addressLine2 : "") +" "+(data.addressLine1)} value={data.branchCode} data_locationType={data.locationType}>{((data.locationType).match(/\b(\w)/g)).join('')} - {data.area} {data.city}, {data.stateCode} - {data.countryCode}</option>
+																						<option key={index} branch_location_id={data._id} branch_location={(data.addressLine2 ? data.addressLine2 : "") +" "+(data.addressLine1)} 
+																						value={data.branchCode} data_locationType={data.locationType} data-city={data.city}
+																						data-state={data.state} data-statecode={data.stateCode} 
+																						data-country={data.country} data-countrycode={data.countrycode}  
+																						>{((data.locationType).match(/\b(\w)/g)).join('')} - {data.area} {data.city}, {data.stateCode} - {data.countryCode}</option>
 																					);
 																				}
 																			})
@@ -1467,7 +1331,7 @@ class ContactDetails extends Component {
 																						<a href={"/"+this.state.pathname+"/contact-details/" + this.props.match.params.entityID + "/" + data._id}><i className="fa fa-pencil penmrleft" aria-hidden="true"></i>&nbsp;&nbsp;Edit</a>
 																					</li>
 																					<li name={index}>
-																						<span onClick={this.contactDelete.bind(this)} email_ID={data.email} id={data._id}><i className="fa fa-trash-o" aria-hidden="true"></i> &nbsp; Delete</span>
+																						<span onClick={this.contactDelete.bind(this)} data-userid={data.userID} email_ID={data.email} id={data._id}><i className="fa fa-trash-o" aria-hidden="true"></i> &nbsp; Delete</span>
 																					</li>
 																				</ul>
 																			</div>
