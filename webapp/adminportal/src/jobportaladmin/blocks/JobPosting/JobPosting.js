@@ -18,6 +18,7 @@ import  * as mapActionCreator       from '../../Common/actions/index';
 import BulkUpload                   from "../../../coreadmin/Master/BulkUpload/BulkUpload.js";
 
 import PreviewModal                 from '../PreviewModal/PreviewModal.js';
+
  
 import './JobPosting.css';
 import 'react-phone-input-2/lib/style.css';
@@ -933,14 +934,21 @@ class JobPosting extends Component {
         }
     }
 
+
     insertData(formValues) {
         Axios.post("/api/jobs/post", formValues)
 
             .then(response => {
+                console.log(formValues);
                 if (response.data.created) {
                     let job_id = response.data.jobsData._id;
 
-                    Swal.fire("Congrats", "Your Data is Submitted Successfully", "success");
+                    if(formValues.status==='draft'){
+                        Swal.fire("", "Your job has been saved into draft jobs!", "");
+                    }else{
+                        Swal.fire("", "Your data is submitted successfully", "");
+                    }
+                    
                     this.setState({
                         jobTitle                :   "",
                         functionalarea_id       :   "",
@@ -949,6 +957,7 @@ class JobPosting extends Component {
                         gender                  :   "Male Only",
                         workFromHome            :   false,
                         jobtype_id              :   "",
+                        jobTime                 :   "",
                         jobtime_id              :   "",
                         jobsector_id            :   "",
                         jobshift_id             :   "",
@@ -965,8 +974,8 @@ class JobPosting extends Component {
                         district                :   "",
                         states                  :   "",
                         stateCode               :   "",
-                        country                 :   "",
-                        countryCode             :   "",
+                        country                 :   "India",
+                        countryCode             :   "IN",
                         pincode                 :   "",
 
                         minSalary               :   "",
@@ -983,7 +992,10 @@ class JobPosting extends Component {
                         otherSkills             :   "",
                         minOtherExp             :   "",
                         preferredSkills         :   "",
+
+                        status                  :   "Active"
                     });
+
 
                     this.props.history.push("/job-profile/" + job_id);
                 }
@@ -991,9 +1003,23 @@ class JobPosting extends Component {
 
             .catch(error => {
                 console.log(error);
-                Swal.fire("Submit Error!", error.message, 'error');
+                if(error.message === "Request failed with status code 401"){
+                  var userDetails =  localStorage.removeItem("userDetails");
+                  localStorage.clear();
+                  Swal.fire({title  : ' ',
+                            html    : "Your session is expired! You need to login again. "+"<br>"+" Click OK to go to Login Page",
+                            text    :  "" })
+                      .then(okay => {
+                        if (okay) {
+                          window.location.href = "/login";
+                        }
+                      });
+                }else{
+                    Swal.fire("", "Submit Error!", "");
+                }
             })
     }
+
 
     updateData(formValues) {
         Axios.patch("/api/jobs/update", formValues)
@@ -2138,18 +2164,19 @@ render(){
                                             </div>
                                         </div>   
 
-                                        <div className="col-lg-7 col-lg-offset-5 pull-right"> 
-                                                <button className="btn addJobFormField saveFLBtn pull-left" data-status = "draft" onClick={this.handleSubmit.bind(this)}>
+                                        <div className="col-lg-12"> 
+                                                <button className="btn addJobPreviewBtn  col-lg-2 pull-left" data-status = "draft" onClick={this.handleSubmit.bind(this)}>
                                                     Save for Later 
                                                 </button>
 
-                                                <button type="button" data-toggle="modal" data-target="#robust" data-dismiss="modal" className="btn addJobFormField addJobPreviewBtn"> 
+                                                <button type="button" data-toggle="modal" data-target="#robust" data-dismiss="modal" className="btn  pull-right col-lg-2 addJobFormField addJobPreviewBtn"> 
                                                     PREVIEW 
                                                 </button>
 
                                                 <PreviewModal jobInfo = {this.state} />
-
-                                                <button className="btn buttonYellow addJobSubmitBtn" data-status = "active" onClick={this.handleSubmit.bind(this)}> {this.state.submitBtnText} </button>
+                                        </div>
+                                        <div className="col-lg-12">
+                                                <button className="btn  pull-right buttonYellow addJobSubmitBtn" data-status = "active" onClick={this.handleSubmit.bind(this)}> {this.state.submitBtnText} </button>
                                         </div>
                                        {/* <div className="col-lg-3 pull-right">
                                             <button className="btn buttonYellow addJobSubmitBtn"  onClick={this.handleSubmit}> {this.state.submitBtnText} </button>
