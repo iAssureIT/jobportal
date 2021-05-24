@@ -626,25 +626,24 @@ class BasicInfoForm extends Component{
 			document.getElementById("emailError").innerHTML = ""; 
 			
 		}
-		if(this.state.mobile.length<=0){
-			document.getElementById("mobileError").innerHTML = "Please enter your mobile number";  
-			status=false; 
-		}else if (!mobileFilter.test(this.state.mobile)) { //test email for illegal characters
-	        document.getElementById('mobileError').innerHTML = "Please enter a valid mobile number.";
-	    }else{
-			document.getElementById("mobileError").innerHTML = ""; 
-		}
-
+		
+		if(this.state.mobile.length>0){
+			
+			if(!this.state.mobile.match(mobileFilter)){
+              status = false;
+              document.getElementById("mobileError").innerHTML = "Please enter a valid  mobile number";
+           }else{
+           		document.getElementById("mobileError").innerHTML = "";
+          }
+     	 }
 		if(this.state.alternate.length>3){
 			
-			if (!mobileFilter.test(this.state.alternate)) {
-			 status=false;  //test email for illegal characters
-	        	document.getElementById('alternateError').innerHTML = "Please enter a valid alternate mobile number.";
-	        	
-		    }else{
-		    	 status=true; 
-				document.getElementById("alternateError").innerHTML = ""; 
-			}
+			if(!this.state.alternate.match(mobileFilter)){
+              status = false;
+              document.getElementById("alternateError").innerHTML = "Please enter a valid alternate mobile number";
+           }else{
+           		document.getElementById("alternateError").innerHTML = "";
+           }  
 		}
 
 		if(this.state.executiveSummary.length<=0){

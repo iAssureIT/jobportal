@@ -8,9 +8,11 @@
 	color: #fff;
 	margin-top: 50px;
 }
-.invoiceLogoWrapper{
-	height: 510px;
+.invoiceLogoInnerWrapper{
+	height: 230px;
 }
+
+
 .invoiceLogo{
 	height: 230px;
 	background-color: #3b4759;
@@ -61,22 +63,33 @@
 	margin-top: 60px;
 }
 .invoiceLogoText{
-	height: 320px;
-	padding-top: 30px;
+	height: 300px;
+	margin-top: 30px;
 	padding-left: 15px;
+	margin-bottom: 30px;
 }
 .invoiceTOText{
 	font-size: 15px;
-
+	min-height: 20px;
+	max-height: 40px;
+	height: auto;
+	text-overflow:ellipsis; 
     font-family: 'Montserrat-SemiBold',Sans-Serif;
     font-weight: 600;
    
  }
  .invoiceNameText{
- 	font-size: 33px;
+ 	text-transform: capitalize;
+ 	font-size: 18px;
     font-weight: bold; 
     color: var(--main-heading-font-color);
     font-family: 'Montserrat-Bold',Sans-Serif;
+   	margin-top: 14px;
+    min-height: 20px;
+    max-height: 50px;
+    height: auto;
+    margin-bottom: 5px;
+    text-overflow: ellipsis;
  }
  .invoicePersonalInfo{
  	margin-top: 30px;
@@ -87,15 +100,28 @@
  	font-weight: 600;
  	margin-bottom:10px; 
  }
+  .invoicePersonalInfoTitle3{
+ 	font-family: 'Montserrat-SemiBold',Sans-Serif;
+ 	font-weight: 600;
+ 	margin-bottom:10px; 
+ }
+ .invoicePersonalInfoTitle:after{
+ 	content: ":";
+ 	position: absolute;
+ 	right: 0px;
+ }
  .commaInvoice{
  	margin-right: 10px;
+ 	height: 100%;
  }
  .invoicePersonalInfoSubTitle{
  	font-family: 'Montserrat-Regular',Sans-Serif;
  	font-size: 14px;
+ 	min-height: 20px;
+ 	height: auto;
  }
  .invoiceBigHeading{
- 	padding-top: 110px;
+ 	padding-top: 40px;
  	font-family: 'Montserrat-Bold',Sans-Serif;
  	font-size: 50px;
  	font-weight: 600;
@@ -103,11 +129,9 @@
  	margin-bottom: 15px;
  }
  .invoicePaymentHeading{
- 	margin-top: 90px;
  	font-family: 'Montserrat-SemiBold',Sans-Serif;
  	font-weight: 600;
  	font-size: 25px;
- 	margin-bottom: 10px;
  }
  .invoiceTable{
  	border-collapse: separate !important;
@@ -155,7 +179,7 @@
     border-radius: 0 5px 5px 0; /* curves the top right */
 }
 .featuresWrapper{
-	height: 220px;
+	height: 200px;
 	margin-top: 20px;
 }
 .featuresTitle{
@@ -174,8 +198,17 @@
 	text-align: right;
 	font-size: 16px;
 }
+.invoicePersonalInfoSubTitle2:before{
+	content: ":";
+	position: absolute;
+	left:0px;
+	 font-weight: 600;
+}
 .invoicePersonalInfoTitle2{
 	font-size: 16px;
+	font-family: 'Montserrat-SemiBold',Sans-Serif;
+    font-weight: 600;
+    margin-bottom: 10px;
 }
 .featuresBill{
 	margin-top: 5px;
@@ -240,4 +273,15 @@
 	  border-top-left-radius: 100%;
 	  height: 45px;
 	  background-color:var(--main-border-color);
+}
+.fromIcon img{
+	width: 100%;
+	height: 80px;
+	margin-top: 14px;
+	background-color: #fff;
+	border-radius: 4px;
+}
+.buttonNext{
+	text-align: center;
+    padding-top: 5px;
 }

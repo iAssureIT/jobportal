@@ -43,89 +43,156 @@ render() {
                 <div className=" col-lg-12 invoiceWrapper">
                     <div className="row">
                         <div className="col-lg-6 invoiceLogoWrapper">
-                            <div className=" row">
+                            <div className="invoiceLogoInnerWrapper row">
                                 <div className="invoiceLogo col-lg-10">
                                     <img src="/images/1.png" className="invoiceLogoImg" alt="ijobs logo"/>
                                 </div>
                                 <div className="invoiceLogo2 col-lg-2">
                                 </div>
                             </div>
-                            <div className="row invoiceLogoText">
-                                <div className="col-lg-8 col-lg-offset-1">
-                                    <div className=" invoiceTOText">
-                                        INVOICE TO
-                                    </div>
-                                    <div className=" invoiceNameText">
-                                        {this.props.invoiceDetails.createdBy ? this.props.invoiceDetails.createdBy.profile.fullName : ""}
-                                    </div>
-                                    <div className=" invoiceTOText">
-                                    { this.props.invoiceDetails.company_id ? this.props.invoiceDetails.company_id.companyName : "" }
-                                    </div>
-                                </div>
-                                <div className="col-lg-10 col-lg-offset-1 invoicePersonalInfo">
-                                    <div className="">
-                                        <div className="row">
-                                            <div className="col-lg-4 invoicePersonalInfoTitle">
-                                                Mobile No 
-                                            </div>
-                                            <div className="col-lg-8 invoicePersonalInfoSubTitle">
-                                                <span className="commaInvoice"> : </span>  {this.props.invoiceDetails.createdBy ? this.props.invoiceDetails.createdBy.profile.mobile : ""}
-                                            </div>
-                                        </div>
-                                        <div className="row">
-                                            <div className="col-lg-4 invoicePersonalInfoTitle">
-                                                Email
-                                            </div>
-                                            <div className="col-lg-8 invoicePersonalInfoSubTitle">
-                                                <span className="commaInvoice"> : </span> {this.props.invoiceDetails.createdBy ? this.props.invoiceDetails.createdBy.profile.email : ""}
-                                            </div>
-                                        </div>
-                                        <div className="row">
-                                            <div className="col-lg-4 invoicePersonalInfoTitle">
-                                                Address 
-                                            </div>
-                                            <div className="col-lg-8 invoicePersonalInfoSubTitle">
-                                                <span className="commaInvoice"> : </span> 
-                                            </div>
-                                        </div>
-                                    </div>
+                            
+                        </div>
 
+                        <div className="col-lg-6 invoiceLogoWrapper ">
+                            
+                                <div className="col-lg-10 col-lg-offset-2">
+                                    <div className="row invoiceLogoInnerWrapper">
+                                        <div className="col-lg-12 invoiceBigHeading">
+                                            INVOICE 
+                                        </div>
+                                        <div className="col-lg-12">
+                                            <div className="row">
+                                                <div className="col-lg-5 invoicePersonalInfoTitle">
+                                                    Invoice No 
+                                                </div>
+                                                <div className="col-lg-7 invoicePersonalInfoSubTitle">
+                                                      {this.props.invoiceDetails.invoiceNumber ? this.props.invoiceDetails.invoiceNumber : ""}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="col-lg-12">
+                                            <div className="row">
+                                                <div className="col-lg-5 invoicePersonalInfoTitle">
+                                                    Invoice Date
+                                                </div>
+                                                <div className="col-lg-7 invoicePersonalInfoSubTitle">
+                                                     {Moment(this.props.invoiceDetails.startDate).format("DD-MM-YYYY")}  
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                 </div>
+                        </div>
+                    </div>
+                    <div>  
+                        <div className="col-lg-6 invoiceLogoText">
+                            <div className="col-lg-12">
+                                <div className=" invoiceTOText">
+                                    INVOICE FORM
+                                </div>
+                                <div className="col-lg-12">
+                                    <div className="row">
+                                        <div className="col-lg-3">
+                                            <div className="row fromIcon">
+                                               <img src="/images/iAssureIT_favicon_blue.png" alt="icon"/>
+                                            </div>
+                                        </div>
+                                        <div className="col-lg-9">
+                                            <div className="">
+                                                <div className=" invoiceNameText">
+                                                   iAssure International Technologies Pvt Ltd
+                                                </div>
+                                                <div className=" invoiceTOText">
+                                                Mr. Ashish Naik (MD & CEO)
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
+                            <div className="col-lg-12 invoicePersonalInfo">
+                                <div className="">
+                                    <div className="row">
+                                        <div className="col-lg-4 invoicePersonalInfoTitle">
+                                            Mobile No 
+                                        </div>
+                                        <div className="col-lg-8 invoicePersonalInfoSubTitle">
+                                             {this.props.invoiceDetails.createdBy ? this.props.invoiceDetails.createdBy.profile.mobile : ""}
+                                        </div>
+                                    </div>
+                                    <div className="row">
+                                        <div className="col-lg-4 invoicePersonalInfoTitle">
+                                            Email
+                                        </div>
+                                        <div className="col-lg-8 invoicePersonalInfoSubTitle">
+                                            {this.props.invoiceDetails.createdBy ? this.props.invoiceDetails.createdBy.profile.email : ""}
+                                        </div>
+                                    </div>
+                                    <div className="row">
+                                        <div className="col-lg-4 invoicePersonalInfoTitle">
+                                            Address 
+                                        </div>
+                                        <div className="col-lg-8 invoicePersonalInfoSubTitle">
+                                          
+                                            # 303, World Trade Center
+                                                1 Kharadi, Dholepatil Farms Rd, opp. Eon Free Zone, MIDC,
+                                                Knowledge Park, Pune
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
                         </div>
-                        <div className="col-lg-6 invoiceLogoWrapper ">
-                            <div className="col-lg-10 col-lg-offset-2">
-                                <div className="col-lg-12 invoiceBigHeading">
-                                    INVOICE 
+                        <div className="col-lg-6 invoiceLogoText">
+                            <div className="col-lg-12">
+                                <div className=" invoiceTOText">
+                                    INVOICE TO
                                 </div>
                                 <div className="col-lg-12">
                                     <div className="row">
-                                        <div className="col-lg-5 invoicePersonalInfoTitle">
-                                            Invoice No 
+                                        <div className="col-lg-3">
+                                            <div className="row fromIcon">
+                                               <img src="/images/iAssureIT_favicon_blue.png" alt="icon"/>
+                                            </div>
                                         </div>
-                                        <div className="col-lg-7 invoicePersonalInfoSubTitle">
-                                            <span className="commaInvoice"> : </span>  {this.props.invoiceDetails.invoiceNumber ? this.props.invoiceDetails.invoiceNumber : ""}
+                                        <div className="col-lg-9">
+                                            <div className="">
+                                                <div className=" invoiceNameText">
+                                                    { this.props.invoiceDetails.company_id ? this.props.invoiceDetails.company_id.companyName : "" }
+                                                </div>
+                                                <div className=" invoiceTOText">
+                                               {this.props.invoiceDetails.createdBy ? this.props.invoiceDetails.createdBy.profile.fullName : ""}
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div className="col-lg-12">
+                            
+                            </div>
+                            <div className="col-lg-12 invoicePersonalInfo">
+                                <div className="">
                                     <div className="row">
-                                        <div className="col-lg-5 invoicePersonalInfoTitle">
-                                            Invoice Date
+                                        <div className="col-lg-4 invoicePersonalInfoTitle">
+                                            Mobile No 
                                         </div>
-                                        <div className="col-lg-7 invoicePersonalInfoSubTitle">
-                                            <span className="commaInvoice"> : </span> {Moment(this.props.invoiceDetails.startDate).format("DD-MM-YYYY")}  
+                                        <div className="col-lg-8 invoicePersonalInfoSubTitle">
+                                            {this.props.invoiceDetails.createdBy ? this.props.invoiceDetails.createdBy.profile.mobile : ""}
                                         </div>
                                     </div>
-                                </div>
-                                
-                                <div className="col-lg-12 invoicePaymentHeading">
-                                    Payment Method
-                                </div>
-                                <div className="col-lg-12">
                                     <div className="row">
-                                        <div className="col-lg-12 invoicePersonalInfoTitle">
-                                            Online Payment
+                                        <div className="col-lg-4 invoicePersonalInfoTitle">
+                                            Email
+                                        </div>
+                                        <div className="col-lg-8 invoicePersonalInfoSubTitle">
+                                             {this.props.invoiceDetails.createdBy ? this.props.invoiceDetails.createdBy.profile.email : ""}
+                                        </div>
+                                    </div>
+                                    <div className="row">
+                                        <div className="col-lg-4 invoicePersonalInfoTitle">
+                                            Address 
+                                        </div>
+                                        <div className="col-lg-8 invoicePersonalInfoSubTitle">
+                                            
                                         </div>
                                     </div>
                                 </div>
@@ -133,6 +200,7 @@ render() {
                             </div>
                         </div>
                     </div>
+                   
                     <div className="row">
                         <div className="col-lg-10 col-lg-offset-1">
                             <div className="row">
@@ -158,7 +226,7 @@ render() {
                             </div>
                         </div>
                     </div>
-                    <div className="">
+                    <div className="row">
                         <div className="col-lg-6 featuresWrapper">
                             <div className="col-lg-10 col-lg-offset-1">
                                 <div className=" featuresTitle">
@@ -199,7 +267,7 @@ render() {
                         <div className="col-lg-6 featuresWrapper">
                             <div className="col-lg-8 col-lg-offset-3">
                                 <div className="row featuresBill">
-                                    <div className="col-lg-6 invoicePersonalInfoTitle invoicePersonalInfoTitle2">
+                                    <div className="col-lg-6  invoicePersonalInfoTitle2">
                                         <div className="row">  Subtotal </div>
                                     </div>
                                     <div className="col-lg-6 invoicePersonalInfoSubTitle invoicePersonalInfoSubTitle2">
@@ -207,7 +275,7 @@ render() {
                                     </div>
                                 </div>
                                 <div className="row featuresBill">
-                                    <div className="col-lg-6 invoicePersonalInfoTitle invoicePersonalInfoTitle2">
+                                    <div className="col-lg-6  invoicePersonalInfoTitle2">
                                        <div className="row">  GST ({this.state.taxrate[0] ? this.state.taxrate[0].taxRating : 0 }%) </div>
                                     </div>
                                     <div className="col-lg-6 invoicePersonalInfoSubTitle invoicePersonalInfoSubTitle2">
@@ -218,7 +286,7 @@ render() {
                                 <hr className="row featuresBillHr"/>
                                 <div className="row featuresBill">
 
-                                    <div className="col-lg-6 invoicePersonalInfoTitle invoicePersonalInfoTitle2">
+                                    <div className="col-lg-6  invoicePersonalInfoTitle2">
                                         <div className="row"> Grand Total</div>
                                     </div>
                                     <div className="col-lg-6 invoicePersonalInfoSubTitle invoicePersonalInfoSubTitle2">
@@ -229,7 +297,7 @@ render() {
                             </div>
                         </div>
                     </div>
-                    <div className="">
+                    <div className="row">
                         {/*<div className="col-lg-6 conditionWrapper">
                             <div className="col-lg-10 col-lg-offset-1">
                                 <div className=" invoicePersonalInfoTitle invoiceConditionTitle">
@@ -255,7 +323,21 @@ render() {
                                 </div>
                             </div>
                         </div>*/}
-                        <div className="col-lg-offset-6 col-lg-6 conditionWrapper">
+                        <div className="col-lg-6  conditionWrapper">
+                             <div className="col-lg-10 col-lg-offset-1">
+                                <div className=" invoicePaymentHeading">
+                                    Payment Method
+                                </div>
+                                <div className="">
+                                    <div className="row">
+                                        <div className="col-lg-12 invoicePersonalInfoTitle3">
+                                            Online Payment
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="col-lg-6  conditionWrapper">
                             <div className="col-lg-12">
                                  <a className="buttonNext  invoiceButtonNext col-lg-6 col-lg-offset-5" onClick={this.makePayment.bind(this, this.props.invoiceDetails._id, total)}>
                                      Make Payment

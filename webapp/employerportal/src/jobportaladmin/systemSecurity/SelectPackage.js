@@ -57,11 +57,7 @@ handleChange(event){
 }
 handleSelection(event){
     event.preventDefault();
-<<<<<<< Updated upstream
-  
-=======
-    //console.log(event.currentTarget.getAttribute('data-id'))
->>>>>>> Stashed changes
+
     this.setState({ package_id : event.currentTarget.getAttribute('data-id'),
                     price : event.currentTarget.getAttribute('data-price'),
                     validity : event.currentTarget.getAttribute('data-validity') })
@@ -108,12 +104,7 @@ subscribePackage(event){
         this.setState({
           paymentDetails : response.data,
         })
-<<<<<<< Updated upstream
-        
-=======
-        console.log(response.data)
-        console.log(response.data.data._id)
->>>>>>> Stashed changes
+
         if (this.state.price > 0) {
             
             Axios.get('/api/packagesubscription/paymentOrderDetails/'+response.data.data._id)
@@ -144,11 +135,7 @@ subscribePackage(event){
     })
 }
 makePayment (subscription_id, amountPaid) { 
-<<<<<<< Updated upstream
-  
-=======
-    console.log("makePayment",amountPaid)
->>>>>>> Stashed changes
+
     var formValues = { "subscription_id" : subscription_id , amountPaid: amountPaid}
     Axios.patch('/api/packagesubscription/payment-response', formValues)
             .then((orderdetails)=>{
