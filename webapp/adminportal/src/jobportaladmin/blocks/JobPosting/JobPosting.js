@@ -16,6 +16,8 @@ import { connect }                  from 'react-redux';
 import { bindActionCreators }       from 'redux';
 import  * as mapActionCreator       from '../../Common/actions/index';
 import BulkUpload                   from "../../../coreadmin/Master/BulkUpload/BulkUpload.js";
+
+import PreviewModal                 from '../PreviewModal/PreviewModal.js';
  
 import './JobPosting.css';
 import 'react-phone-input-2/lib/style.css';
@@ -2134,11 +2136,24 @@ render(){
                                                     />  
                                                 </div> 
                                             </div>
-                                        </div>                                                                                                                      
-                                        
-                                        <div className="col-lg-3 pull-right">
-                                            <button className="btn buttonYellow addJobSubmitBtn"  onClick={this.handleSubmit}> {this.state.submitBtnText} </button>
+                                        </div>   
+
+                                        <div className="col-lg-7 col-lg-offset-5 pull-right"> 
+                                                <button className="btn addJobFormField saveFLBtn pull-left" data-status = "draft" onClick={this.handleSubmit.bind(this)}>
+                                                    Save for Later 
+                                                </button>
+
+                                                <button type="button" data-toggle="modal" data-target="#robust" data-dismiss="modal" className="btn addJobFormField addJobPreviewBtn"> 
+                                                    PREVIEW 
+                                                </button>
+
+                                                <PreviewModal jobInfo = {this.state} />
+
+                                                <button className="btn buttonYellow addJobSubmitBtn" data-status = "active" onClick={this.handleSubmit.bind(this)}> {this.state.submitBtnText} </button>
                                         </div>
+                                       {/* <div className="col-lg-3 pull-right">
+                                            <button className="btn buttonYellow addJobSubmitBtn"  onClick={this.handleSubmit}> {this.state.submitBtnText} </button>
+                                        </div>*/}
                                     </form>
                                 </div>
                             </div>

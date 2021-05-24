@@ -1,0 +1,619 @@
+.jobProfileModalWrapper{
+	min-height: 670px;
+	height: auto;
+	padding-top: 5px;
+	padding-left: 35px;
+	padding-right: 35px;
+	padding-bottom: 30px;
+	background-color: var(--main-bg-color);
+	color: var(--main-txt-color);
+}
+
+.modalLeftSideMain{
+	height: 1100px;
+	border: 1px solid var(--main-border-color);
+	background-color: var(--form-field-background-color);
+	padding-bottom: 100px;
+}
+
+.ModalLeftHeader{
+	height: 180px;
+	border-bottom: 1px solid var(--main-border-color);
+}
+
+.leftImgModalContainer{
+	/*height: 214px;*/
+	background-color: var(--form-field-background-color);
+}
+
+.leftImgModalContainer .modalImgbox{
+	margin-top: 40px;
+	margin-left: 15px;
+	height: 100px;
+	border-radius: 3px;
+	background-color: #fff;
+}
+
+.leftImgModalContainer .modalProfileLogo{
+	height: 40px;
+	margin-top: 30px;
+	border-radius: 5px;
+}
+
+.modalImgContent .modalContentMain{
+	padding-top: 25px;
+}
+
+.modalImgContent{
+	/*height: 214px;*/
+	background-color: var(--form-field-background-color);
+}
+
+.modalImgContent .modalContentHead{
+	font-size: 22px;
+	font-weight: bold;
+	padding-top: 30px;
+	margin-left: -50px;
+	color: var(--main-subheading-font-color);
+	/*font-family: 'Montserrat-SemiBold';*/
+	font-weight: 600;
+}
+
+.modalImgContent .modalSubContentHead{
+	margin-top: -3px;
+	margin-left: -50px;
+	font-size: 15px;
+	/*font-family: 'Montserrat-SemiBold';*/
+	font-weight: 600;
+}
+
+.modalImgContent .modalLocationinfo{
+	margin-left: -50px;
+	font-size: 14px;
+	/*font-family: 'Montserrat-Regular';*/
+	font-weight: 600;
+	color: var(--main-txt-color);
+	white-space: nowrap !important;
+	text-overflow: ellipsis !important;
+  	overflow: hidden !important;
+}
+
+.jobProfileMain{ 
+	height: auto;
+}
+
+.content1 .timeline .start{
+	margin-left: 41px;
+	margin-top: 70px;
+	width: 1px;
+	height: 356px;
+	background-color: var(--main-border-color);
+}
+
+.timeline{
+	height: 200px;
+	/*background-color: red;*/
+}
+
+.modalJobDescContent{
+	margin-left: -37px;
+	font-size: 13px;
+	/*text-align: justify;*/
+}
+
+/*******************************Content Wrapper One********************************/
+
+.contentWrapper1{
+	height: auto;
+	margin-top: -5px;
+	/*min-height: 200px;*/
+	/*background-color: blue;*/
+}
+
+.contentWrapper1 .DescriptionContainer{
+	height: auto;
+	margin-top: 63px;
+	/*min-height: 100px;*/
+	padding-bottom: 15px;
+	padding-top: 18px;
+	padding-left: 33px;
+	border-left: 2px solid var(--main-border-color);
+	/*background-color: green;*/
+} 
+
+.contentWrapper1 .modalProfileheading{
+	position: absolute;
+	font-size: 19px;
+	font-weight: bold;
+	margin-top: 37px;
+	margin-left: 40px;
+	color: var(--main-subheading-font-color);
+	/*font-family: 'Montserrat-SemiBold';*/
+	font-weight: 600;
+}
+
+.contentWrapper1 .profileSubContainer{
+	height: auto;
+	/*min-height: 200px;*/
+	margin-left: 13px;
+	margin-top: 5px;
+	/*background-color: maroon;*/
+}
+
+.contentWrapper1 .horizontalRightLine{
+	height: 2px;
+	position: absolute;
+	margin-top: 50px;
+	margin-left: 12px;
+	width: 25px;
+	background-color: var(--main-border-color);
+}
+
+.contentWrapper1 .profileContent{
+	/*font-family: 'Montserrat-Regular';*/
+}
+
+.contentWrapper1 .diamondBullet:before{
+	content: "\25C8";
+	position: absolute;
+	top: -10px;
+	left: -18px;
+	font-size: 16px;
+	font-weight: bold;
+	color: var(--main-subheading-font-color);
+}
+
+/*****************************End of Content Wrapper One**********************************/
+
+/*******************************Content Wrapper Two***************************************/
+
+.contentWrapper2{
+	height: auto;
+	/*min-height: 120px;*/
+	/*background-color: blue;*/
+}
+
+.contentWrapper2 .DescriptionContainer{
+	margin-top: 27px;
+	height: auto;
+	/*min-height: 100px;*/
+	border-left: 2px solid var(--main-border-color);
+	padding-bottom: 20px;
+	padding-top: 10px;
+	padding-left: 35px;
+	/*background-color: green;*/
+} 
+
+.contentWrapper2 .modalProfileheading{
+	position: absolute;
+	font-size: 19px;
+	font-weight: bold;
+	margin-top: -1px;
+	color: var(--main-subheading-font-color);
+	margin-left: 40px;
+	/*font-family: 'Montserrat-SemiBold';*/
+	font-weight: 600;
+}
+
+.contentWrapper2 .profileSubContainer{
+	height: auto;
+	/*min-height: 120px;*/
+	/*background-color: maroon;*/
+	margin-left: 13px;
+}
+
+.contentWrapper2 .horizontalRightLine{
+	height: 2px;
+	position: absolute;
+	margin-top: 12px;
+	margin-left: 12px;
+	width: 25px;
+	background-color: var(--main-border-color);
+}
+
+.contentWrapper2 .profileContent{
+	/*font-family: 'Montserrat-Regular';*/
+	font-weight: 400;
+}
+
+.contentWrapper2 .diamondBullet:before{
+	content: "\25C8";
+	position: absolute;
+	top: -10px;
+	left: -18px;
+	font-size: 16px;
+	font-weight: bold;
+	color: var(--main-subheading-font-color);
+}
+
+.contentWrapper2 .modalEduSubtitle{
+	/*font-family: 'Montserrat-SemiBold';*/
+	font-weight: 600;
+}
+
+.contentWrapper2 .modalEduDuration{
+	/*font-family: 'Montserrat-Regular';*/
+	font-weight: 400;
+	font-size: 13px;
+}
+
+.profileContent li:before{
+	content: "\25C6";
+    /*font-weight: bold;*/
+    padding-right: 6px;
+    margin-left: -15px;	
+}
+
+.profileContent li{
+	list-style: none;
+}
+
+/*************************End of Content Wrapper Two******************************/
+
+/****************************Content Wrapper Three********************************/
+
+.contentWrapper3{
+	height: auto;
+	/*min-height: 120px;*/
+	/*background-color: blue;*/
+}
+
+.contentWrapper3 .DescriptionContainer{
+	margin-top: 27px;
+	height: auto;
+	/*min-height: 100px;*/
+	border-left: 2px solid var(--main-border-color);
+	padding-top: 10px;
+	padding-left: 35px;
+	/*background-color: green;*/
+} 
+
+.contentWrapper3 .modalProfileheading{
+	position: absolute;
+	font-size: 19px;
+	font-weight: 600;
+	color: var(--main-subheading-font-color);
+	margin-top: -1px;
+	margin-left: 40px;
+	/*font-family: 'Montserrat-SemiBold';*/
+}
+
+.contentWrapper3 .profileSubContainer{
+	height: auto;
+	/*min-height: 120px;*/
+	/*background-color: maroon;*/
+	margin-left: 13px;
+}
+
+.contentWrapper3 .horizontalRightLine{
+	height: 2px;
+	position: absolute;
+	margin-top: 12px;
+	margin-left: 12px;
+	width: 25px;
+	background-color: var(--main-border-color);
+}
+
+.contentWrapper3 .profileContent{
+	/*font-family: 'Montserrat-Regular';*/
+	font-weight: 400;
+}
+
+.contentWrapper3 .diamondBullet:before{
+	content: "\25C8";
+	position: absolute;
+	top: -10px;
+	left: -18px;
+	font-size: 16px;
+	font-weight: bold;
+	color: var(--main-subheading-font-color);
+}
+
+.contentWrapper3 .eduSubtitle{
+	/*font-family: 'Montserrat-SemiBold';*/
+	font-weight: 600;
+}
+
+.contentWrapper3 .eduDuration{
+	/*font-family: 'Montserrat-Regular';*/
+	font-weight: 400;
+}
+
+.profileContent li:before{
+	content: "\25C6";
+    /*font-weight: bold;*/
+    padding-right: 6px;
+    margin-left: -15px;	
+}
+
+.profileContent li{
+	list-style: none;
+}
+
+/*****************************End of Content Wrapper Three****************************/
+
+.profileContent1 li{
+	list-style: none;
+}
+
+.profileContent1 li:nth-child(1):before{
+	content: "\25C6";
+    font-weight: bold;
+    padding-right: 6px;
+    margin-left: -15px;
+	list-style: none;
+}
+
+.modalSkillsHeadOne{
+	/*background-color: maroon;*/
+	margin-left: 6px;
+}
+
+.modalSkillsHeadOne .skillsTitle{
+	font-size: 15px;
+	/*font-family: 'Montserrat-SemiBold';*/
+	font-weight: 600;
+	color: var(--main-subheading-font-color);
+}
+
+.modalSkillsHeadOne .skillSubtitle{
+	/*font-family: 'Montserrat-SemiBold';*/
+	font-weight: 600;
+}
+
+.modalSkillsHeadOne .skillDuration{
+	/*font-family: 'Montserrat-Regular';*/
+	font-weight: 400;
+}
+
+.modalSkillsHeadOne li:nth-child(2){
+	margin-top: 30px;
+	/*background-color: red;*/
+}
+
+.modalSkillsHeadTwo{
+	margin-top: 10px;
+	margin-left: 6px;
+	/*background-color: gray;*/
+}
+
+.modalSkillsHeadTwo .skillsTitle{
+	font-size: 15px;
+	/*font-family: 'Montserrat-SemiBold';*/
+	font-weight: 600;
+	color: var(--main-subheading-font-color);
+}
+
+.modalSkillsHeadTwo .skillSubtitle{
+	/*font-family: 'Montserrat-SemiBold';*/
+	font-weight: 600;
+}
+
+.modalSkillsHeadTwo .skillDuration{
+	/*font-family: 'Montserrat-Regular';*/
+	font-weight: 400;
+}
+
+.modalSkillsHeadTwo li:nth-child(2){
+	margin-top: 30px;
+	/*background-color: red;*/
+}
+
+.modalSkillsHeadThree{
+	margin-left: 6px;
+	margin-top: 10px;
+	/*background-color: red;*/
+}
+
+.modalSkillsHeadThree .skillsTitle{
+	font-size: 15px;
+	/*font-family: 'Montserrat-SemiBold';*/
+	font-weight: 600;
+	color: var(--main-subheading-font-color);
+}
+
+.modalSkillsHeadThree .skillSubtitle{
+	/*font-family: 'Montserrat-SemiBold';*/
+	font-weight: 600;
+}
+
+.modalSkillsHeadThree .skillDuration{
+	/*font-family: 'Montserrat-Regular';*/
+	font-weight: 400;
+}
+
+.modalSkillsHeadThree li:nth-child(2){
+	margin-top: 30px;
+	/*background-color: red;*/
+}
+
+.modalSkillsHeadFour{
+	margin-left: 6px;
+	margin-top: 10px;
+	/*font-family: 'Montserrat-SemiBold';*/
+	font-weight: 600;
+	/*background-color: red;*/
+}
+
+.modalSkillsHeadFour li:nth-child(2){
+	margin-top: 62px;
+}
+
+.modalSkillsHeadFour .skillsTitle{
+	color: var(--main-subheading-font-color);
+}
+
+.skillsList{
+	/*background-color: brown;*/
+	margin-top: 22px;
+	position: absolute;
+	/*font-family: 'Montserrat-Regular';*/
+	font-weight: 400;
+}
+
+.buttonMain{
+	margin-top: 50px;
+	padding-bottom: 40px;
+}
+
+.btnEdit{
+	border: 1px solid var(--main-border-color);
+    background-color: transparent;
+    color: var(--main-txt-color);
+    margin-left: -50px;
+    margin-right: 0px;
+}
+
+.btnEdit:hover{
+	color: var(--main-txt-color);
+}
+
+.btnSubmit{ 
+	background-color: var(--yellow-button-color);
+	margin-left: 33px;
+}
+
+.btnSubmit:hover{ 
+	color: var(--main-txt-color);
+}
+
+/**************************Right Aside Bar******************************/
+
+.ModalRightSideMain{
+	height: 1100px;
+	padding-bottom: 40px;
+	border: 1px solid var(--main-border-color);
+	background-color: var(--form-field-background-color);
+}
+
+.ModalRightSideHeader{
+	height: 180px;
+	border-bottom: 1px solid var(--main-border-color);
+	background-color: var(--form-field-background-color);
+}
+
+.modalMapImg{
+	height: 120px;
+	margin-top: 30px;
+	margin-left: 16px;
+	/*height: 140px;
+	margin-left: 25px;
+	margin-top: 20px;*/
+}
+
+.rightModalContentHead{
+	font-size: 23px;
+	font-weight: bold;
+	color: var(--main-subheading-font-color);
+	padding-top: 30px;
+	padding-left: 5px;
+	/*font-family: 'Montserrat-SemiBold';*/
+	font-weight: 600;
+}
+
+.rightSideModalTitle{
+	font-size: 18px;
+	font-weight: bold;
+	padding-left: 5px;
+	padding-top: 7px;
+	color: var(--main-subheading-font-color);
+	/*font-family: 'Montserrat-SemiBold';*/
+	font-weight: 600;
+}
+
+.rightSideModalSub{
+	padding-left: 5px;
+	padding-top: 2px;
+	margin-left: 2px;
+	font-size: 13px;
+	/*font-family: 'Montserrat-Regular';*/
+	font-weight: 400;
+}
+
+.rightSideModalSub .rupeeIcon{
+	font-size: 10px;
+}
+
+.rightSideModalImg{
+	height: 250px;
+	margin-left: -18px;
+	margin-top: 160px;
+}
+
+/******************************************modal classes**********************************************/
+
+.modalwrapper{
+	background-color: var(--main-bg-color);
+}
+
+.modal-body{
+	background-color: var(--main-bg-color);
+    padding: 0 !important;
+    /*width: 120%;
+    margin-left: -100px;*/
+}
+
+.modal-content{
+	background-color: var(--main-bg-color);
+}
+
+.modal-footer{
+	background-color: var(--main-bg-color);
+	border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-top: 1px solid var(--main-border-color);
+    /*width: 120%;
+    margin-left: -100px;*/
+}
+
+.previewModal-header .previewCloseBtn{
+    background-color: var(--main-border-color);
+    /*border: 0 none !important;*/
+    color: #fff;
+    display: inline-block;
+    float: right;
+    font-size: 20px;
+    height: 28px;
+    /*line-height: 1;*/
+    border-radius: 10%;
+    margin: 10px 10px;
+    opacity: 1;
+    text-align: center;
+    text-shadow: none;
+    -webkit-transition: background 0.2s ease-in-out;
+    transition: background 0.2s ease-in-out;
+    vertical-align: top;
+    width: 30px;
+}
+
+.previewCloseBtn:hover{
+	color: #fff !important;
+	background-color: var(--main-bg-color);
+	border: 1px solid var(--main-border-color);
+	transition: background-color 0.5s ease;
+}
+
+.previewModal-header{
+	padding: 0px !important;
+	background-color: var(--main-bg-color);
+	border-top-right-radius: 10px;
+	border-top-left-radius: 10px;
+    border: none;
+    /*width: 120%;
+    margin-left: -100px;*/
+}
+
+.modalbtn{
+	background-color: var(--main-border-color);
+	color: #fff;
+	border: none;
+	height: 30px;
+	width: 10%;
+	border-radius: 5px;
+}
+
+.modalbtn:hover{
+	background-color: var(--main-bg-color);
+	border: 1px solid var(--main-border-color);
+	transition: background-color 0.5s ease;
+}
