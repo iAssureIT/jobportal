@@ -129,6 +129,24 @@ export const setJobWishlist = (jobWishlist )=> ({
       type        : 'GET_JOB_WISHLIST',
       jobWishlist     : jobWishlist
 });
+export const setSubscriptionDetails = (subscriptionDetails )=> ({
+      type                    : 'SUBSCRIPTION_DETAILS',
+      subscriptionDetails     : subscriptionDetails
+});
+
+export function getSubscriptionDetails(company_id) {
+    return dispatch =>{
+      //console.log(selector)
+      
+      return axios.get("/api/packagesubscription/subscription-details/"+company_id)
+      .then((response)=>{
+          dispatch(setSubscriptionDetails(response.data));
+      })
+      .catch((error)=>{
+            console.log('error', error);
+      }) 
+    }  
+}
 export function jobCount(selector) {
     return dispatch =>{
       //console.log(selector)

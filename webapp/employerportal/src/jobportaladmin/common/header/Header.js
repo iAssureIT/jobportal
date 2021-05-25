@@ -24,7 +24,8 @@ class Header extends Component{
   }
   componentDidMount() {
     this.setState({userDetails : JSON.parse(localStorage.getItem("userDetails"))})
-    
+    var {mapAction} = this.props;
+    mapAction.getSubscriptionDetails(this.props.userDetails.company_id)
   }
   profileInfo(event){
 
@@ -228,7 +229,7 @@ class Header extends Component{
 const mapStateToProps = (state)=>{
     return {
         selectedModal  : state.selectedModal,
-        userDetails    : state.userDetails 
+        userDetails    : state.userDetails, subscriptionDetails   : state.subscriptionDetails 
     }
 }
 const mapDispatchToProps = (dispatch) => ({

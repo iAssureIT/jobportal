@@ -924,6 +924,7 @@ class JobPosting extends Component {
     }
 
     insertData(formValues) {
+        formValues.jobPublished = this.props.subscriptionDetails.jobPublished
         Axios.post("/api/jobs/post", formValues)
 
             .then(response => {
@@ -2045,7 +2046,7 @@ render(){
 
 const mapStateToProps = (state) =>  {
                                         return {
-                                                    userDetails     : state.userDetails,
+                                                    userDetails     : state.userDetails, subscriptionDetails : state.subscriptionDetails
                                                 }
                                     }
 

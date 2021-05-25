@@ -1,6 +1,7 @@
 import React, { Component }  from 'react';
 import { FontAwesomeIcon }   from '@fortawesome/react-fontawesome';
 import Axios                 from 'axios';
+import Swal                  from 'sweetalert2';
 import Invoice               from "./invoice.js";
 import Success               from "./Success.js";
 import Moment                from 'moment';
@@ -44,6 +45,16 @@ componentDidMount(){
         .catch(error=>{
           console.log(error)
         })
+    /*if (this.props.selectedCompanyDetails.company_id) {
+        Axios.get("/api/packagesubscription/subscription-details/"+this.props.selectedCompanyDetails.company_id)
+        .then(response=>{
+          //this.setState({packagemasterArray : response.data});
+        })
+        .catch(error=>{
+          console.log(error)
+        })
+    }    */
+
 }
 
 handleChange(event){
@@ -68,6 +79,9 @@ subscribePackage(event){
     
     var startDate   = Moment(new Date()).format("YYYY-MM-DD")
     var endDate     = Moment(startDate, "YYYY-MM-DD").add('month', this.state.validity).format("YYYY-MM-DD")
+    if (this.state.package_id == "" ) {
+        Swal.fire('', "Please select package", '');
+    }else{
 
     var formValues={
       "package_id"        : this.state.package_id,
@@ -130,9 +144,10 @@ subscribePackage(event){
         }
         
         })
-    .catch(function(error){
-      
-    })
+        .catch(function(error){
+          
+        })
+    }
 }
 makePayment (subscription_id, amountPaid) { 
 

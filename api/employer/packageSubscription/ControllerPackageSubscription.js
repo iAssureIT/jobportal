@@ -124,3 +124,16 @@ exports.payment_response = (req,res,next) =>{
         });
 	
 }
+exports.subscriptionDetails = (req,res,next) =>{
+	PackageSubscription.findOne({company_id: req.params.company_id})
+		.populate('package_id')
+		.populate('company_id')
+		.exec(function(err, details) {
+	            console.log(err)
+	            if (err) return res.status(500).json({
+	                error: err
+	            });
+	            res.status(200).json(details);
+	        });
+}
+

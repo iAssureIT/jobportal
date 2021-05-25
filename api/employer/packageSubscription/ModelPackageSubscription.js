@@ -15,6 +15,13 @@ const packagesubscriptionSchema = mongoose.Schema({
 	paymentOrderID 	: String,
 	paymentStatus	: String, //Paid or Failed
 	invoiceNumber 	: Number,
+
+	jobPublished		: Number,
+	resumeDownloaded 	: Number,
+	emailSent 			: Number, 	
+	videoIntroduction 	: Number,
+	robotScreening 		: Number,	
+
 	createdAt 		: Date,
 	createdBy		: {type: mongoose.Schema.Types.ObjectId, ref: 'users'}
 	
