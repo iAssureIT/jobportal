@@ -17,6 +17,7 @@ import PlacesAutocomplete,
 import { connect }                  from 'react-redux';
 import { bindActionCreators }       from 'redux';
 import  * as mapActionCreator       from '../../common/actions/index';
+
 import 'react-phone-input-2/lib/style.css';
 import './JobPosting.css';
 
@@ -613,7 +614,7 @@ class JobPosting extends Component {
             status = false;
         } 
         else if (this.state.positions.length <= 0) {
-            document.getElementById("positionsError").innerHTML = "Please enter  number";
+            document.getElementById("positionsError").innerHTML = "Please enter number";
             status = false;
         }
         else {
@@ -777,6 +778,30 @@ class JobPosting extends Component {
         } else {
             document.getElementById("contactPersonPhoneError").innerHTML = "Please enter valid Mobile Number";  
             status=false; 
+        }
+
+        if (this.state.primarySkillTags.length <= 0) {
+            document.getElementById("primarySkillTagsError").innerHTML = "Please select or enter primary skills";
+            status = false;
+        } else {
+            document.getElementById("primarySkillTagsError").innerHTML = "";
+            status = true;
+        }
+
+        if (this.state.secondarySkillTags.length <= 0) {
+            document.getElementById("secondarySkillTagsError").innerHTML = "Please select or enter secondary skills";
+            status = false;
+        } else {
+            document.getElementById("secondarySkillTagsError").innerHTML = "";
+            status = true;
+        }
+
+        if (this.state.otherSkillTags.length <= 0) {
+            document.getElementById("otherSkillTagsError").innerHTML = "Please select or enter other skills";
+            status = false;
+        } else {
+            document.getElementById("otherSkillTagsError").innerHTML = "";
+            status = true;
         }
         return status;
     }
@@ -1840,6 +1865,7 @@ render(){
                                                             maxLength        =   "42"
                                                         />
 												</div>
+                                                <span id="primarySkillTagsError" className="errorMsgJobPost"></span>
 											</div>
 											
 											<div className="col-lg-4">
@@ -1868,6 +1894,7 @@ render(){
                                                             maxLength        =   "42"
                                                         />
 												</div>
+                                                <span id="secondarySkillTagsError" className="errorMsgJobPost"></span>
 											</div>
 											
 											<div className="col-lg-4">
@@ -1896,6 +1923,7 @@ render(){
                                                             maxLength        =   "42"
                                                         />
 												</div>
+                                                <span id="otherSkillTagsError" className="errorMsgJobPost"></span>
 											</div>
 											
 											<div className="col-lg-4">
