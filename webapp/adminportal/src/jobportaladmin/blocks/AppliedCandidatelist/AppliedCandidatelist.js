@@ -48,6 +48,7 @@ class AppliedCandidatelist extends Component{
 	}
 	
 	
+	
 	componentDidMount(){
 		console.log(",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,",this.props);
 		var {mapAction}  = this.props;
