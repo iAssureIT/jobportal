@@ -3,7 +3,7 @@ import $ from 'jquery';
 import jQuery from 'jquery';
 import 'jquery-validation';
 import axios from 'axios';
-import Swal           from 'sweetalert2';
+import Swal from 'sweetalert2';
 import './ForgotPassword.css';
 import { connect }        from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -118,6 +118,7 @@ class ForgotPassword extends Component {
                     */
                     localStorage.setItem('previousUrl' ,'forgotpassword');
                     $('.fullpageloader').hide();
+
                     Swal.fire('', "OTP send to your registered Phone Number", '');
                     this.props.history.push('/confirm-otp-fp/'+response.data.userID);
                    // var {mapAction} = this.props;
@@ -129,11 +130,13 @@ class ForgotPassword extends Component {
 
                 } else if(response.data.message == "USER_BLOCK"){
                     console.log("In USER_BLOCK")
-                    Swal.fire(
-                      '',
-                      "Your account is inactive. Please contact Admin.",
-                      ''
-                    );
+
+                    Swal.fire({
+                      title       : ' ',
+                      html        : 'Your account is inactive<br />Please contact Admin',
+                      text        : '',
+                    });
+
                     this.props.history.push('/login');
                    /* var {mapAction} = this.props;
                     mapAction.setSelectedModal("login");*/
