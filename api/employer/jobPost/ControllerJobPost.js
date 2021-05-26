@@ -17,6 +17,8 @@ const JobShiftMaster = require('../../coreAdmin/JobShiftMaster/ModelJobShift.js'
 const JobTimeMaster = require('../../coreAdmin/JobTimeMaster/ModelJobTime.js');
 const SkillMaster = require('../../coreAdmin/SkillMaster/ModelSkill.js');
 const QualificationMaster = require('../../coreAdmin/QualificationMaster/ModelQualification.js');
+const PackageSubscription   = require('../packageSubscription/ModelPackageSubscription.js');
+
 var moment      = require('moment');
 var ObjectID = require('mongodb').ObjectID;
 
@@ -172,11 +174,29 @@ exports.insertJobs = (req, res, next) => {
         jobsData.save()
 
             .then(jobsData => {
-                res.status(200).json({
-                    jobsData: jobsData,
-                    created: true,
-                    message: "Job details Inserted Successfully",
-                });
+                var jobPublished = req.body.jobPublished;
+                jobPublished++;
+                PackageSubscription.updateOne(
+                    { "company_id": req.body.company_id},
+                    {
+                        $set : { "jobPublished"    : jobPublished  }
+                    }
+                    )
+                .exec()
+                .then(data=>{
+                    // res.redirect("http://localhost:3000/paymentResponse");
+                    if(data.nModified === 1){
+                        // res.status(200).json({                          
+                        //         message : "Payment is done successfully",
+                        //         data: data,
+                        //     });
+                    }
+                    res.status(200).json({
+                        jobsData: jobsData,
+                        created: true,
+                        message: "Job details Inserted Successfully",
+                    });
+                })
             })
 
             .catch(error => {

@@ -34,6 +34,7 @@ const initialState = {
 		token 		: "", 
 		industry_id : ""
 	},
+	subscriptionDetails  		: {},
 	selector 					: {},
 	showLoader 					: false,
 	statusMode 					: "active",
@@ -81,6 +82,9 @@ const reducer = (state = initialState, action) => {
 	}
 	if(action.type === "SET_USER_CREDENTIALS"){
 		newState.userCredentials 	= action.userCredentials;
+	}
+	if(action.type === "SUBSCRIPTION_DETAILS"){
+		newState.subscriptionDetails 	= action.subscriptionDetails;
 	}
 	
 	if(action.type === "SET_USER_DETAILS"){

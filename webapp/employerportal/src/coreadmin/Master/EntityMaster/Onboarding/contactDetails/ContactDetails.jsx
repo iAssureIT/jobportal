@@ -1308,13 +1308,13 @@ class ContactDetails extends Component {
 																			{/*<i className="fa fa-phone" aria-hidden="true"></i>*/}
 																		</div>
 																		<ul className="col-lg-10 col-md-10 col-sm-10 col-xs-10 palfclr addrbox">
-																			<li className="fz16"><b>{data.firstName} {data.lastName} </b><span className="fz12">( Emp ID : {data.employeeID} )</span></li>
-																			<li>{data.email}, {data.phone}, {data.altPhone}</li>
+																			<li className="fz16 contactCardContent"><b>{data.firstName} {data.lastName} </b><span className="fz12">( Emp ID : {data.employeeID} )</span></li>
+																			<li className="contactCardContent">{data.email}, {data.phone}, {data.altPhone}</li>
 																			{/*<li>&nbsp;</li>*/}
-																			<li>Branch Code: {data.branchCode  + ( data.locationType ? " ("+ data.locationType+ ")":"")}</li>
+																			<li className="contactCardContent">Branch Code: {data.branchCode  + ( data.locationType ? " ("+ data.locationType+ ")":"")}</li>
 																			{/*<li>Branch Code: {data.branchCode +" ("+data.branchName+")"}</li>*/}
-																			<li>Company Branch: {data.branchName?data.branchName :" -NA- "}</li>
-																			<li>Department &  Designation : {data.departmentName && data.designationName ? data.departmentName+" , "+data.designationName : " -NA- "}</li>
+																			<li className="contactCardContent">Company Branch: {data.branchName?data.branchName :" -NA- "}</li>
+																			<li className="contactCardContent">Department &  Designation : {data.departmentName && data.designationName ? data.departmentName+" , "+data.designationName : " -NA- "}</li>
 																			{/*<li>Designation: {data.designationName ? data.designationName : " -NA- "}</li>*/}
 																			
 																			{data.createUser?

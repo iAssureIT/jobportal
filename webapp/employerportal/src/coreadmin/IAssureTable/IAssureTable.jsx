@@ -701,7 +701,7 @@ class IAssureTable extends Component {
 															        <div className="modal-body delModalBody">
 															          <div className="delBodyText">
 															            Are you sure <br />
-															            you want to delete this job?
+															            you want to delete ?
 															          </div>
 															          <div className="col-lg-12 delMainBtnDiv">
 															              <button type="button" className="btn btn-default delModalBtnOne col-lg-3" data-dismiss="modal">NO</button> 

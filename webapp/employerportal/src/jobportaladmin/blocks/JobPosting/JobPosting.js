@@ -17,6 +17,7 @@ import PlacesAutocomplete,
 import { connect }                  from 'react-redux';
 import { bindActionCreators }       from 'redux';
 import  * as mapActionCreator       from '../../common/actions/index';
+
 import 'react-phone-input-2/lib/style.css';
 import './JobPosting.css';
 
@@ -630,7 +631,7 @@ class JobPosting extends Component {
             status = false;
         } 
         else if (this.state.positions.length <= 0) {
-            document.getElementById("positionsError").innerHTML = "Please enter  number";
+            document.getElementById("positionsError").innerHTML = "Please enter number";
             status = false;
         }
         else {
@@ -772,16 +773,45 @@ class JobPosting extends Component {
             document.getElementById("contactPersonPhoneError").innerHTML = "Please enter valid Mobile Number";  
             status=false; 
         }
+
          if(typeof this.state.planguage !== "undefined"){
+            console.log("im in");
            if(!this.state.planguage.match(regSpaceName)&& !this.state.planguage == ""){
+            console.log("im in flase");
               status = false;
-              document.getElementById("planguageError").innerHTML = "Please enter a valid Primary language name";
+              document.getElementById("primarySkillTagsError").innerHTML = "Please enter a valid Primary language name";
            }else{
-                document.getElementById("planguageError").innerHTML = "";
+            console.log("im in true");
+                document.getElementById("primarySkillTagsError").innerHTML = "";
            }       
         }
+
+        // if (this.state.primarySkillTags.length <= 0) {
+        //     document.getElementById("primarySkillError").innerHTML = "Please select or enter primary skills";
+        //     status = false;
+        // } else {
+        //     document.getElementById("primarySkillError").innerHTML = "";
+        //     status = true;
+        // }
+
+        if (this.state.secondarySkillTags.length <= 0) {
+            document.getElementById("secondarySkillTagsError").innerHTML = "Please select or enter secondary skills";
+            status = false;
+        } else {
+            document.getElementById("secondarySkillTagsError").innerHTML = "";
+            status = true;
+        }
+
+        if (this.state.otherSkillTags.length <= 0) {
+            document.getElementById("otherSkillTagsError").innerHTML = "Please select or enter other skills";
+            status = false;
+        } else {
+            document.getElementById("otherSkillTagsError").innerHTML = "";
+            status = true;
+        }
         return status;
-    }
+    
+}
     
     getStates() {
         Axios.get("/api/states/get/list/IN")
@@ -830,7 +860,7 @@ class JobPosting extends Component {
     handleSubmit = ( event ) => { 
         event.preventDefault();
 
-        if (true) {
+        if (this.validateForm()) {
             var formValues = {
                 user_id                 :   this.props.userDetails.user_id,
                 company_id              :   this.props.userDetails.company_id,
@@ -902,6 +932,7 @@ class JobPosting extends Component {
     }
 
     insertData(formValues) {
+        formValues.jobPublished = this.props.subscriptionDetails.jobPublished
         Axios.post("/api/jobs/post", formValues)
 
             .then(response => {
@@ -1846,7 +1877,11 @@ render(){
                                                             maxLength        =   "42"
                                                         />
 												</div>
-                                                <span id="planguageError" className="errorMsgJobPost"></span>
+
+                                              
+
+                                                <span id="primarySkillTagsError" className="errorMsgJobPost"></span>
+
 											</div>
 											
 											<div className="col-lg-4">
@@ -1875,6 +1910,7 @@ render(){
                                                             maxLength        =   "42"
                                                         />
 												</div>
+                                                <span id="secondarySkillTagsError" className="errorMsgJobPost"></span>
 											</div>
 											
 											<div className="col-lg-4">
@@ -1903,6 +1939,7 @@ render(){
                                                             maxLength        =   "42"
                                                         />
 												</div>
+                                                <span id="otherSkillTagsError" className="errorMsgJobPost"></span>
 											</div>
 											
 											<div className="col-lg-4">
@@ -2024,7 +2061,7 @@ render(){
 
 const mapStateToProps = (state) =>  {
                                         return {
-                                                    userDetails     : state.userDetails,
+                                                    userDetails     : state.userDetails, subscriptionDetails : state.subscriptionDetails
                                                 }
                                     }
 

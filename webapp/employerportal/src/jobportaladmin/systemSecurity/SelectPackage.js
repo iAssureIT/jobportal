@@ -1,6 +1,7 @@
 import React, { Component }  from 'react';
 import { FontAwesomeIcon }   from '@fortawesome/react-fontawesome';
 import Axios                 from 'axios';
+import Swal                  from 'sweetalert2';
 import Invoice               from "./invoice.js";
 import Success               from "./Success.js";
 import Moment                from 'moment';
@@ -24,6 +25,7 @@ constructor() {
         hide :"none",
         hideForm :"block",
         hideSuccess :"none",
+        activeIndex :"",
         
         packagemasterArray  : [],
         package_id          : "",
@@ -37,6 +39,7 @@ constructor() {
     this.makePayment = this.makePayment.bind(this);
 }   
 componentDidMount(){
+
     Axios.get("/api/packagemaster/get/list")
         .then(response=>{
           this.setState({packagemasterArray : response.data});
@@ -44,6 +47,16 @@ componentDidMount(){
         .catch(error=>{
           console.log(error)
         })
+    /*if (this.props.selectedCompanyDetails.company_id) {
+        Axios.get("/api/packagesubscription/subscription-details/"+this.props.selectedCompanyDetails.company_id)
+        .then(response=>{
+          //this.setState({packagemasterArray : response.data});
+        })
+        .catch(error=>{
+          console.log(error)
+        })
+    }    */
+
 }
 
 handleChange(event){
@@ -57,10 +70,13 @@ handleChange(event){
 }
 handleSelection(event){
     event.preventDefault();
+    var id= event.currentTarget.getAttribute('data-id');
+    console.log("id",id)
 
     this.setState({ package_id : event.currentTarget.getAttribute('data-id'),
                     price : event.currentTarget.getAttribute('data-price'),
-                    validity : event.currentTarget.getAttribute('data-validity') })
+                    validity : event.currentTarget.getAttribute('data-validity'),
+                    activeIndex: id})
 }
 subscribePackage(event){
     event.preventDefault();
@@ -68,6 +84,9 @@ subscribePackage(event){
     
     var startDate   = Moment(new Date()).format("YYYY-MM-DD")
     var endDate     = Moment(startDate, "YYYY-MM-DD").add('month', this.state.validity).format("YYYY-MM-DD")
+    if (this.state.package_id == "" ) {
+        Swal.fire('', "Please select package", '');
+    }else{
 
     var formValues={
       "package_id"        : this.state.package_id,
@@ -130,9 +149,10 @@ subscribePackage(event){
         }
         
         })
-    .catch(function(error){
-      
-    })
+        .catch(function(error){
+          
+        })
+    }
 }
 makePayment (subscription_id, amountPaid) { 
 
@@ -165,10 +185,10 @@ render() {
                         this.state.packagemasterArray.length > 0
                      ?
                         this.state.packagemasterArray.map((elem,index)=>{
-                           
+                          
                         return(
-                            <div className="col-lg-4" key={index} onClick={this.handleSelection.bind(this)} data-id={elem._id} data-price={elem.price} data-validity={elem.validity}>
-                                <div className="selectPackageWrapper">
+                            <div className= "col-lg-4"   key={index} onClick={this.handleSelection.bind(this)} data-id={elem._id} data-price={elem.price} data-validity={elem.validity}>
+                                <div className={`${(elem._id == this.state.activeIndex )? "activePackage selectPackageWrapper" : " selectPackageWrapper" }`}>
                                     <div className="selectPackageTitle">
                                         {elem.packageName}
                                     </div>

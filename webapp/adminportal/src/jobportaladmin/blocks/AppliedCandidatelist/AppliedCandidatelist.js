@@ -48,6 +48,7 @@ class AppliedCandidatelist extends Component{
 	}
 	
 	
+	
 	componentDidMount(){
 		console.log(",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,",this.props);
 		var {mapAction}  = this.props;
@@ -173,7 +174,7 @@ class AppliedCandidatelist extends Component{
 						{
 								<div className="col-lg-8">
 							<div className="jobListContainer">
-								{this.state.jobInfo ?
+								{this.props.jobInfo ?
 								<div className="col-lg-12">
 									
 									<div className="col-lg-11 jobListLeftContent">
@@ -184,7 +185,7 @@ class AppliedCandidatelist extends Component{
 														{/*<FontAwesomeIcon className="restRoomIcon" icon={['fas', 'restroom']} />*/}
 														<ul>
 															{
-																this.state.jobInfo.jobBasicInfo.gender=="Male Only"?
+																this.props.jobInfo.jobBasicInfo.gender=="Male Only"?
 																<li><i className="fa fa-male" title="Only male candidates can apply"></i></li>
 																: this.props.jobInfo.jobBasicInfo.gender=="Female Only"?
 																<li><i className="fa fa-female" title="Only female candidates can apply"></i></li> 

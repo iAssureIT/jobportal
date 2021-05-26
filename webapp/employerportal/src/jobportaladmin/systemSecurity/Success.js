@@ -121,9 +121,11 @@ render() {
                                 {/*<button className="buttonNext buttonNext2 col-lg-4 pull-left">
                                      Back
                                 </button>*/}
+                                <a href="/login">
                                 <button className="buttonNext buttonNext2 col-lg-4 pull-right"  >
                                      Login
                                 </button>
+                                </a>
                             </div>
                         </div>
                     </div>

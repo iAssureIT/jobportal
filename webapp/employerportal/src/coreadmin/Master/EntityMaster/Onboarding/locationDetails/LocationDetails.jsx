@@ -1853,7 +1853,7 @@ class LocationDetails extends Component {
 				</div>
 
 				{/*Confirm Delete modal*/}
-				<div className="modal" id="deleteEntityModal" role="dialog">
+				{/*<div className="modal" id="deleteEntityModal" role="dialog">
 		          <div className="adminModal adminModal-dialog col-lg-12 col-md-12 col-sm-12 col-xs-12">
 		            <div className="modal-content adminModal-content col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1 col-xs-12 noPadding">
 		              <div className="modal-header adminModal-header col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -1874,7 +1874,29 @@ class LocationDetails extends Component {
 		            </div>
 		            </div>
 		          </div>
-		        </div>
+		        </div>*/}
+		        <div className="modal fade " id="deleteEntityModal" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+																
+					<div className="modal-dialog delModalMain">
+				      <div className="modal-content delModalContent">
+				        <div className="modal-header delHeader">
+				          <button type="button" className="close delCloseBtn" onClick={this.closeModal.bind(this)} data-dismiss="modal" aria-label="Close">
+				            <span aria-hidden="true">&times;</span>
+				          </button>
+				        </div>
+				        <div className="modal-body delModalBody">
+				          <div className="delBodyText">
+				            Are you sure <br />
+				            you want to delete?
+				          </div>
+				          <div className="col-lg-12 delMainBtnDiv">
+				              <button type="button" className="btn btn-default delModalBtnOne col-lg-3" data-dismiss="modal" onClick={this.closeModal.bind(this)}>NO</button> 
+				              <button type="button" className="btn btn-default delModalBtnTwo col-lg-3" data-dismiss="modal" onClick={this.confirmDelete.bind(this)} >YES</button>
+				          </div> 
+				        </div>
+				      </div>
+				    </div>
+				</div>
 			</div>
 		);
 	}
