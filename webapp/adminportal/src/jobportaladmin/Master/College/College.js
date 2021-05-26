@@ -7,46 +7,37 @@ import $                    from 'jquery';
 import OneFieldForm         from '../../../coreadmin/Master/OneFieldForm/OneFieldForm.js';
 import 'rc-time-picker/assets/index.css';
 
-const format = "h:mm a";
-class Collage extends Component{
+const format = "h:mm a"; 
+class College extends Component{
    constructor(props) {
     super(props);
     this.state = {
       "fields" : {
-        placeholder : "Add collage & press 'Enter' Key",
-        title       : "Collage",
-        attributeName : "collage"
+        placeholder : "Add college & press 'Enter' Key",
+        title       : "College",
+        attributeName : "college"
       },
       "tableHeading": {
-          collage: "Collage",
+          college: "College",
           actions: 'Action',
       },
       "tableObjects": {
           deleteMethod: 'delete',
-          apiLink: '/api/collagemaster/',
+          apiLink: '/api/collegemaster/',
           paginationApply: false,
           searchApply: false,
-          editUrl: '/address-type'
+          editUrl: '/project-master-data'
       },
       "startRange": 0,
       "limitRange": 10,
-      "editId": this.props.match ? this.props.match.params.fieldID : ''
+      "editId":  ''
       };
   }
   componentDidMount() {
-    var editId = this.props.match ? this.props.match.params.fieldID : '';
-    this.setState({
-        editId: editId
-    })
-    window.scrollTo(0, 0);
+   
   } 
   componentWillReceiveProps(nextProps) {
-      var editId = nextProps.match ? nextProps.match.params.fieldID : '';
-      if (editId) {
-          this.setState({
-              editId: editId
-          })
-      }
+      
   }
 
   render() {
@@ -55,11 +46,12 @@ class Collage extends Component{
           <OneFieldForm fields={this.state.fields}
                         tableHeading={this.state.tableHeading}
                         tableObjects={this.state.tableObjects}
-                        editId ={this.props.match ? this.props.match.params.fieldID : ''}
+                        editId ={this.props.editId}
+                        masterFieldForm = {true}   
                         history={this.props.history} />
       </div>
     );
   }
 }
 
- export default Collage;
+ export default College;

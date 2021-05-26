@@ -1,26 +1,26 @@
 const mongoose	        = require("mongoose");
-const CollageMaster       = require('./ModelCollage.js');
+const CollegeMaster       = require('./ModelCollege.js');
 const FailedRecords     = require('../failedRecords/ModelFailedRecords');
 
-exports.insertCollage = (req,res,next)=>{
+exports.insertCollege = (req,res,next)=>{
     processData();
     async function processData(){
-    var allCollages = await fetchCollage()
-        var collage = allCollages.filter((data)=>{
-        if (data.collage.trim().toLowerCase() == req.body.fieldValue.trim().toLowerCase()) {
+    var allColleges = await fetchCollege()
+        var college = allColleges.filter((data)=>{
+        if (data.college.trim().toLowerCase() == req.body.fieldValue.trim().toLowerCase()) {
             return data;
         }
         })
-        if (collage.length > 0) {
+        if (college.length > 0) {
             res.status(200).json({ duplicated : true });
         }else{
-            const collageMaster = new CollageMaster({
+            const collegeMaster = new CollegeMaster({
                             _id                         : new mongoose.Types.ObjectId(),
-                            collage                     : req.body.fieldValue,
+                            college                     : req.body.fieldValue,
                             createdBy                   : req.body.createdBy,
                             createdAt                   : new Date()
                         })
-                        collageMaster.save()
+                        collegeMaster.save()
                         .then(data=>{
                             res.status(200).json({ created : true, fieldID : data._id });
                         })
@@ -36,9 +36,9 @@ exports.insertCollage = (req,res,next)=>{
         }
     }       
 };
-var fetchCollage = async ()=>{
+var fetchCollege = async ()=>{
     return new Promise(function(resolve,reject){ 
-    CollageMaster.find({})
+    CollegeMaster.find({})
         .exec()
         .then(data=>{
             resolve( data );
@@ -48,8 +48,8 @@ var fetchCollage = async ()=>{
         }); 
     });
 };
-exports.countCollages = (req, res, next)=>{
-    CollageMaster.find({}).count()
+exports.countColleges = (req, res, next)=>{
+    CollegeMaster.find({}).count()
         .exec()
         .then(data=>{
             res.status(200).json({ count : data });
@@ -58,8 +58,8 @@ exports.countCollages = (req, res, next)=>{
             res.status(500).json({ error: err });
         }); 
 };
-exports.fetchCollages = (req, res, next)=>{
-    CollageMaster.find({})
+exports.fetchColleges = (req, res, next)=>{
+    CollegeMaster.find({})
         .sort({createdAt : -1})
         .skip(req.body.startRange)
         .limit(req.body.limitRange)
@@ -71,8 +71,8 @@ exports.fetchCollages = (req, res, next)=>{
             res.status(500).json({ error: err });
         }); 
 };
-exports.getCollages = (req, res, next)=>{
-    CollageMaster.find({})
+exports.getColleges = (req, res, next)=>{
+    CollegeMaster.find({})
     .exec()
     .then(data=>{
         res.status(200).json(data);
@@ -81,8 +81,8 @@ exports.getCollages = (req, res, next)=>{
         res.status(500).json({ error: err });
     }); 
 };
-exports.fetchSingleCollage = (req, res, next)=>{
-    CollageMaster.findOne({ _id: req.params.fieldID })
+exports.fetchSingleCollege = (req, res, next)=>{
+    CollegeMaster.findOne({ _id: req.params.fieldID })
         .exec()
         .then(data=>{
             res.status(200).json(data);
@@ -92,8 +92,8 @@ exports.fetchSingleCollage = (req, res, next)=>{
         }); 
 };
 
-exports.searchCollage = (req, res, next)=>{
-    CollageMaster.find({ collage: { $regex : req.params.str ,$options: "i" }  })
+exports.searchCollege = (req, res, next)=>{
+    CollegeMaster.find({ college: { $regex : req.params.str ,$options: "i" }  })
         .exec()
         .then(data=>{
             res.status(200).json(data);
@@ -102,17 +102,17 @@ exports.searchCollage = (req, res, next)=>{
             res.status(500).json({ error: err });
         }); 
 };
-exports.updateCollage = (req, res, next)=>{
-    CollageMaster.updateOne(
+exports.updateCollege = (req, res, next)=>{
+    CollegeMaster.updateOne(
             { _id:req.body.fieldID },  
             {
-                $set:   {  'collage'       : req.body.fieldValue  }
+                $set:   {  'college'       : req.body.fieldValue  }
             }
         )
         .exec()
         .then(data=>{
             if(data.nModified == 1){
-                CollageMaster.updateOne(
+                CollegeMaster.updateOne(
                 { _id:req.body.fieldID},
                 {
                     $push:  { 'updateLog' : [{  updatedAt      : new Date(),
@@ -133,8 +133,8 @@ exports.updateCollage = (req, res, next)=>{
             res.status(500).json({ error: err });
         });
 };
-exports.deleteCollage = (req, res, next)=>{
-    CollageMaster.deleteOne({_id: req.params.fieldID})
+exports.deleteCollege = (req, res, next)=>{
+    CollegeMaster.deleteOne({_id: req.params.fieldID})
         .exec()
         .then(data=>{
             if(data.deletedCount === 1){
@@ -148,9 +148,9 @@ exports.deleteCollage = (req, res, next)=>{
         });            
 };
 
-var fetchAllCollage = async (type)=>{
+var fetchAllCollege = async (type)=>{
     return new Promise(function(resolve,reject){ 
-    CollageMaster.find()
+    CollegeMaster.find()
         .sort({createdAt : -1})
         // .skip(req.body.startRange)
         // .limit(req.body.limitRange)
@@ -247,11 +247,11 @@ var insertFailedRecords = async (invalidData,updateBadData) => {
 };
 
 
-exports.bulkUploadCollage = (req, res, next)=>{
-    console.log("inside bulk upload Collage");
-     // var Collage = [{Collage:"mesh"}];
-    var Collage = req.body.data;
-    console.log("Collage",Collage);
+exports.bulkUploadCollege = (req, res, next)=>{
+    console.log("inside bulk upload College");
+     // var College = [{College:"mesh"}];
+    var College = req.body.data;
+    console.log("College",College);
 
     var validData = [];
     var validObjects = [];
@@ -265,8 +265,8 @@ exports.bulkUploadCollage = (req, res, next)=>{
     processData();
     async function processData(){
          // var alldepartments = await fetchDepartments();
-        for(var k = 0 ; k < Collage.length ; k++){
-            if (Collage[k].Collage == '-') {
+        for(var k = 0 ; k < College.length ; k++){
+            if (College[k].College == '-') {
                 remark += "department not found, " ;  
             }
             console.log("remark",remark)
@@ -275,17 +275,17 @@ exports.bulkUploadCollage = (req, res, next)=>{
                 // var allDepartments = await fetchAllDepartments(req.body.reqdata);
                 // console.log("alldepartments",allDepartments);
                  console.log()
-                  var allCollages = await fetchAllCollage(req.body.reqdata);
-                  var CollageExists = allCollages.filter((data)=>{
-                    if (data.Collage == Collage[k].Collage)
+                  var allColleges = await fetchAllCollege(req.body.reqdata);
+                  var CollegeExists = allColleges.filter((data)=>{
+                    if (data.College == College[k].College)
                          {
                         return data;
                     }
                 })
                
-                 console.log("in else validObjects",CollageExists);
-                if (CollageExists.length==0) {
-                    validObjects = Collage[k];
+                 console.log("in else validObjects",CollegeExists);
+                if (CollegeExists.length==0) {
+                    validObjects = College[k];
                     validObjects.fileName       = req.body.fileName;
                     // validObjects.createdBy      = req.body.reqdata.createdBy;
                     validObjects.createdAt      = new Date();
@@ -294,9 +294,9 @@ exports.bulkUploadCollage = (req, res, next)=>{
 
                 }else{
                     
-                    remark += "Collage already exists." ; 
+                    remark += "College already exists." ; 
 
-                    invalidObjects = Collage[k];
+                    invalidObjects = College[k];
                     invalidObjects.failedRemark = remark;
                     invalidData.push(invalidObjects); 
                 }
@@ -305,7 +305,7 @@ exports.bulkUploadCollage = (req, res, next)=>{
             }
 
         }
-        CollageMaster.insertMany(validData)
+        CollegeMaster.insertMany(validData)
         .then(data=>{
 
         })
@@ -326,7 +326,7 @@ exports.bulkUploadCollage = (req, res, next)=>{
     }
 };
 exports.fetch_file = (req,res,next)=>{ 
-    CollageMaster.find( { _id : "fileName"})
+    CollegeMaster.find( { _id : "fileName"})
     .exec()
     .then(data=>{
         res.status(200).json(data.length);
@@ -342,7 +342,7 @@ exports.fetch_file = (req,res,next)=>{
 exports.filedetails = (req,res,next)=>{
     var finaldata = {};
     console.log(req.params.fileName)
-    CollageMaster.find( { fileName:req.params.fileName }  )
+    CollegeMaster.find( { fileName:req.params.fileName }  )
     .exec()
     .then(data=>{
         //finaldata.push({goodrecords: data})

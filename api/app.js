@@ -64,7 +64,7 @@ const skillMasterRoutes					= require("./coreAdmin/SkillMaster/RoutesSkill.js");
 
 const languageMasterRoutes				= require("./coreAdmin/LanguageMaster/RoutesLanguage.js");
 const universityMasterRoutes			= require("./coreAdmin/UniversityMaster/RoutesUniversity.js");
-const collageMasterRoutes				= require("./coreAdmin/CollageMaster/RoutesCollage.js");
+const collegeMasterRoutes				= require("./coreAdmin/CollegeMaster/RoutesCollege.js");
 
 const moduleRoutes				        = require("./coreAdmin/moduleMaster/RoutesModuleMaster.js");
 const facilityRoutes				    = require("./coreAdmin/facilityMaster/RoutesFacilityMaster.js");
@@ -183,7 +183,7 @@ app.use("/api/qualificationmaster", qualificationMasterRoutes);
 app.use("/api/skillmaster", skillMasterRoutes);
 app.use("/api/languagemaster", languageMasterRoutes);
 app.use("/api/universitymaster", universityMasterRoutes);
-app.use("/api/collagemaster", collageMasterRoutes);
+app.use("/api/collegemaster", collegeMasterRoutes);
 app.use("/api/modulemaster", moduleRoutes);
 app.use("/api/facilitymaster", facilityRoutes);
 app.use("/api/candidatemaster", candidateProfileRoutes);

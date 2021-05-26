@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 
-const collageSchema = mongoose.Schema({
+const collegeSchema = mongoose.Schema({
     _id                       : mongoose.Schema.Types.ObjectId,
-    collage                   : { type: String, index: true, unique: true  },
+    college                   : { type: String, index: true, unique: true  },
     createdBy                 : { type: mongoose.Schema.Types.ObjectId, ref: 'users' },
     createdAt                 : Date,
     fileName                  : String,
@@ -14,4 +14,4 @@ const collageSchema = mongoose.Schema({
                                 ]
 });
 
-module.exports = mongoose.model('collagemasters',collageSchema);
+module.exports = mongoose.model('collegemasters',collegeSchema);
