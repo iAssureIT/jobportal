@@ -584,7 +584,7 @@ class BasicInfoForm extends Component{
 	validateForm=()=>{
 
 		var status = true;
-		var regName = /^[a-zA-Z]+$/;
+		var regName = /[a-zA-Z_]+$/;
 		var tempEmail = this.state.email.trim(); // value of field with whitespace trimmed off
     	var emailFilter = /^[^@]+@[^@.]+\.[^@]*\w\w$/;
     	var illegalChars = /[\(\)\<\>\,\;\:\\\"\[\]]/;

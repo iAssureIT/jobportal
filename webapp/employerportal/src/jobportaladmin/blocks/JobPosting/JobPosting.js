@@ -113,6 +113,8 @@ class JobPosting extends Component {
             preferredSkillTags          :   [],
             preferredSkillSuggestions   :   [],
 
+            planguage                   :   "",
+
             submitBtnText               :   "PUBLISH" 
         }
 
@@ -126,6 +128,7 @@ class JobPosting extends Component {
     }
 
     componentDidMount() {
+        console.log("language",this.state.planguage)
         this.getStates();
 
         const userDetails = JSON.parse(localStorage.getItem("userDetails"));
@@ -517,7 +520,7 @@ class JobPosting extends Component {
 
     validateForm = () => {
         var status = true;
-        var regSpaceName = /^[a-zA-Z\s]+$/;
+        var regSpaceName =  /[a-zA-Z_]+$/;
         var jobTitle=this.state.jobTitle;
         var minEducation =this.state.minEducation;
         var minExperience =this.state.minExperience;
@@ -526,6 +529,9 @@ class JobPosting extends Component {
         var emailFilter = /^[^@]+@[^@.]+\.[^@]*\w\w$/;
         var illegalChars = /[\(\)\<\>\,\;\:\\\"\[\]]/;
         var phoneno = /^\+?([0-9]{2})\)?[-. ]?([0-9]{5})[-. ]?([0-9]{5})$/;
+        var regPincode = /^[1-9][0-9]{5}$/;
+        var planguage = this.state.planguage
+        console.log("errroe",planguage);
 
         if (this.state.jobTitle.length <= 0) {
             document.getElementById("jobTitleError").innerHTML = "Enter Job Title";
@@ -560,53 +566,64 @@ class JobPosting extends Component {
             status = true;
         }
 
-        if (this.state.cityVillage.length <= 0) {
-            document.getElementById("cityVillageError").innerHTML = "Enter City";
-            status = false;
-        } else {
-            document.getElementById("cityVillageError").innerHTML = "";
-            status = true;
-        }
         
-        if (this.state.district.length <= 0) {
-            document.getElementById("districtError").innerHTML = "Enter District";
-            status = false;
-        } else {
-            document.getElementById("districtError").innerHTML = "";
-            status = true;
+        if(typeof this.state.cityVillage !== "undefined"){
+           if(!this.state.cityVillage.match(regSpaceName)){
+              status = false;
+              document.getElementById("cityVillageError").innerHTML = "Please enter a valid city name";
+           }else{
+                document.getElementById("cityVillageError").innerHTML = "";
+           }       
+        }
+        if(typeof this.state.district !== "undefined"){
+           if(!this.state.district.match(regSpaceName)){
+              status = false;
+              document.getElementById("districtError").innerHTML = "Please enter a valid district name";
+           }else{
+                document.getElementById("districtError").innerHTML = "";
+           }       
         }
        
-        if (this.state.pincode.length <= 0) {
-            document.getElementById("pincodeError").innerHTML = "Enter Pincode";
-            status = false;
-        } else {
-            document.getElementById("pincodeError").innerHTML = "";
-            status = true;
+       if(this.state.pincode.length<=0){
+            document.getElementById("pincodeError").innerHTML=  
+            "Please enter your pincode";  
+            status=false; 
+        }else{ 
+
+            if(!regPincode.test(this.state.pincode)){
+                document.getElementById("pincodeError").innerHTML = "Please enter valid pincode";  
+                status=false; 
+            }else{
+                document.getElementById("pincodeError").innerHTML = ""; 
+                status = true;
+            }
+            
+        }
+       if(typeof this.state.functionalArea !== "undefined"){
+           if(!this.state.functionalArea.match(regSpaceName)){
+              status = false;
+              document.getElementById("functionalAreaError").innerHTML = "Please enter a valid functional Area";
+           }else{
+                document.getElementById("functionalAreaError").innerHTML = "";
+           }       
+        }
+        if(typeof this.state.subFunctionalArea !== "undefined"){
+           if(!this.state.subFunctionalArea.match(regSpaceName)){
+              status = false;
+              document.getElementById("subFunctionalAreaError").innerHTML = "Please enter a valid Sub-functional Area";
+           }else{
+                document.getElementById("subFunctionalAreaError").innerHTML = "";
+           }       
+        }
+        if(typeof this.state.jobRole !== "undefined"){
+           if(!this.state.jobRole.match(regSpaceName)){
+              status = false;
+              document.getElementById("jobRoleError").innerHTML = "Please enter a valid job Role";
+           }else{
+                document.getElementById("jobRoleError").innerHTML = "";
+           }       
         }
         
-        if (this.state.functionalArea.length <= 0) {
-            document.getElementById("functionalAreaError").innerHTML = "Select or enter Functional Area";
-            status = false;
-        } else {
-            document.getElementById("functionalAreaError").innerHTML = "";
-            status = true;
-        }
-        
-        if (this.state.subFunctionalArea.length <= 0) {
-            document.getElementById("subFunctionalAreaError").innerHTML = "Select or enter Sub-Functional Area";
-            status = false;
-        } else {
-            document.getElementById("subFunctionalAreaError").innerHTML = "";
-            status = true;
-        }
-        
-        if (this.state.jobRole.length <= 0) {
-            document.getElementById("jobRoleError").innerHTML = "Select or enter job role";
-            status = false;
-        } else {
-            document.getElementById("jobRoleError").innerHTML = "";
-            status = true;
-        }
 
         if (this.state.positions < 0) {
             document.getElementById("positionsError").innerHTML = "Please enter positive number";
@@ -669,22 +686,13 @@ class JobPosting extends Component {
             document.getElementById("maxSalPeriodError").innerHTML = "";
             status = true;
         }
-
-        if (this.state.minEducation.length <= 0) {
-            document.getElementById("minEducationError").innerHTML = "Please enter minimum education";
-            status = false;
-        }
-        else if (this.state.minEducation.length > 256) {
-            document.getElementById("minEducationError").innerHTML = "Education should be only 256 characters";
-            status = false;
-        }
-        else if(!regSpaceName.test(minEducation)){
-            document.getElementById("minEducationError").innerHTML = "Please enter valid education,......";  
-            status=false; 
-        }
-        else {
-            document.getElementById("minEducationError").innerHTML = "";
-            status = true;
+        if(typeof this.state.minEducation !== "undefined"){
+           if(!this.state.minEducation.match(regSpaceName)){
+              status = false;
+              document.getElementById("minEducationError").innerHTML = "Please enter a valid min Education";
+           }else{
+                document.getElementById("minEducationError").innerHTML = "";
+           }       
         }
 
         if (this.state.minExperience == 0) {
@@ -700,63 +708,49 @@ class JobPosting extends Component {
             status = true;
         }
 
-        if (this.state.jobRole.length <= 0) {
-            document.getElementById("jobRoleError").innerHTML = "Please enter Job Role";
-            status = false;
-        } else {
-            document.getElementById("jobRoleError").innerHTML = "";
-            status = true;
+       if( this.state.jobSector.length >0){
+           if(!this.state.jobSector.match(regSpaceName)){
+              status = false;
+              document.getElementById("jobSectorError").innerHTML = "Please enter a valid job Sector";
+           }else{
+                document.getElementById("jobSectorError").innerHTML = "";
+           }       
         }
         
-        if (this.state.jobSector.length <= 0) {
-            document.getElementById("jobSectorError").innerHTML = "Please enter Job Sector";
-            status = false;
-        } else {
-            document.getElementById("jobSectorError").innerHTML = "";
-            status = true;
+         if( this.state.jobType.length >0){
+           if(!this.state.jobType.match(regSpaceName)){
+              status = false;
+              document.getElementById("jobTypeError").innerHTML = "Please enter a valid job Type";
+           }else{
+                document.getElementById("jobTypeError").innerHTML = "";
+           }       
+        }
+        if( this.state.jobTime.length >0){
+           if(!this.state.jobTime.match(regSpaceName)){
+              status = false;
+              document.getElementById("jobTimeError").innerHTML = "Please enter a valid job Time";
+           }else{
+                document.getElementById("jobTimeError").innerHTML = "";
+           }       
         }
         
-        if (this.state.jobType.length <= 0) {
-            document.getElementById("jobTypeError").innerHTML = "Please enter Job Type";
-            status = false;
-        } else {
-            document.getElementById("jobTypeError").innerHTML = "";
-            status = true;
+        if(this.state.jobShift.length >0){
+           if(!this.state.jobShift.match(regSpaceName)){
+              status = false;
+              document.getElementById("jobShiftError").innerHTML = "Please enter a valid job Shift";
+           }else{
+                document.getElementById("jobShiftError").innerHTML = "";
+           }       
         }
-        
-        if (this.state.jobTime.length <= 0) {
-            document.getElementById("jobTimeError").innerHTML = "Please enter Job Time";
-            status = false;
-        } else {
-            document.getElementById("jobTimeError").innerHTML = "";
-            status = true;
+         if(typeof this.state.contactPersonName !== "undefined"){
+           if(!this.state.contactPersonName.match(regSpaceName)){
+              status = false;
+              document.getElementById("contactPersonNameError").innerHTML = "Please enter a valid contact Person Name";
+           }else{
+                document.getElementById("contactPersonNameError").innerHTML = "";
+           }       
         }
-        
-        if (this.state.jobShift.length <= 0) {
-            document.getElementById("jobShiftError").innerHTML = "Please enter Job Shift";
-            status = false;
-        } else {
-            document.getElementById("jobShiftError").innerHTML = "";
-            status = true;
-        }
-        
-        if (this.state.contactPersonName.length <= 0) {
-            document.getElementById("contactPersonNameError").innerHTML = "Enter contact person name";
-            status = false;
-        }
-        else if(this.state.contactPersonName.length > 256) {
-            document.getElementById("contactPersonNameError").innerHTML = "contact person name should be only 256 characters";
-            status = false;
-        }
-        else if(!regSpaceName.test(contactPersonName)){
-            document.getElementById("contactPersonNameError").innerHTML = "Please enter valid contact person name,......";  
-            status=false; 
-        }
-        else {
-            document.getElementById("jobTitleError").innerHTML = "";
-            status = true;
-        }
-        
+
         if(this.state.contactPersonEmail.length <=0 ){
             document.getElementById("contactPersonEmailError").innerHTML = "Please enter your Email";  
             status=false; 
@@ -777,6 +771,14 @@ class JobPosting extends Component {
         } else {
             document.getElementById("contactPersonPhoneError").innerHTML = "Please enter valid Mobile Number";  
             status=false; 
+        }
+         if(typeof this.state.planguage !== "undefined"){
+           if(!this.state.planguage.match(regSpaceName)&& !this.state.planguage == ""){
+              status = false;
+              document.getElementById("planguageError").innerHTML = "Please enter a valid Primary language name";
+           }else{
+                document.getElementById("planguageError").innerHTML = "";
+           }       
         }
         return status;
     }
@@ -828,7 +830,7 @@ class JobPosting extends Component {
     handleSubmit = ( event ) => { 
         event.preventDefault();
 
-        if (this.validateForm()) {
+        if (true) {
             var formValues = {
                 user_id                 :   this.props.userDetails.user_id,
                 company_id              :   this.props.userDetails.company_id,
@@ -883,6 +885,7 @@ class JobPosting extends Component {
                 otherSkillTags          :   this.state.otherSkillTags,
                 minOtherExp             :   this.state.minOtherExp,
                 preferredSkillTags      :   this.state.preferredSkillTags,
+                planguage               :   this.state.planguage,
 
                 status                  :   event.target.getAttribute('data-status')
             };
@@ -1162,7 +1165,9 @@ class JobPosting extends Component {
         if (tag.id == tag.text) {
             tag.id = "" 
         }
-    	this.setState(state => ({ primarySkillTags: [...state.primarySkillTags, tag] }));
+        var planguage = tag.text
+        console.log("planguage",planguage);
+    	this.setState(state => ({ primarySkillTags: [...state.primarySkillTags, tag] ,planguage:planguage}));
   	}
 
     onprimarySkillClick(index) {
@@ -1184,6 +1189,7 @@ class JobPosting extends Component {
         const { primarySkillTags } = this.state;
         this.setState({
           primarySkillTags: primarySkillTags.filter((tag, index) => index !== i),
+          planguage:""
         });
     }
     
@@ -1534,7 +1540,7 @@ render(){
 													<label className="addjobformLable col-lg-12"> Pincode <span className="asterisk">&#42;</span> </label>
 												</div>
 												<div className="input-group"> 
-													<input type="number" className="form-control addJobFormField addJobState" ref="pincode" id="pincode" name="pincode" maxLength="06" value={this.state.pincode} onChange={this.keyPressNumber.bind(this)} onChange={this.handleChange}/>
+													<input type="text" pattern="[0-9]*" maxlength="6" className="form-control addJobFormField addJobState" ref="pincode" id="pincode" name="pincode" value={this.state.pincode} onChange={this.keyPressNumber.bind(this)} onChange={this.handleChange}/>
 												</div>
                                                 <span id="pincodeError" className="errorMsgJobPost"></span>
 											</div>
@@ -1840,6 +1846,7 @@ render(){
                                                             maxLength        =   "42"
                                                         />
 												</div>
+                                                <span id="planguageError" className="errorMsgJobPost"></span>
 											</div>
 											
 											<div className="col-lg-4">

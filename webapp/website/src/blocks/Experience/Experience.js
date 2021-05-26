@@ -811,8 +811,8 @@ class Experience extends Component {
   //========== Validation Start ==================
   validateForm = () => {
     var status = true;
-    var regName = /^[a-zA-Z]+$/;
-    var regName2 = /^[a-zA-z]+([\s][a-zA-Z]+)*$/;
+    var regName = /[a-zA-Z_]+$/;
+   
 
     if (this.state.currentCTC.length <= 0) {
       document.getElementById("currentCTCError").innerHTML =
@@ -857,7 +857,7 @@ class Experience extends Component {
       document.getElementById("relevantExperienceError").innerHTML = "";
     }*/
     if (typeof this.state.industry !== "undefined") {
-      if (!this.state.industry.match(regName2)) {
+      if (!this.state.industry.match(regName)) {
         status = false;
         document.getElementById("industryError").innerHTML =
           "Please enter a valid Industry";
@@ -866,7 +866,7 @@ class Experience extends Component {
       }
     }
     if (typeof this.state.company !== "undefined") {
-      if (!this.state.company.match(regName2)) {
+      if (!this.state.company.match(regName)) {
         status = false;
         document.getElementById("companyNameError").innerHTML =
           "Please enter a valid Company";
@@ -875,7 +875,7 @@ class Experience extends Component {
       }
     }
     if (typeof this.state.companyState !== "undefined") {
-      if (!this.state.companyState.match(regName2)) {
+      if (!this.state.companyState.match(regName)) {
         status = false;
         document.getElementById("stateError").innerHTML =
           "Please enter a valid state";
@@ -884,7 +884,7 @@ class Experience extends Component {
       }
     }
     if (typeof this.state.companyCountry !== "undefined") {
-      if (!this.state.companyCountry.match(regName2)) {
+      if (!this.state.companyCountry.match(regName)) {
         status = false;
         document.getElementById("companyCountryError").innerHTML =
           "Please enter a valid Country";
@@ -893,7 +893,7 @@ class Experience extends Component {
       }
     }
     if (typeof this.state.companyCity !== "undefined") {
-      if (!this.state.companyCity.match(regName2)) {
+      if (!this.state.companyCity.match(regName)) {
         status = false;
         document.getElementById("companyCityError").innerHTML =
           "Please enter a valid City";
@@ -902,7 +902,7 @@ class Experience extends Component {
       }
     }
     if (typeof this.state.lastDesignation !== "undefined") {
-      if (!this.state.lastDesignation.match(regName2)) {
+      if (!this.state.lastDesignation.match(regName)) {
         status = false;
         document.getElementById("lastDesignationError").innerHTML =
           "Please enter a valid last Designation";
@@ -911,7 +911,7 @@ class Experience extends Component {
       }
     }
     if (typeof this.state.lastDeartment !== "undefined") {
-      if (!this.state.lastDeartment.match(regName2)) {
+      if (!this.state.lastDeartment.match(regName)) {
         status = false;
         document.getElementById("lastDeartmentError").innerHTML =
           "Please enter a valid last Deartment";
@@ -920,7 +920,7 @@ class Experience extends Component {
       }
     }
     if (typeof this.state.reportingManager !== "undefined") {
-      if (!this.state.reportingManager.match(regName2)) {
+      if (!this.state.reportingManager.match(regName)) {
         status = false;
         document.getElementById("reportingManagerError").innerHTML =
           "Please enter a valid reporting Manager";
@@ -929,7 +929,7 @@ class Experience extends Component {
       }
     }
     if (typeof this.state.reportingManagerDesignation !== "undefined") {
-      if (!this.state.reportingManagerDesignation.match(regName2)) {
+      if (!this.state.reportingManagerDesignation.match(regName)) {
         status = false;
         document.getElementById("reportingManagerDesignationError").innerHTML =
           "Please enter a valid reporting Manager Designation";

@@ -539,7 +539,7 @@ class Address extends Component{
 	 validateForm=()=>{
 		var status = true;
 		var regPincode = /^[1-9][0-9]{5}$/;
-		var regName = /^[a-zA-Z]+$/;
+		var regName = /[a-zA-Z_]+$/;
 
 
 		if(this.state.addressType.length<=0){

@@ -185,7 +185,7 @@ class Header extends Component{
                     <span className="notificationMessegeText">Employer Settings</span>
                   </div></a>
                   <a href={this.state.company_id !==undefined?"/job-list":"#"}>
-                    <div className="notificationMessege col-lg-12" onClick={this.state.company_id == undefined ? this.modalPopUp.bind(this) : null}>
+                    <div className="notificationMessege col-lg-12" onClick={(this.state.company_id == undefined) ? this.modalPopUp.bind(this) : null}>
                       <FontAwesomeIcon icon="briefcase" />
                       <span className="notificationMessegeText">Posted Jobs</span>
                     </div>
