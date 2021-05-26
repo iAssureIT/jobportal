@@ -74,7 +74,7 @@
   background-color: #eee!important;
 }
 .input-group-addon {
-  /*padding: 9px 12px!important;
+  padding: 9px 12px!important;
   font-size: 14px;
   font-weight: 400;
   color: #555;
@@ -83,7 +83,7 @@
   border-right: 1px solid #ccc!important;
   border-top: 1px solid #ccc!important;
   border-bottom: 1px solid #ccc!important;
-  cursor: pointer;*/
+  cursor: pointer;
 } 
 .input_status {
   background-color: var(--white-background)!important;
@@ -223,7 +223,7 @@ display: block;
   margin-top: 17px;
 }
 .showHideEye {
-  top: -28px !important;
+  top: -34px !important;
   /* left: -136px !important; */
   float: right;
   z-index: 999;
@@ -318,8 +318,7 @@ display: block;
 }
 .scrollContent {
   display: block;
-  min-height: 30px!important;
-  height: auto!important;
+  height: 350px;
   overflow: auto;
   width: 100%;
 }
@@ -329,3 +328,33 @@ display: block;
   overflow: auto;
   width: 100%
 }
+
+/*New fixed header css*/
+
+.UMHeaderFixTable{
+  max-height: 35em;
+}
+#UMTable {
+  width: 120%;
+}
+
+#UMTable thead th {
+  background: #367ea8;
+  color: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 5;
+}
+/*#UMTable tbody td:nth-child(2) {
+  background: white;
+  position: sticky;
+  left: 0;
+  z-index: 3;
+}
+#UMTable thead th:nth-child(2) {
+  background: #367ea8;
+  position: sticky;
+  left: 0;
+  z-index: 6;
+}
+*/
