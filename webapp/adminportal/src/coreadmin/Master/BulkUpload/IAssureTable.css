@@ -113,3 +113,33 @@
 .bulkwidth{
   width: 196px;
 }
+
+/*New fixed header css*/
+
+.commonHeaderFixTable{
+  max-height: 35em;
+}
+#commonTable {
+  width: 120%;
+}
+
+#commonTable thead th {
+  background: #367ea8;
+  color: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 5;
+}
+/*#commonTable tbody td:nth-child(2) {
+  background: #fbfafa;
+  position: sticky;
+  left: 0;
+  z-index: 3;
+}
+#commonTable thead th:nth-child(2) {
+  background: #367ea8;
+  position: sticky;
+  left: 0;
+  z-index: 6;
+}
+*/

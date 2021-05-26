@@ -937,6 +937,14 @@ class DeletedUsersTable extends Component {
 		}
 	}
 
+	openDeleteModal(event){
+	    event.preventDefault();
+	    var currentid = event.currentTarget.id;
+	    var id = currentid.split("-")[0];
+	    $("#"+id+"-rm").show();
+	    $("#"+id+"-rm").addClass('in');
+	}
+
 	render() {
 		return (
 			<div id="tableComponent" className="col-lg-12 col-sm-12 col-md-12 col-xs-12">
@@ -962,14 +970,13 @@ class DeletedUsersTable extends Component {
 					<label className="col-lg-12 col-md-12 col-sm-12 col-xs-12 NOpadding labelform text-left">Search</label>
 					<div className="input-group inputBox-main">
 						<input type="text" placeholder="Enter text..." onChange={this.tableSearch.bind(this)} className="NOpadding-right zzero form-control" ref="tableSearch" id="tableSearch" name="tableSearch" />
-						<span className="input-group-addon input_status"><i className="fa fa-search"></i></span>
+						{/*<span className="input-group-addon input_status"><i className="fa fa-search"></i></span>*/}
 					</div>
 				</div>
 				<div className="col-lg-12 col-sm-12 col-md-12 col-xs-12 NOpadding marginTop17">
-					<div className="table-responsive  ">
-						<div className="scrolltbl">
-							<table className="table iAssureITtable-bordered table-striped table-hover  ">
-								<thead className="tempTableHeader">
+				<div className="col-lg-12 col-sm-12 col-md-12 col-xs-12 NOpadding marginTop8 table-responsive UMHeaderFixTable">
+				 <table id="UMTable" className="table iAssureITtable-bordered table-striped table-hover">
+				 	<thead className="tempTableHeader">
 									<tr className="">
 										{this.state.twoLevelHeader.apply === true ?
 											this.state.twoLevelHeader.firstHeaderData.map((data, index) => {
@@ -985,16 +992,20 @@ class DeletedUsersTable extends Component {
 										{this.state.tableHeading ?
 											Object.entries(this.state.tableHeading).map(
 												([key, value], i) => {
-													if (key === 'actions') {
-														return (
-															<th key={i} className="umDynamicHeader srpadd textAlignLeft">{value}</th>
-														);
-													} else {
-														return (
-															<th key={i} className="umDynamicHeader srpadd textAlignLeft">{value} <span onClick={this.sort.bind(this)} id={key} className="fa fa-sort tableSort"></span></th>
-														);
+													if(key === 'actions'){
+															return(
+																<th key={i} scope="col" className="umDynamicHeader srpadd text-center">
+																	<div className="">{value}</div>
+																</th>
+															);	
+															
+													}else{
+														return(
+															<th key={i} scope="col" className="umDynamicHeader srpadd textAlignLeft">
+															<div>{value}</div>
+															 <span onClick={this.sort.bind(this)} id={key} className="fa fa-sort tableSort"></span></th>
+														);	
 													}
-
 												}
 											)
 											:
@@ -1002,7 +1013,7 @@ class DeletedUsersTable extends Component {
 										}
 									</tr>
 								</thead>
-								<tbody className="scrollContent">
+								<tbody>
 									{this.state.tableData && this.state.tableData.length > 0 ?
 										this.state.tableData.map(
 											(value, i) => {
@@ -1052,7 +1063,7 @@ class DeletedUsersTable extends Component {
 																	<div>
 																		{this.props.editId && this.props.editId === value._id ? null : <button className="btn restoreBtn btn-success" type="button" id={value._id} onClick={this.restoreUser.bind(this)}>Restore User</button>}
 																		{"\n"}
-																		{this.props.editId && this.props.editId === value._id ? null : <button className="btn deleteBtn btn-danger" type="button" id={value._id + '-Delete'} data-toggle="modal" data-target={`#${value._id}-rm`} >Permanent Delete</button>}
+																		{this.props.editId && this.props.editId === value._id ? null : <button className="btn deleteBtn btn-danger" type="button" id={value._id + '-Delete'} data-toggle="modal" data-target={`#${value._id}-rm`} onClick={this.openDeleteModal.bind(this)} >Permanent Delete</button>}
 
 
 																	</div>
@@ -1243,17 +1254,9 @@ class DeletedUsersTable extends Component {
 						</div>
 					</div>
 				</div>
-			</div>
 		);
 	}
 }
 
 export default withRouter(DeletedUsersTable);
-
-
-
-
-
-
-
 

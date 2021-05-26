@@ -51,7 +51,7 @@ class IAssureTableUM extends Component {
 		window.showUserDetails = this.showUserDetails;
 		window.doubleclickonname = this.doubleclickonname;
 		window.doubleclickonCompany = this.doubleclickonCompany;
-		console.log("this.props.tableHeading==>", this.props.tableHeading);
+		// console.log("this.props.tableHeading==>", this.props.tableHeading);
 		this.setState({
 			tableHeading: this.props.tableHeading,
 			tableData: this.props.tableData,
@@ -364,56 +364,61 @@ class IAssureTableUM extends Component {
 	}
 	setLimit(event) {
 		event.preventDefault();
-			var limitRange = parseInt(this.refs.limitRange.value);
-		this.props.Range(limitRange);
+		var limitRange = parseInt(this.refs.limitRange.value);
+		// console.log("response  => ",limitRange)
+	/*	this.props.Range(limitRange);
+		console.log("this.props.Range  => ",this.props.Range(limitRange))
 		this.setState({
 				limitRange :limitRange
+			},()=>{
+			console.log("satet limitRange  => ",this.state.limitRange)
 			})
-		// var startRange = 0;
-		// if (this.refs.limitRange.value === 'All') {
-		// 	var limitRange = '';
-		// } else {
-		// }
+		var startRange = 0;
+		if (this.refs.limitRange.value === 'All') {
+			var limitRange = '';
+		} else {
+		}*/
 		// console.log("this.props.limitRange==>",this.state.limitRange)
-				// var data = {
-				// 	"startRange": this.state.startRange,
-				// 	"limitRange": parseInt(this.refs.limitRange.value),
-				// 	"companyID": parseInt(this.props.companyID)
-				// }
-		// 	console.log("this.props.limitRange==>",data);
+				var data = {
+					"startRange": this.state.startRange,
+					"limitRange": parseInt(this.refs.limitRange.value),
+					"companyID": parseInt(this.props.companyID)
+				}
+			// console.log("this.props.limitRange==>",data);
 
-				// this.props.getData(data);
+				this.props.getData(data);
 		// console.log("this.limitRange==>",limitRange)
-		/*this.setState({
+		this.setState({
 			"limitRange": limitRange,
 		   }, () => {
 			
-			console.log("this.props.limitRange==>",this.state.limitRange)
+			// console.log("this.props.limitRange==>",this.state.limitRange)
 				var data = {
 					"startRange": this.state.startRange,
 					"limitRange": parseInt(this.state.limitRange),
 					"companyID": parseInt(this.props.companyID)
 				}
-			console.log("this.props.limitRange==>",data);
+			// console.log("this.props.limitRange==>",data);
 
 				this.props.getData(data);
 		
-		});*/
+		});
 	}
 	tableSearch() {
 		var searchTextTable = this.refs.tableSearch.value.trim();
-				
+		// console.log("searchTextTable  => ",searchTextTable)
 		var startRange = this.state.startRange;
 		var limitRange = this.state.limitRange;
-		
-		this.props.getSearchText(searchTextTable,startRange,limitRange);
 
-		console.log("searchText",searchTextTable,startRange,limitRange);
+		this.props.getSearchText(searchTextTable,startRange,limitRange);
+				// console.log("this.props.getSearchText(searchTextTable,startRange,limitRange) ",this.props.getSearchText(searchTextTable))		
+		// console.log("searchText",searchTextTable,startRange,limitRange);
 		if (this.props.getSearchText()) {
+				// console.log("this.props.getSearchText  =>  ",this.props.getSearchText())		
 
 		this.props.getSearchText(searchTextTable,startRange,limitRange);
 		}else{
-			/*if (searchTextTable && searchTextTable.length !== 0) {
+/*			if (searchTextTable && searchTextTable.length !== 0) {
 				var data = {
 					searchText: searchTextTable,
 					startRange: this.state.startRange,
@@ -421,7 +426,6 @@ class IAssureTableUM extends Component {
 					companyID: this.props.companyID
 				}
 				console.log("data",data);
-
 				axios.post('/api/users/get/searchfilterwise', data)
 					.then((res) => {
 						console.log("Res in searchtext==>", res.data);
@@ -433,7 +437,6 @@ class IAssureTableUM extends Component {
 								companyDetails: a.companyName == undefined || "" ? "-" : '<a ondblclick=window.doubleclickonCompany("' + a.companyID +'")> ' + a.companyName  + '</a>'+ ' | ' + a.companyID,
 								
 								status: a.status === "active" ? '<span class="label label-success statusLabel">' + a.status + '</span>' : '<span class="label label-default statusLabel">' + a.status + "</span>",
-
 								roles: a.role.map((b, j) => '  <span>' + b + ' </span>').toString(),
 								createdAt: moment(a.createdAt).format("DD MMM YY") + '<br/>' + moment(a.createdAt).fromNow(),
 								lastLogin: a.lastLogin === null
@@ -451,7 +454,6 @@ class IAssureTableUM extends Component {
 					})
 					.catch((error) => {
 					})
-
 				this.setState({
 					tableData: []
 				});
@@ -619,12 +621,12 @@ class IAssureTableUM extends Component {
 		var formValues = {
 			"pwd": conPassword,
 		}
-		console.log('password', password, 'conPassword', conPassword);
+		// console.log('password', password, 'conPassword', conPassword);
 		var newID = $(event.currentTarget).attr('data-email');
 		if (newID) {
 			var resetPassword = newID;
 		}
-		console.log('valid');
+		// console.log('valid');
 		if (password && conPassword) {
 			if (password === conPassword) {
 				if (password.length >= 6) {
@@ -706,9 +708,31 @@ class IAssureTableUM extends Component {
 		return $('.eye').attr('type', 'password');
 	}
 	showprofile(id,getrole) {
+		// console.log("type in getrole===>",getrole.replace( /(<([^>]+)>)/ig, ''));
 		var userID = id
-		this.props.history.push("/edituserprofile/" + id)
-		// this.props.history.push('/edituserprofile/' + e.currentTarget.id);
+		if (getrole.replace( /(<([^>]+)>)/ig, '') === 'admin') {
+			this.props.history.push("/editadminprofile/"+userID)
+		}else{
+			/*axios.get("/api/personmaster/get/details/" +userID)
+				.then((response) => {					
+					console.log("type in response===>",response.data);
+					var type = response.data[0].type;
+					var entityType =response.data[0].entityType;
+					if(entityType == "vendor") {
+						if (type == "driver") {
+							this.props.history.push("/vendor/driver/master/" + response.data[0]._id)
+						}else{
+							this.props.history.push("/vendor/employee/master/" + response.data[0]._id)
+						}
+					}else {
+						this.props.history.push("/"+type+"/users/" + response.data[0]._id)
+					}
+					// this.props.history.push("/"+type+"/master/" + response.data[0]._id)
+				})
+				.catch((error) => {
+				})*/
+		}
+		 this.props.history.push('/edituserprofile/' + id);
 		// this.props.history.push("/driver/master/" + id)
 	}
 	checkAll(event) {
@@ -918,7 +942,7 @@ class IAssureTableUM extends Component {
 			checkedUsersList.push(event.target.id)
 		}
 			function updateStatus(formValues) {
-				console.log('formValues===>>>', formValues.user_id_tobedeleted);
+				// console.log('formValues===>>>', formValues.user_id_tobedeleted);
 				return new Promise(function (resolve, reject) {
 					
 					axios
@@ -932,10 +956,10 @@ class IAssureTableUM extends Component {
 									personID_tobedeleted: response.data[0]._id,
 									updatedBy: username,
 								}
-								console.log('geet/details====>>>>', uservalue);
+								// console.log('geet/details====>>>>', uservalue);
 								axios.patch("/api/personmaster/patch/deletestatus", uservalue)
 									.then((response) => {
-										console.log('responseStatus delete====>>>>', response.data);
+										// console.log('responseStatus delete====>>>>', response.data);
 									})
 									.catch((error) => {})
 							})
@@ -991,7 +1015,7 @@ class IAssureTableUM extends Component {
 					user_id_tobedeleted: selectedId,
 					updatedBy: username,
 				}
-				console.log("formvalues==>", formValues);
+				// console.log("formvalues==>", formValues);
 				var response = await updateStatus(formValues);
 				if (response) {
 					var user = await getUserDetails(selectedId);
@@ -1014,22 +1038,22 @@ class IAssureTableUM extends Component {
 		}
 	}
 	doubleclickonname(userID){
-		console.log("doubleclickonname id== >",userID);
+		// console.log("doubleclickonname id== >",userID);
 		
 		axios.get('/api/personmaster/get/details/' + userID)
 		.then((res) => {
-			console.log("res id== >",res.data[0]);
+			// console.log("res id== >",res.data[0]);
 			var personid = res.data[0]._id;
 			this.props.history.push("/employee-profile/"+personid)
 		})
 		.catch((error) => {});
 	} 
 	doubleclickonCompany(companyID){
-		console.log("doubleclickonname id== >",companyID);
+		// console.log("doubleclickonname id== >",companyID);
 		
 		axios.get('/api/entitymaster/get/one/companyName/' + companyID)
 		.then((res) => {
-			console.log("res id== >",res.data);
+			// console.log("res id== >",res.data);
 			var entity = res.data._id;
 			this.props.history.push("/company-profile/"+entity)
 		})
@@ -1037,9 +1061,10 @@ class IAssureTableUM extends Component {
 	}
 	showUserDetails(id) {
 		var id = id;
-		console.log('id', id);
+		// console.log('id', id);
 		axios.get('/api/users/get/' + id)
 			.then((res) => {
+				console.log("res logDetails ==> ",res.data);
 				this.setState({
 					userMail: res.data.email,
 					fullName: res.data.fullName,
@@ -1048,6 +1073,20 @@ class IAssureTableUM extends Component {
 			})
 			.catch((error) => {});
 	}
+	openDeleteModal(event){
+	    event.preventDefault();
+	    var currentid = event.currentTarget.id;
+	    var id = currentid.split("-")[0];
+	    $("#"+id+"-deleteStatusofUser").show();
+	    $("#"+id+"-deleteStatusofUser").addClass('in');
+	}
+	openPasswordResetModal(event){
+		event.preventDefault();
+	    var id = event.currentTarget.id;
+	    $("#RestpwdModal-"+id).show();
+	    $("#RestpwdModal-"+id).addClass('in');
+	}
+
 	render() {
 		return (
 			<div id="tableComponent" className="col-lg-12 col-sm-12 col-md-12 col-xs-12">
@@ -1088,15 +1127,14 @@ class IAssureTableUM extends Component {
 							
 							buttonText=""/>
 					</div>
-				<div className="col-lg-12 col-sm-12 col-md-12 col-xs-12 NOpadding marginTop8 table-responsive">
-				
-				 <table className="table iAssureITtable-bordered table-striped table-hover fixedTable"style={{marginBottom:"0px"}}>
-				 	<thead className="tempTableHeader fixedHeader">
+				<div className="col-lg-12 col-sm-12 col-md-12 col-xs-12 NOpadding marginTop8 table-responsive UMHeaderFixTable">
+				 <table id="UMTable" className="table iAssureITtable-bordered table-striped table-hover">
+				 	<thead className="tempTableHeader">
 									<tr className="tempTableHeader">
 										{this.state.twoLevelHeader.apply === true ?
 											this.state.twoLevelHeader.firstHeaderData.map((data, index) => {
 												return (
-													<th key={index} id={"heading_data"+index} colSpan={data.mergedColoums} className="umDynamicHeader  srpadd textAlignCenter new_tableborder">{data.heading}</th>
+													<th key={index} scope="col" id={"heading_data"+index} colSpan={data.mergedColoums} className="umDynamicHeader  srpadd textAlignCenter new_tableborder">{data.heading}</th>
 												);
 											})
 											:
@@ -1104,7 +1142,7 @@ class IAssureTableUM extends Component {
 										}
 									</tr>
 									<tr className="tempTableHeader">
-										<th className="umDynamicHeader tablebodynew srpadd textAlignLeft new_tableborder" style={{width:"5%"}}>
+										<th scope="col" className="umDynamicHeader tablebodynew srpadd textAlignLeft new_tableborder">
 											<div className="uMDetailContainer">
 												<input type="checkbox" className="allSelector col-lg-1 col-md-1 col-sm-3 col-xs-1 umchksett" name="allSelector" onChange={this.checkAll.bind(this)} />
 												<span className="uMDetailCheck"></span>
@@ -1115,15 +1153,15 @@ class IAssureTableUM extends Component {
 												([key, value], i) => {
 													if(key === 'actions'){
 															return(
-																<th key={i} className="umDynamicHeader srpadd text-center col">
-																	<div style={{width:"6%"}}>{value}</div>
+																<th key={i} scope="col" className="umDynamicHeader srpadd text-center" style={{"width":"95px"}}>
+																	<div className="" >{value}</div>
 																</th>
 															);	
 															
 													}else{
 														return(
-															<th key={i} className="umDynamicHeader srpadd textAlignLeft">
-															<div className={"wrapWord col"+(i+1)}>{value}</div>
+															<th key={i} scope="col" className="umDynamicHeader srpadd textAlignLeft">
+															<div>{value}</div>
 															 <span onClick={this.sort.bind(this)} id={key} className="fa fa-sort tableSort"></span></th>
 														);	
 													}
@@ -1135,16 +1173,16 @@ class IAssureTableUM extends Component {
 										}
 									</tr>
 								</thead>
-								<tbody className={this.state.tableData && this.state.tableData.length > 0 ? "scrollContent" : ""}>
+								<tbody>
 									{this.state.tableData && this.state.tableData.length > 0 ?
 										this.state.tableData.map(
 											(value, i) => {
-												// console.log('log.value=====>', value.roles);
+												// console.log('log.value=====>', value);
 
 												return (
 													<tr key={i} className="">
 
-														<td className="textAlignCenter"style={{width:'5%'}}>
+														<td className="textAlignCenter">
 															<div className="uMDetailContainer">
 																<input type="checkbox" ref="userCheckbox" name="userCheckbox" className="userCheckbox" checked={this.state[value._id] ? true : false} id={value._id} onChange={this.selectedId.bind(this)} />
 																<span className="uMDetailCheck"></span>
@@ -1174,9 +1212,9 @@ class IAssureTableUM extends Component {
 																			if (found.length > 0) {
 																				if (key !== 'id') {
 																					if(value1){
-																						return(<td className={textAlign} key={j}><div className={textAlign+" col"+j } dangerouslySetInnerHTML={{ __html:value1}}></div></td>); 						
+																						return(<td className={textAlign} key={j}><div className={textAlign} dangerouslySetInnerHTML={{ __html:value1}}></div></td>); 						
 																					}else{
-																						return(<td className={textAlign} key={j}><div className={textAlign+" col"+j} dangerouslySetInnerHTML={{ __html:value1}}></div></td>); 						
+																						return(<td className={textAlign} key={j}><div className={textAlign} dangerouslySetInnerHTML={{ __html:value1}}></div></td>); 						
 																					}
 																				} else {
 
@@ -1193,14 +1231,14 @@ class IAssureTableUM extends Component {
 															this.props.Actioncol ?
 																""
 																:
-																<td className="textAlignCenter"style={{width:'6%'}}>
+																<td className="textAlignCenter">
 																	{
 																		this.props.UsersTable
 																			?
 																			<span className="pointer pointerCls">
-																					<i className="fa fa-pencil " title="Edit" id={value._id} onClick={this.showprofile.bind(this,value._id,value.roles)} ></i>&nbsp; &nbsp;
-																					{this.props.editId && this.props.editId === value._id ? null : <i className={"fa fa-trash redFont " + value._id} id={value._id + '-Delete'} data-toggle="modal" title="Delete" data-target={`#${value._id}-deleteStatusofUser`} ></i>}&nbsp; &nbsp;
-																					<i className="fa fa-key" title="Reset Password" id={value._id} data-toggle="modal" data-target={"#RestpwdModal-" + value._id}></i>
+																					<i className="fa fa-pencil " title="Edit" id={value._id} onClick={this.showprofile.bind(this,value._id,value.roles)} style={{"padding":"5px"}}></i>&nbsp; &nbsp;
+																					{this.props.editId && this.props.editId === value._id ? null : <i className={"fa fa-trash redFont " + value._id} id={value._id + '-Delete'} data-toggle="modal" title="Delete" data-target={`#${value._id}-deleteStatusofUser`} style={{"padding":"5px"}} onClick={this.openDeleteModal.bind(this)} ></i>}&nbsp; &nbsp;
+																					<i className="fa fa-key" title="Reset Password" id={value._id} data-toggle="modal" data-target={"#RestpwdModal-" + value._id} style={{"padding":"5px"}} onClick={this.openPasswordResetModal.bind(this)}></i>
 																				{/* <i className="fa fa-key" onClick={this.showUserDetails.bind(this)} title="Login Details" id={value._id} data-toggle="modal" data-target={"#userDetails-" + value._id}></i> */}
 																			</span>
 																			: null
@@ -1234,7 +1272,7 @@ class IAssureTableUM extends Component {
 																										{this.state.logDetails
 																											?
 																											this.state.logDetails.map((log, index) => {
-																												// console.log("log",log);
+																												console.log("log===>",log);
 																												var date1 = log.loginTimeStamp ? log.loginTimeStamp : new Date();
 																												var date2 = log.logoutTimeStamp ? log.logoutTimeStamp : new Date();
 																												let diffInMilliSeconds = Math.abs(new Date(date1) - new Date(date2)) / 1000;
@@ -1293,8 +1331,8 @@ class IAssureTableUM extends Component {
 																												<label className="">New Password <span className="requiredsign">&nbsp;*</span></label>
 																												<input type="password" value={this.state["resetPassword" + value._id]} onChange={this.resetPasswordChange.bind(this)} className="form-control marBtm eye" ref="resetPassword" name={"resetPassword" + value._id} id={"resetPassword" + value._id} autoComplete="off" />
 																												<div className="showHideSignDiv showHideEye">
-																													<i className="fa fa-eye showPwd showEyeupSign" aria-hidden="true" onClick={this.showSignPass.bind(this)}></i>
-																													<i className="fa fa-eye-slash hidePwd hideEyeSignup " aria-hidden="true" onClick={this.hideSignPass.bind(this)}></i>
+																													<i className="fa fa-eye showPwd showEyeupSign" aria-hidden="true" onClick={this.showSignPass.bind(this)} style={{"fontSize":"13px","padding":"5px"}}></i>
+																													<i className="fa fa-eye-slash hidePwd hideEyeSignup " aria-hidden="true" onClick={this.hideSignPass.bind(this)} style={{"fontSize":"13px","padding":"5px","marginLeft":"5px"}}></i>
 																												</div>
 																												<label className="error">{this.state["resetPassword" + value._id + "Error"]}</label>
 																											</div>
@@ -1304,8 +1342,8 @@ class IAssureTableUM extends Component {
 																												<label className=""> Confirm Password <span className="requiredsign">&nbsp;*</span></label>
 																												<input type="password" value={this.state["resetPasswordConfirm" + value._id]} onChange={this.resetPasswordChange.bind(this)} className="form-control marBtm eye" ref="resetPasswordConfirm" name={"resetPasswordConfirm" + value._id} id={"resetPasswordConfirm" + value._id} autoComplete="off" />
 																												<div className="showHideSignDiv showHideEye">
-																													<i className="fa fa-eye showPwd showEyeupSign" aria-hidden="true" onClick={this.showSignPass.bind(this)}></i>
-																													<i className="fa fa-eye-slash hidePwd hideEyeSignup " aria-hidden="true" onClick={this.hideSignPass.bind(this)}></i>
+																													<i className="fa fa-eye showPwd showEyeupSign" aria-hidden="true" style={{"fontSize":"13px","padding":"5px"}} onClick={this.showSignPass.bind(this)}></i>
+																													<i className="fa fa-eye-slash hidePwd hideEyeSignup " aria-hidden="true"style={{"fontSize":"13px","padding":"5px","marginLeft":"5px"}}  onClick={this.hideSignPass.bind(this)}></i>
 																												</div>
 																												<label className="error">{this.state["resetPasswordConfirm" + value._id + "Error"]}</label>
 																											</div>
@@ -1424,7 +1462,7 @@ class IAssureTableUM extends Component {
 												([key, value], i) => {
 													if (key === 'actions') {
 														return (
-															<th key={i} className="umDynamicHeader srpadd textAlignLeft new_tableborder">{value != "actions"}</th>
+															<th key={i}  className="umDynamicHeader srpadd textAlignLeft new_tableborder">{value != "actions"}</th>
 														);
 													} else {
 														return (

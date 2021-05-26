@@ -384,7 +384,7 @@ class IAssureTable extends Component {
     }
 	render() {
 		return (
-	       	<div id="tableComponent" className="col-lg-12 col-sm-12 col-md-12 col-xs-12 modifiedTableIassure">
+	       	<div id="tableComponent" className="col-lg-12 col-sm-12 col-md-12 col-xs-12">
 				{this.state.tableObjects.paginationApply === true ?
 					<div className="col-lg-4 col-md-4 col-sm-12 col-xs-12 paddingLeftCss">
 						<label className="col-lg-12 col-md-12 col-sm-12 col-xs-12  NOpadding">Data Per Page</label>
@@ -413,10 +413,10 @@ class IAssureTable extends Component {
 					:
 					null
 				}	
-	            <div className="col-lg-12 col-sm-12 col-md-12 col-xs-12 NOpadding marginTop17">			            	        
-	                <div className="table-responsive">
-						<table className="table iAssureITtable-bordered table-striped table-hover">
-	                        <thead className="tempTableHeader fixedTableHeader">	     
+	            <div className="col-lg-12 col-sm-12 col-md-12 col-xs-12 NOpadding ">			            	        
+				<div className="col-lg-12 col-sm-12 col-md-12 col-xs-12 NOpadding marginTop8 table-responsive commonHeaderFixTable">
+				 <table id="commonTable" className="table iAssureITtable-bordered table-striped table-hover">
+				 	<thead className="tempTableHeader">
 		                        <tr className="">
 		                            { this.state.twoLevelHeader.apply === true ?
 		                            	this.state.twoLevelHeader.firstHeaderData.map((data, index)=>{
@@ -429,23 +429,22 @@ class IAssureTable extends Component {
 									}
 	                            </tr>
 	                            <tr className="">
-	                            <th className="umDynamicHeader srpadd textAlignLeft"style={{width:"50px"}}>Sr.No.</th>
+	                            <th className="umDynamicHeader srpadd textAlignLeft" scope="col">Sr.No.</th>
 		                            { this.state.tableHeading ?
 										Object.entries(this.state.tableHeading).map( 
 											([key, value], i)=> {
 													if(key === 'actions'){
+															return(
+																<th key={i} scope="col" className="umDynamicHeader srpadd text-center">
+																	<div className="">{value}</div>
+																</th>
+															);	
+															
+													}else{
 														return(
-															<th key={i} className="umDynamicHeader srpadd textAlignLeft">{value}</th>
-														);	
-													}
-													if(key === 'brand'){
-														return(
-															<th key={i} className="umDynamicHeader srpadd textAlignCenter" style={{width:"150px"}}>{value}</th>
-														);	
-													}
-													else{
-														return(
-															<th key={i} className="umDynamicHeader srpadd textAlignLeft">{value} <span onClick={this.sort.bind(this)} id={key} className="fa fa-sort tableSort"></span></th>
+															<th key={i} scope="col" className="umDynamicHeader srpadd textAlignLeft">
+															<div>{value}</div>
+															 <span onClick={this.sort.bind(this)} id={key} className="fa fa-sort tableSort"></span></th>
 														);	
 													}
 																							
@@ -456,13 +455,13 @@ class IAssureTable extends Component {
 									}
 	                            </tr>
 	                        </thead>
-	                        <tbody className="scrollableBody">
+	                        <tbody>
 	                           { this.state.tableData && this.state.tableData.length > 0 ?
 	                           		this.state.tableData.map( 
 										(value, i)=> {													
 											return(
 												<tr key={i} className="">
-													<td className="textAlignCenter"style={{width:"61px"}}>{this.state.startRange+1+i}</td>
+													<td className="textAlignCenter">{this.state.startRange+1+i}</td>
 													{
 														Object.entries(value).map( 
 															([key, value1], i)=> {
