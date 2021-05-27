@@ -60,10 +60,10 @@ buck-out/
 
 /mobileapp/JobPortal/node_modules
 /mobileapp/JobPortal/.env
-/mobileapp/JobPortal/android
-/mobileapp/JobPortal/ios
+# /mobileapp/JobPortal/android
+# /mobileapp/JobPortal/ios
 
 node_modules/
 /node_modules
-android/
-ios/
+# android/
+# ios/
