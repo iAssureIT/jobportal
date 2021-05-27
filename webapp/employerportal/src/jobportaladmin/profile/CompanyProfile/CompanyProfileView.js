@@ -6,6 +6,9 @@ import swal                   from 'sweetalert';
 import IAssureTable           from './IAssureTable.jsx';
 import ReactToPdf             from 'react-to-pdf';
 import _                      from 'underscore';
+import { connect }              from 'react-redux';
+import { bindActionCreators }   from 'redux';
+import  * as mapActionCreator   from '../../common/actions/index';
 import 'bootstrap/js/tab.js';
 import './CompanyProfile.css';
 
@@ -48,8 +51,8 @@ class CompanyProfileView extends Component {
   }
 
 	componentDidMount(){
-		console.log("HI")
-		axios.get("/api/entitymaster/get/one/"+this.state.company_Id)
+		console.log("HI",this.props.userDetails.company_id)
+		axios.get("/api/entitymaster/get/one/"+this.props.userDetails.company_id)
 		.then((response) => {
 			console.log(" /api/entitymaster/get/one/ response.data = ",response.data);
 			this.setState({
@@ -166,7 +169,8 @@ class CompanyProfileView extends Component {
     				<div className="pageContent col-lg-12 col-md-12 col-sm-12 col-xs-12"> 
 					    <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 boxshadeOP" id="pdfWrap" iref={ref}> 	
 					    	<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 noPadding borderAll">
-						    	<div  className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blueBack ">
+						    	<div  className="col-lg-12 col-md-12 col-sm-12 col-xs-12 "><img src="/images/orgbackground.jpg" alt="background" className="blueBack" />
+						    	<img src="/images/orgbackground.jpg" alt="background" className="blueBack" />
 						    		<div className="col-lg-10 col-md-10 col-sm-10 col-xs-10 ">
 							    		<div className="col-lg-2 col-md-4 col-sm-4 col-xs-4 companyLogoImage noPadding">
 											<img src={this.state.corporateInfo.companyLogo && this.state.corporateInfo.companyLogo.length > 0?this.state.corporateInfo.companyLogo[0]:"/images/noImagePreview.png"} className=""></img>
@@ -434,4 +438,14 @@ class CompanyProfileView extends Component {
 	  );
 	} 
 }
-export default withRouter(CompanyProfileView); 
+const mapStateToProps = (state)=>{
+    return {
+        selectedModal  : state.selectedModal,
+        userDetails    : state.userDetails, subscriptionDetails   : state.subscriptionDetails 
+    }
+}
+const mapDispatchToProps = (dispatch) => ({
+  mapAction :  bindActionCreators(mapActionCreator, dispatch)
+}) 
+
+export default connect(mapStateToProps, mapDispatchToProps) (withRouter(CompanyProfileView)); 

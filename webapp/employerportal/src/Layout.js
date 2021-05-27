@@ -27,6 +27,7 @@ import FunctionalHeader                         from './jobportaladmin/common/fu
 import JobPosting                               from './jobportaladmin/blocks/JobPosting/JobPosting.js'; 
 import JobPostProfile                           from './jobportaladmin/blocks/JobPostProfile/JobPostProfile.js';
 import CandidateProfile                         from './jobportaladmin/blocks/CandidateProfile/CandidateProfile.js';
+import CompanyProfile                           from './jobportaladmin/profile/CompanyProfile/CompanyProfile.js';
 
 import JoblistPage                              from './jobportaladmin/pages/JoblistPage/JoblistPage.js';
 import AppliedCandidatelistPage                 from './jobportaladmin/pages/AppliedCandidatelistPage/AppliedCandidatelistPage.js';
@@ -118,6 +119,7 @@ class Layout extends Component  {
 
                                                         <Route path="/candidate-list"                   component={CandidatesListPage} exact />
                                                         <Route path="/candidate-profile/:candidate_id"  component={CandidateProfile} exact />
+                                                        <Route path="/company-profile/:company_id"  component={CompanyProfile} exact />
                                                         <Route path="/change-pwd/:user_ID"              exact strict component={ChangePassword} />
                                                         <Route path="/confirm-otp/:userID"              exact strict component={ConfirmOtp} />
                                                         <Route path="/confirm-otp-fp/:userID"              exact strict component={ConfirmOtpFP} />
