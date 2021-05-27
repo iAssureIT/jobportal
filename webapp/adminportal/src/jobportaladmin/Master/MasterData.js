@@ -20,7 +20,7 @@ import Qualification        from  '../Master/Qualification/Qualification.js';
 
 
 import University           from "../Master/University/University.js"
-import Collage              from "../Master/Collage/Collage.js"
+import College              from "../Master/College/College.js"
 import Language             from "../Master/Language/Language.js"
 import Skill             from "../Master/Skill/Skill.js"
 import '../../coreadmin/companysetting/css/CompanySetting.css';
@@ -138,7 +138,7 @@ import '../../coreadmin/companysetting/css/CompanySetting.css';
                             <a className="tabLeft lettersp tablefthr" href="#University" data-toggle="tab"  onClick={this.tab.bind(this)}>University</a>
                             </li>
                             <li className="col-lg-12 col-md-12 col-xs-12 col-sm-12">
-                            <a className="tabLeft lettersp tablefthr" href="#Collage" data-toggle="tab"  onClick={this.tab.bind(this)}>Collage</a>
+                            <a className="tabLeft lettersp tablefthr" href="#College" data-toggle="tab"  onClick={this.tab.bind(this)}>College</a>
                             </li>
                             <li className="col-lg-12 col-md-12 col-xs-12 col-sm-12">
                             <a className="tabLeft lettersp tablefthr" href="#Language" data-toggle="tab"  onClick={this.tab.bind(this)}>Language</a>
@@ -167,7 +167,7 @@ import '../../coreadmin/companysetting/css/CompanySetting.css';
                         <div className="tab-pane" id="JobRole"><JobRole  editId={this.state.editId} history={this.props.history}/>  </div>
                         
                         <div className="tab-pane" id="University"><University  editId={this.state.editId} history={this.props.history}/>  </div>
-                        <div className="tab-pane" id="Collage"><Collage  editId={this.state.editId} history={this.props.history}/>  </div>
+                        <div className="tab-pane" id="College"><College  editId={this.state.editId} history={this.props.history}/>  </div>
                         <div className="tab-pane" id="QualificationLevel"><QualificationLevel  editId={this.state.editId} history={this.props.history}/>  </div>
                         <div className="tab-pane" id="Qualification"><Qualification  editId={this.state.editId} history={this.props.history}/>  </div>
                         
