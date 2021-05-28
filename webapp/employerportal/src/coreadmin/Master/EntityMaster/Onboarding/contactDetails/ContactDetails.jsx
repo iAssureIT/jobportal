@@ -1349,7 +1349,7 @@ class ContactDetails extends Component {
 													}
 												</div>
 												:
-												<div className="textAlign">No Contacts Found.</div>
+												<div className="contactsEmptyData">No Contacts Found.</div>
 											}
 									      	</div>
 								 		}

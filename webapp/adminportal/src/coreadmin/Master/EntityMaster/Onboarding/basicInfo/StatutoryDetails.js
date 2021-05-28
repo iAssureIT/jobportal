@@ -58,23 +58,22 @@ class StatutoryDetails extends Component {
 	componentDidMount() {
 		this.getData();
 		this.getCountryConfigData();
-		this.edit();
+		
 		window.scrollTo(0, 0);
 		this.handleChange = this.handleChange.bind(this);
 		this.setState({
 			'entityID': this.props.match.params ? this.props.match.params.entityID : '',
 			'statutoryID': this.props.match.params ? this.props.match.params.statutoryID : '',
-		})
+		},()=>{this.edit()})
 	}
 
 	componentWillReceiveProps(nextProps) {
 		
+		this.edit();
 		this.getData();
 		this.setState({
 			'entityID': nextProps.match.params ? nextProps.match.params.entityID : '',
 			'statutoryID':nextProps.match.params ? nextProps.match.params.statutoryID : '',
-		},()=>{
-			this.edit();
 		})
 	}
 
@@ -193,7 +192,7 @@ class StatutoryDetails extends Component {
 	}
 	
 	getStates(country) {
-		axios.get("http://locations2.iassureit.com/api/states/get/list/"+country)
+		axios.get("/api/states/get/list/"+country)
 			.then((response) => {
 				this.setState({
 					stateArray: response.data
@@ -909,7 +908,7 @@ class StatutoryDetails extends Component {
 																		</select>
 																	</div>
 																	<div className="col-lg-3 col-md-3 col-sm-12 col-xs-12  " >
-																		<label className="labelform col-lg-12 col-md-12 col-sm-12 col-xs-12">{this.state.taxName}<i className="astrick">*</i>
+																		<label className="labelform col-lg-12 col-md-12 col-sm-12 col-xs-12">{this.state.taxName}GSTIN<i className="astrick">*</i>
 																			<a data-tip data-for='basicInfo4Tooltip' className="pull-right"> <i title="Eg. 29ABCDE1234F1Z5" className="fa fa-question-circle"></i> </a>
 																		</label>
 																		<input type="text" id="GSTIN" placeholder="29ABCDE1234F1Z5" className="form-control uppercase col-lg-12 col-md-12 col-sm-12 col-xs-12" value={this.state.GSTIN} ref="GSTIN" name="GSTIN" onChange={this.handleChange} />
