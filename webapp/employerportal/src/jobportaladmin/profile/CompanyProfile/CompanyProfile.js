@@ -289,7 +289,7 @@ class CompanyProfile extends Component {
 	          console.log("res",res);
 	        })
         .catch((error) => { console.log('notification error: ', error) })
-      	swal("Profile Approved");
+      	Swal.fire('', "Profile Approved", '');
       	 axios.get("/api/contract/get/one/entity/" + entityID)
           .then((response) => {
             console.log("response",response)
@@ -359,15 +359,11 @@ class CompanyProfile extends Component {
     .then((response) => {
       if (response.data.deleted) {
       	$('#deleteEntityModal').hide();
-          swal({
-              text: "Data deleted successfully.",
-          });
+          Swal.fire('', "Data deleted successfully", '');
         	this.getCompanyData(this.state.entityID)
 
       } else {
-          swal({
-              text: "Failed to delete.",
-          });
+          Swal.fire('', "Failed to delete", '');
       }
       this.getContracts();
       $('#deleteEntityModal').hide();
