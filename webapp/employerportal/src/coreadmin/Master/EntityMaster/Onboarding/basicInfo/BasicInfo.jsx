@@ -867,11 +867,11 @@ class BasicInfo extends Component {
                           <div className="row"> 
                             <div className="form-margin col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
                               <div className=" col-lg-4 col-md-5 col-sm-12 col-xs-12">
-                                <label className="labelform col-lg-12 col-md-12 col-sm-12 col-xs-12 NOpadding-left">Company Name<i className="astrick">*</i></label>
+                                <label className="labelform col-lg-12 col-md-12 col-sm-12 col-xs-12 NOpadding-left">Company Name <i className="asterisk">*</i></label>
                                 <input type="text" id="companyName" className="form-control col-lg-12 col-md-12 col-sm-12 col-xs-12" value={this.state.companyName} ref="companyName" name="companyName" onChange={this.handleChange} />
                               </div>
                               <div className="col-lg-4 col-md-3 col-sm-12 col-xs-12">
-                                <label className="labelform col-lg-12 col-md-12 col-sm-12 col-xs-12 NOpadding-left">Group Name<i className="astrick">*</i></label>
+                                <label className="labelform col-lg-12 col-md-12 col-sm-12 col-xs-12 NOpadding-left">Group Name <i className="asterisk">*</i></label>
                                 <input type="text" id="groupName" className="form-control col-lg-12 col-md-12 col-sm-12 col-xs-12" value={this.state.groupName} ref="groupName" name="groupName" onChange={this.handleChange} required />
                               </div>
                               
@@ -919,7 +919,7 @@ class BasicInfo extends Component {
                           <div className="form-margin col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
                             <div className="row">
                                 <div className="col-lg-4 col-md-3 col-sm-12 col-xs-12">
-                                  <label className="labelform col-lg-12 col-md-12 col-sm-12 col-xs-12 NOpadding-left">Industry<i className="astrick">*</i></label>
+                                  <label className="labelform col-lg-12 col-md-12 col-sm-12 col-xs-12 NOpadding-left">Industry <i className="asterisk">*</i></label>
                                   <input type="text" list="industry" className="form-control addJobFormField addJobBorderRadius" refs="industry" 
                                     name="industry" id="selectIndustry" maxLength="100" value={this.state.industry} data-value={this.state.industry_id}
                                     onChange={this.onChangeIndustry.bind(this)} />
@@ -930,39 +930,15 @@ class BasicInfo extends Component {
                                     </datalist>
                                 </div>
                                 <div className="col-lg-4 col-md-3 col-sm-12 col-xs-12">
-                                  <label className="labelform col-lg-12 col-md-12 col-sm-12 col-xs-12 NOpadding-left">Email<i className="astrick">*</i></label>
+                                  <label className="labelform col-lg-12 col-md-12 col-sm-12 col-xs-12 NOpadding-left">Email <i className="asterisk">*</i></label>
                                   <input  type="email" id="companyEmail" className="form-control col-lg-12 col-md-12 col-sm-12 col-xs-12" value={this.state.companyEmail} ref="companyEmail" name="companyEmail" onChange={this.handleChange} required />
                                 </div>
-
-                                {/*<div className="col-lg-4 col-md-3 col-sm-12 col-xs-12">
-                                  <label className="labelform  NOpadding-left">Company Number<i className="astrick">*</i></label>
-                                  <PhoneInput
-                                    country={'in'}
-                                    value={this.state.companyPhone}
-                                    name="companyPhone"
-                                    inputProps={{
-                                      name: 'companyPhone',
-                                      required: true
-                                    }}
-                                    onChange={this.changeMobile.bind(this)}
-                                  />
-
-                                  {this.state.companyPhoneAvailable === true ? null : <label className="error">Please enter valid number</label>}
-                                  
-                                </div>                                 
-                              
-                                <div className="col-lg-4 col-md-3 col-sm-12 col-xs-12" >
-                                  <label className="labelform col-lg-12 col-md-12 col-sm-12 col-xs-12 NOpadding-left">Website
-                                    <a href="#" data-tip data-for='basicInfo4Tooltip' className="pull-right"> <i title="Eg. www.abc.xyz" className="fa fa-question-circle"></i> </a>
-                                  </label>
-                                  <input type="text" id="website" className="form-control col-lg-12 col-md-12 col-sm-12 col-xs-12 inputText" onKeyDown={this.keyPressWeb} value={this.state.website} ref="website" name="website" onChange={this.handleChange} />
-                                </div>*/}
                             </div>  
                           </div>
                           <div className="form-margin col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <div className="row">
                               <div className="form-margin1 col-lg-4 col-md-3 col-sm-12 col-xs-12">
-                                <label className="labelform  NOpadding-left">Company Number<i className="astrick">*</i></label>
+                                <label className="labelform  NOpadding-left">Company Number <i className="asterisk">*</i></label>
                                 <PhoneInput
                                   country={'in'}
                                   value={this.state.companyPhone}
@@ -990,7 +966,7 @@ class BasicInfo extends Component {
                         </div>
                         <div className="form-margin col-lg-12 col-md-12 col-sm-12 col-xs-12 row">
                           <div className=" col-lg-4 col-md-3 col-sm-12 col-xs-12 ">
-                                  <label className="labelform col-lg-12 col-md-12 col-sm-12 col-xs-12 NOpadding-left">Country<i className="astrick">*</i></label>
+                                  <label className="labelform col-lg-12 col-md-12 col-sm-12 col-xs-12 NOpadding-left">Country <i className="asterisk">*</i></label>
                                   <select className="form-control col-lg-12 col-md-12 col-sm-12 col-xs-12 errorinputText" value={this.state.country} ref="country" name="country" id="country" onChange={this.handleCountryChange.bind(this)} required>
                                     <option value="" disabled>--Select Country--</option>
                                     {
@@ -1017,15 +993,14 @@ class BasicInfo extends Component {
                             </label>
                             <input type="text" id="CIN" maxLength="21" className="form-control col-lg-12 col-md-12 col-sm-12 col-xs-12 UpperCase inputText" placeholder="L12345MH2019PTC123456" value={this.state.CIN} ref="CIN" name="CIN" onChange={this.handleChange} />
                           </div> 
-                          {/*<hr className="empFormHr"/>*/}
                           <div className="form-margin col-lg-12 col-md-4 col-sm-12 col-xs-12 ">
                             <div className="row">
-                              <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                              <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 empPdfFileLabel">
                                 <label className="labelform col-lg-12 col-md-12 col-sm-12 col-xs-12">Add COI Doc (jpg, jpeg, png, pdf)</label>
                               </div>
                               <div className="col-lg-3 col-md-3 col-sm-12 col-xs-12">
                                 <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 NOpadding marginsBottom" id="hide">
-                                  <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 brdlogos1" id="LogoImageUpOne">
+                                  <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 pdfUploadContainer brdlogos1" id="LogoImageUpOne">
                                     <div><i className="fa fa-upload"></i> <br /></div>
                                     <input multiple onChange={this.docBrowse.bind(this)} id="LogoImageUp" type="file" className="form-control col-lg-12 col-md-12 col-sm-12 col-xs-12" title="" name="COI" />
                                   </div>
@@ -1036,7 +1011,7 @@ class BasicInfo extends Component {
                                   this.state.COI.map((doc, i) => {
                                     if(('extension',doc.substring(doc.lastIndexOf("."))) === '.pdf'){
                                       return (
-                                        <div key={i} className="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                        <div key={i} className="col-lg-3 col-md-3 col-sm-12 col-xs-12 empPdfFile">
                                           <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 NOpadding marginsBottom" id="hide">
                                             <label className="labelform deletelogoCOI col-lg-12 col-md-12 col-sm-12 col-xs-12" title="Delete Document" id={doc} onClick={this.deleteDoc.bind(this)}>x</label>
                                             <div title={(doc.substring(doc.lastIndexOf("/"))).replace('/', "")} className="col-lg-12 col-md-12 col-sm-12 col-xs-12 brdlogos1 " id="LogoImageUpOne">

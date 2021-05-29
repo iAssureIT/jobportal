@@ -24,9 +24,9 @@ import CorporateLocationDetails from '../Master/CorporateMaster/CorporateLocatio
 import CorporateContactDetails from '../Master/CorporateMaster/CorporateContactDetails.js';
 import CorporateStatutoryDetails from '../Master/CorporateMaster/CorporateStatutoryDetails.js';
 
-import CompanyProfile       from '../CompanyProfile/CompanyProfile.js';
+/*import CompanyProfile       from '../CompanyProfile/CompanyProfile.js';
 import CompanyProfileView       from '../CompanyProfile/CompanyProfileView.js';
-
+*/
 
 class CoreLayout extends Component {
     render() {
@@ -36,8 +36,8 @@ class CoreLayout extends Component {
                 
 
                 { /* Corporate Master */}
-                <Route path="/org-profile" exact strict component={CompanyProfile} />
-                <Route path="/company-profile/:comp_ID" exact strict component={CompanyProfileView} />
+            {/*   <Route path="/org-profile" exact strict component={CompanyProfile} />
+                <Route path="/company-profile/:company_id" exact strict component={CompanyProfileView} />*/}
                 <Route path="/corporate/basic-details" exact strict component={CorporateBasicInfo} />
                 <Route path="/corporate/basic-details/:entityID" exact strict component={CorporateBasicInfo} />
                 <Route path="/corporate/location-details" exact strict component={CorporateLocationDetails} />

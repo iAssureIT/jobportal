@@ -7,6 +7,10 @@ import 'bootstrap/js/tab.js';
 import PhoneInput 		from 'react-phone-input-2';
 import { withRouter } 	from 'react-router-dom';
 import IAssureTable     from "../../../../IAssureTable/IAssureTable.jsx";
+import { connect }              from 'react-redux';
+import { bindActionCreators }   from 'redux';
+import  * as mapActionCreator   from '../../../../../jobportaladmin/common/actions/index';
+
 
 
 class ContactDetails extends Component {
@@ -437,7 +441,8 @@ class ContactDetails extends Component {
 			}else{
 			Swal.fire('', "Changes Saved", '');
 
-			this.props.history.push("/"+(this.state.pathname === "appCompany" ? "org-profile" :this.state.pathname+"/list"));
+			/*this.props.history.push("/"+(this.state.pathname === "appCompany" ? "org-profile" :this.state.pathname+"/list"));*/
+			this.props.history.push("/company-profile/"+this.props.userDetails.company_id);
 			}
 		}
 	}
@@ -489,7 +494,7 @@ class ContactDetails extends Component {
 			}else{
 			Swal.fire('', "Changes Saved", '');
 
-			this.props.history.push("/company-profile");
+			this.props.history.push("/company-profile/"+this.props.userDetails.company_id);
 			}
 		}
 	}
@@ -1349,7 +1354,7 @@ class ContactDetails extends Component {
 													}
 												</div>
 												:
-												<div className="textAlign">No Contacts Found.</div>
+												<div className="contactsEmptyData">No Contacts Found.</div>
 											}
 									      	</div>
 								 		}
@@ -1365,4 +1370,14 @@ class ContactDetails extends Component {
 	}
 }
 
-export default withRouter(ContactDetails);
+const mapStateToProps = (state)=>{
+    return {
+        selectedModal  : state.selectedModal,
+        userDetails    : state.userDetails, subscriptionDetails   : state.subscriptionDetails 
+    }
+}
+const mapDispatchToProps = (dispatch) => ({
+  mapAction :  bindActionCreators(mapActionCreator, dispatch)
+}) 
+
+export default connect(mapStateToProps, mapDispatchToProps) (withRouter(ContactDetails));

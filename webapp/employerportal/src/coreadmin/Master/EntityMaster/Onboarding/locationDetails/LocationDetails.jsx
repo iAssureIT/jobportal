@@ -1839,7 +1839,7 @@ class LocationDetails extends Component {
 													</div>
 												</div>
 												:
-												<div className="textAlign">No Locations Found</div>
+												<div className="locationEmptyData">No Locations Found</div>
 
 											}
 										</div>

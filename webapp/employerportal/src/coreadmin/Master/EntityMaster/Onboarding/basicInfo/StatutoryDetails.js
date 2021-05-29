@@ -885,7 +885,7 @@ class StatutoryDetails extends Component {
 														<div className="row">
 
 															<div className="col-lg-3 col-md-3 col-sm-12 col-xs-12  " >
-																<label className="labelform col-lg-12 col-md-12 col-sm-12 col-xs-12">State <i className="astrick">*</i> {this.props.typeOption == 'Local' ? <i className="astrick">*</i> : null}
+																<label className="labelform col-lg-12 col-md-12 col-sm-12 col-xs-12">State<i className="asterisk"> *</i> {this.props.typeOption == 'Local' ? <i className="astrick">*</i> : null}
 																</label>
 																<select id="states" className="form-control col-lg-12 col-md-12 col-sm-12 col-xs-12"
 																	ref="states" value={this.state.states} name="states" onChange={this.handleChangeState} >
@@ -902,7 +902,7 @@ class StatutoryDetails extends Component {
 																</select>
 															</div>
 															<div className="col-lg-3 col-md-3 col-sm-12 col-xs-12  " >
-																<label className="labelform col-lg-12 col-md-12 col-sm-12 col-xs-12">{this.state.taxName}<i className="astrick">*</i>
+																<label className="labelform col-lg-12 col-md-12 col-sm-12 col-xs-12">{this.state.taxName}GSTIN <i className="asterisk">*</i>
 																	<a data-tip data-for='basicInfo4Tooltip' className="emplTooltip pull-right"> <i title="Eg. 29ABCDE1234F1Z5" className="fa fa-question-circle"></i> </a>
 																</label>
 																<input type="text" id="GSTIN" placeholder="29ABCDE1234F1Z5" className="form-control uppercase col-lg-12 col-md-12 col-sm-12 col-xs-12" value={this.state.GSTIN} ref="GSTIN" name="GSTIN" onChange={this.handleChange} />
@@ -967,7 +967,7 @@ class StatutoryDetails extends Component {
 															<div className="row">
 
 																<div className="form-margin col-lg-4 col-md-4 col-sm-12 col-xs-12  " >
-																	<label className="labelform col-lg-12 col-md-12 col-sm-12 col-xs-12">PAN<i className="astrick">*</i>
+																	<label className="labelform col-lg-12 col-md-12 col-sm-12 col-xs-12">PAN <i className="asterisk">*</i>
 																		<a data-tip data-for='basicInfo4Tooltip' className="emplTooltip pull-right"> <i title="Eg. ABCDE1234E" className="fa fa-question-circle"></i> </a>
 																	</label>
 																	<input type="text" id="PAN" placeholder="ABCDE1234E" className="form-control uppercase col-lg-12 col-md-12 col-sm-12 col-xs-12" value={this.state.PAN} ref="PAN" name="PAN" onChange={this.handleChange} />

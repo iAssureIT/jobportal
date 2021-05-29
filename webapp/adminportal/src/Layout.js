@@ -45,7 +45,7 @@ import JobType              from "./jobportaladmin/Master/JobType/JobType.js"
 import QualificationLevel   from "./jobportaladmin/Master/QualificationLevel/QualificationLevel.js"
 import Language             from "./jobportaladmin/Master/Language/Language.js"
 import University           from "./jobportaladmin/Master/University/University.js"
-import Collage              from "./jobportaladmin/Master/Collage/Collage.js"
+import College              from "./jobportaladmin/Master/College/College.js"
 
 import MasterData           from "./jobportaladmin/Master/MasterData.js";
 
@@ -170,8 +170,8 @@ class Layout extends Component  {
                                                         <Route path="/university" exact strict component={University} />
                                                         <Route path="/university/:fieldID" exact strict component={University} />
                                                         
-                                                        <Route path="/collages" exact strict component={Collage} />
-                                                        <Route path="/collages/:fieldID" exact strict component={Collage} />
+                                                        <Route path="/colleges" exact strict component={College} />
+                                                        <Route path="/colleges/:fieldID" exact strict component={College} />
                                                         
                                                         {/*<Route path="/technicalMaster/tax-name" exact strict component={TaxName} />*/}
                                                         <Route path="/technicalMaster/tax-name"  render={(props)=><GlobalMaster {...props}/> } exact />

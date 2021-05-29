@@ -2,10 +2,13 @@ import React, { Component }   from 'react';
 import $                      from 'jquery';
 import axios                  from 'axios';
 import {withRouter}  					from 'react-router-dom';
-import swal                   from 'sweetalert';
+import Swal                   from 'sweetalert2';
 import _                      from 'underscore';
 import IAssureTable           from './IAssureTable.jsx';
 import ReactToPdf             from 'react-to-pdf';
+import { connect }              from 'react-redux';
+import { bindActionCreators }   from 'redux';
+import  * as mapActionCreator   from '../../common/actions/index';
 
 import 'bootstrap/js/tab.js';
 import './CompanyProfile.css';
@@ -71,7 +74,12 @@ class CompanyProfile extends Component {
   		})
     }
 	componentDidMount(){
-		var userId =  localStorage.getItem("user_ID");
+    console.log("In componentDidMount..........");
+/*		var userId =  localStorage.getItem("user_ID");
+
+*/   
+   var userId= this.props.userDetails.user_id;
+ console.log("userId",userId);
 		var company_Id = "";
 
 		
@@ -281,7 +289,7 @@ class CompanyProfile extends Component {
 	          console.log("res",res);
 	        })
         .catch((error) => { console.log('notification error: ', error) })
-      	swal("Profile Approved");
+      	Swal.fire('', "Profile Approved", '');
       	 axios.get("/api/contract/get/one/entity/" + entityID)
           .then((response) => {
             console.log("response",response)
@@ -351,15 +359,11 @@ class CompanyProfile extends Component {
     .then((response) => {
       if (response.data.deleted) {
       	$('#deleteEntityModal').hide();
-          swal({
-              text: "Data deleted successfully.",
-          });
+          Swal.fire('', "Data deleted successfully", '');
         	this.getCompanyData(this.state.entityID)
 
       } else {
-          swal({
-              text: "Failed to delete.",
-          });
+          Swal.fire('', "Failed to delete", '');
       }
       this.getContracts();
       $('#deleteEntityModal').hide();
@@ -417,19 +421,20 @@ class CompanyProfile extends Component {
     				<div className="pageContent col-lg-12 col-md-12 col-sm-12 col-xs-12"> 
 					    <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 boxshadeOP" id="pdfWrap" iref={ref}> 	
 					    	<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 noPadding borderAll">
-						    	<div  className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blueBack ">
+						    	<div  className="col-lg-12 col-md-12 col-sm-12 col-xs-12 blueBack" style={{ backgroundImage: "url(/images/orgbackground.jpg)" }}>
+                  {/*  <img src="/images/orgbackground.jpg" alt="background" className="blueBack" />*/}
 						    		<div className="col-lg-10 col-md-10 col-sm-10 col-xs-10 ">
 							    		<div className="col-lg-2 col-md-4 col-sm-4 col-xs-4 companyLogoImage noPadding">
 											<img src={this.state.corporateInfo.companyLogo && this.state.corporateInfo.companyLogo.length > 0?this.state.corporateInfo.companyLogo[0]:"/images/noImagePreview.png"} className=""></img>
-							    		</div>
+							    		</div> 
 						    		</div>
 						    		<div id="statusDiv" className="col-lg-1 col-md-4 col-sm-4 col-xs-4 noPadding pull-right marginTop12 textAlignCenter">{this.state.corporateInfo.profileStatus == "New"?<span className="newProfile" title="New Company Profile">New </span>:<span className="approvedProfile" title="Company Profile Approved">Approved </span>}</div>
 						    	</div>
 						    	<div className="col-lg-10 col-lg-offset-2 col-md-10 col-sm-10 col-sm-offset-4 col-xs-10 ">
 						    		<div className="col-lg-10 col-md-4 col-sm-4 col-xs-4 orgHead noPadding">
-						    			<label>{this.state.corporateInfo.companyName}</label>&nbsp;&nbsp;<span>( Company ID: <b>{this.state.corporateInfo.companyID}</b> )</span>
+						    			<label>{this.state.corporateInfo.companyName}</label>&nbsp;&nbsp;<span className="changeColor">( Company ID: <b>{this.state.corporateInfo.companyID}</b> )</span>
 						    		</div>
-						    		<div className="col-lg-1 col-md-2 col-sm-2 col-xs-2 editOption pull-right textAlignCenter noPadding">
+						    		<div className="col-lg-1 col-md-2 col-sm-2 col-xs-2 editOption pull-right textAlignCenter changeColor noPadding">
 							    		<div id={this.state.corporateInfo._id} className="customBtnCP col-lg-2 col-lg-offset-2"  title="Edit profile" data-index data-id={this.state.corporateInfo._id} onClick={this.editBasicform.bind(this)}>	
 										    	<i className="fa fa-pencil " id="editPen" aria-hidden="true" ></i>
 										  </div>
@@ -438,20 +443,20 @@ class CompanyProfile extends Component {
 	                    </div>
 						    		</div>
 						    		<div className="col-lg-8 col-md-12 col-sm-12 col-xs-12 noPadding">
-						    			<ul className="col-lg-12 col-md-12 col-sm-12 col-xs-12 noPadding listLI">
+						    			<ul className="col-lg-12 col-md-12 col-sm-12 col-xs-12 noPadding listLI changeColor">
 												<li><i className="fa fa-envelope changeColor " aria-hidden="true"></i>&nbsp;&nbsp;{this.state.corporateInfo.companyEmail}</li>
 												<li><i className="fa fa-phone changeColor" aria-hidden="true"></i>&nbsp;&nbsp;{this.state.corporateInfo.companyPhone}</li>
 												<li><i className="fa fa-globe changeColor " aria-hidden="true"></i>&nbsp;&nbsp;{this.state.corporateInfo.website ? this.state.corporateInfo.website :" -NA- "}</li>
 											</ul>
 						    		</div>
-						    		<div className="col-lg-4 col-md-6 col-sm-6 col-xs-6 noPadding">
+						    	{/*	<div className="col-lg-4 col-md-6 col-sm-6 col-xs-6 noPadding">
 						    			<ul className="col-lg-12 col-md-12 col-sm-12 col-xs-12 NOpadding-left listLI">
 												<li>CIN&nbsp; : <b>{this.state.corporateInfo.CIN? this.state.corporateInfo.CIN :" -NA- "}</b>{this.state.corporateInfo.COI && this.state.corporateInfo.COI.length > 0 ? <a target="_blank" className="col-lg-2 col-sm-2 pull-right"><img src={this.state.corporateInfo.COI[0]}  className="coiImage "></img></a>:""}</li>
-												{/*<li>CIN&nbsp; : <b>{this.state.corporateInfo.CIN? this.state.corporateInfo.CIN :" -NA- "}</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{this.state.corporateInfo.COI && this.state.corporateInfo.COI.length > 0 ? <a target="_blank" className="col-lg-1 col-sm-2 pull-right" title="Click to view COI document" href={this.state.corporateInfo.COI[0]}><img src={this.state.corporateInfo.COI[0]}  className="coiImage "></img></a>:""}</li>*/}
+												{<li>CIN&nbsp; : <b>{this.state.corporateInfo.CIN? this.state.corporateInfo.CIN :" -NA- "}</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{this.state.corporateInfo.COI && this.state.corporateInfo.COI.length > 0 ? <a target="_blank" className="col-lg-1 col-sm-2 pull-right" title="Click to view COI document" href={this.state.corporateInfo.COI[0]}><img src={this.state.corporateInfo.COI[0]}  className="coiImage "></img></a>:""}</li>}
 												<li>&nbsp;</li>
 												<li>TAN&nbsp; : <b>{this.state.corporateInfo.TAN ? this.state.corporateInfo.TAN : " -NA- "}</b></li>
 											</ul>
-						    		</div>				   
+						    		</div>		*/}		   
 						    	</div>				   
 						    </div>				   
 			        	<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 singleClientDetails noPadding" data-child={this.state.corporateInfo._id} id={this.state.corporateInfo._id}>
@@ -472,21 +477,21 @@ class CompanyProfile extends Component {
 															LOCATION TYPE
 														</div>                                                           
 													</div>
-													<div className="col-lg-4 col-md-3 col-sm-3 col-xs-3 cardColumnCP"> 
+													<div className="col-lg-8 col-md-3 col-sm-3 col-xs-3 cardColumnCP"> 
 														<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding cardHeadingCP">
 															ADDRESS
 														</div>                                                           
 													</div>
-													<div className="col-lg-2 col-md-3 col-sm-3 col-xs-3 cardColumnCP"> 
+													{/*<div className="col-lg-2 col-md-3 col-sm-3 col-xs-3 cardColumnCP"> 
 														<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding cardHeadingCP">
-															GSTIN
+														
 														</div>                                                           
 													</div>
 													<div className="col-lg-2 col-md-3 col-sm-3 col-xs-3 cardColumnCP">  
 														<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding cardHeadingCP">
-															PAN
+														
 														</div>                                                           
-													</div>
+													</div>*/}
 													<div className="col-lg-2 col-md-3 col-sm-3 col-xs-3 nopadding textAlignCenter actions">  
 														<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding cardHeadingCP">
 															ACTIONS
@@ -518,13 +523,13 @@ class CompanyProfile extends Component {
 														<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 cardDivDataCP" key={index} name={index} data-child={data._id + '-' + index} id={data._id}>
 															<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding">
 																<div className="col-lg-2 col-md-3 col-sm-3 col-xs-3 cardColumnCP">
-																	<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding cardDataCP"><b>{data.locationType}</b></div>																	                                                        
+																	<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding cardDataCP changeColor"><b>{data.locationType}</b></div>																	                                                        
 																</div>
-																<div className="col-lg-4 col-md-3 col-sm-3 col-xs-3 cardColumnCP"> 
-																	<div className="col-lg-10 col-md-12 col-sm-12 col-xs-12 nopadding cardDataCP">#{(data.addressLine2 ? data.addressLine2 +"," :"") + data.addressLine1 +" "+(data.pincode ? ","+data.pincode : "" )}</div>                                                          
+																<div className="col-lg-8 col-md-3 col-sm-3 col-xs-3 cardColumnCP"> 
+																	<div className="col-lg-10 col-md-12 col-sm-12 col-xs-12 nopadding cardDataCP changeColor">#{(data.addressLine2 ? data.addressLine2 +"," :"") + data.addressLine1 +" "+(data.pincode ? ","+data.pincode : "" )}</div>                                                          
 																</div>
-																<div className="col-lg-2 col-md-3 col-sm-3 col-xs-3 cardColumnCP">
-																	<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding cardDataCP">{GSTIN ? GSTIN : "-"}</div>                                                           
+																{/*<div className="col-lg-2 col-md-3 col-sm-3 col-xs-3 cardColumnCP">
+																	{/*<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding cardDataCP">{GSTIN ? GSTIN : "-"}</div>                                                           
 																	<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding cardDataCP">{GSTDocument && GSTDocument.length > 0 ? GSTDocument.map((data,index)=>{
 																		return(
 																			<img src={data} className="gstnDocCP"/>
@@ -533,11 +538,11 @@ class CompanyProfile extends Component {
 																	:
 																	null
 																	}
-																	</div>                                                           
-																</div>
-																<div className="col-lg-2 col-md-3 col-sm-3 col-xs-3 cardColumnCP"> 
+																	</div> */}                                                          
+															{/*	</div>
+																<div className="col-lg-2 col-md-3 col-sm-3 col-xs-3 cardColumnCP"> */}
 																                                                           
-																	<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding cardDataCP">{PAN ?PAN:"-"}</div>                                                          
+																	{/*<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding cardDataCP">{PAN ?PAN:"-"}</div>                                                          
 																	<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding cardDataCP">{PANDocument && PANDocument.length > 0 ? PANDocument.map((data,index)=>{
 																		return(
 																			<img src={data} className="gstnDocCP"/>
@@ -548,7 +553,7 @@ class CompanyProfile extends Component {
 																	}
 																	</div>  
 																</div>
-															
+															*/}
 																<div className="col-lg-2 col-md-2 col-sm-2 col-xs-2 nopadding actions">  
 																	<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding cardActionsCP">
 																		<a><i className="fa fa-pencil edit" aria-hidden="true" title="Click to Edit" id={data._id} data-id={data._id} onClick={this.editBasicformLocation.bind(this)}></i></a> 
@@ -595,16 +600,16 @@ class CompanyProfile extends Component {
 										</div>
 										<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 cardDivCP paddingOfInner">
 											<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding">
-												<div className="col-lg-1 col-md-2 col-sm-2 col-xs-2 cardColumnCP">
+												<div className="col-lg-3 col-md-2 col-sm-2 col-xs-2 cardColumnCP">
 													<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding cardHeadingCP">
 														NAME <br/>EMP ID
 													</div>                                                           
 												</div>
-												<div className="col-lg-2 col-md-2 col-sm-2 col-xs-2 cardColumnCP"> 
+												{/*<div className="col-lg-2 col-md-2 col-sm-2 col-xs-2 cardColumnCP"> 
 													<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding cardHeadingCP">
 														DEPARTMENT <br/>DESIGNATION
 													</div>                                                           
-												</div>
+												</div>*/}
 												<div className="col-lg-2col-md-2 col-sm-2 col-xs-2 cardColumnCP"> 
 													<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding cardHeadingCP">
 														COMPANY BRANCH
@@ -638,29 +643,29 @@ class CompanyProfile extends Component {
 												this.state.contacts.map((data, index) => {
 
 													return (
-														<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 cardDivDataCP" key={index} name={index} data-child={data._id + '-' + index} id={data._id}>
+														<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 cardDivDataCP changeColor" key={index} name={index} data-child={data._id + '-' + index} id={data._id}>
 															<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding">
-																<div className="col-lg-1 col-md-2 col-sm-2 col-xs-2 cardColumnCP">
-																	<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12  nopadding onhoverBlue cardDataCP"><a href={"/employee-profile/"+data.personID} target="_blank" title="View profile"> {data.firstName +" "+ data.lastName}</a></div>																	                                                        
+																<div className="col-lg-3 col-md-2 col-sm-2 col-xs-2 cardColumnCP">
+																	<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12  nopadding onhoverBlue cardDataCP changeColor"><a className="changeColor" href={"/employee-profile/"+data._id} target="_blank" title="View profile"> {data.firstName +" "+ data.lastName}</a></div>																	                                                        
 																	<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding cardDataCP">{(data.employeeID ? data.employeeID  :"") }</div>                                                          
 																</div>
-																<div className="col-lg-2 col-md-2 col-sm-2 col-xs-2 cardColumnCP"> 
-																	<div className="col-lg-10 col-md-12 col-sm-12 col-xs-12 nopadding cardDataCP">{(data.departmentName ? data.departmentName  :"-") +" "+(data.designationName ? ", "+data.designationName : "-" )}</div>                                                          
-																</div>
+																{/*<div className="col-lg-2 col-md-2 col-sm-2 col-xs-2 cardColumnCP"> 
+																	<div className="col-lg-10 col-md-12 col-sm-12 col-xs-12 nopadding cardDataCP changeColor">{(data.departmentName ? data.departmentName  :"-") +" "+(data.designationName ? ", "+data.designationName : "-" )}</div>                                                          
+																</div>*/}
 																<div className="col-lg-2 col-md-2 col-sm-2 col-xs-2 cardColumnCP">
-																	<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding cardDataCP">{data.branchName}</div>                                                           
+																	<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding cardDataCP changeColor">{data.branchName}</div>                                                           
 																</div>
 																<div className="col-lg-2 col-md-2 col-sm-2 col-xs-2 cardColumnCP"> 
-																	<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding cardDataCP">{data.email}</div>                                                          
+																	<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding cardDataCP changeColor">{data.email}</div>                                                          
 																</div>
 																<div className="col-lg-2 col-md-2 col-sm-2 col-xs-2 cardColumnCP"> 
-																	<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding cardDataCP">{data.phone}</div>                                                          
-																	<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding cardDataCP">{data.whatsappNo ? data.whatsappNo :""}</div>                                                          
+																	<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding cardDataCP changeColor">{data.phone}</div>                                                          
+																	<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding cardDataCP changeColor">{data.whatsappNo ? data.whatsappNo :""}</div>                                                          
 																</div>
 																<div className="col-lg-1 col-md-2 col-sm-2 col-xs-2 cardColumnCP"> 
-																	<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding cardDataCP">{data.role}</div>                                                          
+																	<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding cardDataCP changeColor">{data.role}</div>                                                          
 																</div>
-															
+														
 																<div className="col-lg-2 col-md-2 col-sm-2 col-xs-2 nopadding actions">  
 																	<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding cardActionsCP">
 																		<a><i className="fa fa-pencil edit" aria-hidden="true" title="Click to Edit" id={data._id} data-id={data._id} onClick={this.editBasicformContact.bind(this)}></i></a> 
@@ -680,7 +685,7 @@ class CompanyProfile extends Component {
                {
                   this.state.corporateInfo.profileStatus == "New" ?
                   <div className="marginTop15 col-lg-12 col-md-12 col-sm-12 col-xs-12 noPadding">
-                    <button  className=" col-lg-2 pull-right btn btn-success"onClick={this.changeStatus.bind(this)}>  
+                    <button  className=" col-lg-2 pull-right btn buttonAcceptProfile"onClick={this.changeStatus.bind(this)}>  
                       <span className="">Accept Profile</span>
                     </button>
                   </div>
@@ -690,7 +695,7 @@ class CompanyProfile extends Component {
 	          </div>
 	        :
             <div className="loadingImg">
-            	<img src="/images/loader.gif"/>
+            	<img src="/images/loading.gif"/>
             </div>
 	      }
 			</div>
@@ -698,4 +703,15 @@ class CompanyProfile extends Component {
 	    );
 	} 
 }
-export default withRouter(CompanyProfile); 
+
+const mapStateToProps = (state)=>{
+    return {
+        selectedModal  : state.selectedModal,
+        userDetails    : state.userDetails, subscriptionDetails   : state.subscriptionDetails 
+    }
+}
+const mapDispatchToProps = (dispatch) => ({
+  mapAction :  bindActionCreators(mapActionCreator, dispatch)
+}) 
+
+export default connect(mapStateToProps, mapDispatchToProps) (withRouter(CompanyProfile)); 
