@@ -36,7 +36,7 @@ class Address extends Component{
 			city               : "",
 			district   		   : "",	
 			states             : "",
-			country	           : "India",
+			country	           : "",
 			pincode            : "",
 			inputAddressType   : [], 
 			addressTypeArry    : [],
@@ -591,12 +591,12 @@ class Address extends Component{
            }       
         }
         if(typeof this.state.states !== "undefined"){
-           /*if(!this.state.states.match(regName)){
+           if(!this.state.states.match(regName)){
               status = false;
               document.getElementById("statesError").innerHTML = "Please enter a valid state name";
            }else{
            		document.getElementById("statesError").innerHTML = "";
-           }  */     
+           }       
         }
         if(typeof this.state.district !== "undefined"){
            if(!this.state.district.match(regName)){

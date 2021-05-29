@@ -96,9 +96,22 @@ class LeftAside extends Component{
 							<div className="col-lg-10 col-lg-offset-1 candidateProfileImg">
 								<div className="candidateImgWrapper row">
 									<div className="candiImageAdmin" >
-										<img 
-											src={this.state.profilePicture?this.state.profilePicture:"/images/u.png"} 
-											alt="Candidate Profile" />
+										{
+										this.state.profilePicture
+										?
+										<img src={ this.state.profilePicture} alt="Candidate" />
+										:
+										this.state.gender =="female"
+										?
+										<img src="/images/f.png" alt="Candidate" />
+										:
+										this.state.gender  =="male"
+										?
+										<img src="/images/m.png" alt="Candidate" />
+										:
+										<img src="/images/u.png" alt="Candidate" />
+
+										}
 									</div>
 									<div className="candidateName mainText">
 										{this.state.firstName+" "+this.state.lastName }

@@ -51,7 +51,7 @@ class BasicInfoForm extends Component{
 			resume 					  : [],
 			executiveSummary 		  : "",
 			maxDate 		          : "",
-			language                  :"",
+			language                  : "",
 		}
 		
 	}
@@ -291,7 +291,7 @@ class BasicInfoForm extends Component{
           var fileName = file.name;
           var fileSize = file.size;
           var ext = fileName.split('.').pop();
-          if (ext === "pdf" || ext === "docx" || ext === "doc" ) {
+          if (ext === "pdf" || ext === "docx" || ext === "doc" || ext === "xlsx") {
             if(fileSize > 1048576){
               Swal.fire('', "Allowed file size is 1MB", '');
             }else{

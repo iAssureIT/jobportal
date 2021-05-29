@@ -21,6 +21,7 @@ class LeftAside extends Component{
 			houseNumber        : "",
 			address            : "",
 			area               : "",
+			gender             : "",
 			city               : "",
 			district           : "",
 			state	           : "",
@@ -39,7 +40,7 @@ class LeftAside extends Component{
 
 		Axios.get("/api/candidatemaster/get/one/"+this.state.candidate_id)
 		.then(response=>{
-			 console.log(response.data);
+			 console.log("this.state.gender",response.data.basicInfo.gender);
 			 const primarySkills = [];
 			 const secondarySkills = [];
 			 	response.data.skills.map((skill, index)=>{
@@ -54,6 +55,7 @@ class LeftAside extends Component{
 					middleName        : response.data.basicInfo.middleName?response.data.basicInfo.middleName:"",
 					profilePicture    : response.data.basicInfo.profilePicture?response.data.basicInfo.profilePicture:"",
 					lastName          : response.data.basicInfo.lastName?response.data.basicInfo.lastName:"",
+					gender            : response.data.basicInfo.gender?response.data.basicInfo.gender:"",
 					mobile            : response.data.contact.mobile?response.data.contact.mobile:"",
 					alternate         : response.data.contact.altMobile?response.data.contact.altMobile:"",
 					email             : response.data.contact.emailId?response.data.contact.emailId:"",
@@ -65,6 +67,7 @@ class LeftAside extends Component{
 					state             : response.data.address[0] ? response.data.address[0].state:"",
 					country           : response.data.address[0] ? response.data.address[0].country:"",
 					pincode           : response.data.address[0] ? response.data.address[0].pincode:"",
+					
 					lastDesignation   : response.data.workExperience[0] ? response.data.workExperience[0].lastDegn:"",
 				})
 			})
@@ -94,7 +97,23 @@ class LeftAside extends Component{
 						<div className="">
 							<div className="col-lg-8 col-lg-offset-2 candidateProfileImg">
 								<div className="candidateImgWrapper row">
-									<img src={this.state.profilePicture?this.state.profilePicture:"/images/person.jpg"} alt="Candidate" />
+								{
+									this.state.profilePicture
+									?
+									<img src={ this.state.profilePicture} alt="Candidate" />
+									:
+									this.state.gender =="female"
+									?
+									<img src="/images/f.png" alt="Candidate" />
+									:
+									this.state.gender  =="male"
+									?
+									<img src="/images/m.png" alt="Candidate" />
+									:
+									<img src="/images/u.png" alt="Candidate" />
+
+								}
+									
 									<div className="candidateName mainText">
 										{this.state.firstName+" "+this.state.lastName }
 									</div>

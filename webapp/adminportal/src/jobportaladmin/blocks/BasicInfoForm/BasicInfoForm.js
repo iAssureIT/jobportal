@@ -55,6 +55,7 @@ class BasicInfoForm extends Component{
 			resume 					  : [],
 			executiveSummary 		  : "",
 			maxDate 		          : "",	
+			language                  : "",
 		}
 		
 	}
@@ -410,10 +411,13 @@ class BasicInfoForm extends Component{
 		})
 	}
 	onLanguageAddition (tag) {
+		
         if (tag.id == tag.text) {
             tag.id = "" 
         }
-    	this.setState(state => ({ languagesTags: [...state.languagesTags, tag] }));
+        var language = tag.text
+    	this.setState(state => ({ languagesTags: [...state.languagesTags, tag],language:language }));
+    	
   	}
 
     onLanguageClick(index) {
@@ -435,6 +439,7 @@ class BasicInfoForm extends Component{
         const { languagesTags } = this.state;
         this.setState({
           languagesTags: languagesTags.filter((tag, index) => index !== i),
+          language                  :""
         });
     }
 	handleSubmit(event){
@@ -444,6 +449,7 @@ class BasicInfoForm extends Component{
 			var formValues = {
 
 								firstName          : this.state.firstName,
+								candidate_id       : this.state.candidate_id,
 								middleName         : this.state.middleName,
 								lastName           : this.state.lastName,
 								mobile      	   : this.state.mobile,
@@ -460,6 +466,7 @@ class BasicInfoForm extends Component{
 								executiveSummary   : this.state.executiveSummary,
 								passport   		   : this.state.passport,
 								visa   		   	   : this.state.visa,
+								language   		   : this.state.language,
 							}
 						
 			if(status==true){
@@ -582,7 +589,7 @@ class BasicInfoForm extends Component{
 	validateForm=()=>{
 
 		var status = true;
-		var regName = /^[a-zA-Z]+$/;
+		var regName = /[a-zA-Z_]+$/;
 		var tempEmail = this.state.email.trim(); // value of field with whitespace trimmed off
     	var emailFilter = /^[^@]+@[^@.]+\.[^@]*\w\w$/;
     	var illegalChars = /[\(\)\<\>\,\;\:\\\"\[\]]/;
@@ -623,23 +630,23 @@ class BasicInfoForm extends Component{
 			document.getElementById("emailError").innerHTML = ""; 
 			
 		}
-		if(this.state.mobile.length<=0){
-			document.getElementById("mobileError").innerHTML = "Please enter your mobile number";  
-			status=false; 
-		}else if (!mobileFilter.test(this.state.mobile)) { //test email for illegal characters
-	        document.getElementById('mobileError').innerHTML = "Please enter a valid mobile number.";
-	    }else{
-			document.getElementById("mobileError").innerHTML = ""; 
-		}
-
-		if(this.state.alternate.length>2){
+		if(this.state.mobile.length>0){
 			
-			if (!mobileFilter.test(this.state.alternate)) { //test email for illegal characters
-	        	document.getElementById('alternateError').innerHTML = "Please enter a valid alternate mobile number.";
-	        	 status=false; 
-		    }else{
-				document.getElementById("alternateError").innerHTML = ""; 
-			}
+			if(!this.state.mobile.match(mobileFilter)){
+              status = false;
+              document.getElementById("mobileError").innerHTML = "Please enter a valid  mobile number";
+           }else{
+           		document.getElementById("mobileError").innerHTML = "";
+          }
+     	 }
+		if(this.state.alternate.length>3){
+			
+			if(!this.state.alternate.match(mobileFilter)){
+              status = false;
+              document.getElementById("alternateError").innerHTML = "Please enter a valid alternate mobile number";
+           }else{
+           		document.getElementById("alternateError").innerHTML = "";
+           }  
 		}
 
 		if(this.state.executiveSummary.length<=0){
@@ -672,6 +679,14 @@ class BasicInfoForm extends Component{
               document.getElementById("lastNameError").innerHTML = "Please enter a valid last name";
            }else{
            		document.getElementById("lastNameError").innerHTML = "";
+           }       
+        }
+         if(typeof this.state.language !== "undefined"){
+           if(!this.state.language.match(regName)&& !this.state.language == ""){
+              status = false;
+              document.getElementById("languageError").innerHTML = "Please enter a valid language name";
+           }else{
+           		document.getElementById("languageError").innerHTML = "";
            }       
         }
         

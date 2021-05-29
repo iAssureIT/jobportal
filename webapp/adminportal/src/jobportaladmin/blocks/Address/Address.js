@@ -465,7 +465,7 @@ class Address extends Component{
 	 validateForm=()=>{
 		var status = true;
 		var regPincode = /^[1-9][0-9]{5}$/;
-		var regName = /^[a-zA-Z]+$/;
+		var regName = /[a-zA-Z_]+$/;
 
 
 		if(this.state.addressType.length<=0){
@@ -517,12 +517,12 @@ class Address extends Component{
            }       
         }
         if(typeof this.state.states !== "undefined"){
-           /*if(!this.state.states.match(regName)){
+           if(!this.state.states.match(regName)){
               status = false;
               document.getElementById("statesError").innerHTML = "Please enter a valid state name";
            }else{
            		document.getElementById("statesError").innerHTML = "";
-           }  */     
+           }       
         }
         if(typeof this.state.district !== "undefined"){
            if(!this.state.district.match(regName)){

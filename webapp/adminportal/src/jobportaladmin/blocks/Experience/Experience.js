@@ -52,7 +52,8 @@ class Experience extends Component {
       totalExperience: 0,
       working: "fresher",
       profileCompletion: 0,
-      experienceLevel  : "" 
+      experienceLevel  : "" ,
+      totalExperience2 :0
     };
     this.camelCase = this.camelCase.bind(this);
     this.handleChangeState = this.handleChangeState.bind(this);
@@ -509,7 +510,7 @@ class Experience extends Component {
     });
 
     if (name === "fromDate" || name === "toDate") {
-      this.calExperience(value);
+      this.calExperience(name,value);
     }
   }
   handleChangeCity(event) {
@@ -543,23 +544,53 @@ class Experience extends Component {
       .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
       .join(" ");
   }
-  calExperience(value) {
-    var toDate =
-      this.state.toDate === "" ? Moment(new Date()) : Moment(this.state.toDate);
-    var fromDate =
-      this.state.fromDate === ""
-        ? Moment(new Date())
-        : Moment(this.state.fromDate);
+  calExperience(name,value) {
+    var name = name;
+    var value = value;
+    var toDate ="";
+    var fromDate ="";
+    if(name==="toDate"){
+        toDate = Moment(value);
+        this.setState({
+          currentlyWorkingHere: "No"
+        });
+    }else{
+        toDate = Moment(this.state.toDate)
+    }
+    if(name==="fromDate"){
+          fromDate = Moment(value);
+    }else{
+        fromDate = Moment(this.state.fromDate)
+    }
+    if(name==="Yes"){
+        toDate= Moment(new Date());
+        this.setState({
+          toDate: Moment(new Date()).format("YYYY-MM"),
+          currentlyWorkingHere: "Yes"
+        });
+    }
+    if(name==="No"){
+        toDate=Moment("");
+        this.setState({
+          toDate: "",
+          currentlyWorkingHere: "No"
+        });
+    }
+   
 
-    var exp = Moment.duration(toDate.diff(fromDate));
+    if( fromDate!==""&& toDate!==""){
+      var exp = Moment.duration(toDate.diff(fromDate));
+
     var Years = exp.years();
     var Months = exp.months();
-
     this.setState({
       expYears: Years,
       expMonths: Months,
     });
-  }
+    
+    
+   }
+}
 
   handleBack(event) {
     event.preventDefault();
@@ -627,15 +658,8 @@ class Experience extends Component {
   handleChangeCheckbox(event) {
     event.preventDefault();
     var id = event.currentTarget.id;
-    if (id === "Yes") {
-      this.setState({
-        toDate: Moment(new Date()).format("YYYY-MM"),
-        currentlyWorkingHere: "Yes",
-      });
-    } else {
-      this.setState({ toDate: "", currentlyWorkingHere: "No" });
-    }
-    
+    var name = event.currentTarget.name;
+    this.calExperience(id);
   }
   handleChangeFresher(event){
     event.preventDefault();
@@ -650,10 +674,10 @@ class Experience extends Component {
   }
   //========== User Define Function End ==================
   //========== Validation Start ==================
-  validateForm = () => {
+ validateForm = () => {
     var status = true;
-    var regName = /^[a-zA-Z]+$/;
-    var regName2 = /^[a-zA-z]+([\s][a-zA-Z]+)*$/;
+    var regName = /[a-zA-Z_]+$/;
+   
 
     if (this.state.currentCTC.length <= 0) {
       document.getElementById("currentCTCError").innerHTML =
@@ -698,7 +722,7 @@ class Experience extends Component {
       document.getElementById("relevantExperienceError").innerHTML = "";
     }*/
     if (typeof this.state.industry !== "undefined") {
-      if (!this.state.industry.match(regName2)) {
+      if (!this.state.industry.match(regName)) {
         status = false;
         document.getElementById("industryError").innerHTML =
           "Please enter a valid Industry";
@@ -707,7 +731,7 @@ class Experience extends Component {
       }
     }
     if (typeof this.state.company !== "undefined") {
-      if (!this.state.company.match(regName2)) {
+      if (!this.state.company.match(regName)) {
         status = false;
         document.getElementById("companyNameError").innerHTML =
           "Please enter a valid Company";
@@ -716,7 +740,7 @@ class Experience extends Component {
       }
     }
     if (typeof this.state.companyState !== "undefined") {
-      if (!this.state.companyState.match(regName2)) {
+      if (!this.state.companyState.match(regName)) {
         status = false;
         document.getElementById("stateError").innerHTML =
           "Please enter a valid state";
@@ -725,7 +749,7 @@ class Experience extends Component {
       }
     }
     if (typeof this.state.companyCountry !== "undefined") {
-      if (!this.state.companyCountry.match(regName2)) {
+      if (!this.state.companyCountry.match(regName)) {
         status = false;
         document.getElementById("companyCountryError").innerHTML =
           "Please enter a valid Country";
@@ -734,7 +758,7 @@ class Experience extends Component {
       }
     }
     if (typeof this.state.companyCity !== "undefined") {
-      if (!this.state.companyCity.match(regName2)) {
+      if (!this.state.companyCity.match(regName)) {
         status = false;
         document.getElementById("companyCityError").innerHTML =
           "Please enter a valid City";
@@ -743,7 +767,7 @@ class Experience extends Component {
       }
     }
     if (typeof this.state.lastDesignation !== "undefined") {
-      if (!this.state.lastDesignation.match(regName2)) {
+      if (!this.state.lastDesignation.match(regName)) {
         status = false;
         document.getElementById("lastDesignationError").innerHTML =
           "Please enter a valid last Designation";
@@ -752,7 +776,7 @@ class Experience extends Component {
       }
     }
     if (typeof this.state.lastDeartment !== "undefined") {
-      if (!this.state.lastDeartment.match(regName2)) {
+      if (!this.state.lastDeartment.match(regName)) {
         status = false;
         document.getElementById("lastDeartmentError").innerHTML =
           "Please enter a valid last Deartment";
@@ -761,7 +785,7 @@ class Experience extends Component {
       }
     }
     if (typeof this.state.reportingManager !== "undefined") {
-      if (!this.state.reportingManager.match(regName2)) {
+      if (!this.state.reportingManager.match(regName)) {
         status = false;
         document.getElementById("reportingManagerError").innerHTML =
           "Please enter a valid reporting Manager";
@@ -770,7 +794,7 @@ class Experience extends Component {
       }
     }
     if (typeof this.state.reportingManagerDesignation !== "undefined") {
-      if (!this.state.reportingManagerDesignation.match(regName2)) {
+      if (!this.state.reportingManagerDesignation.match(regName)) {
         status = false;
         document.getElementById("reportingManagerDesignationError").innerHTML =
           "Please enter a valid reporting Manager Designation";

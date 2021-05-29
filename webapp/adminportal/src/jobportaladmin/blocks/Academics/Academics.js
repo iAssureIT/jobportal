@@ -550,8 +550,7 @@ class Academics extends Component{
 		//========== Validation Start ==================
 	validateForm=()=>{
 		var status = true;
-		var regName = /^[a-zA-Z]+$/;
-		var regName2 = /^[a-zA-z]+([\s][a-zA-Z]+)*$/;
+		var regName = /[a-zA-Z_]+$/;
 		
 		if(this.state.mode.length<=0){
 			document.getElementById("modeError").innerHTML=  
@@ -589,7 +588,7 @@ class Academics extends Component{
 		}
 	
 		if(typeof this.state.qualificationLevel !== "undefined"){
-           if(!this.state.qualificationLevel.match(regName2)){
+           if(!this.state.qualificationLevel.match(regName)){
               status = false;
               document.getElementById("qualificationLevelError").innerHTML = "Please enter a valid Qualification Level";
            }else{
@@ -597,7 +596,7 @@ class Academics extends Component{
            }       
         }
         if(typeof this.state.qualification !== "undefined"){
-           if(!this.state.qualification.match(regName2)){
+           if(!this.state.qualification.match(regName)){
               status = false;
               document.getElementById("qualificationError").innerHTML = "Please enter a valid Qualification";
            }else{
@@ -605,7 +604,7 @@ class Academics extends Component{
            }       
         }
         if( this.state.specialization.length>0){
-           if(!this.state.specialization.match(regName2)){
+           if(!this.state.specialization.match(regName)){
               status = false;
               document.getElementById("specializationError").innerHTML = "Please enter a valid Specialization";
            }else{
@@ -637,7 +636,7 @@ class Academics extends Component{
            }       
         }
         if(typeof this.state.university !== "undefined"){
-           if(!this.state.university.match(regName2)){
+           if(!this.state.university.match(regName)){
               status = false;
               document.getElementById("universityError").innerHTML = "Please enter a valid university name";
            }else{
@@ -645,7 +644,7 @@ class Academics extends Component{
            }       
         }
 		if(typeof this.state.addressLine1 !== "undefined"){
-           /*if(!this.state.addressLine1.match(regName2)){
+           /*if(!this.state.addressLine1.match(regName)){
               status = false;
               document.getElementById("collegeError").innerHTML = "Please enter a valid college name";
            }else{

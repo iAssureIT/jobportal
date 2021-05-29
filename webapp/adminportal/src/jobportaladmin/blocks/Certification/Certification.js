@@ -503,7 +503,8 @@ class Certification extends Component{
 													certifiedOn        : "",
 													validity           : "",
 													grade   		   : "",
-													buttonText         : "Save"
+													buttonText         : "Save",
+													certificationToggel : true,
 												})
 										this.getData();
 
@@ -578,7 +579,8 @@ class Certification extends Component{
 										certifiedOn        : "",
 										validity           : "",
 										grade   		   : "",
-										buttonText         : "Save"
+										buttonText         : "Save",
+
 									})
 				})
 				.catch(error =>{
@@ -608,8 +610,8 @@ class Certification extends Component{
 	//========== Validation Start ==================
 	 validateForm=()=>{
 	 	var status = true;
-	 	var regName = /^[a-zA-Z]+$/;
-		var regName2 = /^[a-zA-z]+([\s][a-zA-Z]+)*$/;
+	 	var regName = /[a-zA-Z_]+$/;
+
 	 	//this.state.skills
 
 	 	if(this.state.certificationToggel===false){
@@ -634,7 +636,7 @@ class Certification extends Component{
 				status=false;
 			}
 			if(typeof this.state.skills !== "undefined"){
-	           if(!this.state.skills.match(regName2)){
+	           if(!this.state.skills.match(regName)){
 	              status = false;
 	              document.getElementById("skillsError").innerHTML = "Please enter a valid Skills Level";
 	           }else{
@@ -643,7 +645,7 @@ class Certification extends Component{
 	        }
 	 	}else{
 			if(typeof this.state.certificationName !== "undefined"){
-	           if(!this.state.certificationName.match(regName2)){
+	           if(!this.state.certificationName.match(regName)){
 	              status = false;
 	              document.getElementById("certificationNameError").innerHTML = "Please enter a valid Certification Name";
 	           }else{
@@ -651,7 +653,7 @@ class Certification extends Component{
 	           }       
 	        }
 	        if(typeof this.state.issuedBy !== "undefined"){
-	           if(!this.state.issuedBy.match(regName2)){
+	           if(!this.state.issuedBy.match(regName)){
 	              status = false;
 	              document.getElementById("issuedByError").innerHTML = "Please enter a valid Issued By";
 	           }else{
