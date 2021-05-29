@@ -94,11 +94,23 @@ class ConfirmOtp extends Component {
             } else {
 
               localStorage.removeItem("previousUrl");
-              this.props.hideComponent("showHide4")
-              console.log(this.props.userCredentials)
-              //this.props.history.push('/login');
 
-
+              if (this.props.selectedCompanyDetails.company_id != "" && this.props.selectedCompanyDetails.company_id) {
+                axios.get("/api/packagesubscription/subscription-details/"+this.props.selectedCompanyDetails.company_id)
+                .then((response)=>{
+                  console.log("response.data",response.data)
+                    if (response.data) {
+                      this.props.history.push('/login');
+                    }else{
+                      this.props.hideComponent("showHide4")
+                    }
+                })
+                .catch((error)=>{
+                      console.log('error', error);
+                }) 
+              }else{
+                this.props.history.push('/login');
+              }
             }
           } else {
             Swal.fire('', "Please enter valid OTP", '');
@@ -251,7 +263,8 @@ class ConfirmOtp extends Component {
 const mapStateToProps = (state)=>{ 
     return {
         user_id         : state.user_id,
-        userCredentials : state.userCredentials
+        userCredentials : state.userCredentials,
+        selectedCompanyDetails  : state.selectedCompanyDetails
     }
 }
 const mapDispatchToProps = (dispatch) => ({

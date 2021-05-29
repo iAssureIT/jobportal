@@ -8,9 +8,9 @@
   src: url('/fonts/Montserrat/Montserrat-Bold.ttf');
 }*/
 
-.LeftSideFiltersWrapper{
+.CandLeftSideFiltersWrapper{
   height: auto;
-  margin-top: 72px;
+  
   margin-left: 22px;
   z-index: 10;
   min-height: 250px;

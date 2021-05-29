@@ -438,7 +438,7 @@ class CandidateFilters extends Component{
     //console.log(this.state.inputExperience)
 
     return(
-      <section className="LeftSideFiltersWrapper col-lg-12">
+      <section className="CandLeftSideFiltersWrapper col-lg-12">
       
       <div className="row">
 
