@@ -31,8 +31,6 @@ import StatutoryDetails from '../Master/EntityMaster/Onboarding/basicInfo/Statut
 import LocationDetails from '../Master/EntityMaster/Onboarding/locationDetails/LocationDetails.jsx';
 import ContactDetails from '../Master/EntityMaster/Onboarding/contactDetails/ContactDetails.jsx';
 import ListOfEntities from '../Master/EntityMaster/listOfEntities/components/ListOfEntities.jsx';
-import CompanyProfile from '../CompanyProfile/CompanyProfile.js'
-import CompanyProfileView from '../CompanyProfile/CompanyProfileView.js'
 
 
 import LocationType from '../Master/LocationType/LocationType.jsx';
@@ -151,9 +149,9 @@ class CoreLayout extends Component {
                 <Route path="/corporate/contact-details/:entityID/:contactID" exact strict component={CorporateContactDetails} />
                 <Route path="/corporate/list" exact strict component={CorporateListOfEntities} />
                 <Route path="/filewise/employers" exact strict component={FilewiseEntityList} />
-                <Route path="/org-profile" exact strict component={CompanyProfile} />
+            {/*    <Route path="/org-profile" exact strict component={CompanyProfile} />
                 <Route path="/company-profile/:comp_ID" exact strict component={CompanyProfileView} />
-                
+                */}
 
                 
                  { /* Orgnizational Setting */}

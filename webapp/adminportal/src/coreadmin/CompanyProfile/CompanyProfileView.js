@@ -154,6 +154,66 @@ class CompanyProfileView extends Component {
       $('.main-footer').show();
       $(".box-header").show();
   }
+
+   deleteEntity(event) {
+    event.preventDefault();
+    this.setState({ deleteID: event.currentTarget.getAttribute('data-id'),deleteName: event.currentTarget.getAttribute('data-name') })
+    $('#deleteEntityModal').show();
+  }
+
+  closeModal(event) {
+    event.preventDefault();
+    $('#deleteEntityModal').hide();
+  }
+  confirmDelete(event) {
+    event.preventDefault();
+    var url="";
+
+    if(this.state.deleteName == "contacts"){
+      var formValues = {
+				entityID: this.state.corporateInfo._id,
+				contactID: this.state.deleteID
+			}
+			url = '/api/entitymaster/deleteContact/' + formValues.entityID + '/' + formValues.contactID;
+    }else{
+    	var formValues = {
+				entityID: this.state.corporateInfo._id,
+				location_ID: this.state.deleteID
+			}
+			url = '/api/entitymaster/deleteLocation/' + formValues.entityID + '/' + formValues.location_ID;
+
+    }
+    console.log("url",url)
+    axios.delete(url)
+    .then((response) => {
+      if (response.data.deleted) {
+      	$('#deleteEntityModal').hide();
+          swal({
+              text: "Data deleted successfully.",
+          });
+        	this.getCompanyData(this.state.entityID)
+
+      } else {
+          swal({
+              text: "Failed to delete.",
+          });
+      }
+      this.getContracts();
+      $('#deleteEntityModal').hide();
+    })
+    .catch((error) => {
+    })
+  }
+	editBasicform(event){
+    this.props.history.push("/"+this.state.corporateInfo.entityType+'/basic-details/'+event.currentTarget.getAttribute('data-id'))
+  }
+  editBasicformLocation(event){
+    this.props.history.push("/"+this.state.corporateInfo.entityType+'/location-details/'+this.state.corporateInfo._id+"/"+event.currentTarget.getAttribute('data-id'))
+  }
+  editBasicformContact(event){
+    this.props.history.push("/"+this.state.corporateInfo.entityType+'/contact-details/'+this.state.corporateInfo._id+"/"+event.currentTarget.getAttribute('data-id'))
+  }
+ 
 	render() {
 		const ref = React.createRef();
     return (	
@@ -177,9 +237,9 @@ class CompanyProfileView extends Component {
 						    			<label>{this.state.corporateInfo.companyName}</label>&nbsp;&nbsp;<span>( Company ID: <b>{this.state.corporateInfo.companyID}</b> )</span>
 						    		</div>
 						    		<div className="col-lg-1 col-md-2 col-sm-2 col-xs-2 editOption pull-right textAlignCenter noPadding">
-							    	{/*	<div id={this.state.corporateInfo._id} className="customBtnCP col-lg-2 col-lg-offset-2"  title="Edit Profile" data-index data-id={this.state.corporateInfo._id} onClick={this.editBasicform.bind(this)}>	
+							    	{	<div id={this.state.corporateInfo._id} className="customBtnCP col-lg-2 col-lg-offset-2"  title="Edit Profile" data-index data-id={this.state.corporateInfo._id} onClick={this.editBasicform.bind(this)}>	
 										    	<i className="fa fa-pencil " id="editPen" aria-hidden="true" ></i>
-										  </div>*/}
+										  </div>}
 									    <div className="customBtnCP col-lg-2" title="Download as PDF">
 	                        <i id="printButton" onClick={this.download.bind(this)} className="fa fa-download"></i>
 	                    </div>
@@ -192,12 +252,12 @@ class CompanyProfileView extends Component {
 											</ul>
 						    		</div>
 						    		<div className="col-lg-4 col-md-6 col-sm-6 col-xs-6 noPadding">
-						    			<ul className="col-lg-12 col-md-12 col-sm-12 col-xs-12 NOpadding-left listLI">
+						    			{/*<ul className="col-lg-12 col-md-12 col-sm-12 col-xs-12 NOpadding-left listLI">
 												<li>CIN&nbsp; : <b>{this.state.corporateInfo.CIN? this.state.corporateInfo.CIN :" -NA- "}</b>{this.state.corporateInfo.COI && this.state.corporateInfo.COI.length > 0 ? <a target="_blank" className="col-lg-2 col-sm-2 pull-right"><img src={this.state.corporateInfo.COI[0]}  className="coiImage "></img></a>:""}</li>
-												{/*<li>CIN&nbsp; : <b>{this.state.corporateInfo.CIN? this.state.corporateInfo.CIN :" -NA- "}</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{this.state.corporateInfo.COI && this.state.corporateInfo.COI.length > 0 ? <a target="_blank" className="col-lg-1 col-sm-2 pull-right" title="Click to view COI document" href={this.state.corporateInfo.COI[0]}><img src={this.state.corporateInfo.COI[0]}  className="coiImage "></img></a>:""}</li>*/}
+												{<li>CIN&nbsp; : <b>{this.state.corporateInfo.CIN? this.state.corporateInfo.CIN :" -NA- "}</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{this.state.corporateInfo.COI && this.state.corporateInfo.COI.length > 0 ? <a target="_blank" className="col-lg-1 col-sm-2 pull-right" title="Click to view COI document" href={this.state.corporateInfo.COI[0]}><img src={this.state.corporateInfo.COI[0]}  className="coiImage "></img></a>:""}</li>}
 												<li>&nbsp;</li>
 												<li>TAN&nbsp; : <b>{this.state.corporateInfo.TAN ? this.state.corporateInfo.TAN : " -NA- "}</b></li>
-											</ul>
+											</ul>*/}
 						    		</div>				   
 						    	</div>				   
 						    </div>				   
@@ -219,12 +279,12 @@ class CompanyProfileView extends Component {
 															LOCATION TYPE
 														</div>                                                           
 													</div>
-													<div className="col-lg-4 col-md-3 col-sm-3 col-xs-3 cardColumnCP"> 
+													<div className="col-lg-8 col-md-3 col-sm-3 col-xs-3 cardColumnCP"> 
 														<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding cardHeadingCP">
 															ADDRESS
 														</div>                                                           
 													</div>
-													<div className="col-lg-3 col-md-3 col-sm-3 col-xs-3 cardColumnCP"> 
+													{/*<div className="col-lg-3 col-md-3 col-sm-3 col-xs-3 cardColumnCP"> 
 														<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding cardHeadingCP">
 															GSTIN
 														</div>                                                           
@@ -233,12 +293,12 @@ class CompanyProfileView extends Component {
 														<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding cardHeadingCP">
 															PAN
 														</div>                                                           
-													</div>
-													{/*<div className="col-lg-2 col-md-2 col-sm-2 col-xs-2 nopadding textAlignCenter">  
+													</div>*/}
+													<div className="col-lg-2 col-md-2 col-sm-2 col-xs-2 nopadding textAlignCenter">  
 														<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding cardHeadingCP">
 															ACTION
 														</div>                                                           
-													</div>*/}
+													</div>
 												</div>
 											</div>
 										<div className="">
@@ -250,10 +310,10 @@ class CompanyProfileView extends Component {
 																<div className="col-lg-2 col-md-3 col-sm-3 col-xs-3 cardColumnCP">
 																	<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding cardDataCP"><b>{data.locationType}</b></div>																	                                                        
 																</div>
-																<div className="col-lg-4 col-md-3 col-sm-3 col-xs-3 cardColumnCP"> 
+																<div className="col-lg-8 col-md-3 col-sm-3 col-xs-3 cardColumnCP"> 
 																	<div className="col-lg-10 col-md-12 col-sm-12 col-xs-12 nopadding cardDataCP">#{(data.addressLine2 ? data.addressLine2 +"," :"") + data.addressLine1 +" "+(data.pincode ? ","+data.pincode : "" )}</div>                                                          
 																</div>
-																<div className="col-lg-3 col-md-3 col-sm-3 col-xs-3 cardColumnCP">
+																{/*<div className="col-lg-3 col-md-3 col-sm-3 col-xs-3 cardColumnCP">
 																	<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding cardDataCP">{data.GSTIN ? data.GSTIN : "-"}</div>                                                           
 																	<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding cardDataCP">{data.GSTDocument && data.GSTDocument.length > 0 ? data.GSTDocument.map((data,index)=>{
 																		return(
@@ -278,13 +338,13 @@ class CompanyProfileView extends Component {
 																	}
 																	</div>  
 																</div>
-															
-															{/*	<div className="col-lg-2 col-md-2 col-sm-2 col-xs-2 nopadding">  
+															*/}
+																<div className="col-lg-2 col-md-2 col-sm-2 col-xs-2 nopadding">  
 																	<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding cardActionsCP">
 																		<a><i className="fa fa-pencil edit" aria-hidden="true" title="Click to edit" id={data._id} data-id={data._id} onClick={this.editBasicformLocation.bind(this)}></i></a> 
 																		<a><i  className="fa fa-trash-o delete" aria-hidden="true" title="Click to delete" data-name="location" data-id={data._id} onClick={this.deleteEntity.bind(this)}></i></a>
 																	</div>                                                         
-																</div>*/}
+																</div>
 	                                                            
 															</div>
 														</div>
@@ -292,7 +352,7 @@ class CompanyProfileView extends Component {
 												})
 											}
 										</div>
-										{/*<div className="modal" id="deleteEntityModal" role="dialog">
+										{<div className="modal" id="deleteEntityModal" role="dialog">
 					                        <div className="adminModal adminModal-dialog col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					                            <div className="modal-content adminModal-content col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1 col-xs-12 noPadding">
 					                                <div className="modal-header adminModal-header col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -313,7 +373,7 @@ class CompanyProfileView extends Component {
 					                                </div>
 					                            </div>
 					                        </div>
-					          </div>*/}
+					          </div>}
 									</div>
 			        	</div>
 			        	}
@@ -330,11 +390,11 @@ class CompanyProfileView extends Component {
 														NAME <br/>EMP ID
 													</div>                                                           
 												</div>
-												<div className="col-lg-2 col-md-2 col-sm-2 col-xs-2 cardColumnCP"> 
+												{/*<div className="col-lg-2 col-md-2 col-sm-2 col-xs-2 cardColumnCP"> 
 													<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding cardHeadingCP">
 														DEPARTMENT <br/>DESIGNATION
 													</div>                                                           
-												</div>
+												</div>*/}
 												<div className="col-lg-3 col-md-2 col-sm-2 col-xs-2 cardColumnCP"> 
 													<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding cardHeadingCP">
 														COMPANY BRANCH
@@ -355,11 +415,11 @@ class CompanyProfileView extends Component {
 														ROLE
 													</div>                                                           
 												</div>
-												{/*<div className="col-lg-2 col-md-2 col-sm-2 col-xs-2 nopadding textAlignCenter">  
+												{<div className="col-lg-2 col-md-2 col-sm-2 col-xs-2 nopadding textAlignCenter">  
 													<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding cardHeadingCP">
 														ACTION
 													</div>                                                           
-												</div>*/}
+												</div>}
                                                       
 											</div>
 											</div>
@@ -373,9 +433,9 @@ class CompanyProfileView extends Component {
 																		<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12  nopadding cardDataCP"><a href={"/employee-profile/"+data.personID} title="View profile"> {data.firstName +" "+ data.lastName}</a></div>																	                                                        
 																		<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding cardDataCP">{(data.employeeID ? data.employeeID  :"") }</div>                                                          
 																	</div>
-																	<div className="col-lg-2 col-md-2 col-sm-2 col-xs-2 cardColumnCP"> 
+																	{/*<div className="col-lg-2 col-md-2 col-sm-2 col-xs-2 cardColumnCP"> 
 																		<div className="col-lg-10 col-md-12 col-sm-12 col-xs-12 nopadding cardDataCP">{(data.departmentName ? data.departmentName  :"-") +" "+(data.designationName ? ", "+data.designationName : "-" )}</div>                                                          
-																	</div>
+																	</div>*/}
 																	<div className="col-lg-3 col-md-2 col-sm-2 col-xs-2 cardColumnCP">
 																		<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding cardDataCP">{data.branchName}</div>                                                           
 																	</div>
@@ -390,12 +450,12 @@ class CompanyProfileView extends Component {
 																		<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding cardDataCP">{data.role}</div>                                                          
 																	</div>
 																
-																	{/*<div className="col-lg-2 col-md-2 col-sm-2 col-xs-2 nopadding">  
+																	{<div className="col-lg-2 col-md-2 col-sm-2 col-xs-2 nopadding">  
 																		<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding cardActionsCP">
 																			<a><i className="fa fa-pencil edit" aria-hidden="true" title="click to edit" id={data._id} data-id={data._id} onClick={this.editBasicformContact.bind(this)}></i></a> 
 																			<a><i  className="fa fa-trash-o delete" aria-hidden="true" title="click to delete" data-name="contacts" data-id={data._id} onClick={this.deleteEntity.bind(this)}></i></a>
 																		</div>                                                         
-																	</div>*/}
+																	</div>}
 		                                                            
 																</div>
 															</div>
