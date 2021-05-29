@@ -112,7 +112,7 @@ td#ActionContent{
 	text-align: left!important;
 }
 .textAlignCenter,th.umDynamicHeader.srpadd.text-center{
-	text-align: left!important;
+	text-align: center !important;
 }
 .skillsGenderWrapper{
 	margin-top: 6px;
