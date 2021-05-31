@@ -124,13 +124,13 @@ class Login extends Component {
                   city      : response.data.userDetails.city,
                   company_id : response.data.userDetails.company_id,
                   companyID : response.data.userDetails.companyID,
-                  companyName : response.data.userDetails.companyName,
+                  companyName : response.data.userDetails.companyName,  
                   user_id   : response.data.userDetails.user_id,
                   roles     : response.data.userDetails.roles,
                   token     : response.data.userDetails.token 
                 }
-              if (response.data.userDetails.company_id) {
-                axios.get('/api/entitymaster/getEntity/'+response.data.userDetails.company_id)
+              if (userDetails.company_id) {
+                axios.get('/api/entitymaster/getEntity/'+userDetails.company_id)
                   .then((resp) => {
                     console.log("resp login",resp);
                       if (resp.data === null) {
@@ -145,11 +145,39 @@ class Login extends Component {
 
                           var {mapAction} = this.props;
                           mapAction.setUserDetails(userDetails);
-           
-                          this.setState({ loggedIn: true }, () => {
-                          window.location.href='/'
-                            
-                          })
+                          
+                          if (userDetails.company_id != "" && userDetails.company_id) {
+                            axios.get("/api/packagesubscription/subscription-details/"+response.data.userDetails.company_id)
+                            .then((pack)=>{
+                                if (pack.data) {
+                                  window.location.href='/'
+                                }else{
+                                  var selectedCompanyDetails = {
+                                      company_id  : userDetails.company_id != "" ? userDetails.company_id : null,
+                                      companyID   : userDetails.companyID != "" ? userDetails.companyID : null,
+                                      companyName : userDetails.companyName,
+                                      branch_id   : response.data.userDetails.branch_id,
+                                      branchCode  : response.data.userDetails.branchCode == "" ? 0 : response.data.userDetails.branchCode,
+                                      //locationType: this.state.locationType, 
+                                      //role        : 'employer',
+                                      //status      : 'unverified',        
+                                      city        : response.data.userDetails.city,  
+                                      stateName   : response.data.userDetails.stateName,
+                                      stateCode   : response.data.userDetails.stateCode,
+                                      country     : response.data.userDetails.country,
+                                      countryCode : response.data.userDetails.countryCode,
+                                  }
+
+                                  mapAction.selectedCompanyDetails(selectedCompanyDetails)
+                                  //window.location.href='/subscribe-package'
+                                }
+                            })
+                            .catch((error)=>{
+                                  console.log('error', error);
+                            }) 
+                          }else{
+                            window.location.href='/'
+                          }
                       }
                       
                     })
@@ -361,7 +389,7 @@ class Login extends Component {
 
 const mapStateToProps = (state)=>{
   return {
-    userDetails   : state.userDetails,
+    userDetails   : state.userDetails
   }
 };
 

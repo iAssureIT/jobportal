@@ -2,7 +2,8 @@ const initialState = {
 	rolewiseAccessToModule 		: false,
 	accessToFacility 			: false,
 	selectedCompanyDetails 		: {}, 
-	user_id 					: "",
+	user_id 					: localStorage.getItem("userDetails") 
+									? JSON.parse(localStorage.getItem("userDetails")).user_id : "",
 	userCredentials 			: { username : "", password: "" },
 	candidate_id 				: localStorage.getItem("candidate_id"),
 	userDetails 				: localStorage.getItem("userDetails") ?

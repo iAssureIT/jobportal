@@ -89,7 +89,7 @@ subscribePackage(event){
     }else{
 
     var formValues={
-      "package_id"        : this.state.package_id,
+      "package_id"        : this.state.package_id, 
       "company_id"        : this.props.selectedCompanyDetails.company_id,
       "companyID"         : this.props.selectedCompanyDetails.companyID,
       "branch_id"         : this.props.selectedCompanyDetails.branch_id,
@@ -175,7 +175,7 @@ makePayment (subscription_id, amountPaid) {
             })
 }
 render() {
-
+    console.log(this.props.user_id)
     return (
         <div >
             <form className=" col-lg-10 col-lg-offset-1 signUpBoxFormWrapper signUpBoxFormWrapper2" style={{display:this.state.hideForm}}>
