@@ -1649,8 +1649,8 @@ class LocationDetails extends Component {
 										{
 											this.state.locationarray && this.state.locationarray.length > 0 ?
 											<div className="col-lg-2 col-md-2 col-sm-6 col-xs-12 textAlignCenter  pull-right">
-												<i className="fa fa-th fa-lg btn viewBtn btnactive" name="view" title="Grid View" ref="view" value={this.state.view} onClick={this.showView.bind(this,'Grid')} onChange={this.handleChange} aria-hidden="true"></i>&nbsp;&nbsp;
-												<i className="fa fa-th-list fa-lg btn viewBtn " title="List View" name="view" ref="view" value={this.state.view} onClick={this.showView.bind(this,'List')} onChange={this.handleChange} aria-hidden="true"></i>
+												<i className="fa fa-th fa-lg btn viewBtn btnactive viewBtnStyle" name="view" title="Grid View" ref="view" value={this.state.view} onClick={this.showView.bind(this,'Grid')} onChange={this.handleChange} aria-hidden="true"></i>&nbsp;&nbsp;
+												<i className="fa fa-th-list fa-lg btn viewBtn viewBtnStyle" title="List View" name="view" ref="view" value={this.state.view} onClick={this.showView.bind(this,'List')} onChange={this.handleChange} aria-hidden="true"></i>
 											</div>
 											:
 											null

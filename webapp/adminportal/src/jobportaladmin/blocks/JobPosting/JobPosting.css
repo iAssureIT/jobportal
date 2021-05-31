@@ -563,7 +563,7 @@
 .ck.ck-editor__main>.ck-editor__editable {
 	background-color: var(--admin-form-field-background-color) !important;
 	border: 1px solid var(--main-border-color) !important;
-	height: 370px;
+	height: 370px !important;
 }
 
 .ck-rounded-corners .ck.ck-editor__top .ck-sticky-panel .ck-toolbar, .ck.ck-editor__top .ck-sticky-panel .ck-toolbar.ck-rounded-corners {
@@ -705,6 +705,7 @@ div.ReactTags__suggestions {
     position: absolute;
     z-index: 100 !important;
     background-color: var(--admin-main-bg-color);
+    /*color: var(--admin-main-txt-color) !important;*/
 }
 
 div.ReactTags__suggestions ul {
@@ -712,7 +713,6 @@ div.ReactTags__suggestions ul {
     list-style-type: none;
     box-shadow: .05em .01em .5em rgba(0,0,0,.2);
     margin-top: 3px;
-    /*background-color: var(--main-bg-color);*/
     border: 1px solid var(--admin-main-border-color);
     color: var(--admin-main-txt-color) !important;
     border-radius: 4px;
@@ -721,10 +721,10 @@ div.ReactTags__suggestions ul {
 }
 
 div.ReactTags__suggestions li {
-    /*border-bottom: 1px solid #ddd;*/
     padding: 5px 10px;
     margin: 0;
     margin-left: -40px !important;
+    color: var(--admin-main-txt-color) !important;
 }
 
 div.ReactTags__suggestions li mark {
@@ -737,10 +737,13 @@ div.ReactTags__suggestions li mark {
 
 div.ReactTags__suggestions ul li.ReactTags__activeSuggestion {
     cursor: pointer;
-    background-color: var(--admin-main-bg-color) !important;
     color: var(--admin-main-txt-color) !important;
-    /*background-color: var(--main-border-color) !important;*/
+    /*background-color: var(--admin-main-bg-color) !important;*/
 }
+
+/*div.ReactTags__suggestions ul li.ReactTags__activeSuggestion:hover{
+	color: var(--admin-main-txt-color) !important;
+}*/
 
 input:focus {
     outline-offset: 0px !important;
