@@ -958,7 +958,7 @@ class BasicInfoForm extends Component{
 											
 										</div>
 									</div>
-									<div className="col-lg-4 col-sm-6 candidateVisaWrapper xs-margin md-margin sm-margin">
+									<div className="col-lg-4 col-sm-12 candidateVisaWrapper xs-margin md-margin sm-margin">
 										<div className="row">
 											<div className="col-sm">
 												<label htmlFor="passport" className="nameTitleForm passportFont">
@@ -1022,7 +1022,7 @@ class BasicInfoForm extends Component{
 									</div> 
 									{
 										this.state.countryShow ? 
-											<div className="col-lg-4 col-sm-6 country xs-margin md-margin sm-margin">
+											<div className="col-lg-4 col-sm-12 country xs-margin md-margin sm-margin">
 												<label htmlFor="country" className="nameTitleForm">
 													Country
 												</label>
