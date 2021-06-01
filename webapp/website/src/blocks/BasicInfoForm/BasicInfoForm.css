@@ -181,13 +181,11 @@
 }
 .profileImageWrapper{
     border:1px dashed var(--main-border-color);
-    width:254px;
     height: 192px;
-    position: absolute;
     border-radius: 5px;
 }
 .profileImage{
-    width:244px;
+    width:97%;
     height:182px;
     margin:4px;
 
@@ -904,6 +902,12 @@ user agent stylesheet:focus {
         margin-top: 20px;
     }
 }
+
+@media(min-width:992px) and (max-width:1024px){
+    div.ReactTags__tags {
+    width: 93%;
+    }
+}
 @media(min-width:768px) and (max-width:992px){
     .md-margin{
         margin-top: 20px;
@@ -912,7 +916,7 @@ user agent stylesheet:focus {
         margin-top: 20px;
     }
     div.ReactTags__tags {
-    width: 91%;
+    width: 90%;
     }
 }
 @media(min-width:576px) and (max-width:768px){

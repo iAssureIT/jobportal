@@ -960,7 +960,7 @@ class BasicInfoForm extends Component{
 									</div>
 									<div className="col-lg-4 col-sm-12 candidateVisaWrapper xs-margin md-margin sm-margin">
 										<div className="row">
-											<div className="col-sm">
+											<div className="col-sm col-6">
 												<label htmlFor="passport" className="nameTitleForm passportFont">
 													Do You Have Passport?
 												</label>
@@ -989,7 +989,7 @@ class BasicInfoForm extends Component{
 													</div>
 												</div>
 											</div> 
-											<div className="col-sm xs-margin ">
+											<div className="col-sm col-6  ">
 												<label htmlFor="visa" className="nameTitleForm passportFont">
 													Do You Have Visa?
 												</label>

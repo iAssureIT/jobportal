@@ -119,7 +119,7 @@
 }
 @media(min-width:660px) and (max-width:768px){
     .bullet::after{
-		width: 121px;
+		width: 117px;
 	}
 }
 @media(min-width:576px) and (max-width:660px){
