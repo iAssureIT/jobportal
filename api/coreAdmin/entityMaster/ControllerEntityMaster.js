@@ -1717,7 +1717,18 @@ exports.countContacts = (req, res, next) => {
 
 /*Bulk upload*/
 
-
+function getIndustries() {
+    return new Promise(function(resolve, reject) {
+        IndustryMaster.find({})
+            .exec()
+            .then(data => {
+                resolve(data);
+            })
+            .catch(err => {
+                reject(err);
+            });
+    });
+}
 var fetchDesignations = async () => {
     return new Promise(function(resolve, reject) {
         DesignationMaster.find({})
@@ -1772,23 +1783,7 @@ var fetchAllEntities = async (type) => {
     });
 };
 
-function insertContactDetails(department, createdBy) {
-    return new Promise(function(resolve, reject) {
-        const departmentMaster = new DepartmentMaster({
-            _id: new mongoose.Types.ObjectId(),
-            department: department,
-            createdBy: createdBy,
-            createdAt: new Date()
-        })
-        departmentMaster.save()
-            .then(data => {
-                resolve(data._id);
-            })
-            .catch(err => {
-                reject(err);
-            });
-    });
-}
+
 
 function insertDepartment(department, createdBy) {
     return new Promise(function(resolve, reject) {
@@ -1860,7 +1855,7 @@ function getLatLong(address) {
 
 exports.bulkUploadEntity = (req, res, next) => {
     var entity = req.body.data;
-    //console.log("entity...",entity);
+    
     var validData = [];
     var validObjects = [];
     var invalidData = [];
@@ -1874,14 +1869,17 @@ exports.bulkUploadEntity = (req, res, next) => {
     processData();
     async function processData() {
 
+        var industries  = await getIndustries();
         var departments = await fetchDepartments();
-        // console.log("departments",departments);
         var designations = await fetchDesignations();
 
         for (var k = 0; k < entity.length; k++) {
 
             if (entity[k].entityType == '-') {
                 remark += "entityType not found, ";
+            }
+            if (entity[k].industry == '-') {
+                remark += "industry not found, ";
             }
             if (entity[k].companyName == '-') {
                 remark += "companyName not found, ";
@@ -1925,6 +1923,20 @@ exports.bulkUploadEntity = (req, res, next) => {
 
             if (remark == '') {
                 var departmentId, designationId;
+                var industry_id;
+                var industryExists = industries.filter((data) => {
+                    if (data.industry.trim().toLowerCase() == entity[k].industry.trim().toLowerCase()) {
+                        return data;
+                    }
+                })
+                if (industryExists.length > 0) {
+                    industry_id = industryExists[0]._id;
+                } else {
+                    if (jobs[k].industry != '-') {
+                        industry_id = await insertIndustry(entity[k].industry, req.body.reqdata.createdBy);
+                    }
+                }
+
                 var departmentExists = departments.filter((data) => {
                     if (data.department == entity[k].department) {
                         return data;
@@ -2013,17 +2025,17 @@ exports.bulkUploadEntity = (req, res, next) => {
                             addressLine1: entity[k].address1Line1,
                             addressLine2: entity[k].address1Line2 + "," + entity[k].district1 + "," + entity[k].state1 + "," + entity[k].country1,
                             department: dept_project,
-                            countryCode: entity[k].countryCode,
+                            countryCode: entity[k].countryCode1,
                             country: entity[k].country1,
-                            // stateCode           : entity[k].countryCod,
                             state: entity[k].state1,
+                            stateCode           : entity[k].stateCode1,
                             district: entity[k].district1,
                             city: entity[k].city1,
                             area: entity[k].area1,
                             pincode: entity[k].pincode1,
                             latitude: lat,
                             longitude: lng,
-
+                            branchCode : 1
                         },
 
                         {
@@ -2031,28 +2043,34 @@ exports.bulkUploadEntity = (req, res, next) => {
                             addressLine1: entity[k].address2Line1 != '-' ? entity[k].address2Line1 : 'null',
                             addressLine2: entity[k].address2Line2 != '-' ? entity[k].address2Line2 : 'null',
                             department: dept_project,
-                            state: entity[k].state1,
+                            countryCode: entity[k].countryCode2,
+                            country: entity[k].country2,
+                            state: entity[k].state2,
+                            stateCode           : entity[k].stateCode2,
                             district: entity[k].district2,
                             city: entity[k].city2,
                             area: entity[k].area2,
                             pincode: entity[k].pincode2,
                             latitude: lat1,
                             longitude: lng1,
-
+                            branchCode : 2
                         },
                         {
                             locationType: entity[k].Location3Type != '-' ? entity[k].Location3Type : 'null',
                             addressLine1: entity[k].address3Line1 != '-' ? entity[k].address3Line1 : 'null',
                             addressLine2: entity[k].address3Line2 != '-' ? entity[k].address3Line2 : 'null',
                             department: dept_project,
-                            state: entity[k].state2,
-                            district: entity[k].district2,
-                            city: entity[k].city2,
-                            area: entity[k].area2,
-                            pincode: entity[k].pincode2,
+                            countryCode: entity[k].countryCode3,
+                            country: entity[k].country3,
+                            state: entity[k].state3,
+                            stateCode           : entity[k].stateCode3,
+                            district: entity[k].district3,
+                            city: entity[k].city3,
+                            area: entity[k].area3,
+                            pincode: entity[k].pincode3,
                             latitude: lat2,
                             longitude: lng2,
-
+                            branchCode : 3
                         }
                     ]
                     let locationdetails = [];
@@ -2083,74 +2101,6 @@ exports.bulkUploadEntity = (req, res, next) => {
                         createLogin1 = true;
                     }
 
-
-                    var contactPersons = [
-
-                        {
-
-                            branchName: entity[k].address1Line1,
-                            firstName: entity[k].firstName,
-                            lastName: entity[k].lastName,
-                            phone: entity[k].countryCode + "" + entity[k].phone,
-                            altPhone: entity[k].countryCode + "" + entity[k].altPhone,
-                            email: entity[k].email,
-                            departmentName: departmentId,
-                            designationName: designationId,
-                            employeeID: entity[k].employeeID,
-                            role: entity[k].role,
-                            branchCode: validDcompanyID,
-                            createUser: createLogin1,
-
-                        }
-
-                    ]
-
-                    let contactdetails = [];
-                    for (var a = 0; a < contactPersons.length; a++) {
-                        if ((contactPersons[a].branchName != null || contactPersons[a].firstName != null ||
-                                contactPersons[a].phone != null || contactPersons[a].altPhone != null || contactPersons[a].email != null ||
-                                contactPersons[a].department != null || contactPersons[a].designation != null || contactPersons[a].employeeID != null))
-
-                        {
-
-
-
-                            contactdetails.push(contactPersons[a]);
-
-                            // console.log("contactdetails----s",contactdetails);
-
-                        }
-                    }
-
-
-
-                    var users1 = await fetchAllUsers(entity[k].email);
-                    // console.log("users1----",users1);
-
-                    if (!users1) {
-                        var userDetails = {
-
-                            firstname: entity[k].firstName != '-' ? entity[k].firstName : null,
-                            lastname: entity[k].lastName != '-' ? entity[k].lastName : null,
-                            mobNumber: entity[k].phone != '-' ? entity[k].phone : null,
-                            email: entity[k].email != '-' ? entity[k].email : null,
-                            companyID: validData.companyID,
-                            companyName: entity[k].companyName != '-' ? entity[k].companyName : null,
-                            designation: entity[k].designation != '-' ? entity[k].designation : null,
-                            department: entity[k].department != '-' ? entity[k].department1 : null,
-                            pwd: "welcome123",
-                            role: [entity[k].role != '-' ? entity[k].role : null],
-                            status: 'blocked',
-                            "emailSubject": "Email Verification",
-                            "emailContent": "As part of our registration process, we screen every new profile to ensure its credibility by validating email provided by user. While screening the profile, we verify that details put in by user are correct and genuine.",
-                        }
-                        if ((userDetails.firstName !== null)) {
-                            var insertUser1 = await createUser(userDetails);
-                        }
-                        var userID1 = await createUser(userDetails);
-
-                    }
-
                     validObjects = {
 
                         fileName: req.body.fileName,
@@ -2165,7 +2115,7 @@ exports.bulkUploadEntity = (req, res, next) => {
                         companyEmail: entity[k].companyEmail,
                         country: entity[k].country,
                         locations: locationdetails,
-                        contactPersons: contactdetails,
+                        //contactPersons: contactdetails,
                         departments: entityDept,
                         companyNo: getnext ? getnext : 1,
                         companyID: str ? str : 1,
@@ -2173,22 +2123,86 @@ exports.bulkUploadEntity = (req, res, next) => {
                     }
 
                     validData.push(validObjects);
-                    const entity1 = new EntityMaster({
-                        _id: new mongoose.Types.ObjectId(),
+
+                    var entity1 = {
                         fileName: req.body.fileName,
                         entityType: entity[k].entityType,
+                        industry_id: industry_id,
                         companyName: entity[k].companyName,
                         groupName: entity[k].groupName,
                         CIN: entity[k].CIN,
                         COI: entity[k].COI,
-                        companyPhone: "+" + entity[k].countryCode + " " + entity[k].companyPhone,
+                        companyPhone: "+"+entity[k].phoneCountryCode+" "+entity[k].companyPhone,
                         TAN: entity[k].TAN,
                         website: entity[k].website,
-                        // companyPhone              : entity[k].companyPhone,
                         companyEmail: entity[k].companyEmail,
                         country: entity[k].country,
                         locations: locationdetails,
-                        contactPersons: contactdetails,
+                        //contactPersons: contactdetails,
+                        departments: entityDept,
+                        companyNo: getnext ? getnext : 1,
+                        companyID: str ? str : 1,
+                        uploadTime: uploadTime
+                    }
+                    var insertedEntity = await insertEntityFun(entity1);
+                    //console.log("data to save", insertedEntity)
+                    //console.log("entity...",entity[k].branchPincode); 
+                    var branch_id = insertedEntity.locations.filter((lok)=>{
+                        if (lok.pincode == entity[k].branchPincode ) {
+                            return lok._id
+                        }
+                    })
+                    console.log(branch_id)
+                    var contactPersons = [
+                        { 
+
+                            branchCode : branch_id[0].branchCode ,
+                            branchName: branch_id[0].addressLine2,
+                            locationType : branch_id[0].locationType,
+                            firstName: entity[k].firstName,
+                            lastName: entity[k].lastName,
+                            phone: "+"+entity[k].phoneCountryCode+" "+entity[k].companyPhone,
+                            altPhone: "+"+entity[k].phoneCountryCode+" "+entity[k].altPhone,
+                            email: entity[k].email,
+                            departmentName: departmentId,
+                            designationName: designationId,
+                            employeeID: entity[k].employeeID,
+                            role: entity[k].role,
+                            createUser: createLogin1,
+                        }
+                    ]
+                    let contactdetails = [];
+                        for (var a = 0; a < contactPersons.length; a++) {
+                            if ((contactPersons[a].branchName != null || contactPersons[a].firstName != null ||
+                                    contactPersons[a].phone != null || contactPersons[a].altPhone != null || contactPersons[a].email != null ||
+                                    contactPersons[a].department != null || contactPersons[a].designation != null || contactPersons[a].employeeID != null))
+
+                            {
+                                contactdetails.push(contactPersons[a]);
+                            }
+                        }
+
+                    console.log("contactdetails----s",contactdetails); 
+
+                    var insertedContact = await insertContactDetails( insertedEntity._id, contactdetails);
+                    console.log("insertedContact----s",insertedContact);
+                    
+                    /*const entity1 = new EntityMaster({
+                        _id: new mongoose.Types.ObjectId(),
+                        fileName: req.body.fileName,
+                        entityType: entity[k].entityType,
+                        industry_id: industry_id,
+                        companyName: entity[k].companyName,
+                        groupName: entity[k].groupName,
+                        CIN: entity[k].CIN,
+                        COI: entity[k].COI,
+                        companyPhone: "+"+entity[k].companyPhone,
+                        TAN: entity[k].TAN,
+                        website: entity[k].website,
+                        companyEmail: entity[k].companyEmail,
+                        country: entity[k].country,
+                        locations: locationdetails,
+                        //contactPersons: contactdetails,
                         departments: entityDept,
                         companyNo: getnext ? getnext : 1,
                         companyID: str ? str : 1,
@@ -2198,13 +2212,86 @@ exports.bulkUploadEntity = (req, res, next) => {
                     // console.log("entity1entity1",entity1.companyPhone);
                     entity1.save()
                         .then(data => {
-                            console.log("data to save", data)
+                            //console.log("data to save", data) 
+                            console.log("data to save", data.locations)
+                            console.log("entity...",entity[k]); 
+                            var branch_id = data.locations.filter((lok)=>{
+                                if (lok.pincode == entity[k].branchPincode ) {
+                                    return lok._id
+                                }
+                            })
+                            console.log(branch_id)
+                        /*var contactPersons = [
+
+                            {
+
+                                branchName: entity[k].address1Line1,
+                                firstName: entity[k].firstName,
+                                lastName: entity[k].lastName,
+                                phone: entity[k].phone,
+                                altPhone: entity[k].altPhone,
+                                email: entity[k].email,
+                                departmentName: departmentId,
+                                designationName: designationId,
+                                employeeID: entity[k].employeeID,
+                                role: entity[k].role,
+                                branchCode: validDcompanyID,
+                                createUser: createLogin1,
+
+                            }
+
+                        ]
+
+                        let contactdetails = [];
+                        for (var a = 0; a < contactPersons.length; a++) {
+                            if ((contactPersons[a].branchName != null || contactPersons[a].firstName != null ||
+                                    contactPersons[a].phone != null || contactPersons[a].altPhone != null || contactPersons[a].email != null ||
+                                    contactPersons[a].department != null || contactPersons[a].designation != null || contactPersons[a].employeeID != null))
+
+                            {
+
+                                contactdetails.push(contactPersons[a]);
+
+                                // console.log("contactdetails----s",contactdetails);
+
+                            }
+                        }
+
+
+
+                        var users1 = await fetchAllUsers(entity[k].email);
+                        // console.log("users1----",users1);
+
+                        if (!users1) {
+                            var userDetails = {
+
+                                firstname: entity[k].firstName != '-' ? entity[k].firstName : null,
+                                lastname: entity[k].lastName != '-' ? entity[k].lastName : null,
+                                mobNumber: entity[k].phone != '-' ? entity[k].phone : null,
+                                email: entity[k].email != '-' ? entity[k].email : null,
+                                companyID: validData.companyID,
+                                companyName: entity[k].companyName != '-' ? entity[k].companyName : null,
+                                designation: entity[k].designation != '-' ? entity[k].designation : null,
+                                department: entity[k].department != '-' ? entity[k].department1 : null,
+                                pwd: "welcome123",
+                                role: [entity[k].role != '-' ? entity[k].role : null],
+                                status: 'blocked',
+                                "emailSubject": "Email Verification",
+                                "emailContent": "As part of our registration process, we screen every new profile to ensure its credibility by validating email provided by user. While screening the profile, we verify that details put in by user are correct and genuine.",
+                            }
+                            if ((userDetails.firstName !== null)) {
+                                var insertUser1 = await createUser(userDetails);
+                            }
+                            var userID1 = await createUser(userDetails);
+
+                        }
+
+                        
                             //res.status(200).json({ created : true, entityID : data._id ,companyID : data.companyID});
                         })
                         .catch(err => {
                             console.log(err);
-                        });
-
+                        });*/
 
 
                 } else {
@@ -2247,6 +2334,63 @@ exports.bulkUploadEntity = (req, res, next) => {
     }
 };
 
+var insertEntityFun = async (entity) => {
+    return new Promise(function(resolve, reject) {
+        const entity1 = new EntityMaster({
+                        _id: new mongoose.Types.ObjectId(),
+                        fileName: entity.fileName,
+                        entityType: entity.entityType,
+                        industry_id: entity.industry_id,
+                        companyName: entity.companyName,
+                        groupName: entity.groupName,
+                        CIN: entity.CIN,
+                        COI: entity.COI,
+                        companyPhone: entity.companyPhone,
+                        TAN: entity.TAN,
+                        website: entity.website,
+                        companyEmail: entity.companyEmail,
+                        country: entity.country,
+                        locations: entity.locations,
+                        //contactPersons: contactdetails,
+                        departments: entity.departments,
+                        companyNo: entity.companyNo,
+                        companyID: entity.companyID,
+                        uploadTime: entity.uploadTime
+
+                    })
+                    // console.log("entity1entity1",entity1.companyPhone);
+                    entity1.save()
+                        .then(data => {
+                            //console.log("data to save", data) 
+                            resolve(data);
+                        })
+                        .catch(err => {
+                            reject(err);
+                        });
+
+    })
+}
+
+function insertContactDetails(entity_id, contactdetails) {
+    return new Promise(function(resolve, reject) {
+        EntityMaster.updateOne({ _id: entity_id }, {
+            $push: {
+                'contactPersons': contactdetails
+            }
+        })
+        .exec()
+        .then(data => {
+            if (data.nModified == 1) {
+                resolve({ created: true })
+            } else {
+                resolve({ created: false })
+            }
+        })
+        .catch(err => {
+            reject(err);
+        });
+    });
+}
 var insertFailedRecords = async (invalidData, updateBadData) => {
     //console.log('invalidData',invalidData);
     return new Promise(function(resolve, reject) {

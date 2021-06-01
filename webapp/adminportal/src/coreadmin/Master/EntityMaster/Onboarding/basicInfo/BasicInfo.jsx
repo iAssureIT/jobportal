@@ -755,9 +755,9 @@ class BasicInfo extends Component {
       <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 NOPadding">
         <section className="content">   
           <div className="pageContent col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        { 
+          { 
             this.props.match.params.entityID && this.state.pathname === "appCompany" ? 
-            null: 
+            null : 
             <div  className="col-lg-12 col-md-12 col-sm-12 col-xs-12 mt20">
               <ul className="nav tabNav nav-pills col-lg-3 col-md-3 col-sm-12 col-xs-12 pull-right">
                 <li className="active col-lg-5 col-md-5 col-xs-5 col-sm-5 NOpadding text-center"><a data-toggle="pill" href="#manual">Manual</a></li>
@@ -1071,4 +1071,6 @@ class BasicInfo extends Component {
 //   }
 // }
 // export default connect(mapStateToProps, mapDispatchToProps)(withRouter(BasicInfo));
+
 export default withRouter(BasicInfo);
+
