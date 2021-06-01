@@ -119,37 +119,24 @@
 }
 @media(min-width:660px) and (max-width:768px){
     .bullet::after{
-		width: 131px;
-	}
-	.progressBar,.progressbarOuterWrapper{
-		padding-left: 0px;
-		padding-right: 0px;
+		width: 121px;
 	}
 }
 @media(min-width:576px) and (max-width:660px){
     .bullet::after{
-		width: 110px;
+		width: 100px;
 	}
-	.progressBar,.progressbarOuterWrapper{
-		padding-left: 0px;
-		padding-right: 0px;
-	}
+
 }
 @media(min-width:470px) and (max-width:576px){
     .bullet::after{
-		width: 94px;
+		width: 84px;
 	}
-	.progressBar,.progressbarOuterWrapper{
-		padding-left: 0px;
-		padding-right: 0px;
-	}
+	
 }
 @media(max-width:470px){
 	.bullet::after{
-		width: 68px;
+		width: 58px;
 	}
-	.progressBar,.progressbarOuterWrapper{
-		padding-left: 0px;
-		padding-right: 0px;
-	}
+	
 }
