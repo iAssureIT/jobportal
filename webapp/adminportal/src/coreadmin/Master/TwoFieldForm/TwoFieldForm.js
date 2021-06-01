@@ -147,7 +147,7 @@ class TwoFieldForm extends Component {
             }  
         }
 
-       
+        console.log($('#twoFieldFormValid').valid())
          if ($('#twoFieldFormValid').valid()) {
             var postapiurl = this.props.tableObjects.apiLink+"post";
             axios.post(postapiurl, formValues)

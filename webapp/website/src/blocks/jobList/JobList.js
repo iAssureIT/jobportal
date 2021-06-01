@@ -32,8 +32,11 @@ class Joblist extends Component{
 
 componentDidMount(){
 	const userDetails = JSON.parse(localStorage.getItem("userDetails"));
-  	const token = userDetails.token;
-  	Axios.defaults.headers.common['Authorization'] = 'Bearer '+ token;
+	if (userDetails) {
+		const token = userDetails.token;
+  		Axios.defaults.headers.common['Authorization'] = 'Bearer '+ token;
+	}
+  	
 }
 showMore(){
 
