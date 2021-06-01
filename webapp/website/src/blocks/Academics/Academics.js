@@ -756,313 +756,326 @@ class Academics extends Component{
 	      componentRestrictions: {country: "in"}
 	    }
 		return(
-				<div className="col-lg-12 ">
-					<form>
+				<div className="col-md-12 pageWrapper candidateProfileSteps ">
+					<form className="col-md-12  mainForm">
+						<div className="row ">
+							<div className="col-sm-12">
+								<div className="row formWrapper">
 
-						<div className="row formWrapper">
-
-							<div className="col-lg-4">
-								<label htmlFor="qualificationLevel" className="nameTitleForm">
-									Qualification Level
-									<sup className="nameTitleFormStar">*</sup>
-								</label>
-								<div className="input-group ">
-									<span className="input-group-addon inputBoxIcon">
-										<FontAwesomeIcon icon="file-alt" />
-									</span> 
-									<input type="text" list="qualificationLevel" className="form-control inputBox" refs="qualificationLevel" 
-                                     name="qualificationLevel" id="selectqualificationLevel" maxLength="100" value={this.state.qualificationLevel} data-value={this.state.qualificationlevel_id}
-									onChange={this.onChangeQualificationLevel.bind(this)} />
-									<datalist name="qualificationLevel" id="qualificationLevel" className="qualificationLevellist" >
-									    {this.state.qualificationLevellist.map((item, key) =>
-									        <option key={key} value={item.qualificationLevel} data-value={item._id}/>
-									    )}
-									</datalist>
+									<div className="col-md">
+										<label htmlFor="qualificationLevel" className="nameTitleForm">
+											Qualification Level
+											<sup className="nameTitleFormStar">*</sup>
+										</label>
+										<div className="input-group ">
+											<span className="input-group-addon inputBoxIcon">
+												<FontAwesomeIcon icon="file-alt" />
+											</span> 
+											<input type="text" list="qualificationLevel" className="form-control inputBox" refs="qualificationLevel" 
+		                                     name="qualificationLevel" id="selectqualificationLevel" maxLength="100" value={this.state.qualificationLevel} data-value={this.state.qualificationlevel_id}
+											onChange={this.onChangeQualificationLevel.bind(this)} />
+											<datalist name="qualificationLevel" id="qualificationLevel" className="qualificationLevellist" >
+											    {this.state.qualificationLevellist.map((item, key) =>
+											        <option key={key} value={item.qualificationLevel} data-value={item._id}/>
+											    )}
+											</datalist>
+										</div>
+										<span id="qualificationLevelError" className="errorMsg"></span>
+									</div>
+									<div className="col-md">
+										<label htmlFor="qualification" className="nameTitleForm">
+											Qualification
+											<sup className="nameTitleFormStar">*</sup>
+										</label>
+										<div className="input-group ">
+											<span className="input-group-addon inputBoxIcon">
+												<i className="fa fa-graduation-cap"></i>
+											</span> 
+											<input type="text" list="qualification" className="form-control inputBox" refs="qualification" 
+		                                     name="qualification" id="selectqualification" maxLength="100" value={this.state.qualification} data-value={this.state.qualification_id}
+											onChange={this.onChangeQualification.bind(this)} />
+											<datalist name="qualification" id="qualification" className="qualificationlist" >
+											    {this.state.qualificationlist.map((item, key) =>
+											        <option key={key} value={item.qualification} data-value={item._id}/>
+											    )}
+											</datalist>
+										</div>
+										<span id="qualificationError" className="errorMsg"></span>
+									</div>
+									<div className="col-md">
+										<label htmlFor="specialization" className="nameTitleForm">
+											Specialization
+										</label>
+										<div className="input-group ">
+											<span className="input-group-addon inputBoxIcon">
+												<i className="fa fa-graduation-cap"></i>
+											</span> 
+											<input type="text" name="specialization" id="specialization" 
+											 className="form-control inputBox " 
+											 value={this.state.specialization} 
+											 onChange={this.handleChange.bind(this)} />
+										</div> 
+										<span id="specializationError" className="errorMsg"></span>
+									</div>
 								</div>
-								<span id="qualificationLevelError" className="errorMsg"></span>
-							</div>
-							<div className="col-lg-4">
-								<label htmlFor="qualification" className="nameTitleForm">
-									Qualification
-									<sup className="nameTitleFormStar">*</sup>
-								</label>
-								<div className="input-group ">
-									<span className="input-group-addon inputBoxIcon">
-										<i className="fa fa-graduation-cap"></i>
-									</span> 
-									<input type="text" list="qualification" className="form-control inputBox" refs="qualification" 
-                                     name="qualification" id="selectqualification" maxLength="100" value={this.state.qualification} data-value={this.state.qualification_id}
-									onChange={this.onChangeQualification.bind(this)} />
-									<datalist name="qualification" id="qualification" className="qualificationlist" >
-									    {this.state.qualificationlist.map((item, key) =>
-									        <option key={key} value={item.qualification} data-value={item._id}/>
-									    )}
-									</datalist>
-								</div>
-								<span id="qualificationError" className="errorMsg"></span>
-							</div>
-							<div className="col-lg-4">
-								<label htmlFor="specialization" className="nameTitleForm">
-									Specialization
-								</label>
-								<div className="input-group ">
-									<span className="input-group-addon inputBoxIcon">
-										<i className="fa fa-graduation-cap"></i>
-									</span> 
-									<input type="text" name="specialization" id="specialization" 
-									 className="form-control inputBox " 
-									 value={this.state.specialization} 
-									 onChange={this.handleChange.bind(this)} />
-								</div> 
-								<span id="specializationError" className="errorMsg"></span>
-							</div>
-
-						</div>
-
-						<div className="row formWrapper">
-
-							<div className="col-lg-4">
-								<label htmlFor="grade" className="nameTitleForm">
-									Grade/Marks/GPA
-								</label>
-								<div className="input-group ">
-									<span className="input-group-addon inputBoxIcon">
-										<FontAwesomeIcon icon="file-alt" />
-									</span> 
-									<input type="text" name="grade" id="grade" 
-										className="form-control inputBox" 
-										value={this.state.grade} 
-										onChange={this.handleChange.bind(this)} />
-								</div> 
-								<span id="gradeError" className="errorMsg"></span>
-							</div>
-							<div className="col-lg-4">
-								<label htmlFor="admisionYear" className="nameTitleForm">
-									Admission Year
-									<sup className="nameTitleFormStar">*</sup>
-								</label>
-								<div className="input-group ">
-									<span className="input-group-addon inputBoxIcon">
-										<i className="fa fa-calendar"></i>
-									</span> 
-									<input type="month" name="admisionYear" id="admisionYear" 
-									 className="form-control inputBox" 
-									 value={this.state.admisionYear} 
-									 onChange={this.handleChange.bind(this)} />
-									 <div className="dateLine"></div>
-								</div> 
-								<span id="admisionYearError" className="errorMsg"></span>
-							</div>
-							<div className="col-lg-4">
-								<label htmlFor="passOutYear" className="nameTitleForm">
-									Pass-out-Year
-									<sup className="nameTitleFormStar">*</sup>
-								</label>
-								<div className="input-group ">
-									<span className="input-group-addon inputBoxIcon">
-										<i className="fa fa-calendar"></i>
-									</span> 
-									<input type="month" name="passOutYear" id="passOutYear" 
-									 className="form-control inputBox " 
-									 value={this.state.passOutYear} 
-									 onChange={this.handleChange.bind(this)} />
-									 <div className="dateLine"></div>
-								</div> 
-								<span id="passOutYearError" className="errorMsg"></span>
-							</div>
-							
-						</div>
-
-						<div className="row formWrapper">	
-							<div className="col-lg-4">
-								<label htmlFor="university" className="nameTitleForm">
-									University/Boards Name
-									<sup className="nameTitleFormStar">*</sup>
-								</label>
-								<div className="input-group ">
-									<span className="input-group-addon inputBoxIcon">
-										<FontAwesomeIcon icon="university" />
-									</span> 
-									<input type="text" list="university" className="form-control inputBox" refs="university" 
-                                     name="university" id="selectuniversity" maxLength="100" value={this.state.university} data-value={this.state.university_id}
-									onChange={this.onChangeUniversity.bind(this)} />
-									<datalist name="university" id="university" className="universitylist" >
-									    {this.state.universitylist.map((item, key) =>
-									        <option key={key} value={item.university} data-value={item._id}/>
-									    )}
-									</datalist>
-								</div> 
-								<span id="universityError" className="errorMsg"></span>
-							</div>
-							<div className="col-lg-4">
-								<label htmlFor="college" className="nameTitleForm">
-									College/School Name<sup className="nameTitleFormStar">*</sup>
-								</label>
-								<div className="input-group ">
-									<span className="input-group-addon inputBoxIcon">
-										<FontAwesomeIcon icon="university" />
-									</span> 
-									{/*<select className="form-control inputBox" id="college" 
-									 value={this.state.college} name="college" 
-									 onChange={this.handleChange.bind(this)}>
-										  	<option > -- select -- </option>
-										  	{
-										  		this.state.inputCollege!=null 
-										  			&& this.state.inputCollege.length>0
-										  		?	
-										  			this.state.inputCollege.map((elem,index)=>{
-										  				return(
-										  					<option value={elem._id} key={index}>
-										  						{elem.collage}
-										  					</option>
-										  				);
-										  			})
-										  			
-										  		:
-										  			null
-										  	}
-									</select>*/}
-									<PlacesAutocomplete
-                                        value={this.state.addressLine1}
-                                        onChange={this.handleChangePlaces}
-                                        onSelect={this.handleSelect}
-                                        searchOptions={searchOptions}
-                                      	>
-                                        {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-                                          <div>
-                                            <input
-                                              {...getInputProps({
-                                                placeholder: 'Search Address ...',
-                                                className: 'location-search-input form-control inputBox',
-                                                id:"addressLine1",
-                                                name:"addressLine1",
-                                              })}
-                                            />
-                                            <div className={this.state.addressLine1 
-                                            				? 
-                                            				"autocomplete-dropdown-container SearchListContainer SearchListContainer2 inputSearch" 
-                                            				: 
-                                            				""}>
-                                              {loading && <div>Loading...</div>}
-                                              {suggestions.map(suggestion => {
-                                                const className = suggestion.active
-                                                  ? 'suggestion-item--active'
-                                                  : 'suggestion-item';
-                                                // inline style for demonstration purpose
-                                                const style = suggestion.active
-                                                  ? { backgroundColor: '#f5a721', cursor: 'pointer' }
-                                                  : { backgroundColor: '#242933', cursor: 'pointer'};
-                                                return (
-                                                  <div
-                                                    {...getSuggestionItemProps(suggestion, {
-                                                      className,
-                                                      style,
-                                                    })}
-                                                  >
-                                                    <span>{suggestion.description}</span>
-                                                  </div>
-                                                );
-                                              })}
-                                            </div>
-                                          </div>
-                                        )}
-                                      </PlacesAutocomplete>
-								</div> 
-								<span id="collegeError" className="errorMsg"></span>
-							</div>
-							<div className="col-lg-4">
-								<label htmlFor="mode" className="nameTitleForm">
-									Mode
-									<sup className="nameTitleFormStar">*</sup>
-								</label>
-								<div className="input-group ">
-									<span className="input-group-addon inputBoxIcon">
-										<FontAwesomeIcon icon="adjust" />
-									</span> 
-									<select className="form-control inputBox" id="mode" 
-									 value={this.state.mode} name="mode" 
-									 onChange={this.handleChange.bind(this)}>
-									  	<option > -- select -- </option>
-									  	{
-									  		this.state.inputMode.length > 0
-									  		?	
-									  			this.state.inputMode.map((elem,index)=>{
-									  				return(
-									  					<option value={elem._id} key={index}>
-									  						{elem}
-									  					</option>
-									  				);
-									  			})
-									  			
-									  		:
-									  			null
-									  	}
-									</select>
-								</div>
-								<span id="modeError" className="errorMsg"></span>
 							</div>
 						</div>
 
-						<div className="row formWrapper">
-							<div className="col-lg-4">
-								<label htmlFor="city" className="nameTitleForm">
-									City
-									<sup className="nameTitleFormStar">*</sup>
-								</label>
-								<div className="input-group ">
-									<span className="input-group-addon inputBoxIcon">
-										<FontAwesomeIcon icon="city" /> 
-									</span> 
-									<input type="text" name="city" id="city" 
-									 className="form-control inputBox" value={this.state.city} 
-									 onChange={this.handleChange.bind(this)} />
-								</div>
-								<span id="cityError" className="errorMsg"></span>
-							</div>
-							
+						<div className="row ">
+							<div className="col-sm-12">
+								<div className="row formWrapper">
 
-							<div className="col-lg-4">
-								<label htmlFor="state" className="nameTitleForm">
-									State
-									<sup className="nameTitleFormStar">*</sup>
-								</label>
-								<div className="input-group ">
-									<span className="input-group-addon inputBoxIcon">
-										<i className="fa fa-map"></i>
-									</span> 
+									<div className="col-md">
+										<label htmlFor="grade" className="nameTitleForm">
+											Grade/Marks/GPA
+										</label>
+										<div className="input-group ">
+											<span className="input-group-addon inputBoxIcon">
+												<FontAwesomeIcon icon="file-alt" />
+											</span> 
+											<input type="text" name="grade" id="grade" 
+												className="form-control inputBox" 
+												value={this.state.grade} 
+												onChange={this.handleChange.bind(this)} />
+										</div> 
+										<span id="gradeError" className="errorMsg"></span>
+									</div>
+									<div className="col-md">
+										<label htmlFor="admisionYear" className="nameTitleForm">
+											Admission Year
+											<sup className="nameTitleFormStar">*</sup>
+										</label>
+										<div className="input-group ">
+											<span className="input-group-addon inputBoxIcon">
+												<i className="fa fa-calendar"></i>
+											</span> 
+											<input type="month" name="admisionYear" id="admisionYear" 
+											 className="form-control inputBox" 
+											 value={this.state.admisionYear} 
+											 onChange={this.handleChange.bind(this)} />
+											 <div className="dateLine"></div>
+										</div> 
+										<span id="admisionYearError" className="errorMsg"></span>
+									</div>
+									<div className="col-md">
+										<label htmlFor="passOutYear" className="nameTitleForm">
+											Pass-out-Year
+											<sup className="nameTitleFormStar">*</sup>
+										</label>
+										<div className="input-group ">
+											<span className="input-group-addon inputBoxIcon">
+												<i className="fa fa-calendar"></i>
+											</span> 
+											<input type="month" name="passOutYear" id="passOutYear" 
+											 className="form-control inputBox " 
+											 value={this.state.passOutYear} 
+											 onChange={this.handleChange.bind(this)} />
+											 <div className="dateLine"></div>
+										</div> 
+										<span id="passOutYearError" className="errorMsg"></span>
+									</div>	
+								</div>
+							</div>
+						</div>
+
+						<div className="row ">
+							<div className="col-sm-12">
+								<div className="row formWrapper">	
+									<div className="col-md">
+										<label htmlFor="university" className="nameTitleForm">
+											University/Boards Name
+											<sup className="nameTitleFormStar">*</sup>
+										</label>
+										<div className="input-group ">
+											<span className="input-group-addon inputBoxIcon">
+												<FontAwesomeIcon icon="university" />
+											</span> 
+											<input type="text" list="university" className="form-control inputBox" refs="university" 
+		                                     name="university" id="selectuniversity" maxLength="100" value={this.state.university} data-value={this.state.university_id}
+											onChange={this.onChangeUniversity.bind(this)} />
+											<datalist name="university" id="university" className="universitylist" >
+											    {this.state.universitylist.map((item, key) =>
+											        <option key={key} value={item.university} data-value={item._id}/>
+											    )}
+											</datalist>
+										</div> 
+										<span id="universityError" className="errorMsg"></span>
+									</div>
+									<div className="col-md">
+										<label htmlFor="college" className="nameTitleForm">
+											College/School Name<sup className="nameTitleFormStar">*</sup>
+										</label>
+										<div className="input-group ">
+											<span className="input-group-addon inputBoxIcon">
+												<FontAwesomeIcon icon="university" />
+											</span> 
+											{/*<select className="form-control inputBox" id="college" 
+											 value={this.state.college} name="college" 
+											 onChange={this.handleChange.bind(this)}>
+												  	<option > -- select -- </option>
+												  	{
+												  		this.state.inputCollege!=null 
+												  			&& this.state.inputCollege.length>0
+												  		?	
+												  			this.state.inputCollege.map((elem,index)=>{
+												  				return(
+												  					<option value={elem._id} key={index}>
+												  						{elem.collage}
+												  					</option>
+												  				);
+												  			})
+												  			
+												  		:
+												  			null
+												  	}
+											</select>*/}
+											<PlacesAutocomplete
+		                                        value={this.state.addressLine1}
+		                                        onChange={this.handleChangePlaces}
+		                                        onSelect={this.handleSelect}
+		                                        searchOptions={searchOptions}
+		                                      	>
+		                                        {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+		                                          <div className="candidatePlaceHolderWrappper">
+		                                            <input
+		                                              {...getInputProps({
+		                                                placeholder: 'Search Address ...',
+		                                                className: 'location-search-input form-control inputBox',
+		                                                id:"addressLine1",
+		                                                name:"addressLine1",
+		                                              })}
+		                                            />
+		                                            <div className={this.state.addressLine1 
+		                                            				? 
+		                                            				"autocomplete-dropdown-container SearchListContainer SearchListContainer2 inputSearch" 
+		                                            				: 
+		                                            				""}>
+		                                              {loading && <div>Loading...</div>}
+		                                              {suggestions.map(suggestion => {
+		                                                const className = suggestion.active
+		                                                  ? 'suggestion-item--active'
+		                                                  : 'suggestion-item';
+		                                                // inline style for demonstration purpose
+		                                                const style = suggestion.active
+		                                                  ? { backgroundColor: '#f5a721', cursor: 'pointer' }
+		                                                  : { backgroundColor: '#242933', cursor: 'pointer'};
+		                                                return (
+		                                                  <div
+		                                                    {...getSuggestionItemProps(suggestion, {
+		                                                      className,
+		                                                      style,
+		                                                    })}
+		                                                  >
+		                                                    <span>{suggestion.description}</span>
+		                                                  </div>
+		                                                );
+		                                              })}
+		                                            </div>
+		                                          </div>
+		                                        )}
+		                                      </PlacesAutocomplete>
+										</div> 
+										<span id="collegeError" className="errorMsg"></span>
+									</div>
+									<div className="col-md">
+										<label htmlFor="mode" className="nameTitleForm">
+											Mode
+											<sup className="nameTitleFormStar">*</sup>
+										</label>
+										<div className="input-group ">
+											<span className="input-group-addon inputBoxIcon">
+												<FontAwesomeIcon icon="adjust" />
+											</span> 
+											<select className="form-control inputBox" id="mode" 
+											 value={this.state.mode} name="mode" 
+											 onChange={this.handleChange.bind(this)}>
+											  	<option > -- select -- </option>
+											  	{
+											  		this.state.inputMode.length > 0
+											  		?	
+											  			this.state.inputMode.map((elem,index)=>{
+											  				return(
+											  					<option value={elem._id} key={index}>
+											  						{elem}
+											  					</option>
+											  				);
+											  			})
+											  			
+											  		:
+											  			null
+											  	}
+											</select>
+										</div>
+										<span id="modeError" className="errorMsg"></span>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div className="row ">
+							<div className="col-sm-12">
+								<div className="row formWrapper">
+									<div className="col-md">
+										<label htmlFor="city" className="nameTitleForm">
+											City
+											<sup className="nameTitleFormStar">*</sup>
+										</label>
+										<div className="input-group ">
+											<span className="input-group-addon inputBoxIcon">
+												<FontAwesomeIcon icon="city" /> 
+											</span> 
+											<input type="text" name="city" id="city" 
+											 className="form-control inputBox" value={this.state.city} 
+											 onChange={this.handleChange.bind(this)} />
+										</div>
+										<span id="cityError" className="errorMsg"></span>
+									</div>
 									
-									<select id="states" className="form-control inputBox selectOption"
-										ref="states" value={this.state.states} name="states" onChange={this.handleChangeState} >
-										<option selected={true}>-- Select --</option>
-										{
-											this.state.stateArray && this.state.stateArray.length > 0 ?
-												this.state.stateArray.map((stateData, index) => {
-													return (
-														<option key={index} statecode={stateData.stateCode}>{this.camelCase(stateData.stateName)}</option>
-													);
+
+									<div className="col-md">
+										<label htmlFor="state" className="nameTitleForm">
+											State
+											<sup className="nameTitleFormStar">*</sup>
+										</label>
+										<div className="input-group ">
+											<span className="input-group-addon inputBoxIcon">
+												<i className="fa fa-map"></i>
+											</span> 
+											
+											<select id="states" className="form-control inputBox selectOption"
+												ref="states" value={this.state.states} name="states" onChange={this.handleChangeState} >
+												<option selected={true}>-- Select --</option>
+												{
+													this.state.stateArray && this.state.stateArray.length > 0 ?
+														this.state.stateArray.map((stateData, index) => {
+															return (
+																<option key={index} statecode={stateData.stateCode}>{this.camelCase(stateData.stateName)}</option>
+															);
+														}
+														) : ''
 												}
-												) : ''
-										}
-									</select>
-								</div> 
-								<span id="stateError" className="errorMsg"></span>
-							</div>
-							<div className="col-lg-4">
-								<label htmlFor="country" className="nameTitleForm">
-									Country
-									<sup className="nameTitleFormStar">*</sup>
-								</label>
-								<div className="input-group ">
-									<span className="input-group-addon inputBoxIcon">
-										<i className="fa fa-flag"></i> 
-									</span> 
-									<input type="text" name="country" id="country" 
-									 className="form-control inputBox" 
-									 value={this.state.country} 
-									 onChange={this.handleChange.bind(this)} />
-								</div> 
-								<span id="countryError" className="errorMsg"></span>
-							</div>
+											</select>
+										</div> 
+										<span id="stateError" className="errorMsg"></span>
+									</div>
+									<div className="col-md">
+										<label htmlFor="country" className="nameTitleForm">
+											Country
+											<sup className="nameTitleFormStar">*</sup>
+										</label>
+										<div className="input-group ">
+											<span className="input-group-addon inputBoxIcon">
+												<i className="fa fa-flag"></i> 
+											</span> 
+											<input type="text" name="country" id="country" 
+											 className="form-control inputBox" 
+											 value={this.state.country} 
+											 onChange={this.handleChange.bind(this)} />
+										</div> 
+										<span id="countryError" className="errorMsg"></span>
+									</div>
+								</div>	
+							</div>	
 						</div>	
 						<div className="row">
 							<div className="col-lg-12">

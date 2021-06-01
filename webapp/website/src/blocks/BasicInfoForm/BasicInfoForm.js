@@ -701,44 +701,111 @@ class BasicInfoForm extends Component{
 		const delimiters = [KeyCodes.comma, KeyCodes.enter];
 		return(
 
-				<div className="col-lg-12 pageWrapper">
-					<form className="mainForm">
+				<div className="col-12 pageWrapper candidateProfileSteps">
+					<form className="col-12  mainForm">
 
-						<div className="row formWrapper">
+						<div className="row justify-content-sm-center">
+							<div className="col-lg-8 col-12 order-12 order-lg-1">
+								<div className="row formWrapper">
+									<div className="col-sm ">
+										<label htmlFor="firstName" className="nameTitleForm">
+										 	First Name
+										    <sup className="nameTitleFormStar">*</sup>
+										</label>
+										<div className="input-group ">
+											<span className="input-group-addon inputBoxIcon">
+												<i className="fa fa-user-circle"></i> 
+											</span> 
+											<input type="text" name="firstName" id="firstName" 
+											 className="form-control inputBox" value={this.state.firstName} 
+											 onChange={this.handleChange.bind(this)}/>
+										</div> 
+										<span id="firstNameError" className="errorMsg"></span>
+									</div>
 
-							<div className="col-lg-4">
-								<label htmlFor="firstName" className="nameTitleForm">
-								 	First Name
-								    <sup className="nameTitleFormStar">*</sup>
-								</label>
-								<div className="input-group ">
-									<span className="input-group-addon inputBoxIcon">
-										<i className="fa fa-user-circle"></i> 
-									</span> 
-									<input type="text" name="firstName" id="firstName" 
-									 className="form-control inputBox" value={this.state.firstName} 
-									 onChange={this.handleChange.bind(this)}/>
-								</div> 
-								<span id="firstNameError" className="errorMsg"></span>
-							</div>
-
-							<div className="col-lg-4">
-								<label htmlFor="middleName" className="nameTitleForm">
-									Middle Name <sup className="nameTitleFormStar">*</sup>
-								</label>
-								<div className="input-group ">
-									<span className="input-group-addon inputBoxIcon">
-										<i className="fa fa-user-circle"></i> 
-									</span> 
-									<input type="text" name="middleName" id="middleName" 
-									 className="form-control inputBox" value={this.state.middleName} 
-									 onChange={this.handleChange.bind(this)} />
-								</div> 
-								<span id="middleNameError" className="errorMsg"></span>
-							</div>
-
+									<div className="col-sm xs-margin">
+										<label htmlFor="middleName" className="nameTitleForm">
+											Middle Name <sup className="nameTitleFormStar">*</sup>
+										</label>
+										<div className="input-group ">
+											<span className="input-group-addon inputBoxIcon">
+												<i className="fa fa-user-circle"></i> 
+											</span> 
+											<input type="text" name="middleName" id="middleName" 
+											 className="form-control inputBox" value={this.state.middleName} 
+											 onChange={this.handleChange.bind(this)} />
+										</div> 
+										<span id="middleNameError" className="errorMsg"></span>
+									</div>
+								</div>
+								<div className="row formWrapper">
+									<div className="col-sm ">
+										<label htmlFor="lastName" className="nameTitleForm">
+											Last Name <sup className="nameTitleFormStar">*</sup>
+										</label>
+										<div className="input-group ">
+											<span className="input-group-addon inputBoxIcon">
+												<i className="fa fa-user-circle"></i> 
+											</span> 
+											<input type="text" name="lastName" id="lastName" 
+											 className="form-control inputBox" value={this.state.lastName}
+											 onChange={this.handleChange.bind(this)} />
+										</div> 
+										<span id="lastNameError" className="errorMsg"></span>
+									</div>
 							
-							<div className="col-lg-4 ">
+									<div className="col-sm xs-margin">
+										<label htmlFor="email" className="nameTitleForm">
+											Personal Mail ID
+											<sup className="nameTitleFormStar">*</sup>
+										</label>
+										<div className="input-group ">
+											<span className="input-group-addon inputBoxIcon">
+												<i className="fa fa-envelope-o"></i> 
+											</span> 
+											<input type="email" name="email" id="email" 
+											 className="form-control email inputBox" value={this.state.email} 
+											 onChange={this.handleChange.bind(this)} />
+										</div> 
+										<span id="emailError" className="errorMsg"></span>
+									</div>
+								</div>
+								<div className="row formWrapper">
+									<div className="col-sm ">
+										<label htmlFor="mobile" className="nameTitleForm">
+											Mobile Number
+											<sup className="nameTitleFormStar">*</sup>
+										</label>
+										<PhoneInput 
+											country   = {'in'}
+											id        ="mobile" 
+											className ="input-group-addon form-control inputBox" 
+											value     ={this.state.mobile} 
+											onChange  = {mobile => this.setState({ mobile })}
+										 />
+									
+										<span id="mobileError" className="errorMsg"></span>
+									</div>
+
+									<div className="col-sm xs-margin">
+										<label htmlFor="alternate" className="nameTitleForm">
+											Alternate Mobile Number
+										</label>
+										<PhoneInput 
+											country   = {'in'}
+											id        ="alternate" 
+											className ="input-group-addon form-control inputBox" 
+											value     ={this.state.alternate} 
+											onChange  = {alternate => this.setState({ alternate })}
+										 />
+										
+										<span id="alternateError" className="errorMsg"></span>
+									</div>
+
+								</div>
+							</div>
+			
+							<div className="col-lg-4 col-sm-6 col-12 order-1  formWrapper">
 								<label htmlFor="profilePicture" className="nameTitleForm">
 									Profile Picture
 								</label>
@@ -746,7 +813,7 @@ class BasicInfoForm extends Component{
 									{
 										this.state.profileImageUrl!== ""
 										?	
-											<div className="profileImageWrapper col-lg-12">
+											<div className="profileImageWrapper col-md-12">
 												<div className="row">
 													<i className="fa fa-times delImgIcon" 
 													   onClick={this.delImgPreview.bind(this)}>
@@ -767,275 +834,217 @@ class BasicInfoForm extends Component{
 								</div>
 							</div>
 						</div>
-						<div className="row formWrapper">
-							<div className="col-lg-4">
-								<label htmlFor="lastName" className="nameTitleForm">
-									Last Name <sup className="nameTitleFormStar">*</sup>
-								</label>
-								<div className="input-group ">
-									<span className="input-group-addon inputBoxIcon">
-										<i className="fa fa-user-circle"></i> 
-									</span> 
-									<input type="text" name="lastName" id="lastName" 
-									 className="form-control inputBox" value={this.state.lastName}
-									 onChange={this.handleChange.bind(this)} />
-								</div> 
-								<span id="lastNameError" className="errorMsg"></span>
-							</div>
-							
-							<div className="col-lg-4">
-								<label htmlFor="email" className="nameTitleForm">
-									Personal Mail ID
-									<sup className="nameTitleFormStar">*</sup>
-								</label>
-								<div className="input-group ">
-									<span className="input-group-addon inputBoxIcon">
-										<i className="fa fa-envelope-o"></i> 
-									</span> 
-									<input type="email" name="email" id="email" 
-									 className="form-control email inputBox" value={this.state.email} 
-									 onChange={this.handleChange.bind(this)} />
-								</div> 
-								<span id="emailError" className="errorMsg"></span>
-							</div>
-						</div>
-						<div className="row formWrapper">
-							<div className="col-lg-4">
-								<label htmlFor="mobile" className="nameTitleForm">
-									Mobile Number
-									<sup className="nameTitleFormStar">*</sup>
-								</label>
-								<PhoneInput 
-									country   = {'in'}
-									id        ="mobile" 
-									className ="input-group-addon form-control inputBox" 
-									value     ={this.state.mobile} 
-									onChange  = {mobile => this.setState({ mobile })}
-								 />
-							
-								<span id="mobileError" className="errorMsg"></span>
-							</div>
-
-							<div className="col-lg-4">
-								<label htmlFor="alternate" className="nameTitleForm">
-									Alternate Mobile Number
-								</label>
-								<PhoneInput 
-									country   = {'in'}
-									id        ="alternate" 
-									className ="input-group-addon form-control inputBox" 
-									value     ={this.state.alternate} 
-									onChange  = {alternate => this.setState({ alternate })}
-								 />
-								
-								<span id="alternateError" className="errorMsg"></span>
-							</div>
-
-						</div>
-						<div className="row formWrapper">
-							
-							<div className="col-lg-4">
-								<label htmlFor="dob" className="nameTitleForm">
-									Date Of Birth
-									<sup className="nameTitleFormStar">*</sup>
-								</label>
-								<div className="input-group ">
-									<span className="input-group-addon inputBoxIcon">
-										<i className="fa fa-birthday-cake"></i>
-									</span> 
-									<input type="date" name="dob" id="dob" 
-									 className="form-control inputBox unstyled date" 
-									 value={this.state.dob} max={Moment(new Date()).format("YYYY-MM-DD")}
-									 onChange={this.handleChange.bind(this)} />
-									 <div className="dateLine"></div>
-								</div> 
-								<span id="dobError" className="errorMsg"></span>
-							</div>
-
-							<div className="col-lg-4">
-								<label htmlFor="maritalStatus" className="nameTitleForm">
-									Marital Status
-								</label>
-								<div className="input-group ">
-									<span className="input-group-addon inputBoxIcon inputBoxIcon1">
-										<FontAwesomeIcon icon="ring" />
-									</span> 
-									<select required className="form-control inputBox selectOption" 
-									  id="maritalStatus" value={this.state.maritalStatus}
-									  name="maritalStatus" placeholder="-- Select --" onChange={this.handleChange.bind(this)}>
-									  	<option > -- Select -- </option>
-									  	{
-									  		this.state.inputMaritalStatus.length>0
-									  		?	
-									  			this.state.inputMaritalStatus.map((elem,index)=>{
-									  				return(
-									  					<option value={elem._id} key={index}>
-									  						{elem}
-									  					</option>
-									  				);
-									  			})
-									  			
-									  		:
-									  			null
-									  	}
-									</select>
-
-								</div>
-							</div>
-							<div className="col-lg-4">
-								<label htmlFor = "nationality" className = "nameTitleForm" > 
-									Nationality 
-									<sup className = "nameTitleFormStar"> * </sup>
-								</label>
-								<div className="input-group ">
-									<span className="input-group-addon inputBoxIcon">
-										<i className="fa fa-flag-o"></i>
-									</span> 
-									<select required className="form-control inputBox selectOption" id = "nationality" 
-									 value ={this.state.nationality} name="nationality" 
-									 onChange={this.handleChange.bind(this)}>
-									  	<option  > -- Select -- </option>
-									  	{
-									  		this.state.inputNationality.length>0
-									  		?	
-									  			this.state.inputNationality.map((elem,index)=>{
-									  				return(
-									  					<option value={elem._id} key={index}>
-									  					 	{elem}
-									  					</option>
-									  				);
-									  			})
-									  			
-									  		:
-									  			null
-									  	}
-									</select>
-
-								</div>
-								<span id="nationalityError" className="errorMsg"></span>
-							</div>
-						</div>
-						<div className="row formWrapper">
-							<div className="col-lg-4">
-								<label htmlFor="gender" className="nameTitleForm ">
-									Gender
-								</label>
-								<div className="input-group genderFeildWrapper">
-									<div className={this.state.gender==="male"
-													? 
-													"genderFeild col-lg-4 genderFeildActive" 
-													: 
-													"genderFeild col-lg-4" }  
-										 id="male" name="gender" 
-										 onClick={this.setGender.bind(this)}>
-
-										<div className="row" >
-											Male
-										</div>
-									</div>
-									<div className={this.state.gender==="female"
-									                ? "genderFeild col-lg-4 genderFeildActive" 
-									                : "genderFeild col-lg-4" } 
-									     id="female" name="gender" 
-									     onClick={this.setGender.bind(this)}>
-
-										<div className="row">
-											Female
-										</div>
-									</div>
-									<div className={this.state.gender==="transgender"
-									                ? "genderFeild col-lg-4 genderFeildActive" 
-									                : "genderFeild col-lg-4" } 
-									     id="transgender" name="gender" 
-									     onClick={this.setGender.bind(this)}>
-
-										<div className="row">
-											Transgender
-										</div>
-									</div>		
-									
-								</div>
-							</div>
-							<div className="col-lg-2">
-								<label htmlFor="passport" className="nameTitleForm passportFont">
-									Do You Have Passport?
-								</label>
-								<div className="input-group genderFeildWrapper">
-									<div className={this.state.passport==="Yes"
-														? 
-														"genderFeild col-lg-6 genderFeildActive" 
-														: 
-														"genderFeild col-lg-6" }  
-											 id="Yes" name="passport" 
-											 onClick={this.passport.bind(this)}>
-
-											<div className="row" >
-												Yes
-											</div>
-									</div>
-									<div className={this.state.passport==="No"
-									                ? "genderFeild col-lg-6 genderFeildActive" 
-									                : "genderFeild col-lg-6" } 
-									     id="No" name="passport" 
-									     onClick={this.passport.bind(this)}>
-
-										<div className="row">
-											No
-										</div>
-									</div>
-								</div>
-							</div> 
-							<div className="col-lg-2">
-								<label htmlFor="visa" className="nameTitleForm passportFont">
-									Do You Have Visa?
-								</label>
-								<div className="input-group genderFeildWrapper">
-									<div className={this.state.visa==="Yes"
-														? 
-														"genderFeild col-lg-6 genderFeildActive" 
-														: 
-														"genderFeild col-lg-6" }  
-											 id="Yes" name="visa" 
-											 onClick={this.visa.bind(this)}>
-
-											<div className="row" >
-												Yes
-											</div>
-									</div>
-									<div className={this.state.visa==="No"
-									                ? "genderFeild col-lg-6 genderFeildActive" 
-									                : "genderFeild col-lg-6" } 
-									     id="No" name="visa" 
-									     onClick={this.visa.bind(this)}>
-
-										<div className="row">
-											No
-										</div>
-									</div>
-								</div>
-							</div> 
-							{
-								this.state.countryShow ? 
-									<div className="col-lg-4 country">
-										<label htmlFor="country" className="nameTitleForm">
-											Country
+						
+						<div className="row">
+							<div className="col-12">
+								<div className="row formWrapper">	
+									<div className="col-lg-4 col-sm-6 ">
+										<label htmlFor="dob" className="nameTitleForm">
+											Date Of Birth
+											<sup className="nameTitleFormStar">*</sup>
 										</label>
 										<div className="input-group ">
 											<span className="input-group-addon inputBoxIcon">
-												<i className="fa fa-flag"></i> 
+												<i className="fa fa-birthday-cake"></i>
 											</span> 
-											<input type="text" name="country" id="country" 
-											 className="form-control inputBox" 
-											 value={this.state.country} 
+											<input type="date" name="dob" id="dob" 
+											 className="form-control inputBox unstyled date" 
+											 value={this.state.dob} max={Moment(new Date()).format("YYYY-MM-DD")}
 											 onChange={this.handleChange.bind(this)} />
+											 <div className="dateLine"></div>
 										</div> 
+										<span id="dobError" className="errorMsg"></span>
 									</div>
-								:
-								null
-							}
+
+									<div className="col-lg-4 col-sm-6  xs-margin">
+										<label htmlFor="maritalStatus" className="nameTitleForm">
+											Marital Status
+										</label>
+										<div className="input-group ">
+											<span className="input-group-addon inputBoxIcon inputBoxIcon1">
+												<FontAwesomeIcon icon="ring" />
+											</span> 
+											<select required className="form-control inputBox selectOption" 
+											  id="maritalStatus" value={this.state.maritalStatus}
+											  name="maritalStatus" placeholder="-- Select --" onChange={this.handleChange.bind(this)}>
+											  	<option > -- Select -- </option>
+											  	{
+											  		this.state.inputMaritalStatus.length>0
+											  		?	
+											  			this.state.inputMaritalStatus.map((elem,index)=>{
+											  				return(
+											  					<option value={elem._id} key={index}>
+											  						{elem}
+											  					</option>
+											  				);
+											  			})
+											  			
+											  		:
+											  			null
+											  	}
+											</select>
+
+										</div>
+									</div>
+									<div className="col-lg-4 col-sm-6  xs-margin sm-margin">
+										<label htmlFor = "nationality" className = "nameTitleForm" > 
+											Nationality 
+											<sup className = "nameTitleFormStar"> * </sup>
+										</label>
+										<div className="input-group ">
+											<span className="input-group-addon inputBoxIcon">
+												<i className="fa fa-flag-o"></i>
+											</span> 
+											<select required className="form-control inputBox selectOption" id = "nationality" 
+											 value ={this.state.nationality} name="nationality" 
+											 onChange={this.handleChange.bind(this)}>
+											  	<option  > -- Select -- </option>
+											  	{
+											  		this.state.inputNationality.length>0
+											  		?	
+											  			this.state.inputNationality.map((elem,index)=>{
+											  				return(
+											  					<option value={elem._id} key={index}>
+											  					 	{elem}
+											  					</option>
+											  				);
+											  			})
+											  			
+											  		:
+											  			null
+											  	}
+											</select>
+
+										</div>
+										<span id="nationalityError" className="errorMsg"></span>
+									</div>
+									<div className="col-lg-4 col-sm-6 col-12 xs-margin md-margin sm-margin">
+										<label htmlFor="gender" className="nameTitleForm ">
+											Gender
+										</label>
+										<div className="input-group genderFeildWrapper text-center">
+											<div className={this.state.gender==="male"
+															? 
+															"genderFeild  col-4 genderFeildActive" 
+															: 
+															"genderFeild  col-4" }  
+												 id="male" name="gender" 
+												 onClick={this.setGender.bind(this)}>
+
+												<div className="" >
+													Male
+												</div>
+											</div>
+											<div className={this.state.gender==="female"
+											                ? "genderFeild  col-4 genderFeildActive" 
+											                : "genderFeild  col-4" } 
+											     id="female" name="gender" 
+											     onClick={this.setGender.bind(this)}>
+
+												<div className="">
+													Female
+												</div>
+											</div>
+											<div className={this.state.gender==="transgender"
+											                ? "genderFeild  col-4 genderFeildActive" 
+											                : "genderFeild  col-4" } 
+											     id="transgender" name="gender" 
+											     onClick={this.setGender.bind(this)}>
+
+												<div className="">
+													Transgender
+												</div>
+											</div>		
+											
+										</div>
+									</div>
+									<div className="col-lg-4 col-sm-6 candidateVisaWrapper xs-margin md-margin sm-margin">
+										<div className="row">
+											<div className="col-sm">
+												<label htmlFor="passport" className="nameTitleForm passportFont">
+													Do You Have Passport?
+												</label>
+												<div className="input-group genderFeildWrapper">
+													<div className={this.state.passport==="Yes"
+																		? 
+																		"genderFeild  col-6 genderFeildActive" 
+																		: 
+																		"genderFeild  col-6" }  
+															 id="Yes" name="passport" 
+															 onClick={this.passport.bind(this)}>
+
+															<div className="" >
+																Yes
+															</div>
+													</div>
+													<div className={this.state.passport==="No"
+													                ? "genderFeild  col-6 genderFeildActive" 
+													                : "genderFeild  col-6" } 
+													     id="No" name="passport" 
+													     onClick={this.passport.bind(this)}>
+
+														<div className="">
+															No
+														</div>
+													</div>
+												</div>
+											</div> 
+											<div className="col-sm xs-margin ">
+												<label htmlFor="visa" className="nameTitleForm passportFont">
+													Do You Have Visa?
+												</label>
+												<div className="input-group genderFeildWrapper">
+													<div className={this.state.visa==="Yes"
+																		? 
+																		"genderFeild  col-6 genderFeildActive" 
+																		: 
+																		"genderFeild  col-6" }  
+															 id="Yes" name="visa" 
+															 onClick={this.visa.bind(this)}>
+
+															<div className="" >
+																Yes
+															</div>
+													</div>
+													<div className={this.state.visa==="No"
+													                ? "genderFeild  col-6 genderFeildActive" 
+													                : "genderFeild  col-6" } 
+													     id="No" name="visa" 
+													     onClick={this.visa.bind(this)}>
+
+														<div className="">
+															No
+														</div>
+													</div>
+												</div>
+											</div> 
+										</div> 
+									</div> 
+									{
+										this.state.countryShow ? 
+											<div className="col-lg-4 col-sm-6 country xs-margin md-margin sm-margin">
+												<label htmlFor="country" className="nameTitleForm">
+													Country
+												</label>
+												<div className="input-group ">
+													<span className="input-group-addon inputBoxIcon">
+														<i className="fa fa-flag"></i> 
+													</span> 
+													<input type="text" name="country" id="country" 
+													 className="form-control inputBox" 
+													 value={this.state.country} 
+													 onChange={this.handleChange.bind(this)} />
+												</div> 
+											</div>
+										:
+										null
+									}
+								</div>
+							</div>
 						</div>
+						
 						<div className="row formWrapper">
-							<div className="col-lg-12">
+							<div className="col-12">
 								<label htmlFor="languages" className="nameTitleForm">
 									Languages Spoken
 								</label>
@@ -1057,7 +1066,7 @@ class BasicInfoForm extends Component{
 							</div>
 						</div>
 						<div className="row formWrapper">
-							<div className="col-lg-12">
+							<div className="col-sm-12">
 								<label htmlFor="executiveSummary" className="nameTitleForm">
 									Executive Summary <sup className="nameTitleFormStar">*</sup>
 								</label>
@@ -1077,10 +1086,10 @@ class BasicInfoForm extends Component{
 						</div>
 						<hr className="basicInfoHr"/>
 						<div className="row formWrapper">
-							<div className="BasicInfoTitle attachedDocument">
+							<div className="col-sm-12 BasicInfoTitle attachedDocument">
 								Attached Document
 							</div>
-							<div className="col-lg-4 ">
+							<div className="col-lg-2 col-sm-4 ">
 								<label htmlFor="profilePicture" className="nameTitleForm">
 									Resume
 								</label>
@@ -1088,7 +1097,7 @@ class BasicInfoForm extends Component{
 									{
 										this.state.resumeUrl!== ""
 										?	
-											<div className="profileImageWrapper2 col-lg-12">
+											<div className="profileImageWrapper2">
 												<div className="row">
 													<i className="fa fa-times delResumeIcon" 
 													   onClick={this.delResumePreview.bind(this)}>

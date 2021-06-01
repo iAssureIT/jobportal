@@ -9,7 +9,6 @@
 }
 .progressBar{
 	display:flex;
-	align-items:flex-end;
 	color:#999;
 }
 .step{
@@ -61,6 +60,7 @@
 
 
 .progressBar2{
+	height: 20px;
 	margin-top:25px;
 	border:1px solid var(--main-border-color);
 	background-color:var(--main-bg-color)!important;
@@ -86,8 +86,70 @@
 .step a{
 	color:#999!important;
 }
+
 @media (min-width:1400px){
 	.bullet::after{
 		width: 220px;
+	}
+}
+@media (min-width: 1140px) and (max-width: 1245px){
+	.bullet::after {
+	    width: 180px;
+	}
+}
+@media (min-width: 1040px) and (max-width: 1140px){
+	.bullet::after {
+	    width: 161px;
+	}
+}
+@media (min-width: 992px) and (max-width: 1040px){
+	.bullet::after {
+	    width: 155px;
+	}
+}
+@media(min-width:868px) and (max-width:992px){
+    .bullet::after{
+		width: 134px;
+	}
+}
+@media(min-width:768px) and (max-width:868px){
+    .bullet::after{
+		width: 117px;
+	}
+}
+@media(min-width:660px) and (max-width:768px){
+    .bullet::after{
+		width: 131px;
+	}
+	.progressBar,.progressbarOuterWrapper{
+		padding-left: 0px;
+		padding-right: 0px;
+	}
+}
+@media(min-width:576px) and (max-width:660px){
+    .bullet::after{
+		width: 110px;
+	}
+	.progressBar,.progressbarOuterWrapper{
+		padding-left: 0px;
+		padding-right: 0px;
+	}
+}
+@media(min-width:470px) and (max-width:576px){
+    .bullet::after{
+		width: 94px;
+	}
+	.progressBar,.progressbarOuterWrapper{
+		padding-left: 0px;
+		padding-right: 0px;
+	}
+}
+@media(max-width:470px){
+	.bullet::after{
+		width: 68px;
+	}
+	.progressBar,.progressbarOuterWrapper{
+		padding-left: 0px;
+		padding-right: 0px;
 	}
 }

@@ -12,10 +12,12 @@ class CandidateCertification extends Component{
 					<div className="row">
 						<ProgressBar width="75" left="73" img="37" />
 					</div>
-					<div className="basicInfoWrapper row">
-						<div className=" col-lg-8 col-lg-offset-2 BasicInfoBlock">
-							<TitleLayout title="Skills & Certification"  pageNumber="4"/>
-							<Certification/>
+					<div className="basicInfoWrapper row justify-content-md-center">
+						<div className=" col-md-8  BasicInfoBlock">
+							<div className="row">
+								<TitleLayout title="Skills & Certification"  pageNumber="4"/>
+								<Certification/>
+							</div>
 						</div>
 					</div>
 				</div>

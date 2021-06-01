@@ -9,7 +9,7 @@ import ReactHTMLTableToExcel from 'react-html-table-to-excel';
 import './IAssureTable.css';
 import './print.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/js/modal.js';
+import 'bootstrap/js/dist/modal.js';
 var sum = 0;
 class IAssureTable extends Component { 
 	constructor(props) {

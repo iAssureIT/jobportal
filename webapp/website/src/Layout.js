@@ -49,6 +49,7 @@ class Layout extends Component  {
             sidebar: true,
             empProfileStatus: true,
             stateArray:[],
+            
              
         }
     }
@@ -104,9 +105,9 @@ class Layout extends Component  {
                        
                                 <div className="container-fluid main-container">
                                     <div className="row">
-                                        <div className="dashboardWrapper" >
-                                            <div className="backColor col-lg-12 col-md-12 col-sm-12 col-xs-12" >
-                                                <div className="row">
+                                        <div className="dashboardWrapper col-12" >
+                                            <div className="backColor  row" >
+                                                <div className="col-12 ">
                                               {/*  <CoreLayout />*/}
                                         <Switch >
                                             <Route path="/login" exact strict component={Login} />

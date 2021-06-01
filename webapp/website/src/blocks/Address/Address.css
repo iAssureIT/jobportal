@@ -250,3 +250,6 @@
 .rightIconHideDel:hover{
 	color: var(--red-button-color)!important;
 }
+.candidatePlaceHolderWrappper{
+	width: 84%;
+}

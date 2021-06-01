@@ -945,540 +945,571 @@ class Experience extends Component {
   //========== Validation End ==================
   render() {
     return (
-      <div className="col-lg-12">
-        <form>
-          <div className="row fresherWrapper">
-             <div className="col-lg-4 col-lg-offset-4">
-                  <div className=" input-group genderFeildWrapper ">
-                      <div
-                        className={
-                          this.state.working === "fresher"
-                            ? "genderFeild col-lg-6 genderFeildActive"
-                            : "genderFeild col-lg-6"
-                        }
-                        id="fresher"
-                        name="working"
-                        onClick={this.handleChangeFresher.bind(this)}
-                      >
-                        <div className="row">Fresher</div>
-                      </div>
-                      <div
-                        className={
-                          this.state.working === "experienced"
-                            ? "genderFeild col-lg-6 genderFeildActive"
-                            : "genderFeild col-lg-6"
-                        }
-                        id="experienced"
-                        name="working"
-                        onClick={this.handleChangeFresher.bind(this)}
-                      >
-                        <div className="row">Experienced</div>
-                      </div>
-                  </div>
+      <div className="col-md-12 pageWrapper candidateProfileSteps ">
+          <form className="col-md-12  mainForm">
+              <div className="row ">
+                  <div className="col-sm-12">
+                    <div className="row fresherWrapper justify-content-md-center">
+                       <div className="col-md-4 ">
+                            <div className=" input-group genderFeildWrapper ">
+                                <div
+                                  className={
+                                    this.state.working === "fresher"
+                                      ? "genderFeild col-md-6 genderFeildActive"
+                                      : "genderFeild col-md-6"
+                                  }
+                                  id="fresher"
+                                  name="working"
+                                  onClick={this.handleChangeFresher.bind(this)}
+                                >
+                                  <div className="">Fresher</div>
+                                </div>
+                                <div
+                                  className={
+                                    this.state.working === "experienced"
+                                      ? "genderFeild col-md-6 genderFeildActive"
+                                      : "genderFeild col-md-6"
+                                  }
+                                  id="experienced"
+                                  name="working"
+                                  onClick={this.handleChangeFresher.bind(this)}
+                                >
+                                  <div className="">Experienced</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
               </div>
-          </div>
           {
             this.state.working==="experienced"
             ?
             <div className="">
-              <div className="row formWrapper">
-                <div className="col-lg-6">
-                  <label htmlFor="industry" className="nameTitleForm">
-                    {" "}
-                    Industry <span className="nameTitleFormStar">&#42;</span>{" "}
-                  </label>
-                  <div className="input-group">
-                    <span className="input-group-addon inputBoxIcon">
-                      <i className="fa fa-briefcase"></i>
-                    </span>
-                    <input
-                      type="text"
-                      list="industry"
-                      className="form-control inputBox"
-                      refs="industry"
-                      name="industry"
-                      id="selectIndustry"
-                      maxLength="100"
-                      value={this.state.industry}
-                      data-value={this.state.industry_id}
-                      onChange={this.onChangeIndustry.bind(this)}
-                    />
-                    <datalist
-                      name="industry"
-                      id="industry"
-                      className="industrylist"
-                    >
-                      {this.state.industrylist.map((item, key) => (
-                        <option
-                          key={key}
-                          value={item.industry}
-                          data-value={item._id}
-                        />
-                      ))}
-                    </datalist>
-                  </div>
-                  <span id="industryError" className="errorMsg"></span>
-                </div>
+              <div className="row ">
+                  <div className="col-sm-12">
+                    <div className="row formWrapper">
+                      <div className="col-sm">
+                        <label htmlFor="industry" className="nameTitleForm">
+                          {" "}
+                          Industry <span className="nameTitleFormStar">&#42;</span>{" "}
+                        </label>
+                        <div className="input-group">
+                          <span className="input-group-addon inputBoxIcon">
+                            <i className="fa fa-briefcase"></i>
+                          </span>
+                          <input
+                            type="text"
+                            list="industry"
+                            className="form-control inputBox"
+                            refs="industry"
+                            name="industry"
+                            id="selectIndustry"
+                            maxLength="100"
+                            value={this.state.industry}
+                            data-value={this.state.industry_id}
+                            onChange={this.onChangeIndustry.bind(this)}
+                          />
+                          <datalist
+                            name="industry"
+                            id="industry"
+                            className="industrylist"
+                          >
+                            {this.state.industrylist.map((item, key) => (
+                              <option
+                                key={key}
+                                value={item.industry}
+                                data-value={item._id}
+                              />
+                            ))}
+                          </datalist>
+                        </div>
+                        <span id="industryError" className="errorMsg"></span>
+                      </div>
 
-                <div className="col-lg-6">
-                  <label htmlFor="companyName" className="nameTitleForm">
-                    Company
-                    <sup className="nameTitleFormStar">*</sup>
-                  </label>
-                  <div className="input-group">
-                    <span className="input-group-addon inputBoxIcon">
-                      <i className="fa fa-briefcase"></i>
-                    </span>
-                    <input
-                      type="text"
-                      list="company"
-                      className="form-control inputBox"
-                      refs="industry"
-                      name="company"
-                      id="selectCompany"
-                      maxLength="100"
-                      value={this.state.company}
-                      data-value={this.state.company_id}
-                      onChange={this.onChangeCompany.bind(this)}
-                    />
-                    <datalist name="company" id="company" className="companylist">
-                      {this.state.companylist.map((item, key) => (
-                        <option
-                          key={key}
-                          value={item.companyName}
-                          data-value={item._id}
-                        />
-                      ))}
-                    </datalist>
-                  </div>
-                  <span id="companyNameError" className="errorMsg"></span>
-                </div>
-              </div>
-
-              <div className="row formWrapper">
-                <div className="col-lg-4">
-                  <label htmlFor="companyCity" className="nameTitleForm">
-                    City
-                    <sup className="nameTitleFormStar">*</sup>
-                  </label>
-                  <div className="input-group ">
-                    <span className="input-group-addon inputBoxIcon">
-                      <FontAwesomeIcon icon="city" />
-                    </span>
-                    <input
-                      type="text"
-                      list="companyCity"
-                      className="form-control inputBox"
-                      refs="industry"
-                      name="companyCity"
-                      id="selectCompanyCity"
-                      maxLength="100"
-                      value={this.state.companyCity}
-                      onChange={this.handleChangeCity.bind(this)}
-                    />
-                    <datalist
-                      name="companyCity"
-                      id="companyCity"
-                      className="companyCity"
-                    >
-                      {this.state.city.map((elem, key) => (
-                        <option
-                          key={key}
-                          value={elem.district}
-                          data-stateCode={elem.stateCode}
-                          data-state={elem.state}
-                          data-countryCode={elem.countryCode}
-                          data-country={elem.country}
-                        />
-                      ))}
-                    </datalist>
-                    {/*<select required className="form-control inputBox selectOption" 
-                      id="companyCity" value={this.state.companyCity}
-                      name="companyCity" placeholder="-- Select --" onChange={this.handleChangeCity.bind(this)}>
-                        <option > -- Select -- </option>
-                        {
-                          this.state.city.length>0
-                          ? 
-                            this.state.city.map((elem,index)=>{
-                              return(
-                                <option value={elem.district} key={index} 
-                                data-stateCode = {elem.stateCode} data-state={elem.state} data-countryCode = {elem.countryCode} data-country = {elem.country} >
-                                  {elem.district}
-                                </option>
-                              );
-                            })
-                            
-                          :
-                            null
-                        }
-                    </select>*/}
-                  </div>
-                  <span id="companyCityError" className="errorMsg"></span>
-                </div>
-
-                <div className="col-lg-4">
-                  <label htmlFor="companyState" className="nameTitleForm">
-                    State
-                    <sup className="nameTitleFormStar">*</sup>
-                  </label>
-                  <div className="input-group ">
-                    <span className="input-group-addon inputBoxIcon">
-                      <i className="fa fa-map"></i>
-                    </span>
-
-                    <select
-                      id="states"
-                      className="form-control inputBox selectOption"
-                      ref="companyState"
-                      value={this.state.companyState}
-                      name="companyState"
-                      onChange={this.handleChangeState}
-                    >
-                      <option selected={true}>-- Select --</option>
-                      {this.state.stateArray && this.state.stateArray.length > 0
-                        ? this.state.stateArray.map((stateData, index) => {
-                            return (
-                              <option key={index} statecode={stateData.stateCode}>
-                                {this.camelCase(stateData.stateName)}
-                              </option>
-                            );
-                          })
-                        : ""}
-                    </select>
-                  </div>
-                  <span id="stateError" className="errorMsg"></span>
-                </div>
-                <div className="col-lg-4">
-                  <label htmlFor="companyCountry" className="nameTitleForm">
-                    Country
-                    <sup className="nameTitleFormStar">*</sup>
-                  </label>
-                  <div className="input-group ">
-                    <span className="input-group-addon inputBoxIcon">
-                      <i className="fa fa-flag"></i>
-                    </span>
-                    <input
-                      type="text"
-                      name="companyCountry"
-                      id="companyCountry"
-                      className="form-control inputBox "
-                      value={this.state.companyCountry}
-                      onChange={this.handleChange.bind(this)}
-                    />
-                  </div>
-                  <span id="companyCountryError" className="errorMsg"></span>
-                </div>
-              </div>
-
-              <div className="row formWrapper">
-                <div className="col-lg-4">
-                  <label htmlFor="lastDesignation" className="nameTitleForm">
-                    Last Designation
-                    <sup className="nameTitleFormStar">*</sup>
-                  </label>
-                  <div className="input-group ">
-                    <span className="input-group-addon inputBoxIcon">
-                      <FontAwesomeIcon icon="id-card-alt" />
-                    </span>
-                    <input
-                      type="text"
-                      name="lastDesignation"
-                      id="lastDesignation"
-                      className="form-control inputBox"
-                      value={this.state.lastDesignation}
-                      onChange={this.handleChange.bind(this)}
-                    />
-                  </div>
-                  <span id="lastDesignationError" className="errorMsg"></span>
-                </div>
-
-                <div className="col-lg-4">
-                  <label htmlFor="lastDeartment" className="nameTitleForm">
-                    Last Department
-                    <sup className="nameTitleFormStar">*</sup>
-                  </label>
-                  <div className="input-group ">
-                    <span className="input-group-addon inputBoxIcon">
-                      <FontAwesomeIcon icon="network-wired" />
-                    </span>
-                    <input
-                      type="text"
-                      name="lastDeartment"
-                      id="lastDeartment"
-                      className="form-control inputBox"
-                      value={this.state.lastDeartment}
-                      onChange={this.handleChange.bind(this)}
-                    />
-                  </div>
-                  <span id="lastDeartmentError" className="errorMsg"></span>
-                </div>
-                <div className="col-lg-4">
-                  <label htmlFor="reportingManager" className="nameTitleForm">
-                    Reporting Manager
-                    <sup className="nameTitleFormStar">*</sup>
-                  </label>
-                  <div className="input-group ">
-                    <span className="input-group-addon inputBoxIcon">
-                      <i className="fa fa-user-circle"></i>
-                    </span>
-                    <input
-                      type="text"
-                      name="reportingManager"
-                      id="reportingManager"
-                      className="form-control inputBox"
-                      value={this.state.reportingManager}
-                      onChange={this.handleChange.bind(this)}
-                    />
-                  </div>
-                  <span id="reportingManagerError" className="errorMsg"></span>
-                </div>
-              </div>
-              <div className="row formWrapper">
-                <div className="col-lg-4">
-                  <label
-                    htmlFor="reportingManagerDesignation"
-                    className="nameTitleForm"
-                  >
-                    Reporting Manager Designation
-                    <sup className="nameTitleFormStar">*</sup>
-                  </label>
-                  <div className="input-group ">
-                    <span className="input-group-addon inputBoxIcon">
-                      <FontAwesomeIcon icon="id-card-alt" />
-                    </span>
-                    <input
-                      type="text"
-                      name="reportingManagerDesignation"
-                      id="reportingManagerDesignation"
-                      className="form-control inputBox"
-                      value={this.state.reportingManagerDesignation}
-                      onChange={this.handleChange.bind(this)}
-                    />
-                  </div>
-                  <span
-                    id="reportingManagerDesignationError"
-                    className="errorMsg"
-                  ></span>
-                </div>
-                <div className="col-lg-4">
-                  <label htmlFor="lastDeartment" className="nameTitleForm">
-                    Total Experience
-                    <sup className="nameTitleFormStar">*</sup>
-                  </label>
-                  <div className="input-group ">
-                    <span className="input-group-addon inputBoxIcon">
-                      <i className="fa fa-briefcase"></i>
-                    </span>
-                    <input
-                      type="number"
-                      name="totalExperience"
-                      id="totalExperience"
-                      className="form-control inputBox"
-                      value={this.state.totalExperience}
-                      onChange={this.handleChange.bind(this)}
-                    />
-                  </div>
-                  <span id="totalExperienceError" className="errorMsg"></span>
-                </div>
-                {/*<div className="col-lg-4">
-                  <label htmlFor="lastDeartment" className="nameTitleForm">
-                    Relevant Experience
-                    <sup className="nameTitleFormStar">*</sup>
-                  </label>
-                  <div className="input-group ">
-                    <span className="input-group-addon inputBoxIcon">
-                      <i className="fa fa-briefcase"></i>
-                    </span>
-                    <input
-                      type="number"
-                      name="relevantExperience"
-                      id="relevantExperience"
-                      className="form-control inputBox"
-                      value={this.state.relevantExperience}
-                      onChange={this.handleChange.bind(this)}
-                    />
-                  </div>
-                  <span id="relevantExperienceError" className="errorMsg"></span>
-                </div>*/}
-              </div>
-              <div className="row formWrapper">
-                <div className="col-lg-3 ">
-                  <label htmlFor="currentlyWorkingHere" className="nameTitleForm ">
-                    Currently Working here
-                  </label>
-                  {/*<div className="customCheckBox">
-                    <label  className="">
-                      <input type="checkbox" name="currentlyWorkingHere" id="currentlyWorkingHere"
-                      value={this.state.currentlyWorkingHere}  onChange={ this.handleChangeCheckbox.bind(this) } checked={this.state.currentlyWorkingHere} />
-                      <span className="checkmark"></span>
-                    </label>
-                  </div>*/}
-                  <div className="input-group genderFeildWrapper genderFeildWrapper2">
-                    <div
-                      className={
-                        this.state.currentlyWorkingHere === "Yes"
-                          ? "genderFeild col-lg-6 genderFeildActive"
-                          : "genderFeild col-lg-6"
-                      }
-                      id="Yes"
-                      name="currentlyWorkingHere"
-                      onClick={this.handleChangeCheckbox.bind(this)}
-                    >
-                      <div className="row">Yes</div>
-                    </div>
-                    <div
-                      className={
-                        this.state.currentlyWorkingHere === "No"
-                          ? "genderFeild col-lg-6 genderFeildActive"
-                          : "genderFeild col-lg-6"
-                      }
-                      id="No"
-                      name="currentlyWorkingHere"
-                      onClick={this.handleChangeCheckbox.bind(this)}
-                    >
-                      <div className="row">No</div>
+                      <div className="col-sm">
+                        <label htmlFor="companyName" className="nameTitleForm">
+                          Company
+                          <sup className="nameTitleFormStar">*</sup>
+                        </label>
+                        <div className="input-group">
+                          <span className="input-group-addon inputBoxIcon">
+                            <i className="fa fa-briefcase"></i>
+                          </span>
+                          <input
+                            type="text"
+                            list="company"
+                            className="form-control inputBox"
+                            refs="industry"
+                            name="company"
+                            id="selectCompany"
+                            maxLength="100"
+                            value={this.state.company}
+                            data-value={this.state.company_id}
+                            onChange={this.onChangeCompany.bind(this)}
+                          />
+                          <datalist name="company" id="company" className="companylist">
+                            {this.state.companylist.map((item, key) => (
+                              <option
+                                key={key}
+                                value={item.companyName}
+                                data-value={item._id}
+                              />
+                            ))}
+                          </datalist>
+                        </div>
+                        <span id="companyNameError" className="errorMsg"></span>
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div className="col-lg-3 experienceBoxWidth">
-                  <label htmlFor="fromDate" className="nameTitleForm">
-                    Working From
-                    <sup className="nameTitleFormStar">*</sup>
-                  </label>
-                  <div className="input-group ">
-                    <span className="input-group-addon inputBoxIcon">
-                      <i className="fa fa-calendar"></i>
-                    </span>
-                    <input
-                      type="month"
-                      name="fromDate"
-                      id="fromDate"
-                      className="form-control inputBox date"
-                      value={this.state.fromDate}
-                      onChange={this.handleChange.bind(this)}
-                    />
-                    <div className="dateLine1"></div>
-                  </div>
-                  <span id="fromDateError" className="errorMsg"></span>
-                </div>
+              </div>
 
-                <div className="col-lg-3 experienceBoxWidth">
-                  <label htmlFor="toDate" className="nameTitleForm">
-                    Worked Till
-                  </label>
-                  <div className="input-group ">
-                    <span className="input-group-addon inputBoxIcon">
-                      <i className="fa fa-calendar"></i>
-                    </span>
-                    <input
-                      type="month"
-                      name="toDate"
-                      id="toDate"
-                      className="form-control inputBox date"
-                      value={this.state.toDate}
-                      min={Moment(this.state.fromDate).format("YYYY-MM")}
-                      onChange={this.handleChange.bind(this)}
-                    />
-                    <div className="dateLine1"></div>
-                  </div>
-                  <span id="toDateError" className="errorMsg"></span>
-                </div>
+              <div className="row ">
+                  <div className="col-sm-12">
+                      <div className="row formWrapper">
+                        <div className="col-md">
+                          <label htmlFor="companyCity" className="nameTitleForm">
+                            City
+                            <sup className="nameTitleFormStar">*</sup>
+                          </label>
+                          <div className="input-group ">
+                            <span className="input-group-addon inputBoxIcon">
+                              <FontAwesomeIcon icon="city" />
+                            </span>
+                            <input
+                              type="text"
+                              list="companyCity"
+                              className="form-control inputBox"
+                              refs="industry"
+                              name="companyCity"
+                              id="selectCompanyCity"
+                              maxLength="100"
+                              value={this.state.companyCity}
+                              onChange={this.handleChangeCity.bind(this)}
+                            />
+                            <datalist
+                              name="companyCity"
+                              id="companyCity"
+                              className="companyCity"
+                            >
+                              {this.state.city.map((elem, key) => (
+                                <option
+                                  key={key}
+                                  value={elem.district}
+                                  data-stateCode={elem.stateCode}
+                                  data-state={elem.state}
+                                  data-countryCode={elem.countryCode}
+                                  data-country={elem.country}
+                                />
+                              ))}
+                            </datalist>
+                            {/*<select required className="form-control inputBox selectOption" 
+                              id="companyCity" value={this.state.companyCity}
+                              name="companyCity" placeholder="-- Select --" onChange={this.handleChangeCity.bind(this)}>
+                                <option > -- Select -- </option>
+                                {
+                                  this.state.city.length>0
+                                  ? 
+                                    this.state.city.map((elem,index)=>{
+                                      return(
+                                        <option value={elem.district} key={index} 
+                                        data-stateCode = {elem.stateCode} data-state={elem.state} data-countryCode = {elem.countryCode} data-country = {elem.country} >
+                                          {elem.district}
+                                        </option>
+                                      );
+                                    })
+                                    
+                                  :
+                                    null
+                                }
+                            </select>*/}
+                          </div>
+                          <span id="companyCityError" className="errorMsg"></span>
+                        </div>
 
-                <div className="col-lg-3">
-                  <label htmlFor="fromDate" className="nameTitleForm">
-                    Experience
-                  </label>
-                  <div className="input-group showFeild2" name="exp" id="exp">
-                    {this.state.expYears +
-                      "  Years, " +
-                      this.state.expMonths +
-                      " months"}
+                        <div className="col-md">
+                          <label htmlFor="companyState" className="nameTitleForm">
+                            State
+                            <sup className="nameTitleFormStar">*</sup>
+                          </label>
+                          <div className="input-group ">
+                            <span className="input-group-addon inputBoxIcon">
+                              <i className="fa fa-map"></i>
+                            </span>
+
+                            <select
+                              id="states"
+                              className="form-control inputBox selectOption"
+                              ref="companyState"
+                              value={this.state.companyState}
+                              name="companyState"
+                              onChange={this.handleChangeState}
+                            >
+                              <option selected={true}>-- Select --</option>
+                              {this.state.stateArray && this.state.stateArray.length > 0
+                                ? this.state.stateArray.map((stateData, index) => {
+                                    return (
+                                      <option key={index} statecode={stateData.stateCode}>
+                                        {this.camelCase(stateData.stateName)}
+                                      </option>
+                                    );
+                                  })
+                                : ""}
+                            </select>
+                          </div>
+                          <span id="stateError" className="errorMsg"></span>
+                        </div>
+                        <div className="col-md">
+                          <label htmlFor="companyCountry" className="nameTitleForm">
+                            Country
+                            <sup className="nameTitleFormStar">*</sup>
+                          </label>
+                          <div className="input-group ">
+                            <span className="input-group-addon inputBoxIcon">
+                              <i className="fa fa-flag"></i>
+                            </span>
+                            <input
+                              type="text"
+                              name="companyCountry"
+                              id="companyCountry"
+                              className="form-control inputBox "
+                              value={this.state.companyCountry}
+                              onChange={this.handleChange.bind(this)}
+                            />
+                          </div>
+                          <span id="companyCountryError" className="errorMsg"></span>
+                        </div>
+                      </div>
+                  </div>
+              </div>
+              <div className="row ">
+                <div className="col-sm-12">
+                    <div className="row formWrapper">
+                      <div className="col-md">
+                        <label htmlFor="lastDesignation" className="nameTitleForm">
+                          Last Designation
+                          <sup className="nameTitleFormStar">*</sup>
+                        </label>
+                        <div className="input-group ">
+                          <span className="input-group-addon inputBoxIcon">
+                            <FontAwesomeIcon icon="id-card-alt" />
+                          </span>
+                          <input
+                            type="text"
+                            name="lastDesignation"
+                            id="lastDesignation"
+                            className="form-control inputBox"
+                            value={this.state.lastDesignation}
+                            onChange={this.handleChange.bind(this)}
+                          />
+                        </div>
+                        <span id="lastDesignationError" className="errorMsg"></span>
+                      </div>
+
+                      <div className="col-md">
+                        <label htmlFor="lastDeartment" className="nameTitleForm">
+                          Last Department
+                          <sup className="nameTitleFormStar">*</sup>
+                        </label>
+                        <div className="input-group ">
+                          <span className="input-group-addon inputBoxIcon">
+                            <FontAwesomeIcon icon="network-wired" />
+                          </span>
+                          <input
+                            type="text"
+                            name="lastDeartment"
+                            id="lastDeartment"
+                            className="form-control inputBox"
+                            value={this.state.lastDeartment}
+                            onChange={this.handleChange.bind(this)}
+                          />
+                        </div>
+                        <span id="lastDeartmentError" className="errorMsg"></span>
+                      </div>
+                      <div className="col-md">
+                        <label htmlFor="reportingManager" className="nameTitleForm">
+                          Reporting Manager
+                          <sup className="nameTitleFormStar">*</sup>
+                        </label>
+                        <div className="input-group ">
+                          <span className="input-group-addon inputBoxIcon">
+                            <i className="fa fa-user-circle"></i>
+                          </span>
+                          <input
+                            type="text"
+                            name="reportingManager"
+                            id="reportingManager"
+                            className="form-control inputBox"
+                            value={this.state.reportingManager}
+                            onChange={this.handleChange.bind(this)}
+                          />
+                        </div>
+                        <span id="reportingManagerError" className="errorMsg"></span>
+                      </div>
+                    </div>
+                </div>
+              </div>
+              <div className="row ">
+                <div className="col-sm-12">
+                  <div className="row formWrapper">
+                    <div className="col-md-4">
+                      <label
+                        htmlFor="reportingManagerDesignation"
+                        className="nameTitleForm"
+                      >
+                        Reporting Manager Designation
+                        <sup className="nameTitleFormStar">*</sup>
+                      </label>
+                      <div className="input-group ">
+                        <span className="input-group-addon inputBoxIcon">
+                          <FontAwesomeIcon icon="id-card-alt" />
+                        </span>
+                        <input
+                          type="text"
+                          name="reportingManagerDesignation"
+                          id="reportingManagerDesignation"
+                          className="form-control inputBox"
+                          value={this.state.reportingManagerDesignation}
+                          onChange={this.handleChange.bind(this)}
+                        />
+                      </div>
+                      <span
+                        id="reportingManagerDesignationError"
+                        className="errorMsg"
+                      ></span>
+                    </div>
+                    <div className="col-md-4">
+                      <label htmlFor="lastDeartment" className="nameTitleForm">
+                        Total Experience
+                        <sup className="nameTitleFormStar">*</sup>
+                      </label>
+                      <div className="input-group ">
+                        <span className="input-group-addon inputBoxIcon">
+                          <i className="fa fa-briefcase"></i>
+                        </span>
+                        <input
+                          type="number"
+                          name="totalExperience"
+                          id="totalExperience"
+                          className="form-control inputBox"
+                          value={this.state.totalExperience}
+                          onChange={this.handleChange.bind(this)}
+                        />
+                      </div>
+                      <span id="totalExperienceError" className="errorMsg"></span>
+                    </div>
+                    {/*<div className="col-lg-4">
+                      <label htmlFor="lastDeartment" className="nameTitleForm">
+                        Relevant Experience
+                        <sup className="nameTitleFormStar">*</sup>
+                      </label>
+                      <div className="input-group ">
+                        <span className="input-group-addon inputBoxIcon">
+                          <i className="fa fa-briefcase"></i>
+                        </span>
+                        <input
+                          type="number"
+                          name="relevantExperience"
+                          id="relevantExperience"
+                          className="form-control inputBox"
+                          value={this.state.relevantExperience}
+                          onChange={this.handleChange.bind(this)}
+                        />
+                      </div>
+                      <span id="relevantExperienceError" className="errorMsg"></span>
+                    </div>*/}
                   </div>
                 </div>
               </div>
-              <div className="row formWrapper">
-                <div className="col-lg-12">
-                  <label htmlFor="responsibilities" className="nameTitleForm">
-                    Responsibilities
-                  </label>
-                  <div>
-                    <CKEditor
-                      editor={ClassicEditor}
-                      data={this.state.responsibilities}
-                      id="responsibilities"
-                      onInit={(editor) => {}}
-                      onChange={(event, editor) => {
-                        this.setState({ responsibilities: editor.getData() });
-                      }}
-                      onBlur={(editor) => {}}
-                      onFocus={(editor) => {}}
-                    />
-                  </div>
-                </div>
-              </div>
-              <div className="row formWrapper">
-                <div className="col-lg-4">
-                  <label htmlFor="currentCTC" className="nameTitleForm">
-                    Current CTC (Annual in INR)
-                    <sup className="nameTitleFormStar">*</sup>
-                  </label>
-                  <div className="input-group ">
-                    <span className="input-group-addon inputBoxIcon">
-                      <FontAwesomeIcon icon="rupee-sign" />
-                    </span>
-                    <input
-                      type="number"
-                      name="currentCTC"
-                      id="currentCTC"
-                      className="form-control inputBox"
-                      value={this.state.currentCTC}
-                      onChange={this.handleChange.bind(this)}
-                    />
-                  </div>
-                  <span id="currentCTCError" className="errorMsg"></span>
-                </div>
+              <div className="row ">
+                <div className="col-sm-12">
+                    <div className="row formWrapper">
+                      <div className="col-md ">
+                        <label htmlFor="currentlyWorkingHere" className="nameTitleForm ">
+                          Currently Working here
+                        </label>
+                        {/*<div className="customCheckBox">
+                          <label  className="">
+                            <input type="checkbox" name="currentlyWorkingHere" id="currentlyWorkingHere"
+                            value={this.state.currentlyWorkingHere}  onChange={ this.handleChangeCheckbox.bind(this) } checked={this.state.currentlyWorkingHere} />
+                            <span className="checkmark"></span>
+                          </label>
+                        </div>*/}
+                        <div className="input-group genderFeildWrapper genderFeildWrapper2">
+                          <div
+                            className={
+                              this.state.currentlyWorkingHere === "Yes"
+                                ? "genderFeild col-lg-6 genderFeildActive"
+                                : "genderFeild col-lg-6"
+                            }
+                            id="Yes"
+                            name="currentlyWorkingHere"
+                            onClick={this.handleChangeCheckbox.bind(this)}
+                          >
+                            <div className="">Yes</div>
+                          </div>
+                          <div
+                            className={
+                              this.state.currentlyWorkingHere === "No"
+                                ? "genderFeild col-lg-6 genderFeildActive"
+                                : "genderFeild col-lg-6"
+                            }
+                            id="No"
+                            name="currentlyWorkingHere"
+                            onClick={this.handleChangeCheckbox.bind(this)}
+                          >
+                            <div className="">No</div>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="col-md experienceBoxWidth">
+                        <label htmlFor="fromDate" className="nameTitleForm">
+                          Working From
+                          <sup className="nameTitleFormStar">*</sup>
+                        </label>
+                        <div className="input-group ">
+                          <span className="input-group-addon inputBoxIcon">
+                            <i className="fa fa-calendar"></i>
+                          </span>
+                          <input
+                            type="month"
+                            name="fromDate"
+                            id="fromDate"
+                            className="form-control inputBox date"
+                            value={this.state.fromDate}
+                            onChange={this.handleChange.bind(this)}
+                          />
+                          <div className="dateLine1"></div>
+                        </div>
+                        <span id="fromDateError" className="errorMsg"></span>
+                      </div>
 
-                <div className="col-lg-4">
-                  <label htmlFor="expectedCTC" className="nameTitleForm">
-                    Expected CTC (Annual in INR)
-                    <sup className="nameTitleFormStar">*</sup>
-                  </label>
-                  <div className="input-group ">
-                    <span className="input-group-addon inputBoxIcon">
-                      <FontAwesomeIcon icon="rupee-sign" />
-                    </span>
-                    <input
-                      type="number"
-                      name="expectedCTC"
-                      id="expectedCTC"
-                      className="form-control inputBox"
-                      value={this.state.expectedCTC}
-                      onChange={this.handleChange.bind(this)}
-                    />
-                  </div>
-                  <span id="expectedCTCError" className="errorMsg"></span>
-                </div>
+                      <div className="col-md experienceBoxWidth">
+                        <label htmlFor="toDate" className="nameTitleForm">
+                          Worked Till
+                        </label>
+                        <div className="input-group ">
+                          <span className="input-group-addon inputBoxIcon">
+                            <i className="fa fa-calendar"></i>
+                          </span>
+                          <input
+                            type="month"
+                            name="toDate"
+                            id="toDate"
+                            className="form-control inputBox date"
+                            value={this.state.toDate}
+                            min={Moment(this.state.fromDate).format("YYYY-MM")}
+                            onChange={this.handleChange.bind(this)}
+                          />
+                          <div className="dateLine1"></div>
+                        </div>
+                        <span id="toDateError" className="errorMsg"></span>
+                      </div>
 
-                <div className="col-lg-4">
-                  <label htmlFor="noticePeriod" className="nameTitleForm">
-                    Notice Period
-                    <sup className="nameTitleFormStar">*</sup>
-                  </label>
-                  <div className="input-group ">
-                    <span className="input-group-addon inputBoxIcon">
-                      <FontAwesomeIcon icon="hourglass-start" />
-                    </span>
-                    <input
-                      type="text"
-                      name="noticePeriod"
-                      id="noticePeriod"
-                      className="form-control inputBox"
-                      value={this.state.noticePeriod}
-                      onChange={this.handleChange.bind(this)}
-                    />
+                      <div className="col-md">
+                        <label htmlFor="fromDate" className="nameTitleForm">
+                          Experience
+                        </label>
+                        <div className="input-group showFeild2" name="exp" id="exp">
+                          {this.state.expYears +
+                            "  Years, " +
+                            this.state.expMonths +
+                            " months"}
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                  <span id="noticePeriodError" className="errorMsg"></span>
-                </div>
+               </div>
+               <div className="row ">
+                    <div className="col-sm-12">
+                        <div className="row formWrapper">
+                          <div className="col-md">
+                            <label htmlFor="responsibilities" className="nameTitleForm">
+                              Responsibilities
+                            </label>
+                            <div>
+                              <CKEditor
+                                editor={ClassicEditor}
+                                data={this.state.responsibilities}
+                                id="responsibilities"
+                                onInit={(editor) => {}}
+                                onChange={(event, editor) => {
+                                  this.setState({ responsibilities: editor.getData() });
+                                }}
+                                onBlur={(editor) => {}}
+                                onFocus={(editor) => {}}
+                              />
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+               </div>
+               <div className="row ">
+                  <div className="col-sm-12">
+                      <div className="row formWrapper">
+                        <div className="col-md">
+                          <label htmlFor="currentCTC" className="nameTitleForm">
+                            Current CTC (Annual in INR)
+                            <sup className="nameTitleFormStar">*</sup>
+                          </label>
+                          <div className="input-group ">
+                            <span className="input-group-addon inputBoxIcon">
+                              <FontAwesomeIcon icon="rupee-sign" />
+                            </span>
+                            <input
+                              type="number"
+                              name="currentCTC"
+                              id="currentCTC"
+                              className="form-control inputBox"
+                              value={this.state.currentCTC}
+                              onChange={this.handleChange.bind(this)}
+                            />
+                          </div>
+                          <span id="currentCTCError" className="errorMsg"></span>
+                        </div>
+
+                        <div className="col-md">
+                          <label htmlFor="expectedCTC" className="nameTitleForm">
+                            Expected CTC (Annual in INR)
+                            <sup className="nameTitleFormStar">*</sup>
+                          </label>
+                          <div className="input-group ">
+                            <span className="input-group-addon inputBoxIcon">
+                              <FontAwesomeIcon icon="rupee-sign" />
+                            </span>
+                            <input
+                              type="number"
+                              name="expectedCTC"
+                              id="expectedCTC"
+                              className="form-control inputBox"
+                              value={this.state.expectedCTC}
+                              onChange={this.handleChange.bind(this)}
+                            />
+                          </div>
+                          <span id="expectedCTCError" className="errorMsg"></span>
+                        </div>
+
+                        <div className="col-md">
+                          <label htmlFor="noticePeriod" className="nameTitleForm">
+                            Notice Period
+                            <sup className="nameTitleFormStar">*</sup>
+                          </label>
+                          <div className="input-group ">
+                            <span className="input-group-addon inputBoxIcon">
+                              <FontAwesomeIcon icon="hourglass-start" />
+                            </span>
+                            <input
+                              type="text"
+                              name="noticePeriod"
+                              id="noticePeriod"
+                              className="form-control inputBox"
+                              value={this.state.noticePeriod}
+                              onChange={this.handleChange.bind(this)}
+                            />
+                          </div>
+                          <span id="noticePeriodError" className="errorMsg"></span>
+                        </div>
+                      </div>
+                  </div>
               </div>
               <div className="row">
                 <div className="col-lg-12">

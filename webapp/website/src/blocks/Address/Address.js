@@ -627,236 +627,244 @@ class Address extends Component{
       componentRestrictions: {country: "in"}
     }	
 		return(
-				<div className="mainFormWrapper col-lg-12">
-					<div className="row">
-						<form>
+				<div className="mainFormWrapper col-md-12 candidateProfileSteps">
+					
+						<form className="col-md-12  mainForm">
+							<div className="row ">
+								<div className="col-sm-12">
+									<div className="row formWrapper">
 
-							<div className="row formWrapper">
+										<div className="col-md">
+											<label htmlFor="addressType" className="nameTitleForm">
+												Address Type
+												<sup className="nameTitleFormStar">*</sup>
+											</label>
+											<div className="input-group ">
+												<span className="input-group-addon inputBoxIcon inputBoxIcon1">
+													<i className="fa fa-map-marker"></i>
+												</span> 
+												<select className="form-control inputBox" id="addressType" 
+												 value={this.state.addressType} name="addressType" 
+												 onChange={this.handleChange.bind(this)}>
+												  	<option > ---- select ---- </option>
+												  	{
+												  		this.state.inputAddressType!=null 
+												  		&& this.state.inputAddressType.length>0
+												  		?	
+												  			this.state.inputAddressType.map((elem,index)=>{
+												  				return(
+												  					<option value={elem._id} key={index}>
+												  						{elem.addressType}
+												  					</option>
+												  				);
+												  			})
+												  			
+												  		:
+												  			null
+												  	}
+												</select>
+											</div>
+											<span id="addressTypeError" className="errorMsg"></span>
+										</div>
 
-								<div className="col-lg-4">
-									<label htmlFor="addressType" className="nameTitleForm">
-										Address Type
-										<sup className="nameTitleFormStar">*</sup>
-									</label>
-									<div className="input-group ">
-										<span className="input-group-addon inputBoxIcon inputBoxIcon1">
-											<i className="fa fa-map-marker"></i>
-										</span> 
-										<select className="form-control inputBox" id="addressType" 
-										 value={this.state.addressType} name="addressType" 
-										 onChange={this.handleChange.bind(this)}>
-										  	<option > ---- select ---- </option>
-										  	{
-										  		this.state.inputAddressType!=null 
-										  		&& this.state.inputAddressType.length>0
-										  		?	
-										  			this.state.inputAddressType.map((elem,index)=>{
-										  				return(
-										  					<option value={elem._id} key={index}>
-										  						{elem.addressType}
-										  					</option>
-										  				);
-										  			})
-										  			
-										  		:
-										  			null
-										  	}
-										</select>
+									
+										<div className="col-md">
+											<label htmlFor="houseNumber" className="nameTitleForm">
+												House/Building Number
+												
+											</label>
+											<div className="input-group ">
+												<span className="input-group-addon inputBoxIcon inputBoxIcon1">
+													<i className="fa fa-map-marker"></i>
+												</span> 
+												<input type="text" name="houseNumber" id="houseNumber" 
+												 className="form-control inputBox " 
+												 value={this.state.houseNumber} 
+												 onChange={this.handleChange.bind(this)} />
+											</div> 
+											<span id="houseNumberError" className="errorMsg"></span>
+										</div>
+
+										<div className="col-md">
+											<label htmlFor="address" className="nameTitleForm">Address <sup className="nameTitleFormStar">*</sup></label>
+											<div className="input-group ">
+												<span className="input-group-addon inputBoxIcon">
+													<i className="fa fa-map-marker"></i>
+												</span> 
+												<PlacesAutocomplete
+			                                        value={this.state.addressLine1}
+			                                        onChange={this.handleChangePlaces}
+			                                        onSelect={this.handleSelect}
+			                                        searchOptions={searchOptions}
+			                                      	>
+			                                        {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+			                                          <div className="candidatePlaceHolderWrappper">
+				                                          <div>
+				                                            <input
+				                                              {...getInputProps({
+				                                                placeholder: 'Search Address ...',
+				                                                className: 'location-search-input form-control inputBox',
+				                                                id:"addressLine1",
+				                                                name:"addressLine1",
+				                                              })}
+				                                            />
+				                                            
+				                                          </div>
+				                                          <div className={this.state.addressLine1 
+				                                            				? 
+				                                            				"autocomplete-dropdown-container SearchListContainer SearchListContainer1 inputSearch" 
+				                                            				: 
+				                                            				""}>
+				                                              {loading && <div>Loading...</div>}
+				                                              {suggestions.map(suggestion => {
+				                                                const className = suggestion.active
+				                                                  ? 'suggestion-item--active'
+				                                                  : 'suggestion-item';
+				                                                // inline style for demonstration purpose
+				                                                const style = suggestion.active
+				                                                  ? { backgroundColor: '#f5a721', cursor: 'pointer' }
+				                                                  : { backgroundColor: '#242933', cursor: 'pointer'};
+				                                                return (
+				                                                  <div
+				                                                    {...getSuggestionItemProps(suggestion, {
+				                                                      className,
+				                                                      style,
+				                                                    })}
+				                                                  >
+				                                                    <span>{suggestion.description}</span>
+				                                                  </div>
+				                                                );
+				                                              })}
+				                                            </div>
+				                                        </div>
+			                                        )}
+			                                      </PlacesAutocomplete>
+											</div> 
+											<span id="addressError" className="errorMsg"></span> 
+										</div>
 									</div>
-									<span id="addressTypeError" className="errorMsg"></span>
-								</div>
-
-							
-								<div className="col-lg-4">
-									<label htmlFor="houseNumber" className="nameTitleForm">
-										House/Building Number
-										
-									</label>
-									<div className="input-group ">
-										<span className="input-group-addon inputBoxIcon inputBoxIcon1">
-											<i className="fa fa-map-marker"></i>
-										</span> 
-										<input type="text" name="houseNumber" id="houseNumber" 
-										 className="form-control inputBox " 
-										 value={this.state.houseNumber} 
-										 onChange={this.handleChange.bind(this)} />
-									</div> 
-									<span id="houseNumberError" className="errorMsg"></span>
-								</div>
-
-								<div className="col-lg-4">
-									<label htmlFor="address" className="nameTitleForm">Address <sup className="nameTitleFormStar">*</sup></label>
-									<div className="input-group ">
-										<span className="input-group-addon inputBoxIcon">
-											<i className="fa fa-map-marker"></i>
-										</span> 
-										<PlacesAutocomplete
-	                                        value={this.state.addressLine1}
-	                                        onChange={this.handleChangePlaces}
-	                                        onSelect={this.handleSelect}
-	                                        searchOptions={searchOptions}
-	                                      	>
-	                                        {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-	                                          <div>
-		                                          <div>
-		                                            <input
-		                                              {...getInputProps({
-		                                                placeholder: 'Search Address ...',
-		                                                className: 'location-search-input form-control inputBox',
-		                                                id:"addressLine1",
-		                                                name:"addressLine1",
-		                                              })}
-		                                            />
-		                                            
-		                                          </div>
-		                                          <div className={this.state.addressLine1 
-		                                            				? 
-		                                            				"autocomplete-dropdown-container SearchListContainer SearchListContainer1 inputSearch" 
-		                                            				: 
-		                                            				""}>
-		                                              {loading && <div>Loading...</div>}
-		                                              {suggestions.map(suggestion => {
-		                                                const className = suggestion.active
-		                                                  ? 'suggestion-item--active'
-		                                                  : 'suggestion-item';
-		                                                // inline style for demonstration purpose
-		                                                const style = suggestion.active
-		                                                  ? { backgroundColor: '#f5a721', cursor: 'pointer' }
-		                                                  : { backgroundColor: '#242933', cursor: 'pointer'};
-		                                                return (
-		                                                  <div
-		                                                    {...getSuggestionItemProps(suggestion, {
-		                                                      className,
-		                                                      style,
-		                                                    })}
-		                                                  >
-		                                                    <span>{suggestion.description}</span>
-		                                                  </div>
-		                                                );
-		                                              })}
-		                                            </div>
-		                                        </div>
-	                                        )}
-	                                      </PlacesAutocomplete>
-									</div> 
-									<span id="addressError" className="errorMsg"></span> 
 								</div>
 							</div>
 
-							<div className="row formWrapper">
-								<div className="col-lg-4">
-									<label htmlFor="area" className="nameTitleForm">
-										Area/Suburb <sup className="nameTitleFormStar">*</sup>
-									</label>
-									<div className="input-group ">
-										<span className="input-group-addon inputBoxIcon">
-											<FontAwesomeIcon icon="map-marked-alt" />
-										</span> 
-										<input type="text" name="area" id="area" 
-										 className="form-control inputBox" value={this.state.area} 
-										 onChange={this.handleChange.bind(this)} />
-									</div> 
-									<span id="areaError" className="errorMsg"></span> 
-								</div>
+							<div className="row ">
+								<div className="col-sm-12">
+									<div className="row formWrapper">
+										<div className="col-md">
+											<label htmlFor="area" className="nameTitleForm">
+												Area/Suburb <sup className="nameTitleFormStar">*</sup>
+											</label>
+											<div className="input-group ">
+												<span className="input-group-addon inputBoxIcon">
+													<FontAwesomeIcon icon="map-marked-alt" />
+												</span> 
+												<input type="text" name="area" id="area" 
+												 className="form-control inputBox" value={this.state.area} 
+												 onChange={this.handleChange.bind(this)} />
+											</div> 
+											<span id="areaError" className="errorMsg"></span> 
+										</div>
 
-								<div className="col-lg-4">
-									<label htmlFor="city" className="nameTitleForm">
-										City/Village
-										<sup className="nameTitleFormStar">*</sup>
-									</label>
-									<div className="input-group ">
-										<span className="input-group-addon inputBoxIcon">
-											<i className="fa fa-map-marker"></i> 
-										</span> 
-										<input type="text" name="city" id="city" 
-										 className="form-control inputBox" value={this.state.city} 
-										 onChange={this.handleChange.bind(this)} />
-									</div> 
-									<span id="cityError" className="errorMsg"></span>
-								</div>
+										<div className="col-md">
+											<label htmlFor="city" className="nameTitleForm">
+												City/Village
+												<sup className="nameTitleFormStar">*</sup>
+											</label>
+											<div className="input-group ">
+												<span className="input-group-addon inputBoxIcon">
+													<i className="fa fa-map-marker"></i> 
+												</span> 
+												<input type="text" name="city" id="city" 
+												 className="form-control inputBox" value={this.state.city} 
+												 onChange={this.handleChange.bind(this)} />
+											</div> 
+											<span id="cityError" className="errorMsg"></span>
+										</div>
 
-								<div className="col-lg-4">
-									<label htmlFor="district" className="nameTitleForm">
-										District
-										<sup className="nameTitleFormStar">*</sup>
-									</label>
-									<div className="input-group ">
-										<span className="input-group-addon inputBoxIcon">
-											<i className="fa fa-map"></i> 
-										</span> 
-										<input type="text" name="district" id="district" 
-										 className="form-control inputBox" value={this.state.district} 
-										 onChange={this.handleChange.bind(this)} />
-									</div> 
-									<span id="districtError" className="errorMsg"></span>
+										<div className="col-md">
+											<label htmlFor="district" className="nameTitleForm">
+												District
+												<sup className="nameTitleFormStar">*</sup>
+											</label>
+											<div className="input-group ">
+												<span className="input-group-addon inputBoxIcon">
+													<i className="fa fa-map"></i> 
+												</span> 
+												<input type="text" name="district" id="district" 
+												 className="form-control inputBox" value={this.state.district} 
+												 onChange={this.handleChange.bind(this)} />
+											</div> 
+											<span id="districtError" className="errorMsg"></span>
+										</div>
+									</div>
 								</div>
-
 							</div>
+							<div className="row ">
+								<div className="col-sm-12">
+									<div className="row formWrapper">
 
-							<div className="row formWrapper">
-
-								<div className="col-lg-4">
-									<label htmlFor="states" className="nameTitleForm">
-										State
-										<sup className="nameTitleFormStar">*</sup>
-									</label>
-									<div className="input-group ">
-										<span className="input-group-addon inputBoxIcon">
-											<i className="fa fa-map"></i> 
-										</span>
-										<select id="states" className="form-control inputBox selectOption"
-										ref="stateCode" value={this.state.states} name="stateCode" onChange={this.handleChangeState} >
-										<option selected={true}>-- Select --</option>
-										{
-											this.state.stateArray && this.state.stateArray.length > 0 ?
-												this.state.stateArray.map((stateData, index) => {
-													return (
-														<option key={index} statecode={stateData.stateCode} state={this.camelCase(stateData.stateName)}>{this.camelCase(stateData.stateName)}</option>
-													);
+										<div className="col-lg-4">
+											<label htmlFor="states" className="nameTitleForm">
+												State
+												<sup className="nameTitleFormStar">*</sup>
+											</label>
+											<div className="input-group ">
+												<span className="input-group-addon inputBoxIcon">
+													<i className="fa fa-map"></i> 
+												</span>
+												<select id="states" className="form-control inputBox selectOption"
+												ref="stateCode" value={this.state.states} name="stateCode" onChange={this.handleChangeState} >
+												<option selected={true}>-- Select --</option>
+												{
+													this.state.stateArray && this.state.stateArray.length > 0 ?
+														this.state.stateArray.map((stateData, index) => {
+															return (
+																<option key={index} statecode={stateData.stateCode} state={this.camelCase(stateData.stateName)}>{this.camelCase(stateData.stateName)}</option>
+															);
+														}
+														) : ''
 												}
-												) : ''
-										}
-										</select>
-										{/*<input type="text" className="form-control inputBox" ref="states" id="states" name="states" value={this.state.states} onChange={this.handleChange.bind(this)}/>
-										*/} 			
-									</div> 
-									<span id="statesError" className="errorMsg"></span>
-								</div>
+												</select>
+												{/*<input type="text" className="form-control inputBox" ref="states" id="states" name="states" value={this.state.states} onChange={this.handleChange.bind(this)}/>
+												*/} 			
+											</div> 
+											<span id="statesError" className="errorMsg"></span>
+										</div>
 
-								<div className="col-lg-4">
-									<label htmlFor="country" className="nameTitleForm">
-										Country
-										<sup className="nameTitleFormStar">*</sup>
-									</label>
-									<div className="input-group ">
-										<span className="input-group-addon inputBoxIcon">
-											<i className="fa fa-flag"></i> 
-										</span> 
-										<input type="text" name="country" id="country" 
-										 className="form-control inputBox" 
-										 value={this.state.country} 
-										 onChange={this.handleChange.bind(this)} />
-									</div> 
-									<span id="countryError" className="errorMsg"></span>
-								</div>
+										<div className="col-lg-4">
+											<label htmlFor="country" className="nameTitleForm">
+												Country
+												<sup className="nameTitleFormStar">*</sup>
+											</label>
+											<div className="input-group ">
+												<span className="input-group-addon inputBoxIcon">
+													<i className="fa fa-flag"></i> 
+												</span> 
+												<input type="text" name="country" id="country" 
+												 className="form-control inputBox" 
+												 value={this.state.country} 
+												 onChange={this.handleChange.bind(this)} />
+											</div> 
+											<span id="countryError" className="errorMsg"></span>
+										</div>
 
-								<div className="col-lg-4">
-									<label htmlFor="pincode" className="nameTitleForm">
-										Pincode
-										<sup className="nameTitleFormStar">*</sup>
-									</label>
-									<div className="input-group ">
-										<span className="input-group-addon inputBoxIcon">
-											<FontAwesomeIcon icon="map-marked-alt" /> 
-										</span> 
-										<input type="text" pattern="[0-9]*" maxlength="6" name="pincode" id="pincode" 
-										 className="form-control inputBox" 
-										 value={this.state.pincode} max="6"
-										 onChange={this.handleChange.bind(this)} />
-									</div> 
-									<span id="pincodeError" className="errorMsg"></span>
+										<div className="col-lg-4">
+											<label htmlFor="pincode" className="nameTitleForm">
+												Pincode
+												<sup className="nameTitleFormStar">*</sup>
+											</label>
+											<div className="input-group ">
+												<span className="input-group-addon inputBoxIcon">
+													<FontAwesomeIcon icon="map-marked-alt" /> 
+												</span> 
+												<input type="text" pattern="[0-9]*" maxlength="6" name="pincode" id="pincode" 
+												 className="form-control inputBox" 
+												 value={this.state.pincode} max="6"
+												 onChange={this.handleChange.bind(this)} />
+											</div> 
+											<span id="pincodeError" className="errorMsg"></span>
+										</div>
+									</div>
 								</div>
-
 							</div>
 							<div className="row">
 								<div className="col-lg-12">
@@ -942,7 +950,7 @@ class Address extends Component{
 								<FontAwesomeIcon className="nextArrow" icon="arrow-right" />
 							</button>
 						</form>
-					</div>
+					
 				</div>
 			);
 	}

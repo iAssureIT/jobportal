@@ -33,7 +33,7 @@
   background-color: var(--main-bg-color );
 }
 .mainPagesWrapper{
-  min-height: 430px;
+ min-height: 200px;
   height:auto;
   background-color: var(--main-bg-color );
 }

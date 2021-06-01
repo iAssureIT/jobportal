@@ -5,7 +5,7 @@ import { withRouter }       from 'react-router-dom';
 import Swal                 from 'sweetalert2';
 import _                    from 'underscore';
 import moment               from 'moment';
-import 'bootstrap/js/tab.js';
+import 'bootstrap/js/dist/tab.js';
 
 class TestProfile extends Component {
   constructor(props) {

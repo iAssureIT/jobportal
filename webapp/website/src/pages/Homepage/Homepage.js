@@ -357,7 +357,7 @@ class HomePage extends Component {
 
           <div className="col-lg-9">
             <div className="tab-content">
-              <div id="mapwise" className= {this.props.viewMode == "mapView" ? "tab-pane fade in active" : "tab-pane fade" }>
+              <div id="mapwise" className= {this.props.viewMode == "mapView" ? "tab-pane fade in active show" : "tab-pane fade" }>
                 <MapComponent pathname={this.props.match}/> 
               </div>
 

@@ -16,12 +16,12 @@ class ProgressBar extends Component{
 
 	render(){
 		return(
-				<div className="progressBarWrapper col-lg-12">
+				<div className="progressBarWrapper col-12 ">
 					<div className="row">
-						<div className="col-lg-10 col-lg-offset-1">
+						<div className="col-md-10 offset-md-1 col-12 progressbarOuterWrapper">
 							<div className="row">
 
-							<div className="progressBar col-lg-12">
+							<div className="progressBar col-12">
 									<div className="step">
 										<a href="/basic-info">
 
@@ -141,23 +141,26 @@ class ProgressBar extends Component{
 							</div>
 						    </div>
 						</div>
-					
+					</div>
 				
-					
-						<div className=" mainProgessBar">
-							<div className="col-lg-8 col-lg-offset-2">
-								<div className="progress progressBar2 row">
-									<div className="progress-bar progress-bar-striped progressBarInner progress-bar-warning progress-bar-striped active" 
-									  role="progressbar" aria-valuenow="0" aria-valuemin="0" 
-									  aria-valuemax="100" style={{width:this.props.width+"%"}}>
-									    <img src={this.props.img?("/images/"+ this.props.img + ".png"):null} alt={this.props.img?"progress":null} style={{left:this.props.left+"%"}}/>
-									</div>
+						<div className="row">
+							<div className=" mainProgessBar col-12">
+								<div className="row">
+									<div className="col-md-8 offset-md-2 col-12">
+										<div className="progress progressBar2 row">
+											<div className="progress-bar progress-bar-striped progressBarInner progress-bar-warning progress-bar-striped active" 
+											  role="progressbar" aria-valuenow="0" aria-valuemin="0" 
+											  aria-valuemax="100" style={{width:this.props.width+"%"}}>
+											    <img src={this.props.img?("/images/"+ this.props.img + ".png"):null} alt={this.props.img?"progress":null} style={{left:this.props.left+"%"}}/>
+											</div>
 
+										</div>
+										
+									</div>
 								</div>
-								
 							</div>
 						</div>
-					</div>
+					
 				</div>
 
 			);

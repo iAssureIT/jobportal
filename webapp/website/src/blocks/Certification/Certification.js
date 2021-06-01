@@ -851,169 +851,179 @@ class Certification extends Component{
 	render(){
 		
 		return(
-				<div className="col-lg-12 certificationWrapper">
-					<form>
-						<div className="row formWrapper">
-							<div className="col-lg-4 col-lg-offset-4">
-								<div className="input-group genderFeildWrapper">
+				<div className="col-md-12 pageWrapper candidateProfileSteps ">
+					<form className="col-md-12  mainForm">
+						<div className="row ">
+							<div className="col-sm-12">
+								<div className="row formWrapper">
+									<div className="col-lg-4 col-lg-offset-4">
+										<div className="input-group genderFeildWrapper">
 
-									<div className ={ this.state.certificationToggel===false
-													 ? "genderFeild col-lg-6 genderFeildActive"
-													 : "genderFeild col-lg-6"}  
-										 id="toggleSkills" name="certificationToggel" 
-										 value="toggleSkills" onClick={this.changeBlock.bind(this)}
-									> Skills</div>
-									<div className={this.state.certificationToggel === true
-													? "genderFeild col-lg-6 genderFeildActive"
-													: "genderFeild col-lg-6"} 
-										id="toogleCertificate" name="certificationToggel" 
-										value="toogleCertificate" onClick={this.changeBlock.bind(this)}
-									> Certification	</div>
-									
+											<div className ={ this.state.certificationToggel===false
+															 ? "genderFeild col-lg-6 genderFeildActive"
+															 : "genderFeild col-lg-6"}  
+												 id="toggleSkills" name="certificationToggel" 
+												 value="toggleSkills" onClick={this.changeBlock.bind(this)}
+											> Skills</div>
+											<div className={this.state.certificationToggel === true
+															? "genderFeild col-lg-6 genderFeildActive"
+															: "genderFeild col-lg-6"} 
+												id="toogleCertificate" name="certificationToggel" 
+												value="toogleCertificate" onClick={this.changeBlock.bind(this)}
+											> Certification	</div>
+											
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>
+
 						{
 							this.state.certificationToggel===false
 							?
-								<div >
-								<div className="row formWrapper">
-									
-									<div className="col-lg-2">
-										
-										<label htmlFor="skills" className="nameTitleForm">
-											Type 
-											<sup className="nameTitleFormStar">*</sup>
-										</label>
-										<div className="input-group genderFeildWrapper skillsGenderWrapper">
-											<div className ={ this.state.isPrimary===true
-													 ? "genderFeild col-lg-6 genderFeildActive"
-													 : "genderFeild col-lg-6"}  
-												 id="togglePrimary" name="primaryToggel" 
-												 value="togglePrimary" onClick={this.handleSwitch.bind(this)}>
-												<div className="row">
-													Primary
+								<div className="row ">
+									<div className="col-sm-12">
+										<div className="row formWrapper">
+											
+											<div className="col-md-2">
+												
+												<label htmlFor="skills" className="nameTitleForm">
+													Type 
+													<sup className="nameTitleFormStar">*</sup>
+												</label>
+												<div className="input-group genderFeildWrapper skillsGenderWrapper text-center">
+													<div className ={ this.state.isPrimary===true
+															 ? "genderFeild col-md-6 genderFeildActive"
+															 : "genderFeild col-md-6"}  
+														 id="togglePrimary" name="primaryToggel" 
+														 value="togglePrimary" onClick={this.handleSwitch.bind(this)}>
+														<div className="row skillPillsPadding">
+															Primary
+														</div>
+													</div>
+													<div className={this.state.isPrimary === false
+																	? "genderFeild col-md-6 genderFeildActive"
+																	: "genderFeild col-md-6"} 
+														id="toogleSecondary" name="primaryToggel" 
+														value="toogleSecondary" onClick={this.handleSwitch.bind(this)}>
+														<div className="row skillPillsPadding">
+															Secondary
+														</div>
+													</div>
 												</div>
 											</div>
-											<div className={this.state.isPrimary === false
-															? "genderFeild col-lg-6 genderFeildActive"
-															: "genderFeild col-lg-6"} 
-												id="toogleSecondary" name="primaryToggel" 
-												value="toogleSecondary" onClick={this.handleSwitch.bind(this)}>
-												<div className="row">
-													Secondary
-												</div>
+											<div className="col-md-4">
+												<label htmlFor="skills" className="nameTitleForm">
+													Skill 
+													<sup className="nameTitleFormStar">*</sup>
+												</label>
+												<div className="input-group ">
+													<span className="input-group-addon inputBoxIcon">
+														<FontAwesomeIcon icon="chalkboard-teacher" /> 
+													</span> 
+													<input type="text" list="skills" 
+													 className="form-control inputBox" 
+													 refs="skills" name="skills" 
+													 id="selectskills" 
+													 maxLength="100" value={this.state.skills} 
+													 data-value={this.state.skills_id}
+													 onChange={this.onChangeSkills.bind(this)} />
+													<datalist name="skills" id="skills" className="skillslist" >
+														{this.state.skillslist.map((item, key) =>
+														    <option key={key} value={item.skill} data-value={item._id}/>
+														)}
+													</datalist>
+												</div> 
+												<span id="skillsError" className="errorMsg"></span>
+											</div>
+
+											<div className="col-md-3">
+												<label htmlFor="rating" className="nameTitleForm">How do you rate yourself  <sup className="nameTitleFormStar">*</sup></label>
+												<div className="input-group ">
+													<span className={this.state.rating=== "1"||this.state.rating=== "2"||this.state.rating=== "3"||this.state.rating=== "4"||this.state.rating=== "5"? "fa fa-star rating stars":"fa fa-star-o rating"} id="1" name="rating" value="1" onClick={this.starClick.bind(this)}></span>
+													<span className={this.state.rating === "2"||this.state.rating=== "3"||this.state.rating=== "4"||this.state.rating=== "5"? "fa fa-star rating stars":"fa fa-star-o rating"} id="2" name="rating" value="2" onClick={this.starClick.bind(this)}></span>
+													<span className={this.state.rating === "3"||this.state.rating=== "4"||this.state.rating=== "5"? "fa fa-star rating stars":"fa fa-star-o rating"} id="3" name="rating" value="3" onClick={this.starClick.bind(this)}></span>
+													<span className={this.state.rating === "4" ||this.state.rating=== "5"? "fa fa-star rating stars":"fa fa-star-o rating"} id="4" name="rating" value="4" onClick={this.starClick.bind(this)}></span>
+													<span className={this.state.rating === "5" ? "fa fa-star rating stars":"fa fa-star-o rating"} id="5" name="rating" value="5" onClick={this.starClick.bind(this)}></span>
+												</div> 
+												<span id="ratingError" className="errorMsg"></span>
+											</div>
+											<div className="col-md-3">
+												<label htmlFor="experience" className="nameTitleForm">Experience in Years<sup className="nameTitleFormStar">*</sup></label>
+												<div className="input-group ">
+													<span className="input-group-addon inputBoxIcon"><FontAwesomeIcon icon="chalkboard-teacher" /></span> 
+													<input type="number" name="experience" id="experience" className="form-control inputBox " value={this.state.experience} onChange={this.handleChange.bind(this)} />
+												</div> 
+												<span id="experienceError" className="errorMsg"></span>
 											</div>
 										</div>
 									</div>
-									<div className="col-lg-4">
-										<label htmlFor="skills" className="nameTitleForm">
-											Skill 
-											<sup className="nameTitleFormStar">*</sup>
-										</label>
-										<div className="input-group ">
-											<span className="input-group-addon inputBoxIcon">
-												<FontAwesomeIcon icon="chalkboard-teacher" /> 
-											</span> 
-											<input type="text" list="skills" 
-											 className="form-control inputBox" 
-											 refs="skills" name="skills" 
-											 id="selectskills" 
-											 maxLength="100" value={this.state.skills} 
-											 data-value={this.state.skills_id}
-											 onChange={this.onChangeSkills.bind(this)} />
-											<datalist name="skills" id="skills" className="skillslist" >
-												{this.state.skillslist.map((item, key) =>
-												    <option key={key} value={item.skill} data-value={item._id}/>
-												)}
-											</datalist>
-										</div> 
-										<span id="skillsError" className="errorMsg"></span>
-									</div>
-
-									<div className="col-lg-3">
-										<label htmlFor="rating" className="nameTitleForm">How do you rate yourself  <sup className="nameTitleFormStar">*</sup></label>
-										<div className="input-group ">
-											<span className={this.state.rating=== "1"||this.state.rating=== "2"||this.state.rating=== "3"||this.state.rating=== "4"||this.state.rating=== "5"? "fa fa-star rating stars":"fa fa-star-o rating"} id="1" name="rating" value="1" onClick={this.starClick.bind(this)}></span>
-											<span className={this.state.rating === "2"||this.state.rating=== "3"||this.state.rating=== "4"||this.state.rating=== "5"? "fa fa-star rating stars":"fa fa-star-o rating"} id="2" name="rating" value="2" onClick={this.starClick.bind(this)}></span>
-											<span className={this.state.rating === "3"||this.state.rating=== "4"||this.state.rating=== "5"? "fa fa-star rating stars":"fa fa-star-o rating"} id="3" name="rating" value="3" onClick={this.starClick.bind(this)}></span>
-											<span className={this.state.rating === "4" ||this.state.rating=== "5"? "fa fa-star rating stars":"fa fa-star-o rating"} id="4" name="rating" value="4" onClick={this.starClick.bind(this)}></span>
-											<span className={this.state.rating === "5" ? "fa fa-star rating stars":"fa fa-star-o rating"} id="5" name="rating" value="5" onClick={this.starClick.bind(this)}></span>
-										</div> 
-										<span id="ratingError" className="errorMsg"></span>
-									</div>
-									<div className="col-lg-3">
-										<label htmlFor="experience" className="nameTitleForm">Experience in Years<sup className="nameTitleFormStar">*</sup></label>
-										<div className="input-group ">
-											<span className="input-group-addon inputBoxIcon"><FontAwesomeIcon icon="chalkboard-teacher" /></span> 
-											<input type="number" name="experience" id="experience" className="form-control inputBox " value={this.state.experience} onChange={this.handleChange.bind(this)} />
-										</div> 
-										<span id="experienceError" className="errorMsg"></span>
-									</div>
-										
-
 								</div>
-							</div>
 							:
 							<div >
-						
-							<div className="row formWrapper">
+							<div className="row ">
+								<div className="col-sm-12">
+									<div className="row formWrapper">
 
-								<div className="col-lg-4">
-									<label htmlFor="certificationName" className="nameTitleForm">Certification Name<sup className="nameTitleFormStar">*</sup></label>
-									<div className="input-group ">
-										<span className="input-group-addon inputBoxIcon"><FontAwesomeIcon icon="chalkboard-teacher" /></span> 
-										<input type="text" name="certificationName" id="certificationName" className="form-control inputBox " value={this.state.certificationName} onChange={this.handleChange.bind(this)} />
-									</div> 
-									<span id="certificationNameError" className="errorMsg"></span>
+										<div className="col-md">
+											<label htmlFor="certificationName" className="nameTitleForm">Certification Name<sup className="nameTitleFormStar">*</sup></label>
+											<div className="input-group ">
+												<span className="input-group-addon inputBoxIcon"><FontAwesomeIcon icon="chalkboard-teacher" /></span> 
+												<input type="text" name="certificationName" id="certificationName" className="form-control inputBox " value={this.state.certificationName} onChange={this.handleChange.bind(this)} />
+											</div> 
+											<span id="certificationNameError" className="errorMsg"></span>
+										</div>
+
+										<div className="col-md">
+											<label htmlFor="issuedBy" className="nameTitleForm">Issued By<sup className="nameTitleFormStar">*</sup></label>
+											<div className="input-group ">
+												<span className="input-group-addon inputBoxIcon"><i className="fa fa-user-circle"></i></span> 
+												<input type="text" name="issuedBy" id="issuedBy" className="form-control inputBox " value={this.state.issuedBy} onChange={this.handleChange.bind(this)} />
+											</div> 
+											<span id="issuedByError" className="errorMsg"></span>
+										</div>
+
+										<div className="col-md">
+											<label htmlFor="certifiedOn" className="nameTitleForm">Certified ON<sup className="nameTitleFormStar">*</sup></label>
+											<div className="input-group ">
+												<span className="input-group-addon inputBoxIcon">
+													<FontAwesomeIcon icon="chalkboard-teacher" />
+												</span> 
+												<input type="Date" name="certifiedOn" id="certifiedOn"
+												 className="form-control inputBox date" 
+												 value={this.state.certifiedOn} onChange={this.handleChange.bind(this)} />
+												 <div className="dateLine"></div>
+											</div> 
+											<span id="certifiedOnError" className="errorMsg"></span>
+										</div>
+									</div>
 								</div>
-
-								<div className="col-lg-4">
-									<label htmlFor="issuedBy" className="nameTitleForm">Issued By<sup className="nameTitleFormStar">*</sup></label>
-									<div className="input-group ">
-										<span className="input-group-addon inputBoxIcon"><i className="fa fa-user-circle"></i></span> 
-										<input type="text" name="issuedBy" id="issuedBy" className="form-control inputBox " value={this.state.issuedBy} onChange={this.handleChange.bind(this)} />
-									</div> 
-									<span id="issuedByError" className="errorMsg"></span>
-								</div>
-
-								<div className="col-lg-4">
-									<label htmlFor="certifiedOn" className="nameTitleForm">Certified ON<sup className="nameTitleFormStar">*</sup></label>
-									<div className="input-group ">
-										<span className="input-group-addon inputBoxIcon">
-											<FontAwesomeIcon icon="chalkboard-teacher" />
-										</span> 
-										<input type="Date" name="certifiedOn" id="certifiedOn"
-										 className="form-control inputBox date" 
-										 value={this.state.certifiedOn} onChange={this.handleChange.bind(this)} />
-										 <div className="dateLine"></div>
-									</div> 
-									<span id="certifiedOnError" className="errorMsg"></span>
-								</div>
-
 							</div>
 
-							<div className="row formWrapper">
+							<div className="row ">
+								<div className="col-sm-12">
+									<div className="row formWrapper">
 
-								<div className="col-lg-4">
-									<label htmlFor="validity" className="nameTitleForm">Valid Till</label>
-									<div className="input-group ">
-										<span className="input-group-addon inputBoxIcon"><i className="fa fa-calendar"></i> </span> 
-										<input type="date" name="validity" id="validity" 
-										 className="form-control inputBox date" value={this.state.validity} 
-										 onChange={this.handleChange.bind(this)} />
-										 <div className="dateLine"></div>
-									</div> 
+										<div className="col-md-4">
+											<label htmlFor="validity" className="nameTitleForm">Valid Till</label>
+											<div className="input-group ">
+												<span className="input-group-addon inputBoxIcon"><i className="fa fa-calendar"></i> </span> 
+												<input type="date" name="validity" id="validity" 
+												 className="form-control inputBox date" value={this.state.validity} 
+												 onChange={this.handleChange.bind(this)} />
+												 <div className="dateLine"></div>
+											</div> 
+										</div>
+
+										<div className="col-md-4">
+											<label htmlFor="grade" className="nameTitleForm">Grade / Percentage  </label>
+											<div className="input-group ">
+												<span className="input-group-addon inputBoxIcon"><FontAwesomeIcon icon="file-alt" /></span> 
+												<input type="text" name="grade" id="grade" className="form-control inputBox" value={this.state.grade} onChange={this.handleChange.bind(this)} />
+											</div> 
+										</div>
+									</div>
 								</div>
-
-								<div className="col-lg-4">
-									<label htmlFor="grade" className="nameTitleForm">Grade / Percentage  </label>
-									<div className="input-group ">
-										<span className="input-group-addon inputBoxIcon"><FontAwesomeIcon icon="file-alt" /></span> 
-										<input type="text" name="grade" id="grade" className="form-control inputBox" value={this.state.grade} onChange={this.handleChange.bind(this)} />
-									</div> 
-								</div>
-
 							</div>
 						</div>
 

@@ -114,3 +114,13 @@ td#ActionContent{
 	font-family: 'Montserrat-Medium',Sans-Serif!important;
 	text-transform: capitalize!important;
 }
+.skillPillsPadding{
+	padding-left: 6px!important;
+}
+.iAssureTable1 .tempTableHeader{
+	font-size: 15px;
+}
+.iAssureTable1 .noTempData{
+	color: #fff;
+	font-size: 13px;
+}
