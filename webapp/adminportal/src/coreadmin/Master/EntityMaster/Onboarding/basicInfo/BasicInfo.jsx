@@ -288,9 +288,9 @@ class BasicInfo extends Component {
         "COI": this.state.COI,
         "TAN": this.state.TAN ? this.state.TAN.toUpperCase() : "",
         "industry_id" : this.state.industry_id,
-        "industry" : this.state.value,
+        "industry" : this.state.industry,
         "companyLogo": this.state.companyLogo,
-        "userID": this.state.userID,
+        "userID": localStorage.getItem("user_ID"),
         "createdBy": localStorage.getItem("user_ID")
       }
 
@@ -727,74 +727,19 @@ class BasicInfo extends Component {
       })
   }
   
-  escapeRegexCharacters(str) {
-    return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-  }
 
-  getSuggestions(value) {
-    const escapedValue = this.escapeRegexCharacters(value.trim());
-   
-    if (escapedValue === '') {
-      return [];
-    }
-
-    const regex = new RegExp('^' + escapedValue, 'i');
-
-    return this.state.industryArray.filter(industry => regex.test(industry.label));
-  }
-
-  getSuggestionValue(suggestion) {
-    return suggestion.label;
-  }
-
-  renderSuggestion(suggestion) {
-    return (
-      <span className="Autosuggestlist">{suggestion.label}</span>
-    );
-  }
-
-  onChange = (event, { newValue , method}) => {
-    if (method="type") {
-      this.setState({ value: newValue, industry : newValue})
-      
-    }else{
-      this.setState({
-        value: newValue, industry_id :""
-      });
-    }
-  };
- 
-  // Autosuggest will call this function every time you need to update suggestions.
-  // You already implemented this logic above, so just use it.
-  onSuggestionsFetchRequested = ({ value }) => {
-    this.setState({
-      suggestions: this.getSuggestions(value)
-    });
-  };
- 
-  // Autosuggest will call this function every time you need to clear suggestions.
-  onSuggestionsClearRequested = () => {
-    this.setState({
-      suggestions: []
-    });
-  };
-  onSuggestionSelected=(event, { suggestion, suggestionValue, suggestionIndex, sectionIndex, method }) => { 
-    //console.log("suggestion",suggestion)
-    
-    this.setState({industry_id : suggestion._id, industry : suggestionValue})
-  };
 
   onChangeIndustry(event){
       const {name,value} = event.target;
       this.setState({ [name]:value });  
-      
+      var industryElem = document.getElementById("industry");
       var industry_id;
       if (document.querySelector('#industry option[value="' + value + '"]')) {
           industry_id = document.querySelector('#industry option[value="' + value + '"]').getAttribute("data-value")
       }else{ industry_id = "" }
 
       this.setState({ industry_id : industry_id },()=>{
-          //console.log(this.state)
+          //console.log(this.state.industry_id) 
       });  
   }
   
@@ -872,7 +817,7 @@ class BasicInfo extends Component {
                         <i className="fa fa-map-marker iconMarginLeft" aria-hidden="true"></i> &nbsp;
                         Locations
                       </a>
-                      <div className="trianglethree forActive" id="triangle-right"></div>
+                      <div className="trianglethree forActive triangleShapeTwo" id="triangle-right"></div>
                     </li>
                     <li className="col-lg-3 col-md-3 col-sm-12 col-xs-12 transactionTab noRightPadding pdcls btn4 disabled">
                       <div className="trianglesix" id="triangle-right2"></div>
@@ -966,7 +911,7 @@ class BasicInfo extends Component {
                                     onChange={this.onChangeIndustry.bind(this)} />
                                     <datalist name="industry" id="industry" className="industryArray" >
                                         {this.state.industryArray.map((item, key) =>
-                                            <option key={key} value={item.industry} data-value={item._id}/>
+                                            <option key={key} value={item.label} data-value={item._id}>{item.label}</option>
                                         )}
                                     </datalist>
                                 </div>

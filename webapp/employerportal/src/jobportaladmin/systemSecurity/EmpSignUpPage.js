@@ -72,7 +72,7 @@ render() {
                     <div className="ProgressBarSignUpWrapper">
                         <div className="row progressBar">
                             <div className="step col-lg-3">
-                                <a  onClick={() => this.hideComponent("showHide1")}>
+                                <a  >
                                     <div className={(showHide1) ||(showHide2)||(showHide3) ||(showHide4)
 
                                                     ?
@@ -85,7 +85,7 @@ render() {
                                 </a>
                             </div>
                             <div className="step col-lg-3">
-                                <a  onClick={() => this.hideComponent("showHide2")}>
+                                <a >
                                 <div className={(showHide2)||(showHide3) ||(showHide4)
                                                 ?
                                                     "bullet active"
@@ -97,14 +97,14 @@ render() {
                                 </a>
                             </div>
                             <div className="step col-lg-3" >
-                                <a onClick={() => this.hideComponent("showHide3")}>
+                                <a >
                                     <div className={(showHide3)||(showHide4)?"bullet active":"bullet"}>
                                         3
                                     </div>
                                 </a>
                             </div>
                             <div className="step col-lg-3" >
-                                <a onClick={() => this.hideComponent("showHide4")}>
+                                <a >
                                     <div className={(showHide4)?"bullet active":"bullet"}>
                                         4
                                     </div>

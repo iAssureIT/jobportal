@@ -26,8 +26,28 @@ class Header extends Component{
 
     console.log('userDetails',this.props.userDetails,this.state.company_id)
     this.setState({userDetails : JSON.parse(localStorage.getItem("userDetails"))})
+    
     var {mapAction} = this.props;
     mapAction.getSubscriptionDetails(this.props.userDetails.company_id)
+
+    var selectedCompanyDetails = {
+                                      company_id  : this.props.userDetails.company_id != "" ? this.props.userDetails.company_id : null,
+                                      companyID   : this.props.userDetails.companyID != "" ? this.props.userDetails.companyID : null,
+                                      companyName : this.props.userDetails.companyName,
+                                      branch_id   : this.props.userDetails.branch_id,
+                                      branchCode  : this.props.userDetails.branchCode == "" ? 0 : this.props.userDetails.branchCode,
+                                      //locationType: this.state.locationType, 
+                                      //role        : 'employer',
+                                      //status      : 'unverified',        
+                                      city        : this.props.userDetails.city,  
+                                      stateName   : this.props.userDetails.stateName,
+                                      stateCode   : this.props.userDetails.stateCode,
+                                      country     : this.props.userDetails.country,
+                                      countryCode : this.props.userDetails.countryCode,
+                                  }
+    mapAction.selectedCompanyDetails(selectedCompanyDetails)
+                                  
+
   }
   profileInfo(event){
 

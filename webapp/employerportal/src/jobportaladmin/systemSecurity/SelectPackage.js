@@ -89,7 +89,7 @@ subscribePackage(event){
     }else{
 
     var formValues={
-      "package_id"        : this.state.package_id,
+      "package_id"        : this.state.package_id, 
       "company_id"        : this.props.selectedCompanyDetails.company_id,
       "companyID"         : this.props.selectedCompanyDetails.companyID,
       "branch_id"         : this.props.selectedCompanyDetails.branch_id,
@@ -118,6 +118,7 @@ subscribePackage(event){
     //         .catch(function(error){
 
     //         })
+    console.log(formValues)
     Axios.post('/api/packagesubscription/post',formValues)
     .then((response)=>{ 
         this.setState({
@@ -128,7 +129,7 @@ subscribePackage(event){
             
             Axios.get('/api/packagesubscription/paymentOrderDetails/'+response.data.data._id)
             .then((orderdetails)=>{
-                console.log("hide",this.state.hide)
+                
                 if(this.state.hide=="none"){
                     this.setState({
                         hide : "block",
@@ -136,7 +137,6 @@ subscribePackage(event){
                         invoiceDetails : orderdetails.data,
                         subscription_id: response.data._id
                     })
-                    console.log(this.state.hide)
                 }
             })
             .catch(function(error){
@@ -175,7 +175,7 @@ makePayment (subscription_id, amountPaid) {
             })
 }
 render() {
-
+    console.log(this.props.selectedCompanyDetails)
     return (
         <div >
             <form className=" col-lg-10 col-lg-offset-1 signUpBoxFormWrapper signUpBoxFormWrapper2" style={{display:this.state.hideForm}}>

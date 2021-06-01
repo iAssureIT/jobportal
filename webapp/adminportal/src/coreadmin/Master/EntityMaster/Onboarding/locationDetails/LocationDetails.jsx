@@ -1331,7 +1331,7 @@ class LocationDetails extends Component {
 												<i className="fa fa-info-circle" aria-hidden="true"></i> &nbsp;
 												Basic Info
 											</a>
-											<div className="triangleone " id="triangle-right"></div>
+											<div className="triangleone trianglePositionFix" id="triangle-right"></div>
 										</li>
 										<li className=" col-lg-3 col-md-3 col-sm-12 col-xs-12 transactionTab pdcls pdclsOne btn2 disabled">
 											<div className="triangletwo" id="triangle-right1"></div>
@@ -1339,7 +1339,7 @@ class LocationDetails extends Component {
 												<i className="fa fa-map-marker iconMarginLeft" aria-hidden="true"></i> &nbsp;
 												Statutory Info
 											</a>
-											<div className="trianglethree forActive" id="triangle-right"></div>
+											<div className="trianglethree trianglePositionFix forActive" id="triangle-right"></div>
 										</li>
 										<li className="active col-lg-3 col-md-3 col-sm-12 col-xs-12 transactionTab noRightPadding pdcls btn4 disabled">
 											<div className="triangletwo" id="triangle-right1"></div>
@@ -1347,7 +1347,7 @@ class LocationDetails extends Component {
 												<i className="fa fa-map-marker iconMarginLeft" aria-hidden="true"></i> &nbsp;
 												Location
 											</a>
-											<div className="trianglethree triangleones forActive" id="triangle-right"></div>
+											<div className="trianglethree trianglePositionFix triangleShapeThree triangleones forActive" id="triangle-right"></div>
 										</li>
 										<li className="col-lg-3 col-md-3 col-sm-12 col-xs-12 transactionTab noRightPadding pdcls btn4 disabled">
 											<div className="trianglesix" id="triangle-right2"></div>

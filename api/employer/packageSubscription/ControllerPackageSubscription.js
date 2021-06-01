@@ -46,6 +46,12 @@ exports.create_order = (req, res, next) => {
 				"paymentOrderID" 	: "",
 				"paymentStatus"	    : paymentStatus, //Paid or Failed
 				"invoiceNumber"		: maxInvoiceNum,
+				"jobPublished"		: 0,
+				"resumeDownloaded" 	: 0,
+				"emailSent" 		: 0, 	
+				"videoIntroduction" : 0,
+				"robotScreening" 	: 0,	
+
 				"createdAt" 		: new Date(),
 				"createdBy"			: req.body.user_id				
 			});

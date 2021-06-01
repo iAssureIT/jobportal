@@ -23,7 +23,7 @@ import Header                                   from './jobportaladmin/common/he
 import Footer                                   from './jobportaladmin/common/footer/Footer.js';
 /*import Leftsidebar                              from './jobportaladmin/common/LeftSidebar/Leftsidebar.js';*/
 import FunctionalHeader                         from './jobportaladmin/common/functionalHeader/FunctionalHeader.js'; 
-
+import SelectPackage                            from './jobportaladmin/systemSecurity/SelectPackage.js';
 import JobPosting                               from './jobportaladmin/blocks/JobPosting/JobPosting.js'; 
 import JobPostProfile                           from './jobportaladmin/blocks/JobPostProfile/JobPostProfile.js';
 import CandidateProfile                         from './jobportaladmin/blocks/CandidateProfile/CandidateProfile.js';
@@ -105,6 +105,7 @@ class Layout extends Component  {
                                                    {/* <Leftsidebar/>*/}
                                                     <Switch >
                                                         <Route path="/"                                 component={Dashboard} exact />
+                                                        <Route path="/subscribe-package"                component={SelectPackage} exact />
                                                         <Route path="/post-job/"                        component={JobPosting} exact />
                                                         <Route path="/post-job/:job_id"                 component={JobPosting} exact />
                                                         <Route path="/job-profile/:job_id"              component={JobPostProfile} exact />

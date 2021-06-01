@@ -932,6 +932,7 @@ class JobPosting extends Component {
     }
 
     insertData(formValues) {
+        console.log(this.props.subscriptionDetails)
         formValues.jobPublished = this.props.subscriptionDetails.jobPublished
         Axios.post("/api/jobs/post", formValues)
 

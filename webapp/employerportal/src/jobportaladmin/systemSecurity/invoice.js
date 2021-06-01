@@ -31,12 +31,24 @@ makePayment(subscription_id, amountPaid){
 }
 render() {
     
-    console.log(this.props.invoiceDetails)
+    //console.log(this.props.invoiceDetails)
+    var branchAddress;
+    if (this.props.invoiceDetails.company_id) {
+        branchAddress = this.props.invoiceDetails.company_id.locations.filter((data)=>{
+            if (this.props.invoiceDetails.branch_id == data._id) {
+                return data;
+            }
+        })
+
+    }
+    //console.log(branchAddress)
     var taxrate     = this.state.taxrate[0] ? this.state.taxrate[0].taxRating : 0
     //console.log(tax)
     var tax = this.props.invoiceDetails.package_id && this.state.orderDetails ? parseInt(((this.state.orderDetails.amountPaid)/100)*tax) : 0
     var price   = this.props.invoiceDetails.package_id ? this.props.invoiceDetails.package_id.price : 0
     var total = price + tax;
+
+
     return (
         this.props.invoiceDetails ? 
           <div className="row">
@@ -117,7 +129,7 @@ render() {
                                             Mobile No 
                                         </div>
                                         <div className="col-lg-8 invoicePersonalInfoSubTitle">
-                                             {this.props.invoiceDetails.createdBy ? this.props.invoiceDetails.createdBy.profile.mobile : ""}
+                                             +91 9923393733
                                         </div>
                                     </div>
                                     <div className="row">
@@ -125,7 +137,7 @@ render() {
                                             Email
                                         </div>
                                         <div className="col-lg-8 invoicePersonalInfoSubTitle">
-                                            {this.props.invoiceDetails.createdBy ? this.props.invoiceDetails.createdBy.profile.email : ""}
+                                            ashish.naik@iassureit.com
                                         </div>
                                     </div>
                                     <div className="row">
@@ -152,7 +164,9 @@ render() {
                                     <div className="row">
                                         <div className="col-lg-3">
                                             <div className="row fromIcon">
-                                               <img src="/images/iAssureIT_favicon_blue.png" alt="icon"/>
+                                               <img src={this.props.invoiceDetails.company_id ? this.props.invoiceDetails.company_id.companyLogo[0] 
+                                                        ? this.props.invoiceDetails.company_id.companyLogo[0] : 
+                                                        "/images/noImagePreview.png" : "/images/noImagePreview.png"} alt="icon"/>
                                             </div>
                                         </div>
                                         <div className="col-lg-9">
@@ -192,7 +206,7 @@ render() {
                                             Address 
                                         </div>
                                         <div className="col-lg-8 invoicePersonalInfoSubTitle">
-                                            
+                                          {branchAddress ? branchAddress[0].addressLine1 : ""}  
                                         </div>
                                     </div>
                                 </div>

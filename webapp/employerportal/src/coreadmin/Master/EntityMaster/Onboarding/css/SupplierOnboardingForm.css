@@ -1745,6 +1745,9 @@ select#gender option[value="others"] {
     text-overflow: ellipsis;
 }
 
+.viewBtnStyle{
+    border: 1px solid #eee;
+}
 
 /**********************************Responsive code********************************************/
 

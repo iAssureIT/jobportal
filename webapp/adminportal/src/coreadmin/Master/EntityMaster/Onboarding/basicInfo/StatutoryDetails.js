@@ -837,7 +837,7 @@ class StatutoryDetails extends Component {
 												<i className="fa fa-info-circle" aria-hidden="true"></i> &nbsp;
 												Basic Info
 											</a>
-											<div className="triangleone " id="triangle-right"></div>
+											<div className="triangleone" id="triangle-right"></div>
 										</li>
 										<li className="active col-lg-3 col-md-3 col-sm-12 col-xs-12 transactionTab pdcls  pdclsOne btn2 ">
 											<div className="triangletwo" id="triangle-right1"></div>
@@ -845,7 +845,7 @@ class StatutoryDetails extends Component {
 												<i className="fa fa-info-circle iconMarginLeft" aria-hidden="true"></i> &nbsp;
 												Statutory Info
 											</a>
-											<div className="trianglethree triangleones forActive" id="triangle-right"></div>
+											<div className="trianglethree trianglePositionFix triangleones forActive triangleShapeTwo" id="triangle-right"></div>
 										</li>
 										<li className="col-lg-3 col-md-3 col-sm-12 col-xs-12 transactionTab noRightPadding pdcls btn4 disabled">
 											<div className="trianglesix" id="triangle-right2"></div>
@@ -908,7 +908,7 @@ class StatutoryDetails extends Component {
 																		</select>
 																	</div>
 																	<div className="col-lg-3 col-md-3 col-sm-12 col-xs-12  " >
-																		<label className="labelform col-lg-12 col-md-12 col-sm-12 col-xs-12">{this.state.taxName}GSTIN<i className="astrick">*</i>
+																		<label className="labelform col-lg-12 col-md-12 col-sm-12 col-xs-12">{this.state.taxName}GSTIN<i className="asterisk">*</i>
 																			<a data-tip data-for='basicInfo4Tooltip' className="pull-right"> <i title="Eg. 29ABCDE1234F1Z5" className="fa fa-question-circle"></i> </a>
 																		</label>
 																		<input type="text" id="GSTIN" placeholder="29ABCDE1234F1Z5" className="form-control uppercase col-lg-12 col-md-12 col-sm-12 col-xs-12" value={this.state.GSTIN} ref="GSTIN" name="GSTIN" onChange={this.handleChange} />

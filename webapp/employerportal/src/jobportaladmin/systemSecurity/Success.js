@@ -3,6 +3,9 @@ import "./success.css";
 import Axios from 'axios';
 import { FontAwesomeIcon }   from '@fortawesome/react-fontawesome';
 import Moment                from 'moment';
+import { connect }           from 'react-redux';
+import { bindActionCreators }   from 'redux';
+import  * as mapActionCreator   from '../common/actions/index';
 
 class Success extends Component {
 constructor() {
@@ -45,7 +48,7 @@ render() {
                         </div>
                     </div>
                     <div className="row">
-                        <div className="col-lg-6 col-lg-offset-3">
+                        <div className="col-lg-6 col-lg-offset-4">
                             <div className="col-lg-6 successPointTitle">
                                 Transaction Status 
                             </div>
@@ -55,7 +58,7 @@ render() {
                         </div>
                     </div>
                     <div className="row">
-                        <div className="col-lg-6 col-lg-offset-3">
+                        <div className="col-lg-6 col-lg-offset-4">
                             <div className="col-lg-6 successPointTitle">
                                 Transaction Number 
                             </div>
@@ -65,7 +68,7 @@ render() {
                         </div>
                     </div>
                     <div className="row">
-                        <div className="col-lg-6 col-lg-offset-3">
+                        <div className="col-lg-6 col-lg-offset-4">
                             <div className="col-lg-6 successPointTitle">
                                 Transaction Date 
                             </div>
@@ -75,7 +78,7 @@ render() {
                         </div>
                     </div>
                     <div className="row">
-                        <div className="col-lg-6 col-lg-offset-3">
+                        <div className="col-lg-6 col-lg-offset-4">
                             <div className="col-lg-6 successPointTitle">
                                 Name
                             </div>
@@ -85,7 +88,7 @@ render() {
                         </div>
                     </div>
                     <div className="row">
-                        <div className="col-lg-6 col-lg-offset-3">
+                        <div className="col-lg-6 col-lg-offset-4">
                             <div className="col-lg-6 successPointTitle">
                                 Mobile Number 
                             </div>
@@ -95,7 +98,7 @@ render() {
                         </div>
                     </div>
                     <div className="row">
-                        <div className="col-lg-6 col-lg-offset-3">
+                        <div className="col-lg-6 col-lg-offset-4">
 
                             <div className="col-lg-6 successPointTitle">
                                 Email ID
@@ -106,7 +109,7 @@ render() {
                         </div>
                     </div>
                     <div className="row">
-                        <div className="col-lg-6 col-lg-offset-3">
+                        <div className="col-lg-6 col-lg-offset-4">
                             <div className="col-lg-6 successPointTitle">
                                 Amount
                             </div>
@@ -116,16 +119,16 @@ render() {
                         </div>
                     </div>
                     <div className="row buttonWrapperSuccess">
-                        <div className="col-lg-6 col-lg-offset-3">
+                        <div className="col-lg-6 col-lg-offset-4">
                             <div className="col-lg-12">
                                 {/*<button className="buttonNext buttonNext2 col-lg-4 pull-left">
                                      Back
                                 </button>*/}
-                                <a href="/login">
+                                {!this.props.userDetails.loggedIn ? <a href="/login">
                                 <button className="buttonNext buttonNext2 col-lg-4 pull-right"  >
                                      Login
                                 </button>
-                                </a>
+                                </a> : ""}
                             </div>
                         </div>
                     </div>
@@ -137,4 +140,15 @@ render() {
 }
 
 }
-export default Success;
+const mapStateToProps = (state)=>{ 
+    return {
+        userDetails    : state.userDetails
+    }
+}
+const mapDispatchToProps = (dispatch) => ({
+  mapAction :  bindActionCreators(mapActionCreator, dispatch)
+})
+
+export default connect(mapStateToProps, mapDispatchToProps) (Success);
+
+
