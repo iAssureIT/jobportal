@@ -2479,7 +2479,7 @@ exports.insertBulkJobs = (req, res, next) => {
                         "minOtherExp"       : Math.floor(Math.random() * 5),
                         "preferredSkills"   : preferredSkillsArray
                     },
-                "status"   : "draft",
+                "status"   : "active",
                 "applicantStatistics":  {   
                     "male"          : 0,
                     "female"        : 0,

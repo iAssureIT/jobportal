@@ -115,19 +115,25 @@ class Login extends Component {
             console.log("response login",response);
             if (response.data.message == "Login Auth Successful") { 
               var  userDetails = {
-                  loggedIn    : true,
+                  loggedIn    : true, 
                   username    : response.data.username,
-                  firstName : response.data.userDetails.firstName, 
-                  lastName  : response.data.userDetails.lastName, 
-                  email     : response.data.userDetails.email, 
-                  phone     : response.data.userDetails.phone, 
-                  city      : response.data.userDetails.city,
-                  company_id : response.data.userDetails.company_id,
-                  companyID : response.data.userDetails.companyID,
-                  companyName : response.data.userDetails.companyName,  
-                  user_id   : response.data.userDetails.user_id,
-                  roles     : response.data.userDetails.roles,
-                  token     : response.data.userDetails.token 
+                  firstName   : response.data.userDetails.firstName, 
+                  lastName    : response.data.userDetails.lastName, 
+                  email       : response.data.userDetails.email, 
+                  phone       : response.data.userDetails.phone, 
+                  company_id  : response.data.userDetails.company_id,
+                  companyID   : response.data.userDetails.companyID,
+                  companyName : response.data.userDetails.companyName, 
+                  branch_id   : response.data.userDetails.branch_id,
+                  branchCode  : response.data.userDetails.branchCode,
+                  city        : response.data.userDetails.city,
+                  stateName   : response.data.userDetails.stateName,
+                  stateCode   : response.data.userDetails.stateCode,
+                  country     : response.data.userDetails.country,
+                  countryCode : response.data.userDetails.countryCode,
+                  user_id     : response.data.userDetails.user_id,
+                  roles       : response.data.userDetails.roles,
+                  token       : response.data.userDetails.token 
                 }
               if (userDetails.company_id) {
                 axios.get('/api/entitymaster/getEntity/'+userDetails.company_id)
@@ -152,24 +158,7 @@ class Login extends Component {
                                 if (pack.data) {
                                   window.location.href='/'
                                 }else{
-                                  var selectedCompanyDetails = {
-                                      company_id  : userDetails.company_id != "" ? userDetails.company_id : null,
-                                      companyID   : userDetails.companyID != "" ? userDetails.companyID : null,
-                                      companyName : userDetails.companyName,
-                                      branch_id   : response.data.userDetails.branch_id,
-                                      branchCode  : response.data.userDetails.branchCode == "" ? 0 : response.data.userDetails.branchCode,
-                                      //locationType: this.state.locationType, 
-                                      //role        : 'employer',
-                                      //status      : 'unverified',        
-                                      city        : response.data.userDetails.city,  
-                                      stateName   : response.data.userDetails.stateName,
-                                      stateCode   : response.data.userDetails.stateCode,
-                                      country     : response.data.userDetails.country,
-                                      countryCode : response.data.userDetails.countryCode,
-                                  }
-
-                                  mapAction.selectedCompanyDetails(selectedCompanyDetails)
-                                  //window.location.href='/subscribe-package'
+                                  window.location.href='/subscribe-package'
                                 }
                             })
                             .catch((error)=>{
