@@ -762,7 +762,7 @@ class Academics extends Component{
 							<div className="col-sm-12">
 								<div className="row formWrapper">
 
-									<div className="col-md">
+									<div className="col-lg-4 col-sm-6">
 										<label htmlFor="qualificationLevel" className="nameTitleForm">
 											Qualification Level
 											<sup className="nameTitleFormStar">*</sup>
@@ -782,7 +782,7 @@ class Academics extends Component{
 										</div>
 										<span id="qualificationLevelError" className="errorMsg"></span>
 									</div>
-									<div className="col-md">
+									<div className="col-lg-4 col-sm-6 xs-margin">
 										<label htmlFor="qualification" className="nameTitleForm">
 											Qualification
 											<sup className="nameTitleFormStar">*</sup>
@@ -802,7 +802,7 @@ class Academics extends Component{
 										</div>
 										<span id="qualificationError" className="errorMsg"></span>
 									</div>
-									<div className="col-md">
+									<div className="col-lg-4 col-sm-6 xs-margin sm-margin">
 										<label htmlFor="specialization" className="nameTitleForm">
 											Specialization
 										</label>
@@ -817,15 +817,7 @@ class Academics extends Component{
 										</div> 
 										<span id="specializationError" className="errorMsg"></span>
 									</div>
-								</div>
-							</div>
-						</div>
-
-						<div className="row ">
-							<div className="col-sm-12">
-								<div className="row formWrapper">
-
-									<div className="col-md">
+									<div className="col-lg-4 col-sm-6 xs-margin lg-margin">
 										<label htmlFor="grade" className="nameTitleForm">
 											Grade/Marks/GPA
 										</label>
@@ -840,7 +832,7 @@ class Academics extends Component{
 										</div> 
 										<span id="gradeError" className="errorMsg"></span>
 									</div>
-									<div className="col-md">
+									<div className="col-lg-4 col-sm-6 xs-margin lg-margin">
 										<label htmlFor="admisionYear" className="nameTitleForm">
 											Admission Year
 											<sup className="nameTitleFormStar">*</sup>
@@ -857,7 +849,7 @@ class Academics extends Component{
 										</div> 
 										<span id="admisionYearError" className="errorMsg"></span>
 									</div>
-									<div className="col-md">
+									<div className="col-lg-4 col-sm-6  xs-margin lg-margin">
 										<label htmlFor="passOutYear" className="nameTitleForm">
 											Pass-out-Year
 											<sup className="nameTitleFormStar">*</sup>
@@ -874,14 +866,7 @@ class Academics extends Component{
 										</div> 
 										<span id="passOutYearError" className="errorMsg"></span>
 									</div>	
-								</div>
-							</div>
-						</div>
-
-						<div className="row ">
-							<div className="col-sm-12">
-								<div className="row formWrapper">	
-									<div className="col-md">
+									<div className="col-lg-4 col-sm-6 xs-margin lg-margin">
 										<label htmlFor="university" className="nameTitleForm">
 											University/Boards Name
 											<sup className="nameTitleFormStar">*</sup>
@@ -901,7 +886,7 @@ class Academics extends Component{
 										</div> 
 										<span id="universityError" className="errorMsg"></span>
 									</div>
-									<div className="col-md">
+									<div className="col-lg-4 col-sm-6 xs-margin lg-margin">
 										<label htmlFor="college" className="nameTitleForm">
 											College/School Name<sup className="nameTitleFormStar">*</sup>
 										</label>
@@ -936,7 +921,7 @@ class Academics extends Component{
 		                                        searchOptions={searchOptions}
 		                                      	>
 		                                        {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-		                                          <div className="candidatePlaceHolderWrappper">
+		                                          <div className="candidatePlaceHolderWrappper2">
 		                                            <input
 		                                              {...getInputProps({
 		                                                placeholder: 'Search Address ...',
@@ -977,7 +962,7 @@ class Academics extends Component{
 										</div> 
 										<span id="collegeError" className="errorMsg"></span>
 									</div>
-									<div className="col-md">
+									<div className="col-lg-4 col-sm-6 col-6 xs-margin lg-margin">
 										<label htmlFor="mode" className="nameTitleForm">
 											Mode
 											<sup className="nameTitleFormStar">*</sup>
@@ -1008,14 +993,7 @@ class Academics extends Component{
 										</div>
 										<span id="modeError" className="errorMsg"></span>
 									</div>
-								</div>
-							</div>
-						</div>
-
-						<div className="row ">
-							<div className="col-sm-12">
-								<div className="row formWrapper">
-									<div className="col-md">
+									<div className="col-lg-4 col-sm-6 col-6 xs-margin lg-margin">
 										<label htmlFor="city" className="nameTitleForm">
 											City
 											<sup className="nameTitleFormStar">*</sup>
@@ -1030,9 +1008,7 @@ class Academics extends Component{
 										</div>
 										<span id="cityError" className="errorMsg"></span>
 									</div>
-									
-
-									<div className="col-md">
+									<div className="col-lg-4 col-sm-6 col-6 xs-margin lg-margin">
 										<label htmlFor="state" className="nameTitleForm">
 											State
 											<sup className="nameTitleFormStar">*</sup>
@@ -1058,7 +1034,7 @@ class Academics extends Component{
 										</div> 
 										<span id="stateError" className="errorMsg"></span>
 									</div>
-									<div className="col-md">
+									<div className="col-lg-4 col-sm-6 col-6 xs-margin lg-margin">
 										<label htmlFor="country" className="nameTitleForm">
 											Country
 											<sup className="nameTitleFormStar">*</sup>
@@ -1074,9 +1050,13 @@ class Academics extends Component{
 										</div> 
 										<span id="countryError" className="errorMsg"></span>
 									</div>
-								</div>	
-							</div>	
-						</div>	
+								</div>
+							</div>
+						</div>
+
+
+
+						
 						<div className="row">
 							<div className="col-lg-12">
 								<button className="buttonBack pull-right"

@@ -115,7 +115,7 @@ td#ActionContent{
 	text-transform: capitalize!important;
 }
 .skillPillsPadding{
-	padding-left: 6px!important;
+	margin-left:-10px;
 }
 .iAssureTable1 .tempTableHeader{
 	font-size: 15px;
@@ -123,4 +123,9 @@ td#ActionContent{
 .iAssureTable1 .noTempData{
 	color: #fff;
 	font-size: 13px;
+}
+@media (max-width:576px){
+    .skillPillsPadding{
+        margin-left:0px;
+    }
 }

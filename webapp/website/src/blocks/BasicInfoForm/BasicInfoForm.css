@@ -751,7 +751,7 @@ user agent stylesheet:focus {
 /*********************************************Properties Of Experience***********************************************/
 
 .experienceBoxWidth .input-group .form-control {
-    width: 78%;
+    width: 77%;
 }
 
 /*********************************************Properties Of Experience***********************************************/
@@ -928,6 +928,12 @@ user agent stylesheet:focus {
     .sm-margin{
         margin-top: 20px;
     }
+     div.ReactTags__tags {
+    width: 92%;
+    }
+    .candidatePlaceHolderWrappper2 {
+        width: 84%;
+    }
 }
 @media (max-width:576px){
     .xs-margin{
@@ -939,10 +945,17 @@ user agent stylesheet:focus {
     div.ReactTags__tags {
     width: 83%;
     }
+    .candidatePlaceHolderWrappper2 {
+        width: 84%;
+    }
     .uploadImageClient1, .LogoImageUp1 {
         position: relative;
     }
     .candidatePlaceHolderWrappper {
         width: 87%;
+    }
+
+    .skillPillsPadding{
+        padding-left:0px;
     }
 }

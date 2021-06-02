@@ -724,7 +724,7 @@ class BasicInfoForm extends Component{
 												</div> 
 												<span id="firstNameError" className="errorMsg"></span>
 											</div>
-											<div className="col-lg col-sm-12  sm-margin">
+											<div className="col-lg col-sm-12 xs-margin  sm-margin">
 												<label htmlFor="middleName" className="nameTitleForm">
 													Middle Name <sup className="nameTitleFormStar">*</sup>
 												</label>
@@ -781,7 +781,7 @@ class BasicInfoForm extends Component{
 						<div className="row">
 							<div className="col-12">
 								<div className="row formWrapper">
-									<div className="col-lg-4 col-sm-6 ">
+									<div className="col-lg-4 col-sm-6">
 										<label htmlFor="lastName" className="nameTitleForm">
 											Last Name <sup className="nameTitleFormStar">*</sup>
 										</label>
@@ -796,7 +796,7 @@ class BasicInfoForm extends Component{
 										<span id="lastNameError" className="errorMsg"></span>
 									</div>
 									<div class="w-100 d-none d-sm-block d-md-none"></div>
-									<div className="col-lg-4 col-sm-12 xs-margin sm-margin">
+									<div className="col-lg-4 col-sm-12 xs-margin  sm-margin">
 										<label htmlFor="email" className="nameTitleForm">
 											Personal Mail ID
 											<sup className="nameTitleFormStar">*</sup>

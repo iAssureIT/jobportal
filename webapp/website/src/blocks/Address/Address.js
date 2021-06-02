@@ -668,7 +668,7 @@ class Address extends Component{
 										</div>
 
 									
-										<div className="col-lg-4 col-md-6 xs-margin">
+										<div className="col-lg-4 col-md-6 xs-margin sm-margin">
 											<label htmlFor="houseNumber" className="nameTitleForm">
 												House/Building Number
 												
@@ -698,7 +698,7 @@ class Address extends Component{
 			                                        searchOptions={searchOptions}
 			                                      	>
 			                                        {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-			                                          <div className="candidatePlaceHolderWrappper">
+			                                          <div className="candidatePlaceHolderWrappper1">
 				                                          <div>
 				                                            <input
 				                                              {...getInputProps({

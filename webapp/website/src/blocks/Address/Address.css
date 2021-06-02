@@ -267,9 +267,15 @@
    .candidatePlaceHolderWrappper {
         width: 79%;
     }
+    .candidatePlaceHolderWrappper1 {
+        width: 92%;
+    }
 }
 @media (max-width:576px){
     .candidatePlaceHolderWrappper {
+        width: 84%;
+    }
+    .candidatePlaceHolderWrappper1 {
         width: 84%;
     }
 }

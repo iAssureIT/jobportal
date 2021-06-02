@@ -851,23 +851,23 @@ class Certification extends Component{
 	render(){
 		
 		return(
-				<div className="col-md-12 pageWrapper candidateProfileSteps ">
-					<form className="col-md-12  mainForm">
+				<div className="col-12 pageWrapper candidateProfileSteps ">
+					<form className="col-12  mainForm">
 						<div className="row ">
-							<div className="col-sm-12">
-								<div className="row formWrapper">
-									<div className="col-lg-4 col-lg-offset-4">
+							<div className="col-12">
+								<div className="row formWrapper justify-content-center">
+									<div className="col-lg-4 col-sm-6 col-8">
 										<div className="input-group genderFeildWrapper">
 
 											<div className ={ this.state.certificationToggel===false
-															 ? "genderFeild col-lg-6 genderFeildActive"
-															 : "genderFeild col-lg-6"}  
+															 ? "genderFeild col-6 genderFeildActive"
+															 : "genderFeild col-6"}  
 												 id="toggleSkills" name="certificationToggel" 
 												 value="toggleSkills" onClick={this.changeBlock.bind(this)}
 											> Skills</div>
 											<div className={this.state.certificationToggel === true
-															? "genderFeild col-lg-6 genderFeildActive"
-															: "genderFeild col-lg-6"} 
+															? "genderFeild col-6 genderFeildActive"
+															: "genderFeild col-6"} 
 												id="toogleCertificate" name="certificationToggel" 
 												value="toogleCertificate" onClick={this.changeBlock.bind(this)}
 											> Certification	</div>
@@ -882,10 +882,10 @@ class Certification extends Component{
 							this.state.certificationToggel===false
 							?
 								<div className="row ">
-									<div className="col-sm-12">
+									<div className="col-12">
 										<div className="row formWrapper">
 											
-											<div className="col-md-2">
+											<div className="col-lg-2 col-sm-6 col-12">
 												
 												<label htmlFor="skills" className="nameTitleForm">
 													Type 
@@ -893,26 +893,26 @@ class Certification extends Component{
 												</label>
 												<div className="input-group genderFeildWrapper skillsGenderWrapper text-center">
 													<div className ={ this.state.isPrimary===true
-															 ? "genderFeild col-md-6 genderFeildActive"
-															 : "genderFeild col-md-6"}  
+															 ? "genderFeild col-6 genderFeildActive"
+															 : "genderFeild col-6"}  
 														 id="togglePrimary" name="primaryToggel" 
 														 value="togglePrimary" onClick={this.handleSwitch.bind(this)}>
-														<div className="row skillPillsPadding">
+														<div className=" skillPillsPadding">
 															Primary
 														</div>
 													</div>
 													<div className={this.state.isPrimary === false
-																	? "genderFeild col-md-6 genderFeildActive"
-																	: "genderFeild col-md-6"} 
+																	? "genderFeild col-6 genderFeildActive"
+																	: "genderFeild col-6"} 
 														id="toogleSecondary" name="primaryToggel" 
 														value="toogleSecondary" onClick={this.handleSwitch.bind(this)}>
-														<div className="row skillPillsPadding">
+														<div className=" skillPillsPadding">
 															Secondary
 														</div>
 													</div>
 												</div>
 											</div>
-											<div className="col-md-4">
+											<div className="col-lg-4 col-sm-6 xs-margin">
 												<label htmlFor="skills" className="nameTitleForm">
 													Skill 
 													<sup className="nameTitleFormStar">*</sup>
@@ -937,7 +937,7 @@ class Certification extends Component{
 												<span id="skillsError" className="errorMsg"></span>
 											</div>
 
-											<div className="col-md-3">
+											<div className="col-lg-3 col-sm-6 xs-margin sm-margin">
 												<label htmlFor="rating" className="nameTitleForm">How do you rate yourself  <sup className="nameTitleFormStar">*</sup></label>
 												<div className="input-group ">
 													<span className={this.state.rating=== "1"||this.state.rating=== "2"||this.state.rating=== "3"||this.state.rating=== "4"||this.state.rating=== "5"? "fa fa-star rating stars":"fa fa-star-o rating"} id="1" name="rating" value="1" onClick={this.starClick.bind(this)}></span>
@@ -948,7 +948,7 @@ class Certification extends Component{
 												</div> 
 												<span id="ratingError" className="errorMsg"></span>
 											</div>
-											<div className="col-md-3">
+											<div className="col-lg-3 col-sm-6 xs-margin sm-margin">
 												<label htmlFor="experience" className="nameTitleForm">Experience in Years<sup className="nameTitleFormStar">*</sup></label>
 												<div className="input-group ">
 													<span className="input-group-addon inputBoxIcon"><FontAwesomeIcon icon="chalkboard-teacher" /></span> 
@@ -962,10 +962,10 @@ class Certification extends Component{
 							:
 							<div >
 							<div className="row ">
-								<div className="col-sm-12">
+								<div className="col-12">
 									<div className="row formWrapper">
 
-										<div className="col-md">
+										<div className="col-lg-4 col-sm-6">
 											<label htmlFor="certificationName" className="nameTitleForm">Certification Name<sup className="nameTitleFormStar">*</sup></label>
 											<div className="input-group ">
 												<span className="input-group-addon inputBoxIcon"><FontAwesomeIcon icon="chalkboard-teacher" /></span> 
@@ -974,7 +974,7 @@ class Certification extends Component{
 											<span id="certificationNameError" className="errorMsg"></span>
 										</div>
 
-										<div className="col-md">
+										<div className="col-lg-4 col-sm-6 xs-margin ">
 											<label htmlFor="issuedBy" className="nameTitleForm">Issued By<sup className="nameTitleFormStar">*</sup></label>
 											<div className="input-group ">
 												<span className="input-group-addon inputBoxIcon"><i className="fa fa-user-circle"></i></span> 
@@ -983,7 +983,7 @@ class Certification extends Component{
 											<span id="issuedByError" className="errorMsg"></span>
 										</div>
 
-										<div className="col-md">
+										<div className="col-lg-4 col-sm-6 xs-margin sm-margin">
 											<label htmlFor="certifiedOn" className="nameTitleForm">Certified ON<sup className="nameTitleFormStar">*</sup></label>
 											<div className="input-group ">
 												<span className="input-group-addon inputBoxIcon">
@@ -996,15 +996,7 @@ class Certification extends Component{
 											</div> 
 											<span id="certifiedOnError" className="errorMsg"></span>
 										</div>
-									</div>
-								</div>
-							</div>
-
-							<div className="row ">
-								<div className="col-sm-12">
-									<div className="row formWrapper">
-
-										<div className="col-md-4">
+										<div className="col-lg-4 col-sm-6 xs-margin lg-margin">
 											<label htmlFor="validity" className="nameTitleForm">Valid Till</label>
 											<div className="input-group ">
 												<span className="input-group-addon inputBoxIcon"><i className="fa fa-calendar"></i> </span> 
@@ -1015,7 +1007,7 @@ class Certification extends Component{
 											</div> 
 										</div>
 
-										<div className="col-md-4">
+										<div className="col-lg-4 col-sm-6 xs-margin lg-margin">
 											<label htmlFor="grade" className="nameTitleForm">Grade / Percentage  </label>
 											<div className="input-group ">
 												<span className="input-group-addon inputBoxIcon"><FontAwesomeIcon icon="file-alt" /></span> 
