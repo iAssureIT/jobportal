@@ -210,9 +210,9 @@ class LocationDetails extends Component {
 		$.validator.addMethod("pincodeRegx", function (value, element, regexpr) {
 			return regexpr.test(value);
 		}, "Pincode does not exist!");
-		/*$.validator.addMethod("regxcity", function (value, element, arg) {
+		$.validator.addMethod("regxcity", function (value, element, arg) {
 			return arg !== value;
-		}, "Please select the city");*/
+		}, "Please select the city");
 		$.validator.addMethod("regxstate", function (value, element, arg) {
 			return arg !== value;
 		}, "Please select the state");
@@ -226,9 +226,9 @@ class LocationDetails extends Component {
 			return regexpr.test(value);
 		}, "Please enter valid PAN.");
 		
-		$.validator.addMethod("regxarea", function (value, element, regexpr) {
+		/*$.validator.addMethod("regxarea", function (value, element, regexpr) {
 			return regexpr.test(value);
-		}, "Please enter valid area.");
+		}, "Please enter valid area.");*/
 		jQuery.validator.addMethod("notEqual", function(value, element, param) {
       return this.optional(element) || value != param;
     }, "Please specify a different (non-default) value");
@@ -254,14 +254,14 @@ class LocationDetails extends Component {
 					required: true,
 					regxstate: "-- Select --"
 				},
-				// district: {
-				// 	required: true,
-				// 	regxdistrict: "-- Select --"
-				// },
-				// pincode: {
-				// 	required: true,
-				// 	pincodeRegx: /^[0-9][0-9\-\s]/,
-				// },
+				district: {
+					required: true,
+					regxdistrict: "-- Select --"
+				},
+				pincode: {
+					required: true,
+					pincodeRegx: /^[0-9][0-9\-\s]/,
+				},
 				GSTIN: {
 					required:true,
 					regxGSTIN: /^[0-9]{2}[a-zA-Z]{5}[0-9]{4}[a-zA-Z]{1}[A-Za-z1-9]{1}[z|Z]{1}[A-Za-z0-9]{1}$|^$/,
@@ -299,9 +299,9 @@ class LocationDetails extends Component {
 				if (element.attr("name") === "PAN") {
 					error.insertAfter("#PAN");
 				}
-				if (element.attr("name") === "area") {
+				/*if (element.attr("name") === "area") {
 					error.insertAfter("#area");
-				}
+				}*/
 			}
 		})
 	}
@@ -1404,12 +1404,12 @@ class LocationDetails extends Component {
 
 																	  </div>
 																	</div>
-																	<div className="col-lg-4 col-md-4 col-sm-12 col-xs-12  " >
+																	<div className="col-lg-4 col-md-4 col-sm-12 col-xs-12" >
 																		<label className="labelform col-lg-12 col-md-12 col-sm-12 col-xs-12">Flat No/Block No</label>
 																		<input id="Line2" type="text" className="form-control col-lg-12 col-md-12 col-sm-12 col-xs-12" value={this.state.addressLine2} ref="addressLine2" name="addressLine2" onChange={this.handleChange} />
 																	</div>
 																	<div className="col-lg-4 col-md-4 col-sm-12 col-xs-12  entityLocation" >
-																		<label className="labelform col-lg-12 col-md-12 col-sm-12 col-xs-12">Address Line 2 <i className="astrick">*</i></label>
+																		<label className="labelform col-lg-12 col-md-12 col-sm-12 col-xs-12 entityLocAdd">Address Line 2 <i className="astrick">*</i></label>
 																		<PlacesAutocomplete
 								                                        value={this.state.addressLine1}
 								                                        onChange={this.handleChangePlaces}
@@ -1473,17 +1473,15 @@ class LocationDetails extends Component {
 																			}
 																		</select>
 																	</div>
-																	<div className="col-lg-3 col-md-3 col-sm-12 col-xs-12  " id="city" >
-																		<label className="labelform col-lg-12 col-md-12 col-sm-12 col-xs-12 ">City<i className="astrick">*</i> 
-																		</label>
-																		<input type="text"  className="form-control capitalize col-lg-12 col-md-12 col-sm-12 col-xs-12" value={this.state.city} ref="city" name="city" onChange={this.handleChange} />
+																	{<div className="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+																		<label className="labelform col-lg-12 col-md-12 col-sm-12 col-xs-12">City<i className="astrick">*</i></label>
+																		<input type="text" id="city" className="form-control capitalize col-lg-12 col-md-12 col-sm-12 col-xs-12" value={this.state.city} ref="city" name="city" onChange={this.handleChange} />
+																	</div>}
+																	<div className="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+																		<label className="labelform col-lg-12 col-md-12 col-sm-12 col-xs-12 ">District<i className="astrick">*</i></label>
+																		<input type="text" id="district" className="form-control capitalize col-lg-12 col-md-12 col-sm-12 col-xs-12" value={this.state.district} ref="district" name="district" onChange={this.handleChange} />
 																	</div>
-																	<div className="col-lg-3 col-md-3 col-sm-12 col-xs-12  " id="district" >
-																		<label className="labelform col-lg-12 col-md-12 col-sm-12 col-xs-12 ">District<i className="astrick">*</i> 
-																		</label>
-																		<input type="text"  className="form-control capitalize col-lg-12 col-md-12 col-sm-12 col-xs-12" value={this.state.district} ref="district" name="district" onChange={this.handleChange} />
-																	</div>
-																	<div className="col-lg-3 col-md-3 col-sm-12 col-xs-12  " >
+																	<div className="col-lg-3 col-md-3 col-sm-12 col-xs-12" >
 																		<label className="labelform col-lg-12 col-md-12 col-sm-12 col-xs-12">Pincode <i className="astrick">*</i>
 																		</label>
 																		<input maxLength="6" onChange={this.handlePincode.bind(this)} type="text" id="pincode" className="form-control col-lg-12 col-md-12 col-sm-12 col-xs-12" value={this.state.pincode} ref="pincode" name="pincode" onKeyDown={this.keyPressNumber.bind(this)} />

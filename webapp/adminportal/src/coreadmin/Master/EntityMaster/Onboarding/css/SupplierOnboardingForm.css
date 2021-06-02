@@ -1437,6 +1437,10 @@ select#gender option[value="others"] {
 top:0px !important;
 }
 
+.entityLocAdd{
+    padding-bottom: 5px;
+    margin-left: -10px;
+}
 
 
 /************************************************/

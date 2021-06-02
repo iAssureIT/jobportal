@@ -77,13 +77,13 @@ class BasicInfo extends Component {
     window.scrollTo(0, 0);
     $.validator.addMethod("regxA1", function (value, element, regexpr) {
       return regexpr.test(value);
-    }, "Please enter valid company name");
+    }, "Please specify company name (only letters and spaces are allowed)");
     $.validator.addMethod("regxA5", function (value, element, regexpr) {
       return regexpr.test(value);
-    }, "Please enter valid group name");
-  /*  $.validator.addMethod("regxA2", function (value, element, regexpr) {
+    }, "Please specify group name (only letters and spaces are allowed)");
+    $.validator.addMethod("regxA2", function (value, element, regexpr) {
       return regexpr.test(value);
-    }, "Please enter a valid TAN Number.");*/
+    }, "Please enter a valid TAN Number.");
     $.validator.addMethod("regxA4", function (value, element, regexpr) {
       return regexpr.test(value);
     }, "Please enter a valid website.");
@@ -111,16 +111,17 @@ class BasicInfo extends Component {
       rules: {
         companyName: {
           required: true,
-          regxA1: /^[A-Za-z][A-Za-z0-9\-\s]/,
+          regxA1: /^[A-Za-z]/,
         },
         groupName: {
           required: true,
-          regxA5: /^[A-Za-z][A-Za-z0-9\-\s]/,
+          regxA5: /^[A-Za-z]/,
         },
-     /*   TAN: {
+        TAN: {
+          /*regxA2: /^[A-Za-z]{4}[0-9]{5}/,*/
           regxA2: /^[A-Za-z]{4}[0-9]{5}[A-Za-z]$|^$/,
         },
-        */
+        
         website: {
           regxA4: /^([a-zA-Z0-9_\-:/.]+).([a-zA-Z]{2,5})$|^$/
         },
@@ -153,9 +154,9 @@ class BasicInfo extends Component {
         if (element.attr("name") === "companyEmail") {
           error.insertAfter("#companyEmail");
         }
-       /*  if (element.attr("name") === "TAN") {
+         if (element.attr("name") === "TAN") {
           error.insertAfter("#TAN");
-        }*/
+        }
         if (element.attr("name") === "website") {
           error.insertAfter("#website");
         }
@@ -970,7 +971,7 @@ class BasicInfo extends Component {
                                 <label className="labelform col-lg-12 col-md-12 col-sm-12 col-xs-12 NOpadding-left">Tax Deduction Account Number
                                   <a href="#" data-tip data-for='basicInfo2Tooltip' className="pull-right"> <i title="Eg. NGPO02911G" className="fa fa-question-circle"></i> </a>
                                 </label>
-                                <input maxLength="10" type="text" id="TAN" className="form-control col-lg-12 col-md-12 col-sm-12 col-xs-12 inputText UpperCase" value={this.state.TAN} ref="TAN" name="TAN" onChange={this.handleChange} placeholder="NGPO02911G" />
+                                <input maxLength="10" type="text" id="TAN" className="form-control col-lg-12 col-md-12 col-sm-12 col-xs-12 inputText UpperCase" value={this.state.TAN} ref="TAN" name="TAN" onChange={this.handleChange} placeholder="NGPO02911G" required/>
                               </div>
                           <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12" >
                             <label className="labelform col-lg-12 col-md-12 col-sm-12 col-xs-12 NOpadding-left">Company Identification Number
