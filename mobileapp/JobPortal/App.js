@@ -1,7 +1,7 @@
 import React, 
       { useEffect,useState }  from "react";
 import axios                  from 'axios';
-// import codePush               from 'react-native-code-push';
+import codePush               from 'react-native-code-push';
 import {Provider, connect}    from 'react-redux';
 import {Provider as ProviderPaper, 
       Snackbar}               from 'react-native-paper';
@@ -84,8 +84,8 @@ const ToastProviderComponent = props => {
   }),
 )(ToastProviderComponent);
 
-// const codePushOptions = {
-//  checkFrequency: codePush.CheckFrequency.ON_APP_START 
-// };
-// export default codePush(codePushOptions)(App);
-export default (App);
+const codePushOptions = {
+ checkFrequency: codePush.CheckFrequency.ON_APP_START 
+};
+export default codePush(codePushOptions)(App);
+// export default (App);
