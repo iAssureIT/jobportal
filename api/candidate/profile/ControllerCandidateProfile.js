@@ -1172,7 +1172,7 @@ exports.getCandidateList = (req,res,next)=>{
     }
     console.log(selector)
 
-    CandidateProfile.find(selector)
+    CandidateProfile.find(selector).sort({ createdAt: -1 })
     .populate('languagesKnown.language_id')
     .populate('address.addressType')
     .populate('academics.qualificationlevel_id')
@@ -1183,7 +1183,7 @@ exports.getCandidateList = (req,res,next)=>{
     .populate('skills.skill_id')
 
     .exec(function (err, candidate) {
-    console.log(err)
+    console.log(err) 
     if (err) return res.status(500).json({ error: err });
     res.status(200).json(candidate);
     // prints "The author is Ian Fleming"
