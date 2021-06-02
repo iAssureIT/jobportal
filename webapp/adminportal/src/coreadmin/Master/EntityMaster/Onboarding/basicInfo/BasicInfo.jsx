@@ -118,6 +118,7 @@ class BasicInfo extends Component {
           regxA5: /^[A-Za-z]/,
         },
         TAN: {
+          /*regxA2: /^[A-Za-z]{4}[0-9]{5}/,*/
           regxA2: /^[A-Za-z]{4}[0-9]{5}[A-Za-z]$|^$/,
         },
         
