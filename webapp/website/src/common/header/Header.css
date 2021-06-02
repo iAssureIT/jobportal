@@ -409,6 +409,7 @@ color: var(--main-heading-font-color) !important
 
 .modal-dialog{
   width: 100%;
+  max-width: 100%;
   margin: 0px 0px;
 }
 .modal{

@@ -183,6 +183,7 @@
     border:1px dashed var(--main-border-color);
     height: 192px;
     border-radius: 5px;
+    position: absolute;
 }
 .profileImage{
     width:97%;
@@ -802,9 +803,9 @@ user agent stylesheet:focus {
     display: grid;
     border-radius: 5px;
 }
-/*.uploadImageClient1,.LogoImageUp1{
+.uploadImageClient1,.LogoImageUp1{
     position: absolute;
-}*/
+}
 .LogoImageUpOne i,
 .LogoImageUpOne2 i{
     position: absolute;
@@ -815,8 +816,10 @@ user agent stylesheet:focus {
 }
 .LogoImageUp,
 .LogoImageUp2{
-    /*position: absolute;*/
+    position: absolute;
     top: 1px;
+    width: 100%;
+    z-index: 10;
     height: 100%;
 }
 .uploadImageClient input[type=file],.uploadImageClient2 input[type=file]  {
@@ -896,7 +899,9 @@ user agent stylesheet:focus {
 .candidateVisaWrapper{
     margin-top: 3px;
 }
-
+.lg-margin{
+    margin-top: 20px;
+}
 @media (min-width:576px){
     .md-margin{
         margin-top: 20px;
@@ -934,5 +939,10 @@ user agent stylesheet:focus {
     div.ReactTags__tags {
     width: 83%;
     }
-
+    .uploadImageClient1, .LogoImageUp1 {
+        position: relative;
+    }
+    .candidatePlaceHolderWrappper {
+        width: 87%;
+    }
 }

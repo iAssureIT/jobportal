@@ -838,23 +838,24 @@ class Header extends Component{
                   </div>
 
                   <div
-                    className="modal col-lg-12"
+                    className="modal col-md-12"
                     id="loginModal"
                     role="dialog"
                     tabIndex="-1"
                   >
-                    <div className="row">
-                      <div className="modal-dialog  modal-lg ">
+                    <div className="">
+                      <div className="modal-dialog " role="document">
                         <div className="modal-body">
                           <button
                             type="button"
                             className="close"
                             id="closeModalButton"
                             data-dismiss="modal"
+                            aria-label="Close"
                           >
                             &times;
                           </button>
-                          <section className="OTPSentWrapper row">
+                          <section className="OTPSentWrapper ">
                             {this.props.selectedModal == "login" ? <LoginForm /> : null}
                             {this.props.selectedModal == "signup" ? <SignUp /> : null}
                             {this.props.selectedModal == "forgotpassword" ? (

@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Switch,Link,location } from 'react-router-dom';
 import PhoneInput from 'react-phone-input-2';
 import 'font-awesome/css/font-awesome.min.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/js/dist/modal.js';
 import './LoginForm.css';
 import $ from 'jquery';
 import axios from 'axios';
@@ -12,6 +13,9 @@ import Swal           from 'sweetalert2';
 import { connect }        from 'react-redux';
 import { bindActionCreators } from 'redux';
 import  * as mapActionCreator from '../common/actions/index';
+window.jQuery = $;
+window.$ = $;
+global.jQuery = $;
 
 class Login extends Component {
 
@@ -300,118 +304,120 @@ class Login extends Component {
   render() {
     
     return (
-        <section className="loginFormOuter col-lg-12 col-md-12">
-          <div className="img1Login">
-              <img src="/images/Sign_In/1.png" alt="img1Login" className="img1oginInner"/>
-          </div>
+        <div className="row">
+          <div className="loginFormOuter col-md-12">
+            <div className="img1Login">
+                <img src="/images/Sign_In/1.png" alt="img1Login" className="img1oginInner"/>
+            </div>
 
-           <div className="img2Login">
-              <img src="/images/Sign_In/2.png" alt="img2Login" className="img2loginInner"/>
-          </div>
+             <div className="img2Login">
+                <img src="/images/Sign_In/2.png" alt="img2Login" className="img2loginInner"/>
+            </div>
 
-           <div className="img3Login">
-              <img src="/images/Sign_In/3.png" alt="img3Login" className="img3loginInner"/>
-          </div>
+             <div className="img3Login">
+                <img src="/images/Sign_In/3.png" alt="img3Login" className="img3loginInner"/>
+            </div>
 
-           <div className="img4Login">
-              <img src="/images/Sign_In/4.png" alt="img4Login" className="img4loginInner"/>
-          </div>
+             <div className="img4Login">
+                <img src="/images/Sign_In/4.png" alt="img4Login" className="img4loginInner"/>
+            </div>
 
-           <div className="img5Login">
-              <img src="/images/Sign_In/5.png" alt="img5Login" className="img5loginInner"/>
-          </div>
+             <div className="img5Login">
+                <img src="/images/Sign_In/5.png" alt="img5Login" className="img5loginInner"/>
+            </div>
 
-           <div className="img6Login">
-              <img src="/images/Sign_In/6.png" alt="img6Login" className="img6loginInner"/>
-          </div>
+             <div className="img6Login">
+                <img src="/images/Sign_In/6.png" alt="img6Login" className="img6loginInner"/>
+            </div>
 
-          <div className="loginFormInner col-lg-4 col-lg-offset-4 col-md-4 col-md-offset-4">
-            <form autocomplete="off">
+            <div className="loginFormInner col-md-4 offset-md-4">
+              <form autocomplete="off">
 
-              <div className="signInTitle col-lg-12 col-md-12"> Sign In
-              </div>
-              
-             {/* <div className="loginSocialMedia">
-                <div className="loginSocialMediaInner">
-                 <div className="loginLinkedIn"><i className="fa fa-linkedin"></i></div>
-                  <div className="loginGoogle"><i className="fa fa-google"></i></div>
-                </div>    
-              </div>*/}
-              
-
-             {/* <div className="loginOr col-lg-12">
-                <hr className="loginHr"/>
-                <div className="loginOrText">or
+                <div className="signInTitle col-lg-12 col-md-12"> Sign In
                 </div>
-                <hr className="loginHr"/>
-              </div>*/}
-              
-              <div className="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1">
-                        <div className="loginSignUp1" >
-                        Don't have an Account ?
-                          <a href="#" onClick={this.ShowSignUp.bind(this)}><u className="loginSignUp" > Sign Up</u></a>
-                        </div>
-              </div>
-                    
+                
+               {/* <div className="loginSocialMedia">
+                  <div className="loginSocialMediaInner">
+                   <div className="loginLinkedIn"><i className="fa fa-linkedin"></i></div>
+                    <div className="loginGoogle"><i className="fa fa-google"></i></div>
+                  </div>    
+                </div>*/}
+                
 
-                  <div className="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 form-group loginFormGroup" >
-                    {/*<div className="input-group" autocomplete="off">
-                      <span className="input-group-addon loginInputIcon1"><i className="fa fa-mobile"></i></span>
-                      <input type="tel" id="loginusername" name="loginusername" placeholder="Email Id" 
-                      value={this.state.loginusername} ref="loginusername"
-                       onChange={this.handleChange.bind(this)} className="form-control loginInputBox"/>
-                    </div>*/}
-                    <PhoneInput
-                      country={'in'}
-                      value={this.state.loginusername}
-                      name="loginusername"
-                      inputProps={{
-                        name: 'loginusername',
-                        required: true
-                      }}
-                      onChange={this.changeMobile.bind(this)}
-                    />
-                    <span id="loginusernameError" className="errorMsg"></span>
-                  </div> 
-
-                  <div className="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 form-group" >
-                    <div className="input-group">
-                      <span className="input-group-addon loginInputIcon2"><i className="fa fa-lock"></i></span>
-                      <input type="password" id="password" name="password" placeholder="Password" value={this.state.password} ref="loginpassword" onChange={this.handleChange.bind(this)} className="form-control loginInputBox"/>
-                      <span className="input-group-addon loginInputIcon3" onClick={this.showPassFun.bind(this)}>
-                      <i className={this.state.showPassword ? "fa fa-eye-slash" : "fa fa-eye"} 
-                          value={this.state.showPassword}></i></span>
-                    </div>
-                    <span id="passwordError" className="errorMsg"></span>
+               {/* <div className="loginOr col-lg-12">
+                  <hr className="loginHr"/>
+                  <div className="loginOrText">or
                   </div>
+                  <hr className="loginHr"/>
+                </div>*/}
+                
+                <div className="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1">
+                          <div className="loginSignUp1" >
+                          Don't have an Account ?
+                            <a href="#" onClick={this.ShowSignUp.bind(this)}><u className="loginSignUp" > Sign Up</u></a>
+                          </div>
+                </div>
+                      
 
-                  <div className="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 buttonWrapper">
-                    <div className="col-lg-6 col-md-6">
+                    <div className="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 form-group loginFormGroup" >
+                      {/*<div className="input-group" autocomplete="off">
+                        <span className="input-group-addon loginInputIcon1"><i className="fa fa-mobile"></i></span>
+                        <input type="tel" id="loginusername" name="loginusername" placeholder="Email Id" 
+                        value={this.state.loginusername} ref="loginusername"
+                         onChange={this.handleChange.bind(this)} className="form-control loginInputBox"/>
+                      </div>*/}
+                      <PhoneInput
+                        country={'in'}
+                        value={this.state.loginusername}
+                        name="loginusername"
+                        inputProps={{
+                          name: 'loginusername',
+                          required: true
+                        }}
+                        onChange={this.changeMobile.bind(this)}
+                      />
+                      <span id="loginusernameError" className="errorMsg"></span>
+                    </div> 
+
+                    <div className="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 form-group" >
+                      <div className="input-group">
+                        <span className="input-group-addon loginInputIcon2"><i className="fa fa-lock"></i></span>
+                        <input type="password" id="password" name="password" placeholder="Password" value={this.state.password} ref="loginpassword" onChange={this.handleChange.bind(this)} className="form-control loginInputBox"/>
+                        <span className="input-group-addon loginInputIcon3" onClick={this.showPassFun.bind(this)}>
+                        <i className={this.state.showPassword ? "fa fa-eye-slash" : "fa fa-eye"} 
+                            value={this.state.showPassword}></i></span>
+                      </div>
+                      <span id="passwordError" className="errorMsg"></span>
+                    </div>
+
+                    <div className="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 buttonWrapper">
+                      <div className="col-lg-6 col-md-6">
+                        <div className="row">
+                           <a href="#" className="loginForgotPassword" onClick={this.ShowForgotPass.bind(this)}><u>Forgot Password?</u></a>
+                        </div>  
+                      </div>
+                     <button className="btn col-lg-6 col-md-6 buttonSignIn" onClick={this.userlogin.bind(this)}>
+                      Sign In
+                     </button>
+                    </div>
+
+                    <div className="col-lg-12 col-md-12 loginLinks"> 
                       <div className="row">
+                        {/*<div className="col-lg-6">
+                          <a href="#" className="loginSignUp" onClick={this.ShowSignUp.bind(this)}><u>Sign Up?</u></a>
+                        </div>
+                   
+                        <div className="col-lg-6">
                          <a href="#" className="loginForgotPassword" onClick={this.ShowForgotPass.bind(this)}><u>Forgot Password?</u></a>
+                        </div>
+
+                          */}
                       </div>  
                     </div>
-                   <button className="btn col-lg-6 col-md-6 buttonSignIn" onClick={this.userlogin.bind(this)}>
-                    Sign In
-                   </button>
-                  </div>
-
-                  <div className="col-lg-12 col-md-12 loginLinks"> 
-                    <div className="row">
-                      {/*<div className="col-lg-6">
-                        <a href="#" className="loginSignUp" onClick={this.ShowSignUp.bind(this)}><u>Sign Up?</u></a>
-                      </div>
-                 
-                      <div className="col-lg-6">
-                       <a href="#" className="loginForgotPassword" onClick={this.ShowForgotPass.bind(this)}><u>Forgot Password?</u></a>
-                      </div>
-
-                        */}
-                    </div>  
-                  </div>
-            </form>
+              </form>
+            </div>
           </div>
-        </section>
+        </div>
       
     );
   }

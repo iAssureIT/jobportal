@@ -705,41 +705,83 @@ class BasicInfoForm extends Component{
 					<form className="col-12  mainForm">
 
 						<div className="row justify-content-sm-center">
-							<div className="col-lg-8 col-12 order-12 order-lg-1">
+							<div className="col-12">
 								<div className="row formWrapper">
-									<div className="col-sm ">
-										<label htmlFor="firstName" className="nameTitleForm">
-										 	First Name
-										    <sup className="nameTitleFormStar">*</sup>
-										</label>
-										<div className="input-group ">
-											<span className="input-group-addon inputBoxIcon">
-												<i className="fa fa-user-circle"></i> 
-											</span> 
-											<input type="text" name="firstName" id="firstName" 
-											 className="form-control inputBox" value={this.state.firstName} 
-											 onChange={this.handleChange.bind(this)}/>
-										</div> 
-										<span id="firstNameError" className="errorMsg"></span>
+									<div className="col-lg-8 col-sm-6 order-2 order-sm-1">
+										 <div className="row">
+											<div className="col-lg col-sm-12  xs-margin">
+												<label htmlFor="firstName" className="nameTitleForm">
+												 	First Name
+												    <sup className="nameTitleFormStar">*</sup>
+												</label>
+												<div className="input-group ">
+													<span className="input-group-addon inputBoxIcon">
+														<i className="fa fa-user-circle"></i> 
+													</span> 
+													<input type="text" name="firstName" id="firstName" 
+													 className="form-control inputBox" value={this.state.firstName} 
+													 onChange={this.handleChange.bind(this)}/>
+												</div> 
+												<span id="firstNameError" className="errorMsg"></span>
+											</div>
+											<div className="col-lg col-sm-12  sm-margin">
+												<label htmlFor="middleName" className="nameTitleForm">
+													Middle Name <sup className="nameTitleFormStar">*</sup>
+												</label>
+												<div className="input-group ">
+													<span className="input-group-addon inputBoxIcon">
+														<i className="fa fa-user-circle"></i> 
+													</span> 
+													<input type="text" name="middleName" id="middleName" 
+													 className="form-control inputBox" value={this.state.middleName} 
+													 onChange={this.handleChange.bind(this)} />
+												</div> 
+												<span id="middleNameError" className="errorMsg"></span>
+											</div>
+										</div>
 									</div>
-
-									<div className="col-sm xs-margin">
-										<label htmlFor="middleName" className="nameTitleForm">
-											Middle Name <sup className="nameTitleFormStar">*</sup>
-										</label>
-										<div className="input-group ">
-											<span className="input-group-addon inputBoxIcon">
-												<i className="fa fa-user-circle"></i> 
-											</span> 
-											<input type="text" name="middleName" id="middleName" 
-											 className="form-control inputBox" value={this.state.middleName} 
-											 onChange={this.handleChange.bind(this)} />
-										</div> 
-										<span id="middleNameError" className="errorMsg"></span>
+									<div className="col-lg-4 col-sm-6 order-1 order-sm-2 xs-margin">
+										<div className="row">
+											<div className="col  ">
+												<label htmlFor="profilePicture" className="nameTitleForm">
+													Profile Picture
+												</label>
+												<div className="input-group profilformWrapper">
+													{
+														this.state.profileImageUrl!== ""
+														?	
+															<div className="profileImageWrapper col-md-12">
+																<div className="row">
+																	<i className="fa fa-times delImgIcon" 
+																	   onClick={this.delImgPreview.bind(this)}>
+																	</i>
+																	<img src={this.state.profileImageUrl} alt="profileImage" 
+																	className="profileImage"/>
+																</div>
+															</div>
+														:
+															<div className="uploadImageClient uploadImageClient1 LogoImageUpOne " >
+																<div><i className="fa fa-camera cursorPointer"></i></div>
+																<input type="file" className=" LogoImageUp LogoImageUp1" 
+																 name="profilePicture"
+																 onChange={this.selectImage.bind(this)}
+																/>
+															</div>
+													}
+												</div>
+											</div>
+										</div>
 									</div>
 								</div>
+							</div>
+			
+							
+						</div>
+						
+						<div className="row">
+							<div className="col-12">
 								<div className="row formWrapper">
-									<div className="col-sm ">
+									<div className="col-lg-4 col-sm-6 ">
 										<label htmlFor="lastName" className="nameTitleForm">
 											Last Name <sup className="nameTitleFormStar">*</sup>
 										</label>
@@ -753,8 +795,8 @@ class BasicInfoForm extends Component{
 										</div> 
 										<span id="lastNameError" className="errorMsg"></span>
 									</div>
-							
-									<div className="col-sm xs-margin">
+									<div class="w-100 d-none d-sm-block d-md-none"></div>
+									<div className="col-lg-4 col-sm-12 xs-margin sm-margin">
 										<label htmlFor="email" className="nameTitleForm">
 											Personal Mail ID
 											<sup className="nameTitleFormStar">*</sup>
@@ -769,9 +811,8 @@ class BasicInfoForm extends Component{
 										</div> 
 										<span id="emailError" className="errorMsg"></span>
 									</div>
-								</div>
-								<div className="row formWrapper">
-									<div className="col-sm ">
+									<div class="w-100 d-none d-lg-block" ></div>
+									<div className="col-lg-4 col-sm-6 lg-margin">
 										<label htmlFor="mobile" className="nameTitleForm">
 											Mobile Number
 											<sup className="nameTitleFormStar">*</sup>
@@ -787,7 +828,7 @@ class BasicInfoForm extends Component{
 										<span id="mobileError" className="errorMsg"></span>
 									</div>
 
-									<div className="col-sm xs-margin">
+									<div className="col-lg-4 col-sm-6 xs-margin lg-margin">
 										<label htmlFor="alternate" className="nameTitleForm">
 											Alternate Mobile Number
 										</label>
@@ -801,41 +842,11 @@ class BasicInfoForm extends Component{
 										
 										<span id="alternateError" className="errorMsg"></span>
 									</div>
-
 								</div>
-							</div>
-			
-							<div className="col-lg-4 col-sm-6 col-12 order-1  formWrapper">
-								<label htmlFor="profilePicture" className="nameTitleForm">
-									Profile Picture
-								</label>
-								<div className="input-group ">
-									{
-										this.state.profileImageUrl!== ""
-										?	
-											<div className="profileImageWrapper col-md-12">
-												<div className="row">
-													<i className="fa fa-times delImgIcon" 
-													   onClick={this.delImgPreview.bind(this)}>
-													</i>
-													<img src={this.state.profileImageUrl} alt="profileImage" 
-													className="profileImage"/>
-												</div>
-											</div>
-										:
-											<div className="uploadImageClient uploadImageClient1 LogoImageUpOne " >
-												<div><i className="fa fa-camera cursorPointer"></i></div>
-												<input type="file" className=" LogoImageUp LogoImageUp1" 
-												 name="profilePicture"
-												 onChange={this.selectImage.bind(this)}
-												/>
-											</div>
-									}
-								</div>
+								
 							</div>
 						</div>
-						
-						<div className="row">
+							<div className="row">
 							<div className="col-12">
 								<div className="row formWrapper">	
 									<div className="col-lg-4 col-sm-6 ">

@@ -253,3 +253,23 @@
 .candidatePlaceHolderWrappper{
 	width: 84%;
 }
+@media(min-width:992px) and (max-width:1024px){
+    .candidatePlaceHolderWrappper {
+        width: 77%;
+    }
+}
+@media(min-width:768px) and (max-width:992px){
+    .candidatePlaceHolderWrappper {
+        width: 77%;
+    }
+}
+@media(min-width:576px) and (max-width:768px){
+   .candidatePlaceHolderWrappper {
+        width: 79%;
+    }
+}
+@media (max-width:576px){
+    .candidatePlaceHolderWrappper {
+        width: 84%;
+    }
+}

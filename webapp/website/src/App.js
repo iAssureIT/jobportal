@@ -25,11 +25,13 @@
 import React,{useEffect,useState} from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import $ from 'jquery';
+import Popper from 'popper.js';
+// import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import './coreadmin/css/root.css';
 import Layout from './Layout.js';
 import './lib/router.js';
 import axios from 'axios';
-import $ from 'jquery';
 import '../node_modules/font-awesome/css/font-awesome.min.css';
 import ReactDependentScript from "react-dependent-script";
 import './blocks/FontAwesomeIcons'; 
