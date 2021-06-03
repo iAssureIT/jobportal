@@ -33,6 +33,8 @@ class HomePage extends Component {
   } 
   componentDidMount(){ 
     
+    console.log("this.props.viewMode",this.props.viewMode);
+
     var {mapAction} = this.props;
     var selector = this.props.selector;
 
@@ -304,7 +306,7 @@ class HomePage extends Component {
     //console.log(this.props.match.params) 
     return (
       <div className="ViewBodyWrapper1 container-fluid">
-
+        
 
           <div className="filterDiv col-lg-12">
 
@@ -390,7 +392,7 @@ class HomePage extends Component {
               </div>
             </div>
           </div>
-         
+       
       </div>
     );
   }

@@ -10,8 +10,13 @@ import { bindActionCreators } from 'redux';
 import  * as mapActionCreator from '../../common/actions/index';
 import UploadVideoModal from '../UploadVideoModal/UploadVideoModal.js';
 /*import Pagination from "react-js-pagination";*/
+<<<<<<< Updated upstream
 // require("bootstrap/less/bootstrap.less");
 
+=======
+/*require("bootstrap/less/bootstrap.less");
+*/
+>>>>>>> Stashed changes
 /*import {
   RecordWebcam,
   useRecordWebcam,
