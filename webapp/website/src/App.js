@@ -26,7 +26,7 @@ import React,{useEffect,useState} from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import $ from 'jquery';
-import Popper from 'popper.js';
+// import Popper from 'popper.js';
 // import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import './coreadmin/css/root.css';
 import Layout from './Layout.js';

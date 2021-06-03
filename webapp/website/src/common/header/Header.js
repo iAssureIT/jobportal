@@ -838,7 +838,7 @@ class Header extends Component{
                   </div>
 
                   <div
-                    className="modal col-md-12"
+                    className="modal col-md-12 col-12"
                     id="loginModal"
                     role="dialog"
                     tabIndex="-1"

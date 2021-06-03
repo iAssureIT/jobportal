@@ -330,7 +330,7 @@ class Login extends Component {
                 <img src="/images/Sign_In/6.png" alt="img6Login" className="img6loginInner"/>
             </div>
 
-            <div className="loginFormInner col-md-4 offset-md-4">
+            <div className="loginFormInner col-md-4 offset-md-4 col-8 offset-2">
               <form autocomplete="off">
 
                 <div className="signInTitle col-lg-12 col-md-12"> Sign In
