@@ -899,18 +899,29 @@ user agent stylesheet:focus {
 .candidateVisaWrapper{
     margin-top: 3px;
 }
-.lg-margin{
+.xl-margin{
     margin-top: 20px;
 }
-@media (min-width:576px){
-    .md-margin{
-        margin-top: 20px;
+.candidatePlaceHolderWrappper2 {
+        width: 84%;
     }
-}
+
 
 @media(min-width:992px) and (max-width:1024px){
     div.ReactTags__tags {
     width: 93%;
+    }
+    .candidatePlaceHolderWrappper2 {
+        width: 77%;
+    }
+    .SearchListContainer2 {
+        width: 77%;
+    }
+     .lg-margin{
+        margin-top: 20px;
+    }
+    .experienceBoxWidth .input-group .form-control {
+        width: 76%;
     }
 }
 @media(min-width:768px) and (max-width:992px){
@@ -932,7 +943,7 @@ user agent stylesheet:focus {
     width: 92%;
     }
     .candidatePlaceHolderWrappper2 {
-        width: 84%;
+        width: 79%;
     }
 }
 @media (max-width:576px){
@@ -948,6 +959,9 @@ user agent stylesheet:focus {
     .candidatePlaceHolderWrappper2 {
         width: 84%;
     }
+    .SearchListContainer2 {
+        width: 79%;
+    }
     .uploadImageClient1, .LogoImageUp1 {
         position: relative;
     }
@@ -957,5 +971,8 @@ user agent stylesheet:focus {
 
     .skillPillsPadding{
         padding-left:0px;
+    }
+    .resumeImage {
+        margin-top: 17%;
     }
 }

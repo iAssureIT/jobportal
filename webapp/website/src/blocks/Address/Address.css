@@ -13,10 +13,10 @@
 	background-color: var(--input-bg-color);
 }
 .SearchListContainer1{
-	width: 235px;
+	width: 84%;
 }
 .SearchListContainer2{
-	width: 219px;
+	width: 84%;
 }
 .addRightbtn a{
 	color:var(--main-txt-color );
@@ -229,13 +229,14 @@
 .iconAdd{
 	font-size: 20px;
 	height:40px;
-	margin-left:-5px;
 	margin-right: 5px;
+	padding-left: 20px;
 	/*margin-left: -5px;
 	padding-right: 5px;*/
 }
 .buttonAdd {
     padding-top: 3px;
+    margin-left: -10px;
 }
 .buttonAdd a{
 	color: #fff;
@@ -253,9 +254,18 @@
 .candidatePlaceHolderWrappper{
 	width: 84%;
 }
+ .candidatePlaceHolderWrappper1 {
+        width: 84%;
+    }
 @media(min-width:992px) and (max-width:1024px){
-    .candidatePlaceHolderWrappper {
+    .candidatePlaceHolderWrappper1 {
         width: 77%;
+    }
+    .SearchListContainer1 {
+	    width: 77%;
+	}
+	.experienceBoxWidth .input-group .form-control {
+        width: 76%;
     }
 }
 @media(min-width:768px) and (max-width:992px){
@@ -268,8 +278,18 @@
         width: 79%;
     }
     .candidatePlaceHolderWrappper1 {
-        width: 92%;
+        width: 79%;
     }
+    .iconAdd{
+    	margin-left: 0px;
+    	padding-left: 25px;
+    }
+    .buttonAdd{
+    	margin-left: 0px;
+    }
+    .SearchListContainer1 {
+	    width: 79%;
+	}
 }
 @media (max-width:576px){
     .candidatePlaceHolderWrappper {
@@ -278,4 +298,14 @@
     .candidatePlaceHolderWrappper1 {
         width: 84%;
     }
+    .iconAdd{
+    	margin-left: 0px;
+    	padding-left: 25px;
+    }
+     .buttonAdd{
+    	margin-left: 0px;
+    }
+    /*.SearchListContainer1 {
+	    width: 222px;
+	}*/
 }

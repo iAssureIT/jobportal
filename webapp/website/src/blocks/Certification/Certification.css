@@ -68,6 +68,7 @@
 }
 .certificateLogo2{
 	height:25px;
+	margin-left: 10px;
 }
 .certificateFooter{
 	margin-top:5px;
@@ -123,6 +124,15 @@ td#ActionContent{
 .iAssureTable1 .noTempData{
 	color: #fff;
 	font-size: 13px;
+}
+.iAssureTable1 .scrollContent{
+	color: #ddd;
+}
+.iAssureTable1 .scrollContent td{
+	font-size: 13px;
+}
+.table-hover tbody tr:hover {
+	color: #fff;
 }
 @media (max-width:576px){
     .skillPillsPadding{

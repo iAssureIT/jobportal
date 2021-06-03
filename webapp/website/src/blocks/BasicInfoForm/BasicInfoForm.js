@@ -588,7 +588,7 @@ class BasicInfoForm extends Component{
 		var tempEmail = this.state.email.trim(); // value of field with whitespace trimmed off
     	var emailFilter = /^[^@]+@[^@.]+\.[^@]*\w\w$/;
     	var illegalChars = /[\(\)\<\>\,\;\:\\\"\[\]]/;
-    	var mobileFilter = /^(\+\d{1,3}[- ]?)?\d{12}$/gm;
+    	var mobileFilter = /^\+?([0-9]{2})\)?[-. ]?([0-9]{5})[-. ]?([0-9]{5})$/;
     	var max = this.state.maxDate;
 
 
@@ -812,7 +812,7 @@ class BasicInfoForm extends Component{
 										<span id="emailError" className="errorMsg"></span>
 									</div>
 									<div class="w-100 d-none d-lg-block" ></div>
-									<div className="col-lg-4 col-sm-6 lg-margin">
+									<div className="col-lg-4 col-sm-6 xl-margin">
 										<label htmlFor="mobile" className="nameTitleForm">
 											Mobile Number
 											<sup className="nameTitleFormStar">*</sup>
@@ -828,7 +828,7 @@ class BasicInfoForm extends Component{
 										<span id="mobileError" className="errorMsg"></span>
 									</div>
 
-									<div className="col-lg-4 col-sm-6 xs-margin lg-margin">
+									<div className="col-lg-4 col-sm-6 xs-margin xl-margin">
 										<label htmlFor="alternate" className="nameTitleForm">
 											Alternate Mobile Number
 										</label>

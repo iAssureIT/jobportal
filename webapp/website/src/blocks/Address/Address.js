@@ -668,7 +668,7 @@ class Address extends Component{
 										</div>
 
 									
-										<div className="col-lg-4 col-md-6 xs-margin sm-margin">
+										<div className="col-lg-4 col-md-6 xs-margin ">
 											<label htmlFor="houseNumber" className="nameTitleForm">
 												House/Building Number
 												
@@ -874,18 +874,19 @@ class Address extends Component{
 										this.state.addressArry.map((elem,index)=>{
 											return(
 											
-												<div className="col-lg-4 AddressOuterWrapper"  key={index}>
+												<div className="col-lg-4 col-12 col-md-6 AddressOuterWrapper"  key={index}>
 													<div className="">
-														<div className="col-lg-12 addWrapper">
+														<div className="col-12 addWrapper">
 															<div className="row">
-																<div className="col-lg-12 addLeftWrapper key={index}">
-																		<div className="col-lg-1 iconAdd" >
+																<div className="col-12 addLeftWrapper key={index}">
+																	<div className="row">
+																		<div className="col-xl-1 col-lg-1 col-2 col-md-2 iconAdd" >
 																			<FontAwesomeIcon icon="home" /> 
 																		</div>
-																		<div className="col-lg-8 titleAdd" >
+																		<div className="col-xl-8 col-lg-7 col-7 col-md-6 titleAdd" >
 																			{elem.addressType.addressType} Address
 																		</div>
-																		<div className="col-lg-2 buttonAdd" >
+																		<div className="col-xl-2 col-lg-3  col-2 col-md-3 buttonAdd" >
 																			<div className="row">
 																				 <a id={elem._id} href={"/address/"+this.state.candidate_id+"/edit/"+elem._id}>
 																				 	<span className="editAdd" title="Edit">
@@ -897,10 +898,11 @@ class Address extends Component{
 																				</span>
 																			</div>
 																		</div>
+																	</div>
 																</div> 
 															</div> 
 															<div className="row">
-																<div className="col-lg-12 addRightWrapper">
+																<div className="col-12 addRightWrapper">
 																	<div className="addRightText paddingAddress">
 																		{elem.houseNumber +", "+ elem.address+" , "}<br/>
 																		{elem.area +" , "+ elem.district+" , "}<br/>

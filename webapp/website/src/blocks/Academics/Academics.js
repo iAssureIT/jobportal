@@ -817,7 +817,7 @@ class Academics extends Component{
 										</div> 
 										<span id="specializationError" className="errorMsg"></span>
 									</div>
-									<div className="col-lg-4 col-sm-6 xs-margin lg-margin">
+									<div className="col-lg-4 col-sm-6 xs-margin xl-margin">
 										<label htmlFor="grade" className="nameTitleForm">
 											Grade/Marks/GPA
 										</label>
@@ -832,7 +832,7 @@ class Academics extends Component{
 										</div> 
 										<span id="gradeError" className="errorMsg"></span>
 									</div>
-									<div className="col-lg-4 col-sm-6 xs-margin lg-margin">
+									<div className="col-lg-4 col-sm-6 xs-margin xl-margin">
 										<label htmlFor="admisionYear" className="nameTitleForm">
 											Admission Year
 											<sup className="nameTitleFormStar">*</sup>
@@ -849,7 +849,7 @@ class Academics extends Component{
 										</div> 
 										<span id="admisionYearError" className="errorMsg"></span>
 									</div>
-									<div className="col-lg-4 col-sm-6  xs-margin lg-margin">
+									<div className="col-lg-4 col-sm-6  xs-margin xl-margin">
 										<label htmlFor="passOutYear" className="nameTitleForm">
 											Pass-out-Year
 											<sup className="nameTitleFormStar">*</sup>
@@ -866,7 +866,7 @@ class Academics extends Component{
 										</div> 
 										<span id="passOutYearError" className="errorMsg"></span>
 									</div>	
-									<div className="col-lg-4 col-sm-6 xs-margin lg-margin">
+									<div className="col-lg-4 col-sm-6 xs-margin xl-margin">
 										<label htmlFor="university" className="nameTitleForm">
 											University/Boards Name
 											<sup className="nameTitleFormStar">*</sup>
@@ -886,7 +886,7 @@ class Academics extends Component{
 										</div> 
 										<span id="universityError" className="errorMsg"></span>
 									</div>
-									<div className="col-lg-4 col-sm-6 xs-margin lg-margin">
+									<div className="col-lg-4 col-sm-6 xs-margin xl-margin">
 										<label htmlFor="college" className="nameTitleForm">
 											College/School Name<sup className="nameTitleFormStar">*</sup>
 										</label>
@@ -962,7 +962,7 @@ class Academics extends Component{
 										</div> 
 										<span id="collegeError" className="errorMsg"></span>
 									</div>
-									<div className="col-lg-4 col-sm-6 col-6 xs-margin lg-margin">
+									<div className="col-lg-4 col-sm-6 col-6 xs-margin xl-margin">
 										<label htmlFor="mode" className="nameTitleForm">
 											Mode
 											<sup className="nameTitleFormStar">*</sup>
@@ -993,7 +993,7 @@ class Academics extends Component{
 										</div>
 										<span id="modeError" className="errorMsg"></span>
 									</div>
-									<div className="col-lg-4 col-sm-6 col-6 xs-margin lg-margin">
+									<div className="col-lg-4 col-sm-6 col-6 xs-margin xl-margin">
 										<label htmlFor="city" className="nameTitleForm">
 											City
 											<sup className="nameTitleFormStar">*</sup>
@@ -1008,7 +1008,7 @@ class Academics extends Component{
 										</div>
 										<span id="cityError" className="errorMsg"></span>
 									</div>
-									<div className="col-lg-4 col-sm-6 col-6 xs-margin lg-margin">
+									<div className="col-lg-4 col-sm-6 col-6 xs-margin xl-margin">
 										<label htmlFor="state" className="nameTitleForm">
 											State
 											<sup className="nameTitleFormStar">*</sup>
@@ -1034,7 +1034,7 @@ class Academics extends Component{
 										</div> 
 										<span id="stateError" className="errorMsg"></span>
 									</div>
-									<div className="col-lg-4 col-sm-6 col-6 xs-margin lg-margin">
+									<div className="col-lg-4 col-sm-6 col-6 xs-margin xl-margin">
 										<label htmlFor="country" className="nameTitleForm">
 											Country
 											<sup className="nameTitleFormStar">*</sup>
@@ -1075,32 +1075,34 @@ class Academics extends Component{
 								?
 								this.state.academics.map((elem,index)=>{
 									return(
-										<div className="col-lg-4 AddressOuterWrapper"  key={index}>
-											<div className="col-lg-12 addWrapper">
+										<div className="col-lg-4 col-12 col-md-6 AddressOuterWrapper"  key={index}>
+											<div className="col-12 addWrapper">
 												<div className="row">
-													<div className="col-lg-12 addLeftWrapper key={index}">
-														<div className="col-lg-1 iconAdd" >
-															<FontAwesomeIcon icon="home" /> 
-														</div>
-														<div className="col-lg-8 titleAdd" >
-															{elem.qualificationlevel_id.qualificationLevel}
-														</div>
-														<div className="col-lg-2 buttonAdd" >
-															<div className="row">
-																 <a id={elem._id} href={"/academics/"+this.state.candidate_id+"/edit/"+elem._id}>
-																 	<span className="editAdd" title="Edit">
-																 		<FontAwesomeIcon icon="pencil-alt" />
-																 	</span> 
-																 </a>
-																<span className="deleteAdd" title="Delete" id={elem._id} onClick={this.deleteDate.bind(this)}>
-																	<FontAwesomeIcon icon="trash-alt" /> 
-																</span>
+													<div className="col-12 addLeftWrapper key={index}">
+														<div className="row">
+															<div className="col-xl-1 col-lg-1 col-2 col-md-2 iconAdd" >
+																<FontAwesomeIcon icon="home" /> 
+															</div>
+															<div className="col-xl-8 col-lg-7 col-7 col-md-6 titleAdd" >
+																{elem.qualificationlevel_id.qualificationLevel}
+															</div>
+															<div className="col-xl-2 col-lg-3  col-2 col-md-3 buttonAdd" >
+																<div className="row">
+																	 <a id={elem._id} href={"/academics/"+this.state.candidate_id+"/edit/"+elem._id}>
+																	 	<span className="editAdd" title="Edit">
+																	 		<FontAwesomeIcon icon="pencil-alt" />
+																	 	</span> 
+																	 </a>
+																	<span className="deleteAdd" title="Delete" id={elem._id} onClick={this.deleteDate.bind(this)}>
+																		<FontAwesomeIcon icon="trash-alt" /> 
+																	</span>
+																</div>
 															</div>
 														</div>
 													</div> 
 												</div> 
 												<div className="row">
-													<div className="col-lg-12 addRightWrapper">
+													<div className="col-12 addRightWrapper">
 														
 														<div className="addRightText ">
 															

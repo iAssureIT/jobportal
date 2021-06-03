@@ -885,7 +885,7 @@ class Certification extends Component{
 									<div className="col-12">
 										<div className="row formWrapper">
 											
-											<div className="col-lg-2 col-sm-6 col-12">
+											<div className="col-xl-2 col-lg-3 col-sm-6 col-12">
 												
 												<label htmlFor="skills" className="nameTitleForm">
 													Type 
@@ -912,7 +912,7 @@ class Certification extends Component{
 													</div>
 												</div>
 											</div>
-											<div className="col-lg-4 col-sm-6 xs-margin">
+											<div className="col-xl-4 col-lg-5 col-sm-6 xs-margin">
 												<label htmlFor="skills" className="nameTitleForm">
 													Skill 
 													<sup className="nameTitleFormStar">*</sup>
@@ -937,7 +937,7 @@ class Certification extends Component{
 												<span id="skillsError" className="errorMsg"></span>
 											</div>
 
-											<div className="col-lg-3 col-sm-6 xs-margin sm-margin">
+											<div className="col-xl-3 col-lg-4 col-sm-6 xs-margin sm-margin">
 												<label htmlFor="rating" className="nameTitleForm">How do you rate yourself  <sup className="nameTitleFormStar">*</sup></label>
 												<div className="input-group ">
 													<span className={this.state.rating=== "1"||this.state.rating=== "2"||this.state.rating=== "3"||this.state.rating=== "4"||this.state.rating=== "5"? "fa fa-star rating stars":"fa fa-star-o rating"} id="1" name="rating" value="1" onClick={this.starClick.bind(this)}></span>
@@ -948,7 +948,7 @@ class Certification extends Component{
 												</div> 
 												<span id="ratingError" className="errorMsg"></span>
 											</div>
-											<div className="col-lg-3 col-sm-6 xs-margin sm-margin">
+											<div className="col-xl-3 col-lg-3 col-sm-6 xs-margin sm-margin lg-margin">
 												<label htmlFor="experience" className="nameTitleForm">Experience in Years<sup className="nameTitleFormStar">*</sup></label>
 												<div className="input-group ">
 													<span className="input-group-addon inputBoxIcon"><FontAwesomeIcon icon="chalkboard-teacher" /></span> 
@@ -996,7 +996,7 @@ class Certification extends Component{
 											</div> 
 											<span id="certifiedOnError" className="errorMsg"></span>
 										</div>
-										<div className="col-lg-4 col-sm-6 xs-margin lg-margin">
+										<div className="col-lg-4 col-sm-6 xs-margin xl-margin">
 											<label htmlFor="validity" className="nameTitleForm">Valid Till</label>
 											<div className="input-group ">
 												<span className="input-group-addon inputBoxIcon"><i className="fa fa-calendar"></i> </span> 
@@ -1007,7 +1007,7 @@ class Certification extends Component{
 											</div> 
 										</div>
 
-										<div className="col-lg-4 col-sm-6 xs-margin lg-margin">
+										<div className="col-lg-4 col-sm-6 xs-margin xl-margin ">
 											<label htmlFor="grade" className="nameTitleForm">Grade / Percentage  </label>
 											<div className="input-group ">
 												<span className="input-group-addon inputBoxIcon"><FontAwesomeIcon icon="file-alt" /></span> 
@@ -1021,7 +1021,7 @@ class Certification extends Component{
 
 						}
 						<div className="row">
-							<div className="col-lg-12">
+							<div className="col-12">
 								<button className="buttonBack pull-right"
 								  onClick={this.handleSave.bind(this)}> 
 								  {this.state.buttonText}
@@ -1043,43 +1043,43 @@ class Certification extends Component{
 
 										return(
 										
-											<div className="col-lg-4 " key={index}>
-												<div className="col-lg-12 certifiedWrapper">
+											<div className="col-xl-4 col-lg-6 col-12" key={index}>
+												<div className="col-lg-12 certifiedWrapper text-center">
 													<div className="row">
-														<div className="col-lg-12 certificateTitleWrapperd">
+														<div className="col-lg-12 certificateTitleWrapperd ">
 															<div className="row">
-																<div className="certificateTitle">
+																<div className="certificateTitle col-12">
 																	Certificate
 																</div>
 															</div>
 														</div>
-														<div className="certificateLogoWrppaer">
+														<div className="certificateLogoWrppaer col-12">
 															<img className="certificateLogo" src="/images/56.png" alt="certificateLogo"/>
 														</div>
-														<div className="certificateText col-lg-12">
+														<div className="certificateText col-12">
 															This certificate is proudly presented to
 														</div>
-														<div className="certificateNameText1">
+														<div className="certificateNameText1 col-12">
 															{this.state.basicInfo.firstName + " " + this.state.basicInfo.lastName }
 														</div>
-														<div className="certificateText">
+														<div className="certificateText col-12">
 															for
 														</div>
-														<div className="certificateNameText1">
+														<div className="certificateNameText1 col-12">
 															{elem.certName}
 														</div>
-														<div className="col-ld-12 certificateFooter">
-															<div className="row">
-																<div className="col-lg-4 col-lg-offset-1 IssueDate">
+														<div className="col-12 certificateFooter">
+															<div className="row ">
+																<div className=" col-5  IssueDate">
 																	<div className="certificateNameText2">{Moment(elem.certifiedOn).format("YYYY-MM-DD")} </div>
 																	<div className="certificateText2">date</div>
 																</div>
-																<div className="col-lg-2">
+																<div className="col-2  ">
 																	<div className="row">
 																		<img className="certificateLogo2" src="/images/57.png" alt="certificateLogo"/>
 																	</div>
 																</div>
-																<div className="col-lg-4 IssueDate">
+																<div className="col-5 IssueDate">
 																	<div className="certificateNameText2">{elem.issuedBy}</div>
 																	<div className="certificateText2">Issued By</div>
 																</div>

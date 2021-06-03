@@ -1177,7 +1177,7 @@ class Experience extends Component {
                             </div>
                             <span id="companyCountryError" className="errorMsg"></span>
                           </div>
-                          <div className="col-lg-4 col-sm-6 sm-margin xs-margin lg-margin">
+                          <div className="col-lg-4 col-sm-6 sm-margin xs-margin xl-margin">
                             <label htmlFor="lastDesignation" className="nameTitleForm">
                               Last Designation
                               <sup className="nameTitleFormStar">*</sup>
@@ -1198,7 +1198,7 @@ class Experience extends Component {
                             <span id="lastDesignationError" className="errorMsg"></span>
                           </div>
 
-                          <div className="col-lg-4 col-sm-6 sm-margin xs-margin lg-margin">
+                          <div className="col-lg-4 col-sm-6 sm-margin xs-margin xl-margin">
                               <label htmlFor="lastDeartment" className="nameTitleForm">
                                 Last Department
                                 <sup className="nameTitleFormStar">*</sup>
@@ -1218,7 +1218,7 @@ class Experience extends Component {
                               </div>
                               <span id="lastDeartmentError" className="errorMsg"></span>
                           </div>
-                          <div className="col-lg-4 col-sm-6 sm-margin xs-margin lg-margin">
+                          <div className="col-lg-4 col-sm-6 sm-margin xs-margin xl-margin">
                               <label htmlFor="reportingManager" className="nameTitleForm">
                                 Reporting Manager
                                 <sup className="nameTitleFormStar">*</sup>
@@ -1238,7 +1238,7 @@ class Experience extends Component {
                               </div>
                               <span id="reportingManagerError" className="errorMsg"></span>
                           </div>
-                          <div className="col-lg-4 col-sm-6 sm-margin xs-margin lg-margin">
+                          <div className="col-lg-4 col-sm-6 sm-margin xs-margin xl-margin">
                             <label
                               htmlFor="reportingManagerDesignation"
                               className="nameTitleForm"
@@ -1264,7 +1264,7 @@ class Experience extends Component {
                               className="errorMsg"
                             ></span>
                           </div>
-                          <div className="col-lg-4 col-sm-6 sm-margin xs-margin lg-margin">
+                          <div className="col-lg-4 col-sm-6 sm-margin xs-margin xl-margin">
                             <label htmlFor="lastDeartment" className="nameTitleForm">
                               Total Experience
                               <sup className="nameTitleFormStar">*</sup>
@@ -1494,17 +1494,18 @@ class Experience extends Component {
                     this.state.experienceArry.length > 0 ? (
                       this.state.experienceArry.map((elem, index) => {
                         return (
-                          <div className="col-lg-4 AddressOuterWrapper" key={index}>
-                            <div className="col-lg-12 addWrapper">
+                          <div className="col-lg-4 col-12 col-md-6 AddressOuterWrapper" key={index}>
+                            <div className="col-12 addWrapper">
                               <div className="row">
-                                <div className="col-lg-12 addLeftWrapper key={index}">
-                                  <div className="col-lg-1 iconAdd">
+                                <div className="col-12 addLeftWrapper key={index}">
+                                <div className="row">
+                                  <div className="col-xl-1 col-lg-1 col-2 col-md-2 iconAdd">
                                     <FontAwesomeIcon icon="user-clock" />
                                   </div>
-                                  <div className="col-lg-8 titleAdd">
+                                  <div className="col-xl-8 col-lg-7 col-7 col-md-6 titleAdd">
                                     {elem.industry_id.industry}
                                   </div>
-                                  <div className="col-lg-2 buttonAdd">
+                                  <div className="col-xl-2 col-lg-3  col-2 col-md-3 buttonAdd">
                                     <div className="row">
                                       <a
                                         id={elem._id}
@@ -1530,9 +1531,10 @@ class Experience extends Component {
                                     </div>
                                   </div>
                                 </div>
+                                </div>
                               </div>
                               <div className="row">
-                                <div className="col-lg-12 addRightWrapper">
+                                <div className="col-12 addRightWrapper">
                                   <div className="">
                                     <div className="addRightText ">
                                       <div className="AddressBoxText">
