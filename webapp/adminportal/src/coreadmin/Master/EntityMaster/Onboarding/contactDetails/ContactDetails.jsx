@@ -558,7 +558,7 @@ class ContactDetails extends Component {
 		var entityID = this.props.match.params.entityID;
 			var formValues = {
 				'entityID' 						: entityID,
-				'contactDetails' 				: {
+				'contactDetails' 				: { 
 					'branchCode'        		: this.state.branchCode,
 					'branchName'        		: this.state.workLocation, 
 					'locationType'				: this.state.locationType,
@@ -637,6 +637,7 @@ class ContactDetails extends Component {
 	createUser = ()=>{
 		var userDetails = {
 			username    			: "MOBILE",
+			pwd 					: "welcome123",
 			firstname				: this.state.firstName,
 			lastname				: this.state.lastName,
 			mobNumber				: this.state.phone.replace("-", ""),

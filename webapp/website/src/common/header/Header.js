@@ -837,11 +837,46 @@ class Header extends Component{
                     </div>
                   </div>
 
+                  <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-body">
+                          <button
+                            type="button"
+                            className="close"
+                            id="closeModalButton"
+                            data-dismiss="modal"
+                            aria-label="Close"
+                          >
+                            &times;
+                          </button>
+                          <section className="OTPSentWrapper ">
+                            {this.props.selectedModal == "login" ? <LoginForm /> : null}
+                            {this.props.selectedModal == "signup" ? <SignUp /> : null}
+                            {this.props.selectedModal == "forgotpassword" ? (
+                              <ForgotPassword />
+                            ) : null}
+                            {this.props.selectedModal == "confirmotp" ? (
+                              <ConfirmOtp />
+                            ) : null}
+                            {this.props.selectedModal == "resetpassword" ? (
+                              <ResetPassword />
+                            ) : null}
+                            {this.props.selectedModal == "changepassword" ? (
+                              <ChangePassword />
+                            ) : null}
+                          </section>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
                   <div
-                    className="modal col-md-12 col-12"
-                    id="loginModal"
+                    className="modal fade col-md-12"
+                    id="loginModal1"
                     role="dialog"
-                    tabIndex="-1"
+                    tabIndex="-1" aria-hidden="true"
                   >
                     <div className="">
                       <div className="modal-dialog " role="document">
