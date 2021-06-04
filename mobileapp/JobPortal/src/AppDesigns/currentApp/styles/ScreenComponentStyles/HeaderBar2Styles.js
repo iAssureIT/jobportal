@@ -41,7 +41,7 @@ export default StyleSheet.create({
   rightcnt: {
     ...Platform.select({
       ios: {
-        marginTop: 30,
+        // marginTop: 30,
         paddingTop: 0,
         paddingLeft: 0,
         paddingRight: 0,
@@ -51,15 +51,16 @@ export default StyleSheet.create({
         height: 60,
       },
       android: {
-         // marginTop: 10,
-        // paddingBottom:10,
+        // marginTop: 10,
+        marginBottom:10,
         paddingTop: 0,
         paddingLeft: 0,
+        borderBottomWidth:0,
         paddingRight: 0,
         backgroundColor: '#242933',
         // borderTopWidth: 3,
         // borderTopColor: colors.theme,
-        height: 60,
+        height: 120,
       }
     })
   },
@@ -165,6 +166,7 @@ export default StyleSheet.create({
   header2main: {
 
     backgroundColor:'#242933',
+    // height:50
     //  elevation: 4, 
     // boxShadow: "10px 5px 5px black"
   },

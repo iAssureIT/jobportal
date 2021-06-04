@@ -111,7 +111,8 @@ import { SET_SEARCH_CALL,
           }
           centerComponent={
             <View style={{alignItem:'center',justifyContent:'center',alignSelf:'center'}}>
-              <Text style={[{fontSize:16,color:'#fff',fontFamily:"Montserrat-SemiBold",textAlign:'center',marginTop:20}]}>Post A Job</Text>
+              <Text style={[{fontSize:16,color:'#f5a721',fontFamily:"Montserrat-SemiBold",textAlign:'center',marginTop:20}]}>Candidate Form</Text>
+               <Text style={[{fontSize:16,color:'#fff',fontFamily:"Montserrat-SemiBold",textAlign:'center',marginTop:20}]}>Basic Info</Text>
             </View>
           }
           rightComponent={
@@ -122,7 +123,7 @@ import { SET_SEARCH_CALL,
                </TouchableOpacity> 
               <View >
                 <TouchableOpacity  onPress={()=> navigation.toggleDrawer()}>
-                  <Icon size={25} name='bars' type='font-awesome' color={colors.white} style={{borderWidth:1,borderColor:'#aaa',paddingTop:4,padding:5,borderRadius:3}}/>
+                  <Icon size={18} name='bars' type='font-awesome' color={colors.white} style={{borderWidth:1,borderColor:'#aaa',padding:10,borderRadius:3}}/>
                 </TouchableOpacity>
               </View>
                 {/*<TouchableOpacity onPress={()=>{Linking.openURL('tel:+91 90280 79487');}} style={{marginLeft:20,justiafyContent:"flex-end"}}>
