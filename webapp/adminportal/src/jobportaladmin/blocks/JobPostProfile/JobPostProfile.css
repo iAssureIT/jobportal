@@ -8,6 +8,7 @@
 
 .leftSideMain{
 	height: auto;
+	min-height: 1220px;
 	border: 1px solid var(--admin-main-border-color);
 	background-color: var(--admin-form-field-background-color);
 	padding-bottom: 100px;
@@ -34,7 +35,7 @@
 .leftImgContainer .companyProfileLogo{
 	width: 100%;
     height: auto;
-	margin-top: 0px;
+	margin-top: 43px;
 	border-radius: 5px;
 }
 
@@ -44,6 +45,7 @@
 
 .imgContent{
 	height: 214px;
+	padding-left: 46px;
 	background-color: var(--admin-form-field-background-color);
 }
 
@@ -378,7 +380,6 @@
 }
 
 .skillsHeadTwo{
-	margin-top: 28px;
 	margin-left: 6px;
 	font-weight: 600;
 	/*background-color: gray;*/
@@ -409,7 +410,6 @@
 
 .skillsHeadThree{
 	margin-left: 6px;
-	margin-top: 28px;
 	font-weight: 600;
 	/*background-color: red;*/
 }
@@ -439,7 +439,6 @@
 
 .skillsHeadFour{
 	margin-left: 6px;
-	margin-top: 28px;
 	/*font-family: 'Montserrat-SemiBold';*/
 	font-weight: 600;
 	/*background-color: red;*/
@@ -456,8 +455,7 @@
 
 .skillsList{
 	/*background-color: brown;*/
-	margin-top: 22px;
-	position: absolute;
+	margin-top: -60px;
 	/*font-family: 'Montserrat-Regular';*/
 	font-weight: 400;
 }
@@ -491,7 +489,7 @@
 /**************************Right Aside Bar******************************/
 
 .rightSideMain{
-	height: 1359px;
+	height: 1220px;
 	padding-bottom: 40px;
 	border: 1px solid var(--admin-main-border-color);
 	background-color: var(--admin-form-field-background-color);
@@ -539,5 +537,46 @@
 .rightSideImg{
 	height: 300px;
 	margin-left: 30px;
-	margin-top: 280px;
+	margin-top: 117px;
+}
+
+/************************************************************Media Query*************************************************************/
+
+@media  screen and (max-width: 2880px) {
+
+.mapImg {
+    margin-left: 79px;
+}
+
+}
+
+@media  screen and (max-width: 1537px) {
+
+.mapImg {
+    margin-left: 38px;
+}
+
+}
+
+@media  screen and (max-width: 1440px) {
+
+.mapImg {
+    margin-left: 29px;
+}
+
+}
+
+
+@media  screen and (max-width: 1400px) {
+
+.mapImg {
+    margin-left: 20px;
+}
+
+}
+
+.buttonNextResume{
+	margin-bottom: 30px!important;
+	margin-top: 30px!important;
+	width: 100px;
 }

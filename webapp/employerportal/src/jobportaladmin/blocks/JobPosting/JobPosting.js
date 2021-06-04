@@ -543,7 +543,7 @@ class JobPosting extends Component {
             status = false;
         }
         else if(!regSpaceName.test(jobTitle)){
-            document.getElementById("jobTitleError").innerHTML = "Please enter valid name,......";  
+            document.getElementById("jobTitleError").innerHTML = "Please enter valid name";  
             status=false; 
         }
         else {
@@ -576,6 +576,7 @@ class JobPosting extends Component {
                 document.getElementById("cityVillageError").innerHTML = "";
            }       
         }
+        
         if(typeof this.state.district !== "undefined"){
            if(!this.state.district.match(regSpaceName)){
               status = false;
@@ -585,9 +586,8 @@ class JobPosting extends Component {
            }       
         }
        
-       if(this.state.pincode.length<=0){
-            document.getElementById("pincodeError").innerHTML=  
-            "Please enter your pincode";  
+        if(this.state.pincode.length<=0){
+            document.getElementById("pincodeError").innerHTML = "Please enter your pincode";  
             status=false; 
         }else{ 
 
@@ -667,7 +667,6 @@ class JobPosting extends Component {
 
         if ((this.state.minSalary) > (this.state.maxSalary)){
             document.getElementById("maxSalaryError").innerHTML = "Maximum salary is less than minimum salary";  
-
             status=false; 
         }
 
@@ -687,6 +686,7 @@ class JobPosting extends Component {
             document.getElementById("maxSalPeriodError").innerHTML = "";
             status = true;
         }
+        
         if(typeof this.state.minEducation !== "undefined"){
            if(!this.state.minEducation.match(regSpaceName)){
               status = false;
@@ -753,14 +753,14 @@ class JobPosting extends Component {
         }
 
         if(this.state.contactPersonEmail.length <=0 ){
-            document.getElementById("contactPersonEmailError").innerHTML = "Please enter your Email";  
+            document.getElementById("contactPersonEmailError").innerHTML=  "Please enter your Email";  
             status=false; 
-        } else if (
+        }else if (
             !emailFilter.test(tempEmail)) { //test email for illegal characters
             document.getElementById('contactPersonEmailError').innerHTML = "Please enter a valid email address.";
         } else if (this.state.contactPersonEmail.match(illegalChars)) {
             document.getElementById('contactPersonEmailError').innerHTML = "Email contains invalid characters.";
-        } else {
+        }else{
             document.getElementById("contactPersonEmailError").innerHTML = ""; 
             status = true;
         }
@@ -774,16 +774,16 @@ class JobPosting extends Component {
             status=false; 
         }
 
-         if(typeof this.state.planguage !== "undefined"){
+        if(typeof this.state.planguage !== "undefined"){
             console.log("im in");
-           if(!this.state.planguage.match(regSpaceName)&& !this.state.planguage == ""){
+            if(!this.state.planguage.match(regSpaceName)&& !this.state.planguage == ""){
             console.log("im in flase");
               status = false;
               document.getElementById("primarySkillTagsError").innerHTML = "Please enter a valid Primary language name";
-           }else{
+            }else{
             console.log("im in true");
                 document.getElementById("primarySkillTagsError").innerHTML = "";
-           }       
+            }       
         }
 
         // if (this.state.primarySkillTags.length <= 0) {
@@ -1878,11 +1878,7 @@ render(){
                                                             maxLength        =   "42"
                                                         />
 												</div>
-
-                                              
-
                                                 <span id="primarySkillTagsError" className="errorMsgJobPost"></span>
-
 											</div>
 											
 											<div className="col-lg-4">
@@ -1937,7 +1933,7 @@ render(){
                                                             handleAddition  =   {this.onOtherSkillAddition.bind(this)}
                                                             handleDrag      =   {this.onOtherSkillDrag.bind(this)}
                                                             handleTagClick  =   {this.onOtherSkillClick.bind(this)}
-                                                            maxLength        =   "42"
+                                                            maxLength       =   "42"
                                                         />
 												</div>
                                                 <span id="otherSkillTagsError" className="errorMsgJobPost"></span>
@@ -1965,7 +1961,7 @@ render(){
                                                     handleAddition  =   {this.onPreferredAddition.bind(this)}
                                                     handleDrag      =   {this.onPreferredDrag.bind(this)}
                                                     handleTagClick  =   {this.onPreferredClick.bind(this)}
-                                                    maxLength        =   "42"
+                                                    maxLength       =   "42"
                                                 />
 										</div>
 									</div>

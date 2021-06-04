@@ -3,6 +3,7 @@ import $ from 'jquery';
 import jQuery from 'jquery';
 import axios from 'axios';
 import swal from 'sweetalert';
+import Swal 			   from 'sweetalert2';	
 import 'bootstrap/js/tab.js';
 import PhoneInput from 'react-phone-input-2';
 import { withRouter } from 'react-router-dom';
@@ -978,37 +979,59 @@ class ContactDetails extends Component {
 			entityID: entityID,
 			location_ID: locationID
 		}
-		axios.delete('/api/entitymaster/deleteContact/' + entityID + "/delete/" + locationID, formValues)
-			.then((response) => {
-
-				this.setState({
-					'openForm'			: false,
-					'contactID' 		: '',
-					'firstName'         : '',
-					'lastName'          : '',
-					'phone'             : '',
-					'altPhone'          : '',
-					'email'             : '',
-					'createUser' 		: false,
-					'employeeID'        : '',
-					'role'				: '',
-					'branchCode'        		: '',
-					'department'        		: '',
-					'designation'       		: '',
-					
-				})
-				
-	            axios.delete("/api/users/delete/"+user_id)
-					.then((response)=>{
-						this.contactDetails();	
-						this.getAllEntites();
-						this.props.history.push('/'+this.state.pathname+'/contact-details/' + entityID);
-						swal("Contact is deleted successfully.");
-					})
-			})
-			.catch((error) => {
-				
-			})
+	Swal.fire({
+		title 				: ' ',
+		html				: 'Are you sure<br /> do you want to delete this contact?',
+		text 				: '',
+		icon 				: 'warning',
+		showCloseButton		: true,
+		showCancelButton 	: true,
+		confirmButtonText 	: 'YES',
+		cancelButtonText 	: 'NO',
+		confirmButtonColor 	: '#f5a721',
+		reverseButtons		: true
+	
+	}).then((result) =>{	if(result.value){ 
+								axios.delete('/api/entitymaster/deleteContact/' + entityID + "/delete/" + locationID, formValues)
+									.then((response) => {
+															/*console.log("Inside First then");*/
+															this.setState({
+																'openForm'			: false,
+																'contactID' 		: '',
+																'firstName'         : '',
+																'lastName'          : '',
+																'phone'             : '',
+																'altPhone'          : '',
+																'email'             : '',
+																'createUser' 		: false,
+																'employeeID'        : '',
+																'role'				: '',
+																'branchCode'        : '',
+																'department'        : '',
+																'designation'       : '',	
+														})
+													
+												axios.delete("/api/users/delete/"+user_id)
+												.then((response)=>{
+													this.contactDetails();	
+													this.getAllEntites();
+													//this.props.history.push('/'+this.state.pathname+'/contact-details/' + entityID);
+													Swal.fire('', "Contact is deleted successfully", '');
+												})			
+												
+												
+									})
+									.catch((error) => {
+										
+									})
+							}else if (result.dismiss === Swal.DismissReason.cancel){
+										/*Swal.fire(
+											'',
+											'Your contact is safe',
+											''
+										)*/
+									}
+		})	
 	}
 	contactDetails() {
 		axios.get('/api/entitymaster/get/one/' + this.props.match.params.entityID)
@@ -1231,7 +1254,7 @@ class ContactDetails extends Component {
 														<div className="form-margin col-lg-12 col-md-12 col-sm-12 col-xs-12 NOpadding">
 															<div className="col-lg-4 col-md-4 col-sm-12 col-xs-12 "  >
 																<label className="labelform col-lg-12 col-md-12 col-sm-12 col-xs-12">Employee ID <i className="astrick">*</i></label>
-																<input type="text" id="employeeID" className="errorinputText form-control col-lg-12 col-md-12 col-sm-12 col-xs-12" value={this.state.employeeID} ref="employeeID" name="employeeID" onChange={this.handleChange.bind(this)} />
+																<input type="number" id="employeeID" className="errorinputText form-control col-lg-12 col-md-12 col-sm-12 col-xs-12" value={this.state.employeeID} ref="employeeID" name="employeeID" onChange={this.handleChange.bind(this)} />
 															</div>
 															<div className="col-lg-4 col-md-4 col-sm-12 col-xs-12 " >
 																<label className="labelform col-lg-12 col-md-12 col-sm-12 col-xs-12">First Name <i className="astrick">*</i></label>
@@ -1283,8 +1306,8 @@ class ContactDetails extends Component {
 														<div className="height40 form-margin col-lg-12 col-md-12 col-sm-12 col-xs-12 NOpadding">
 															<div className="col-lg-4 col-md-4 col-sm-12 col-xs-12 ">
 																<label className="labelform col-lg-12 col-md-12 col-sm-12 col-xs-12">Create Login Credentials</label>
-																<div className="btn-group btn-group-toggle" data-toggle="buttons">
-																	<label className={this.state.createUser === true ? "btn toggleButton customToggleButtonPermission btn-secondary active":"btn toggleButton customToggleButtonPermission btn-secondary"} value={true} onClick={this.loginCredentials.bind(this,true)}>
+																<div className="btn-group btn-group-toggle loginCredbtn" data-toggle="buttons">
+																	<label className={this.state.createUser === true ? "btn toggleButton btn-secondary active":"btn toggleButton btn-secondary"} value={true} onClick={this.loginCredentials.bind(this,true)}>
 																	<input type="radio"
 																		name="options" 
 																		id="yes"
@@ -1293,7 +1316,7 @@ class ContactDetails extends Component {
 																		checked
 																		/>Yes
 																	</label>
-																	<label className={this.state.createUser === false ? "btn toggleButton customToggleButtonPermission btn-secondary active":"btn toggleButton customToggleButtonPermission btn-secondary"} value={false} onClick={this.loginCredentials.bind(this,false)} >
+																	<label className={this.state.createUser === false ? "loginCredbtn1 btn toggleButton btn-secondary active":"btn toggleButton btn-secondary"} value={false} onClick={this.loginCredentials.bind(this,false)} >
 																		<input type="radio" name="options" id="no"  value="no" autoComplete="off" /> No
 																	</label>
 																</div>
@@ -1368,25 +1391,25 @@ class ContactDetails extends Component {
 											<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 NOPadding">
 										 	{this.state.contactarray && this.state.contactarray.length > 0 ?
 												<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 NOPadding">
-													<h4 className=" col-lg-12 col-md-12 col-sm-12 col-sm-12 ">List of Contacts</h4>
+													<h4 className="locationDetTitle col-lg-12 col-md-12 col-sm-12 col-sm-12 ">List of Contacts</h4>
 													{this.state.contactarray && this.state.contactarray.length > 0 ?
 														this.state.contactarray.map((data, index) => {
 															console.log(data)
 															return (
-																<div className="col-lg-6  col-md-6  col-sm-6 col-xs-12 " key={index}>
+																<div className="col-lg-6  col-md-6  col-sm-6 col-xs-12 empContactCard" key={index}>
 																	<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 boxul1">
 																		<div className=" col-lg-1 col-md-1 col-sm-1 col-xs-1">
 																			{/*<i className="fa fa-phone" aria-hidden="true"></i>*/}
 																		</div>
 																		<ul className="col-lg-10 col-md-10 col-sm-10 col-xs-10 palfclr addrbox">
-																			<li className="fz16"><b>{data.firstName} {data.lastName} </b><span className="fz12">( Emp ID : {data.employeeID} )</span></li>
-																			<li>{data.email}, {data.phone}, {data.altPhone}</li>
-																			<li>&nbsp;</li>
-																			<li>Branch Code: {data.branchCode  + ( data.locationType ? " ("+ data.locationType+ ")":"")}</li>
+																			<li className="fz16 contactCardContent"><b>{data.firstName} {data.lastName} </b><span className="fz12">( Emp ID : {data.employeeID} )</span></li>
+																			<li className="contactCardContent">{data.email}, {data.phone}, {data.altPhone}</li>
+																			<li className="contactCardContent">&nbsp;</li>
+																			<li className="contactCardContent">Branch Code: {data.branchCode  + ( data.locationType ? " ("+ data.locationType+ ")":"")}</li>
 																			{/*<li>Branch Code: {data.branchCode +" ("+data.branchName+")"}</li>*/}
-																			<li>Company Branch: {data.branchName?data.branchName :" -NA- "}</li>
-																			<li>Department : {data.departmentName} </li>
-															        		<li>Designation : {data.designationName ? data.designationName : " -NA- "}</li>
+																			<li className="contactCardContent">Company Branch: {data.branchName?data.branchName :" -NA- "}</li>
+																			<li className="contactCardContent">Department : {data.departmentName} </li>
+															        		<li className="contactCardContent">Designation : {data.designationName ? data.designationName : " -NA- "}</li>
 																			{/*<li>Designation: {data.designationName ? data.designationName : " -NA- "}</li>*/}
 																											
 																																				

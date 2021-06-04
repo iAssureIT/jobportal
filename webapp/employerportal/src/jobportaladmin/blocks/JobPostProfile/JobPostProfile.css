@@ -27,10 +27,15 @@
 }
 
 .leftImgContainer .imgbox{
-	margin-top: 35px;
+	/*margin-top: 35px;
 	margin-left: 15px;
 	height: 130px;
-	border-radius: 3px;
+	border-radius: 3px;*/
+
+	margin-top: 45px;
+    /* margin-left: 15px; */
+    height: 130px;
+    border-radius: 3px;
 }
 
 .leftImgContainer .companyProfileLogo{
@@ -544,6 +549,22 @@
 
 .mapImg {
     margin-left: 62px;
+}
+
+}
+
+@media  screen and (max-width: 1537px) {
+
+.mapImg {
+    margin-left: 60px;
+}
+
+}
+
+@media  screen and (max-width: 1440px) {
+
+.mapImg {
+    margin-left: 50px;
 }
 
 }

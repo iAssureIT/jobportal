@@ -164,12 +164,12 @@ class Header extends Component{
                     <span className="headerProfileName">
                       Hello, {this.state.userDetails.firstName }
                     </span>
-                    <img className="headerProfileImg" src='/images/profilelogo.jpeg' alt="logo" onClick={this.profileInfo.bind(this)} />
+                    <img className="headerProfileImg" src='/images/iAssureIT_Logo.svg' alt="logo" onClick={this.profileInfo.bind(this)} />
                     <i className="fa fa-caret-down profileDownArrow" onClick={this.profileInfo.bind(this)}></i>
                   </div>
                   <div className="signOutToggel" id="signOutToggel" style={{display:this.state.profileDisplay}}>
                     <div className="signOutToggelProfileImg">
-                      <img src='/images/profilelogo.jpeg' alt="logo"  />
+                      <img src='/images/iAssureIT_Logo.svg' alt="logo"  />
                     </div>
                     <div className="signOutToggelProfileName">
                        Hello, {this.state.userDetails.firstName }

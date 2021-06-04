@@ -121,7 +121,7 @@ class JobPosting extends Component {
             preferredSkillSuggestions   :   [],
 
             
-            submitBtnText               :   "SUBMIT",
+            submitBtnText               :   "PUBLISH",
             fileDetailUrl               :   "/api/jobs/get/filedetails/",
 
             goodRecordsHeading: {
@@ -552,8 +552,7 @@ class JobPosting extends Component {
 
     validateForm = () => {
         var status = true;
-        var regSpaceName = /^[a-zA-Z\s]+$/;
-        var company=this.state.company;
+        var regSpaceName =  /[a-zA-Z_]+$/;
         var jobTitle=this.state.jobTitle;
         var minEducation =this.state.minEducation;
         var minExperience =this.state.minExperience;
@@ -562,102 +561,123 @@ class JobPosting extends Component {
         var emailFilter = /^[^@]+@[^@.]+\.[^@]*\w\w$/;
         var illegalChars = /[\(\)\<\>\,\;\:\\\"\[\]]/;
         var phoneno = /^\+?([0-9]{2})\)?[-. ]?([0-9]{5})[-. ]?([0-9]{5})$/;
+        var regPincode = /^[1-9][0-9]{5}$/;
+        var planguage = this.state.planguage
+        console.log("errroe",planguage);
 
         console.log(this.state.company_id)
 
         if (this.state.company_id == "Select Employer") {
-            document.getElementById("companyError").innerHTML = "Select Employer";
+            document.getElementById("companyError").innerHTML = "Select employer";
             status = false;
         }
-        
-        // else if(!regSpaceName.test(company)){
-        //  document.getElementById("companyError").innerHTML=  
-        //  "Please enter valid company name......";  
-        //  status=false; 
-        // }
         else {
             document.getElementById("companyError").innerHTML = "";
             status = true;
         }
 
-
         if (this.state.jobTitle.length <= 0) {
-            document.getElementById("jobTitleError").innerHTML = "Enter Job Title";
+            document.getElementById("jobTitleError").innerHTML = "Enter job title";
             status = false;
         }
         else if (this.state.jobTitle.length > 256) {
             document.getElementById("jobTitleError").innerHTML = "Job Title should be only 256 characters";
             status = false;
         }
-        else if(!regSpaceName.test(jobTitle)){
-         document.getElementById("jobTitleError").innerHTML=  
-         "Please enter valid name,......";  
-         status=false; 
+        else if(!regSpaceName.test(jobTitle)) {
+            document.getElementById("jobTitleError").innerHTML=  "Please enter valid name";  
+            status=false; 
         }
         else {
             document.getElementById("jobTitleError").innerHTML = "";
             status = true;
         }
+        
         if (this.state.address.length <= 0) {
-            document.getElementById("addressError").innerHTML = "Enter Job Location";
+            document.getElementById("addressError").innerHTML = "Enter job location";
             status = false;
         } else {
             document.getElementById("addressError").innerHTML = "";
             status = true;
         }
+        
         if (this.state.states.length <= 0) {
-            document.getElementById("statesError").innerHTML = "Select State";
+            document.getElementById("statesError").innerHTML = "Select state";
             status = false;
         } else {
             document.getElementById("statesError").innerHTML = "";
             status = true;
         }
 
-        if (this.state.cityVillage.length <= 0) {
-            document.getElementById("cityVillageError").innerHTML = "Enter City";
-            status = false;
-        } else {
-            document.getElementById("cityVillageError").innerHTML = "";
-            status = true;
+        if(typeof this.state.cityVillage !== "undefined"){
+           if(!this.state.cityVillage.match(regSpaceName)){
+              status = false;
+              document.getElementById("cityVillageError").innerHTML = "Please enter a valid city name";
+           }else{
+                document.getElementById("cityVillageError").innerHTML = "";
+           }       
         }
-        if (this.state.district.length <= 0) {
-            document.getElementById("districtError").innerHTML = "Enter District";
-            status = false;
-        } else {
-            document.getElementById("districtError").innerHTML = "";
-            status = true;
+        
+        if(typeof this.state.district !== "undefined"){
+           if(!this.state.district.match(regSpaceName)){
+              status = false;
+              document.getElementById("districtError").innerHTML = "Please enter a valid district name";
+           }else{
+                document.getElementById("districtError").innerHTML = "";
+           }       
         }
-       if (this.state.pincode.length <= 0) {
-            document.getElementById("pincodeError").innerHTML = "Enter Pincode";
-            status = false;
-        } else {
-            document.getElementById("pincodeError").innerHTML = "";
-            status = true;
+       
+        if(this.state.pincode.length<=0){
+            document.getElementById("pincodeError").innerHTML=  
+            "Please enter your pincode";  
+            status=false; 
+        }else{ 
+
+            if(!regPincode.test(this.state.pincode)){
+                document.getElementById("pincodeError").innerHTML = "Please enter valid pincode";  
+                status=false; 
+            }else{
+                document.getElementById("pincodeError").innerHTML = ""; 
+                status = true;
+            }
+            
         }
-        if (this.state.functionalArea.length <= 0) {
-            document.getElementById("functionalAreaError").innerHTML = "Select or enter Functional Area";
-            status = false;
-        } else {
-            document.getElementById("functionalAreaError").innerHTML = "";
-            status = true;
+        
+        if(typeof this.state.functionalArea !== "undefined"){
+            if(!this.state.functionalArea.match(regSpaceName)){
+              status = false;
+              document.getElementById("functionalAreaError").innerHTML = "Please enter a valid functional Area";
+            }else{
+                document.getElementById("functionalAreaError").innerHTML = "";
+            }       
         }
-        if (this.state.subFunctionalArea.length <= 0) {
-            document.getElementById("subFunctionalAreaError").innerHTML = "Select or enter Sub-Functional Area";
-            status = false;
-        } else {
-            document.getElementById("subFunctionalAreaError").innerHTML = "";
-            status = true;
+        
+        if(typeof this.state.subFunctionalArea !== "undefined"){
+            if(!this.state.subFunctionalArea.match(regSpaceName)){
+              status = false;
+              document.getElementById("subFunctionalAreaError").innerHTML = "Please enter a valid sub-functional Area";
+            }else{
+                document.getElementById("subFunctionalAreaError").innerHTML = "";
+            }       
+        }
+
+        if(typeof this.state.jobRole !== "undefined"){
+            if(!this.state.jobRole.match(regSpaceName)){
+              status = false;
+              document.getElementById("jobRoleError").innerHTML = "Please enter a valid job Role";
+            }else{
+                document.getElementById("jobRoleError").innerHTML = "";
+            }       
         }
 
         if (this.state.positions < 0) {
             document.getElementById("positionsError").innerHTML = "Please enter positive number";
             status = false;
         } 
-         else if (this.state.positions.length <= 0) {
-            document.getElementById("positionsError").innerHTML = "Please enter  number";
+        else if (this.state.positions.length <= 0) {
+            document.getElementById("positionsError").innerHTML = "Please enter number";
             status = false;
         }
-
         else {
             document.getElementById("positionsError").innerHTML = "";
             status = true;
@@ -667,12 +687,11 @@ class JobPosting extends Component {
             document.getElementById("minSalaryError").innerHTML = "Please enter positive number";
             status = false;
         }
-         else if (this.state.minSalary.length <= 0) {
+        else if (this.state.minSalary.length <= 0) {
             document.getElementById("minSalaryError").innerHTML = "Please enter minimum salary";
             status = false;
         }
-
-         else {
+        else {
             document.getElementById("minSalaryError").innerHTML = "";
             status = true;
         }
@@ -685,19 +704,15 @@ class JobPosting extends Component {
             document.getElementById("maxSalaryError").innerHTML = "Please enter maximum salary";
             status = false;
         }
-
-         else {
+        else {
             document.getElementById("maxSalaryError").innerHTML = "";
             status = true;
         }
 
         if ((this.state.minSalary) > (this.state.maxSalary)){
-          document.getElementById("maxSalaryError").innerHTML=  
-          "Maximum salary is less than minimum salary";  
-          
-          status=false; 
+            document.getElementById("maxSalaryError").innerHTML=  "Maximum salary is less than minimum salary";  
+            status=false; 
         }
-
 
         if (this.state.minSalPeriod.length <= 0) {
             document.getElementById("minSalPeriodError").innerHTML = "Select period";
@@ -715,25 +730,16 @@ class JobPosting extends Component {
             status = true;
         }
 
-        if (this.state.minEducation.length <= 0) {
-            document.getElementById("minEducationError").innerHTML = "Please enter minimum education";
-            status = false;
-        }
-        else if (this.state.minEducation.length > 256) {
-            document.getElementById("minEducationError").innerHTML = "Education should be only 256 characters";
-            status = false;
-        }
-        else if(!regSpaceName.test(minEducation)){
-         document.getElementById("minEducationError").innerHTML=  
-         "Please enter valid education,......";  
-         status=false; 
-        }
-        else {
-            document.getElementById("minEducationError").innerHTML = "";
-            status = true;
+        if(typeof this.state.minEducation !== "undefined"){
+           if(!this.state.minEducation.match(regSpaceName)){
+              status = false;
+              document.getElementById("minEducationError").innerHTML = "Please enter a valid min Education";
+           }else{
+                document.getElementById("minEducationError").innerHTML = "";
+           }       
         }
 
-         if (this.state.minExperience < 0) {
+        if(this.state.minExperience == 0) {
             document.getElementById("minExperienceError").innerHTML = "Please enter positive number";
             status = false;
         }
@@ -741,63 +747,54 @@ class JobPosting extends Component {
             document.getElementById("minExperienceError").innerHTML = "Please enter minimum experience";
             status = false;
         }
-
-         else {
+        else {
             document.getElementById("minExperienceError").innerHTML = "";
             status = true;
         }
 
-        if (this.state.jobRole.length <= 0) {
-            document.getElementById("jobRoleError").innerHTML = "Please enter Job Role";
-            status = false;
-        } else {
-            document.getElementById("jobRoleError").innerHTML = "";
-            status = true;
+        if( this.state.jobSector.length >0){
+           if(!this.state.jobSector.match(regSpaceName)){
+              status = false;
+              document.getElementById("jobSectorError").innerHTML = "Please enter a valid job Sector";
+           }else{
+                document.getElementById("jobSectorError").innerHTML = "";
+           }       
         }
-        if (this.state.jobSector.length <= 0) {
-            document.getElementById("jobSectorError").innerHTML = "Please enter Job Sector";
-            status = false;
-        } else {
-            document.getElementById("jobSectorError").innerHTML = "";
-            status = true;
+
+        if( this.state.jobType.length >0){
+           if(!this.state.jobType.match(regSpaceName)){
+              status = false;
+              document.getElementById("jobTypeError").innerHTML = "Please enter a valid job Type";
+           }else{
+                document.getElementById("jobTypeError").innerHTML = "";
+           }       
         }
-        if (this.state.jobType.length <= 0) {
-            document.getElementById("jobTypeError").innerHTML = "Please enter Job Type";
-            status = false;
-        } else {
-            document.getElementById("jobTypeError").innerHTML = "";
-            status = true;
+
+        if( this.state.jobTime.length >0){
+           if(!this.state.jobTime.match(regSpaceName)){
+              status = false;
+              document.getElementById("jobTimeError").innerHTML = "Please enter a valid job Time";
+           }else{
+                document.getElementById("jobTimeError").innerHTML = "";
+           }       
         }
-        if (this.state.jobTime.length <= 0) {
-            document.getElementById("jobTimeError").innerHTML = "Please enter Job Time";
-            status = false;
-        } else {
-            document.getElementById("jobTimeError").innerHTML = "";
-            status = true;
+
+        if(this.state.jobShift.length >0){
+           if(!this.state.jobShift.match(regSpaceName)){
+              status = false;
+              document.getElementById("jobShiftError").innerHTML = "Please enter a valid job Shift";
+           }else{
+                document.getElementById("jobShiftError").innerHTML = "";
+           }       
         }
-        if (this.state.jobShift.length <= 0) {
-            document.getElementById("jobShiftError").innerHTML = "Please enter Job Shift";
-            status = false;
-        } else {
-            document.getElementById("jobShiftError").innerHTML = "";
-            status = true;
-        }
-        if (this.state.contactPersonName.length <= 0) {
-            document.getElementById("contactPersonNameError").innerHTML = "Enter contact person name";
-            status = false;
-        }
-        else if (this.state.contactPersonName.length > 256) {
-            document.getElementById("contactPersonNameError").innerHTML = "contact person name should be only 256 characters";
-            status = false;
-        }
-        else if(!regSpaceName.test(contactPersonName)){
-         document.getElementById("contactPersonNameError").innerHTML=  
-         "Please enter valid contact person name,......";  
-         status=false; 
-        }
-        else {
-            document.getElementById("jobTitleError").innerHTML = "";
-            status = true;
+        
+        if(typeof this.state.contactPersonName !== "undefined"){
+           if(!this.state.contactPersonName.match(regSpaceName)){
+              status = false;
+              document.getElementById("contactPersonNameError").innerHTML = "Please enter a valid contact Person Name";
+           }else{
+                document.getElementById("contactPersonNameError").innerHTML = "";
+           }       
         }
         
         if(this.state.contactPersonEmail.length <=0 ){
@@ -814,17 +811,53 @@ class JobPosting extends Component {
         }
 
         if(this.state.contactPersonPhone.match(phoneno)){
-          document.getElementById("contactPersonPhoneError").innerHTML=  
-          ""; 
-          status = true;
+            document.getElementById("contactPersonPhoneError").innerHTML = ""; 
+            status = true;
           
-        }else{
-          document.getElementById("contactPersonPhoneError").innerHTML=  
-          "Please enter valid Mobile Number";  
-          status=false; 
+        } else {
+            document.getElementById("contactPersonPhoneError").innerHTML = "Please enter valid Mobile Number";  
+            status=false; 
+        }
+
+        if(typeof this.state.planguage !== "undefined"){
+            console.log("im in");
+            if(!this.state.planguage.match(regSpaceName)&& !this.state.planguage == ""){
+            console.log("im in flase");
+              status = false;
+              document.getElementById("primarySkillTagsError").innerHTML = "Please enter a valid Primary language name";
+            }else{
+            console.log("im in true");
+                document.getElementById("primarySkillTagsError").innerHTML = "";
+            } 
+        }
+
+        // if (this.state.primarySkillTags.length <= 0) {
+        //     document.getElementById("primarySkillError").innerHTML = "Please select or enter primary skills";
+        //     status = false;
+        // } else {
+        //     document.getElementById("primarySkillError").innerHTML = "";
+        //     status = true;
+        // }
+
+        if (this.state.secondarySkillTags.length <= 0) {
+            document.getElementById("secondarySkillTagsError").innerHTML = "Please select or enter secondary skills";
+            status = false;
+        } else {
+            document.getElementById("secondarySkillTagsError").innerHTML = "";
+            status = true;
+        }
+
+        if (this.state.otherSkillTags.length <= 0) {
+            document.getElementById("otherSkillTagsError").innerHTML = "Please select or enter other skills";
+            status = false;
+        } else {
+            document.getElementById("otherSkillTagsError").innerHTML = "";
+            status = true;
         }
         return status;
-    }
+    
+}
+    
     getStates() {
         Axios.get("http://locations2.iassureit.com/api/states/get/list/IN").then((response) => {
                 this.setState({
@@ -1027,7 +1060,7 @@ class JobPosting extends Component {
                 console.log("formValues :", formValues);
                 if (response.data.message === "Job details updated Successfully!") {
                     console.log("response.data : ", response.data);
-                    Swal.fire("Congrats!", "your profile updated successfully!", "success");
+                    Swal.fire("", "your profile updated successfully!", "");
                     this.props.history.push("/job-profile/" + this.state.job_id);
                 }
             })
@@ -1565,7 +1598,7 @@ render(){
                                                 <div className="col-lg-12">
                                                     <label htmlFor="company" className="addjobformLable">
                                                         Company Name
-                                                        <span className="asterisk">&#42;</span>
+                                                        <span className="asterisk"> &#42;</span>
                                                     </label>
                                                  
                                                     <div className="input-group">
@@ -1579,8 +1612,8 @@ render(){
                                                                     <option key={key} value={item._id} data-industry={item.industry_id}>{item.companyName}</option>
                                                                 )}
                                                             </select>
-                                                        <span id="companyError" className="errorMsgJobPost"></span>
                                                     </div>
+                                                    <span id="companyError" className="errorMsgJobPost"></span>
                                                 </div>
                                             </div>              
                                         </div>    
@@ -1996,19 +2029,21 @@ render(){
                                             <div className="row">
                                                 <div className="col-lg-8 primarySkillsField">
                                                     <label htmlFor="primarySkills" className="addjobformLable"> Primary Skills </label>
-                                                    <div className="input-group col-lg-12">
-                                                        <span className="input-group-addon addJobFormField"> <i className='fa fa-cog'></i> </span>
+                                                        <div className="input-group col-lg-12">
+                                                            <span className="input-group-addon addJobFormField"> <i className='fa fa-cog'></i> </span>
                                                             <ReactTags
                                                                 //ref={this.reactTags}
-                                                                tags={this.state.primarySkillTags}
-                                                                suggestions={this.state.primarySkillSuggestions}
-                                                                delimiters={delimiters}
-                                                                handleDelete={this.onprimarySkillDelete.bind(this)}
-                                                                handleAddition={this.onprimarySkillAddition.bind(this)}
-                                                                handleDrag={this.onprimarySkillDrag.bind(this)}
-                                                                handleTagClick={this.onprimarySkillClick.bind(this)}
-                                                                autocomplete />
+                                                                tags            =   {this.state.primarySkillTags}
+                                                                suggestions     =   {this.state.primarySkillSuggestions}
+                                                                delimiters      =   {delimiters}
+                                                                handleDelete    =   {this.onprimarySkillDelete.bind(this)}
+                                                                handleAddition  =   {this.onprimarySkillAddition.bind(this)}
+                                                                handleDrag      =   {this.onprimarySkillDrag.bind(this)}
+                                                                handleTagClick  =   {this.onprimarySkillClick.bind(this)}
+                                                                maxLength       =   "42" 
+                                                            />
                                                         </div>
+                                                        <span id="primarySkillTagsError" className="errorMsgJobPost"></span>
                                                 </div>
                                                 
                                                 <div className="col-lg-4">
@@ -2026,16 +2061,18 @@ render(){
                                                     <label htmlFor="secondarySkills" className="addjobformLable"> Secondary Skills </label>
                                                     <div className="input-group col-lg-12">
                                                         <span className="input-group-addon addJobFormField"> <i className='fa fa-cog'></i> </span>
-                                                            <ReactTags
-                                                                tags={this.state.secondarySkillTags}
-                                                                suggestions={this.state.secondarySkillSuggestions}
-                                                                delimiters={delimiters}
-                                                                handleDelete={this.onsecondarySkillDelete.bind(this)}
-                                                                handleAddition={this.onsecondarySkillAddition.bind(this)}
-                                                                handleDrag={this.onsecondarySkillDrag.bind(this)}
-                                                                handleTagClick={this.onsecondarySkillClick.bind(this)}
-                                                                />
+                                                        <ReactTags
+                                                            tags            =   {this.state.secondarySkillTags}
+                                                            suggestions     =   {this.state.secondarySkillSuggestions}
+                                                            delimiters      =   {delimiters}
+                                                            handleDelete    =   {this.onsecondarySkillDelete.bind(this)}
+                                                            handleAddition  =   {this.onsecondarySkillAddition.bind(this)}
+                                                            handleDrag      =   {this.onsecondarySkillDrag.bind(this)}
+                                                            handleTagClick  =   {this.onsecondarySkillClick.bind(this)}
+                                                            maxLength       =   "42"
+                                                        />    
                                                     </div>
+                                                    <span id="secondarySkillTagsError" className="errorMsgJobPost"></span>
                                                 </div>
                                                 
                                                 <div className="col-lg-4">
@@ -2053,16 +2090,18 @@ render(){
                                                     <label htmlFor="otherSkills" className="addjobformLable"> Other Skills </label>
                                                     <div className="input-group col-lg-12">
                                                         <span className="input-group-addon addJobFormField"> <i className='fa fa-cog'></i> </span>
-                                                            <ReactTags
-                                                                tags={this.state.otherSkillTags}
-                                                                suggestions={this.state.otherSkillSuggestions}
-                                                                delimiters={delimiters}
-                                                                handleDelete={this.onOtherSkillDelete.bind(this)}
-                                                                handleAddition={this.onOtherSkillAddition.bind(this)}
-                                                                handleDrag={this.onOtherSkillDrag.bind(this)}
-                                                                handleTagClick={this.onOtherSkillClick.bind(this)}
-                                                                />
+                                                        <ReactTags
+                                                            tags            =   {this.state.otherSkillTags}
+                                                            suggestions     =   {this.state.otherSkillSuggestions}
+                                                            delimiters      =   {delimiters}
+                                                            handleDelete    =   {this.onOtherSkillDelete.bind(this)}
+                                                            handleAddition  =   {this.onOtherSkillAddition.bind(this)}
+                                                            handleDrag      =   {this.onOtherSkillDrag.bind(this)}
+                                                            handleTagClick  =   {this.onOtherSkillClick.bind(this)}
+                                                            maxLength       =   "42"
+                                                        />
                                                     </div>
+                                                    <span id="otherSkillTagsError" className="errorMsgJobPost"></span>
                                                 </div>
                                                 
                                                 <div className="col-lg-4">
@@ -2079,15 +2118,16 @@ render(){
                                             <label htmlFor="preferredSkills" className="addjobformLable"> Preferred Skills but not mandatory </label>
                                             <div className="input-group col-lg-12 preferredSkillsField">
                                                 <span className="input-group-addon addJobFormField"> <i className='fa fa-cog'></i> </span>
-                                                    <ReactTags
-                                                        tags={this.state.preferredSkillTags}
-                                                        suggestions={this.state.preferredSkillSuggestions}
-                                                        delimiters={delimiters}
-                                                        handleDelete={this.onPreferredDelete.bind(this)}
-                                                        handleAddition={this.onPreferredAddition.bind(this)}
-                                                        handleDrag={this.onPreferredDrag.bind(this)}
-                                                        handleTagClick={this.onPreferredClick.bind(this)}
-                                                        />
+                                                <ReactTags
+                                                    tags            =   {this.state.preferredSkillTags}
+                                                    suggestions     =   {this.state.preferredSkillSuggestions}
+                                                    delimiters      =   {delimiters}
+                                                    handleDelete    =   {this.onPreferredDelete.bind(this)}
+                                                    handleAddition  =   {this.onPreferredAddition.bind(this)}
+                                                    handleDrag      =   {this.onPreferredDrag.bind(this)}
+                                                    handleTagClick  =   {this.onPreferredClick.bind(this)}
+                                                    maxLength       =   "42"
+                                                />
                                             </div>
                                         </div>
                                         
@@ -2166,22 +2206,18 @@ render(){
                                         </div>   
 
                                         <div className="col-lg-12"> 
-                                                <button className="btn addJobPreviewBtn  col-lg-2 pull-left" data-status = "draft" onClick={this.handleSubmit.bind(this)}>
+                                                <button className="col-lg-2 btn addJobFormField addJobPreviewBtn pull-left" data-status = "draft" onClick={this.handleSubmit.bind(this)}>
                                                     Save for Later 
                                                 </button>
 
-                                                <button type="button" data-toggle="modal" data-target="#robust" data-dismiss="modal" className="btn  pull-right col-lg-2 addJobFormField addJobPreviewBtn"> 
+                                                {/*<button type="button" data-toggle="modal" data-target="#robust" data-dismiss="modal" className="col-lg-2 btn  pull-right addJobFormField addJobPreviewBtn"> 
                                                     PREVIEW 
                                                 </button>
 
-                                                <PreviewModal jobInfo = {this.state} />
+                                                <PreviewModal jobInfo = {this.state} />*/}
+
+                                                <button className="col-lg-2 btn  pull-right buttonYellow addJobSubmitBtn" data-status = "active" onClick={this.handleSubmit.bind(this)}> {this.state.submitBtnText} </button>
                                         </div>
-                                        <div className="col-lg-12">
-                                                <button className="btn  pull-right buttonYellow addJobSubmitBtn" data-status = "active" onClick={this.handleSubmit.bind(this)}> {this.state.submitBtnText} </button>
-                                        </div>
-                                       {/* <div className="col-lg-3 pull-right">
-                                            <button className="btn buttonYellow addJobSubmitBtn"  onClick={this.handleSubmit}> {this.state.submitBtnText} </button>
-                                        </div>*/}
                                     </form>
                                 </div>
                             </div>

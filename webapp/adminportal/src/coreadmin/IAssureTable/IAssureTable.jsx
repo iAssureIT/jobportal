@@ -625,10 +625,10 @@ class IAssureTable extends Component {
 									{
 										this.state.showCompanyId ?
 
-										<th scope="col" className="umDynamicHeader  srpadd text-center">Company ID</th>
+										<th scope="col" className="umDynamicHeader  srpadd textAlignCenter">Company ID</th>
 
 										:
-										<th scope="col" className="umDynamicHeader srpadd text-center">Sr. No.</th>
+										<th scope="col" className="umDynamicHeader srpadd textAlignCenter">Sr. No.</th>
 
 									}
 									{this.state.tableHeading ?
@@ -686,14 +686,14 @@ class IAssureTable extends Component {
 												}*/}
 												if(key === 'actions'){
 														return(
-															<th key={i} scope="col" className="umDynamicHeader srpadd text-center">
+															<th key={i} scope="col" className="umDynamicHeader srpadd textAlignCenter">
 																<div className="">{value}</div>
 															</th>
 														);	
 														
 												}else{
 													return(
-														<th key={i} scope="col" className="umDynamicHeader srpadd textAlignLeft">
+														<th key={i} scope="col" className="umDynamicHeader srpadd textAlignCenter">
 														<div>{value}</div>
 														 <span onClick={this.sort.bind(this)} id={key} className="fa fa-sort tableSort"></span></th>
 													);	
@@ -702,7 +702,7 @@ class IAssureTable extends Component {
 											}
 										)
 										:
-										<th className="umDynamicHeader srpadd  textAlignLeft"></th>
+										<th className="umDynamicHeader srpadd  textAlignCenter"></th>
 									}
 								</tr>
 							</thead>
@@ -713,10 +713,10 @@ class IAssureTable extends Component {
 											return (
 												<tr key={i} className="">
 													{ this.state.showCompanyId?
-													<td className="textAlignLeft">{value.companyID}</td>
+													<td className="textAlignCenter">{value.companyID}</td>
 
 													:
-													<td className="textAlignLeft">{this.state.startRange + 1 + i}</td>
+													<td className="textAlignCenter">{this.state.startRange + 1 + i}</td>
 													}
 													{
 														Object.entries(value).map(
@@ -726,17 +726,17 @@ class IAssureTable extends Component {
 																	var value2 = value1 ? value1.replace(regex, '') : '';
 																	var aN = value2.replace(this.state.reA, "");
 																	if (aN && $.type(aN) === 'string') {
-																		var textAlign = 'textAlignLeft'
+																		var textAlign = 'textAlignCenter'
 																	} else {
 																		var bN = value1 ? parseInt(value1.replace(this.state.reN, ""), 10) : '';
 																		if (bN) {
-																			var textAlign = 'textAlignRight';
+																			var textAlign = 'textAlignCenter';
 																		} else {
-																			var textAlign = 'textAlignLeft';
+																			var textAlign = 'textAlignCenter';
 																		}
 																	}
 																} else {
-																	var textAlign = 'textAlignLeft';
+																	var textAlign = 'textAlignCenter';
 																}
 																var found = Object.keys(this.state.tableHeading).filter((k) => {
 																	return k === key;

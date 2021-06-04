@@ -81,6 +81,9 @@ class BasicInfo extends Component {
     $.validator.addMethod("regxA5", function (value, element, regexpr) {
       return regexpr.test(value);
     }, "Please specify group name (only letters and spaces are allowed)");
+    $.validator.addMethod("regxA6", function (value, element, regexpr) {
+      return regexpr.test(value);
+    }, "Please valid industry name (only letters and spaces are allowed)");
     $.validator.addMethod("regxA2", function (value, element, regexpr) {
       return regexpr.test(value);
     }, "Please enter a valid TAN Number.");
@@ -117,6 +120,10 @@ class BasicInfo extends Component {
           required: true,
           regxA5: /^[A-Za-z]/,
         },
+        industry: {
+          required: true,
+          regxA6: /^[A-Za-z]/,
+        },
         TAN: {
           /*regxA2: /^[A-Za-z]{4}[0-9]{5}/,*/
           regxA2: /^[A-Za-z]{4}[0-9]{5}[A-Za-z]$|^$/,
@@ -150,6 +157,9 @@ class BasicInfo extends Component {
         }
         if (element.attr("name") === "groupName") {
           error.insertAfter("#groupName");
+        }
+        if (element.attr("name") === "industry") {
+          error.insertAfter("#industry");
         }
         if (element.attr("name") === "companyEmail") {
           error.insertAfter("#companyEmail");
@@ -910,7 +920,7 @@ class BasicInfo extends Component {
                                   <label className="labelform col-lg-12 col-md-12 col-sm-12 col-xs-12 NOpadding-left">Industry <i className="asterisk">*</i></label>
                                   <input type="text" list="industry" className="form-control addJobFormField addJobBorderRadius" refs="industry" 
                                     name="industry" id="selectIndustry" maxLength="100" value={this.state.industry} data-value={this.state.industry_id}
-                                    onChange={this.onChangeIndustry.bind(this)} />
+                                    onChange={this.onChangeIndustry.bind(this)} required/>
                                     <datalist name="industry" id="industry" className="industryArray" >
                                         {this.state.industryArray.map((item, key) =>
                                             <option key={key} value={item.label} data-value={item._id}>{item.label}</option>
