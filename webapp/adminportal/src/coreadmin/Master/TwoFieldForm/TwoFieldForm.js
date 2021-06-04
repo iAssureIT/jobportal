@@ -26,7 +26,7 @@ class TwoFieldForm extends Component {
             "startRange"           : 0,
             "limitRange"           : 10000,
             "editId"               :  '',
-            gmapsLoaded: false,
+            gmapsLoaded            : false,
         };
     }
     initMap = () => {
@@ -84,7 +84,19 @@ class TwoFieldForm extends Component {
               required: true,
             },
         },
-      
+          
+        errorPlacement: function (error, element) {            
+            if (element.attr("data_name") === "selectField") {
+              error.insertAfter("#selectField");
+            }
+            if (element.attr("name") === "attributeName") {
+              error.insertAfter("#attributeName");
+            }
+             if (element.attr("name") === "textFieldOne") {
+              error.insertAfter("#textFieldOne");
+            }
+          }    
+
         });
     }
    
@@ -131,7 +143,7 @@ class TwoFieldForm extends Component {
     }
     submitType(event) {
         event.preventDefault();
-
+        console.log("this.props.fields.attributeName====>>>",this.props.fields.attributeName);
         if(this.props.fields.secondAttributeName == "documententity"){
             var formValues ={ 
                 "dropdownID"       : this.state.selectedIndex,
@@ -146,13 +158,14 @@ class TwoFieldForm extends Component {
                 "createdBy"        : this.state.user_ID
             }  
         }
-
-        console.log($('#twoFieldFormValid').valid())
+        if(this.state.selectedIndex !== ""  && this.state.attributeName !== "") {
+        // if(this.props.fields.secondAttributeName){
+        
          if ($('#twoFieldFormValid').valid()) {
             var postapiurl = this.props.tableObjects.apiLink+"post";
             axios.post(postapiurl, formValues)
                 .then((response) => {
-                    // console.log("response = ", response.data);
+                    console.log("response = ", response.data);
 
                     if (response.data.created) {
                         swal(" ",this.state.attributeName+" Submitted Successfully");
@@ -160,17 +173,29 @@ class TwoFieldForm extends Component {
                         this.setState({
                            attributeName    : "",
                            dateRequired    : "No",
-                           [this.props.fields.secondAttributeName]            : "-- Select --"
+                           [this.props.fields.secondAttributeName] : "-- Select --"
                          })
 
                     }else{
                         swal(" ",this.state.attributeName+" already exist");
+                        this.getData(this.state.startRange, this.state.limitRange);
+                        this.setState({
+                           attributeName    : "",
+                           dateRequired    : "No",
+                           [this.props.fields.secondAttributeName] : "-- Select --"
+                        })
                     }
                 })
                 .catch((error) => {
                     console.log("Error in Post API of Two field = ",error);
                 })
-         }      
+         } 
+        // }else{
+        //     swal(" ","Please Enter All Mandatory field");
+        //  }     
+        }else{
+            swal(" ","Please Enter All Mandatory field");
+         }     
     }
     updateType(event) {
         event.preventDefault();
@@ -181,21 +206,21 @@ class TwoFieldForm extends Component {
                 "fieldID"       : this.state.fieldId,
                 "dropdownID"    : this.state.selectedIndex,
                 "fieldValue"    : this.state.attributeName,
-                "dateRequired"     : this.state.dateRequired,
+                "dateRequired"  : this.state.dateRequired,
             }
         }else{
           var formValues ={ 
                "fieldID"       : this.state.fieldId,
-                "dropdownID"    : this.state.selectedIndex,
-                "fieldValue"    : this.state.attributeName,
-            }  
+               "dropdownID"    : this.state.selectedIndex,
+               "fieldValue"    : this.state.attributeName,
+            } 
+                
         }
+        console.log("formValues update",formValues);
         if ($('#twoFieldFormValid').valid()) {
             axios.patch(this.props.tableObjects.apiLink+'patch', formValues)
                 .then((response) => {
-                    if(response.data.updated ){
-                        // if (response.data.created){
-                        
+                    if(response.data.updated ){                        
                         swal(" ","Record updated Successfully");
                         this.setState({
                             attributeName                           : "",
@@ -207,7 +232,16 @@ class TwoFieldForm extends Component {
                             this.props.history.push(this.props.tableObjects.editUrl);
                         })
                       }else{
-                         swal(" ","Failed to Update Record");
+                        swal(" ","Failed to Update Record");
+                        this.setState({
+                            attributeName                           : "",
+                            dateRequired                           : "No",
+                           [this.props.fields.secondAttributeName]  : "-- Select --",
+                        },()=>{
+                            this.getData(this.state.startRange, this.state.limitRange);
+                            console.log("pops=>",this.props)
+                            this.props.history.push(this.props.tableObjects.editUrl);
+                        });                        
                       }
 
                 })
@@ -310,7 +344,6 @@ class TwoFieldForm extends Component {
     handleSelectLocation = address => {
     geocodeByAddress(address)
      .then((results) =>{ 
-
       for (var i = 0; i < results[0].address_components.length; i++) {
           for (var b = 0; b < results[0].address_components[i].types.length; b++) {
               switch (results[0].address_components[i].types[b]) {
@@ -369,256 +402,270 @@ class TwoFieldForm extends Component {
         }
         var bulkReq = this.props.bulkRequired ? true : false 
         return (
-            <div className="row">
-                <div className="box-header with-border col-lg-12 col-md-12 col-xs-12 col-sm-12 NOpadding-right">
-                    {
-                        this.props.fields.title == "Roles" ?
-                            <h4 className="weighttitle col-lg-10 col-md-10 col-xs-12 col-sm-12 NOpadding-right">{this.props.fields.title === "Location Type"? this.props.fields.title+"s" : this.props.fields.title } </h4>
-                        :
-                            <h4 className="weighttitle col-lg-9 col-md-9 col-xs-12 col-sm-12 NOpadding-right">{this.props.fields.title === "Location Type"? this.props.fields.title+"s" : this.props.fields.title } </h4>
-                    }
-                    {
-                        this.props.twofieldBulkRequired ?
-                            <ul className="nav tabNav nav-pills col-lg-3 col-md-3 col-sm-12 col-xs-12">
-                                <li className="active col-lg-5 col-md-5 col-xs-5 col-sm-5 NOpadding text-center">
-                                    <a className="fieldTab tabSty" data-toggle="tab" href={"#manual-"+this.props.fields.attributeName}>Manual</a>
-                                </li>
-                                <li className="col-lg-6 col-md-6 col-xs-6 col-sm-6 NOpadding  text-center">
-                                    <a className="fieldTab tabSty" data-toggle="tab" href={"#bulk-"+this.props.fields.attributeName}>Bulk Upload</a>
-                                </li>
-                            </ul>
-                        : null 
-                    }
-                     {
-                        this.props.fields.title == "Roles" ?
-                            <div className="col-lg-2 col-md-3 col-sm-12 col-xs-12 " id="rolemodalcl">
-                                <button type="button" className="btn col-lg-12 col-md-12 col-sm-12 col-xs-12 addexamform userbtn clickforhideshow"
-                                    onClick={this.backtoum.bind(this)}
-                                >
-                                    <i className="fa fa-undo" aria-hidden="true"></i>
-                                    <b>&nbsp;&nbsp; Back To UM List</b>
-                                </button>
-                            </div>
+            <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 NOPadding">
+                 <div className="box-header with-border box-headerPadding col-lg-12 col-md-12 col-xs-12 col-sm-12 NOpadding-right">
+                        {
+                            this.props.fields.title == "Roles" ?
+                                <h4 className="weighttitle col-lg-6 col-md-8 col-xs-12 col-sm-12 NOpadding-right">{this.props.fields.title === "Location Type"? this.props.fields.title+"s" : this.props.fields.title } </h4>
                             :
-                            null
-                    }
-                </div>
-                {   
-                    this.props.oneFields ?  
+                                <h4 className="weighttitle col-lg-6 col-md-8 col-xs-12 col-sm-12 NOpadding-right">{this.props.fields.title === "Location Type"? this.props.fields.title+"s" : this.props.fields.title } </h4>
+                        }
+                        {
+                            this.props.twofieldBulkRequired ?
+                                <ul className="nav tabNav nav-pills col-lg-6 col-md-6 col-sm-12 col-xs-12 pull-right">
+                                    <li className="col-lg-4 col-md-4 col-xs-6 col-sm-6 NOpadding text-center pull-right ">
+                                        <a className="fieldTab tabSty bulkBtnNew brLeftNone " data-toggle="tab" href={"#bulk-"+this.props.fields.attributeName}>Bulk Upload</a>
+                                    </li>
+                                    <li className="active col-lg-4 col-md-4 col-xs-5 col-sm-5 NOpadding text-center pull-right">
+                                        <a className="fieldTab tabSty brRightNone " data-toggle="tab" href={"#manual-"+this.props.fields.attributeName}>Manual</a>
+                                    </li>
+                                    
+                                </ul>
+                            : null 
+                        }
+                         {
+                            this.props.fields.title == "Roles" ?
+                                <div className="col-lg-2 col-md-3 col-sm-12 col-xs-12 " id="rolemodalcl">
+                                    <button type="button" className="btn col-lg-12 col-md-12 col-sm-12 col-xs-12 addexamform userbtn clickforhideshow"
+                                        onClick={this.backtoum.bind(this)}
+                                    >
+                                        <i className="fa fa-undo" aria-hidden="true"></i>
+                                        <b>&nbsp;&nbsp; Back To UM List</b>
+                                    </button>
+                                </div>
+                                :
+                                null
+                        }
+                    </div>
+                <section className="content">
+                   
+                    {   
+                        this.props.oneFields ?  
 
-                        <div className="modal" id={"oneField"+this.props.oneFields.attributeName} role="dialog">
-                          <div className="adminModal adminModal-dialog marginTopModal col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <div className="modal-content adminModal-content col-lg-8 col-lg-offset-2 col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1 col-xs-12 noPadding">
-                              <div className="modal-header adminModal-header col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                <div className="adminCloseCircleDiv pull-right  col-lg-1 col-lg-offset-11 col-md-1 col-md-offset-11 col-sm-1 col-sm-offset-11 col-xs-12 NOpadding-left NOpadding-right">
-                                    <button type="button" className="adminCloseButton" onClick={this.closeModal.bind(this)}>&times;</button>
-                               </div>
+                            <div className="modal" id={"oneField"+this.props.oneFields.attributeName} role="dialog">
+                              <div className="adminModal adminModal-dialog marginTopModal col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div className="modal-content adminModal-content col-lg-8 col-lg-offset-2 col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1 col-xs-12 noPadding">
+                                    <div className="modal-header adminModal-header col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <div className="adminCloseCircleDiv pull-right  col-lg-1 col-lg-offset-11 col-md-1 col-md-offset-11 col-sm-1 col-sm-offset-11 col-xs-12 NOpadding-left NOpadding-right">
+                                            <button type="button" className="adminCloseButton" onClick={this.closeModal.bind(this)}>&times;</button>
+                                        </div>
+                                    </div>
+                                    <div className="modal-body adminModal-body OneFieldModal col-lg-12 col-md-12 col-sm-12 col-xs-12" style={{"minHight" : "530px"}}>
+                                        <OneFieldForm fields={this.props.oneFields}
+                                            tableHeading={this.props.oneTableHeading}
+                                            tableObjects={this.props.oneTableObjects}
+                                            editId ={this.props.oneeditId}
+                                            getSecondFieldData={this.getSecondFieldData.bind(this)}
+                                            bulkRequired = {bulkReq}
+                                            masterFieldForm = {true}
+
+                                            url ={this.props.onefieldurl}
+                                            fileurl ={this.props.onefieldfileurl}
+                                            data ={this.props.data}
+                                            uploadedData ={this.props.oneFielduploadedData}
+                                            getFileDetails ={this.props.getOneFieldFileDetails}
+                                            fileDetails ={this.props.oneFieldfileDetails}
+                                            goodRecordsHeading ={this.props.oneFieldgoodRecordsHeading}
+                                            failedtableHeading ={this.props.oneFieldfailedtableHeading}
+                                            failedRecordsTable ={this.props.oneFieldfailedRecordsTable}
+                                            failedRecordsCount ={this.props.oneFieldfailedRecordsCount}
+                                            goodRecordsTable ={this.props.oneFieldgoodRecordsTable}
+                                            goodDataCount ={this.props.oneFieldgoodDataCount}
+                                            history={this.props.history}
+                                           />
+                                    </div>
+                                <div className="modal-footer adminModal-footer col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    {/*<div className="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                                                        <button type="button" className="btn adminCancel-btn col-lg-7 col-lg-offset-1 col-md-4 col-md-offset-1 col-sm-8 col-sm-offset-1 col-xs-10 col-xs-offset-1" data-dismiss="modal" >CANCEL</button>
+                                                                    </div>*/}
+                                </div>
+                                </div>
                               </div>
-                            <div className="modal-body adminModal-body OneFieldModal col-lg-offset-1  col-lg-8 col-md-8 col-sm-8 col-xs-8">
-                                <OneFieldForm fields={this.props.oneFields}
-                                    tableHeading={this.props.oneTableHeading}
-                                    tableObjects={this.props.oneTableObjects}
-                                    editId ={this.props.oneeditId}
-                                    getSecondFieldData={this.getSecondFieldData.bind(this)}
-                                    bulkRequired = {bulkReq}
-                                    masterFieldForm = {true}
-
-                                    url ={this.props.onefieldurl}
-                                    fileurl ={this.props.onefieldfileurl}
-                                    data ={this.props.data}
-                                    uploadedData ={this.props.oneFielduploadedData}
-                                    getFileDetails ={this.props.getOneFieldFileDetails}
-                                    fileDetails ={this.props.oneFieldfileDetails}
-                                    goodRecordsHeading ={this.props.oneFieldgoodRecordsHeading}
-                                    failedtableHeading ={this.props.oneFieldfailedtableHeading}
-                                    failedRecordsTable ={this.props.oneFieldfailedRecordsTable}
-                                    failedRecordsCount ={this.props.oneFieldfailedRecordsCount}
-                                    goodRecordsTable ={this.props.oneFieldgoodRecordsTable}
-                                    goodDataCount ={this.props.oneFieldgoodDataCount}
-                                    history={this.props.history}
-                                   />
                             </div>
-                            <div className="modal-footer adminModal-footer col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                {/*<div className="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                                                    <button type="button" className="btn adminCancel-btn col-lg-7 col-lg-offset-1 col-md-4 col-md-offset-1 col-sm-8 col-sm-offset-1 col-xs-10 col-xs-offset-1" data-dismiss="modal" >CANCEL</button>
-                                                                </div>*/}
-                            </div>
-                            </div>
-                          </div>
-                        </div>
-                    :null
-                }
-                <section className="Content">
-                    <div className="row tab-content">
-                        <div id={"manual-"+this.props.fields.attributeName} className="tab-pane fade in manual active mt">
-                            <form className="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="twoFieldFormValid" >
-                                {
-                                    this.props.oneFields ? 
+                        :null
+                    }
+                    <section className="content col-lg-12 col-md-12 col-sm-12 col-xs-12 NOPadding">
+                        <div className="row tab-content">
+                            <div id={"manual-"+this.props.fields.attributeName} className="tab-pane fade in manual active mt10">
+                                <form className="col-lg-12 col-md-12 col-sm-12 col-xs-12 NOpadding" id="twoFieldFormValid" >
+                                    {
+                                        this.props.oneFields ? 
+                                         <div>
+                                            <div className="form-margin form-group col-lg-6 col-md-6 col-sm-12 col-xs-12 pdcls"style={{marginBottmon:"0px"}}>
+                                                <label className="labelform col-lg-12 col-md-12 col-sm-12 col-xs-12 NOpadding-left">{this.props.fields.secondtitle} <i className="astrick">*</i></label>
+                                                <div className="input-group custom-selectNew  col-lg-11 col-md-11 col-sm-11 col-xs-11"id="selectField" >
+                                                    <select className="form-control removeDownarrow form-control-bR col-lg-12 col-md-12 col-sm-12 col-xs-12"   value={this.state[this.props.fields.secondAttributeName]} data_name ="selectField" name={this.props.fields.secondAttributeName} onChange={this.handleSelect.bind(this)} required>
+                                                        <option selected={true} disabled={true}>-- Select --</option>
+                                                        {
+                                                        this.state.secondFieldData && this.state.secondFieldData.length > 0 ?
+                                                          this.state.secondFieldData.map((data, index)=>{
+                                                            return(
+                                                                <option key={index} id={data._id}>{data[this.props.fields.secondAttributeName]}</option>
+                                                            );
+                                                          })
+                                                        :
+                                                        null
+                                                        }
+                                                       
+                                                     </select>
+                                                </div>
+                                                <div className="col-lg-1 col-md-1 colsm-1 col-xs-1 input-group-addon inputIcon  plusIconBooking" data-toggle="modal"  data-target={"#oneField"+this.props.oneFields.attributeName} title={"Add "+this.props.fields.secondtitle} ><i className="fa fa-plus "></i>
+                                                </div>
+                                            </div>
+                                            {console.log("this.props.oneFields.attributeName",this.props.oneFields.attributeName)}
+                                             
+                                          </div>    
+                                        :
                                         <div className="form-margin form-group col-lg-6 col-md-6 col-sm-12 col-xs-12 pdcls" >
-                                            <label className="labelform col-lg-12 col-md-12 col-sm-12 col-xs-12 NOpadding-left">{this.props.fields.secondtitle} <i className="astrick">*</i></label>
-                                            <div className="input-group" id="selectField" >
-                                                <select className="addonDiv col-lg-12 col-md-12 col-sm-12 col-xs-12" value={this.state[this.props.fields.secondAttributeName]} data_name ="selectField" name={this.props.fields.secondAttributeName} onChange={this.handleSelect.bind(this)} required>
+                                            <div className="" >
+                                                <label className="labelform col-lg-12 col-md-12 col-sm-12 col-xs-12 NOpadding-left">{this.props.fields.secondtitle} <i className="astrick">*</i></label>
+                                                <select className="form-control col-lg-12 col-md-12 col-sm-12 col-xs-12" value={this.state[this.props.fields.secondAttributeName]} data_name ="selectField"  id="selectField" name={this.props.fields.secondAttributeName} onChange={this.handleSelect.bind(this)} required>
                                                     <option selected={true} disabled={true}>-- Select --</option>
                                                     {
                                                     this.state.secondFieldData && this.state.secondFieldData.length > 0 ?
                                                       this.state.secondFieldData.map((data, index)=>{
                                                         return(
-                                                            <option key={index} id={data._id}>{data[this.props.fields.secondAttributeName]}</option>
+                                                            <option  key={index} id={data._id}>{data[this.props.fields.secondAttributeName]}</option>
                                                         );
                                                       })
                                                     :
                                                     null
                                                     }
                                                    
-                                                 </select>
-                                                <div className="input-group-addon inputIcon plusIconBooking" data-toggle="modal"  data-target={"#oneField"+this.props.oneFields.attributeName} title={"Add "+this.props.fields.secondtitle} ><i className="fa fa-plus "></i>
-                                                </div>   
+                                                </select>
                                             </div>
                                         </div>
-                                    :
-                                    <div className="form-margin form-group col-lg-6 col-md-6 col-sm-12 col-xs-12 pdcls" >
-                                        <div className="" id="selectField" >
-                                            <label className="labelform col-lg-12 col-md-12 col-sm-12 col-xs-12 NOpadding-left">{this.props.fields.secondtitle} <i className="astrick">*</i></label>
-                                            <select className="addonDiv col-lg-12 col-md-12 col-sm-12 col-xs-12" value={this.state[this.props.fields.secondAttributeName]} data_name ="selectField" name={this.props.fields.secondAttributeName} onChange={this.handleSelect.bind(this)} required>
-                                                <option selected={true} disabled={true}>-- Select --</option>
-                                                {
-                                                this.state.secondFieldData && this.state.secondFieldData.length > 0 ?
-                                                  this.state.secondFieldData.map((data, index)=>{
-                                                    return(
-                                                        <option  key={index} id={data._id}>{data[this.props.fields.secondAttributeName]}</option>
-                                                    );
-                                                  })
-                                                :
-                                                null
-                                                }
-                                               
-                                            </select>
+                                    }
+
+
+
+                                {/*second field of twofield master*/}
+
+                                    <div className="form-margin col-lg-6  col-md-6 col-sm-12 col-xs-12 pdcls">
+                                        <div  id="textFieldOne">
+                                         
+                                            <label className="labelform col-lg-12 col-md-12 col-sm-12 col-xs-12 NOpadding-left">{this.props.fields.title} <i className="astrick">*</i></label>
+                                            {this.props.fields.secondAttributeName == "cityType" ?
+                                                <PlacesAutocomplete
+                                                    value={this.state.attributeName}
+                                                    onChange={this.handleChangePlaces}
+                                                    onSelect={this.handleSelectLocation}
+                                                    searchOptions={searchOptions}
+                                                    
+
+                                                  >
+                                                    {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+                                                      <div>
+                                                        <input  required
+                                                          {...getInputProps({
+                                                            placeholder: 'Search cities ...',
+                                                            className: 'location-search-input col-lg-12 form-control',
+                                                            id:"attributeName",name:"attributeName"
+                                                          })}
+                                                        />
+                                                        <div className="autocomplete-dropdown-container">
+                                                          {loading && <div>Loading...</div>}
+                                                          {suggestions.map(suggestion => {
+                                                            const className = suggestion.active
+                                                              ? 'suggestion-item--active'
+                                                              : 'suggestion-item';
+                                                            // inline style for demonstration purpose
+                                                            const style = suggestion.active
+                                                              ? { backgroundColor: '#fafafa', cursor: 'pointer' }
+                                                              : { backgroundColor: '#ffffff', cursor: 'pointer' };
+                                                            return (
+                                                              <div
+                                                                {...getSuggestionItemProps(suggestion, {
+                                                                  className,
+                                                                  style,
+                                                                })}
+                                                              >
+
+                                                            <span>{(suggestion.description ? suggestion.description.split(",")[0]:"")}</span>
+
+                                                              </div>
+                                                            );
+                                                          })}
+                                                        </div>
+                                                      </div>
+                                                    )}
+                                                 
+                                                </PlacesAutocomplete>
+                                                  :
+                                                // <input type="text"  className="form-control col-lg-12 col-md-12 col-sm-12 col-xs-12" value={this.state.attributeName} ref={this.props.fields.attributeName} data_name="attributeName" id="attributeName" onChange={this.handleChange.bind(this)} placeholder={this.props.fields.placeholder} required />
+                                                 <input type="text"  className="form-control col-lg-12 col-md-12 col-sm-12 col-xs-12" value={this.state.attributeName} ref={this.props.fields.attributeName} name="attributeName" id="attributeName" onChange={this.handleChange.bind(this)} placeholder={this.props.fields.placeholder} required />
+                                            }
                                         </div>
-                                    </div>
-                                }
-
-                                <div className="form-margin col-lg-6  col-md-6 col-sm-12 col-xs-12 pdcls">
-                                    <div  id="textFieldOne">
-                                       {/*{console.log("this.props.fields.secondAttributeName",this.props.fields.secondAttributeName)}*/}
-                                        <label className="labelform col-lg-12 col-md-12 col-sm-12 col-xs-12 NOpadding-left">{this.props.fields.title} <i className="astrick">*</i></label>
-                                        {this.props.fields.secondAttributeName == "cityType" ?
-                                            <PlacesAutocomplete
-                                                value={this.state.attributeName}
-                                                onChange={this.handleChangePlaces}
-                                                onSelect={this.handleSelectLocation}
-                                                searchOptions={searchOptions}
-
-                                              >
-                                                {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-                                                  <div>
-                                                    <input data_name="selectField1" required
-                                                      {...getInputProps({
-                                                        placeholder: 'Search cities ...',
-                                                        className: 'location-search-input col-lg-12 form-control',
-                                                      })}
-                                                    />
-                                                    <div className="autocomplete-dropdown-container">
-                                                      {loading && <div>Loading...</div>}
-                                                      {suggestions.map(suggestion => {
-                                                        const className = suggestion.active
-                                                          ? 'suggestion-item--active'
-                                                          : 'suggestion-item';
-                                                        // inline style for demonstration purpose
-                                                        const style = suggestion.active
-                                                          ? { backgroundColor: '#fafafa', cursor: 'pointer' }
-                                                          : { backgroundColor: '#ffffff', cursor: 'pointer' };
-                                                        return (
-                                                          <div
-                                                            {...getSuggestionItemProps(suggestion, {
-                                                              className,
-                                                              style,
-                                                            })}
-                                                          >
-                                                            {/*<span>{suggestion.description}</span>*/}
-                                                        <span>{(suggestion.description ? suggestion.description.split(",")[0]:"")}</span>
-
-                                                          </div>
-                                                        );
-                                                      })}
-                                                    </div>
-                                                  </div>
-                                                )}
-                                            </PlacesAutocomplete>
-                                              :
-                                            <input type="text"  className="form-control col-lg-12 col-md-12 col-sm-12 col-xs-12" value={this.state.attributeName} ref={this.props.fields.attributeName} name="attributeName" id="attributeName" onChange={this.handleChange.bind(this)} placeholder={this.props.fields.placeholder} required />
-                                        }
-                                    </div>
-                                   
-                                </div>
-                                 {this.props.fields.secondAttributeName == "documententity" ?
-                                    <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 pdcls" >
-                                        <label className="labelform col-lg-12 col-md-12 col-sm-12 col-xs-12 NOpadding-left">Date Required <i className="astrick">*</i></label>
-                                        <div className="btn-group btn-group-toggle" data-toggle="buttons">
-                                        <label className={this.state.dateRequired === "Yes" ? "btn toggleButton customToggleButtonPermission btn-secondary active":"btn toggleButton customToggleButtonPermission btn-secondary"} value="Yes" onClick={this.getSelectedOption.bind(this,"Yes")}>
-                                        <input type="radio"
-                                            name="options" 
-                                            id="yes"
-                                            value= "Yes"
-                                            autoComplete="off"
-                                            checked
-                                            />Yes
-                                        </label>
-                                        <label className={this.state.dateRequired === "No" ? "btn toggleButton customToggleButtonPermission btn-secondary active":"btn toggleButton customToggleButtonPermission btn-secondary"} value="No" onClick={this.getSelectedOption.bind(this,"No")} >
-                                        <input type="radio" name="options" id="no"  value="No" autoComplete="off" /> No
-                                        </label>
-                                    </div>
                                        
                                     </div>
-                                    :
-                                    null
-                                    }
-                                <br />
-                                <div className="form-margin col-lg-6 col-lg-offset-6 col-md-6 col-sm-12 col-xs-12">
-
-                                    {this.props.editId ?
-                                        <button onClick={this.updateType.bind(this)} className="btn button3 pull-right">Update</button>
+                                     {this.props.fields.secondAttributeName == "documententity" ?
+                                        <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 pdcls mt15" >
+                                            <label className="labelform col-lg-12 col-md-12 col-sm-12 col-xs-12 NOpadding-left">Date Required <i className="astrick">*</i></label>
+                                            <div className="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label className={this.state.dateRequired === "Yes" ? "btn toggleButton customToggleButtonPermission btn-secondary active":"btn toggleButton customToggleButtonPermission btn-secondary"} value="Yes" onClick={this.getSelectedOption.bind(this,"Yes")}>
+                                            <input type="radio"
+                                                name="options" 
+                                                id="yes"
+                                                value= "Yes"
+                                                autoComplete="off"
+                                                checked
+                                                />Yes
+                                            </label>
+                                            <label className={this.state.dateRequired === "No" ? "btn toggleButton customToggleButtonPermission btn-secondary active":"btn toggleButton customToggleButtonPermission btn-secondary"} value="No" onClick={this.getSelectedOption.bind(this,"No")} >
+                                            <input type="radio" name="options" id="no"  value="No" autoComplete="off" /> No
+                                            </label>
+                                        </div>
+                                           
+                                        </div>
                                         :
-                                        <button onClick={this.submitType.bind(this)} className="btn button3 pull-right">Submit</button>
-                                    }
-                                </div>
-                            </form> 
-                            <div className="oneFieldTable col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                <IAssureTable
-                                    tableHeading={this.props.tableHeading}
-                                    twoLevelHeader={this.state.twoLevelHeader}
-                                    dataCount={this.state.dataCount}
-                                    tableData={this.state.tableData}
-                                    getData={this.getData.bind(this)}
-                                    tableObjects={this.props.tableObjects}
-                                    getSecondFieldData={this.getSecondFieldData.bind(this)}
-                                />
-                            </div>
-                        </div>
-                        <div id={"bulk-"+this.props.fields.attributeName} className="tab-pane fade in bulk col-lg-12 col-md-12 col-sm-12 col-xs-12 mt">
-                            <div className="outerForm">
-                                <BulkUpload 
-                                    url ={this.props.url}
-                                    data ={this.props.data}
-                                    uploadedData ={this.props.uploadedData}
-                                    fileurl ={this.props.twofieldfileurl}
-                                    getFileDetails ={this.props.getTwoFieldFileDetails}
-                                    getData={this.getData.bind(this)}
-                                    fileDetails ={this.props.fileDetails}
-                                    goodRecordsHeading ={this.props.goodRecordsHeading}
-                                    failedtableHeading ={this.props.failedtableHeading}
-                                    failedRecordsTable ={this.props.failedRecordsTable}
-                                    failedRecordsCount ={this.props.failedRecordsCount}
-                                    goodRecordsTable ={this.props.goodRecordsTable}
-                                    goodDataCount ={this.props.goodDataCount}
+                                        null
+                                        }
+                                    <br />
+                                    <div className="form-margin col-lg-6 col-lg-offset-6 col-md-6 col-sm-12 col-xs-12">
+
+                                        {this.props.editId ?
+                                            <button onClick={this.updateType.bind(this)} className="btn12 button3 btnRadius pull-right">Update</button>
+                                            :
+                                            <button onClick={this.submitType.bind(this)} className="btn12 button3 btnRadius pull-right">Submit</button>
+                                        }
+                                    </div>
+                                </form> 
+                                <div className="oneFieldTable col-lg-12 col-md-12 col-sm-12 col-xs-12 NOPadding">
+                                    <IAssureTable
+                                        tableHeading={this.props.tableHeading}
+                                        twoLevelHeader={this.state.twoLevelHeader}
+                                        dataCount={this.state.dataCount}
+                                        tableData={this.state.tableData}
+                                        getData={this.getData.bind(this)}
+                                        tableObjects={this.props.tableObjects}
+                                        getSecondFieldData={this.getSecondFieldData.bind(this)}
+                                        field="Two"
                                     />
+                                </div>
+                            </div>
+                            <div id={"bulk-"+this.props.fields.attributeName} className="tab-pane fade in bulk col-lg-12 col-md-12 col-sm-12 col-xs-12 mt">
+                                <div className="outerForm">
+                                    <BulkUpload 
+                                        url ={this.props.url}
+                                        data ={this.props.data}
+                                        uploadedData ={this.props.uploadedData}
+                                        fileurl ={this.props.twofieldfileurl}
+                                        getFileDetails ={this.props.getTwoFieldFileDetails}
+                                        getData={this.getData.bind(this)}
+                                        fileDetails ={this.props.fileDetails}
+                                        goodRecordsHeading ={this.props.goodRecordsHeading}
+                                        failedtableHeading ={this.props.failedtableHeading}
+                                        failedRecordsTable ={this.props.failedRecordsTable}
+                                        failedRecordsCount ={this.props.failedRecordsCount}
+                                        goodRecordsTable ={this.props.goodRecordsTable}
+                                        goodDataCount ={this.props.goodDataCount}
+                                        />
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </section>
                 </section>
-            </div>
-
-
-        
+            </div>        
         );
     }
 }

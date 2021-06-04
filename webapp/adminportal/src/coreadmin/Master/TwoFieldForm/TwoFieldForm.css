@@ -25,8 +25,71 @@
     background: #eee !important;
     color: #000;
 }
+.bulkBtnNew{
+    font-weight: bold;
+    border: 1px solid var(--bunting-color);
+    margin-left: 0px !important;
+    /* border-bottom-left-radius: 0px !important; */
+    /* border-top-left-radius: 0px !important; */
+    box-shadow: 0px 2px 3px 1px #aaa;
+}
 
-.nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover{
+
+
+/*.nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover{
     color: #fff;
     background-color: #337ab7 !important;
+}*/
+.newplusIcon{
+    position: relative;
+    left: 335px;
+    top: 35px;
+    width: 35px;
+    height: 36px ! important;
+}
+
+.nav-pills>li+li {
+    margin-left: 2px;
+}
+
+.nav-pills>li {
+    float: left;
+}
+
+.nav>li {
+    position: relative;
+    display: block;
+}
+
+.fieldTab {
+    white-space: nowrap;
+    padding: 0px 0px !important;
+    background-color: var(--white-color) !important;
+    color: #333;
+    box-shadow: 0px 2px 3px 1px #aaa;
+    border-radius: 3px;
+}
+
+.fieldTab {
+    white-space: nowrap;
+    padding: 10px 8px !important;
+}
+
+.impClass{
+    padding: 10px 8px !important;
+}
+
+.plusIconBooking {
+    color: #fff!important;
+    background-color: var(--blue-color) !important;
+    /*margin-left: -40px !important;
+    margin-top: 37px !important;
+    height: 35px !important;*/
+    width: 35px !important;
+}
+.mt15{
+    margin-top:15px !important;
+}
+.padd6{
+    padding:6px !important;
 }
