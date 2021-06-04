@@ -383,14 +383,14 @@ class AppliedJobFilters extends Component{
     //console.log(this.state.inputExperience)
 
     return(
-      <section className="LeftSideFiltersWrapper col-12">
+      <section className="LeftSideFiltersWrapper">
       
       <div className="row">
 
 
-          <div className="form-group col-lg-12 col-6">
+          <div className="form-group col-lg-12 col-sm-3 col-6">
             <div className=''>
-              <div className="input-group col-12">
+              <div className="input-group ">
                 
                    <Multiselect className="form-control LeftSideFiltersInputBox LeftSideFiltersDrop"
                     id="allSectors" name="allSectors" placeholder="Sector"
@@ -405,9 +405,9 @@ class AppliedJobFilters extends Component{
               </div>
             </div>
           </div> 
-          <div className="form-group col-lg-12 col-6">
+          <div className="form-group col-lg-12 col-sm-3 col-6">
             <div className=''>
-              <div className="input-group col-12">
+              <div className="input-group">
                 
                    <Multiselect className="form-control LeftSideFiltersInputBox LeftSideFiltersDrop"
                     id="allJobTypes" name="allJobTypes" placeholder="Types"
@@ -422,9 +422,9 @@ class AppliedJobFilters extends Component{
               </div>
             </div>
           </div> 
-          <div className="form-group col-lg-12 col-6">
-            <div className='row'>
-              <div className="input-group col-12">
+          <div className="form-group col-lg-12 col-sm-3 col-6">
+            <div className=''>
+              <div className="input-group ">
                 
                    <Multiselect className="form-control LeftSideFiltersInputBox LeftSideFiltersDrop"
                     id="allJobTime" name="allJobTime" placeholder="Time"
@@ -439,9 +439,9 @@ class AppliedJobFilters extends Component{
               </div>
             </div>
           </div>
-          <div className="form-group col-lg-12 col-6">
-            <div className='row'>
-              <div className="input-group col-12">
+          <div className="form-group col-lg-12 col-sm-3 col-6">
+            <div className=''>
+              <div className="input-group ">
                 
                    <Multiselect className="form-control LeftSideFiltersInputBox LeftSideFiltersDrop"
                     id="allJobShift" name="allJobShift" placeholder="Shift"
@@ -456,9 +456,9 @@ class AppliedJobFilters extends Component{
               </div>
             </div>
           </div>
-          <div className="form-group col-lg-12 col-6">
-            <div className='row'>
-              <div className="input-group col-12">
+          <div className="form-group col-lg-12 col-sm-3 col-6">
+            <div className=''>
+              <div className="input-group">
                 
                    <Multiselect className="form-control LeftSideFiltersInputBox LeftSideFiltersDrop"
                     id="allRoles" name="allRoles" placeholder="Roles"
@@ -473,9 +473,9 @@ class AppliedJobFilters extends Component{
               </div>
             </div>
           </div> 
-          <div className="form-group col-lg-12 col-6">
-              <div className='row'>
-                <div className="input-group col-12">
+          <div className="form-group col-lg-12 col-sm-3 col-6">
+              <div className=''>
+                <div className="input-group ">
                   
                      <Multiselect className="form-control LeftSideFiltersInputBox LeftSideFiltersDrop"
                       id="allSkills" name="allSkills" placeholder="Skills"
@@ -490,9 +490,9 @@ class AppliedJobFilters extends Component{
                 </div>
               </div>
           </div>    
-          <div className="form-group col-lg-12 col-6">
-              <div className='row'>
-                <div className="input-group col-12">
+          <div className="form-group col-lg-12 col-sm-3 col-6">
+              <div className=''>
+                <div className="input-group ">
                   
                      <Multiselect className="form-control LeftSideFiltersInputBox LeftSideFiltersDrop"
                       id="allQualifications" name="allQualifications" placeholder="Qualification"
@@ -507,9 +507,9 @@ class AppliedJobFilters extends Component{
                 </div>
               </div>
           </div>
-          <div className="form-group col-lg-12 col-6">
-            <div className="row">
-              <div className="input-group col-12">
+          <div className="form-group col-lg-12 col-sm-3 col-6">
+            <div className="">
+              <div className="input-group ">
                 
                    <Multiselect className="form-control LeftSideFiltersInputBox LeftSideFiltersDrop"
                     id="allExperiences" name="aallExperiences" placeholder="Experience"

@@ -40,7 +40,7 @@ class CandidateApplyJoblist extends Component {
           </div>
         </div>
 
-        <div className="col-lg-9 ">
+        <div className="col-lg-9">
           <div className="row">
             <div id="mapwise">
               <AppliedJoblist appliedJoblist={this.props.appliedJoblist}/>

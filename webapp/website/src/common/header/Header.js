@@ -315,9 +315,10 @@ class Header extends Component{
     
     if (this.props.userDetails.loggedIn) {    
       return(
-        <nav className="navbar FunctionalHeaderWrapper container-fluid">
-        {/*  <div className="row">*/}
-              <div className="col-1 col-sm-1 col-md-1 col-lg-1 col-xl-1">
+        <nav className="row navbar FunctionalHeaderWrapper container-flex">
+         <div className="col-12">
+         <div className="row">
+              <div className="col-3 col-sm-2 col-md-2 col-lg-1 col-xl-1">
                 <div className="iconHeader">
                   <a href="/">
                     <img src="/images/1.png" alt="icon"  className="iIcon"/>
@@ -396,14 +397,14 @@ class Header extends Component{
                   </ul>
                 </div>
               ) : (
-                <div className="breadCrumbHeader col-4 col-sm-4 col-md-4 col-lg-3 col-xl-3"></div>
+                <div className="breadCrumbHeader col-1 d-none d-sm-block col-sm-3 col-md-3 col-lg-3 col-xl-3"></div>
               )}
 
-              <div className="FunctionWiseTitle col-1 col-sm-1 col-md-1 col-lg-4 col-xl-4"></div>
+              <div className="FunctionWiseTitle col-1 d-none d-sm-block col-sm-1 col-md-1 col-lg-4 col-xl-4"></div>
 
-              <div className="rightFunctionHeader col-6 col-sm-6 col-md-6 col-lg-4 col-xl-4">
+              <div className="rightFunctionHeader col-8 col-sm-6 col-md-6 col-lg-4 col-xl-4">
                 <div className="row">
-                  <div className="rightFunctionHeader1 col-7 col-sm-7 col-md-7 col-lg-7 col-xl-7">
+                  <div className="rightFunctionHeader1 col-6 col-sm-7 col-md-7 col-lg-7 col-xl-7">
                     <div className="row">
                       <div className="rightFunctionHeader1 col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 pull-right">
                         <div className="rightFunctionHeader1CityJobs">
@@ -434,7 +435,7 @@ class Header extends Component{
                     </div>
                   </div>
 
-                  <div className="rightFunctionHeader2 col-5 col-sm-5 col-md-5 col-lg-5 col-xl-5">
+                  <div className="rightFunctionHeader2 col-6 col-sm-5 col-md-5 col-lg-5 col-xl-5">
                     <div className="row">
                       <div className="headerMenu2 col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4">
                         <div className="headerMenu1">
@@ -651,7 +652,8 @@ class Header extends Component{
                   </div>
                 </div>
               </div>
-           {/* </div>  */}
+            </div>  
+            </div>  
           </nav>
 
         );

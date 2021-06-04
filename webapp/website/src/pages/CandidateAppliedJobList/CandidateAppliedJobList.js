@@ -9,7 +9,7 @@ class CandidateAppliedJoblistPage extends Component{
 	render(){
 		return(
 				<div className="mainPagesWrapper col-lg-12">
-					<div className="row">
+					<div className="">
 						<CandidateApplyJoblist/>
 					</div>
 				</div>
