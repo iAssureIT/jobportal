@@ -609,6 +609,7 @@ class BasicInfo extends Component {
           var industry = this.state.industryArray.filter((industry)=>{
             return industry._id  == response.data.industry_id
           })
+          //console.log(industry)
           this.setState({
             "entityID": this.props.match.params.entityID,
             "entityType": response.data.entityType,
@@ -627,7 +628,7 @@ class BasicInfo extends Component {
             "statutoryDetails": response.data.statutoryDetails,
             "value": industry[0] ? industry[0].label : "",
             "industry_id": industry[0] ? industry[0]._id : "",
-            "industry": industry[0] ? industry[0].industry : "",
+            "industry": industry[0] ? industry[0].label : "",
             "userID": response.data.ID,
             "createdBy": localStorage.getItem("user_ID")
           })

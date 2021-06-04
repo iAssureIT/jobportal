@@ -288,7 +288,9 @@ class ContactDetails extends Component {
 					required: true,
 					lastRegx: /^[a-zA-Z\s]+$/,
 				},
-				
+				phone:{
+					required: true,
+				},
 				empCategory: {
 					required: true,
 				},
@@ -324,7 +326,9 @@ class ContactDetails extends Component {
 				if (element.attr("name") === "lastName") {
 					error.insertAfter("#lastName");
 				}
-				
+				if (element.attr("name") === "phone") {
+		          error.insertAfter("#phone");
+		        }
 				if (element.attr("name") === "employeeID") {
 					error.insertAfter("#employeeID");
 				}
@@ -1274,6 +1278,7 @@ class ContactDetails extends Component {
 												                <div className="form-group">
 												                  <label className="labelform" >Contact Number</label>
 												                    <PhoneInput
+												                    	id="phone"
 												                      country={'in'}
 												                      value={this.state.phone} 
 												                      name="phone"
