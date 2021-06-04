@@ -853,7 +853,7 @@ class StatutoryDetails extends Component {
 												<i className="fa fa-phone phoneIcon" aria-hidden="true"></i> &nbsp;
 												Locations
 											</a>
-											<div className="trianglethree forActive" id="triangle-right"></div>
+											<div className="trianglethree forActive tri" id="triangle-right"></div>
 										</li>
 										<li className="col-lg-3 col-md-3 col-sm-12 col-xs-12 transactionTab noRightPadding pdcls btn4 disabled">
 											<div className="trianglesix" id="triangle-right2"></div>

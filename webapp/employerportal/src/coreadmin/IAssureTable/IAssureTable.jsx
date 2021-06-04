@@ -645,10 +645,10 @@ class IAssureTable extends Component {
 											return (
 												<tr key={i} className="">
 													{ this.state.showCompanyId?
-													<td className="textAlignCenter fixedWidth">{value.companyID}</td>
+													<td className="textAlignCenter">{value.companyID}</td>
 
 													:
-													<td className="textAlignCenter fixedWidth">{this.state.startRange + 1 + i}</td>
+													<td className="textAlignCenter">{this.state.startRange + 1 + i}</td>
 													}
 													{
 														Object.entries(value).map(
@@ -658,17 +658,17 @@ class IAssureTable extends Component {
 																	var value2 = value1 ? value1.replace(regex, '') : '';
 																	var aN = value2.replace(this.state.reA, "");
 																	if (aN && $.type(aN) === 'string') {
-																		var textAlign = 'textAlignCenter fixedWidth'
+																		var textAlign = 'textAlignCenter'
 																	} else {
 																		var bN = value1 ? parseInt(value1.replace(this.state.reN, ""), 10) : '';
 																		if (bN) {
-																			var textAlign = 'textAlignCenter fixedWidth';
+																			var textAlign = 'textAlignCenter';
 																		} else {
-																			var textAlign = 'textAlignCenter fixedWidth';
+																			var textAlign = 'textAlignCenter';
 																		}
 																	}
 																} else {
-																	var textAlign = 'textAlignCenter fixedWidth';
+																	var textAlign = 'textAlignCenter';
 																}
 																var found = Object.keys(this.state.tableHeading).filter((k) => {
 																	return k === key;

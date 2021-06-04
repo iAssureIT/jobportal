@@ -1052,7 +1052,7 @@ input:checked+.slider:before {
     border:1px solid #aaaaaa6b;
     border-radius: 4px;
     padding: 5px !important;
-    padding-right: 19px !important;
+    padding-left: 18px !important;
     /*padding-top: 12px;
     padding-bottom: 12px;*/
    /*background-color: var(--yellow-button-color) !important;*/
@@ -1792,6 +1792,10 @@ select#gender option[value="others"] {
 
 #LogoImageUpOne {
     left: 4px;
+}
+
+.empPdfFile {
+    margin-left: -176px;
 }
 
 /*.logoStyle1{

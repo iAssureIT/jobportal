@@ -2006,7 +2006,8 @@ render(){
                                                                 handleDelete={this.onprimarySkillDelete.bind(this)}
                                                                 handleAddition={this.onprimarySkillAddition.bind(this)}
                                                                 handleDrag={this.onprimarySkillDrag.bind(this)}
-                                                                handleTagClick={this.onprimarySkillClick.bind(this)} />
+                                                                handleTagClick={this.onprimarySkillClick.bind(this)}
+                                                                autocomplete />
                                                         </div>
                                                 </div>
                                                 

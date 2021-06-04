@@ -979,9 +979,9 @@ class BasicInfo extends Component {
                             </label>
                             <input type="text" id="CIN" maxLength="21" className="form-control col-lg-12 col-md-12 col-sm-12 col-xs-12 UpperCase inputText" placeholder="L12345MH2019PTC123456" value={this.state.CIN} ref="CIN" name="CIN" onChange={this.handleChange} />
                           </div>
-                          <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-margin NOpadding empPdfFileLabel">
+                          <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-margin NOpadding">
                             <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                              <label className="labelform col-lg-12 col-md-12 col-sm-12 col-xs-12">Add COI Doc (jpg, jpeg, png, pdf)</label>
+                              <label className="labelform col-lg-12 col-md-12 col-sm-12 col-xs-12 empPdfFileLabel">Add COI Doc (jpg, jpeg, png, pdf)</label>
                             </div>
                             <div className="col-lg-3 col-md-3 col-sm-12 col-xs-12">
                               <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 NOpadding marginsBottom" id="hide">
@@ -996,7 +996,7 @@ class BasicInfo extends Component {
                                 this.state.COI.map((doc, i) => {
                                   if(('extension',doc.substring(doc.lastIndexOf("."))) === '.pdf'){
                                     return (
-                                      <div key={i} className="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                      <div key={i} className="col-lg-3 col-md-3 col-sm-12 col-xs-12 empPdfFile">
                                         <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 NOpadding marginsBottom" id="hide">
                                           <label className="labelform deletelogoCOI col-lg-12 col-md-12 col-sm-12 col-xs-12" title="Delete Document" id={doc} onClick={this.deleteDoc.bind(this)}>x</label>
                                           <div title={(doc.substring(doc.lastIndexOf("/"))).replace('/', "")} className="col-lg-12 col-md-12 col-sm-12 col-xs-12 brdlogos1 " id="LogoImageUpOne">

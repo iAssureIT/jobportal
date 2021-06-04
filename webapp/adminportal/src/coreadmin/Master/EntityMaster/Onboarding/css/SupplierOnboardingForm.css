@@ -1125,10 +1125,10 @@ select#gender option[value="others"] {
     padding: 0px;
     font-size: 10px;
     text-align: center;
-    position: absolute;
+    /*position: absolute;*/
     z-index: 1;
     top: -5px;
-    right: -25px;
+    right: -60px;
     font-weight: 700;
     cursor: pointer;
 }
@@ -1344,6 +1344,7 @@ select#gender option[value="others"] {
     position: absolute;
     top: 20px;
     left: -65px;
+    display: none;
 }
 .MasterBudgetTitle{
 
@@ -1442,6 +1443,10 @@ top:0px !important;
     margin-left: -10px;
 }
 
+.tri{
+    right: -11px !important;
+}
+
 
 /************************************************/
 .form-margin {
@@ -1490,6 +1495,10 @@ top:0px !important;
 
 .trianglePositionFix{
     top: 0px !important;
+}
+
+.empPdfFile{
+    margin-left: -230px;
 }
 
 /*.triangleShapeposi{
@@ -1543,6 +1552,10 @@ top:0px !important;
 
 #LogoImageUpOne {
     left: 4px;
+}
+
+.empPdfFile {
+    margin-left: -176px;
 }
 
 /*.logoStyle1{
