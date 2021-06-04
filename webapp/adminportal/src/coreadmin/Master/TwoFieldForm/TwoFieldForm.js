@@ -493,23 +493,25 @@ class TwoFieldForm extends Component {
                                          <div>
                                             <div className="form-margin form-group col-lg-6 col-md-6 col-sm-12 col-xs-12 pdcls"style={{marginBottmon:"0px"}}>
                                                 <label className="labelform col-lg-12 col-md-12 col-sm-12 col-xs-12 NOpadding-left">{this.props.fields.secondtitle} <i className="astrick">*</i></label>
-                                                <div className="input-group custom-selectNew  col-lg-11 col-md-11 col-sm-11 col-xs-11"id="selectField" >
-                                                    <select className="form-control removeDownarrow form-control-bR col-lg-12 col-md-12 col-sm-12 col-xs-12"   value={this.state[this.props.fields.secondAttributeName]} data_name ="selectField" name={this.props.fields.secondAttributeName} onChange={this.handleSelect.bind(this)} required>
-                                                        <option selected={true} disabled={true}>-- Select --</option>
-                                                        {
-                                                        this.state.secondFieldData && this.state.secondFieldData.length > 0 ?
-                                                          this.state.secondFieldData.map((data, index)=>{
-                                                            return(
-                                                                <option key={index} id={data._id}>{data[this.props.fields.secondAttributeName]}</option>
-                                                            );
-                                                          })
-                                                        :
-                                                        null
-                                                        }
-                                                       
-                                                     </select>
-                                                </div>
-                                                <div className="col-lg-1 col-md-1 colsm-1 col-xs-1 input-group-addon inputIcon  plusIconBooking" data-toggle="modal"  data-target={"#oneField"+this.props.oneFields.attributeName} title={"Add "+this.props.fields.secondtitle} ><i className="fa fa-plus "></i>
+                                                <div className="input-group col-lg-12 col-md-12 col-sm-12 col-xs-12" >
+                                                    <div className="custom-selectNew  "id="selectField" >
+                                                        <select className="form-control removeDownarrow form-control-bR "   value={this.state[this.props.fields.secondAttributeName]} data_name ="selectField" name={this.props.fields.secondAttributeName} onChange={this.handleSelect.bind(this)} required>
+                                                            <option selected={true} disabled={true}>-- Select --</option>
+                                                            {
+                                                            this.state.secondFieldData && this.state.secondFieldData.length > 0 ?
+                                                              this.state.secondFieldData.map((data, index)=>{
+                                                                return(
+                                                                    <option key={index} id={data._id}>{data[this.props.fields.secondAttributeName]}</option>
+                                                                );
+                                                              })
+                                                            :
+                                                            null
+                                                            }
+                                                           
+                                                         </select>
+                                                    </div>
+                                                    <div className=" input-group-addon inputIcon  plusIconBooking" data-toggle="modal"  data-target={"#oneField"+this.props.oneFields.attributeName} title={"Add "+this.props.fields.secondtitle} ><i className="fa fa-plus "></i>
+                                                    </div>
                                                 </div>
                                             </div>
                                             {console.log("this.props.oneFields.attributeName",this.props.oneFields.attributeName)}

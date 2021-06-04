@@ -388,9 +388,9 @@ class AppliedJobFilters extends Component{
       <div className="row">
 
 
-          <div className="form-group col-lg-12 col-3">
-            <div className='row'>
-              <div className="input-group ">
+          <div className="form-group col-lg-12 col-6">
+            <div className=''>
+              <div className="input-group col-12">
                 
                    <Multiselect className="form-control LeftSideFiltersInputBox LeftSideFiltersDrop"
                     id="allSectors" name="allSectors" placeholder="Sector"
@@ -405,9 +405,9 @@ class AppliedJobFilters extends Component{
               </div>
             </div>
           </div> 
-          <div className="form-group col-lg-12 col-3">
-            <div className='row '>
-              <div className="input-group ">
+          <div className="form-group col-lg-12 col-6">
+            <div className=''>
+              <div className="input-group col-12">
                 
                    <Multiselect className="form-control LeftSideFiltersInputBox LeftSideFiltersDrop"
                     id="allJobTypes" name="allJobTypes" placeholder="Types"
@@ -422,7 +422,7 @@ class AppliedJobFilters extends Component{
               </div>
             </div>
           </div> 
-          <div className="form-group col-lg-12 col-3">
+          <div className="form-group col-lg-12 col-6">
             <div className='row'>
               <div className="input-group col-12">
                 
@@ -439,7 +439,7 @@ class AppliedJobFilters extends Component{
               </div>
             </div>
           </div>
-          <div className="form-group col-lg-12 col-3">
+          <div className="form-group col-lg-12 col-6">
             <div className='row'>
               <div className="input-group col-12">
                 
@@ -456,7 +456,7 @@ class AppliedJobFilters extends Component{
               </div>
             </div>
           </div>
-          <div className="form-group col-lg-12 col-3">
+          <div className="form-group col-lg-12 col-6">
             <div className='row'>
               <div className="input-group col-12">
                 
@@ -473,7 +473,7 @@ class AppliedJobFilters extends Component{
               </div>
             </div>
           </div> 
-          <div className="form-group col-lg-12 col-3">
+          <div className="form-group col-lg-12 col-6">
               <div className='row'>
                 <div className="input-group col-12">
                   
@@ -490,7 +490,7 @@ class AppliedJobFilters extends Component{
                 </div>
               </div>
           </div>    
-          <div className="form-group col-lg-12 col-3">
+          <div className="form-group col-lg-12 col-6">
               <div className='row'>
                 <div className="input-group col-12">
                   
@@ -507,7 +507,7 @@ class AppliedJobFilters extends Component{
                 </div>
               </div>
           </div>
-          <div className="form-group col-lg-12 col-3">
+          <div className="form-group col-lg-12 col-6">
             <div className="row">
               <div className="input-group col-12">
                 
