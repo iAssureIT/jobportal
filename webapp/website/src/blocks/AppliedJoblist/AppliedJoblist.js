@@ -184,7 +184,7 @@ wishlistJob = (jobid)=>{
 	render(){
 		return(
 			<section className="jobListWrapper">
-				<div className="col-lg-12 JobListWrapperMain">
+				<div className="col-12 JobListWrapperMain">
 					
 					<div className="row">
 						{
@@ -209,7 +209,7 @@ wishlistJob = (jobid)=>{
 										<div className="col-12">
 											<div className="row appliedJobListContainer">
 											<div className="col-12">
-													<div className="col-12">
+												<div className="col-12">
 													<div className="row">
 														<div className="col-xl-11 col-10 jobListLeftContent">
 															<div className="row">
@@ -285,7 +285,7 @@ wishlistJob = (jobid)=>{
 														</div>
 														</div>
 													</div>	
-													</div>	
+												</div>	
 												
 											</div>
 										</div>

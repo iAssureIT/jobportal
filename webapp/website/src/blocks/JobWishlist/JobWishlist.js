@@ -5,7 +5,7 @@ import Moment 					from "moment";
 import { connect }        from 'react-redux';
 import { bindActionCreators } from 'redux';
 import  * as mapActionCreator from '../../common/actions/index';
-//import "./JobWishlist.css";
+import "./JobWishlist.css";
 
 class JobWishlist extends Component{
 	constructor(props){
@@ -296,13 +296,14 @@ removeApplication = (job_id) => {
 	render(){
 		return(
 			<section className="jobListWrapper">
-				<div className="col-lg-12 JobListWrapperMain">
+				<div className="col-12 JobListWrapperMain">
 					{/*<div className="col-lg-4 col-lg-offset-8">
 							<div className="input-group searchMainTab">
 								<input type="text" name="jobTitle" id="jobTitle" className="form-control jobListSearchTab" placeholder="Search by Job Title..." onChange={this.search}/>
 								<span className="input-group-addon searchTabAddOn"><i className="fa fa-search"></i> </span> 
 							</div> 
 						</div> */}
+						<div className="row">
 						{
 							this.props.jobWishlist[0]
 							?
@@ -324,14 +325,16 @@ removeApplication = (job_id) => {
 					                }
 					               	
 									return(
-										<div>
+										<div className="col-sm-6">
 									 	{ elem.job_id ?
-										<div className="col-lg-6">
-											<div className="appliedJobListContainer">
-												<div className="col-lg-12">
-													<div className="col-lg-11 jobListLeftContent">
+										<div className="col-12">
+											<div className="row appliedJobListContainer">
+												<div className="col-12">
+												<div className="col-12">
+												<div className="row">
+													<div className="col-xl-11 col-10 jobListLeftContent">
 														<div className="row">
-															<div className="iconsBar">
+															<div className="col-12 iconsBar">
 																<ul>	
 																	{
 																	elem.job_id.jobBasicInfo.gender=="Male Only"?
@@ -359,32 +362,34 @@ removeApplication = (job_id) => {
 																		<li><i className="fa fa-hourglass-o" title="Hourly Basis"></i></li> 
 																		: <li><i className="fa fa-hourglass-o" title="Hourly Basis"></i></li> 
 																	}
+																	<li><div className="infoLog"> {Moment(elem.createdAt).startOf('seconds').fromNow()} </div></li>
 																</ul>
-																<div className="infoLog"> {Moment(elem.createdAt).startOf('seconds').fromNow()} </div>
-															</div>
+															
 														</div>
-														<div className="jobListDesignation">
+														<div className="col-12 jobListDesignation">
 															{elem.job_id.jobBasicInfo.jobTitle}
 														</div>
-														<div className="jobListCompanyName">
+														<div className="col-12 jobListCompanyName">
 															<b>{elem.job_id ? elem.job_id.company_id.companyName : "Anonymous"}</b>
 														</div>
-														<div> 
-															<i className="fa fa-calendar jobListExperience"></i> &nbsp;&nbsp;Exp&nbsp;:&nbsp;{elem.job_id.eligibility.minExperience} Years
-														</div>
-														<div> 
-															<i className="fa fa-rupee jobListMonSal"></i> &nbsp; <i className="fa fa-inr"></i> {elem.job_id.ctcOffered.minSalary} - <i className="fa fa-inr"></i> {elem.job_id.ctcOffered.maxSalary} a month
-														</div>
-														<div className="joblistLocationInfo">
-															<i className="fa fa-map-marker jobListLocation"></i> &nbsp; {elem.job_id.location.address + " "+ elem.job_id.location.district + ", "+elem.job_id.location.state+", "+elem.job_id.location.country}
-														</div>
-														<div> 
-															<i className="fa fa-users jobListNumPositions"></i> &nbsp; No of position : {elem.job_id.jobBasicInfo.positions}
+														<div className="appliedListSubFont">
+															<div className="col-12"> 
+																<i className="fa fa-calendar jobListExperience"></i> &nbsp;&nbsp;Exp&nbsp;:&nbsp;{elem.job_id.eligibility.minExperience} Years
+															</div>
+															<div className="col-12"> 
+																<i className="fa fa-rupee jobListMonSal"></i> &nbsp; <i className="fa fa-inr"></i> {elem.job_id.ctcOffered.minSalary} - <i className="fa fa-inr"></i> {elem.job_id.ctcOffered.maxSalary} a month
+															</div>
+															<div className="col-12 joblistLocationInfo">
+																<i className="fa fa-map-marker jobListLocation"></i> &nbsp; {elem.job_id.location.address + " "+ elem.job_id.location.district + ", "+elem.job_id.location.state+", "+elem.job_id.location.country}
+															</div>
+															<div className="col-12"> 
+																<i className="fa fa-users jobListNumPositions"></i> &nbsp; No of position : {elem.job_id.jobBasicInfo.positions}
+															</div>
 														</div>
 													</div>
-													<div className="col-lg-1 jobListRightContent">
-														<div className="row">
-															<div className="col-lg-12">
+													</div>
+													<div className="col-xl-1 col-1 jobListRightContent">
+														
 																<div className="jobProfileVerticleIcons">
 																	<ul>
 																		<li><i title={appliedtooltipMsg} className={"fa fa-check-square" + appliedClass}  onClick={appliedClass == '-o' ? applyJob => this.applyJob(elem.job_id._id, elem.company_id) : removeApplication => this.removeApplication(elem.job_id._id) } ></i></li>
@@ -392,13 +397,13 @@ removeApplication = (job_id) => {
 																		{/*<li><i className="fa fa-youtube-play"></i></li>*/}
 																	</ul>
 																</div>
-															</div>
-														</div>
+														
 													</div>
 												</div>	
 											</div>
 										</div>
-
+										</div>
+										</div>
 										: null
 										}
 										</div>	
@@ -409,6 +414,7 @@ removeApplication = (job_id) => {
 							:
 								null
 						}
+						</div>
 				</div>
 			</section>
 		);

@@ -179,3 +179,36 @@
 .jobProfileVerticleIcons ul li{
 	cursor: pointer;
 }*/
+@media(min-width:992px) and (max-width:1024px){
+  .jobListLeftContent .iconsBar ul li {
+		margin-right: 17px;
+	}
+}
+@media(min-width:768px) and (max-width:992px){
+	.jobListLeftContent .iconsBar ul li {
+		margin-right: 15px;
+	}
+
+}
+@media(min-width:576px) and (max-width:768px){
+	.jobListLeftContent .iconsBar i{
+ 		font-size: 13px;
+ 	}
+ 	.jobListLeftContent .infoLog {
+	    padding: 6px 3px;
+	}
+	.jobListLeftContent .iconsBar ul li {
+		margin-right: 10px;
+	}
+}
+@media (max-width:576px){
+ 	.jobListLeftContent .iconsBar i{
+ 		font-size: 14px;
+ 	}
+ 	.jobListLeftContent .infoLog {
+	    padding: 6px 3px;
+	}
+	.jobListLeftContent .iconsBar ul li {
+		margin-right: 10px;
+	}
+}
