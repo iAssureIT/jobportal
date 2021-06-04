@@ -25,28 +25,30 @@
 }
 
 .jobListLeftContent .iconsBar{
-	background-color: yellow;
-	margin-left: -11px;
 	margin-top: -5px;
 }
 
 .jobListLeftContent .iconsBar ul{
 	list-style: none;
 	height: 29px;
-	padding: 0;
+	margin: 0px;
+	padding: 0px;
 	padding-top: 2px;	
 	float: left;
+	margin-bottom: 10px;
 }
 
 .jobListLeftContent .iconsBar ul li{
 	float: left;
+	margin: 0px;
+	padding: 0px;
 	margin-top: 5px;
+	margin-right: 25px;
 }
  
-.jobListLeftContent .iconsBar ul li i{
-	margin-left: 22px;
+.appliedListSubFont{
+	font-size: 13px;
 }
-
 .jobListLeftContent .iconsBar i{
 	color: var(--main-border-color);
 	font-size: 20px;
@@ -54,23 +56,11 @@
 }
 
 .jobListLeftContent .infoLog{
-	/*padding: 6px 9px;
-	height: 29px;
-	color: var(--main-border-color);
-	border-radius: 3px;
-	border: 1px solid var(--main-border-color);
-	width: 10%;
-	margin-left: 18px;
-	font-size: 11px;
-	float: left;
-	margin-top: 2px;*/
 	padding: 6px 10px;
 	height: 29px;
 	border-radius: 3px;
-	margin-left: 18px;
 	font-size: 11px;
-	float: left;
-	margin-top: 2px;
+	margin-top: -5px;
 	font-weight: 500;
 	border: 1px solid var(--main-border-color);
 	color: var(--main-border-color);
@@ -88,6 +78,7 @@
 
 .jobListCompanyName{
 	margin-top: 7px;
+	font-size: 15px;
 	margin-left: -5px;
 	/*font-family: 'Montserrat-SemiBold';*/
 	font-weight: 600;
@@ -216,4 +207,37 @@
 	margin-top: 32px;
 	margin-left: -20px;
 	margin-right: 20px;
+}
+@media(min-width:992px) and (max-width:1024px){
+  .jobListLeftContent .iconsBar ul li {
+		margin-right: 17px;
+	}
+}
+@media(min-width:768px) and (max-width:992px){
+	.jobListLeftContent .iconsBar ul li {
+		margin-right: 15px;
+	}
+
+}
+@media(min-width:576px) and (max-width:768px){
+	.jobListLeftContent .iconsBar i{
+ 		font-size: 13px;
+ 	}
+ 	.jobListLeftContent .infoLog {
+	    padding: 6px 3px;
+	}
+	.jobListLeftContent .iconsBar ul li {
+		margin-right: 12px;
+	}
+}
+@media (max-width:576px){
+ 	.jobListLeftContent .iconsBar i{
+ 		font-size: 14px;
+ 	}
+ 	.jobListLeftContent .infoLog {
+	    padding: 6px 3px;
+	}
+	.jobListLeftContent .iconsBar ul li {
+		margin-right: 15px;
+	}
 }

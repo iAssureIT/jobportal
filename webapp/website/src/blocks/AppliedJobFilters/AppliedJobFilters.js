@@ -383,52 +383,14 @@ class AppliedJobFilters extends Component{
     //console.log(this.state.inputExperience)
 
     return(
-      <section className="LeftSideFiltersWrapper col-lg-12">
+      <section className="LeftSideFiltersWrapper col-12">
       
       <div className="row">
 
-          {/*<div className="form-group col-lg-12">
-            <div className='row'>
-              <div className="input-group filtersColor col-lg-12">
-                
-                   <Multiselect className="form-control LeftSideFiltersInputBox LeftSideFiltersDrop"
-                    id="allIndustries" name="allIndustries" placeholder="Industries"
-                    //onChange={this.onSelectedItemsChange.bind(this,'industry')}
-                    options={this.state.allIndustries}
-                    displayValue="industry"
-                    onSelect={this.onSelectedItemsChange.bind(this,'industry')} // Function will trigger on select event
-                    onRemove={this.onSelectedItemsChange.bind(this,'industry')}
-                    style={this.style}
-                    
-                   />   
 
-          
-              </div>
-            </div>  
-          </div> 
-
-          <div className="form-group col-lg-12">
+          <div className="form-group col-lg-12 col-3">
             <div className='row'>
-              <div className="input-group FilterDropDown1 col-lg-12">
-               
-                   <Multiselect className="form-control LeftSideFiltersInputBox LeftSideFiltersDrop"
-                    id="allFunctionalAreas" name="allFunctionalAreas" placeholder="Functional Areas"
-                    
-                      options={this.state.allFunctionalAreas}
-                      displayValue="functionalArea"
-                      onSelect={this.onSelectedItemsChange.bind(this,'functionalArea')} // Function will trigger on select event
-                      onRemove={this.onSelectedItemsChange.bind(this,'functionalArea')}
-                        //showCheckbox={true}
-                        style={this.style}
-                   />    
-                            
-              </div>
-            </div>
-          </div> */}
-
-          <div className="form-group col-lg-12">
-            <div className='row'>
-              <div className="input-group col-lg-12">
+              <div className="input-group ">
                 
                    <Multiselect className="form-control LeftSideFiltersInputBox LeftSideFiltersDrop"
                     id="allSectors" name="allSectors" placeholder="Sector"
@@ -443,9 +405,9 @@ class AppliedJobFilters extends Component{
               </div>
             </div>
           </div> 
-          <div className="form-group col-lg-12">
-            <div className='row'>
-              <div className="input-group col-lg-12">
+          <div className="form-group col-lg-12 col-3">
+            <div className='row '>
+              <div className="input-group ">
                 
                    <Multiselect className="form-control LeftSideFiltersInputBox LeftSideFiltersDrop"
                     id="allJobTypes" name="allJobTypes" placeholder="Types"
@@ -460,9 +422,9 @@ class AppliedJobFilters extends Component{
               </div>
             </div>
           </div> 
-          <div className="form-group col-lg-12">
+          <div className="form-group col-lg-12 col-3">
             <div className='row'>
-              <div className="input-group col-lg-12">
+              <div className="input-group col-12">
                 
                    <Multiselect className="form-control LeftSideFiltersInputBox LeftSideFiltersDrop"
                     id="allJobTime" name="allJobTime" placeholder="Time"
@@ -477,9 +439,9 @@ class AppliedJobFilters extends Component{
               </div>
             </div>
           </div>
-          <div className="form-group col-lg-12">
+          <div className="form-group col-lg-12 col-3">
             <div className='row'>
-              <div className="input-group col-lg-12">
+              <div className="input-group col-12">
                 
                    <Multiselect className="form-control LeftSideFiltersInputBox LeftSideFiltersDrop"
                     id="allJobShift" name="allJobShift" placeholder="Shift"
@@ -494,9 +456,9 @@ class AppliedJobFilters extends Component{
               </div>
             </div>
           </div>
-          <div className="form-group col-lg-12">
+          <div className="form-group col-lg-12 col-3">
             <div className='row'>
-              <div className="input-group col-lg-12">
+              <div className="input-group col-12">
                 
                    <Multiselect className="form-control LeftSideFiltersInputBox LeftSideFiltersDrop"
                     id="allRoles" name="allRoles" placeholder="Roles"
@@ -511,44 +473,43 @@ class AppliedJobFilters extends Component{
               </div>
             </div>
           </div> 
-        <div className="form-group col-lg-12">
-            <div className='row'>
-              <div className="input-group col-lg-12">
-                
-                   <Multiselect className="form-control LeftSideFiltersInputBox LeftSideFiltersDrop"
-                    id="allSkills" name="allSkills" placeholder="Skills"
-                      options={this.state.allSkills}
-                      displayValue="skill"
-                      onSelect={this.onSelectedItemsChange.bind(this,'skill')} // Function will trigger on select event
-                      onRemove={this.onSelectedItemsChange.bind(this,'skill')}
-                        //showCheckbox={true}
-                        style={this.style}
-                   />    
-                                 
+          <div className="form-group col-lg-12 col-3">
+              <div className='row'>
+                <div className="input-group col-12">
+                  
+                     <Multiselect className="form-control LeftSideFiltersInputBox LeftSideFiltersDrop"
+                      id="allSkills" name="allSkills" placeholder="Skills"
+                        options={this.state.allSkills}
+                        displayValue="skill"
+                        onSelect={this.onSelectedItemsChange.bind(this,'skill')} // Function will trigger on select event
+                        onRemove={this.onSelectedItemsChange.bind(this,'skill')}
+                          //showCheckbox={true}
+                          style={this.style}
+                     />    
+                                   
+                </div>
               </div>
-            </div>
-        </div>
-        
-        <div className="form-group col-lg-12">
-            <div className='row'>
-              <div className="input-group col-lg-12">
-                
-                   <Multiselect className="form-control LeftSideFiltersInputBox LeftSideFiltersDrop"
-                    id="allQualifications" name="allQualifications" placeholder="Qualification"
-                      options={this.state.allQualifications}
-                      displayValue="qualification"
-                      onSelect={this.onSelectedItemsChange.bind(this,'qualification')} // Function will trigger on select event
-                      onRemove={this.onSelectedItemsChange.bind(this,'qualification')}
-                        //showCheckbox={true}
-                        style={this.style}
-                   />    
-                                 
+          </div>    
+          <div className="form-group col-lg-12 col-3">
+              <div className='row'>
+                <div className="input-group col-12">
+                  
+                     <Multiselect className="form-control LeftSideFiltersInputBox LeftSideFiltersDrop"
+                      id="allQualifications" name="allQualifications" placeholder="Qualification"
+                        options={this.state.allQualifications}
+                        displayValue="qualification"
+                        onSelect={this.onSelectedItemsChange.bind(this,'qualification')} // Function will trigger on select event
+                        onRemove={this.onSelectedItemsChange.bind(this,'qualification')}
+                          //showCheckbox={true}
+                          style={this.style}
+                     />    
+                                   
+                </div>
               </div>
-            </div>
-        </div>
-        <div className="form-group col-lg-12">
+          </div>
+          <div className="form-group col-lg-12 col-3">
             <div className="row">
-              <div className="input-group col-lg-12">
+              <div className="input-group col-12">
                 
                    <Multiselect className="form-control LeftSideFiltersInputBox LeftSideFiltersDrop"
                     id="allExperiences" name="aallExperiences" placeholder="Experience"

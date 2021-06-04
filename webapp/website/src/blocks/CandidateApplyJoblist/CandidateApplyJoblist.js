@@ -31,16 +31,16 @@ class CandidateApplyJoblist extends Component {
 
   render() {
     return ( 
-      <div className="ViewBodyWrapper">
+      <div className="row ViewBodyWrapper">
         <div className="col-lg-3" style={{"marginTop": "30px"}}>
-          <div className="col-lg-12">
+          <div className="col-12">
             <div className='row'>
               <AppliedJobFilters />
             </div>
           </div>
         </div>
 
-        <div className="col-lg-9">
+        <div className="col-lg-9 ">
           <div className="row">
             <div id="mapwise">
               <AppliedJoblist appliedJoblist={this.props.appliedJoblist}/>

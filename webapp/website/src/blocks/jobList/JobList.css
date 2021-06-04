@@ -25,27 +25,26 @@
 }
 
 .jobListLeftContent .iconsBar{
-	background-color: yellow;
-	margin-left: -11px;
 	margin-top: -5px;
 }
 
 .jobListLeftContent .iconsBar ul{
 	list-style: none;
 	height: 29px;
-	padding: 0;
+	margin: 0px;
+	padding: 0px;
 	padding-top: 2px;	
 	float: left;
 }
 
 .jobListLeftContent .iconsBar ul li{
 	float: left;
-	margin-top: 5px;
+
+	margin: 0px;
+	padding: 0px;
+		margin-top: 5px;
 }
- 
-.jobListLeftContent .iconsBar ul li i{
-	margin-left: 22px;
-}
+
 
 .jobListLeftContent .iconsBar i{
 	color: var(--main-border-color);
@@ -73,7 +72,6 @@
 	padding: 6px 10px;
 	height: 29px;
 	border-radius: 3px;
-	margin-left: 18px;
 	font-size: 11px;
 	float: left;
 	margin-top: 2px;
