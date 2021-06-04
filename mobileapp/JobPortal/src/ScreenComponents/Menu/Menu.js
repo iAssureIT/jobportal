@@ -152,7 +152,7 @@ export const Menu = (props)=>{
         </TouchableOpacity>
        
        
-        {/*{user_id ?
+        {user_id ?
         <TouchableOpacity onPress={()=>logout()}>
           <View style={styles.menu}>
             <Icon 
@@ -181,7 +181,7 @@ export const Menu = (props)=>{
               Login
             </Text>
           </View>
-        </TouchableOpacity>}*/}
+        </TouchableOpacity>}
       </View>
       </ImageBackground>
   </ScrollView>

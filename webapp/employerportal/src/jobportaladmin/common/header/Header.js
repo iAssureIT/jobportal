@@ -202,10 +202,16 @@ class Header extends Component{
                   </div>
                 </div>
                 <div className="barsToggel pull-right" id="barsToggel" style={{display:this.state.asideDisplay}}>
+                  
                   <a href={hascompany_Id ? "/corporate/basic-details/"+hascompany_Id : "/corporate/basic-details"}>
                   <div className="notificationMessege col-lg-12" >
-                    <FontAwesomeIcon icon="setting" />
+                    <i className="fa fa-cog" aria-hidden="true"></i>
                     <span className="notificationMessegeText">Employer Settings</span>
+                  </div></a>
+                  <a href= "/subscribe-package">
+                  <div className="notificationMessege col-lg-12" >
+                    <i className="fa fa-credit-card" aria-hidden="true"></i>
+                    <span className="notificationMessegeText">Package Subscription</span>
                   </div></a>
                   <a href={this.state.company_id?"/job-list":"/corporate/basic-details"}>
                     <div className="notificationMessege col-lg-12" onClick={!this.state.company_id  ? this.modalPopUp.bind(this) : null}>
@@ -219,21 +225,6 @@ class Header extends Component{
                       <span className="notificationMessegeText">Search Candidates</span>
                     </div>
                   </a>
-                  <div className="notificationMessege col-lg-12">
-                    <FontAwesomeIcon icon="users" />
-                    <span className="notificationMessegeText">Recruiters</span>
-                  </div>
-                  <div className="notificationMessege col-lg-12">
-                    <FontAwesomeIcon icon="search" />
-                    <span className="notificationMessegeText">Services</span>
-                  </div>
-                  <div className="notificationMessege col-lg-12">
-                    <span className="notificationMessegeText">About Us</span>
-                  </div>
-                  <div className="notificationMessege col-lg-12">
-                    <span className="notificationMessegeText">Contact Us</span>
-                  </div>
-                  
                 </div>
                 
               </div>

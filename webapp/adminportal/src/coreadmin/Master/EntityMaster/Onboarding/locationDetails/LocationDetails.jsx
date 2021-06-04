@@ -124,7 +124,7 @@ class LocationDetails extends Component {
 		this.getLocationType();
 		this.locationDetails();
 		this.getData();
-		this.getStates();
+		this.getStates("IN");
 		this.edit();
 		window.scrollTo(0, 0);
 		this.handleChange = this.handleChange.bind(this);
@@ -333,8 +333,8 @@ class LocationDetails extends Component {
 	// 	});
 	// 	this.getStates(event.target.value.split('|')[0])
 	// }
-	getStates() {
-		axios.get("http://locations2.iassureit.com/api/states/get/list/IN")
+	getStates(country) {
+		axios.get("/api/states/get/list/"+country)
 			.then((response) => {
 				this.setState({
 					stateArray: response.data
@@ -1470,7 +1470,7 @@ class LocationDetails extends Component {
 																						);
 																					}
 																					) : ''
-																			}
+																			} 
 																		</select>
 																	</div>
 																	{<div className="col-lg-3 col-md-3 col-sm-12 col-xs-12">

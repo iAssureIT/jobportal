@@ -17,7 +17,7 @@ import {RootSignUp}               from '../Screens/SystemSecurity/Signup/RootSig
 import {OTPVerification}          from '../Screens/SystemSecurity/OTPVerification/OTPVerification.js';
 import {ForgotPasswordOTP}        from '../Screens/SystemSecurity/ForgotPasswordOTP/ForgotPasswordOTP.js';
 import {Dashboard}                from '../Screens/Dashboard/Dashboard.js';
-// import BasicInfo                  from '../Screens/CompleteYourProfile/BasicInfo.js';
+import {BasicInfo}                  from '../Screens/CompleteYourProfile/BasicInfo.js';
 // import {CategoriesComponent}       from'../Screens/CategoriesComponent/CategoriesComponent.js';
 // import {SubCategoriesComp}          from'../Screens/CategoriesComponent/SubCategoriesComp.js';
 // import {SubCatCompView}             from'../Screens/CategoriesComponent/SubCatCompView.js';
@@ -36,7 +36,7 @@ import {SupportSystem}            from '../Screens/Help&Support/SupportSystem.js
 // import {OrderDetails}             from '../Screens/MyOrders/OrderDetails.js';
 // import {AccountDashboard}         from '../Screens/AccountDashboard/AccountDashboard.js';
 // import {AccountInformation}         from'../Screens/AccountDashboard/AccountInformation.js';
-import ResetPwd                   from'../Screens/AccountDashboard/ResetPwd.js';
+// import ResetPwd                   from'../Screens/AccountDashboard/ResetPwd.js';
 /*import MyProductReview            from'../Screens/MyProductReview/MyProductReview.js';
 import {OrderSummary}             from'../Screens/OrderSummary/OrderSummary.js';
 import {PaymentMethod}            from '../Screens/PaymentMethod/PaymentMethod.js';*/
@@ -55,7 +55,7 @@ export const HomeStack = () => (
     mode="modal"
     drawerContent   = { (props) => <Menu { ...props } />}
   >
-   
+    <Home.Screen name="BasicInfo"                   component={BasicInfo} />
     <Home.Screen name="Dashboard"                   component={Dashboard} />
     <Home.Screen name="SupportSystem"               component={SupportSystem} />
     <Home.Screen name="InAppNotification"           component={InAppNotification} /> 
@@ -83,7 +83,7 @@ const AppStack = () => (
   <App.Navigator headerMode="none" >
       <App.Screen name="App" component={HomeStack} />
       <App.Screen name="Auth" component={RegisterStack} />
-      {/*<App.Screen name="Dashboard" component={Dashboard} />*/}
+      <App.Screen name="Dashboard" component={Dashboard} />
   </App.Navigator>
 );
 

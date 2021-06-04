@@ -73,7 +73,8 @@ exports.insertEntity = (req, res, next) => {
                             res.status(200).json({
                                 created: true,
                                 entityID: data._id,
-                                companyID: data.companyID
+                                companyID: data.companyID,
+                                companyName: data.companyName
                             });
                         })
                         .catch(err => {
@@ -1880,19 +1881,46 @@ exports.bulkUploadEntity = (req, res, next) => {
             }
             if (entity[k].industry == '-') {
                 remark += "industry not found, ";
+            }else{
+                var regex = /^[a-zA-Z]+$/
+                if(!regex.test(entity[k].industry)){
+                    remark += "industry is not valid, ";
+                }
             }
             if (entity[k].companyName == '-') {
                 remark += "companyName not found, ";
+            }else{
+                var regex = /^[A-Za-z]/
+                if(!regex.test(entity[k].companyName)){
+                    remark += "companyName is not valid, ";
+                }
             }
             if (entity[k].groupName == '-') {
                 remark += "groupName not found, ";
+            }else{
+                var regex = /^[A-Za-z]/
+                if(!regex.test(entity[k].groupName)){
+                    remark += "groupName is not valid, ";
+                }
             }
+
             if (entity[k].companyEmail == '-') {
                 remark += "companyEmail not found, ";
+            }else{
+                var regex = /^([a-zA-Z0-9_\-.]+)@([a-zA-Z0-9_\-.]+)\.([a-zA-Z]{2,5})$/
+                if(!regex.test(entity[k].companyEmail)){
+                    remark += "companyEmail is not valid, ";
+                }
             }
-            if (entity[k].departmentName == '-') {
-                remark += "departmentName not found, ";
+            if (entity[k].companyPhone == '-') {
+                remark += "companyPhone not found, ";
+            }else{
+                var regex = /^\+?([0-9]{2})\)?[-. ]?([0-9]{5})[-. ]?([0-9]{5})$/
+                if(!regex.test(entity[k].companyPhone)){
+                    remark += "companyPhone is not valid, ";
+                }
             }
+            
             if (entity[k].projectName == '-') {
                 remark += "projectName not found, ";
             }
