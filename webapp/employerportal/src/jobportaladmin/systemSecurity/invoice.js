@@ -31,7 +31,7 @@ makePayment(subscription_id, amountPaid){
 }
 render() {
     
-    //console.log(this.props.invoiceDetails)
+    console.log(this.props.invoiceDetails)
     var branchAddress;
     if (this.props.invoiceDetails.company_id) {
         branchAddress = this.props.invoiceDetails.company_id.locations.filter((data)=>{
@@ -39,7 +39,6 @@ render() {
                 return data;
             }
         })
-
     }
     //console.log(branchAddress)
     var taxrate     = this.state.taxrate[0] ? this.state.taxrate[0].taxRating : 0

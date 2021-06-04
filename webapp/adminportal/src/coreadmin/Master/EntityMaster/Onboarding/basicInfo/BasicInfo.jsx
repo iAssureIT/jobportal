@@ -604,7 +604,7 @@ class BasicInfo extends Component {
             "entityType": response.data.entityType,
             "companyName": response.data.companyName,
             "groupName": response.data.groupName,
-            "website": response.data.website,
+            "website": response.data.website, 
             "companyPhone": response.data.companyPhone,
             "companyEmail": response.data.companyEmail,
             "industry_id":response.data.industry_id,
@@ -617,13 +617,13 @@ class BasicInfo extends Component {
             "statutoryDetails": response.data.statutoryDetails,
             "value": industry[0] ? industry[0].label : "",
             "industry_id": industry[0] ? industry[0]._id : "",
-            suggestions: industry[0] ? this.getSuggestions(industry[0].label) : [] ,
+            "industry": industry[0] ? industry[0].industry : "",
             "userID": response.data.ID,
             "createdBy": localStorage.getItem("user_ID")
           })
         })
-        .catch((error) => {
-        })
+        // .catch((error) => {
+        // })
         this.getCountryConfigDetails()
     }
   }
@@ -745,6 +745,7 @@ class BasicInfo extends Component {
   }
   
   render() {
+    console.log(this.state.companyName)
     const { value, suggestions } = this.state;
     const inputProps = {
       placeholder: "Industry",

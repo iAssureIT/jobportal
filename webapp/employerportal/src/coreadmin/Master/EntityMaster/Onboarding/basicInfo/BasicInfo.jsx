@@ -367,6 +367,17 @@ class BasicInfo extends Component {
             html  :(this.state.pathname === "appCompany" ? "Organzational Settings" : this.state.pathname ) + " created successfully.",
             text  :''
           });
+          var userDetails = this.props.userDetails;
+          userDetails.company_id  = response.data.entityID
+          userDetails.companyID   = response.data.companyID
+          userDetails.companyName = response.data.companyName
+          userDetails.industry_id = this.state.industry_id
+
+          localStorage.setItem('userDetails', JSON.stringify(userDetails));
+
+          var {mapAction} = this.props;
+          mapAction.setUserDetails(userDetails); 
+                          
           $(".swal-text").css("text-transform", "capitalize");
           this.props.history.push('/' + this.state.pathname + '/statutory-details/' + response.data.entityID)
         })
