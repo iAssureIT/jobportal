@@ -18,17 +18,7 @@
 	height: 30px;
 	/*background-color: blue;*/
 }
-.filterButton{
-	/*background-color: yellow;*/
-	height: auto;
-	width: 7%;
-	border: 1px solid var(--yellow-button-color);
-	color: #fff;
-	border-radius: 5px;
-	margin-bottom: 15px;
-	font-family: 'Montserrat-Regular';
-	font-size: 12px;
-}
+
 .marginTop15{
 	margin-top: 15px;
 }

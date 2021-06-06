@@ -21,8 +21,8 @@
 }
 .filterButton{
 	/*background-color: yellow;*/
-	height: auto;
-	width: 7%;
+	height: 25px;
+	/*width: 7%;*/
 	border: 1px solid var(--yellow-button-color);
 	color: #fff;
 	border-radius: 5px;
