@@ -66,6 +66,7 @@
 }
 
 .viewDiv a {
+	
 	color: var(--main-txt-color) !important;
 	font-family: 'Montserrat-Regular' !important;
 	padding:7px 5px !important;
@@ -83,6 +84,7 @@
 }
 
 .viewDiv.active>a{
+
 	height: 50px !important;
 	background-color: var(--yellow-button-color) !important;
 	color: var(--main-txt-color) !important;

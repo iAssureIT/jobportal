@@ -306,10 +306,11 @@ redirectTo(job_id, url, parameter){
 										//mapAction.stateApplicantsCountList({entity_id : this.props.company_id, stateCode : elem.location.stateCode});
 										//console.log(elem)
 										
-										 return(
+										 return(	
 													<div className="col-lg-12" key={index1}>
-														<div className="jobListContainer">
+														<div className="row jobListContainer">
 															<div className="col-lg-12">
+															<div className="row">
 																<div className="col-lg-11 jobListLeftContent">
 																	<div className="row">
 																		<div className="leftSideMainBox col-lg-12">
@@ -414,6 +415,7 @@ redirectTo(job_id, url, parameter){
 																	</div>
 																</div>
 															</div>	
+															</div>	
 														</div>
 													</div>
 												);
@@ -444,7 +446,7 @@ redirectTo(job_id, url, parameter){
 										
 										return(
 											<div className="col-lg-12" key={index1}>
-												<div className="jobListContainer">
+												<div className="row jobListContainer">
 													<div className="col-lg-12">
 														<div className="col-lg-11 jobListLeftContent">
 															<div className="row">
