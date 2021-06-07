@@ -260,7 +260,7 @@ class LocationDetails extends Component {
 				},
 				pincode: {
 					required: true,
-					pincodeRegx: /^[0-9][0-9\-\s]/,
+					pincodeRegx: /^[1-9][0-9]{5}$/,
 				},
 				GSTIN: {
 					required:true,
@@ -1668,13 +1668,13 @@ class LocationDetails extends Component {
 											{this.state.locationarray && this.state.locationarray.length > 0 ?
 												<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 													<div className="col-lg-12 col-md-12 col-sm-12 col-sm-12 foothd">
-														<h4>List of Locations</h4>
+														<h4 className="locationDetTitle">List of Locations</h4>
 													</div>
 													<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 NOpadding" style={{"display" : "block"}}>
 														{this.state.locationarray && this.state.locationarray.length > 0 ?
 															this.state.locationarray.map((Suppliersdata, index) => {
 																return (
-																	<div className="col-lg-6 col-md-6 col-sm-6 col-xs-12 " key={index}>
+																	<div className="col-lg-6 col-md-6 col-sm-6 col-xs-12 empLocationCard" key={index}>
 																		<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 box_style">
 																			<div className=" col-lg-1 col-md-1 col-sm-1 col-xs-1 NOpadding">
 																				<div className="locationIcon col-lg-10 col-md-10 col-sm-10 col-xs-10 ">

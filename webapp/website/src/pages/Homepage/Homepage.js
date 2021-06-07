@@ -308,20 +308,21 @@ class HomePage extends Component {
       <div className="ViewBodyWrapper1 container-fluid">
         
 
-          <div className="filterDiv col-lg-12">
+        <div className="filterDiv col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
 
-          
-              <div className="filterButton" onClick={this.leftDrawerInfo.bind(this)}>
-               
+          <div className="row">  
+            <div className="filterButton col-1 col-sm-1 col-md-1 col-lg-1 col-xl-1" onClick={this.leftDrawerInfo.bind(this)}>
+              <div className="row"> 
                 <i className="fa fa-filter filtersIcon" ></i>
                 <i className={this.state.arrowToggle ? "fa fa-arrow-left arrowIcon" : "fa fa-arrow-right arrowIcon"} 
                               value={this.state.arrowToggle}></i>
 
                 &nbsp; Filters              
               </div>
-           
+           </div>
           </div>
-
+        </div>
+        
           <div className=" col-lg-3">
             
                 <div className="viewWrapper col-lg-4">

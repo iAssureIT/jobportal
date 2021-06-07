@@ -513,84 +513,54 @@ color: #fff;
 	background-color: var(--yellow-button-color);
 }
 
-/*******************************************************swal custom classes*******************************************************************/
+/************************************************************************************************************************************/
 
-/*.swal2-container:not(.swal2-top):not(.swal2-top-start):not(.swal2-top-end):not(.swal2-top-left):not(.swal2-top-right):not(.swal2-center-start):not(.swal2-center-end):not(.swal2-center-left):not(.swal2-center-right):not(.swal2-bottom):not(.swal2-bottom-start):not(.swal2-bottom-end):not(.swal2-bottom-left):not(.swal2-bottom-right):not(.swal2-grow-fullscreen)>.swal2-modal {
-  border: 1px solid var(--main-border-color);
-  border-radius: 5px;
-  background-color: var(--main-bg-color);
+.jobStatusToggleWrapper{
+	height:25px;
+	border:1px solid var(--main-border-color)!important;
+	margin-top: 15px;
+	margin-bottom: 13px;
+	margin-left: 22px;
+    padding: 0px;
+    width: 45%;
+    border-radius: 1px;
+ }
+
+.genderFeildVerti{
+	border-radius: 0px!important;
+	height: 15px!important;
 }
 
-.swal2-container.swal2-shown {
-    background-color: rgba(31, 38, 45, 0.8);
+.genderFeildWrapper2{
+    margin-top:6px;
 }
 
-.swal2-popup{
-  width: 45em;
+.genderFeild{
+	height: 21px;
+	border-radius: 20px;
+	font-size: 10px;
+	font-weight: 100!important;
+	padding-top: 4px;
+	text-align: center;
+	background-color: var(--input-bg-color);
+    transition: all 1s;
 }
 
-[class^=swal2]{
-  color: #fff;
+.genderFeild:hover{
+	cursor: pointer;
+    /*background-color:var(--main-border-color);*/
 }
 
-.swal2-header{
-  background-color: var(--main-border-color);
-  height: 34px;
-  border-top-left-radius: 4px;
-  border-top-right-radius: 4px;
-  margin-bottom: 50px !important;
+.genderFeildActive{
+	background-color:var(--main-border-color);
+	transition:all 2s;
 }
 
-.swal2-icon{
-  margin-top: 50px;
-}
-
-.swal2-popup{
-  padding: 0;
-}
-
-.swal2-styled.swal2-confirm{
-  box-shadow: none;
-  height: 33px;
-  width: 28%;
-  font-size: 12px;
-  font-weight: 500;
-  margin-top: 30px;
-  color: #fff;
-  background-color: var(--form-field-background-color) !important;
-  border: 1px solid var(--main-border-color) !important;
-}
-
-.swal2-styled.swal2-confirm:hover{
-  background-color: var(--main-border-color) !important;
-  color: #fff;
-}
-
-.swal2-styled.swal2-cancel{
-  box-shadow: none;
-  color: #fff;
-  height: 33px;
-  width: 28%;
-  font-size: 12px;
-  font-weight: 500;
-  margin-top: 30px;
-  margin-right: 60px;
-  background-color: var(--form-field-background-color) !important;
-  border: 1px solid var(--main-border-color) !important;
-}
-
-.swal2-styled.swal2-cancel:hover{
-  background-color: var(--main-border-color) !important;
-  color: #fff;
-}
-
-.swal2-title{
-  font-size: 16px;
-  font-weight: 400;
-}
-
-.swal2-header .swal2-content .swal2-content{
-  padding-top: 30px;
+.genderFeildInActive{
+  pointer-events: none;
+  /* for "disabled" effect */
+  opacity: 1;
+  background-color:var(--main-border-color);
 }
 
 /************************************************************Media Query*************************************************************/
@@ -662,54 +632,4 @@ color: #fff;
     margin-left: 19px;
 }
 
-}
-
-
-
-.jobStatusToggleWrapper{
-	height:25px;
-	border:1px solid var(--main-border-color)!important;
-	margin-top: 15px;
-	margin-bottom: 13px;
-	margin-left: 22px;
-    padding: 0px;
-    width: 45%;
-    border-radius: 1px;
- }
-
-.genderFeildVerti{
-	border-radius: 0px!important;
-	height: 15px!important;
-}
-
-.genderFeildWrapper2{
-    margin-top:6px;
-}
-
-.genderFeild{
-	height: 21px;
-	border-radius: 20px;
-	font-size: 10px;
-	font-weight: 100!important;
-	padding-top: 4px;
-	text-align: center;
-	background-color: var(--input-bg-color);
-    transition: all 1s;
-}
-
-.genderFeild:hover{
-	cursor: pointer;
-    /*background-color:var(--main-border-color);*/
-}
-
-.genderFeildActive{
-	background-color:var(--main-border-color);
-	transition:all 2s;
-}
-
-.genderFeildInActive{
-  pointer-events: none;
-  /* for "disabled" effect */
-  opacity: 1;
-  background-color:var(--main-border-color);
 }

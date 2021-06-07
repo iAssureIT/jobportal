@@ -78,13 +78,12 @@ class StatutoryDetails extends Component {
 	}
 
 	getCountryConfigData(){
+		this.getStates("IN")
 		axios.get("/api/entitymaster/getEntity/"+this.props.match.params.entityID)
 	      .then((response) => {
 	      	if(response.data){
 		        this.setState({
 		          countryCode     : response.data.countryCode
-		        },()=>{
-		          this.getStates(this.state.countryCode)
 		        })
 		        axios.get('/api/countryspecificConfig/getTaxName/'+response.data.countryCode)
 			    .then((res)=>{

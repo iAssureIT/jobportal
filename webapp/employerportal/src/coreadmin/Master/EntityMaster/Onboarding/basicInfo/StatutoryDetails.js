@@ -77,13 +77,12 @@ class StatutoryDetails extends Component {
 	}
 
 	getCountryConfigData(){
+		this.getStates("IN")
 		axios.get("/api/entitymaster/getEntity/"+this.props.match.params.entityID)
 	      .then((response) => {
 	      	if(response.data){
 		        this.setState({
 		          countryCode     : response.data.countryCode
-		        },()=>{
-		          this.getStates(this.state.countryCode)
 		        })
 		        axios.get('/api/countryspecificConfig/getTaxName/'+response.data.countryCode)
 			    .then((res)=>{
@@ -890,7 +889,7 @@ class StatutoryDetails extends Component {
 																<select id="states" className="form-control col-lg-12 col-md-12 col-sm-12 col-xs-12"
 																	ref="states" value={this.state.states} name="states" onChange={this.handleChangeState} >
 																	<option selected={true}>-- Select --</option>
-																	{
+																	{ 
 																		this.state.stateArray && this.state.stateArray.length > 0 ?
 																			this.state.stateArray.map((stateData, index) => {
 																				return (

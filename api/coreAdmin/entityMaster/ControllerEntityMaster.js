@@ -1877,12 +1877,12 @@ exports.bulkUploadEntity = (req, res, next) => {
         for (var k = 0; k < entity.length; k++) {
 
             if (entity[k].entityType == '-') {
-                remark += "entityType not found, ";
+                entity[k].entityType = 'corporate'
             }
             if (entity[k].industry == '-') {
                 remark += "industry not found, ";
             }else{
-                var regex = /^[a-zA-Z]+$/
+                var regex = /^[a-zA-Z ]*$/
                 if(!regex.test(entity[k].industry)){
                     remark += "industry is not valid, ";
                 }
@@ -1890,7 +1890,7 @@ exports.bulkUploadEntity = (req, res, next) => {
             if (entity[k].companyName == '-') {
                 remark += "companyName not found, ";
             }else{
-                var regex = /^[A-Za-z]/
+                var regex = /^[a-zA-Z ]*$/
                 if(!regex.test(entity[k].companyName)){
                     remark += "companyName is not valid, ";
                 }
@@ -1898,7 +1898,7 @@ exports.bulkUploadEntity = (req, res, next) => {
             if (entity[k].groupName == '-') {
                 remark += "groupName not found, ";
             }else{
-                var regex = /^[A-Za-z]/
+                var regex = /^[a-zA-Z ]*$/
                 if(!regex.test(entity[k].groupName)){
                     remark += "groupName is not valid, ";
                 }
@@ -1916,7 +1916,7 @@ exports.bulkUploadEntity = (req, res, next) => {
                 remark += "companyPhone not found, ";
             }else{
                 var regex = /^\+?([0-9]{2})\)?[-. ]?([0-9]{5})[-. ]?([0-9]{5})$/
-                if(!regex.test(entity[k].companyPhone)){
+                if(!regex.test("+"+entity[k].phoneCountryCode+" "+entity[k].companyPhone)){
                     remark += "companyPhone is not valid, ";
                 }
             }
@@ -1925,9 +1925,112 @@ exports.bulkUploadEntity = (req, res, next) => {
                 remark += "projectName not found, ";
             }
             if (entity[k].countryCode == '-') {
-                remark += "CountryCode not found, ";
+                remark += "countryCode not found, ";
+            }else{
+                var regex = /^[a-zA-Z ]*$/
+                if(!regex.test(entity[k].countryCode)){
+                    remark += "countryCode is not valid, ";
+                }
             }
-
+            if (entity[k].website == '-') {
+                //remark += "projectName not found, ";
+            }else{
+                var regex = /^([a-zA-Z0-9_\-:/.]+).([a-zA-Z]{2,5})$|^$/
+                if(!regex.test(entity[k].website)){
+                    remark += "website is not valid, ";
+                }
+            }
+            if (entity[k].Location1Type == '-') {
+                remark += "Location1Type not found, ";
+            }else{
+                var regex = /^[a-zA-Z0-9 ]*$/
+                if(!regex.test(entity[k].Location1Type)){
+                    remark += "Location1Type is not valid, ";
+                }
+            }
+            if (entity[k].address1Line2 == '-') {
+                remark += "address1Line2 not found, ";
+            }
+            if (entity[k].state1 == '-') {
+                remark += "state1 not found, ";
+            }else{
+                var regex = /^[a-zA-Z ]*$/
+                if(!regex.test(entity[k].state1)){
+                    remark += "state1 is not valid, ";
+                }
+            }
+            if (entity[k].stateCode1 == '-') {
+                remark += "stateCode1 not found, ";
+            }else{
+                var regex = /^[A-Z ]/
+                if(!regex.test(entity[k].stateCode1)){
+                    remark += "stateCode1 is not valid, ";
+                }
+            }
+            if (entity[k].district1 == '-') {
+                remark += "district1 not found, ";
+            }else{
+                var regex = /^[a-zA-Z ]*$/
+                if(!regex.test(entity[k].district1)){
+                    remark += "district1 is not valid, ";
+                }
+            }
+            if (entity[k].city1 == '-') {
+                remark += "city1 not found, ";
+            }else{
+                var regex = /^[a-zA-Z ]*$/
+                if(!regex.test(entity[k].city1)){
+                    remark += "city1 is not valid, ";
+                }
+            }
+            if (entity[k].pincode1 == '-') {
+                remark += "pincode1 not found, ";
+            }else{
+                var regex = /^[0-9][0-9\-\s]/
+                if(!regex.test(entity[k].pincode1)){
+                    remark += "pincode1 is not valid, ";
+                }
+            }
+            if (entity[k].branchPincode == '-') {
+                remark += "branchPincode not found, ";
+            }else{
+                var regex = /^[0-9][0-9\-\s]/
+                if(!regex.test(entity[k].branchPincode)){
+                    remark += "branchPincode is not valid, ";
+                }
+            }
+            if (entity[k].firstName == '-') {
+                remark += "firstName not found, ";
+            }else{
+                var regex = /^[a-zA-Z ]*$/
+                if(!regex.test(entity[k].firstName)){
+                    remark += "firstName is not valid, ";
+                }
+            }
+            if (entity[k].lastName == '-') {
+                remark += "lastName not found, ";
+            }else{
+                var regex = /^[a-zA-Z ]*$/
+                if(!regex.test(entity[k].lastName)){
+                    remark += "lastName is not valid, ";
+                }
+            }
+            if (entity[k].phone == '-') {
+                remark += "phone not found, ";
+            }else{
+                var regex = /^\+?([0-9]{2})\)?[-. ]?([0-9]{5})[-. ]?([0-9]{5})$/
+                if(!regex.test("+"+entity[k].phoneCountryCode+" "+entity[k].phone)){
+                    remark += "phone is not valid, ";
+                }
+            }
+            if (entity[k].email == '-') {
+                remark += "email not found, ";
+            }else{
+                var regex = /^([a-zA-Z0-9_\-.]+)@([a-zA-Z0-9_\-.]+)\.([a-zA-Z]{2,5})$/
+                if(!regex.test(entity[k].email)){
+                    remark += "email is not valid, ";
+                }
+            }
             EntityMaster.findOne({
                     companyName: entity[k].companyName,
                     groupName: entity[k].groupName,
@@ -2056,7 +2159,7 @@ exports.bulkUploadEntity = (req, res, next) => {
                             countryCode: entity[k].countryCode1,
                             country: entity[k].country1,
                             state: entity[k].state1,
-                            stateCode           : entity[k].stateCode1,
+                            stateCode: entity[k].stateCode1,
                             district: entity[k].district1,
                             city: entity[k].city1,
                             area: entity[k].area1,
@@ -2142,6 +2245,8 @@ exports.bulkUploadEntity = (req, res, next) => {
                         companyPhone: entity[k].companyPhone,
                         companyEmail: entity[k].companyEmail,
                         country: entity[k].country,
+                        countryCode: entity[k].countryCode,
+                        industry_id: industry_id,
                         locations: locationdetails,
                         //contactPersons: contactdetails,
                         departments: entityDept,
@@ -2195,7 +2300,7 @@ exports.bulkUploadEntity = (req, res, next) => {
                             departmentName: departmentId,
                             designationName: designationId,
                             employeeID: entity[k].employeeID,
-                            role: entity[k].role,
+                            role: entity[k].role ? entity[k].role : "employer",
                             createUser: createLogin1,
                         }
                     ]
