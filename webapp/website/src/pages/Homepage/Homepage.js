@@ -307,25 +307,25 @@ class HomePage extends Component {
     return (
       <div className="ViewBodyWrapper1 container-fluid">
         
-
+      <div className="row">
         <div className="filterDiv col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
 
           <div className="row">  
             <div className="filterButton col-1 col-sm-1 col-md-1 col-lg-1 col-xl-1" onClick={this.leftDrawerInfo.bind(this)}>
               <div className="row"> 
-                <i className="fa fa-filter filtersIcon" ></i>
-                <i className={this.state.arrowToggle ? "fa fa-arrow-left arrowIcon" : "fa fa-arrow-right arrowIcon"} 
-                              value={this.state.arrowToggle}></i>
-
-                &nbsp; Filters              
+                <i className="col-6 col-sm-6 col-md-3 col-lg-3 col-xl-3 fa fa-filter filtersIcon" ></i>
+                <i className={this.state.arrowToggle ? "col-6 col-sm-6 col-md-3 col-lg-3 col-xl-3 fa fa-arrow-left arrowIcon" : "col-6 col-sm-6 col-md-3 col-lg-3 col-xl-3 fa fa-arrow-right arrowIcon"} 
+                              value={this.state.arrowToggle}></i>     
+                <div className="row d-none d-md-block col-md-6 col-lg-6 col-xl-6">&nbsp;Filter </div>      
               </div>
            </div>
           </div>
         </div>
-        
-          <div className=" col-lg-3">
-            
-                <div className="viewWrapper col-lg-4">
+      </div> 
+        <div className="row">
+          <div className=" col-md-3 col-lg-3 col-xl-3">
+            <div className="row">
+                <div className="viewWrapper col-md-4 col-lg-4 col-xl-4">
                   <div className='row'>
                     <ul className="nav nav-pills">
                       <li className={this.props.viewMode == "mapView" ? "viewDiv active" : "viewDiv"} onClick={this.changeViewMode.bind(this,"mapView")}>
@@ -352,13 +352,13 @@ class HomePage extends Component {
                   </div>  
                 </div>
 
-                <div className="filterWrapper col-lg-8" style={{left:this.state.leftDrawerDisplay}}>
+                <div className="filterWrapper col-md-8 col-lg-8 col-xl-8" style={{left:this.state.leftDrawerDisplay}}>
                     <LeftSideFilters />
                 </div>
-           
+            </div>
           </div>
 
-          <div className="col-lg-9">
+          <div className="col-md-9 col-lg-9 col-xl-9">
             <div className="tab-content">
               <div id="mapwise" className= {this.props.viewMode == "mapView" ? "tab-pane fade in active show" : "tab-pane fade" }>
                 <MapComponent pathname={this.props.match}/> 
@@ -393,7 +393,7 @@ class HomePage extends Component {
               </div>
             </div>
           </div>
-       
+        </div>
       </div>
     );
   }

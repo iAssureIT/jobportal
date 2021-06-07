@@ -100,10 +100,16 @@
 	z-index: 200;
 }
 .filterWrapper{
+	
 	height: auto;
 	min-height: 40px;
 	
 	z-index: 100;
-	/*transition:all 0.5s; */
+	transition:all 0.1s; 
  /* transition-timing-function: ease-in-out;*/
+}
+.filtersResponsive{
+	width: 100%;
+	height: auto;
+	min-height: 200px;
 }
