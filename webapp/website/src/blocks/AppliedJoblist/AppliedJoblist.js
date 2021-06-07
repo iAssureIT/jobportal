@@ -208,86 +208,102 @@ wishlistJob = (jobid)=>{
 									 	{ elem.job_id ?
 										<div className="col-12">
 											<div className="row appliedJobListContainer">
-											<div className="col-12">
 												<div className="col-12">
 													<div className="row">
-														<div className="col-xl-11 col-10 jobListLeftContent">
+														<div className="col-12">
 															<div className="row">
-																<div className="col-12 iconsBar">
-																	<ul>	
-																		{
-																		elem.job_id.jobBasicInfo.gender=="Male Only"?
-																		<li><i className="fa fa-male" title="Only male candidates can apply"></i></li>
-																		: elem.job_id.jobBasicInfo.gender=="Female Only"?
-																		<li><i className="fa fa-female" title="Only female candidates can apply"></i></li> 
-																		: <li><i className="fa fa-male" title="male & female candidates both can apply"></i><i className="fa fa-female bothIcon" title="male & female candidates both can apply"></i></li>
-																		}
-																		{	 
-																			elem.job_id.jobBasicInfo.jobshift_id ? 
-																			elem.job_id.jobBasicInfo.jobshift_id.jobShift=="Day Shift" ?
-																			<li><i className="fa fa-sun-o" title="Day Shift"></i></li>
-																			: elem.job_id.jobBasicInfo.jobshift_id.jobShift=="Night Shift"?
-																			<li><i className="fa fa-moon-o" title="Night Shift"></i></li> 
-																			: <li><i className="fa fa-repeat" title="Rotational shift"></i></li> 
-																			:
-																			<li><i className="fa fa-sun-o" title="Day Shift"></i></li>
-																			
-																		}	
-																		{	
-																			elem.job_id.jobBasicInfo.jobtime_id.jobTime=="Full Time"?
-																			<li><i className="fa fa-clock-o" title="Full Time"></i></li>
-																			: elem.job_id.jobBasicInfo.jobtime_id.jobTime=="Part Time" ? <li><i className="fa fa-hourglass-start" title="Part Time"></i></li>
-																			: elem.job_id.jobBasicInfo.jobtime_id.jobTime=="Hourly Basis"? 
-																			<li><i className="fa fa-hourglass-o" title="Hourly Basis"></i></li> 
-																			: <li><i className="fa fa-hourglass-o" title="Hourly Basis"></i></li> 
-																		}
-																		<li><div className="infoLog"> {Moment(elem.createdAt).startOf('seconds').fromNow()} </div></li>
-																	</ul>
+																<div className="col-xl-10 col-10 jobListLeftContent">
+																	<div className="row">
+																		<div className="col-12">
+																			<div className="col-12 iconsBar">
+																				<ul>	
+																					{
+																					elem.job_id.jobBasicInfo.gender=="Male Only"?
+																					<li><i className="fa fa-male" title="Only male candidates can apply"></i></li>
+																					: elem.job_id.jobBasicInfo.gender=="Female Only"?
+																					<li><i className="fa fa-female" title="Only female candidates can apply"></i></li> 
+																					: <li><i className="fa fa-male" title="male & female candidates both can apply"></i><i className="fa fa-female bothIcon" title="male & female candidates both can apply"></i></li>
+																					}
+																					{	 
+																						elem.job_id.jobBasicInfo.jobshift_id ? 
+																						elem.job_id.jobBasicInfo.jobshift_id.jobShift=="Day Shift" ?
+																						<li><i className="fa fa-sun-o" title="Day Shift"></i></li>
+																						: elem.job_id.jobBasicInfo.jobshift_id.jobShift=="Night Shift"?
+																						<li><i className="fa fa-moon-o" title="Night Shift"></i></li> 
+																						: <li><i className="fa fa-repeat" title="Rotational shift"></i></li> 
+																						:
+																						<li><i className="fa fa-sun-o" title="Day Shift"></i></li>
+																						
+																					}	
+																					{	
+																						elem.job_id.jobBasicInfo.jobtime_id.jobTime=="Full Time"?
+																						<li><i className="fa fa-clock-o" title="Full Time"></i></li>
+																						: elem.job_id.jobBasicInfo.jobtime_id.jobTime=="Part Time" ? <li><i className="fa fa-hourglass-start" title="Part Time"></i></li>
+																						: elem.job_id.jobBasicInfo.jobtime_id.jobTime=="Hourly Basis"? 
+																						<li><i className="fa fa-hourglass-o" title="Hourly Basis"></i></li> 
+																						: <li><i className="fa fa-hourglass-o" title="Hourly Basis"></i></li> 
+																					}
+																					<li><div className="infoLog"> {Moment(elem.createdAt).startOf('seconds').fromNow()} </div></li>
+																				</ul>
+																			</div>
+																		</div>
+																	</div>
+																		
+																	<div className="row">
+																		<div className="col-12">
+																			<div className="col-12 jobListDesignation">
+																				{elem.job_id.jobBasicInfo.jobTitle}
+																			</div>
+																		</div>
+																	</div>
+																	<div className="row">
+																		<div className="col-12">
+																			<div className="col-12 jobListCompanyName">
+																				{/*<b>{elem.company_id ? elem.company_id.companyName : null}</b>*/}
+																				{elem.entity_id ? elem.entity_id.companyName : "Anonymous"}
+																			</div>
+																		</div>
+																	</div>
+
+																	<div className="row appliedListSubFont">
+																		<div className="col-12"> 
+																			<div className="col-12"> 
+																				<i className="fa fa-calendar jobListExperience"></i> &nbsp; Exp: {elem.job_id.eligibility.minExperience}
+																			</div>
+																			<div className="col-12"> 
+																				<i className="fa fa-rupee jobListMonSal"></i> &nbsp; <i className="fa fa-inr"></i> {elem.job_id.ctcOffered.minSalary} - <i className="fa fa-inr"></i> {elem.job_id.ctcOffered.maxSalary} a month
+																			</div>
+																			<div className="col-12 joblistLocationInfo">
+																				<i className="fa fa-map-marker jobListLocation"></i> &nbsp; {elem.job_id.location.address + " "+ elem.job_id.location.district + ", "+elem.job_id.location.state+", "+elem.job_id.location.country}
+																			</div>
+																			<div className="col-12"> 
+																				<i className="fa fa-users jobListNumPositions"></i> &nbsp; No of position : {elem.job_id.jobBasicInfo.positions}
+																			</div>
+																		</div>
+																	</div>
+															</div>
+																	
+																
+																<div className="col-xl-2 col-2 jobListRightContent">
+																
+																			<div className="jobProfileVerticleIcons">
+																				<ul>
+																					{/*<li><i className="fa fa-check" onClick={this.applyJob}></i></li>*/}
+																					<li><i title="Remove from applied job" className={"fa fa-check-square"}  onClick={ removeApplication => this.removeApplication(elem.job_id._id) } ></i></li>
+																					<li ><i title={tooltipMsg} onClick={wishlist => this.wishlistJob(elem.job_id._id)} className={"fa fa-heart" + wishClass}></i></li>
+																				
+																					{/*<li><i onClick={wishlist => this.wishlistJob(elem._id)} className={this.state.isToggle ? 'fa fa-heart-o':'fa fa-heart'}></i></li>
+																					<li><i className="fa fa-youtube-play"></i></li>*/}
+																				</ul>
+																			</div>
 																	
 																</div>
-															
-																<div className="col-12 jobListDesignation">
-																	{elem.job_id.jobBasicInfo.jobTitle}
 																</div>
-																<div className="col-12 jobListCompanyName">
-																	{/*<b>{elem.company_id ? elem.company_id.companyName : null}</b>*/}
-																	{elem.entity_id ? elem.entity_id.companyName : "Anonymous"}
-																</div>
-																<div className="appliedListSubFont">
-																	<div className="col-12"> 
-																		<i className="fa fa-calendar jobListExperience"></i> &nbsp; Exp: {elem.job_id.eligibility.minExperience}
-																	</div>
-																	<div className="col-12"> 
-																		<i className="fa fa-rupee jobListMonSal"></i> &nbsp; <i className="fa fa-inr"></i> {elem.job_id.ctcOffered.minSalary} - <i className="fa fa-inr"></i> {elem.job_id.ctcOffered.maxSalary} a month
-																	</div>
-																	<div className="col-12 joblistLocationInfo">
-																		<i className="fa fa-map-marker jobListLocation"></i> &nbsp; {elem.job_id.location.address + " "+ elem.job_id.location.district + ", "+elem.job_id.location.state+", "+elem.job_id.location.country}
-																	</div>
-																	<div className="col-12"> 
-																		<i className="fa fa-users jobListNumPositions"></i> &nbsp; No of position : {elem.job_id.jobBasicInfo.positions}
-																	</div>
-																</div>
-															</div>
-														</div>
-														<div className="col-xl-1 col-1 jobListRightContent">
-													
-																	<div className="jobProfileVerticleIcons">
-																		<ul>
-																			{/*<li><i className="fa fa-check" onClick={this.applyJob}></i></li>*/}
-																			<li><i title="Remove from applied job" className={"fa fa-check-square"}  onClick={ removeApplication => this.removeApplication(elem.job_id._id) } ></i></li>
-																			<li ><i title={tooltipMsg} onClick={wishlist => this.wishlistJob(elem.job_id._id)} className={"fa fa-heart" + wishClass}></i></li>
-																		
-																			{/*<li><i onClick={wishlist => this.wishlistJob(elem._id)} className={this.state.isToggle ? 'fa fa-heart-o':'fa fa-heart'}></i></li>
-																			<li><i className="fa fa-youtube-play"></i></li>*/}
-																		</ul>
-																	</div>
-															
-														</div>
-														</div>
-													</div>	
-												</div>	
-												
-											</div>
+															</div>	
+														</div>	
+														
+													</div>
+												</div>
 										</div>
 										: null
 										

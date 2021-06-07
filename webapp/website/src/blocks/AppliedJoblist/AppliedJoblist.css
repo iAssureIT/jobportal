@@ -71,7 +71,7 @@
 	font-size: 22px;
 	color: var(--main-border-color);
 	margin-top: 3px;
-	margin-left: -5px;
+	/*margin-left: -5px;*/
 	/*font-family: 'Montserrat-SemiBold';*/
 	font-weight: 600;
 }
@@ -79,14 +79,14 @@
 .jobListCompanyName{
 	margin-top: 7px;
 	font-size: 15px;
-	margin-left: -5px;
+	/*margin-left: -5px;*/
 	/*font-family: 'Montserrat-SemiBold';*/
 	font-weight: 600;
 }
 
 .jobListExperience{
 	font-size: 14px !important;
-	margin-left: -5px;
+/*	margin-left: -5px;*/
 	margin-top: 13px;
 	color: var(--main-border-color);
 }
@@ -97,7 +97,7 @@
 	padding: 3px 5px;
 	border-radius: 50%;
 	margin-top: 13px;
-	margin-left: -8px;
+	/*margin-left: -8px;*/
 	color: var(--main-border-color);
 }
 
@@ -106,7 +106,7 @@
 	padding: 3px 5px;
 	border-radius: 50%;
 	margin-top: 9px;
-	margin-left: -9px;
+/*	margin-left: -9px;*/
 	color: var(--main-border-color);
 }
 
@@ -114,12 +114,12 @@
 	white-space: nowrap !important;
 	text-overflow: ellipsis !important;
   	overflow: hidden !important;
-  	margin-left: -10px; 
+  /*	margin-left: -10px; */
 }
 
 .jobListNumPositions{
 	font-size: 13px !important;
-	margin-left: -6px;
+/*	margin-left: -6px;*/
 	margin-top: 13px;
 	color: var(--main-border-color);
 }
@@ -143,28 +143,16 @@
 }
 
 .jobProfileVerticleIcons ul li:nth-child(1){
+	padding-left: 2px;
+
+}
+.jobProfileVerticleIcons ul li{
 	padding-right: 17px;
-	padding-left: 3px; 
 	border-radius: 3px;
-	margin-left: -2px;
 	margin-top: 6px;
 	font-size: 20px;
-}
-
-.jobProfileVerticleIcons ul li:nth-child(2){
-	padding-right: 16px;
-	padding-left: 3px; 
-	border-radius: 3px;
-	margin-left: -3px;
-	margin-top: 20px;
-	font-size: 19px;
-}
-
-.jobProfileVerticleIcons ul li:nth-child(3){
-	padding-right: 16px;
-	border-radius: 3px;
-	margin-top: 12px;
-	font-size: 20px;	
+	margin-left: 50%;
+	transform: translateX(-50%);
 }
 
 .listEditBtn i{
@@ -229,6 +217,22 @@
 	.jobListLeftContent .iconsBar ul li {
 		margin-right: 12px;
 	}
+	.jobListLeftContent .infoLog{
+		font-size: 8px!important;
+		height: 24px!important;
+	}
+	.link {
+   		 font-size: 15px!important;
+	}
+	.jobListCompanyName {
+		font-size: 13px;
+	}
+	.appliedListSubFont {
+	    font-size: 12px;
+	}
+	.jobListDesignation{
+		font-size: 15px;
+	}
 }
 @media (max-width:576px){
  	.jobListLeftContent .iconsBar i{
@@ -239,5 +243,21 @@
 	}
 	.jobListLeftContent .iconsBar ul li {
 		margin-right: 15px;
+	}
+	.jobListLeftContent .infoLog{
+		font-size: 9px!important;
+		height: 25px!important;
+	}
+	.link {
+   		 font-size: 15px!important;
+	}
+	.jobListCompanyName {
+		font-size: 12px!important;
+	}
+	.appliedListSubFont {
+	    font-size: 11px!important;
+	}
+	.jobListDesignation{
+		font-size: 15px;
 	}
 }

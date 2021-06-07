@@ -422,102 +422,117 @@ removeApplication = (job_id, male, female, other, state, stateCode, country,coun
 										<div className="col-12">
 											<div className="row jobListContainer">
 												<div className="col-12">
-												<div className="col-12">
-												<div className="row">
-													<div className="col-xl-11 col-10 jobListLeftContent">
-														<div className="row">
-															<div className="col-12  iconsBar">
-																<ul>	 
-																	{
-																		elem.jobBasicInfo.gender=="Male Only"?
-																		<li><i className="fa fa-male" title="Only male candidates can apply"></i></li>
-																		: elem.jobBasicInfo.gender=="Female Only"?
-																		<li><i className="fa fa-female" title="Only female candidates can apply"></i></li>
-																		 : <li><i className="fa fa-male" title="male & female candidates both can apply"></i>
-																		 <i className="fa fa-female bothIcon" title="male & female candidates both can apply"></i></li>
-																	}
-																	{	
-																		elem.jobBasicInfo.jobshift_id ? 
-																		elem.jobBasicInfo.jobshift_id.jobShift=="Day Shift" ?
-																		<li><i className="fa fa-sun-o" title="Day Shift"></i></li>
-																		: elem.jobBasicInfo.jobshift_id.jobShift=="Night Shift"?
-																		<li><i className="fa fa-moon-o" title="Night Shift"></i></li> 
-																		: <li><i className="fa fa-repeat" title="Rotational shift"></i></li> 
-																		:
-																		<li><i className="fa fa-sun-o" title="Day Shift"></i></li>
-																	}	
-																	{	
-																		elem.jobBasicInfo.jobtime_id.jobTime=="Full Time"?
-																		<li><i className="fa fa-clock-o" title="Full Time"></i></li>
-																		: elem.jobBasicInfo.jobtime_id.jobTime=="Part Time" ? <li><i className="fa fa-hourglass-start" title="Part Time"></i></li>
-																		: elem.jobBasicInfo.jobtime_id.jobTime=="Hourly Basis"? 
-																		<li><i className="fa fa-hourglass-o" title="Hourly Basis"></i></li> 
-																		: <li><i className="fa fa-hourglass-o" title="Hourly Basis"></i></li>
-																	}	
-																	<li><div className="infoLog"> {Moment(elem.createdAt).startOf('seconds').fromNow()} </div></li>
-																</ul>
-																
-															</div>
-														</div>
-														<div className="col-12 jobListDesignation">
-															<a href={"/job-profile/"+elem._id} className="link">{elem.jobBasicInfo.jobTitle}</a>
-														</div>
-														<div className="col-12 jobListCompanyName">
-															<b>{elem.company_id ? elem.company_id.companyName : "Anonymous"}</b>
-														</div>
-														<div className="appliedListSubFont">
-															<div className="col-12"> 
-																<i className="fa fa-calendar jobListExperience"></i> &nbsp; Exp: {elem.eligibility.minExperience}
-															</div>
-															<div className="col-12"> 
-																<i className="fa fa-rupee jobListMonSal"></i> &nbsp; <i className="fa fa-inr"></i> {elem.ctcOffered.minSalary} - <i className="fa fa-inr"></i> {elem.ctcOffered.maxSalary} a month
-															</div>
-															<div className="col-12 joblistLocationInfo">
-																<i className="fa fa-map-marker jobListLocation"></i> &nbsp; {elem.location.address + " "+ elem.location.district + ", "+elem.location.state+", "+elem.location.country}
-															</div>
-															<div className="col-12"> 
-																<i className="fa fa-users jobListNumPositions"></i> &nbsp; No of position : {elem.jobBasicInfo.positions}
-															</div>
-														</div>
-													</div>
-													<div className="col-xl-1 col-1 jobListRightContent">
-														
-																<div className="jobListVerticleIcons">
-																	<ul>
-																		<li><i title={appliedtooltipMsg} className={"fa fa-check-square" + appliedClass}  
-																		onClick={appliedClass == '-o' ? 
-																		applyJob => this.applyJob(elem._id, elem.company_id, elem.applicantStatistics.male, 
-																									elem.applicantStatistics.female, elem.applicantStatistics.other, 
-																									elem.applicantStatistics.state, elem.location.stateCode,
-																									elem.applicantStatistics.country, elem.location.countryCode,
-																									elem.applicantStatistics.exp0to2,  elem.applicantStatistics.exp2to6, 
-																									elem.applicantStatistics.exp6to10) 
-																		: removeApplication => this.removeApplication(elem._id, elem.applicantStatistics.male, 
-																									elem.applicantStatistics.female, elem.applicantStatistics.other, 
-																									elem.applicantStatistics.state, elem.location.stateCode,
-																									elem.applicantStatistics.country, elem.location.countryCode,
-																									elem.applicantStatistics.exp0to2,  elem.applicantStatistics.exp2to6, 
-																									elem.applicantStatistics.exp6to10 ) } ></i></li>
-																		<li ><i title={tooltipMsg} onClick={wishlist => this.handleclick(elem._id)} className={"fa fa-heart" + wishClass}></i></li>
-																		{/*<li><i className="fa fa-youtube-play" id="video" data-toggle="modal" data-target="#videoModal"></i></li>*/}
-																	</ul>
+													<div className="row">
+														<div className="col-12">
+															<div className="row">
+																<div className="col-xl-10 col-10 jobListLeftContent">
+																	<div className="row">
+																		<div className="col-12">
+																			<div className="col-12  iconsBar">
+																				<ul>	 
+																					{
+																						elem.jobBasicInfo.gender=="Male Only"?
+																						<li><i className="fa fa-male" title="Only male candidates can apply"></i></li>
+																						: elem.jobBasicInfo.gender=="Female Only"?
+																						<li><i className="fa fa-female" title="Only female candidates can apply"></i></li>
+																						 : <li><i className="fa fa-male" title="male & female candidates both can apply"></i>
+																						 <i className="fa fa-female bothIcon" title="male & female candidates both can apply"></i></li>
+																					}
+																					{	
+																						elem.jobBasicInfo.jobshift_id ? 
+																						elem.jobBasicInfo.jobshift_id.jobShift=="Day Shift" ?
+																						<li><i className="fa fa-sun-o" title="Day Shift"></i></li>
+																						: elem.jobBasicInfo.jobshift_id.jobShift=="Night Shift"?
+																						<li><i className="fa fa-moon-o" title="Night Shift"></i></li> 
+																						: <li><i className="fa fa-repeat" title="Rotational shift"></i></li> 
+																						:
+																						<li><i className="fa fa-sun-o" title="Day Shift"></i></li>
+																					}	
+																					{	
+																						elem.jobBasicInfo.jobtime_id.jobTime=="Full Time"?
+																						<li><i className="fa fa-clock-o" title="Full Time"></i></li>
+																						: elem.jobBasicInfo.jobtime_id.jobTime=="Part Time" ? <li><i className="fa fa-hourglass-start" title="Part Time"></i></li>
+																						: elem.jobBasicInfo.jobtime_id.jobTime=="Hourly Basis"? 
+																						<li><i className="fa fa-hourglass-o" title="Hourly Basis"></i></li> 
+																						: <li><i className="fa fa-hourglass-o" title="Hourly Basis"></i></li>
+																					}	
+																					<li><div className="infoLog"> {Moment(elem.createdAt).startOf('seconds').fromNow()} </div></li>
+																				</ul>
+																				
+																			</div>
+																		</div>
+																	</div>
+																	<div className="row">
+																		<div className="col-12">
+																			<div className="col-12 jobListDesignation">
+																				<a href={"/job-profile/"+elem._id} className="link">{elem.jobBasicInfo.jobTitle}</a>
+																			</div>
+																		</div>
+																	</div>
+																	<div className="row">
+																		<div className="col-12">
+																			<div className="col-12 jobListCompanyName">
+																				<b>{elem.company_id ? elem.company_id.companyName : "Anonymous"}</b>
+																			</div>
+																		</div>
+																	</div>
+																	<div className="row appliedListSubFont">
+																		<div className="col-12">
+																			<div className="col-12"> 
+																				<i className="fa fa-calendar jobListExperience"></i> &nbsp; Exp: {elem.eligibility.minExperience}
+																			</div>
+																			<div className="col-12"> 
+																				<i className="fa fa-rupee jobListMonSal"></i> &nbsp; <i className="fa fa-inr"></i> {elem.ctcOffered.minSalary} - <i className="fa fa-inr"></i> {elem.ctcOffered.maxSalary} a month
+																			</div>
+																			<div className="col-12 joblistLocationInfo">
+																				<i className="fa fa-map-marker jobListLocation"></i> &nbsp; {elem.location.address + " "+ elem.location.district + ", "+elem.location.state+", "+elem.location.country}
+																			</div>
+																			<div className="col-12"> 
+																				<i className="fa fa-users jobListNumPositions"></i> &nbsp; No of position : {elem.jobBasicInfo.positions}
+																			</div>
+																		</div>
+																	</div>
 																</div>
-															
-													</div>
+																<div className="col-xl-2 col-2 jobListRightContent">
+																	
+																		<div className="col-12 jobListVerticleIcons">
+																			<ul>
+																				<li><i title={appliedtooltipMsg} className={"fa fa-check-square" + appliedClass}  
+																				onClick={appliedClass == '-o' ? 
+																				applyJob => this.applyJob(elem._id, elem.company_id, elem.applicantStatistics.male, 
+																											elem.applicantStatistics.female, elem.applicantStatistics.other, 
+																											elem.applicantStatistics.state, elem.location.stateCode,
+																											elem.applicantStatistics.country, elem.location.countryCode,
+																											elem.applicantStatistics.exp0to2,  elem.applicantStatistics.exp2to6, 
+																											elem.applicantStatistics.exp6to10) 
+																				: removeApplication => this.removeApplication(elem._id, elem.applicantStatistics.male, 
+																											elem.applicantStatistics.female, elem.applicantStatistics.other, 
+																											elem.applicantStatistics.state, elem.location.stateCode,
+																											elem.applicantStatistics.country, elem.location.countryCode,
+																											elem.applicantStatistics.exp0to2,  elem.applicantStatistics.exp2to6, 
+																											elem.applicantStatistics.exp6to10 ) } ></i></li>
+																				<li ><i title={tooltipMsg} onClick={wishlist => this.handleclick(elem._id)} className={"fa fa-heart" + wishClass}></i></li>
+																				{/*<li><i className="fa fa-youtube-play" id="video" data-toggle="modal" data-target="#videoModal"></i></li>*/}
+																			</ul>
+																		</div>
+																	
+																		
+																</div>
 
-													 <div className="modal" id="videoModal" role="dialog" tabIndex="-1">
-										                <div className="modal-dialog  modal-lg">
-										                  <div className="modal-body">
-										                      <button type="button" className="close" id="videoModalCloseButton" data-dismiss="modal">&times;</button>
-										                      <section className="OTPSentWrapper row">
-										                           
-										                        <UploadVideoModal/>
-										                      </section>
-										                  </div>
-										                </div>
-										              </div>
-												</div>	
-												</div>	
+																 <div className="modal" id="videoModal" role="dialog" tabIndex="-1">
+													                <div className="modal-dialog  modal-lg">
+													                  <div className="modal-body">
+													                      <button type="button" className="close" id="videoModalCloseButton" data-dismiss="modal">&times;</button>
+													                      <section className="OTPSentWrapper row">
+													                           
+													                        <UploadVideoModal/>
+													                      </section>
+													                  </div>
+													                </div>
+													              </div>
+															</div>	
+														</div>	
+													</div>	
 												</div>	
 											</div>
 										</div>

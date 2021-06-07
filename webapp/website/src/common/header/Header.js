@@ -315,9 +315,9 @@ class Header extends Component{
     
     if (this.props.userDetails.loggedIn) {    
       return(
-        <nav className=" navbar FunctionalHeaderWrapper">
+        <nav className=" navbar ">
           
-            <div className="col-12">
+            <div className="col-12 FunctionalHeaderWrapper">
               <div className="row">
                   <div className="col-2 col-sm-2 col-md-1 col-lg-1 col-xl-1">
                     <div className="iconHeader">

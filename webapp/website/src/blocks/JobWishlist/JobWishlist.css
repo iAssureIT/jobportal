@@ -181,8 +181,12 @@
 }*/
 @media(min-width:992px) and (max-width:1024px){
   .jobListLeftContent .iconsBar ul li {
-		margin-right: 17px;
+		margin-right: 14px;
 	}
+	.jobListLeftContent .infoLog {
+   		 padding: 6px 3px;
+   		 font-size: 10px;
+   	}
 }
 @media(min-width:768px) and (max-width:992px){
 	.jobListLeftContent .iconsBar ul li {
@@ -200,6 +204,22 @@
 	.jobListLeftContent .iconsBar ul li {
 		margin-right: 10px;
 	}
+	.jobListLeftContent .infoLog{
+		font-size: 8px!important;
+		height: 24px!important;
+	}
+	.link {
+   		 font-size: 15px!important;
+	}
+	.jobListCompanyName {
+		font-size: 13px;
+	}
+	.appliedListSubFont {
+	    font-size: 12px;
+	}
+	.jobListDesignation{
+		font-size: 15px;
+	}
 }
 @media (max-width:576px){
  	.jobListLeftContent .iconsBar i{
@@ -210,5 +230,21 @@
 	}
 	.jobListLeftContent .iconsBar ul li {
 		margin-right: 10px;
+	}
+	.jobListLeftContent .infoLog{
+		font-size: 8px!important;
+		height: 24px!important;
+	}
+	.link {
+   		 font-size: 15px!important;
+	}
+	.jobListCompanyName {
+		font-size: 12px!important;
+	}
+	.appliedListSubFont {
+	    font-size: 11px!important;
+	}
+	.jobListDesignation{
+		font-size: 15px;
 	}
 }
