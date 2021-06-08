@@ -541,8 +541,10 @@ exports.user_update_name_mobile_profile = (req,res,next)=>{
 			if(user){
 				User.updateOne(
 					{_id:req.params.ID},
-					{
+					{	
+
 						$set:{
+							"username" 				: req.body.mobNumber, 
 							"profile.firstname"     : req.body.firstname,
 							"profile.lastname"      : req.body.lastname,
 							"profile.fullName"      : req.body.firstname+' '+req.body.lastname,

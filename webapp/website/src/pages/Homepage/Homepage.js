@@ -376,12 +376,12 @@ class HomePage extends Component {
 
               <div id="functionwise" className= {
                       this.props.match.params.industryName == "all" && (this.props.viewMode == "functionalView" || this.props.viewMode == "listView")  
-                      ? "tab-pane fade in active" :
+                      ? "tab-pane fade in active show" :
                       //this.props.match.params.industryName != "all" && this.props.match.params.functionalArea_id != "all" && this.props.match.params.subfunctionalArea_id != "all" && (this.props.viewMode == "functionalView" || this.props.viewMode == "listView") 
-                      //? "tab-pane fade in active" :
+                      //? "tab-pane fade in active show" :
                       this.props.match.params.industryName != "all" && this.props.match.params.functionalArea != "all" && (this.props.viewMode == "functionalView" || this.props.viewMode == "listView") 
 
-                      ? "tab-pane fade in active"  : "tab-pane fade in" } >
+                      ? "tab-pane fade in active show"  : "tab-pane fade in" } >
                 
                 { this.props.showLoader ?  
                     this.props.viewMode == "functionalView" ? <Loader type="placeholderloader"  />  : 
@@ -391,9 +391,9 @@ class HomePage extends Component {
 
               <div id="industrywise" className={
                 //this.props.match.params.industryName != "all" && this.props.match.params.functionalArea != "all" && (this.props.viewMode == "industrialView" || this.props.viewMode == "listView") 
-                //? "tab-pane fade in active" :
+                //? "tab-pane fade in active show" :
                 this.props.match.params.industryName != "all" && this.props.match.params.functionalArea == "all" && (this.props.viewMode == "functionalView" || this.props.viewMode == "listView") 
-                ? "tab-pane fade in active" : "tab-pane fade" }>
+                ? "tab-pane fade in active show" : "tab-pane fade" }>
               
               { this.props.showLoader ? 
                 this.props.viewMode == "industrialView" ? <Loader type="placeholderloader"  />  : 

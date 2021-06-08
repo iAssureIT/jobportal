@@ -14,7 +14,9 @@ class IndustrywiseJobs extends Component{
         var tempArray = [];
         tempArray.push({"industry" : industry, "id": _id })
         selector.industry_id = tempArray; 
-
+        selector.startLimit     = 0;
+        selector.initialLimit   = 25;
+        selector.showMoreLimit  = 25;
         mapAction.jobCount(selector);
         mapAction.filterJobList(this.props.selector);
         mapAction.setViewMode("listView");
