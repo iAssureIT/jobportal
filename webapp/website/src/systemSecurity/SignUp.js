@@ -507,18 +507,21 @@ class SignUp extends Component {
                   <div className="col-lg-12">
                     
                       <div className="col-lg-6 form-group" >
-
                         <div className="input-group">
-                            <span className="input-group-addon registrationInputIcon"><i className="fa fa-user"></i></span>
-                            <input type="text" id="firstName" name="firstName" placeholder="First Name" value={this.state.firstName} onChange={this.handleChange.bind(this)} className="form-control registrationInputBox"/>
+                          <div className="input-group-prepend">
+                            <span className="input-group-text registrationInputIcon"><i className="fa fa-user"></i></span>
+                          </div>
+                          <input type="text" id="firstName" name="firstName" placeholder="First Name" value={this.state.firstName} onChange={this.handleChange.bind(this)} className="form-control registrationInputBox"/>
                         </div>
                          <span id="firstNameError" className="errorMsg"></span>
                       </div>
 
                       <div className="col-lg-6  form-group" >
                         <div className="input-group">
-                            <span className="input-group-addon registrationInputIcon"><i className="fa fa-user"></i></span>
-                            <input type="text" id="lastName" name="lastName" placeholder="Last Name" value={this.state.lastName} onChange={this.handleChange.bind(this)} className="form-control registrationInputBox"/>
+                          <div className="input-group-prepend">
+                              <span className="input-group-text registrationInputIcon"><i className="fa fa-user"></i></span>
+                          </div>    
+                          <input type="text" id="lastName" name="lastName" placeholder="Last Name" value={this.state.lastName} onChange={this.handleChange.bind(this)} className="form-control registrationInputBox"/>
                         </div>
                          <span id="lastNameError" className="errorMsg"></span>
                       </div>
@@ -528,8 +531,10 @@ class SignUp extends Component {
                       <div className="col-lg-12">
                         <div className="col-lg-12 form-group" >
                             <div className="input-group">
-                                <span className="input-group-addon registrationInputIcon1"><i className="fa fa-envelope"></i></span>
-                                <input type="email" id="emailAddress" name="emailAddress" placeholder="Email Address" value={this.state.emailAddress} onChange={this.handleChange.bind(this)} className="form-control registrationInputBox"/>
+                              <div className="input-group-prepend">
+                                <span className="input-group-text registrationInputIcon1"><i className="fa fa-envelope"></i></span>
+                              </div>  
+                              <input type="email" id="emailAddress" name="emailAddress" placeholder="Email Address" value={this.state.emailAddress} onChange={this.handleChange.bind(this)} className="form-control registrationInputBox"/>
                             </div>
                              <span id="emailAddressError" className="errorMsg"></span>
                         </div>
@@ -554,11 +559,15 @@ class SignUp extends Component {
                     <div className="col-lg-12">
                          <div className="col-lg-12 form-group" >
                             <div className="input-group zIndex">
-                                <span className="input-group-addon registrationInputIcon"><i className="fa fa-lock"></i></span>
-                                <input type="password" id="password" name="password" placeholder="Password" value={this.state.password} onChange={this.handleChange.bind(this)} className="form-control registrationInputBox"/>
-                                <span className="input-group-addon loginInputIcon3" onClick={this.showPassword1.bind(this)}>
+                              <div className="input-group-prepend">
+                                <span className="input-group-text registrationInputIcon"><i className="fa fa-lock"></i></span>
+                              </div>  
+                              <input type="password" id="password" name="password" placeholder="Password" value={this.state.password} onChange={this.handleChange.bind(this)} className="form-control registrationInputBox"/>
+                              <div className="input-group-prepend">
+                                <span className="input-group-text loginInputIcon3" onClick={this.showPassword1.bind(this)}>
                                   <i className={this.state.showPassword1 ? "fa fa-eye-slash" : "fa fa-eye"} 
                                       value={this.state.showPassword1}></i></span>
+                              </div>        
                             </div>
                              <span id="passwordError" className="errorMsg"></span>
                         </div>
@@ -567,11 +576,15 @@ class SignUp extends Component {
                     <div className="col-lg-12">
                         <div className="col-lg-12 form-group" >
                             <div className="input-group zIndex">
-                                <span className="input-group-addon registrationInputIcon"><i className="fa fa-lock"></i></span>
+                              <div className="input-group-prepend">
+                                <span className="input-group-text registrationInputIcon"><i className="fa fa-lock"></i></span>
+                              </div>  
                                 <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" value={this.state.confirmPassword} onChange={this.handleChange.bind(this)} className="form-control registrationInputBox"/>
-                                <span className="input-group-addon loginInputIcon3" onClick={this.showPassword2.bind(this)}>
-                                   <i className={this.state.showPassword2 ? "fa fa-eye-slash" : "fa fa-eye"} 
-                                    value={this.state.showPassword2}></i></span>
+                                <div className="input-group-prepend">
+                                  <span className="input-group-text loginInputIcon3" onClick={this.showPassword2.bind(this)}>
+                                     <i className={this.state.showPassword2 ? "fa fa-eye-slash" : "fa fa-eye"} 
+                                      value={this.state.showPassword2}></i></span>
+                                </div>      
                             </div>
                              <span id="confirmPasswordError" className="errorMsg"></span>
                         </div>
