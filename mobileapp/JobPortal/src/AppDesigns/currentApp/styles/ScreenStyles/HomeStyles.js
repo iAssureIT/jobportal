@@ -109,7 +109,7 @@ export default StyleSheet.create({
   },
 
   ddContainer:{
-    backgroundColor:'transparent',
+    backgroundColor:'#1F262D',
     height: 40,
     // fontFamily:"Montserrat-Regular"
     paddingLeft:4
@@ -118,11 +118,11 @@ export default StyleSheet.create({
     fontFamily:"Montserrat-Regular"
   },
   ddInputContainer:{
-    borderBottomColor: 'transparent',
+    borderBottomColor: '#1F262D',
     // paddingLeft:5
   },
   ddLabelText:{
-    backgroundColor:'#fff',
+    backgroundColor:'#1F262D',
     top:0,
     // left:5,
     fontFamily:"Montserrat-Regular",

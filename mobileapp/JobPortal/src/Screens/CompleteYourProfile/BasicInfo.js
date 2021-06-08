@@ -34,6 +34,12 @@ import {emailValidator,
 import {Formik}                     from 'formik';
 import {FormButton}                 from '../../ScreenComponents/FormButton/FormButton';
 import PhoneInput                   from "react-native-phone-number-input";
+import SwitchSelector               from "react-native-switch-selector";
+import DatePicker from 'react-native-datepicker';
+import StepIndicator from 'react-native-step-indicator';
+import * as Progress from 'react-native-progress';
+
+// import DateTimePickerModal          from "react-native-modal-datetime-picker";
 
   const window = Dimensions.get('window');
   const LoginSchema = Yup.object().shape({
@@ -57,6 +63,32 @@ import PhoneInput                   from "react-native-phone-number-input";
     .required('This field is required')
   });
 
+   const stepIndicatorStyles = {
+      stepIndicatorSize                 : 25,
+      currentStepIndicatorSize          : 30,
+      separatorStrokeWidth              : 1,
+      currentStepStrokeWidth            : 3,
+      stepStrokeCurrentColor            : colors.theme,
+      stepStrokeWidth                   : 2,
+      stepStrokeFinishedColor           : colors.theme,
+      stepStrokeUnFinishedColor         : colors.theme,
+      separatorFinishedColor            : colors.theme,
+      separatorUnFinishedColor          : colors.theme,
+      stepIndicatorFinishedColor        : colors.theme,
+      stepIndicatorUnFinishedColor      : '#1F262D',
+      stepIndicatorCurrentColor         : colors.theme,
+      stepIndicatorLabelFontSize        : 11,
+      currentStepIndicatorLabelFontSize : 13,
+      stepIndicatorLabelCurrentColor    : "#fff",
+      stepIndicatorLabelFinishedColor   : '#ffffff',
+      stepIndicatorLabelUnFinishedColor : '#aaaaaa',
+      labelColor                        : '#999999',
+      labelSize                         : 10,
+      currentStepLabelColor             : colors.theme,
+
+    }
+  
+
 export const BasicInfo = withCustomerToaster((props)=>{
   const [btnLoading, setLoading] = useState(false);
     const {setToast,navigation,route} = props; //setToast function bhetta
@@ -71,8 +103,13 @@ export const BasicInfo = withCustomerToaster((props)=>{
     // const {delivery}=route.params;  
     // console.log("store",store);
 
+    const options = [
+      { label: "01:00", value: "1", testID: "switch-one", accessibilityLabel: "switch-one" },
+      { label: "01:30", value: "1.5", testID: "switch-one-thirty", accessibilityLabel: "switch-one-thirty" },
+      { label: "02:00", value: "2", testID: "switch-two", accessibilityLabel: "switch-two" }
+    ]
 
-  
+   
     useEffect(() => {
       var type = 'GOOGLE';
       axios.get('/api/projectsettings/get/'+type)
@@ -155,6 +192,8 @@ export const BasicInfo = withCustomerToaster((props)=>{
         touched,
         btnLoading,
         setFieldValue,
+        currentPosition,
+        labels,
         navigation,
         values,
         setToast,
@@ -174,7 +213,7 @@ export const BasicInfo = withCustomerToaster((props)=>{
       //   var number      = mobileNumber[1];
       // }
       var ShippingType = [{ value: 'Home', }, { value: 'Office', }, { value: 'Relative', }, { value: 'Friend', }];
-      console.log("values",values);
+      // console.log("values",values);
       const pincodeexistsornot=(pincode,formatted_address,area,city,state,country,latlong)=>{
         axios.get("/api/allowablepincode/checkpincode/" + pincode)
           .then((response) => {
@@ -195,184 +234,146 @@ export const BasicInfo = withCustomerToaster((props)=>{
       <React.Fragment>
         <HeaderBar2
           goBack={navigation.goBack}
-          headerTitle={'Add Delivery Address'}
+          headerTitle={'Basic Info'}
           navigate={navigation.navigate}
           // openControlPanel={() => openControlPanel()}
         />
+
         <View style={styles.addsuperparent}>
           <ScrollView contentContainerStyle={styles.container} keyboardShouldPersistTaps="handled" >
-            <View style={styles.formWrapper}>
-              <View style={{ marginTop: 15, marginBottom: "5%" }}>
-              <FormInput
-                labelName       = "Full Name"
-                placeholder     = "Full Name"
-                onChangeText    = {handleChange('contactperson')}
-                required        = {true}
-                name            = "contactperson"
-                errors          = {errors}
-                touched         = {touched}
-                iconName        = {'user-circle-o'}
-                iconType        = {'font-awesome'}
-                autoCapitalize  = "none"
-                value           = {values.contactperson}
+            <View style={{backgroundColor:'#1F262D',paddingVertical:16,}}>
+                <StepIndicator
+                customStyles={stepIndicatorStyles}
+                // currentPosition={currentPage}
+                // onPress={onStepPress}
+                // renderStepIndicator={renderStepIndicator}
+                labels={[
+                  'BasicInfo',
+                  'Address',
+                  'Academics',
+                  'Skills & Communication',
+                  'Work Experience',
+                ]}
               />
-              <View style={{marginHorizontal:10,marginVertical:5}}>
-                <Text style={{fontFamily:'Montserrat-SemiBold', fontSize: 14,paddingVertical:2}}>
-                    <Text>Phone Number</Text>{' '}
-                    <Text style={{color: 'red', fontSize: 12}}>
-                    *
-                    </Text>
-                </Text>
-                    <PhoneInput
-                      ref={phoneInput}
-                      defaultValue={values.mobileNumber}
-                      defaultCode={values.countryCode}
-                      layout="first"
-                      onChangeFormattedText={(text) => {
-                        console.log("text",text);
-                        setValue(text);
-                        setFieldValue('mobileNumber',text)
-                        const checkValid = phoneInput.current?.isValidNumber(text);
-                        console.log("checkValid",checkValid);
-                        setValid(checkValid)
-                      }}
-                      containerStyle= {styles1.containerStyle}
-                      textContainerStyle={styles1.textContainerStyle}
-                      textInputStyle={styles1.textInputStyle}
-                    />
-                  <Text style={{fontSize:12,marginTop:2,color:"#f00"}}>{value ? !valid && "Enter a valid mobile number" :touched['mobileNumber'] && errors['mobileNumber'] ? errors['mobileNumber'] : ''}</Text>
-                </View>   
-                <View style={[styles.formInputView, styles.marginBottom20]}>
-                  <Text style={{fontFamily:'Montserrat-SemiBold', fontSize: 14,paddingVertical:2}}>
-                    <Text>Address</Text>{' '}
-                    <Text style={{color: 'red', fontSize: 12}}>
-                    *
-                    </Text>
-                </Text>
-                  <GooglePlacesAutocomplete
-                    placeholder               = 'Address'
-                    minLength                 = {2} // minimum length of text to search
-                    autoFocus                 = {true}
-                    returnKeyType             = {'search'} // Can be left out for default return key https://facebook.github.io/react-native/docs/textinput.html#returnkeytype
-                    keyboardAppearance        = {'light'} // Can be left out for default keyboardAppearance https://facebook.github.io/react-native/docs/textinput.html#keyboardappearance
-                    listViewDisplayed         = {false}    // true/false/undefined
-                    fetchDetails              = {true}
-                    // onChangeText              = {(from)}
-                    // value                     = {from}
-                    enablePoweredByContainer  = {false}
-                    currentLocation           = {false} // Will add a 'Current location' button at the top of the predefined places list
-                    currentLocationLabel      = "Current location"
-                    nearbyPlacesAPI           = 'GooglePlacesSearch' // Which API to use: GoogleReverseGeocoding or GooglePlacesSearch
-                    renderDescription         = {row => row.description} // custom description render
-                    onPress={(data, details = null) => { // 'details' is provided when fetchDetails = true
-                      for (var i = 0; i < details.address_components.length; i++) {
-                        for (var b = 0; b < details.address_components[i].types.length; b++) {
-                          switch (details.address_components[i].types[b]) {
-                            case 'sublocality_level_2':
-                              var address = details.address_components[i].long_name;
-                              break;
-                            case 'sublocality_level_1':
-                              var area = details.address_components[i].long_name;
-                              break;
-                            case 'locality':
-                              var city = details.address_components[i].long_name;
-                              break;
-                            case 'administrative_area_level_1':
-                              var state = details.address_components[i].long_name;
-                              break;
-                            case 'country':
-                              var country = details.address_components[i].long_name;
-                              break;
-                            case 'postal_code':
-                              var pincode = details.address_components[i].long_name;
-                              break;
-                          }
-                        }
-                      }
-                      console.log("details",details);
-                      const latlong = details.geometry.location
-                      pincodeexistsornot(pincode,details.formatted_address,area,city,state,country,latlong);
-                      setFieldValue('fromaddress',details.formatted_address);
-                      setFieldValue('fromcity',details.city);
-                      setFieldValue('fromstate',details.state);
-                      setFieldValue('fromcountry',details.country);
-                      setFieldValue('fromPincode',details.pincode);
-                      setFieldValue('fromlatlong',details.latlong);
-                      setFieldValue('formatted_address',details.formatted_address);
-                    }}
-                    getDefaultValue={() => ''}
-                    query={{
-                      // key: 'AIzaSyCrzFPcpBm_YD5DfBl9zJ2KwOjiRpOQ1lE',
-                      key: googleapikey,
-                    }}
-                    styles={{
-                      textInputContainer: {
-                        backgroundColor: 'rgba(0,0,0,0)',
-                        borderWidth: 1,
-                        borderColor:"#ccc",
-                        borderRadius:5,
-                      },
-                      textInput: {
-                        height :45,
-                      },
-
-                    }}/>
+            </View>
+            <View style={{backgroundColor:'#1F262D',paddingHorizontal:10}}>
+              <Progress.Bar 
+                progress={0.3} 
+                width={340} 
+                color={"#f5a721"}
+                height={15}
+                />
+            </View>
+            <View style={styles.formWrapper}>
+              <View style={{ marginTop: 15,}}>
+              <View>
+                <FormInput
+                  labelName       = "Full Name"
+                  placeholder     = "Full Name"
+                  // onChangeText    = {handleChange('contactperson')}
+                  required        = {true}
+                  name            = "contactperson"
+                  errors          = {errors}
+                  touched         = {touched}
+                  iconName        = {'user-circle-o'}
+                  iconType        = {'font-awesome'}
+                  autoCapitalize  = "none"
+                  // value           = {values.contactperson}
+                />
               </View>
-               <View>
-                  <FormInput
-                    labelName       = "Flat/Office No"
-                    placeholder     = "Flat/Office No"
-                    onChangeText    = {handleChange('fromarea')}
-                    required        = {true}
-                    name            = "fromarea"
-                    errors          = {errors}
-                    touched         = {touched}
-                    iconName        = {'user-circle-o'}
-                    iconType        = {'font-awesome'}
-                    autoCapitalize  = "none"
-                  />
-                   <FormInput
-                    labelName       = "State/Province"
-                    placeholder     = "State/Province"
-                    onChangeText    = {handleChange('fromstate')}
-                    required        = {true}
-                    value           = {values.fromstate}
-                    name            = "fromstate"
-                    errors          = {errors}
-                    touched         = {touched}
-                    iconName        = {'user-circle-o'}
-                    iconType        = {'font-awesome'}
-                    autoCapitalize  = "none"
-                  />
-                   <FormInput
-                    labelName       = "Country"
-                    placeholder     = "Country"
-                    onChangeText    = {handleChange('fromcountry')}
-                    required        = {true}
-                    value           = {values.fromcountry}
-                    name            = "fromcountry"
-                    errors          = {errors}
-                    touched         = {touched}
-                    iconName        = {'user-circle-o'}
-                    iconType        = {'font-awesome'}
-                    autoCapitalize  = "none"
-                  />
-                  <FormInput
-                    labelName       = "Postal code"
-                    placeholder     = "Postal Code"
-                    onChangeText    = {handleChange('fromPincode')}
-                    required        = {false}
-                    name            = "fromPincode"
-                    errors          = {errors}
-                    touched         = {touched}
-                    iconName        = {'user-circle-o'}
-                    iconType        = {'font-awesome'}
-                    autoCapitalize  = "none"
+
+              <View style={{paddingHorizontal:10,flexDirection:"row"}}>
+                <View style={{flex:0.5}}>
+                  <Text style={{fontFamily:'Montserrat-Regular', fontSize: 12}}>
+                    <Text style={{color:'#fff'}}>Date of Birth</Text>{' '}
+                    <Text style={{color: 'red', fontSize: 12}}>
+                    *
+                    </Text>
+                  </Text>
+                  <DatePicker 
+                    mode                  = "date"
+                    placeholder           = "YYYY-MM-DD"
+                    format                = "YYYY-MM-DD"
+                    confirmBtnText        = "Confirm"
+                    cancelBtnText         = "Cancel"
+                    style                 = {{backgroundColor:'#242933',borderWidth :0.5,borderColor : '#f5a721',fontFamily: 'Montserrat-SemiBold',borderRadius:5}}
+                    customStyles          = {{ dateInput : { borderWidth : 0,fontFamily: 'Montserrat-SemiBold'}}}
+                    // date               /   = {this.state.expectedDate}
+                    // onDateChange          = {(expectedDate) => {this.setState({expectedDate: expectedDate})}}
                   />
                 </View>
-                <View style={[styles.formInputView, styles.marginBottom20]}>
+                <View style={{flex:0.5}}>
+                  <Text style={{fontFamily:'Montserrat-Regular', fontSize: 12,color:"#fff"}}>Age</Text>
+                  <Text style={{fontFamily:'Montserrat-Regular', fontSize: 12,color:"#fff",marginTop:10}}>28 Years,10 months</Text>
+                </View>
+              </View>
+             
+             <View style={{paddingHorizontal:10,paddingVertical:20}}>
+                <Text style={{fontFamily:'Montserrat-Regular', fontSize: 12}}>
+                  <Text style={{color:'#fff'}}>Gender</Text>{' '}
+                  <Text style={{color: 'red', fontSize: 12}}>
+                  *
+                  </Text>
+                </Text>
+                <SwitchSelector
+                  initial={0}
+                  // onPress={value => this.setState({ gender: value })}
+                  textColor={colors.white} //'#7a44cf'
+                  selectedColor={colors.white}
+                  buttonColor={colors.theme}
+                  borderColor={colors.theme}
+                  backgroundColor={colors.inputBackground}
+                  // style={{borderWidth:.5}}
+                  hasPadding
+                  options={[
+                    { label: "Male", value: "m", }, //images.feminino = require('./path_to/assets/img/feminino.png')
+                    { label: "Female", value: "f", }, //images.masculino = require('./path_to/assets/img/masculino.png')
+                    { label: "Transgender", value: "t", }
+                  ]}
+                  testID="gender-switch-selector"
+                  accessibilityLabel="gender-switch-selector"
+                />
+              </View>
+              <View style={{flexDirection:"row"}}>
+                <View style={[styles.formInputView, styles.marginBottom20],{flex:0.5,paddingHorizontal:15}}>
+                  <Text style={{fontFamily:'Montserrat-Regular', fontSize: 12}}>
+                    <Text style={{color:'#fff'}}>Marital Status</Text>{' '}
+                    <Text style={{color: 'red', fontSize: 12}}>
+                    *
+                    </Text>
+                  </Text>
                   <Dropdown
-                    label               = 'Type of Address'
+                    // label               = 'Marital Status'
+                    rippleOpacity       = {0.54}
+                    shadeOpacity        = {0.12}
+                    containerStyle      = {styles.ddContainer}
+                    dropdownOffset      = {{ top: 0, left: 0 }}
+                    itemTextStyle       = {styles.ddItemText}
+                    inputContainerStyle = {styles.ddInputContainer}
+                    labelHeight         = {10}
+                    tintColor           = {colors.button}
+                    labelFontSize       = {sizes.label}
+                    fontSize            = {15}
+                    baseColor           = {'#666'} 
+                    textColor           = {'#333'}
+                    labelTextStyle      = {styles.ddLabelText}
+                    style               = {styles.ddStyle}
+                    animationDuration   = {225}
+                    data                = {ShippingType}
+                    // value               = {values.addresstype}
+                    // onChangeText={(addresstype) => { this.setState({ addresstype }) }}
+                    // onChangeText={handleChange('addresstype')}
+                  />
+                 </View> 
+                 <View style={[styles.formInputView, styles.marginBottom20],{flex:0.5,paddingHorizontal:15}}>
+                  <Text style={{fontFamily:'Montserrat-Regular', fontSize: 12}}>
+                    <Text style={{color:'#fff'}}>Nationality</Text>{' '}
+                    <Text style={{color: 'red', fontSize: 12}}>
+                    *
+                    </Text>
+                  </Text>
+                  <Dropdown
+                    // label               = 'Marital Status'
                     containerStyle      = {styles.ddContainer}
                     dropdownOffset      = {{ top: 0, left: 0 }}
                     itemTextStyle       = {styles.ddItemText}
@@ -386,13 +387,75 @@ export const BasicInfo = withCustomerToaster((props)=>{
                     labelTextStyle      = {styles.ddLabelText}
                     style               = {styles.ddStyle}
                     data                = {ShippingType}
+                    // value               = {values.addresstype}
+                    // onChangeText={(addresstype) => { this.setState({ addresstype }) }}
+                    // onChangeText={handleChange('addresstype')}
+                  />
+                 </View> 
+
+                </View>
+                <View style={[styles.formInputView, styles.marginBottom20],{flex:0.5,paddingVertical:15,paddingHorizontal:15}}>
+                  <Text style={{fontFamily:'Montserrat-Regular', fontSize: 12}}>
+                      <Text style={{color:'#fff'}}>Nationality</Text>{' '}
+                      <Text style={{color: 'red', fontSize: 12}}>
+                      *
+                      </Text>
+                    </Text>
+                  <Dropdown
+                    // label               = 'Marital Status'
+                    placeholder         = "-Select your language-"
+                    // containerStyle      = {styles.ddContainer}
+                    dropdownOffset      = {{ top: 0, left: 0 }}
+                    // itemTextStyle       = {styles.ddItemText}
+                    // inputContainerStyle = {styles.ddInputContainer}
+                    labelHeight         = {10}
+                    tintColor           = {colors.button}
+                    labelFontSize       = {sizes.label}
+                    fontSize            = {15}
+                    baseColor           = {'#666'} 
+                    textColor           = {'#333'}
+                    // labelTextStyle      = {styles.ddLabelText}
+                    style               = {styles.ddStyle}
+                    data                = {ShippingType}
                     value               = {values.addresstype}
                     // onChangeText={(addresstype) => { this.setState({ addresstype }) }}
                     onChangeText={handleChange('addresstype')}
                   />
+                  <View style={{flexDirection:'row',marginTop:20}}>
+                    <View style={{flex:.5}}>
+                      <FormInput
+                        labelName       = "Aadhar Card No."
+                        placeholder     = "Aadhar Card No."
+                        // onChangeText    = {handleChange('contactperson')}
+                        required        = {true}
+                        name            = "contactperson"
+                        errors          = {errors}
+                        touched         = {touched}
+                        iconName        = {'user-circle-o'}
+                        iconType        = {'font-awesome'}
+                        autoCapitalize  = "none"
+                        // value           = {values.contactperson}
+                      />
+                    </View>
+                    <View style={{flex:.5}}>
+                      <FormInput
+                        labelName       = "Pan Card No."
+                        placeholder     = "Pan Card No."
+                        // onChangeText    = {handleChange('contactperson')}
+                        required        = {true}
+                        name            = "contactperson"
+                        errors          = {errors}
+                        touched         = {touched}
+                        iconName        = {'user-circle-o'}
+                        iconType        = {'font-awesome'}
+                        autoCapitalize  = "none"
+                        // value           = {values.contactperson}
+                      />
+                    </View>
+                  </View>
                  </View> 
-                    <FormButton
-                    title       = {'SAVE'}
+                  <FormButton
+                    title       = {'NEXT'}
                     onPress     = {handleSubmit}
                     background  = {true}
                     loading     = {btnLoading}

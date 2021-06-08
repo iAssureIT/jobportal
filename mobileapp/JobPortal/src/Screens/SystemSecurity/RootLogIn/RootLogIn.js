@@ -247,7 +247,7 @@ import AsyncStorage         from '@react-native-async-storage/async-storage';
               onPress     = {handleSubmit}
               background  = {true}
               loading     = {btnLoading}
-               iconRight
+              iconRight
               icon={
                     <Icon
                       name="angle-double-right"

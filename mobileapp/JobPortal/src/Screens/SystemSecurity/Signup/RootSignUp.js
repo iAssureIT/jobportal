@@ -188,14 +188,14 @@ const window = Dimensions.get('window');
   } 
 
   return (
-       <ImageBackground source={require("../../../AppDesigns/currentApp/images/Background.png")} style={commonStyles.container} resizeMode="cover" >
+       <ImageBackground source={require("../../../AppDesigns/currentApp/images/34.png")} style={commonStyles.container} resizeMode="cover" >
           <ScrollView contentContainerStyle={[commonStyles.container]} keyboardShouldPersistTaps="always" >
               <View style={{paddingHorizontal:20,marginVertical:20}}>
                 <View style={styles.boxOpacity}>
                   <View style={styles.syslogo}>
                       <Image
                       resizeMode="contain"
-                      source={require("../../../AppDesigns/currentApp/images/Logo.png")}
+                      source={require("../../../AppDesigns/currentApp/images/1.png")}
                       style={styles.syslogoimg}
                       />
                   </View>

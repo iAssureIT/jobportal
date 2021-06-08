@@ -18,28 +18,11 @@ import {OTPVerification}          from '../Screens/SystemSecurity/OTPVerificatio
 import {ForgotPasswordOTP}        from '../Screens/SystemSecurity/ForgotPasswordOTP/ForgotPasswordOTP.js';
 import {Dashboard}                from '../Screens/Dashboard/Dashboard.js';
 import {BasicInfo}                  from '../Screens/CompleteYourProfile/BasicInfo.js';
-// import {CategoriesComponent}       from'../Screens/CategoriesComponent/CategoriesComponent.js';
-// import {SubCategoriesComp}          from'../Screens/CategoriesComponent/SubCategoriesComp.js';
-// import {SubCatCompView}             from'../Screens/CategoriesComponent/SubCatCompView.js';
-// import {CartComponent}            from '../Screens/CartComponent/CartComponent.js';
-// import ConfirmOrderComponent      from '../Screens/ConfirmOrderComponent/ConfirmOrderComponent.js';
-// import {AddressDefaultComp}       from '../Screens/AddressComponent/AddressDefaultComp.js';
-// import {AddressComponent}         from '../Screens/AddressComponent/AddressComponent.js';
-// import AddressComponentforaddress from '../Screens/AddressComponent/AddressComponentforaddressmenu.js';
-// import AddressMenu                from'../Screens/AddressComponent/AddressMenu.js';
+
 // import {WishlistComponent}        from'../Screens/WishlistComponent/WishlistComponent.js';
-// import {MyOrder}                  from '../Screens/MyOrders/MyOrder.js';
 import {SupportSystem}            from '../Screens/Help&Support/SupportSystem.js';
-// import Stores                     from '../Screens/Stores/Stores.js';
-// import StoreDetails               from '../Screens/Stores/StoreDetails.js';
-// import {AllProductList}           from '../Screens/AllProductList/AllProductList.js';
-// import {OrderDetails}             from '../Screens/MyOrders/OrderDetails.js';
-// import {AccountDashboard}         from '../Screens/AccountDashboard/AccountDashboard.js';
-// import {AccountInformation}         from'../Screens/AccountDashboard/AccountInformation.js';
+
 // import ResetPwd                   from'../Screens/AccountDashboard/ResetPwd.js';
-/*import MyProductReview            from'../Screens/MyProductReview/MyProductReview.js';
-import {OrderSummary}             from'../Screens/OrderSummary/OrderSummary.js';
-import {PaymentMethod}            from '../Screens/PaymentMethod/PaymentMethod.js';*/
 
 const Home = createDrawerNavigator();
 console.log("TransitionPresets",TransitionPresets);
@@ -81,8 +64,9 @@ export const RegisterStack = () => (
 const App = createStackNavigator();
 const AppStack = () => (
   <App.Navigator headerMode="none" >
+     
       <App.Screen name="App" component={HomeStack} />
-      <App.Screen name="Auth" component={RegisterStack} />
+       <App.Screen name="Auth" component={RegisterStack} />
       <App.Screen name="Dashboard" component={Dashboard} />
   </App.Navigator>
 );

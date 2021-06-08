@@ -3,7 +3,9 @@ import {colors} from '../styles.js';
 const window = Dimensions.get('window');
 
 export default StyleSheet.create({
-  
+  container:{
+    paddingHorizontal:15
+  },
   menuWrapper:{
     marginTop:20,
     flexDirection:'row',
@@ -12,8 +14,11 @@ export default StyleSheet.create({
   imageMenuWraper:{ 
     borderWidth:1,borderColor:'#f1f1f1',borderRadius:5,width: 150, height:85, backgroundColor: '#ccc',marginRight:15
   },
+  itemTextStyle:{
+    color:"#fff"
+  },
   formWrapper:{
-  	paddingHorizontal:15,
+  	// paddingHorizontal:15,
     marginTop:15
   },
   categoryTitle:{
@@ -235,22 +240,22 @@ export default StyleSheet.create({
   },
 
   ddContainer:{
-    backgroundColor:'#fff',
+    backgroundColor:'#242933',
     height: "auto",
-    paddingLeft:4,
-    backgroundColor:"#fff"
-    // fontFamily:"Montserrat-Regular"
+    // paddingLeft:4,
+    // backgroundColor:"#242933"
+    fontFamily:"Montserrat-Regular"
   },
   ddItemText:{
     fontFamily:"Montserrat-Regular"
   },
   ddInputContainer:{
-    borderBottomColor: '#fff',
-    backgroundColor:"#fff"
+    borderBottomColor: '#242933',
+    backgroundColor:"#242933",
     // paddingLeft:5
   },
   ddLabelText:{
-    backgroundColor:'#fff',
+    backgroundColor:'#242933',
     top:0,
     // left:5,
     fontFamily:"Montserrat-Regular",
@@ -258,10 +263,15 @@ export default StyleSheet.create({
     paddingHorizontal:2
   },
   ddStyle:{
-    fontFamily:"Montserrat-Regular"
+    fontFamily:"Montserrat-Regular",
+    height:45,
+    backgroundColor:'#1F262D',
+    borderColor:"#f5a721",
+    borderWidth:0.5,
+    borderRadius:5
   },
   addsuperparent:{
-    flex:1,backgroundColor:'#f1f1f1',
+    flex:1,backgroundColor:'#1F262D',
   },
   flxdir1:{
     flex:1,flexDirection: "row"

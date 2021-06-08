@@ -123,7 +123,7 @@ import { SET_SEARCH_CALL,
                </TouchableOpacity> 
               <View >
                 <TouchableOpacity  onPress={()=> navigation.toggleDrawer()}>
-                  <Icon size={18} name='bars' type='font-awesome' color={colors.white} style={{borderWidth:1,borderColor:'#aaa',padding:10,borderRadius:3}}/>
+                  <Icon size={18} name='bars' type='font-awesome' color={colors.white} style={{borderWidth:1,borderColor:'#4C5B72',backgroundColor:"#242933",padding:10,borderRadius:3}}/>
                 </TouchableOpacity>
               </View>
                 {/*<TouchableOpacity onPress={()=>{Linking.openURL('tel:+91 90280 79487');}} style={{marginLeft:20,justiafyContent:"flex-end"}}>
