@@ -323,42 +323,52 @@ class HomePage extends Component {
         </div>
       </div> 
         <div className="row">
-          <div className=" col-md-3 col-lg-3 col-xl-3">
-            <div className="row">
-                <div className="viewWrapper col-md-4 col-lg-4 col-xl-4">
-                  <div className='row'>
-                    <ul className="nav nav-pills">
-                      <li className={this.props.viewMode == "mapView" ? "viewDiv active" : "viewDiv"} onClick={this.changeViewMode.bind(this,"mapView")}>
-                        <a data-toggle="pill" href="#mapwise" > Map <br/> View</a> 
-                      </li>
-
-                      <li className={
-                        this.props.match.params.industryName == "all" && (this.props.viewMode == "functionalView" || this.props.viewMode == "listView") 
-                        ? "viewDiv active" : 
-                        this.props.match.params.industryName != "all" && this.props.match.params.functionalArea != "all" && (this.props.viewMode == "functionalView" || this.props.viewMode == "listView") 
-                        ? "viewDiv active" : "viewDiv" } 
-                        onClick={this.changeViewMode.bind(this,this.props.match.path == "/" ? "functionalView" : this.props.match.params.subfunctionalArea == "all" ? "functionalView" : "listView")}>  
-                        <a data-toggle="pill" href="#functionwise">Functional <br/> View</a>
-                      </li>
-
-                      <li className={
-                        this.props.match.params.industryName != "all" && this.props.match.params.functionalArea == "all" && (this.props.viewMode == "industrialView" || this.props.viewMode == "listView") 
-                        ? "viewDiv active" : "viewDiv"} 
-                        onClick={this.changeViewMode.bind(this, this.props.match.path == "/" ? "industrialView" : this.props.match.params.industryName == "all" ? "industrialView" : "listView") }>
-                        <a data-toggle="pill" href="#industrywise">Industrial <br/> View</a>
-                      </li>
-
+          <div className=" col-md-12 col-lg-3 col-xl-3">
+              <div className="row">
+                <div className="viewWrapper col-md-12 col-lg-4 col-xl-4">
+                  <div className="row">
+                    <ul className="nav nav-pills ">
+                      <div className="row">
+                          <div className="col-md-12 col-lg-12">
+                            <div className="floatLeft col-md-4 col-lg-12">
+                              <li className={this.props.viewMode == "mapView" ? "viewDiv active" : "viewDiv"} onClick={this.changeViewMode.bind(this,"mapView")}>
+                               
+                                  <a data-toggle="pill" href="#mapwise" > Map <br/> View</a> 
+                                
+                              </li>
+                            </div>
+                            <div className="floatLeft col-md-4 col-lg-12">
+                              <li className={
+                                this.props.match.params.industryName == "all" && (this.props.viewMode == "functionalView" || this.props.viewMode == "listView") 
+                                ? "viewDiv active " : 
+                                this.props.match.params.industryName != "all" && this.props.match.params.functionalArea != "all" && (this.props.viewMode == "functionalView" || this.props.viewMode == "listView") 
+                                ? "viewDiv active " : "viewDiv " } 
+                                onClick={this.changeViewMode.bind(this,this.props.match.path == "/" ? "functionalView" : this.props.match.params.subfunctionalArea == "all" ? "functionalView" : "listView")}>  
+                                <a data-toggle="pill" href="#functionwise">Functional <br/> View</a>
+                              </li>
+                            </div>
+                            <div className="floatLeft col-md-4 col-lg-12">
+                              <li className={
+                                this.props.match.params.industryName != "all" && this.props.match.params.functionalArea == "all" && (this.props.viewMode == "industrialView" || this.props.viewMode == "listView") 
+                                ? "viewDiv active " : "viewDiv "} 
+                                onClick={this.changeViewMode.bind(this, this.props.match.path == "/" ? "industrialView" : this.props.match.params.industryName == "all" ? "industrialView" : "listView") }>
+                                <a data-toggle="pill" href="#industrywise">Industrial <br/> View</a>
+                              </li>
+                            </div>
+                          </div>  
+                      </div>    
                     </ul>
-                  </div>  
+                  </div>
                 </div>
-
-                <div className="filterWrapper col-md-8 col-lg-8 col-xl-8" style={{left:this.state.leftDrawerDisplay}}>
+              </div>
+              
+                <div className="filterWrapper col-md-12 col-lg-8 col-xl-8" style={{left:this.state.leftDrawerDisplay}}>
                     <LeftSideFilters />
                 </div>
-            </div>
+             
           </div>
 
-          <div className="col-md-9 col-lg-9 col-xl-9">
+          <div className="col-md-12 col-lg-9 col-xl-9">
             <div className="tab-content">
               <div id="mapwise" className= {this.props.viewMode == "mapView" ? "tab-pane fade in active show" : "tab-pane fade" }>
                 <MapComponent pathname={this.props.match}/> 

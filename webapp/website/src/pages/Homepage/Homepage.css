@@ -54,7 +54,7 @@
 
 
 .viewDiv{
-	width: 90%;
+	width: 100%;
 	margin: auto;
 	height: 50px;
 	border: 1px solid var(--yellow-button-color);
@@ -63,6 +63,7 @@
 	margin-bottom: 10px;
 	text-align: center;
 	margin-bottom: 20px;
+	float: left !important;
 
 }
 
@@ -71,9 +72,11 @@
 	font-family: 'Montserrat-Regular' !important;
 	padding:7px 5px !important;
 	font-size: 13px !important;
+	float: left !important;
+
 }
 
-.viewDiv a:hover{
+.viewDiv:hover{
 	height: 50px !important;
 	background-color: var(--yellow-button-color) !important;
 	color: var(--main-txt-color) !important;
@@ -83,7 +86,7 @@
 
 }
 
-.viewDiv.active>a{
+.viewDiv.active{
 	height: 50px !important;
 	background-color: var(--yellow-button-color) !important;
 	color: var(--main-txt-color) !important;
@@ -94,8 +97,9 @@
 }
 
 .viewWrapper{
+	width: 100%;
 	height: auto;
-	min-height: 300px;
+	min-height: 80px;
 	
 	z-index: 200;
 }
@@ -112,4 +116,16 @@
 	width: 100%;
 	height: auto;
 	min-height: 200px;
+}
+.nav {
+    display: flex;
+    flex-wrap: wrap;
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none;
+    width: 100% !important;
+}
+
+.floatLeft{
+	float: left;
 }
