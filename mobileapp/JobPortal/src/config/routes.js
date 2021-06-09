@@ -38,16 +38,16 @@ export const HomeStack = () => (
     mode="modal"
     drawerContent   = { (props) => <Menu { ...props } />}
   >
-    <Home.Screen name="BasicInfo"                   component={BasicInfo} />
+     <Home.Screen name="BasicInfo"                   component={BasicInfo} />
     <Home.Screen name="Dashboard"                   component={Dashboard} />
     <Home.Screen name="SupportSystem"               component={SupportSystem} />
-    <Home.Screen name="InAppNotification"           component={InAppNotification} /> 
+    <Home.Screen name="InAppNotification"           component={InAppNotification} />  
   </Home.Navigator>
 );
 
 
 const RegisterRoutes = createStackNavigator();
-export const RegisterStack = () => (
+ export const RegisterStack = () => (
   <RegisterRoutes.Navigator
     headerMode="none"
     initialRouteName={"RootLogIn"}>
@@ -64,9 +64,9 @@ export const RegisterStack = () => (
 const App = createStackNavigator();
 const AppStack = () => (
   <App.Navigator headerMode="none" >
-     
+    <App.Screen name="Auth" component={RegisterStack} />
       <App.Screen name="App" component={HomeStack} />
-       <App.Screen name="Auth" component={RegisterStack} />
+
       <App.Screen name="Dashboard" component={Dashboard} />
   </App.Navigator>
 );
