@@ -451,11 +451,122 @@ input:-webkit-autofill
 	
 }*/
 
+@media screen and (max-width: 1537px){
+
+.OTPSentWrapper{
+	min-height: 663px;
+	margin-top: 100px;
+}
+
+.img1Login {
+    left: 60%;
+}
+
+.img2Login {
+    left: 2%;
+    bottom: 65px;
+}
+
+.img3Login {
+    left: 75%;
+}
+
+.img4Login {
+    bottom: 69px;
+    left: 30%;
+}
+
+.img4loginInner {
+    height: 146px;
+}
+
+.img5Login {
+    left: 83%;
+}
+
+.img6Login {
+    left: 81px;
+}
+
+}
+
+@media screen and (max-width: 1441px){
+
+.OTPSentWrapper{
+	min-height: 798px;
+	margin-top: 100px;
+}
+
+}
+
+@media screen and (max-width: 1367px){
+
+.OTPSentWrapper{
+	min-height: 665px;
+	margin-top: 100px;
+}
+
+.img1Login {
+    left: 59%;
+}
+
+.img2Login {
+    left: 0%;
+}
+
+.img3Login {
+    left: 74%;
+}
+
+.img4Login {
+    bottom: 65px;
+    left: 31%;
+}
+
+.img5Login {
+    left: 82%;
+}
+
+.img6Login {
+    left: 67px;
+}
+	
+}
+
 @media screen and (max-width: 1024px){
 
 .OTPSentWrapper{
 	min-height: 665px;
 	margin-top: 100px;
+}
+
+.img1Login {
+    left: 60%;
+}
+
+.img2Login {
+    left: 2%;
+}
+
+.img3Login {
+    left: 75%;
+}
+
+.img4Login {
+    bottom: 69px;
+    left: 30%;
+}
+
+.img4loginInner {
+    height: 146px;
+}
+
+.img5Login {
+    left: 83%;
+}
+
+.img6Login {
+    left: 85px;
 }
 	
 }

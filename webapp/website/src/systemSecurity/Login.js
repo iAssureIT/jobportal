@@ -305,7 +305,7 @@ class Login extends Component {
     
     return (
         <div className="row">
-          <div className="loginFormOuter OTPSentLoginWrapper col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+          <div className="loginFormOuter OTPSentLoginWrapper col-12 col-sm-12 col-md-12 col-lg-12 col-xl-6 offset-xl-3">
             <div className="img1Login">
                 <img src="/images/Sign_In/1.png" alt="img1Login" className="img1oginInner img-fluid"/>
             </div>
@@ -354,7 +354,7 @@ class Login extends Component {
                 <div className="col-10 offset-1 col-sm-10 offset-sm-1 col-md-10 offset-md-1 col-lg-10 offset-lg-1 col-xl-10 offset-xl-1">
                   <div className="loginSignUp1" >
                   Don't have an Account ?
-                    <a href="#" onClick={this.ShowSignUp.bind(this)}><u className="loginSignUp" > Sign Up</u></a>
+                    <a href="#" onClick={this.ShowSignUp.bind(this)}><u className="loginSignUp"> Sign Up </u></a>
                   </div>
                 </div>
                       
