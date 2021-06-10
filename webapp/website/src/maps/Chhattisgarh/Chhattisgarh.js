@@ -49,7 +49,7 @@ class Chhattisgarh extends Component{
 	}
 	render(){
 		return(
-			<div className="bodyWrapper" >
+			<div className="bodyWrapper col-12" >
 				<div className="stateWrapper" >
 					<div className="bijapur classHover" onClick={e => this.onDistrictClick("Bijapur","CG")}> 
 						<img src="/Maps/Chhattisgarh/Bijapur.png" alt="Bijapur"

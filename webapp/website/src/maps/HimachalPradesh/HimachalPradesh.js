@@ -50,7 +50,7 @@ class HimachalPradesh extends Component{
 
 	render(){
 		return(
-			<div className="bodyWrapper">
+			<div className="bodyWrapper col-12">
 				<div className="stateWrapper">
 					<div className="kangra classHover" onClick={e => this.onDistrictClick("Kangra","HP")}> 
 						<img src="/Maps/Himachal_Pradesh/Kangra.png"  alt="Kangra" onMouseOver={e => (e.currentTarget.src = "/Maps/Himachal_Pradesh/Kangra_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Himachal_Pradesh/Kangra.png")}/>

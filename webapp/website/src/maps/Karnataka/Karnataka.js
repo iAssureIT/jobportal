@@ -50,7 +50,7 @@ class Karnataka extends Component{
 
 	render(){
 		return(
-			<div className="bodyWrapper">
+			<div className="bodyWrapper col-12">
 				<div className="stateWrapper">
 					<div className="uttaraKannada  classHover" onClick={e => this.onDistrictClick("Uttara_Kannada","KA")}> 
 						<img src="/Maps/Karnataka/Uttara_Kannada.png"  alt="Uttara_Kannada" onMouseOver={e => (e.currentTarget.src = "/Maps/Karnataka/Uttara_Kannada_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Karnataka/Uttara_Kannada.png")}/>

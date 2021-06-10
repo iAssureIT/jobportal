@@ -49,7 +49,7 @@ class Manipur extends Component{
 	}
 	render(){
 		return(
-			<div className="bodyWrapper">
+			<div className="bodyWrapper col-12">
 				<div className="stateWrapper">
 					<div className="pherzawl classHover" onClick={e => this.onDistrictClick("Pherzawl","MN")}> 
 						<img src="/Maps/Manipur/Pherzawl.png"  alt="Pherzawl"

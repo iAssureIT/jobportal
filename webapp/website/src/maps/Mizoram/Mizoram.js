@@ -52,7 +52,7 @@ class Mizoram extends Component{
 
 	render(){
 		return(
-			<div className="bodyWrapper" >
+			<div className="bodyWrapper col-12" >
 				<div className="stateWrapper"  >
 					<div className="tuipang classHover" onClick={e => this.onDistrictClick("Tuipang","MZ")}> 
 						<img src="/Maps/Mizoram/Tuipang.png"  alt="Tuipang"

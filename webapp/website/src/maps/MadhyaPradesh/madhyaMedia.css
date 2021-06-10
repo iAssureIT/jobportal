@@ -1,0 +1,27 @@
+@media only screen and (min-width: 1200px) {
+  .madhyaMedia {
+  	left: -125px;}
+}
+@media(min-width:992px) and (max-width:1024px){
+ .madhyaMedia{
+ 
+ 
+ }
+}
+@media(min-width:768px) and (max-width:992px){
+.madhyaMedia{
+
+ }
+
+
+}
+@media(min-width:576px) and (max-width:768px){
+.madhyaMedia{
+
+ }
+}
+@media (max-width:576px){
+ .madhyaMedia{
+
+ }	
+}

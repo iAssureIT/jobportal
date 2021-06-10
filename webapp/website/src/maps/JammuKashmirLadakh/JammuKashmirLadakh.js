@@ -51,7 +51,7 @@ class JammuKashmirLadakh extends Component{
 
 	render(){
 		return(
-			<div className="bodyWrapper">
+			<div className="bodyWrapper col-12">
 				<div className="stateWrapper">
 					<div className="jammuAndKashmir classHover" onClick={e => this.onDistrictClick("Jammu And Kashmir","JK")}> 
 						<img src="/Maps/Jammu_Kashmir___Ladakh/Jammu_And_Kashmir.png" alt="Jammu_And_Kashmir" onMouseOver={e => (e.currentTarget.src = "/Maps/Jammu_Kashmir___Ladakh/Jammu_And_Kashmir_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Jammu_Kashmir___Ladakh/Jammu_And_Kashmir.png")}/>

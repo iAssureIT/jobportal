@@ -48,7 +48,7 @@ class Tripura extends Component{
 	render(){
 		return(
 
-			<div className="bodyWrapper">
+			<div className="bodyWrapper col-12">
 				<div className="stateWrapper ">
 					<div className="northTripura classHover" onClick={e => this.onDistrictClick("","TR")}> 
 						<img src="/Maps/Tripura/North_Tripura.png"  alt="North_Tripura" 

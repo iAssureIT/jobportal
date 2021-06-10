@@ -47,7 +47,7 @@ class Telangana extends Component{
 	}
 	render(){
 		return(
-			<div className="bodyWrapper">
+			<div className="bodyWrapper col-12">
 				<div className="stateWrapper">
 					<div className="adilabad classHover" onClick={e => this.onDistrictClick("Adilabad","TS")}> 
 						<img src="/Maps/Telangana/Adilabad.png"  alt="Adilabad" 

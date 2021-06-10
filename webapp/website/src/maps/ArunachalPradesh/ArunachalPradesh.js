@@ -50,7 +50,7 @@ class ArunachalPradesh extends Component{
 	}
 	render(){
 		return(
-			<div className="bodyWrapper">
+			<div className="bodyWrapper col-12">
 				<div className="stateWrapper">
 					<div className="tawang classHover" onClick={e => this.onDistrictClick("Tawang","AR")}> 
 						<img src="/Maps/Arunachal_Pradesh/Tawang.png"  alt="Tawang" 

@@ -51,7 +51,7 @@ class WestBengal extends Component{
 	}
 	render(){
 		return(
-			<div className="bodyWrapper">
+			<div className="bodyWrapper col-12">
 				<div className="stateWrapper">
 					<div className="darjeeling classHover" onClick={e => this.onDistrictClick("Darjeeling","WB")}> 
 						<img src="/Maps/West_Bengal/Darjeeling.png"  alt="Darjeeling" 

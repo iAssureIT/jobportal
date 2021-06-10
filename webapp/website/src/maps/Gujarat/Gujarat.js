@@ -51,7 +51,7 @@ class Gujarat extends Component{
 	}
 	render(){
 		return(
-			<div className="bodyWrapper">
+			<div className="bodyWrapper col-12">
 				<div className="stateWrapper">
 					<div className="kachchh classHover" onClick={e => this.onDistrictClick("Kachchh","GJ")}> 
 						<img src="/Maps/Gujarat/Kachchh.png"  alt="Kachchh" onMouseOver={e => (e.currentTarget.src = "/Maps/Gujarat/Kachchh_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Gujarat/Kachchh.png")}/>

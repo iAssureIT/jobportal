@@ -52,7 +52,7 @@ class Bihar extends Component{
 
 	render(){
 		return(
-			<div className="bodyWrapper">
+			<div className="bodyWrapper col-12">
 				<div className="stateWrapper">
 					<div className="bhabua classHover" onClick={e => this.onDistrictClick("Bhabua","BR")}> 
 						<img src="/Maps/Bihar/Bhabua.png"  alt="Bhabua" onMouseOver={e => (e.currentTarget.src = "/Maps/Bihar/Bhabua_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Bihar/Bhabua.png")}/>

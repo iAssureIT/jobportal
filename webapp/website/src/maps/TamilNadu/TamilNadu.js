@@ -48,7 +48,7 @@ class TamilNadu extends Component{
 	}
 	render(){
 		return(
-			<div className="bodyWrapper">
+			<div className="bodyWrapper col-12">
 				<div className="stateWrapper">
 					<div className="tiruvallur classHover" onClick={e => this.onDistrictClick("Tiruvallur","TN")}> 
 						<img src="/Maps/Tamil_Nadu/Tiruvallur.png"  alt="Tiruvallur" 

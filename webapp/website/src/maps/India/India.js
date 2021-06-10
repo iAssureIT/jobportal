@@ -82,7 +82,7 @@ class India extends Component{
 		return(
 			<section className="mapWrapper  col-12">
 				<div className="row">
-					<div className="india  col-12">
+					<div className="india">
 						 
 						<div className="jammuKashmir classHover">
 							<img src="/Maps/India/Jammu&Kashmir.png"   onClick={e => this.onStateClick("Jammu & Kashmir","JK")} onMouseOver={e => (e.currentTarget.src = "/Maps/India/Jammu&Kashmir_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/India/Jammu&Kashmir.png")}/>

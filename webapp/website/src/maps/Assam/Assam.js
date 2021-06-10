@@ -52,7 +52,7 @@ class Assam extends Component{
 	render(){
 		console.log("Assam...............................");
 		return(
-			<div className="bodyWrapper">
+			<div className="bodyWrapper col-12">
 				<div className="stateWrapper">
 
 					<div className="kokrajhar classHover" onClick={e => this.onDistrictClick("Kokrajhar","AS")}> 

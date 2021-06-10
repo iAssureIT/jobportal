@@ -49,7 +49,7 @@ class Delhi extends Component{
 	}
 	render(){
 		return(
-			<div className="bodyWrapper">
+			<div className="bodyWrapper col-12">
 				<div className="stateWrapper">
 					<div className="dwarka classHover" onClick={e => this.onDistrictClick("Dwarka","DL")}> 
 						<img src="/Maps/Delhi/Dwarka.png"  alt="Dwarka" 

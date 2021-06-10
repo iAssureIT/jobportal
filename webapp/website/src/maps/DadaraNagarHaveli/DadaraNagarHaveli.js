@@ -48,7 +48,7 @@ class DadaraNagarHaveli extends Component{
 	}
 	render(){
 		return(
-			<div className="bodyWrapper">
+			<div className="bodyWrapper col-12">
 				<div className="stateWrapper">
 					<div className="DadaraNagarHaveli classHover" onClick={e => this.onDistrictClick("DadaraNagarHaveli","DD")}> 
 						<img src="/Maps/DadaraNagarHaveli/DadaraNagarHaveli.png" alt="DadaraNagarHaveli" onMouseOver={e => (e.currentTarget.src = "/Maps/DadaraNagarHaveli/DadaraNagarHaveli_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/DadaraNagarHaveli/DadaraNagarHaveli.png")}/>

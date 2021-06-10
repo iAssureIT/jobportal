@@ -50,9 +50,9 @@ class Punjab extends Component{
 	
 	}
 	render(){
-		console.log("Punjab................................");
+		
 		return(
-			<div className="bodyWrapper">
+			<div className="bodyWrapper col-12">
 				<div className="stateWrapper">
 					<div className="fazilka classHover" onClick={e => this.onDistrictClick("Fazilka","PB")}> 
 						<img src="/Maps/Punjab/Fazilka.png" alt="Fazilka" onMouseOver={e => (e.currentTarget.src = "/Maps/Punjab/Fazilka_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Punjab/Fazilka.png")}/>

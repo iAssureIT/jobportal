@@ -49,7 +49,7 @@ class Jharkhand extends Component{
 	}
 	render(){
 		return(
-			<div className="bodyWrapper">
+			<div className="bodyWrapper col-12">
 				<div className="stateWrapper">
 					<div className="garhwa classHover" onClick={e => this.onDistrictClick("Garhwa","JH")}> 
 						<img src="/Maps/Jharkhand/Garhwa.png"  alt="Garhwa"
