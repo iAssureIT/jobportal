@@ -421,9 +421,9 @@ exports.getJobList = (req, res, next) => {
     selector["$and"].push({
         "status": req.body.status ? req.body.status : "active"
     })
-
+    var countryCode = req.body.countryCode ? req.body.countryCode : "IN";
     selector["$and"].push({
-        "location.countryCode": req.body.countryCode
+        "location.countryCode": countryCode
     })
     if (req.body.status) {
         selector["$and"].push({

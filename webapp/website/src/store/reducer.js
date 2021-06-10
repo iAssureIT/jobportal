@@ -43,6 +43,7 @@ const initialState = {
 	selectedModal 				: "login",
 	userID 						: "",
 	viewMode 					: "mapView",
+	listView 					: 0,
 	selector 					: {},
 	mapJobs 					: [],
 	jobCount 					: 0,
@@ -84,6 +85,10 @@ const newState = {...state};
 	if(action.type === "SET_VIEW_MODE"){
 		newState.viewMode 	= action.viewMode;
 	}
+	if(action.type === "SET_LIST_MODE"){
+		newState.listView 	= action.listView;
+	}
+	
 	if(action.type === "SET_FILTER_SELECTOR"){
 		newState.selector 	= action.selector;
 	}

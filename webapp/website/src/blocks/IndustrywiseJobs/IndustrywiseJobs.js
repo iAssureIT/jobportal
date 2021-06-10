@@ -18,8 +18,8 @@ class IndustrywiseJobs extends Component{
         selector.initialLimit   = 25;
         selector.showMoreLimit  = 25;
         mapAction.jobCount(selector);
+        mapAction.setListMode(1);
         mapAction.filterJobList(this.props.selector);
-        mapAction.setViewMode("listView");
         
         if(this.props.match.path=="/"){
             this.props.history.push("/country/IN/state/all/city/all/industry/"+industry+"/"+_id+"/function/all/0/subfunction/all/0");
