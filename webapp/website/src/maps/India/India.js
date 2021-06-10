@@ -8,6 +8,7 @@ import { bindActionCreators } from 'redux';
 import  * as mapActionCreator from '../../common/actions/index';
 import '../global.css';
 import './india.css';
+import './indiaMedia.css';
 
 
 class India extends Component{
@@ -79,9 +80,9 @@ class India extends Component{
 	render(){
 		//console.log(this.state)
 		return(
-			<section className="mapWrapper container">
+			<section className="mapWrapper  col-12">
 				<div className="row">
-					<div className="india col-sm-12 col-md-12 col-lg-12 col-xl-12">
+					<div className="india  col-12">
 						 
 						<div className="jammuKashmir classHover">
 							<img src="/Maps/India/Jammu&Kashmir.png"   onClick={e => this.onStateClick("Jammu & Kashmir","JK")} onMouseOver={e => (e.currentTarget.src = "/Maps/India/Jammu&Kashmir_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/India/Jammu&Kashmir.png")}/>

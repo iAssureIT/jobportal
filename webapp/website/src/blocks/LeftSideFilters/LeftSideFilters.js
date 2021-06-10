@@ -400,7 +400,7 @@ class LeftSideFilters extends Component{
         <div className="row">
 
 
-                <div className="form-group col-md-12 col-lg-12 col-xl-12">
+                <div className="form-group col-4 col-sm-4 col-md-4 col-lg-12 col-xl-12">
                   <div className=''>
                     <div className="input-group ">
                       
@@ -417,7 +417,7 @@ class LeftSideFilters extends Component{
                     </div>
                   </div>
                 </div> 
-                <div className="form-group col-md-12 col-lg-12 col-xl-12">
+                <div className="form-group col-4 col-sm-4 col-md-4 col-lg-12 col-xl-12">
                   <div className=''>
                     <div className="input-group">
                       
@@ -434,7 +434,7 @@ class LeftSideFilters extends Component{
                     </div>
                   </div>
                 </div> 
-                <div className="form-group col-md-12 col-lg-12 col-xl-12">
+                <div className="form-group col-4 col-sm-4 col-md-4 col-lg-12 col-xl-12">
                   <div className=''>
                     <div className="input-group ">
                       
@@ -451,7 +451,7 @@ class LeftSideFilters extends Component{
                     </div>
                   </div>
                 </div>
-                <div className="form-group col-md-12 col-lg-12 col-xl-12">
+                <div className="form-group col-4 col-sm-4 col-md-4 col-lg-12 col-xl-12">
                   <div className=''>
                     <div className="input-group ">
                       
@@ -468,7 +468,7 @@ class LeftSideFilters extends Component{
                     </div>
                   </div>
                 </div>
-                <div className="form-group col-md-12 col-lg-12 col-xl-12">
+                <div className="form-group col-4 col-sm-4 col-md-4 col-lg-12 col-xl-12">
                   <div className=''>
                     <div className="input-group">
                       
@@ -485,7 +485,7 @@ class LeftSideFilters extends Component{
                     </div>
                   </div>
                 </div> 
-                <div className="form-group col-md-12 col-lg-12 col-xl-12">
+                <div className="form-group col-4 col-sm-4 col-md-4 col-lg-12 col-xl-12">
                     <div className=''>
                       <div className="input-group ">
                         
@@ -502,7 +502,7 @@ class LeftSideFilters extends Component{
                       </div>
                     </div>
                 </div>    
-                <div className="form-group col-md-12 col-lg-12 col-xl-12">
+                <div className="form-group col-4 col-sm-4 col-md-4 col-lg-12 col-xl-12">
                     <div className=''>
                       <div className="input-group ">
                         
@@ -519,7 +519,7 @@ class LeftSideFilters extends Component{
                       </div>
                     </div>
                 </div>
-                <div className="form-group col-md-12 col-lg-12 col-xl-12">
+                <div className="form-group col-4 col-sm-4 col-md-4 col-lg-12 col-xl-12">
                   <div className="">
                     <div className="input-group ">
                       

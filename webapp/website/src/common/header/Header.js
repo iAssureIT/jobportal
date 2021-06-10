@@ -319,7 +319,7 @@ class Header extends Component{
           
             <div className="col-12 FunctionalHeaderWrapper">
               <div className="row">
-                  <div className="col-2 col-sm-2 col-md-1 col-lg-1 col-xl-1">
+                  <div className="col-3 col-sm-3 col-md-1 col-lg-1 col-xl-1">
                     <div className="iconHeader">
                       <a href="/">
                         <img src="/images/1.png" alt="icon"  className="iIcon"/>
@@ -328,7 +328,7 @@ class Header extends Component{
                   </div>
 
                   {window.location.pathname.split("/")[3] == "state" ? (
-                    <div className="breadCrumbHeader col-3 col-sm-3 col-md-5 col-lg-3 col-xl-3">
+                    <div className="breadCrumbHeader d-none d-md-block col-md-5 col-lg-3 col-xl-3">
                       <ul className="breadCrumbInner">
                         <li className="breadCrumbInnerli">
                           <a href="/">India</a>
@@ -398,12 +398,12 @@ class Header extends Component{
                       </ul>
                     </div>
                   ) : (
-                    <div className="breadCrumbHeader col-3  col-sm-3 col-md-5 col-lg-3 col-xl-3"></div>
+                    <div className="breadCrumbHeader d-none d-md-block col-md-5 col-lg-3 col-xl-3"></div>
                   )}
 
                   <div className="FunctionWiseTitle  d-none d-lg-block  col-lg-4 col-xl-4"></div>
 
-                  <div className="rightFunctionHeader col-7 col-sm-7 col-md-6 col-lg-4 col-xl-4">
+                  <div className="rightFunctionHeader col-9 col-sm-9 col-md-6 col-lg-4 col-xl-4">
                     <div className="row">
                       <div className="rightFunctionHeader1 col-7 col-sm-7 col-md-7 col-lg-7 col-xl-7">
                         <div className="row">
