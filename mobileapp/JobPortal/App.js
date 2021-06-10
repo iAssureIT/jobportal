@@ -14,10 +14,18 @@ import { request,
 import { LogBox,StatusBar }             from 'react-native';
 import {AuthLoadingScreen}    from "./src/ScreenComponents/AuthLoadingScreen/AuthLoadingScreen.js";
 import {NavigationContainer}  from "@react-navigation/native";
+
+// axios.defaults.baseURL = 'http://192.168.43.170:3066';
+
+
 // axios.defaults.baseURL = 'http://qaapi-bookstore.iassureit.in/';
 // axios.defaults.baseURL = 'https://qaapi-sampurna-marketplace.iassureit.in/';
 // axios.defaults.baseURL = 'https://devapi.knock-knockeshop.com/';
-axios.defaults.baseURL = 'http://qaapi-jobportal.iassureit.in/';
+
+   axios.defaults.baseURL = 'https://qaapi-jobportal.iassureit.in/';
+
+
+
  const App = (props) => {
   const [token, setToken] = useState('');
   const [toast, setAppToast] = React.useState(null);

@@ -56,57 +56,71 @@ const window = Dimensions.get('window');
     confirm_password: Yup.string().required('This field is required'),
   });
 
+  
+
+
 
   export const RootSignUp = withCustomerToaster((props)=>{
+
+    
+
     const [btnLoading, setLoading] = useState(false);
     const [password_matched, setPasswordMatched] = useState(false);
     const {setToast,navigation} = props; //setToast function bhetta
     const dispatch = useDispatch();
-    
+
       return (
+        
         <React.Fragment>
           <Formik
             onSubmit={(data) => {
-              console.log("data",data);
+              console.log("data77",data);
               if(password_matched){
                 setLoading(true);
                 let {firstName, lastName,mobileNumber,email_id,password,countryCode} = data;
                 var formValues = {
+                  username 		: "MOBILE",
                   firstname   : firstName,
                   lastname    : lastName,
                   mobNumber   : mobileNumber,
-                  pincode     : "",
                   email       : email_id,
                   pwd         : password,
-                  role        : 'user',
+                  role        : 'candidate',
                   status      : 'unverified',
                   countryCode : countryCode
                 }
-                axios.post('/api/auth/post/signup/user/otp/new',formValues)
+                console.log("formValues",formValues)
+                axios.post('/api/auth/post/signup/user/otp',formValues)
                 .then((response) => {
                   setLoading(false)
                   if(response.data.message == 'USER_CREATED'){            
-                    console.log('response.data Result==>', response.data.result)
+                    console.log('response.data Result96==>', response)
+                    console.log('response.data.OTP==>', response.data.OTP)
+                    // console.log('response.data.firstname==>', response.data.firstname)
                     var sendData = {
                       "event": "5",
                       "toUser_id": response.data.ID,
-                      "toUserRole":"user",
+                      "toUserRole":"candidate",
                         "variables": {
-                          "Username" : response.data.result.profile.firstname,
-                          "OTP" : response.data.result.profile.otpEmail,
+                          // "Username" :response.data.result.firstname,
+                          "OTP" : response.data.OTP,
+                          // "Username" :response.data.result.profile.firstname,
+                          // "OTP" : response.data.result.profile.otpEmail,
                         }
                       }
                       console.log('sendDataToUser==>', sendData)
-                      axios.post('/api/masternotifications/post/sendNotification', sendData)
-                      .then((res) => {
-                      console.log('sendDataToUser in result==>>>', res.data)
-                      })
-                      .catch((error) => { console.log('notification error: ',error)})
+                      // axios.post('/api/masternotifications/post/sendNotification', sendData)
+                      // .then((res) => {
+                      // console.log('sendDataToUser in result==>>>', res.data)
+                      // })
+                      // .catch((error) => { console.log('notification error: ',error)})
                       setToast({text: "Great, Information submitted successfully", color: 'green'});
                       AsyncStorage.multiSet([
                         ['user_id_signup', response.data.ID],
                       ])
-                      navigation.navigate('OTPVerification',{userID:response.data.ID,Username:response.data.result.profile.firstname});
+                      navigation.navigate('OTPVerification',{userID:response.data.ID});
+
+                      // navigation.navigate('OTPVerification',{userID:response.data.ID,Username:response.data.result.profile.firstname});
                   }else{
                     setToast({text: response.data.message, color:  colors.warning});
                   }
@@ -186,7 +200,6 @@ const window = Dimensions.get('window');
   const getCountryCode=(e)=>{
       console.log("e",e);
   } 
-
   return (
        <ImageBackground source={require("../../../AppDesigns/currentApp/images/34.png")} style={commonStyles.container} resizeMode="cover" >
           <ScrollView contentContainerStyle={[commonStyles.container]} keyboardShouldPersistTaps="always" >
@@ -204,9 +217,11 @@ const window = Dimensions.get('window');
                   <FormInput
                     labelName       = "First Name"
                     placeholder     = "First Name"
-                    onChangeText    = {handleChange('firstName')}
+                    // onChangeText  = {(firstname) => setFirstName(firstname) }
+                    // value         = {firstname}
+                     onChangeText    = {handleChange('firstName')}
                     required        = {true}
-                    name            = "firstName"
+                     name            = "firstName"
                     errors          = {errors}
                     touched         = {touched}
                     iconName        = {'user-circle-o'}
@@ -216,7 +231,9 @@ const window = Dimensions.get('window');
                   <FormInput
                     labelName       = "Last Name"
                     placeholder     = "Last Name"
-                    onChangeText    = {handleChange('lastName')}
+                    // onChangeText  = {(lastname) => setLastName(lastname) }
+                    // value         = {lastname}
+                     onChangeText    = {handleChange('lastName')}
                     required        = {true}
                     name            = "lastName"
                     errors          = {errors}
@@ -266,6 +283,10 @@ const window = Dimensions.get('window');
                           setFieldValue('countryCode',countryCode)
                           setValid(checkValid);
                         }}
+                        
+                        // onChangeText={(mobileNumber) =>setMobileNumber(mobileNumber) }
+                        // value         = {mobileNumber}
+                       
                         containerStyle= {styles1.containerStyle}
                         textContainerStyle={styles1.textContainerStyle}
                         textInputStyle={styles1.textInputStyle}
@@ -289,7 +310,9 @@ const window = Dimensions.get('window');
                   <FormInput
                     labelName     = "Password"
                     placeholder   = "Password"
-                    onChangeText  = {handleChange("password")}
+                    // onChangeText  = {(password) => setPassword(password) }
+                    // value         = {password}
+                     onChangeText  = {handleChange("password")}
                     onBlur        = {checkPassword}
                     errors        = {errors}
                     name          = "password"
@@ -333,6 +356,7 @@ const window = Dimensions.get('window');
                       </TouchableOpacity>
                     }
                     secureTextEntry={!showPassword}
+                   
                   />
                   <FormButton
                     title       = {'Sign Up'}

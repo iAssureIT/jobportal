@@ -35,25 +35,37 @@ export const OTPVerification = withCustomerToaster((props) => {
         onSubmit={(data) => {
             setLoading(true);
             let { otp } = data;
-            console.log("otp",otp);
-            axios.get('/api/auth/get/checkemailotp/usingID/'+userID+"/"+otp)
+            console.log("otp38",otp);
+            var checkData = { 
+              "user_id":userID, 
+              "mobileotp"  : otp, 
+              "status" : "active" }
+          
+            console.log("checkData",checkData)  
+            axios.post('/api/auth/checkmobileotp/usingID/',checkData)
             .then(response => {
+              console.log("response41",response)
                 setLoading(false);
                 if (response.data.message == 'SUCCESS') {
-                  var sendData = {
-                    "event": "1",
-                    "toUser_id": userID,
-                    "toUserRole":"user",
-                    "variables": {
-                      // "Username" : this.state.fullName,
-                      }
-                  }
-                  axios.post('/api/masternotifications/post/sendNotification', sendData)
-                  .then((res) => {
-                  console.log('sendDataToUser in result==>>>', res.data)
-                  })
-                  .catch((error) => { console.log('notification error: ',error)})
-                //   axios.get('/api/users/get/id/'+userID)
+                  setToast({text: 'OTP Verified Successfully', color: 'green'});
+
+                  navigation.navigate('RootLogIn')
+
+                  // var sendData = {
+                  //   "event": "1",
+                  //   "toUser_id": userID,
+                  //   "toUserRole":"candidate",
+                  //   "variables": {
+                  //      "OTP" : response.data.OTP
+                     
+                  //     }
+                  // }
+                //   axios.post('/api/masternotifications/post/sendNotification', sendData)
+                //   .then((res) => {
+                //   console.log('sendDataToUser in result==>>>', res.data)
+                //   })
+                //   .catch((error) => { console.log('notification error: ',error)})
+                // //   axios.get('/api/users/get/id/'+userID)
                 //   .then(res => {
                 //     console.log("res",res);
                 //     AsyncStorage.multiSet([
@@ -88,7 +100,7 @@ export const OTPVerification = withCustomerToaster((props) => {
                 //       navigation.navigate('App')
                 //     }
                 // })
-                navigation.navigate('RootLogIn')
+                
               }else{
                 setToast({text: 'Please enter correct OTP.', color: colors.warning});
               }

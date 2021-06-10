@@ -183,33 +183,33 @@ class ConfirmOtp extends Component {
     var resendOtp = "";
 
     return (
-      <section className="col-lg-12 confirmOTPWrapper">
+      <section className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 confirmOTPWrapper">
           <div className="img1LoginFP">
-              <img src="/images/Sign_In/1.png" alt="img1Login" className="img1oginInnerFP"/>
+              <img src="/images/Sign_In/1.png" alt="img1Login" className="img1oginInnerFP img-fluid"/>
           </div>
 
            <div className="img2LoginFP">
-              <img src="/images/Sign_In/2.png" alt="img2Login" className="img2loginInnerFP"/>
+              <img src="/images/Sign_In/2.png" alt="img2Login" className="img2loginInnerFP img-fluid"/>
           </div>
 
            <div className="img3LoginFP">
-              <img src="/images/Sign_In/3.png" alt="img3Login" className="img3loginInnerFP"/>
+              <img src="/images/Sign_In/3.png" alt="img3Login" className="img3loginInnerFP img-fluid"/>
           </div>
 
            <div className="img4LoginFP">
-              <img src="/images/Sign_In/4.png" alt="img4Login" className="img4loginInnerFP"/>
+              <img src="/images/Sign_In/4.png" alt="img4Login" className="img4loginInnerFP img-fluid"/>
           </div>
 
            <div className="img5LoginFP">
-              <img src="/images/Sign_In/5.png" alt="img5Login" className="img5loginInnerFP"/>
+              <img src="/images/Sign_In/5.png" alt="img5Login" className="img5loginInnerFP img-fluid"/>
           </div>
 
            <div className="img6LoginFP">
-              <img src="/images/Sign_In/6.png" alt="img6Login" className="img6loginInnerFP"/>
+              <img src="/images/Sign_In/6.png" alt="img6Login" className="img6loginInnerFP img-fluid"/>
           </div>
-                <div className="confirmOTP col-lg-4 col-lg-offset-4">
+                <div className="confirmOTP col-4 offset-4 col-sm-4 offset-sm-4 col-md-4 offset-md-4 col-lg-4 offset-lg-4 col-xl-4 offset-xl-4">
                   <form>
-                    <div className="confirmOTPTitle col-lg-10 col-lg-offset-1">Please enter OTP sent you on your Phone
+                    <div className="confirmOTPTitle col-10 offset-1 col-sm-10 offset-sm-1 col-md-10 offset-md-1 col-lg-10 offset-lg-1 col-xl-10 offset-xl-1">Please enter OTP sent you on your Phone
                     </div>
 
                   {/*  <hr className="confirmOTPHr"/>
@@ -219,35 +219,24 @@ class ConfirmOtp extends Component {
 
                     </div>*/}
 
-                       <div className="col-lg-10 col-lg-offset-1">
-
-                        <div className="otpBox form-group" >
-                            <div className="input-group ">
-                               
+                       <div className="col-10 offset-1 col-sm-10 offset-sm-1 col-md-10 offset-md-1 col-lg-10 offset-lg-1 col-xl-10 offset-xl-1">
+                        <div className="otpBox form-group">
+                            <div className="input-group">
                                 <input type="text" id="otp" maxlength="1" name="otp" ref="emailotp1" placeholder="_" value={this.state.OTP} onChange={this.handleChange.bind(this)} className="form-control roundCorner confirmOTPInputBox"/>
                             </div>
-                           
                         </div>
-
-
-                        <div className="otpBox form-group" >
-                            <div className="input-group ">
-                               
+                        <div className="otpBox form-group">
+                            <div className="input-group">
                                 <input type="text" id="otp" maxlength="1" name="otp" ref="emailotp2" placeholder="_" value={this.state.OTP} onChange={this.handleChange.bind(this)} className="form-control roundCorner confirmOTPInputBox"/>
                             </div>
-                           
                         </div>
-                        <div className="otpBox form-group" >
-                            <div className="input-group ">
-                               
+                        <div className="otpBox form-group">
+                            <div className="input-group">
                                 <input type="text" id="otp" maxlength="1" name="otp" ref="emailotp3" placeholder="_" value={this.state.OTP} onChange={this.handleChange.bind(this)} className="form-control roundCorner confirmOTPInputBox"/>
                             </div>
-                           
                         </div>
-
-                        <div className="otpBox form-group" >
-                            <div className="input-group ">
-                               
+                        <div className="otpBox form-group">
+                            <div className="input-group">
                                 <input type="text" id="otp" maxlength="1" name="otp" ref="emailotp4" placeholder="_" value={this.state.OTP} onChange={this.handleChange.bind(this)} className="form-control roundCorner confirmOTPInputBox"/>
                             </div>
                            
@@ -264,14 +253,14 @@ class ConfirmOtp extends Component {
                     */}
                     
                      
-                    <div className="col-lg-10 col-lg-offset-1 buttonWrapper">
+                    <div className="col-10 offset-1 col-sm-10 offset-sm-1 col-md-10 offset-md-1 col-lg-10 offset-lg-1 col-xl-10 offset-xl-1 buttonWrapper">
                       <div className="row">
-                        <div className="col-lg-6">
-                            <button className="btn col-lg-12 buttonConfirmOTP" onClick={this.resendOtp.bind(this)}>Resend OTP</button>
+                        <div className="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                            <button className="btn col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 buttonConfirmOTP" onClick={this.resendOtp.bind(this)}>Resend OTP</button>
                         </div>
 
-                        <div className="col-lg-6">
-                            <button className="btn col-lg-12 buttonConfirmOTP" onClick={this.confirmOTP.bind(this)}>Confirm OTP</button>
+                        <div className="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                            <button className="btn col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 buttonConfirmOTP" onClick={this.confirmOTP.bind(this)}>Confirm OTP</button>
                         </div>
                       </div>
                             
