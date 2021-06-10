@@ -453,35 +453,35 @@ class SignUp extends Component {
   }
 	render() {
 		return (
-			<section className="registrationFormWrapper col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+			<section className="registrationFormWrapper col-12 col-sm-12 col-md-12 col-lg-12 col-xl-6 offset-xl-3">
 
           <div className="img1LoginSU">
-              <img src="/images/Sign_In/1.png" alt="img1Login" className="img1oginInnerSU"/>
+              <img src="/images/Sign_In/1.png" alt="img1Login" className="img1oginInnerSU img-fluid"/>
           </div>
 
            <div className="img2LoginSU">
-              <img src="/images/Sign_In/2.png" alt="img2Login" className="img2loginInnerSU"/>
+              <img src="/images/Sign_In/2.png" alt="img2Login" className="img2loginInnerSU img-fluid"/>
           </div>
 
            <div className="img3LoginSU">
-              <img src="/images/Sign_In/3.png" alt="img3Login" className="img3loginInnerSU"/>
+              <img src="/images/Sign_In/3.png" alt="img3Login" className="img3loginInnerSU img-fluid"/>
           </div>
 
            <div className="img4LoginSU">
-              <img src="/images/Sign_In/4.png" alt="img4Login" className="img4loginInnerSU"/>
+              <img src="/images/Sign_In/4.png" alt="img4Login" className="img4loginInnerSU img-fluid"/>
           </div>
 
            <div className="img5LoginSU">
-              <img src="/images/Sign_In/5.png" alt="img5Login" className="img5loginInnerSU"/>
+              <img src="/images/Sign_In/5.png" alt="img5Login" className="img5loginInnerSU img-fluid"/>
           </div>
 
            <div className="img6LoginSU">
-              <img src="/images/Sign_In/6.png" alt="img6Login" className="img6loginInnerSU"/>
+              <img src="/images/Sign_In/6.png" alt="img6Login" className="img6loginInnerSU img-fluid"/>
           </div>
-                <div className="registrationForm col-4 offset-4 col-sm-4 offset-sm-4 col-md-4 offset-md-4 col-lg-4 offset-lg-4 col-xl-4 offset-xl-4">
+                <div className="registrationForm col-8 offset-2 col-sm-8 offset-sm-2 col-md-8 offset-md-2 col-lg-8 offset-lg-2 col-xl-8 offset-xl-2">
                   <form>
 
-                    <div className="signUpTitle col-lg-12">Sign Up
+                    <div className="signUpTitle col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">Sign Up
                     </div>
 
                      {/*<div className="row">
@@ -504,9 +504,9 @@ class SignUp extends Component {
                         </div>
                     </div>*/}
 
-                  <div className="col-lg-12">
+                  <div className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 row flName">
                     
-                      <div className="col-lg-6 form-group" >
+                      <div className="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 form-group">
                         <div className="input-group">
                           <div className="input-group-prepend">
                             <span className="input-group-text registrationInputIcon"><i className="fa fa-user"></i></span>
@@ -516,7 +516,7 @@ class SignUp extends Component {
                          <span id="firstNameError" className="errorMsg"></span>
                       </div>
 
-                      <div className="col-lg-6  form-group" >
+                      <div className="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 form-group">
                         <div className="input-group">
                           <div className="input-group-prepend">
                               <span className="input-group-text registrationInputIcon"><i className="fa fa-user"></i></span>
@@ -528,8 +528,8 @@ class SignUp extends Component {
                     
                   </div>
 
-                      <div className="col-lg-12">
-                        <div className="col-lg-12 form-group" >
+                      <div className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                        <div className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 form-group">
                             <div className="input-group">
                               <div className="input-group-prepend">
                                 <span className="input-group-text registrationInputIcon1"><i className="fa fa-envelope"></i></span>
@@ -540,8 +540,8 @@ class SignUp extends Component {
                         </div>
                       </div>
 
-                      <div className="col-lg-12">
-                        <div className="col-lg-12 form-group" >
+                      <div className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                        <div className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 form-group">
                       
                              <PhoneInput
                                       country   = {'in'}
@@ -556,8 +556,8 @@ class SignUp extends Component {
                         </div>
                       </div>
 
-                    <div className="col-lg-12">
-                         <div className="col-lg-12 form-group" >
+                    <div className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                         <div className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 form-group">
                             <div className="input-group zIndex">
                               <div className="input-group-prepend">
                                 <span className="input-group-text registrationInputIcon"><i className="fa fa-lock"></i></span>
@@ -573,8 +573,8 @@ class SignUp extends Component {
                         </div>
                     </div>
 
-                    <div className="col-lg-12">
-                        <div className="col-lg-12 form-group" >
+                    <div className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                        <div className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 form-group" >
                             <div className="input-group zIndex">
                               <div className="input-group-prepend">
                                 <span className="input-group-text registrationInputIcon"><i className="fa fa-lock"></i></span>
@@ -590,8 +590,9 @@ class SignUp extends Component {
                         </div>
                     </div>
                        
-                    <div className="col-lg-12">
-                        <div className="col-lg-6">
+                    <div className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                      <div className="row">
+                        <div className="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
                          
                             <label htmlFor="checkTC" className="agreeTC container">
                             
@@ -602,16 +603,16 @@ class SignUp extends Component {
                          
                         </div>
 
-                        <div className="col-lg-6  buttonWrapper">
+                        <div className="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 buttonWrapper row">
                           
-                            <button className="btn col-lg-12 buttonSignUp" onClick={this.usersignup.bind(this)}>Sign Up >></button>
+                            <button className="btn col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 buttonSignUp" onClick={this.usersignup.bind(this)}>Sign Up >></button>
                           
                         </div>
-                      
+                      </div>
                     </div>    
 
-                  <div className="col-lg-10 col-lg-offset-1 registrationLinks" >
-                    <a className="alreadyAccount col-lg-4 col-lg-offset-6" href="#" onClick={this.ShowLogin.bind(this)}><u>Sign In >></u></a>
+                  <div className="col-10 offset-1 col-sm-10 offset-sm-1 col-md-10 offset-md-1 col-lg-10 offset-lg-1 col-xl-10 offset-xl-1 registrationLinks" >
+                    <a className="alreadyAccount col-4 offset-4 col-sm-4 offset-sm-4 col-md-4 offset-md-4 col-lg-4 offset-lg-4 col-xl-4 offset-xl-4" href="#" onClick={this.ShowLogin.bind(this)}><u>Sign In >></u></a>
                   </div>
 
                 </form>
