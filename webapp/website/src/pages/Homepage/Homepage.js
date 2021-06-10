@@ -233,7 +233,7 @@ class HomePage extends Component {
 
     var selector = this.props.selector;
     selector.countryCode = "IN"; 
-    
+    console.log(viewMode)
     if (viewMode=="mapView") {
       
       /*if (this.props.match.path=="/functional/:functionalArea/:functionalArea_id" ) {
@@ -297,14 +297,22 @@ class HomePage extends Component {
       }
     }
     if (viewMode=="listView") {
-
+      if (this.props.match.path != "/") {
+        var selector = this.props.selector;
+        delete selector.functionalArea_id;
+        delete selector.subfunctionalArea_id;
+        console.log(selector)
+        this.props.history.push("/country/"+this.props.match.params.countryCode+"/state/"+this.props.match.params.stateCode+"/city/"+this.props.match.params.district+"/industry/"+this.props.match.params.industryName+"/"+this.props.match.params.industry_id+"/function/all/0/subfunction/all/0");
+      }
       mapAction.filterJobList(this.props.selector);
     }
     mapAction.jobCount(selector);
   }
   render() {
-    //console.log(this.props.viewMode) 
-    //console.log(this.props.match.params) 
+    console.log(this.props.match)
+    console.log(this.props.match.params.district != "all" && (this.props.viewMode == "functionalView" || this.props.viewMode == "listView") )
+    console.log(this.props.match.params.functionalArea != "all" && (this.props.viewMode == "functionalView" || this.props.viewMode == "listView"))
+    console.log(this.props.match.params.functionalArea != "all" && this.props.match.params.subfunctionalArea != "all" && (this.props.viewMode == "functionalView" || this.props.viewMode == "listView"))
     return (
         
         <div className="ViewBodyWrapper1">
@@ -343,18 +351,26 @@ class HomePage extends Component {
                                     </div>
                                     <div className="floatLeft col-4 col-sm-4 col-md-4 col-lg-12 col-xl-12">
                                       <div className={
-                                        this.props.match.params.industryName == "all" && (this.props.viewMode == "functionalView" || this.props.viewMode == "listView") 
+                                        this.props.match.path == "/" ?  this.props.viewMode == "functionalView" ? "viewDiv active" : "viewDiv"
+                                        : 
+
+                                        this.props.match.params.district != "all" && (this.props.viewMode == "functionalView" || this.props.viewMode == "listView") 
                                         ? "viewDiv active " : 
-                                        this.props.match.params.industryName != "all" && this.props.match.params.functionalArea != "all" && (this.props.viewMode == "functionalView" || this.props.viewMode == "listView") 
-                                        ? "viewDiv active " : "viewDiv " } 
+                                        this.props.match.params.functionalArea != "all" && (this.props.viewMode == "functionalView" || this.props.viewMode == "listView") 
+                                        ? "viewDiv active " :
+                                        this.props.match.params.functionalArea != "all" && this.props.match.params.subfunctionalArea != "all" && (this.props.viewMode == "functionalView" || this.props.viewMode == "listView") 
+                                        ? "viewDiv active "  
+                                        : "viewDiv " } 
                                         onClick={this.changeViewMode.bind(this,this.props.match.path == "/" ? "functionalView" : this.props.match.params.subfunctionalArea == "all" ? "functionalView" : "listView")} data-toggle="pill" href="#functionwise">  
                                        Functional  View
                                       </div>
                                     </div>
                                     <div className="floatLeft col-4 col-sm-4 col-md-4 col-lg-12 col-xl-12">
                                       <div className={
-                                         this.props.match.params.industryName == "all" && (this.props.viewMode == "functionalView" || this.props.viewMode == "listView") 
-                                        ? "viewDiv active " : 
+                                        this.props.match.path == "/" ?  this.props.viewMode == "industrialView" ? "viewDiv active" : "viewDiv"
+                                        :
+                                        //this.props.match.params.industryName == "all" && (this.props.viewMode == "industrialView" || this.props.viewMode == "listView") 
+                                        //? "viewDiv active " : 
                                         this.props.match.params.industryName != "all" && this.props.match.params.functionalArea == "all" && (this.props.viewMode == "industrialView" || this.props.viewMode == "listView") 
                                         ? "viewDiv active " : "viewDiv "} 
                                         onClick={this.changeViewMode.bind(this, this.props.match.path == "/" ? "industrialView" : this.props.match.params.industryName == "all" ? "industrialView" : "listView") } data-toggle="pill" href="#industrywise">
