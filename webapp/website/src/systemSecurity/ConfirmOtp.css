@@ -78,7 +78,6 @@
 }
 
 .confirmOTPLinks{
-	
 	margin-top: 10px;
 	margin-bottom: 10px;
 	height: 30px;
@@ -86,14 +85,11 @@
 	/*background-color: pink;*/
 }
 
-
 .confirmOTPSignIn{
 	color: #aaa !important;
 	text-align: center;
 	font-size: 14px;
 	margin-top: 50px;
-	
-	
 }
 
 .confirmOTPSignIn:hover{
@@ -104,7 +100,7 @@
 .img1LoginFP{
 	position: absolute;
 	height: 200px;
-	width: 125px;
+	/*width: 125px;*/
 	top:0px;
 	left:55%;
 	z-index: 1;
@@ -112,52 +108,42 @@
 
 .img1oginInnerFP{
 	height: 200px;
-	width: 125px;
-
-	
+	/*width: 125px;*/
 }
 
 
 .img2LoginFP{
 	position: absolute;
 	height: 300px;
-	width: 180px;
+	/*width: 180px;*/
 	bottom: 70px;
 	left:23%;
 	z-index: 1;
-
-	
 }
 
 .img2loginInnerFP{
 	height: 300px;
-	width: 180px;
+	/*width: 180px;*/
 }
-
-
-
 
 .img3LoginFP{
 	position: absolute;
 	height: 290px;
-	width: 110px;
+	/*width: 110px;*/
 	bottom: 75px;
 	left:61.5%;
 	z-index: 1;
-	
 }
 
 .img3loginInnerFP{
 	height: 290px;
-	width: 110px;
+	/*width: 110px;*/
 }
-
-
 
 .img4LoginFP{
 	position: absolute;
 	height: 100px;
-	width: 50px;
+	/*width: 50px;*/
 	
 	bottom: 65px;
     left: 38%;
@@ -166,13 +152,13 @@
 
 .img4loginInnerFP{
 	height: 100px;
-	width: 50px;
+	/*width: 50px;*/
 }
 
 .img5LoginFP{
 	position: absolute;
 	height: 135px;
-	width: 125px;
+	/*width: 125px;*/
 	bottom: 100px;
     left: 65%;
 	z-index: 0;
@@ -180,13 +166,13 @@
 
 .img5loginInnerFP{
 	height: 135px;
-	width: 125px;
+	/*width: 125px;*/
 }
 
 .img6LoginFP{
 	position: absolute;
 	height: 80px;
-	width: 60px;
+	/*width: 60px;*/
 	top: 130px;
     left: 29.6%;
 	z-index: 0;
@@ -194,7 +180,7 @@
 
 .img6loginInnerFP{
 	height: 80px;
-	width: 60px;
+	/*width: 60px;*/
 }
 
 .input-group  .roundCorner{
@@ -208,5 +194,12 @@
 	margin-left: 5%;
 	margin-right: 5%;
 	float: left;
+}
 
+.otpBoxZindex{
+	z-index: 9;
+}
+
+.buttonWrapper{
+	z-index: 1;
 }

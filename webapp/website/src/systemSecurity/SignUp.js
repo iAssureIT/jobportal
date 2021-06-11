@@ -481,7 +481,7 @@ class SignUp extends Component {
                 <div className="registrationForm col-8 offset-2 col-sm-8 offset-sm-2 col-md-8 offset-md-2 col-lg-8 offset-lg-2 col-xl-8 offset-xl-2">
                   <form>
 
-                    <div className="signUpTitle col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">Sign Up
+                    <div className="signUpTitle col-12">Sign Up
                     </div>
 
                      {/*<div className="row">
@@ -503,10 +503,10 @@ class SignUp extends Component {
                          </select>                      
                         </div>
                     </div>*/}
-
-                  <div className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 row flName">
-                    
-                      <div className="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 form-group">
+                <div className="col-12">    
+                  <div className="col-12">
+                    <div className="row">
+                      <div className="col-6 form-group">
                         <div className="input-group">
                           <div className="input-group-prepend">
                             <span className="input-group-text registrationInputIcon"><i className="fa fa-user"></i></span>
@@ -516,7 +516,7 @@ class SignUp extends Component {
                          <span id="firstNameError" className="errorMsg"></span>
                       </div>
 
-                      <div className="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 form-group">
+                      <div className="col-6 form-group">
                         <div className="input-group">
                           <div className="input-group-prepend">
                               <span className="input-group-text registrationInputIcon"><i className="fa fa-user"></i></span>
@@ -525,11 +525,12 @@ class SignUp extends Component {
                         </div>
                          <span id="lastNameError" className="errorMsg"></span>
                       </div>
-                    
+                    </div>
                   </div>
+                </div>  
 
-                      <div className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                        <div className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 form-group">
+                      <div className="col-12">
+                        <div className="col-12 form-group">
                             <div className="input-group">
                               <div className="input-group-prepend">
                                 <span className="input-group-text registrationInputIcon1"><i className="fa fa-envelope"></i></span>
@@ -540,8 +541,8 @@ class SignUp extends Component {
                         </div>
                       </div>
 
-                      <div className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                        <div className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 form-group">
+                      <div className="col-12">
+                        <div className="col-12 form-group">
                       
                              <PhoneInput
                                       country   = {'in'}
@@ -556,8 +557,8 @@ class SignUp extends Component {
                         </div>
                       </div>
 
-                    <div className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                         <div className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 form-group">
+                    <div className="col-12">
+                         <div className="col-12 form-group">
                             <div className="input-group zIndex">
                               <div className="input-group-prepend">
                                 <span className="input-group-text registrationInputIcon"><i className="fa fa-lock"></i></span>
@@ -573,8 +574,8 @@ class SignUp extends Component {
                         </div>
                     </div>
 
-                    <div className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                        <div className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 form-group" >
+                    <div className="col-12">
+                        <div className="col-12 form-group" >
                             <div className="input-group zIndex">
                               <div className="input-group-prepend">
                                 <span className="input-group-text registrationInputIcon"><i className="fa fa-lock"></i></span>
@@ -590,9 +591,9 @@ class SignUp extends Component {
                         </div>
                     </div>
                        
-                    <div className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    <div className="col-12">
                       <div className="row">
-                        <div className="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                        <div className="col-6">
                          
                             <label htmlFor="checkTC" className="agreeTC container">
                             
@@ -603,9 +604,9 @@ class SignUp extends Component {
                          
                         </div>
 
-                        <div className="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 buttonWrapper row">
+                        <div className="col-6 buttonWrapper row">
                           
-                            <button className="btn col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 buttonSignUp" onClick={this.usersignup.bind(this)}>Sign Up >></button>
+                            <button className="btn col-12 buttonSignUp" onClick={this.usersignup.bind(this)}>Sign Up >></button>
                           
                         </div>
                       </div>
