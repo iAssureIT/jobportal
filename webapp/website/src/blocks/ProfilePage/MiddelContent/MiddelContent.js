@@ -78,79 +78,91 @@ class MiddelContent extends Component{
 		
 	render(){
 		return( 
-				<div className="container-fluid middelContentWrapper col-lg-12">
-					<div className=" ">
-						<div >
+				<div className="middelContentWrapper col-lg-12">
+					<div className="row ">
+						<div className="col-12">
+						<div className="col-12">
 							<div className="middelContentHeadingWrapper ">
-								<div className="col-lg-1">
+								<div className="col-md-1 d-none d-lg-block">
 									<div className="row">
 										<i className="fa fa-square midlleContentrotate45 " ></i>
 									</div>
 								</div>
-								<div className="col-lg-11"> 
+								<div className="col-md-11 col-12"> 
 									<div className="row middleContentHeading">
 										Executive Summary 
 									</div>
 								</div>
 							</div>
 							<div className="middelContentText executiveSummaryWraap col-lg-12">
-								<div dangerouslySetInnerHTML = {{ __html : this.state.executiveSummary}} />
+								<div className="col-12" dangerouslySetInnerHTML = {{ __html : this.state.executiveSummary}} />
 							</div>
 						</div>
+						</div>
 
-						<div >
+						<div className="col-12">
+						<div className="col-12">
 							<div className="middelContentHeadingWrapper ">
-								<div className="col-lg-1">
+								<div className="col-md-1 d-none d-lg-block">
 									<div className="row">
 										<i className="fa fa-square midlleContentrotate45 " ></i>
 									</div>
 								</div>
-								<div className="col-lg-11"> 
+								<div className="col-md-11 col-12"> 
 									<div className="row middleContentHeading">
 										Work Experience
 									</div>
 								</div>
 							</div>
-							<div className="middelContentText  col-lg-12">
+							<div className="middelContentText  col-lg-12 col-sm-6">
 								{
 									this.state.workExperienceArry.length > 0
 									?
 									this.state.workExperienceArry.map((elem,index)=>{
 										return(
 										<div key={index}>
-											<div className="SubHeadingPadding">
-												<div className="profesion">
-													{elem.lastDegn}
+											<div className=" SubHeadingPadding">
+												<div className="col-12 profesion">
+														{elem.lastDegn}
+													
 												</div>
-												<div>
-													<div className="col-lg-10">
-														<div className="row">
-															<div className="companyName">
-																{elem.company_id.companyName }
-															</div>
-															<div className="companyExperience">
-																{Moment(elem.fromDate).format("YYYY MMM") +" - "+Moment(elem.toDate).format("YYYY MMM") + " . " + "9 mos"}
-															</div>
-															<div className="companyAddress">
-																{elem.district+", "+elem.state+", "+elem.country} 
+												<div className="col-12">
+													<div className="row">
+														<div className="col-lg-10 col-10">
+															<div className="row">
+																<div className="col-12 companyName">
+																	{elem.company_id.companyName }
+																</div>
+																<div className="col-12 companyExperience">
+																	{Moment(elem.fromDate).format("YYYY MMM") +" - "+Moment(elem.toDate).format("YYYY MMM") + " . " + "9 mos"}
+																</div>
+																<div className="col-12 companyAddress">
+																	{elem.district+", "+elem.state+", "+elem.country} 
+																</div>
 															</div>
 														</div>
-													</div>
-													<div className="companyImages col-lg-2">
-														<div className="row">
-														{
-															elem.company_id.companyLogo[0] ? 
-															<img className="pull-right" src={elem.company_id.companyLogo[0] } alt="Company logo"/>
-															: <img className="pull-right" src= "/images/logonotfound.jpg" alt="Company logo"/>
-														}
+														<div className="companyImages col-lg-2 col-1">
+															<div className="row pull-right">
+															{
+																elem.company_id.companyLogo[0] ? 
+																<img className="companyLogoIcon" src={elem.company_id.companyLogo[0] } alt="Company logo"/>
+																: <img className="companyLogoIcon" src= "/images/logonotfound.jpg" alt="Company logo"/>
+															}
+															</div>
 														</div>
 													</div>
 												</div>
 											</div>
-											<div>
+											<div>{
+												index.length>0
+												?
 												<div className="row">
-													<hr className="middleContentHr col-lg-10 col-lg-offset-1"/>
+													<hr className="middleContentHr col-lg-10 offset-lg-1"/>
 												</div>
+												:
+												null
+											}
+												
 											</div>
 										</div>
 										);
@@ -160,17 +172,21 @@ class MiddelContent extends Component{
 								  }
 						   </div>
 						</div>
+						</div>
 
-						<div >
-							<div className="middelContentHeadingWrapper ">
-								<div className="col-lg-1">
-									<div className="row">
-										<i className="fa fa-square midlleContentrotate45 " ></i>
+						<div className="col-12">
+						<div className="col-12">
+							<div className="row middelContentHeadingWrapper ">
+								<div className="col-12">
+									<div className="col-md-1 d-none d-lg-block">
+										<div className="row">
+											<i className="fa fa-square midlleContentrotate45 " ></i>
+										</div>
 									</div>
-								</div>
-								<div className="col-lg-11"> 
-									<div className="row middleContentHeading">
-										Education
+									<div className="col-md-11 col-12"> 
+										<div className="row middleContentHeading">
+											Education
+										</div>
 									</div>
 								</div>
 							</div>
@@ -180,29 +196,31 @@ class MiddelContent extends Component{
 									?
 									this.state.academicsArry.map((elem,index)=>{
 										return(
-												<div key={index}>
-													<div className="SubHeadingPadding">
-														<div className="profesion" key={index}>
+												<div className key={index}>
+													<div className=" SubHeadingPadding">
+														<div className="col-12 profesion" key={index}>
 															{elem.collegeSchool}
 														</div>
-														<div>
-														<div className="col-lg-10">
+														<div className="col-12">
 															<div className="row">
-																<div className="companyName" key={index}>
-																	{elem.qualificationlevel_id.qualificationLevel + ", " + elem.qualification_id.qualification + ", "}<br/>
-																	{elem.university_id.university}
+																<div className="col-lg-10 col-10">
+																	<div className="row">
+																		<div className="col-12 companyName" key={index}>
+																			{elem.qualificationlevel_id.qualificationLevel + ", " + elem.qualification_id.qualification + ", "}<br/>
+																			{elem.university_id.university}
+																		</div>
+																		<div className="col-12 companyExperience">
+																			{Moment(elem.admisionYear).format("YYYY") +" - "+Moment(elem.passOutYear).format("YYYY")}
+																		</div>
+																		<div className="col-12 companyAddress">
+																		   {elem.cityVillage + ", " + elem.state + ", " + elem.country }
+																		</div>
+																	</div>
 																</div>
-																<div className="companyExperience">
-																	{Moment(elem.admisionYear).format("YYYY") +" - "+Moment(elem.passOutYear).format("YYYY")}
-																</div>
-																<div className="companyAddress">
-																   {elem.cityVillage + ", " + elem.state + ", " + elem.country }
-																</div>
-															</div>
-														</div>
-															<div className="companyImages col-lg-2">
-																<div className="row">
-																	<img className="pull-right" src="/images/55.png" alt="College logo"/>
+																<div className="companyImages col-lg-2 col-1">
+																	<div className="row pull-right">
+																		<img className="companyLogoIcon" src="/images/collegeLogo.jpg" alt="College logo"/>
+																	</div>
 																</div>
 															</div>
 														</div>
@@ -214,6 +232,7 @@ class MiddelContent extends Component{
 										null
 									}
 							</div>
+						</div>
 						</div>
 					</div>
 				</div>

@@ -109,165 +109,201 @@ class LeftAside extends Component{
 	render(){
 
 		return(
-				<div className="container-fluid col-lg-12 ">
+				<div className="col-12 ">
 					<div className=" leftAsideWrapper ">
 						<div className="">
-							<div className="col-lg-8 col-lg-offset-2 candidateProfileImg">
-								<div className="candidateImgWrapper row">
-									{
-									this.state.profilePicture
-									?
-									<img src={ this.state.profilePicture} alt="Candidate" />
-									:
-									this.state.gender =="female"
-									?
-									<img src="/images/f.png" alt="Candidate" />
-									:
-									this.state.gender  =="male"
-									?
-									<img src="/images/m.png" alt="Candidate" />
-									:
-									<img src="/images/u.png" alt="Candidate" />
+							<div className="row candidateSmWrapper">
+								<div className="col-lg-12 col-sm-6 candidateProfileImg">
+									<div className="row justify-content-center">
+										<div className="col-lg-8 col-6 ">
+											<div className="candidateImgWrapper row">
+												{
+												this.state.profilePicture
+												?
+												<img src={ this.state.profilePicture} alt="Candidate" />
+												:
+												this.state.gender =="female"
+												?
+												<img src="/images/f.png" alt="Candidate" />
+												:
+												this.state.gender  =="male"
+												?
+												<img src="/images/m.png" alt="Candidate" />
+												:
+												<img src="/images/u.png" alt="Candidate" />
 
-									}
-									<div className="candidateName mainText">
-										{this.state.firstName+" "+this.state.lastName }
+												}
+											</div>
+										</div> 
+										<div className="col-lg-12 text-center">
+											<div className="candidateName mainText">
+												{this.state.firstName+" "+this.state.lastName }
+											</div>
+											<div className="jobName subText">
+												{this.state.lastDesignation}  
+											</div>
+										</div>
+											
 									</div>
-									<div className="jobName subText">
-										{this.state.lastDesignation}  
+								</div>
+								<div className="col-lg-12 col-sm-5">
+									<div className="candidateContactInfo  row">
+										<div className="col-12">
+											<div className="">
+												<div className="col-12">
+													<div className="row">
+														<div className="mainText">
+															Contact Info
+														</div>
+														<div className="subText contactPhone col-12">
+															<div className="row">
+																<div className="candidatePageIcon1 col-1">
+																	<div className="row">
+																	 	<i className="fa fa-mobile  fa-2x"></i>
+																	 </div>
+																</div>
+
+																<div className=" col-10">
+																	<div className="candidatePageText row">
+																		{this.state.mobile}
+																	</div>
+																</div>
+															</div>
+														</div>
+														<div className="subText contactPhone col-12">
+															<div className="row">
+																<div className="candidatePageIcon2 col-1">
+																	<div className="row">
+																	 	<i className="fa fa-envelope-o "></i>
+																	 </div>
+																</div>
+
+																<div className=" col-10">
+																	<div className="candidatePageText row">
+																		{this.state.email}
+																	</div>
+																</div>
+															</div>
+														</div>
+														<div className="subText contactPhone col-12">
+															<div className="row">
+																<div className="candidatePageIcon3 col-1">
+																	<div className="row">
+																	 	<i className="fa fa-map-marker  "></i>
+																	 </div>
+																</div>
+
+																<div className=" col-10">
+																	<div className="candidatePageText row">
+																		{ this.state.houseNumber+", "+ this.state.address +", "}<br/>
+																		{ this.state.area + ", "+ this.state.city+ ", "+ this.state.district +", "}<br/>
+																		{ this.state.state+", "+this.state.country+", "+this.state.pincode +"."}
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>
 
-							<div className="candidateContactInfo  col-lg-12">
-								<div className="row">
-									<div className="mainText">
-										Contact Info
-									</div>
-									<div className="subText contactPhone col-lg-12">
-										<div className="row">
-											<div className="candidatePageIcon1 col-lg-1">
-												<div className="row">
-												 	<i className="fa fa-mobile  fa-2x"></i>
-												 </div>
-											</div>
-
-											<div className=" col-lg-10">
-												<div className="candidatePageText row">
-													{this.state.mobile}
-												</div>
-											</div>
-										</div>
-									</div>
-									<div className="subText contactPhone col-lg-12">
-										<div className="row">
-											<div className="candidatePageIcon2 col-lg-1">
-												<div className="row">
-												 	<i className="fa fa-envelope-o "></i>
-												 </div>
-											</div>
-
-											<div className=" col-lg-10">
-												<div className="candidatePageText row">
-													{this.state.email}
-												</div>
-											</div>
-										</div>
-									</div>
-									<div className="subText contactPhone col-lg-12">
-										<div className="row">
-											<div className="candidatePageIcon3 col-lg-1">
-												<div className="row">
-												 	<i className="fa fa-map-marker  "></i>
-												 </div>
-											</div>
-
-											<div className=" col-lg-10">
-												<div className="candidatePageText row">
-													{ this.state.houseNumber+", "+ this.state.address +", "}<br/>
-													{ this.state.area + ", "+ this.state.city+ ", "+ this.state.district +", "}<br/>
-													{ this.state.state+", "+this.state.country+", "+this.state.pincode +"."}
-												</div>
-											</div>
+							<div className="candidateSkillsBlock  row">
+								<div className="col-lg-12 col-12">
+									<div className="row candidateSkillsTitle">
+										<div className="col-12 mainText">
+											My Skills
 										</div>
 									</div>
 								</div>
-							</div>
-
-							<div className="candidateSkillsBlock  col-lg-12">
-								<div className="row candidateSkillsTitle">
-									<div className="mainText">
-										My Skills
-									</div>
-								</div>
-								{ this.state.primarySkills.length > 0 ?
-								<div className="row candidateSkillsProgess">
-									<div className="subHeadingText">
-										Primary Skills
-									</div>
-
-									<ul className="candidateSkillsUl">
-										{
-											this.state.primarySkills.map((elem,index)=>{
-
-												return(
-												<li key={index}>
-													<div>
-														<i className="fa fa-square rotate45" ></i>
-															{elem.skill_id.skill}
+								<div className="col-lg-12 col-6">
+										<div className="">
+											{ this.state.primarySkills.length > 0 ?
+											<div className="row candidateSkillsProgess">
+												<div className="col-12">
+													<div className="col-12">
+														<div className="row subHeadingText">
+															Primary Skills
+														</div>
 													</div>
-													<div className="progress candidateprogess">
-														<div className="progress-bar candidateprogessBar"
-														 role="progressbar" aria-valuenow="70"
-														  aria-valuemin="0" aria-valuemax="100" 
-														  style={{width:(elem.rating*20)+"%"}}>
-														    
-														 </div>	
-														 <span className="progressBarStatus ">{elem.rating*20+"%"}</span>
+													<div className="col-12">
+														<ul className="row candidateSkillsUl">
+															{
+																this.state.primarySkills.map((elem,index)=>{
+
+																	return(
+																	<li  key={index}>
+																		<div>
+																			<i className="fa fa-square rotate45" ></i>
+																				{elem.skill_id.skill}
+																		</div>
+																		<div className="progress candidateprogess">
+																			<div className="progress-bar candidateprogessBar"
+																			 role="progressbar" aria-valuenow="70"
+																			  aria-valuemin="0" aria-valuemax="100" 
+																			  style={{width:(elem.rating*20)+"%"}}>
+																			    
+																			 </div>	
+																			 <span className="progressBarStatus ">{elem.rating*20+"%"}</span>
+																		</div>
+																	</li>
+																	);
+																	})
+																}
+															
+														</ul>
 													</div>
-												</li>
-												);
-												})
+												</div>
+											</div>
+											: null }
+										</div>
+									</div>
+									<div className="col-lg-12 col-6 secondarySkillsWrapper">
+										<div className="">
+											{ this.state.secondarySkills.length>0 ?
+												<div className="row candidateSkillsProgess">
+													<div className="col-12">
+														<div className="subHeadingText candidateSkillsSubTitle">
+															Secondary Skills
+														</div>
+														<div className="col-12">
+															<ul className="row candidateSkillsUl">
+																{
+																this.state.secondarySkills.map((elem,index)=>{
+																	return(
+																	<li key={index}>
+																		<div>
+																			<i className="fa fa-square rotate45" ></i>
+																				{elem.skill_id.skill}
+																		</div>
+																		<div className="progress candidateprogess">
+																			<div className="progress-bar candidateprogessBar" 
+																			 role="progressbar" aria-valuenow="70"
+																			 aria-valuemin="0" aria-valuemax="100" 
+																			 style={{width:(elem.rating*20)+"%"}}
+																			 >
+																			  
+																			 </div>	
+																			 <span className="progressBarStatus ">{elem.rating*20+"%"}</span>
+																		</div>
+																	</li>
+																	);
+																	})
+																}
+															</ul>
+														</div>
+													</div>
+												</div>
+												
+												: null 
 											}
-										
-									</ul>
-								</div>
-								: null }
-								{ this.state.secondarySkills.length>0 ?
-									<div className="row candidateSkillsProgess">
-										<div className="subHeadingText candidateSkillsSubTitle">
-											Secondary Skills
 										</div>
-										<ul className="candidateSkillsUl">
-											{
-											this.state.secondarySkills.map((elem,index)=>{
-												return(
-												<li key={index}>
-													<div>
-														<i className="fa fa-square rotate45" ></i>
-															{elem.skill_id.skill}
-													</div>
-													<div className="progress candidateprogess">
-														<div className="progress-bar candidateprogessBar" 
-														 role="progressbar" aria-valuenow="70"
-														 aria-valuemin="0" aria-valuemax="100" 
-														 style={{width:(elem.rating*20)+"%"}}
-														 >
-														  
-														 </div>	
-														 <span className="progressBarStatus ">{elem.rating*20+"%"}</span>
-													</div>
-												</li>
-												);
-												})
-											}
-										</ul>
 									</div>
 									
-									: null 
-								}
+								</div>
 							</div>
-						</div>
 					</div>
 				</div>
 

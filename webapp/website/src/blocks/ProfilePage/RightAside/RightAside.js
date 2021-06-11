@@ -68,8 +68,8 @@ class RightAside extends Component{
 		return(
 				<div className="container-fluid  rightAsideWrapper col-lg-12">
 					<div className=" ">
-						<div className="videoWrapper">
-							<div className="videoLigo">
+						<div className="col-lg-12 col-6 videoWrapper">
+							<div className="row videoLigo">
 								<img src="/images/49.png" alt="logo"/>
 							</div>
 						</div>
@@ -81,35 +81,55 @@ class RightAside extends Component{
 									?
 									this.state.certificationArry.map((elem,index)=>{
 										return(
-											<div className="caertificationNameWrapper" key={index}>
-												<div className="col-lg-10">
+										<div className="row">
+											<div className="col-lg-12 col-sm-6 caertificationNameWrapper" key={index}>
+												<div className="col-12">
 													<div className="row">
-														<div className="caertificationName" >
-															{elem.certName}
+														<div className="col-xl-10 col-lg-9  col-10">
+															<div className="row">
+																<div className="caertificationName col-12 " >
+																	<div className="row">
+																		{elem.certName}
+																	</div>
+																</div>
+									
+																<div className="caertificationCompanyName col-12">
+																	<div className="row">
+																		{elem.issuedBy}
+																	</div>
+																</div>
+																<div className="issueDate col-12">
+																	<div className="row">
+																		{"Issued " + Moment(elem.certifiedOn).format("MMM YYYY")}
+																	</div>
+																</div>
+																<div className="expireDate col-12">
+																	<div className="row">
+																		{"Expired " + Moment(elem.validTill).format("MMM YYYY")}
+																	</div>
+																</div>
+															</div>
 														</div>
-							
-														<div className="caertificationCompanyName ">
-															{elem.issuedBy}
+															
+														<div className="certificationImages col-xl-2 col-lg-2  col-1">
+															<div className="row">
+																<img className="pull-right" src="/images/53.png" alt="logo"/>
+															</div>
 														</div>
-														<div className="issueDate">
-															{"Issued " + Moment(elem.certifiedOn).format("MMM YYYY")}
-														</div>
-														<div className="expireDate">
-															{"Expired " + Moment(elem.validTill).format("MMM YYYY")}
-														</div>
+														{
+															index.length>0
+															?
+															<div className="col-lg-12 ">
+																<hr className="middleContentHr row "/>
+															</div>
+															:
+															null
+														}
+														
 													</div>
-												</div>
-													
-												<div className="certificationImages col-lg-2">
-													<div className="row">
-														<img className="pull-right" src="/images/53.png" alt="logo"/>
-													</div>
-												</div>
-												
-												<div className="col-lg-12 ">
-													<hr className="middleContentHr row "/>
 												</div>
 											</div>
+										</div>
 										);
 									})
 									:
@@ -120,19 +140,27 @@ class RightAside extends Component{
 						<div className="caertificationNameWrapper">
 							<div className="col-lg-12">
 							<div className="row">
-								<div className="caertificationName" >
-									Honor & Award
+								<div className="caertificationName col-12" >
+									<div className="row">
+										Honor & Award
+									</div>
 								</div>
 	
-								<div className="caertificationCompanyName ">
-									Best Employee of the year 2019 in Tata Consultncy Services
+								<div className="caertificationCompanyName col-12">
+									<div className="row">
+										Best Employee of the year 2019 in Tata Consultncy Services
+									</div>
 								</div>
 							</div>
 							</div>
 								
 							<div className="HonnerImage col-lg-12">
 								<div className="row">
-									<img className=""  src="/images/50.png" alt="logo"/>
+									<div className="col-lg-12 col-6">
+										<div className="row">
+											<img className=""  src="/images/50.png" alt="logo"/>
+										</div>
+									</div>
 								</div>
 							</div>
 							
