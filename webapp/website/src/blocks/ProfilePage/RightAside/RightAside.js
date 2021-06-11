@@ -68,7 +68,7 @@ class RightAside extends Component{
 		return(
 				<div className="container-fluid  rightAsideWrapper col-lg-12">
 					<div className=" ">
-						<div className="col-lg-12 col-6 videoWrapper">
+						<div className="col-lg-12 col-sm-6 videoWrapper">
 							<div className="row videoLigo">
 								<img src="/images/49.png" alt="logo"/>
 							</div>
@@ -81,9 +81,10 @@ class RightAside extends Component{
 									?
 									this.state.certificationArry.map((elem,index)=>{
 										return(
-										<div className="row">
-											<div className="col-lg-12 col-sm-6 caertificationNameWrapper" key={index}>
-												<div className="col-12">
+										
+											<div className="col-lg-12 col-sm-6 " key={index}>
+												<div className="row">
+												<div className="col-12 caertificationNameWrapper">
 													<div className="row">
 														<div className="col-xl-10 col-lg-9  col-10">
 															<div className="row">
@@ -156,7 +157,7 @@ class RightAside extends Component{
 								
 							<div className="HonnerImage col-lg-12">
 								<div className="row">
-									<div className="col-lg-12 col-6">
+									<div className="col-lg-12 col-sm-6">
 										<div className="row">
 											<img className=""  src="/images/50.png" alt="logo"/>
 										</div>

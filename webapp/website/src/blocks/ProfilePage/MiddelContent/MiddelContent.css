@@ -30,7 +30,7 @@
     transform: rotate(45deg);
 }
 .middleContentHeading{
-	margin-top: -5px;
+	margin-top: 2px;
 	font-size:16px;
 	letter-spacing:1px;
 	color: var(--main-heading-font-color);
@@ -39,7 +39,7 @@
 .middelContentText{	
 	min-height:100px;
 	height:auto;
-	margin-bottom:8px;
+	margin-bottom:0px;
 	padding-bottom:12px;
 	border-left:2px solid var(--main-heading-font-color);
 	font-family: Montserrat-Medium,Sans-Serif;
@@ -86,7 +86,7 @@
 	margin-right:5px;
 }
 .executiveSummaryWraap{
-	padding-left: 35px;
+	padding-left: 50px;
 	padding-top: 20px;
 }
 @media(min-width:992px) and (max-width:1024px){
@@ -114,8 +114,8 @@
 		margin-left: 0px;
 	}
 	.SubHeadingPadding{
-		margin-left: -15px;
-		margin-right: -15px;
+		margin-left: -30px;
+		margin-right: -30px;
 	}
 	.companyImages img {
 		width: 40px;

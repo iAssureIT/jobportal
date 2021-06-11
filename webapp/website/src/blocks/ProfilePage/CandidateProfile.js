@@ -12,7 +12,8 @@ class CandidateProfile extends Component{
 					<div className="  col-lg-12">
 						<div className=" candidateProfile">
 							<div className="row">
-								<div className="  col-lg-12">
+								
+
 									<div className="col-lg-3 col-md-12">
 										
 											<LeftAside/>
@@ -29,7 +30,7 @@ class CandidateProfile extends Component{
 										
 									</div>
 								</div>
-							</div>
+							
 						</div>
 					</div>
 				</div>

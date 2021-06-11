@@ -110,10 +110,10 @@ class LeftAside extends Component{
 
 		return(
 				<div className="col-12 ">
-					<div className=" leftAsideWrapper ">
+					<div className="col-12 leftAsideWrapper ">
 						<div className="">
 							<div className="row candidateSmWrapper">
-								<div className="col-lg-12 col-sm-6 candidateProfileImg">
+								<div className="col-lg-12 col-sm-5 candidateProfileImg">
 									<div className="row justify-content-center">
 										<div className="col-lg-8 col-6 ">
 											<div className="candidateImgWrapper row">
@@ -146,10 +146,10 @@ class LeftAside extends Component{
 											
 									</div>
 								</div>
-								<div className="col-lg-12 col-sm-5">
-									<div className="candidateContactInfo  row">
+								<div className="col-lg-12 col-sm-6 candidateContactInfo">
+									<div className="  ">
 										<div className="col-12">
-											<div className="">
+											<div className="row">
 												<div className="col-12">
 													<div className="row">
 														<div className="mainText">
@@ -218,7 +218,7 @@ class LeftAside extends Component{
 										</div>
 									</div>
 								</div>
-								<div className="col-lg-12 col-6">
+								<div className="col-lg-12 col-sm-6">
 										<div className="">
 											{ this.state.primarySkills.length > 0 ?
 											<div className="row candidateSkillsProgess">
@@ -246,7 +246,7 @@ class LeftAside extends Component{
 																			  style={{width:(elem.rating*20)+"%"}}>
 																			    
 																			 </div>	
-																			 <span className="progressBarStatus ">{elem.rating*20+"%"}</span>
+																			 <span className="progressBarStatus " style={{left:(elem.rating*20)+"%"}}>{elem.rating*20+"%"}</span>
 																		</div>
 																	</li>
 																	);
@@ -260,7 +260,7 @@ class LeftAside extends Component{
 											: null }
 										</div>
 									</div>
-									<div className="col-lg-12 col-6 secondarySkillsWrapper">
+									<div className="col-lg-12 col-sm-6 secondarySkillsWrapper">
 										<div className="">
 											{ this.state.secondarySkills.length>0 ?
 												<div className="row candidateSkillsProgess">
@@ -286,7 +286,7 @@ class LeftAside extends Component{
 																			 >
 																			  
 																			 </div>	
-																			 <span className="progressBarStatus ">{elem.rating*20+"%"}</span>
+																			 <span className="progressBarStatus " style={{left:(elem.rating*20)+"%"}}>{elem.rating*20+"%"}</span>
 																		</div>
 																	</li>
 																	);

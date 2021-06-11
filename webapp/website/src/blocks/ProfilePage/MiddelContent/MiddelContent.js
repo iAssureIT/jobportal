@@ -82,34 +82,36 @@ class MiddelContent extends Component{
 					<div className="row ">
 						<div className="col-12">
 						<div className="col-12">
-							<div className="middelContentHeadingWrapper ">
+							<div className="row middelContentHeadingWrapper ">
 								<div className="col-md-1 d-none d-lg-block">
-									<div className="row">
+									<div className="">
 										<i className="fa fa-square midlleContentrotate45 " ></i>
 									</div>
 								</div>
 								<div className="col-md-11 col-12"> 
-									<div className="row middleContentHeading">
+									<div className=" middleContentHeading">
 										Executive Summary 
 									</div>
 								</div>
 							</div>
 							<div className="middelContentText executiveSummaryWraap col-lg-12">
+							<div className="row">
 								<div className="col-12" dangerouslySetInnerHTML = {{ __html : this.state.executiveSummary}} />
+							</div>
 							</div>
 						</div>
 						</div>
 
 						<div className="col-12">
 						<div className="col-12">
-							<div className="middelContentHeadingWrapper ">
+							<div className="row middelContentHeadingWrapper ">
 								<div className="col-md-1 d-none d-lg-block">
-									<div className="row">
+									<div className="">
 										<i className="fa fa-square midlleContentrotate45 " ></i>
 									</div>
 								</div>
 								<div className="col-md-11 col-12"> 
-									<div className="row middleContentHeading">
+									<div className=" middleContentHeading">
 										Work Experience
 									</div>
 								</div>
@@ -177,18 +179,19 @@ class MiddelContent extends Component{
 						<div className="col-12">
 						<div className="col-12">
 							<div className="row middelContentHeadingWrapper ">
-								<div className="col-12">
+								
+
 									<div className="col-md-1 d-none d-lg-block">
-										<div className="row">
+										<div className="">
 											<i className="fa fa-square midlleContentrotate45 " ></i>
 										</div>
 									</div>
 									<div className="col-md-11 col-12"> 
-										<div className="row middleContentHeading">
+										<div className=" middleContentHeading">
 											Education
 										</div>
 									</div>
-								</div>
+								
 							</div>
 							<div className="middelContentText  col-lg-12">
 								{

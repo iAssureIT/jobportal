@@ -109,7 +109,6 @@
     transform: rotate(45deg);
 }
 .candidateSkillsProgess .candidateprogess{
-	display: block;
 	margin:0px;
 	padding:0px;
 	height:3px;
