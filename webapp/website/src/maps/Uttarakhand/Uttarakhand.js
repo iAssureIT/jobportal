@@ -49,9 +49,9 @@ class Uttarakhand extends Component{
 	
 	}
 	render(){
-		console.log("Uttarakhand...............................");
+		
 		return(
-			<div className="bodyWrapper">
+			<div className="bodyWrapper col-12">
 				<div className="stateWrapper">
 
 					<div className="uttarkashi classHover" onClick={e => this.onDistrictClick("Uttarkashi","UK")}> 

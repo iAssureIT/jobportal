@@ -48,7 +48,7 @@ class Lakshadweep extends Component{
 	}
 	render(){
 		return(
-			<div className="bodyWrapper">
+			<div className="bodyWrapper col-12">
 				<div className="stateWrapper">
 					<div className="Lakshadweep classHover" onClick={e => this.onDistrictClick("Lakshadweep","LD")}> 
 						<img src="/Maps/Lakshadweep/Lakshadweep.png" alt="Lakshadweep" onMouseOver={e => (e.currentTarget.src = "/Maps/Lakshadweep/Lakshadweep_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Lakshadweep/Lakshadweep.png")}/>

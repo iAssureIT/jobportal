@@ -48,7 +48,7 @@ class DamanDiu extends Component{
 	}
 	render(){
 		return(
-			<div className="bodyWrapper">
+			<div className="bodyWrapper col-12">
 				<div className="stateWrapper">
 					<div className="DamanDiu classHover" onClick={e => this.onDistrictClick("DamanDiu","DD")}> 
 						<img src="/Maps/DamanDiu/DamanDiu.png" alt="DamanDiu" onMouseOver={e => (e.currentTarget.src = "/Maps/DamanDiu/DamanDiu_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/DamanDiu/DamanDiu.png")}/>

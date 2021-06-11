@@ -384,7 +384,9 @@ removeApplication = (job_id, male, female, other, state, stateCode, country,coun
 }
 	
 	render(){
-		console.log(this.props.selector)
+		// console.log(this.props.selector)
+		// console.log(this.props.viewMode)
+		// console.log(this.props.jobList)
 		return(
 			<section className="jobListWrapper">
 				<div className="col-12 JobListWrapperMain">
@@ -573,7 +575,7 @@ removeApplication = (job_id, male, female, other, state, stateCode, country,coun
 
 const mapStateToProps = (state)=>{
     return {
-    	userDetails 	: state.userDetails,	selector        	: state.selector, 	
+    	userDetails 	: state.userDetails,	selector        	: state.selector,  viewMode: state.viewMode,	
     	jobList 		: state.jobList,		jobCount  			: state.jobCount,
     	jobWishlist 	: state.jobWishlist, 	jobWishlistSelector : state.jobWishlistSelector,
     	appliedJoblist  : state.appliedJoblist, appliedJobSelector 	: state.appliedJobSelector

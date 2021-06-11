@@ -7,6 +7,7 @@ import { connect }            from 'react-redux';
 import { bindActionCreators } from 'redux';
 import  * as mapActionCreator from '../../common/actions/index';
 import './UttarPradesh.css';
+import './uttarMedia.css';
 import '../global.css';
 
 
@@ -49,8 +50,8 @@ class UttarPradesh extends Component{
 	}
 	render(){
 		return(
-			<div className="bodyWrapper">
-				<div className="stateWrapper">
+			<div className="bodyWrapper col-12">
+				<div className="stateWrapper uttarMedia">
 					<div className="sharanpur classHover" onClick={e => this.onDistrictClick("Sharanpur","UP")}> 
 						<img src="/Maps/Uttar_Pradesh/Sharanpur.png"  alt="Sharanpur" 
 						 onMouseOver={e => (e.currentTarget.src = "/Maps/Uttar_Pradesh/Sharanpur_.png")} 

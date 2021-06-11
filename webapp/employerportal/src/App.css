@@ -80,22 +80,6 @@ body{
   color: #fff
 }
 
-/************************/
-
-/* Chrome, Safari, Edge, Opera */
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-/* Firefox */
-input[type=number] {
-  -moz-appearance: textfield;
-}
-
-
-
 /*******************************************************swal custom classes*******************************************************************/
 
 .swal2-container:not(.swal2-top):not(.swal2-top-start):not(.swal2-top-end):not(.swal2-top-left):not(.swal2-top-right):not(.swal2-center-start):not(.swal2-center-end):not(.swal2-center-left):not(.swal2-center-right):not(.swal2-bottom):not(.swal2-bottom-start):not(.swal2-bottom-end):not(.swal2-bottom-left):not(.swal2-bottom-right):not(.swal2-grow-fullscreen)>.swal2-modal {
@@ -203,6 +187,7 @@ input[type=number] {
 }
 
 /************************************************************************************************************************************/
+
 /* Auto suggestion color*/
 /* Change the white to any color */
 input:-webkit-autofill,
@@ -217,4 +202,18 @@ input:-webkit-autofill:active
 input:-webkit-autofill
 {
  -webkit-text-fill-color: #efefef !important;
+}
+
+/*************************************************************************************************************************************/
+
+/* Chrome, Safari, Edge, Opera (Remove spin button)*/
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
 }

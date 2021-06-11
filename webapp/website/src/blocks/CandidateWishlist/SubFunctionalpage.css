@@ -42,7 +42,7 @@
 
 }
 
-.viewDiv{
+/*.viewDiv{
 	width: 90%;
 	margin: auto;
 	height: 50px;
@@ -87,7 +87,7 @@
 	min-height: 300px;
 	
 	z-index: 200;
-}
+}*/
 .filterWrapper{
 	height: auto;
 	min-height: 40px;

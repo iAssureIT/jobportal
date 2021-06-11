@@ -50,7 +50,7 @@ class Orissa extends Component{
 	}
 	render(){
 		return(
-			<div className="bodyWrapper">
+			<div className="bodyWrapper col-12">
 				<div className="stateWrapper">
 					<div className="malkangir classHover" onClick={e => this.onDistrictClick("Malkangir","OD")}> 
 						<img src="/Maps/Orissa/Malkangir.png"  alt="Malkangir" 

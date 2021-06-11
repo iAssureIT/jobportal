@@ -48,7 +48,7 @@ class Andaman_Nicobar extends Component{
 	}
 	render(){
 		return(
-			<div className="bodyWrapper">
+			<div className="bodyWrapper col-12">
 				<div className="stateWrapper">
 					<div className="Andaman_Nicobar classHover" onClick={e => this.onDistrictClick("Andaman_Nicobar","LA")}> 
 						<img src="/Maps/Andaman_Nicobar/Andaman_Nicobar.png" alt="Andaman_Nicobar" onMouseOver={e => (e.currentTarget.src = "/Maps/Andaman_Nicobar/Andaman_Nicobar_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Andaman_Nicobar/Andaman_Nicobar.png")}/>

@@ -50,7 +50,7 @@ class Nagaland extends Component{
 	
 	render(){
 		return(
-			<div className="bodyWrapper">
+			<div className="bodyWrapper col-12">
 				<div className="stateWrapper">
 					<div className="peren classHover" onClick={e => this.onDistrictClick("Peren","NL")}> 
 						<img src="/Maps/Nagaland/Peren.png"  alt="Peren" onMouseOver={e => (e.currentTarget.src = "/Maps/Nagaland/Peren_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Nagaland/Peren.png")}/>

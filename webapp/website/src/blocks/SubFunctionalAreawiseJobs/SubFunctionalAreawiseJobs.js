@@ -24,8 +24,9 @@ class SubFunctionalAreawiseJobs extends Component{
         selector.showMoreLimit         = 25;
           
         mapAction.jobCount(selector); 
+        mapAction.setListMode(1);
         mapAction.filterJobList(this.props.selector);
-        mapAction.setViewMode("listView");
+        //mapAction.setViewMode("listView");
         /*if(this.props.match.path=="/country/:countryCode/state/:stateCode/city/:district/function/:functionalArea/:functionalArea_id"){
             this.props.history.push("/country/"+this.props.match.params.countryCode+"/state/"+this.props.match.params.stateCode+"/city/"+this.props.match.params.district+"/function/"+this.props.match.params.functionalArea+"/"+this.props.match.params.functionalArea_id +"/subfunction/"+subfunctionalArea+"/"+_id );
         }

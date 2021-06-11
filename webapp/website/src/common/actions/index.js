@@ -28,7 +28,11 @@ export const setUserDetails = (userDetails )=> ({
 });
 export const setViewMode = (viewMode )=> ({
       type 				: 'SET_VIEW_MODE',
-      viewMode 			: viewMode
+      viewMode 		: viewMode
+});
+export const setListMode = (listView )=> ({
+      type        : 'SET_LIST_MODE',
+      listView    : listView
 });
 export const setMapView = (mapView )=> ({
       type 				: 'SET_MAP_VIEW',

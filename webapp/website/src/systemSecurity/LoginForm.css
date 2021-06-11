@@ -17,7 +17,6 @@
     height: auto;
   /*background-color:#242931;*/
  	padding-bottom: 100px;
-	
 }
 
 .loginFormInner{
@@ -138,6 +137,7 @@
   font-size: 14px;
   font-family: 'Montserrat-Regular';
   letter-spacing: 1px;
+  height: 34px;
 
 }
 
@@ -145,7 +145,6 @@
 	border-color: #D3950A;
 	box-shadow: 0px 1px 1px rgba(211, 149, 10, 0.075) inset, 0px 0px 8px rgba(211, 149, 10, 0.5)  !important;
 }
-
 
 .loginInputIcon1{
 	font-size: 20px;
@@ -157,18 +156,27 @@
 .loginInputIcon2{
 	font-size: 18px;
 	border: 1px solid #D3950A !important;
-	border-right: transparent !important;
 	background-color: transparent !important;
 	color: #eee;
+	padding: 5px 13px 5px 13px;
+	/*border-top-left-radius: 4px;
+	border-bottom-left-radius: 4px;*/
 }
 
 .loginInputIcon3{
 	font-size: 18px;
 	border: 1px solid #D3950A !important;
-	border-left: transparent!important;
+	/*border-left: none !important;*/
 	background-color: transparent !important;
 	color: #eee;
+	padding: 5px 10px 5px 10px;
 	z-index: 100;
+	border-top-right-radius: 4px !important;
+	border-bottom-right-radius: 4px !important;
+}
+
+input-group.loginPwdField{
+	border-radius: 4px !important;
 }
 
 .loginformGroup{
@@ -182,6 +190,7 @@
 	margin-bottom: 2px;
 	font-size: 14px;
 	font-family: 'Montserrat-Bold';
+	/*margin-right: -79px;*/
 }
 
 .buttonSignIn:hover{
@@ -243,97 +252,73 @@
 .img1Login{
 	position: absolute;
 	height: 200px;
-	width: 125px;
-	top:0px;
-	left:55%;
+	top: -5px;
+	left: 61%;
 	z-index: 1;
 }
 
 .img1oginInner{
 	height: 200px;
-	width: 125px;
-
-	
 }
-
 
 .img2Login{
 	position: absolute;
 	height: 300px;
-	width: 180px;
-	bottom: 70px;
-	left:23%;
+	bottom: 79px;
+	left: 2%;
 	z-index: 1;
-
-	
 }
 
 .img2loginInner{
 	height: 300px;
-	width: 180px;
 }
-
-
-
 
 .img3Login{
 	position: absolute;
 	height: 290px;
-	width: 110px;
 	bottom: 75px;
-	left:61.5%;
+	left: 75.1%;
 	z-index: 1;
-	
 }
 
 .img3loginInner{
 	height: 290px;
-	width: 110px;
 }
-
-
 
 .img4Login{
 	position: absolute;
 	height: 100px;
-	width: 50px;
-	
-	bottom: 65px;
-    left: 38%;
+	bottom: 74px;
+    left: 27%;
 	z-index: 1;
 }
 
 .img4loginInner{
-	height: 100px;
-	width: 50px;
+	height: 164px;
 }
 
 .img5Login{
 	position: absolute;
 	height: 135px;
-	width: 125px;
 	bottom: 100px;
-    left: 65%;
+    left: 83%;
 	z-index: 0;
 }
 
 .img5loginInner{
-	height: 135px;
-	width: 125px;
+	height: 98px;
 }
 
 .img6Login{
 	position: absolute;
 	height: 80px;
-	width: 60px;
-	top: 130px;
-    left: 29.6%;
+	top: 120px;
+    left: 89px;
 	z-index: 0;
 }
 
 .img6loginInner{
-	height: 80px;
-	width: 60px;
+	height: 90px;
 }
 
 
@@ -342,10 +327,31 @@
 	font-family: 'Montserrat-Regular';
 	font-size: 11px;
 }
+
+.modal-content{
+	background-color:#242931 !important;
+}
+
+.closebtnmodal{
+	position: absolute;
+	right: 14px;
+	font-size: 30px !important;
+}
+
+/*.modal-body{
+	background: none !important; 
+}*/
+
 .OTPSentWrapper{
-	min-height: 650px;
+	min-height: 999px;
+	z-index: 900 !important;
 	height: auto;
 	background-color:#242931 !important;
+	margin-top: 340px;
+}
+
+.OTPSentLoginWrapper{
+	/*padding-top: 80px;*/
 }
 
 .OTPSent{
@@ -366,7 +372,6 @@
 
 .OTPSentHr{
 	width:92%;
-	
 	border-top: 1px solid #D3950A;
 }
 
@@ -412,3 +417,307 @@ input:-webkit-autofill
 {
  -webkit-text-fill-color: #efefef !important;
 }
+
+
+.forgotpwdLabel{
+	margin-left: -15px;
+}
+
+
+/********************************Media Query*****************************/
+
+/*@media only screen 
+  and (min-device-width: 320px) 
+  and (max-device-width: 812px)
+  and (-webkit-min-device-pixel-ratio: 2)
+  and (orientation: landscape) {
+
+.OTPSentWrapper{
+	min-height: 661px !important;
+	margin-top: 58px !important;
+}
+
+
+}*/
+
+
+
+/*@media screen and (max-width: 480px){
+
+.OTPSentWrapper{
+	min-height: 661px;
+	margin-top: 58px;
+}
+	
+}*/
+
+@media screen and (max-width: 1537px){
+
+.OTPSentWrapper{
+	min-height: 663px;
+	margin-top: 100px;
+}
+
+.img1Login {
+    left: 60%;
+}
+
+.img2Login {
+    left: 2%;
+    bottom: 65px;
+}
+
+.img3Login {
+    left: 75%;
+}
+
+.img4Login {
+    bottom: 69px;
+    left: 30%;
+}
+
+.img4loginInner {
+    height: 146px;
+}
+
+.img5Login {
+    left: 83%;
+}
+
+.img6Login {
+    left: 81px;
+}
+
+}
+
+@media screen and (max-width: 1441px){
+
+.OTPSentWrapper{
+	min-height: 798px;
+	margin-top: 100px;
+}
+
+}
+
+@media screen and (max-width: 1367px){
+
+.OTPSentWrapper{
+	min-height: 665px;
+	margin-top: 100px;
+}
+
+.img1Login {
+    left: 59%;
+}
+
+.img2Login {
+    left: 0%;
+}
+
+.img3Login {
+    left: 74%;
+}
+
+.img4Login {
+    bottom: 65px;
+    left: 31%;
+}
+
+.img5Login {
+    left: 82%;
+}
+
+.img6Login {
+    left: 67px;
+}
+	
+}
+
+@media screen and (max-width: 1024px){
+
+.OTPSentWrapper{
+	min-height: 665px;
+	margin-top: 100px;
+}
+
+.img1Login {
+    left: 60%;
+}
+
+.img2Login {
+    left: 2%;
+}
+
+.img3Login {
+    left: 75%;
+}
+
+.img4Login {
+    bottom: 69px;
+    left: 30%;
+}
+
+.img4loginInner {
+    height: 146px;
+}
+
+.img5Login {
+    left: 83%;
+}
+
+.img6Login {
+    left: 85px;
+}
+	
+}
+
+
+@media screen and (max-width: 852px){
+
+.OTPSentWrapper{
+	min-height: 634px;
+	margin-top: 38px;
+}
+	
+}
+
+@media screen and (max-width: 768px){
+
+.OTPSentWrapper{
+	min-height: 828px;
+    margin-top: 208px;
+}
+	
+}
+
+@media screen and (max-width: 736px){
+
+.OTPSentWrapper{
+	min-height: 634px;
+	margin-top: 38px;
+}
+	
+}
+
+@media screen and (max-width: 667px){
+
+.OTPSentWrapper{
+	min-height: 634px;
+	margin-top: 38px;
+}
+	
+}
+
+@media screen and (max-width: 640px){
+
+.OTPSentWrapper{
+	min-height: 634px;
+	margin-top: 38px;
+}
+	
+}
+
+@media screen and (max-width: 568px){
+
+.OTPSentWrapper{
+	min-height: 634px;
+	margin-top: 38px;
+}
+	
+}
+
+@media screen and (max-width: 480px){
+
+.OTPSentWrapper{
+	min-height: 999px;
+	margin-top: 340px;
+}
+	
+}
+
+@media screen and (max-width: 394px){
+
+.OTPSentWrapper{
+	min-height: 1121px;
+	margin-top: 510px;
+}
+	
+}
+
+@media screen and (max-width: 384px){
+
+.OTPSentWrapper{
+	min-height: 1000px;
+	margin-top: 340px;
+}
+	
+}
+
+/*@media screen and (max-width: 376px){
+
+.OTPSentWrapper{
+	min-height: 1100px;
+	margin-top: 530px;
+}
+	
+}*/
+
+@media screen and (max-width: 375px){
+
+.OTPSentWrapper{
+	min-height: 1100px;
+	margin-top: 530px;
+}
+	
+}
+
+@media screen and (max-width: 360px){
+
+.OTPSentWrapper{
+	min-height: 999px;
+	margin-top: 340px;
+}
+	
+}
+
+@media screen and (max-width: 320px){
+
+.OTPSentWrapper{
+	min-height: 999px;
+	margin-top: 340px;
+}
+
+}
+
+
+/*ipad pro*/
+@media only screen 
+  and (min-device-width: 1024px) 
+  and (max-device-width: 1024px) 
+  and (orientation: portrait) 
+  and (-webkit-min-device-pixel-ratio: 2) {
+
+.OTPSentWrapper{
+	min-height: 984px;
+	margin-top: 380px;
+}
+
+}
+
+/*iPhone x*/
+@media only screen 
+    and (device-width : 375px) 
+    and (device-height : 812px) 
+    and (-webkit-device-pixel-ratio : 3) { 
+
+.OTPSentWrapper{
+	min-height: 1112px;
+	margin-top: 520px;
+}
+
+}
+
+
+
+
+

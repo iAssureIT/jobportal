@@ -10,11 +10,11 @@ export const FormInput = props => {
   return (
     <Input
       placeholderTextColor={'#bbb'}
-      inputStyle={{fontSize: 13}}
+      inputStyle={{fontSize: 12}}
       errorMessage={touched[name] && errors[name] ? errors[name] : ''}
       label={
-        <Text style={{fontFamily:'Montserrat-Regular', fontSize: 14,}}>
-          <Text style={{fontFamily:"Montserrat-Regular",color:'#fff',fontSize: 13,}}>{props.labelName}</Text>{' '}
+        <Text style={{fontFamily:'Montserrat-Regular', fontSize: 12,}}>
+          <Text style={{fontFamily:"Montserrat-Regular",color:'#fff',fontSize: 12,}}>{props.labelName}</Text>{' '}
           <Text style={{color: 'red', fontSize: 12}}>
             {props.required && '*'}
           </Text>
@@ -25,21 +25,22 @@ export const FormInput = props => {
       inputContainerStyle= {styles.containerStyle}
       leftIconContainerStyle={styles.leftIconContainerStyle}
       errorStyle={{ color: 'red' ,margin:0}}
-      inputStyle={{textAlignVertical: "top",color:'#fff'}}
-      containerStyle={{height:100}}
-    
+      inputStyle={{textAlignVertical: "top",color:'#fff',fontSize:11}}
+      // containerStyle={{height:100}}
     />
   );
 };
 
 const styles = StyleSheet.create({
   containerStyle:{
-   borderWidth:0.5,
+   borderBottomWidth:.5,
+   borderWidth:.5,
     borderRadius:5,
     width:"100%",
     height:43,
     borderColor:"#f5a721",
-    backgroundColor:"#242933", color:'#fff',
+    backgroundColor:"#242933",
+    color:'#fff',
     
   },
   leftIconContainerStyle:{

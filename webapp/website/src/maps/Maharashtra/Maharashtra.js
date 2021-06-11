@@ -53,7 +53,7 @@ class Maharashtra extends Component{
 	}
 	render(){
 		return(
-			<div className="bodyWrapper">
+			<div className="bodyWrapper col-12">
 				<div className="stateWrapper">
 
 					<div className="thane classHover" onClick={e => this.onDistrictClick("Thane","MH")}> 

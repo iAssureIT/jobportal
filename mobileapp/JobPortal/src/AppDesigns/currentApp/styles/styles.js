@@ -1,9 +1,9 @@
 export const colors = {
-  background: '#F5F2F9',
+  background: '#1F262D',
   errorText: '#FA3256',
   headerText: '#444444',
   buttonBackground: '#ed3c55',
-  inputBackground: '#FFFFFF',
+  inputBackground: '#242933',
   inputDivider: '#E4E2E5',
   buttonRED:'#c10000',
   buttonGreen:'#ed3c55',

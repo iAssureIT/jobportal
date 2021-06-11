@@ -1,0 +1,27 @@
+@media only screen and (min-width: 1200px) {
+  .uttarMedia {
+  	left: -5px;}
+}
+@media(min-width:992px) and (max-width:1024px){
+ .uttarMedia{
+ 
+ 
+ }
+}
+@media(min-width:768px) and (max-width:992px){
+.uttarMedia{
+
+ }
+
+
+}
+@media(min-width:576px) and (max-width:768px){
+.uttarMedia{
+
+ }
+}
+@media (max-width:576px){
+ .uttarMedia{
+
+ }	
+}

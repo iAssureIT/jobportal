@@ -48,7 +48,7 @@ class Ladakh extends Component{
 	}
 	render(){
 		return(
-			<div className="bodyWrapper">
+			<div className="bodyWrapper col-12">
 				<div className="stateWrapper">
 					<div className="Ladakh classHover" onClick={e => this.onDistrictClick("Ladakh","LA")}> 
 						<img src="/Maps/Jammu_Kashmir___Ladakh/Ladakh.png" alt="Ladakh" onMouseOver={e => (e.currentTarget.src = "/Maps/Jammu_Kashmir___Ladakh/Ladakh_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Jammu_Kashmir___Ladakh/Ladakh.png")}/>

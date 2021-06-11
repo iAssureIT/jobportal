@@ -49,17 +49,18 @@ import AsyncStorage         from '@react-native-async-storage/async-storage';
         <React.Fragment>
           <Formik
             onSubmit={(data) => {
-              console.log("data",data);
+              console.log("data52",data);
               setLoading(true);
               let {username, password} = data;
-              const payload = {
+              var formValues = {
                 username  : username,
                 password  : password,
-                role      : "user"
+                role      : "candidate"
               };
-              console.log()
+              console.log("payload",formValues)
+             
               axios
-                .post('/api/auth/post/login/mob_email', payload)
+                .post('/api/auth/post/login/mob_email', formValues)
                 .then((res) => {
                   console.log("res",res);
                   setLoading(false);
@@ -247,7 +248,7 @@ import AsyncStorage         from '@react-native-async-storage/async-storage';
               onPress     = {handleSubmit}
               background  = {true}
               loading     = {btnLoading}
-               iconRight
+              iconRight
               icon={
                     <Icon
                       name="angle-double-right"

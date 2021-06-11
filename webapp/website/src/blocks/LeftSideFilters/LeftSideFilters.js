@@ -348,8 +348,9 @@ class LeftSideFilters extends Component{
     selector.startLimit     = 0;
     selector.initialLimit   = 25;
     selector.showMoreLimit  = 25;
-      
+    
     this.setState({ selector: selector },()=>{
+      console.log(this.state.selector)
         mapAction.jobCount(this.state.selector);
       if (this.props.viewMode=="mapView" ) {
         mapAction.filterMapData(selector);
@@ -374,15 +375,17 @@ class LeftSideFilters extends Component{
       // if (this.props.viewMode=="functionalView" && this.props.match.params.functionalArea != "all") {
       //   mapAction.filterSubfunctionalData(this.state.selector);
       // }
-      console.log(this.props.match)
-      if (this.props.viewMode=="functionalView" && this.props.match.params.functionalArea != "all"
-        && this.props.match.path == "/country/:countryCode/state/:stateCode/city/:district/industry/:industryName/:industry_id/function/:functionalArea/:functionalArea_id/subfunction/:subfunctionalArea/:subfunctionalArea_id" ) {
+      
+      if (this.props.viewMode=="functionalView" && 
+        this.props.match.path == "/country/:countryCode/state/:stateCode/city/:district/industry/:industryName/:industry_id/function/:functionalArea/:functionalArea_id/subfunction/:subfunctionalArea/:subfunctionalArea_id"
+        && this.props.match.params.functionalArea != "all" && !this.props.listView) {
         mapAction.filterSubfunctionalData(this.state.selector);
       }
       if (this.props.viewMode=="industrialView") {
         mapAction.filterIndustrialData(this.state.selector);
       }
-      if (this.props.viewMode=="listView") {
+      if (this.props.listView) {
+        console.log(this.state.selector)
         mapAction.filterJobList(this.state.selector);
       }
     })
@@ -400,7 +403,7 @@ class LeftSideFilters extends Component{
         <div className="row">
 
 
-                <div className="form-group col-md-12 col-lg-12 col-xl-12">
+                <div className="form-group col-4 col-sm-4 col-md-4 col-lg-12 col-xl-12">
                   <div className=''>
                     <div className="input-group ">
                       
@@ -417,7 +420,7 @@ class LeftSideFilters extends Component{
                     </div>
                   </div>
                 </div> 
-                <div className="form-group col-md-12 col-lg-12 col-xl-12">
+                <div className="form-group col-4 col-sm-4 col-md-4 col-lg-12 col-xl-12">
                   <div className=''>
                     <div className="input-group">
                       
@@ -434,7 +437,7 @@ class LeftSideFilters extends Component{
                     </div>
                   </div>
                 </div> 
-                <div className="form-group col-md-12 col-lg-12 col-xl-12">
+                <div className="form-group col-4 col-sm-4 col-md-4 col-lg-12 col-xl-12">
                   <div className=''>
                     <div className="input-group ">
                       
@@ -451,7 +454,7 @@ class LeftSideFilters extends Component{
                     </div>
                   </div>
                 </div>
-                <div className="form-group col-md-12 col-lg-12 col-xl-12">
+                <div className="form-group col-4 col-sm-4 col-md-4 col-lg-12 col-xl-12">
                   <div className=''>
                     <div className="input-group ">
                       
@@ -468,7 +471,7 @@ class LeftSideFilters extends Component{
                     </div>
                   </div>
                 </div>
-                <div className="form-group col-md-12 col-lg-12 col-xl-12">
+                <div className="form-group col-4 col-sm-4 col-md-4 col-lg-12 col-xl-12">
                   <div className=''>
                     <div className="input-group">
                       
@@ -485,7 +488,7 @@ class LeftSideFilters extends Component{
                     </div>
                   </div>
                 </div> 
-                <div className="form-group col-md-12 col-lg-12 col-xl-12">
+                <div className="form-group col-4 col-sm-4 col-md-4 col-lg-12 col-xl-12">
                     <div className=''>
                       <div className="input-group ">
                         
@@ -502,7 +505,7 @@ class LeftSideFilters extends Component{
                       </div>
                     </div>
                 </div>    
-                <div className="form-group col-md-12 col-lg-12 col-xl-12">
+                <div className="form-group col-4 col-sm-4 col-md-4 col-lg-12 col-xl-12">
                     <div className=''>
                       <div className="input-group ">
                         
@@ -519,7 +522,7 @@ class LeftSideFilters extends Component{
                       </div>
                     </div>
                 </div>
-                <div className="form-group col-md-12 col-lg-12 col-xl-12">
+                <div className="form-group col-4 col-sm-4 col-md-4 col-lg-12 col-xl-12">
                   <div className="">
                     <div className="input-group ">
                       
@@ -550,7 +553,7 @@ class LeftSideFilters extends Component{
 const mapStateToProps = (state)=>{
     return {
             selector    : state.selector,
-            viewMode    : state.viewMode
+            viewMode    : state.viewMode, listView: state.listView
     }
 }
 const mapDispatchToProps = (dispatch) => ({

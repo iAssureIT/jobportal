@@ -350,11 +350,13 @@ exports.user_signup_user_otp = (req, res, next) => {
 													if (!req.body.firstname) {
 														user.profile.fullName = req.body.fullName;
 													}
+													console.log("user.profile.fullName",user.profile.fullName)
 													user.save()
 														.then(result => {
 															console.log('bef mail===',result)
 
 															if (result) {
+																// console.log('bef mail359===',result)
 															// 	request({
 															// 		"method": "POST",
 															// 		"url": "http://localhost:" + globalVariable.port + "/send-email",
@@ -383,7 +385,7 @@ exports.user_signup_user_otp = (req, res, next) => {
 															main();
 										                        async function main(){ 
 											                    	//var sendMail = await sendEmail(req.body.email,req.body.emailSubject,req.body.emailContent + " Your OTP is " + emailOTP);
-											                    	res.status(200).json({ message: "USER_CREATED", ID: result._id, OTP:emailOTP })
+											                    	res.status(200).json({ message: "USER_CREATED", ID: result._id, OTP:emailOTP})
 											                     }
 															}else {
 																res.status(200).json({ message: "USER_NOT_CREATED" })

@@ -1,5 +1,5 @@
 .bodyWrapper{
-	min-height: 1100px;
+	min-height: 1150px;
 	height: auto!important;
 	background-color: #1f262d;
 	color: #f5a721;
@@ -15,7 +15,7 @@
 
 .stateWrapper{
 	width:100%;
-	min-height: 1000px;
+	min-height: 1150px;
 	height: auto;
 	margin: auto;
 	/*border: 1px solid #ff0;*/

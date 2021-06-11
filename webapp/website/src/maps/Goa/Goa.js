@@ -49,7 +49,7 @@ class Goa extends Component{
 	}
 	render(){
 		return(
-			<div className="bodyWrapper">
+			<div className="bodyWrapper col-12">
 				<div className="stateWrapper">
 					<div className="pernem classHover" onClick={e => this.onDistrictClick("Pernem","GA")}> 
 						<img src="/Maps/Goa/Pernem.png"  alt="Pernem" 

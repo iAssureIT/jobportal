@@ -52,15 +52,17 @@ export default StyleSheet.create({
       },
       android: {
         // marginTop: 10,
-        marginBottom:10,
+        // marginBottom:10,
         paddingTop: 0,
         paddingLeft: 0,
-        borderBottomWidth:0,
+        borderBottomWidth:1,
+        borderBottomColor:"#4B5666",
         paddingRight: 0,
-        backgroundColor: '#242933',
+        backgroundColor: '#191C24',
+
         // borderTopWidth: 3,
         // borderTopColor: colors.theme,
-        height: 120,
+        height: 150,
       }
     })
   },

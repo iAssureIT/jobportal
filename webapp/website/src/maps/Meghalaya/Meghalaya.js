@@ -49,7 +49,7 @@ class Meghalaya extends Component{
 	}
 	render(){
 		return(
-			<div className="bodyWrapper">
+			<div className="bodyWrapper col-12">
 				<div className="stateWrapper">
 					
 					<div className="westGaroHills classHover" onClick={e => this.onDistrictClick("West Garo Hills","ML")}> 

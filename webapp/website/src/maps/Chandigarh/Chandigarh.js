@@ -48,7 +48,7 @@ class Chandigarh extends Component{
 	}
 	render(){
 		return(
-			<div className="bodyWrapper">
+			<div className="bodyWrapper col-12">
 				<div className="stateWrapper">
 					<div className="Chandigarh classHover" onClick={e => this.onDistrictClick("Chandigarh","LA")}> 
 						<img src="/Maps/Chandigarh/Chandigarh.png" alt="Chandigarh" onMouseOver={e => (e.currentTarget.src = "/Maps/Chandigarh/Chandigarh_.png")} onMouseOut={e => (e.currentTarget.src = "/Maps/Chandigarh/Chandigarh.png")}/>

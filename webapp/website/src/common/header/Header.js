@@ -319,7 +319,7 @@ class Header extends Component{
           
             <div className="col-12 FunctionalHeaderWrapper">
               <div className="row">
-                  <div className="col-2 col-sm-2 col-md-1 col-lg-1 col-xl-1">
+                  <div className="col-3 col-sm-3 col-md-1 col-lg-1 col-xl-1">
                     <div className="iconHeader">
                       <a href="/">
                         <img src="/images/1.png" alt="icon"  className="iIcon"/>
@@ -328,7 +328,7 @@ class Header extends Component{
                   </div>
 
                   {window.location.pathname.split("/")[3] == "state" ? (
-                    <div className="breadCrumbHeader col-3 col-sm-3 col-md-5 col-lg-3 col-xl-3">
+                    <div className="breadCrumbHeader d-none d-md-block col-md-5 col-lg-3 col-xl-3">
                       <ul className="breadCrumbInner">
                         <li className="breadCrumbInnerli">
                           <a href="/">India</a>
@@ -398,12 +398,12 @@ class Header extends Component{
                       </ul>
                     </div>
                   ) : (
-                    <div className="breadCrumbHeader col-3  col-sm-3 col-md-5 col-lg-3 col-xl-3"></div>
+                    <div className="breadCrumbHeader d-none d-md-block col-md-5 col-lg-3 col-xl-3"></div>
                   )}
 
                   <div className="FunctionWiseTitle  d-none d-lg-block  col-lg-4 col-xl-4"></div>
 
-                  <div className="rightFunctionHeader col-7 col-sm-7 col-md-6 col-lg-4 col-xl-4">
+                  <div className="rightFunctionHeader col-9 col-sm-9 col-md-6 col-lg-4 col-xl-4">
                     <div className="row">
                       <div className="rightFunctionHeader1 col-7 col-sm-7 col-md-7 col-lg-7 col-xl-7">
                         <div className="row">
@@ -550,7 +550,6 @@ class Header extends Component{
                             </div>
                           </div>
                         </div>
-                        
 
                         <div
                           className="barsToggel pull-right"
@@ -752,7 +751,7 @@ class Header extends Component{
               <div className="row">
                 <div className="rightFunctionHeader1 col-7 col-sm-7 col-md-7 col-lg-7 col-xl-7">
                   <div className="row">
-                    <div className="rightFunctionHeader1 col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 pull-right">
+                    <div className="rightFunctionHeader1 col-12  pull-right">
                       <div className="rightFunctionHeader1CityJobs">
                         {window.location.pathname.split("/")[0] == "" &&
                         window.location.pathname.split("/")[3] != "state" ? (
@@ -810,7 +809,7 @@ class Header extends Component{
                     id="functionalbarsToggel"
                     style={{ top: this.state.asideDisplay }}
                   >
-                    <div className="functionalbarsCross col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    <div className="functionalbarsCross col-12 ">
                       <span
                         className="functionalnotificationMessegeCross"
                         id="closeAsidebarButton"
@@ -845,19 +844,20 @@ class Header extends Component{
 
                   <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
                     aria-hidden="true">
+                    <div className="row">
                     <div class="modal-dialog" role="document">
                       <div class="modal-content">
                         <div class="modal-body">
                           <button
                             type="button"
-                            className="close"
+                            className="close closebtnmodal"
                             id="closeModalButton"
                             data-dismiss="modal"
                             aria-label="Close"
                           >
                             &times;
                           </button>
-                          <section className="OTPSentWrapper ">
+                          <section className="OTPSentWrapper">
                             {this.props.selectedModal == "login" ? <LoginForm /> : null}
                             {this.props.selectedModal == "signup" ? <SignUp /> : null}
                             {this.props.selectedModal == "forgotpassword" ? (
@@ -877,15 +877,17 @@ class Header extends Component{
                       </div>
                     </div>
                   </div>
+                </div>
 
-                  <div
+                  {/*<div
                     className="modal fade col-md-12"
-                    id="loginModal1"
+                    id="loginModal"
                     role="dialog"
                     tabIndex="-1" aria-hidden="true"
                   >
                     <div className="">
-                      <div className="modal-dialog " role="document">
+                      <div className="modal-dialog modal-lg">
+                      <div class="modal-content">
                         <div className="modal-body">
                           <button
                             type="button"
@@ -913,37 +915,38 @@ class Header extends Component{
                             ) : null}
                           </section>
                         </div>
+                        </div>
                       </div>
                     </div>
-                  </div>
+                  </div>*/}
 
                   <div
                     className="barsToggel pull-right"
                     id="barsToggel"
                     style={{ display: this.state.userMenu }}
                   >
-                    <div className="notificationMessege col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    <div className="notificationMessege col-12 ">
                       <FontAwesomeIcon icon="search" />
                       <span className="notificationMessegeText">Employer Settings</span>
                     </div>
                     <a href="/job-list">
-                      <div className="notificationMessege col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                      <div className="notificationMessege col-12 ">
                         <FontAwesomeIcon icon="briefcase" />
                         <span className="notificationMessegeText">Posted Jobs</span>
                       </div>
                     </a>
-                    <div className="notificationMessege col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    <div className="notificationMessege col-12 ">
                       <FontAwesomeIcon icon="users" />
                       <span className="notificationMessegeText">Recruiters</span>
                     </div>
-                    <div className="notificationMessege col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    <div className="notificationMessege col-12 ">
                       <FontAwesomeIcon icon="search" />
                       <span className="notificationMessegeText">Services</span>
                     </div>
-                    <div className="notificationMessege col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    <div className="notificationMessege col-12 ">
                       <span className="notificationMessegeText">About Us</span>
                     </div>
-                    <div className="notificationMessege col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    <div className="notificationMessege col-12 ">
                       <span className="notificationMessegeText">Contact Us</span>
                     </div>
                   </div>

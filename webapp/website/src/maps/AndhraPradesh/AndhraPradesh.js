@@ -49,7 +49,7 @@ class AndhraPradesh extends Component{
 	}
 	render(){
 		return(
-			<div className="bodyWrapper">
+			<div className="bodyWrapper col-12">
 				<div className="stateWrapper">
 					<div className="kurnool classHover" onClick={e => this.onDistrictClick("Kurnool","AD")}> 
 						<img src="/Maps/Andhra_Pradesh/Kurnool.png"  alt="Kurnool"

@@ -49,7 +49,7 @@ class Kerala extends Component{
 	}
 	render(){
 		return(
-			<div className="bodyWrapper">
+			<div className="bodyWrapper col-12">
 				<div className="stateWrapper">
 					<div className="kasaragod classHover" onClick={e => this.onDistrictClick("Kasaragod","KL")}> 
 						<img src="/Maps/Kerala/Kasaragod.png"  alt="Kasaragod"
