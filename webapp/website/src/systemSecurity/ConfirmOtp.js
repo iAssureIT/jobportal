@@ -207,7 +207,7 @@ class ConfirmOtp extends Component {
            <div className="img6LoginFP">
               <img src="/images/Sign_In/6.png" alt="img6Login" className="img6loginInnerFP img-fluid"/>
           </div>
-                <div className="confirmOTP col-4 offset-4 col-sm-4 offset-sm-4 col-md-4 offset-md-4 col-lg-4 offset-lg-4 col-xl-4 offset-xl-4">
+                <div className="confirmOTP col-8 offset-2 col-sm-4 offset-sm-4 col-md-4 offset-md-4 col-lg-4 offset-lg-4 col-xl-4 offset-xl-4">
                   <form>
                     <div className="confirmOTPTitle col-10 offset-1 col-sm-10 offset-sm-1 col-md-10 offset-md-1 col-lg-10 offset-lg-1 col-xl-10 offset-xl-1">Please enter OTP sent you on your Phone
                     </div>
@@ -219,7 +219,7 @@ class ConfirmOtp extends Component {
 
                     </div>*/}
 
-                       <div className="col-10 offset-1 col-sm-10 offset-sm-1 col-md-10 offset-md-1 col-lg-10 offset-lg-1 col-xl-10 offset-xl-1">
+                       <div className="col-10 offset-1 col-sm-10 offset-sm-1 col-md-10 offset-md-1 col-lg-10 offset-lg-1 col-xl-10 offset-xl-1 otpBoxZindex">
                         <div className="otpBox form-group">
                             <div className="input-group">
                                 <input type="text" id="otp" maxlength="1" name="otp" ref="emailotp1" placeholder="_" value={this.state.OTP} onChange={this.handleChange.bind(this)} className="form-control roundCorner confirmOTPInputBox"/>
@@ -239,7 +239,6 @@ class ConfirmOtp extends Component {
                             <div className="input-group">
                                 <input type="text" id="otp" maxlength="1" name="otp" ref="emailotp4" placeholder="_" value={this.state.OTP} onChange={this.handleChange.bind(this)} className="form-control roundCorner confirmOTPInputBox"/>
                             </div>
-                           
                         </div>
                       <span id="otpError" className="errorMsg"></span>
                      </div>  
@@ -259,7 +258,7 @@ class ConfirmOtp extends Component {
                             <button className="btn col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 buttonConfirmOTP" onClick={this.resendOtp.bind(this)}>Resend OTP</button>
                         </div>
 
-                        <div className="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                        <div className="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
                             <button className="btn col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 buttonConfirmOTP" onClick={this.confirmOTP.bind(this)}>Confirm OTP</button>
                         </div>
                       </div>

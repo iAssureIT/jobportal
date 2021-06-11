@@ -584,7 +584,7 @@ input:-webkit-autofill
 @media screen and (max-width: 768px){
 
 .OTPSentWrapper{
-	min-height: 828px;
+	min-height: 830px;
     margin-top: 208px;
 }
 	
@@ -629,8 +629,8 @@ input:-webkit-autofill
 @media screen and (max-width: 480px){
 
 .OTPSentWrapper{
-	min-height: 999px;
-	margin-top: 340px;
+	min-height: 1000px;
+    margin-top: 383px;
 }
 	
 }
@@ -639,7 +639,7 @@ input:-webkit-autofill
 
 .OTPSentWrapper{
 	min-height: 1121px;
-	margin-top: 510px;
+	margin-top: 520px;
 }
 	
 }
@@ -648,7 +648,7 @@ input:-webkit-autofill
 
 .OTPSentWrapper{
 	min-height: 1000px;
-	margin-top: 340px;
+    margin-top: 383px;
 }
 	
 }
@@ -662,20 +662,20 @@ input:-webkit-autofill
 	
 }*/
 
-@media screen and (max-width: 375px){
+/*@media screen and (max-width: 375px){
 
 .OTPSentWrapper{
-	min-height: 1100px;
-	margin-top: 530px;
+	min-height: 1200px;
+	margin-top: 550px;
 }
 	
-}
+}*/
 
 @media screen and (max-width: 360px){
 
 .OTPSentWrapper{
-	min-height: 999px;
-	margin-top: 340px;
+	min-height: 1000px;
+    margin-top: 383px;
 }
 	
 }
@@ -683,8 +683,8 @@ input:-webkit-autofill
 @media screen and (max-width: 320px){
 
 .OTPSentWrapper{
-	min-height: 999px;
-	margin-top: 340px;
+	min-height: 1000px;
+    margin-top: 383px;
 }
 
 }
@@ -700,6 +700,19 @@ input:-webkit-autofill
 .OTPSentWrapper{
 	min-height: 984px;
 	margin-top: 380px;
+}
+
+}
+
+@media only screen 
+  and (min-device-width: 1366px) 
+  and (max-device-width: 1366px) 
+  and (orientation: landscape) 
+  and (-webkit-min-device-pixel-ratio: 2) {
+
+.OTPSentWrapper{
+	min-height: 800px;
+	margin-top: 220px;
 }
 
 }

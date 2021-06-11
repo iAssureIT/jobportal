@@ -263,13 +263,13 @@
   position: absolute;
   height: 80px;
   /*width: 60px;*/
-  top: 130px;
-  left: 29.2%;
+  top: 77px;
+  left: 10.2%;
   z-index: 0;
 }
 
 .img6loginInnerSU{
-  height: 80px;
+  height: 89px;
   /*width: 60px;*/
 }
 
@@ -305,7 +305,6 @@
   width: 0;
 }
 
-
 .checkmark2 {
     height: 15px;
     width: 15px;
@@ -313,8 +312,7 @@
     cursor: pointer;
     border: 2px solid #ff0 !important;
     float: left;
-    background-color: pink important;
-
+    background-color: pink !important;
 }
 
 /* On mouse-over, add a grey background color */
@@ -335,8 +333,12 @@
   height: 20px;
 }
 
-.flName{
-  margin-left: 0px;
+/**********media query***********/
+
+@media screen and (max-width: 1367px){
+
+.registrationFormWrapper {
+     margin-top: 149px !important; 
 }
 
-/**********media query***********/
+}
