@@ -41,7 +41,12 @@ const window = Dimensions.get('window');
               onSubmit={(data) => {
                 setLoading(true);
                 let {username} = data;
-                axios.patch('/api/auth/patch/set_send_otp/'+username)
+                var loginValues = {
+                  mobileNo  : username
+                 
+                };
+                console.log("loginValues",loginValues)
+                axios.patch('/api/auth/patch/setsendmobileotpusingMobile',loginValues)
                   .then(response => {
                       console.log("response",response);
                       setLoading(false);

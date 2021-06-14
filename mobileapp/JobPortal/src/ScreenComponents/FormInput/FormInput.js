@@ -25,8 +25,8 @@ export const FormInput = props => {
       inputContainerStyle= {styles.containerStyle}
       leftIconContainerStyle={styles.leftIconContainerStyle}
       errorStyle={{ color: 'red' ,margin:0}}
-      inputStyle={{textAlignVertical: "top",color:'#fff',fontSize:11}}
-      // containerStyle={{height:100}}
+      inputStyle={{textAlignVertical: "top",color:'#fff',fontSize:12}}
+      containerStyle={{height:100}}
     />
   );
 };

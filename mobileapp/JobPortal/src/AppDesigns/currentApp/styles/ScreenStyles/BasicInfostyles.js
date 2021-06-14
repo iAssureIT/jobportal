@@ -14,6 +14,40 @@ export default StyleSheet.create({
   imageMenuWraper:{ 
     borderWidth:1,borderColor:'#f1f1f1',borderRadius:5,width: 150, height:85, backgroundColor: '#ccc',marginRight:15
   },
+   MainContainer :{
+ 
+  flex:1,
+  paddingTop: (Platform.OS) === 'ios' ? -20 : 0,
+  justifyContent: 'flex-start',
+  margin:20
+  },
+    block1: {
+    flex: 0.45,
+    height:100,
+    justifyContent:"center",
+  },
+  block2: {
+    flex: 0.45,
+    height:100,
+    justifyContent:"center",
+  }, 
+   profileImgView:{
+    alignItems:'center',
+    justifyContent:"center",
+    paddingVertical:10
+  },
+ 
+  TextInputStyleClass:{
+
+    textAlign: 'left',
+    // height: 50,
+    borderWidth: 2,
+    borderColor: '#9E9E9E',
+    borderRadius: 5 ,
+    backgroundColor : "#FFFFFF",
+    height: 150
+     
+    },
   itemTextStyle:{
     color:"#fff"
   },

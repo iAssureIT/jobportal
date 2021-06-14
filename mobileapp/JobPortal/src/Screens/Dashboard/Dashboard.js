@@ -17,8 +17,6 @@ import Loading                      from '../../ScreenComponents/Loading/Loading
 
 // 
 import {withCustomerToaster}        from '../../redux/AppState.js';
-
-import { getList } 		              from '../../redux/productList/actions';
 import { getWishList } 		          from '../../redux/wishDetails/actions';
 
 import { SET_SEARCH_CALL,SET_SEARCH_TEXT,SET_SUGGETION_LIST,SET_SERACH_LIST} 	        from '../../redux/globalSearch/types';
