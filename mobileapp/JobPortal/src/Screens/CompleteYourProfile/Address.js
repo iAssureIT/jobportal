@@ -1,3 +1,4 @@
+
 import React,{useState,useEffect,useRef} from 'react';
 import {
   ScrollView,
@@ -42,10 +43,6 @@ import SwitchSelector               from "react-native-switch-selector";
 import DatePicker from 'react-native-datepicker';
 import StepIndicator from 'react-native-step-indicator';
 import * as Progress from 'react-native-progress';
-// import { WebView }                         from 'react-native-webview';
-// import CKEditor from 'react-native-ckeditor';
-
-// import DateTimePickerModal          from "react-native-modal-datetime-picker";
 
   const window = Dimensions.get('window');
   const LoginSchema = Yup.object().shape({
@@ -95,7 +92,7 @@ import * as Progress from 'react-native-progress';
     }
   
 
-export const BasicInfo = withCustomerToaster((props)=>{
+export const Address = withCustomerToaster((props)=>{
     const [btnLoading, setLoading] = useState(false);
     const [setOpen]= useState(false);
     const {setToast,navigation,route} = props; //setToast function bhetta
@@ -247,7 +244,7 @@ export const BasicInfo = withCustomerToaster((props)=>{
       <React.Fragment>
         <HeaderBar2
           goBack={navigation.goBack}
-          headerTitle={'Basic Info'}
+          headerTitle={'Address'}
           navigate={navigation.navigate}
           // toggle={setOpen} 
           // openControlPanel={()=>_drawer.open()}
@@ -279,71 +276,6 @@ export const BasicInfo = withCustomerToaster((props)=>{
                 />
             </View>
 
-            <View style={{flex:1}}>
-                    <ImageBackground
-                      source={
-                        
-                          require('../../AppDesigns/currentApp/images/user.jpg')
-                      }
-                      style={{
-                        width: 100,
-                        height: 100,
-                        borderRadius: 100,
-                        alignSelf: 'center',
-                        borderWidth:1
-                      }}
-                      imageStyle={{borderRadius: 100,}}>
-                      <TouchableOpacity
-                        style={{
-                          width: 30,
-                          height: 30,
-                          backgroundColor: '#283593',
-                          justifyContent: 'center',
-                          marginTop: 60,
-                          marginLeft: 60,
-                          borderRadius: 100,
-                        }}
-                        onPress={() => setModal(true)}>
-                        <Icon size={15} name="camera" type="font-awesome" color="#fff" />
-                      </TouchableOpacity>
-                    </ImageBackground>
-                  </View>
-                  <View style={styles.profileImgView}>
-                    <Dialog.Container
-                      visible={openModal}
-                      container={{borderRadius: 30}}
-                      onDismiss={() => setModal(false)}>
-                      <Dialog.Title style={{alignSelf: 'center'}}>
-                        Select an image
-                      </Dialog.Title>
-                      <View style={{flexDirection: 'row'}}>
-                        <TouchableOpacity style={styles.block1} 
-                          onPress={() => chooseFromLibrary('openCamera')}>
-                          <Icon
-                            name="camera"
-                            type="material-community"
-                            size={50}
-                            color={'#aaa'}
-                            style={{}}
-                          />
-                          <Text>Camera</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity
-                          style={styles.block1}
-                          onPress={() => chooseFromLibrary('openPicker')}>
-                          <Icon
-                            name="upload"
-                            type="font-awesome"
-                            size={50}
-                            color="#aaa"
-                            style={{}}
-                          />
-                          <Text>Gallery</Text>
-                        </TouchableOpacity>
-                      </View>
-                      <Dialog.Button label="Cancel" onPress={() => setModal(false)} />
-                    </Dialog.Container>
-                  </View>
             <View style={styles.formWrapper}>
               <View style={{ marginTop: 15,}}>
               <View>
@@ -360,46 +292,6 @@ export const BasicInfo = withCustomerToaster((props)=>{
                   autoCapitalize  = "none"
                   // value           = {values.contactperson}
                 />
-                <FormInput
-                  labelName       = "Middle Name"
-                  placeholder     = "Middle Name"
-                  // onChangeText    = {handleChange('contactperson')}
-                  required        = {true}
-                  name            = "contactperson"
-                  errors          = {errors}
-                  touched         = {touched}
-                  iconName        = {'user-circle-o'}
-                  iconType        = {'font-awesome'}
-                  autoCapitalize  = "none"
-                  // value           = {values.contactperson}
-                />
-                <FormInput
-                  labelName       = "Last Name"
-                  placeholder     = "Last Name"
-                  // onChangeText    = {handleChange('contactperson')}
-                  required        = {true}
-                  name            = "contactperson"
-                  errors          = {errors}
-                  touched         = {touched}
-                  iconName        = {'user-circle-o'}
-                  iconType        = {'font-awesome'}
-                  autoCapitalize  = "none"
-                  // value           = {values.contactperson}
-                />
-                 <FormInput
-                  labelName       = "Personal Mail ID"
-                  placeholder     = "Personal Mail ID"
-                  // onChangeText    = {handleChange('contactperson')}
-                  required        = {true}
-                  name            = "contactperson"
-                  errors          = {errors}
-                  touched         = {touched}
-                  iconName        = {'user-circle-o'}
-                  iconType        = {'font-awesome'}
-                  autoCapitalize  = "none"
-                  // value           = {values.contactperson}
-                />
-
 
               </View>
                 <FormPhoneInput
@@ -606,8 +498,6 @@ export const BasicInfo = withCustomerToaster((props)=>{
                       *
                       </Text>
                     </Text>
-
-                    
                   <Dropdown
                     // label               = 'Marital Status'
                     placeholder         = "-Select your language-"

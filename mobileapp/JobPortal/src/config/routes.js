@@ -17,7 +17,8 @@ import {RootSignUp}               from '../Screens/SystemSecurity/Signup/RootSig
 import {OTPVerification}          from '../Screens/SystemSecurity/OTPVerification/OTPVerification.js';
 import {ForgotPasswordOTP}        from '../Screens/SystemSecurity/ForgotPasswordOTP/ForgotPasswordOTP.js';
 import {Dashboard}                from '../Screens/Dashboard/Dashboard.js';
-import {BasicInfo}                  from '../Screens/CompleteYourProfile/BasicInfo.js';
+import {BasicInfo}                from '../Screens/CompleteYourProfile/BasicInfo.js';
+import {Address}                  from '../Screens/CompleteYourProfile/Address.js';
 
 // import {WishlistComponent}        from'../Screens/WishlistComponent/WishlistComponent.js';
 import {SupportSystem}            from '../Screens/Help&Support/SupportSystem.js';
@@ -38,7 +39,7 @@ export const HomeStack = () => (
     mode="modal"
     drawerContent   = { (props) => <Menu { ...props } />}
   >
-     <Home.Screen name="BasicInfo"                   component={BasicInfo} />
+    <Home.Screen name="BasicInfo"                   component={BasicInfo} />
     <Home.Screen name="Dashboard"                   component={Dashboard} />
     <Home.Screen name="SupportSystem"               component={SupportSystem} />
     <Home.Screen name="InAppNotification"           component={InAppNotification} />  

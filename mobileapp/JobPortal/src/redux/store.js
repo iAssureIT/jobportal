@@ -6,12 +6,10 @@ import {composeWithDevTools}  from 'redux-devtools-extension/developmentOnly';
 import thunk                  from 'redux-thunk';
 import {AppStateReducer}      from './AppState';
 import userDetails            from './user';
-import productList            from './productList';
 import wishDetails            from './wishDetails';
 import globalSearch            from './globalSearch';
 const appReducer = combineReducers({
   userDetails,
-  productList,
   wishDetails,
   globalSearch,
   appStateReducer: AppStateReducer,

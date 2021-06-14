@@ -27,7 +27,7 @@ export const FormPhoneInput = props => {
             errorStyle={{ color: 'red' ,margin:0}}
             inputStyle={{textAlignVertical: "top",height:45}}
 
-
+            placeholderTextColor={'#bbb'}
             ref={phoneInput}
             placeholderTextColor={styles.placeholderTextColor}
             defaultValue={""}
@@ -62,23 +62,21 @@ const styles = StyleSheet.create({
  containerStyle:{
     borderWidth:0.5,
     borderRadius:5,
-    // width:"100%",
+    width:"100%",
     // height:45,
     borderColor:"#f5a721",
     backgroundColor:"#242933", color:'#fff'
   },
   textInputStyle:{
-      height:43,
-      // paddingTop:15,
-      backgroundColor:"#242933",
-      color:'#fff',
+    height:43,
+    // paddingTop:15,
+    backgroundColor:"#242933",
+    color:'#fff',
   },
   textContainerStyle:{
-
     height:43,
     // padding:0,
     backgroundColor:"#242933", color:'#fff'
-
   },
    leftIconContainerStyle:{
     borderRightWidth:0.5,
@@ -94,7 +92,6 @@ const styles = StyleSheet.create({
     height:43,
     paddingTop:10,
     color:"#bbb",
-
     // backgroundColor:'#f0f'
   },
   placeholderTextColor:{
