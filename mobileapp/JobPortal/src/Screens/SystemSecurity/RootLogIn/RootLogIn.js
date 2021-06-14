@@ -52,71 +52,67 @@ import AsyncStorage         from '@react-native-async-storage/async-storage';
               console.log("data52",data);
               setLoading(true);
               let {username, password} = data;
-              var formValues = {
-                username  : username,
+              var loginValues = {
+                mobNumber  : username,
                 password  : password,
                 role      : "candidate"
               };
-              console.log("payload",formValues)
+              console.log("loginValues",loginValues)
              
               axios
-                .post('/api/auth/post/login/mob_email', formValues)
-                .then((res) => {
-                  console.log("res",res);
-                  setLoading(false);
-                  if(res.data.message === "Login Auth Successful"){
-                    if(res.data.passwordreset === false  ){
-                      navigation.navigate('ChangePassword',{user_id:res.data.ID})
-                    }else{  
-                      AsyncStorage.multiSet([
-                        ['user_id', res.data.ID],
-                        ['token', res.data.token],
+                .post('/api/auth/post/login/mobile',loginValues)
+                .then((response) => {
+                  console.log("res55",response);
+                  if(response.data.message === "Login Auth Successful"){
+                    axios.defaults.headers.common['Authorization'] = 'Bearer '+response.data.token;
+                    console.log("response.data.token",response.data.token)
+                    setLoading(false);
+                   AsyncStorage.multiSet([
+                        ['user_id', response.data.ID],
+                        ['token', response.data.token],
                       ]);
-                      axios.defaults.headers.common['Authorization'] = 'Bearer '+ res.data.token;
-                      dispatch(
-                        setUserDetails({
-                          user_id     : res.data.ID,
-                          token       : res.data.token,
-                          firstName   : res.data.userDetails.firstName,
-                          lastName    : res.data.userDetails.lastName,
-                          email       : res.data.userDetails.email,
-                          mobile      : res.data.userDetails.mobile,
-                          countryCode : res.data.userDetails.countryCode,
-                          fullName    : res.data.userDetails.fullName,
-                          company_id  : res.data.userDetails.company_id,
-                          companyID   : res.data.userDetails.companyID,
-                          companyName : res.data.userDetails.companyName,
-                          status      : res.data.userDetails.status,
-                          role        : res.data.roles
-                        }),
-                      );
+                     
+                      // dispatch(
+                      //   setUserDetails({
+                      //     loggedIn    : true,
+                      //     username: response.data.username,
+                      //     firstName: response.data.userDetails.firstName,
+                      //     lastName: response.data.userDetails.lastName,
+                      //     email: response.data.userDetails.email,
+                      //     phone: response.data.userDetails.phone,
+                      //     pincode: response.data.userDetails.pincode,
+                      //     user_id: response.data.userDetails.user_id,
+                      //     roles: response.data.userDetails.roles,
+                      //     token: response.data.userDetails.token,
+                      //   }),
+                      // );
                       navigation.navigate('Dashboard')
-                    }
-                  }else if(res.data.message === 'INVALID_PASSWORD'){
+                    
+                  }else if(response.data.message === 'INVALID_PASSWORD'){
                     setToast({text: "Please enter correct password", color: colors.warning});
                     setLoading(false);
-                  }else if(res.data.message === 'NOT_REGISTER'){
+                  }else if(response.data.message === 'NOT_REGISTER'){
                     setToast({text: "This username is not registered.", color: colors.warning});
                     setLoading(false);
-                  }else if(res.data.message === 'USER_BLOCK'){
+                  }else if(response.data.message === 'USER_BLOCK'){
                     setToast({text: "Please contact to admin", color: colors.warning});
                     setLoading(false);
-                  }else if(res.data.message === 'USER_UNVERIFIED'){
+                  }else if(response.data.message === 'USER_UNVERIFIED'){
                     setToast({text: "Your verification is still pending.", color: colors.warning});
-                    var sendData = {
-                      "event": "2",
-                      "toUser_id": res.data.userDetails.user_id,
-                      "toUserRole":"user",
-                        "variables": {
-                          "Username" : res.data.userDetails.firstName,
-                          "OTP" : res.data.userDetails.otpEmail,
-                        }
-                      }
-                      axios.post('/api/masternotifications/post/sendNotification', sendData)
-                      .then((res) => {
-                        console.log('sendDataToUser in result==>>>', res.data)
-                      })
-                      .catch((error) => { console.log('notification error: ',error)})
+                    // var sendData = {
+                    //   "event": "2",
+                    //   "toUser_id": res.data.userDetails.user_id,
+                    //   "toUserRole":"user",
+                    //     "variables": {
+                    //       "Username" : response.data.userDetails.firstName,
+                    //       "OTP" : response.data.userDetails.otpEmail,
+                    //     }
+                    //   }
+                      // axios.post('/api/masternotifications/post/sendNotification', sendData)
+                      // .then((res) => {
+                      //   console.log('sendDataToUser in result==>>>', response.data)
+                      // })
+                      // .catch((error) => { console.log('notification error: ',error)})
                   }
                 })
                 .catch((error) => {
@@ -125,7 +121,7 @@ import AsyncStorage         from '@react-native-async-storage/async-storage';
                   setToast({text: 'Something went wrong.', color: 'red'});
                 });
             }}
-            validationSchema={LoginSchema}
+            // validationSchema={LoginSchema}
             initialValues={{
               username: '',
               password: '',
@@ -155,6 +151,8 @@ import AsyncStorage         from '@react-native-async-storage/async-storage';
     const [openModal, setModal] = useState(false);
     const [showPassword, togglePassword] = useState(false);
     const [image, setImage] = useState({profile_photo: '', image: ''});
+    const [value, setValue] = useState("");
+    const [loading,setLoading] = useState("");
     
   return (
       <ImageBackground source={require("../../../AppDesigns/currentApp/images/34.png")} style={commonStyles.container} resizeMode="cover" >
@@ -188,6 +186,7 @@ import AsyncStorage         from '@react-native-async-storage/async-storage';
               labelName       = "Mobile No"
               placeholder     = "Mobile No"
               onChangeText    = {handleChange('username')}
+              
               required        = {true}
               name            = "username"
               errors          = {errors}
@@ -196,7 +195,6 @@ import AsyncStorage         from '@react-native-async-storage/async-storage';
               iconType        = {'material-community'}
               autoCapitalize  = "none"
               keyboardType    = "numeric"
-              // leftIcon        = {<Icon name="phone" size={20} color="#fff" style={commonStyle.IconLeft} />}
               style           = {{fontFamily: 'Montserrat-Regular',fontSize:15,color:'#fff',marginTop:10,marginLeft:5}}
             />
             <FormInput

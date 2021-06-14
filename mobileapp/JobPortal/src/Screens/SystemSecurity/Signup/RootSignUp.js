@@ -217,8 +217,6 @@ const window = Dimensions.get('window');
                   <FormInput
                     labelName       = "First Name"
                     placeholder     = "First Name"
-                    // onChangeText  = {(firstname) => setFirstName(firstname) }
-                    // value         = {firstname}
                      onChangeText    = {handleChange('firstName')}
                     required        = {true}
                      name            = "firstName"
@@ -231,9 +229,7 @@ const window = Dimensions.get('window');
                   <FormInput
                     labelName       = "Last Name"
                     placeholder     = "Last Name"
-                    // onChangeText  = {(lastname) => setLastName(lastname) }
-                    // value         = {lastname}
-                     onChangeText    = {handleChange('lastName')}
+                    onChangeText    = {handleChange('lastName')}
                     required        = {true}
                     name            = "lastName"
                     errors          = {errors}
@@ -270,7 +266,7 @@ const window = Dimensions.get('window');
                       <PhoneInput
                         ref={phoneInput}
                         defaultValue={value}
-                        defaultCode="AE"
+                        defaultCode="IN"
                         layout="first"
                         onChangeText={(text) => {
                           console.log("text",text);
@@ -283,9 +279,6 @@ const window = Dimensions.get('window');
                           setFieldValue('countryCode',countryCode)
                           setValid(checkValid);
                         }}
-                        
-                        // onChangeText={(mobileNumber) =>setMobileNumber(mobileNumber) }
-                        // value         = {mobileNumber}
                        
                         containerStyle= {styles1.containerStyle}
                         textContainerStyle={styles1.textContainerStyle}
