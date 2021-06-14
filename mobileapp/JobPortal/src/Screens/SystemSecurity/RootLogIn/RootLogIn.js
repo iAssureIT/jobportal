@@ -53,9 +53,7 @@ import AsyncStorage         from '@react-native-async-storage/async-storage';
               setLoading(true);
               let {username, password} = data;
               var loginValues = {
-                mobNumber  : username,
-                password  : password,
-                role      : "candidate"
+                mobileNo : mobileNo
               };
               console.log("loginValues",loginValues)
              
