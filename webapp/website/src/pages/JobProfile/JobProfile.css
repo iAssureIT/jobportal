@@ -96,7 +96,7 @@
 }
 
 .jobDescContent{
-	margin-left: -37px;
+	margin-left: -20px;
 	/*text-align: justify;*/
 }
 
@@ -111,17 +111,17 @@
 
 .contentWrapper1 .DescriptionContainer{
 	height: auto;
-	margin-top: 63px;
+	margin-top: 0px;
 	/*min-height: 100px;*/
 	padding-bottom: 15px;
-	padding-top: 18px;
-	padding-left: 33px;
+	padding-top: 0px;
+	padding-left: 48px;
 	border-left: 2px solid var(--main-border-color);
 	/*background-color: green;*/
 } 
 
 .contentWrapper1 .profileheading{
-	position: absolute;
+/*	position: absolute;*/
 	font-size: 21px;
 	/*font-weight: bold;*/
 	margin-top: 35px;
@@ -142,7 +142,7 @@
 .contentWrapper1 .horizontalRightLine{
 	height: 2px;
 	position: absolute;
-	margin-top: 50px;
+	margin-top: -18px;
 	margin-left: 12px;
 	width: 25px;
 	background-color: var(--main-border-color);
@@ -174,18 +174,18 @@
 }
 
 .contentWrapper2 .DescriptionContainer{
-	margin-top: 27px;
+	margin-top: 0px;
 	height: auto;
 	/*min-height: 100px;*/
 	border-left: 2px solid var(--main-border-color);
 	padding-bottom: 20px;
-	padding-top: 20px;
-	padding-left: 35px;
+	padding-top: 10px;
+	padding-left: 50px;
 	/*background-color: green;*/
 } 
 
 .contentWrapper2 .profileheading{
-	position: absolute;
+	/*position: absolute;*/
 	font-size: 21px;
 	font-weight: bold;
 	color: var(--main-subheading-font-color);
@@ -205,7 +205,7 @@
 .contentWrapper2 .horizontalRightLine{
 	height: 2px;
 	position: absolute;
-	margin-top: 12px;
+	margin-top: -17px;
 	margin-left: 12px;
 	width: 25px;
 	background-color: var(--main-border-color);
@@ -234,6 +234,7 @@
 .contentWrapper2 .eduDuration{
 	/*font-family: 'Montserrat-Regular';*/
 	font-weight: 400;
+	padding-left: 10px;
 }
 
 .profileContent li:before{
@@ -241,9 +242,11 @@
     /*font-weight: bold;*/
     padding-right: 6px;
     margin-left: -15px;	
+
 }
 
 .profileContent li{
+	 margin-bottom: 10px;
 	list-style: none;
 }
 
@@ -258,7 +261,7 @@
 }
 
 .contentWrapper3 .DescriptionContainer{
-	margin-top: 27px;
+	margin-top: 0px;
 	height: auto;
 	/*min-height: 100px;*/
 	border-left: 2px solid var(--main-border-color);
@@ -268,11 +271,11 @@
 } 
 
 .contentWrapper3 .profileheading{
-	position: absolute;
+	/*position: absolute;*/
 	font-size: 21px;
 	font-weight: bold;
 	color: var(--main-subheading-font-color);
-	margin-top: -2px;
+	margin-top: 0px;
 	margin-left: 40px;
 	/*font-family: 'Montserrat-SemiBold';*/
 	font-weight: 600;
@@ -288,7 +291,7 @@
 .contentWrapper3 .horizontalRightLine{
 	height: 3px;
 	position: absolute;
-	margin-top: 12px;
+	margin-top: -17px;
 	margin-left: 12px;
 	width: 25px;
 	background-color: var(--main-border-color);
@@ -369,7 +372,7 @@
 }
 
 .skillsHeadOne li:nth-child(2){
-	margin-top: 42px;
+	margin-top: 24px;
 	/*background-color: red;*/
 }
 
