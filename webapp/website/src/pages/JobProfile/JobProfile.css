@@ -34,7 +34,7 @@
 
 .leftImgContainer .companyProfileLogo{
 	width: 100%;
-    height: auto;
+    height: 100%;
 	margin-top: 0px;
 	border-radius: 5px;
 }
@@ -52,7 +52,7 @@
 	font-size: 27px;
 	font-weight: bold;
 	padding-top: 60px;
-	margin-left: -52px;
+	margin-left: 0px;
 	color: var(--main-subheading-font-color);
 	/*font-family: 'Montserrat-SemiBold';*/
 	font-weight: 600;
@@ -60,7 +60,7 @@
 
 .imgContent .subContentHead{
 	margin-top: -3px;
-	margin-left: -52px;
+	margin-left: 0px;
 	font-size: 18px;
 	/*font-family: 'Montserrat-SemiBold';*/
 	font-weight: 600;
@@ -68,7 +68,7 @@
 
 .imgContent .locationinfo{
 	padding-top: 1px;
-	margin-left: -52px;
+	margin-left: 0px;
 	font-size: 14px;
 	/*font-family: 'Montserrat-Regular';*/
 	font-weight: 400;
@@ -180,7 +180,7 @@
 	border-left: 2px solid var(--main-border-color);
 	padding-bottom: 20px;
 	padding-top: 10px;
-	padding-left: 50px;
+	padding-left: 55px;
 	/*background-color: green;*/
 } 
 
@@ -237,11 +237,12 @@
 	padding-left: 10px;
 }
 
-.profileContent li:before{
+.profileContent2:before{
 	content: "\25C6";
     /*font-weight: bold;*/
-    padding-right: 6px;
-    margin-left: -15px;	
+    left: 0px;
+/*    margin-left: -15px;*/	
+    position: absolute;
 
 }
 
@@ -322,14 +323,14 @@
 	font-weight: 400;
 }
 
-.profileContent li:before{
+/*.profileContent li:before{
 	content: "\25C6";
-    /*font-weight: bold;*/
+
     font-weight: 600;
     padding-right: 6px;
     margin-left: -15px;	
 }
-
+*/
 .profileContent li{
 	list-style: none;
 }
@@ -364,20 +365,22 @@
 .skillsHeadOne .skillSubtitle{
 	/*font-family: 'Montserrat-SemiBold';*/
 	font-weight: 600;
+	padding-left: 20px;
 }
 
 .skillsHeadOne .skillDuration{
 	/*font-family: 'Montserrat-Regular';*/
 	font-weight: 400;
+	padding-left: 20px;
 }
 
 .skillsHeadOne li:nth-child(2){
-	margin-top: 24px;
+	margin-top: 0px;
 	/*background-color: red;*/
 }
 
 .skillsHeadTwo{
-	margin-top: 28px;
+	margin-top: 0px;
 	margin-left: 6px;
 	font-weight: 600;
 	/*background-color: gray;*/
@@ -393,21 +396,23 @@
 .skillsHeadTwo .skillSubtitle{
 	/*font-family: 'Montserrat-SemiBold';*/
 	font-weight: 600;
+	padding-left: 20px;
 }
 
 .skillsHeadTwo .skillDuration{
 	/*font-family: 'Montserrat-Regular';*/
 	font-weight: 400;
+	padding-left: 20px;
 }
 
 .skillsHeadTwo li:nth-child(2){
-	margin-top: 43px;
+	margin-top: 0px;
 	/*background-color: red;*/
 }
 
 .skillsHeadThree{
 	margin-left: 6px;
-	margin-top: 28px;
+	margin-top: 0px;
 	font-weight: 600;
 	/*background-color: red;*/
 }
@@ -430,7 +435,7 @@
 }
 
 .skillsHeadThree li:nth-child(2){
-	margin-top: 43px;
+	margin-top: 0px;
 	/*background-color: red;*/
 }
 
@@ -443,7 +448,7 @@
 }
 
 .skillsHeadFour li:nth-child(2){
-	margin-top: 62px;
+	margin-top: 10px;
 }
 
 .skillsHeadFour .skillsTitle{
@@ -452,10 +457,11 @@
 
 .skillsList{
 	/*background-color: brown;*/
-	margin-top: 22px;
-	position: absolute;
+	/*margin-top: 22px;
+	position: absolute;*/
 	/*font-family: 'Montserrat-Regular';*/
 	font-weight: 400;
+	width:100%;
 }
 
 .buttonMain{
@@ -490,6 +496,7 @@
 	height: 1359px;
 	padding-bottom: 40px;
 	border: 1px solid var(--main-border-color);
+	border-left: none;
 	background-color: var(--form-field-background-color);
 }
 
@@ -502,7 +509,8 @@
 .mapImg{
 	height: 175px;
 	margin-top: 20px;
-	margin-left: 35px;
+	margin-left: 50%;
+	transform: translateX(-50%);
 }
 
 .rightContentHead{
@@ -533,7 +541,37 @@
 }
 
 .rightSideImg{
+	width: 85%;
 	height: 300px;
-	margin-left: 30px;
-	margin-top: 280px;
+	margin-left: 50%;
+	margin-top: 10px;
+	transform: translateX(-50%);
+}
+@media(min-width:768px) and (max-width:992px){
+   .mapImg{
+   	height: 140px;
+   }
+   .rightSideImg {
+    height: 250px;
+	}
+	
+}
+@media(min-width:576px) and (max-width:768px){
+    .mapImg{
+   	height: 140px;
+   }
+   .rightSideImg {
+    height: 250px;
+
+	}
+	
+}
+@media (max-width:576px){
+	 .rightSideImg {
+    height: 250px;
+    width: 85%;
+	}
+	.rightSideMain{
+		border-left: 1px solid var(--main-border-color);
+	}
 }
