@@ -79,17 +79,17 @@
   background-color: transparent !important;
   color: #eee;
 }
-.buttonSignUp{
+.signUpFormBtn{
   background-color: #D3950A;
   color: #fff;
   border: 1px solid #D3950A;
   margin-bottom: 2px;
-  font-size: 14px;
+  font-size: 9px;
   font-family: 'Montserrat-Bold';
   float: right;
 }
 
-.buttonSignUp:hover{
+.signUpFormBtn:hover{
   background-color: transparent;
   color: #D3950A;
 }
@@ -274,7 +274,7 @@
 }
 
 .agreeTC{
-    font-size: 11px;
+    font-size: 9px;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
