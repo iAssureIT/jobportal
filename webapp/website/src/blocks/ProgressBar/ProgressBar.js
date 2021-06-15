@@ -148,7 +148,7 @@ class ProgressBar extends Component{
 								<div className="row">
 									<div className="col-md-8 offset-md-2 col-12">
 										<div className="progress progressBar2 row">
-											<div className="progress-bar progress-bar-striped progressBarInner progress-bar-warning progress-bar-striped active" 
+											<div className="progress-bar progress-bar-striped progressBarInner progress-bar-warning progress-bar-striped active progress-bar-animated" 
 											  role="progressbar" aria-valuenow="0" aria-valuemin="0" 
 											  aria-valuemax="100" style={{width:this.props.width+"%"}}>
 											    <img src={this.props.img?("/images/"+ this.props.img + ".png"):null} alt={this.props.img?"progress":null} style={{left:this.props.left+"%"}}/>

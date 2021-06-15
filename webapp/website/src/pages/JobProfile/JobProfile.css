@@ -8,7 +8,7 @@
 }
 
 .leftSideMain{
-	height: 1359px;
+	min-height: 1359px;
 	border: 1px solid var(--main-border-color);
 	background-color: var(--form-field-background-color);
 	padding-bottom: 100px;
@@ -518,7 +518,7 @@
 	font-weight: bold;
 	color: var(--main-subheading-font-color);
 	padding-top: 30px;
-	padding-left: 22px;
+	padding-left: 0px;
 	/*font-family: 'Montserrat-SemiBold';*/
 	font-weight: 600;
 }
@@ -526,7 +526,7 @@
 .rightSideTitle{
 	font-size: 20px;
 	font-weight: bold;
-	padding-left: 25px;
+	padding-left: 0px;
 	padding-top: 7px;
 	color: var(--main-subheading-font-color);
 	/*font-family: 'Montserrat-SemiBold';*/
@@ -534,7 +534,7 @@
 }
 
 .rightSideSub{
-	padding-left: 25px;
+	padding-left: 0px;
 	padding-top: 2px;
 	/*font-family: 'Montserrat-Regular';*/
 	font-weight: 400;
@@ -558,13 +558,38 @@
 }
 @media(min-width:576px) and (max-width:768px){
     .mapImg{
-   	height: 140px;
+   	height: 110px;
+   	margin-top: 60px;
    }
    .rightSideImg {
     height: 250px;
 
 	}
-	
+	.rightContentHead {
+    font-size: 21px;
+	}
+	.rightSideTitle {
+    font-size: 17px;
+	}
+	.rightSideSub{
+		font-size: 13px;
+	}
+	.contentWrapper1 .profileheading,.contentWrapper2 .profileheading,
+	.contentWrapper3 .profileheading{
+		font-size: 19px;
+	}
+	 .skillSubtitle {
+	    font-size: 13px;
+	}
+	.eduSubtitle{
+		font-size: 13px;
+	}
+	.eduDuration{
+		font-size: 14px;
+	}
+	.skillsHeadFour .skillsTitle{
+		font-size:15px;
+	}
 }
 @media (max-width:576px){
 	 .rightSideImg {
@@ -573,5 +598,17 @@
 	}
 	.rightSideMain{
 		border-left: 1px solid var(--main-border-color);
+	}
+	.rightContentHead {
+    font-size: 21px;}
+    .contentWrapper2 .profileheading,.contentWrapper1 .profileheading,
+    .contentWrapper3 .profileheading{
+    	font-size: 17px;
+    }
+    .eduSubtitle,.skillSubtitle{
+    	font-size: 13px;
+    }
+    .skillsHeadFour .skillsTitle{
+		font-size:15px;
 	}
 }

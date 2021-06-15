@@ -81,13 +81,17 @@
 }
 .progress-bar-striped {
     background-image: linear-gradient(135deg, rgba(20, 40, 60, 0.9) 25%, transparent 25%, transparent 50%, rgba(20, 40, 60, 0.9) 50%, rgba(20, 40, 60, 0.9) 75%, transparent 75%, transparent)!important;
-    background-size: 1.3rem 1.3rem!important;
+    background-size: 1rem 1rem!important;
 }
 .step a{
 	color:#999!important;
 }
-
-@media (min-width:1400px){
+@media (min-width:1600px){
+	.bullet::after{
+		width: 290px;
+	}
+}
+@media (min-width:1400px)and (max-width: 1600px){
 	.bullet::after{
 		width: 220px;
 	}

@@ -444,6 +444,7 @@ export default class JobProfile extends Component{
 									</div>
 									<div className="col-lg-12">
 										<div className="row">
+										<div className="col-lg-12">
 											<div className="rightContentHead col-12">
 												Overview
 											</div>
@@ -502,6 +503,7 @@ export default class JobProfile extends Component{
 													<img src="/images/2.png" className="rightSideImg" alt="not found" />
 												</div>
 											</div>
+										</div>
 										</div>
 									</div>	
 								</div>

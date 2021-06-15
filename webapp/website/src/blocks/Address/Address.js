@@ -685,7 +685,7 @@ class Address extends Component{
 											<span id="houseNumberError" className="errorMsg"></span>
 										</div>
 
-										<div className="col-lg-4 col-md-6 xs-margin sm-margin">
+										<div className="col-lg-4 col-md-6 xs-margin sm-margin ">
 											<label htmlFor="address" className="nameTitleForm">Address <sup className="nameTitleFormStar">*</sup></label>
 											<div className="input-group ">
 												<span className="input-group-addon inputBoxIcon">
@@ -742,7 +742,7 @@ class Address extends Component{
 											</div> 
 											<span id="addressError" className="errorMsg"></span> 
 										</div>
-										<div className="col-lg-4 col-6 xs-margin md-margin">
+										<div className="col-lg-4 col-6 xs-margin md-margin xl-margin">
 											<label htmlFor="area" className="nameTitleForm">
 												Area/Suburb <sup className="nameTitleFormStar">*</sup>
 											</label>
@@ -757,7 +757,7 @@ class Address extends Component{
 											<span id="areaError" className="errorMsg"></span> 
 										</div>
 
-										<div className="col-lg-4 col-6 xs-margin md-margin">
+										<div className="col-lg-4 col-6 xs-margin md-margin xl-margin">
 											<label htmlFor="city" className="nameTitleForm">
 												City/Village
 												<sup className="nameTitleFormStar">*</sup>
@@ -773,7 +773,7 @@ class Address extends Component{
 											<span id="cityError" className="errorMsg"></span>
 										</div>
 
-										<div className="col-lg-4 col-6 xs-margin md-margin">
+										<div className="col-lg-4 col-6 xs-margin md-margin xl-margin">
 											<label htmlFor="district" className="nameTitleForm">
 												District
 												<sup className="nameTitleFormStar">*</sup>
@@ -791,7 +791,7 @@ class Address extends Component{
 
 										<div class="w-100 d-none d-lg-block"></div>
 
-										<div className="col-lg-4 col-6 xs-margin md-margin">
+										<div className="col-lg-4 col-6 xs-margin md-margin xl-margin">
 											<label htmlFor="states" className="nameTitleForm">
 												State
 												<sup className="nameTitleFormStar">*</sup>
@@ -819,7 +819,7 @@ class Address extends Component{
 											<span id="statesError" className="errorMsg"></span>
 										</div>
 
-										<div className="col-lg-4 col-6 xs-margin md-margin">
+										<div className="col-lg-4 col-6 xs-margin md-margin xl-margin">
 											<label htmlFor="country" className="nameTitleForm">
 												Country
 												<sup className="nameTitleFormStar">*</sup>
@@ -836,7 +836,7 @@ class Address extends Component{
 											<span id="countryError" className="errorMsg"></span>
 										</div>
 
-										<div className="col-lg-4 col-6 xs-margin md-margin">
+										<div className="col-lg-4 col-6 xs-margin md-margin xl-margin">
 											<label htmlFor="pincode" className="nameTitleForm">
 												Pincode
 												<sup className="nameTitleFormStar">*</sup>

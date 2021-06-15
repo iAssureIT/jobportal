@@ -20,7 +20,7 @@
     margin-bottom: 15px;
     margin-top: 15px;
     height: auto;
-    color: var(--main-txt-color);
+    color: #fff;
 }
 
 .nameTitleForm{
@@ -110,6 +110,7 @@
 
 }
 .buttonNext{
+    color: #fff;
     height: 28px;
     width: 110px;
     background-color:var(--main-border-color);
@@ -129,6 +130,7 @@
     margin-right:3px;
 }
 .buttonBack{
+    color: #fff;
     height: 28px;
     width: 110px;
     margin-top:30px;
@@ -181,13 +183,13 @@
 }
 .profileImageWrapper{
     border:1px dashed var(--main-border-color);
-    height: 192px;
+    height: 204px;
     border-radius: 5px;
     position: absolute;
 }
 .profileImage{
     width:97%;
-    height:182px;
+    height:194px;
     margin:4px;
 
 }
@@ -464,6 +466,7 @@ user agent stylesheet:focus {
 .ReactTags__remove{
     background: transparent;
     border: none;
+    color: #fff;
 }
 
 /*****************************************************End Of ReactTags Properties****************************************************/
@@ -796,7 +799,7 @@ user agent stylesheet:focus {
     background: var(--form-field-background-color);
     border: 1px dashed var(--main-border-color);
     cursor: pointer;
-    height: 190px!important;
+    height: 204px!important;
     padding: 0;
     align-items: center;
     text-align: center;
@@ -894,7 +897,8 @@ user agent stylesheet:focus {
 .candidateProfileSteps .input-group-addon{
     padding: 0px;
     width: 40px;
-    padding-top:8px;
+    padding-top:6px;
+    padding-left: 12px;
 }
 .candidateVisaWrapper{
     margin-top: 3px;
