@@ -2,6 +2,7 @@ import React, { useEffect }       from 'react';
 import {NavigationContainer}      from '@react-navigation/native';
 import { createStackNavigator,CardStyleInterpolators,TransitionPresets }   from '@react-navigation/stack';
 import { createDrawerNavigator }  from '@react-navigation/drawer';
+import { useWindowDimensions } from 'react-native';
 // import { createAppContainer }     from 'react-navigation';
 import { Animated, Easing }       from 'react-native';
 import axios                      from 'axios';
@@ -33,11 +34,46 @@ const TransitionScreenOptions = {
 };
 
 
+// const Drawer = createDrawerNavigator();
+
+// function MyDrawer() {
+//   const dimensions = useWindowDimensions();
+
+//   const isLargeScreen = dimensions.width >= 768;
+
+//   return (
+//     <Drawer.Navigator
+//       openByDefault
+//       drawerType={isLargeScreen ? 'permanent' : 'back'}
+//       drawerStyle={isLargeScreen ? null : { width: '100%' }}
+//       overlayColor="transparent"
+//       initialRouteName="BasicInfo"
+//     >
+//      <Drawer.Screen
+//         name="Feed"
+//         component={Feed}
+//         options={{ drawerLabel: 'Home' }}
+//       />
+//       <Drawer.Screen
+//         name="Notifications"
+//         component={Notifications}
+//         options={{ drawerLabel: 'Updates' }}
+//       />
+//       <Drawer.Screen
+//         name="Profile"
+//         component={Profile}
+//         options={{ drawerLabel: 'Profile' }}
+//       />
+
+//     </Drawer.Navigator>
+//   );
+// }
+
 export const HomeStack = () => (
   <Home.Navigator 
     headerMode            = "none"
     mode="modal"
-    drawerContent   = { (props) => <Menu { ...props } />}
+    drawerContent   = { (props) => <Menu navigate={navigation.navigate} { ...props } />}
   >
     <Home.Screen name="BasicInfo"                   component={BasicInfo} />
     <Home.Screen name="Dashboard"                   component={Dashboard} />
