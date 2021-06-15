@@ -90,6 +90,7 @@
 	.bullet::after{
 		width: 290px;
 	}
+	
 }
 @media (min-width:1400px)and (max-width: 1600px){
 	.bullet::after{

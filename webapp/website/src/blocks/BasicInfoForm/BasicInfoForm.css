@@ -910,6 +910,11 @@ user agent stylesheet:focus {
         width: 84%;
     }
 
+@media (min-width:1600px){
+  .resumeImage{
+        margin-top: 24%;
+    }
+}
 
 @media(min-width:992px) and (max-width:1024px){
     div.ReactTags__tags {
