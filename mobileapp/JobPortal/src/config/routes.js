@@ -75,6 +75,7 @@ export const HomeStack = () => (
     mode="modal"
     drawerContent   = { (props) => <Menu navigate={navigation.navigate} { ...props } />}
   >
+    <Home.Screen name="Address"                     component={Address}  />
     <Home.Screen name="BasicInfo"                   component={BasicInfo} />
     <Home.Screen name="Dashboard"                   component={Dashboard} />
     <Home.Screen name="SupportSystem"               component={SupportSystem} />
