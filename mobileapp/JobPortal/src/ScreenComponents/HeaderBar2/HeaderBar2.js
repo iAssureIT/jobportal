@@ -13,14 +13,23 @@ import {
   SearchBar,
   Button 
 } from 'react-native-elements';
-import AsyncStorage                from '@react-native-async-storage/async-storage';
-import { connect,useDispatch,
-  useSelector }                    from 'react-redux';
-import { useNavigation }           from '@react-navigation/native';
-import ValidationComponent         from "react-native-form-validator";
-import axios                       from 'axios'; 
-import styles                      from '../../AppDesigns/currentApp/styles/ScreenComponentStyles/HeaderBar2Styles.js';
-import {colors}                    from '../../AppDesigns/currentApp/styles/styles.js';
+
+
+import ValidationComponent  from "react-native-form-validator";
+import axios                from 'axios'; 
+import styles               from '../../AppDesigns/currentApp/styles/ScreenComponentStyles/HeaderBar2Styles.js';
+import { connect,useDispatch,useSelector }      from 'react-redux';
+import {colors}             from '../../AppDesigns/currentApp/styles/styles.js';
+import AsyncStorage         from '@react-native-async-storage/async-storage';
+import { getSearchResult,getSuggestion } 	from '../../redux/globalSearch/actions';
+import { SET_SEARCH_CALL,
+      SET_SUGGETION_LIST,
+      SET_SEARCH_TEXT,
+      SET_SERACH_LIST
+    } 	from '../../redux/globalSearch/types';
+// import {Autocomplete}       from  'react-native-autocomplete-input';
+
+import { DrawerActions } from '@react-navigation/native';
 
 
   const HeaderBars2=(props)=>{
@@ -115,15 +124,24 @@ import {colors}                    from '../../AppDesigns/currentApp/styles/styl
           }
           rightComponent={
               <View style={styles.notificationbell}>
-                 <TouchableOpacity style={styles.bellIcon} onPress={()=> navigation.navigate('InAppNotification')}>
-                  <Icon name="bell-o" type="font-awesome" size={25} color={colors.theme} />
-                  <Text style={styles.notificationText}>{inAppNotificationsCount}</Text>
-                 </TouchableOpacity> 
-                <View >
-                  <TouchableOpacity  onPress={()=> navigation.toggleDrawer()}>
-                    <Icon size={18} name='bars' type='font-awesome' color={colors.white} style={{borderWidth:1,borderColor:'#4C5B72',backgroundColor:"#242933",padding:10,borderRadius:3}}/>
-                  </TouchableOpacity>
-                </View>
+
+               <TouchableOpacity style={styles.bellIcon} onPress={()=> navigation.navigate('InAppNotification')}>
+                <Icon name="bell-o" type="font-awesome" size={25} color={colors.theme} />
+                <Text style={styles.notificationText}>{inAppNotificationsCount}</Text>
+               </TouchableOpacity> 
+              <View >
+                <TouchableOpacity  onPress={()=> navigation.dispatch(DrawerActions.toggleDrawer())}>
+                  <Icon size={18} name='bars' type='font-awesome' color={colors.white} style={{borderWidth:1,borderColor:'#4C5B72',backgroundColor:"#242933",padding:10,borderRadius:3}}/>
+                </TouchableOpacity>
+              </View>
+                {/*<TouchableOpacity onPress={()=>{Linking.openURL('tel:+91 90280 79487');}} style={{marginLeft:20,justiafyContent:"flex-end"}}>
+                  <Icon name="phone" type="font-awesome"    size={25} color={colors.theme} />
+                </TouchableOpacity>*/}
+
+                {/* <TouchableOpacity onPress={()=>this.props.navigation.navigate('Stores')}>
+                  <Icon size={25} name="store"  type="font-awesome-5" color=colors.theme />
+                </TouchableOpacity> */}
+
               </View>
           }
           containerStyle={styles.rightcnt}
