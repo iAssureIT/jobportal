@@ -14,7 +14,7 @@ import { connect,useDispatch,useSelector }      from 'react-redux';
 import styles                       from '../../AppDesigns/currentApp/styles/ScreenStyles/Dashboardstyles.js';
 import {colors}                     from '../../AppDesigns/currentApp/styles/styles.js';
 import Loading                      from '../../ScreenComponents/Loading/Loading.js';
-import { useNavigation }           from '@react-navigation/native';
+// import { useNavigation }           from '@react-navigation/native';
 // 
 import {withCustomerToaster}        from '../../redux/AppState.js';
 
@@ -29,8 +29,8 @@ export const Dashboard = withCustomerToaster((props)=>{
  
   const isFocused = useIsFocused();
   const dispatch = useDispatch();
-  const navigation = useNavigation();
-  const {setToast} = props; 
+  // const navigation = useNavigation();
+  const {setToast,navigation} = props; 
   // 
   const [isOpen,setOpen]= useState(false);
 

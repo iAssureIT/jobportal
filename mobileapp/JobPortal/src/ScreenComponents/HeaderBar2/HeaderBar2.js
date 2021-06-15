@@ -29,8 +29,8 @@ import { SET_SEARCH_CALL,
     } 	from '../../redux/globalSearch/types';
 // import {Autocomplete}       from  'react-native-autocomplete-input';
 
-import { DrawerActions } from '@react-navigation/native';
-
+import { DrawerActions }     from '@react-navigation/native';
+import { useNavigation }     from '@react-navigation/native';
 
   const HeaderBars2=(props)=>{
 
@@ -47,12 +47,14 @@ import { DrawerActions } from '@react-navigation/native';
     }));
     const {globalSearch} = store;
    
-    useEffect(() => {InAppNotification
-      getData()
-      setHeaderTitle(props.headerTitle)
-    },[props]);
-
+    // useEffect(() => {InAppNotification
+    //   getData()
+    //   setHeaderTitle(props.headerTitle)
+    // },[props]);
     
+    useEffect(() => {
+      getData()
+    },[props]);
  
   const getData=()=>{
     useSearchText(globalSearch.searchText);
