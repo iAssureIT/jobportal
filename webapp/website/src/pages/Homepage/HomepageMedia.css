@@ -4,6 +4,8 @@
 	overflow-x: scroll;
 	z-index: 500;
 }
+
+
 }
 @media(min-width:768px) and (max-width:992px){
 	.overFlow{
@@ -11,9 +13,6 @@
 	z-index: 500;
 }
 
-.india{
-	top: 0px;
-}
 
 .viewDiv{
 	width: 100%;
@@ -86,5 +85,34 @@
  	.overFlow{
 	overflow-x: scroll;
 	z-index: 500;
+}
+
+.viewDiv{
+	width: 100%;
+	margin: auto;
+	height: 50px;
+	border: 1px solid var(--yellow-button-color);
+	border-radius: 5px;
+	background-color: var(--main-bg-color);
+	margin-bottom: 10px;
+	text-align: center;
+	margin-bottom: 20px;
+	float: left !important;
+	color: var(--main-txt-color) !important;
+	font-family: 'Montserrat-Regular' !important;
+	padding:7px !important;
+	font-size: 12px !important;
+	float: left !important;
+
+
+}
+.viewDiv.active{
+	height: 50px !important;
+	background-color: var(--yellow-button-color) !important;
+	color: var(--main-txt-color) !important;
+	font-family: 'Montserrat-Regular' !important;
+	padding:7px !important;
+	font-size: 12px !important;
+
 }
 }
