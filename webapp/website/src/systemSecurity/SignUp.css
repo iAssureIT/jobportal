@@ -9,10 +9,11 @@
 }
 
 .registrationFormWrapper{
-  min-height: 500px;
+  min-height: 557px;
+  margin-top: 127px;
   height: auto;
   /*background-color:#242931;*/
-  padding-bottom: 100px;
+  /*padding-bottom: 100px;*/
 
 }
 
@@ -23,9 +24,9 @@
 .registrationForm{
   min-height: 300px;
   height: auto;
-  margin-top: 100px;
+  margin-top: -47px;
   background-color: #242931;
-  border:3px solid #D3950A;
+  border: 3px solid #D3950A;
   border-radius: 10px;
   padding-bottom: 50px;
 }
@@ -192,13 +193,13 @@
   position: absolute;
   height: 200px;
   width: 125px;
-  top:-108px;
-  left:62%;
+  top: -74px;
+  left: 58%;
   z-index: 1;
 }
 
 .img1oginInnerSU{
-  height: 200px;
+  height: 131px;
   /*width: 125px;*/
 }
 
@@ -209,6 +210,7 @@
   bottom: 75px;
   left: 2.6%;
   z-index: 1;
+  display: none;
 }
 
 .img2loginInnerSU{
@@ -223,6 +225,7 @@
   bottom: 75px;
   left: 74.7%;
   z-index: 1;
+  display: none;
 }
 
 .img3loginInnerSU{
@@ -238,6 +241,7 @@
   bottom: 45px;
   left: 30%;
   z-index: 1;
+  display: none;
 }
 
 .img4loginInnerSU{
@@ -252,6 +256,7 @@
   bottom: 100px;
   left: 83%;
   z-index: 0;
+  display: none;
 }
 
 .img5loginInnerSU{
@@ -266,6 +271,7 @@
   top: 77px;
   left: 10.2%;
   z-index: 0;
+  display: none;
 }
 
 .img6loginInnerSU{
@@ -333,12 +339,193 @@
   height: 20px;
 }
 
-/**********media query***********/
+/* NNNNNNNNNNNNNNNNNNNNNNNNN ++  Start Media Query  ++ NNNNNNNNNNNNNNNNNNNNNNNNN */
 
-@media screen and (max-width: 1367px){
+@media(min-width:1920px) and (max-width:2560px){
 
-.registrationFormWrapper {
-     margin-top: 149px !important; 
+
+
+.errorMsg {
+    font-size: 10px;
 }
+
+} 
+
+@media(min-width:1536px) and (max-width:1919px){
+
+
+
+.errorMsg {
+    font-size: 10px;
+} 
+
+}
+
+@media(min-width:1366px) and (max-width:1535px){
+
+
+
+}
+
+@media(min-width:1024px) and (max-width:1365px){
+
+
+
+}
+
+@media(min-width:993px) and (max-width:1023px){
+
+
+
+}
+
+@media(min-width:851px) and (max-width:992px){
+
+
+
+}
+
+@media(min-width:812px) and (max-width:850px){
+
+
+
+}
+
+@media(min-width:768px) and (max-width:811px){
+
+  
+
+}
+
+@media(min-width:576px) and (max-width:767px){
+
+
+
+}
+
+@media (max-width:576px){
+
+
+
+}
+
+@media (max-width:480px){
+
+/*.registrationFormWrapper{
+  min-height: 620px;
+  margin-top: 160px;
+}
+
+.registrationForm{
+  min-height: 300px;
+  margin-top: -47px;
+  padding-bottom: 60px;
+}  */  
+
+  
+}
+
+@media (max-width:415px){
+
+.registrationFormWrapper{
+  min-height: 641px;
+  margin-top: 140px;
+}
+
+.registrationForm{
+  min-height: 300px;
+  margin-top: -47px;
+  padding-bottom: 60px;
+}    
+  
+}
+
+@media (max-width:394px){
+
+.registrationFormWrapper{
+  min-height: 696px;
+  margin-top: 200px;
+}
+
+.registrationForm{
+  min-height: 300px;
+  margin-top: -47px;
+  padding-bottom: 60px;
+}  
+  
+}
+
+@media (max-width:376px){
+
+.registrationFormWrapper{
+  min-height: 584px;
+  margin-top: 127px;
+}
+
+.registrationForm{
+  min-height: 300px;
+  margin-top: -47px;
+  padding-bottom: 60px;
+}
+  
+}
+
+@media (max-width:360px){
+
+.registrationFormWrapper{
+  min-height: 557px;
+  margin-top: 127px;
+}
+
+.registrationForm{
+  min-height: 300px;
+  margin-top: -47px;
+  padding-bottom: 50px;
+}
+
+  
+}
+
+@media (max-width:320px){
+
+.registrationFormWrapper{
+  min-height: 607px;
+  margin-top: 127px;
+}
+
+.registrationForm{
+  min-height: 300px;
+  margin-top: -47px;
+  padding-bottom: 50px;
+}
+
+}
+
+/*ipad pro*/
+@media only screen 
+  and (min-device-width: 1024px) 
+  and (max-device-width: 1366px) 
+  and (-webkit-min-device-pixel-ratio: 2) 
+  and (orientation: portrait){
+
+
+}
+
+/*iPhone x*/
+@media only screen 
+    and (device-width : 375px) 
+    and (device-height : 812px) 
+    and (-webkit-device-pixel-ratio : 3) { 
+
+.registrationFormWrapper{
+  min-height: 676px;
+  margin-top: 180px;
+}
+
+.registrationForm{
+  min-height: 300px;
+  margin-top: -47px;
+  padding-bottom: 60px;
+}       
 
 }

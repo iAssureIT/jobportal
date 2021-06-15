@@ -66,7 +66,7 @@ export const Menu = (props)=>{
           <Text style={{fontSize:15,color: "#aaa",fontFamily:"Montserrat-Regular",}}>garima.billore@iassureit.com</Text>
         </View>	
       <View style={styles.menuWrapper}>
-        <TouchableOpacity onPress={()=> navigation.navigate('AccountDashboard')}>
+        <TouchableOpacity onPress={()=> navigation.navigate('BasicInfo')}>
           <View style={styles.menu}>
             <Icon 
               size={18} 

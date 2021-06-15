@@ -453,7 +453,7 @@ class SignUp extends Component {
   }
 	render() {
 		return (
-			<section className="registrationFormWrapper col-12 col-sm-10 offset-sm-1 col-md-10 offset-md-1 col-lg-8 offset-lg-2 col-xl-6 offset-xl-3">
+			<section className="registrationFormWrapper col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-8 offset-lg-2 col-xl-6 offset-xl-3">
 
           <div className="img1LoginSU">
               <img src="/images/Sign_In/1.png" alt="img1Login" className="img1oginInnerSU img-fluid"/>
@@ -478,7 +478,7 @@ class SignUp extends Component {
            <div className="img6LoginSU">
               <img src="/images/Sign_In/6.png" alt="img6Login" className="img6loginInnerSU img-fluid"/>
           </div>
-                <div className="registrationForm col-10 offset-1 col-sm-8 offset-sm-2 col-md-8 offset-md-2 col-lg-8 offset-lg-2 col-xl-8 offset-xl-2">
+                <div className="registrationForm col-10 offset-1 col-sm-8 offset-sm-2 col-md-8 offset-md-2 col-lg-8 offset-lg-2 col-xl-6 offset-xl-3">
                   <form>
 
                     <div className="signUpTitle col-12">Sign Up

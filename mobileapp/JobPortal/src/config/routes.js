@@ -2,6 +2,7 @@ import React, { useEffect }       from 'react';
 import {NavigationContainer}      from '@react-navigation/native';
 import { createStackNavigator,CardStyleInterpolators,TransitionPresets }   from '@react-navigation/stack';
 import { createDrawerNavigator }  from '@react-navigation/drawer';
+import { useWindowDimensions } from 'react-native';
 // import { createAppContainer }     from 'react-navigation';
 import { Animated, Easing }       from 'react-native';
 import axios                      from 'axios';
@@ -32,15 +33,24 @@ const TransitionScreenOptions = {
   ...TransitionPresets.ModalTransition, // This is where the transition happens
 };
 
-
 export const HomeStack = () => (
   <Home.Navigator 
     headerMode            = "none"
-    mode="modal"
+    initialRouteName      = "Dashboard"
+    screenOptions={{
+      gestureEnabled:true,
+      gestureDirection:'horizontal',
+      cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS
+      // transitionSpec:{
+      //   open:config,
+      //   close:closeConfig
+      // }
+    }}
     drawerContent   = { (props) => <Menu { ...props } />}
   >
-    <Home.Screen name="BasicInfo"                   component={BasicInfo} />
     <Home.Screen name="Dashboard"                   component={Dashboard} />
+    <Home.Screen name="Address"                     component={Address}  />
+    <Home.Screen name="BasicInfo"                   component={BasicInfo} />
     <Home.Screen name="SupportSystem"               component={SupportSystem} />
     <Home.Screen name="InAppNotification"           component={InAppNotification} />  
   </Home.Navigator>
@@ -65,10 +75,10 @@ const RegisterRoutes = createStackNavigator();
 const App = createStackNavigator();
 const AppStack = () => (
   <App.Navigator headerMode="none" >
+    <App.Screen name="App" component={HomeStack} />
+    <App.Screen name="Dashboard" component={Dashboard} />
     <App.Screen name="Auth" component={RegisterStack} />
-      <App.Screen name="App" component={HomeStack} />
 
-      <App.Screen name="Dashboard" component={Dashboard} />
   </App.Navigator>
 );
 

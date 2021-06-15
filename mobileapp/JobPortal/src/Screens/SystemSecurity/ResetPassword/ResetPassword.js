@@ -47,9 +47,11 @@ export const ResetPassword = withCustomerToaster((props) => {
             if(data.password == data.confirm_password){
               setLoading(true)
               var formValues = {
-                pwd: data.password,
+                pwd :data.password,
+                user_id : user_id
+               
               };
-              axios.patch('/api/auth/patch/change_password_withoutotp/id/'+user_id,formValues)
+              axios.patch('/api/auth/patch/change_password_withoutotp/id',formValues)
               .then((response)=>{  
                 if(response.data === "PASSWORD_RESET"){
                   setToast({

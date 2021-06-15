@@ -663,296 +663,301 @@ class Header extends Component{
 
     else{
        return(
-          <nav className="navbar FunctionalHeaderWrapper container-fluid">
-            <div className="col-1 col-sm-1 col-md-1 col-lg-1 col-xl-1">
-              <div className="iconHeader">
-                <a href="/">
-                  <img src="/images/1.png" alt="icon"  className="iIcon" />
-                </a>
-              </div>
-            </div>
-            {window.location.pathname.split("/")[3] == "state" ? (
-              <div className="breadCrumbHeader col-4 col-sm-4 col-md-4 col-lg-3 col-xl-3">
-                <ul className="breadCrumbInner">
-                  <li className="breadCrumbInnerli">
-                    <a href="/">India</a>
-                  </li>
-                  {window.location.pathname.split("/")[4] != "all" ? (
-                    <li
-                      className={
-                        window.location.pathname.split("/")[3] == "state" &&
-                        window.location.pathname.split("/")[6] != "all"
-                          ? "breadCrumbInnerli"
-                          : "breadCrumbInnerli selectedState"
-                      }
-                    >
-                      <a
-                        href={
-                          "/country/" +
-                          window.location.pathname.split("/")[2] +
-                          "/state/" +
-                          window.location.pathname.split("/")[4] +
-                          "/city/all/industry/" +
-                          window.location.pathname.split("/")[8] +
-                          "/" +
-                          window.location.pathname.split("/")[9] +
-                          "/function/" +
-                          window.location.pathname.split("/")[11] +
-                          "/" +
-                          window.location.pathname.split("/")[12] +
-                          "/subfunction/" +
-                          window.location.pathname.split("/")[14] +
-                          "/" +
-                          window.location.pathname.split("/")[15]
-                        }
-                      >
-                        {selectedState}
-                      </a>
-                    </li>
-                  ) : null}
-                  {window.location.pathname.split("/")[4] != "all" &&
-                  window.location.pathname.split("/")[6] != "all" ? (
-                    <li className="breadCrumbInnerli selectedState">
-                      <a
-                        href={
-                          "/country/" +
-                          window.location.pathname.split("/")[2] +
-                          "/state/" +
-                          window.location.pathname.split("/")[4] +
-                          "/city/" +
-                          window.location.pathname.split("/")[6] +
-                          "/industry/" +
-                          window.location.pathname.split("/")[8] +
-                          "/" +
-                          window.location.pathname.split("/")[9] +
-                          "/function/" +
-                          window.location.pathname.split("/")[11] +
-                          "/" +
-                          window.location.pathname.split("/")[12] +
-                          "/subfunction/" +
-                          window.location.pathname.split("/")[14] +
-                          "/" +
-                          window.location.pathname.split("/")[15]
-                        }
-                      >
-                        {window.location.pathname.split("/")[6]}
-                      </a>
-                    </li>
-                  ) : null}
-                </ul>
-              </div>
-            ) : (
-              <div className="breadCrumbHeader col-4 col-sm-4 col-md-4 col-lg-3 col-xl-3"></div>
-            )}
-
-            <div className="FunctionWiseTitle col-1 col-sm-1 col-md-1 col-lg-4 col-xl-4"></div>
-
-            <div className="rightFunctionHeader col-6 col-sm-6 col-md-6 col-lg-4 col-xl-4">
+          <nav className="navbar ">
+            <div className="col-12 FunctionalHeaderWrapper">
               <div className="row">
-                <div className="rightFunctionHeader1 col-7 col-sm-7 col-md-7 col-lg-7 col-xl-7">
-                  <div className="row">
-                    <div className="rightFunctionHeader1 col-12  pull-right">
-                      <div className="rightFunctionHeader1CityJobs">
-                        {window.location.pathname.split("/")[0] == "" &&
-                        window.location.pathname.split("/")[3] != "state" ? (
-                          <div className="cityNameHeader">{"India"}</div>
-                        ) : null}
-                        {window.location.pathname.split("/")[3] == "state" &&
-                        window.location.pathname.split("/")[6] == "all" ? (
-                          <div className="cityNameHeader">
-                            {selectedState && selectedState != ""
-                              ? selectedState
-                              : "India"}
-                          </div>
-                        ) : null}
-                        {window.location.pathname.split("/")[3] == "state" &&
-                        window.location.pathname.split("/")[6] != "all" ? (
-                          <div className="cityNameHeader">
-                            {window.location.pathname.split("/")[6]}
-                          </div>
-                        ) : null}
 
-                        <div className="cityJobsHeader">
-                          {this.props.jobCount ? this.props.jobCount : 0}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="rightFunctionHeader2 col-5 col-sm-5 col-md-5 col-lg-5 col-xl-5">
-                  <div className="row">
-                    <div className="headerMenu2 col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4">
-                      {/*<div className="headerMenu11" >
-                              <FontAwesomeIcon icon={['fas', 'bell']} />
-                            </div>*/}
-                    </div>
-                    <div
-                      className="headerMenu2 col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4"
-                      id="loginbtndiv"
-                      data-toggle="modal"
-                      data-target="#loginModal"
-                    >
-                      <div className="headerMenu11">
-                        <FontAwesomeIcon icon={["fas", "user"]} />
-                      </div>
-                    </div>
-                    <div className="headerMenu2 col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4">
-                      <div className="headerMenu1" onClick={this.asideBar.bind(this)}>
-                        <FontAwesomeIcon icon={["fas", "bars"]} />
-                      </div>
-                    </div>
-                  </div>
-
-                  <div
-                    className="functionalbarsToggel"
-                    id="functionalbarsToggel"
-                    style={{ top: this.state.asideDisplay }}
-                  >
-                    <div className="functionalbarsCross col-12 ">
-                      <span
-                        className="functionalnotificationMessegeCross"
-                        id="closeAsidebarButton"
-                        onClick={this.asideBar.bind(this)}
-                      >
-                        {" "}
-                        X{" "}
-                      </span>
-                    </div>
-
-                    <div className="functionalbarsItem col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                      <span className="functionalnotificationMessegeText">Jobs </span>
-                    </div>
-                    <div className="functionalbarsItem col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                      <span className="functionalnotificationMessegeText">Companies</span>
-                    </div>
-                    <div className="functionalbarsItem col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                      <span className="functionalnotificationMessegeText">
-                        Recruiters
-                      </span>
-                    </div>
-                    <div className="functionalbarsItem col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                      <span className="functionalnotificationMessegeText">About Us</span>
-                    </div>
-
-                    <div className="functionalbarsItem col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                      <span className="functionalnotificationMessegeText">
-                        Contact Us
-                      </span>
-                    </div>
-                  </div>
-
-                  <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-                    aria-hidden="true">
-                    <div className="row">
-                    <div class="modal-dialog" role="document">
-                      <div class="modal-content">
-                        <div class="modal-body">
-                          <button
-                            type="button"
-                            className="close closebtnmodal"
-                            id="closeModalButton"
-                            data-dismiss="modal"
-                            aria-label="Close"
-                          >
-                            &times;
-                          </button>
-                          <section className="OTPSentWrapper">
-                            {this.props.selectedModal == "login" ? <LoginForm /> : null}
-                            {this.props.selectedModal == "signup" ? <SignUp /> : null}
-                            {this.props.selectedModal == "forgotpassword" ? (
-                              <ForgotPassword />
-                            ) : null}
-                            {this.props.selectedModal == "confirmotp" ? (
-                              <ConfirmOtp />
-                            ) : null}
-                            {this.props.selectedModal == "resetpassword" ? (
-                              <ResetPassword />
-                            ) : null}
-                            {this.props.selectedModal == "changepassword" ? (
-                              <ChangePassword />
-                            ) : null}
-                          </section>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                  {/*<div
-                    className="modal fade col-md-12"
-                    id="loginModal"
-                    role="dialog"
-                    tabIndex="-1" aria-hidden="true"
-                  >
-                    <div className="">
-                      <div className="modal-dialog modal-lg">
-                      <div class="modal-content">
-                        <div className="modal-body">
-                          <button
-                            type="button"
-                            className="close"
-                            id="closeModalButton"
-                            data-dismiss="modal"
-                            aria-label="Close"
-                          >
-                            &times;
-                          </button>
-                          <section className="OTPSentWrapper ">
-                            {this.props.selectedModal == "login" ? <LoginForm /> : null}
-                            {this.props.selectedModal == "signup" ? <SignUp /> : null}
-                            {this.props.selectedModal == "forgotpassword" ? (
-                              <ForgotPassword />
-                            ) : null}
-                            {this.props.selectedModal == "confirmotp" ? (
-                              <ConfirmOtp />
-                            ) : null}
-                            {this.props.selectedModal == "resetpassword" ? (
-                              <ResetPassword />
-                            ) : null}
-                            {this.props.selectedModal == "changepassword" ? (
-                              <ChangePassword />
-                            ) : null}
-                          </section>
-                        </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>*/}
-
-                  <div
-                    className="barsToggel pull-right"
-                    id="barsToggel"
-                    style={{ display: this.state.userMenu }}
-                  >
-                    <div className="notificationMessege col-12 ">
-                      <FontAwesomeIcon icon="search" />
-                      <span className="notificationMessegeText">Employer Settings</span>
-                    </div>
-                    <a href="/job-list">
-                      <div className="notificationMessege col-12 ">
-                        <FontAwesomeIcon icon="briefcase" />
-                        <span className="notificationMessegeText">Posted Jobs</span>
-                      </div>
+                <div className="col-3 col-sm-3 col-md-1 col-lg-1 col-xl-1">
+                  <div className="iconHeader">
+                    <a href="/">
+                      <img src="/images/1.png" alt="icon"  className="iIcon" />
                     </a>
-                    <div className="notificationMessege col-12 ">
-                      <FontAwesomeIcon icon="users" />
-                      <span className="notificationMessegeText">Recruiters</span>
+                  </div>
+                </div>
+                {window.location.pathname.split("/")[3] == "state" ? (
+                  <div className="breadCrumbHeader  d-none d-md-block col-md-5 col-lg-3 col-xl-3">
+                    <ul className="breadCrumbInner">
+                      <li className="breadCrumbInnerli">
+                        <a href="/">India</a>
+                      </li>
+                      {window.location.pathname.split("/")[4] != "all" ? (
+                        <li
+                          className={
+                            window.location.pathname.split("/")[3] == "state" &&
+                            window.location.pathname.split("/")[6] != "all"
+                              ? "breadCrumbInnerli"
+                              : "breadCrumbInnerli selectedState"
+                          }
+                        >
+                          <a
+                            href={
+                              "/country/" +
+                              window.location.pathname.split("/")[2] +
+                              "/state/" +
+                              window.location.pathname.split("/")[4] +
+                              "/city/all/industry/" +
+                              window.location.pathname.split("/")[8] +
+                              "/" +
+                              window.location.pathname.split("/")[9] +
+                              "/function/" +
+                              window.location.pathname.split("/")[11] +
+                              "/" +
+                              window.location.pathname.split("/")[12] +
+                              "/subfunction/" +
+                              window.location.pathname.split("/")[14] +
+                              "/" +
+                              window.location.pathname.split("/")[15]
+                            }
+                          >
+                            {selectedState}
+                          </a>
+                        </li>
+                      ) : null}
+                      {window.location.pathname.split("/")[4] != "all" &&
+                      window.location.pathname.split("/")[6] != "all" ? (
+                        <li className="breadCrumbInnerli selectedState">
+                          <a
+                            href={
+                              "/country/" +
+                              window.location.pathname.split("/")[2] +
+                              "/state/" +
+                              window.location.pathname.split("/")[4] +
+                              "/city/" +
+                              window.location.pathname.split("/")[6] +
+                              "/industry/" +
+                              window.location.pathname.split("/")[8] +
+                              "/" +
+                              window.location.pathname.split("/")[9] +
+                              "/function/" +
+                              window.location.pathname.split("/")[11] +
+                              "/" +
+                              window.location.pathname.split("/")[12] +
+                              "/subfunction/" +
+                              window.location.pathname.split("/")[14] +
+                              "/" +
+                              window.location.pathname.split("/")[15]
+                            }
+                          >
+                            {window.location.pathname.split("/")[6]}
+                          </a>
+                        </li>
+                      ) : null}
+                    </ul>
+                  </div>
+                ) : (
+                  <div className="breadCrumbHeader d-none d-md-block col-md-5 col-lg-3 col-xl-3"></div>
+                )}
+
+                <div className="FunctionWiseTitle  d-none d-lg-block  col-lg-4 col-xl-4"></div>
+
+                <div className="rightFunctionHeader col-9 col-sm-9 col-md-6 col-lg-4 col-xl-4">
+                  <div className="row">
+                    <div className="rightFunctionHeader1  col-7 col-sm-7 col-md-7 col-lg-7 col-xl-7">
+                      <div className="row">
+                        <div className="rightFunctionHeader1 col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 pull-right">
+                          <div className="rightFunctionHeader1CityJobs">
+                            {window.location.pathname.split("/")[0] == "" &&
+                            window.location.pathname.split("/")[3] != "state" ? (
+                              <div className="cityNameHeader">{"India"}</div>
+                            ) : null}
+                            {window.location.pathname.split("/")[3] == "state" &&
+                            window.location.pathname.split("/")[6] == "all" ? (
+                              <div className="cityNameHeader">
+                                {selectedState && selectedState != ""
+                                  ? selectedState
+                                  : "India"}
+                              </div>
+                            ) : null}
+                            {window.location.pathname.split("/")[3] == "state" &&
+                            window.location.pathname.split("/")[6] != "all" ? (
+                              <div className="cityNameHeader">
+                                {window.location.pathname.split("/")[6]}
+                              </div>
+                            ) : null}
+
+                            <div className="cityJobsHeader">
+                              {this.props.jobCount ? this.props.jobCount : 0}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                    <div className="notificationMessege col-12 ">
-                      <FontAwesomeIcon icon="search" />
-                      <span className="notificationMessegeText">Services</span>
+
+                    <div className="rightFunctionHeader2 col-5 col-sm-5 col-md-5 col-lg-5 col-xl-5">
+                      <div className="row">
+                        <div className="headerMenu2 col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4">
+                          {/*<div className="headerMenu11" >
+                                  <FontAwesomeIcon icon={['fas', 'bell']} />
+                                </div>*/}
+                        </div>
+                        <div
+                          className="headerMenu2  col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4"
+                          id="loginbtndiv"
+                          data-toggle="modal"
+                          data-target="#loginModal"
+                        >
+                          <div className="headerMenu11">
+                            <FontAwesomeIcon icon={["fas", "user"]} />
+                          </div>
+                        </div>
+                        <div className="headerMenu2 col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4">
+                          <div className="headerMenu1" onClick={this.asideBar.bind(this)}>
+                            <FontAwesomeIcon icon={["fas", "bars"]} />
+                          </div>
+                        </div>
+                      </div>
+
+                      <div
+                        className="functionalbarsToggel"
+                        id="functionalbarsToggel"
+                        style={{ top: this.state.asideDisplay }}
+                      >
+                        <div className="functionalbarsCross col-12 ">
+                          <span
+                            className="functionalnotificationMessegeCross"
+                            id="closeAsidebarButton"
+                            onClick={this.asideBar.bind(this)}
+                          >
+                            {" "}
+                            X{" "}
+                          </span>
+                        </div>
+
+                        <div className="functionalbarsItem col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                          <span className="functionalnotificationMessegeText">Jobs </span>
+                        </div>
+                        <div className="functionalbarsItem col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                          <span className="functionalnotificationMessegeText">Companies</span>
+                        </div>
+                        <div className="functionalbarsItem col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                          <span className="functionalnotificationMessegeText">
+                            Recruiters
+                          </span>
+                        </div>
+                        <div className="functionalbarsItem col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                          <span className="functionalnotificationMessegeText">About Us</span>
+                        </div>
+
+                        <div className="functionalbarsItem col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                          <span className="functionalnotificationMessegeText">
+                            Contact Us
+                          </span>
+                        </div>
+                      </div>
+
+                      <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                        aria-hidden="true">
+                        <div className="row">
+                        <div class="modal-dialog" role="document">
+                          <div class="modal-content">
+                            <div class="modal-body">
+                              <button
+                                type="button"
+                                className="close closebtnmodal"
+                                id="closeModalButton"
+                                data-dismiss="modal"
+                                aria-label="Close"
+                              >
+                                &times;
+                              </button>
+                              <section className="OTPSentWrapper">
+                                {this.props.selectedModal == "login" ? <LoginForm /> : null}
+                                {this.props.selectedModal == "signup" ? <SignUp /> : null}
+                                {this.props.selectedModal == "forgotpassword" ? (
+                                  <ForgotPassword />
+                                ) : null}
+                                {this.props.selectedModal == "confirmotp" ? (
+                                  <ConfirmOtp />
+                                ) : null}
+                                {this.props.selectedModal == "resetpassword" ? (
+                                  <ResetPassword />
+                                ) : null}
+                                {this.props.selectedModal == "changepassword" ? (
+                                  <ChangePassword />
+                                ) : null}
+                              </section>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                    <div className="notificationMessege col-12 ">
-                      <span className="notificationMessegeText">About Us</span>
-                    </div>
-                    <div className="notificationMessege col-12 ">
-                      <span className="notificationMessegeText">Contact Us</span>
+
+                      {/*<div
+                        className="modal fade col-md-12"
+                        id="loginModal"
+                        role="dialog"
+                        tabIndex="-1" aria-hidden="true"
+                      >
+                        <div className="">
+                          <div className="modal-dialog modal-lg">
+                          <div class="modal-content">
+                            <div className="modal-body">
+                              <button
+                                type="button"
+                                className="close"
+                                id="closeModalButton"
+                                data-dismiss="modal"
+                                aria-label="Close"
+                              >
+                                &times;
+                              </button>
+                              <section className="OTPSentWrapper ">
+                                {this.props.selectedModal == "login" ? <LoginForm /> : null}
+                                {this.props.selectedModal == "signup" ? <SignUp /> : null}
+                                {this.props.selectedModal == "forgotpassword" ? (
+                                  <ForgotPassword />
+                                ) : null}
+                                {this.props.selectedModal == "confirmotp" ? (
+                                  <ConfirmOtp />
+                                ) : null}
+                                {this.props.selectedModal == "resetpassword" ? (
+                                  <ResetPassword />
+                                ) : null}
+                                {this.props.selectedModal == "changepassword" ? (
+                                  <ChangePassword />
+                                ) : null}
+                              </section>
+                            </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>*/}
+
+                      <div
+                        className="barsToggel pull-right"
+                        id="barsToggel"
+                        style={{ display: this.state.userMenu }}
+                      >
+                        <div className="notificationMessege col-12 ">
+                          <FontAwesomeIcon icon="search" />
+                          <span className="notificationMessegeText">Employer Settings</span>
+                        </div>
+                        <a href="/job-list">
+                          <div className="notificationMessege col-12 ">
+                            <FontAwesomeIcon icon="briefcase" />
+                            <span className="notificationMessegeText">Posted Jobs</span>
+                          </div>
+                        </a>
+                        <div className="notificationMessege col-12 ">
+                          <FontAwesomeIcon icon="users" />
+                          <span className="notificationMessegeText">Recruiters</span>
+                        </div>
+                        <div className="notificationMessege col-12 ">
+                          <FontAwesomeIcon icon="search" />
+                          <span className="notificationMessegeText">Services</span>
+                        </div>
+                        <div className="notificationMessege col-12 ">
+                          <span className="notificationMessegeText">About Us</span>
+                        </div>
+                        <div className="notificationMessege col-12 ">
+                          <span className="notificationMessegeText">Contact Us</span>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
+            </div>    
           </nav>
 
         );

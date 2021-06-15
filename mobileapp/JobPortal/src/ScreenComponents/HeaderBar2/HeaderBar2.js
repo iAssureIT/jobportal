@@ -13,36 +13,36 @@ import {
   SearchBar,
   Button 
 } from 'react-native-elements';
-import ValidationComponent  from "react-native-form-validator";
 import axios                from 'axios'; 
 import styles               from '../../AppDesigns/currentApp/styles/ScreenComponentStyles/HeaderBar2Styles.js';
-import { connect,useDispatch,useSelector }      from 'react-redux';
+import {useDispatch,useSelector }      from 'react-redux';
 import {colors}             from '../../AppDesigns/currentApp/styles/styles.js';
 import AsyncStorage         from '@react-native-async-storage/async-storage';
-import { getSearchResult,getSuggestion } 	from '../../redux/globalSearch/actions';
+import { getSearchResult,getSuggestion }  from '../../redux/globalSearch/actions';
 import { SET_SEARCH_CALL,
       SET_SUGGETION_LIST,
       SET_SEARCH_TEXT,
       SET_SERACH_LIST
-    } 	from '../../redux/globalSearch/types';
-// import {Autocomplete}       from  'react-native-autocomplete-input';
+    }   from '../../redux/globalSearch/types';
+import { DrawerActions } from '@react-navigation/native';
+
+
   const HeaderBars2=(props)=>{
-    const [headerTitle,setHeaderTitle]=useState('');
+      const {navigation} = props;;
     const [searchText,useSearchText] = useState('');
     const [inAppNotificationsCount,setInAppNotifyCount] = useState(0);
     const [user_id,setUserId] = useState('');
     const dispatch = useDispatch();
     const [list,setList]=useState([])
-    const{navigation}=props;
 
     const store = useSelector(store => ({
-      globalSearch    : store.globalSearch,
+      globalSearch  : store.globalSearch,
+      location      : store.location
     }));
-    const {globalSearch} = store;
+    const {globalSearch,location} = store;
    
     useEffect(() => {
       getData()
-      setHeaderTitle(props.headerTitle)
     },[props]);
 
     
@@ -90,7 +90,6 @@ import { SET_SEARCH_CALL,
     dispatch(getSearchResult(searchText,user_id,10));
     Keyboard.dismiss();
   }
-
     return (
       <View style={styles.header2main}>
         <Header
@@ -112,17 +111,18 @@ import { SET_SEARCH_CALL,
           centerComponent={
             <View style={{alignItem:'center',justifyContent:'center',alignSelf:'center'}}>
               <Text style={[{fontSize:16,color:'#f5a721',fontFamily:"Montserrat-SemiBold",textAlign:'center',marginTop:20}]}>Candidate Form</Text>
-               <Text style={[{fontSize:16,color:'#fff',fontFamily:"Montserrat-SemiBold",textAlign:'center',marginTop:20}]}>Basic Info</Text>
+              <Text style={[{fontSize:16,color:'#fff',fontFamily:"Montserrat-SemiBold",textAlign:'center',marginTop:20}]}>Basic Info</Text>
             </View>
           }
           rightComponent={
               <View style={styles.notificationbell}>
+
                <TouchableOpacity style={styles.bellIcon} onPress={()=> navigation.navigate('InAppNotification')}>
                 <Icon name="bell-o" type="font-awesome" size={25} color={colors.theme} />
                 <Text style={styles.notificationText}>{inAppNotificationsCount}</Text>
                </TouchableOpacity> 
               <View >
-                <TouchableOpacity  onPress={()=> navigation.toggleDrawer()}>
+                <TouchableOpacity  onPress={()=> navigation.dispatch(DrawerActions.openDrawer())}>
                   <Icon size={18} name='bars' type='font-awesome' color={colors.white} style={{borderWidth:1,borderColor:'#4C5B72',backgroundColor:"#242933",padding:10,borderRadius:3}}/>
                 </TouchableOpacity>
               </View>
@@ -133,32 +133,11 @@ import { SET_SEARCH_CALL,
                 {/* <TouchableOpacity onPress={()=>this.props.navigation.navigate('Stores')}>
                   <Icon size={25} name="store"  type="font-awesome-5" color=colors.theme />
                 </TouchableOpacity> */}
+
               </View>
           }
           containerStyle={styles.rightcnt}
         />
-       {/* <View style={styles.searchvw}>
-          {(globalSearch.search || globalSearch.searchList.length >0) && <Icon size={30} name='keyboard-arrow-left' type='MaterialIcons' color={"#fff"} onPress={()=>  {
-              dispatch({type : SET_SUGGETION_LIST, payload  : []});
-              dispatch({type : SET_SEARCH_TEXT,    payload  : ''});
-              dispatch({type : SET_SERACH_LIST,    payload  : []});
-              dispatch({type:SET_SEARCH_CALL,payload:false});
-              useSearchText('');
-              Keyboard.dismiss();
-          } }/>}
-          <SearchBar
-            placeholder         = 'Search for Product, Brands and More'
-            containerStyle      = {[styles.searchContainer,(globalSearch.search || globalSearch.searchList.length >0)?styles.flex09:styles.flex1]}
-            inputContainerStyle = {styles.searchInputContainer}
-            inputStyle          = {styles.searchInput}
-            onChangeText        = {(searchText)=>getKeywords(searchText)}
-            onFocus             = {()=>dispatch({type:SET_SEARCH_CALL,payload:true})}
-            value               = {searchText}
-            onSubmitEditing     = {()=>updateSearch()}
-            returnKeyType       = 'search'
-          />
-        </View>
-*/}
       </View>
     );
 }

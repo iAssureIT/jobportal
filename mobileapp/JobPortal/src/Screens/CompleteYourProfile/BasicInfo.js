@@ -94,10 +94,9 @@ import * as Progress from 'react-native-progress';
 
     }
   
-
 export const BasicInfo = withCustomerToaster((props)=>{
     const [btnLoading, setLoading] = useState(false);
-    const [setOpen]= useState(false);
+    const [isOpen,setOpen] =useState(false);
     const {setToast,navigation,route} = props; //setToast function bhetta
     const dispatch = useDispatch();
 
@@ -246,11 +245,11 @@ export const BasicInfo = withCustomerToaster((props)=>{
     return (
       <React.Fragment>
         <HeaderBar2
-          goBack={navigation.goBack}
+          // goBack={navigation.goBack}
           headerTitle={'Basic Info'}
           navigate={navigation.navigate}
           // toggle={setOpen} 
-          // openControlPanel={()=>_drawer.open()}
+          openControlPanel={()=>_drawer.open()}
         />
 
         <View style={styles.addsuperparent}>
