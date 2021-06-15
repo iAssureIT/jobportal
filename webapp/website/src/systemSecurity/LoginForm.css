@@ -250,7 +250,7 @@ input-group.loginPwdField{
 
 .img1Login{
 	position: absolute;
-	height: 200px;
+	/*height: 200px;*/
 	top: 31px;
 	right: 77px;
 	z-index: 1;
@@ -535,7 +535,7 @@ input:-webkit-autofill
 .img2Login{
 	display: block;
     bottom: 112px;
-    left: 13.3%;
+    left: 13.6%;
 }
 
 .img2loginInner {
@@ -606,11 +606,101 @@ input:-webkit-autofill
 
 .errorMsg {
     font-size: 10px;
+}		
+
+}
+
+@media(min-width:1440px) and (max-width:1535px){
+
+.img1Login {
+    right: 118px;
+    top: 15px;
+    right: 254px;
+}
+
+.img1oginInner {
+    height: 153px;
+}
+
+.img2Login{
+	display: block;
+    bottom: 165px;
+    left: 12.9%;
+}
+
+.img2loginInner {
+    height: 240px;
+}
+
+.img3Login{
+	display: block;
+    bottom: 184px;
+    left: 67.3%;
+}
+
+.img3loginInner {
+    height: 240px;
+}
+
+.img4Login{
+	display: block;
+    bottom: 199px;
+    left: 35%;
+}
+
+.img4loginInner {
+    height: 104px;
+}
+
+.img5Login{
+	display: block;
+    bottom: 233px;
+    left: 72.7%;
+}
+
+.img5loginInner {
+    height: 95px;
+}
+
+.img6Login{
+	display: block;
+	top: 132px;
+    left: 130px;
+}
+
+.img6loginInner {
+    height: 93px;
+}
+
+.loginFormWrapper{
+	min-height: 738px !important;
+	margin-top: 130px;
+}
+
+.loginFormInner{
+	min-height: 385px;
+	margin-top: 100px;
+}
+
+.signInTitle {
+    margin-top: 37px;
+}
+
+.loginSignUp1 {
+    margin-bottom: 10px !important;
+}
+
+.loginForgotPassword{
+	font-size: 10px;
+}
+
+.errorMsg {
+    font-size: 10px;
 }	
 
 }
 
-@media(min-width:1366px) and (max-width:1535px){
+@media(min-width:1366px) and (max-width:1439px){
 
 .img1Login {
     right: 118px;
@@ -821,7 +911,6 @@ input:-webkit-autofill
 	min-height: 585px !important;
 	margin-top: 50px;
 }
-
 	
 }
 
