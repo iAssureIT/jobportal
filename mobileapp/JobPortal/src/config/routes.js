@@ -33,51 +33,24 @@ const TransitionScreenOptions = {
   ...TransitionPresets.ModalTransition, // This is where the transition happens
 };
 
-
-// const Drawer = createDrawerNavigator();
-
-// function MyDrawer() {
-//   const dimensions = useWindowDimensions();
-
-//   const isLargeScreen = dimensions.width >= 768;
-
-//   return (
-//     <Drawer.Navigator
-//       openByDefault
-//       drawerType={isLargeScreen ? 'permanent' : 'back'}
-//       drawerStyle={isLargeScreen ? null : { width: '100%' }}
-//       overlayColor="transparent"
-//       initialRouteName="BasicInfo"
-//     >
-//      <Drawer.Screen
-//         name="Feed"
-//         component={Feed}
-//         options={{ drawerLabel: 'Home' }}
-//       />
-//       <Drawer.Screen
-//         name="Notifications"
-//         component={Notifications}
-//         options={{ drawerLabel: 'Updates' }}
-//       />
-//       <Drawer.Screen
-//         name="Profile"
-//         component={Profile}
-//         options={{ drawerLabel: 'Profile' }}
-//       />
-
-//     </Drawer.Navigator>
-//   );
-// }
-
 export const HomeStack = () => (
   <Home.Navigator 
     headerMode            = "none"
-    mode="modal"
-    drawerContent   = { (props) => <Menu navigate={navigation.navigate} { ...props } />}
+    initialRouteName      = "Dashboard"
+    screenOptions={{
+      gestureEnabled:true,
+      gestureDirection:'horizontal',
+      cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS
+      // transitionSpec:{
+      //   open:config,
+      //   close:closeConfig
+      // }
+    }}
+    drawerContent   = { (props) => <Menu { ...props } />}
   >
+    <Home.Screen name="Dashboard"                   component={Dashboard} />
     <Home.Screen name="Address"                     component={Address}  />
     <Home.Screen name="BasicInfo"                   component={BasicInfo} />
-    <Home.Screen name="Dashboard"                   component={Dashboard} />
     <Home.Screen name="SupportSystem"               component={SupportSystem} />
     <Home.Screen name="InAppNotification"           component={InAppNotification} />  
   </Home.Navigator>
@@ -102,10 +75,10 @@ const RegisterRoutes = createStackNavigator();
 const App = createStackNavigator();
 const AppStack = () => (
   <App.Navigator headerMode="none" >
+    <App.Screen name="App" component={HomeStack} />
+    <App.Screen name="Dashboard" component={Dashboard} />
     <App.Screen name="Auth" component={RegisterStack} />
-      <App.Screen name="App" component={HomeStack} />
 
-      <App.Screen name="Dashboard" component={Dashboard} />
   </App.Navigator>
 );
 

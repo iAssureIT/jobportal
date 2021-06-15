@@ -13,48 +13,39 @@ import {
   SearchBar,
   Button 
 } from 'react-native-elements';
-
-
-import ValidationComponent  from "react-native-form-validator";
 import axios                from 'axios'; 
 import styles               from '../../AppDesigns/currentApp/styles/ScreenComponentStyles/HeaderBar2Styles.js';
-import { connect,useDispatch,useSelector }      from 'react-redux';
+import {useDispatch,useSelector }      from 'react-redux';
 import {colors}             from '../../AppDesigns/currentApp/styles/styles.js';
 import AsyncStorage         from '@react-native-async-storage/async-storage';
-import { getSearchResult,getSuggestion } 	from '../../redux/globalSearch/actions';
+import { getSearchResult,getSuggestion }  from '../../redux/globalSearch/actions';
 import { SET_SEARCH_CALL,
       SET_SUGGETION_LIST,
       SET_SEARCH_TEXT,
       SET_SERACH_LIST
-    } 	from '../../redux/globalSearch/types';
-// import {Autocomplete}       from  'react-native-autocomplete-input';
+    }   from '../../redux/globalSearch/types';
+import { DrawerActions } from '@react-navigation/native';
 
-import { DrawerActions }     from '@react-navigation/native';
-import { useNavigation }     from '@react-navigation/native';
 
   const HeaderBars2=(props)=>{
-
-    const [headerTitle,setHeaderTitle]=useState('');
+      const {navigation} = props;;
     const [searchText,useSearchText] = useState('');
     const [inAppNotificationsCount,setInAppNotifyCount] = useState(0);
     const [user_id,setUserId] = useState('');
     const dispatch = useDispatch();
     const [list,setList]=useState([])
-    // const {navigation}=props;
-    const navigation = useNavigation();
+
     const store = useSelector(store => ({
-      globalSearch    : store.globalSearch,
+      globalSearch  : store.globalSearch,
+      location      : store.location
     }));
-    const {globalSearch} = store;
+    const {globalSearch,location} = store;
    
-    // useEffect(() => {InAppNotification
-    //   getData()
-    //   setHeaderTitle(props.headerTitle)
-    // },[props]);
-    
     useEffect(() => {
       getData()
     },[props]);
+
+    
  
   const getData=()=>{
     useSearchText(globalSearch.searchText);
@@ -99,7 +90,6 @@ import { useNavigation }     from '@react-navigation/native';
     dispatch(getSearchResult(searchText,user_id,10));
     Keyboard.dismiss();
   }
-
     return (
       <View style={styles.header2main}>
         <Header
@@ -121,7 +111,7 @@ import { useNavigation }     from '@react-navigation/native';
           centerComponent={
             <View style={{alignItem:'center',justifyContent:'center',alignSelf:'center'}}>
               <Text style={[{fontSize:16,color:'#f5a721',fontFamily:"Montserrat-SemiBold",textAlign:'center',marginTop:20}]}>Candidate Form</Text>
-               <Text style={[{fontSize:16,color:'#fff',fontFamily:"Montserrat-SemiBold",textAlign:'center',marginTop:20}]}>Basic Info</Text>
+              <Text style={[{fontSize:16,color:'#fff',fontFamily:"Montserrat-SemiBold",textAlign:'center',marginTop:20}]}>Basic Info</Text>
             </View>
           }
           rightComponent={
@@ -132,7 +122,7 @@ import { useNavigation }     from '@react-navigation/native';
                 <Text style={styles.notificationText}>{inAppNotificationsCount}</Text>
                </TouchableOpacity> 
               <View >
-                <TouchableOpacity  onPress={()=> navigation.dispatch(DrawerActions.toggleDrawer())}>
+                <TouchableOpacity  onPress={()=> navigation.dispatch(DrawerActions.openDrawer())}>
                   <Icon size={18} name='bars' type='font-awesome' color={colors.white} style={{borderWidth:1,borderColor:'#4C5B72',backgroundColor:"#242933",padding:10,borderRadius:3}}/>
                 </TouchableOpacity>
               </View>

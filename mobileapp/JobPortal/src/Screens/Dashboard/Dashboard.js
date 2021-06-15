@@ -8,7 +8,7 @@ import axios                        from "axios";
 import Highlighter                  from 'react-native-highlight-words';
 import { useIsFocused }             from "@react-navigation/native";
 import {Menu}                       from '../../ScreenComponents/Menu/Menu.js';
-import HeaderBar2                   from '../../ScreenComponents/HeaderBar2/HeaderBar2.js';
+import HeaderBar3            from '../../ScreenComponents/HeaderBar3/HeaderBar3.js';
 import Notification                 from '../../ScreenComponents/Notification/Notification.js'
 import { connect,useDispatch,useSelector }      from 'react-redux';
 import styles                       from '../../AppDesigns/currentApp/styles/ScreenStyles/Dashboardstyles.js';
@@ -44,7 +44,7 @@ export const Dashboard = withCustomerToaster((props)=>{
     return (
       <React.Fragment>
        
-         <HeaderBar2 
+         <HeaderBar3 
             navigation={navigation}
             toggle={setOpen} 
             openControlPanel={()=>_drawer.open()}

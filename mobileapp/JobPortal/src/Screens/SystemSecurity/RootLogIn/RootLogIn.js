@@ -62,7 +62,7 @@ import AsyncStorage         from '@react-native-async-storage/async-storage';
               axios
                 .post('/api/auth/post/login/mobile',loginValues)
                 .then((response) => {
-                  console.log("res55",response);
+                  // console.log("res55",response);
                   if(response.data.message === "Login Auth Successful"){
                     axios.defaults.headers.common['Authorization'] = 'Bearer '+response.data.token;
                     console.log("response.data.token",response.data.token)
@@ -184,9 +184,8 @@ import AsyncStorage         from '@react-native-async-storage/async-storage';
             <View style={commonStyles.formWrapper}>
             <FormPhoneInput
               labelName       = "Mobile No"
-              placeholder     = "Mobile No"
+              // placeholder     = "Mobile No"
               onChangeText    = {handleChange('username')}
-              
               required        = {true}
               name            = "username"
               errors          = {errors}
@@ -199,7 +198,7 @@ import AsyncStorage         from '@react-native-async-storage/async-storage';
             />
             <FormInput
               labelName       = "Password"
-              placeholder     = "Password"
+              // placeholder     = "Password"
               onChangeText    = {handleChange('password')}
               errors          = {errors}
               name            = "password"
