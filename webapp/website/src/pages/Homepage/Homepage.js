@@ -336,7 +336,7 @@ class HomePage extends Component {
                 <div className="floatLeft col-12 col-sm-12 col-md-12 col-lg-9 col-xl-9">
                   <div className="row">
                       <div className="tab-content col-12">
-                        
+                        <div className="row">
                             <div id="mapwise" className= {this.props.viewMode == "mapView" ? "tab-pane fade in active show overFlow col-12" : "tab-pane fade" }>
                               <MapComponent pathname={this.props.match}/> 
                             </div>
@@ -364,7 +364,7 @@ class HomePage extends Component {
                                         : <IndustrialComponent pathname={this.props.match}/> }
 
                             </div>
-                       
+                        </div>
                       </div>
                   </div>
                 </div>  
