@@ -16,17 +16,15 @@
 	min-height: 500px;
     height: auto;
   /*background-color:#242931;*/
- 	padding-bottom: 100px;
 }
 
 .loginFormInner{
 	height: auto;
-	min-height: 315px;
+	min-height: 295px;
 	margin-top: 100px;
 	background-color: #242931;
 	border:3px solid #D3950A !important;
 	border-radius: 10px;
-	padding-bottom: 30px;
 }
 
 .signInTitle{
@@ -34,7 +32,7 @@
 	color: #D3950A;
 	font-size: 18px;
 	text-align: center;
-	padding-top: 30px;
+	margin-top: 30px;
 	font-family: 'Montserrat-Bold';
 }
 
@@ -204,16 +202,16 @@ input-group.loginPwdField{
 
 
 .loginLinks{
-
 	margin-top: 20px;
 	height: 30px;
+	margin-bottom: 30px;
 }
 
 .loginSignUp1{
 	height: 50px !important;
-	margin-top: -6px !important;
-	/*margin-bottom: 0px !important;*/
-	color: #aaa !important;
+	margin-top: -35px !important;
+	margin-bottom: -11px !important;
+	color: #ccc !important;
 	text-align: center !important;
 	font-size: 10px;
 	font-family: 'Montserrat-Regular';
@@ -223,22 +221,24 @@ input-group.loginPwdField{
 	height: 50px !important;;
 	margin-top: 25px !important;;
 	margin-bottom: 40px !important;;
-	color: #aaa !important;
+	color: #ccc !important;
 	text-align: center !important;
 	font-size: 10px;
 	font-family: 'Montserrat-Regular';
 	float: center;
+	cursor: pointer;
 }
 
 .loginSignUp:hover{
-	color: #fff!important;
-	font-size: 14px;
+	color: #ccc!important;
+	/*font-size: 14px;*/
 }
 
 .loginForgotPassword{
-	color: #aaa !important;
+	color: #ccc !important;
 	/*text-align: right;*/
-	font-size: 11px;
+	font-size: 9px;
+	margin-top: 6px;
 	font-family: 'Montserrat-Regular';
 	float: left;
 }
@@ -251,13 +251,13 @@ input-group.loginPwdField{
 .img1Login{
 	position: absolute;
 	height: 200px;
-	top: 35px;
-	right: 90px;
+	top: 31px;
+	right: 77px;
 	z-index: 1;
 }
 
 .img1oginInner{
-	height: 116px;
+	height: 125px;
 }
 
 .img2Login{
@@ -266,6 +266,7 @@ input-group.loginPwdField{
 	bottom: -49px;
 	left: 2%;
 	z-index: 1;
+	display: none;
 }
 
 .img2loginInner{
@@ -278,6 +279,7 @@ input-group.loginPwdField{
 	bottom: -37px;
 	left: 68.1%;
 	z-index: 1;
+	display: none;
 }
 
 .img3loginInner{
@@ -290,6 +292,7 @@ input-group.loginPwdField{
 	bottom: 43px;
     left: 35%;
 	z-index: 1;
+	display: none;
 }
 
 .img4loginInner{
@@ -302,6 +305,7 @@ input-group.loginPwdField{
 	bottom: 47px;
     left: 79%;
 	z-index: 0;
+	display: none;
 }
 
 .img5loginInner{
@@ -314,6 +318,7 @@ input-group.loginPwdField{
 	top: 132px;
     left: 32px;
 	z-index: 0;
+	display: none;
 }
 
 .img6loginInner{
@@ -425,2729 +430,476 @@ input:-webkit-autofill
 
 /* NNNNNNNNNNNNNNNNNNNNNNNNN ++  Start Media Query  ++ NNNNNNNNNNNNNNNNNNNNNNNNN */
 
+@media(min-width:1920px) and (max-width:2560px){
 
-/* (xxl) Extra Large Devices (Desktop/Laptop (FHD), 1920px and up) */
-@media (min-width:1920px){
-
+.img1Login {
+    right: 118px;
+    top: -15px;
+    right: 423px;
 }
 
-@media (min-width:1501px) and (max-width:1919px){
-
-.loginFormWrapper{
-	min-height: 683px !important;
-	margin-top: 50px;
-	/*background-color: red;*/
-}
-
-.loginFormInner {
-/*    height: auto;*/
-    min-height: 400px;
-    margin-top: 100px;
- /*   background-color: #242931;
-    border: 3px solid #D3950A !important;
-    border-radius: 10px;
-    padding-bottom: 30px;*/
-}
-
-.signInTitle{
-	/*height: 70px;
-	color: #D3950A;
-	font-size: 18px;
-	text-align: center;*/
-	padding-top: 30px;
-	margin-top: 30px;
-/*	font-family: 'Montserrat-Bold';*/
-}
-
-.loginFormGroup{
-	margin-top: 40px;
-}
-
-.loginSignUp1 {
-    font-size: 11px;
-}
-
-.loginSignUp {
-    font-size: 12px;
-}
-
-.img1Login{
-	height: 200px;
-	top: 6px;
-	right: 200px;
-}
-
-.img1oginInner{
-	height: 168px;
+.img1oginInner {
+    height: 204px;
 }
 
 .img2Login{
-	height: 300px;
-	bottom: 123px;
-	left: 4%;
+	display: block;
+    bottom: 556px;
+    left: 15.6%;
 }
 
-.img2loginInner{
-	height: 271px;
+.img2loginInner {
+    height: 309px;
 }
 
 .img3Login{
-	height: 290px;
-	bottom: 136px;
-	left: 74.9%;
+	display: block;
+    bottom: 572px;
+    left: 69.6%;
 }
 
-.img3loginInner{
-	height: 271px;
+.img3loginInner {
+    height: 309px;
 }
 
 .img4Login{
-	height: 100px;
-	bottom: 149px;
-    left: 29%;
+	display: block;
+    bottom: 562px;
+    left: 35%;
 }
 
-.img4loginInner{
-	height: 135px;
+.img4loginInner {
+    height: 168px;
 }
 
 .img5Login{
-	height: 135px;
-	bottom: 184px;
-    left: 81.2%;
+	display: block;
+    bottom: 590px;
+    left: 74.7%;
 }
 
-.img5loginInner{
-	height: 94px;
+.img5loginInner {
+    height: 96px;
 }
 
 .img6Login{
-	height: 80px;
+	display: block;
 	top: 132px;
-    left: 66px;
+    left: 246px;
 }
 
-.img6loginInner{
-	height: 113px;
-}				
-
+.img6loginInner {
+    height: 129px;
 }
-
-
-/* (xl) Extra Large Devices (Desktop/Laptop (HD), 1440px to 1919px) */
-@media (min-width:1440px) and (max-width:1500px){
 
 .loginFormWrapper{
-	min-height: 697px !important;
-	margin-top: 50px;
+	min-height: 1138px !important;
+	margin-top: 430px;
 }
 
-.loginFormInner {
-/*    height: auto;*/
-    min-height: 400px;
-    margin-top: 100px;
- /*   background-color: #242931;
-    border: 3px solid #D3950A !important;
-    border-radius: 10px;
-    padding-bottom: 30px;*/
+.loginFormInner{
+	min-height: 450px;
+	margin-top: 100px;
 }
 
-.signInTitle{
-	/*height: 70px;
-	color: #D3950A;
-	font-size: 18px;
-	text-align: center;*/
-	padding-top: 30px;
-	margin-top: 30px;
-/*	font-family: 'Montserrat-Bold';*/
-}
-
-.loginFormGroup{
-	margin-top: 40px;
+.signInTitle {
+    margin-top: 69px;
 }
 
 .loginSignUp1 {
-    font-size: 11px;
+    margin-bottom: 10px !important;
 }
 
-.loginSignUp {
-    font-size: 12px;
+.loginForgotPassword{
+	font-size: 10px;
 }
 
-.img1Login{
-	height: 200px;
-	top: 6px;
-	right: 200px;
+.errorMsg {
+    font-size: 10px;
 }
 
-.img1oginInner{
-	height: 168px;
+}	
+
+@media(min-width:1536px) and (max-width:1919px){
+
+.img1Login {
+    right: 118px;
+    top: 15px;
+    right: 254px;
+}
+
+.img1oginInner {
+    height: 153px;
 }
 
 .img2Login{
-	height: 300px;
-	bottom: 137px;
-	left: 3.4%;
+	display: block;
+    bottom: 112px;
+    left: 13.3%;
 }
 
-.img2loginInner{
-	height: 271px;
+.img2loginInner {
+    height: 240px;
 }
 
 .img3Login{
-	height: 290px;
-	bottom: 156px;
-	left: 74.4%;
+	display: block;
+    bottom: 126px;
+    left: 67.7%;
 }
 
-.img3loginInner{
-	height: 271px;
+.img3loginInner {
+    height: 240px;
 }
 
 .img4Login{
-	height: 100px;
-	bottom: 163px;
-    left: 29%;
+	display: block;
+    bottom: 149px;
+    left: 35%;
 }
 
-.img4loginInner{
-	height: 135px;
+.img4loginInner {
+    height: 104px;
 }
 
 .img5Login{
-	height: 135px;
-	bottom: 189px;
-    left: 81.2%;
+	display: block;
+    bottom: 175px;
+    left: 72.7%;
 }
 
-.img5loginInner{
-	height: 94px;
+.img5loginInner {
+    height: 95px;
 }
 
 .img6Login{
-	height: 80px;
+	display: block;
 	top: 132px;
-    left: 66px;
+    left: 144px;
 }
 
-.img6loginInner{
-	height: 113px;
+.img6loginInner {
+    height: 93px;
+}
+
+.loginFormWrapper{
+	min-height: 670px !important;
+	margin-top: 60px;
+}
+
+.loginFormInner{
+	min-height: 370px;
+	margin-top: 100px;
+}
+
+.signInTitle {
+    margin-top: 37px;
+}
+
+.loginSignUp1 {
+    margin-bottom: 10px !important;
+}
+
+.loginForgotPassword{
+	font-size: 10px;
+}
+
+.errorMsg {
+    font-size: 10px;
+}	
+
+}
+
+@media(min-width:1366px) and (max-width:1535px){
+
+.img1Login {
+    right: 118px;
+    top: 15px;
+    right: 226px;
+}
+
+.img1oginInner {
+    height: 153px;
+}
+
+.img2Login{
+	display: block;
+    bottom: 99px;
+    left: 12.2%;
+}
+
+.img2loginInner {
+    height: 240px;
+}
+
+.img3Login{
+	display: block;
+    bottom: 111px;
+    left: 66.9%;
+}
+
+.img3loginInner {
+    height: 240px;
+}
+
+.img4Login{
+	display: block;
+    bottom: 138px;
+    left: 35%;
+}
+
+.img4loginInner {
+    height: 104px;
+}
+
+.img5Login{
+	display: block;
+    bottom: 161px;
+    left: 72.7%;
+}
+
+.img5loginInner {
+    height: 95px;
+}
+
+.img6Login{
+	display: block;
+	top: 132px;
+    left: 121px;
+}
+
+.img6loginInner {
+    height: 93px;
+}
+
+.loginFormWrapper{
+	min-height: 656px !important;
+	margin-top: 80px;
+}
+
+.loginFormInner{
+	min-height: 370px;
+	margin-top: 100px;
+}
+
+.signInTitle {
+    margin-top: 43px;
+}
+
+.loginSignUp1 {
+    margin-bottom: -3px !important;
+}
+
+.loginForgotPassword {
+    font-size: 8px;
+}	
+
+}
+
+@media(min-width:1024px) and (max-width:1365px){
+
+.img1Login {
+    right: 181px;
+}
+
+.loginFormWrapper{
+	min-height: 666px !important;
+	margin-top: 70px;
+}
+
+.loginFormInner{
+	min-height: 370px;
+	margin-top: 100px;
+}
+
+.signInTitle {
+    margin-top: 37px;
+}
+
+.loginSignUp1 {
+    margin-bottom: 30px !important;
+}	
+
+}
+
+@media(min-width:993px) and (max-width:1023px){
+
+.img1Login {
+    right: 185px;
+}
+
+.loginFormWrapper{
+	min-height: 595px !important;
+	margin-top: 140px;
+}		
+
+}
+
+@media(min-width:851px) and (max-width:992px){
+
+/*.img1Login {
+    right: 172px;
+}*/
+
+.img1Login {
+    right: 155px;
+}
+
+.loginFormWrapper{
+	min-height: 100px !important;
+	margin-top: 0px;
+}	
+
+.loginFormInner{
+	min-height: 295px;
+	margin-top: 100px;
+}	
+
+
+}
+
+@media(min-width:812px) and (max-width:850px){
+
+.img1Login {
+    right: 141px;
+}
+
+.loginFormWrapper{
+	min-height: 100px !important;
+	margin-top: 0px;
+}		
+
+
+}
+
+@media(min-width:768px) and (max-width:811px){
+
+.img1Login {
+    right: 141px;
+}
+
+.loginFormWrapper{
+	min-height: 770px !important;
+	margin-top: 220px;
+}
+
+.loginFormInner{
+	min-height: 348px;
+	margin-top: 100px;
+}
+
+.signInTitle {
+    margin-top: 37px;
+}
+
+.loginSignUp1 {
+    margin-bottom: 30px !important;
 }			
 
 }
 
+@media(min-width:576px) and (max-width:767px){
 
-/* (lg) Large Devices (Desktop/Laptop (HD), 1366px to 1439px) */
-@media (min-width:1366px) and (max-width:1439px){
-/* No media query since this is the default in Bootstrap 3 */
+.img1Login {
+    right: 160px;
 }
-
-
-/* (lg) Large Devices (Desktop/Laptop (HD), 1200px to 1365px) */
-@media (min-width:1200px) and (max-width:1365px){
 
 }
 
-
-/* (md) Medium Devices (Tablet Landscape, 992px to 1199px ) */
-@media (min-width:992px) and (max-width:1199px){
-
-}
-
-
-@media (min-width:1366px) and (max-width:1439px){
+@media (max-width:576px){
 
 .loginFormWrapper{
-	min-height: 686px !important;
+	min-height: 588px !important;
+	margin-top: 20px;
+}
+
+}
+
+@media (max-width:480px){
+
+.loginFormWrapper{
+	min-height: 585px !important;
 	margin-top: 50px;
-	/*background-color: red;*/
 }
 
-.loginFormInner {
-/*    height: auto;*/
-    min-height: 400px;
-    margin-top: 100px;
- /*   background-color: #242931;
-    border: 3px solid #D3950A !important;
-    border-radius: 10px;
-    padding-bottom: 30px;*/
+	
 }
 
-.signInTitle{
-	/*height: 70px;
-	color: #D3950A;
-	font-size: 18px;
-	text-align: center;*/
-	padding-top: 30px;
-	margin-top: 30px;
-/*	font-family: 'Montserrat-Bold';*/
-}
-
-.loginFormGroup{
-	margin-top: 40px;
-}
-
-.loginSignUp1 {
-    font-size: 11px;
-}
-
-.loginSignUp {
-    font-size: 12px;
-}
-
-.img1Login{
-	height: 200px;
-	top: 6px;
-	right: 175px;
-}
-
-.img1oginInner{
-	height: 168px;
-}
-
-.img2Login{
-	height: 300px;
-	bottom: 127px;
-	left: 2%;
-}
-
-.img2loginInner{
-	height: 271px;
-}
-
-.img3Login{
-	height: 290px;
-	bottom: 149px;
-	left: 73.9%;
-}
-
-.img3loginInner{
-	height: 271px;
-}
-
-.img4Login{
-	height: 100px;
-	bottom: 149px;
-    left: 29%;
-}
-
-.img4loginInner{
-	height: 135px;
-}
-
-.img5Login{
-	height: 135px;
-	bottom: 184px;
-    left: 81.2%;
-}
-
-.img5loginInner{
-	height: 94px;
-}
-
-.img6Login{
-	height: 80px;
-	top: 132px;
-    left: 54px;
-}
-
-.img6loginInner{
-	height: 113px;
-}		
-
-}
-
-/* (sm) Small Devices (Tablets Portrait, 844px to 991px) */
-@media (min-width:1025px) and (max-width:1365px){
-
-.loginFormWrapper{
-	min-height: 900px !important;
-	margin-top: 400px;
-	/*background-color: red;*/
-}
-
-.loginFormInner {
-/*    height: auto;*/
-    min-height: 400px;
-    margin-top: 100px;
- /*   background-color: #242931;
-    border: 3px solid #D3950A !important;
-    border-radius: 10px;
-    padding-bottom: 30px;*/
-}
-
-.signInTitle{
-	/*height: 70px;
-	color: #D3950A;
-	font-size: 18px;
-	text-align: center;*/
-	padding-top: 30px;
-	margin-top: 30px;
-/*	font-family: 'Montserrat-Bold';*/
-}
-
-.loginFormGroup{
-	margin-top: 40px;
-}
-
-.loginSignUp1 {
-    font-size: 11px;
-}
-
-.loginSignUp {
-    font-size: 12px;
-}
-
-.img1Login{
-	height: 200px;
-	top: 17px;
-	right: 175px;
-}
-
-.img1oginInner{
-	height: 168px;
-}
-
-.img2Login{
-	height: 300px;
-	bottom: 335px;
-	left: 2%;
-}
-
-.img2loginInner{
-	height: 271px;
-}
-
-.img3Login{
-	height: 290px;
-	bottom: 349px;
-	left: 74.8%;
-}
-
-.img3loginInner{
-	height: 271px;
-}
-
-.img4Login{
-	height: 100px;
-	bottom: 364px;
-    left: 29%;
-}
-
-.img4loginInner{
-	height: 135px;
-}
-
-.img5Login{
-	height: 135px;
-	bottom: 381px;
-    left: 82%;
-}
-
-.img5loginInner{
-	height: 94px;
-}
-
-.img6Login{
-	height: 80px;
-	top: 132px;
-    left: 54px;
-}
-
-.img6loginInner{
-	height: 113px;
-}		
-
-}
-
-@media (min-width:992px) and (max-width:1024px){
-
-.loginFormWrapper{
-	min-height: 696px !important;
-	margin-top: 40px;
-	/*background-color: red;*/
-}
-
-.loginFormInner {
-/*    height: auto;*/
-    min-height: 400px;
-    margin-top: 100px;
- /*   background-color: #242931;
-    border: 3px solid #D3950A !important;
-    border-radius: 10px;
-    padding-bottom: 30px;*/
-}
-
-.signInTitle{
-	/*height: 70px;
-	color: #D3950A;
-	font-size: 18px;
-	text-align: center;*/
-	padding-top: 30px;
-	margin-top: 30px;
-/*	font-family: 'Montserrat-Bold';*/
-}
-
-.loginFormGroup{
-	margin-top: 40px;
-}
-
-.loginSignUp1 {
-    font-size: 11px;
-}
-
-.loginSignUp {
-    font-size: 12px;
-}
-
-.img1Login{
-	height: 200px;
-	top: 17px;
-	right: 175px;
-}
-
-.img1oginInner{
-	height: 168px;
-}
-
-.img2Login{
-	height: 300px;
-	bottom: 134px;
-	left: 2%;
-}
-
-.img2loginInner{
-	height: 271px;
-}
-
-.img3Login{
-	height: 290px;
-	bottom: 147px;
-	left: 74.8%;
-}
-
-.img3loginInner{
-	height: 271px;
-}
-
-.img4Login{
-	height: 100px;
-	bottom: 158px;
-    left: 29%;
-}
-
-.img4loginInner{
-	height: 135px;
-}
-
-.img5Login{
-	height: 135px;
-	bottom: 182px;
-    left: 82%;
-}
-
-.img5loginInner{
-	height: 94px;
-}
-
-.img6Login{
-	height: 80px;
-	top: 132px;
-    left: 54px;
-}
-
-.img6loginInner{
-	height: 113px;
-}		
-
-}	
-
-@media (min-width:844px) and (max-width:991px){
-
-.loginFormWrapper{
-	min-height: 550px !important;
-	margin-top: -10px;
-	/*background-color: red;*/
-}
-
-.loginFormInner {
-/*    height: auto;*/
-    min-height: 315px;
-    margin-top: 100px;
- /*   background-color: #242931;
-    border: 3px solid #D3950A !important;
-    border-radius: 10px;
-    padding-bottom: 30px;*/
-}
-
-.signInTitle{
-	/*height: 70px;
-	color: #D3950A;
-	font-size: 18px;
-	text-align: center;*/
-	padding-top: 30px;
-	margin-top: 0px;
-/*	font-family: 'Montserrat-Bold';*/
-}
-
-.loginFormGroup{
-	margin-top: 0px;
-}
-
-.loginSignUp1 {
-    font-size: 11px;
-}
-
-.loginSignUp {
-    font-size: 12px;
-}
-
-.img1Login{
-	height: 200px;
-	top: 33px;
-	right: 170px;
-}
-
-.img1oginInner{
-	height: 121px;
-}
-
-.img2Login{
-	height: 300px;
-	bottom: 1px;
-	left: 7%;
-}
-
-.img2loginInner{
-	height: 190px;
-}
-
-.img3Login{
-	height: 290px;
-	bottom: 9px;
-	left: 77%;
-}
-
-.img3loginInner{
-	height: 181px;
-}
-
-.img4Login{
-	height: 100px;
-	bottom: 88px;
-    left: 30%;
-}
-
-.img4loginInner{
-	height: 110px;
-}
-
-.img5Login{
-	height: 135px;
-	bottom: 87px;
-    left: 82%;
-}
-
-.img5loginInner{
-	height: 63px;
-}
-
-.img6Login{
-	height: 80px;
-	top: 132px;
-    left: 91px;
-}
-
-.img6loginInner{
-	height: 67px;
-}		
-
-}
-
-
-/* (sm) Small Devices (Tablets Portrait, 768px to 843px) */
-@media (min-width:812px) and (max-width:843px){
-
-.loginFormWrapper{
-	min-height: 550px !important;
-	margin-top: -10px;
-	/*background-color: red;*/
-}
-
-.loginSignUp1 {
-    font-size: 11px;
-}
-
-.loginSignUp {
-    font-size: 12px;
-}
-
-.img1Login{
-	height: 200px;
-	top: 33px;
-	right: 170px;
-}
-
-.img1oginInner{
-	height: 121px;
-}
-
-.img2Login{
-	height: 300px;
-	bottom: 1px;
-	left: 7%;
-}
-
-.img2loginInner{
-	height: 190px;
-}
-
-.img3Login{
-	height: 290px;
-	bottom: 9px;
-	left: 77%;
-}
-
-.img3loginInner{
-	height: 181px;
-}
-
-.img4Login{
-	height: 100px;
-	bottom: 88px;
-    left: 30%;
-}
-
-.img4loginInner{
-	height: 110px;
-}
-
-.img5Login{
-	height: 135px;
-	bottom: 87px;
-    left: 82%;
-}
-
-.img5loginInner{
-	height: 63px;
-}
-
-.img6Login{
-	height: 80px;
-	top: 132px;
-    left: 86px;
-}
-
-.img6loginInner{
-	height: 67px;
-}		
-
-}
-
-@media (min-width:768px) and (max-width:811px){
-
-.loginFormWrapper{
-	min-height: 812px !important;
-	margin-top: 180px;
-	/*background-color: red;*/
-}
-
-.loginFormInner {
-/*    height: auto;*/
-    min-height: 400px;
-    margin-top: 100px;
- /*   background-color: #242931;
-    border: 3px solid #D3950A !important;
-    border-radius: 10px;
-    padding-bottom: 30px;*/
-}
-
-.signInTitle{
-	/*height: 70px;
-	color: #D3950A;
-	font-size: 18px;
-	text-align: center;*/
-	padding-top: 30px;
-	margin-top: 30px;
-/*	font-family: 'Montserrat-Bold';*/
-}
-
-.loginFormGroup{
-	margin-top: 40px;
-}
-
-.loginSignUp1 {
-    font-size: 11px;
-}
-
-.loginSignUp {
-    font-size: 12px;
-}
-
-.img1Login{
-	height: 200px;
-	top: 8px;
-	right: 175px;
-}
-
-.img1oginInner{
-	height: 168px;
-}
-
-.img2Login{
-	height: 300px;
-	bottom: 250px;
-	left: 2%;
-}
-
-.img2loginInner{
-	height: 271px;
-}
-
-.img3Login{
-	height: 290px;
-	bottom: 270px;
-	left: 74.2%;
-}
-
-.img3loginInner{
-	height: 271px;
-}
-
-.img4Login{
-	height: 100px;
-	bottom: 278px;
-    left: 29%;
-}
-
-.img4loginInner{
-	height: 135px;
-}
-
-.img5Login{
-	height: 135px;
-	bottom: 305px;
-    left: 82%;
-}
-
-.img5loginInner{
-	height: 94px;
-}
-
-.img6Login{
-	height: 80px;
-	top: 132px;
-    left: 48px;
-}
-
-.img6loginInner{
-	height: 113px;
-}		
-
-}
-
-@media (min-width:736px) and (max-width:767px){
-
-.loginFormWrapper{
-	min-height: 550px !important;
-	margin-top: -10px;
-	/*background-color: red;*/
-}
-
-.loginSignUp1 {
-    font-size: 11px;
-}
-
-.loginSignUp {
-    font-size: 12px;
-}
-
-.img1Login{
-	height: 200px;
-	top: 33px;
-	right: 163px;
-}
-
-.img1oginInner{
-	height: 121px;
-}
-
-.img2Login{
-	height: 300px;
-	bottom: 1px;
-	left: 6%;
-}
-
-.img2loginInner{
-	height: 190px;
-}
-
-.img3Login{
-	height: 290px;
-	bottom: 9px;
-	left: 76%;
-}
-
-.img3loginInner{
-	height: 181px;
-}
-
-.img4Login{
-	height: 100px;
-	bottom: 88px;
-    left: 30%;
-}
-
-.img4loginInner{
-	height: 110px;
-}
-
-.img5Login{
-	height: 135px;
-	bottom: 87px;
-    left: 82%;
-}
-
-.img5loginInner{
-	height: 63px;
-}
-
-.img6Login{
-	height: 80px;
-	top: 132px;
-    left: 75px;
-}
-
-.img6loginInner{
-	height: 67px;
-}	
-
-}
-
-
-/* (xs) Extra Small Devices (Phone Landscape, 667px to 767px) */
-@media (min-width:667px) and (max-width:735px){
-
-.loginFormWrapper{
-	min-height: 550px !important;
-	margin-top: -10px;
-	/*background-color: red;*/
-}
-
-.loginSignUp1 {
-    font-size: 11px;
-}
-
-.loginSignUp {
-    font-size: 12px;
-}
-
-.img1Login{
-	height: 200px;
-	top: 33px;
-	right: 162px;
-}
-
-.img1oginInner{
-	height: 121px;
-}
-
-.img2Login{
-	height: 300px;
-	bottom: 1px;
-	left: 5%;
-}
-
-.img2loginInner{
-	height: 190px;
-}
-
-.img3Login{
-	height: 290px;
-	bottom: 9px;
-	left: 76%;
-}
-
-.img3loginInner{
-	height: 181px;
-}
-
-.img4Login{
-	height: 100px;
-	bottom: 88px;
-    left: 30%;
-}
-
-.img4loginInner{
-	height: 110px;
-}
-
-.img5Login{
-	height: 135px;
-	bottom: 87px;
-    left: 82%;
-}
-
-.img5loginInner{
-	height: 63px;
-}
-
-.img6Login{
-	height: 80px;
-	top: 132px;
-    left: 66px;
-}
-
-.img6loginInner{
-	height: 67px;
-}	
-
-
-}
-
-
-@media (min-width:640px) and (max-width:666px){
-
-.loginFormWrapper{
-	min-height: 550px !important;
-	margin-top: -10px;
-	/*background-color: red;*/
-}
-
-.loginSignUp1 {
-    font-size: 11px;
-}
-
-.loginSignUp {
-    font-size: 12px;
-}
-
-.img1Login{
-	height: 200px;
-	top: 33px;
-	right: 162px;
-}
-
-.img1oginInner{
-	height: 121px;
-}
-
-.img2Login{
-	height: 300px;
-	bottom: 1px;
-	left: 5%;
-}
-
-.img2loginInner{
-	height: 190px;
-}
-
-.img3Login{
-	height: 290px;
-	bottom: 9px;
-	left: 75%;
-}
-
-.img3loginInner{
-	height: 181px;
-}
-
-.img4Login{
-	height: 100px;
-	bottom: 80px;
-    left: 30%;
-}
-
-.img4loginInner{
-	height: 110px;
-}
-
-.img5Login{
-	height: 135px;
-	bottom: 87px;
-    left: 81.1%;
-}
-
-.img5loginInner{
-	height: 63px;
-}
-
-.img6Login{
-	height: 80px;
-	top: 132px;
-    left: 62px;
-}
-
-.img6loginInner{
-	height: 67px;
-}	
-
-}	
-
-@media (min-width:569px) and (max-width:639px){
-
-.loginFormWrapper{
-	min-height: 550px !important;
-	margin-top: -10px;
-	/*background-color: red;*/
-}
-
-.loginSignUp1 {
-    font-size: 11px;
-}
-
-.loginSignUp {
-    font-size: 12px;
-}
-
-.img1Login{
-	height: 200px;
-	top: 33px;
-	right: 162px;
-}
-
-.img1oginInner{
-	height: 121px;
-}
-
-.img2Login{
-	height: 300px;
-	bottom: 1px;
-	left: 7%;
-}
-
-.img2loginInner{
-	height: 190px;
-}
-
-.img3Login{
-	height: 290px;
-	bottom: 9px;
-	left: 77%;
-}
-
-.img3loginInner{
-	height: 181px;
-}
-
-.img4Login{
-	height: 100px;
-	bottom: 88px;
-    left: 30%;
-}
-
-.img4loginInner{
-	height: 110px;
-}
-
-.img5Login{
-	height: 135px;
-	bottom: 87px;
-    left: 82%;
-}
-
-.img5loginInner{
-	height: 63px;
-}
-
-.img6Login{
-	height: 80px;
-	top: 132px;
-    left: 81px;
-}
-
-.img6loginInner{
-	height: 67px;
-}	
-
-
-}
-
-@media (min-width:481px) and (max-width:568px){
-
-.loginFormWrapper{
-	min-height: 550px !important;
-	margin-top: -10px;
-	/*background-color: red;*/
-}
-
-.loginSignUp1 {
-    font-size: 11px;
-}
-
-.loginSignUp {
-    font-size: 12px;
-}
-
-.img1Login{
-	height: 200px;
-	top: 33px;
-	right: 162px;
-}
-
-.img1oginInner{
-	height: 121px;
-}
-
-.img2Login{
-	height: 300px;
-	bottom: 1px;
-	left: 6%;
-}
-
-.img2loginInner{
-	height: 190px;
-}
-
-.img3Login{
-	height: 290px;
-	bottom: 9px;
-	left: 76%;
-}
-
-.img3loginInner{
-	height: 181px;
-}
-
-.img4Login{
-	height: 100px;
-	bottom: 88px;
-    left: 30%;
-}
-
-.img4loginInner{
-	height: 110px;
-}
-
-.img5Login{
-	height: 135px;
-	bottom: 87px;
-    left: 82%;
-}
-
-.img5loginInner{
-	height: 63px;
-}
-
-.img6Login{
-	height: 80px;
-	top: 132px;
-    left: 69px;
-}
-
-.img6loginInner{
-	height: 67px;
-}
-
-
-}
-
-
-/* (xs) Extra Small Devices (Phone Potrait, 414px to 666px) */
-@media (min-width:414px) and (max-width:480px){
+@media (max-width:415px){
 
 .loginFormWrapper{
 	min-height: 624px !important;
 	margin-top: 80px;
 }
-
-.loginSignUp1 {
-    font-size: 11px;
+	
 }
 
-.loginSignUp {
-    font-size: 12px;
-}
-
-.img1Login{
-	height: 200px;
-	top: 33px;
-	right: 120px;
-}
-
-.img1oginInner{
-	height: 121px;
-}
-
-.img2Login{
-	height: 300px;
-	bottom: 62px;
-	left: 4%;
-}
-
-.img2loginInner{
-	height: 176px;
-}
-
-.img3Login{
-	height: 290px;
-	bottom: 72px;
-	left: 73%;
-}
-
-.img3loginInner{
-	height: 173px;
-}
-
-.img4Login{
-	height: 100px;
-	bottom: 154px;
-    left: 31%;
-}
-
-.img4loginInner{
-	height: 100px;
-}
-
-.img5Login{
-	height: 135px;
-	bottom: 149px;
-    left: 81%;
-}
-
-.img5loginInner{
-	height: 53px;
-}
-
-.img6Login{
-	height: 80px;
-	top: 132px;
-    left: 44px;
-}
-
-.img6loginInner{
-	height: 67px;
-}
-
-}
-
-
-/* (xs) Extra Small Devices (Phone Potrait, 390px to 413px) */
-@media (min-width:390px) and (max-width:413px){
+@media (max-width:394px){
 
 .loginFormWrapper{
-	min-height: 688px !important;
-	margin-top: 130px;
+	min-height: 668px !important;
+	margin-top: 150px;
+}
+	
 }
 
-.loginSignUp1 {
-    font-size: 10px;
-}
-
-.loginSignUp {
-    font-size: 10px;
-}
-
-.img1Login{
-	height: 200px;
-	top: 35px;
-	right: 114px;
-}
-
-.img1oginInner{
-	height: 121px;
-}
-
-.img2Login{
-	height: 300px;
-	bottom: 119px;
-	left: 4%;
-}
-
-.img2loginInner{
-	height: 167px;
-}
-
-.img3Login{
-	height: 290px;
-	bottom: 130px;
-	left: 74%;
-}
-
-.img3loginInner{
-	height: 164px;
-}
-
-.img4Login{
-	height: 100px;
-	bottom: 218px;
-    left: 32%;
-}
-
-.img4loginInner{
-	height: 100px;
-}
-
-.img5Login{
-	height: 135px;
-	bottom: 213px;
-    left: 81%;
-}
-
-.img5loginInner{
-	height: 54px;
-}
-
-.img6Login{
-	height: 80px;
-	top: 132px;
-    left: 40px;
-}
-
-.img6loginInner{
-	height: 67px;
-}
-
-}
-
-
-/* (xs) Extra Small Devices (Phone Portrait, 375px and 389px) */
-@media (min-width:375px) and (max-width:389px){
+@media (max-width:376px){
 
 .loginFormWrapper{
-	min-height: 588px !important;
-	margin-top: 47px;
+	min-height: 580px !important;
+	margin-top: 55px;
+}
+	
 }
 
-.loginSignUp1 {
-    font-size: 10px;
-}
-
-.loginSignUp {
-    font-size: 10px;
-}
-
-.img1Login{
-	height: 200px;
-	top: 35px;
-	right: 105px;
-}
-
-.img1oginInner{
-	height: 116px;
-}
-
-.img2Login{
-	height: 300px;
-	bottom: 21px;
-	left: 2%;
-}
-
-.img2loginInner{
-	height: 167px;
-}
-
-.img3Login{
-	height: 290px;
-	bottom: 37px;
-	left: 73%;
-}
-
-.img3loginInner{
-	height: 162px;
-}
-
-.img4Login{
-	height: 100px;
-	bottom: 116px;
-    left: 35%;
-}
-
-.img4loginInner{
-	height: 100px;
-}
-
-.img5Login{
-	height: 135px;
-	bottom: 116px;
-    left: 81%;
-}
-
-.img5loginInner{
-	height: 48px;
-}
-
-.img6Login{
-	height: 80px;
-	top: 132px;
-    left: 37px;
-}
-
-.img6loginInner{
-	height: 67px;
-}
-
-}
-
-
-/* (xs) Extra Small Devices (Phone Portrait, 360px to 374px) */
-@media (min-width:360px) and (max-width:374px){
-.loginFormWrapper{
-	min-height: 588px !important;
-	margin-top: 20px;
-}
-
-.loginSignUp1 {
-    font-size: 11px;
-}
-
-.loginSignUp {
-    font-size: 10px;
-}
-
-.img1Login{
-	height: 200px;
-	top: 35px;
-	right: 105px;
-}
-
-.img1oginInner{
-	height: 116px;
-}
-
-.img2Login{
-	height: 300px;
-	bottom: 21px;
-	left: 2%;
-}
-
-.img2loginInner{
-	height: 167px;
-}
-
-.img3Login{
-	height: 290px;
-	bottom: 37px;
-	left: 73%;
-}
-
-.img3loginInner{
-	height: 162px;
-}
-
-.img4Login{
-	height: 100px;
-	bottom: 116px;
-    left: 35%;
-}
-
-.img4loginInner{
-	height: 100px;
-}
-
-.img5Login{
-	height: 135px;
-	bottom: 116px;
-    left: 81%;
-}
-
-.img5loginInner{
-	height: 48px;
-}
-
-.img6Login{
-	height: 80px;
-	top: 132px;
-    left: 34px;
-}
-
-.img6loginInner{
-	height: 67px;
-}
-
-}
-
-
-/* (xs) Extra Small Devices (Phone Portrait, 320px to 359px) */
-@media (min-width:320px) and (max-width:359px){
-
-
-
-}
-
-
-/*iPhone x*/
-@media only screen 
-    and (device-width : 375px) 
-    and (device-height : 812px) 
-    and (-webkit-device-pixel-ratio : 3) { 
+@media (max-width:360px){
 
 .loginFormWrapper{
-	min-height: 670px !important;
-	margin-top: 110px;
-}
-
-.loginSignUp1 {
-    font-size: 10px;
-}
-
-.loginSignUp {
-    font-size: 10px;
-}
-
-.img1Login{
-	height: 200px;
-	top: 35px;
-	right: 105px;
-}
-
-.img1oginInner{
-	height: 116px;
-}
-
-.img2Login{
-	height: 300px;
-	bottom: 99px;
-	left: 3%;
-}
-
-.img2loginInner{
-	height: 165px;
-}
-
-.img3Login{
-	height: 290px;
-	bottom: 113px;
-	left: 73%;
-}
-
-.img3loginInner{
-	height: 162px;
-}
-
-.img4Login{
-	height: 100px;
-	bottom: 199px;
-    left: 32%;
-}
-
-.img4loginInner{
-	height: 100px;
-}
-
-.img5Login{
-	height: 135px;
-	bottom: 193px;
-    left: 81%;
-}
-
-.img5loginInner{
-	height: 48px;
-}
-
-.img6Login{
-	height: 80px;
-	top: 132px;
-    left: 37px;
-}
-
-.img6loginInner{
-	height: 67px;
-}
-
-
-}
-
-/*ipad*/
-@media only screen 
-  and (min-device-width: 768px) 
-  and (max-device-width: 1024px) 
-  and (-webkit-min-device-pixel-ratio: 1) 
-  and (orientation: portrait){
-
-.loginFormWrapper{
-	min-height: 805px !important;
-	margin-top: 187px;
-	/*background-color: red;*/
-}
-
-.loginFormInner {
-/*    height: auto;*/
-    min-height: 400px;
-    margin-top: 100px;
- /*   background-color: #242931;
-    border: 3px solid #D3950A !important;
-    border-radius: 10px;
-    padding-bottom: 30px;*/
-}
-
-.signInTitle{
-	/*height: 70px;
-	color: #D3950A;
-	font-size: 18px;
-	text-align: center;*/
-	padding-top: 30px;
+	min-height: 578px !important;
 	margin-top: 30px;
-/*	font-family: 'Montserrat-Bold';*/
+}
+	
 }
 
-.loginFormGroup{
-	margin-top: 40px;
-}
-
-.loginSignUp1 {
-    font-size: 11px;
-}
-
-.loginSignUp {
-    font-size: 12px;
-}
-
-.img1Login{
-	height: 200px;
-	top: 17px;
-	right: 175px;
-}
-
-.img1oginInner{
-	height: 168px;
-}
-
-.img2Login{
-	height: 300px;
-	bottom: 242px;
-	left: 2%;
-}
-
-.img2loginInner{
-	height: 271px;
-}
-
-.img3Login{
-	height: 290px;
-	bottom: 259px;
-	left: 73.8%;
-}
-
-.img3loginInner{
-	height: 271px;
-}
-
-.img4Login{
-	height: 100px;
-	bottom: 266px;
-    left: 29%;
-}
-
-.img4loginInner{
-	height: 135px;
-}
-
-.img5Login{
-	height: 135px;
-	bottom: 296px;
-    left: 81.3%;
-}
-
-.img5loginInner{
-	height: 94px;
-}
-
-.img6Login{
-	height: 80px;
-	top: 132px;
-    left: 54px;
-}
-
-.img6loginInner{
-	height: 113px;
-}
-
-}
-
-@media only screen 
-  and (min-device-width: 768px) 
-  and (max-device-width: 1024px) 
-  and (-webkit-min-device-pixel-ratio: 1) 
-  and (orientation: landscape){
+@media (max-width:320px){
 
 .loginFormWrapper{
-	min-height: 900px !important;
-	margin-top: 50px;
-	/*background-color: red;*/
-}
-
-.loginFormInner {
-/*    height: auto;*/
-    min-height: 400px;
-    margin-top: 100px;
- /*   background-color: #242931;
-    border: 3px solid #D3950A !important;
-    border-radius: 10px;
-    padding-bottom: 30px;*/
-}
-
-.signInTitle{
-	/*height: 70px;
-	color: #D3950A;
-	font-size: 18px;
-	text-align: center;*/
-	padding-top: 30px;
-	margin-top: 30px;
-/*	font-family: 'Montserrat-Bold';*/
-}
-
-.loginFormGroup{
-	margin-top: 40px;
-}
-
-.loginSignUp1 {
-    font-size: 11px;
-}
-
-.loginSignUp {
-    font-size: 12px;
-}
-
-.img1Login{
-	height: 200px;
-	top: 17px;
-	right: 175px;
-}
-
-.img1oginInner{
-	height: 168px;
-}
-
-.img2Login{
-	height: 300px;
-	bottom: 129px;
-	left: 2%;
-}
-
-.img2loginInner{
-	height: 271px;
-}
-
-.img3Login{
-	height: 290px;
-	bottom: 140px;
-	left: 74.2%;
-}
-
-.img3loginInner{
-	height: 271px;
-}
-
-.img4Login{
-	height: 100px;
-	bottom: 150px;
-    left: 29%;
-}
-
-.img4loginInner{
-	height: 135px;
-}
-
-.img5Login{
-	height: 135px;
-	bottom: 178px;
-    left: 81.1%;
-}
-
-.img5loginInner{
-	height: 94px;
-}
-
-.img6Login{
-	height: 80px;
-	top: 132px;
-    left: 54px;
-}
-
-.img6loginInner{
-	height: 113px;
-}
-
-}  
-
-/*ipad pro*/
-@media only screen 
-  and (min-device-width: 1024px) 
-  and (max-device-width: 1366px) 
-  and (-webkit-min-device-pixel-ratio: 2) 
-  and (orientation: portrait){
-
-.loginFormWrapper{
-	min-height: 983px !important;
-	margin-top: 350px;
-	/*background-color: red;*/
-}
-
-.loginFormInner {
-/*    height: auto;*/
-    min-height: 400px;
-    margin-top: 100px;
- /*   background-color: #242931;
-    border: 3px solid #D3950A !important;
-    border-radius: 10px;
-    padding-bottom: 30px;*/
-}
-
-.signInTitle{
-	/*height: 70px;
-	color: #D3950A;
-	font-size: 18px;
-	text-align: center;*/
-	padding-top: 30px;
-	margin-top: 30px;
-/*	font-family: 'Montserrat-Bold';*/
-}
-
-.loginFormGroup{
-	margin-top: 40px;
-}
-
-.loginSignUp1 {
-    font-size: 11px;
-}
-
-.loginSignUp {
-    font-size: 12px;
-}
-
-.img1Login{
-	height: 200px;
-	top: 8px;
-	right: 175px;
-}
-
-.img1oginInner{
-	height: 168px;
-}
-
-.img2Login{
-	height: 300px;
-	bottom: 419px;
-	left: 2%;
-}
-
-.img2loginInner{
-	height: 271px;
-}
-
-.img3Login{
-	height: 290px;
-	bottom: 435px;
-	left: 74.6%;
-}
-
-.img3loginInner{
-	height: 271px;
-}
-
-.img4Login{
-	height: 100px;
-	bottom: 451px;
-    left: 29%;
-}
-
-.img4loginInner{
-	height: 135px;
-}
-
-.img5Login{
-	height: 135px;
-	bottom: 472px;
-    left: 82%;
-}
-
-.img5loginInner{
-	height: 94px;
-}
-
-.img6Login{
-	height: 80px;
-	top: 132px;
-    left: 54px;
-}
-
-.img6loginInner{
-	height: 113px;
-}
-
-}
-
-@media only screen 
-  and (min-device-width: 1024px) 
-  and (max-device-width: 1366px) 
-  and (-webkit-min-device-pixel-ratio: 2) 
-  and (orientation: landscape){
-
-.loginFormWrapper{
-	min-height: 817px !important;
-	margin-top: 175px;
-	/*background-color: red;*/
-}
-
-.loginFormInner {
-/*    height: auto;*/
-    min-height: 400px;
-    margin-top: 100px;
- /*   background-color: #242931;
-    border: 3px solid #D3950A !important;
-    border-radius: 10px;
-    padding-bottom: 30px;*/
-}
-
-.signInTitle{
-	/*height: 70px;
-	color: #D3950A;
-	font-size: 18px;
-	text-align: center;*/
-	padding-top: 30px;
-	margin-top: 30px;
-/*	font-family: 'Montserrat-Bold';*/
-}
-
-.loginFormGroup{
-	margin-top: 40px;
-}
-
-.loginSignUp1 {
-    font-size: 11px;
-}
-
-.loginSignUp {
-    font-size: 12px;
-}
-
-.img1Login{
-	height: 200px;
-	top: 17px;
-	right: 175px;
-}
-
-.img1oginInner{
-	height: 168px;
-}
-
-.img2Login{
-	height: 300px;
-	bottom: 255px;
-	left: 2%;
-}
-
-.img2loginInner{
-	height: 271px;
-}
-
-.img3Login{
-	height: 290px;
-	bottom: 266px;
-	left: 74.2%;
-}
-
-.img3loginInner{
-	height: 271px;
-}
-
-.img4Login{
-	height: 100px;
-	bottom: 280px;
-    left: 29%;
-}
-
-.img4loginInner{
-	height: 135px;
-}
-
-.img5Login{
-	height: 135px;
-	bottom: 296px;
-    left: 81.1%;
-}
-
-.img5loginInner{
-	height: 94px;
-}
-
-.img6Login{
-	height: 80px;
-	top: 132px;
-    left: 54px;
-}
-
-.img6loginInner{
-	height: 113px;
-}
-
-}
-
-
-/* NNNNNNNNNNNNNNNNNNNNNNNNN ++  End Media Query  ++ NNNNNNNNNNNNNNNNNNNNNNNNN */
-
-
-/********************************Media Query*****************************/
-
-/*@media only screen 
-  and (min-device-width: 320px) 
-  and (max-device-width: 812px)
-  and (-webkit-min-device-pixel-ratio: 2)
-  and (orientation: landscape) {
-
-.OTPSentWrapper{
-	min-height: 661px !important;
-	margin-top: 58px !important;
-}
-
-
-}*/
-
-
-
-/*@media screen and (max-width: 480px){
-
-.OTPSentWrapper{
-	min-height: 661px;
-	margin-top: 58px;
-}
-	
-}*/
-
-/*@media screen and (max-width: 1537px){
-
-.OTPSentWrapper{
-	min-height: 663px;
-	margin-top: 100px;
-}
-
-.img1Login {
-    left: 60%;
-}
-
-.img2Login {
-    left: 2%;
-    bottom: 65px;
-}
-
-.img3Login {
-    left: 75%;
-}
-
-.img4Login {
-    bottom: 69px;
-    left: 30%;
-}
-
-.img4loginInner {
-    height: 146px;
-}
-
-.img5Login {
-    left: 83%;
-}
-
-.img6Login {
-    left: 81px;
-}
-
-}
-
-@media screen and (max-width: 1441px){
-
-.OTPSentWrapper{
-	min-height: 798px;
-	margin-top: 100px;
-}
-
-}
-
-@media screen and (max-width: 1367px){
-
-.OTPSentWrapper{
-	min-height: 665px;
-	margin-top: 100px;
-}
-
-.img1Login {
-    left: 59%;
-}
-
-.img2Login {
-    left: 0%;
-}
-
-.img3Login {
-    left: 74%;
-}
-
-.img4Login {
-    bottom: 65px;
-    left: 31%;
-}
-
-.img5Login {
-    left: 82%;
-}
-
-.img6Login {
-    left: 67px;
-}
-	
-}
-
-@media screen and (max-width: 1024px){
-
-.OTPSentWrapper{
-	min-height: 665px;
-	margin-top: 100px;
-}
-
-.img1Login {
-    left: 60%;
-}
-
-.img2Login {
-    left: 2%;
-}
-
-.img3Login {
-    left: 75%;
-}
-
-.img4Login {
-    bottom: 69px;
-    left: 30%;
-}
-
-.img4loginInner {
-    height: 146px;
-}
-
-.img5Login {
-    left: 83%;
-}
-
-.img6Login {
-    left: 85px;
-}
-	
-}
-
-
-@media screen and (max-width: 852px){
-
-.OTPSentWrapper{
-	min-height: 634px;
-	margin-top: 38px;
-}
-	
-}
-
-@media screen and (max-width: 768px){
-
-.OTPSentWrapper{
-	min-height: 830px;
-    margin-top: 208px;
-}
-	
-}
-
-@media screen and (max-width: 736px){
-
-.OTPSentWrapper{
-	min-height: 634px;
-	margin-top: 38px;
-}
-	
-}
-
-@media screen and (max-width: 667px){
-
-.OTPSentWrapper{
-	min-height: 634px;
-	margin-top: 38px;
-}
-	
-}
-
-@media screen and (max-width: 640px){
-
-.OTPSentWrapper{
-	min-height: 634px;
-	margin-top: 38px;
-}
-	
-}
-
-@media screen and (max-width: 568px){
-
-.OTPSentWrapper{
-	min-height: 634px;
-	margin-top: 38px;
-}
-	
-}
-
-@media screen and (max-width: 480px){
-
-.OTPSentWrapper{
-	min-height: 1000px;
-    margin-top: 383px;
-}
-	
-}
-
-@media screen and (max-width: 394px){
-
-.OTPSentWrapper{
-	min-height: 1121px;
-	margin-top: 520px;
-}
-	
-}
-
-@media screen and (max-width: 384px){
-
-.OTPSentWrapper{
-	min-height: 1000px;
-    margin-top: 383px;
-}
-	
-}*/
-
-
-/*@media screen and (max-width: 360px){
-
-.OTPSentWrapper{
-	min-height: 1000px;
-    margin-top: 383px;
-}
-	
-}
-
-@media screen and (max-width: 320px){
-
-.OTPSentWrapper{
-	min-height: 1000px;
-    margin-top: 383px;
-}
-
-}
-*/
-
-/*ipad pro*/
-/*@media only screen 
-  and (min-device-width: 1024px) 
-  and (max-device-width: 1024px) 
-  and (orientation: portrait) 
-  and (-webkit-min-device-pixel-ratio: 2) {
-
-.OTPSentWrapper{
-	min-height: 984px;
-	margin-top: 380px;
-}
-
-}
-
-@media only screen 
-  and (min-device-width: 1366px) 
-  and (max-device-width: 1366px) 
-  and (orientation: landscape) 
-  and (-webkit-min-device-pixel-ratio: 2) {
-
-.OTPSentWrapper{
-	min-height: 800px;
-	margin-top: 220px;
-}
-
-}*/
-
-/*iPhone x*/
-/*@media only screen 
-    and (device-width : 375px) 
-    and (device-height : 812px) 
-    and (-webkit-device-pixel-ratio : 3) { 
-
-.OTPSentWrapper{
-	min-height: 1112px;
-	margin-top: 520px;
-}
-
-}*/
-
-
-
-
-/******************************************original css***********************************************/
-
-
-/*.loginFormOuter{
-	min-height: 500px;
-    height: auto;
- 	padding-bottom: 100px;
-}
-
-.loginFormInner{
-	height: auto;
-	min-height: 400px;
-	margin-top: 100px;
-	background-color: #242931;
-	border:3px solid #D3950A !important;
-	border-radius: 10px;
-	padding-bottom: 30px;
-}
-
-.signInTitle{
-	height: 70px;
-	color: #D3950A;
-	font-size:20px;
-	text-align: center;
-	padding-top: 30px;
-	font-family: 'Montserrat-Bold';
-}
-
-.loginSocialMedia{
-	height: 50px;
-	width: 100%;	
-	float: left;
-	margin: auto;
-}
-
-.loginSocialMediaInner{
-	height: 50px;
-	width: 28%;	
-	
-	margin: auto;
-}
-
-.loginLinkedIn{
-	height: 38px;
-	width: 40px;
-	margin: 6px;
-	color: #fff;
-	text-align: center;
-	font-size: 24px;
-	border: 1px solid #D3950A !important;
-	border-radius: 5px;
-	float: left;
-	background-color: transparent;
-}
-
-.loginLinkedIn:hover{
-	height: 42px;
-	width: 44px;
-	margin: 4px;
-	color: #fff;
-	text-align: center;
-	font-size: 24px;
-	border: 1px solid #D3950A !important;
-	border-radius: 5px;
-	float: left;
-	background-color: #D3950A;
-}
-
-
-.loginGoogle{
-	height: 38px;
-	width: 40px;
-	margin: 6px;
-	color: #fff;
-	text-align: center;
-	font-size: 24px;
-	border: 1px solid #D3950A !important;
-	border-radius: 5px;
-	float: left;
-	background-color: transparent;
-}
-
-.loginGoogle:hover{
-	height: 42px;
-	width: 44px;
-	margin: 5px;
-	color: #fff;
-	text-align: center;
-	font-size: 24px;
-	border: 1px solid #D3950A !important;
-	border-radius: 5px;
-	float: left;
-	background-color: #D3950A;
-}
-
-.loginOr{
-	width: 100%;
-	height: 30px;
-	margin-bottom: 20px;	
-}
-
-.loginHr{
-	width:47%;
-	float: left;
-	border-top: 1px solid #D3950A;
-}
-
-.loginOrText{
-	width: 6%;
-	float: left;
-	text-align: center;
-	color: #eee;
-	height: 20px;
-	padding-top: 10px;
-	font-family: 'Montserrat-Regular';
-}
-
-.loginInputBox{
-  
-  text-align:left;
-  padding-left: 10px;
-  border: 1px solid #D3950A !important;
-  background-color: #242933 !important;
-  color: #fff ;
-  font-size: 14px;
-  font-family: 'Montserrat-Regular';
-  letter-spacing: 1px;
-  height: 34px;
-
-}
-
-.loginInputBox:focus{
-	border-color: #D3950A;
-	box-shadow: 0px 1px 1px rgba(211, 149, 10, 0.075) inset, 0px 0px 8px rgba(211, 149, 10, 0.5)  !important;
-}
-
-.loginInputIcon1{
-	font-size: 20px;
-	border: 1px solid #D3950A !important;
-	background-color: transparent !important;
-	color: #eee;
-}
-
-.loginInputIcon2{
-	font-size: 18px;
-	border: 1px solid #D3950A !important;
-	background-color: transparent !important;
-	color: #eee;
-	padding: 5px 13px 5px 13px;
-}
-
-.loginInputIcon3{
-	font-size: 18px;
-	border: 1px solid #D3950A !important;
-	background-color: transparent !important;
-	color: #eee;
-	padding: 5px 10px 5px 10px;
-	z-index: 100;
-	border-top-right-radius: 4px !important;
-	border-bottom-right-radius: 4px !important;
-}
-
-input-group.loginPwdField{
-	border-radius: 4px !important;
-}
-
-.loginformGroup{
-	margin-top: 50px !important;
-}
-
-.buttonSignIn{
-	background-color: #D3950A;
-	color: #fff;
-	border: 1px solid #D3950A !important;
-	margin-bottom: 2px;
-	font-size: 14px;
-	font-family: 'Montserrat-Bold';
-}
-
-.buttonSignIn:hover{
-	background-color: transparent;
-	color: #D3950A;
-	border: 2px solid #D3950A !important;
-	font-weight: bold;
-	margin-bottom: 0px;
-}
-
-
-
-.loginLinks{
-
-	margin-top: 20px;
-	height: 30px;
-}
-
-.loginSignUp1{
-	height: 50px !important;;
-	margin-top: 25px !important;;
-	margin-bottom: 30px !important;;
-	color: #aaa !important;
-	text-align: center !important;
-	font-size: 14px;
-	font-family: 'Montserrat-Regular';
-	float: center;
-}
-.loginSignUp{
-	height: 50px !important;;
-	margin-top: 25px !important;;
-	margin-bottom: 40px !important;;
-	color: #aaa !important;
-	text-align: center !important;
-	font-size: 14px;
-	font-family: 'Montserrat-Regular';
-	float: center;
-}
-
-.loginSignUp:hover{
-	color: #fff!important;
-	font-size: 14px;
+	min-height: 400px !important;
+	margin-top: 0px;
 }
 
 .loginForgotPassword{
-	color: #aaa !important;
-	text-align: right;
-	font-size: 14px;
-	font-family: 'Montserrat-Regular';
-	float: left;
-	margin-top: 7px;
+	font-size: 10px;
+	margin-top: 1px;
 }
 
-.loginForgotPassword:hover{
-	color: #fff!important;
-	
 }
 
-.img1Login{
-	position: absolute;
-	height: 200px;
-	top: -5px;
-	left: 61%;
-	z-index: 1;
-}
+/*ipad pro*/
+@media only screen 
+  and (min-device-width: 1024px) 
+  and (max-device-width: 1366px) 
+  and (-webkit-min-device-pixel-ratio: 2) 
+  and (orientation: portrait){
 
-.img1oginInner{
-	height: 200px;
-}
-
-.img2Login{
-	position: absolute;
-	height: 300px;
-	bottom: 79px;
-	left: 2%;
-	z-index: 1;
-}
-
-.img2loginInner{
-	height: 300px;
-}
-
-.img3Login{
-	position: absolute;
-	height: 290px;
-	bottom: 75px;
-	left: 75.1%;
-	z-index: 1;
-}
-
-.img3loginInner{
-	height: 290px;
-}
-
-.img4Login{
-	position: absolute;
-	height: 100px;
-	bottom: 74px;
-    left: 27%;
-	z-index: 1;
-}
-
-.img4loginInner{
-	height: 164px;
-}
-
-.img5Login{
-	position: absolute;
-	height: 135px;
-	bottom: 100px;
-    left: 83%;
-	z-index: 0;
-}
-
-.img5loginInner{
-	height: 98px;
-}
-
-.img6Login{
-	position: absolute;
-	height: 80px;
-	top: 120px;
-    left: 89px;
-	z-index: 0;
-}
-
-.img6loginInner{
-	height: 90px;
+.loginFormWrapper{
+	min-height: 964px !important;
+	margin-top: 370px;
 }
 
 
-.errorMsg{
-	color: #f00;
-	font-family: 'Montserrat-Regular';
-	font-size: 11px;
 }
 
-.modal-content{
-	background-color:#242931 !important;
-}
+/*iPhone x*/
+@media only screen 
+    and (device-width : 375px) 
+    and (device-height : 812px) 
+    and (-webkit-device-pixel-ratio : 3) { 
 
-.closebtnmodal{
-	position: absolute;
-	right: 14px;
-	font-size: 30px !important;
-}
-
-
-.OTPSentWrapper{
-	min-height: 999px;
-	z-index: 900 !important;
+.loginFormWrapper{
+	min-height: 630px !important;
 	height: auto;
-	background-color:#242931 !important;
-	margin-top: 340px;
-}
-
-.OTPSent{
-	height: 250px;
 	margin-top: 150px;
-	background-color: #242931;
-	border:3px solid #D3950A;
-	border-radius: 10px;
 }
 
-.OTPSentTitle{
-	height: 80px;
-	color: #D3950A;
-	font-size:20px;
-	text-align: center;
-	padding-top: 40px;
 }
-
-.OTPSentHr{
-	width:92%;
-	border-top: 1px solid #D3950A;
-}
-
-.OTPSentSentence{
-	text-align: center;
-	color: #aaa;
-	height: 60px;
-	line-height: 1.8;
-	letter-spacing: 1px;
-	margin-top: 10px;
-}
-
-.buttonOTPSent{
-	background-color: #D3950A;
-	color: #fff;
-	border: 1px solid #D3950A;
-	margin-bottom: 2px;
-}
-
-.buttonOTPSent:hover{
-	background-color: transparent;
-	color: #D3950A;
-	border: 2px solid #D3950A;
-	font-weight: bold;
-	margin-bottom: 0px;
-}
-
-.form-group{
-	margin-bottom: 24px;
-}*/

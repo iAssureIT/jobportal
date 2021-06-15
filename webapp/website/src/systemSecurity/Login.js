@@ -305,7 +305,7 @@ class Login extends Component {
     
     return (
         <div className="row">
-          <div className="loginFormOuter loginFormWrapper col-12 col-sm-10 offset-sm-1 col-md-10 offset-md-1 col-lg-8 offset-lg-2 col-xl-6 offset-xl-3">
+          <div className="loginFormOuter loginFormWrapper col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-8 offset-lg-2 col-xl-6 offset-xl-3">
             <div className="img1Login">
                 <img src="/images/Sign_In/1.png" alt="img1Login" className="img1oginInner img-fluid"/>
             </div>
@@ -330,7 +330,7 @@ class Login extends Component {
                 <img src="/images/Sign_In/6.png" alt="img6Login" className="img6loginInner img-fluid"/>
             </div>
 
-            <div className="loginFormInner col-8 offset-2 col-sm-8 offset-sm-2 col-md-8 offset-md-2 col-lg-8 offset-lg-2 col-xl-8 offset-xl-2">
+            <div className="loginFormInner col-10 offset-1 col-sm-8 offset-sm-2 col-md-8 offset-md-2 col-lg-8 offset-lg-2 col-xl-6 offset-xl-3">
               <form autocomplete="off">
 
                 <div className="signInTitle col-12"> Sign In
@@ -356,8 +356,7 @@ class Login extends Component {
                   Don't have an account ?
                     <a href="#" onClick={this.ShowSignUp.bind(this)}><u className="loginSignUp"> Sign Up </u></a>
                   </div>
-                </div>
-                      
+                </div>                      
 
                     <div className="col-12 col-sm-10 offset-sm-1 col-md-10 offset-md-1 col-lg-10 offset-lg-1 col-xl-10 offset-xl-1 form-group loginFormGroup">
                       {/*<div className="input-group" autocomplete="off">
