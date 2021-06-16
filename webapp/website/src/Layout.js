@@ -166,31 +166,33 @@ class Layout extends Component  {
                     
                 
                     <Router >
-                        <Switch >
+                        <div className="container-fluid main-container">
+                            <Switch >
 
-                            <Route exact path="/"        component={Homepage}  />
-                            <Route exact path="/country/:countryCode/state/:stateCode/city/:district/industry/:industryName/:industry_id/function/:functionalArea/:functionalArea_id/subfunction/:subfunctionalArea/:subfunctionalArea_id"     component={Homepage}  />
-                                   
-                            {/*<Route exact path="/country/:countryCode/state/:stateCode"               component={Homepage}  />
-                            <Route exact path="/country/:countryCode/state/:stateCode/functional/:functionalArea/:functionalArea_id"               component={Homepage}  />
-                            <Route exact path="/country/:countryCode/state/:stateCode/subfunctional/:functionalArea/:functionalArea_id/:subfunctionalArea/:subfunctionalArea_id"               component={Homepage}  />
-                            
-                            <Route exact path="/country/:countryCode/state/:stateCode/:district"               component={Homepage}  />
-                            <Route exact path="/country/:countryCode/state/:stateCode/:district/functional/:functionalArea/:functionalArea_id"     component={Homepage}  />
-                            <Route exact path="/country/:countryCode/state/:stateCode/:district/subfunctional/:functionalArea/:functionalArea_id/:subfunctionalArea/:subfunctionalArea_id"     component={Homepage}  />
-                            */}
+                                <Route exact path="/"        component={Homepage}  />
+                                <Route exact path="/country/:countryCode/state/:stateCode/city/:district/industry/:industryName/:industry_id/function/:functionalArea/:functionalArea_id/subfunction/:subfunctionalArea/:subfunctionalArea_id"     component={Homepage}  />
+                                       
+                                {/*<Route exact path="/country/:countryCode/state/:stateCode"               component={Homepage}  />
+                                <Route exact path="/country/:countryCode/state/:stateCode/functional/:functionalArea/:functionalArea_id"               component={Homepage}  />
+                                <Route exact path="/country/:countryCode/state/:stateCode/subfunctional/:functionalArea/:functionalArea_id/:subfunctionalArea/:subfunctionalArea_id"               component={Homepage}  />
+                                
+                                <Route exact path="/country/:countryCode/state/:stateCode/:district"               component={Homepage}  />
+                                <Route exact path="/country/:countryCode/state/:stateCode/:district/functional/:functionalArea/:functionalArea_id"     component={Homepage}  />
+                                <Route exact path="/country/:countryCode/state/:stateCode/:district/subfunctional/:functionalArea/:functionalArea_id/:subfunctionalArea/:subfunctionalArea_id"     component={Homepage}  />
+                                */}
 
-                            <Route exact path="/search-jobs"                    component={CandidateJobList}  />  
-                            <Route path="/job-profile/:job_id"                  component={JobProfile} exact />
-                                                        
+                                <Route exact path="/search-jobs"                    component={CandidateJobList}  />  
+                                <Route path="/job-profile/:job_id"                  component={JobProfile} exact />
+                                                            
 
-                            <Route path="/login" exact strict component={Login} />
-                            <Route path="/signup" exact strict component={SignUp} />
-                            <Route path="/forgot-password" exact strict component={ForgotPassword} />
-                            <Route path="/reset-pwd/:user_ID" exact strict component={ResetPassword} />
-                            <Route path="/confirm-otp/:userID" exact strict component={ConfirmOtp} />
-                            
-                        </Switch>
+                                <Route path="/login" exact strict component={Login} />
+                                <Route path="/signup" exact strict component={SignUp} />
+                                <Route path="/forgot-password" exact strict component={ForgotPassword} />
+                                <Route path="/reset-pwd/:user_ID" exact strict component={ResetPassword} />
+                                <Route path="/confirm-otp/:userID" exact strict component={ConfirmOtp} />
+                                
+                            </Switch>
+                        </div>
                     </Router>
                     {/*<Footer />*/}
                 </div>
